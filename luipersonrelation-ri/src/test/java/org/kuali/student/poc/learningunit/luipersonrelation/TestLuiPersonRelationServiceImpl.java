@@ -191,7 +191,7 @@ public class TestLuiPersonRelationServiceImpl extends AbstractServiceTest{
 
     @Test
     public void testRelationStates() throws Exception{
-        assertTrue(client.findRelationStates().size() == 2);
+        assertTrue(client.findRelationStates().size() == 5);
 
         //TODO: Add test for ordered relation state
         //TODO: Add test for valid relation states

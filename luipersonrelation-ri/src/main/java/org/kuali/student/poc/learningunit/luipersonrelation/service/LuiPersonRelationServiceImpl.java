@@ -444,6 +444,18 @@ public class LuiPersonRelationServiceImpl implements LuiPersonRelationService {
 	    rs.setState("drop");
 	    rsList.add(rs);
 	    
+	    rs= new RelationStateInfo();
+        rs.setState("basket");
+        rsList.add(rs);
+
+        rs= new RelationStateInfo();
+        rs.setState("pending");
+        rsList.add(rs);
+        
+        rs= new RelationStateInfo();
+        rs.setState("complete");
+        rsList.add(rs);
+	    
 		return rsList;
 	}
 
