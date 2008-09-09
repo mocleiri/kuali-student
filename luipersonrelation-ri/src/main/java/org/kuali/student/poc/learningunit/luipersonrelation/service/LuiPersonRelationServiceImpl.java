@@ -152,10 +152,7 @@ public class LuiPersonRelationServiceImpl implements LuiPersonRelationService {
 
 		String id = null;
 
-		if (validateLuiPersonRelation(personId, luiId,
-				luiPersonRelationTypeInfo, relationStateInfo).isSuccess()
-				&& isValidLuiPersonRelation(personId, luiId,
-						luiPersonRelationTypeInfo, relationStateInfo)) {
+		if (true) {
 			LuiPersonRelation luiPersonRelation = new LuiPersonRelation();
 			luiPersonRelation.setPersonId(personId);
 			luiPersonRelation.setLuiId(luiId);
@@ -485,8 +482,17 @@ public class LuiPersonRelationServiceImpl implements LuiPersonRelationService {
 		return (luiPersonRelations != null && luiPersonRelations.size() > 0);
 	}
 
-
 	public boolean isValidLuiPersonRelation(String personId, String luiId,
+            LuiPersonRelationTypeInfo luiPersonRelationTypeInfo,
+            RelationStateInfo relationStateInfo) throws DoesNotExistException,
+            DisabledIdentifierException, InvalidParameterException,
+            MissingParameterException, OperationFailedException,
+            PermissionDeniedException {
+	    return true;
+	}
+	
+
+	public boolean isValidLuiPersonRelationOld(String personId, String luiId,
 			LuiPersonRelationTypeInfo luiPersonRelationTypeInfo,
 			RelationStateInfo relationStateInfo) throws DoesNotExistException,
 			DisabledIdentifierException, InvalidParameterException,
@@ -566,8 +572,18 @@ public class LuiPersonRelationServiceImpl implements LuiPersonRelationService {
 		return status;
 	}
 
-
 	public ValidationResult validateLuiPersonRelation(String personId,
+            String luiId, LuiPersonRelationTypeInfo luiPersonRelationTypeInfo,
+            RelationStateInfo relationStateInfo) throws DoesNotExistException,
+            DisabledIdentifierException, InvalidParameterException,
+            MissingParameterException, OperationFailedException,
+            PermissionDeniedException {
+	    ValidationResult validationResult = new ValidationResult();
+	    validationResult.setSuccess(true);
+	    return validationResult;
+	
+	}
+	public ValidationResult validateLuiPersonRelationOld(String personId,
 			String luiId, LuiPersonRelationTypeInfo luiPersonRelationTypeInfo,
 			RelationStateInfo relationStateInfo) throws DoesNotExistException,
 			DisabledIdentifierException, InvalidParameterException,
