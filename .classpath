@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="fact-finder/target/classes" path="fact-finder/src/main/java"/>
-	<classpathentry kind="src" output="fact-finder/target/test-classes" path="fact-finder/src/test/java"/>
-	<classpathentry excluding="**" kind="src" output="fact-finder/target/classes" path="fact-finder/src/main/resources"/>
-	<classpathentry excluding="**" kind="src" output="fact-finder/target/test-classes" path="fact-finder/src/test/resources"/>
-	<classpathentry kind="src" output="rule-execution/target/classes" path="rule-execution/src/main/java"/>
-	<classpathentry kind="src" output="rule-execution/target/test-classes" path="rule-execution/src/test/java"/>
-	<classpathentry excluding="**" kind="src" output="rule-execution/target/classes" path="rule-execution/src/main/resources"/>
-	<classpathentry excluding="**" kind="src" output="rule-execution/target/test-classes" path="rule-execution/src/test/resources"/>
-	<classpathentry kind="src" output="rule-management/target/classes" path="rule-management/src/main/java"/>
-	<classpathentry kind="src" output="rule-management/target/test-classes" path="rule-management/src/test/java"/>
-	<classpathentry excluding="**" kind="src" output="rule-management/target/classes" path="rule-management/src/main/resources"/>
-	<classpathentry excluding="**" kind="src" output="rule-management/target/test-classes" path="rule-management/src/test/resources"/>
-	<classpathentry kind="src" output="rule-repository/target/classes" path="rule-repository/src/main/java"/>
-	<classpathentry kind="src" output="rule-repository/target/test-classes" path="rule-repository/src/test/java"/>
-	<classpathentry excluding="**" kind="src" output="rule-repository/target/classes" path="rule-repository/src/main/resources"/>
-	<classpathentry excluding="**" kind="src" output="rule-repository/target/test-classes" path="rule-repository/src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" output="dic-api/target/classes" path="dic-api/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-api/target/classes" path="dic-api/src/main/resources"/>
+	<classpathentry kind="src" output="dic-api/target/test-classes" path="dic-api/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-api/target/test-classes" path="dic-api/src/test/resources"/>
+	<classpathentry kind="src" output="dic-impl/target/classes" path="dic-impl/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-impl/target/classes" path="dic-impl/src/main/resources"/>
+	<classpathentry kind="src" output="dic-impl/target/test-classes" path="dic-impl/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-impl/target/test-classes" path="dic-impl/src/test/resources"/>
+	<classpathentry kind="src" output="dic-services/target/classes" path="dic-services/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-services/target/classes" path="dic-services/src/main/resources"/>
+	<classpathentry kind="src" output="dic-services/target/test-classes" path="dic-services/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-services/target/test-classes" path="dic-services/src/test/resources"/>
+	<classpathentry kind="src" output="dic-web/target/classes" path="dic-web/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-web/target/classes" path="dic-web/src/main/resources"/>
+	<classpathentry kind="src" output="dic-web/target/test-classes" path="dic-web/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="dic-web/target/test-classes" path="dic-web/src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
