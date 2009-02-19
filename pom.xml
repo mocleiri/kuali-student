@@ -18,7 +18,7 @@
 
 				<executions>
 					<execution>
-						<phase>generate-sources</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>contractToJava</goal>
 						</goals>
