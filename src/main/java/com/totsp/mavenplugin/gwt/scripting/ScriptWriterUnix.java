@@ -81,7 +81,9 @@ public class ScriptWriterUnix implements ScriptWriter {
         writer.print(" -war ");
         writer.print("\"" + mojo.getOutput().getAbsolutePath() + "\"");
         writer.print(" -port ");
-        writer.print(Integer.toString(mojo.getPort()));
+        writer.print(Integer.toString(mojo.getPort()));        
+        writer.print(" -startupUrl ");
+        writer.print(mojo.getStartupUrl());
 
         if (mojo.isNoServer()) {
             writer.print(" -noserver ");
