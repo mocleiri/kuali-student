@@ -18,7 +18,7 @@
 
 				<executions>
 					<execution>
-						<phase>compile</phase>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>contractToJava</goal>
 						</goals>
@@ -29,13 +29,14 @@
 							<outputDirectory>
 								src/main/java
 							</outputDirectory>
-							<packageName>org.kuali.student.organization</packageName>
-							
+							<packageName>org.kuali.student.lum.xxx</packageName>
+                            <serviceName>XxxService</serviceName>
+
 							<!--
 							<transformFile>
 								src/main/resources/interface.xml
 							</transformFile>
-							
+
 							<messageTransformFile>
 								src/main/resources/messageInterface.xml
 							</messageTransformFile>
