@@ -25,12 +25,13 @@
 
 						<configuration>
 							<contractURL>https://test.kuali.org/confluence/display/KULSTU/Organization+Service</contractURL>
-							<jsessionId>2C4C7738EA37CCC448CAD9923562528B.Kuali3_1Engine</jsessionId>
+							<jsessionId>C403985B89D8D8A8762745684E0ADAE6.Kuali3_1Engine</jsessionId>
 							<outputDirectory>
 								src/main/java
 							</outputDirectory>
 							<packageName>org.kuali.student.lum.xxx</packageName>
                             <serviceName>XxxService</serviceName>
+                            <namespace>http://student.kuali.org/lum/xxx</namespace>
 
 							<!--
 							<transformFile>
