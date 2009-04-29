@@ -17,12 +17,12 @@
 package com.totsp.mavenplugin.gwt.util;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
@@ -36,6 +36,7 @@ import org.apache.maven.project.MavenProject;
 
 import com.totsp.mavenplugin.gwt.AbstractGWTMojo;
 import com.totsp.mavenplugin.gwt.util.ArtifactNameUtil;
+import com.totsp.mavenplugin.gwt.util.DependencyScope;
 
 /**
  * Util to consolidate classpath manipulation stuff in one place.
@@ -144,7 +145,15 @@ public class BuildClasspathUtil {
 				} catch (ArtifactNotFoundException e) {
 					e.printStackTrace();
 				}
-        		items.add(art.getFile());
+
+				//When using maven plugin, source path for artifact found via workspace resolution
+				//is resolving to the target/classes, reset to  src/main/java-- Will Gomes 
+				File artFile = art.getFile();				
+				String filePath = artFile.toURI().getRawPath();
+				if (filePath.contains("target/classes")){				   
+				    artFile = new File(filePath.replace("target/classes", "src/main/java"));
+				}
+				items.add(artFile);
         	}
         }
 
