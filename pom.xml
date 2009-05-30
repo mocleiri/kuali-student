@@ -32,7 +32,13 @@
 							<packageName>org.kuali.student.lum.xxx</packageName>
                             <serviceName>XxxService</serviceName>
                             <namespace>http://student.kuali.org/lum/xxx</namespace>
-
+							<excludeClasses>
+								<className>MetaInfo</className>
+								<className>StatusInfo</className>
+								<className>AttributeInfo</className>
+								<className>RichTextInfo</className>
+								<className>ValidationResultInfo</className>
+							</excludeClasses>
 							<!--
 							<transformFile>
 								src/main/resources/interface.xml
