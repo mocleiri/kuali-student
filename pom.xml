@@ -38,6 +38,11 @@
 								<className>AttributeInfo</className>
 								<className>RichTextInfo</className>
 								<className>ValidationResultInfo</className>
+								<className>CriteriaSetInfo</className>
+								<className>CriterionInfo</className>
+								<className>TypeAttributeInfo</className>
+								<className>SearchRelationshipInfo</className>
+								<className>SearchIndexedTypeInfo</className>
 							</excludeClasses>
 							<!--
 							<transformFile>
