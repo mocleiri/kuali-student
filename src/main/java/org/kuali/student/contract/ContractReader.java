@@ -41,6 +41,9 @@ public class ContractReader {
 
     private String contractPath;
 
+    /* Test adding in a comment just to see if subversion works */
+
+    
 	public ContractReader(File file) throws FileNotFoundException, IOException {
 		contractPath = file.getCanonicalPath();
         FileReader fileReader = new FileReader(file);
