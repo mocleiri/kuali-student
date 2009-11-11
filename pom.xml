@@ -5,7 +5,12 @@
   	<version>0.0.1-SNAPSHOT</version>
   	<name>Continuum Release Management Test</name>
     <description>Continuum Release Management Test</description>
+    <packaging>pom</packaging>
 
+	<modules>        
+        <module>module1</module>
+        <module>module2</module>
+    </modules>
     
     <scm>
         <connection>scm:svn:https://test.kuali.org/svn/student/sandbox/continuum-release-mngmt/branches/continuum-release-mngmt-test</connection>

@@ -4,6 +4,12 @@
 	<classpathentry kind="src" output="module1/target/classes" path="module1/src/main/resources"/>
 	<classpathentry kind="src" output="module1/target/test-classes" path="module1/src/test/java"/>
 	<classpathentry kind="src" output="module1/target/test-classes" path="module1/src/test/resources"/>
+	
+	<classpathentry kind="src" output="module2/target/classes" path="module2/src/main/java"/>
+	<classpathentry kind="src" output="module2/target/classes" path="module2/src/main/resources"/>
+	<classpathentry kind="src" output="module2/target/test-classes" path="module2/src/test/java"/>
+	<classpathentry kind="src" output="module2/target/test-classes" path="module2/src/test/resources"/>
+	
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
