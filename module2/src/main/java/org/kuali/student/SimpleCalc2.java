@@ -20,7 +20,7 @@ package org.kuali.student;
  * @author Kuali Rice Team (kuali-rice@googlegroups.com)
  *
  */
-public class SimpleCalc {
+public class SimpleCalc2 {
 
     public int add(int x, int y){
         return x+y;

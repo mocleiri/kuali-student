@@ -23,11 +23,11 @@ import static org.junit.Assert.assertEquals;
  * @author Kuali Rice Team (kuali-rice@googlegroups.com)
  *
  */
-public class SimpleCalcTest {
+public class SimpleCalc2Test {
 
     @Test     
     public void testAdd() {
-        SimpleCalc calc = new SimpleCalc();
+        SimpleCalc2 calc = new SimpleCalc2();
         int result = calc.add(3, 4);
         assertEquals(result, 7);
     }
