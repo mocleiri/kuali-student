@@ -24,25 +24,29 @@
 						</goals>
 
 						<configuration>
-							<contractURL>https://test.kuali.org/confluence/display/KULSTU/Organization+Service</contractURL>
-							<jsessionId>C403985B89D8D8A8762745684E0ADAE6.Kuali3_1Engine</jsessionId>
+                            <contractURL>https://test.kuali.org/confluence/display/KULSTU/Learning+Objective+Service+v1.0-rc3</contractURL>
+							<jsessionId>ED90AEA5562FAFEBE674C6C7DCA91226.Kuali3_1Engine</jsessionId>
 							<outputDirectory>
 								src/main/java
 							</outputDirectory>
-							<packageName>org.kuali.student.lum.xxx</packageName>
-                            <serviceName>XxxService</serviceName>
-                            <namespace>http://student.kuali.org/lum/xxx</namespace>
+							<packageName>org.kuali.student.lum.lo</packageName>
+                            <serviceName>LearningObjectiveService</serviceName>
+                            <namespace>http://student.kuali.org/lum/lo</namespace>
 							<excludeClasses>
-								<className>MetaInfo</className>
-								<className>StatusInfo</className>
+								<className>Attribute</className>
 								<className>AttributeInfo</className>
-								<className>RichTextInfo</className>
-								<className>ValidationResultInfo</className>
 								<className>CriteriaSetInfo</className>
 								<className>CriterionInfo</className>
-								<className>TypeAttributeInfo</className>
-								<className>SearchRelationshipInfo</className>
+								<className>Date</className>
+								<className>Long</className>
+								<className>MetaInfo</className>
+								<className>QueryParamValue</className>
+								<className>RichTextInfo</className>
+								<className>StatusInfo</className>
 								<className>SearchIndexedTypeInfo</className>
+								<className>SearchRelationshipInfo</className>
+								<className>TypeAttributeInfo</className>
+								<className>ValidationResultInfo</className>
 							</excludeClasses>
 							<!--
 							<transformFile>
