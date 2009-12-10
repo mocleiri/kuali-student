@@ -31,7 +31,7 @@
 							</outputDirectory>
 							<packageName>org.kuali.student.lum.lo</packageName>
                             <serviceName>LearningObjectiveService</serviceName>
-                            <namespace>http://student.kuali.org/lum/lo</namespace>
+                            <namespace>http://student.kuali.org/wsdl/lo</namespace>
 							<excludeClasses>
 								<className>Attribute</className>
 								<className>AttributeInfo</className>
