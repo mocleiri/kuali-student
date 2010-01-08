@@ -24,7 +24,7 @@
 	<artifactId>maven-kscontract-plugin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
-	<name />
+ <name>KS Tools - Contract Scraper</name>
 	<description />
 
 	<dependencies>
