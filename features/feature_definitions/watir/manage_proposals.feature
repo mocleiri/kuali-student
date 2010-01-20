@@ -18,7 +18,7 @@ Feature: Proposal workflow
 	And I am on the kuali homepage 
 	When I follow "Organizations"
 	And I click the "Organization" label
-# no name on field...wtf?	And I select "Adhoc Comittee" from "Type"
+# no name on field...?	And I select "Adhoc Comittee" from "Type"
 	And I fill in "orgName" with "name1"
 	And I fill in "orgAbbrev" with "abbrev1"
 	And I fill in "orgDesc" with "desc1"
@@ -28,7 +28,7 @@ Feature: Proposal workflow
 	And I click the "/html/body/table/tbody/tr/td/div/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr[3]/td/table/tbody/tr/td/a/table/tbody/tr/td[2]" xpath
 	And I press "Save"
 	Then I should see "Saving.."
-#date fields with no names...wtf?
+#date fields with no names ...?
 	
   Scenario: I want to see the curiculum management page
 	Given I am loged in as "admin" with the password "admin"
