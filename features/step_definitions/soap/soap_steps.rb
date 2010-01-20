@@ -3,7 +3,7 @@ Given /^(?:|I )am connected to the "([^\"]*)" service$/ do |service_name|
 end
 
 When /^(?:|I )call the "([^\"]*)" action with params "([^\"]*)"$/ do |action_name, params|
-  @response = @client.instance_eval (action_name + build_action_params(params))
+  @response = @client.instance_eval(action_name + build_action_params(params))
 end
 
 Then /^response parameter "([^\"]*)" for the action "([^\"]*)" should contain "([^\"]*)"$/ do |response_parameter, action_name, value|
