@@ -27,6 +27,10 @@ module NavigationHelpers
         "Now, go and add a mapping in #{__FILE__}"
     end
   end
+  
+  def soap_path_to(service_name)
+    "http://localhost:8080/ks-embedded/services/#{service_name}?wsdl"
+  end
 end
 
 World(NavigationHelpers)
