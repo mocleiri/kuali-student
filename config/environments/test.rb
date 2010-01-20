@@ -34,3 +34,5 @@ config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.9' unless Fil
 config.gem 'firewatir'
 config.gem 'cucumber-rails'
 config.gem 'database_cleaner'
+config.gem 'savon'
+config.gem 'culerity'
