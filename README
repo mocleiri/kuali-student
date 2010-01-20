@@ -19,25 +19,25 @@ e.g. Culerity.
 
 4. Install all needed gems by running test script:
 	'sudo rake gems:install RAILS_ENV=test'
-	Vendor folder contains all gems versions necessary for running cucumber
+	Vendor folder contains all gems versions necessary for running cucumber for various frameworks,
 	if you have problem you can run manual installations e.g.:
 	'sudo gem install cucumber watir fire-watir Selenium selenium-client rspec rspec-rails savon'
 	
-5. Have running Tomcat with ks-embedded application
+5. Have running Tomcat with ks-embedded application and Oracle with database
 
 6. Run default test with -p switch (switch either one: watir, selenium, soap)
 	'cucumber -p watir'
 	'cucumber -p selenium'
 	'cucumber -p soap'
-	Remember that watir or selenium needs to start Firefox for the first time 
+	Remember that watir or selenium needs to start Firefox for the first time on Mac 
 	(you have to unload Firefox before), wait until empty Firefox will appear and 
 	then you have to run it second time e.g.: 'cucumber -p watir'
 	
-7. If you have missing 'a' characters in output use command:
+7. If you have missing 'a' characters in output use command (mainly in Windows):
 	'chcp 1252'
 	to switch to correct font mapping
 	
-Notes: sometimes installations will get in trouble with error message of some kind, try to follow 
+Notes: sometimes installations will get in trouble with error messages of some kind, try to follow 
 	suggestions and work it out manually
 	
 	
