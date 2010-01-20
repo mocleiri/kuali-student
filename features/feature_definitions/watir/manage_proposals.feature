@@ -23,12 +23,10 @@ Feature: Proposal workflow
 	And I fill in "orgAbbrev" with "abbrev1"
 	And I fill in "orgDesc" with "desc1"
 # Relationships / Links. Again nothing that I can use to select it
-	And I click the "/html/body/table/tbody/tr/td/div/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr/td/a/table/tbody/tr/td[2]" xpath
-# Positions. Again nothing that I can use to select it
-	And I click the "/html/body/table/tbody/tr/td/div/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr[3]/td/table/tbody/tr/td/a/table/tbody/tr/td[2]" xpath
+	And I click the "/html/body/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td[2]/div/select" xpath
 	And I press "Save"
 	Then I should see "Saving.."
-#date fields with no names ...?
+#date fields with no names...?
 	
   Scenario: I want to see the curiculum management page
 	Given I am loged in as "admin" with the password "admin"
