@@ -23,6 +23,18 @@ When /^(?:|I )select "([^\"]*)" from "([^\"]*)"$/ do |value, field|
   @browser.select_list(:name, field).set(value)
 end
 
+When /^(?:|I )select "([^\"]*)" from "([^\"]*)" class_set$/ do |value, field|
+  #@browser.select_list(:class, field).set(value)
+end
+
+When /^(?:|I )select "([^\"]*)" from "([^\"]*)" xpath$/ do |value, field|
+  #@browser.select_list(:name, field).set(value)
+  @browser.element_by_xpath(field).set(value)
+  #@browser.element_by_xpath(field).select_value(value)
+   #@browser.select_from_combobox_with_index(index, value)   
+   #select_item_in_select_list(attribute, value)   
+end
+
 When /^(?:|I )click the "([^\"]*)" label$/ do |field|
 	@browser.div(:text, field).click
 end
