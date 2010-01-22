@@ -6,36 +6,39 @@ It does not require directly Rails support but some gems may use Rails web libra
 e.g. Culerity. 
 
 == Getting Started
-Please not that we prepend each install command with sudo. This is not necessary in windows and will not work there. 
-Linux and Mac users should install with sudo to have the gems install into the system library.
+Please note that we prepend each install command with sudo. This is not necessary in windows and will not work there. 
+Linux and Mac users should install with sudo to have gems installed into the system library.
 
 1. Install Ruby with all features checked: http://www.ruby-lang.org/en/downloads/
 	check if ruby is running ok: 'ruby -v'
 
 2. Install Rails. For now only needed for gem management and selenium. You also need to have the latest rubygems.
-   'sudo gem update --system'
-   'sudo gem install rails'
+   	'sudo gem update --system'
+   	'sudo gem install rails'
 
 3. Checkout ks-cuke-testing project from svn (into current folder):
 	'svn co https://test.kuali.org/svn/student/deploymentlab/UI/ks-cuke-testing ks-cuke-testing'
 	go to ks-cuke-testing folder: 'cd ks-cuke-testing'
 
-4. Install all needed gems by running script: 'sudo rake gems:install RAILS_ENV=test'
+4. Install all needed gems by running script: 
+	'sudo rake gems:install RAILS_ENV=test'
+	
 	If you have problem you can run manual installations based on config/environments/test.rb e.g.:
 	'sudo gem install cucumber watir fire-watir Selenium selenium-client rspec rspec-rails savon'
 	
 5. Have running Tomcat with ks-embedded application and Oracle with database. 
 	The testing framework assumes that the path to the app is http://localhost:8080/ks-embedded
 
-6. Run default test with -p switch (switch either one: watir, selenium, soap)
+6. Run default test with -p switch (switch either one: watir, selenium, soap, culerity)
 	'cucumber -p watir'
 	'cucumber -p selenium'
 	'cucumber -p soap'
 	'cucumber -p culerity'
+	
 	Remember that watir or selenium needs to start Firefox for the first time on Mac 
 	(you have to unload Firefox before), wait until empty Firefox will appear and 
 	then you have to run it second time e.g.: 'cucumber -p watir'. Also dont forget to
-	install jssh plugin for watir to work http://wiki.openqa.org/display/WTR/FireWatir+Installation.
+	install jssh plugin for watir to work http://wiki.openqa.org/display/WTR/FireWatir+Installation
 	
 7. Culerity.
 	If you would like to run culerity tests you need to have jruby installed on your system.
