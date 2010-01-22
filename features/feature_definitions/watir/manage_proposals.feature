@@ -26,8 +26,8 @@ Feature: Proposal workflow
 	And I click the "/html/body/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td[2]/div/select/option[3]" xpath
 #	And I select the "Advisory Group" from #"/html/body/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td[2]/div/select"# xpath
 	And I select "Advisory Group" from "/html/body/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td[2]/div/select" xpath
-#And I select the "Advisory Group" from "0" index
-	And I select "Association" from "gwt-ListBox KS-Dropdown KS-Dropdown-Selected KS-Dropdown-Hover" class_set
+	#:class does not work yet 
+	#And I select "Association" from "gwt-ListBox KS-Dropdown KS-Dropdown-Selected KS-Dropdown-Hover" class_set
 	#Then I should see "Association"
 	And I press "Save"
 	Then I should see "Saving.."
