@@ -37,3 +37,11 @@ end
 After do
   @browser.goto path_to("the logout path")
 end
+
+When /^(?:|I )select "([^\"]*)" from "([^\"]*)" class_set$/ do |value, field|
+  @browser.select_list(:class, field).set(value)
+end
+
+When /^(?:|I )select "([^\"]*)" from "([^\"]*)" xpath$/ do |value, field|
+  @browser.element_by_xpath(field).set(value)
+end
