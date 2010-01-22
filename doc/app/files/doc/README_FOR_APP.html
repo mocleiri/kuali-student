@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Thu Jan 21 09:36:59 -0800 2010</td>
+      <td>Thu Jan 21 17:57:56 -0800 2010</td>
     </tr>
     </table>
   </div>
@@ -78,9 +78,9 @@ e.g. Culerity.
 </p>
 <h2>Getting Started</h2>
 <p>
-Please not that we prepend each install command with sudo. This is not
+Please note that we prepend each install command with sudo. This is not
 necessary in windows and will not work there. Linux and Mac users should
-install with sudo to have the gems install into the system library.
+install with sudo to have gems installed into the system library.
 </p>
 <ol>
 <li>Install Ruby with all features checked: <a
@@ -91,9 +91,12 @@ href="http://www.ruby-lang.org/en/downloads">www.ruby-lang.org/en/downloads</a>/
 </pre>
 </li>
 <li>Install Rails. For now only needed for gem management and selenium. You
-also need to have the latest rubygems. &#8216;sudo gem update
-&#8212;system&#8217; &#8216;sudo gem install rails&#8216;
+also need to have the latest rubygems.
 
+<pre>
+     'sudo gem update --system'
+     'sudo gem install rails'
+</pre>
 </li>
 <li>Checkout ks-cuke-testing project from svn (into current folder):
 
@@ -102,10 +105,11 @@ also need to have the latest rubygems. &#8216;sudo gem update
      go to ks-cuke-testing folder: 'cd ks-cuke-testing'
 </pre>
 </li>
-<li>Install all needed gems by running script: &#8216;sudo rake gems:install
-RAILS_ENV=test&#8216;
+<li>Install all needed gems by running script:
 
 <pre>
+     'sudo rake gems:install RAILS_ENV=test'
+
      If you have problem you can run manual installations based on config/environments/test.rb e.g.:
      'sudo gem install cucumber watir fire-watir Selenium selenium-client rspec rspec-rails savon'
 </pre>
@@ -116,17 +120,19 @@ RAILS_ENV=test&#8216;
      The testing framework assumes that the path to the app is http://localhost:8080/ks-embedded
 </pre>
 </li>
-<li>Run default test with -p switch (switch either one: watir, selenium, soap)
+<li>Run default test with -p switch (switch either one: watir, selenium, soap,
+culerity)
 
 <pre>
      'cucumber -p watir'
      'cucumber -p selenium'
      'cucumber -p soap'
      'cucumber -p culerity'
+
      Remember that watir or selenium needs to start Firefox for the first time on Mac
      (you have to unload Firefox before), wait until empty Firefox will appear and
      then you have to run it second time e.g.: 'cucumber -p watir'. Also dont forget to
-     install jssh plugin for watir to work http://wiki.openqa.org/display/WTR/FireWatir+Installation.
+     install jssh plugin for watir to work http://wiki.openqa.org/display/WTR/FireWatir+Installation
 </pre>
 </li>
 <li>Culerity.
