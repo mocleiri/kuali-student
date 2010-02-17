@@ -19,7 +19,8 @@
     <parent>
       <groupId>org.kuali.student</groupId>
       <artifactId>student-parent</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
+      <relativePath>../pom/student/pom.xml</relativePath>
     </parent>
     <groupId>org.kuali.student</groupId>
     <artifactId>student</artifactId>
@@ -1060,6 +1061,10 @@
 		</dependency>
 	</dependencies>
     <distributionManagement>
+      <site>
+        <id>kauli.website</id>
+        <url>file://C:/site/${project.version}/</url>
+      </site>
       <repository>
         <uniqueVersion>true</uniqueVersion>
         <id>internal</id>
