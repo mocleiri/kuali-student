@@ -1,11 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2009 The Kuali Foundation
+ 
+  Licensed under the Educational Community License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.osedu.org/licenses/ECL-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+      <groupId>org.kuali.student</groupId>
+      <artifactId>student-parent</artifactId>
+      <version>1.0</version>
+    </parent>
     <groupId>org.kuali.student</groupId>
     <artifactId>student</artifactId>
     <version>1.0.0-m3-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Master KS Pom</name>
-    <description>Kuali Student Project</description>
+    <name>Kuali Student</name>
+    <description>Kuali Student</description>
     <scm>
       <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/trunk</connection>
       <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/trunk</developerConnection>
@@ -109,10 +130,6 @@
 					<id>gwt-maven</id>
 					<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
 				</repository>
-				<repository>
-                    <id>shibboleth.internet2</id>
-                    <url>http://shibboleth.internet2.edu/downloads/maven2/</url>
-                </repository>
 			</repositories>
 			<pluginRepositories>
                 <pluginRepository>
@@ -231,7 +248,7 @@
 				    <configuration>
 					    <username>${maven.release.username}</username>
 				        <password>${maven.release.password}</password>
-			    	    <arguments>-Dmaven.test.skip=true</arguments>
+			    	    <arguments>--batch-mode -Dmaven.test.skip=true</arguments>
 			        	<preparationGoals>clean install</preparationGoals>
 				        <goals>clean deploy</goals>
 				    </configuration>
@@ -259,13 +276,6 @@
 						<compilerArgument>-implicit:none</compilerArgument>
 					</configuration>
 				</plugin>
-
-                <!--  the site plugin is both build and reporting -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${site.plugin.version}</version>
-                </plugin>
 
 				<!-- CXF Java2WS Default Configuration -->
 				<plugin>
