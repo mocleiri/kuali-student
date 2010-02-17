@@ -6,6 +6,11 @@
     <packaging>pom</packaging>
     <name>Master KS Pom</name>
     <description>Kuali Student Project</description>
+    <scm>
+      <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/trunk</connection>
+      <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/trunk</developerConnection>
+      <url>https://test.kuali.org/svn/student/deploymentlab/ks/trunk</url>
+    </scm>
     <modules>
         <module>security</module>
         <module>core</module>
@@ -13,18 +18,6 @@
         <module>lum</module>
         <module>web</module>
     </modules>
-    <repositories>
-        <repository>
-            <id>kuali.release</id>
-            <url>https://test.kuali.org/maven</url>
-            <snapshots><enabled>false</enabled></snapshots>
-        </repository>
-        <repository>
-            <id>kuali.snapshot</id>
-            <url>http://archiva.kuali.umd.edu/repository/snapshot</url>
-            <releases><enabled>false</enabled></releases>
-        </repository>
-    </repositories>
     <properties>
     	<!-- artifact versions -->
         <atomikos.version>3.4.1</atomikos.version>
@@ -1056,11 +1049,6 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-    <scm>
-      <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/branches/1.0.0-m3</connection>
-      <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/branches/1.0.0-m3</developerConnection>
-      <url>https://test.kuali.org/svn/student/deploymentlab/branches/1.0.0-m3</url>
-    </scm>
     <distributionManagement>
       <repository>
         <uniqueVersion>true</uniqueVersion>
