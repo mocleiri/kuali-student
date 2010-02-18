@@ -30,9 +30,9 @@
     <description>Kuali Student Testing</description>
     <version>1-SNAPSHOT</version>
     <modules>
-      <!--<module>driver</module>
+      <module>driver</module>
       <module>performance</module>
-      <module>ui</module>-->
+      <module>ui</module>
       <module>ws</module>
     </modules>
     <issueManagement>
