@@ -30,10 +30,7 @@
     <description>Kuali Student Testing</description>
     <version>2-SNAPSHOT</version>
     <modules>
-      <module>driver</module>
       <module>performance</module>
-      <module>ui</module>
-      <module>ws</module>
     </modules>
     <issueManagement>
       <system>JIRA</system>
