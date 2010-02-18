@@ -1067,12 +1067,5 @@
         <id>kauli.website</id>
         <url>file://C:/site/${project.version}/</url>
       </site>
-      <repository>
-        <uniqueVersion>true</uniqueVersion>
-        <id>internal</id>
-        <name>Kuali Student Repository</name>
-        <url>file://C:/maven2</url>
-        <layout>default</layout>
-      </repository>
     </distributionManagement>
 </project>
