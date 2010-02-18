@@ -251,7 +251,7 @@
 				    <configuration>
 					    <username>${maven.release.username}</username>
 				        <password>${maven.release.password}</password>
-			    	    <arguments>--batch-mode -Dmaven.test.skip=true</arguments>
+			    	    <arguments>-Dmaven.test.skip=true</arguments>
 			        	<preparationGoals>clean install</preparationGoals>
 				        <goals>clean deploy</goals>
 				    </configuration>
