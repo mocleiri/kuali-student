@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <bannerLeft>
-    <name>${project.name}</name>
-    <src>http://maven.apache.org/images/apache-maven-project-2.png</src>
-    <href>http://student.kuali.org/</href>
+    <name></name>
+    <src></src>
+    <href></href>
   </bannerLeft>
   <bannerRight>
-    <name>${project.name}</name>
-    <src>http://maven.apache.org/images/maven-logo-2.gif</src>
-    <href>http://student.kuali.org/</href>
+    <name></name>
+    <src></src>
+    <href></href>
   </bannerRight>
 
   <skin>
