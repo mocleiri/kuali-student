@@ -24,14 +24,14 @@
     </parent>
     <groupId>org.kuali.student</groupId>
     <artifactId>student</artifactId>
-    <version>1.0.0-m3-SNAPSHOT</version>
+    <version>1.0.0-m3</version>
     <packaging>pom</packaging>
     <name>Kuali Student</name>
     <description>Kuali Student</description>
     <scm>
-      <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/trunk</connection>
-      <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/trunk</developerConnection>
-      <url>https://test.kuali.org/svn/student/deploymentlab/ks/trunk</url>
+      <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/tags/student-1.0.0-m3</connection>
+      <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/ks/tags/student-1.0.0-m3</developerConnection>
+      <url>https://test.kuali.org/svn/student/deploymentlab/ks/tags/student-1.0.0-m3</url>
     </scm>
     <modules>
         <module>security</module>
@@ -217,7 +217,7 @@
           <configuration>
            <tasks>
              <copy flatten="true" todir="${project.basedir}/web/ks-embedded/target/ks-embedded-webapp/WEB-INF/lib">
-               <fileset dir="." includes="**/ks-*-SNAPSHOT-clover.jar"/>
+               <fileset dir="." includes="**/ks-*-SNAPSHOT-clover.jar" />
              </copy>
            </tasks>
           </configuration>
