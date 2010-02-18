@@ -2,8 +2,8 @@
     <modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.kuali.student.test</groupId>
-		<artifactId>test</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+		<artifactId>test-parent</artifactId>
+        <version>1-SNAPSHOT</version>
 	</parent>
     <groupId>org.kuali.student.test.performance</groupId>
     <artifactId>performance</artifactId>

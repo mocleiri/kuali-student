@@ -7,8 +7,8 @@
     <description>This area is dedicated to the automated testing of Kuali Student web services</description>
 	<parent>
 		<groupId>org.kuali.student.test</groupId>
-		<artifactId>test</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+		<artifactId>test-parent</artifactId>
+        <version>1-SNAPSHOT</version>
 	</parent>
     <modules>
         <module>ks-groovyws</module>
