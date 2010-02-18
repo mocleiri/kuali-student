@@ -1066,7 +1066,7 @@
     <distributionManagement>
       <site>
         <id>kauli.website</id>
-        <url>file://C:/site/ks/${project.version}/</url>
+        <url>file://C:/site/${project.artifactId}/${project.version}/</url>
       </site>
     </distributionManagement>
 </project>
