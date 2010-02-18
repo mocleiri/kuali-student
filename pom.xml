@@ -34,6 +34,7 @@
       <url>https://test.kuali.org/svn/student/deploymentlab/ks/trunk</url>
     </scm>
     <modules>
+        <module>db</module>
         <module>security</module>
         <!-- 
         <module>core</module>
