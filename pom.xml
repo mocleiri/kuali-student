@@ -1,53 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Copyright 2009 The Kuali Foundation
- 
-  Licensed under the Educational Community License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
- 
-  http://www.osedu.org/licenses/ECL-2.0
- 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
- -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-      <groupId>org.kuali.student</groupId>
-      <artifactId>student-parent</artifactId>
-      <version>1</version>
-      <relativePath>../maven/student/pom.xml</relativePath>
-    </parent>
-    <groupId>org.kuali.student.test</groupId>
-    <artifactId>test-parent</artifactId>
+	<parent>
+		<groupId>org.kuali.student.test</groupId>
+		<artifactId>test-parent</artifactId>
+        <version>1-SNAPSHOT</version>
+	</parent>
+    <artifactId>performance</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Kuali Student Testing</name>
-    <url>http://driver-1.ks.kuali.net/</url>
-    <description>Kuali Student Testing</description>
-    <version>1</version>
+    <name>Performance</name>
+    <description>This set of projects is dedicated to performance testing of the Kuali Student application</description>
     <modules>
-      <module>driver</module>
-      <module>performance</module>
-      <module>ui</module>
-      <module>ws</module>
+        <module>ks-tsung</module>
     </modules>
-    <issueManagement>
-      <system>JIRA</system>
-      <url>https://test.kuali.org/jira/browse/KSLAB</url>
-    </issueManagement>       
-    <scm>
-      <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/test/tags/test-parent-1</connection>
-      <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/test/tags/test-parent-1</developerConnection>
-      <url>https://test.kuali.org/svn/student/deploymentlab/test/tags/test-parent-1</url>
-    </scm>
-    <distributionManagement>
-      <site>
-        <id>driver-1.ks.kuali.net</id>
-        <url>file://C:/site/${project.artifactId}/${project.version}</url>
-      </site>
-    </distributionManagement>
 </project>
