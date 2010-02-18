@@ -47,7 +47,7 @@
     <distributionManagement>
       <site>
         <id>driver-1.ks.kuali.net</id>
-        <url>file://C:/site/ks-test/${project.version}</url>
+        <url>file://C:/site/${project.artifactId}/${project.version}</url>
       </site>
     </distributionManagement>
 </project>
