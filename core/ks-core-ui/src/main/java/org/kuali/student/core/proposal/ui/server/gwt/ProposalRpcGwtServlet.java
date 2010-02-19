@@ -19,13 +19,14 @@ import org.kuali.student.core.proposal.service.ProposalService;
 import org.kuali.student.core.proposal.ui.client.service.ProposalRpcService;
 
 /**
- * For now this servlet just exposes the dictionary and search methods of the Proposal Service 
+ * For now this servlet just exposes the dictionary and search methods of the
+ * Proposal Service
  * 
  * @author Kuali Student Team
- *
+ * 
  */
-public class ProposalRpcGwtServlet extends BaseRpcGwtServletAbstract<ProposalService> implements ProposalRpcService{
+public class ProposalRpcGwtServlet extends BaseRpcGwtServletAbstract<ProposalService> implements ProposalRpcService {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 }
