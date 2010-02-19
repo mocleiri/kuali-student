@@ -50,15 +50,4 @@
         <url>file:///usr/local/apache-tomcat/apache-tomcat-6.0.24/webapps/site/${project.version}</url>
       </site>
     </distributionManagement>
-    <profiles>
-      <profile>
-        <id>local-publication</id>
-        <distributionManagement>
-          <repository>
-            <id>kuali.releases.lab</id>
-            <url>file://C:/site/${project.version}</url>
-          </repository>
-        </distributionManagement>
-      </profile>
-    </profiles>
 </project>
