@@ -26,7 +26,6 @@ import org.kuali.student.common.assembly.client.Metadata;
 import org.kuali.student.common.assembly.client.SaveResult;
 import org.kuali.student.common.assembly.client.Data.Property;
 import org.kuali.student.common.assembly.client.Metadata.WriteAccess;
-import org.kuali.student.common.ui.server.mvc.dto.BeanMappingException;
 import org.kuali.student.common.util.security.SecurityUtils;
 import org.kuali.student.core.dto.RichTextInfo;
 import org.kuali.student.core.dto.TimeAmountInfo;
@@ -110,15 +109,15 @@ public class CreditCourseProposalAssembler implements Assembler<Data, Void> {
 	public static final String FORMAT_LU_TYPE = "kuali.lu.type.CreditCourseFormatShell";
 	public static final String ACTIVITY_RELATION_TYPE = "luLuRelationType.contains";
 	public static final String PROPOSAL_REFERENCE_TYPE = "kuali.proposal.referenceType.clu"; // <-
-																								// what
-																								// the
-																								// service
-																								// says,
-																								// but
-																								// the
-																								// dictionary
-																								// says:
-																								// "kuali.referenceType.CLU";
+	// what
+	// the
+	// service
+	// says,
+	// but
+	// the
+	// dictionary
+	// says:
+	// "kuali.referenceType.CLU";
 	public static final String PROPOSAL_TYPE_CREATE_COURSE = "kuali.proposal.type.course.create";
 	public static final String JOINT_RELATION_TYPE = "kuali.lu.relation.type.co-located";
 
@@ -128,7 +127,6 @@ public class CreditCourseProposalAssembler implements Assembler<Data, Void> {
 	private CluInfoHierarchyAssembler cluHierarchyAssembler;
 	private final RichTextInfoAssembler richtextAssembler = new RichTextInfoAssembler();
 	private final TimeAmountInfoAssembler timeamountAssembler = new TimeAmountInfoAssembler();
-	private final CluIdentifierInfoAssembler cluIdentifierAssembler = new CluIdentifierInfoAssembler();
 	private final CluInstructorInfoDataAssembler instructorAssembler = new CluInstructorInfoDataAssembler();
 	private ProposalService proposalService;
 	private LuService luService;
@@ -471,8 +469,8 @@ public class CreditCourseProposalAssembler implements Assembler<Data, Void> {
 				Metadata fieldMetadata = courseMetadata.getProperties().get(dtoFieldKey);
 				if (fieldMetadata != null) {
 					if ("edit".equals(fieldAccessLevel)) {// TODO better
-															// translation of
-															// access
+						// translation of
+						// access
 						// Don't do anything, yield to default behavior
 					} else {
 						fieldMetadata.setWriteAccess(WriteAccess.NEVER);
@@ -580,15 +578,15 @@ public class CreditCourseProposalAssembler implements Assembler<Data, Void> {
 		if (isDeleted(inputProposal.getProposal().getData())) {
 			proposalService.deleteProposal(inputProposal.getProposal().getId());
 		} else if (isModified(inputProposal.getProposal().getData()) || inputProposal.getProposal().getId() == null) { // FIXME
-																														// wilj:
-																														// use
-																														// modification
-																														// flags
-																														// once
-																														// the
-																														// client
-																														// enforces
-																														// them
+			// wilj:
+			// use
+			// modification
+			// flags
+			// once
+			// the
+			// client
+			// enforces
+			// them
 			ProposalInfo prop = null;
 			// FIXME wilj: use modification flags once the client enforces them
 			if (inputProposal.getProposal().getId() == null) {
@@ -709,9 +707,9 @@ public class CreditCourseProposalAssembler implements Assembler<Data, Void> {
 	private CluInfoHierarchy buildCluInfoHiearchy(CreditCourseHelper course) throws AssemblyException {
 		// metadata for authz
 		Metadata courseMetadata = this.getMetadata(course.getType(), course.getState()).getProperties().get("course");// TODO
-																														// cache
-																														// the
-																														// metadata
+		// cache
+		// the
+		// metadata
 
 		CluInfoHierarchy result = null;
 		CluInfo courseClu = null;
