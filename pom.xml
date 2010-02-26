@@ -15,8 +15,8 @@
     </modules>
 
     <scm>
-        <connection>scm:svn:https://test.kuali.org/svn/student/sandbox/ks-security/branches/ks-security-dev</connection>
-        <developerConnection>scm:svn:https://test.kuali.org/svn/student/sandbox/ks-security/branches/ks-security-dev</developerConnection>
+        <connection>scm:svn:https://test.kuali.org/svn/student/sandbox/ks-security/branches/ks-security-1.0.0-m4</connection>
+        <developerConnection>scm:svn:https://test.kuali.org/svn/student/sandbox/ks-security/branches/ks-security-1.0.0-m4</developerConnection>
     </scm>
     
     <repositories>
