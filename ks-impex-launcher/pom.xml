@@ -141,6 +141,20 @@
                                 <systemPath>${project.build.directory}/impex-checkout/impex/lib/ant-1.6.5.jar</systemPath>
                             </dependency>
                             <dependency>
+						    	<groupId>ant</groupId>
+					    		<artifactId>ant-apache-regexp</artifactId>
+						    	<version>1.6.5</version>
+                                <scope>system</scope>
+                                <systemPath>${project.build.directory}/impex-checkout/impex/lib/ant-apache-regexp-1.6.5.jar</systemPath>
+						    </dependency>
+						    <dependency>
+						    	<artifactId>jakarta-regexp</artifactId>
+						    	<groupId>jakarta-regexp</groupId>
+						    	<version>1.4</version>
+                                <scope>system</scope>
+                                <systemPath>${project.build.directory}/impex-checkout/impex/lib/jakarta-regexp-1.4.jar</systemPath>
+						    </dependency>
+							<dependency>
                                 <groupId>ant-contrib</groupId>
                                 <artifactId>ant-contrib</artifactId>
                                 <version>1.0b3</version>
