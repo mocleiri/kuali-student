@@ -13,8 +13,8 @@
     </modules>
     
     <scm>
-        <connection>scm:svn:https://test.kuali.org/svn/student/sandbox/continuum-release-mngmt/tags/continuum-release-mngmt-test-0.0.1</connection>
-        <developerConnection>scm:svn:https://test.kuali.org/svn/student/sandbox/continuum-release-mngmt/tags/continuum-release-mngmt-test-0.0.1</developerConnection>
+        <connection>scm:svn:https://test.kuali.org/svn/student/sandbox/continuum-release-mngmt/branches/continuum-release-mngmt-test</connection>
+        <developerConnection>scm:svn:https://test.kuali.org/svn/student/sandbox/continuum-release-mngmt/branches/continuum-release-mngmt-test</developerConnection>
     </scm>
     
     <properties>
