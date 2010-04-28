@@ -2,7 +2,7 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>org.kuali.student</groupId>
   	<artifactId>continuum-release-mngmt-test</artifactId>
-  	<version>0.0.1</version>
+  	<version>0.0.3-SNAPSHOT</version>
   	<name>Continuum Release Management Test</name>
     <description>Continuum Release Management Test</description>
     <packaging>pom</packaging>
