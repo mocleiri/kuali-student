@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kuali.student</groupId>
 	<artifactId>continuum-release-mngmt-module1</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>continuum release mngmt module1</name>
 	<description>continuum release mngmt module1</description>
@@ -11,6 +11,6 @@
 	<parent>
 		<groupId>org.kuali.student</groupId>
 		<artifactId>continuum-release-mngmt-test</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 </project>
