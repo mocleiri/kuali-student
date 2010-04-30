@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+    <writeAccess>ALWAYS</writeAccess>
+    <canUnmask>false</canUnmask>
+    <canView>true</canView>
+    <canEdit>true</canEdit>
+    <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+    <dataType>DATA</dataType>
+    <properties>
+        <property name="bySubjectArea">
+            <metadata>
+                <writeAccess>ALWAYS</writeAccess>
+                <canUnmask>false</canUnmask>
+                <canView>true</canView>
+                <canEdit>true</canEdit>
+                <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+                <dataType>DATA</dataType>
+                <constraints>
+                    <constraint>
+                        <id>single</id>
+                        <messageId>kuali.msg.validation.single</messageId>
+                        <desc>Single valued (non-repeating)</desc>
+                        <serverSide>false</serverSide>
+                        <maxOccurs>1</maxOccurs>
+                        <comments>Used to override a repeating constraint</comments>
+                    </constraint>
+                </constraints>
+                <properties>
+                    <property name="courseId">
+                        <metadata>
+                            <writeAccess>ALWAYS</writeAccess>
+                            <canUnmask>false</canUnmask>
+                            <canView>true</canView>
+                            <canEdit>true</canEdit>
+                            <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+                            <dataType>LIST</dataType>
+                            <lookupMetadata>
+<id>kuali.lu.browse.CourseCatalogBySubjectArea</id>
+<searchTypeId>lu.search.generic</searchTypeId>
+<name>Basic and Advanced Search</name>
+<desc>Query with multiple optional elements to satisfy most advanced pickers</desc>
+<params>
+    <param>
+        <key>lu.queryParam.luOptionalId</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Id</name>
+        <desc>Unique identifier for a lu.</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>CUSTOM</usage>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalLongName</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Name</name>
+        <desc>Long name</desc>
+        <caseSensitive>false</caseSensitive>
+        <usage>DEFAULT</usage>
+        <widget>SUGGEST_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalType</key>
+        <writeAccess>NEVER</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <defaultValueString>kuali.lu.type.CreditCourse</defaultValueString>
+        <name>Type</name>
+        <desc>Lu type (course, program etc.)</desc>
+        <caseSensitive>true</caseSensitive>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalDivision</key>
+        <childLookup>
+            <id>kuali.lu.browse.AllSubjectAreas</id>
+            <searchTypeId>enumeration.management.search</searchTypeId>
+            <name>Get enumerations</name>
+            <desc>Get enumerated lists of values given context</desc>
+            <params>
+                <param>
+                    <key>enumeration.queryParam.enumerationType</key>
+                    <writeAccess>NEVER</writeAccess>
+                    <dataType>STRING</dataType>
+                    <optional>false</optional>
+                    <defaultValueString>kuali.lu.subjectArea</defaultValueString>
+                    <name>Enumeration Type</name>
+                    <desc>The type of the enumeration to search</desc>
+                    <caseSensitive>true</caseSensitive>
+                </param>
+                <param>
+                    <key>enumeration.queryParam.contextType</key>
+                    <writeAccess>NEVER</writeAccess>
+                    <dataType>STRING</dataType>
+                    <optional>true</optional>
+                    <name>Context Type</name>
+                    <desc>The type of context being used</desc>
+                    <caseSensitive>true</caseSensitive>
+                </param>
+                <param>
+                    <key>enumeration.queryParam.contextValue</key>
+                    <writeAccess>NEVER</writeAccess>
+                    <dataType>STRING</dataType>
+                    <optional>true</optional>
+                    <name>Context Value</name>
+                    <desc>The value of the supplied context</desc>
+                    <caseSensitive>true</caseSensitive>
+                </param>
+                <param>
+                    <key>enumeration.queryParam.contextDate</key>
+                    <writeAccess>NEVER</writeAccess>
+                    <dataType>DATE</dataType>
+                    <optional>true</optional>
+                    <name>Context Date</name>
+                    <desc>A date supplied as context</desc>
+                    <caseSensitive>true</caseSensitive>
+                </param>
+            </params>
+            <results>
+                <result>
+                    <dataType>STRING</dataType>
+                    <desc>The internal code of the enumeration value</desc>
+                    <hidden>true</hidden>
+                    <key>enumeration.resultColumn.code</key>
+                    <name>Code</name>
+                </result>
+                <result>
+                    <dataType>STRING</dataType>
+                    <desc>An abbreviation of the enumeration value</desc>
+                    <hidden>false</hidden>
+                    <key>enumeration.resultColumn.abbrevValue</key>
+                    <name>Abbreviation of the code</name>
+                </result>
+                <result>
+                    <dataType>STRING</dataType>
+                    <desc>The description of the enumeration value</desc>
+                    <hidden>false</hidden>
+                    <key>enumeration.resultColumn.value</key>
+                    <name>Description of the code</name>
+                </result>
+                <result>
+                    <dataType>TRUNCATED_DATE</dataType>
+                    <desc>The date the enumeration became effective</desc>
+                    <hidden>true</hidden>
+                    <key>enumeration.resultColumn.effectiveDate</key>
+                    <name>Effective date</name>
+                </result>
+                <result>
+                    <dataType>TRUNCATED_DATE</dataType>
+                    <desc>The date the enumeration became non-effective</desc>
+                    <hidden>true</hidden>
+                    <key>enumeration.resultColumn.expirationDate</key>
+                    <name>Expiration date</name>
+                </result>
+                <result>
+                    <dataType>STRING</dataType>
+                    <desc>The description of the type</desc>
+                    <hidden>true</hidden>
+                    <key>enumeration.resultColumn.sortKey</key>
+                    <name>Key used to sort the results</name>
+                </result>
+            </results>
+            <resultReturnKey>enumeration.resultColumn.code</resultReturnKey>
+            <resultDisplayKey>enumeration.resultColumn.value</resultDisplayKey>
+            <usage>DEFAULT</usage>
+        </childLookup>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Division</name>
+        <desc>Division or Subject Area</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalPrimaryAdminOrgId</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Primary Admin Org Id</name>
+        <desc>Primary Admin Org Id</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalCode</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Code</name>
+        <desc>Lu code</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalDivision</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Division</name>
+        <desc>Division or Subject Area</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalPrimaryAdminOrgId</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Primary Admin Org Id</name>
+        <desc>Primary Admin Org Id</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalLevel</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Level</name>
+        <desc>Lu level grad/undergrad</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalState</key>
+        <writeAccess>NEVER</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <defaultValueString>activated</defaultValueString>
+        <name>State</name>
+        <desc>Lu State</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+</params>
+<results>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Identifier of a Clu</desc>
+        <hidden>true</hidden>
+        <key>lu.resultColumn.cluId</key>
+        <name>Clu Id</name>
+    </result>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Long name for the lu, recorded as the default listing.</desc>
+        <hidden>false</hidden>
+        <key>lu.resultColumn.luOptionalLongName</key>
+        <name>Name</name>
+    </result>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Lu code</desc>
+        <hidden>false</hidden>
+        <key>lu.resultColumn.luOptionalCode</key>
+        <name>Code</name>
+    </result>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Level of Lu</desc>
+        <hidden>false</hidden>
+        <key>lu.resultColumn.luOptionalLevel</key>
+        <name>Level</name>
+    </result>
+</results>
+<resultReturnKey>lu.resultColumn.cluId</resultReturnKey>
+<resultDisplayKey>lu.resultColumn.luOptionalLongName</resultDisplayKey>
+<resultSortKey>lu.resultColumn.luOptionalLongName</resultSortKey>
+<usage>DEFAULT</usage>
+                            </lookupMetadata>
+                            <additionalLookups/>
+                            <properties>
+<property name="*">
+    <metadata>
+        <writeAccess>ALWAYS</writeAccess>
+        <canUnmask>false</canUnmask>
+        <canView>true</canView>
+        <canEdit>true</canEdit>
+        <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+        <dataType>STRING</dataType>
+    </metadata>
+</property>
+                            </properties>
+                        </metadata>
+                    </property>
+                </properties>
+            </metadata>
+        </property>
+        <property name="bySchoolOrCollege">
+            <metadata>
+                <writeAccess>ALWAYS</writeAccess>
+                <canUnmask>false</canUnmask>
+                <canView>true</canView>
+                <canEdit>true</canEdit>
+                <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+                <dataType>DATA</dataType>
+                <constraints>
+                    <constraint>
+                        <id>single</id>
+                        <messageId>kuali.msg.validation.single</messageId>
+                        <desc>Single valued (non-repeating)</desc>
+                        <serverSide>false</serverSide>
+                        <maxOccurs>1</maxOccurs>
+                        <comments>Used to override a repeating constraint</comments>
+                    </constraint>
+                </constraints>
+                <properties>
+                    <property name="courseId">
+                        <metadata>
+                            <writeAccess>ALWAYS</writeAccess>
+                            <canUnmask>false</canUnmask>
+                            <canView>true</canView>
+                            <canEdit>true</canEdit>
+                            <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+                            <dataType>LIST</dataType>
+                            <lookupMetadata>
+<id>kuali.lu.browseCourseCatalogBySchoolOrCollege</id>
+<searchTypeId>lu.search.generic</searchTypeId>
+<name>Basic and Advanced Search</name>
+<desc>Query with multiple optional elements to satisfy most advanced pickers</desc>
+<params>
+    <param>
+        <key>lu.queryParam.luOptionalId</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Id</name>
+        <desc>Unique identifier for a lu.</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>CUSTOM</usage>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalLongName</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Name</name>
+        <desc>Long name</desc>
+        <caseSensitive>false</caseSensitive>
+        <usage>DEFAULT</usage>
+        <widget>SUGGEST_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalType</key>
+        <writeAccess>NEVER</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <defaultValueString>kuali.lu.type.CreditCourse</defaultValueString>
+        <name>Type</name>
+        <desc>Lu type (course, program etc.)</desc>
+        <caseSensitive>true</caseSensitive>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalCode</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Code</name>
+        <desc>Lu code</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalDivision</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Division</name>
+        <desc>Division or Subject Area</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalPrimaryAdminOrgId</key>
+        <childLookup>
+            <id>kuali.lu.browse.departments.in.school</id>
+            <searchTypeId>org.search.orgQuickViewByRelationTypeRelatedOrgTypeOrgId</searchTypeId>
+            <name>Search using a heirarchy</name>
+            <desc>Finds children of an org</desc>
+            <params>
+                <param>
+                    <key>org.queryParam.relationType</key>
+                    <writeAccess>ALWAYS</writeAccess>
+                    <dataType>STRING</dataType>
+                    <optional>false</optional>
+                    <defaultValueString>kuali.org.Contain</defaultValueString>
+                    <name>Relation type</name>
+                    <desc>relation type to follow</desc>
+                    <caseSensitive>true</caseSensitive>
+                </param>
+                <param>
+                    <key>org.queryParam.orgId</key>
+                    <childLookup>
+                        <id>kuali.lu.browse.schoolsAndColleges</id>
+                        <searchTypeId>org.search.generic</searchTypeId>
+                        <name>Basic and Advanced Search</name>
+                        <desc>Query with multiple optional elements to satisfy most advanced pickers</desc>
+                        <params>
+                            <param>
+<key>org.queryParam.orgOptionalLongName</key>
+<writeAccess>NEVER</writeAccess>
+<dataType>STRING</dataType>
+<optional>true</optional>
+<name>Organization Name</name>
+<desc>Long organization name.</desc>
+<caseSensitive>false</caseSensitive>
+                            </param>
+                            <param>
+<key>org.queryParam.orgOptionalLocation</key>
+<writeAccess>NEVER</writeAccess>
+<dataType>STRING</dataType>
+<optional>true</optional>
+<name>Location</name>
+<desc>Organization location.</desc>
+<caseSensitive>false</caseSensitive>
+                            </param>
+                            <param>
+<key>org.queryParam.orgOptionalId</key>
+<writeAccess>NEVER</writeAccess>
+<dataType>STRING</dataType>
+<optional>true</optional>
+<name>Id</name>
+<desc>Unique identifier for an organization.</desc>
+<caseSensitive>true</caseSensitive>
+                            </param>
+                            <param>
+<key>org.queryParam.orgOptionalShortName</key>
+<writeAccess>NEVER</writeAccess>
+<dataType>STRING</dataType>
+<optional>true</optional>
+<name>Organization Name</name>
+<desc>Short organization name.</desc>
+<caseSensitive>false</caseSensitive>
+                            </param>
+                            <param>
+<key>org.queryParam.orgOptionalType</key>
+<writeAccess>NEVER</writeAccess>
+<dataType>STRING</dataType>
+<optional>true</optional>
+<defaultValueList>kuali.org.College</defaultValueList>
+<defaultValueList>kuali.org.School</defaultValueList>
+<name>Org Type</name>
+<desc>Type of an organization.</desc>
+<caseSensitive>true</caseSensitive>
+                            </param>
+                        </params>
+                        <results>
+                            <result>
+<dataType>STRING</dataType>
+<desc>Identifier for the organization</desc>
+<hidden>true</hidden>
+<key>org.resultColumn.orgId</key>
+<name>Organization Identifier</name>
+                            </result>
+                            <result>
+<dataType>STRING</dataType>
+<desc>Short name for the organization, recorded as the default listing</desc>
+<hidden>false</hidden>
+<key>org.resultColumn.orgShortName</key>
+<name>Organization Short Name</name>
+                            </result>
+                            <result>
+<dataType>STRING</dataType>
+<desc>Long name for the organization, recorded as the default listing.</desc>
+<hidden>false</hidden>
+<key>org.resultColumn.orgOptionalLongName</key>
+<name>Name</name>
+                            </result>
+                            <result>
+<dataType>STRING</dataType>
+<desc>Organization Type</desc>
+<hidden>true</hidden>
+<key>org.resultColumn.orgType</key>
+<name>Organization Type</name>
+                            </result>
+                        </results>
+                        <resultReturnKey>org.resultColumn.orgId</resultReturnKey>
+                        <resultDisplayKey>org.resultColumn.orgOptionalLongName</resultDisplayKey>
+                        <resultSortKey>org.resultColumn.orgOptionalLongName</resultSortKey>
+                        <usage>DEFAULT</usage>
+                    </childLookup>
+                    <writeAccess>NEVER</writeAccess>
+                    <dataType>STRING</dataType>
+                    <optional>false</optional>
+                    <name>parent id</name>
+                    <desc>parent org id</desc>
+                    <caseSensitive>true</caseSensitive>
+                    <widget>PICKER</widget>
+                </param>
+                <param>
+                    <key>org.queryParam.relatedOrgType</key>
+                    <writeAccess>NEVER</writeAccess>
+                    <dataType>STRING</dataType>
+                    <optional>false</optional>
+                    <defaultValueString>kuali.org.Department</defaultValueString>
+                    <name>related Org Type</name>
+                    <desc>Type of an organization.</desc>
+                    <caseSensitive>true</caseSensitive>
+                </param>
+            </params>
+            <results>
+                <result>
+                    <dataType>STRING</dataType>
+                    <desc>Identifier for the organization</desc>
+                    <hidden>true</hidden>
+                    <key>org.resultColumn.orgId</key>
+                    <name>Organization Identifier</name>
+                </result>
+                <result>
+                    <dataType>STRING</dataType>
+                    <desc>Short name for the organization, recorded as the default listing</desc>
+                    <hidden>false</hidden>
+                    <key>org.resultColumn.orgShortName</key>
+                    <name>Organization Short Name</name>
+                </result>
+            </results>
+            <resultReturnKey>org.resultColumn.orgId</resultReturnKey>
+            <resultDisplayKey>org.resultColumn.orgOptionalLongName</resultDisplayKey>
+            <resultSortKey>org.resultColumn.orgOptionalLongName</resultSortKey>
+            <usage>DEFAULT</usage>
+        </childLookup>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Primary Admin Org Id</name>
+        <desc>Primary Admin Org Id</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalLevel</key>
+        <writeAccess>ALWAYS</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <name>Level</name>
+        <desc>Lu level grad/undergrad</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+    <param>
+        <key>lu.queryParam.luOptionalState</key>
+        <writeAccess>NEVER</writeAccess>
+        <dataType>STRING</dataType>
+        <optional>true</optional>
+        <defaultValueString>activated</defaultValueString>
+        <name>State</name>
+        <desc>Lu State</desc>
+        <caseSensitive>true</caseSensitive>
+        <usage>ADVANCED</usage>
+        <widget>TEXT_BOX</widget>
+    </param>
+</params>
+<results>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Identifier of a Clu</desc>
+        <hidden>true</hidden>
+        <key>lu.resultColumn.cluId</key>
+        <name>Clu Id</name>
+    </result>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Long name for the lu, recorded as the default listing.</desc>
+        <hidden>false</hidden>
+        <key>lu.resultColumn.luOptionalLongName</key>
+        <name>Name</name>
+    </result>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Lu code</desc>
+        <hidden>false</hidden>
+        <key>lu.resultColumn.luOptionalCode</key>
+        <name>Code</name>
+    </result>
+    <result>
+        <dataType>STRING</dataType>
+        <desc>Level of Lu</desc>
+        <hidden>false</hidden>
+        <key>lu.resultColumn.luOptionalLevel</key>
+        <name>Level</name>
+    </result>
+</results>
+<resultReturnKey>lu.resultColumn.cluId</resultReturnKey>
+<resultDisplayKey>lu.resultColumn.luOptionalLongName</resultDisplayKey>
+<resultSortKey>lu.resultColumn.luOptionalLongName</resultSortKey>
+<usage>DEFAULT</usage>
+                            </lookupMetadata>
+                            <additionalLookups/>
+                            <properties>
+<property name="*">
+    <metadata>
+        <writeAccess>ALWAYS</writeAccess>
+        <canUnmask>false</canUnmask>
+        <canView>true</canView>
+        <canEdit>true</canEdit>
+        <onChangeRefreshMetadata>false</onChangeRefreshMetadata>
+        <dataType>STRING</dataType>
+    </metadata>
+</property>
+                            </properties>
+                        </metadata>
+                    </property>
+                </properties>
+            </metadata>
+        </property>
+    </properties>
+</metadata>
