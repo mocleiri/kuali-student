@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.kuali</groupId>
     <artifactId>kuali-parent</artifactId>
-    <version>5</version>
+    <version>6-SNAPSHOT</version>
   </parent>
   <groupId>org.kuali.student</groupId>
   <artifactId>ks</artifactId>
@@ -34,6 +34,14 @@
   <url>http://student.kuali.org/</url>
   <inceptionYear>2006</inceptionYear>
   <repositories>
+    <repository>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <url>http://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
     <repository>
       <id>kuali.central</id>
       <url>http://kuali.googlecode.com/svn/repository</url>
