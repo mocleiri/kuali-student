@@ -51,13 +51,6 @@
     <ks.java2ws.phase>process-classes</ks.java2ws.phase>
   </properties>
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.jvnet.wagon-svn</groupId>
-        <artifactId>wagon-svn</artifactId>
-        <version>1.9</version>
-      </extension>
-    </extensions>
     <pluginManagement>
       <plugins>
         <plugin>
