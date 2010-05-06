@@ -35,23 +35,8 @@
   <inceptionYear>2006</inceptionYear>
   <repositories>
     <repository>
-      <id>central</id>
-      <name>Maven Repository Switchboard</name>
-      <url>http://repo1.maven.org/maven2</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
       <id>kuali.central</id>
       <url>http://kuali.googlecode.com/svn/repository</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>kuali.central.2</id>
-      <url>https://test.kuali.org/maven</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
