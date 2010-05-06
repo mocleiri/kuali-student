@@ -51,7 +51,7 @@
     </repository>
     <repository>
       <id>kuali.central.2</id>
-      <url>http://test.kuali.org/maven</url>
+      <url>https://test.kuali.org/maven</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
