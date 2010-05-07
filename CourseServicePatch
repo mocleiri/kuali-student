@@ -1,0 +1,2995 @@
+### Eclipse Workspace Patch 1.0
+#P ks-lum
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ReqCompFieldInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ReqCompFieldInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ReqCompFieldInfo.java	(revision 0)
+@@ -0,0 +1,75 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++
++/**
++ * Detailed information about a requirement component field value.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:58 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/reqCompFieldInfo+Structure">ReqCompFieldInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class ReqCompFieldInfo implements Serializable, Idable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String value;
++
++    @XmlAttribute(name="key")
++    private String id;
++
++    /**
++     * Value for this requirement component field.
++     */
++    public String getValue() {
++        return value;
++    }
++
++    public void setValue(String value) {
++        this.value = value;
++    }
++
++    /**
++     * Unique identifier for a requirement component field type.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ReqComponentInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ReqComponentInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ReqComponentInfo.java	(revision 0)
+@@ -0,0 +1,162 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasTypeState;
++import org.kuali.student.core.dto.MetaInfo;
++import org.kuali.student.core.dto.RichTextInfo;
++
++/**
++ * Information about a requirement component.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:57 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/reqComponentInfo+Structure">ReqComponentInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class ReqComponentInfo implements Serializable, Idable, HasTypeState {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private RichTextInfo desc;
++
++    @XmlElement
++    private ReqCompFieldInfo reqCompField;
++
++    @XmlElement
++    private Date effectiveDate;
++
++    @XmlElement
++    private Date expirationDate;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * Narrative description of the requirement component.
++     */
++    public RichTextInfo getDesc() {
++        return desc;
++    }
++
++    public void setDesc(RichTextInfo desc) {
++        this.desc = desc;
++    }
++
++    /**
++     * Detailed information about a requirement component field value.
++     */
++    public ReqCompFieldInfo getReqCompField() {
++        return reqCompField;
++    }
++
++    public void setReqCompField(ReqCompFieldInfo reqCompField) {
++        this.reqCompField = reqCompField;
++    }
++
++    /**
++     * Date and time that this requirement component became effective. This is a similar concept to the effective date on enumerated values. When an expiration date has been specified, this field must be less than or equal to the expiration date.
++     */
++    public Date getEffectiveDate() {
++        return effectiveDate;
++    }
++
++    public void setEffectiveDate(Date effectiveDate) {
++        this.effectiveDate = effectiveDate;
++    }
++
++    /**
++     * Date and time that this requirement component expires. This is a similar concept to the expiration date on enumerated values. If specified, this must be greater than or equal to the effective date. If this field is not specified, then no expiration date has been currently defined and should automatically be considered greater than the effective date.
++     */
++    public Date getExpirationDate() {
++        return expirationDate;
++    }
++
++    public void setExpirationDate(Date expirationDate) {
++        this.expirationDate = expirationDate;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a requirement component type.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * The current status of the requirement component. The values for this field are constrained to those in the reqComponentState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for a requirement component. This is optional, due to the identifier being set at the time of creation. Once the requirement component has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseVariationInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseVariationInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseVariationInfo.java	(revision 0)
+@@ -0,0 +1,131 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++
++/**
++ * Detailed information about the human readable form of a Variation
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:19 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/courseVariationInfo+Structure">CourseVariationInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CourseVariationInfo implements Serializable, Idable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String variationTitle;
++
++    @XmlElement
++    private String subjectArea;
++
++    @XmlElement
++    private String courseNumberSuffix;
++
++    @XmlElement
++    private String variationCode;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * Full name of the variation, commonly used on catalogues
++     */
++    public String getVariationTitle() {
++        return variationTitle;
++    }
++
++    public void setVariationTitle(String variationTitle) {
++        this.variationTitle = variationTitle;
++    }
++
++    /**
++     * 
++     */
++    public String getSubjectArea() {
++        return subjectArea;
++    }
++
++    public void setSubjectArea(String subjectArea) {
++        this.subjectArea = subjectArea;
++    }
++
++    /**
++     * The "extra" portion of the code, which usually corresponds with the most detailed part of the number.
++     */
++    public String getCourseNumberSuffix() {
++        return courseNumberSuffix;
++    }
++
++    public void setCourseNumberSuffix(String courseNumberSuffix) {
++        this.courseNumberSuffix = courseNumberSuffix;
++    }
++
++    /**
++     * A number that indicates the sequence or order of variation in cases where several different variations have the same offical Identifier
++     */
++    public String getVariationCode() {
++        return variationCode;
++    }
++
++    public void setVariationCode(String variationCode) {
++        this.variationCode = variationCode;
++    }
++
++    /**
++     * This is the CluIdentifier Type. It can only have a single value for VariationType
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * Identifies the particular identifier structure. This is set by the service to be able to determine changes and alterations to the structure as well as provides a handle for searches. This structure is not accessible through unique operations, and it is strongly recommended that no external references to this particular identifier be maintained.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseCrossListingInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseCrossListingInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseCrossListingInfo.java	(revision 0)
+@@ -0,0 +1,117 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++
++/**
++ * Detailed information about the human readable form of a Variation
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:17 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/courseCrossListingInfo+Structure">CourseCrossListingInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CourseCrossListingInfo implements Serializable, Idable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String subjectArea;
++
++    @XmlElement
++    private String department;
++
++    @XmlElement
++    private String courseNumberSuffix;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * 
++     */
++    public String getSubjectArea() {
++        return subjectArea;
++    }
++
++    public void setSubjectArea(String subjectArea) {
++        this.subjectArea = subjectArea;
++    }
++
++    /**
++     * 
++     */
++    public String getDepartment() {
++        return department;
++    }
++
++    public void setDepartment(String department) {
++        this.department = department;
++    }
++
++    /**
++     * The "extra" portion of the code, which usually corresponds with the most detailed part of the number.
++     */
++    public String getCourseNumberSuffix() {
++        return courseNumberSuffix;
++    }
++
++    public void setCourseNumberSuffix(String courseNumberSuffix) {
++        this.courseNumberSuffix = courseNumberSuffix;
++    }
++
++    /**
++     * This is the CluIdentifier Type. It can only have a single value for VariationType
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * Identifies the particular identifier structure. This is set by the service to be able to determine changes and alterations to the structure as well as provides a handle for searches. This structure is not accessible through unique operations, and it is strongly recommended that no external references to this particular identifier be maintained.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/service/CourseService.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/service/CourseService.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/service/CourseService.java	(revision 0)
+@@ -0,0 +1,168 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.service;
++
++import java.util.List;
++
++import javax.jws.WebParam;
++import javax.jws.WebService;
++import javax.jws.soap.SOAPBinding;
++
++import org.kuali.student.core.dto.StatusInfo;
++import org.kuali.student.core.exceptions.AlreadyExistsException;
++import org.kuali.student.core.exceptions.DataValidationErrorException;
++import org.kuali.student.core.exceptions.DoesNotExistException;
++import org.kuali.student.core.exceptions.InvalidParameterException;
++import org.kuali.student.core.exceptions.MissingParameterException;
++import org.kuali.student.core.exceptions.OperationFailedException;
++import org.kuali.student.core.exceptions.PermissionDeniedException;
++import org.kuali.student.core.exceptions.VersionMismatchException;
++
++import org.kuali.student.lum.course.dto.ActivityInfo;
++import org.kuali.student.lum.course.dto.CourseInfo;
++import org.kuali.student.lum.course.dto.FormatInfo;
++import org.kuali.student.lum.course.dto.LoDisplayInfo;
++import org.kuali.student.lum.course.dto.StatementTreeViewInfo;
++
++
++/**
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:39:48 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/Course+Service">CourseService</>
++ *
++ */
++@WebService(name = "CourseService", targetNamespace = "http://student.kuali.org/wsdl/course") // TODO CHECK THESE VALUES
++@SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
++public interface CourseService { 
++    /** 
++     * Retrieves a Course.
++     * @return the Course Structure
++     * @throws OperationFailedException unable to complete request
++	 */
++    public CourseInfo getCourse() throws OperationFailedException;
++
++    /** 
++     * Retrieves the formats for a Course.
++     * @return a list of format info Structures
++     * @throws DoesNotExistException Course does not exist
++     * @throws InvalidParameterException invalid courseId
++     * @throws MissingParameterException invalid courseId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public List<FormatInfo> getCourseFormats() throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Retrieves the Activities for a Course.
++     * @return a list of activity info Structures
++     * @throws DoesNotExistException Format does not exist
++     * @throws InvalidParameterException invalid formatId
++     * @throws MissingParameterException invalid formatId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public List<ActivityInfo> getCourseActivities() throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Retrieves the Los for a Course.
++     * @return a list of LoDisplay info Structures
++     * @throws DoesNotExistException Course does not exist
++     * @throws InvalidParameterException invalid courseId
++     * @throws MissingParameterException invalid courseId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public List<LoDisplayInfo> getCourseLos() throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Retrieves the Statements of a Course.
++     * @return a list of Statementree Structures
++     * @throws DoesNotExistException Credit Course does not exist
++     * @throws InvalidParameterException invalid courseId
++     * @throws MissingParameterException invalid courseId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public List<StatementTreeViewInfo> getCourseStatements() throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Creates a Course
++     * @param courseInfo courseInfo
++     * @return the created course
++     * @throws AlreadyExistsException The Course already exists
++     * @throws DataValidationErrorException One or more values invalid for this operation
++     * @throws InvalidParameterException invalid course
++     * @throws MissingParameterException missing Course
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public CourseInfo createCourse(@WebParam(name="courseInfo")CourseInfo courseInfo) throws AlreadyExistsException, DataValidationErrorException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Updates a Course.
++     * @param courseInfo courseInfo
++     * @return updated Course
++     * @throws DataValidationErrorException One or more values invalid for this operation
++     * @throws DoesNotExistException course not found
++     * @throws InvalidParameterException invalid course
++     * @throws MissingParameterException missing course
++     * @throws VersionMismatchException The action was attempted on an out of date version.
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public CourseInfo updateCourse(@WebParam(name="courseInfo")CourseInfo courseInfo) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException, MissingParameterException, VersionMismatchException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Deletes a Course.
++     * @param courseId identifier for Course.Maps to cluId
++     * @return status of the operation (success or failure)
++     * @throws DoesNotExistException Course does not exist
++     * @throws InvalidParameterException invalid courseId
++     * @throws MissingParameterException invalid courseId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public StatusInfo deleteCourse(@WebParam(name="courseId")String courseId) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Updates the Los for a Course.
++     * @param courseId Unique Id of the Course.Maps to cluId
++     * @param loDisplayInfoList list of LoDisplay info Structures
++     * @return a list of LoDisplay info Structures
++     * @throws DoesNotExistException Course does not exist
++     * @throws InvalidParameterException invalid courseId
++     * @throws MissingParameterException invalid courseId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public List<LoDisplayInfo> updateCourseLos(@WebParam(name="courseId")String courseId, @WebParam(name="loDisplayInfoList")List<LoDisplayInfo> loDisplayInfoList) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++    /** 
++     * Updates the Statements for a Course.
++     * @param courseId Unique Id of the Course. Maps to cluId
++     * @param statementTreeViewInfoList a list of Statementree Structures
++     * @return a list of Statementree Structures
++     * @throws DoesNotExistException Course does not exist
++     * @throws InvalidParameterException invalid courseId
++     * @throws MissingParameterException invalid courseId
++     * @throws OperationFailedException unable to complete request
++     * @throws PermissionDeniedException authorization failure
++	 */
++    public List<StatementTreeViewInfo> updateCourseStatements(@WebParam(name="courseId")String courseId, @WebParam(name="statementTreeViewInfoList")List<StatementTreeViewInfo> statementTreeViewInfoList) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
++
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluFeeRecordInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluFeeRecordInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluFeeRecordInfo.java	(revision 0)
+@@ -0,0 +1,125 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasAttributes;
++
++/**
++ * Information about a fee related to a clu.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:26 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/cluFeeRecordInfo+Structure">CluFeeRecordInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CluFeeRecordInfo implements Serializable, Idable, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String feeType;
++
++    @XmlElement
++    private CurrencyAmountInfo feeAmount;
++
++    @XmlElement
++    private List<AffiliatedOrgInfo> affiliatedOrgs;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * Any finite sequence of characters with letters, numerals, symbols and punctuation marks. The length can be any natural number between zero or any positive integer.
++     */
++    public String getFeeType() {
++        return feeType;
++    }
++
++    public void setFeeType(String feeType) {
++        this.feeType = feeType;
++    }
++
++    /**
++     * The page currencyAmount Structure does not exist.
++     */
++    public CurrencyAmountInfo getFeeAmount() {
++        return feeAmount;
++    }
++
++    public void setFeeAmount(CurrencyAmountInfo feeAmount) {
++        this.feeAmount = feeAmount;
++    }
++
++    /**
++     * List of affiliated organizations.
++     */
++    public List<AffiliatedOrgInfo> getAffiliatedOrgs() {
++        if (affiliatedOrgs == null) {
++            affiliatedOrgs = new ArrayList<AffiliatedOrgInfo>(0);
++        }
++        return affiliatedOrgs;
++    }
++
++    public void setAffiliatedOrgs(List<AffiliatedOrgInfo> affiliatedOrgs) {
++        this.affiliatedOrgs = affiliatedOrgs;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Identifier for the clu fee record.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CurrencyAmountInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CurrencyAmountInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CurrencyAmountInfo.java	(revision 0)
+@@ -0,0 +1,74 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Detailed information about an amount of currency including both the type of units and the quantity.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:27 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/currencyAmountInfo+Structure">CurrencyAmountInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CurrencyAmountInfo implements Serializable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String currencyTypeKey;
++
++    @XmlElement
++    private Integer currencyQuantity;
++
++    /**
++     * The kind of units associated with the quantity, such as US Dollars
++     */
++    public String getCurrencyTypeKey() {
++        return currencyTypeKey;
++    }
++
++    public void setCurrencyTypeKey(String currencyTypeKey) {
++        this.currencyTypeKey = currencyTypeKey;
++    }
++
++    /**
++     * The amount of currency
++     */
++    public Integer getCurrencyQuantity() {
++        return currencyQuantity;
++    }
++
++    public void setCurrencyQuantity(Integer currencyQuantity) {
++        this.currencyQuantity = currencyQuantity;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/FormatInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/FormatInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/FormatInfo.java	(revision 0)
+@@ -0,0 +1,141 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasTypeState;
++import org.kuali.student.core.dto.HasAttributes;
++import org.kuali.student.core.dto.MetaInfo;
++
++/**
++ * Detailed information about a single course.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:39:55 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/formatInfo+Structure">FormatInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class FormatInfo implements Serializable, Idable, HasTypeState, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private List<ActivityInfo> activities;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * 
++     */
++    public List<ActivityInfo> getActivities() {
++        if (activities == null) {
++            activities = new ArrayList<ActivityInfo>(0);
++        }
++        return activities;
++    }
++
++    public void setActivities(List<ActivityInfo> activities) {
++        this.activities = activities;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a learning unit type. Once set at create time, this field may not be updated.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * The current status of the course. The values for this field are constrained to those in the luState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value. This field may not be updated through updating this structure and must instead be updated through a dedicated operation.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for a Canonical Learning Unit (CLU). This is optional, due to the identifier being set at the time of creation. Once the Format has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluInstructorInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluInstructorInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluInstructorInfo.java	(revision 0)
+@@ -0,0 +1,93 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.HasAttributes;
++
++/**
++ * Information about a potential instructor for a clu.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:21 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/cluInstructorInfo+Structure">CluInstructorInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CluInstructorInfo implements Serializable, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String orgId;
++
++    @XmlElement
++    private String personId;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    /**
++     * Unique identifier for an organization. This indicates which organization this individual is associated with for the purposes of this clu.
++     */
++    public String getOrgId() {
++        return orgId;
++    }
++
++    public void setOrgId(String orgId) {
++        this.orgId = orgId;
++    }
++
++    /**
++     * Unique identifier for a person record.
++     */
++    public String getPersonId() {
++        return personId;
++    }
++
++    public void setPersonId(String personId) {
++        this.personId = personId;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/AcademicSubjectOrgInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/AcademicSubjectOrgInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/AcademicSubjectOrgInfo.java	(revision 0)
+@@ -0,0 +1,60 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Information about an organization that represents the Academic Subject for a learning unit. This often would be the same as the primaryAdminOrg.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:01 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/academicSubjectOrgInfo+Structure">AcademicSubjectOrgInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class AcademicSubjectOrgInfo implements Serializable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String orgId;
++
++    /**
++     * Unique identifier for an organization.
++     */
++    public String getOrgId() {
++        return orgId;
++    }
++
++    public void setOrgId(String orgId) {
++        this.orgId = orgId;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluFeeInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluFeeInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CluFeeInfo.java	(revision 0)
+@@ -0,0 +1,82 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.HasAttributes;
++
++/**
++ * Detailed information associated with this CLU related to the calculation of fees.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:23 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/cluFeeInfo+Structure">CluFeeInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CluFeeInfo implements Serializable, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private List<CluFeeRecordInfo> cluFeeRecords;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    /**
++     * List of clu fee records
++     */
++    public List<CluFeeRecordInfo> getCluFeeRecords() {
++        if (cluFeeRecords == null) {
++            cluFeeRecords = new ArrayList<CluFeeRecordInfo>(0);
++        }
++        return cluFeeRecords;
++    }
++
++    public void setCluFeeRecords(List<CluFeeRecordInfo> cluFeeRecords) {
++        this.cluFeeRecords = cluFeeRecords;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoDisplayInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoDisplayInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoDisplayInfo.java	(revision 0)
+@@ -0,0 +1,122 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Detailed information about an LO  and all it's children for application use.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:36 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/loDisplayInfo+Structure">LoDisplayInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class LoDisplayInfo implements Serializable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private LoInfo loInfo;
++
++    @XmlElement
++    private List<LoDisplayInfo> loDisplayInfoList;
++
++    @XmlAttribute
++    private String parentRelType;
++
++    @XmlAttribute
++    private String parentLoRelationid;
++
++    @XmlAttribute
++    private List<LoCategoryInfo> loCategoryInfoList;
++
++    /**
++     * Detailed information about a learning objective
++     */
++    public LoInfo getLoInfo() {
++        return loInfo;
++    }
++
++    public void setLoInfo(LoInfo loInfo) {
++        this.loInfo = loInfo;
++    }
++
++    /**
++     * List of Lo Display information. (info and child relations
++     */
++    public List<LoDisplayInfo> getLoDisplayInfoList() {
++        if (loDisplayInfoList == null) {
++            loDisplayInfoList = new ArrayList<LoDisplayInfo>(0);
++        }
++        return loDisplayInfoList;
++    }
++
++    public void setLoDisplayInfoList(List<LoDisplayInfo> loDisplayInfoList) {
++        this.loDisplayInfoList = loDisplayInfoList;
++    }
++
++    /**
++     * Unique identifier for the LO to LO relation type.
++     */
++    public String getParentRelType() {
++        return parentRelType;
++    }
++
++    public void setParentRelType(String parentRelType) {
++        this.parentRelType = parentRelType;
++    }
++
++    /**
++     * Unique identifier for a LO to LO relationship.
++     */
++    public String getParentLoRelationid() {
++        return parentLoRelationid;
++    }
++
++    public void setParentLoRelationid(String parentLoRelationid) {
++        this.parentLoRelationid = parentLoRelationid;
++    }
++
++    /**
++     * List of learning objective category information.
++     */
++    public List<LoCategoryInfo> getLoCategoryInfoList() {
++        if (loCategoryInfoList == null) {
++            loCategoryInfoList = new ArrayList<LoCategoryInfo>(0);
++        }
++        return loCategoryInfoList;
++    }
++
++    public void setLoCategoryInfoList(List<LoCategoryInfo> loCategoryInfoList) {
++        this.loCategoryInfoList = loCategoryInfoList;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/StatementTreeViewInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/StatementTreeViewInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/StatementTreeViewInfo.java	(revision 0)
+@@ -0,0 +1,201 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasTypeState;
++import org.kuali.student.core.dto.HasAttributes;
++import org.kuali.student.core.dto.MetaInfo;
++import org.kuali.student.core.dto.RichTextInfo;
++
++/**
++ * View of statement information with the referenced statements and requirement components expanded. Compare to statementInfo Structure.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:54 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/statementTreeViewInfo+Structure">StatementTreeViewInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class StatementTreeViewInfo implements Serializable, Idable, HasTypeState, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String name;
++
++    @XmlElement
++    private RichTextInfo desc;
++
++    @XmlElement
++    private String operator;
++
++    @XmlElement
++    private List<StatementTreeViewInfo> statements;
++
++    @XmlElement
++    private List<ReqComponentInfo> reqComponents;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * Friendly name for the statement.
++     */
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    /**
++     * Narrative description for the statement.
++     */
++    public RichTextInfo getDesc() {
++        return desc;
++    }
++
++    public void setDesc(RichTextInfo desc) {
++        this.desc = desc;
++    }
++
++    /**
++     * Logical operator used to assemble statements. Acceptable values are restricted to AND and OR. This operator applies to both the statements and requirement components contained within this statement.
++     */
++    public String getOperator() {
++        return operator;
++    }
++
++    public void setOperator(String operator) {
++        this.operator = operator;
++    }
++
++    /**
++     * List of views of statement information with the information for referenced statements and requirement components expanded.
++     */
++    public List<StatementTreeViewInfo> getStatements() {
++        if (statements == null) {
++            statements = new ArrayList<StatementTreeViewInfo>(0);
++        }
++        return statements;
++    }
++
++    public void setStatements(List<StatementTreeViewInfo> statements) {
++        this.statements = statements;
++    }
++
++    /**
++     * List of requirement component information.
++     */
++    public List<ReqComponentInfo> getReqComponents() {
++        if (reqComponents == null) {
++            reqComponents = new ArrayList<ReqComponentInfo>(0);
++        }
++        return reqComponents;
++    }
++
++    public void setReqComponents(List<ReqComponentInfo> reqComponents) {
++        this.reqComponents = reqComponents;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a statement type.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * The current status of the statement. The values for this field are constrained to those in the statementState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for a single statement record. This is optional, due to the identifier being set at the time of creation. Once the LU statement has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/AffiliatedOrgInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/AffiliatedOrgInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/AffiliatedOrgInfo.java	(revision 0)
+@@ -0,0 +1,102 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Information about an organization that is affiliated in some percentage with a learning unit. For when precision is needed to support counts or dollars.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:31 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/affiliatedOrgInfo+Structure">AffiliatedOrgInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class AffiliatedOrgInfo implements Serializable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String orgId;
++
++    @XmlElement
++    private Date effectiveDate;
++
++    @XmlElement
++    private Date expirationDate;
++
++    @XmlElement
++    private Long percentage;
++
++    /**
++     * Unique identifier for an organization.
++     */
++    public String getOrgId() {
++        return orgId;
++    }
++
++    public void setOrgId(String orgId) {
++        this.orgId = orgId;
++    }
++
++    /**
++     * Specifies a date with no time component.
++     */
++    public Date getEffectiveDate() {
++        return effectiveDate;
++    }
++
++    public void setEffectiveDate(Date effectiveDate) {
++        this.effectiveDate = effectiveDate;
++    }
++
++    /**
++     * Specifies a date with no time component.
++     */
++    public Date getExpirationDate() {
++        return expirationDate;
++    }
++
++    public void setExpirationDate(Date expirationDate) {
++        this.expirationDate = expirationDate;
++    }
++
++    /**
++     * A long numeric value without a fractional component.
++     */
++    public Long getPercentage() {
++        return percentage;
++    }
++
++    public void setPercentage(Long percentage) {
++        this.percentage = percentage;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoCategoryInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoCategoryInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoCategoryInfo.java	(revision 0)
+@@ -0,0 +1,193 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.dto.HasAttributes;
++import org.kuali.student.core.dto.HasTypeState;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.MetaInfo;
++import org.kuali.student.core.dto.RichTextInfo;
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Detailed information about a learning objective category.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:48 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/loCategoryInfo+Structure">LoCategoryInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class LoCategoryInfo implements Serializable, Idable, HasTypeState, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String name;
++
++    @XmlElement
++    private RichTextInfo desc;
++
++    @XmlElement
++    private String loRepository;
++
++    @XmlElement
++    private Date effectiveDate;
++
++    @XmlElement
++    private Date expirationDate;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * Friendly name of the category
++     */
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    /**
++     * Narrative description of the learning objective category
++     */
++    public RichTextInfo getDesc() {
++        return desc;
++    }
++
++    public void setDesc(RichTextInfo desc) {
++        this.desc = desc;
++    }
++
++    /**
++     * Unique identifier for a learning objective repository. Once set in creation, this is immutable.
++     */
++    public String getLoRepository() {
++        return loRepository;
++    }
++
++    public void setLoRepository(String loRepository) {
++        this.loRepository = loRepository;
++    }
++
++    /**
++     * Date and time that this learning objective category became effective. This is a similar concept to the effective date on enumerated values. When an expiration date has been specified, this field must be less than or equal to the expiration date.
++     */
++    public Date getEffectiveDate() {
++        return effectiveDate;
++    }
++
++    public void setEffectiveDate(Date effectiveDate) {
++        this.effectiveDate = effectiveDate;
++    }
++
++    /**
++     * Date and time that this learning objective category expires. This is a similar concept to the expiration date on enumerated values. If specified, this should be greater than or equal to the effective date. If this field is not specified, then no expiration date has been currently defined and should automatically be considered greater than the effective date.
++     */
++    public Date getExpirationDate() {
++        return expirationDate;
++    }
++
++    public void setExpirationDate(Date expirationDate) {
++        this.expirationDate = expirationDate;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a learning objective category type.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * The current status of the learning objective category. The values for this field are constrained to those in the loCategoryState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for a learning objective category record. This is optional, due to the identifier being set at the time of creation. Once the learning objective category has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ActivityInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ActivityInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/ActivityInfo.java	(revision 0)
+@@ -0,0 +1,168 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasAttributes;
++import org.kuali.student.core.dto.MetaInfo;
++
++/**
++ * Detailed information about a single course activity.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:39:57 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/activityInfo+Structure">ActivityInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class ActivityInfo implements Serializable, Idable, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private TimeAmountInfo duration;
++
++    @XmlElement
++    private List<AcademicSubjectOrgInfo> academicSubjectOrgs;
++
++    @XmlElement
++    private Integer defaultEnrollmentEstimate;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String activityType;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * The standard duration of the Course.
++     */
++    public TimeAmountInfo getDuration() {
++        return duration;
++    }
++
++    public void setDuration(TimeAmountInfo duration) {
++        this.duration = duration;
++    }
++
++    /**
++     * The organizations that represents the Subject area of the course.
++     */
++    public List<AcademicSubjectOrgInfo> getAcademicSubjectOrgs() {
++        if (academicSubjectOrgs == null) {
++            academicSubjectOrgs = new ArrayList<AcademicSubjectOrgInfo>(0);
++        }
++        return academicSubjectOrgs;
++    }
++
++    public void setAcademicSubjectOrgs(List<AcademicSubjectOrgInfo> academicSubjectOrgs) {
++        this.academicSubjectOrgs = academicSubjectOrgs;
++    }
++
++    /**
++     * Default enrollment estimate for this CLU.
++     */
++    public Integer getDefaultEnrollmentEstimate() {
++        return defaultEnrollmentEstimate;
++    }
++
++    public void setDefaultEnrollmentEstimate(Integer defaultEnrollmentEstimate) {
++        this.defaultEnrollmentEstimate = defaultEnrollmentEstimate;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a learning unit type. Once set at create time, this field may not be updated.
++     */
++    public String getActivityType() {
++        return activityType;
++    }
++
++    public void setActivityType(String activityType) {
++        this.activityType = activityType;
++    }
++
++    /**
++     * The current status of the course. The values for this field are constrained to those in the luState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value. This field may not be updated through updating this structure and must instead be updated through a dedicated operation.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for an Activity. This is optional, due to the identifier being set at the time of creation. Once the Course has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseInfo.java	(revision 0)
+@@ -0,0 +1,460 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasTypeState;
++import org.kuali.student.core.dto.HasAttributes;
++import org.kuali.student.core.dto.MetaInfo;
++import org.kuali.student.core.dto.RichTextInfo;
++
++/**
++ * Detailed information about a single course.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:39:53 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/courseInfo+Structure">CourseInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CourseInfo implements Serializable, Idable, HasTypeState, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String code;
++
++    @XmlElement
++    private String courseNumberSuffix;
++
++    @XmlElement
++    private String courseTitle;
++
++    @XmlElement
++    private String transcriptTitle;
++
++    @XmlElement
++    private RichTextInfo description;
++
++    @XmlElement
++    private List<FormatInfo> formats;
++
++    @XmlElement
++    private List<String> termsOffered;
++
++    @XmlElement
++    private String firstExpectedOffering;
++
++    @XmlElement
++    private TimeAmountInfo duration;
++
++    @XmlElement
++    private List<String> offeredAtpTypes;
++
++    @XmlElement
++    private List<CourseJointInfo> joints;
++
++    @XmlElement
++    private List<CourseCrossListingInfo> crossListings;
++
++    @XmlElement
++    private List<CourseVariationInfo> variations;
++
++    @XmlElement
++    private String subjectArea;
++
++    @XmlElement
++    private List<String> campusLocations;
++
++    @XmlElement
++    private String department;
++
++    @XmlElement
++    private List<AcademicSubjectOrgInfo> academicSubjectOrgs;
++
++    @XmlElement
++    private CluInstructorInfo primaryInstructor;
++
++    @XmlElement
++    private CluFeeInfo feeInfo;
++
++    @XmlElement
++    private List<LoDisplayInfo> courseSpecificLOs;
++
++    @XmlElement
++    private Date effectiveDate;
++
++    @XmlElement
++    private Date expirationDate;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * The composite string that is used to officially reference or publish the CLU. Note it may have an internal structure that each Institution may want to enforce. This structure may be composed from the other parts of the structure such as Level amp; Division, but may include items such as cluType.
++     */
++    public String getCode() {
++        return code;
++    }
++
++    public void setCode(String code) {
++        this.code = code;
++    }
++
++    /**
++     * The "extra" portion of the code, which usually corresponds with the most detailed part of the number. Ex. at MIT we might map Division to subject area(Ex:6) but overall we need to say the code is 6.120. This field would represent the 120 part.
++     */
++    public String getCourseNumberSuffix() {
++        return courseNumberSuffix;
++    }
++
++    public void setCourseNumberSuffix(String courseNumberSuffix) {
++        this.courseNumberSuffix = courseNumberSuffix;
++    }
++
++    /**
++     * Abbreviated name of the Course
++     */
++    public String getCourseTitle() {
++        return courseTitle;
++    }
++
++    public void setCourseTitle(String courseTitle) {
++        this.courseTitle = courseTitle;
++    }
++
++    /**
++     * Information related to the official identification of the credit course, typically in human readable form. Used to officially reference or publish.
++     */
++    public String getTranscriptTitle() {
++        return transcriptTitle;
++    }
++
++    public void setTranscriptTitle(String transcriptTitle) {
++        this.transcriptTitle = transcriptTitle;
++    }
++
++    /**
++     * Narrative description of the Course.
++     */
++    public RichTextInfo getDescription() {
++        return description;
++    }
++
++    public void setDescription(RichTextInfo description) {
++        this.description = description;
++    }
++
++    /**
++     * 
++     */
++    public List<FormatInfo> getFormats() {
++        if (formats == null) {
++            formats = new ArrayList<FormatInfo>(0);
++        }
++        return formats;
++    }
++
++    public void setFormats(List<FormatInfo> formats) {
++        this.formats = formats;
++    }
++
++    /**
++     * Terms in which this Course is typically offered.
++     */
++    public List<String> getTermsOffered() {
++        if (termsOffered == null) {
++            termsOffered = new ArrayList<String>(0);
++        }
++        return termsOffered;
++    }
++
++    public void setTermsOffered(List<String> termsOffered) {
++        this.termsOffered = termsOffered;
++    }
++
++    /**
++     * The expected first academic time period that this course would be effective.
++     */
++    public String getFirstExpectedOffering() {
++        return firstExpectedOffering;
++    }
++
++    public void setFirstExpectedOffering(String firstExpectedOffering) {
++        this.firstExpectedOffering = firstExpectedOffering;
++    }
++
++    /**
++     * The standard duration of the Course.
++     */
++    public TimeAmountInfo getDuration() {
++        return duration;
++    }
++
++    public void setDuration(TimeAmountInfo duration) {
++        this.duration = duration;
++    }
++
++    /**
++     * The academic time period types in which this Course is typically offered. Standard usage would equate to terms. It can define a timeframe that a course with of a certain stdDuration would fall in.
++     */
++    public List<String> getOfferedAtpTypes() {
++        if (offeredAtpTypes == null) {
++            offeredAtpTypes = new ArrayList<String>(0);
++        }
++        return offeredAtpTypes;
++    }
++
++    public void setOfferedAtpTypes(List<String> offeredAtpTypes) {
++        this.offeredAtpTypes = offeredAtpTypes;
++    }
++
++    /**
++     * 
++     */
++    public List<CourseJointInfo> getJoints() {
++        if (joints == null) {
++            joints = new ArrayList<CourseJointInfo>(0);
++        }
++        return joints;
++    }
++
++    public void setJoints(List<CourseJointInfo> joints) {
++        this.joints = joints;
++    }
++
++    /**
++     * 
++     */
++    public List<CourseCrossListingInfo> getCrossListings() {
++        if (crossListings == null) {
++            crossListings = new ArrayList<CourseCrossListingInfo>(0);
++        }
++        return crossListings;
++    }
++
++    public void setCrossListings(List<CourseCrossListingInfo> crossListings) {
++        this.crossListings = crossListings;
++    }
++
++    /**
++     * 
++     */
++    public List<CourseVariationInfo> getVariations() {
++        if (variations == null) {
++            variations = new ArrayList<CourseVariationInfo>(0);
++        }
++        return variations;
++    }
++
++    public void setVariations(List<CourseVariationInfo> variations) {
++        this.variations = variations;
++    }
++
++    /**
++     * The Study Subject Area is used to identify the area of study associated with the course. It may be a general study area (e.g. Chemistry) or very specific (e.g. Naval Architecture).
++     */
++    public String getSubjectArea() {
++        return subjectArea;
++    }
++
++    public void setSubjectArea(String subjectArea) {
++        this.subjectArea = subjectArea;
++    }
++
++    /**
++     * Places where this course might be offered
++     */
++    public List<String> getCampusLocations() {
++        if (campusLocations == null) {
++            campusLocations = new ArrayList<String>(0);
++        }
++        return campusLocations;
++    }
++
++    public void setCampusLocations(List<String> campusLocations) {
++        this.campusLocations = campusLocations;
++    }
++
++    /**
++     * The primary organization (typically, an academic department) with administrative oversight over the Course.
++     */
++    public String getDepartment() {
++        return department;
++    }
++
++    public void setDepartment(String department) {
++        this.department = department;
++    }
++
++    /**
++     * The organizations that represents the Subject area of the course.
++     */
++    public List<AcademicSubjectOrgInfo> getAcademicSubjectOrgs() {
++        if (academicSubjectOrgs == null) {
++            academicSubjectOrgs = new ArrayList<AcademicSubjectOrgInfo>(0);
++        }
++        return academicSubjectOrgs;
++    }
++
++    public void setAcademicSubjectOrgs(List<AcademicSubjectOrgInfo> academicSubjectOrgs) {
++        this.academicSubjectOrgs = academicSubjectOrgs;
++    }
++
++    /**
++     * Primary potential instructor for the clu. This is primarily for use in advertising the course and may not be the actual instructor.
++     */
++    public CluInstructorInfo getPrimaryInstructor() {
++        return primaryInstructor;
++    }
++
++    public void setPrimaryInstructor(CluInstructorInfo primaryInstructor) {
++        this.primaryInstructor = primaryInstructor;
++    }
++
++    /**
++     * Fee information associated with this Course.
++     */
++    public CluFeeInfo getFeeInfo() {
++        return feeInfo;
++    }
++
++    public void setFeeInfo(CluFeeInfo feeInfo) {
++        this.feeInfo = feeInfo;
++    }
++
++    /**
++     * Learning Objectives associated with this Course.
++     */
++    public List<LoDisplayInfo> getCourseSpecificLOs() {
++        if (courseSpecificLOs == null) {
++            courseSpecificLOs = new ArrayList<LoDisplayInfo>(0);
++        }
++        return courseSpecificLOs;
++    }
++
++    public void setCourseSpecificLOs(List<LoDisplayInfo> courseSpecificLOs) {
++        this.courseSpecificLOs = courseSpecificLOs;
++    }
++
++    /**
++     * Date and time the Course became effective. This is a similar concept to the effective date on enumerated values. When an expiration date has been specified, this field must be less than or equal to the expiration date.
++     */
++    public Date getEffectiveDate() {
++        return effectiveDate;
++    }
++
++    public void setEffectiveDate(Date effectiveDate) {
++        this.effectiveDate = effectiveDate;
++    }
++
++    /**
++     * Date and time that this Course expires. This is a similar concept to the expiration date on enumerated values. If specified, this should be greater than or equal to the effective date. If this field is not specified, then no expiration date has been currently defined and should automatically be considered greater than the effective date.
++     */
++    public Date getExpirationDate() {
++        return expirationDate;
++    }
++
++    public void setExpirationDate(Date expirationDate) {
++        this.expirationDate = expirationDate;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a learning unit type. Once set at create time, this field may not be updated.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * The current status of the course. The values for this field are constrained to those in the luState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value. This field may not be updated through updating this structure and must instead be updated through a dedicated operation.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for a Course. This is optional, due to the identifier being set at the time of creation. Once the Course has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/TimeAmountInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/TimeAmountInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/TimeAmountInfo.java	(revision 0)
+@@ -0,0 +1,74 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Detailed information about an amount of time including both the type of units and the quantity.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:39:58 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/timeAmountInfo+Structure">TimeAmountInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class TimeAmountInfo implements Serializable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String atpDurationTypeKey;
++
++    @XmlElement
++    private Integer timeQuantity;
++
++    /**
++     * The kind of units associated with the quantity, such as Semesters
++     */
++    public String getAtpDurationTypeKey() {
++        return atpDurationTypeKey;
++    }
++
++    public void setAtpDurationTypeKey(String atpDurationTypeKey) {
++        this.atpDurationTypeKey = atpDurationTypeKey;
++    }
++
++    /**
++     * The amount of time
++     */
++    public Integer getTimeQuantity() {
++        return timeQuantity;
++    }
++
++    public void setTimeQuantity(Integer timeQuantity) {
++        this.timeQuantity = timeQuantity;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/LoInfo.java	(revision 0)
+@@ -0,0 +1,195 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++import org.kuali.student.core.dto.Idable;
++import org.kuali.student.core.dto.HasTypeState;
++import org.kuali.student.core.dto.HasAttributes;
++import org.kuali.student.core.dto.MetaInfo;
++import org.kuali.student.core.dto.RichTextInfo;
++
++/**
++ * Detailed information about a learning objective
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:39 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/loInfo+Structure">LoInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class LoInfo implements Serializable, Idable, HasTypeState, HasAttributes {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String name;
++
++    @XmlElement
++    private RichTextInfo desc;
++
++    @XmlElement
++    private String loRepositoryKey;
++
++    @XmlElement
++    private Date effectiveDate;
++
++    @XmlElement
++    private Date expirationDate;
++
++    @XmlElement
++    @XmlJavaTypeAdapter(JaxbAttributeMapListAdapter.class)
++    private Map<String, String> attributes;
++
++    @XmlElement
++    private MetaInfo metaInfo;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String state;
++
++    @XmlAttribute
++    private String id;
++
++    /**
++     * Friendly name of the learning objective
++     */
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    /**
++     * Narrative description of the learning objective
++     */
++    public RichTextInfo getDesc() {
++        return desc;
++    }
++
++    public void setDesc(RichTextInfo desc) {
++        this.desc = desc;
++    }
++
++    /**
++     * Unique identifier for a learning objective repository. This value is immutable once set during creation.
++     */
++    public String getLoRepositoryKey() {
++        return loRepositoryKey;
++    }
++
++    public void setLoRepositoryKey(String loRepositoryKey) {
++        this.loRepositoryKey = loRepositoryKey;
++    }
++
++    /**
++     * Date and time that this learning objective became effective. This is a similar concept to the effective date on enumerated values. When an expiration date has been specified, this field must be less than or equal to the expiration date.
++     */
++    public Date getEffectiveDate() {
++        return effectiveDate;
++    }
++
++    public void setEffectiveDate(Date effectiveDate) {
++        this.effectiveDate = effectiveDate;
++    }
++
++    /**
++     * Date and time that this learning objective expires. This is a similar concept to the expiration date on enumerated values. If specified, this should be greater than or equal to the effective date. If this field is not specified, then no expiration date has been currently defined and should automatically be considered greater than the effective date.
++     */
++    public Date getExpirationDate() {
++        return expirationDate;
++    }
++
++    public void setExpirationDate(Date expirationDate) {
++        this.expirationDate = expirationDate;
++    }
++
++    /**
++     * List of key/value pairs, typically used for dynamic attributes.
++     */
++    public Map<String, String> getAttributes() {
++        if (attributes == null) {
++            attributes = new HashMap<String, String>();
++        }
++        return attributes;
++    }
++
++    public void setAttributes(Map<String, String> attributes) {
++        this.attributes = attributes;
++    }
++
++    /**
++     * Create and last update info for the structure. This is optional and treated as read only since the data is set by the internals of the service during maintenance operations.
++     */
++    public MetaInfo getMetaInfo() {
++        return metaInfo;
++    }
++
++    public void setMetaInfo(MetaInfo metaInfo) {
++        this.metaInfo = metaInfo;
++    }
++
++    /**
++     * Unique identifier for a learning objective type.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * The current status of the learning objective. The values for this field are constrained to those in the loState enumeration. A separate setup operation does not exist for retrieval of the meta data around this value.
++     */
++    public String getState() {
++        return state;
++    }
++
++    public void setState(String state) {
++        this.state = state;
++    }
++
++    /**
++     * Unique identifier for a learning objective record. This is optional, due to the identifier being set at the time of creation. Once the learning objective has been created, this should be seen as required.
++     */
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++}
+\ No newline at end of file
+Index: ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseJointInfo.java
+===================================================================
+--- ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseJointInfo.java	(revision 0)
++++ ks-lum-api/src/main/java/org/kuali/student/lum/course/dto/CourseJointInfo.java	(revision 0)
+@@ -0,0 +1,130 @@
++/*
++ * Copyright 2009 The Kuali Foundation
++ *
++ * Licensed under the Educational Community License, Version 1.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.opensource.org/licenses/ecl1.php
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.kuali.student.lum.course.dto;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import javax.xml.bind.annotation.XmlAccessType;
++import javax.xml.bind.annotation.XmlAccessorType;
++import javax.xml.bind.annotation.XmlAttribute;
++import javax.xml.bind.annotation.XmlElement;
++import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
++
++import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
++
++/**
++ * Information about course joints.
++ *
++ * @Author KSContractMojo
++ * @Author Neerav Agrawal
++ * @Since Fri May 07 11:40:14 EDT 2010
++ * @See <a href="https://test.kuali.org/confluence/display/KULSTU/courseJointInfo+Structure">CourseJointInfo</>
++ *
++ */
++@XmlAccessorType(XmlAccessType.FIELD)
++public class CourseJointInfo implements Serializable {
++
++    private static final long serialVersionUID = 1L;
++
++    @XmlElement
++    private String courseNumberSuffix;
++
++    @XmlElement
++    private String courseTitle;
++
++    @XmlElement
++    private String subjectArea;
++
++    @XmlAttribute
++    private String type;
++
++    @XmlAttribute
++    private String courseId;
++
++    @XmlAttribute
++    private String relationId;
++
++    /**
++     * 
++     */
++    public String getCourseNumberSuffix() {
++        return courseNumberSuffix;
++    }
++
++    public void setCourseNumberSuffix(String courseNumberSuffix) {
++        this.courseNumberSuffix = courseNumberSuffix;
++    }
++
++    /**
++     * Abbreviated name of the Course
++     */
++    public String getCourseTitle() {
++        return courseTitle;
++    }
++
++    public void setCourseTitle(String courseTitle) {
++        this.courseTitle = courseTitle;
++    }
++
++    /**
++     * The Study Subject Area is used to identify the area of study associated with the credit course. It may be a general study area (e.g. Chemistry) or very specific (e.g. Naval Architecture).
++     */
++    public String getSubjectArea() {
++        return subjectArea;
++    }
++
++    public void setSubjectArea(String subjectArea) {
++        this.subjectArea = subjectArea;
++    }
++
++    /**
++     * Unique identifier for a learning unit type. Once set at create time, this field may not be updated.
++     */
++    public String getType() {
++        return type;
++    }
++
++    public void setType(String type) {
++        this.type = type;
++    }
++
++    /**
++     * Unique identifier for a Course.
++     */
++    public String getCourseId() {
++        return courseId;
++    }
++
++    public void setCourseId(String courseId) {
++        this.courseId = courseId;
++    }
++
++    /**
++     * 
++     */
++    public String getRelationId() {
++        return relationId;
++    }
++
++    public void setRelationId(String relationId) {
++        this.relationId = relationId;
++    }
++}
+\ No newline at end of file
