@@ -258,7 +258,7 @@
     <snapshotRepository>
       <id>kuali.snapshots</id>
       <name>Internal Snapshot Repository</name>
-      <url>file:///tomcat/home/.m2/repository</url>
+      <url>file:///home/tomcat/.m2/repository</url>
     </snapshotRepository>
     <site>
       <id>ks.site</id>
