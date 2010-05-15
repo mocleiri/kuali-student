@@ -24,7 +24,14 @@
     </repository>
     <repository>
       <id>kuali.snapshot</id>
-      <url>http://archiva.kuali.umd.edu/repository/snapshot</url>
+      <url>http://archiva.kuali.umd.edu/repsitory/snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>kuali.snapshot.2</id>
+      <url>http://ci.ks.kuali.org/maven</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -251,7 +258,7 @@
     <snapshotRepository>
       <id>kuali.snapshots</id>
       <name>Internal Snapshot Repository</name>
-      <url>dav:http://archiva.kuali.umd.edu/repository/snapshot</url>
+      <url>file:///tomcat/home/.m2/repository</url>
     </snapshotRepository>
     <site>
       <id>ks.site</id>
