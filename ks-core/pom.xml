@@ -53,7 +53,7 @@
     </repository>
     <repository>
       <id>kuali.snapshot</id>
-      <url>http://archiva.kuali.umd.edu/repsitory/snapshot</url>
+      <url>http://archiva.kuali.umd.edu/repository/snapshot</url>
       <releases>
         <enabled>false</enabled>
       </releases>
