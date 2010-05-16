@@ -355,7 +355,7 @@
       <url>scp://test.kuali.org:/opt/m2/repository</url>
     </repository>
     <snapshotRepository>
-      <id>kuali.snapshots</id>
+      <id>kuali.snapshots.nexus</id>
       <name>Internal Snapshot Repository</name>
       <url>http://ec2-184-73-1-175.compute-1.amazonaws.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
