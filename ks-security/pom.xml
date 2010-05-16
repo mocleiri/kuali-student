@@ -31,7 +31,7 @@
     </repository>
     <repository>
       <id>kuali.snapshot.2</id>
-      <url>http://ci.ks.kuali.org/maven</url>
+      <url>http://ec2-184-73-1-175.compute-1.amazonaws.com/nexus/content/repositories/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -258,7 +258,7 @@
     <snapshotRepository>
       <id>kuali.snapshots</id>
       <name>Internal Snapshot Repository</name>
-      <url>file:///home/tomcat/.m2/repository</url>
+      <url>http://ec2-184-73-1-175.compute-1.amazonaws.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
     <site>
       <id>ks.site</id>
