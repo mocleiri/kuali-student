@@ -90,7 +90,7 @@
     <snapshotRepository>
       <id>kuali.snapshot</id>
       <name>Kuali Snapshot Repository</name>
-      <url>file://C:/maven.kuali.org/snapshot</url>
+      <url>file://C:/m2/repository</url>
     </snapshotRepository>
   </distributionManagement>
   <scm>
