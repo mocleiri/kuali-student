@@ -25,7 +25,6 @@
     <name>The Kuali Foundation</name>
     <url>http://student.kuali.org/</url>
   </organization>
-  <url>http://site.kuali.org.s3.amazonaws.com</url>
   <repositories>
     <repository>
       <id>kuali.nexus</id>
