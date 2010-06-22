@@ -10,10 +10,12 @@
   <packaging>pom</packaging>
   <name>KS Security</name>
   <description>KS Security Parent POM</description>
+  <!-- 
   <modules>
     <module>ks-standard-sec</module>
     <module>ks-sts</module>
   </modules>
+   -->
   <repositories>
     <repository>
       <id>kuali.nexus</id>
