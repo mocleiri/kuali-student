@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE dataset SYSTEM "data.dtd">
+<dataset>
+    <KSLO_RICH_TEXT_T
+        FORMATTED="&lt;p>Learning objectives defined by faculty that are specific to a course&lt;/p>"
+        ID="RICHTEXT-10" PLAIN="Learning objectives defined by faculty that are specific to a course"/>
+    <KSLO_RICH_TEXT_T
+        FORMATTED="&lt;p>Learning objectives mandated by the Institution. They represent learning objectives of the institutions general education and are inherited by all programs&lt;/p>"
+        ID="RICHTEXT-18" PLAIN="Learning objectives mandated by the Institution. They represent learning objectives of the institutions general education and are inherited by all programs"/>
+    <KSLO_RICH_TEXT_T
+        FORMATTED="&lt;p>Learning objectives mandated by the state&lt;/p>"
+        ID="RICHTEXT-22" PLAIN="Learning objectives mandated by the state"/>
+</dataset>
