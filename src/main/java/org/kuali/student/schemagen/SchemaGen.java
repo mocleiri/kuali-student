@@ -44,10 +44,14 @@ public class SchemaGen {
 	}
 	public void generateAllDbTypes() throws Exception{
 		Map<String,Set<Class<?>>> entries = getClasses(persistenceFileNames);
+		Set<Class<?>> allClasses = new HashSet<Class<?>>();
 		for(Entry<String,Set<Class<?>>> entry:entries.entrySet()){
 			generate("oracle","org.hibernate.dialect.Oracle10gDialect",entry.getKey(),entry.getValue());
 			generate("mysql","org.hibernate.dialect.MySQLDialect",entry.getKey(),entry.getValue());
+			allClasses.addAll(entry.getValue());
 		}
+		generate("oracle","org.hibernate.dialect.Oracle10gDialect","All_Entities",allClasses);
+		generate("mysql","org.hibernate.dialect.Oracle10gDialect","All_Entities",allClasses);
 	}
 	
 	public void generate(String dbType, String dbDialect, String puName, Set<Class<?>> classes) throws MappingException, HibernateException, Exception{
