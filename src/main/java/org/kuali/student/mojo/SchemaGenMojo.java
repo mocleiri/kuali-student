@@ -1,6 +1,7 @@
 package org.kuali.student.mojo;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
@@ -43,7 +44,8 @@ public class SchemaGenMojo extends AbstractMojo {
 	
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		SchemaGen schemaGen = new SchemaGen(outputPath, persistenceFileNames, getClassLoader());
+		addDependenciesToClassLoader();
+		SchemaGen schemaGen = new SchemaGen(outputPath, persistenceFileNames);
 		try {
 			schemaGen.generateAllDbTypes();
 		} catch (Exception e) {
@@ -51,17 +53,17 @@ public class SchemaGenMojo extends AbstractMojo {
 		}
 	}
 	
-    /**
-     * Returns the an isolated classloader.
-     *
-     * @return ClassLoader
-     * @noinspection unchecked
-     */
-    private ClassLoader getClassLoader()
+
+    private void addDependenciesToClassLoader()
     {
         try
         {
-            List classpathElements = mavenProject.getCompileClasspathElements();
+            URLClassLoader systemClassLoader = (URLClassLoader) this.getClass().getClassLoader(); 
+            Class<URLClassLoader> classLoaderClass = URLClassLoader.class; 
+            Method method = classLoaderClass.getDeclaredMethod("addURL", new Class[]{URL.class}); 
+            method.setAccessible(true); 
+            
+        	List classpathElements = mavenProject.getCompileClasspathElements();
             classpathElements.add( mavenProject.getBuild().getOutputDirectory() );
             classpathElements.add( mavenProject.getBuild().getTestOutputDirectory() );
             for(Object resource:mavenProject.getBuild().getResources()){
@@ -69,17 +71,16 @@ public class SchemaGenMojo extends AbstractMojo {
             		classpathElements.add(((Resource) resource).getDirectory());
             	}
             }
-            URL urls[] = new URL[classpathElements.size()];
             for ( int i = 0; i < classpathElements.size(); ++i )
             {
-                urls[i] = new File( (String) classpathElements.get( i ) ).toURL();
+            	URL url = new File( (String) classpathElements.get( i ) ).toURL();
+                method.invoke(systemClassLoader, new Object[]{url}); 
             }
-            return new URLClassLoader( urls, this.getClass().getClassLoader() );
+            
         }
         catch ( Exception e )
         {
-            getLog().debug( "Couldn't get the classloader." );
-            return this.getClass().getClassLoader();
+            getLog().debug( "Couldn't add to the classloader.",e);
         }
     }
 
