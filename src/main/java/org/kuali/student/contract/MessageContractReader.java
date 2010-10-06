@@ -50,34 +50,61 @@ public class MessageContractReader extends ContractReader {
 
 		// Add in xml header and entity definitions
 		builder.append("<?xml version=\"1.0\"?>" + "<!DOCTYPE xsl:stylesheet ["
-				+ "<!ENTITY nbsp '&#160;'>" + "]>");
+			       + "<!ENTITY nbsp '&#160;'>" + "]>");
 
-		// Get rid of the first line (doctype info stuff)
-		reader.readLine();
+		boolean description = false;
+                boolean meta = false;
+		boolean struct = false;
 
-		// read each line and fix any open tags, bad attributes, and '&' symbols
-		// without a ';'
+		builder.append("\n<content>\n");
+		
 		while ((line = reader.readLine()) != null) {
-
-			// Check if the current line has a tag that does not end yet
-			if (line.matches(".*<[^>]+")) {
-
-				// Concatenate the next lines until the tag is closed
-				String newLine;
-				while ((newLine = reader.readLine()) != null
-						&& !(line += newLine).contains(">")) {
-				}
-			}
-
-			// Do some regex to clean up the tags
-			line = line.replaceAll("border=0", "border=\"0\"");
-			line = line.replaceAll("([^:])nowrap([^=])", "$1nowrap=\"true\"$2");
-			line = line.replaceAll("&(\\w+[^;])", "$1");
-			line = line.replaceAll("(<(META|meta|br|hr|col|link|img|input)(\\s+[\\w-]+\\s*=\\s*(\"([^\"]*)\"|'([^']*)'))*\\s*)>", "$1/>");
-			line = line.replaceAll("<div \">", "<div>");
+		    if (line.contains("<h2>")) {
 			builder.append(line + "\n");
+			continue;
+		    }
+
+		    if (line.contains("Description</h3>")) {
+			description = true;
+			builder.append(line + "\n");
+			continue;
+		    }
+
+		    if (description) {
+			builder.append(line + "\n");
+			if (line.contains("</p>")) {
+			    description = false;
+			}
+		    }
+
+		    if (line.contains("<table id=\"structureMetaTable\"")) {
+			meta = true;
+			builder.append(line + "\n");
+			continue;
+		    }
+
+		    if (meta) {
+			builder.append(line + "\n");
+			if (line.contains("</table>")) {
+			    meta = false;
+			}
+		    }
+
+		    if (line.contains("<table class=\"structTable\"")) {
+			struct = true;
+			builder.append(line + "\n");
+			continue;
+		    }
+
+		    if (struct) {
+			builder.append(line + "\n");
+			if (line.contains("</table>")) {
+			    struct = false;
+			}
+		    }
 		}
 
+		builder.append("\n</content>\n");
 		return builder.toString();
 	}
 

@@ -121,10 +121,11 @@ public class KsContractMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
 
-		ContractReader contract;
+	    ContractReader contract;
 
 		try {
 			if (contractURL != null) {
+
 				contract = new ContractReader(contractURL, jsessionId);
 			} else {
 				contract = new ContractReader(contractFile);

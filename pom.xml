@@ -22,7 +22,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kuali.student.mojo</groupId>
 	<artifactId>maven-kscontract-plugin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
  <name>KS Tools - Contract Scraper</name>
 	<description />

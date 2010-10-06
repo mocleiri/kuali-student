@@ -17,10 +17,12 @@ package org.kuali.student.contract;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
@@ -44,13 +46,14 @@ public class ContractReader {
     /* Test adding in a comment just to see if subversion works */
 
     
-	public ContractReader(File file) throws FileNotFoundException, IOException {
-		contractPath = file.getCanonicalPath();
+    public ContractReader(File file) throws FileNotFoundException, IOException {
+	contractPath = file.getCanonicalPath();
         FileReader fileReader = new FileReader(file);
         BufferedReader reader = new BufferedReader(fileReader);
 
-        contractText = trimContract(reader);
+        contractText = trimContract(reader);	
     }
+
 
     public ContractReader(URL url, String jsessionId) throws IOException {
     	this.contractPath = url.toString();
@@ -72,7 +75,6 @@ public class ContractReader {
 
     public StreamSource getStreamSource() {
         StringReader stringReader = new StringReader(contractText);
-
         return new StreamSource(stringReader);
     }
 
@@ -81,41 +83,110 @@ public class ContractReader {
         StringBuilder builder = new StringBuilder();
         String line;
         boolean inContract = false;
+	boolean content = false;
+	boolean style = false;
+	boolean form = false;
+	boolean script = false;
+	boolean p = false;
 
         while ((line = reader.readLine()) != null) {
+	    if (line.contains("wiki-content")) {
+		content = true;
+		continue;
+	    }
+
+	    if (!content) {
+		continue;
+	    }
+
+	    if (line.contains("<style")) {
+		style = true;
+	    }
+
+	    if (line.contains("/style>")) {
+		style = false;
+		continue;
+	    }
+
+	    if (style) {
+		continue;
+	    }
+
+	    if (line.contains("<form")) {
+		form = true;
+	    }
+
+	    if (line.contains("/form>")) {
+		form = false;
+		continue;
+	    }
+
+	    if (form) {
+		continue;
+	    }
+	    
+	    if (line.contains("<script")) {
+		script = true;
+	    }
+
+	    if (line.contains("/script>")) {
+		script = false;
+		continue;
+	    }
+
+	    if (script) {
+		continue;
+	    }
+	  
+	    if (line.contains("<p")) {
+		p = true;
+	    }
+
+	    if (line.contains("/p>")) {
+		p = false;
+		continue;
+	    }
+
+	    if (p) {
+		continue;
+	    }
+
+	    if (line.contains("<link") || (line.contains("<meta"))) {
+		continue;
+	    }
+
             if (!inContract) {
                 if (line.contains("<em>Setup</em>")) {
                     inContract = true;
-                    builder.append("<contents>");
+		    builder.append("<contents>\n");
                 }
             } else {
                 if (line.contains("</a>Capabilities</h3>")) {
                     inContract = false;
                 } else {
-                    builder.append(line);
+		    builder.append(line + "\n");
                 }
             }
         }
 
-        builder.append("</contents>");
-
-        return builder.toString();
+	builder.append("</contents>");
+	return builder.toString();
+    }
+    
+    /**
+     * @return the contractText
+     */
+	
+    public String getContractText() {
+	return contractText;
     }
 
-	/**
-	 * @return the contractText
-	 */
-	public String getContractText() {
-		return contractText;
-	}
+    /**
+     *
+     * @return the URL
+     */
 
-	/**
-	 *
-	 * @return the URL
-	 */
     public String getContractPath() {
-		return contractPath;
-	}
-
-
+	return contractPath;
+    }
 }

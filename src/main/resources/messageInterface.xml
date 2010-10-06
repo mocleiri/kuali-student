@@ -25,9 +25,11 @@
 	<xsl:strip-space elements="*" />
 	<xsl:output method="text" />
 	<xsl:template match="/">
+<!--
 		<xsl:apply-templates select="//div[@class='wiki-content'][1]" />
 	</xsl:template>
 	<xsl:template match="//div[@class='wiki-content'][1]">
+-->
 
 <xsl:text>/*
  * Copyright 2009 The Kuali Foundation
@@ -67,25 +69,26 @@ import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
 <!-- Determine if it implements Idable (has a 'key' or 'id' element) and if it implements
 	 HasTypeState (has 'type' and 'state' elements) or HasAttributes-->
 <xsl:variable name="hasKey">
-	<xsl:value-of select="table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='key']" />
+	<xsl:value-of select="//table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='key']" />
 </xsl:variable>
 <xsl:variable name="hasId">
-	<xsl:value-of select="table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='id']" />
+	<xsl:value-of select="//table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='id']" />
 </xsl:variable>
 <xsl:variable name="hasState">
-	<xsl:value-of select="table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='state']" />
+	<xsl:value-of select="//table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='state']" />
 </xsl:variable>
 <xsl:variable name="hasType">
-	<xsl:value-of select="table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='type']" />
+	<xsl:value-of select="//table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='type']" />
 </xsl:variable>
 <xsl:variable name="hasAttributes">
-	<xsl:value-of select="table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='attributes']" />
+	<xsl:value-of select="//table[@class='structTable']/tr[position()>1]/td[@class='structSName'][text()='attributes']" />
 </xsl:variable>
 
 <xsl:variable name="className">
-    <xsl:value-of select="concat(upper-case(substring(normalize-space(h2),1,1)),
-             substring(normalize-space(h2),2))" />
+  <xsl:value-of select="concat(upper-case(substring(normalize-space(//h2),1,1)),
+		substring(normalize-space(//h2),2))" />
 </xsl:variable>
+
 <!-- import implemented core dto interfaces -->
 <xsl:if test="string-length($hasKey)>0 or string-length($hasId)>0">
 	<xsl:text>import org.kuali.student.core.dto.Idable;&#10;</xsl:text>
@@ -100,12 +103,12 @@ import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
 <xsl:text>
 /**
  * </xsl:text>
- <xsl:value-of select="//h3[.='Description']/following-sibling::*[1]"/>
+<xsl:value-of select="//h3[.='Description']/following-sibling::*[1]"/>
 <xsl:text>&#10; *&#10;</xsl:text>
 <xsl:text> * @Author KSContractMojo&#10;</xsl:text>
 <xsl:text> * @Author </xsl:text><xsl:value-of select="$user"/><xsl:text>&#10;</xsl:text>
 <xsl:text> * @Since </xsl:text><xsl:value-of select="$date"/><xsl:text>&#10;</xsl:text>
-<xsl:text> * @See &lt;a href="</xsl:text><xsl:value-of select="$url"/><xsl:text>"&gt;</xsl:text><xsl:value-of select="$className" /><xsl:text>&lt;/&gt;&#10;</xsl:text>
+<xsl:text> * @See &lt;a href="</xsl:text><xsl:value-of select="$url"/><xsl:text>"&gt;</xsl:text><xsl:value-of select="$className" /><xsl:text>&lt;/a&gt;&#10;</xsl:text>
 <xsl:text> *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -127,7 +130,7 @@ public class </xsl:text>
 		<xsl:text> {&#10;</xsl:text>
 		<xsl:text>&#10;    private static final long serialVersionUID = 1L;&#10;</xsl:text>
 		<xsl:for-each
-			select="table[@class='structTable']/tr[position()>1]">
+			select="//table[@class='structTable']/tr[position()>1]">
 			<xsl:choose>
 				<xsl:when
 					test="normalize-space(td[@class='structAttr'])='Yes'">
@@ -159,7 +162,7 @@ public class </xsl:text>
 
 		<!-- do getters/setters -->
 		<xsl:for-each
-			select="table[@class='structTable']/tr[position()>1]">
+			select="//table[@class='structTable']/tr[position()>1]">
 			<!-- Do Getter -->
 			<xsl:text>&#10;    /**&#10;     * </xsl:text>
 			<xsl:value-of
