@@ -28,6 +28,8 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,12 +42,35 @@ import org.xml.sax.SAXException;
 public class ContractReader {
 
     private String contractText;
-
     private String contractPath;
+    private URL url;
+    private String jsessionId;
+    private boolean nested;
 
-    /* Test adding in a comment just to see if subversion works */
+   
+    public ContractReader(URL url, String jsessionId) throws IOException {
+	this(url, jsessionId, false);
+	return;
+    }
 
-    
+
+    public ContractReader(URL url, String jsessionId, boolean nested) throws IOException {
+	this.nested = nested;
+    	this.contractPath = url.toString();
+	this.url = url;
+	this.jsessionId = jsessionId;
+
+        URLConnection connection = url.openConnection();
+        connection.setRequestProperty("Cookie", "JSESSIONID=" + jsessionId);
+
+        InputStreamReader myReader = new InputStreamReader(connection.getInputStream());
+        BufferedReader reader = new BufferedReader(myReader);
+
+        contractText = trimContract(reader);
+	return;
+    }
+
+	
     public ContractReader(File file) throws FileNotFoundException, IOException {
 	contractPath = file.getCanonicalPath();
         FileReader fileReader = new FileReader(file);
@@ -55,17 +80,6 @@ public class ContractReader {
     }
 
 
-    public ContractReader(URL url, String jsessionId) throws IOException {
-    	this.contractPath = url.toString();
-        URLConnection connection = url.openConnection();
-        connection.setRequestProperty("Cookie", "JSESSIONID=" + jsessionId);
-
-        InputStreamReader myReader = new InputStreamReader(connection.getInputStream());
-        BufferedReader reader = new BufferedReader(myReader);
-
-        contractText = trimContract(reader);
-    }
-
     public Document getDocument() throws ParserConfigurationException, UnsupportedEncodingException, IOException, SAXException {
         DocumentBuilderFactory  factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -73,106 +87,109 @@ public class ContractReader {
         return builder.parse(new ByteArrayInputStream(contractText.getBytes("UTF-8")));
     }
 
+
     public StreamSource getStreamSource() {
         StringReader stringReader = new StringReader(contractText);
         return new StreamSource(stringReader);
     }
+
+    
+    public String getText() {
+	return (this.contractText);
+    }
+
+
+    /**
+     *  Filters out the HTML gunk that trips the SAX parser. The magic
+     *  html tokens are "wiki-content" for the start of the content
+     *  portion of the wiki page, "Setup" for the start of the
+     *  contract and "Capabilities" for the end of the contract. If a
+     *  page has a "Linked Operations" heading, it is expected to
+     *  contain links to other pages that will be merged into the
+     *  contract text.
+     *
+     *  @param reader input text reader
+     *  @return a string containing an XML-like contract
+     *  @throws IOException problem reading stream
+     */
 
     protected String trimContract(BufferedReader reader) throws IOException {
 
         StringBuilder builder = new StringBuilder();
         String line;
         boolean inContract = false;
-	boolean content = false;
-	boolean style = false;
-	boolean form = false;
-	boolean script = false;
+	boolean linkPage = false;
+	Collection <String>linkedPages = new ArrayList<String>();
 	boolean p = false;
 
+	if (!this.nested) {
+	    builder.append("<contents>\n");	
+	}
+
         while ((line = reader.readLine()) != null) {
-	    if (line.contains("wiki-content")) {
-		content = true;
+	    if (line.contains("ServiceOperationStart")) {
+		inContract = true;
 		continue;
 	    }
 
-	    if (!content) {
+	    if (line.contains("ServiceOperationStop")) {
+		inContract = false;
 		continue;
 	    }
 
-	    if (line.contains("<style")) {
-		style = true;
-	    }
+	    if (linkPage) {
+		if (line.contains("href=")) {
+		    linkedPages.add(parsePageLink(line));
+		}
 
-	    if (line.contains("/style>")) {
-		style = false;
+		if (line.contains("</div>")) {
+		    linkPage = false;
+		}
+
 		continue;
 	    }
 
-	    if (style) {
+	    /* link to another page */
+	    if (line.contains("</a>Linked Operations</h3>")) {
+		linkPage = true;
 		continue;
 	    }
 
-	    if (line.contains("<form")) {
-		form = true;
-	    }
-
-	    if (line.contains("/form>")) {
-		form = false;
+	    if (!inContract) {
 		continue;
 	    }
 
-	    if (form) {
-		continue;
-	    }
-	    
-	    if (line.contains("<script")) {
-		script = true;
-	    }
-
-	    if (line.contains("/script>")) {
-		script = false;
-		continue;
-	    }
-
-	    if (script) {
-		continue;
-	    }
-	  
-	    if (line.contains("<p")) {
-		p = true;
-	    }
-
-	    if (line.contains("/p>")) {
-		p = false;
-		continue;
-	    }
-
-	    if (p) {
-		continue;
-	    }
-
-	    if (line.contains("<link") || (line.contains("<meta"))) {
-		continue;
-	    }
-
-            if (!inContract) {
-                if (line.contains("<em>Setup</em>")) {
-                    inContract = true;
-		    builder.append("<contents>\n");
-                }
-            } else {
-                if (line.contains("</a>Capabilities</h3>")) {
-                    inContract = false;
-                } else {
-		    builder.append(line + "\n");
-                }
-            }
+	    builder.append(line + "\n");
         }
 
-	builder.append("</contents>");
-	return builder.toString();
+	for (String page : linkedPages) {
+	    ContractReader cr = new ContractReader(new URL(this.url.getProtocol(), 
+							   this.url.getHost(), 
+							   this.url.getPort(), 
+							   page), 
+						   this.jsessionId, true);
+	    builder.append(cr.getText());
+	}
+
+	if (!this.nested) {
+	    builder.append("</contents>\n");
+	}
+
+	return (builder.toString());
     }
-    
+
+
+    private String parsePageLink(String line) {
+	String[] tok = line.split("href=");
+	if (tok.length < 2) {
+	    return ("");
+	}
+
+	tok = tok[1].split("\"");
+	return (tok[1]);
+    }
+
+	
     /**
      * @return the contractText
      */
