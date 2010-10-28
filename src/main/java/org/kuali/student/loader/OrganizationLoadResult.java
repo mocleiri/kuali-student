@@ -15,10 +15,11 @@
  */
 package org.kuali.student.loader;
 
+import org.kuali.student.core.exceptions.DataValidationErrorException;
+import org.kuali.student.core.organization.dto.OrgInfo;
+import org.kuali.student.core.validation.dto.ValidationResultInfo;
 
-import org.kuali.student.wsdl.course.ValidationResultInfo;
-import org.kuali.student.wsdl.exceptions.DataValidationErrorException;
-import org.kuali.student.wsdl.organization.OrgInfo;
+
 
 /**
  *

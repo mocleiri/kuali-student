@@ -61,9 +61,9 @@ public class CreditCourseLoaderFromCommandLineTest
   System.out.println ("main");
   String[] args =
   {
-    "src/main/" + CreditCourseLoaderModelFactory.RESOURCES_DIRECTORY + "/"
-     + CreditCourseLoaderModelFactory.COURSES_XLS,
-   CreditCourseLoaderModelFactory.LOCAL_HOST_URL
+    "src/main/" + CreditCourseInputModelFactory.RESOURCES_DIRECTORY + "/"
+     + CreditCourseInputModelFactory.COURSES_XLS,
+   CreditCourseInputModelFactory.LOCAL_HOST_URL
   };
   CreditCourseLoaderFromCommandLine.main (args);
  }

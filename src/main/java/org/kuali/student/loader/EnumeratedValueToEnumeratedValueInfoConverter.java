@@ -17,7 +17,8 @@ package org.kuali.student.loader;
 
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.wsdl.enumerationmanagement.EnumeratedValueInfo;
+import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
+
 
 /**
  *
@@ -41,8 +42,8 @@ public class EnumeratedValueToEnumeratedValueInfoConverter
   info.setCode (ev.getCode ());
   info.setAbbrevValue (ev.getAbbrevValue ());
   info.setValue (ev.getValue ());
-  info.setEffectiveDate (new DateHelper ().asXmlDate (ev.getEffectiveDate ()));
-  info.setEffectiveDate (new DateHelper ().asXmlDate (ev.getExpirationDate ()));
+  info.setEffectiveDate (ev.getEffectiveDate ());
+  info.setEffectiveDate (ev.getExpirationDate ());
   if (ev.getSortKey () != null)
   {
    info.setSortKey ("" + ev.getSortKey ());

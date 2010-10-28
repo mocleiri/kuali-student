@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import org.kuali.student.core.organization.service.OrganizationService;
 
 /**
  *
@@ -100,15 +101,14 @@ public class OrganizationLoaderFromCommandLine
  {
   displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
-  cfg.put (OrganizationLoaderModelFactory.EXCEL_FILES_KEY + "1", inFile);
-  cfg.put (OrganizationLoaderModelFactory.SERVICE_HOST_URL, hostUrl);
-  OrganizationLoaderModelFactory factory = new OrganizationLoaderModelFactory ();
+  cfg.put (OrganizationInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
+  cfg.put (OrganizationInputModelFactory.SERVICE_HOST_URL, hostUrl);
+  OrganizationInputModelFactory factory = new OrganizationInputModelFactory ();
   factory.setConfig (cfg);
-  OrganizationLoaderModel orgModel = factory.getModel ();
+  OrganizationInputModel orgModel = factory.getModel ();
   OrganizationLoader ccLoader = new OrganizationLoader ();
-  OrgService OrgService = new OrgService ();
-  OrgService.setHostUrl (OrganizationLoaderModelFactory.LOCAL_HOST_URL);
-  ccLoader.setOrgService (OrgService);
+  OrganizationService organizationService = null;
+  ccLoader.setOrganizationService (organizationService);
 
   System.out.println (new Date () + " getting organizations...");
   List<Organization> organizations = orgModel.getOrganizations ();

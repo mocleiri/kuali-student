@@ -22,6 +22,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.kuali.student.core.organization.service.OrganizationService;
 import static org.junit.Assert.*;
 
 /**
@@ -35,10 +36,14 @@ public class OrganizationLoaderTest
  {
  }
 
+ private static OrganizationService organizationService;
+
  @BeforeClass
- public static void setUpClass ()
-   throws Exception
+ public static void setUpClass () throws Exception
  {
+  OrganizationServiceFactory factory = new OrganizationServiceFactory ();
+  factory.setHostUrl (CreditCourseInputModelFactory.LOCAL_HOST_URL);
+  organizationService = factory.getOrganizationService ();
  }
 
  @AfterClass
@@ -67,10 +72,8 @@ public class OrganizationLoaderTest
   System.out.println (new Date () + " load organizations");
 
   OrganizationLoader ccLoader = new OrganizationLoader ();
-  OrgService orgService = new OrgService ();
-  orgService.setHostUrl (OrganizationLoaderModelFactory.LOCAL_HOST_URL);
-  ccLoader.setOrgService (orgService);
-  OrganizationLoaderModel ccModel = OrgLoaderModelFactoryTest.getInstance ().
+  ccLoader.setOrganizationService (organizationService);
+  OrganizationInputModel ccModel = OrganizationInputModelFactoryTest.getInstance ().
     getModel ();
 
   System.out.println (new Date () + " getting organizations...");

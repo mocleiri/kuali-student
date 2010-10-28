@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.wsdl.course.CourseInfo;
-import org.kuali.student.wsdl.course.DataValidationErrorException;
+import org.kuali.student.lum.course.dto.CourseInfo;
+import org.kuali.student.lum.course.service.CourseService;
+
 
 /**
  *
@@ -29,16 +30,16 @@ import org.kuali.student.wsdl.course.DataValidationErrorException;
 public class CreditCourseLoader
 {
 
- private CrsService crsService;
+ private CourseService courseService;
 
- public CrsService getCrsService ()
+ public CourseService getCourseService ()
  {
-  return crsService;
+  return courseService;
  }
 
- public void setCrsService (CrsService crsService)
+ public void setCourseService (CourseService courseService)
  {
-  this.crsService = crsService;
+  this.courseService = courseService;
  }
 
  public CreditCourseLoader ()
@@ -72,14 +73,13 @@ public class CreditCourseLoader
    result.setCourseInfo (info);
    try
    {
-    CourseInfo createdInfo = crsService.createCourse (info);
+    CourseInfo createdInfo = courseService.createCourse (info);
     result.setCourseInfo (createdInfo);
     result.setSuccess (true);
    }
-   catch (DataValidationErrorException ex)
+   catch (RuntimeException ex)
    {
     result.setSuccess (false);
-    result.setDataValidationErrorException (ex.getFaultInfo ());
    }
    catch (Exception ex)
    {
@@ -90,16 +90,16 @@ public class CreditCourseLoader
   return results;
  }
 
- public static CreditCourseLoaderModelFactory getInstance (String excelFile)
+ public static CreditCourseInputModelFactory getInstance (String excelFile)
  {
   Properties props = new Properties ();
-  props.putAll (CreditCourseLoaderModelFactory.getDefaultConfig ());
-  props.put (CreditCourseLoaderModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + CreditCourseLoaderModelFactory.RESOURCES_DIRECTORY);
-  props.put (CreditCourseLoaderModelFactory.SERVICE_HOST_URL, "src/main/"
-   + CreditCourseLoaderModelFactory.RESOURCES_DIRECTORY);
+  props.putAll (CreditCourseInputModelFactory.getDefaultConfig ());
+  props.put (CreditCourseInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
+   + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (CreditCourseInputModelFactory.SERVICE_HOST_URL, "src/main/"
+   + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
-  CreditCourseLoaderModelFactory factory = new CreditCourseLoaderModelFactory ();
+  CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
   factory.setConfig (props);
   return factory;
  }

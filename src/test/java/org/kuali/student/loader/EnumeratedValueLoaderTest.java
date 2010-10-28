@@ -22,6 +22,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
 import static org.junit.Assert.*;
 
 /**
@@ -35,10 +36,15 @@ public class EnumeratedValueLoaderTest
  {
  }
 
+ private static EnumerationManagementService enumerationManagementService;
+
  @BeforeClass
- public static void setUpClass ()
-   throws Exception
+ public static void setUpClass () throws Exception
  {
+  EnumerationManagementServiceFactory factory =
+                                      new EnumerationManagementServiceFactory ();
+  factory.setHostUrl (CreditCourseInputModelFactory.LOCAL_HOST_URL);
+  enumerationManagementService = factory.getEnumerationManagementService ();
  }
 
  @AfterClass
@@ -67,10 +73,8 @@ public class EnumeratedValueLoaderTest
   System.out.println (new Date () + " load enumerated values");
 
   EnumeratedValueLoader ccLoader = new EnumeratedValueLoader ();
-  EnumManService enumManService = new EnumManService ();
-  enumManService.setHostUrl (EnumeratedValueLoaderModelFactory.LOCAL_HOST_URL);
-  ccLoader.setEnumManService (enumManService);
-  EnumeratedValueLoaderModel ccModel = EnumeratedValueLoaderModelFactoryTest.getInstance ().
+  ccLoader.setEnumerationManagementService (enumerationManagementService);
+  EnumeratedValueInputModel ccModel = EnumeratedValueInputModelFactoryTest.getInstance ().
     getModel ();
 
   System.out.println (new Date () + " getting enumerated values...");

@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.wsdl.enumerationmanagement.AlreadyExistsException;
-import org.kuali.student.wsdl.enumerationmanagement.EnumeratedValueInfo;
+import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
+import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
+import org.kuali.student.core.exceptions.AlreadyExistsException;
 
 /**
  *
@@ -29,16 +30,16 @@ import org.kuali.student.wsdl.enumerationmanagement.EnumeratedValueInfo;
 public class EnumeratedValueLoader
 {
 
- private EnumManService enumManService;
+ private EnumerationManagementService enumerationManagementService;
 
- public EnumManService getEnumManService ()
+ public EnumerationManagementService getEnumerationManagementService ()
  {
-  return enumManService;
+  return enumerationManagementService;
  }
 
- public void setEnumManService (EnumManService enumManService)
+ public void setEnumerationManagementService (EnumerationManagementService enumerationManagementService)
  {
-  this.enumManService = enumManService;
+  this.enumerationManagementService = enumerationManagementService;
  }
 
  public EnumeratedValueLoader ()
@@ -72,7 +73,7 @@ public class EnumeratedValueLoader
    result.setEnumeratedValueInfo (info);
    try
    {
-    EnumeratedValueInfo createdInfo = enumManService.addEnumeratedValue (ev.getEnumerationKey (), info);
+    EnumeratedValueInfo createdInfo = enumerationManagementService.addEnumeratedValue (ev.getEnumerationKey (), info);
     result.setEnumeratedValueInfo (createdInfo);
     result.setSuccess (true);
    }
@@ -90,16 +91,16 @@ public class EnumeratedValueLoader
   return results;
  }
 
- public static EnumeratedValueLoaderModelFactory getInstance (String excelFile)
+ public static EnumeratedValueInputModelFactory getInstance (String excelFile)
  {
   Properties props = new Properties ();
-  props.putAll (EnumeratedValueLoaderModelFactory.getDefaultConfig ());
-  props.put (EnumeratedValueLoaderModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + EnumeratedValueLoaderModelFactory.RESOURCES_DIRECTORY);
-  props.put (EnumeratedValueLoaderModelFactory.SERVICE_HOST_URL, "src/main/"
-   + EnumeratedValueLoaderModelFactory.RESOURCES_DIRECTORY);
+  props.putAll (EnumeratedValueInputModelFactory.getDefaultConfig ());
+  props.put (EnumeratedValueInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
+   + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (EnumeratedValueInputModelFactory.SERVICE_HOST_URL, "src/main/"
+   + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
-  EnumeratedValueLoaderModelFactory factory = new EnumeratedValueLoaderModelFactory ();
+  EnumeratedValueInputModelFactory factory = new EnumeratedValueInputModelFactory ();
   factory.setConfig (props);
   return factory;
  }

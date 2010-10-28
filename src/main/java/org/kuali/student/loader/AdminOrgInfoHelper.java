@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.kuali.student.wsdl.course.AdminOrgInfo;
+import org.kuali.student.lum.lu.dto.AdminOrgInfo;
+
 
 
 /**
@@ -69,6 +70,6 @@ public class AdminOrgInfoHelper
   List<String> types = new ArrayList ();
   types.add (DEPARTMENT);
   types.add (OFFICE);
-  return new OrgFinderService ().findMatch (orgName, types);
+  return new OrgFinderHelper ().findMatch (orgName, types);
  }
 }

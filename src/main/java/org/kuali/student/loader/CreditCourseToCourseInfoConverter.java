@@ -15,11 +15,11 @@
  */
 package org.kuali.student.loader;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.wsdl.course.AdminOrgInfo;
-import org.kuali.student.wsdl.course.CourseInfo;
+import org.kuali.student.lum.course.dto.CourseInfo;
+import org.kuali.student.lum.lu.dto.AdminOrgInfo;
+
 
 /**
  *
@@ -44,7 +44,7 @@ public class CreditCourseToCourseInfoConverter
   AdminOrgInfo adminOrgInfo = new AdminOrgInfoHelper ().get (ADMINISTRATION_ADMIN_ORG_TYPE, cc.getAdministeringOrgName ());
   if (adminOrgInfo != null)
   {
-   courseInfo.getAdministeringOrgs ().add (adminOrgInfo.getId ());
+   courseInfo.getUnitsContentOwner ().add (adminOrgInfo.getId ());
   }
   courseInfo.setDescr (new RichTextInfoHelper ().getFromPlain (cc.getDescr ()));
   // let it calculate the code
@@ -61,12 +61,12 @@ public class CreditCourseToCourseInfoConverter
 //  courseInfo.getCampusLocations ().addAll (campuses);
 
   // TODO: make this a lookup via the OrgService 
-  courseInfo.getAdministeringOrgs ().add (cc.getAdministeringOrg ());
+  courseInfo.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
 
   courseInfo.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.Semester"));
   courseInfo.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
   courseInfo.setStartTerm ("kuali.atp.FA2008-2009");
-  courseInfo.setEffectiveDate (new DateHelper ().asXmlDate ("2010-01-01"));
+  courseInfo.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
   courseInfo.setMetaInfo (new MetaInfoHelper ().get ());
   return courseInfo;
  }

@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
 
 /**
  *
@@ -100,15 +101,14 @@ public class EnumeratedValueLoaderFromCommandLine
  {
   displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
-  cfg.put (EnumeratedValueLoaderModelFactory.EXCEL_FILES_KEY + "1", inFile);
-  cfg.put (EnumeratedValueLoaderModelFactory.SERVICE_HOST_URL, hostUrl);
-  EnumeratedValueLoaderModelFactory factory = new EnumeratedValueLoaderModelFactory ();
+  cfg.put (EnumeratedValueInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
+  cfg.put (EnumeratedValueInputModelFactory.SERVICE_HOST_URL, hostUrl);
+  EnumeratedValueInputModelFactory factory = new EnumeratedValueInputModelFactory ();
   factory.setConfig (cfg);
-  EnumeratedValueLoaderModel ccModel = factory.getModel ();
+  EnumeratedValueInputModel ccModel = factory.getModel ();
   EnumeratedValueLoader evLoader = new EnumeratedValueLoader ();
-  EnumManService enumManService = new EnumManService ();
-  enumManService.setHostUrl (EnumeratedValueLoaderModelFactory.LOCAL_HOST_URL);
-  evLoader.setEnumManService (enumManService);
+  EnumerationManagementService enumManService = null;
+  evLoader.setEnumerationManagementService (enumManService);
 
   System.out.println (new Date () + " getting enumerated values...");
   List<EnumeratedValue> enumeratedValues = ccModel.getEnumeratedValues ();

@@ -17,7 +17,7 @@ package org.kuali.student.loader;
 
 import java.text.ParseException;
 import java.util.Date;
-import org.kuali.student.dictionary.model.spreadsheet.WorksheetReader;
+import org.kuali.student.spreadsheet.WorksheetReader;
 
 
 /**

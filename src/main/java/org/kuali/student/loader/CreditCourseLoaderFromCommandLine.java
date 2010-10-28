@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import org.kuali.student.lum.course.service.CourseService;
 
 /**
  *
@@ -100,15 +101,14 @@ public class CreditCourseLoaderFromCommandLine
  {
   displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
-  cfg.put (CreditCourseLoaderModelFactory.EXCEL_FILES_KEY + "1", inFile);
-  cfg.put (CreditCourseLoaderModelFactory.SERVICE_HOST_URL, hostUrl);
-  CreditCourseLoaderModelFactory factory = new CreditCourseLoaderModelFactory ();
+  cfg.put (CreditCourseInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
+  cfg.put (CreditCourseInputModelFactory.SERVICE_HOST_URL, hostUrl);
+  CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
   factory.setConfig (cfg);
-  CreditCourseLoaderModel ccModel = factory.getModel ();
+  CreditCourseInputModel ccModel = factory.getModel ();
   CreditCourseLoader ccLoader = new CreditCourseLoader ();
-  CrsService crsService = new CrsService ();
-  crsService.setHostUrl (CreditCourseLoaderModelFactory.LOCAL_HOST_URL);
-  ccLoader.setCrsService (crsService);
+  CourseService courseService = null;
+  ccLoader.setCourseService (courseService);
 
   System.out.println (new Date () + " getting credit courses...");
   List<CreditCourse> creditCourses = ccModel.getCreditCourses ();

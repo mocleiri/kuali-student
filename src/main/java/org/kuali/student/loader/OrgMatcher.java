@@ -20,18 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.kuali.student.wsdl.organization.OrgInfo;
-import org.kuali.student.wsdl.organization.OrgTypeInfo;
-import org.kuali.student.wsdl.organization.OrganizationService;
-import org.kuali.student.wsdl.organization.OrganizationService_Service;
-import org.kuali.student.wsdl.search.GetSearchTypes;
-import org.kuali.student.wsdl.search.GetSearchTypesResponse;
-import org.kuali.student.wsdl.search.SearchParam;
-import org.kuali.student.wsdl.search.SearchRequest;
-import org.kuali.student.wsdl.search.SearchResult;
-import org.kuali.student.wsdl.search.SearchResultCell;
-import org.kuali.student.wsdl.search.SearchResultRow;
-import org.kuali.student.wsdl.search.SearchTypeInfo;
+
 
 /**
  *

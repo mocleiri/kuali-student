@@ -17,8 +17,8 @@ package org.kuali.student.loader;
 
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.wsdl.course.AdminOrgInfo;
-import org.kuali.student.wsdl.organization.OrgInfo;
+import org.kuali.student.core.organization.dto.OrgInfo;
+
 
 /**
  *
@@ -48,8 +48,8 @@ public class OrganizationToOrgInfoConverter
   orgInfo.setType (org.getType ());
   orgInfo.setState (org.getState ());
 
-  orgInfo.setEffectiveDate (new DateHelper ().asXmlDate (org.getEffectiveDate ()));
-  orgInfo.setExpirationDate (new DateHelper ().asXmlDate (org.getExpirationDate ()));
+  orgInfo.setEffectiveDate (org.getEffectiveDate ());
+  orgInfo.setExpirationDate (org.getExpirationDate ());
   return orgInfo;
  }
 

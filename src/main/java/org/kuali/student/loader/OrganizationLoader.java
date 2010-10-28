@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.wsdl.course.DataValidationErrorException;
-import org.kuali.student.wsdl.organization.OrgInfo;
+import org.kuali.student.core.organization.dto.OrgInfo;
+import org.kuali.student.core.organization.service.OrganizationService;
+
 
 /**
  *
@@ -29,16 +30,16 @@ import org.kuali.student.wsdl.organization.OrgInfo;
 public class OrganizationLoader
 {
 
- private OrgService orgService;
+ private OrganizationService organizationService;
 
- public OrgService getOrgService ()
+ public OrganizationService getOrganizationService ()
  {
-  return orgService;
+  return organizationService;
  }
 
- public void setOrgService (OrgService orgService)
+ public void setOrganizationService (OrganizationService organizationService)
  {
-  this.orgService = orgService;
+  this.organizationService = organizationService;
  }
 
  public OrganizationLoader ()
@@ -72,7 +73,7 @@ public class OrganizationLoader
    result.setOrgInfo (info);
    try
    {
-    OrgInfo createdInfo = orgService.createOrganization (info);
+    OrgInfo createdInfo = getOrganizationService ().createOrganization (info.getType (), info);
     result.setOrgInfo (createdInfo);
     result.setSuccess (true);
    }
@@ -90,16 +91,16 @@ public class OrganizationLoader
   return results;
  }
 
- public static OrganizationLoaderModelFactory getInstance (String excelFile)
+ public static OrganizationInputModelFactory getInstance (String excelFile)
  {
   Properties props = new Properties ();
-  props.putAll (OrganizationLoaderModelFactory.getDefaultConfig ());
-  props.put (OrganizationLoaderModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + OrganizationLoaderModelFactory.RESOURCES_DIRECTORY);
-  props.put (OrganizationLoaderModelFactory.SERVICE_HOST_URL, "src/main/"
-   + OrganizationLoaderModelFactory.RESOURCES_DIRECTORY);
+  props.putAll (OrganizationInputModelFactory.getDefaultConfig ());
+  props.put (OrganizationInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
+   + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (OrganizationInputModelFactory.SERVICE_HOST_URL, "src/main/"
+   + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
-  OrganizationLoaderModelFactory factory = new OrganizationLoaderModelFactory ();
+  OrganizationInputModelFactory factory = new OrganizationInputModelFactory ();
   factory.setConfig (props);
   return factory;
  }

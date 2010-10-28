@@ -22,6 +22,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.kuali.student.lum.course.service.CourseService;
 import static org.junit.Assert.*;
 
 /**
@@ -31,6 +32,8 @@ import static org.junit.Assert.*;
 public class CreditCourseLoaderTest
 {
 
+ private static CourseService courseService;
+
  public CreditCourseLoaderTest ()
  {
  }
@@ -39,6 +42,9 @@ public class CreditCourseLoaderTest
  public static void setUpClass ()
    throws Exception
  {
+  CourseServiceFactory factory = new CourseServiceFactory ();
+  factory.setHostUrl (CreditCourseInputModelFactory.LOCAL_HOST_URL);
+  courseService = factory.getCourseService ();
  }
 
  @AfterClass
@@ -67,10 +73,8 @@ public class CreditCourseLoaderTest
   System.out.println (new Date () + " load credit courses");
 
   CreditCourseLoader ccLoader = new CreditCourseLoader ();
-  CrsService crsService = new CrsService ();
-  crsService.setHostUrl (CreditCourseLoaderModelFactory.LOCAL_HOST_URL);
-  ccLoader.setCrsService (crsService);
-  CreditCourseLoaderModel ccModel = CreditCourseLoaderModelFactoryTest.getInstance ().
+  ccLoader.setCourseService (courseService);
+  CreditCourseInputModel ccModel = CreditCourseInputModelFactoryTest.getInstance ().
     getModel ();
 
   System.out.println (new Date () + " getting credit courses...");
@@ -88,14 +92,16 @@ public class CreditCourseLoaderTest
    if (result.isSuccess ())
    {
     created ++;
-    System.out.println (result.getCourseInfo ().getCode () + " id = " + result.getCourseInfo ().getId ());
+    System.out.println (result.getCourseInfo ().getCode () + " id = "
+                        + result.getCourseInfo ().getId ());
    }
    else
    {
     failures ++;
    }
   }
-  System.out.println (created + " recordes created out of " + creditCourses.size () + " credit courses");
+  System.out.println (created + " recordes created out of "
+                      + creditCourses.size () + " credit courses");
   System.out.println (failures + " records failed to load");
   for (CreditCourseLoadResult result : results)
   {
