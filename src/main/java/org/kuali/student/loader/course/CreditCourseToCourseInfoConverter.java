@@ -54,10 +54,11 @@ public class CreditCourseToCourseInfoConverter
    info.getUnitsContentOwner ().add (adminOrgInfo.getId ());
   }
   info.setDescr (new RichTextInfoHelper ().getFromPlain (cc.getDescr ()));
-  // let it calculate the code
-//  courseInfo.setCode (cc.getCode ());
+  // TODO: figure out why the code calculation doesn't get triggered if I leave it null
+  info.setCode (cc.getSubjectArea () + cc.getCourseNumberSuffix ());
   info.setSubjectArea (cc.getSubjectArea ());
   info.setCourseNumberSuffix (cc.getCourseNumberSuffix ());
+  info.setLevel (cc.getCourseNumberSuffix ().substring (0, 1) + "00");
   info.setTranscriptTitle (cc.getTranscriptTitle ());
   info.setCourseTitle (cc.getCourseTitle ());
   info.getTermsOffered ().addAll (convertOfferedAtpTypes (cc.getTermsOffered ()));

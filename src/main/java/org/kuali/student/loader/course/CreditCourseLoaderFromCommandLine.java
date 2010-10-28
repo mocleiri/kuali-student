@@ -19,7 +19,6 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.lum.course.service.CourseService;
 
 /**
  *
@@ -27,13 +26,14 @@ import org.kuali.student.lum.course.service.CourseService;
  */
 public class CreditCourseLoaderFromCommandLine
 {
-  /**
+
+ /**
   * @param args the command line arguments
   */
  public static void main (String[] args)
  {
   CreditCourseLoaderFromCommandLine instance =
-   new CreditCourseLoaderFromCommandLine ();
+                                    new CreditCourseLoaderFromCommandLine ();
   instance.execute (args);
 
  }
@@ -68,10 +68,13 @@ public class CreditCourseLoaderFromCommandLine
 
  public void displayUsage (PrintStream out)
  {
-  out.println ("Usage: java -jar kuali-credit-course-loader.jar <inputExcel> <hostUrl>");
-  out.println ("\t@param inputExcel the fully qualified file name for the input excel file");
+  out.println (
+    "Usage: java -jar kuali-credit-course-loader.jar <inputExcel> <hostUrl>");
+  out.println (
+    "\t@param inputExcel the fully qualified file name for the input excel file");
   out.println ("\t@param hostUrl the fully qualified url of the serice");
-  out.println ("ex: java -jar kuali-credit-course-loader.jar courses.xls http://localhost:9393/ks-embedded-dev");
+  out.println (
+    "ex: java -jar kuali-credit-course-loader.jar courses.xls http://localhost:9393/ks-embedded-dev");
  }
 
  private void execute (String[] args)
@@ -102,48 +105,69 @@ public class CreditCourseLoaderFromCommandLine
   displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
   cfg.put (CreditCourseInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
-  cfg.put (CreditCourseInputModelFactory.SERVICE_HOST_URL, hostUrl);
   CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
   factory.setConfig (cfg);
   CreditCourseInputModel ccModel = factory.getModel ();
   CreditCourseLoader ccLoader = new CreditCourseLoader ();
-  CourseService courseService = null;
-  ccLoader.setCourseService (courseService);
+  CourseServiceFactory servFactory = new CourseServiceFactory ();
+  servFactory.setHostUrl (hostUrl);
+  ccLoader.setCourseService (servFactory.getCourseService ());
 
   System.out.println (new Date () + " getting credit courses...");
   List<CreditCourse> creditCourses = ccModel.getCreditCourses ();
 
   System.out.println (new Date () + " loading " + creditCourses.size ()
                       + " credit courses");
-//  ccLoader.setSource (creditCourses.subList (0, 10).iterator ());
-  ccLoader.setInputDataSource (creditCourses.iterator ());
+//  List<CreditCourse> list = creditCourses.subList (0, 10);
+  List<CreditCourse> list = creditCourses;
+  ccLoader.setInputDataSource (list);
   List<CreditCourseLoadResult> results = ccLoader.update ();
-  int created = 0;
-  int failures = 0;
+
+  // output good results
   for (CreditCourseLoadResult result : results)
   {
-   if (result.isSuccess ())
+   switch (result.getStatus ())
    {
-    created ++;
-    System.out.println (result.getCourseInfo ().getCode () + " id = " + result.getCourseInfo ().getId ());
-   }
-   else
-   {
-    failures ++;
+    case CREATED:
+    case COURSE_VARIATION_PROCESSED_WITH_MAIN_COURSE:
+     System.out.println (result.getCourseInfo ().getCode ()
+                         + " " + result.getStatus () + " id = "
+                         + result.getCourseInfo ().getId ());
    }
   }
-  System.out.println (created + " recordes created out of " + creditCourses.size () + " credit courses");
-  System.out.println (failures + " records failed to load");
+
+  // output summary
   for (CreditCourseLoadResult result : results)
   {
-   if ( ! result.isSuccess ())
+   result.getStatus ().increment ();
+  }
+  System.out.println (list.size () + " credit courses");
+  for (CreditCourseLoadResult.Status status :
+       CreditCourseLoadResult.Status.values ())
+  {
+   System.out.println ("Total with status of " + status + " = "
+                       + status.getCount ());
+  }
+
+  // output errors
+  for (CreditCourseLoadResult result : results)
+  {
+   switch (result.getStatus ())
    {
-    System.out.println (result);
+    case VALIDATION_ERROR:
+    case EXCEPTION:
+     System.out.println (result);
    }
   }
-  if (failures > 0)
+  if (CreditCourseLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
   {
-   throw new RuntimeException (failures + " records failed to load");
+   throw new RuntimeException (CreditCourseLoadResult.Status.VALIDATION_ERROR.getCount ()
+                               + " records failed to load");
+  }
+  if (CreditCourseLoadResult.Status.EXCEPTION.getCount () > 0)
+  {
+   throw new RuntimeException (CreditCourseLoadResult.Status.EXCEPTION.getCount ()
+                               + " records failed to load");
   }
  }
 }

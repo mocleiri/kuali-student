@@ -19,7 +19,6 @@ import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.course.dto.CourseInfo;
 
-
 /**
  *
  * @author nwright
@@ -27,7 +26,32 @@ import org.kuali.student.lum.course.dto.CourseInfo;
 public class CreditCourseLoadResult
 {
 
- private boolean success;
+ public enum Status
+ {
+
+  CREATED,
+  VALIDATION_ERROR,
+  COURSE_VARIATION_PROCESSED_WITH_MAIN_COURSE,
+  EXCEPTION;
+
+  private int count = 0;
+
+  public int getCount ()
+  {
+   return count;
+  }
+
+  public void setCount (int count)
+  {
+   this.count = count;
+  }
+
+  public void increment ()
+  {
+   this.count++;
+  }
+ };
+ private Status status;
  private int row;
  private CreditCourse creditCourse;
  private CourseInfo courseInfo;
@@ -85,14 +109,14 @@ public class CreditCourseLoadResult
   this.row = row;
  }
 
- public boolean isSuccess ()
+ public Status getStatus ()
  {
-  return success;
+  return status;
  }
 
- public void setSuccess (boolean success)
+ public void setStatus (Status status)
  {
-  this.success = success;
+  this.status = status;
  }
 
  @Override
@@ -101,14 +125,7 @@ public class CreditCourseLoadResult
   StringBuilder builder = new StringBuilder ();
   builder.append (row);
   builder.append (". ");
-  if (success)
-  {
-   builder.append ("success");
-  }
-  else
-  {
-   builder.append ("error");
-  }
+  builder.append (status);
   builder.append (": ");
   builder.append (this.creditCourse.getCode ());
   builder.append (": ");
@@ -121,7 +138,8 @@ public class CreditCourseLoadResult
   if (this.dataValidationErrorException != null)
   {
    String comma = "";
-   for (ValidationResultInfo vri: this.dataValidationErrorException.getValidationResults ())
+   for (ValidationResultInfo vri :
+        this.dataValidationErrorException.getValidationResults ())
    {
     builder.append (comma);
     comma = ", ";

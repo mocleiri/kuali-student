@@ -36,8 +36,6 @@ public class CreditCourseInputModelFactory
                             "loader.model.excel.default.directory";
  public static final String EXCEL_FILES_KEY =
                             "credit.course.loader.model.excel.file#";
- public static final String SERVICE_HOST_URL =
-                            "loader.service.host.url";
 
 
  public static Properties getDefaultConfig ()
@@ -45,7 +43,6 @@ public class CreditCourseInputModelFactory
   Properties defaultProps = new Properties ();
   defaultProps.put (EXCEL_FILES_DEFAULT_DIRECTORY_KEY, RESOURCES_DIRECTORY);
   defaultProps.put (EXCEL_FILES_KEY + "1", COURSES_XLS);
-  defaultProps.put (SERVICE_HOST_URL, AtpServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   return defaultProps;
  }
  private Properties config;

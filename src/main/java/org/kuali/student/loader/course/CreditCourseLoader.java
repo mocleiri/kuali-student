@@ -16,7 +16,6 @@
 package org.kuali.student.loader.course;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
@@ -46,37 +45,33 @@ public class CreditCourseLoader
  public CreditCourseLoader ()
  {
  }
- private Iterator<CreditCourse> inputDataSource;
+ private List<CreditCourse> inputDataSource;
 
- public Iterator<CreditCourse> getInputDataSource ()
+ public List<CreditCourse> getInputDataSource ()
  {
   return inputDataSource;
  }
 
- public void setInputDataSource (Iterator<CreditCourse> inputDataSource)
+ public void setInputDataSource (List<CreditCourse> inputDataSource)
  {
   this.inputDataSource = inputDataSource;
  }
 
  public List<CreditCourseLoadResult> update ()
  {
-  List<CreditCourseLoadResult> results = new ArrayList (500);
-  int row = 0;
-  while (inputDataSource.hasNext ())
+  List<CreditCourseLoadResult> results = new CreditCoursesToCourseInfosConverter (inputDataSource).convert ();
+  for (CreditCourseLoadResult result : results)
   {
-   CreditCourseLoadResult result = new CreditCourseLoadResult ();
-   results.add (result);
-   CreditCourse cc = inputDataSource.next ();
-   row ++;
-   CourseInfo info = new CreditCourseToCourseInfoConverter (cc).convert ();
-   result.setRow (row);
-   result.setCreditCourse (cc);
-   result.setCourseInfo (info);
+   if (result.getStatus () != null)
+   {
+    continue;
+   }
+   CourseInfo info = result.getCourseInfo ();
    try
    {
     CourseInfo createdInfo = courseService.createCourse (info);
     result.setCourseInfo (createdInfo);
-    result.setSuccess (true);
+    result.setStatus (CreditCourseLoadResult.Status.CREATED);
    }
    catch (DataValidationErrorException ex)
    {
@@ -92,7 +87,7 @@ public class CreditCourseLoader
     }
     DataValidationErrorException dvex = new DataValidationErrorException (
       "got validation errors", vris, ex);
-    result.setSuccess (false);
+    result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
     result.setDataValidationErrorException (dvex);
    }
    catch (RuntimeException ex)
@@ -101,25 +96,10 @@ public class CreditCourseLoader
    }
    catch (Exception ex)
    {
-    throw new RuntimeException (ex);
+    result.setStatus (CreditCourseLoadResult.Status.EXCEPTION);
+    result.setException (ex);
    }
   }
   return results;
- }
-
- public static CreditCourseInputModelFactory getInstance (String excelFile)
- {
-  Properties props = new Properties ();
-  props.putAll (CreditCourseInputModelFactory.getDefaultConfig ());
-  props.put (CreditCourseInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY,
-             "src/main/"
-             + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
-  props.put (CreditCourseInputModelFactory.SERVICE_HOST_URL,
-             "src/main/"
-             + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
-  System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
-  CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
-  factory.setConfig (props);
-  return factory;
  }
 }

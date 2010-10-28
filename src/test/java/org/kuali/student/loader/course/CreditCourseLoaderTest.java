@@ -79,40 +79,60 @@ public class CreditCourseLoaderTest
 
   System.out.println (new Date () + " getting credit courses...");
   List<CreditCourse> creditCourses = ccModel.getCreditCourses ();
-
-  System.out.println (new Date () + " loading " + creditCourses.size ()
+//  List<CreditCourse> list = creditCourses.subList (400, 500);
+  List<CreditCourse> list = creditCourses;
+  System.out.println (new Date () + " loading " + list.size ()
                       + " credit courses");
-  ccLoader.setInputDataSource (creditCourses.subList (0, 1).iterator ());
-//  ccLoader.setInputDataSource (creditCourses.iterator ());
+
+  ccLoader.setInputDataSource (list);
+//  ccLoader.setInputDataSource (creditCourses);
   List<CreditCourseLoadResult> results = ccLoader.update ();
-  int created = 0;
-  int failures = 0;
+
+  // output good results
   for (CreditCourseLoadResult result : results)
   {
-   if (result.isSuccess ())
+   switch (result.getStatus ())
    {
-    created ++;
-    System.out.println (result.getCourseInfo ().getCode () + " id = "
-                        + result.getCourseInfo ().getId ());
-   }
-   else
-   {
-    failures ++;
+    case CREATED:
+    case COURSE_VARIATION_PROCESSED_WITH_MAIN_COURSE:
+     System.out.println (result.getCourseInfo ().getCode ()
+                         + " " + result.getStatus () + " id = "
+                         + result.getCourseInfo ().getId ());
    }
   }
-  System.out.println (created + " recordes created out of "
-                      + creditCourses.size () + " credit courses");
-  System.out.println (failures + " records failed to load");
+
+  // output summary
   for (CreditCourseLoadResult result : results)
   {
-   if ( ! result.isSuccess ())
+   result.getStatus ().increment ();
+  }
+  System.out.println (list.size () + " credit courses");
+  for (CreditCourseLoadResult.Status status :
+       CreditCourseLoadResult.Status.values ())
+  {
+   System.out.println ("Total with status of " + status + " = "
+                       + status.getCount ());
+  }
+
+  // output errors
+  for (CreditCourseLoadResult result : results)
+  {
+   switch (result.getStatus ())
    {
-    System.out.println (result);
+    case VALIDATION_ERROR:
+    case EXCEPTION:
+     System.out.println (result);
    }
   }
-  if (failures > 0)
+  if (CreditCourseLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
   {
-   fail (failures + " records failed to load");
+   throw new RuntimeException (CreditCourseLoadResult.Status.VALIDATION_ERROR.getCount ()
+                               + " records failed to load");
+  }
+  if (CreditCourseLoadResult.Status.EXCEPTION.getCount () > 0)
+  {
+   throw new RuntimeException (CreditCourseLoadResult.Status.EXCEPTION.getCount ()
+                               + " records failed to load");
   }
  }
 }

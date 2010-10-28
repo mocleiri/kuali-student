@@ -62,8 +62,6 @@ public class CreditCourseInputModelFactoryTest
   props.putAll (CreditCourseInputModelFactory.getDefaultConfig ());
   props.put (CreditCourseInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
    + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
-  props.put (CreditCourseInputModelFactory.SERVICE_HOST_URL, "src/main/"
-   + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
   factory.setConfig (props);
