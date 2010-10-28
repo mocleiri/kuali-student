@@ -15,7 +15,6 @@
  */
 package org.kuali.student.loader.enumeration;
 
-import org.kuali.student.loader.enumeration.EnumerationManagementServiceFactory;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;

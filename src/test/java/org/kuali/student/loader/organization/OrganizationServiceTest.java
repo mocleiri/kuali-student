@@ -15,7 +15,6 @@
  */
 package org.kuali.student.loader.organization;
 
-import org.kuali.student.loader.organization.OrganizationServiceFactory;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;

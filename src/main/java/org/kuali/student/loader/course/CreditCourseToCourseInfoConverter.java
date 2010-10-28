@@ -25,6 +25,7 @@ import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
 import org.kuali.student.lum.course.dto.CourseInfo;
 import org.kuali.student.lum.lu.dto.AdminOrgInfo;
+import org.kuali.student.lum.lu.dto.CluInstructorInfo;
 
 
 /**
@@ -45,39 +46,41 @@ public class CreditCourseToCourseInfoConverter
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE = "kuali.adminOrg.type.Administration";
  public CourseInfo convert ()
  {
-  CourseInfo courseInfo = new CourseInfo ();
-  courseInfo.setId (null);
+  CourseInfo info = new CourseInfo ();
+  info.setId (null);
   AdminOrgInfo adminOrgInfo = new AdminOrgInfoHelper ().get (ADMINISTRATION_ADMIN_ORG_TYPE, cc.getAdministeringOrgName ());
   if (adminOrgInfo != null)
   {
-   courseInfo.getUnitsContentOwner ().add (adminOrgInfo.getId ());
+   info.getUnitsContentOwner ().add (adminOrgInfo.getId ());
   }
-  courseInfo.setDescr (new RichTextInfoHelper ().getFromPlain (cc.getDescr ()));
+  info.setDescr (new RichTextInfoHelper ().getFromPlain (cc.getDescr ()));
   // let it calculate the code
 //  courseInfo.setCode (cc.getCode ());
-  courseInfo.setSubjectArea (cc.getSubjectArea ());
-  courseInfo.setCourseNumberSuffix (cc.getCourseNumberSuffix ());
-  courseInfo.setTranscriptTitle (cc.getTranscriptTitle ());
-  courseInfo.setCourseTitle (cc.getCourseTitle ());
-  courseInfo.getTermsOffered ().addAll (convertOfferedAtpTypes (cc.getTermsOffered ()));
-  courseInfo.setType ("kuali.lu.type.CreditCourse");
-  courseInfo.setState ("Active");
+  info.setSubjectArea (cc.getSubjectArea ());
+  info.setCourseNumberSuffix (cc.getCourseNumberSuffix ());
+  info.setTranscriptTitle (cc.getTranscriptTitle ());
+  info.setCourseTitle (cc.getCourseTitle ());
+  info.getTermsOffered ().addAll (convertOfferedAtpTypes (cc.getTermsOffered ()));
+  info.setType ("kuali.lu.type.CreditCourse");
+  info.setState ("Active");
 //  List<String> campuses = new ArrayList ();
 //  campuses.add ("North");
 //  courseInfo.getCampusLocations ().addAll (campuses);
 
   // TODO: make this a lookup via the OrgService 
-  courseInfo.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
+  info.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
 
-  courseInfo.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.Semester"));
-  courseInfo.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
-  courseInfo.setStartTerm ("kuali.atp.FA2008-2009");
-  courseInfo.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
-  courseInfo.setMetaInfo (new MetaInfoHelper ().get ());
+  info.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.Semester"));
+  info.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
+  info.setStartTerm ("kuali.atp.FA2008-2009");
+  info.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
+  info.setMetaInfo (new MetaInfoHelper ().get ());
   
-  courseInfo.getAttributes ().put ("finalExamStatus", cc.getFinalExam ());
-  courseInfo.getAttributes ().put ("finalExamRationale", cc.getFinalExamRationale ());
-  return courseInfo;
+  info.getAttributes ().put ("finalExamStatus", cc.getFinalExam ());
+  info.getAttributes ().put ("finalExamRationale", cc.getFinalExamRationale ());
+  info.setPrimaryInstructor (new CluInstructorInfo ());
+  info.getPrimaryInstructor ().setPersonInfoOverride ("Staff");
+  return info;
  }
 
 // public static final int ID = 0;

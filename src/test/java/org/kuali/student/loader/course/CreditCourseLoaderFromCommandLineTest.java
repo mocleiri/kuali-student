@@ -15,9 +15,6 @@
  */
 package org.kuali.student.loader.course;
 
-import org.kuali.student.loader.course.CreditCourseInputModelFactory;
-import org.kuali.student.loader.course.CourseServiceFactory;
-import org.kuali.student.loader.course.CreditCourseLoaderFromCommandLine;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

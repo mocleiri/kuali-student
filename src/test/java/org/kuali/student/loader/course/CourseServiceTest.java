@@ -17,7 +17,6 @@ package org.kuali.student.loader.course;
 
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.DateHelper;
-import org.kuali.student.loader.course.CourseServiceFactory;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

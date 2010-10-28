@@ -15,9 +15,6 @@
  */
 package org.kuali.student.loader.organization;
 
-import org.kuali.student.loader.organization.OrganizationInputModel;
-import org.kuali.student.loader.organization.Organization;
-import org.kuali.student.loader.organization.OrganizationInputModelFactory;
 import java.util.Properties;
 import org.junit.After;
 import org.junit.AfterClass;

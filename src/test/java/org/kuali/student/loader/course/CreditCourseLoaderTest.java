@@ -15,11 +15,6 @@
  */
 package org.kuali.student.loader.course;
 
-import org.kuali.student.loader.course.CreditCourse;
-import org.kuali.student.loader.course.CreditCourseLoadResult;
-import org.kuali.student.loader.course.CreditCourseInputModel;
-import org.kuali.student.loader.course.CourseServiceFactory;
-import org.kuali.student.loader.course.CreditCourseLoader;
 import java.util.Date;
 import java.util.List;
 import org.junit.After;

@@ -15,8 +15,6 @@
  */
 package org.kuali.student.loader.search;
 
-import org.kuali.student.loader.search.OrgFinderHelper;
-import org.kuali.student.loader.search.OrgResultGeneric;
 import org.kuali.student.loader.organization.OrganizationServiceFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +23,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.organization.service.OrganizationService;
 import org.kuali.student.core.search.dto.SearchTypeInfo;
-import org.kuali.student.lum.course.service.CourseService;
 import static org.junit.Assert.*;
 
 /**
