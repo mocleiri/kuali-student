@@ -86,9 +86,7 @@
     <configuration>
      <archive>
       <manifest>
-       <!--   <mainClass>org.kuali.student.loader.CreditCourseLoaderFromCommandLine</mainClass>    -->
-       <mainClass>org.kuali.student.loader.OrganizationLoaderFromCommandLine</mainClass>
-       <!--      <mainClass>org.kuali.student.loader.EnumeratedValueLoaderFromCommandLine</mainClass>    -->
+       <mainClass>org.kuali.student.loader.LoadFromCommandLine</mainClass>  
       </manifest>
      </archive>
     </configuration>
@@ -113,72 +111,6 @@
      </execution>
     </executions>
    </plugin>
-
-   <!--
-   <plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>axistools-maven-plugin</artifactId>
-    <version>1.4</version>
-    <configuration>
-     <sourceDirectory>${basedir}/src/main/resources/wsdl</sourceDirectory>
-     <outputDirectory>${project.build.directory}/generated/axis</outputDirectory>
-     <packageSpace>org.kuali.student.wsdl</packageSpace>
-     <testCases>true</testCases>
-     <serverSide>false</serverSide>
-     <subPackageByFileName>true</subPackageByFileName>
-    </configuration>
-    <executions>
-     <execution>
-      <goals>
-       <goal>wsdl2java</goal>
-      </goals>
-     </execution>
-    </executions>
-   </plugin>
-   -->
-<!--
-   <plugin>
-    <groupId>org.apache.cxf</groupId>
-    <artifactId>cxf-codegen-plugin</artifactId>
-    <version>${cxf.version}</version>
-    <executions>
-     <execution>
-      <id>generate-sources</id>
-      <phase>generate-sources</phase>
-      <configuration>
-       <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
-       <wsdlOptions>
-        <wsdlOption>
-         <wsdl>${basedir}/src/main/resources/wsdl/CourseService.wsdl</wsdl>
-
-         <wsdl>${basedir}/src/main/resources/wsdl/EnumerationManagementService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/OrganizationService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/AtpService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/CommentService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/DocumentService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/DocumentRelationService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/ProposalService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/StatementService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/MessageService.wsdl</wsdl>
-         <wsdl>${basedir}/src/main/resources/wsdl/LearningResultService.wsdl</wsdl>
-        <wsdl>${basedir}/src/main/resources/wsdl/LearningObjectiveService.wsdl</wsdl>
-        </wsdlOption>
-       </wsdlOptions>
-      </configuration>
-      <goals>
-       <goal>wsdl2java</goal>
-      </goals>
-     </execution>
-    </executions>
-    <dependencies>
-     <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>2.8.1</version>
-     </dependency>
-    </dependencies>
-   </plugin>
--->
   </plugins>
  </build>
 </project>
