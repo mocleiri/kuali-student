@@ -47,7 +47,7 @@ public class CreditCourseToCourseInfoConverter
  public CourseInfo convert ()
  {
   CourseInfo info = new CourseInfo ();
-  info.setId (null);
+  info.setId (cc.getId ());
   AdminOrgInfo adminOrgInfo = new AdminOrgInfoHelper ().get (ADMINISTRATION_ADMIN_ORG_TYPE, cc.getAdministeringOrgName ());
   if (adminOrgInfo != null)
   {

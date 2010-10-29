@@ -39,7 +39,7 @@ public class OrganizationToOrgInfoConverter
  public OrgInfo convert ()
  {
   OrgInfo orgInfo = new OrgInfo ();
-  orgInfo.setId (null);
+  orgInfo.setId (org.getId ());
   orgInfo.setShortName (org.getShortName ());
   orgInfo.setLongName (org.getLongName ());
   orgInfo.setSortName (org.getSortName ());

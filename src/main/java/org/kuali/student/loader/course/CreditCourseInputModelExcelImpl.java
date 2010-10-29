@@ -58,6 +58,7 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
   while (worksheetReader.next ())
   {
    CreditCourse cc = new CreditCourse ();
+   cc.setId (helper.getFixup ("id"));
    cc.setCode (helper.getFixup ("code"));
    if (cc.getCode () == null)
    {

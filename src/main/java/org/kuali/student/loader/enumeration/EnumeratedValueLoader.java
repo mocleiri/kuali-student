@@ -16,12 +16,14 @@
 package org.kuali.student.loader.enumeration;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
 import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
 import org.kuali.student.core.exceptions.AlreadyExistsException;
+import org.kuali.student.core.exceptions.DataValidationErrorException;
+import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.loader.organization.OrganizationLoadResult;
 
 /**
  *
@@ -45,14 +47,14 @@ public class EnumeratedValueLoader
  public EnumeratedValueLoader ()
  {
  }
- private Iterator<EnumeratedValue> inputDataSource;
+ private List<EnumeratedValue> inputDataSource;
 
- public Iterator<EnumeratedValue> getInputDataSource ()
+ public List<EnumeratedValue> getInputDataSource ()
  {
   return inputDataSource;
  }
 
- public void setInputDataSource (Iterator<EnumeratedValue> inputDataSource)
+ public void setInputDataSource (List<EnumeratedValue> inputDataSource)
  {
   this.inputDataSource = inputDataSource;
  }
@@ -61,11 +63,10 @@ public class EnumeratedValueLoader
  {
   List<EnumeratedValueLoadResult> results = new ArrayList (500);
   int row = 0;
-  while (inputDataSource.hasNext ())
+  for (EnumeratedValue ev : inputDataSource)
   {
    EnumeratedValueLoadResult result = new EnumeratedValueLoadResult ();
    results.add (result);
-   EnumeratedValue ev = inputDataSource.next ();
    row ++;
    EnumeratedValueInfo info = new EnumeratedValueToEnumeratedValueInfoConverter (ev).convert ();
    result.setRow (row);
@@ -73,18 +74,37 @@ public class EnumeratedValueLoader
    result.setEnumeratedValueInfo (info);
    try
    {
-    EnumeratedValueInfo createdInfo = enumerationManagementService.addEnumeratedValue (ev.getEnumerationKey (), info);
+    EnumeratedValueInfo createdInfo = enumerationManagementService.addEnumeratedValue (info.getEnumerationKey (), info);
     result.setEnumeratedValueInfo (createdInfo);
-    result.setSuccess (true);
+    result.setStatus (EnumeratedValueLoadResult.Status.CREATED);
    }
    catch (AlreadyExistsException ex)
    {
-    result.setSuccess (false);
+    result.setStatus (EnumeratedValueLoadResult.Status.ALREADY_EXISTS);
     result.setException (ex);
    }
+   // THERE IS NO DATA VALIDATION EXCEPTION THROWN!!!!!!!!
+   // AND THERE IS NO VALIDATE METHOD!!!!!!!!
+//   catch (DataValidationErrorException ex)
+//   {
+//    List<ValidationResultInfo> vris = null;
+//    try
+//    {
+//     vris = enumerationManagementService.validateEnumeratedValue ("SYSTEM", info);
+//    }
+//    catch (Exception ex1)
+//    {
+//     throw new RuntimeException (
+//       "Got an exception trying to get validation errors", ex1);
+//    }
+//    DataValidationErrorException dvex = new DataValidationErrorException (
+//      "got validation errors", vris, ex);
+//    result.setStatus (EnumeratedValueLoadResult.Status.VALIDATION_ERROR);
+//    result.setDataValidationErrorException (dvex);
+//   }
    catch (Exception ex)
    {
-    result.setSuccess (false);
+    result.setStatus (EnumeratedValueLoadResult.Status.EXCEPTION);
     result.setException (ex);
    }
   }
@@ -96,8 +116,6 @@ public class EnumeratedValueLoader
   Properties props = new Properties ();
   props.putAll (EnumeratedValueInputModelFactory.getDefaultConfig ());
   props.put (EnumeratedValueInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY);
-  props.put (EnumeratedValueInputModelFactory.SERVICE_HOST_URL, "src/main/"
    + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   EnumeratedValueInputModelFactory factory = new EnumeratedValueInputModelFactory ();

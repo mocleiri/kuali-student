@@ -82,34 +82,53 @@ public class OrganizationLoaderTest
   System.out.println (new Date () + " loading " + orgs.size ()
                       + " organizations");
 //  ccLoader.setInputDataSource (orgs.subList (372, 373).iterator ());
-  ccLoader.setInputDataSource (orgs.iterator ());
-  List<OrganizationLoadResult> results = ccLoader.update ();
-  int created = 0;
-  int failures = 0;
+  ccLoader.setInputDataSource (orgs);
+  List<OrganizationLoadResult> results = ccLoader.load ();
+    // output good results
   for (OrganizationLoadResult result : results)
   {
-   if (result.isSuccess ())
+   switch (result.getStatus ())
    {
-    created ++;
-    System.out.println (result.getOrgInfo ().getShortName () + " id = " + result.getOrgInfo ().getId ());
-   }
-   else
-   {
-    failures ++;
+    case CREATED:
+     System.out.println (result.getOrgInfo ().getShortName ()
+                         + " " + result.getStatus () + " id = "
+                         + result.getOrgInfo ().getId ());
    }
   }
-  System.out.println (created + " recordes created out of " + orgs.size () + " organizations");
-  System.out.println (failures + " records failed to load");
+
+  // output summary
   for (OrganizationLoadResult result : results)
   {
-   if ( ! result.isSuccess ())
+   result.getStatus ().increment ();
+  }
+  System.out.println (orgs.size () + " organizations");
+  for (OrganizationLoadResult.Status status :
+       OrganizationLoadResult.Status.values ())
+  {
+   System.out.println ("Total with status of " + status + " = "
+                       + status.getCount ());
+  }
+
+  // output errors
+  for (OrganizationLoadResult result : results)
+  {
+   switch (result.getStatus ())
    {
-    System.out.println (result);
+    case CREATED:
+     break;
+    default:
+     System.out.println (result);
    }
   }
-  if (failures > 0)
+  if (OrganizationLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
   {
-   fail (failures + " records failed to load");
+   throw new RuntimeException (OrganizationLoadResult.Status.VALIDATION_ERROR.getCount ()
+                               + " records failed to load");
+  }
+  if (OrganizationLoadResult.Status.EXCEPTION.getCount () > 0)
+  {
+   throw new RuntimeException (OrganizationLoadResult.Status.EXCEPTION.getCount ()
+                               + " records failed to load");
   }
  }
 }

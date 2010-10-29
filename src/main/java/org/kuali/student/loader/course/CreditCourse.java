@@ -21,13 +21,13 @@ package org.kuali.student.loader.course;
  */
 public class CreditCourse
 {
-
+private String id;
 private String code;
 private String subjectArea;
-private String courseNumberSuffixCode;
+private String courseNumberSuffix;
 private String variation;
 private String administeringOrgName;
-private String administeringOrgId;
+private String administeringOrg;
 private String transcriptTitle;
 private String courseTitle;
 private String descr;
@@ -44,6 +44,17 @@ private String requirementsMet;
 private String learningObjectives;
 private String finalExam;
 private String finalExamRationale;
+
+ public String getId ()
+ {
+  return id;
+ }
+
+ public void setId (String id)
+ {
+  this.id = id;
+ }
+
 
  public String getCode ()
  {
@@ -188,12 +199,12 @@ private String finalExamRationale;
 
  public String getAdministeringOrg ()
  {
-  return administeringOrgId;
+  return administeringOrg;
  }
 
  public void setAdministeringOrg (String orgId)
  {
-  this.administeringOrgId = orgId;
+  this.administeringOrg = orgId;
  }
 
  public String getRequirementsMet ()
@@ -238,12 +249,12 @@ private String finalExamRationale;
 
  public String getCourseNumberSuffix ()
  {
-  return courseNumberSuffixCode;
+  return courseNumberSuffix;
  }
 
  public void setCourseNumberSuffix (String suffixCode)
  {
-  this.courseNumberSuffixCode = suffixCode;
+  this.courseNumberSuffix = suffixCode;
  }
 
  public String getFinalExam ()

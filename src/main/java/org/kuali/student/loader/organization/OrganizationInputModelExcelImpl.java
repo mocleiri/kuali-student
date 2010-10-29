@@ -62,6 +62,7 @@ public class OrganizationInputModelExcelImpl implements OrganizationInputModel
    }
    list.add (org);
    row ++;
+   org.setId (helper.getFixup ("id"));
    org.setGrouping (helper.getFixup ("grouping"));
    org.setShortName (helper.getFixup ("shortName"));
    org.setLongName (helper.getFixup ("longName"));

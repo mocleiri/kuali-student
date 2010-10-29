@@ -19,8 +19,6 @@ import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.organization.dto.OrgInfo;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
 
-
-
 /**
  *
  * @author nwright
@@ -28,7 +26,31 @@ import org.kuali.student.core.validation.dto.ValidationResultInfo;
 public class OrganizationLoadResult
 {
 
- private boolean success;
+ public enum Status
+ {
+
+  CREATED,
+  NOT_PROCESSED_ALREADY_EXISTS,
+  VALIDATION_ERROR,
+  EXCEPTION;
+  private int count = 0;
+
+  public int getCount ()
+  {
+   return count;
+  }
+
+  public void setCount (int count)
+  {
+   this.count = count;
+  }
+
+  public void increment ()
+  {
+   this.count ++;
+  }
+ };
+ private Status status;
  private int row;
  private Organization organization;
  private OrgInfo orgInfo;
@@ -86,14 +108,14 @@ public class OrganizationLoadResult
   this.row = row;
  }
 
- public boolean isSuccess ()
+ public Status getStatus ()
  {
-  return success;
+  return status;
  }
 
- public void setSuccess (boolean success)
+ public void setStatus (Status status)
  {
-  this.success = success;
+  this.status = status;
  }
 
  @Override
@@ -102,14 +124,7 @@ public class OrganizationLoadResult
   StringBuilder builder = new StringBuilder ();
   builder.append (row);
   builder.append (". ");
-  if (success)
-  {
-   builder.append ("success");
-  }
-  else
-  {
-   builder.append ("error");
-  }
+  builder.append (this.status);
   builder.append (": ");
   builder.append (this.organization.getShortName ());
   builder.append (": ");
@@ -122,7 +137,8 @@ public class OrganizationLoadResult
   if (this.dataValidationErrorException != null)
   {
    String comma = "";
-   for (ValidationResultInfo vri: this.dataValidationErrorException.getValidationResults ())
+   for (ValidationResultInfo vri :
+        this.dataValidationErrorException.getValidationResults ())
    {
     builder.append (comma);
     comma = ", ";

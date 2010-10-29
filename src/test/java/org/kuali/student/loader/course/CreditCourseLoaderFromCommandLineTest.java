@@ -62,7 +62,7 @@ public class CreditCourseLoaderFromCommandLineTest
   String[] args =
   {
     "src/main/" + CreditCourseInputModelFactory.RESOURCES_DIRECTORY + "/"
-     + CreditCourseInputModelFactory.COURSES_XLS,
+     + CreditCourseInputModelFactory.COURSES_FOR_BSCI_PROGRAM_XLS,
    CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL
   };
   CreditCourseLoaderFromCommandLine.main (args);

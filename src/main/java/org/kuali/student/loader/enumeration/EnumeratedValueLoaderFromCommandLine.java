@@ -38,58 +38,19 @@ public class EnumeratedValueLoaderFromCommandLine
 
  }
 
- private void displayVersion ()
- {
-  displayVersion (System.out);
- }
-
- public void displayVersion (PrintStream out)
- {
-  //TODO: figure out how to get the version from the Maven property
-  out.println ("Kuali Student Enumerated Value Loader: Version 0.5");
-  out.println ("                         Built on September 15, 2010");
- }
-
- private void displayParameters (String inFile, String outFile)
- {
-  displayParameters (System.out, inFile, outFile);
- }
-
- public void displayParameters (PrintStream out, String inFile, String hostURL)
- {
-  out.println ("Reading: " + inFile);
-  out.println ("Updating: " + hostURL);
- }
-
- private void displayUsage ()
- {
-  displayUsage (System.out);
- }
-
- public void displayUsage (PrintStream out)
- {
-  out.println ("Usage: java -jar kuali-enumerated-value-loader.jar <inputExcel> <hostUrl>");
-  out.println ("\t@param inputExcel the fully qualified file name for the input excel file");
-  out.println ("\t@param hostUrl the fully qualified url of the serice");
-  out.println ("ex: java -jar kuali-enumerated-value-loader.jar EnumeratedValuesCIPCode2010.xls http://localhost:9393/ks-embedded-dev");
- }
 
  private void execute (String[] args)
  {
-  displayVersion ();
   if (args == null)
   {
-   displayUsage ();
    throw new RuntimeException ("args is null");
   }
   if (args.length == 0)
   {
-   displayUsage ();
    throw new RuntimeException ("no args specified");
   }
   if (args.length == 1)
   {
-   displayUsage ();
    throw new RuntimeException ("no host url specified");
   }
   String in = args[0];
@@ -99,51 +60,69 @@ public class EnumeratedValueLoaderFromCommandLine
 
  protected void generate (String inFile, String hostUrl)
  {
-  displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
   cfg.put (EnumeratedValueInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
-  cfg.put (EnumeratedValueInputModelFactory.SERVICE_HOST_URL, hostUrl);
   EnumeratedValueInputModelFactory factory = new EnumeratedValueInputModelFactory ();
   factory.setConfig (cfg);
-  EnumeratedValueInputModel ccModel = factory.getModel ();
+  EnumeratedValueInputModel evModel = factory.getModel ();
   EnumeratedValueLoader evLoader = new EnumeratedValueLoader ();
-  EnumerationManagementService enumManService = null;
+  EnumerationManagementServiceFactory servFact = new EnumerationManagementServiceFactory ();
+  servFact.setHostUrl (EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
+  EnumerationManagementService enumManService = servFact.getEnumerationManagementService ();
   evLoader.setEnumerationManagementService (enumManService);
 
   System.out.println (new Date () + " getting enumerated values...");
-  List<EnumeratedValue> enumeratedValues = ccModel.getEnumeratedValues ();
+  List<EnumeratedValue> enumeratedValues = evModel.getEnumeratedValues ();
 
   System.out.println (new Date () + " loading " + enumeratedValues.size ()
                       + " enumerated values");
 //  ccLoader.setSource (creditCourses.subList (0, 10).iterator ());
-  evLoader.setInputDataSource (enumeratedValues.iterator ());
+  evLoader.setInputDataSource (enumeratedValues);
   List<EnumeratedValueLoadResult> results = evLoader.update ();
-  int created = 0;
-  int failures = 0;
+  // output good results
   for (EnumeratedValueLoadResult result : results)
   {
-   if (result.isSuccess ())
+   switch (result.getStatus ())
    {
-    created ++;
-    System.out.println (result.getEnumeratedValue ().getEnumerationKey () + " " + result.getEnumeratedValueInfo ().getCode ());
-   }
-   else
-   {
-    failures ++;
+    case CREATED:
+     System.out.println (result.getEnumeratedValueInfo ().getCode ()
+                         + " " + result.getStatus () + " id = "
+                         + result.getEnumeratedValueInfo ().getValue ());
    }
   }
-  System.out.println (created + " recordes created out of " + enumeratedValues.size () + " enumerated values");
-  System.out.println (failures + " records failed to load");
+
+  // output summary
   for (EnumeratedValueLoadResult result : results)
   {
-   if ( ! result.isSuccess ())
+   result.getStatus ().increment ();
+  }
+  System.out.println (enumeratedValues.size () + " enumerated values");
+  for (EnumeratedValueLoadResult.Status status :
+       EnumeratedValueLoadResult.Status.values ())
+  {
+   System.out.println ("Total with status of " + status + " = "
+                       + status.getCount ());
+  }
+
+  // output errors
+  for (EnumeratedValueLoadResult result : results)
+  {
+   switch (result.getStatus ())
    {
-    System.out.println (result);
+    case VALIDATION_ERROR:
+    case EXCEPTION:
+     System.out.println (result);
    }
   }
-  if (failures > 0)
+  if (EnumeratedValueLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
   {
-   throw new RuntimeException (failures + " records failed to load");
+   throw new RuntimeException (EnumeratedValueLoadResult.Status.VALIDATION_ERROR.getCount ()
+                               + " records failed to load");
+  }
+  if (EnumeratedValueLoadResult.Status.EXCEPTION.getCount () > 0)
+  {
+   throw new RuntimeException (EnumeratedValueLoadResult.Status.EXCEPTION.getCount ()
+                               + " records failed to load");
   }
  }
 }

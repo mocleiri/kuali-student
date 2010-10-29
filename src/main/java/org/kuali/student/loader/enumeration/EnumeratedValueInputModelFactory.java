@@ -31,12 +31,12 @@ public class EnumeratedValueInputModelFactory
 
  public static final String RESOURCES_DIRECTORY = "resources";
  public static String ENUMERATED_VALUES_CIP_2010_XLS = "EnumeratedValuesCIPCode2010.xls";
+ public static String EXTRA_ENUMERATED_VALUES_BSCI_XLS = "EnumeratedValues Subject Areas For BSCI program.xls";
  public static final String EXCEL_FILES_DEFAULT_DIRECTORY_KEY =
                             "loader.model.excel.default.directory";
  public static final String EXCEL_FILES_KEY =
                             "enumerated.value.loader.model.excel.file#";
- public static final String SERVICE_HOST_URL =
-                            "loader.service.host.url";
+
 
 
  public static Properties getDefaultConfig ()
@@ -44,7 +44,6 @@ public class EnumeratedValueInputModelFactory
   Properties defaultProps = new Properties ();
   defaultProps.put (EXCEL_FILES_DEFAULT_DIRECTORY_KEY, RESOURCES_DIRECTORY);
   defaultProps.put (EXCEL_FILES_KEY + "1", ENUMERATED_VALUES_CIP_2010_XLS);
-  defaultProps.put (SERVICE_HOST_URL, EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   return defaultProps;
  }
  private Properties config;

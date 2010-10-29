@@ -119,8 +119,10 @@ public class CreditCourseLoaderTest
   {
    switch (result.getStatus ())
    {
-    case VALIDATION_ERROR:
-    case EXCEPTION:
+    case CREATED:
+    case COURSE_VARIATION_PROCESSED_WITH_MAIN_COURSE:
+     break;
+    default:
      System.out.println (result);
    }
   }

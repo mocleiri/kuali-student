@@ -62,8 +62,6 @@ public class OrganizationInputModelFactoryTest
   props.putAll (OrganizationInputModelFactory.getDefaultConfig ());
   props.put (OrganizationInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
    + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
-  props.put (OrganizationInputModelFactory.SERVICE_HOST_URL, "src/main/"
-   + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   OrganizationInputModelFactory factory = new OrganizationInputModelFactory ();
   factory.setConfig (props);

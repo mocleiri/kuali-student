@@ -32,6 +32,7 @@ public class CreditCourseInputModelFactory
 
  public static final String RESOURCES_DIRECTORY = "resources";
  public static String COURSES_XLS = "Courses.xls";
+  public static String COURSES_FOR_BSCI_PROGRAM_XLS = "Courses for BSCI program.xls";
  public static final String EXCEL_FILES_DEFAULT_DIRECTORY_KEY =
                             "loader.model.excel.default.directory";
  public static final String EXCEL_FILES_KEY =

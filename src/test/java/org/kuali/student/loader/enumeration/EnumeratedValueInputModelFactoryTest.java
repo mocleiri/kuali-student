@@ -63,8 +63,6 @@ public class EnumeratedValueInputModelFactoryTest
   props.putAll (EnumeratedValueInputModelFactory.getDefaultConfig ());
   props.put (EnumeratedValueInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
    + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY);
-  props.put (EnumeratedValueInputModelFactory.SERVICE_HOST_URL, "src/main/"
-   + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   EnumeratedValueInputModelFactory factory = new EnumeratedValueInputModelFactory ();
   factory.setConfig (props);

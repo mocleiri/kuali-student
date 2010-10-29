@@ -26,7 +26,31 @@ import org.kuali.student.core.validation.dto.ValidationResultInfo;
 public class EnumeratedValueLoadResult
 {
 
- private boolean success;
+ public enum Status
+ {
+
+  CREATED,
+  ALREADY_EXISTS,
+  VALIDATION_ERROR,
+  EXCEPTION;
+  private int count = 0;
+
+  public int getCount ()
+  {
+   return count;
+  }
+
+  public void setCount (int count)
+  {
+   this.count = count;
+  }
+
+  public void increment ()
+  {
+   this.count ++;
+  }
+ };
+ private Status status;
  private int row;
  private EnumeratedValue enumeratedValue;
  private EnumeratedValueInfo enumeratedValueInfo;
@@ -84,14 +108,14 @@ public class EnumeratedValueLoadResult
   this.row = row;
  }
 
- public boolean isSuccess ()
+ public Status getStatus ()
  {
-  return success;
+  return status;
  }
 
- public void setSuccess (boolean success)
+ public void setStatus (Status status)
  {
-  this.success = success;
+  this.status = status;
  }
 
  @Override
@@ -100,14 +124,7 @@ public class EnumeratedValueLoadResult
   StringBuilder builder = new StringBuilder ();
   builder.append (row);
   builder.append (". ");
-  if (success)
-  {
-   builder.append ("success");
-  }
-  else
-  {
-   builder.append ("error");
-  }
+  builder.append (status);
   builder.append (": ");
   builder.append (this.enumeratedValue.getCode ());
   builder.append (": ");
@@ -120,7 +137,8 @@ public class EnumeratedValueLoadResult
   if (this.dataValidationErrorException != null)
   {
    String comma = "";
-   for (ValidationResultInfo vri: this.dataValidationErrorException.getValidationResults ())
+   for (ValidationResultInfo vri :
+        this.dataValidationErrorException.getValidationResults ())
    {
     builder.append (comma);
     comma = ", ";

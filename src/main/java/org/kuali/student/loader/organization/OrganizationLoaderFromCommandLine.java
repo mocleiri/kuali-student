@@ -38,58 +38,18 @@ public class OrganizationLoaderFromCommandLine
 
  }
 
- private void displayVersion ()
- {
-  displayVersion (System.out);
- }
-
- public void displayVersion (PrintStream out)
- {
-  //TODO: figure out how to get the version from the Maven property
-  out.println ("Kuali Student Organization Loader: Version 0.5");
-  out.println ("                     Built on September 9, 2010");
- }
-
- private void displayParameters (String inFile, String outFile)
- {
-  displayParameters (System.out, inFile, outFile);
- }
-
- public void displayParameters (PrintStream out, String inFile, String hostURL)
- {
-  out.println ("Reading: " + inFile);
-  out.println ("Updating: " + hostURL);
- }
-
- private void displayUsage ()
- {
-  displayUsage (System.out);
- }
-
- public void displayUsage (PrintStream out)
- {
-  out.println ("Usage: java -jar kuali-organization-loader.jar <inputExcel> <hostUrl>");
-  out.println ("\t@param inputExcel the fully qualified file name for the input excel file");
-  out.println ("\t@param hostUrl the fully qualified url of the serice");
-  out.println ("ex: java -jar kuali-organization-loader-loader.jar AccreditingBodies.xls http://localhost:9393/ks-embedded-dev");
- }
-
  private void execute (String[] args)
  {
-  displayVersion ();
   if (args == null)
   {
-   displayUsage ();
    throw new RuntimeException ("args is null");
   }
   if (args.length == 0)
   {
-   displayUsage ();
    throw new RuntimeException ("no args specified");
   }
   if (args.length == 1)
   {
-   displayUsage ();
    throw new RuntimeException ("no host url specified");
   }
   String in = args[0];
@@ -99,16 +59,16 @@ public class OrganizationLoaderFromCommandLine
 
  protected void generate (String inFile, String hostUrl)
  {
-  displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
   cfg.put (OrganizationInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
-  cfg.put (OrganizationInputModelFactory.SERVICE_HOST_URL, hostUrl);
   OrganizationInputModelFactory factory = new OrganizationInputModelFactory ();
   factory.setConfig (cfg);
   OrganizationInputModel orgModel = factory.getModel ();
-  OrganizationLoader ccLoader = new OrganizationLoader ();
-  OrganizationService organizationService = null;
-  ccLoader.setOrganizationService (organizationService);
+  OrganizationLoader orgLoader = new OrganizationLoader ();
+  OrganizationServiceFactory servFact = new OrganizationServiceFactory ();
+  servFact.setHostUrl (hostUrl);
+  OrganizationService organizationService = servFact.getOrganizationService ();
+  orgLoader.setOrganizationService (organizationService);
 
   System.out.println (new Date () + " getting organizations...");
   List<Organization> organizations = orgModel.getOrganizations ();
@@ -116,34 +76,53 @@ public class OrganizationLoaderFromCommandLine
   System.out.println (new Date () + " loading " + organizations.size ()
                       + " organizations");
 //  ccLoader.setSource (organizations.subList (0, 10).iterator ());
-  ccLoader.setInputDataSource (organizations.iterator ());
-  List<OrganizationLoadResult> results = ccLoader.update ();
-  int created = 0;
-  int failures = 0;
+  orgLoader.setInputDataSource (organizations);
+  List<OrganizationLoadResult> results = orgLoader.load ();
+  // output good results
   for (OrganizationLoadResult result : results)
   {
-   if (result.isSuccess ())
+   switch (result.getStatus ())
    {
-    created ++;
-    System.out.println (result.getOrgInfo ().getShortName () + " id = " + result.getOrgInfo ().getId ());
-   }
-   else
-   {
-    failures ++;
+    case CREATED:
+     System.out.println (result.getOrgInfo ().getShortName ()
+                         + " " + result.getStatus () + " id = "
+                         + result.getOrgInfo ().getId ());
    }
   }
-  System.out.println (created + " recordes created out of " + organizations.size () + " organizations");
-  System.out.println (failures + " records failed to load");
+
+  // output summary
   for (OrganizationLoadResult result : results)
   {
-   if ( ! result.isSuccess ())
+   result.getStatus ().increment ();
+  }
+  System.out.println (organizations.size () + " organizations");
+  for (OrganizationLoadResult.Status status :
+       OrganizationLoadResult.Status.values ())
+  {
+   System.out.println ("Total with status of " + status + " = "
+                       + status.getCount ());
+  }
+
+  // output errors
+  for (OrganizationLoadResult result : results)
+  {
+   switch (result.getStatus ())
    {
-    System.out.println (result);
+    case CREATED:
+     break;
+    default:
+     System.out.println (result);
    }
   }
-  if (failures > 0)
+  if (OrganizationLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
   {
-   throw new RuntimeException (failures + " records failed to load");
+   throw new RuntimeException (OrganizationLoadResult.Status.VALIDATION_ERROR.getCount ()
+                               + " records failed to load");
+  }
+  if (OrganizationLoadResult.Status.EXCEPTION.getCount () > 0)
+  {
+   throw new RuntimeException (OrganizationLoadResult.Status.EXCEPTION.getCount ()
+                               + " records failed to load");
   }
  }
 }

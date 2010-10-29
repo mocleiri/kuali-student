@@ -31,12 +31,11 @@ public class OrganizationInputModelFactory
 
  public static final String RESOURCES_DIRECTORY = "resources";
  public static String ACCREDITING_BODIES_XLS = "AccreditingBodies.xls";
+ public static String ORGS_FOR_BSCI = "Organizations for BSCI program.xls";
  public static final String EXCEL_FILES_DEFAULT_DIRECTORY_KEY =
                             "loader.model.excel.default.directory";
  public static final String EXCEL_FILES_KEY =
                             "credit.course.loader.model.excel.file#";
- public static final String SERVICE_HOST_URL =
-                            "loader.service.host.url";
 
 
  public static Properties getDefaultConfig ()
@@ -44,7 +43,6 @@ public class OrganizationInputModelFactory
   Properties defaultProps = new Properties ();
   defaultProps.put (EXCEL_FILES_DEFAULT_DIRECTORY_KEY, RESOURCES_DIRECTORY);
   defaultProps.put (EXCEL_FILES_KEY + "1", ACCREDITING_BODIES_XLS);
-  defaultProps.put (SERVICE_HOST_URL, OrganizationServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   return defaultProps;
  }
  private Properties config;

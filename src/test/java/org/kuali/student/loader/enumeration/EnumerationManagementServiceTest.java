@@ -44,7 +44,8 @@ public class EnumerationManagementServiceTest
  {
   EnumerationManagementServiceFactory factory =
                                       new EnumerationManagementServiceFactory ();
-  factory.setHostUrl (EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
+  factory.setHostUrl (
+    EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   enumerationManagementService = factory.getEnumerationManagementService ();
  }
 

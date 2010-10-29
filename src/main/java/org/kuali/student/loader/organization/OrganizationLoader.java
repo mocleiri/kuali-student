@@ -16,12 +16,13 @@
 package org.kuali.student.loader.organization;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import org.kuali.student.core.exceptions.AlreadyExistsException;
+import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.organization.dto.OrgInfo;
 import org.kuali.student.core.organization.service.OrganizationService;
-
+import org.kuali.student.core.validation.dto.ValidationResultInfo;
 
 /**
  *
@@ -45,46 +46,64 @@ public class OrganizationLoader
  public OrganizationLoader ()
  {
  }
- private Iterator<Organization> inputDataSource;
+ private List<Organization> inputDataSource;
 
- public Iterator<Organization> getInputDataSource ()
+ public List<Organization> getInputDataSource ()
  {
   return inputDataSource;
  }
 
- public void setInputDataSource (Iterator<Organization> inputDataSource)
+ public void setInputDataSource (List<Organization> inputDataSource)
  {
   this.inputDataSource = inputDataSource;
  }
 
- public List<OrganizationLoadResult> update ()
+ public List<OrganizationLoadResult> load ()
  {
   List<OrganizationLoadResult> results = new ArrayList (500);
   int row = 0;
-  while (inputDataSource.hasNext ())
+  for (Organization org : inputDataSource)
   {
    OrganizationLoadResult result = new OrganizationLoadResult ();
    results.add (result);
-   Organization cc = inputDataSource.next ();
    row ++;
-   OrgInfo info = new OrganizationToOrgInfoConverter (cc).convert ();
+   OrgInfo info = new OrganizationToOrgInfoConverter (org).convert ();
    result.setRow (row);
-   result.setOrganization (cc);
+   result.setOrganization (org);
    result.setOrgInfo (info);
    try
    {
-    OrgInfo createdInfo = getOrganizationService ().createOrganization (info.getType (), info);
+    OrgInfo createdInfo = getOrganizationService ().createOrganization (
+      info.getType (), info);
     result.setOrgInfo (createdInfo);
-    result.setSuccess (true);
+    result.setStatus (OrganizationLoadResult.Status.CREATED);
    }
-//   catch (DataValidationErrorException ex)
-//   {
-//    result.setSuccess (false);
-//    result.setDataValidationErrorException (ex.getFaultInfo ());
-//   }
+   catch (AlreadyExistsException ex)
+   {
+    //TODO update if already exists?
+    result.setStatus (OrganizationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
+    result.setException (ex);
+   }
+   catch (DataValidationErrorException ex)
+   {
+    List<ValidationResultInfo> vris = null;
+    try
+    {
+     vris = organizationService.validateOrg ("SYSTEM", info);
+    }
+    catch (Exception ex1)
+    {
+     throw new RuntimeException (
+       "Got an exception trying to get validation errors", ex1);
+    }
+    DataValidationErrorException dvex = new DataValidationErrorException (
+      "got validation errors", vris, ex);
+    result.setStatus (OrganizationLoadResult.Status.VALIDATION_ERROR);
+    result.setDataValidationErrorException (dvex);
+   }
    catch (Exception ex)
    {
-    result.setSuccess (false);
+    result.setStatus (OrganizationLoadResult.Status.EXCEPTION);
     result.setException (ex);
    }
   }
@@ -95,17 +114,12 @@ public class OrganizationLoader
  {
   Properties props = new Properties ();
   props.putAll (OrganizationInputModelFactory.getDefaultConfig ());
-  props.put (OrganizationInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
-  props.put (OrganizationInputModelFactory.SERVICE_HOST_URL, "src/main/"
-   + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (OrganizationInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY,
+             "src/main/"
+             + OrganizationInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   OrganizationInputModelFactory factory = new OrganizationInputModelFactory ();
   factory.setConfig (props);
   return factory;
  }
-
- 
-
-
 }

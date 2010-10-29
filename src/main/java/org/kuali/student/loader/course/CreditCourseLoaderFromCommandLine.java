@@ -38,61 +38,18 @@ public class CreditCourseLoaderFromCommandLine
 
  }
 
- private void displayVersion ()
- {
-  displayVersion (System.out);
- }
-
- public void displayVersion (PrintStream out)
- {
-  //TODO: figure out how to get the version from the Maven property
-  out.println ("Kuali Student Credit Course Loader: Version 0.5");
-  out.println ("                     Built on September 9, 2010");
- }
-
- private void displayParameters (String inFile, String outFile)
- {
-  displayParameters (System.out, inFile, outFile);
- }
-
- public void displayParameters (PrintStream out, String inFile, String hostURL)
- {
-  out.println ("Reading: " + inFile);
-  out.println ("Updating: " + hostURL);
- }
-
- private void displayUsage ()
- {
-  displayUsage (System.out);
- }
-
- public void displayUsage (PrintStream out)
- {
-  out.println (
-    "Usage: java -jar kuali-credit-course-loader.jar <inputExcel> <hostUrl>");
-  out.println (
-    "\t@param inputExcel the fully qualified file name for the input excel file");
-  out.println ("\t@param hostUrl the fully qualified url of the serice");
-  out.println (
-    "ex: java -jar kuali-credit-course-loader.jar courses.xls http://localhost:9393/ks-embedded-dev");
- }
-
  private void execute (String[] args)
  {
-  displayVersion ();
   if (args == null)
   {
-   displayUsage ();
    throw new RuntimeException ("args is null");
   }
   if (args.length == 0)
   {
-   displayUsage ();
    throw new RuntimeException ("no args specified");
   }
   if (args.length == 1)
   {
-   displayUsage ();
    throw new RuntimeException ("no host url specified");
   }
   String in = args[0];
@@ -102,7 +59,6 @@ public class CreditCourseLoaderFromCommandLine
 
  protected void generate (String inFile, String hostUrl)
  {
-  displayParameters (inFile, hostUrl);
   Properties cfg = new Properties ();
   cfg.put (CreditCourseInputModelFactory.EXCEL_FILES_KEY + "1", inFile);
   CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
@@ -154,8 +110,10 @@ public class CreditCourseLoaderFromCommandLine
   {
    switch (result.getStatus ())
    {
-    case VALIDATION_ERROR:
-    case EXCEPTION:
+    case CREATED:
+    case COURSE_VARIATION_PROCESSED_WITH_MAIN_COURSE:
+     break;
+    default:
      System.out.println (result);
    }
   }

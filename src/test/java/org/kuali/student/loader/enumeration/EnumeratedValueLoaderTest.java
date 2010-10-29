@@ -35,7 +35,6 @@ public class EnumeratedValueLoaderTest
  public EnumeratedValueLoaderTest ()
  {
  }
-
  private static EnumerationManagementService enumerationManagementService;
 
  @BeforeClass
@@ -43,7 +42,8 @@ public class EnumeratedValueLoaderTest
  {
   EnumerationManagementServiceFactory factory =
                                       new EnumerationManagementServiceFactory ();
-  factory.setHostUrl (EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
+  factory.setHostUrl (
+    EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   enumerationManagementService = factory.getEnumerationManagementService ();
  }
 
@@ -78,39 +78,57 @@ public class EnumeratedValueLoaderTest
     getModel ();
 
   System.out.println (new Date () + " getting enumerated values...");
-  List<EnumeratedValue> creditCourses = ccModel.getEnumeratedValues ();
+  List<EnumeratedValue> enumeratedValues = ccModel.getEnumeratedValues ();
 
-  System.out.println (new Date () + " loading " + creditCourses.size ()
+  System.out.println (new Date () + " loading " + enumeratedValues.size ()
                       + " enumerated values");
-  ccLoader.setInputDataSource (creditCourses.subList (1, 10).iterator ());
+  ccLoader.setInputDataSource (enumeratedValues);
 //  ccLoader.setInputDataSource (creditCourses.iterator ());
   List<EnumeratedValueLoadResult> results = ccLoader.update ();
-  int created = 0;
-  int failures = 0;
+  // output good results
   for (EnumeratedValueLoadResult result : results)
   {
-   if (result.isSuccess ())
+   switch (result.getStatus ())
    {
-    created ++;
-    System.out.println (result.getEnumeratedValueInfo ().getCode ());
-   }
-   else
-   {
-    failures ++;
+    case CREATED:
+     System.out.println (result.getEnumeratedValueInfo ().getCode ()
+                         + " " + result.getStatus () + " id = "
+                         + result.getEnumeratedValueInfo ().getValue ());
    }
   }
-  System.out.println (created + " recordes created out of " + creditCourses.size () + " credit courses");
-  System.out.println (failures + " records failed to load");
+
+  // output summary
   for (EnumeratedValueLoadResult result : results)
   {
-   if ( ! result.isSuccess ())
+   result.getStatus ().increment ();
+  }
+  System.out.println (enumeratedValues.size () + " enumerated values");
+  for (EnumeratedValueLoadResult.Status status :
+       EnumeratedValueLoadResult.Status.values ())
+  {
+   System.out.println ("Total with status of " + status + " = "
+                       + status.getCount ());
+  }
+
+  // output errors
+  for (EnumeratedValueLoadResult result : results)
+  {
+   switch (result.getStatus ())
    {
-    System.out.println (result);
+    case VALIDATION_ERROR:
+    case EXCEPTION:
+     System.out.println (result);
    }
   }
-  if (failures > 0)
+  if (EnumeratedValueLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
   {
-   fail (failures + " records failed to load");
+   throw new RuntimeException (EnumeratedValueLoadResult.Status.VALIDATION_ERROR.getCount ()
+                               + " records failed to load");
+  }
+  if (EnumeratedValueLoadResult.Status.EXCEPTION.getCount () > 0)
+  {
+   throw new RuntimeException (EnumeratedValueLoadResult.Status.EXCEPTION.getCount ()
+                               + " records failed to load");
   }
  }
 }
