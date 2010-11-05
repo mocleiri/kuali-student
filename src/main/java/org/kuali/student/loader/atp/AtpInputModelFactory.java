@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may	obtain a copy of the License at
  *
- * 	http://www.osedu.org/licenses/ECL-2.0
+ * 	http://www.osedu.atp/licenses/ECL-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,6 @@ package org.kuali.student.loader.atp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.loader.course.CreditCourseInputModel;
-import org.kuali.student.loader.course.CreditCourseInputModelCache;
-import org.kuali.student.loader.course.CreditCourseInputModelExcelImpl;
 import org.kuali.student.spreadsheet.CompositeSpreadsheetReader;
 import org.kuali.student.spreadsheet.ExcelSpreadsheetReader;
 import org.kuali.student.spreadsheet.SpreadsheetReader;
@@ -33,7 +30,7 @@ public class AtpInputModelFactory
 {
 
  public static final String RESOURCES_DIRECTORY = "resources";
- public static String COURSES_XLS = "Courses.xls";
+ public static String ATP_CALENDAR = "ATP Calendar.xls";
  public static final String EXCEL_FILES_DEFAULT_DIRECTORY_KEY =
                             "loader.model.excel.default.directory";
  public static final String EXCEL_FILES_KEY =
@@ -45,7 +42,7 @@ public class AtpInputModelFactory
  {
   Properties defaultProps = new Properties ();
   defaultProps.put (EXCEL_FILES_DEFAULT_DIRECTORY_KEY, RESOURCES_DIRECTORY);
-  defaultProps.put (EXCEL_FILES_KEY + "1", COURSES_XLS);
+  defaultProps.put (EXCEL_FILES_KEY + "1", ATP_CALENDAR);
   defaultProps.put (SERVICE_HOST_URL, AtpServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   return defaultProps;
  }
@@ -61,7 +58,7 @@ public class AtpInputModelFactory
   this.config = config;
  }
 
- public CreditCourseInputModel getModel ()
+ public AtpInputModel getModel ()
  {
   List<SpreadsheetReader> list = new ArrayList ();
   String directory = config.getProperty (EXCEL_FILES_DEFAULT_DIRECTORY_KEY);
@@ -84,12 +81,8 @@ public class AtpInputModelFactory
    }
   }
   SpreadsheetReader reader = new CompositeSpreadsheetReader (list);
-  CreditCourseInputModelExcelImpl model =
-                                   new CreditCourseInputModelExcelImpl (reader);
-//  ContextFactory contextFactory = new ContextFactory ();
-//  contextFactory.setConfig (config);
-//  model.setContext (contextFactory.getInstance ());
-  CreditCourseInputModelCache cache = new CreditCourseInputModelCache (model);
+  AtpInputModelExcelImpl model =  new AtpInputModelExcelImpl (reader);
+  AtpInputModelCache cache = new AtpInputModelCache (model);
   return cache;
  }
 }

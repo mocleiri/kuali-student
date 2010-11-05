@@ -15,8 +15,8 @@
  */
 package org.kuali.student.loader.course;
 
-import org.kuali.student.loader.atp.AdminOrgInfoHelper;
-import org.kuali.student.loader.atp.AmountInfoHelper;
+import org.kuali.student.loader.util.AdminOrgInfoHelper;
+import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
 import java.util.List;
 import org.kuali.student.loader.util.DateHelper;

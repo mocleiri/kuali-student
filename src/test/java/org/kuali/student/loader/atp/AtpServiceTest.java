@@ -17,7 +17,6 @@ package org.kuali.student.loader.atp;
 
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.course.CourseServiceFactory;
-import org.kuali.student.loader.atp.AtpServiceFactory;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,6 +27,7 @@ import org.kuali.student.core.atp.dto.AtpInfo;
 import org.kuali.student.core.atp.dto.AtpTypeInfo;
 import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.dto.StatusInfo;
+import org.kuali.student.core.exceptions.AlreadyExistsException;
 import org.kuali.student.core.exceptions.DoesNotExistException;
 import org.kuali.student.core.exceptions.OperationFailedException;
 
@@ -141,6 +141,75 @@ public class AtpServiceTest
  }
 
  /**
+  * Test of GetAtpanization method in AtpFinder
+  */
+ @Test
+ public void testThrowsAlreadyExistsExceptionOnCreate ()
+ {
+  System.out.println ("throwsAlreadyExistsExceptionOnCreate");
+
+//  List<AtpTypeInfo> expResult = new ArrayList ();
+  String id = "kuali.atp.FA2008-2009";
+  AtpInfo result;
+
+  try
+  {
+   result = atpService.getAtp (id);
+  }
+  catch (Exception ex)
+  {
+   throw new RuntimeException (ex);
+  }
+  assertNotNull (result);
+  System.out.print (result.getId ());
+  System.out.print ("|");
+  System.out.print (result.getName ());
+  System.out.println ("|");
+  try
+  {
+   atpService.createAtp (result.getType (), result.getId (), result);
+   fail ("should have gotten already exists exception");
+  }
+  catch (AlreadyExistsException ex)
+  {
+   // should succeed
+  }
+  catch (Exception ex)
+  {
+   fail ("Did not get an AlreadyExistsException but instead got a "
+         + ex.toString ());
+  }
+
+ }
+
+ /**
+  * Test of GetAtpanization method in AtpFinder
+  */
+ @Test
+ public void testThrowsDoesNotExistExceptionOnGet ()
+ {
+  System.out.println ("testThrowsDoesNotExistExceptionOnGet");
+
+//  List<AtpTypeInfo> expResult = new ArrayList ();
+  String id = "kuali.atp.THIS SHOULD NOT EXIST FA2008-2009";
+  AtpInfo result;
+
+  try
+  {
+   result = atpService.getAtp (id);
+   fail ("should have thrown does not exist exception");
+  }
+  catch (DoesNotExistException ex)
+  {
+   // success
+  }
+  catch (Exception ex)
+  {
+   throw new RuntimeException (ex);
+  }
+ }
+
+ /**
   * Test of CreateAtpanization method in AtpFinder
   */
  @Test
@@ -153,11 +222,12 @@ public class AtpServiceTest
   info.setState ("actual");
   info.setId ("kuali.atp.FA2001-02");
   info.setName ("short name");
-  info.setDesc (new RichTextInfoHelper ().getFromPlain ("long name that is longer than the short name"));
+  info.setDesc (new RichTextInfoHelper ().getFromPlain (
+    "long name that is longer than the short name"));
   AtpInfo result = null;
   try
   {
-   result = atpService.createAtp (info.getId (), info.getType (), info);
+   result = atpService.createAtp (info.getType (), info.getId (), info);
   }
   catch (Exception ex)
   {

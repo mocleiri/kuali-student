@@ -16,6 +16,7 @@
 package org.kuali.student.loader;
 
 import java.io.PrintStream;
+import org.kuali.student.loader.atp.AtpLoaderFromCommandLine;
 import org.kuali.student.loader.course.CreditCourseLoaderFromCommandLine;
 import org.kuali.student.loader.enumeration.EnumeratedValueLoaderFromCommandLine;
 import org.kuali.student.loader.organization.OrganizationLoaderFromCommandLine;
@@ -46,8 +47,8 @@ public class LoadFromCommandLine
  public void displayVersion (PrintStream out)
  {
   //TODO: figure out how to get the version from the Maven property
-  out.println ("Kuali Student Loader: Version 0.7");
-  out.println ("        Built on October 29, 2010");
+  out.println ("Kuali Student Loader: Version 0.8");
+  out.println ("        Built on November 4, 2010");
  }
 
  private void displayParameters (String whatToLoad, String inFile,
@@ -74,10 +75,11 @@ public class LoadFromCommandLine
   out.println (
     "Usage: java -jar ks-loader.jar <whatToLoad> <inputExcel> <hostUrl>");
   out.println (
-    "\t@param whatToLoad organization, course or enumeration (coming soon: atp )");
+    "\t@param whatToLoad organization, course, enumeration or atp");
   out.println (
     "\t@param inputExcel the fully qualified file name for the specially formatted input excel file");
-  out.println ("\t@param hostUrl the fully qualified url of the running Kuali Student web service");
+  out.println (
+    "\t@param hostUrl the fully qualified url of the running Kuali Student web service");
   out.println (
     "ex: java -jar ks-loader.jar organization AccreditingBodies.xls http://localhost:9393/ks-embedded-dev");
  }
@@ -124,7 +126,7 @@ public class LoadFromCommandLine
   }
   if (whatToLoad.equalsIgnoreCase ("organization"))
   {
-  displayParameters (whatToLoad, inFile, hostUrl);
+   displayParameters (whatToLoad, inFile, hostUrl);
    String[] args = new String[2];
    args[0] = inFile;
    args[1] = hostUrl;
@@ -133,8 +135,12 @@ public class LoadFromCommandLine
   }
   if (whatToLoad.equalsIgnoreCase ("atp"))
   {
-     displayParameters (whatToLoad, inFile, hostUrl);
-   throw new RuntimeException ("atp coming soon");
+   displayParameters (whatToLoad, inFile, hostUrl);
+   String[] args = new String[2];
+   args[0] = inFile;
+   args[1] = hostUrl;
+   AtpLoaderFromCommandLine.main (args);
+   return;
   }
   if (whatToLoad.equalsIgnoreCase ("enumeration"))
   {
@@ -145,8 +151,8 @@ public class LoadFromCommandLine
    EnumeratedValueLoaderFromCommandLine.main (args);
    return;
   }
-   displayUsage ();
-   displayParameters (whatToLoad, inFile, hostUrl);
-   throw new RuntimeException ("unknown type of object to be laoded" + whatToLoad);
+  displayUsage ();
+  displayParameters (whatToLoad, inFile, hostUrl);
+  throw new RuntimeException ("unknown type of object to be laoded" + whatToLoad);
  }
 }
