@@ -76,7 +76,7 @@ public class LoadFromCommandLine
   out.println (
     "Usage: java -jar ks-loader.jar <whatToLoad> <inputExcel> <hostUrl>");
   out.println (
-    "\t@param whatToLoad organization, course, enumeration, atp or test");
+    "\t@param whatToLoad 'organization', 'course', 'enumeration', 'atp' or 'test' (for standardized tests)");
   out.println (
     "\t@param inputExcel the fully qualified file name for the specially formatted input excel file");
   out.println (
