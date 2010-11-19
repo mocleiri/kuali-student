@@ -18,6 +18,7 @@ package org.kuali.student.loader.standardizedtest;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.lu.dto.CluInfo;
+import org.kuali.student.lum.lu.dto.CluSetInfo;
 
 /**
  *
@@ -28,10 +29,12 @@ public class StandardizedTestLoadResult
 
  public enum Status
  {
-
-  CREATED,
-  NOT_PROCESSED_ALREADY_EXISTS,
-  VALIDATION_ERROR,
+  CREATED_JUST_CLUSET,
+  CREATED_BOTH,
+  CREATED_JUST_CLU,
+  NOT_PROCESSED_BOTH_ALREADY_EXISTS,
+  CLU_VALIDATION_ERROR,
+  CLUSET_VALIDATION_ERROR,
   EXCEPTION;
 
   private int count = 0;
@@ -67,6 +70,20 @@ public class StandardizedTestLoadResult
  {
   this.cluInfo = cluInfo;
  }
+
+ private CluSetInfo cluSetInfo;
+
+ public CluSetInfo getCluSetInfo ()
+ {
+  return cluSetInfo;
+ }
+
+ public void setCluSetInfo (CluSetInfo cluSetInfo)
+ {
+  this.cluSetInfo = cluSetInfo;
+ }
+
+
 
  public StandardizedTest getStandardizedTest ()
  {

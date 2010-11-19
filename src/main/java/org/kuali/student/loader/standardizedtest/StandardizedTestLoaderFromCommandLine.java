@@ -83,8 +83,8 @@ public class StandardizedTestLoaderFromCommandLine
   {
    switch (result.getStatus ())
    {
-    case CREATED:
-    case NOT_PROCESSED_ALREADY_EXISTS:
+    case CREATED_BOTH:
+    case NOT_PROCESSED_BOTH_ALREADY_EXISTS:
      System.out.println (result.getCluInfo ().getOfficialIdentifier ().getCode ()
                          + " " + result.getStatus () + " id = "
                          + result.getCluInfo ().getId ());
@@ -109,16 +109,16 @@ public class StandardizedTestLoaderFromCommandLine
   {
    switch (result.getStatus ())
    {
-    case CREATED:
-    case NOT_PROCESSED_ALREADY_EXISTS:
+    case CREATED_BOTH:
+    case NOT_PROCESSED_BOTH_ALREADY_EXISTS:
      break;
     default:
      System.out.println (result);
    }
   }
-  if (StandardizedTestLoadResult.Status.VALIDATION_ERROR.getCount () > 0)
+  if (StandardizedTestLoadResult.Status.CLU_VALIDATION_ERROR.getCount () > 0)
   {
-   throw new RuntimeException (StandardizedTestLoadResult.Status.VALIDATION_ERROR.getCount ()
+   throw new RuntimeException (StandardizedTestLoadResult.Status.CLU_VALIDATION_ERROR.getCount ()
                                + " records failed to load");
   }
   if (StandardizedTestLoadResult.Status.EXCEPTION.getCount () > 0)

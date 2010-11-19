@@ -105,7 +105,7 @@ public class OrganizationServiceTest
    System.out.print (typeInfo.getExpirationDate ());
    System.out.println ("|");
   }
-  assertEquals (18, result.size ());
+  assertEquals (19, result.size ());
  }
 
  /**

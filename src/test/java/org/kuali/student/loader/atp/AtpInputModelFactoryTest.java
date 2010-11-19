@@ -86,7 +86,7 @@ public class AtpInputModelFactoryTest
   }
   Atp org = result.getAtps ().get (0);
   assertEquals ("kuali.atp.AY2008-2009", org.getId ());
-  assertEquals ("AY 2008-09", org.getName ());
+  assertEquals ("AY 2008-2009", org.getName ());
   assertEquals ("Academic Year 2008-2009", org.getDesc ().getPlain ());
   assertEquals ("kuali.atp.type.AY", org.getType ());
   assertEquals ("Actual", org.getState ());

@@ -15,12 +15,15 @@
  */
 package org.kuali.student.loader.standardizedtest;
 
+import java.util.Arrays;
 import java.util.List;
+import org.kuali.student.core.exceptions.AlreadyExistsException;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.exceptions.OperationFailedException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.lum.lu.dto.CluInfo;
+import org.kuali.student.lum.lu.dto.CluSetInfo;
 import org.kuali.student.lum.lu.service.LuService;
 
 /**
@@ -73,10 +76,6 @@ public class StandardizedTestLoader
    {
     oldClu = luService.getClu (info.getId ());
    }
-   catch (OperationFailedException ex)
-   {
-    // ignore for now because this often means the id does not exist until exceptions get fixed
-   }
    catch (DoesNotExistException ex)
    {
     // ignore because that is what we are trying to find out
@@ -90,14 +89,16 @@ public class StandardizedTestLoader
    if (oldClu != null)
    {
     result.setStatus (
-      StandardizedTestLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
+      StandardizedTestLoadResult.Status.NOT_PROCESSED_BOTH_ALREADY_EXISTS);
+    this.createCluSet (result);
     continue;
    }
    try
    {
     CluInfo createdInfo = luService.createClu (info.getType (), info);
     result.setCluInfo (createdInfo);
-    result.setStatus (StandardizedTestLoadResult.Status.CREATED);
+    result.setStatus (StandardizedTestLoadResult.Status.CREATED_JUST_CLU);
+    this.createCluSet (result);
     continue;
    }
    catch (DataValidationErrorException ex)
@@ -114,7 +115,7 @@ public class StandardizedTestLoader
     }
     DataValidationErrorException dvex = new DataValidationErrorException (
       "got validation errors", vris, ex);
-    result.setStatus (StandardizedTestLoadResult.Status.VALIDATION_ERROR);
+    result.setStatus (StandardizedTestLoadResult.Status.CLU_VALIDATION_ERROR);
     result.setDataValidationErrorException (dvex);
     continue;
    }
@@ -127,5 +128,106 @@ public class StandardizedTestLoader
 
   }
   return results;
+ }
+
+ private void createCluSet (StandardizedTestLoadResult result)
+ {
+  CluSetInfo info = new CluSetInfo ();
+  CluInfo cluInfo = result.getCluInfo ();
+//  CLU-ID-SAT-SUBJ-SPANISH-LISTENING-SET
+//  123456789012345678901234567890123456
+//  0        1         2         3
+
+  info.setId (cluInfo.getId () + "-SET");
+  result.setCluSetInfo (info);
+  CluSetInfo oldInfo = null;
+  try
+  {
+   oldInfo = luService.getCluSetInfo (info.getId ());
+  }
+  catch (DoesNotExistException ex)
+  {
+   // ignore because that is what we are checking
+  }
+  catch (Exception ex)
+  {
+   result.setException (ex);
+   result.setStatus (StandardizedTestLoadResult.Status.EXCEPTION);
+   return;
+  }
+  if (oldInfo != null)
+  {
+   result.setCluSetInfo (oldInfo);
+   if (result.getStatus ().equals (
+     StandardizedTestLoadResult.Status.CREATED_JUST_CLU))
+   {
+    result.setStatus (StandardizedTestLoadResult.Status.CREATED_JUST_CLU);
+    return;
+   }
+   else
+   {
+    result.setStatus (
+      StandardizedTestLoadResult.Status.NOT_PROCESSED_BOTH_ALREADY_EXISTS);
+    return;
+   }
+  }
+  info.setCluIds (Arrays.asList (cluInfo.getId ()));
+  info.setEffectiveDate (cluInfo.getEffectiveDate ());
+  info.setExpirationDate (cluInfo.getExpirationDate ());
+  info.setType ("kuali.cluSet.type.Test");
+  info.setState ("active");
+  info.setName (cluInfo.getOfficialIdentifier ().getLongName ());
+  String descr = "Set that holds just the one standardized test "
+                 + cluInfo.getOfficialIdentifier ().getLongName ();
+  info.setDescr (new RichTextInfoHelper ().getFromPlain (descr));
+  try
+  {
+   System.out.println ("before.id=" + info.getId ());
+   CluSetInfo createdCluSetInfo = luService.createCluSet (info.getType (), info);
+   System.out.println ("after.id=" + createdCluSetInfo.getId ());
+   result.setCluSetInfo (createdCluSetInfo);
+   if (result.getStatus ().equals (
+     StandardizedTestLoadResult.Status.CREATED_JUST_CLU))
+   {
+    result.setStatus (StandardizedTestLoadResult.Status.CREATED_BOTH);
+    return;
+   }
+   else
+   {
+    result.setStatus (StandardizedTestLoadResult.Status.CREATED_JUST_CLUSET);
+    return;
+   }
+  }
+  catch (AlreadyExistsException ex)
+  {
+   result.setStatus (
+     StandardizedTestLoadResult.Status.NOT_PROCESSED_BOTH_ALREADY_EXISTS);
+   return;
+  }
+  catch (DataValidationErrorException ex)
+  {
+   List<ValidationResultInfo> vris = null;
+   try
+   {
+    vris = luService.validateCluSet ("SYSTEM", info);
+   }
+   catch (Exception ex1)
+   {
+    throw new RuntimeException (
+      "Got an exception trying to get validation errors", ex1);
+   }
+   DataValidationErrorException dvex = new DataValidationErrorException (
+     "got validation errors", vris, ex);
+   result.setStatus (StandardizedTestLoadResult.Status.CLUSET_VALIDATION_ERROR);
+   result.setDataValidationErrorException (dvex);
+   return;
+  }
+  catch (Exception ex)
+  {
+   result.setException (ex);
+   result.setStatus (StandardizedTestLoadResult.Status.EXCEPTION);
+   return;
+  }
+
  }
 }

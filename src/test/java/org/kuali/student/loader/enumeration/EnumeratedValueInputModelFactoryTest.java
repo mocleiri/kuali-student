@@ -80,6 +80,7 @@ public class EnumeratedValueInputModelFactoryTest
   EnumeratedValueInputModel result = instance.getModel ();
   if (result.getEnumeratedValues ().size () < 100)
   {
+   System.out.println (result.getEnumeratedValues ().size () + " values found");
    fail (" too few enumerations");
   }
   EnumeratedValue ev = result.getEnumeratedValues ().get (0);
