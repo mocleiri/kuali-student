@@ -15,6 +15,7 @@
  */
 package org.kuali.student.loader.course;
 
+import java.util.ArrayList;
 import org.kuali.student.loader.util.AdminOrgInfoHelper;
 import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
@@ -64,9 +65,9 @@ public class CreditCourseToCourseInfoConverter
   info.getTermsOffered ().addAll (convertOfferedAtpTypes (cc.getTermsOffered ()));
   info.setType ("kuali.lu.type.CreditCourse");
   info.setState ("Active");
-//  List<String> campuses = new ArrayList ();
-//  campuses.add ("North");
-//  courseInfo.getCampusLocations ().addAll (campuses);
+  List<String> campuses = new ArrayList ();
+  campuses.add ("NO"); // north
+  info.setCampusLocations (campuses);
 
   // TODO: make this a lookup via the OrgService 
   info.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
@@ -81,6 +82,9 @@ public class CreditCourseToCourseInfoConverter
   info.getAttributes ().put ("finalExamRationale", cc.getFinalExamRationale ());
   info.setPrimaryInstructor (new CluInstructorInfo ());
   info.getPrimaryInstructor ().setPersonInfoOverride ("Staff");
+  List<String> gradingOptions = new ArrayList ();
+  gradingOptions.add ("kuali.resultComponent.grade.letter");
+  info.setGradingOptions (gradingOptions);
   return info;
  }
 

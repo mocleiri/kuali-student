@@ -10,4 +10,11 @@
                 <maven.test.skip>true</maven.test.skip>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-compile tests</actionName>
+            <displayName>compile tests</displayName>
+            <goals>
+                <goal>compiler:testCompile</goal>
+            </goals>
+        </action>
     </actions>
