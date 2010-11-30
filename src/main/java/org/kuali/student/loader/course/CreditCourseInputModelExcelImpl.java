@@ -74,7 +74,8 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
    cc.setTranscriptTitle (helper.getFixup ("TranscriptTitle"));
    cc.setCourseTitle (helper.getFixup ("CourseTitle"));
    cc.setDescr (helper.getFixup ("Descr"));
-   cc.setCredits (helper.getFixup ("credits"));
+   cc.setMinCredits (helper.getFixup ("minCredits"));
+   cc.setMaxCredits (helper.getFixup ("maxCredits"));
    cc.setRestrictions (helper.getFixup ("restrictions"));
    cc.setPrereq (helper.getFixup ("prereq"));
    cc.setPrereqNL (helper.getFixup ("prereqNL"));

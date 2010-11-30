@@ -31,7 +31,8 @@ private String administeringOrg;
 private String transcriptTitle;
 private String courseTitle;
 private String descr;
-private String credits;
+private String minCredits;
+private String maxCredits;
 private String restrictions;
 private String prereq;
 private String prereqNL;
@@ -97,17 +98,23 @@ private String finalExamRationale;
   this.coreqNL = coreqNL;
  }
 
- public String getCredits ()
- {
-  return credits;
- }
+ public String getMinCredits() {
+	return minCredits;
+}
 
- public void setCredits (String credits)
- {
-  this.credits = credits;
- }
+public void setMinCredits(String minCredits) {
+	this.minCredits = minCredits;
+}
 
- public String getDescr ()
+public String getMaxCredits() {
+	return maxCredits;
+}
+
+public void setMaxCredits(String maxCredits) {
+	this.maxCredits = maxCredits;
+}
+
+public String getDescr ()
  {
   return descr;
  }

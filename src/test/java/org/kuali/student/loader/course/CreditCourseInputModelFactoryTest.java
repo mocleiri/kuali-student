@@ -89,7 +89,7 @@ public class CreditCourseInputModelFactoryTest
   assertEquals ("Survey Art & Arch I", cc.getTranscriptTitle ());
   assertEquals ("Survey of Art & Arch I", cc.getCourseTitle ());
   assertEquals ("Principles of art. Relation of styles to cultural context. Art and architecture from ancient times to the end of the Middle Ages.", cc.getDescr ());
-  assertEquals ("3", cc.getCredits ());
+  assertEquals ("3", cc.getMaxCredits ());
   assertEquals ("Numeric Grade", cc.getGradingOptions ());
   assertEquals ("kuali.atp.season.Fall kuali.atp.season.Spring kuali.atp.season.Winter", cc.getTermsOffered ());
   assertEquals ("ALT", cc.getFinalExam ());

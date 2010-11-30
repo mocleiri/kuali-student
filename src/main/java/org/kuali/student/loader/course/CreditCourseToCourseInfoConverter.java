@@ -19,12 +19,16 @@ import java.util.ArrayList;
 import org.kuali.student.loader.util.AdminOrgInfoHelper;
 import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.kuali.student.loader.util.DateHelper;
 import org.kuali.student.loader.util.MetaInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
 import org.kuali.student.lum.course.dto.CourseInfo;
+import org.kuali.student.lum.lrc.dto.ResultComponentInfo;
 import org.kuali.student.lum.lu.dto.AdminOrgInfo;
 import org.kuali.student.lum.lu.dto.CluInstructorInfo;
 
@@ -85,6 +89,10 @@ public class CreditCourseToCourseInfoConverter
   List<String> gradingOptions = new ArrayList ();
   gradingOptions.add ("kuali.resultComponent.grade.letter");
   info.setGradingOptions (gradingOptions);
+  
+  //fixed & variable credits
+  setCreditOptions(info);
+  
   return info;
  }
 
@@ -157,6 +165,26 @@ public class CreditCourseToCourseInfoConverter
 //      toString ());
 //  return null;
 // }
+ private void setCreditOptions(CourseInfo info){
+	if(cc.getMinCredits() != null && !cc.getMinCredits().isEmpty() && cc.getMaxCredits() != null && !cc.getMaxCredits().isEmpty()){
+	  List<ResultComponentInfo> creditOptions = new ArrayList<ResultComponentInfo> ();
+	  ResultComponentInfo rci = new ResultComponentInfo();
+	  Map<String, String> rciAttributes = new HashMap<String, String>();
+	  if (cc.getMinCredits().equals(cc.getMaxCredits())){ 
+		  rci.setType("kuali.resultComponentType.credit.degree.fixed");
+		  rciAttributes.put("fixedCreditValue", cc.getMaxCredits());
+	  }
+	  else{
+		  rci.setType("kuali.resultComponentType.credit.degree.range");
+		  rciAttributes.put("minCreditValue", cc.getMinCredits());
+		  rciAttributes.put("maxCreditValue", cc.getMaxCredits());
+	  }
+		  
+	  rci.setAttributes(rciAttributes);
+	  creditOptions.add(rci);
+	  info.setCreditOptions(creditOptions);
+	}	 
+ }
  private List<String> convertOfferedAtpTypes (String offeredAtpTypes)
  {
   if (offeredAtpTypes == null)
