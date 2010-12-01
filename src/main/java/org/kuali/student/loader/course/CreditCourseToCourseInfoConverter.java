@@ -16,12 +16,21 @@
 package org.kuali.student.loader.course;
 
 import java.util.ArrayList;
+
+import org.kuali.student.core.atp.dto.AtpInfo;
+import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.core.exceptions.DoesNotExistException;
+import org.kuali.student.core.exceptions.InvalidParameterException;
+import org.kuali.student.core.exceptions.MissingParameterException;
+import org.kuali.student.core.exceptions.OperationFailedException;
 import org.kuali.student.loader.util.AdminOrgInfoHelper;
 import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.ws.soap.SOAPFaultException;
 
 import org.kuali.student.loader.util.DateHelper;
 import org.kuali.student.loader.util.MetaInfoHelper;
@@ -42,12 +51,19 @@ public class CreditCourseToCourseInfoConverter
 
 
  private CreditCourse cc;
+ private AtpService atpService;
 
  public CreditCourseToCourseInfoConverter (CreditCourse cc)
  {
   this.cc = cc;
  }
 
+ public CreditCourseToCourseInfoConverter (CreditCourse cc, AtpService thisService)
+ {
+  this.cc = cc;
+  this.atpService = thisService;
+ }
+ 
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE = "kuali.adminOrg.type.Administration";
  public CourseInfo convert ()
  {
@@ -68,7 +84,6 @@ public class CreditCourseToCourseInfoConverter
   info.setCourseTitle (cc.getCourseTitle ());
   info.getTermsOffered ().addAll (convertOfferedAtpTypes (cc.getTermsOffered ()));
   info.setType ("kuali.lu.type.CreditCourse");
-  info.setState ("Active");
   List<String> campuses = new ArrayList ();
   campuses.add ("NO"); // north
   info.setCampusLocations (campuses);
@@ -78,8 +93,6 @@ public class CreditCourseToCourseInfoConverter
 
   info.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.Semester"));
   info.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
-  info.setStartTerm ("kuali.atp.FA2008-2009");
-  info.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
   info.setMetaInfo (new MetaInfoHelper ().get ());
   
   info.getAttributes ().put ("finalExamStatus", cc.getFinalExam ());
@@ -93,6 +106,8 @@ public class CreditCourseToCourseInfoConverter
   //fixed & variable credits
   setCreditOptions(info);
   
+  //set atpTerm related fields
+  setAtpTerms(info);
   return info;
  }
 
@@ -185,6 +200,38 @@ public class CreditCourseToCourseInfoConverter
 	  info.setCreditOptions(creditOptions);
 	}	 
  }
+ 
+ private void setAtpTerms(CourseInfo info){
+	 try {
+		 if(cc.getStartTerm()!= null && !cc.getStartTerm().isEmpty()){
+			 info.setStartTerm(cc.getStartTerm());
+
+			 AtpInfo atpStart = atpService.getAtp(cc.getStartTerm());
+			 if(atpStart.getStartDate()!= null ){
+				 info.setEffectiveDate(atpStart.getStartDate());
+			 }
+		 }
+	 
+		 if(cc.getEndTerm()!= null && !cc.getEndTerm().isEmpty()){
+			 info.setEndTerm(cc.getEndTerm());
+	
+			 AtpInfo atpEnd = atpService.getAtp(cc.getEndTerm());
+			 if(atpEnd.getEndDate()!= null ){
+				 info.setExpirationDate(atpEnd.getEndDate());
+			 }
+			 
+			 info.setState ("Retired");
+		 }
+		 else		 
+			 info.setState ("Active");
+		 
+	 } catch (SOAPFaultException e) {
+		 System.out.println(e.getMessage());		 
+	 } catch (Exception e) {
+		 System.out.println(e.getMessage());
+	}
+ }
+ 
  private List<String> convertOfferedAtpTypes (String offeredAtpTypes)
  {
   if (offeredAtpTypes == null)

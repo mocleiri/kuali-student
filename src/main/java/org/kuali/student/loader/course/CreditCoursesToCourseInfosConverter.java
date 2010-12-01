@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.lum.course.dto.CourseInfo;
 import org.kuali.student.lum.course.dto.CourseVariationInfo;
 import org.kuali.student.lum.lu.dto.CluIdentifierInfo;
@@ -33,12 +35,18 @@ public class CreditCoursesToCourseInfosConverter
 
 
  private List<CreditCourse> ccs;
+ private AtpService atpService;
 
  public CreditCoursesToCourseInfosConverter (List<CreditCourse> ccs)
  {
   this.ccs = ccs;
  }
 
+ public CreditCoursesToCourseInfosConverter (List<CreditCourse> ccs, AtpService thisService)
+ {
+  this.ccs = ccs;
+  this.atpService = thisService;
+ }
 
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE = "kuali.adminOrg.type.Administration";
 
@@ -59,7 +67,7 @@ public class CreditCoursesToCourseInfosConverter
    {
     continue;
    }
-   CourseInfo info = new CreditCourseToCourseInfoConverter (cc).convert ();
+   CourseInfo info = new CreditCourseToCourseInfoConverter (cc, atpService).convert ();
    infos.put (info.getCode (), info);
    result.setCourseInfo (info);
   }

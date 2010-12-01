@@ -18,6 +18,8 @@ package org.kuali.student.loader.course;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.course.dto.CourseInfo;
@@ -31,6 +33,17 @@ public class CreditCourseLoader
 {
 
  private CourseService courseService;
+ private AtpService atpService;
+
+ public AtpService getAtpService ()
+ {
+  return atpService;
+ }
+
+ public void setAtpService (AtpService atpService)
+ {
+  this.atpService = atpService;
+ }
 
  public CourseService getCourseService ()
  {
@@ -59,7 +72,7 @@ public class CreditCourseLoader
 
  public List<CreditCourseLoadResult> update ()
  {
-  List<CreditCourseLoadResult> results = new CreditCoursesToCourseInfosConverter (inputDataSource).convert ();
+  List<CreditCourseLoadResult> results = new CreditCoursesToCourseInfosConverter (inputDataSource, atpService).convert ();
   for (CreditCourseLoadResult result : results)
   {
    if (result.getStatus () != null)

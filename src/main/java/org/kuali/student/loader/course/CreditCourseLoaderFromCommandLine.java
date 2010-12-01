@@ -20,6 +20,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.loader.atp.AtpServiceFactory;
+
 /**
  *
  * @author nwright
@@ -68,6 +71,10 @@ public class CreditCourseLoaderFromCommandLine
   CourseServiceFactory servFactory = new CourseServiceFactory ();
   servFactory.setHostUrl (hostUrl);
   ccLoader.setCourseService (servFactory.getCourseService ());
+  AtpServiceFactory aptServFactory = new AtpServiceFactory();
+  aptServFactory.setHostUrl(hostUrl);
+  AtpService atpService = aptServFactory.getAtpService();
+  ccLoader.setAtpService(atpService);
 
   System.out.println (new Date () + " getting credit courses...");
   List<CreditCourse> creditCourses = ccModel.getCreditCourses ();

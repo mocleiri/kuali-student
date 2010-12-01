@@ -88,6 +88,8 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
    cc.setLearningObjectives (helper.getFixup ("learningObjectives"));
    cc.setFinalExam (helper.getFixup ("FinalExam"));
    cc.setFinalExamRationale (helper.getFixup ("FinalExamRationale"));
+   cc.setStartTerm(helper.getFixup("startTerm"));
+   cc.setEndTerm(helper.getFixup("endTerm"));
   }
   return list;
  }

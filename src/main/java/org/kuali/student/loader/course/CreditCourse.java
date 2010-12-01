@@ -45,6 +45,8 @@ private String requirementsMet;
 private String learningObjectives;
 private String finalExam;
 private String finalExamRationale;
+private String startTerm;
+private String endTerm;
 
  public String getId ()
  {
@@ -284,6 +286,20 @@ public String getDescr ()
   this.finalExamRationale = finalExamRationale;
  }
 
+public String getStartTerm() {
+	return startTerm;
+}
 
+public void setStartTerm(String startTerm) {
+	this.startTerm = startTerm;
+}
+
+public String getEndTerm() {
+	return endTerm;
+}
+
+public void setEndTerm(String endTerm) {
+	this.endTerm = endTerm;
+}
  
 }
