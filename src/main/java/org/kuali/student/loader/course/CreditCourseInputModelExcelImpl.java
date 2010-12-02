@@ -52,7 +52,7 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
    throw new IllegalArgumentException (ex);
   }
   ExcelLoaderHelper helper = new ExcelLoaderHelper (worksheetReader);
-  helper.setMaxStringSize (500);
+  helper.setMaxStringSize (2000);
   List<CreditCourse> list = new ArrayList (worksheetReader.getEstimatedRows ());
   int row = 0;
   while (worksheetReader.next ())
