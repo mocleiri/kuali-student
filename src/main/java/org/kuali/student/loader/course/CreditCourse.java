@@ -47,6 +47,9 @@ private String finalExam;
 private String finalExamRationale;
 private String startTerm;
 private String endTerm;
+private String formatActivities;
+private String lecHr;
+private String labHr;
 
  public String getId ()
  {
@@ -301,5 +304,29 @@ public String getEndTerm() {
 public void setEndTerm(String endTerm) {
 	this.endTerm = endTerm;
 }
- 
+
+public String getFormatActivities() {
+	return formatActivities;
+}
+
+public void setFormatActivities(String formatActivities) {
+	this.formatActivities = formatActivities;
+}
+
+public String getLecHr() {
+	return lecHr;
+}
+
+public void setLecHr(String lecHr) {
+	this.lecHr = lecHr;
+}
+
+public String getLabHr() {
+	return labHr;
+}
+
+public void setLabHr(String labHr) {
+	this.labHr = labHr;
+}
+
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import org.kuali.student.core.atp.dto.AtpInfo;
 import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.core.dto.AmountInfo;
 import org.kuali.student.core.exceptions.DoesNotExistException;
 import org.kuali.student.core.exceptions.InvalidParameterException;
 import org.kuali.student.core.exceptions.MissingParameterException;
@@ -36,7 +37,9 @@ import org.kuali.student.loader.util.DateHelper;
 import org.kuali.student.loader.util.MetaInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
+import org.kuali.student.lum.course.dto.ActivityInfo;
 import org.kuali.student.lum.course.dto.CourseInfo;
+import org.kuali.student.lum.course.dto.FormatInfo;
 import org.kuali.student.lum.lrc.dto.ResultComponentInfo;
 import org.kuali.student.lum.lu.dto.AdminOrgInfo;
 import org.kuali.student.lum.lu.dto.CluInstructorInfo;
@@ -108,6 +111,10 @@ public class CreditCourseToCourseInfoConverter
   
   //set atpTerm related fields
   setAtpTerms(info);
+  
+  //set formats
+  setFormats(info);
+  
   return info;
  }
 
@@ -230,6 +237,42 @@ public class CreditCourseToCourseInfoConverter
 	 } catch (Exception e) {
 		 System.out.println(e.getMessage());
 	}
+ }
+ private void setFormats(CourseInfo info) {
+	 List<FormatInfo> formats = new ArrayList<FormatInfo>();
+	 
+	 //formatActivities
+	 String formatActivity = cc.getFormatActivities();
+	 if(formatActivity != null && !formatActivity.isEmpty()){
+		 FormatInfo formatInfo = new FormatInfo();
+		 formatInfo.setType("kuali.lu.type.CreditCourseFormatShell");
+		 
+		 List<ActivityInfo> activities = new ArrayList<ActivityInfo>();
+		 
+		 if(formatActivity.equals("Lec") || formatActivity.equals("LecLab"))
+			 setActivityInfo(activities, "kuali.lu.type.activity.Lecture", cc.getLecHr(), info.getState());			 
+		 
+		 if(formatActivity.equals("Lab") || formatActivity.equals("LecLab"))
+			 setActivityInfo(activities, "kuali.lu.type.activity.Lab", cc.getLabHr(), info.getState());
+		 
+		 formatInfo.setActivities(activities);
+		 formatInfo.setState(info.getState());
+		 formats.add(formatInfo);
+		 
+		 info.setFormats(formats);
+	 }
+ }
+ 
+ private void setActivityInfo(List<ActivityInfo> activities, String activityType, String contactHour, String state){
+	 ActivityInfo activityInfo = new ActivityInfo();
+	 activityInfo.setActivityType(activityType);
+	 activityInfo.setState(state);
+	 AmountInfo amountInfo = new AmountInfo();
+	 amountInfo.setUnitType("kuali.atp.duration.week");
+	 amountInfo.setUnitQuantity(contactHour);
+	 activityInfo.setContactHours(amountInfo);
+	 
+	 activities.add(activityInfo);
  }
  
  private List<String> convertOfferedAtpTypes (String offeredAtpTypes)
