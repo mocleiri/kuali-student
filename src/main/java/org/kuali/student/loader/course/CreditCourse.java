@@ -50,6 +50,9 @@ private String endTerm;
 private String formatActivities;
 private String lecHr;
 private String labHr;
+private boolean audit;
+private boolean passFail;
+private boolean specialTopics;
 
  public String getId ()
  {
@@ -327,6 +330,30 @@ public String getLabHr() {
 
 public void setLabHr(String labHr) {
 	this.labHr = labHr;
+}
+
+public boolean isAudit() {
+	return audit;
+}
+
+public void setAudit(boolean audit) {
+	this.audit = audit;
+}
+
+public boolean isPassFail() {
+	return passFail;
+}
+
+public void setPassFail(boolean passFail) {
+	this.passFail = passFail;
+}
+
+public boolean isSpecialTopics() {
+	return specialTopics;
+}
+
+public void setSpecialTopics(boolean specialTopics) {
+	this.specialTopics = specialTopics;
 }
 
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import org.kuali.student.core.atp.dto.AtpInfo;
 import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.dto.AmountInfo;
+import org.kuali.student.core.dto.TimeAmountInfo;
 import org.kuali.student.core.exceptions.DoesNotExistException;
 import org.kuali.student.core.exceptions.InvalidParameterException;
 import org.kuali.student.core.exceptions.MissingParameterException;
@@ -94,18 +95,20 @@ public class CreditCourseToCourseInfoConverter
   // TODO: make this a lookup via the OrgService 
   info.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
 
-  info.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.Semester"));
+  info.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.week"));
   info.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
   info.setMetaInfo (new MetaInfoHelper ().get ());
   
   info.getAttributes ().put ("finalExamStatus", cc.getFinalExam ());
   info.getAttributes ().put ("finalExamRationale", cc.getFinalExamRationale ());
-  info.setPrimaryInstructor (new CluInstructorInfo ());
-  info.getPrimaryInstructor ().setPersonInfoOverride ("Staff");
-  List<String> gradingOptions = new ArrayList ();
-  gradingOptions.add ("kuali.resultComponent.grade.letter");
-  info.setGradingOptions (gradingOptions);
-  
+  info.getAttributes ().put ("audit", new Boolean(cc.isAudit()).toString());
+  info.getAttributes ().put ("passFail", new Boolean(cc.isPassFail()).toString());
+  info.setSpecialTopicsCourse(cc.isSpecialTopics());
+  info.setPrimaryInstructor (null);
+ 
+  //set gradingOptions
+  setGradingOptions(info);
+ 
   //fixed & variable credits
   setCreditOptions(info);
   
@@ -187,6 +190,19 @@ public class CreditCourseToCourseInfoConverter
 //      toString ());
 //  return null;
 // }
+ private void setGradingOptions(CourseInfo info){
+	 if(cc.getGradingOptions() != null && !cc.getGradingOptions().isEmpty()){
+		 List<String> gradingOptions = new ArrayList ();
+
+		 String[] options = cc.getGradingOptions().split(" ");
+		 for (int i = 0; i < options.length; i++){
+			 gradingOptions.add(options[i]);
+		 }	
+		 
+		 info.setGradingOptions (gradingOptions);
+	 }
+ }
+ 
  private void setCreditOptions(CourseInfo info){
 	if(cc.getMinCredits() != null && !cc.getMinCredits().isEmpty() && cc.getMaxCredits() != null && !cc.getMaxCredits().isEmpty()){
 	  List<ResultComponentInfo> creditOptions = new ArrayList<ResultComponentInfo> ();
@@ -246,6 +262,7 @@ public class CreditCourseToCourseInfoConverter
 	 if(formatActivity != null && !formatActivity.isEmpty()){
 		 FormatInfo formatInfo = new FormatInfo();
 		 formatInfo.setType("kuali.lu.type.CreditCourseFormatShell");
+		 formatInfo.setState(info.getState());
 		 
 		 List<ActivityInfo> activities = new ArrayList<ActivityInfo>();
 		 
@@ -256,22 +273,20 @@ public class CreditCourseToCourseInfoConverter
 			 setActivityInfo(activities, "kuali.lu.type.activity.Lab", cc.getLabHr(), info.getState());
 		 
 		 formatInfo.setActivities(activities);
-		 formatInfo.setState(info.getState());
 		 formats.add(formatInfo);
-		 
+	 }		 
+		
+	 if(!formats.isEmpty())
 		 info.setFormats(formats);
-	 }
  }
  
  private void setActivityInfo(List<ActivityInfo> activities, String activityType, String contactHour, String state){
 	 ActivityInfo activityInfo = new ActivityInfo();
 	 activityInfo.setActivityType(activityType);
 	 activityInfo.setState(state);
-	 AmountInfo amountInfo = new AmountInfo();
-	 amountInfo.setUnitType("kuali.atp.duration.week");
-	 amountInfo.setUnitQuantity(contactHour);
-	 activityInfo.setContactHours(amountInfo);
-	 
+	 activityInfo.setDuration(new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
+	 activityInfo.setContactHours(new AmountInfoHelper ().get (contactHour, "kuali.atp.duration.week"));
+
 	 activities.add(activityInfo);
  }
  
