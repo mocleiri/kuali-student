@@ -93,6 +93,9 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
    cc.setFormatActivities(helper.getFixup("formatActivities"));
    cc.setLecHr(helper.getFixup("lecHr"));
    cc.setLabHr(helper.getFixup("labHr"));
+   cc.setAudit(helper.getFixupBoolean("audit"));
+   cc.setPassFail(helper.getFixupBoolean("passFail"));
+   cc.setSpecialTopics(helper.getFixupBoolean("specialTopics"));
   }
   return list;
  }
