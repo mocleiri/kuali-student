@@ -15,42 +15,35 @@
  */
 package org.kuali.student.loader.util;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.kuali.student.core.dto.TimeAmountInfo;
-
 
 /**
  *
  * @author nwright
  */
-public class TimeAmountInfoHelper
+public class AttributeInfoHelper
 {
 
-
-  public TimeAmountInfo getWith1InTimeQuantity (String atpDurationKey)
+ public Map<String, String> setValue (String key, Object value,
+                                      Map<String, String> attributes)
  {
-  if (atpDurationKey == null)
+  if (value == null)
   {
-   return null;
+   if (attributes == null)
+   {
+    return null;
+   }
+   attributes.remove (key);
+   return attributes;
   }
-  TimeAmountInfo ta = new TimeAmountInfo ();
-  ta.setAtpDurationTypeKey (atpDurationKey);
-  ta.setTimeQuantity (1);
-  return ta;
- }
-
-
- public TimeAmountInfo get (Integer timeQuantity , String atpDurationKey)
- {
-  if (timeQuantity == null && atpDurationKey == null)
+  if (attributes == null)
   {
-   return null;
+   attributes = new HashMap ();
   }
-  TimeAmountInfo ta = new TimeAmountInfo ();
-  ta.setAtpDurationTypeKey (atpDurationKey);
-  ta.setTimeQuantity (timeQuantity);
-  return ta;
+  String valStr = value.toString ();
+  attributes.put (key, valStr);
+  return attributes;
  }
-
- 
-
 }

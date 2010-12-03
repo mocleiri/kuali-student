@@ -36,13 +36,13 @@ public class ProgramInputModelFactoryTest
 
  @BeforeClass
  public static void setUpClass ()
-  throws Exception
+   throws Exception
  {
  }
 
  @AfterClass
  public static void tearDownClass ()
-  throws Exception
+   throws Exception
  {
  }
 
@@ -60,8 +60,9 @@ public class ProgramInputModelFactoryTest
  {
   Properties props = new Properties ();
   props.putAll (ProgramInputModelFactory.getDefaultConfig ());
-  props.put (ProgramInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + ProgramInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (ProgramInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY,
+             "src/main/"
+             + ProgramInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   ProgramInputModelFactory factory = new ProgramInputModelFactory ();
   factory.setConfig (props);
@@ -77,15 +78,16 @@ public class ProgramInputModelFactoryTest
   System.out.println ("getModel");
   ProgramInputModelFactory instance = getInstance ();
   ProgramInputModel result = instance.getModel ();
-  if (result.getPrograms ().size () < 100)
+  if (result.getPrograms ().size () < 5)
   {
    fail (" too few programs");
   }
   Program prog = result.getPrograms ().get (0);
-  assertEquals ("AACH 101", prog.getCode ());
-  assertEquals ("Survey Art & Arch I", prog.getTranscriptTitle ());
-  assertEquals ("Survey of Art & Arch I", prog.getShortTitle ());
-  assertEquals ("Principles of art. Relation of styles to cultural context. Art and architecture from ancient times to the end of the Middle Ages.", prog.getDescr ());
+  assertEquals ("BSCI", prog.getCode ());
+  assertEquals ("BIOLOGICAL SCIENCES", prog.getTranscriptTitle ());
+  assertEquals ("BIO SCI", prog.getShortTitle ());
+  assertEquals (
+    "The Biological Sciences major offers a rigorous exposure to the modern experimental disciplines within Biology. The major is jointly offered by the Departments of Biology, Cell Biology & Molecular Genetics, and Entomology. All Biological Sciences majors complete a common sequence of introductory and supporting courses referred to as the Basic Program. In addition, students must complete an Advanced Program within one of the following specialization areas: Cell Biology & Genetics, Ecology & Evolution, General Biology, Microbiology, Physiology & Neurobiology, Individualized Studies.",
+                prog.getDescr ());
  }
-
 }

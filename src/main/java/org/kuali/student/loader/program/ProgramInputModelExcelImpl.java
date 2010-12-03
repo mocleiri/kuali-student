@@ -49,49 +49,74 @@ public class ProgramInputModelExcelImpl implements ProgramInputModel
    throw new IllegalArgumentException (ex);
   }
   ExcelLoaderHelper helper = new ExcelLoaderHelper (worksheetReader);
-  helper.setMaxStringSize (500);
+  helper.setMaxStringSize (2000);
   List<Program> list = new ArrayList (worksheetReader.getEstimatedRows ());
   int row = 0;
   while (worksheetReader.next ())
   {
    Program prog = new Program ();
-   prog.setId (helper.getFixup ("id"));
    prog.setCode (helper.getFixup ("code"));
    if (prog.getCode () == null)
    {
     continue;
    }
+   prog.setUniversityClassification (
+     helper.getFixup ("universityClassification"));
    prog.setType (helper.getFixup ("type"));
    prog.setVariationOf (helper.getFixup ("variationOf"));
+   prog.setIsVariationRequired (helper.getFixupBoolean ("isVariationRequired"));
+   prog.setCorePrograms (helper.getFixup ("corePrograms"));
+   prog.setCredentialProgram (helper.getFixup ("credentialProgram"));
+   prog.setId (helper.getFixup ("id"));
+   prog.setShortTitle (helper.getFixup ("shortTitle"));
+   prog.setLongTitle (helper.getFixup ("longTitle"));
+   prog.setTranscriptTitle (helper.getFixup ("transcriptTitle"));
+   prog.setAccreditingAgencies (helper.getFixup ("accreditingAgencies"));
+   prog.setCampusLocations (helper.getFixup ("campusLocations"));
+   prog.setCatalogPublicationTargets (helper.getFixup (
+     "catalogPublicationTargets"));
+   prog.setCip2000Code (helper.getFixup ("cip2000Code"));
+   prog.setCip2010Code (helper.getFixup ("cip2010Code"));
+   prog.setHegisCode (helper.getFixup ("hegisCode"));
+   prog.setDescr (helper.getFixup ("descr"));
+   prog.setCatalogDescr (helper.getFixup ("catalogDescr"));
+   prog.setDiplomaTitle (helper.getFixup ("diplomaTitle"));
+   prog.setUnitsContentOwner (helper.getFixup ("unitsContentOwner"));
+   prog.setDivisionsContentOwner (helper.getFixup ("divisionsContentOwner"));
+   prog.setUnitsDeployment (helper.getFixup ("unitsDeployment"));
+   prog.setDivisionsDeployment (helper.getFixup ("divisionsDeployment"));
+   prog.setUnitsFinancialControl (helper.getFixup ("unitsFinancialControl"));
+   prog.setDivisionsFinancialControl (helper.getFixup (
+     "divisionsFinancialControl"));
+   prog.setUnitsFinancialResources (helper.getFixup ("unitsFinancialResources"));
+   prog.setDivisionsFinancialResources (helper.getFixup (
+     "divisionsFinancialResources"));
+   prog.setUnitsStudentOversight (helper.getFixup ("unitsStudentOversight"));
+   prog.setDivisionsStudentOversight (helper.getFixup (
+     "divisionsStudentOversight"));
+   prog.setInstitution (helper.getFixup ("institution"));
+   prog.setStdDuration (helper.getFixup ("stdDuration"));
+   prog.setDurationNotes (helper.getFixup ("durationNotes"));
+   prog.setStartTerm (helper.getFixup ("startTerm"));
+   prog.setEndTerm (helper.getFixup ("endTerm"));
+   prog.setState (helper.getFixup ("state"));
+   prog.setEndInstAdmitTerm (helper.getFixup ("endInstAdmitTerm"));
+   prog.setEndProgramEntryTerm (helper.getFixup ("endProgramEntryTerm"));
+   prog.setIntensity (helper.getFixup ("intensity"));
+   prog.setLastReviewDate (helper.getFixupDate ("lastReviewDate"));
+   prog.setNextReviewPeriod (helper.getFixup ("nextReviewPeriod"));
+   prog.setPublishedInstructors (helper.getFixup ("publishedInstructors"));
+   prog.setReferenceURL (helper.getFixup ("referenceURL"));
+   prog.setResultOptions (helper.getFixup ("resultOptions"));
+   prog.setSelectiveEnrollmentCode (helper.getFixup ("selectiveEnrollmentCode"));
+   prog.setVersionInfo (helper.getFixup ("versionInfo"));
+   prog.setProgramLevel (helper.getFixup ("programLevel"));
+   prog.setProgramRequirements (helper.getFixup ("programRequirements"));
+   prog.setLearningObjectives (helper.getFixup ("learningObjectives"));
+
    list.add (prog);
    row ++;
-//   prog.setSubjectArea (helper.getFixup ("subjectArea"));
-//   prog.setProgramNumberSuffix (helper.getFixup ("programNumberSuffix"));
-//   prog.setVariation (helper.getFixup ("variation"));
-//   prog.setAdministeringOrgName (helper.getFixup ("AdministeringOrgName"));
-//   prog.setAdministeringOrg (helper.getFixup ("AdministeringOrgName"));
-   prog.setTranscriptTitle (helper.getFixup ("TranscriptTitle"));
-   prog.setShortTitle (helper.getFixup ("ShortTitle"));
-   prog.setDescr (helper.getFixup ("Descr"));
-//   prog.setMinCredits (helper.getFixup ("minCredits"));
-//   prog.setMaxCredits (helper.getFixup ("maxCredits"));
-//   prog.setRestrictions (helper.getFixup ("restrictions"));
-//   prog.setPrereq (helper.getFixup ("prereq"));
-//   prog.setPrereqNL (helper.getFixup ("prereqNL"));
-//   prog.setCoreq (helper.getFixup ("coreq"));
-//   prog.setCoreqNL (helper.getFixup ("coreqNL"));
-//   prog.setEquivalencies (helper.getFixup ("equivalencies"));
-//   prog.setGradingOptions (helper.getFixup ("gradingOptions"));
-//   prog.setTermsOffered (helper.getFixup ("TermsOffered"));
-//   prog.setRequirementsMet (helper.getFixup ("requirementsMet"));
-//   prog.setLearningObjectives (helper.getFixup ("learningObjectives"));
-//   prog.setFinalExam (helper.getFixup ("FinalExam"));
-//   prog.setFinalExamRationale (helper.getFixup ("FinalExamRationale"));
-//   prog.setStartTerm(helper.getFixup("startTerm"));
-//   prog.setEndTerm(helper.getFixup("endTerm"));
-//   prog.setFormatActivities(helper.getFixup("formatActivities"));
-//   prog.setLecHr(helper.getFixup("lecHr"));
-//   prog.setLabHr(helper.getFixup("labHr"));
+
   }
   return list;
  }
