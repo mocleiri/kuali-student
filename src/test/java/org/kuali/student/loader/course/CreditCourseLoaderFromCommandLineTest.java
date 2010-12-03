@@ -59,10 +59,12 @@ public class CreditCourseLoaderFromCommandLineTest
  public void testMain ()
  {
   System.out.println ("main");
+
   String[] args =
   {
     "src/main/" + CreditCourseInputModelFactory.RESOURCES_DIRECTORY + "/"
-     + CreditCourseInputModelFactory.COURSES_FOR_BSCI_PROGRAM_XLS,
+//     + CreditCourseInputModelFactory.ORIGINAL_KRU_COURSES_XLS,
+      + CreditCourseInputModelFactory.COURSES_FOR_BSCI_PROGRAM_XLS,
    CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL
   };
   CreditCourseLoaderFromCommandLine.main (args);

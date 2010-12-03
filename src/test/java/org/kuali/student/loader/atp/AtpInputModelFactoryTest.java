@@ -38,13 +38,13 @@ public class AtpInputModelFactoryTest
 
  @BeforeClass
  public static void setUpClass ()
-  throws Exception
+   throws Exception
  {
  }
 
  @AfterClass
  public static void tearDownClass ()
-  throws Exception
+   throws Exception
  {
  }
 
@@ -62,8 +62,9 @@ public class AtpInputModelFactoryTest
  {
   Properties props = new Properties ();
   props.putAll (AtpInputModelFactory.getDefaultConfig ());
-  props.put (AtpInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + AtpInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (AtpInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY,
+             "src/main/"
+             + AtpInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   AtpInputModelFactory factory = new AtpInputModelFactory ();
   factory.setConfig (props);
@@ -84,16 +85,25 @@ public class AtpInputModelFactoryTest
   {
    fail (" too few courses");
   }
-  Atp org = result.getAtps ().get (0);
-  assertEquals ("kuali.atp.AY2008-2009", org.getId ());
-  assertEquals ("AY 2008-2009", org.getName ());
-  assertEquals ("Academic Year 2008-2009", org.getDesc ().getPlain ());
-  assertEquals ("kuali.atp.type.AY", org.getType ());
-  assertEquals ("Actual", org.getState ());
-  DateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+  boolean found = false;
+  for (Atp atp : result.getAtps ())
+  {
+   if ("kuali.atp.AY2008-2009".equals (atp.getId ()))
+   {
+    found = true;
+    assertEquals ("AY 2008-2009", atp.getName ());
+    assertEquals ("Academic Year 2008-2009", atp.getDesc ().getPlain ());
+    assertEquals ("kuali.atp.type.AY", atp.getType ());
+    assertEquals ("Actual", atp.getState ());
+    DateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
-  assertEquals (format.parse ("2008-09-01"), org.getStartDate ());
-  assertEquals (format.parse ("2009-08-31"), org.getEndDate ());
+    assertEquals (format.parse ("2008-09-01"), atp.getStartDate ());
+    assertEquals (format.parse ("2009-08-31"), atp.getEndDate ());
+   }
+  }
+  if ( ! found)
+  {
+   fail ("could not find " + "kuali.atp.AY2008-2009");
+  }
  }
-
 }

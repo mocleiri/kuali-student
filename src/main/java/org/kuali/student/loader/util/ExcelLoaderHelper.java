@@ -15,7 +15,6 @@
  */
 package org.kuali.student.loader.util;
 
-import java.text.ParseException;
 import java.util.Date;
 import org.kuali.student.spreadsheet.WorksheetReader;
 
@@ -68,6 +67,7 @@ public class ExcelLoaderHelper
   int index = reader.getIndex (colName);
   if (index == -1)
   {
+   System.out.println ("ExcelLoaderHelper: WARNING: could not find column with name " + colName);
    return null;
   }
   String value = reader.getValue (colName);

@@ -19,12 +19,6 @@ import java.util.ArrayList;
 
 import org.kuali.student.core.atp.dto.AtpInfo;
 import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.core.dto.AmountInfo;
-import org.kuali.student.core.dto.TimeAmountInfo;
-import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.exceptions.InvalidParameterException;
-import org.kuali.student.core.exceptions.MissingParameterException;
-import org.kuali.student.core.exceptions.OperationFailedException;
 import org.kuali.student.loader.util.AdminOrgInfoHelper;
 import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
@@ -33,8 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.ws.soap.SOAPFaultException;
+import org.kuali.student.loader.util.AttributeInfoHelper;
 
-import org.kuali.student.loader.util.DateHelper;
 import org.kuali.student.loader.util.MetaInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
@@ -43,7 +37,6 @@ import org.kuali.student.lum.course.dto.CourseInfo;
 import org.kuali.student.lum.course.dto.FormatInfo;
 import org.kuali.student.lum.lrc.dto.ResultComponentInfo;
 import org.kuali.student.lum.lu.dto.AdminOrgInfo;
-import org.kuali.student.lum.lu.dto.CluInstructorInfo;
 
 
 /**
@@ -99,10 +92,14 @@ public class CreditCourseToCourseInfoConverter
   info.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
   info.setMetaInfo (new MetaInfoHelper ().get ());
   
-  info.getAttributes ().put ("finalExamStatus", cc.getFinalExam ());
-  info.getAttributes ().put ("finalExamRationale", cc.getFinalExamRationale ());
-  info.getAttributes ().put ("audit", new Boolean(cc.isAudit()).toString());
-  info.getAttributes ().put ("passFail", new Boolean(cc.isPassFail()).toString());
+  info.setAttributes (new AttributeInfoHelper ().setValue (
+    "finalExamStatus", cc.getFinalExam (), info.getAttributes ()));
+  info.setAttributes (new AttributeInfoHelper ().setValue (
+    "finalExamRationale", cc.getFinalExamRationale (), info.getAttributes ()));
+  info.setAttributes (new AttributeInfoHelper ().setValue (
+    "audit", cc.isAudit (), info.getAttributes ()));
+   info.setAttributes (new AttributeInfoHelper ().setValue (
+    "passFail", cc.isPassFail (), info.getAttributes ()));
   info.setSpecialTopicsCourse(cc.isSpecialTopics());
   info.setPrimaryInstructor (null);
  
@@ -117,7 +114,7 @@ public class CreditCourseToCourseInfoConverter
   
   //set formats
   setFormats(info);
-  
+
   return info;
  }
 

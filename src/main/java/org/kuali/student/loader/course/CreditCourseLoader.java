@@ -15,9 +15,8 @@
  */
 package org.kuali.student.loader.course;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+import java.util.Map;
 
 import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
@@ -82,6 +81,7 @@ public class CreditCourseLoader
    CourseInfo info = result.getCourseInfo ();
    try
    {
+//    System.out.println ("Debug: " + info.getAttributes ());
     CourseInfo createdInfo = courseService.createCourse (info);
     result.setCourseInfo (createdInfo);
     result.setStatus (CreditCourseLoadResult.Status.CREATED);

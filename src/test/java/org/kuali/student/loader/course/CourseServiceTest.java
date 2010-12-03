@@ -26,6 +26,7 @@ import org.kuali.student.core.dto.StatusInfo;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.exceptions.DoesNotExistException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.loader.util.AttributeInfoHelper;
 import org.kuali.student.lum.course.dto.CourseInfo;
 import org.kuali.student.lum.course.service.CourseService;
 import static org.junit.Assert.*;
@@ -89,6 +90,18 @@ public class CourseServiceTest
  {
   System.out.println ("createCourse");
   CourseInfo info = new CourseInfo ();
+  info.setId ("TESTLIFECYCLECOURSE");
+
+  // delete test course if it is there left over from previous test
+  try
+  {
+   StatusInfo status = courseService.deleteCourse (info.getId ());
+  }
+  catch (Exception ex)
+  {
+   // ignore because it may ore may not be there
+  }
+
   info.setSubjectArea ("ENGL");
 //  info.setCode ("ENGL111");
   info.setState ("draft");
@@ -96,7 +109,7 @@ public class CourseServiceTest
   info.setCourseNumberSuffix ("111");
   info.setCourseTitle ("Intro to English");
   info.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
-  info.getAttributes ().put ("audit", new Boolean(true).toString());
+  info.setAttributes (new AttributeInfoHelper ().setValue ("audit", true, info.getAttributes ()));
 
   CourseInfo result = null;
   try
@@ -203,7 +216,7 @@ public class CourseServiceTest
   assertEquals (info.getSubjectArea (), result.getSubjectArea ());
   assertEquals (info.getCourseNumberSuffix (), result.getCourseNumberSuffix ());
   assertEquals (info.getCourseTitle (), result.getCourseTitle ());
-
+  assertEquals ("true", result.getAttributes().get("audit"));
 
   // get
   info = result;
@@ -227,40 +240,41 @@ public class CourseServiceTest
   assertEquals (info.getSubjectArea (), result.getSubjectArea ());
   assertEquals (info.getCourseNumberSuffix (), result.getCourseNumberSuffix ());
   assertEquals (info.getCourseTitle (), result.getCourseTitle ());
-
+  assertEquals ("true", result.getAttributes().get("audit"));
+  
   // delete
-  info = result;
-  try
-  {
-   StatusInfo status = courseService.deleteCourse (info.getId ());
-   assertTrue (status.getSuccess ());
-  }
-  catch (DataValidationErrorException ex)
-  {
-   for (ValidationResultInfo vri : ex.getValidationResults ())
-   {
-    System.out.println (vri.getElement () + " " + vri.getMessage ());
-   }
-   fail ("got validation exception");
-  }
-  catch (Exception ex)
-  {
-   throw new RuntimeException (ex);
-  }
-
-  try
-  {
-   result = courseService.getCourse (info.getId ());
-   fail ("should have thrown does not exist exception");
-  }
-  catch (DoesNotExistException ex)
-  {
-   // as expected
-  }
-  catch (Exception ex)
-  {
-   throw new RuntimeException (ex);
-  }
+//  info = result;
+//  try
+//  {
+//   StatusInfo status = courseService.deleteCourse (info.getId ());
+//   assertTrue (status.getSuccess ());
+//  }
+//  catch (DataValidationErrorException ex)
+//  {
+//   for (ValidationResultInfo vri : ex.getValidationResults ())
+//   {
+//    System.out.println (vri.getElement () + " " + vri.getMessage ());
+//   }
+//   fail ("got validation exception");
+//  }
+//  catch (Exception ex)
+//  {
+//   throw new RuntimeException (ex);
+//  }
+//
+//  try
+//  {
+//   result = courseService.getCourse (info.getId ());
+//   fail ("should have thrown does not exist exception");
+//  }
+//  catch (DoesNotExistException ex)
+//  {
+//   // as expected
+//  }
+//  catch (Exception ex)
+//  {
+//   throw new RuntimeException (ex);
+//  }
 
  }
 }

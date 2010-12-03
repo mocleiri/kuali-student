@@ -145,9 +145,7 @@ public class ProgramLoadResult
    {
     builder.append (comma);
     comma = ", ";
-    builder.append (vri.getElement ());
-    builder.append ("-");
-    builder.append (vri.getMessage ());
+    builder.append (vri);
    }
   }
   return builder.toString ();

@@ -36,13 +36,13 @@ public class CreditCourseInputModelFactoryTest
 
  @BeforeClass
  public static void setUpClass ()
-  throws Exception
+   throws Exception
  {
  }
 
  @AfterClass
  public static void tearDownClass ()
-  throws Exception
+   throws Exception
  {
  }
 
@@ -60,8 +60,8 @@ public class CreditCourseInputModelFactoryTest
  {
   Properties props = new Properties ();
   props.putAll (CreditCourseInputModelFactory.getDefaultConfig ());
-  props.put (CreditCourseInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY, "src/main/"
-   + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
+  props.put (CreditCourseInputModelFactory.EXCEL_FILES_DEFAULT_DIRECTORY_KEY,
+             "src/main/" + CreditCourseInputModelFactory.RESOURCES_DIRECTORY);
   System.out.println ("Current Directory=" + System.getProperty ("user.dir"));
   CreditCourseInputModelFactory factory = new CreditCourseInputModelFactory ();
   factory.setConfig (props);
@@ -81,19 +81,37 @@ public class CreditCourseInputModelFactoryTest
   {
    fail (" too few courses");
   }
-  CreditCourse cc = result.getCreditCourses ().get (0);
-  assertEquals ("AACH 101", cc.getCode ());
-  assertEquals ("AACH", cc.getSubjectArea ());
-  assertEquals ("101", cc.getCourseNumberSuffix ());
-  assertEquals ("Art & Architecture", cc.getAdministeringOrgName ());
-  assertEquals ("Survey Art & Arch I", cc.getTranscriptTitle ());
-  assertEquals ("Survey of Art & Arch I", cc.getCourseTitle ());
-  assertEquals ("Principles of art. Relation of styles to cultural context. Art and architecture from ancient times to the end of the Middle Ages.", cc.getDescr ());
-  assertEquals ("3", cc.getMaxCredits ());
-  assertEquals ("Numeric Grade", cc.getGradingOptions ());
-  assertEquals ("kuali.atp.season.Fall kuali.atp.season.Spring kuali.atp.season.Winter", cc.getTermsOffered ());
-  assertEquals ("ALT", cc.getFinalExam ());
-  assertEquals ("Has Exhibit instead", cc.getFinalExamRationale ());
+  boolean found = false;
+  for (CreditCourse cc : result.getCreditCourses ())
+  {
+   if ("AACH 101".equals (cc.getCode ()))
+   {
+    found = true;
+    assertEquals ("AACH", cc.getSubjectArea ());
+    assertEquals ("101", cc.getCourseNumberSuffix ());
+    assertEquals ("Art & Architecture", cc.getAdministeringOrgName ());
+    assertEquals ("Survey Art & Arch I", cc.getTranscriptTitle ());
+    assertEquals ("Survey of Art & Arch I", cc.getCourseTitle ());
+    assertEquals (
+      "Principles of art. Relation of styles to cultural context. Art and architecture from ancient times to the end of the Middle Ages.",
+      cc.getDescr ());
+    assertEquals ("3", cc.getMaxCredits ());
+    assertEquals (
+      "kuali.resultComponent.grade.letter kuali.resultComponent.grade.passFail",
+                  cc.getGradingOptions ());
+    assertEquals (
+      "kuali.atp.season.Fall kuali.atp.season.Spring kuali.atp.season.Winter",
+      cc.getTermsOffered ());
+    assertEquals ("ALT", cc.getFinalExam ());
+    assertEquals ("Has Exhibit instead", cc.getFinalExamRationale ());
+    assertEquals (true, cc.isAudit ());
+    assertEquals (true, cc.isPassFail ());
+    assertEquals (false, cc.isSpecialTopics ());
+   }
+  }
+  if ( ! found)
+  {
+   fail ("Could not find AACH 101");
+  }
  }
-
 }
