@@ -33,21 +33,21 @@ import org.kuali.student.loader.util.AttributeInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
 import org.kuali.student.lum.lu.dto.CluInstructorInfo;
-import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
+import org.kuali.student.lum.program.dto.ProgramVariationInfo;
 
 /**
  *
  * @author nwright
  */
-public class ProgramToMajorDisciplineInfoConverter
+public class ProgramToProgramVariationInfoConverter
 {
 
  private ProgramLoadResult result;
  private Program prog;
  private AtpService atpService;
 
- public ProgramToMajorDisciplineInfoConverter (ProgramLoadResult result,
-                                               AtpService atpService)
+ public ProgramToProgramVariationInfoConverter (ProgramLoadResult result,
+                                                AtpService atpService)
  {
   this.result = result;
   this.prog = result.getProgram ();
@@ -56,9 +56,9 @@ public class ProgramToMajorDisciplineInfoConverter
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE =
                             "kuali.adminOrg.type.Administration";
 
- public MajorDisciplineInfo convert ()
+ public ProgramVariationInfo convert ()
  {
-  MajorDisciplineInfo info = new MajorDisciplineInfo ();
+  ProgramVariationInfo info = new ProgramVariationInfo ();
   info.setCode (prog.getCode ());
   info.setUniversityClassification (prog.getUniversityClassification ());
   info.setType (prog.getType ());
@@ -121,10 +121,10 @@ public class ProgramToMajorDisciplineInfoConverter
    }
    info.setEffectiveDate (atp.getStartDate ());
   }
-   if (prog.getEndTerm () != null)
+  if (prog.getEndTerm () != null)
   {
    info.setEndTerm (prog.getEndTerm ());
-   AtpInfo atp = new GetAtpHelper (atpService).getAtp  (info.getEndTerm ());
+   AtpInfo atp = new GetAtpHelper (atpService).getAtp (info.getStartTerm ());
    if (atp == null)
    {
     result.setException (new RuntimeException ("endTerm was not found: "
@@ -133,7 +133,6 @@ public class ProgramToMajorDisciplineInfoConverter
     return info;
    }
   }
-  info.setEndTerm (prog.getEndTerm ());
   info.setState (prog.getState ());
   info.setAttributes (
     new AttributeInfoHelper ().setValue ("endInstAdmitTerm",
@@ -145,9 +144,9 @@ public class ProgramToMajorDisciplineInfoConverter
     new AttributeInfoHelper ().setValue ("lastReviewDate",
                                          prog.getLastReviewDate (),
                                          info.getAttributes ()));
-  info.setNextReviewPeriod (prog.getNextReviewPeriod ());
-  info.setPublishedInstructors (toCluInstructors (
-    prog.getPublishedInstructors ()));
+//  info.setNextReviewPeriod (prog.getNextReviewPeriod ());
+//  info.setPublishedInstructors (toCluInstructors (
+//    prog.getPublishedInstructors ()));
   info.setReferenceURL (prog.getReferenceURL ());
   if (prog.getResultOptions () != null)
   {
@@ -159,6 +158,7 @@ public class ProgramToMajorDisciplineInfoConverter
 //  info.setProgramRequirements (prog.getProgramRequirements ());
   // TODO: load learning objectives
 //  info.setLearningObjectives (prog.getLearningObjectives ());
+
   return info;
  }
 
@@ -200,6 +200,4 @@ public class ProgramToMajorDisciplineInfoConverter
   }
   return cip;
  }
-
- 
 }

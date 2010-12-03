@@ -28,6 +28,7 @@ import java.util.Map;
 
 import javax.xml.ws.soap.SOAPFaultException;
 import org.kuali.student.loader.util.AttributeInfoHelper;
+import org.kuali.student.loader.util.GetAtpHelper;
 
 import org.kuali.student.loader.util.MetaInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
@@ -47,18 +48,16 @@ public class CreditCourseToCourseInfoConverter
 {
 
 
+ private CreditCourseLoadResult result;
  private CreditCourse cc;
  private AtpService atpService;
 
- public CreditCourseToCourseInfoConverter (CreditCourse cc)
+ public CreditCourseToCourseInfoConverter (CreditCourseLoadResult result, AtpService atpService)
  {
-  this.cc = cc;
- }
 
- public CreditCourseToCourseInfoConverter (CreditCourse cc, AtpService thisService)
- {
-  this.cc = cc;
-  this.atpService = thisService;
+  this.result = result;
+  this.cc = result.getCreditCourse ();
+  this.atpService = atpService;
  }
  
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE = "kuali.adminOrg.type.Administration";
@@ -110,7 +109,11 @@ public class CreditCourseToCourseInfoConverter
   setCreditOptions(info);
   
   //set atpTerm related fields
-  setAtpTerms(info);
+  if ( ! setAtpTerms(info))
+  {
+   // if failed stop processing
+   return info;
+  }
   
   //set formats
   setFormats(info);
@@ -221,36 +224,38 @@ public class CreditCourseToCourseInfoConverter
 	}	 
  }
  
- private void setAtpTerms(CourseInfo info){
-	 try {
+ private boolean setAtpTerms(CourseInfo info){
 		 if(cc.getStartTerm()!= null && !cc.getStartTerm().isEmpty()){
 			 info.setStartTerm(cc.getStartTerm());
 
-			 AtpInfo atpStart = atpService.getAtp(cc.getStartTerm());
-			 if(atpStart.getStartDate()!= null ){
-				 info.setEffectiveDate(atpStart.getStartDate());
-			 }
+			 AtpInfo atpStart = new GetAtpHelper (atpService).getAtp(cc.getStartTerm());
+     if (atpStart == null) {
+      result.setException (new RuntimeException ("startTerm was not found: "
+                                                + cc.getStartTerm ()));
+      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
+      return false;
+   }
+			 info.setEffectiveDate(atpStart.getStartDate());
 		 }
 	 
 		 if(cc.getEndTerm()!= null && !cc.getEndTerm().isEmpty()){
 			 info.setEndTerm(cc.getEndTerm());
 	
-			 AtpInfo atpEnd = atpService.getAtp(cc.getEndTerm());
-			 if(atpEnd.getEndDate()!= null ){
-				 info.setExpirationDate(atpEnd.getEndDate());
-			 }
-			 
+			 AtpInfo atpEnd = new GetAtpHelper (atpService).getAtp(cc.getEndTerm());
+    if (atpEnd == null){
+      result.setException (new RuntimeException ("startTerm was not found: "
+                                                + cc.getStartTerm ()));
+      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
+      return false;
+    }
+				info.setExpirationDate(atpEnd.getEndDate());
 			 info.setState ("Retired");
+    return true;
 		 }
-		 else		 
-			 info.setState ("Active");
-		 
-	 } catch (SOAPFaultException e) {
-		 System.out.println(e.getMessage());		 
-	 } catch (Exception e) {
-		 System.out.println(e.getMessage());
-	}
+			info.setState ("Active");
+		 return true;
  }
+
  private void setFormats(CourseInfo info) {
 	 List<FormatInfo> formats = new ArrayList<FormatInfo>();
 	 

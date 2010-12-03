@@ -64,7 +64,8 @@ public class CreditCourseLoaderFromCommandLineTest
   {
     "src/main/" + CreditCourseInputModelFactory.RESOURCES_DIRECTORY + "/"
 //     + CreditCourseInputModelFactory.ORIGINAL_KRU_COURSES_XLS,
-      + CreditCourseInputModelFactory.COURSES_FOR_BSCI_PROGRAM_XLS,
+//      + CreditCourseInputModelFactory.COURSES_FOR_BSCI_PROGRAM_XLS,
+      + CreditCourseInputModelFactory.REFERENCE_COURSES_XLS,
    CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL
   };
   CreditCourseLoaderFromCommandLine.main (args);

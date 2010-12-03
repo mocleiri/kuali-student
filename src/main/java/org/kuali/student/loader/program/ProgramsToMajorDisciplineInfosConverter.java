@@ -34,16 +34,11 @@ public class ProgramsToMajorDisciplineInfosConverter
  private List<Program> progs;
  private AtpService atpService;
 
- public ProgramsToMajorDisciplineInfosConverter (List<Program> progs)
- {
-  this.progs = progs;
- }
-
  public ProgramsToMajorDisciplineInfosConverter (List<Program> progs,
-                                                 AtpService thisService)
+                                                 AtpService atpService)
  {
   this.progs = progs;
-  this.atpService = thisService;
+  this.atpService = atpService;
  }
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE =
                             "kuali.adminOrg.type.Administration";
@@ -78,13 +73,14 @@ public class ProgramsToMajorDisciplineInfosConverter
    if (prog.getType ().equals ("kuali.lu.type.MajorDiscipline"))
    {
     MajorDisciplineInfo info =
-                        new ProgramToMajorDisciplineInfoConverter (prog,
+                        new ProgramToMajorDisciplineInfoConverter (result,
                                                                    atpService).convert ();
     infos.put (info.getCode (), info);
     result.setMajorDisciplineInfo (info);
     continue;
    }
-   throw new IllegalArgumentException ("Invalid/unhandled type=" + prog.getType ());
+   throw new IllegalArgumentException ("Invalid/unhandled type="
+                                       + prog.getType ());
   }
 
   // now process versions
@@ -94,7 +90,7 @@ public class ProgramsToMajorDisciplineInfosConverter
   {
    ProgramLoadResult result = results.get (row);
    row ++;
-   if (prog.getVariationOf () == null)
+   if ( ! prog.getType ().equals ("kuali.lu.type.Variation"))
    {
     continue;
    }
@@ -114,12 +110,8 @@ public class ProgramsToMajorDisciplineInfosConverter
    {
     info.setVariations (new ArrayList ());
    }
-   ProgramVariationInfo varInfo = new ProgramVariationInfo ();
-   varInfo.setCode (prog.getCode ());
-   varInfo.setShortTitle (prog.getShortTitle ());
-   varInfo.setLongTitle (prog.getLongTitle ());
-   varInfo.setTranscriptTitle (prog.getTranscriptTitle ());
-   varInfo.setType (prog.getType ());
+   ProgramVariationInfo varInfo = new ProgramToProgramVariationInfoConverter (
+     result, atpService).convert ();
    info.getVariations ().add (varInfo);
   }
   return results;

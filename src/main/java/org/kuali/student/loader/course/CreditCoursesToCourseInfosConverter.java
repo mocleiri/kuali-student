@@ -67,7 +67,7 @@ public class CreditCoursesToCourseInfosConverter
    {
     continue;
    }
-   CourseInfo info = new CreditCourseToCourseInfoConverter (cc, atpService).convert ();
+   CourseInfo info = new CreditCourseToCourseInfoConverter (result, atpService).convert ();
    infos.put (info.getCode (), info);
    result.setCourseInfo (info);
   }
