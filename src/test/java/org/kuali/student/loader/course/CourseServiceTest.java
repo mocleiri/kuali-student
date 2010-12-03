@@ -48,6 +48,7 @@ public class CourseServiceTest
  {
   CourseServiceFactory factory = new CourseServiceFactory ();
   factory.setHostUrl (CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL);
+  //factory.setHostUrl("http://localhost:9080/ks-embedded-dev");
   courseService = factory.getCourseService ();
  }
 
@@ -95,6 +96,8 @@ public class CourseServiceTest
   info.setCourseNumberSuffix ("111");
   info.setCourseTitle ("Intro to English");
   info.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
+  info.getAttributes ().put ("audit", new Boolean(true).toString());
+
   CourseInfo result = null;
   try
   {
@@ -106,6 +109,7 @@ public class CourseServiceTest
    assertEquals (info.getSubjectArea (), result.getSubjectArea ());
    assertEquals (info.getCourseNumberSuffix (), result.getCourseNumberSuffix ());
    assertEquals (info.getCourseTitle (), result.getCourseTitle ());
+   assertEquals ("true", result.getAttributes().get("audit"));
   }
   catch (DataValidationErrorException ex)
   {
@@ -142,7 +146,8 @@ public class CourseServiceTest
   assertEquals (info.getSubjectArea (), result.getSubjectArea ());
   assertEquals (info.getCourseNumberSuffix (), result.getCourseNumberSuffix ());
   assertEquals (info.getCourseTitle (), result.getCourseTitle ());
-
+  assertEquals ("true", result.getAttributes().get("audit"));
+  
   // update
   info = result;
   info.setSubjectArea ("MATH");
