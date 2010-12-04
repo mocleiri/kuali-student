@@ -35,19 +35,19 @@ public class CreditCoursesToCourseInfosConverter
 
 
  private List<CreditCourse> ccs;
- private AtpService atpService;
-
+ private Map<String, Object> helperService;
+ 
  public CreditCoursesToCourseInfosConverter (List<CreditCourse> ccs)
  {
   this.ccs = ccs;
  }
 
- public CreditCoursesToCourseInfosConverter (List<CreditCourse> ccs, AtpService thisService)
+ public CreditCoursesToCourseInfosConverter (List<CreditCourse> ccs, Map<String, Object> thisServiceMap)
  {
   this.ccs = ccs;
-  this.atpService = thisService;
+  this.helperService = thisServiceMap;
  }
-
+ 
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE = "kuali.adminOrg.type.Administration";
 
  public List<CreditCourseLoadResult> convert ()
@@ -67,7 +67,7 @@ public class CreditCoursesToCourseInfosConverter
    {
     continue;
    }
-   CourseInfo info = new CreditCourseToCourseInfoConverter (result, atpService).convert ();
+   CourseInfo info = new CreditCourseToCourseInfoConverter (result, helperService).convert ();
    infos.put (info.getCode (), info);
    result.setCourseInfo (info);
   }

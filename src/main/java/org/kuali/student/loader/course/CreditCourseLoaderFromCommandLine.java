@@ -21,7 +21,10 @@ import java.util.List;
 import java.util.Properties;
 
 import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.core.organization.service.OrganizationService;
+import org.kuali.student.loader.LoadFromCommandLine;
 import org.kuali.student.loader.atp.AtpServiceFactory;
+import org.kuali.student.loader.organization.OrganizationServiceFactory;
 
 /**
  *
@@ -71,11 +74,17 @@ public class CreditCourseLoaderFromCommandLine
   CourseServiceFactory servFactory = new CourseServiceFactory ();
   servFactory.setHostUrl (hostUrl);
   ccLoader.setCourseService (servFactory.getCourseService ());
+  
   AtpServiceFactory aptServFactory = new AtpServiceFactory();
   aptServFactory.setHostUrl(hostUrl);
   AtpService atpService = aptServFactory.getAtpService();
-  ccLoader.setAtpService(atpService);
-
+  ccLoader.getHelperService().put("atp", atpService);
+ 
+  OrganizationServiceFactory orgServFactory = new OrganizationServiceFactory ();
+  orgServFactory.setHostUrl (hostUrl);
+  OrganizationService orgService = orgServFactory.getOrganizationService ();
+  ccLoader.getHelperService().put("org", orgService);
+  
   System.out.println (new Date () + " getting credit courses...");
   List<CreditCourse> creditCourses = ccModel.getCreditCourses ();
 

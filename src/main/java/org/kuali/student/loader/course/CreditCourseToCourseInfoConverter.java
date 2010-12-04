@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 import org.kuali.student.core.atp.dto.AtpInfo;
 import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.core.organization.dto.OrgInfo;
+import org.kuali.student.core.organization.service.OrganizationService;
 import org.kuali.student.loader.util.AdminOrgInfoHelper;
 import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
@@ -26,10 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.ws.soap.SOAPFaultException;
 import org.kuali.student.loader.util.AttributeInfoHelper;
 import org.kuali.student.loader.util.GetAtpHelper;
 
+import org.kuali.student.loader.util.GetOrgHelper;
 import org.kuali.student.loader.util.MetaInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
@@ -50,14 +52,14 @@ public class CreditCourseToCourseInfoConverter
 
  private CreditCourseLoadResult result;
  private CreditCourse cc;
- private AtpService atpService;
-
- public CreditCourseToCourseInfoConverter (CreditCourseLoadResult result, AtpService atpService)
+ private Map<String, Object> helperService;
+ 
+ public CreditCourseToCourseInfoConverter (CreditCourseLoadResult result, Map<String, Object> thisServiceMap)
  {
 
   this.result = result;
   this.cc = result.getCreditCourse ();
-  this.atpService = atpService;
+  this.helperService = thisServiceMap;
  }
  
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE = "kuali.adminOrg.type.Administration";
@@ -83,10 +85,6 @@ public class CreditCourseToCourseInfoConverter
   List<String> campuses = new ArrayList ();
   campuses.add ("NO"); // north
   info.setCampusLocations (campuses);
-
-  // TODO: make this a lookup via the OrgService 
-  info.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
-
   info.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.week"));
   info.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
   info.setMetaInfo (new MetaInfoHelper ().get ());
@@ -101,7 +99,14 @@ public class CreditCourseToCourseInfoConverter
     "passFail", cc.isPassFail (), info.getAttributes ()));
   info.setSpecialTopicsCourse(cc.isSpecialTopics());
   info.setPrimaryInstructor (null);
- 
+  
+  // set adminOrgs
+  if ( ! setAdminOrgs(info))
+  {
+	// if failed stop processing
+	  return info;
+  }
+  
   //set gradingOptions
   setGradingOptions(info);
  
@@ -225,37 +230,67 @@ public class CreditCourseToCourseInfoConverter
  }
  
  private boolean setAtpTerms(CourseInfo info){
-		 if(cc.getStartTerm()!= null && !cc.getStartTerm().isEmpty()){
-			 info.setStartTerm(cc.getStartTerm());
+	 if(helperService != null && !helperService.isEmpty()){
+		 AtpService atpService = (AtpService)helperService.get("atp");
+		 if (atpService != null){
+			 if(cc.getStartTerm()!= null && !cc.getStartTerm().isEmpty()){
+				 info.setStartTerm(cc.getStartTerm());
 
-			 AtpInfo atpStart = new GetAtpHelper (atpService).getAtp(cc.getStartTerm());
-     if (atpStart == null) {
-      result.setException (new RuntimeException ("startTerm was not found: "
-                                                + cc.getStartTerm ()));
-      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
-      return false;
-   }
-			 info.setEffectiveDate(atpStart.getStartDate());
-		 }
+				 AtpInfo atpStart = new GetAtpHelper (atpService).getAtp(cc.getStartTerm());
+			     if (atpStart == null) {
+				      result.setException (new RuntimeException ("startTerm was not found: "
+				                                                + cc.getStartTerm ()));
+				      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
+				      return false;
+			     }
+				 info.setEffectiveDate(atpStart.getStartDate());
+			 }
 	 
-		 if(cc.getEndTerm()!= null && !cc.getEndTerm().isEmpty()){
-			 info.setEndTerm(cc.getEndTerm());
+			 if(cc.getEndTerm()!= null && !cc.getEndTerm().isEmpty()){
+				 info.setEndTerm(cc.getEndTerm());
 	
-			 AtpInfo atpEnd = new GetAtpHelper (atpService).getAtp(cc.getEndTerm());
-    if (atpEnd == null){
-      result.setException (new RuntimeException ("startTerm was not found: "
-                                                + cc.getStartTerm ()));
-      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
-      return false;
-    }
+				 AtpInfo atpEnd = new GetAtpHelper (atpService).getAtp(cc.getEndTerm());
+			    if (atpEnd == null){
+			      result.setException (new RuntimeException ("startTerm was not found: "
+			                                                + cc.getStartTerm ()));
+			      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
+			      return false;
+			    }
+			    
 				info.setExpirationDate(atpEnd.getEndDate());
-			 info.setState ("Retired");
-    return true;
-		 }
-			info.setState ("Active");
+				info.setState ("Retired");
+				return true;
+			 }
+			
+		 info.setState ("Active");
 		 return true;
+		 }
+	 }
+	 
+	 return false;
  }
 
+ private boolean setAdminOrgs(CourseInfo info) {
+	 if(helperService != null && !helperService.isEmpty()){
+		 OrganizationService orgService = (OrganizationService)helperService.get("org");
+		 if (orgService != null){
+			 if(cc.getAdministeringOrg() != null && !cc.getAdministeringOrg().isEmpty()){
+				 OrgInfo adminOrg = new GetOrgHelper (orgService).getOrg(cc.getAdministeringOrg());
+			     if (adminOrg == null) {
+				      result.setException (new RuntimeException ("AdministeringOrg was not found: "
+				                                                + cc.getAdministeringOrg ()));
+				      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
+				      return false;
+			     }
+			     info.getUnitsContentOwner ().add (cc.getAdministeringOrg ());
+			     return true;
+			 }			 
+		 }
+	 }
+	 
+	 return false;
+ }
+ 
  private void setFormats(CourseInfo info) {
 	 List<FormatInfo> formats = new ArrayList<FormatInfo>();
 	 

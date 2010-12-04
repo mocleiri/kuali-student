@@ -15,6 +15,7 @@
  */
 package org.kuali.student.loader.course;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,18 +33,8 @@ public class CreditCourseLoader
 {
 
  private CourseService courseService;
- private AtpService atpService;
-
- public AtpService getAtpService ()
- {
-  return atpService;
- }
-
- public void setAtpService (AtpService atpService)
- {
-  this.atpService = atpService;
- }
-
+ private Map<String, Object> helperService = new HashMap<String, Object>();
+ 
  public CourseService getCourseService ()
  {
   return courseService;
@@ -71,7 +62,7 @@ public class CreditCourseLoader
 
  public List<CreditCourseLoadResult> update ()
  {
-  List<CreditCourseLoadResult> results = new CreditCoursesToCourseInfosConverter (inputDataSource, atpService).convert ();
+	List<CreditCourseLoadResult> results = new CreditCoursesToCourseInfosConverter (inputDataSource, helperService).convert ();
   for (CreditCourseLoadResult result : results)
   {
    if (result.getStatus () != null)
@@ -115,4 +106,12 @@ public class CreditCourseLoader
   }
   return results;
  }
+
+public void setHelperService(Map<String, Object> helperService) {
+	this.helperService = helperService;
+}
+
+public Map<String, Object> getHelperService() {
+	return helperService;
+}
 }

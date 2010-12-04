@@ -45,7 +45,7 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
   WorksheetReader worksheetReader;
   try
   {
-   worksheetReader = reader.getWorksheetReader ("CreditCourses");
+	  worksheetReader = reader.getWorksheetReader ("CreditCourses");
   }
   catch (WorksheetNotFoundException ex)
   {
@@ -70,7 +70,7 @@ public class CreditCourseInputModelExcelImpl implements CreditCourseInputModel
    cc.setCourseNumberSuffix (helper.getFixup ("courseNumberSuffix"));
    cc.setVariation (helper.getFixup ("variation"));
    cc.setAdministeringOrgName (helper.getFixup ("AdministeringOrgName"));
-   cc.setAdministeringOrg (helper.getFixup ("AdministeringOrgName"));
+   cc.setAdministeringOrg (helper.getFixup ("administeringOrg"));
    cc.setTranscriptTitle (helper.getFixup ("TranscriptTitle"));
    cc.setCourseTitle (helper.getFixup ("CourseTitle"));
    cc.setDescr (helper.getFixup ("Descr"));

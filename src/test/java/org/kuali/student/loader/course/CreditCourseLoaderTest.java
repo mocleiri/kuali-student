@@ -16,12 +16,19 @@
 package org.kuali.student.loader.course;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.core.organization.service.OrganizationService;
+import org.kuali.student.loader.atp.AtpServiceFactory;
+import org.kuali.student.loader.organization.OrganizationServiceFactory;
 import org.kuali.student.lum.course.service.CourseService;
 import static org.junit.Assert.*;
 
@@ -33,7 +40,8 @@ public class CreditCourseLoaderTest
 {
 
  private static CourseService courseService;
-
+ private static Map<String, Object> helperService = new HashMap<String, Object>();
+ 
  public CreditCourseLoaderTest ()
  {
  }
@@ -45,6 +53,16 @@ public class CreditCourseLoaderTest
   CourseServiceFactory factory = new CourseServiceFactory ();
   factory.setHostUrl (CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   courseService = factory.getCourseService ();
+  
+  AtpServiceFactory aptServFactory = new AtpServiceFactory();
+  aptServFactory.setHostUrl(CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL);
+  AtpService atpService = aptServFactory.getAtpService();
+  helperService.put("atp", atpService);
+ 
+  OrganizationServiceFactory orgServFactory = new OrganizationServiceFactory ();
+  orgServFactory.setHostUrl (CourseServiceFactory.LOCAL_HOST_EMBEDDED_URL);
+  OrganizationService orgService = orgServFactory.getOrganizationService ();
+  helperService.put("org", orgService);
  }
 
  @AfterClass
@@ -74,6 +92,7 @@ public class CreditCourseLoaderTest
 
   CreditCourseLoader ccLoader = new CreditCourseLoader ();
   ccLoader.setCourseService (courseService);
+  ccLoader.setHelperService(helperService);
   CreditCourseInputModel ccModel = CreditCourseInputModelFactoryTest.getInstance ().
     getModel ();
 
