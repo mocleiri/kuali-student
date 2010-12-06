@@ -16,18 +16,20 @@
 package org.kuali.student.loader.program;
 
 import org.kuali.student.loader.util.GetAtpHelper;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 import org.kuali.student.core.atp.service.AtpService;
 import java.util.List;
 import org.kuali.student.core.atp.dto.AtpInfo;
+import org.kuali.student.core.organization.dto.OrgInfo;
+import org.kuali.student.core.organization.service.OrganizationService;
 import org.kuali.student.loader.util.AttributeInfoHelper;
 
 
+import org.kuali.student.loader.util.GetOrgHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
-import org.kuali.student.lum.lu.dto.CluInstructorInfo;
 import org.kuali.student.lum.program.dto.ProgramVariationInfo;
 
 /**
@@ -39,14 +41,13 @@ public class ProgramToProgramVariationInfoConverter
 
  private ProgramLoadResult result;
  private Program prog;
- private AtpService atpService;
+ private Map<String, Object> helperService;
 
- public ProgramToProgramVariationInfoConverter (ProgramLoadResult result,
-                                                AtpService atpService)
+ public ProgramToProgramVariationInfoConverter (ProgramLoadResult result, Map<String, Object> thisServiceMap)
  {
   this.result = result;
   this.prog = result.getProgram ();
-  this.atpService = atpService;
+  this.helperService = thisServiceMap;
  }
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE =
                             "kuali.adminOrg.type.Administration";
@@ -86,16 +87,14 @@ public class ProgramToProgramVariationInfoConverter
   info.setCatalogDescr (new RichTextInfoHelper ().getFromPlain (
     prog.getCatalogDescr ()));
   info.setDiplomaTitle (prog.getDiplomaTitle ());
-  info.setUnitsContentOwner (Arrays.asList (prog.getUnitsContentOwnerId ()));
-  info.setDivisionsContentOwner (Arrays.asList (prog.getDivisionsContentOwnerId ()));
-  info.setUnitsDeployment (Arrays.asList (prog.getUnitsDeploymentId ()));
-  info.setDivisionsDeployment (Arrays.asList (prog.getDivisionsDeploymentId ()));
-  info.setUnitsFinancialControl (Arrays.asList (prog.getUnitsFinancialControlId ()));
-  info.setDivisionsFinancialControl (Arrays.asList (prog.getDivisionsFinancialControlId ()));
-  info.setUnitsFinancialResources (Arrays.asList (prog.getUnitsFinancialResourcesId ()));
-  info.setDivisionsFinancialResources (Arrays.asList (prog.getDivisionsFinancialResourcesId ()));
-  info.setUnitsStudentOversight (Arrays.asList (prog.getUnitsStudentOversightId ()));
-  info.setDivisionsStudentOversight (Arrays.asList (prog.getDivisionsStudentOversightId ()));
+  
+  //set adminOrgs
+  if ( ! setAdminOrgs(info))
+  {
+	// if failed stop processing
+	  return info;
+  }
+  
 //  info.setInstitution (prog.getInstitution ());
   info.setStdDuration (new TimeAmountInfoHelper ().getWith1InTimeQuantity (
     prog.getStdDuration ()));
@@ -103,6 +102,7 @@ public class ProgramToProgramVariationInfoConverter
     new AttributeInfoHelper ().setValue ("durationNotes",
                                          prog.getDurationNotes (),
                                          info.getAttributes ()));
+  AtpService atpService = (AtpService)helperService.get("atp");
   if (prog.getStartTerm () != null)
   {
    info.setStartTerm (prog.getStartTerm ());
@@ -156,5 +156,94 @@ public class ProgramToProgramVariationInfoConverter
 
   return info;
  }
+ private boolean setAdminOrgs(ProgramVariationInfo info) {
+	 if(helperService != null && !helperService.isEmpty()){
+		 OrganizationService orgService = (OrganizationService)helperService.get("org");
+		 if (orgService != null){
+			 if(prog.getUnitsContentOwnerId () != null && !prog.getUnitsContentOwnerId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getUnitsContentOwnerId ()) != null )
+					 info.setUnitsContentOwner (Arrays.asList (prog.getUnitsContentOwnerId ())); 
+				 else
+					 return false;
+			 }
 
+			 if(prog.getDivisionsContentOwnerId () != null && !prog.getDivisionsContentOwnerId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getDivisionsContentOwnerId ()) != null )
+					 info.setDivisionsContentOwner (Arrays.asList (prog.getDivisionsContentOwnerId ()));
+				 else
+					 return false;
+			 }
+			 
+			 if(prog.getUnitsDeploymentId () != null && !prog.getUnitsDeploymentId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getUnitsDeploymentId ()) != null )
+					 info.setUnitsDeployment (Arrays.asList (prog.getUnitsDeploymentId ()));
+				 else
+					 return false;
+			 }
+
+			 if(prog.getDivisionsDeploymentId () != null && !prog.getDivisionsDeploymentId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getDivisionsDeploymentId ()) != null )
+					 info.setDivisionsDeployment (Arrays.asList (prog.getDivisionsDeploymentId ()));
+				 else
+					 return false;
+			 }
+			 
+			 if(prog.getUnitsFinancialControlId () != null && !prog.getUnitsFinancialControlId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getUnitsFinancialControlId ()) != null )
+					 info.setUnitsFinancialControl (Arrays.asList (prog.getUnitsFinancialControlId ()));
+				 else
+					 return false;
+			 }
+			  
+			if(prog.getDivisionsFinancialControlId () != null && !prog.getDivisionsFinancialControlId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getDivisionsFinancialControlId ()) != null )
+					 info.setDivisionsFinancialControl (Arrays.asList (prog.getDivisionsFinancialControlId ()));
+				 else
+					 return false;
+			 }
+			
+			if(prog.getUnitsFinancialResourcesId () != null && !prog.getUnitsFinancialResourcesId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getUnitsFinancialResourcesId ()) != null )
+					 info.setUnitsFinancialResources (Arrays.asList (prog.getUnitsFinancialResourcesId ()));
+				 else
+					 return false;
+			 }
+			  
+			if(prog.getDivisionsFinancialResourcesId () != null && !prog.getDivisionsFinancialResourcesId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getDivisionsFinancialResourcesId ()) != null )
+					 info.setDivisionsFinancialResources (Arrays.asList (prog.getDivisionsFinancialResourcesId ()));
+				 else
+					 return false;
+			 }
+
+			if(prog.getUnitsStudentOversightId () != null && !prog.getUnitsStudentOversightId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getUnitsStudentOversightId ()) != null )
+					 info.setUnitsStudentOversight (Arrays.asList (prog.getUnitsStudentOversightId ()));
+				 else
+					 return false;
+			 }
+			
+			if(prog.getDivisionsStudentOversightId () != null && !prog.getDivisionsStudentOversightId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getDivisionsStudentOversightId ()) != null )
+					 info.setDivisionsStudentOversight (Arrays.asList (prog.getDivisionsStudentOversightId ()));	
+				 else
+					 return false;
+			 }		 
+		 }
+	 }
+	 
+	 return false;
+ }
+ 
+ private OrgInfo getAdminOrg(OrganizationService orgService, String orgId){
+
+	 OrgInfo adminOrg = new GetOrgHelper (orgService).getOrg(orgId);
+	 
+     if (adminOrg == null) {
+	      result.setException (new RuntimeException ("AdministeringOrg was not found: " + orgId));
+	      result.setStatus (ProgramLoadResult.Status.VALIDATION_ERROR);
+     }	
+     
+     return adminOrg;
+ }
 }

@@ -15,7 +15,9 @@
  */
 package org.kuali.student.loader.program;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,17 +40,7 @@ public class ProgramLoader
 {
 
  private ProgramService programService;
- private AtpService atpService;
-
- public AtpService getAtpService ()
- {
-  return atpService;
- }
-
- public void setAtpService (AtpService atpService)
- {
-  this.atpService = atpService;
- }
+ private Map<String, Object> helperService = new HashMap<String, Object>();
 
  public ProgramService getProgramService ()
  {
@@ -77,7 +69,7 @@ public class ProgramLoader
 
  public List<ProgramLoadResult> update ()
  {
-  List<ProgramLoadResult> results = new ProgramsToMajorDisciplineInfosConverter (inputDataSource, atpService).convert ();
+  List<ProgramLoadResult> results = new ProgramsToMajorDisciplineInfosConverter (inputDataSource, helperService).convert ();
   for (ProgramLoadResult result : results)
   {
    if (result.getStatus () != null)
@@ -140,4 +132,12 @@ public class ProgramLoader
   }
   return results;
  }
+ 
+ public void setHelperService(Map<String, Object> helperService) {
+		this.helperService = helperService;
+	}
+
+	public Map<String, Object> getHelperService() {
+		return helperService;
+	}
 }

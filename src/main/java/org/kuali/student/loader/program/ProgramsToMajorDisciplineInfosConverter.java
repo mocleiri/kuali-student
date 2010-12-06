@@ -32,13 +32,12 @@ public class ProgramsToMajorDisciplineInfosConverter
 {
 
  private List<Program> progs;
- private AtpService atpService;
+ private Map<String, Object> helperService;
 
- public ProgramsToMajorDisciplineInfosConverter (List<Program> progs,
-                                                 AtpService atpService)
+ public ProgramsToMajorDisciplineInfosConverter (List<Program> progs, Map<String, Object> thisServiceMap)
  {
   this.progs = progs;
-  this.atpService = atpService;
+  this.helperService = thisServiceMap;
  }
  public static final String ADMINISTRATION_ADMIN_ORG_TYPE =
                             "kuali.adminOrg.type.Administration";
@@ -73,8 +72,7 @@ public class ProgramsToMajorDisciplineInfosConverter
    if (prog.getType ().equals ("kuali.lu.type.MajorDiscipline"))
    {
     MajorDisciplineInfo info =
-                        new ProgramToMajorDisciplineInfoConverter (result,
-                        atpService).convert ();
+                        new ProgramToMajorDisciplineInfoConverter (result, helperService).convert ();
     infos.put (info.getCode (), info);
     result.setMajorDisciplineInfo (info);
     continue;
@@ -111,7 +109,7 @@ public class ProgramsToMajorDisciplineInfosConverter
     info.setVariations (new ArrayList ());
    }
    ProgramVariationInfo varInfo = new ProgramToProgramVariationInfoConverter (
-     result, atpService).convert ();
+     result, helperService).convert ();
    info.getVariations ().add (varInfo);
   }
   return results;
