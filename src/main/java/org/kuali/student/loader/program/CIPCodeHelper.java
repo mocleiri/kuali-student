@@ -13,36 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.loader.util;
+package org.kuali.student.loader.program;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 
 /**
  *
  * @author nwright
  */
-public class AttributeInfoHelper
+public class CIPCodeHelper
 {
 
- public Map<String, String> setValue (String key, Object value,
-                                      Map<String, String> attributes)
+ public String formatCIP (String cip)
  {
-  if (value == null)
+  if (cip == null)
   {
-   if (attributes == null)
-   {
-    return null;
-   }
-   attributes.remove (key);
-   return attributes;
+   return null;
   }
-  if (attributes == null)
+  if (cip.length () == 6)
   {
-   attributes = new HashMap ();
+   return cip.substring (0, 2) + "." + cip.substring (2);
   }
-  String valStr = value.toString ();
-  attributes.put (key, valStr);
-  return attributes;
+  if (cip.length () == 4)
+  {
+   return cip.substring (0, 2) + "." + cip.substring (2);
+  }
+  if (cip.length () == 2)
+  {
+   return cip;
+  }
+  return cip;
  }
+
+
+ 
 }

@@ -20,6 +20,7 @@ import org.kuali.student.loader.atp.AtpLoaderFromCommandLine;
 import org.kuali.student.loader.course.CreditCourseLoaderFromCommandLine;
 import org.kuali.student.loader.enumeration.EnumeratedValueLoaderFromCommandLine;
 import org.kuali.student.loader.organization.OrganizationLoaderFromCommandLine;
+import org.kuali.student.loader.program.ProgramLoaderFromCommandLine;
 import org.kuali.student.loader.standardizedtest.StandardizedTestLoaderFromCommandLine;
 
 /**
@@ -48,8 +49,8 @@ public class LoadFromCommandLine
  public void displayVersion (PrintStream out)
  {
   //TODO: figure out how to get the version from the Maven property
-  out.println ("Kuali Student Loader: Version 0.86");
-  out.println ("        Built on November 24, 2010");
+  out.println ("Kuali Student Loader: Version 0.90");
+  out.println ("        Built on December 5, 2010");
  }
 
  private void displayParameters (String whatToLoad, String inFile,
@@ -76,7 +77,7 @@ public class LoadFromCommandLine
   out.println (
     "Usage: java -jar ks-loader.jar <whatToLoad> <inputExcel> <hostUrl>");
   out.println (
-    "\t@param whatToLoad 'organization', 'course', 'enumeration', 'atp' or 'test' (for standardized tests)");
+    "\t@param whatToLoad 'organization', 'course', 'program', 'enumeration', 'atp' or 'test' (for standardized tests)");
   out.println (
     "\t@param inputExcel the fully qualified file name for the specially formatted input excel file");
   out.println (
@@ -123,6 +124,15 @@ public class LoadFromCommandLine
    args[0] = inFile;
    args[1] = hostUrl;
    CreditCourseLoaderFromCommandLine.main (args);
+   return;
+  }
+  if (whatToLoad.equalsIgnoreCase ("program"))
+  {
+   displayParameters (whatToLoad, inFile, hostUrl);
+   String[] args = new String[2];
+   args[0] = inFile;
+   args[1] = hostUrl;
+   ProgramLoaderFromCommandLine.main (args);
    return;
   }
   if (whatToLoad.equalsIgnoreCase ("organization"))

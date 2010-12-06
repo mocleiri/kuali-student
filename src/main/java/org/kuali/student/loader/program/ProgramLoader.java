@@ -16,9 +16,16 @@
 package org.kuali.student.loader.program;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
+import org.kuali.student.core.exceptions.DoesNotExistException;
+import org.kuali.student.core.exceptions.InvalidParameterException;
+import org.kuali.student.core.exceptions.MissingParameterException;
+import org.kuali.student.core.exceptions.OperationFailedException;
+import org.kuali.student.core.exceptions.PermissionDeniedException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
 import org.kuali.student.lum.program.service.ProgramService;
@@ -78,6 +85,26 @@ public class ProgramLoader
     continue;
    }
    MajorDisciplineInfo info = result.getMajorDisciplineInfo ();
+   if (info.getId () != null)
+   {
+    try
+    {
+     MajorDisciplineInfo oldInfo =
+                         programService.getMajorDiscipline (info.getId ());
+     result.setStatus (ProgramLoadResult.Status.NOT_LOADED_ALREADY_EXISTS);
+     continue;
+    }
+    catch (DoesNotExistException ex)
+    {
+     // ok we will create
+    }
+    catch (Exception ex)
+    {
+     result.setException (ex);
+     result.setStatus (ProgramLoadResult.Status.EXCEPTION);
+     continue;
+    }
+   }
    try
    {
     MajorDisciplineInfo createdInfo = programService.createMajorDiscipline (info);

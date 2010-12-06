@@ -21,12 +21,7 @@ import java.util.Arrays;
 
 import org.kuali.student.core.atp.service.AtpService;
 import java.util.List;
-import javax.xml.ws.soap.SOAPFaultException;
 import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.exceptions.InvalidParameterException;
-import org.kuali.student.core.exceptions.MissingParameterException;
-import org.kuali.student.core.exceptions.OperationFailedException;
 import org.kuali.student.loader.util.AttributeInfoHelper;
 
 
@@ -84,23 +79,23 @@ public class ProgramToProgramVariationInfoConverter
    info.setCatalogPublicationTargets (Arrays.asList (prog.getCatalogPublicationTargets ().split (
      " ")));
   }
-  info.setCip2000Code (formatCIP (prog.getCip2000Code ()));
-  info.setCip2010Code (formatCIP (prog.getCip2010Code ()));
+  info.setCip2000Code (new CIPCodeHelper ().formatCIP (prog.getCip2000Code ()));
+  info.setCip2010Code (new CIPCodeHelper ().formatCIP (prog.getCip2010Code ()));
   info.setHegisCode (prog.getHegisCode ());
   info.setDescr (new RichTextInfoHelper ().getFromPlain (prog.getDescr ()));
   info.setCatalogDescr (new RichTextInfoHelper ().getFromPlain (
     prog.getCatalogDescr ()));
   info.setDiplomaTitle (prog.getDiplomaTitle ());
-//  info.setUnitsContentOwner (prog.getUnitsContentOwner ());
-//  info.setDivisionsContentOwner (prog.getDivisionsContentOwner ());
-//  info.setUnitsDeployment (prog.getUnitsDeployment ());
-//  info.setDivisionsDeployment (prog.getDivisionsDeployment ());
-//  info.setUnitsFinancialControl (prog.getUnitsFinancialControl ());
-//  info.setDivisionsFinancialControl (prog.getDivisionsFinancialControl ());
-//  info.setUnitsFinancialResources (prog.getUnitsFinancialResources ());
-//  info.setDivisionsFinancialResources (prog.getDivisionsFinancialResources ());
-//  info.setUnitsStudentOversight (prog.getUnitsStudentOversight ());
-//  info.setDivisionsStudentOversight (prog.getDivisionsStudentOversight ());
+  info.setUnitsContentOwner (Arrays.asList (prog.getUnitsContentOwnerId ()));
+  info.setDivisionsContentOwner (Arrays.asList (prog.getDivisionsContentOwnerId ()));
+  info.setUnitsDeployment (Arrays.asList (prog.getUnitsDeploymentId ()));
+  info.setDivisionsDeployment (Arrays.asList (prog.getDivisionsDeploymentId ()));
+  info.setUnitsFinancialControl (Arrays.asList (prog.getUnitsFinancialControlId ()));
+  info.setDivisionsFinancialControl (Arrays.asList (prog.getDivisionsFinancialControlId ()));
+  info.setUnitsFinancialResources (Arrays.asList (prog.getUnitsFinancialResourcesId ()));
+  info.setDivisionsFinancialResources (Arrays.asList (prog.getDivisionsFinancialResourcesId ()));
+  info.setUnitsStudentOversight (Arrays.asList (prog.getUnitsStudentOversightId ()));
+  info.setDivisionsStudentOversight (Arrays.asList (prog.getDivisionsStudentOversightId ()));
 //  info.setInstitution (prog.getInstitution ());
   info.setStdDuration (new TimeAmountInfoHelper ().getWith1InTimeQuantity (
     prog.getStdDuration ()));
@@ -162,42 +157,4 @@ public class ProgramToProgramVariationInfoConverter
   return info;
  }
 
- private List<CluInstructorInfo> toCluInstructors (String instructors)
- {
-  if (instructors == null)
-  {
-   return null;
-  }
-  List<String> names = Arrays.asList (instructors.split ("\n"));
-  List<CluInstructorInfo> clis = new ArrayList (names.size ());
-  for (String name : names)
-  {
-   CluInstructorInfo cli = new CluInstructorInfo ();
-   cli.setPersonInfoOverride (name);
-   clis.add (cli);
-  }
-  return clis;
- }
-
- private String formatCIP (String cip)
- {
-  if (cip == null)
-  {
-   return null;
-  }
-  if (cip.length () == 6)
-  {
-   return cip.substring (0, 2) + "." + cip.substring (2, 4) + "." + cip.substring (
-     4);
-  }
-  if (cip.length () == 4)
-  {
-   return cip.substring (0, 2) + "." + cip.substring (2);
-  }
-  if (cip.length () == 2)
-  {
-   return cip;
-  }
-  return cip;
- }
 }

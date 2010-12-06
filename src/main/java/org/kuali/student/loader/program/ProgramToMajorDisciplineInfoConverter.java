@@ -21,12 +21,7 @@ import java.util.Arrays;
 
 import org.kuali.student.core.atp.service.AtpService;
 import java.util.List;
-import javax.xml.ws.soap.SOAPFaultException;
 import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.exceptions.InvalidParameterException;
-import org.kuali.student.core.exceptions.MissingParameterException;
-import org.kuali.student.core.exceptions.OperationFailedException;
 import org.kuali.student.loader.util.AttributeInfoHelper;
 
 
@@ -67,7 +62,7 @@ public class ProgramToMajorDisciplineInfoConverter
     "isVariationRequired", prog.getIsVariationRequired (), info.getAttributes ()));
 //  info.setOrgCoreProgram (prog.getCorePrograms ());
   // Convert this to an Id by looking it up in the rest file
-//  info.setCredentialProgramId (prog.getCredentialProgram ());
+  info.setCredentialProgramId (prog.getCredentialProgramId ());
   info.setId (prog.getId ());
   info.setShortTitle (prog.getShortTitle ());
   info.setLongTitle (prog.getLongTitle ());
@@ -84,24 +79,31 @@ public class ProgramToMajorDisciplineInfoConverter
    info.setCatalogPublicationTargets (Arrays.asList (prog.getCatalogPublicationTargets ().split (
      " ")));
   }
-  info.setCip2000Code (formatCIP (prog.getCip2000Code ()));
-  info.setCip2010Code (formatCIP (prog.getCip2010Code ()));
+  info.setCip2000Code (new CIPCodeHelper ().formatCIP (prog.getCip2000Code ()));
+  info.setCip2010Code (new CIPCodeHelper ().formatCIP (prog.getCip2010Code ()));
   info.setHegisCode (prog.getHegisCode ());
   info.setDescr (new RichTextInfoHelper ().getFromPlain (prog.getDescr ()));
   info.setCatalogDescr (new RichTextInfoHelper ().getFromPlain (
     prog.getCatalogDescr ()));
   info.setDiplomaTitle (prog.getDiplomaTitle ());
-//  info.setUnitsContentOwner (prog.getUnitsContentOwner ());
-//  info.setDivisionsContentOwner (prog.getDivisionsContentOwner ());
-//  info.setUnitsDeployment (prog.getUnitsDeployment ());
-//  info.setDivisionsDeployment (prog.getDivisionsDeployment ());
-//  info.setUnitsFinancialControl (prog.getUnitsFinancialControl ());
-//  info.setDivisionsFinancialControl (prog.getDivisionsFinancialControl ());
-//  info.setUnitsFinancialResources (prog.getUnitsFinancialResources ());
-//  info.setDivisionsFinancialResources (prog.getDivisionsFinancialResources ());
-//  info.setUnitsStudentOversight (prog.getUnitsStudentOversight ());
-//  info.setDivisionsStudentOversight (prog.getDivisionsStudentOversight ());
-//  info.setInstitution (prog.getInstitution ());
+  info.setUnitsContentOwner (Arrays.asList (prog.getUnitsContentOwnerId ()));
+  info.setDivisionsContentOwner (Arrays.asList (
+    prog.getDivisionsContentOwnerId ()));
+  info.setUnitsDeployment (Arrays.asList (prog.getUnitsDeploymentId ()));
+  info.setDivisionsDeployment (Arrays.asList (prog.getDivisionsDeploymentId ()));
+  info.setUnitsFinancialControl (Arrays.asList (
+    prog.getUnitsFinancialControlId ()));
+  info.setDivisionsFinancialControl (Arrays.asList (
+    prog.getDivisionsFinancialControlId ()));
+  info.setUnitsFinancialResources (Arrays.asList (
+    prog.getUnitsFinancialResourcesId ()));
+  info.setDivisionsFinancialResources (Arrays.asList (
+    prog.getDivisionsFinancialResourcesId ()));
+  info.setUnitsStudentOversight (Arrays.asList (
+    prog.getUnitsStudentOversightId ()));
+  info.setDivisionsStudentOversight (Arrays.asList (
+    prog.getDivisionsStudentOversightId ()));
+//  info.setInstitution (Arrays.asList (prog.getInstitution ()));
   info.setStdDuration (new TimeAmountInfoHelper ().getWith1InTimeQuantity (
     prog.getStdDuration ()));
   info.setAttributes (
@@ -121,10 +123,10 @@ public class ProgramToMajorDisciplineInfoConverter
    }
    info.setEffectiveDate (atp.getStartDate ());
   }
-   if (prog.getEndTerm () != null)
+  if (prog.getEndTerm () != null)
   {
    info.setEndTerm (prog.getEndTerm ());
-   AtpInfo atp = new GetAtpHelper (atpService).getAtp  (info.getEndTerm ());
+   AtpInfo atp = new GetAtpHelper (atpService).getAtp (info.getEndTerm ());
    if (atp == null)
    {
     result.setException (new RuntimeException ("endTerm was not found: "
@@ -148,6 +150,10 @@ public class ProgramToMajorDisciplineInfoConverter
   info.setNextReviewPeriod (prog.getNextReviewPeriod ());
   info.setPublishedInstructors (toCluInstructors (
     prog.getPublishedInstructors ()));
+  info.setAttributes (
+    new AttributeInfoHelper ().setValue ("coreFaculties",
+                                         prog.getCoreFaculties (),
+                                         info.getAttributes ()));
   info.setReferenceURL (prog.getReferenceURL ());
   if (prog.getResultOptions () != null)
   {
@@ -158,7 +164,8 @@ public class ProgramToMajorDisciplineInfoConverter
 //  info.setProgramLevel (prog.getProgramLevel ());
 //  info.setProgramRequirements (prog.getProgramRequirements ());
   // TODO: load learning objectives
-//  info.setLearningObjectives (prog.getLearningObjectives ());
+  info.setLearningObjectives (new SingleUseLoDisplayInfoHelper ().parse (
+    prog.getLearningObjectives (), info.getEffectiveDate ()));
   return info;
  }
 
@@ -178,28 +185,4 @@ public class ProgramToMajorDisciplineInfoConverter
   }
   return clis;
  }
-
- private String formatCIP (String cip)
- {
-  if (cip == null)
-  {
-   return null;
-  }
-  if (cip.length () == 6)
-  {
-   return cip.substring (0, 2) + "." + cip.substring (2, 4) + "." + cip.substring (
-     4);
-  }
-  if (cip.length () == 4)
-  {
-   return cip.substring (0, 2) + "." + cip.substring (2);
-  }
-  if (cip.length () == 2)
-  {
-   return cip;
-  }
-  return cip;
- }
-
- 
 }

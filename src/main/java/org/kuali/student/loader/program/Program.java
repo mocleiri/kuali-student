@@ -30,6 +30,7 @@ private String variationOf;
 private Boolean isVariationRequired;
 private String corePrograms;
 private String credentialProgram;
+private String credentialProgramId;
 private String id;
 private String shortTitle;
 private String longTitle;
@@ -54,6 +55,17 @@ private String divisionsFinancialResources;
 private String unitsStudentOversight;
 private String divisionsStudentOversight;
 private String institution;
+private String unitsContentOwnerId;
+private String divisionsContentOwnerId;
+private String unitsDeploymentId;
+private String divisionsDeploymentId;
+private String unitsFinancialControlId;
+private String divisionsFinancialControlId;
+private String unitsFinancialResourcesId;
+private String divisionsFinancialResourcesId;
+private String unitsStudentOversightId;
+private String divisionsStudentOversightId;
+private String institutionId;
 private String stdDuration;
 private String durationNotes;
 private String startTerm;
@@ -65,6 +77,7 @@ private String intensity;
 private Date lastReviewDate;
 private String nextReviewPeriod;
 private String publishedInstructors;
+private String coreFaculties;
 private String referenceURL;
 private String resultOptions;
 private String selectiveEnrollmentCode;
@@ -244,6 +257,16 @@ private String learningObjectives;
  public void setCredentialProgram (String credentialProgram)
  {
   this.credentialProgram = credentialProgram;
+ }
+
+ public String getCredentialProgramId ()
+ {
+  return credentialProgramId;
+ }
+
+ public void setCredentialProgramId (String credentialProgramId)
+ {
+  this.credentialProgramId = credentialProgramId;
  }
 
  public String getDiplomaTitle ()
@@ -446,6 +469,16 @@ private String learningObjectives;
   this.publishedInstructors = publishedInstructors;
  }
 
+ public String getCoreFaculties ()
+ {
+  return coreFaculties;
+ }
+
+ public void setCoreFaculties (String coreFaculties)
+ {
+  this.coreFaculties = coreFaculties;
+ }
+
  public String getReferenceURL ()
  {
   return referenceURL;
@@ -555,6 +588,118 @@ private String learningObjectives;
  {
   this.unitsStudentOversight = unitsStudentOversight;
  }
+
+ public String getDivisionsContentOwnerId ()
+ {
+  return divisionsContentOwnerId;
+ }
+
+ public void setDivisionsContentOwnerId (String divisionsContentOwnerId)
+ {
+  this.divisionsContentOwnerId = divisionsContentOwnerId;
+ }
+
+ public String getDivisionsDeploymentId ()
+ {
+  return divisionsDeploymentId;
+ }
+
+ public void setDivisionsDeploymentId (String divisionsDeploymentId)
+ {
+  this.divisionsDeploymentId = divisionsDeploymentId;
+ }
+
+ public String getDivisionsFinancialControlId ()
+ {
+  return divisionsFinancialControlId;
+ }
+
+ public void setDivisionsFinancialControlId (String divisionsFinancialControlId)
+ {
+  this.divisionsFinancialControlId = divisionsFinancialControlId;
+ }
+
+ public String getDivisionsFinancialResourcesId ()
+ {
+  return divisionsFinancialResourcesId;
+ }
+
+ public void setDivisionsFinancialResourcesId (String divisionsFinancialResourcesId)
+ {
+  this.divisionsFinancialResourcesId = divisionsFinancialResourcesId;
+ }
+
+ public String getDivisionsStudentOversightId ()
+ {
+  return divisionsStudentOversightId;
+ }
+
+ public void setDivisionsStudentOversightId (String divisionsStudentOversightId)
+ {
+  this.divisionsStudentOversightId = divisionsStudentOversightId;
+ }
+
+ public String getInstitutionId ()
+ {
+  return institutionId;
+ }
+
+ public void setInstitutionId (String institutionId)
+ {
+  this.institutionId = institutionId;
+ }
+
+ public String getUnitsContentOwnerId ()
+ {
+  return unitsContentOwnerId;
+ }
+
+ public void setUnitsContentOwnerId (String unitsContentOwnerId)
+ {
+  this.unitsContentOwnerId = unitsContentOwnerId;
+ }
+
+ public String getUnitsDeploymentId ()
+ {
+  return unitsDeploymentId;
+ }
+
+ public void setUnitsDeploymentId (String unitsDeploymentId)
+ {
+  this.unitsDeploymentId = unitsDeploymentId;
+ }
+
+ public String getUnitsFinancialControlId ()
+ {
+  return unitsFinancialControlId;
+ }
+
+ public void setUnitsFinancialControlId (String unitsFinancialControlId)
+ {
+  this.unitsFinancialControlId = unitsFinancialControlId;
+ }
+
+ public String getUnitsFinancialResourcesId ()
+ {
+  return unitsFinancialResourcesId;
+ }
+
+ public void setUnitsFinancialResourcesId (String unitsFinancialResourcesId)
+ {
+  this.unitsFinancialResourcesId = unitsFinancialResourcesId;
+ }
+
+ public String getUnitsStudentOversightId ()
+ {
+  return unitsStudentOversightId;
+ }
+
+ public void setUnitsStudentOversightId (String unitsStudentOversightId)
+ {
+  this.unitsStudentOversightId = unitsStudentOversightId;
+ }
+
+ 
 
  public String getVersionInfo ()
  {

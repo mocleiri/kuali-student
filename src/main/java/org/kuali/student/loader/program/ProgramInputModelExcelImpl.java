@@ -67,6 +67,7 @@ public class ProgramInputModelExcelImpl implements ProgramInputModel
    prog.setIsVariationRequired (helper.getFixupBoolean ("isVariationRequired"));
    prog.setCorePrograms (helper.getFixup ("corePrograms"));
    prog.setCredentialProgram (helper.getFixup ("credentialProgram"));
+   prog.setCredentialProgramId (helper.getFixup ("credentialProgramId"));
    prog.setId (helper.getFixup ("id"));
    prog.setShortTitle (helper.getFixup ("shortTitle"));
    prog.setLongTitle (helper.getFixup ("longTitle"));
@@ -95,6 +96,22 @@ public class ProgramInputModelExcelImpl implements ProgramInputModel
    prog.setDivisionsStudentOversight (helper.getFixup (
      "divisionsStudentOversight"));
    prog.setInstitution (helper.getFixup ("institution"));
+
+   prog.setUnitsContentOwnerId (helper.getFixup ("unitsContentOwnerId"));
+   prog.setDivisionsContentOwnerId (helper.getFixup ("divisionsContentOwnerId"));
+   prog.setUnitsDeploymentId (helper.getFixup ("unitsDeploymentId"));
+   prog.setDivisionsDeploymentId (helper.getFixup ("divisionsDeploymentId"));
+   prog.setUnitsFinancialControlId (helper.getFixup ("unitsFinancialControlId"));
+   prog.setDivisionsFinancialControlId (helper.getFixup (
+     "divisionsFinancialControlId"));
+   prog.setUnitsFinancialResourcesId (helper.getFixup ("unitsFinancialResourcesId"));
+   prog.setDivisionsFinancialResourcesId (helper.getFixup (
+     "divisionsFinancialResourcesId"));
+   prog.setUnitsStudentOversightId (helper.getFixup ("unitsStudentOversightId"));
+   prog.setDivisionsStudentOversightId (helper.getFixup (
+     "divisionsStudentOversightId"));
+   prog.setInstitutionId (helper.getFixup ("institutionId"));
+
    prog.setStdDuration (helper.getFixup ("stdDuration"));
    prog.setDurationNotes (helper.getFixup ("durationNotes"));
    prog.setStartTerm (helper.getFixup ("startTerm"));
@@ -106,6 +123,7 @@ public class ProgramInputModelExcelImpl implements ProgramInputModel
    prog.setLastReviewDate (helper.getFixupDate ("lastReviewDate"));
    prog.setNextReviewPeriod (helper.getFixup ("nextReviewPeriod"));
    prog.setPublishedInstructors (helper.getFixup ("publishedInstructors"));
+   prog.setCoreFaculties (helper.getFixup ("coreFaculties"));
    prog.setReferenceURL (helper.getFixup ("referenceURL"));
    prog.setResultOptions (helper.getFixup ("resultOptions"));
    prog.setSelectiveEnrollmentCode (helper.getFixup ("selectiveEnrollmentCode"));

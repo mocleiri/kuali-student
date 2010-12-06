@@ -74,7 +74,7 @@ public class ProgramsToMajorDisciplineInfosConverter
    {
     MajorDisciplineInfo info =
                         new ProgramToMajorDisciplineInfoConverter (result,
-                                                                   atpService).convert ();
+                        atpService).convert ();
     infos.put (info.getCode (), info);
     result.setMajorDisciplineInfo (info);
     continue;
