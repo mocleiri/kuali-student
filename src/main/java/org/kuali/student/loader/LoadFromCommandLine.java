@@ -50,8 +50,8 @@ public class LoadFromCommandLine
  public void displayVersion (PrintStream out)
  {
   //TODO: figure out how to get the version from the Maven property
-  out.println ("Kuali Student Loader: Version 0.91");
-  out.println ("        Built on December 7, 2010");
+  out.println ("Kuali Student Loader: Version 0.92");
+  out.println ("        Built on December 8, 2010");
  }
 
  private void displayParameters (String whatToLoad, String inFile,

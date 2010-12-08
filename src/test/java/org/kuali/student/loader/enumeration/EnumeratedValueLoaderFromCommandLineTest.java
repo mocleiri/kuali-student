@@ -4,13 +4,11 @@
  */
 package org.kuali.student.loader.enumeration;
 
-import java.io.PrintStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -53,7 +51,8 @@ public class EnumeratedValueLoaderFromCommandLineTest
   String[] args =
   {
    "src/main/" + EnumeratedValueInputModelFactory.RESOURCES_DIRECTORY + "/"
-   + EnumeratedValueInputModelFactory.EXTRA_ENUMERATED_VALUES_BSCI_XLS,
+     + "NewReferenceSubjectAreaEnumerations.xls",
+//   + EnumeratedValueInputModelFactory.EXTRA_ENUMERATED_VALUES_BSCI_XLS,
    EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL
   };
   EnumeratedValueLoaderFromCommandLine.main (args);

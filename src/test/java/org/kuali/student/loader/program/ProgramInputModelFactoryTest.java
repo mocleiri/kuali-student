@@ -89,6 +89,7 @@ public class ProgramInputModelFactoryTest
   assertEquals (
     "The Biological Sciences major offers a rigorous exposure to the modern experimental disciplines within Biology. The major is jointly offered by the Departments of Biology, Cell Biology & Molecular Genetics, and Entomology. All Biological Sciences majors complete a common sequence of introductory and supporting courses referred to as the Basic Program. In addition, students must complete an Advanced Program within one of the following specialization areas: Cell Biology & Genetics, Ecology & Evolution, General Biology, Microbiology, Physiology & Neurobiology, Individualized Studies.",
                 prog.getDescr ());
+  assertEquals ("Active", prog.getState ());
 //  System.out.println ("CoreFaculties=" + prog.getCoreFaculties ());
   assertNotNull (prog.getCoreFaculties ());
  }

@@ -32,6 +32,7 @@ public class OrganizationInputModelFactory
  public static final String RESOURCES_DIRECTORY = "resources";
  public static String ACCREDITING_BODIES_XLS = "AccreditingBodies.xls";
  public static String ORGS_FOR_BSCI = "Organizations for BSCI program.xls";
+ public static String NEW_REFERENCE_ORGS = "NewReferenceOrganizations.xls";
  public static final String EXCEL_FILES_DEFAULT_DIRECTORY_KEY =
                             "loader.model.excel.default.directory";
  public static final String EXCEL_FILES_KEY =

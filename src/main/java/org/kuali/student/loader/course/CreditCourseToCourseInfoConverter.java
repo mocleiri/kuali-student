@@ -251,8 +251,8 @@ public class CreditCourseToCourseInfoConverter
 	
 				 AtpInfo atpEnd = new GetAtpHelper (atpService).getAtp(cc.getEndTerm());
 			    if (atpEnd == null){
-			      result.setException (new RuntimeException ("startTerm was not found: "
-			                                                + cc.getStartTerm ()));
+			      result.setException (new RuntimeException ("endTerm was not found: "
+			                                                + cc.getEndTerm ()));
 			      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
 			      return false;
 			    }
