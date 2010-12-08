@@ -72,45 +72,57 @@ public class OrgOrgRelationLoader
    result.setRow (row);
    result.setOrgOrgRelation(org);
    result.setRelationInfo(relationInfo);
-   try
-   {
-	   OrgOrgRelationInfo createdInfo = getOrganizationService ().createOrgOrgRelation(
-			   	relationInfo.getOrgId(), 
-			   	relationInfo.getRelatedOrgId(), 
-			   	relationInfo.getType(), 
-			   	relationInfo);
-	   
-	   result.setRelationInfo(createdInfo);
-	   result.setStatus (OrgOrgRelationLoadResult.Status.CREATED);
+   
+   try{
+   if(!getOrganizationService ().hasOrgOrgRelation(relationInfo.getOrgId(), relationInfo.getRelatedOrgId(), relationInfo.getType())){
+	   try
+	   {
+		   OrgOrgRelationInfo createdInfo = getOrganizationService ().createOrgOrgRelation(
+				   	relationInfo.getOrgId(), 
+				   	relationInfo.getRelatedOrgId(), 
+				   	relationInfo.getType(), 
+				   	relationInfo);
+		   
+		   result.setRelationInfo(createdInfo);
+		   result.setStatus (OrgOrgRelationLoadResult.Status.CREATED);
+	   }
+	   catch (AlreadyExistsException ex)
+	   {
+	    //TODO update if already exists?
+	    result.setStatus (OrgOrgRelationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
+	    result.setException (ex);
+	   }
+	   catch (DataValidationErrorException ex)
+	   {
+	    List<ValidationResultInfo> vris = null;
+	    try
+	    {
+	     vris = organizationService.validateOrgOrgRelation("SYSTEM", relationInfo);
+	    }
+	    catch (Exception ex1)
+	    {
+	     throw new RuntimeException (
+	       "Got an exception trying to get validation errors", ex1);
+	    }
+	    DataValidationErrorException dvex = new DataValidationErrorException (
+	      "got validation errors", vris, ex);
+	    result.setStatus (OrgOrgRelationLoadResult.Status.VALIDATION_ERROR);
+	    result.setDataValidationErrorException (dvex);
+	   }
+	   catch (Exception ex)
+	   {
+	    result.setStatus (OrgOrgRelationLoadResult.Status.EXCEPTION);
+	    result.setException (ex);
+	   }
    }
-   catch (AlreadyExistsException ex)
-   {
-    //TODO update if already exists?
-    result.setStatus (OrgOrgRelationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
-    result.setException (ex);
+   else{
+	   result.setStatus (OrgOrgRelationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
    }
-   catch (DataValidationErrorException ex)
-   {
-    List<ValidationResultInfo> vris = null;
-    try
-    {
-     vris = organizationService.validateOrgOrgRelation("SYSTEM", relationInfo);
-    }
-    catch (Exception ex1)
-    {
-     throw new RuntimeException (
-       "Got an exception trying to get validation errors", ex1);
-    }
-    DataValidationErrorException dvex = new DataValidationErrorException (
-      "got validation errors", vris, ex);
-    result.setStatus (OrgOrgRelationLoadResult.Status.VALIDATION_ERROR);
-    result.setDataValidationErrorException (dvex);
-   }
-   catch (Exception ex)
-   {
-    result.setStatus (OrgOrgRelationLoadResult.Status.EXCEPTION);
-    result.setException (ex);
-   }
+  }
+  catch (Exception ex)
+  {
+	  System.out.println("error in checking relation: " + ex.getMessage());
+  }
   }
   return results;
  }
