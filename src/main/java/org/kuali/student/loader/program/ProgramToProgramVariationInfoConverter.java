@@ -232,7 +232,7 @@ public class ProgramToProgramVariationInfoConverter
 		 }
 	 }
 	 
-	 return false;
+	 return true;
  }
  
  private OrgInfo getAdminOrg(OrganizationService orgService, String orgId){

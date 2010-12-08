@@ -31,6 +31,8 @@ public class OrganizationServiceFactory
  private static final QName ORGANIZATION_SERVICE_QNAME =
                             OrganizationService_Service.SERVICE;
  public static final String ORG_GENERIC_SEARCH = "org.search.generic";
+ public static final String DEV_EMBEDDED_URL =
+                            "http://dev.ks.kuali.org";
  public static final String LOCAL_HOST_EMBEDDED_URL =
                             "http://localhost:9393/ks-embedded-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;

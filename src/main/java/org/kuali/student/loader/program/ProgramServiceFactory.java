@@ -30,7 +30,9 @@ public class ProgramServiceFactory
  private static final String PROGRAM_SERVICE_NAME = "ProgramService";
  private static final QName PROGRAM_SERVICE_QNAME =
                             ProgramService_Service.SERVICE;
-  public static final String LOCAL_HOST_EMBEDDED_URL =
+ public static final String DEV_EMBEDDED_URL =
+                            "http://dev.ks.kuali.org";
+ public static final String LOCAL_HOST_EMBEDDED_URL =
                             "http://localhost:9393/ks-embedded-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;
 

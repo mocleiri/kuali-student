@@ -30,6 +30,8 @@ public class CourseServiceFactory
  private static final String COURSE_SERVICE_NAME = "CourseService";
  private static final QName COURSE_SERVICE_QNAME =
                             CourseService_Service.SERVICE;
+ public static final String DEV_EMBEDDED_URL =
+                            "http://dev.ks.kuali.org";
   public static final String LOCAL_HOST_EMBEDDED_URL =
                             "http://localhost:9393/ks-embedded-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;

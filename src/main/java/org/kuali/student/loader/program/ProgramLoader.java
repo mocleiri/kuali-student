@@ -18,16 +18,9 @@ package org.kuali.student.loader.program;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.kuali.student.core.atp.service.AtpService;
 import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.exceptions.InvalidParameterException;
-import org.kuali.student.core.exceptions.MissingParameterException;
-import org.kuali.student.core.exceptions.OperationFailedException;
-import org.kuali.student.core.exceptions.PermissionDeniedException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
 import org.kuali.student.lum.program.service.ProgramService;
@@ -99,6 +92,7 @@ public class ProgramLoader
    }
    try
    {
+    System.out.println ("state before create=" + info.getState ());
     MajorDisciplineInfo createdInfo = programService.createMajorDiscipline (info);
     result.setMajorDisciplineInfo (createdInfo);
     result.setStatus (ProgramLoadResult.Status.MAJOR_DISCIPLINE_CREATED);

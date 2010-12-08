@@ -31,6 +31,8 @@ public class AtpServiceFactory
  private static final String SERVICE_NAME = "AtpService";
  private static final QName SERVICE_QNAME =
                             AtpService_Service.SERVICE;
+ public static final String DEV_EMBEDDED_URL =
+                            "http://dev.ks.kuali.org";
  public static final String LOCAL_HOST_EMBEDDED_URL =
                             "http://localhost:9393/ks-embedded-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;

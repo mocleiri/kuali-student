@@ -131,7 +131,9 @@ public class ProgramToMajorDisciplineInfoConverter
    }
   }
   info.setEndTerm (prog.getEndTerm ());
+  System.out.println ("before setting info prog.state=" + prog.getState ());
   info.setState (prog.getState ());
+  System.out.println ("after setting info info.state=" + info.getState ());
   info.setAttributes (
     new AttributeInfoHelper ().setValue ("endInstAdmitTerm",
                                          prog.getEndInstAdmitTerm (),
@@ -257,7 +259,7 @@ public class ProgramToMajorDisciplineInfoConverter
 		 }
 	 }
 	 
-	 return false;
+	 return true;
  }
  
  private OrgInfo getAdminOrg(OrganizationService orgService, String orgId){

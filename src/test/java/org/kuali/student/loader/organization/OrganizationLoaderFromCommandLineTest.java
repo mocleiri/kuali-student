@@ -53,7 +53,8 @@ public class OrganizationLoaderFromCommandLineTest
    "src/main/" + OrganizationInputModelFactory.RESOURCES_DIRECTORY + "/"
    + OrganizationInputModelFactory.ORGS_FOR_BSCI,
 //   + OrganizationInputModelFactory.NEW_REFERENCE_ORGS,
-   OrganizationServiceFactory.LOCAL_HOST_EMBEDDED_URL
+//   OrganizationServiceFactory.LOCAL_HOST_EMBEDDED_URL
+   OrganizationServiceFactory.DEV_EMBEDDED_URL
   };
   OrganizationLoaderFromCommandLine.main (args);
  }
