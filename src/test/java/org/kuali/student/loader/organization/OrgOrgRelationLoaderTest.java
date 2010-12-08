@@ -92,7 +92,7 @@ public class OrgOrgRelationLoaderTest
     case CREATED:
         System.out.println (result.getRelationInfo().getOrgId()
                 + " to " + result.getRelationInfo().getRelatedOrgId() 
-                + " " + result.getStatus () + " id = "
+                + " relation " + result.getStatus () + " id = "
                 + result.getRelationInfo ().getId ());
    }
   }
