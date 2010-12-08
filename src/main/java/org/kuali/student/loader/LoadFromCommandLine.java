@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import org.kuali.student.loader.atp.AtpLoaderFromCommandLine;
 import org.kuali.student.loader.course.CreditCourseLoaderFromCommandLine;
 import org.kuali.student.loader.enumeration.EnumeratedValueLoaderFromCommandLine;
+import org.kuali.student.loader.organization.OrgOrgRelationLoaderFromCommandLine;
 import org.kuali.student.loader.organization.OrganizationLoaderFromCommandLine;
 import org.kuali.student.loader.program.ProgramLoaderFromCommandLine;
 import org.kuali.student.loader.standardizedtest.StandardizedTestLoaderFromCommandLine;
@@ -77,7 +78,7 @@ public class LoadFromCommandLine
   out.println (
     "Usage: java -jar ks-loader.jar <whatToLoad> <inputExcel> <hostUrl>");
   out.println (
-    "\t@param whatToLoad 'organization', 'course', 'program', 'enumeration', 'atp' or 'test' (for standardized tests)");
+    "\t@param whatToLoad 'organization', 'orgorgrelation', 'course', 'program', 'enumeration', 'atp' or 'test' (for standardized tests)");
   out.println (
     "\t@param inputExcel the fully qualified file name for the specially formatted input excel file");
   out.println (
@@ -142,6 +143,15 @@ public class LoadFromCommandLine
    args[0] = inFile;
    args[1] = hostUrl;
    OrganizationLoaderFromCommandLine.main (args);
+   return;
+  }
+  if (whatToLoad.equalsIgnoreCase ("orgorgrelation"))
+  {
+   displayParameters (whatToLoad, inFile, hostUrl);
+   String[] args = new String[2];
+   args[0] = inFile;
+   args[1] = hostUrl;
+   OrgOrgRelationLoaderFromCommandLine.main (args);
    return;
   }
   if (whatToLoad.equalsIgnoreCase ("test"))
