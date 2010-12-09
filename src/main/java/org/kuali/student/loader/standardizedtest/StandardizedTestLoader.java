@@ -172,6 +172,7 @@ public class StandardizedTestLoader
    }
   }
   info.setCluIds (Arrays.asList (cluInfo.getId ()));
+  info.setIsReusable (Boolean.TRUE);
   info.setEffectiveDate (cluInfo.getEffectiveDate ());
   info.setExpirationDate (cluInfo.getExpirationDate ());
   info.setType ("kuali.cluSet.type.Test");

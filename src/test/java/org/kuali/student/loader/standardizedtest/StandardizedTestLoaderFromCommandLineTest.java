@@ -64,8 +64,8 @@ public class StandardizedTestLoaderFromCommandLineTest
   {
     "src/main/" + StandardizedTestInputModelFactory.RESOURCES_DIRECTORY + "/"
      + StandardizedTestInputModelFactory.STANDARDIZED_TESTS_XLS,
-//   LuServiceFactory.LOCAL_HOST_EMBEDDED_URL
-   LuServiceFactory.DEV_EMBEDDED_URL
+   LuServiceFactory.LOCAL_HOST_EMBEDDED_URL
+//   LuServiceFactory.DEV_EMBEDDED_URL
   };
   StandardizedTestLoaderFromCommandLine.main (args);
  }
