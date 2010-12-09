@@ -14,10 +14,10 @@ import org.junit.Test;
  *
  * @author nwright
  */
-public class OrganizationLoaderFromCommandLineTest
+public class OrgOrgRelLoaderFromCommandLineTest
 {
 
- public OrganizationLoaderFromCommandLineTest ()
+ public OrgOrgRelLoaderFromCommandLineTest ()
  {
  }
 
@@ -50,12 +50,11 @@ public class OrganizationLoaderFromCommandLineTest
   System.out.println ("main");
   String[] args =
   {
-   "src/main/" + OrganizationInputModelFactory.RESOURCES_DIRECTORY + "/"
-//   + OrganizationInputModelFactory.ORGS_FOR_BSCI,
-   + OrganizationInputModelFactory.NEW_REFERENCE_ORGS,
-   OrganizationServiceFactory.LOCAL_HOST_EMBEDDED_URL
-//   OrganizationServiceFactory.DEV_EMBEDDED_URL
+   "src/main/" + OrgOrgRelationInputModelFactory.RESOURCES_DIRECTORY + "/"
+   + OrgOrgRelationInputModelFactory.REFERENCE_ORGORGRELATION,
+//   OrganizationServiceFactory.LOCAL_HOST_EMBEDDED_URL
+   OrganizationServiceFactory.DEV_EMBEDDED_URL
   };
-  OrganizationLoaderFromCommandLine.main (args);
+  OrgOrgRelationLoaderFromCommandLine.main (args);
  }
 }
