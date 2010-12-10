@@ -93,7 +93,8 @@ public class ProgramToCoreProgramInfoConverter
 //  info.setProgramLevel (prog.getProgramLevel ());
 //  info.setProgramRequirements (prog.getProgramRequirements ());
   // TODO: load learning objectives
-//  info.setLearningObjectives (prog.getLearningObjectives ());
+  info.setLearningObjectives (new SingleUseLoDisplayInfoHelper ().parse (
+		    prog.getLearningObjectives (), null));
 
   return info;
  }
