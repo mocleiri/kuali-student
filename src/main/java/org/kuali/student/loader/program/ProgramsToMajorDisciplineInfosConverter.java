@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.lum.program.dto.CoreProgramInfo;
+import org.kuali.student.lum.program.dto.CredentialProgramInfo;
 import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
 import org.kuali.student.lum.program.dto.ProgramVariationInfo;
 
@@ -61,12 +63,16 @@ public class ProgramsToMajorDisciplineInfosConverter
    }
    if (prog.getType ().equals ("kuali.lu.type.CoreProgram"))
    {
-    result.setStatus (ProgramLoadResult.Status.CORE_PROGRAM_NOT_PROCESSED);
+    //result.setStatus (ProgramLoadResult.Status.CORE_PROGRAM_NOT_PROCESSED);
+	   CoreProgramInfo core = new ProgramToCoreProgramInfoConverter(result, helperService).convert();
+	   result.setCoreProgramInfo(core);
     continue;
    }
    if (prog.getType ().startsWith ("kuali.lu.type.credential."))
    {
-    result.setStatus (ProgramLoadResult.Status.CREDENTIAL_PROGRAM_NOT_PROCESSED);
+    //result.setStatus (ProgramLoadResult.Status.CREDENTIAL_PROGRAM_NOT_PROCESSED);
+	   CredentialProgramInfo bacc = new ProgramToCredentialProgramInfoConverter(result, helperService).convert();
+	   result.setCredentialProgramInfo(bacc);
     continue;
    }
    if (prog.getType ().equals ("kuali.lu.type.MajorDiscipline"))

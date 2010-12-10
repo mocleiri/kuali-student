@@ -17,6 +17,8 @@ package org.kuali.student.loader.program;
 
 import org.kuali.student.core.exceptions.DataValidationErrorException;
 import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.lum.program.dto.CoreProgramInfo;
+import org.kuali.student.lum.program.dto.CredentialProgramInfo;
 import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
 
 /**
@@ -35,6 +37,8 @@ public class ProgramLoadResult
   VALIDATION_ERROR,
   CORE_PROGRAM_NOT_PROCESSED,
   CREDENTIAL_PROGRAM_NOT_PROCESSED,
+  CORE_PROGRAM_CREATED,
+  CREDENTIAL_PROGRAM_CREATED,
   EXCEPTION;
 
   private int count = 0;
@@ -58,6 +62,8 @@ public class ProgramLoadResult
  private int row;
  private Program program;
  private MajorDisciplineInfo majorDisciplineInfo;
+ private CoreProgramInfo coreProgramInfo;
+ private CredentialProgramInfo credentialProgramInfo;
  private DataValidationErrorException dataValidationErrorException;
  private Exception exception;
 
@@ -71,7 +77,23 @@ public class ProgramLoadResult
   this.majorDisciplineInfo = majorDisciplineInfo;
  }
 
- public Program getProgram ()
+ public CoreProgramInfo getCoreProgramInfo() {
+	return coreProgramInfo;
+}
+
+public void setCoreProgramInfo(CoreProgramInfo coreProgramInfo) {
+	this.coreProgramInfo = coreProgramInfo;
+}
+
+public CredentialProgramInfo getCredentialProgramInfo() {
+	return credentialProgramInfo;
+}
+
+public void setCredentialProgramInfo(CredentialProgramInfo credentialProgramInfo) {
+	this.credentialProgramInfo = credentialProgramInfo;
+}
+
+public Program getProgram ()
  {
   return program;
  }
