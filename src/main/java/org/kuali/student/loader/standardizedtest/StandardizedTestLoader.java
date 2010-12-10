@@ -96,6 +96,8 @@ public class StandardizedTestLoader
    try
    {
     CluInfo createdInfo = luService.createClu (info.getType (), info);
+    // I don't think I have to do this
+//    luService.createNewCluVersion (createdInfo.getId (), "Initial Version");
     result.setCluInfo (createdInfo);
     result.setStatus (StandardizedTestLoadResult.Status.CREATED_JUST_CLU);
     this.createCluSet (result);
@@ -171,7 +173,11 @@ public class StandardizedTestLoader
     return;
    }
   }
-  info.setCluIds (Arrays.asList (cluInfo.getId ()));
+  //  don't do this
+//  info.setCluIds (Arrays.asList (cluInfo.getId ()));
+  // instead do this
+  info.setCluIds (Arrays.asList (cluInfo.getVersionInfo ().getVersionIndId ()));
+  System.out.println ("Version Independent Id is " + cluInfo.getVersionInfo ().getVersionIndId ());
   info.setIsReusable (Boolean.TRUE);
   info.setEffectiveDate (cluInfo.getEffectiveDate ());
   info.setExpirationDate (cluInfo.getExpirationDate ());
