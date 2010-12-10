@@ -90,6 +90,7 @@ public class StandardizedTestLoader
    {
     result.setStatus (
       StandardizedTestLoadResult.Status.NOT_PROCESSED_BOTH_ALREADY_EXISTS);
+    result.setCluInfo (oldClu);
     this.createCluSet (result);
     continue;
    }
