@@ -52,8 +52,8 @@ public class AtpLoaderFromCommandLineTest
   {
    "src/main/" + AtpInputModelFactory.RESOURCES_DIRECTORY + "/"
    + AtpInputModelFactory.ATP_CALENDAR,
-//   AtpServiceFactory.LOCAL_HOST_EMBEDDED_URL
-   AtpServiceFactory.DEV_EMBEDDED_URL
+   AtpServiceFactory.LOCAL_HOST_EMBEDDED_URL
+//   AtpServiceFactory.DEV_EMBEDDED_URL
   };
   AtpLoaderFromCommandLine.main (args);
  }

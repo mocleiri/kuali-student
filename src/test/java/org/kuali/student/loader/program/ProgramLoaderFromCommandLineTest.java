@@ -63,8 +63,8 @@ public class ProgramLoaderFromCommandLineTest
   {
     "src/main/" + ProgramInputModelFactory.RESOURCES_DIRECTORY + "/"
      + ProgramInputModelFactory.REFERENCE_PROGRAMS,
-//   ProgramServiceFactory.LOCAL_HOST_EMBEDDED_URL
-   ProgramServiceFactory.DEV_EMBEDDED_URL
+   ProgramServiceFactory.LOCAL_HOST_EMBEDDED_URL
+//   ProgramServiceFactory.DEV_EMBEDDED_URL
   };
   ProgramLoaderFromCommandLine.main (args);
  }

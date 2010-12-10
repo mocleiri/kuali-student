@@ -15,21 +15,16 @@
  */
 package org.kuali.student.loader.program;
 
-import org.kuali.student.loader.util.GetAtpHelper;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.kuali.student.core.atp.service.AtpService;
-import java.util.List;
-import org.kuali.student.core.atp.dto.AtpInfo;
 import org.kuali.student.core.organization.dto.OrgInfo;
 import org.kuali.student.core.organization.service.OrganizationService;
-import org.kuali.student.loader.util.AttributeInfoHelper;
 
 
 import org.kuali.student.loader.util.GetOrgHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
-import org.kuali.student.loader.util.TimeAmountInfoHelper;
+import org.kuali.student.lum.lu.dto.AdminOrgInfo;
 import org.kuali.student.lum.program.dto.CredentialProgramInfo;
 
 /**
@@ -49,8 +44,8 @@ public class ProgramToCredentialProgramInfoConverter
   this.prog = result.getProgram ();
   this.helperService = thisServiceMap;
  }
- public static final String ADMINISTRATION_ADMIN_ORG_TYPE =
-                            "kuali.adminOrg.type.Administration";
+ public static final String INSTITUTION_ADMIN_ORG_TYPE =
+                            "kuali.adminOrg.type.Institution";
 
  public CredentialProgramInfo convert ()
  {
@@ -85,10 +80,10 @@ public class ProgramToCredentialProgramInfoConverter
   }
   info.setSelectiveEnrollmentCode (prog.getSelectiveEnrollmentCode ());
 //  info.setVersionInfo (prog.getVersionInfo ());
-//  info.setProgramLevel (prog.getProgramLevel ());
+  info.setProgramLevel (prog.getProgramLevel ());
 //  info.setProgramRequirements (prog.getProgramRequirements ());
-  // TODO: load learning objectives
-//  info.setLearningObjectives (prog.getLearningObjectives ());
+  info.setLearningObjectives (new SingleUseLoDisplayInfoHelper ().parse (
+		    prog.getLearningObjectives (), null));
 
   return info;
  }
@@ -122,10 +117,21 @@ public class ProgramToCredentialProgramInfoConverter
 					 info.setDivisionsStudentOversight (Arrays.asList (prog.getDivisionsStudentOversightId ()));	
 				 else
 					 return false;
-			 }		 
-		 }
-	 }
-	 
+			 }
+
+   	if(prog.getInstitutionId () != null && !prog.getInstitutionId ().isEmpty()){
+				 if( getAdminOrg(orgService, prog.getInstitutionId ()) != null )
+     {
+      AdminOrgInfo aoi = new AdminOrgInfo ();
+      aoi.setOrgId (prog.getInstitutionId ());
+      aoi.setType (INSTITUTION_ADMIN_ORG_TYPE);
+					 info.setInstitution (aoi);
+     }
+				 else
+					 return false;
+			 }
+	  }
+  }
 	 return true;
  }
  
