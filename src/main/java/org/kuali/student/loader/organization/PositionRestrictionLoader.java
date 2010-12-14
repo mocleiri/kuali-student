@@ -126,6 +126,19 @@ public class PositionRestrictionLoader
  }
 
  private boolean hasPositionRestriction(OrgPositionRestriction posRestriction){
+	 try {
+		List<OrgPositionRestrictionInfo> pris = getOrganizationService ().getPositionRestrictionsByOrg(posRestriction.getOrgId());
+		if(pris != null && !pris.isEmpty()){
+			String personRelationTypeKey = posRestriction.getOrgPersonRelationTypeKey();
+			for (OrgPositionRestrictionInfo pri : pris){
+				if(personRelationTypeKey.equals(pri.getOrgPersonRelationTypeKey()))
+					return true;
+			}
+		}
+	} catch (Exception e) {
+		return false;
+	} 
+	
 	 return false;
  }
  
