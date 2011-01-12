@@ -1,0 +1,3432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Person Service - KS Kuali Student - Confluence</title>
+
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<script language="javascript">
+        var contextPath = '/confluence';
+        var i18n = [];
+    </script>
+
+<link rel="stylesheet"
+	href="/confluence/s/919/1/1/_/styles/main-action.css?spaceKey=KULSTU"
+	type="text/css" />
+
+<link rel="shortcut icon" href="/confluence/images/icons/favicon.ico">
+
+<link rel="icon" type="image/png"
+	href="/confluence/images/icons/favicon.png">
+
+<script type="text/javascript"
+	src="/confluence/s/919/1/_/decorators/effects.js"></script>
+
+
+
+</head>
+
+<body onload="placeFocus()">
+
+
+
+<script type="text/javascript">
+        function hideMessage(messageId)
+        {
+            var message = document.getElementById(messageId)
+            message.style.display = "none";
+            setCookie(messageId, true);
+        }
+    </script>
+
+
+<div id="PageContent">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+	<tr class="topBar">
+		<td align="left">&nbsp; <span class="topBarDiv"> <script
+			language="JavaScript">
+        function showBreadcrumbsEllipsis()
+        {
+            document.getElementById('breadcrumbsEllipsis').style.display = 'none';
+            document.getElementById('breadcrumbsExpansion').style.display = 'inline';
+        }
+    </script> <a href="/confluence/dashboard.action">Dashboard</a> &gt; <a
+			href="/confluence/display/KULSTU">KS Kuali Student</a> &gt; <span
+			id="breadcrumbs"><span id="breadcrumbsEllipsis"><a
+			href="#" onclick="showBreadcrumbsEllipsis();return false;"
+			title="Home&nbsp;&gt;&nbsp;Service Architecture Homepage">...</a></span><span
+			id="breadcrumbsExpansion" style="display: none;"><a
+			href='/confluence/display/KULSTU/Home'>Home</a>&nbsp;&gt;&nbsp;<a
+			href='/confluence/display/KULSTU/Service+Architecture+Homepage'>Service
+		Architecture Homepage</a></span>&nbsp;&gt;&nbsp;</span><a
+			href='/confluence/display/KULSTU/Service+Description+Repository'>Service
+		Description Repository</a>&nbsp;&gt;&nbsp;<a
+			href="/confluence/display/KULSTU/Person+Service">Person Service</a> </span>
+		</td>
+
+		<td align="right" valign="middle" style="white-space: nowrap">
+		<form id="quickSearch" method="POST"
+			action="/confluence/dosearchsite.action" name="searchForm"><input
+			type="hidden" name="quickSearch" value="true" /> <input
+			type="hidden" name="searchQuery.spaceKey" value="conf_global" /> <input
+			type="text" accessKey="s" name="searchQuery.queryString" size="25" />
+		<input type="submit" value="Search" /></form>
+		</td>
+
+	</tr>
+
+	<tr>
+		<td style="padding: 5px" colspan="2">
+		<table style="padding: 0px; margin: 0px 5px; width: 100%;"
+			cellspacing="0" cellpadding="1" border="0">
+			<tr>
+				<td rowspan="2" valign="bottom" width="1%"><a
+					href="/confluence/display/KULSTU"><img
+					src="/confluence/download/userResources/KULSTU/logo"
+					align="absmiddle" border="0"></a></td>
+				<td valign="bottom" align="left" width="1%" nowrap>&nbsp; <span
+					class="logoSpaceLink"> <a href="/confluence/display/KULSTU">KS
+				Kuali Student</a> </span></td>
+				<td align="right" valign="top" width="98%"><span
+					class="smalltext" id="userNavBar"> Welcome <a
+					href="/confluence/display/~sgibson">Scott Gibson</a> | <a
+					href="/confluence/users/viewuserhistory.action"
+					onClick="window.open(this.href,'user_history', 'width=620, height=350, resizable'); return false;"
+					title="View History">History</a> | <a
+					href="/confluence/users/viewuserprofile.action?username=sgibson">Preferences</a>
+				| <a href="/confluence/admin/console.action">Administration</a> | <a
+					href="/confluence/logout.action" id="logout">Log Out</a>&nbsp; </span> <a
+					href="/confluence/display/KULSTU/Person+Service?decorator=printable"
+					rel="nofollow"><img src="/confluence/images/icons/print_16.gif"
+					width="16" height="16" hspace="1" vspace="1" align="absmiddle"
+					border="0" alt="View a printable version of the current page."
+					title="View a printable version of the current page." /></a> <a
+					href="/confluence/pages/doexportpage.action?pageId=22511698&type=TYPE_PDF"
+					rel="nofollow"> <img
+					src="/confluence/images/icons/attachments/pdf.gif" height="16"
+					width="16" border="0" align="absmiddle" title="Export Page as PDF"></a>
+				&nbsp;</td>
+			</tr>
+			<tr>
+
+				<td height="22" align="left" colspan="2">&nbsp; <span
+					class="pagetitle"
+					style="line-height: 1; margin: 0px; text-decoration: none">
+				Person Service </span></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+
+</table>
+
+<!--
+    Root decorator: all decisions about how a page is to be decorated via the
+                    inline decoration begins here.
+--> <!--
+    Switch based upon the context. However, for now, just delegate to a decorator
+    identified directly by the context.
+-->
+
+
+
+
+
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+	<tr>
+		<td>
+
+		<div class="greynavbar"><span
+			style="float: right; padding: 6px 10px 4px 0px"> <a
+			href="/confluence/spaces/browsespace.action?key=KULSTU"><img
+			src="/confluence/images/icons/browse_space.gif" height="16"
+			width="16" border="0" align="absmiddle" title="Browse Space">&nbsp;<span>Browse
+		Space</span></a> <a
+			href="/confluence/pages/createpage.action?spaceKey=KULSTU&fromPageId=22511698"><img
+			src="/confluence/images/icons/add_page_16.gif" height="16" width="16"
+			border="0" align="absmiddle" title="Add Page">&nbsp;<span>Add
+		Page</span></a> <a href="/confluence/pages/createblogpost.action?spaceKey=KULSTU"><img
+			src="/confluence/images/icons/add_blogentry_16.gif" height="16"
+			width="16" border="0" align="absmiddle" title="Add News">&nbsp;<span>Add
+		News</span></a> <a
+			href="/confluence/spaces/gliffy/adddiagram.action?pageId=22511698&key=KULSTU"><img
+			src="/confluence/download/resources/com.gliffy.integration.confluence:gliffy-macro-key/resources/icons/add_diagram_16.gif"
+			height="16" width="16" border="0" align="absmiddle"
+			title="Add Diagram">&nbsp;<span>Add Diagram</span></a> </span>
+
+		<ul id="foldertab" style="margin-bottom: 0px; padding-top: 10px;">
+			<li><a id="viewPageLink"
+				href="/confluence/display/KULSTU/Person+Service" class="current"
+				accessKey="v">View</a></li>
+			<li><a id="editPageLink"
+				href="/confluence/pages/editpage.action?pageId=22511698"
+				accessKey="e">Edit</a></li>
+			<li><a id="viewAttachmentsLink"
+				href="/confluence/pages/viewpageattachments.action?pageId=22511698"
+				accessKey="a"><u>A</u>ttachments (0)</a></li>
+			<li><a id="viewPageInfoLink"
+				href="/confluence/pages/pageinfo.action?pageId=22511698"
+				accessKey="i"><u>I</u>nfo</a></li>
+
+		</ul>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" class="pagebody">
+
+		<table width="100%" cellpadding="0" cellspacing="0" border="0"
+			style="clear: both">
+			<tr>
+
+				<td width='100%' class="pagecontent" valign="top">
+
+
+
+
+
+				<table width="100%" style="margin-bottom: 5px" cellspacing="0">
+					<tr>
+						<td align="left" valign="top"><span class="smalltext">
+						Added by <a href="/confluence/display/~abucior">Andy Bucior</a> ,
+						last edited by <a href="/confluence/display/~rburnette">Rick
+						Burnette</a> on Apr 29, 2008 &nbsp;(<a
+							href="/confluence/pages/diffpages.action?pageId=22511698&originalId=45645938">view
+						change</a>)
+
+
+
+
+						<style type="text/css">
+div.auto_complete {
+	width: 350px;
+	background: #fff;
+}
+
+div.auto_complete ul {
+	border: 1px solid #888;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	list-style-type: none;
+}
+
+div.auto_complete ul li {
+	margin: 0;
+	padding: 3px;
+}
+
+div.auto_complete ul li.selected {
+	background-color: #ffb;
+}
+
+div.auto_complete ul strong.highlight {
+	color: #800;
+	margin: 0;
+	padding: 0;
+}
+</style>
+
+
+						<!-- Delay the loading of the external javascript file needed for labels (as it takes too long to load and visibly holds loading of the page body) -->
+						<!-- To do this without javascript errors over undefined functions, we need to declare stubs here (that are overrided later by the proper implementations) -->
+						<script language="JavaScript" type="text/javascript">
+    function doAddLabel(hideTextfieldAfterAddParam)
+    {
+        // stub
+    }
+
+    function onAddLabel()
+    {
+        // stub
+    }
+
+    function showLabelsInput()
+    {
+        // stub
+    }
+</script> <!-- This is a hack to work around an apparent SiteMesh bug - http://jira.opensymphony.com/browse/SIM-198 -->
+
+
+						<span class="error"><span class="errorMessage"
+							id="errorSpan"></span></span>
+						<form name="addLabelForm" method="" action=""
+							onSubmit="doAddLabel(false); return false;"
+							style="margin: 0px; padding: 0px">
+						<div style="float: left">Labels:&nbsp;</div>
+
+						<div id="labelsInfo" style="float: left; width: 90%"><span
+							id="labelsList"> <a
+							href="/confluence/label/KULSTU/kss-svcs">kss-svcs</a>, <a
+							href="/confluence/label/KULSTU/kss-pi">kss-pi</a>, <a
+							href="/confluence/label/KULSTU/kss-service">kss-service</a>, <a
+							href="/confluence/label/KULSTU/kss-svb1">kss-svb1</a> </span> <span
+							id="editLabelsLink" class="inline-control-link fontSizeTiny"
+							style="display: none;"> <a href=""
+							onclick="onAddLabel(); showLabelsInput(); return false;">EDIT</a>
+
+						</span></div>
+						<br clear="all" />
+						<!-- Do not remove this line-break. You will make Safari cry. -->
+						<div id="labelInputSpan" style="display: none; clear: both;">
+						<div
+							style="border: 1px solid #cccccc; padding: 8px; align: center; background-color: #f0f0f0">
+
+						<div id="labelOperationErrorContainer" style="display: none"><span
+							class="error"><span class="errorMessage"
+							id="labelOperationErrorMessage"></span></span></div>
+
+						<table width="100%">
+							<tr>
+
+								<td>
+								<div class="formtitle"
+									style="padding-bottom: 3px; font-size: 13px;">Add Labels</div>
+								</td>
+								<td align="right">
+								<div id="waitImageAndStatus"
+									style="display: none; height: 16px;"><img
+									alt="Wait Image" border=0 align="absmiddle"
+									src="/confluence/images/icons/wait.gif">&nbsp;<span
+									id="labelOperationStatus" class="smalltext"
+									style="vertical-align: middle"></span></div>
+								</td>
+							</tr>
+							<tr>
+								<td width="50%">Enter labels to add to this page:<br />
+								<input autocomplete="off" type="text" id="labelName"
+									name="labelsString" value="" class="monospaceInput" size="40">
+
+								<input type="submit" onclick="doAddLabel(false); return false;"
+									value="Add"><input type="button"
+									onclick="doAddLabel(true); return false;" value="Done">
+								<div class="auto_complete" id="labelsAutocompleteList"></div>
+								<div class="smalltext"><em>Tip:</em> Looking for a label?
+								Just start typing.</div>
+								</td>
+								<td width="50%" valign="top">
+								<div id="suggestedLabelsSpan"></div>
+
+								</td>
+							</tr>
+						</table>
+						</div>
+						</div>
+						</form>
+						<script type="text/javascript">
+        // if there is javascript support, enable the [Edit] link that enables AJAX label adding/removing functionality
+        if (document.getElementById('editLabelsLink'))
+        {
+            document.getElementById('editLabelsLink').style.display = 'inline';
+        }
+    </script> </span></td>
+						<td align="right" valign="top">
+
+						<div
+							style="padding: 5px; border: 1px solid #cccccc; margin: 0px; float: right;">
+						<center><a id="pageFavourite"
+							href="/confluence/labels/addfavourite.action?entityId=22511698"><img
+							src="/confluence/images/icons/star_grey.gif" height="16"
+							width="16" border="0" align="absmiddle"
+							title="Add this page to your favourites list"
+							alt="Add this page to your favourites list"></a> <a
+							id="pageWatch"
+							href="/confluence/pages/addpagenotification.action?pageId=22511698"><img
+							src="/confluence/images/icons/watch_16.gif" height="16"
+							width="16" border="0" align="absmiddle" title="Watch this page"
+							alt="Watch this page"></a></center>
+						</div>
+						</td>
+					</tr>
+				</table>
+
+
+				<div class="wiki-content"><!-- wiki content -->
+				<h2><a name="PersonService-PersonService"></a>Person Service</h2>
+
+				<table class='confluenceTable'>
+					<tbody>
+						<tr>
+							<td class='confluenceTd'><a
+								href="#PersonService-Description">Description</a></td>
+							<td class='confluenceTd'><a href="#PersonService-References">References</a>
+							</td>
+
+							<td class='confluenceTd'><a href="#PersonService-Operations">Operations</a>
+							</td>
+							<td class='confluenceTd'><a
+								href="#PersonService-Capabilities">Capabilities</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3><a name="PersonService-Description"></a>Description</h3>
+				<p>Create, update, and find people. Assign person identifiers
+				and manage resolving duplicate identities. Resolving duplicate
+				identities includes the ability to "merge" records.<br />
+				This would allow for the reading or updating of basic person
+				information. Manipulation of information regarding relationships,
+				academic information, etc. should be handled through the services of
+				record for that information. Generalized information from those
+				areas <em>may</em> be available through this service.</p>
+
+				<div class='panelMacro'>
+				<table class='noteMacro'>
+					<colgroup>
+						<col width='24'>
+						<col>
+					</colgroup>
+					<tr>
+						<td valign='top'><img
+							src="/confluence/images/icons/emoticons/warning.gif" width="16"
+							height="16" align="absmiddle" alt="" border="0"></td>
+						<td><b>Notes</b><br />
+						<p>Assumed that</p>
+						<ul>
+							<li>the service exposes attribute sets directly at this
+							level</li>
+							<li>the service may know about more personTypes than it can
+							create people for</li>
+							<li>attributes aren't created for a given person directly
+							through the service (so treated as if created when person is)</li>
+							<li>updates happen on a single attribute set at a time <img
+								class="emoticon"
+								src="/confluence/images/icons/emoticons/warning.gif" height="16"
+								width="16" align="absmiddle" alt="" border="0" /> <em>Update:</em>
+							update expects just the changes.</li>
+
+							<li>deletes occur at the person level</li>
+							<li>person information may not be complete or valid after a
+							personType addition or change <img class="emoticon"
+								src="/confluence/images/icons/emoticons/warning.gif" height="16"
+								width="16" align="absmiddle" alt="" border="0" /> <em>Update:</em>
+							reversed. person information must be complete and valid before an
+							addition/change of personType is allowed</li>
+							<li>person deletion may indicate that the identifier is
+							retired at first, so the identifier may be found, but no longer
+							valid. While we talked about the error and look-up as a group, we
+							hadn't come to a consensus on if we should have functionality
+							like this exposed here. As a result, all the DISABLED_IDENTIFIER
+							errors and the fetchReplacementPersonId operation might go away.</li>
+							<li>isValidPersonInfoForPersonType is not listed since
+							validatePersonInfoForPersonType has similar functionality.</li>
+						</ul>
+
+
+						<p>Currently sidestepped</p>
+						<ul>
+							<li>where the required/updatable designation lies for a set
+							of attributes. Is it with the attribute set? Attached to the
+							connection between personType and attribute set? Changed from
+							having an operation in the setup to one that was person centric
+							to get around that. Solidifying the location would help with
+							being able to specify person-agnostic calls in the setup section
+							(retrieve metadata to be able to recognize which attribute sets
+							to ask for).
+							<ul>
+								<li><img class="emoticon"
+									src="/confluence/images/icons/emoticons/warning.gif"
+									height="16" width="16" align="absmiddle" alt="" border="0" />
+								removed isUpdateablePersonAttributeSetType operation</li>
+							</ul>
+							</li>
+						</ul>
+
+						</td>
+					</tr>
+				</table>
+				</div>
+
+				<h3><a name="PersonService-References"></a>References</h3>
+
+				<p><a
+					href="/confluence/display/KULSTU/Person+Service+Description"
+					title="Person Service Description">Person Service Description</a><br />
+				<a href="/confluence/display/KULSTU/Person+Entity+Diagram"
+					title="Person Entity Diagram">Person Entity Diagram</a> - diagram
+				which matches understandings/concepts described through the service<br />
+				<a
+					href="/confluence/download/attachments/42534/pocERalt-1.pdf?version=1">ER
+				Diagram from Vegas</a> - diagram done in Vegas which shows relationships
+				with LU and dynamic attributes<br />
+				<a href="/confluence/display/KULSTU/PI+Meeting+Diagrams"
+					title="PI Meeting Diagrams">PI Meeting Diagrams</a> - diagrams done
+				in Vancouver which show relationships between people, organizations,
+				groups, and principals. Outdated.<br />
+
+				<a
+					href="/confluence/display/KULSTU/Service+Basket+1+Operation+Sandbox"
+					title="Service Basket 1 Operation Sandbox">Service Basket 1
+				Operation Sandbox</a> - <em>remove link after migration to avoid
+				confusion</em></p>
+
+
+				<h3><a name="PersonService-Operations"></a>Operations</h3>
+
+				<style type="text/css">
+table.methodTable {
+	border-collapse: collapse;
+	border: 1px solid #000000;
+	width: 95%;
+}
+
+table.methodTable td.d {
+	border: 1px solid #000000;
+}
+
+table.methodTable th.h {
+	border: 1px solid #000000;
+	background-color: #eeeeee;
+	width: 15%;
+}
+
+table.methodTable td.methodName {
+	border: 1px solid #000000;
+	background-color: #f2f2f2;
+	color: #222222;
+	text-align: center;
+	width: 85%;
+	font-weight: bold;
+	font-style: italic;
+}
+
+table.methodTable td.methodDesc {
+	border: 1px solid #000000;
+	width: 85%;
+}
+
+table.methodTable td.methodParamType {
+	border: 1px solid #000000;
+	width: 21%;
+	font-style: italic;
+}
+
+table.methodTable td.methodParamName {
+	border: 1px solid #000000;
+	width: 21%;
+}
+
+table.methodTable td.methodParamDesc {
+	border: 1px solid #000000;
+	width: 43%;
+}
+
+table.methodTable td.methodReturnType {
+	border: 1px solid #000000;
+	width: 42%;
+	font-style: italic;
+}
+
+table.methodTable td.methodReturnDesc {
+	border: 1px solid #000000;
+	width: 43%;
+}
+
+table.methodTable td.methodErrors {
+	border: 1px solid #000000;
+	width: 85%;
+}
+
+table.methodTable td.methodErrorType {
+	border: 1px solid #000000;
+	width: 42%;
+	font-style: italic;
+}
+
+table.methodTable td.methodErrorDesc {
+	border: 1px solid #000000;
+	width: 43%;
+}
+
+table.methodTable td.capabilityDesc {
+	border: 1px solid #000000;
+	background: #ffffff;
+}
+
+table.methodTable td.usecaseDesc {
+	border: 1px solid #000000;
+	background: #ffffff;
+}
+
+table.methodTable td.commentsDesc {
+	border: 1px solid #000000;
+	background: #ffffff;
+}
+</style>
+				<div class="panel"
+					style="background-color: #ffffff; border-color: #cccccc; border-style: solid; border-width: 1px;">
+				<div class="panelHeader"
+					style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #cccccc; background-color: #eeeeee;"><b>Setup</b></div>
+				<div class="panelContent" style="background-color: #ffffff;">
+				<p><a href="#PersonService-findPersonTypes">findPersonTypes</a><br />
+				<a href="#PersonService-findCreatablePersonTypes">findCreatablePersonTypes</a><br />
+
+				<a href="#PersonService-findPersonAttributeSetTypes">findPersonAttributeSetTypes</a><br />
+				<a href="#PersonService-findPersonAttributeSetTypesForPersonType">findPersonAttributeSetTypesForPersonType</a><br />
+				<a href="#PersonService-fetchPersonType">fetchPersonType</a><br />
+				<a href="#PersonService-fetchPersonAttributeSetType">fetchPersonAttributeSetType</a></p>
+
+				<p><a href="#PersonService-findPersonPersonRelationTypes">findPersonPersonRelationTypes</a></p>
+				</div>
+				</div>
+				<div class="panel"
+					style="background-color: #ffffff; border-color: #cccccc; border-style: solid; border-width: 1px;">
+				<div class="panelHeader"
+					style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #cccccc; background-color: #eeeeee;"><b>Read</b></div>
+				<div class="panelContent" style="background-color: #ffffff;">
+				<p><a href="#PersonService-fetchFullPersonInfo">fetchFullPersonInfo</a><br />
+				<a href="#PersonService-fetchPersonInfoByPersonType">fetchPersonInfoByPersonType</a><br />
+
+				<a href="#PersonService-fetchPersonInfoByPersonAttributeSetTypes">fetchPersonInfoByPersonAttributeSetTypes</a><br />
+				<a href="#PersonService-findPersonAttributeSetTypeKeysForPerson">findPersonAttributeSetTypeKeysForPerson</a><br />
+				<a href="#PersonService-findPersonTypeKeysForPerson">findPersonTypeKeysForPerson</a><br />
+				<a href="#PersonService-findPersonIdsForPersonType">findPersonIdsForPersonType</a><br />
+				<a href="#PersonService-isPersonType">isPersonType</a><br />
+				<a href="#PersonService-validatePersonInfoForPersonType">validatePersonInfoForPersonType</a><br />
+				<a href="#PersonService-fetchReplacementPersonId">fetchReplacementPersonId</a></p>
+
+				<p><a href="#PersonService-findPersonPersonRelations">findPersonPersonRelations</a><br />
+
+				<a href="#PersonService-findPersonPersonRelationIds">findPersonPersonRelationIds</a><br />
+				<a href="#PersonService-fetchPersonPersonRelation">fetchPersonPersonRelation</a></p>
+
+				<p><a href="#PersonService-findPeopleByRelation">findPeopleByRelation</a><br />
+				<a href="#PersonService-findPersonIdsByRelation">findPersonIdsByRelation</a><br />
+				<a href="#PersonService-findRelatedPeopleForPerson">findRelatedPeopleForPerson</a><br />
+				<a href="#PersonService-findRelatedPersonIdsForPerson">findRelatedPersonIdsForPerson</a></p>
+				</div>
+				</div>
+				<div class="panel"
+					style="background-color: #ffffff; border-color: #cccccc; border-style: solid; border-width: 1px;">
+				<div class="panelHeader"
+					style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #cccccc; background-color: #eeeeee;"><b>Search</b></div>
+				<div class="panelContent" style="background-color: #ffffff;">
+				<p><a href="#PersonService-searchForPersonIds">searchForPersonIds</a><br />
+
+				<a href="#PersonService-searchForPeople">searchForPeople</a><br />
+				<a href="#PersonService-searchForPeopleByPersonType">searchForPeopleByPersonType</a><br />
+				<a href="#PersonService-searchForPeopleByPersonAttributeSetType">searchForPeopleByPersonAttributeSetType</a></p>
+
+				<p><a href="#PersonService-searchForPersonPersonRelations">searchForPersonPersonRelations</a></p>
+
+				<p><a href="#PersonService-searchForPeopleByRelation">searchForPeopleByRelation</a><br />
+				<a href="#PersonService-searchForPersonIdsByRelation">searchForPersonIdsByRelation</a></p>
+				</div>
+				</div>
+				<div class="panel"
+					style="background-color: #ffffff; border-color: #cccccc; border-style: solid; border-width: 1px;">
+				<div class="panelHeader"
+					style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #cccccc; background-color: #eeeeee;"><b>Maintenance</b></div>
+				<div class="panelContent" style="background-color: #ffffff;">
+
+				<p><a href="#PersonService-createPerson">createPerson</a><br />
+				<a href="#PersonService-updatePerson">updatePerson</a><br />
+				<a href="#PersonService-deletePerson">deletePerson</a><br />
+				<a href="#PersonService-assignPersonType">assignPersonType</a><br />
+				<a href="#PersonService-removePersonType">removePersonType</a></p>
+
+				<p><a href="#PersonService-createPersonPersonRelation">createPersonPersonRelation</a><br />
+				<a href="#PersonService-updatePersonPersonRelation">updatePersonPersonRelation</a><br />
+				<a href="#PersonService-deletePersonPersonRelation">deletePersonPersonRelation</a></p>
+
+				</div>
+				</div>
+
+				<h4><a name="PersonService-"></a><font color="#000066"><em>Setup</em></font></h4>
+
+				<p><a name="PersonService-findPersonTypes"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonTypes</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves the list of
+						person types known by this service</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType">none</td>
+						<td class="methodParamName">none</td>
+						<td class="methodParamDesc">No parameters</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personTypeDisplayList+Structure"
+							title="personTypeDisplayList Structure">personTypeDisplayList</a></td>
+						<td class="methodReturnDesc">list of person types</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="1">Errors</th>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3">
+						<p><a href="/confluence/display/~abucior">Andy Bucior</a> <font
+							color="#00cc00">Initial version was key only, but could
+						also work as richer structure.</font></p>
+						</td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findCreatablePersonTypes"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findCreatablePersonTypes</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+
+						<td class="methodDesc" colspan="3">Retrieves the list of
+						person types which can be created by this service</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType">none</td>
+						<td class="methodParamName">none</td>
+						<td class="methodParamDesc">No parameters</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personTypeDisplayList+Structure"
+							title="personTypeDisplayList Structure">personTypeDisplayList</a></td>
+						<td class="methodReturnDesc">list of person types</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="1">Errors</th>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3">
+						<p><a href="/confluence/display/~abucior">Andy Bucior</a> <font
+							color="#00cc00">Initial version was key only, but could
+						also work as richer structure.</font></p>
+						</td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonAttributeSetTypes"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonAttributeSetTypes</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+
+						<td class="methodDesc" colspan="3">Retrieves the list of
+						person attribute set types</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType">none</td>
+						<td class="methodParamName">none</td>
+						<td class="methodParamDesc">No parameters</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personAttributeSetTypeDisplayList+Structure"
+							title="personAttributeSetTypeDisplayList Structure">personAttributeSetTypeDisplayList</a></td>
+						<td class="methodReturnDesc">list of person attribute set
+						types</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="1">Errors</th>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3">
+						<p><a href="/confluence/display/~abucior">Andy Bucior</a> <font
+							color="#00cc00">Initial version was key only, but could
+						also work as richer structure.</font></p>
+						</td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a
+					name="PersonService-findPersonAttributeSetTypesForPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonAttributeSetTypesForPersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+
+						<td class="methodDesc" colspan="3">Retrieves the list of
+						person attribute sets for the specified person type key</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personAttributeSetTypeDisplayList+Structure"
+							title="personAttributeSetTypeDisplayList Structure">personAttributeSetTypeDisplayList</a></td>
+						<td class="methodReturnDesc">list of person attribute set
+						types</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personType not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personType</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3">
+
+						<p><img class="emoticon"
+							src="/confluence/images/icons/emoticons/help_16.gif" height="16"
+							width="16" align="absmiddle" alt="" border="0" /> <a
+							href="/confluence/display/~sgibson">Scott Gibson</a> <font
+							color="red">Shouldn't this be fetchPersonType (and the
+						full person type would contain the sets)</font></p>
+						</td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-fetchPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchPersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+
+						<td class="methodDesc" colspan="3">Retrieves the metadata
+						about the specified person type</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personTypeInfo+Structure"
+							title="personTypeInfo Structure">personTypeInfo</a></td>
+						<td class="methodReturnDesc">information about a personType</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personType not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personTypeKey</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-fetchPersonAttributeSetType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchPersonAttributeSetType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves the metadata
+						about the specified person attribute set type</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personAttributeSetTypeKey+Structure"
+							title="personAttributeSetTypeKey Structure">personAttributeSetTypeKey</a></td>
+						<td class="methodParamName">personAttributeSetTypeKey</td>
+						<td class="methodParamDesc">the person attribute set type to
+						retrieve metadata for</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personAttributeSetTypeInfo+Structure"
+							title="personAttributeSetTypeInfo Structure">personAttributeSetTypeInfo</a></td>
+						<td class="methodReturnDesc">information about a
+						personAttributeSetType</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+
+						<td class="methodErrorDesc">personAttributeSetType not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personAttributeSetTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personAttributeSetTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonPersonRelationTypes"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonPersonRelationTypes</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves the list of
+						person to person relationship type known by this service</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType">none</td>
+						<td class="methodParamName">none</td>
+
+						<td class="methodParamDesc">no parameters</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personRelationTypeDisplayList+Structure"
+							title="personRelationTypeDisplayList Structure">personRelationTypeDisplayList</a></td>
+						<td class="methodReturnDesc">list of person person relation
+						types</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Errors</th>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<h4><a name="PersonService-"></a><font color="#000066"><em>Read</em></font></h4>
+
+				<p><a name="PersonService-fetchFullPersonInfo"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchFullPersonInfo</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves all available
+						information about a person</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person to be
+						retrieved</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2">&lt;<a
+							href="/confluence/display/KULSTU/Service+Data+Structures+Sandbox#ServiceDataStructuresSandbox-personpersonfullinfo">person
+						full info</a>&gt;</td>
+						<td class="methodReturnDesc">all information available
+						through the person service</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId not found</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-fetchPersonInfoByPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchPersonInfoByPersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves information
+						about a person, returning only the information associated with the
+						specified personType<br />
+						<img class="emoticon"
+							src="/confluence/images/icons/emoticons/warning.gif" height="16"
+							width="16" align="absmiddle" alt="" border="0" /> <font
+							color="blue">May be converted to return the person display
+						list instead (limiting the variable returns to searches only)</font></td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person to be
+						retrieved</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">person type identifier</td>
+					</tr>
+					<tr>
+
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personInfo+Structure"
+							title="personInfo Structure">personInfo</a></td>
+						<td class="methodReturnDesc">information about a person,
+						limited to information associated with the specified personType</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, personTypeKey not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId, personTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId, personTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a
+					name="PersonService-fetchPersonInfoByPersonAttributeSetTypes"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchPersonInfoByPersonAttributeSetTypes</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves information
+						about a person through a list of person attribute sets<br />
+						<img class="emoticon"
+							src="/confluence/images/icons/emoticons/warning.gif" height="16"
+							width="16" align="absmiddle" alt="" border="0" /> <font
+							color="blue">May be converted to return the person display
+						list instead (limiting the variable returns to searches only)</font></td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person to be
+						retrieved</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/pages/createpage.action?spaceKey=KULSTU&amp;title=personpersonAttributeSetTypeKeyList+Structure&amp;linkCreation=true&amp;fromPageId=22511698"
+							class="createlink">personAttributeSetTypeKeyList</a></td>
+						<td class="methodParamName">personAttributeSetTypeKeyList</td>
+						<td class="methodParamDesc">list of person attribute sets to
+						be retrieved</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personInfo+Structure"
+							title="personInfo Structure">personInfo</a></td>
+
+						<td class="methodReturnDesc">information about a person,
+						limited to information associated with the specified attribute set
+						list</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, personAttributeSet not
+						found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid personId,
+						personAttributeSet list</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId,
+						personAttributeSet list</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonAttributeSetTypesForPerson"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonAttributeSetTypesForPerson</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves a list of which
+						person attribute sets should be available for a given person</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+
+						<td class="methodParamDesc">identifier of the person whose
+						set availability is to be retrieved</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personAttributeSetTypeKeyList+Structure"
+							title="personAttributeSetTypeKeyList Structure">personAttributeSetTypeKeyList</a></td>
+						<td class="methodReturnDesc">list of person attribute set
+						type keys</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId not found</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonTypesForPerson"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonTypesForPerson</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves a list of person
+						type keys for a given person</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personTypeKeyList+Structure"
+							title="personTypeKeyList Structure">personTypeKeyList</a></td>
+						<td class="methodReturnDesc">list of person type keys</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+
+						<td class="methodErrorDesc">missing personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonIdsForPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonIdsForPersonType</td>
+					</tr>
+
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves a list of person
+						ids for a given person type key</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">persontype for the people to be
+						retrieved</td>
+					</tr>
+					<tr>
+						<td class="methodParamType">&lt;<a
+							href="/confluence/display/KULSTU/Service+Data+Structures+Sandbox#ServiceDataStructuresSandbox-personpersonfilters">person
+						filters</a>&gt;</td>
+
+						<td class="methodParamName">personFilters</td>
+						<td class="methodParamDesc">additional criteria used to
+						narrow the list of results<br />
+						<img class="emoticon"
+							src="/confluence/images/icons/emoticons/warning.gif" height="16"
+							width="16" align="absmiddle" alt="" border="0" /> <font
+							color="blue">Assumption is hard constraints (equals and
+						ands)</font></td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personIdList+Structure"
+							title="personIdList Structure">personIdList</a></td>
+						<td class="methodReturnDesc">list of person identifiers</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personType not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personType, additional
+						criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personType, additional
+						criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-isPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">isPersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Checks if a person is of a
+						specified type</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/boolean+Structure"
+							title="boolean Structure">boolean</a></td>
+						<td class="methodReturnDesc">true if the person specified is
+						of the specified type</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, personType not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3">
+						<p><a href="/confluence/display/~sgibson">Scott Gibson</a> <font
+							color="red">A person message should contain their list of
+						personTypes and if you only have the personId you could use
+						fetchFullPersonInfo - or is this meant to somehow get around
+						authorization constraints?</font></p>
+						</td>
+					</tr>
+				</table>
+
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-validatePersonInfoForPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">validatePersonInfoForPersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Validates if the
+						information collected for a person is complete and valid for the
+						specified personType (usually called before attempting to assign a
+						new personType)</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/validationResult+Structure"
+							title="validationResult Structure">validationResult</a></td>
+
+						<td class="methodReturnDesc">results of the specified
+						validations (general status, lists of failed validation rules,
+						etc.)</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, personType not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-fetchReplacementPersonId"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchReplacementPersonId</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves the replacement
+						identifier for a person using the old person identifier specified.</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">oldId</td>
+
+						<td class="methodParamDesc">identifier of the person</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodReturnDesc">current identifier for the
+						specified person</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId not found</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonPersonRelations"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonPersonRelations</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves all relations of
+						the specified type where the specified person is involved in
+						either side of the relation</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationTypeKey+Structure"
+							title="personRelationTypeKey Structure">personRelationTypeKey</a></td>
+						<td class="methodParamName">personRelationTypeKey</td>
+						<td class="methodParamDesc">type of relationship</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personRelationDisplayList+Structure"
+							title="personRelationDisplayList Structure">personRelationDisplayList</a></td>
+						<td class="methodReturnDesc">list of relationships matching
+						the specified type where the person is on either side</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, personRelationTypeKey
+						not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId,
+						personRelationTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId,
+						personRelationTypeKey</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-findPersonPersonRelationIds"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">findPersonPersonRelationIds</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+
+						<td class="methodDesc" colspan="3">Retrieves all identifiers
+						for relations of the specified type where the specified person is
+						involved in either side of the relation</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier of the person</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationTypeKey+Structure"
+							title="personRelationTypeKey Structure">personRelationTypeKey</a></td>
+						<td class="methodParamName">personRelationTypeKey</td>
+						<td class="methodParamDesc">type of relationship</td>
+					</tr>
+
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personRelationIdList+Structure"
+							title="personRelationIdList Structure">personRelationIdList</a></td>
+						<td class="methodReturnDesc">list of identifiers for
+						relationships matching the specified type where the person is on
+						either side</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, personRelationTypeKey
+						not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid personId,
+						personRelationTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId,
+						personRelationTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-fetchPersonPersonRelation"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">fetchPersonPersonRelation</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves the specified
+						relation</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationId+Structure"
+							title="personRelationId Structure">personRelationId</a></td>
+						<td class="methodParamName">personRelationId</td>
+
+						<td class="methodParamDesc">identifier of the relationship</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personRelationInfo+Structure"
+							title="personRelationInfo Structure">personRelationInfo</a></td>
+						<td class="methodReturnDesc">the specified person person
+						relationship</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personRelationId, relationship
+						not found</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personRelationId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personRelationId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<h4><a name="PersonService-"></a><font color="#000066"><em>Search</em></font></h4>
+
+				<p><a name="PersonService-searchForPersonIds"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">searchForPersonIds</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves identifiers of
+						existing people matching the specified criteria.</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personCriteria+Structure"
+							title="personCriteria Structure">personCriteria</a></td>
+						<td class="methodParamName">personCriteria</td>
+						<td class="methodParamDesc">criteria to be used for retrieval
+						of multiple people, e.g. by personType, by name, by birthdate</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personIdList+Structure"
+							title="personIdList Structure">personIdList</a></td>
+						<td class="methodReturnDesc">List of person identifiers that
+						match the supplied criteria</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-searchForPeople"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">searchForPeople</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves basic attribute
+						set for existing people matching the specified criteria. <img
+							class="emoticon"
+							src="/confluence/images/icons/emoticons/help_16.gif" height="16"
+							width="16" align="absmiddle" alt="" border="0" /> What is in the
+						basic attribute set?</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personCriteria+Structure"
+							title="personCriteria Structure">personCriteria</a></td>
+						<td class="methodParamName">personCriteria</td>
+						<td class="methodParamDesc">criteria to be used for retrieval
+						of multiple people, e.g. by name, by birthdate</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personDisplayList+Structure"
+							title="personDisplayList Structure">personDisplayList</a></td>
+						<td class="methodReturnDesc">List of Persons with data that
+						match the supplied criteria. Data is from the basic Attribute Set
+						only</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-searchForPeopleByPersonType"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">searchForPeopleByPersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves appropriate
+						Attribute Set(s) for existing people of the specified Person Type
+						and matching other criteria. The information returned is
+						determined by the Attribute Set(s) associated with the specified
+						Person Type</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+
+						<td class="methodParamDesc">key for the person type used as
+						both constraint and output modifier</td>
+					</tr>
+					<td class="methodParamType"><a
+						href="/confluence/display/KULSTU/personCriteria+Structure"
+						title="personCriteria Structure">personCriteria</a></td>
+					<td class="methodParamName">personCriteria</td>
+					<td class="methodParamDesc">criteria to be used for retrieval
+					of multiple people, e.g. by name, by birthdate</td>
+					<tr></tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/Service+Data+Structures+Sandbox#ServiceDataStructuresSandbox-personpersonlimitedinfolist">&lt;person
+						limited info list&gt;</a></td>
+						<td class="methodReturnDesc">List of Persons with data that
+						match the supplied criteria. Data returned is determined by
+						Attribute Set(s) for this Person Type. Only people of the
+						specified person type are returned.</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">Missing person type or criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a
+					name="PersonService-searchForPeopleByPersonAttributeSetType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">searchForPeopleByPersonAttributeSetType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves information from
+						the selected Attribute Set for existing people with information in
+						the specified Attribute Set Type and matching other criteria.</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personAttributeSetTypeKey+Structure"
+							title="personAttributeSetTypeKey Structure">personAttributeSetTypeKey</a></td>
+
+						<td class="methodParamName">personAttributeSetTypeKey</td>
+						<td class="methodParamDesc">key for the person attribute set
+						type used as both a constraint and output modifier</td>
+					</tr>
+					<td class="methodParamType"><a
+						href="/confluence/display/KULSTU/personCriteria+Structure"
+						title="personCriteria Structure">personCriteria</a></td>
+					<td class="methodParamName">personCriteria</td>
+					<td class="methodParamDesc">criteria to be used for retrieval
+					of multiple people, e.g. by name, by birthdate</td>
+					<tr></tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/Service+Data+Structures+Sandbox#ServiceDataStructuresSandbox-personpersonlimitedinfolist">&lt;person
+						limited info list&gt;</a></td>
+						<td class="methodReturnDesc">List of Persons with data that
+						match the supplied criteria. Data returned is determined by
+						selected Attribute Set. Only people with the data in the Attribute
+						Set is returned.</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">Missing attribute set type or
+						person criteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-searchForPersonPersonRelations"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">searchForPersonPersonRelations</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves a list of person
+						person relations meeting the specified criteria</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationCriteria+Structure"
+							title="personRelationCriteria Structure">personRelationCriteria</a></td>
+						<td class="methodParamName">personRelationCriteria</td>
+						<td class="methodParamDesc">criteria to be used for finding
+						relationships</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personRelationDisplayList+Structure"
+							title="personRelationDisplayList Structure">personRelationDisplayList</a></td>
+						<td class="methodReturnDesc">List of Person Person
+						Relationships with data that match the supplied criteria.</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid personRelationCriteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">Missing personRelationCriteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-searchForPeopleByRelation"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">searchForPeopleByRelation</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves a list of people
+						with relationships meeting the specified criteria</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationCriteria+Structure"
+							title="personRelationCriteria Structure">personRelationCriteria</a></td>
+						<td class="methodParamName">personRelationCriteria</td>
+
+						<td class="methodParamDesc">criteria to be used for finding
+						relationships</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personDisplayList+Structure"
+							title="personDisplayList Structure">personDisplayList</a></td>
+						<td class="methodReturnDesc">List of people with
+						relationships that match the supplied criteria.</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personRelationCriteria</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">Missing personRelationCriteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-searchForPersonIdsByRelation"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+
+						<td class="methodName" colspan="3">searchForPersonIdsByRelation</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Retrieves a list of
+						identifiers of people with relationships meeting the specified
+						criteria</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationCriteria+Structure"
+							title="personRelationCriteria Structure">personRelationCriteria</a></td>
+						<td class="methodParamName">personRelationCriteria</td>
+						<td class="methodParamDesc">criteria to be used for finding
+						relationships</td>
+					</tr>
+					<tr>
+
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personIdList+Structure"
+							title="personIdList Structure">personIdList</a></td>
+						<td class="methodReturnDesc">List of identifiers of people
+						with relationships that match the supplied criteria.</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Errors</th>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personRelationCriteria</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">Missing personRelationCriteria</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+
+				<h4><a name="PersonService-"></a><font color="#000066"><em>Maintenance</em></font></h4>
+
+				<p><a name="PersonService-createPerson"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+
+						<td class="methodName" colspan="3">createPerson</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Creates a person record</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person being created</td>
+					</tr>
+					<tr>
+
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personCreateInfo+Structure"
+							title="personCreateInfo Structure">personCreateInfo</a></td>
+						<td class="methodParamName">personCreateInfo</td>
+						<td class="methodParamDesc">information required to create a
+						person - may consist of name, source type, effective date,
+						expiration date, etc.</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodReturnDesc">identifier for the newly created
+						person</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+						<td class="methodErrorType" colspan="2">ALREADY_EXISTS</td>
+
+						<td class="methodErrorDesc">person already exists</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personTypeKey,
+						personCreateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personTypeKey,
+						personCreateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"><b><a
+							href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000002"><b>PI_00_0002</b></a></b>
+						<b><a
+							href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000043"><b>PI_00_0043</b></a></b></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-updatePerson"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">updatePerson</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Updates a person record</td>
+					</tr>
+
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier for person to be
+						updated</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personUpdateInfo+Structure"
+							title="personUpdateInfo Structure">personUpdateInfo</a></td>
+						<td class="methodParamName">personUpdateInfo</td>
+						<td class="methodParamDesc">information needed to update a
+						person record</td>
+					</tr>
+					<tr>
+
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/status+Structure"
+							title="status Structure">status</a></td>
+						<td class="methodReturnDesc">status of the operation (success
+						or failure)</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="7">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId,
+						personUpdateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId,
+						personUpdateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">READ_ONLY</td>
+						<td class="methodErrorDesc">attempted to update a read only
+						attribute</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-deletePerson"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">deletePerson</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Deletes a person record.</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier for person to be
+						deleted</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/status+Structure"
+							title="status Structure">status</a></td>
+						<td class="methodReturnDesc">status of the operation (success
+						or failure)</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">person does not exist</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid personId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-assignPersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">assignPersonType</td>
+					</tr>
+
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Assigns a personType to a
+						person record</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier for person having a
+						personType assigned</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person being assigned</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/status+Structure"
+							title="status Structure">status</a></td>
+						<td class="methodReturnDesc">status of the operation</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">ALREADY_EXISTS</td>
+						<td class="methodErrorDesc">person already has specified
+						personType associated</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId, personTypeKey</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-removePersonType"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">removePersonType</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Deassociates a personType
+						from a person record</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">identifier for person having a
+						personType removed</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personTypeKey+Structure"
+							title="personTypeKey Structure">personTypeKey</a></td>
+						<td class="methodParamName">personTypeKey</td>
+						<td class="methodParamDesc">type of person being removed</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/status+Structure"
+							title="status Structure">status</a></td>
+						<td class="methodReturnDesc">status of the operation</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DISABLED_IDENTIFIER</td>
+						<td class="methodErrorDesc">personId found but has been
+						retired</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">person, personType, or
+						association does not exist</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId, personType</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-createPersonPersonRelation"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">createPersonPersonRelation</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Creates a person to person
+						relationship</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="4">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+
+						<td class="methodParamName">personId</td>
+						<td class="methodParamDesc">person identifier</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personId+Structure"
+							title="personId Structure">personId</a></td>
+						<td class="methodParamName">relatedPersonId</td>
+						<td class="methodParamDesc">person identifier</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationTypeKey+Structure"
+							title="personRelationTypeKey Structure">personRelationTypeKey</a></td>
+						<td class="methodParamName">personRelationTypeKey</td>
+						<td class="methodParamDesc">person to person relationship
+						type</td>
+					</tr>
+
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationCreateInfo+Structure"
+							title="personRelationCreateInfo Structure">personRelationCreateInfo</a></td>
+						<td class="methodParamName">personRelationCreateInfo</td>
+						<td class="methodParamDesc">additional information about the
+						person to person relationship</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/personRelationId+Structure"
+							title="personRelationId Structure">personRelationId</a></td>
+						<td class="methodReturnDesc">identifier for the newly created
+						person relationship</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="7">Errors</th>
+
+						<td class="methodErrorType" colspan="2">ALREADY_EXISTS</td>
+						<td class="methodErrorDesc">personRelationship already exists</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personId, relatedPersonId not
+						found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">CIRCULAR_REFERENCE</td>
+						<td class="methodErrorDesc">personId and relatedPersonId
+						refer to the same person</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+
+						<td class="methodErrorDesc">invalid personId,
+						relatedPersonId, personRelationTypeKey, personRelationCreateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personId,
+						relatedPersonId, personRelationTypeKey, personRelationCreateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+
+					<tr>
+						<th class="h">Capabilities</th>
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-updatePersonPersonRelation"></a></p>
+				<table class="methodTable">
+
+					<tr>
+						<th class="h">Method</th>
+						<td class="methodName" colspan="3">updatePersonPersonRelation</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Updates a person to person
+						relationship</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="2">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationId+Structure"
+							title="personRelationId Structure">personRelationId</a></td>
+						<td class="methodParamName">personRelationId</td>
+
+						<td class="methodParamDesc">identifier for person
+						relationship to be updated</td>
+					</tr>
+					<tr>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationUpdateInfo+Structure"
+							title="personRelationUpdateInfo Structure">personRelationUpdateInfo</a></td>
+						<td class="methodParamName">personRelationUpdateInfo</td>
+						<td class="methodParamDesc">changed information about a
+						person relationship</td>
+					</tr>
+					<tr>
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/status+Structure"
+							title="status Structure">status</a></td>
+						<td class="methodReturnDesc">status of the operation (success
+						or failure)</td>
+					</tr>
+					<tr>
+
+						<th class="h" rowspan="6">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">personRelationId not found</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personRelationId,
+						personRelationUpdateInfo</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">missing personRelationId,
+						personRelationUpdateInfo</td>
+					</tr>
+					<tr>
+
+						<td class="methodErrorType" colspan="2">READ_ONLY</td>
+						<td class="methodErrorDesc">attempted to update a read only
+						attribute</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+				<p><a name="PersonService-deletePersonPersonRelation"></a></p>
+				<table class="methodTable">
+					<tr>
+						<th class="h">Method</th>
+
+						<td class="methodName" colspan="3">deletePersonPersonRelation</td>
+					</tr>
+					<tr>
+						<th class="h">Description</th>
+						<td class="methodDesc" colspan="3">Deletes a person
+						relationship.</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="1">Parameters</th>
+						<td class="methodParamType"><a
+							href="/confluence/display/KULSTU/personRelationId+Structure"
+							title="personRelationId Structure">personRelationId</a></td>
+						<td class="methodParamName">personRelationId</td>
+						<td class="methodParamDesc">identifier for person
+						relationship to be deleted</td>
+					</tr>
+					<tr>
+
+						<th class="h">Return</th>
+						<td class="methodReturnType" colspan="2"><a
+							href="/confluence/display/KULSTU/status+Structure"
+							title="status Structure">status</a></td>
+						<td class="methodReturnDesc">status of the operation (success
+						or failure)</td>
+					</tr>
+					<tr>
+						<th class="h" rowspan="5">Errors</th>
+						<td class="methodErrorType" colspan="2">DOES_NOT_EXIST</td>
+						<td class="methodErrorDesc">person relationship does not
+						exist</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">INVALID_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personRelationId</td>
+					</tr>
+
+					<tr>
+						<td class="methodErrorType" colspan="2">MISSING_PARAMETER</td>
+						<td class="methodErrorDesc">invalid personRelationId</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">OPERATION_FAILED</td>
+						<td class="methodErrorDesc">unable to complete request</td>
+					</tr>
+					<tr>
+						<td class="methodErrorType" colspan="2">PERMISSION_DENIED</td>
+						<td class="methodErrorDesc">authorization failure</td>
+					</tr>
+					<tr>
+						<th class="h">Capabilities</th>
+
+						<td class="capabilityDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Use Cases</th>
+						<td class="usecaseDesc" colspan="3"></td>
+					</tr>
+					<tr>
+						<th class="h">Comments/Feedback</th>
+						<td class="commentsDesc" colspan="3"></td>
+					</tr>
+				</table>
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+
+
+				<h3><a name="PersonService-Capabilities"></a>Capabilities</h3>
+
+				<ul>
+
+					<li><img class="emoticon"
+						src="/confluence/images/icons/emoticons/check.gif" height="16"
+						width="16" align="absmiddle" alt="" border="0" /> <b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000002"><b>PI_00_0002</b></a></b>
+					&#45; <b>Create</b> Person Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000003"><b>PI_00_0003</b></a></b>
+					&#45; <b>Create</b> Person Source (how did they become known by the
+					institution)</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000004"><b>PI_00_0004</b></a></b>
+					&#45; <b>Update</b> Person Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000005"><b>PI_00_0005</b></a></b>
+					&#45; <b>Delete</b> Person Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000006"><b>PI_00_0006</b></a></b>
+					&#45; <b>Create</b> a new PersonId</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000007"><b>PI_00_0007</b></a></b>
+					&#45; <b>Find/Fetch</b> Person.</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000008"><b>PI_00_0008</b></a></b>
+					&#45; Match and Resolve Person Records
+					<ul>
+						<li>Find out if the new person might already have a record in
+						the system</li>
+
+					</ul>
+					</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000009"><b>PI_00_0009</b></a></b>
+					&#45; <b>De-Dup</b> Find possible duplicate records and resolve to
+					a single id</li>
+				</ul>
+
+
+				<ul>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000031"><b>PI_00_0031</b></a></b>
+					&#45; Find where a Student is physically living</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000032"><b>PI_00_0032</b></a></b>
+					&#45; Update a Student Biographic Data</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000033"><b>PI_00_0033</b></a></b>
+					&#45; Change an Address</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000034"><b>PI_00_0034</b></a></b>
+					&#45; Make a Name change</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000035"><b>PI_00_0035</b></a></b>
+					&#45; Correct some information</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000036"><b>PI_00_0036</b></a></b>
+					&#45; Manage Faculty or Staff Biographic Data</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000037"><b>PI_00_0037</b></a></b>
+					&#45; Manage Students Academic Record</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000038"><b>PI_00_0038</b></a></b>
+					&#45; Manage Student's address for the purpose of bill paying</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000039"><b>PI_00_0039</b></a></b>
+					&#45; Manage Student's address for the purpose of receiving grades</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000040"><b>PI_00_0040</b></a></b>
+					&#45; Manage Visiting or Exchange Student's information</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000041"><b>PI_00_0041</b></a></b>
+					&#45; Find/Fetch People and creating a set to work with</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000042"><b>PI_00_0042</b></a></b>
+					&#45; Find/Fetch everyone who hasn't completed the X form and send
+					mail</li>
+				</ul>
+
+
+				<ul>
+					<li><img class="emoticon"
+						src="/confluence/images/icons/emoticons/check.gif" height="16"
+						width="16" align="absmiddle" alt="" border="0" /> <b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000043"><b>PI_00_0043</b></a></b>
+					&#45; Create Student Identity</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000044"><b>PI_00_0044</b></a></b>
+					&#45; Update Student Identity.</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000045"><b>PI_00_0045</b></a></b>
+					&#45; Find Student.</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000046"><b>PI_00_0046</b></a></b>
+					&#45; Fetch Student.</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000047"><b>PI_00_0047</b></a></b>
+					&#45; Delete Student. Rare</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000048"><b>PI_00_0048</b></a></b>
+					&#45; Match Students</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000049"><b>PI_00_0049</b></a></b>
+					&#45; Merge Student.</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000050"><b>PI_00_0050</b></a></b>
+					&#45; Validate Student already exists</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000051"><b>PI_00_0051</b></a></b>
+					&#45; Validate Students as Different/Unique</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000052"><b>PI_00_0052</b></a></b>
+					&#45; Create Self-Reported Information Record</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000053"><b>PI_00_0053</b></a></b>
+					&#45; Update Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000054"><b>PI_00_0054</b></a></b>
+					&#45; Find Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000055"><b>PI_00_0055</b></a></b>
+					&#45; Fetch Self-Reported Information Record</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000056"><b>PI_00_0056</b></a></b>
+					&#45; Delete Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000057"><b>PI_00_0057</b></a></b>
+					&#45; Match Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000058"><b>PI_00_0058</b></a></b>
+					&#45; Merge Self-Reported Information Record</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000059"><b>PI_00_0059</b></a></b>
+					&#45; Validate Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000060"><b>PI_00_0060</b></a></b>
+					&#45; Validate Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000061"><b>PI_00_0061</b></a></b>
+					&#45; Attach Self-Reported Information Record to Person Enrollment
+					Instance</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000062"><b>PI_00_0062</b></a></b>
+					&#45; Detach Self-Reported Information Record</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000063"><b>PI_00_0063</b></a></b>
+					&#45; Create Student Source Contact Identity</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000064"><b>PI_00_0064</b></a></b>
+					&#45; Update Student Source Contact Identity</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000065"><b>PI_00_0065</b></a></b>
+					&#45; Find Student Source Contact</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000066"><b>PI_00_0066</b></a></b>
+					&#45; Fetch Student Source Contact</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000067"><b>PI_00_0067</b></a></b>
+					&#45; Delete Student Source Contact</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000068"><b>PI_00_0068</b></a></b>
+					&#45; Match Students Source Contacts - Allows for identification of
+					suspect matches (duplicate records or possible duplicates).</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000069"><b>PI_00_0069</b></a></b>
+					&#45; Merge Student Source Contact</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000070"><b>PI_00_0070</b></a></b>
+					&#45; Validate Student Source Contact.</li>
+
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000071"><b>PI_00_0071</b></a></b>
+					&#45; Validate as Different Student Source Contacts</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000072"><b>PI_00_0072</b></a></b>
+					&#45; Attach Student Source Contact to Person</li>
+					<li><b><a
+						href="/confluence/display/KULSTU/PI+Capabilities#PICapabilities-PI000073"><b>PI_00_0073</b></a></b>
+					&#45; Detach Student Source Contact Record</li>
+
+				</ul>
+
+
+				<p><a href="#PersonService-Operations">Back to Operations</a></p>
+				</div>
+
+				<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+    rdf:about="https://test.kuali.org/confluence/display/KULSTU/Person+Service"
+    dc:identifier="https://test.kuali.org/confluence/display/KULSTU/Person+Service"
+    dc:title="Person Service"
+    trackback:ping="https://test.kuali.org/confluence/rpc/trackback/22511698"/>
+</rdf:RDF>
+-->
+
+				<div id="pageChildren" class="pageSection">
+
+				<div class="pageSectionHeader "><a name="children"
+					id="childrenSectionTitle" class="pageSectionTitle">Children</a>
+
+				&nbsp; <a class="grey"
+					href="/confluence/display/KULSTU/Person+Service?showChildren=false&#0035;children">Hide
+				Children</a> &nbsp;|&nbsp; <a class="grey"
+					href="/confluence/pages/listpages-dirview.action?key=KULSTU&openId=22511698#selectedPageInHierarchy">View
+				in Hierarchy</a> &nbsp;|&nbsp; <a class="grey"
+					href="/confluence/pages/createpage.action?spaceKey=KULSTU&fromPageId=22511698">Add
+				Child Page</a></div>
+
+				<div id="pageChildrenList" class="pageSectionBody"><img
+					src="/confluence/images/icons/new_16.gif" height="16" width="16"
+					border="0" align="absmiddle"
+					title="Person Service Description (Updated)" /> <a
+					href="/confluence/display/KULSTU/Person+Service+Description">Person
+				Service Description</a> <br>
+				<img src="/confluence/images/icons/new_16.gif" height="16"
+					width="16" border="0" align="absmiddle"
+					title="Person Service v0.1 (Updated)" /> <a
+					href="/confluence/display/KULSTU/Person+Service+v0.1">Person
+				Service v0.1</a> <br>
+				<img src="/confluence/images/icons/new_16.gif" height="16"
+					width="16" border="0" align="absmiddle"
+					title="Person Service v0.2 (Updated)" /> <a
+					href="/confluence/display/KULSTU/Person+Service+v0.2">Person
+				Service v0.2</a> <br>
+				</div>
+				</div>
+
+				<!--
+    Root decorator: all decisions about how a page is to be decorated via the
+                    inline decoration begins here.
+--> <!--
+    Switch based upon the context. However, for now, just delegate to a decorator
+    identified directly by the context.
+-->
+
+
+
+
+
+				<div class="wiki-content" style="margin-right: 10px;">
+				<p style="clear: both" /><!-- comments should always display underneath the content. we should have a 'clear:both' here just in case there are floats or aligned images in the content -->
+				<div style="margin-top: 30px;"><a
+					href="/confluence/display/KULSTU/Person+Service?showComments=true&showCommentArea=true#addcomment"><img
+					src="/confluence/images/icons/add_comment_16.gif" height="16"
+					width="16" border="0" align="absmiddle"></a> <a
+					href="/confluence/display/KULSTU/Person+Service?showComments=true&showCommentArea=true#addcomment">Add
+				Comment</a></div>
+				</div>
+
+
+				</td>
+
+
+			</tr>
+		</table>
+
+
+		</td>
+	</tr>
+</table>
+
+</div>
+
+<div class="license license-opensource">Site running on a free <b>Atlassian
+Confluence Open Source Project License</b> granted to Kuali Project. <a
+	href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence
+today</a>.<br>
+</div>
+<div class="bottomshadow"></div>
+
+<div id="poweredby" class="smalltext">Powered by <a
+	href="http://www.atlassian.com/software/confluence" class="smalltext">Atlassian
+Confluence</a>, the <a href="http://www.atlassian.com/software/confluence"
+	class="smalltext">Enterprise Wiki</a>. (Version: 2.6.2 Build:#919 Nov
+26, 2007) - <a
+	href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470"
+	class="smalltext">Bug/feature request</a> - <a
+	href="/confluence/administrators.action">Contact Administrators</a> <br />
+</div>
+
+<!-- delay the loading of large javascript files to the end so that they don't interfere with the loading of page content -->
+<span style="display: none"> <script type="text/javascript"
+	language="JavaScript">var domainName = 'https://test.kuali.org/confluence'; var entityId = '22511698'; var spaceKey = 'KULSTU'</script>
+<script type="text/javascript" language="JavaScript"
+	src="/confluence/s/919/1/_/labels-javascript"></script> <script>new Ajax.Autocompleter('labelName', 'labelsAutocompleteList', '22511698', { tokens: new Array(',', ' '), dwrFunction: GenerateAutocompleteLabelsListForEntity.autocompleteLabels});</script>
+</span>
+
+
+</body>
+</html>
