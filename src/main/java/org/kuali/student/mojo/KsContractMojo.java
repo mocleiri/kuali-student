@@ -154,6 +154,7 @@ public class KsContractMojo extends AbstractMojo {
 			transformer.setParameter("date", new Date());
 			transformer.setParameter("user", System.getProperty("user.name"));
 			transformer.setParameter("namespace", namespace);
+			transformer.setParameter("excludeClasses", join(excludeClasses,","));
 			String packageDir="";
 			if(packageName!=null && !packageName.isEmpty()){
 				packageDir = "/"+packageName.replace('.', '/');
@@ -176,6 +177,19 @@ public class KsContractMojo extends AbstractMojo {
 		} catch (Exception ex) {
 			throw new MojoExecutionException("Error parsing params", ex);
 		}
+	}
+
+	private String join(String[] strings, String joinString) {
+		StringBuilder sb = new StringBuilder("");
+		if(strings!=null){
+			for(int i=0;i<strings.length;i++){
+				sb.append(strings[i]);
+				if(i<strings.length-1){
+					sb.append(joinString);
+				}
+			}
+		}
+		return sb.toString();
 	}
 
 	public void findParamsFromMessage(String param, URL url,
@@ -307,6 +321,7 @@ public class KsContractMojo extends AbstractMojo {
 			transformer.setParameter("date", new Date());
 			transformer.setParameter("user", System.getProperty("user.name"));
 			transformer.setParameter("url", contract.getContractPath());
+			transformer.setParameter("excludeClasses", join(excludeClasses,","));
 			String packageDir="";
 			if(packageName!=null && !packageName.isEmpty()){
 				packageDir = "/"+packageName.replace('.', '/');

@@ -24,6 +24,7 @@
     <xsl:param name="date"></xsl:param>
     <xsl:param name="user"></xsl:param>
     <xsl:param name="namespace"></xsl:param>
+    <xsl:param name="excludeClasses"></xsl:param>
 	<xsl:output method="text" />
 	<xsl:template match="/">
 
@@ -64,13 +65,22 @@ import javax.jws.soap.SOAPBinding;
           <xsl:text>Exception;</xsl:text>
           <xsl:text>&#10;</xsl:text>
         </xsl:for-each>
+        <xsl:if test="contains($excludeClasses,'StatusInfo') and count(contents/table/tr/td[@class='methodReturnType' and normalize-space()='StatusInfo']>0) or count(contents/table/tr[td[@class='methodParamType']]/td[@class='methodParamName' and normalize-space()='StatusInfo']>0)">
+       		<xsl:text>&#10;import org.kuali.student.core.dto.StatusInfo;</xsl:text>
+        </xsl:if>
+        <xsl:if test="contains($excludeClasses,'ValidationResultInfo') and count(contents/table/tr/td[@class='methodReturnType' and normalize-space()='ValidationResultInfo']>0) or count(contents/table/tr[td[@class='methodParamType']]/td[@class='methodParamName' and normalize-space()='ValidationResultInfo']>0)">
+       		<xsl:text>&#10;import org.kuali.student.core.validation.dto.ValidationResultInfo;</xsl:text>
+        </xsl:if>
+        <xsl:if test="contains($excludeClasses,'Date') and count(contents/table/tr/td[@class='methodReturnType' and normalize-space()='dateTime']>0) or count(contents/table/tr[td[@class='methodParamType']]/td[@class='methodParamName' and normalize-space()='dateTime']>0)">
+       		<xsl:text>&#10;import java.util.Date;</xsl:text>
+        </xsl:if>        
         <xsl:text>&#10;</xsl:text>
         <xsl:for-each select="distinct-values(contents/table/tr/td[@class='methodReturnType'])">
           <xsl:sort select="."/>
           <xsl:variable name="returnType">
             <xsl:value-of select="normalize-space(.)" />
           </xsl:variable>
-          <xsl:if test="ends-with($returnType, 'Info')">
+          <xsl:if test="ends-with($returnType, 'Info') and not(contains($excludeClasses,concat(upper-case(substring($returnType,1,1)), substring($returnType,2))))">
              <xsl:value-of
               select="concat('import ', $packageName, '.dto.', upper-case(substring($returnType,1,1)), substring($returnType,2))" />
             <xsl:text>;&#10;</xsl:text>

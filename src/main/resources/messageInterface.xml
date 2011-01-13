@@ -22,6 +22,7 @@
     <xsl:param name="url"></xsl:param>
     <xsl:param name="date"></xsl:param>
     <xsl:param name="user"></xsl:param>
+    <xsl:param name="excludeClasses"></xsl:param>
 	<xsl:strip-space elements="*" />
 	<xsl:output method="text" />
 	<xsl:template match="/">
@@ -65,7 +66,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.kuali.student.core.ws.binding.JaxbAttributeMapListAdapter;
 </xsl:text>
-
+<xsl:if test="contains($excludeClasses,'MetaInfo') and count(//content/table[@class='structTable']/tr[position()>1]/td[@class='structType' and normalize-space()='metaInfo'])>0">
+	<xsl:text>&#10;import org.kuali.student.core.dto.MetaInfo;</xsl:text>
+</xsl:if>
+<xsl:if test="contains($excludeClasses,'RichTextInfo') and count(//content/table[@class='structTable']/tr[position()>1]/td[@class='structType' and normalize-space()='richTextInfo'])>0">
+	<xsl:text>&#10;import org.kuali.student.core.dto.RichTextInfo;</xsl:text>
+</xsl:if>
 <!-- Determine if it implements Idable (has a 'key' or 'id' element) and if it implements
 	 HasTypeState (has 'type' and 'state' elements) or HasAttributes-->
 <xsl:variable name="hasKey">
