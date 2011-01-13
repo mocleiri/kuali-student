@@ -154,8 +154,13 @@ public class KsContractMojo extends AbstractMojo {
 			transformer.setParameter("date", new Date());
 			transformer.setParameter("user", System.getProperty("user.name"));
 			transformer.setParameter("namespace", namespace);
-			File serviceDir = new File(outputDirectory, "service");
-			serviceDir.mkdir();
+			String packageDir="";
+			if(packageName!=null && !packageName.isEmpty()){
+				packageDir = "/"+packageName.replace('.', '/');
+			}
+			
+			File serviceDir = new File(outputDirectory+packageDir, "service");
+			serviceDir.mkdirs();
 			Result result = new StreamResult(new File(serviceDir, getServiceName() + ".java"));
 			System.out.println("Creating Service Interface: "+ getServiceName() + ".java");
 
@@ -302,8 +307,12 @@ public class KsContractMojo extends AbstractMojo {
 			transformer.setParameter("date", new Date());
 			transformer.setParameter("user", System.getProperty("user.name"));
 			transformer.setParameter("url", contract.getContractPath());
-			File dtoDirectory = new File(outputDirectory, "dto");
-			dtoDirectory.mkdir();
+			String packageDir="";
+			if(packageName!=null && !packageName.isEmpty()){
+				packageDir = "/"+packageName.replace('.', '/');
+			}
+			File dtoDirectory = new File(outputDirectory+packageDir, "dto");
+			dtoDirectory.mkdirs();
 			Result result = new StreamResult(new File(dtoDirectory, param
 					.substring(0, 1).toUpperCase()
 					+ param.substring(1) + ".java"));
