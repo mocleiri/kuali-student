@@ -28,6 +28,18 @@
   <version>0.0.3-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>KS Tools - Contract Scraper</name>
+  <properties>
+    <kuali.site.download.path>org/kuali/student/mojo</kuali.site.download.path>
+    <kuali.site.path>student/mojo/${project.version}</kuali.site.path>
+  </properties>
+  <url>${kuali.site.public.url}</url>
+  <distributionManagement>
+    <site>
+      <id>${kuali.site.server.id}</id>
+      <name>Maven Site</name>
+      <url>${kuali.site.publish.url}</url>
+    </site>
+  </distributionManagement>
   <repositories>
     <repository>
       <id>kuali.nexus</id>
