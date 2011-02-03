@@ -30,7 +30,6 @@ public class XmlWriter
 
  public XmlWriter ()
  {
-
  }
 
  public XmlWriter (PrintStream out, int indent)
@@ -43,11 +42,12 @@ public class XmlWriter
  {
   this.out = out;
  }
+
  public void setIndent (int indent)
  {
   this.indent = indent;
  }
- 
+
  public int getIndent ()
  {
   return indent;
@@ -122,6 +122,11 @@ public class XmlWriter
 
  public void writeTag (String tag, String value)
  {
+  writeTag (tag, null, value);
+ }
+
+ public void writeTag (String tag, String modifiers, String value)
+ {
   if (value == null)
   {
    return;
@@ -131,7 +136,12 @@ public class XmlWriter
    return;
   }
   indent ();
-  out.print ("<" + tag + ">");
+  out.print ("<" + tag);
+  if (modifiers != null &&  ! modifiers.isEmpty ())
+  {
+   out.print (" " + modifiers);
+  }
+  out.print (">");
   out.print (escapeXML (value));
   out.print ("</" + tag + ">");
   out.println ("");
@@ -190,10 +200,10 @@ public class XmlWriter
   return sb.toString ();
  }
 
-
  public void writeCommentBox (String comment)
  {
-  String border = "***************************************************************";
+  String border =
+         "***************************************************************";
   while (border.length () < comment.length ())
   {
    border = border + border;

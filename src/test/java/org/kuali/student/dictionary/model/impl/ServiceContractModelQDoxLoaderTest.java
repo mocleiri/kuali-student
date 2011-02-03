@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 The Kuali Foundation
+ * Copyright 2011 The Kuali Foundation
  *
  * Licensed under the Educational Community License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,18 +60,18 @@ public class ServiceContractModelQDoxLoaderTest
  public void tearDown ()
  {
  }
+ private static final String CORE_DIRECTORY =
+                             "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
 
- private static final String CORE_DIRECTORY = "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
-
-  private ServiceContractModel getModel ()
+ private ServiceContractModel getModel ()
  {
   List<String> sourceDirectories = new ArrayList ();
   sourceDirectories.add (CORE_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (
     sourceDirectories);
   return instance;
-
  }
+
  private String dump (ServiceMethod method)
  {
   StringBuilder bldr = new StringBuilder ();
@@ -100,7 +100,7 @@ public class ServiceContractModelQDoxLoaderTest
   ServiceContractModel model = getModel ();
   List<ServiceMethod> result = model.getServiceMethods ();
   System.out.println ("Number of methods=" + result.size ());
-  for (ServiceMethod method: result)
+  for (ServiceMethod method : result)
   {
    System.out.println (dump (method));
   }
