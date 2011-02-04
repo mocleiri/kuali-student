@@ -195,7 +195,7 @@ public class ServiceContractModelQDoxLoader implements
      param.setType (calcType (parameter.getType ()));
      param.setDescription (calcParameterDescription (javaMethod,
                                                      param.getName ()));
-     addXmlTypeAndMessageStructure (parameter.getType ().getJavaClass (),
+     addXmlTypeAndMessageStructure (calcJavaClass (parameter.getType ()),
                                     serviceMethod.getService ());
     }
     // errors
@@ -213,7 +213,7 @@ public class ServiceContractModelQDoxLoader implements
     serviceMethod.setReturnValue (rv);
     rv.setType (this.calcType (javaMethod.getReturnType ()));
     rv.setDescription (this.calcReturnDescription (javaMethod));
-    addXmlTypeAndMessageStructure (javaMethod.getReturnType ().getJavaClass (),
+    addXmlTypeAndMessageStructure (calcJavaClass (javaMethod.getReturnType ()),
                                    serviceMethod.getService ());
    }
   }
@@ -276,7 +276,7 @@ public class ServiceContractModelQDoxLoader implements
  }
 
  private void addXmlTypeAndMessageStructure (JavaClass messageStructureJavaClass,
-                                             String service)
+                                             String serviceKey)
  {
   if (xmlTypeMap == null)
   {
@@ -289,19 +289,17 @@ public class ServiceContractModelQDoxLoader implements
    xmlTypeMap.put (messageStructureJavaClass.getName (), xmlType);
    xmlType.setName (messageStructureJavaClass.getName ());
    xmlType.setDesc (messageStructureJavaClass.getComment ());
-   xmlType.setService (service);
+   xmlType.setService (serviceKey);
+   xmlType.setVersion ("???");
    xmlType.setPrimitive (calcPrimitive (messageStructureJavaClass));
-   if (xmlType.getPrimitive ().equals ("Complex"))
+   if (xmlType.getPrimitive ().equals (XmlType.COMPLEX))
    {
-    addMessageStructure (messageStructureJavaClass, service);
+    addMessageStructure (messageStructureJavaClass, serviceKey);
    }
   }
   else
   {
-   if ( ! xmlType.getService ().contains (service))
-   {
-    xmlType.setService (xmlType.getService () + ", " + service);
-   }
+   addServiceToList (xmlType, serviceKey);
   }
  }
 
@@ -315,41 +313,41 @@ public class ServiceContractModelQDoxLoader implements
  }
 
  private void addMessageStructure (JavaClass messageStructureJavaClass,
-                                   String service)
+                                   String serviceKey)
  {
   if (this.messageStructures == null)
   {
    this.messageStructures = new ArrayList ();
   }
-  Set<JavaClass> complexSubObjectsToAdd = new LinkedHashSet ();
-
-  for (JavaMethod setterMethod : messageStructureJavaClass.getMethods ())
+  Set<JavaClass> subObjectsToAdd = new LinkedHashSet ();
+  for (JavaMethod setterMethod : messageStructureJavaClass.getMethods (true))
   {
-   if ( ! isSetterMethod (setterMethod))
+   if ( ! isSetterMethod (setterMethod, messageStructureJavaClass.getName ()))
    {
     continue;
    }
-   MessageStructure ms = new MessageStructure ();
-   messageStructures.add (ms);
-   ms.setXmlObject (messageStructureJavaClass.getName ());
-   ms.setShortName (this.calcShortName (setterMethod));
+   String shortName = this.calcShortName (setterMethod);
    JavaMethod getterMethod = findGetterMethod (messageStructureJavaClass,
-                                               ms.getShortName ());
+                                               shortName);
    if (getterMethod == null)
    {
     throw new IllegalArgumentException ("Setter method has no corresponding getter method: "
                                         + messageStructureJavaClass.getName ()
                                         + "." + setterMethod.getName ());
    }
-   // overide the shortName if the bean field has an XmlAttribute name=xxx
    JavaField beanField = this.findField (messageStructureJavaClass,
-                                         ms.getShortName ());
+                                         shortName);
    if (beanField == null)
    {
     throw new IllegalArgumentException ("Setter method has no corresponding bean field: "
                                         + messageStructureJavaClass.getName ()
                                         + "." + setterMethod.getName ());
    }
+   MessageStructure ms = new MessageStructure ();
+   messageStructures.add (ms);
+   ms.setXmlObject (messageStructureJavaClass.getName ());
+   ms.setShortName (shortName);
+   // overide the shortName if the bean field has an XmlAttribute name=xxx
    for (Annotation annotation : beanField.getAnnotations ())
    {
     if (annotation.getType ().getJavaClass ().getName ().equals ("XmlAttribute"))
@@ -363,31 +361,53 @@ public class ServiceContractModelQDoxLoader implements
    }
    ms.setName ("????");
    ms.setType (calcType (setterMethod));
-   ms.setXmlAttribute ("??");
+   ms.setXmlAttribute (this.calcXmlAttribute (beanField));
+   ms.setOptional ("???");
    ms.setCardinality (this.calcCardinality (setterMethod));
    ms.setDescription (getterMethod.getComment ());
    ms.setFeedback ("???");
    ms.setStatus ("???");
-   if (isComplex (setterMethod))
-   {
-    complexSubObjectsToAdd.add (this.calcJavaClass (setterMethod));
-   }
+   subObjectsToAdd.add (this.calcJavaClass (setterMethod));
   }
   // now add all it's complex sub-objects if they haven't already been added
-  for (JavaClass clazzToAdd : complexSubObjectsToAdd)
+  for (JavaClass subObjectToAdd : subObjectsToAdd)
   {
-   XmlType xmlType = xmlTypeMap.get (clazzToAdd.getName ());
+   XmlType xmlType = xmlTypeMap.get (subObjectToAdd.getName ());
    if (xmlType == null)
    {
-    addXmlTypeAndMessageStructure (clazzToAdd, service);
+    addXmlTypeAndMessageStructure (subObjectToAdd, serviceKey);
+   }
+   else
+   {
+    addServiceToList (xmlType, serviceKey);
    }
   }
   return;
  }
 
- private JavaField findField (JavaClass msClass, String shortName)
+ private void addServiceToList (XmlType xmlType, String serviceKey)
  {
-  for (JavaField field : msClass.getFields ())
+  if ( ! xmlType.getService ().contains (serviceKey))
+  {
+   xmlType.setService (xmlType.getService () + ", " + serviceKey);
+  }
+ }
+
+ private String calcXmlAttribute (JavaField beanField)
+ {
+  for (Annotation annotation : beanField.getAnnotations ())
+  {
+   if (annotation.getType ().getJavaClass ().getName ().equals ("XmlAttribute"))
+   {
+    return "Yes";
+   }
+  }
+  return "No";
+ }
+
+ private JavaField findField (JavaClass javaClass, String shortName)
+ {
+  for (JavaField field : javaClass.getFields ())
   {
    if (field.getName ().equalsIgnoreCase (shortName))
    {
@@ -399,12 +419,17 @@ public class ServiceContractModelQDoxLoader implements
     return field;
    }
   }
-  return null;
+  JavaClass superClass = javaClass.getSuperJavaClass ();
+  if (superClass == null)
+  {
+   return null;
+  }
+  return findField (superClass, shortName);
  }
 
  private JavaMethod findGetterMethod (JavaClass msClass, String shortName)
  {
-  for (JavaMethod method : msClass.getMethods ())
+  for (JavaMethod method : msClass.getMethods (true))
   {
    if (method.getName ().equals ("get" + shortName))
    {
@@ -418,8 +443,31 @@ public class ServiceContractModelQDoxLoader implements
   }
   return null;
  }
+ private static final String[] SETTER_METHODS_TO_SKIP =
+ {
+  // Somebody put "convenience" methods on the validation result info
+  "ValidationResultInfo.setWarning",
+  "ValidationResultInfo.setError",
+  // not on original wiki but still defined as a method but not backed by a field so not in wsdl
+  "CredentialProgramInfo.setDiplomaTitle",
+  // synonym for the official of setCredentialType
+  "CredentialProgramInfo.setType",
+  // not on original wiki but still defined as a method but not backed by a field so not in wsdl
+  "CredentialProgramInfo.setHegisCode",
+  "CredentialProgramInfo.setCip2000Code",
+  "CredentialProgramInfo.setCip2010Code",
+  "CredentialProgramInfo.setSelectiveEnrollmentCode",
+  "CoreProgramInfo.setDiplomaTitle",
+  // synonym for the official of setCredentialType
+//  "CoreProgramInfo.setType",
+  // not on original wiki but still defined as a method but not backed by a field so not in wsdl
+  "CoreProgramInfo.setHegisCode",
+  "CoreProgramInfo.setCip2000Code",
+  "CoreProgramInfo.setCip2010Code",
+  "CoreProgramInfo.setSelectiveEnrollmentCode"
+ };
 
- private boolean isSetterMethod (JavaMethod method)
+ private boolean isSetterMethod (JavaMethod method, String className)
  {
   if ( ! method.getName ().startsWith ("set"))
   {
@@ -428,6 +476,14 @@ public class ServiceContractModelQDoxLoader implements
   if (method.getParameters ().length != 1)
   {
    return false;
+  }
+  String fullName = className + "." + method.getName ();
+  for (String skip : SETTER_METHODS_TO_SKIP)
+  {
+   if (skip.equals (fullName))
+   {
+    return false;
+   }
   }
   return true;
  }
@@ -569,6 +625,10 @@ public class ServiceContractModelQDoxLoader implements
    return false;
   }
   if (javaClass.getName ().equals (float.class.getSimpleName ()))
+  {
+   return false;
+  }
+  if (javaClass.getName ().equals (Map.class.getSimpleName ()))
   {
    return false;
   }

@@ -33,7 +33,6 @@ public class MessageStructure
  {
   this.id = id;
  }
-
  private String xmlObject;
 
  public String getXmlObject ()
@@ -45,7 +44,6 @@ public class MessageStructure
  {
   this.xmlObject = xmlObject;
  }
-
  private String shortName;
 
  public String getShortName ()
@@ -57,7 +55,6 @@ public class MessageStructure
  {
   this.shortName = shortName;
  }
-
  private String name;
 
  public String getName ()
@@ -69,7 +66,6 @@ public class MessageStructure
  {
   this.name = name;
  }
-
  private String type;
 
  public String getType ()
@@ -81,7 +77,6 @@ public class MessageStructure
  {
   this.type = type;
  }
-
  private String url;
 
  public String getUrl ()
@@ -93,7 +88,6 @@ public class MessageStructure
  {
   this.url = url;
  }
-
  private String description;
 
  public String getDescription ()
@@ -105,8 +99,6 @@ public class MessageStructure
  {
   this.description = description;
  }
-
-
  private String required;
 
  public String getRequired ()
@@ -118,8 +110,17 @@ public class MessageStructure
  {
   this.required = required;
  }
+ private String optional;
 
+ public String getOptional ()
+ {
+  return optional;
+ }
 
+ public void setOptional (String optional)
+ {
+  this.optional = optional;
+ }
  private String cardinality;
 
  public String getCardinality ()
@@ -131,7 +132,6 @@ public class MessageStructure
  {
   this.cardinality = cardinality;
  }
-
  private String xmlAttribute;
 
  public String getXmlAttribute ()
@@ -143,7 +143,6 @@ public class MessageStructure
  {
   this.xmlAttribute = xmlAttribute;
  }
-
  private String status;
 
  public String getStatus ()
@@ -155,7 +154,6 @@ public class MessageStructure
  {
   this.status = status;
  }
-
  private String feedback;
 
  public String getFeedback ()
@@ -167,6 +165,4 @@ public class MessageStructure
  {
   this.feedback = feedback;
  }
-
-
 }

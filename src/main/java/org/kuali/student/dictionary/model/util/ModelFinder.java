@@ -31,14 +31,14 @@ public class ModelFinder
 {
 
  private SearchModel searchModel;
- private ServiceContractModel serviceMethodModel;
- private DictionaryModel model;
+ private ServiceContractModel serviceContractModel;
+ private DictionaryModel dictionaryModel;
 
  public ModelFinder (DictionaryModel model)
  {
-  this.model = model;
+  this.dictionaryModel = model;
   this.searchModel = model;
-  this.serviceMethodModel = model;
+  this.serviceContractModel = model;
  }
 
  public ModelFinder (SearchModel model)
@@ -48,12 +48,12 @@ public class ModelFinder
 
  public ModelFinder (ServiceContractModel model)
  {
-  this.serviceMethodModel = model;
+  this.serviceContractModel = model;
  }
 
  public XmlType findXmlType (String xmlTypeName)
  {
-  for (XmlType xmlType : model.getXmlTypes ())
+  for (XmlType xmlType : serviceContractModel.getXmlTypes ())
   {
    if (xmlTypeName.equalsIgnoreCase (xmlType.getName ()))
    {
@@ -66,7 +66,7 @@ public class ModelFinder
  public List<State> findStates (String xmlObject)
  {
   List<State> list = new ArrayList ();
-  for (State state : model.getStates ())
+  for (State state : dictionaryModel.getStates ())
   {
    if (state.getXmlObject ().equalsIgnoreCase (xmlObject))
    {
@@ -79,7 +79,7 @@ public class ModelFinder
  public List<Type> findTypes (String xmlObject)
  {
   List<Type> list = new ArrayList ();
-  for (Type type : model.getTypes ())
+  for (Type type : dictionaryModel.getTypes ())
   {
    if (type.getXmlObject ().equalsIgnoreCase (xmlObject))
    {
@@ -95,7 +95,7 @@ public class ModelFinder
   {
    return this.getDefaultType ();
   }
-  for (Type type : model.getTypes ())
+  for (Type type : dictionaryModel.getTypes ())
   {
    if (type.getXmlObject ().equalsIgnoreCase (xmlObject))
    {
@@ -110,7 +110,7 @@ public class ModelFinder
 
  public Type findType (String typeKey)
  {
-  for (Type type : model.getTypes ())
+  for (Type type : dictionaryModel.getTypes ())
   {
    if (type.getTypeKey ().equalsIgnoreCase (typeKey))
    {
@@ -126,7 +126,7 @@ public class ModelFinder
   {
    return this.getDefaultState ();
   }
-  for (State state : model.getStates ())
+  for (State state : dictionaryModel.getStates ())
   {
    if (state.getXmlObject ().equalsIgnoreCase (xmlObject))
    {
@@ -141,7 +141,7 @@ public class ModelFinder
 
   public State findState (String stateKey)
  {
-  for (State state : model.getStates ())
+  for (State state : dictionaryModel.getStates ())
   {
    if (state.getStateKey ().equalsIgnoreCase (stateKey))
    {
@@ -167,7 +167,7 @@ public class ModelFinder
   */
  public Dictionary findDictionaryEntry (String dictId)
  {
-  for (Dictionary d : model.getDictionary ())
+  for (Dictionary d : dictionaryModel.getDictionary ())
   {
    if (d.getId ().equalsIgnoreCase (dictId))
    {
@@ -184,7 +184,7 @@ public class ModelFinder
  public List<Dictionary> findChildDictionaryEntries (Dictionary parent)
  {
   List<Dictionary> list = new ArrayList ();
-  for (Dictionary d : model.getDictionary ())
+  for (Dictionary d : dictionaryModel.getDictionary ())
   {
    if (d.getParent () == null)
    {
@@ -204,8 +204,8 @@ public class ModelFinder
   */
  public List<Dictionary> findDefaultDictionary ()
  {
-  List<Dictionary> list = new ArrayList (model.getDictionary ().size ());
-  for (Dictionary d : model.getDictionary ())
+  List<Dictionary> list = new ArrayList (dictionaryModel.getDictionary ().size ());
+  for (Dictionary d : dictionaryModel.getDictionary ())
   {
    if (d.getState ().equalsIgnoreCase (State.DEFAULT))
    {
@@ -218,7 +218,7 @@ public class ModelFinder
  public List<Dictionary> findDictionaryEntriees (String xmlTypeName)
  {
   List<Dictionary> list = new ArrayList ();
-  for (Dictionary dict : model.getDictionary ())
+  for (Dictionary dict : dictionaryModel.getDictionary ())
   {
    if (dict.getXmlObject ().equalsIgnoreCase (xmlTypeName))
    {
@@ -247,8 +247,8 @@ public class ModelFinder
   */
  public List<Dictionary> findStateOverrideDictionary ()
  {
-  List<Dictionary> list = new ArrayList (model.getDictionary ().size ());
-  for (Dictionary d : model.getDictionary ())
+  List<Dictionary> list = new ArrayList (dictionaryModel.getDictionary ().size ());
+  for (Dictionary d : dictionaryModel.getDictionary ())
   {
    if ( ! d.getState ().equalsIgnoreCase (State.DEFAULT))
    {
@@ -275,7 +275,7 @@ public class ModelFinder
   String pattern = type.getTypeKey ();
   GroupTypeStatePatternMatcher matcher =
    new GroupTypeStatePatternMatcher (pattern);
-  for (Type t : model.getTypes ())
+  for (Type t : dictionaryModel.getTypes ())
   {
    // can't match yourself
    if (t == type)
@@ -325,7 +325,7 @@ public class ModelFinder
   String pattern = state.getStateKey ();
   GroupTypeStatePatternMatcher matcher =
    new GroupTypeStatePatternMatcher (pattern);
-  for (State s : model.getStates ())
+  for (State s : dictionaryModel.getStates ())
   {
    // can't match yourself
    if (s == state)
@@ -360,7 +360,7 @@ public class ModelFinder
 
  public Constraint findConstraint (String id)
  {
-  for (Constraint cons : model.getConstraints ())
+  for (Constraint cons : dictionaryModel.getConstraints ())
   {
    if (cons.getId ().equalsIgnoreCase (id))
    {
@@ -372,7 +372,7 @@ public class ModelFinder
 
  public Field findField (String id)
  {
-  for (Field field : model.getFields ())
+  for (Field field : dictionaryModel.getFields ())
   {
    if (field.getId ().equalsIgnoreCase (id))
    {
@@ -399,7 +399,7 @@ public class ModelFinder
  public List<Field> findFields (String xmlTypeName)
  {
   List<Field> list = new ArrayList ();
-  for (Field field : model.getFields ())
+  for (Field field : dictionaryModel.getFields ())
   {
    if (field.getXmlObject ().equalsIgnoreCase (xmlTypeName))
    {
@@ -411,7 +411,7 @@ public class ModelFinder
 
  public Service findService (String key)
  {
-  for (Service serv : model.getServices ())
+  for (Service serv : serviceContractModel.getServices ())
   {
    if (serv.getKey ().equalsIgnoreCase (key))
    {
@@ -423,7 +423,7 @@ public class ModelFinder
 
  public Project findProject (String key)
  {
-  for (Project proj : model.getProjects ())
+  for (Project proj : dictionaryModel.getProjects ())
   {
    if (proj.getKey ().equalsIgnoreCase (key))
    {
@@ -447,7 +447,7 @@ public class ModelFinder
 
  public ServiceMethod findServiceMethod (String service, String name)
  {
-  for (ServiceMethod method : serviceMethodModel.getServiceMethods ())
+  for (ServiceMethod method : serviceContractModel.getServiceMethods ())
   {
    if (method.getService ().equalsIgnoreCase (service))
    {
@@ -463,7 +463,7 @@ public class ModelFinder
  public List<ServiceMethod> getServiceMethodsInService (String service)
  {
   List<ServiceMethod> list = new ArrayList ();
-  for (ServiceMethod method : serviceMethodModel.getServiceMethods ())
+  for (ServiceMethod method : serviceContractModel.getServiceMethods ())
   {
    if (method.getService ().equalsIgnoreCase (service))
    {
@@ -476,7 +476,7 @@ public class ModelFinder
  public List<MessageStructure> findMessageStructures (String xmlType)
  {
   List<MessageStructure> list = new ArrayList ();
-  for (MessageStructure ms : model.getMessageStructures ())
+  for (MessageStructure ms : serviceContractModel.getMessageStructures ())
   {
    if (ms.getXmlObject ().equalsIgnoreCase (xmlType))
    {

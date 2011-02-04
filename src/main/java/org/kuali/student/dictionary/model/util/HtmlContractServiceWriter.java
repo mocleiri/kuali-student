@@ -26,7 +26,7 @@ import org.kuali.student.dictionary.writer.HtmlWriter;
  *
  * @author nwright
  */
-public class ServiceHtmlWriter
+public class HtmlContractServiceWriter
 {
 
  private Service service;
@@ -34,7 +34,7 @@ public class ServiceHtmlWriter
  private ServiceContractModel model;
  private ModelFinder finder;
 
- public ServiceHtmlWriter (Service service, String directory,
+ public HtmlContractServiceWriter (Service service, String directory,
                            ServiceContractModel model)
  {
   this.service = service;
@@ -46,6 +46,7 @@ public class ServiceHtmlWriter
 
  public void write ()
  {
+  writer.print ("<a href=\"index.html\">home</a>");
   this.writeStyleSheet ();
   writer.writeTag ("h1", service.getName ());
 
@@ -74,10 +75,13 @@ public class ServiceHtmlWriter
 //  writer.indentPrintln ("</div>");
 //  writer.indentPrintln ("</div>");
 
-  writer.indentPrintln ("<div class=\"panel\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204);\">");
-  writer.indentPrintln ("<div class=\"panelHeader\" style=\"border-bottom: 1px solid rgb(204, 204, 204); background-color: rgb(238, 238, 238);\">");
+  writer.indentPrintln (
+    "<div class=\"panel\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204);\">");
+  writer.indentPrintln (
+    "<div class=\"panelHeader\" style=\"border-bottom: 1px solid rgb(204, 204, 204); background-color: rgb(238, 238, 238);\">");
   writer.indentPrintln ("<b><a name=\"ListOfOperations\"></a>Operations</b>");
-  writer.indentPrintln ("</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
+  writer.indentPrintln (
+    "</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
   writer.indentPrintln ("<ul>");
   for (ServiceMethod method : finder.getServiceMethodsInService (
     service.getKey ()))
@@ -91,7 +95,7 @@ public class ServiceHtmlWriter
   writer.indentPrintln ("</div>");
   writer.indentPrintln ("</div>");
 
-  
+
   for (ServiceMethod method : finder.getServiceMethodsInService (
     service.getKey ()))
   {
@@ -141,7 +145,11 @@ public class ServiceHtmlWriter
                       "Parameters");
      firstTime = false;
     }
-    writer.writeTag ("td", "class=\"methodParamType\"", param.getType ()); // TODO wrap in link to type
+    writer.indentPrint ("<td class=\"methodParamType\">");
+    writer.indentPrintln ("<a href=\"" + stripListFromType (param.getType ())
+                          + ".html" + "\">"
+                          + param.getType () + "</a>");
+    writer.indentPrint ("</td>");
     writer.writeTag ("td", "class=\"methodParamName\"", param.getName ());
     writer.writeTag ("td", "class=\"methodParamDesc\"", param.getDescription ());
     writer.indentPrintln ("</tr>");
@@ -149,8 +157,12 @@ public class ServiceHtmlWriter
   }
   writer.indentPrintln ("<tr>");
   writer.writeTag ("th", "class=h", "Return");
-  writer.writeTag ("td", "colspan=2 class=\"methodReturnType\"",
-                   method.getReturnValue ().getType ()); // TODO wrap in link to type
+  writer.indentPrint ("<td colspan=2 class=\"methodReturnType\">");
+  writer.indentPrintln ("<a href=\"" + stripListFromType (
+    method.getReturnValue ().getType ())
+                        + ".html" + "\">"
+                        + method.getReturnValue ().getType () + "</a>");
+  writer.indentPrint ("</td>");
   writer.writeTag ("td", "class=\"methodReturnDesc\"",
                    method.getReturnValue ().getDescription ());
   writer.indentPrintln ("</tr>");
@@ -186,6 +198,15 @@ public class ServiceHtmlWriter
   writer.indentPrintln ("<p>");
   writer.indentPrintln ("<a href=\"#ListOfOperations\">Back to Operations</a>");
   writer.indentPrintln ("<p>");
+ }
+
+ private String stripListFromType (String type)
+ {
+  if (type.endsWith ("List"))
+  {
+   return type.substring (0, type.length () - "List".length ());
+  }
+  return type;
  }
 
  public void writeStyleSheet ()

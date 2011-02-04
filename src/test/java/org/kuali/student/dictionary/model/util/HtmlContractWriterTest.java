@@ -22,20 +22,18 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.dictionary.model.Service;
 import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.impl.ServiceContractModelCache;
 import org.kuali.student.dictionary.model.impl.ServiceContractModelQDoxLoader;
-import org.kuali.student.dictionary.model.util.ServiceHtmlWriter;
 
 /**
  *
  * @author nwright
  */
-public class ServiceHtmlWriterTest
+public class HtmlContractWriterTest
 {
 
- public ServiceHtmlWriterTest ()
+ public HtmlContractWriterTest ()
  {
  }
 
@@ -59,16 +57,22 @@ public class ServiceHtmlWriterTest
  {
  }
  private static final String CORE_DIRECTORY =
-                             "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
+                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
+//                           "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
+ private static final String COMMON_DIRECTORY =
+                             "C:/svn/student/ks-common/ks-core-api/src/main/java";
+ private static final String LUM_DIRECTORY =
+                             "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
  private static final String HTML_DIRECTORY =
                              "C:/svn/maven-dictionary-generator/trunk/target/html";
 
  private ServiceContractModel getModel ()
  {
-  List<String> sourceDirectories = new ArrayList ();
-  sourceDirectories.add (CORE_DIRECTORY);
-  ServiceContractModel instance = new ServiceContractModelQDoxLoader (
-    sourceDirectories);
+  List<String> srcDirs = new ArrayList ();
+  srcDirs.add (CORE_DIRECTORY);
+  srcDirs.add (COMMON_DIRECTORY);
+  srcDirs.add (LUM_DIRECTORY);
+  ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   return instance;
 
  }
@@ -80,11 +84,7 @@ public class ServiceHtmlWriterTest
  public void testRun ()
  {
   ServiceContractModel model = new ServiceContractModelCache (this.getModel ());
-  for (Service service : model.getServices ())
-  {
-   ServiceHtmlWriter writer = new ServiceHtmlWriter (service, HTML_DIRECTORY,
-                                                     model);
-   writer.write ();
-  }
+  HtmlContractWriter writer = new HtmlContractWriter (HTML_DIRECTORY, model);
+  writer.write ();
  }
 }

@@ -28,6 +28,7 @@ import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.ServiceMethod;
 import org.kuali.student.dictionary.model.ServiceMethodParameter;
 import org.kuali.student.dictionary.model.XmlType;
+import org.kuali.student.dictionary.model.util.MessageStructureDumper;
 import static org.junit.Assert.*;
 
 /**
@@ -170,6 +171,10 @@ public class ServiceContractModelQDoxLoaderTest
   if (result.size () < 10)
   {
    fail ("too few: " + result.size ());
+  }
+  for (MessageStructure ms : result)
+  {
+   new MessageStructureDumper (ms, System.out).dump ();
   }
  }
 }
