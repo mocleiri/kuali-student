@@ -60,7 +60,7 @@ public class HtmlContractWriterTest
                              "C:/svn/student/ks-core/ks-core-api/src/main/java";
 //                           "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
  private static final String COMMON_DIRECTORY =
-                             "C:/svn/student/ks-common/ks-core-api/src/main/java";
+                             "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
  private static final String HTML_DIRECTORY =
