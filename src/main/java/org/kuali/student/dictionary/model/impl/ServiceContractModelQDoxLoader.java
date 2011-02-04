@@ -26,6 +26,7 @@ import com.thoughtworks.qdox.model.Type;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -320,6 +321,7 @@ public class ServiceContractModelQDoxLoader implements
    this.messageStructures = new ArrayList ();
   }
   Set<JavaClass> subObjectsToAdd = new LinkedHashSet ();
+  Set<String> fieldsAdded = new HashSet ();
   for (JavaMethod setterMethod : messageStructureJavaClass.getMethods (true))
   {
    if ( ! isSetterMethod (setterMethod, messageStructureJavaClass.getName ()))
@@ -343,11 +345,8 @@ public class ServiceContractModelQDoxLoader implements
                                         + messageStructureJavaClass.getName ()
                                         + "." + setterMethod.getName ());
    }
-   MessageStructure ms = new MessageStructure ();
-   messageStructures.add (ms);
-   ms.setXmlObject (messageStructureJavaClass.getName ());
-   ms.setShortName (shortName);
    // overide the shortName if the bean field has an XmlAttribute name=xxx
+   // this catches the key=id switch
    for (Annotation annotation : beanField.getAnnotations ())
    {
     if (annotation.getType ().getJavaClass ().getName ().equals ("XmlAttribute"))
@@ -355,10 +354,19 @@ public class ServiceContractModelQDoxLoader implements
      Object nameValue = annotation.getNamedParameter ("name");
      if (nameValue != null)
      {
-      ms.setShortName (nameValue.toString ());
+      shortName = nameValue.toString ();
      }
     }
    }
+   if (fieldsAdded.contains (shortName))
+   {
+    continue;
+   }
+   fieldsAdded.add (shortName);
+   MessageStructure ms = new MessageStructure ();
+   messageStructures.add (ms);
+   ms.setXmlObject (messageStructureJavaClass.getName ());
+   ms.setShortName (shortName);
    ms.setName ("????");
    ms.setType (calcType (setterMethod));
    ms.setXmlAttribute (this.calcXmlAttribute (beanField));

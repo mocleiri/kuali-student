@@ -134,7 +134,7 @@ public class HtmlContractMessageStructureWriter
   {
    writer.writeTag ("td", "class=\"structType\"", ms.getType ());
   }
-  writer.writeTag ("td", "class=\"structDesc\"", ms.getDescription ());
+  writer.writeTag ("td", "class=\"structDesc\"", missingData (ms.getDescription ()));
   writer.writeTag ("td", "class=\"structOpt\"", ms.getOptional ());
   writer.writeTag ("td", "class=\"structCard\"", ms.getCardinality ());
   writer.writeTag ("td", "class=\"structAttr\"", ms.getXmlAttribute ());
@@ -148,6 +148,18 @@ public class HtmlContractMessageStructureWriter
 //  writer.indentPrintln ("<p>");
  }
 
+ private String missingData (String str)
+ {
+  if (str == null)
+  {
+   return "???";
+  }
+  if (str.trim ().isEmpty ())
+  {
+   return "???";
+  }
+  return str;
+ }
  private String stripListFromType (String type)
  {
   if (type.endsWith ("List"))
