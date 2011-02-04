@@ -60,10 +60,24 @@ public class ServiceHtmlWriter
   writer.indentPrintln ("</tr>");
   writer.indentPrintln ("</table>");
 
+//  writer.indentPrintln ("<div class=\"panel\" style=\"border-width: 1px;\">");
+//  writer.indentPrintln ("<div class=\"panelHeader\" style=\"border-bottom-width: 1px;\">");
+  writer.indentPrintln ("<p>");
+  writer.indentPrintln ("<table id=\"serviceMetaTable\">");
+  writer.indentPrintln ("<tr>");
+  writer.indentPrintln ("<th class=h>");
   writer.indentPrintln (service.getComments ());
-  writer.indentPrintln ("<hr>");
+  writer.indentPrintln ("</th>");
+  writer.indentPrintln ("</tr>");
+  writer.indentPrintln ("</table>");
 
-  writer.indentPrintln ("<h3><a name=\"ListOfOperations\"></a>Operations</h3>");
+//  writer.indentPrintln ("</div>");
+//  writer.indentPrintln ("</div>");
+
+  writer.indentPrintln ("<div class=\"panel\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204);\">");
+  writer.indentPrintln ("<div class=\"panelHeader\" style=\"border-bottom: 1px solid rgb(204, 204, 204); background-color: rgb(238, 238, 238);\">");
+  writer.indentPrintln ("<b><a name=\"ListOfOperations\"></a>Operations</b>");
+  writer.indentPrintln ("</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
   writer.indentPrintln ("<ul>");
   for (ServiceMethod method : finder.getServiceMethodsInService (
     service.getKey ()))
@@ -74,6 +88,10 @@ public class ServiceHtmlWriter
    writer.print ("</li>");
   }
   writer.indentPrintln ("</ul>");
+  writer.indentPrintln ("</div>");
+  writer.indentPrintln ("</div>");
+
+  
   for (ServiceMethod method : finder.getServiceMethodsInService (
     service.getKey ()))
   {
@@ -131,7 +149,8 @@ public class ServiceHtmlWriter
   }
   writer.indentPrintln ("<tr>");
   writer.writeTag ("th", "class=h", "Return");
-  writer.writeTag ("td", "colspan=2", method.getReturnValue ().getType ()); // TODO wrap in link to type
+  writer.writeTag ("td", "colspan=2 class=\"methodReturnType\"",
+                   method.getReturnValue ().getType ()); // TODO wrap in link to type
   writer.writeTag ("td", "class=\"methodReturnDesc\"",
                    method.getReturnValue ().getDescription ());
   writer.indentPrintln ("</tr>");

@@ -119,13 +119,29 @@ public class ServiceContractModelQDoxLoader implements
   StringBuilder bldr = new StringBuilder ();
   bldr.append (tag.getName ());
   bldr.append ("=");
-  bldr.append (tag.getValue ());
+  if (tag.getNamedParameterMap () == null
+      || tag.getNamedParameterMap ().isEmpty ())
+  {
+   bldr.append (tag.getValue ());
+  }
+  else
+  {
+   for (Object key : tag.getNamedParameterMap ().keySet ())
+   {
+    Object value = tag.getNamedParameterMap ().get (key);
+    bldr.append ("(");
+    bldr.append (key);
+    bldr.append ("=");
+    bldr.append (value);
+    bldr.append (")");
+   }
+  }
   return bldr.toString ();
  }
 
  private void parse ()
  {
-  System.out.println ("Starting parse");
+  System.out.println ("ServiceContractModelQDoxLoader: Starting parse");
   services = new ArrayList ();
   serviceMethods = new ArrayList ();
   JavaDocBuilder builder = new JavaDocBuilder ();
@@ -150,7 +166,8 @@ public class ServiceContractModelQDoxLoader implements
    service.setStatus ("???");
    for (DocletTag tag : javaClass.getTags ())
    {
-    System.out.println ("Class: " + javaClass.getName () + " has tag=" + dump (
+    System.out.println ("ServiceContractModelQDoxLoader: Class: "
+                        + javaClass.getName () + " has tag=" + dump (
       tag));
    }
    for (JavaMethod javaMethod : javaClass.getMethods ())
@@ -164,7 +181,8 @@ public class ServiceContractModelQDoxLoader implements
     serviceMethod.setParameters (new ArrayList ());
     for (DocletTag tag : javaMethod.getTags ())
     {
-     System.out.println ("Method: " + service.getName () + "."
+     System.out.println ("ServiceContractModelQDoxLoader: Method: "
+                         + service.getName () + "."
                          + javaMethod.getName ()
                          + " has tag=" + dump (tag));
     }
@@ -208,7 +226,10 @@ public class ServiceContractModelQDoxLoader implements
   {
    if (tag.getName ().equals ("param"))
    {
-    return tag.getNamedParameter (parameterName);
+    if (tag.getValue ().startsWith (parameterName + " "))
+    {
+     return tag.getValue ().substring (parameterName.length () + 1);
+    }
    }
   }
   return null;
@@ -221,7 +242,10 @@ public class ServiceContractModelQDoxLoader implements
   {
    if (tag.getName ().equals ("throws"))
    {
-    return tag.getNamedParameter (exceptionType);
+    if (tag.getValue ().startsWith (exceptionType + " "))
+    {
+     return tag.getValue ().substring (exceptionType.length () + 1);
+    }
    }
   }
   return null;
@@ -484,7 +508,8 @@ public class ServiceContractModelQDoxLoader implements
 
   for (Type t : type.getActualTypeArguments ())
   {
-   System.out.println ("type arguments = " + t.toString ());
+   System.out.println ("ServiceContractModelQDoxLoader: type arguments = "
+                       + t.toString ());
   }
 
   Type t = type.getActualTypeArguments ()[0];
