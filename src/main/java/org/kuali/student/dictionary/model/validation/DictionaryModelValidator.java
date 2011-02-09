@@ -53,7 +53,6 @@ public class DictionaryModelValidator implements ModelValidator
   validateFields ();
   validateDefaultDictionary ();
   validateStateOverrideDictionary ();
-  validateXmlTypes ();
   checkForDuplicateDictionaryEntries ();
   return errors;
  }
@@ -81,19 +80,6 @@ public class DictionaryModelValidator implements ModelValidator
   {
    FieldValidator fv = new FieldValidator (field, model);
    errors.addAll (fv.validate ());
-  }
- }
-
- private void validateXmlTypes ()
- {
-  if (model.getXmlTypes ().size () == 0)
-  {
-   addError ("No xmlTypes found");
-  }
-  for (XmlType xmlType : model.getXmlTypes ())
-  {
-   XmlTypesValidator validator = new XmlTypesValidator (xmlType, model);
-   errors.addAll (validator.validate ());
   }
  }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 The Kuali Foundation
+ * Copyright 2009 The Kuali Foundation
  *
  * Licensed under the Educational Community License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,50 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.util;
+package org.kuali.student.dictionary.command.run;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.impl.ServiceContractModelCache;
 import org.kuali.student.dictionary.model.impl.ServiceContractModelQDoxLoader;
 import org.kuali.student.dictionary.model.validation.ServiceContractModelValidator;
-import static org.junit.Assert.*;
+import org.kuali.student.dictionary.writer.service.PureJavaInfcWriter;
 
 /**
  *
  * @author nwright
  */
-public class HtmlContractWriterTest
+public class PureJavaInterfaceWriterRun
 {
 
- public HtmlContractWriterTest ()
- {
- }
-
- @BeforeClass
- public static void setUpClass () throws Exception
- {
- }
-
- @AfterClass
- public static void tearDownClass () throws Exception
- {
- }
-
- @Before
- public void setUp ()
- {
- }
-
- @After
- public void tearDown ()
+ public PureJavaInterfaceWriterRun ()
  {
  }
  private static final String CORE_DIRECTORY =
@@ -66,10 +41,8 @@ public class HtmlContractWriterTest
                              "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
- private static final String HTML_DIRECTORY =
-                             "C:/svn/maven-dictionary-generator/trunk/target/html";
 
- private ServiceContractModel getModel ()
+ private static ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
   srcDirs.add (CORE_DIRECTORY);
@@ -77,10 +50,9 @@ public class HtmlContractWriterTest
   srcDirs.add (LUM_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   return new ServiceContractModelCache (instance);
-
  }
 
- private void validate (ServiceContractModel model)
+ private static void validate (ServiceContractModel model)
  {
   Collection<String> errors =
                      new ServiceContractModelValidator (model).validate ();
@@ -96,19 +68,34 @@ public class HtmlContractWriterTest
     buf.append ("*error*" + cnt + ":" + msg);
    }
 
-   fail (buf.toString ());
+   throw new IllegalArgumentException (buf.toString ());
   }
  }
 
- /**
-  * Test of getBody method, of class HtmlWriter.
-  */
- @Test
- public void testRun ()
+ public static void main (String[] args)
  {
-  ServiceContractModel model = this.getModel ();
-  this.validate (model);
-  HtmlContractWriter writer = new HtmlContractWriter (HTML_DIRECTORY, model);
-  writer.write ();
+  ServiceContractModel model = getModel ();
+  validate (model);
+//   List<String> servicesToProcess = new ArrayList ();
+//   servicesToProcess.add ("atp");
+//   servicesToProcess.add ("lu");
+//   servicesToProcess.add ("lo");
+//   servicesToProcess.add ("organization");
+//   servicesToProcess.add ("proposal");
+////   servicesToProcess.add ("comment");
+//   servicesToProcess.add ("dictionary");
+//   servicesToProcess.add ("document");
+//   servicesToProcess.add ("enumerable");
+//   servicesToProcess.add ("search");
+//   ServicesFilter filter = new ServicesFilterByKeys (servicesToProcess);
+  String targetDir = "target/gen-src";
+//  targetDir = "src/main/java";
+  PureJavaInfcWriter instance =
+                 new PureJavaInfcWriter (model,
+                                     targetDir,
+                                     PureJavaInfcWriter.DEFAULT_ROOT_PACKAGE,
+                                     null);
+  instance.write ();
+
  }
 }

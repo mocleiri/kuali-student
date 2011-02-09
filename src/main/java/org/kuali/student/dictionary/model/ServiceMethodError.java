@@ -22,7 +22,10 @@ package org.kuali.student.dictionary.model;
 public class ServiceMethodError
 {
 
- protected String type;
+ private String packageName;
+ private String className;
+ private String description;
+ private String type;
 
  public String getType ()
  {
@@ -34,9 +37,6 @@ public class ServiceMethodError
   this.type = type;
  }
 
-
- private String description;
-
  public String getDescription ()
  {
   return description;
@@ -47,4 +47,25 @@ public class ServiceMethodError
   this.description = description;
  }
 
+ public String getPackageName ()
+ {
+  return packageName;
+ }
+
+ public void setPackageName (String packageName)
+ {
+  this.packageName = packageName;
+ }
+
+ public String getClassName ()
+ {
+  return className;
+ }
+
+ public void setClassName (String className)
+ {
+  this.className = className;
+ }
+
+ 
 }

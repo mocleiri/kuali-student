@@ -92,11 +92,11 @@ public class ServiceMethodValidator implements ModelValidator
  private Service findService (String service)
  {
   // if we are only working with the searchModel then can't validate service
-  if ( ! (model instanceof DictionaryModel))
+  if ( ! (model instanceof ServiceContractModel))
   {
    return null;
   }
-  return new ModelFinder ((DictionaryModel) model).findService (service);
+  return new ModelFinder (model).findService (service);
  }
 
  private void addError (String msg)

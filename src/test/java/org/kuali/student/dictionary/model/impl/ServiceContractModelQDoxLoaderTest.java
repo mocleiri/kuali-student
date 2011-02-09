@@ -16,12 +16,14 @@
 package org.kuali.student.dictionary.model.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.kuali.student.dictionary.model.MessageStructure;
 import org.kuali.student.dictionary.model.Service;
 import org.kuali.student.dictionary.model.ServiceContractModel;
@@ -29,7 +31,7 @@ import org.kuali.student.dictionary.model.ServiceMethod;
 import org.kuali.student.dictionary.model.ServiceMethodParameter;
 import org.kuali.student.dictionary.model.XmlType;
 import org.kuali.student.dictionary.model.util.MessageStructureDumper;
-import static org.junit.Assert.*;
+import org.kuali.student.dictionary.model.validation.ServiceContractModelValidator;
 
 /**
  *
@@ -62,14 +64,22 @@ public class ServiceContractModelQDoxLoaderTest
  {
  }
  private static final String CORE_DIRECTORY =
+//                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
                              "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
+ private static final String COMMON_DIRECTORY =
+                             "C:/svn/student/ks-common/ks-common-api/src/main/java";
+ private static final String LUM_DIRECTORY =
+                             "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
 
  private ServiceContractModel getModel ()
  {
-  List<String> sourceDirectories = new ArrayList ();
-  sourceDirectories.add (CORE_DIRECTORY);
-  ServiceContractModel instance = new ServiceContractModelQDoxLoader (
-    sourceDirectories);
+  List<String> srcDirs = new ArrayList ();
+  srcDirs.add (CORE_DIRECTORY);
+//  srcDirs.add (COMMON_DIRECTORY);
+//  srcDirs.add (LUM_DIRECTORY);
+  ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
+  instance = new ServiceContractModelCache (instance);
+  validate (instance);
   return instance;
  }
 
@@ -89,6 +99,26 @@ public class ServiceContractModelQDoxLoaderTest
   }
   bldr.append (")");
   return bldr.toString ();
+ }
+
+ private void validate (ServiceContractModel model)
+ {
+  Collection<String> errors =
+                     new ServiceContractModelValidator (model).validate ();
+  if (errors.size () > 0)
+  {
+   StringBuffer buf = new StringBuffer ();
+   buf.append (errors.size () + " errors found while validating the data.");
+   int cnt = 0;
+   for (String msg : errors)
+   {
+    cnt ++;
+    buf.append ("\n");
+    buf.append ("*error*" + cnt + ":" + msg);
+   }
+
+   fail (buf.toString ());
+  }
  }
 
  /**

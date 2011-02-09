@@ -152,7 +152,7 @@ public class ServiceContractModelQDoxLoader implements
   }
   for (JavaClass javaClass : builder.getClasses ())
   {
-   if ( ! javaClass.getName ().endsWith ("Service"))
+   if ( ! this.isServiceToProcess (javaClass))
    {
     continue;
    }
@@ -165,12 +165,14 @@ public class ServiceContractModelQDoxLoader implements
    service.setUrl (this.calcServiceUrl (javaClass));
    service.setVersion ("???");
    service.setStatus ("???");
-   for (DocletTag tag : javaClass.getTags ())
-   {
-    System.out.println ("ServiceContractModelQDoxLoader: Class: "
-                        + javaClass.getName () + " has tag=" + dump (
-      tag));
-   }
+   service.setIncludedServices (calcIncludedServices (javaClass));
+
+//   for (DocletTag tag : javaClass.getTags ())
+//   {
+//    System.out.println ("ServiceContractModelQDoxLoader: Class: "
+//                        + javaClass.getName () + " has tag=" + dump (
+//      tag));
+//   }
    for (JavaMethod javaMethod : javaClass.getMethods ())
    {
 
@@ -178,15 +180,15 @@ public class ServiceContractModelQDoxLoader implements
     serviceMethods.add (serviceMethod);
     serviceMethod.setService (service.getKey ());
     serviceMethod.setName (javaMethod.getName ());
-    serviceMethod.setDescription (javaMethod.getComment ());
+    serviceMethod.setDescription (calcMissing (javaMethod.getComment ()));
     serviceMethod.setParameters (new ArrayList ());
-    for (DocletTag tag : javaMethod.getTags ())
-    {
-     System.out.println ("ServiceContractModelQDoxLoader: Method: "
-                         + service.getName () + "."
-                         + javaMethod.getName ()
-                         + " has tag=" + dump (tag));
-    }
+//    for (DocletTag tag : javaMethod.getTags ())
+//    {
+//     System.out.println ("ServiceContractModelQDoxLoader: Method: "
+//                         + service.getName () + "."
+//                         + javaMethod.getName ()
+//                         + " has tag=" + dump (tag));
+//    }
     // parameters
     for (JavaParameter parameter : javaMethod.getParameters ())
     {
@@ -194,9 +196,10 @@ public class ServiceContractModelQDoxLoader implements
      serviceMethod.getParameters ().add (param);
      param.setName (parameter.getName ());
      param.setType (calcType (parameter.getType ()));
-     param.setDescription (calcParameterDescription (javaMethod,
-                                                     param.getName ()));
-     addXmlTypeAndMessageStructure (calcJavaClass (parameter.getType ()),
+     param.setDescription (calcMissing (
+       calcParameterDescription (javaMethod,
+                                 param.getName ())));
+     addXmlTypeAndMessageStructure (calcRealJavaClass (parameter.getType ()),
                                     serviceMethod.getService ());
     }
     // errors
@@ -205,19 +208,111 @@ public class ServiceContractModelQDoxLoader implements
     {
      ServiceMethodError error = new ServiceMethodError ();
      error.setType (this.calcType (exception.getJavaClass ()));
-     error.setDescription (calcExceptionDescription (javaMethod,
-                                                     error.getType ()));
+     error.setDescription (calcMissing (
+       calcExceptionDescription (javaMethod,
+                                 error.getType ())));
+     error.setPackageName (exception.getJavaClass ().getPackageName ());
+     error.setClassName (exception.getJavaClass ().getName ());
      serviceMethod.getErrors ().add (error);
     }
     // return values
     ServiceMethodReturnValue rv = new ServiceMethodReturnValue ();
     serviceMethod.setReturnValue (rv);
     rv.setType (this.calcType (javaMethod.getReturnType ()));
-    rv.setDescription (this.calcReturnDescription (javaMethod));
-    addXmlTypeAndMessageStructure (calcJavaClass (javaMethod.getReturnType ()),
+    rv.setDescription (calcMissing (this.calcReturnDescription (javaMethod)));
+    addXmlTypeAndMessageStructure (calcRealJavaClass (
+      javaMethod.getReturnType ()),
                                    serviceMethod.getService ());
    }
   }
+ }
+
+ private boolean isServiceToProcess (JavaClass javaClass)
+ {
+  if ( ! javaClass.getName ().endsWith ("Service"))
+  {
+   return false;
+  }
+  if (javaClass.getPackageName ().contains (".old."))
+  {
+   return false;
+  }
+  if (javaClass.getPackageName ().endsWith (".old"))
+  {
+   return false;
+  }
+  return true;
+ }
+
+ private String calcIncludedServices (JavaClass javaClass)
+ {
+  // The QDox parser is broken
+  // it says that CommentService does not:
+  // (1) have a superclass
+  // (2) implement anything
+  // (3) implement any intefaces anything
+  // Even the code block has the implements stripped out!
+//  CodeBlock=/**
+// * @Author KSContractMojo
+// * @Author Neerav Agrawal
+// * @Since Fri Jun 05 14:27:10 EDT 2009
+// * @See <a href="https://test.kuali.org/confluence/display/KULSTR/Comment+Service+v1.0-rc1">CommentService</>
+// */
+//public interface CommentService {
+//
+//        /**
+//         * Retrieves the list of types which can be tagged or commented.
+//         *
+//         * @return the list of types which can be tagged or commented
+//         * @throws OperationFailedException unable to complete request
+//         */
+//        public java.util.List getReferenceTypes() throws org.kuali.student.core.exceptions.OperationFailedException;
+//
+//  when in reality it has stuff
+//
+//    /**
+// *
+// * @Author KSContractMojo
+// * @Author Neerav Agrawal
+// * @Since Fri Jun 05 14:27:10 EDT 2009
+// * @See <a href="https://test.kuali.org/confluence/display/KULSTR/Comment+Service+v1.0-rc1">CommentService</>
+// *
+// */
+//@WebService(name = "CommentService", targetNamespace = "http://student.kuali.org/wsdl/comment")
+//@SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+////@XmlSeeAlso({org.kuali.student.core.dto.ReferenceTypeInfo.class})
+//public interface CommentService extends DictionaryService {
+//    /**
+//     * Retrieves the list of types which can be tagged or commented.
+//     * @return the list of types which can be tagged or commented
+//     * @throws OperationFailedException unable to complete request
+//	 */
+//    public List<ReferenceTypeInfo> getReferenceTypes() throws OperationFailedException;
+
+  System.out.println ("ServiceContractModelQDoxLoader:" + javaClass.getName ()
+                      + " extends " + javaClass.getSuperClass ());
+  System.out.println (javaClass.getName () + " implmenets "
+                      + javaClass.getImplements ().length + " things");
+  System.out.println (javaClass.getName () + " implmenets "
+                      + javaClass.getImplementedInterfaces ().length
+                      + " interfaces");
+//  System.out.println ("CodeBlock=" + javaClass.getCodeBlock ());
+//   StringBuilder includedServices = new StringBuilder ();
+//   String comma = "";
+//   for (Type type : javaClass.getImplements ())
+//   {
+//    System.out.println ("ServiceContractModelQDoxLoader:" + javaClass.getName ()
+//                        + " implements " + type);
+//   }
+//   for (JavaClass interfaceClass : javaClass.getImplementedInterfaces ())
+//   {
+//    System.out.println ("ServiceContractModelQDoxLoader:" + javaClass.getName ()
+//                        + " implements " + interfaceClass.getName ());
+//    includedServices.append (comma);
+//    comma = ", ";
+//    includedServices.append (interfaceClass.getName ());
+//   }
+  return null;
  }
 
  private String calcParameterDescription (JavaMethod method,
@@ -308,7 +403,7 @@ public class ServiceContractModelQDoxLoader implements
  {
   if (this.isComplex (javaClass))
   {
-   return "Complex";
+   return XmlType.COMPLEX;
   }
   return "Primitive";
  }
@@ -354,7 +449,7 @@ public class ServiceContractModelQDoxLoader implements
      Object nameValue = annotation.getNamedParameter ("name");
      if (nameValue != null)
      {
-      shortName = nameValue.toString ();
+      shortName = stripQuotes (nameValue.toString ());
      }
     }
    }
@@ -367,15 +462,43 @@ public class ServiceContractModelQDoxLoader implements
    messageStructures.add (ms);
    ms.setXmlObject (messageStructureJavaClass.getName ());
    ms.setShortName (shortName);
+   ms.setId (ms.getXmlObject () + "." + ms.getShortName ());
    ms.setName ("????");
-   ms.setType (calcType (setterMethod));
+   ms.setType (calcTypeOfSetterMethodFirstParam (setterMethod));
+   if (ms.getType ().equals ("Object"))
+   {
+    System.out.println (ms.getId ()
+                        + " has Object as it's type ==> Changing to String");
+    ms.setType ("String");
+   }
+   else if (ms.getType ().equals ("ObjectList"))
+   {
+    System.out.println (
+      ms.getId ()
+      + " has a list of Objects as it's type ==> Changing to List of String");
+    ms.setType ("StringList");
+   }
    ms.setXmlAttribute (this.calcXmlAttribute (beanField));
    ms.setOptional ("???");
    ms.setCardinality (this.calcCardinality (setterMethod));
-   ms.setDescription (getterMethod.getComment ());
+   ms.setDescription (calcMissing (getterMethod.getComment ()));
    ms.setFeedback ("???");
    ms.setStatus ("???");
-   subObjectsToAdd.add (this.calcJavaClass (setterMethod));
+   JavaClass subObjToAdd = this.calcRealJavaClassOfSetterFirstParam (
+     setterMethod);
+   if ( ! subObjToAdd.isEnum ())
+   {
+    if ( ! subObjToAdd.getName ().equals ("Object"))
+    {
+     if ( ! subObjToAdd.getName ().equals ("LocaleKeyList"))
+     {
+      if ( ! subObjToAdd.getName ().equals ("MessageGroupKeyList"))
+      {
+       subObjectsToAdd.add (subObjToAdd);
+      }
+     }
+    }
+   }
   }
   // now add all it's complex sub-objects if they haven't already been added
   for (JavaClass subObjectToAdd : subObjectsToAdd)
@@ -391,6 +514,33 @@ public class ServiceContractModelQDoxLoader implements
    }
   }
   return;
+ }
+
+
+ private String stripQuotes (String str)
+ {
+  if (str.startsWith ("\""))
+  {
+   str = str.substring (1);
+  }
+  if (str.endsWith ("\""))
+  {
+   str = str.substring (0, str.length () - 1);
+  }
+  return str;
+ }
+ 
+ private String calcMissing (String str)
+ {
+  if (str == null)
+  {
+   return "???";
+  }
+  if (str.trim ().isEmpty ())
+  {
+   return "???";
+  }
+  return str;
  }
 
  private void addServiceToList (XmlType xmlType, String serviceKey)
@@ -467,12 +617,13 @@ public class ServiceContractModelQDoxLoader implements
   "CredentialProgramInfo.setSelectiveEnrollmentCode",
   "CoreProgramInfo.setDiplomaTitle",
   // synonym for the official of setCredentialType
-//  "CoreProgramInfo.setType",
+  //  "CoreProgramInfo.setType",
   // not on original wiki but still defined as a method but not backed by a field so not in wsdl
   "CoreProgramInfo.setHegisCode",
   "CoreProgramInfo.setCip2000Code",
   "CoreProgramInfo.setCip2010Code",
-  "CoreProgramInfo.setSelectiveEnrollmentCode"
+  "CoreProgramInfo.setSelectiveEnrollmentCode",
+  "WhenConstraint.setValue"
  };
 
  private boolean isSetterMethod (JavaMethod method, String className)
@@ -514,6 +665,11 @@ public class ServiceContractModelQDoxLoader implements
  {
   JavaParameter param = method.getParameters ()[0];
   Type type = param.getType ();
+  return isList (type);
+ }
+
+ private boolean isList (Type type)
+ {
   JavaClass setterParamClass = type.getJavaClass ();
   return this.isList (setterParamClass);
  }
@@ -524,16 +680,17 @@ public class ServiceContractModelQDoxLoader implements
   {
    return true;
   }
+  if (setterParamClass.getName ().equals (ArrayList.class.getSimpleName ()))
+  {
+   return true;
+  }
   return false;
  }
 
- private String calcType (JavaMethod setterMethod)
+ private String calcTypeOfSetterMethodFirstParam (JavaMethod setterMethod)
  {
-  if (isList (setterMethod))
-  {
-   return calcJavaClass (setterMethod).getName () + "List";
-  }
-  return calcJavaClass (setterMethod).getName ();
+  JavaParameter param = setterMethod.getParameters ()[0];
+  return calcType (param);
  }
 
  private String calcType (JavaParameter parameter)
@@ -545,24 +702,69 @@ public class ServiceContractModelQDoxLoader implements
  {
   if (isList (type.getJavaClass ()))
   {
-   return calcType (calcJavaClass (type)) + "List";
+   return calcType (calcRealJavaClass (type)) + "List";
   }
-  return calcType (calcJavaClass (type));
+  return calcType (calcRealJavaClass (type));
  }
 
  private String calcType (JavaClass javaClass)
  {
+  if (javaClass.isEnum ())
+  {
+   if (javaClass.getName ().equals ("ErrorLevel"))
+   {
+    return "Integer";
+   }
+   if (javaClass.getName ().equals ("StatementOperatorTypeKey"))
+   {
+    return "String";
+   }
+   if (javaClass.getName ().equals ("WriteAccess"))
+   {
+    return "String";
+   }
+   if (javaClass.getName ().equals ("Widget"))
+   {
+    return "String";
+   }
+   if (javaClass.getName ().equals ("DataType"))
+   {
+    return "String";
+   }
+   if (javaClass.getName ().equals ("SortDirection"))
+   {
+    return "String";
+   }
+   if (javaClass.getName ().equals ("Usage"))
+   {
+    return "String";
+   }
+  }
+  // this is messed up instead of list of strings it is an object with a list of strings
+  if (javaClass.getName ().equals ("LocaleKeyList"))
+  {
+   return "StringList";
+  }
+  if (javaClass.getName ().equals ("MessageGroupKeyList"))
+  {
+   return "StringList";
+  }
   return javaClass.getName ();
  }
 
- private JavaClass calcJavaClass (JavaMethod setterMethod)
+ private JavaClass calcRealJavaClassOfSetterFirstParam (JavaMethod setterMethod)
  {
   JavaParameter param = setterMethod.getParameters ()[0];
-  Type type = param.getType ();
-  return calcJavaClass (type);
+  return this.calcRealJavaClass (param);
  }
 
- private JavaClass calcJavaClass (Type type)
+ private JavaClass calcRealJavaClass (JavaParameter param)
+ {
+  Type type = param.getType ();
+  return calcRealJavaClass (type);
+ }
+
+ private JavaClass calcRealJavaClass (Type type)
  {
   JavaClass javaClass = type.getJavaClass ();
   if ( ! this.isList (javaClass))
@@ -570,24 +772,22 @@ public class ServiceContractModelQDoxLoader implements
    return javaClass;
   }
 
-  for (Type t : type.getActualTypeArguments ())
-  {
-   System.out.println ("ServiceContractModelQDoxLoader: type arguments = "
-                       + t.toString ());
-  }
+//  for (Type t : type.getActualTypeArguments ())
+//  {
+//   System.out.println ("ServiceContractModelQDoxLoader: type arguments = "
+//                       + t.toString ());
+//  }
 
   Type t = type.getActualTypeArguments ()[0];
   return t.getJavaClass ();
  }
 
- private boolean isComplex (JavaMethod setterMethod)
- {
-  JavaClass javaClass = calcJavaClass (setterMethod);
-  return this.isComplex (javaClass);
- }
-
  private boolean isComplex (JavaClass javaClass)
  {
+  if (javaClass.isEnum ())
+  {
+   return false;
+  }
   if (javaClass.getName ().equals (String.class.getSimpleName ()))
   {
    return false;

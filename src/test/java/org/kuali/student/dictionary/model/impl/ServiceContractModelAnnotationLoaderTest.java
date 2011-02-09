@@ -22,8 +22,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.core.comment.service.CommentService;
 import org.kuali.student.dictionary.model.MessageStructure;
 import org.kuali.student.dictionary.model.Service;
 import org.kuali.student.dictionary.model.ServiceContractModel;
@@ -66,8 +64,8 @@ public class ServiceContractModelAnnotationLoaderTest
  private ServiceContractModel getModel ()
  {
   List<Class<?>> serviceClasses = new ArrayList ();
-  serviceClasses.add (AtpService.class);
-  serviceClasses.add (CommentService.class);
+//  serviceClasses.add (AtpService.class);
+//  serviceClasses.add (CommentService.class);
   ServiceContractModel instance = new ServiceContractModelAnnotationLoader (
     serviceClasses);
   return instance;
@@ -121,8 +119,8 @@ public class ServiceContractModelAnnotationLoaderTest
   System.out.println ("getSourceNames");
   ServiceContractModel model = getModel ();
   List<String> expResult = new ArrayList ();
-  expResult.add (AtpService.class.getSimpleName ());
-  expResult.add (CommentService.class.getSimpleName ());
+//  expResult.add (AtpService.class.getSimpleName ());
+//  expResult.add (CommentService.class.getSimpleName ());
   List result = model.getSourceNames ();
   assertEquals (expResult, result);
  }

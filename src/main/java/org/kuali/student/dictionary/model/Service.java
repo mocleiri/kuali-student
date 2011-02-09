@@ -106,4 +106,27 @@ public class Service
   this.url = url;
  }
 
+
+ private String includedServices;
+
+ /**
+  * Comma separated list of services that are included
+  *
+  * @return
+  */
+ public String getIncludedServices ()
+ {
+  return includedServices;
+ }
+
+ /**
+  * comma separated list of services that are included
+  * @param includedServices
+  */
+ public void setIncludedServices (String includedServices)
+ {
+  this.includedServices = includedServices;
+ }
+
+
 }

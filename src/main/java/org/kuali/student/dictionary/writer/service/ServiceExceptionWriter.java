@@ -15,8 +15,7 @@
  */
 package org.kuali.student.dictionary.writer.service;
 
-import org.kuali.student.dictionary.model.DictionaryModel;
-import org.kuali.student.dictionary.model.Service;
+import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.ServiceMethodError;
 import org.kuali.student.dictionary.writer.JavaClassWriter;
 import org.kuali.student.dictionary.writer.JavaEnumConstantCalculator;
@@ -24,33 +23,31 @@ import org.kuali.student.dictionary.writer.JavaEnumConstantCalculator;
 /**
  *
  * @author nwright
+ * @deprecated 
  */
 public class ServiceExceptionWriter extends JavaClassWriter
 {
 
- private DictionaryModel model;
+ private ServiceContractModel model;
  private String directory;
  private String rootPackage;
- private Service service;
  private ServiceMethodError error;
 
- public ServiceExceptionWriter (DictionaryModel model,
+ public ServiceExceptionWriter (ServiceContractModel model,
                                 String directory,
                                 String rootPackage,
-                                Service service,
                                 ServiceMethodError error)
  {
-  super (directory, calcPackage (service, rootPackage), calcClassName (error.getType ()));
+  super (directory, calcPackage (rootPackage), calcClassName (error.getType ()));
   this.model = model;
   this.directory = directory;
   this.rootPackage = rootPackage;
-  this.service = service;
   this.error = error;
  }
 
- public static String calcPackage (Service service, String rootPackage)
+ public static String calcPackage (String rootPackage)
  {
-  return ServiceMethodsWriter.calcPackage (service, rootPackage);
+  return PureJavaInfcServiceWriter.calcPackage ("exception", rootPackage);
  }
 
  public static String calcClassName (String type)

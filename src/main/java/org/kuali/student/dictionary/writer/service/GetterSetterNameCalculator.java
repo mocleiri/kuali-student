@@ -15,8 +15,8 @@
  */
 package org.kuali.student.dictionary.writer.service;
 
-import org.kuali.student.dictionary.model.DictionaryModel;
 import org.kuali.student.dictionary.model.MessageStructure;
+import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.writer.JavaClassWriter;
 
 /**
@@ -28,11 +28,11 @@ public class GetterSetterNameCalculator
 
  private MessageStructure ms;
  private JavaClassWriter writer;
- private DictionaryModel model;
+ private ServiceContractModel model;
 
  public GetterSetterNameCalculator (MessageStructure ms,
                                     JavaClassWriter writer,
-                                    DictionaryModel model)
+                                    ServiceContractModel model)
  {
   this.ms = ms;
   this.writer = writer;
@@ -77,7 +77,15 @@ public class GetterSetterNameCalculator
 
  public String calcFieldTypeToUse (String type)
  {
-  return ServiceMessageStructureTypeCalculator.calculate (writer, model, type, null);
+  return MessageStructureTypeCalculator.calculate (writer, model, type, type, null);
  }
 
+ public static String stripList (String str)
+ {
+  if (str.endsWith ("List"))
+  {
+   return str.substring (0, str.length () - "List".length ());
+  }
+  return str;
+ }
 }

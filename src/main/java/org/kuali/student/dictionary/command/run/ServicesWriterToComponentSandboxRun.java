@@ -25,7 +25,7 @@ import org.kuali.student.dictionary.model.spreadsheet.SpreadsheetReader;
 import org.kuali.student.dictionary.model.spreadsheet.CompositeSpreadsheetReader;
 import org.kuali.student.dictionary.model.util.ServicesFilter;
 import org.kuali.student.dictionary.model.util.ServicesFilterByKeys;
-import org.kuali.student.dictionary.writer.service.ServicesWriter;
+import org.kuali.student.dictionary.writer.service.PureJavaInfcWriter;
 
 /**
  *
@@ -65,10 +65,10 @@ public class ServicesWriterToComponentSandboxRun implements
    servicesToProcess.add ("enumerable");
    servicesToProcess.add ("search");  
    ServicesFilter filter = new ServicesFilterByKeys (servicesToProcess);
-   ServicesWriter instance =
-    new ServicesWriter (model,
+   PureJavaInfcWriter instance =
+    new PureJavaInfcWriter (model,
     COMPONENT_SANDBOX_DIRECTORY_TO_WRITE_JAVA,
-    ServicesWriter.DEFAULT_ROOT_PACKAGE,
+    PureJavaInfcWriter.DEFAULT_ROOT_PACKAGE,
     filter);
    instance.write ();
   }

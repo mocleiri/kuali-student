@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 The Kuali Foundation
+ * Copyright 2009 The Kuali Foundation
  *
  * Licensed under the Educational Community License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,70 +15,69 @@
  */
 package org.kuali.student.dictionary.model.validation;
 
+import org.kuali.student.dictionary.model.ServiceMethod;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.model.util.ModelFinder;
 
 /**
- *
+ * This validates a single serviceMethodinoary entry
  * @author nwright
  */
-public class XmlTypesValidator implements ModelValidator
+public class ServiceContractModelValidator implements ModelValidator
 {
 
  private ServiceContractModel model;
- private ModelFinder finder;
- private XmlType xmlType;
 
- public XmlTypesValidator (XmlType xmlType, ServiceContractModel model)
+ public ServiceContractModelValidator (ServiceContractModel model)
  {
   this.model = model;
-  this.finder = new ModelFinder (model);
-  this.xmlType = xmlType;
  }
  private Collection errors;
 
  @Override
  public Collection<String> validate ()
  {
-
   errors = new ArrayList ();
   basicValidation ();
+  this.validateServiceMethods ();
+  validateXmlTypes ();
   return errors;
+ }
+
+ private void validateServiceMethods ()
+ {
+  for (ServiceMethod method : model.getServiceMethods ())
+  {
+   errors.addAll (new ServiceMethodValidator (method, model).validate ());
+  }
+ }
+
+ private void validateXmlTypes ()
+ {
+  if (model.getXmlTypes ().size () == 0)
+  {
+   addError ("No xmlTypes found");
+  }
+  for (XmlType xmlType : model.getXmlTypes ())
+  {
+   XmlTypesValidator validator = new XmlTypesValidator (xmlType, model);
+   errors.addAll (validator.validate ());
+  }
  }
 
  private void basicValidation ()
  {
-  if (xmlType.getName ().equals (""))
+  if (model.getServiceMethods ().size () == 0)
   {
-   addError ("Name is required");
-  }
-  if (xmlType.getName ().equalsIgnoreCase ("Object"))
-  {
-   addError ("Object is reserved and cannot be used as the name of an XmlType");
-  }
-  if (xmlType.getName ().equalsIgnoreCase ("ObjectList"))
-  {
-   addError ("Object is reserved and cannot be used as the name of an XmlType");
-  }
-  if ( ! xmlType.getService ().equals (""))
-  {
-   for (String srv : xmlType.getService ().split (","))
-   {
-    if (finder.findService (srv.trim ()) == null)
-    {
-     addError ("Service, [" + srv
-               + "] could not be found in the list of services");
-    }
-   }
+   addError ("no service methods have been defined");
   }
  }
 
  private void addError (String msg)
  {
-  String error = "Error in xmlType entry: " + xmlType.getName () + ": " + msg;
+  String error = "Error in service methods: " + msg;
   if ( ! errors.contains (error))
   {
    errors.add (error);
