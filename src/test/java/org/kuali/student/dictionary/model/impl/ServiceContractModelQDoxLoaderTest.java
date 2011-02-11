@@ -71,10 +71,26 @@ public class ServiceContractModelQDoxLoaderTest
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
 
+  private static final String RICE_DIRECTORY =
+ "C:/svn/rice/rice-release-1-0-2-1-br/api/src/main/java";
  private ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
+//  srcDirs.add (RICE_DIRECTORY);
   srcDirs.add (CORE_DIRECTORY);
+//  srcDirs.add (COMMON_DIRECTORY);
+//  srcDirs.add (LUM_DIRECTORY);
+  ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
+  instance = new ServiceContractModelCache (instance);
+  validate (instance);
+  return instance;
+ }
+
+  private ServiceContractModel getRiceModel ()
+ {
+  List<String> srcDirs = new ArrayList ();
+  srcDirs.add (RICE_DIRECTORY);
+//  srcDirs.add (CORE_DIRECTORY);
 //  srcDirs.add (COMMON_DIRECTORY);
 //  srcDirs.add (LUM_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);

@@ -15,8 +15,14 @@
  */
 package org.kuali.student.dictionary.model.util;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import org.kuali.student.dictionary.model.MessageStructure;
 import org.kuali.student.dictionary.model.ServiceContractModel;
+import org.kuali.student.dictionary.model.ServiceMethod;
+import org.kuali.student.dictionary.model.ServiceMethodParameter;
 import org.kuali.student.dictionary.model.XmlType;
 import org.kuali.student.dictionary.writer.HtmlWriter;
 
@@ -58,8 +64,8 @@ public class HtmlContractMessageStructureWriter
   writer.writeTag ("td", "id=structureVersion colspan=2", xmlType.getVersion ());
   writer.indentPrintln ("</tr>");
   writer.indentPrintln ("<tr>");
-  writer.writeTag ("th", "class=h", "Usage");
-  writer.indentPrint ("<td id=\"structureVersion\">");
+  writer.writeTag ("th", "rowspan=3 class=h", "Usage");
+  writer.indentPrint ("<td id=\"structureVersion\" colspan=2>");
   for (String servKey : xmlType.getService ().split (","))
   {
    writer.indentPrintln ("<a href=\"" + servKey + "Service" + ".html" + "\">"
@@ -68,6 +74,28 @@ public class HtmlContractMessageStructureWriter
   writer.indentPrint ("</td>");
 
   writer.indentPrintln ("</tr>");
+  writer.indentPrintln ("<tr>");
+  writer.writeTag ("th", "class=h", "");
+  writer.indentPrint ("<td id=\"structureVersion\" colspan=2>");
+  for (ServiceMethod method : this.calcUsageByMethods (xmlType))
+  {
+   writer.indentPrintln ("<a href=\"" + method.getService () + "Service" + ".html" + "#" + method.getService () +"-" + method.getName () + "\">"
+                         + method.getName () +  "</a>");
+  }
+  writer.indentPrint ("</td>");
+  writer.indentPrintln ("</tr>");
+  writer.indentPrintln ("<tr>");
+  writer.writeTag ("th", "class=h", "");
+  writer.indentPrint ("<td id=\"structureVersion\" colspan=2>");
+  for (String xmlTypeName : this.calcOtherXmlTypeUsages (xmlType))
+  {
+   XmlType usageType = finder.findXmlType (xmlTypeName);
+   writer.indentPrintln ("<a href=\"" + usageType.getName () + ".html" + "\">"
+                         + usageType.getName () +  "</a>");
+  }
+  writer.indentPrint ("</td>");
+  writer.indentPrintln ("</tr>");
+
   writer.writeTag ("th", "class=h", "Type");
   writer.writeTag ("td", "id=structureVersion colspan=2",
                    xmlType.getPrimitive ());
@@ -106,7 +134,44 @@ public class HtmlContractMessageStructureWriter
   writer.writeHeaderBodyAndFooterOutToFile ();
  }
 
- public void writeMessageStructure (MessageStructure ms)
+
+ private Set<ServiceMethod> calcUsageByMethods (XmlType xmlType)
+ {
+  Set<ServiceMethod> methods = new LinkedHashSet ();
+  for (ServiceMethod method : model.getServiceMethods ())
+  {
+   if (method.getReturnValue ().getType ().equalsIgnoreCase (xmlType.getName ()))
+   {
+    methods.add (method);
+    continue;
+   }
+   for (ServiceMethodParameter param : method.getParameters ())
+   {
+    if (param.getType ().equalsIgnoreCase (xmlType.getName ()))
+    {
+     methods.add (method);
+     break;
+    }
+   }
+  }
+  return methods;
+ }
+
+
+ private Set<String> calcOtherXmlTypeUsages (XmlType xmlType)
+ {
+  Set<String> xmlTypeNames = new LinkedHashSet ();
+  for (MessageStructure ms : model.getMessageStructures ())
+  {
+   if (ms.getType ().equalsIgnoreCase (xmlType.getName ()))
+   {
+    xmlTypeNames.add (ms.getXmlObject ());
+   }
+  }
+  return xmlTypeNames;
+ }
+
+ private void writeMessageStructure (MessageStructure ms)
  {
   writer.indentPrintln ("<tr>");
   writer.writeTag ("td", "class=\"structSName\"", ms.getShortName ());

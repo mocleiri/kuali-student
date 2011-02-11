@@ -25,8 +25,10 @@ import com.thoughtworks.qdox.model.JavaParameter;
 import com.thoughtworks.qdox.model.Type;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -145,17 +147,22 @@ public class ServiceContractModelQDoxLoader implements
   System.out.println ("ServiceContractModelQDoxLoader: Starting parse");
   services = new ArrayList ();
   serviceMethods = new ArrayList ();
+  xmlTypeMap = new LinkedHashMap ();
+  messageStructures = new ArrayList ();
   JavaDocBuilder builder = new JavaDocBuilder ();
   for (String sourceDirectory : sourceDirectories)
   {
    builder.addSourceTree (new File (sourceDirectory));
   }
-  for (JavaClass javaClass : builder.getClasses ())
+  List<JavaClass> sortedClasses = Arrays.asList (builder.getClasses ());
+  Collections.sort (sortedClasses);
+  for (JavaClass javaClass : sortedClasses)
   {
    if ( ! this.isServiceToProcess (javaClass))
    {
     continue;
    }
+//   System.out.println ("processing service=" + javaClass.getName ());
    Service service = new Service ();
    services.add (service);
    service.setKey (javaClass.getName ().substring (0, javaClass.getName ().length ()
@@ -229,19 +236,33 @@ public class ServiceContractModelQDoxLoader implements
 
  private boolean isServiceToProcess (JavaClass javaClass)
  {
+//  System.out.println ("looking if javaClass is a service to process=" + javaClass.getName () + "=" + javaClass.getPackageName ());
   if ( ! javaClass.getName ().endsWith ("Service"))
   {
    return false;
   }
   if (javaClass.getPackageName ().contains (".old."))
   {
+
    return false;
   }
   if (javaClass.getPackageName ().endsWith (".old"))
   {
    return false;
   }
-  return true;
+  for (Annotation annotation : javaClass.getAnnotations ())
+  {
+//   System.out.println ("looking for webservice tag=" + annotation.getType ().getJavaClass ().getName ());
+   if (annotation.getType ().getJavaClass ().getName ().equals ("WebService"))
+   {
+    System.out.println ("Processing web service=" + javaClass.getPackageName ()
+                        + "." + javaClass.getName ());
+    return true;
+   }
+  }
+  System.out.println ("skipping service because it is not a web service="
+                      + javaClass.getPackageName () + "." + javaClass.getName ());
+  return false;
  }
 
  private String calcIncludedServices (JavaClass javaClass)
@@ -288,7 +309,7 @@ public class ServiceContractModelQDoxLoader implements
 //     * @throws OperationFailedException unable to complete request
 //	 */
 //    public List<ReferenceTypeInfo> getReferenceTypes() throws OperationFailedException;
-
+//
   System.out.println ("ServiceContractModelQDoxLoader:" + javaClass.getName ()
                       + " extends " + javaClass.getSuperClass ());
   System.out.println (javaClass.getName () + " implmenets "
@@ -374,10 +395,6 @@ public class ServiceContractModelQDoxLoader implements
  private void addXmlTypeAndMessageStructure (JavaClass messageStructureJavaClass,
                                              String serviceKey)
  {
-  if (xmlTypeMap == null)
-  {
-   xmlTypeMap = new LinkedHashMap ();
-  }
   XmlType xmlType = xmlTypeMap.get (messageStructureJavaClass.getName ());
   if (xmlType == null)
   {
@@ -408,63 +425,78 @@ public class ServiceContractModelQDoxLoader implements
   return "Primitive";
  }
 
+ private Set<String> getShortNames (JavaClass messageStructureJavaClass)
+ {
+  Set<String> fields = new LinkedHashSet ();
+  for (JavaMethod method : messageStructureJavaClass.getMethods (true))
+  {
+   if (isSetterMethodToProcess (method, messageStructureJavaClass.getName ()))
+   {
+    String shortName = this.calcShortNameFromSetter (method);
+    fields.add (shortName);
+    continue;
+   }
+   if (isGetterMethodToProcess (method, messageStructureJavaClass.getName ()))
+   {
+    String shortName = this.calcShortNameFromGetter (method);
+    fields.add (shortName);
+    continue;
+   }
+  }
+  return fields;
+ }
+
  private void addMessageStructure (JavaClass messageStructureJavaClass,
                                    String serviceKey)
  {
-  if (this.messageStructures == null)
-  {
-   this.messageStructures = new ArrayList ();
-  }
   Set<JavaClass> subObjectsToAdd = new LinkedHashSet ();
-  Set<String> fieldsAdded = new HashSet ();
-  for (JavaMethod setterMethod : messageStructureJavaClass.getMethods (true))
+  for (String shortName : this.getShortNames (messageStructureJavaClass))
   {
-   if ( ! isSetterMethod (setterMethod, messageStructureJavaClass.getName ()))
-   {
-    continue;
-   }
-   String shortName = this.calcShortName (setterMethod);
+   JavaMethod setterMethod = findSetterMethod (messageStructureJavaClass,
+                                               shortName);
    JavaMethod getterMethod = findGetterMethod (messageStructureJavaClass,
                                                shortName);
    if (getterMethod == null)
    {
-    throw new IllegalArgumentException ("Setter method has no corresponding getter method: "
+    throw new IllegalArgumentException ("shortName has no corresponding getter method: "
                                         + messageStructureJavaClass.getName ()
-                                        + "." + setterMethod.getName ());
+                                        + "." + shortName);
    }
    JavaField beanField = this.findField (messageStructureJavaClass,
-                                         shortName);
+                                         shortName, setterMethod);
    if (beanField == null)
    {
-    throw new IllegalArgumentException ("Setter method has no corresponding bean field: "
-                                        + messageStructureJavaClass.getName ()
-                                        + "." + setterMethod.getName ());
+    String accessorType = getAccessorType (getterMethod);
+    if ("XmlAccessType.FIELD".equals (accessorType))
+    {
+     throw new IllegalArgumentException ("Setter method has no corresponding bean field: "
+                                         + messageStructureJavaClass.getName ()
+                                         + "." + getterMethod.getName ());
+    }
    }
    // overide the shortName if the bean field has an XmlAttribute name=xxx
    // this catches the key=id switch
-   for (Annotation annotation : beanField.getAnnotations ())
+   if (beanField != null)
    {
-    if (annotation.getType ().getJavaClass ().getName ().equals ("XmlAttribute"))
+    for (Annotation annotation : beanField.getAnnotations ())
     {
-     Object nameValue = annotation.getNamedParameter ("name");
-     if (nameValue != null)
+     if (annotation.getType ().getJavaClass ().getName ().equals ("XmlAttribute"))
      {
-      shortName = stripQuotes (nameValue.toString ());
+      Object nameValue = annotation.getNamedParameter ("name");
+      if (nameValue != null)
+      {
+       shortName = stripQuotes (nameValue.toString ());
+      }
      }
     }
    }
-   if (fieldsAdded.contains (shortName))
-   {
-    continue;
-   }
-   fieldsAdded.add (shortName);
    MessageStructure ms = new MessageStructure ();
    messageStructures.add (ms);
    ms.setXmlObject (messageStructureJavaClass.getName ());
    ms.setShortName (shortName);
    ms.setId (ms.getXmlObject () + "." + ms.getShortName ());
    ms.setName ("????");
-   ms.setType (calcTypeOfSetterMethodFirstParam (setterMethod));
+   ms.setType (calcTypeOfGetterMethodReturn (getterMethod));
    if (ms.getType ().equals ("Object"))
    {
     System.out.println (ms.getId ()
@@ -480,12 +512,12 @@ public class ServiceContractModelQDoxLoader implements
    }
    ms.setXmlAttribute (this.calcXmlAttribute (beanField));
    ms.setOptional ("???");
-   ms.setCardinality (this.calcCardinality (setterMethod));
-   ms.setDescription (calcMissing (getterMethod.getComment ()));
+   ms.setCardinality (this.calcCardinalityOfReturn (getterMethod));
+   ms.setDescription (calcMissing (calcDescription (getterMethod, setterMethod,
+                                                    beanField)));
    ms.setFeedback ("???");
    ms.setStatus ("???");
-   JavaClass subObjToAdd = this.calcRealJavaClassOfSetterFirstParam (
-     setterMethod);
+   JavaClass subObjToAdd = this.calcRealJavaClassOfGetterReturn (getterMethod);
    if ( ! subObjToAdd.isEnum ())
    {
     if ( ! subObjToAdd.getName ().equals ("Object"))
@@ -516,6 +548,145 @@ public class ServiceContractModelQDoxLoader implements
   return;
  }
 
+ private String calcDescription (JavaMethod getterMethod,
+                                 JavaMethod setterMethod, JavaField beanField)
+ {
+  String desc = null;
+  desc = getterMethod.getComment ();
+  if (isDescriptionOk (desc))
+  {
+   return desc;
+  }
+  if (setterMethod != null)
+  {
+   desc = setterMethod.getComment ();
+   if (isDescriptionOk (desc))
+   {
+    return desc;
+   }
+  }
+  if (beanField != null)
+  {
+   desc = beanField.getComment ();
+   if (isDescriptionOk (desc))
+   {
+    return desc;
+   }
+  }
+  desc = calcDescriptionRecursively (getterMethod);
+  if (isDescriptionOk (desc))
+  {
+   return desc;
+  }
+  desc = calcDescriptionRecursively (setterMethod);
+  if (isDescriptionOk (desc))
+  {
+   return desc;
+  }
+  return null;
+ }
+
+ private String calcDescriptionRecursively (JavaMethod method)
+ {
+  if (method == null)
+  {
+   return null;
+  }
+  String desc = method.getComment ();
+  if (isDescriptionOk (desc))
+  {
+   return desc;
+  }
+  desc = calcDescriptionRecursively (findInterfaceMethod (method));
+  if (isDescriptionOk (desc))
+  {
+   return desc;
+  }
+  desc = calcDescriptionRecursively (findSuperMethod (method));
+  if (isDescriptionOk (desc))
+  {
+   return desc;
+  }
+  return null;
+ }
+
+ private JavaMethod findInterfaceMethod (JavaMethod method)
+ {
+  for (JavaClass interfaceClass :
+       method.getParentClass ().getImplementedInterfaces ())
+  {
+   for (JavaMethod superMethod : interfaceClass.getMethods (true))
+   {
+    if (method.getCallSignature ().equals (superMethod.getCallSignature ()))
+    {
+     return superMethod;
+    }
+   }
+  }
+  return null;
+ }
+
+ private JavaMethod findSuperMethod (JavaMethod method)
+ {
+//  System.out.println ("Searching for super method for " + method.getCallSignature ());
+  for (JavaMethod superMethod : method.getParentClass ().getMethods (true))
+  {
+   if (method.equals (superMethod))
+   {
+    continue;
+   }
+   if (method.getCallSignature ().equals (superMethod.getCallSignature ()))
+   {
+    return superMethod;
+   }
+  }
+
+
+  return null;
+ }
+
+ private boolean isDescriptionOk (String desc)
+ {
+  if (desc == null)
+  {
+   return false;
+  }
+  if (desc.trim ().isEmpty ())
+  {
+   return false;
+  }
+  if (desc.contains ("@inheritDoc"))
+  {
+   return false;
+  }
+  return true;
+ }
+
+ private String getAccessorType (JavaMethod method)
+ {
+  String accessorType = getAccessorType (method.getAnnotations ());
+  if (accessorType != null)
+  {
+   return accessorType;
+  }
+  accessorType = getAccessorType (method.getParentClass ().getAnnotations ());
+  return accessorType;
+ }
+
+ private String getAccessorType (Annotation[] annotations)
+ {
+  for (Annotation annotation : annotations)
+  {
+   if (annotation.getType ().getJavaClass ().getName ().equals (
+     "XmlAccessorType"))
+   {
+    System.out.println ("Looking for XmlAccessorType annotation = "
+                        + annotation.getParameterValue ());
+    return annotation.getParameterValue ().toString ();
+   }
+  }
+  return null;
+ }
 
  private String stripQuotes (String str)
  {
@@ -529,7 +700,7 @@ public class ServiceContractModelQDoxLoader implements
   }
   return str;
  }
- 
+
  private String calcMissing (String str)
  {
   if (str == null)
@@ -553,6 +724,11 @@ public class ServiceContractModelQDoxLoader implements
 
  private String calcXmlAttribute (JavaField beanField)
  {
+  if (beanField == null)
+  {
+   // TODO: worry about checking for this annotation on the method for non-field based AccessorTypes
+   return "No";
+  }
   for (Annotation annotation : beanField.getAnnotations ())
   {
    if (annotation.getType ().getJavaClass ().getName ().equals ("XmlAttribute"))
@@ -563,16 +739,40 @@ public class ServiceContractModelQDoxLoader implements
   return "No";
  }
 
- private JavaField findField (JavaClass javaClass, String shortName)
+ private JavaField findField (JavaClass javaClass, String shortName,
+                              JavaMethod setterMethod)
  {
+  JavaField field = findField (javaClass, shortName);
+  if (field != null)
+  {
+   return field;
+  }
+  if (setterMethod != null)
+  {
+   String paramName = setterMethod.getParameters ()[0].getName ();
+   if (paramName.equalsIgnoreCase (shortName))
+   {
+    return null;
+   }
+   return findField (javaClass, paramName);
+  }
+  return null;
+ }
+
+ private JavaField findField (JavaClass javaClass, String name)
+ {
+  if (name == null)
+  {
+   return null;
+  }
   for (JavaField field : javaClass.getFields ())
   {
-   if (field.getName ().equalsIgnoreCase (shortName))
+   if (field.getName ().equalsIgnoreCase (name))
    {
     return field;
    }
    // TODO: check for shortNames that already start with is so we don't check for isIsEnrollable
-   if (field.getName ().equals ("is" + shortName))
+   if (field.getName ().equals ("is" + name))
    {
     return field;
    }
@@ -582,7 +782,7 @@ public class ServiceContractModelQDoxLoader implements
   {
    return null;
   }
-  return findField (superClass, shortName);
+  return findField (superClass, name);
  }
 
  private JavaMethod findGetterMethod (JavaClass msClass, String shortName)
@@ -595,6 +795,35 @@ public class ServiceContractModelQDoxLoader implements
    }
    // TODO: check for shortNames that already start with is so we don't check for isIsEnrollable
    if (method.getName ().equals ("is" + shortName))
+   {
+    return method;
+   }
+   // TODO: followup on KimEntityResidencyInfo.getInState
+   if (method.getName ().equals ("getInState") && shortName.equals (
+     "InStateFlag"))
+   {
+    return method;
+   }
+  }
+  return null;
+ }
+
+ private JavaMethod findSetterMethod (JavaClass msClass, String shortName)
+ {
+  for (JavaMethod method : msClass.getMethods (true))
+  {
+   if (method.getName ().equals ("set" + shortName))
+   {
+    return method;
+   }
+   // TODO: check for shortNames that already start with is so we don't check for isIsEnrollable
+   if (method.getName ().equals ("setIs" + shortName))
+   {
+    return method;
+   }
+   // TODO: followup on KimEntityResidencyInfo.getInState
+   if (method.getName ().equals ("setInStateFlag") && shortName.equals (
+     "InState"))
    {
     return method;
    }
@@ -625,14 +854,54 @@ public class ServiceContractModelQDoxLoader implements
   "CoreProgramInfo.setSelectiveEnrollmentCode",
   "WhenConstraint.setValue"
  };
+ private static final String[] GETTER_METHODS_TO_SKIP =
+ {
+  // Somebody put "convenience" methods on the validation result info
+  "ValidationResultInfo.getWarning",
+  "ValidationResultInfo.getError",
+  // not on original wiki but still defined as a method but not backed by a field so not in wsdl
+  "CredentialProgramInfo.getDiplomaTitle",
+  // synonym for the official of setCredentialType
+  "CredentialProgramInfo.getType",
+  // not on original wiki but still defined as a method but not backed by a field so not in wsdl
+  "CredentialProgramInfo.getHegisCode",
+  "CredentialProgramInfo.getCip2000Code",
+  "CredentialProgramInfo.getCip2010Code",
+  "CredentialProgramInfo.getSelectiveEnrollmentCode",
+  "CoreProgramInfo.getDiplomaTitle",
+  // synonym for the official of setCredentialType
+  //  "CoreProgramInfo.setType",
+  // not on original wiki but still defined as a method but not backed by a field so not in wsdl
+  "CoreProgramInfo.getHegisCode",
+  "CoreProgramInfo.getCip2000Code",
+  "CoreProgramInfo.getCip2010Code",
+  "CoreProgramInfo.getSelectiveEnrollmentCode",
+  "WhenConstraint.getValue"
+ };
 
- private boolean isSetterMethod (JavaMethod method, String className)
+ private boolean isSetterMethodToProcess (JavaMethod method, String className)
  {
   if ( ! method.getName ().startsWith ("set"))
   {
    return false;
   }
   if (method.getParameters ().length != 1)
+  {
+   return false;
+  }
+  if (method.isPrivate ())
+  {
+   return false;
+  }
+  if (method.isProtected ())
+  {
+   return false;
+  }
+  if (method.isStatic ())
+  {
+   return false;
+  }
+  if (method.getParentClass ().getPackageName ().startsWith ("java"))
   {
    return false;
   }
@@ -644,47 +913,131 @@ public class ServiceContractModelQDoxLoader implements
     return false;
    }
   }
+//  if (method.getParentClass ().isInterface ())
+//  {
+//   return false;
+//  }
+  for (Annotation annotation : method.getAnnotations ())
+  {
+   if (annotation.getType ().getJavaClass ().getName ().equals ("XmlTransient"))
+   {
+    return false;
+   }
+  }
   return true;
  }
 
- private String calcShortName (JavaMethod method)
+ private boolean isGetterMethodToProcess (JavaMethod method, String className)
+ {
+  if ( ! method.getName ().startsWith ("get"))
+  {
+   if ( ! method.getName ().startsWith ("is"))
+   {
+    return false;
+   }
+  }
+  if (method.getParameters ().length != 0)
+  {
+   return false;
+  }
+  if (method.isPrivate ())
+  {
+   return false;
+  }
+  if (method.isProtected ())
+  {
+   return false;
+  }
+  if (method.isStatic ())
+  {
+   return false;
+  }
+  if (method.getParentClass ().getPackageName ().startsWith ("java"))
+  {
+   return false;
+  }
+  String fullName = className + "." + method.getName ();
+  for (String skip : GETTER_METHODS_TO_SKIP)
+  {
+   if (skip.equals (fullName))
+   {
+    return false;
+   }
+  }
+//  if (method.getParentClass ().isInterface ())
+//  {
+//   return false;
+//  }
+  for (Annotation annotation : method.getAnnotations ())
+  {
+   if (annotation.getType ().getJavaClass ().getName ().equals ("XmlTransient"))
+   {
+    return false;
+   }
+  }
+  return true;
+ }
+
+ private String calcShortNameFromSetter (JavaMethod method)
  {
   return method.getName ().substring (3);
  }
 
- private String calcCardinality (JavaMethod setterMethod)
+ private String calcShortNameFromGetter (JavaMethod method)
  {
-  if (isList (setterMethod))
+  if (method.getName ().startsWith ("get"))
+  {
+   return method.getName ().substring (3);
+  }
+  if (method.getName ().startsWith ("is"))
+  {
+   return method.getName ().substring (2);
+  }
+  throw new IllegalArgumentException (method.getName ()
+                                      + " does not start with is or get");
+ }
+
+ private String calcCardinalityOfReturn (JavaMethod getterMethod)
+ {
+  if (isReturnAList (getterMethod))
   {
    return "Many";
   }
   return "One";
  }
 
- private boolean isList (JavaMethod method)
+ private boolean isReturnAList (JavaMethod method)
  {
-  JavaParameter param = method.getParameters ()[0];
-  Type type = param.getType ();
-  return isList (type);
+  return isList (method.getReturnType ());
  }
 
  private boolean isList (Type type)
  {
-  JavaClass setterParamClass = type.getJavaClass ();
-  return this.isList (setterParamClass);
+  JavaClass javaClass = type.getJavaClass ();
+  return this.isList (javaClass);
  }
 
- private boolean isList (JavaClass setterParamClass)
+ private boolean isList (JavaClass javaClass)
  {
-  if (setterParamClass.getName ().equals (List.class.getSimpleName ()))
+  if (javaClass.getName ().equals (List.class.getSimpleName ()))
   {
    return true;
   }
-  if (setterParamClass.getName ().equals (ArrayList.class.getSimpleName ()))
+  if (javaClass.getName ().equals (ArrayList.class.getSimpleName ()))
+  {
+   return true;
+  }
+  if (javaClass.getName ().equals (Collection.class.getSimpleName ()))
   {
    return true;
   }
   return false;
+ }
+
+ private String calcTypeOfGetterMethodReturn (JavaMethod getterMethod)
+ {
+  Type type = getterMethod.getReturnType ();
+  return calcType (type);
  }
 
  private String calcTypeOfSetterMethodFirstParam (JavaMethod setterMethod)
@@ -749,7 +1102,21 @@ public class ServiceContractModelQDoxLoader implements
   {
    return "StringList";
   }
+  if (javaClass.getName ().equals ("java$util$Map"))
+  {
+   return "Map<String,String>";
+  }
+  if (javaClass.getName ().equals ("Map"))
+  {
+   return "Map<String,String>";
+  }
   return javaClass.getName ();
+ }
+
+ private JavaClass calcRealJavaClassOfGetterReturn (JavaMethod getterMethod)
+ {
+  Type type = getterMethod.getReturnType ();
+  return this.calcRealJavaClass (type);
  }
 
  private JavaClass calcRealJavaClassOfSetterFirstParam (JavaMethod setterMethod)
@@ -837,6 +1204,10 @@ public class ServiceContractModelQDoxLoader implements
    return false;
   }
   if (javaClass.getName ().equals (Map.class.getSimpleName ()))
+  {
+   return false;
+  }
+  if (javaClass.getName ().equals ("java$util$Map"))
   {
    return false;
   }

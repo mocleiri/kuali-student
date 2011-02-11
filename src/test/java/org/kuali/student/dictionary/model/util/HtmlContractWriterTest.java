@@ -66,15 +66,18 @@ public class HtmlContractWriterTest
                              "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
+  private static final String RICE_DIRECTORY =
+ "C:/svn/rice/rice-release-1-0-2-1-br/api/src/main/java";
  private static final String HTML_DIRECTORY =
-                             "C:/svn/maven-dictionary-generator/trunk/target/html";
+                             "target/html";
 
  private ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
-  srcDirs.add (CORE_DIRECTORY);
-  srcDirs.add (COMMON_DIRECTORY);
-  srcDirs.add (LUM_DIRECTORY);
+//  srcDirs.add (CORE_DIRECTORY);
+//  srcDirs.add (COMMON_DIRECTORY);
+//  srcDirs.add (LUM_DIRECTORY);
+  srcDirs.add (RICE_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   return new ServiceContractModelCache (instance);
 

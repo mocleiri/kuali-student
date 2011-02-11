@@ -20,8 +20,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -100,7 +98,7 @@ public abstract class JavaClassWriter extends XmlWriter
  public void writeHeader ()
  {
   indentPrintln ("/*");
-  indentPrintln (" * Copyright 2010 The Kuali Foundation");
+  indentPrintln (" * Copyright 2011 The Kuali Foundation");
   indentPrintln (" *");
   indentPrintln (" * Licensed under the Educational Community License, Version 2.0 (the \"License\");");
   indentPrintln (" * you may not use this file except in compliance with the License.");
