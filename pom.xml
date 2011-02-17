@@ -1,27 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Copyright 2009 The Kuali Foundation Licensed under the Educational Community
-  License, Version 2.0 (the "License"); you may not use this file except in
-  compliance with the License. You may obtain a copy of the License at
-  http://www.osedu.org/licenses/ECL-2.0 Unless required by applicable law or
-  agreed to in writing, software distributed under the License is distributed
-  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-  express or implied. See the License for the specific language governing
-  permissions and limitations under the License.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kuali</groupId>
-    <artifactId>kuali</artifactId>
-    <version>75</version>
+    <groupId>org.kuali.student</groupId>
+    <artifactId>student</artifactId>
+    <version>1.2-SNAPSHOT</version>
   </parent>
-  <groupId>org.kuali.student</groupId>
-  <artifactId>student</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <groupId>org.kuali.student.db</groupId>
+  <artifactId>ks-cfg-dbs</artifactId>
   <packaging>pom</packaging>
-  <name>Kuali Student</name>
-  <url>http://${kuali.site.hostname}/student/${project.version}/</url>
+  <name>KS Impex</name>
+  <description>Kuali Student Impex</description>
   <repositories>
     <repository>
       <id>kuali.nexus</id>
@@ -35,943 +23,827 @@
       </snapshots>
     </repository>
   </repositories>
-  <ciManagement>
-    <system>hudson</system>
-    <url>http://ci.ks.kuali.org</url>
-  </ciManagement>
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <modules>
-        <module>ks-common</module>
-        <module>ks-security</module>
-        <module>ks-admin</module>
-        <module>ks-core</module>
-        <module>ks-lum</module>
-        <module>ks-web</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>skip-ui</id>
-      <modules>
-        <module>ks-common</module>
-        <module>ks-security</module>
-        <module>ks-admin</module>
-        <module>ks-core</module>
-        <module>ks-lum</module>
-      </modules>
-      <properties>
-        <kuali.attach.sources.phase>none</kuali.attach.sources.phase>
-      </properties>
-    </profile>
-    <profile>
-      <id>skip-all-wars</id>
-      <modules>
-        <module>ks-common</module>
-        <module>ks-security</module>
-        <module>ks-admin</module>
-        <module>ks-core</module>
-        <module>ks-lum</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>impex-only</id>
-      <modules>
-        <module>ks-cfg-dbs</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>sql-only</id>
-      <modules>
-        <module>ks-core</module>
-        <module>ks-lum</module>
-      </modules>
-      <properties>
-        <kuali.attach.sources.phase>none</kuali.attach.sources.phase>
-      </properties>
-    </profile>
-  </profiles>
-  <scm>
-    <connection>scm:svn:https://test.kuali.org/svn/student/trunk</connection>
-    <developerConnection>scm:svn:https://test.kuali.org/svn/student/trunk</developerConnection>
-    <url>https://test.kuali.org/svn/student/trunk</url>
-  </scm>
   <properties>
-    <!-- Remove this property as soon as the devs are comfortable with Maven 3 -->
-    <kuali.site.plugin.version>2.0.1</kuali.site.plugin.version>
+    <ks.impex.sql.plugin.escapeProcessing>false</ks.impex.sql.plugin.escapeProcessing>
+    <ks.impex.sql.plugin.orderFile>ascending</ks.impex.sql.plugin.orderFile>
+    <ks.impex.sql.plugin.keepFormat>true</ks.impex.sql.plugin.keepFormat>
+    <ks.impex.sql.plugin.printResultSet>false</ks.impex.sql.plugin.printResultSet>
+    <ks.impex.sql.plugin.delimiter.type>row</ks.impex.sql.plugin.delimiter.type>
+    <ks.impex.sql.plugin.force.execution>false</ks.impex.sql.plugin.force.execution>
+    <ks.impex.sql.plugin.skip>false</ks.impex.sql.plugin.skip>
+    <ks.impex.ant.compatibility.mode>false</ks.impex.ant.compatibility.mode>
+    <ks.impex.include.version.in.comment>false</ks.impex.include.version.in.comment>
 
-    <kuali.clover.exclude.pattern.1>org/kuali/**/ui/**/client/**/*.java</kuali.clover.exclude.pattern.1>
-    <kuali.clover.exclude.pattern.2>org/kuali/**/ui/client/**/*.java</kuali.clover.exclude.pattern.2>
-    <kuali.clover.exclude.pattern.3>org/kuali/**/client/**/*.java</kuali.clover.exclude.pattern.3>
+    <ks.impex.generate.phase>generate-resources</ks.impex.generate.phase>
+    <ks.impex.generate.sql.phase>${ks.impex.generate.phase}</ks.impex.generate.sql.phase>
+    <ks.impex.generate.sql.oracle.phase>${ks.impex.generate.sql.phase}</ks.impex.generate.sql.oracle.phase>
+    <ks.impex.generate.sql.mysql.phase>${ks.impex.generate.sql.phase}</ks.impex.generate.sql.mysql.phase>
+    <ks.impex.generate.morph.phase>${ks.impex.generate.phase}</ks.impex.generate.morph.phase>
+    <ks.impex.generate.dtd.phase>${ks.impex.generate.phase}</ks.impex.generate.dtd.phase>
+    <!-- This is the format dates will be exported/imported as -->
+    <ks.impex.date.format>yyyyMMddHHmmss</ks.impex.date.format>
 
-    <kuali.javadoc.exclude.package.names>*.service.jaxws:*.exceptions.jaxws</kuali.javadoc.exclude.package.names>
-    <kuali.javadoc.link.3>http://cxf.apache.org/javadoc/${ks.cxf.javadoc.version}/</kuali.javadoc.link.3>
-    <kuali.javadoc.link.4>http://download.oracle.com/javaee/5/api/</kuali.javadoc.link.4>
-    <kuali.javadoc.link.5>http://static.springframework.org/spring/docs/${spring.version}/api/</kuali.javadoc.link.5>
-    <kuali.javadoc.link.6>http://static.springsource.org/spring-security/site/docs/${spring.security.javadoc.version}/apidocs/</kuali.javadoc.link.6>
-    <kuali.javadoc.link.7>http://site.kuali.org/rice/${kuali.rice.version}/apidocs/</kuali.javadoc.link.7>
-    <kuali.javadoc.link.8>http://logging.apache.org/log4j/${log4j.javadoc.version}/apidocs/</kuali.javadoc.link.8>
-    <kuali.javadoc.link.9>http://ws.apache.org/wss4j/apidocs/</kuali.javadoc.link.9>
+    <!-- Oracle specific properties -->
+    <ks.impex.masterdb.url>jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</ks.impex.masterdb.url>
+    <ks.impex.masterdb.schema>KSMASTER</ks.impex.masterdb.schema>
+    <ks.impex.masterdb.username>KSMASTER</ks.impex.masterdb.username>
+    <ks.impex.masterdb.password>KSMASTER</ks.impex.masterdb.password>
+    <ks.impex.oracle.driver>oracle.jdbc.driver.OracleDriver</ks.impex.oracle.driver>
+    <ks.impex.oracle.default.url>jdbc:oracle:thin:@localhost:1521:XE</ks.impex.oracle.default.url>
+    <ks.impex.oracle.delimiter>/</ks.impex.oracle.delimiter>
+    <ks.impex.oracle.defaultTablespace>users</ks.impex.oracle.defaultTablespace>
+    <ks.impex.oracle.temporaryTablespace>temp</ks.impex.oracle.temporaryTablespace>
+    <ks.impex.oracle.quota>UNLIMITED</ks.impex.oracle.quota>
+    <ks.impex.oracle.error.sqlcode.userDoesNotExist>-01918</ks.impex.oracle.error.sqlcode.userDoesNotExist>
+    <ks.impex.oracle.error.sqlcode.userAlreadyExists>-01920</ks.impex.oracle.error.sqlcode.userAlreadyExists>
+    <ks.impex.oracle.dba.username>SYS AS SYSDBA</ks.impex.oracle.dba.username>
+    <ks.impex.oracle.dba.password>change_on_install</ks.impex.oracle.dba.password>
 
-    <!-- artifact versions -->
-    <aspectj.version>1.5.4</aspectj.version>
-    <atomikos.version>3.4.1</atomikos.version>
-    <cxf.version>2.2.9</cxf.version>
-    <!-- For some reason the 2.2.9 javadocs for CXF weren't published -->
-    <ks.cxf.javadoc.version>2.2.8</ks.cxf.javadoc.version>
-    <derby.version>10.4.2.0</derby.version>
-    <eclipselink.version>1.0</eclipselink.version>
-    <gwt.version>2.0.4</gwt.version>
-    <jaxws-api.version>2.1</jaxws-api.version>
-    <jaxws.version>2.1.5</jaxws.version>
-    <jetty.version>6.1.6</jetty.version>
-    <junit.version>4.4</junit.version>
-    <kuali.rice.version>1.0.3.1-BX-SNAPSHOT</kuali.rice.version>
-    <log4j.version>1.2.14</log4j.version>
-    <log4j.javadoc.version>1.2</log4j.javadoc.version>
-    <metro.version>1.4</metro.version>
-    <spring.version>2.5.6</spring.version>
-    <spring.security.version>2.0.4</spring.security.version>
-    <spring.security.javadoc.version>2.0.x</spring.security.javadoc.version>
-    <velocity.version>1.6.4</velocity.version>
-    <velocity.tools.version>2.0</velocity.tools.version>
-    <xalan.version>2.7.1</xalan.version>
-    <xercesImpl.version>2.9.1</xercesImpl.version>
-    <oracle.ojdbc.version>10.2.0.3.0</oracle.ojdbc.version>
-    <mysql.connector.version>5.1.13</mysql.connector.version>
-    <backport-util-concurrent.version>3.1</backport-util-concurrent.version>
-    <jsr107cache.version>1.0</jsr107cache.version>
-    
-    <!-- plugin versions -->
-    <gwt.codehaus.plugin.version>1.2</gwt.codehaus.plugin.version>
-    <war.plugin.version>2.1-beta-1</war.plugin.version>
-    <tomcat.plugin.version>1.0-beta-1</tomcat.plugin.version>
+    <!-- Simple select query for validating connection properties -->
+    <ks.impex.oracle.sql.validate>
+      SELECT SYSDATE FROM DUAL
+    </ks.impex.oracle.sql.validate>
 
-    <!-- build properties -->
-    <ks.gwt.compile.phase>process-classes</ks.gwt.compile.phase>
-    <ks.gwt.compile.draftCompile>false</ks.gwt.compile.draftCompile>
-    <ks.gwt.compile.soyc>false</ks.gwt.compile.soyc>
-    <ks.gwt.compile.style>OBF</ks.gwt.compile.style>
-    <ks.java2ws.phase>none</ks.java2ws.phase>
-    <kuali.attach.sources.phase>verify</kuali.attach.sources.phase>
+    <!-- Drop the user, ignoring the Oracle error code for "user does not exist" -->
+    <ks.impex.oracle.sql.drop>
+      BEGIN
+      EXECUTE IMMEDIATE 'DROP USER ${ks.impex.username} CASCADE';
+      EXCEPTION WHEN OTHERS THEN
+      IF SQLCODE != ${ks.impex.oracle.error.sqlcode.userDoesNotExist} THEN
+      RAISE;
+      END IF;
+      END;
+      /
+    </ks.impex.oracle.sql.drop>
+
+    <!-- Create an Oracle user with some sensible defaults -->
+    <ks.impex.oracle.sql.create>
+      CREATE USER ${ks.impex.username}
+      IDENTIFIED BY ${ks.impex.password}
+      DEFAULT TABLESPACE ${ks.impex.oracle.defaultTablespace}
+      TEMPORARY TABLESPACE ${ks.impex.oracle.temporaryTablespace}
+      QUOTA ${ks.impex.oracle.quota} ON ${ks.impex.oracle.defaultTablespace}
+      /
+    </ks.impex.oracle.sql.create>
+
+    <!-- Grant permissions needed for KS -->
+    <ks.impex.oracle.sql.grants>
+      GRANT CREATE PROCEDURE
+      , CREATE SEQUENCE
+      , CREATE SESSION
+      , CREATE SYNONYM
+      , CREATE TABLE
+      , CREATE TRIGGER
+      , CREATE TYPE
+      , CREATE VIEW
+      TO ${ks.impex.username}
+      /
+
+      GRANT SELECT ON pending_trans$ to ${ks.impex.username}
+      /
+
+      GRANT SELECT ON dba_2pc_pending to ${ks.impex.username}
+      /
+
+      GRANT SELECT ON dba_pending_transactions to ${ks.impex.username}
+      /
+
+      GRANT EXECUTE ON dbms_system to ${ks.impex.username}
+      /
+    </ks.impex.oracle.sql.grants>
+    <!-- This is executed just before generating XML from the master db -->
+    <ks.impex.oracle.sql.pre.export>
+      UPDATE ks_db_version SET upgrade_time = NULL
+      /
+    </ks.impex.oracle.sql.pre.export>
+    <!-- This is executed after materializing the master db from database control files -->
+    <ks.impex.oracle.sql.post.materialization>
+      purge recyclebin
+      /
+    </ks.impex.oracle.sql.post.materialization>
   </properties>
   <build>
     <pluginManagement>
       <plugins>
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>sql-maven-plugin</artifactId>
+          <version>1.4</version>
           <configuration>
-            <!-- Don't compile sources that are in jars -->
-            <compilerArgument>-implicit:none</compilerArgument>
+            <username>${ks.impex.username}</username>
+            <password>${ks.impex.password}</password>
+            <url>${ks.impex.url}</url>
+            <driver>${ks.impex.driver}</driver>
+            <delimiter>${ks.impex.delimiter}</delimiter>
+            <delimiterType>${ks.impex.sql.plugin.delimiter.type}</delimiterType>
+            <forceMojoExecution>${ks.impex.sql.plugin.force.execution}</forceMojoExecution>
+            <skip>${ks.impex.sql.plugin.skip}</skip>
+            <keepFormat>${ks.impex.sql.plugin.keepFormat}</keepFormat>
+            <printResultSet>${ks.impex.sql.plugin.printResultSet}</printResultSet>
+            <outputFile>${ks.impex.sql.plugin.outputFile}</outputFile>
+            <orderFile>${ks.impex.sql.plugin.orderFile}</orderFile>
+            <escapeProcessing>${ks.impex.sql.plugin.escapeProcessing}</escapeProcessing>
           </configuration>
-        </plugin>
-
-        <!-- CXF Java2WS Default Configuration -->
-        <plugin>
-          <groupId>org.apache.cxf</groupId>
-          <artifactId>cxf-java2ws-plugin</artifactId>
-          <version>${cxf.version}</version>
+          <executions>
+            <execution>
+              <id>validate-dba-config</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <username>${ks.impex.dba.username}</username>
+                <password>${ks.impex.dba.password}</password>
+                <sqlCommand>${ks.impex.sql.validate}</sqlCommand>
+              </configuration>
+            </execution>
+            <execution>
+              <id>validate-db-config</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <username>${ks.impex.username}</username>
+                <password>${ks.impex.password}</password>
+                <sqlCommand>${ks.impex.sql.validate}</sqlCommand>
+              </configuration>
+            </execution>
+            <execution>
+              <id>drop-db</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <username>${ks.impex.dba.username}</username>
+                <password>${ks.impex.dba.password}</password>
+                <sqlCommand>${ks.impex.sql.drop}</sqlCommand>
+              </configuration>
+            </execution>
+            <execution>
+              <id>init-db</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <username>${ks.impex.dba.username}</username>
+                <password>${ks.impex.dba.password}</password>
+                <sqlCommand>${ks.impex.sql.initialize}</sqlCommand>
+              </configuration>
+            </execution>
+            <execution>
+              <id>execute-pre-export-sql</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <forceMojoExecution>true</forceMojoExecution>
+                <sqlCommand>${ks.impex.sql.pre.export}</sqlCommand>
+              </configuration>
+            </execution>
+          </executions>
           <dependencies>
             <dependency>
-              <groupId>org.apache.cxf</groupId>
-              <artifactId>cxf-rt-frontend-jaxws</artifactId>
-              <version>${cxf.version}</version>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>${mysql.connector.version}</version>
             </dependency>
             <dependency>
-              <groupId>org.apache.cxf</groupId>
-              <artifactId>cxf-rt-frontend-simple</artifactId>
-              <version>${cxf.version}</version>
+              <groupId>com.oracle</groupId>
+              <artifactId>ojdbc14</artifactId>
+              <version>${oracle.ojdbc.version}</version>
             </dependency>
           </dependencies>
-          <configuration>
-            <genWsdl>true</genWsdl>
-            <genWrapperbean>true</genWrapperbean>
-            <verbose>true</verbose>
-            <argline>-s ${project.build.directory}/generated/src -classdir ${project.build.outputDirectory}</argline>
-          </configuration>
-        </plugin>
-
-        <!-- Tomcat Plugin Configuration -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>tomcat-maven-plugin</artifactId>
-          <version>${tomcat.plugin.version}</version>
-          <configuration>
-            <server>${project.artifactId}</server>
-            <warDirectory>${project.build.directory}/${project.artifactId}-webapp</warDirectory>
-          </configuration>
-        </plugin>
-
-        <!-- Codehaus GWT Maven Plugin Configuration -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>gwt-maven-plugin</artifactId>
-          <version>${gwt.codehaus.plugin.version}</version>
-          <configuration>
-            <webappDirectory>${project.build.directory}/${project.artifactId}-webapp</webappDirectory>
-            <buildOutputDirectory>${project.build.directory}/${project.artifactId}-webapp/WEB-INF/classes</buildOutputDirectory>
-            <hostedWebapp>${project.build.directory}/${project.artifactId}-webapp</hostedWebapp>
-            <extraJvmArgs>-Xss32m -Xmx1g</extraJvmArgs>
-            <style>${ks.gwt.compile.style}</style>
-            <soyc>${ks.gwt.compile.soyc}</soyc>
-            <draftCompile>${ks.gwt.compile.draftCompile}</draftCompile>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
-  </build>
-  <dependencyManagement>
-    <dependencies>
-      <!-- Test Framework Dependencies -->
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>${derby.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derbynet</artifactId>
-        <version>${derby.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derbyclient</artifactId>
-        <version>${derby.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>jetty</artifactId>
-        <version>${jetty.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <artifactId>servlet-api</artifactId>
-        <groupId>javax.servlet</groupId>
-        <version>2.5</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>javax.persistence</groupId>
-        <artifactId>persistence-api</artifactId>
-        <version>1.0</version>
-      </dependency>
-      <dependency>
-        <groupId>javax.transaction</groupId>
-        <artifactId>jta</artifactId>
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/generated-impex</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
         <version>1.1</version>
-      </dependency>
-      <dependency>
-        <groupId>cglib</groupId>
-        <artifactId>cglib-nodep</artifactId>
-        <version>2.1_3</version>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.persistence</groupId>
-        <artifactId>eclipselink</artifactId>
-        <version>${eclipselink.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.openjpa</groupId>
-        <artifactId>openjpa</artifactId>
-        <version>1.2.1</version>
-      </dependency>
-
-      <!-- Hibernate -->
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-annotations</artifactId>
-        <version>3.4.0.GA</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-entitymanager</artifactId>
-        <version>3.4.0.GA</version>
-      </dependency>
-
-      <!-- Hibernate Transitive Dependencies -->
-      <dependency>
-        <groupId>dom4j</groupId>
-        <artifactId>dom4j</artifactId>
-        <version>1.6.1</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-collections</groupId>
-        <artifactId>commons-collections</artifactId>
-        <version>3.2</version>
-      </dependency>
-      <dependency>
-        <groupId>antlr</groupId>
-        <artifactId>antlr</artifactId>
-        <version>2.7.7</version>
-      </dependency>
-
-      <!-- Spring Dependencies -->
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-aop</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-aspects</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-jdbc</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-orm</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-test</artifactId>
-        <version>${spring.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-webmvc</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-core</artifactId>
-        <version>${spring.security.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-support</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-security-core</artifactId>
-        <version>${spring.security.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-support</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-security-cas-client</artifactId>
-        <version>${spring.security.version}</version>
-      </dependency>
-
-      <!-- This jar is only needed if you are using CAS with Spring Security -->
-      <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-cas-client</artifactId>
-        <version>${spring.security.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-dao</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.opensaml</groupId>
-        <artifactId>opensaml</artifactId>
-        <version>1.1</version>
-        <!-- <version>2.2.2</version> -->
-      </dependency>
-      <dependency>
-        <groupId>xerces</groupId>
-        <artifactId>xercesImpl</artifactId>
-        <version>${xercesImpl.version}</version>
-      </dependency>
-
-      <!-- Metro Dependencies -->
-      <dependency>
-        <groupId>com.sun.xml.ws</groupId>
-        <artifactId>webservices-rt</artifactId>
-        <version>${metro.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jvnet.jax-ws-commons.spring</groupId>
-        <artifactId>jaxws-spring</artifactId>
-        <version>1.8</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-          </exclusion>
-          <!-- These must be excluded for WSIT to work -->
-          <exclusion>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>jaxws-rt</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.xml.messaging.saaj</groupId>
-            <artifactId>saaj-impl</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.xml.stream.buffer</groupId>
-            <artifactId>streambuffer</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.xml.stream</groupId>
-            <artifactId>sjsxp</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.org.apache.xml.internal</groupId>
-            <artifactId>resolver</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <!-- stax-ex 1.0 pom making a disaster so trying 1.2 -->
-      <dependency>
-        <groupId>org.jvnet.staxex</groupId>
-        <artifactId>stax-ex</artifactId>
-        <version>1.2</version>
-      </dependency>
-
-      <!-- CXF Dependencies -->
-      <!-- Libraries not required for Java 1.6_04+ are being excluding (based cxf WHICH_JARS file) -->
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-api</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-javamail_1.4_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-activation_1.1_spec</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-core</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-javamail_1.4_spec</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-frontend-jaxws</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-javamail_1.4_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jaxws_2.1_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-activation_1.1_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-annotation_1.0_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.xml.messaging.saaj</groupId>
-            <artifactId>saaj-impl</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>wstx-asl</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-frontend-simple</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jaxws_2.1_spec</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-common-utilities</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-tools-common</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http</artifactId>
-        <version>${cxf.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http-jetty</artifactId>
-        <version>${cxf.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-ws-security</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-annotation_1.0_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-stax-api_1.0_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-bindings-soap</artifactId>
-        <version>${cxf.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-javamail_1.4_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-activation_1.1_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-          </exclusion>
-          <!-- GWT hosted not working if this is excluded -->
-          <!--
-            <exclusion>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>wstx-asl</artifactId>
-            </exclusion>
-          -->
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-databinding-jaxb</artifactId>
-        <version>${cxf.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-databinding-aegis</artifactId>
-        <version>${cxf.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.ws.security</groupId>
-        <artifactId>wss4j</artifactId>
-        <version>1.5.8</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.santuario</groupId>
-        <artifactId>xmlsec</artifactId>
-        <version>1.4.2</version>
-      </dependency>
-
-
-      <!-- Atomikos -->
-      <dependency>
-        <groupId>com.atomikos</groupId>
-        <artifactId>transactions-jdbc</artifactId>
-        <version>${atomikos.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.atomikos</groupId>
-        <artifactId>transactions-jta</artifactId>
-        <version>${atomikos.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.atomikos</groupId>
-        <artifactId>transactions-api</artifactId>
-        <version>${atomikos.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.atomikos</groupId>
-        <artifactId>transactions</artifactId>
-        <version>${atomikos.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.atomikos</groupId>
-        <artifactId>atomikos-util</artifactId>
-        <version>${atomikos.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.atomikos</groupId>
-        <artifactId>transactions-hibernate3</artifactId>
-        <version>${atomikos.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <!-- Logging -->
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.6.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>1.6.0</version>
-      </dependency>
-      <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-logging</groupId>
-        <artifactId>commons-logging</artifactId>
-        <version>1.1.1</version>
-      </dependency>
-
-      <!-- Velocity (used by cxf & statements) -->
-      <dependency>
-        <groupId>velocity</groupId>
-        <artifactId>velocity</artifactId>
-        <version>${velocity.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.velocity</groupId>
-        <artifactId>velocity</artifactId>
-        <version>${velocity.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.velocity</groupId>
-        <artifactId>velocity-tools</artifactId>
-        <version>${velocity.tools.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>2.3</version>
-      </dependency>
-
-      <!-- Pom dependencies for impl specific jars -->
-      <dependency>
-        <groupId>org.kuali.student.common</groupId>
-        <artifactId>ks-jta</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.kuali.student.common</groupId>
-        <artifactId>ks-cxf</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.kuali.student.common</groupId>
-        <artifactId>ks-metro</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.kuali.student.common</groupId>
-        <artifactId>ks-eclipselink</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.kuali.student.common</groupId>
-        <artifactId>ks-hibernate</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-
-      <!-- GWT Dependencies -->
-      <dependency>
-        <groupId>javax.xml.bind</groupId>
-        <artifactId>jaxb-api</artifactId>
-        <version>2.1</version>
-        <classifier>sources</classifier>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-incubator</artifactId>
-        <version>2.0.1</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-dev</artifactId>
-        <version>${gwt.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-user</artifactId>
-        <version>${gwt.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-servlet</artifactId>
-        <version>${gwt.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>junit</artifactId>
-            <groupId>com.google.gwt</groupId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-visualization</artifactId>
-        <version>1.0</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.code.gwtx</groupId>
-        <artifactId>gwtx</artifactId>
-        <version>1.5.3</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.kuali.rice</groupId>
-        <artifactId>rice-api</artifactId>
-        <version>${kuali.rice.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kuali.rice</groupId>
-        <artifactId>rice-impl</artifactId>
-        <version>${kuali.rice.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-dao</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jpa</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-remoting</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-support</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jmx</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-mock</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty</artifactId>
-          </exclusion>
-          <!--
-            <exclusion>
-            <groupId>org.springmodules</groupId>
-            <artifactId>spring-modules-ojb</artifactId>
-            </exclusion>
-          -->
-          <!--
-            <exclusion>
-            <groupId>ojb</groupId>
-            <artifactId>db-ojb</artifactId>
-            </exclusion>
-          -->
-          <exclusion>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-          </exclusion>
-          <exclusion>
+        <executions>
+          <execution>
+            <id>drop-db-config</id>
+            <phase>none</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>JDBC Url - ${ks.impex.url}</echo>
+                <echo>JDBC Driver - ${ks.impex.driver}</echo>
+                <echo>Username - ${ks.impex.dba.username}</echo>
+                <echo>SQL:</echo>
+                <echo>---------------------------------</echo>
+                <echo>${ks.impex.sql.drop}</echo>
+                <echo>---------------------------------</echo>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>init-db-config</id>
+            <phase>none</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>JDBC Url - ${ks.impex.url}</echo>
+                <echo>JDBC Driver - ${ks.impex.driver}</echo>
+                <echo>Username - ${ks.impex.dba.username}</echo>
+                <echo>SQL:</echo>
+                <echo>---------------------------------</echo>
+                <echo>${ks.impex.sql.initialize}</echo>
+                <echo>---------------------------------</echo>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>db-config</id>
+            <phase>none</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>JDBC Url - ${ks.impex.url}</echo>
+                <echo>JDBC Driver - ${ks.impex.driver}</echo>
+                <echo>Username - ${ks.impex.username}</echo>
+                <echo>Password - ${ks.impex.password}</echo>
+                <echo>SQL: '${ks.impex.sql.validate}'</echo>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>dba-config</id>
+            <phase>none</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>JDBC Url - ${ks.impex.url}</echo>
+                <echo>JDBC Driver - ${ks.impex.driver}</echo>
+                <echo>Username - ${ks.impex.dba.username}</echo>
+                <echo>Password - ${ks.impex.dba.password}</echo>
+                <echo>SQL: '${ks.impex.sql.validate}'</echo>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>pre-export-config</id>
+            <phase>none</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>JDBC Url - ${ks.impex.url}</echo>
+                <echo>JDBC Driver - ${ks.impex.driver}</echo>
+                <echo>Username - ${ks.impex.username}</echo>
+                <echo>Password - ${ks.impex.password}</echo>
+                <echo>---------------------------------</echo>
+                <echo>${ks.impex.sql.pre.export}</echo>
+                <echo>---------------------------------</echo>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <version>1.4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <!-- No need to attach sources -->
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.kuali.maven.impex</groupId>
+        <artifactId>maven-impex-plugin</artifactId>
+        <version>1.0.17</version>
+        <dependencies>
+          <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-activation_1.1_spec</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-javamail_1.4_spec</artifactId>
-          </exclusion>
-          <!--
-            These dependencies conflict with gwt-dev for running hosted mode via eclipse
-            launch file.
-          -->
-          <exclusion>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-compiler-jdt</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-compiler</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-runtime</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.eclipse.jdt</groupId>
-            <artifactId>core</artifactId>
-          </exclusion>
-          
-		  <!-- JOTM -->        
-	      <exclusion>                                 
-	        <groupId>xapool</groupId>                 
-	        <artifactId>xapool</artifactId>           
-	      </exclusion>                                
-	      <exclusion>                                 
-	        <groupId>jotm</groupId>                   
-	        <artifactId>jotm</artifactId>             
-	      </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>commons-beanutils</groupId>
-        <artifactId>commons-beanutils</artifactId>
-        <version>1.7.0</version>
-      </dependency>
-      <dependency>
-        <groupId>xalan</groupId>
-        <artifactId>xalan</artifactId>
-        <version>${xalan.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.oracle</groupId>
-        <artifactId>ojdbc14</artifactId>
-        <version>${oracle.ojdbc.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>${mysql.connector.version}</version>
-      </dependency>
-      <!-- Caching dependencies -->
-      <dependency>
-        <groupId>backport-util-concurrent</groupId>
-        <artifactId>backport-util-concurrent</artifactId>
-        <version>${backport-util-concurrent.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>net.sf.jsr107cache</groupId>
-        <artifactId>jsr107cache</artifactId>
-        <version>${jsr107cache.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-  </dependencies>
+            <version>${mysql.connector.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>${oracle.ojdbc.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <username>${ks.impex.username}</username>
+          <password>${ks.impex.password}</password>
+          <url>${ks.impex.url}</url>
+          <driver>${ks.impex.driver}</driver>
+          <dataXMLDir>${project.build.directory}/generated-impex/xml</dataXMLDir>
+          <schemaDir>${project.build.directory}/generated-impex</schemaDir>
+          <schemaXMLFile>${project.build.directory}/generated-impex/${project.artifactId}.xml</schemaXMLFile>
+          <dateFormat>${ks.impex.date.format}</dateFormat>
+          <includeVersionInComment>${ks.impex.include.version.in.comment}</includeVersionInComment>
+          <antCompatibilityMode>${ks.impex.ant.compatibility.mode}</antCompatibilityMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>morph-xml</id>
+            <phase>${ks.impex.generate.morph.phase}</phase>
+            <goals>
+              <goal>morphschema</goal>
+              <goal>morphdata</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-data-dtd</id>
+            <phase>${ks.impex.generate.dtd.phase}</phase>
+            <goals>
+              <goal>datadtd</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-oracle-sql</id>
+            <phase>${ks.impex.generate.sql.oracle.phase}</phase>
+            <goals>
+              <goal>schemasql</goal>
+              <goal>datasql</goal>
+            </goals>
+            <configuration>
+              <targetDatabase>oracle</targetDatabase>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-mysql-sql</id>
+            <phase>${ks.impex.generate.sql.mysql.phase}</phase>
+            <goals>
+              <goal>schemasql</goal>
+              <goal>datasql</goal>
+            </goals>
+            <configuration>
+              <targetDatabase>mysql</targetDatabase>
+            </configuration>
+          </execution>
+          <execution>
+            <id>import-data</id>
+            <phase>none</phase>
+            <goals>
+              <goal>import</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>export-db</id>
+            <phase>none</phase>
+            <goals>
+              <goal>exportschema</goal>
+              <goal>exportdata</goal>
+              <goal>datadtd</goal>
+            </goals>
+            <configuration>
+              <schemaXMLFile>${basedir}/src/main/impex/schema.xml</schemaXMLFile>
+              <dataXMLDir>${basedir}/src/main/impex</dataXMLDir>
+              <copyToFile>${basedir}/src/main/impex/data.dtd</copyToFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>all-dbs</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>ks-rice-db</module>
+        <module>ks-embedded-db</module>
+        <module>ks-standalone-db</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>skip-impex</id>
+      <!-- Turn off SQL generation and don't include any modules -->
+      <properties>
+        <ks.impex.generate.phase>none</ks.impex.generate.phase>
+      </properties>
+      <activation>
+        <property>
+          <name>skipImpex</name>
+        </property>
+      </activation>
+    </profile>
+    <profile>
+      <id>embedded-only</id>
+      <modules>
+        <module>ks-embedded-db</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>standalone-only</id>
+      <modules>
+        <module>ks-standalone-db</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>rice-only</id>
+      <modules>
+        <module>ks-rice-db</module>
+      </modules>
+    </profile>
+    <profile>
+      <!--
+        This profile sets properties for Oracle specific SQL that handles dropping and creating
+        Oracle schemas as well as granting permissions
+      -->
+      <id>oracle</id>
+      <properties>
+        <ks.impex.delimiter>${ks.impex.oracle.delimiter}</ks.impex.delimiter>
+        <ks.impex.url>${ks.impex.oracle.default.url}</ks.impex.url>
+        <ks.impex.driver>${ks.impex.oracle.driver}</ks.impex.driver>
+        <ks.impex.dba.username>${ks.impex.oracle.dba.username}</ks.impex.dba.username>
+        <ks.impex.dba.password>${ks.impex.oracle.dba.password}</ks.impex.dba.password>
+        <ks.impex.sql.validate>${ks.impex.oracle.sql.validate}</ks.impex.sql.validate>
+        <ks.impex.sql.drop>${ks.impex.oracle.sql.drop}</ks.impex.sql.drop>
+        <ks.impex.sql.pre.export>${ks.impex.oracle.sql.pre.export}</ks.impex.sql.pre.export>
+        <ks.impex.sql.initialize>
+          ${ks.impex.oracle.sql.create}
+          ${ks.impex.oracle.sql.grants}
+        </ks.impex.sql.initialize>
+        <ks.impex.generate.sql.mysql.phase>none</ks.impex.generate.sql.mysql.phase>
+      </properties>
+    </profile>
+    <profile>
+      <!--
+        This profile connects the dropping/creating/loading of a database to appropriate
+        phases of the Maven build lifecycle. The "clean" phase drops the db, the "initialize" phase creates the
+        db and grants permissions, and the "install" phase loads data into the db
+      -->
+      <id>ks-db</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.kuali.maven.impex</groupId>
+            <artifactId>maven-impex-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>import-data</id>
+                <phase>install</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>drop-db</id>
+                <phase>clean</phase>
+              </execution>
+              <execution>
+                <id>validate-dba-config</id>
+                <phase>validate</phase>
+              </execution>
+              <execution>
+                <id>init-db</id>
+                <phase>initialize</phase>
+              </execution>
+              <execution>
+                <id>validate-db-config</id>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!--
+        This profile generates XML files by inspecting a database materialized from the
+        database control files
+      -->
+      <id>generate-xml</id>
+      <modules>
+        <module>ks-standalone-db</module>
+        <module>ks-embedded-db</module>
+      </modules>
+      <properties>
+        <ks.impex.url>${ks.impex.masterdb.url}</ks.impex.url>
+        <ks.impex.username>${ks.impex.masterdb.username}</ks.impex.username>
+        <ks.impex.password>${ks.impex.masterdb.password}</ks.impex.password>
+        <ks.impex.schema>${ks.impex.masterdb.schema}</ks.impex.schema>
+        <ks.impex.generate.phase>none</ks.impex.generate.phase>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>pre-export-config</id>
+                <phase>generate-resources</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>execute-pre-export-sql</id>
+                <phase>generate-resources</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.kuali.maven.impex</groupId>
+            <artifactId>maven-impex-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>export-db</id>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <schema>${ks.impex.masterdb.schema}</schema>
+                  <antCompatibilityMode>true</antCompatibilityMode>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!--
+        This profile materializes a database from the combination of Kuali Student SQL
+        files and Rice Impex XML files. The system of record for the Kuali Student database is
+        the set of Oracle SQL files and Rice Impex XML files checked into SCM. This profile helps
+        verify the correctness of that control data by materializing a database from it
+      -->
+      <id>materialize-db</id>
+      <properties>
+        <ks.impex.url>${ks.impex.masterdb.url}</ks.impex.url>
+        <ks.impex.schema>${ks.impex.masterdb.schema}</ks.impex.schema>
+        <ks.impex.username>${ks.impex.masterdb.username}</ks.impex.username>
+        <ks.impex.password>${ks.impex.masterdb.password}</ks.impex.password>
+        <ks.impex.generate.phase>none</ks.impex.generate.phase>
+        <ks.impex.sql.post.materialization>${ks.impex.oracle.sql.post.materialization}</ks.impex.sql.post.materialization>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>drop-db-config</id>
+                <phase>pre-clean</phase>
+              </execution>
+              <execution>
+                <id>dba-config</id>
+                <phase>validate</phase>
+              </execution>
+              <execution>
+                <id>init-db-config</id>
+                <phase>initialize</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>unpack</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>org.kuali.student.core</groupId>
+                      <artifactId>ks-core-sql</artifactId>
+                      <version>${project.version}</version>
+                      <includes>**\/*.sql</includes>
+                      <outputDirectory>${project.build.directory}/gen/data</outputDirectory>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.kuali.student.lum</groupId>
+                      <artifactId>ks-lum-sql</artifactId>
+                      <version>${project.version}</version>
+                      <includes>**\/*.sql</includes>
+                      <outputDirectory>${project.build.directory}/gen/data</outputDirectory>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.kuali.student.db</groupId>
+                      <artifactId>ks-rice-db</artifactId>
+                      <version>${project.version}</version>
+                      <includes>**/oracle/*.sql</includes>
+                      <outputDirectory>${project.build.directory}/gen/data/rice</outputDirectory>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>org.kuali.student.core</groupId>
+                <artifactId>ks-core-sql</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>org.kuali.student.lum</groupId>
+                <artifactId>ks-lum-sql</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>org.kuali.student.db</groupId>
+                <artifactId>ks-rice-db</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <groupId>org.kuali.maven.impex</groupId>
+            <artifactId>maven-impex-plugin</artifactId>
+            <configuration>
+              <forceMojoExecution>true</forceMojoExecution>
+              <importDir>${project.build.directory}/gen/data/rice/sql</importDir>
+            </configuration>
+            <executions>
+              <execution>
+                <id>create-rice-schema</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>import</goal>
+                </goals>
+                <configuration>
+                  <importDirIncludes>ks-rice-db.sql</importDirIncludes>
+                </configuration>
+              </execution>
+              <execution>
+                <id>load-rice-data</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>import</goal>
+                </goals>
+                <configuration>
+                  <importDirExcludes>ks-rice-db*.sql</importDirExcludes>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add-rice-constraints</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>import</goal>
+                </goals>
+                <configuration>
+                  <importDirIncludes>ks-rice-db-constraints.sql</importDirIncludes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+            <configuration>
+              <forceMojoExecution>true</forceMojoExecution>
+            </configuration>
+            <executions>
+              <execution>
+                <id>drop-db</id>
+                <phase>clean</phase>
+              </execution>
+              <execution>
+                <id>validate-dba-config</id>
+                <phase>validate</phase>
+              </execution>
+              <execution>
+                <id>init-db</id>
+                <phase>initialize</phase>
+              </execution>
+              <execution>
+                <id>create-schema</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <fileset>
+                    <basedir>${project.build.directory}/gen/data</basedir>
+                    <includes>
+                      <include>initial-db/*/*-create-schema.sql</include>
+                      <include>initial-db/*/*-create-schema.sql</include>
+                    </includes>
+                  </fileset>
+                </configuration>
+              </execution>
+              <execution>
+                <id>load-data</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <fileset>
+                    <basedir>${project.build.directory}/gen/data</basedir>
+                    <includes>
+                      <include>initial-db/*/*data/*.sql</include>
+                      <include>initial-db/*/*data/*.sql</include>
+                    </includes>
+                  </fileset>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add-constraints</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <fileset>
+                    <basedir>${project.build.directory}/gen/data</basedir>
+                    <includes>
+                      <include>initial-db/*/*-constraints.sql</include>
+                      <include>initial-db/*/*-constraints.sql</include>
+                    </includes>
+                  </fileset>
+                </configuration>
+              </execution>
+              <execution>
+                <id>run-upgrades</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <fileset>
+                    <basedir>${project.build.directory}/gen/data</basedir>
+                    <includes>
+                      <include>upgrades/*/*.sql</include>
+                      <include>upgrades/*/*.sql</include>
+                    </includes>
+                  </fileset>
+                </configuration>
+              </execution>
+              <execution>
+                <!-- Perform cleanup on the materialized database as needed -->
+                <id>execute-post-materialization-sql</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <sqlCommand>${ks.impex.sql.post.materialization}</sqlCommand>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!-- This profile commits any Impex changes to SCM -->
+      <id>commit-impex-changes</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-scm-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>commit-impex-changes</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>add</goal>
+                  <goal>checkin</goal>
+                </goals>
+                <configuration>
+                  <message>Automated Impex update</message>
+                  <includes>**/src/main/impex/*.xml,**/src/main/impex/*.dtd</includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
