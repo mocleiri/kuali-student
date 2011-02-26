@@ -43,10 +43,10 @@ public class MessageStructureTypeCalculator
                                  String realType,
                                  String importPackage)
  {
-  if (type.equalsIgnoreCase ("Map"))
+  if (type.equalsIgnoreCase ("Map<String, String>"))
   {
    importsAdd (writer, Map.class.getName ());
-   return "Map<String,String>";
+   return "Map<String, String>";
   }
 
   if (type.endsWith ("List"))

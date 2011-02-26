@@ -25,6 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.impl.ServiceContractModelCache;
+import org.kuali.student.dictionary.model.impl.ServiceContractModelPescXsdLoader;
 import org.kuali.student.dictionary.model.impl.ServiceContractModelQDoxLoader;
 import org.kuali.student.dictionary.model.validation.ServiceContractModelValidator;
 import static org.junit.Assert.*;
@@ -71,16 +72,38 @@ public class HtmlContractWriterTest
  private static final String HTML_DIRECTORY =
                              "target/html";
 
+   private static final String RESOURCES_DIRECTORY =
+//                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
+                             "src/main/resources";
+  private static final String PESC_CORE_MAIN = RESOURCES_DIRECTORY + "/CoreMain_v1.8.0.xsd";
+
+ private ServiceContractModel getPescModel ()
+ {
+  String xsdFileName = PESC_CORE_MAIN;
+  ServiceContractModel instance = new ServiceContractModelPescXsdLoader (xsdFileName);
+  instance = new ServiceContractModelCache (instance);
+  validate (instance);
+  return instance;
+ }
+
+
  private ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
-//  srcDirs.add (CORE_DIRECTORY);
-//  srcDirs.add (COMMON_DIRECTORY);
-//  srcDirs.add (LUM_DIRECTORY);
-  srcDirs.add (RICE_DIRECTORY);
+  srcDirs.add (CORE_DIRECTORY);
+  srcDirs.add (COMMON_DIRECTORY);
+  srcDirs.add (LUM_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   return new ServiceContractModelCache (instance);
 
+ }
+
+  private ServiceContractModel getRiceModel ()
+ {
+  List<String> srcDirs = new ArrayList ();
+  srcDirs.add (RICE_DIRECTORY);
+  ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
+  return new ServiceContractModelCache (instance);
  }
 
  private void validate (ServiceContractModel model)
@@ -109,9 +132,22 @@ public class HtmlContractWriterTest
  @Test
  public void testRun ()
  {
-  ServiceContractModel model = this.getModel ();
+  ServiceContractModel model = null;
+  HtmlContractWriter writer = null;
+
+//  model = this.getModel ();
+//  this.validate (model);
+//  writer = new HtmlContractWriter (HTML_DIRECTORY + "/student", model);
+//  writer.write ();
+//
+//  model = this.getRiceModel ();
+//  this.validate (model);
+//  writer = new HtmlContractWriter (HTML_DIRECTORY + "/rice", model);
+//  writer.write ();
+
+  model = this.getPescModel ();
   this.validate (model);
-  HtmlContractWriter writer = new HtmlContractWriter (HTML_DIRECTORY, model);
+  writer = new HtmlContractWriter (HTML_DIRECTORY + "/pesc", model);
   writer.write ();
  }
 }

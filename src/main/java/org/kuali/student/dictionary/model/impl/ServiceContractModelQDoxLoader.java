@@ -51,6 +51,10 @@ public class ServiceContractModelQDoxLoader implements
   ServiceContractModel
 {
 
+ private static final String LOCALE_KEY_LIST = "LocaleKeyList";
+ private static final String MESSAGE_GROUP_KEY_LIST = "MessageGroupKeyList";
+ private static final JavaClass STRING_JAVA_CLASS = new JavaClass (
+   "java.lang.String");
  private List<String> sourceDirectories = null;
  private List<Service> services = null;
  private List<ServiceMethod> serviceMethods = null;
@@ -144,7 +148,7 @@ public class ServiceContractModelQDoxLoader implements
 
  private void parse ()
  {
-  System.out.println ("ServiceContractModelQDoxLoader: Starting parse");
+//  System.out.println ("ServiceContractModelQDoxLoader: Starting parse");
   services = new ArrayList ();
   serviceMethods = new ArrayList ();
   xmlTypeMap = new LinkedHashMap ();
@@ -225,7 +229,7 @@ public class ServiceContractModelQDoxLoader implements
     // return values
     ServiceMethodReturnValue rv = new ServiceMethodReturnValue ();
     serviceMethod.setReturnValue (rv);
-    rv.setType (this.calcType (javaMethod.getReturnType ()));
+    rv.setType (calcType (javaMethod.getReturnType ()));
     rv.setDescription (calcMissing (this.calcReturnDescription (javaMethod)));
     addXmlTypeAndMessageStructure (calcRealJavaClass (
       javaMethod.getReturnType ()),
@@ -255,13 +259,13 @@ public class ServiceContractModelQDoxLoader implements
 //   System.out.println ("looking for webservice tag=" + annotation.getType ().getJavaClass ().getName ());
    if (annotation.getType ().getJavaClass ().getName ().equals ("WebService"))
    {
-    System.out.println ("Processing web service=" + javaClass.getPackageName ()
-                        + "." + javaClass.getName ());
+//    System.out.println ("Processing web service=" + javaClass.getPackageName ()
+//                        + "." + javaClass.getName ());
     return true;
    }
   }
-  System.out.println ("skipping service because it is not a web service="
-                      + javaClass.getPackageName () + "." + javaClass.getName ());
+//  System.out.println ("skipping service because it is not a web service="
+//                      + javaClass.getPackageName () + "." + javaClass.getName ());
   return false;
  }
 
@@ -395,12 +399,13 @@ public class ServiceContractModelQDoxLoader implements
  private void addXmlTypeAndMessageStructure (JavaClass messageStructureJavaClass,
                                              String serviceKey)
  {
-  XmlType xmlType = xmlTypeMap.get (messageStructureJavaClass.getName ());
+  String name = calcType (messageStructureJavaClass);
+  XmlType xmlType = xmlTypeMap.get (name);
   if (xmlType == null)
   {
    xmlType = new XmlType ();
-   xmlTypeMap.put (messageStructureJavaClass.getName (), xmlType);
-   xmlType.setName (messageStructureJavaClass.getName ());
+   xmlTypeMap.put (name, xmlType);
+   xmlType.setName (name);
    xmlType.setDesc (messageStructureJavaClass.getComment ());
    xmlType.setService (serviceKey);
    xmlType.setVersion ("???");
@@ -535,7 +540,7 @@ public class ServiceContractModelQDoxLoader implements
   // now add all it's complex sub-objects if they haven't already been added
   for (JavaClass subObjectToAdd : subObjectsToAdd)
   {
-   XmlType xmlType = xmlTypeMap.get (subObjectToAdd.getName ());
+   XmlType xmlType = xmlTypeMap.get (calcType (subObjectToAdd));
    if (xmlType == null)
    {
     addXmlTypeAndMessageStructure (subObjectToAdd, serviceKey);
@@ -1019,6 +1024,14 @@ public class ServiceContractModelQDoxLoader implements
 
  private boolean isList (JavaClass javaClass)
  {
+  if (javaClass.getName ().equals ("LocalKeyList"))
+  {
+   return true;
+  }
+  if (javaClass.getName ().equals ("MessageGroupKeyList"))
+  {
+   return true;
+  }
   if (javaClass.getName ().equals (List.class.getSimpleName ()))
   {
    return true;
@@ -1094,21 +1107,23 @@ public class ServiceContractModelQDoxLoader implements
    }
   }
   // this is messed up instead of list of strings it is an object with a list of strings
-  if (javaClass.getName ().equals ("LocaleKeyList"))
+  if (javaClass.getName ().equals (LOCALE_KEY_LIST))
   {
    return "StringList";
   }
-  if (javaClass.getName ().equals ("MessageGroupKeyList"))
+  if (javaClass.getName ().equals (MESSAGE_GROUP_KEY_LIST))
   {
    return "StringList";
   }
+  // TODO: figure out why rice stuff translates like this junk?
   if (javaClass.getName ().equals ("java$util$Map"))
   {
-   return "Map<String,String>";
+   return "Map<String, String>";
   }
   if (javaClass.getName ().equals ("Map"))
   {
-   return "Map<String,String>";
+   // TODO: make sure it is in fact a String,String map
+   return "Map<String, String>";
   }
   return javaClass.getName ();
  }
@@ -1134,6 +1149,14 @@ public class ServiceContractModelQDoxLoader implements
  private JavaClass calcRealJavaClass (Type type)
  {
   JavaClass javaClass = type.getJavaClass ();
+  if (javaClass.getName ().equals (LOCALE_KEY_LIST))
+  {
+   return STRING_JAVA_CLASS;
+  }
+  if (javaClass.getName ().equals (MESSAGE_GROUP_KEY_LIST))
+  {
+   return STRING_JAVA_CLASS;
+  }
   if ( ! this.isList (javaClass))
   {
    return javaClass;
@@ -1204,6 +1227,14 @@ public class ServiceContractModelQDoxLoader implements
    return false;
   }
   if (javaClass.getName ().equals (Map.class.getSimpleName ()))
+  {
+   return false;
+  }
+  if (javaClass.getName ().equals (LOCALE_KEY_LIST))
+  {
+   return false;
+  }
+  if (javaClass.getName ().equals (MESSAGE_GROUP_KEY_LIST))
   {
    return false;
   }

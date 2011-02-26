@@ -64,8 +64,7 @@ public class ServiceContractModelQDoxLoaderTest
  {
  }
  private static final String CORE_DIRECTORY =
-//                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
-                             "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
+                             "C:/svn/student/ks-core/ks-core-api/src/main/java";       
  private static final String COMMON_DIRECTORY =
                              "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
@@ -76,7 +75,6 @@ public class ServiceContractModelQDoxLoaderTest
  private ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
-//  srcDirs.add (RICE_DIRECTORY);
   srcDirs.add (CORE_DIRECTORY);
 //  srcDirs.add (COMMON_DIRECTORY);
 //  srcDirs.add (LUM_DIRECTORY);
@@ -90,9 +88,6 @@ public class ServiceContractModelQDoxLoaderTest
  {
   List<String> srcDirs = new ArrayList ();
   srcDirs.add (RICE_DIRECTORY);
-//  srcDirs.add (CORE_DIRECTORY);
-//  srcDirs.add (COMMON_DIRECTORY);
-//  srcDirs.add (LUM_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   instance = new ServiceContractModelCache (instance);
   validate (instance);
@@ -180,14 +175,12 @@ public class ServiceContractModelQDoxLoaderTest
   System.out.println ("getServices");
   ServiceContractModel model = getModel ();
   List<Service> result = model.getServices ();
-  assertEquals (2, result.size ());
   for (Service service : result)
   {
    System.out.println (service.getKey () + " " + service.getName () + " "
-                       + service.getVersion () + " " + service.getStatus ()
-                       + " " + service.getComments ()
-                       + " " + service.getUrl ());
+                       + service.getVersion () + " " + service.getStatus ());
   }
+  assertEquals (7, result.size ());
  }
 
  /**
@@ -199,6 +192,10 @@ public class ServiceContractModelQDoxLoaderTest
   System.out.println ("getXmlTypes");
   ServiceContractModel model = getModel ();
   List<XmlType> result = model.getXmlTypes ();
+  for (XmlType xmlType : result)
+  {
+   System.out.println ("XmlType=" + xmlType.getName () + " " + xmlType.getPrimitive ());
+  }
   if (result.size () < 10)
   {
    fail ("too few: " + result.size ());
@@ -214,6 +211,13 @@ public class ServiceContractModelQDoxLoaderTest
   System.out.println ("getMessageStructures");
   ServiceContractModel model = getModel ();
   List<MessageStructure> result = model.getMessageStructures ();
+  for (MessageStructure ms : result)
+  {
+   if (ms.getName ().equalsIgnoreCase ("attributes"))
+   {
+    System.out.println ("MessageStructure=" + ms.getId () + " " + ms.getType ());
+   }
+  }
   if (result.size () < 10)
   {
    fail ("too few: " + result.size ());

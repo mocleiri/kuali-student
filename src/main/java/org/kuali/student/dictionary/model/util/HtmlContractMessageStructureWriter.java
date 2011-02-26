@@ -90,6 +90,10 @@ public class HtmlContractMessageStructureWriter
   for (String xmlTypeName : this.calcOtherXmlTypeUsages (xmlType))
   {
    XmlType usageType = finder.findXmlType (xmlTypeName);
+   if (usageType == null)
+   {
+    throw new NullPointerException ("Coud not find XmlType with name=" + xmlTypeName);
+   }
    writer.indentPrintln ("<a href=\"" + usageType.getName () + ".html" + "\">"
                          + usageType.getName () +  "</a>");
   }
@@ -163,6 +167,10 @@ public class HtmlContractMessageStructureWriter
   Set<String> xmlTypeNames = new LinkedHashSet ();
   for (MessageStructure ms : model.getMessageStructures ())
   {
+   if (ms.getType () == null)
+   {
+    throw new NullPointerException (ms.getId () + " has no type set");
+   }
    if (ms.getType ().equalsIgnoreCase (xmlType.getName ()))
    {
     xmlTypeNames.add (ms.getXmlObject ());

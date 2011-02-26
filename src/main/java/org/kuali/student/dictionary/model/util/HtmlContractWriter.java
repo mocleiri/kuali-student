@@ -125,6 +125,10 @@ public class HtmlContractWriter
   Collections.sort (types, XML_TYPE_NAME_COMPARATOR);
   for (XmlType type : types)
   {
+   if (type.getPrimitive () == null)
+   {
+    throw new NullPointerException (type.getName () + " has no primitive flag set");
+   }
    if (type.getPrimitive ().equals (XmlType.COMPLEX))
    {
     writer.indentPrint ("<li>");

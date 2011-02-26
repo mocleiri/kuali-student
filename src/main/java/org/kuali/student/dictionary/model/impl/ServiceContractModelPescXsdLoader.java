@@ -21,8 +21,10 @@ import com.sun.xml.xsom.XSContentType;
 import com.sun.xml.xsom.XSElementDecl;
 import com.sun.xml.xsom.XSModelGroup;
 import com.sun.xml.xsom.XSParticle;
+import com.sun.xml.xsom.XSRestrictionSimpleType;
 import com.sun.xml.xsom.XSSchema;
 import com.sun.xml.xsom.XSSchemaSet;
+import com.sun.xml.xsom.XSSimpleType;
 import com.sun.xml.xsom.XSTerm;
 import com.sun.xml.xsom.XSType;
 import com.sun.xml.xsom.parser.XSOMParser;
@@ -158,31 +160,75 @@ public class ServiceContractModelPescXsdLoader implements
   for (XSSchema schema : schemaSet.getSchemas ())
   {
    System.out.println ("Schema Namespace=" + schema.getTargetNamespace ());
+   for (XSSimpleType st : schema.getSimpleTypes ().values ())
+   {
+    System.out.println ("SimpleType =" + st.getName () + " namespace=" + st.getTargetNamespace ());
+    addSimpleType (st);
+   }
    for (XSComplexType ct : schema.getComplexTypes ().values ())
    {
-    System.out.println ("ComplexType =" + ct.getName ());
+    if ( ! shouldInclude (ct))
+    {
+     System.out.println ("Skipping ComplexType =" + ct.getName () + " namespace=" + ct.getTargetNamespace ());
+     continue;
+    }
+    System.out.println ("ComplexType =" + ct.getName () + " namespace=" + ct.getTargetNamespace ());
     addComplexType (ct);
    }
   }
  }
 
- private void addComplexType (XSComplexType complexType)
+ private boolean shouldInclude (XSComplexType ct)
  {
-  XmlType xmlType = xmlTypeMap.get (complexType.getName ());
+  if (ct.getTargetNamespace ().equals ("urn:org:pesc:core:CoreMain:v1.8.0"))
+  {
+   return true;
+  }
+  return false;
+ }
+
+ private void addSimpleType (XSSimpleType simpleType)
+ {
+  XmlType xmlType = xmlTypeMap.get (simpleType.getName ());
   if (xmlType != null)
   {
-   System.out.println ("Already processed complex Type="
-                       + complexType.getName ());
+   System.out.println ("Already processed simple Type="
+                       + simpleType.getName ());
    return;
   }
   xmlType = new XmlType ();
-  xmlTypeMap.put (complexType.getName (), xmlType);
-  xmlType.setName (complexType.getName ());
+  xmlTypeMap.put (simpleType.getName (), xmlType);
+  xmlType.setName (simpleType.getName ());
+  xmlType.setDesc (calcMissing (calcDesc (simpleType.getAnnotation ())));
+  xmlType.setComments ("???");
+  xmlType.setExamples ("???");
+  xmlType.setService ("Pesc");
+  xmlType.setPrimitive ("Primitive");
+ }
+
+ private void addComplexType (XSComplexType complexType)
+ {
+  addComplexType (complexType, complexType.getName ());
+ }
+
+ private void addComplexType (XSComplexType complexType, String name)
+ {
+  XmlType xmlType = xmlTypeMap.get (name);
+  if (xmlType != null)
+  {
+   System.out.println ("Already processed complex Type="  + name);
+   return;
+  }
+  xmlType = new XmlType ();
+  xmlTypeMap.put (name, xmlType);
+  xmlType.setName (name);
   xmlType.setDesc (calcMissing (calcDesc (complexType.getAnnotation ())));
   xmlType.setComments ("???");
   xmlType.setExamples ("???");
   xmlType.setService ("Pesc");
+  xmlType.setPrimitive (XmlType.COMPLEX);
 
+  boolean found = false;
   XSContentType contentType = complexType.getContentType ();
   XSParticle particle = contentType.asParticle ();
   if (particle != null)
@@ -199,9 +245,14 @@ public class ServiceContractModelPescXsdLoader implements
      { //xs:element inside complex type
       XSElementDecl element = pterm.asElementDecl ();
       addMessageStructure (xmlType.getName (), element);
+      found = true;
      }
     }
    }
+  }
+  if ( ! found)
+  {
+   System.out.println ("*** WARNING *** Complex Type, " + xmlType.getName () + ", has no message structure fields");
   }
  }
 
@@ -236,24 +287,56 @@ public class ServiceContractModelPescXsdLoader implements
   MessageStructure ms = new MessageStructure ();
   this.messageStructures.add (ms);
   ms.setXmlObject (xmlObject);
-  ms.setName (element.getName ());
-  ms.setId (xmlObject + "." + ms.getName ());
-  ms.setType (calcType (element));
+  ms.setShortName (element.getName ());
+  ms.setName ("???");
+  ms.setId (xmlObject + "." + ms.getShortName ());
+  ms.setType (calcType (element, xmlObject + "" + ms.getShortName ()));
   ms.setDescription (calcMissing (calcDesc (element.getAnnotation ())));
   System.out.println ("Element " + ms.getId () + " " + ms.getType ());
   ms.setRequired (calcRequired (element));
   ms.setCardinality (calcCardinality (element));
  }
 
- private String calcType (XSElementDecl element)
+ private String calcType (XSElementDecl element, String inLinePrefix)
  {
-  return calcType (element.getType ());
+  String type = calcType (element.getType (), inLinePrefix);
+  if (type != null)
+  {
+   return type;
+  }
+  return type;
  }
 
- private String calcType (XSType xsType)
+ private String calcType (XSType xsType, String inLinePrefix)
  {
+  if (xsType.isSimpleType ())
+  {
+   XSSimpleType st = xsType.asSimpleType ();
+   return st.getBaseType ().getName ();
+//   if (st.isRestriction ())
+//   {
+//    XSRestrictionSimpleType res = st.asRestriction ();
+//    return res.getBaseType ().getName ();
+//   }
+  }
   String type = xsType.getName ();
-  return type;
+  if (type != null)
+  {
+   return type;
+  }
+  if ((xsType.isComplexType ()))
+  {
+   XSComplexType ct = xsType.asComplexType ();
+   String baseType = ct.getBaseType ().getName ();
+   if (baseType.equals ("anyType"))
+   {
+    baseType = "";
+   }
+   String inlineTypeName =  inLinePrefix + baseType;
+   addComplexType (ct, inlineTypeName);
+   return inlineTypeName;
+  }
+  throw new IllegalArgumentException ("cannot calculate the type of the field " + inLinePrefix);
  }
 
  private String calcRequired (XSElementDecl element)
