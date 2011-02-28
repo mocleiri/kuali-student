@@ -135,15 +135,15 @@ public class HtmlContractWriterTest
   ServiceContractModel model = null;
   HtmlContractWriter writer = null;
 
-//  model = this.getModel ();
-//  this.validate (model);
-//  writer = new HtmlContractWriter (HTML_DIRECTORY + "/student", model);
-//  writer.write ();
-//
-//  model = this.getRiceModel ();
-//  this.validate (model);
-//  writer = new HtmlContractWriter (HTML_DIRECTORY + "/rice", model);
-//  writer.write ();
+  model = this.getModel ();
+  this.validate (model);
+  writer = new HtmlContractWriter (HTML_DIRECTORY + "/student", model);
+  writer.write ();
+
+  model = this.getRiceModel ();
+  this.validate (model);
+  writer = new HtmlContractWriter (HTML_DIRECTORY + "/rice", model);
+  writer.write ();
 
   model = this.getPescModel ();
   this.validate (model);

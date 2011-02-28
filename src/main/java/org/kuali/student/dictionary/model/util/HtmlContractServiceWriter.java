@@ -15,11 +15,14 @@
  */
 package org.kuali.student.dictionary.model.util;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import org.kuali.student.dictionary.model.Service;
 import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.ServiceMethod;
 import org.kuali.student.dictionary.model.ServiceMethodError;
 import org.kuali.student.dictionary.model.ServiceMethodParameter;
+import org.kuali.student.dictionary.model.XmlType;
 import org.kuali.student.dictionary.writer.HtmlWriter;
 
 /**
@@ -35,7 +38,7 @@ public class HtmlContractServiceWriter
  private ModelFinder finder;
 
  public HtmlContractServiceWriter (Service service, String directory,
-                           ServiceContractModel model)
+                                   ServiceContractModel model)
  {
   this.service = service;
   this.writer = new HtmlWriter (directory, service.getName () + ".html",
@@ -95,13 +98,68 @@ public class HtmlContractServiceWriter
   writer.indentPrintln ("</div>");
   writer.indentPrintln ("</div>");
 
+  // now write out the root message structures
+  writer.indentPrintln (
+    "<div class=\"panel\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204);\">");
+  writer.indentPrintln (
+    "<div class=\"panelHeader\" style=\"border-bottom: 1px solid rgb(204, 204, 204); background-color: rgb(238, 238, 238);\">");
+  writer.indentPrintln (
+    "<b><a name=\"MainMessageStructures\"></a>Main Message Structures</b>");
+  writer.indentPrintln (
+    "</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
+
+  writer.indentPrintln ("<ul>");
+  for (XmlType type : this.calcComplexRootXmlTypes ())
+  {
+   writer.indentPrint ("<li>");
+   writer.print ("<a href=\"" + type.getName () + ".html"
+                 + "\">" + type.getName () + "</a>");
+   writer.print ("</li>");
+  }
+  writer.indentPrintln ("</ul>");
+
 
   for (ServiceMethod method : finder.getServiceMethodsInService (
     service.getKey ()))
   {
    this.writeMethod (method);
   }
+
   writer.writeHeaderBodyAndFooterOutToFile ();
+ }
+
+ private Set<XmlType> calcComplexRootXmlTypes ()
+ {
+  Set<XmlType> types = new LinkedHashSet ();
+  for (ServiceMethod method : model.getServiceMethods ())
+  {
+   if ( ! method.getService ().equalsIgnoreCase (this.service.getKey ()))
+   {
+    continue;
+   }
+   XmlType type = finder.findXmlType (method.getReturnValue ().getType ());
+   if (type != null)
+   {
+    if (type.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))
+    {
+     types.add (type);
+    }
+   }
+
+   for (ServiceMethodParameter param : method.getParameters ())
+   {
+    type = finder.findXmlType (param.getType ());
+    if (type != null)
+    {
+     if (type.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))
+     {
+      types.add (type);
+     }
+    }
+    break;
+   }
+  }
+  return types;
  }
 
  public void writeMethod (ServiceMethod method)

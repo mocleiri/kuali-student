@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Stack;
+import org.kuali.student.dictionary.model.MessageStructure;
 import org.kuali.student.dictionary.model.Service;
 import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.XmlType;
@@ -73,7 +75,7 @@ public class HtmlContractWriter
   @Override
   public int compare (XmlType e1, XmlType e2)
   {
-   return e1.getName ().compareTo (e2.getName ());
+   return e1.getName ().toLowerCase ().compareTo (e2.getName ().toLowerCase ());
   }
  };
  private static final Comparator<Service> SERVICE_NAME_COMPARATOR =
@@ -112,35 +114,148 @@ public class HtmlContractWriter
   writer.indentPrintln ("</div>");
   writer.indentPrintln ("</div>");
 
+  this.writeAlphabeticalList ();
+  this.writeMainOrRootList ();
+
+  writer.writeHeaderBodyAndFooterOutToFile ();
+
+ }
+
+ private void writeMainOrRootList ()
+ {
+  Stack stack = new Stack ();
+  List<XmlType> types = this.getMainMessageStructures ();
   writer.indentPrintln (
     "<div class=\"panel\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204);\">");
   writer.indentPrintln (
     "<div class=\"panelHeader\" style=\"border-bottom: 1px solid rgb(204, 204, 204); background-color: rgb(238, 238, 238);\">");
   writer.indentPrintln (
-    "<b><a name=\"MessageStructures\"></a>Message Structures</b>");
+    "<b><a name=\"MessageStructures\"></a> " + types.size () + " Main (root) Message Structures</b>");
   writer.indentPrintln (
     "</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
   writer.indentPrintln ("<ul>");
-  List<XmlType> types = new ArrayList (model.getXmlTypes ());
-  Collections.sort (types, XML_TYPE_NAME_COMPARATOR);
   for (XmlType type : types)
   {
-   if (type.getPrimitive () == null)
+   this.writeLink (type);
+   if ( ! stack.contains (type.getName ()))
    {
-    throw new NullPointerException (type.getName () + " has no primitive flag set");
-   }
-   if (type.getPrimitive ().equals (XmlType.COMPLEX))
-   {
-    writer.indentPrint ("<li>");
-    writer.print ("<a href=\"" + type.getName () + ".html"
-                  + "\">" + type.getName () + "</a>");
-    writer.print ("</li>");
+    stack.push (type.getName ());
+    this.writeSubStructures (type, stack);
+    stack.pop ();
    }
   }
   writer.indentPrintln ("</ul>");
   writer.indentPrintln ("</div>");
   writer.indentPrintln ("</div>");
+ }
 
-  writer.writeHeaderBodyAndFooterOutToFile ();
+ private String stripListOffEnd (String name)
+ {
+  if (name.endsWith ("List"))
+  {
+   return name.substring (0, name.length () - "List".length ());
+  }
+  return name;
+ }
+ 
+ private void writeSubStructures (XmlType type, Stack stack)
+ {
+  boolean first = true;
+  for (MessageStructure ms : finder.findMessageStructures (type.getName ()))
+  {
+   XmlType st = finder.findXmlType (this.stripListOffEnd (ms.getType ()));
+   if ( ! st.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))
+   {
+    continue;
+   }
+   if (first)
+   {
+    first = false;
+    writer.indentPrintln ("<ul>");
+   }
+   this.writeLink (st);
+   if ( ! stack.contains (st.getName ()))
+   {
+    stack.push (st.getName ());
+    this.writeSubStructures (st, stack);
+    stack.pop ();
+   }
+  }
+  if ( ! first)
+  {
+   writer.indentPrintln ("</ul>");
+  }
+ }
+
+ private void writeLink (XmlType type)
+ {
+  writer.indentPrint ("<li>");
+  writer.print ("<a href=\"" + type.getName () + ".html"
+                + "\">" + type.getName () + "</a>");
+  writer.print ("</li>");
+ }
+
+ private List<XmlType> getMainMessageStructures ()
+ {
+  List<XmlType> types = new ArrayList (model.getXmlTypes ().size ());
+  for (XmlType type : this.getComplexMessageStructures ())
+  {
+   if (isMainMessageStructure (type))
+   {
+    types.add (type);
+   }
+  }
+  Collections.sort (types, XML_TYPE_NAME_COMPARATOR);
+  return types;
+ }
+
+ private boolean isMainMessageStructure (XmlType xmlType)
+ {
+  if ( ! HtmlContractMessageStructureWriter.calcOtherXmlTypeUsages (model,
+                                                                    xmlType).isEmpty ())
+  {
+   return false;
+  }
+  return true;
+ }
+
+ private List<XmlType> getComplexMessageStructures ()
+ {
+  List<XmlType> types = new ArrayList (model.getXmlTypes ().size ());
+  for (XmlType type : model.getXmlTypes ())
+  {
+   if (type.getPrimitive () == null)
+   {
+    throw new NullPointerException (type.getName ()
+                                    + " has no primitive flag set");
+   }
+   if (type.getPrimitive ().equals (XmlType.COMPLEX))
+   {
+    types.add (type);
+   }
+  }
+  Collections.sort (types, XML_TYPE_NAME_COMPARATOR);
+  return types;
+ }
+
+ private void writeAlphabeticalList ()
+ {
+    List<XmlType> types = this.getComplexMessageStructures ();
+  writer.indentPrintln (
+    "<div class=\"panel\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204);\">");
+  writer.indentPrintln (
+    "<div class=\"panelHeader\" style=\"border-bottom: 1px solid rgb(204, 204, 204); background-color: rgb(238, 238, 238);\">");
+  writer.indentPrintln (
+    "<b><a name=\"MessageStructures\"></a>All " + types.size () + " Message Structures in Alphabetical Order</b>");
+  writer.indentPrintln (
+    "</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
+  writer.indentPrintln ("<ul>");
+  for (XmlType type : types)
+  {
+   this.writeLink (type);
+  }
+  writer.indentPrintln ("</ul>");
+  writer.indentPrintln ("</div>");
+  writer.indentPrintln ("</div>");
  }
 }
