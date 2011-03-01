@@ -130,14 +130,23 @@ public class HtmlContractServiceWriter
 
  private Set<XmlType> calcComplexRootXmlTypes ()
  {
+  return calcComplexRootXmlTypes (model, service.getKey ());
+ }
+
+ public static Set<XmlType> calcComplexRootXmlTypes (ServiceContractModel mdl, String serviceOptionaFilter)
+ {
+  ModelFinder fndr = new ModelFinder (mdl);
   Set<XmlType> types = new LinkedHashSet ();
-  for (ServiceMethod method : model.getServiceMethods ())
+  for (ServiceMethod method : mdl.getServiceMethods ())
   {
-   if ( ! method.getService ().equalsIgnoreCase (this.service.getKey ()))
+   if (serviceOptionaFilter != null)
    {
-    continue;
+    if ( ! method.getService ().equalsIgnoreCase (serviceOptionaFilter))
+    {
+     continue;
+    }
    }
-   XmlType type = finder.findXmlType (method.getReturnValue ().getType ());
+   XmlType type = fndr.findXmlType (method.getReturnValue ().getType ());
    if (type != null)
    {
     if (type.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))
@@ -148,7 +157,7 @@ public class HtmlContractServiceWriter
 
    for (ServiceMethodParameter param : method.getParameters ())
    {
-    type = finder.findXmlType (param.getType ());
+    type = fndr.findXmlType (param.getType ());
     if (type != null)
     {
      if (type.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))

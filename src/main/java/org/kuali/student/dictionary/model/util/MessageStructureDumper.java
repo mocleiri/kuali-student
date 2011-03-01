@@ -61,6 +61,15 @@ public class MessageStructureDumper
   out.println ("");
  }
 
+ private String clean (String str)
+ {
+  str = str.replace ("\n", " ");
+  str = str.replace ("\t", " ");
+  str = str.replace ("\r", str);
+  str = str.replace ("\f", " ");
+  return str;
+ }
+
  public void writeTabbedData ()
  {
   out.print (messageStructure.getId ());
@@ -75,7 +84,7 @@ public class MessageStructureDumper
   out.print ("\t");
   out.print (messageStructure.getType ());
   out.print ("\t");
-  out.print (messageStructure.getDescription ());
+  out.print (clean (messageStructure.getDescription ()));
   out.print ("\t");
   out.print (messageStructure.getRequired ());
   out.print ("\t");

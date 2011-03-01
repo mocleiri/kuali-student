@@ -15,9 +15,14 @@
  */
 package org.kuali.student.dictionary.model.impl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.Stack;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,7 +35,9 @@ import org.kuali.student.dictionary.model.ServiceContractModel;
 import org.kuali.student.dictionary.model.ServiceMethod;
 import org.kuali.student.dictionary.model.ServiceMethodParameter;
 import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.model.util.MessageStructureDumper;
+import org.kuali.student.dictionary.model.util.HtmlContractServiceWriter;
+import org.kuali.student.dictionary.model.util.MessageStructureHierarchyDumper;
+import org.kuali.student.dictionary.model.util.ModelFinder;
 import org.kuali.student.dictionary.model.validation.ServiceContractModelValidator;
 
 /**
@@ -64,27 +71,27 @@ public class ServiceContractModelQDoxLoaderTest
  {
  }
  private static final String CORE_DIRECTORY =
-                             "C:/svn/student/ks-core/ks-core-api/src/main/java";       
+                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
  private static final String COMMON_DIRECTORY =
                              "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
+ private static final String RICE_DIRECTORY =
+                             "C:/svn/rice/rice-release-1-0-2-1-br/api/src/main/java";
 
-  private static final String RICE_DIRECTORY =
- "C:/svn/rice/rice-release-1-0-2-1-br/api/src/main/java";
  private ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
   srcDirs.add (CORE_DIRECTORY);
-//  srcDirs.add (COMMON_DIRECTORY);
-//  srcDirs.add (LUM_DIRECTORY);
+  srcDirs.add (COMMON_DIRECTORY);
+  srcDirs.add (LUM_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   instance = new ServiceContractModelCache (instance);
   validate (instance);
   return instance;
  }
 
-  private ServiceContractModel getRiceModel ()
+ private ServiceContractModel getRiceModel ()
  {
   List<String> srcDirs = new ArrayList ();
   srcDirs.add (RICE_DIRECTORY);
@@ -194,7 +201,8 @@ public class ServiceContractModelQDoxLoaderTest
   List<XmlType> result = model.getXmlTypes ();
   for (XmlType xmlType : result)
   {
-   System.out.println ("XmlType=" + xmlType.getName () + " " + xmlType.getPrimitive ());
+   System.out.println ("XmlType=" + xmlType.getName () + " "
+                       + xmlType.getPrimitive ());
   }
   if (result.size () < 10)
   {
@@ -206,7 +214,7 @@ public class ServiceContractModelQDoxLoaderTest
   * Test of getMessageStructures method, of class ServiceContractModelQDoxLoader.
   */
  @Test
- public void testGetMessageStructures ()
+ public void testGetMessageStructures () throws FileNotFoundException
  {
   System.out.println ("getMessageStructures");
   ServiceContractModel model = getModel ();
@@ -222,9 +230,21 @@ public class ServiceContractModelQDoxLoaderTest
   {
    fail ("too few: " + result.size ());
   }
-  for (MessageStructure ms : result)
+  String outputFileName = "target/messageStructures.txt";
+  File file = new File (outputFileName);
+  PrintStream out = new PrintStream (file);
+  new MessageStructureHierarchyDumper (out, model).writeTabbedHeader ();
+  Set<XmlType> rootTypes = HtmlContractServiceWriter.calcComplexRootXmlTypes (
+    model, null);
+  ModelFinder finder = new ModelFinder (model);
+  for (XmlType rootType : rootTypes)
   {
-   new MessageStructureDumper (ms, System.out).dump ();
+   Stack<String> stack = new Stack ();
+   stack.push (rootType.getName ());
+   for (MessageStructure ms : finder.findMessageStructures (rootType.getName ()))
+   {
+    new MessageStructureHierarchyDumper (out, model).writeTabbedData (ms, stack);
+   }
   }
  }
 }
