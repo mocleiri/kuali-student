@@ -17,17 +17,20 @@
 
 -->
 
-
-<project>
+<!--
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kuali</groupId>
+    <artifactId>kuali</artifactId>
+    <version>72</version>
+  </parent>
   <groupId>org.kuali.student.mojo</groupId>
   <artifactId>maven-kscontractdoc-plugin</artifactId>
-  <packaging>maven-plugin</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Sample ks contract do Maven Plugin</name>
+  <packaging>maven-plugin</packaging>
+  <name>KS Tools - Java Contract Scraper</name>
   <properties>
-  <cxf.version>2.2.10</cxf.version>
- 
     <kuali.site.download.path>org/kuali/student/mojo</kuali.site.download.path>
     <kuali.site.path>student/mojo/${project.version}</kuali.site.path>
   </properties>
@@ -52,7 +55,6 @@
       </snapshots>
     </repository>
   </repositories>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -60,68 +62,35 @@
       <version>2.0</version>
     </dependency>
     <dependency>
-   <groupId>com.sun.xsom</groupId>
-   <artifactId>xsom</artifactId>
-   <version>20100725</version>
-  </dependency>
-  <dependency>
-   <groupId>com.thoughtworks.qdox</groupId>
-   <artifactId>qdox</artifactId>
-   <version>1.12</version>
-  </dependency>
-  <dependency>
-   <groupId>org.apache.cxf</groupId>
-   <artifactId>cxf-rt-frontend-jaxws</artifactId>
-   <version>${cxf.version}</version>
-  </dependency>
-  <dependency>
-   <groupId>org.apache.cxf</groupId>
-   <artifactId>cxf-rt-transports-http</artifactId>
-   <version>${cxf.version}</version>
-  </dependency>
-  <dependency>
-   <groupId>org.apache.cxf</groupId>
-   <artifactId>cxf-rt-transports-http-jetty</artifactId>
-   <version>${cxf.version}</version>
-  </dependency>
-  <dependency>
-   <groupId>junit</groupId>
-   <artifactId>junit</artifactId>
-   <version>4.5</version>
-   <scope>test</scope>
-  </dependency>
-  <dependency>
-   <groupId>org.apache.maven</groupId>
-   <artifactId>maven-plugin-api</artifactId>
-   <version>2.0</version>
-  </dependency>
+      <groupId>net.sf.saxon</groupId>
+      <artifactId>saxon</artifactId>
+      <version>8.7</version>
+    </dependency>
     <dependency>
-   <groupId>com.thoughtworks.paranamer</groupId>
-   <artifactId>paranamer</artifactId>
-   <version>2.3</version>
-  </dependency>
-  <dependency>
-   <groupId>net.sourceforge.jexcelapi</groupId>
-   <artifactId>jxl</artifactId>
-   <version>2.6</version>
-  </dependency>
-  		<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.6.0</version>
-			</dependency>
-
-		</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>2.5.4</version>
+    </dependency>
+  </dependencies>
+  <scm>
+    <connection>scm:svn:https://test.kuali.org/svn/student/tools/maven-kscontractdoc-plugin/trunk</connection>
+    <developerConnection>scm:svn:https://test.kuali.org/svn/student/tools/maven-kscontractdoc-plugin/trunk</developerConnection>
+    <url>http://test.kuali.org/svn/student/tools/maven-kscontractdoc-plugin/trunk</url>
+  </scm>
+</project>
+-->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.kuali.student.mojo</groupId>
+  <artifactId>maven-kscontractdoc-plugin</artifactId>
+  <packaging>maven-plugin</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Sample ks contract do Maven Plugin</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+  </dependencies>
 </project>
