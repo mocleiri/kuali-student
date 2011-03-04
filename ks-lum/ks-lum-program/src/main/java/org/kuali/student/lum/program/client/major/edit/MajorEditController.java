@@ -1,13 +1,19 @@
 package org.kuali.student.lum.program.client.major.edit;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.kuali.student.common.assembly.data.Data;
+import org.kuali.student.common.assembly.data.Data.Property;
+import org.kuali.student.common.assembly.data.QueryPath;
+import org.kuali.student.common.ui.client.application.Application;
 import org.kuali.student.common.ui.client.application.ViewContext;
 import org.kuali.student.common.ui.client.mvc.Callback;
 import org.kuali.student.common.ui.client.mvc.DataModel;
+import org.kuali.student.common.ui.client.mvc.HasCrossConstraints;
 import org.kuali.student.common.ui.client.mvc.ModelRequestCallback;
 import org.kuali.student.common.ui.client.mvc.history.HistoryManager;
 import org.kuali.student.common.ui.client.service.DataSaveResult;
@@ -17,9 +23,7 @@ import org.kuali.student.common.ui.client.widgets.notification.KSNotification;
 import org.kuali.student.common.ui.client.widgets.notification.KSNotifier;
 import org.kuali.student.common.ui.shared.IdAttributes;
 import org.kuali.student.common.ui.shared.IdAttributes.IdType;
-import org.kuali.student.core.assembly.data.Data;
-import org.kuali.student.core.assembly.data.QueryPath;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.common.client.helpers.RecentlyViewedHelper;
 import org.kuali.student.lum.common.client.widgets.AppLocations;
 import org.kuali.student.lum.program.client.ProgramConstants;
@@ -315,10 +319,7 @@ public class MajorEditController extends MajorController {
             @Override
             public void onSuccess(DataSaveResult result) {
                 super.onSuccess(result);
-                Data data = result.getValue();
-                if (data != null) {
-                    programModel.setRoot(result.getValue());
-                }
+
                 List<ValidationResultInfo> validationResults = result.getValidationResults();
                 if (validationResults != null && !validationResults.isEmpty()) {
                     if (previousState != null) {
@@ -327,8 +328,28 @@ public class MajorEditController extends MajorController {
                     ProgramUtils.retrofitValidationResults(validationResults);
                     isValid(validationResults, false, true);
                     ProgramUtils.handleValidationErrorsForSpecializations(validationResults, programModel);
+                    
+                    //Clean up anything created by earlier code
+                    Data currentVariations = getDataProperty(ProgramConstants.VARIATIONS);
+
+                    existingVariationIds.clear();
+
+                    for (Iterator<Property> iter = currentVariations.iterator();iter.hasNext();) {
+                    	Property prop = iter.next();
+                        String existingId = (String) ((Data) prop.getValue()).get(ProgramConstants.ID);
+                        if(existingId==null){
+                        	iter.remove();
+                        }else{
+                        	existingVariationIds.add(existingId);
+                        }
+                    }
+                    
                     okCallback.exec(false);
                 } else {
+                    Data data = result.getValue();
+                    if (data != null) {
+                        programModel.setRoot(result.getValue());
+                    }
                     previousState = null;
                     setHeaderTitle();
                     setStatus();
@@ -404,5 +425,18 @@ public class MajorEditController extends MajorController {
                 showView(ProgramSections.SUMMARY);
             }
         }
+        //Update any cross fields
+        for(HasCrossConstraints crossConstraint:Application.getApplicationContext().getCrossConstraints(null)){
+        	crossConstraint.reprocessWithUpdatedConstraints();
+        }
     }
+
+	@Override
+	public void beforeShow(Callback<Boolean> onReadyCallback) {
+		if(!initialized){
+			Application.getApplicationContext().clearCrossConstraintMap(null);
+			Application.getApplicationContext().clearPathToFieldMapping(null);
+		}
+		super.beforeShow(onReadyCallback);
+	}
 }

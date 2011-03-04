@@ -3,17 +3,19 @@ package org.kuali.student.lum.program.client.variation.edit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kuali.student.common.assembly.data.Data;
+import org.kuali.student.common.ui.client.application.Application;
 import org.kuali.student.common.ui.client.application.ViewContext;
 import org.kuali.student.common.ui.client.mvc.Callback;
 import org.kuali.student.common.ui.client.mvc.DataModel;
+import org.kuali.student.common.ui.client.mvc.HasCrossConstraints;
 import org.kuali.student.common.ui.client.mvc.ModelRequestCallback;
 import org.kuali.student.common.ui.client.mvc.history.HistoryManager;
 import org.kuali.student.common.ui.client.widgets.KSButton;
 import org.kuali.student.common.ui.client.widgets.KSButtonAbstract;
 import org.kuali.student.common.ui.client.widgets.notification.KSNotification;
 import org.kuali.student.common.ui.client.widgets.notification.KSNotifier;
-import org.kuali.student.core.assembly.data.Data;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.common.client.widgets.AppLocations;
 import org.kuali.student.lum.program.client.ProgramConstants;
 import org.kuali.student.lum.program.client.ProgramRegistry;
@@ -223,6 +225,7 @@ public class VariationEditController extends VariationController {
             addCommonButton(ProgramProperties.get().program_menu_sections(), cancelButton, excludedViews);
             initialized = true;
         }
+
     }
 
     @Override
@@ -254,8 +257,57 @@ public class VariationEditController extends VariationController {
     }
 
     private void navigateToParent(ProgramSections parentSection) {
+
         String path = HistoryManager.appendContext(AppLocations.Locations.EDIT_PROGRAM_SPEC.getLocation(), getViewContext()) + "/" + parentSection;
         HistoryManager.navigate(path);
     }
+
+    
+	@Override
+	public void beforeShow(Callback<Boolean> onReadyCallback) {
+    	//clear all cross constraints that start with variations
+    	Application.getApplicationContext().clearCrossConstraintsWithStartingPath(null,ProgramConstants.VARIATIONS);
+    	
+    	//Set the context parent path so the proper mapping is retained 
+    	String newParentPath = ProgramConstants.VARIATIONS+"/"+org.kuali.student.lum.program.client.ProgramRegistry.getRow()+"/";
+    	Application.getApplicationContext().setParentPath(newParentPath);
+		
+    	super.beforeShow(onReadyCallback);
+        
+        //Update any cross fields
+        for(HasCrossConstraints crossConstraint:Application.getApplicationContext().getCrossConstraints(null)){
+        	crossConstraint.reprocessWithUpdatedConstraints();
+        }
+        
+	}
+//	@Override
+//	public void beforeShow(Callback<Boolean> onReadyCallback) {
+//		super.beforeShow(onReadyCallback);
+//        if(majorController!=null){
+//        	majorController.requestModel(new ModelRequestCallback<DataModel>(){
+//				public void onModelReady(DataModel programModel) {
+//	            	//Update default values from other fields if they are currently null 
+//	            	for(Map.Entry<FieldDescriptor,String> entry:Application.getApplicationContext().getDefaultValueMapping(null).entrySet()){
+//	            		FieldDescriptor fd = entry.getKey();
+//	            		if(fd != null){
+//	            			final String pathToSet = fd.getFieldKey();
+//	            			if(programModel.get(pathToSet)==null){
+//	            				final Data defaultValue = ((Data)programModel.get(entry.getValue())).copy();
+//	            				VariationEditController.this.requestModel(new ModelRequestCallback<DataModel>(){
+//									public void onModelReady(DataModel vairationModel) {
+//										vairationModel.set(QueryPath.parse(pathToSet), defaultValue);
+//			            			}
+//									public void onRequestFail(Throwable cause) {
+//									}
+//	            				});
+//	            			}
+//	            		}
+//	            	}
+//				}
+//				public void onRequestFail(Throwable cause) {
+//				}
+//	        });
+//        }
+//	}
 
 }

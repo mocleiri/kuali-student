@@ -35,6 +35,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.kuali.student.common.assembly.data.Data;
+import org.kuali.student.common.assembly.data.Metadata;
+import org.kuali.student.common.assembly.data.QueryPath;
+import org.kuali.student.common.assembly.data.Data.Value;
+import org.kuali.student.common.dto.DtoConstants;
 import org.kuali.student.common.ui.client.application.Application;
 import org.kuali.student.common.ui.client.configurable.mvc.FieldDescriptor;
 import org.kuali.student.common.ui.client.configurable.mvc.SectionTitle;
@@ -67,8 +72,6 @@ import org.kuali.student.common.ui.client.widgets.KSCheckBox;
 import org.kuali.student.common.ui.client.widgets.KSDropDown;
 import org.kuali.student.common.ui.client.widgets.ListOfStringWidget;
 import org.kuali.student.common.ui.client.widgets.KSButtonAbstract.ButtonStyle;
-import org.kuali.student.common.ui.client.widgets.commenttool.CommentTool;
-import org.kuali.student.common.ui.client.widgets.documenttool.DocumentTool;
 import org.kuali.student.common.ui.client.widgets.field.layout.element.MessageKeyInfo;
 import org.kuali.student.common.ui.client.widgets.field.layout.element.SpanPanel;
 import org.kuali.student.common.ui.client.widgets.field.layout.layouts.FieldLayoutComponent;
@@ -77,11 +80,9 @@ import org.kuali.student.common.ui.client.widgets.list.KSSelectItemWidgetAbstrac
 import org.kuali.student.common.ui.client.widgets.list.KSSelectedList;
 import org.kuali.student.common.ui.client.widgets.list.impl.SimpleListItems;
 import org.kuali.student.common.ui.client.widgets.search.KSPicker;
-import org.kuali.student.core.assembly.data.Data;
-import org.kuali.student.core.assembly.data.Metadata;
-import org.kuali.student.core.assembly.data.QueryPath;
-import org.kuali.student.core.assembly.data.Data.Value;
+import org.kuali.student.core.comments.ui.client.widgets.commenttool.CommentTool;
 import org.kuali.student.core.comments.ui.client.widgets.decisiontool.DecisionPanel;
+import org.kuali.student.core.document.ui.client.widgets.documenttool.DocumentTool;
 import org.kuali.student.core.statement.dto.StatementTypeInfo;
 import org.kuali.student.core.workflow.ui.client.views.CollaboratorSectionView;
 import org.kuali.student.lum.common.client.lo.LOBuilder;
@@ -147,10 +148,10 @@ public class CourseConfigurer extends AbstractCourseConfigurer {
      */
     public void configure(final CourseProposalController layout) {
     	type = "course";
-        state = "draft";
+        state = DtoConstants.STATE_DRAFT;
     	groupName = LUUIConstants.COURSE_GROUP_NAME;
 
-        if (modelDefinition.getMetadata().isCanEdit()) {
+    	if (modelDefinition.getMetadata().isCanEdit()) {
         	addCluStartSection(layout);
             String sections = getLabel(LUUIConstants.COURSE_SECTIONS);
 
@@ -224,7 +225,7 @@ public class CourseConfigurer extends AbstractCourseConfigurer {
             	decisionPanel.show();
             }
         }));
-
+        
     }
     
     protected KSButton getContinueButton(final CourseProposalController layout){
@@ -745,6 +746,7 @@ public class CourseConfigurer extends AbstractCourseConfigurer {
 
     protected SectionView generateLearningObjectivesSection() {
         VerticalSectionView section = initSectionView(CourseSections.LEARNING_OBJECTIVES, LUUIConstants.LEARNING_OBJECTIVES_LABEL_KEY);
+        section.setInstructions(getLabel(LUUIConstants.LEARNING_OBJECTIVES_LABEL_KEY + "-instruct"));
         section.addSection(generateLearningObjectivesNestedSection());
         return section;
     }

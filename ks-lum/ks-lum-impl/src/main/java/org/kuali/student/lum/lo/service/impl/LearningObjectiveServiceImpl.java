@@ -20,31 +20,32 @@ import java.util.List;
 
 import javax.jws.WebService;
 
+import org.kuali.student.common.dictionary.dto.ObjectStructureDefinition;
+import org.kuali.student.common.dictionary.service.DictionaryService;
+import org.kuali.student.common.dto.DtoConstants;
+import org.kuali.student.common.dto.StatusInfo;
+import org.kuali.student.common.exceptions.AlreadyExistsException;
+import org.kuali.student.common.exceptions.DataValidationErrorException;
+import org.kuali.student.common.exceptions.DependentObjectsExistException;
+import org.kuali.student.common.exceptions.DoesNotExistException;
+import org.kuali.student.common.exceptions.InvalidParameterException;
+import org.kuali.student.common.exceptions.MissingParameterException;
+import org.kuali.student.common.exceptions.OperationFailedException;
+import org.kuali.student.common.exceptions.PermissionDeniedException;
+import org.kuali.student.common.exceptions.UnsupportedActionException;
+import org.kuali.student.common.exceptions.VersionMismatchException;
+import org.kuali.student.common.search.dto.SearchCriteriaTypeInfo;
+import org.kuali.student.common.search.dto.SearchParam;
+import org.kuali.student.common.search.dto.SearchRequest;
+import org.kuali.student.common.search.dto.SearchResult;
+import org.kuali.student.common.search.dto.SearchResultCell;
+import org.kuali.student.common.search.dto.SearchResultRow;
+import org.kuali.student.common.search.dto.SearchResultTypeInfo;
+import org.kuali.student.common.search.dto.SearchTypeInfo;
+import org.kuali.student.common.search.service.SearchManager;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.common.validator.Validator;
 import org.kuali.student.common.validator.ValidatorFactory;
-import org.kuali.student.core.dictionary.dto.ObjectStructureDefinition;
-import org.kuali.student.core.dictionary.service.DictionaryService;
-import org.kuali.student.core.dto.StatusInfo;
-import org.kuali.student.core.exceptions.AlreadyExistsException;
-import org.kuali.student.core.exceptions.DataValidationErrorException;
-import org.kuali.student.core.exceptions.DependentObjectsExistException;
-import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.exceptions.InvalidParameterException;
-import org.kuali.student.core.exceptions.MissingParameterException;
-import org.kuali.student.core.exceptions.OperationFailedException;
-import org.kuali.student.core.exceptions.PermissionDeniedException;
-import org.kuali.student.core.exceptions.UnsupportedActionException;
-import org.kuali.student.core.exceptions.VersionMismatchException;
-import org.kuali.student.core.search.dto.SearchCriteriaTypeInfo;
-import org.kuali.student.core.search.dto.SearchParam;
-import org.kuali.student.core.search.dto.SearchRequest;
-import org.kuali.student.core.search.dto.SearchResult;
-import org.kuali.student.core.search.dto.SearchResultCell;
-import org.kuali.student.core.search.dto.SearchResultRow;
-import org.kuali.student.core.search.dto.SearchResultTypeInfo;
-import org.kuali.student.core.search.dto.SearchTypeInfo;
-import org.kuali.student.core.search.service.SearchManager;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.lo.dao.LoDao;
 import org.kuali.student.lum.lo.dto.LoCategoryInfo;
 import org.kuali.student.lum.lo.dto.LoCategoryTypeInfo;
@@ -743,7 +744,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchCriteriaType(java.lang.String)
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchCriteriaType(java.lang.String)
 	 */
     @Override
     public SearchCriteriaTypeInfo getSearchCriteriaType(
@@ -755,7 +756,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchCriteriaTypes()
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchCriteriaTypes()
 	 */
     @Override
     public List<SearchCriteriaTypeInfo> getSearchCriteriaTypes()
@@ -764,7 +765,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchResultType(java.lang.String)
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchResultType(java.lang.String)
 	 */
     @Override
     public SearchResultTypeInfo getSearchResultType(String searchResultTypeKey)
@@ -775,7 +776,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchResultTypes()
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchResultTypes()
 	 */
     @Override
     public List<SearchResultTypeInfo> getSearchResultTypes()
@@ -784,7 +785,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchType(java.lang.String)
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchType(java.lang.String)
 	 */
     @Override
     public SearchTypeInfo getSearchType(String searchTypeKey)
@@ -795,7 +796,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchTypes()
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchTypes()
 	 */
     @Override
     public List<SearchTypeInfo> getSearchTypes()
@@ -804,7 +805,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchTypesByCriteria(java.lang.String)
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchTypesByCriteria(java.lang.String)
 	 */
     @Override
     public List<SearchTypeInfo> getSearchTypesByCriteria(
@@ -816,7 +817,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
     }
 
 	/* (non-Javadoc)
-	 * @see org.kuali.student.core.search.service.SearchService#getSearchTypesByResult(java.lang.String)
+	 * @see org.kuali.student.common.search.service.SearchService#getSearchTypesByResult(java.lang.String)
 	 */
     @Override
     public List<SearchTypeInfo> getSearchTypesByResult(
@@ -850,7 +851,7 @@ public class LearningObjectiveServiceImpl implements LearningObjectiveService {
 		}
 	    
 	    if (null == loLoRelationInfo.getState()) {
-	    	loLoRelationInfo.setState("draft"); // TODO - enum of allowed states? retrieve allowed states from dictionary?
+	    	loLoRelationInfo.setState(DtoConstants.STATE_DRAFT);
 	    }
 	    Lo lo = loDao.fetch(Lo.class, loId);
 	    Lo relatedLo = loDao.fetch(Lo.class, relatedLoId);
