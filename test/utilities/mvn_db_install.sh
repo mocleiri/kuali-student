@@ -38,4 +38,4 @@ else
 fi
 
 echo "Running: mvn clean install -Pks-db,oracle -Dks.impex.url=jdbc:oracle:thin:@${FULL_HOST}:1521:${SID} -Dks.impex.dba.password=${DBA_PASSWORD} -Dks.impex.username=${SCHEMA} -Dks.impex.password=${SCHEMA}"
-#`mvn clean install -Pks-db,oracle -Dks.impex.url=jdbc:oracle:thin:@${FULL_HOST}:1521:${SID} -Dks.impex.dba.password=${DBA_PASSWORD} -Dks.impex.username=${SCHEMA} -Dks.impex.password=${SCHEMA}`
+`mvn clean install -Pks-db,oracle -Dks.impex.url=jdbc:oracle:thin:@${FULL_HOST}:1521:${SID} -Dks.impex.dba.password=${DBA_PASSWORD} -Dks.impex.username=${SCHEMA} -Dks.impex.password=${SCHEMA}`
