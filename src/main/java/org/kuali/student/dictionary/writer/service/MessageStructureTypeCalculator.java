@@ -63,9 +63,18 @@ public class MessageStructureTypeCalculator
 
   if (xmlType.getPrimitive ().equalsIgnoreCase ("Primitive"))
   {
-   if (type.equalsIgnoreCase ("string"))
+      if (type.equalsIgnoreCase ("string"))
    {
     return "String";
+   }
+   if (type.equalsIgnoreCase ("java.lang.String"))
+   {
+    return "String";
+   }
+   if (type.equalsIgnoreCase ("java.util.Date"))
+   {
+    importsAdd (writer, Date.class.getName ());
+    return "Date";
    }
    if (type.equalsIgnoreCase ("date"))
    {
@@ -89,7 +98,15 @@ public class MessageStructureTypeCalculator
    {
     return "Integer";
    }
+   if (type.equalsIgnoreCase ("java.lang.Integer"))
+   {
+    return "Integer";
+   }
    if (type.equalsIgnoreCase ("long"))
+   {
+    return "Long";
+   }
+   if (type.equalsIgnoreCase ("java.lang.Long"))
    {
     return "Long";
    }

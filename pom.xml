@@ -22,7 +22,7 @@
  <artifactId>ks-tools</artifactId>
  <version>1.0.0-SNAPSHOT</version>
  <packaging>jar</packaging>
- <name>KS Tools</name>
+ <name>Norms KS SANDBOX</name>
  <properties>
   <cxf.version>2.2.10</cxf.version>
  </properties>

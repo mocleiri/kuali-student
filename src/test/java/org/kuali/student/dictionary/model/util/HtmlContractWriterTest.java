@@ -67,25 +67,27 @@ public class HtmlContractWriterTest
                              "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
-  private static final String RICE_DIRECTORY =
- "C:/svn/rice/rice-release-1-0-2-1-br/api/src/main/java";
+ private static final String RICE_DIRECTORY =
+                             "C:/svn/rice/rice-release-1-0-2-1-br/api/src/main/java";
  private static final String HTML_DIRECTORY =
                              "target/html";
-
-   private static final String RESOURCES_DIRECTORY =
-//                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
+ private static final String RESOURCES_DIRECTORY =
+                             //                             "C:/svn/student/ks-core/ks-core-api/src/main/java";
                              "src/main/resources";
-  private static final String PESC_CORE_MAIN = RESOURCES_DIRECTORY + "/CoreMain_v1.8.0.xsd";
+ private static final String PESC_CORE_MAIN = RESOURCES_DIRECTORY
+                                              + "/CoreMain_v1.8.0.xsd";
+ private static final String POC_DIRECTORY =
+                             "C:/svn/ks-r2-poc/ks-services/ks-services-api/src/main/java";
 
  private ServiceContractModel getPescModel ()
  {
   String xsdFileName = PESC_CORE_MAIN;
-  ServiceContractModel instance = new ServiceContractModelPescXsdLoader (xsdFileName);
+  ServiceContractModel instance = new ServiceContractModelPescXsdLoader (
+    xsdFileName);
   instance = new ServiceContractModelCache (instance);
   validate (instance);
   return instance;
  }
-
 
  private ServiceContractModel getModel ()
  {
@@ -93,12 +95,13 @@ public class HtmlContractWriterTest
   srcDirs.add (CORE_DIRECTORY);
   srcDirs.add (COMMON_DIRECTORY);
   srcDirs.add (LUM_DIRECTORY);
+  srcDirs.add (POC_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   return new ServiceContractModelCache (instance);
 
  }
 
-  private ServiceContractModel getRiceModel ()
+ private ServiceContractModel getRiceModel ()
  {
   List<String> srcDirs = new ArrayList ();
   srcDirs.add (RICE_DIRECTORY);

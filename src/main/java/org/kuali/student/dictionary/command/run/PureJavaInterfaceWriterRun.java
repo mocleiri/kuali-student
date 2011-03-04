@@ -41,13 +41,15 @@ public class PureJavaInterfaceWriterRun
                              "C:/svn/student/ks-common/ks-common-api/src/main/java";
  private static final String LUM_DIRECTORY =
                              "C:/svn/student/ks-lum/ks-lum-api/src/main/java";
-
+ private static final String POC_DIRECTORY =
+                             "C:/svn/ks-r2-poc/ks-services/ks-services-api/src/main/java";
  private static ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
   srcDirs.add (CORE_DIRECTORY);
   srcDirs.add (COMMON_DIRECTORY);
   srcDirs.add (LUM_DIRECTORY);
+  srcDirs.add (POC_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   return new ServiceContractModelCache (instance);
  }
