@@ -119,7 +119,7 @@
       <properties>
         <ks.hudson.job>1.2-full-build</ks.hudson.job>
         <ks.hudson.svn.suffix>trunk</ks.hudson.svn.suffix>
-        <ks.deploy.version>1.2-M1-SNAPSHOT</ks.deploy.version>
+        <ks.deploy.version>1.2-M2-SNAPSHOT</ks.deploy.version>
       </properties>
     </profile>
     <profile>
