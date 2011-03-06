@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DMEUSER=kuali
-DMEPASS=sr48svzf
+DMEPASS=<dnsmadeeasypassword>
 DMEID=5497004
 IP_PUBLIC=`curl http://169.254.169.254/latest/meta-data/public-ipv4`
 DNS_PUBLIC=ci.ks.kuali.org
