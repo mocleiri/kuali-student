@@ -52,7 +52,13 @@
       </snapshots>
     </repository>
   </repositories>
-
+<!--  <configuration>
+	<commonDirectory>https://test.kuali.org/svn/student/sandbox/ks-r2-poc/trunk/ks-services/ks-services-api/src/main/java</commonDirectory>
+	<coreDirectory>C:/Users/sambit/kuali/code/trunk/ks-common/ks-common-api/src/main/java</coreDirectory>
+	<lumDirectory>C:/Users/sambit/kuali/code/trunk/ks-lum/ks-lum-api/src/main/jav</lumDirectory>
+	<htmlDirectory>target/html</htmlDirectory>
+</configuration>
+	-->
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
