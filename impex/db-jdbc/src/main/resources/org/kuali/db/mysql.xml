@@ -12,26 +12,45 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="jdbcProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location">
-      <value>classpath:org/kuali/db/jdbc.properties</value>
-    </property>
-  </bean>
-
-
-  <bean id="impex.oracle.sql.drop" class="java.lang.String">
+  <bean id="impex.mysql.sql.drop" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
-        BEGIN
-        EXECUTE IMMEDIATE 'DROP USER ${impex.username} CASCADE';
-        EXCEPTION WHEN OTHERS THEN
-        IF SQLCODE !=
-        ${impex.oracle.error.sqlcode.userDoesNotExist} THEN
-        RAISE;
-        END IF;
-        END;
+        DROP DATABASE IF EXISTS ${impex.database}
+        /
+
+        GRANT USAGE ON *.* TO '${impex.username}'@'%' IDENTIFIED BY
+        '${impex.password}'
+        /
+
+        DROP USER ${impex.username}
         /
       </value>
     </constructor-arg>
   </bean>
+
+  <bean id="impex.mysql.sql.create" class="java.lang.String">
+    <constructor-arg type="java.lang.String">
+      <value>
+        CREATE DATABASE IF NOT EXISTS ${impex.database}
+        DEFAULT CHARACTER SET '${impex.mysql.character.set}'
+        DEFAULT
+        COLLATE '${impex.mysql.collate}';
+        /
+      </value>
+    </constructor-arg>
+  </bean>
+
+  <bean id="impex.mysql.sql.grants" class="java.lang.String">
+    <constructor-arg type="java.lang.String">
+      <value>
+        GRANT ALL ON ${impex.database}.*
+        TO '${impex.username}'@'%'
+        IDENTIFIED BY
+        '${impex.password}'
+        WITH GRANT OPTION
+        /
+      </value>
+    </constructor-arg>
+  </bean>
+
 </beans>
