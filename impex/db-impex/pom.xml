@@ -36,16 +36,6 @@
       <version>${impex.spring.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.kuali.rice</groupId>
-      <artifactId>rice-api</artifactId>
-      <version>1.0.3.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.kuali.rice</groupId>
-      <artifactId>rice-impl</artifactId>
-      <version>1.0.3.1</version>
-    </dependency>
-    <dependency>
       <groupId>org.kuali.student.common</groupId>
       <artifactId>ks-common-util</artifactId>
       <version>1.1-SNAPSHOT</version>
