@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.writer.search;
+package org.kuali.student.contract.writer.search;
 
-import org.kuali.student.dictionary.model.SearchCriteriaParameter;
-import org.kuali.student.dictionary.model.SearchCriteria;
+import org.kuali.student.contract.model.SearchCriteria;
+import org.kuali.student.contract.model.SearchCriteriaParameter;
+import org.kuali.student.contract.writer.XmlWriter;
+
 import java.io.PrintStream;
-import org.kuali.student.dictionary.writer.XmlWriter;
-import org.kuali.student.dictionary.writer.XmlWriter;
 
 /**
  * Writes out a constraint in XML format.

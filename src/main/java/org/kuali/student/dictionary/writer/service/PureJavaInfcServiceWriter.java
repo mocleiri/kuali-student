@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.writer.service;
+package org.kuali.student.contract.writer.service;
 
 import java.util.List;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.ServiceMethod;
-import org.kuali.student.dictionary.model.ServiceMethodError;
-import org.kuali.student.dictionary.model.ServiceMethodParameter;
-import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.model.util.ModelFinder;
-import org.kuali.student.dictionary.writer.JavaClassWriter;
+
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethodError;
+import org.kuali.student.contract.model.ServiceMethodParameter;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.model.util.ModelFinder;
+import org.kuali.student.contract.writer.JavaClassWriter;
 
 /**
  *

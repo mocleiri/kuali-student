@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.writer.service;
+package org.kuali.student.contract.writer.service;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,14 +21,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.kuali.student.dictionary.model.Service;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.ServiceMethod;
-import org.kuali.student.dictionary.model.ServiceMethodError;
-import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.model.util.ServicesFilter;
-import org.kuali.student.dictionary.model.validation.DictionaryValidationException;
-import org.kuali.student.dictionary.model.validation.ServiceContractModelValidator;
+
+import org.kuali.student.contract.model.Service;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethodError;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.model.util.ServicesFilter;
+import org.kuali.student.contract.model.validation.DictionaryValidationException;
+import org.kuali.student.contract.model.validation.ServiceContractModelValidator;
 
 /**
  *

@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.writer.search;
+package org.kuali.student.contract.writer.search;
 
-import org.kuali.student.dictionary.model.validation.DictionaryValidationException;
-import org.kuali.student.dictionary.model.SearchResult;
-import org.kuali.student.dictionary.model.SearchImplementation;
-import org.kuali.student.dictionary.model.validation.SearchModelValidator;
-import org.kuali.student.dictionary.model.SearchCriteriaParameter;
-import org.kuali.student.dictionary.model.SearchModel;
-import org.kuali.student.dictionary.model.SearchCriteria;
-import org.kuali.student.dictionary.model.SearchType;
-import org.kuali.student.dictionary.model.SearchResultColumn;
+import org.kuali.student.contract.model.SearchCriteria;
+import org.kuali.student.contract.model.SearchCriteriaParameter;
+import org.kuali.student.contract.model.SearchImplementation;
+import org.kuali.student.contract.model.SearchModel;
+import org.kuali.student.contract.model.SearchResult;
+import org.kuali.student.contract.model.SearchResultColumn;
+import org.kuali.student.contract.model.SearchType;
+import org.kuali.student.contract.model.validation.DictionaryValidationException;
+import org.kuali.student.contract.model.validation.SearchModelValidator;
+import org.kuali.student.contract.writer.XmlWriter;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +32,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.kuali.student.dictionary.writer.XmlWriter;
 
 /**
  * This writes out the entire search xml file

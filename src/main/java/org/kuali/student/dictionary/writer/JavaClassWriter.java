@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.writer;
+package org.kuali.student.contract.writer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,7 +24,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.kuali.student.dictionary.DictionaryExecutionException;
+
+import org.kuali.student.contract.exception.DictionaryExecutionException;
 
 /**
  *

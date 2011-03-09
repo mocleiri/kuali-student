@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.writer.service;
+package org.kuali.student.contract.writer.service;
 
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.ServiceMethodError;
-import org.kuali.student.dictionary.writer.JavaClassWriter;
-import org.kuali.student.dictionary.writer.JavaEnumConstantCalculator;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethodError;
+import org.kuali.student.contract.writer.JavaClassWriter;
+import org.kuali.student.contract.writer.JavaEnumConstantCalculator;
 
 /**
  *
