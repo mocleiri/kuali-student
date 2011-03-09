@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.validation;
+package org.kuali.student.contract.model.validation;
 
-import org.kuali.student.dictionary.model.ServiceMethod;
+import org.kuali.student.contract.model.DictionaryModel;
+import org.kuali.student.contract.model.Service;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethodError;
+import org.kuali.student.contract.model.ServiceMethodParameter;
+import org.kuali.student.contract.model.util.ModelFinder;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import org.kuali.student.dictionary.model.DictionaryModel;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.Service;
-import org.kuali.student.dictionary.model.ServiceMethodError;
-import org.kuali.student.dictionary.model.ServiceMethodParameter;
-import org.kuali.student.dictionary.model.util.ModelFinder;
 
 /**
  * This validates a single serviceMethodinoary entry

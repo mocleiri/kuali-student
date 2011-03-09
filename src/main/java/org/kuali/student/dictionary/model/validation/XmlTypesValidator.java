@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.validation;
+package org.kuali.student.contract.model.validation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.model.util.ModelFinder;
+
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.model.util.ModelFinder;
 
 /**
  *

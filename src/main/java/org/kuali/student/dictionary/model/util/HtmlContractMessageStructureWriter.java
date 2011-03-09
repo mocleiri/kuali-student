@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.util;
+package org.kuali.student.contract.model.util;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.kuali.student.dictionary.model.MessageStructure;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.ServiceMethod;
-import org.kuali.student.dictionary.model.ServiceMethodParameter;
-import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.writer.HtmlWriter;
+
+import org.kuali.student.contract.model.MessageStructure;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethodParameter;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.writer.HtmlWriter;
 
 /**
  *

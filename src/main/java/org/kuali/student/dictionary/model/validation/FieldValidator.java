@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.validation;
+package org.kuali.student.contract.model.validation;
 
-import org.kuali.student.dictionary.model.util.ModelFinder;
-import org.kuali.student.dictionary.model.DictionaryModel;
-import org.kuali.student.dictionary.model.Constraint;
-import org.kuali.student.dictionary.model.Field;
+import org.kuali.student.contract.model.Constraint;
+import org.kuali.student.contract.model.DictionaryModel;
+import org.kuali.student.contract.model.Field;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.model.util.ModelFinder;
+
 import java.util.Collection;
-import org.kuali.student.dictionary.model.XmlType;
 
 /**
  * This validates a single field definition

@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.util;
+package org.kuali.student.contract.model.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.kuali.student.dictionary.DictionaryExecutionException;
+
+import org.kuali.student.contract.exception.DictionaryExecutionException;
 
 /**
  *

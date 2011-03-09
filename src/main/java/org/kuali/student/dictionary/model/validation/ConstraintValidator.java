@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.validation;
+package org.kuali.student.contract.model.validation;
 
-import org.kuali.student.dictionary.model.Constraint;
+import org.kuali.student.contract.model.Constraint;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

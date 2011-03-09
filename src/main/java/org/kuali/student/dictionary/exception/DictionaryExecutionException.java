@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 The Kuali Foundation
+ * Copyright 2009 The Kuali Foundation
  *
  * Licensed under the Educational Community License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,35 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.contract.model.util;
-
-import java.util.List;
-
-import org.kuali.student.contract.model.Service;
+package org.kuali.student.contract.exception;
 
 /**
- *
+ * Exception thrown when encounter an unexpected exeception when generating the dictionary
  * @author nwright
  */
-public class ServicesFilterChained implements ServicesFilter
+public class DictionaryExecutionException extends DictionaryException
 {
 
- private List <ServicesFilter> filters;
-
- public ServicesFilterChained (List<ServicesFilter> filters)
+ public DictionaryExecutionException (Throwable cause)
  {
-  this.filters = filters;
+  super (cause);
  }
 
-
- @Override
- public List<Service> filter (List<Service> services)
+ public DictionaryExecutionException (String message, Throwable cause)
  {
-  for (ServicesFilter filter : filters)
-  {
-  services = filter.filter (services);
-  }
-  return services;
+  super (message, cause);
+ }
+
+ public DictionaryExecutionException (String message)
+ {
+  super (message);
+ }
+
+ public DictionaryExecutionException ()
+ {
  }
 
 }

@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.util;
+package org.kuali.student.contract.model.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
-import org.kuali.student.dictionary.model.MessageStructure;
-import org.kuali.student.dictionary.model.Service;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.writer.HtmlWriter;
+
+import org.kuali.student.contract.model.MessageStructure;
+import org.kuali.student.contract.model.Service;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.writer.HtmlWriter;
 
 /**
  *

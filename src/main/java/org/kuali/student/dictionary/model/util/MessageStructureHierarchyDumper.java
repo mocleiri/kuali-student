@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.kuali.student.dictionary.model.util;
+package org.kuali.student.contract.model.util;
 
 import java.io.PrintStream;
 import java.util.Stack;
-import org.kuali.student.dictionary.model.MessageStructure;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.XmlType;
+
+import org.kuali.student.contract.model.MessageStructure;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.XmlType;
 
 /**
  *

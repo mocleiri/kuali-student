@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model;
+package org.kuali.student.contract.model;
 
 /**
  * This models a constraint either an in-line one or one defined as part of the bank of constraints.

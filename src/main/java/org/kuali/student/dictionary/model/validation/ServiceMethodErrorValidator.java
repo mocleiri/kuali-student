@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.validation;
+package org.kuali.student.contract.model.validation;
 
-import org.kuali.student.dictionary.model.ServiceMethodError;
-import org.kuali.student.dictionary.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethodError;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

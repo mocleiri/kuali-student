@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.impl;
+package org.kuali.student.contract.model.impl;
 
 import java.util.List;
-import org.kuali.student.dictionary.model.MessageStructure;
-import org.kuali.student.dictionary.model.Service;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.ServiceMethod;
-import org.kuali.student.dictionary.model.XmlType;
+
+import org.kuali.student.contract.model.MessageStructure;
+import org.kuali.student.contract.model.Service;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.XmlType;
 
 /**
  * This reads the supplied spreadsheet but then caches it so it doesn't have to
