@@ -16,6 +16,11 @@
   <properties>
     <kuali.impex.version>1.1.0-SNAPSHOT</kuali.impex.version>
   </properties>
+  <scm>
+    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/maven-impex-plugin</connection>
+    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/maven-impex-plugin</developerConnection>
+    <url>http://test.kuali.org/svn/student/deploymentlab/trunk/maven-impex-plugin</url>
+  </scm>
   <dependencies>
     <dependency>
       <groupId>org.kuali.maven.mojo</groupId>
