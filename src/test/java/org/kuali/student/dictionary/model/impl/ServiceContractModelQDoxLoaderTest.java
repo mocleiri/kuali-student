@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.student.dictionary.model.impl;
+package org.kuali.student.contract.model.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,16 +29,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.kuali.student.dictionary.model.MessageStructure;
-import org.kuali.student.dictionary.model.Service;
-import org.kuali.student.dictionary.model.ServiceContractModel;
-import org.kuali.student.dictionary.model.ServiceMethod;
-import org.kuali.student.dictionary.model.ServiceMethodParameter;
-import org.kuali.student.dictionary.model.XmlType;
-import org.kuali.student.dictionary.model.util.HtmlContractServiceWriter;
-import org.kuali.student.dictionary.model.util.MessageStructureHierarchyDumper;
-import org.kuali.student.dictionary.model.util.ModelFinder;
-import org.kuali.student.dictionary.model.validation.ServiceContractModelValidator;
+
+import org.kuali.student.contract.model.MessageStructure;
+import org.kuali.student.contract.model.Service;
+import org.kuali.student.contract.model.ServiceContractModel;
+import org.kuali.student.contract.model.ServiceMethod;
+import org.kuali.student.contract.model.ServiceMethodParameter;
+import org.kuali.student.contract.model.XmlType;
+import org.kuali.student.contract.model.impl.ServiceContractModelCache;
+import org.kuali.student.contract.model.impl.ServiceContractModelQDoxLoader;
+import org.kuali.student.contract.model.util.HtmlContractServiceWriter;
+import org.kuali.student.contract.model.util.MessageStructureHierarchyDumper;
+import org.kuali.student.contract.model.util.ModelFinder;
+import org.kuali.student.contract.model.validation.ServiceContractModelValidator;
 
 /**
  *
