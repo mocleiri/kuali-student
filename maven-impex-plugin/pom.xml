@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kuali.db.impex</groupId>
-    <artifactId>impex</artifactId>
-    <version>1.0.21-SNAPSHOT</version>
+    <groupId>org.kuali</groupId>
+    <artifactId>kuali</artifactId>
+    <version>75</version>
   </parent>
+  <groupId>org.kuali.maven.plugins</groupId>
   <artifactId>maven-impex-plugin</artifactId>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Maven Impex Plugin</name>
   <description>Maven plugin for converting database agnostic XML files into platform specific SQL files and for examining proprietary databases via JDBC to generate database agnostic XML files</description>
+  <properties>
+    <kuali.impex.version>1.1.0-SNAPSHOT</kuali.impex.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.kuali.maven.mojo</groupId>
@@ -19,17 +25,17 @@
     <dependency>
       <groupId>org.kuali.db.impex</groupId>
       <artifactId>torque-generator</artifactId>
-      <version>${project.version}</version>
+      <version>${kuali.impex.version}</version>
     </dependency>
     <dependency>
       <groupId>org.kuali.db.impex</groupId>
       <artifactId>db-jdbc</artifactId>
-      <version>${project.version}</version>
+      <version>${kuali.impex.version}</version>
     </dependency>
     <dependency>
       <groupId>org.kuali.db.impex</groupId>
       <artifactId>torque-templates</artifactId>
-      <version>${project.version}</version>
+      <version>${kuali.impex.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -93,7 +99,6 @@
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
-
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
@@ -104,7 +109,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>${impex.spring.version}</version>
+      <version>3.0.5.RELEASE</version>
     </dependency>
   </dependencies>
 </project>
