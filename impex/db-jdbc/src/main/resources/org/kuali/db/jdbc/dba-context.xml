@@ -53,7 +53,7 @@
     </property>
   </bean>
 
-  <bean id="jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute" p:skipExecutions="${jdbc.dba.sql.execute.skip}">
+  <bean id="jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute" p:skipExecution="${jdbc.dba.sql.execute.skip}">
     <property name="connectionHandler">
       <ref bean="jdbc.dba.connectionHandler" />
     </property>

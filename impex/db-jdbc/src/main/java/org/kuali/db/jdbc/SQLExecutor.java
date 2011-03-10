@@ -48,7 +48,7 @@ public class SQLExecutor {
 	 */
 	public static final String ON_ERROR_CONTINUE = "continue";
 
-	boolean skipExecutions;
+	boolean skipExecution;
 	Vector<Transaction> transactions;
 	boolean keepFormat = true;
 	String delimiterType = "row";
@@ -168,7 +168,7 @@ public class SQLExecutor {
 	}
 
 	public void execute() throws SQLException {
-		if (isSkipExecutions()) {
+		if (isSkipExecution()) {
 			log.info("Skipping execution");
 			return;
 		}
@@ -553,12 +553,12 @@ public class SQLExecutor {
 		this.transactions = transactions;
 	}
 
-	public boolean isSkipExecutions() {
-		return skipExecutions;
+	public boolean isSkipExecution() {
+		return skipExecution;
 	}
 
-	public void setSkipExecutions(boolean skipExecutions) {
-		this.skipExecutions = skipExecutions;
+	public void setSkipExecution(boolean skipExecutions) {
+		this.skipExecution = skipExecutions;
 	}
 
 	public ConnectionHandler getConnectionHandler() {
