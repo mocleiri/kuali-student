@@ -13,9 +13,8 @@
 
 
   <!-- 
-  Avoid "magic" numbers in our config.  Give a name to the systemPropertiesMode we are using 
-  Check system properties first, before trying the specified properties. 
-  This allows system properties to override any other property source.
+  Avoid "magic" numbers in our config by giving a name to the systemPropertiesMode being used 
+  SYSTEM_PROPERTIES_MODE_OVERRIDE means that system properties override any other property source.
   See PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE for further details  
   -->
   <bean id="SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
