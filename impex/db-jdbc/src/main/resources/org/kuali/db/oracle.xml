@@ -23,8 +23,8 @@
     <constructor-arg type="java.lang.String" value="${jdbc.oracle.dba.password}" />
   </bean>
 
-  <bean id="jdbc.url" class="java.lang.String">
-    <constructor-arg type="java.lang.String" value="${jdbc.oracle.url}" />
+  <bean id="jdbc.dba.url" class="java.lang.String">
+    <constructor-arg type="java.lang.String" value="${jdbc.oracle.dba.url}" />
   </bean>
 
   <!-- Drop the user and ignore the error if the user does not exist -->
