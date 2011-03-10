@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-  <comment>Oracle Configuration</comment>
+  <comment>Oracle Properties</comment>
 
   <entry key="jdbc.oracle.driver">oracle.jdbc.driver.OracleDriver</entry>
   <entry key="jdbc.oracle.dba.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
