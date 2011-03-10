@@ -14,6 +14,7 @@
                            http://www.springframework.org/schema/util 
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
+<!-- 
   <bean id="config" class="org.kuali.rice.student.core.config.spring.RiceConfigFactoryBean">
     <property name="configLocations">
       <list>
@@ -22,7 +23,6 @@
     </property>
   </bean>
 
-<!-- 
   <bean id="propertyPlaceholder" class="org.kuali.rice.student.core.config.spring.RiceConfigPropertyPlaceholderConfigurer" depends-on="config"/>
 
   <bean id="impexCredentials" class="org.kuali.db.Credentials" p:username="${impex.username}" p:password="${impex.password}"/>
