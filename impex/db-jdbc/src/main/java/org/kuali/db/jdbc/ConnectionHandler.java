@@ -94,6 +94,9 @@ public class ConnectionHandler {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public Connection getConnection() throws SQLException {
 		validateConfiguration();
 		Properties info = getInfo();

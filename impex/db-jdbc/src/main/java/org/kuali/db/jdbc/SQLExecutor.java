@@ -195,7 +195,7 @@ public class SQLExecutor {
 			throw new SQLException(e);
 		} catch (SQLException e) {
 			if (!autocommit && ON_ERROR_ABORT.equalsIgnoreCase(getOnError())) {
-				rollbackQuietly(conn);
+				nullSafeRollback(conn);
 			}
 			throw e;
 		} finally {

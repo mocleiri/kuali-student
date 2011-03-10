@@ -53,15 +53,11 @@ public class JDBCUtils {
 		}
 	}
 
-	public static void rollbackQuietly(final Connection conn) {
+	public static void nullSafeRollback(final Connection conn) throws SQLException {
 		if (conn == null) {
 			return;
 		}
-		try {
-			conn.rollback();
-		} catch (SQLException e) {
-			// ignore
-		}
+		conn.rollback();
 	}
 
 }
