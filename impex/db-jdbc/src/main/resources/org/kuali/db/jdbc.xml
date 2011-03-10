@@ -41,7 +41,7 @@
     <ref bean="jdbc.transaction.grants" />
   </util:list>
 
-  <bean id="jdbc.dba.credentials">
+  <bean id="jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials">
     <property name="username">
       <ref bean="jdbc.dba.username" />
     </property>
@@ -50,7 +50,7 @@
     </property>
   </bean>
 
-  <bean id="jdbc.dba.connectionHandler">
+  <bean id="jdbc.dba.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler">
     <property name="credentials">
       <ref bean="jdbc.dba.credentials" />
     </property>
