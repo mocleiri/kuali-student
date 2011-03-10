@@ -15,7 +15,8 @@
   <!-- 
   Avoid "magic" numbers in our config.  Give a name to the systemPropertiesMode we are using 
   Check system properties first, before trying the specified properties. 
-  This allows system properties to override any other property source.  
+  This allows system properties to override any other property source.
+  See PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE for further details  
   -->
   <bean id="SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
     <constructor-arg type="java.lang.String" value="2" />
