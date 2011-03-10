@@ -34,11 +34,11 @@
   <bean id="jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.sql.drop}" />
   <bean id="jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.sql.initialize}" />
 
-  <util:list id="jdbc.init.transactions" list-class="java.util.Vector">
+  <util:list id="jdbc.dba.transactions" list-class="java.util.Vector">
     <ref bean="jdbc.transaction.drop" />
     <ref bean="jdbc.transaction.initialize" />
   </util:list>
- 
+
   <bean id="jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${jdbc.dba.username}"
     p:password="${jdbc.dba.password}" />
 
@@ -49,9 +49,12 @@
     </property>
   </bean>
 
-  <bean id="jdbc.init.sql.executor" class="org.kuali.db.jdbc.SQLExecutor">
+  <bean id="jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute" p:skipExecutions="${jdbc.dba.sql.execute}">
+    <property name="connectionHandler">
+      <ref bean="jdbc.dba.connectionHandler" />
+    </property>
     <property name="transactions">
-      <ref bean="jdbc.init.transactions" />
+      <ref bean="jdbc.dba.transactions" />
     </property>
   </bean>
 </beans>

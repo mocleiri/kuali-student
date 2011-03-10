@@ -30,21 +30,25 @@ public class SQLExecutor {
 	private static final Log log = LogFactory.getLog(SQLExecutor.class);
 
 	/**
-	 * Call {@link #setOnError(String)} with this value to abort SQL command execution if an error is found.
+	 * Call {@link #setOnError(String)} with this value to abort SQL command
+	 * execution if an error is found.
 	 */
 	public static final String ON_ERROR_ABORT = "abort";
 
 	/**
-	 * Call {@link #setOnError(String)} with this value to continue SQL command execution until all commands have been
-	 * attempted, then abort the build if an SQL error occurred in any of the commands.
+	 * Call {@link #setOnError(String)} with this value to continue SQL command
+	 * execution until all commands have been attempted, then abort the build if
+	 * an SQL error occurred in any of the commands.
 	 */
 	public static final String ON_ERROR_ABORT_AFTER = "abortAfter";
 
 	/**
-	 * Call {@link #setOnError(String)} with this value to continue SQL command execution if an error is found.
+	 * Call {@link #setOnError(String)} with this value to continue SQL command
+	 * execution if an error is found.
 	 */
 	public static final String ON_ERROR_CONTINUE = "continue";
 
+	boolean skipExecutions;
 	Vector<Transaction> transactions;
 	boolean keepFormat = true;
 	String delimiterType = "row";
@@ -55,7 +59,7 @@ public class SQLExecutor {
 	String outputDelimiter = ",";
 	int totalStatements;
 	int successfulStatements;
-	Connection conn;
+	ConnectionHandler connectionHandler;
 	Statement statement;
 	boolean autocommit = false;
 	boolean escapeProcessing = true;
@@ -114,7 +118,8 @@ public class SQLExecutor {
 		}
 	}
 
-	protected void fireAfterProcessingSQLResults(int totalStatements, int successfulStatements, int updateCountTotal, String sql) {
+	protected void fireAfterProcessingSQLResults(int totalStatements, int successfulStatements, int updateCountTotal,
+			String sql) {
 		DatabaseEvent event = getExecuteSQLEvent(totalStatements, sql);
 		event.setSuccessfulStatements(successfulStatements);
 		event.setUpdateCountTotal(updateCountTotal);
@@ -163,7 +168,13 @@ public class SQLExecutor {
 	}
 
 	public void execute() throws SQLException {
+		if (isSkipExecutions()) {
+			log.info("Skipping execution");
+			return;
+		}
+		Connection conn = null;
 		try {
+			conn = connectionHandler.getConnection();
 			statement = conn.createStatement();
 			statement.setEscapeProcessing(escapeProcessing);
 
@@ -172,7 +183,7 @@ public class SQLExecutor {
 				Transaction t = (Transaction) e.nextElement();
 
 				fireBeginTransaction(t);
-				runTransaction(t, System.out);
+				runTransaction(conn, t, System.out);
 				fireFinishTransaction(t);
 
 				if (!autocommit) {
@@ -198,11 +209,11 @@ public class SQLExecutor {
 		}
 	}
 
-	protected void runTransaction(Transaction t, PrintStream out) throws IOException, SQLException {
+	protected void runTransaction(Connection conn, Transaction t, PrintStream out) throws IOException, SQLException {
 		Reader in = null;
 		try {
 			in = t.getReader();
-			runStatements(in, out);
+			runStatements(conn, in, out);
 		} finally {
 			closeQuietly(in);
 		}
@@ -216,7 +227,7 @@ public class SQLExecutor {
 	 * @param out
 	 *            the outputstream
 	 */
-	protected void execSQL(String sql, PrintStream out) throws SQLException {
+	protected void execSQL(Connection conn, String sql, PrintStream out) throws SQLException {
 		// Check and ignore empty statements
 		if ("".equals(sql.trim())) {
 			return;
@@ -284,7 +295,7 @@ public class SQLExecutor {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	protected void runStatements(Reader reader, PrintStream out) throws SQLException, IOException {
+	protected void runStatements(Connection conn, Reader reader, PrintStream out) throws SQLException, IOException {
 		String line;
 
 		StringBuffer sql = new StringBuffer();
@@ -327,15 +338,16 @@ public class SQLExecutor {
 				}
 			}
 
-			if ((delimiterType.equals(DelimiterType.NORMAL) && SqlSplitter.containsSqlEnd(line, delimiter) > 0) || (delimiterType.equals(DelimiterType.ROW) && line.trim().equals(delimiter))) {
-				execSQL(sql.substring(0, sql.length() - delimiter.length()), out);
+			if ((delimiterType.equals(DelimiterType.NORMAL) && SqlSplitter.containsSqlEnd(line, delimiter) > 0)
+					|| (delimiterType.equals(DelimiterType.ROW) && line.trim().equals(delimiter))) {
+				execSQL(conn, sql.substring(0, sql.length() - delimiter.length()), out);
 				sql.setLength(0); // clean buffer
 			}
 		}
 
 		// Catch any statements not followed by ;
 		if (!sql.toString().equals("")) {
-			execSQL(sql.toString(), out);
+			execSQL(conn, sql.toString(), out);
 		}
 	}
 
@@ -477,14 +489,6 @@ public class SQLExecutor {
 		this.successfulStatements = successfulStatements;
 	}
 
-	public Connection getConn() {
-		return conn;
-	}
-
-	public void setConn(Connection conn) {
-		this.conn = conn;
-	}
-
 	public Statement getStatement() {
 		return statement;
 	}
@@ -547,5 +551,21 @@ public class SQLExecutor {
 
 	public void setTransactions(Vector<Transaction> transactions) {
 		this.transactions = transactions;
+	}
+
+	public boolean isSkipExecutions() {
+		return skipExecutions;
+	}
+
+	public void setSkipExecutions(boolean skipExecutions) {
+		this.skipExecutions = skipExecutions;
+	}
+
+	public ConnectionHandler getConnectionHandler() {
+		return connectionHandler;
+	}
+
+	public void setConnectionHandler(ConnectionHandler connectionHandler) {
+		this.connectionHandler = connectionHandler;
 	}
 }

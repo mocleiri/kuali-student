@@ -9,4 +9,6 @@
   <entry key="jdbc.dba.password">${jdbc.${jdbc.db.vendor}.dba.password}</entry>
   <entry key="jdbc.sql.drop">${jdbc.${jdbc.db.vendor}.sql.drop}</entry>
   <entry key="jdbc.sql.initialize">${jdbc.${jdbc.db.vendor}.sql.initialize}</entry>
+  <!-- They will have to explicitly override this property to "true" in order to execute the drop/create SQL -->
+  <entry key="jdbc.dba.sql.execute">false</entry>
 </properties>

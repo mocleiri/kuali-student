@@ -80,10 +80,10 @@ public class ConnectionHandler {
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
 		if (!enableAnonymousUsername && StringUtils.isBlank(username)) {
-			throw new SQLException("\n\nNo username was supplied.\nYou can supply a username in the plugin configuration or provide it as a system property.\n\nFor example:\n-Dusername=myuser\n\n.");
+			throw new SQLException("\n\nNo username was supplied and enableAnonymousUsername is false");
 		}
 		if (!enableAnonymousPassword && StringUtils.isBlank(password)) {
-			throw new SQLException("\n\nNo password was supplied.\nYou can supply a password in the plugin configuration or provide it as a system property.\n\nFor example:\n-Dpassword=mypassword\n\n.");
+			throw new SQLException("\n\nNo password was supplied and enableAnonymousPassword is false\n\n.");
 		}
 		// Convert null to the empty string if needed
 		if (StringUtils.isBlank(username)) {
@@ -111,7 +111,8 @@ public class ConnectionHandler {
 			conn.setAutoCommit(autocommit);
 		} catch (SQLException e) {
 			if (skipOnConnectionError) {
-				// Error getting the connection but they have asked us not to throw an exception
+				// Error getting the connection but they have asked us not to
+				// throw an exception
 				// Set our flag and return
 				connectionError = true;
 				return null;
