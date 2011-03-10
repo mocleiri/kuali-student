@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>MySQL Properties</comment>
+
+  <!-- MySQL Specific Properties -->
+  <entry key="jdbc.mysql.character.set">utf8</entry>
+  <entry key="jdbc.mysql.collate">utf8_bin</entry>
+  <entry key="jdbc.mysql.sql.drop"><![CDATA[
+    DROP DATABASE IF EXISTS ${jdbc.database}
+    /
+
+    GRANT USAGE ON *.* TO '${jdbc.username}'@'%' IDENTIFIED BY '${jdbc.password}'
+    /
+
+    DROP USER ${jdbc.username}
+    /
+]]>
+  </entry>
+  <entry key="jdbc.mysql.sql.create"><![CDATA[
+    CREATE DATABASE IF NOT EXISTS ${jdbc.database}
+    DEFAULT CHARACTER SET '${jdbc.mysql.character.set}'
+    DEFAULT COLLATE '${jdbc.mysql.collate}';
+    /
+]]>
+  </entry>
+  <entry key="jdbc.mysql.sql.grants"><![CDATA[
+    GRANT ALL ON ${jdbc.database}.*
+    TO '${jdbc.username}'@'%'
+    IDENTIFIED BY '${jdbc.password}'
+    WITH GRANT OPTION
+    /
+]]>
+  </entry>
+  <entry key="jdbc.mysql.sql.initialize">
+    ${jdbc.mysql.sql.create}
+    ${jdbc.mysql.sql.grants}
+  </entry>
+
+</properties>

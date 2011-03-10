@@ -8,9 +8,7 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/test/resources/impex-context.xml</config>
-		<config>src/main/resources/org/kuali/db/jdbc.xml</config>
-		<config>src/main/resources/org/kuali/db/mysql.xml</config>
-		<config>src/main/resources/org/kuali/db/oracle.xml</config>
+		<config>src/main/resources/org/kuali/db/jdbc-context.xml</config>
 	</configs>
 	<configSets>
 		<configSet>
@@ -18,9 +16,7 @@
 			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
 			<incomplete>false</incomplete>
 			<configs>
-				<config>src/main/resources/org/kuali/db/jdbc.xml</config>
-				<config>src/main/resources/org/kuali/db/mysql.xml</config>
-				<config>src/main/resources/org/kuali/db/oracle.xml</config>
+				<config>src/main/resources/org/kuali/db/jdbc-context.xml</config>
 			</configs>
 		</configSet>
 		<configSet>

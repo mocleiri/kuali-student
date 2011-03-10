@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>JDBC Properties</comment>
+  <entry key="jdbc.db.vendor">oracle</entry>
+  <entry key="jdbc.driver">${jdbc.${jdbc.db.vendor}.driver}</entry>
+  <entry key="jdbc.dba.url">${jdbc.${jdbc.db.vendor}.dba.url}</entry>
+  <entry key="jdbc.dba.username">${jdbc.${jdbc.db.vendor}.dba.username}</entry>
+  <entry key="jdbc.dba.password">${jdbc.${jdbc.db.vendor}.dba.password}</entry>
+  <entry key="jdbc.sql.drop">${jdbc.${jdbc.db.vendor}.sql.drop}</entry>
+  <entry key="jdbc.sql.initialize">${jdbc.${jdbc.db.vendor}.sql.initialize}</entry>
+</properties>

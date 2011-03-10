@@ -12,53 +12,40 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="jdbcPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-    p:location="classpath:org/kuali/db/jdbc.properties" />
+  <!-- Avoid "magic" numbers in our config.  Give a name to the systemPropertiesMode we are using -->
+  <bean id="jdbc.system.properties.mode.override" class="java.lang.Integer">
+    <constructor-arg type="java.lang.String" value="2" />
+  </bean>
 
-  <import resource="classpath:org/kuali/db/${jdbc.db.vendor}.xml" />
-
-  <bean id="jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction">
-    <property name="sqlCommand">
-      <ref bean="jdbc.sql.drop" />
+  <!-- Read properties in, but defer to System properties over properties in our config -->
+  <bean id="jdbc.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:org/kuali/db/mysql-properties.xml</value>
+        <value>classpath:org/kuali/db/oracle-properties.xml</value>
+        <value>classpath:org/kuali/db/jdbc-properties.xml</value>
+      </list>
+    </property>
+    <property name="systemPropertiesMode">
+      <ref bean="jdbc.system.properties.mode.override" />
     </property>
   </bean>
 
-  <bean id="jdbc.transaction.create" class="org.kuali.db.jdbc.Transaction">
-    <property name="sqlCommand">
-      <ref bean="jdbc.sql.create" />
-    </property>
-  </bean>
-
-  <bean id="jdbc.transaction.grants" class="org.kuali.db.jdbc.Transaction">
-    <property name="sqlCommand">
-      <ref bean="jdbc.sql.grants" />
-    </property>
-  </bean>
+  <bean id="jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.sql.drop}" />
+  <bean id="jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.sql.initialize}" />
 
   <util:list id="jdbc.init.transactions" list-class="java.util.Vector">
     <ref bean="jdbc.transaction.drop" />
-    <ref bean="jdbc.transaction.create" />
-    <ref bean="jdbc.transaction.grants" />
+    <ref bean="jdbc.transaction.initialize" />
   </util:list>
+ 
+  <bean id="jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${jdbc.dba.username}"
+    p:password="${jdbc.dba.password}" />
 
-  <bean id="jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials">
-    <property name="username">
-      <ref bean="jdbc.dba.username" />
-    </property>
-    <property name="password">
-      <ref bean="jdbc.dba.password" />
-    </property>
-  </bean>
-
-  <bean id="jdbc.dba.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler">
+  <bean id="jdbc.dba.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler" p:driver="${jdbc.driver}"
+    p:url="${jdbc.dba.url}">
     <property name="credentials">
       <ref bean="jdbc.dba.credentials" />
-    </property>
-    <property name="driver">
-      <ref bean="jdbc.driver" />
-    </property>
-    <property name="url">
-      <ref bean="jdbc.dba.url" />
     </property>
   </bean>
 
@@ -67,5 +54,4 @@
       <ref bean="jdbc.init.transactions" />
     </property>
   </bean>
-
 </beans>
