@@ -66,9 +66,9 @@ public class SQLExecutor {
 	boolean skipOnConnectionError;
 	boolean connectionError;
 	boolean append = false;
-	List<DatabaseListener> listeners = new ArrayList<DatabaseListener>();
+	List<SQLListener> listeners = new ArrayList<SQLListener>();
 
-	public void addListener(DatabaseListener listener) {
+	public void addListener(SQLListener listener) {
 		listeners.add(listener);
 	}
 
@@ -77,53 +77,53 @@ public class SQLExecutor {
 	}
 
 	protected void fireMessageLogged(String message, MessagePriority priority) {
-		DatabaseEvent event = new DatabaseEvent(message, priority);
-		for (DatabaseListener listener : listeners) {
+		SQLEvent event = new SQLEvent(message, priority);
+		for (SQLListener listener : listeners) {
 			listener.messageLogged(event);
 		}
 	}
 
 	protected void fireBeginTransaction(Transaction transaction) {
-		DatabaseEvent event = new DatabaseEvent();
+		SQLEvent event = new SQLEvent();
 		event.setTransaction(transaction);
-		for (DatabaseListener listener : listeners) {
+		for (SQLListener listener : listeners) {
 			listener.beginTransaction(event);
 		}
 	}
 
 	protected void fireFinishTransaction(Transaction transaction) {
-		DatabaseEvent event = new DatabaseEvent();
+		SQLEvent event = new SQLEvent();
 		event.setTransaction(transaction);
-		for (DatabaseListener listener : listeners) {
+		for (SQLListener listener : listeners) {
 			listener.finishTransaction(event);
 		}
 	}
 
-	protected DatabaseEvent getExecuteSQLEvent(int totalStatements, String sql) {
-		DatabaseEvent event = new DatabaseEvent();
+	protected SQLEvent getExecuteSQLEvent(int totalStatements, String sql) {
+		SQLEvent event = new SQLEvent();
 		event.setSql(sql);
 		event.setTotalStatements(totalStatements);
 		return event;
 	}
 
 	protected void fireBeforeExecuteSQL(int totalStatements, String sql) {
-		for (DatabaseListener listener : listeners) {
+		for (SQLListener listener : listeners) {
 			listener.beforeExecuteSQL(getExecuteSQLEvent(totalStatements, sql));
 		}
 	}
 
 	protected void fireAfterExecuteSQL(int totalStatements, String sql) {
-		for (DatabaseListener listener : listeners) {
+		for (SQLListener listener : listeners) {
 			listener.afterExecuteSQL(getExecuteSQLEvent(totalStatements, sql));
 		}
 	}
 
 	protected void fireAfterProcessingSQLResults(int totalStatements, int successfulStatements, int updateCountTotal,
 			String sql) {
-		DatabaseEvent event = getExecuteSQLEvent(totalStatements, sql);
+		SQLEvent event = getExecuteSQLEvent(totalStatements, sql);
 		event.setSuccessfulStatements(successfulStatements);
 		event.setUpdateCountTotal(updateCountTotal);
-		for (DatabaseListener listener : listeners) {
+		for (SQLListener listener : listeners) {
 			listener.afterExecuteSQL(event);
 		}
 	}
@@ -144,9 +144,9 @@ public class SQLExecutor {
 		} else {
 			log.error(message, throwable);
 		}
-		DatabaseEvent event = new DatabaseEvent(message, MessagePriority.ERROR);
+		SQLEvent event = new SQLEvent(message, MessagePriority.ERROR);
 		event.setException(throwable);
-		for (DatabaseListener listener : listeners) {
+		for (SQLListener listener : listeners) {
 			listener.messageLogged(event);
 		}
 	}
@@ -537,11 +537,11 @@ public class SQLExecutor {
 		this.connectionError = connectionError;
 	}
 
-	public List<DatabaseListener> getListeners() {
+	public List<SQLListener> getListeners() {
 		return listeners;
 	}
 
-	public void setListeners(List<DatabaseListener> listeners) {
+	public void setListeners(List<SQLListener> listeners) {
 		this.listeners = listeners;
 	}
 

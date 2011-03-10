@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Pojo for a database event
  */
-public class DatabaseEvent {
+public class SQLEvent {
 	String message;
 	MessagePriority priority;
 	Date timestamp;
@@ -16,19 +16,19 @@ public class DatabaseEvent {
 	String sql;
 	int updateCountTotal;
 
-	public DatabaseEvent() {
+	public SQLEvent() {
 		this(null);
 	}
 
-	public DatabaseEvent(String message) {
+	public SQLEvent(String message) {
 		this(message, MessagePriority.INFO);
 	}
 
-	public DatabaseEvent(String message, MessagePriority priority) {
+	public SQLEvent(String message, MessagePriority priority) {
 		this(message, priority, new Date(), null, null);
 	}
 
-	public DatabaseEvent(String message, MessagePriority priority, Date timestamp, Throwable exception, Transaction transaction) {
+	public SQLEvent(String message, MessagePriority priority, Date timestamp, Throwable exception, Transaction transaction) {
 		super();
 		this.message = message;
 		this.priority = priority;
