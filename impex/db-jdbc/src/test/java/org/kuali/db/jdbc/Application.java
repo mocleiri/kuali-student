@@ -6,7 +6,7 @@ public class Application {
 
 	public static void main(final String[] args) {
 		try {
-			new ClassPathXmlApplicationContext("org/kuali/db/jdbc/jdbc-context.xml");
+			new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-context.xml");
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
