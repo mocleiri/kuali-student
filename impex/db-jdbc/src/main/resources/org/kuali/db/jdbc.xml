@@ -18,21 +18,21 @@
   <import resource="classpath:org/kuali/db/oracle.xml" />
   <import resource="classpath:org/kuali/db/mysql.xml" />
 
-  <bean id="impex.sql.drop" class="java.lang.String">
+  <bean id="jdbc.sql.drop" class="java.lang.String">
     <constructor-arg type="java.lang.String">
-      <ref bean="impex.${impex.db.vendor}.sql.drop" />
+      <ref bean="jdbc.${jdbc.db.vendor}.sql.drop" />
     </constructor-arg>
   </bean>
 
-  <bean id="impex.sql.create" class="java.lang.String">
+  <bean id="jdbc.sql.create" class="java.lang.String">
     <constructor-arg type="java.lang.String">
-      <ref bean="impex.${impex.db.vendor}.sql.create" />
+      <ref bean="jdbc.${jdbc.db.vendor}.sql.create" />
     </constructor-arg>
   </bean>
 
-  <bean id="impex.sql.grants" class="java.lang.String">
+  <bean id="jdbc.sql.grants" class="java.lang.String">
     <constructor-arg type="java.lang.String">
-      <ref bean="impex.${impex.db.vendor}.sql.grants" />
+      <ref bean="jdbc.${jdbc.db.vendor}.sql.grants" />
     </constructor-arg>
   </bean>
 

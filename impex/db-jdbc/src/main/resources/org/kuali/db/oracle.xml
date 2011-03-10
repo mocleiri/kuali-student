@@ -12,14 +12,15 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="impex.oracle.sql.drop" class="java.lang.String">
+  <!-- Drop the user and ignore the error if the user does not exist -->
+  <bean id="jdbc.oracle.sql.drop" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         BEGIN
-        EXECUTE IMMEDIATE 'DROP USER ${impex.username} CASCADE';
+        EXECUTE IMMEDIATE 'DROP USER ${jdbc.username} CASCADE';
         EXCEPTION WHEN OTHERS THEN
         IF SQLCODE !=
-        ${impex.oracle.error.sqlcode.userDoesNotExist} THEN
+        ${jdbc.oracle.error.sqlcode.userDoesNotExist} THEN
         RAISE;
         END IF;
         END;
@@ -28,22 +29,24 @@
     </constructor-arg>
   </bean>
 
-  <bean id="impex.oracle.sql.create" class="java.lang.String">
+  <!-- Create the user with some sensible defaults -->
+  <bean id="jdbc.oracle.sql.create" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
-        CREATE USER ${impex.username}
-        IDENTIFIED BY ${impex.password}
+        CREATE USER ${jdbc.username}
+        IDENTIFIED BY ${jdbc.password}
         DEFAULT TABLESPACE
-        ${impex.oracle.defaultTablespace}
-        TEMPORARY TABLESPACE ${impex.oracle.temporaryTablespace}
+        ${jdbc.oracle.defaultTablespace}
+        TEMPORARY TABLESPACE ${jdbc.oracle.temporaryTablespace}
         QUOTA
-        ${impex.oracle.quota} ON ${impex.oracle.defaultTablespace}
+        ${jdbc.oracle.quota} ON ${jdbc.oracle.defaultTablespace}
         /
       </value>
     </constructor-arg>
   </bean>
 
-  <bean id="impex.oracle.sql.grants" class="java.lang.String">
+  <!-- Grant permissions as needed -->
+  <bean id="jdbc.oracle.sql.grants" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         GRANT CREATE PROCEDURE
@@ -52,23 +55,24 @@
         , CREATE SYNONYM
         , CREATE TABLE
         , CREATE TRIGGER
-        , CREATE TYPE
+        ,
+        CREATE TYPE
         , CREATE VIEW
-        TO ${impex.username}
+        TO ${jdbc.username}
         /
 
-        GRANT SELECT ON pending_trans$ to ${impex.username}
+        GRANT SELECT ON pending_trans$ to ${jdbc.username}
         /
 
         GRANT SELECT ON
-        dba_2pc_pending to ${impex.username}
+        dba_2pc_pending to ${jdbc.username}
         /
 
-        GRANT SELECT ON dba_pending_transactions to ${impex.username}
+        GRANT SELECT ON dba_pending_transactions to ${jdbc.username}
         /
 
         GRANT EXECUTE
-        ON dbms_system to ${impex.username}
+        ON dbms_system to ${jdbc.username}
         /
       </value>
     </constructor-arg>

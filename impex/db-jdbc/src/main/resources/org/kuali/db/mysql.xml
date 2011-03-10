@@ -12,41 +12,42 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="impex.mysql.sql.drop" class="java.lang.String">
+  <!--  -->
+  <bean id="jdbc.mysql.sql.drop" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
-        DROP DATABASE IF EXISTS ${impex.database}
+        DROP DATABASE IF EXISTS ${jdbc.database}
         /
 
-        GRANT USAGE ON *.* TO '${impex.username}'@'%' IDENTIFIED BY
-        '${impex.password}'
+        GRANT USAGE ON *.* TO '${jdbc.username}'@'%' IDENTIFIED BY
+        '${jdbc.password}'
         /
 
-        DROP USER ${impex.username}
+        DROP USER ${jdbc.username}
         /
       </value>
     </constructor-arg>
   </bean>
 
-  <bean id="impex.mysql.sql.create" class="java.lang.String">
+  <bean id="jdbc.mysql.sql.create" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
-        CREATE DATABASE IF NOT EXISTS ${impex.database}
-        DEFAULT CHARACTER SET '${impex.mysql.character.set}'
+        CREATE DATABASE IF NOT EXISTS ${jdbc.database}
+        DEFAULT CHARACTER SET '${jdbc.mysql.character.set}'
         DEFAULT
-        COLLATE '${impex.mysql.collate}';
+        COLLATE '${jdbc.mysql.collate}';
         /
       </value>
     </constructor-arg>
   </bean>
 
-  <bean id="impex.mysql.sql.grants" class="java.lang.String">
+  <bean id="jdbc.mysql.sql.grants" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
-        GRANT ALL ON ${impex.database}.*
-        TO '${impex.username}'@'%'
+        GRANT ALL ON ${jdbc.database}.*
+        TO '${jdbc.username}'@'%'
         IDENTIFIED BY
-        '${impex.password}'
+        '${jdbc.password}'
         WITH GRANT OPTION
         /
       </value>
