@@ -15,7 +15,6 @@
 			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
 			<incomplete>false</incomplete>
 			<configs>
-				<config>/db-jdbc/src/main/resources/org/kuali/db/jdbc/dba-context.xml</config>
 				<config>src/main/resources/org/kuali/db/impex/impex-context.xml</config>
 			</configs>
 		</configSet>
