@@ -4,10 +4,10 @@
   <comment>MySQL Properties</comment>
 
   <!-- MySQL Specific Properties -->
-  <entry key="jdbc.mysql.driver">mysql.jdbc.driver.OracleDriver</entry>
-  <entry key="jdbc.mysql.dba.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
-  <entry key="jdbc.mysql.dba.username">SYS AS SYSDBA</entry>
-  <entry key="jdbc.mysql.dba.password">change_on_install</entry>
+  <entry key="jdbc.mysql.driver">com.mysql.jdbc.Driver</entry>
+  <entry key="jdbc.mysql.dba.url">jdbc:mysql://localhost:3306/</entry>
+  <entry key="jdbc.mysql.dba.username">root</entry>
+  <entry key="jdbc.mysql.dba.password"></entry>
   <entry key="jdbc.mysql.character.set">utf8</entry>
   <entry key="jdbc.mysql.collate">utf8_bin</entry>
   <entry key="jdbc.mysql.dba.sql.drop"><![CDATA[
