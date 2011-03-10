@@ -41,6 +41,17 @@
     <ref bean="jdbc.transaction.grants" />
   </util:list>
 
+  <bean id="jdbc.dba.credentials">
+    <property name="username" value="${jdbc.dba.username}" />
+    <property name="password" value="${jdbc.dba.password}" />
+  </bean>
+
+  <bean id="jdbc.dba.connectionHandler">
+    <property name="credentials">
+      <ref bean="jdbc.dba.credentials" />
+    </property>
+  </bean>
+
   <bean id="jdbc.init.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute">
     <property name="transactions">
       <ref bean="jdbc.init.transactions" />

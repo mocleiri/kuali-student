@@ -11,6 +11,21 @@
                            http://www.springframework.org/schema/util 
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
+  <bean id="jdbc.driver" class="java.lang.String">
+    <constructor-arg type="java.lang.String" value="${jdbc.oracle.driver}" />
+  </bean>
+
+  <bean id="jdbc.dba.username" class="java.lang.String">
+    <constructor-arg type="java.lang.String" value="${jdbc.oracle.dba.username}" />
+  </bean>
+
+  <bean id="jdbc.dba.password" class="java.lang.String">
+    <constructor-arg type="java.lang.String" value="${jdbc.oracle.dba.password}" />
+  </bean>
+
+  <bean id="jdbc.url" class="java.lang.String">
+    <constructor-arg type="java.lang.String" value="${jdbc.oracle.url}" />
+  </bean>
 
   <!-- Drop the user and ignore the error if the user does not exist -->
   <bean id="jdbc.sql.drop" class="java.lang.String">
