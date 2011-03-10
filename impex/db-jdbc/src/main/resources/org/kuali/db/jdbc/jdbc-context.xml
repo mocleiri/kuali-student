@@ -26,9 +26,9 @@
   <bean id="jdbc.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
       <list>
-        <value>classpath:org/kuali/db/mysql-properties.xml</value>
-        <value>classpath:org/kuali/db/oracle-properties.xml</value>
-        <value>classpath:org/kuali/db/jdbc-properties.xml</value>
+        <value>classpath:org/kuali/db/jdbc/mysql-properties.xml</value>
+        <value>classpath:org/kuali/db/jdbc/oracle-properties.xml</value>
+        <value>classpath:org/kuali/db/jdbc/jdbc-properties.xml</value>
       </list>
     </property>
     <property name="systemPropertiesMode">
@@ -36,12 +36,12 @@
     </property>
   </bean>
 
-  <bean id="jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.sql.drop}" />
-  <bean id="jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.sql.initialize}" />
+  <bean id="jdbc.dba.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.dba.sql.drop}" />
+  <bean id="jdbc.dba.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${jdbc.dba.sql.initialize}" />
 
   <util:list id="jdbc.dba.transactions" list-class="java.util.Vector">
-    <ref bean="jdbc.transaction.drop" />
-    <ref bean="jdbc.transaction.initialize" />
+    <ref bean="jdbc.dba.transaction.drop" />
+    <ref bean="jdbc.dba.transaction.initialize" />
   </util:list>
 
   <bean id="jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${jdbc.dba.username}"
