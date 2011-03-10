@@ -35,5 +35,10 @@
       <artifactId>spring-context</artifactId>
       <version>${impex.spring.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.kuali.student.db</groupId>
+      <artifactId>ks-embedded-db</artifactId>
+      <version>1.2-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 </project>
