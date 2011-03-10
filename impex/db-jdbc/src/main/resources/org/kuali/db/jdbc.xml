@@ -36,5 +36,34 @@
     </constructor-arg>
   </bean>
 
+  <bean id="jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction">
+    <property name="sqlCommand">
+      <ref bean="jdbc.sql.drop" />
+    </property>
+  </bean>
+
+  <bean id="jdbc.transaction.create" class="org.kuali.db.jdbc.Transaction">
+    <property name="sqlCommand">
+      <ref bean="jdbc.sql.create" />
+    </property>
+  </bean>
+
+  <bean id="jdbc.transaction.grants" class="org.kuali.db.jdbc.Transaction">
+    <property name="sqlCommand">
+      <ref bean="jdbc.sql.grants" />
+    </property>
+  </bean>
+
+  <util:list id="jdbc.init.transactions" list-class="java.util.Vector">
+    <ref bean="jdbc.transaction.drop" />
+    <ref bean="jdbc.transaction.create" />
+    <ref bean="jdbc.transaction.grants" />
+  </util:list>
+
+  <bean id="jdbc.init.sql.executor" class="org.kuali.db.jdbc.SQLExecutor">
+    <property name="transactions">
+      <ref bean="jdbc.init.transactions" />
+    </property>
+  </bean>
 
 </beans>
