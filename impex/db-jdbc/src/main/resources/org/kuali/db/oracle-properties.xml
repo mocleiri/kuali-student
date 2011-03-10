@@ -11,7 +11,7 @@
   <entry key="jdbc.oracle.temporaryTablespace">temp</entry>
   <entry key="jdbc.oracle.quota">UNLIMITED</entry>
   <entry key="jdbc.oracle.error.sqlcode.userDoesNotExist">-01918</entry>
-  <entry key="jdbc.oracle.sql.drop"><![CDATA[
+  <entry key="jdbc.oracle.dba.sql.drop"><![CDATA[
     BEGIN
       EXECUTE IMMEDIATE 'DROP USER ${jdbc.username} CASCADE';
       EXCEPTION WHEN OTHERS THEN
@@ -22,7 +22,7 @@
     /
 ]]>
   </entry>
-  <entry key="jdbc.oracle.sql.create"><![CDATA[
+  <entry key="jdbc.oracle.dba.sql.create"><![CDATA[
     CREATE USER ${jdbc.username}
     IDENTIFIED BY ${jdbc.password}
     DEFAULT TABLESPACE ${jdbc.oracle.defaultTablespace}
@@ -31,7 +31,7 @@
     /
 ]]>
   </entry>
-  <entry key="jdbc.oracle.sql.grants"><![CDATA[
+  <entry key="jdbc.oracle.dba.sql.grants"><![CDATA[
     GRANT CREATE PROCEDURE
      , CREATE SEQUENCE
      , CREATE SESSION
@@ -52,9 +52,9 @@
     /
 ]]>
   </entry>
-  <entry key="jdbc.oracle.sql.initialize">
-    ${jdbc.oracle.sql.create}
-    ${jdbc.oracle.sql.grants}
+  <entry key="jdbc.oracle.dba.sql.initialize">
+    ${jdbc.oracle.dba.sql.create}
+    ${jdbc.oracle.dba.sql.grants}
   </entry>
 
 </properties>

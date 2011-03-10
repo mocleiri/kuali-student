@@ -6,7 +6,7 @@
   <!-- MySQL Specific Properties -->
   <entry key="jdbc.mysql.character.set">utf8</entry>
   <entry key="jdbc.mysql.collate">utf8_bin</entry>
-  <entry key="jdbc.mysql.sql.drop"><![CDATA[
+  <entry key="jdbc.mysql.dba.sql.drop"><![CDATA[
     DROP DATABASE IF EXISTS ${jdbc.database}
     /
 
@@ -17,14 +17,14 @@
     /
 ]]>
   </entry>
-  <entry key="jdbc.mysql.sql.create"><![CDATA[
+  <entry key="jdbc.mysql.dba.sql.create"><![CDATA[
     CREATE DATABASE IF NOT EXISTS ${jdbc.database}
     DEFAULT CHARACTER SET '${jdbc.mysql.character.set}'
     DEFAULT COLLATE '${jdbc.mysql.collate}';
     /
 ]]>
   </entry>
-  <entry key="jdbc.mysql.sql.grants"><![CDATA[
+  <entry key="jdbc.mysql.dba.sql.grants"><![CDATA[
     GRANT ALL ON ${jdbc.database}.*
     TO '${jdbc.username}'@'%'
     IDENTIFIED BY '${jdbc.password}'
@@ -32,9 +32,9 @@
     /
 ]]>
   </entry>
-  <entry key="jdbc.mysql.sql.initialize">
-    ${jdbc.mysql.sql.create}
-    ${jdbc.mysql.sql.grants}
+  <entry key="jdbc.mysql.dba.sql.initialize">
+    ${jdbc.mysql.dba.sql.create}
+    ${jdbc.mysql.dba.sql.grants}
   </entry>
 
 </properties>
