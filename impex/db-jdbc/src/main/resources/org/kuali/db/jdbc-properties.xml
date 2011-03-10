@@ -2,13 +2,13 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <comment>JDBC Properties</comment>
-  <entry key="jdbc.db.vendor">oracle</entry>
-  <entry key="jdbc.driver">${jdbc.${jdbc.db.vendor}.driver}</entry>
-  <entry key="jdbc.dba.url">${jdbc.${jdbc.db.vendor}.dba.url}</entry>
-  <entry key="jdbc.dba.username">${jdbc.${jdbc.db.vendor}.dba.username}</entry>
-  <entry key="jdbc.dba.password">${jdbc.${jdbc.db.vendor}.dba.password}</entry>
-  <entry key="jdbc.sql.drop">${jdbc.${jdbc.db.vendor}.sql.drop}</entry>
-  <entry key="jdbc.sql.initialize">${jdbc.${jdbc.db.vendor}.sql.initialize}</entry>
+  <entry key="jdbc.vendor">oracle</entry>
+  <entry key="jdbc.driver">${jdbc.${jdbc.vendor}.driver}</entry>
+  <entry key="jdbc.dba.url">${jdbc.${jdbc.vendor}.dba.url}</entry>
+  <entry key="jdbc.dba.username">${jdbc.${jdbc.vendor}.dba.username}</entry>
+  <entry key="jdbc.dba.password">${jdbc.${jdbc.vendor}.dba.password}</entry>
+  <entry key="jdbc.sql.drop">${jdbc.${jdbc.vendor}.sql.drop}</entry>
+  <entry key="jdbc.sql.initialize">${jdbc.${jdbc.vendor}.sql.initialize}</entry>
   <!-- They will have to explicitly override this property to "false" in order to execute the drop/create SQL -->
   <entry key="jdbc.dba.sql.execute.skip">true</entry>
 </properties>
