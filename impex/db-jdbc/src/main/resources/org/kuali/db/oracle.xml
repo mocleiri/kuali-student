@@ -13,7 +13,7 @@
 
 
   <!-- Drop the user and ignore the error if the user does not exist -->
-  <bean id="jdbc.oracle.sql.drop" class="java.lang.String">
+  <bean id="jdbc.sql.drop" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         BEGIN
@@ -30,7 +30,7 @@
   </bean>
 
   <!-- Create the user with some sensible defaults -->
-  <bean id="jdbc.oracle.sql.create" class="java.lang.String">
+  <bean id="jdbc.sql.create" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         CREATE USER ${jdbc.username}
@@ -46,7 +46,7 @@
   </bean>
 
   <!-- Grant permissions as needed -->
-  <bean id="jdbc.oracle.sql.grants" class="java.lang.String">
+  <bean id="jdbc.sql.grants" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         GRANT CREATE PROCEDURE

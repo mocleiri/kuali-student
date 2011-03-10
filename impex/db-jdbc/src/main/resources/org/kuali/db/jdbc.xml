@@ -15,26 +15,7 @@
   <bean id="jdbcPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
     p:location="classpath:org/kuali/db/jdbc.properties" />
 
-  <import resource="classpath:org/kuali/db/oracle.xml" />
-  <import resource="classpath:org/kuali/db/mysql.xml" />
-
-  <bean id="jdbc.sql.drop" class="java.lang.String">
-    <constructor-arg type="java.lang.String">
-      <ref bean="jdbc.${jdbc.db.vendor}.sql.drop" />
-    </constructor-arg>
-  </bean>
-
-  <bean id="jdbc.sql.create" class="java.lang.String">
-    <constructor-arg type="java.lang.String">
-      <ref bean="jdbc.${jdbc.db.vendor}.sql.create" />
-    </constructor-arg>
-  </bean>
-
-  <bean id="jdbc.sql.grants" class="java.lang.String">
-    <constructor-arg type="java.lang.String">
-      <ref bean="jdbc.${jdbc.db.vendor}.sql.grants" />
-    </constructor-arg>
-  </bean>
+  <import resource="classpath:org/kuali/db/${jdbc.db.vendor}.xml" />
 
   <bean id="jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction">
     <property name="sqlCommand">
@@ -60,7 +41,7 @@
     <ref bean="jdbc.transaction.grants" />
   </util:list>
 
-  <bean id="jdbc.init.sql.executor" class="org.kuali.db.jdbc.SQLExecutor">
+  <bean id="jdbc.init.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute">
     <property name="transactions">
       <ref bean="jdbc.init.transactions" />
     </property>

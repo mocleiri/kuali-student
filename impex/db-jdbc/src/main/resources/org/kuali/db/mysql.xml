@@ -13,7 +13,7 @@
 
 
   <!--  -->
-  <bean id="jdbc.mysql.sql.drop" class="java.lang.String">
+  <bean id="jdbc.sql.drop" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         DROP DATABASE IF EXISTS ${jdbc.database}
@@ -29,7 +29,7 @@
     </constructor-arg>
   </bean>
 
-  <bean id="jdbc.mysql.sql.create" class="java.lang.String">
+  <bean id="jdbc.sql.create" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         CREATE DATABASE IF NOT EXISTS ${jdbc.database}
@@ -41,7 +41,7 @@
     </constructor-arg>
   </bean>
 
-  <bean id="jdbc.mysql.sql.grants" class="java.lang.String">
+  <bean id="jdbc.sql.grants" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>
         GRANT ALL ON ${jdbc.database}.*
