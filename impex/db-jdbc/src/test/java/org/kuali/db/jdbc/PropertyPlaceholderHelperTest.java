@@ -2,7 +2,6 @@ package org.kuali.db.jdbc;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -31,17 +30,6 @@ public class PropertyPlaceholderHelperTest {
 		String value = "${datasource.url}";
 		value = helper.replacePlaceholders(value, properties);
 		// System.out.println(value);
-	}
-
-	@Test
-	public void configContext() throws IOException {
-		//JAXBConfigImpl config = new JAXBConfigImpl("classpath:standalone-config.xml", ConfigContext.getCurrentContextConfig());
-		//config.setSystemOverride(true);
-		//config.parseConfig();
-		//ConfigContext.init(config);
-		//Properties properties = config.getProperties();
-		//System.out.println(properties.getProperty("environment"));
-		//System.out.println(properties.getProperty("s"));
 	}
 
 }
