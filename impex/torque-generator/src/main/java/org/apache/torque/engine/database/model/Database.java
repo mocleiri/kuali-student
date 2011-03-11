@@ -52,7 +52,7 @@ public class Database {
 	private static Log log = LogFactory.getLog(Database.class);
 
 	private String databaseType = null;
-	private List tableList = new ArrayList(100);
+	private List<Table> tableList = new ArrayList<Table>(100);
 	private Map domainMap = new HashMap();
 	private String name;
 	private String javaName;
@@ -220,8 +220,8 @@ public class Database {
 	}
 
 	/**
-	 * Get the value of defaultJavaNamingMethod which specifies the method for converting schema names for table and
-	 * column to Java names.
+	 * Get the value of defaultJavaNamingMethod which specifies the method for
+	 * converting schema names for table and column to Java names.
 	 * 
 	 * @return The default naming conversion used by this database.
 	 */
@@ -263,7 +263,7 @@ public class Database {
 	 * 
 	 * @return List of all tables
 	 */
-	public List getTables() {
+	public List<Table> getTables() {
 		return tableList;
 	}
 
@@ -346,11 +346,12 @@ public class Database {
 	}
 
 	/**
-	 * Determines if this database will be using the <code>IDMethod.ID_BROKER</code> to create ids for torque OM
-	 * objects.
+	 * Determines if this database will be using the
+	 * <code>IDMethod.ID_BROKER</code> to create ids for torque OM objects.
 	 * 
-	 * @return true if there is at least one table in this database that uses the <code>IDMethod.ID_BROKER</code> method
-	 *         of generating ids. returns false otherwise.
+	 * @return true if there is at least one table in this database that uses
+	 *         the <code>IDMethod.ID_BROKER</code> method of generating ids.
+	 *         returns false otherwise.
 	 */
 	public boolean requiresIdTable() {
 		Iterator iter = getTables().iterator();
@@ -386,7 +387,10 @@ public class Database {
 				}
 
 				if (!foundOne) {
-					String errorMessage = "Table '" + currTable.getName() + "' is marked as autoincrement, but it does not " + "have a column which declared as the one to " + "auto increment (i.e. autoIncrement=\"true\")\n";
+					String errorMessage = "Table '" + currTable.getName()
+							+ "' is marked as autoincrement, but it does not "
+							+ "have a column which declared as the one to "
+							+ "auto increment (i.e. autoIncrement=\"true\")\n";
 					throw new EngineException("Error in XML schema: " + errorMessage);
 				}
 			}
@@ -399,7 +403,8 @@ public class Database {
 				ForeignKey currFK = (ForeignKey) fks.next();
 				Table foreignTable = getTable(currFK.getForeignTableName());
 				if (foreignTable == null) {
-					throw new EngineException("Attempt to set foreign" + " key to nonexistent table, " + currFK.getForeignTableName());
+					throw new EngineException("Attempt to set foreign" + " key to nonexistent table, "
+							+ currFK.getForeignTableName());
 				} else {
 					// TODO check type and size
 					List referrers = foreignTable.getReferrers();
@@ -415,7 +420,8 @@ public class Database {
 						// note we do not prevent the npe as there is nothing
 						// that we can do, if it is to occur.
 						if (local == null) {
-							throw new EngineException("Attempt to define foreign" + " key with nonexistent column in table, " + currTable.getName());
+							throw new EngineException("Attempt to define foreign"
+									+ " key with nonexistent column in table, " + currTable.getName());
 						} else {
 							// check for foreign pk's
 							if (local.isPrimaryKey()) {
@@ -432,7 +438,8 @@ public class Database {
 						// if the foreign column does not exist, we may have an
 						// external reference or a misspelling
 						if (foreign == null) {
-							throw new EngineException("Attempt to set foreign" + " key to nonexistent column: table=" + currTable.getName() + ", foreign column=" + foreignColumnName);
+							throw new EngineException("Attempt to set foreign" + " key to nonexistent column: table="
+									+ currTable.getName() + ", foreign column=" + foreignColumnName);
 						} else {
 							foreign.addReferrer(currFK);
 						}
@@ -445,8 +452,8 @@ public class Database {
 	/**
 	 * Get the base name to use when creating related Java Classes.
 	 * 
-	 * @return A Java syntax capatible version of the dbName using the method defined by the defaultJavaNamingMethod XML
-	 *         value.
+	 * @return A Java syntax capatible version of the dbName using the method
+	 *         defined by the defaultJavaNamingMethod XML value.
 	 */
 	public String getJavaName() {
 		if (javaName == null) {
@@ -463,9 +470,11 @@ public class Database {
 	}
 
 	/**
-	 * Convert dbName to a Java compatible name by the JavaName method only (ignores the defaultJavaNamingMethod).
+	 * Convert dbName to a Java compatible name by the JavaName method only
+	 * (ignores the defaultJavaNamingMethod).
 	 * 
-	 * @return The current dbName converted to a standard format that can be used as part of a Java Object name.
+	 * @return The current dbName converted to a standard format that can be
+	 *         used as part of a Java Object name.
 	 */
 	public String getStandardJavaName() {
 		if (javaName == null) {
@@ -482,7 +491,8 @@ public class Database {
 	}
 
 	/**
-	 * Creats a string representation of this Database. The representation is given in xml format.
+	 * Creats a string representation of this Database. The representation is
+	 * given in xml format.
 	 * 
 	 * @return string representation in xml
 	 */
@@ -492,7 +502,10 @@ public class Database {
 		result.append("<?xml version=\"1.0\"?>\n");
 		result.append("<!DOCTYPE database SYSTEM \"" + DTDResolver.WEB_SITE_DTD + "\">\n");
 		result.append("<!-- Autogenerated by SQLToXMLSchema! -->\n");
-		result.append("<database name=\"").append(getName()).append('"').append(" package=\"").append(getPackage()).append('"').append(" defaultIdMethod=\"").append(getDefaultIdMethod()).append('"').append(" baseClass=\"").append(getBaseClass()).append('"').append(" basePeer=\"").append(getBasePeer()).append('"').append(">\n");
+		result.append("<database name=\"").append(getName()).append('"').append(" package=\"").append(getPackage())
+				.append('"').append(" defaultIdMethod=\"").append(getDefaultIdMethod()).append('"')
+				.append(" baseClass=\"").append(getBaseClass()).append('"').append(" basePeer=\"")
+				.append(getBasePeer()).append('"').append(">\n");
 
 		for (Iterator i = tableList.iterator(); i.hasNext();) {
 			result.append(i.next());
@@ -526,11 +539,13 @@ public class Database {
 	}
 
 	/**
-	 * Gets the full ordered hashtable array of items specified by XML option statements under this element.
+	 * Gets the full ordered hashtable array of items specified by XML option
+	 * statements under this element.
 	 * <p>
 	 * 
-	 * Note, this is not thread save but since it's only used for generation which is single threaded, there should be
-	 * minimum danger using this in Velocity.
+	 * Note, this is not thread save but since it's only used for generation
+	 * which is single threaded, there should be minimum danger using this in
+	 * Velocity.
 	 * 
 	 * @return An Map of all options. Will not be null but may be empty.
 	 */

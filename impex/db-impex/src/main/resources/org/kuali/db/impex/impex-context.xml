@@ -12,7 +12,29 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="impex.metadata" class="org.kuali.db.impex.ImpexMetadata" p:platform="oracle" p:schemaLocation="classpath:ks-embedded-db.xml" />
+  <!-- 
+  Avoid "magic" numbers in our config by giving a name to the systemPropertiesMode being used 
+  SYSTEM_PROPERTIES_MODE_OVERRIDE means that system properties override any other property source.
+  See PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE for further details  
+  -->
+  <bean id="impex.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
+    <constructor-arg type="java.lang.String" value="2" />
+  </bean>
+
+  <!-- Read properties in, but defer to System properties over properties in our config -->
+  <bean id="impex.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:org/kuali/db/impex/impex-properties.xml</value>
+      </list>
+    </property>
+    <property name="systemPropertiesMode">
+      <ref bean="impex.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+    </property>
+  </bean>
+
+  <bean id="impex.metadata" class="org.kuali.db.impex.ImpexMetadata" p:platform="${impex.platform}"
+    p:schemaLocation="${impex.resource}" />
 
   <bean id="impex.schemaParser" class="org.kuali.db.impex.SchemaParser" init-method="parse">
     <property name="impexMetadata">
@@ -20,8 +42,8 @@
     </property>
   </bean>
 
-  <bean id="impex.transaction.generator" class="org.kuali.db.impex.TransactionGenerator" init-method="generate"
-    p:suffix=".sql" p:constraintsSuffix="-constraints" p:prefix="sql">
+  <bean id="impex.transactionGenerator" class="org.kuali.db.impex.TransactionGenerator" init-method="generate"
+    p:suffix="${impex.resource.suffix}" p:constraintsSuffix="${impex.ddl.constraints.suffix}" p:prefix="${impex.resource.prefix}">
     <property name="parser">
       <ref bean="impex.schemaParser" />
     </property>

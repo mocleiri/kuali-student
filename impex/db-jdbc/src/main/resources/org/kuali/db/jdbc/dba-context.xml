@@ -17,7 +17,7 @@
   SYSTEM_PROPERTIES_MODE_OVERRIDE means that system properties override any other property source.
   See PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE for further details  
   -->
-  <bean id="SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
+  <bean id="jdbc.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
     <constructor-arg type="java.lang.String" value="2" />
   </bean>
 
@@ -31,7 +31,7 @@
       </list>
     </property>
     <property name="systemPropertiesMode">
-      <ref bean="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+      <ref bean="jdbc.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
     </property>
   </bean>
 
