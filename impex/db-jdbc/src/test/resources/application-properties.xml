@@ -4,7 +4,7 @@
   <comment>Application Properties</comment>
   <entry key="org.kuali.jdbc.username">KSMASTER</entry>
   <entry key="org.kuali.jdbc.password">KSMASTER</entry>
-  <entry key="org.kuali.jdbc.dba.url">jdbc:oracle:thin:@192.168.1.107:1521:XE</entry>
+  <entry key="org.kuali.jdbc.dba.url">jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</entry>
   <entry key="org.kuali.jdbc.dba.password">gw570229</entry>
   <entry key="org.kuali.dba.sql.execute">true</entry>
 </properties>
