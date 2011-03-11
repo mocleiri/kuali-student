@@ -12,6 +12,18 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="impex.schemaParser" class="org.kuali.db.impex.SchemaParser" init-method="parse" p:location="classpath:ks-embedded-db.xml"
-    p:databaseVendor="oracle" />
+  <bean id="impex.metadata" class="org.kuali.db.impex.ImpexMetadata" p:platform="oracle" p:schemaLocation="classpath:ks-embedded-db.xml" />
+
+  <bean id="impex.schemaParser" class="org.kuali.db.impex.SchemaParser" init-method="parse">
+    <property name="impexMetadata">
+      <ref bean="impex.metadata" />
+    </property>
+  </bean>
+
+  <bean id="impex.transaction.generator" class="org.kuali.db.impex.TransactionGenerator" init-method="generate"
+    p:suffix=".sql" p:constraintsSuffix="-constraints" p:prefix="sql">
+    <property name="parser">
+      <ref bean="impex.schemaParser" />
+    </property>
+  </bean>
 </beans>
