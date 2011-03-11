@@ -12,25 +12,23 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="application.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
+  <bean id="org.kuali.jdbc.application.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
     <constructor-arg type="java.lang.String" value="2" />
   </bean>
 
   <!-- Read properties in, but defer to System properties over properties in our config -->
-  <bean id="application.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <bean id="org.kuali.jdbc.application.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
       <list>
-        <value>classpath:org/kuali/db/jdbc/mysql-dba-properties.xml</value>
-        <value>classpath:org/kuali/db/jdbc/oracle-dba-properties.xml</value>
-        <value>classpath:org/kuali/db/jdbc/dba-properties.xml</value>
+        <value>classpath:dba-properties.xml</value>
         <value>classpath:application-properties.xml</value>
       </list>
     </property>
     <property name="systemPropertiesMode">
-      <ref bean="application.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+      <ref bean="org.kuali.jdbc.application.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
     </property>
   </bean>
   
-  <import resource="classpath:org/kuali/db/jdbc/dba-context.xml"/>
+  <import resource="classpath:org/kuali/db/jdbc/dbaBeans.xml"/>
 
 </beans>

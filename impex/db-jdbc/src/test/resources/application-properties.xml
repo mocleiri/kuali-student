@@ -6,5 +6,5 @@
   <entry key="jdbc.password">KSMASTER</entry>
   <entry key="jdbc.dba.url">jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</entry>
   <entry key="jdbc.dba.password">gw570229</entry>
-  <entry key="jdbc.dba.sql.execute.skip">false</entry>
+  <entry key="jdbc.dba.sql.execute.skip">true</entry>
 </properties>

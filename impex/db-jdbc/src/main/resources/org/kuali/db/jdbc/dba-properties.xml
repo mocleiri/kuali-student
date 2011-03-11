@@ -2,14 +2,111 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <comment>JDBC Properties</comment>
-  <entry key="jdbc.vendor">oracle</entry>
-  <entry key="jdbc.database">${jdbc.username}</entry>
-  <entry key="jdbc.driver">${jdbc.${jdbc.vendor}.driver}</entry>
-  <entry key="jdbc.dba.url">${jdbc.${jdbc.vendor}.dba.url}</entry>
-  <entry key="jdbc.dba.username">${jdbc.${jdbc.vendor}.dba.username}</entry>
-  <entry key="jdbc.dba.password">${jdbc.${jdbc.vendor}.dba.password}</entry>
-  <entry key="jdbc.dba.sql.drop">${jdbc.${jdbc.vendor}.dba.sql.drop}</entry>
-  <entry key="jdbc.dba.sql.initialize">${jdbc.${jdbc.vendor}.dba.sql.initialize}</entry>
-  <!-- Setting this property to "false" will execute SQL for dropping and then recreating a database -->
-  <entry key="jdbc.dba.sql.execute.skip">true</entry>
+
+  <!-- Setting this property to "true" will execute SQL that drops and then recreates a database -->
+  <entry key="org.kuali.dba.sql.execute">false</entry>
+  
+  <!-- JDBC properties -->
+  <entry key="org.kuali.jdbc.vendor">oracle</entry>
+  <entry key="org.kuali.jdbc.database">${org.kuali.jdbc.username}</entry>
+  <entry key="org.kuali.jdbc.driver">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.driver}</entry>
+  <entry key="org.kuali.jdbc.url">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.url}</entry>
+  <entry key="org.kuali.jdbc.username">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.username}</entry>
+  <entry key="org.kuali.jdbc.password">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.password}</entry>
+  <entry key="org.kuali.jdbc.sql.drop">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.sql.drop}</entry>
+  <entry key="org.kuali.jdbc.sql.initialize">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.sql.initialize}</entry>
+
+  <!-- Oracle properties -->
+  <entry key="org.kuali.jdbc.oracle.driver">oracle.org.kuali.jdbc.driver.OracleDriver</entry>
+  <entry key="org.kuali.jdbc.oracle.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+  <entry key="org.kuali.jdbc.oracle.username">SYS AS SYSDBA</entry>
+  <entry key="org.kuali.jdbc.oracle.password">change_on_install</entry>
+  <entry key="org.kuali.jdbc.oracle.defaultTablespace">users</entry>
+  <entry key="org.kuali.jdbc.oracle.temporaryTablespace">temp</entry>
+  <entry key="org.kuali.jdbc.oracle.quota">UNLIMITED</entry>
+  <entry key="org.kuali.jdbc.oracle.error.sqlcode.userDoesNotExist">-01918</entry>
+  <entry key="org.kuali.jdbc.oracle.sql.drop"><![CDATA[
+    BEGIN
+      EXECUTE IMMEDIATE 'DROP USER ${org.kuali.jdbc.username} CASCADE';
+      EXCEPTION WHEN OTHERS THEN
+      IF SQLCODE != ${org.kuali.jdbc.oracle.error.sqlcode.userDoesNotExist} THEN
+        RAISE;
+      END IF;
+    END;
+    /
+]]>
+  </entry>
+  <entry key="org.kuali.jdbc.oracle.sql.create"><![CDATA[
+    CREATE USER ${org.kuali.jdbc.username}
+    IDENTIFIED BY ${org.kuali.jdbc.password}
+    DEFAULT TABLESPACE ${org.kuali.jdbc.oracle.defaultTablespace}
+    TEMPORARY TABLESPACE ${org.kuali.jdbc.oracle.temporaryTablespace}
+    QUOTA ${org.kuali.jdbc.oracle.quota} ON ${org.kuali.jdbc.oracle.defaultTablespace}
+    /
+]]>
+  </entry>
+  <entry key="org.kuali.jdbc.oracle.sql.grants"><![CDATA[
+    GRANT CREATE PROCEDURE
+     , CREATE SEQUENCE
+     , CREATE SESSION
+     , CREATE SYNONYM
+     , CREATE TABLE
+     , CREATE TRIGGER
+     , CREATE TYPE
+     , CREATE VIEW
+    TO ${org.kuali.jdbc.username}
+    /
+    GRANT SELECT ON pending_trans$ to ${org.kuali.jdbc.username}
+    /
+    GRANT SELECT ON dba_2pc_pending to ${org.kuali.jdbc.username}
+    /
+    GRANT SELECT ON dba_pending_transactions to ${org.kuali.jdbc.username}
+    /
+    GRANT EXECUTE ON dbms_system to ${org.kuali.jdbc.username}
+    /
+]]>
+  </entry>
+  <entry key="org.kuali.jdbc.oracle.sql.initialize">
+    ${org.kuali.jdbc.oracle.sql.create}
+    ${org.kuali.jdbc.oracle.sql.grants}
+  </entry>
+
+  <!-- MySQL properties -->
+  <entry key="org.kuali.jdbc.mysql.driver">com.mysql.org.kuali.jdbc.Driver</entry>
+  <entry key="org.kuali.jdbc.mysql.url">jdbc:mysql://localhost:3306/</entry>
+  <entry key="org.kuali.jdbc.mysql.username">root</entry>
+  <entry key="org.kuali.jdbc.mysql.password"></entry>
+  <entry key="org.kuali.jdbc.mysql.character.set">utf8</entry>
+  <entry key="org.kuali.jdbc.mysql.collate">utf8_bin</entry>
+  <entry key="org.kuali.jdbc.mysql.sql.drop"><![CDATA[
+    DROP DATABASE IF EXISTS ${org.kuali.jdbc.database}
+    /
+
+    GRANT USAGE ON *.* TO '${org.kuali.jdbc.username}'@'%' IDENTIFIED BY '${org.kuali.jdbc.password}'
+    /
+
+    DROP USER ${org.kuali.jdbc.username}
+    /
+]]>
+  </entry>
+  <entry key="org.kuali.jdbc.mysql.sql.create"><![CDATA[
+    CREATE DATABASE IF NOT EXISTS ${org.kuali.jdbc.database}
+    DEFAULT CHARACTER SET '${org.kuali.jdbc.mysql.character.set}'
+    DEFAULT COLLATE '${org.kuali.jdbc.mysql.collate}';
+    /
+]]>
+  </entry>
+  <entry key="org.kuali.jdbc.mysql.sql.grants"><![CDATA[
+    GRANT ALL ON ${org.kuali.jdbc.database}.*
+    TO '${org.kuali.jdbc.username}'@'%'
+    IDENTIFIED BY '${org.kuali.jdbc.password}'
+    WITH GRANT OPTION
+    /
+]]>
+  </entry>
+  <entry key="org.kuali.jdbc.mysql.sql.initialize">
+    ${org.kuali.jdbc.mysql.sql.create}
+    ${org.kuali.jdbc.mysql.sql.grants}
+  </entry>
+
 </properties>

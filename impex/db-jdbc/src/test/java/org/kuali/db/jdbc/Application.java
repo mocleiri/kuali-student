@@ -6,7 +6,7 @@ public class Application {
 
 	public static void main(final String[] args) {
 		try {
-			new ClassPathXmlApplicationContext("application-context.xml");
+			new ClassPathXmlApplicationContext("applicationContext.xml");
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
