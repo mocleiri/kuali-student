@@ -1,14 +1,16 @@
 package org.kuali.db.jdbc;
 
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Application {
+public class ApplicationTest {
 
-	public static void main(final String[] args) {
+	@Test
+	public void appTest() {
 		try {
 			new ClassPathXmlApplicationContext("applicationContext.xml");
-		} catch (Throwable t) {
-			t.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
