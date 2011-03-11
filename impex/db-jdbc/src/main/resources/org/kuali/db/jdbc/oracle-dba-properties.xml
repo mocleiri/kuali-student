@@ -48,7 +48,7 @@
     /
     GRANT SELECT ON dba_pending_transactions to ${jdbc.username}
     /
-    GRANT EXECUTE  ON dbms_system to ${jdbc.username}
+    GRANT EXECUTE ON dbms_system to ${jdbc.username}
     /
 ]]>
   </entry>
