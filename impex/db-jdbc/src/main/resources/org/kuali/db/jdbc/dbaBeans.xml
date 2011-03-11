@@ -15,28 +15,28 @@
   <bean id="org.kuali.jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.drop}" />
   <bean id="org.kuali.jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.initialize}" />
 
-  <util:list id="org.kuali.jdbc.transactions" list-class="java.util.Vector">
+  <util:list id="org.kuali.jdbc.dba.transactions" list-class="java.util.Vector">
     <ref bean="org.kuali.jdbc.transaction.drop" />
     <ref bean="org.kuali.jdbc.transaction.initialize" />
   </util:list>
 
-  <bean id="org.kuali.jdbc.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${org.kuali.jdbc.username}"
-    p:password="${org.kuali.jdbc.password}" />
+  <bean id="org.kuali.jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${org.kuali.jdbc.dba.username}"
+    p:password="${org.kuali.jdbc.dba.password}" />
 
-  <bean id="org.kuali.jdbc.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler" p:driver="${jdbc.driver}"
-    p:url="${org.kuali.jdbc.url}">
+  <bean id="org.kuali.jdbc.dba.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler" p:driver="${org.kuali.jdbc.driver}"
+    p:url="${org.kuali.jdbc.dba.url}">
     <property name="credentials">
-      <ref bean="org.kuali.jdbc.credentials" />
+      <ref bean="org.kuali.jdbc.dba.credentials" />
     </property>
   </bean>
 
-  <bean id="org.kuali.jdbc.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute"
-    p:executeSql="${org.kuali.jdbc.sql.execute}">
+  <bean id="org.kuali.jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute"
+    p:executeSql="${org.kuali.jdbc.dba.sql.execute}">
     <property name="connectionHandler">
-      <ref bean="org.kuali.jdbc.connectionHandler" />
+      <ref bean="org.kuali.jdbc.dba.connectionHandler" />
     </property>
     <property name="transactions">
-      <ref bean="org.kuali.jdbc.transactions" />
+      <ref bean="org.kuali.jdbc.dba.transactions" />
     </property>
   </bean>
 </beans>
