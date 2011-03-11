@@ -11,7 +11,7 @@ public class ApplicationTest {
 
 	@Test
 	public void appTest() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("impex-test-context.xml");
 		Credentials c = (Credentials) context.getBean("org.kuali.jdbc.dba.credentials");
 		Assert.assertNotNull(c);
 	}
