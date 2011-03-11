@@ -6,29 +6,14 @@
   governing permissions and limitations under the License. -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
                            http://www.springframework.org/schema/util 
-                           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+                           http://www.springframework.org/schema/util/spring-util-2.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-
-  <bean id="org.kuali.jdbc.app.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
-    <constructor-arg type="java.lang.String" value="2" />
-  </bean>
-
-  <!-- Read properties in, but defer to System properties over properties in our config -->
-  <bean id="org.kuali.jdbc.app.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations">
-      <list>
-        <value>classpath:org/kuali/db/jdbc/dba-properties.xml</value>
-        <value>classpath:application-properties.xml</value>
-      </list>
-    </property>
-    <property name="systemPropertiesMode">
-      <ref bean="org.kuali.jdbc.app.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-    </property>
-  </bean>
-  
-  <import resource="classpath:org/kuali/db/jdbc/dbaBeans.xml"/>
-
+  <context:property-placeholder location="classpath:org/kuali/db/jdbc/dba-properties.xml,classpath:application-properties.xml" />
+  <import resource="classpath:org/kuali/db/jdbc/dbaBeans.xml" />
 </beans>
