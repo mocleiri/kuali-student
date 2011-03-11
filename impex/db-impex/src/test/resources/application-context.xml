@@ -24,7 +24,7 @@
       </list>
     </property>
     <property name="systemPropertiesMode">
-      <ref bean="impex.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+      <ref bean="application.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
     </property>
   </bean>
   
