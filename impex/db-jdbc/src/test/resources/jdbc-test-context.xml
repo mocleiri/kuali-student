@@ -14,6 +14,6 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <context:property-placeholder location="classpath:org/kuali/db/jdbc/dba-properties.xml,classpath:application-properties.xml" />
+  <context:property-placeholder location="classpath:org/kuali/db/jdbc/dba-properties.xml,classpath:jdbc-test-properties.xml" />
   <import resource="classpath:org/kuali/db/jdbc/dbaBeans.xml" />
 </beans>
