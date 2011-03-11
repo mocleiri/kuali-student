@@ -12,12 +12,12 @@
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-  <bean id="org.kuali.jdbc.application.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
+  <bean id="org.kuali.jdbc.app.SYSTEM_PROPERTIES_MODE_OVERRIDE" class="java.lang.Integer">
     <constructor-arg type="java.lang.String" value="2" />
   </bean>
 
   <!-- Read properties in, but defer to System properties over properties in our config -->
-  <bean id="org.kuali.jdbc.application.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <bean id="org.kuali.jdbc.app.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
       <list>
         <value>classpath:dba-properties.xml</value>
@@ -25,7 +25,7 @@
       </list>
     </property>
     <property name="systemPropertiesMode">
-      <ref bean="org.kuali.jdbc.application.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+      <ref bean="org.kuali.jdbc.app.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
     </property>
   </bean>
   
