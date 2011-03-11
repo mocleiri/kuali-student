@@ -16,9 +16,9 @@
 
 
   <context:property-placeholder
-    location="classpath:org/kuali/db/jdbc/dba-properties.xml,classpath:org/kuali/db/impex/impex-properties.xml,classpath:impex-test-properties.xml" />
+    location="classpath:org/kuali/db/jdbc/dba-properties.xml,classpath:org/kuali/db/impex/properties.xml,classpath:impex-test-properties.xml" />
 
   <import resource="classpath:org/kuali/db/jdbc/dba-context.xml" />
-  <import resource="classpath:org/kuali/db/impex/impex-context.xml" />
+  <import resource="classpath:org/kuali/db/impex/context.xml" />
 
 </beans>
