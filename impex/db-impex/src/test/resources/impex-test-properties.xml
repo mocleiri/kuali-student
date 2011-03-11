@@ -7,4 +7,7 @@
   <entry key="org.kuali.jdbc.dba.url">jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</entry>
   <entry key="org.kuali.jdbc.dba.password">gw570229</entry>
   <entry key="org.kuali.dba.sql.execute">false</entry>
+  <entry key="org.kuali.impex.platform">${org.kuali.jdbc.vendor}</entry>
+  <entry key="org.kuali.impex.resource">classpath:ks-embedded-db.xml</entry>
+  
 </properties>

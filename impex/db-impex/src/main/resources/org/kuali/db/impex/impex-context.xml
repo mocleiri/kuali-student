@@ -13,7 +13,7 @@
 
 
   <bean id="org.kuali.impex.metadata" class="org.kuali.db.impex.ImpexMetadata" p:platform="${org.kuali.impex.platform}"
-    p:schemaLocation="${impex.resource}" />
+    p:schemaLocation="${org.kuali.impex.resource}" />
 
   <bean id="org.kuali.impex.schemaParser" class="org.kuali.db.impex.SchemaParser" init-method="parse">
     <property name="impexMetadata">
@@ -22,7 +22,7 @@
   </bean>
 
   <bean id="org.kuali.impex.transactionGenerator" class="org.kuali.db.impex.TransactionGenerator" init-method="generate"
-    p:suffix="${impex.resource.suffix}" p:constraintsSuffix="${org.kuali.impex.ddl.constraints.suffix}" p:prefix="${org.kuali.impex.resource.prefix}">
+    p:suffix="${org.kuali.impex.resource.suffix}" p:constraintsSuffix="${org.kuali.impex.ddl.constraints.suffix}" p:prefix="${org.kuali.impex.resource.prefix}">
     <property name="parser">
       <ref bean="org.kuali.impex.schemaParser" />
     </property>
