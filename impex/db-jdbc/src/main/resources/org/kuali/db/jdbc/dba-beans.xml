@@ -11,6 +11,8 @@
                            http://www.springframework.org/schema/util 
                            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
+
+
   <bean id="org.kuali.jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.drop}" />
   <bean id="org.kuali.jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.initialize}" />
 
