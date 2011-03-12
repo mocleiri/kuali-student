@@ -10,7 +10,7 @@ public class ApplicationTest {
 
 	@Test
 	public void appTest() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("jdbc-test-context.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("dba-context.xml");
 		Credentials c = (Credentials) context.getBean("org.kuali.jdbc.dba.credentials");
 		Assert.assertNotNull(c);
 	}

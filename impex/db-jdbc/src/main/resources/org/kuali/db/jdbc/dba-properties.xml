@@ -4,7 +4,7 @@
   <comment>JDBC Properties</comment>
 
   <!-- Setting this property to "true" will execute SQL that drops and then recreates a database -->
-  <entry key="org.kuali.dba.sql.execute">false</entry>
+  <entry key="org.kuali.jdbc.dba.sql.execute">false</entry>
   
   <!-- JDBC properties -->
   <entry key="org.kuali.jdbc.vendor">oracle</entry>

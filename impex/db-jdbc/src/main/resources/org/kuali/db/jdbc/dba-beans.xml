@@ -32,7 +32,7 @@
   </bean>
 
   <bean id="org.kuali.jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute"
-    p:executeSql="${org.kuali.dba.sql.execute}">
+    p:executeSql="${org.kuali.jdbc.dba.sql.execute}">
     <property name="connectionHandler">
       <ref bean="org.kuali.jdbc.dba.connectionHandler" />
     </property>
