@@ -14,8 +14,6 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <context:property-placeholder location="classpath:org/kuali/db/impex/properties.xml" />
-
   <bean id="org.kuali.impex.metadata" class="org.kuali.db.impex.ImpexMetadata" p:platform="${org.kuali.impex.platform}"
     p:schemaLocation="${org.kuali.impex.resource}" />
 
