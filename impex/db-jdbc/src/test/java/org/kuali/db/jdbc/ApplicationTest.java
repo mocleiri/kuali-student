@@ -1,6 +1,5 @@
 package org.kuali.db.jdbc;
 
-import junit.framework.Assert;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -11,7 +10,7 @@ public class ApplicationTest {
 	@Test
 	public void appTest() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("dba-context.xml");
-		Credentials c = (Credentials) context.getBean("org.kuali.jdbc.dba.credentials");
-		Assert.assertNotNull(c);
+		String fooBean = (String) context.getBean("foo.bean");
+		System.out.println(fooBean);
 	}
 }

@@ -2,6 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <comment>Application Properties</comment>
+  <entry key="foo">bar2</entry>
   <entry key="org.kuali.jdbc.username">KSTEST</entry>
   <entry key="org.kuali.jdbc.password">KSTEST</entry>
   <entry key="org.kuali.jdbc.dba.url">jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</entry>
