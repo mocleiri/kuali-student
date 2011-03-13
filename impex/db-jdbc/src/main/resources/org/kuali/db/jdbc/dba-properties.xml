@@ -3,7 +3,6 @@
 <properties>
   <comment>JDBC Properties</comment>
 
-  <!-- Setting this property to "true" will execute SQL that drops and then recreates a database -->
   <entry key="foo">bar</entry>
 
   <!-- Setting this property to "true" will execute SQL that drops and then recreates a database -->
@@ -11,7 +10,7 @@
   
   <!-- JDBC properties -->
   <entry key="org.kuali.jdbc.vendor">oracle</entry>
-  <entry key="org.kuali.jdbc.database">${org.kuali.jdbc.username}</entry>
+  <entry key="org.kuali.jdbc.database">${org.kuali.jdbc.dba.username}</entry>
   <entry key="org.kuali.jdbc.driver">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.driver}</entry>
   <entry key="org.kuali.jdbc.dba.url">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.dba.url}</entry>
   <entry key="org.kuali.jdbc.dba.username">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.dba.username}</entry>
@@ -65,7 +64,7 @@
     /
     GRANT SELECT ON dba_pending_transactions to ${org.kuali.jdbc.username}
     /
-    GRANT EXECUTE ON dbms_system to ${org.kuali.jdbc.username}
+    GRANT EXECUTE ON dbms_system to ${org.kuali.jdbc.dba.username}
     /
 ]]>
   </entry>
@@ -88,7 +87,7 @@
     GRANT USAGE ON *.* TO '${org.kuali.jdbc.username}'@'%' IDENTIFIED BY '${org.kuali.jdbc.password}'
     /
 
-    DROP USER ${org.kuali.jdbc.username}
+    DROP USER ${org.kuali.jdbc.dba.username}
     /
 ]]>
   </entry>

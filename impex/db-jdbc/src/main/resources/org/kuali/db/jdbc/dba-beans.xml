@@ -14,17 +14,6 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="org.kuali.db.jdbc.dba.system.properties.mode.override" class="java.lang.Integer">
-    <constructor-arg type="java.lang.String" value="2" />
-  </bean>
-
-  <bean id="org.kuali.db.jdbc.dba.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-    p:location="classpath:org/kuali/db/jdbc/dba-properties.xml">
-    <property name="systemPropertiesMode">
-      <ref bean="org.kuali.db.jdbc.dba.system.properties.mode.override" />
-    </property>
-  </bean>
-
   <bean id="foo.bean" class="java.lang.String">
     <constructor-arg type="java.lang.String">
       <value>${foo}</value>

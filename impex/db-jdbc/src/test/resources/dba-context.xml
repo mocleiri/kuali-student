@@ -19,7 +19,13 @@
   </bean>
 
   <bean id="org.kuali.db.jdbc.property.configurer.test" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-    p:ignoreUnresolvablePlaceholders="true" p:location="classpath:dba-test-properties.xml">
+    p:ignoreUnresolvablePlaceholders="true">
+    <property name="locations">
+      <list>
+        <value>classpath:org/kuali/db/jdbc/dba-properties.xml</value>
+        <value>classpath:dba-test-properties.xml</value>
+      </list>
+    </property>
     <property name="systemPropertiesMode">
       <ref bean="org.kuali.db.jdbc.system.properties.mode.override.test" />
     </property>
