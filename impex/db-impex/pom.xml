@@ -57,8 +57,9 @@
     </dependency>
     <dependency>
       <groupId>org.kuali.student.db</groupId>
-      <artifactId>ks-embedded-db</artifactId>
+      <artifactId>ks-rice-db</artifactId>
       <version>1.2-SNAPSHOT</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.oracle</groupId>
