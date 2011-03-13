@@ -23,15 +23,17 @@
     <property name="locations">
       <list>
         <value>classpath:org/kuali/db/jdbc/dba-properties.xml</value>
-        <value>classpath:dba-test-properties.xml</value>
+        <value>classpath:org/kuali/db/impex/properties.xml</value>
+        <value>classpath:org/kuali/db/jdbc/dba-test-properties.xml</value>
+        <value>classpath:org/kuali/db/impex/test-properties.xml</value>
       </list>
     </property>
     <property name="systemPropertiesMode">
-      <ref bean="org.kuali.jdbc.system.properties.mode.override.test" />
+      <ref bean="org.kuali.impex.property.configurer.test" />
     </property>
   </bean>
 
-  <import resource="classpath:org/kuali/db/jdbc/dba-context.xml" />
+  <import resource="classpath:org/kuali/db/jdbc/dba-beans.xml" />
   <import resource="classpath:org/kuali/db/impex/context.xml" />
 
 </beans>
