@@ -34,6 +34,6 @@
   </bean>
 
   <import resource="classpath:org/kuali/db/jdbc/dba-beans.xml" />
-  <import resource="classpath:org/kuali/db/impex/context.xml" />
+  <import resource="classpath:org/kuali/db/impex/beans.xml" />
 
 </beans>
