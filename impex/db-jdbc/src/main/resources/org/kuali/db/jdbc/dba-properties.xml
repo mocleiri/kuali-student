@@ -62,7 +62,7 @@
     /
     GRANT SELECT ON dba_pending_transactions to ${org.kuali.jdbc.username}
     /
-    GRANT EXECUTE ON dbms_system to ${org.kuali.jdbc.dba.username}
+    GRANT EXECUTE ON dbms_system to ${org.kuali.jdbc.username}
     /
 ]]>
   </entry>
