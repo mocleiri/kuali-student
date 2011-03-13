@@ -1,14 +1,19 @@
 package org.kuali.db.jdbc;
 
 import org.junit.Test;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationTest {
+	final Logger logger = LoggerFactory.getLogger(ApplicationTest.class);
 
 	@Test
 	public void appTest() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("dba-context.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("dba-test-context.xml");
 		showContext(context);
 	}
 
@@ -16,7 +21,7 @@ public class ApplicationTest {
 		String[] names = context.getBeanDefinitionNames();
 		for (String name : names) {
 			Object bean = context.getBean(name);
-			System.out.println(name + "=" + bean);
+			logger.info(name + "=" + bean);
 		}
 	}
 }
