@@ -60,5 +60,11 @@
       <artifactId>ks-embedded-db</artifactId>
       <version>1.2-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc14</artifactId>
+      <version>10.2.0.3.0</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 </project>
