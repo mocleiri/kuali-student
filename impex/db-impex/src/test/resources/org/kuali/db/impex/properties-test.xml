@@ -3,5 +3,5 @@
 <properties>
   <comment>Application Properties</comment>
   <entry key="org.kuali.impex.platform">oracle</entry>
-  <entry key="org.kuali.impex.database">classpath:ks-embedded-db.xml</entry>
+  <entry key="org.kuali.impex.database">classpath:ks-rice-db.xml</entry>
 </properties>
