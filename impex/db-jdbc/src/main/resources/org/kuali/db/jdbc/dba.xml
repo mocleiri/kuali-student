@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2008-2009 The Kuali Foundation Licensed under the Educational Community License, Version 2.0 (the "License"); 
+  you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.opensource.org/licenses/ecl2.php 
+  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS 
+  IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
+  governing permissions and limitations under the License. -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/util 
+                           http://www.springframework.org/schema/util/spring-util-2.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+  <bean id="org.kuali.jdbc.property.configurer.priority" class="java.lang.Integer">
+    <constructor-arg type="java.lang.String" value="10000" />
+  </bean>
+
+  <bean id="org.kuali.jdbc.property.configurer" class="org.kuali.db.jdbc.MyPropertyPlaceHolderConfigurer"
+    p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:ignoreUnresolvablePlaceholders="true"
+    p:location="classpath:org/kuali/db/jdbc/dba-properties.xml" p:order-ref="org.kuali.jdbc.property.configurer.priority" />
+
+  <bean id="org.kuali.jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.drop}" />
+  <bean id="org.kuali.jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.initialize}" />
+
+  <util:list id="org.kuali.jdbc.dba.transactions" list-class="java.util.Vector">
+    <ref bean="org.kuali.jdbc.transaction.drop" />
+    <ref bean="org.kuali.jdbc.transaction.initialize" />
+  </util:list>
+
+  <bean id="org.kuali.jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${org.kuali.jdbc.dba.username}"
+    p:password="${org.kuali.jdbc.dba.password}" />
+
+  <bean id="org.kuali.jdbc.dba.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler" p:driver="${org.kuali.jdbc.driver}"
+    p:url="${org.kuali.jdbc.dba.url}">
+    <property name="credentials">
+      <ref bean="org.kuali.jdbc.dba.credentials" />
+    </property>
+  </bean>
+
+  <bean id="org.kuali.jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute"
+    p:executeSql="${org.kuali.jdbc.dba.sql.execute}">
+    <property name="connectionHandler">
+      <ref bean="org.kuali.jdbc.dba.connectionHandler" />
+    </property>
+    <property name="transactions">
+      <ref bean="org.kuali.jdbc.dba.transactions" />
+    </property>
+  </bean>
+</beans>

@@ -1,7 +1,9 @@
 package org.kuali.db.jdbc;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
+import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,10 +51,14 @@ public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigur
 	}
 
 	protected void showProperties(Properties properties) {
+		Map<String, String> sortedProperties = new TreeMap<String, String>();
 		for (Object key : properties.keySet()) {
 			String property = properties.getProperty(key + "");
 			property = property.replace("\n", "");
-			logger.debug(key + "=" + property);
+			sortedProperties.put(key + "", property);
+		}
+		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
+			logger.debug(entry.getKey() + "=" + entry.getValue());
 		}
 	}
 }

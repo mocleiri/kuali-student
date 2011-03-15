@@ -14,31 +14,11 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="org.kuali.jdbc.transaction.drop" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.drop}" />
-  <bean id="org.kuali.jdbc.transaction.initialize" class="org.kuali.db.jdbc.Transaction" p:sqlCommand="${org.kuali.jdbc.sql.initialize}" />
+  <bean id="org.kuali.jdbc.property.configurer.test.1" class="org.kuali.db.jdbc.MyPropertyPlaceHolderConfigurer"
+    p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:order="0"
+    p:location="classpath:org/kuali/db/jdbc/dba-properties-test.xml" p:ignoreUnresolvablePlaceholders="true" />
 
-  <util:list id="org.kuali.jdbc.dba.transactions" list-class="java.util.Vector">
-    <ref bean="org.kuali.jdbc.transaction.drop" />
-    <ref bean="org.kuali.jdbc.transaction.initialize" />
-  </util:list>
+  <bean id="org.kuali.jdbc.property.configurer.test.2" class="org.kuali.db.jdbc.MyPropertyPlaceHolderConfigurer"
+    p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 
-  <bean id="org.kuali.jdbc.dba.credentials" class="org.kuali.db.jdbc.Credentials" p:username="${org.kuali.jdbc.dba.username}"
-    p:password="${org.kuali.jdbc.dba.password}" />
-
-  <bean id="org.kuali.jdbc.dba.connectionHandler" class="org.kuali.db.jdbc.ConnectionHandler" p:driver="${org.kuali.jdbc.driver}"
-    p:url="${org.kuali.jdbc.dba.url}">
-    <property name="credentials">
-      <ref bean="org.kuali.jdbc.dba.credentials" />
-    </property>
-  </bean>
-
-  <bean id="org.kuali.jdbc.dba.sql.executor" class="org.kuali.db.jdbc.SQLExecutor" init-method="execute"
-    p:executeSql="${org.kuali.jdbc.dba.sql.execute}">
-    <property name="connectionHandler">
-      <ref bean="org.kuali.jdbc.dba.connectionHandler" />
-    </property>
-    <property name="transactions">
-      <ref bean="org.kuali.jdbc.dba.transactions" />
-    </property>
-  </bean>
 </beans>

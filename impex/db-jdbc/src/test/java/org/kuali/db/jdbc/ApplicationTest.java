@@ -13,7 +13,8 @@ public class ApplicationTest {
 
 	@Test
 	public void appTest() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-context-test.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-context-test.xml",
+				"org/kuali/db/jdbc/dba-beans.xml");
 		showContext(context);
 	}
 

@@ -13,10 +13,14 @@
   <entry key="org.kuali.jdbc.dba.url">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.dba.url}</entry>
   <entry key="org.kuali.jdbc.dba.username">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.dba.username}</entry>
   <entry key="org.kuali.jdbc.dba.password">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.dba.password}</entry>
+  <entry key="org.kuali.jdbc.username">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.username}</entry>
+  <entry key="org.kuali.jdbc.password">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.password}</entry>
   <entry key="org.kuali.jdbc.sql.drop">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.sql.drop}</entry>
   <entry key="org.kuali.jdbc.sql.initialize">${org.kuali.jdbc.${org.kuali.jdbc.vendor}.sql.initialize}</entry>
 
   <!-- Oracle properties -->
+  <entry key="org.kuali.jdbc.oracle.username">KSEMBEDDED</entry>
+  <entry key="org.kuali.jdbc.oracle.password">KSEMBEDDED</entry>
   <entry key="org.kuali.jdbc.oracle.driver">oracle.jdbc.driver.OracleDriver</entry>
   <entry key="org.kuali.jdbc.oracle.dba.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
   <entry key="org.kuali.jdbc.oracle.dba.username">SYS AS SYSDBA</entry>
@@ -72,6 +76,8 @@
   </entry>
 
   <!-- MySQL properties -->
+  <entry key="org.kuali.jdbc.oracle.username">ksembedded</entry>
+  <entry key="org.kuali.jdbc.oracle.password">ksembedded</entry>
   <entry key="org.kuali.jdbc.mysql.driver">com.mysql.jdbc.Driver</entry>
   <entry key="org.kuali.jdbc.mysql.dba.url">jdbc:mysql://localhost:3306/</entry>
   <entry key="org.kuali.jdbc.mysql.dba.username">root</entry>

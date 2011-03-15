@@ -10,6 +10,9 @@
   <logger name="org.kuali.db.jdbc">
     <level value="debug" />
   </logger>
+  <logger name="org.springframework">
+    <level value="debug" />
+  </logger>
   <root>
     <priority value="info" />
     <appender-ref ref="console" />
