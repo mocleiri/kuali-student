@@ -22,6 +22,7 @@ public class ApplicationTest {
 		}
 	}
 
+	@Test
 	public void appTest2() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-test.xml",
 				"org/kuali/db/jdbc/dba.xml");
