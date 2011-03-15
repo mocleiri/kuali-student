@@ -43,7 +43,7 @@
   </entry>
   <entry key="kuali.jdbc.oracle.sql.create"><![CDATA[
     CREATE USER ${kuali.jdbc.oracle.username}
-    IDENTIFIED BY ${kuali.jdbc.password}
+    IDENTIFIED BY ${kuali.jdbc.oracle.password}
     DEFAULT TABLESPACE ${kuali.jdbc.oracle.defaultTablespace}
     TEMPORARY TABLESPACE ${kuali.jdbc.oracle.temporaryTablespace}
     QUOTA ${kuali.jdbc.oracle.quota} ON ${kuali.jdbc.oracle.defaultTablespace}
@@ -67,7 +67,7 @@
     /
     GRANT SELECT ON dba_pending_transactions to ${kuali.jdbc.oracle.username}
     /
-    GRANT EXECUTE ON dbms_system to ${kuali.jdbc.username}
+    GRANT EXECUTE ON dbms_system to ${kuali.jdbc.oracle.username}
     /
 ]]>
   </entry>
@@ -87,27 +87,27 @@
   <entry key="kuali.jdbc.mysql.character.set">utf8</entry>
   <entry key="kuali.jdbc.mysql.collate">utf8_bin</entry>
   <entry key="kuali.jdbc.mysql.sql.drop"><![CDATA[
-    DROP DATABASE IF EXISTS ${kuali.jdbc.database}
+    DROP DATABASE IF EXISTS ${kuali.jdbc.mysql.database}
     /
 
-    GRANT USAGE ON *.* TO '${kuali.jdbc.username}'@'%' IDENTIFIED BY '${kuali.jdbc.password}'
+    GRANT USAGE ON *.* TO '${kuali.jdbc.mysql.username}'@'%' IDENTIFIED BY '${kuali.jdbc.mysql.password}'
     /
 
-    DROP USER ${kuali.jdbc.dba.username}
+    DROP USER ${kuali.jdbc.dba.mysql.username}
     /
 ]]>
   </entry>
   <entry key="kuali.jdbc.mysql.sql.create"><![CDATA[
-    CREATE DATABASE IF NOT EXISTS ${kuali.jdbc.database}
+    CREATE DATABASE IF NOT EXISTS ${kuali.jdbc.mysql.database}
     DEFAULT CHARACTER SET '${kuali.jdbc.mysql.character.set}'
     DEFAULT COLLATE '${kuali.jdbc.mysql.collate}';
     /
 ]]>
   </entry>
   <entry key="kuali.jdbc.mysql.sql.grants"><![CDATA[
-    GRANT ALL ON ${kuali.jdbc.database}.*
-    TO '${kuali.jdbc.username}'@'%'
-    IDENTIFIED BY '${kuali.jdbc.password}'
+    GRANT ALL ON ${kuali.jdbc.mysql.database}.*
+    TO '${kuali.jdbc.mysql.username}'@'%'
+    IDENTIFIED BY '${kuali.jdbc.mysql.password}'
     WITH GRANT OPTION
     /
 ]]>
