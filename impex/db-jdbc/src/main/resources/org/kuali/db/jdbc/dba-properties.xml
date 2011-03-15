@@ -32,7 +32,7 @@
   <entry key="kuali.jdbc.oracle.error.sqlcode.userDoesNotExist">-01918</entry>
   <entry key="kuali.jdbc.oracle.sql.drop"><![CDATA[
     BEGIN
-      EXECUTE IMMEDIATE 'DROP USER ${kuali.jdbc.username} CASCADE';
+      EXECUTE IMMEDIATE 'DROP USER ${kuali.jdbc.oracle.username} CASCADE';
       EXCEPTION WHEN OTHERS THEN
       IF SQLCODE != ${kuali.jdbc.oracle.error.sqlcode.userDoesNotExist} THEN
         RAISE;
