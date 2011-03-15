@@ -15,7 +15,7 @@
                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
   <bean id="kuali.jdbc.property.configurer.priority" class="java.lang.Integer">
-    <constructor-arg type="java.lang.String" value="10000" />
+    <constructor-arg type="java.lang.String" value="1000000" />
   </bean>
 
   <bean id="kuali.jdbc.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
