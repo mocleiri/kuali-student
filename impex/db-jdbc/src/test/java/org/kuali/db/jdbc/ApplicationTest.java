@@ -12,9 +12,19 @@ public class ApplicationTest {
 	final Logger logger = LoggerFactory.getLogger(ApplicationTest.class);
 
 	@Test
-	public void appTest() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-context-test.xml",
-				"org/kuali/db/jdbc/dba-beans.xml");
+	public void appTest1() {
+
+		try {
+			ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba.xml");
+			showContext(context);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void appTest2() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-test.xml",
+				"org/kuali/db/jdbc/dba.xml");
 		showContext(context);
 	}
 
