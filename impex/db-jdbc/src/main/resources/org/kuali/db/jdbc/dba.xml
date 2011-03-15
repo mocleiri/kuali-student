@@ -18,7 +18,7 @@
     <constructor-arg type="java.lang.String" value="10000" />
   </bean>
 
-  <bean id="kuali.jdbc.property.configurer" class="org.kuali.db.jdbc.MyPropertyPlaceHolderConfigurer"
+  <bean id="kuali.jdbc.property.configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:ignoreUnresolvablePlaceholders="true"
     p:location="classpath:org/kuali/db/jdbc/dba-properties.xml" p:order-ref="kuali.jdbc.property.configurer.priority" />
 
