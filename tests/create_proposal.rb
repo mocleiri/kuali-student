@@ -50,7 +50,7 @@ Curriculum.new(cp_req).create_proposal(
   #config.directory["department"]["name"],,
   'Psychology Dept',
   'The College of Arts and Humanities',
-  {:submit => true}
+  {:submit => true, :collaborator => nil, :instructor => nil}
 )
 
 # Logout
