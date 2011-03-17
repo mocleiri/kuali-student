@@ -11,7 +11,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ApplicationTest {
 	final Logger logger = LoggerFactory.getLogger(ApplicationTest.class);
 
-	@Test
 	public void appTest1() {
 
 		try {

@@ -15,7 +15,7 @@ public class Spring5369 {
 	@Test
 	public void testSpring5369() {
 		String oracleUser = "MYDB";
-		String oraclePassword = "MYDB";
+		String oraclePassword = oracleUser;
 		String expectedSql = getOracleSql(oracleUser, oraclePassword);
 		String placeHolderSql = getOracleSql("${jdbc.user}", "${jdbc.password}");
 		Properties props = new Properties();
@@ -35,8 +35,7 @@ public class Spring5369 {
 		Assert.assertEquals(expectedSql, actualSql);
 	}
 
-	protected String getOracleSql(String userSubsitution, String passwordSubsitution) {
-		return "DROP USER " + userSubsitution + " CASCADE\n/\nCREATE USER " + userSubsitution + " IDENTIFIED BY "
-				+ passwordSubsitution + "\n/\n";
+	protected String getOracleSql(String user, String password) {
+		return "DROP USER " + user + " CASCADE\n/\nCREATE USER " + user + " IDENTIFIED BY " + password + "\n/\n";
 	}
 }

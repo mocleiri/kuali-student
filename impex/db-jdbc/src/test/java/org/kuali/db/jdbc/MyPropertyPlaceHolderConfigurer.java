@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,54 +13,91 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.util.PropertyPlaceholderHelper;
 
 public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigurer {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceHolderConfigurer.class);
+	boolean maskPropertyValues = true;
+	// Mask any values containing the word "password" (case insensitive)
+	String maskExpression = "(.)*((?i)password)(.*)";
+	String maskValue = "******";
+	Pattern pattern;
 
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
-			logger.info("Hello");
 			Properties mergedProps = mergeProperties();
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("******************* Merged Props *********************");
-				showProperties(mergedProps);
-				logger.debug("******************* Merged Props *********************");
-			}
 
 			// Convert the merged properties, if necessary.
 			convertProperties(mergedProps);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("******************* Converted Props *********************");
-				showProperties(mergedProps);
-				logger.debug("******************* Converted Props *********************");
+			if (logger.isInfoEnabled()) {
+				logProperties(mergedProps);
 			}
 
 			// Let the subclass process the properties.
 			processProperties(beanFactory, mergedProps);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("******************* Processed Props *********************");
-				showProperties(mergedProps);
-				logger.debug("******************* Processed Props *********************");
-			}
-
-			logger.info("Goodbye");
 		} catch (IOException ex) {
 			throw new BeanInitializationException("Could not load properties", ex);
 		}
 	}
 
-	protected void showProperties(Properties properties) {
+	protected void logProperties(Properties properties) {
+		if (properties == null || properties.size() == 0) {
+			return;
+		}
+		if (maskPropertyValues) {
+			pattern = Pattern.compile(maskExpression);
+		}
+		PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(DEFAULT_PLACEHOLDER_PREFIX,
+				DEFAULT_PLACEHOLDER_SUFFIX);
+
 		Map<String, String> sortedProperties = new TreeMap<String, String>();
-		for (Object key : properties.keySet()) {
-			String property = properties.getProperty(key + "");
-			property = property.replace("\n", "");
-			sortedProperties.put(key + "", property);
+		for (String key : properties.stringPropertyNames()) {
+			String property = properties.getProperty(key);
+			String value = helper.replacePlaceholders(property, properties);
+			sortedProperties.put(key, value);
 		}
+		logger.info("******************* Spring Properties *********************");
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
-			logger.debug(entry.getKey() + "=" + entry.getValue());
+			logger.info(entry.getKey() + "=" + getValue(entry));
 		}
+	}
+
+	protected String getValue(Map.Entry<String, String> entry) {
+		if (!maskPropertyValues) {
+			return entry.getValue();
+		}
+		Matcher matcher = pattern.matcher(entry.getKey());
+		boolean match = matcher.matches();
+		if (match) {
+			return maskValue;
+		} else {
+			return entry.getValue();
+		}
+	}
+
+	public String getMaskExpression() {
+		return maskExpression;
+	}
+
+	public void setMaskExpression(String maskExpression) {
+		this.maskExpression = maskExpression;
+	}
+
+	public boolean isMaskPropertyValues() {
+		return maskPropertyValues;
+	}
+
+	public void setMaskPropertyValues(boolean maskPropertyValues) {
+		this.maskPropertyValues = maskPropertyValues;
+	}
+
+	public String getMaskValue() {
+		return maskValue;
+	}
+
+	public void setMaskValue(String maskValue) {
+		this.maskValue = maskValue;
 	}
 }

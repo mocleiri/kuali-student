@@ -8,9 +8,9 @@
     </layout>
   </appender>
   <logger name="org.kuali.db.jdbc">
-    <level value="info" />
+    <level value="debug" />
   </logger>
-  <logger name="org.springframework">
+  <logger name="org.springframework.util">
     <level value="info" />
   </logger>
   <root>
