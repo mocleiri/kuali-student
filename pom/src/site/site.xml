@@ -33,7 +33,7 @@
     </head>
 
     <menu ref="parent" inherit="top" />
-    <menu ref="modules" inherit="bottom"/>
+    <menu ref="modules" inherit="top"/>
     <menu ref="reports" inherit="bottom"/>
   </body>
 </project>
