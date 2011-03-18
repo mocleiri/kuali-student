@@ -147,7 +147,6 @@
     <kuali.site.plugin.version>3.0-beta-3</kuali.site.plugin.version>
     <kuali.site.bucket>site.origin.kuali.org</kuali.site.bucket>
     <kuali.site.hostname>site.kuali.org</kuali.site.hostname>
-    <kuali.site.public.url>http://${kuali.site.hostname}/${project.artifactId}/${project.version}</kuali.site.public.url>
     <kuali.site.server.id>kuali.site</kuali.site.server.id>
     <kuali.site.bucket.recurse>true</kuali.site.bucket.recurse>
 
