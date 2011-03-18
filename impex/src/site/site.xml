@@ -40,7 +40,8 @@ under the License.
         'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ga, s); })();</script>
     </head>
-    <menu ref="modules"/>
+    <menu ref="parent" inherit="top"/>
+    <menu ref="modules" inherit="top"/>
     <menu ref="reports" inherit="bottom"/>
   </body>
 </project>
