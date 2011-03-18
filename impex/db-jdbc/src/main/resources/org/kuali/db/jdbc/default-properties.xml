@@ -19,7 +19,7 @@
   <entry key="kuali.jdbc.sql.initialize">${kuali.jdbc.${kuali.jdbc.vendor}.sql.initialize}</entry>
 
   <!-- Oracle properties -->
-  <entry key="kuali.jdbc.oracle.database">KSEMBEDDED</entry>
+  <entry key="kuali.jdbc.oracle.database">KUALIDB</entry>
   <entry key="kuali.jdbc.oracle.username">${kuali.jdbc.oracle.database}</entry>
   <entry key="kuali.jdbc.oracle.password">${kuali.jdbc.oracle.database}</entry>
   <entry key="kuali.jdbc.oracle.driver">oracle.jdbc.driver.OracleDriver</entry>
@@ -77,7 +77,7 @@
   </entry>
 
   <!-- MySQL properties -->
-  <entry key="kuali.jdbc.mysql.database">ksembedded</entry>
+  <entry key="kuali.jdbc.mysql.database">kualidb</entry>
   <entry key="kuali.jdbc.mysql.username">${kuali.jdbc.mysql.database}</entry>
   <entry key="kuali.jdbc.mysql.password">${kuali.jdbc.mysql.database}</entry>
   <entry key="kuali.jdbc.mysql.driver">com.mysql.jdbc.Driver</entry>

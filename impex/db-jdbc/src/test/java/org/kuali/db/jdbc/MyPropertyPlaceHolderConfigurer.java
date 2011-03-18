@@ -17,25 +17,31 @@ import org.springframework.util.PropertyPlaceholderHelper;
 
 public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigurer {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceHolderConfigurer.class);
+	// If true, strip the new line character when logging values
+	boolean flattenPropertyValues;
+	// If true, don't log values for keys that match the maskExpression
 	boolean maskPropertyValues = true;
 	// Mask values if the key contains "password" (case insensitive)
 	String maskExpression = "(.)*((?i)password)(.*)";
 	String maskValue = "******";
 	Pattern pattern;
+	// Retain the properties we load
+	Properties properties;
 
+	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
-			Properties mergedProps = mergeProperties();
+			properties = mergeProperties();
 
 			// Convert the merged properties, if necessary.
-			convertProperties(mergedProps);
+			convertProperties(properties);
 
 			if (logger.isInfoEnabled()) {
-				logProperties(mergedProps);
+				logProperties(properties);
 			}
 
 			// Let the subclass process the properties.
-			processProperties(beanFactory, mergedProps);
+			processProperties(beanFactory, properties);
 
 		} catch (IOException ex) {
 			throw new BeanInitializationException("Could not load properties", ex);
@@ -60,20 +66,24 @@ public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigur
 		}
 		logger.info("******************* Spring Properties *********************");
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
-			logger.info(entry.getKey() + "=" + getMaskedValue(entry));
+			logger.info(entry.getKey() + "=" + getLogValue(entry));
 		}
 	}
 
-	protected String getMaskedValue(Map.Entry<String, String> entry) {
+	protected String getLogValue(Map.Entry<String, String> entry) {
+		String value = entry.getValue();
+		if (flattenPropertyValues) {
+			value = value.replace("\n", "");
+		}
 		if (!maskPropertyValues) {
-			return entry.getValue();
+			return value;
 		}
 		Matcher matcher = pattern.matcher(entry.getKey());
 		boolean match = matcher.matches();
 		if (match) {
 			return maskValue;
 		} else {
-			return entry.getValue();
+			return value;
 		}
 	}
 
@@ -99,5 +109,17 @@ public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigur
 
 	public void setMaskValue(String maskValue) {
 		this.maskValue = maskValue;
+	}
+
+	public boolean isFlattenPropertyValues() {
+		return flattenPropertyValues;
+	}
+
+	public void setFlattenPropertyValues(boolean flattenPropertyValues) {
+		this.flattenPropertyValues = flattenPropertyValues;
+	}
+
+	public Properties getProperties() {
+		return properties;
 	}
 }

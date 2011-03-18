@@ -17,7 +17,7 @@
   <bean id="kuali.jdbc.property.configurer.test.1" class="org.kuali.db.jdbc.MyPropertyPlaceHolderConfigurer"
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:order="0"
     p:location="classpath:org/kuali/db/jdbc/dba-properties-test.xml" p:ignoreUnresolvablePlaceholders="true"
-    p:maskPropertyValues="false" />
+    p:maskPropertyValues="false" p:flattenPropertyValues="true" />
 
   <bean id="kuali.jdbc.property.configurer.test.2" class="org.kuali.db.jdbc.MyPropertyPlaceHolderConfigurer"
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" />

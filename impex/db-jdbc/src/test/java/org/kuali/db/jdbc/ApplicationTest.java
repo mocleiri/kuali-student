@@ -11,8 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ApplicationTest {
 	final Logger logger = LoggerFactory.getLogger(ApplicationTest.class);
 
+	@Test
 	public void appTest1() {
-
 		try {
 			ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba.xml");
 			showContext(context);
@@ -21,7 +21,6 @@ public class ApplicationTest {
 		}
 	}
 
-	@Test
 	public void appTest2() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-test.xml",
 				"org/kuali/db/jdbc/dba.xml");
