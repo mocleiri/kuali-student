@@ -38,8 +38,8 @@
     <menu ref="parent" inherit="top" />
     -->
     
-    <!-- This isn't work due to this bug http://jira.codehaus.org/browse/MSITE-532
-    They've already fixed this, so we can add this back in, once maven-site-plugin 3.0-beta4 has been published
+    <!-- This isn't working due to this bug http://jira.codehaus.org/browse/MSITE-532
+    They've already fixed the issue, so we are just waiting on maven-site-plugin 3.0-beta4 to be published
     <menu ref="modules" inherit="top"/>
      -->
     <menu ref="reports" inherit="bottom"/>
