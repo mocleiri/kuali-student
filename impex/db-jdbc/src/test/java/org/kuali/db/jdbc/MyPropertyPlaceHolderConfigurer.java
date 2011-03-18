@@ -18,7 +18,7 @@ import org.springframework.util.PropertyPlaceholderHelper;
 public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigurer {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceHolderConfigurer.class);
 	boolean maskPropertyValues = true;
-	// Mask any values containing the word "password" (case insensitive)
+	// Mask values if the key contains "password" (case insensitive)
 	String maskExpression = "(.)*((?i)password)(.*)";
 	String maskValue = "******";
 	Pattern pattern;
