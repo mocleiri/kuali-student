@@ -21,8 +21,8 @@ public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigur
 	boolean flattenPropertyValues;
 	// If true, don't log values for keys that match the maskExpression
 	boolean maskPropertyValues = true;
-	// Mask values if the key contains "password" (case insensitive)
-	String maskExpression = "(.)*((?i)password)(.*)";
+	// Matches any string containing "password" (case insensitive)
+	String maskExpression = ".*((?i)password).*";
 	String maskValue = "******";
 	Pattern pattern;
 	// Retain the properties we load
@@ -31,6 +31,8 @@ public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigur
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
+			logger.info("Processing properties");
+
 			properties = mergeProperties();
 
 			// Convert the merged properties, if necessary.
