@@ -54,17 +54,17 @@ public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigur
 
 		Map<String, String> sortedProperties = new TreeMap<String, String>();
 		for (String key : properties.stringPropertyNames()) {
-			String property = properties.getProperty(key);
-			String value = helper.replacePlaceholders(property, properties);
-			sortedProperties.put(key, value);
+			String originalValue = properties.getProperty(key);
+			String resolvedValue = helper.replacePlaceholders(originalValue, properties);
+			sortedProperties.put(key, resolvedValue);
 		}
 		logger.info("******************* Spring Properties *********************");
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
-			logger.info(entry.getKey() + "=" + getValue(entry));
+			logger.info(entry.getKey() + "=" + getMaskedValue(entry));
 		}
 	}
 
-	protected String getValue(Map.Entry<String, String> entry) {
+	protected String getMaskedValue(Map.Entry<String, String> entry) {
 		if (!maskPropertyValues) {
 			return entry.getValue();
 		}
