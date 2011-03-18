@@ -1,4 +1,4 @@
-package org.kuali.db.jdbc;
+package org.kuali.spring.util;
 
 import java.io.IOException;
 import java.util.Map;
@@ -12,11 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.util.PropertyPlaceholderHelper;
 
-public class MyPropertyPlaceHolderConfigurer extends PropertyPlaceholderConfigurer {
-	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceHolderConfigurer.class);
+public class PropertyPlaceholderConfigurer extends
+		org.springframework.beans.factory.config.PropertyPlaceholderConfigurer {
+	final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);
 	// If true, strip the new line character when logging values
 	boolean flattenPropertyValues;
 	// If true, don't log values for keys that match the maskExpression
