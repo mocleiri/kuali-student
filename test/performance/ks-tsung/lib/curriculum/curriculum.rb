@@ -946,13 +946,7 @@ class Curriculum
   end
   
   
-  
-  def scratch
-    
-    
-    
-  end
-  
+  # Currently not working in 1.1
   def edit_proposal(proposal_name, opts={})
     
     defaults = {
@@ -1229,6 +1223,7 @@ class Curriculum
   
   
   # Find Course or Proposal
+  # Currently not working in 1.1
   def find(type, name, opts={})
     
     defaults = {

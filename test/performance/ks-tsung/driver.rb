@@ -13,7 +13,7 @@
 #     show help
 #
 # -c, --config [file.xml]:
-#     path to xml config file for everything after <tsung> and before <sessions>
+#     path to xml config file for everything after <tsung> and before <sessions> : NOT CURRENTLY SUPPORTED
 #
 # -d, --debug:
 #     enable debug logging
@@ -31,7 +31,7 @@
 #     filename(path) that you want to use for output XML
 #
 # -s, --sso [cas URL]:
-#     CAS login URL
+#     CAS login URL : NOT CURRENTLY SUPPORTED
 #
 # SUITE_FILE_NAME:
 #     suite file name containg list of tests. File must exist in suites directory
@@ -74,7 +74,7 @@ optparse = OptionParser.new do |opts|
   end
   
   # Config file
-  opts.on('-c', '--config FILE', 'path to xml config file for everything after <tsung> and before <sessions>') do |file|
+  opts.on('-c', '--config FILE', 'path to xml config file for everything after <tsung> and before <sessions> : NOT CURRENTLY SUPPORTED') do |file|
     config.intro_xml = file
     errors.push("#{opt} does not exist") unless(File.file?(config.intro_xml))
     option = true
@@ -91,13 +91,13 @@ optparse = OptionParser.new do |opts|
   end
   
   # Execute tests after generating xml
-  config.execute = false
+  config.execute = nil
   opts.on('-x', '--execute', 'start the load after generating the XML') do
     config.execute = true
   end
   
   # Verbose option for tsung
-  config.verbose = false
+  config.verbose = nil
   opts.on('-v', '--verbose', 'dumps http traffic from tsung') do
     config.verbose = true
   end
@@ -120,14 +120,14 @@ optparse = OptionParser.new do |opts|
   end
   
   # Enable thinktime
-  config.thinktime = false
+  config.thinktime = nil
   opts.on('-t', '--thinktime', 'enable thinktime sleeps') do
     config.thinktime = true
   end
   
   # SSO
   config.sso = false
-  opts.on('-s', '--sso URL', 'CAS login URL') do |url|
+  opts.on('-s', '--sso URL', 'CAS login URL: NOT CURRENTLY SUPPORTED') do |url|
     config.sso = url
   end
   

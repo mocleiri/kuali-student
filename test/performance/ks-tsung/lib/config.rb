@@ -38,15 +38,16 @@ class AutoConfig
     puts "Let's setup your test run config..."
     
     # Output file
-    xml_fn = ""
-    while(xml_fn == "")
+    if(!self.output)
       print "What do you want to name your output xml file? "
-      xml_fn = gets.strip
+      log_name = gets.strip
+      # If they specify a path then store that, otherwise stick it in config dir
+      self.output = (log_name =~ /^(\.|\/)/ ? log_name : "#{self.log_dir}/#{log_name}")
     end
-    # If they specify a path then store that, otherwise stick it in config dir
-    self.output = (xml_fn =~ /^(\.|\/)/ ? xml_fn : "#{self.log_dir}/#{xml_fn}")
+      
     self.log.info_msg "Your xml file will be here: #{self.output}"
-  
+    
+    
     #
     # Clients
     #
@@ -174,17 +175,23 @@ class AutoConfig
     #
     # Thinktime
     #
-    print "Do you want to insert user thinktime? [y/n] "
-    self.thinktime = (gets.chomp == 'y' ? true : false)
+    if(self.thinktime.nil?)
+      print "Do you want to insert user thinktime? [y/n] "
+      self.thinktime = (gets.chomp == 'y' ? true : false)
+    end
     
     #
     # Execute
     #
-    print "Do you want to execute tsung now? [y/n] "
-    self.execute = (gets.chomp == 'y' ? true : false)
+    if(self.execute.nil?)
+      print "Do you want to execute tsung now? [y/n] "
+      self.execute = (gets.chomp == 'y' ? true : false)
+    end
     
-    print "Do you want to dump http traffic from tsung? [y/n] "
-    self.verbose = (gets.chomp == 'y' ? true : false)
+    if(self.verbose.nil?)
+      print "Do you want to dump http traffic from tsung? [y/n] "
+      self.verbose = (gets.chomp == 'y' ? true : false)
+    end
     
   end
 
@@ -235,7 +242,7 @@ class AutoConfig
   def initialize_logs
     
     # Output path
-    self.log_path = "#{self.log_dir}/#{Time.now.to_i}_#{self.suite}.log" if(!self.log)
+    self.log_path = "#{self.log_dir}/#{Time.now.to_i}_#{self.suite}.log" if(!self.log_path)
     self.log        = LogWriter.new(self)
     self.log.info_msg("Your log file is here: #{self.log_path}")
     
