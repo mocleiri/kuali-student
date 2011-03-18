@@ -9,7 +9,8 @@
   express or implied. See the License for the specific language governing
   permissions and limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <!--
     Shared parent. Contains settings common to all projects at Kuali. This
@@ -19,19 +20,15 @@
   -->
   <groupId>org.kuali</groupId>
   <artifactId>kuali</artifactId>
-  <version>77-SNAPSHOT</version>
+  <version>76-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>The Kuali Foundation</name>
   <description>
     Kuali is a community of universities, colleges, businesses, and other
-    organizations that have partnered to build and
-    sustain open-source administrative software for higher education, by higher
-    education. Kuali software is designed to
-    meet the needs of all sizes of institutions, from land-grant research
-    universities to community colleges. The members
-    of the Kuali Community share a common vision of open, modular, and
-    distributed systems for their software requirements.
-    Kuali software is released under the Educational Community License
+    organizations that have partnered to build and sustain open-source administrative software for higher education, by higher
+    education. Kuali software is designed to meet the needs of all sizes of institutions, from land-grant research
+    universities to community colleges. The members of the Kuali Community share a common vision of open, modular, and
+    distributed systems for their software requirements. Kuali software is released under the Educational Community License
   </description>
   <licenses>
     <license>
@@ -122,7 +119,7 @@
     <kuali.compile.target>1.6</kuali.compile.target>
 
     <kuali.release.use.maven.default.profile>false</kuali.release.use.maven.default.profile>
-    <kuali.release.goals>site:attach-descriptor deploy site-deploy cloudfront:updateoriginbucket</kuali.release.goals>
+    <kuali.release.goals>deploy site-deploy cloudfront:updateoriginbucket</kuali.release.goals>
     <kuali.release.dryrun>false</kuali.release.dryrun>
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
     <kuali.release.username />
@@ -344,6 +341,13 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
               </manifest>
             </archive>
           </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>test-jar</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -679,7 +683,8 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
       <id>sonatype-oss-release</id>
       <properties>
         <kuali.nexus.sonatype.url>https://oss.sonatype.org</kuali.nexus.sonatype.url>
-        <kuali.nexus.sonatype.description>Releasing version ${project.version} of ${project.artifactId}</kuali.nexus.sonatype.description>
+        <kuali.nexus.sonatype.description>Releasing version ${project.version} of ${project.artifactId}
+        </kuali.nexus.sonatype.description>
         <kuali.nexus.sonatype.phase>deploy</kuali.nexus.sonatype.phase>
         <kuali.nexus.sonatype.automatic>true</kuali.nexus.sonatype.automatic>
         <kuali.nexus.sonatype.promote.auto.select.override>true</kuali.nexus.sonatype.promote.auto.select.override>
@@ -687,7 +692,8 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
 
         <kuali.repository.release.id>sonatype-nexus-staging</kuali.repository.release.id>
         <kuali.repository.release.name>Sonatype Nexus Release Repository</kuali.repository.release.name>
-        <kuali.repository.release.url>${kuali.nexus.sonatype.url}/service/local/staging/deploy/maven2/</kuali.repository.release.url>
+        <kuali.repository.release.url>${kuali.nexus.sonatype.url}/service/local/staging/deploy/maven2/
+        </kuali.repository.release.url>
 
         <!-- These are for reference only.  Not currently publishing snapshots to Sonatype's Nexus instance 
         <kuali.repository.snapshot.id>sonatype-nexus-snapshots</kuali.repository.snapshot.id>
@@ -705,7 +711,8 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
               <nexusUrl>${kuali.nexus.sonatype.url}</nexusUrl>
               <serverAuthId>${kuali.repository.release.id}</serverAuthId>
               <automatic>${kuali.nexus.sonatype.automatic}</automatic>
-              <promoteAutoSelectOverride>${kuali.nexus.sonatype.promote.auto.select.override}</promoteAutoSelectOverride>
+              <promoteAutoSelectOverride>${kuali.nexus.sonatype.promote.auto.select.override}
+              </promoteAutoSelectOverride>
               <description>${kuali.nexus.sonatype.description}</description>
               <targetRepositoryId>${kuali.nexus.sonatype.release.repository.id}</targetRepositoryId>
             </configuration>
@@ -765,6 +772,19 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
                 <phase>package</phase>
                 <goals>
                   <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-descriptor</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>attach-descriptor</goal>
                 </goals>
               </execution>
             </executions>
