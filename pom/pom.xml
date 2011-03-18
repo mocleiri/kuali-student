@@ -55,9 +55,6 @@
       <timezone>-7</timezone>
     </developer>
   </developers>
-  <modules>
-    <module>kuali-tmp</module>
-  </modules>
   <properties>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm z</maven.build.timestamp.format>
     <kuali.build.timestamp>${maven.build.timestamp}</kuali.build.timestamp>
@@ -126,7 +123,7 @@
     <kuali.compile.target>1.6</kuali.compile.target>
 
     <kuali.release.use.maven.default.profile>false</kuali.release.use.maven.default.profile>
-    <kuali.release.goals>deploy site-deploy cloudfront:updateoriginbucket</kuali.release.goals>
+    <kuali.release.goals>site:attach-descriptor deploy site-deploy cloudfront:updateoriginbucket</kuali.release.goals>
     <kuali.release.dryrun>false</kuali.release.dryrun>
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
     <kuali.release.username />
