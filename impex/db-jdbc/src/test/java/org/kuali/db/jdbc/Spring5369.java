@@ -5,9 +5,9 @@ import java.util.Properties;
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.kuali.spring.util.PropertyPlaceholderHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.PropertyPlaceholderHelper;
 
 public class Spring5369 {
 	final Logger logger = LoggerFactory.getLogger(Spring5369.class);

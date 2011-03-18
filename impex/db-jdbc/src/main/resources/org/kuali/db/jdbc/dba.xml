@@ -25,9 +25,11 @@
     <value>${kuali.jdbc.dba.properties}</value>
   </util:list>
 
+  <bean id="kuali.jdbc.dba.property.logger" class="org.kuali.spring.util.PropertiesLogger" p:flattenPropertyValues="true" />
+
   <bean id="kuali.jdbc.dba.property.configurer" class="org.kuali.spring.util.PropertyPlaceholderConfigurer"
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:ignoreUnresolvablePlaceholders="true"
-    p:ignoreResourceNotFound="true" p:flattenPropertyValues="true" p:locations-ref="kuali.jdbc.dba.property.locations"
+    p:ignoreResourceNotFound="true" p:propertiesLogger-ref="kuali.jdbc.dba.property.logger" p:locations-ref="kuali.jdbc.dba.property.locations"
     p:order-ref="kuali.jdbc.dba.property.configurer.priority" />
     
   <!-- 
