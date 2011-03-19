@@ -6,7 +6,7 @@ import java.util.Set;
 import org.junit.Test;
 import org.kuali.spring.util.MyPropertyPlaceholderConfigurer;
 import org.kuali.spring.util.PPH3;
-import org.kuali.spring.util.PropertiesLogger;
+import org.kuali.spring.util.PropertiesLoggerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class Spring5369 {
 		try {
 			Properties props = getProps1();
 			MyPropertyPlaceholderConfigurer ppc = new MyPropertyPlaceholderConfigurer();
-			PropertiesLogger pLogger = new PropertiesLogger();
+			PropertiesLoggerHelper pLogger = new PropertiesLoggerHelper();
 			pLogger.setFlattenPropertyValues(true);
 			pLogger.setMaskPropertyValues(false);
 			pLogger.logProperties(props, "Nested Properties for testing Spring issue 5369");
@@ -66,7 +66,7 @@ public class Spring5369 {
 			// props.put("jdbc.mysql.sql", "DROP DATABASE ${jdbc.user} / CREATE DATABASE ${jdbc.user} /");
 			// props.put("jdbc.mysql.user", "mydb");
 			// props.put("jdbc.mysql.password", "mydb");
-			PropertiesLogger pLogger = new PropertiesLogger();
+			PropertiesLoggerHelper pLogger = new PropertiesLoggerHelper();
 			pLogger.setFlattenPropertyValues(true);
 			pLogger.setMaskPropertyValues(false);
 			pLogger.logProperties(props, "Nested Properties for testing Spring issue 5369");

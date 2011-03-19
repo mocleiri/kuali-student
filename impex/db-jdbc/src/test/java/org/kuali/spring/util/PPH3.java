@@ -156,6 +156,7 @@ public class PPH3 {
 		logger.debug("Adding " + originalKey + " to visited keys");
 		boolean added = ctx.getVisitedPlaceholders().add(originalKey);
 
+		// Check to make sure we aren't in an infinite loop
 		if (!added) {
 			throw new IllegalArgumentException("Circular reference '" + originalKey + "' in property definitions");
 		}

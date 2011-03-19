@@ -11,7 +11,7 @@ import org.springframework.util.ObjectUtils;
 
 public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
-	PropertiesLogger propertiesLogger = new PropertiesLogger();
+	PropertiesLoggerHelper propertiesLogger = new PropertiesLoggerHelper();
 	Properties rawProperties;
 	Properties resolvedProperties;
 
@@ -130,11 +130,11 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 		return clone;
 	}
 
-	public PropertiesLogger getPropertiesLogger() {
+	public PropertiesLoggerHelper getPropertiesLogger() {
 		return propertiesLogger;
 	}
 
-	public void setPropertiesLogger(PropertiesLogger propertiesLogger) {
+	public void setPropertiesLogger(PropertiesLoggerHelper propertiesLogger) {
 		this.propertiesLogger = propertiesLogger;
 	}
 

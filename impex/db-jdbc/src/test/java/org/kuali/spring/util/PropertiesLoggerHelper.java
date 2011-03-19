@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PropertiesLogger {
+public class PropertiesLoggerHelper {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
 	// If true, strip the new line character when logging values
 	boolean flattenPropertyValues;

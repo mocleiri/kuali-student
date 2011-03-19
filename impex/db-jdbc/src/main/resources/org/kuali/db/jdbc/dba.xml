@@ -19,13 +19,13 @@
   </bean>
 
   <util:list id="kuali.jdbc.dba.property.locations">
-    <value>classpath:org/kuali/db/jdbc/default-properties.xml</value>
-    <value>classpath:kuali-dba.properties</value>
-    <value>classpath:kuali-dba.xml</value>
-    <value>${kuali.jdbc.dba.properties}</value>
+    <value>classpath:org/kuali/db/jdbc/default-dba-properties.xml</value>
+    <value>classpath:kualidba.properties</value>
+    <value>classpath:kualidba.xml</value>
+    <value>${kuali.dba.properties}</value>
   </util:list>
 
-  <bean id="kuali.jdbc.dba.property.logger" class="org.kuali.spring.util.PropertiesLogger" p:flattenPropertyValues="true"
+  <bean id="kuali.jdbc.dba.property.logger" class="org.kuali.spring.util.PropertiesLoggerHelper" p:flattenPropertyValues="true"
     p:maskPropertyValues="false" />
 
   <bean id="kuali.jdbc.dba.property.configurer" class="org.kuali.spring.util.MyPropertyPlaceholderConfigurer"
