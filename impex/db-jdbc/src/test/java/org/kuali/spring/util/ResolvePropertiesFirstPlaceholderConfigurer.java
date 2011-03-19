@@ -12,9 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.ObjectUtils;
 
-public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
-	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
+/**
+ * This class takes advantage of the convertProperties() hook provided by Spring to resolve placeholders in Spring
+ * properties before proceeding with resolving placeholders in Spring bean references. This allows you to do something
+ * useful (eg logging them, debugging them etc) with the complete set of properties that are going to be used by the
+ * container.
+ */
+public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
+	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+
 	Properties rawProperties;
 	Properties resolvedProperties;
 
@@ -37,7 +44,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Spring Properties ***"));
 		}
 
-		logger.debug("*** Merging original properties with resolved properties ***");
 		mergeProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
@@ -85,34 +91,34 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 	}
 
 	protected void mergeProperties(Properties originalProperties, Properties resolvedProperties) {
+		logger.debug("*** Merging original properties with resolved properties ***");
 		removeProperties(originalProperties, resolvedProperties.stringPropertyNames());
 		addProperties(originalProperties, resolvedProperties);
-		updateOriginalProperties(originalProperties, resolvedProperties);
+		updateProperties(originalProperties, resolvedProperties);
 	}
 
-	protected void updateOriginalProperties(Properties originalProperties, Properties resolvedProperties) {
-		List<String> originalNames = new ArrayList<String>(originalProperties.stringPropertyNames());
-		Collections.sort(originalNames);
-		Iterator<String> itr = originalNames.iterator();
+	protected void updateProperties(Properties oldProperties, Properties newProperties) {
+		List<String> oldNames = new ArrayList<String>(oldProperties.stringPropertyNames());
+		Collections.sort(oldNames);
+		Iterator<String> itr = oldNames.iterator();
 		while (itr.hasNext()) {
 			String commonKey = itr.next();
-			String originalPropertyValue = originalProperties.getProperty(commonKey);
-			String resolvedPropertyValue = resolvedProperties.getProperty(commonKey);
+			String oldPropertyValue = oldProperties.getProperty(commonKey);
+			String newPropertyValue = newProperties.getProperty(commonKey);
 			// The values are the same. Don't do anything
-			if (ObjectUtils.nullSafeEquals(originalPropertyValue, resolvedPropertyValue)) {
+			if (ObjectUtils.nullSafeEquals(oldPropertyValue, newPropertyValue)) {
 				continue;
 			}
 
 			// Update the original property value with the resolved property value
-			logger.debug("Update " + commonKey + " ["
-					+ loggerSupport.getPropertyValue(commonKey, originalPropertyValue) + "]->["
-					+ loggerSupport.getPropertyValue(commonKey, resolvedPropertyValue) + "]");
-			originalProperties.setProperty(commonKey, resolvedPropertyValue);
+			logger.debug("Update " + commonKey + "=" + loggerSupport.getPropertyValue(commonKey, newPropertyValue)
+					+ "was [" + loggerSupport.getPropertyValue(commonKey, oldPropertyValue) + "]->[");
+			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
 
 	protected Properties getResolvedProperties(Properties properties) {
-		PPH3 helper = new PPH3();
+		NestedPropertyPlaceholderHelper helper = new NestedPropertyPlaceholderHelper();
 		Properties resolvedProperties = new Properties();
 		Set<String> names = properties.stringPropertyNames();
 		for (String name : names) {
@@ -140,6 +146,14 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 
 	public void setLoggerSupport(PropertiesLoggerSupport propertiesLogger) {
 		this.loggerSupport = propertiesLogger;
+	}
+
+	public Properties getRawProperties() {
+		return rawProperties;
+	}
+
+	public Properties getResolvedProperties() {
+		return resolvedProperties;
 	}
 
 }

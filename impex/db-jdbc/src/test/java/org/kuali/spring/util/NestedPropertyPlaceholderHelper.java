@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.Assert;
+import org.springframework.util.PropertyPlaceholderHelper;
 import org.springframework.util.StringUtils;
 
 /**
@@ -39,9 +40,9 @@ import org.springframework.util.StringUtils;
  * @author Rob Harrop
  * @since 3.0
  */
-public class PPH3 {
+public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 
-	private static final Log logger = LogFactory.getLog(PPH3.class);
+	private static final Log logger = LogFactory.getLog(NestedPropertyPlaceholderHelper.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 
@@ -61,11 +62,11 @@ public class PPH3 {
 
 	private final boolean ignoreUnresolvablePlaceholders;
 
-	public PPH3() {
+	public NestedPropertyPlaceholderHelper() {
 		this(true);
 	}
 
-	public PPH3(boolean ignoreUnresolvablePlaceholders) {
+	public NestedPropertyPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {
 		this(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, ignoreUnresolvablePlaceholders);
 	}
@@ -79,7 +80,7 @@ public class PPH3 {
 	 * @param placeholderSuffix
 	 *            the suffix that denotes the end of a placeholder.
 	 */
-	public PPH3(String placeholderPrefix, String placeholderSuffix) {
+	public NestedPropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix) {
 		this(placeholderPrefix, placeholderSuffix, null, true);
 	}
 
@@ -96,8 +97,9 @@ public class PPH3 {
 	 *            indicates whether unresolvable placeholders should be ignored (<code>true</code>) or cause an
 	 *            exception (<code>false</code>).
 	 */
-	public PPH3(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
+	public NestedPropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
 			boolean ignoreUnresolvablePlaceholders) {
+		super(placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
 
 		Assert.notNull(placeholderPrefix, "placeholderPrefix must not be null");
 		Assert.notNull(placeholderSuffix, "placeholderSuffix must not be null");
@@ -114,15 +116,9 @@ public class PPH3 {
 	}
 
 	/**
-	 * Replaces all placeholders of format <code>${name}</code> with the corresponding property from the supplied
-	 * {@link Properties}.
 	 * 
-	 * @param value
-	 *            the value containing the placeholders to be replaced.
-	 * @param properties
-	 *            the <code>Properties</code> to use for replacement.
-	 * @return the supplied value with placeholders replaced inline.
 	 */
+	@Override
 	public String replacePlaceholders(String value, final Properties properties) {
 		Assert.notNull(value, "Argument 'value' must not be null.");
 		logger.debug("Examining " + value);
