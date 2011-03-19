@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
  * This class takes advantage of the convertProperties() hook provided by Spring to resolve placeholders in Spring
@@ -21,6 +22,7 @@ import org.springframework.util.ObjectUtils;
 public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+	PropertyPlaceholderHelper helper;
 
 	Properties rawProperties;
 	Properties resolvedProperties;
@@ -118,7 +120,6 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceho
 	}
 
 	protected Properties getResolvedProperties(Properties properties) {
-		NestedPropertyPlaceholderHelper helper = new NestedPropertyPlaceholderHelper();
 		Properties resolvedProperties = new Properties();
 		Set<String> names = properties.stringPropertyNames();
 		for (String name : names) {
