@@ -33,7 +33,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 		mergeProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
-			propertiesLogger.logProperties(properties, "*** Updated Spring Properties ***");
+			propertiesLogger.logProperties(properties, "*** Final Spring Properties ***");
 		}
 	}
 
@@ -95,8 +95,9 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			}
 
 			// Update the original property value with the resolved property value
-			logger.info("Updating " + commonKey + " to [" + resolvedPropertyValue + "] was [" + originalPropertyValue
-					+ "]");
+			logger.info("Updating " + commonKey + " to ["
+					+ propertiesLogger.getLogValue(commonKey, resolvedPropertyValue) + "] was ["
+					+ propertiesLogger.getLogValue(commonKey, originalPropertyValue) + "]");
 			originalProperties.setProperty(commonKey, resolvedPropertyValue);
 		}
 	}

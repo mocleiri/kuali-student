@@ -21,6 +21,10 @@ public class PropertiesLogger {
 	String maskValue = "******";
 	Pattern pattern;
 
+	public void logProperty(String key, String value) {
+		logger.info(key + "=" + getLogValue(key, value));
+	}
+
 	public void logProperties(Properties properties) {
 		logProperties(properties, null);
 	}
@@ -42,12 +46,11 @@ public class PropertiesLogger {
 			sortedProperties.put(key, originalValue);
 		}
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
-			logger.info(entry.getKey() + "=" + getLogValue(entry));
+			logProperty(entry.getKey(), entry.getValue());
 		}
 	}
 
-	protected String getLogValue(Map.Entry<String, String> entry) {
-		String value = entry.getValue();
+	public String getLogValue(String key, String value) {
 		if (flattenPropertyValues) {
 			value = value.replace("\n", " ");
 			value = value.replace("\r", " ");
@@ -55,7 +58,7 @@ public class PropertiesLogger {
 		if (!maskPropertyValues) {
 			return value;
 		}
-		Matcher matcher = pattern.matcher(entry.getKey());
+		Matcher matcher = pattern.matcher(key);
 		boolean match = matcher.matches();
 		if (match) {
 			return maskValue;
