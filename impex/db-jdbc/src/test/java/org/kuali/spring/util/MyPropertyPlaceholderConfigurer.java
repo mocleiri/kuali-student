@@ -11,12 +11,17 @@ import org.springframework.util.ObjectUtils;
 
 public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
-	PropertiesLogger propertiesLogger;
+	PropertiesLogger propertiesLogger = new PropertiesLogger();
 	Properties rawProperties;
 	Properties resolvedProperties;
 
 	@Override
 	public void convertProperties(Properties properties) {
+		if (properties == null || properties.size() == 0) {
+			logger.info("No properties to convert");
+			return;
+		}
+
 		logger.info("Converting properties");
 
 		// Clone the original properties

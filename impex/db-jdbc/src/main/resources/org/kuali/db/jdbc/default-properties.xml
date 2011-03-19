@@ -72,21 +72,21 @@
 ]]>
   </entry>
   <entry key="kuali.jdbc.oracle.default.sql.initialize">
-    ${kuali.jdbc.oracle.sql.create}
-    ${kuali.jdbc.oracle.sql.grants}
+    ${kuali.jdbc.oracle.default.sql.create}
+    ${kuali.jdbc.oracle.default.sql.grants}
   </entry>
 
   <!-- MySQL properties -->
-  <entry key="kuali.jdbc.mysql.database">kualidb</entry>
-  <entry key="kuali.jdbc.mysql.username">${kuali.jdbc.mysql.database}</entry>
-  <entry key="kuali.jdbc.mysql.password">${kuali.jdbc.mysql.database}</entry>
-  <entry key="kuali.jdbc.mysql.driver">com.mysql.jdbc.Driver</entry>
-  <entry key="kuali.jdbc.mysql.dba.url">jdbc:mysql://localhost:3306/</entry>
-  <entry key="kuali.jdbc.mysql.dba.username">root</entry>
-  <entry key="kuali.jdbc.mysql.dba.password"></entry>
+  <entry key="kuali.jdbc.mysql.default.database">kualidb</entry>
+  <entry key="kuali.jdbc.mysql.default.username">kualidb</entry>
+  <entry key="kuali.jdbc.mysql.default.password">kualidb</entry>
+  <entry key="kuali.jdbc.mysql.default.driver">com.mysql.jdbc.Driver</entry>
+  <entry key="kuali.jdbc.mysql.default.dba.url">jdbc:mysql://localhost:3306/</entry>
+  <entry key="kuali.jdbc.mysql.default.dba.username">root</entry>
+  <entry key="kuali.jdbc.mysql.default.dba.password"></entry>
   <entry key="kuali.jdbc.mysql.character.set">utf8</entry>
   <entry key="kuali.jdbc.mysql.collate">utf8_bin</entry>
-  <entry key="kuali.jdbc.mysql.sql.drop"><![CDATA[
+  <entry key="kuali.jdbc.mysql.default.sql.drop"><![CDATA[
     DROP DATABASE IF EXISTS ${kuali.jdbc.database}
     /
 
@@ -97,14 +97,14 @@
     /
 ]]>
   </entry>
-  <entry key="kuali.jdbc.mysql.sql.create"><![CDATA[
+  <entry key="kuali.jdbc.mysql.default.sql.create"><![CDATA[
     CREATE DATABASE IF NOT EXISTS ${kuali.jdbc.database}
     DEFAULT CHARACTER SET '${kuali.jdbc.mysql.character.set}'
     DEFAULT COLLATE '${kuali.jdbc.mysql.collate}';
     /
 ]]>
   </entry>
-  <entry key="kuali.jdbc.mysql.sql.grants"><![CDATA[
+  <entry key="kuali.jdbc.mysql.default.sql.grants"><![CDATA[
     GRANT ALL ON ${kuali.jdbc.database}.*
     TO '${kuali.jdbc.username}'@'%'
     IDENTIFIED BY '${kuali.jdbc.password}'
@@ -112,9 +112,9 @@
     /
 ]]>
   </entry>
-  <entry key="kuali.jdbc.mysql.sql.initialize">
-    ${kuali.jdbc.mysql.sql.create}
-    ${kuali.jdbc.mysql.sql.grants}
+  <entry key="kuali.jdbc.mysql.default.sql.initialize">
+    ${kuali.jdbc.mysql.default.sql.create}
+    ${kuali.jdbc.mysql.default.sql.grants}
   </entry>
 
 </properties>

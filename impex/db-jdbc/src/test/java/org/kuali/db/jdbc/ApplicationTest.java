@@ -1,5 +1,7 @@
 package org.kuali.db.jdbc;
 
+import java.util.Properties;
+
 import org.junit.Test;
 
 import org.slf4j.Logger;
@@ -21,9 +23,15 @@ public class ApplicationTest {
 		}
 	}
 
+	@Test
 	public void appTest2() {
+		String key = "kuali.jdbc.dba.properties";
+		String location = "classpath:org/kuali/db/jdbc/dba-properties-test.xml";
+		Properties systemProperties = System.getProperties();
+		System.setProperty(key, location);
 		ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba-test.xml");
 		showContext(context);
+		systemProperties.remove(key);
 	}
 
 	protected void showContext(ApplicationContext context) {
