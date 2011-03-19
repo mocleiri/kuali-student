@@ -11,7 +11,7 @@ import org.springframework.util.ObjectUtils;
 
 public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
-	PropertiesLoggerHelper propertiesLogger = new PropertiesLoggerHelper();
+	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	Properties rawProperties;
 	Properties resolvedProperties;
 
@@ -30,15 +30,15 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 		resolvedProperties = getResolvedProperties(properties);
 
 		if (logger.isInfoEnabled()) {
-			propertiesLogger.logProperties(rawProperties, "*** Raw Spring Properties ***");
-			propertiesLogger.logProperties(resolvedProperties, "*** Resolved Spring Properties ***");
+			logger.info(loggerSupport.getLogEntry(rawProperties, "*** Raw Spring Properties ***"));
+			logger.info(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Spring Properties ***"));
 		}
 
 		logger.info("*** Merging original properties with resolved properties ***");
 		mergeProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
-			propertiesLogger.logProperties(properties, "*** Final Spring Properties ***");
+			logger.info(loggerSupport.getLogEntry(properties, "*** Final Spring Properties ***"));
 		}
 	}
 
@@ -100,9 +100,9 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			}
 
 			// Update the original property value with the resolved property value
-			logger.info("Updating " + commonKey + " to ["
-					+ propertiesLogger.getLogValue(commonKey, resolvedPropertyValue) + "] was ["
-					+ propertiesLogger.getLogValue(commonKey, originalPropertyValue) + "]");
+			logger.info("Update " + commonKey + " ["
+					+ loggerSupport.getPropertyValue(commonKey, originalPropertyValue) + "]->["
+					+ loggerSupport.getPropertyValue(commonKey, resolvedPropertyValue) + "]");
 			originalProperties.setProperty(commonKey, resolvedPropertyValue);
 		}
 	}
@@ -130,12 +130,12 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 		return clone;
 	}
 
-	public PropertiesLoggerHelper getPropertiesLogger() {
-		return propertiesLogger;
+	public PropertiesLoggerSupport getLoggerSupport() {
+		return loggerSupport;
 	}
 
-	public void setPropertiesLogger(PropertiesLoggerHelper propertiesLogger) {
-		this.propertiesLogger = propertiesLogger;
+	public void setLoggerSupport(PropertiesLoggerSupport propertiesLogger) {
+		this.loggerSupport = propertiesLogger;
 	}
 
 }

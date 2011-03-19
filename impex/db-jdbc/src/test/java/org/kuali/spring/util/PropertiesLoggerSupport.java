@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PropertiesLoggerHelper {
+public class PropertiesLoggerSupport {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
 	// If true, strip the new line character when logging values
 	boolean flattenPropertyValues;
@@ -21,21 +21,22 @@ public class PropertiesLoggerHelper {
 	String maskValue = "******";
 	Pattern pattern;
 
-	public void logProperty(String key, String value) {
-		logger.info(key + "=" + getLogValue(key, value));
+	public String getLogEntry(String key, String value) {
+		return key + "=" + getPropertyValue(key, value);
 	}
 
-	public void logProperties(Properties properties) {
-		logProperties(properties, null);
+	public String getLogEntry(Properties properties) {
+		return getLogEntry(properties, null);
 	}
 
-	public void logProperties(Properties properties, String comment) {
+	public String getLogEntry(Properties properties, String comment) {
+		StringBuilder sb = new StringBuilder();
 		if (!StringUtils.isEmpty(comment)) {
-			logger.info(comment);
+			sb.append(comment + "\n");
 		}
 		if (properties == null || properties.size() == 0) {
-			logger.info("No properties to log");
-			return;
+			sb.append("No properties to log\n");
+			return sb.toString();
 		}
 		if (maskPropertyValues) {
 			pattern = Pattern.compile(maskExpression);
@@ -46,11 +47,12 @@ public class PropertiesLoggerHelper {
 			sortedProperties.put(key, value);
 		}
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
-			logProperty(entry.getKey(), entry.getValue());
+			sb.append(getLogEntry(entry.getKey(), entry.getValue()) + "\n");
 		}
+		return sb.toString();
 	}
 
-	public String getLogValue(String key, String value) {
+	public String getPropertyValue(String key, String value) {
 		if (flattenPropertyValues) {
 			value = value.replace("\n", " ");
 			value = value.replace("\r", " ");

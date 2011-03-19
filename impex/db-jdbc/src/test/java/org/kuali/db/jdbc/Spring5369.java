@@ -6,7 +6,7 @@ import java.util.Set;
 import org.junit.Test;
 import org.kuali.spring.util.MyPropertyPlaceholderConfigurer;
 import org.kuali.spring.util.PPH3;
-import org.kuali.spring.util.PropertiesLoggerHelper;
+import org.kuali.spring.util.PropertiesLoggerSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,11 +37,11 @@ public class Spring5369 {
 		try {
 			Properties props = getProps1();
 			MyPropertyPlaceholderConfigurer ppc = new MyPropertyPlaceholderConfigurer();
-			PropertiesLoggerHelper pLogger = new PropertiesLoggerHelper();
-			pLogger.setFlattenPropertyValues(true);
-			pLogger.setMaskPropertyValues(false);
-			pLogger.logProperties(props, "Nested Properties for testing Spring issue 5369");
-			ppc.setPropertiesLogger(pLogger);
+			PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+			loggerSupport.setFlattenPropertyValues(true);
+			loggerSupport.setMaskPropertyValues(false);
+			logger.info(loggerSupport.getLogEntry(props, "Nested Properties for testing Spring issue 5369"));
+			ppc.setLoggerSupport(loggerSupport);
 			ppc.convertProperties(props);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,10 +66,10 @@ public class Spring5369 {
 			// props.put("jdbc.mysql.sql", "DROP DATABASE ${jdbc.user} / CREATE DATABASE ${jdbc.user} /");
 			// props.put("jdbc.mysql.user", "mydb");
 			// props.put("jdbc.mysql.password", "mydb");
-			PropertiesLoggerHelper pLogger = new PropertiesLoggerHelper();
-			pLogger.setFlattenPropertyValues(true);
-			pLogger.setMaskPropertyValues(false);
-			pLogger.logProperties(props, "Nested Properties for testing Spring issue 5369");
+			PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+			loggerSupport.setFlattenPropertyValues(true);
+			loggerSupport.setMaskPropertyValues(false);
+			logger.info(loggerSupport.getLogEntry(props, "Nested Properties for testing Spring issue 5369"));
 			PPH3 helper = new PPH3(false);
 			// This fails throwing IllegalArgumentException
 			// helper.replacePlaceholders("${jdbc.ice.cream=rockyroad}", props);
@@ -83,7 +83,7 @@ public class Spring5369 {
 				String resolvedProperty = helper.replacePlaceholders(property, props);
 				resolvedProperties.setProperty(resolvedName, resolvedProperty);
 			}
-			pLogger.logProperties(resolvedProperties);
+			logger.info(loggerSupport.getLogEntry(resolvedProperties));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
