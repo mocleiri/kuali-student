@@ -1,6 +1,9 @@
 package org.kuali.spring.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -88,7 +91,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 	}
 
 	protected void updateOriginalProperties(Properties originalProperties, Properties resolvedProperties) {
-		Set<String> originalNames = originalProperties.stringPropertyNames();
+		List<String> originalNames = new ArrayList<String>(originalProperties.stringPropertyNames());
+		Collections.sort(originalNames);
 		Iterator<String> itr = originalNames.iterator();
 		while (itr.hasNext()) {
 			String commonKey = itr.next();
@@ -100,9 +104,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			}
 
 			// Update the original property value with the resolved property value
-			logger.info("Update " + commonKey + " ["
-					+ loggerSupport.getPropertyValue(commonKey, originalPropertyValue) + "]->["
-					+ loggerSupport.getPropertyValue(commonKey, resolvedPropertyValue) + "]");
+			logger.info("Update " + commonKey + " [" + loggerSupport.getPropertyValue(commonKey, originalPropertyValue)
+					+ "]->[" + loggerSupport.getPropertyValue(commonKey, resolvedPropertyValue) + "]");
 			originalProperties.setProperty(commonKey, resolvedPropertyValue);
 		}
 	}
