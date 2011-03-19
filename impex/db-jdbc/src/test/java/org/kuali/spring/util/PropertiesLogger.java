@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PropertiesLogger {
-	final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);
+	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
 	// If true, strip the new line character when logging values
 	boolean flattenPropertyValues;
 	// If true, mask values for keys that match the maskExpression
@@ -19,12 +19,15 @@ public class PropertiesLogger {
 	// Matches any string containing "password" (case insensitive)
 	String maskExpression = ".*((?i)password).*";
 	String maskValue = "******";
-	String description;
 	Pattern pattern;
 
 	public void logProperties(Properties properties) {
-		if (!StringUtils.isEmpty(description)) {
-			logger.info(description);
+		logProperties(properties, null);
+	}
+
+	public void logProperties(Properties properties, String comment) {
+		if (!StringUtils.isEmpty(comment)) {
+			logger.info(comment);
 		}
 		if (properties == null || properties.size() == 0) {
 			logger.info("No properties to log");
@@ -33,15 +36,10 @@ public class PropertiesLogger {
 		if (maskPropertyValues) {
 			pattern = Pattern.compile(maskExpression);
 		}
-		PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(
-				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
-				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX);
-
 		Map<String, String> sortedProperties = new TreeMap<String, String>();
 		for (String key : properties.stringPropertyNames()) {
 			String originalValue = properties.getProperty(key);
-			String resolvedValue = helper.replacePlaceholders(originalValue, properties);
-			sortedProperties.put(key, resolvedValue);
+			sortedProperties.put(key, originalValue);
 		}
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
 			logger.info(entry.getKey() + "=" + getLogValue(entry));
@@ -51,7 +49,8 @@ public class PropertiesLogger {
 	protected String getLogValue(Map.Entry<String, String> entry) {
 		String value = entry.getValue();
 		if (flattenPropertyValues) {
-			value = value.replace("\n", "");
+			value = value.replace("\n", " ");
+			value = value.replace("\r", " ");
 		}
 		if (!maskPropertyValues) {
 			return value;
@@ -99,14 +98,6 @@ public class PropertiesLogger {
 
 	public Pattern getPattern() {
 		return pattern;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 }
