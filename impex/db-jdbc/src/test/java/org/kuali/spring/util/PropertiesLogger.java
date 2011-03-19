@@ -42,8 +42,8 @@ public class PropertiesLogger {
 		}
 		Map<String, String> sortedProperties = new TreeMap<String, String>();
 		for (String key : properties.stringPropertyNames()) {
-			String originalValue = properties.getProperty(key);
-			sortedProperties.put(key, originalValue);
+			String value = properties.getProperty(key);
+			sortedProperties.put(key, value);
 		}
 		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
 			logProperty(entry.getKey(), entry.getValue());
@@ -54,6 +54,7 @@ public class PropertiesLogger {
 		if (flattenPropertyValues) {
 			value = value.replace("\n", " ");
 			value = value.replace("\r", " ");
+			value = value.trim();
 		}
 		if (!maskPropertyValues) {
 			return value;

@@ -41,7 +41,7 @@ import org.springframework.util.StringUtils;
  */
 public class PPH3 {
 
-	private static final Log logger = LogFactory.getLog(PropertyPlaceholderHelper.class);
+	private static final Log logger = LogFactory.getLog(PPH3.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 
@@ -64,6 +64,7 @@ public class PPH3 {
 	public PPH3() {
 		this(true);
 	}
+
 	public PPH3(boolean ignoreUnresolvablePlaceholders) {
 		this(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, ignoreUnresolvablePlaceholders);
@@ -124,7 +125,7 @@ public class PPH3 {
 	 */
 	public String replacePlaceholders(String value, final Properties properties) {
 		Assert.notNull(value, "Argument 'value' must not be null.");
-		logger.info("Examining " + value);
+		logger.debug("Examining " + value);
 		return parseStringValue(value, properties, new HashSet<String>());
 	}
 
@@ -133,16 +134,15 @@ public class PPH3 {
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		while (startIndex != -1) {
-			startIndex = processString(startIndex, properties, visitedPlaceholders, buf);
+			startIndex = processString(new ProcessStringContext(properties, visitedPlaceholders, startIndex, buf));
 		}
 		return buf.toString();
 	}
 
-	protected int processString(int startIndex, Properties properties, Set<String> visitedPlaceholders,
-			StringBuilder buf) {
+	protected int processString(ProcessStringContext ctx) {
 
 		// Locate the index of the end placeholder
-		int endIndex = findPlaceholderEndIndex(buf, startIndex);
+		int endIndex = findPlaceholderEndIndex(ctx.getBuffer(), ctx.getStartIndex());
 
 		// There is no terminating placeholder, we are done
 		if (endIndex == -1) {
@@ -150,27 +150,27 @@ public class PPH3 {
 		}
 
 		// Trim prefix and suffix off of the placeholder
-		String originalKey = buf.substring(startIndex + this.placeholderPrefix.length(), endIndex);
+		String originalKey = ctx.getBuffer().substring(ctx.getStartIndex() + this.placeholderPrefix.length(), endIndex);
 
 		// Add this placeholder to the set
-		logger.info("Adding " + originalKey + " to visited keys");
-		boolean added = visitedPlaceholders.add(originalKey);
+		logger.debug("Adding " + originalKey + " to visited keys");
+		boolean added = ctx.getVisitedPlaceholders().add(originalKey);
 
 		if (!added) {
 			throw new IllegalArgumentException("Circular reference '" + originalKey + "' in property definitions");
 		}
 
 		// Recursive invocation, resolve any placeholders inside the key
-		String resolvedKey = parseStringValue(originalKey, properties, visitedPlaceholders);
+		String resolvedKey = parseStringValue(originalKey, ctx.getProperties(), ctx.getVisitedPlaceholders());
 
 		// Obtain a value for the resolved placeholder
-		String value = getValue(resolvedKey, properties);
+		String value = getValue(resolvedKey, ctx.getProperties());
 
 		logger.debug("Processing " + resolvedKey + "=" + value);
-		int bufIndex = processValue(value, properties, visitedPlaceholders, startIndex, endIndex, resolvedKey, buf);
+		int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
 
-		logger.info("Removing " + originalKey + " from visited keys");
-		visitedPlaceholders.remove(originalKey);
+		logger.debug("Removing " + originalKey + " from visited keys");
+		ctx.getVisitedPlaceholders().remove(originalKey);
 
 		return bufIndex;
 	}
@@ -221,8 +221,7 @@ public class PPH3 {
 		}
 	}
 
-	protected int processValue(String value, Properties properties, Set<String> visitedPlaceholders, int startIndex,
-			int endIndex, String key, StringBuilder buf) {
+	protected int processValue(ProcessStringContext ctx, String value, int endIndex, String key) {
 
 		// We could not locate a value and we are not ignoring unresolved placeholders
 		if (value == null && !ignoreUnresolvablePlaceholders) {
@@ -232,22 +231,23 @@ public class PPH3 {
 		// The value is null, but we can ignore the fact that we encountered an unresolved placeholder
 		if (value == null) {
 			// Leave the unresolved placeholder intact and continue processing the rest of the string
-			return buf.indexOf(this.placeholderPrefix, endIndex + this.placeholderSuffix.length());
+			return ctx.getBuffer().indexOf(this.placeholderPrefix, endIndex + this.placeholderSuffix.length());
 		}
 
 		// Recursive invocation, resolve any placeholders inside the value
-		value = parseStringValue(value, properties, visitedPlaceholders);
+		value = parseStringValue(value, ctx.getProperties(), ctx.getVisitedPlaceholders());
 
 		// log that we resolved the placeholder
-		if (logger.isInfoEnabled()) {
-			logger.debug("Resolved key '" + key + "' to '" + value + "'");
-		}
+		logger.debug("Resolved key '" + key + "' to '" + value + "'");
 
 		// Replace the placeholder with the value
-		buf.replace(startIndex, endIndex + this.placeholderSuffix.length(), value);
+		ctx.getBuffer().replace(ctx.getStartIndex(), endIndex + this.placeholderSuffix.length(), value);
 
 		// Move past the string we just replaced
-		return buf.indexOf(this.placeholderPrefix, startIndex + value.length());
+		int newIndex = ctx.getBuffer().indexOf(this.placeholderPrefix, ctx.getStartIndex() + value.length());
+
+		// Return the new index
+		return newIndex;
 	}
 
 	protected boolean haveArrivedAtSuffix(CharSequence buf, int index) {
