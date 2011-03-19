@@ -25,23 +25,23 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			return;
 		}
 
-		logger.info("Converting properties");
+		logger.info("Resolving placeholders in properties");
 
 		// Clone the original properties
 		rawProperties = clone(properties);
 
 		resolvedProperties = getResolvedProperties(properties);
 
-		if (logger.isInfoEnabled()) {
-			logger.info(loggerSupport.getLogEntry(rawProperties, "*** Raw Spring Properties ***"));
-			logger.info(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Spring Properties ***"));
+		if (logger.isDebugEnabled()) {
+			logger.debug(loggerSupport.getLogEntry(rawProperties, "*** Raw Spring Properties ***"));
+			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Spring Properties ***"));
 		}
 
-		logger.info("*** Merging original properties with resolved properties ***");
+		logger.debug("*** Merging original properties with resolved properties ***");
 		mergeProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
-			logger.info(loggerSupport.getLogEntry(properties, "*** Final Spring Properties ***"));
+			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
 		}
 	}
 
@@ -59,7 +59,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			if (approvedKeys.contains(key)) {
 				continue;
 			}
-			logger.info("Removing " + key);
+			logger.debug("Removing " + key);
 			// Remove this property as it is not in the approved set
 			properties.remove(key);
 		}
@@ -79,7 +79,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 				continue;
 			}
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
-			logger.info("Adding " + necessaryKey + "=" + necessaryValue);
+			logger.debug("Adding " + necessaryKey + "=" + necessaryValue);
 			currentProperties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
@@ -104,8 +104,9 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 			}
 
 			// Update the original property value with the resolved property value
-			logger.info("Update " + commonKey + " [" + loggerSupport.getPropertyValue(commonKey, originalPropertyValue)
-					+ "]->[" + loggerSupport.getPropertyValue(commonKey, resolvedPropertyValue) + "]");
+			logger.debug("Update " + commonKey + " ["
+					+ loggerSupport.getPropertyValue(commonKey, originalPropertyValue) + "]->["
+					+ loggerSupport.getPropertyValue(commonKey, resolvedPropertyValue) + "]");
 			originalProperties.setProperty(commonKey, resolvedPropertyValue);
 		}
 	}
