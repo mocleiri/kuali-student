@@ -22,7 +22,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	BeanFactory beanFactory;
 	PlaceholderResolvingStringValueResolver stringValueResolver;
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor;
-	MyPlaceholderResolver resolver;
+	MyPlaceholderResolver placeholderResolver;
 
 	/**
 	 * Mimic the default configuration from PropertyPlaceholderConfigurer
@@ -83,7 +83,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	@Override
 	protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props)
 			throws BeansException {
-		resolver.setProperties(props);
+		placeholderResolver.setProperties(props);
 		stringValueResolver.setProperties(props);
 		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
 
@@ -144,8 +144,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.beanFactory = beanFactory;
 		super.setBeanFactory(beanFactory);
 	}
-
-	// ********* End setters with custom behavior ****
+	// ********* End of setters with custom behavior ****
 
 	public String getPlaceholderPrefix() {
 		return placeholderPrefix;
@@ -201,6 +200,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
+	}
+
+	public MyPlaceholderResolver getPlaceholderResolver() {
+		return placeholderResolver;
+	}
+
+	public void setPlaceholderResolver(MyPlaceholderResolver placeholderResolver) {
+		this.placeholderResolver = placeholderResolver;
 	}
 
 }
