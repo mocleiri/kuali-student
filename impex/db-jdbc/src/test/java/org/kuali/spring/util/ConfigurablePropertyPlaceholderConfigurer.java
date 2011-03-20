@@ -6,23 +6,22 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionVisitor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.util.StringValueResolver;
 
 public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
-	int ignoreUnresolvablePlaceholders;
 	String placeholderPrefix;
 	String placeholderSuffix;
-	boolean searchSystemEnvironment;
 	String valueSeparator;
 	SystemPropertiesMode systemPropertiesModeEnum;
+	boolean searchSystemEnvironment;
+	int ignoreUnresolvablePlaceholders;
+
 	String nullValue;
 	String beanName;
 	BeanFactory beanFactory;
-	StringValueResolver stringValueResolver;
-	BeanDefinitionVisitor beanDefinitionVisitor;
+	PlaceholderResolvingStringValueResolver stringValueResolver;
+	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor;
 
 	/**
 	 * Mimic the default configuration from PropertyPlaceholderConfigurer
@@ -47,7 +46,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		return true;
 	}
 
-	protected void processBeanDefinitions(ConfigurableListableBeanFactory beanFactory, Properties props) {
+	protected void processBeanDefinitions(ConfigurableListableBeanFactory beanFactory) {
 		String[] beanNames = beanFactory.getBeanDefinitionNames();
 		for (String curName : beanNames) {
 			// Skip processing our own bean definition
@@ -65,17 +64,19 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	}
 
 	@Override
-	protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props)
+	protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props)
 			throws BeansException {
+		stringValueResolver.setProperties(props);
+		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
 
 		// Process placeholders in the bean definitions
-		processBeanDefinitions(beanFactoryToProcess, props);
+		processBeanDefinitions(beanFactory);
 
 		// New in Spring 2.5: resolve placeholders in alias target names and aliases as well.
-		beanFactoryToProcess.resolveAliases(stringValueResolver);
+		beanFactory.resolveAliases(stringValueResolver);
 
 		// New in Spring 3.0: resolve placeholders in embedded values such as annotation attributes.
-		beanFactoryToProcess.addEmbeddedValueResolver(stringValueResolver);
+		beanFactory.addEmbeddedValueResolver(stringValueResolver);
 	}
 
 	// ********* These setters have custom behavior ****
@@ -168,19 +169,19 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		return beanFactory;
 	}
 
-	public StringValueResolver getStringValueResolver() {
+	public PlaceholderResolvingStringValueResolver getStringValueResolver() {
 		return stringValueResolver;
 	}
 
-	public void setStringValueResolver(StringValueResolver stringValueResolver) {
+	public void setStringValueResolver(PlaceholderResolvingStringValueResolver stringValueResolver) {
 		this.stringValueResolver = stringValueResolver;
 	}
 
-	public BeanDefinitionVisitor getBeanDefinitionVisitor() {
+	public ConfigurableBeanDefinitionVisitor getBeanDefinitionVisitor() {
 		return beanDefinitionVisitor;
 	}
 
-	public void setBeanDefinitionVisitor(BeanDefinitionVisitor beanDefinitionVisitor) {
+	public void setBeanDefinitionVisitor(ConfigurableBeanDefinitionVisitor beanDefinitionVisitor) {
 		this.beanDefinitionVisitor = beanDefinitionVisitor;
 	}
 
