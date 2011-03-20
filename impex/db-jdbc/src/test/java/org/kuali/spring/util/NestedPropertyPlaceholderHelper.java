@@ -30,15 +30,7 @@ import org.springframework.util.PropertyPlaceholderHelper;
 import org.springframework.util.StringUtils;
 
 /**
- * Utility class for working with Strings that have placeholder values in them. A placeholder takes the form
- * <code>${name}</code>. Using <code>PropertyPlaceholderHelper</code> these placeholders can be substituted for
- * user-supplied values.
- * <p>
- * Values for substitution can be supplied using a {@link Properties} instance or using a {@link PlaceholderResolver}.
  * 
- * @author Juergen Hoeller
- * @author Rob Harrop
- * @since 3.0
  */
 public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 
@@ -53,17 +45,13 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 	}
 
 	private String placeholderPrefix;
-
 	private String placeholderSuffix;
-
 	private String simplePrefix;
-
 	private String valueSeparator;
-
 	private boolean ignoreUnresolvablePlaceholders;
 
 	public NestedPropertyPlaceholderHelper() {
-		this(true);
+		this(false);
 	}
 
 	public NestedPropertyPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {
