@@ -8,7 +8,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.util.PropertyPlaceholderHelper;
 
 public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	String placeholderPrefix;
@@ -17,14 +16,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	SystemPropertiesMode systemPropertiesModeEnum;
 	boolean searchSystemEnvironment;
 	boolean ignoreUnresolvablePlaceholders;
-	PropertyPlaceholderHelper helper;
-
 	String nullValue;
+
 	String beanName;
 	BeanFactory beanFactory;
+	NestedPropertyPlaceholderHelper helper;
 	PlaceholderResolvingStringValueResolver stringValueResolver;
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor;
-	MyPlaceholderResolver placeholderResolver;
+	ConfigurablePlaceholderResolver placeholderResolver;
 
 	/**
 	 * Mimic the default configuration from PropertyPlaceholderConfigurer
@@ -37,30 +36,30 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.setSystemPropertiesModeEnum(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
 		this.setSearchSystemEnvironment(true);
 		this.setIgnoreUnresolvablePlaceholders(false);
+		helper = new NestedPropertyPlaceholderHelper();
+		placeholderResolver = new ConfigurablePlaceholderResolver();
+		stringValueResolver = new PlaceholderResolvingStringValueResolver();
+		beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
+		configure();
+	}
 
-		NestedPropertyPlaceholderHelper helper = new NestedPropertyPlaceholderHelper();
+	public void configure() {
 		helper.setIgnoreUnresolvablePlaceholders(ignoreUnresolvablePlaceholders);
 		helper.setPlaceholderPrefix(placeholderPrefix);
 		helper.setPlaceholderSuffix(placeholderSuffix);
 		helper.setValueSeparator(valueSeparator);
-		setHelper(helper);
 
-		placeholderResolver = new MyPlaceholderResolver();
 		placeholderResolver.setSearchSystemEnvironment(searchSystemEnvironment);
 		placeholderResolver.setSystemPropertiesMode(systemPropertiesModeEnum);
-		setPlaceholderResolver(placeholderResolver);
 
-		stringValueResolver = new PlaceholderResolvingStringValueResolver();
 		stringValueResolver.setHelper(helper);
 		stringValueResolver.setNullValue(nullValue);
 		stringValueResolver.setResolver(placeholderResolver);
 
-		beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
-
 	}
 
-	protected boolean currentBeanIsMe(String name, ConfigurableListableBeanFactory beanFactory) {
+	protected boolean currentBeanIsThisConfigurer(String name, ConfigurableListableBeanFactory beanFactory) {
 		if (!name.equals(this.beanName)) {
 			return false;
 		}
@@ -75,7 +74,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		for (String curName : beanNames) {
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
-			if (currentBeanIsMe(curName, beanFactory)) {
+			if (currentBeanIsThisConfigurer(curName, beanFactory)) {
 				logger.info("Skipping placeholder resolution for " + curName);
 				continue;
 			}
@@ -214,19 +213,19 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
-	public MyPlaceholderResolver getPlaceholderResolver() {
+	public ConfigurablePlaceholderResolver getPlaceholderResolver() {
 		return placeholderResolver;
 	}
 
-	public void setPlaceholderResolver(MyPlaceholderResolver placeholderResolver) {
+	public void setPlaceholderResolver(ConfigurablePlaceholderResolver placeholderResolver) {
 		this.placeholderResolver = placeholderResolver;
 	}
 
-	public PropertyPlaceholderHelper getHelper() {
+	public NestedPropertyPlaceholderHelper getHelper() {
 		return helper;
 	}
 
-	public void setHelper(PropertyPlaceholderHelper helper) {
+	public void setHelper(NestedPropertyPlaceholderHelper helper) {
 		this.helper = helper;
 	}
 

@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 
-public class MyPlaceholderResolver implements PlaceholderResolver {
-	final Logger logger = LoggerFactory.getLogger(MyPlaceholderResolver.class);
+public class ConfigurablePlaceholderResolver implements PlaceholderResolver {
+	final Logger logger = LoggerFactory.getLogger(ConfigurablePlaceholderResolver.class);
 	boolean searchSystemEnvironment;
 	Properties properties;
 	SystemPropertiesMode systemPropertiesMode;
