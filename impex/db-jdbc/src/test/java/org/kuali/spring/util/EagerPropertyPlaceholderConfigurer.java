@@ -15,8 +15,8 @@ import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
  * This class takes advantage of the convertProperties() hook provided by Spring to resolve placeholders in Spring
- * properties before proceeding with resolving placeholders in Spring bean references. This allows you to do something
- * useful (eg logging them, debugging them etc) with the complete set of Spring properties known to this configurer
+ * properties before attempting to resolve placeholders in Spring beans. This allows you to do something useful with the
+ * complete set of Spring properties known to this configurer. (eg logging them, debugging them etc)
  */
 public class EagerPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(EagerPropertyPlaceholderConfigurer.class);

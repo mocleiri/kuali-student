@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PropertiesLoggerSupport {
-	final Logger logger = LoggerFactory.getLogger(EagerPropertyPlaceholderConfigurer.class);
+	final Logger logger = LoggerFactory.getLogger(PropertiesLoggerSupport.class);
 	// If true, strip the new line character when logging values
 	boolean flattenPropertyValues;
 	// If true, mask values for keys that match the maskExpression
