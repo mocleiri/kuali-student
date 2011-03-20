@@ -10,7 +10,6 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
  * This class uses the convertProperties() hook provided by Spring to resolve placeholders in Spring properties before
@@ -20,8 +19,6 @@ import org.springframework.util.PropertyPlaceholderHelper;
 public class EagerPropertyPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(EagerPropertyPlaceholderConfigurer.class);
 	PropertiesLoggerSupport loggerSupport;
-	PropertyPlaceholderHelper helper;
-
 	Properties rawProperties;
 	Properties resolvedProperties;
 
@@ -158,14 +155,6 @@ public class EagerPropertyPlaceholderConfigurer extends ConfigurablePropertyPlac
 
 	public Properties getResolvedProperties() {
 		return resolvedProperties;
-	}
-
-	public PropertyPlaceholderHelper getHelper() {
-		return helper;
-	}
-
-	public void setHelper(PropertyPlaceholderHelper helper) {
-		this.helper = helper;
 	}
 
 }

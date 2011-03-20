@@ -8,6 +8,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.util.PropertyPlaceholderHelper;
 
 public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	String placeholderPrefix;
@@ -16,6 +17,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	SystemPropertiesMode systemPropertiesModeEnum;
 	boolean searchSystemEnvironment;
 	boolean ignoreUnresolvablePlaceholders;
+	PropertyPlaceholderHelper helper;
 
 	String nullValue;
 	String beanName;
@@ -41,15 +43,17 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		helper.setPlaceholderPrefix(placeholderPrefix);
 		helper.setPlaceholderSuffix(placeholderSuffix);
 		helper.setValueSeparator(valueSeparator);
+		setHelper(helper);
 
-		MyPlaceholderResolver resolver = new MyPlaceholderResolver();
-		resolver.setSearchSystemEnvironment(searchSystemEnvironment);
-		resolver.setSystemPropertiesMode(systemPropertiesModeEnum);
+		placeholderResolver = new MyPlaceholderResolver();
+		placeholderResolver.setSearchSystemEnvironment(searchSystemEnvironment);
+		placeholderResolver.setSystemPropertiesMode(systemPropertiesModeEnum);
+		setPlaceholderResolver(placeholderResolver);
 
 		stringValueResolver = new PlaceholderResolvingStringValueResolver();
 		stringValueResolver.setHelper(helper);
 		stringValueResolver.setNullValue(nullValue);
-		stringValueResolver.setResolver(resolver);
+		stringValueResolver.setResolver(placeholderResolver);
 
 	}
 
@@ -144,6 +148,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.beanFactory = beanFactory;
 		super.setBeanFactory(beanFactory);
 	}
+
 	// ********* End of setters with custom behavior ****
 
 	public String getPlaceholderPrefix() {
@@ -208,6 +213,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public void setPlaceholderResolver(MyPlaceholderResolver placeholderResolver) {
 		this.placeholderResolver = placeholderResolver;
+	}
+
+	public PropertyPlaceholderHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(PropertyPlaceholderHelper helper) {
+		this.helper = helper;
 	}
 
 }
