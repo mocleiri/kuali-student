@@ -18,12 +18,11 @@ public class ApplicationTest {
 		try {
 			ApplicationContext context = new ClassPathXmlApplicationContext("org/kuali/db/jdbc/dba.xml");
 			showContext(context);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
-	@Test
 	public void appTest2() {
 		String key = "kuali.jdbc.dba.properties";
 		String location = "classpath:org/kuali/db/jdbc/dba-properties-test.xml";

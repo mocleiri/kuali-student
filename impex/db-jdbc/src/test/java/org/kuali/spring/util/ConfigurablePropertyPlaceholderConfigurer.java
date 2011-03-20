@@ -55,6 +55,9 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		stringValueResolver.setNullValue(nullValue);
 		stringValueResolver.setResolver(placeholderResolver);
 
+		beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
+		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
+
 	}
 
 	protected boolean currentBeanIsMe(String name, ConfigurableListableBeanFactory beanFactory) {
