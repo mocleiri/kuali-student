@@ -13,26 +13,18 @@ public class MyPlaceholderResolver implements PlaceholderResolver {
 	SystemPropertiesMode systemPropertiesMode;
 
 	@Override
-	public String resolvePlaceholder(String placeholderName) {
-		return resolvePlaceholder(placeholderName, systemPropertiesMode);
-	}
-
-	protected String resolvePlaceholder(String placeholder, SystemPropertiesMode systemPropertiesMode) {
+	public String resolvePlaceholder(String placeholder) {
 		String propVal = null;
 		if (systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE)) {
 			propVal = resolveSystemProperty(placeholder);
 		}
 		if (propVal == null) {
-			propVal = resolvePlaceholder(placeholder, properties);
+			propVal = properties.getProperty(placeholder);
 		}
 		if (propVal == null && systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK)) {
 			propVal = resolveSystemProperty(placeholder);
 		}
 		return propVal;
-	}
-
-	protected String resolvePlaceholder(String placeholder, Properties props) {
-		return props.getProperty(placeholder);
 	}
 
 	protected String resolveSystemProperty(String key) {
@@ -48,6 +40,30 @@ public class MyPlaceholderResolver implements PlaceholderResolver {
 			}
 			return null;
 		}
+	}
+
+	public boolean isSearchSystemEnvironment() {
+		return searchSystemEnvironment;
+	}
+
+	public void setSearchSystemEnvironment(boolean searchSystemEnvironment) {
+		this.searchSystemEnvironment = searchSystemEnvironment;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	public SystemPropertiesMode getSystemPropertiesMode() {
+		return systemPropertiesMode;
+	}
+
+	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
+		this.systemPropertiesMode = systemPropertiesMode;
 	}
 
 }

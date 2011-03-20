@@ -15,13 +15,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	String valueSeparator;
 	SystemPropertiesMode systemPropertiesModeEnum;
 	boolean searchSystemEnvironment;
-	int ignoreUnresolvablePlaceholders;
+	boolean ignoreUnresolvablePlaceholders;
 
 	String nullValue;
 	String beanName;
 	BeanFactory beanFactory;
 	PlaceholderResolvingStringValueResolver stringValueResolver;
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor;
+	MyPlaceholderResolver resolver;
 
 	/**
 	 * Mimic the default configuration from PropertyPlaceholderConfigurer
@@ -34,6 +35,22 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.setSystemPropertiesModeEnum(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
 		this.setSearchSystemEnvironment(true);
 		this.setIgnoreUnresolvablePlaceholders(false);
+
+		NestedPropertyPlaceholderHelper helper = new NestedPropertyPlaceholderHelper();
+		helper.setIgnoreUnresolvablePlaceholders(ignoreUnresolvablePlaceholders);
+		helper.setPlaceholderPrefix(placeholderPrefix);
+		helper.setPlaceholderSuffix(placeholderSuffix);
+		helper.setValueSeparator(valueSeparator);
+
+		MyPlaceholderResolver resolver = new MyPlaceholderResolver();
+		resolver.setSearchSystemEnvironment(searchSystemEnvironment);
+		resolver.setSystemPropertiesMode(systemPropertiesModeEnum);
+
+		stringValueResolver = new PlaceholderResolvingStringValueResolver();
+		stringValueResolver.setHelper(helper);
+		stringValueResolver.setNullValue(nullValue);
+		stringValueResolver.setResolver(resolver);
+
 	}
 
 	protected boolean currentBeanIsMe(String name, ConfigurableListableBeanFactory beanFactory) {
@@ -66,6 +83,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	@Override
 	protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props)
 			throws BeansException {
+		resolver.setProperties(props);
 		stringValueResolver.setProperties(props);
 		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
 
@@ -129,14 +147,6 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	// ********* End setters with custom behavior ****
 
-	public int getIgnoreUnresolvablePlaceholders() {
-		return ignoreUnresolvablePlaceholders;
-	}
-
-	public void setIgnoreUnresolvablePlaceholders(int ignoreUnresolvablePlaceholders) {
-		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
-	}
-
 	public String getPlaceholderPrefix() {
 		return placeholderPrefix;
 	}
@@ -183,6 +193,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public void setBeanDefinitionVisitor(ConfigurableBeanDefinitionVisitor beanDefinitionVisitor) {
 		this.beanDefinitionVisitor = beanDefinitionVisitor;
+	}
+
+	public boolean isIgnoreUnresolvablePlaceholders() {
+		return ignoreUnresolvablePlaceholders;
+	}
+
+	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
+		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
 }
