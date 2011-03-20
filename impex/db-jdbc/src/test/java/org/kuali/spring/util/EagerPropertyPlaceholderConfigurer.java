@@ -9,16 +9,15 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
- * This class takes advantage of the convertProperties() hook provided by Spring to resolve placeholders in Spring
- * properties before attempting to resolve placeholders in Spring beans. This allows you to do something useful with the
- * complete set of Spring properties known to this configurer. (eg logging them, debugging them etc)
+ * This class uses the convertProperties() hook provided by Spring to resolve placeholders in Spring properties before
+ * attempting to resolve placeholders in Spring beans. This allows you to do something useful with the complete set of
+ * Spring properties known to this configurer. (eg logging them, debugging them etc)
  */
-public class EagerPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
+public class EagerPropertyPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(EagerPropertyPlaceholderConfigurer.class);
 	PropertiesLoggerSupport loggerSupport;
 	PropertyPlaceholderHelper helper;
