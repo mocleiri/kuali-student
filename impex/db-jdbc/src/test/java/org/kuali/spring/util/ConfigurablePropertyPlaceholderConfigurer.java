@@ -14,6 +14,19 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	String beanName;
 	BeanFactory beanFactory;
 
+	/**
+	 * Invoke setters that mimic the default configuration used by Spring's PropertyPlaceholderConfigurer
+	 */
+	public ConfigurablePropertyPlaceholderConfigurer() {
+		super();
+		setPlaceholderPrefix(DEFAULT_PLACEHOLDER_PREFIX);
+		setPlaceholderSuffix(DEFAULT_PLACEHOLDER_SUFFIX);
+		setValueSeparator(DEFAULT_VALUE_SEPARATOR);
+		setSystemPropertiesModeEnum(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
+		setSearchSystemEnvironment(true);
+		setIgnoreUnresolvablePlaceholders(false);
+	}
+
 	// ********* Begin setters with custom behavior ****
 	public void setSystemPropertiesModeEnum(SystemPropertiesMode systemPropertiesModeEnum) {
 		this.systemPropertiesModeEnum = systemPropertiesModeEnum;
