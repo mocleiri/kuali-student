@@ -160,7 +160,7 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 		// Recursive invocation, resolve any placeholders inside the key
 		String resolvedKey = parseStringValue(originalKey, ctx.getProperties(), ctx.getVisitedPlaceholders());
 
-		// Obtain a value for the resolved placeholder
+		// Obtain a value for the resolved key
 		String value = getValue(resolvedKey, ctx.getProperties());
 
 		logger.debug("Processing " + resolvedKey + "=" + value);
