@@ -16,12 +16,11 @@ import org.springframework.util.PropertyPlaceholderHelper;
 /**
  * This class takes advantage of the convertProperties() hook provided by Spring to resolve placeholders in Spring
  * properties before proceeding with resolving placeholders in Spring bean references. This allows you to do something
- * useful (eg logging them, debugging them etc) with the complete set of properties that are going to be used by the
- * container.
+ * useful (eg logging them, debugging them etc) with the complete set of Spring properties known to this configurer
  */
 public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+	PropertiesLoggerSupport loggerSupport;
 	PropertyPlaceholderHelper helper;
 
 	Properties rawProperties;
@@ -37,7 +36,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceho
 		logger.info("Resolving placeholders in properties");
 
 		// Clone the original properties
-		rawProperties = clone(properties);
+		rawProperties = getClone(properties);
 
 		resolvedProperties = getResolvedProperties(properties);
 
@@ -74,21 +73,26 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceho
 	}
 
 	/**
-	 * Add properties to currentProperties from necessaryProperties
+	 * Add any missing properties from necessaryProperties
 	 * 
 	 * @param properties
 	 * @param necessaryProperties
 	 */
-	protected void addProperties(Properties currentProperties, Properties necessaryProperties) {
+	protected void addProperties(Properties properties, Properties necessaryProperties) {
+		// Extract the set of necessary property names
 		Set<String> necessaryKeys = necessaryProperties.stringPropertyNames();
-		Set<String> keys = currentProperties.stringPropertyNames();
+		// Extract the set of existing property names
+		Set<String> keys = properties.stringPropertyNames();
 		for (String necessaryKey : necessaryKeys) {
+			// Don't do anything, the property is already present
 			if (keys.contains(necessaryKey)) {
 				continue;
 			}
+
+			// Add the missing property
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
 			logger.debug("Adding " + necessaryKey + "=" + necessaryValue);
-			currentProperties.setProperty(necessaryKey, necessaryValue);
+			properties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
 
@@ -113,8 +117,8 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceho
 			}
 
 			// Update the original property value with the resolved property value
-			logger.debug("Update " + commonKey + "=" + loggerSupport.getPropertyValue(commonKey, newPropertyValue)
-					+ "was [" + loggerSupport.getPropertyValue(commonKey, oldPropertyValue) + "]->[");
+			logger.debug("Update " + commonKey + "='" + loggerSupport.getPropertyValue(commonKey, newPropertyValue)
+					+ "' was [" + loggerSupport.getPropertyValue(commonKey, oldPropertyValue) + "]");
 			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
@@ -132,7 +136,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceho
 
 	}
 
-	protected Properties clone(Properties properties) {
+	protected Properties getClone(Properties properties) {
 		Properties clone = new Properties();
 		for (String propertyName : properties.stringPropertyNames()) {
 			String propertyValue = properties.getProperty(propertyName);
@@ -155,6 +159,14 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceho
 
 	public Properties getResolvedProperties() {
 		return resolvedProperties;
+	}
+
+	public PropertyPlaceholderHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(PropertyPlaceholderHelper helper) {
+		this.helper = helper;
 	}
 
 }

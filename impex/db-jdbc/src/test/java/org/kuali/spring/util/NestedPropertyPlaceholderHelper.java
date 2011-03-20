@@ -52,15 +52,15 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 		wellKnownSimplePrefixes.put(")", "(");
 	}
 
-	private final String placeholderPrefix;
+	private String placeholderPrefix;
 
-	private final String placeholderSuffix;
+	private String placeholderSuffix;
 
-	private final String simplePrefix;
+	private String simplePrefix;
 
-	private final String valueSeparator;
+	private String valueSeparator;
 
-	private final boolean ignoreUnresolvablePlaceholders;
+	private boolean ignoreUnresolvablePlaceholders;
 
 	public NestedPropertyPlaceholderHelper() {
 		this(true);
@@ -294,6 +294,46 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 
 		// We never found a suffix to match our prefix
 		return -1;
+	}
+
+	public String getPlaceholderPrefix() {
+		return placeholderPrefix;
+	}
+
+	public void setPlaceholderPrefix(String placeholderPrefix) {
+		this.placeholderPrefix = placeholderPrefix;
+	}
+
+	public String getPlaceholderSuffix() {
+		return placeholderSuffix;
+	}
+
+	public void setPlaceholderSuffix(String placeholderSuffix) {
+		this.placeholderSuffix = placeholderSuffix;
+	}
+
+	public String getSimplePrefix() {
+		return simplePrefix;
+	}
+
+	public void setSimplePrefix(String simplePrefix) {
+		this.simplePrefix = simplePrefix;
+	}
+
+	public String getValueSeparator() {
+		return valueSeparator;
+	}
+
+	public void setValueSeparator(String valueSeparator) {
+		this.valueSeparator = valueSeparator;
+	}
+
+	public boolean isIgnoreUnresolvablePlaceholders() {
+		return ignoreUnresolvablePlaceholders;
+	}
+
+	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
+		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
 }
