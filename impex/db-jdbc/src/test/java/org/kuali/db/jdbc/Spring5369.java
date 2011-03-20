@@ -4,7 +4,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.junit.Test;
-import org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer;
+import org.kuali.spring.util.EagerPropertyPlaceholderConfigurer;
 import org.kuali.spring.util.NestedPropertyPlaceholderHelper;
 import org.kuali.spring.util.PropertiesLoggerSupport;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class Spring5369 {
 	public void testSpring5369_2() {
 		try {
 			Properties props = getProps1();
-			ResolvePropertiesFirstPlaceholderConfigurer ppc = new ResolvePropertiesFirstPlaceholderConfigurer();
+			EagerPropertyPlaceholderConfigurer ppc = new EagerPropertyPlaceholderConfigurer();
 			PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 			loggerSupport.setFlattenPropertyValues(true);
 			loggerSupport.setMaskPropertyValues(false);

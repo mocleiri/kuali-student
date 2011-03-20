@@ -18,8 +18,8 @@ import org.springframework.util.PropertyPlaceholderHelper;
  * properties before proceeding with resolving placeholders in Spring bean references. This allows you to do something
  * useful (eg logging them, debugging them etc) with the complete set of Spring properties known to this configurer
  */
-public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
-	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
+public class EagerPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
+	private final Logger logger = LoggerFactory.getLogger(EagerPropertyPlaceholderConfigurer.class);
 	PropertiesLoggerSupport loggerSupport;
 	PropertyPlaceholderHelper helper;
 
