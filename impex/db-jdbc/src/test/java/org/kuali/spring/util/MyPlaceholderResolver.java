@@ -14,16 +14,16 @@ public class MyPlaceholderResolver implements PlaceholderResolver {
 
 	@Override
 	public String resolvePlaceholder(String placeholderName) {
-		return resolvePlaceholder(placeholderName, properties, systemPropertiesMode);
+		return resolvePlaceholder(placeholderName, systemPropertiesMode);
 	}
 
-	protected String resolvePlaceholder(String placeholder, Properties props, SystemPropertiesMode systemPropertiesMode) {
+	protected String resolvePlaceholder(String placeholder, SystemPropertiesMode systemPropertiesMode) {
 		String propVal = null;
 		if (systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE)) {
 			propVal = resolveSystemProperty(placeholder);
 		}
 		if (propVal == null) {
-			propVal = resolvePlaceholder(placeholder, props);
+			propVal = resolvePlaceholder(placeholder, properties);
 		}
 		if (propVal == null && systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK)) {
 			propVal = resolveSystemProperty(placeholder);

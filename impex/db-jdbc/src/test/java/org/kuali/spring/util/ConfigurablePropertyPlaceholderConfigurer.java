@@ -25,16 +25,16 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	BeanDefinitionVisitor beanDefinitionVisitor;
 
 	/**
-	 * Invoke setters that mimic the default configuration used by Spring's PropertyPlaceholderConfigurer
+	 * Mimic the default configuration from PropertyPlaceholderConfigurer
 	 */
 	public ConfigurablePropertyPlaceholderConfigurer() {
 		super();
-		setPlaceholderPrefix(DEFAULT_PLACEHOLDER_PREFIX);
-		setPlaceholderSuffix(DEFAULT_PLACEHOLDER_SUFFIX);
-		setValueSeparator(DEFAULT_VALUE_SEPARATOR);
-		setSystemPropertiesModeEnum(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
-		setSearchSystemEnvironment(true);
-		setIgnoreUnresolvablePlaceholders(false);
+		this.setPlaceholderPrefix(DEFAULT_PLACEHOLDER_PREFIX);
+		this.setPlaceholderSuffix(DEFAULT_PLACEHOLDER_SUFFIX);
+		this.setValueSeparator(DEFAULT_VALUE_SEPARATOR);
+		this.setSystemPropertiesModeEnum(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
+		this.setSearchSystemEnvironment(true);
+		this.setIgnoreUnresolvablePlaceholders(false);
 	}
 
 	protected boolean currentBeanIsMe(String name, ConfigurableListableBeanFactory beanFactory) {
