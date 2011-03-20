@@ -8,7 +8,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	String placeholderSuffix;
 	boolean searchSystemEnvironment;
 	String valueSeparator;
-	SystemPropertiesMode systemPropertiesMode;
+	SystemPropertiesMode systemPropertiesModeEnum;
 
 	public int getIgnoreUnresolvablePlaceholders() {
 		return ignoreUnresolvablePlaceholders;
@@ -50,11 +50,12 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.valueSeparator = valueSeparator;
 	}
 
-	public SystemPropertiesMode getSystemPropertiesMode() {
-		return systemPropertiesMode;
+	public SystemPropertiesMode getSystemPropertiesModeEnum() {
+		return systemPropertiesModeEnum;
 	}
 
-	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
-		this.systemPropertiesMode = systemPropertiesMode;
+	public void setSystemPropertiesModeEnum(SystemPropertiesMode systemPropertiesModeEnum) {
+		this.systemPropertiesModeEnum = systemPropertiesModeEnum;
+		super.setSystemPropertiesModeName(this.systemPropertiesModeEnum.name());
 	}
 }
