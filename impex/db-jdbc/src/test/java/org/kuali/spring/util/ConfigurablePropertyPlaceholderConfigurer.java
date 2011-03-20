@@ -76,10 +76,12 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
 			if (currentBeanIsMe(curName, beanFactory)) {
+				logger.info("Skipping placeholder resolution for " + curName);
 				continue;
 			}
 			BeanDefinition bd = beanFactory.getBeanDefinition(curName);
 			try {
+				logger.info("Resolving placeholders for " + curName);
 				beanDefinitionVisitor.visitBeanDefinition(bd);
 			} catch (Exception ex) {
 				throw new BeanDefinitionStoreException(bd.getResourceDescription(), curName, ex.getMessage());
@@ -90,6 +92,8 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	@Override
 	protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props)
 			throws BeansException {
+		logger.info("Resolving placeholders in bean definitions");
+
 		placeholderResolver.setProperties(props);
 		stringValueResolver.setProperties(props);
 		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
