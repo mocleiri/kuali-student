@@ -52,14 +52,16 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		placeholderResolver.setSearchSystemEnvironment(searchSystemEnvironment);
 		placeholderResolver.setSystemPropertiesMode(systemPropertiesModeEnum);
 
-		stringValueResolver.setHelper(helper);
 		stringValueResolver.setNullValue(nullValue);
-		stringValueResolver.setResolver(placeholderResolver);
+	}
 
+	public void wire() {
+		stringValueResolver.setHelper(helper);
+		stringValueResolver.setResolver(placeholderResolver);
 		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
 	}
 
-	protected boolean currentBeanIsThisConfigurer(String name, ConfigurableListableBeanFactory beanFactory) {
+	protected boolean isThisConfigurer(String name, ConfigurableListableBeanFactory beanFactory) {
 		if (!name.equals(this.beanName)) {
 			return false;
 		}
@@ -74,7 +76,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		for (String curName : beanNames) {
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
-			if (currentBeanIsThisConfigurer(curName, beanFactory)) {
+			if (isThisConfigurer(curName, beanFactory)) {
 				logger.info("Skipping placeholder resolution for " + curName);
 				continue;
 			}
