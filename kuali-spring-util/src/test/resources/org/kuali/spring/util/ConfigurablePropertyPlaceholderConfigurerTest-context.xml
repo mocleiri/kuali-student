@@ -14,8 +14,8 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="kuali.spring.foo" class="java.lang.String">
-    <constructor-arg type="java.lang.String" value="bar" />
+  <bean id="kuali.spring.null" class="java.lang.String">
+    <constructor-arg type="java.lang.String" value="nulllll" />
   </bean>
 
   <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
