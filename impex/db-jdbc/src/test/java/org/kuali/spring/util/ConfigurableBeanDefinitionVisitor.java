@@ -20,7 +20,7 @@ public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
 		for (PropertyValue pv : pvArray) {
 			Object newVal = resolveValue(pv.getValue());
 			if (!ObjectUtils.nullSafeEquals(newVal, pv.getValue())) {
-				logger.info("Updating '" + pv.getName() + "' [" + pv.getValue() + "]->["
+				logger.info("Resolved '" + pv.getName() + "' [" + pv.getValue() + "]->["
 						+ loggerSupport.getPropertyValue(pv.getValue() + "", newVal + "") + "]");
 				pvs.add(pv.getName(), newVal);
 			}
