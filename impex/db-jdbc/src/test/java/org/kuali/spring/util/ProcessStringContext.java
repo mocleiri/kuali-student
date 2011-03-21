@@ -1,7 +1,8 @@
 package org.kuali.spring.util;
 
-import java.util.Properties;
 import java.util.Set;
+
+import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 
 /**
  * 
@@ -9,7 +10,7 @@ import java.util.Set;
  */
 public class ProcessStringContext {
 
-	Properties properties;
+	PlaceholderResolver resolver;
 	Set<String> visitedPlaceholders;
 	int startIndex;
 	StringBuilder buffer;
@@ -18,21 +19,13 @@ public class ProcessStringContext {
 		this(null, null, 0, null);
 	}
 
-	public ProcessStringContext(Properties properties, Set<String> visitedPlaceholders, int startIndex,
+	public ProcessStringContext(PlaceholderResolver resolver, Set<String> visitedPlaceholders, int startIndex,
 			StringBuilder buffer) {
 		super();
-		this.properties = properties;
+		this.resolver = resolver;
 		this.visitedPlaceholders = visitedPlaceholders;
 		this.startIndex = startIndex;
 		this.buffer = buffer;
-	}
-
-	public Properties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Properties properties) {
-		this.properties = properties;
 	}
 
 	public Set<String> getVisitedPlaceholders() {
@@ -57,6 +50,14 @@ public class ProcessStringContext {
 
 	public void setBuffer(StringBuilder buffer) {
 		this.buffer = buffer;
+	}
+
+	public PlaceholderResolver getResolver() {
+		return resolver;
+	}
+
+	public void setResolver(PlaceholderResolver resolver) {
+		this.resolver = resolver;
 	}
 
 }

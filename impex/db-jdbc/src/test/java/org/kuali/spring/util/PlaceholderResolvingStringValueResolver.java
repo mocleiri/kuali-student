@@ -3,12 +3,11 @@ package org.kuali.spring.util;
 import java.util.Properties;
 
 import org.springframework.beans.BeansException;
-import org.springframework.util.PropertyPlaceholderHelper;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 import org.springframework.util.StringValueResolver;
 
 public class PlaceholderResolvingStringValueResolver implements StringValueResolver {
-	PropertyPlaceholderHelper helper;
+	NestedPropertyPlaceholderHelper helper;
 	PlaceholderResolver resolver;
 	Properties properties;
 	String nullValue;
@@ -19,11 +18,11 @@ public class PlaceholderResolvingStringValueResolver implements StringValueResol
 		return (value.equals(nullValue) ? null : value);
 	}
 
-	public PropertyPlaceholderHelper getHelper() {
+	public NestedPropertyPlaceholderHelper getHelper() {
 		return helper;
 	}
 
-	public void setHelper(PropertyPlaceholderHelper helper) {
+	public void setHelper(NestedPropertyPlaceholderHelper helper) {
 		this.helper = helper;
 	}
 

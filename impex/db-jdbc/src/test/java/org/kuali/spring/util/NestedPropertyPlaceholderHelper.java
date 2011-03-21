@@ -26,13 +26,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.Assert;
-import org.springframework.util.PropertyPlaceholderHelper;
+import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 import org.springframework.util.StringUtils;
 
 /**
  * 
  */
-public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
+public class NestedPropertyPlaceholderHelper {
 
 	private static final Log logger = LogFactory.getLog(NestedPropertyPlaceholderHelper.class);
 
@@ -87,7 +87,6 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 	 */
 	public NestedPropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
 			boolean ignoreUnresolvablePlaceholders) {
-		super(placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
 
 		Assert.notNull(placeholderPrefix, "placeholderPrefix must not be null");
 		Assert.notNull(placeholderSuffix, "placeholderSuffix must not be null");
@@ -104,21 +103,45 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 	}
 
 	/**
+	 * Replaces all placeholders of format <code>${name}</code> with the corresponding property from the supplied
+	 * {@link Properties}.
 	 * 
+	 * @param value
+	 *            the value containing the placeholders to be replaced.
+	 * @param properties
+	 *            the <code>Properties</code> to use for replacement.
+	 * @return the supplied value with placeholders replaced inline.
 	 */
-	@Override
 	public String replacePlaceholders(String value, final Properties properties) {
-		Assert.notNull(value, "Argument 'value' must not be null.");
-		logger.debug("Examining " + value);
-		return parseStringValue(value, properties, new HashSet<String>());
+		Assert.notNull(properties, "Argument 'properties' must not be null.");
+		return replacePlaceholders(value, new PlaceholderResolver() {
+			public String resolvePlaceholder(String placeholderName) {
+				return properties.getProperty(placeholderName);
+			}
+		});
 	}
 
-	protected String parseStringValue(String strVal, Properties properties, Set<String> visitedPlaceholders) {
+	/**
+	 * Replaces all placeholders of format <code>${name}</code> with the value returned from the supplied
+	 * {@link PlaceholderResolver}.
+	 * 
+	 * @param value
+	 *            the value containing the placeholders to be replaced.
+	 * @param placeholderResolver
+	 *            the <code>PlaceholderResolver</code> to use for replacement.
+	 * @return the supplied value with placeholders replaced inline.
+	 */
+	public String replacePlaceholders(String value, PlaceholderResolver placeholderResolver) {
+		Assert.notNull(value, "Argument 'value' must not be null.");
+		return parseStringValue(value, placeholderResolver, new HashSet<String>());
+	}
+
+	protected String parseStringValue(String strVal, PlaceholderResolver resolver, Set<String> visitedPlaceholders) {
 		logger.debug("Parsing " + strVal);
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		while (startIndex != -1) {
-			startIndex = processString(new ProcessStringContext(properties, visitedPlaceholders, startIndex, buf));
+			startIndex = processString(new ProcessStringContext(resolver, visitedPlaceholders, startIndex, buf));
 		}
 		return buf.toString();
 	}
@@ -146,10 +169,10 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 		}
 
 		// Recursive invocation, resolve any placeholders inside the key
-		String resolvedKey = parseStringValue(originalKey, ctx.getProperties(), ctx.getVisitedPlaceholders());
+		String resolvedKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
 		// Obtain a value for the resolved key
-		String value = getValue(resolvedKey, ctx.getProperties());
+		String value = getValue(resolvedKey, ctx.getResolver());
 
 		logger.debug("Processing " + resolvedKey + "=" + value);
 		int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
@@ -163,9 +186,9 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 	/**
 	 * Attempt to get a value for this placeholder
 	 */
-	protected String getValue(String placeholder, Properties properties) {
+	protected String getValue(String placeholder, PlaceholderResolver resolver) {
 		// If the resolver gives us something, we're done
-		String propVal = properties.getProperty(placeholder);
+		String propVal = resolver.resolvePlaceholder(placeholder);
 		if (propVal != null) {
 			return propVal;
 		}
@@ -195,7 +218,7 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 		String defaultValue = placeholder.substring(separatorIndex + this.valueSeparator.length());
 
 		// Give the resolver a chance to locate a value
-		propVal = properties.getProperty(actualPlaceholder);
+		propVal = resolver.resolvePlaceholder(actualPlaceholder);
 
 		// If the resolver found something, use it
 		if (propVal != null) {
@@ -220,7 +243,7 @@ public class NestedPropertyPlaceholderHelper extends PropertyPlaceholderHelper {
 		}
 
 		// Recursive invocation, resolve any placeholders inside the value
-		value = parseStringValue(value, ctx.getProperties(), ctx.getVisitedPlaceholders());
+		value = parseStringValue(value, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
 		// log that we resolved the placeholder
 		logger.debug("Resolved key '" + key + "' to '" + value + "'");
