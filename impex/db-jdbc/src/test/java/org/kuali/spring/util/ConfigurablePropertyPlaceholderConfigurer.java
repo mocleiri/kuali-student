@@ -16,6 +16,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	SystemPropertiesMode systemPropertiesModeEnum;
 	boolean searchSystemEnvironment;
 	boolean ignoreUnresolvablePlaceholders;
+	boolean flattenPropertyValues;
 	String nullValue;
 
 	String beanName;
@@ -55,6 +56,8 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		placeholderResolver.setSystemPropertiesMode(systemPropertiesModeEnum);
 
 		stringValueResolver.setNullValue(nullValue);
+		
+		loggerSupport.setFlattenPropertyValues(flattenPropertyValues);
 	}
 
 	public void wire() {
@@ -239,6 +242,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public void setLoggerSupport(PropertiesLoggerSupport loggerSupport) {
 		this.loggerSupport = loggerSupport;
+	}
+
+	public boolean isFlattenPropertyValues() {
+		return flattenPropertyValues;
+	}
+
+	public void setFlattenPropertyValues(boolean flattenPropertyValues) {
+		this.flattenPropertyValues = flattenPropertyValues;
 	}
 
 }
