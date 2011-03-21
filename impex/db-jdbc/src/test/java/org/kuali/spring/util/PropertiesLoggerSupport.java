@@ -29,7 +29,7 @@ public class PropertiesLoggerSupport {
 		return getLogEntry(properties, null);
 	}
 
-	public String getLogEntry(Properties properties, String comment) {
+	public synchronized String getLogEntry(Properties properties, String comment) {
 		StringBuilder sb = new StringBuilder();
 		if (!StringUtils.isEmpty(comment)) {
 			sb.append(comment + "\n");
@@ -52,7 +52,7 @@ public class PropertiesLoggerSupport {
 		return sb.toString();
 	}
 
-	public String getPropertyValue(String key, String value) {
+	protected synchronized String getPropertyValue(String key, String value) {
 		if (flattenPropertyValues) {
 			value = value.replace("\n", " ");
 			value = value.replace("\r", " ");
@@ -60,6 +60,9 @@ public class PropertiesLoggerSupport {
 		}
 		if (!maskPropertyValues) {
 			return value;
+		}
+		if (pattern == null) {
+			pattern = Pattern.compile(maskExpression);
 		}
 		Matcher matcher = pattern.matcher(key);
 		boolean match = matcher.matches();

@@ -16,9 +16,9 @@ import org.springframework.util.ObjectUtils;
  * attempting to resolve placeholders in Spring beans. This allows you to do something useful with the complete set of
  * Spring properties known to this configurer. (eg logging them, debugging them etc)
  */
-public class EagerPropertyPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
-	private final Logger logger = LoggerFactory.getLogger(EagerPropertyPlaceholderConfigurer.class);
-	PropertiesLoggerSupport loggerSupport;
+public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
+	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
+	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	Properties rawProperties;
 	Properties resolvedProperties;
 
@@ -112,9 +112,9 @@ public class EagerPropertyPlaceholderConfigurer extends ConfigurablePropertyPlac
 				continue;
 			}
 
-			// Update the original property value with the resolved property value
-			logger.debug("Update " + commonKey + "='" + loggerSupport.getPropertyValue(commonKey, newPropertyValue)
-					+ "' was [" + loggerSupport.getPropertyValue(commonKey, oldPropertyValue) + "]");
+			// Update the old property value with the new property value
+			logger.debug("Update " + commonKey + "='" + loggerSupport.getLogEntry(commonKey, newPropertyValue)
+					+ "' was [" + loggerSupport.getLogEntry(commonKey, oldPropertyValue) + "]");
 			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}

@@ -41,6 +41,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		stringValueResolver = new PlaceholderResolvingStringValueResolver();
 		beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 		configure();
+		wire();
 	}
 
 	public void configure() {
