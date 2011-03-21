@@ -13,12 +13,11 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * This class uses the convertProperties() hook provided by Spring to resolve placeholders in Spring properties before
- * attempting to resolve placeholders in Spring beans. This allows you to do something useful with the complete set of
- * Spring properties known to this configurer. (eg logging them, debugging them etc)
+ * resolving placeholders in Spring beans. This allows you to do something useful with the complete set of Spring
+ * properties known to this configurer. (eg logging them, debugging them etc)
  */
 public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	Properties rawProperties;
 	Properties resolvedProperties;
 
@@ -113,8 +112,8 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			}
 
 			// Update the old property value with the new property value
-			logger.debug("Update " + commonKey + "='" + loggerSupport.getLogEntry(commonKey, newPropertyValue)
-					+ "' was [" + loggerSupport.getLogEntry(commonKey, oldPropertyValue) + "]");
+			logger.debug("Update " + commonKey + "='" + loggerSupport.getPropertyValue(commonKey, newPropertyValue)
+					+ "' was [" + loggerSupport.getPropertyValue(commonKey, oldPropertyValue) + "]");
 			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
@@ -139,14 +138,6 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			clone.setProperty(propertyName, propertyValue);
 		}
 		return clone;
-	}
-
-	public PropertiesLoggerSupport getLoggerSupport() {
-		return loggerSupport;
-	}
-
-	public void setLoggerSupport(PropertiesLoggerSupport propertiesLogger) {
-		this.loggerSupport = propertiesLogger;
 	}
 
 	public Properties getRawProperties() {

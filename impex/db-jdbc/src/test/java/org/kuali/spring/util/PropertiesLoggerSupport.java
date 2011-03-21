@@ -52,7 +52,7 @@ public class PropertiesLoggerSupport {
 		return sb.toString();
 	}
 
-	protected synchronized String getPropertyValue(String key, String value) {
+	public synchronized String getPropertyValue(String key, String value) {
 		if (flattenPropertyValues) {
 			value = value.replace("\n", " ");
 			value = value.replace("\r", " ");

@@ -20,6 +20,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	String beanName;
 	BeanFactory beanFactory;
+	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	NestedPropertyPlaceholderHelper helper;
 	PlaceholderResolvingStringValueResolver stringValueResolver;
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor;
@@ -60,6 +61,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		stringValueResolver.setHelper(helper);
 		stringValueResolver.setResolver(placeholderResolver);
 		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
+		beanDefinitionVisitor.setLoggerSupport(loggerSupport);
 	}
 
 	protected boolean isThisConfigurer(String name, ConfigurableListableBeanFactory beanFactory) {
@@ -230,6 +232,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public void setHelper(NestedPropertyPlaceholderHelper helper) {
 		this.helper = helper;
+	}
+
+	public PropertiesLoggerSupport getLoggerSupport() {
+		return loggerSupport;
+	}
+
+	public void setLoggerSupport(PropertiesLoggerSupport loggerSupport) {
+		this.loggerSupport = loggerSupport;
 	}
 
 }
