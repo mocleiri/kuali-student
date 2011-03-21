@@ -6,27 +6,30 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PropertiesLoggerSupport {
+	final Logger logger = LoggerFactory.getLogger(PropertiesLoggerSupport.class);
+
+	// Matches any string containing "password" (case insensitive)
 	public static final String DEFAULT_MASK_EXPRESSION = ".*((?i)password).*";
 	public static final String DEFAULT_MASKED_VALUE = "******";
-	public static final boolean IS_DEFAULT_MASK_PROPERTY_VALUES = true;
+	public static final boolean DEFAULT_IS_MASK_PROPERTY_VALUES = true;
+	public static final boolean DEFAULT_IS_FLATTEN_PROPERTY_VALUES = false;
 
-	final Logger logger = LoggerFactory.getLogger(PropertiesLoggerSupport.class);
 	// If true, strip \n and \r when logging values
-	boolean flattenPropertyValues;
+	boolean flattenPropertyValues = DEFAULT_IS_FLATTEN_PROPERTY_VALUES;
 	// If true, mask values for keys that match the maskExpression
-	boolean maskPropertyValues = IS_DEFAULT_MASK_PROPERTY_VALUES;
-	// Matches any string containing "password" (case insensitive)
+	boolean maskPropertyValues = DEFAULT_IS_MASK_PROPERTY_VALUES;
 	String maskExpression = DEFAULT_MASK_EXPRESSION;
 	String maskValue = DEFAULT_MASKED_VALUE;
 	Pattern pattern;
 
 	/**
-	 * This setter has custom behavior
+	 * This setter also invokes Pattern.compile(maskExpression)
+	 * 
+	 * @param maskExpression
 	 */
 	public void setMaskExpression(String maskExpression) {
 		this.maskExpression = maskExpression;
@@ -41,17 +44,24 @@ public class PropertiesLoggerSupport {
 		return getLogEntry(properties, null);
 	}
 
+	protected boolean isEmpty(String s) {
+		if (s == null) {
+			return true;
+		}
+		if (s.trim().length() == 0) {
+			return true;
+		}
+		return false;
+	}
+
 	public String getLogEntry(Properties properties, String comment) {
 		StringBuilder sb = new StringBuilder();
-		if (!StringUtils.isEmpty(comment)) {
+		if (!isEmpty(comment)) {
 			sb.append(comment + "\n");
 		}
 		if (properties == null || properties.size() == 0) {
 			sb.append("No properties to log\n");
 			return sb.toString();
-		}
-		if (maskPropertyValues) {
-			pattern = Pattern.compile(maskExpression);
 		}
 		Map<String, String> sortedProperties = new TreeMap<String, String>();
 		for (String key : properties.stringPropertyNames()) {
@@ -72,9 +82,6 @@ public class PropertiesLoggerSupport {
 		}
 		if (!maskPropertyValues) {
 			return value;
-		}
-		if (pattern == null) {
-			pattern = Pattern.compile(maskExpression);
 		}
 		Matcher matcher = pattern.matcher(key);
 		boolean match = matcher.matches();

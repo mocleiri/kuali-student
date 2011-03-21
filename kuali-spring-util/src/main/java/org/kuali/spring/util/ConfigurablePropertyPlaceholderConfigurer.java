@@ -20,7 +20,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	String nullValue;
 	String maskExpression = PropertiesLoggerSupport.DEFAULT_MASK_EXPRESSION;
 	String maskValue = PropertiesLoggerSupport.DEFAULT_MASKED_VALUE;
-	boolean maskPropertyValues = PropertiesLoggerSupport.IS_DEFAULT_MASK_PROPERTY_VALUES;
+	boolean maskPropertyValues = PropertiesLoggerSupport.DEFAULT_IS_MASK_PROPERTY_VALUES;
 
 	String beanName;
 	BeanFactory beanFactory;

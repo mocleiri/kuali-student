@@ -2,28 +2,22 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.kuali.db.impex</groupId>
-    <artifactId>impex</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <groupId>org.kuali</groupId>
+    <artifactId>kuali</artifactId>
+    <version>77</version>
   </parent>
-  <artifactId>db-jdbc</artifactId>
-  <name>JDBC Support Utilities</name>
-  <description>Various utility methods for JDBC</description>
+  <artifactId>kuali-spring-util</artifactId>
+  <name>Kuali Spring Utilities</name>
+  <description>Various utility methods for Spring</description>
+  <properties>
+    <kuali.spring.version>3.0.5.RELEASE</kuali.spring.version>
+    <kuali.slf4j.version>1.6.1</kuali.slf4j.version>
+  </properties>
   <dependencies>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.5</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>1.3.2</version>
-    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${impex.spring.version}</version>
+      <version>${kuali.spring.version}</version>
       <exclusions>
         <exclusion>
           <groupId>commons-logging</groupId>
@@ -34,26 +28,24 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <version>${kuali.slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
+      <version>${kuali.slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.oracle</groupId>
-      <artifactId>ojdbc14</artifactId>
-      <version>10.2.0.3.0</version>
-      <scope>provided</scope>
+      <version>${kuali.slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
+      <version>4.8.1</version>
     </dependency>
   </dependencies>
 </project>
