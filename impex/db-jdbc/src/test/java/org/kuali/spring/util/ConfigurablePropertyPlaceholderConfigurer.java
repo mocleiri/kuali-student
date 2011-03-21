@@ -85,7 +85,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 			}
 			BeanDefinition bd = beanFactory.getBeanDefinition(curName);
 			try {
-				logger.info("Resolving placeholders for " + curName);
+				logger.info("Resolving placeholders for bean '" + curName + "' [" + bd.getBeanClassName() + "]");
 				beanDefinitionVisitor.visitBeanDefinition(bd);
 			} catch (Exception ex) {
 				throw new BeanDefinitionStoreException(bd.getResourceDescription(), curName, ex.getMessage());
@@ -100,7 +100,6 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 		placeholderResolver.setProperties(props);
 		stringValueResolver.setProperties(props);
-		beanDefinitionVisitor.setStringValueResolver(stringValueResolver);
 
 		// Process placeholders in the bean definitions
 		processBeanDefinitions(beanFactory);
