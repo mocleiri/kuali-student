@@ -22,8 +22,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.Assert;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
@@ -34,7 +34,7 @@ import org.springframework.util.StringUtils;
  */
 public class PropertyPlaceholderHelper {
 
-	private static final Log logger = LogFactory.getLog(PropertyPlaceholderHelper.class);
+	private static final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderHelper.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 
