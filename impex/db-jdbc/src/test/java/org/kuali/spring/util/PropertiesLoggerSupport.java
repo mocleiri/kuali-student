@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PropertiesLoggerSupport {
+
 	final Logger logger = LoggerFactory.getLogger(PropertiesLoggerSupport.class);
 	// If true, strip \n and \r when logging values
 	boolean flattenPropertyValues;
@@ -21,6 +22,15 @@ public class PropertiesLoggerSupport {
 	String maskValue = "******";
 	Pattern pattern;
 
+	/**
+	 * This setter has custom behavior
+	 */
+	public void setMaskExpression(String maskExpression) {
+		this.maskExpression = maskExpression;
+		this.pattern = Pattern.compile(maskExpression);
+	}
+
+
 	public String getLogEntry(String key, String value) {
 		return key + "=" + getPropertyValue(key, value);
 	}
@@ -29,7 +39,7 @@ public class PropertiesLoggerSupport {
 		return getLogEntry(properties, null);
 	}
 
-	public synchronized String getLogEntry(Properties properties, String comment) {
+	public String getLogEntry(Properties properties, String comment) {
 		StringBuilder sb = new StringBuilder();
 		if (!StringUtils.isEmpty(comment)) {
 			sb.append(comment + "\n");
@@ -52,7 +62,7 @@ public class PropertiesLoggerSupport {
 		return sb.toString();
 	}
 
-	public synchronized String getPropertyValue(String key, String value) {
+	public String getPropertyValue(String key, String value) {
 		if (flattenPropertyValues) {
 			value = value.replace("\n", " ");
 			value = value.replace("\r", " ");
@@ -91,10 +101,6 @@ public class PropertiesLoggerSupport {
 
 	public String getMaskExpression() {
 		return maskExpression;
-	}
-
-	public void setMaskExpression(String maskExpression) {
-		this.maskExpression = maskExpression;
 	}
 
 	public String getMaskValue() {
