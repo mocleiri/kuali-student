@@ -21,7 +21,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	String beanName;
 	BeanFactory beanFactory;
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
-	NestedPropertyPlaceholderHelper helper;
+	PropertyPlaceholderHelper helper;
 	PlaceholderResolvingStringValueResolver stringValueResolver;
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor;
 	ConfigurablePlaceholderResolver placeholderResolver;
@@ -37,7 +37,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.setSystemPropertiesModeEnum(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
 		this.setSearchSystemEnvironment(true);
 		this.setIgnoreUnresolvablePlaceholders(false);
-		helper = new NestedPropertyPlaceholderHelper();
+		helper = new PropertyPlaceholderHelper();
 		placeholderResolver = new ConfigurablePlaceholderResolver();
 		stringValueResolver = new PlaceholderResolvingStringValueResolver();
 		beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
@@ -226,11 +226,11 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		this.placeholderResolver = placeholderResolver;
 	}
 
-	public NestedPropertyPlaceholderHelper getHelper() {
+	public PropertyPlaceholderHelper getHelper() {
 		return helper;
 	}
 
-	public void setHelper(NestedPropertyPlaceholderHelper helper) {
+	public void setHelper(PropertyPlaceholderHelper helper) {
 		this.helper = helper;
 	}
 

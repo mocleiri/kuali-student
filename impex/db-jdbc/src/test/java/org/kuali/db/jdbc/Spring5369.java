@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer;
-import org.kuali.spring.util.NestedPropertyPlaceholderHelper;
+import org.kuali.spring.util.PropertyPlaceholderHelper;
 import org.kuali.spring.util.PropertiesLoggerSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +70,7 @@ public class Spring5369 {
 			loggerSupport.setFlattenPropertyValues(true);
 			loggerSupport.setMaskPropertyValues(false);
 			logger.info(loggerSupport.getLogEntry(props, "Nested Properties for testing Spring issue 5369"));
-			NestedPropertyPlaceholderHelper helper = new NestedPropertyPlaceholderHelper(false);
+			PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(false);
 			// This fails throwing IllegalArgumentException
 			// helper.replacePlaceholders("${jdbc.ice.cream=rockyroad}", props);
 			helper.replacePlaceholders("${jdbc.sql}", props);

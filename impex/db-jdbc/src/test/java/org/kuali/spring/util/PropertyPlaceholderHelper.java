@@ -32,9 +32,9 @@ import org.springframework.util.StringUtils;
 /**
  * 
  */
-public class NestedPropertyPlaceholderHelper {
+public class PropertyPlaceholderHelper {
 
-	private static final Log logger = LogFactory.getLog(NestedPropertyPlaceholderHelper.class);
+	private static final Log logger = LogFactory.getLog(PropertyPlaceholderHelper.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 
@@ -50,11 +50,11 @@ public class NestedPropertyPlaceholderHelper {
 	private String valueSeparator;
 	private boolean ignoreUnresolvablePlaceholders;
 
-	public NestedPropertyPlaceholderHelper() {
+	public PropertyPlaceholderHelper() {
 		this(false);
 	}
 
-	public NestedPropertyPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {
+	public PropertyPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {
 		this(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, ignoreUnresolvablePlaceholders);
 	}
@@ -68,7 +68,7 @@ public class NestedPropertyPlaceholderHelper {
 	 * @param placeholderSuffix
 	 *            the suffix that denotes the end of a placeholder.
 	 */
-	public NestedPropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix) {
+	public PropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix) {
 		this(placeholderPrefix, placeholderSuffix, null, true);
 	}
 
@@ -85,7 +85,7 @@ public class NestedPropertyPlaceholderHelper {
 	 *            indicates whether unresolvable placeholders should be ignored (<code>true</code>) or cause an
 	 *            exception (<code>false</code>).
 	 */
-	public NestedPropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
+	public PropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
 			boolean ignoreUnresolvablePlaceholders) {
 
 		Assert.notNull(placeholderPrefix, "placeholderPrefix must not be null");

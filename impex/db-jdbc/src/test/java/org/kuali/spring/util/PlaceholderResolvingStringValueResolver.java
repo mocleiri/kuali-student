@@ -7,7 +7,7 @@ import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 import org.springframework.util.StringValueResolver;
 
 public class PlaceholderResolvingStringValueResolver implements StringValueResolver {
-	NestedPropertyPlaceholderHelper helper;
+	PropertyPlaceholderHelper helper;
 	PlaceholderResolver resolver;
 	Properties properties;
 	String nullValue;
@@ -18,11 +18,11 @@ public class PlaceholderResolvingStringValueResolver implements StringValueResol
 		return (value.equals(nullValue) ? null : value);
 	}
 
-	public NestedPropertyPlaceholderHelper getHelper() {
+	public PropertyPlaceholderHelper getHelper() {
 		return helper;
 	}
 
-	public void setHelper(NestedPropertyPlaceholderHelper helper) {
+	public void setHelper(PropertyPlaceholderHelper helper) {
 		this.helper = helper;
 	}
 
