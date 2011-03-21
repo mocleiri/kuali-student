@@ -18,6 +18,9 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 	boolean ignoreUnresolvablePlaceholders;
 	boolean flattenPropertyValues;
 	String nullValue;
+	String maskExpression = PropertiesLoggerSupport.DEFAULT_MASK_EXPRESSION;
+	String maskValue = PropertiesLoggerSupport.DEFAULT_MASKED_VALUE;
+	boolean maskPropertyValues = PropertiesLoggerSupport.IS_DEFAULT_MASK_PROPERTY_VALUES;
 
 	String beanName;
 	BeanFactory beanFactory;
@@ -56,8 +59,11 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		placeholderResolver.setSystemPropertiesMode(systemPropertiesModeEnum);
 
 		stringValueResolver.setNullValue(nullValue);
-		
+
 		loggerSupport.setFlattenPropertyValues(flattenPropertyValues);
+		loggerSupport.setMaskExpression(maskExpression);
+		loggerSupport.setMaskValue(maskValue);
+		loggerSupport.setMaskPropertyValues(maskPropertyValues);
 	}
 
 	public void wire() {
@@ -250,6 +256,30 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public void setFlattenPropertyValues(boolean flattenPropertyValues) {
 		this.flattenPropertyValues = flattenPropertyValues;
+	}
+
+	public String getMaskExpression() {
+		return maskExpression;
+	}
+
+	public void setMaskExpression(String maskExpression) {
+		this.maskExpression = maskExpression;
+	}
+
+	public String getMaskValue() {
+		return maskValue;
+	}
+
+	public void setMaskValue(String maskValue) {
+		this.maskValue = maskValue;
+	}
+
+	public boolean isMaskPropertyValues() {
+		return maskPropertyValues;
+	}
+
+	public void setMaskPropertyValues(boolean maskPropertyValues) {
+		this.maskPropertyValues = maskPropertyValues;
 	}
 
 }

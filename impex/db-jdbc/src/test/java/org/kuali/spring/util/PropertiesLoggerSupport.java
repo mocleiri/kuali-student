@@ -11,15 +11,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PropertiesLoggerSupport {
+	public static final String DEFAULT_MASK_EXPRESSION = ".*((?i)password).*";
+	public static final String DEFAULT_MASKED_VALUE = "******";
+	public static final boolean IS_DEFAULT_MASK_PROPERTY_VALUES = true;
 
 	final Logger logger = LoggerFactory.getLogger(PropertiesLoggerSupport.class);
 	// If true, strip \n and \r when logging values
 	boolean flattenPropertyValues;
 	// If true, mask values for keys that match the maskExpression
-	boolean maskPropertyValues = true;
+	boolean maskPropertyValues = IS_DEFAULT_MASK_PROPERTY_VALUES;
 	// Matches any string containing "password" (case insensitive)
-	String maskExpression = ".*((?i)password).*";
-	String maskValue = "******";
+	String maskExpression = DEFAULT_MASK_EXPRESSION;
+	String maskValue = DEFAULT_MASKED_VALUE;
 	Pattern pattern;
 
 	/**
@@ -29,7 +32,6 @@ public class PropertiesLoggerSupport {
 		this.maskExpression = maskExpression;
 		this.pattern = Pattern.compile(maskExpression);
 	}
-
 
 	public String getLogEntry(String key, String value) {
 		return key + "=" + getPropertyValue(key, value);

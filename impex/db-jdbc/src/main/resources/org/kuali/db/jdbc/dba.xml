@@ -20,7 +20,7 @@
 
   <bean id="kuali.jdbc.dba.property.configurer" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
     p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:ignoreUnresolvablePlaceholders="true"
-    p:ignoreResourceNotFound="true" p:order-ref="kuali.jdbc.dba.property.configurer.priority" init-method="configure">
+    p:ignoreResourceNotFound="true" p:flattenPropertyValues="true" p:maskPropertyValues="false" p:order-ref="kuali.jdbc.dba.property.configurer.priority" init-method="configure">
     <property name="locations">
       <list>
         <value>classpath:org/kuali/db/jdbc/default-dba-properties.xml</value>
