@@ -62,6 +62,9 @@ public class PropertyPlaceholderConfigurer extends PropertyResourceConfigurer im
 		logger.info("Resolving placeholders in bean definitions");
 
 		helper.setProperties(props);
+		if (beanDefinitionVisitor.getStringValueResolver() == null) {
+			beanDefinitionVisitor.setStringValueResolver(helper);
+		}
 
 		// Process placeholders in the bean definitions
 		processBeanDefinitions(beanFactory);
