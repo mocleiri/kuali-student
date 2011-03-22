@@ -6,29 +6,20 @@
   governing permissions and limitations under the License. -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
   xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
-  xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
                       http://www.springframework.org/schema/util 
                       http://www.springframework.org/schema/util/spring-util-2.0.xsd
                       http://www.springframework.org/schema/context
-                      http://www.springframework.org/schema/context/spring-context-2.5.xsd
-                      http://www.springframework.org/schema/aop 
-                      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+                      http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="kuali.spring.bean1" class="java.lang.String">
-    <constructor-arg type="java.lang.String" value="bean1" />
-  </bean>
-
-  <bean id="kuali.spring.bean2" class="java.lang.String">
-    <constructor-arg type="java.lang.String" value="bean2" />
-  </bean>
+  <bean id="kuali.spring.property.helper" class="org.kuali.spring.util.PropertyPlaceholderHelper" />
+  <bean id="kuali.spring.property.bean.visitor" class="org.kuali.spring.util.ConfigurableBeanDefinitionVisitor"
+    p:stringValueResolver="kuali.spring.property.helper" />
 
   <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
-    p:systemPropertiesModeEnum="SYSTEM_PROPERTIES_MODE_OVERRIDE" p:ignoreUnresolvablePlaceholders="true"
-    p:ignoreResourceNotFound="true" p:flattenPropertyValues="true" p:maskPropertyValues="false" p:order="10000"
-    p:nullValue="null" p:placeholderPrefix="${" p:placeholderSuffix="}" p:searchSystemEnvironment="true"
-    p:maskExpression="password" p:maskValue="****" init-method="configure">
+    p:order="10000" p:helper-ref="kuali.spring.property.helper" p:beanDefinitionVisitor-ref="kuali.spring.property.bean.visitor">
     <property name="locations">
       <list>
         <value>classpath:org/kuali/spring/util/default-properties.xml</value>

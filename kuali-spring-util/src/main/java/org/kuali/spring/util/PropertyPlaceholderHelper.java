@@ -1,19 +1,3 @@
-/*
- * Copyright 2002-2010 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.kuali.spring.util;
 
 import java.util.HashMap;
@@ -24,17 +8,19 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.Assert;
 import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 import org.springframework.util.StringUtils;
+import org.springframework.util.StringValueResolver;
 
 /**
  * 
  */
-public class PropertyPlaceholderHelper {
+public class PropertyPlaceholderHelper implements StringValueResolver, PlaceholderResolver {
 
-	private static final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderHelper.class);
+	final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderHelper.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 
@@ -49,6 +35,10 @@ public class PropertyPlaceholderHelper {
 	private String simplePrefix;
 	private String valueSeparator;
 	private boolean ignoreUnresolvablePlaceholders;
+	private String nullValue;
+	boolean searchSystemEnvironment;
+	Properties properties;
+	SystemPropertiesMode systemPropertiesMode;
 
 	public PropertyPlaceholderHelper() {
 		this(false);
@@ -59,32 +49,10 @@ public class PropertyPlaceholderHelper {
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, ignoreUnresolvablePlaceholders);
 	}
 
-	/**
-	 * Creates a new <code>PropertyPlaceholderHelper</code> that uses the supplied prefix and suffix. Unresolvable
-	 * placeholders are ignored.
-	 * 
-	 * @param placeholderPrefix
-	 *            the prefix that denotes the start of a placeholder.
-	 * @param placeholderSuffix
-	 *            the suffix that denotes the end of a placeholder.
-	 */
 	public PropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix) {
 		this(placeholderPrefix, placeholderSuffix, null, true);
 	}
 
-	/**
-	 * Creates a new <code>PropertyPlaceholderHelper</code> that uses the supplied prefix and suffix.
-	 * 
-	 * @param placeholderPrefix
-	 *            the prefix that denotes the start of a placeholder
-	 * @param placeholderSuffix
-	 *            the suffix that denotes the end of a placeholder
-	 * @param valueSeparator
-	 *            the separating character between the placeholder variable and the associated default value, if any
-	 * @param ignoreUnresolvablePlaceholders
-	 *            indicates whether unresolvable placeholders should be ignored (<code>true</code>) or cause an
-	 *            exception (<code>false</code>).
-	 */
 	public PropertyPlaceholderHelper(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
 			boolean ignoreUnresolvablePlaceholders) {
 
@@ -100,6 +68,42 @@ public class PropertyPlaceholderHelper {
 		}
 		this.valueSeparator = valueSeparator;
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
+	}
+
+	@Override
+	public String resolveStringValue(String strVal) throws BeansException {
+		String value = replacePlaceholders(strVal, this);
+		return (value.equals(nullValue) ? null : value);
+	}
+
+	@Override
+	public String resolvePlaceholder(String placeholder) {
+		String propVal = null;
+		if (systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE)) {
+			propVal = resolveSystemProperty(placeholder);
+		}
+		if (propVal == null) {
+			propVal = properties.getProperty(placeholder);
+		}
+		if (propVal == null && systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK)) {
+			propVal = resolveSystemProperty(placeholder);
+		}
+		return propVal;
+	}
+
+	protected String resolveSystemProperty(String key) {
+		try {
+			String value = System.getProperty(key);
+			if (value == null && this.searchSystemEnvironment) {
+				value = System.getenv(key);
+			}
+			return value;
+		} catch (Throwable ex) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Could not access system property '" + key + "': " + ex);
+			}
+			return null;
+		}
 	}
 
 	/**
@@ -345,6 +349,38 @@ public class PropertyPlaceholderHelper {
 
 	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
+	}
+
+	public String getNullValue() {
+		return nullValue;
+	}
+
+	public void setNullValue(String nullValue) {
+		this.nullValue = nullValue;
+	}
+
+	public boolean isSearchSystemEnvironment() {
+		return searchSystemEnvironment;
+	}
+
+	public void setSearchSystemEnvironment(boolean searchSystemEnvironment) {
+		this.searchSystemEnvironment = searchSystemEnvironment;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	public SystemPropertiesMode getSystemPropertiesMode() {
+		return systemPropertiesMode;
+	}
+
+	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
+		this.systemPropertiesMode = systemPropertiesMode;
 	}
 
 }
