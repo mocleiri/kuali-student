@@ -1,5 +1,8 @@
 package org.kuali.spring.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinitionVisitor;
@@ -7,6 +10,7 @@ import org.springframework.util.StringValueResolver;
 
 public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	final Logger logger = LoggerFactory.getLogger(ConfigurableBeanDefinitionVisitor.class);
+	List<ValueResolutionListener> listeners = new ArrayList<ValueResolutionListener>();
 
 	StringValueResolver stringValueResolver;
 
@@ -16,13 +20,7 @@ public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
 			throw new IllegalStateException("No StringValueResolver specified");
 		}
 		String resolvedValue = this.stringValueResolver.resolveStringValue(strVal);
-		boolean equal = strVal.equals(resolvedValue);
-		if (!equal) {
-			// logger.info("Resolved " + strVal + "->" + loggerSupport.getPropertyValue(strVal, resolvedValue));
-			// TODO Do "something" so the application is aware a bean property has been changed
-		}
-		// Return original String if not modified.
-		return (equal ? strVal : resolvedValue);
+		return (strVal.equals(resolvedValue) ? strVal : resolvedValue);
 	}
 
 	public StringValueResolver getStringValueResolver() {
@@ -31,6 +29,20 @@ public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
 
 	public void setStringValueResolver(StringValueResolver stringValueResolver) {
 		this.stringValueResolver = stringValueResolver;
+	}
+
+	@Override
+	protected Object resolveValue(Object value) {
+		Object newValue = super.resolveValue(value);
+		valueResolved(value, newValue);
+		return newValue;
+	}
+
+	protected void valueResolved(Object oldValue, Object newValue) {
+		ValueResolutionEvent event = new ValueResolutionEvent(oldValue, newValue);
+		for (ValueResolutionListener listener : listeners) {
+			listener.valueResolved(event);
+		}
 	}
 
 }
