@@ -76,9 +76,10 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		return (value.equals(nullValue) ? null : value);
 	}
 
-	protected String getProperty(String regularProperty, String systemProperty, SystemPropertiesMode mode) {
+	protected String resolvePlaceholder(String regularProperty, String systemProperty, SystemPropertiesMode mode) {
 		if (systemProperty == null) {
 			// No other choice, might be returning null here
+			logger.trace("Ignoring system property as it is null.  Returning '{}'", regularProperty);
 			return regularProperty;
 		}
 
@@ -87,13 +88,20 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		switch (mode) {
 		case SYSTEM_PROPERTIES_MODE_NEVER:
 			// They have instructed us to never use system properties
+			logger.trace("Using property [{}], ignoring system property=[{}]", systemProperty, regularProperty);
 			return regularProperty;
 		case SYSTEM_PROPERTIES_MODE_OVERRIDE:
 			// Always use the system property if it is not null (ignore regularProperty)
+			logger.trace("Using system property [{}], ignoring property=[{}]", systemProperty, regularProperty);
 			return systemProperty;
 		case SYSTEM_PROPERTIES_MODE_FALLBACK:
 			// Only use the system property if the regular property is null
-			return (regularProperty == null ? systemProperty : regularProperty);
+			if (regularProperty == null) {
+				logger.trace("Falling back to system property=[{}]", systemProperty);
+				return systemProperty;
+			}
+			logger.trace("Using property [{}], ignoring system property=[{}]", systemProperty, regularProperty);
+			return regularProperty;
 		default:
 			throw new IllegalArgumentException("Unknown mode for handling system properties [" + mode + "]");
 		}
@@ -104,7 +112,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		String systemProperty = resolveSystemProperty(placeholder);
 		String regularProperty = properties.getProperty(placeholder);
 		logger.trace("Resolving placeholder '{}' System properties mode={}", placeholder, systemPropertiesMode);
-		return getProperty(regularProperty, systemProperty, systemPropertiesMode);
+		return resolvePlaceholder(regularProperty, systemProperty, systemPropertiesMode);
 	}
 
 	protected String resolveSystemProperty(String key) {
