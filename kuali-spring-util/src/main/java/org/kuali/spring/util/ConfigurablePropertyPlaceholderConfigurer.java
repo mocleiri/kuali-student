@@ -13,9 +13,9 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 
-public class PropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
+public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
-	final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);
+	final Logger logger = LoggerFactory.getLogger(ConfigurablePropertyPlaceholderConfigurer.class);
 
 	String beanName;
 	BeanFactory beanFactory;

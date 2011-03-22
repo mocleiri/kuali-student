@@ -16,7 +16,7 @@ import org.springframework.util.ObjectUtils;
  * resolving placeholders in Spring beans. This allows you to do something useful with the complete set of resolved
  * Spring properties known to this configurer. (eg logging them, debugging them etc)
  */
-public class ResolvePropertiesFirstPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
+public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
 	Properties rawProperties;
 	Properties resolvedProperties;
