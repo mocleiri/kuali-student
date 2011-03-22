@@ -38,7 +38,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 	String nullValue;
 	boolean searchSystemEnvironment;
 	Properties properties;
-	SystemPropertiesMode systemPropertiesMode;
+	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK;
 
 	public PropertyPlaceholderHelper() {
 		this(false);

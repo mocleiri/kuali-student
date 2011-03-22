@@ -28,6 +28,8 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			return;
 		}
 
+		helper.setProperties(properties);
+
 		// Clone the original properties
 		rawProperties = getClone(properties);
 
@@ -133,7 +135,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
 		// First resolve any placeholders in the key itself
 		logger.trace("Resolving placeholders in key '{}'", key);
-		String resolvedKey = helper.replacePlaceholders(key, originalProperties);
+		String resolvedKey = helper.replacePlaceholders(key, helper);
 		if (!key.equals(resolvedKey)) {
 			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
@@ -142,7 +144,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		logger.trace("Unresolved value for '{}' is '{}'", key, rawValue);
 		logger.trace("Resolving placeholders in value '{}'", rawValue);
 		// Now resolve any placeholders in the property value
-		String resolvedValue = helper.replacePlaceholders(rawValue, originalProperties);
+		String resolvedValue = helper.replacePlaceholders(rawValue, helper);
 		if (!rawValue.equals(resolvedValue)) {
 			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
 		}
