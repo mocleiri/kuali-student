@@ -24,7 +24,7 @@ public class PropertiesLoggerSupport {
 	boolean maskPropertyValues = DEFAULT_IS_MASK_PROPERTY_VALUES;
 	String maskExpression = DEFAULT_MASK_EXPRESSION;
 	String maskValue = DEFAULT_MASKED_VALUE;
-	Pattern pattern;
+	Pattern pattern = Pattern.compile(maskExpression);
 
 	/**
 	 * This setter also invokes Pattern.compile(maskExpression)

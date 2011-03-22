@@ -33,14 +33,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		return true;
 	}
 
-	protected void processBeanDefinition(String beanName, ConfigurableListableBeanFactory beanFactory) {
-		// Skip processing our own bean definition
-		// Prevent failing on unresolvable placeholders in the locations property
-		if (thisBeanIsMe(beanName, beanFactory)) {
-			logger.info("Skipping placeholder resolution for " + beanName);
-			return;
-		}
-		BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
+	protected void processBeanDefinition(BeanDefinition bd) {
 		try {
 			logger.info("Resolving placeholders for bean '" + beanName + "' [" + bd.getBeanClassName() + "]");
 			beanDefinitionVisitor.visitBeanDefinition(bd);
@@ -52,7 +45,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	protected void processBeanDefinitions(ConfigurableListableBeanFactory beanFactory) {
 		String[] beanNames = beanFactory.getBeanDefinitionNames();
 		for (String beanName : beanNames) {
-			processBeanDefinition(beanName, beanFactory);
+			BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
+			// Skip processing our own bean definition
+			// Prevent failing on unresolvable placeholders in the locations property
+			if (thisBeanIsMe(beanName, beanFactory)) {
+				logger.info("Skipping placeholder resolution for bean '" + beanName + "' [" + bd.getBeanClassName() + "]");
+				return;
+			}
+			processBeanDefinition(bd);
 		}
 	}
 
