@@ -38,7 +38,6 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 	String nullValue;
 	boolean searchSystemEnvironment = true;
 	Properties properties;
-	Properties resolvedPlaceholderCache = new Properties();
 	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 
 	public PropertyPlaceholderHelper() {
@@ -113,18 +112,11 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 
 	@Override
 	public String resolvePlaceholder(String placeholder) {
-		String cachedProperty = resolvedPlaceholderCache.getProperty(placeholder);
-		if (cachedProperty != null) {
-			logger.trace("Placeholder '{}' resolved from the cache [{}]", placeholder, cachedProperty);
-			return cachedProperty;
-		}
 		logger.trace("Resolving placeholder '{}' using mode {}", placeholder, systemPropertiesMode);
 		String systemProperty = resolveSystemProperty(placeholder);
 		String regularProperty = properties.getProperty(placeholder);
 		logger.trace("regular property=[{}], system property=[{}]", regularProperty, systemProperty);
 		String property = resolvePlaceholder(placeholder, regularProperty, systemProperty, systemPropertiesMode);
-		logger.trace("Caching value for '{}' Cache size={}", placeholder, resolvedPlaceholderCache.size());
-		resolvedPlaceholderCache.setProperty(placeholder, property);
 		return property;
 	}
 
@@ -423,14 +415,6 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 
 	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
 		this.systemPropertiesMode = systemPropertiesMode;
-	}
-
-	public Properties getResolvedPlaceholderCache() {
-		return resolvedPlaceholderCache;
-	}
-
-	public void setResolvedPlaceholderCache(Properties resolvedCache) {
-		this.resolvedPlaceholderCache = resolvedCache;
 	}
 
 }

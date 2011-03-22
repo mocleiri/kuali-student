@@ -137,8 +137,11 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		if (!key.equals(resolvedKey)) {
 			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
+		if (resolvedProperties.contains(key)) {
+
+		}
 		// Extract a property value for the key from the original properties
-		String rawValue = originalProperties.getProperty(key);
+		String rawValue = helper.resolvePlaceholder(key);
 		logger.trace("Unresolved value for '{}' is [{}]", key, rawValue);
 		logger.trace("Resolving placeholders in value [{}]", rawValue);
 		// Now resolve any placeholders in the property value

@@ -22,7 +22,7 @@ public class PropertyPlaceholderConfigurerSystemOverrideTest {
 	@BeforeClass
 	public static void oneTimeSetUp() {
 		logger.info("Setting system property {}={}", key, val);
-		systemProperties.setProperty(key, val);
+		System.setProperty(key, val);
 	}
 	
     @AfterClass
@@ -36,7 +36,7 @@ public class PropertyPlaceholderConfigurerSystemOverrideTest {
 	@Test
 	public void systemPropertyOverrideTest() {
 		// Nothing to do. This test exists just to make sure Spring can process and load
-		// SimpleConfigurablePropertyPlaceholderConfigurerTest-context.xml
+		// PropertyPlaceholderConfigurerSystemOverrideTest-context.xml
 	}
 
 }
