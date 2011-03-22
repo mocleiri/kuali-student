@@ -63,7 +63,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			if (approvedKeys.contains(key)) {
 				continue;
 			}
-			logger.trace("Removing {}", key);
+			logger.trace("Removing key '{}'", key);
 			// Remove this property as it is not in the approved set
 			properties.remove(key);
 		}
@@ -88,7 +88,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 
 			// Add the missing property
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
-			logger.trace("Adding {}={}", necessaryKey, necessaryValue);
+			logger.trace("Adding property {}=[{}]", necessaryKey, necessaryValue);
 			properties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
@@ -114,7 +114,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			}
 
 			// Update the old property value with the new property value
-			logger.trace("Update " + commonKey + " [{}]->[{}]",
+			logger.trace("Updating property '" + commonKey + "' [{}]->[{}]",
 					loggerSupport.getPropertyValue(commonKey, oldPropertyValue),
 					loggerSupport.getPropertyValue(commonKey, newPropertyValue));
 			oldProperties.setProperty(commonKey, newPropertyValue);
@@ -141,15 +141,15 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		}
 		// Extract a property value for the key from the original properties
 		String rawValue = originalProperties.getProperty(key);
-		logger.trace("Unresolved value for '{}' is '{}'", key, rawValue);
-		logger.trace("Resolving placeholders in value '{}'", rawValue);
+		logger.trace("Unresolved value for '{}' is [{}]", key, rawValue);
+		logger.trace("Resolving placeholders in value [{}]", rawValue);
 		// Now resolve any placeholders in the property value
 		String resolvedValue = helper.replacePlaceholders(rawValue, helper);
 		if (!rawValue.equals(resolvedValue)) {
 			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
 		}
 		// The only items allowed into resolvedProperties are fully resolved keys and values
-		logger.trace("Adding to resolved properties [{}={}]", resolvedKey, resolvedValue);
+		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, resolvedValue);
 		resolvedProperties.setProperty(resolvedKey, resolvedValue);
 	}
 

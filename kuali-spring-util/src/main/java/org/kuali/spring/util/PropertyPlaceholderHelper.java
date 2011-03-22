@@ -76,10 +76,11 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		return (value.equals(nullValue) ? null : value);
 	}
 
-	protected String resolvePlaceholder(String regularProperty, String systemProperty, SystemPropertiesMode mode) {
+	protected String resolvePlaceholder(String placeholder, String regularProperty, String systemProperty,
+			SystemPropertiesMode mode) {
 		if (systemProperty == null) {
-			// No other choice, might be returning null here
-			logger.trace("Ignoring system property as it is null.  Returning '{}'", regularProperty);
+			// No other choice, even though we might be returning null here
+			logger.trace("Ignoring system property mode (system property is null).  Returning [{}]", regularProperty);
 			return regularProperty;
 		}
 
@@ -88,19 +89,19 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		switch (mode) {
 		case SYSTEM_PROPERTIES_MODE_NEVER:
 			// They have instructed us to never use system properties
-			logger.trace("Using property [{}], ignoring system property=[{}]", systemProperty, regularProperty);
+			logger.trace("Using property [{}], ignoring system property [{}]", systemProperty, regularProperty);
 			return regularProperty;
 		case SYSTEM_PROPERTIES_MODE_OVERRIDE:
-			// Always use the system property if it is not null (ignore regularProperty)
-			logger.trace("Using system property [{}], ignoring property=[{}]", systemProperty, regularProperty);
+			// Always use the system property since we know it isn't null
+			logger.trace("Using system property [{}], ignoring property [{}]", systemProperty, regularProperty);
 			return systemProperty;
 		case SYSTEM_PROPERTIES_MODE_FALLBACK:
 			// Only use the system property if the regular property is null
 			if (regularProperty == null) {
-				logger.trace("Falling back to system property=[{}]", systemProperty);
+				logger.trace("Falling back to system property [{}]", systemProperty);
 				return systemProperty;
 			}
-			logger.trace("Using property [{}], ignoring system property=[{}]", systemProperty, regularProperty);
+			logger.trace("Using property [{}], ignoring system property [{}]", systemProperty, regularProperty);
 			return regularProperty;
 		default:
 			throw new IllegalArgumentException("Unknown mode for handling system properties [" + mode + "]");
@@ -109,10 +110,11 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 
 	@Override
 	public String resolvePlaceholder(String placeholder) {
+		logger.trace("Resolving placeholder '{}' using mode {}", placeholder, systemPropertiesMode);
 		String systemProperty = resolveSystemProperty(placeholder);
 		String regularProperty = properties.getProperty(placeholder);
-		logger.trace("Resolving placeholder '{}' System properties mode={}", placeholder, systemPropertiesMode);
-		return resolvePlaceholder(regularProperty, systemProperty, systemPropertiesMode);
+		logger.trace("regular property=[{}], system property=[{}]", regularProperty, systemProperty);
+		return resolvePlaceholder(placeholder, regularProperty, systemProperty, systemPropertiesMode);
 	}
 
 	protected String resolveSystemProperty(String key) {
@@ -168,7 +170,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		if (startIndex == -1) {
-			logger.trace("Skip parsing.  Prefix '" + placeholderPrefix + "' not detected in '" + strVal + "'");
+			logger.trace("Skip parsing.  Prefix '" + placeholderPrefix + "' not detected in [" + strVal + "]");
 			return buf.toString();
 		}
 		logger.trace("Parsing " + strVal);
@@ -192,7 +194,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		String originalKey = ctx.getBuffer().substring(ctx.getStartIndex() + this.placeholderPrefix.length(), endIndex);
 
 		// Add this placeholder to the set
-		logger.trace("Adding {} to visited keys", originalKey);
+		logger.trace("Adding '{}' to visited keys", originalKey);
 		boolean added = ctx.getVisitedPlaceholders().add(originalKey);
 
 		// Check to make sure we aren't in an infinite loop
@@ -206,10 +208,10 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		// Obtain a value for the resolved key
 		String value = getValue(resolvedKey, ctx.getResolver());
 
-		logger.trace("Processing value {}", value);
+		logger.trace("Processing value [{}]", value);
 		int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
 
-		logger.trace("Removing {} from visited keys", originalKey);
+		logger.trace("Removing '{}' from visited keys", originalKey);
 		ctx.getVisitedPlaceholders().remove(originalKey);
 
 		return bufIndex;
@@ -279,7 +281,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		value = parseStringValue(value, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
 		// log that we resolved the placeholder
-		logger.trace("Resolved key '{}' to '{}'", key, value);
+		logger.trace("Resolved key '{}' to [{}]", key, value);
 
 		// Replace the placeholder with the value
 		ctx.getBuffer().replace(ctx.getStartIndex(), endIndex + this.placeholderSuffix.length(), value);
