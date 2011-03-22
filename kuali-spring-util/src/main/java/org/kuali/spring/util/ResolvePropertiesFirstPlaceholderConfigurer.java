@@ -28,8 +28,6 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			return;
 		}
 
-		helper.setProperties(properties);
-
 		// Clone the original properties
 		rawProperties = getClone(properties);
 

@@ -1,5 +1,6 @@
 package org.kuali.spring.util;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper();
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
+	Properties properties;
 
 	protected boolean thisBeanIsMe(String name, ConfigurableListableBeanFactory beanFactory) {
 		if (!name.equals(this.beanName)) {
@@ -49,7 +51,8 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
 			if (thisBeanIsMe(beanName, beanFactory)) {
-				logger.info("Skipping placeholder resolution for bean '" + beanName + "' [" + bd.getBeanClassName() + "]");
+				logger.info("Skipping placeholder resolution for bean '" + beanName + "' [" + bd.getBeanClassName()
+						+ "]");
 				return;
 			}
 			processBeanDefinition(bd);
@@ -57,11 +60,19 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	}
 
 	@Override
+	protected Properties mergeProperties() throws IOException {
+		Properties properties = super.mergeProperties();
+		setProperties(properties);
+		helper.setProperties(properties);
+		return properties;
+	}
+
+	@Override
 	protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props)
 			throws BeansException {
 		logger.info("Resolving placeholders in bean definitions");
 
-		helper.setProperties(props);
+		// TODO Refactor how these beans collaborate so we don't have to do this
 		if (beanDefinitionVisitor.getStringValueResolver() == null) {
 			beanDefinitionVisitor.setStringValueResolver(helper);
 		}
@@ -114,6 +125,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 	public void setBeanFactory(BeanFactory beanFactory) {
 		this.beanFactory = beanFactory;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
 	}
 
 }

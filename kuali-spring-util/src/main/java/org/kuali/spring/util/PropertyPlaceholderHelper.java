@@ -170,10 +170,10 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		if (startIndex == -1) {
-			logger.trace("Skip parsing.  Prefix '" + placeholderPrefix + "' not detected in [" + strVal + "]");
+			logger.trace("Skip parsing.  Prefix '{}' not detected in [{}]", placeholderPrefix, strVal);
 			return buf.toString();
 		}
-		logger.trace("Parsing " + strVal);
+		logger.trace("Parsing [{}]", strVal);
 		while (startIndex != -1) {
 			startIndex = processString(new ProcessStringContext(resolver, visitedPlaceholders, startIndex, buf));
 		}
