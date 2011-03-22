@@ -28,8 +28,6 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			return;
 		}
 
-		logger.info("Resolving placeholders in properties");
-
 		// Clone the original properties
 		rawProperties = getClone(properties);
 
@@ -63,7 +61,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			if (approvedKeys.contains(key)) {
 				continue;
 			}
-			logger.debug("Removing " + key);
+			logger.trace("Removing {}", key);
 			// Remove this property as it is not in the approved set
 			properties.remove(key);
 		}
@@ -88,13 +86,13 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 
 			// Add the missing property
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
-			logger.debug("Adding " + necessaryKey + "=" + necessaryValue);
+			logger.trace("Adding {}={}", necessaryKey, necessaryValue);
 			properties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
 
 	protected void mergeProperties(Properties originalProperties, Properties resolvedProperties) {
-		logger.debug("*** Merging original properties with resolved properties ***");
+		logger.trace("*** Merging original properties with resolved properties ***");
 		removeProperties(originalProperties, resolvedProperties.stringPropertyNames());
 		addProperties(originalProperties, resolvedProperties);
 		updateProperties(originalProperties, resolvedProperties);
@@ -114,26 +112,47 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			}
 
 			// Update the old property value with the new property value
-			logger.debug("Update " + commonKey + "='" + loggerSupport.getPropertyValue(commonKey, newPropertyValue)
-					+ "' was [" + loggerSupport.getPropertyValue(commonKey, oldPropertyValue) + "]");
+			logger.trace("Update " + commonKey + " [{}]->[{}]",
+					loggerSupport.getPropertyValue(commonKey, oldPropertyValue),
+					loggerSupport.getPropertyValue(commonKey, newPropertyValue));
 			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
 
 	protected Properties getResolvedProperties(Properties properties) {
+		logger.info("Resolving placeholders in properties");
 		Properties resolvedProperties = new Properties();
-		Set<String> names = properties.stringPropertyNames();
-		for (String name : names) {
-			String rawPropertyValue = properties.getProperty(name);
-			String resolvedName = helper.replacePlaceholders(name, properties);
-			String resolvedPropertyValue = helper.replacePlaceholders(rawPropertyValue, properties);
-			resolvedProperties.setProperty(resolvedName, resolvedPropertyValue);
+		Set<String> keys = properties.stringPropertyNames();
+		for (String key : keys) {
+			resolveProperty(key, properties, resolvedProperties);
 		}
 		return resolvedProperties;
 
 	}
 
+	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
+		// First resolve any placeholders in the key itself
+		logger.trace("Resolving placeholders in key '{}'", key);
+		String resolvedKey = helper.replacePlaceholders(key, originalProperties);
+		if (!key.equals(resolvedKey)) {
+			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
+		}
+		// Extract a property value for the key from the original properties
+		String rawValue = originalProperties.getProperty(key);
+		logger.trace("Unresolved value for '{}' is '{}'", key, rawValue);
+		logger.trace("Resolving placeholders in value '{}'", rawValue);
+		// Now resolve any placeholders in the property value
+		String resolvedValue = helper.replacePlaceholders(rawValue, originalProperties);
+		if (!rawValue.equals(resolvedValue)) {
+			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
+		}
+		// The only items allowed into resolvedProperties are fully resolved keys and values
+		logger.trace("Adding to resolved properties [{}={}]", resolvedKey, resolvedValue);
+		resolvedProperties.setProperty(resolvedKey, resolvedValue);
+	}
+
 	protected Properties getClone(Properties properties) {
+		logger.trace("Cloning original properties");
 		Properties clone = new Properties();
 		for (String propertyName : properties.stringPropertyNames()) {
 			String propertyValue = properties.getProperty(propertyName);

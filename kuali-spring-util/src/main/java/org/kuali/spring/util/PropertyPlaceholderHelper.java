@@ -141,9 +141,13 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 	}
 
 	protected String parseStringValue(String strVal, PlaceholderResolver resolver, Set<String> visitedPlaceholders) {
-		logger.debug("Parsing " + strVal);
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
+		if (startIndex == -1) {
+			logger.trace("Skip parsing.  Prefix '" + placeholderPrefix + "' not detected in '" + strVal + "'");
+			return buf.toString();
+		}
+		logger.trace("Parsing " + strVal);
 		while (startIndex != -1) {
 			startIndex = processString(new ProcessStringContext(resolver, visitedPlaceholders, startIndex, buf));
 		}
@@ -164,7 +168,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		String originalKey = ctx.getBuffer().substring(ctx.getStartIndex() + this.placeholderPrefix.length(), endIndex);
 
 		// Add this placeholder to the set
-		logger.debug("Adding " + originalKey + " to visited keys");
+		logger.trace("Adding {} to visited keys", originalKey);
 		boolean added = ctx.getVisitedPlaceholders().add(originalKey);
 
 		// Check to make sure we aren't in an infinite loop
@@ -178,10 +182,10 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		// Obtain a value for the resolved key
 		String value = getValue(resolvedKey, ctx.getResolver());
 
-		logger.debug("Processing " + resolvedKey + "=" + value);
+		logger.trace("Processing value {}", value);
 		int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
 
-		logger.debug("Removing " + originalKey + " from visited keys");
+		logger.trace("Removing {} from visited keys", originalKey);
 		ctx.getVisitedPlaceholders().remove(originalKey);
 
 		return bufIndex;
@@ -242,6 +246,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 
 		// The value is null, but we can ignore the fact that we encountered an unresolved placeholder
 		if (value == null) {
+			logger.trace("Ignoring unresolvable placeholder for '" + key + "'");
 			// Leave the unresolved placeholder intact and continue processing the rest of the string
 			return ctx.getBuffer().indexOf(this.placeholderPrefix, endIndex + this.placeholderSuffix.length());
 		}
@@ -250,7 +255,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		value = parseStringValue(value, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
 		// log that we resolved the placeholder
-		logger.debug("Resolved key '" + key + "' to '" + value + "'");
+		logger.trace("Resolved key '{}' to '{}'", key, value);
 
 		// Replace the placeholder with the value
 		ctx.getBuffer().replace(ctx.getStartIndex(), endIndex + this.placeholderSuffix.length(), value);
