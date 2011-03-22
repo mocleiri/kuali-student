@@ -13,8 +13,8 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * This class uses the convertProperties() hook provided by Spring to resolve placeholders in Spring properties before
- * resolving placeholders in Spring beans. This allows you to do something useful with the complete set of Spring
- * properties known to this configurer. (eg logging them, debugging them etc)
+ * resolving placeholders in Spring beans. This allows you to do something useful with the complete set of resolved
+ * Spring properties known to this configurer. (eg logging them, debugging them etc)
  */
 public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
@@ -33,6 +33,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		// Clone the original properties
 		rawProperties = getClone(properties);
 
+		// Properties after all placeholders have been resolved
 		resolvedProperties = getResolvedProperties(properties);
 
 		if (logger.isDebugEnabled()) {
@@ -40,6 +41,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Spring Properties ***"));
 		}
 
+		// Update the original properties with our resolved properties
 		mergeProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
@@ -122,10 +124,10 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		Properties resolvedProperties = new Properties();
 		Set<String> names = properties.stringPropertyNames();
 		for (String name : names) {
-			String property = properties.getProperty(name);
+			String rawPropertyValue = properties.getProperty(name);
 			String resolvedName = helper.replacePlaceholders(name, properties);
-			String resolvedProperty = helper.replacePlaceholders(property, properties);
-			resolvedProperties.setProperty(resolvedName, resolvedProperty);
+			String resolvedPropertyValue = helper.replacePlaceholders(rawPropertyValue, properties);
+			resolvedProperties.setProperty(resolvedName, resolvedPropertyValue);
 		}
 		return resolvedProperties;
 
