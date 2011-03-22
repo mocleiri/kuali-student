@@ -30,12 +30,12 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		wellKnownSimplePrefixes.put(")", "(");
 	}
 
-	private String placeholderPrefix;
-	private String placeholderSuffix;
-	private String simplePrefix;
-	private String valueSeparator;
-	private boolean ignoreUnresolvablePlaceholders;
-	private String nullValue;
+	String placeholderPrefix;
+	String placeholderSuffix;
+	String simplePrefix;
+	String valueSeparator;
+	boolean ignoreUnresolvablePlaceholders;
+	String nullValue;
 	boolean searchSystemEnvironment;
 	Properties properties;
 	SystemPropertiesMode systemPropertiesMode;
@@ -76,19 +76,35 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		return (value.equals(nullValue) ? null : value);
 	}
 
+	protected String getProperty(String regularProperty, String systemProperty, SystemPropertiesMode mode) {
+		if (systemProperty == null) {
+			// No other choice, might be returning null here
+			return regularProperty;
+		}
+
+		// The system property is not null
+		// BUT are we allowed to use it?
+		switch (mode) {
+		case SYSTEM_PROPERTIES_MODE_NEVER:
+			// They have instructed us to never use system properties
+			return regularProperty;
+		case SYSTEM_PROPERTIES_MODE_OVERRIDE:
+			// Always use the system property if it is not null (ignore regularProperty)
+			return systemProperty;
+		case SYSTEM_PROPERTIES_MODE_FALLBACK:
+			// Only use the system property if the regular property is null
+			return (regularProperty == null ? systemProperty : regularProperty);
+		default:
+			throw new IllegalArgumentException("Unknown mode for handling system properties [" + mode + "]");
+		}
+	}
+
 	@Override
 	public String resolvePlaceholder(String placeholder) {
-		String propVal = null;
-		if (systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE)) {
-			propVal = resolveSystemProperty(placeholder);
-		}
-		if (propVal == null) {
-			propVal = properties.getProperty(placeholder);
-		}
-		if (propVal == null && systemPropertiesMode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK)) {
-			propVal = resolveSystemProperty(placeholder);
-		}
-		return propVal;
+		String systemProperty = resolveSystemProperty(placeholder);
+		String regularProperty = properties.getProperty(placeholder);
+		logger.trace("Resolving placeholder '{}' System properties mode={}", placeholder, systemPropertiesMode);
+		return getProperty(regularProperty, systemProperty, systemPropertiesMode);
 	}
 
 	protected String resolveSystemProperty(String key) {
