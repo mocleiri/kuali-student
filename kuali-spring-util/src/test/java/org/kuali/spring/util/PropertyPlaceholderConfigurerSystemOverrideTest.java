@@ -33,7 +33,7 @@ public class PropertyPlaceholderConfigurerSystemOverrideTest {
 
 	@AfterClass
 	public static void oneTimeTearDown() {
-		logger.info("Removing system property {}={}", key, cheetah);
+		logger.info("Removing system property '{}'", key, cheetah);
 		systemProperties.remove(key);
 	}
 

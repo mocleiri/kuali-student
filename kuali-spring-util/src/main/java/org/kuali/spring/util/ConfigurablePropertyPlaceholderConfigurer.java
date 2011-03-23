@@ -44,16 +44,15 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 	protected void processBeanDefinitions(ConfigurableListableBeanFactory beanFactory) {
 		String[] beanNames = beanFactory.getBeanDefinitionNames();
-		for (String beanName : beanNames) {
-			BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
+		for (String currentBean : beanNames) {
+			BeanDefinition bd = beanFactory.getBeanDefinition(currentBean);
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
-			if (thisBeanIsMe(beanName, beanFactory)) {
-				logger.info("Skipping placeholder resolution for bean '" + beanName + "' [" + bd.getBeanClassName()
-						+ "]");
+			if (thisBeanIsMe(currentBean, beanFactory)) {
+				logger.info("Skipping placeholder resolution for " + bd);
 				continue;
 			}
-			processBeanDefinition(beanName, bd);
+			processBeanDefinition(currentBean, bd);
 		}
 	}
 

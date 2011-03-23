@@ -23,6 +23,6 @@ public class DefaultBeanVisitationListener implements VisitationListener {
 
 	@Override
 	public void afterBeanVisit(BeanVisitationEvent event) {
-		// Nothing for now
+		logger.trace("Visit completed. {}", event.getBeanDefinition());
 	}
 }
