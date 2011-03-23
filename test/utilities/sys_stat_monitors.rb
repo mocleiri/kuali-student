@@ -73,7 +73,7 @@ end
 
 # Start log, return File obj
 def start_log(log)
-  File.open(log, '+w')
+  File.open(log, 'w')
 end
 
 
@@ -82,7 +82,8 @@ def start_monitors
   
   @config[:phases].each do |phase|
     
-    info_msg("Launching phase 1 monitors...")
+    info_msg("Launching phase #{phase} monitors...")
+    gets
     info_msg(Time.now.to_s)
     
     `mem-stat.plx #{@config[:pid]} #{@config[:phases][phase][:interval]} #{@config[:phases][phase][:amount]} > #{@config[:base_log_name]}-phase#{phase}-mem_stats.log &`
@@ -105,7 +106,7 @@ def generate_config
   
   # Config output
   if(@config[:output].nil?)
-    print "Config file name: "
+    print "Output config file name: "
     @config[:output] = gets.chomp
   end
   
@@ -131,12 +132,13 @@ def generate_config
   @config[:num_phases] = gets.chomp
   
   # Build phases
-  phase = 0
-  begin
-    phase += 1
+  phase = 1
+  @config[:phases] = {}
+  
+  while(phase <= @config[:num_phases].to_i) do
+
     puts "Configuring phase #{phase}..."
     
-    @config[:phases] = {}
     @config[:phases][phase] = {}
     
     print "Snapshot interval(secs)? "
@@ -145,10 +147,11 @@ def generate_config
     print "Number of snapshots? "
     @config[:phases][phase][:amount] = gets.chomp
     
-  end while(phase <= @config[:num_phases])
+    phase += 1
+    
+  end 
   
 end
-
 
 
 
@@ -163,7 +166,9 @@ else
 end
 
 @log = start_log(@config[:log])
-start_monitors
+info_msg("CONFIG: #{@config.inspect}") if(@config[:debug])
+
+#start_monitors
 
 
 

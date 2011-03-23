@@ -64,8 +64,8 @@ done
 echo "Preparing volume..."
 
 mkfs.ext3 "$dev"
-mkdir -p /vol
-mount "$dev" /vol
+mkdir -p /ebs
+mount "$dev" /ebs
 rm -rf $mount_dir/image*
 rm -rf $mount_dir/img-mnt
 mkdir -m 000 $mount_dir/img-mnt
@@ -74,7 +74,7 @@ mkdir -m 000 $mount_dir/img-mnt
 # Use bundle to create a clean image (we will not upload)
 echo "Using bundle to create a clean image (we will not upload)..."
 
-ec2-bundle-vol -c $EC2_CERT -k $EC2_PRIVATE_KEY -u $AMAZON_USER_ID -e /vol,$mount_dir -d $mount_dir
+ec2-bundle-vol -c $EC2_CERT -k $EC2_PRIVATE_KEY -u $AMAZON_USER_ID -e /ebs,$mount_dir -d $mount_dir
 
 
 # take the clean image and install on the EBS Volume
@@ -82,13 +82,13 @@ echo "Taking the clean image and install on the EBS Volume..."
 echo "mount -o loop $mount_dir/image $mount_dir/img-mnt"
 
 mount -o loop $mount_dir/image $mount_dir/img-mnt
-rsync -av $mount_dir/img-mnt/ /vol/
+rsync -av $mount_dir/img-mnt/ /ebs/
 
 
 # Set the fstab up 
 echo "Setting up the fstab up..."
 
-cat > /vol/etc/fstab << FSTABEOF
+cat > /ebs/etc/fstab << FSTABEOF
 # <file system> <mountpoint> <type> <options> <dump> <pass>
 proc               /proc           proc    defaults        0       0
 /dev/sda3          None            swap    defaults        0       0
@@ -100,6 +100,6 @@ FSTABEOF
 # Snapshot the volume. Note the snapshot id for the registration step
 echo "Taking snapshot of the volume..."
 echo "ec2addsnap -C $EC2_CERT -K $EC2_PRIVATE_KEY -d $desc $vol"
-umount /vol
+umount /ebs
 ec2addsnap -C $EC2_CERT -K $EC2_PRIVATE_KEY -d "$desc" $vol
 umount $mount_dir/image
