@@ -29,7 +29,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		}
 
 		// Clone the original properties
-		rawProperties = getClone(properties);
+		rawProperties = propertiesHelper.getClone(properties);
 
 		// Properties after all placeholders have been resolved
 		resolvedProperties = getResolvedProperties(properties);
@@ -42,7 +42,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		// Update the original properties with our resolved properties
 		mergeProperties(properties, resolvedProperties);
 
-		helper.setResolvedCache(resolvedProperties);
+		placeholderHelper.setResolvedCache(resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
 			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
@@ -135,32 +135,22 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
 		// First resolve any placeholders in the key itself
 		logger.trace("Resolving placeholders in key '{}'", key);
-		String resolvedKey = helper.replacePlaceholders(key, helper);
+		String resolvedKey = placeholderHelper.replacePlaceholders(key, placeholderHelper);
 		if (!key.equals(resolvedKey)) {
 			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
 		// Get a value for the key
-		String rawValue = helper.resolvePlaceholder(key);
+		String rawValue = placeholderHelper.resolvePlaceholder(key);
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Resolving placeholders in value [{}]", rawValue);
 		// Now resolve any placeholders in the value
-		String resolvedValue = helper.replacePlaceholders(rawValue, helper);
+		String resolvedValue = placeholderHelper.replacePlaceholders(rawValue, placeholderHelper);
 		if (!rawValue.equals(resolvedValue)) {
 			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
 		}
 		// The only items allowed into resolvedProperties are fully resolved keys and values
 		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, resolvedValue);
 		resolvedProperties.setProperty(resolvedKey, resolvedValue);
-	}
-
-	protected Properties getClone(Properties properties) {
-		logger.trace("Cloning original properties");
-		Properties clone = new Properties();
-		for (String propertyName : properties.stringPropertyNames()) {
-			String propertyValue = properties.getProperty(propertyName);
-			clone.setProperty(propertyName, propertyValue);
-		}
-		return clone;
 	}
 
 	public Properties getRawProperties() {

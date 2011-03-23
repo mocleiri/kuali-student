@@ -13,17 +13,23 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
+import org.springframework.core.io.Resource;
 
 public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
 	final Logger logger = LoggerFactory.getLogger(ConfigurablePropertyPlaceholderConfigurer.class);
+	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
 
+	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	String beanName;
 	BeanFactory beanFactory;
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
-	PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper();
+	PropertyPlaceholderHelper placeholderHelper = new PropertyPlaceholderHelper();
+	PropertiesHelper propertiesHelper = new PropertiesHelper();
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 	Properties properties;
+	Properties originalProperties;
+	Resource[] locations;
 
 	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
 		if (!currentBean.equals(this.beanName)) {
@@ -58,10 +64,26 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	}
 
 	@Override
+	/**
+	 * Load properties into the given instance.
+	 * @param props the Properties instance to load into
+	 * @throws java.io.IOException in case of I/O errors
+	 * @see #setLocations
+	 */
+	protected void loadProperties(Properties props) throws IOException {
+		this.propertiesHelper.loadProperties(props, this.locations);
+	}
+
+	@Override
 	protected Properties mergeProperties() throws IOException {
 		Properties properties = super.mergeProperties();
+		this.originalProperties = propertiesHelper.getClone(properties);
+		propertiesHelper.mergeSystemProperties(properties, this.placeholderHelper.getSystemPropertiesMode());
+		if (placeholderHelper.isSearchSystemEnvironment()) {
+			propertiesHelper.mergeEnvironmentProperties(properties);
+		}
 		setProperties(properties);
-		helper.setProperties(properties);
+		this.placeholderHelper.setProperties(properties);
 		return properties;
 	}
 
@@ -72,17 +94,17 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 		// TODO Refactor how these beans collaborate so we don't have to do this
 		if (beanDefinitionVisitor.getStringValueResolver() == null) {
-			beanDefinitionVisitor.setStringValueResolver(helper);
+			beanDefinitionVisitor.setStringValueResolver(placeholderHelper);
 		}
 
 		// Process placeholders in the bean definitions
 		processBeanDefinitions(beanFactory);
 
 		// New in Spring 2.5: resolve placeholders in alias target names and aliases as well.
-		beanFactory.resolveAliases(helper);
+		beanFactory.resolveAliases(placeholderHelper);
 
 		// New in Spring 3.0: resolve placeholders in embedded values such as annotation attributes.
-		beanFactory.addEmbeddedValueResolver(helper);
+		beanFactory.addEmbeddedValueResolver(placeholderHelper);
 	}
 
 	public String getBeanName() {
@@ -101,12 +123,12 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		this.beanDefinitionVisitor = beanDefinitionVisitor;
 	}
 
-	public PropertyPlaceholderHelper getHelper() {
-		return helper;
+	public PropertyPlaceholderHelper getPlaceholderHelper() {
+		return placeholderHelper;
 	}
 
-	public void setHelper(PropertyPlaceholderHelper helper) {
-		this.helper = helper;
+	public void setPlaceholderHelper(PropertyPlaceholderHelper helper) {
+		this.placeholderHelper = helper;
 	}
 
 	public PropertiesLoggerSupport getLoggerSupport() {
@@ -131,6 +153,18 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 	public void setProperties(Properties properties) {
 		this.properties = properties;
+	}
+
+	public String getEnvironmentPropertyPrefix() {
+		return environmentPropertyPrefix;
+	}
+
+	public void setEnvironmentPropertyPrefix(String environmentPropertyPrefix) {
+		this.environmentPropertyPrefix = environmentPropertyPrefix;
+	}
+
+	public Properties getOriginalProperties() {
+		return originalProperties;
 	}
 
 }
