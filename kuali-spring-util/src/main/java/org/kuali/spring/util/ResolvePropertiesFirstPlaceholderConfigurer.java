@@ -1,15 +1,10 @@
 package org.kuali.spring.util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.ObjectUtils;
 
 /**
  * This class uses the convertProperties() hook provided by Spring to resolve placeholders in Spring properties before
@@ -40,84 +35,12 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		}
 
 		// Update the original properties with our resolved properties
-		mergeProperties(properties, resolvedProperties);
+		propertiesHelper.mergeProperties(properties, resolvedProperties);
 
 		placeholderHelper.setResolvedCache(resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
 			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
-		}
-	}
-
-	/**
-	 * Remove any properties not in approvedKeys
-	 * 
-	 * @param properties
-	 * @param approvedKeys
-	 */
-	protected void removeProperties(Properties properties, Set<String> approvedKeys) {
-		// Extract the set of existing property names
-		Set<String> keys = properties.stringPropertyNames();
-		for (String key : keys) {
-			// Don't do anything, this property is approved
-			if (approvedKeys.contains(key)) {
-				continue;
-			}
-			logger.trace("Removing key '{}'", key);
-			// Remove this property as it is not in the approved set
-			properties.remove(key);
-		}
-	}
-
-	/**
-	 * Add any missing properties from necessaryProperties
-	 * 
-	 * @param properties
-	 * @param necessaryProperties
-	 */
-	protected void addProperties(Properties properties, Properties necessaryProperties) {
-		// Extract the set of necessary property names
-		Set<String> necessaryKeys = necessaryProperties.stringPropertyNames();
-		// Extract the set of existing property names
-		Set<String> keys = properties.stringPropertyNames();
-		for (String necessaryKey : necessaryKeys) {
-			// Don't do anything, the property is already present
-			if (keys.contains(necessaryKey)) {
-				continue;
-			}
-
-			// Add the missing property
-			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
-			logger.trace("Adding property {}=[{}]", necessaryKey, necessaryValue);
-			properties.setProperty(necessaryKey, necessaryValue);
-		}
-	}
-
-	protected void mergeProperties(Properties originalProperties, Properties resolvedProperties) {
-		logger.trace("*** Merging original properties with resolved properties ***");
-		removeProperties(originalProperties, resolvedProperties.stringPropertyNames());
-		addProperties(originalProperties, resolvedProperties);
-		updateProperties(originalProperties, resolvedProperties);
-	}
-
-	protected void updateProperties(Properties oldProperties, Properties newProperties) {
-		List<String> oldNames = new ArrayList<String>(oldProperties.stringPropertyNames());
-		Collections.sort(oldNames);
-		Iterator<String> itr = oldNames.iterator();
-		while (itr.hasNext()) {
-			String commonKey = itr.next();
-			String oldPropertyValue = oldProperties.getProperty(commonKey);
-			String newPropertyValue = newProperties.getProperty(commonKey);
-			// The values are the same. Don't do anything
-			if (ObjectUtils.nullSafeEquals(oldPropertyValue, newPropertyValue)) {
-				continue;
-			}
-
-			// Update the old property value with the new property value
-			logger.trace("Updating property '" + commonKey + "' [{}]->[{}]",
-					loggerSupport.getPropertyValue(commonKey, oldPropertyValue),
-					loggerSupport.getPropertyValue(commonKey, newPropertyValue));
-			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
 
@@ -135,7 +58,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
 		// First resolve any placeholders in the key itself
 		logger.trace("Resolving placeholders in key '{}'", key);
-		String resolvedKey = placeholderHelper.replacePlaceholders(key, placeholderHelper);
+		String resolvedKey = placeholderHelper.replacePlaceholders(key, originalProperties);
 		if (!key.equals(resolvedKey)) {
 			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
@@ -144,7 +67,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Resolving placeholders in value [{}]", rawValue);
 		// Now resolve any placeholders in the value
-		String resolvedValue = placeholderHelper.replacePlaceholders(rawValue, placeholderHelper);
+		String resolvedValue = placeholderHelper.replacePlaceholders(rawValue, originalProperties);
 		if (!rawValue.equals(resolvedValue)) {
 			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
 		}

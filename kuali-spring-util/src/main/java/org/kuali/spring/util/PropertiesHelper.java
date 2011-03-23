@@ -3,9 +3,14 @@ package org.kuali.spring.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +29,7 @@ public class PropertiesHelper {
 	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	String fileEncoding;
+	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 
 	public PropertiesHelper() {
 		this(DEFAULT_IGNORE_RESOURCE_NOT_FOUND, null);
@@ -33,6 +39,77 @@ public class PropertiesHelper {
 		super();
 		this.ignoreResourceNotFound = ignoreResourceNotFound;
 		this.fileEncoding = fileEncoding;
+	}
+
+	/**
+	 * Remove any properties not in approvedKeys
+	 * 
+	 * @param properties
+	 * @param approvedKeys
+	 */
+	protected void removeProperties(Properties properties, Set<String> approvedKeys) {
+		// Extract the set of existing property names
+		Set<String> keys = properties.stringPropertyNames();
+		for (String key : keys) {
+			// Don't do anything, this property is approved
+			if (approvedKeys.contains(key)) {
+				continue;
+			}
+			logger.trace("Removing key '{}'", key);
+			// Remove this property as it is not in the approved set
+			properties.remove(key);
+		}
+	}
+
+	/**
+	 * Add any missing properties from necessaryProperties
+	 * 
+	 * @param properties
+	 * @param necessaryProperties
+	 */
+	protected void addProperties(Properties properties, Properties necessaryProperties) {
+		// Extract the set of necessary property names
+		Set<String> necessaryKeys = necessaryProperties.stringPropertyNames();
+		// Extract the set of existing property names
+		Set<String> keys = properties.stringPropertyNames();
+		for (String necessaryKey : necessaryKeys) {
+			// Don't do anything, the property is already present
+			if (keys.contains(necessaryKey)) {
+				continue;
+			}
+
+			// Add the missing property
+			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
+			logger.trace("Adding property {}=[{}]", necessaryKey, necessaryValue);
+			properties.setProperty(necessaryKey, necessaryValue);
+		}
+	}
+
+	public void mergeProperties(Properties oldProperties, Properties newProperties) {
+		removeProperties(oldProperties, newProperties.stringPropertyNames());
+		addProperties(oldProperties, newProperties);
+		updateProperties(oldProperties, newProperties);
+	}
+
+	protected void updateProperties(Properties oldProperties, Properties newProperties) {
+		List<String> oldNames = new ArrayList<String>(oldProperties.stringPropertyNames());
+		Collections.sort(oldNames);
+		Iterator<String> itr = oldNames.iterator();
+		while (itr.hasNext()) {
+			String commonKey = itr.next();
+			String oldPropertyValue = oldProperties.getProperty(commonKey);
+			String newPropertyValue = newProperties.getProperty(commonKey);
+			// The values are the same. Don't do anything
+			if (ObjectUtils.nullSafeEquals(oldPropertyValue, newPropertyValue)) {
+				continue;
+			}
+
+			// Update the old property value with the new property value
+			logger.trace("Updating property '" + commonKey + "' [{}]->[{}]",
+					loggerSupport.getPropertyValue(commonKey, oldPropertyValue),
+					loggerSupport.getPropertyValue(commonKey, newPropertyValue));
+			oldProperties.setProperty(commonKey, newPropertyValue);
+		}
 	}
 
 	protected Properties loadProperties(Resource location, InputStream is) throws IOException {
