@@ -63,7 +63,6 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		}
 	}
 
-	@Override
 
 	/**
 	 * Load properties into the given instance.
@@ -71,6 +70,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	 * @throws java.io.IOException in case of I/O errors
 	 * @see #setLocations
 	 */
+	@Override
 	protected void loadProperties(Properties props) throws IOException {
 		this.propertiesHelper.loadProperties(props, this.locations);
 	}

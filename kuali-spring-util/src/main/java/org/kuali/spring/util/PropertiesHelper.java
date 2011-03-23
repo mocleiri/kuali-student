@@ -101,7 +101,7 @@ public class PropertiesHelper {
 	}
 
 	public void loadProperties(Properties properties, Resource[] locations) throws IOException {
-		if (locations == null) {
+		if (locations == null || locations.length == 0) {
 			logger.info("No property locations to load from");
 			return;
 		}
