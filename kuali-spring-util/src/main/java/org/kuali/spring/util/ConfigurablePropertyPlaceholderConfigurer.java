@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
@@ -24,8 +25,8 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 	Properties properties;
 
-	protected boolean thisBeanIsMe(String name, ConfigurableListableBeanFactory beanFactory) {
-		if (!name.equals(this.beanName)) {
+	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
+		if (!currentBean.equals(this.beanName)) {
 			return false;
 		}
 		if (!beanFactory.equals(this.beanFactory)) {
@@ -34,11 +35,11 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		return true;
 	}
 
-	protected void processBeanDefinition(String beanName, BeanDefinition bd) {
+	protected void processBeanDefinition(String currentBean, BeanDefinition bd) {
 		try {
 			beanDefinitionVisitor.visitBeanDefinition(bd);
 		} catch (Exception e) {
-			throw new RuntimeException("Error processing bean " + beanName, e);
+			throw new BeanDefinitionStoreException(bd.getResourceDescription(), currentBean, e.getMessage(), e);
 		}
 	}
 
@@ -48,7 +49,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 			BeanDefinition bd = beanFactory.getBeanDefinition(currentBean);
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
-			if (thisBeanIsMe(currentBean, beanFactory)) {
+			if (currentBeanIsMe(currentBean, beanFactory)) {
 				logger.info("Skipping placeholder resolution for " + bd);
 				continue;
 			}
