@@ -94,9 +94,8 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 			return regularProperty;
 		case SYSTEM_PROPERTIES_MODE_OVERRIDE:
 			// Always use the system property since we know it isn't null
-			logger.info("Overriding property '" + placeholder
-					+ "' Using system property value [{}] instead of default value [{}]", systemProperty,
-					regularProperty);
+			logger.info("System property override for '" + placeholder + "' [{}]->[{}]", regularProperty,
+					systemProperty);
 			return systemProperty;
 		case SYSTEM_PROPERTIES_MODE_FALLBACK:
 			// Only use the system property if the regular property is null
