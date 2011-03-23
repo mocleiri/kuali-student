@@ -9,8 +9,13 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-  <bean id="placeholder.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
-    p:resourceLocations="classpath:org/kuali/spring/util/simple-test.properties">
+  <bean id="placeholder.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer">
+    <property name="resourceLocations">
+      <list>
+        <value>classpath:org/kuali/spring/util/test.properties</value>
+        <value>classpath:org/kuali/spring/util/test2.properties</value>
+      </list>
+    </property>
   </bean>
 
   <bean id="cat.test" class="org.kuali.spring.util.bean.Cat" p:actions="${cat.actions}" p:speed="${cat.speed}"

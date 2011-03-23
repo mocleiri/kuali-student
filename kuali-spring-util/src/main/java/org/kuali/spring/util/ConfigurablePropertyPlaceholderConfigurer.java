@@ -28,7 +28,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	PropertiesHelper propertiesHelper = new PropertiesHelper();
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 	Properties properties;
-	Properties originalProperties;
+	Properties springProperties;
 	Resource[] resourceLocations;
 
 	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
@@ -65,16 +65,16 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 	@Override
 	protected Properties mergeProperties() throws IOException {
-		Properties properties = super.mergeProperties();
-		this.originalProperties = propertiesHelper.getClone(properties);
-		this.propertiesHelper.loadProperties(properties, getResourceLocations());
-		propertiesHelper.mergeSystemProperties(properties, this.placeholderHelper.getSystemPropertiesMode());
+		Properties mergedProperties = super.mergeProperties();
+		this.springProperties = propertiesHelper.getClone(mergedProperties);
+		this.propertiesHelper.loadProperties(mergedProperties, getResourceLocations());
+		propertiesHelper.mergeSystemProperties(mergedProperties, this.placeholderHelper.getSystemPropertiesMode());
 		if (placeholderHelper.isSearchSystemEnvironment()) {
-			propertiesHelper.mergeEnvironmentProperties(properties);
+			propertiesHelper.mergeEnvironmentProperties(mergedProperties);
 		}
-		setProperties(properties);
-		this.placeholderHelper.setProperties(properties);
-		return properties;
+		setProperties(mergedProperties);
+		this.placeholderHelper.setProperties(mergedProperties);
+		return mergedProperties;
 	}
 
 	@Override
@@ -153,8 +153,8 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		this.environmentPropertyPrefix = environmentPropertyPrefix;
 	}
 
-	public Properties getOriginalProperties() {
-		return originalProperties;
+	public Properties getSpringProperties() {
+		return springProperties;
 	}
 
 	public Resource[] getResourceLocations() {
