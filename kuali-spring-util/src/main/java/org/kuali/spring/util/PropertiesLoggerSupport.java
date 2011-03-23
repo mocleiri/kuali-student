@@ -18,13 +18,13 @@ public class PropertiesLoggerSupport {
 	public static final boolean DEFAULT_IS_MASK_PROPERTY_VALUES = true;
 	public static final boolean DEFAULT_IS_FLATTEN_PROPERTY_VALUES = false;
 
-	// If true, strip \n and \r when logging values
+	// If true, replace \n and \r with a space when logging values
 	boolean flattenPropertyValues = DEFAULT_IS_FLATTEN_PROPERTY_VALUES;
 	// If true, mask values for keys that match the maskExpression
 	boolean maskPropertyValues = DEFAULT_IS_MASK_PROPERTY_VALUES;
 	String maskExpression = DEFAULT_MASK_EXPRESSION;
 	String maskValue = DEFAULT_MASKED_VALUE;
-	Pattern pattern = Pattern.compile(maskExpression);
+	Pattern pattern = Pattern.compile(getMaskExpression());
 
 	/**
 	 * This setter also invokes Pattern.compile(maskExpression)
