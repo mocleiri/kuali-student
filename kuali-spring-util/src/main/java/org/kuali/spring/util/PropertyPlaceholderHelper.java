@@ -123,8 +123,10 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		String regularProperty = properties.getProperty(placeholder);
 		logger.trace("regular property=[{}], system property=[{}]", regularProperty, systemProperty);
 		String property = resolvePlaceholder(placeholder, regularProperty, systemProperty, systemPropertiesMode);
-		resolvedCache.setProperty(placeholder, property);
-		logger.trace("Caching placeholder '{}' [{}]", placeholder, property);
+		if (property != null) {
+			resolvedCache.setProperty(placeholder, property);
+			logger.trace("Caching placeholder '{}' [{}]", placeholder, property);
+		}
 		return property;
 	}
 
@@ -423,6 +425,14 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 
 	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
 		this.systemPropertiesMode = systemPropertiesMode;
+	}
+
+	public Properties getResolvedCache() {
+		return resolvedCache;
+	}
+
+	public void setResolvedCache(Properties resolvedCache) {
+		this.resolvedCache = resolvedCache;
 	}
 
 }

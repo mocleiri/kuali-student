@@ -6,7 +6,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
@@ -35,12 +34,12 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		return true;
 	}
 
-	protected void processBeanDefinition(BeanDefinition bd) {
+	protected void processBeanDefinition(String beanName, BeanDefinition bd) {
 		try {
 			logger.info("Resolving placeholders for bean '" + beanName + "' [" + bd.getBeanClassName() + "]");
 			beanDefinitionVisitor.visitBeanDefinition(bd);
-		} catch (Exception ex) {
-			throw new BeanDefinitionStoreException(bd.getResourceDescription(), beanName, ex.getMessage());
+		} catch (Exception e) {
+			throw new RuntimeException("Error processing bean " + beanName, e);
 		}
 	}
 
@@ -53,9 +52,9 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 			if (thisBeanIsMe(beanName, beanFactory)) {
 				logger.info("Skipping placeholder resolution for bean '" + beanName + "' [" + bd.getBeanClassName()
 						+ "]");
-				return;
+				continue;
 			}
-			processBeanDefinition(bd);
+			processBeanDefinition(beanName, bd);
 		}
 	}
 

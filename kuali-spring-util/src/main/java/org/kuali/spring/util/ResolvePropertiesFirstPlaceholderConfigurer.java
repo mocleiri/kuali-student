@@ -42,6 +42,8 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePro
 		// Update the original properties with our resolved properties
 		mergeProperties(properties, resolvedProperties);
 
+		helper.setResolvedCache(resolvedProperties);
+
 		if (logger.isInfoEnabled()) {
 			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
 		}

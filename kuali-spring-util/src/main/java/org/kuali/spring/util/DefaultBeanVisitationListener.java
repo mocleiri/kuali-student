@@ -4,11 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
-public class BeanVisitationListener implements VisitationListener {
-	final Logger logger = LoggerFactory.getLogger(BeanVisitationListener.class);
+public class DefaultBeanVisitationListener implements VisitationListener {
+	final Logger logger = LoggerFactory.getLogger(DefaultBeanVisitationListener.class);
 
 	@Override
 	public void valueResolved(ValueResolutionEvent event) {
+		logger.info("value resolved");
 		if (ObjectUtils.nullSafeEquals(event.getOldValue(), event.getNewValue())) {
 			logger.trace("oldValue=[{}] newValue=[{}]", event.getOldValue(), event.getNewValue());
 			return;

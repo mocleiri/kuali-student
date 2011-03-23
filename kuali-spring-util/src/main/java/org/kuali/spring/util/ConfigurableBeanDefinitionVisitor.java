@@ -15,7 +15,7 @@ public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
 
 	public ConfigurableBeanDefinitionVisitor() {
 		super();
-		listeners.add(new BeanVisitationListener());
+		listeners.add(new DefaultBeanVisitationListener());
 	}
 
 	StringValueResolver stringValueResolver;

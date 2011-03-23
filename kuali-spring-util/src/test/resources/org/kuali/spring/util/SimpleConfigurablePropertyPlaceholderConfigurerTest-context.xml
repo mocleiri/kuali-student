@@ -11,4 +11,5 @@
 
   <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
     p:location="classpath:org/kuali/spring/util/simple-test.properties" />
+
 </beans>

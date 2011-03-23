@@ -9,9 +9,10 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-  <bean id="kuali.spring.property.configurer.helper.test" class="org.kuali.spring.util.PropertyPlaceholderHelper"
-    p:systemPropertiesMode="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+  <bean id="placeholder.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
+    p:location="classpath:org/kuali/spring/util/simple-test.properties" />
 
-  <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
-    p:helper-ref="kuali.spring.property.configurer.helper.test" p:location="classpath:org/kuali/spring/util/simple-test.properties" />
+  <bean id="cat.test" class="org.kuali.spring.util.bean.Cat" p:actions="${cat.actions}" p:speed="${cat.speed}"
+    p:prey="${catt.prey}" />
+
 </beans>
