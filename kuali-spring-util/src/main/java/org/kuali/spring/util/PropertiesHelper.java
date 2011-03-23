@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -203,7 +202,7 @@ public class PropertiesHelper {
 	}
 
 	protected Properties getEnvironmentAsProperties(String prefix) {
-		Map<String, String> environmentMap = getEnvironment();
+		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreSecurity();
 		Properties envProps = new Properties();
 		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
 			envProps.setProperty(prefix + entry.getKey(), entry.getValue());
@@ -211,37 +210,10 @@ public class PropertiesHelper {
 		return envProps;
 	}
 
-	protected Map<String, String> getEnvironment() {
-		try {
-			return System.getenv();
-		} catch (SecurityException e) {
-			logger.warn("Unable to access system environment.  {}", e.getMessage());
-			return new HashMap<String, String>();
-		}
-	}
-
 	public void mergeEnvironmentProperties(Properties currentProps) {
 		logger.info("Merging environment properties");
 		String source = PropertiesSource.ENVIRONMENT.toString();
 		mergeProperties(currentProps, getEnvironmentAsProperties(getEnvironmentPropertyPrefix()), true, source);
-	}
-
-	protected Properties getSystemProperties() {
-		try {
-			return System.getProperties();
-		} catch (SecurityException e) {
-			logger.warn("Unable to access system properties.  {}", e.getMessage());
-			return new Properties();
-		}
-	}
-
-	protected String getSystemProperty(String key) {
-		try {
-			return System.getProperty(key);
-		} catch (SecurityException e) {
-			logger.warn("Unable to access system property '{}'.  {}", key, e.getMessage());
-			return null;
-		}
 	}
 
 	protected void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
@@ -291,7 +263,8 @@ public class PropertiesHelper {
 		// Merge in the system properties
 		logger.info("Merging system properties with Spring properties using mode {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-		mergeProperties(currentProps, getSystemProperties(), override, PropertiesSource.SYSTEM.toString());
+		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreSecurity();
+		mergeProperties(currentProps, systemProperties, override, PropertiesSource.SYSTEM.toString());
 	}
 
 	public String getEnvironmentPropertyPrefix() {

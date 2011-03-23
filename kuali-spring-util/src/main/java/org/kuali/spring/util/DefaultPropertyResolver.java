@@ -5,7 +5,7 @@ import java.util.Properties;
 public class DefaultPropertyResolver implements PropertyResolver {
 	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 	public static final boolean DEFAULT_IS_SEARCH_ENVIRONMENT = true;
-	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
+	SystemPropertiesMode mode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 	boolean searchEnvironment = DEFAULT_IS_SEARCH_ENVIRONMENT;
 	Properties properties;
 
@@ -13,24 +13,72 @@ public class DefaultPropertyResolver implements PropertyResolver {
 		this(DEFAULT_SYSTEM_PROPERTIES_MODE, DEFAULT_IS_SEARCH_ENVIRONMENT);
 	}
 
-	public DefaultPropertyResolver(SystemPropertiesMode systemPropertiesMode, boolean searchEnvironment) {
+	public DefaultPropertyResolver(SystemPropertiesMode mode, boolean searchEnvironment) {
 		super();
-		this.systemPropertiesMode = systemPropertiesMode;
+		this.mode = mode;
 		this.searchEnvironment = searchEnvironment;
 	}
 
 	@Override
 	public String getProperty(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		String environmentProperty = SystemUtils.getEnvironmentPropertyIgnoreSecurity(key);
+		String property = getProperties().getProperty(key);
+		String systemProperty = SystemUtils.getSystemPropertyIgnoreSecurity(key);
+
+		if (isUseSystemProperty(systemProperty, property)) {
+			return systemProperty;
+		}
+		if (isUseEnvironmentProperty(environmentProperty, property)) {
+			return environmentProperty;
+		}
+		return property;
 	}
 
-	public SystemPropertiesMode getSystemPropertiesMode() {
-		return systemPropertiesMode;
+	protected boolean isUseSystemProperty(String systemProperty, String regularProperty) {
+		// The system property is null, don't use it
+		if (systemProperty == null) {
+			return false;
+		}
+
+		switch (mode) {
+		case SYSTEM_PROPERTIES_MODE_NEVER:
+			// We've been instructed to always ignore system properties
+			return false;
+		case SYSTEM_PROPERTIES_MODE_OVERRIDE:
+			// The system property is not null and system properties always win
+			return true;
+		case SYSTEM_PROPERTIES_MODE_FALLBACK:
+			// The system property is not null, but we can only use it if the regular property is null
+			if (regularProperty == null) {
+				return true;
+			} else {
+				return false;
+			}
+		default:
+			// The system properties mode is unknown
+			throw new IllegalArgumentException("Unknown system properties mode [" + mode + "] Available modes are "
+					+ SystemPropertiesMode.values());
+		}
 	}
 
-	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
-		this.systemPropertiesMode = systemPropertiesMode;
+	protected boolean isUseEnvironmentProperty(String environmentProperty, String regularProperty) {
+		// Always ignore environment properties
+		if (!searchEnvironment) {
+			return false;
+		}
+
+		// The environment property is null don't use it
+		if (environmentProperty == null) {
+			return false;
+		}
+
+		// Never use an environment property over a regular property
+		if (regularProperty != null) {
+			return false;
+		}
+
+		// The regular property is null and the environment property is not
+		return true;
 	}
 
 	public boolean isSearchEnvironment() {
@@ -39,6 +87,22 @@ public class DefaultPropertyResolver implements PropertyResolver {
 
 	public void setSearchEnvironment(boolean searchEnvironment) {
 		this.searchEnvironment = searchEnvironment;
+	}
+
+	public SystemPropertiesMode getMode() {
+		return mode;
+	}
+
+	public void setMode(SystemPropertiesMode mode) {
+		this.mode = mode;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
 	}
 
 }

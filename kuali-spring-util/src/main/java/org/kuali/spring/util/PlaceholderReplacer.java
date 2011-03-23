@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.Assert;
-import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 import org.springframework.util.StringUtils;
 
 /**
@@ -66,38 +65,18 @@ public class PlaceholderReplacer {
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
-	/**
-	 * Replaces all placeholders of format <code>${name}</code> with the corresponding property from the supplied
-	 * {@link Properties}.
-	 * 
-	 * @param value
-	 *            the value containing the placeholders to be replaced.
-	 * @param properties
-	 *            the <code>Properties</code> to use for replacement.
-	 * @return the supplied value with placeholders replaced inline.
-	 */
-	public String replacePlaceholders(String value, final Properties properties) {
+	public String replacePlaceholders(String value, Properties properties) {
 		Assert.notNull(properties, "Argument 'properties' must not be null.");
-		PlaceholderResolver resolver = new PropertiesPlaceholderResolver(properties);
+		PropertyResolver resolver = new SimplePropertyResolver(properties);
 		return replacePlaceholders(value, resolver);
 	}
 
-	/**
-	 * Replaces all placeholders of format <code>${name}</code> with the value returned from the supplied
-	 * {@link PlaceholderResolver}.
-	 * 
-	 * @param value
-	 *            the value containing the placeholders to be replaced.
-	 * @param placeholderResolver
-	 *            the <code>PlaceholderResolver</code> to use for replacement.
-	 * @return the supplied value with placeholders replaced inline.
-	 */
-	public String replacePlaceholders(String value, PlaceholderResolver placeholderResolver) {
+	public String replacePlaceholders(String value, PropertyResolver resolver) {
 		Assert.notNull(value, "Argument 'value' must not be null.");
-		return parseStringValue(value, placeholderResolver, new HashSet<String>());
+		return parseStringValue(value, resolver, new HashSet<String>());
 	}
 
-	protected String parseStringValue(String strVal, PlaceholderResolver resolver, Set<String> visitedPlaceholders) {
+	protected String parseStringValue(String strVal, PropertyResolver resolver, Set<String> visitedPlaceholders) {
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		if (startIndex == -1) {
@@ -133,14 +112,14 @@ public class PlaceholderReplacer {
 			throw new IllegalArgumentException("Circular reference '" + originalKey + "' in property definitions");
 		}
 
-		// Recursive invocation, resolve any placeholders inside the key
-		String resolvedKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
+		// Recursive invocation, replace any placeholders inside the key
+		String finalKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
-		// Obtain a value for the resolved key
-		String value = getValue(resolvedKey, ctx.getResolver());
+		// Obtain a value for the key after any placeholders have been replaced in the key
+		String value = getValue(finalKey, ctx.getResolver());
 
 		logger.trace("Processing value [{}]", value);
-		int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
+		int bufIndex = processValue(ctx, value, endIndex, finalKey);
 
 		logger.trace("Removing '{}' from visited keys", originalKey);
 		ctx.getVisitedPlaceholders().remove(originalKey);
@@ -151,9 +130,9 @@ public class PlaceholderReplacer {
 	/**
 	 * Attempt to get a value for this placeholder
 	 */
-	protected String getValue(String placeholder, PlaceholderResolver resolver) {
+	protected String getValue(String key, PropertyResolver resolver) {
 		// If the resolver gives us something, we're done
-		String propVal = resolver.resolvePlaceholder(placeholder);
+		String propVal = resolver.getProperty(key);
 		if (propVal != null) {
 			return propVal;
 		}
@@ -163,8 +142,8 @@ public class PlaceholderReplacer {
 			return null;
 		}
 
-		// If they supplied a valueSeparator but this placeholder isn't using it, we're done
-		int separatorIndex = placeholder.indexOf(this.valueSeparator);
+		// If they supplied a valueSeparator but this key isn't using it, we are done
+		int separatorIndex = key.indexOf(this.valueSeparator);
 		if (separatorIndex == -1) {
 			return null;
 		}
@@ -173,13 +152,13 @@ public class PlaceholderReplacer {
 		// ${jdbc.vendor:oracle}
 		// The user wants the placeholder set to "oracle" if a "jdbc.vendor" property cannot be located
 		// Extract "jdbc.vendor"
-		String actualPlaceholder = placeholder.substring(0, separatorIndex);
+		String actualKey = key.substring(0, separatorIndex);
 
 		// Extract the default value they supplied
-		String defaultValue = placeholder.substring(separatorIndex + this.valueSeparator.length());
+		String defaultValue = key.substring(separatorIndex + this.valueSeparator.length());
 
 		// Give the resolver a chance to locate a value
-		propVal = resolver.resolvePlaceholder(actualPlaceholder);
+		propVal = resolver.getProperty(actualKey);
 
 		// If the resolver found something, use it
 		if (propVal != null) {
