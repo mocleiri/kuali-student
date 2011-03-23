@@ -206,13 +206,13 @@ public class PropertiesHelper {
 
 	public void mergeSystemProperties(Properties currentProps, SystemPropertiesMode mode) {
 		if (mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_NEVER)) {
-			logger.info("{} - Ignoring system properties.", mode);
+			logger.info("Ignoring system properties because mode is {}", mode);
 			// Nothing to do
 			return;
 		}
 
 		// Merge in the system properties
-		logger.info("{} - Merging system properties with Spring properties", mode);
+		logger.info("Merging system properties with Spring properties using mode {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
 		mergeProperties(currentProps, getSystemProperties(), override, PropertiesSource.SYSTEM.toString());
 	}
