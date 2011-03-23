@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderSupport;
-import org.springframework.util.Assert;
 import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.PropertiesPersister;
@@ -126,16 +125,16 @@ public class PropertiesHelper {
 		return clone;
 	}
 
-	protected Properties getSystemEnvironmentAsProperties() {
-		Map<String, String> environmentMap = getSystemEnvironment();
+	protected Properties getEnvironmentAsProperties(String prefix) {
+		Map<String, String> environmentMap = getEnvironment();
 		Properties envProps = new Properties();
 		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
-			envProps.setProperty(entry.getKey(), entry.getValue());
+			envProps.setProperty(prefix + entry.getKey(), entry.getValue());
 		}
 		return envProps;
 	}
 
-	protected Map<String, String> getSystemEnvironment() {
+	protected Map<String, String> getEnvironment() {
 		try {
 			return System.getenv();
 		} catch (SecurityException e) {
@@ -144,21 +143,10 @@ public class PropertiesHelper {
 		}
 	}
 
-	protected void mergeEnvironmentProperty(Properties properties, Map.Entry<String, String> environmentEntry) {
-		String key = this.environmentPropertyPrefix + environmentEntry.getKey();
-		String existingValue = properties.getProperty(key);
-		String environmentValue = environmentEntry.getValue();
-		if (existingValue != null) {
-			logger.warn("Environment property override for '" + key + "' [{}]->[{}]", existingValue, environmentValue);
-		} else {
-			logger.trace("Adding environment property {}=[{}]", key, environmentValue);
-		}
-		properties.setProperty(key, environmentValue);
-	}
-
 	public void mergeEnvironmentProperties(Properties currentProps) {
 		logger.info("Merging environment properties");
-		mergeProperties(currentProps, getSystemEnvironmentAsProperties(), true, PropertiesSource.ENVIRONMENT.toString());
+		String source = PropertiesSource.ENVIRONMENT.toString();
+		mergeProperties(currentProps, getEnvironmentAsProperties(getEnvironmentPropertyPrefix()), true, source);
 	}
 
 	protected Properties getSystemProperties() {
@@ -176,42 +164,6 @@ public class PropertiesHelper {
 		} catch (SecurityException e) {
 			logger.warn("Unable to access system property '{}'.  {}", key, e.getMessage());
 			return null;
-		}
-	}
-
-	protected void mergeSystemProperty(Properties properties, String systemPropertyKey, SystemPropertiesMode mode) {
-		// Extract the system property
-		String systemPropertyValue = getSystemProperty(systemPropertyKey);
-
-		// Ignore system properties that are null
-		if (systemPropertyValue == null) {
-			return;
-		}
-
-		// Extract the existing property
-		String existingPropertyValue = properties.getProperty(systemPropertyKey);
-
-		// Values are the same, nothing to do
-		if (ObjectUtils.nullSafeEquals(systemPropertyValue, existingPropertyValue)) {
-			return;
-		}
-
-		// Double check our system properties mode
-		Assert.isTrue(mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE)
-				|| mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK));
-
-		// There is no existing property
-		if (existingPropertyValue == null) {
-			logger.debug("Adding system property {}=[{}]", systemPropertyKey, systemPropertyValue);
-			properties.setProperty(systemPropertyKey, systemPropertyValue);
-			return;
-		}
-
-		// There is an existing property, but system properties win
-		if (mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE)) {
-			logger.info("System property override for '" + systemPropertyKey + "' [{}]->[{}]", existingPropertyValue,
-					systemPropertyValue);
-			properties.setProperty(systemPropertyKey, systemPropertyValue);
 		}
 	}
 
@@ -263,5 +215,37 @@ public class PropertiesHelper {
 		logger.info("{} - Merging system properties with Spring properties", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
 		mergeProperties(currentProps, getSystemProperties(), override, PropertiesSource.SYSTEM.toString());
+	}
+
+	public String getEnvironmentPropertyPrefix() {
+		return environmentPropertyPrefix;
+	}
+
+	public void setEnvironmentPropertyPrefix(String environmentPropertyPrefix) {
+		this.environmentPropertyPrefix = environmentPropertyPrefix;
+	}
+
+	public boolean isIgnoreResourceNotFound() {
+		return ignoreResourceNotFound;
+	}
+
+	public void setIgnoreResourceNotFound(boolean ignoreResourceNotFound) {
+		this.ignoreResourceNotFound = ignoreResourceNotFound;
+	}
+
+	public PropertiesPersister getPropertiesPersister() {
+		return propertiesPersister;
+	}
+
+	public void setPropertiesPersister(PropertiesPersister propertiesPersister) {
+		this.propertiesPersister = propertiesPersister;
+	}
+
+	public String getFileEncoding() {
+		return fileEncoding;
+	}
+
+	public void setFileEncoding(String fileEncoding) {
+		this.fileEncoding = fileEncoding;
 	}
 }

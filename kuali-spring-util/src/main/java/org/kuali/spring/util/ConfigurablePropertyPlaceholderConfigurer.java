@@ -29,7 +29,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 	Properties properties;
 	Properties originalProperties;
-	Resource[] locations;
+	Resource[] resourceLocations;
 
 	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
 		if (!currentBean.equals(this.beanName)) {
@@ -63,22 +63,11 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 		}
 	}
 
-
-	/**
-	 * Load properties into the given instance.
-	 * @param props the Properties instance to load into
-	 * @throws java.io.IOException in case of I/O errors
-	 * @see #setLocations
-	 */
-	@Override
-	protected void loadProperties(Properties props) throws IOException {
-		this.propertiesHelper.loadProperties(props, this.locations);
-	}
-
 	@Override
 	protected Properties mergeProperties() throws IOException {
 		Properties properties = super.mergeProperties();
 		this.originalProperties = propertiesHelper.getClone(properties);
+		this.propertiesHelper.loadProperties(properties, getResourceLocations());
 		propertiesHelper.mergeSystemProperties(properties, this.placeholderHelper.getSystemPropertiesMode());
 		if (placeholderHelper.isSearchSystemEnvironment()) {
 			propertiesHelper.mergeEnvironmentProperties(properties);
@@ -166,6 +155,14 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 	public Properties getOriginalProperties() {
 		return originalProperties;
+	}
+
+	public Resource[] getResourceLocations() {
+		return resourceLocations;
+	}
+
+	public void setResourceLocations(Resource[] resourceLocations) {
+		this.resourceLocations = resourceLocations;
 	}
 
 }

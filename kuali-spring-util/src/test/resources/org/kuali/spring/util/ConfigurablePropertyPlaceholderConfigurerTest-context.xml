@@ -16,7 +16,7 @@
     p:stringValueResolver="kuali.spring.property.helper" />
 
   <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
-    p:order="10000" p:helper-ref="kuali.spring.property.helper" p:beanDefinitionVisitor-ref="kuali.spring.property.bean.visitor">
+    p:order="10000" p:beanDefinitionVisitor-ref="kuali.spring.property.bean.visitor" >
     <property name="locations">
       <list>
         <value>classpath:org/kuali/spring/util/default-properties.xml</value>
