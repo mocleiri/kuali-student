@@ -36,7 +36,6 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 
 	protected void processBeanDefinition(String beanName, BeanDefinition bd) {
 		try {
-			logger.info("Resolving placeholders for bean '" + beanName + "' [" + bd.getBeanClassName() + "]");
 			beanDefinitionVisitor.visitBeanDefinition(bd);
 		} catch (Exception e) {
 			throw new RuntimeException("Error processing bean " + beanName, e);

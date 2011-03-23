@@ -13,6 +13,6 @@
     p:location="classpath:org/kuali/spring/util/simple-test.properties" />
 
   <bean id="cat.test" class="org.kuali.spring.util.bean.Cat" p:actions="${cat.actions}" p:speed="${cat.speed}"
-    p:prey="${catt.prey}" />
+    p:prey="${cat.prey}" />
 
 </beans>

@@ -9,21 +9,20 @@ public class DefaultBeanVisitationListener implements VisitationListener {
 
 	@Override
 	public void valueResolved(ValueResolutionEvent event) {
-		logger.info("value resolved");
 		if (ObjectUtils.nullSafeEquals(event.getOldValue(), event.getNewValue())) {
-			logger.trace("oldValue=[{}] newValue=[{}]", event.getOldValue(), event.getNewValue());
+			// Nothing changed
 			return;
 		}
-		logger.info("oldValue=[{}] newValue=[{}]", event.getOldValue(), event.getNewValue());
+		logger.info("Value updated: [{}]->[{}]", event.getOldValue(), event.getNewValue());
 	}
 
 	@Override
 	public void beforeBeanVisit(BeanVisitationEvent event) {
-		logger.info("About to visit {}", event.getBeanDefinition().getDescription());
+		logger.info("Visiting {}", event.getBeanDefinition());
 	}
 
 	@Override
 	public void afterBeanVisit(BeanVisitationEvent event) {
-		logger.info("Just finished visiting {}", event.getBeanDefinition().getDescription());
+		// Nothing for now
 	}
 }
