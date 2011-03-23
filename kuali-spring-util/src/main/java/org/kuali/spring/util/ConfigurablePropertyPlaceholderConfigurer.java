@@ -64,6 +64,7 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceC
 	}
 
 	@Override
+
 	/**
 	 * Load properties into the given instance.
 	 * @param props the Properties instance to load into

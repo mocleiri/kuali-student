@@ -26,29 +26,44 @@ public class PropertiesHelper {
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	String fileEncoding;
 
-	protected void loadProperties(Properties properties, Resource location, InputStream is) throws IOException {
+	public PropertiesHelper() {
+		this(DEFAULT_IGNORE_RESOURCE_NOT_FOUND, null);
+	}
+
+	public PropertiesHelper(boolean ignoreResourceNotFound, String fileEncoding) {
+		super();
+		this.ignoreResourceNotFound = ignoreResourceNotFound;
+		this.fileEncoding = fileEncoding;
+	}
+
+	protected Properties loadProperties(Resource location, InputStream is) throws IOException {
+		Properties properties = new Properties();
 		if (isXMLFile(location)) {
 			this.propertiesPersister.loadFromXml(properties, is);
-			return;
+			return properties;
 		}
+
+		// It is not an xml file
 		if (this.fileEncoding == null) {
 			this.propertiesPersister.load(properties, is);
 		} else {
 			this.propertiesPersister.load(properties, new InputStreamReader(is, this.fileEncoding));
 		}
+		return properties;
 	}
 
-	protected void loadProperties(Properties properties, Resource location) throws IOException {
+	protected Properties getProperties(Resource location) throws IOException {
 		logger.info("Loading properties from {}", location);
 		InputStream is = null;
 		try {
 			is = location.getInputStream();
-			loadProperties(properties, location, is);
+			return loadProperties(location, is);
 		} catch (IOException e) {
 			handleIOException(location, e);
 		} finally {
 			nullSafeClose(is);
 		}
+		return new Properties();
 	}
 
 	protected boolean isXMLFile(Resource location) {
@@ -59,7 +74,16 @@ public class PropertiesHelper {
 			// resource is not file-based. See SPR-7552.
 			return false;
 		}
-		return (filename != null) && (filename.endsWith(PropertiesLoaderSupport.XML_FILE_EXTENSION));
+		// May not have thrown an exception, but might still be null
+		if (filename == null) {
+			return false;
+		}
+		// It's an XML file
+		if (filename.endsWith(PropertiesLoaderSupport.XML_FILE_EXTENSION)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	protected void handleIOException(Resource location, IOException e) throws IOException {
@@ -82,7 +106,8 @@ public class PropertiesHelper {
 			return;
 		}
 		for (Resource location : locations) {
-			loadProperties(properties, location);
+			Properties newProps = getProperties(location);
+			mergeProperties(properties, newProps, true, PropertiesSource.RESOURCE.toString());
 		}
 	}
 
@@ -99,6 +124,15 @@ public class PropertiesHelper {
 			clone.setProperty(propertyName, propertyValue);
 		}
 		return clone;
+	}
+
+	protected Properties getSystemEnvironmentAsProperties() {
+		Map<String, String> environmentMap = getSystemEnvironment();
+		Properties envProps = new Properties();
+		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
+			envProps.setProperty(entry.getKey(), entry.getValue());
+		}
+		return envProps;
 	}
 
 	protected Map<String, String> getSystemEnvironment() {
@@ -122,15 +156,21 @@ public class PropertiesHelper {
 		properties.setProperty(key, environmentValue);
 	}
 
-	public void mergeEnvironmentProperties(Properties properties) {
+	public void mergeEnvironmentProperties(Properties currentProps) {
 		logger.info("Merging environment properties");
-		Map<String, String> environment = getSystemEnvironment();
-		for (Map.Entry<String, String> environmentEntry : environment.entrySet()) {
-			mergeEnvironmentProperty(properties, environmentEntry);
+		mergeProperties(currentProps, getSystemEnvironmentAsProperties(), true, PropertiesSource.ENVIRONMENT.toString());
+	}
+
+	protected Properties getSystemProperties() {
+		try {
+			return System.getProperties();
+		} catch (SecurityException e) {
+			logger.warn("Unable to access system properties.  {}", e.getMessage());
+			return new Properties();
 		}
 	}
 
-	protected String getSystemPropertyValue(String key) {
+	protected String getSystemProperty(String key) {
 		try {
 			return System.getProperty(key);
 		} catch (SecurityException e) {
@@ -141,7 +181,7 @@ public class PropertiesHelper {
 
 	protected void mergeSystemProperty(Properties properties, String systemPropertyKey, SystemPropertiesMode mode) {
 		// Extract the system property
-		String systemPropertyValue = getSystemPropertyValue(systemPropertyKey);
+		String systemPropertyValue = getSystemProperty(systemPropertyKey);
 
 		// Ignore system properties that are null
 		if (systemPropertyValue == null) {
@@ -175,7 +215,44 @@ public class PropertiesHelper {
 		}
 	}
 
-	public void mergeSystemProperties(Properties properties, SystemPropertiesMode mode) {
+	protected void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
+		// Extract the new value
+		String newValue = newProps.getProperty(key);
+
+		// Ignore values that are null
+		if (newValue == null) {
+			return;
+		}
+
+		// Extract the existing property
+		String currentValue = currentProps.getProperty(key);
+
+		// There is no existing property
+		if (currentValue == null) {
+			logger.debug("Adding " + src + " property {}=[{}]", key, newValue);
+			currentProps.setProperty(key, newValue);
+			return;
+		}
+
+		// Values are the same, nothing to do
+		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
+			return;
+		}
+
+		// There is an existing property, but the new property wins
+		if (override) {
+			logger.info(src + " property override for '" + key + "' [{}]->[{}]", currentValue, newValue);
+			currentProps.setProperty(key, newValue);
+		}
+	}
+
+	public void mergeProperties(Properties currentProps, Properties newProps, boolean override, String source) {
+		for (String key : newProps.stringPropertyNames()) {
+			mergeProperty(currentProps, newProps, key, override, source);
+		}
+	}
+
+	public void mergeSystemProperties(Properties currentProps, SystemPropertiesMode mode) {
 		if (mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_NEVER)) {
 			logger.info("{} - Ignoring system properties.", mode);
 			// Nothing to do
@@ -184,8 +261,7 @@ public class PropertiesHelper {
 
 		// Merge in the system properties
 		logger.info("{} - Merging system properties with Spring properties", mode);
-		for (String systemPropertyKey : System.getProperties().stringPropertyNames()) {
-			mergeSystemProperty(properties, systemPropertyKey, mode);
-		}
+		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
+		mergeProperties(currentProps, getSystemProperties(), override, PropertiesSource.SYSTEM.toString());
 	}
 }
