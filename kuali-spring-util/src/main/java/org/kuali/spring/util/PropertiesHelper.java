@@ -23,7 +23,7 @@ public class PropertiesHelper {
 	 * @param properties
 	 * @param approvedKeys
 	 */
-	protected void removeProperties(Properties properties, Set<String> approvedKeys) {
+	protected void removeKeys(Properties properties, Set<String> approvedKeys) {
 		// Extract the set of existing property names
 		Set<String> keys = properties.stringPropertyNames();
 		for (String key : keys) {
@@ -63,17 +63,17 @@ public class PropertiesHelper {
 
 	/**
 	 * Make oldProperties the same as newProperties. Remove any properties from old that are not in new. Add any
-	 * properties from new that are not in old. Update properties in old to the values from new
+	 * properties from new that are not in old. Update property values in old to the values from new
 	 * 
 	 * @param oldProperties
 	 * @param newProperties
 	 */
 	public void syncProperties(Properties oldProperties, Properties newProperties) {
-		// Remove anything from oldProperties that is not in newProperties
-		removeProperties(oldProperties, newProperties.stringPropertyNames());
-		// Add anything from newProperties that is not in oldProperties
+		// Remove any keys from oldProperties that are not in newProperties
+		removeKeys(oldProperties, newProperties.stringPropertyNames());
+		// Add properties from newProperties to oldProperties
 		addProperties(oldProperties, newProperties);
-		// Set values in old to the values from new
+		// Set property values in oldProperties to the values from newProperties
 		syncValues(oldProperties, newProperties);
 	}
 
