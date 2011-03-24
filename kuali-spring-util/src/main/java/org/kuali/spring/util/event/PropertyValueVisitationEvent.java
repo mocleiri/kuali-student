@@ -1,4 +1,4 @@
-package org.kuali.spring.util;
+package org.kuali.spring.util.event;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;

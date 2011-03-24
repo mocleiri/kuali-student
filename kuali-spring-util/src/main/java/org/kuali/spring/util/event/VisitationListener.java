@@ -1,4 +1,4 @@
-package org.kuali.spring.util;
+package org.kuali.spring.util.event;
 
 public interface VisitationListener {
 	public void beforeVisit(PropertyValueVisitationEvent event);

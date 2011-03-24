@@ -1,4 +1,4 @@
-package org.kuali.spring.util;
+package org.kuali.spring.util.event;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
