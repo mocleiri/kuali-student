@@ -166,7 +166,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	@Override
 	protected Properties mergeProperties() throws IOException {
-		// The super class loads properties from resources as well as properties defined directly on this bean
+		// The super class method loads properties from resources as well as properties defined directly on this bean
 		Properties managedProperties = super.mergeProperties();
 		// Give the retriever a handle to the properties
 		retriever.setProperties(managedProperties);
