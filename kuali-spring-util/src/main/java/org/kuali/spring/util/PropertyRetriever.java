@@ -1,5 +1,5 @@
 package org.kuali.spring.util;
 
-public interface PropertyResolver {
+public interface PropertyRetriever {
 	public String getProperty(String key);
 }

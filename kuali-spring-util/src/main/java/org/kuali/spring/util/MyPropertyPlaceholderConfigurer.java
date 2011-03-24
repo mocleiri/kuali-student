@@ -13,6 +13,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringValueResolver;
@@ -20,31 +21,35 @@ import org.springframework.util.StringValueResolver;
 public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
+	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
+	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
 
 	String beanName;
 	BeanFactory beanFactory;
 	Properties properties;
+	Properties springProperties;
+	Properties rawProperties;
+	Properties resolvedProperties;
+	Resource[] locations;
+
 	String nullValue;
-	boolean searchSystemEnvironment;
-	boolean ignoreResourceNotFound;
 	String fileEncoding;
-	SystemPropertiesMode systemPropertiesMode;
-	String placeholderPrefix;
-	String placeholderSuffix;
 	String valueSeparator;
-	boolean ignoreUnresolvablePlaceholders;
+
+	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
+	boolean ignoreResourceNotFound = PropertiesHelper.DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
+	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
+	String placeholderPrefix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX;
+	String placeholderSuffix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX;
+	boolean ignoreUnresolvablePlaceholders = DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS;
 
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	PropertiesHelper propertiesHelper = new PropertiesHelper(ignoreResourceNotFound, fileEncoding);
 	PlaceholderReplacer replacer = new PlaceholderReplacer(placeholderPrefix, placeholderSuffix, valueSeparator,
 			ignoreUnresolvablePlaceholders);
-	SimplePropertyResolver propertyResolver = new SimplePropertyResolver(properties);
+	SimplePropertyRetriever propertyResolver = new SimplePropertyRetriever();
 	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, propertyResolver, nullValue);
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor(stringResolver);
-	Properties springProperties;
-	Properties rawProperties;
-	Properties resolvedProperties;
-	Resource[] locations;
 
 	@Override
 	public void setLocations(Resource[] locations) {
@@ -99,15 +104,15 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		// Get a value for the key
 		String rawValue = propertyResolver.getProperty(key);
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
-		logger.trace("Resolving placeholders in value [{}]", rawValue);
-		// Now resolve any placeholders in the value
-		String resolvedValue = replacer.replacePlaceholders(rawValue, originalProperties);
-		if (!rawValue.equals(resolvedValue)) {
-			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
+		logger.trace("Replacing placeholders in value [{}]", rawValue);
+		// Now replace any placeholders in the value
+		String newValue = replacer.replacePlaceholders(rawValue, originalProperties);
+		if (!rawValue.equals(newValue)) {
+			logger.trace("Resolved value [{}]->[{}]", rawValue, newValue);
 		}
 		// The only items allowed into resolvedProperties are fully resolved keys and values
-		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, resolvedValue);
-		resolvedProperties.setProperty(resolvedKey, resolvedValue);
+		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, newValue);
+		resolvedProperties.setProperty(resolvedKey, newValue);
 	}
 
 	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
@@ -156,6 +161,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	protected Properties mergeProperties() throws IOException {
 		// The super class loads properties from resources as well as properties defined directly on this bean
 		Properties properties = super.mergeProperties();
+		propertyResolver.setProperties(properties);
 		// Preserve just the Spring properties
 		setSpringProperties(propertiesHelper.getClone(properties));
 		// Merge in the system properties as appropriate
@@ -331,11 +337,11 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
-	public SimplePropertyResolver getPropertyResolver() {
+	public SimplePropertyRetriever getPropertyResolver() {
 		return propertyResolver;
 	}
 
-	public void setPropertyResolver(SimplePropertyResolver propertyResolver) {
+	public void setPropertyResolver(SimplePropertyRetriever propertyResolver) {
 		this.propertyResolver = propertyResolver;
 	}
 

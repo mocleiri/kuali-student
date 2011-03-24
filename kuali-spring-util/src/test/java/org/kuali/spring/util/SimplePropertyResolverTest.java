@@ -15,7 +15,7 @@ public class SimplePropertyResolverTest {
 		String val = "bar";
 		Properties properties = new Properties();
 		properties.setProperty(key, val);
-		PropertyResolver resolver = new SimplePropertyResolver(properties);
+		PropertyRetriever resolver = new SimplePropertyRetriever(properties);
 
 		String resolvedProperty = resolver.getProperty(key);
 		String unresolvedProperty = resolver.getProperty("A-Key-That-Does-Not-Exist");
@@ -31,7 +31,7 @@ public class SimplePropertyResolverTest {
 		String val = "bar";
 		Properties properties = new Properties();
 		properties.setProperty(key, val);
-		SimplePropertyResolver resolver = new SimplePropertyResolver();
+		SimplePropertyRetriever resolver = new SimplePropertyRetriever();
 		resolver.setProperties(properties);
 
 		String resolvedProperty = resolver.getProperty(key);

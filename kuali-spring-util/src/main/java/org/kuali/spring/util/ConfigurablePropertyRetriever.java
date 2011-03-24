@@ -1,19 +1,16 @@
 package org.kuali.spring.util;
 
-import java.util.Properties;
-
-public class DefaultPropertyResolver implements PropertyResolver {
+public class ConfigurablePropertyRetriever extends SimplePropertyRetriever {
 	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 	public static final boolean DEFAULT_IS_SEARCH_ENVIRONMENT = true;
 	SystemPropertiesMode mode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 	boolean searchEnvironment = DEFAULT_IS_SEARCH_ENVIRONMENT;
-	Properties properties;
 
-	public DefaultPropertyResolver() {
+	public ConfigurablePropertyRetriever() {
 		this(DEFAULT_SYSTEM_PROPERTIES_MODE, DEFAULT_IS_SEARCH_ENVIRONMENT);
 	}
 
-	public DefaultPropertyResolver(SystemPropertiesMode mode, boolean searchEnvironment) {
+	public ConfigurablePropertyRetriever(SystemPropertiesMode mode, boolean searchEnvironment) {
 		super();
 		this.mode = mode;
 		this.searchEnvironment = searchEnvironment;
@@ -67,7 +64,7 @@ public class DefaultPropertyResolver implements PropertyResolver {
 			return false;
 		}
 
-		// The environment property is null don't use it
+		// The environment property is null, don't use it
 		if (environmentProperty == null) {
 			return false;
 		}
@@ -95,14 +92,6 @@ public class DefaultPropertyResolver implements PropertyResolver {
 
 	public void setMode(SystemPropertiesMode mode) {
 		this.mode = mode;
-	}
-
-	public Properties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Properties properties) {
-		this.properties = properties;
 	}
 
 }

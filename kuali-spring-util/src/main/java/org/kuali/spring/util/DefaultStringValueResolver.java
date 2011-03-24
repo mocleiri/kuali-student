@@ -4,14 +4,14 @@ import org.springframework.util.StringValueResolver;
 
 public class DefaultStringValueResolver implements StringValueResolver {
 	PlaceholderReplacer replacer;
-	PropertyResolver resolver;
+	PropertyRetriever resolver;
 	String nullValue;
 
 	public DefaultStringValueResolver() {
 		this(null, null, null);
 	}
 
-	public DefaultStringValueResolver(PlaceholderReplacer replacer, PropertyResolver resolver, String nullValue) {
+	public DefaultStringValueResolver(PlaceholderReplacer replacer, PropertyRetriever resolver, String nullValue) {
 		super();
 		this.replacer = replacer;
 		this.resolver = resolver;
@@ -32,11 +32,11 @@ public class DefaultStringValueResolver implements StringValueResolver {
 		this.replacer = replacer;
 	}
 
-	public PropertyResolver getResolver() {
+	public PropertyRetriever getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(PropertyResolver resolver) {
+	public void setResolver(PropertyRetriever resolver) {
 		this.resolver = resolver;
 	}
 

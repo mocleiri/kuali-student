@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class ProcessStringContext {
 
-	PropertyResolver resolver;
+	PropertyRetriever resolver;
 	Set<String> visitedPlaceholders;
 	int startIndex;
 	StringBuilder buffer;
@@ -17,7 +17,7 @@ public class ProcessStringContext {
 		this(null, null, 0, null);
 	}
 
-	public ProcessStringContext(PropertyResolver resolver, Set<String> visitedPlaceholders, int startIndex,
+	public ProcessStringContext(PropertyRetriever resolver, Set<String> visitedPlaceholders, int startIndex,
 			StringBuilder buffer) {
 		super();
 		this.resolver = resolver;
@@ -50,11 +50,11 @@ public class ProcessStringContext {
 		this.buffer = buffer;
 	}
 
-	public PropertyResolver getResolver() {
+	public PropertyRetriever getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(PropertyResolver resolver) {
+	public void setResolver(PropertyRetriever resolver) {
 		this.resolver = resolver;
 	}
 }

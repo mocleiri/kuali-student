@@ -67,16 +67,16 @@ public class PlaceholderReplacer {
 
 	public String replacePlaceholders(String value, Properties properties) {
 		Assert.notNull(properties, "Argument 'properties' must not be null.");
-		PropertyResolver resolver = new SimplePropertyResolver(properties);
+		PropertyRetriever resolver = new SimplePropertyRetriever(properties);
 		return replacePlaceholders(value, resolver);
 	}
 
-	public String replacePlaceholders(String value, PropertyResolver resolver) {
+	public String replacePlaceholders(String value, PropertyRetriever resolver) {
 		Assert.notNull(value, "Argument 'value' must not be null.");
 		return parseStringValue(value, resolver, new HashSet<String>());
 	}
 
-	protected String parseStringValue(String strVal, PropertyResolver resolver, Set<String> visitedPlaceholders) {
+	protected String parseStringValue(String strVal, PropertyRetriever resolver, Set<String> visitedPlaceholders) {
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		if (startIndex == -1) {
@@ -139,7 +139,7 @@ public class PlaceholderReplacer {
 	/**
 	 * Attempt to get a value for this placeholder
 	 */
-	protected String getValue(String key, PropertyResolver resolver) {
+	protected String getValue(String key, PropertyRetriever resolver) {
 		// If the resolver gives us something, we're done
 		String propVal = resolver.getProperty(key);
 		if (propVal != null) {
