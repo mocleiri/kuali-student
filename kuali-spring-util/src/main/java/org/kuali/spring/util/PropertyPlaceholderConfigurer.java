@@ -18,9 +18,9 @@ import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringValueResolver;
 
-public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
+public class PropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
-	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
+	final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
 	public static final boolean DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND = false;
