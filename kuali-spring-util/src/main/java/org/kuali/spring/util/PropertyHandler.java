@@ -12,6 +12,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionVisitor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
@@ -44,7 +45,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 			PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	PropertiesRetriever retriever = new PropertiesRetriever();
 	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, null);
-	NotifyingBeanDefinitionVisitor beanDefinitionVisitor = new NotifyingBeanDefinitionVisitor(stringResolver);
+	BeanDefinitionVisitor beanDefinitionVisitor = new NotifyingBeanDefinitionVisitor(stringResolver);
 
 	@Override
 	public void setLocation(Resource location) {
@@ -202,14 +203,6 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		return beanFactory;
 	}
 
-	public NotifyingBeanDefinitionVisitor getBeanDefinitionVisitor() {
-		return beanDefinitionVisitor;
-	}
-
-	public void setBeanDefinitionVisitor(NotifyingBeanDefinitionVisitor beanDefinitionVisitor) {
-		this.beanDefinitionVisitor = beanDefinitionVisitor;
-	}
-
 	public PropertiesLoggerSupport getLoggerSupport() {
 		return loggerSupport;
 	}
@@ -324,6 +317,14 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	public void setSpringProperties(Properties springProperties) {
 		this.springProperties = springProperties;
+	}
+
+	public BeanDefinitionVisitor getBeanDefinitionVisitor() {
+		return beanDefinitionVisitor;
+	}
+
+	public void setBeanDefinitionVisitor(BeanDefinitionVisitor beanDefinitionVisitor) {
+		this.beanDefinitionVisitor = beanDefinitionVisitor;
 	}
 
 }
