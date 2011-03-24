@@ -4,23 +4,23 @@ import org.springframework.util.StringValueResolver;
 
 public class DefaultStringValueResolver implements StringValueResolver {
 	PlaceholderReplacer replacer;
-	PropertyRetriever resolver;
+	PropertyRetriever retriever;
 	String nullValue;
 
 	public DefaultStringValueResolver() {
 		this(null, null, null);
 	}
 
-	public DefaultStringValueResolver(PlaceholderReplacer replacer, PropertyRetriever resolver, String nullValue) {
+	public DefaultStringValueResolver(PlaceholderReplacer replacer, PropertyRetriever retriever, String nullValue) {
 		super();
 		this.replacer = replacer;
-		this.resolver = resolver;
+		this.retriever = retriever;
 		this.nullValue = nullValue;
 	}
 
 	@Override
 	public String resolveStringValue(String strVal) {
-		String value = replacer.replacePlaceholders(strVal, resolver);
+		String value = replacer.replacePlaceholders(strVal, retriever);
 		return value.equals(nullValue) ? null : value;
 	}
 
@@ -32,12 +32,12 @@ public class DefaultStringValueResolver implements StringValueResolver {
 		this.replacer = replacer;
 	}
 
-	public PropertyRetriever getResolver() {
-		return resolver;
+	public PropertyRetriever getRetriever() {
+		return retriever;
 	}
 
-	public void setResolver(PropertyRetriever resolver) {
-		this.resolver = resolver;
+	public void setRetriever(PropertyRetriever resolver) {
+		this.retriever = resolver;
 	}
 
 	public String getNullValue() {

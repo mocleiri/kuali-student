@@ -9,37 +9,21 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionVisitor;
 import org.springframework.util.StringValueResolver;
 
-public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
-	final Logger logger = LoggerFactory.getLogger(ConfigurableBeanDefinitionVisitor.class);
+public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
+	final Logger logger = LoggerFactory.getLogger(NotifyingBeanDefinitionVisitor.class);
 	List<VisitationListener> listeners = new ArrayList<VisitationListener>();
 
-	StringValueResolver stringValueResolver;
-	public ConfigurableBeanDefinitionVisitor() {
-		this(null);
+	public NotifyingBeanDefinitionVisitor() {
+		this(new DefaultStringValueResolver());
 	}
 
-	public ConfigurableBeanDefinitionVisitor(StringValueResolver stringValueResolver) {
-		super();
-		this.stringValueResolver = stringValueResolver;
-		listeners.add(new DefaultBeanVisitationListener());
+	public void addListener(VisitationListener listener) {
+		listeners.add(listener);
 	}
 
-
-	@Override
-	protected String resolveStringValue(String strVal) {
-		if (this.stringValueResolver == null) {
-			throw new IllegalStateException("No StringValueResolver specified");
-		}
-		String resolvedValue = this.stringValueResolver.resolveStringValue(strVal);
-		return (strVal.equals(resolvedValue) ? strVal : resolvedValue);
-	}
-
-	public StringValueResolver getStringValueResolver() {
-		return stringValueResolver;
-	}
-
-	public void setStringValueResolver(StringValueResolver stringValueResolver) {
-		this.stringValueResolver = stringValueResolver;
+	public NotifyingBeanDefinitionVisitor(StringValueResolver stringValueResolver) {
+		super(stringValueResolver);
+		addListener(new DefaultBeanVisitationListener());
 	}
 
 	@Override

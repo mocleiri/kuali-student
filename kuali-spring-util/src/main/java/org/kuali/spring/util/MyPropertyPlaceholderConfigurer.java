@@ -49,7 +49,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 			ignoreUnresolvablePlaceholders);
 	PropertiesRetriever retriever = new PropertiesRetriever();
 	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, nullValue);
-	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor(stringResolver);
+	NotifyingBeanDefinitionVisitor beanDefinitionVisitor = new NotifyingBeanDefinitionVisitor(stringResolver);
 
 	@Override
 	public void setLocations(Resource[] locations) {
@@ -197,11 +197,11 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		return beanFactory;
 	}
 
-	public ConfigurableBeanDefinitionVisitor getBeanDefinitionVisitor() {
+	public NotifyingBeanDefinitionVisitor getBeanDefinitionVisitor() {
 		return beanDefinitionVisitor;
 	}
 
-	public void setBeanDefinitionVisitor(ConfigurableBeanDefinitionVisitor beanDefinitionVisitor) {
+	public void setBeanDefinitionVisitor(NotifyingBeanDefinitionVisitor beanDefinitionVisitor) {
 		this.beanDefinitionVisitor = beanDefinitionVisitor;
 	}
 
