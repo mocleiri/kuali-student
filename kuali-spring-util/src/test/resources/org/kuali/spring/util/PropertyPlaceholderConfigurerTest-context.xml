@@ -11,7 +11,8 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="configurer.test" class="org.kuali.spring.util.MyPropertyPlaceholderConfigurer" p:order="10000">
+  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:ignoreResourceNotFound="true" />
+  <bean id="property.configurer" class="org.kuali.spring.util.MyPropertyPlaceholderConfigurer" p:loader-ref="property.loader">
     <property name="locations">
       <list>
         <value>classpath:org/kuali/spring/util/default-properties.xml</value>
