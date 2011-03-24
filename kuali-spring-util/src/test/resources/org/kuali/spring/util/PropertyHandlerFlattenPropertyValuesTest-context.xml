@@ -16,7 +16,7 @@
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:loggerSupport-ref="property.logger" />
   <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:loggerSupport-ref="property.logger"
     p:helper-ref="property.helper" />
-  <bean id="property.retriever" class="org.kuali.spring.util.HelloWorldRetriever" />
+  <bean id="property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" />
   <bean id="property.string.resolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:replacer-ref="property.replacer"
     p:retriever-ref="property.retriever" />
