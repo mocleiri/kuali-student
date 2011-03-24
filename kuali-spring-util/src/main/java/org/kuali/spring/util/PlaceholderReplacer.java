@@ -32,7 +32,6 @@ public class PlaceholderReplacer {
 	String simplePrefix;
 	String valueSeparator;
 	boolean ignoreUnresolvablePlaceholders;
-	String nullValue;
 	Properties resolvedCache = new Properties();
 
 	public PlaceholderReplacer() {
@@ -286,14 +285,6 @@ public class PlaceholderReplacer {
 
 	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
-	}
-
-	public String getNullValue() {
-		return nullValue;
-	}
-
-	public void setNullValue(String nullValue) {
-		this.nullValue = nullValue;
 	}
 
 	public Properties getResolvedCache() {
