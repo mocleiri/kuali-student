@@ -45,7 +45,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 			PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	PropertiesRetriever retriever = new PropertiesRetriever();
 	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, null);
-	BeanDefinitionVisitor beanDefinitionVisitor = new NotifyingBeanDefinitionVisitor(stringResolver);
+	BeanDefinitionVisitor visitor = new NotifyingBeanDefinitionVisitor(stringResolver);
 
 	@Override
 	public void setLocation(Resource location) {
@@ -128,7 +128,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	protected void processBeanDefinition(String currentBean, BeanDefinition bd) {
 		try {
-			beanDefinitionVisitor.visitBeanDefinition(bd);
+			visitor.visitBeanDefinition(bd);
 		} catch (Exception e) {
 			throw new BeanDefinitionStoreException(bd.getResourceDescription(), currentBean, e.getMessage(), e);
 		}
@@ -319,12 +319,12 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.springProperties = springProperties;
 	}
 
-	public BeanDefinitionVisitor getBeanDefinitionVisitor() {
-		return beanDefinitionVisitor;
+	public BeanDefinitionVisitor getVisitor() {
+		return visitor;
 	}
 
-	public void setBeanDefinitionVisitor(BeanDefinitionVisitor beanDefinitionVisitor) {
-		this.beanDefinitionVisitor = beanDefinitionVisitor;
+	public void setVisitor(BeanDefinitionVisitor beanDefinitionVisitor) {
+		this.visitor = beanDefinitionVisitor;
 	}
 
 }

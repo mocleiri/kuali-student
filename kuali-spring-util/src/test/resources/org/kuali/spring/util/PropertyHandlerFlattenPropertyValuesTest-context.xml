@@ -10,9 +10,7 @@
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
 
-  <bean id="property.logger" class="org.kuali.spring.util.PropertiesLoggerSupport" p:flattenPropertyValues="true"
-    p:maskValue="foobar" />
-
+  <bean id="property.logger" class="org.kuali.spring.util.PropertiesLoggerSupport" />
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:loggerSupport-ref="property.logger" />
   <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:loggerSupport-ref="property.logger"
     p:helper-ref="property.helper" />
@@ -26,7 +24,7 @@
 
   <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:location="classpath:org/kuali/spring/util/test.properties"
     p:loggerSupport-ref="property.logger" p:helper-ref="property.helper" p:loader-ref="property.loader" p:retriever-ref="property.retriever"
-    p:beanDefinitionVisitor-ref="property.bean.visitor" />
+    p:visitor-ref="property.bean.visitor" />
 
   <bean id="cat" class="org.kuali.spring.util.bean.Cat" p:prey="${cat.prey}" />
 </beans>
