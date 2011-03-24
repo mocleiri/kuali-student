@@ -23,6 +23,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
+	public static final boolean DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND = false;
+	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
 
 	String beanName;
 	BeanFactory beanFactory;
@@ -35,16 +37,17 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	String nullValue;
 	String fileEncoding;
 	String valueSeparator;
-
+	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
-	boolean ignoreResourceNotFound = PropertiesHelper.DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
+	boolean ignoreResourceNotFound = DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND;
 	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 	String placeholderPrefix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX;
 	String placeholderSuffix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX;
 	boolean ignoreUnresolvablePlaceholders = DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS;
 
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
-	PropertiesHelper propertiesHelper = new PropertiesHelper(ignoreResourceNotFound, fileEncoding);
+	PropertiesHelper helper = new PropertiesHelper();
+	PropertiesLoader loader = new PropertiesLoader();
 	PlaceholderReplacer replacer = new PlaceholderReplacer(placeholderPrefix, placeholderSuffix, valueSeparator,
 			ignoreUnresolvablePlaceholders);
 	PropertiesRetriever retriever = new PropertiesRetriever();
@@ -71,7 +74,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		}
 
 		// Clone the original properties
-		rawProperties = propertiesHelper.getClone(properties);
+		rawProperties = helper.getClone(properties);
 
 		// Properties after all placeholders have been resolved
 		resolvedProperties = getResolvedProperties(properties);
@@ -82,7 +85,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		}
 
 		// Synchronize the properties passed in with our resolved properties
-		propertiesHelper.syncProperties(properties, resolvedProperties);
+		helper.syncProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
 			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
@@ -160,25 +163,26 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	 */
 	@Override
 	protected void loadProperties(Properties properties) throws IOException {
-		this.propertiesHelper.loadProperties(properties, getLocations());
+		this.loader.loadProperties(properties, getLocations());
 	}
 
 	@Override
 	protected Properties mergeProperties() throws IOException {
 		// The super class loads properties from resources as well as properties defined directly on this bean
-		Properties properties = super.mergeProperties();
+		Properties managedProperties = super.mergeProperties();
 		// Give the retriever a handle to the properties
-		retriever.setProperties(properties);
+		retriever.setProperties(managedProperties);
 		// Preserve just the Spring properties
-		setSpringProperties(propertiesHelper.getClone(properties));
+		setSpringProperties(helper.getClone(managedProperties));
 		// Merge in the system properties as appropriate
-		propertiesHelper.mergeSystemProperties(properties, getSystemPropertiesMode());
+		helper.mergeSystemProperties(managedProperties, getSystemPropertiesMode());
 		// Merge in environment properties as appropriate
-		propertiesHelper.mergeEnvironmentProperties(properties, isSearchSystemEnvironment());
+		helper.mergeEnvironmentProperties(managedProperties, isSearchSystemEnvironment(),
+				getEnvironmentPropertyPrefix());
 		// Store the complete set of properties that will be used during placeholder replacement
-		setProperties(properties);
+		setManagedProperties(managedProperties);
 		// return the complete set of properties
-		return properties;
+		return managedProperties;
 	}
 
 	@Override
@@ -280,12 +284,12 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		this.systemPropertiesMode = systemPropertiesMode;
 	}
 
-	public PropertiesHelper getPropertiesHelper() {
-		return propertiesHelper;
+	public PropertiesHelper getHelper() {
+		return helper;
 	}
 
-	public void setPropertiesHelper(PropertiesHelper propertiesHelper) {
-		this.propertiesHelper = propertiesHelper;
+	public void setHelper(PropertiesHelper propertiesHelper) {
+		this.helper = propertiesHelper;
 	}
 
 	public PlaceholderReplacer getReplacer() {
@@ -362,6 +366,26 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	public void setResolvedProperties(Properties resolvedProperties) {
 		this.resolvedProperties = resolvedProperties;
+	}
+
+	public String getEnvironmentPropertyPrefix() {
+		return environmentPropertyPrefix;
+	}
+
+	public void setEnvironmentPropertyPrefix(String environmentPropertyPrefix) {
+		this.environmentPropertyPrefix = environmentPropertyPrefix;
+	}
+
+	public PropertiesLoader getLoader() {
+		return loader;
+	}
+
+	public void setLoader(PropertiesLoader loader) {
+		this.loader = loader;
+	}
+
+	public void setManagedProperties(Properties managedProperties) {
+		this.managedProperties = managedProperties;
 	}
 
 }

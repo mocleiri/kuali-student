@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderSupport;
 import org.springframework.util.DefaultPropertiesPersister;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.PropertiesPersister;
 
 public class PropertiesLoader {
@@ -19,6 +18,7 @@ public class PropertiesLoader {
 
 	PropertiesPersister persister = new DefaultPropertiesPersister();
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+	PropertiesHelper helper = new PropertiesHelper();
 
 	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
 	String fileEncoding;
@@ -104,54 +104,7 @@ public class PropertiesLoader {
 		}
 		for (Resource location : locations) {
 			Properties newProps = getProperties(location);
-			mergeProperties(properties, newProps, true, PropertiesSource.RESOURCE.toString());
-		}
-	}
-
-	/**
-	 * Merge the property under 'key' from newProps into currentProps. If override is false and the property already
-	 * exists do not update currentProps
-	 * 
-	 * @param currentProps
-	 * @param newProps
-	 * @param key
-	 * @param override
-	 * @param src
-	 */
-	protected void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
-		// Extract the new value
-		String newValue = newProps.getProperty(key);
-
-		// Ignore values that are null
-		if (newValue == null) {
-			return;
-		}
-
-		// Extract the existing property
-		String currentValue = currentProps.getProperty(key);
-
-		// There is no existing property
-		if (currentValue == null) {
-			logger.debug("Adding " + src + " property {}=[{}]", key, newValue);
-			currentProps.setProperty(key, newValue);
-			return;
-		}
-
-		// Values are the same, nothing to do
-		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
-			return;
-		}
-
-		// There is an existing property, but the new property wins
-		if (override) {
-			logger.info(src + " property override for '" + key + "' [{}]->[{}]", currentValue, newValue);
-			currentProps.setProperty(key, newValue);
-		}
-	}
-
-	public void mergeProperties(Properties currentProps, Properties newProps, boolean override, String source) {
-		for (String key : newProps.stringPropertyNames()) {
-			mergeProperty(currentProps, newProps, key, override, source);
+			helper.mergeProperties(properties, newProps, true, PropertiesSource.RESOURCE.toString());
 		}
 	}
 
