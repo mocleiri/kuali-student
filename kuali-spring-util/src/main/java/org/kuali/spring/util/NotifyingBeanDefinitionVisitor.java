@@ -30,21 +30,6 @@ public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	}
 
 	@Override
-	protected void visitPropertyValues(MutablePropertyValues pvs) {
-		PropertyValue[] pvArray = pvs.getPropertyValues();
-		for (PropertyValue pv : pvArray) {
-			Object newVal = visitPropertyValue(pv);
-			if (!ObjectUtils.nullSafeEquals(newVal, pv.getValue())) {
-				pvs.add(pv.getName(), newVal);
-			}
-		}
-	}
-
-	protected Object visitPropertyValue(PropertyValue pv) {
-		return resolveValue(pv.getValue());
-	}
-
-	@Override
 	protected Object resolveValue(Object value) {
 		Object newValue = super.resolveValue(value);
 		valueResolved(value, newValue);
@@ -58,17 +43,49 @@ public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
 		afterVisit(beanDefinition);
 	}
 
+	@Override
+	protected void visitPropertyValues(MutablePropertyValues pvs) {
+		PropertyValue[] pvArray = pvs.getPropertyValues();
+		for (PropertyValue pv : pvArray) {
+			visitPropertyValue(pvs, pv);
+		}
+	}
+
+	protected void visitPropertyValue(MutablePropertyValues pvs, PropertyValue pv) {
+		beforeVisit(pvs, pv);
+		Object oldVal = pv.getValue();
+		Object newVal = resolveValue(pv.getValue());
+		if (!ObjectUtils.nullSafeEquals(newVal, oldVal)) {
+			pvs.add(pv.getName(), newVal);
+		}
+		afterVisit(pvs, pv, oldVal, newVal);
+	}
+
+	protected void beforeVisit(MutablePropertyValues pvs, PropertyValue pv) {
+		PropertyValueVisitationEvent event = new PropertyValueVisitationEvent(pvs, pv);
+		for (VisitationListener listener : listeners) {
+			listener.afterVisit(event);
+		}
+	}
+
+	protected void afterVisit(MutablePropertyValues pvs, PropertyValue pv, Object oldVal, Object newVal) {
+		PropertyValueVisitationEvent event = new PropertyValueVisitationEvent(pvs, pv, oldVal, newVal);
+		for (VisitationListener listener : listeners) {
+			listener.afterVisit(event);
+		}
+	}
+
 	protected void beforeVisit(BeanDefinition beanDefinition) {
 		BeanVisitationEvent event = new BeanVisitationEvent(beanDefinition);
 		for (VisitationListener listener : listeners) {
-			listener.beforeBeanVisit(event);
+			listener.beforeVisit(event);
 		}
 	}
 
 	protected void afterVisit(BeanDefinition beanDefinition) {
 		BeanVisitationEvent event = new BeanVisitationEvent(beanDefinition);
 		for (VisitationListener listener : listeners) {
-			listener.afterBeanVisit(event);
+			listener.afterVisit(event);
 		}
 	}
 
