@@ -5,15 +5,15 @@ import java.util.Properties;
 /**
  * 
  */
-public class SimplePropertyRetriever implements PropertyRetriever {
+public class PropertiesRetriever implements PropertyRetriever {
 
 	Properties properties;
 
-	public SimplePropertyRetriever() {
+	public PropertiesRetriever() {
 		this(null);
 	}
 
-	public SimplePropertyRetriever(Properties properties) {
+	public PropertiesRetriever(Properties properties) {
 		super();
 		setProperties(properties);
 	}

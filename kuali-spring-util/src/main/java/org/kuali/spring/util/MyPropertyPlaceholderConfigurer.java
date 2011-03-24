@@ -47,8 +47,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	PropertiesHelper propertiesHelper = new PropertiesHelper(ignoreResourceNotFound, fileEncoding);
 	PlaceholderReplacer replacer = new PlaceholderReplacer(placeholderPrefix, placeholderSuffix, valueSeparator,
 			ignoreUnresolvablePlaceholders);
-	SimplePropertyRetriever propertyResolver = new SimplePropertyRetriever();
-	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, propertyResolver, nullValue);
+	PropertiesRetriever retriever = new PropertiesRetriever();
+	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, nullValue);
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor(stringResolver);
 
 	@Override
@@ -99,20 +99,20 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		logger.trace("Resolving placeholders in key '{}'", key);
 		String resolvedKey = replacer.replacePlaceholders(key, originalProperties);
 		if (!key.equals(resolvedKey)) {
-			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
+			logger.info("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
 		// Get a value for the key
-		String rawValue = propertyResolver.getProperty(key);
+		String rawValue = retriever.getProperty(key);
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Replacing placeholders in value [{}]", rawValue);
 		// Now replace any placeholders in the value
-		String newValue = replacer.replacePlaceholders(rawValue, originalProperties);
-		if (!rawValue.equals(newValue)) {
-			logger.trace("Resolved value [{}]->[{}]", rawValue, newValue);
+		String resolvedValue = replacer.replacePlaceholders(rawValue, originalProperties);
+		if (!rawValue.equals(resolvedValue)) {
+			logger.info("Resolved value for '" + resolvedKey + "' [{}]->[{}]", rawValue, resolvedValue);
 		}
 		// The only items allowed into resolvedProperties are fully resolved keys and values
-		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, newValue);
-		resolvedProperties.setProperty(resolvedKey, newValue);
+		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, resolvedValue);
+		resolvedProperties.setProperty(resolvedKey, resolvedValue);
 	}
 
 	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
@@ -161,7 +161,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	protected Properties mergeProperties() throws IOException {
 		// The super class loads properties from resources as well as properties defined directly on this bean
 		Properties properties = super.mergeProperties();
-		propertyResolver.setProperties(properties);
+		retriever.setProperties(properties);
 		// Preserve just the Spring properties
 		setSpringProperties(propertiesHelper.getClone(properties));
 		// Merge in the system properties as appropriate
@@ -337,12 +337,12 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
-	public SimplePropertyRetriever getPropertyResolver() {
-		return propertyResolver;
+	public PropertiesRetriever getRetriever() {
+		return retriever;
 	}
 
-	public void setPropertyResolver(SimplePropertyRetriever propertyResolver) {
-		this.propertyResolver = propertyResolver;
+	public void setRetriever(PropertiesRetriever propertyResolver) {
+		this.retriever = propertyResolver;
 	}
 
 	public Properties getRawProperties() {

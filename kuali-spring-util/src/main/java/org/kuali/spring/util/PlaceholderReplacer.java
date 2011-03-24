@@ -67,16 +67,16 @@ public class PlaceholderReplacer {
 
 	public String replacePlaceholders(String value, Properties properties) {
 		Assert.notNull(properties, "Argument 'properties' must not be null.");
-		PropertyRetriever resolver = new SimplePropertyRetriever(properties);
-		return replacePlaceholders(value, resolver);
+		PropertyRetriever retriever = new PropertiesRetriever(properties);
+		return replacePlaceholders(value, retriever);
 	}
 
-	public String replacePlaceholders(String value, PropertyRetriever resolver) {
+	public String replacePlaceholders(String value, PropertyRetriever retriever) {
 		Assert.notNull(value, "Argument 'value' must not be null.");
-		return parseStringValue(value, resolver, new HashSet<String>());
+		return parseStringValue(value, retriever, new HashSet<String>());
 	}
 
-	protected String parseStringValue(String strVal, PropertyRetriever resolver, Set<String> visitedPlaceholders) {
+	protected String parseStringValue(String strVal, PropertyRetriever retriever, Set<String> visitedPlaceholders) {
 		StringBuilder buf = new StringBuilder(strVal);
 		int startIndex = strVal.indexOf(this.placeholderPrefix);
 		if (startIndex == -1) {
@@ -85,7 +85,7 @@ public class PlaceholderReplacer {
 		}
 		logger.trace("Parsing [{}]", strVal);
 		while (startIndex != -1) {
-			startIndex = processString(new ProcessStringContext(resolver, visitedPlaceholders, startIndex, buf));
+			startIndex = processString(new ProcessStringContext(retriever, visitedPlaceholders, startIndex, buf));
 		}
 		return buf.toString();
 	}
@@ -113,7 +113,7 @@ public class PlaceholderReplacer {
 		}
 
 		// Recursive invocation, replace any placeholders inside the key
-		String finalKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
+		String finalKey = parseStringValue(originalKey, ctx.getRetriever(), ctx.getVisitedPlaceholders());
 
 		// Obtain a value for key now that placeholders in the key have been replaced
 
@@ -122,7 +122,7 @@ public class PlaceholderReplacer {
 
 		// Nothing in the cache
 		if (value == null) {
-			value = getValue(finalKey, ctx.getResolver());
+			value = getValue(finalKey, ctx.getRetriever());
 		} else {
 			logger.trace("Resolved the value for '{}' from cache", finalKey);
 		}
@@ -139,9 +139,9 @@ public class PlaceholderReplacer {
 	/**
 	 * Attempt to get a value for this placeholder
 	 */
-	protected String getValue(String key, PropertyRetriever resolver) {
-		// If the resolver gives us something, we're done
-		String propVal = resolver.getProperty(key);
+	protected String getValue(String key, PropertyRetriever retriever) {
+		// If the retriever gives us something, we're done
+		String propVal = retriever.getProperty(key);
 		if (propVal != null) {
 			return propVal;
 		}
@@ -166,10 +166,10 @@ public class PlaceholderReplacer {
 		// Extract the default value they supplied
 		String defaultValue = key.substring(separatorIndex + this.valueSeparator.length());
 
-		// Give the resolver a chance to locate a value
-		propVal = resolver.getProperty(actualKey);
+		// Give the retriever a chance to locate a value
+		propVal = retriever.getProperty(actualKey);
 
-		// If the resolver found something, use it
+		// If the retriever found something, use it
 		if (propVal != null) {
 			return propVal;
 		} else {
@@ -193,7 +193,7 @@ public class PlaceholderReplacer {
 		}
 
 		// Recursive invocation, resolve any placeholders inside the value
-		value = parseStringValue(value, ctx.getResolver(), ctx.getVisitedPlaceholders());
+		value = parseStringValue(value, ctx.getRetriever(), ctx.getVisitedPlaceholders());
 
 		// log that we resolved the placeholder
 		logger.trace("Resolved key '{}' to [{}]", key, value);

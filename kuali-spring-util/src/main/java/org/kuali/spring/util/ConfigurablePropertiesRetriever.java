@@ -1,16 +1,16 @@
 package org.kuali.spring.util;
 
-public class ConfigurablePropertyRetriever extends SimplePropertyRetriever {
+public class ConfigurablePropertiesRetriever extends PropertiesRetriever {
 	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 	public static final boolean DEFAULT_IS_SEARCH_ENVIRONMENT = true;
 	SystemPropertiesMode mode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 	boolean searchEnvironment = DEFAULT_IS_SEARCH_ENVIRONMENT;
 
-	public ConfigurablePropertyRetriever() {
+	public ConfigurablePropertiesRetriever() {
 		this(DEFAULT_SYSTEM_PROPERTIES_MODE, DEFAULT_IS_SEARCH_ENVIRONMENT);
 	}
 
-	public ConfigurablePropertyRetriever(SystemPropertiesMode mode, boolean searchEnvironment) {
+	public ConfigurablePropertiesRetriever(SystemPropertiesMode mode, boolean searchEnvironment) {
 		super();
 		this.mode = mode;
 		this.searchEnvironment = searchEnvironment;

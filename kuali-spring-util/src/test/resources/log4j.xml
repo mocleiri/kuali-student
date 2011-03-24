@@ -11,7 +11,7 @@
     <level value="info" />
   </logger>
   <logger name="org.kuali.spring.util">
-    <level value="trace" />
+    <level value="debug" />
   </logger>
   <root>
     <priority value="info" />
