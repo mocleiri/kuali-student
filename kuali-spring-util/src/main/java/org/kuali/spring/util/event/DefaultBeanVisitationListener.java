@@ -14,7 +14,7 @@ public class DefaultBeanVisitationListener implements VisitationListener {
 			logger.trace("Resolved value is the same as the original value");
 		} else {
 			// The property was updated
-			logger.info("Value updated: [{}]->[{}]", event.getOldValue(), event.getNewValue());
+			logger.trace("Value updated: [{}]->[{}]", event.getOldValue(), event.getNewValue());
 		}
 	}
 
@@ -38,8 +38,7 @@ public class DefaultBeanVisitationListener implements VisitationListener {
 		if (ObjectUtils.nullSafeEquals(event.getOldValue(), event.getNewValue())) {
 			logger.trace("Value for property '{}' was left unchanged", event.getPropertyValue().getName());
 		} else {
-			logger.info("Value for property '" + event.getPropertyValue().getName() + "' updated: [{}]->[{}]",
-					event.getOldValue(), event.getNewValue());
+			logger.info(event.getPropertyValue() + " updated [{}]->[{}]", event.getOldValue(), event.getNewValue());
 		}
 	}
 }

@@ -19,7 +19,9 @@
         <value>classpath:kuali-spring.properties</value>
         <value>classpath:kuali-spring.xml</value>
         <value>${kuali.spring.properties}</value>
+        <value>classpath:org/kuali/spring/util/test.properties</value>
       </list>
     </property>
   </bean>
+  <bean id="cat" class="org.kuali.spring.util.bean.Cat" p:prey="${cat.prey}" />
 </beans>
