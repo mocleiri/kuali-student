@@ -187,7 +187,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		}
 		logger.trace("Parsing [{}]", strVal);
 		while (startIndex != -1) {
-			startIndex = processString(new ProcessStringContext(resolver, visitedPlaceholders, startIndex, buf));
+			// startIndex = processString(new ProcessStringContext(resolver, visitedPlaceholders, startIndex, buf));
 		}
 		return buf.toString();
 	}
@@ -215,18 +215,19 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		}
 
 		// Recursive invocation, resolve any placeholders inside the key
-		String resolvedKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
+		// String resolvedKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
 		// Obtain a value for the resolved key
-		String value = getValue(resolvedKey, ctx.getResolver());
+		// String value = getValue(resolvedKey, ctx.getResolver());
 
-		logger.trace("Processing value [{}]", value);
-		int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
+		// logger.trace("Processing value [{}]", value);
+		// int bufIndex = processValue(ctx, value, endIndex, resolvedKey);
 
 		logger.trace("Removing '{}' from visited keys", originalKey);
 		ctx.getVisitedPlaceholders().remove(originalKey);
 
-		return bufIndex;
+		// return bufIndex;
+		return -1;
 	}
 
 	/**
@@ -290,7 +291,7 @@ public class PropertyPlaceholderHelper implements StringValueResolver, Placehold
 		}
 
 		// Recursive invocation, resolve any placeholders inside the value
-		value = parseStringValue(value, ctx.getResolver(), ctx.getVisitedPlaceholders());
+		// value = parseStringValue(value, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
 		// log that we resolved the placeholder
 		logger.trace("Resolved key '{}' to [{}]", key, value);

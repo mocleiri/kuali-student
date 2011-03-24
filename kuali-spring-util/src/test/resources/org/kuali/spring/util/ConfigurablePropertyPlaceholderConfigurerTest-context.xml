@@ -15,7 +15,8 @@
   <bean id="kuali.spring.property.bean.visitor" class="org.kuali.spring.util.ConfigurableBeanDefinitionVisitor"
     p:stringValueResolver="kuali.spring.property.helper" />
 
-  <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer"
+<!-- 
+  <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurerTest"
     p:order="10000" p:beanDefinitionVisitor-ref="kuali.spring.property.bean.visitor" >
     <property name="locations">
       <list>
@@ -26,4 +27,5 @@
       </list>
     </property>
   </bean>
+   -->
 </beans>

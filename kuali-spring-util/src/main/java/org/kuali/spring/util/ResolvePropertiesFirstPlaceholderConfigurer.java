@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
  * resolving placeholders in Spring beans. This allows you to do something useful with the complete set of resolved
  * Spring properties known to this configurer. (eg logging them, debugging them etc)
  */
-public class ResolvePropertiesFirstPlaceholderConfigurer extends ConfigurablePropertyPlaceholderConfigurer {
-	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurer.class);
+public class ResolvePropertiesFirstPlaceholderConfigurer extends MyPropertyPlaceholderConfigurer {
+	private final Logger logger = LoggerFactory.getLogger(ResolvePropertiesFirstPlaceholderConfigurerTest.class);
 	Properties rawProperties;
 	Properties resolvedProperties;
 

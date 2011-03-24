@@ -15,9 +15,9 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
 
-public class ConfigurablePropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
+public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
-	final Logger logger = LoggerFactory.getLogger(ConfigurablePropertyPlaceholderConfigurer.class);
+	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
 	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
 
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
