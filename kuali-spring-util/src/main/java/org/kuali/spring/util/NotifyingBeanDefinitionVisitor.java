@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionVisitor;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringValueResolver;
 
 public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
@@ -24,6 +27,21 @@ public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	public NotifyingBeanDefinitionVisitor(StringValueResolver stringValueResolver) {
 		super(stringValueResolver);
 		addListener(new DefaultBeanVisitationListener());
+	}
+
+	@Override
+	protected void visitPropertyValues(MutablePropertyValues pvs) {
+		PropertyValue[] pvArray = pvs.getPropertyValues();
+		for (PropertyValue pv : pvArray) {
+			Object newVal = visitPropertyValue(pv);
+			if (!ObjectUtils.nullSafeEquals(newVal, pv.getValue())) {
+				pvs.add(pv.getName(), newVal);
+			}
+		}
+	}
+
+	protected Object visitPropertyValue(PropertyValue pv) {
+		return resolveValue(pv.getValue());
 	}
 
 	@Override
