@@ -13,14 +13,13 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringValueResolver;
 
-public class PropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
+public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
-	final Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);
+	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
 	public static final boolean DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND = false;
@@ -39,8 +38,8 @@ public class PropertyPlaceholderConfigurer extends PropertyResourceConfigurer im
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
 	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
-	String placeholderPrefix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX;
-	String placeholderSuffix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX;
+	String placeholderPrefix = org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX;
+	String placeholderSuffix = org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX;
 	boolean ignoreUnresolvablePlaceholders = DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS;
 
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();

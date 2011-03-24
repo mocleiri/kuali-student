@@ -25,7 +25,7 @@ public class MyPropertyPlaceholderConfigurerTest {
 
 	@Test
 	public void test1() throws IOException {
-		PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
+		PropertyHandler configurer = new PropertyHandler();
 		configurer.setLocations(getLocations());
 		Properties properties = configurer.mergeProperties();
 		configurer.convertProperties(properties);
