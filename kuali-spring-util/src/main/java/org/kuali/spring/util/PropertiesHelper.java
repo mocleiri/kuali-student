@@ -147,10 +147,10 @@ public class PropertiesHelper {
 			return;
 		}
 
-		// Extract the existing property
+		// Extract the existing value
 		String currentValue = currentProps.getProperty(key);
 
-		// There is no existing property
+		// There is no existing value for this key
 		if (currentValue == null) {
 			logger.debug("Adding " + src + " property {}=[{}]", key, newValue);
 			currentProps.setProperty(key, newValue);
