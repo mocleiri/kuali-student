@@ -18,12 +18,12 @@ public class PropertiesHelper {
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 
 	/**
-	 * Remove any properties not in approvedKeys
+	 * Remove any keys from properties that are not in approvedKeys
 	 * 
 	 * @param properties
 	 * @param approvedKeys
 	 */
-	protected void removeKeys(Properties properties, Set<String> approvedKeys) {
+	public void removeKeys(Properties properties, Set<String> approvedKeys) {
 		// Extract the set of existing property names
 		Set<String> keys = properties.stringPropertyNames();
 		for (String key : keys) {
@@ -43,7 +43,7 @@ public class PropertiesHelper {
 	 * @param properties
 	 * @param necessaryProperties
 	 */
-	protected void addProperties(Properties properties, Properties necessaryProperties) {
+	public void addProperties(Properties properties, Properties necessaryProperties) {
 		// Extract the set of necessary property names
 		Set<String> necessaryKeys = necessaryProperties.stringPropertyNames();
 		// Extract the set of existing property names
@@ -77,7 +77,7 @@ public class PropertiesHelper {
 		syncValues(oldProperties, newProperties);
 	}
 
-	protected void syncValues(Properties oldProperties, Properties newProperties) {
+	public void syncValues(Properties oldProperties, Properties newProperties) {
 		List<String> oldNames = new ArrayList<String>(oldProperties.stringPropertyNames());
 		Collections.sort(oldNames);
 		Iterator<String> itr = oldNames.iterator();
@@ -113,7 +113,7 @@ public class PropertiesHelper {
 		return clone;
 	}
 
-	protected Properties getEnvironmentAsProperties(String prefix) {
+	public Properties getEnvironmentAsProperties(String prefix) {
 		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreExceptions();
 		Properties envProps = new Properties();
 		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
@@ -141,7 +141,7 @@ public class PropertiesHelper {
 	 * @param override
 	 * @param src
 	 */
-	protected void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
+	public void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
 		// Extract the new value
 		String newValue = newProps.getProperty(key);
 
