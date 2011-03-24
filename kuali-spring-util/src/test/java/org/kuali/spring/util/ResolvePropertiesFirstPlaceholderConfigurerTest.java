@@ -11,7 +11,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurerTest {
 
 	@Test
 	public void helloWorld() throws IOException {
-		ResourceLoader loader = new DefaultResourceLoader();
+	    ResourceLoader loader = new DefaultResourceLoader();
 		String location = "classpath:org/kuali/spring/util/test.properties";
 		Resource resource = loader.getResource(location);
 		Resource[] resourceLocations = new Resource[] { resource };

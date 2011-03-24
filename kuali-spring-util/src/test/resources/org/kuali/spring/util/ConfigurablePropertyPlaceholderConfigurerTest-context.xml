@@ -11,11 +11,11 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+<!-- 
   <bean id="kuali.spring.property.helper" class="org.kuali.spring.util.PropertyPlaceholderHelper" />
   <bean id="kuali.spring.property.bean.visitor" class="org.kuali.spring.util.ConfigurableBeanDefinitionVisitor"
     p:stringValueResolver="kuali.spring.property.helper" />
 
-<!-- 
   <bean id="kuali.spring.property.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurerTest"
     p:order="10000" p:beanDefinitionVisitor-ref="kuali.spring.property.bean.visitor" >
     <property name="locations">
