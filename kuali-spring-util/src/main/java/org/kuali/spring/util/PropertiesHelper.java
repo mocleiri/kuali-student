@@ -86,19 +86,22 @@ public class PropertiesHelper {
 	}
 
 	/**
-	 * Make oldProperties the same as newProperties. Remove any old properties that are not in new. Add any properties
-	 * from new that are not in old. Update properties in old to the values from new
+	 * Make oldProperties the same as newProperties. Remove any properties from old that are not in new. Add any
+	 * properties from new that are not in old. Update properties in old to the values from new
 	 * 
 	 * @param oldProperties
 	 * @param newProperties
 	 */
-	public void replaceProperties(Properties oldProperties, Properties newProperties) {
+	public void syncProperties(Properties oldProperties, Properties newProperties) {
+		// Remove anything from oldProperties that is not in newProperties
 		removeProperties(oldProperties, newProperties.stringPropertyNames());
+		// Add anything from newProperties that is not in oldProperties
 		addProperties(oldProperties, newProperties);
-		updateProperties(oldProperties, newProperties);
+		// Set values in old to the values from new
+		syncValues(oldProperties, newProperties);
 	}
 
-	protected void updateProperties(Properties oldProperties, Properties newProperties) {
+	protected void syncValues(Properties oldProperties, Properties newProperties) {
 		List<String> oldNames = new ArrayList<String>(oldProperties.stringPropertyNames());
 		Collections.sort(oldNames);
 		Iterator<String> itr = oldNames.iterator();
@@ -218,7 +221,10 @@ public class PropertiesHelper {
 		return envProps;
 	}
 
-	public void mergeEnvironmentProperties(Properties currentProps) {
+	public void mergeEnvironmentProperties(Properties currentProps, boolean mergeEnvironmentProperties) {
+		if (!mergeEnvironmentProperties) {
+			return;
+		}
 		logger.info("Merging environment properties");
 		String source = PropertiesSource.ENVIRONMENT.toString();
 		mergeProperties(currentProps, getEnvironmentAsProperties(getEnvironmentPropertyPrefix()), true, source);

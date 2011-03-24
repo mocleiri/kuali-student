@@ -2,6 +2,7 @@ package org.kuali.spring.util;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +38,77 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	PropertiesHelper propertiesHelper = new PropertiesHelper(ignoreResourceNotFound, fileEncoding);
 	PlaceholderReplacer replacer = new PlaceholderReplacer(placeholderPrefix, placeholderSuffix, valueSeparator,
 			ignoreUnresolvablePlaceholders);
-	PropertyResolver propertyResolver = new SimplePropertyResolver(properties);
+	SimplePropertyResolver propertyResolver = new SimplePropertyResolver(properties);
 	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, propertyResolver, nullValue);
 	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor(stringResolver);
 	Properties springProperties;
-	Resource[] resourceLocations;
+	Properties rawProperties;
+	Properties resolvedProperties;
+	Resource[] locations;
+
+	@Override
+	public void setLocations(Resource[] locations) {
+		this.locations = locations;
+		super.setLocations(locations);
+	}
+
+	@Override
+	public void convertProperties(Properties properties) {
+		if (properties == null || properties.size() == 0) {
+			logger.info("No properties to convert");
+			return;
+		}
+
+		// Clone the original properties
+		rawProperties = propertiesHelper.getClone(properties);
+
+		// Properties after all placeholders have been resolved
+		resolvedProperties = getResolvedProperties(properties);
+
+		if (logger.isDebugEnabled()) {
+			logger.debug(loggerSupport.getLogEntry(rawProperties, "*** Raw Properties ***"));
+			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Properties ***"));
+		}
+
+		// Update the original properties with our resolved properties
+		propertiesHelper.syncProperties(properties, resolvedProperties);
+
+		if (logger.isInfoEnabled()) {
+			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
+		}
+	}
+
+	protected Properties getResolvedProperties(Properties properties) {
+		logger.info("Resolving placeholders in properties");
+		Properties resolvedProperties = new Properties();
+		Set<String> keys = properties.stringPropertyNames();
+		for (String key : keys) {
+			resolveProperty(key, properties, resolvedProperties);
+		}
+		return resolvedProperties;
+
+	}
+
+	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
+		// First resolve any placeholders in the key itself
+		logger.trace("Resolving placeholders in key '{}'", key);
+		String resolvedKey = replacer.replacePlaceholders(key, originalProperties);
+		if (!key.equals(resolvedKey)) {
+			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
+		}
+		// Get a value for the key
+		String rawValue = propertyResolver.getProperty(key);
+		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
+		logger.trace("Resolving placeholders in value [{}]", rawValue);
+		// Now resolve any placeholders in the value
+		String resolvedValue = replacer.replacePlaceholders(rawValue, originalProperties);
+		if (!rawValue.equals(resolvedValue)) {
+			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
+		}
+		// The only items allowed into resolvedProperties are fully resolved keys and values
+		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, resolvedValue);
+		resolvedProperties.setProperty(resolvedKey, resolvedValue);
+	}
 
 	protected boolean currentBeanIsMe(String currentBean, ConfigurableListableBeanFactory beanFactory) {
 		if (!currentBean.equals(this.beanName)) {
@@ -77,12 +144,12 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	/**
 	 * Override the default resource loading logic to clean it up and add fine grained logging. Anytime a property value
-	 * is overridden an INFO level logging message is produced. If TRACE is turned on, all properties are logged in the
+	 * is overridden an INFO level logging message is produced. With TRACE turned on, all properties are logged in the
 	 * order they are loaded
 	 */
 	@Override
 	protected void loadProperties(Properties properties) throws IOException {
-		this.propertiesHelper.loadProperties(properties, getResourceLocations());
+		this.propertiesHelper.loadProperties(properties, getLocations());
 	}
 
 	@Override
@@ -94,9 +161,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		// Merge in the system properties as appropriate
 		propertiesHelper.mergeSystemProperties(properties, getSystemPropertiesMode());
 		// Merge in environment properties as appropriate
-		if (isSearchSystemEnvironment()) {
-			propertiesHelper.mergeEnvironmentProperties(properties);
-		}
+		propertiesHelper.mergeEnvironmentProperties(properties, isSearchSystemEnvironment());
 		// Store the complete set of properties that will be used during placeholder replacement
 		setProperties(properties);
 		// return the complete set of properties
@@ -162,12 +227,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		return springProperties;
 	}
 
-	public Resource[] getResourceLocations() {
-		return resourceLocations;
-	}
-
-	public void setResourceLocations(Resource[] resourceLocations) {
-		this.resourceLocations = resourceLocations;
+	public Resource[] getLocations() {
+		return locations;
 	}
 
 	public String getNullValue() {
@@ -226,14 +287,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		this.replacer = replacer;
 	}
 
-	public PropertyResolver getPropertyResolver() {
-		return propertyResolver;
-	}
-
-	public void setPropertyResolver(PropertyResolver propertyResolver) {
-		this.propertyResolver = propertyResolver;
-	}
-
 	public StringValueResolver getStringResolver() {
 		return stringResolver;
 	}
@@ -244,6 +297,62 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	public void setSpringProperties(Properties springProperties) {
 		this.springProperties = springProperties;
+	}
+
+	public String getPlaceholderPrefix() {
+		return placeholderPrefix;
+	}
+
+	public void setPlaceholderPrefix(String placeholderPrefix) {
+		this.placeholderPrefix = placeholderPrefix;
+	}
+
+	public String getPlaceholderSuffix() {
+		return placeholderSuffix;
+	}
+
+	public void setPlaceholderSuffix(String placeholderSuffix) {
+		this.placeholderSuffix = placeholderSuffix;
+	}
+
+	public String getValueSeparator() {
+		return valueSeparator;
+	}
+
+	public void setValueSeparator(String valueSeparator) {
+		this.valueSeparator = valueSeparator;
+	}
+
+	public boolean isIgnoreUnresolvablePlaceholders() {
+		return ignoreUnresolvablePlaceholders;
+	}
+
+	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
+		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
+	}
+
+	public SimplePropertyResolver getPropertyResolver() {
+		return propertyResolver;
+	}
+
+	public void setPropertyResolver(SimplePropertyResolver propertyResolver) {
+		this.propertyResolver = propertyResolver;
+	}
+
+	public Properties getRawProperties() {
+		return rawProperties;
+	}
+
+	public void setRawProperties(Properties rawProperties) {
+		this.rawProperties = rawProperties;
+	}
+
+	public Properties getResolvedProperties() {
+		return resolvedProperties;
+	}
+
+	public void setResolvedProperties(Properties resolvedProperties) {
+		this.resolvedProperties = resolvedProperties;
 	}
 
 }

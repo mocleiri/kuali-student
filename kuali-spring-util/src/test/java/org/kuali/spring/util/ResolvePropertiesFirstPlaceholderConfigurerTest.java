@@ -16,7 +16,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurerTest {
 		Resource resource = loader.getResource(location);
 		Resource[] resourceLocations = new Resource[] { resource };
 		ResolvePropertiesFirstPlaceholderConfigurer rpfpc = new ResolvePropertiesFirstPlaceholderConfigurer();
-		rpfpc.setResourceLocations(resourceLocations);
+		rpfpc.setLocations(resourceLocations);
 		rpfpc.mergeProperties();
 	}
 

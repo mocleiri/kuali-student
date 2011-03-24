@@ -67,7 +67,7 @@ public class PropertiesHelperTest {
 		newProps.setProperty("d", "5");
 
 		PropertiesHelper helper = new PropertiesHelper();
-		helper.replaceProperties(oldProps, newProps);
+		helper.syncProperties(oldProps, newProps);
 		for (String key : oldProps.stringPropertyNames()) {
 			Assert.assertEquals(newProps.getProperty(key), oldProps.getProperty(key));
 		}
