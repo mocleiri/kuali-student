@@ -8,10 +8,9 @@
   xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-<!-- 
 
-  <bean id="placeholder.configurer.test" class="org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer">
-    <property name="resourceLocations">
+  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler">
+    <property name="locations">
       <list>
         <value>classpath:org/kuali/spring/util/test.properties</value>
         <value>classpath:org/kuali/spring/util/test2.properties</value>
@@ -21,6 +20,5 @@
 
   <bean id="cat.test" class="org.kuali.spring.util.bean.Cat" p:actions="${cat.actions}" p:speed="${cat.speed}"
     p:prey="${cat.prey}" />
-    -->
 
 </beans>

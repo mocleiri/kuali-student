@@ -13,6 +13,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringValueResolver;
@@ -21,33 +22,27 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
-	public static final boolean DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND = false;
 	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
+	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 
 	String beanName;
 	BeanFactory beanFactory;
-	Properties managedProperties;
-	Properties springProperties;
+	Properties properties;
+	Properties unresolvedSpringProperties;
 	Properties unresolvedProperties;
-	Properties resolvedProperties;
 	Resource[] locations;
 
-	String nullValue;
-	String valueSeparator;
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
-	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
-	String placeholderPrefix = org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX;
-	String placeholderSuffix = org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX;
-	boolean ignoreUnresolvablePlaceholders = DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS;
+	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 	PropertiesHelper helper = new PropertiesHelper();
 	PropertiesLoader loader = new PropertiesLoader();
-	PlaceholderReplacer replacer = new PlaceholderReplacer(placeholderPrefix, placeholderSuffix, valueSeparator,
-			ignoreUnresolvablePlaceholders);
+	PlaceholderReplacer replacer = new PlaceholderReplacer(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
+			PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	PropertiesRetriever retriever = new PropertiesRetriever();
-	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, nullValue);
+	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, null);
 	NotifyingBeanDefinitionVisitor beanDefinitionVisitor = new NotifyingBeanDefinitionVisitor(stringResolver);
 
 	@Override
@@ -73,18 +68,17 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		unresolvedProperties = helper.getClone(properties);
 
 		// Properties after all placeholders have been resolved
-		resolvedProperties = getResolvedProperties(properties);
+		Properties resolvedProperties = getResolvedProperties(properties);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug(loggerSupport.getLogEntry(unresolvedProperties, "*** Raw Properties ***"));
-			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Properties ***"));
 		}
 
 		// Synchronize the properties passed in with our resolved properties
 		helper.syncProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
-			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
+			logger.info(loggerSupport.getLogEntry(properties, "*** Properties ***"));
 		}
 	}
 
@@ -153,9 +147,9 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	}
 
 	/**
-	 * Override the default resource loading logic to clean it up and add fine grained logging. Anytime a property value
-	 * is overridden an INFO level logging message is produced. With TRACE turned on, all properties are logged in the
-	 * order they are loaded
+	 * Override the default resource loading logic to clean it up and emit sensible log messages. Anytime a property
+	 * value is overridden an INFO level logging message is produced. With TRACE turned on, all properties are logged in
+	 * the order they are loaded
 	 */
 	@Override
 	protected void loadProperties(Properties properties) throws IOException {
@@ -169,7 +163,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		// Give the retriever a handle to the properties
 		retriever.setProperties(managedProperties);
 		// Preserve just the Spring properties
-		setSpringProperties(helper.getClone(managedProperties));
+		setUnresolvedSpringProperties(helper.getClone(managedProperties));
 		// Merge in the system properties as appropriate
 		helper.mergeSystemProperties(managedProperties, getSystemPropertiesMode());
 		// Merge in environment properties as appropriate
@@ -177,7 +171,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 			helper.mergeEnvironmentProperties(managedProperties, getEnvironmentPropertyPrefix());
 		}
 		// Store the complete set of properties that will be used during placeholder replacement
-		setManagedProperties(managedProperties);
+		setProperties(managedProperties);
 		// return the complete set of properties
 		return managedProperties;
 	}
@@ -229,24 +223,16 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.beanFactory = beanFactory;
 	}
 
-	public Properties getManagedProperties() {
-		return managedProperties;
+	public Properties getProperties() {
+		return properties;
 	}
 
-	public Properties getSpringProperties() {
-		return springProperties;
+	public Properties getUnresolvedSpringProperties() {
+		return unresolvedSpringProperties;
 	}
 
 	public Resource[] getLocations() {
 		return locations;
-	}
-
-	public String getNullValue() {
-		return nullValue;
-	}
-
-	public void setNullValue(String nullValue) {
-		this.nullValue = nullValue;
 	}
 
 	public boolean isSearchSystemEnvironment() {
@@ -289,40 +275,8 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.stringResolver = stringResolver;
 	}
 
-	public void setSpringProperties(Properties springProperties) {
-		this.springProperties = springProperties;
-	}
-
-	public String getPlaceholderPrefix() {
-		return placeholderPrefix;
-	}
-
-	public void setPlaceholderPrefix(String placeholderPrefix) {
-		this.placeholderPrefix = placeholderPrefix;
-	}
-
-	public String getPlaceholderSuffix() {
-		return placeholderSuffix;
-	}
-
-	public void setPlaceholderSuffix(String placeholderSuffix) {
-		this.placeholderSuffix = placeholderSuffix;
-	}
-
-	public String getValueSeparator() {
-		return valueSeparator;
-	}
-
-	public void setValueSeparator(String valueSeparator) {
-		this.valueSeparator = valueSeparator;
-	}
-
-	public boolean isIgnoreUnresolvablePlaceholders() {
-		return ignoreUnresolvablePlaceholders;
-	}
-
-	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
-		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
+	public void setUnresolvedSpringProperties(Properties springProperties) {
+		this.unresolvedSpringProperties = springProperties;
 	}
 
 	public PropertiesRetriever getRetriever() {
@@ -341,14 +295,6 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.unresolvedProperties = rawProperties;
 	}
 
-	public Properties getResolvedProperties() {
-		return resolvedProperties;
-	}
-
-	public void setResolvedProperties(Properties resolvedProperties) {
-		this.resolvedProperties = resolvedProperties;
-	}
-
 	public String getEnvironmentPropertyPrefix() {
 		return environmentPropertyPrefix;
 	}
@@ -365,8 +311,8 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.loader = loader;
 	}
 
-	public void setManagedProperties(Properties managedProperties) {
-		this.managedProperties = managedProperties;
+	public void setProperties(Properties managedProperties) {
+		this.properties = managedProperties;
 	}
 
 }

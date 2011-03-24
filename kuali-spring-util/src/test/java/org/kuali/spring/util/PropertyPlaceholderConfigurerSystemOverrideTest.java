@@ -42,7 +42,7 @@ public class PropertyPlaceholderConfigurerSystemOverrideTest {
 	public void systemPropertyOverrideTest() {
 		try {
 			PropertyHandler handler = (PropertyHandler) applicationContext.getBean("property.handler");
-			Properties properties = handler.getManagedProperties();
+			Properties properties = handler.getProperties();
 			String cat = properties.getProperty("cat");
 			Assert.assertEquals(cat, cheetah);
 		} catch (Throwable e) {
