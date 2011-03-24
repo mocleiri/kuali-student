@@ -122,10 +122,7 @@ public class PropertiesHelper {
 		return envProps;
 	}
 
-	public void mergeEnvironmentProperties(Properties currentProps, boolean mergeEnvironmentProperties, String prefix) {
-		if (!mergeEnvironmentProperties) {
-			return;
-		}
+	public void mergeEnvironmentProperties(Properties currentProps, String prefix) {
 		logger.info("Merging environment properties");
 		String source = PropertiesSource.ENVIRONMENT.toString();
 		mergeProperties(currentProps, getEnvironmentAsProperties(prefix), true, source);

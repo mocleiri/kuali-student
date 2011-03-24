@@ -175,8 +175,9 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		// Merge in the system properties as appropriate
 		helper.mergeSystemProperties(managedProperties, getSystemPropertiesMode());
 		// Merge in environment properties as appropriate
-		helper.mergeEnvironmentProperties(managedProperties, isSearchSystemEnvironment(),
-				getEnvironmentPropertyPrefix());
+		if (isSearchSystemEnvironment()) {
+			helper.mergeEnvironmentProperties(managedProperties, getEnvironmentPropertyPrefix());
+		}
 		// Store the complete set of properties that will be used during placeholder replacement
 		setManagedProperties(managedProperties);
 		// return the complete set of properties
