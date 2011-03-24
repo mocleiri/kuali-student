@@ -108,11 +108,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 			throws BeansException {
 		logger.info("Resolving placeholders in bean definitions");
 
-		// TODO Refactor how these beans collaborate so we don't have to do this
-		if (beanDefinitionVisitor.getStringValueResolver() == null) {
-			beanDefinitionVisitor.setStringValueResolver(stringResolver);
-		}
-
 		// Process placeholders in the bean definitions
 		processBeanDefinitions(beanFactory);
 
