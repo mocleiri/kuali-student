@@ -102,7 +102,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 			logger.info("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
 		// Get a value for the key
-		String rawValue = retriever.getProperty(key);
+		String rawValue = retriever.retrieveProperty(key);
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Replacing placeholders in value [{}]", rawValue);
 		// Now replace any placeholders in the value

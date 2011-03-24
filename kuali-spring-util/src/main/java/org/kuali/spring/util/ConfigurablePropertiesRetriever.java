@@ -17,7 +17,7 @@ public class ConfigurablePropertiesRetriever extends PropertiesRetriever {
 	}
 
 	@Override
-	public String getProperty(String key) {
+	public String retrieveProperty(String key) {
 		String environmentProperty = SystemUtils.getEnvironmentPropertyIgnoreSecurity(key);
 		String property = getProperties().getProperty(key);
 		String systemProperty = SystemUtils.getSystemPropertyIgnoreSecurity(key);

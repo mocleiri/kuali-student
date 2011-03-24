@@ -19,7 +19,7 @@ public class PropertiesRetriever implements PropertyRetriever {
 	}
 
 	@Override
-	public String getProperty(String key) {
+	public String retrieveProperty(String key) {
 		return properties.getProperty(key);
 	}
 

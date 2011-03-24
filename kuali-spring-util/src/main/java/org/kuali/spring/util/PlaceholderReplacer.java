@@ -141,7 +141,7 @@ public class PlaceholderReplacer {
 	 */
 	protected String getValue(String key, PropertyRetriever retriever) {
 		// If the retriever gives us something, we're done
-		String propVal = retriever.getProperty(key);
+		String propVal = retriever.retrieveProperty(key);
 		if (propVal != null) {
 			return propVal;
 		}
@@ -167,7 +167,7 @@ public class PlaceholderReplacer {
 		String defaultValue = key.substring(separatorIndex + this.valueSeparator.length());
 
 		// Give the retriever a chance to locate a value
-		propVal = retriever.getProperty(actualKey);
+		propVal = retriever.retrieveProperty(actualKey);
 
 		// If the retriever found something, use it
 		if (propVal != null) {

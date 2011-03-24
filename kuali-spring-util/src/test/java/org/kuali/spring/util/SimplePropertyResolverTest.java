@@ -17,8 +17,8 @@ public class SimplePropertyResolverTest {
 		properties.setProperty(key, val);
 		PropertyRetriever resolver = new PropertiesRetriever(properties);
 
-		String resolvedProperty = resolver.getProperty(key);
-		String unresolvedProperty = resolver.getProperty("A-Key-That-Does-Not-Exist");
+		String resolvedProperty = resolver.retrieveProperty(key);
+		String unresolvedProperty = resolver.retrieveProperty("A-Key-That-Does-Not-Exist");
 
 		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);
@@ -34,8 +34,8 @@ public class SimplePropertyResolverTest {
 		PropertiesRetriever resolver = new PropertiesRetriever();
 		resolver.setProperties(properties);
 
-		String resolvedProperty = resolver.getProperty(key);
-		String unresolvedProperty = resolver.getProperty("A-Key-That-Does-Not-Exist");
+		String resolvedProperty = resolver.retrieveProperty(key);
+		String unresolvedProperty = resolver.retrieveProperty("A-Key-That-Does-Not-Exist");
 
 		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);
