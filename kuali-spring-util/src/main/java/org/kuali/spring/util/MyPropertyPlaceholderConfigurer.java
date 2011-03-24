@@ -75,7 +75,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Properties ***"));
 		}
 
-		// Update the original properties with our resolved properties
+		// Synchronize the properties passed in with our resolved properties
 		propertiesHelper.syncProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
