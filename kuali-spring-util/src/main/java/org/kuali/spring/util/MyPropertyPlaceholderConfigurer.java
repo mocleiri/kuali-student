@@ -26,7 +26,7 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	String beanName;
 	BeanFactory beanFactory;
-	Properties properties;
+	Properties managedProperties;
 	Properties springProperties;
 	Properties rawProperties;
 	Properties resolvedProperties;
@@ -59,8 +59,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	@Override
 	public void setLocations(Resource[] locations) {
-		this.locations = locations;
 		super.setLocations(locations);
+		this.locations = locations;
 	}
 
 	@Override
@@ -228,12 +228,8 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		this.beanFactory = beanFactory;
 	}
 
-	public Properties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Properties properties) {
-		this.properties = properties;
+	public Properties getManagedProperties() {
+		return managedProperties;
 	}
 
 	public Properties getSpringProperties() {
