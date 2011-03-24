@@ -9,7 +9,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-public class MyPropertyPlaceholderConfigurerTest {
+public class PropertyHandlerTest {
 
 	protected Resource[] getLocations() {
 		String[] locations = new String[] { "classpath:org/kuali/spring/util/test.properties" };

@@ -17,8 +17,7 @@ import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringValueResolver;
 
-public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware,
-		BeanFactoryAware {
+public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware, BeanFactoryAware {
 	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
@@ -146,7 +145,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 			// Skip processing our own bean definition
 			// Prevent failing on unresolvable placeholders in the locations property
 			if (currentBeanIsMe(currentBean, beanFactory)) {
-				logger.info("Skipping placeholder resolution for " + bd);
+				logger.info("Skipping placeholder resolution on my own bean definition " + bd);
 				continue;
 			}
 			processBeanDefinition(currentBean, bd);
