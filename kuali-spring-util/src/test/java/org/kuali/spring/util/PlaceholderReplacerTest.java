@@ -63,6 +63,8 @@ public class PlaceholderReplacerTest {
 		props.setProperty("cat.prey", "${${cat}.prey}");
 		props.setProperty("lion.prey", "zebra");
 		PlaceholderReplacer replacer = new PlaceholderReplacer();
+		Assert.assertEquals(replacer.replacePlaceholders("${cat}", props), "lion");
+		Assert.assertEquals(replacer.replacePlaceholders("${cat.prey}", props), "zebra");
 		Assert.assertEquals(replacer.replacePlaceholders("${cat.prey}", props), "zebra");
 	}
 }

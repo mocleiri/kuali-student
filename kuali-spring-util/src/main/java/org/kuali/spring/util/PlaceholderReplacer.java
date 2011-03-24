@@ -114,8 +114,17 @@ public class PlaceholderReplacer {
 		// Recursive invocation, replace any placeholders inside the key
 		String finalKey = parseStringValue(originalKey, ctx.getResolver(), ctx.getVisitedPlaceholders());
 
-		// Obtain a value for the key after any placeholders have been replaced in the key
-		String value = getValue(finalKey, ctx.getResolver());
+		// Obtain a value for key now that placeholders in the key have been replaced
+
+		// Check the resolved cache first
+		String value = resolvedCache.getProperty(finalKey);
+
+		// Nothing in the cache
+		if (value == null) {
+			value = getValue(finalKey, ctx.getResolver());
+		} else {
+			logger.trace("Resolved the value for '{}' from cache", finalKey);
+		}
 
 		logger.trace("Processing value [{}]", value);
 		int bufIndex = processValue(ctx, value, endIndex, finalKey);
@@ -187,6 +196,10 @@ public class PlaceholderReplacer {
 
 		// log that we resolved the placeholder
 		logger.trace("Resolved key '{}' to [{}]", key, value);
+
+		// Cache the key->value pair now that all the placeholders have been removed
+		resolvedCache.setProperty(key, value);
+		logger.trace("Caching property '{}'", key);
 
 		// Replace the placeholder with the value
 		ctx.getBuffer().replace(ctx.getStartIndex(), endIndex + this.placeholderSuffix.length(), value);
