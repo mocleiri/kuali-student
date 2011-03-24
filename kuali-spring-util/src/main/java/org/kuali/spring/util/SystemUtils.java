@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class SystemUtils {
 	final static Logger logger = LoggerFactory.getLogger(SystemUtils.class);
 
-	public static Map<String, String> getEnvironmentIgnoreSecurity() {
+	public static Map<String, String> getEnvironmentIgnoreExceptions() {
 		try {
 			return System.getenv();
 		} catch (Throwable e) {
@@ -19,7 +19,7 @@ public class SystemUtils {
 		}
 	}
 
-	public static Properties getSystemPropertiesIgnoreSecurity() {
+	public static Properties getSystemPropertiesIgnoreExceptions() {
 		try {
 			return System.getProperties();
 		} catch (Throwable e) {
@@ -28,20 +28,20 @@ public class SystemUtils {
 		}
 	}
 
-	public static final String getSystemPropertyIgnoreSecurity(String key) {
+	public static final String getSystemPropertyIgnoreExceptions(String key) {
 		try {
 			return System.getProperty(key);
 		} catch (Throwable e) {
-			logger.warn("Unable to access system property {}: {}", key, e.getMessage());
+			logger.warn("Unable to access system property '{}': {}", key, e.getMessage());
 			return null;
 		}
 	}
 
-	public static final String getEnvironmentPropertyIgnoreSecurity(String key) {
+	public static final String getEnvironmentPropertyIgnoreExceptions(String key) {
 		try {
 			return System.getenv(key);
 		} catch (Throwable e) {
-			logger.warn("Unable to access environment property {}: {}", key, e.getMessage());
+			logger.warn("Unable to access environment property '{}': {}", key, e.getMessage());
 			return null;
 		}
 	}

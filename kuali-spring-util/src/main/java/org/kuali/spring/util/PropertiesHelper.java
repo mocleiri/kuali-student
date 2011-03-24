@@ -213,7 +213,7 @@ public class PropertiesHelper {
 	}
 
 	protected Properties getEnvironmentAsProperties(String prefix) {
-		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreSecurity();
+		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreExceptions();
 		Properties envProps = new Properties();
 		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
 			envProps.setProperty(prefix + entry.getKey(), entry.getValue());
@@ -287,7 +287,7 @@ public class PropertiesHelper {
 		// Merge in the system properties
 		logger.info("Merging system properties with Spring properties using mode {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreSecurity();
+		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreExceptions();
 		mergeProperties(currentProps, systemProperties, override, PropertiesSource.SYSTEM.toString());
 	}
 

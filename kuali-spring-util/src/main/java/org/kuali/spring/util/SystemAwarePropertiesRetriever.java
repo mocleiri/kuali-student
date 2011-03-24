@@ -18,9 +18,9 @@ public class SystemAwarePropertiesRetriever extends PropertiesRetriever {
 
 	@Override
 	public String retrieveProperty(String key) {
-		String environmentProperty = SystemUtils.getEnvironmentPropertyIgnoreSecurity(key);
+		String environmentProperty = SystemUtils.getEnvironmentPropertyIgnoreExceptions(key);
 		String property = super.retrieveProperty(key);
-		String systemProperty = SystemUtils.getSystemPropertyIgnoreSecurity(key);
+		String systemProperty = SystemUtils.getSystemPropertyIgnoreExceptions(key);
 
 		if (isUseSystemProperty(systemProperty, property)) {
 			return systemProperty;
