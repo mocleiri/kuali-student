@@ -2,6 +2,8 @@ package org.kuali.spring.util;
 
 import java.util.Properties;
 
+import junit.framework.Assert;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,7 +24,8 @@ public class PropertyPlaceholderConfigurerSystemOverrideTest {
 	static Properties systemProperties = System.getProperties();
 
 	@Autowired
-	// private ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
+
 	@BeforeClass
 	public static void oneTimeSetUp() {
 		logger.info("Setting system property {}={}", key, cheetah);
@@ -37,12 +41,10 @@ public class PropertyPlaceholderConfigurerSystemOverrideTest {
 	@Test
 	public void systemPropertyOverrideTest() {
 		try {
-			// ResolvePropertiesFirstPlaceholderConfigurerTest configurer =
-			// (ResolvePropertiesFirstPlaceholderConfigurerTest) applicationContext
-			// .getBean("placeholder.configurer.test");
-			// Properties properties = configurer.getProperties();
-			// String cat = properties.getProperty("cat");
-			// Assert.assertEquals(cat, cheetah);
+			PropertyHandler handler = (PropertyHandler) applicationContext.getBean("property.handler");
+			Properties properties = handler.getManagedProperties();
+			String cat = properties.getProperty("cat");
+			Assert.assertEquals(cat, cheetah);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
