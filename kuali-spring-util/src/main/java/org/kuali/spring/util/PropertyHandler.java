@@ -100,7 +100,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		logger.trace("Resolving placeholders in key '{}'", key);
 		String resolvedKey = replacer.replacePlaceholders(key, originalProperties);
 		if (!key.equals(resolvedKey)) {
-			logger.info("Resolved key [{}]->[{}]", key, resolvedKey);
+			logger.debug("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
 		// Get a value for the key
 		String rawValue = retriever.retrieveProperty(key);
