@@ -13,9 +13,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
 public class PropertiesHelper {
+
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
 	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+
+	public PropertiesHelper() {
+		this(null);
+	}
+
+	public PropertiesHelper(PropertiesLoggerSupport loggerSupport) {
+		super();
+		this.loggerSupport = loggerSupport;
+	}
 
 	/**
 	 * Remove any keys from properties that are not in approvedKeys

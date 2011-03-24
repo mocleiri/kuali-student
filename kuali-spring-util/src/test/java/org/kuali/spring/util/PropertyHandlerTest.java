@@ -1,8 +1,6 @@
 package org.kuali.spring.util;
 
 import java.io.IOException;
-import java.util.Properties;
-
 
 import org.junit.Test;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -27,8 +25,7 @@ public class PropertyHandlerTest {
 	public void test1() throws IOException {
 		PropertyHandler configurer = new PropertyHandler();
 		configurer.setLocations(getLocations());
-		Properties properties = configurer.mergeProperties();
-		configurer.convertProperties(properties);
+		configurer.mergeProperties();
 	}
 
 }
