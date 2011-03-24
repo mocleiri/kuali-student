@@ -109,7 +109,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		// Now replace any placeholders in the value
 		String resolvedValue = replacer.replacePlaceholders(rawValue, originalProperties);
 		if (!rawValue.equals(resolvedValue)) {
-			logger.info("Resolved value for '" + resolvedKey + "' [{}]->[{}]", rawValue, resolvedValue);
+			logger.debug("Resolved value for '" + resolvedKey + "' [{}]->[{}]", rawValue, resolvedValue);
 		}
 		// The only items allowed into resolvedProperties are fully resolved keys and values
 		logger.trace("Adding to resolved properties {}=[{}]", resolvedKey, resolvedValue);
