@@ -16,9 +16,11 @@ public class SimplePropertyResolverTest {
 		Properties properties = new Properties();
 		properties.setProperty(key, val);
 		PropertyResolver resolver = new SimplePropertyResolver(properties);
+
 		String resolvedProperty = resolver.getProperty(key);
-		Assert.assertEquals(val, resolvedProperty);
 		String unresolvedProperty = resolver.getProperty("A-Key-That-Does-Not-Exist");
+
+		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);
 	}
 
