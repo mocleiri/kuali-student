@@ -14,20 +14,32 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringValueResolver;
 
 public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer implements BeanNameAware,
 		BeanFactoryAware {
 	final Logger logger = LoggerFactory.getLogger(MyPropertyPlaceholderConfigurer.class);
-	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
 
-	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	String beanName;
 	BeanFactory beanFactory;
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
-	PropertyPlaceholderHelper placeholderHelper = new PropertyPlaceholderHelper();
-	PropertiesHelper propertiesHelper = new PropertiesHelper();
-	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor();
 	Properties properties;
+	String nullValue;
+	boolean searchSystemEnvironment;
+	boolean ignoreResourceNotFound;
+	String fileEncoding;
+	SystemPropertiesMode systemPropertiesMode;
+	String placeholderPrefix;
+	String placeholderSuffix;
+	String valueSeparator;
+	boolean ignoreUnresolvablePlaceholders;
+
+	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+	PropertiesHelper propertiesHelper = new PropertiesHelper(ignoreResourceNotFound, fileEncoding);
+	PlaceholderReplacer replacer = new PlaceholderReplacer(placeholderPrefix, placeholderSuffix, valueSeparator,
+			ignoreUnresolvablePlaceholders);
+	PropertyResolver propertyResolver = new SimplePropertyResolver(properties);
+	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, propertyResolver, nullValue);
+	ConfigurableBeanDefinitionVisitor beanDefinitionVisitor = new ConfigurableBeanDefinitionVisitor(stringResolver);
 	Properties springProperties;
 	Resource[] resourceLocations;
 
@@ -63,18 +75,32 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		}
 	}
 
+	/**
+	 * Override the default resource loading logic to clean it up and add fine grained logging. Anytime a property value
+	 * is overridden an INFO level logging message is produced. If TRACE is turned on, all properties are logged in the
+	 * order they are loaded
+	 */
+	@Override
+	protected void loadProperties(Properties properties) throws IOException {
+		this.propertiesHelper.loadProperties(properties, getResourceLocations());
+	}
+
 	@Override
 	protected Properties mergeProperties() throws IOException {
-		Properties mergedProperties = super.mergeProperties();
-		this.springProperties = propertiesHelper.getClone(mergedProperties);
-		this.propertiesHelper.loadProperties(mergedProperties, getResourceLocations());
-		propertiesHelper.mergeSystemProperties(mergedProperties, this.placeholderHelper.getSystemPropertiesMode());
-		if (placeholderHelper.isSearchSystemEnvironment()) {
-			propertiesHelper.mergeEnvironmentProperties(mergedProperties);
+		// The super class loads properties from resources as well as properties defined directly on this bean
+		Properties properties = super.mergeProperties();
+		// Preserve just the Spring properties
+		setSpringProperties(propertiesHelper.getClone(properties));
+		// Merge in the system properties as appropriate
+		propertiesHelper.mergeSystemProperties(properties, getSystemPropertiesMode());
+		// Merge in environment properties as appropriate
+		if (isSearchSystemEnvironment()) {
+			propertiesHelper.mergeEnvironmentProperties(properties);
 		}
-		setProperties(mergedProperties);
-		this.placeholderHelper.setProperties(mergedProperties);
-		return mergedProperties;
+		// Store the complete set of properties that will be used during placeholder replacement
+		setProperties(properties);
+		// return the complete set of properties
+		return properties;
 	}
 
 	@Override
@@ -84,17 +110,17 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 		// TODO Refactor how these beans collaborate so we don't have to do this
 		if (beanDefinitionVisitor.getStringValueResolver() == null) {
-			beanDefinitionVisitor.setStringValueResolver(placeholderHelper);
+			beanDefinitionVisitor.setStringValueResolver(stringResolver);
 		}
 
 		// Process placeholders in the bean definitions
 		processBeanDefinitions(beanFactory);
 
 		// New in Spring 2.5: resolve placeholders in alias target names and aliases as well.
-		beanFactory.resolveAliases(placeholderHelper);
+		beanFactory.resolveAliases(stringResolver);
 
 		// New in Spring 3.0: resolve placeholders in embedded values such as annotation attributes.
-		beanFactory.addEmbeddedValueResolver(placeholderHelper);
+		beanFactory.addEmbeddedValueResolver(stringResolver);
 	}
 
 	public String getBeanName() {
@@ -111,14 +137,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	public void setBeanDefinitionVisitor(ConfigurableBeanDefinitionVisitor beanDefinitionVisitor) {
 		this.beanDefinitionVisitor = beanDefinitionVisitor;
-	}
-
-	public PropertyPlaceholderHelper getPlaceholderHelper() {
-		return placeholderHelper;
-	}
-
-	public void setPlaceholderHelper(PropertyPlaceholderHelper helper) {
-		this.placeholderHelper = helper;
 	}
 
 	public PropertiesLoggerSupport getLoggerSupport() {
@@ -145,14 +163,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 		this.properties = properties;
 	}
 
-	public String getEnvironmentPropertyPrefix() {
-		return environmentPropertyPrefix;
-	}
-
-	public void setEnvironmentPropertyPrefix(String environmentPropertyPrefix) {
-		this.environmentPropertyPrefix = environmentPropertyPrefix;
-	}
-
 	public Properties getSpringProperties() {
 		return springProperties;
 	}
@@ -163,6 +173,82 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	public void setResourceLocations(Resource[] resourceLocations) {
 		this.resourceLocations = resourceLocations;
+	}
+
+	public String getNullValue() {
+		return nullValue;
+	}
+
+	public void setNullValue(String nullValue) {
+		this.nullValue = nullValue;
+	}
+
+	public boolean isSearchSystemEnvironment() {
+		return searchSystemEnvironment;
+	}
+
+	public void setSearchSystemEnvironment(boolean searchSystemEnvironment) {
+		this.searchSystemEnvironment = searchSystemEnvironment;
+	}
+
+	public boolean isIgnoreResourceNotFound() {
+		return ignoreResourceNotFound;
+	}
+
+	public void setIgnoreResourceNotFound(boolean ignoreResourceNotFound) {
+		this.ignoreResourceNotFound = ignoreResourceNotFound;
+	}
+
+	public String getFileEncoding() {
+		return fileEncoding;
+	}
+
+	public void setFileEncoding(String fileEncoding) {
+		this.fileEncoding = fileEncoding;
+	}
+
+	public SystemPropertiesMode getSystemPropertiesMode() {
+		return systemPropertiesMode;
+	}
+
+	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
+		this.systemPropertiesMode = systemPropertiesMode;
+	}
+
+	public PropertiesHelper getPropertiesHelper() {
+		return propertiesHelper;
+	}
+
+	public void setPropertiesHelper(PropertiesHelper propertiesHelper) {
+		this.propertiesHelper = propertiesHelper;
+	}
+
+	public PlaceholderReplacer getReplacer() {
+		return replacer;
+	}
+
+	public void setReplacer(PlaceholderReplacer replacer) {
+		this.replacer = replacer;
+	}
+
+	public PropertyResolver getPropertyResolver() {
+		return propertyResolver;
+	}
+
+	public void setPropertyResolver(PropertyResolver propertyResolver) {
+		this.propertyResolver = propertyResolver;
+	}
+
+	public StringValueResolver getStringResolver() {
+		return stringResolver;
+	}
+
+	public void setStringResolver(StringValueResolver stringResolver) {
+		this.stringResolver = stringResolver;
+	}
+
+	public void setSpringProperties(Properties springProperties) {
+		this.springProperties = springProperties;
 	}
 
 }

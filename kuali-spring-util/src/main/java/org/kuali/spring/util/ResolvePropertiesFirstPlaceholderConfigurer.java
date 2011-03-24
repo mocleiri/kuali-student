@@ -37,8 +37,6 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends MyPropertyPlace
 		// Update the original properties with our resolved properties
 		propertiesHelper.replaceProperties(properties, resolvedProperties);
 
-		placeholderHelper.setResolvedCache(resolvedProperties);
-
 		if (logger.isInfoEnabled()) {
 			logger.info(loggerSupport.getLogEntry(properties, "*** Spring Properties ***"));
 		}
@@ -58,16 +56,16 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends MyPropertyPlace
 	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
 		// First resolve any placeholders in the key itself
 		logger.trace("Resolving placeholders in key '{}'", key);
-		String resolvedKey = placeholderHelper.replacePlaceholders(key, originalProperties);
+		String resolvedKey = replacer.replacePlaceholders(key, originalProperties);
 		if (!key.equals(resolvedKey)) {
 			logger.trace("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
 		// Get a value for the key
-		String rawValue = placeholderHelper.resolvePlaceholder(key);
+		String rawValue = propertyResolver.getProperty(key);
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Resolving placeholders in value [{}]", rawValue);
 		// Now resolve any placeholders in the value
-		String resolvedValue = placeholderHelper.replacePlaceholders(rawValue, originalProperties);
+		String resolvedValue = replacer.replacePlaceholders(rawValue, originalProperties);
 		if (!rawValue.equals(resolvedValue)) {
 			logger.trace("Resolved value [{}]->[{}]", rawValue, resolvedValue);
 		}

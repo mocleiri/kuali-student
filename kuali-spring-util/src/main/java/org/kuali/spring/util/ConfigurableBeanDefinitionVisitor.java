@@ -13,12 +13,17 @@ public class ConfigurableBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	final Logger logger = LoggerFactory.getLogger(ConfigurableBeanDefinitionVisitor.class);
 	List<VisitationListener> listeners = new ArrayList<VisitationListener>();
 
+	StringValueResolver stringValueResolver;
 	public ConfigurableBeanDefinitionVisitor() {
+		this(null);
+	}
+
+	public ConfigurableBeanDefinitionVisitor(StringValueResolver stringValueResolver) {
 		super();
+		this.stringValueResolver = stringValueResolver;
 		listeners.add(new DefaultBeanVisitationListener());
 	}
 
-	StringValueResolver stringValueResolver;
 
 	@Override
 	protected String resolveStringValue(String strVal) {

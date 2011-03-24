@@ -29,9 +29,10 @@ public class PlaceholderReplacer {
 
 	String placeholderPrefix;
 	String placeholderSuffix;
-	String simplePrefix;
 	String valueSeparator;
 	boolean ignoreUnresolvablePlaceholders;
+
+	String simplePrefix;
 	Properties resolvedCache = new Properties();
 
 	public PlaceholderReplacer() {

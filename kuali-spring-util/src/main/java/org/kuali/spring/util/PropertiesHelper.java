@@ -24,11 +24,12 @@ public class PropertiesHelper {
 	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
 	public static final boolean DEFAULT_IGNORE_RESOURCE_NOT_FOUND = false;
 
+	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
+	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
-	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	String fileEncoding;
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
 
 	public PropertiesHelper() {
 		this(DEFAULT_IGNORE_RESOURCE_NOT_FOUND, null);
