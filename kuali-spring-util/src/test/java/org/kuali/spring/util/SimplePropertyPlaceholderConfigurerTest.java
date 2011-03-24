@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class SimpleConfigurablePropertyPlaceholderConfigurerTest {
+public class SimplePropertyPlaceholderConfigurerTest {
 
 	@Test
 	public void simpleTest() {
