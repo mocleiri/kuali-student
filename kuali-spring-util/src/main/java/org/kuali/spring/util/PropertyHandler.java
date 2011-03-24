@@ -28,7 +28,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	BeanFactory beanFactory;
 	Properties managedProperties;
 	Properties springProperties;
-	Properties rawProperties;
+	Properties unresolvedProperties;
 	Properties resolvedProperties;
 	Resource[] locations;
 
@@ -70,13 +70,13 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		}
 
 		// Clone the original properties
-		rawProperties = helper.getClone(properties);
+		unresolvedProperties = helper.getClone(properties);
 
 		// Properties after all placeholders have been resolved
 		resolvedProperties = getResolvedProperties(properties);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(loggerSupport.getLogEntry(rawProperties, "*** Raw Properties ***"));
+			logger.debug(loggerSupport.getLogEntry(unresolvedProperties, "*** Raw Properties ***"));
 			logger.debug(loggerSupport.getLogEntry(resolvedProperties, "*** Resolved Properties ***"));
 		}
 
@@ -333,12 +333,12 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.retriever = propertyResolver;
 	}
 
-	public Properties getRawProperties() {
-		return rawProperties;
+	public Properties getUnresolvedProperties() {
+		return unresolvedProperties;
 	}
 
-	public void setRawProperties(Properties rawProperties) {
-		this.rawProperties = rawProperties;
+	public void setUnresolvedProperties(Properties rawProperties) {
+		this.unresolvedProperties = rawProperties;
 	}
 
 	public Properties getResolvedProperties() {
