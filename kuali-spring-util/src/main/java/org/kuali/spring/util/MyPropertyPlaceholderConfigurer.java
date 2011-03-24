@@ -52,6 +52,12 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	NotifyingBeanDefinitionVisitor beanDefinitionVisitor = new NotifyingBeanDefinitionVisitor(stringResolver);
 
 	@Override
+	public void setLocation(Resource location) {
+		super.setLocation(location);
+		this.locations = new Resource[] { location };
+	}
+
+	@Override
 	public void setLocations(Resource[] locations) {
 		this.locations = locations;
 		super.setLocations(locations);
