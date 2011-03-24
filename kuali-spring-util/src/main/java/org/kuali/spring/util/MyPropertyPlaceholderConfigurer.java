@@ -35,11 +35,9 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 	Resource[] locations;
 
 	String nullValue;
-	String fileEncoding;
 	String valueSeparator;
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
-	boolean ignoreResourceNotFound = DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND;
 	SystemPropertiesMode systemPropertiesMode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 	String placeholderPrefix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX;
 	String placeholderSuffix = PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX;
@@ -258,22 +256,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyResourceConfigurer 
 
 	public void setSearchSystemEnvironment(boolean searchSystemEnvironment) {
 		this.searchSystemEnvironment = searchSystemEnvironment;
-	}
-
-	public boolean isIgnoreResourceNotFound() {
-		return ignoreResourceNotFound;
-	}
-
-	public void setIgnoreResourceNotFound(boolean ignoreResourceNotFound) {
-		this.ignoreResourceNotFound = ignoreResourceNotFound;
-	}
-
-	public String getFileEncoding() {
-		return fileEncoding;
-	}
-
-	public void setFileEncoding(String fileEncoding) {
-		this.fileEncoding = fileEncoding;
 	}
 
 	public SystemPropertiesMode getSystemPropertiesMode() {
