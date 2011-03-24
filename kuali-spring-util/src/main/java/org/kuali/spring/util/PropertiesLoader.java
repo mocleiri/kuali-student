@@ -13,8 +13,18 @@ import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.PropertiesPersister;
 
 public class PropertiesLoader {
+	final Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
+	public static final boolean DEFAULT_IGNORE_RESOURCE_NOT_FOUND = false;
+
+	PropertiesPersister persister = new DefaultPropertiesPersister();
+	PropertiesLoggerSupport loggerSupport;
+	PropertiesHelper helper;
+
+	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
+	String fileEncoding;
+
 	public PropertiesLoader() {
-		this(null, null);
+		this(new PropertiesLoggerSupport(), new PropertiesHelper());
 	}
 
 	public PropertiesLoader(PropertiesLoggerSupport loggerSupport, PropertiesHelper helper) {
@@ -28,16 +38,6 @@ public class PropertiesLoader {
 		this.ignoreResourceNotFound = ignoreResourceNotFound;
 		this.fileEncoding = fileEncoding;
 	}
-
-	final Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
-	public static final boolean DEFAULT_IGNORE_RESOURCE_NOT_FOUND = false;
-
-	PropertiesPersister persister = new DefaultPropertiesPersister();
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
-	PropertiesHelper helper = new PropertiesHelper();
-
-	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
-	String fileEncoding;
 
 	protected Properties loadProperties(Resource location, InputStream is) throws IOException {
 		Properties properties = new Properties();

@@ -16,10 +16,10 @@ public class PropertiesHelper {
 
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+	PropertiesLoggerSupport loggerSupport;
 
 	public PropertiesHelper() {
-		this(null);
+		this(new PropertiesLoggerSupport());
 	}
 
 	public PropertiesHelper(PropertiesLoggerSupport loggerSupport) {
