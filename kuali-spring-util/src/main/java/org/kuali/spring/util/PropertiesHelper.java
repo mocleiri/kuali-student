@@ -36,8 +36,8 @@ public class PropertiesHelper {
 
 	public PropertiesHelper(boolean ignoreResourceNotFound, String fileEncoding) {
 		super();
-		this.ignoreResourceNotFound = ignoreResourceNotFound;
-		this.fileEncoding = fileEncoding;
+		setIgnoreResourceNotFound(ignoreResourceNotFound);
+		setFileEncoding(fileEncoding);
 	}
 
 	/**
@@ -84,7 +84,14 @@ public class PropertiesHelper {
 		}
 	}
 
-	public void mergeProperties(Properties oldProperties, Properties newProperties) {
+	/**
+	 * Make oldProperties the same as newProperties. Remove any old properties that are not in new. Add any properties
+	 * from new that are not in old. Update properties in old to the values from new
+	 * 
+	 * @param oldProperties
+	 * @param newProperties
+	 */
+	public void replaceProperties(Properties oldProperties, Properties newProperties) {
 		removeProperties(oldProperties, newProperties.stringPropertyNames());
 		addProperties(oldProperties, newProperties);
 		updateProperties(oldProperties, newProperties);
@@ -216,6 +223,16 @@ public class PropertiesHelper {
 		mergeProperties(currentProps, getEnvironmentAsProperties(getEnvironmentPropertyPrefix()), true, source);
 	}
 
+	/**
+	 * Merge the property under 'key' from newProps into currentProps. If override is false and the property already
+	 * exists do not update currentProps
+	 * 
+	 * @param currentProps
+	 * @param newProps
+	 * @param key
+	 * @param override
+	 * @param src
+	 */
 	protected void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
 		// Extract the new value
 		String newValue = newProps.getProperty(key);

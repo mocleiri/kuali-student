@@ -35,7 +35,7 @@ public class ResolvePropertiesFirstPlaceholderConfigurer extends MyPropertyPlace
 		}
 
 		// Update the original properties with our resolved properties
-		propertiesHelper.mergeProperties(properties, resolvedProperties);
+		propertiesHelper.replaceProperties(properties, resolvedProperties);
 
 		placeholderHelper.setResolvedCache(resolvedProperties);
 

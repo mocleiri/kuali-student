@@ -15,7 +15,7 @@ public class SimplePropertyResolver implements PropertyResolver {
 
 	public SimplePropertyResolver(Properties properties) {
 		super();
-		this.properties = properties;
+		setProperties(properties);
 	}
 
 	@Override
