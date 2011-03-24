@@ -137,4 +137,20 @@ public class PropertiesLoader {
 	public void setFileEncoding(String fileEncoding) {
 		this.fileEncoding = fileEncoding;
 	}
+
+	public PropertiesLoggerSupport getLoggerSupport() {
+		return loggerSupport;
+	}
+
+	public void setLoggerSupport(PropertiesLoggerSupport loggerSupport) {
+		this.loggerSupport = loggerSupport;
+	}
+
+	public PropertiesHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(PropertiesHelper helper) {
+		this.helper = helper;
+	}
 }

@@ -198,4 +198,12 @@ public class PropertiesHelper {
 		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreExceptions();
 		mergeProperties(currentProps, systemProperties, override, PropertiesSource.SYSTEM.toString());
 	}
+
+	public PropertiesLoggerSupport getLoggerSupport() {
+		return loggerSupport;
+	}
+
+	public void setLoggerSupport(PropertiesLoggerSupport loggerSupport) {
+		this.loggerSupport = loggerSupport;
+	}
 }

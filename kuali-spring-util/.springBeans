@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/test/resources/org/kuali/spring/util/PropertyPlaceholderConfigurerTest-context.xml</config>
 		<config>src/test/resources/org/kuali/spring/util/SimplePropertyPlaceholderConfigurerTest-context.xml</config>
+		<config>src/test/resources/org/kuali/spring/util/PropertyHandlerFlattenPropertyValuesTest-context.xml</config>
 	</configs>
 	<configSets>
 		<configSet>
