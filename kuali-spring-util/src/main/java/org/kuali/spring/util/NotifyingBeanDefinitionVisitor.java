@@ -20,13 +20,13 @@ public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
 		this(new DefaultStringValueResolver());
 	}
 
-	public void addListener(VisitationListener listener) {
-		listeners.add(listener);
-	}
-
 	public NotifyingBeanDefinitionVisitor(StringValueResolver stringValueResolver) {
 		super(stringValueResolver);
 		addListener(new DefaultBeanVisitationListener());
+	}
+
+	public void addListener(VisitationListener listener) {
+		listeners.add(listener);
 	}
 
 	@Override
