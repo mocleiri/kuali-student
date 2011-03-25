@@ -100,7 +100,7 @@ public class DefaultAutoWirer implements Wirer {
 			logWiringEvent(handler.getResolver(), handler);
 		}
 		StringValueResolver resolver = handler.getResolver();
-		if (!(resolver instanceof DefaultStringValueResolver)) {
+		if (!(handler.getResolver() instanceof DefaultStringValueResolver)) {
 			return;
 		}
 		wireDefaultResolver((DefaultStringValueResolver) resolver);
@@ -115,10 +115,6 @@ public class DefaultAutoWirer implements Wirer {
 			resolver.setRetriever(handler.getRetriever());
 			logWiringEvent(handler.getRetriever(), resolver);
 		}
-	}
-
-	protected void logWiringEvent(Object objectToWire, Object beingWiredTo) {
-		logger.info("Auto-wiring [" + objectToWire + "] -> [" + beingWiredTo + "]");
 	}
 
 	protected void wireVisitor() {
@@ -143,6 +139,10 @@ public class DefaultAutoWirer implements Wirer {
 			visitor.addListener(listener);
 			logWiringEvent(listener, visitor);
 		}
+	}
+
+	protected void logWiringEvent(Object objectToWire, Object beingWiredTo) {
+		logger.info("Wiring [" + objectToWire + "] -> [" + beingWiredTo + "]");
 	}
 
 }
