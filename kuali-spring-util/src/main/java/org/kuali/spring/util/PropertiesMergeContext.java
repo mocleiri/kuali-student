@@ -13,10 +13,10 @@ public class PropertiesMergeContext {
 		this(null, null, true, null, true);
 	}
 
-	public PropertiesMergeContext(Properties oldProperties, Properties newProperties, boolean override, String source,
+	public PropertiesMergeContext(Properties currentProperties, Properties newProperties, boolean override, String source,
 			boolean sort) {
 		super();
-		this.currentProperties = oldProperties;
+		this.currentProperties = currentProperties;
 		this.newProperties = newProperties;
 		this.override = override;
 		this.source = source;
@@ -27,8 +27,8 @@ public class PropertiesMergeContext {
 		return currentProperties;
 	}
 
-	public void setCurrentProperties(Properties oldProperties) {
-		this.currentProperties = oldProperties;
+	public void setCurrentProperties(Properties currentProperties) {
+		this.currentProperties = currentProperties;
 	}
 
 	public Properties getNewProperties() {
@@ -47,6 +47,14 @@ public class PropertiesMergeContext {
 		this.override = override;
 	}
 
+	public boolean isSort() {
+		return sort;
+	}
+
+	public void setSort(boolean sort) {
+		this.sort = sort;
+	}
+
 	public String getSource() {
 		return source;
 	}
@@ -55,11 +63,4 @@ public class PropertiesMergeContext {
 		this.source = source;
 	}
 
-	public boolean isSort() {
-		return sort;
-	}
-
-	public void setSort(boolean sort) {
-		this.sort = sort;
-	}
 }
