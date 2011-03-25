@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.util.Assert;
 
 public class PropertyHandlerTest {
 
@@ -22,10 +23,26 @@ public class PropertyHandlerTest {
 	}
 
 	@Test
-	public void test1() throws IOException {
-		PropertyHandler configurer = new PropertyHandler();
-		configurer.setLocations(getLocations());
-		configurer.mergeProperties();
+	public void autoWire() throws IOException {
+		PropertyHandler handler = new PropertyHandler();
+		handler.autoWire();
+		Assert.notNull(handler.getLoggerSupport());
+	}
+
+	@Test
+	public void validate() throws IOException {
+		PropertyHandler handler = new PropertyHandler();
+		handler.autoWire();
+		handler.validate();
+	}
+
+	@Test
+	public void mergeProperties() throws IOException {
+		PropertyHandler handler = new PropertyHandler();
+		handler.autoWire();
+		handler.validate();
+		handler.setLocations(getLocations());
+		handler.mergeProperties();
 	}
 
 }
