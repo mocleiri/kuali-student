@@ -22,6 +22,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 import org.springframework.util.StringValueResolver;
 
+/**
+ * This class is similar to PropertyPlaceholderConfigurer from Spring. It is used to update bean properties with values
+ * from properties files. It has all of the features from the Spring configurer, fixes a few bugs and has a few new
+ * features.
+ * 
+ */
 public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware, BeanFactoryAware {
 	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
@@ -31,25 +37,86 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	String beanName;
 	BeanFactory beanFactory;
+	/**
+	 * Contains all of the resolved properties known to this configurer after they have been resolved (properties can
+	 * come from files, system, environment etc)
+	 */
 	Properties properties;
-	Properties unresolvedSpringProperties;
-	Properties unresolvedProperties;
+
+	/**
+	 * Contains the resolved properties that originate from properties files
+	 */
 	Properties springProperties;
+
+	/**
+	 * Contains the unresolved properties that originate from properties files
+	 */
+	Properties unresolvedSpringProperties;
+
+	/**
+	 * Contains all of the properties known to this configurer before they have been resolved
+	 */
+	Properties unresolvedProperties;
+
+	/**
+	 * A list of locations to load properties from
+	 */
 	Resource[] locations;
 
+	/**
+	 * Properties that originate from the environment are prefixed with "env" by default
+	 */
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
+
+	/**
+	 * Include environment properties?
+	 */
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
+
+	/**
+	 * Controls how system properties are handled
+	 */
 	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 
-	PropertiesLoggerSupport loggerSupport;// = new PropertiesLoggerSupport();
-	PropertiesHelper helper;// = new PropertiesHelper(loggerSupport);
-	PropertiesLoader loader;// = new PropertiesLoader(loggerSupport, helper);
-	PlaceholderReplacer replacer;// = new PlaceholderReplacer(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
-	// PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
-	PropertiesRetriever retriever;// = new PropertiesRetriever();
-	StringValueResolver resolver;// = new DefaultStringValueResolver(replacer, retriever, null);
-	BeanDefinitionVisitor visitor;// = new EnhancedBeanDefinitionVisitor(resolver);
+	/**
+	 * Provides control over how properties are logged
+	 */
+	PropertiesLoggerSupport loggerSupport;
+	/**
+	 * Utility class for working with properties
+	 */
+	PropertiesHelper helper;
 
+	/**
+	 * Utility class for loading properties from resources
+	 */
+	PropertiesLoader loader;
+
+	/**
+	 * Utility class for replacing placeholders with values
+	 */
+	PlaceholderReplacer replacer;
+
+	/**
+	 * Strategy for obtaining property values
+	 */
+	PropertiesRetriever retriever;
+
+	/**
+	 * Strategy for resolving string values
+	 */
+	StringValueResolver resolver;
+
+	/**
+	 * Updates bean definitions with property values
+	 */
+	BeanDefinitionVisitor visitor;
+
+	/**
+	 * This method automatically wires together a default set of components for handling properties. This lessens the
+	 * amount of XML configuration required. It only wires together components if it detects null values where there
+	 * should not be. This allows the extensions to this base class to easly wire in their own implementations
+	 */
 	protected void autoWire() {
 		if (loggerSupport == null) {
 			loggerSupport = new PropertiesLoggerSupport();
@@ -124,6 +191,9 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		}
 	}
 
+	/**
+	 * Make sure we have all of the components we need
+	 */
 	protected void validate() {
 		Assert.notNull(getLoggerSupport());
 		Assert.notNull(getHelper());
@@ -155,7 +225,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	public void resolvePlaceholders(Properties properties) {
 		if (properties == null || properties.size() == 0) {
-			logger.info("No properties to convert");
+			logger.info("No properties to resolve");
 			return;
 		}
 
