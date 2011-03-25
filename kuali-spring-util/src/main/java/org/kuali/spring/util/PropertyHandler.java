@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 
-import org.kuali.spring.util.event.DefaultBeanVisitListener;
+import org.kuali.spring.util.event.DefaultVisitListener;
+import org.kuali.spring.util.event.VisitListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -40,47 +41,85 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
 	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 
-	PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
-	PropertiesHelper helper = new PropertiesHelper(loggerSupport);
-	PropertiesLoader loader = new PropertiesLoader(loggerSupport, helper);
-	PlaceholderReplacer replacer = new PlaceholderReplacer(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
-			PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
-	PropertiesRetriever retriever = new PropertiesRetriever();
-	StringValueResolver resolver = new DefaultStringValueResolver(replacer, retriever, null);
-	BeanDefinitionVisitor visitor = new EnhancedBeanDefinitionVisitor(resolver);
+	PropertiesLoggerSupport loggerSupport;// = new PropertiesLoggerSupport();
+	PropertiesHelper helper;// = new PropertiesHelper(loggerSupport);
+	PropertiesLoader loader;// = new PropertiesLoader(loggerSupport, helper);
+	PlaceholderReplacer replacer;// = new PlaceholderReplacer(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
+	// PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
+	PropertiesRetriever retriever;// = new PropertiesRetriever();
+	StringValueResolver resolver;// = new DefaultStringValueResolver(replacer, retriever, null);
+	BeanDefinitionVisitor visitor;// = new EnhancedBeanDefinitionVisitor(resolver);
 
 	protected void autoWire() {
+		if (loggerSupport == null) {
+			loggerSupport = new PropertiesLoggerSupport();
+			logger.debug("Auto-wiring " + loggerSupport.getClass());
+		}
+		if (helper == null) {
+			helper = new PropertiesHelper();
+			logger.debug("Auto-wiring " + helper.getClass());
+		}
 		if (helper.getLoggerSupport() == null) {
 			helper.setLoggerSupport(getLoggerSupport());
-			logger.debug("Auto-wiring helper with loggerSupport");
+			logger.debug("Auto-wiring " + loggerSupport.getClass().getSimpleName() + "->"
+					+ helper.getClass().getSimpleName());
+		}
+		if (loader == null) {
+			loader = new PropertiesLoader();
+			logger.debug("Auto-wiring " + loader.getClass());
 		}
 		if (loader.getLoggerSupport() == null) {
 			loader.setLoggerSupport(getLoggerSupport());
-			logger.debug("Auto-wiring loader with loggerSupport");
+			logger.debug("Auto-wiring " + loggerSupport.getClass().getSimpleName() + "->"
+					+ loader.getClass().getSimpleName());
 		}
 		if (loader.getHelper() == null) {
 			loader.setHelper(getHelper());
-			logger.debug("Auto-wiring loader with helper");
+			logger.debug("Auto-wiring " + helper.getClass().getSimpleName() + "->" + loader.getClass().getSimpleName());
+		}
+		if (replacer == null) {
+			replacer = new PlaceholderReplacer(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
+					PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null,
+					DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
+			logger.debug("Auto-wiring " + replacer.getClass());
+		}
+		if (retriever == null) {
+			retriever = new PropertiesRetriever();
+			logger.debug("Auto-wiring " + retriever.getClass());
+		}
+		if (resolver == null) {
+			resolver = new DefaultStringValueResolver();
+			logger.debug("Auto-wiring " + resolver.getClass());
 		}
 		if (resolver instanceof DefaultStringValueResolver) {
 			DefaultStringValueResolver defaultResolver = (DefaultStringValueResolver) resolver;
 			if (defaultResolver.getReplacer() == null) {
 				defaultResolver.setReplacer(getReplacer());
-				logger.debug("Auto-wiring resolver with replacer");
+				logger.debug("Auto-wiring " + replacer.getClass().getSimpleName() + "->"
+						+ resolver.getClass().getSimpleName());
 			}
 			if (defaultResolver.getRetriever() == null) {
 				defaultResolver.setRetriever(getRetriever());
-				logger.debug("Auto-wiring resolver with retriever");
+				logger.debug("Auto-wiring " + replacer.getClass().getSimpleName() + "->"
+						+ retriever.getClass().getSimpleName());
 			}
+		}
+		if (visitor == null) {
+			visitor = new EnhancedBeanDefinitionVisitor();
+			logger.debug("Auto-wiring " + visitor.getClass());
 		}
 		if (visitor instanceof EnhancedBeanDefinitionVisitor) {
 			EnhancedBeanDefinitionVisitor enhancedVisitor = (EnhancedBeanDefinitionVisitor) visitor;
 			if (enhancedVisitor.getValueResolver() == null) {
 				enhancedVisitor.setValueResolver(getResolver());
-				logger.debug("Auto-wiring visitor with resolver");
+				logger.debug("Auto-wiring " + resolver.getClass().getSimpleName() + "->"
+						+ visitor.getClass().getSimpleName());
 			}
 			if (enhancedVisitor.getListeners().size() == 0) {
-				enhancedVisitor.addListener(new DefaultBeanVisitListener());
+				VisitListener listener = new DefaultVisitListener();
+				enhancedVisitor.addListener(listener);
+				logger.debug("Auto-wiring " + resolver.getClass().getSimpleName() + "->"
+						+ listener.getClass().getSimpleName());
 			}
 		}
 	}
@@ -97,8 +136,8 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		validate();
 		autoWire();
+		validate();
 		super.postProcessBeanFactory(beanFactory);
 	}
 
