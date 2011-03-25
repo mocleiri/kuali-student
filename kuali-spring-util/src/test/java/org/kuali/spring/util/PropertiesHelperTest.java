@@ -8,8 +8,15 @@ import org.junit.Test;
 
 public class PropertiesHelperTest {
 
+	protected PropertiesHelper getPropertiesHelper() {
+		PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+		PropertiesHelper helper = new PropertiesHelper();
+		helper.setLoggerSupport(loggerSupport);
+		return helper;
+	}
+
 	@Test
-	public void replaceProperties() {
+	public void syncProperties() {
 		Properties oldProps = new Properties();
 		oldProps.setProperty("a", "1");
 		oldProps.setProperty("b", "2");
@@ -19,7 +26,8 @@ public class PropertiesHelperTest {
 		newProps.setProperty("c", "4");
 		newProps.setProperty("d", "5");
 
-		PropertiesHelper helper = new PropertiesHelper();
+		PropertiesHelper helper = getPropertiesHelper();
+
 		helper.syncProperties(oldProps, newProps);
 		for (String key : oldProps.stringPropertyNames()) {
 			Assert.assertEquals(newProps.getProperty(key), oldProps.getProperty(key));
@@ -37,7 +45,7 @@ public class PropertiesHelperTest {
 		newProps.setProperty("c", "4");
 		newProps.setProperty("d", "5");
 
-		PropertiesHelper helper = new PropertiesHelper();
+		PropertiesHelper helper = getPropertiesHelper();
 		helper.mergeProperty(oldProps, newProps, "b", false, "Unit Test");
 		helper.mergeProperty(oldProps, newProps, "foo", false, "Unit Test");
 	}
@@ -57,13 +65,51 @@ public class PropertiesHelperTest {
 	}
 
 	@Test
-	public void mergeSystemProperties() {
+	public void mergeSystemPropertiesNever() {
+		String key = "a";
+		String val = "1";
 		Properties currentProps = new Properties();
-		currentProps.setProperty("a", "1");
-		currentProps.setProperty("b", "2");
+		currentProps.setProperty(key, val);
 
-		PropertiesHelper helper = new PropertiesHelper();
+		PropertiesHelper helper = getPropertiesHelper();
+
+		System.setProperty(key, "some-other-value");
 		helper.mergeSystemProperties(currentProps, SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_NEVER);
-
+		Assert.assertEquals(val, currentProps.getProperty(key));
+		System.getProperties().remove(key);
 	}
+
+	@Test
+	public void mergeSystemPropertiesOverride() {
+		String key = "a";
+		String val = "1";
+		Properties currentProps = new Properties();
+		currentProps.setProperty(key, val);
+
+		PropertiesHelper helper = getPropertiesHelper();
+
+		System.setProperty(key, "some-other-value");
+		helper.mergeSystemProperties(currentProps, SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
+		Assert.assertEquals("some-other-value", currentProps.getProperty(key));
+		System.getProperties().remove(key);
+	}
+
+	@Test
+	public void mergeSystemPropertiesFallback() {
+		String key = "a";
+		String val = "1";
+		Properties currentProps = new Properties();
+		currentProps.setProperty(key, val);
+
+		PropertiesHelper helper = getPropertiesHelper();
+
+		System.setProperty(key, "some-other-value");
+		System.setProperty("b", "2");
+		helper.mergeSystemProperties(currentProps, SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
+		Assert.assertEquals(val, currentProps.getProperty(key));
+		Assert.assertEquals("2", currentProps.getProperty("b"));
+		System.getProperties().remove(key);
+		System.getProperties().remove("b");
+	}
+
 }

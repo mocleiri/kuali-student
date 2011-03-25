@@ -66,7 +66,8 @@ public class PropertiesHelper {
 
 			// Add the missing property
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
-			logger.trace("Adding property {}=[{}]", necessaryKey, necessaryValue);
+			logger.trace("Adding property {}=[{}]", necessaryKey,
+					loggerSupport.getPropertyValue(necessaryKey, necessaryValue));
 			properties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
@@ -123,11 +124,12 @@ public class PropertiesHelper {
 		return clone;
 	}
 
-	public Properties getEnvironmentAsProperties(String prefix) {
+	public Properties getEnvironmentProperties(String prefix) {
 		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreExceptions();
 		Properties envProps = new Properties();
 		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
-			envProps.setProperty(prefix + entry.getKey(), entry.getValue());
+			String key = (prefix == null) ? entry.getKey() : prefix + entry.getKey();
+			envProps.setProperty(key, entry.getValue());
 		}
 		return envProps;
 	}
@@ -135,7 +137,7 @@ public class PropertiesHelper {
 	public void mergeEnvironmentProperties(Properties currentProps, String prefix) {
 		logger.info("Merging environment properties");
 		String source = PropertiesSource.ENVIRONMENT.toString();
-		mergeProperties(currentProps, getEnvironmentAsProperties(prefix), true, source);
+		mergeProperties(currentProps, getEnvironmentProperties(prefix), true, source);
 	}
 
 	/**
@@ -193,7 +195,7 @@ public class PropertiesHelper {
 		}
 
 		// Merge in the system properties
-		logger.info("Merging system properties with Spring properties using mode {}", mode);
+		logger.info("Merging system properties using mode {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
 		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreExceptions();
 		mergeProperties(currentProps, systemProperties, override, PropertiesSource.SYSTEM.toString());
