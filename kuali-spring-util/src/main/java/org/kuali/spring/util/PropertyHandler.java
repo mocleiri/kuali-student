@@ -41,11 +41,12 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	/**
 	 * Automatically wire together a default set of components for handling properties.<br>
 	 * 
-	 * The intent here is to lessen the amount of configuration imposed on end users of this class. Allow users to think
-	 * at the property level.<br>
+	 * The intent here is to lessen the configuration burden imposed on users of this class. Allow users to think at the
+	 * property level.<br>
 	 * 
-	 * For example, set ignoreResourceNotFound to true on the PropertiesLoader and not be overly concerned with the
-	 * internals of how PropertiesLoggerSupport and PropertiesHelper are wired into the PropertiesLoader.<br>
+	 * For example, setting ignoreResourceNotFound to true on the PropertiesLoader will have the desired affect without
+	 * also requiring a user to configure how PropertiesLoggerSupport and PropertiesHelper are wired into the
+	 * PropertiesLoader.<br>
 	 * 
 	 * Nothing prevents altering how components are wired together.<br>
 	 * 
