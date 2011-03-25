@@ -17,16 +17,29 @@ import org.springframework.beans.factory.config.BeanDefinitionVisitor;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringValueResolver;
 
-public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
-	final Logger logger = LoggerFactory.getLogger(NotifyingBeanDefinitionVisitor.class);
+public class EnhancedBeanDefinitionVisitor extends BeanDefinitionVisitor {
+	final Logger logger = LoggerFactory.getLogger(EnhancedBeanDefinitionVisitor.class);
 	List<VisitationListener> listeners = new ArrayList<VisitationListener>();
+	StringValueResolver valueResolver;
 
-	public NotifyingBeanDefinitionVisitor() {
-		this(new DefaultStringValueResolver());
+	public EnhancedBeanDefinitionVisitor() {
+		this(null);
 	}
 
-	public NotifyingBeanDefinitionVisitor(StringValueResolver stringValueResolver) {
-		super(stringValueResolver);
+	@Override
+	protected String resolveStringValue(String strVal) {
+		if (this.valueResolver == null) {
+			throw new IllegalStateException("No StringValueResolver specified - pass a resolver "
+					+ "object into the constructor or override the 'resolveStringValue' method");
+		}
+		String resolvedValue = this.valueResolver.resolveStringValue(strVal);
+		// Return original String if not modified.
+		return (strVal.equals(resolvedValue) ? strVal : resolvedValue);
+	}
+
+	public EnhancedBeanDefinitionVisitor(StringValueResolver valueResolver) {
+		super();
+		this.valueResolver = valueResolver;
 		addListener(new DefaultBeanVisitationListener());
 	}
 
@@ -107,6 +120,14 @@ public class NotifyingBeanDefinitionVisitor extends BeanDefinitionVisitor {
 
 	public void setListeners(List<VisitationListener> listeners) {
 		this.listeners = listeners;
+	}
+
+	public StringValueResolver getValueResolver() {
+		return valueResolver;
+	}
+
+	public void setValueResolver(StringValueResolver valueResolver) {
+		this.valueResolver = valueResolver;
 	}
 
 }

@@ -18,7 +18,7 @@
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" />
   <bean id="property.string.resolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:replacer-ref="property.replacer"
     p:retriever-ref="property.retriever" />
-  <bean id="property.bean.visitor" class="org.kuali.spring.util.NotifyingBeanDefinitionVisitor">
+  <bean id="property.bean.visitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor">
     <constructor-arg ref="property.string.resolver" />
   </bean>
 

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.io.Resource;
+import org.springframework.util.Assert;
 import org.springframework.util.StringValueResolver;
 
 public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware, BeanFactoryAware {
@@ -44,8 +45,58 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	PlaceholderReplacer replacer = new PlaceholderReplacer(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 			PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	PropertiesRetriever retriever = new PropertiesRetriever();
-	StringValueResolver stringResolver = new DefaultStringValueResolver(replacer, retriever, null);
-	BeanDefinitionVisitor visitor = new NotifyingBeanDefinitionVisitor(stringResolver);
+	StringValueResolver resolver = new DefaultStringValueResolver(replacer, retriever, null);
+	BeanDefinitionVisitor visitor = new EnhancedBeanDefinitionVisitor(resolver);
+
+	protected void autoWire() {
+		if (helper.getLoggerSupport() == null) {
+			helper.setLoggerSupport(getLoggerSupport());
+			logger.debug("Auto-wiring helper with loggerSupport");
+		}
+		if (loader.getLoggerSupport() == null) {
+			loader.setLoggerSupport(getLoggerSupport());
+			logger.debug("Auto-wiring loader with loggerSupport");
+		}
+		if (loader.getHelper() == null) {
+			loader.setHelper(getHelper());
+			logger.debug("Auto-wiring loader with helper");
+		}
+		if (resolver instanceof DefaultStringValueResolver) {
+			DefaultStringValueResolver defaultResolver = (DefaultStringValueResolver) resolver;
+			if (defaultResolver.getReplacer() == null) {
+				defaultResolver.setReplacer(getReplacer());
+				logger.debug("Auto-wiring resolver with replacer");
+			}
+			if (defaultResolver.getRetriever() == null) {
+				defaultResolver.setRetriever(getRetriever());
+				logger.debug("Auto-wiring resolver with retriever");
+			}
+		}
+		if (visitor instanceof EnhancedBeanDefinitionVisitor) {
+			EnhancedBeanDefinitionVisitor enhancedVisitor = (EnhancedBeanDefinitionVisitor) visitor;
+			if (enhancedVisitor.getValueResolver() == null) {
+				enhancedVisitor.setValueResolver(getResolver());
+				logger.debug("Auto-wiring visitor with resolver");
+			}
+		}
+	}
+
+	protected void validate() {
+		Assert.notNull(getLoggerSupport());
+		Assert.notNull(getHelper());
+		Assert.notNull(getLoader());
+		Assert.notNull(getReplacer());
+		Assert.notNull(getRetriever());
+		Assert.notNull(getResolver());
+		Assert.notNull(getVisitor());
+	}
+
+	@Override
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		validate();
+		autoWire();
+		super.postProcessBeanFactory(beanFactory);
+	}
 
 	@Override
 	public void setLocation(Resource location) {
@@ -189,10 +240,10 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		processBeanDefinitions(beanFactory);
 
 		// New in Spring 2.5: resolve placeholders in alias target names and aliases as well.
-		beanFactory.resolveAliases(stringResolver);
+		beanFactory.resolveAliases(resolver);
 
 		// New in Spring 3.0: resolve placeholders in embedded values such as annotation attributes.
-		beanFactory.addEmbeddedValueResolver(stringResolver);
+		beanFactory.addEmbeddedValueResolver(resolver);
 	}
 
 	public String getBeanName() {
@@ -263,12 +314,12 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.replacer = replacer;
 	}
 
-	public StringValueResolver getStringResolver() {
-		return stringResolver;
+	public StringValueResolver getResolver() {
+		return resolver;
 	}
 
-	public void setStringResolver(StringValueResolver stringResolver) {
-		this.stringResolver = stringResolver;
+	public void setResolver(StringValueResolver stringResolver) {
+		this.resolver = stringResolver;
 	}
 
 	public void setUnresolvedSpringProperties(Properties springProperties) {
