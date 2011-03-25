@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
-public class DefaultBeanVisitationListener implements VisitationListener {
-	final Logger logger = LoggerFactory.getLogger(DefaultBeanVisitationListener.class);
+public class DefaultBeanVisitListener implements VisitListener {
+	final Logger logger = LoggerFactory.getLogger(DefaultBeanVisitListener.class);
 
 	@Override
 	public void valueResolved(ValueResolutionEvent event) {
@@ -19,22 +19,22 @@ public class DefaultBeanVisitationListener implements VisitationListener {
 	}
 
 	@Override
-	public void beforeVisit(BeanVisitationEvent event) {
+	public void beforeVisit(BeanVisitEvent event) {
 		logger.info("Visiting {}", event.getBeanDefinition());
 	}
 
 	@Override
-	public void afterVisit(BeanVisitationEvent event) {
+	public void afterVisit(BeanVisitEvent event) {
 		logger.trace("Visit completed. {}", event.getBeanDefinition());
 	}
 
 	@Override
-	public void beforeVisit(PropertyValueVisitationEvent event) {
+	public void beforeVisit(PropertyValueVisitEvent event) {
 		logger.trace("Visiting {}", event.getPropertyValue());
 	}
 
 	@Override
-	public void afterVisit(PropertyValueVisitationEvent event) {
+	public void afterVisit(PropertyValueVisitEvent event) {
 		if (ObjectUtils.nullSafeEquals(event.getOldValue(), event.getNewValue())) {
 			logger.trace("Value for property '{}' was left unchanged", event.getPropertyValue().getName());
 		} else {

@@ -24,7 +24,7 @@ public class PropertiesLoader {
 	String fileEncoding;
 
 	public PropertiesLoader() {
-		this(new PropertiesLoggerSupport(), new PropertiesHelper());
+		this(null, null);
 	}
 
 	public PropertiesLoader(PropertiesLoggerSupport loggerSupport, PropertiesHelper helper) {

@@ -11,7 +11,7 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:ignoreResourceNotFound="true" />
+  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:ignoreResourceNotFound="true" p:fileEncoding="UTF-8" />
   <bean id="property.configurer" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="property.loader">
     <property name="locations">
       <list>

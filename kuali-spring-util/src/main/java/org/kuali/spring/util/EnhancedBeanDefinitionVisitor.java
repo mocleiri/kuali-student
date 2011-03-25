@@ -3,11 +3,10 @@ package org.kuali.spring.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kuali.spring.util.event.BeanVisitationEvent;
-import org.kuali.spring.util.event.DefaultBeanVisitationListener;
-import org.kuali.spring.util.event.PropertyValueVisitationEvent;
+import org.kuali.spring.util.event.BeanVisitEvent;
+import org.kuali.spring.util.event.PropertyValueVisitEvent;
 import org.kuali.spring.util.event.ValueResolutionEvent;
-import org.kuali.spring.util.event.VisitationListener;
+import org.kuali.spring.util.event.VisitListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.MutablePropertyValues;
@@ -19,31 +18,29 @@ import org.springframework.util.StringValueResolver;
 
 public class EnhancedBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	final Logger logger = LoggerFactory.getLogger(EnhancedBeanDefinitionVisitor.class);
-	List<VisitationListener> listeners = new ArrayList<VisitationListener>();
+	List<VisitListener> listeners = new ArrayList<VisitListener>();
 	StringValueResolver valueResolver;
 
 	public EnhancedBeanDefinitionVisitor() {
 		this(null);
 	}
 
+	public EnhancedBeanDefinitionVisitor(StringValueResolver valueResolver) {
+		super();
+		this.valueResolver = valueResolver;
+	}
+
 	@Override
 	protected String resolveStringValue(String strVal) {
 		if (this.valueResolver == null) {
-			throw new IllegalStateException("No StringValueResolver specified - pass a resolver "
-					+ "object into the constructor or override the 'resolveStringValue' method");
+			throw new IllegalStateException("No StringValueResolver specified");
 		}
 		String resolvedValue = this.valueResolver.resolveStringValue(strVal);
 		// Return original String if not modified.
 		return (strVal.equals(resolvedValue) ? strVal : resolvedValue);
 	}
 
-	public EnhancedBeanDefinitionVisitor(StringValueResolver valueResolver) {
-		super();
-		this.valueResolver = valueResolver;
-		addListener(new DefaultBeanVisitationListener());
-	}
-
-	public void addListener(VisitationListener listener) {
+	public void addListener(VisitListener listener) {
 		listeners.add(listener);
 	}
 
@@ -80,45 +77,45 @@ public class EnhancedBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	}
 
 	protected void beforeVisit(MutablePropertyValues pvs, PropertyValue pv) {
-		PropertyValueVisitationEvent event = new PropertyValueVisitationEvent(pvs, pv);
-		for (VisitationListener listener : listeners) {
+		PropertyValueVisitEvent event = new PropertyValueVisitEvent(pvs, pv);
+		for (VisitListener listener : listeners) {
 			listener.afterVisit(event);
 		}
 	}
 
 	protected void afterVisit(MutablePropertyValues pvs, PropertyValue pv, Object oldVal, Object newVal) {
-		PropertyValueVisitationEvent event = new PropertyValueVisitationEvent(pvs, pv, oldVal, newVal);
-		for (VisitationListener listener : listeners) {
+		PropertyValueVisitEvent event = new PropertyValueVisitEvent(pvs, pv, oldVal, newVal);
+		for (VisitListener listener : listeners) {
 			listener.afterVisit(event);
 		}
 	}
 
 	protected void beforeVisit(BeanDefinition beanDefinition) {
-		BeanVisitationEvent event = new BeanVisitationEvent(beanDefinition);
-		for (VisitationListener listener : listeners) {
+		BeanVisitEvent event = new BeanVisitEvent(beanDefinition);
+		for (VisitListener listener : listeners) {
 			listener.beforeVisit(event);
 		}
 	}
 
 	protected void afterVisit(BeanDefinition beanDefinition) {
-		BeanVisitationEvent event = new BeanVisitationEvent(beanDefinition);
-		for (VisitationListener listener : listeners) {
+		BeanVisitEvent event = new BeanVisitEvent(beanDefinition);
+		for (VisitListener listener : listeners) {
 			listener.afterVisit(event);
 		}
 	}
 
 	protected void valueResolved(Object oldValue, Object newValue) {
 		ValueResolutionEvent event = new ValueResolutionEvent(oldValue, newValue);
-		for (VisitationListener listener : listeners) {
+		for (VisitListener listener : listeners) {
 			listener.valueResolved(event);
 		}
 	}
 
-	public List<VisitationListener> getListeners() {
+	public List<VisitListener> getListeners() {
 		return listeners;
 	}
 
-	public void setListeners(List<VisitationListener> listeners) {
+	public void setListeners(List<VisitListener> listeners) {
 		this.listeners = listeners;
 	}
 

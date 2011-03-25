@@ -2,14 +2,14 @@ package org.kuali.spring.util.event;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 
-public class BeanVisitationEvent {
+public class BeanVisitEvent {
 	BeanDefinition beanDefinition;
 
-	public BeanVisitationEvent() {
+	public BeanVisitEvent() {
 		this(null);
 	}
 
-	public BeanVisitationEvent(BeanDefinition beanDefinition) {
+	public BeanVisitEvent(BeanDefinition beanDefinition) {
 		super();
 		this.beanDefinition = beanDefinition;
 	}

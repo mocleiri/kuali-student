@@ -3,21 +3,21 @@ package org.kuali.spring.util.event;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 
-public class PropertyValueVisitationEvent {
+public class PropertyValueVisitEvent {
 	MutablePropertyValues propertyValues;
 	PropertyValue propertyValue;
 	Object oldValue;
 	Object newValue;
 
-	public PropertyValueVisitationEvent() {
+	public PropertyValueVisitEvent() {
 		this(null, null, null, null);
 	}
 
-	public PropertyValueVisitationEvent(MutablePropertyValues propertyValues, PropertyValue propertyValue) {
+	public PropertyValueVisitEvent(MutablePropertyValues propertyValues, PropertyValue propertyValue) {
 		this(propertyValues, propertyValue, null, null);
 	}
 
-	public PropertyValueVisitationEvent(MutablePropertyValues propertyValues, PropertyValue propertyValue,
+	public PropertyValueVisitEvent(MutablePropertyValues propertyValues, PropertyValue propertyValue,
 			Object oldValue, Object newValue) {
 		super();
 		this.propertyValues = propertyValues;

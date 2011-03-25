@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 
+import org.kuali.spring.util.event.DefaultBeanVisitListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -77,6 +78,9 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 			if (enhancedVisitor.getValueResolver() == null) {
 				enhancedVisitor.setValueResolver(getResolver());
 				logger.debug("Auto-wiring visitor with resolver");
+			}
+			if (enhancedVisitor.getListeners().size() == 0) {
+				enhancedVisitor.addListener(new DefaultBeanVisitListener());
 			}
 		}
 	}

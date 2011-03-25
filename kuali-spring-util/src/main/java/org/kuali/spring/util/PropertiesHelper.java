@@ -19,7 +19,7 @@ public class PropertiesHelper {
 	PropertiesLoggerSupport loggerSupport;
 
 	public PropertiesHelper() {
-		this(new PropertiesLoggerSupport());
+		this(null);
 	}
 
 	public PropertiesHelper(PropertiesLoggerSupport loggerSupport) {
