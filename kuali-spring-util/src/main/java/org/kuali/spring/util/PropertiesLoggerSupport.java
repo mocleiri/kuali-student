@@ -17,13 +17,24 @@ public class PropertiesLoggerSupport {
 	public static final String DEFAULT_MASKED_VALUE = "******";
 	public static final boolean DEFAULT_IS_MASK_PROPERTY_VALUES = true;
 	public static final boolean DEFAULT_IS_FLATTEN_PROPERTY_VALUES = false;
+	public static final boolean DEFAULT_IS_TRIM_PROPERTY_VALUES = false;
+	public static final String DEFAULT_REPLACEMENT_STRING = " ";
 
-	// If true, replace \n and \r with a space when logging values
+	// If true, replace \n and \r when logging values
 	boolean flattenPropertyValues = DEFAULT_IS_FLATTEN_PROPERTY_VALUES;
+	// The value to replace linefeeds with
+	String linefeedReplacement = DEFAULT_REPLACEMENT_STRING;
+	// The value to replace carriage returns with
+	String carriageReturnReplacement = DEFAULT_REPLACEMENT_STRING;
+	// If true, call trim() on property values before logging them
+	boolean trimPropertyValues = DEFAULT_IS_TRIM_PROPERTY_VALUES;
 	// If true, mask values for keys that match the maskExpression
 	boolean maskPropertyValues = DEFAULT_IS_MASK_PROPERTY_VALUES;
+	// Regular expression to compare property keys against
 	String maskExpression = DEFAULT_MASK_EXPRESSION;
+	// The value to log in place of the actual value if we need to mask it
 	String maskValue = DEFAULT_MASKED_VALUE;
+	// Compiled representation of the regular expression
 	Pattern pattern = Pattern.compile(getMaskExpression());
 
 	/**
@@ -76,8 +87,10 @@ public class PropertiesLoggerSupport {
 
 	public String getPropertyValue(String key, String value) {
 		if (flattenPropertyValues) {
-			value = value.replace("\n", " ");
-			value = value.replace("\r", " ");
+			value = value.replace("\n", getLinefeedReplacement());
+			value = value.replace("\r", getCarriageReturnReplacement());
+		}
+		if (trimPropertyValues) {
 			value = value.trim();
 		}
 		if (!maskPropertyValues) {
@@ -122,6 +135,30 @@ public class PropertiesLoggerSupport {
 
 	public Pattern getPattern() {
 		return pattern;
+	}
+
+	public String getLinefeedReplacement() {
+		return linefeedReplacement;
+	}
+
+	public void setLinefeedReplacement(String linefeedReplacement) {
+		this.linefeedReplacement = linefeedReplacement;
+	}
+
+	public String getCarriageReturnReplacement() {
+		return carriageReturnReplacement;
+	}
+
+	public void setCarriageReturnReplacement(String carriageReturnReplacement) {
+		this.carriageReturnReplacement = carriageReturnReplacement;
+	}
+
+	public boolean isTrimPropertyValues() {
+		return trimPropertyValues;
+	}
+
+	public void setTrimPropertyValues(boolean trimPropertyValues) {
+		this.trimPropertyValues = trimPropertyValues;
 	}
 
 }

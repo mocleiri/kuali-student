@@ -10,6 +10,9 @@ public class PropertiesHelperTest {
 
 	protected PropertiesHelper getPropertiesHelper() {
 		PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+		loggerSupport.setFlattenPropertyValues(true);
+		loggerSupport.setLinefeedReplacement("LF");
+		loggerSupport.setCarriageReturnReplacement("CR");
 		PropertiesHelper helper = new PropertiesHelper();
 		helper.setLoggerSupport(loggerSupport);
 		return helper;
@@ -36,18 +39,31 @@ public class PropertiesHelperTest {
 
 	@Test
 	public void mergeProperty() {
+		String source = "UNITTEST";
+		String key = "a";
+		String newKey = "b";
+		String a = "a";
+		String a1 = "a1";
+		String b = "b";
+
 		Properties oldProps = new Properties();
-		oldProps.setProperty("a", "1");
-		oldProps.setProperty("b", "2");
+		oldProps.setProperty(key, a);
 
 		Properties newProps = new Properties();
-		newProps.setProperty("b", "3");
-		newProps.setProperty("c", "4");
-		newProps.setProperty("d", "5");
+		newProps.setProperty(key, a1);
+		newProps.setProperty(newKey, b);
 
 		PropertiesHelper helper = getPropertiesHelper();
-		helper.mergeProperty(oldProps, newProps, "b", false, "Unit Test");
-		helper.mergeProperty(oldProps, newProps, "foo", false, "Unit Test");
+
+		PropertiesMergeContext context = new PropertiesMergeContext(oldProps, newProps, false, source, true);
+
+		helper.mergeProperty(context, key);
+		Assert.assertEquals(a, oldProps.getProperty(key));
+		helper.mergeProperty(context, key);
+		Assert.assertEquals(a1, oldProps.getProperty(key));
+		context.setOverride(false);
+		helper.mergeProperty(context, newKey);
+		Assert.assertEquals(b, oldProps.getProperty(newKey));
 	}
 
 	@Test

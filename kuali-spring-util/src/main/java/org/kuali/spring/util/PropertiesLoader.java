@@ -110,7 +110,9 @@ public class PropertiesLoader {
 		}
 		for (Resource location : locations) {
 			Properties newProps = getProperties(location);
-			helper.mergeProperties(properties, newProps, true, PropertiesSource.RESOURCE.toString());
+			String source = PropertiesSource.RESOURCE.toString();
+			PropertiesMergeContext context = new PropertiesMergeContext(properties, newProps, true, source, true);
+			helper.mergeProperties(context);
 		}
 	}
 

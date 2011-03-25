@@ -137,7 +137,9 @@ public class PropertiesHelper {
 	public void mergeEnvironmentProperties(Properties currentProps, String prefix) {
 		logger.info("Merging environment properties");
 		String source = PropertiesSource.ENVIRONMENT.toString();
-		mergeProperties(currentProps, getEnvironmentProperties(prefix), true, source);
+		Properties envProps = getEnvironmentProperties(prefix);
+		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, envProps, true, source, true);
+		mergeProperties(context);
 	}
 
 	/**
@@ -150,7 +152,11 @@ public class PropertiesHelper {
 	 * @param override
 	 * @param src
 	 */
-	public void mergeProperty(Properties currentProps, Properties newProps, String key, boolean override, String src) {
+	public void mergeProperty(PropertiesMergeContext context, String key) {
+		Properties newProps = context.getNewProperties();
+		Properties currentProps = context.getCurrentProperties();
+		String src = context.getSource();
+		boolean override = context.isOverride();
 		// Extract the new value
 		String newValue = newProps.getProperty(key);
 
@@ -164,7 +170,7 @@ public class PropertiesHelper {
 
 		// There is no existing value for this key
 		if (currentValue == null) {
-			logger.debug("Adding " + src + " property {}=[{}]", key, newValue);
+			logger.debug("Adding " + src + " property {}=[{}]", key, loggerSupport.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 			return;
 		}
@@ -176,14 +182,19 @@ public class PropertiesHelper {
 
 		// There is an existing property, but the new property wins
 		if (override) {
-			logger.info(src + " property override for '" + key + "' [{}]->[{}]", currentValue, newValue);
+			logger.info(src + " property override for '" + key + "' [{}]->[{}]",
+					loggerSupport.getPropertyValue(key, currentValue), loggerSupport.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 		}
 	}
 
-	public void mergeProperties(Properties currentProps, Properties newProps, boolean override, String source) {
-		for (String key : newProps.stringPropertyNames()) {
-			mergeProperty(currentProps, newProps, key, override, source);
+	public void mergeProperties(PropertiesMergeContext context) {
+		List<String> keys = new ArrayList<String>(context.getNewProperties().stringPropertyNames());
+		if (context.isSort()) {
+			Collections.sort(keys);
+		}
+		for (String key : keys) {
+			mergeProperty(context, key);
 		}
 	}
 
@@ -195,10 +206,12 @@ public class PropertiesHelper {
 		}
 
 		// Merge in the system properties
-		logger.info("Merging system properties using mode {}", mode);
+		logger.info("Merging system properties using {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreExceptions();
-		mergeProperties(currentProps, systemProperties, override, PropertiesSource.SYSTEM.toString());
+		Properties sysProps = SystemUtils.getSystemPropertiesIgnoreExceptions();
+		String source = PropertiesSource.SYSTEM.toString();
+		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, sysProps, override, source, true);
+		mergeProperties(context);
 	}
 
 	public PropertiesLoggerSupport getLoggerSupport() {
