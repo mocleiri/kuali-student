@@ -17,10 +17,10 @@ public class ProcessStringContext {
 		this(null, null, 0, null);
 	}
 
-	public ProcessStringContext(PropertyRetriever resolver, Set<String> visitedPlaceholders, int startIndex,
+	public ProcessStringContext(PropertyRetriever retriever, Set<String> visitedPlaceholders, int startIndex,
 			StringBuilder buffer) {
 		super();
-		this.retriever = resolver;
+		this.retriever = retriever;
 		this.visitedPlaceholders = visitedPlaceholders;
 		this.startIndex = startIndex;
 		this.buffer = buffer;
@@ -54,7 +54,7 @@ public class ProcessStringContext {
 		return retriever;
 	}
 
-	public void setRetriever(PropertyRetriever resolver) {
-		this.retriever = resolver;
+	public void setRetriever(PropertyRetriever retriever) {
+		this.retriever = retriever;
 	}
 }
