@@ -118,8 +118,8 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 			if (enhancedVisitor.getListeners().size() == 0) {
 				VisitListener listener = new DefaultVisitListener();
 				enhancedVisitor.addListener(listener);
-				logger.debug("Auto-wiring " + resolver.getClass().getSimpleName() + "->"
-						+ listener.getClass().getSimpleName());
+				logger.debug("Auto-wiring " + listener.getClass().getSimpleName() + "->"
+						+ visitor.getClass().getSimpleName());
 			}
 		}
 	}
