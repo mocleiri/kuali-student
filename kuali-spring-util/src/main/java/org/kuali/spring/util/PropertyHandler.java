@@ -133,6 +133,10 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	 */
 	BeanDefinitionVisitor visitor;
 
+	protected void autoWire() {
+		wirer.wire();
+	}
+
 	/**
 	 * Make sure we have all of the components needed by the default property handling logic
 	 */
@@ -149,7 +153,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		if (isAutoWire()) {
-			wirer.wire();
+			autoWire();
 		}
 		if (isValidate()) {
 			validate();
