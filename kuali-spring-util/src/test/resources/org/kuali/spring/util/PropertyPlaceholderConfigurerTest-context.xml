@@ -11,12 +11,11 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:ignoreResourceNotFound="true" />
-  <!-- 
   <bean id="property.logger" class="org.kuali.spring.util.PropertiesLoggerSupport" p:maskPropertyValues="false" />
-  <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" />
+  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:ignoreResourceNotFound="true" />
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" p:ignoreUnresolvablePlaceholders="true" />
-  <bean id="property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />
+  <!-- 
+  <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" />
   <bean id="property.resolver" class="org.kuali.spring.util.DefaultStringValueResolver" />
   <bean id="property.visitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor" />
    -->
@@ -25,7 +24,8 @@
     p:helper-ref="property.helper" p:loader-ref="property.loader" p:replacer-ref="property.replacer" p:retriever-ref="property.retriever"
     p:resolver-ref="property.resolver" p:visitor-ref="property.visitor">
      -->
-  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="property.loader">
+  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="property.loader"
+    p:loggerSupport-ref="property.logger" p:replacer-ref="property.replacer">
     <property name="locations">
       <list>
         <value>classpath:org/kuali/spring/util/default-properties.xml</value>
