@@ -111,8 +111,9 @@ public class PropertiesHelperTest {
 
 		System.setProperty(key, "some-other-value");
 		helper.mergeSystemProperties(currentProps, SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-		Assert.assertEquals("some-other-value", currentProps.getProperty(key));
 		System.getProperties().remove(key);
+		// Make sure the property has been updated
+		Assert.assertEquals("some-other-value", currentProps.getProperty(key));
 	}
 
 	@Test
@@ -127,10 +128,13 @@ public class PropertiesHelperTest {
 		System.setProperty(key, "some-other-value");
 		System.setProperty("b", "2");
 		helper.mergeSystemProperties(currentProps, SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK);
-		Assert.assertEquals(val, currentProps.getProperty(key));
-		Assert.assertEquals("2", currentProps.getProperty("b"));
 		System.getProperties().remove(key);
 		System.getProperties().remove("b");
+
+		// Make sure the existing property has NOT changed
+		Assert.assertEquals(val, currentProps.getProperty(key));
+		// Make sure the new property was merged in
+		Assert.assertEquals("2", currentProps.getProperty("b"));
 	}
 
 }
