@@ -46,8 +46,8 @@ public class PropertiesHelperTest {
 		String a1 = "a1";
 		String b = "b";
 
-		Properties oldProps = new Properties();
-		oldProps.setProperty(key, a);
+		Properties currentProps = new Properties();
+		currentProps.setProperty(key, a);
 
 		Properties newProps = new Properties();
 		newProps.setProperty(key, a1);
@@ -55,15 +55,20 @@ public class PropertiesHelperTest {
 
 		PropertiesHelper helper = getPropertiesHelper();
 
-		PropertiesMergeContext context = new PropertiesMergeContext(oldProps, newProps, false, source, true);
+		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, newProps, false, source, true);
 
+		// Test that the value was NOT overridden
 		helper.mergeProperty(context, key);
-		Assert.assertEquals(a, oldProps.getProperty(key));
+		Assert.assertEquals(a, currentProps.getProperty(key));
+
+		// Test that the value WAS overridden
+		context.setOverride(true);
 		helper.mergeProperty(context, key);
-		Assert.assertEquals(a1, oldProps.getProperty(key));
-		context.setOverride(false);
+		Assert.assertEquals(a1, currentProps.getProperty(key));
+
+		// Test that the new property was merged in
 		helper.mergeProperty(context, newKey);
-		Assert.assertEquals(b, oldProps.getProperty(newKey));
+		Assert.assertEquals(b, currentProps.getProperty(newKey));
 	}
 
 	@Test
