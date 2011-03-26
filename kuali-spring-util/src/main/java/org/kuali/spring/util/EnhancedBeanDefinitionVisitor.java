@@ -79,7 +79,7 @@ public class EnhancedBeanDefinitionVisitor extends BeanDefinitionVisitor {
 	protected void beforeVisit(MutablePropertyValues pvs, PropertyValue pv) {
 		PropertyValueVisitEvent event = new PropertyValueVisitEvent(pvs, pv);
 		for (VisitListener listener : listeners) {
-			listener.afterVisit(event);
+			listener.beforeVisit(event);
 		}
 	}
 
