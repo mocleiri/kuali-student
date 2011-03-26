@@ -17,7 +17,7 @@ public class PropertiesLoader {
 	public static final boolean DEFAULT_IGNORE_RESOURCE_NOT_FOUND = false;
 
 	PropertiesPersister persister = new DefaultPropertiesPersister();
-	PropertyLogger loggerSupport;
+	PropertiesLogger loggerSupport;
 	PropertiesHelper helper;
 
 	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
@@ -27,7 +27,7 @@ public class PropertiesLoader {
 		this(null, null);
 	}
 
-	public PropertiesLoader(PropertyLogger loggerSupport, PropertiesHelper helper) {
+	public PropertiesLoader(PropertiesLogger loggerSupport, PropertiesHelper helper) {
 		super();
 		this.loggerSupport = loggerSupport;
 		this.helper = helper;
@@ -140,11 +140,11 @@ public class PropertiesLoader {
 		this.fileEncoding = fileEncoding;
 	}
 
-	public PropertyLogger getLoggerSupport() {
+	public PropertiesLogger getLoggerSupport() {
 		return loggerSupport;
 	}
 
-	public void setLoggerSupport(PropertyLogger loggerSupport) {
+	public void setLoggerSupport(PropertiesLogger loggerSupport) {
 		this.loggerSupport = loggerSupport;
 	}
 

@@ -16,13 +16,13 @@ public class PropertiesHelper {
 
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
-	PropertyLogger loggerSupport;
+	PropertiesLogger loggerSupport;
 
 	public PropertiesHelper() {
 		this(null);
 	}
 
-	public PropertiesHelper(PropertyLogger loggerSupport) {
+	public PropertiesHelper(PropertiesLogger loggerSupport) {
 		super();
 		this.loggerSupport = loggerSupport;
 	}
@@ -214,11 +214,11 @@ public class PropertiesHelper {
 		mergeProperties(context);
 	}
 
-	public PropertyLogger getLoggerSupport() {
+	public PropertiesLogger getLoggerSupport() {
 		return loggerSupport;
 	}
 
-	public void setLoggerSupport(PropertyLogger loggerSupport) {
+	public void setLoggerSupport(PropertiesLogger loggerSupport) {
 		this.loggerSupport = loggerSupport;
 	}
 }

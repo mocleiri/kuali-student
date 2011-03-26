@@ -10,7 +10,7 @@
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
 
-  <bean id="property.logger" class="org.kuali.spring.util.PropertyLogger" />
+  <bean id="property.logger" class="org.kuali.spring.util.PropertiesLogger" />
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:loggerSupport-ref="property.logger" />
   <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:loggerSupport-ref="property.logger"
     p:helper-ref="property.helper" />
