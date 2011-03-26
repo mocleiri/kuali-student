@@ -11,8 +11,8 @@
 
 
   <bean id="property.logger" class="org.kuali.spring.util.PropertiesLogger" />
-  <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:loggerSupport-ref="property.logger" />
-  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:loggerSupport-ref="property.logger"
+  <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:propertiesLogger-ref="property.logger" />
+  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:propertiesLogger-ref="property.logger"
     p:helper-ref="property.helper" />
   <bean id="property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" />
@@ -23,7 +23,7 @@
   </bean>
 
   <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:location="classpath:org/kuali/spring/util/test.properties"
-    p:loggerSupport-ref="property.logger" p:helper-ref="property.helper" p:loader-ref="property.loader" p:retriever-ref="property.retriever"
+    p:propertiesLogger-ref="property.logger" p:helper-ref="property.helper" p:loader-ref="property.loader" p:retriever-ref="property.retriever"
     p:visitor-ref="property.bean.visitor" />
 
   <bean id="cat" class="org.kuali.spring.util.bean.Cat" p:prey="${cat.prey}" />

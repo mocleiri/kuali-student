@@ -25,7 +25,7 @@
     p:resolver-ref="property.resolver" p:visitor-ref="property.visitor">
      -->
   <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="property.loader"
-    p:loggerSupport-ref="property.logger" p:replacer-ref="property.replacer">
+    p:propertiesLogger-ref="property.logger" p:replacer-ref="property.replacer">
     <property name="locations">
       <list>
         <value>classpath:org/kuali/spring/util/default-properties.xml</value>

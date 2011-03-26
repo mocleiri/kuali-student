@@ -21,8 +21,8 @@ import org.springframework.util.StringValueResolver;
 
 /**
  * This class is similar to PropertyPlaceholderConfigurer from Spring. It is used to update bean properties with values
- * from properties files. It has all of the features from the Spring configurer, fixes a few bugs adds, a few new
- * features and is designed for extensibility
+ * from properties files. It has all of the features from the Spring configurer, fixes a few bugs, adds a few new
+ * features and is much more pluggable
  */
 public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware, BeanFactoryAware {
 	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
@@ -45,8 +45,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	 * property level.<br>
 	 * 
 	 * For example, setting ignoreResourceNotFound to true on the PropertiesLoader will have the desired affect without
-	 * also requiring a user to configure how PropertiesLoggerSupport and PropertiesHelper are wired into the
-	 * PropertiesLoader.<br>
+	 * also requiring a user to configure how PropertiesLogger and PropertiesHelper are wired into the PropertiesLoader.<br>
 	 * 
 	 * Nothing prevents altering how components are wired together.<br>
 	 * 
@@ -58,13 +57,13 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	Wirer wirer = new DefaultAutoWirer(this);
 
 	/**
-	 * Contains all of the resolved properties known to this configurer (properties can come from resources, system,
-	 * environment etc)
+	 * Contains all of the properties known to this configurer AFTER they have been resolved (properties can come from
+	 * resources, system, environment etc)
 	 */
 	Properties properties;
 
 	/**
-	 * Contains all of the properties known to this configurer before they have been resolved
+	 * Contains all of the properties known to this configurer BEFORE they have been resolved
 	 */
 	Properties unresolvedProperties;
 
@@ -74,7 +73,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	Properties springProperties;
 
 	/**
-	 * Contains the unresolved properties that originate from properties files
+	 * Contains the unresolved properties that originate from resources
 	 */
 	Properties unresolvedSpringProperties;
 
@@ -101,7 +100,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	/**
 	 * Provides control over how properties are logged
 	 */
-	PropertiesLogger loggerSupport;
+	PropertiesLogger propertiesLogger;
 
 	/**
 	 * Utility class for working with properties
@@ -141,7 +140,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	 * Make sure we have all of the components needed by the default property handling logic
 	 */
 	protected void validate() {
-		Assert.notNull(getLoggerSupport());
+		Assert.notNull(getPropertiesLogger());
 		Assert.notNull(getHelper());
 		Assert.notNull(getLoader());
 		Assert.notNull(getReplacer());
@@ -184,15 +183,15 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		springProperties = getResolvedProperties(unresolvedSpringProperties);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(loggerSupport.getLogEntry(unresolvedProperties, "*** Unresolved Properties ***"));
+			logger.debug(propertiesLogger.getLogEntry(unresolvedProperties, "*** Unresolved Properties ***"));
 		}
 
 		// Synchronize the properties passed in with our resolved properties
 		helper.syncProperties(properties, resolvedProperties);
 
 		if (logger.isInfoEnabled()) {
-			logger.info(loggerSupport.getLogEntry(springProperties, "*** Spring Properties ***"));
-			logger.info(loggerSupport.getLogEntry(properties, "*** All Properties ***"));
+			logger.info(propertiesLogger.getLogEntry(springProperties, "*** Spring Properties ***"));
+			logger.info(propertiesLogger.getLogEntry(properties, "*** All Properties ***"));
 		}
 	}
 
@@ -368,14 +367,6 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.systemPropertiesMode = systemPropertiesMode;
 	}
 
-	public PropertiesLogger getLoggerSupport() {
-		return loggerSupport;
-	}
-
-	public void setLoggerSupport(PropertiesLogger loggerSupport) {
-		this.loggerSupport = loggerSupport;
-	}
-
 	public PropertiesHelper getHelper() {
 		return helper;
 	}
@@ -470,6 +461,14 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	public void setUnresolvedSpringProperties(Properties unresolvedSpringProperties) {
 		this.unresolvedSpringProperties = unresolvedSpringProperties;
+	}
+
+	public PropertiesLogger getPropertiesLogger() {
+		return propertiesLogger;
+	}
+
+	public void setPropertiesLogger(PropertiesLogger propertiesLogger) {
+		this.propertiesLogger = propertiesLogger;
 	}
 
 }

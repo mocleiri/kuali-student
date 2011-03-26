@@ -26,7 +26,7 @@ public class PropertyHandlerTest {
 	public void autoWire() throws IOException {
 		PropertyHandler handler = new PropertyHandler();
 		handler.autoWire();
-		Assert.notNull(handler.getLoggerSupport());
+		Assert.notNull(handler.getPropertiesLogger());
 	}
 
 	@Test

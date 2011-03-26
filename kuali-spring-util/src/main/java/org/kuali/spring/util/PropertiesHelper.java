@@ -16,7 +16,7 @@ public class PropertiesHelper {
 
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
-	PropertiesLogger loggerSupport;
+	PropertiesLogger propertiesLogger;
 
 	public PropertiesHelper() {
 		this(null);
@@ -24,7 +24,7 @@ public class PropertiesHelper {
 
 	public PropertiesHelper(PropertiesLogger loggerSupport) {
 		super();
-		this.loggerSupport = loggerSupport;
+		this.propertiesLogger = loggerSupport;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class PropertiesHelper {
 			// Add the missing property
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
 			logger.trace("Adding property {}=[{}]", necessaryKey,
-					loggerSupport.getPropertyValue(necessaryKey, necessaryValue));
+					propertiesLogger.getPropertyValue(necessaryKey, necessaryValue));
 			properties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
@@ -103,8 +103,8 @@ public class PropertiesHelper {
 
 			// Update the old property value with the new property value
 			logger.trace("Updating property '" + commonKey + "' [{}]->[{}]",
-					loggerSupport.getPropertyValue(commonKey, oldPropertyValue),
-					loggerSupport.getPropertyValue(commonKey, newPropertyValue));
+					propertiesLogger.getPropertyValue(commonKey, oldPropertyValue),
+					propertiesLogger.getPropertyValue(commonKey, newPropertyValue));
 			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
@@ -170,7 +170,7 @@ public class PropertiesHelper {
 
 		// There is no existing value for this key
 		if (currentValue == null) {
-			logger.debug("Adding " + src + " property {}=[{}]", key, loggerSupport.getPropertyValue(key, newValue));
+			logger.debug("Adding " + src + " property {}=[{}]", key, propertiesLogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 			return;
 		}
@@ -183,7 +183,7 @@ public class PropertiesHelper {
 		// There is an existing property, but the new property wins
 		if (override) {
 			logger.info(src + " property override for '" + key + "' [{}]->[{}]",
-					loggerSupport.getPropertyValue(key, currentValue), loggerSupport.getPropertyValue(key, newValue));
+					propertiesLogger.getPropertyValue(key, currentValue), propertiesLogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 		}
 	}
@@ -214,11 +214,11 @@ public class PropertiesHelper {
 		mergeProperties(context);
 	}
 
-	public PropertiesLogger getLoggerSupport() {
-		return loggerSupport;
+	public PropertiesLogger getPropertiesLogger() {
+		return propertiesLogger;
 	}
 
-	public void setLoggerSupport(PropertiesLogger loggerSupport) {
-		this.loggerSupport = loggerSupport;
+	public void setPropertiesLogger(PropertiesLogger loggerSupport) {
+		this.propertiesLogger = loggerSupport;
 	}
 }

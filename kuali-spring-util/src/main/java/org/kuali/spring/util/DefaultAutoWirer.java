@@ -35,12 +35,12 @@ public class DefaultAutoWirer implements Wirer {
 	}
 
 	protected void wireLoggerSupport() {
-		if (handler.getLoggerSupport() != null) {
+		if (handler.getPropertiesLogger() != null) {
 			return;
 		}
 		PropertiesLogger loggerSupport = new PropertiesLogger();
-		handler.setLoggerSupport(loggerSupport);
-		logWiringEvent(handler.getLoggerSupport(), handler);
+		handler.setPropertiesLogger(loggerSupport);
+		logWiringEvent(handler.getPropertiesLogger(), handler);
 	}
 
 	protected void wireHelper() {
@@ -49,9 +49,9 @@ public class DefaultAutoWirer implements Wirer {
 			logWiringEvent(handler.getHelper(), handler);
 		}
 		PropertiesHelper helper = handler.getHelper();
-		if (helper.getLoggerSupport() == null) {
-			helper.setLoggerSupport(handler.getLoggerSupport());
-			logWiringEvent(helper.getLoggerSupport(), helper);
+		if (helper.getPropertiesLogger() == null) {
+			helper.setPropertiesLogger(handler.getPropertiesLogger());
+			logWiringEvent(helper.getPropertiesLogger(), helper);
 		}
 	}
 
@@ -62,10 +62,10 @@ public class DefaultAutoWirer implements Wirer {
 		}
 		PropertiesHelper helper = handler.getHelper();
 		PropertiesLoader loader = handler.getLoader();
-		PropertiesLogger loggerSupport = handler.getLoggerSupport();
-		if (loader.getLoggerSupport() == null) {
-			loader.setLoggerSupport(loggerSupport);
-			logWiringEvent(loader.getLoggerSupport(), loader);
+		PropertiesLogger loggerSupport = handler.getPropertiesLogger();
+		if (loader.getPropertiesLogger() == null) {
+			loader.setPropertiesLogger(loggerSupport);
+			logWiringEvent(loader.getPropertiesLogger(), loader);
 		}
 		if (loader.getHelper() == null) {
 			loader.setHelper(helper);
