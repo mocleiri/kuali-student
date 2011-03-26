@@ -101,7 +101,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	/**
 	 * Provides control over how properties are logged
 	 */
-	PropertiesLoggerSupport loggerSupport;
+	PropertyLogger loggerSupport;
 
 	/**
 	 * Utility class for working with properties
@@ -368,11 +368,11 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.systemPropertiesMode = systemPropertiesMode;
 	}
 
-	public PropertiesLoggerSupport getLoggerSupport() {
+	public PropertyLogger getLoggerSupport() {
 		return loggerSupport;
 	}
 
-	public void setLoggerSupport(PropertiesLoggerSupport loggerSupport) {
+	public void setLoggerSupport(PropertyLogger loggerSupport) {
 		this.loggerSupport = loggerSupport;
 	}
 

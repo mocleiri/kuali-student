@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PropertiesLoggerSupport {
-	final Logger logger = LoggerFactory.getLogger(PropertiesLoggerSupport.class);
+public class PropertyLogger {
+	final Logger logger = LoggerFactory.getLogger(PropertyLogger.class);
 
 	// Matches any string containing "password" (case insensitive)
 	public static final String DEFAULT_MASK_EXPRESSION = ".*((?i)password).*";

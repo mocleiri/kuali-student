@@ -16,13 +16,13 @@ public class PropertiesHelper {
 
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
-	PropertiesLoggerSupport loggerSupport;
+	PropertyLogger loggerSupport;
 
 	public PropertiesHelper() {
 		this(null);
 	}
 
-	public PropertiesHelper(PropertiesLoggerSupport loggerSupport) {
+	public PropertiesHelper(PropertyLogger loggerSupport) {
 		super();
 		this.loggerSupport = loggerSupport;
 	}
@@ -136,7 +136,7 @@ public class PropertiesHelper {
 
 	public void mergeEnvironmentProperties(Properties currentProps, String prefix) {
 		logger.info("Merging environment properties");
-		String source = PropertiesSource.ENVIRONMENT.toString();
+		String source = PropertySource.ENVIRONMENT.toString();
 		Properties envProps = getEnvironmentProperties(prefix);
 		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, envProps, true, source, true);
 		mergeProperties(context);
@@ -160,7 +160,7 @@ public class PropertiesHelper {
 		// Extract the new value
 		String newValue = newProps.getProperty(key);
 
-		// Ignore values that are null
+		// If the new value is null, there is nothing further to do
 		if (newValue == null) {
 			return;
 		}
@@ -175,7 +175,7 @@ public class PropertiesHelper {
 			return;
 		}
 
-		// Values are the same, nothing to do
+		// Values are the same, nothing further to do
 		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
 			return;
 		}
@@ -209,16 +209,16 @@ public class PropertiesHelper {
 		logger.info("Merging system properties using {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
 		Properties sysProps = SystemUtils.getSystemPropertiesIgnoreExceptions();
-		String source = PropertiesSource.SYSTEM.toString();
+		String source = PropertySource.SYSTEM.toString();
 		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, sysProps, override, source, true);
 		mergeProperties(context);
 	}
 
-	public PropertiesLoggerSupport getLoggerSupport() {
+	public PropertyLogger getLoggerSupport() {
 		return loggerSupport;
 	}
 
-	public void setLoggerSupport(PropertiesLoggerSupport loggerSupport) {
+	public void setLoggerSupport(PropertyLogger loggerSupport) {
 		this.loggerSupport = loggerSupport;
 	}
 }

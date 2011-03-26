@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PropertiesHelperTest {
 
 	protected PropertiesHelper getPropertiesHelper() {
-		PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+		PropertyLogger loggerSupport = new PropertyLogger();
 		loggerSupport.setFlattenPropertyValues(true);
 		loggerSupport.setLinefeedReplacement("LF");
 		loggerSupport.setCarriageReturnReplacement("CR");

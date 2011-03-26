@@ -38,7 +38,7 @@ public class DefaultAutoWirer implements Wirer {
 		if (handler.getLoggerSupport() != null) {
 			return;
 		}
-		PropertiesLoggerSupport loggerSupport = new PropertiesLoggerSupport();
+		PropertyLogger loggerSupport = new PropertyLogger();
 		handler.setLoggerSupport(loggerSupport);
 		logWiringEvent(handler.getLoggerSupport(), handler);
 	}
@@ -62,7 +62,7 @@ public class DefaultAutoWirer implements Wirer {
 		}
 		PropertiesHelper helper = handler.getHelper();
 		PropertiesLoader loader = handler.getLoader();
-		PropertiesLoggerSupport loggerSupport = handler.getLoggerSupport();
+		PropertyLogger loggerSupport = handler.getLoggerSupport();
 		if (loader.getLoggerSupport() == null) {
 			loader.setLoggerSupport(loggerSupport);
 			logWiringEvent(loader.getLoggerSupport(), loader);

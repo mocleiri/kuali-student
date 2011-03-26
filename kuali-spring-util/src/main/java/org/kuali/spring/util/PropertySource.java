@@ -1,5 +1,5 @@
 package org.kuali.spring.util;
 
-public enum PropertiesSource {
+public enum PropertySource {
 	SYSTEM, ENVIRONMENT, RESOURCE;
 }
