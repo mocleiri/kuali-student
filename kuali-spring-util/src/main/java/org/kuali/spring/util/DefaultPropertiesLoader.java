@@ -9,58 +9,72 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderSupport;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.PropertiesPersister;
 
-public class DefaultPropertiesLoader {
-	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	public static final boolean DEFAULT_IGNORE_RESOURCE_NOT_FOUND = false;
+public class DefaultPropertiesLoader implements PropertiesLoader {
+	private static final Logger logger = LoggerFactory.getLogger(DefaultPropertiesLoader.class);
 
-	PropertiesPersister persister = new DefaultPropertiesPersister();
-	DefaultPropertiesLogger propertiesLogger;
-	PropertiesHelper helper;
+	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
+	public static final boolean DEFAULT_IS_USE_ENVIRONMENT_PROPERTY_PREFIX = false;
+	public static final boolean DEFAULT_IS_LOCAL_OVERRIDE = false;
+	public static final boolean DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND = false;
+	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
+	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 
-	boolean ignoreResourceNotFound = DEFAULT_IGNORE_RESOURCE_NOT_FOUND;
+	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
+	PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
+	PropertiesHelper propertiesHelper = new PropertiesHelper();
+	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
+	boolean useEnvironmentPropertyPrefix = DEFAULT_IS_USE_ENVIRONMENT_PROPERTY_PREFIX;
+	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
+	boolean localOverride = DEFAULT_IS_LOCAL_OVERRIDE;
+	boolean ignoreResourceNotFound = DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND;
+	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
+	Properties systemProperties;
+	Properties environmentProperties;
+	Properties[] localProperties;
+	Resource[] locations;
 	String fileEncoding;
+	Properties resourceProperties;
+	Properties mergedLocalProperties;
 
-	public DefaultPropertiesLoader() {
-		this(null, null);
-	}
-
-	public DefaultPropertiesLoader(DefaultPropertiesLogger loggerSupport, PropertiesHelper helper) {
-		super();
-		this.propertiesLogger = loggerSupport;
-		this.helper = helper;
-	}
-
-	protected Properties loadProperties(Resource location, InputStream is) throws IOException {
+	protected Properties getProperties(Resource location, InputStream is) throws IOException {
 		Properties properties = new Properties();
+		// Use XML style loading if it is an XML file
 		if (isXMLFile(location)) {
-			this.persister.loadFromXml(properties, is);
+			getPropertiesPersister().loadFromXml(properties, is);
 			return properties;
 		}
 
-		// It is not an xml file
-		if (this.fileEncoding == null) {
-			this.persister.load(properties, is);
+		if (getFileEncoding() != null) {
+			// Use a Reader if they've specified a fileEncoding
+			getPropertiesPersister().load(properties, new InputStreamReader(is, getFileEncoding()));
 		} else {
-			this.persister.load(properties, new InputStreamReader(is, this.fileEncoding));
+			// Otherwise use an InputStream
+			getPropertiesPersister().load(properties, is);
 		}
 		return properties;
 	}
 
 	protected Properties getProperties(Resource location) throws IOException {
+		// Handle locations that don't exist
+		if (!location.exists()) {
+			return handleResourceNotFound(location);
+		}
+
+		// Otherwise proceed with loading
 		logger.info("Loading properties from {}", location);
 		InputStream is = null;
 		try {
 			is = location.getInputStream();
-			return loadProperties(location, is);
+			return getProperties(location, is);
 		} catch (IOException e) {
-			handleIOException(location, e);
+			throw e;
 		} finally {
 			nullSafeClose(is);
 		}
-		return new Properties();
 	}
 
 	protected boolean isXMLFile(Resource location) {
@@ -83,11 +97,14 @@ public class DefaultPropertiesLoader {
 		}
 	}
 
-	protected void handleIOException(Resource location, IOException e) throws IOException {
-		if (!this.ignoreResourceNotFound) {
-			throw e;
+	protected Properties handleResourceNotFound(Resource location) {
+		if (isIgnoreResourceNotFound()) {
+			logger.info("Ignoring properties from {}.  Resource not found", location);
+			// Return an empty Properties
+			return new Properties();
+		} else {
+			throw new PropertiesLoadException("Resource not found: " + location);
 		}
-		logger.warn("Could not load properties from {}: {}", location, e.getMessage());
 	}
 
 	protected void nullSafeClose(InputStream is) throws IOException {
@@ -97,56 +114,221 @@ public class DefaultPropertiesLoader {
 		is.close();
 	}
 
-	public void loadProperties(Properties properties, Resource[] locations) throws IOException {
-		if (locations == null || locations.length == 0) {
-			logger.info("No property locations to load from");
-			return;
+	/**
+	 * Merge the Properties[] into a single Properties object
+	 */
+	protected Properties getMergedLocalProperties() {
+		if (getLocalProperties() == null) {
+			// Nothing to do, return an empty Properties object
+			return new Properties();
 		}
-		for (Resource location : locations) {
+		// Merge the Properties[] into a single Properties object
+		Properties result = new Properties();
+		for (Properties localProp : getLocalProperties()) {
+			CollectionUtils.mergePropertiesIntoMap(localProp, result);
+		}
+		return result;
+	}
+
+	/**
+	 * Get properties from the environment
+	 */
+	protected Properties getEnvironmentProperties() {
+		if (isUseEnvironmentPropertyPrefix()) {
+			return getPropertiesHelper().getEnvironmentProperties(getEnvironmentPropertyPrefix());
+		} else {
+			return getPropertiesHelper().getEnvironmentProperties(null);
+		}
+	}
+
+	/**
+	 * Get system properties
+	 * 
+	 * @return
+	 */
+	protected Properties getSystemProperties() {
+		return SystemUtils.getSystemPropertiesIgnoreExceptions();
+	}
+
+	/**
+	 * Merge local, resource, system, and environment properties into a single Properties object. User supplied settings
+	 * control what properties "win" over other properties.
+	 */
+	public Properties mergeProperties(Properties local, Properties resource, Properties sys, Properties env) {
+		// Storage for our merged properties
+		Properties result = new Properties();
+
+		// Merge in local properties (nothing to actually merge here, but this also logs them when DEBUG is on)
+		PropertiesMergeContext context = new PropertiesMergeContext(result, local, PropertySource.LOCAL);
+		getPropertiesHelper().mergeProperties(context);
+
+		// Merge in properties from our resource locations. localOverride controls what property "wins" if the same
+		// property is declared both locally and in a properties file
+		context = new PropertiesMergeContext(result, resource, isLocalOverride(), PropertySource.RESOURCE);
+		getPropertiesHelper().mergeProperties(context);
+
+		// Merge in system properties. systemPropertiesMode controls system property overrides
+		getPropertiesHelper().mergeSystemProperties(result, sys, getSystemPropertiesMode());
+
+		// Merge in properties from the environment. Environment properties never override normal properties
+		context = new PropertiesMergeContext(result, env, false, PropertySource.ENVIRONMENT);
+		getPropertiesHelper().mergeProperties(context);
+
+		return result;
+	}
+
+	public Properties loadProperties() {
+		try {
+			// Populate properties objects from all of our known locations
+			Properties local = getMergedLocalProperties();
+			Properties resource = getResourceProperties();
+			Properties sys = getSystemProperties();
+			Properties env = getEnvironmentProperties();
+
+			// Store the properties locally
+			setMergedLocalProperties(local);
+			setResourceProperties(resource);
+			setSystemProperties(sys);
+			setEnvironmentProperties(env);
+
+			// Merge them into a single properties object
+			return mergeProperties(local, resource, sys, env);
+		} catch (IOException e) {
+			throw new PropertiesLoadException("Unexpected error loading properties", e);
+		}
+	}
+
+	public Properties getResourceProperties() throws IOException {
+		if (getLocations() == null || getLocations().length == 0) {
+			logger.info("No resource property locations to load from");
+			return new Properties();
+		}
+		Properties result = new Properties();
+		for (Resource location : getLocations()) {
 			Properties newProps = getProperties(location);
 			PropertySource source = PropertySource.RESOURCE;
-			PropertiesMergeContext context = new PropertiesMergeContext(properties, newProps, true, source, true);
-			helper.mergeProperties(context);
+			// If a property is declared in more than one resource location, the last resource location "wins"
+			boolean override = true;
+			PropertiesMergeContext context = new PropertiesMergeContext(result, newProps, override, source);
+			propertiesHelper.mergeProperties(context);
 		}
+		return result;
 	}
 
 	public boolean isIgnoreResourceNotFound() {
 		return ignoreResourceNotFound;
 	}
 
-	public void setIgnoreResourceNotFound(boolean ignoreResourceNotFound) {
-		this.ignoreResourceNotFound = ignoreResourceNotFound;
-	}
-
-	public PropertiesPersister getPersister() {
-		return persister;
-	}
-
-	public void setPersister(PropertiesPersister propertiesPersister) {
-		this.persister = propertiesPersister;
-	}
-
 	public String getFileEncoding() {
 		return fileEncoding;
+	}
+
+	public Properties[] getLocalProperties() {
+		return localProperties;
+	}
+
+	public void setLocalProperties(Properties[] localProperties) {
+		this.localProperties = localProperties;
+	}
+
+	public Resource[] getLocations() {
+		return locations;
+	}
+
+	public boolean isLocalOverride() {
+		return localOverride;
+	}
+
+	public PropertiesPersister getPropertiesPersister() {
+		return propertiesPersister;
+	}
+
+	public PropertiesHelper getPropertiesHelper() {
+		return propertiesHelper;
+	}
+
+	public void setPropertiesHelper(PropertiesHelper propertiesHelper) {
+		this.propertiesHelper = propertiesHelper;
+	}
+
+	public String getEnvironmentPropertyPrefix() {
+		return environmentPropertyPrefix;
+	}
+
+	public void setEnvironmentPropertyPrefix(String environmentPropertyPrefix) {
+		this.environmentPropertyPrefix = environmentPropertyPrefix;
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public void setPropertiesPersister(PropertiesPersister propertiesPersister) {
+		this.propertiesPersister = propertiesPersister;
+	}
+
+	public void setLocations(Resource[] locations) {
+		this.locations = locations;
+	}
+
+	public void setLocalOverride(boolean localOverride) {
+		this.localOverride = localOverride;
+	}
+
+	public void setIgnoreResourceNotFound(boolean ignoreResourceNotFound) {
+		this.ignoreResourceNotFound = ignoreResourceNotFound;
 	}
 
 	public void setFileEncoding(String fileEncoding) {
 		this.fileEncoding = fileEncoding;
 	}
 
-	public DefaultPropertiesLogger getPropertiesLogger() {
+	public SystemPropertiesMode getSystemPropertiesMode() {
+		return systemPropertiesMode;
+	}
+
+	public void setSystemPropertiesMode(SystemPropertiesMode systemPropertiesMode) {
+		this.systemPropertiesMode = systemPropertiesMode;
+	}
+
+	public boolean isSearchSystemEnvironment() {
+		return searchSystemEnvironment;
+	}
+
+	public void setSearchSystemEnvironment(boolean searchSystemEnvironment) {
+		this.searchSystemEnvironment = searchSystemEnvironment;
+	}
+
+	public void setResourceProperties(Properties resourceProperties) {
+		this.resourceProperties = resourceProperties;
+	}
+
+	public void setSystemProperties(Properties systemProperties) {
+		this.systemProperties = systemProperties;
+	}
+
+	public void setEnvironmentProperties(Properties environmentProperties) {
+		this.environmentProperties = environmentProperties;
+	}
+
+	public void setMergedLocalProperties(Properties mergedLocalProperties) {
+		this.mergedLocalProperties = mergedLocalProperties;
+	}
+
+	public boolean isUseEnvironmentPropertyPrefix() {
+		return useEnvironmentPropertyPrefix;
+	}
+
+	public void setUseEnvironmentPropertyPrefix(boolean useEnvironmentPropertyPrefix) {
+		this.useEnvironmentPropertyPrefix = useEnvironmentPropertyPrefix;
+	}
+
+	public PropertiesLogger getPropertiesLogger() {
 		return propertiesLogger;
 	}
 
-	public void setPropertiesLogger(DefaultPropertiesLogger loggerSupport) {
-		this.propertiesLogger = loggerSupport;
+	public void setPropertiesLogger(PropertiesLogger propertiesLogger) {
+		this.propertiesLogger = propertiesLogger;
 	}
 
-	public PropertiesHelper getHelper() {
-		return helper;
-	}
-
-	public void setHelper(PropertiesHelper helper) {
-		this.helper = helper;
-	}
 }
