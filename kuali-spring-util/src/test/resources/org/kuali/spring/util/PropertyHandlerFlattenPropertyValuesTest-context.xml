@@ -12,7 +12,7 @@
 
   <bean id="property.logger" class="org.kuali.spring.util.DefaultPropertiesLogger" />
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:propertiesLogger-ref="property.logger" />
-  <bean id="property.loader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:propertiesLogger-ref="property.logger"
+  <bean id="property.loader" class="org.kuali.spring.util.DefaultPropertiesLoaderOld" p:propertiesLogger-ref="property.logger"
     p:helper-ref="property.helper" />
   <bean id="property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" />

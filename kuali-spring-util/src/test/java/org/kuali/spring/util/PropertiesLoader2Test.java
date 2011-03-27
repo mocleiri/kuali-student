@@ -30,7 +30,7 @@ public class PropertiesLoader2Test {
 	@Test
 	public void resourceNotFound() throws IOException {
 		Resource location = new DefaultResourceLoader().getResource("classpath:some-resource-that-does-not-exist.txt");
-		PropertiesLoader2 loader = new PropertiesLoader2();
+		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
 		try {
 			loader.getProperties(location);
 			// Make sure it fails as a default behavior
@@ -46,7 +46,7 @@ public class PropertiesLoader2Test {
 
 	@Test
 	public void nullSafeClose() throws IOException {
-		PropertiesLoader2 loader = new PropertiesLoader2();
+		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
 		// Try to "close" null
 		loader.nullSafeClose(null);
 		InputStream is = new ByteArrayInputStream(new byte[] { 1 });

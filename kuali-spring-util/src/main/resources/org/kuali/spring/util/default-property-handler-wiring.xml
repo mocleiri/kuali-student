@@ -15,7 +15,7 @@
 
   <bean id="kuali.property.helper" class="org.kuali.spring.util.PropertiesHelper" p:propertiesLogger-ref="kuali.property.logger" />
 
-  <bean id="kuali.property.loader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:propertiesLogger-ref="kuali.property.logger"
+  <bean id="kuali.property.loader" class="org.kuali.spring.util.DefaultPropertiesLoaderOld" p:propertiesLogger-ref="kuali.property.logger"
     p:ignoreResourceNotFound="false" p:helper-ref="kuali.property.helper" />
 
   <bean id="kuali.property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />

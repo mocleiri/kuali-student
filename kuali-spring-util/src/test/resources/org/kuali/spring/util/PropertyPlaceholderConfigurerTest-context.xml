@@ -12,7 +12,7 @@
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
   <bean id="property.logger" class="org.kuali.spring.util.DefaultPropertiesLogger" p:maskPropertyValues="false" />
-  <bean id="property.loader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:ignoreResourceNotFound="true" />
+  <bean id="property.loader" class="org.kuali.spring.util.DefaultPropertiesLoaderOld" p:ignoreResourceNotFound="true" />
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" p:ignoreUnresolvablePlaceholders="true" />
   <!-- 
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" />

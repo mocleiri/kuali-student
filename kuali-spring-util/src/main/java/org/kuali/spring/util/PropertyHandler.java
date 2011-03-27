@@ -110,7 +110,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	/**
 	 * Utility class for loading properties from resources
 	 */
-	DefaultPropertiesLoader loader;
+	DefaultPropertiesLoaderOld loader;
 
 	/**
 	 * Utility class for replacing placeholders with values
@@ -375,11 +375,11 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.helper = helper;
 	}
 
-	public DefaultPropertiesLoader getLoader() {
+	public DefaultPropertiesLoaderOld getLoader() {
 		return loader;
 	}
 
-	public void setLoader(DefaultPropertiesLoader loader) {
+	public void setLoader(DefaultPropertiesLoaderOld loader) {
 		this.loader = loader;
 	}
 

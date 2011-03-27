@@ -57,11 +57,11 @@ public class DefaultAutoWirer implements Wirer {
 
 	protected void wireLoader() {
 		if (handler.getLoader() == null) {
-			handler.setLoader(new DefaultPropertiesLoader());
+			handler.setLoader(new DefaultPropertiesLoaderOld());
 			logWiringEvent(handler.getLoader(), handler);
 		}
 		PropertiesHelper helper = handler.getHelper();
-		DefaultPropertiesLoader loader = handler.getLoader();
+		DefaultPropertiesLoaderOld loader = handler.getLoader();
 		DefaultPropertiesLogger loggerSupport = handler.getPropertiesLogger();
 		if (loader.getPropertiesLogger() == null) {
 			loader.setPropertiesLogger(loggerSupport);

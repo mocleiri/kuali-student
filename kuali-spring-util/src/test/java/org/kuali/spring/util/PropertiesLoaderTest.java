@@ -31,7 +31,7 @@ public class PropertiesLoaderTest {
 	public void test1() throws IOException {
 		Resource[] locations = getLocations();
 		Properties properties = new Properties();
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
+		DefaultPropertiesLoaderOld loader = new DefaultPropertiesLoaderOld();
 		loader.setIgnoreResourceNotFound(true);
 		loader.loadProperties(properties, null);
 		loader.loadProperties(properties, locations);
@@ -41,7 +41,7 @@ public class PropertiesLoaderTest {
 
 	@Test
 	public void nullSafeClose() throws IOException {
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
+		DefaultPropertiesLoaderOld loader = new DefaultPropertiesLoaderOld();
 		loader.nullSafeClose(null);
 		InputStream is = new ByteArrayInputStream(new byte[] { 1 });
 		loader.nullSafeClose(is);
@@ -49,7 +49,7 @@ public class PropertiesLoaderTest {
 
 	@Test
 	public void handleIOException() throws IOException {
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
+		DefaultPropertiesLoaderOld loader = new DefaultPropertiesLoaderOld();
 		try {
 			loader.handleIOException(null, new IOException("Just testing"));
 			Assert.assertFalse(true);
