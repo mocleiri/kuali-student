@@ -8,7 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.Assert;
 
-public class PropertyHandlerTest {
+public class PropertyHandlerOldTest {
 
 	protected Resource[] getLocations() {
 		String[] locations = new String[] { "classpath:org/kuali/spring/util/test.properties" };
