@@ -23,20 +23,27 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
 
-	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
-	PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
-	PropertiesHelper propertiesHelper = new PropertiesHelper();
+	// Properties with defaults
 	String environmentPropertyPrefix = DEFAULT_ENVIRONMENT_PROPERTY_PREFIX;
 	boolean useEnvironmentPropertyPrefix = DEFAULT_IS_USE_ENVIRONMENT_PROPERTY_PREFIX;
 	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 	boolean localOverride = DEFAULT_IS_LOCAL_OVERRIDE;
 	boolean ignoreResourceNotFound = DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND;
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
-	Properties systemProperties;
-	Properties environmentProperties;
+	
+	// Properties without defaults
+	String fileEncoding;
 	Properties[] localProperties;
 	Resource[] locations;
-	String fileEncoding;
+
+	// Default component beans
+	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
+	PropertiesHelper propertiesHelper = new PropertiesHelper();
+	PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
+	
+	// Filled in during loading
+	Properties systemProperties;
+	Properties environmentProperties;
 	Properties resourceProperties;
 	Properties mergedLocalProperties;
 
