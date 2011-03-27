@@ -30,7 +30,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	boolean localOverride = DEFAULT_IS_LOCAL_OVERRIDE;
 	boolean ignoreResourceNotFound = DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND;
 	boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
-	
+
 	// Properties without defaults
 	String fileEncoding;
 	Properties[] localProperties;
@@ -40,7 +40,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	PropertiesHelper propertiesHelper = new PropertiesHelper();
 	PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
-	
+
 	// Filled in during loading
 	Properties systemProperties;
 	Properties environmentProperties;
@@ -159,7 +159,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 	/**
 	 * Merge local, resource, system, and environment properties into a single Properties object. User supplied settings
-	 * control what properties "win" over other properties.
+	 * control which property "wins" if a property is defined in multiple areas
 	 */
 	public Properties mergeProperties(Properties local, Properties resource, Properties sys, Properties env) {
 		// Storage for our merged properties
@@ -169,24 +169,25 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		PropertiesMergeContext context = new PropertiesMergeContext(result, local, PropertySource.LOCAL);
 		getPropertiesHelper().mergeProperties(context);
 
-		// Merge in properties from our resource locations. localOverride controls what property "wins" if the same
-		// property is declared both locally and in a properties file
+		// Merge in resource properties. isLocalOverride() controls what property "wins" if the same
+		// property is declared both locally and in a resource
 		context = new PropertiesMergeContext(result, resource, isLocalOverride(), PropertySource.RESOURCE);
 		getPropertiesHelper().mergeProperties(context);
 
 		// Merge in system properties. systemPropertiesMode controls system property overrides
 		getPropertiesHelper().mergeSystemProperties(result, sys, getSystemPropertiesMode());
 
-		// Merge in properties from the environment. Environment properties never override normal properties
+		// Merge in environment properties. Environment properties never override properties from another source
 		context = new PropertiesMergeContext(result, env, false, PropertySource.ENVIRONMENT);
 		getPropertiesHelper().mergeProperties(context);
 
+		// Return the merged properties
 		return result;
 	}
 
 	public Properties loadProperties() {
 		try {
-			// Populate properties objects from all of our known locations
+			// Populate properties from the default set of locations
 			Properties local = getMergedLocalProperties();
 			Properties resource = getResourceProperties();
 			Properties sys = getSystemProperties();
