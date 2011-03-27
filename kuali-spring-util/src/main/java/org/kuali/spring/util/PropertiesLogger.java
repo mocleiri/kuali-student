@@ -18,7 +18,12 @@ public class PropertiesLogger {
 	public static final boolean DEFAULT_IS_MASK_PROPERTY_VALUES = true;
 	public static final boolean DEFAULT_IS_FLATTEN_PROPERTY_VALUES = false;
 	public static final boolean DEFAULT_IS_TRIM_PROPERTY_VALUES = false;
+	// Space
 	public static final String DEFAULT_REPLACEMENT_STRING = " ";
+	// Carriage return
+	public static final String CR = "\r";
+	// Linefeed
+	public static final String LF = "\n";
 
 	// If true, replace \n and \r when logging values
 	boolean flattenPropertyValues = DEFAULT_IS_FLATTEN_PROPERTY_VALUES;
@@ -28,23 +33,40 @@ public class PropertiesLogger {
 	String carriageReturnReplacement = DEFAULT_REPLACEMENT_STRING;
 	// If true, call trim() on property values before logging them
 	boolean trimPropertyValues = DEFAULT_IS_TRIM_PROPERTY_VALUES;
-	// If true, mask values for keys that match the maskExpression
+	// If true, mask values for keys that match any of the maskExpressions
 	boolean maskPropertyValues = DEFAULT_IS_MASK_PROPERTY_VALUES;
-	// Regular expression to compare property keys against
-	String maskExpression = DEFAULT_MASK_EXPRESSION;
+	// Regular expressions to compare property keys against
+	String[] maskExpressions;
 	// The value to log in place of the actual value if we need to mask it
 	String maskValue = DEFAULT_MASKED_VALUE;
 	// Compiled representation of the regular expression
-	Pattern pattern = Pattern.compile(getMaskExpression());
+	Pattern[] patterns;
+
+	public PropertiesLogger() {
+		super();
+		setMaskExpression(DEFAULT_MASK_EXPRESSION);
+	}
 
 	/**
-	 * This setter also invokes Pattern.compile(maskExpression)
+	 * This setter invokes setMaskExpressions()
 	 * 
 	 * @param maskExpression
 	 */
 	public void setMaskExpression(String maskExpression) {
-		this.maskExpression = maskExpression;
-		this.pattern = Pattern.compile(maskExpression);
+		setMaskExpressions(new String[] { maskExpression });
+	}
+
+	/**
+	 * This setter also invokes Pattern.compile() for each maskExpression
+	 * 
+	 * @param maskExpressions
+	 */
+	public void setMaskExpressions(String[] maskExpressions) {
+		this.maskExpressions = maskExpressions;
+		this.patterns = new Pattern[maskExpressions.length];
+		for (int i = 0; i < patterns.length; i++) {
+			patterns[i] = Pattern.compile(maskExpressions[i]);
+		}
 	}
 
 	public String getLogEntry(String key, String value) {
@@ -85,21 +107,30 @@ public class PropertiesLogger {
 		return sb.toString();
 	}
 
-	public String getPropertyValue(String key, String value) {
-		if (flattenPropertyValues) {
-			value = value.replace("\n", getLinefeedReplacement());
-			value = value.replace("\r", getCarriageReturnReplacement());
+	protected boolean isMatch(Pattern[] patterns, String key) {
+		for (Pattern pattern : patterns) {
+			Matcher matcher = pattern.matcher(key);
+			if (matcher.matches()) {
+				return true;
+			}
 		}
-		if (trimPropertyValues) {
+		return false;
+	}
+
+	public String getPropertyValue(String key, String value) {
+		if (isFlattenPropertyValues()) {
+			value = value.replace(LF, getLinefeedReplacement());
+			value = value.replace(CR, getCarriageReturnReplacement());
+		}
+		if (isTrimPropertyValues()) {
 			value = value.trim();
 		}
-		if (!maskPropertyValues) {
+		if (!isMaskPropertyValues()) {
 			return value;
 		}
-		Matcher matcher = pattern.matcher(key);
-		boolean match = matcher.matches();
+		boolean match = isMatch(getPatterns(), key);
 		if (match) {
-			return maskValue;
+			return getMaskValue();
 		} else {
 			return value;
 		}
@@ -121,20 +152,12 @@ public class PropertiesLogger {
 		this.maskPropertyValues = maskPropertyValues;
 	}
 
-	public String getMaskExpression() {
-		return maskExpression;
-	}
-
 	public String getMaskValue() {
 		return maskValue;
 	}
 
 	public void setMaskValue(String maskValue) {
 		this.maskValue = maskValue;
-	}
-
-	public Pattern getPattern() {
-		return pattern;
 	}
 
 	public String getLinefeedReplacement() {
@@ -159,6 +182,14 @@ public class PropertiesLogger {
 
 	public void setTrimPropertyValues(boolean trimPropertyValues) {
 		this.trimPropertyValues = trimPropertyValues;
+	}
+
+	public String[] getMaskExpressions() {
+		return maskExpressions;
+	}
+
+	public Pattern[] getPatterns() {
+		return patterns;
 	}
 
 }
