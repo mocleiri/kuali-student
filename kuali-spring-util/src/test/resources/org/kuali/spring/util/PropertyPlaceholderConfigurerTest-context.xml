@@ -11,8 +11,8 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="property.logger" class="org.kuali.spring.util.PropertiesLogger" p:maskPropertyValues="false" />
-  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:ignoreResourceNotFound="true" />
+  <bean id="property.logger" class="org.kuali.spring.util.DefaultPropertiesLogger" p:maskPropertyValues="false" />
+  <bean id="property.loader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:ignoreResourceNotFound="true" />
   <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacer" p:ignoreUnresolvablePlaceholders="true" />
   <!-- 
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" />

@@ -13,22 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
 public class PropertiesHelper {
-
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
-	PropertiesLogger propertiesLogger;
-
-	public PropertiesHelper() {
-		this(null);
-	}
-
-	public PropertiesHelper(PropertiesLogger loggerSupport) {
-		super();
-		this.propertiesLogger = loggerSupport;
-	}
+	DefaultPropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
 
 	/**
-	 * Remove any keys from properties that are not in approvedKeys
+	 * Remove keys from properties that are not in approvedKeys
 	 * 
 	 * @param properties
 	 * @param approvedKeys
@@ -48,7 +38,7 @@ public class PropertiesHelper {
 	}
 
 	/**
-	 * Add any missing properties from necessaryProperties
+	 * Add missing properties from necessaryProperties
 	 * 
 	 * @param properties
 	 * @param necessaryProperties
@@ -136,7 +126,7 @@ public class PropertiesHelper {
 
 	public void mergeEnvironmentProperties(Properties currentProps, String prefix) {
 		logger.info("Merging environment properties");
-		String source = PropertySource.ENVIRONMENT.toString();
+		PropertySource source = PropertySource.ENVIRONMENT;
 		Properties envProps = getEnvironmentProperties(prefix);
 		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, envProps, true, source, true);
 		mergeProperties(context);
@@ -155,7 +145,7 @@ public class PropertiesHelper {
 	public void mergeProperty(PropertiesMergeContext context, String key) {
 		Properties newProps = context.getNewProperties();
 		Properties currentProps = context.getCurrentProperties();
-		String src = context.getSource();
+		PropertySource source = context.getSource();
 		boolean override = context.isOverride();
 		// Extract the new value
 		String newValue = newProps.getProperty(key);
@@ -170,7 +160,8 @@ public class PropertiesHelper {
 
 		// There is no existing value for this key
 		if (currentValue == null) {
-			logger.debug("Adding " + src + " property {}=[{}]", key, propertiesLogger.getPropertyValue(key, newValue));
+			logger.debug("Adding " + source + " property {}=[{}]", key,
+					propertiesLogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 			return;
 		}
@@ -182,8 +173,14 @@ public class PropertiesHelper {
 
 		// There is an existing property, but the new property wins
 		if (override) {
-			logger.info(src + " property override for '" + key + "' [{}]->[{}]",
-					propertiesLogger.getPropertyValue(key, currentValue), propertiesLogger.getPropertyValue(key, newValue));
+			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
+					propertiesLogger.getPropertyValue(key, currentValue),
+					propertiesLogger.getPropertyValue(key, newValue));
+			currentProps.setProperty(key, newValue);
+		} else {
+			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
+					+ " value. Existing:[{}] New:[{}]", propertiesLogger.getPropertyValue(key, currentValue),
+					propertiesLogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 		}
 	}
@@ -198,7 +195,7 @@ public class PropertiesHelper {
 		}
 	}
 
-	public void mergeSystemProperties(Properties currentProps, SystemPropertiesMode mode) {
+	public void mergeSystemProperties(Properties currentProps, Properties systemProperties, SystemPropertiesMode mode) {
 		if (mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_NEVER)) {
 			logger.info("Ignoring system properties because mode is {}", mode);
 			// Nothing to do
@@ -208,17 +205,22 @@ public class PropertiesHelper {
 		// Merge in the system properties
 		logger.info("Merging system properties using {}", mode);
 		boolean override = mode.equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-		Properties sysProps = SystemUtils.getSystemPropertiesIgnoreExceptions();
-		String source = PropertySource.SYSTEM.toString();
-		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, sysProps, override, source, true);
+		PropertySource source = PropertySource.SYSTEM;
+		PropertiesMergeContext context = new PropertiesMergeContext(currentProps, systemProperties, override, source,
+				true);
 		mergeProperties(context);
 	}
 
-	public PropertiesLogger getPropertiesLogger() {
+	public void mergeSystemProperties(Properties currentProps, SystemPropertiesMode mode) {
+		Properties systemProperties = SystemUtils.getSystemPropertiesIgnoreExceptions();
+		mergeSystemProperties(currentProps, systemProperties, mode);
+	}
+
+	public DefaultPropertiesLogger getPropertiesLogger() {
 		return propertiesLogger;
 	}
 
-	public void setPropertiesLogger(PropertiesLogger loggerSupport) {
+	public void setPropertiesLogger(DefaultPropertiesLogger loggerSupport) {
 		this.propertiesLogger = loggerSupport;
 	}
 }

@@ -12,7 +12,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-public class PropertiesLoaderTest {
+public class PropertiesLoader2Test {
 
 	protected Resource[] getLocations() {
 		String[] locationStrings = new String[] { "classpath:org/kuali/spring/util/test.properties",
@@ -28,36 +28,30 @@ public class PropertiesLoaderTest {
 	}
 
 	@Test
-	public void test1() throws IOException {
-		Resource[] locations = getLocations();
-		Properties properties = new Properties();
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
+	public void resourceNotFound() throws IOException {
+		Resource location = new DefaultResourceLoader().getResource("classpath:some-resource-that-does-not-exist.txt");
+		PropertiesLoader2 loader = new PropertiesLoader2();
+		try {
+			loader.getProperties(location);
+			// Make sure it fails as a default behavior
+			Assert.fail("Should have thrown an exception that the resource could not be found");
+		} catch (PropertiesLoadException e) {
+			// expected
+		}
 		loader.setIgnoreResourceNotFound(true);
-		loader.loadProperties(properties, null);
-		loader.loadProperties(properties, locations);
-		loader.setFileEncoding("UTF-8");
-		loader.loadProperties(properties, locations);
+		// Test that we get an empty properties object back
+		Properties properties = loader.getProperties(location);
+		Assert.assertEquals(0, properties.size());
 	}
 
 	@Test
 	public void nullSafeClose() throws IOException {
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
+		PropertiesLoader2 loader = new PropertiesLoader2();
+		// Try to "close" null
 		loader.nullSafeClose(null);
 		InputStream is = new ByteArrayInputStream(new byte[] { 1 });
+		// Close a real InputStrem
 		loader.nullSafeClose(is);
-	}
-
-	@Test
-	public void handleIOException() throws IOException {
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
-		try {
-			loader.handleIOException(null, new IOException("Just testing"));
-			Assert.assertFalse(true);
-		} catch (IOException e) {
-			// this is expected
-		}
-		loader.setIgnoreResourceNotFound(true);
-		loader.handleIOException(null, new IOException("Just testing"));
 	}
 
 }

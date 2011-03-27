@@ -10,11 +10,14 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionVisitor;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.PropertyResourceConfigurer;
+import org.springframework.core.Ordered;
+import org.springframework.core.PriorityOrdered;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 import org.springframework.util.StringValueResolver;
@@ -24,14 +27,24 @@ import org.springframework.util.StringValueResolver;
  * from properties files. It has all of the features from the Spring configurer, fixes a few bugs, adds a few new
  * features and is much more pluggable
  */
-public class PropertyHandler extends PropertyResourceConfigurer implements BeanNameAware, BeanFactoryAware {
-	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
+public class PropertyHandler2 implements BeanNameAware, BeanFactoryAware, BeanFactoryPostProcessor, PriorityOrdered {
+	final Logger logger = LoggerFactory.getLogger(PropertyHandler2.class);
 	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
 	public static final boolean DEFAULT_IS_AUTO_WIRE = true;
 	public static final boolean DEFAULT_IS_VALIDATE = true;
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
 	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
 	public static final SystemPropertiesMode DEFAULT_SYSTEM_PROPERTIES_MODE = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE;
+
+	private int order = Ordered.LOWEST_PRECEDENCE; // default: same as non-Ordered
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public int getOrder() {
+		return this.order;
+	}
 
 	String beanName;
 	BeanFactory beanFactory;
@@ -54,7 +67,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	 * 
 	 * Disable automatic wiring by setting autoWire=false
 	 */
-	Wirer wirer = new DefaultAutoWirer(this);
+	// Wirer wirer = new DefaultAutoWirer(this);
 
 	/**
 	 * Contains all of the properties known to this configurer AFTER they have been resolved (properties can come from
@@ -98,7 +111,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	SystemPropertiesMode systemPropertiesMode = DEFAULT_SYSTEM_PROPERTIES_MODE;
 
 	/**
-	 * Provides control over how properties are logged
+	 * Controls how properties are logged (to mask sensitive property values for example)
 	 */
 	DefaultPropertiesLogger propertiesLogger;
 
@@ -108,9 +121,9 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	PropertiesHelper helper;
 
 	/**
-	 * Utility class for loading properties from resources
+	 * Utility class responsible for loading properties
 	 */
-	DefaultPropertiesLoader loader;
+	PropertiesLoader loader;
 
 	/**
 	 * Utility class for replacing placeholders with values
@@ -133,7 +146,7 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 	BeanDefinitionVisitor visitor;
 
 	protected void autoWire() {
-		wirer.wire();
+		// wirer.wire();
 	}
 
 	/**
@@ -151,25 +164,17 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		if (isAutoWire()) {
-			autoWire();
-		}
-		if (isValidate()) {
-			validate();
-		}
-		super.postProcessBeanFactory(beanFactory);
-	}
+		try {
+			Properties mergedProps = mergeProperties();
 
-	@Override
-	public void setLocation(Resource location) {
-		super.setLocation(location);
-		this.locations = new Resource[] { location };
-	}
+			// Convert the merged properties, if necessary.
+			// convertProperties(mergedProps);
 
-	@Override
-	public void setLocations(Resource[] locations) {
-		super.setLocations(locations);
-		this.locations = locations;
+			// Let the subclass process the properties.
+			processProperties(beanFactory, mergedProps);
+		} catch (IOException ex) {
+			throw new BeanInitializationException("Could not load properties", ex);
+		}
 	}
 
 	public void resolvePlaceholders(Properties properties) {
@@ -258,20 +263,8 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		}
 	}
 
-	/**
-	 * Override the default resource loading logic to clean it up and emit sensible log messages. Anytime a property
-	 * value is overridden an INFO level logging message is produced. With TRACE turned on, all properties are logged in
-	 * the order they are loaded
-	 */
-	@Override
-	protected void loadProperties(Properties properties) throws IOException {
-		this.loader.loadProperties(properties, getLocations());
-	}
-
-	@Override
 	protected Properties mergeProperties() throws IOException {
 		// The super class method loads properties from resources as well as properties defined directly on this bean
-		Properties properties = super.mergeProperties();
 		// Preserve just the Spring properties
 		setUnresolvedSpringProperties(helper.getClone(properties));
 		// Merge in the system properties as appropriate
@@ -294,7 +287,6 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		return properties;
 	}
 
-	@Override
 	protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props)
 			throws BeansException {
 		logger.info("Resolving placeholders in bean definitions");
@@ -335,14 +327,6 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 		this.validate = validate;
 	}
 
-	public Wirer getWirer() {
-		return wirer;
-	}
-
-	public void setWirer(Wirer wirer) {
-		this.wirer = wirer;
-	}
-
 	public String getEnvironmentPropertyPrefix() {
 		return environmentPropertyPrefix;
 	}
@@ -373,14 +357,6 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	public void setHelper(PropertiesHelper helper) {
 		this.helper = helper;
-	}
-
-	public DefaultPropertiesLoader getLoader() {
-		return loader;
-	}
-
-	public void setLoader(DefaultPropertiesLoader loader) {
-		this.loader = loader;
 	}
 
 	public PlaceholderReplacer getReplacer() {
@@ -469,6 +445,14 @@ public class PropertyHandler extends PropertyResourceConfigurer implements BeanN
 
 	public void setPropertiesLogger(DefaultPropertiesLogger propertiesLogger) {
 		this.propertiesLogger = propertiesLogger;
+	}
+
+	public PropertiesLoader getLoader() {
+		return loader;
+	}
+
+	public void setLoader(PropertiesLoader loader) {
+		this.loader = loader;
 	}
 
 }

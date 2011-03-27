@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PropertiesHelperTest {
 
 	protected PropertiesHelper getPropertiesHelper() {
-		PropertiesLogger loggerSupport = new PropertiesLogger();
+		DefaultPropertiesLogger loggerSupport = new DefaultPropertiesLogger();
 		loggerSupport.setFlattenPropertyValues(true);
 		loggerSupport.setLinefeedReplacement("LF");
 		loggerSupport.setCarriageReturnReplacement("CR");
@@ -39,7 +39,7 @@ public class PropertiesHelperTest {
 
 	@Test
 	public void mergeProperty() {
-		String source = "UNITTEST";
+		PropertySource source = PropertySource.LOCAL;
 		String key = "a";
 		String newKey = "b";
 		String a = "a";

@@ -3,18 +3,29 @@ package org.kuali.spring.util;
 import java.util.Properties;
 
 public class PropertiesMergeContext {
+	public static final boolean DEFAULT_IS_SORT = true;
+	public static final boolean DEFAULT_IS_OVERRIDE = true;
+	boolean override = DEFAULT_IS_OVERRIDE;
+	boolean sort = DEFAULT_IS_SORT;
 	Properties currentProperties;
 	Properties newProperties;
-	boolean override;
-	boolean sort;
-	String source;
+	PropertySource source;
 
 	public PropertiesMergeContext() {
-		this(null, null, true, null, true);
+		this(null, null, DEFAULT_IS_OVERRIDE, null, DEFAULT_IS_SORT);
 	}
 
-	public PropertiesMergeContext(Properties currentProperties, Properties newProperties, boolean override, String source,
-			boolean sort) {
+	public PropertiesMergeContext(Properties currentProperties, Properties newProperties, PropertySource source) {
+		this(currentProperties, newProperties, DEFAULT_IS_OVERRIDE, source, DEFAULT_IS_SORT);
+	}
+
+	public PropertiesMergeContext(Properties currentProperties, Properties newProperties, boolean override,
+			PropertySource source) {
+		this(currentProperties, newProperties, override, source, DEFAULT_IS_SORT);
+	}
+
+	public PropertiesMergeContext(Properties currentProperties, Properties newProperties, boolean override,
+			PropertySource source, boolean sort) {
 		super();
 		this.currentProperties = currentProperties;
 		this.newProperties = newProperties;
@@ -55,12 +66,11 @@ public class PropertiesMergeContext {
 		this.sort = sort;
 	}
 
-	public String getSource() {
+	public PropertySource getSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
+	public void setSource(PropertySource source) {
 		this.source = source;
 	}
-
 }
