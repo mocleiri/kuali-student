@@ -8,7 +8,7 @@ public class DefaultAutomaticWirerTest {
 
 	@Test
 	public void wire() throws IOException {
-		PropertyHandler handler = new PropertyHandler();
+		PropertyHandlerOld handler = new PropertyHandlerOld();
 		Wirer wirer = new DefaultAutoWirer(handler);
 		wirer.wire();
 	}

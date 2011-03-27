@@ -27,7 +27,7 @@
   <bean id="kuali.property.bean.visitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor"
     p:valueResolver="kuali.property.string.resolver" />
 
-  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:propertiesLogger-ref="kuali.property.logger"
+  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandlerOld" p:propertiesLogger-ref="kuali.property.logger"
     p:helper-ref="kuali.property.helper" p:loader-ref="kuali.property.loader" p:retriever-ref="kuali.property.retriever"
     p:visitor-ref="kuali.property.bean.visitor" p:environmentPropertyPrefix="env." />
 </beans>

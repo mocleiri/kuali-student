@@ -12,13 +12,13 @@ import org.springframework.util.StringValueResolver;
 public class DefaultAutoWirer implements Wirer {
 	final Logger logger = LoggerFactory.getLogger(DefaultAutoWirer.class);
 
-	PropertyHandler handler;
+	PropertyHandlerOld handler;
 
 	public DefaultAutoWirer() {
 		this(null);
 	}
 
-	public DefaultAutoWirer(PropertyHandler handler) {
+	public DefaultAutoWirer(PropertyHandlerOld handler) {
 		super();
 		this.handler = handler;
 	}
@@ -80,7 +80,7 @@ public class DefaultAutoWirer implements Wirer {
 		PlaceholderReplacer replacer = new PlaceholderReplacer(
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null,
-				PropertyHandler.DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
+				PropertyHandlerOld.DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 		handler.setReplacer(replacer);
 		logWiringEvent(handler.getReplacer(), handler);
 	}

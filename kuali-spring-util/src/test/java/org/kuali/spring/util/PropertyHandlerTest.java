@@ -24,21 +24,21 @@ public class PropertyHandlerTest {
 
 	@Test
 	public void autoWire() throws IOException {
-		PropertyHandler handler = new PropertyHandler();
+		PropertyHandlerOld handler = new PropertyHandlerOld();
 		handler.autoWire();
 		Assert.notNull(handler.getPropertiesLogger());
 	}
 
 	@Test
 	public void validate() throws IOException {
-		PropertyHandler handler = new PropertyHandler();
+		PropertyHandlerOld handler = new PropertyHandlerOld();
 		handler.autoWire();
 		handler.validate();
 	}
 
 	@Test
 	public void mergeProperties() throws IOException {
-		PropertyHandler handler = new PropertyHandler();
+		PropertyHandlerOld handler = new PropertyHandlerOld();
 		handler.autoWire();
 		handler.validate();
 		handler.setLocations(getLocations());

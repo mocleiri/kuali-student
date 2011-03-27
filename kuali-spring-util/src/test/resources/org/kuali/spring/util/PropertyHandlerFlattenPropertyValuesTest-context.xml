@@ -22,7 +22,7 @@
     <constructor-arg ref="property.string.resolver" />
   </bean>
 
-  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandler" p:location="classpath:org/kuali/spring/util/test.properties"
+  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandlerOld" p:location="classpath:org/kuali/spring/util/test.properties"
     p:propertiesLogger-ref="property.logger" p:helper-ref="property.helper" p:loader-ref="property.loader" p:retriever-ref="property.retriever"
     p:visitor-ref="property.bean.visitor" />
 
