@@ -57,7 +57,7 @@ public class DefaultPropertiesLogger implements PropertiesLogger {
 	}
 
 	/**
-	 * This setter also invokes Pattern.compile() for each maskExpression
+	 * This setter invokes Pattern.compile() for each maskExpression
 	 * 
 	 * @param maskExpressions
 	 */

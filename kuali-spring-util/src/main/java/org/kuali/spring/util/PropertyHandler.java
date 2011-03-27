@@ -13,6 +13,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
+import org.springframework.core.io.Resource;
 
 /**
  * This class is similar to PropertyPlaceholderConfigurer from Spring. It is used to update bean properties with values
@@ -28,6 +29,7 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 	private BeanFactory beanFactory;
 	private PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
 	private PropertiesLoader loader = new DefaultPropertiesLoader();
+	Resource[] locations;
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -76,6 +78,14 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	public void setLoader(PropertiesLoader loader) {
 		this.loader = loader;
+	}
+
+	public Resource[] getLocations() {
+		return locations;
+	}
+
+	public void setLocations(Resource[] locations) {
+		this.locations = locations;
 	}
 
 }
