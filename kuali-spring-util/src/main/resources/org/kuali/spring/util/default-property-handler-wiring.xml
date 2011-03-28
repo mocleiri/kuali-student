@@ -9,25 +9,14 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-  <bean id="kuali.property.logger" class="org.kuali.spring.util.DefaultPropertiesLogger" p:carriageReturnReplacement=" "
-    p:flattenPropertyValues="false" p:linefeedReplacement=" " p:maskExpression=".*((?i)password).*"
-    p:maskPropertyValues="true" p:maskValue="*****" p:trimPropertyValues="false" />
-
-  <bean id="kuali.property.helper" class="org.kuali.spring.util.PropertiesHelper" p:propertiesLogger-ref="kuali.property.logger" />
-
-  <bean id="kuali.property.loader" class="org.kuali.spring.util.DefaultPropertiesLoaderOld" p:propertiesLogger-ref="kuali.property.logger"
-    p:ignoreResourceNotFound="false" p:helper-ref="kuali.property.helper" />
-
-  <bean id="kuali.property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />
-  <bean id="kuali.property.replacer" class="org.kuali.spring.util.PlaceholderReplacer"
-    p:ignoreUnresolvablePlaceholders="false" p:placeholderPrefix="${" p:placeholderSuffix="}" p:valueSeparator="null" />
-  <bean id="kuali.property.string.resolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:nullValue="null"
-    p:replacer-ref="kuali.property.replacer" p:retriever-ref="kuali.property.retriever" />
-
-  <bean id="kuali.property.bean.visitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor"
-    p:valueResolver="kuali.property.string.resolver" />
-
-  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandlerOld" p:propertiesLogger-ref="kuali.property.logger"
-    p:helper-ref="kuali.property.helper" p:loader-ref="kuali.property.loader" p:retriever-ref="kuali.property.retriever"
-    p:visitor-ref="kuali.property.bean.visitor" p:environmentPropertyPrefix="env." />
+  <bean id="kuali.plogger" class="org.kuali.spring.util.DefaultPropertiesLogger" />
+  <bean id="kuali.phelper" class="org.kuali.spring.util.PropertiesHelper" p:plogger-ref="kuali.plogger" />
+  <bean id="kuali.ploader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:plogger-ref="kuali.plogger"
+    p:helper-ref="kuali.phelper" />
+  <bean id="kuali.pretriever" class="org.kuali.spring.util.PropertiesRetriever" />
+  <bean id="kuali.preplacer" class="org.kuali.spring.util.PlaceholderReplacer" />
+  <bean id="kuali.presolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:replacer-ref="kuali.preplacer"
+    p:retriever-ref="kuali.pretriever" />
+  <bean id="kuali.pvisitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor" p:valueResolver="kuali.presolver" />
+  <bean id="kuali.phandler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="kuali.ploader" />
 </beans>

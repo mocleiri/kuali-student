@@ -15,7 +15,7 @@ import org.springframework.util.ObjectUtils;
 public class PropertiesHelper {
 	final Logger logger = LoggerFactory.getLogger(PropertiesHelper.class);
 
-	PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
+	PropertiesLogger plogger = new DefaultPropertiesLogger();
 
 	/**
 	 * Remove keys from properties that are not in approvedKeys
@@ -57,7 +57,7 @@ public class PropertiesHelper {
 			// Add the missing property
 			String necessaryValue = necessaryProperties.getProperty(necessaryKey);
 			logger.trace("Adding property {}=[{}]", necessaryKey,
-					propertiesLogger.getPropertyValue(necessaryKey, necessaryValue));
+					plogger.getPropertyValue(necessaryKey, necessaryValue));
 			properties.setProperty(necessaryKey, necessaryValue);
 		}
 	}
@@ -93,8 +93,8 @@ public class PropertiesHelper {
 
 			// Update the old property value with the new property value
 			logger.trace("Updating property '" + commonKey + "' [{}]->[{}]",
-					propertiesLogger.getPropertyValue(commonKey, oldPropertyValue),
-					propertiesLogger.getPropertyValue(commonKey, newPropertyValue));
+					plogger.getPropertyValue(commonKey, oldPropertyValue),
+					plogger.getPropertyValue(commonKey, newPropertyValue));
 			oldProperties.setProperty(commonKey, newPropertyValue);
 		}
 	}
@@ -157,7 +157,7 @@ public class PropertiesHelper {
 		// There is no existing value for this key
 		if (currentValue == null) {
 			logger.debug("Adding " + source + " property {}=[{}]", key,
-					propertiesLogger.getPropertyValue(key, newValue));
+					plogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 			return;
 		}
@@ -170,14 +170,14 @@ public class PropertiesHelper {
 		if (override) {
 			// There is an existing property, but the new property wins
 			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
-					propertiesLogger.getPropertyValue(key, currentValue),
-					propertiesLogger.getPropertyValue(key, newValue));
+					plogger.getPropertyValue(key, currentValue),
+					plogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 		} else {
 			// There is an existing property, and the existing property wins
 			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
-					+ " value. Existing:[{}] New:[{}]", propertiesLogger.getPropertyValue(key, currentValue),
-					propertiesLogger.getPropertyValue(key, newValue));
+					+ " value. Existing:[{}] New:[{}]", plogger.getPropertyValue(key, currentValue),
+					plogger.getPropertyValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 		}
 	}
@@ -212,12 +212,12 @@ public class PropertiesHelper {
 		mergeSystemProperties(currentProps, systemProperties, mode);
 	}
 
-	public PropertiesLogger getPropertiesLogger() {
-		return propertiesLogger;
+	public PropertiesLogger getPlogger() {
+		return plogger;
 	}
 
-	public void setPropertiesLogger(PropertiesLogger propertiesLogger) {
-		this.propertiesLogger = propertiesLogger;
+	public void setPlogger(PropertiesLogger propertiesLogger) {
+		this.plogger = propertiesLogger;
 	}
 
 }

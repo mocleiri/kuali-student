@@ -7,7 +7,7 @@ public class SystemAwarePropertiesRetriever extends PropertiesRetriever {
 	boolean searchEnvironment = PropertyHandlerOld.DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
 
 	public SystemAwarePropertiesRetriever() {
-		this(PropertyHandlerOld.DEFAULT_SYSTEM_PROPERTIES_MODE, false);
+		this(PropertyHandlerOld.DEFAULT_SYSTEM_PROPERTIES_MODE, PropertyHandlerOld.DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT);
 	}
 
 	public SystemAwarePropertiesRetriever(SystemPropertiesMode mode, boolean searchEnvironment) {

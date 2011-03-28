@@ -27,7 +27,6 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	private String beanName;
 	private BeanFactory beanFactory;
-	private PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
 	private PropertiesLoader loader = new DefaultPropertiesLoader();
 	Resource[] locations;
 
@@ -62,14 +61,6 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	public void setBeanFactory(BeanFactory beanFactory) {
 		this.beanFactory = beanFactory;
-	}
-
-	public PropertiesLogger getPropertiesLogger() {
-		return propertiesLogger;
-	}
-
-	public void setPropertiesLogger(PropertiesLogger propertiesLogger) {
-		this.propertiesLogger = propertiesLogger;
 	}
 
 	public PropertiesLoader getLoader() {

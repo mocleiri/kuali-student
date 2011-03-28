@@ -38,8 +38,8 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 	// Default component beans
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
-	PropertiesHelper propertiesHelper = new PropertiesHelper();
-	PropertiesLogger propertiesLogger = new DefaultPropertiesLogger();
+	PropertiesHelper helper = new PropertiesHelper();
+	PropertiesLogger plogger = new DefaultPropertiesLogger();
 
 	// Filled in during loading
 	Properties systemProperties;
@@ -142,9 +142,9 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	 */
 	protected Properties getEnvironmentProperties() {
 		if (isUseEnvironmentPropertyPrefix()) {
-			return getPropertiesHelper().getEnvironmentProperties(getEnvironmentPropertyPrefix());
+			return getHelper().getEnvironmentProperties(getEnvironmentPropertyPrefix());
 		} else {
-			return getPropertiesHelper().getEnvironmentProperties(null);
+			return getHelper().getEnvironmentProperties(null);
 		}
 	}
 
@@ -167,19 +167,19 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 		// Merge in local properties (nothing to actually merge here, but this also logs them when DEBUG is on)
 		PropertiesMergeContext context = new PropertiesMergeContext(result, local, PropertySource.LOCAL);
-		getPropertiesHelper().mergeProperties(context);
+		getHelper().mergeProperties(context);
 
 		// Merge in resource properties. isLocalOverride() controls what property "wins" if the same
 		// property is declared both locally and in a resource
 		context = new PropertiesMergeContext(result, resource, isLocalOverride(), PropertySource.RESOURCE);
-		getPropertiesHelper().mergeProperties(context);
+		getHelper().mergeProperties(context);
 
 		// Merge in system properties. systemPropertiesMode controls system property overrides
-		getPropertiesHelper().mergeSystemProperties(result, sys, getSystemPropertiesMode());
+		getHelper().mergeSystemProperties(result, sys, getSystemPropertiesMode());
 
 		// Merge in environment properties. Environment properties never override properties from another source
 		context = new PropertiesMergeContext(result, env, false, PropertySource.ENVIRONMENT);
-		getPropertiesHelper().mergeProperties(context);
+		getHelper().mergeProperties(context);
 
 		// Return the merged properties
 		return result;
@@ -218,7 +218,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 			// If a property is declared in more than one resource location, the last resource location "wins"
 			boolean override = true;
 			PropertiesMergeContext context = new PropertiesMergeContext(result, newProps, override, source);
-			propertiesHelper.mergeProperties(context);
+			helper.mergeProperties(context);
 		}
 		return result;
 	}
@@ -251,12 +251,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		return propertiesPersister;
 	}
 
-	public PropertiesHelper getPropertiesHelper() {
-		return propertiesHelper;
+	public PropertiesHelper getHelper() {
+		return helper;
 	}
 
-	public void setPropertiesHelper(PropertiesHelper propertiesHelper) {
-		this.propertiesHelper = propertiesHelper;
+	public void setHelper(PropertiesHelper propertiesHelper) {
+		this.helper = propertiesHelper;
 	}
 
 	public String getEnvironmentPropertyPrefix() {
@@ -331,12 +331,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		this.useEnvironmentPropertyPrefix = useEnvironmentPropertyPrefix;
 	}
 
-	public PropertiesLogger getPropertiesLogger() {
-		return propertiesLogger;
+	public PropertiesLogger getPlogger() {
+		return plogger;
 	}
 
-	public void setPropertiesLogger(PropertiesLogger propertiesLogger) {
-		this.propertiesLogger = propertiesLogger;
+	public void setPlogger(PropertiesLogger propertiesLogger) {
+		this.plogger = propertiesLogger;
 	}
 
 }

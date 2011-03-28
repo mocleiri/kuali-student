@@ -49,9 +49,9 @@ public class DefaultAutoWirer implements Wirer {
 			logWiringEvent(handler.getHelper(), handler);
 		}
 		PropertiesHelper helper = handler.getHelper();
-		if (helper.getPropertiesLogger() == null) {
-			helper.setPropertiesLogger(handler.getPropertiesLogger());
-			logWiringEvent(helper.getPropertiesLogger(), helper);
+		if (helper.getPlogger() == null) {
+			helper.setPlogger(handler.getPropertiesLogger());
+			logWiringEvent(helper.getPlogger(), helper);
 		}
 	}
 

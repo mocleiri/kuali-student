@@ -200,15 +200,15 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 		Properties resolvedProperties = new Properties();
 		Set<String> keys = properties.stringPropertyNames();
 		for (String key : keys) {
-			resolveProperty(key, properties, resolvedProperties);
+			resolveProperty(key, resolvedProperties);
 		}
 		return resolvedProperties;
 	}
 
-	protected void resolveProperty(String key, Properties originalProperties, Properties resolvedProperties) {
+	protected void resolveProperty(String key, Properties resolvedProperties) {
 		// First resolve any placeholders in the key itself
 		logger.trace("Resolving placeholders in key '{}'", key);
-		String resolvedKey = replacer.replacePlaceholders(key, originalProperties);
+		String resolvedKey = replacer.replacePlaceholders(key, retriever);
 		if (!key.equals(resolvedKey)) {
 			logger.debug("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
@@ -217,7 +217,7 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Replacing placeholders in value [{}]", rawValue);
 		// Now replace any placeholders in the value
-		String resolvedValue = replacer.replacePlaceholders(rawValue, originalProperties);
+		String resolvedValue = replacer.replacePlaceholders(rawValue, retriever);
 		if (!rawValue.equals(resolvedValue)) {
 			logger.debug("Resolved value for '" + resolvedKey + "' [{}]->[{}]", rawValue, resolvedValue);
 		}

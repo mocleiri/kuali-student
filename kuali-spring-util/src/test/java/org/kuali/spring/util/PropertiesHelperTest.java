@@ -14,7 +14,7 @@ public class PropertiesHelperTest {
 		loggerSupport.setLinefeedReplacement("LF");
 		loggerSupport.setCarriageReturnReplacement("CR");
 		PropertiesHelper helper = new PropertiesHelper();
-		helper.setPropertiesLogger(loggerSupport);
+		helper.setPlogger(loggerSupport);
 		return helper;
 	}
 
