@@ -30,7 +30,7 @@ public class TraceCallback implements MethodInterceptor {
 			interceptCount = this.counter++;
 		}
 		if (logger.isTraceEnabled()) {
-			logger.trace("Method Invocation Id=" + interceptCount + " Invoking {} values={}",
+			logger.trace("Method Invocation Id=" + interceptCount + " Invoking {} parameters={}",
 					getString(context.getMethod()), context.getArgs());
 		}
 		Object result = context.getMethodProxy().invokeSuper(context.getObject(), context.getArgs());
