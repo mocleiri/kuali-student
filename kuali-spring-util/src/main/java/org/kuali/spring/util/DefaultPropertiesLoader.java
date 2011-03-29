@@ -45,12 +45,15 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	PropertyLogger plogger = new DefaultPropertyLogger();
 
-	// Filled in during loading
+	// Instance variables filled in during loading
 	Properties systemProperties;
 	Properties environmentProperties;
 	Properties resourceProperties;
 	Properties mergedLocalProperties;
 
+	/**
+	 * Get a handle to our environment properties. Prefix is optional
+	 */
 	protected Properties getEnvironmentProperties(String prefix) {
 		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreExceptions();
 		Properties envProps = new Properties();
@@ -61,6 +64,15 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		return envProps;
 	}
 
+	/**
+	 * Given a resource and an InputStream load and return a Properties object. Supports regular as well as XML style
+	 * properties files
+	 * 
+	 * @param location
+	 * @param is
+	 * @return
+	 * @throws IOException
+	 */
 	protected Properties getProperties(Resource location, InputStream is) throws IOException {
 		Properties properties = new Properties();
 		// Use XML style loading if it is an XML file
@@ -79,6 +91,14 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		return properties;
 	}
 
+	/**
+	 * Load properties from a Resource object. Returns an empty Properties object if ignoreResourceNotFound is true and
+	 * the resource could not be located
+	 * 
+	 * @param location
+	 * @return
+	 * @throws IOException
+	 */
 	protected Properties getProperties(Resource location) throws IOException {
 		// Handle locations that don't exist
 		if (!location.exists()) {
@@ -98,6 +118,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		}
 	}
 
+	/**
+	 * True if this location represents an XML file, false otherwise
+	 * 
+	 * @param location
+	 * @return
+	 */
 	protected boolean isXMLFile(Resource location) {
 		String filename = null;
 		try {
@@ -118,6 +144,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		}
 	}
 
+	/**
+	 * Throw an exception unless ignoreResourceNotFound is true
+	 * 
+	 * @param location
+	 * @return
+	 */
 	protected Properties handleResourceNotFound(Resource location) {
 		if (isIgnoreResourceNotFound()) {
 			logger.info("Ignoring properties from {}.  Resource not found", location);
@@ -128,6 +160,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		}
 	}
 
+	/**
+	 * Close the InputStream
+	 * 
+	 * @param is
+	 * @throws IOException
+	 */
 	protected void nullSafeClose(InputStream is) throws IOException {
 		if (is == null) {
 			return;
@@ -203,6 +241,9 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		return result;
 	}
 
+	/**
+	 * Load all of our properties into a Properties object
+	 */
 	public Properties loadProperties() {
 		try {
 			// Populate properties from the default set of locations
@@ -230,7 +271,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	 * @param context
 	 * @param key
 	 */
-	public void mergeProperty(PropertiesMergeContext context, String key) {
+	public PropertyMergeResult mergeProperty(PropertiesMergeContext context, String key) {
 		Properties newProps = context.getNewProperties();
 		Properties currentProps = context.getCurrentProperties();
 		PropertySource source = context.getSource();
@@ -240,7 +281,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 		// If the new value is null, there is nothing further to do
 		if (newValue == null) {
-			return;
+			return PropertyMergeResult.NOOP_NULL_NEW_VALUE;
 		}
 
 		// Extract the existing value
@@ -250,12 +291,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		if (currentValue == null) {
 			logger.debug("Adding " + source + " property {}=[{}]", key, plogger.getValue(key, newValue));
 			currentProps.setProperty(key, newValue);
-			return;
+			return PropertyMergeResult.ADD;
 		}
 
 		// Neither value is null, but they are the same, nothing further to do
 		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
-			return;
+			return PropertyMergeResult.NOOP_IDENTICAL_VALUES;
 		}
 
 		if (override) {
@@ -263,11 +304,13 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
 					plogger.getValue(key, currentValue), plogger.getValue(key, newValue));
 			currentProps.setProperty(key, newValue);
+			return PropertyMergeResult.OVERRIDE;
 		} else {
 			// There is already an existing property, and the existing property wins
 			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
 					+ " value. Existing:[{}] New:[{}]", plogger.getValue(key, currentValue),
 					plogger.getValue(key, newValue));
+			return PropertyMergeResult.NOOP_EXISTING_WINS;
 		}
 	}
 
