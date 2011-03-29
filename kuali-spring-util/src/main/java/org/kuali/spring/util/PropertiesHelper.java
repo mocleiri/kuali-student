@@ -161,7 +161,7 @@ public class PropertiesHelper {
 			return;
 		}
 
-		// Values are the same, nothing further to do
+		// Neither value is null, but they are the same, nothing further to do
 		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
 			return;
 		}
@@ -176,7 +176,6 @@ public class PropertiesHelper {
 			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
 					+ " value. Existing:[{}] New:[{}]", plogger.getPropertyValue(key, currentValue),
 					plogger.getPropertyValue(key, newValue));
-			currentProps.setProperty(key, newValue);
 		}
 	}
 
