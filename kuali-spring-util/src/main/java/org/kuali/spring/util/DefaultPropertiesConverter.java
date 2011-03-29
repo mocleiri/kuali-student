@@ -5,16 +5,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
 public class DefaultPropertiesConverter implements PropertiesConverter {
+	final Logger logger = LoggerFactory.getLogger(DefaultPropertiesConverter.class);
+
 	public static final boolean DEFAULT_IS_SORT = true;
 	boolean sort = DEFAULT_IS_SORT;
+
+	PropertyLogger plogger = new DefaultPropertyLogger();
 
 	/**
 	 * Perform any conversion on the supplied Properties as needed.
 	 * <p>
-	 * The default implementation invokes {@link #getConvertedValue(String,String)} for each property value and replaces
+	 * The default implementation invokes {@link #convert(String,String)} for each property value and replaces
 	 * the original with the converted value if the converted value is different
 	 * 
 	 * @param properties
@@ -23,21 +29,23 @@ public class DefaultPropertiesConverter implements PropertiesConverter {
 	@Override
 	public void convert(Properties properties) {
 		// Get a handle to the property names
-		List<String> names = new ArrayList<String>(properties.stringPropertyNames());
+		List<String> keys = new ArrayList<String>(properties.stringPropertyNames());
 		// Sort if needed
 		if (isSort()) {
-			Collections.sort(names);
+			Collections.sort(keys);
 		}
 		// Iterate through the properties
-		for (String name : names) {
+		for (String key : keys) {
 			// Extract the current value
-			String oldValue = properties.getProperty(name);
+			String oldValue = properties.getProperty(key);
 			// Get the converted value
-			String newValue = getConvertedValue(name, oldValue);
+			String newValue = convert(key, oldValue);
 			// Check them for equality
 			if (!ObjectUtils.nullSafeEquals(newValue, oldValue)) {
 				// The converted value is different, update our properties object
-				properties.setProperty(name, newValue);
+				logger.info("Converted value for '" + key + "' [{}]->[{}]", plogger.getLogValue(key, oldValue),
+						plogger.getLogValue(key, newValue));
+				properties.setProperty(key, newValue);
 			}
 		}
 	}
@@ -45,7 +53,7 @@ public class DefaultPropertiesConverter implements PropertiesConverter {
 	/**
 	 * Convert the given property from the properties source to the value which should be used.
 	 * <p>
-	 * The default implementation calls {@link #getConvertedValue(String)}.
+	 * The default implementation calls {@link #convert(String)}.
 	 * 
 	 * @param propertyName
 	 *            the name of the property
@@ -53,10 +61,10 @@ public class DefaultPropertiesConverter implements PropertiesConverter {
 	 *            the original value from the properties source
 	 * 
 	 * @return the converted value, to be used for processing
-	 * @see #getConvertedValue(String)
+	 * @see #convert(String)
 	 */
-	protected String getConvertedValue(String propertyName, String propertyValue) {
-		return getConvertedValue(propertyValue);
+	protected String convert(String propertyName, String propertyValue) {
+		return convert(propertyValue);
 	}
 
 	/**
@@ -70,9 +78,9 @@ public class DefaultPropertiesConverter implements PropertiesConverter {
 	 * 
 	 * @return the converted value, to be used for processing
 	 * 
-	 * @see #getConvertedValue(String, String)
+	 * @see #convert(String, String)
 	 */
-	protected String getConvertedValue(String originalValue) {
+	protected String convert(String originalValue) {
 		return originalValue;
 	}
 
@@ -82,6 +90,14 @@ public class DefaultPropertiesConverter implements PropertiesConverter {
 
 	public void setSort(boolean sort) {
 		this.sort = sort;
+	}
+
+	public PropertyLogger getPlogger() {
+		return plogger;
+	}
+
+	public void setPlogger(PropertyLogger plogger) {
+		this.plogger = plogger;
 	}
 
 }

@@ -23,5 +23,9 @@
   <bean id="ploader.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
     p:sourceBean-ref="ploader" />
 
-  <bean id="phandler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="ploader.proxy" />
+  <bean id="pconverter" class="org.kuali.spring.util.DefaultPropertiesConverter" p:plogger-ref="plogger.proxy" />
+  <bean id="pconverter.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
+    p:sourceBean-ref="pconverter" />
+
+  <bean id="phandler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="ploader.proxy" p:converter-ref="pconverter.proxy" />
 </beans>

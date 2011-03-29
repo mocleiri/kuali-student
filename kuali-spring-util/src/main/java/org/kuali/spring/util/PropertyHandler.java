@@ -13,7 +13,6 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
-import org.springframework.core.io.Resource;
 
 /**
  * This class is similar to PropertyPlaceholderConfigurer from Spring. It updates bean properties with values from
@@ -71,6 +70,14 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	public void setLoader(PropertiesLoader loader) {
 		this.loader = loader;
+	}
+
+	public PropertiesConverter getConverter() {
+		return converter;
+	}
+
+	public void setConverter(PropertiesConverter converter) {
+		this.converter = converter;
 	}
 
 }
