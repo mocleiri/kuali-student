@@ -3,6 +3,10 @@ package org.kuali.spring.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -11,6 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderSupport;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DefaultPropertiesPersister;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.PropertiesPersister;
 
 public class DefaultPropertiesLoader implements PropertiesLoader {
@@ -38,7 +43,6 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 	// Default component beans
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
-	PropertiesHelper helper = new PropertiesHelper();
 	PropertyLogger plogger = new DefaultPropertyLogger();
 
 	// Filled in during loading
@@ -46,6 +50,16 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	Properties environmentProperties;
 	Properties resourceProperties;
 	Properties mergedLocalProperties;
+
+	protected Properties getEnvironmentProperties(String prefix) {
+		Map<String, String> environmentMap = SystemUtils.getEnvironmentIgnoreExceptions();
+		Properties envProps = new Properties();
+		for (Map.Entry<String, String> entry : environmentMap.entrySet()) {
+			String key = (prefix == null) ? entry.getKey() : prefix + entry.getKey();
+			envProps.setProperty(key, entry.getValue());
+		}
+		return envProps;
+	}
 
 	protected Properties getProperties(Resource location, InputStream is) throws IOException {
 		Properties properties = new Properties();
@@ -71,7 +85,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 			return handleResourceNotFound(location);
 		}
 
-		// Otherwise proceed with loading
+		// Proceed with loading
 		logger.info("Loading properties from {}", location);
 		InputStream is = null;
 		try {
@@ -142,9 +156,9 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	 */
 	protected Properties getEnvironmentProperties() {
 		if (isUseEnvironmentPropertyPrefix()) {
-			return getHelper().getEnvironmentProperties(getEnvironmentPropertyPrefix());
+			return getEnvironmentProperties(getEnvironmentPropertyPrefix());
 		} else {
-			return getHelper().getEnvironmentProperties(null);
+			return getEnvironmentProperties(null);
 		}
 	}
 
@@ -167,19 +181,23 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 		// Merge in local properties (nothing to actually merge here, but this also logs them when DEBUG is on)
 		PropertiesMergeContext context = new PropertiesMergeContext(result, local, PropertySource.LOCAL);
-		getHelper().mergeProperties(context);
+		mergeProperties(context);
 
 		// Merge in resource properties. isLocalOverride() controls what property "wins" if the same
 		// property is declared both locally and in a resource
 		context = new PropertiesMergeContext(result, resource, isLocalOverride(), PropertySource.RESOURCE);
-		getHelper().mergeProperties(context);
+		mergeProperties(context);
 
-		// Merge in system properties. systemPropertiesMode controls system property overrides
-		getHelper().mergeSystemProperties(result, sys, getSystemPropertiesMode());
+		// Merge in system properties according to the SystemPropertiesMode being used
+		if (!getSystemPropertiesMode().equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_NEVER)) {
+			boolean override = getSystemPropertiesMode().equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
+			context = new PropertiesMergeContext(result, resource, override, PropertySource.SYSTEM);
+			mergeProperties(context);
+		}
 
 		// Merge in environment properties. Environment properties never override properties from another source
 		context = new PropertiesMergeContext(result, env, false, PropertySource.ENVIRONMENT);
-		getHelper().mergeProperties(context);
+		mergeProperties(context);
 
 		// Return the merged properties
 		return result;
@@ -206,6 +224,63 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		}
 	}
 
+	/**
+	 * Merge the property under 'key' from newProps into currentProps using the settings from PropertiesMergeContext
+	 * 
+	 * @param context
+	 * @param key
+	 */
+	public void mergeProperty(PropertiesMergeContext context, String key) {
+		Properties newProps = context.getNewProperties();
+		Properties currentProps = context.getCurrentProperties();
+		PropertySource source = context.getSource();
+		boolean override = context.isOverride();
+		// Extract the new value
+		String newValue = newProps.getProperty(key);
+
+		// If the new value is null, there is nothing further to do
+		if (newValue == null) {
+			return;
+		}
+
+		// Extract the existing value
+		String currentValue = currentProps.getProperty(key);
+
+		// There is no existing value for this key
+		if (currentValue == null) {
+			logger.debug("Adding " + source + " property {}=[{}]", key, plogger.getValue(key, newValue));
+			currentProps.setProperty(key, newValue);
+			return;
+		}
+
+		// Neither value is null, but they are the same, nothing further to do
+		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
+			return;
+		}
+
+		if (override) {
+			// There is an existing property, but the new property wins
+			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
+					plogger.getValue(key, currentValue), plogger.getValue(key, newValue));
+			currentProps.setProperty(key, newValue);
+		} else {
+			// There is already an existing property, and the existing property wins
+			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
+					+ " value. Existing:[{}] New:[{}]", plogger.getValue(key, currentValue),
+					plogger.getValue(key, newValue));
+		}
+	}
+
+	public void mergeProperties(PropertiesMergeContext context) {
+		List<String> keys = new ArrayList<String>(context.getNewProperties().stringPropertyNames());
+		if (context.isSort()) {
+			Collections.sort(keys);
+		}
+		for (String key : keys) {
+			mergeProperty(context, key);
+		}
+	}
+
 	public Properties getResourceProperties() throws IOException {
 		if (getLocations() == null || getLocations().length == 0) {
 			logger.info("No resource property locations to load from");
@@ -218,7 +293,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 			// If a property is declared in more than one resource location, the last resource location "wins"
 			boolean override = true;
 			PropertiesMergeContext context = new PropertiesMergeContext(result, newProps, override, source);
-			helper.mergeProperties(context);
+			mergeProperties(context);
 		}
 		return result;
 	}
@@ -249,14 +324,6 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 	public PropertiesPersister getPropertiesPersister() {
 		return propertiesPersister;
-	}
-
-	public PropertiesHelper getHelper() {
-		return helper;
-	}
-
-	public void setHelper(PropertiesHelper propertiesHelper) {
-		this.helper = propertiesHelper;
 	}
 
 	public String getEnvironmentPropertyPrefix() {
