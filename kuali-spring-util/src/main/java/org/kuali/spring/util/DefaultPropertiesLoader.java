@@ -266,7 +266,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	}
 
 	/**
-	 * Merge the property under 'key' from newProps into currentProps using the settings from PropertiesMergeContext
+	 * Merge a property under 'key' from newProps into currentProps using the settings from PropertiesMergeContext
 	 * 
 	 * @param context
 	 * @param key
@@ -279,24 +279,27 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		// Extract the new value
 		String newValue = newProps.getProperty(key);
 
-		// If the new value is null, there is nothing further to do
-		if (newValue == null) {
-			return PropertyMergeResult.NOOP_NULL_NEW_VALUE;
-		}
-
 		// Extract the existing value
 		String currentValue = currentProps.getProperty(key);
 
-		// There is no existing value for this key
+		// If the new value is null, there is nothing further to do
+		if (newValue == null) {
+			PropertyMergeResultReason reason = PropertyMergeResultReason.NOOP_NULL_NEW_VALUE;
+			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
+		}
+
+		// The newValue is not null, and there is no existing value for this key
 		if (currentValue == null) {
 			logger.debug("Adding " + source + " property {}=[{}]", key, plogger.getValue(key, newValue));
 			currentProps.setProperty(key, newValue);
-			return PropertyMergeResult.ADD;
+			PropertyMergeResultReason reason = PropertyMergeResultReason.ADD;
+			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
 		}
 
-		// Neither value is null, but they are the same, nothing further to do
+		// Neither value is null and the values are the same, nothing further to do
 		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
-			return PropertyMergeResult.NOOP_IDENTICAL_VALUES;
+			PropertyMergeResultReason reason = PropertyMergeResultReason.NOOP_IDENTICAL_VALUES;
+			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
 		}
 
 		if (override) {
@@ -304,13 +307,15 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
 					plogger.getValue(key, currentValue), plogger.getValue(key, newValue));
 			currentProps.setProperty(key, newValue);
-			return PropertyMergeResult.OVERRIDE;
+			PropertyMergeResultReason reason = PropertyMergeResultReason.OVERRIDE;
+			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
 		} else {
 			// There is already an existing property, and the existing property wins
 			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
 					+ " value. Existing:[{}] New:[{}]", plogger.getValue(key, currentValue),
 					plogger.getValue(key, newValue));
-			return PropertyMergeResult.NOOP_EXISTING_WINS;
+			PropertyMergeResultReason reason = PropertyMergeResultReason.NOOP_EXISTING_WINS;
+			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
 		}
 	}
 
