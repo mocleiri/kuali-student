@@ -28,7 +28,6 @@ public class PropertyHandlerTest {
 		PropertyHandler handler = new PropertyHandler();
 		handler.setLoader(loader);
 		handler.postProcessBeanFactory(null);
-		// Assert.notNull(handler.getPlogger());
 	}
 
 }

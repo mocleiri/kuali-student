@@ -229,7 +229,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		// Merge in system properties according to the SystemPropertiesMode being used
 		if (!getSystemPropertiesMode().equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_NEVER)) {
 			boolean override = getSystemPropertiesMode().equals(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-			context = new PropertiesMergeContext(result, resource, override, PropertySource.SYSTEM);
+			context = new PropertiesMergeContext(result, sys, override, PropertySource.SYSTEM);
 			mergeProperties(context);
 		}
 

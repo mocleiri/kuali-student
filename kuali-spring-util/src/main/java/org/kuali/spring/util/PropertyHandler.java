@@ -30,7 +30,6 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	private String beanName;
 	private BeanFactory beanFactory;
-	Resource[] locations;
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -38,7 +37,7 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 			Properties properties = loader.loadProperties();
 			converter.convert(properties);
 		} catch (Exception e) {
-			throw new BeanInitializationException("Could not load properties", e);
+			throw new BeanInitializationException("Could not complete property handling", e);
 		}
 	}
 
@@ -72,14 +71,6 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	public void setLoader(PropertiesLoader loader) {
 		this.loader = loader;
-	}
-
-	public Resource[] getLocations() {
-		return locations;
-	}
-
-	public void setLocations(Resource[] locations) {
-		this.locations = locations;
 	}
 
 }
