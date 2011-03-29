@@ -234,8 +234,10 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		}
 
 		// Merge in environment properties. Environment properties never override properties from another source
-		context = new PropertiesMergeContext(result, env, false, PropertySource.ENVIRONMENT);
-		mergeProperties(context);
+		if (isSearchSystemEnvironment()) {
+			context = new PropertiesMergeContext(result, env, false, PropertySource.ENVIRONMENT);
+			mergeProperties(context);
+		}
 
 		// Return the merged properties
 		return result;
