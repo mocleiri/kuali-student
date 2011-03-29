@@ -26,6 +26,7 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 	private int order = Ordered.LOWEST_PRECEDENCE; // default: same as non-Ordered
 
 	private PropertiesLoader loader = new DefaultPropertiesLoader();
+	private PropertiesConverter converter = new DefaultPropertiesConverter();
 
 	private String beanName;
 	private BeanFactory beanFactory;
@@ -35,6 +36,7 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
 			Properties properties = loader.loadProperties();
+			converter.convert(properties);
 		} catch (Exception e) {
 			throw new BeanInitializationException("Could not load properties", e);
 		}
