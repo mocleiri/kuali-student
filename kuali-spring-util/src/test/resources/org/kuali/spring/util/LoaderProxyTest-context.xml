@@ -12,9 +12,16 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean id="logging.callback" class="org.kuali.spring.proxy.DefaultPropertiesLoaderLoggingCallback" />
-  <bean id="proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:classname="org.kuali.spring.util.ConfigurablePropertyPlaceholderConfigurer"
-    p:callback-ref="logging.callback" />
-  <bean id="configurer" class="org.kuali.spring.util.DelegatingPropertyPlaceholderConfigurer" p:delegate-ref="proxy"
+  <bean id="trace.callback" class="org.kuali.spring.proxy.TraceCallback" />
+
+  <bean id="plogger" class="org.kuali.spring.util.DefaultPropertyLogger" />
+  <bean id="plogger.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
+    p:sourceBean-ref="plogger" />
+
+  <bean id="ploader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:plogger-ref="plogger.proxy"
     p:locations="classpath:org/kuali/spring/util/test.properties" />
+  <bean id="ploader.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
+    p:sourceBean-ref="ploader" />
+
+  <bean id="phandler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="ploader.proxy" />
 </beans>

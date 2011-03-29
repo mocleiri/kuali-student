@@ -10,7 +10,7 @@
   <logger name="org.springframework.util">
     <level value="info" />
   </logger>
-  <logger name="org.kuali.spring.util">
+  <logger name="org.kuali.spring">
     <level value="trace" />
   </logger>
   <root>

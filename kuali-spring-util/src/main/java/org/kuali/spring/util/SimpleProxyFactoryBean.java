@@ -5,11 +5,14 @@ import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.FactoryBean;
 
 public class SimpleProxyFactoryBean implements FactoryBean<Object> {
-	String classname;
 	Callback callback = NoOp.INSTANCE;
+	String classname;
+	Object sourceBean;
+	boolean copySourceBeanProperties = true;
 
 	public SimpleProxyFactoryBean() {
 		this(null, NoOp.INSTANCE);
@@ -27,15 +30,29 @@ public class SimpleProxyFactoryBean implements FactoryBean<Object> {
 
 	@Override
 	public Object getObject() throws Exception {
-		Assert.assertNotNull(classname);
-		Assert.assertNotNull(callback);
+		Assert.assertTrue(this.classname != null || this.sourceBean != null);
+		Assert.assertNotNull(this.callback);
+		if (this.copySourceBeanProperties) {
+			Assert.assertTrue(this.sourceBean != null);
+		}
 
-		Class<?> targetClass = Class.forName(classname);
+		Class<?> targetClass = getTargetClass();
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(targetClass);
 		enhancer.setCallback(getCallback());
 		Object proxy = enhancer.create();
+		if (this.copySourceBeanProperties) {
+			BeanUtils.copyProperties(this.sourceBean, proxy);
+		}
 		return proxy;
+	}
+
+	protected Class<?> getTargetClass() throws ClassNotFoundException {
+		if (this.classname != null) {
+			return Class.forName(this.classname);
+		} else {
+			return this.sourceBean.getClass();
+		}
 	}
 
 	@Override
@@ -62,6 +79,14 @@ public class SimpleProxyFactoryBean implements FactoryBean<Object> {
 
 	public void setClassname(String classname) {
 		this.classname = classname;
+	}
+
+	public Object getSourceBean() {
+		return sourceBean;
+	}
+
+	public void setSourceBean(Object source) {
+		this.sourceBean = source;
 	}
 
 }

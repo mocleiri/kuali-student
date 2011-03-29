@@ -99,7 +99,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	 * @return
 	 * @throws IOException
 	 */
-	protected Properties getProperties(Resource location) throws IOException {
+	protected Properties loadProperties(Resource location) throws IOException {
 		// Handle locations that don't exist
 		if (!location.exists()) {
 			return handleResourceNotFound(location);
@@ -153,7 +153,6 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	protected Properties handleResourceNotFound(Resource location) {
 		if (isIgnoreResourceNotFound()) {
 			logger.info("Ignoring properties from {}.  Resource not found", location);
-			// Return an empty Properties
 			return new Properties();
 		} else {
 			throw new PropertiesLoadException("Resource not found: " + location);
@@ -176,8 +175,8 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	/**
 	 * Merge the Properties[] into a single Properties object
 	 */
-	protected Properties getMergedLocalProperties() {
-		if (getLocalProperties() == null) {
+	protected Properties mergeLocalProperties() {
+		if (getLocalProperties() == null || getLocalProperties().length == 0) {
 			// Nothing to do, return an empty Properties object
 			return new Properties();
 		}
@@ -192,7 +191,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	/**
 	 * Get properties from the environment
 	 */
-	protected Properties getEnvironmentProperties() {
+	protected Properties loadEnvironmentProperties() {
 		if (isUseEnvironmentPropertyPrefix()) {
 			return getEnvironmentProperties(getEnvironmentPropertyPrefix());
 		} else {
@@ -205,7 +204,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	 * 
 	 * @return
 	 */
-	protected Properties getSystemProperties() {
+	protected Properties loadSystemProperties() {
 		return SystemUtils.getSystemPropertiesIgnoreExceptions();
 	}
 
@@ -250,10 +249,10 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	public Properties loadProperties() {
 		try {
 			// Populate properties from the default set of locations
-			Properties local = getMergedLocalProperties();
-			Properties resource = getResourceProperties();
-			Properties sys = getSystemProperties();
-			Properties env = getEnvironmentProperties();
+			Properties local = mergeLocalProperties();
+			Properties resource = loadResourceProperties();
+			Properties sys = loadSystemProperties();
+			Properties env = loadEnvironmentProperties();
 
 			// Store the properties locally
 			setMergedLocalProperties(local);
@@ -277,8 +276,8 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	public PropertyMergeResult mergeProperty(PropertiesMergeContext context, String key) {
 		Properties newProps = context.getNewProperties();
 		Properties currentProps = context.getCurrentProperties();
-		PropertySource source = context.getSource();
 		boolean override = context.isOverride();
+
 		// Extract the new value
 		String newValue = newProps.getProperty(key);
 
@@ -293,7 +292,6 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 		// The newValue is not null, and there is no existing value for this key
 		if (currentValue == null) {
-			logger.debug("Adding " + source + " property {}=[{}]", key, plogger.getValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 			PropertyMergeResultReason reason = PropertyMergeResultReason.ADD;
 			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
@@ -307,17 +305,12 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 		if (override) {
 			// There is an existing property, but the new property wins
-			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
-					plogger.getValue(key, currentValue), plogger.getValue(key, newValue));
 			currentProps.setProperty(key, newValue);
 			PropertyMergeResultReason reason = PropertyMergeResultReason.OVERRIDE;
 			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
 		} else {
 			// There is already an existing property, and the existing property wins
-			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
-					+ " value. Existing:[{}] New:[{}]", plogger.getValue(key, currentValue),
-					plogger.getValue(key, newValue));
-			PropertyMergeResultReason reason = PropertyMergeResultReason.NOOP_EXISTING_WINS;
+			PropertyMergeResultReason reason = PropertyMergeResultReason.EXISTING_PROPERTY_WINS;
 			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
 		}
 	}
@@ -328,18 +321,45 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 			Collections.sort(keys);
 		}
 		for (String key : keys) {
-			mergeProperty(context, key);
+			logResult(mergeProperty(context, key));
 		}
 	}
 
-	public Properties getResourceProperties() throws IOException {
+	protected void logResult(PropertyMergeResult result) {
+		PropertySource source = result.getContext().getSource();
+		String key = result.getKey();
+		String newValue = result.getNewValue();
+		String currentValue = result.getOldValue();
+
+		switch (result.getReason()) {
+		case ADD:
+			logger.debug("Add " + source + " property {}=[{}]", key, plogger.getLogValue(key, newValue));
+			return;
+		case OVERRIDE:
+			logger.info(source + " property override for '" + key + "' [{}]->[{}]",
+					plogger.getLogValue(key, currentValue), plogger.getLogValue(key, newValue));
+			return;
+		case EXISTING_PROPERTY_WINS:
+			logger.debug("The existing value for '" + key + "' is not being overridden by the " + source
+					+ " value. Existing:[{}] New:[{}]", plogger.getLogValue(key, currentValue),
+					plogger.getLogValue(key, newValue));
+			return;
+		default:
+			logger.trace("Merge property result: {} for {}", result.getReason(), key);
+			return;
+
+		}
+
+	}
+
+	public Properties loadResourceProperties() throws IOException {
 		if (getLocations() == null || getLocations().length == 0) {
 			logger.info("No resource property locations to load from");
 			return new Properties();
 		}
 		Properties result = new Properties();
 		for (Resource location : getLocations()) {
-			Properties newProps = getProperties(location);
+			Properties newProps = loadProperties(location);
 			PropertySource source = PropertySource.RESOURCE;
 			// If a property is declared in more than one resource location, the last resource location "wins"
 			boolean override = true;

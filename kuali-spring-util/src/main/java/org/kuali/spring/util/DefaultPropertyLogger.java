@@ -1,8 +1,9 @@
 package org.kuali.spring.util;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ public class DefaultPropertyLogger implements PropertyLogger {
 	public static final boolean DEFAULT_IS_MASK_PROPERTY_VALUES = true;
 	public static final boolean DEFAULT_IS_FLATTEN_PROPERTY_VALUES = false;
 	public static final boolean DEFAULT_IS_TRIM_PROPERTY_VALUES = false;
+	public static final boolean DEFAULT_IS_LOG_IN_SORTED_ORDER = true;
 	// Space
 	public static final String DEFAULT_REPLACEMENT_STRING = " ";
 	// Carriage return
@@ -25,6 +27,8 @@ public class DefaultPropertyLogger implements PropertyLogger {
 	// Linefeed
 	public static final String LF = "\n";
 
+	// If true, log entries from a Properties object sorted by key
+	boolean logInSortedOrder = DEFAULT_IS_LOG_IN_SORTED_ORDER;
 	// If true, replace \n and \r when logging values
 	boolean flattenPropertyValues = DEFAULT_IS_FLATTEN_PROPERTY_VALUES;
 	// The value to replace linefeeds with
@@ -71,7 +75,7 @@ public class DefaultPropertyLogger implements PropertyLogger {
 
 	@Override
 	public String getLogEntry(String key, String value) {
-		return key + "=" + getValue(key, value);
+		return key + "=" + getLogValue(key, value);
 	}
 
 	protected boolean isEmpty(String s) {
@@ -86,18 +90,17 @@ public class DefaultPropertyLogger implements PropertyLogger {
 
 	@Override
 	public String getLogEntry(Properties properties) {
-		StringBuilder sb = new StringBuilder();
 		if (properties == null || properties.size() == 0) {
-			sb.append("No properties to log\n");
-			return sb.toString();
+			return "No properties to log";
 		}
-		Map<String, String> sortedProperties = new TreeMap<String, String>();
-		for (String key : properties.stringPropertyNames()) {
+		StringBuilder sb = new StringBuilder();
+		List<String> keys = new ArrayList<String>(properties.stringPropertyNames());
+		if (isLogInSortedOrder()) {
+			Collections.sort(keys);
+		}
+		for (String key : keys) {
 			String value = properties.getProperty(key);
-			sortedProperties.put(key, value);
-		}
-		for (Map.Entry<String, String> entry : sortedProperties.entrySet()) {
-			sb.append(getLogEntry(entry.getKey(), entry.getValue()) + "\n");
+			sb.append(getLogEntry(key, value) + "\n");
 		}
 		return sb.toString();
 	}
@@ -113,7 +116,7 @@ public class DefaultPropertyLogger implements PropertyLogger {
 	}
 
 	@Override
-	public String getValue(String key, String value) {
+	public String getLogValue(String key, String value) {
 		if (isFlattenPropertyValues()) {
 			value = value.replace(LF, getLinefeedReplacement());
 			value = value.replace(CR, getCarriageReturnReplacement());
@@ -186,6 +189,14 @@ public class DefaultPropertyLogger implements PropertyLogger {
 
 	public Pattern[] getPatterns() {
 		return patterns;
+	}
+
+	public boolean isLogInSortedOrder() {
+		return logInSortedOrder;
+	}
+
+	public void setLogInSortedOrder(boolean logInSortedOrder) {
+		this.logInSortedOrder = logInSortedOrder;
 	}
 
 }
