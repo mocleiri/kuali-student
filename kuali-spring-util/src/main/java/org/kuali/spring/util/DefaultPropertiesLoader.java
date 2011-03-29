@@ -39,7 +39,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 	// Default component beans
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	PropertiesHelper helper = new PropertiesHelper();
-	PropertiesLogger plogger = new DefaultPropertiesLogger();
+	PropertyLogger plogger = new DefaultPropertyLogger();
 
 	// Filled in during loading
 	Properties systemProperties;
@@ -331,11 +331,11 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		this.useEnvironmentPropertyPrefix = useEnvironmentPropertyPrefix;
 	}
 
-	public PropertiesLogger getPlogger() {
+	public PropertyLogger getPlogger() {
 		return plogger;
 	}
 
-	public void setPlogger(PropertiesLogger propertiesLogger) {
+	public void setPlogger(PropertyLogger propertiesLogger) {
 		this.plogger = propertiesLogger;
 	}
 

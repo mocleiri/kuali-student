@@ -100,7 +100,7 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 	/**
 	 * Provides control over how properties are logged
 	 */
-	DefaultPropertiesLogger propertiesLogger;
+	DefaultPropertyLogger propertiesLogger;
 
 	/**
 	 * Utility class for working with properties
@@ -463,11 +463,11 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 		this.unresolvedSpringProperties = unresolvedSpringProperties;
 	}
 
-	public DefaultPropertiesLogger getPropertiesLogger() {
+	public DefaultPropertyLogger getPropertiesLogger() {
 		return propertiesLogger;
 	}
 
-	public void setPropertiesLogger(DefaultPropertiesLogger propertiesLogger) {
+	public void setPropertiesLogger(DefaultPropertyLogger propertiesLogger) {
 		this.propertiesLogger = propertiesLogger;
 	}
 

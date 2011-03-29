@@ -9,7 +9,7 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans
                       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-  <bean id="kuali.plogger" class="org.kuali.spring.util.DefaultPropertiesLogger" />
+  <bean id="kuali.plogger" class="org.kuali.spring.util.DefaultPropertyLogger" />
   <bean id="kuali.phelper" class="org.kuali.spring.util.PropertiesHelper" p:plogger-ref="kuali.plogger" />
   <bean id="kuali.ploader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:plogger-ref="kuali.plogger"
     p:helper-ref="kuali.phelper" />
