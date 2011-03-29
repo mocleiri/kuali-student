@@ -183,7 +183,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		PropertiesMergeContext context = new PropertiesMergeContext(result, local, PropertySource.LOCAL);
 		mergeProperties(context);
 
-		// Merge in resource properties. isLocalOverride() controls what property "wins" if the same
+		// Merge in resource properties. localOverride controls what property "wins" if the same
 		// property is declared both locally and in a resource
 		context = new PropertiesMergeContext(result, resource, isLocalOverride(), PropertySource.RESOURCE);
 		mergeProperties(context);

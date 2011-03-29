@@ -16,18 +16,19 @@ import org.springframework.core.PriorityOrdered;
 import org.springframework.core.io.Resource;
 
 /**
- * This class is similar to PropertyPlaceholderConfigurer from Spring. It is used to update bean properties with values
- * from properties files. It has all of the features from the Spring configurer, fixes a few bugs, adds a few new
- * features and is much more pluggable
+ * This class is similar to PropertyPlaceholderConfigurer from Spring. It updates bean properties with values from
+ * properties files. It has all of the features from the Spring configurer, fixes a few bugs, adds a few new features
+ * and is a lot more pluggable/extensible
  */
 public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFactoryPostProcessor, PriorityOrdered {
 	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
 
 	private int order = Ordered.LOWEST_PRECEDENCE; // default: same as non-Ordered
 
+	private PropertiesLoader loader = new DefaultPropertiesLoader();
+
 	private String beanName;
 	private BeanFactory beanFactory;
-	private PropertiesLoader loader = new DefaultPropertiesLoader();
 	Resource[] locations;
 
 	@Override

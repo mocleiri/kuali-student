@@ -8,8 +8,6 @@ public interface PropertyLogger {
 
 	public String getLogEntry(Properties properties);
 
-	public String getLogEntry(Properties properties, String msg);
-
-	public String getPropertyValue(String key, String value);
+	public String getValue(String key, String value);
 
 }

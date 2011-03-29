@@ -108,11 +108,6 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 	PropertiesHelper helper;
 
 	/**
-	 * Utility class for loading properties from resources
-	 */
-	DefaultPropertiesLoaderOld loader;
-
-	/**
 	 * Utility class for replacing placeholders with values
 	 */
 	PlaceholderReplacer replacer;
@@ -142,7 +137,7 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 	protected void validate() {
 		Assert.notNull(getPropertiesLogger());
 		Assert.notNull(getHelper());
-		Assert.notNull(getLoader());
+		// Assert.notNull(getLoader());
 		Assert.notNull(getReplacer());
 		Assert.notNull(getRetriever());
 		Assert.notNull(getResolver());
@@ -182,17 +177,13 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 		Properties resolvedProperties = getResolvedProperties(properties);
 		springProperties = getResolvedProperties(unresolvedSpringProperties);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug(propertiesLogger.getLogEntry(unresolvedProperties, "*** Unresolved Properties ***"));
-		}
+		logger.debug("*** Unresolved Properties ***\n{}", propertiesLogger.getLogEntry(unresolvedProperties));
 
 		// Synchronize the properties passed in with our resolved properties
-		helper.syncProperties(properties, resolvedProperties);
+		// helper.syncProperties(properties, resolvedProperties);
 
-		if (logger.isInfoEnabled()) {
-			logger.info(propertiesLogger.getLogEntry(springProperties, "*** Spring Properties ***"));
-			logger.info(propertiesLogger.getLogEntry(properties, "*** All Properties ***"));
-		}
+		logger.info("*** Spring Properties ***\n{}", propertiesLogger.getLogEntry(springProperties));
+		logger.info("*** All Properties ***\n{}", propertiesLogger.getLogEntry(properties));
 	}
 
 	protected Properties getResolvedProperties(Properties properties) {
@@ -256,42 +247,6 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 			}
 			processBeanDefinition(currentBean, bd);
 		}
-	}
-
-	/**
-	 * Override the default resource loading logic to clean it up and emit sensible log messages. Anytime a property
-	 * value is overridden an INFO level logging message is produced. With TRACE turned on, all properties are logged in
-	 * the order they are loaded
-	 */
-	@Override
-	protected void loadProperties(Properties properties) throws IOException {
-		this.loader.loadProperties(properties, getLocations());
-	}
-
-	@Override
-	protected Properties mergeProperties() throws IOException {
-		// The super class method loads properties from resources as well as properties defined directly on this bean
-		Properties properties = super.mergeProperties();
-		// Preserve just the Spring properties
-		setUnresolvedSpringProperties(helper.getClone(properties));
-		// Merge in the system properties as appropriate
-		helper.mergeSystemProperties(properties, getSystemPropertiesMode());
-		// Merge in environment properties as appropriate
-		if (isSearchSystemEnvironment()) {
-			helper.mergeEnvironmentProperties(properties, getEnvironmentPropertyPrefix());
-		}
-		if (retriever instanceof PropertiesRetriever) {
-			// Give the retriever a handle to the properties
-			((PropertiesRetriever) retriever).setProperties(properties);
-		}
-		// Retain a reference to the unresolved properties
-		setUnresolvedProperties(helper.getClone(properties));
-		// resolve placeholders in the properties
-		resolvePlaceholders(properties);
-		// Store the complete set of resolved properties
-		setProperties(properties);
-		// return the complete set of properties
-		return properties;
 	}
 
 	@Override
@@ -373,14 +328,6 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 
 	public void setHelper(PropertiesHelper helper) {
 		this.helper = helper;
-	}
-
-	public DefaultPropertiesLoaderOld getLoader() {
-		return loader;
-	}
-
-	public void setLoader(DefaultPropertiesLoaderOld loader) {
-		this.loader = loader;
 	}
 
 	public PlaceholderReplacer getReplacer() {

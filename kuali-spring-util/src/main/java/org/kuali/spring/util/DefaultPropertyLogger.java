@@ -69,12 +69,9 @@ public class DefaultPropertyLogger implements PropertyLogger {
 		}
 	}
 
+	@Override
 	public String getLogEntry(String key, String value) {
-		return key + "=" + getPropertyValue(key, value);
-	}
-
-	public String getLogEntry(Properties properties) {
-		return getLogEntry(properties, null);
+		return key + "=" + getValue(key, value);
 	}
 
 	protected boolean isEmpty(String s) {
@@ -87,11 +84,9 @@ public class DefaultPropertyLogger implements PropertyLogger {
 		return false;
 	}
 
-	public String getLogEntry(Properties properties, String comment) {
+	@Override
+	public String getLogEntry(Properties properties) {
 		StringBuilder sb = new StringBuilder();
-		if (!isEmpty(comment)) {
-			sb.append(comment + "\n");
-		}
 		if (properties == null || properties.size() == 0) {
 			sb.append("No properties to log\n");
 			return sb.toString();
@@ -117,7 +112,8 @@ public class DefaultPropertyLogger implements PropertyLogger {
 		return false;
 	}
 
-	public String getPropertyValue(String key, String value) {
+	@Override
+	public String getValue(String key, String value) {
 		if (isFlattenPropertyValues()) {
 			value = value.replace(LF, getLinefeedReplacement());
 			value = value.replace(CR, getCarriageReturnReplacement());

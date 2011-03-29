@@ -56,6 +56,7 @@ public class DefaultAutoWirer implements Wirer {
 	}
 
 	protected void wireLoader() {
+		/*
 		if (handler.getLoader() == null) {
 			handler.setLoader(new DefaultPropertiesLoaderOld());
 			logWiringEvent(handler.getLoader(), handler);
@@ -70,7 +71,7 @@ public class DefaultAutoWirer implements Wirer {
 		if (loader.getHelper() == null) {
 			loader.setHelper(helper);
 			logWiringEvent(loader.getHelper(), loader);
-		}
+		}*/
 	}
 
 	protected void wireReplacer() {
