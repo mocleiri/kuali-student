@@ -14,7 +14,8 @@
 
   <bean id="trace.callback" class="org.kuali.spring.proxy.TraceCallback" />
 
-  <bean id="plogger" class="org.kuali.spring.util.DefaultPropertyLogger" />
+  <bean id="plogger" class="org.kuali.spring.util.DefaultPropertyLogger" p:flattenPropertyValues="true"
+    p:linefeedReplacement="LF" p:carriageReturnReplacement="CR" />
   <bean id="plogger.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
     p:sourceBean-ref="plogger" />
 

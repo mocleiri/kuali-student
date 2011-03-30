@@ -20,6 +20,7 @@ public class PlaceholderReplacer {
 	final Logger logger = LoggerFactory.getLogger(PlaceholderReplacer.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
+	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
 
 	static {
 		wellKnownSimplePrefixes.put("}", "{");
@@ -36,7 +37,7 @@ public class PlaceholderReplacer {
 	Properties resolvedCache = new Properties();
 
 	public PlaceholderReplacer() {
-		this(false);
+		this(DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	}
 
 	public PlaceholderReplacer(boolean ignoreUnresolvablePlaceholders) {
@@ -45,7 +46,7 @@ public class PlaceholderReplacer {
 	}
 
 	public PlaceholderReplacer(String placeholderPrefix, String placeholderSuffix) {
-		this(placeholderPrefix, placeholderSuffix, null, true);
+		this(placeholderPrefix, placeholderSuffix, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	}
 
 	public PlaceholderReplacer(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
@@ -53,8 +54,10 @@ public class PlaceholderReplacer {
 
 		Assert.notNull(placeholderPrefix, "placeholderPrefix must not be null");
 		Assert.notNull(placeholderSuffix, "placeholderSuffix must not be null");
+		
 		this.placeholderPrefix = placeholderPrefix;
 		this.placeholderSuffix = placeholderSuffix;
+		
 		String simplePrefixForSuffix = wellKnownSimplePrefixes.get(this.placeholderSuffix);
 		if (simplePrefixForSuffix != null && this.placeholderPrefix.endsWith(simplePrefixForSuffix)) {
 			this.simplePrefix = simplePrefixForSuffix;

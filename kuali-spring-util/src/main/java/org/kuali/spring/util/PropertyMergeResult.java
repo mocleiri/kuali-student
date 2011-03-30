@@ -5,20 +5,20 @@ public class PropertyMergeResult {
 	String key;
 	String oldValue;
 	String newValue;
-	PropertyMergeResultReason reason;
+	PropertyMergeType type;
 
 	public PropertyMergeResult() {
 		this(null, null, null, null, null);
 	}
 
 	public PropertyMergeResult(PropertiesMergeContext context, String key, String oldValue, String newValue,
-			PropertyMergeResultReason reason) {
+			PropertyMergeType reason) {
 		super();
 		this.context = context;
 		this.key = key;
 		this.oldValue = oldValue;
 		this.newValue = newValue;
-		this.reason = reason;
+		this.type = reason;
 	}
 
 	public String getKey() {
@@ -45,12 +45,12 @@ public class PropertyMergeResult {
 		this.newValue = newValue;
 	}
 
-	public PropertyMergeResultReason getReason() {
-		return reason;
+	public PropertyMergeType getType() {
+		return type;
 	}
 
-	public void setReason(PropertyMergeResultReason reason) {
-		this.reason = reason;
+	public void setType(PropertyMergeType reason) {
+		this.type = reason;
 	}
 
 	public PropertiesMergeContext getContext() {

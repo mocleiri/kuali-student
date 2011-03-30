@@ -286,32 +286,32 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 
 		// If the new value is null, there is nothing further to do
 		if (newValue == null) {
-			PropertyMergeResultReason reason = PropertyMergeResultReason.NOOP_NULL_NEW_VALUE;
-			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
+			PropertyMergeType type = PropertyMergeType.NULL_NEW_VALUE;
+			return new PropertyMergeResult(context, key, currentValue, newValue, type);
 		}
 
 		// The newValue is not null, and there is no existing value for this key
 		if (currentValue == null) {
 			currentProps.setProperty(key, newValue);
-			PropertyMergeResultReason reason = PropertyMergeResultReason.ADD;
-			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
+			PropertyMergeType type = PropertyMergeType.ADD;
+			return new PropertyMergeResult(context, key, currentValue, newValue, type);
 		}
 
 		// Neither value is null and the values are the same, nothing further to do
 		if (ObjectUtils.nullSafeEquals(newValue, currentValue)) {
-			PropertyMergeResultReason reason = PropertyMergeResultReason.NOOP_IDENTICAL_VALUES;
-			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
+			PropertyMergeType type = PropertyMergeType.IDENTICAL_VALUES;
+			return new PropertyMergeResult(context, key, currentValue, newValue, type);
 		}
 
 		if (override) {
 			// There is an existing property, but the new property wins
 			currentProps.setProperty(key, newValue);
-			PropertyMergeResultReason reason = PropertyMergeResultReason.OVERRIDE;
-			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
+			PropertyMergeType type = PropertyMergeType.OVERRIDE;
+			return new PropertyMergeResult(context, key, currentValue, newValue, type);
 		} else {
 			// There is already an existing property, and the existing property wins
-			PropertyMergeResultReason reason = PropertyMergeResultReason.EXISTING_PROPERTY_WINS;
-			return new PropertyMergeResult(context, key, currentValue, newValue, reason);
+			PropertyMergeType type = PropertyMergeType.EXISTING_PROPERTY_WINS;
+			return new PropertyMergeResult(context, key, currentValue, newValue, type);
 		}
 	}
 
@@ -331,7 +331,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 		String newValue = result.getNewValue();
 		String currentValue = result.getOldValue();
 
-		switch (result.getReason()) {
+		switch (result.getType()) {
 		case ADD:
 			logger.debug("Add " + source + " property {}=[{}]", key, plogger.getLogValue(key, newValue));
 			return;
@@ -345,7 +345,7 @@ public class DefaultPropertiesLoader implements PropertiesLoader {
 					plogger.getLogValue(key, newValue));
 			return;
 		default:
-			logger.trace("Merge property result: {} for {}", result.getReason(), key);
+			logger.trace("Merge property result: {} for {}", result.getType(), key);
 			return;
 
 		}

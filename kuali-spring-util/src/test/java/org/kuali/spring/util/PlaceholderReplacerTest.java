@@ -10,7 +10,7 @@ import org.junit.Test;
 public class PlaceholderReplacerTest {
 
 	@Test
-	public void replacePlaceholders() throws IOException {
+	public void replacePlaceholders() {
 		Properties props = new Properties();
 		props.setProperty("a", "1");
 		PlaceholderReplacer replacer = new PlaceholderReplacer();
@@ -19,7 +19,7 @@ public class PlaceholderReplacerTest {
 	}
 
 	@Test
-	public void circularReference() throws IOException {
+	public void circularReference() {
 		Properties props = new Properties();
 		props.setProperty("a", "${b}");
 		props.setProperty("b", "${c}");
@@ -27,7 +27,7 @@ public class PlaceholderReplacerTest {
 		PlaceholderReplacer replacer = new PlaceholderReplacer();
 		try {
 			replacer.replacePlaceholders("${a}", props);
-			Assert.assertTrue(false);
+			Assert.fail("Should have thrown an IllegalArgumentException due to a circular reference");
 		} catch (IllegalArgumentException e) {
 			// This is expected
 		}
