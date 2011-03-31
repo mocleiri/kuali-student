@@ -243,8 +243,8 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 	 * bar=b<br>
 	 * a.b=purple<br>
 	 * 
-	 * The nested placeholder ${${foo}.${bar}} will be expanded to ${a.b}. Once expansion has taken place, the value
-	 * "purple" will be looked up and stored in the "value" property of this placeholder
+	 * The nested placeholder ${${foo}.${bar}} will be expanded to ${a.b} After expansion has taken place, the value
+	 * "purple" will be looked up and stored in the "value" property of the corresponding placeholder
 	 * 
 	 * @param placeholder
 	 * @param properties
@@ -255,8 +255,7 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 		String source = placeholder.getOriginalPlaceholder();
 		// The "children" of this placeholder are ${foo} and ${bar}
 		List<Placeholder> children = placeholder.getPlaceholders();
-		// If the value for "foo" is "a" and the value for "bar" is "b" the expanded placeholder for ${${foo}.${bar}}
-		// will be ${a.b}
+		// If "foo" is "a" and "bar" is "b" the expanded placeholder for ${${foo}.${bar}} will be ${a.b}
 		String expandedPlaceholder = replacePlaceholders(source, children, retriever, resolving);
 		// Resolve the placeholder by finding a value for the property "a.b"
 		resolve(placeholder, retriever, resolving, expandedPlaceholder);
