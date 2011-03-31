@@ -78,7 +78,7 @@ public class DefaultAutoWirer implements Wirer {
 		if (handler.getReplacer() != null) {
 			return;
 		}
-		PlaceholderReplacer replacer = new PlaceholderReplacer(
+		PlaceholderReplacerOld replacer = new PlaceholderReplacerOld(
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null,
 				PropertyHandlerOld.DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);

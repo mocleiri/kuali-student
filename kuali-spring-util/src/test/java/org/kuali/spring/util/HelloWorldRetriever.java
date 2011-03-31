@@ -6,7 +6,7 @@ package org.kuali.spring.util;
 public class HelloWorldRetriever extends PropertiesRetriever {
 
 	@Override
-	public String retrieveProperty(String key) {
+	public String retrieveValue(String key) {
 		return "Hello World";
 	}
 

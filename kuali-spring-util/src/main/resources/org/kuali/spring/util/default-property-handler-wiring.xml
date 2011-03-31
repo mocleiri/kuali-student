@@ -14,7 +14,7 @@
   <bean id="kuali.ploader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:plogger-ref="kuali.plogger"
     p:helper-ref="kuali.phelper" />
   <bean id="kuali.pretriever" class="org.kuali.spring.util.PropertiesRetriever" />
-  <bean id="kuali.preplacer" class="org.kuali.spring.util.PlaceholderReplacer" />
+  <bean id="kuali.preplacer" class="org.kuali.spring.util.PlaceholderReplacerOld" />
   <bean id="kuali.presolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:replacer-ref="kuali.preplacer"
     p:retriever-ref="kuali.pretriever" />
   <bean id="kuali.pvisitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor" p:valueResolver="kuali.presolver" />

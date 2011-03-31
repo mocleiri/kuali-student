@@ -17,8 +17,8 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("1941.12.07", "A day that will live in infamy");
 		properties.setProperty("${year}.${month}.${day}", "A day that will live in infamy");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
-		Properties resolvedProperties = replacer.resolvePlaceholders(properties);
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
+		Properties resolvedProperties = replacer.replacePlaceholders(properties);
 		Assert.assertEquals("A day that will live in infamy", resolvedProperties.getProperty("1941.12.07"));
 	}
 
@@ -31,10 +31,10 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("1941.12.07", "Just a normal day");
 		properties.setProperty("${year}.${month}.${day}", "A day that will live in infamy");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
 		try {
-			replacer.resolvePlaceholders(properties);
-			Assert.fail("Should have thrown an exception for duplicate property");
+			replacer.replacePlaceholders(properties);
+			Assert.fail("Should have thrown an exception for duplicate property with different values");
 		} catch (IllegalArgumentException e) {
 			// expected
 		}
@@ -48,8 +48,8 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("a2", "foo");
 		properties.setProperty("1.${a${b}}", "bar");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
-		Properties resolvedProperties = replacer.resolvePlaceholders(properties);
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
+		Properties resolvedProperties = replacer.replacePlaceholders(properties);
 		String resolvedValue = resolvedProperties.getProperty("1.foo");
 		Assert.assertEquals("bar", resolvedValue);
 		System.out.println(resolvedProperties);
@@ -63,8 +63,8 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("c", "3");
 		properties.setProperty("${a}.${b}.${c}", "foo");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
-		Properties resolvedProperties = replacer.resolvePlaceholders(properties);
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
+		Properties resolvedProperties = replacer.replacePlaceholders(properties);
 		String resolvedValue = resolvedProperties.getProperty("1.2.3");
 		Assert.assertEquals("foo", resolvedValue);
 		System.out.println(resolvedProperties);
@@ -81,8 +81,8 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("lion.female.agility", "awesome");
 		properties.setProperty("lion.female.power", "good");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
-		Properties resolvedProperties = replacer.resolvePlaceholders(properties);
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
+		Properties resolvedProperties = replacer.replacePlaceholders(properties);
 		String resolvedValue = resolvedProperties.getProperty("cat.agility");
 		Assert.assertEquals("awesome", resolvedValue);
 		System.out.println(resolvedProperties);
@@ -94,10 +94,10 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("a", "${b}");
 		properties.setProperty("b", "${a}");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
 		String s = "${a}";
 		try {
-			replacer.resolvePlaceholders(s, properties);
+			replacer.replacePlaceholders(s, properties);
 			Assert.fail("Should have thrown an exception due to a circular reference");
 		} catch (IllegalArgumentException e) {
 			// expected
@@ -114,10 +114,10 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("lion.female.agility", "awesome");
 		properties.setProperty("lion.female.power", "good");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
-		Assert.assertEquals("lion", replacer.resolvePlaceholders("${cat}", properties));
-		Assert.assertEquals("good", replacer.resolvePlaceholders("${${cat}.${gender}.power}", properties));
-		Assert.assertEquals("awesome", replacer.resolvePlaceholders("${${cat}.${gender}.agility}", properties));
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
+		Assert.assertEquals("lion", replacer.replacePlaceholders("${cat}", properties));
+		Assert.assertEquals("good", replacer.replacePlaceholders("${${cat}.${gender}.power}", properties));
+		Assert.assertEquals("awesome", replacer.replacePlaceholders("${${cat}.${gender}.agility}", properties));
 	}
 
 	@Test
@@ -132,13 +132,13 @@ public class PlaceholderReplacer2Test {
 		properties.setProperty("lion.female.agility", "awesome");
 		properties.setProperty("lion.female.power", "good");
 
-		PlaceholderResolver replacer = new PlaceholderResolver();
-		Assert.assertEquals("awesome", replacer.resolvePlaceholders("${cat.agility}", properties));
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
+		Assert.assertEquals("awesome", replacer.replacePlaceholders("${cat.agility}", properties));
 	}
 
 	@Test
 	public void getPlaceholders() {
-		PlaceholderResolver replacer = new PlaceholderResolver();
+		DefaultPlaceholderReplacer replacer = new DefaultPlaceholderReplacer();
 		String s = "I like ${food}";
 		List<Placeholder> placeholders = replacer.getPlaceholders(s);
 		// Should be one placeholder

@@ -15,10 +15,10 @@ public class SimplePropertyResolverTest {
 		String val = "bar";
 		Properties properties = new Properties();
 		properties.setProperty(key, val);
-		PropertyRetriever resolver = new PropertiesRetriever(properties);
+		ValueRetriever resolver = new PropertiesRetriever(properties);
 
-		String resolvedProperty = resolver.retrieveProperty(key);
-		String unresolvedProperty = resolver.retrieveProperty("A-Key-That-Does-Not-Exist");
+		String resolvedProperty = resolver.retrieveValue(key);
+		String unresolvedProperty = resolver.retrieveValue("A-Key-That-Does-Not-Exist");
 
 		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);
@@ -34,8 +34,8 @@ public class SimplePropertyResolverTest {
 		PropertiesRetriever resolver = new PropertiesRetriever();
 		resolver.setProperties(properties);
 
-		String resolvedProperty = resolver.retrieveProperty(key);
-		String unresolvedProperty = resolver.retrieveProperty("A-Key-That-Does-Not-Exist");
+		String resolvedProperty = resolver.retrieveValue(key);
+		String unresolvedProperty = resolver.retrieveValue("A-Key-That-Does-Not-Exist");
 
 		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);

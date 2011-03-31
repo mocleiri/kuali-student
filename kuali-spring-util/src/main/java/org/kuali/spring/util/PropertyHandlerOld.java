@@ -110,12 +110,12 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 	/**
 	 * Utility class for replacing placeholders with values
 	 */
-	PlaceholderReplacer replacer;
+	PlaceholderReplacerOld replacer;
 
 	/**
 	 * Strategy for obtaining property values
 	 */
-	PropertyRetriever retriever;
+	ValueRetriever retriever;
 
 	/**
 	 * Strategy for resolving string values
@@ -204,7 +204,7 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 			logger.debug("Resolved key [{}]->[{}]", key, resolvedKey);
 		}
 		// Get a value for the key
-		String rawValue = retriever.retrieveProperty(key);
+		String rawValue = retriever.retrieveValue(key);
 		logger.trace("Raw value for '{}' is [{}]", key, rawValue);
 		logger.trace("Replacing placeholders in value [{}]", rawValue);
 		// Now replace any placeholders in the value
@@ -330,19 +330,19 @@ public class PropertyHandlerOld extends PropertyResourceConfigurer implements Be
 		this.helper = helper;
 	}
 
-	public PlaceholderReplacer getReplacer() {
+	public PlaceholderReplacerOld getReplacer() {
 		return replacer;
 	}
 
-	public void setReplacer(PlaceholderReplacer replacer) {
+	public void setReplacer(PlaceholderReplacerOld replacer) {
 		this.replacer = replacer;
 	}
 
-	public PropertyRetriever getRetriever() {
+	public ValueRetriever getRetriever() {
 		return retriever;
 	}
 
-	public void setRetriever(PropertyRetriever retriever) {
+	public void setRetriever(ValueRetriever retriever) {
 		this.retriever = retriever;
 	}
 

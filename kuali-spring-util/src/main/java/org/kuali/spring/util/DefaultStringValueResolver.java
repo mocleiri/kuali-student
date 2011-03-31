@@ -3,15 +3,15 @@ package org.kuali.spring.util;
 import org.springframework.util.StringValueResolver;
 
 public class DefaultStringValueResolver implements StringValueResolver {
-	PlaceholderReplacer replacer;
-	PropertyRetriever retriever;
+	PlaceholderReplacerOld replacer;
+	ValueRetriever retriever;
 	String nullValue;
 
 	public DefaultStringValueResolver() {
 		this(null, null, null);
 	}
 
-	public DefaultStringValueResolver(PlaceholderReplacer replacer, PropertyRetriever retriever, String nullValue) {
+	public DefaultStringValueResolver(PlaceholderReplacerOld replacer, ValueRetriever retriever, String nullValue) {
 		super();
 		this.replacer = replacer;
 		this.retriever = retriever;
@@ -24,19 +24,19 @@ public class DefaultStringValueResolver implements StringValueResolver {
 		return value.equals(nullValue) ? null : value;
 	}
 
-	public PlaceholderReplacer getReplacer() {
+	public PlaceholderReplacerOld getReplacer() {
 		return replacer;
 	}
 
-	public void setReplacer(PlaceholderReplacer replacer) {
+	public void setReplacer(PlaceholderReplacerOld replacer) {
 		this.replacer = replacer;
 	}
 
-	public PropertyRetriever getRetriever() {
+	public ValueRetriever getRetriever() {
 		return retriever;
 	}
 
-	public void setRetriever(PropertyRetriever resolver) {
+	public void setRetriever(ValueRetriever resolver) {
 		this.retriever = resolver;
 	}
 

@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class ProcessStringContext {
 
-	PropertyRetriever retriever;
+	ValueRetriever retriever;
 	Set<String> visitedPlaceholders;
 	int startIndex;
 	StringBuilder buffer;
@@ -17,7 +17,7 @@ public class ProcessStringContext {
 		this(null, null, 0, null);
 	}
 
-	public ProcessStringContext(PropertyRetriever retriever, Set<String> visitedPlaceholders, int startIndex,
+	public ProcessStringContext(ValueRetriever retriever, Set<String> visitedPlaceholders, int startIndex,
 			StringBuilder buffer) {
 		super();
 		this.retriever = retriever;
@@ -50,11 +50,11 @@ public class ProcessStringContext {
 		this.buffer = buffer;
 	}
 
-	public PropertyRetriever getRetriever() {
+	public ValueRetriever getRetriever() {
 		return retriever;
 	}
 
-	public void setRetriever(PropertyRetriever retriever) {
+	public void setRetriever(ValueRetriever retriever) {
 		this.retriever = retriever;
 	}
 }

@@ -17,10 +17,10 @@ public class SystemAwarePropertiesRetriever extends PropertiesRetriever {
 	}
 
 	@Override
-	public String retrieveProperty(String key) {
+	public String retrieveValue(String key) {
 		Assert.notNull(mode);
 		String environmentProperty = SystemUtils.getEnvironmentPropertyIgnoreExceptions(key);
-		String property = super.retrieveProperty(key);
+		String property = super.retrieveValue(key);
 		String systemProperty = SystemUtils.getSystemPropertyIgnoreExceptions(key);
 
 		if (isUseSystemProperty(systemProperty, property)) {

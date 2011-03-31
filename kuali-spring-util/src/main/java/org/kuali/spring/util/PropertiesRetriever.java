@@ -5,7 +5,7 @@ import java.util.Properties;
 /**
  * 
  */
-public class PropertiesRetriever implements PropertyRetriever {
+public class PropertiesRetriever implements ValueRetriever {
 
 	Properties properties;
 
@@ -19,7 +19,7 @@ public class PropertiesRetriever implements PropertyRetriever {
 	}
 
 	@Override
-	public String retrieveProperty(String key) {
+	public String retrieveValue(String key) {
 		return properties.getProperty(key);
 	}
 
