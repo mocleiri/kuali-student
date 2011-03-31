@@ -8,6 +8,37 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 public class PlaceholderReplacer2Test {
+	@Test
+	public void duplicatePropertyCheckSameValues() {
+		Properties properties = new Properties();
+		properties.setProperty("day", "07");
+		properties.setProperty("month", "12");
+		properties.setProperty("year", "1941");
+		properties.setProperty("1941.12.07", "A day that will live in infamy");
+		properties.setProperty("${year}.${month}.${day}", "A day that will live in infamy");
+
+		PlaceholderResolver replacer = new PlaceholderResolver();
+		Properties resolvedProperties = replacer.resolvePlaceholders(properties);
+		Assert.assertEquals("A day that will live in infamy", resolvedProperties.getProperty("1941.12.07"));
+	}
+
+	@Test
+	public void duplicatePropertyCheck() {
+		Properties properties = new Properties();
+		properties.setProperty("day", "07");
+		properties.setProperty("month", "12");
+		properties.setProperty("year", "1941");
+		properties.setProperty("1941.12.07", "Just a normal day");
+		properties.setProperty("${year}.${month}.${day}", "A day that will live in infamy");
+
+		PlaceholderResolver replacer = new PlaceholderResolver();
+		try {
+			replacer.resolvePlaceholders(properties);
+			Assert.fail("Should have thrown an exception for duplicate property");
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
+	}
 
 	@Test
 	public void resolveNestedPropertyKeys() {
