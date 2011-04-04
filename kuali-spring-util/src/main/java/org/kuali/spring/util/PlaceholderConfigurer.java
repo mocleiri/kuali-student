@@ -24,18 +24,12 @@ public abstract class PlaceholderConfigurer implements BeanNameAware, BeanFactor
 	private String beanName;
 	private BeanFactory beanFactory;
 
-	protected abstract void load();
-
-	protected abstract void convert();
-
-	protected abstract void process(ConfigurableListableBeanFactory beanFactory);
+	protected abstract void processPlaceholders(ConfigurableListableBeanFactory beanFactory);
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
-			load();
-			convert();
-			process(beanFactory);
+			processPlaceholders(beanFactory);
 		} catch (Exception e) {
 			throw new BeanInitializationException("Could not complete placeholder configuration", e);
 		}
