@@ -2,6 +2,8 @@ package org.kuali.spring.util;
 
 import java.util.Properties;
 
+import org.kuali.spring.util.event.DefaultVisitListener;
+import org.kuali.spring.util.event.VisitListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
@@ -35,6 +37,8 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 	protected BeanDefinitionVisitor getBeanDefinitionVisitor(StringValueResolver valueResolver) {
 		EnhancedBeanDefinitionVisitor visitor = new EnhancedBeanDefinitionVisitor();
 		visitor.setValueResolver(valueResolver);
+		VisitListener listener = new DefaultVisitListener();
+		visitor.addListener(listener);
 		return visitor;
 	}
 
@@ -59,8 +63,8 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 		ValueRetriever retriever = new PropertiesRetriever(this.properties);
 		DefaultStringValueResolver dsvr = new DefaultStringValueResolver();
 		dsvr.setResolver(this.resolver);
-		dsvr.setRetriever(retriever);
 		dsvr.setNullValue(this.nullValue);
+		dsvr.setRetriever(retriever);
 		return dsvr;
 	}
 
