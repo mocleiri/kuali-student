@@ -16,7 +16,7 @@ public class PlaceholderString {
 		this.text = text;
 	}
 
-	List<Placeholder2> placeholders;
+	List<Placeholder> placeholders;
 
 	public String getText() {
 		return text;
@@ -34,11 +34,11 @@ public class PlaceholderString {
 		this.resolvedText = resolvedText;
 	}
 
-	public List<Placeholder2> getPlaceholders() {
+	public List<Placeholder> getPlaceholders() {
 		return placeholders;
 	}
 
-	public void setPlaceholders(List<Placeholder2> placeholders) {
+	public void setPlaceholders(List<Placeholder> placeholders) {
 		this.placeholders = placeholders;
 	}
 
@@ -49,7 +49,7 @@ public class PlaceholderString {
 		sb.append(" Resolved Text: [" + getResolvedText() + "]");
 		sb.append(" Placeholders: [");
 		if (placeholders != null) {
-			for (Placeholder2 placeholder : placeholders) {
+			for (Placeholder placeholder : placeholders) {
 				sb.append(placeholder.toString());
 			}
 		}

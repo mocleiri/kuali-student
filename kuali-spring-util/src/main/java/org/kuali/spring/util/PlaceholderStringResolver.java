@@ -193,7 +193,7 @@ public class PlaceholderStringResolver {
 	/**
 	 * Return the value that should be substituted for the placeholder text
 	 */
-	protected String getValue(String key, Placeholder2 placeholder, ValueRetriever retriever, Set<String> resolving) {
+	protected String getValue(String key, Placeholder placeholder, ValueRetriever retriever, Set<String> resolving) {
 		// Get a value for this property key
 		String value = getRawValue(key, retriever);
 
@@ -238,7 +238,7 @@ public class PlaceholderStringResolver {
 		// Iterate through the Placeholder objects
 		StringBuilder buffer = new StringBuilder(phs.getText());
 		int offset = 0;
-		for (Placeholder2 pholder : phs.getPlaceholders()) {
+		for (Placeholder pholder : phs.getPlaceholders()) {
 			// Resolve each placeholder we found
 			resolvePlaceholder(pholder, retriever, resolving);
 			// Update the buffer with the new text
@@ -251,7 +251,7 @@ public class PlaceholderStringResolver {
 	/**
 	 * Update the buffer to replace the placeholder text with a value
 	 */
-	protected int updateBuffer(StringBuilder buffer, Placeholder2 pholder, int offset) {
+	protected int updateBuffer(StringBuilder buffer, Placeholder pholder, int offset) {
 		int prefixLength = this.placeholderPrefix.length();
 		int suffixLength = this.placeholderSuffix.length();
 		int startIndex = pholder.getStartIndex() + offset;
@@ -288,7 +288,7 @@ public class PlaceholderStringResolver {
 	 * When this method completes, Placeholder.getValue() will return the value that should be used in place of the
 	 * Placeholder
 	 */
-	protected void resolvePlaceholder(Placeholder2 placeholder, ValueRetriever retriever, Set<String> resolving) {
+	protected void resolvePlaceholder(Placeholder placeholder, ValueRetriever retriever, Set<String> resolving) {
 		// Extract the PlaceholderString for this Placeholder
 		PlaceholderString phs = placeholder.getPlaceholderString();
 
@@ -333,12 +333,12 @@ public class PlaceholderStringResolver {
 		}
 
 		// Storage for the placeholders we find
-		List<Placeholder2> placeholders = new ArrayList<Placeholder2>();
+		List<Placeholder> placeholders = new ArrayList<Placeholder>();
 
 		// While there is at least one prefix remaining
 		while (startIndex != -1) {
 			// Attempt to get a placeholder object
-			Placeholder2 placeholder = getPlaceholder(text, startIndex);
+			Placeholder placeholder = getPlaceholder(text, startIndex);
 
 			// No placeholder could be found
 			if (placeholder == null) {
@@ -362,7 +362,7 @@ public class PlaceholderStringResolver {
 	/**
 	 * Get a Placeholder object representing the first placeholder after startIndex
 	 */
-	protected Placeholder2 getPlaceholder(String source, int startIndex) {
+	protected Placeholder getPlaceholder(String source, int startIndex) {
 		int suffixLength = this.placeholderSuffix.length();
 
 		// Attempt to locate the end of the placeholder
@@ -389,7 +389,7 @@ public class PlaceholderStringResolver {
 		parse(phs);
 
 		// Populate a placeholder object
-		Placeholder2 placeholder = new Placeholder2();
+		Placeholder placeholder = new Placeholder();
 		placeholder.setStartIndex(startIndex);
 		placeholder.setEndIndex(endIndex);
 		placeholder.setPlaceholderString(phs);

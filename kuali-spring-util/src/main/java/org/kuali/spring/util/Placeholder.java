@@ -1,6 +1,6 @@
 package org.kuali.spring.util;
 
-public class Placeholder2 {
+public class Placeholder {
 	int startIndex;
 	int endIndex;
 	String value;
