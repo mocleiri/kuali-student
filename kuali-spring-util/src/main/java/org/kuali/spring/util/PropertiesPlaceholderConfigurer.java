@@ -14,7 +14,6 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 
 	private PropertiesLoader loader = new PropertiesLoader();
 	private PropertiesConverter converter = new PropertiesConverter();
-	private PropertiesProcessor processor;
 	private Properties properties;
 
 	protected void load() {
@@ -26,7 +25,6 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 	}
 
 	protected void process(ConfigurableListableBeanFactory beanFactory) {
-		processor.process(beanFactory, this.properties);
 	}
 
 	public PropertiesLoader getLoader() {
@@ -43,14 +41,6 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 
 	public void setConverter(PropertiesConverter converter) {
 		this.converter = converter;
-	}
-
-	public PropertiesProcessor getProcessor() {
-		return processor;
-	}
-
-	public void setProcessor(PropertiesProcessor processor) {
-		this.processor = processor;
 	}
 
 	public Properties getProperties() {

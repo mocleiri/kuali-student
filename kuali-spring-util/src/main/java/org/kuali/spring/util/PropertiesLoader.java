@@ -18,7 +18,7 @@ import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.PropertiesPersister;
 
-public class PropertiesLoader  {
+public class PropertiesLoader {
 	private static final Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
 
 	public static final String DEFAULT_ENVIRONMENT_PROPERTY_PREFIX = "env.";
@@ -66,7 +66,7 @@ public class PropertiesLoader  {
 	}
 
 	/**
-	 * Given a resource and an InputStream load and return a Properties object. Supports regular as well as XML style
+	 * Given a resource and an InputStream, load and return a Properties object. Supports regular as well as XML style
 	 * properties files
 	 * 
 	 * @param location
@@ -202,8 +202,6 @@ public class PropertiesLoader  {
 
 	/**
 	 * Get system properties
-	 * 
-	 * @return
 	 */
 	protected Properties loadSystemProperties() {
 		return SystemUtils.getSystemPropertiesIgnoreExceptions();
