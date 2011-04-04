@@ -39,7 +39,7 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 	}
 
 	protected void processBeans(ConfigurableListableBeanFactory beanFactory, StringValueResolver valueResolver) {
-		BeanDefinitionVisitor visitor = new BeanDefinitionVisitor(valueResolver);
+		BeanDefinitionVisitor visitor = getBeanDefinitionVisitor(valueResolver);
 		String[] beanNames = beanFactory.getBeanDefinitionNames();
 		for (String curName : beanNames) {
 			// Skip processing our own bean definition
@@ -65,9 +65,9 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 	}
 
 	protected void processPlaceholders(ConfigurableListableBeanFactory beanFactoryToProcess) {
-		this.properties = loader.loadProperties();
-		converter.convert(this.properties);
-		resolver.resolve(this.properties);
+		this.properties = this.loader.loadProperties();
+		this.converter.convert(this.properties);
+		this.resolver.resolve(this.properties);
 
 		StringValueResolver valueResolver = getStringValueResolver();
 
