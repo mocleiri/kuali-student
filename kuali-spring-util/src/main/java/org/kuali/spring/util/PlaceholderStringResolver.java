@@ -122,9 +122,6 @@ public class PlaceholderStringResolver {
 
 	/**
 	 * Trim the prefix and suffix off of the placeholder ie change ${foo}->foo
-	 * 
-	 * @param placeholder
-	 * @return
 	 */
 	protected String getTrimmedText(String text) {
 		int prefixLength = this.placeholderPrefix.length();
@@ -136,7 +133,7 @@ public class PlaceholderStringResolver {
 
 	/**
 	 * Return true if we have arrived at a "base" Placeholder. A "base" Placeholder is a Placeholder who's
-	 * PlaceholderString does not contain additional Placeholder's.<br>
+	 * PlaceholderString does not contain additional Placeholder's.
 	 */
 	protected boolean isBaseCase(Placeholder2 placeholder) {
 		PlaceholderString phs = placeholder.getPlaceholderString();
@@ -235,7 +232,8 @@ public class PlaceholderStringResolver {
 	}
 
 	/**
-	 * Resolve any Placeholders in the supplied PlaceholderString
+	 * Resolve any Placeholders in the supplied PlaceholderString. When this method completes,
+	 * PlaceholderString.getResolvedText() will return the fully resolved text.
 	 */
 	public void resolve(PlaceholderString placeholderString, ValueRetriever retriever) {
 		resolvePlaceholderString(placeholderString, retriever, new HashSet<String>());
@@ -265,12 +263,12 @@ public class PlaceholderStringResolver {
 	/**
 	 * Update the buffer to replace the placeholder text with a value
 	 */
-	protected int updateBuffer(StringBuilder sb, Placeholder2 pholder, int offset) {
+	protected int updateBuffer(StringBuilder buffer, Placeholder2 pholder, int offset) {
 		int prefixLength = this.placeholderPrefix.length();
 		int suffixLength = this.placeholderSuffix.length();
 		int startIndex = pholder.getStartIndex() + offset;
 		int endIndex = pholder.getEndIndex() + offset;
-		sb.replace(startIndex, endIndex, pholder.getValue());
+		buffer.replace(startIndex, endIndex, pholder.getValue());
 		int textLength = pholder.getPlaceholderString().getText().length();
 		int originalLength = prefixLength + textLength + suffixLength;
 		int newLength = pholder.getValue().length();
@@ -332,8 +330,8 @@ public class PlaceholderStringResolver {
 	}
 
 	/**
-	 * Parse the PlaceholderString to get the List of Placeholder objects (if any). If there are no Placeholder's, an
-	 * empty list is returned.
+	 * Parse the PlaceholderString to get the List of Placeholder objects (if any). If there are none, an empty list is
+	 * returned.
 	 */
 	protected void parse(PlaceholderString phs) {
 
@@ -354,7 +352,7 @@ public class PlaceholderStringResolver {
 			// Attempt to get a placeholder object
 			Placeholder2 placeholder = getPlaceholder(text, startIndex);
 
-			// No more placeholders
+			// No placeholder could be found
 			if (placeholder == null) {
 				break;
 			}
