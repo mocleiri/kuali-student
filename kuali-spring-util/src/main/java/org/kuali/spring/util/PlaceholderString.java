@@ -6,6 +6,7 @@ public class PlaceholderString {
 
 	String text;
 	String resolvedText;
+	List<Placeholder> placeholders;
 
 	public PlaceholderString() {
 		this(null);
@@ -15,8 +16,6 @@ public class PlaceholderString {
 		super();
 		this.text = text;
 	}
-
-	List<Placeholder> placeholders;
 
 	public String getText() {
 		return text;
@@ -48,8 +47,8 @@ public class PlaceholderString {
 		sb.append("Text: [" + getText() + "]");
 		sb.append(" Resolved Text: [" + getResolvedText() + "]");
 		sb.append(" Placeholders: [");
-		if (placeholders != null) {
-			for (Placeholder placeholder : placeholders) {
+		if (getPlaceholders() != null) {
+			for (Placeholder placeholder : getPlaceholders()) {
 				sb.append(placeholder.toString());
 			}
 		}

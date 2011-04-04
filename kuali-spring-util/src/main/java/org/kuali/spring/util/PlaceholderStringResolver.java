@@ -36,6 +36,8 @@ import org.springframework.util.StringUtils;
  * cheetah.speed=fast
  * </code>
  * 
+ * The text should be resolved to <code>A cheetah is fast.</code>
+ * 
  * The object graph created to model the data is:<br>
  * <code>
  * PlaceholderString 
@@ -396,10 +398,16 @@ public class PlaceholderStringResolver {
 		return placeholder;
 	}
 
+	/**
+	 * Return true if the index into the buffer is pointing at the suffix, false otherwise
+	 */
 	protected boolean haveArrivedAtSuffix(CharSequence buf, int index) {
 		return StringUtils.substringMatch(buf, index, this.placeholderSuffix);
 	}
 
+	/**
+	 * Return true if the index into the buffer is pointing at the simplePrefix, false otherwise
+	 */
 	protected boolean haveArrivedAtPrefix(CharSequence buf, int index) {
 		return StringUtils.substringMatch(buf, index, this.simplePrefix);
 	}
