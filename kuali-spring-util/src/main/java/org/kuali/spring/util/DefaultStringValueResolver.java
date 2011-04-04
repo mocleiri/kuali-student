@@ -3,7 +3,7 @@ package org.kuali.spring.util;
 import org.springframework.util.StringValueResolver;
 
 public class DefaultStringValueResolver implements StringValueResolver {
-	PlaceholderReplacerOld replacer;
+	PlaceholderStringResolver resolver;
 	ValueRetriever retriever;
 	String nullValue;
 
@@ -11,25 +11,17 @@ public class DefaultStringValueResolver implements StringValueResolver {
 		this(null, null, null);
 	}
 
-	public DefaultStringValueResolver(PlaceholderReplacerOld replacer, ValueRetriever retriever, String nullValue) {
+	public DefaultStringValueResolver(PlaceholderStringResolver resolver, ValueRetriever retriever, String nullValue) {
 		super();
-		this.replacer = replacer;
+		this.resolver = resolver;
 		this.retriever = retriever;
 		this.nullValue = nullValue;
 	}
 
 	@Override
 	public String resolveStringValue(String strVal) {
-		String value = replacer.replacePlaceholders(strVal, retriever);
+		String value = resolver.resolve(strVal, retriever);
 		return value.equals(nullValue) ? null : value;
-	}
-
-	public PlaceholderReplacerOld getReplacer() {
-		return replacer;
-	}
-
-	public void setReplacer(PlaceholderReplacerOld replacer) {
-		this.replacer = replacer;
 	}
 
 	public ValueRetriever getRetriever() {
@@ -46,6 +38,14 @@ public class DefaultStringValueResolver implements StringValueResolver {
 
 	public void setNullValue(String nullValue) {
 		this.nullValue = nullValue;
+	}
+
+	public PlaceholderStringResolver getResolver() {
+		return resolver;
+	}
+
+	public void setResolver(PlaceholderStringResolver resolver) {
+		this.resolver = resolver;
 	}
 
 }

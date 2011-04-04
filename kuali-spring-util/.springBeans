@@ -11,7 +11,6 @@
 		<config>src/test/resources/org/kuali/spring/util/SimplePropertyPlaceholderConfigurerTest-context.xml</config>
 		<config>src/test/resources/org/kuali/spring/util/PropertyHandlerFlattenPropertyValuesTest-context.xml</config>
 		<config>src/main/resources/org/kuali/spring/util/default-property-handler-wiring.xml</config>
-		<config>src/test/resources/org/kuali/spring/util/PlaceholderProxyTest-context.xml</config>
 	</configs>
 	<configSets>
 		<configSet>

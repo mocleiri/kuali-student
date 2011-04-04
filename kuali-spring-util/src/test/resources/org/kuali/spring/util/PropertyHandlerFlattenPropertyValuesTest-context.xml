@@ -12,19 +12,14 @@
 
   <bean id="property.logger" class="org.kuali.spring.util.DefaultPropertyLogger" />
   <bean id="property.helper" class="org.kuali.spring.util.PropertiesHelper" p:plogger-ref="property.logger" />
-  <bean id="property.loader" class="org.kuali.spring.util.DefaultPropertiesLoaderOld" p:propertiesLogger-ref="property.logger"
-    p:helper-ref="property.helper" />
+  <bean id="property.loader" class="org.kuali.spring.util.PropertiesLoader" p:plogger-ref="property.logger" />
   <bean id="property.retriever" class="org.kuali.spring.util.PropertiesRetriever" />
-  <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderReplacerOld" />
-  <bean id="property.string.resolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:replacer-ref="property.replacer"
+  <bean id="property.replacer" class="org.kuali.spring.util.PlaceholderStringResolver" />
+  <bean id="property.string.resolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:resolver-ref="property.replacer"
     p:retriever-ref="property.retriever" />
   <bean id="property.bean.visitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor">
     <constructor-arg ref="property.string.resolver" />
   </bean>
-
-  <bean id="property.handler" class="org.kuali.spring.util.PropertyHandlerOld" p:location="classpath:org/kuali/spring/util/test.properties"
-    p:propertiesLogger-ref="property.logger" p:helper-ref="property.helper" p:loader-ref="property.loader" p:retriever-ref="property.retriever"
-    p:visitor-ref="property.bean.visitor" />
 
   <bean id="cat" class="org.kuali.spring.util.bean.Cat" p:prey="${cat.prey}" />
 </beans>

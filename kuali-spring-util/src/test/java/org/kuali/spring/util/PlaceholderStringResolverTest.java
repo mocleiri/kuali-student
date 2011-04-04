@@ -9,9 +9,48 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PlaceholderStringProcessorTest {
+public class PlaceholderStringResolverTest {
 
-	final Logger logger = LoggerFactory.getLogger(PlaceholderStringProcessorTest.class);
+	final Logger logger = LoggerFactory.getLogger(PlaceholderStringResolverTest.class);
+
+	@Test
+	public void resolve3() throws IOException {
+		Properties properties = new Properties();
+		properties.setProperty("a", "1");
+		properties.setProperty("b", "2");
+		properties.setProperty("${a}.${b}", "foo");
+		PropertiesRetriever retriever = new PropertiesRetriever(properties);
+		PlaceholderStringResolver processor = new PlaceholderStringResolver();
+		String text = "${1.2}";
+		Assert.assertEquals("foo", processor.resolve(text, retriever));
+	}
+
+	@Test
+	public void circularReference() throws IOException {
+		Properties properties = new Properties();
+		properties.setProperty("a", "${b}");
+		properties.setProperty("b", "${a}");
+		PropertiesRetriever retriever = new PropertiesRetriever(properties);
+		PlaceholderStringResolver processor = new PlaceholderStringResolver();
+		String text = "${a}";
+		try {
+			processor.resolve(text, retriever);
+			Assert.fail("Should have thrown a circular reference exception");
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
+	}
+
+	@Test
+	public void resolve2() throws IOException {
+		Properties properties = new Properties();
+		properties.setProperty("a", "1");
+		properties.setProperty("b", "${a}");
+		PropertiesRetriever retriever = new PropertiesRetriever(properties);
+		PlaceholderStringResolver processor = new PlaceholderStringResolver();
+		String text = "${b}";
+		Assert.assertEquals("1", processor.resolve(text, retriever));
+	}
 
 	@Test
 	public void resolve() throws IOException {

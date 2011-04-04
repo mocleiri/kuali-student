@@ -3,11 +3,11 @@ package org.kuali.spring.util;
 import org.springframework.util.Assert;
 
 public class SystemAwarePropertiesRetriever extends PropertiesRetriever {
-	SystemPropertiesMode mode = PropertyHandlerOld.DEFAULT_SYSTEM_PROPERTIES_MODE;
-	boolean searchEnvironment = PropertyHandlerOld.DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
+	SystemPropertiesMode mode = SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK;
+	boolean searchEnvironment = true;
 
 	public SystemAwarePropertiesRetriever() {
-		this(PropertyHandlerOld.DEFAULT_SYSTEM_PROPERTIES_MODE, PropertyHandlerOld.DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT);
+		this(SystemPropertiesMode.SYSTEM_PROPERTIES_MODE_FALLBACK, true);
 	}
 
 	public SystemAwarePropertiesRetriever(SystemPropertiesMode mode, boolean searchEnvironment) {
