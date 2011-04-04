@@ -62,7 +62,7 @@ import org.springframework.util.StringUtils;
  */
 public class PlaceholderStringResolver {
 
-	final Logger logger = LoggerFactory.getLogger(PlaceholderStringResolver.class);
+	private static final Logger logger = LoggerFactory.getLogger(PlaceholderStringResolver.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
@@ -180,7 +180,7 @@ public class PlaceholderStringResolver {
 	}
 
 	/**
-	 * Throw an exception unless they've activated the flag for ignoring placeholders that could not be resolved.
+	 * Throw an exception unless they've activated the flag for ignoring unresolved placeholders
 	 */
 	protected void handleUnresolvedPlaceholder(String placeholderText) {
 		// Value is null, meaning we could not get find a value for the Placeholder

@@ -14,8 +14,7 @@
 
   <bean id="trace.callback" class="org.kuali.spring.proxy.TraceCallback" />
 
-  <bean id="plogger" class="org.kuali.spring.util.PropertyLogger" p:flattenPropertyValues="true"
-    p:linefeedReplacement="LF" p:carriageReturnReplacement="CR" />
+  <bean id="plogger" class="org.kuali.spring.util.PropertyLogger" />
   <bean id="plogger.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
     p:sourceBean-ref="plogger" />
 
@@ -27,5 +26,13 @@
   <bean id="pconverter" class="org.kuali.spring.util.PropertiesConverter" p:plogger-ref="plogger.proxy" />
   <bean id="pconverter.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
     p:sourceBean-ref="pconverter" />
+
+  <bean id="presolver" class="org.kuali.spring.util.PropertiesResolver" p:plogger-ref="plogger.proxy" />
+  <bean id="presolver.proxy" class="org.kuali.spring.util.SimpleProxyFactoryBean" p:callback-ref="trace.callback"
+    p:sourceBean-ref="presolver" />
+
+  <bean id="kuali.pconfigurer" class="org.kuali.spring.util.PropertiesPlaceholderConfigurer" p:loader-ref="ploader.proxy"
+    p:converter-ref="pconverter.proxy" p:resolver-ref="presolver.proxy" />
+
 
 </beans>

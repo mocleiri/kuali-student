@@ -5,10 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
 public class PropertiesResolver extends PlaceholderStringResolver {
-	boolean sort;
+	private static final Logger logger = LoggerFactory.getLogger(PropertiesResolver.class);
+	public static final boolean DEFAULT_IS_SORT = true;
+	boolean sort = DEFAULT_IS_SORT;
 
 	protected class ResolvePropertyContext {
 		public ResolvePropertyContext(List<String> keys, String key, Properties properties,
