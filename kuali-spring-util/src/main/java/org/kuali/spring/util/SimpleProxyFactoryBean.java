@@ -9,17 +9,19 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.util.Assert;
 
 public class SimpleProxyFactoryBean implements FactoryBean<Object> {
-	Callback callback = NoOp.INSTANCE;
+	public static final Callback DEFAULT_CALLBACK = NoOp.INSTANCE;
+
+	Callback callback = DEFAULT_CALLBACK;
 	String classname;
 	Object sourceBean;
 	boolean copySourceBeanProperties = true;
 
 	public SimpleProxyFactoryBean() {
-		this(null, NoOp.INSTANCE);
+		this(null, DEFAULT_CALLBACK);
 	}
 
 	public SimpleProxyFactoryBean(String classname) {
-		this(classname, NoOp.INSTANCE);
+		this(classname, DEFAULT_CALLBACK);
 	}
 
 	public SimpleProxyFactoryBean(String classname, Callback callback) {
