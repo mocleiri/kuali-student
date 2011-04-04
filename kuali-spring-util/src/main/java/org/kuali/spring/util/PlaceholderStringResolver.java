@@ -112,9 +112,6 @@ public class PlaceholderStringResolver {
 
 	/**
 	 * Return true if the collection is null or has no elements
-	 * 
-	 * @param c
-	 * @return
 	 */
 	protected boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
@@ -129,15 +126,6 @@ public class PlaceholderStringResolver {
 		int beginIndex = prefixLength;
 		int endIndex = text.length() - suffixLength;
 		return text.substring(beginIndex, endIndex);
-	}
-
-	/**
-	 * Return true if we have arrived at a "base" Placeholder. A "base" Placeholder is a Placeholder who's
-	 * PlaceholderString does not contain additional Placeholder's.
-	 */
-	protected boolean isBaseCase(Placeholder2 placeholder) {
-		PlaceholderString phs = placeholder.getPlaceholderString();
-		return isEmpty(phs.getPlaceholders());
 	}
 
 	/**
