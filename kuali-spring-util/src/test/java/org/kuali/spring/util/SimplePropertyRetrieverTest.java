@@ -7,7 +7,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-public class SimplePropertyResolverTest {
+public class SimplePropertyRetrieverTest {
 
 	@Test
 	public void test1() throws IOException {
@@ -15,10 +15,10 @@ public class SimplePropertyResolverTest {
 		String val = "bar";
 		Properties properties = new Properties();
 		properties.setProperty(key, val);
-		ValueRetriever resolver = new PropertiesRetriever(properties);
+		ValueRetriever retriever = new PropertiesRetriever(properties);
 
-		String resolvedProperty = resolver.retrieveValue(key);
-		String unresolvedProperty = resolver.retrieveValue("A-Key-That-Does-Not-Exist");
+		String resolvedProperty = retriever.retrieveValue(key);
+		String unresolvedProperty = retriever.retrieveValue("A-Key-That-Does-Not-Exist");
 
 		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);
@@ -31,16 +31,16 @@ public class SimplePropertyResolverTest {
 		String val = "bar";
 		Properties properties = new Properties();
 		properties.setProperty(key, val);
-		PropertiesRetriever resolver = new PropertiesRetriever();
-		resolver.setProperties(properties);
+		PropertiesRetriever retriever = new PropertiesRetriever();
+		retriever.setProperties(properties);
 
-		String resolvedProperty = resolver.retrieveValue(key);
-		String unresolvedProperty = resolver.retrieveValue("A-Key-That-Does-Not-Exist");
+		String resolvedProperty = retriever.retrieveValue(key);
+		String unresolvedProperty = retriever.retrieveValue("A-Key-That-Does-Not-Exist");
 
 		Assert.assertEquals(val, resolvedProperty);
 		Assert.assertNull(unresolvedProperty);
 
-		Properties resolverProperties = resolver.getProperties();
+		Properties resolverProperties = retriever.getProperties();
 		Assert.assertEquals(properties.getProperty(key), resolverProperties.getProperty(key));
 
 	}

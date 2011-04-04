@@ -201,7 +201,8 @@ public class PlaceholderStringResolver {
 
 		if (value == null) {
 			// No value could be located
-			String placeholderText = placeholder.getPlaceholderString().getText();
+			String placeholderText = getPlaceholderPrefix() + placeholder.getPlaceholderString().getText()
+					+ getPlaceholderSuffix();
 			handleUnresolvedPlaceholder(placeholderText);
 			return placeholderText;
 		} else {
@@ -230,10 +231,10 @@ public class PlaceholderStringResolver {
 	}
 
 	/**
-	 * When this method completes, PlacholderString.getResolvedText() will return the fully resolved text
+	 * When this method completes, PlaceholderString.getResolvedText() will return the fully resolved text
 	 */
 	protected void resolvePlaceholderString(PlaceholderString phs, ValueRetriever retriever, Set<String> resolving) {
-		// Parse the PlaceholderString to find any Placholder's it may contain
+		// Parse the PlaceholderString to find any Placeholder's it may contain
 		// phs.getPlaceholders() returns any parsed Placeholders
 		parse(phs);
 
@@ -241,7 +242,7 @@ public class PlaceholderStringResolver {
 		StringBuilder buffer = new StringBuilder(phs.getText());
 		int offset = 0;
 		for (Placeholder pholder : phs.getPlaceholders()) {
-			// Resolve each placeholder we found
+			// Resolve each placeholder
 			resolvePlaceholder(pholder, retriever, resolving);
 			// Update the buffer with the new text
 			offset += updateBuffer(buffer, pholder, offset);

@@ -1,7 +1,7 @@
 package org.kuali.spring.util;
 
 /**
- * Always return the same thing
+ * Always retrieve the string "Hello World"
  */
 public class HelloWorldRetriever extends PropertiesRetriever {
 
