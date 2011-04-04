@@ -9,25 +9,38 @@ import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.PropertiesPersister;
 
 public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
+	public static final boolean DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT = true;
+	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
+	public static final boolean DEFAULT_IS_LOCAL_OVERRIDE = false;
+	public static final boolean DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND = false;
 	private String placeholderPrefix = DEFAULT_PLACEHOLDER_PREFIX;
 	private String placeholderSuffix = DEFAULT_PLACEHOLDER_SUFFIX;
 	private String valueSeparator = DEFAULT_VALUE_SEPARATOR;
 	private int systemPropertiesMode = SYSTEM_PROPERTIES_MODE_FALLBACK;
-	private boolean searchSystemEnvironment = true;
-	private boolean ignoreUnresolvablePlaceholders = false;
+	private boolean searchSystemEnvironment = DEFAULT_IS_SEARCH_SYSTEM_ENVIRONMENT;
+	private boolean ignoreUnresolvablePlaceholders = DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS;
+	private boolean localOverride = DEFAULT_IS_LOCAL_OVERRIDE;
+	private boolean ignoreResourceNotFound = DEFAULT_IS_IGNORE_RESOURCE_NOT_FOUND;
 	private String nullValue;
 	private String beanName;
 	private Properties[] localProperties;
 	private Resource[] locations;
-	private boolean localOverride = false;
-	private boolean ignoreResourceNotFound = false;
 	private String fileEncoding;
 	private PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 
 	private BeanFactory beanFactory;
 
-	public String getPlaceholderPrefix() {
-		return placeholderPrefix;
+	public String getSystemPropertiesModeName() {
+		if (getSystemPropertiesMode() == SYSTEM_PROPERTIES_MODE_FALLBACK) {
+			return "SYSTEM_PROPERTIES_MODE_FALLBACK";
+		} else if (getSystemPropertiesMode() == SYSTEM_PROPERTIES_MODE_NEVER) {
+			return "SYSTEM_PROPERTIES_MODE_NEVER";
+		} else if (getSystemPropertiesMode() == SYSTEM_PROPERTIES_MODE_OVERRIDE) {
+			return "SYSTEM_PROPERTIES_MODE_OVERRIDE";
+		} else {
+			throw new IllegalArgumentException("Unknown system properties mode");
+		}
+
 	}
 
 	@Override
@@ -151,19 +164,6 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 		return beanFactory;
 	}
 
-	public String getSystemPropertiesModeName() {
-		if (getSystemPropertiesMode() == SYSTEM_PROPERTIES_MODE_FALLBACK) {
-			return "SYSTEM_PROPERTIES_MODE_FALLBACK";
-		} else if (getSystemPropertiesMode() == SYSTEM_PROPERTIES_MODE_NEVER) {
-			return "SYSTEM_PROPERTIES_MODE_NEVER";
-		} else if (getSystemPropertiesMode() == SYSTEM_PROPERTIES_MODE_OVERRIDE) {
-			return "SYSTEM_PROPERTIES_MODE_OVERRIDE";
-		} else {
-			throw new IllegalArgumentException("Unknown system properties mode");
-		}
-
-	}
-
 	public Properties[] getLocalProperties() {
 		return localProperties;
 	}
@@ -190,6 +190,10 @@ public class ConfigurablePropertyPlaceholderConfigurer extends PropertyPlacehold
 
 	public PropertiesPersister getPropertiesPersister() {
 		return propertiesPersister;
+	}
+
+	public String getPlaceholderPrefix() {
+		return placeholderPrefix;
 	}
 
 }
