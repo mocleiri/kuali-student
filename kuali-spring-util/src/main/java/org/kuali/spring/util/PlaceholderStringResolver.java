@@ -73,7 +73,7 @@ public class PlaceholderStringResolver {
 		wellKnownSimplePrefixes.put(")", "(");
 	}
 
-	PropertyLogger plogger = new DefaultPropertyLogger();
+	PropertyLogger plogger = new PropertyLogger();
 	String placeholderPrefix;
 	String placeholderSuffix;
 	String valueSeparator;

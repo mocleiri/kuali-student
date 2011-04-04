@@ -15,7 +15,7 @@ public class PropertiesConverter {
 	public static final boolean DEFAULT_IS_SORT = true;
 	boolean sort = DEFAULT_IS_SORT;
 
-	PropertyLogger plogger = new DefaultPropertyLogger();
+	PropertyLogger plogger = new PropertyLogger();
 
 	/**
 	 * Perform any conversion on the supplied Properties as needed.

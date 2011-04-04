@@ -43,7 +43,7 @@ public class PropertiesLoader {
 
 	// Default component beans
 	PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
-	PropertyLogger plogger = new DefaultPropertyLogger();
+	PropertyLogger plogger = new PropertyLogger();
 
 	// Instance variables filled in during loading
 	Properties systemProperties;
