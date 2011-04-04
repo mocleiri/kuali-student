@@ -7,7 +7,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-public class SimplePropertyRetrieverTest {
+public class PropertiesRetrieverTest {
 
 	@Test
 	public void test1() throws IOException {
