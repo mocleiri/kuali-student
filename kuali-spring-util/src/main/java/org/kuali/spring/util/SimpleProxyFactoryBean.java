@@ -1,12 +1,12 @@
 package org.kuali.spring.util;
 
-import junit.framework.Assert;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.util.Assert;
 
 public class SimpleProxyFactoryBean implements FactoryBean<Object> {
 	Callback callback = NoOp.INSTANCE;
@@ -30,10 +30,10 @@ public class SimpleProxyFactoryBean implements FactoryBean<Object> {
 
 	@Override
 	public Object getObject() throws Exception {
-		Assert.assertTrue(this.classname != null || this.sourceBean != null);
-		Assert.assertNotNull(this.callback);
+		Assert.isTrue(this.classname != null || this.sourceBean != null);
+		Assert.notNull(this.callback);
 		if (this.copySourceBeanProperties) {
-			Assert.assertTrue(this.sourceBean != null);
+			Assert.notNull(this.sourceBean);
 		}
 
 		Class<?> targetClass = getTargetClass();
