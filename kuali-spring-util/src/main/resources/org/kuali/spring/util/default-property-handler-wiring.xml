@@ -11,12 +11,12 @@
 
   <bean id="kuali.plogger" class="org.kuali.spring.util.DefaultPropertyLogger" />
   <bean id="kuali.phelper" class="org.kuali.spring.util.PropertiesHelper" p:plogger-ref="kuali.plogger" />
-  <bean id="kuali.ploader" class="org.kuali.spring.util.DefaultPropertiesLoader" p:plogger-ref="kuali.plogger"
+  <bean id="kuali.ploader" class="org.kuali.spring.util.PropertiesLoader" p:plogger-ref="kuali.plogger"
     p:helper-ref="kuali.phelper" />
   <bean id="kuali.pretriever" class="org.kuali.spring.util.PropertiesRetriever" />
   <bean id="kuali.preplacer" class="org.kuali.spring.util.PlaceholderReplacerOld" />
   <bean id="kuali.presolver" class="org.kuali.spring.util.DefaultStringValueResolver" p:replacer-ref="kuali.preplacer"
     p:retriever-ref="kuali.pretriever" />
   <bean id="kuali.pvisitor" class="org.kuali.spring.util.EnhancedBeanDefinitionVisitor" p:valueResolver="kuali.presolver" />
-  <bean id="kuali.phandler" class="org.kuali.spring.util.PropertyHandler" p:loader-ref="kuali.ploader" />
+  <bean id="kuali.phandler" class="org.kuali.spring.util.PropertiesPlaceholderConfigurer" p:loader-ref="kuali.ploader" />
 </beans>

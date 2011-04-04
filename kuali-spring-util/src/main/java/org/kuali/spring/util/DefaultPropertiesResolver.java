@@ -5,7 +5,7 @@ import java.util.Properties;
 public class DefaultPropertiesResolver implements PropertiesResolver {
 
 	@Override
-	public Properties resolvePlaceholders(Properties properties) {
+	public Properties resolve(Properties properties) {
 		Properties resolvedProperties = new Properties();
 		return resolvedProperties;
 	}

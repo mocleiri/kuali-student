@@ -18,11 +18,12 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * This processor 
  * 
  */
-public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
+public class PropertiesPlaceholderProcessor implements PlaceholderReplacer {
 
-	final Logger logger = LoggerFactory.getLogger(DefaultPlaceholderReplacer.class);
+	final Logger logger = LoggerFactory.getLogger(PropertiesPlaceholderProcessor.class);
 
 	private static final Map<String, String> wellKnownSimplePrefixes = new HashMap<String, String>(4);
 	public static final boolean DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS = false;
@@ -42,20 +43,20 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 	boolean sort = DEFAULT_IS_SORT;
 	String simplePrefix;
 
-	public DefaultPlaceholderReplacer() {
+	public PropertiesPlaceholderProcessor() {
 		this(DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	}
 
-	public DefaultPlaceholderReplacer(boolean ignoreUnresolvablePlaceholders) {
+	public PropertiesPlaceholderProcessor(boolean ignoreUnresolvablePlaceholders) {
 		this(PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX,
 				PropertyPlaceholderConfigurer.DEFAULT_PLACEHOLDER_SUFFIX, null, ignoreUnresolvablePlaceholders);
 	}
 
-	public DefaultPlaceholderReplacer(String placeholderPrefix, String placeholderSuffix) {
+	public PropertiesPlaceholderProcessor(String placeholderPrefix, String placeholderSuffix) {
 		this(placeholderPrefix, placeholderSuffix, null, DEFAULT_IS_IGNORE_UNRESOLVABLE_PLACEHOLDERS);
 	}
 
-	public DefaultPlaceholderReplacer(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
+	public PropertiesPlaceholderProcessor(String placeholderPrefix, String placeholderSuffix, String valueSeparator,
 			boolean ignoreUnresolvablePlaceholders) {
 
 		Assert.notNull(placeholderPrefix, "placeholderPrefix must not be null");
@@ -118,7 +119,7 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 	 */
 	protected String getResolvedKey(Placeholder placeholder, ValueRetriever retriever, Set<String> resolving) {
 		// The key is the placeholder minus suffix and prefix
-		String key = getTrimmedPlaceholder(placeholder.getOriginalPlaceholder());
+		String key = getTrimmedPlaceholder(placeholder.getText());
 
 		// The key may have placeholders in it
 		return replacePlaceholders(key, retriever, resolving);
@@ -131,7 +132,7 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 	 * @param properties
 	 */
 	protected void doBaseCase(Placeholder placeholder, ValueRetriever retriever, Set<String> resolving) {
-		resolve(placeholder, retriever, resolving, placeholder.getOriginalPlaceholder());
+		resolve(placeholder, retriever, resolving, placeholder.getText());
 	}
 
 	/**
@@ -201,11 +202,11 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 		// If we get here, value is null. We could not get a value for this placeholder
 		if (!this.ignoreUnresolvablePlaceholders) {
 			// We couldn't resolve the placeholder and we need to fail fast
-			throw new IllegalArgumentException("Could not resolve a value for " + placeholder.getOriginalPlaceholder());
+			throw new IllegalArgumentException("Could not resolve a value for " + placeholder.getText());
 		} else {
 			// If we couldn't get a value, and we are ignoring unresolvable placeholders, leave the original placeholder
 			// string intact (ie ${foo}) and let processing continue
-			return placeholder.getOriginalPlaceholder();
+			return placeholder.getText();
 		}
 	}
 
@@ -223,7 +224,7 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 		String key = getResolvedKey(placeholder, retriever, resolving);
 		String value = getResolvedValue(key, placeholder, retriever, resolving);
 
-		placeholder.setExpandedPlaceholder(expandedPlaceholder);
+		placeholder.setExpandedText(expandedPlaceholder);
 		placeholder.setValue(value);
 
 		// This placeholder is now "resolved". Resolved means there are no more nested placeholders to
@@ -245,14 +246,11 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 	 * 
 	 * The nested placeholder ${${foo}.${bar}} will be expanded to ${a.b} After expansion has taken place, the value
 	 * "purple" will be looked up and stored in the "value" property of the corresponding placeholder
-	 * 
-	 * @param placeholder
-	 * @param properties
 	 */
 	protected void doRecursion(Placeholder placeholder, ValueRetriever retriever, Set<String> resolving) {
 		// Our source string is the placeholder string itself
 		// eg ${${foo}.${bar}}
-		String source = placeholder.getOriginalPlaceholder();
+		String source = placeholder.getText();
 		// The "children" of this placeholder are ${foo} and ${bar}
 		List<Placeholder> children = placeholder.getPlaceholders();
 		// If "foo" is "a" and "bar" is "b" the expanded placeholder for ${${foo}.${bar}} will be ${a.b}
@@ -273,12 +271,6 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 	 * 
 	 * The key ${year}.${month}.${day} will resolve to '1941.12.07' which duplicates the original entry in the
 	 * properties file
-	 * 
-	 * @param keys
-	 * @param key
-	 * @param resolvedKey
-	 * @param existingValue
-	 * @param resolvedValue
 	 */
 	protected void duplicatePropertyCheck(List<String> keys, String key, String resolvedKey, String newValue,
 			Properties properties) {
@@ -294,12 +286,12 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 
 		// If we get this far, the keys are not the same, and resolved key points to a property that already exists
 
-		// Extract th existing value
+		// Extract the existing value
 		String existingValue = properties.getProperty(resolvedKey);
 
 		// Check the values
 		if (ObjectUtils.nullSafeEquals(existingValue, newValue)) {
-			// The values are the same, emit a warning and proceed
+			// The values are the same, just emit a warning and proceed
 			logger.warn("Duplicate property detected for '" + resolvedKey + "'.  '" + key + "' resolved to '"
 					+ resolvedKey + "' which already has a value. Both values are the same: [{}]",
 					plogger.getLogValue(resolvedKey, existingValue));
@@ -373,7 +365,7 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 			int startIndex = placeholder.getStartIndex() + offset;
 			int endIndex = placeholder.getEndIndex() + offset;
 			sb.replace(startIndex, endIndex, placeholder.getValue());
-			int diff = placeholder.getValue().length() - placeholder.getOriginalPlaceholder().length();
+			int diff = placeholder.getValue().length() - placeholder.getText().length();
 			offset += diff;
 		}
 		return sb.toString();
@@ -381,25 +373,29 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 
 	@Override
 	public String replacePlaceholders(String source, ValueRetriever retriever) {
-		return replacePlaceholders(source, getPlaceholders(source), retriever, new HashSet<String>());
+		return replacePlaceholders(source, parsePlaceholders(source), retriever, new HashSet<String>());
 	}
 
 	public String replacePlaceholders(String source, Properties properties) {
 		ValueRetriever retriever = new PropertiesRetriever(properties);
-		return replacePlaceholders(source, getPlaceholders(source), retriever, new HashSet<String>());
+		return replacePlaceholders(source, parsePlaceholders(source), retriever, new HashSet<String>());
 	}
 
 	protected String replacePlaceholders(String source, ValueRetriever retriever, Set<String> resolving) {
-		return replacePlaceholders(source, getPlaceholders(source), retriever, resolving);
+		return replacePlaceholders(source, parsePlaceholders(source), retriever, resolving);
 	}
 
 	protected void circularReferenceCheck(Placeholder placeholder, Set<String> resolving) {
-		logger.trace("Adding '{}' to the list of placeholders being resolved", placeholder.getOriginalPlaceholder());
-		boolean added = resolving.add(placeholder.getOriginalPlaceholder());
+		logger.trace("Adding '{}' to the list of placeholders being resolved", placeholder.getText());
+		boolean added = resolving.add(placeholder.getText());
 
 		if (!added) {
-			// Can't try to resolve a placeholder we are already resolving
-			throw new IllegalArgumentException("Circular reference detected on " + placeholder.getOriginalPlaceholder());
+			// If we get here, one of the placeholders we are trying to resolve contains a reference to another
+			// placeholder that we are already trying to resolve. This can happen if someone does something like this
+			// in a properties file:
+			// a=${b}
+			// b=${a}
+			throw new IllegalArgumentException("Circular reference detected on " + placeholder.getText());
 		}
 	}
 
@@ -415,12 +411,12 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 			doRecursion(placeholder, retriever, resolving);
 		}
 
-		logger.trace("Removing '{}' from the list of placeholders being resolved", placeholder.getOriginalPlaceholder());
+		logger.trace("Removing '{}' from the list of placeholders being resolved", placeholder.getText());
 		// It is resolved, remove it from the Set
-		resolving.remove(placeholder.getOriginalPlaceholder());
+		resolving.remove(placeholder.getText());
 	}
 
-	protected List<Placeholder> getPlaceholders(String source) {
+	protected List<Placeholder> parsePlaceholders(String source) {
 		return getPlaceholders(source, 0);
 	}
 
@@ -476,7 +472,7 @@ public class DefaultPlaceholderReplacer implements PlaceholderReplacer {
 		Placeholder placeholder = new Placeholder();
 		placeholder.setStartIndex(startIndex);
 		placeholder.setEndIndex(endIndex);
-		placeholder.setOriginalPlaceholder(originalPlaceholder);
+		placeholder.setText(originalPlaceholder);
 		placeholder.setPlaceholders(placeholders);
 		return placeholder;
 	}

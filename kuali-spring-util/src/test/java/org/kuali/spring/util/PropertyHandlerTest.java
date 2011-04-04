@@ -23,9 +23,9 @@ public class PropertyHandlerTest {
 
 	@Test
 	public void postProcessBeanFactory() throws IOException {
-		DefaultPropertiesLoader loader = new DefaultPropertiesLoader();
+		PropertiesLoader loader = new PropertiesLoader();
 		loader.setLocations(getLocations());
-		PropertyHandler handler = new PropertyHandler();
+		PropertiesPlaceholderConfigurer handler = new PropertiesPlaceholderConfigurer();
 		handler.setLoader(loader);
 		handler.postProcessBeanFactory(null);
 	}

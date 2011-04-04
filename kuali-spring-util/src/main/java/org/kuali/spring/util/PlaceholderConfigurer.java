@@ -1,7 +1,5 @@
 package org.kuali.spring.util;
 
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -15,28 +13,31 @@ import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
 /**
- * This class is similar to PropertyPlaceholderConfigurer from Spring. It updates bean properties with values from
- * properties files. It has all of the features from the Spring configurer, fixes a few bugs, adds a few new features
- * and is a lot more pluggable/extensible
+ * 
  */
-public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFactoryPostProcessor, PriorityOrdered {
-	final Logger logger = LoggerFactory.getLogger(PropertyHandler.class);
+public abstract class PlaceholderConfigurer implements BeanNameAware, BeanFactoryAware, BeanFactoryPostProcessor,
+		PriorityOrdered {
+	final Logger logger = LoggerFactory.getLogger(PlaceholderConfigurer.class);
 
 	private int order = Ordered.LOWEST_PRECEDENCE; // default: same as non-Ordered
-
-	private PropertiesLoader loader = new DefaultPropertiesLoader();
-	private PropertiesConverter converter = new DefaultPropertiesConverter();
 
 	private String beanName;
 	private BeanFactory beanFactory;
 
+	protected abstract void load();
+
+	protected abstract void convert();
+
+	protected abstract void process(ConfigurableListableBeanFactory beanFactory);
+
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
-			Properties properties = loader.loadProperties();
-			converter.convert(properties);
+			load();
+			convert();
+			process(beanFactory);
 		} catch (Exception e) {
-			throw new BeanInitializationException("Could not complete property handling", e);
+			throw new BeanInitializationException("Could not complete placeholder configuration", e);
 		}
 	}
 
@@ -62,22 +63,6 @@ public class PropertyHandler implements BeanNameAware, BeanFactoryAware, BeanFac
 
 	public void setBeanFactory(BeanFactory beanFactory) {
 		this.beanFactory = beanFactory;
-	}
-
-	public PropertiesLoader getLoader() {
-		return loader;
-	}
-
-	public void setLoader(PropertiesLoader loader) {
-		this.loader = loader;
-	}
-
-	public PropertiesConverter getConverter() {
-		return converter;
-	}
-
-	public void setConverter(PropertiesConverter converter) {
-		this.converter = converter;
 	}
 
 }

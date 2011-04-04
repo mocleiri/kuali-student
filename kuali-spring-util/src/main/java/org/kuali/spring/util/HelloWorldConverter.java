@@ -1,6 +1,6 @@
 package org.kuali.spring.util;
 
-public class HelloWorldConverter extends DefaultPropertiesConverter {
+public class HelloWorldConverter extends PropertiesConverter {
 
 	@Override
 	protected String convert(String originalValue) {

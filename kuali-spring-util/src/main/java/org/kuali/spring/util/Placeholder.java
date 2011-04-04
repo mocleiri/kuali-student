@@ -5,8 +5,8 @@ import java.util.List;
 public class Placeholder {
 	int startIndex;
 	int endIndex;
-	String originalPlaceholder;
-	String expandedPlaceholder;
+	String text;
+	String expandedText;
 	String value;
 	boolean resolved;
 	List<Placeholder> placeholders;
@@ -27,20 +27,20 @@ public class Placeholder {
 		this.endIndex = endIndex;
 	}
 
-	public String getOriginalPlaceholder() {
-		return originalPlaceholder;
+	public String getText() {
+		return text;
 	}
 
-	public void setOriginalPlaceholder(String rawPlaceholder) {
-		this.originalPlaceholder = rawPlaceholder;
+	public void setText(String rawPlaceholder) {
+		this.text = rawPlaceholder;
 	}
 
-	public String getExpandedPlaceholder() {
-		return expandedPlaceholder;
+	public String getExpandedText() {
+		return expandedText;
 	}
 
-	public void setExpandedPlaceholder(String resolvedPlaceholder) {
-		this.expandedPlaceholder = resolvedPlaceholder;
+	public void setExpandedText(String resolvedPlaceholder) {
+		this.expandedText = resolvedPlaceholder;
 	}
 
 	public String getValue() {
