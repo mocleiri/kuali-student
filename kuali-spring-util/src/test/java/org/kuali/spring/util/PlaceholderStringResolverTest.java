@@ -15,10 +15,48 @@ public class PlaceholderStringResolverTest {
 	final Logger logger = LoggerFactory.getLogger(PlaceholderStringResolverTest.class);
 
 	@Test
+	public void setters() throws IOException {
+		PropertyLogger plogger = new PropertyLogger();
+		PlaceholderStringResolver resolver = new PlaceholderStringResolver();
+		resolver.setPlaceholderPrefix("foo");
+		resolver.setPlaceholderSuffix("bar");
+		resolver.setPlogger(plogger);
+		resolver.setSimplePrefix("o");
+
+		Assert.assertEquals("foo", resolver.getPlaceholderPrefix());
+		Assert.assertEquals("bar", resolver.getPlaceholderSuffix());
+		Assert.assertEquals("o", resolver.getSimplePrefix());
+		Assert.assertNotNull(resolver.getPlogger());
+	}
+
+	@Test
+	public void valueSeparator() throws IOException {
+		Properties properties = new Properties();
+		properties.setProperty("a", "bar");
+		PropertiesRetriever retriever = new PropertiesRetriever(properties);
+		PlaceholderStringResolver resolver = new PlaceholderStringResolver();
+
+		// Update the the resolver so it has a value separator
+		resolver.setValueSeparator("=");
+
+		// A placeholder that won't be located by the retriever, but contains a default value
+		String text = "Hello ${c=foo} World";
+		Assert.assertEquals("Hello foo World", resolver.resolve(text, retriever));
+
+		// A placeholder that will be located by the retriever, and contains a default value different from what the
+		// retriever returns
+		String text2 = "Hello ${a=foo} World";
+		Assert.assertEquals("Hello bar World", resolver.resolve(text2, retriever));
+
+		// Test the default value/value separator logic with a placeholder that doesn't contain a default value
+		String text3 = "Hello ${b} World";
+		resolver.setIgnoreUnresolvablePlaceholders(true);
+		Assert.assertEquals("Hello ${b} World", resolver.resolve(text3, retriever));
+	}
+
+	@Test
 	public void unresolvablePlaceholder() throws IOException {
 		Properties properties = new Properties();
-		properties.setProperty("a", "${b}");
-		properties.setProperty("b", "${a}");
 		PropertiesRetriever retriever = new PropertiesRetriever(properties);
 		PlaceholderStringResolver resolver = new PlaceholderStringResolver();
 		String text = "Hello ${c} World";
@@ -38,8 +76,6 @@ public class PlaceholderStringResolverTest {
 	@Test
 	public void noMatchingSuffix() throws IOException {
 		Properties properties = new Properties();
-		properties.setProperty("a", "${b}");
-		properties.setProperty("b", "${a}");
 		PropertiesRetriever retriever = new PropertiesRetriever(properties);
 		PlaceholderStringResolver resolver = new PlaceholderStringResolver();
 		String text = "Hello ${a World";

@@ -36,7 +36,7 @@ import org.springframework.util.StringUtils;
  * cheetah.speed=fast
  * </code>
  * 
- * The text should be resolved to <code>A cheetah is fast.</code>
+ * The text <code>A ${cat} is ${${cat}.speed}.</code> should be resolved to <code>A cheetah is fast.</code>
  * 
  * The object graph created to model the data is:<br>
  * <code>
