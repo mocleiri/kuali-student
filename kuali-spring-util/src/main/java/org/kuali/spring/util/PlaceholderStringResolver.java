@@ -21,25 +21,33 @@ import org.springframework.util.StringUtils;
  * Recursion is used since the text of a Placeholder may itself be a PlaceholderString.<br>
  * 
  * Consider the text:<br>
- * <code>A ${cat} is ${${cat}.speed}.</code>
+ * 
+ * <pre>
+ * A ${cat} is ${${cat}.speed}.
+ * </pre>
  * 
  * The PlaceholderString representing this text contains two Placeholders:<br>
- * 1 - ${cat}<br>
- * 2 - ${${cat}.speed}<br>
  * 
- * The second Placeholder has a nested PlaceholderString (<code>${cat}.speed</code>) which must be resolved in order to
+ * <pre>
+ * 1 - ${cat}
+ * 2 - ${${cat}.speed}
+ * </pre>
+ * 
+ * The second Placeholder has a nested PlaceholderString <code>${cat}.speed</code> which must be resolved in order to
  * locate the correct replacement value.
  * 
  * Given a properties file (or other property source) with the following mappings:<br>
- * <code>
+ * 
+ * <pre>
  * cat=cheetah
  * cheetah.speed=fast
- * </code>
+ * </pre>
  * 
- * The text <code>A ${cat} is ${${cat}.speed}.</code> should be resolved to <code>A cheetah is fast.</code>
+ * The text <code>A ${cat} is ${${cat}.speed}.</code> should be resolved to <code>A cheetah is fast.</code><br>
  * 
  * The object graph created to model the data is:<br>
- * <code>
+ * 
+ * <pre>
  * PlaceholderString 
  *     + text: A ${cat} is ${${cat}.speed}.
  *     + resolvedText: A cheetah is fast.
@@ -58,7 +66,7 @@ import org.springframework.util.StringUtils;
  *           - PlaceholderString
  *             + text: cat
  *             + resolvedText: cat
- * </code>
+ * </pre>
  */
 public class PlaceholderStringResolver {
 
