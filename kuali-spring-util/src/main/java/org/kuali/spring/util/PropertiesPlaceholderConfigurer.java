@@ -4,8 +4,6 @@ import java.util.Properties;
 
 import org.kuali.spring.util.event.DefaultVisitListener;
 import org.kuali.spring.util.event.VisitListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionVisitor;
@@ -16,7 +14,6 @@ import org.springframework.util.StringValueResolver;
  * 
  */
 public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
-	final Logger logger = LoggerFactory.getLogger(PropertiesPlaceholderConfigurer.class);
 
 	private PropertiesLoader loader = new PropertiesLoader();
 	private PropertiesConverter converter = new PropertiesConverter();
