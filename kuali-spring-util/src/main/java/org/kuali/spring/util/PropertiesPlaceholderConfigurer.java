@@ -65,6 +65,7 @@ public class PropertiesPlaceholderConfigurer extends PlaceholderConfigurer {
 		return dsvr;
 	}
 
+	@Override
 	protected void processPlaceholders(ConfigurableListableBeanFactory beanFactoryToProcess) {
 		this.properties = this.loader.loadProperties();
 		this.converter.convert(this.properties);
