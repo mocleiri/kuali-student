@@ -32,7 +32,7 @@
   <licenses>
     <license>
       <name>Educational Community License, Version 2.0</name>
-      <url>${kuali.ecl.license.url}</url>
+      <url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -43,17 +43,16 @@
   <inceptionYear>2007</inceptionYear>
   <developers>
     <developer>
-      <id>jcaddel</id>
-      <name>Jeff Caddel</name>
-      <email>jcaddel@kuali.org</email>
-      <organization>rSmart</organization>
-      <timezone>-7</timezone>
+      <id>kuali</id>
+      <organization>Kuali Foundation</organization>
+      <organizationUrl>http://www.kuali.org/</organizationUrl>
     </developer>
   </developers>
   <properties>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm z</maven.build.timestamp.format>
     <kuali.build.timestamp>${maven.build.timestamp}</kuali.build.timestamp>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <kuali.jxr.plugin.version>2.2</kuali.jxr.plugin.version>
     <kuali.clover.plugin.version>3.0.4</kuali.clover.plugin.version>
     <kuali.clover.generate.info.phase>pre-site</kuali.clover.generate.info.phase>
     <kuali.clover.history.dir>${user.home}/.clover/history/${project.groupId}/${project.artifactId}</kuali.clover.history.dir>
@@ -112,8 +111,6 @@
      -->
     <kuali.reporting.dependency.locations>false</kuali.reporting.dependency.locations>
 
-    <kuali.ecl.license.url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</kuali.ecl.license.url>
-
     <kuali.compile.source>1.6</kuali.compile.source>
     <kuali.compile.target>1.6</kuali.compile.target>
 
@@ -123,14 +120,9 @@
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
     <kuali.release.username />
     <kuali.release.password />
-    <!-- Overriding this to "verify" will cause artifacts to be signed by the maven-gpg-plugin -->
-    <kuali.gpg.sign.phase>none</kuali.gpg.sign.phase>
 
     <!-- Overriding this to "verify" will cause sources to be bundled as jar's in addition to the binaries -->
     <kuali.attach.sources.phase>none</kuali.attach.sources.phase>
-
-    <!-- Overriding this to "initialize" will add Subversion info to jar's and war's (eg revision number, repository, etc) -->
-    <kuali.svn.info.phase>none</kuali.svn.info.phase>
 
     <!-- This must be the same as the groupId for this pom -->
     <kuali.organization.group.id>org.kuali</kuali.organization.group.id>
@@ -215,21 +207,6 @@
       <plugins>
         <!-- set versions of common plugins for reproducibility, ordered alphabetically -->
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>clirr-maven-plugin</artifactId>
-          <version>2.2.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.2-beta-5</version>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
           <version>2.4</version>
@@ -274,7 +251,7 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.0.2</version>
+          <version>2.3.2</version>
           <configuration>
             <source>${kuali.compile.source}</source>
             <target>${kuali.compile.target}</target>
@@ -288,18 +265,8 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-docck-plugin</artifactId>
-          <version>1.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.0-beta-1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.1</version>
+          <version>1.2</version>
           <configuration>
             <passphrase>${kuali.gpg.passphrase}</passphrase>
           </configuration>
@@ -308,11 +275,6 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-invoker-plugin</artifactId>
-          <version>1.5</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -355,13 +317,8 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-plugin-plugin</artifactId>
-          <version>2.6</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.0</version>
+          <version>2.1</version>
           <configuration>
             <goals>${kuali.release.goals}</goals>
             <dryRun>${kuali.release.dryrun}</dryRun>
@@ -375,8 +332,12 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-remote-resources-plugin</artifactId>
-          <version>1.1</version>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>${kuali.jxr.plugin.version}</version>
+          <configuration>
+            <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+            <aggregate>true</aggregate>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -385,11 +346,6 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
           <configuration>
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-scm-plugin</artifactId>
-          <version>1.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -478,7 +434,7 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.2</version>
+                <version>${kuali.jxr.plugin.version}</version>
                 <configuration>
                   <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
                   <aggregate>true</aggregate>
@@ -547,12 +503,12 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.4.3</version>
+          <version>2.8</version>
         </plugin>
         <plugin>
           <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
           <artifactId>maven-svn-revision-number-plugin</artifactId>
-          <version>1.5</version>
+          <version>1.6</version>
           <configuration>
             <entries>
               <entry>
@@ -566,7 +522,6 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
           <artifactId>maven-war-plugin</artifactId>
           <version>${kuali.war.plugin.version}</version>
           <configuration>
-            <webappDirectory>${project.build.directory}/${project.artifactId}-webapp</webappDirectory>
             <archive>
               <manifestEntries>
                 <Bundle-Version>${project.version}</Bundle-Version>
@@ -584,16 +539,6 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
               </manifestEntries>
             </archive>
           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.plexus</groupId>
-          <artifactId>plexus-maven-plugin</artifactId>
-          <version>1.3.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.modello</groupId>
-          <artifactId>modello-maven-plugin</artifactId>
-          <version>1.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -619,21 +564,7 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>${kuali.gpg.sign.phase}</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
-        <version>2.2</version>
         <configuration>
           <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
           <aggregate>true</aggregate>
@@ -682,8 +613,7 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
       <id>sonatype-oss-release</id>
       <properties>
         <kuali.nexus.sonatype.url>https://oss.sonatype.org</kuali.nexus.sonatype.url>
-        <kuali.nexus.sonatype.description>Releasing version ${project.version} of ${project.artifactId}
-        </kuali.nexus.sonatype.description>
+        <kuali.nexus.sonatype.description>Releasing version ${project.version} of ${project.artifactId}</kuali.nexus.sonatype.description>
         <kuali.nexus.sonatype.phase>deploy</kuali.nexus.sonatype.phase>
         <kuali.nexus.sonatype.automatic>true</kuali.nexus.sonatype.automatic>
         <kuali.nexus.sonatype.promote.auto.select.override>true</kuali.nexus.sonatype.promote.auto.select.override>
@@ -691,8 +621,7 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
 
         <kuali.repository.release.id>sonatype-nexus-staging</kuali.repository.release.id>
         <kuali.repository.release.name>Sonatype Nexus Release Repository</kuali.repository.release.name>
-        <kuali.repository.release.url>${kuali.nexus.sonatype.url}/service/local/staging/deploy/maven2/
-        </kuali.repository.release.url>
+        <kuali.repository.release.url>${kuali.nexus.sonatype.url}/service/local/staging/deploy/maven2/</kuali.repository.release.url>
 
         <!-- These are for reference only.  Not currently publishing snapshots to Sonatype's Nexus instance 
         <kuali.repository.snapshot.id>sonatype-nexus-snapshots</kuali.repository.snapshot.id>
@@ -710,8 +639,7 @@ mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnO
               <nexusUrl>${kuali.nexus.sonatype.url}</nexusUrl>
               <serverAuthId>${kuali.repository.release.id}</serverAuthId>
               <automatic>${kuali.nexus.sonatype.automatic}</automatic>
-              <promoteAutoSelectOverride>${kuali.nexus.sonatype.promote.auto.select.override}
-              </promoteAutoSelectOverride>
+              <promoteAutoSelectOverride>${kuali.nexus.sonatype.promote.auto.select.override}</promoteAutoSelectOverride>
               <description>${kuali.nexus.sonatype.description}</description>
               <targetRepositoryId>${kuali.nexus.sonatype.release.repository.id}</targetRepositoryId>
             </configuration>
