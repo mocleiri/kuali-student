@@ -19,7 +19,7 @@
     but may be overridden/configured by individual projects as needed
   -->
   <groupId>org.kuali</groupId>
-  <artifactId>kuali-parent</artifactId>
+  <artifactId>kuali</artifactId>
   <version>80-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>The Kuali Foundation</name>
