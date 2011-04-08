@@ -9,7 +9,8 @@
   express or implied. See the License for the specific language governing
   permissions and limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <!--
     Shared parent. Contains settings common to all projects at Kuali. This
@@ -18,12 +19,12 @@
     but may be overridden/configured by individual projects as needed
   -->
   <groupId>org.kuali</groupId>
-  <artifactId>kuali-main</artifactId>
+  <artifactId>kuali-common</artifactId>
   <version>1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Kuali Main</name>
   <description>
-  Provides reasonable defaults for common items.  ie Javadoc publication etc.
+  Provides reasonable defaults for common items.  Javadoc publication etc.
   </description>
   <properties>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm z</maven.build.timestamp.format>
