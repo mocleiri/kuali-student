@@ -73,11 +73,20 @@
   <!-- The public url is filled in by the maven-kualisite-plugin -->
   <url>http://${kuali.site.hostname}/${project.artifactId}/${project.version}/</url>
   <scm>
-    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/pom</connection>
-    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/pom</developerConnection>
-    <url>https://test.kuali.org/svn/student/deploymentlab/trunk/pom</url>
+    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/pom/common</connection>
+    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/pom/common</developerConnection>
+    <url>https://test.kuali.org/svn/student/deploymentlab/trunk/pom/common</url>
   </scm>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.atlassian.maven.plugins</groupId>
+          <artifactId>maven-clover2-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
@@ -94,158 +103,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>${kuali.gpg.sign.phase}</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <phase>${kuali.attach.sources.phase}</phase>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>sonatype-oss-release</id>
-      <properties>
-        <kuali.nexus.sonatype.url>https://oss.sonatype.org</kuali.nexus.sonatype.url>
-        <kuali.nexus.sonatype.description>Releasing version ${project.version} of ${project.artifactId}
-        </kuali.nexus.sonatype.description>
-        <kuali.nexus.sonatype.phase>deploy</kuali.nexus.sonatype.phase>
-        <kuali.nexus.sonatype.automatic>true</kuali.nexus.sonatype.automatic>
-        <kuali.nexus.sonatype.promote.auto.select.override>true</kuali.nexus.sonatype.promote.auto.select.override>
-        <kuali.nexus.sonatype.release.repository.id>releases</kuali.nexus.sonatype.release.repository.id>
-
-        <kuali.repository.release.id>sonatype-nexus-staging</kuali.repository.release.id>
-        <kuali.repository.release.name>Sonatype Nexus Release Repository</kuali.repository.release.name>
-        <kuali.repository.release.url>${kuali.nexus.sonatype.url}/service/local/staging/deploy/maven2/
-        </kuali.repository.release.url>
-
-        <!-- These are for reference only.  Not currently publishing snapshots to Sonatype's Nexus instance 
-        <kuali.repository.snapshot.id>sonatype-nexus-snapshots</kuali.repository.snapshot.id>
-        <kuali.repository.snapshot.name>Sonatype Nexus Snapshots</kuali.repository.snapshot.name>
-        <kuali.repository.snapshot.url>https://oss.sonatype.org/content/repositories/snapshots/</kuali.repository.snapshot.url>
-        -->
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-maven-plugin</artifactId>
-            <configuration>
-              <nexusUrl>${kuali.nexus.sonatype.url}</nexusUrl>
-              <serverAuthId>${kuali.repository.release.id}</serverAuthId>
-              <automatic>${kuali.nexus.sonatype.automatic}</automatic>
-              <promoteAutoSelectOverride>${kuali.nexus.sonatype.promote.auto.select.override}
-              </promoteAutoSelectOverride>
-              <description>${kuali.nexus.sonatype.description}</description>
-              <targetRepositoryId>${kuali.nexus.sonatype.release.repository.id}</targetRepositoryId>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>kuali-release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <inherited>true</inherited>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <configuration>
-              <updateReleaseInfo>true</updateReleaseInfo>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <configuration>
-              <passphrase>${kuali.gpg.passphrase}</passphrase>
-            </configuration>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <encoding>${project.build.sourceEncoding}</encoding>
-            </configuration>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-site-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-descriptor</id>
-                <phase>install</phase>
-                <goals>
-                  <goal>attach-descriptor</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
-            <artifactId>maven-svn-revision-number-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>svn-info</id>
-                <goals>
-                  <goal>revision</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
