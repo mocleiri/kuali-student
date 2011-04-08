@@ -35,7 +35,7 @@
   <licenses>
     <license>
       <name>Educational Community License, Version 2.0</name>
-      <url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</url>
+      <url>${kuali.ecl.license.url}</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
