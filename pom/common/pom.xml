@@ -31,6 +31,7 @@
 
     <kuali.war.plugin.version>2.1</kuali.war.plugin.version>
     <kuali.findbugs.plugin.version>2.3.1</kuali.findbugs.plugin.version>
+    <kuali.jxr.plugin.version>2.2</kuali.jxr.plugin.version>
 
     <kuali.cobertura.plugin.version>2.4</kuali.cobertura.plugin.version>
     <!-- Placeholders for ignore/exclude patterns.  Override these in child poms as needed. -->
@@ -83,7 +84,16 @@
         <plugin>
           <groupId>com.atlassian.maven.plugins</groupId>
           <artifactId>maven-clover2-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>${kuali.clover.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>${kuali.jxr.plugin.version}</version>
+          <configuration>
+            <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+            <aggregate>true</aggregate>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
