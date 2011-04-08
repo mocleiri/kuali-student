@@ -24,14 +24,11 @@
   <packaging>pom</packaging>
   <name>The Kuali Foundation</name>
   <description>
-    Kuali is a community of universities, colleges, businesses, and other
-    organizations that have partnered to build and sustain open-source administrative software for
-    higher education, by higher
-    education. Kuali software is designed to meet the needs of all sizes of institutions, from land-grant research
-    universities to community colleges. The
-    members of the Kuali Community share a common vision of open, modular, and
-    distributed systems for their software requirements. Kuali software is released under the Educational
-    Community License
+    Kuali is a community of universities, colleges, businesses, and other organizations that have partnered to 
+    build and sustain open-source administrative software for higher education, by higher education. Kuali software 
+    is designed to meet the needs of all sizes of institutions, from land-grant research universities to community 
+    colleges. The members of the Kuali Community share a common vision of open, modular, and distributed systems for 
+    their software requirements. Kuali software is released under the Educational Community License.
   </description>
   <licenses>
     <license>
@@ -63,6 +60,7 @@
     <kuali.release.username />
     <kuali.release.password />
 
+    <!-- This is used in the licenses section and also by the jar/war plugins -->
     <kuali.ecl.license.url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</kuali.ecl.license.url>
 
     <!-- This must be the same as the groupId for this pom -->
@@ -253,7 +251,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>${kuali.war.plugin.version}</version>
+          <version>2.1</version>
           <configuration>
             <archive>
               <manifestEntries>
