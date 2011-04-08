@@ -144,6 +144,18 @@
           <version>2.4.1</version>
         </plugin>
         <plugin>
+          <groupId>org.kuali.maven.plugins</groupId>
+          <artifactId>maven-cloudfront-plugin</artifactId>
+          <version>1.0.21</version>
+          <configuration>
+            <organizationGroupId>${kuali.organization.group.id}</organizationGroupId>
+            <forceMojoExecution>true</forceMojoExecution>
+            <bucket>${kuali.site.bucket}</bucket>
+            <serverId>${kuali.site.server.id}</serverId>
+            <recurse>${kuali.site.bucket.recurse}</recurse>
+          </configuration>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>2.3.2</version>
@@ -202,6 +214,16 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>2.7</version>
+        </plugin>
+        <plugin>
+          <groupId>org.kuali.maven.plugins</groupId>
+          <artifactId>maven-kualisite-plugin</artifactId>
+          <version>1.0.3</version>
+          <configuration>
+            <organizationGroupId>${kuali.organization.group.id}</organizationGroupId>
+            <bucket>${kuali.site.bucket}</bucket>
+            <hostname>${kuali.site.hostname}</hostname>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
