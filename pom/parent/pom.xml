@@ -9,7 +9,8 @@
   express or implied. See the License for the specific language governing
   permissions and limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <!--
     Shared parent. Contains settings common to all projects at Kuali. This
@@ -61,15 +62,12 @@
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
     <kuali.release.username />
     <kuali.release.password />
-    
-    <kuali.ecl.license.url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</kuali.ecl.license.url>
 
-    <!-- Overriding this to "verify" will cause sources to be bundled as jar's in addition to the binaries -->
-    <kuali.attach.sources.phase>none</kuali.attach.sources.phase>
+    <kuali.ecl.license.url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</kuali.ecl.license.url>
 
     <!-- This must be the same as the groupId for this pom -->
     <kuali.organization.group.id>org.kuali</kuali.organization.group.id>
-    
+
     <kuali.repository.release.id>kuali.release</kuali.repository.release.id>
     <kuali.repository.release.name>Kuali Release Repository</kuali.repository.release.name>
     <kuali.repository.release.url>s3://maven.kuali.org/release</kuali.repository.release.url>
@@ -205,7 +203,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${kuali.javadoc.plugin.version}</version>
+          <version>2.7</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
