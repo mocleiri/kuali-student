@@ -383,6 +383,21 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.kuali.maven.plugins</groupId>
+        <artifactId>maven-kualisite-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>kuali-site-properties</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>updatesiteproperties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
   <profiles>
     <profile>

@@ -225,7 +225,7 @@
         </plugin>
         <plugin>
           <groupId>org.kuali.maven.plugins</groupId>
-          <artifactId>maven-kualisite-plugin</artifactId>
+          <artifactId>maven-</artifactId>
           <version>1.0.3</version>
           <configuration>
             <organizationGroupId>${kuali.organization.group.id}</organizationGroupId>
