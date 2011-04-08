@@ -328,23 +328,6 @@
                   </reportSet>
                 </reportSets>
               </plugin>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>${kuali.jxr.plugin.version}</version>
-                <configuration>
-                  <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-                  <aggregate>true</aggregate>
-                </configuration>
-              </plugin>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                  <dependencyLocationsEnabled>${kuali.reporting.dependency.locations}</dependencyLocationsEnabled>
-                </configuration>
-              </plugin>
             </reportPlugins>
           </configuration>
         </plugin>
