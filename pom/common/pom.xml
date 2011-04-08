@@ -106,24 +106,21 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>${kuali.site.plugin.version}</version>
+        <artifactId>maven-jxr-plugin</artifactId>
         <configuration>
-          <reportPlugins>
-            <plugin>
-              <groupId>com.atlassian.maven.plugins</groupId>
-              <artifactId>maven-clover2-plugin</artifactId>
-              <version>${kuali.clover.plugin.version}</version>
-              <configuration>
-                <license><![CDATA[rQQrPasjfItwAkMJKkmNMCxgroOBLImTnqHdkoJrjKCIWJb
-mj2Krd<9J9nD6sR<IqbMLA7P2L01abPDWMorvjKhHqZHUh0 RPoRTSOrOpmOqPrmMPqXVqOqoOQQrrnOrotXvWxXwUTWuVN xUpvTWwxxuUvQnmqmUUnosomvnsmmmmmUUnosomvnsmmmmm UULkfsbopfqvWlcW1ofwlkXUUn]]>
-                </license>
-                <generateHistorical>true</generateHistorical>
-                <historyDir>${kuali.clover.history.dir}</historyDir>
-              </configuration>
-            </plugin>
-          </reportPlugins>
+          <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+          <aggregate>true</aggregate>
         </configuration>
+        <executions>
+          <execution>
+            <id>generate-jxr-info</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>jxr</goal>
+              <goal>test-jxr</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
