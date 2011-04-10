@@ -249,7 +249,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.7</version>
+          <version>${kuali.javadoc.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.kuali.maven.plugins</groupId>
