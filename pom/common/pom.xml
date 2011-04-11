@@ -123,44 +123,6 @@
           <configuration>
             <reportPlugins>
               <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${kuali.javadoc.plugin.version}</version>
-                <configuration>
-                  <excludePackageNames>${kuali.javadoc.exclude.package.names}</excludePackageNames>
-                  <links>
-                    <link>${kuali.javadoc.link.1}</link>
-                    <link>${kuali.javadoc.link.2}</link>
-                    <link>${kuali.javadoc.link.3}</link>
-                    <link>${kuali.javadoc.link.4}</link>
-                    <link>${kuali.javadoc.link.5}</link>
-                    <link>${kuali.javadoc.link.6}</link>
-                    <link>${kuali.javadoc.link.7}</link>
-                    <link>${kuali.javadoc.link.8}</link>
-                    <link>${kuali.javadoc.link.9}</link>
-                    <link>${kuali.javadoc.link.10}</link>
-                  </links>
-                  <additionalJOption>${kuali.javadoc.additional.joption}</additionalJOption>
-                  <maxmemory>${kuali.javadoc.maxmemory}</maxmemory>
-                  <linksource>${kuali.javadoc.linksource}</linksource>
-                  <javadocVersion>${kuali.javadoc.tool.version}</javadocVersion>
-                  <show>${kuali.javadoc.show}</show>
-                  <debug>${kuali.javadoc.debug}</debug>
-                  <source>${kuali.compile.source}</source>
-                  <quiet>${kuali.javadoc.quiet}</quiet>
-                  <aggregate>${kuali.javadoc.aggregate}</aggregate>
-                </configuration>
-                <reportSets>
-                  <reportSet>
-                    <id>generate-javadocs</id>
-                    <reports>
-                      <report>${kuali.javadoc.report.1}</report>
-                      <report>${kuali.javadoc.report.2}</report>
-                    </reports>
-                  </reportSet>
-                </reportSets>
-              </plugin>
-              <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>${kuali.cobertura.plugin.version}</version>
@@ -206,11 +168,6 @@
                   <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
                   <aggregate>true</aggregate>
                 </configuration>
-              </plugin>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <version>2.5.1</version>
               </plugin>
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
