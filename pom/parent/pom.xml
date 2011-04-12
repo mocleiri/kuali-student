@@ -237,6 +237,11 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.1</version>
           <configuration>
@@ -267,7 +272,6 @@
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.3</version>
                 <configuration>
                   <dependencyLocationsEnabled>${kuali.reporting.dependency.locations}</dependencyLocationsEnabled>
                 </configuration>
@@ -403,7 +407,6 @@
             <executions>
               <execution>
                 <id>sign-artifacts</id>
-                <phase>verify</phase>
                 <goals>
                   <goal>sign</goal>
                 </goals>
@@ -428,7 +431,6 @@
             <executions>
               <execution>
                 <id>attach-sources</id>
-                <phase>package</phase>
                 <goals>
                   <goal>jar-no-fork</goal>
                 </goals>
@@ -441,7 +443,6 @@
             <executions>
               <execution>
                 <id>attach-descriptor</id>
-                <phase>package</phase>
                 <goals>
                   <goal>attach-descriptor</goal>
                 </goals>
