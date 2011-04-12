@@ -114,15 +114,6 @@
           <groupId>com.atlassian.maven.plugins</groupId>
           <artifactId>maven-clover2-plugin</artifactId>
           <version>3.0.4</version>
-          <configuration>
-            <license>${kuali.clover.license}</license>
-            <historyDir>${kuali.clover.history.dir}</historyDir>
-            <excludes>
-              <exclude>${kuali.clover.exclude.pattern.1}</exclude>
-              <exclude>${kuali.clover.exclude.pattern.2}</exclude>
-              <exclude>${kuali.clover.exclude.pattern.3}</exclude>
-            </excludes>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -305,23 +296,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>com.atlassian.maven.plugins</groupId>
-        <artifactId>maven-clover2-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate-clover-info</id>
-            <phase>pre-site</phase>
-            <goals>
-              <goal>instrument</goal>
-              <goal>aggregate</goal>
-              <goal>save-history</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
   </build>
   <profiles>
     <profile>
@@ -329,10 +303,30 @@
       <build>
         <plugins>
           <plugin>
+            <groupId>com.atlassian.maven.plugins</groupId>
+            <artifactId>maven-clover2-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>clover-instrument</id>
+                <phase>pre-site</phase>
+                <goals>
+                  <goal>instrument</goal>
+                  <goal>aggregate</goal>
+                  <goal>save-history</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <license>${kuali.clover.license}</license>
+              <historyDir>${kuali.clover.history.dir}</historyDir>
+            </configuration>
+          </plugin>
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <executions>
               <execution>
+                <id>test-jar</id>
                 <goals>
                   <goal>test-jar</goal>
                 </goals>
