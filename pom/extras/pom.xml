@@ -17,7 +17,7 @@
     <artifactId>kuali</artifactId>
     <version>82-SNAPSHOT</version>
   </parent>
-  <groupId>org.kuali.pom</groupId>
+  <groupId>org.kuali</groupId>
   <artifactId>kuali-extras</artifactId>
   <version>1-SNAPSHOT</version>
   <packaging>pom</packaging>
