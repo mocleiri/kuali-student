@@ -41,7 +41,7 @@
     <kuali.cobertura.instrumentation.ignore>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.ignore>
     <kuali.cobertura.instrumentation.exclude>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.exclude>
 
-    <!-- javadoc, jxr, pmd plugins all have an aggregate option -->
+    <!-- javadoc, jxr, pmd, and taglist plugins all have an aggregate option -->
     <kuali.reporting.aggregate>true</kuali.reporting.aggregate>
 
     <!-- Default JavaDoc config -->
@@ -173,6 +173,7 @@
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- Version is included here because it does not inherit correctly from the pluginManagement section of the parent pom -->
                 <version>2.7</version>
                 <configuration>
                   <excludePackageNames>${kuali.javadoc.exclude.package.names}</excludePackageNames>
@@ -211,6 +212,7 @@
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+                <!-- Version is included here because it does not inherit correctly from the pluginManagement section of the parent pom -->
                 <version>2.3</version>
                 <configuration>
                   <dependencyLocationsEnabled>${kuali.reporting.dependency.locations}</dependencyLocationsEnabled>
