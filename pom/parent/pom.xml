@@ -53,7 +53,7 @@
     <!-- This profile provides basic quality control for official Kuali artifacts (GPG signature, attached sources/javadocs etc.)-->
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
 
-    <!-- These goals provide a basic release process for publishing artifacts and generating technical doc's -->
+    <!-- These goals constitute the default release process (publishing artifacts, generate essential technical doc's) -->
     <kuali.release.goals>deploy site-deploy cloudfront:updateoriginbucket</kuali.release.goals>
 
     <!-- This is used in the licenses section as well as the jar/war plugins -->
