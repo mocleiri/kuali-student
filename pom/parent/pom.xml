@@ -52,6 +52,8 @@
 
     <!-- This profile provides basic quality control for official Kuali artifacts (GPG signature, attached sources/javadocs etc.)-->
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
+
+    <!-- These goals provide a basic release process for publishing artifacts and generating technical doc's -->
     <kuali.release.goals>deploy site-deploy cloudfront:updateoriginbucket</kuali.release.goals>
 
     <!-- This is used in the licenses section as well as the jar/war plugins -->
@@ -73,10 +75,12 @@
      -->
     <kuali.reporting.dependency.locations>false</kuali.reporting.dependency.locations>
 
+    <!-- These are the Kuali repository settings for an official release -->
     <kuali.repository.release.id>kuali.release</kuali.repository.release.id>
     <kuali.repository.release.name>Kuali Release Repository</kuali.repository.release.name>
     <kuali.repository.release.url>s3://maven.kuali.org/release</kuali.repository.release.url>
 
+    <!-- These are the Kuali repository settings for snapshot builds -->
     <kuali.repository.snapshot.id>kuali.snapshot</kuali.repository.snapshot.id>
     <kuali.repository.snapshot.name>Kuali Snapshot Repository</kuali.repository.snapshot.name>
     <kuali.repository.snapshot.url>s3://maven.kuali.org/snapshot</kuali.repository.snapshot.url>
