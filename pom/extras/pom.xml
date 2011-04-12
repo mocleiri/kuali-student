@@ -114,17 +114,6 @@
           <groupId>com.atlassian.maven.plugins</groupId>
           <artifactId>maven-clover2-plugin</artifactId>
           <version>3.0.4</version>
-          <executions>
-            <execution>
-              <id>generate-clover-info</id>
-              <phase>${kuali.clover.generate.info.phase}</phase>
-              <goals>
-                <goal>instrument</goal>
-                <goal>aggregate</goal>
-                <goal>save-history</goal>
-              </goals>
-            </execution>
-          </executions>
           <configuration>
             <license>${kuali.clover.license}</license>
             <historyDir>${kuali.clover.history.dir}</historyDir>
@@ -316,5 +305,54 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>maven-clover2-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-clover-info</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>instrument</goal>
+              <goal>aggregate</goal>
+              <goal>save-history</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>kuali-release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>test-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-test-sources</id>
+                <goals>
+                  <goal>test-jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
