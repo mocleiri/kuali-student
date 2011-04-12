@@ -26,23 +26,23 @@
   <url>http://${kuali.site.hostname}/common/${project.artifactId}/${project.version}/</url>
   <properties>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm z</maven.build.timestamp.format>
-    <!-- Explicitly set build timestamp as a custom property.  Resource plugin is not currently filtering values correctly without this -->
+    <!-- Explicitly set build timestamp as a custom property.  The maven-resource-plugin is not filtering values correctly without this -->
     <kuali.build.timestamp>${maven.build.timestamp}</kuali.build.timestamp>
 
+    <!-- Default Clover config -->
     <kuali.clover.generate.info.phase>pre-site</kuali.clover.generate.info.phase>
     <kuali.clover.history.dir>${user.home}/.clover/history/${project.groupId}/${project.artifactId}/${project.version}</kuali.clover.history.dir>
     <kuali.clover.history.generate>true</kuali.clover.history.generate>
-    <!-- Placeholders for clover exclude patterns.  Override these in child poms as needed. -->
     <kuali.clover.exclude.pattern.1>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.1>
     <kuali.clover.exclude.pattern.2>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.2>
     <kuali.clover.exclude.pattern.3>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.3>
-
-    <kuali.jxr.plugin.version>2.2</kuali.jxr.plugin.version>
 
     <!-- Placeholders for ignore/exclude patterns.  Override these in child poms as needed. -->
     <kuali.cobertura.instrumentation.ignore>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.ignore>
     <kuali.cobertura.instrumentation.exclude>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.exclude>
 
+    <!-- javadoc, jxr, pmd plugins all have an aggregate option -->
+    <kuali.reporting.aggregate>true</kuali.reporting.aggregate>
   </properties>
   <repositories>
     <repository>
@@ -78,7 +78,7 @@
         <plugin>
           <groupId>com.atlassian.maven.plugins</groupId>
           <artifactId>maven-clover2-plugin</artifactId>
-          <version>${kuali.clover.plugin.version}</version>
+          <version>3.0.4</version>
           <executions>
             <execution>
               <id>generate-clover-info</id>
@@ -111,7 +111,7 @@
           <version>2.2</version>
           <configuration>
             <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-            <aggregate>true</aggregate>
+            <aggregate>${kuali.reporting.aggregate}</aggregate>
           </configuration>
           <executions>
             <execution>
@@ -160,7 +160,7 @@
                   <debug>${kuali.javadoc.debug}</debug>
                   <source>${kuali.compile.source}</source>
                   <quiet>${kuali.javadoc.quiet}</quiet>
-                  <aggregate>${kuali.javadoc.aggregate}</aggregate>
+                  <aggregate>${kuali.reporting.aggregate}</aggregate>
                 </configuration>
                 <reportSets>
                   <reportSet>
@@ -218,7 +218,7 @@
                 <artifactId>maven-jxr-plugin</artifactId>
                 <configuration>
                   <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-                  <aggregate>true</aggregate>
+                  <aggregate>${kuali.reporting.aggregate}</aggregate>
                 </configuration>
               </plugin>
               <plugin>
@@ -226,14 +226,14 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                   <targetJdk>${kuali.compile.source}</targetJdk>
-                  <aggregate>true</aggregate>
+                  <aggregate>${kuali.reporting.aggregate}</aggregate>
                 </configuration>
               </plugin>
               <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
                 <configuration>
-                  <aggregate>true</aggregate>
+                  <aggregate>${kuali.reporting.aggregate}</aggregate>
                   <tagListOptions>
                     <tagClasses>
                       <tagClass>
