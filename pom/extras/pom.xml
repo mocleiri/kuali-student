@@ -37,7 +37,7 @@
     <kuali.clover.exclude.pattern.2>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.2>
     <kuali.clover.exclude.pattern.3>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.3>
 
-    <!-- Placeholders for ignore/exclude patterns.  Override these in child poms as needed. -->
+    <!-- Default Cobertura config -->
     <kuali.cobertura.instrumentation.ignore>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.ignore>
     <kuali.cobertura.instrumentation.exclude>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.exclude>
 
@@ -49,16 +49,12 @@
     <kuali.javadoc.show>private</kuali.javadoc.show>
     <kuali.javadoc.tool.version />
     <kuali.javadoc.linksource>true</kuali.javadoc.linksource>
-
-    <!-- Placeholder for packages to exclude from javadoc coverage -->
     <kuali.javadoc.exclude.package.names />
-
     <kuali.javadoc.maxmemory>512m</kuali.javadoc.maxmemory>
     <!-- Uncomment this to troubleshoot heap issues when generating javadoc -->
     <!-- <kuali.javadoc.additional.joption>-J-XX:MaxPermSize=256m -J-verbose:gc -J-XX:+PrintGCDetails -J-XX:+PrintGCDateStamps -J-XX:+PrintHeapAtGC -J-XX:+PrintTenuringDistribution -J-Xloggc:${project.build.directory}/javadoc-heap.log</kuali.javadoc.additional.joption> -->
     <!-- Setting this to true will generate javadoc.sh in target/site/apidocs.  This allows you to see the exact javadoc command being issued during the build -->
     <kuali.javadoc.debug>false</kuali.javadoc.debug>
-
     <!-- These 2 should be "aggregate" and "test-aggregate", but with the latest version of the relevant tools (Maven 3.0.1, maven-site-plugin 3.0-beta-3 and 
          maven-javadoc-plugin 2.7), those 2 reports cause a heap error regardless of how large the heap is set.  I set the overall heap to 4 gb's with a MaxPermGen 
          of 512m before switching back to "javadoc" and "test-javadoc" -->
