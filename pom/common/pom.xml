@@ -35,7 +35,6 @@
     <kuali.clover.exclude.pattern.2>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.2>
     <kuali.clover.exclude.pattern.3>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.clover.exclude.pattern.3>
 
-    <kuali.war.plugin.version>2.1</kuali.war.plugin.version>
     <kuali.findbugs.plugin.version>2.3.1</kuali.findbugs.plugin.version>
     <kuali.jxr.plugin.version>2.2</kuali.jxr.plugin.version>
 
@@ -44,12 +43,6 @@
     <kuali.cobertura.instrumentation.ignore>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.ignore>
     <kuali.cobertura.instrumentation.exclude>DO_NOT_MATCH_ANYTHING_PATTERN</kuali.cobertura.instrumentation.exclude>
 
-    <!-- 
-      Setting this to true causes Maven to try and contact any url's listed for every dependency in the project.
-      Quite a few of these urls are out of date, which makes the request eventually time out.  This causes the
-      report generation to take a very long time  
-     -->
-    <kuali.reporting.dependency.locations>false</kuali.reporting.dependency.locations>
   </properties>
   <repositories>
     <repository>
