@@ -45,6 +45,8 @@
   </developers>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <!-- Declared as properties so they can be shared between the compiler and javadoc plugins -->
     <kuali.compile.source>1.6</kuali.compile.source>
     <kuali.compile.target>1.6</kuali.compile.target>
 
@@ -65,7 +67,7 @@
 
     <!-- 
       Setting this to true causes Maven to try and contact any url's listed for every dependency in the project.
-      Quite a few of these urls are out of date, which makes the request eventually time out.  This causes the
+      Typically, quite a few of these urls are out of date, which makes the request eventually time out.  This causes the
       report generation to take a very long time  
      -->
     <kuali.reporting.dependency.locations>false</kuali.reporting.dependency.locations>
@@ -220,6 +222,7 @@
           <version>2.7</version>
           <configuration>
             <encoding>${project.build.sourceEncoding}</encoding>
+            <source>${kuali.compile.source}</source>
           </configuration>
         </plugin>
         <plugin>
