@@ -52,41 +52,6 @@
     <kuali.release.dryrun>false</kuali.release.dryrun>
     <kuali.release.arguments>-Pkuali-release</kuali.release.arguments>
 
-    <kuali.javadoc.plugin.version>2.7</kuali.javadoc.plugin.version>
-    <kuali.javadoc.quiet>true</kuali.javadoc.quiet>
-    <kuali.javadoc.show>private</kuali.javadoc.show>
-    <kuali.javadoc.tool.version />
-    <kuali.javadoc.linksource>true</kuali.javadoc.linksource>
-
-    <!-- Placeholder for packages to exclude from javadoc coverage -->
-    <kuali.javadoc.exclude.package.names />
-
-    <kuali.javadoc.maxmemory>512m</kuali.javadoc.maxmemory>
-    <!-- Uncomment this to troubleshoot heap issues when generating javadoc -->
-    <!-- <kuali.javadoc.additional.joption>-J-XX:MaxPermSize=256m -J-verbose:gc -J-XX:+PrintGCDetails -J-XX:+PrintGCDateStamps -J-XX:+PrintHeapAtGC -J-XX:+PrintTenuringDistribution -J-Xloggc:${project.build.directory}/javadoc-heap.log</kuali.javadoc.additional.joption> -->
-    <!-- Setting this to true will generate javadoc.sh in target/site/apidocs.  This allows you to see the exact javadoc command being issued during the build -->
-    <kuali.javadoc.debug>false</kuali.javadoc.debug>
-
-    <!-- These 2 should be "aggregate" and "test-aggregate", but with the latest version of the relevant tools (Maven 3.0.1, maven-site-plugin 3.0-beta-3 and 
-         maven-javadoc-plugin 2.7), those 2 reports cause a heap error regardless of how large the heap is set.  I set the overall heap to 4 gb's with a MaxPermGen 
-         of 512m before switching back to "javadoc" and "test-javadoc" -->
-    <kuali.javadoc.report.1>javadoc</kuali.javadoc.report.1>
-    <kuali.javadoc.report.2>test-javadoc</kuali.javadoc.report.2>
-    <!-- Once the heap error with aggregate and test-aggregate is worked out, set this to false -->
-    <kuali.javadoc.aggregate>true</kuali.javadoc.aggregate>
-
-    <!-- Placeholders for javadoc link locations.  Override these in child poms as needed -->
-    <kuali.javadoc.link.1>http://download.oracle.com/javase/6/docs/api/</kuali.javadoc.link.1>
-    <kuali.javadoc.link.2>${kuali.javadoc.link.1}</kuali.javadoc.link.2>
-    <kuali.javadoc.link.3>${kuali.javadoc.link.1}</kuali.javadoc.link.3>
-    <kuali.javadoc.link.4>${kuali.javadoc.link.1}</kuali.javadoc.link.4>
-    <kuali.javadoc.link.5>${kuali.javadoc.link.1}</kuali.javadoc.link.5>
-    <kuali.javadoc.link.6>${kuali.javadoc.link.1}</kuali.javadoc.link.6>
-    <kuali.javadoc.link.7>${kuali.javadoc.link.1}</kuali.javadoc.link.7>
-    <kuali.javadoc.link.8>${kuali.javadoc.link.1}</kuali.javadoc.link.8>
-    <kuali.javadoc.link.9>${kuali.javadoc.link.1}</kuali.javadoc.link.9>
-    <kuali.javadoc.link.10>${kuali.javadoc.link.1}</kuali.javadoc.link.10>
-
     <!-- This is used in the licenses section and also by the jar/war plugins -->
     <kuali.ecl.license.url>http://maven.kuali.org/external/org/opensource/ecl/2.0/ecl-2.0.txt</kuali.ecl.license.url>
 
@@ -247,7 +212,10 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${kuali.javadoc.plugin.version}</version>
+          <version>2.7</version>
+          <configuration>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.kuali.maven.plugins</groupId>
@@ -288,44 +256,6 @@
           <version>${kuali.site.plugin.version}</version>
           <configuration>
             <reportPlugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${kuali.javadoc.plugin.version}</version>
-                <configuration>
-                  <excludePackageNames>${kuali.javadoc.exclude.package.names}</excludePackageNames>
-                  <links>
-                    <link>${kuali.javadoc.link.1}</link>
-                    <link>${kuali.javadoc.link.2}</link>
-                    <link>${kuali.javadoc.link.3}</link>
-                    <link>${kuali.javadoc.link.4}</link>
-                    <link>${kuali.javadoc.link.5}</link>
-                    <link>${kuali.javadoc.link.6}</link>
-                    <link>${kuali.javadoc.link.7}</link>
-                    <link>${kuali.javadoc.link.8}</link>
-                    <link>${kuali.javadoc.link.9}</link>
-                    <link>${kuali.javadoc.link.10}</link>
-                  </links>
-                  <additionalJOption>${kuali.javadoc.additional.joption}</additionalJOption>
-                  <maxmemory>${kuali.javadoc.maxmemory}</maxmemory>
-                  <linksource>${kuali.javadoc.linksource}</linksource>
-                  <javadocVersion>${kuali.javadoc.tool.version}</javadocVersion>
-                  <show>${kuali.javadoc.show}</show>
-                  <debug>${kuali.javadoc.debug}</debug>
-                  <source>${kuali.compile.source}</source>
-                  <quiet>${kuali.javadoc.quiet}</quiet>
-                  <aggregate>${kuali.javadoc.aggregate}</aggregate>
-                </configuration>
-                <reportSets>
-                  <reportSet>
-                    <id>generate-javadocs</id>
-                    <reports>
-                      <report>${kuali.javadoc.report.1}</report>
-                      <report>${kuali.javadoc.report.2}</report>
-                    </reports>
-                  </reportSet>
-                </reportSets>
-              </plugin>
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
@@ -475,9 +405,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <encoding>${project.build.sourceEncoding}</encoding>
-            </configuration>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
