@@ -18,7 +18,7 @@
     <version>82-SNAPSHOT</version>
   </parent>
   <groupId>org.kuali.pom</groupId>
-  <artifactId>kuali-site</artifactId>
+  <artifactId>kuali-exras</artifactId>
   <version>1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Kuali Common</name>
