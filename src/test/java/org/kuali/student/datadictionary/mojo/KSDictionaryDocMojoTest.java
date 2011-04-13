@@ -66,7 +66,6 @@ public class KSDictionaryDocMojoTest {
         inputFiles.add(RESOURCES_DIRECTORY + "ks-lui-person-relation-dictionary.xml");
         instance.setInputFiles(inputFiles);
         instance.setProjectUrl(PROJECT_URL);
-//      TODO: figure out this
-//      instance.execute();
+//        instance.execute();
     }
 }

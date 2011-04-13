@@ -71,16 +71,19 @@ public class ServiceContractModelQDoxLoaderTest
  public void tearDown ()
  {
  }
- 	private static final String POC_DIRECTORY = "C:/svn/ks-r2-poc/trunk/ks-services/ks-services-api/src/main/java";
+ private static final String POC_DIRECTORY =
+                             "C:/svn/ks-r2-poc/trunk/ks-services/ks-services-api/src/main/java";
  private static final String RESOURCES_DIRECTORY = "src/test/resources";
- private static final String SOURCE_DIRECTORY = RESOURCES_DIRECTORY + "/org";
+ private static final String TEST_SOURCE_DIRECTORY =
+                             "src/test/java/org/kuali/student/contract/model/test/source";
+
  private ServiceContractModel getModel ()
  {
   List<String> srcDirs = new ArrayList ();
   System.out.println ("User directory=" + System.getProperty ("user.dir"));
-  System.out.println ("Current directory=" + new File(".").getAbsolutePath());
+  System.out.println ("Current directory=" + new File (".").getAbsolutePath ());
 //  srcDirs.add (POC_DIRECTORY);
-  srcDirs.add (SOURCE_DIRECTORY);
+  srcDirs.add (TEST_SOURCE_DIRECTORY);
   ServiceContractModel instance = new ServiceContractModelQDoxLoader (srcDirs);
   instance = new ServiceContractModelCache (instance);
   validate (instance);
@@ -154,7 +157,7 @@ public class ServiceContractModelQDoxLoaderTest
   System.out.println ("getSourceNames");
   ServiceContractModel model = getModel ();
   List<String> expResult = new ArrayList ();
-  expResult.add (SOURCE_DIRECTORY);
+  expResult.add (TEST_SOURCE_DIRECTORY);
   List result = model.getSourceNames ();
   assertEquals (expResult, result);
  }
@@ -173,7 +176,7 @@ public class ServiceContractModelQDoxLoaderTest
    System.out.println (service.getKey () + " " + service.getName () + " "
                        + service.getVersion () + " " + service.getStatus ());
   }
-  assertEquals (11, result.size ());
+  assertEquals (3, result.size ());
  }
 
  /**
@@ -220,7 +223,7 @@ public class ServiceContractModelQDoxLoaderTest
   File file = new File (outputFileName);
   PrintStream out = new PrintStream (file);
   new MessageStructureHierarchyDumper (out, model).writeTabbedHeader ();
-  Set<XmlType> rootTypes = HtmlContractServiceWriter.calcComplexRootXmlTypes (
+  Set<XmlType> rootTypes = HtmlContractServiceWriter.calcMainMessageStructures (
     model, null);
   ModelFinder finder = new ModelFinder (model);
   for (XmlType rootType : rootTypes)

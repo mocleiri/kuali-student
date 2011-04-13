@@ -118,7 +118,7 @@ public class HtmlContractServiceWriter
     "</div><div class=\"panelContent\" style=\"background-color: rgb(255, 255, 255);\">");
 
   writer.indentPrintln ("<ul>");
-  for (XmlType type : this.calcComplexRootXmlTypes ())
+  for (XmlType type : this.calcMainMessageStructures ())
   {
    writer.indentPrint ("<li>");
    writer.print ("<a href=\"" + type.getName () + ".html"
@@ -159,12 +159,12 @@ public class HtmlContractServiceWriter
   return bldr.toString ();
  }
 
- private Set<XmlType> calcComplexRootXmlTypes ()
+ private Set<XmlType> calcMainMessageStructures ()
  {
-  return calcComplexRootXmlTypes (model, service.getKey ());
+  return calcMainMessageStructures (model, service.getKey ());
  }
 
- public static Set<XmlType> calcComplexRootXmlTypes (ServiceContractModel mdl,
+ public static Set<XmlType> calcMainMessageStructures (ServiceContractModel mdl,
                                                      String serviceOptionaFilter)
  {
   ModelFinder fndr = new ModelFinder (mdl);
@@ -178,7 +178,7 @@ public class HtmlContractServiceWriter
      continue;
     }
    }
-   XmlType type = fndr.findXmlType (method.getReturnValue ().getType ());
+   XmlType type = fndr.findXmlType (stripListFromType (method.getReturnValue ().getType ()));
    if (type != null)
    {
     if (type.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))
@@ -189,7 +189,7 @@ public class HtmlContractServiceWriter
 
    for (ServiceMethodParameter param : method.getParameters ())
    {
-    type = fndr.findXmlType (param.getType ());
+    type = fndr.findXmlType (stripListFromType (param.getType ()));
     if (type != null)
     {
      if (type.getPrimitive ().equalsIgnoreCase (XmlType.COMPLEX))
@@ -311,7 +311,7 @@ public class HtmlContractServiceWriter
   writer.indentPrintln ("<p>");
  }
 
- private String stripListFromType (String type)
+ private static String stripListFromType (String type)
  {
   if (type.endsWith ("List"))
   {
