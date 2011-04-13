@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Spring5369 {
+	/*
 	final Logger logger = LoggerFactory.getLogger(Spring5369.class);
 
 	protected Properties getProps1() {
@@ -92,4 +93,5 @@ public class Spring5369 {
 	protected String getOracleSql(String user, String password) {
 		return "DROP USER " + user + " CASCADE / CREATE USER " + user + " IDENTIFIED BY " + password + " /";
 	}
+	*/
 }
