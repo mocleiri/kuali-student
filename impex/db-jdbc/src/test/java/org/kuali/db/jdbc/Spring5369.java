@@ -4,11 +4,13 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.junit.Test;
+/*
 import org.kuali.spring.util.ResolvePropertiesFirstPlaceholderConfigurer;
 import org.kuali.spring.util.PropertyPlaceholderHelper;
 import org.kuali.spring.util.PropertiesLoggerSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+*/
 
 public class Spring5369 {
 	/*
