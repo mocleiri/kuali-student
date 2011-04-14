@@ -17,20 +17,4 @@
       <version>4.8.1</version>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.kuali.maven.plugins</groupId>
-        <artifactId>maven-cloudfront-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>update-s3-bucket-indexes</id>
-            <configuration>
-              <prefix>multimodule/${project.version}/${project.artifactId}</prefix>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>
