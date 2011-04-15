@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.kuali.multimodule</groupId>
     <artifactId>multimodule</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>module1</artifactId>
   <name>Module 1</name>

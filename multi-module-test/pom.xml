@@ -8,7 +8,7 @@
   <groupId>org.kuali.multimodule</groupId>
   <artifactId>multimodule</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <name>Multi Module Testing</name>
   <description>Project structure for testing multi module builds</description>
   <url>http://${kuali.site.hostname}/multimodule/${project.version}/</url>
@@ -30,8 +30,8 @@
     </repository>
   </repositories>
   <scm>
-    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/tags/multimodule-1.0.0</connection>
-    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/tags/multimodule-1.0.0</developerConnection>
-    <url>http://test.kuali.org/svn/student/deploymentlab/tags/multimodule-1.0.0</url>
+    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/multi-module-test</connection>
+    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/multi-module-test</developerConnection>
+    <url>http://test.kuali.org/svn/student/deploymentlab/trunk/multi-module-test</url>
   </scm>
 </project>
