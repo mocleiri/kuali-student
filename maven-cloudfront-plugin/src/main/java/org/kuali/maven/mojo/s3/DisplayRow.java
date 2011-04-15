@@ -3,12 +3,17 @@ package org.kuali.maven.mojo.s3;
 /**
  * Pojo that represents one row in the directory listing of the contents of a directory in an S3 bucket
  */
-public class DisplayRow {
+public class DisplayRow implements Comparable<DisplayRow> {
 	String show;
 	String image;
 	String ahref;
 	String lastModified;
 	String size;
+
+	@Override
+	public int compareTo(DisplayRow other) {
+		return lastModified.compareTo(other.getLastModified());
+	}
 
 	public String getImage() {
 		return image;
@@ -49,4 +54,5 @@ public class DisplayRow {
 	public void setShow(String show) {
 		this.show = show;
 	}
+
 }
