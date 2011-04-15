@@ -5,7 +5,7 @@ import java.util.Comparator;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Provide intelligent sorting for version numbers.
+ * Provide non-alphanumeric sorting for version numbers.
  * 
  * 1.1.10 sorts after 1.1.2<br>
  * 1.1.10-SNAPSHOT sorts before 1.1.10
@@ -44,47 +44,12 @@ public class DisplayRowComparator implements Comparator<DisplayRow> {
 			}
 		}
 
-		if (isOnlyDifferenceSnapshot(tokens1, tokens2)) {
-			if (isSnapshot(tokens1)) {
-				return -1;
-			} else {
-				return 1;
-			}
-		}
-
 		if (tokens1.length > tokens2.length) {
-			return 1;
-		} else if (tokens1.length < tokens2.length) {
 			return -1;
+		} else if (tokens1.length < tokens2.length) {
+			return 1;
 		} else {
 			return 0;
-		}
-	}
-
-	protected boolean isOnlyDifferenceSnapshot(String[] tokens1, String[] tokens2) {
-		if (!isLengthDifferentByOne(tokens1, tokens2)) {
-			return false;
-		}
-		if (!isSnapshot(tokens1) && !isSnapshot(tokens2)) {
-			return false;
-		}
-		return true;
-	}
-
-	protected boolean isSnapshot(String[] tokens) {
-		int len = tokens.length;
-		String token = tokens[len - 1];
-		return token.toUpperCase().equals(this.snapshot.toUpperCase());
-	}
-
-	protected boolean isLengthDifferentByOne(String[] tokens1, String[] tokens2) {
-		int len1 = tokens1.length;
-		int len2 = tokens2.length;
-		int diff = Math.abs(len1 - len2);
-		if (diff == 1) {
-			return true;
-		} else {
-			return false;
 		}
 	}
 

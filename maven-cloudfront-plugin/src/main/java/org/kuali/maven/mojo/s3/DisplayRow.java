@@ -12,7 +12,16 @@ public class DisplayRow implements Comparable<DisplayRow> {
 
 	@Override
 	public int compareTo(DisplayRow other) {
-		return lastModified.compareTo(other.getLastModified());
+		if (show == null && other.getShow() == null) {
+			return 0;
+		}
+		if (show == null) {
+			return -1;
+		}
+		if (other.getShow() == null) {
+			return -1;
+		}
+		return show.compareTo(other.getShow());
 	}
 
 	public String getImage() {
