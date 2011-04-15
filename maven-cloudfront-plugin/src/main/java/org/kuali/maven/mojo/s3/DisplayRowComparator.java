@@ -12,7 +12,9 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DisplayRowComparator implements Comparator<DisplayRow> {
 	public static final String DEFAULT_SEPARATORS = ".-";
+	public static final String DEFAULT_DELIMITER = "/";
 	String separators = DEFAULT_SEPARATORS;
+	String delimiter = DEFAULT_DELIMITER;
 
 	@Override
 	public int compare(DisplayRow one, DisplayRow two) {
@@ -30,8 +32,13 @@ public class DisplayRowComparator implements Comparator<DisplayRow> {
 		if (show2 == null) {
 			return 1;
 		}
+
+		show1 = StringUtils.strip(show1, delimiter);
+		show2 = StringUtils.strip(show2, delimiter);
+
 		String[] tokens1 = StringUtils.split(show1, separators);
 		String[] tokens2 = StringUtils.split(show2, separators);
+
 		int len = Math.min(tokens1.length, tokens2.length);
 
 		for (int i = 0; i < len; i++) {
@@ -70,6 +77,14 @@ public class DisplayRowComparator implements Comparator<DisplayRow> {
 
 	public void setSeparators(String separators) {
 		this.separators = separators;
+	}
+
+	public String getDelimiter() {
+		return delimiter;
+	}
+
+	public void setDelimiter(String delimiter) {
+		this.delimiter = delimiter;
 	}
 
 }
