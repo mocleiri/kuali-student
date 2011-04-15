@@ -59,7 +59,7 @@ public class DisplayRowComparator implements Comparator<DisplayRow> {
 			Double d2 = new Double(token2);
 			return d1.compareTo(d2);
 		} catch (NumberFormatException e) {
-			// ignore
+			// Intentionally ignore this
 		}
 		return token1.compareTo(token2);
 
