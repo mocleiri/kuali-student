@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kuali</groupId>
@@ -9,7 +8,7 @@
   <groupId>org.kuali.multimodule</groupId>
   <artifactId>multimodule</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>Multi Module Testing</name>
   <description>Project structure for testing multi module builds</description>
   <url>http://${kuali.site.hostname}/multimodule/${project.version}/</url>
@@ -31,8 +30,8 @@
     </repository>
   </repositories>
   <scm>
-    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/multi-module-test</connection>
-    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/trunk/multi-module-test</developerConnection>
-    <url>http://test.kuali.org/svn/student/deploymentlab/trunk/multi-module-test</url>
+    <connection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/tags/multimodule-1.0.1</connection>
+    <developerConnection>scm:svn:https://test.kuali.org/svn/student/deploymentlab/tags/multimodule-1.0.1</developerConnection>
+    <url>http://test.kuali.org/svn/student/deploymentlab/tags/multimodule-1.0.1</url>
   </scm>
 </project>
