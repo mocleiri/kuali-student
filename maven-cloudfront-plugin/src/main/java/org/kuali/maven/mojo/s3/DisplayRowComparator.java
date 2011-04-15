@@ -13,7 +13,6 @@ import org.apache.commons.lang.StringUtils;
 public class DisplayRowComparator implements Comparator<DisplayRow> {
 	public static final String DEFAULT_SEPARATORS = ".-";
 	String separators = DEFAULT_SEPARATORS;
-	String snapshot = "SNAPSHOT";
 
 	@Override
 	public int compare(DisplayRow one, DisplayRow two) {
@@ -71,14 +70,6 @@ public class DisplayRowComparator implements Comparator<DisplayRow> {
 
 	public void setSeparators(String separators) {
 		this.separators = separators;
-	}
-
-	public String getSnapshot() {
-		return snapshot;
-	}
-
-	public void setSnapshot(String snapshot) {
-		this.snapshot = snapshot;
 	}
 
 }

@@ -18,6 +18,13 @@ import org.junit.Test;
 public class DisplayRowComparatorTest {
 
 	@Test
+	public void gettersAndSetters() {
+		DisplayRowComparator c = new DisplayRowComparator();
+		c.setSeparators(DisplayRowComparator.DEFAULT_SEPARATORS);
+		Assert.assertEquals(DisplayRowComparator.DEFAULT_SEPARATORS, c.getSeparators());
+	}
+
+	@Test
 	public void bothNull() {
 		DisplayRow dr1 = new DisplayRow();
 		DisplayRow dr2 = new DisplayRow();
@@ -130,5 +137,23 @@ public class DisplayRowComparatorTest {
 		Collections.sort(drs, c);
 
 		Assert.assertEquals("1.1.17-M2-SNAPSHOT", drs.get(0).getShow());
+	}
+
+	@Test
+	public void sameCompareTo() {
+		String show1 = "1.1.17-M2";
+		String show2 = "1.1.17-M2";
+		DisplayRow dr1 = new DisplayRow();
+		dr1.setShow(show1);
+		DisplayRow dr2 = new DisplayRow();
+		dr2.setShow(show2);
+		List<DisplayRow> drs = new ArrayList<DisplayRow>();
+		Comparator<DisplayRow> c = new DisplayRowComparator();
+		drs.add(dr1);
+		drs.add(dr2);
+
+		Collections.sort(drs, c);
+
+		Assert.assertEquals("1.1.17-M2", drs.get(0).getShow());
 	}
 }
