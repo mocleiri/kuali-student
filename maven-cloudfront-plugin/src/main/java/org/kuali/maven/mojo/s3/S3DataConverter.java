@@ -134,14 +134,8 @@ public class S3DataConverter {
 		DisplayRow upOneDirectory = getUpOneDirectoryDisplayRow(prefix, delimiter);
 		List<DisplayRow> objectDisplayRows = getObjectDisplayRows(objectListing, prefix, delimiter);
 		List<DisplayRow> directoryDisplayRows = getDirectoryDisplayRows(objectListing, prefix, delimiter);
-		for (DisplayRow df : directoryDisplayRows) {
-			System.out.println("before=" + df.getShow());
-		}
 		Comparator<DisplayRow> c = new DisplayRowComparator();
 		Collections.sort(directoryDisplayRows, c);
-		for (DisplayRow df : directoryDisplayRows) {
-			System.out.println("after=" + df.getShow());
-		}
 		List<String[]> data = new ArrayList<String[]>();
 		addDisplayRow(upOneDirectory, data);
 		addDisplayRows(directoryDisplayRows, data);
