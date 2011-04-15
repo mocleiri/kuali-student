@@ -3,7 +3,6 @@ package org.kuali.maven.mojo.s3;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -132,10 +131,9 @@ public class S3DataConverter {
 	public List<String[]> getData(final ObjectListing objectListing, final String prefix, final String delimiter) {
 		DisplayRow upOneDirectory = getUpOneDirectoryDisplayRow(prefix, delimiter);
 		List<DisplayRow> objectDisplayRows = getObjectDisplayRows(objectListing, prefix, delimiter);
-		Comparator<DisplayRow> c = new DisplayRowComparator();
-		Collections.sort(objectDisplayRows, c);
+		Collections.sort(objectDisplayRows);
 		List<DisplayRow> directoryDisplayRows = getDirectoryDisplayRows(objectListing, prefix, delimiter);
-		Collections.sort(directoryDisplayRows, c);
+		Collections.sort(directoryDisplayRows);
 		List<String[]> data = new ArrayList<String[]>();
 		addDisplayRow(upOneDirectory, data);
 		addDisplayRows(directoryDisplayRows, data);
