@@ -143,7 +143,7 @@
         <ks.deploy.remote.hostname>deploy.ks.kuali.org</ks.deploy.remote.hostname>
         <ks.deploy.remote.public.url>staging.ks.kuali.org</ks.deploy.remote.public.url>
         <ks.deploy.remote.tomcat.user>staging</ks.deploy.remote.tomcat.user>
-        <ks.deploy.remote.tomcat.home>/usr/local/tomcat_staging}</ks.deploy.remote.tomcat.home>
+        <ks.deploy.remote.tomcat.home>/usr/local/tomcat_staging</ks.deploy.remote.tomcat.home>
         <ks.deploy.remote.config.file>/home/staging/kuali/main/dev/ks-embedded-config.xml</ks.deploy.remote.config.file>
         <ks.deploy.impex.url>jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</ks.deploy.impex.url>
         <ks.deploy.impex.username>KSSTAGING</ks.deploy.impex.username>
