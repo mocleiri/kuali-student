@@ -68,7 +68,7 @@
     <ks.deploy.remote.tomcat.shutdown>${ks.deploy.remote.tomcat.home}/bin/forced-shutdown.sh</ks.deploy.remote.tomcat.shutdown>
 
     <ks.hudson.base.dir>/opt/hudson/home/jobs</ks.hudson.base.dir>
-    <ks.hudson.working.dir>${ks.hudson.base.dir}/${ks.hudson.job}/workspace/${ks.hudson.svn.suffix}</ks.hudson.working.dir>
+    <ks.hudson.working.dir>${ks.hudson.base.dir}/${ks.hudson.job}/workspace/</ks.hudson.working.dir>
     <ks.hudson.ks-embedded.dir>${ks.hudson.working.dir}/ks-web/ks-embedded</ks.hudson.ks-embedded.dir>
     <ks.hudson.ks-embedded-db.dir>${ks.hudson.working.dir}/ks-cfg-dbs/ks-embedded-db</ks.hudson.ks-embedded-db.dir>
 
@@ -111,7 +111,6 @@
       <id>1.1</id>
       <properties>
         <ks.hudson.job>1.1-full-build</ks.hudson.job>
-        <ks.hudson.svn.suffix>ks-1.1</ks.hudson.svn.suffix>
         <ks.deploy.version>1.1.1-SNAPSHOT</ks.deploy.version>
       </properties>
     </profile>
@@ -119,7 +118,6 @@
       <id>1.2</id>
       <properties>
         <ks.hudson.job>1.2-full-build</ks.hudson.job>
-        <ks.hudson.svn.suffix>trunk</ks.hudson.svn.suffix>
         <ks.deploy.version>1.2-M3-SNAPSHOT</ks.deploy.version>
       </properties>
     </profile>
