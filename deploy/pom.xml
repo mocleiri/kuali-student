@@ -107,6 +107,17 @@
     <ks.deploy.start.remote.tomcat.phase>post-integration-test</ks.deploy.start.remote.tomcat.phase>
 
   </properties>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
   <profiles>
     <profile>
       <id>1.1</id>
@@ -157,7 +168,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>1.1</version>
             <executions>
               <execution>
                 <id>copy-local-config-file-to-remote</id>
