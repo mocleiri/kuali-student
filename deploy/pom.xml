@@ -361,8 +361,8 @@
                     <argument>${ks.deploy.remote.tomcat.shutdown}</argument>
                   </arguments>
                   <successCodes>
-                    <param>0</param>
-                    <param>1</param>
+                    <successCode>0</successCode>
+                    <successCode>1</successCode>
                   </successCodes>
                 </configuration>
               </execution>
