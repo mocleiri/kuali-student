@@ -69,7 +69,7 @@
 
     <ks.hudson.workspace.directory>.</ks.hudson.workspace.directory>
     <ks.hudson.base.dir>/opt/hudson/home/jobs</ks.hudson.base.dir>
-    <ks.hudson.working.dir>${ks.hudson.base.dir}/${ks.hudson.job}/workspace/${ks.hudson.workspace.directory}/</ks.hudson.working.dir>
+    <ks.hudson.working.dir>${ks.hudson.base.dir}/${ks.hudson.job}/workspace/${ks.hudson.workspace.directory}</ks.hudson.working.dir>
     <ks.hudson.ks-embedded.dir>${ks.hudson.working.dir}/ks-web/ks-embedded</ks.hudson.ks-embedded.dir>
     <ks.hudson.ks-embedded-db.dir>${ks.hudson.working.dir}/ks-cfg-dbs/ks-embedded-db</ks.hudson.ks-embedded-db.dir>
 
