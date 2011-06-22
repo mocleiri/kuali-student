@@ -73,6 +73,12 @@
     <ks.hudson.ks-embedded.dir>${ks.hudson.working.dir}/ks-web/ks-embedded</ks.hudson.ks-embedded.dir>
     <ks.hudson.ks-embedded-db.dir>${ks.hudson.working.dir}/ks-cfg-dbs/ks-embedded-db</ks.hudson.ks-embedded-db.dir>
 
+    <ks.hudson.ks-standalone.dir>${ks.hudson.working.dir}/ks-web/ks-standalone</ks.hudson.ks-standalone.dir>
+    <ks.hudson.ks-standalone-db.dir>${ks.hudson.working.dir}/ks-cfg-dbs/ks-standalone-db</ks.hudson.ks-standalone-db.dir>
+
+    <ks.hudson.ks-rice.dir>${ks.hudson.working.dir}/ks-web/ks-rice</ks.hudson.ks-rice.dir>
+    <ks.hudson.ks-rice-db.dir>${ks.hudson.working.dir}/ks-cfg-dbs/ks-rice-db</ks.hudson.ks-rice-db.dir>
+
     <ks.deploy.impex.dba.password>gw570229</ks.deploy.impex.dba.password>
 
     <ks.deploy.local.war.file>${ks.hudson.ks-embedded.dir}/target/ks-embedded-${ks.deploy.version}.war</ks.deploy.local.war.file>
@@ -96,6 +102,46 @@
         <param name="encryption.key">i44AED6CACC70B4CE47B1A0488ECB1288</param>
       </config>]]>
     </ks.deploy.embedded.config>
+
+    <ks.deploy.standalone.config><![CDATA[
+      <config>
+        <param name="appserver.url">http://${ks.deploy.remote.public.url}</param>
+        <param name="app.context.name"/>
+        <param name="app.code"/>
+        <param name="application.url">${appserver.url}</param>
+        <param name="externalizable.help.url">/kr/static/help/</param>
+        <param name="externalizable.images.url">/kr/static/images/</param>
+        <param name="kr.externalizable.images.url">${externalizable.images.url}</param>
+        <param name="travel.externalizable.images.url">${externalizable.images.url}</param>
+        <param name="datasource.url">${ks.deploy.impex.url}</param>
+        <param name="datasource.username">${ks.deploy.impex.username}</param>
+        <param name="datasource.password">${ks.deploy.impex.password}</param>
+        <param name="datasource.pool.maxSize">20</param>
+        <param name="ks.core.datasource.pool.maxSize">20</param>
+        <param name="ks.lum.datasource.pool.maxSize">20</param>
+        <param name="encryption.key">i44AED6CACC70B4CE47B1A0488ECB1288</param>
+      </config>]]>
+    </ks.deploy.standalone.config>
+
+    <ks.deploy.rice.config><![CDATA[
+      <config>
+        <param name="appserver.url">http://${ks.deploy.remote.public.url}</param>
+        <param name="app.context.name"/>
+        <param name="app.code"/>
+        <param name="application.url">${appserver.url}</param>
+        <param name="externalizable.help.url">/kr/static/help/</param>
+        <param name="externalizable.images.url">/kr/static/images/</param>
+        <param name="kr.externalizable.images.url">${externalizable.images.url}</param>
+        <param name="travel.externalizable.images.url">${externalizable.images.url}</param>
+        <param name="datasource.url">${ks.deploy.impex.url}</param>
+        <param name="datasource.username">${ks.deploy.impex.username.rice}</param>
+        <param name="datasource.password">${ks.deploy.impex.password.rice}</param>
+        <param name="datasource.pool.maxSize">20</param>
+        <param name="ks.core.datasource.pool.maxSize">20</param>
+        <param name="ks.lum.datasource.pool.maxSize">20</param>
+        <param name="encryption.key">i44AED6CACC70B4CE47B1A0488ECB1288</param>
+      </config>]]>
+    </ks.deploy.rice.config>
 
     <ks.deploy.shutdown.remote.tomcat.phase>pre-integration-test</ks.deploy.shutdown.remote.tomcat.phase>
     <ks.deploy.remove.old.war.dir.phase>pre-integration-test</ks.deploy.remove.old.war.dir.phase>
@@ -160,6 +206,275 @@
         <ks.deploy.impex.username>KSSTAGING</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSSTAGING</ks.deploy.impex.password>
       </properties>
+    </profile>
+    <profile>
+      <id>standalone</id>
+      <properties>
+        <ks.deploy.local.war.file>${ks.hudson.ks-standalone.dir}/target/ks-standalone-${ks.deploy.version}.war</ks.deploy.local.war.file>
+        <ks.deploy.local.war.file.rice>${ks.hudson.ks-rice.dir}/target/ks-rice-${ks.deploy.version}.war</ks.deploy.local.war.file.rice>
+
+        <ks.deploy.environment.name>standalone</ks.deploy.environment.name>
+        <ks.deploy.remote.hostname>standalone.ks.kuali.org</ks.deploy.remote.hostname>
+        <ks.deploy.remote.public.url>standalone.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.impex.url>jdbc:oracle:thin:@standalone.ks.kuali.org:1521:KS</ks.deploy.impex.url>
+
+        <ks.deploy.local.config.file>${project.basedir}/ks-standalone-config.xml</ks.deploy.local.config.file>
+        <ks.deploy.remote.tomcat.user>root</ks.deploy.remote.tomcat.user>
+        <ks.deploy.remote.tomcat.home>/usr/local/tomcat</ks.deploy.remote.tomcat.home>
+        <ks.deploy.remote.config.file>/home/root/kuali/main/dev/ks-standalone-config.xml</ks.deploy.remote.config.file>
+        <ks.deploy.impex.username>KSSTANDALONE</ks.deploy.impex.username>
+        <ks.deploy.impex.password>KSSTANDALONE</ks.deploy.impex.password>
+
+        <ks.deploy.local.config.file.rice>${project.basedir}/ks-rice-config.xml</ks.deploy.local.config.file.rice>
+        <ks.deploy.remote.tomcat.user.rice>deploy</ks.deploy.remote.tomcat.user.rice>
+        <ks.deploy.remote.tomcat.home.rice>/usr/local/tomcat_deploy</ks.deploy.remote.tomcat.home.rice>
+        <ks.deploy.remote.config.file.rice>/home/root/kuali/main/dev/ks-rice-config.xml</ks.deploy.remote.config.file.rice>
+        <ks.deploy.impex.username.rice>KSRICE</ks.deploy.impex.username.rice>
+        <ks.deploy.impex.password.rice>KSRICE</ks.deploy.impex.password.rice>
+      </properties>
+    </profile>
+    <profile>
+      <id>deploy-standalone</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>generate-local-config-files</id>
+                <phase>${ks.deploy.generate.config.file.phase}</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <echo>Generating ${ks.deploy.local.config.file}</echo>
+                    <echo file="${ks.deploy.local.config.file}">${ks.deploy.standalone.config}</echo>
+                    <echo>Generating ${ks.deploy.local.config.file.rice}</echo>
+                    <echo file="${ks.deploy.local.config.file.rice}">${ks.deploy.rice.config}</echo>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-local-config-file-to-remote</id>
+                <phase>${ks.deploy.copy.config.file.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.scp.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.local.config.file}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}:${ks.deploy.remote.config.file}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-local-rice-config-file-to-remote</id>
+                <phase>${ks.deploy.copy.config.file.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.scp.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.local.config.file.rice}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}:${ks.deploy.remote.config.file.rice}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>stop-remote-tomcat</id>
+                <phase>${ks.deploy.shutdown.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.shutdown}</argument>
+                  </arguments>
+                  <successCodes>
+                    <param>0</param>
+                    <param>1</param>
+                  </successCodes>
+                </configuration>
+              </execution>
+              <execution>
+                <id>stop-remote-rice-tomcat</id>
+                <phase>${ks.deploy.shutdown.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user.rice}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.shutdown}</argument>
+                  </arguments>
+                  <successCodes>
+                    <param>0</param>
+                    <param>1</param>
+                  </successCodes>
+                </configuration>
+              </execution>
+              <execution>
+                <id>remove-remote-war-dir</id>
+                <phase>${ks.deploy.remove.old.war.dir.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>rm</argument>
+                    <argument>-rf</argument>
+                    <argument>${ks.deploy.remote.war.dir}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>remove-remote-rice-war-dir</id>
+                <phase>${ks.deploy.remove.old.war.dir.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>rm</argument>
+                    <argument>-rf</argument>
+                    <argument>${ks.deploy.remote.war.dir.rice}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-local-war-file-to-remote</id>
+                <phase>${ks.deploy.install.new.war.file.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.scp.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.local.war.file}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}:${ks.deploy.remote.war.file}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-local-rice-war-file-to-remote</id>
+                <phase>${ks.deploy.install.new.war.file.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.scp.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.local.war.file.rice}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}:${ks.deploy.remote.war.file.rice}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>reset-remote-database</id>
+                <phase>${ks.deploy.reset.remote.db.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.mvn.path}</executable>
+                  <workingDirectory>${ks.hudson.ks-embedded-db.dir}</workingDirectory>
+                  <arguments>
+                    <argument>clean</argument>
+                    <argument>install</argument>
+                    <argument>-Pks-db,oracle</argument>
+                    <argument>-Dks.impex.username=${ks.deploy.impex.username}</argument>
+                    <argument>-Dks.impex.password=${ks.deploy.impex.password}</argument>
+                    <argument>-Dks.impex.dba.password=${ks.deploy.impex.dba.password}</argument>
+                    <argument>-Dks.impex.url=${ks.deploy.impex.url}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>cleanup-remote-tomcat</id>
+                <phase>${ks.deploy.cleanup.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.cleanup}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>start-remote-tomcat</id>
+                <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.startup}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
     <profile>
       <id>deploy-app</id>
