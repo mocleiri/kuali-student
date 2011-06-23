@@ -240,7 +240,7 @@
         <ks.deploy.local.config.file.rice>${project.basedir}/ks-rice-config.xml</ks.deploy.local.config.file.rice>
         <ks.deploy.remote.tomcat.user.rice>deploy</ks.deploy.remote.tomcat.user.rice>
         <ks.deploy.remote.tomcat.home.rice>/usr/local/tomcat_deploy</ks.deploy.remote.tomcat.home.rice>
-        <ks.deploy.remote.config.file.rice>/usr/local/tomcat_deploy/kuali/main/dev/ks-config.xml</ks.deploy.remote.config.file.rice>
+        <ks.deploy.remote.config.file.rice>/usr/local/tomcat_deploy/kuali/main/dev/ks-rice-config.xml</ks.deploy.remote.config.file.rice>
         <ks.deploy.impex.username.rice>KSRICE</ks.deploy.impex.username.rice>
         <ks.deploy.impex.password.rice>KSRICE</ks.deploy.impex.password.rice>
       </properties>
