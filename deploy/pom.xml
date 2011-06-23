@@ -223,14 +223,14 @@
         <ks.deploy.local.config.file>${project.basedir}/ks-standalone-config.xml</ks.deploy.local.config.file>
         <ks.deploy.remote.tomcat.user>root</ks.deploy.remote.tomcat.user>
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat</ks.deploy.remote.tomcat.home>
-        <ks.deploy.remote.config.file>/home/root/kuali/main/dev/ks-standalone-config.xml</ks.deploy.remote.config.file>
+        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-standalone-config.xml</ks.deploy.remote.config.file>
         <ks.deploy.impex.username>KSSTANDALONE</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSSTANDALONE</ks.deploy.impex.password>
 
         <ks.deploy.local.config.file.rice>${project.basedir}/ks-rice-config.xml</ks.deploy.local.config.file.rice>
         <ks.deploy.remote.tomcat.user.rice>deploy</ks.deploy.remote.tomcat.user.rice>
         <ks.deploy.remote.tomcat.home.rice>/usr/local/tomcat_deploy</ks.deploy.remote.tomcat.home.rice>
-        <ks.deploy.remote.config.file.rice>/home/root/kuali/main/dev/ks-rice-config.xml</ks.deploy.remote.config.file.rice>
+        <ks.deploy.remote.config.file.rice>/usr/local/tomcat_deploy/kuali/main/dev/ks-config.xml</ks.deploy.remote.config.file.rice>
         <ks.deploy.impex.username.rice>KSRICE</ks.deploy.impex.username.rice>
         <ks.deploy.impex.password.rice>KSRICE</ks.deploy.impex.password.rice>
       </properties>
