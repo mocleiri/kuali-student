@@ -236,7 +236,7 @@
         <ks.deploy.local.config.file>${project.basedir}/ks-standalone-config.xml</ks.deploy.local.config.file>
         <ks.deploy.remote.tomcat.user>root</ks.deploy.remote.tomcat.user>
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat</ks.deploy.remote.tomcat.home>
-        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-standalone-config.xml
+        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-config.xml
         </ks.deploy.remote.config.file>
         <ks.deploy.impex.username>KSSTANDALONE</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSSTANDALONE</ks.deploy.impex.password>
