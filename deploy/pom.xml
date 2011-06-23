@@ -234,6 +234,8 @@
         <ks.deploy.impex.username>KSSTANDALONE</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSSTANDALONE</ks.deploy.impex.password>
 
+        <ks.deploy.remote.tomcat.startup.rice>/usr/local/tomcat_deploy/bin/startup.sh</ks.deploy.remote.tomcat.startup.rice>
+        <ks.deploy.remote.tomcat.cleanup.rice>/usr/local/tomcat_deploy/bin/cleanup.sh</ks.deploy.remote.tomcat.cleanup.rice>
         <ks.deploy.remote.war.file.rice>/usr/local/tomcat_deploy/webapps/ROOT.war</ks.deploy.remote.war.file.rice>
         <ks.deploy.local.config.file.rice>${project.basedir}/ks-rice-config.xml</ks.deploy.local.config.file.rice>
         <ks.deploy.remote.tomcat.user.rice>deploy</ks.deploy.remote.tomcat.user.rice>
@@ -483,6 +485,26 @@
                 </configuration>
               </execution>
               <execution>
+                <id>cleanup-remote-tomcat-rice</id>
+                <phase>${ks.deploy.cleanup.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.cleanup.rice}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
                 <id>start-remote-tomcat</id>
                 <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
                 <goals>
@@ -499,6 +521,26 @@
                     <argument>${ks.deploy.remote.tomcat.user}</argument>
                     <argument>--command</argument>
                     <argument>${ks.deploy.remote.tomcat.startup}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>start-remote-tomcat-rice</id>
+                <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.startup.rice}</argument>
                   </arguments>
                 </configuration>
               </execution>
