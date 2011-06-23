@@ -210,6 +210,7 @@
     <profile>
       <id>standalone</id>
       <properties>
+        <ks.deploy.remote.tomcat.shutdown.rice>/usr/local/tomcat_deploy/bin/forced-shutdown.sh</ks.deploy.remote.tomcat.shutdown.rice>
         <ks.deploy.local.war.file>${ks.hudson.ks-standalone.dir}/target/ks-standalone-${ks.deploy.version}.war</ks.deploy.local.war.file>
         <ks.deploy.local.war.file.rice>${ks.hudson.ks-rice.dir}/target/ks-rice-${ks.deploy.version}.war</ks.deploy.local.war.file.rice>
 
@@ -335,7 +336,7 @@
                     <argument>--login</argument>
                     <argument>${ks.deploy.remote.tomcat.user.rice}</argument>
                     <argument>--command</argument>
-                    <argument>${ks.deploy.remote.tomcat.shutdown}</argument>
+                    <argument>${ks.deploy.remote.tomcat.shutdown.rice}</argument>
                   </arguments>
                   <successCodes>
                     <param>0</param>
