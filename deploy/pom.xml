@@ -157,9 +157,12 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
+          <groupId>org.kuali.maven.plugins</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>1.2</version>
+            <!-- 
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId> -->
+          <version>1.0-SNAPSHOT</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -261,7 +264,7 @@
             </executions>
           </plugin>
           <plugin>
-            <groupId>org.codehaus.mojo</groupId>
+            <groupId>org.kuali.maven.plugins</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <executions>
               <execution>
