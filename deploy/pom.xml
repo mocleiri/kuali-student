@@ -125,8 +125,10 @@
         <param name="ks.core.datasource.pool.maxSize">20</param>
         <param name="ks.lum.datasource.pool.maxSize">20</param>
         <param name="encryption.key">i44AED6CACC70B4CE47B1A0488ECB1288</param>
-        <param name="ks.rice.url">http://standalone.kuali.org:8081</param>
 
+        <param name="log4j.settings.path">classpath:log4j.properties</param>
+
+        <param name="ks.rice.url">http://standalone.kuali.org:8081</param>
         <param name="ks.rice.personLookup.serviceAddress">${ks.rice.url}/kr/lookup.do</param>
         <param name="ks.rice.actionList.serviceAddress">${ks.rice.url}/kew/ActionList.do</param>
         <param name="ks.rice.docSearch.serviceAddress">${ks.rice.url}/kew/DocumentSearch.do</param>
@@ -236,7 +238,7 @@
         <ks.deploy.local.config.file>${project.basedir}/ks-standalone-config.xml</ks.deploy.local.config.file>
         <ks.deploy.remote.tomcat.user>root</ks.deploy.remote.tomcat.user>
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat</ks.deploy.remote.tomcat.home>
-        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-config.xml
+        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-standalone-config.xml
         </ks.deploy.remote.config.file>
         <ks.deploy.impex.username>KSSTANDALONE</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSSTANDALONE</ks.deploy.impex.password>
