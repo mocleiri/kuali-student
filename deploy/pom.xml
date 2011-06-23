@@ -235,9 +235,6 @@
         <ks.deploy.impex.username.rice>KSRICE</ks.deploy.impex.username.rice>
         <ks.deploy.impex.password.rice>KSRICE</ks.deploy.impex.password.rice>
       </properties>
-    </profile>
-    <profile>
-      <id>deploy-standalone</id>
       <build>
         <plugins>
           <plugin>
