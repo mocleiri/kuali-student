@@ -612,7 +612,7 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.codehaus.mojo</groupId>
+            <groupId>org.kuali.maven.plugins</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <executions>
               <execution>
@@ -792,7 +792,7 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.codehaus.mojo</groupId>
+            <groupId>org.kuali.maven.plugins</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <executions>
               <execution>
