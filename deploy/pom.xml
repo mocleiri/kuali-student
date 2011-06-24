@@ -60,6 +60,7 @@
     <url>https://test.kuali.org/svn/student/deploymentlab/trunk/deploy</url>
   </scm>
   <properties>
+    <kuali.testjar.phase>none</kuali.testjar.phase>
     <ks.deploy.ssh.path>/usr/bin/ssh</ks.deploy.ssh.path>
     <ks.deploy.scp.path>/usr/bin/scp</ks.deploy.scp.path>
     <ks.deploy.mvn.path>/opt/java/apache-maven-3.0/bin/mvn</ks.deploy.mvn.path>
