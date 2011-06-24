@@ -542,6 +542,26 @@
                 </configuration>
               </execution>
               <execution>
+                <id>wait-for-remote-tomcat-startup-rice</id>
+                <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user.rice}</argument>
+                    <argument>--command</argument>
+                    <argument>/usr/local/tomcat_deploy/bin/wait-for-startup.sh</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
                 <id>start-remote-tomcat</id>
                 <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
                 <goals>
@@ -558,6 +578,26 @@
                     <argument>${ks.deploy.remote.tomcat.user}</argument>
                     <argument>--command</argument>
                     <argument>${ks.deploy.remote.tomcat.startup}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>wait-for-remote-tomcat-startup</id>
+                <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user.rice}</argument>
+                    <argument>--command</argument>
+                    <argument>/usr/local/tomcat/bin/wait-for-startup.sh</argument>
                   </arguments>
                 </configuration>
               </execution>
