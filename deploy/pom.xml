@@ -146,7 +146,7 @@
 
     <ks.deploy.rice.config><![CDATA[
       <config>
-        <param name="appserver.url">http://${ks.deploy.remote.public.url}</param>
+        <param name="appserver.url">http://${ks.deploy.remote.public.url}:8081</param>
         <param name="app.context.name"/>
         <param name="app.code"/>
         <param name="application.url">${appserver.url}</param>
