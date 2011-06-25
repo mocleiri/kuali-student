@@ -20,7 +20,7 @@ counter=50
 echo ---------- Determining Tomcat status for $URL - `date`
 until [ "`curl --silent --connect-timeout 3 --max-time 3 -I $URL | grep 'Coyote'`" != "" ];
 do
-  echo --- $counter --- Waiting for for response from $URL - `date`
+  echo --- $counter --- Waiting for response from $URL - `date`
   sleep 3
   counter=`expr $counter - 1`
   if [ "$counter" = 0 ]
