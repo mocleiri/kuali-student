@@ -25,7 +25,7 @@ fi
 echo ---------- Determining Tomcat status for $URL - `date`
 until [ "`curl --silent --connect-timeout 3 --max-time 3 -I $URL | grep 'Coyote'`" != "" ];
 do
-  echo --- $COUNT --- Waiting for response from $URL     - `date`
+  echo --- $COUNT --- Waiting for response from $URL - `date`
   sleep 3
   COUNT=`expr $COUNT - 1`
   if [ "$COUNT" = 0 ]
@@ -35,5 +35,5 @@ do
   fi
 done
 
-echo ---------- Tomcat is ready!                                  - `date`
+echo ---------- Tomcat is ready! - `date`
 
