@@ -63,6 +63,7 @@
     <kuali.testjar.phase>none</kuali.testjar.phase>
     <ks.deploy.ssh.path>/usr/bin/ssh</ks.deploy.ssh.path>
     <ks.deploy.wait.for.tomcat.startup.path>${project.basedir}/wait-for-tomcat-startup.sh</ks.deploy.wait.for.tomcat.startup.path>
+    <ks.deploy.tomcat.retry.attempts>50</ks.deploy.tomcat.retry.attempts>
     <ks.deploy.scp.path>/usr/bin/scp</ks.deploy.scp.path>
     <ks.deploy.mvn.path>/opt/java/apache-maven-3.0.3/bin/mvn</ks.deploy.mvn.path>
     <ks.deploy.auth>/home/tomcat/ks-key.pem</ks.deploy.auth>
@@ -761,6 +762,7 @@
                   <executable>${ks.deploy.wait.for.tomcat.startup.path}</executable>
                   <arguments>
                     <argument>${ks.deploy.remote.public.url}</argument>
+                    <argument>${ks.deploy.tomcat.retry.attempts}</argument>
                   </arguments>
                 </configuration>
               </execution>
