@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# This script waits for approximately 5 minutes to get a response from a Tomcat instance
+# If no response is generated within that time, the script errors out
+#
+
 URL=$1
 
 if [ "$URL" = "" ]
