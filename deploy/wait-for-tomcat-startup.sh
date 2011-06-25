@@ -35,5 +35,5 @@ do
   fi
 done
 
-echo ----------- Tomcat is ready! - `date`
+echo ---------- Tomcat is ready! - `date`
 
