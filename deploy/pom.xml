@@ -758,16 +758,9 @@
                   <goal>exec</goal>
                 </goals>
                 <configuration>
-                  <executable>${ks.deploy.ssh.path}</executable>
+                  <executable>${ks.deploy.wait.for.tomcat.startup.path}</executable>
                   <arguments>
-                    <argument>-i</argument>
-                    <argument>${ks.deploy.auth}</argument>
-                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
-                    <argument>su</argument>
-                    <argument>--login</argument>
-                    <argument>${ks.deploy.remote.tomcat.user}</argument>
-                    <argument>--command</argument>
-                    <argument>${ks.deploy.remote.tomcat.startup}</argument>
+                    <argument>${ks.deploy.remote.public.url}</argument>
                   </arguments>
                 </configuration>
               </execution>
