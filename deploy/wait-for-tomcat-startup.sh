@@ -6,6 +6,7 @@
 #
 
 URL=$1
+COUNT=$2
 
 if [ "$URL" = "" ]
 then
@@ -16,14 +17,18 @@ then
   exit 1
 fi
 
-counter=50
+if [ "$COUNT" = "" ]
+then
+  COUNT=50
+fi
+
 echo ---------- Determining Tomcat status for $URL - `date`
 until [ "`curl --silent --connect-timeout 3 --max-time 3 -I $URL | grep 'Coyote'`" != "" ];
 do
-  echo --- $counter --- Waiting for response from $URL - `date`
+  echo --- $COUNT --- Waiting for response from $URL - `date`
   sleep 3
-  counter=`expr $counter - 1`
-  if [ "$counter" = 0 ]
+  COUNT=`expr $COUNT - 1`
+  if [ "$COUNT" = 0 ]
   then
     echo --------- ERROR: Timed out waiting for Tomcat to start - `date`
     exit 1
