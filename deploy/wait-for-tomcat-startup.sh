@@ -5,7 +5,6 @@
 # If no response is generated within that time, the script errors out
 #
 
-
 URL=$1
 
 if [ "$URL" = "" ]
@@ -18,10 +17,10 @@ then
 fi
 
 counter=50
-echo --------- Determining Tomcat status - `date`
+echo ---------- Determining Tomcat status for $URL - `date`
 until [ "`curl --silent --connect-timeout 3 --max-time 3 -I $URL | grep 'Coyote'`" != "" ];
 do
-  echo --- $counter --- Waiting for Tomcat to start - `date`
+  echo --- $counter --- Waiting for for response from $URL - `date`
   sleep 3
   counter=`expr $counter - 1`
   if [ "$counter" = 0 ]
@@ -31,5 +30,5 @@ do
   fi
 done
 
-echo --------- Tomcat is ready! - `date`
+echo ----------- Tomcat is ready! - `date`
 
