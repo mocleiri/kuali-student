@@ -62,8 +62,9 @@
   <properties>
     <kuali.testjar.phase>none</kuali.testjar.phase>
     <ks.deploy.ssh.path>/usr/bin/ssh</ks.deploy.ssh.path>
+    <ks.deploy.wait.for.tomcat.startup.path>${project.basedir}/wait-for-tomcat-startup.sh</ks.deploy.wait.for.tomcat.startup.path>
     <ks.deploy.scp.path>/usr/bin/scp</ks.deploy.scp.path>
-    <ks.deploy.mvn.path>/opt/java/apache-maven-3.0/bin/mvn</ks.deploy.mvn.path>
+    <ks.deploy.mvn.path>/opt/java/apache-maven-3.0.3/bin/mvn</ks.deploy.mvn.path>
     <ks.deploy.auth>/home/tomcat/ks-key.pem</ks.deploy.auth>
 
     <ks.deploy.remote.user>root</ks.deploy.remote.user>
@@ -91,7 +92,7 @@
     <ks.deploy.local.config.file>${project.basedir}/ks-embedded-config-${ks.deploy.environment.name}.xml</ks.deploy.local.config.file>
     <ks.deploy.embedded.config><![CDATA[
       <config>
-        <param name="appserver.url">http://${ks.deploy.remote.public.url}</param>
+        <param name="appserver.url">${ks.deploy.remote.public.url}</param>
         <param name="app.context.name"/>
         <param name="app.code"/>
         <param name="application.url">${appserver.url}</param>
@@ -111,7 +112,7 @@
 
     <ks.deploy.standalone.config><![CDATA[
       <config>
-        <param name="appserver.url">http://${ks.deploy.remote.public.url}</param>
+        <param name="appserver.url">${ks.deploy.remote.public.url}</param>
         <param name="app.context.name"/>
         <param name="app.code"/>
         <param name="application.url">${appserver.url}</param>
@@ -147,7 +148,7 @@
 
     <ks.deploy.rice.config><![CDATA[
       <config>
-        <param name="appserver.url">http://${ks.deploy.remote.public.url}:8081</param>
+        <param name="appserver.url">${ks.deploy.remote.public.url.rice}</param>
         <param name="app.context.name"/>
         <param name="app.code"/>
         <param name="application.url">${appserver.url}</param>
@@ -208,10 +209,9 @@
         <ks.deploy.environment.name>dev</ks.deploy.environment.name>
         <ks.deploy.remote.tomcat.user>deploy</ks.deploy.remote.tomcat.user>
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat_${ks.deploy.remote.tomcat.user}</ks.deploy.remote.tomcat.home>
-        <ks.deploy.remote.config.file>${ks.deploy.remote.tomcat.home}/kuali/main/dev/ks-embedded-config.xml
-        </ks.deploy.remote.config.file>
+        <ks.deploy.remote.config.file>${ks.deploy.remote.tomcat.home}/kuali/main/dev/ks-embedded-config.xml</ks.deploy.remote.config.file>
         <ks.deploy.remote.hostname>deploy.ks.kuali.org</ks.deploy.remote.hostname>
-        <ks.deploy.remote.public.url>dev.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.remote.public.url>http://dev.ks.kuali.org</ks.deploy.remote.public.url>
         <ks.deploy.impex.url>jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</ks.deploy.impex.url>
         <ks.deploy.impex.username>KSDEV</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSDEV</ks.deploy.impex.password>
@@ -222,7 +222,7 @@
       <properties>
         <ks.deploy.environment.name>staging</ks.deploy.environment.name>
         <ks.deploy.remote.hostname>deploy.ks.kuali.org</ks.deploy.remote.hostname>
-        <ks.deploy.remote.public.url>staging.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.remote.public.url>http://staging.ks.kuali.org</ks.deploy.remote.public.url>
         <ks.deploy.remote.tomcat.user>staging</ks.deploy.remote.tomcat.user>
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat_staging</ks.deploy.remote.tomcat.home>
         <ks.deploy.remote.config.file>/home/staging/kuali/main/dev/ks-embedded-config.xml</ks.deploy.remote.config.file>
@@ -241,14 +241,14 @@
 
         <ks.deploy.environment.name>standalone</ks.deploy.environment.name>
         <ks.deploy.remote.hostname>standalone.ks.kuali.org</ks.deploy.remote.hostname>
-        <ks.deploy.remote.public.url>standalone.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.remote.public.url>http://standalone.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.remote.public.url.rice>http://standalone.ks.kuali.org:8081</ks.deploy.remote.public.url.rice>
         <ks.deploy.impex.url>jdbc:oracle:thin:@standalone.ks.kuali.org:1521:KS</ks.deploy.impex.url>
 
         <ks.deploy.local.config.file>${project.basedir}/ks-standalone-config.xml</ks.deploy.local.config.file>
         <ks.deploy.remote.tomcat.user>root</ks.deploy.remote.tomcat.user>
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat</ks.deploy.remote.tomcat.home>
-        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-standalone-config.xml
-        </ks.deploy.remote.config.file>
+        <ks.deploy.remote.config.file>/usr/local/tomcat/kuali/main/dev/ks-standalone-config.xml</ks.deploy.remote.config.file>
         <ks.deploy.impex.username>KSSTANDALONE</ks.deploy.impex.username>
         <ks.deploy.impex.password>KSSTANDALONE</ks.deploy.impex.password>
 
@@ -608,7 +608,7 @@
       </build>
     </profile>
     <profile>
-      <id>deploy-app</id>
+      <id>deploy-embedded</id>
       <build>
         <plugins>
           <plugin>
@@ -733,6 +733,26 @@
               </execution>
               <execution>
                 <id>start-remote-tomcat</id>
+                <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${ks.deploy.ssh.path}</executable>
+                  <arguments>
+                    <argument>-i</argument>
+                    <argument>${ks.deploy.auth}</argument>
+                    <argument>${ks.deploy.remote.user}@${ks.deploy.remote.hostname}</argument>
+                    <argument>su</argument>
+                    <argument>--login</argument>
+                    <argument>${ks.deploy.remote.tomcat.user}</argument>
+                    <argument>--command</argument>
+                    <argument>${ks.deploy.remote.tomcat.startup}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>wait-for-tomcat-startup</id>
                 <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
                 <goals>
                   <goal>exec</goal>
