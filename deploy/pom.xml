@@ -752,6 +752,7 @@
                   </arguments>
                 </configuration>
               </execution>
+              <!-- 
               <execution>
                 <id>wait-for-tomcat-startup</id>
                 <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
@@ -764,6 +765,23 @@
                     <argument>${ks.deploy.remote.public.url}</argument>
                     <argument>${ks.deploy.tomcat.retry.attempts}</argument>
                   </arguments>
+                </configuration>
+              </execution> -->
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.kuali.maven.plugins</groupId>
+            <artifactId>maven-http-plugin</artifactId>
+            <version>1.0.1</version>
+            <executions>
+              <execution>
+                <id>wait-for-tomcat-startup</id>
+                <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
+                <goals>
+                  <goal>wait</goal>
+                </goals>
+                <configuration>
+                  <url>${ks.deploy.remote.public.url}</url>
                 </configuration>
               </execution>
             </executions>
