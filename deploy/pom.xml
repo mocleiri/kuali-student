@@ -275,7 +275,7 @@
     <profile>
       <id>standalone</id>
       <properties>
-        <ks.deploy.remote.war.dir.rice>/usr/local/tomcat_deploy/webapps/ROOT</ks.deploy.remote.war.dir.rice>
+        <ks.deploy.remote.war.dir.rice>/usr/local/tomcat_deploy/webapps/ks-rice</ks.deploy.remote.war.dir.rice>
         <ks.deploy.remote.tomcat.shutdown.rice>/usr/local/tomcat_deploy/bin/forced-shutdown.sh</ks.deploy.remote.tomcat.shutdown.rice>
         <ks.deploy.local.war.file>${ks.hudson.ks-standalone.dir}/target/ks-standalone-${ks.deploy.version}.war</ks.deploy.local.war.file>
         <ks.deploy.local.war.file.rice>${ks.hudson.ks-rice.dir}/target/ks-rice-${ks.deploy.version}.war</ks.deploy.local.war.file.rice>
@@ -295,7 +295,7 @@
 
         <ks.deploy.remote.tomcat.startup.rice>/usr/local/tomcat_deploy/bin/startup.sh</ks.deploy.remote.tomcat.startup.rice>
         <ks.deploy.remote.tomcat.cleanup.rice>/usr/local/tomcat_deploy/bin/cleanup.sh</ks.deploy.remote.tomcat.cleanup.rice>
-        <ks.deploy.remote.war.file.rice>/usr/local/tomcat_deploy/webapps/ROOT.war</ks.deploy.remote.war.file.rice>
+        <ks.deploy.remote.war.file.rice>/usr/local/tomcat_deploy/webapps/ks-rice.war</ks.deploy.remote.war.file.rice>
         <ks.deploy.local.config.file.rice>${project.basedir}/ks-rice-config.xml</ks.deploy.local.config.file.rice>
         <ks.deploy.remote.tomcat.user.rice>deploy</ks.deploy.remote.tomcat.user.rice>
         <ks.deploy.remote.tomcat.home.rice>/usr/local/tomcat_deploy</ks.deploy.remote.tomcat.home.rice>
