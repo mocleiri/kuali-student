@@ -284,7 +284,7 @@
         <ks.deploy.environment.name>standalone</ks.deploy.environment.name>
         <ks.deploy.remote.hostname>standalone.ks.kuali.org</ks.deploy.remote.hostname>
         <ks.deploy.remote.public.url>http://standalone.ks.kuali.org</ks.deploy.remote.public.url>
-        <ks.deploy.remote.public.url.rice>http://standalone.ks.kuali.org:8081</ks.deploy.remote.public.url.rice>
+        <ks.deploy.remote.public.url.rice>http://standalone.ks.kuali.org:8081/ks-rice</ks.deploy.remote.public.url.rice>
         <ks.deploy.impex.url>jdbc:oracle:thin:@standalone.ks.kuali.org:1521:KS</ks.deploy.impex.url>
 
         <ks.deploy.local.config.file>${project.basedir}/ks-standalone-config.xml</ks.deploy.local.config.file>
