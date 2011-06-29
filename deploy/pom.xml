@@ -155,6 +155,7 @@
     <param name="ks.core.datasource.poolPreparedStatements">true</param>
     <param name="ks.core.datasource.maxOpenPreparedStatements">20</param>
 
+    <param name="keystore.file">/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/rice.keystore</param>
     <param name="ks.rice.url">http://standalone.ks.kuali.org:8081/ks-rice</param>
     <param name="serviceServletUrl">${application.url}/services/</param>
     <param name="ks.rice.personLookup.serviceAddress">${ks.rice.url}/kr/lookup.do</param>
@@ -198,7 +199,7 @@
    <param name="ks.core.datasource.pool.maxSize">10</param>
    <param name="ks.core.datasource.pool.maxWait">600000</param>
 
-
+   <param name="keystore.file">/usr/local/tomcat_deploy/webapps/ks-rice/WEB-INF/classes/rice.keystore</param>
    <param name="lum.application.url">http://standalone.ks.kuali.org</param>
 
    <param name="kim.cache.permission.max.size">3000</param>
