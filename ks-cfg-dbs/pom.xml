@@ -827,7 +827,7 @@
     </profile>
     <profile>
       <!-- This profile commits any Impex changes to SCM -->
-      <id>commit-impex-changes</id>
+      <id>remove-invalid-data-files</id>
       <modules>
         <module>ks-standalone-db</module>
         <module>ks-embedded-db</module>
@@ -874,17 +874,6 @@
             </configuration>
             <executions>
               <execution>
-                <id>add</id>
-                <phase>${scm.phase}</phase>
-                <goals>
-                  <goal>add</goal>
-                  <goal>checkin</goal>
-                </goals>
-                <configuration>
-                  <includes>**/src/main/impex/*.xml,**/src/main/impex/*.dtd</includes>
-                </configuration>
-              </execution>
-              <execution>
                 <id>remove</id>
                 <phase>${scm.phase}</phase>
                 <goals>
@@ -900,5 +889,64 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <!-- This profile commits any Impex changes to SCM -->
+      <id>commit-impex-changes</id>
+      <modules>
+        <module>ks-standalone-db</module>
+        <module>ks-embedded-db</module>
+      </modules>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.kuali.maven.plugins</groupId>
+            <artifactId>maven-impex-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>morph-xml</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>generate-data-dtd</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>generate-oracle-sql</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>generate-mysql-sql</id>
+                <phase>none</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.kuali.maven.plugins</groupId>
+            <artifactId>maven-scm-plugin</artifactId>
+            <configuration>
+              <message>Automated Impex update</message>
+            </configuration>
+            <executions>
+              <execution>
+                <id>add</id>
+                <phase>${scm.phase}</phase>
+                <goals>
+                  <goal>add</goal>
+                  <goal>checkin</goal>
+                </goals>
+                <configuration>
+                  <includes>**/src/main/impex/*.xml,**/src/main/impex/*.dtd</includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
+  <scm>
+    <connection>scm:svn:https://test.kuali.org/svn/student/sandbox/ks-1.3-KSLAB-2125</connection>
+    <developerConnection>scm:svn:https://test.kuali.org/svn/student/sandbox/ks-1.3-KSLAB-2125</developerConnection>
+    <url>https://test.kuali.org/svn/student/sandbox/ks-1.3-KSLAB-2125</url>
+  </scm>
 </project>
