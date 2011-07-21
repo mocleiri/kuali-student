@@ -113,4 +113,84 @@ class RiceLocators < Locators
     self.locator
   end
   
+  # Test View 1
+  
+  def test_view_1
+    self.type  = 'link'
+    self.value = 'Test View 1'
+    self.locator
+  end
+  
+  # 4 chars
+  def test_view_1_field_1
+    self.type  = 'name'
+    self.value = 'field1'
+    self.locator
+  end
+  
+  # Text - no input
+  def test_view_1_field_2
+    self.type  = 'id'
+    self.value = 'id_7049_attribute_span'
+    self.locator
+  end
+  
+  # mm/dd/yyyy
+  def test_view_1_field_3
+    self.type  = 'name'
+    self.value = 'field3'
+    self.locator
+  end
+  
+  # Select
+  def test_view_1_field_4
+    self.type  = 'name'
+    self.value = 'field4'
+    self.locator
+  end
+  
+  # Text
+  def test_view_1_field_6
+    self.type  = 'name'
+    self.value = 'field6'
+    self.locator
+  end
+  
+  # Text
+  # name doesn't match label
+  def test_view_1_field_8
+    self.type  = 'name'
+    self.value = 'field7'
+    self.locator
+  end
+  
+  # Text
+  def test_view_1_field_6
+    self.type  = 'name'
+    self.value = 'field6'
+    self.locator
+  end
+  
+  # Radio
+  def test_view_1_field_34(selection)
+    self.type  = 'id'
+    
+    if(selection == 'Yes')
+      self.value = 'id_7126_attribute1'
+    elsif(selection == 'No')
+      self.value = 'id_7126_attribute2'
+    elsif(selection == 'Both')
+      self.value = 'id_7126_attribute2'
+    end
+    
+    self.locator
+  end
+  
+  # Save
+  def test_view_1_save
+    self.type  = 'id'
+    self.value = 'id_7007'
+    self.locator
+  end
+  
 end

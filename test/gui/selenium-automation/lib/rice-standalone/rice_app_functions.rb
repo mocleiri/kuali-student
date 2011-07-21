@@ -66,4 +66,19 @@ class RiceAppFunctions < AppFunctions
     @selenium.is_text_present("Created sample travel request")
   end
   
+  
+  def test_view_1_interface(field1='TEST', field3='01/11/2011', field4='Clearing Account Type', field6='test', field8='1', field34='Both')
+    
+    @selenium.click @locators.test_view_1, :wait_for => :page
+    @selenium.type @locators.test_view_1_field_1, field1
+    @selenium.type @locators.test_view_1_field_3, field3
+    @selenium.select @locators.test_view_1_field_4, field4
+    @selenium.type @locators.test_view_1_field_6, field6
+    @selenium.type @locators.test_view_1_field_8, field8
+    #@selenium.check @locators.test_view_1_field_34(field34)
+    
+    #@selenium.click @locators.test_view_1_save, :wait_for => :page
+    true
+  end
+  
 end
