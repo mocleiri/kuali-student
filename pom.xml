@@ -213,6 +213,14 @@
           </configuration>
         </plugin>
 
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <configuration>
+            <webappDirectory>${project.build.directory}/${project.artifactId}-webapp</webappDirectory>
+          </configuration>
+        </plugin>
+
         <!-- Codehaus GWT Maven Plugin Configuration -->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
