@@ -172,8 +172,8 @@
    <param name="app.context.name">ks-rice</param>
    <param name="app.code">${app.context.name}</param>
    <param name="application.url">${appserver.url}</param>
-   <param name="externalizable.help.url">/kr/static/help/</param>
-   <param name="externalizable.images.url">/kr/static/images/</param>
+   <param name="externalizable.help.url">${ks.deploy.remote.public.url.rice}/kr/static/help/</param>
+   <param name="externalizable.images.url">${ks.deploy.remote.public.url.rice}/kr/static/images/</param>
    <param name="kr.externalizable.images.url">${externalizable.images.url}</param>
    <param name="travel.externalizable.images.url">${externalizable.images.url}</param>
 
