@@ -1,7 +1,6 @@
 package org.kuali.student.contract.mojo;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +16,8 @@ import org.kuali.student.contract.model.validation.ServiceContractModelValidator
 /**
  * The plugin entrypoint which is used to generate the html wiki doc of the service interface.
  * @goal kscontractdoc
+ * @phase site
+ * @requiresProject true
  */
 public class KSContractDocMojo extends AbstractMojo {
 
@@ -29,11 +30,19 @@ public class KSContractDocMojo extends AbstractMojo {
      */
     private File htmlDirectory;
 
+    public File getHtmlDirectory() {
+        return htmlDirectory;
+    }
+
+    public List<String> getSourceDirs() {
+        return sourceDirs;
+    }
+
     public void setHtmlDirectory(File htmlDirectory) {
         this.htmlDirectory = htmlDirectory;
     }
 
-    public void setsourceDirs(List<String> sourceDirs) {
+    public void setSourceDirs(List<String> sourceDirs) {
         this.sourceDirs = sourceDirs;
     }
 
@@ -47,9 +56,8 @@ public class KSContractDocMojo extends AbstractMojo {
     private boolean validate(ServiceContractModel model) {
         Collection<String> errors = new ServiceContractModelValidator(model).validate();
         if (errors.size() > 0) {
-            StringBuffer buf = new StringBuffer();
-            buf.append(errors.size()
-                    + " errors found while validating the data.");
+            StringBuilder buf = new StringBuilder();
+            buf.append(errors.size()).append(" errors found while validating the data.");
             return false;
 
 
@@ -57,6 +65,7 @@ public class KSContractDocMojo extends AbstractMojo {
         return true;
     }
 
+    @Override
     public void execute() throws MojoExecutionException {
         ServiceContractModel model = null;
         HtmlContractWriter writer = null;

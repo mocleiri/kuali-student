@@ -481,7 +481,7 @@ public class ServiceContractModelQDoxLoader implements
             ms.setXmlObject(messageStructureJavaClass.getName());
             ms.setShortName(shortName);
             ms.setId(ms.getXmlObject() + "." + ms.getShortName());
-            ms.setName(calcMissing(calcName(getterMethod, setterMethod,
+            ms.setName(calcMissing(calcName(messageStructureJavaClass, getterMethod, setterMethod,
                     beanField, shortName)));
             ms.setType(calcTypeOfGetterMethodReturn(getterMethod));
             if (ms.getType().equals("Object")) {
@@ -498,7 +498,7 @@ public class ServiceContractModelQDoxLoader implements
             ms.setRequired(calcRequired(getterMethod, setterMethod, beanField));
             ms.setReadOnly(calcReadOnly(getterMethod, setterMethod, beanField));
             ms.setCardinality(this.calcCardinalityOfReturn(getterMethod));
-            ms.setDescription(calcMissing(calcDescription(getterMethod, setterMethod,
+            ms.setDescription(calcMissing(calcDescription(messageStructureJavaClass, getterMethod, setterMethod,
                     beanField)));
             ms.setImplNotes(calcImplementationNotes(getterMethod, setterMethod, beanField));
             ms.setStatus("???");
@@ -677,13 +677,13 @@ public class ServiceContractModelQDoxLoader implements
         return bldr.toString();
     }
 
-    private String calcName(JavaMethod getterMethod,
+    private String calcName(JavaClass mainClass, JavaMethod getterMethod,
             JavaMethod setterMethod, JavaField beanField, String shortName) {
         String name = this.calcNameFromTag(getterMethod, setterMethod, beanField);
         if (name != null) {
             return name;
         }
-        name = this.calcNameFromNameEmbeddedInDescription(getterMethod, setterMethod, beanField);
+        name = this.calcNameFromNameEmbeddedInDescription(mainClass, getterMethod, setterMethod, beanField);
         if (name != null) {
             return name;
         }
@@ -699,9 +699,9 @@ public class ServiceContractModelQDoxLoader implements
         return null;
     }
 
-    private String calcNameFromNameEmbeddedInDescription(JavaMethod getterMethod,
+    private String calcNameFromNameEmbeddedInDescription(JavaClass mainClass, JavaMethod getterMethod,
             JavaMethod setterMethod, JavaField beanField) {
-        String nameDesc = this.calcNameDescription(getterMethod, setterMethod,
+        String nameDesc = this.calcMethodComment(mainClass, getterMethod, setterMethod,
                 beanField);
         String[] parsed = parseNameDesc(nameDesc);
         return parsed[0];
@@ -728,60 +728,66 @@ public class ServiceContractModelQDoxLoader implements
         return parsed;
     }
 
-    private String calcDescription(JavaMethod getterMethod,
+    private String calcDescription(JavaClass mainClass, JavaMethod getterMethod,
             JavaMethod setterMethod, JavaField beanField) {
-        String nameDesc = this.calcNameDescription(getterMethod, setterMethod,
+        String nameDesc = this.calcMethodComment(mainClass, getterMethod, setterMethod,
                 beanField);
         String[] parsed = parseNameDesc(nameDesc);
         return parsed[1];
     }
 
-    private String calcNameDescription(JavaMethod getterMethod,
+    private String calcMethodComment(JavaClass mainClass, JavaMethod getterMethod,
             JavaMethod setterMethod,
             JavaField beanField) {
         String desc = null;
         desc = getterMethod.getComment();
-        if (isDescriptionOk(desc)) {
+        if (isCommentNotEmpty(desc)) {
             return desc;
         }
         if (setterMethod != null) {
             desc = setterMethod.getComment();
-            if (isDescriptionOk(desc)) {
+            if (isCommentNotEmpty(desc)) {
                 return desc;
             }
         }
         if (beanField != null) {
             desc = beanField.getComment();
-            if (isDescriptionOk(desc)) {
+            if (isCommentNotEmpty(desc)) {
                 return desc;
             }
         }
-        desc = calcDescriptionRecursively(getterMethod);
-        if (isDescriptionOk(desc)) {
+        desc = calcMethodCommentRecursively(mainClass, getterMethod);
+        if (isCommentNotEmpty(desc)) {
             return desc;
         }
-        desc = calcDescriptionRecursively(setterMethod);
-        if (isDescriptionOk(desc)) {
+        desc = calcMethodCommentRecursively(mainClass, setterMethod);
+        if (isCommentNotEmpty(desc)) {
             return desc;
         }
         return null;
     }
 
-    private String calcDescriptionRecursively(JavaMethod method) {
+    private String calcMethodCommentRecursively(JavaClass mainClass, JavaMethod method) {
         if (method == null) {
             return null;
         }
         String desc = method.getComment();
-        if (isDescriptionOk(desc)) {
+        if (isCommentNotEmpty(desc)) {
             return desc;
         }
-        desc = calcDescriptionRecursively(findInterfaceMethod(method.getParentClass(), method));
-        if (isDescriptionOk(desc)) {
-            return desc;
+        JavaMethod infcMethod = findInterfaceMethod(mainClass, method);
+        if (infcMethod != null) {
+            desc = infcMethod.getComment();
+            if (isCommentNotEmpty(desc)) {
+                return desc;
+            }
         }
-        desc = calcDescriptionRecursively(findSuperMethod(method));
-        if (isDescriptionOk(desc)) {
-            return desc;
+        JavaMethod superMethod = findSuperMethod(method);
+        if (superMethod != null) {
+            desc = superMethod.getComment();
+            if (isCommentNotEmpty(desc)) {
+                return desc;
+            }
         }
         return null;
     }
@@ -801,25 +807,63 @@ public class ServiceContractModelQDoxLoader implements
         return null;
     }
 
-    private JavaMethod findInterfaceMethod(JavaClass parentClass, JavaMethod method) {
+    private JavaMethod findInterfaceMethod(JavaClass mainClass, JavaMethod method) {
         String callSig = method.getCallSignature();
+        JavaClass classToSearch = mainClass;       
+//        log ("Searching mainClass " + classToSearch.getName() + " for " + callSig, callSig);
         while (true) {
-            for (JavaClass infcClass : parentClass.getImplementedInterfaces()) {
-                for (JavaMethod superMethod : infcClass.getMethods()) {
-                    if (callSig.equals(superMethod.getCallSignature())) {
-                        return superMethod;
-                    }
+            for (JavaClass infcClass : classToSearch.getImplementedInterfaces()) {
+                JavaMethod meth = this.findMethodOnInterfaceRecursively(infcClass, callSig);
+                if (meth != null) {
+//                    recursionCntr = 0;
+                    return meth;
                 }
-            }
-            JavaClass grandParent = parentClass.getSuperJavaClass();
-            if (grandParent == null) {
+            }         
+            JavaClass superClass = classToSearch.getSuperJavaClass();
+            if (superClass == null) {
+//                recursionCntr = 0;                
+//                log ("Did not find " + callSig + " on " + mainClass, callSig); 
                 return null;
-            }
-            parentClass = grandParent;
+            }           
+            classToSearch = superClass;
+//            log ("Searching superClass " + classToSearch.getName() + " for " + callSig, callSig);                
         }
     }
 
-    private boolean isDescriptionOk(String desc) {
+//    private void log (String message, String callSig) {
+//        if (callSig.equalsIgnoreCase("getTypeKey()")) {
+//            for (int i = 0; i < this.recursionCntr; i++) {
+//                System.out.print (" ");
+//            }
+//            System.out.println (message);
+//        }
+//    }
+    
+//    private int recursionCntr = 0;
+    private JavaMethod findMethodOnInterfaceRecursively(JavaClass infcClass, String callSig) {
+//        recursionCntr++;
+//        log ("Searching interface " + infcClass.getName() + " for " + callSig, callSig);
+        for (JavaMethod infcMethod : infcClass.getMethods()) {
+            if (callSig.equals(infcMethod.getCallSignature())) {
+//                log (callSig + " found on " + infcClass.getName() + "!!!!!!!!!!!!!!!!", callSig); 
+//                recursionCntr--;
+                return infcMethod;
+            }
+        }
+        for (JavaClass subInfc : infcClass.getImplementedInterfaces()) {
+//            log ("Searching  sub-interface " + subInfc.getName() + " for " + callSig, callSig);
+            JavaMethod infcMethod = findMethodOnInterfaceRecursively(subInfc, callSig);
+            if (infcMethod != null) {
+//                recursionCntr--;
+                return infcMethod;
+            }
+        }
+//        log (callSig + " not found on " + infcClass.getName(), callSig);
+//        this.recursionCntr--;
+        return null;
+    }
+
+    private boolean isCommentNotEmpty(String desc) {
         if (desc == null) {
             return false;
         }

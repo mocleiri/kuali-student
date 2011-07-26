@@ -39,5 +39,5 @@ public interface HasMeta {
      * @readOnly
      */
 
-    public Meta getMetaInfo();
+    public Meta getMeta();
 }

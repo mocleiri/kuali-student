@@ -19,9 +19,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.kuali.student.contract.model.test.source.IdEntity;
 
-import org.kuali.student.contract.model.test.source.Relationship;
 
 /**
  * Information about a Relationship.

@@ -14,14 +14,9 @@ package org.kuali.student.contract.model.test.source;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.kuali.student.contract.model.test.source.KeyEntity;
-import org.kuali.student.contract.model.test.source.EntityInfo;
 
 @SuppressWarnings("serial")
 @XmlTransient

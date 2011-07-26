@@ -93,14 +93,13 @@ public class HtmlContractWriterTest {
         Collection<String> errors =
                 new ServiceContractModelValidator(model).validate();
         if (errors.size() > 0) {
-            StringBuffer buf = new StringBuffer();
-            buf.append(errors.size()
-                    + " errors found while validating the data.");
+            StringBuilder buf = new StringBuilder();
+            buf.append(errors.size()).append(" errors found while validating the data.");
             int cnt = 0;
             for (String msg : errors) {
                 cnt++;
                 buf.append("\n");
-                buf.append("*error*" + cnt + ":" + msg);
+                buf.append("*error*").append(cnt).append(":").append(msg);
             }
 
             fail(buf.toString());

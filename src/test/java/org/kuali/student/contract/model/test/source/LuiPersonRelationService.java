@@ -235,19 +235,6 @@ public interface LuiPersonRelationService extends TypeService, StateService {
     public List<String> findAllValidLuisForPerson(@WebParam(name = "personId") String personId, @WebParam(name = "luiPersonRelationTypeKey") String luiPersonRelationTypeKey, @WebParam(name = "relationState") String relationState, @WebParam(name = "atpId") String atpId, @WebParam(name = "context") ContextInfo context) throws DoesNotExistException, DisabledIdentifierException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
 
     /**
-     * Retrieves detail of LUI Person Relation Ids
-     *
-     * @param criteria Criteria to be used for retrieval of multiple LUI Person Relation identifiers
-     * @param context                   Context information containing the principalId and locale information about the caller of service operation
-     * @return Simple list of LUI Person Relation identifiers
-     * @throws InvalidParameterException invalid relation criteria
-     * @throws MissingParameterException missing relation criteria
-     * @throws OperationFailedException  unable to complete request
-     * @throws PermissionDeniedException authorization failure
-     */
-    public List<String> searchForLuiPersonRelationIds(@WebParam(name = "criteria") CriteriaInfo criteria, @WebParam(name = "context") ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
-
-    /**
      * Creates relation between the specified Person and LUI
      *
      * @param personId              Person Identifier

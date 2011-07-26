@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LuiPersonRelationInfo", propOrder = {"id", "typeKey", "stateKey", "luiId", "personId", "effectiveDate", "expirationDate", "metaInfo", "attributes", "_futureElements"})
+@XmlType(name = "LuiPersonRelationInfo", propOrder = {"id", "typeKey", "stateKey", "luiId", "personId", "effectiveDate", "expirationDate", "meta", "attributes", "_futureElements"})
 public class LuiPersonRelationInfo extends RelationshipInfo
         implements LuiPersonRelation, Serializable {
 
