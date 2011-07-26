@@ -10,6 +10,7 @@
 
 require File.dirname(__FILE__) + '/tsung-api.rb'
 require File.dirname(__FILE__) + '/common.rb'
+require 'yaml'
 require "rexml/document"
 include REXML
 include Common
