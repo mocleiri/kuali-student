@@ -24,12 +24,15 @@
             <password>KSLIQUIBASE</password>
             <driver>oracle.jdbc.driver.OracleDriver</driver>
             <url>jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</url>
+            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
           </configuration>
-          <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.3.0</version>
-          </dependency>
+          <dependencies>
+            <dependency>
+              <groupId>com.oracle</groupId>
+              <artifactId>ojdbc14</artifactId>
+              <version>10.2.0.3.0</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
