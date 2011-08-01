@@ -6,13 +6,20 @@
     <artifactId>kuali-common</artifactId>
     <version>18</version>
   </parent>
-
   <groupId>org.kuali.student.db</groupId>
   <artifactId>ks-embedded-db</artifactId>
   <version>1.2-SNAPSHOT</version>
-
   <name>KS Embedded DB - Liquibase</name>
   <description>Kuali Student Embedded DB implemented via Liquibase</description>
-
-
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>2.0.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
