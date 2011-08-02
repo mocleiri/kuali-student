@@ -18,13 +18,15 @@
           <artifactId>liquibase-maven-plugin</artifactId>
           <version>2.0.1</version>
           <configuration>
-            <changeLogFile>${project.basedir}/src/test/resources/simple.xml</changeLogFile>
+            <changeLogFile>simple.xml</changeLogFile>
             <defaultSchemaName>KSLIQUIBASE</defaultSchemaName>
             <username>KSLIQUIBASE</username>
             <password>KSLIQUIBASE</password>
             <driver>oracle.jdbc.driver.OracleDriver</driver>
             <url>jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</url>
             <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+            <dropFirst>true</dropFirst>
+            <verbose>true</verbose>
           </configuration>
           <dependencies>
             <dependency>
