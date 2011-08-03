@@ -139,22 +139,20 @@ vertical-align:top;
 <td id=structureName colspan=2>AccreditationType</td>
 </tr>
 <tr>
-<th class=h>Version</th>
-</tr>
-<tr>
 <th rowspan=3 class=h>Usage</th>
 <td id="structureVersion" colspan=2><a href="PescService.html">PescService</a>
 </td></tr>
 <tr>
 <td id="structureVersion" colspan=2></td></tr>
 <tr>
-<td id="structureVersion" colspan=2></td></tr>
+<td id="structureVersion" colspan=2><a href="OrganizationType.html">OrganizationType</a>
+</td></tr>
 <th class=h>Type</th>
 <td id=structureVersion colspan=2>Complex</td>
 </tr>
 </table>
 <h2>Description</h2>
-Accreditation Organization: This will be used to house the Accrediting Body and the Accrediting Body Name if the Accrediting Body Acronym is not known, represented by "Other"
+[xs:annotation: null]
 <h2><a name="StructureDefinition"></a>Structure Definition</h2>
 <table class="structTable">
 <tr>
@@ -162,32 +160,41 @@ Accreditation Organization: This will be used to house the Accrediting Body and 
 <th class="h">Name</th>
 <th class="h">Type</th>
 <th class="h">Description</th>
-<th class="h">Required</th>
+<th class="h">Required?</th>
+<th class="h">Read only?</th>
 <th class="h">Cardinality</th>
 <th class="h">XML Attribute?</th>
-<th class="h">Data Team Status</th>
-<th class="h">Comments/Feedback</th>
+<th class="h">Implementation Notes</th>
 </tr>
 <tr>
 <td class="structSName">AccreditingBodyCode</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
-<td class="structDesc">Acronym Enumerated List of values of the different Accrediting Bodies including &quot;Other&quot; for not known</td>
-<td class="structCard">One</td>
+<td class="structDesc">[xs:annotation: null]</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 <tr>
 <td class="structSName">AccreditingBodyName</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
-<td class="structDesc">If AccreditingBody Acronym is Other, use this optional text field (max length = 80) to enter the Accrediting Body Name.</td>
-<td class="structCard">One</td>
+<td class="structDesc">[xs:annotation: null]</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 <tr>
 <td class="structSName">NoteMessage</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
 <td class="structDesc">???</td>
-<td class="structCard">One</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 </table>
 

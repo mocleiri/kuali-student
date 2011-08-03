@@ -139,22 +139,20 @@ vertical-align:top;
 <td id=structureName colspan=2>TransmissionDataType</td>
 </tr>
 <tr>
-<th class=h>Version</th>
-</tr>
-<tr>
 <th rowspan=3 class=h>Usage</th>
 <td id="structureVersion" colspan=2><a href="PescService.html">PescService</a>
 </td></tr>
 <tr>
 <td id="structureVersion" colspan=2></td></tr>
 <tr>
-<td id="structureVersion" colspan=2></td></tr>
+<td id="structureVersion" colspan=2><a href="CollegeTranscriptCollegeTranscript.html">CollegeTranscriptCollegeTranscript</a>
+</td></tr>
 <th class=h>Type</th>
 <td id=structureVersion colspan=2>Complex</td>
 </tr>
 </table>
 <h2>Description</h2>
-TransmissionData Type
+???
 <h2><a name="StructureDefinition"></a>Structure Definition</h2>
 <table class="structTable">
 <tr>
@@ -162,46 +160,131 @@ TransmissionData Type
 <th class="h">Name</th>
 <th class="h">Type</th>
 <th class="h">Description</th>
-<th class="h">Required</th>
+<th class="h">Required?</th>
+<th class="h">Read only?</th>
 <th class="h">Cardinality</th>
 <th class="h">XML Attribute?</th>
-<th class="h">Data Team Status</th>
-<th class="h">Comments/Feedback</th>
+<th class="h">Implementation Notes</th>
 </tr>
 <tr>
 <td class="structSName">DocumentID</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
 <td class="structDesc">???</td>
-<td class="structCard">One</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 <tr>
 <td class="structSName">CreatedDateTime</td>
 <td class="structLName">???</td>
 <td class="structType">dateTime</td>
 <td class="structDesc">???</td>
-<td class="structCard">One</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">DocumentTypeCode</td>
+<td class="structLName">???</td>
+<td class="structType">string</td>
+<td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 <tr>
 <td class="structSName">TransmissionType</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
 <td class="structDesc">???</td>
-<td class="structCard">One</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 <tr>
-<td class="structSName">DocumentType</td>
+<td class="structSName">Source</td>
+<td class="structLName">???</td>
+<td class="structType"><a href="SourceDestinationType.html">SourceDestinationType</a>
+</td><td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">Destination</td>
+<td class="structLName">???</td>
+<td class="structType"><a href="SourceDestinationType.html">SourceDestinationType</a>
+</td><td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">DocumentProcessCode</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
 <td class="structDesc">???</td>
-<td class="structCard">One</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">DocumentOfficialCode</td>
+<td class="structLName">???</td>
+<td class="structType">string</td>
+<td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">DocumentCompleteCode</td>
+<td class="structLName">???</td>
+<td class="structType">string</td>
+<td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">RequestTrackingID</td>
+<td class="structLName">???</td>
+<td class="structType">string</td>
+<td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
+</tr>
+<tr>
+<td class="structSName">UserDefinedExtensions</td>
+<td class="structLName">???</td>
+<td class="structType"><a href="UserDefinedExtensionsType.html">UserDefinedExtensionsType</a>
+</td><td class="structDesc">???</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 <tr>
 <td class="structSName">NoteMessage</td>
 <td class="structLName">???</td>
 <td class="structType">string</td>
 <td class="structDesc">???</td>
-<td class="structCard">One</td>
+<td class="structOpt">???</td>
+<td class="structOpt">&nbsp;</td>
+<td class="structCard">???</td>
+<td class="commentsDesc">&nbsp;</td>
 </tr>
 </table>
 
