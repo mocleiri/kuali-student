@@ -16,7 +16,7 @@
   <parent>
     <groupId>org.kuali</groupId>
     <artifactId>kuali-common</artifactId>
-    <version>15</version>
+    <version>18</version>
   </parent>
   <groupId>org.kuali.student.deploy</groupId>
   <artifactId>ks-deploy</artifactId>
@@ -269,8 +269,8 @@
         <ks.deploy.remote.tomcat.home>/usr/local/tomcat_staging</ks.deploy.remote.tomcat.home>
         <ks.deploy.remote.config.file>/home/staging/kuali/main/dev/ks-embedded-config.xml</ks.deploy.remote.config.file>
         <ks.deploy.impex.url>jdbc:oracle:thin:@deploy.ks.kuali.org:1521:KS</ks.deploy.impex.url>
-        <ks.deploy.impex.username>KSSTAGING</ks.deploy.impex.username>
-        <ks.deploy.impex.password>KSSTAGING</ks.deploy.impex.password>
+        <ks.deploy.impex.username>KSSTAGE</ks.deploy.impex.username>
+        <ks.deploy.impex.password>KSSTAGE</ks.deploy.impex.password>
       </properties>
     </profile>
     <profile>
@@ -793,21 +793,21 @@
                   </arguments>
                 </configuration>
               </execution>
-              <!-- 
-              <execution>
+              <!--
+                <execution>
                 <id>wait-for-tomcat-startup</id>
                 <phase>${ks.deploy.start.remote.tomcat.phase}</phase>
                 <goals>
-                  <goal>exec</goal>
+                <goal>exec</goal>
                 </goals>
                 <configuration>
-                  <executable>${ks.deploy.wait.for.tomcat.startup.path}</executable>
-                  <arguments>
-                    <argument>${ks.deploy.remote.public.url}</argument>
-                    <argument>${ks.deploy.tomcat.retry.attempts}</argument>
-                  </arguments>
+                <executable>${ks.deploy.wait.for.tomcat.startup.path}</executable>
+                <arguments>
+                <argument>${ks.deploy.remote.public.url}</argument>
+                <argument>${ks.deploy.tomcat.retry.attempts}</argument>
+                </arguments>
                 </configuration>
-              </execution> -->
+                </execution> -->
             </executions>
           </plugin>
           <plugin>
