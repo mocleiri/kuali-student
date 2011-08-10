@@ -15,7 +15,7 @@
  */
 package org.kuali.student.loader.organization;
 
-import org.kuali.student.core.dto.TimeAmountInfo;
+import org.kuali.student.common.dto.TimeAmountInfo;
 import org.kuali.student.core.organization.dto.OrgPositionRestrictionInfo;
 
 

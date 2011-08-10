@@ -15,8 +15,8 @@
  */
 package org.kuali.student.loader.program;
 
-import org.kuali.student.core.exceptions.DataValidationErrorException;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.exceptions.DataValidationErrorException;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.program.dto.CoreProgramInfo;
 import org.kuali.student.lum.program.dto.CredentialProgramInfo;
 import org.kuali.student.lum.program.dto.MajorDisciplineInfo;

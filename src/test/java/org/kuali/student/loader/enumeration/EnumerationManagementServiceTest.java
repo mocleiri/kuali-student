@@ -25,7 +25,7 @@ import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
 import org.kuali.student.core.enumerationmanagement.dto.EnumerationInfo;
 import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
 import static org.junit.Assert.*;
-import org.kuali.student.core.exceptions.OperationFailedException;
+import org.kuali.student.common.exceptions.OperationFailedException;
 
 /**
  *

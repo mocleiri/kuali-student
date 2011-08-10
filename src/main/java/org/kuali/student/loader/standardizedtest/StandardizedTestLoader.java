@@ -17,10 +17,10 @@ package org.kuali.student.loader.standardizedtest;
 
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.core.exceptions.AlreadyExistsException;
-import org.kuali.student.core.exceptions.DataValidationErrorException;
-import org.kuali.student.core.exceptions.DoesNotExistException;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.exceptions.AlreadyExistsException;
+import org.kuali.student.common.exceptions.DataValidationErrorException;
+import org.kuali.student.common.exceptions.DoesNotExistException;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.lum.lu.dto.CluInfo;
 import org.kuali.student.lum.lu.dto.CluSetInfo;

@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Properties;
 import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
 import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
-import org.kuali.student.core.exceptions.AlreadyExistsException;
-import org.kuali.student.core.exceptions.DataValidationErrorException;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.exceptions.AlreadyExistsException;
+import org.kuali.student.common.exceptions.DataValidationErrorException;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.loader.organization.OrganizationLoadResult;
 
 /**

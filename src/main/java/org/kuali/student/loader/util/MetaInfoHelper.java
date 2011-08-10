@@ -16,7 +16,7 @@
 package org.kuali.student.loader.util;
 
 import java.util.Date;
-import org.kuali.student.core.dto.MetaInfo;
+import org.kuali.student.common.dto.MetaInfo;
 
 
 

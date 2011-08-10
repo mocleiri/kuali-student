@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.core.exceptions.DataValidationErrorException;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.exceptions.DataValidationErrorException;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.course.dto.CourseInfo;
 import org.kuali.student.lum.course.service.CourseService;
 

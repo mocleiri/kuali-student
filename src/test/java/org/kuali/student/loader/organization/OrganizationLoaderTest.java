@@ -17,13 +17,13 @@ package org.kuali.student.loader.organization;
 
 import java.util.Date;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.kuali.student.core.organization.service.OrganizationService;
-import static org.junit.Assert.*;
 
 /**
  *

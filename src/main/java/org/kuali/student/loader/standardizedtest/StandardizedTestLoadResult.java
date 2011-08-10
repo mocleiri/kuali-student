@@ -15,8 +15,8 @@
  */
 package org.kuali.student.loader.standardizedtest;
 
-import org.kuali.student.core.exceptions.DataValidationErrorException;
-import org.kuali.student.core.validation.dto.ValidationResultInfo;
+import org.kuali.student.common.exceptions.DataValidationErrorException;
+import org.kuali.student.common.validation.dto.ValidationResultInfo;
 import org.kuali.student.lum.lu.dto.CluInfo;
 import org.kuali.student.lum.lu.dto.CluSetInfo;
 

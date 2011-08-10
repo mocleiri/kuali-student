@@ -15,7 +15,7 @@
  */
 package org.kuali.student.loader.util;
 
-import org.kuali.student.core.dto.AmountInfo;
+import org.kuali.student.common.dto.AmountInfo;
 
 
 /**
