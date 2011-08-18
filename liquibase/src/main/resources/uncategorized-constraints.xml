@@ -1,0 +1,218 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+  <changeSet author="andy (generated)" id="1311191427300-468">
+    <addPrimaryKey columnNames="NMSPC_CD, PARM_DTL_TYP_CD" constraintName="KRCR_PARM_DTL_TYP_TP1" tableName="KRCR_PARM_DTL_TYP_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-469">
+    <addPrimaryKey columnNames="NMSPC_CD, PARM_DTL_TYP_CD, PARM_NM, APPL_ID" constraintName="KRCR_PARM_TP1" tableName="KRCR_PARM_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-499">
+    <addPrimaryKey columnNames="COUNTY_CD, STATE_CD, POSTAL_CNTRY_CD" constraintName="KRLC_CNTY_TP1" tableName="KRLC_CNTY_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-500">
+    <addPrimaryKey columnNames="POSTAL_CD, POSTAL_CNTRY_CD" constraintName="KRLC_PSTL_CD_TP1" tableName="KRLC_PSTL_CD_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-501">
+    <addPrimaryKey columnNames="POSTAL_STATE_CD, POSTAL_CNTRY_CD" constraintName="KRLC_ST_TP1" tableName="KRLC_ST_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-502">
+    <addPrimaryKey columnNames="CMPND_PROP_ID, PROP_ID" constraintName="KRMS_CMPND_PROP_PROPS_TP1" tableName="KRMS_CMPND_PROP_PROPS_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-503">
+    <addPrimaryKey columnNames="TERM_SPEC_ID, TERM_RSLVR_ID" constraintName="KRMS_TERM_RSLVR_INPUT_SPEC_P1" tableName="KRMS_TERM_RSLVR_INPUT_SPEC_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-513">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_NMSPC_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_NMSPC_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-514">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PARM_DTL_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_PARM_DTL_TYP_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-515">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PARM_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_PARM_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-516">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PARM_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_PARM_TYP_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-610">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_CAMPUS_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_CMP_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-611">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_CMP_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_CMP_TYP_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-612">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KR_COUNTRY_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_CNTRY_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-613">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KR_COUNTY_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_CNTY_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-614">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KR_POSTAL_CODE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_PSTL_CD_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-615">
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KR_STATE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_ST_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-616">
+    <addUniqueConstraint columnNames="ACTN_ID, RULE_ID, SEQ_NO" constraintName="KRMS_ACTN_TC2" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRMS_ACTN_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-617">
+    <addUniqueConstraint columnNames="NMSPC_CD, NM, CNTXT_ID" constraintName="KRMS_TERM_RSLVR_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRMS_TERM_RSLVR_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-618">
+    <addUniqueConstraint columnNames="NM, CNTXT_ID" constraintName="KRMS_ASSET_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRMS_TERM_SPEC_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-619">
+    <addUniqueConstraint columnNames="TYP_ID, ATTR_DEFN_ID" constraintName="KRMS_TYP_ATTR_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRMS_TYP_ATTR_T" tablespace="USERS" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-780">
+    <addForeignKeyConstraint baseColumnNames="NMSPC_CD" baseTableName="KRCR_PARM_DTL_TYP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_PARM_DTL_TYP_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NMSPC_CD" referencedTableName="KRCR_NMSPC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-781">
+    <addForeignKeyConstraint baseColumnNames="NMSPC_CD" baseTableName="KRCR_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_PARM_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NMSPC_CD" referencedTableName="KRCR_NMSPC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-782">
+    <addForeignKeyConstraint baseColumnNames="PARM_TYP_CD" baseTableName="KRCR_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_PARM_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PARM_TYP_CD" referencedTableName="KRCR_PARM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-849">
+    <addForeignKeyConstraint baseColumnNames="CAMPUS_TYP_CD" baseTableName="KRLC_CMP_T" baseTableSchemaName="KSEMBEDDED" constraintName="SH_CAMPUS_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CAMPUS_TYP_CD" referencedTableName="KRLC_CMP_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-850">
+    <addForeignKeyConstraint baseColumnNames="COUNTY_CD, POSTAL_STATE_CD, POSTAL_CNTRY_CD" baseTableName="KRLC_PSTL_CD_T" baseTableSchemaName="KSEMBEDDED" constraintName="KR_POSTAL_CODE_TR3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="COUNTY_CD, STATE_CD, POSTAL_CNTRY_CD" referencedTableName="KRLC_CNTY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-851">
+    <addForeignKeyConstraint baseColumnNames="POSTAL_CNTRY_CD" baseTableName="KRLC_PSTL_CD_T" baseTableSchemaName="KSEMBEDDED" constraintName="KR_POSTAL_CODE_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="POSTAL_CNTRY_CD" referencedTableName="KRLC_CNTRY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-852">
+    <addForeignKeyConstraint baseColumnNames="POSTAL_STATE_CD, POSTAL_CNTRY_CD" baseTableName="KRLC_PSTL_CD_T" baseTableSchemaName="KSEMBEDDED" constraintName="KR_POSTAL_CODE_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="POSTAL_STATE_CD, POSTAL_CNTRY_CD" referencedTableName="KRLC_ST_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-853">
+    <addForeignKeyConstraint baseColumnNames="POSTAL_CNTRY_CD" baseTableName="KRLC_ST_T" baseTableSchemaName="KSEMBEDDED" constraintName="KR_STATE_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="POSTAL_CNTRY_CD" referencedTableName="KRLC_CNTRY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-854">
+    <addForeignKeyConstraint baseColumnNames="ACTN_ID" baseTableName="KRMS_ACTN_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_ACTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ACTN_ID" referencedTableName="KRMS_ACTN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-855">
+    <addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KRMS_ACTN_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_ACTN_ATTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KRMS_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-856">
+    <addForeignKeyConstraint baseColumnNames="RULE_ID" baseTableName="KRMS_ACTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_ACTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RULE_ID" referencedTableName="KRMS_RULE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-857">
+    <addForeignKeyConstraint baseColumnNames="AGENDA_ID" baseTableName="KRMS_AGENDA_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AGENDA_ID" referencedTableName="KRMS_AGENDA_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-858">
+    <addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KRMS_AGENDA_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ATTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KRMS_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-859">
+    <addForeignKeyConstraint baseColumnNames="AGENDA_ID" baseTableName="KRMS_AGENDA_ITM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ITM_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AGENDA_ID" referencedTableName="KRMS_AGENDA_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-860">
+    <addForeignKeyConstraint baseColumnNames="ALWAYS" baseTableName="KRMS_AGENDA_ITM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ITM_FK6" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AGENDA_ITM_ID" referencedTableName="KRMS_AGENDA_ITM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-861">
+    <addForeignKeyConstraint baseColumnNames="RULE_ID" baseTableName="KRMS_AGENDA_ITM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ITM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RULE_ID" referencedTableName="KRMS_RULE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-862">
+    <addForeignKeyConstraint baseColumnNames="SUB_AGENDA_ID" baseTableName="KRMS_AGENDA_ITM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ITM_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AGENDA_ID" referencedTableName="KRMS_AGENDA_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-863">
+    <addForeignKeyConstraint baseColumnNames="WHEN_FALSE" baseTableName="KRMS_AGENDA_ITM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ITM_FK5" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AGENDA_ITM_ID" referencedTableName="KRMS_AGENDA_ITM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-864">
+    <addForeignKeyConstraint baseColumnNames="WHEN_TRUE" baseTableName="KRMS_AGENDA_ITM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_ITM_FK4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AGENDA_ITM_ID" referencedTableName="KRMS_AGENDA_ITM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-865">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_AGENDA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_AGENDA_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-866">
+    <addForeignKeyConstraint baseColumnNames="CMPND_PROP_ID" baseTableName="KRMS_CMPND_PROP_PROPS_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CMPND_PROP_PROPS_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROP_ID" referencedTableName="KRMS_PROP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-867">
+    <addForeignKeyConstraint baseColumnNames="PROP_ID" baseTableName="KRMS_CMPND_PROP_PROPS_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CMPND_PROP_PROPS_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROP_ID" referencedTableName="KRMS_PROP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-868">
+    <addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KRMS_CNTXT_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_ATTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KRMS_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-869">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_CNTXT_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-870">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_CNTXT_TERM_SPEC_PREREQ_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_ASSET_PREREQ_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-871">
+    <addForeignKeyConstraint baseColumnNames="TERM_SPEC_ID" baseTableName="KRMS_CNTXT_TERM_SPEC_PREREQ_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_ASSET_PREREQ_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_SPEC_ID" referencedTableName="KRMS_TERM_SPEC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-872">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_CNTXT_VLD_ACTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_VLD_ACTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-873">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_CNTXT_VLD_EVENT_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_VLD_EVENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-874">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_CNTXT_VLD_FUNC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_VLD_FUNC_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-875">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_CNTXT_VLD_RULE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_CNTXT_VLD_RULE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-876">
+    <addForeignKeyConstraint baseColumnNames="FUNC_ID" baseTableName="KRMS_FUNC_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_FUNC_PARM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="FUNC_ID" referencedTableName="KRMS_FUNC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-877">
+    <addForeignKeyConstraint baseColumnNames="TYP_ID" baseTableName="KRMS_FUNC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_FUNC_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYP_ID" referencedTableName="KRMS_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-878">
+    <addForeignKeyConstraint baseColumnNames="PROP_ID" baseTableName="KRMS_PROP_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_PROP_PARM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROP_ID" referencedTableName="KRMS_PROP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-879">
+    <addForeignKeyConstraint baseColumnNames="RULE_ID" baseTableName="KRMS_PROP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_PROP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RULE_ID" referencedTableName="KRMS_RULE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-880">
+    <addForeignKeyConstraint baseColumnNames="TYP_ID" baseTableName="KRMS_PROP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_PROP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYP_ID" referencedTableName="KRMS_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-881">
+    <addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KRMS_RULE_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_RULE_ATTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KRMS_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-882">
+    <addForeignKeyConstraint baseColumnNames="RULE_ID" baseTableName="KRMS_RULE_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_RULE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RULE_ID" referencedTableName="KRMS_RULE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-883">
+    <addForeignKeyConstraint baseColumnNames="PROP_ID" baseTableName="KRMS_RULE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_RULE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROP_ID" referencedTableName="KRMS_PROP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-884">
+    <addForeignKeyConstraint baseColumnNames="TERM_ID" baseTableName="KRMS_TERM_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TERM_PARM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_ID" referencedTableName="KRMS_TERM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-885">
+    <addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KRMS_TERM_RSLVR_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_ASSET_RSLVR_ATTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KRMS_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-886">
+    <addForeignKeyConstraint baseColumnNames="TERM_RSLVR_ID" baseTableName="KRMS_TERM_RSLVR_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_ASSET_RSLVR_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_RSLVR_ID" referencedTableName="KRMS_TERM_RSLVR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-887">
+    <addForeignKeyConstraint baseColumnNames="TERM_RSLVR_ID" baseTableName="KRMS_TERM_RSLVR_INPUT_SPEC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_INPUT_ASSET_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_RSLVR_ID" referencedTableName="KRMS_TERM_RSLVR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-888">
+    <addForeignKeyConstraint baseColumnNames="TERM_SPEC_ID" baseTableName="KRMS_TERM_RSLVR_INPUT_SPEC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_INPUT_ASSET_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_SPEC_ID" referencedTableName="KRMS_TERM_SPEC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-889">
+    <addForeignKeyConstraint baseColumnNames="TERM_RSLVR_ID" baseTableName="KRMS_TERM_RSLVR_PARM_SPEC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TERM_RESLV_PARM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_RSLVR_ID" referencedTableName="KRMS_TERM_RSLVR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-890">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_TERM_RSLVR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TERM_RSLVR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-891">
+    <addForeignKeyConstraint baseColumnNames="OUTPUT_TERM_SPEC_ID" baseTableName="KRMS_TERM_RSLVR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TERM_RSLVR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_SPEC_ID" referencedTableName="KRMS_TERM_SPEC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-892">
+    <addForeignKeyConstraint baseColumnNames="TYP_ID" baseTableName="KRMS_TERM_RSLVR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TERM_RSLVR_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYP_ID" referencedTableName="KRMS_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-893">
+    <addForeignKeyConstraint baseColumnNames="CNTXT_ID" baseTableName="KRMS_TERM_SPEC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_ASSET_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTXT_ID" referencedTableName="KRMS_CNTXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-894">
+    <addForeignKeyConstraint baseColumnNames="TERM_SPEC_ID" baseTableName="KRMS_TERM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TERM_T__FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TERM_SPEC_ID" referencedTableName="KRMS_TERM_SPEC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-895">
+    <addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KRMS_TYP_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TYP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KRMS_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-896">
+    <addForeignKeyConstraint baseColumnNames="TYP_ID" baseTableName="KRMS_TYP_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRMS_TYP_ATTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYP_ID" referencedTableName="KRMS_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+  </changeSet>
+</databaseChangeLog>
