@@ -1,0 +1,123 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-312">
+  <createTable tableName="KSLR_RESCOMP">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_RESCOMPP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="STATE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-313">
+  <createTable tableName="KSLR_RESCOMP_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_RESCOMP_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-314">
+  <createTable tableName="KSLR_RESCOMP_JN_RESVALUE">
+    <column name="COMPONENT_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="RESULT_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-315">
+  <createTable tableName="KSLR_RESCOMP_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_RESCOMP_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-316">
+  <createTable tableName="KSLR_RESCOMP_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_RESCOMP_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-317">
+  <createTable tableName="KSLR_RESULT_VALUE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_RESULT_VALUEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="VALUE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RSLT_COMP_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-318">
+  <createTable tableName="KSLR_RICH_TEXT_T">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_RICH_TEXT_TP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="FORMATTED" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="PLAIN" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-319">
+  <createTable tableName="KSLR_SCALE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_SCALEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-320">
+  <createTable tableName="KSLR_SCALE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLR_SCALE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+</databaseChangeLog>

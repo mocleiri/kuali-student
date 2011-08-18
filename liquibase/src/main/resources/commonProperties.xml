@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<!-- different clob types -->
+	<property name="clob.type" value="clob" dbms="oracle"/>
+	<property name="clob.type" value="longtext" dbms="mysql"/>
+	
+	<!-- different decimal types -->
+	<property name="decimal.type" value="DECIMAL" dbms="oracle"/>
+	<property name="decimal.type" value="java.sql.Types.DOUBLE" dbms="mysql"/>
+	
+	<!-- different integer types -->
+	<property name="integer.type" value="NUMBER" dbms="oracle"/>
+	<property name="integer.type" value="java.sql.Types.INTEGER" dbms="mysql"/>
+	
+	<!-- different big-int types -->
+	<property name="bigint.type" value="NUMBER" dbms="oracle"/>
+	<property name="bigint.type" value="java.sql.Types.BIGINT" dbms="mysql"/>
+	
+	<!-- In mysql, use LONGBLOB for blobs -->
+	<property name="blob.type" value="BLOB" dbms="oracle"/>
+	<property name="blob.type" value="LONGBLOB" dbms="mysql"/>
+	
+</databaseChangeLog>

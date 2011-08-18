@@ -1,0 +1,1210 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-321">
+  <createTable tableName="KSLU_CLU">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLUP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CURR_VER_END" type="java.sql.Types.TIMESTAMP" />
+    <column name="CURR_VER_START" type="java.sql.Types.TIMESTAMP" />
+    <column name="SEQ_NUM" type="${bigint.type}(19)" />
+    <column name="VER_CMT" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VER_IND_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VER_FROM_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CAN_CREATE_LUI" type="BOOLEAN" />
+    <column name="DEF_ENRL_EST" type="${integer.type}(10)" />
+    <column name="DEF_MAX_ENRL" type="${integer.type}(10)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXP_FIRST_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="HAS_EARLY_DROP_DEDLN" type="BOOLEAN" />
+    <column name="CLU_INTSTY_QTY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_INTSTY_TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="IS_ENRL" type="BOOLEAN" />
+    <column name="IS_HAZR_DISBLD_STU" type="BOOLEAN" />
+    <column name="LAST_ADMIT_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LAST_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="NEXT_REVIEW_PRD" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REF_URL" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATP_DUR_TYP_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TM_QUANTITY" type="${integer.type}(10)" />
+    <column name="STDY_SUBJ_AREA" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ACCT_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="FEE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LUTYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OFFIC_CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="PRI_INSTR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-322">
+  <createTable tableName="KSLU_CLU_ACCRED">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ACCREDP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-323">
+  <createTable tableName="KSLU_CLU_ACCRED_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ACCRED_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-324">
+  <createTable tableName="KSLU_CLU_ACCT">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ACCTP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-325">
+  <createTable tableName="KSLU_CLU_ACCT_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ACCT_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-326">
+  <createTable tableName="KSLU_CLU_ACCT_JN_AFFIL_ORG">
+    <column name="CLU_ACCT_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="AFFIL_ORG_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-327">
+  <createTable tableName="KSLU_CLU_ADMIN_ORG">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ADMIN_ORGP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="IS_PR" type="BOOLEAN" />
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-328">
+  <createTable tableName="KSLU_CLU_ADMIN_ORG_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ADMIN_ORG_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-329">
+  <createTable tableName="KSLU_CLU_AFFIL_ORG">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_AFFIL_ORGP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="PERCT" type="${bigint.type}(19)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-330">
+  <createTable tableName="KSLU_CLU_ATP_TYPE_KEY">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ATP_TYPE_KEYP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATP_TYPE_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-331">
+  <createTable tableName="KSLU_CLU_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-332">
+  <createTable tableName="KSLU_CLU_CR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_CRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="INSTR_UNIT" type="${integer.type}(10)" />
+    <column name="MAX_ALOW_INACV_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MAX_ALOW_INACV_TMQ" type="${integer.type}(10)" />
+    <column name="MAX_TM_RSLT_RCGZ_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MAX_TM_RSLT_RCGZ_TMQ" type="${integer.type}(10)" />
+    <column name="MAX_TM_TO_COMP_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MAX_TM_TO_COMP_TMQ" type="${integer.type}(10)" />
+    <column name="MAX_TOT_UNIT" type="${integer.type}(10)" />
+    <column name="MIN_TM_TO_COMP_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MIN_TM_TO_COMP_TMQ" type="${integer.type}(10)" />
+    <column name="MIN_TOT_UNIT" type="${integer.type}(10)" />
+    <column name="REPEAT_CNT" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REPEAT_TM_ATP" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REPEAT_TM_TMQ" type="${integer.type}(10)" />
+    <column name="REPEAT_UNIT" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-333">
+  <createTable tableName="KSLU_CLU_FEE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_FEEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-334">
+  <createTable tableName="KSLU_CLU_FEE_AMOUNT">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_FEE_AMOUNTP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CURRENCY_QUANT" type="${integer.type}(10)" />
+    <column name="CURRENCY_TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLUE_FEE_REC_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-335">
+  <createTable tableName="KSLU_CLU_FEE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_FEE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-336">
+  <createTable tableName="KSLU_CLU_FEE_JN_CLU_FEE_REC">
+    <column name="CLU_FEE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_FEE_REC_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-337">
+  <createTable tableName="KSLU_CLU_FEE_REC">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_FEE_RECP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="FEE_TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RATE_TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-338">
+  <createTable tableName="KSLU_CLU_FEE_REC_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_FEE_REC_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-339">
+  <createTable tableName="KSLU_CLU_FEEREC_JN_AFFIL_ORG">
+    <column name="CLU_FEE_REC_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="AFFIL_ORG_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-340">
+  <createTable tableName="KSLU_CLU_IDENT">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_IDENTP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CD" type="java.sql.Types.VARCHAR(255)" />
+    <column name="DIVISION" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LVL" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LNG_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="SHRT_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="SUFX_CD" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VARTN" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-341">
+  <createTable tableName="KSLU_CLU_IDENT_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-342">
+  <createTable tableName="KSLU_CLU_INSTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_INSTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="PERS_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-343">
+  <createTable tableName="KSLU_CLU_INSTR_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_INSTR_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-344">
+  <createTable tableName="KSLU_CLU_JN_ACCRED">
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_ACCRED_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-345">
+  <createTable tableName="KSLU_CLU_JN_CAMP_LOC">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_JN_CAMP_LOCP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CAMP_LOC" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-346">
+  <createTable tableName="KSLU_CLU_JN_CLU_IDENT">
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ALT_CLU_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-347">
+  <createTable tableName="KSLU_CLU_JN_CLU_INSTR">
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_INSTR_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-348">
+  <createTable tableName="KSLU_CLU_JN_SUBJ_ORG">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_JN_SUBJ_ORGP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-349">
+  <createTable tableName="KSLU_CLU_LO_ALOW_RELTN_TYPE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_LO_ALOW_RELTN_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="LO_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLULO_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LU_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-350">
+  <createTable tableName="KSLU_CLU_LO_RELTN">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_LO_RELTNP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="LO_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-351">
+  <createTable tableName="KSLU_CLU_LO_RELTN_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_LO_RELTN_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-352">
+  <createTable tableName="KSLU_CLU_LO_RELTN_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_LO_RELTN_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-353">
+  <createTable tableName="KSLU_CLU_LO_RELTN_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_LO_RELTN_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-354">
+  <createTable tableName="KSLU_CLU_PUB_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUB_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-355">
+  <createTable tableName="KSLU_CLU_PUB_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUB_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-356">
+  <createTable tableName="KSLU_CLU_PUBL">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUBLP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="END_CYCLE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="START_CYCLE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_PUB_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-357">
+  <createTable tableName="KSLU_CLU_PUBL_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUBL_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-358">
+  <createTable tableName="KSLU_CLU_PUBL_JN_CLU_INSTR">
+    <column name="CLU_PUBL_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_INSTR_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-359">
+  <createTable tableName="KSLU_CLU_PUBL_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUBL_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-360">
+  <createTable tableName="KSLU_CLU_PUBL_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUBL_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-361">
+  <createTable tableName="KSLU_CLU_PUBL_VARI">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_PUBL_VARIP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="VARI_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VARI_VALUE" type="java.sql.Types.VARCHAR(1000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-362">
+  <createTable tableName="KSLU_CLU_RESULT_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_RESULT_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-363">
+  <createTable tableName="KSLU_CLU_RSLT">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_RSLTP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE_KEY_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-364">
+  <createTable tableName="KSLU_CLU_RSLT_LU_ALOW_TYPE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_RSLT_LU_ALOW_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="CLU_RSLT_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LU_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-365">
+  <createTable tableName="KSLU_CLU_RSLT_TYP">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_RSLT_TYPP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-366">
+  <createTable tableName="KSLU_CLU_SET">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_SETP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ADMIN_ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="REFERENCEABLE" type="BOOLEAN" />
+    <column name="REUSABLE" type="BOOLEAN" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MEM_QUERY_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-367">
+  <createTable tableName="KSLU_CLU_SET_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_SET_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-368">
+  <createTable tableName="KSLU_CLU_SET_JN_CLU">
+    <column name="CLU_SET_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_VER_IND_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_SET_JN_CLUP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-369">
+  <createTable tableName="KSLU_CLU_SET_JN_CLU_SET">
+    <column name="CLU_SET_PARENT_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_SET_CHILD_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-370">
+  <createTable tableName="KSLU_CLU_SET_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_SET_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-371">
+  <createTable tableName="KSLU_CLU_SET_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLU_SET_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-372">
+  <createTable tableName="KSLU_CLUCLU_RELTN">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLUCLU_RELTNP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CLU_RELTN_REQ" type="BOOLEAN" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LU_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RELATED_CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-373">
+  <createTable tableName="KSLU_CLUCLU_RELTN_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_CLUCLU_RELTN_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-374">
+  <createTable tableName="KSLU_CLURES_JN_RESOPT">
+    <column name="CLU_RES_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="RES_OPT_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-375">
+  <createTable tableName="KSLU_DLVMTHD_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_DLVMTHD_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-376">
+  <createTable tableName="KSLU_DLVMTHD_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_DLVMTHD_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-377">
+  <createTable tableName="KSLU_INSTFRMT_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_INSTFRMT_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-378">
+  <createTable tableName="KSLU_INSTFRMT_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_INSTFRMT_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-379">
+  <createTable tableName="KSLU_LU_CD_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_CD_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-380">
+  <createTable tableName="KSLU_LU_CD_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_CD_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-381">
+  <createTable tableName="KSLU_LU_CODE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_CODEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="DESCR" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VALUE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-382">
+  <createTable tableName="KSLU_LU_CODE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_CODE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-383">
+  <createTable tableName="KSLU_LU_LU_ALOW_RELTN_TYPE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_LU_ALOW_RELTN_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="LU_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LU_REL_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LU_LU_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-384">
+  <createTable tableName="KSLU_LU_PUBL_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_PUBL_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-385">
+  <createTable tableName="KSLU_LU_PUBL_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_PUBL_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-386">
+  <createTable tableName="KSLU_LU_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LU_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-387">
+  <createTable tableName="KSLU_LUI">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LUIP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ATP_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXP_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="LUI_CODE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MAX_SEATS" type="${integer.type}(10)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-388">
+  <createTable tableName="KSLU_LUI_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LUI_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-389">
+  <createTable tableName="KSLU_LUILUI_RELTN">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LUILUI_RELTNP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LULU_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LUI_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RELATED_LUI_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-390">
+  <createTable tableName="KSLU_LUILUI_RELTN_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LUILUI_RELTN_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-391">
+  <createTable tableName="KSLU_LULU_RELTN_TYPE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LULU_RELTN_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="DESCR" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REV_DESC" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REV_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-392">
+  <createTable tableName="KSLU_LULU_RELTN_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LULU_RELTN_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-393">
+  <createTable tableName="KSLU_LULU_RELTN_TYPE_JN_LU_TYP">
+    <column name="LULU_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="LU_TYPE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-394">
+  <createTable tableName="KSLU_LUTYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_LUTYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="DLVR_MTHD" type="java.sql.Types.VARCHAR(255)" />
+    <column name="INSTR_FRMT" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-395">
+  <createTable tableName="KSLU_MEMSHIP">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_MEMSHIPP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="SEARCH_TYPE_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-396">
+  <createTable tableName="KSLU_MEMSHIP_KSLU_SPARAM">
+    <column name="KSLU_MEMSHIP_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="SEARCHPARAMETERS_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-397">
+  <createTable tableName="KSLU_RICH_TEXT_T">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RICH_TEXT_TP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="FORMATTED" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="PLAIN" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-398">
+  <createTable tableName="KSLU_RSLT_COMP_USG_ALOW_TYPE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RSLT_COMP_USG_ALOW_TYPP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="RSLT_COMP_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RSLT_USG_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-399">
+  <createTable tableName="KSLU_RSLT_OPT">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RSLT_OPTP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="RES_COMP_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RES_USAGE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-400">
+  <createTable tableName="KSLU_RSLT_USG_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RSLT_USG_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-401">
+  <createTable tableName="KSLU_RSLT_USG_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RSLT_USG_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-402">
+  <createTable tableName="KSLU_RSLTUSAGE_LU_ALOW_TYPE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RSLTUSAGE_LU_ALOW_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="LU_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_RSLT_USAGE_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-403">
+  <createTable tableName="KSLU_RSRC">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_RSRCP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="RSRC_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CLU_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-404">
+  <createTable tableName="KSLU_SPARAM">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_SPARAMP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="SEARCH_PARAM_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-405">
+  <createTable tableName="KSLU_SPARAM_KSLU_SPVALUE">
+    <column name="KSLU_SPARAM_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="VALUES_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-406">
+  <createTable tableName="KSLU_SPVALUE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSLU_SPVALUEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="VALUE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+</databaseChangeLog>

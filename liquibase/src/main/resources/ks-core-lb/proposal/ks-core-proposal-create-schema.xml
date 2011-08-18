@@ -1,0 +1,141 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-427">
+  <createTable tableName="KSPR_PROPOSAL">
+    <column name="PROPOSAL_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSALP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="DETAIL_DESC" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RATIONALE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="STATE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="WORKFLOW_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-428">
+  <createTable tableName="KSPR_PROPOSAL_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-429">
+  <createTable tableName="KSPR_PROPOSAL_JN_ORG">
+    <column name="ORGREF_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_JN_ORGP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="PROPOSAL_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-430">
+  <createTable tableName="KSPR_PROPOSAL_JN_PERSON">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_JN_PERSONP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="PERSONREF_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="PROPOSAL_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-431">
+  <createTable tableName="KSPR_PROPOSAL_JN_REFERENCE">
+    <column name="PROPOSAL_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="REFERENCE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-432">
+  <createTable tableName="KSPR_PROPOSAL_REFERENCE">
+    <column name="REFERENCE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_REFERENCEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="OBJECT_REFERENCE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-433">
+  <createTable tableName="KSPR_PROPOSAL_REFTYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_REFTYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-434">
+  <createTable tableName="KSPR_PROPOSAL_REFTYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_REFTYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-435">
+  <createTable tableName="KSPR_PROPOSAL_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-436">
+  <createTable tableName="KSPR_PROPOSAL_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_PROPOSAL_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-437">
+  <createTable tableName="KSPR_RICH_TEXT_T">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSPR_RICH_TEXT_TP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="FORMATTED" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="PLAIN" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+</databaseChangeLog>

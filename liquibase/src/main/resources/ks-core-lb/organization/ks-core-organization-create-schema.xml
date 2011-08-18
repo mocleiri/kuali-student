@@ -1,0 +1,272 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-408">
+  <createTable tableName="KSOR_ORG">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORGP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="LNG_DESCR" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="LNG_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="SHRT_DESCR" type="java.sql.Types.VARCHAR(500)" />
+    <column name="SHRT_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-409">
+  <createTable tableName="KSOR_ORG_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-410">
+  <createTable tableName="KSOR_ORG_HIRCHY">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_HIRCHYP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="DESCR" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ROOT_ORG" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-411">
+  <createTable tableName="KSOR_ORG_HIRCHY_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_HIRCHY_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-412">
+  <createTable tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+    <column name="ORG_HIRCHY_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ORG_TYPE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-413">
+  <createTable tableName="KSOR_ORG_JN_ORG_PERS_REL_TYPE">
+    <column name="ORG_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ORG_PERS_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-414">
+  <createTable tableName="KSOR_ORG_ORG_RELTN">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_ORG_RELTNP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ORG" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RELATED_ORG" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-415">
+  <createTable tableName="KSOR_ORG_ORG_RELTN_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_ORG_RELTN_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-416">
+  <createTable tableName="KSOR_ORG_ORG_RELTN_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_ORG_RELTN_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="REV_DESCR" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REV_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ORG_HIRCHY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-417">
+  <createTable tableName="KSOR_ORG_ORG_RELTN_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_ORG_RELTN_TYPE_ATTP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-418">
+  <createTable tableName="KSOR_ORG_PERS_RELTN">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_PERS_RELTNP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="PERS_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ST" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ORG" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ORG_PERS_RELTN_TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-419">
+  <createTable tableName="KSOR_ORG_PERS_RELTN_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_PERS_RELTN_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-420">
+  <createTable tableName="KSOR_ORG_PERS_RELTN_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_PERS_RELTN_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-421">
+  <createTable tableName="KSOR_ORG_PERS_RELTN_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_PERS_RELTN_TYPE_ATP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-422">
+  <createTable tableName="KSOR_ORG_POS_RESTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_POS_RESTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="VER_NBR" type="${bigint.type}(19)">
+      <constraints nullable="false" />
+    </column>
+    <column name="DESCR" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="MAX_NUM_RELTN" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MIN_NUM_RELTN" type="${integer.type}(10)" />
+    <column name="ATP_DUR_TYP_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TM_QUANTITY" type="${integer.type}(10)" />
+    <column name="TTL" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ORG" type="java.sql.Types.VARCHAR(255)" />
+    <column name="PERS_RELTN_TYPE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-423">
+  <createTable tableName="KSOR_ORG_POS_RESTR_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_POS_RESTR_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-424">
+  <createTable tableName="KSOR_ORG_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_TYPEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-425">
+  <createTable tableName="KSOR_ORG_TYPE_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSOR_ORG_TYPE_ATTRP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ATTR_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-426">
+  <createTable tableName="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP">
+    <column name="ORG_TYPE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="ORG_PERS_RELTN_TYPE_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+</databaseChangeLog>

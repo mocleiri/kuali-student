@@ -1,0 +1,326 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="andy (generated)" id="1311191427300-1143">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_CHNL_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1144">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_CHNL_SUBSCRP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1145">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_CNTNT_TYP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1146">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_MSG_DELIV_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1147">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_MSG_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1148">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_NTFCTN_MSG_DELIV_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1149">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_NTFCTN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1150">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_PRIO_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1151">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_PRODCR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1152">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_RECIP_DELIV_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1153">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_RECIP_LIST_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1154">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_RECIP_PREF_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1155">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_RECIP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1156">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_RVWER_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1157">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREN_SNDR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1158">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_ACTN_ITM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1159">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_ACTN_LIST_OPTN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1160">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_ACTN_RQST_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1161">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_ACTN_TKN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1162">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_DOC_HDR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1163">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_DOC_LNK_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1164">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_DOC_NTE_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1165">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_DOC_TYP_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1166">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_EDL_FLD_DMP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1167">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_EDL_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1168">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_HLP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1169">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_OUT_BOX_ITM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1170">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RIA_DOCTYPE_MAP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1171">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RSP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1172">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RTE_NODE_CFG_PARM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1173">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RTE_NODE_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1174">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RTE_TMPL_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1175">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RULE_EXPR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1176">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RULE_TMPL_OPTN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1177">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_SRCH_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1178">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_USR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1179">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ATTR_DATA_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1180">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ATTR_DEFN_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1181">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_DLGN_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1182">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_DLGN_MBR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1183">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_ADDR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1184">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_AFLTN_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1185">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_CTZNSHP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1186">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_EMAIL_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1187">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_EMP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1188">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_ETHNIC_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1189">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_EXT_ID_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1190">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1191">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_NM_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1192">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_PHONE_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1193">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_RESIDENCY_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1194">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ENTITY_VISA_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1195">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_GRP_ATTR_DATA_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1196">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_GRP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1197">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_GRP_MBR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1198">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_PERM_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1199">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_PERM_RQRD_ATTR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1200">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_PERM_TMPL_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1201">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_PRNCPL_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1202">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ROLE_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1203">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ROLE_MBR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1204">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ROLE_PERM_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1205">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ROLE_RSP_ACTN_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1206">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_ROLE_RSP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1207">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_RSP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1208">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_RSP_RQRD_ATTR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1209">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_RSP_TMPL_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1210">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_TYP_ATTR_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1211">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRIM_TYP_ID_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1212">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_ACTN_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1213">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_ACTN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1214">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_AGENDA_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1215">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_AGENDA_ITM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1216">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_AGENDA_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1217">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_ATTR_DEFN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1218">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CMPND_PROP_PROPS_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1219">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1220">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1221">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_TERM_SPEC_PREREQ_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1222">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_VLD_ACTN_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1223">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_VLD_EVENT_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1224">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_VLD_FUNC_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1225">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_VLD_RULE_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1226">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_FUNC_PARM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1227">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_FUNC_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1228">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_PROP_PARM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1229">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_PROP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1230">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_RULE_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1231">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_RULE_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1232">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_PARM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1233">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_RSLVR_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1234">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_RSLVR_INPUT_SPEC_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1235">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_RSLVR_PARM_SPEC_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1236">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_RSLVR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1237">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1238">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TERM_SPEC_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1239">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TYP_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1240">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_TYP_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1241">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRNS_DOC_TYP_ATTR_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1242">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRNS_LOCK_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1243">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRNS_LOOKUP_RSLT_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1244">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRNS_MAINT_LOCK_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1245">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRNS_NTE_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1246">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRSB_BAM_PARM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1247">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRSB_BAM_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1248">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRSB_MSG_QUE_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1249">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRSB_SVC_DEF_S"/>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-1250">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRSB_SVC_DSCRPTR_S"/>
+    </changeSet>
+</databaseChangeLog>

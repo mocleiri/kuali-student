@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-407">
+  <createTable tableName="KSMG_MESSAGE">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSMG_MESSAGEP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="MSG_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LOCALE" type="java.sql.Types.VARCHAR(255)" />
+    <column name="GRP_NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="MSG_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+</databaseChangeLog>

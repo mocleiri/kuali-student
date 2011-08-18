@@ -1,0 +1,686 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="andy (generated)" id="1311191427300-650">
+        <createIndex indexName="KREW_ACTN_ITM_T1" tableName="KREW_ACTN_ITM_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-651">
+        <createIndex indexName="KREW_ACTN_ITM_TI2" tableName="KREW_ACTN_ITM_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-652">
+        <createIndex indexName="KREW_ACTN_ITM_TI3" tableName="KREW_ACTN_ITM_T" tablespace="USERS" unique="false">
+            <column name="ACTN_RQST_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-653">
+        <createIndex indexName="KREW_ACTN_ITM_TI5" tableName="KREW_ACTN_ITM_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+            <column name="DLGN_TYP"/>
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-654">
+        <createIndex indexName="KREW_ACTN_RQST_T11" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-655">
+        <createIndex indexName="KREW_ACTN_RQST_T12" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-656">
+        <createIndex indexName="KREW_ACTN_RQST_T13" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="ACTN_TKN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-657">
+        <createIndex indexName="KREW_ACTN_RQST_T14" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="PARNT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-658">
+        <createIndex indexName="KREW_ACTN_RQST_T15" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="RSP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-659">
+        <createIndex indexName="KREW_ACTN_RQST_T16" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="STAT_CD"/>
+            <column name="RSP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-660">
+        <createIndex indexName="KREW_ACTN_RQST_T17" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-661">
+        <createIndex indexName="KREW_ACTN_RQST_T19" tableName="KREW_ACTN_RQST_T" tablespace="USERS" unique="false">
+            <column name="STAT_CD"/>
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-662">
+        <createIndex indexName="KREW_ACTN_TKN_TI1" tableName="KREW_ACTN_TKN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-663">
+        <createIndex indexName="KREW_ACTN_TKN_TI2" tableName="KREW_ACTN_TKN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+            <column name="PRNCPL_ID"/>
+            <column name="ACTN_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-664">
+        <createIndex indexName="KREW_ACTN_TKN_TI3" tableName="KREW_ACTN_TKN_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-665">
+        <createIndex indexName="KREW_ACTN_TKN_TI4" tableName="KREW_ACTN_TKN_T" tablespace="USERS" unique="false">
+            <column name="DLGTR_PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-666">
+        <createIndex indexName="KREW_ACTN_TKN_TI5" tableName="KREW_ACTN_TKN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-667">
+        <createIndex indexName="KREW_APP_DOC_STAT_TI1" tableName="KREW_APP_DOC_STAT_TRAN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+            <column name="STAT_TRANS_DATE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-668">
+        <createIndex indexName="KREW_APP_DOC_STAT_TI2" tableName="KREW_APP_DOC_STAT_TRAN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+            <column name="APP_DOC_STAT_FROM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-669">
+        <createIndex indexName="KREW_APP_DOC_STAT_TI3" tableName="KREW_APP_DOC_STAT_TRAN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+            <column name="APP_DOC_STAT_TO"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-670">
+        <createIndex indexName="KREW_DOC_HDR_EXT_DT_TI1" tableName="KREW_DOC_HDR_EXT_DT_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-671">
+        <createIndex indexName="KREW_DOC_HDR_EXT_DT_TI2" tableName="KREW_DOC_HDR_EXT_DT_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-672">
+        <createIndex indexName="KREW_DOC_HDR_EXT_DT_TI3" tableName="KREW_DOC_HDR_EXT_DT_T" tablespace="USERS" unique="false">
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-673">
+        <createIndex indexName="KREW_DOC_HDR_EXT_FLT_TI1" tableName="KREW_DOC_HDR_EXT_FLT_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-674">
+        <createIndex indexName="KREW_DOC_HDR_EXT_FLT_TI2" tableName="KREW_DOC_HDR_EXT_FLT_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-675">
+        <createIndex indexName="KREW_DOC_HDR_EXT_FLT_TI3" tableName="KREW_DOC_HDR_EXT_FLT_T" tablespace="USERS" unique="false">
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-676">
+        <createIndex indexName="KREW_DOC_HDR_EXT_LONG_TI1" tableName="KREW_DOC_HDR_EXT_LONG_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-677">
+        <createIndex indexName="KREW_DOC_HDR_EXT_LONG_TI2" tableName="KREW_DOC_HDR_EXT_LONG_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-678">
+        <createIndex indexName="KREW_DOC_HDR_EXT_LONG_TI3" tableName="KREW_DOC_HDR_EXT_LONG_T" tablespace="USERS" unique="false">
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-679">
+        <createIndex indexName="KREW_DOC_HDR_EXT_TI1" tableName="KREW_DOC_HDR_EXT_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-680">
+        <createIndex indexName="KREW_DOC_HDR_EXT_TI2" tableName="KREW_DOC_HDR_EXT_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-681">
+        <createIndex indexName="KREW_DOC_HDR_EXT_TI3" tableName="KREW_DOC_HDR_EXT_T" tablespace="USERS" unique="false">
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-682">
+        <createIndex indexName="KREW_DOC_HDR_T10" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="APP_DOC_STAT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-683">
+        <createIndex indexName="KREW_DOC_HDR_T12" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="APP_DOC_STAT_MDFN_DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-684">
+        <createIndex indexName="KREW_DOC_HDR_TI1" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-685">
+        <createIndex indexName="KREW_DOC_HDR_TI2" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="INITR_PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-686">
+        <createIndex indexName="KREW_DOC_HDR_TI3" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_STAT_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-687">
+        <createIndex indexName="KREW_DOC_HDR_TI4" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="TTL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-688">
+        <createIndex indexName="KREW_DOC_HDR_TI5" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="CRTE_DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-689">
+        <createIndex indexName="KREW_DOC_HDR_TI6" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="RTE_STAT_MDFN_DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-690">
+        <createIndex indexName="KREW_DOC_HDR_TI7" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="APRV_DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-691">
+        <createIndex indexName="KREW_DOC_HDR_TI8" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="FNL_DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-692">
+        <createIndex indexName="KREW_DOC_HDR_TI9" tableName="KREW_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="APP_DOC_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-693">
+        <createIndex indexName="KREW_DOC_LNK_TI1" tableName="KREW_DOC_LNK_T" tablespace="USERS" unique="false">
+            <column name="ORGN_DOC_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-694">
+        <createIndex indexName="KREW_DOC_NTE_TI1" tableName="KREW_DOC_NTE_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-695">
+        <createIndex indexName="KREW_DOC_TYP_APP_DOC_STAT_T1" tableName="KREW_DOC_TYP_APP_DOC_STAT_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-696">
+        <createIndex indexName="KREW_DOC_TYP_ATTR_TI1" tableName="KREW_DOC_TYP_ATTR_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-697">
+        <createIndex indexName="KREW_DOC_TYP_PROC_TI1" tableName="KREW_DOC_TYP_PROC_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-698">
+        <createIndex indexName="KREW_DOC_TYP_PROC_TI2" tableName="KREW_DOC_TYP_PROC_T" tablespace="USERS" unique="false">
+            <column name="INIT_RTE_NODE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-699">
+        <createIndex indexName="KREW_DOC_TYP_PROC_TI3" tableName="KREW_DOC_TYP_PROC_T" tablespace="USERS" unique="false">
+            <column name="NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-700">
+        <createIndex indexName="KREW_DOC_TYP_TI2" tableName="KREW_DOC_TYP_T" tablespace="USERS" unique="false">
+            <column name="PARNT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-701">
+        <createIndex indexName="KREW_DOC_TYP_TI3" tableName="KREW_DOC_TYP_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+            <column name="PARNT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-702">
+        <createIndex indexName="KREW_DOC_TYP_TI4" tableName="KREW_DOC_TYP_T" tablespace="USERS" unique="false">
+            <column name="PREV_DOC_TYP_VER_NBR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-703">
+        <createIndex indexName="KREW_DOC_TYP_TI5" tableName="KREW_DOC_TYP_T" tablespace="USERS" unique="false">
+            <column name="CUR_IND"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-704">
+        <createIndex indexName="KREW_DOC_TYP_TI6" tableName="KREW_DOC_TYP_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-705">
+        <createIndex indexName="KREW_EDL_DMP_TI1" tableName="KREW_EDL_DMP_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_NM"/>
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-706">
+        <createIndex indexName="KREW_HLP_TI1" tableName="KREW_HLP_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-707">
+        <createIndex indexName="KREW_INIT_RTE_NODE_INSTN_TI1" tableName="KREW_INIT_RTE_NODE_INSTN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-708">
+        <createIndex indexName="KREW_INIT_RTE_NODE_INSTN_TI2" tableName="KREW_INIT_RTE_NODE_INSTN_T" tablespace="USERS" unique="false">
+            <column name="RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-709">
+        <createIndex indexName="KREW_OUT_BOX_ITM_TI1" tableName="KREW_OUT_BOX_ITM_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-710">
+        <createIndex indexName="KREW_OUT_BOX_ITM_TI2" tableName="KREW_OUT_BOX_ITM_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-711">
+        <createIndex indexName="KREW_OUT_BOX_ITM_TI3" tableName="KREW_OUT_BOX_ITM_T" tablespace="USERS" unique="false">
+            <column name="ACTN_RQST_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-712">
+        <createIndex indexName="KREW_RTE_BRCH_PROTO_TI1" tableName="KREW_RTE_BRCH_PROTO_T" tablespace="USERS" unique="false">
+            <column name="BRCH_NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-713">
+        <createIndex indexName="KREW_RTE_BRCH_ST_TI1" tableName="KREW_RTE_BRCH_ST_T" tablespace="USERS" unique="false">
+            <column name="RTE_BRCH_ID"/>
+            <column name="KEY_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-714">
+        <createIndex indexName="KREW_RTE_BRCH_ST_TI2" tableName="KREW_RTE_BRCH_ST_T" tablespace="USERS" unique="false">
+            <column name="RTE_BRCH_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-715">
+        <createIndex indexName="KREW_RTE_BRCH_ST_TI3" tableName="KREW_RTE_BRCH_ST_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-716">
+        <createIndex indexName="KREW_RTE_BRCH_TI1" tableName="KREW_RTE_BRCH_T" tablespace="USERS" unique="false">
+            <column name="NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-717">
+        <createIndex indexName="KREW_RTE_BRCH_TI2" tableName="KREW_RTE_BRCH_T" tablespace="USERS" unique="false">
+            <column name="PARNT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-718">
+        <createIndex indexName="KREW_RTE_BRCH_TI3" tableName="KREW_RTE_BRCH_T" tablespace="USERS" unique="false">
+            <column name="INIT_RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-719">
+        <createIndex indexName="KREW_RTE_BRCH_TI4" tableName="KREW_RTE_BRCH_T" tablespace="USERS" unique="false">
+            <column name="SPLT_RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-720">
+        <createIndex indexName="KREW_RTE_BRCH_TI5" tableName="KREW_RTE_BRCH_T" tablespace="USERS" unique="false">
+            <column name="JOIN_RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-721">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_LNK_TI1" tableName="KREW_RTE_NODE_INSTN_LNK_T" tablespace="USERS" unique="false">
+            <column name="FROM_RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-722">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_LNK_TI2" tableName="KREW_RTE_NODE_INSTN_LNK_T" tablespace="USERS" unique="false">
+            <column name="TO_RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-723">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_ST_TI1" tableName="KREW_RTE_NODE_INSTN_ST_T" tablespace="USERS" unique="false">
+            <column name="RTE_NODE_INSTN_ID"/>
+            <column name="KEY_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-724">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_ST_TI2" tableName="KREW_RTE_NODE_INSTN_ST_T" tablespace="USERS" unique="false">
+            <column name="RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-725">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_ST_TI3" tableName="KREW_RTE_NODE_INSTN_ST_T" tablespace="USERS" unique="false">
+            <column name="KEY_CD"/>
+            <column name="VAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-726">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_TI1" tableName="KREW_RTE_NODE_INSTN_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+            <column name="ACTV_IND"/>
+            <column name="CMPLT_IND"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-727">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_TI2" tableName="KREW_RTE_NODE_INSTN_T" tablespace="USERS" unique="false">
+            <column name="RTE_NODE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-728">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_TI3" tableName="KREW_RTE_NODE_INSTN_T" tablespace="USERS" unique="false">
+            <column name="BRCH_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-729">
+        <createIndex indexName="KREW_RTE_NODE_INSTN_TI4" tableName="KREW_RTE_NODE_INSTN_T" tablespace="USERS" unique="false">
+            <column name="PROC_RTE_NODE_INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-730">
+        <createIndex indexName="KREW_RTE_NODE_LNK_TI1" tableName="KREW_RTE_NODE_LNK_T" tablespace="USERS" unique="false">
+            <column name="FROM_RTE_NODE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-731">
+        <createIndex indexName="KREW_RTE_NODE_LNK_TI2" tableName="KREW_RTE_NODE_LNK_T" tablespace="USERS" unique="false">
+            <column name="TO_RTE_NODE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-732">
+        <createIndex indexName="KREW_RTE_NODE_TI1" tableName="KREW_RTE_NODE_T" tablespace="USERS" unique="false">
+            <column name="NM"/>
+            <column name="DOC_TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-733">
+        <createIndex indexName="KREW_RTE_NODE_TI2" tableName="KREW_RTE_NODE_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+            <column name="FNL_APRVR_IND"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-734">
+        <createIndex indexName="KREW_RTE_NODE_TI3" tableName="KREW_RTE_NODE_T" tablespace="USERS" unique="false">
+            <column name="BRCH_PROTO_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-735">
+        <createIndex indexName="KREW_RTE_NODE_TI4" tableName="KREW_RTE_NODE_T" tablespace="USERS" unique="false">
+            <column name="DOC_TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-736">
+        <createIndex indexName="KREW_RULE_EXT_T1" tableName="KREW_RULE_EXT_T" tablespace="USERS" unique="false">
+            <column name="RULE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-737">
+        <createIndex indexName="KREW_RULE_EXT_VAL_T1" tableName="KREW_RULE_EXT_VAL_T" tablespace="USERS" unique="false">
+            <column name="RULE_EXT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-738">
+        <createIndex indexName="KREW_RULE_EXT_VAL_T2" tableName="KREW_RULE_EXT_VAL_T" tablespace="USERS" unique="false">
+            <column name="RULE_EXT_VAL_ID"/>
+            <column name="KEY_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-739">
+        <createIndex indexName="KREW_RULE_RSP_TI1" tableName="KREW_RULE_RSP_T" tablespace="USERS" unique="false">
+            <column name="RULE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-740">
+        <createIndex indexName="KREW_RULE_TMPL_ATTR_TI1" tableName="KREW_RULE_TMPL_ATTR_T" tablespace="USERS" unique="false">
+            <column name="RULE_TMPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-741">
+        <createIndex indexName="KREW_RULE_TMPL_ATTR_TI2" tableName="KREW_RULE_TMPL_ATTR_T" tablespace="USERS" unique="false">
+            <column name="RULE_ATTR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-742">
+        <createIndex indexName="KREW_USR_OPTN_TI1" tableName="KREW_USR_OPTN_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-743">
+        <createIndex indexName="KRIM_ENTITY_ADDR_TI1" tableName="KRIM_ENTITY_ADDR_T" tablespace="USERS" unique="false">
+            <column name="ENTITY_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-744">
+        <createIndex indexName="KRIM_ENTITY_EMAIL_TI1" tableName="KRIM_ENTITY_EMAIL_T" tablespace="USERS" unique="false">
+            <column name="ENTITY_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-745">
+        <createIndex indexName="KRIM_ENTITY_PHONE_TI1" tableName="KRIM_ENTITY_PHONE_T" tablespace="USERS" unique="false">
+            <column name="ENTITY_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-746">
+        <createIndex indexName="KRIM_GRP_MBR_TI1" tableName="KRIM_GRP_MBR_T" tablespace="USERS" unique="false">
+            <column name="MBR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-747">
+        <createIndex indexName="KRIM_ROLE_MBR_ATTR_DATA_TI1" tableName="KRIM_ROLE_MBR_ATTR_DATA_T" tablespace="USERS" unique="false">
+            <column name="ROLE_MBR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-748">
+        <createIndex indexName="KRIM_ROLE_MBR_TI1" tableName="KRIM_ROLE_MBR_T" tablespace="USERS" unique="false">
+            <column name="MBR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-749">
+        <createIndex indexName="KRMS_ACTN_TI1" tableName="KRMS_ACTN_T" tablespace="USERS" unique="false">
+            <column name="TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-750">
+        <createIndex indexName="KRMS_ACTN_TI3" tableName="KRMS_ACTN_T" tablespace="USERS" unique="false">
+            <column name="RULE_ID"/>
+            <column name="SEQ_NO"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-751">
+        <createIndex indexName="KRNS_ADHOC_RTE_ACTN_RECIP_T2" tableName="KRNS_ADHOC_RTE_ACTN_RECIP_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-752">
+        <createIndex indexName="KRNS_DOC_HDR_TI3" tableName="KRNS_DOC_HDR_T" tablespace="USERS" unique="false">
+            <column name="ORG_DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-753">
+        <createIndex indexName="KRNS_MAINT_LOCK_TI2" tableName="KRNS_MAINT_LOCK_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-754">
+        <createIndex indexName="KRNS_PESSIMISTIC_LOCK_TI1" tableName="KRNS_PESSIMISTIC_LOCK_T" tablespace="USERS" unique="false">
+            <column name="DOC_HDR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-755">
+        <createIndex indexName="KRNS_PESSIMISTIC_LOCK_TI2" tableName="KRNS_PESSIMISTIC_LOCK_T" tablespace="USERS" unique="false">
+            <column name="PRNCPL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-756">
+        <createIndex indexName="KRNS_SESN_DOC_TI1" tableName="KRNS_SESN_DOC_T" tablespace="USERS" unique="false">
+            <column name="LAST_UPDT_DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-757">
+        <createIndex indexName="KREW_BAM_PARM_TI1" tableName="KRSB_BAM_PARM_T" tablespace="USERS" unique="false">
+            <column name="BAM_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-758">
+        <createIndex indexName="KRSB_BAM_TI1" tableName="KRSB_BAM_T" tablespace="USERS" unique="false">
+            <column name="SVC_NM"/>
+            <column name="MTHD_NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-759">
+        <createIndex indexName="KRSB_BAM_TI2" tableName="KRSB_BAM_T" tablespace="USERS" unique="false">
+            <column name="SVC_NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-760">
+        <createIndex indexName="KRSB_MSG_QUE_TI1" tableName="KRSB_MSG_QUE_T" tablespace="USERS" unique="false">
+            <column name="SVC_NM"/>
+            <column name="SVC_MTHD_NM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-761">
+        <createIndex indexName="KRSB_MSG_QUE_TI2" tableName="KRSB_MSG_QUE_T" tablespace="USERS" unique="false">
+            <column name="APPL_ID"/>
+            <column name="STAT_CD"/>
+            <column name="IP_NBR"/>
+            <column name="DT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-762">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI1" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="JOB_GROUP"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-763">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI2" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="JOB_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-764">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI3" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="REQUESTS_RECOVERY"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-765">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI4" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="IS_STATEFUL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-766">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI5" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="TRIGGER_GROUP"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-767">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI6" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="INSTANCE_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-768">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI7" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="TRIGGER_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-769">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI8" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="TRIGGER_NAME"/>
+            <column name="TRIGGER_GROUP"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-770">
+        <createIndex indexName="KRSB_QRTZ_FIRED_TRIGGERS_TI9" tableName="KRSB_QRTZ_FIRED_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="IS_VOLATILE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-771">
+        <createIndex indexName="KRSB_QRTZ_JOB_DETAILS_TI1" tableName="KRSB_QRTZ_JOB_DETAILS" tablespace="USERS" unique="false">
+            <column name="REQUESTS_RECOVERY"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-772">
+        <createIndex indexName="KRSB_QRTZ_TRIGGERS_TI1" tableName="KRSB_QRTZ_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="NEXT_FIRE_TIME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-773">
+        <createIndex indexName="KRSB_QRTZ_TRIGGERS_TI2" tableName="KRSB_QRTZ_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="NEXT_FIRE_TIME"/>
+            <column name="TRIGGER_STATE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-774">
+        <createIndex indexName="KRSB_QRTZ_TRIGGERS_TI3" tableName="KRSB_QRTZ_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="TRIGGER_STATE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-775">
+        <createIndex indexName="KRSB_QRTZ_TRIGGERS_TI4" tableName="KRSB_QRTZ_TRIGGERS" tablespace="USERS" unique="false">
+            <column name="IS_VOLATILE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-776">
+        <createIndex indexName="KRSB_SVC_DEF_TI1" tableName="KRSB_SVC_DEF_T" tablespace="USERS" unique="false">
+            <column name="INSTN_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-777">
+        <createIndex indexName="KRSB_SVC_DEF_TI2" tableName="KRSB_SVC_DEF_T" tablespace="USERS" unique="false">
+            <column name="SVC_NM"/>
+            <column name="STAT_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-778">
+        <createIndex indexName="KRSB_SVC_DEF_TI3" tableName="KRSB_SVC_DEF_T" tablespace="USERS" unique="false">
+            <column name="STAT_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="andy (generated)" id="1311191427300-779">
+        <createIndex indexName="KSEM_ENUM_VAL_I2" tableName="KSEM_ENUM_VAL_T" tablespace="USERS" unique="false">
+            <column name="CD"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

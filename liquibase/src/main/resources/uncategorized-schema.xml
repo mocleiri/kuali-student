@@ -1,0 +1,777 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<databaseChangeLog>
+  <changeSet author="andy (generated)" id="1311191427300-1">
+    <createTable tableName="KRCR_NMSPC_T">
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(20)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRCR_NMSPC_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(40)" />
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.CHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column name="APPL_ID" type="java.sql.Types.VARCHAR(20)" />
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-2">
+    <createTable tableName="KRCR_PARM_DTL_TYP_T">
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(20)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PARM_DTL_TYP_CD" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(255)" />
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.CHAR(1)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-3">
+    <createTable tableName="KRCR_PARM_T">
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(20)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PARM_DTL_TYP_CD" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PARM_NM" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PARM_TYP_CD" type="java.sql.Types.VARCHAR(5)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TXT" type="java.sql.Types.VARCHAR(4000)" />
+      <column name="PARM_DESC_TXT" type="java.sql.Types.VARCHAR(4000)" />
+      <column name="CONS_CD" type="java.sql.Types.VARCHAR(1)" />
+      <column defaultValue="KUALI" name="APPL_ID" type="java.sql.Types.VARCHAR(20)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-4">
+    <createTable tableName="KRCR_PARM_TYP_T">
+      <column name="PARM_TYP_CD" type="java.sql.Types.VARCHAR(5)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRCR_PARM_TYP_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(40)" />
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.CHAR(1)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-143">
+    <createTable tableName="KRLC_CMP_T">
+      <column name="CAMPUS_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRLC_CMP_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CAMPUS_NM" type="java.sql.Types.VARCHAR(250)" />
+      <column name="CAMPUS_SHRT_NM" type="java.sql.Types.VARCHAR(250)" />
+      <column name="CAMPUS_TYP_CD" type="java.sql.Types.VARCHAR(1)" />
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-144">
+    <createTable tableName="KRLC_CMP_TYP_T">
+      <column name="CAMPUS_TYP_CD" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRLC_CMP_TYP_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CMP_TYP_NM" type="java.sql.Types.VARCHAR(250)" />
+      <column name="DOBJ_MAINT_CD_ACTV_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-145">
+    <createTable tableName="KRLC_CNTRY_T">
+      <column name="POSTAL_CNTRY_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRLC_CNTRY_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="POSTAL_CNTRY_NM" type="java.sql.Types.VARCHAR(40)" />
+      <column name="PSTL_CNTRY_RSTRC_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ALT_POSTAL_CNTRY_CD" type="java.sql.Types.VARCHAR(3)" />
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-146">
+    <createTable tableName="KRLC_CNTY_T">
+      <column name="COUNTY_CD" type="java.sql.Types.VARCHAR(10)">
+        <constraints nullable="false" />
+      </column>
+      <column name="STATE_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="US" name="POSTAL_CNTRY_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="COUNTY_NM" type="java.sql.Types.VARCHAR(100)" />
+      <column name="ACTV_IND" type="java.sql.Types.VARCHAR(1)" />
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-147">
+    <createTable tableName="KRLC_PSTL_CD_T">
+      <column name="POSTAL_CD" type="java.sql.Types.VARCHAR(20)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="US" name="POSTAL_CNTRY_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="POSTAL_STATE_CD" type="java.sql.Types.VARCHAR(2)" />
+      <column name="COUNTY_CD" type="java.sql.Types.VARCHAR(10)" />
+      <column name="POSTAL_CITY_NM" type="java.sql.Types.VARCHAR(30)" />
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-148">
+    <createTable tableName="KRLC_ST_T">
+      <column name="POSTAL_STATE_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="US" name="POSTAL_CNTRY_CD" type="java.sql.Types.VARCHAR(2)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="POSTAL_STATE_NM" type="java.sql.Types.VARCHAR(40)" />
+      <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-149">
+    <createTable tableName="KRMS_ACTN_ATTR_T">
+      <column name="ACTN_ATTR_DATA_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_ACTN_ATTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="ACTN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_VAL" type="java.sql.Types.VARCHAR(400)" />
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-150">
+    <createTable tableName="KRMS_ACTN_T">
+      <column name="ACTN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_ACTN_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(40)" />
+      <column name="DESC_TXT" type="java.sql.Types.VARCHAR(4000)" />
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column name="SEQ_NO" type="${integer.type}(5)" />
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-151">
+    <createTable tableName="KRMS_AGENDA_ATTR_T">
+      <column name="AGENDA_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_AGENDA_ATTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="AGENDA_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_VAL" type="java.sql.Types.VARCHAR(400)" />
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-152">
+    <createTable tableName="KRMS_AGENDA_ITM_T">
+      <column name="AGENDA_ITM_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_AGENDA_ITM_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column name="SUB_AGENDA_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column name="AGENDA_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="WHEN_TRUE" type="java.sql.Types.VARCHAR(40)" />
+      <column name="WHEN_FALSE" type="java.sql.Types.VARCHAR(40)" />
+      <column name="ALWAYS" type="java.sql.Types.VARCHAR(40)" />
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-153">
+    <createTable tableName="KRMS_AGENDA_T">
+      <column name="AGENDA_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_AGENDA_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="INIT_AGENDA_ITM_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-154">
+    <createTable tableName="KRMS_ATTR_DEFN_T">
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_ATTR_DEFN_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="LBL" type="java.sql.Types.VARCHAR(40)" />
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column name="CMPNT_NM" type="java.sql.Types.VARCHAR(100)" />
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-155">
+    <createTable tableName="KRMS_CMPND_PROP_PROPS_T">
+      <column name="CMPND_PROP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PROP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="SEQ_NO" type="${integer.type}(5)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-156">
+    <createTable tableName="KRMS_CNTXT_ATTR_T">
+      <column name="CNTXT_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_ATTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_VAL" type="java.sql.Types.VARCHAR(400)" />
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-157">
+    <createTable tableName="KRMS_CNTXT_T">
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-158">
+    <createTable tableName="KRMS_CNTXT_TERM_SPEC_PREREQ_T">
+      <column name="CNTXT_TERM_SPEC_PREREQ_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_TERM_SPEC_PREREQP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TERM_SPEC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-159">
+    <createTable tableName="KRMS_CNTXT_VLD_ACTN_T">
+      <column name="CNTXT_VLD_ACTN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_VLD_ACTN_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ACTN_TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-160">
+    <createTable tableName="KRMS_CNTXT_VLD_EVENT_T">
+      <column name="CNTXT_VLD_EVENT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_VLD_EVENT_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="EVENT_NM" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-161">
+    <createTable tableName="KRMS_CNTXT_VLD_FUNC_T">
+      <column name="CNTXT_VLD_FUNC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_VLD_FUNC_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="FUNC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-162">
+    <createTable tableName="KRMS_CNTXT_VLD_RULE_T">
+      <column name="CNTXT_VLD_RULE_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_CNTXT_VLD_RULE_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-163">
+    <createTable tableName="KRMS_FUNC_PARM_T">
+      <column name="FUNC_PARM_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_FUNC_PARM_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="DESC_TXT" type="java.sql.Types.VARCHAR(255)" />
+      <column name="TYP" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="FUNC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="SEQ_NO" type="${integer.type}(5)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-164">
+    <createTable tableName="KRMS_FUNC_T">
+      <column name="FUNC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_FUNC_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="DESC_TXT" type="java.sql.Types.VARCHAR(255)" />
+      <column name="RTRN_TYP" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-165">
+    <createTable tableName="KRMS_PROP_PARM_T">
+      <column name="PROP_PARM_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_PROP_PARM_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="PROP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PARM_VAL" type="java.sql.Types.VARCHAR(255)" />
+      <column name="PARM_TYP_CD" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column name="SEQ_NO" type="${integer.type}(5)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-166">
+    <createTable tableName="KRMS_PROP_T">
+      <column name="PROP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_PROP_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="DESC_TXT" type="java.sql.Types.VARCHAR(100)" />
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="DSCRM_TYP_CD" type="java.sql.Types.VARCHAR(10)">
+        <constraints nullable="false" />
+      </column>
+      <column name="CMPND_OP_CD" type="java.sql.Types.VARCHAR(40)" />
+      <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-167">
+    <createTable tableName="KRMS_RULE_ATTR_T">
+      <column name="RULE_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_RULE_ATTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_VAL" type="java.sql.Types.VARCHAR(400)" />
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-168">
+    <createTable tableName="KRMS_RULE_T">
+      <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_RULE_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="PROP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+      <column name="DESC_TXT" type="java.sql.Types.VARCHAR(4000)" />
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-169">
+    <createTable tableName="KRMS_TERM_PARM_T">
+      <column name="TERM_PARM_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TERM_PARM_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="TERM_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="VAL" type="java.sql.Types.VARCHAR(255)" />
+      <column name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-170">
+    <createTable tableName="KRMS_TERM_RSLVR_ATTR_T">
+      <column name="TERM_RSLVR_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TERM_RSLVR_ATTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="TERM_RSLVR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_VAL" type="java.sql.Types.VARCHAR(400)" />
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-171">
+    <createTable tableName="KRMS_TERM_RSLVR_INPUT_SPEC_T">
+      <column name="TERM_SPEC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TERM_RSLVR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-172">
+    <createTable tableName="KRMS_TERM_RSLVR_PARM_SPEC_T">
+      <column name="TERM_RSLVR_PARM_SPEC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TERM_RSLVR_PARM_SPEC_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="TERM_RSLVR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(45)">
+        <constraints nullable="false" />
+      </column>
+      <column name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-173">
+    <createTable tableName="KRMS_TERM_RSLVR_T">
+      <column name="TERM_RSLVR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TERM_RSLVR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="OUTPUT_TERM_SPEC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-174">
+    <createTable tableName="KRMS_TERM_SPEC_T">
+      <column name="TERM_SPEC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TERM_SPEC_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="CNTXT_ID" type="java.sql.Types.VARCHAR(40)" />
+      <column name="NM" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TYP" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-175">
+    <createTable tableName="KRMS_TERM_T">
+      <column name="TERM_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TERM_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="TERM_SPEC_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-176">
+    <createTable tableName="KRMS_TYP_ATTR_T">
+      <column name="TYP_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TYP_ATTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="SEQ_NO" type="${integer.type}(5)">
+        <constraints nullable="false" />
+      </column>
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-177">
+    <createTable tableName="KRMS_TYP_T">
+      <column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRMS_TYP_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="NM" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="SRVC_NM" type="java.sql.Types.VARCHAR(200)" />
+      <column defaultValue="Y" name="ACTV" type="java.sql.Types.VARCHAR(1)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-207">
+    <createTable tableName="KRSB_SVC_DSCRPTR_T">
+      <column name="SVC_DSCRPTR_ID" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="KRSB_SVC_DSCRPTR_TP1" primaryKeyTablespace="USERS" />
+      </column>
+      <column name="DSCRPTR" type="CLOB">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet author="andy (generated)" id="1311191427300-208">
+    <createTable tableName="KS_DB_VERSION">
+      <column name="VERSION" type="java.sql.Types.VARCHAR(255)" />
+      <column name="MODULE_NAME" type="java.sql.Types.VARCHAR(255)" />
+      <column defaultValueComputed="SYSDATE" name="UPGRADE_TIME" type="TIMESTAMP" />
+      <column name="BUILD_ID" type="java.sql.Types.VARCHAR(255)" />
+      <column name="BUILD_TIMESTAMP" type="java.sql.Types.VARCHAR(255)" />
+    </createTable>
+    <modifySql dbms="mysql">
+      <replace replace="SYSDATE" with="CURRENT_TIMESTAMP" />
+    </modifySql>
+  </changeSet>
+  <changeSet author="alubbers" id="mysql-index-length-updates" dbms="mysql">
+    <modifyDataType tableName="KREW_DOC_HDR_EXT_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
+    <modifyDataType tableName="KREW_RTE_BRCH_ST_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
+    <modifyDataType tableName="KREW_RTE_NODE_INSTN_ST_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
+    <modifyDataType tableName="KREW_RULE_EXT_VAL_T" columnName="KEY_CD" newDataType="java.sql.Types.VARCHAR(500)" />
+    <modifyDataType tableName="KRSB_BAM_T" columnName="MTHD_NM" newDataType="java.sql.Types.VARCHAR(500)" />
+    <modifyDataType tableName="KRSB_MSG_QUE_T" columnName="SVC_MTHD_NM" newDataType="java.sql.Types.VARCHAR(500)" />
+    <modifyDataType tableName="KRSB_MSG_QUE_T" columnName="IP_NBR" newDataType="java.sql.Types.VARCHAR(500)" />
+  </changeSet>
+</databaseChangeLog>

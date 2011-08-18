@@ -1,0 +1,52 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-255">
+  <createTable tableName="KSEM_CTX_JN_ENUM_VAL_T">
+    <column name="ENUM_VAL_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+    <column name="CTX_ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" />
+    </column>
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-256">
+  <createTable tableName="KSEM_CTX_T">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSEM_CTX_TP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="CTX_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CTX_VAL" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-257">
+  <createTable tableName="KSEM_ENUM_T">
+    <column name="ENUM_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSEM_ENUM_TP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="DESCR" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-258">
+  <createTable tableName="KSEM_ENUM_VAL_T">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" primaryKeyName="KSEM_ENUM_VAL_TP1" primaryKeyTablespace="USERS" />
+    </column>
+    <column name="ABBREV_VAL" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CD" type="java.sql.Types.VARCHAR(255)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="SORT_KEY" type="${integer.type}(10)" />
+    <column name="VAL" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ENUM_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+  </createTable>
+</changeSet>
+</databaseChangeLog>
