@@ -1,0 +1,38 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-631">
+  <addUniqueConstraint columnNames="REFERENCE_ID, REFERENCE_TYPE" constraintName="SYS_C0033779" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSCO_REFERENCE" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-924">
+  <addForeignKeyConstraint baseColumnNames="REFERENCE" baseTableName="KSCO_COMMENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_COMMENT_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSCO_REFERENCE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-925">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSCO_COMMENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_COMMENT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSCO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-926">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSCO_COMMENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_COMMENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSCO_COMMENT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-927">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSCO_COMMENT_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_COMMENT_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSCO_COMMENT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-928">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSCO_COMMENT_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_COMMENT_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSCO_COMMENT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-929">
+  <addForeignKeyConstraint baseColumnNames="REFERENCE_TYPE" baseTableName="KSCO_REFERENCE" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_REFERENCE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSCO_REFERENCE_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-930">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSCO_REFERENCE_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_REFERENCE_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSCO_REFERENCE_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-931">
+  <addForeignKeyConstraint baseColumnNames="REFERENCE" baseTableName="KSCO_TAG" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_TAG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSCO_REFERENCE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-932">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSCO_TAG" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_TAG_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSCO_TAG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-933">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSCO_TAG_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_TAG_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSCO_TAG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-934">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSCO_TAG_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSCO_TAG_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSCO_TAG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

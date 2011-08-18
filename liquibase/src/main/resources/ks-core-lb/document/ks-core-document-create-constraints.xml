@@ -1,0 +1,59 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-935">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSDO_DOCUMENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOCUMENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSDO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-936">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSDO_DOCUMENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOCUMENT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_DOCUMENT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-937">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_DOCUMENT_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOCUMENT_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="DOC_ID" referencedTableName="KSDO_DOCUMENT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-938">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSDO_DOCUMENT_CATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOCUMENT_CATEGORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSDO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-939">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_DOCUMENT_CATEGORY_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOC_CATEGORY_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CATEGORY_ID" referencedTableName="KSDO_DOCUMENT_CATEGORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-940">
+  <addForeignKeyConstraint baseColumnNames="CATEGORY_ID" baseTableName="KSDO_DOCUMENT_JN_DOC_CATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOC_JN_DOC_CATEGORY_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CATEGORY_ID" referencedTableName="KSDO_DOCUMENT_CATEGORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-941">
+  <addForeignKeyConstraint baseColumnNames="DOC_ID" baseTableName="KSDO_DOCUMENT_JN_DOC_CATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOC_JN_DOC_CATEGORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="DOC_ID" referencedTableName="KSDO_DOCUMENT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-942">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_DOCUMENT_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_DOCUMENT_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_DOCUMENT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-943">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_REF_DOC_REL_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_DOC_REL_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSDO_REF_DOC_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-944">
+  <addForeignKeyConstraint baseColumnNames="DOC_ID" baseTableName="KSDO_REF_DOC_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_DOC_RELTN_FK4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="DOC_ID" referencedTableName="KSDO_DOCUMENT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-945">
+  <addForeignKeyConstraint baseColumnNames="REF_OBJ_TYPE_KEY" baseTableName="KSDO_REF_DOC_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_DOC_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_OBJ_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-946">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSDO_REF_DOC_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_DOC_RELTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSDO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-947">
+  <addForeignKeyConstraint baseColumnNames="TYPE_KEY" baseTableName="KSDO_REF_DOC_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_DOC_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_DOC_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-948">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_REF_DOC_RELTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_DOC_REL_TYP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_DOC_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-949">
+  <addForeignKeyConstraint baseColumnNames="REF_OBJ_TYPE_KEY" baseTableName="KSDO_REF_OBJ_SUB_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_OBJ_SUB_TYPE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_OBJ_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-950">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_REF_OBJ_SUB_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_OBJ_SUB_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_OBJ_SUB_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-951">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSDO_REF_OBJ_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_OBJ_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_OBJ_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-952">
+  <addForeignKeyConstraint baseColumnNames="REF_DOC_RELTN_TYPE_KEY" baseTableName="KSDO_REF_REL_TYP_JN_SUB_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_REL_TYP_JN_SUBTYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_DOC_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-953">
+  <addForeignKeyConstraint baseColumnNames="REF_OBJ_SUB_TYPE_KEY" baseTableName="KSDO_REF_REL_TYP_JN_SUB_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSDO_REF_REL_TYP_JN_SUBTYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSDO_REF_OBJ_SUB_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

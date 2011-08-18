@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-632">
+  <addUniqueConstraint columnNames="CTX_KEY, CTX_VAL" constraintName="SYS_C00285110" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSEM_CTX_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-954">
+  <addForeignKeyConstraint baseColumnNames="CTX_ID" baseTableName="KSEM_CTX_JN_ENUM_VAL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KSEM_CTX_JN_ENUM_VAL_T_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSEM_CTX_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-955">
+  <addForeignKeyConstraint baseColumnNames="ENUM_VAL_ID" baseTableName="KSEM_CTX_JN_ENUM_VAL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KSEM_CTX_JN_ENUM_VAL_T_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSEM_ENUM_VAL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-956">
+  <addForeignKeyConstraint baseColumnNames="ENUM_KEY" baseTableName="KSEM_ENUM_VAL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KSEM_ENUM_VAL_T_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ENUM_KEY" referencedTableName="KSEM_ENUM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

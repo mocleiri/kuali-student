@@ -1,0 +1,56 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-906">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSAP_ATP" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-907">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSAP_ATP" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_ATP_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-908">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_ATP_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_ATP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-909">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_ATP_DUR_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_DUR_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_ATP_DUR_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-910">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_ATP_SEASONAL_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_SEAS_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_ATP_SEASONAL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-911">
+  <addForeignKeyConstraint baseColumnNames="DUR_TYPE" baseTableName="KSAP_ATP_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_TYPE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_ATP_DUR_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-912">
+  <addForeignKeyConstraint baseColumnNames="SEASONAL_TYPE" baseTableName="KSAP_ATP_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_TYPE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_ATP_SEASONAL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-913">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_ATP_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_ATP_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_ATP_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-914">
+  <addForeignKeyConstraint baseColumnNames="ATP_ID" baseTableName="KSAP_DT_RANGE" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_DT_RANGE_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_ATP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-915">
+  <addForeignKeyConstraint baseColumnNames="DT_RANGE_TYPE_ID" baseTableName="KSAP_DT_RANGE" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_DT_RANGE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_DT_RANGE_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-916">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSAP_DT_RANGE" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_DT_RANGE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-917">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_DT_RANGE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_DT_RANGE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="DATERANGE_KEY" referencedTableName="KSAP_DT_RANGE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-918">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_DT_RANGE_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_DT_RANGE_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_DT_RANGE_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-919">
+  <addForeignKeyConstraint baseColumnNames="ATP_ID" baseTableName="KSAP_MLSTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_MLSTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_ATP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-920">
+  <addForeignKeyConstraint baseColumnNames="MLSTN_TYPE_ID" baseTableName="KSAP_MLSTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_MLSTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_MLSTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-921">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSAP_MLSTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_MLSTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-922">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_MLSTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_MLSTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSAP_MLSTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-923">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSAP_MLSTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSAP_MLSTN_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSAP_MLSTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

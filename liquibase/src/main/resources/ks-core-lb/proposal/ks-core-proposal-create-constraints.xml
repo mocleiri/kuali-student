@@ -1,0 +1,29 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-1101">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSPR_PROPOSAL" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSPR_PROPOSAL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1102">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSPR_PROPOSAL_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROPOSAL_ID" referencedTableName="KSPR_PROPOSAL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1103">
+  <addForeignKeyConstraint baseColumnNames="PROPOSAL_ID" baseTableName="KSPR_PROPOSAL_JN_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_JN_ORG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROPOSAL_ID" referencedTableName="KSPR_PROPOSAL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1104">
+  <addForeignKeyConstraint baseColumnNames="PROPOSAL_ID" baseTableName="KSPR_PROPOSAL_JN_PERSON" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_JN_PERSON_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROPOSAL_ID" referencedTableName="KSPR_PROPOSAL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1105">
+  <addForeignKeyConstraint baseColumnNames="PROPOSAL_ID" baseTableName="KSPR_PROPOSAL_JN_REFERENCE" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_JN_REFERENCE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PROPOSAL_ID" referencedTableName="KSPR_PROPOSAL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1106">
+  <addForeignKeyConstraint baseColumnNames="REFERENCE_ID" baseTableName="KSPR_PROPOSAL_JN_REFERENCE" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_JN_REFERENCE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="REFERENCE_ID" referencedTableName="KSPR_PROPOSAL_REFERENCE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1107">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSPR_PROPOSAL_REFERENCE" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_REFERENCE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSPR_PROPOSAL_REFTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1108">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSPR_PROPOSAL_REFTYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_REFTYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSPR_PROPOSAL_REFTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1109">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSPR_PROPOSAL_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSPR_PROPOSAL_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSPR_PROPOSAL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

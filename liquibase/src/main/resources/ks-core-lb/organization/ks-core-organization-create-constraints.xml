@@ -1,0 +1,80 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-645">
+  <addUniqueConstraint columnNames="ORG_PERS_RELTN_TYPE, ORG, PERS_ID" constraintName="SYS_C0011691" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSOR_ORG_PERS_RELTN" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-646">
+  <addUniqueConstraint columnNames="ORG, PERS_RELTN_TYPE" constraintName="SYS_C0011701" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSOR_ORG_POS_RESTR" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1077">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSOR_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1078">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1079">
+  <addForeignKeyConstraint baseColumnNames="ROOT_ORG" baseTableName="KSOR_ORG_HIRCHY" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_HIRCHY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1080">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_HIRCHY_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_HIRCHY_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG_HIRCHY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1081">
+  <addForeignKeyConstraint baseColumnNames="ORG_HIRCHY_ID" baseTableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_HIRCHY_JN_ORG_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG_HIRCHY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1082">
+  <addForeignKeyConstraint baseColumnNames="ORG_TYPE_ID" baseTableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_HIRCHY_JN_ORG_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1083">
+  <addForeignKeyConstraint baseColumnNames="ORG_ID" baseTableName="KSOR_ORG_JN_ORG_PERS_REL_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_JN_ORG_PERREL_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1084">
+  <addForeignKeyConstraint baseColumnNames="ORG_PERS_RELTN_TYPE_ID" baseTableName="KSOR_ORG_JN_ORG_PERS_REL_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_JN_ORG_PERREL_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_PERS_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1085">
+  <addForeignKeyConstraint baseColumnNames="ORG" baseTableName="KSOR_ORG_ORG_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ORG_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1086">
+  <addForeignKeyConstraint baseColumnNames="RELATED_ORG" baseTableName="KSOR_ORG_ORG_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ORG_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1087">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSOR_ORG_ORG_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ORG_RELTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_ORG_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1088">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_ORG_RELTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ORG_RELTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG_ORG_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1089">
+  <addForeignKeyConstraint baseColumnNames="ORG_HIRCHY" baseTableName="KSOR_ORG_ORG_RELTN_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ORG_RELTN_TYPE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG_HIRCHY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1090">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_ORG_RELTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_ORG_REL_TYP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_ORG_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1091">
+  <addForeignKeyConstraint baseColumnNames="ORG" baseTableName="KSOR_ORG_PERS_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_PERS_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1092">
+  <addForeignKeyConstraint baseColumnNames="ORG_PERS_RELTN_TYPE" baseTableName="KSOR_ORG_PERS_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_PERS_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_PERS_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1093">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_PERS_RELTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_PERS_RELTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG_PERS_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1094">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_PERS_RELTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_PERS_REL_TYP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_PERS_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1095">
+  <addForeignKeyConstraint baseColumnNames="ORG" baseTableName="KSOR_ORG_POS_RESTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_POS_RESTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1096">
+  <addForeignKeyConstraint baseColumnNames="PERS_RELTN_TYPE" baseTableName="KSOR_ORG_POS_RESTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_POS_RESTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_PERS_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1097">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_POS_RESTR_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_POS_RESTR_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSOR_ORG_POS_RESTR" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1098">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSOR_ORG_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORG_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1099">
+  <addForeignKeyConstraint baseColumnNames="ORG_PERS_RELTN_TYPE_ID" baseTableName="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORGTYP_JN_ORGPREL_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_PERS_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1100">
+  <addForeignKeyConstraint baseColumnNames="ORG_TYPE_ID" baseTableName="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSOR_ORGTYP_JN_ORGPREL_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSOR_ORG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,110 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-647">
+  <addUniqueConstraint columnNames="OBJ_SUB_TYPE_ID" constraintName="SYS_C0011792" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSST_OBJ_TYP_JN_OBJ_SUB_TYP" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-648">
+  <addUniqueConstraint columnNames="REQ_COM_FIELD_ID" constraintName="SYS_C0011797" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSST_RC_JN_RC_FIELD" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-649">
+  <addUniqueConstraint columnNames="CHLD_STMT_ID" constraintName="SYS_C0011839" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSST_STMT_JN_STMT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1110">
+  <addForeignKeyConstraint baseColumnNames="OBJ_SUB_TYPE_ID" baseTableName="KSST_OBJ_TYP_JN_OBJ_SUB_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_OBJ_TYP_JN_OBJ_SUBTYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_OBJECT_SUB_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1111">
+  <addForeignKeyConstraint baseColumnNames="OBJ_TYPE_ID" baseTableName="KSST_OBJ_TYP_JN_OBJ_SUB_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_OBJ_TYP_JN_OBJ_SUBTYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_OBJECT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1112">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_OBJECT_SUB_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_OBJECT_SUB_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_OBJECT_SUB_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1113">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_OBJECT_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_OBJECT_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_OBJECT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1114">
+  <addForeignKeyConstraint baseColumnNames="REQ_COM_FIELD_ID" baseTableName="KSST_RC_JN_RC_FIELD" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RC_JN_RC_FIELD_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_REQ_COM_FIELD" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1115">
+  <addForeignKeyConstraint baseColumnNames="REQ_COM_ID" baseTableName="KSST_RC_JN_RC_FIELD" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RC_JN_RC_FIELD_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_REQ_COM" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1116">
+  <addForeignKeyConstraint baseColumnNames="REQ_COMP_FIELD_TYPE_ID" baseTableName="KSST_RCTYP_JN_RCFLDTYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RCTYP_JN_RCFLDTYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_REQ_COM_FIELD_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1117">
+  <addForeignKeyConstraint baseColumnNames="REQ_COMP_TYPE_ID" baseTableName="KSST_RCTYP_JN_RCFLDTYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RCTYP_JN_RCFLDTYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REQ_COM_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1118">
+  <addForeignKeyConstraint baseColumnNames="REF_STMT_REL_TYPE_ID" baseTableName="KSST_REF_STMT_REL" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REF_STMT_REL_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REF_STMT_REL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1119">
+  <addForeignKeyConstraint baseColumnNames="STMT_ID" baseTableName="KSST_REF_STMT_REL" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REF_STMT_REL_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_STMT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1120">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_REF_STMT_REL_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REF_STMT_REL_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_REF_STMT_REL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1121">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_REF_STMT_REL_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REF_STMT_REL_TYP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REF_STMT_REL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1122">
+  <addForeignKeyConstraint baseColumnNames="REQ_COM_TYPE_ID" baseTableName="KSST_REQ_COM" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REQ_COM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REQ_COM_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1123">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSST_REQ_COM" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REQ_COM_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1124">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_REQ_COM_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REQ_COM_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REQ_COM_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1125">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_REQ_COM_TYPE_NL_TMPL" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_REQ_COM_TYPE_NL_TMPL_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REQ_COM_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1126">
+  <addForeignKeyConstraint baseColumnNames="OBJ_SUB_TYPE_ID" baseTableName="KSST_RSTMT_RTYP_JN_OSUB_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RSTMT_RTYP_JN_OSUBTYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_OBJECT_SUB_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1127">
+  <addForeignKeyConstraint baseColumnNames="REF_STMT_REL_TYPE_ID" baseTableName="KSST_RSTMT_RTYP_JN_OSUB_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RSTMT_RTYP_JN_OSUBTYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REF_STMT_REL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1128">
+  <addForeignKeyConstraint baseColumnNames="REF_STMT_REL_TYPE_ID" baseTableName="KSST_RSTMT_RTYP_JN_STMT_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RSTMT_RTYP_JN_ST_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REF_STMT_REL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1129">
+  <addForeignKeyConstraint baseColumnNames="STMT_TYPE_ID" baseTableName="KSST_RSTMT_RTYP_JN_STMT_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_RSTMT_RTYP_JN_ST_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_STMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1130">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSST_STMT" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1131">
+  <addForeignKeyConstraint baseColumnNames="STMT_TYPE_ID" baseTableName="KSST_STMT" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_STMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1132">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_STMT_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_STMT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1133">
+  <addForeignKeyConstraint baseColumnNames="REQ_COM_ID" baseTableName="KSST_STMT_JN_REQ_COM" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_JN_REQ_COM_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_REQ_COM" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1134">
+  <addForeignKeyConstraint baseColumnNames="STMT_ID" baseTableName="KSST_STMT_JN_REQ_COM" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_JN_REQ_COM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_STMT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1135">
+  <addForeignKeyConstraint baseColumnNames="CHLD_STMT_ID" baseTableName="KSST_STMT_JN_STMT" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_JN_STMT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_STMT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1136">
+  <addForeignKeyConstraint baseColumnNames="STMT_ID" baseTableName="KSST_STMT_JN_STMT" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_JN_STMT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSST_STMT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1137">
+  <addForeignKeyConstraint baseColumnNames="REQ_COM_TYPE_ID" baseTableName="KSST_STMT_TYP_JN_RC_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_TYP_JN_RC_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_REQ_COM_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1138">
+  <addForeignKeyConstraint baseColumnNames="STMT_TYPE_ID" baseTableName="KSST_STMT_TYP_JN_RC_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_TYP_JN_RC_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_STMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1139">
+  <addForeignKeyConstraint baseColumnNames="CHLD_STMT_TYPE_ID" baseTableName="KSST_STMT_TYP_JN_STMT_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_TYP_JN_STMT_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_STMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1140">
+  <addForeignKeyConstraint baseColumnNames="STMT_TYPE_ID" baseTableName="KSST_STMT_TYP_JN_STMT_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_TYP_JN_STMT_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_STMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1141">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_STMT_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_STMT_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_STMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1142">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSST_USAGE_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSST_USAGE_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSST_NL_USAGE_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>
