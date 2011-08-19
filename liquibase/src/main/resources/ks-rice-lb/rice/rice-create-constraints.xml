@@ -1,0 +1,653 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-470">
+  <addPrimaryKey columnNames="CHNL_ID, PRODCR_ID" constraintName="KREN_CHNL_PRODCR_TP1" tableName="KREN_CHNL_PRODCR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-471">
+  <addPrimaryKey columnNames="DOC_TYP_ID, DOC_STAT_NM" constraintName="KREW_DOC_TYP_APP_DOC_STAT_TP1" tableName="KREW_DOC_TYP_APP_DOC_STAT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-472">
+  <addPrimaryKey columnNames="DOC_TYP_ID, DOC_PLCY_NM" constraintName="KREW_DOC_TYP_PLCY_RELN_TP1" tableName="KREW_DOC_TYP_PLCY_RELN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-473">
+  <addPrimaryKey columnNames="DOC_HDR_ID, RTE_NODE_INSTN_ID" constraintName="KREW_INIT_RTE_NODE_INSTN_TP1" tableName="KREW_INIT_RTE_NODE_INSTN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-474">
+  <addPrimaryKey columnNames="DOC_HDR_ID, GRP_ID" constraintName="KREW_RMV_RPLC_GRP_TP1" tableName="KREW_RMV_RPLC_GRP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-475">
+  <addPrimaryKey columnNames="DOC_HDR_ID, RULE_ID" constraintName="KREW_RMV_RPLC_RULE_TP1" tableName="KREW_RMV_RPLC_RULE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-476">
+  <addPrimaryKey columnNames="FROM_RTE_NODE_INSTN_ID, TO_RTE_NODE_INSTN_ID" constraintName="KREW_RTE_NODE_INSTN_LNK_TP1" tableName="KREW_RTE_NODE_INSTN_LNK_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-477">
+  <addPrimaryKey columnNames="FROM_RTE_NODE_ID, TO_RTE_NODE_ID" constraintName="KREW_RTE_NODE_LNK_TP1" tableName="KREW_RTE_NODE_LNK_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-478">
+  <addPrimaryKey columnNames="PRNCPL_ID, PRSN_OPTN_ID" constraintName="KREW_USR_OPTN_TP1" tableName="KREW_USR_OPTN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-479">
+  <addPrimaryKey columnNames="ENT_TYP_CD, ENTITY_ID" constraintName="KRIM_ENTITY_ENT_TYP_TP1" tableName="KRIM_ENTITY_ENT_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-480">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_ADDR_ID" constraintName="KRIM_PND_ADDR_MTP1" tableName="KRIM_PND_ADDR_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-481">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_AFLTN_ID" constraintName="KRIM_PND_AFLTN_MTP1" tableName="KRIM_PND_AFLTN_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-482">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_CTZNSHP_ID" constraintName="KRIM_PND_CTZNSHP_MTP1" tableName="KRIM_PND_CTZNSHP_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-483">
+  <addPrimaryKey columnNames="FDOC_NBR, ATTR_DATA_ID" constraintName="KRIM_PND_DLGN_MBR_ATTR_DATAP1" tableName="KRIM_PND_DLGN_MBR_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-484">
+  <addPrimaryKey columnNames="FDOC_NBR, DLGN_MBR_ID" constraintName="KRIM_PND_DLGN_MBR_TP1" tableName="KRIM_PND_DLGN_MBR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-485">
+  <addPrimaryKey columnNames="FDOC_NBR, DLGN_ID" constraintName="KRIM_PND_DLGN_TP1" tableName="KRIM_PND_DLGN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-486">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_EMAIL_ID" constraintName="KRIM_PND_EMAIL_MTP1" tableName="KRIM_PND_EMAIL_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-487">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_EMP_ID" constraintName="KRIM_PND_EMP_INFO_MTP1" tableName="KRIM_PND_EMP_INFO_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-488">
+  <addPrimaryKey columnNames="FDOC_NBR, ATTR_DATA_ID" constraintName="KRIM_PND_GRP_ATTR_DATA_TP1" tableName="KRIM_PND_GRP_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-489">
+  <addPrimaryKey columnNames="FDOC_NBR, GRP_MBR_ID" constraintName="KRIM_PND_GRP_MBR_TP1" tableName="KRIM_PND_GRP_MBR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-490">
+  <addPrimaryKey columnNames="GRP_MBR_ID, FDOC_NBR" constraintName="KRIM_PND_GRP_PRNCPL_MTP1" tableName="KRIM_PND_GRP_PRNCPL_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-491">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_NM_ID" constraintName="KRIM_PND_NM_MTP1" tableName="KRIM_PND_NM_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-492">
+  <addPrimaryKey columnNames="FDOC_NBR, ENTITY_PHONE_ID" constraintName="KRIM_PND_PHONE_MTP1" tableName="KRIM_PND_PHONE_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-493">
+  <addPrimaryKey columnNames="FDOC_NBR, ATTR_DATA_ID" constraintName="KRIM_PND_ROLE_MBR_ATTR_DATAP1" tableName="KRIM_PND_ROLE_MBR_ATTR_DATA_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-494">
+  <addPrimaryKey columnNames="FDOC_NBR, ROLE_MBR_ID" constraintName="KRIM_PND_ROLE_MBR_MTP1" tableName="KRIM_PND_ROLE_MBR_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-495">
+  <addPrimaryKey columnNames="FDOC_NBR, ROLE_ID" constraintName="KRIM_PND_ROLE_MTP1" tableName="KRIM_PND_ROLE_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-496">
+  <addPrimaryKey columnNames="FDOC_NBR, ROLE_PERM_ID" constraintName="KRIM_PND_ROLE_PERM_TP1" tableName="KRIM_PND_ROLE_PERM_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-497">
+  <addPrimaryKey columnNames="ROLE_RSP_ACTN_ID, FDOC_NBR" constraintName="KRIM_PND_ROLE_RSP_ACTN_MTP1" tableName="KRIM_PND_ROLE_RSP_ACTN_MT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-498">
+  <addPrimaryKey columnNames="FDOC_NBR, ROLE_RSP_ID" constraintName="KRIM_PND_ROLE_RSP_TP1" tableName="KRIM_PND_ROLE_RSP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-504">
+  <addPrimaryKey columnNames="RECIP_TYP_CD, ACTN_RQST_CD, ACTN_RQST_RECIP_ID, DOC_HDR_ID" constraintName="KRNS_ADHOC_RTE_ACTN_RECIP_TP1" tableName="KRNS_ADHOC_RTE_ACTN_RECIP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-505">
+  <addPrimaryKey columnNames="SESN_DOC_ID, DOC_HDR_ID, PRNCPL_ID, IP_ADDR" constraintName="KRNS_SESN_DOC_TP1" tableName="KRNS_SESN_DOC_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-506">
+  <addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP" constraintName="KRSB_QRTZ_BLOB_TRIGGERSP1" tableName="KRSB_QRTZ_BLOB_TRIGGERS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-507">
+  <addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP" constraintName="KRSB_QRTZ_CRON_TRIGGERSP1" tableName="KRSB_QRTZ_CRON_TRIGGERS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-508">
+  <addPrimaryKey columnNames="JOB_NAME, JOB_GROUP" constraintName="KRSB_QRTZ_JOB_DETAILSP1" tableName="KRSB_QRTZ_JOB_DETAILS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-509">
+  <addPrimaryKey columnNames="JOB_NAME, JOB_GROUP, JOB_LISTENER" constraintName="KRSB_QRTZ_JOB_LISTENERSP1" tableName="KRSB_QRTZ_JOB_LISTENERS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-510">
+  <addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP" constraintName="KRSB_QRTZ_SIMPLE_TRIGGERSP1" tableName="KRSB_QRTZ_SIMPLE_TRIGGERS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-511">
+  <addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP" constraintName="KRSB_QRTZ_TRIGGERSP1" tableName="KRSB_QRTZ_TRIGGERS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-512">
+  <addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP, TRIGGER_LISTENER" constraintName="KRSB_QRTZ_TRIGGER_LISTENERSP1" tableName="KRSB_QRTZ_TRIGGER_LISTENERS" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-517">
+  <addUniqueConstraint columnNames="CHNL_ID, PRNCPL_ID" constraintName="KREN_CHNL_SUBSCRP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_CHNL_SUBSCRP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-518">
+  <addUniqueConstraint columnNames="NM" constraintName="KREN_CHNL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_CHNL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-519">
+  <addUniqueConstraint columnNames="NM, CNTNT_TYP_VER_NBR" constraintName="KREN_CNTNT_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_CNTNT_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-520">
+  <addUniqueConstraint columnNames="MSG_ID, TYP_NM" constraintName="KREN_MSG_DELIV_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_MSG_DELIV_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-521">
+  <addUniqueConstraint columnNames="ORGN_ID" constraintName="KREN_MSG_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_MSG_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-522">
+  <addUniqueConstraint columnNames="NTFCTN_ID, RECIP_ID" constraintName="KREN_NTFCTN_MSG_DELIV_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_NTFCTN_MSG_DELIV_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-523">
+  <addUniqueConstraint columnNames="NM" constraintName="KREN_PRIO_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_PRIO_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-524">
+  <addUniqueConstraint columnNames="NM" constraintName="KREN_PRODCR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_PRODCR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-525">
+  <addUniqueConstraint columnNames="CHNL_ID, RECIP_TYP_CD, RECIP_ID" constraintName="KREN_RECIP_LIST_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_RECIP_LIST_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-526">
+  <addUniqueConstraint columnNames="RECIP_ID, PROP" constraintName="KREN_RECIP_PREFS_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_RECIP_PREFS_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-527">
+  <addUniqueConstraint columnNames="NTFCTN_ID, RECIP_TYP_CD, PRNCPL_ID" constraintName="KREN_RECIP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_RECIP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-528">
+  <addUniqueConstraint columnNames="CHNL_ID, TYP, PRNCPL_ID" constraintName="KREN_RVWER_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_RVWER_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-529">
+  <addUniqueConstraint columnNames="NTFCTN_ID, NM" constraintName="KREN_SNDR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREN_SNDR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-530">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_APP_DOC_STAT_TRAN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_APP_DOC_STAT_TRAN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-531">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_DLGN_RSP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_DLGN_RSP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-532">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_DOC_HDR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_DOC_HDR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-533">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_DOC_TYP_APP_DOC_STAT_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_DOC_TYP_APP_DOC_STAT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-534">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_DOC_TYP_PLCY_RELN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_DOC_TYP_PLCY_RELN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-535">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_DOC_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_DOC_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-536">
+  <addUniqueConstraint columnNames="DOC_TYP_NM, DOC_TYP_VER_NBR" constraintName="KREW_DOC_TYP_TI1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_DOC_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-537">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_EDL_ASSCTN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_EDL_ASSCTN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-538">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_EDL_DEF_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_EDL_DEF_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-539">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_RULE_ATTR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_ATTR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-540">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_RULE_EXPR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_EXPR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-541">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_RULE_RSP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_RSP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-542">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_RULE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-543">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_RULE_TMPL_ATTR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_TMPL_ATTR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-544">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_RULE_TMPL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_TMPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-545">
+  <addUniqueConstraint columnNames="NM" constraintName="KREW_RULE_TMPL_TI1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_RULE_TMPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-546">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KREW_STYLE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KREW_STYLE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-547">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ADDR_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ADDR_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-548">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_ADDR_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ADDR_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-549">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_AFLTN_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_AFLTN_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-550">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_AFLTN_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_AFLTN_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-551">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ATTR_DEFN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ATTR_DEFN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-552">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_CTZNSHP_STAT_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_CTZNSHP_STAT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-553">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_CTZNSHP_STAT_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_CTZNSHP_STAT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-554">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_DLGN_MBR_ATTR_DATA_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_DLGN_MBR_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-555">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_DLGN_MBR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_DLGN_MBR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-556">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_DLGN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_DLGN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-557">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_EMAIL_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EMAIL_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-558">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_EMAIL_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EMAIL_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-559">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_EMP_STAT_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EMP_STAT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-560">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_EMP_STAT_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EMP_STAT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-561">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_EMP_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EMP_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-562">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_EMP_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EMP_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-563">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_ADDR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_ADDR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-564">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_AFLTN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_AFLTN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-565">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_BIO_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_BIO_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-566">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_CACHE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_CACHE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-567">
+  <addUniqueConstraint columnNames="PRNCPL_ID" constraintName="KRIM_ENTITY_CACHE_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_CACHE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-568">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_CTZNSHP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_CTZNSHP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-569">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_EMAIL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_EMAIL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-570">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_EMP_INFO_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_EMP_INFO_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-571">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_ENT_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_ENT_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-572">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_ETHNIC_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_ETHNIC_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-573">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_EXT_ID_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_EXT_ID_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-574">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_NM_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_NM_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-575">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_PHONE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_PHONE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-576">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_PRIV_PREF_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_PRIV_PREF_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-577">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_RESIDENCY_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_RESIDENCY_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-578">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-579">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENTITY_VISA_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENTITY_VISA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-580">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENT_NM_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENT_NM_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-581">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_ENT_NM_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENT_NM_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-582">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ENT_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENT_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-583">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_ENT_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ENT_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-584">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_EXT_ID_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EXT_ID_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-585">
+  <addUniqueConstraint columnNames="NM" constraintName="KRIM_EXT_ID_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_EXT_ID_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-586">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_GRP_ATTR_DATA_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_GRP_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-587">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_GRP_MBR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_GRP_MBR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-588">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_GRP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_GRP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-589">
+  <addUniqueConstraint columnNames="GRP_NM, NMSPC_CD" constraintName="KRIM_GRP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_GRP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-590">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PERM_ATTR_DATA_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-591">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PERM_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-592">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PERM_TMPL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_TMPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-593">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PHONE_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PHONE_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-594">
+  <addUniqueConstraint columnNames="PHONE_TYP_NM" constraintName="KRIM_PHONE_TYP_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PHONE_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-595">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PRNCPL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PRNCPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-596">
+  <addUniqueConstraint columnNames="PRNCPL_NM" constraintName="KRIM_PRNCPL_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PRNCPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-597">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ROLE_MBR_ATTR_DATA_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_MBR_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-598">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ROLE_MBR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_MBR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-599">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ROLE_PERM_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_PERM_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-600">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ROLE_RSP_ACTN_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_RSP_ACTN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-601">
+  <addUniqueConstraint columnNames="ROLE_RSP_ID, ROLE_MBR_ID" constraintName="KRIM_ROLE_RSP_ACTN_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_RSP_ACTN_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-602">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ROLE_RSP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_RSP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-603">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_ROLE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-604">
+  <addUniqueConstraint columnNames="ROLE_NM, NMSPC_CD" constraintName="KRIM_ROLE_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_ROLE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-605">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_RSP_ATTR_DATA_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_RSP_ATTR_DATA_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-606">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_RSP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_RSP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-607">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_RSP_TMPL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_RSP_TMPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-608">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_TYP_ATTR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_TYP_ATTR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-609">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-620">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_ADHOC_RTE_ACTN_RECIP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_ADHOC_RTE_ACTN_RECIP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-621">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_ATT_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_ATT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-622">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_DOC_HDR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_DOC_HDR_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-623">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_LOOKUP_RSLT_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_LOOKUP_RSLT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-624">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_LOOKUP_SEL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_LOOKUP_SEL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-625">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_MAINT_DOC_ATT_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_MAINT_DOC_ATT_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-626">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_MAINT_DOC_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_MAINT_DOC_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-627">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_MAINT_LOCK_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_MAINT_LOCK_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-628">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_NTE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_NTE_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-629">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_NTE_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_NTE_TYP_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-630">
+  <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PESSIMISTIC_LOCK_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRNS_PESSIMISTIC_LOCK_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-783">
+  <addForeignKeyConstraint baseColumnNames="CHNL_ID" baseTableName="KREN_CHNL_PRODCR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_CHNL_PRODCR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CHNL_ID" referencedTableName="KREN_CHNL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-784">
+  <addForeignKeyConstraint baseColumnNames="PRODCR_ID" baseTableName="KREN_CHNL_PRODCR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_CHNL_PRODCR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PRODCR_ID" referencedTableName="KREN_PRODCR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-785">
+  <addForeignKeyConstraint baseColumnNames="CHNL_ID" baseTableName="KREN_CHNL_SUBSCRP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_CHAN_SUBSCRP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CHNL_ID" referencedTableName="KREN_CHNL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-786">
+  <addForeignKeyConstraint baseColumnNames="MSG_ID" baseTableName="KREN_MSG_DELIV_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_MSG_DELIV_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="MSG_ID" referencedTableName="KREN_MSG_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-787">
+  <addForeignKeyConstraint baseColumnNames="NTFCTN_ID" baseTableName="KREN_NTFCTN_MSG_DELIV_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_NTFCTN_MSG_DELIV_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NTFCTN_ID" referencedTableName="KREN_NTFCTN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-788">
+  <addForeignKeyConstraint baseColumnNames="CHNL_ID" baseTableName="KREN_NTFCTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_NTFCTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CHNL_ID" referencedTableName="KREN_CHNL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-789">
+  <addForeignKeyConstraint baseColumnNames="CNTNT_TYP_ID" baseTableName="KREN_NTFCTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_NTFCTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CNTNT_TYP_ID" referencedTableName="KREN_CNTNT_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-790">
+  <addForeignKeyConstraint baseColumnNames="PRIO_ID" baseTableName="KREN_NTFCTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_NTFCTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PRIO_ID" referencedTableName="KREN_PRIO_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-791">
+  <addForeignKeyConstraint baseColumnNames="PRODCR_ID" baseTableName="KREN_NTFCTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_NTFCTN_FK4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PRODCR_ID" referencedTableName="KREN_PRODCR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-792">
+  <addForeignKeyConstraint baseColumnNames="CHNL_ID" baseTableName="KREN_RECIP_LIST_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_RECIP_LIST_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CHNL_ID" referencedTableName="KREN_CHNL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-793">
+  <addForeignKeyConstraint baseColumnNames="NTFCTN_ID" baseTableName="KREN_RECIP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_RECIP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NTFCTN_ID" referencedTableName="KREN_NTFCTN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-794">
+  <addForeignKeyConstraint baseColumnNames="CHNL_ID" baseTableName="KREN_RVWER_T" baseTableSchemaName="KSEMBEDDED" constraintName="NOTIFICATION_REVIEWERS_N_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CHNL_ID" referencedTableName="KREN_CHNL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-795">
+  <addForeignKeyConstraint baseColumnNames="NTFCTN_ID" baseTableName="KREN_SNDR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREN_SNDR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NTFCTN_ID" referencedTableName="KREN_NTFCTN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-796">
+  <addForeignKeyConstraint baseColumnNames="RTE_NODE_ID" baseTableName="KREW_RTE_NODE_CFG_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="EN_RTE_NODE_CFG_PARM_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RTE_NODE_ID" referencedTableName="KREW_RTE_NODE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-797">
+  <addForeignKeyConstraint baseColumnNames="RULE_EXPR_ID" baseTableName="KREW_RULE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KREW_RULE_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RULE_EXPR_ID" referencedTableName="KREW_RULE_EXPR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-798">
+  <addForeignKeyConstraint baseColumnNames="KIM_ATTR_DEFN_ID" baseTableName="KRIM_DLGN_MBR_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_DLGN_MBR_ATTR_DATA_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_ATTR_DEFN_ID" referencedTableName="KRIM_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-799">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_DLGN_MBR_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_DLGN_MBR_ATTR_DATA_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-800">
+  <addForeignKeyConstraint baseColumnNames="DLGN_ID" baseTableName="KRIM_DLGN_MBR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_DLGN_MBR_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="DLGN_ID" referencedTableName="KRIM_DLGN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-801">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_DLGN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_DLGN_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-802">
+  <addForeignKeyConstraint baseColumnNames="ROLE_ID" baseTableName="KRIM_DLGN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_DLGN_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ROLE_ID" referencedTableName="KRIM_ROLE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-803">
+  <addForeignKeyConstraint baseColumnNames="ADDR_TYP_CD" baseTableName="KRIM_ENTITY_ADDR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_ADDR_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ADDR_TYP_CD" referencedTableName="KRIM_ADDR_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-804">
+  <addForeignKeyConstraint baseColumnNames="ENT_TYP_CD, ENTITY_ID" baseTableName="KRIM_ENTITY_ADDR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_ADDR_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENT_TYP_CD, ENTITY_ID" referencedTableName="KRIM_ENTITY_ENT_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-805">
+  <addForeignKeyConstraint baseColumnNames="AFLTN_TYP_CD" baseTableName="KRIM_ENTITY_AFLTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_AFLTN_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="AFLTN_TYP_CD" referencedTableName="KRIM_AFLTN_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-806">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_AFLTN_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_AFLTN_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-807">
+  <addForeignKeyConstraint baseColumnNames="CTZNSHP_STAT_CD" baseTableName="KRIM_ENTITY_CTZNSHP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_CTZNSHP_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="CTZNSHP_STAT_CD" referencedTableName="KRIM_CTZNSHP_STAT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-808">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_CTZNSHP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_CTZNSHP_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-809">
+  <addForeignKeyConstraint baseColumnNames="ENT_TYP_CD, ENTITY_ID" baseTableName="KRIM_ENTITY_EMAIL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EMAIL_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENT_TYP_CD, ENTITY_ID" referencedTableName="KRIM_ENTITY_ENT_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-810">
+  <addForeignKeyConstraint baseColumnNames="EMP_STAT_CD" baseTableName="KRIM_ENTITY_EMP_INFO_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EMP_INFO_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="EMP_STAT_CD" referencedTableName="KRIM_EMP_STAT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-811">
+  <addForeignKeyConstraint baseColumnNames="EMP_TYP_CD" baseTableName="KRIM_ENTITY_EMP_INFO_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EMP_INFO_TR3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="EMP_TYP_CD" referencedTableName="KRIM_EMP_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-812">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_AFLTN_ID" baseTableName="KRIM_ENTITY_EMP_INFO_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EMP_INFO_TR4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ENTITY_AFLTN_ID" referencedTableName="KRIM_ENTITY_AFLTN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-813">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_EMP_INFO_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EMP_INFO_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-814">
+  <addForeignKeyConstraint baseColumnNames="ENT_TYP_CD" baseTableName="KRIM_ENTITY_ENT_TYP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_ENT_TYP_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ENT_TYP_CD" referencedTableName="KRIM_ENT_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-815">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_ENT_TYP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_ENT_TYP_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-816">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_ETHNIC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_ETHNIC_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-817">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_EXT_ID_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EXT_ID_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-818">
+  <addForeignKeyConstraint baseColumnNames="EXT_ID_TYP_CD" baseTableName="KRIM_ENTITY_EXT_ID_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_EXT_ID_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="EXT_ID_TYP_CD" referencedTableName="KRIM_EXT_ID_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-819">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_NM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_NM_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-820">
+  <addForeignKeyConstraint baseColumnNames="ENT_TYP_CD, ENTITY_ID" baseTableName="KRIM_ENTITY_PHONE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_PHONE_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENT_TYP_CD, ENTITY_ID" referencedTableName="KRIM_ENTITY_ENT_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-821">
+  <addForeignKeyConstraint baseColumnNames="PHONE_TYP_CD" baseTableName="KRIM_ENTITY_PHONE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_PHONE_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PHONE_TYP_CD" referencedTableName="KRIM_PHONE_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-822">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_RESIDENCY_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_RESIDENCY_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-823">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_ENTITY_VISA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ENTITY_VISA_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-824">
+  <addForeignKeyConstraint baseColumnNames="GRP_ID" baseTableName="KRIM_GRP_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_GRP_ATTR_DATA_TR3" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="GRP_ID" referencedTableName="KRIM_GRP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-825">
+  <addForeignKeyConstraint baseColumnNames="KIM_ATTR_DEFN_ID" baseTableName="KRIM_GRP_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_GRP_ATTR_DATA_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_ATTR_DEFN_ID" referencedTableName="KRIM_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-826">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_GRP_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_GRP_ATTR_DATA_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-827">
+  <addForeignKeyConstraint baseColumnNames="GRP_ID" baseTableName="KRIM_GRP_MBR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_GRP_MBR_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="GRP_ID" referencedTableName="KRIM_GRP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-828">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_GRP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_GRP_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-829">
+  <addForeignKeyConstraint baseColumnNames="KIM_ATTR_DEFN_ID" baseTableName="KRIM_PERM_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PERM_ATTR_DATA_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_ATTR_DEFN_ID" referencedTableName="KRIM_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-830">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_PERM_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PERM_ATTR_DATA_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-831">
+  <addForeignKeyConstraint baseColumnNames="PERM_ID" baseTableName="KRIM_PERM_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PERM_ATTR_DATA_TR3" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="PERM_ID" referencedTableName="KRIM_PERM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-832">
+  <addForeignKeyConstraint baseColumnNames="PERM_TMPL_ID" baseTableName="KRIM_PERM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PERM_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PERM_TMPL_ID" referencedTableName="KRIM_PERM_TMPL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-833">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_PERM_TMPL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PERM_TMPL_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-834">
+  <addForeignKeyConstraint baseColumnNames="FDOC_NBR" baseTableName="KRIM_PND_AFLTN_MT" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PND_AFLTN_MT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="FDOC_NBR" referencedTableName="KRIM_PERSON_DOCUMENT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-835">
+  <addForeignKeyConstraint baseColumnNames="ENTITY_ID" baseTableName="KRIM_PRNCPL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_PRNCPL_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ENTITY_ID" referencedTableName="KRIM_ENTITY_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-836">
+  <addForeignKeyConstraint baseColumnNames="KIM_ATTR_DEFN_ID" baseTableName="KRIM_ROLE_MBR_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ROLE_MBR_ATTR_DATA_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_ATTR_DEFN_ID" referencedTableName="KRIM_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-837">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_ROLE_MBR_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ROLE_MBR_ATTR_DATA_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-838">
+  <addForeignKeyConstraint baseColumnNames="ROLE_ID" baseTableName="KRIM_ROLE_MBR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ROLE_MBR_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="ROLE_ID" referencedTableName="KRIM_ROLE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-839">
+  <addForeignKeyConstraint baseColumnNames="PERM_ID" baseTableName="KRIM_ROLE_PERM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ROLE_PERM_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="PERM_ID" referencedTableName="KRIM_PERM_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-840">
+  <addForeignKeyConstraint baseColumnNames="RSP_ID" baseTableName="KRIM_ROLE_RSP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ROLE_RSP_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RSP_ID" referencedTableName="KRIM_RSP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-841">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_ROLE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_ROLE_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-842">
+  <addForeignKeyConstraint baseColumnNames="KIM_ATTR_DEFN_ID" baseTableName="KRIM_RSP_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_RSP_ATTR_DATA_TR2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_ATTR_DEFN_ID" referencedTableName="KRIM_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-843">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_RSP_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_RSP_ATTR_DATA_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-844">
+  <addForeignKeyConstraint baseColumnNames="RSP_ID" baseTableName="KRIM_RSP_ATTR_DATA_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_RSP_ATTR_DATA_TR3" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="RSP_ID" referencedTableName="KRIM_RSP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-845">
+  <addForeignKeyConstraint baseColumnNames="RSP_TMPL_ID" baseTableName="KRIM_RSP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_RSP_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="RSP_TMPL_ID" referencedTableName="KRIM_RSP_TMPL_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-846">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_RSP_TMPL_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_RSP_TMPL_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-847">
+  <addForeignKeyConstraint baseColumnNames="KIM_ATTR_DEFN_ID" baseTableName="KRIM_TYP_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_TYP_ATTR_TR2" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="KIM_ATTR_DEFN_ID" referencedTableName="KRIM_ATTR_DEFN_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-848">
+  <addForeignKeyConstraint baseColumnNames="KIM_TYP_ID" baseTableName="KRIM_TYP_ATTR_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRIM_TYP_ATTRIBUTE_TR1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="KIM_TYP_ID" referencedTableName="KRIM_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-897">
+  <addForeignKeyConstraint baseColumnNames="NTE_ID" baseTableName="KRNS_ATT_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_ATT_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NTE_ID" referencedTableName="KRNS_NTE_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-898">
+  <addForeignKeyConstraint baseColumnNames="DOC_HDR_ID" baseTableName="KRNS_MAINT_DOC_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_MAINT_DOC_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="DOC_HDR_ID" referencedTableName="KRNS_DOC_HDR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-899">
+  <addForeignKeyConstraint baseColumnNames="NTE_TYP_CD" baseTableName="KRNS_NTE_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_NTE_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NTE_TYP_CD" referencedTableName="KRNS_NTE_TYP_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-900">
+  <addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP" baseTableName="KRSB_QRTZ_BLOB_TRIGGERS" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_QRTZ_BLOB_TRIGGERS_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP" referencedTableName="KRSB_QRTZ_TRIGGERS" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-901">
+  <addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP" baseTableName="KRSB_QRTZ_CRON_TRIGGERS" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_QRTZ_CRON_TRIGGERS_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP" referencedTableName="KRSB_QRTZ_TRIGGERS" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-902">
+  <addForeignKeyConstraint baseColumnNames="JOB_NAME, JOB_GROUP" baseTableName="KRSB_QRTZ_JOB_LISTENERS" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_QUARTZ_JOB_LISTENERS_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="JOB_NAME, JOB_GROUP" referencedTableName="KRSB_QRTZ_JOB_DETAILS" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-903">
+  <addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP" baseTableName="KRSB_QRTZ_SIMPLE_TRIGGERS" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_QRTZ_SIMPLE_TRIGGERS_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP" referencedTableName="KRSB_QRTZ_TRIGGERS" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-904">
+  <addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP" baseTableName="KRSB_QRTZ_TRIGGER_LISTENERS" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_QRTZ_TRIGGER_LISTENE_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP" referencedTableName="KRSB_QRTZ_TRIGGERS" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-905">
+  <addForeignKeyConstraint baseColumnNames="SVC_DSCRPTR_ID" baseTableName="KRSB_SVC_DEF_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_SVC_DEF_FK1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="SVC_DSCRPTR_ID" referencedTableName="KRSB_SVC_DSCRPTR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>
