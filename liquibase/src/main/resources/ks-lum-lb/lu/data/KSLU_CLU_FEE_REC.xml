@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_CLU_FEE_REC-initial-data" author="alubbers">
+		<insert tableName="KSLU_CLU_FEE_REC">
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101214123113"/>
+			<column name="FEE_TYPE" value="REVENUE"/>
+			<column name="ID" value="466f80c3-2889-43b8-be32-7b60cb06a300"/>
+			<column name="OBJ_ID" value="ff9dd39c-bbc5-405b-b441-9cdafa77c633"/>
+			<column name="RATE_TYPE" value="REVENUE"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101214124420"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KSLU_CLU_FEE_REC">
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101214123113"/>
+			<column name="FEE_TYPE" value="kuali.enum.type.feeTypes.fieldTripFee"/>
+			<column name="ID" value="886548f0-9b12-4534-bee3-7e8153402c8e"/>
+			<column name="OBJ_ID" value="69b7a28d-2290-47b7-839e-de4f7374936d"/>
+			<column name="RATE_TYPE" value="variableRateFee"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101214124420"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

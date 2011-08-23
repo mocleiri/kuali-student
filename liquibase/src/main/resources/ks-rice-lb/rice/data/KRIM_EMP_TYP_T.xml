@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_EMP_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_EMP_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="02"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="NM" value="Non-Professional"/>
+			<column name="OBJ_ID" value="5B97C50B03826110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="99"/>
+			<column name="EMP_TYP_CD" value="O"/>
+			<column name="LAST_UPDT_DT" value="20081113140633"/>
+			<column name="NM" value="Other"/>
+			<column name="OBJ_ID" value="5B97C50B03836110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="01"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="LAST_UPDT_DT" value="20081113140633"/>
+			<column name="NM" value="Professional"/>
+			<column name="OBJ_ID" value="5B97C50B03846110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

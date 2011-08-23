@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-977">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLR_RESCOMP" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_RESCOMP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLR_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-978">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSLR_RESCOMP" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_RESCOMP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLR_RESCOMP_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-979">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLR_RESCOMP_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_RESCOMP_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLR_RESCOMP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-980">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLR_RESCOMP_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_RESCOMP_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLR_RESCOMP_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-981">
+  <addForeignKeyConstraint baseColumnNames="RSLT_COMP_ID" baseTableName="KSLR_RESULT_VALUE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_RESULT_VALUE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLR_RESCOMP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-982">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLR_SCALE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_SCALE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLR_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-983">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLR_SCALE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLR_SCALE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLR_SCALE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,148 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_REQ_COM_FIELD_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="CLU identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.clu.id"/>
+			<column name="NAME" value="CLU Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="CLU set identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.cluSet.id"/>
+			<column name="NAME" value="CLU Set Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Course CLU identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.course.clu.id"/>
+			<column name="NAME" value="Course CLU Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Course CLU set identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="NAME" value="Course CLU Set Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Duration value"/>
+			<column name="ID" value="kuali.reqComponent.field.type.duration"/>
+			<column name="NAME" value="Duration Value"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Duration type identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="NAME" value="Duration Type Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Grade point average value"/>
+			<column name="ID" value="kuali.reqComponent.field.type.gpa"/>
+			<column name="NAME" value="Grade Point Average Value"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Grade value identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.grade.id"/>
+			<column name="NAME" value="Grade Value Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Grade type identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.gradeType.id"/>
+			<column name="NAME" value="Grade Type Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Relational Operator"/>
+			<column name="ID" value="kuali.reqComponent.field.type.operator"/>
+			<column name="NAME" value="Relational Operator"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Organization identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.org.id"/>
+			<column name="NAME" value="Organization Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Person identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.person.id"/>
+			<column name="NAME" value="Person Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Program CLU identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.program.clu.id"/>
+			<column name="NAME" value="Program CLU Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Program CLU set identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="NAME" value="Program CLU Set Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Test CLU identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.test.clu.id"/>
+			<column name="NAME" value="Test CLU Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Test CLU set identifier"/>
+			<column name="ID" value="kuali.reqComponent.field.type.test.cluSet.id"/>
+			<column name="NAME" value="Test CLU Set Id"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="string"/>
+			<column name="DESCR" value="Test score"/>
+			<column name="ID" value="kuali.reqComponent.field.type.test.score"/>
+			<column name="NAME" value="Test Score"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
+			<column name="DATA_TYPE" value="integer"/>
+			<column name="DESCR" value="Integer Value"/>
+			<column name="ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="NAME" value="Integer Value"/>
+			<column name="READ_ONLY" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,52 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_ATP_STATE-initial-data" author="alubbers">
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Atp relation is active"/>
+			<column name="ID" value="kuali.atp.atp.relation.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Atp relation is inactive"/>
+			<column name="ID" value="kuali.atp.atp.relation.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Milestone relation is active"/>
+			<column name="ID" value="kuali.atp.milestone.relation.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Milestone relation is inactive"/>
+			<column name="ID" value="kuali.atp.milestone.relation.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this Time Period is just tentative"/>
+			<column name="ID" value="kuali.atp.state.Draft"/>
+			<column name="NAME" value="Draft"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this Time Period has been established"/>
+			<column name="ID" value="kuali.atp.state.Official"/>
+			<column name="NAME" value="Official"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this milestone is just tentative"/>
+			<column name="ID" value="kuali.milestone.state.Draft"/>
+			<column name="NAME" value="Draft"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_STATE">
+			<column name="DESCR" value="Indicates that this milestone has been established"/>
+			<column name="ID" value="kuali.milestone.state.Official"/>
+			<column name="NAME" value="Official"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

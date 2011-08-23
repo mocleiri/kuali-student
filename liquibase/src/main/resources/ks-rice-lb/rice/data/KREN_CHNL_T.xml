@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREN_CHNL_T-initial-data" author="alubbers">
+		<insert tableName="KREN_CHNL_T">
+			<column name="CHNL_ID" value="500"/>
+			<column name="DESC_TXT" value="Builtin channel for KEW"/>
+			<column name="NM" value="KEW"/>
+			<column name="SUBSCRB_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

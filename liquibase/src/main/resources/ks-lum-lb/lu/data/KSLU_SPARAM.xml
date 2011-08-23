@@ -1,0 +1,64 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_SPARAM-initial-data" author="alubbers">
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="036c3609-48da-432a-9949-0d93c3b99f05"/>
+			<column name="OBJ_ID" value="7a8c2188-f37b-4550-9b77-dcb94ff1f219"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalCrsNoRange"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="03874608-d7bf-40f9-a627-a65a32cb3c10"/>
+			<column name="OBJ_ID" value="6e00ae7b-99c8-472e-b3ee-76a6aa4a5724"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalCrsNoRange"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="24f46f2b-347c-490e-89b1-df6117c78243"/>
+			<column name="OBJ_ID" value="5f0246df-5c89-4a4a-a541-c38e617197c1"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalCrsNoRange"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="32a26aed-c5ec-4f70-b3bd-1767009aa8c7"/>
+			<column name="OBJ_ID" value="75805c9e-8ac0-4a7e-8dfd-5ada8932ade7"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalDivision"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="5205c9a9-8d34-4952-aaa0-96499097c368"/>
+			<column name="OBJ_ID" value="6d8285b0-bc6c-4856-9f93-758e3a7678df"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalDivision"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="6ba067ba-de33-433a-9e47-f95e8741b71e"/>
+			<column name="OBJ_ID" value="ed0e66f1-8128-4822-8a62-cdf667a4b66f"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalDivision"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="b2b3a642-5dc9-48ec-9979-9e6f0b4ddd3e"/>
+			<column name="OBJ_ID" value="3ad2e8f1-074c-4cd7-8311-56fddc270eae"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalCrsNoRange"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="b34cd32c-74c3-4c60-9462-d03bc5479d2e"/>
+			<column name="OBJ_ID" value="883888c4-49f7-49e4-8ab4-7e8e5ef82efb"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalCrsNoRange"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="b5887814-b196-439d-86c7-f18e1e1a4d14"/>
+			<column name="OBJ_ID" value="44055293-e115-4f5c-a287-9b275235da8b"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalDivision"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_SPARAM">
+			<column name="ID" value="f164e510-ae46-477b-85a3-aacec0d37111"/>
+			<column name="OBJ_ID" value="e767262e-68f1-49dc-97af-972ba08dab7f"/>
+			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalDivision"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

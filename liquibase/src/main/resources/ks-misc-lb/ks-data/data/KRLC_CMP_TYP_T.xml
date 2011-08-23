@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRLC_CMP_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRLC_CMP_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CAMPUS_TYP_CD" value="B"/>
+			<column name="CMP_TYP_NM" value="BOTH"/>
+			<column name="DOBJ_MAINT_CD_ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="1EFD72846DC90024E043814FD8810024"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CMP_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CAMPUS_TYP_CD" value="F"/>
+			<column name="CMP_TYP_NM" value="FISCAL"/>
+			<column name="DOBJ_MAINT_CD_ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="1EFD72846DCA0024E043814FD8810024"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CMP_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CAMPUS_TYP_CD" value="P"/>
+			<column name="CMP_TYP_NM" value="PHYSICAL"/>
+			<column name="DOBJ_MAINT_CD_ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="1EFD72846DCB0024E043814FD8810024"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,44 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_AFLTN_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_AFLTN_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="AFLTN_TYP_CD" value="AFLT"/>
+			<column name="DISPLAY_SORT_CD" value="d"/>
+			<column name="EMP_AFLTN_TYP_IND" value="N"/>
+			<column name="LAST_UPDT_DT" value="20081113140630"/>
+			<column name="NM" value="Affiliate"/>
+			<column name="OBJ_ID" value="5B97C50B03736110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_AFLTN_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="AFLTN_TYP_CD" value="FCLTY"/>
+			<column name="DISPLAY_SORT_CD" value="b"/>
+			<column name="EMP_AFLTN_TYP_IND" value="Y"/>
+			<column name="LAST_UPDT_DT" value="20081113140630"/>
+			<column name="NM" value="Faculty"/>
+			<column name="OBJ_ID" value="5B97C50B03746110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_AFLTN_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="AFLTN_TYP_CD" value="STAFF"/>
+			<column name="DISPLAY_SORT_CD" value="c"/>
+			<column name="EMP_AFLTN_TYP_IND" value="Y"/>
+			<column name="LAST_UPDT_DT" value="20081113140630"/>
+			<column name="NM" value="Staff"/>
+			<column name="OBJ_ID" value="5B97C50B03756110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_AFLTN_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="AFLTN_TYP_CD" value="STDNT"/>
+			<column name="DISPLAY_SORT_CD" value="a"/>
+			<column name="EMP_AFLTN_TYP_IND" value="N"/>
+			<column name="LAST_UPDT_DT" value="20081113140630"/>
+			<column name="NM" value="Student"/>
+			<column name="OBJ_ID" value="5B97C50B03766110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

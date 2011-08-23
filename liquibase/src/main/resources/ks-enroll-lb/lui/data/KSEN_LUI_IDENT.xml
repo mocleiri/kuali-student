@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_LUI_IDENT-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="CHEM123"/>
+			<column name="DIVISION" value="CHEM"/>
+			<column name="ID" value="LUI-IDENT-1"/>
+			<column name="LNG_NAME" value="Chemistry 123"/>
+			<column name="SHRT_NAME" value="Chem 123"/>
+			<column name="SUFX_CD" value="123"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

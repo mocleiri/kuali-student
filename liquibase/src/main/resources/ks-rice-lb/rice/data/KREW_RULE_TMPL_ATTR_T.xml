@@ -1,0 +1,74 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RULE_TMPL_ATTR_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="2"/>
+			<column name="OBJ_ID" value="6166CBA1BB16644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="1"/>
+			<column name="RULE_ATTR_ID" value="1010"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1024"/>
+			<column name="RULE_TMPL_ID" value="1023"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="3"/>
+			<column name="OBJ_ID" value="6166CBA1BB17644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="1"/>
+			<column name="RULE_ATTR_ID" value="1011"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1027"/>
+			<column name="RULE_TMPL_ID" value="1026"/>
+			<column name="VER_NBR" value="8"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="4"/>
+			<column name="OBJ_ID" value="6166CBA1BB18644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="1"/>
+			<column name="RULE_ATTR_ID" value="1012"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1029"/>
+			<column name="RULE_TMPL_ID" value="1028"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="5"/>
+			<column name="OBJ_ID" value="6166CBA1BB19644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="1"/>
+			<column name="RULE_ATTR_ID" value="1012"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1031"/>
+			<column name="RULE_TMPL_ID" value="1030"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="6"/>
+			<column name="OBJ_ID" value="6166CBA1BB1A644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="1"/>
+			<column name="RULE_ATTR_ID" value="1013"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1033"/>
+			<column name="RULE_TMPL_ID" value="1032"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="0"/>
+			<column name="OBJ_ID" value="6166CBA1BB1C644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="0"/>
+			<column name="RULE_ATTR_ID" value="1100"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1102"/>
+			<column name="RULE_TMPL_ID" value="1101"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_ATTR_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="DSPL_ORD" value="3"/>
+			<column name="OBJ_ID" value="6166CBA1BB20644DE0404F8189D86C09"/>
+			<column name="REQ_IND" value="1"/>
+			<column name="RULE_ATTR_ID" value="1000"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1321"/>
+			<column name="RULE_TMPL_ID" value="1320"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

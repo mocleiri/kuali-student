@@ -1,0 +1,180 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ROLE_RSP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="BC27A267EF607417E0404F8189DAA0A9"/>
+			<column name="ROLE_ID" value="63"/>
+			<column name="ROLE_RSP_ID" value="1"/>
+			<column name="RSP_ID" value="1000"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="5DF45238F5528846E0404F8189D840B8"/>
+			<column name="ROLE_ID" value="63"/>
+			<column name="ROLE_RSP_ID" value="1080"/>
+			<column name="RSP_ID" value="93"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview0000000ROLERSP01"/>
+			<column name="ROLE_ID" value="900"/>
+			<column name="ROLE_RSP_ID" value="5001"/>
+			<column name="RSP_ID" value="300"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview0000000ROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5002"/>
+			<column name="RSP_ID" value="300"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview0000000ROLERSP03"/>
+			<column name="ROLE_ID" value="917"/>
+			<column name="ROLE_RSP_ID" value="5003"/>
+			<column name="RSP_ID" value="300"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview0000000ROLERSP04"/>
+			<column name="ROLE_ID" value="911"/>
+			<column name="ROLE_RSP_ID" value="5004"/>
+			<column name="RSP_ID" value="300"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview0000000000ROLERSP01"/>
+			<column name="ROLE_ID" value="905"/>
+			<column name="ROLE_RSP_ID" value="5101"/>
+			<column name="RSP_ID" value="301"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview0000000000ROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5102"/>
+			<column name="RSP_ID" value="301"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview0000000000ROLERSP03"/>
+			<column name="ROLE_ID" value="906"/>
+			<column name="ROLE_RSP_ID" value="5103"/>
+			<column name="RSP_ID" value="301"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview0000000000ROLERSP04"/>
+			<column name="ROLE_ID" value="911"/>
+			<column name="ROLE_RSP_ID" value="5104"/>
+			<column name="RSP_ID" value="301"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview000000000ROLERSP01"/>
+			<column name="ROLE_ID" value="901"/>
+			<column name="ROLE_RSP_ID" value="5301"/>
+			<column name="RSP_ID" value="303"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview000000000ROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5302"/>
+			<column name="RSP_ID" value="303"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview000000000ROLERSP03"/>
+			<column name="ROLE_ID" value="902"/>
+			<column name="ROLE_RSP_ID" value="5303"/>
+			<column name="RSP_ID" value="303"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview000000000ROLERSP04"/>
+			<column name="ROLE_ID" value="911"/>
+			<column name="ROLE_RSP_ID" value="5304"/>
+			<column name="RSP_ID" value="303"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview00000000000ROLERSP01"/>
+			<column name="ROLE_ID" value="907"/>
+			<column name="ROLE_RSP_ID" value="5401"/>
+			<column name="RSP_ID" value="304"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview00000000000ROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5402"/>
+			<column name="RSP_ID" value="304"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview00000000000ROLERSP03"/>
+			<column name="ROLE_ID" value="908"/>
+			<column name="ROLE_RSP_ID" value="5403"/>
+			<column name="RSP_ID" value="304"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview00000000000ROLERSP04"/>
+			<column name="ROLE_ID" value="911"/>
+			<column name="ROLE_RSP_ID" value="5404"/>
+			<column name="RSP_ID" value="304"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview000000ROLERSP01"/>
+			<column name="ROLE_ID" value="909"/>
+			<column name="ROLE_RSP_ID" value="5501"/>
+			<column name="RSP_ID" value="305"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview000000ROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5502"/>
+			<column name="RSP_ID" value="305"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview00000AROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5503"/>
+			<column name="RSP_ID" value="306"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview00000BROLERSP02"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_RSP_ID" value="5504"/>
+			<column name="RSP_ID" value="307"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

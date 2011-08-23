@@ -1,0 +1,44 @@
+atp/ks-enroll-atp-create:KSEN_ATP 
+atp/ks-enroll-atp-create:KSEN_ATPATP_RELTN 
+atp/ks-enroll-atp-create:KSEN_ATPATP_RELTN_ATTR 
+atp/ks-enroll-atp-create:KSEN_ATPMSTONE_RELTN_ATTR 
+atp/ks-enroll-atp-create:KSEN_ATPMSTONE_RELTN 
+atp/ks-enroll-atp-create:KSEN_ATPMSTONE_RELTN_ATTR 
+atp/ks-enroll-atp-create:KSEN_ATP_ATTR 
+atp/ks-enroll-atp-create:KSEN_ATP_STATE 
+atp/ks-enroll-atp-create:KSEN_ATP_TYPE 
+atp/ks-enroll-atp-create:KSEN_COMM_STATE 
+atp/ks-enroll-atp-create:KSEN_HOLD 
+atp/ks-enroll-atp-create:KSEN_HOLD_ATTR 
+atp/ks-enroll-atp-create:KSEN_HOLD_RICH_TEXT 
+atp/ks-enroll-atp-create:KSEN_HOLD_TYPE 
+atp/ks-enroll-atp-create:KSEN_HOLD_TYPE_ATTR 
+atp/ks-enroll-atp-create:KSEN_ISSRESTRCTN_RELTN 
+atp/ks-enroll-atp-create:KSEN_ISSUE 
+atp/ks-enroll-atp-create:KSEN_ISSUE_ATTR 
+atp/ks-enroll-atp-create:KSEN_MSTONE 
+atp/ks-enroll-atp-create:KSEN_RESTRICTION 
+atp/ks-enroll-atp-create:KSEN_RESTRICTION_ATTR 
+atp/ks-enroll-atp-create:KSEN_RICH_TEXT_T 
+atp/ks-enroll-atp-create:KSEN_STATEPROCESS_RELTN 
+atp/ks-enroll-atp-create:KSEN_STATE_ATTR 
+atp/ks-enroll-atp-create:KSEN_STATE_PROCESS 
+atp/ks-enroll-atp-create:KSEN_TYPETYPE_RELTN 
+lpr/ks-enroll-lpr-create:KSLP_LPR 
+lpr/ks-enroll-lpr-create:KSLP_LPR_ATTR 
+lpr/ks-enroll-lpr-create:KSLP_LPR_STATE 
+lpr/ks-enroll-lpr-create:KSLP_LPR_TYPE 
+lui/ks-enroll-lui-create:KSEN_LUI 
+lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN 
+lui/ks-enroll-lui-create:  KSEN_LUILUI_RELTN_ATTR
+lui/ks-enroll-lui-create:KSEN_LUI_ATTR 
+lui/ks-enroll-lui-create:KSEN_LUI_INSTR 
+lui/ks-enroll-lui-create:KSEN_LUI_JN_LUI_INSTR 
+lui/ks-enroll-lui-create:KSEN_LUI_JN_LUI_IDENT
+lui/ks-enroll-lui-create:KSEN_LUI_RICH_TEXT 
+lui/ks-enroll-lui-create:KSEN_LUI_TYPE 
+lui/ks-enroll-lui-create:KSEN_LUI_TYPE_ATTR
+lui/ks-enroll-lui-create:  KSEN_LUI_IDENT
+lui/ks-enroll-lui-create:  KSEN_LUI_IDENT_ATTR 
+lui/ks-enroll-lui-create:  KSEN_LUI_LUCD
+lui/ks-enroll-lui-create:  KSEN_LUI_LUCD_ATTR

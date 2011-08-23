@@ -1,0 +1,88 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_REF_STMT_REL_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Anti-requisites"/>
+			<column name="TYPE_DESC" value="CLU Anti-requisites"/>
+			<column name="TYPE_KEY" value="clu.antirequisites"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Completion Requirements"/>
+			<column name="TYPE_DESC" value="CLU Completion Requirements"/>
+			<column name="TYPE_KEY" value="clu.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Co-requisites"/>
+			<column name="TYPE_DESC" value="CLU Co-requisites"/>
+			<column name="TYPE_KEY" value="clu.corequisites"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Repeatable for Credit"/>
+			<column name="TYPE_DESC" value="CLU Repeatable for Credit"/>
+			<column name="TYPE_KEY" value="clu.credit.repeatable"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU That Restrict Credit"/>
+			<column name="TYPE_DESC" value="CLU That Restrict Credit"/>
+			<column name="TYPE_KEY" value="clu.credit.restriction"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Eligibilities and Pre-requisites"/>
+			<column name="TYPE_DESC" value="CLU Eligibilities and Pre-requisites"/>
+			<column name="TYPE_KEY" value="clu.eligibilitiesandprerequisites"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Entrance Requirements"/>
+			<column name="TYPE_DESC" value="CLU Entrance Requirements"/>
+			<column name="TYPE_KEY" value="clu.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Pre-requisites"/>
+			<column name="TYPE_DESC" value="CLU Pre-requisites"/>
+			<column name="TYPE_KEY" value="clu.prerequisites"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Recommended Preparations"/>
+			<column name="TYPE_DESC" value="CLU Recommended Preparations"/>
+			<column name="TYPE_KEY" value="clu.recommendedpreparation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Rules"/>
+			<column name="TYPE_DESC" value="CLU Rules"/>
+			<column name="TYPE_KEY" value="clu.rule"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU Satisfactory Progress Requirements"/>
+			<column name="TYPE_DESC" value="CLU Satisfactory Progress Requirements"/>
+			<column name="TYPE_KEY" value="clu.satisfactoryprogress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_REF_STMT_REL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="CLU reference type"/>
+			<column name="TYPE_DESC" value="CLU reference type"/>
+			<column name="TYPE_KEY" value="kuali.referenceType.CLU"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

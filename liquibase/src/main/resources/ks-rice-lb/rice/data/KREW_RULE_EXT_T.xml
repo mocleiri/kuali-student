@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RULE_EXT_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RULE_EXT_T">
+			<column name="RULE_EXT_ID" value="1045"/>
+			<column name="RULE_ID" value="1044"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1024"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_EXT_T">
+			<column name="RULE_EXT_ID" value="1047"/>
+			<column name="RULE_ID" value="1046"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1027"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_EXT_T">
+			<column name="RULE_EXT_ID" value="1104"/>
+			<column name="RULE_ID" value="1103"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1102"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_EXT_T">
+			<column name="RULE_EXT_ID" value="1107"/>
+			<column name="RULE_ID" value="1106"/>
+			<column name="RULE_TMPL_ATTR_ID" value="1102"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

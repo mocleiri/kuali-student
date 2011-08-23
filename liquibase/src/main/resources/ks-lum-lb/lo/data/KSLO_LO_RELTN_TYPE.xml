@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLO_LO_RELTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSLO_LO_RELTN_TYPE">
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lo.relation.type.inSupportOf"/>
+			<column name="NAME" value="inSupportOf"/>
+			<column name="OBJ_ID" value="6DFADEAABF6140689F8B6A10DFCFDAFF"/>
+			<column name="REV_NAME" value="supports"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLO_LO_RELTN_TYPE">
+			<column name="DESCR" value="Parent-child relationship between a parent LO and sub LO. Currently used in the context of LOs that are related within a single CLU."/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lo.relation.type.includes"/>
+			<column name="NAME" value="includes"/>
+			<column name="OBJ_ID" value="543596F0443D427CB8A3ADC65E68949C"/>
+			<column name="REV_DESCR" value="Child-parent relationship between a child LO and an LO that includes the child.  Currently used in the context of LOs that are related within a single CLU."/>
+			<column name="REV_NAME" value="is-included-by"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

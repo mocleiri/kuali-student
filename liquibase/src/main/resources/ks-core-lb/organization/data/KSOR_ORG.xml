@@ -1,0 +1,3329 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="077ef01e-510f-4932-976a-06666de45562"/>
+			<column name="LNG_NAME" value="The National Council of Teachers of English"/>
+			<column name="OBJ_ID" value="159E42F8D3594FDBAA48570C89C20670"/>
+			<column name="SHRT_NAME" value="NCTE"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="077ef01e-510f-4932-976a-FIRE"/>
+			<column name="LNG_NAME" value="Maryland Fire and Rescue Institute"/>
+			<column name="OBJ_ID" value="96ED3E513F2BFE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="FIRE"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.CorporateEntity"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="077ef01e-510f-4932-976a-IAA"/>
+			<column name="LNG_NAME" value="Institute of Applied Agriculture"/>
+			<column name="OBJ_ID" value="96ED3E513F2AFE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="IAA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.CorporateEntity"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="077ef01e-510f-4932-976a-UMD"/>
+			<column name="LNG_NAME" value="University of Maryland"/>
+			<column name="OBJ_ID" value="96ED3E513F29FE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="UMD"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.CorporateEntity"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="084c11ce-a379-4935-a977-34a6f5292b1f"/>
+			<column name="LNG_NAME" value="The Society of American Foresters"/>
+			<column name="OBJ_ID" value="38BB20A4E1134684B86DB17D9DB41AA2"/>
+			<column name="SHRT_NAME" value="SAF"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="0c34aecc-1549-4cfe-8dda-7d9c7ec364cc"/>
+			<column name="LNG_NAME" value="The American-Speech-Language-Hearing Association"/>
+			<column name="OBJ_ID" value="9CC81227CDBE4D2AA52E420615916375"/>
+			<column name="SHRT_NAME" value="ASHA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="0d58b7fa-e91c-4517-b04e-6b926ad65d70"/>
+			<column name="LNG_NAME" value="The National Architectural Accrediting Board"/>
+			<column name="OBJ_ID" value="629305956A7043008D8BC9682B738249"/>
+			<column name="SHRT_NAME" value="NAAB"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="1"/>
+			<column name="LNG_NAME" value="Kuali University System"/>
+			<column name="OBJ_ID" value="739BEB6B7B764770A9F071223EE48E66"/>
+			<column name="SHRT_NAME" value="KUSystem"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.CorporateEntity"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="10"/>
+			<column name="LNG_NAME" value="Legal Counsel"/>
+			<column name="OBJ_ID" value="9F9D6D84A1024E6CA07062830B0E2EE4"/>
+			<column name="SHRT_NAME" value="Legal"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="100"/>
+			<column name="LNG_NAME" value="Undergraduate Admissions"/>
+			<column name="OBJ_ID" value="74EE97B3BBB24BEB9FE40EFBCB6BCFE6"/>
+			<column name="SHRT_NAME" value="Admissions"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="101"/>
+			<column name="LNG_DESCR" value="The charge of the Enrollment Management Council is to give special attention to three areas: ?????? Increasing the effectiveness of recruitment, marketing and financial aid programs directed at new freshmen.  ?????? Improving success in recruiting transfer students"/>
+			<column name="LNG_NAME" value="Enrollment Management Council"/>
+			<column name="OBJ_ID" value="6178390526914DDBAECDF07336E704F7"/>
+			<column name="SHRT_NAME" value="EMC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="102"/>
+			<column name="LNG_NAME" value="Records and Registration (Registrar's Office)"/>
+			<column name="OBJ_ID" value="C9BB7ED216E44D0AB2081FFB840F82E0"/>
+			<column name="SHRT_NAME" value="Registrar"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="103"/>
+			<column name="LNG_NAME" value="Curriculum Section of the Registrar's Office"/>
+			<column name="OBJ_ID" value="32D61E8268694056A83F3764E80067A2"/>
+			<column name="SHRT_NAME" value="CurriculumSection"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="104"/>
+			<column name="LNG_NAME" value="Institutional Research"/>
+			<column name="OBJ_ID" value="394D6FB8E9724BED964B7259E70EAC2C"/>
+			<column name="SHRT_NAME" value="InstitutionalResearch"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="105"/>
+			<column name="LNG_NAME" value="Advising and Orientation Office"/>
+			<column name="OBJ_ID" value="A59015EAA4374E408008A21CAB6ACF3E"/>
+			<column name="SHRT_NAME" value="Advising"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094153"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="106"/>
+			<column name="LNG_NAME" value="Career Services Department"/>
+			<column name="OBJ_ID" value="9A08F54CF3654EB08AF0DB942332A877"/>
+			<column name="SHRT_NAME" value="CareerServices"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="107"/>
+			<column name="LNG_NAME" value="Student Accounts"/>
+			<column name="OBJ_ID" value="159F9873CAD446AF975BBAE98509741A"/>
+			<column name="SHRT_NAME" value="StudentAccounts"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="108"/>
+			<column name="LNG_DESCR" value="This committee coordinates the advising programs of the various colleges and advises the Vice President for Academic Affairs on issues of interest or concern to advisors."/>
+			<column name="LNG_NAME" value="Academic Advising Committee"/>
+			<column name="OBJ_ID" value="AD7BB4996AC44273A15D0BB4E7447859"/>
+			<column name="SHRT_NAME" value="AdvisingCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="109"/>
+			<column name="LNG_DESCR" value="This Committee considers policies and procedures related to academic standards, Admissions, and advising for both prospective and enrolled undergraduate students.  Jurisdiction includes Admissions Appeals.  "/>
+			<column name="LNG_NAME" value="Academic Standards and Admissions Committee"/>
+			<column name="OBJ_ID" value="C7D8F84784BD41B587A2D16D483D47E0"/>
+			<column name="SHRT_NAME" value="AdmissionsCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="11"/>
+			<column name="LNG_NAME" value="The Foundation"/>
+			<column name="OBJ_ID" value="613F976B0FDA4C738E3C33CE58EA2445"/>
+			<column name="SHRT_NAME" value="Foundation"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="110"/>
+			<column name="LNG_DESCR" value="Invites nominations for honorary degrees based on a candidate's record of scholarship, research, and/or creative activity and recommends names directly to the Faculty Senate Executive Board for the awarding of honorary degrees."/>
+			<column name="LNG_NAME" value="Committee on Honorary Degrees "/>
+			<column name="OBJ_ID" value="00E3B6C2D60E4663A97F8C0FAABEA009"/>
+			<column name="SHRT_NAME" value="HonoraryDegreesCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="111"/>
+			<column name="LNG_DESCR" value="The purpose of the Council is to enhance programmatic and institutional articulation between Kuali University and institutions and programs that are significant or potentially significant sources of transfer students."/>
+			<column name="LNG_NAME" value="Administrative Support Programs Advisory Committee"/>
+			<column name="OBJ_ID" value="2FFFEA11D54D4F9FA36B256E478C803B"/>
+			<column name="SHRT_NAME" value="ASPAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="112"/>
+			<column name="LNG_DESCR" value="The purpose of the Council is to enhance programmatic and institutional articulation between Kuali University and institutions and programs that are significant or potentially significant sources of transfer students."/>
+			<column name="LNG_NAME" value="Articulation Coordination Council"/>
+			<column name="OBJ_ID" value="036AC634A8E543629467222EB0EC36E3"/>
+			<column name="SHRT_NAME" value="ArticulationCouncil"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="113"/>
+			<column name="LNG_DESCR" value="Allocation of new revenues, final policy for faculty and professional staff compensation increases and, when necessary, assignment of budget reduction targets are made centrally by the university??????s Budget Cabinet. The Budget Cabinet is strictly advisory t"/>
+			<column name="LNG_NAME" value="University Budget Advisory Committee (BAC)"/>
+			<column name="OBJ_ID" value="1421769E315C4700A12A3D8D6ECCEA2A"/>
+			<column name="SHRT_NAME" value="BAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="114"/>
+			<column name="LNG_DESCR" value="See Budget Cabinet"/>
+			<column name="LNG_NAME" value="Budget Cabinet"/>
+			<column name="OBJ_ID" value="86EA433DBA6841DBA2754D7BE29AAEE3"/>
+			<column name="SHRT_NAME" value="BudgetCabinet"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdvisoryGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="115"/>
+			<column name="LNG_DESCR" value="See Budget Cabinet"/>
+			<column name="LNG_NAME" value="Presidents Advisory Committee on Budget Priorities and Planning"/>
+			<column name="OBJ_ID" value="12CACCA7E47A4084BEA28A05E0550F8A"/>
+			<column name="SHRT_NAME" value="BudgetPrioritiesCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdvisoryGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="116"/>
+			<column name="LNG_DESCR" value="Capital project information is submitted via a vice president to the Capital Projects Advisory Committee (CPAC) for review of all capital improvements greater than $250,000. The Committee is advisory to the President, and the President's approval is requi"/>
+			<column name="LNG_NAME" value="Business and Finance Advisory Committee"/>
+			<column name="OBJ_ID" value="B533415BAC6A45C2B3AA08F23983C8AE"/>
+			<column name="SHRT_NAME" value="FinanceAdvisoryCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdvisoryGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="117"/>
+			<column name="LNG_DESCR" value="The Career Services Council reviews and sets policies as they relate to legal, ethical, and professional practice related to the recruitment, hiring, and selection of students and alumni in experiential learning and full-time employment. The Council facil"/>
+			<column name="LNG_NAME" value="Capital Projects Advisory Committee (CPAC)"/>
+			<column name="OBJ_ID" value="3675E7282A7A4ACBB400C87F5AAB7CCC"/>
+			<column name="SHRT_NAME" value="CPAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdvisoryGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="118"/>
+			<column name="LNG_DESCR" value="The Council of Deans has members from each college. It is the principal source in higher education of collective views on all matters relating to education and research. It aims to respond dynamically to the changes and trends in higher education.   The C"/>
+			<column name="LNG_NAME" value="Career Services Council"/>
+			<column name="OBJ_ID" value="08C617C7AE114F3CBBD60474A56FA440"/>
+			<column name="SHRT_NAME" value="CareerServicesCouncil"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="119"/>
+			<column name="LNG_DESCR" value="The Department Chairs Council [cabinet] shall discuss and establish positions on matters of University concern with particular implications for academic departments and programs of the University. The Council shall provide for communication between the De"/>
+			<column name="LNG_NAME" value="Council of Deans"/>
+			<column name="OBJ_ID" value="EED40B9A7B7F4381A83926FC30BCA92A"/>
+			<column name="SHRT_NAME" value="TheDeans"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="12"/>
+			<column name="LNG_NAME" value="Intercollegiate Athletics"/>
+			<column name="OBJ_ID" value="31E592138EC44BB5B8744B6675533165"/>
+			<column name="SHRT_NAME" value="Athletics"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="120"/>
+			<column name="LNG_DESCR" value="The Department Chairs Council [cabinet] shall discuss and establish positions on matters of University concern with particular implications for academic departments and programs of the University. The Council shall provide for communication between the De"/>
+			<column name="LNG_NAME" value="Department Chairs Cabinet"/>
+			<column name="OBJ_ID" value="3742294A00AD4920934A20240B738E1B"/>
+			<column name="SHRT_NAME" value="TheDeptChairs"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="121"/>
+			<column name="LNG_NAME" value="Faculty Senate Executive Board"/>
+			<column name="OBJ_ID" value="395EF64AC8004BBD88C02E5BFB8A6A6C"/>
+			<column name="SHRT_NAME" value="SenateExcecutiveBoard"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="12197874-0e2f-44b6-93cd-b793442e0b58"/>
+			<column name="LNG_NAME" value="The Planning Accreditation Board"/>
+			<column name="OBJ_ID" value="461B30704D99412DAFC246565994AFD2"/>
+			<column name="SHRT_NAME" value="PAB"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="122"/>
+			<column name="LNG_DESCR" value="The Institutional Review Board (IRB) is a federally mandated committee responsible for review of all research involving human participants for compliance with the federal regulations.   The IRB is sponsored by the Offices of Research Assurances and the Vi"/>
+			<column name="LNG_NAME" value="Information Technology Services Advisory Committee (ITSAC)"/>
+			<column name="OBJ_ID" value="8AB7B9885F0641C2A1DB1F0E846A6E14"/>
+			<column name="SHRT_NAME" value="ITSAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="123"/>
+			<column name="LNG_DESCR" value="The Institutional Review Board (IRB) is a federally mandated committee responsible for review of all research involving human participants for compliance with the federal regulations.   The IRB is sponsored by the Offices of Research Assurances and the Vi"/>
+			<column name="LNG_NAME" value="Institutional Review Board (IRB)"/>
+			<column name="OBJ_ID" value="1848CEA27A1745759AB9C59DEF4FA21F"/>
+			<column name="SHRT_NAME" value="IRB"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="124"/>
+			<column name="LNG_NAME" value="Offices of Research Assurances"/>
+			<column name="OBJ_ID" value="DF0D26114F71475DB9E32840EBD00E3F"/>
+			<column name="SHRT_NAME" value="ResearchAssurances"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="125"/>
+			<column name="LNG_DESCR" value="The mission of the Council on International Programs (CIP) is to promote, improve, and expand the internationalization/ globalization of the University.   The Council??????s goals are to further internationalization in the following areas: ?????? Strengthen undergr"/>
+			<column name="LNG_NAME" value="Investment Committee"/>
+			<column name="OBJ_ID" value="C66CAE4643734756B5BE79922FE5A93D"/>
+			<column name="SHRT_NAME" value="InvestmentCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="126"/>
+			<column name="LNG_DESCR" value="Sponsored by both the Vice President for Student Affairs and the Provost, the Learning Community Advisory Committee exists to ?????? Advise the Co-Directors of Learning Communities and the Associate Provost for Academic Programs and the Associate Vice Presiden"/>
+			<column name="LNG_NAME" value="Council on International Programs"/>
+			<column name="OBJ_ID" value="8F4289B284E64019A892DD15C3646274"/>
+			<column name="SHRT_NAME" value="CIP"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="127"/>
+			<column name="LNG_DESCR" value="The University Orientation Committee, composed of University faculty and staff, is responsible for student orientation programs. The undergraduate colleges of the university, in cooperation with the Office of New Student Programs, have responsibility for"/>
+			<column name="LNG_NAME" value="Learning Community Advisory Committee"/>
+			<column name="OBJ_ID" value="75B74E6B72174645B051A3AFEF83E61D"/>
+			<column name="SHRT_NAME" value="LCAC"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095210"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="128"/>
+			<column name="LNG_DESCR" value="The University Orientation Committee, composed of University faculty and staff, is responsible for student orientation programs. The undergraduate colleges of the university, in cooperation with the Office of New Student Programs, have responsibility for "/>
+			<column name="LNG_NAME" value="University Orientation Committee"/>
+			<column name="OBJ_ID" value="FF90127BA1F14AC4935FE81D5CEE498C"/>
+			<column name="SHRT_NAME" value="OrientationCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="129"/>
+			<column name="LNG_NAME" value="Office of New Student Programs"/>
+			<column name="OBJ_ID" value="20069FBD56F345C3B2DCADAE9B73166F"/>
+			<column name="SHRT_NAME" value="NewStudentPrograms"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="13"/>
+			<column name="LNG_NAME" value="Alumni Relations"/>
+			<column name="OBJ_ID" value="3B97475F012A456CBE9E99B80ABE489C"/>
+			<column name="SHRT_NAME" value="AlumniRelations"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="130"/>
+			<column name="LNG_DESCR" value="The Special Student Fee and Tuition Committee (SSFTC) is a statutory committee of five students and five university employees that considers proposed student activity changes and makes recommendations to the President concerning special student fee change"/>
+			<column name="LNG_NAME" value="Residency Review Committee"/>
+			<column name="OBJ_ID" value="C6803120C12341FA9AD96D377694F231"/>
+			<column name="SHRT_NAME" value="ResidencyCommittee"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="13046975-f3e4-44ab-877e-6a171635906f"/>
+			<column name="LNG_NAME" value="The Council for Exceptional Children"/>
+			<column name="OBJ_ID" value="EA3B40E660D34C82921CA227BD2ACAEE"/>
+			<column name="SHRT_NAME" value="CED"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="131"/>
+			<column name="LNG_DESCR" value="The University Student Government Association is the foremost student organization at Kuali University. Along with providing comprehensive representation of the views and opinions of the student body, the SGA attempts to coordinate the efforts of the mult"/>
+			<column name="LNG_NAME" value="Special Student Fee and Tuition Committee"/>
+			<column name="OBJ_ID" value="798986E048F548E18BA2ABA5A1F45F17"/>
+			<column name="SHRT_NAME" value="SSFTC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="132"/>
+			<column name="LNG_DESCR" value="The Graduate and Professional Student Association represents the graduate and professional students' perspective on campus issues and serves as a liaison between graduate/professional students and the university administration. Each department is permitte"/>
+			<column name="LNG_NAME" value="Student Government Association "/>
+			<column name="OBJ_ID" value="C5BE67F8786B4B5796DD5C8488FF31B6"/>
+			<column name="SHRT_NAME" value="SGA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="133"/>
+			<column name="LNG_DESCR" value="The Senate has legislative responsibility for general academic and educational policy. It also serves to facilitate communication among faculty, students, and administration. Finally, it cooperates with the administration in conflict resolution. The Senat"/>
+			<column name="LNG_NAME" value="The Graduate and Professional Student Association"/>
+			<column name="OBJ_ID" value="0A40E167B7494DB0B5959A8C9A04F30E"/>
+			<column name="SHRT_NAME" value="GPSA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="13374c81-60f3-4062-a6d5-7b1899713e11"/>
+			<column name="LNG_NAME" value="The Accreditation Board of Engineering and Technology"/>
+			<column name="OBJ_ID" value="B55C3656A5E44412A0544F6B202AC867"/>
+			<column name="SHRT_NAME" value="ABET"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="134"/>
+			<column name="LNG_DESCR" value="The Academic Affairs Council coordinates the creation and consideration of policy in the area of academic affairs, including but not limited to instructional policies, honors programs, and the academic calendar.    They also coordinate the policy proposal"/>
+			<column name="LNG_NAME" value="University Senate"/>
+			<column name="OBJ_ID" value="6B182D3971A8475BBE7A9DC909BCF081"/>
+			<column name="SHRT_NAME" value="Senate"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Senate"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="135"/>
+			<column name="LNG_DESCR" value="The Academic Affairs Council coordinates the creation and consideration of policy in the area of academic affairs, including but not limited to instructional policies, honors programs, and the academic calendar.    They also coordinate the policy proposal"/>
+			<column name="LNG_NAME" value="Academic Affairs Council"/>
+			<column name="OBJ_ID" value="C4A0F98C92304AA79EB4828EB9820971"/>
+			<column name="SHRT_NAME" value="AAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="136"/>
+			<column name="LNG_NAME" value="Faculty Development and Administrative Relations Council"/>
+			<column name="OBJ_ID" value="34635AB3576F48A8B3A49D4072A3691B"/>
+			<column name="SHRT_NAME" value="FDARC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="137"/>
+			<column name="LNG_NAME" value="Resource Policies and Allocations Council"/>
+			<column name="OBJ_ID" value="7FC6C5B8A8604974BD597BC293294C28"/>
+			<column name="SHRT_NAME" value="RPAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="138"/>
+			<column name="LNG_DESCR" value="The Judiciary and Appeals Committee (JAC) hears cases in which a serious violation of the Conduct Code may result in suspension or expulsion from the University.     JAC may also hear cases of minor nature."/>
+			<column name="LNG_NAME" value="Judiciary and Appeals Committee (JAC)"/>
+			<column name="OBJ_ID" value="6AD9DD5A11FE4E4CB4A67A3EB21EE27C"/>
+			<column name="SHRT_NAME" value="JAC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="139"/>
+			<column name="LNG_DESCR" value="The JAC hears cases in boards of five persons each, at least two of whom are students.   The JAC makes its recommendation to the Dean of Students."/>
+			<column name="LNG_NAME" value="Judiciary Board assembled to hear a particular case"/>
+			<column name="OBJ_ID" value="24213AE0FA474043B94D5004CA974F32"/>
+			<column name="SHRT_NAME" value="JAC-BoardFor?"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="14"/>
+			<column name="LNG_NAME" value="Alumni Association"/>
+			<column name="OBJ_ID" value="93D24FA48B5945FAA1D0E3E8D117A999"/>
+			<column name="SHRT_NAME" value="AlumniAssociation"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Association"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="140"/>
+			<column name="LNG_DESCR" value="Recommends and develops policies and procedures for university-wide curricular standards, reviews catalog offerings and degree requirements, and initiates discussions on future curricular matters. The committee reviews college proposals and makes recommen"/>
+			<column name="LNG_NAME" value="Faculty Governance Council"/>
+			<column name="OBJ_ID" value="FE5F6851E9834AC28351530BF76C0E88"/>
+			<column name="SHRT_NAME" value="FacultyGovernance"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="141"/>
+			<column name="LNG_DESCR" value="Recommends and develops policies and procedures for university-wide curricular standards, reviews catalog offerings and degree requirements, and initiates discussions on future curricular matters. The committee reviews college proposals and makes recommen"/>
+			<column name="LNG_NAME" value="Senate Subcommittee on Curricula"/>
+			<column name="OBJ_ID" value="492AC00AFA69424885787E5ABF20C065"/>
+			<column name="SHRT_NAME" value="COC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="142"/>
+			<column name="LNG_NAME" value="Departmental Representatives to the COC"/>
+			<column name="OBJ_ID" value="A9AA66BC931740538EAB2A7940FBDD5F"/>
+			<column name="SHRT_NAME" value="DeptCOCReps"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.WorkGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="143"/>
+			<column name="LNG_NAME" value="College of Arts and Hum Curriculum Committee"/>
+			<column name="OBJ_ID" value="73C600734E6D4A1D83CD6F25C7395912"/>
+			<column name="SHRT_NAME" value="Arts&HumCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113246"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="144"/>
+			<column name="LNG_NAME" value="College of Behavioral and Social Sciences Curriculum Committee"/>
+			<column name="OBJ_ID" value="80B529C5CCED47B188EDEA13C0981DE1"/>
+			<column name="SHRT_NAME" value="BSOSCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105920"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="145"/>
+			<column name="LNG_NAME" value="College of Life and Chemical Sciences Curriculum Committee"/>
+			<column name="OBJ_ID" value="5794572325534298BFABAFFD2E672554"/>
+			<column name="SHRT_NAME" value="Life&ChemSciencesCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110923"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="146"/>
+			<column name="LNG_NAME" value="College of Engineering Curriculum Committee"/>
+			<column name="OBJ_ID" value="4B7FB45F7B294B2AB26269309CE3A345"/>
+			<column name="SHRT_NAME" value="EngineeringCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122048"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="147"/>
+			<column name="LNG_NAME" value="English Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="45E419F42DE8423F8991000B2D90E734"/>
+			<column name="SHRT_NAME" value="EnglishCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="148"/>
+			<column name="LNG_NAME" value="Fine Arts Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="B2ACB2EA79CE4A588093EF9B5BF217ED"/>
+			<column name="SHRT_NAME" value="FineArtsCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="149"/>
+			<column name="LNG_NAME" value="French Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="249DA83CFCA9482F9AEE2A0BF4538CDF"/>
+			<column name="SHRT_NAME" value="FrenchCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="15"/>
+			<column name="LNG_NAME" value="Academic Affairs"/>
+			<column name="OBJ_ID" value="5E7E3AACF7474BA9BF8667B6364531A3"/>
+			<column name="SHRT_NAME" value="Academics"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213102017"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="150"/>
+			<column name="LNG_NAME" value="Geography Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="A999EFE131B7491A9D24C9312A356B57"/>
+			<column name="SHRT_NAME" value="GeographyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="151"/>
+			<column name="LNG_NAME" value="Linguistics Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="AAF493E272C7469DA19652737D6C6949"/>
+			<column name="SHRT_NAME" value="LinguisticsCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="152"/>
+			<column name="LNG_NAME" value="Music Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="60393648EC564432A227D0344411C23C"/>
+			<column name="SHRT_NAME" value="MusicCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="153"/>
+			<column name="LNG_NAME" value="History Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="A71A343F7ED64B9D958E40D8BBD1C3EF"/>
+			<column name="SHRT_NAME" value="HistoryCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="154"/>
+			<column name="LNG_NAME" value="Political Science Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="8AC91252FA0948C2A358BA9D66EC6A9C"/>
+			<column name="SHRT_NAME" value="PolySciCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="155"/>
+			<column name="LNG_NAME" value="Psychology Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="FD053A486C084D288C170751F72699BF"/>
+			<column name="SHRT_NAME" value="PsychologyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="156"/>
+			<column name="LNG_NAME" value="Sociology Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="2E7B5D6A6739414C812358F430BCD96E"/>
+			<column name="SHRT_NAME" value="SociologyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="157"/>
+			<column name="LNG_NAME" value="Interdisciplinary BSOS COC"/>
+			<column name="OBJ_ID" value="C7197A632961497380F8BC8D0592BEAC"/>
+			<column name="SHRT_NAME" value="InterdiscBSOSCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="158"/>
+			<column name="LNG_NAME" value="Chemical Engineering Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="62FC9D7D2F9B45FB9EB36304BA4BFCED"/>
+			<column name="SHRT_NAME" value="ChemicalCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="159"/>
+			<column name="LNG_NAME" value="Civil Engineering Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="EF4623B0412C4320AFEBA59BF3A77907"/>
+			<column name="SHRT_NAME" value="CivilCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="16"/>
+			<column name="LNG_NAME" value="Administration and Finance"/>
+			<column name="OBJ_ID" value="BD2BDD7508444152BADA0C1025AC6148"/>
+			<column name="SHRT_NAME" value="Administration"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095427"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="160"/>
+			<column name="LNG_NAME" value="Mechanical Engineering Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="B4235F9A6D24409D85C76F50F90933EF"/>
+			<column name="SHRT_NAME" value="MechanicalCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="161"/>
+			<column name="LNG_NAME" value="Computer Science Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="B1353B8E9D184F749B0935560DEB3DBE"/>
+			<column name="SHRT_NAME" value="CompSciCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="162"/>
+			<column name="LNG_NAME" value="Biology Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="68C2E830DB1F43538058065D57A8CD77"/>
+			<column name="SHRT_NAME" value="BiologyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="163"/>
+			<column name="LNG_NAME" value="Biochemistry Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="C6D6CE03DD524D81B37A85973EF608A8"/>
+			<column name="SHRT_NAME" value="BiochemistryCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="164"/>
+			<column name="LNG_NAME" value="Botany Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="1ED1A3944DE1461C99627949078C0910"/>
+			<column name="SHRT_NAME" value="BotanyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="165"/>
+			<column name="LNG_NAME" value="Chemistry Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="C718CC8050A2459D94979CF303F47454"/>
+			<column name="SHRT_NAME" value="ChemistryCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="166"/>
+			<column name="LNG_NAME" value="Geology Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="A1DA5230AA8C4D79BC3F4125D56D6AA8"/>
+			<column name="SHRT_NAME" value="GeologyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="167"/>
+			<column name="LNG_NAME" value="Gender Studies Curriculum Committee"/>
+			<column name="OBJ_ID" value="202712033F234F10A72A59782540F11A"/>
+			<column name="SHRT_NAME" value="GenderStudiesCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="168"/>
+			<column name="LNG_NAME" value="Business School Curriculum Committee"/>
+			<column name="OBJ_ID" value="56FD913852A243749A2F6AE9F2689ACD"/>
+			<column name="SHRT_NAME" value="BusinessSchoolCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124842"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="169"/>
+			<column name="LNG_NAME" value="College of Education Curriculum Committee"/>
+			<column name="OBJ_ID" value="932E914FF62E4A709B53F3ED44A78D72"/>
+			<column name="SHRT_NAME" value="EducationCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121854"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="16a70c2b-7ebb-4555-b574-a290ef19f02c"/>
+			<column name="LNG_NAME" value="The National Association of School Psychologists"/>
+			<column name="OBJ_ID" value="650CA3EEA2764E9D8B02B438CE8049CB"/>
+			<column name="SHRT_NAME" value="NASP"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="17"/>
+			<column name="LNG_NAME" value="Student Affairs"/>
+			<column name="OBJ_ID" value="55C232C2B83F4DBFB36F0625E310B485"/>
+			<column name="SHRT_NAME" value="Students"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="170"/>
+			<column name="LNG_NAME" value="Medical School Curriculum Committee"/>
+			<column name="OBJ_ID" value="2B0108EF7696432C83D2C376DA0EC878"/>
+			<column name="SHRT_NAME" value="MedicalSchoolCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213125015"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="171"/>
+			<column name="LNG_DESCR" value="This committee was chartered by the Head of the Geology Department to review and possibly revamp the geology Department's curriculum"/>
+			<column name="LNG_NAME" value="Ad hoc Committee for Geology Curriculum Innovation"/>
+			<column name="OBJ_ID" value="30FE175924B64B21AB0A0A76FB9F0806"/>
+			<column name="SHRT_DESCR" value="Committee charted by Geology Dept. head to evaluate dept. curriculum"/>
+			<column name="SHRT_NAME" value="GeologyCIC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdhocCommittee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="172"/>
+			<column name="LNG_DESCR" value="Biological Science Division Coc"/>
+			<column name="LNG_NAME" value="Biological Science Division Coc"/>
+			<column name="OBJ_ID" value="56D565FBEFB249669C1C1EE1CC8AC378"/>
+			<column name="SHRT_NAME" value="BiologicalScienceDivisionCoc"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214112838"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="173"/>
+			<column name="LNG_DESCR" value="Chemical Science Division Coc"/>
+			<column name="LNG_NAME" value="Chemical Science Division Coc"/>
+			<column name="OBJ_ID" value="9A4F2C9352914763A2B0C3A260772777"/>
+			<column name="SHRT_NAME" value="ChemicalScienceDivisionCoc"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214113102"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="174"/>
+			<column name="LNG_DESCR" value="Behavioral Science Division Coc"/>
+			<column name="LNG_NAME" value="Behavioral Science Division Coc"/>
+			<column name="OBJ_ID" value="DE1D7129B65E41789384B0F6FBBFAAD5"/>
+			<column name="SHRT_NAME" value="BehavioralScienceDivisionCoc"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="175"/>
+			<column name="LNG_DESCR" value="Social Science Division Coc"/>
+			<column name="LNG_NAME" value="Social Science Division Coc"/>
+			<column name="OBJ_ID" value="A72F2574C3B44718AC3DDADDB0C7B895"/>
+			<column name="SHRT_NAME" value="SocialScienceDivisionCoc"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105732"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="176"/>
+			<column name="LNG_DESCR" value="Publication Office"/>
+			<column name="LNG_NAME" value="Publication Office"/>
+			<column name="OBJ_ID" value="646A51CEDA6A4024B90B79DE7149B58C"/>
+			<column name="SHRT_NAME" value="PublicationOffice"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111226"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="177"/>
+			<column name="LNG_DESCR" value="Undergraduate Program Coc"/>
+			<column name="LNG_NAME" value="Undergraduate Program Coc"/>
+			<column name="OBJ_ID" value="B5E9E2C297424FA3B1346604F6D66D05"/>
+			<column name="SHRT_NAME" value="UndergraduateProgramCoc"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="178"/>
+			<column name="LNG_DESCR" value="Biological Science Division"/>
+			<column name="LNG_NAME" value="Biological Science Division"/>
+			<column name="OBJ_ID" value="BB7D5E14E0544F638C267206B2A7B95D"/>
+			<column name="SHRT_NAME" value="BiologicalScienceDivision"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214112929"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="179"/>
+			<column name="LNG_DESCR" value="Chemical Science Division"/>
+			<column name="LNG_NAME" value="Chemical Science Division"/>
+			<column name="OBJ_ID" value="849F08E5271040FBAF71984C5B6380A6"/>
+			<column name="SHRT_NAME" value="ChemicalScienceDivision"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214113026"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="18"/>
+			<column name="LNG_NAME" value="Research and Economic Development"/>
+			<column name="OBJ_ID" value="586AE00F30B74F468E2D546FBEEC9E66"/>
+			<column name="SHRT_NAME" value="Research"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="180"/>
+			<column name="LNG_DESCR" value="Behavioral Science Division"/>
+			<column name="LNG_NAME" value="Behavioral Science Division"/>
+			<column name="OBJ_ID" value="1137EF6947EC416C9E81AA849F4F3230"/>
+			<column name="SHRT_NAME" value="BehavioralScienceDivision"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="181"/>
+			<column name="LNG_DESCR" value="Social Science Division"/>
+			<column name="LNG_NAME" value="Social Science Division"/>
+			<column name="OBJ_ID" value="28CA8FD0DBF54C16BF97B9DBFC9F7899"/>
+			<column name="SHRT_NAME" value="SocialScienceDivision"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Division"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101124125626"/>
+			<column name="EFF_DT" value="20101124125626"/>
+			<column name="ID" value="182"/>
+			<column name="LNG_NAME" value="Office of the Provost"/>
+			<column name="OBJ_ID" value="96ED3E513F35FE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="ProvostOffice"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101124125626"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="19"/>
+			<column name="LNG_NAME" value="Office of the Executive Vice President and Provost"/>
+			<column name="OBJ_ID" value="DC3BD367CAE542ADA982FF2FCAE64887"/>
+			<column name="SHRT_NAME" value="EVPPOffice"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094704"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="1a7c3043-2219-4414-a106-6c6ce2d3bfc7"/>
+			<column name="LNG_NAME" value="The American Library Association"/>
+			<column name="OBJ_ID" value="2304169A200D43AE83E18F9087463E5E"/>
+			<column name="SHRT_NAME" value="ALA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121356"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="1bc53d64-0f9d-41c8-b5ca-4f82e774a450"/>
+			<column name="LNG_NAME" value="The American Assembly of Collegiate Schools of Business"/>
+			<column name="OBJ_ID" value="BF451F4A8B03465483D3DFAEB4C3754E"/>
+			<column name="SHRT_NAME" value="AACSB"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121356"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="1d6050c2-c879-4a1b-8c58-e4492950a9cb"/>
+			<column name="LNG_NAME" value="The National Council of Teachers of Mathematics"/>
+			<column name="OBJ_ID" value="6E18C7EC49F64A6BB77618A06D90A11F"/>
+			<column name="SHRT_NAME" value="NCTM"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="1e8cd111-bc37-491f-ba4a-5c2ce610a91b"/>
+			<column name="LNG_NAME" value="The Council on Education for Public Health"/>
+			<column name="OBJ_ID" value="BD0D240E96C04B6093BEF3FE1CE98244"/>
+			<column name="SHRT_NAME" value="CEPH"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="2"/>
+			<column name="LNG_DESCR" value="A (put a number here) member Board of Regents, including one full-time student governs the Kuali University System.   The Regents oversee the system's academic, administrative, and financial operations; formulate policy; and appoint the Kuali Chancellor "/>
+			<column name="LNG_NAME" value="Board of Regents"/>
+			<column name="OBJ_ID" value="62442A0C129E492D92254FD07BCFAD9F"/>
+			<column name="SHRT_NAME" value="BORG"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Board"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="20"/>
+			<column name="LNG_NAME" value="Office of the VP for Business Administration and Finance"/>
+			<column name="OBJ_ID" value="F749827FFF5440E0A1E39BC7EBA38935"/>
+			<column name="SHRT_NAME" value="VPAdminOffice"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="201"/>
+			<column name="LNG_NAME" value="Animal and Avian Sciences Dept"/>
+			<column name="OBJ_ID" value="8aff8f49-704a-44cb-9e5e-e1141fe86e28"/>
+			<column name="SHRT_NAME" value="AnimalAvianSciences"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATETIME" value="20101210172037"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="202"/>
+			<column name="LNG_NAME" value="Animal and Avian Sciences Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="8764befb-5359-4ae4-8a27-b575e5b4f5cb"/>
+			<column name="SHRT_NAME" value="AnimalAvianSciencesCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122611"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="203"/>
+			<column name="LNG_NAME" value="Gemstone Program"/>
+			<column name="OBJ_ID" value="19606252-559d-40af-9364-52b51d3b92ae"/>
+			<column name="SHRT_NAME" value="GemstoneProgram"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATETIME" value="20101210172037"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="204"/>
+			<column name="LNG_NAME" value="Mathematics Dept"/>
+			<column name="OBJ_ID" value="c3592049-0f98-40d9-98ac-479942aa0c54"/>
+			<column name="SHRT_NAME" value="Mathematics"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214143242"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="205"/>
+			<column name="LNG_NAME" value="Mathematics Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="172df04f-2ded-43d1-bedb-3f6df7bfbd70"/>
+			<column name="SHRT_NAME" value="MathematicsCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214143432"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="206"/>
+			<column name="LNG_NAME" value="Physics Dept"/>
+			<column name="OBJ_ID" value="8e028589-1c42-4746-b4b5-3fe641ccb85d"/>
+			<column name="SHRT_NAME" value="Physics"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATETIME" value="20101210172037"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="207"/>
+			<column name="LNG_NAME" value="Physics Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="8da0a314-878a-4a28-9fae-17f4f2b83af2"/>
+			<column name="SHRT_NAME" value="PhysicsCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114312"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172037"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="208"/>
+			<column name="LNG_NAME" value="Office of Undergraduate Studies"/>
+			<column name="OBJ_ID" value="c1069a5a-613c-4f38-b9ba-c465cc02136b"/>
+			<column name="SHRT_NAME" value="UndergraduateStudies"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121036"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="21"/>
+			<column name="LNG_NAME" value="Office of the VP for Student Affairs"/>
+			<column name="OBJ_ID" value="DC0095C363A84264B547D94540587362"/>
+			<column name="SHRT_NAME" value="VPStudentsOffice"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095054"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="210"/>
+			<column name="LNG_NAME" value="African American Studies Dept"/>
+			<column name="OBJ_ID" value="d5e2343e-2553-489c-b5cf-41efdde7a8bf"/>
+			<column name="SHRT_NAME" value="AfricanAmericanStudies"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATETIME" value="20101210172030"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="211"/>
+			<column name="LNG_NAME" value="African American Studies Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="c911828d-3610-440d-ad08-72711eca867c"/>
+			<column name="SHRT_NAME" value="AfricanAmericanStudiesCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114631"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="212"/>
+			<column name="LNG_NAME" value="Art History & Archaeology Dept"/>
+			<column name="OBJ_ID" value="744b8527-f0b8-4453-aa32-4a2d8d012fe0"/>
+			<column name="SHRT_NAME" value="ArtHistArchaeology"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213123754"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="213"/>
+			<column name="LNG_NAME" value="Art History & Archaeology Curriculum Committee"/>
+			<column name="OBJ_ID" value="0e41a4b6-4dbd-48ec-bced-1d8e48b4b9c0"/>
+			<column name="SHRT_NAME" value="ArtHistArchaeologyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113449"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="214"/>
+			<column name="LNG_NAME" value="Criminology & Criminal Justice Dept"/>
+			<column name="OBJ_ID" value="2b02d683-177b-4a3b-9b07-cfcd06013d00"/>
+			<column name="SHRT_NAME" value="CrimCrimJus"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATETIME" value="20101210172030"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="215"/>
+			<column name="LNG_NAME" value="Criminology & Criminal Justice Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="5ce93770-5a4c-42fb-b118-b57ac916aa95"/>
+			<column name="SHRT_NAME" value="CrimCrimJusCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114024"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="216"/>
+			<column name="LNG_NAME" value="Economics Dept"/>
+			<column name="OBJ_ID" value="a918a221-796e-4405-947b-be7928342c6e"/>
+			<column name="SHRT_NAME" value="Economics"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATETIME" value="20101210172030"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="217"/>
+			<column name="LNG_NAME" value="Economics Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="ca1a4cf2-e907-4d2a-babe-7609f5e2f3ae"/>
+			<column name="SHRT_NAME" value="EconomicsCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114830"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="218"/>
+			<column name="LNG_NAME" value="Philosophy Dept"/>
+			<column name="OBJ_ID" value="06ad6172-56c0-47fc-bc68-c51b27397cf1"/>
+			<column name="SHRT_NAME" value="Philosophy"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATETIME" value="20101210172030"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="219"/>
+			<column name="LNG_NAME" value="Philosophy Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="62c43020-800b-4be3-aab6-6a7e26b98108"/>
+			<column name="SHRT_NAME" value="PhilosophyCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115823"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="22"/>
+			<column name="LNG_NAME" value="Office of the VP for Research and Economic Development"/>
+			<column name="OBJ_ID" value="1B783D5FF26B4BD792CEE06742E00875"/>
+			<column name="SHRT_NAME" value="VPResearchOffice"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094043"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="220"/>
+			<column name="LNG_NAME" value="Theatre, Dance, and Performance Dept"/>
+			<column name="OBJ_ID" value="5e744cd9-702e-4bb5-a362-b0e432792b96"/>
+			<column name="SHRT_NAME" value="TheatreDancePerf"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213095904"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101210172030"/>
+			<column name="EFF_DT" value="20100630030000"/>
+			<column name="ID" value="221"/>
+			<column name="LNG_NAME" value="Theatre, Dance, and Performance Dept Curriculum Committee"/>
+			<column name="OBJ_ID" value="b4293cdc-dedd-43e4-adbe-c4cb85079766"/>
+			<column name="SHRT_NAME" value="TheatreDancePerfCOC"/>
+			<column name="TYPE" value="kuali.org.COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120811"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="23"/>
+			<column name="LNG_NAME" value="Information Technology"/>
+			<column name="OBJ_ID" value="5A77778E5586472F87FDD6B34347BCF0"/>
+			<column name="SHRT_NAME" value="IT"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="237a8c53-a3a0-45d0-a29d-09a697f59a86"/>
+			<column name="LNG_NAME" value="The Council for Accreditation of Counseling and Related Educational Programs"/>
+			<column name="OBJ_ID" value="45E3F845CA404AF8805B0F2300A68B06"/>
+			<column name="SHRT_NAME" value="CACREP"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="24"/>
+			<column name="LNG_NAME" value="The Undergraduate Program"/>
+			<column name="OBJ_ID" value="1BC9E15BCA9642E09055DE16365B9AC7"/>
+			<column name="SHRT_NAME" value="UndergraduateProgram"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214091403"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="248a7e5e-45f9-4bda-8b88-e7bd2135775d"/>
+			<column name="LNG_NAME" value="The National Council for Accreditation of Teacher Education"/>
+			<column name="OBJ_ID" value="E36CABFA35E94ACBA47F7644A55F1EEF"/>
+			<column name="SHRT_NAME" value="NCATE"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="25"/>
+			<column name="LNG_NAME" value="Office of the Dean of Students"/>
+			<column name="OBJ_ID" value="8BFC32EC979F4099AFE338A3400F723B"/>
+			<column name="SHRT_NAME" value="DeanStudentsOffice"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="26"/>
+			<column name="LNG_NAME" value="The College of Graduate and Professional Studies"/>
+			<column name="OBJ_ID" value="D436F33282EC4AD5BD207E113D003194"/>
+			<column name="SHRT_NAME" value="GraduateSchool"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214090829"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="268980fe-dbfe-400a-b6ef-e149ca1bf794"/>
+			<column name="LNG_NAME" value="The National Association of Schools of Music"/>
+			<column name="OBJ_ID" value="C5AE1A1D744F4A6CB26861575C66AA35"/>
+			<column name="SHRT_NAME" value="NASM"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="27"/>
+			<column name="LNG_NAME" value="The Graduate School Office"/>
+			<column name="OBJ_ID" value="84CFA1AD905C43D282188DE965A32D73"/>
+			<column name="SHRT_NAME" value="GraduateOffice"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214091110"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="28"/>
+			<column name="LNG_NAME" value="The College of Arts and Humanities"/>
+			<column name="OBJ_ID" value="D00C4127E60E4095A829FC1A83F78E38"/>
+			<column name="SHRT_NAME" value="CollegeArtsHum"/>
+			<column name="TYPE" value="kuali.org.College"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111300"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="29"/>
+			<column name="LNG_NAME" value="The College of Behavioral and Social Science"/>
+			<column name="OBJ_ID" value="8A41E63679BB49ACB0705ECDCEE212B5"/>
+			<column name="SHRT_NAME" value="CollegeBSOS"/>
+			<column name="TYPE" value="kuali.org.College"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213103351"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="3"/>
+			<column name="LNG_NAME" value="Chancellor's Office"/>
+			<column name="OBJ_ID" value="6479186CFBE940C580430450BD38D09D"/>
+			<column name="SHRT_NAME" value="ChancellorsOffice"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="30"/>
+			<column name="LNG_NAME" value="The College of Life and Chemical Sciences"/>
+			<column name="OBJ_ID" value="92025D01F17F41F0AE47152EB14EE246"/>
+			<column name="SHRT_NAME" value="CollegeLCS"/>
+			<column name="TYPE" value="kuali.org.College"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124303"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="31"/>
+			<column name="LNG_NAME" value="The College of Engineering"/>
+			<column name="OBJ_ID" value="4DD9ACD5D08848F786B3226363090CC4"/>
+			<column name="SHRT_NAME" value="CollegeEng"/>
+			<column name="TYPE" value="kuali.org.College"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213104435"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="32"/>
+			<column name="LNG_NAME" value="The Business School"/>
+			<column name="OBJ_ID" value="9455C1E43C7C474199E418454A3FD831"/>
+			<column name="SHRT_NAME" value="BusinessSchool"/>
+			<column name="TYPE" value="kuali.org.School"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213111301"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="33"/>
+			<column name="LNG_NAME" value="The College of Education"/>
+			<column name="OBJ_ID" value="75333F27EFCD4938A05437439F7578E1"/>
+			<column name="SHRT_NAME" value="CollegeEducation"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.College"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="33fda982-5663-4a55-9fb7-1f15a3546f24"/>
+			<column name="LNG_NAME" value="The Royal Institute of British Architects"/>
+			<column name="OBJ_ID" value="CC2B9587559B4B1D8A539BE679E977EC"/>
+			<column name="SHRT_NAME" value="RIBA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="34"/>
+			<column name="LNG_NAME" value="The Medical School"/>
+			<column name="OBJ_ID" value="A3C7C5FBB8214B55869064CA9BCE52CE"/>
+			<column name="SHRT_NAME" value="MedicalSchool"/>
+			<column name="TYPE" value="kuali.org.School"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213101708"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="35"/>
+			<column name="LNG_NAME" value="Office of the Dean of the College of Arts and Humanities"/>
+			<column name="OBJ_ID" value="18FBF96F77004BECA9C5F622560BEEC5"/>
+			<column name="SHRT_NAME" value="OfficeOfDeanArtsHum"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="36"/>
+			<column name="LNG_NAME" value="Office of the Dean of the College of Behavioral and Social Science (BSOS)"/>
+			<column name="OBJ_ID" value="98BF060ED2F3438DB7A368DAD0B692A3"/>
+			<column name="SHRT_NAME" value="OfficeOfDeanBSOS"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="37"/>
+			<column name="LNG_NAME" value="Office of the Dean of the College of Engineering"/>
+			<column name="OBJ_ID" value="A0B6DB173A5345F1956B7A66082EB0FA"/>
+			<column name="SHRT_NAME" value="OfficeOfDeanEng"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="38"/>
+			<column name="LNG_NAME" value="Office of the Dean of the College of Life and Chemical Sciences "/>
+			<column name="OBJ_ID" value="28050EC413FB4EC5ACE74660A1E5194C"/>
+			<column name="SHRT_NAME" value="OfficeOfDeanLCS"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="39"/>
+			<column name="LNG_NAME" value="Extended Studies Program"/>
+			<column name="OBJ_ID" value="092DE5AAFDFC42E4856791DF76D7273D"/>
+			<column name="SHRT_NAME" value="ExtendedStudies"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213110612"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="4"/>
+			<column name="LNG_NAME" value="Kuali University"/>
+			<column name="OBJ_ID" value="E5B7817C63E94250A74C3B032FB75C72"/>
+			<column name="SHRT_NAME" value="KU"/>
+			<column name="TYPE" value="kuali.org.CorporateEntity"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214091512"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="40"/>
+			<column name="LNG_NAME" value="College of Distance Education"/>
+			<column name="OBJ_ID" value="E307844B47DA42479F55C18CB3783B4A"/>
+			<column name="SHRT_NAME" value="DistanceEducation"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.College"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="41"/>
+			<column name="LNG_NAME" value="Learning Communities Programs"/>
+			<column name="OBJ_ID" value="1D85A0D0E8844C7A87FC8397452814DC"/>
+			<column name="SHRT_NAME" value="LearningCommunities"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095258"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="42"/>
+			<column name="LNG_NAME" value="Undergraduate Research Program"/>
+			<column name="OBJ_ID" value="DCF75C19A09545A08815993858B6CD51"/>
+			<column name="SHRT_NAME" value="URP"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="43"/>
+			<column name="LNG_NAME" value="Freshman Experiential Learning Group"/>
+			<column name="OBJ_ID" value="743EC37C44E54354B634E36C29AD3504"/>
+			<column name="SHRT_NAME" value="FELG"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="44"/>
+			<column name="LNG_NAME" value="Seminar Based Advising"/>
+			<column name="OBJ_ID" value="BD061CB1D26542E8B6C2EA655F112DCC"/>
+			<column name="SHRT_NAME" value="SeminarAdvising"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="440682d5-1ad8-4023-a30f-a0d7f54cb400"/>
+			<column name="LNG_NAME" value="The American Psychological Association"/>
+			<column name="OBJ_ID" value="044CBAE675374A34B929A1D3508F311A"/>
+			<column name="SHRT_NAME" value="APA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="45"/>
+			<column name="LNG_NAME" value="Residence Based Advising"/>
+			<column name="OBJ_ID" value="C6C87F5DD100471D9E250F89F134C396"/>
+			<column name="SHRT_NAME" value="ResidenceAdvising"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="46"/>
+			<column name="LNG_NAME" value="Cross-Registration Program"/>
+			<column name="OBJ_ID" value="0F159044A154418E88176FC86E56103E"/>
+			<column name="SHRT_NAME" value="CrossRegistration"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="47"/>
+			<column name="LNG_NAME" value="Study Abroad Center"/>
+			<column name="OBJ_ID" value="E620AF6ADBCF4151AF0442C46FB06F66"/>
+			<column name="SHRT_NAME" value="StudyAbroad"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Center"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="48"/>
+			<column name="LNG_NAME" value="Honors Program"/>
+			<column name="OBJ_ID" value="1E4FB7AE0BE3495D8A4D1D4FA74A803E"/>
+			<column name="SHRT_NAME" value="HonorsProgram"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="49"/>
+			<column name="LNG_NAME" value="Gender Studies Program"/>
+			<column name="OBJ_ID" value="01DF393DE2C945B9A1EDF243C02792DE"/>
+			<column name="SHRT_NAME" value="GenderStudies"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="4921c765-9614-45f1-883f-e9442fc0ce8c"/>
+			<column name="LNG_NAME" value="The National Association of Schools of Public Affairs and Administration"/>
+			<column name="OBJ_ID" value="8F28481596FA452EBC2595CC0B0B4834"/>
+			<column name="SHRT_NAME" value="NASPAA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="5"/>
+			<column name="LNG_NAME" value="Board of Trustees"/>
+			<column name="OBJ_ID" value="34CA416998E942C5A1AC478098D7BF46"/>
+			<column name="SHRT_NAME" value="Trustees"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Board"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="50"/>
+			<column name="LNG_NAME" value="English Dept"/>
+			<column name="OBJ_ID" value="1B63DB73AC614C9490F8AEDB2E36C0BF"/>
+			<column name="SHRT_NAME" value="English"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="51"/>
+			<column name="LNG_NAME" value="Fine Arts Dept"/>
+			<column name="OBJ_ID" value="2798F7408D1942F4BBD3044F67465120"/>
+			<column name="SHRT_NAME" value="FineArts"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="52"/>
+			<column name="LNG_NAME" value="French Dept"/>
+			<column name="OBJ_ID" value="74E0CF707FBB4AB5A2521F97FD023F09"/>
+			<column name="SHRT_NAME" value="French"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="53"/>
+			<column name="LNG_NAME" value="Geography Dept"/>
+			<column name="OBJ_ID" value="E019511E643C4FDF9C2CA5ED9C701A08"/>
+			<column name="SHRT_NAME" value="Geography"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110048"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="54"/>
+			<column name="LNG_NAME" value="Linguistics Dept"/>
+			<column name="OBJ_ID" value="5D6F0A7E52C745FAA4A4A2FE67D4DEB3"/>
+			<column name="SHRT_NAME" value="Linguistics"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="55"/>
+			<column name="LNG_NAME" value="Music Dept"/>
+			<column name="OBJ_ID" value="35A0AD38E7C4433E85F724314B673C2A"/>
+			<column name="SHRT_NAME" value="Music"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="56"/>
+			<column name="LNG_NAME" value="History Dept"/>
+			<column name="OBJ_ID" value="28AB439DC484498BAC23F951755E3693"/>
+			<column name="SHRT_NAME" value="History"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="57"/>
+			<column name="LNG_NAME" value="Political Science Dept"/>
+			<column name="OBJ_ID" value="7AF3E4AA9C7840D68E8AA9BD895D1956"/>
+			<column name="SHRT_NAME" value="PolySci"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="58"/>
+			<column name="LNG_NAME" value="Psychology Dept"/>
+			<column name="OBJ_ID" value="CFA7D727C7314DC2B14E5C3EC55DE71B"/>
+			<column name="SHRT_NAME" value="Psychology"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="59"/>
+			<column name="LNG_NAME" value="Sociology Dept"/>
+			<column name="OBJ_ID" value="47EBA9D673914D658053A7C5C58DE28E"/>
+			<column name="SHRT_NAME" value="Sociology"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="6"/>
+			<column name="LNG_NAME" value="Office of the President"/>
+			<column name="OBJ_ID" value="17A0D75DB5D84CE1A526EE17512E7930"/>
+			<column name="SHRT_NAME" value="PresidentsOffice"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214093946"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="60"/>
+			<column name="LNG_NAME" value="Interdisciplinary Studies in Behavioral and Social Science Program"/>
+			<column name="OBJ_ID" value="A0CF1667BF3A4DB3AFF69B2CB7AED287"/>
+			<column name="SHRT_NAME" value="InterdiscBSOS"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121554"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="61"/>
+			<column name="LNG_NAME" value="Chemical Engineering Dept"/>
+			<column name="OBJ_ID" value="14BC5AA08D3D4F9EBB682DADB2E8C3E0"/>
+			<column name="SHRT_NAME" value="Chemical"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="62"/>
+			<column name="LNG_NAME" value="Civil Engineering Dept"/>
+			<column name="OBJ_ID" value="B3E8FDC4D73C4EFDB2571A2034A79DBF"/>
+			<column name="SHRT_NAME" value="Civil"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="63"/>
+			<column name="LNG_NAME" value="Mechanical Engineering Dept"/>
+			<column name="OBJ_ID" value="F12074E8BA2A4152B390812311953B04"/>
+			<column name="SHRT_NAME" value="Mechanical"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="64"/>
+			<column name="LNG_NAME" value="Computer Science Dept"/>
+			<column name="OBJ_ID" value="4C22FF02F8854B69BCD05C00D19232D2"/>
+			<column name="SHRT_NAME" value="CompSci"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="65"/>
+			<column name="LNG_NAME" value="Biology Dept"/>
+			<column name="OBJ_ID" value="0BA38A8C251A4C1A80C22D6C705E326A"/>
+			<column name="SHRT_NAME" value="Biology"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="66"/>
+			<column name="LNG_NAME" value="Biochemistry Dept"/>
+			<column name="OBJ_ID" value="597BAE74250743C4A354D838BEA85C85"/>
+			<column name="SHRT_NAME" value="Biochemistry"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="67"/>
+			<column name="LNG_NAME" value="Botany Dept"/>
+			<column name="OBJ_ID" value="C90877D974104121B1B58D67F072DBFB"/>
+			<column name="SHRT_NAME" value="Botany"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="68"/>
+			<column name="LNG_NAME" value="Chemistry Dept"/>
+			<column name="OBJ_ID" value="123E79261C7649BDBDDF20841902251D"/>
+			<column name="SHRT_NAME" value="Chemistry"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="68016d69-2ac0-498a-b735-09bdd353bcdc"/>
+			<column name="LNG_NAME" value="The Landscape Architecture Accreditation Board"/>
+			<column name="OBJ_ID" value="21FBB51BDE1E4600ADDAC987E01FE0C1"/>
+			<column name="SHRT_NAME" value="ASLA-LAAB"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="69"/>
+			<column name="LNG_NAME" value="Geology Dept"/>
+			<column name="OBJ_ID" value="06E63A44DB084D1AB323B654552A19F1"/>
+			<column name="SHRT_NAME" value="Geology"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213143638"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="6d9d8e2b-dd3e-4d00-90b9-9ee2b13ee7ad"/>
+			<column name="LNG_NAME" value="The Commission on Accreditation for Dietetics Education"/>
+			<column name="OBJ_ID" value="A1E74386C84C41CAA342F93C94322408"/>
+			<column name="SHRT_NAME" value="ADA-CAD"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="7"/>
+			<column name="LNG_NAME" value="President's Cabinet for College-Wide Planning"/>
+			<column name="OBJ_ID" value="C55E25852A41425E8502DE8770B89571"/>
+			<column name="SHRT_NAME" value="PresidentsCabinet"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdvisoryGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="70"/>
+			<column name="LNG_NAME" value="Accounting Section"/>
+			<column name="OBJ_ID" value="E1AC08258BFA4D0A8DEF7AC26AAD5D41"/>
+			<column name="SHRT_NAME" value="Accounting"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="71"/>
+			<column name="LNG_NAME" value="Finance Section"/>
+			<column name="OBJ_ID" value="934E3157318A4F6D85074212A35F4B44"/>
+			<column name="SHRT_NAME" value="Finance"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="72"/>
+			<column name="LNG_NAME" value="International Business Section"/>
+			<column name="OBJ_ID" value="1479FE39D3F54F9C9392E75C948FEDBC"/>
+			<column name="SHRT_NAME" value="InternationalBusiness"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="73"/>
+			<column name="LNG_NAME" value="Marketing Section"/>
+			<column name="OBJ_ID" value="CC66298FF8444F6C9CFCFF6FCD752D84"/>
+			<column name="SHRT_NAME" value="Marketing "/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="74"/>
+			<column name="LNG_DESCR" value="Section w/in the Provost Office that deals with all the academic programs"/>
+			<column name="LNG_NAME" value="Academic Programs"/>
+			<column name="OBJ_ID" value="DB25C64F723443958123AB0B63270B7D"/>
+			<column name="SHRT_NAME" value="AcademicPrograms"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094518"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="742152a4-4096-45d1-adbe-d7c5932df4d1"/>
+			<column name="LNG_NAME" value="The National Association of Schools for Art and Design"/>
+			<column name="OBJ_ID" value="E909BA877D0A41EC8B28047EC4FDC903"/>
+			<column name="SHRT_NAME" value="NASAD"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="19991231030000"/>
+			<column name="ID" value="75"/>
+			<column name="LNG_DESCR" value="Section w/in the Provost Office that deals with assessing the quality of the programs"/>
+			<column name="LNG_NAME" value="Outcomes Assessment"/>
+			<column name="OBJ_ID" value="D9AA3ACFCCAD4B7AA4DEE547A5A2B9A9"/>
+			<column name="SHRT_NAME" value="OutcomesAssessment"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094945"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="76"/>
+			<column name="LNG_NAME" value="Section w/in the Provost Office that deals with academic services"/>
+			<column name="OBJ_ID" value="2A536FC7AF8B42128090AE107E7D3488"/>
+			<column name="SHRT_NAME" value="AcademicServices"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="77"/>
+			<column name="LNG_NAME" value="Division of Academic Affairs"/>
+			<column name="OBJ_ID" value="B50390F464A94BE7A8D0B7BE79282147"/>
+			<column name="SHRT_NAME" value="DivisionAcademicAffaris"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="78"/>
+			<column name="LNG_NAME" value="Housing"/>
+			<column name="OBJ_ID" value="A2E13C87913B46168CAFD56476078F67"/>
+			<column name="SHRT_NAME" value="Housing"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="79"/>
+			<column name="LNG_NAME" value="Dining"/>
+			<column name="OBJ_ID" value="E8CD08EE4E7941FB9630038FDE4D4334"/>
+			<column name="SHRT_NAME" value="Dining"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="79e0e1e4-0ec7-4f34-97c1-24b38967fc64"/>
+			<column name="LNG_NAME" value="The American Association for Marriage and Family Therapy"/>
+			<column name="OBJ_ID" value="A80D6C4317BD4D1C8239DEAC95C358B2"/>
+			<column name="SHRT_NAME" value="AAMFT"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="8"/>
+			<column name="LNG_NAME" value="President's Council for College-Wide Planning"/>
+			<column name="OBJ_ID" value="56BB3E09464D49E8AA2A5A952444424A"/>
+			<column name="SHRT_NAME" value="PresidentsCouncil"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AdvisoryGroup"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="80"/>
+			<column name="LNG_NAME" value="Transportation"/>
+			<column name="OBJ_ID" value="5118B42746C94FC1A260EF666C6784AD"/>
+			<column name="SHRT_NAME" value="Transportation"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="81"/>
+			<column name="LNG_NAME" value="Student Activities"/>
+			<column name="OBJ_ID" value="FD71D94FAFB245FBBA2A6DCAA77FA07F"/>
+			<column name="SHRT_NAME" value="StudentActivities"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="82"/>
+			<column name="LNG_NAME" value="Community Involvement"/>
+			<column name="OBJ_ID" value="CC77EF4334BA4AE18190DD20CF865163"/>
+			<column name="SHRT_NAME" value="Community"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="83"/>
+			<column name="LNG_NAME" value="Recreation"/>
+			<column name="OBJ_ID" value="0F6AB3BD89F44E9AABD8C3CFE9733CAE"/>
+			<column name="SHRT_NAME" value="Recreation"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="83db9071-6b07-475c-b7ea-3b787108bbbb"/>
+			<column name="LNG_NAME" value="The American Veterinary Medical Association Council on Accreditation"/>
+			<column name="OBJ_ID" value="63377F6A879F42F78B0E4508BCCD5713"/>
+			<column name="SHRT_NAME" value="AVMA-CA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="84"/>
+			<column name="LNG_NAME" value="Health"/>
+			<column name="OBJ_ID" value="8B35E3F51C1948F4857C37910D236834"/>
+			<column name="SHRT_NAME" value="Health"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="85"/>
+			<column name="LNG_NAME" value="Wellness"/>
+			<column name="OBJ_ID" value="47D0DEF1A89F44CEBC0CC5A596B1531E"/>
+			<column name="SHRT_NAME" value="Wellness"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="86"/>
+			<column name="LNG_NAME" value="Spirituality"/>
+			<column name="OBJ_ID" value="7C2793412DF1442E8082ED7A0CF6CA1C"/>
+			<column name="SHRT_NAME" value="Spirituality"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="87"/>
+			<column name="LNG_NAME" value="Career and Social Development"/>
+			<column name="OBJ_ID" value="C1FD4F3DACC34FD8800EC210A0EF4503"/>
+			<column name="SHRT_NAME" value="Career"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="88"/>
+			<column name="LNG_NAME" value="Drug & Alcohol Awareness"/>
+			<column name="OBJ_ID" value="48CED857599347EBBDFE8A0F5720163C"/>
+			<column name="SHRT_NAME" value="DrugAlcohol"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="89"/>
+			<column name="LNG_NAME" value="Greek Affairs"/>
+			<column name="OBJ_ID" value="9B2C21E74EB244EDA563590639ADCD14"/>
+			<column name="SHRT_NAME" value="GreekProgram"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="8d3d7c48-5845-4b4d-b98a-03274c43165a"/>
+			<column name="LNG_NAME" value="The American Alliance for Health, Physical Education, Recreation & Dance"/>
+			<column name="OBJ_ID" value="1819C80B5F9446428E0DE840A8F970E4"/>
+			<column name="SHRT_NAME" value="AAPERD"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="9"/>
+			<column name="LNG_NAME" value="Internal Audit"/>
+			<column name="OBJ_ID" value="81EA7A1196684C4CB2F7416A5231D7D1"/>
+			<column name="SHRT_NAME" value="Audit"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="90"/>
+			<column name="LNG_NAME" value="Multicultural and Diversity"/>
+			<column name="OBJ_ID" value="F597F1D68CA345D49FE086B0AFACE66B"/>
+			<column name="SHRT_NAME" value="DiversityProgram"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="91"/>
+			<column name="LNG_NAME" value="New Student Life Programs"/>
+			<column name="OBJ_ID" value="6D11B0E8E671467E8F28A3E67FD541EC"/>
+			<column name="SHRT_NAME" value="NewStudentLifeProgram"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="92"/>
+			<column name="LNG_NAME" value="Off-Campus Life"/>
+			<column name="OBJ_ID" value="506C051151254C1BB14A7DDB7D44F591"/>
+			<column name="SHRT_NAME" value="OffCampusLifeProgram"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="93"/>
+			<column name="LNG_NAME" value="Peer Counseling Services"/>
+			<column name="OBJ_ID" value="8A599AE444B64A3C84E9306D7B651F83"/>
+			<column name="SHRT_NAME" value="PeerCounselingServices"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="94"/>
+			<column name="LNG_NAME" value="Student Conduct & Judicial Affairs"/>
+			<column name="OBJ_ID" value="4CFCFA20BE414E678048701A1AD94835"/>
+			<column name="SHRT_NAME" value="StudentConductJudicial"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="95"/>
+			<column name="LNG_NAME" value="Student Disability Services"/>
+			<column name="OBJ_ID" value="5F2DBDF1074C4E9DA810F4D361131B8D"/>
+			<column name="SHRT_NAME" value="StudentDisabilityServices"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="96"/>
+			<column name="LNG_NAME" value="Student Legal Services"/>
+			<column name="OBJ_ID" value="6792898DE1C9431293A0EE217108066B"/>
+			<column name="SHRT_NAME" value="StudentLegalServices"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="97"/>
+			<column name="LNG_NAME" value="Student Organizations"/>
+			<column name="OBJ_ID" value="F88EF50127E34D58A6FA979991BCAC94"/>
+			<column name="SHRT_NAME" value="StudentOrganizations"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Program"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="98"/>
+			<column name="LNG_NAME" value="Admissions and Enrollment Planning"/>
+			<column name="OBJ_ID" value="60E7A7EAE5D54BA6A101B5DBCCCC144E"/>
+			<column name="SHRT_NAME" value="Admissions"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20090122000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="99"/>
+			<column name="LNG_NAME" value="Financial Aid Office (Scholarships and Student Aid)"/>
+			<column name="OBJ_ID" value="18E34B6853184D04B4C358AD0472AF05"/>
+			<column name="SHRT_NAME" value="FinancialAid"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20090122000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101101000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="ORG-ID-ACT"/>
+			<column name="LNG_NAME" value="ACT, Inc"/>
+			<column name="OBJ_ID" value="96ED3E513F2FFE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="ACT"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.TestingService"/>
+			<column name="UPDATETIME" value="20101101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101101000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="ORG-ID-CEEB"/>
+			<column name="LNG_NAME" value="The College Board"/>
+			<column name="OBJ_ID" value="96ED3E513F2DFE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="CEEB"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.TestingService"/>
+			<column name="UPDATETIME" value="20101101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20101101000000"/>
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="ID" value="ORG-ID-ETS"/>
+			<column name="LNG_NAME" value="Educational Testing Board"/>
+			<column name="OBJ_ID" value="96ED3E513F2EFE1EE040C60AF05B2BC9"/>
+			<column name="SHRT_NAME" value="ETS"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.TestingService"/>
+			<column name="UPDATETIME" value="20101101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="a460f47e-c878-42e5-8f3c-119ecfab0b04"/>
+			<column name="LNG_NAME" value="Teachers of English to Speakers of Other Languages, Inc."/>
+			<column name="OBJ_ID" value="65029624F8774ED3A4F962C21129CC6A"/>
+			<column name="SHRT_NAME" value="TESOL"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="b5729f4d-d8b2-4c2f-bebf-8390e89ab52d"/>
+			<column name="LNG_NAME" value="The National Association for Sport and Physical Education"/>
+			<column name="OBJ_ID" value="1EB57650F40940D3A4484DBD5BB654E3"/>
+			<column name="SHRT_NAME" value="NASPE"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="b95833a6-ba57-44e7-b93c-344cf4f55e5b"/>
+			<column name="LNG_NAME" value="The National Association for Education of Young Children"/>
+			<column name="OBJ_ID" value="C614C85238104FFABCC1D19B3B6E3F64"/>
+			<column name="SHRT_NAME" value="NAEYC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="c3ae45d5-344c-474f-8699-82ef34773eb4"/>
+			<column name="LNG_NAME" value="The American Council on Teaching of Foreign Language"/>
+			<column name="OBJ_ID" value="E264D665B4BE4E948D07688A15B54DE4"/>
+			<column name="SHRT_NAME" value="ACTFL"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="c9db653c-ce44-418f-9f68-f47177c533fa"/>
+			<column name="LNG_NAME" value="The National Council for Accreditation of Teacher Education"/>
+			<column name="OBJ_ID" value="6C6E01E6A97849799E2E15820720C280"/>
+			<column name="SHRT_NAME" value="MSDE"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="d2d0d73e-fc79-45d8-8e68-dad241cb6755"/>
+			<column name="LNG_NAME" value="The National Science Teachers Association"/>
+			<column name="OBJ_ID" value="6D504D2D84C3476B9B43FA81F42B9D31"/>
+			<column name="SHRT_NAME" value="NSTA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="d89cd34c-5458-4b1c-8b44-e200c820d1f4"/>
+			<column name="LNG_NAME" value="The Accrediting Council on Education in Journalism and Mass Communications"/>
+			<column name="OBJ_ID" value="6D1DD47A2ED845F1818B6A1C58D769A3"/>
+			<column name="SHRT_NAME" value="ACEJMC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="df2e360b-8d8b-4aeb-8614-daf0d53e1f62"/>
+			<column name="LNG_NAME" value="The American Society for Landscape Architecture"/>
+			<column name="OBJ_ID" value="1C0C158BCF814364B34AC73A1F4BD3C9"/>
+			<column name="SHRT_NAME" value="ASLA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="e04510db-f484-44e4-ae99-85c8060f038a"/>
+			<column name="LNG_NAME" value="The Educational Leadership Constituent Council"/>
+			<column name="OBJ_ID" value="3AB477966FEE4D5AAF63C84EAD444998"/>
+			<column name="SHRT_NAME" value="ELCC"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121400"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="e27ce044-cbe5-4246-a0c9-f38821ecceaa"/>
+			<column name="LNG_NAME" value="The National Council for the Social Studies"/>
+			<column name="OBJ_ID" value="0CC113CBA57648E99FF37AA8E48033DD"/>
+			<column name="SHRT_NAME" value="NCSS"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121400"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="e4259587-cfc0-4921-a8fc-2202875a244f"/>
+			<column name="LNG_NAME" value="The Council on Academic Accreditation"/>
+			<column name="OBJ_ID" value="4DAB495CF3024DAA9ADBA376211BADB0"/>
+			<column name="SHRT_NAME" value="CAA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="e92da521-7e97-4a20-bb54-874b6cce6807"/>
+			<column name="LNG_NAME" value="The American Dietetic Association"/>
+			<column name="OBJ_ID" value="1CA47C8239234B3BBAD1C7C43A56E470"/>
+			<column name="SHRT_NAME" value="ADA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121358"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="ed371165-7e8b-4598-ada4-3c1c1be92602"/>
+			<column name="LNG_NAME" value="The Council on Rehabilitation Education"/>
+			<column name="OBJ_ID" value="F8AE38F639FB4FE58182B7F1499BF4CE"/>
+			<column name="SHRT_NAME" value="CORE"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121358"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121357"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="f50f1290-6aea-4b7f-89ac-0ea4bf8ce5e9"/>
+			<column name="LNG_NAME" value="The Association for Childhood Education International"/>
+			<column name="OBJ_ID" value="AFD903F5C7BA4232BEFA70294F297031"/>
+			<column name="SHRT_NAME" value="ACEI"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121357"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="f8ca1525-8d58-4975-be25-ab512f8292f8"/>
+			<column name="LNG_NAME" value="The International Reading Association"/>
+			<column name="OBJ_ID" value="3B42F99F011C49BDAFC67B2B2C102272"/>
+			<column name="SHRT_NAME" value="IRA"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG">
+			<column name="CREATETIME" value="20100917121359"/>
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="ID" value="f94d7266-5d88-4d7a-a776-b0ec7cbbe041"/>
+			<column name="LNG_NAME" value="The Institute of Food Technologists"/>
+			<column name="OBJ_ID" value="18C7940C6BD14820BDE34D12E704B7E4"/>
+			<column name="SHRT_NAME" value="IFT"/>
+			<column name="ST" value="Active"/>
+			<column name="TYPE" value="kuali.org.AccreditingBody"/>
+			<column name="UPDATETIME" value="20100917121359"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

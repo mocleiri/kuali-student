@@ -1,0 +1,781 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_LU_CODE-initial-data" author="alubbers">
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="dc4eb85d-f3fb-4b26-8bdf-17aebf229b12"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214094902"/>
+			<column name="ID" value="089bae78-fdb3-4978-abc5-0d3c5e467706"/>
+			<column name="OBJ_ID" value="daa7d3f6-0409-431d-a18a-70a0bc8917c7"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095239"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="471bff41-f3cd-4071-b7a7-eb5bc1b83a8c"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214110556"/>
+			<column name="ID" value="0990b7b2-e4d7-4ff0-9e57-9ca9f42247b3"/>
+			<column name="OBJ_ID" value="44d7bafc-4427-4aaf-9492-0e6a696dcfe8"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110649"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG498"/>
+			<column name="CREATETIME" value="20101210172130"/>
+			<column name="ID" value="0da1045b-0886-41c1-95d6-7ac52b137717"/>
+			<column name="OBJ_ID" value="ebdd3e8e-ab26-4fca-8837-55111157dd3f"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172130"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GEOG"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="0eeec44a-ac48-477e-a913-4cb6c4685686"/>
+			<column name="OBJ_ID" value="54961b21-2ab3-44bf-b433-e6d4094d302b"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2000"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="45.0701"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="718cce39-28c4-4893-b832-d7a08d214b38"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214101116"/>
+			<column name="ID" value="13aa08ba-871f-48c4-9fcd-0f3c6f165074"/>
+			<column name="OBJ_ID" value="9b4a4be8-eb08-4f4d-8712-995ae7587006"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214101233"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="ad7acd2a-a4e1-49ae-afa5-d4eac144d34d"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213170014"/>
+			<column name="ID" value="15553c15-6911-4ce4-9c88-21a2a015c7ec"/>
+			<column name="OBJ_ID" value="1028f13f-8934-453c-b6de-931f8aa35e14"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213170123"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="15e1dd6f-c2b3-4bb0-9c78-2eeca9c58de7"/>
+			<column name="OBJ_ID" value="8f76f59e-f44f-4445-a324-a13f16aedfd0"/>
+			<column name="TYPE" value="kuali.lu.code.HEGIS"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="040100"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BACC"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214102531"/>
+			<column name="ID" value="1991d942-cb5b-4387-ad20-71455409ced2"/>
+			<column name="OBJ_ID" value="de1aadba-9618-4c32-a020-8dd4427517b2"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214102531"/>
+			<column name="VALUE" value="MAJOR"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI379"/>
+			<column name="CREATETIME" value="20101210172116"/>
+			<column name="ID" value="1dc34afc-83b1-49f2-9766-2c9fc56e2abc"/>
+			<column name="OBJ_ID" value="8192bbc2-18f2-4d30-b296-7bff70141960"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213180039"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG399"/>
+			<column name="CREATETIME" value="20101210172128"/>
+			<column name="ID" value="1f124b35-2b1a-4efd-9a5a-8483b0ff635e"/>
+			<column name="OBJ_ID" value="43dc535e-cecd-4cf1-8a84-ff504ab64029"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172128"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GEOG"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="20606f5b-4545-415b-a9f2-757a51db4130"/>
+			<column name="OBJ_ID" value="300badf9-5892-4b8a-9c50-6d61b264d379"/>
+			<column name="TYPE" value="kuali.lu.code.HEGIS"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="220600"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="14dd1594-9007-4282-b08d-54d1c73f0e6e"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213165254"/>
+			<column name="ID" value="27449648-9cc6-4b35-af30-c6b19c0ae9a0"/>
+			<column name="OBJ_ID" value="101c40ee-d607-493e-8c61-538de5e52365"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213165948"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="6"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-CCJS"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101213194448"/>
+			<column name="ID" value="2b04fa93-f24b-4504-90d5-cf4bcc254269"/>
+			<column name="OBJ_ID" value="9c279f20-d177-4758-8acc-aaf5d011b622"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="VALUE" value="MAJOR"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-CCJS"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101213194448"/>
+			<column name="ID" value="2c63f12a-47d6-427f-9504-051c986000a0"/>
+			<column name="OBJ_ID" value="ab98d7ce-f2c5-4510-9575-518f52c2fc01"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2000"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="VALUE" value="45.0401"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEENGL398"/>
+			<column name="CREATETIME" value="20101210172126"/>
+			<column name="ID" value="2fe365f3-18d8-4591-aa2b-5374edefda71"/>
+			<column name="OBJ_ID" value="d63fec57-bdb2-4029-8de6-d7724c382587"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172126"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="36fb07fb-da5e-437a-8e78-9943dbb6aacf"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214110714"/>
+			<column name="ID" value="30acc7b0-80cd-4ffd-957f-8c7123b23944"/>
+			<column name="OBJ_ID" value="3e3ef773-51aa-4769-b32e-5e479e9bcd63"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111008"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI338"/>
+			<column name="CREATETIME" value="20101210172115"/>
+			<column name="ID" value="335b4d32-1a5c-41ed-8a43-0e436a4b6bd1"/>
+			<column name="OBJ_ID" value="0c3de590-6c3a-436c-89b2-3f8d4c4132d2"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172115"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG499"/>
+			<column name="CREATETIME" value="20101210172130"/>
+			<column name="ID" value="35f68445-16d3-4be8-aa26-223f875e4382"/>
+			<column name="OBJ_ID" value="a06b17e0-710e-4662-8521-97e0af4967cd"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172130"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGVPT439"/>
+			<column name="CREATETIME" value="20101210172131"/>
+			<column name="ID" value="38d67dce-2c24-432a-9765-1d0b7df04bd9"/>
+			<column name="OBJ_ID" value="b37ddd15-5599-4e8a-ab17-64ea364cf583"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172131"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="3d6eba1b-4b07-4796-8f88-9fb84c28feee"/>
+			<column name="OBJ_ID" value="ec3672d3-7584-404a-998b-c9741da44c60"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2000"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="26.0101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI-GENB"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="3f61855c-13d6-4b74-8352-27d491c5028d"/>
+			<column name="OBJ_ID" value="9c6f107d-c660-456e-8ae1-bbe53c70282f"/>
+			<column name="TYPE" value="kuali.lu.code.HEGIS"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="040100"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GEOG"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="405193ca-3488-448c-a31d-1543424f254a"/>
+			<column name="OBJ_ID" value="38f5d33d-939f-4431-849a-81d482ab3766"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2010"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="45.0701"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="48438012-0862-4e74-980f-ef10e9213581"/>
+			<column name="OBJ_ID" value="2e1f6330-0156-4cd7-8837-12c6a48520f5"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2010"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="26.0101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="4b643291-a433-44ae-9897-c49169544432"/>
+			<column name="OBJ_ID" value="3031f6f6-9dc2-42b3-889b-e98a7f96b273"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="MAJOR"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-CCJS"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101213194448"/>
+			<column name="ID" value="4e436b38-0759-4942-a89a-93c8d0e3edbe"/>
+			<column name="OBJ_ID" value="2cc99034-c0fb-4476-90fb-62056e9b8852"/>
+			<column name="TYPE" value="kuali.lu.code.HEGIS"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="VALUE" value="220900"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS359"/>
+			<column name="CREATETIME" value="20101210172121"/>
+			<column name="ID" value="504bf716-6495-4506-81d4-8e468333e829"/>
+			<column name="OBJ_ID" value="3388bce8-e7f2-4233-b88b-b6ede771eeb0"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105752"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="9ceee7cd-d076-43de-b6ab-6b4444d149c1"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214095547"/>
+			<column name="ID" value="51295ba1-61d7-4466-a95a-029c4487a972"/>
+			<column name="OBJ_ID" value="54218c54-6807-4d59-9612-f15e61150191"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095642"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGVPT479"/>
+			<column name="CREATETIME" value="20101210172131"/>
+			<column name="ID" value="54f7546e-4206-4d2a-ba20-6584fb01c37e"/>
+			<column name="OBJ_ID" value="0917f897-afa5-4d83-90a4-7f4d5d09825a"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172131"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS188"/>
+			<column name="CREATETIME" value="20101210172120"/>
+			<column name="ID" value="55a66f63-2baa-44c3-bc35-54b4a954c22c"/>
+			<column name="OBJ_ID" value="ffa2eeee-372a-49d5-9345-edac7a4c74c4"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214101233"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-CORE"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101213155310"/>
+			<column name="ID" value="5dc21087-7d59-4195-9833-2a83e72e71ee"/>
+			<column name="OBJ_ID" value="9b4a34a7-76e6-4715-8f30-a939966a2c61"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="VALUE" value="MAJOR"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="b6e0b88e-b61e-4b5c-a388-7f31cea7964a"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214110312"/>
+			<column name="ID" value="6113dfe7-a045-451b-a17f-4fe59f3a73a3"/>
+			<column name="OBJ_ID" value="c38ed8df-61fa-455d-8cd5-86845221f279"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110518"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS398"/>
+			<column name="CREATETIME" value="20101210172122"/>
+			<column name="ID" value="62b30f98-89ee-4252-af01-9d26d495c092"/>
+			<column name="OBJ_ID" value="8da0bd4c-b85c-4b28-bf28-8cacae44ab1c"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110919"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG438"/>
+			<column name="CREATETIME" value="20101210172129"/>
+			<column name="ID" value="64bce105-9bc1-4646-bf3e-99560e07df90"/>
+			<column name="OBJ_ID" value="f3a2664a-3b39-4283-a85a-323b69b12d49"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095239"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI398"/>
+			<column name="CREATETIME" value="20101210172117"/>
+			<column name="ID" value="6530a8ef-c2e4-4bae-966f-9e9a4d407107"/>
+			<column name="OBJ_ID" value="8349f794-fd4d-4f2f-aa7b-8e7e6a84915f"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213170123"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS388"/>
+			<column name="CREATETIME" value="20101210172122"/>
+			<column name="ID" value="6f90e03f-9ebc-49ec-b304-661ae110a2b4"/>
+			<column name="OBJ_ID" value="2dcb2e93-d41a-4399-913d-802f3d3816c8"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110518"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI378"/>
+			<column name="CREATETIME" value="20101210172138"/>
+			<column name="ID" value="6ffbb4e9-1b7d-4539-8ff7-cce0b5c2aab7"/>
+			<column name="OBJ_ID" value="1293e500-527d-4a7a-bb54-2d07c0cf04f3"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172138"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEPHIL209"/>
+			<column name="CREATETIME" value="20101210172135"/>
+			<column name="ID" value="7ba3e598-1e1f-4124-8bda-d3a0227687cd"/>
+			<column name="OBJ_ID" value="19f5f523-fcbb-4913-be79-b74e121011b1"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172135"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI-GENB"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="7c750af9-9dc0-4a9b-9881-d66d0b487b6f"/>
+			<column name="OBJ_ID" value="c1929a60-e8a8-4c60-bb6d-bf76e4c122ab"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2010"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="26.0101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG478"/>
+			<column name="CREATETIME" value="20101210172130"/>
+			<column name="ID" value="7efb3cea-c3a7-4c48-948b-e645bd54495c"/>
+			<column name="OBJ_ID" value="c53fe1ef-8282-4372-9a6d-eca83ffa22e1"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172130"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="88c6d275-a86f-4189-87d9-bee0f8e10b62"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214110758"/>
+			<column name="ID" value="825580c9-650c-41cf-9d52-6c30b6b0e9ec"/>
+			<column name="OBJ_ID" value="e02f9bb8-b802-4557-b80a-07e0d228d105"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110919"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GIS"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="84eacea9-ccbd-4450-a083-54a4c5006f5e"/>
+			<column name="OBJ_ID" value="3dadee74-dd0e-433a-828a-859db099b559"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="SPEC"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI328"/>
+			<column name="CREATETIME" value="20101210172115"/>
+			<column name="ID" value="86260102-4185-41c7-8c0b-ec883fd8fbe6"/>
+			<column name="OBJ_ID" value="c929aaea-62cf-4a3d-9e53-77ccd5362a9f"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172115"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GIS"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="8841b88f-2dd0-4aba-993f-2737398a735f"/>
+			<column name="OBJ_ID" value="b020e70b-4d6e-49e1-bf00-b2dea2f41d56"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2000"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="45.0701"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS288"/>
+			<column name="CREATETIME" value="20101210172121"/>
+			<column name="ID" value="8ec56993-e6e4-49be-affc-a5e1beb45025"/>
+			<column name="OBJ_ID" value="811dc691-0577-4a2a-be7a-a56e2aca4ac7"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214101958"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI399"/>
+			<column name="CREATETIME" value="20101210172117"/>
+			<column name="ID" value="8fdcc47b-ab58-4c26-90d0-cbd956eda613"/>
+			<column name="OBJ_ID" value="a6b74cde-bc25-4b1d-b8c7-65e2f0197511"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213165948"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="9cddad26-4a99-4aa5-94d0-89162df6f14c"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214105644"/>
+			<column name="ID" value="9105c320-126d-4fa3-a8d3-87ca701171db"/>
+			<column name="OBJ_ID" value="e925ca12-b7b9-4454-9e7d-a8645139e21a"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105752"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GIS"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="958d88e3-37ec-46b5-bbdf-9c58f9567ffd"/>
+			<column name="OBJ_ID" value="e4e8183e-79bc-48bd-b007-844e5259ab1c"/>
+			<column name="TYPE" value="kuali.lu.code.HEGIS"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="220600"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="b8debaf9-c924-4dae-be44-82c129a48699"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213175929"/>
+			<column name="ID" value="95fa4873-def8-425e-835e-ea27409019d4"/>
+			<column name="OBJ_ID" value="316afd79-9d4d-4cc7-abc9-9aecbe4350dc"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213180039"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEHIST219"/>
+			<column name="CREATETIME" value="20101210172132"/>
+			<column name="ID" value="978c55cb-3bef-4657-a204-037e42a9b442"/>
+			<column name="OBJ_ID" value="4babfc9a-9a96-49e3-8653-777e48f4012f"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172132"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG418"/>
+			<column name="CREATETIME" value="20101210172129"/>
+			<column name="ID" value="a92a8d37-955e-49a5-8d27-39ddb2510449"/>
+			<column name="OBJ_ID" value="cc0ef939-1204-4c84-b42f-edc75bb571e8"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172129"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG398"/>
+			<column name="CREATETIME" value="20101210172128"/>
+			<column name="ID" value="af7dd2d2-5cf3-4721-86f8-10c649d1b6c0"/>
+			<column name="OBJ_ID" value="0c4477a1-b29f-42b7-bb93-1bbaca9dcef6"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095643"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-CCJS"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101213194448"/>
+			<column name="ID" value="afa614a1-1c54-4b82-bcca-88aa840c3dc0"/>
+			<column name="OBJ_ID" value="d2e165e4-b2bb-4c13-91ab-efeba2d34e48"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2010"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="VALUE" value="45.0401"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI-GENB"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="b4fa6ce5-d8c2-4f15-ae18-a5adab17492d"/>
+			<column name="OBJ_ID" value="e40b1778-45d9-4f5b-9331-54f2ce1ce7cc"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="SPEC"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI389"/>
+			<column name="CREATETIME" value="20101210172116"/>
+			<column name="ID" value="b6b748e1-75d2-425a-8774-db334489193a"/>
+			<column name="OBJ_ID" value="4ab7eb6c-7934-4f55-93ef-216d442ce90e"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213171741"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG328"/>
+			<column name="CREATETIME" value="20101210172127"/>
+			<column name="ID" value="bbb3bf94-3e3f-474c-8201-b55e42a929a6"/>
+			<column name="OBJ_ID" value="bceea858-680d-4aa0-867f-f8835def9952"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172127"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEBSCI348"/>
+			<column name="CREATETIME" value="20101210172115"/>
+			<column name="ID" value="befbb132-e652-4c6b-8890-b63126074267"/>
+			<column name="OBJ_ID" value="de853cd3-55d9-4702-a1b0-64f22950b8c6"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172115"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS278"/>
+			<column name="CREATETIME" value="20101210172121"/>
+			<column name="ID" value="c2111d46-c5f0-45ed-abb5-f5f087d4d76b"/>
+			<column name="OBJ_ID" value="d9834a8d-e9f6-4787-8b16-1d501071a98a"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172121"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-BSCI-GENB"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" value="20101214105343"/>
+			<column name="ID" value="c4b60d97-d916-480e-963c-6f1852a468a9"/>
+			<column name="OBJ_ID" value="01d45f7a-a763-4dba-97ca-b96d4ee1cb17"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2000"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="VALUE" value="26.0101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GEOG"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="dadb3b89-c70d-4bc7-9fcc-895f943ea59e"/>
+			<column name="OBJ_ID" value="f2cedbe2-4d7a-4118-8c76-e6cf26694df9"/>
+			<column name="TYPE" value="kuali.lu.code.UniversityClassification"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="MAJOR"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEAASP298"/>
+			<column name="CREATETIME" value="20101210172111"/>
+			<column name="ID" value="e1715bd1-dcfb-4473-bc03-9ccbfa0551a4"/>
+			<column name="OBJ_ID" value="88836dbe-e955-46a9-ad9c-0d415f49f4fa"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172111"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="4eda4440-bbb6-4f95-8af6-dacc63ffb0a6"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213171245"/>
+			<column name="ID" value="e329794b-1e5f-41ae-9852-5d38b63ac8f2"/>
+			<column name="OBJ_ID" value="dc65dfb1-91c6-4974-85d4-9941f467a741"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213171741"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="2b9bcafc-2631-47e4-ae06-a9135bf17971"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214110440"/>
+			<column name="ID" value="e33457dc-ff3f-4893-a696-83ae63e7642d"/>
+			<column name="OBJ_ID" value="cfdd2a0a-6456-4235-8931-d8a00bb8247b"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110518"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS399"/>
+			<column name="CREATETIME" value="20101210172122"/>
+			<column name="ID" value="e57dc136-4dea-4725-a5a4-3e0736a2f3f4"/>
+			<column name="OBJ_ID" value="511dd94a-9323-4c0c-acf6-7a28d787884e"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111618"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="484205ed-07c9-4d98-a4b0-cc2629641e88"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214111458"/>
+			<column name="ID" value="eb9d1a3b-dca7-4095-9574-732b183be0ff"/>
+			<column name="OBJ_ID" value="f624732d-121d-450c-817c-4e96042d2847"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111618"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS389"/>
+			<column name="CREATETIME" value="20101210172122"/>
+			<column name="ID" value="f2c6d01c-e59a-4af5-84a5-f6e1b1439a8d"/>
+			<column name="OBJ_ID" value="273665bd-4edb-429a-b288-b570ab554aae"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110649"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCEPROG-GIS"/>
+			<column name="CREATEID" value="fred"/>
+			<column name="CREATETIME" value="20101213151948"/>
+			<column name="ID" value="f89e795e-6366-40ba-8a2c-75dedcd9858c"/>
+			<column name="OBJ_ID" value="b6890b9f-d1d7-42d2-bffe-e74bf6485125"/>
+			<column name="TYPE" value="kuali.lu.code.CIP2010"/>
+			<column name="UPDATEID" value="fred"/>
+			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="VALUE" value="45.0701"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSEGVPT339"/>
+			<column name="CREATETIME" value="20101210172130"/>
+			<column name="ID" value="f8b64350-bb61-45a6-9d2a-fafbbd8bb9a9"/>
+			<column name="OBJ_ID" value="ded239df-f3a0-457a-8d0b-f7cf478b17b3"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172130"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="daead631-461f-474a-8cbc-e1d9d72b2f19"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214101852"/>
+			<column name="ID" value="fcc458b7-7dce-45f4-be27-b7bffd07021a"/>
+			<column name="OBJ_ID" value="12755ccf-38dc-4cda-a05e-a6bcb5ff65f7"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214101958"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSLU_LU_CODE">
+			<column name="CLU_ID" value="REFERENCECOURSECCJS498"/>
+			<column name="CREATETIME" value="20101210172123"/>
+			<column name="ID" value="fea382b1-30bc-4f6b-a561-67ed8e7c9559"/>
+			<column name="OBJ_ID" value="a57bea03-6933-4df9-9844-1b6631993a7b"/>
+			<column name="TYPE" value="kuali.lu.code.specialTopics"/>
+			<column name="UPDATETIME" value="20101210172123"/>
+			<column name="VALUE" value="true"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

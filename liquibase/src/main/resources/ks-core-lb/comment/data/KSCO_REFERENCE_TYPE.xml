@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSCO_REFERENCE_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSCO_REFERENCE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Clu"/>
+			<column name="OBJ_ID" value="27B3302EC30F43FB936FDA7313094869"/>
+			<column name="TYPE_DESC" value="Clu reference type"/>
+			<column name="TYPE_KEY" value="referenceType.clu"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSCO_REFERENCE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Clu Proposal"/>
+			<column name="OBJ_ID" value="7619651AED59491093D04AED1ECD9414"/>
+			<column name="TYPE_DESC" value="Clu reference type"/>
+			<column name="TYPE_KEY" value="referenceType.clu.proposal"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

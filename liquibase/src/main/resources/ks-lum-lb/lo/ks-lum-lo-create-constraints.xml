@@ -1,0 +1,65 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-633">
+  <addUniqueConstraint columnNames="LO_ID, LOCATEGORY_ID" constraintName="SYS_C0011301" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLO_LO_JN_LOCATEGORY" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-957">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-958">
+  <addForeignKeyConstraint baseColumnNames="LO_REPO_ID" baseTableName="KSLO_LO" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_REPOSITORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-959">
+  <addForeignKeyConstraint baseColumnNames="LOTYPE_ID" baseTableName="KSLO_LO" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-960">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLO_LO" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-961">
+  <addForeignKeyConstraint baseColumnNames="LO_CATEGORY_TYPE_ID" baseTableName="KSLO_LO_CATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_CATEGORY_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_CATEGORY_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-962">
+  <addForeignKeyConstraint baseColumnNames="LO_REPO_ID" baseTableName="KSLO_LO_CATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_CATEGORY_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_REPOSITORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-963">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLO_LO_CATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_CATEGORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-964">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_LO_CATEGORY_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_CATEGORY_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_CATEGORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-965">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_LO_CATEGORY_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_CATEGORY_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_CATEGORY_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-966">
+  <addForeignKeyConstraint baseColumnNames="LO_ID" baseTableName="KSLO_LO_JN_LOCATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_JN_LOCATEGORY_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-967">
+  <addForeignKeyConstraint baseColumnNames="LOCATEGORY_ID" baseTableName="KSLO_LO_JN_LOCATEGORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_JN_LOCATEGORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_CATEGORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-968">
+  <addForeignKeyConstraint baseColumnNames="LO_ID" baseTableName="KSLO_LO_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_RELTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-969">
+  <addForeignKeyConstraint baseColumnNames="LO_LO_RELATION_TYPE_ID" baseTableName="KSLO_LO_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-970">
+  <addForeignKeyConstraint baseColumnNames="RELATED_LO_ID" baseTableName="KSLO_LO_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-971">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_LO_RELTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_RELTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-972">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_LO_RELTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_RELTN_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-973">
+  <addForeignKeyConstraint baseColumnNames="LO_ROOT_ID" baseTableName="KSLO_LO_REPOSITORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_REPOSITORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-974">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLO_LO_REPOSITORY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_REPOSITORY_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-975">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_LO_REPOSITORY_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_REPOSITORY_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_REPOSITORY" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-976">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLO_LO_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLO_LO_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLO_LO_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

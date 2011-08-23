@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLO_LO_REPOSITORY-initial-data" author="alubbers">
+		<insert tableName="KSLO_LO_REPOSITORY">
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.loRepository.key.institution"/>
+			<column name="NAME" value="Institution"/>
+			<column name="OBJ_ID" value="AFDB79EC47CA4B949DB4E3D4002BAD7E"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-18"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLO_LO_REPOSITORY">
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.loRepository.key.singleUse"/>
+			<column name="NAME" value="singleUse"/>
+			<column name="OBJ_ID" value="16A480F0E36F49D9AC5E645B7554387B"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-10"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLO_LO_REPOSITORY">
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.loRepository.key.state"/>
+			<column name="NAME" value="State"/>
+			<column name="OBJ_ID" value="0FCE13F58BB84C4585056792E251B151"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-22"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,2227 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRLC_CNTRY_T-initial-data" author="alubbers">
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AND"/>
+			<column name="OBJ_ID" value="56908AA37904661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AD"/>
+			<column name="POSTAL_CNTRY_NM" value="Andorra"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ARE"/>
+			<column name="OBJ_ID" value="56908AA379DE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AE"/>
+			<column name="POSTAL_CNTRY_NM" value="United Arab Emirates"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AFG"/>
+			<column name="OBJ_ID" value="56908AA378FF661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AF"/>
+			<column name="POSTAL_CNTRY_NM" value="Afghanistan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ATG"/>
+			<column name="OBJ_ID" value="56908AA378FE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AG"/>
+			<column name="POSTAL_CNTRY_NM" value="Antigua and Barbuda"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AIA"/>
+			<column name="OBJ_ID" value="56908AA3790B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AI"/>
+			<column name="POSTAL_CNTRY_NM" value="Anguilla"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ALB"/>
+			<column name="OBJ_ID" value="56908AA37902661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AL"/>
+			<column name="POSTAL_CNTRY_NM" value="Albania"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ARM"/>
+			<column name="OBJ_ID" value="56908AA37903661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AM"/>
+			<column name="POSTAL_CNTRY_NM" value="Armenia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ANT"/>
+			<column name="OBJ_ID" value="56908AA379A7661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AN"/>
+			<column name="POSTAL_CNTRY_NM" value="Netherlands Antilles"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AGO"/>
+			<column name="OBJ_ID" value="56908AA37905661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AO"/>
+			<column name="POSTAL_CNTRY_NM" value="Angola"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ATA"/>
+			<column name="OBJ_ID" value="56908AA3790C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AQ"/>
+			<column name="POSTAL_CNTRY_NM" value="Antarctica"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ARG"/>
+			<column name="OBJ_ID" value="56908AA37907661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AR"/>
+			<column name="POSTAL_CNTRY_NM" value="Argentina"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ASM"/>
+			<column name="OBJ_ID" value="56908AA37906661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AS"/>
+			<column name="POSTAL_CNTRY_NM" value="American Samoa"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AUT"/>
+			<column name="OBJ_ID" value="56908AA3790A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AT"/>
+			<column name="POSTAL_CNTRY_NM" value="Austria"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AUS"/>
+			<column name="OBJ_ID" value="56908AA37908661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AU"/>
+			<column name="POSTAL_CNTRY_NM" value="Australia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ABW"/>
+			<column name="OBJ_ID" value="56908AA378FD661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AW"/>
+			<column name="POSTAL_CNTRY_NM" value="Aruba"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ALA"/>
+			<column name="OBJ_ID" value="56908AA3794E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AX"/>
+			<column name="POSTAL_CNTRY_NM" value="Ã¿land Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="AZE"/>
+			<column name="OBJ_ID" value="56908AA37901661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="AZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Azerbaijan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BIH"/>
+			<column name="OBJ_ID" value="56908AA37915661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BA"/>
+			<column name="POSTAL_CNTRY_NM" value="Bosnia and Herzegovina"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BRB"/>
+			<column name="OBJ_ID" value="56908AA3790E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BB"/>
+			<column name="POSTAL_CNTRY_NM" value="Barbados"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BGD"/>
+			<column name="OBJ_ID" value="56908AA37913661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BD"/>
+			<column name="POSTAL_CNTRY_NM" value="Bangladesh"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BEL"/>
+			<column name="OBJ_ID" value="56908AA37911661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BE"/>
+			<column name="POSTAL_CNTRY_NM" value="Belgium"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BFA"/>
+			<column name="OBJ_ID" value="56908AA37909661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BF"/>
+			<column name="POSTAL_CNTRY_NM" value="Burkina Faso"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BGR"/>
+			<column name="OBJ_ID" value="56908AA3791F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BG"/>
+			<column name="POSTAL_CNTRY_NM" value="Bulgaria"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BHR"/>
+			<column name="OBJ_ID" value="56908AA3790D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BH"/>
+			<column name="POSTAL_CNTRY_NM" value="Bahrain"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BDI"/>
+			<column name="OBJ_ID" value="56908AA37922661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BI"/>
+			<column name="POSTAL_CNTRY_NM" value="Burundi"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BEN"/>
+			<column name="OBJ_ID" value="56908AA37918661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BJ"/>
+			<column name="POSTAL_CNTRY_NM" value="Benin"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BLM"/>
+			<column name="OBJ_ID" value="56908AA3791B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BL"/>
+			<column name="POSTAL_CNTRY_NM" value="Saint BarthÃ©lemy"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BMU"/>
+			<column name="OBJ_ID" value="56908AA37910661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BM"/>
+			<column name="POSTAL_CNTRY_NM" value="Bermuda"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BRN"/>
+			<column name="OBJ_ID" value="56908AA37921661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BN"/>
+			<column name="POSTAL_CNTRY_NM" value="Brunei Darussalam"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BOL"/>
+			<column name="OBJ_ID" value="56908AA37916661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BO"/>
+			<column name="POSTAL_CNTRY_NM" value="Bolivia, Plurinational State Of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BRA"/>
+			<column name="OBJ_ID" value="56908AA3791C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BR"/>
+			<column name="POSTAL_CNTRY_NM" value="Brazil"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BHS"/>
+			<column name="OBJ_ID" value="56908AA37912661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BS"/>
+			<column name="POSTAL_CNTRY_NM" value="Bahamas"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BTN"/>
+			<column name="OBJ_ID" value="56908AA3791E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BT"/>
+			<column name="POSTAL_CNTRY_NM" value="Bhutan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BVT"/>
+			<column name="OBJ_ID" value="56908AA37920661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BV"/>
+			<column name="POSTAL_CNTRY_NM" value="Bouvet Island"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BWA"/>
+			<column name="OBJ_ID" value="56908AA3790F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BW"/>
+			<column name="POSTAL_CNTRY_NM" value="Botswana"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BLR"/>
+			<column name="OBJ_ID" value="56908AA37919661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BY"/>
+			<column name="POSTAL_CNTRY_NM" value="Belarus"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="BLZ"/>
+			<column name="OBJ_ID" value="56908AA37914661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="BZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Belize"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CAN"/>
+			<column name="OBJ_ID" value="56908AA37923661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CA"/>
+			<column name="POSTAL_CNTRY_NM" value="Canada"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CCK"/>
+			<column name="OBJ_ID" value="56908AA3792C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CC"/>
+			<column name="POSTAL_CNTRY_NM" value="Cocos (Keeling) Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="COD"/>
+			<column name="OBJ_ID" value="56908AA37928661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CD"/>
+			<column name="POSTAL_CNTRY_NM" value="Congo, The Democratic Republic Of The"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CAF"/>
+			<column name="OBJ_ID" value="56908AA37933661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CF"/>
+			<column name="POSTAL_CNTRY_NM" value="Central African Republic"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="COG"/>
+			<column name="OBJ_ID" value="56908AA37927661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CG"/>
+			<column name="POSTAL_CNTRY_NM" value="Congo"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CHE"/>
+			<column name="OBJ_ID" value="56908AA379DD661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CH"/>
+			<column name="POSTAL_CNTRY_NM" value="Switzerland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CIV"/>
+			<column name="OBJ_ID" value="56908AA37973661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CI"/>
+			<column name="POSTAL_CNTRY_NM" value="CÃ´te D'Ivoire"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="COK"/>
+			<column name="OBJ_ID" value="56908AA37936661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CK"/>
+			<column name="POSTAL_CNTRY_NM" value="Cook Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CHL"/>
+			<column name="OBJ_ID" value="56908AA3792A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CL"/>
+			<column name="POSTAL_CNTRY_NM" value="Chile"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CMR"/>
+			<column name="OBJ_ID" value="56908AA3792D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CM"/>
+			<column name="POSTAL_CNTRY_NM" value="Cameroon"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CHN"/>
+			<column name="OBJ_ID" value="56908AA37929661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CN"/>
+			<column name="POSTAL_CNTRY_NM" value="China"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="COL"/>
+			<column name="OBJ_ID" value="56908AA3792F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CO"/>
+			<column name="POSTAL_CNTRY_NM" value="Colombia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CRI"/>
+			<column name="OBJ_ID" value="56908AA37932661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CR"/>
+			<column name="POSTAL_CNTRY_NM" value="Costa Rica"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CUB"/>
+			<column name="OBJ_ID" value="56908AA37934661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CU"/>
+			<column name="POSTAL_CNTRY_NM" value="Cuba"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CPV"/>
+			<column name="OBJ_ID" value="56908AA37935661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CV"/>
+			<column name="POSTAL_CNTRY_NM" value="Cape Verde"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CXR"/>
+			<column name="OBJ_ID" value="56908AA37983661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CX"/>
+			<column name="POSTAL_CNTRY_NM" value="Christmas Island"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CYP"/>
+			<column name="OBJ_ID" value="56908AA37937661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CY"/>
+			<column name="POSTAL_CNTRY_NM" value="Cyprus"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CZE"/>
+			<column name="OBJ_ID" value="56908AA37946661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="CZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Czech Republic"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="DEU"/>
+			<column name="OBJ_ID" value="56908AA3795A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="DE"/>
+			<column name="POSTAL_CNTRY_NM" value="Germany"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="DJI"/>
+			<column name="OBJ_ID" value="56908AA3793A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="DJ"/>
+			<column name="POSTAL_CNTRY_NM" value="Djibouti"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="DNK"/>
+			<column name="OBJ_ID" value="56908AA37939661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="DK"/>
+			<column name="POSTAL_CNTRY_NM" value="Denmark"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="DMA"/>
+			<column name="OBJ_ID" value="56908AA3793B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="DM"/>
+			<column name="POSTAL_CNTRY_NM" value="Dominica"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="DOM"/>
+			<column name="OBJ_ID" value="56908AA3793C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="DO"/>
+			<column name="POSTAL_CNTRY_NM" value="Dominican Republic"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="DZA"/>
+			<column name="OBJ_ID" value="56908AA37900661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="DZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Algeria"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ECU"/>
+			<column name="OBJ_ID" value="56908AA3793D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="EC"/>
+			<column name="POSTAL_CNTRY_NM" value="Ecuador"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="EST"/>
+			<column name="OBJ_ID" value="56908AA37941661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="EE"/>
+			<column name="POSTAL_CNTRY_NM" value="Estonia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="EGY"/>
+			<column name="OBJ_ID" value="56908AA3793E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="EG"/>
+			<column name="POSTAL_CNTRY_NM" value="Egypt"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ESH"/>
+			<column name="OBJ_ID" value="56908AA379FE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="EH"/>
+			<column name="POSTAL_CNTRY_NM" value="Western Sahara"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ERI"/>
+			<column name="OBJ_ID" value="56908AA37942661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ER"/>
+			<column name="POSTAL_CNTRY_NM" value="Eritrea"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ESP"/>
+			<column name="OBJ_ID" value="56908AA379D6661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ES"/>
+			<column name="POSTAL_CNTRY_NM" value="Spain"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ETH"/>
+			<column name="OBJ_ID" value="56908AA37944661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ET"/>
+			<column name="POSTAL_CNTRY_NM" value="Ethiopia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="FIN"/>
+			<column name="OBJ_ID" value="56908AA37949661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="FI"/>
+			<column name="POSTAL_CNTRY_NM" value="Finland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="FJI"/>
+			<column name="OBJ_ID" value="56908AA3794A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="FJ"/>
+			<column name="POSTAL_CNTRY_NM" value="Fiji"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="FLK"/>
+			<column name="OBJ_ID" value="56908AA37947661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="FK"/>
+			<column name="POSTAL_CNTRY_NM" value="Falkland Islands (Malvinas)"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="FSM"/>
+			<column name="OBJ_ID" value="56908AA3794B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="FM"/>
+			<column name="POSTAL_CNTRY_NM" value="Micronesia, Federated States Of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="FRO"/>
+			<column name="OBJ_ID" value="56908AA3794C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="FO"/>
+			<column name="POSTAL_CNTRY_NM" value="Faroe Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="FRA"/>
+			<column name="OBJ_ID" value="56908AA3794F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="FR"/>
+			<column name="POSTAL_CNTRY_NM" value="France"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GAB"/>
+			<column name="OBJ_ID" value="56908AA37952661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GA"/>
+			<column name="POSTAL_CNTRY_NM" value="Gabon"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GBR"/>
+			<column name="OBJ_ID" value="56908AA379EF661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GB"/>
+			<column name="POSTAL_CNTRY_NM" value="United Kingdom"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GRD"/>
+			<column name="OBJ_ID" value="56908AA37957661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GD"/>
+			<column name="POSTAL_CNTRY_NM" value="Grenada"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GEO"/>
+			<column name="OBJ_ID" value="56908AA37954661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GE"/>
+			<column name="POSTAL_CNTRY_NM" value="Georgia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GUF"/>
+			<column name="OBJ_ID" value="56908AA37948661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GF"/>
+			<column name="POSTAL_CNTRY_NM" value="French Guiana"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GGY"/>
+			<column name="OBJ_ID" value="56908AA37958661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GG"/>
+			<column name="POSTAL_CNTRY_NM" value="Guernsey"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GHA"/>
+			<column name="OBJ_ID" value="56908AA37955661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GH"/>
+			<column name="POSTAL_CNTRY_NM" value="Ghana"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GIB"/>
+			<column name="OBJ_ID" value="56908AA37956661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GI"/>
+			<column name="POSTAL_CNTRY_NM" value="Gibraltar"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GRL"/>
+			<column name="OBJ_ID" value="56908AA37959661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GL"/>
+			<column name="POSTAL_CNTRY_NM" value="Greenland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GMB"/>
+			<column name="OBJ_ID" value="56908AA37951661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GM"/>
+			<column name="POSTAL_CNTRY_NM" value="Gambia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GIN"/>
+			<column name="OBJ_ID" value="56908AA37960661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GN"/>
+			<column name="POSTAL_CNTRY_NM" value="Guinea"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GLP"/>
+			<column name="OBJ_ID" value="56908AA3795C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GP"/>
+			<column name="POSTAL_CNTRY_NM" value="Guadeloupe"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GNQ"/>
+			<column name="OBJ_ID" value="56908AA37940661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GQ"/>
+			<column name="POSTAL_CNTRY_NM" value="Equatorial Guinea"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GRC"/>
+			<column name="OBJ_ID" value="56908AA3795E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GR"/>
+			<column name="POSTAL_CNTRY_NM" value="Greece"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SGS"/>
+			<column name="OBJ_ID" value="56908AA37931661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GS"/>
+			<column name="POSTAL_CNTRY_NM" value="South Georgia and South Sandwich Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GTM"/>
+			<column name="OBJ_ID" value="56908AA3795F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GT"/>
+			<column name="POSTAL_CNTRY_NM" value="Guatemala"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GUM"/>
+			<column name="OBJ_ID" value="56908AA3795D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GU"/>
+			<column name="POSTAL_CNTRY_NM" value="Guam"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GNB"/>
+			<column name="OBJ_ID" value="56908AA379C1661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GW"/>
+			<column name="POSTAL_CNTRY_NM" value="Guinea-Bissau"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="GUY"/>
+			<column name="OBJ_ID" value="56908AA37961661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="GY"/>
+			<column name="POSTAL_CNTRY_NM" value="Guyana"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="HKG"/>
+			<column name="OBJ_ID" value="56908AA37964661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="HK"/>
+			<column name="POSTAL_CNTRY_NM" value="Hong Kong"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="HMD"/>
+			<column name="OBJ_ID" value="56908AA37965661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="HM"/>
+			<column name="POSTAL_CNTRY_NM" value="Heard and McDonald Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="HND"/>
+			<column name="OBJ_ID" value="56908AA37966661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="HN"/>
+			<column name="POSTAL_CNTRY_NM" value="Honduras"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="HRV"/>
+			<column name="OBJ_ID" value="56908AA37968661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="HR"/>
+			<column name="POSTAL_CNTRY_NM" value="Croatia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="HTI"/>
+			<column name="OBJ_ID" value="56908AA37963661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="HT"/>
+			<column name="POSTAL_CNTRY_NM" value="Haiti"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="HUN"/>
+			<column name="OBJ_ID" value="56908AA37969661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="HU"/>
+			<column name="POSTAL_CNTRY_NM" value="Hungary"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IDN"/>
+			<column name="OBJ_ID" value="56908AA3796B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ID"/>
+			<column name="POSTAL_CNTRY_NM" value="Indonesia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IRL"/>
+			<column name="OBJ_ID" value="56908AA3793F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IE"/>
+			<column name="POSTAL_CNTRY_NM" value="Ireland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ISR"/>
+			<column name="OBJ_ID" value="56908AA37971661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IL"/>
+			<column name="POSTAL_CNTRY_NM" value="Israel"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IMN"/>
+			<column name="OBJ_ID" value="56908AA3796C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IM"/>
+			<column name="POSTAL_CNTRY_NM" value="Isle of Man"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IND"/>
+			<column name="OBJ_ID" value="56908AA3796D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IN"/>
+			<column name="POSTAL_CNTRY_NM" value="India"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IOT"/>
+			<column name="OBJ_ID" value="56908AA3796E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IO"/>
+			<column name="POSTAL_CNTRY_NM" value="British Indian Ocean Territory"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IRQ"/>
+			<column name="OBJ_ID" value="56908AA37975661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IQ"/>
+			<column name="POSTAL_CNTRY_NM" value="Iraq"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="IRN"/>
+			<column name="OBJ_ID" value="56908AA37970661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IR"/>
+			<column name="POSTAL_CNTRY_NM" value="Iran, Islamic Republic Of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ISL"/>
+			<column name="OBJ_ID" value="56908AA3796A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IS"/>
+			<column name="POSTAL_CNTRY_NM" value="Iceland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ITA"/>
+			<column name="OBJ_ID" value="56908AA37972661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="IT"/>
+			<column name="POSTAL_CNTRY_NM" value="Italy"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="JEY"/>
+			<column name="OBJ_ID" value="56908AA37977661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="JE"/>
+			<column name="POSTAL_CNTRY_NM" value="Jersey"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="JAM"/>
+			<column name="OBJ_ID" value="56908AA37978661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="JM"/>
+			<column name="POSTAL_CNTRY_NM" value="Jamaica"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="JOR"/>
+			<column name="OBJ_ID" value="56908AA3797A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="JO"/>
+			<column name="POSTAL_CNTRY_NM" value="Jordan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="JPN"/>
+			<column name="OBJ_ID" value="56908AA37976661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="JP"/>
+			<column name="POSTAL_CNTRY_NM" value="Japan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KEN"/>
+			<column name="OBJ_ID" value="56908AA3797D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KE"/>
+			<column name="POSTAL_CNTRY_NM" value="Kenya"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KGZ"/>
+			<column name="OBJ_ID" value="56908AA3797E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KG"/>
+			<column name="POSTAL_CNTRY_NM" value="Kyrgyzstan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KHM"/>
+			<column name="OBJ_ID" value="56908AA37924661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KH"/>
+			<column name="POSTAL_CNTRY_NM" value="Cambodia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KIR"/>
+			<column name="OBJ_ID" value="56908AA37981661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KI"/>
+			<column name="POSTAL_CNTRY_NM" value="Kiribati"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="COM"/>
+			<column name="OBJ_ID" value="56908AA3792E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KM"/>
+			<column name="POSTAL_CNTRY_NM" value="Comoros"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KNA"/>
+			<column name="OBJ_ID" value="56908AA379CC661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KN"/>
+			<column name="POSTAL_CNTRY_NM" value="Saint Kitts And Nevis"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PRK"/>
+			<column name="OBJ_ID" value="56908AA3797F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KP"/>
+			<column name="POSTAL_CNTRY_NM" value="Korea, Democratic People's Republic Of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KOR"/>
+			<column name="OBJ_ID" value="56908AA37982661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KR"/>
+			<column name="POSTAL_CNTRY_NM" value="Korea, Republic of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KWT"/>
+			<column name="OBJ_ID" value="56908AA37984661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KW"/>
+			<column name="POSTAL_CNTRY_NM" value="Kuwait"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="CYM"/>
+			<column name="OBJ_ID" value="56908AA3792B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KY"/>
+			<column name="POSTAL_CNTRY_NM" value="Cayman Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="KAZ"/>
+			<column name="OBJ_ID" value="56908AA37985661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="KZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Kazakhstan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LAO"/>
+			<column name="OBJ_ID" value="56908AA37986661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LA"/>
+			<column name="POSTAL_CNTRY_NM" value="Lao People's Democratic Republic"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LBN"/>
+			<column name="OBJ_ID" value="56908AA37987661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LB"/>
+			<column name="POSTAL_CNTRY_NM" value="Lebanon"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LCA"/>
+			<column name="OBJ_ID" value="56908AA379D8661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LC"/>
+			<column name="POSTAL_CNTRY_NM" value="Saint Lucia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LIE"/>
+			<column name="OBJ_ID" value="56908AA3798D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LI"/>
+			<column name="POSTAL_CNTRY_NM" value="Liechtenstein"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LKA"/>
+			<column name="OBJ_ID" value="56908AA37926661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LK"/>
+			<column name="POSTAL_CNTRY_NM" value="Sri Lanka"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LBR"/>
+			<column name="OBJ_ID" value="56908AA3798A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LR"/>
+			<column name="POSTAL_CNTRY_NM" value="Liberia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LSO"/>
+			<column name="OBJ_ID" value="56908AA3798E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LS"/>
+			<column name="POSTAL_CNTRY_NM" value="Lesotho"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LTU"/>
+			<column name="OBJ_ID" value="56908AA37989661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LT"/>
+			<column name="POSTAL_CNTRY_NM" value="Lithuania"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LUX"/>
+			<column name="OBJ_ID" value="56908AA3798F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LU"/>
+			<column name="POSTAL_CNTRY_NM" value="Luxembourg"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LVA"/>
+			<column name="OBJ_ID" value="56908AA37988661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LV"/>
+			<column name="POSTAL_CNTRY_NM" value="Latvia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="LBY"/>
+			<column name="OBJ_ID" value="56908AA37990661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="LY"/>
+			<column name="POSTAL_CNTRY_NM" value="Libyan Arab Jamahiriya"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MAR"/>
+			<column name="OBJ_ID" value="56908AA3799C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MA"/>
+			<column name="POSTAL_CNTRY_NM" value="Morocco"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MCO"/>
+			<column name="OBJ_ID" value="56908AA3799B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MC"/>
+			<column name="POSTAL_CNTRY_NM" value="Monaco"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MDA"/>
+			<column name="OBJ_ID" value="56908AA37994661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MD"/>
+			<column name="POSTAL_CNTRY_NM" value="Moldova, Republic of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MNE"/>
+			<column name="OBJ_ID" value="56908AA379A3661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ME"/>
+			<column name="POSTAL_CNTRY_NM" value="Montenegro"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MAF"/>
+			<column name="OBJ_ID" value="56908AA3791D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MF"/>
+			<column name="POSTAL_CNTRY_NM" value="Saint Martin"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MDG"/>
+			<column name="OBJ_ID" value="56908AA37991661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MG"/>
+			<column name="POSTAL_CNTRY_NM" value="Madagascar"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MHL"/>
+			<column name="OBJ_ID" value="56908AA379C4661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MH"/>
+			<column name="POSTAL_CNTRY_NM" value="Marshall Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MKD"/>
+			<column name="OBJ_ID" value="56908AA37999661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MK"/>
+			<column name="POSTAL_CNTRY_NM" value="Macedonia, the Fmr. Yugoslav Republic Of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MLI"/>
+			<column name="OBJ_ID" value="56908AA3799A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ML"/>
+			<column name="POSTAL_CNTRY_NM" value="Mali"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MMR"/>
+			<column name="OBJ_ID" value="56908AA37917661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MM"/>
+			<column name="POSTAL_CNTRY_NM" value="Myanmar"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MNG"/>
+			<column name="OBJ_ID" value="56908AA37996661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MN"/>
+			<column name="POSTAL_CNTRY_NM" value="Mongolia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MAC"/>
+			<column name="OBJ_ID" value="56908AA37993661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MO"/>
+			<column name="POSTAL_CNTRY_NM" value="Macao"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MNP"/>
+			<column name="OBJ_ID" value="56908AA37930661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MP"/>
+			<column name="POSTAL_CNTRY_NM" value="Northern Mariana Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MTQ"/>
+			<column name="OBJ_ID" value="56908AA37992661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MQ"/>
+			<column name="POSTAL_CNTRY_NM" value="Martinique"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MRT"/>
+			<column name="OBJ_ID" value="56908AA3799F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MR"/>
+			<column name="POSTAL_CNTRY_NM" value="Mauritania"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MSR"/>
+			<column name="OBJ_ID" value="56908AA37997661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MS"/>
+			<column name="POSTAL_CNTRY_NM" value="Montserrat"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MLT"/>
+			<column name="OBJ_ID" value="56908AA379A0661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MT"/>
+			<column name="POSTAL_CNTRY_NM" value="Malta"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MUS"/>
+			<column name="OBJ_ID" value="56908AA3799D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MU"/>
+			<column name="POSTAL_CNTRY_NM" value="Mauritius"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MDV"/>
+			<column name="OBJ_ID" value="56908AA379A2661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MV"/>
+			<column name="POSTAL_CNTRY_NM" value="Maldives"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MWI"/>
+			<column name="OBJ_ID" value="56908AA37998661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MW"/>
+			<column name="POSTAL_CNTRY_NM" value="Malawi"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MEX"/>
+			<column name="OBJ_ID" value="56908AA379A4661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MX"/>
+			<column name="POSTAL_CNTRY_NM" value="Mexico"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MYS"/>
+			<column name="OBJ_ID" value="56908AA379A5661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MY"/>
+			<column name="POSTAL_CNTRY_NM" value="Malaysia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MOZ"/>
+			<column name="OBJ_ID" value="56908AA379A6661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="MZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Mozambique"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NAM"/>
+			<column name="OBJ_ID" value="56908AA379FB661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NA"/>
+			<column name="POSTAL_CNTRY_NM" value="Namibia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NCL"/>
+			<column name="OBJ_ID" value="56908AA379A8661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NC"/>
+			<column name="POSTAL_CNTRY_NM" value="New Caledonia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NER"/>
+			<column name="OBJ_ID" value="56908AA379AB661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NE"/>
+			<column name="POSTAL_CNTRY_NM" value="Niger"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NFK"/>
+			<column name="OBJ_ID" value="56908AA379AA661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NF"/>
+			<column name="POSTAL_CNTRY_NM" value="Norfolk Island"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NGA"/>
+			<column name="OBJ_ID" value="56908AA379AD661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NG"/>
+			<column name="POSTAL_CNTRY_NM" value="Nigeria"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NIC"/>
+			<column name="OBJ_ID" value="56908AA379B3661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NI"/>
+			<column name="POSTAL_CNTRY_NM" value="Nicaragua"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NLD"/>
+			<column name="OBJ_ID" value="56908AA379AE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NL"/>
+			<column name="POSTAL_CNTRY_NM" value="Netherlands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NOR"/>
+			<column name="OBJ_ID" value="56908AA379AF661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NO"/>
+			<column name="POSTAL_CNTRY_NM" value="Norway"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NPL"/>
+			<column name="OBJ_ID" value="56908AA379B0661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NP"/>
+			<column name="POSTAL_CNTRY_NM" value="Nepal"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NRU"/>
+			<column name="OBJ_ID" value="56908AA379B1661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NR"/>
+			<column name="POSTAL_CNTRY_NM" value="Nauru"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NIU"/>
+			<column name="OBJ_ID" value="56908AA379A9661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NU"/>
+			<column name="POSTAL_CNTRY_NM" value="Niue"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="NZL"/>
+			<column name="OBJ_ID" value="56908AA379B4661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="NZ"/>
+			<column name="POSTAL_CNTRY_NM" value="New Zealand"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="OMN"/>
+			<column name="OBJ_ID" value="56908AA379A1661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="OM"/>
+			<column name="POSTAL_CNTRY_NM" value="Oman"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PAN"/>
+			<column name="OBJ_ID" value="56908AA379BD661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PA"/>
+			<column name="POSTAL_CNTRY_NM" value="Panama"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PER"/>
+			<column name="OBJ_ID" value="56908AA379B8661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PE"/>
+			<column name="POSTAL_CNTRY_NM" value="Peru"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PYF"/>
+			<column name="OBJ_ID" value="56908AA3794D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PF"/>
+			<column name="POSTAL_CNTRY_NM" value="French Polynesia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PNG"/>
+			<column name="OBJ_ID" value="56908AA379BF661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PG"/>
+			<column name="POSTAL_CNTRY_NM" value="Papua New Guinea"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PHL"/>
+			<column name="OBJ_ID" value="56908AA379C6661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PH"/>
+			<column name="POSTAL_CNTRY_NM" value="Philippines"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PAK"/>
+			<column name="OBJ_ID" value="56908AA379BB661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PK"/>
+			<column name="POSTAL_CNTRY_NM" value="Pakistan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="POL"/>
+			<column name="OBJ_ID" value="56908AA379BC661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PL"/>
+			<column name="POSTAL_CNTRY_NM" value="Poland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SPM"/>
+			<column name="OBJ_ID" value="56908AA379CB661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PM"/>
+			<column name="POSTAL_CNTRY_NM" value="Saint Pierre And Miquelon"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PCN"/>
+			<column name="OBJ_ID" value="56908AA379B7661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PN"/>
+			<column name="POSTAL_CNTRY_NM" value="Pitcairn"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PRI"/>
+			<column name="OBJ_ID" value="56908AA379C7661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PR"/>
+			<column name="POSTAL_CNTRY_NM" value="Puerto Rico"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PSE"/>
+			<column name="OBJ_ID" value="56908AA37962661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PS"/>
+			<column name="POSTAL_CNTRY_NM" value="Palestinian Territory, Occupied"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PRT"/>
+			<column name="OBJ_ID" value="56908AA379BE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PT"/>
+			<column name="POSTAL_CNTRY_NM" value="Portugal"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PLW"/>
+			<column name="OBJ_ID" value="56908AA379C0661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PW"/>
+			<column name="POSTAL_CNTRY_NM" value="Palau"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="PRY"/>
+			<column name="OBJ_ID" value="56908AA379B6661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="PY"/>
+			<column name="POSTAL_CNTRY_NM" value="Paraguay"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="QAT"/>
+			<column name="OBJ_ID" value="56908AA379C2661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="QA"/>
+			<column name="POSTAL_CNTRY_NM" value="Qatar"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="REU"/>
+			<column name="OBJ_ID" value="56908AA379C3661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="RE"/>
+			<column name="POSTAL_CNTRY_NM" value="RÃ©union"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ROU"/>
+			<column name="OBJ_ID" value="56908AA379C5661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="RO"/>
+			<column name="POSTAL_CNTRY_NM" value="Romania"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SRB"/>
+			<column name="OBJ_ID" value="56908AA379D7661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="RS"/>
+			<column name="POSTAL_CNTRY_NM" value="Serbia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="RUS"/>
+			<column name="OBJ_ID" value="56908AA379C8661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="RU"/>
+			<column name="POSTAL_CNTRY_NM" value="Russian Federation"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="RWA"/>
+			<column name="OBJ_ID" value="56908AA379C9661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="RW"/>
+			<column name="POSTAL_CNTRY_NM" value="Rwanda"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SAU"/>
+			<column name="OBJ_ID" value="56908AA379CA661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SA"/>
+			<column name="POSTAL_CNTRY_NM" value="Saudi Arabia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SLB"/>
+			<column name="OBJ_ID" value="56908AA3791A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SB"/>
+			<column name="POSTAL_CNTRY_NM" value="Solomon Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SYC"/>
+			<column name="OBJ_ID" value="56908AA379CD661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SC"/>
+			<column name="POSTAL_CNTRY_NM" value="Seychelles"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SDN"/>
+			<column name="OBJ_ID" value="56908AA379D9661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SD"/>
+			<column name="POSTAL_CNTRY_NM" value="Sudan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SWE"/>
+			<column name="OBJ_ID" value="56908AA379DB661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SE"/>
+			<column name="POSTAL_CNTRY_NM" value="Sweden"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SGP"/>
+			<column name="OBJ_ID" value="56908AA379D4661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SG"/>
+			<column name="POSTAL_CNTRY_NM" value="Singapore"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SHN"/>
+			<column name="OBJ_ID" value="56908AA379D0661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SH"/>
+			<column name="POSTAL_CNTRY_NM" value="St. Helena, Ascension, Tristan Da Cunha"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SVN"/>
+			<column name="OBJ_ID" value="56908AA379D1661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SI"/>
+			<column name="POSTAL_CNTRY_NM" value="Slovenia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SJM"/>
+			<column name="OBJ_ID" value="56908AA379DA661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SJ"/>
+			<column name="POSTAL_CNTRY_NM" value="Svalbard And Jan Mayen"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SVK"/>
+			<column name="OBJ_ID" value="56908AA3798B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SK"/>
+			<column name="POSTAL_CNTRY_NM" value="Slovakia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SLE"/>
+			<column name="OBJ_ID" value="56908AA379D2661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SL"/>
+			<column name="POSTAL_CNTRY_NM" value="Sierra Leone"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SMR"/>
+			<column name="OBJ_ID" value="56908AA379D3661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SM"/>
+			<column name="POSTAL_CNTRY_NM" value="San Marino"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SEN"/>
+			<column name="OBJ_ID" value="56908AA379CF661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SN"/>
+			<column name="POSTAL_CNTRY_NM" value="Senegal"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SOM"/>
+			<column name="OBJ_ID" value="56908AA379D5661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SO"/>
+			<column name="POSTAL_CNTRY_NM" value="Somalia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SUR"/>
+			<column name="OBJ_ID" value="56908AA379B2661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SR"/>
+			<column name="POSTAL_CNTRY_NM" value="Suriname"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="STP"/>
+			<column name="OBJ_ID" value="56908AA379E7661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ST"/>
+			<column name="POSTAL_CNTRY_NM" value="Sao Tome and Principe"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SLV"/>
+			<column name="OBJ_ID" value="56908AA37943661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SV"/>
+			<column name="POSTAL_CNTRY_NM" value="El Salvador"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SYR"/>
+			<column name="OBJ_ID" value="56908AA379DC661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SY"/>
+			<column name="POSTAL_CNTRY_NM" value="Syrian Arab Republic"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="SWZ"/>
+			<column name="OBJ_ID" value="56908AA37A01661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="SZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Swaziland"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TCA"/>
+			<column name="OBJ_ID" value="56908AA379E3661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TC"/>
+			<column name="POSTAL_CNTRY_NM" value="Turks and Caicos Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TCD"/>
+			<column name="OBJ_ID" value="56908AA37925661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TD"/>
+			<column name="POSTAL_CNTRY_NM" value="Chad"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ATF"/>
+			<column name="OBJ_ID" value="56908AA37950661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TF"/>
+			<column name="POSTAL_CNTRY_NM" value="French Southern Territories"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TGO"/>
+			<column name="OBJ_ID" value="56908AA379E6661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TG"/>
+			<column name="POSTAL_CNTRY_NM" value="Togo"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="THA"/>
+			<column name="OBJ_ID" value="56908AA379E1661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TH"/>
+			<column name="POSTAL_CNTRY_NM" value="Thailand"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TJK"/>
+			<column name="OBJ_ID" value="56908AA379E2661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TJ"/>
+			<column name="POSTAL_CNTRY_NM" value="Tajikistan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TKL"/>
+			<column name="OBJ_ID" value="56908AA379E4661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TK"/>
+			<column name="POSTAL_CNTRY_NM" value="Tokelau"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TLS"/>
+			<column name="OBJ_ID" value="56908AA37945661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TL"/>
+			<column name="POSTAL_CNTRY_NM" value="Timor-Leste"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TKM"/>
+			<column name="OBJ_ID" value="56908AA379EC661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TM"/>
+			<column name="POSTAL_CNTRY_NM" value="Turkmenistan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TUN"/>
+			<column name="OBJ_ID" value="56908AA379E8661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TN"/>
+			<column name="POSTAL_CNTRY_NM" value="Tunisia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TON"/>
+			<column name="OBJ_ID" value="56908AA379E5661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TO"/>
+			<column name="POSTAL_CNTRY_NM" value="Tonga"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TUR"/>
+			<column name="OBJ_ID" value="56908AA379E9661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TR"/>
+			<column name="POSTAL_CNTRY_NM" value="Turkey"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TTO"/>
+			<column name="OBJ_ID" value="56908AA379DF661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TT"/>
+			<column name="POSTAL_CNTRY_NM" value="Trinidad and Tobago"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TUV"/>
+			<column name="OBJ_ID" value="56908AA379EA661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TV"/>
+			<column name="POSTAL_CNTRY_NM" value="Tuvalu"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TWN"/>
+			<column name="OBJ_ID" value="56908AA379EB661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TW"/>
+			<column name="POSTAL_CNTRY_NM" value="Taiwan, Province Of China"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="TZA"/>
+			<column name="OBJ_ID" value="56908AA379ED661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="TZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Tanzania, United Republic of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="UKR"/>
+			<column name="OBJ_ID" value="56908AA379F0661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="UA"/>
+			<column name="POSTAL_CNTRY_NM" value="Ukraine"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="UGA"/>
+			<column name="OBJ_ID" value="56908AA379EE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="UG"/>
+			<column name="POSTAL_CNTRY_NM" value="Uganda"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="UMI"/>
+			<column name="OBJ_ID" value="56908AA3799E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="UM"/>
+			<column name="POSTAL_CNTRY_NM" value="United States Minor Outlying Islands"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="USA"/>
+			<column name="OBJ_ID" value="56908AA379F2661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_CNTRY_NM" value="United States"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="URY"/>
+			<column name="OBJ_ID" value="56908AA379F3661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="UY"/>
+			<column name="POSTAL_CNTRY_NM" value="Uruguay"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="UZB"/>
+			<column name="OBJ_ID" value="56908AA379F4661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="UZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Uzbekistan"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VAT"/>
+			<column name="OBJ_ID" value="56908AA379FA661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VA"/>
+			<column name="POSTAL_CNTRY_NM" value="Holy See (Vatican City State)"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VCT"/>
+			<column name="OBJ_ID" value="56908AA379F5661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VC"/>
+			<column name="POSTAL_CNTRY_NM" value="Saint Vincent And The Grenedines"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VEN"/>
+			<column name="OBJ_ID" value="56908AA379F6661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VE"/>
+			<column name="POSTAL_CNTRY_NM" value="Venezuela, Bolivarian Republic of"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VGB"/>
+			<column name="OBJ_ID" value="56908AA379F7661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VG"/>
+			<column name="POSTAL_CNTRY_NM" value="Virgin Islands, British"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VIR"/>
+			<column name="OBJ_ID" value="56908AA379F9661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VI"/>
+			<column name="POSTAL_CNTRY_NM" value="Virgin Islands, U.S."/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VNM"/>
+			<column name="OBJ_ID" value="56908AA379F8661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VN"/>
+			<column name="POSTAL_CNTRY_NM" value="Viet Nam"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="VUT"/>
+			<column name="OBJ_ID" value="56908AA379AC661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="VU"/>
+			<column name="POSTAL_CNTRY_NM" value="Vanuatu"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="WLF"/>
+			<column name="OBJ_ID" value="56908AA379FD661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="WF"/>
+			<column name="POSTAL_CNTRY_NM" value="Wallis and Futuna"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="WSM"/>
+			<column name="OBJ_ID" value="56908AA37A00661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="WS"/>
+			<column name="POSTAL_CNTRY_NM" value="Samoa"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="YEM"/>
+			<column name="OBJ_ID" value="56908AA37A02661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="YE"/>
+			<column name="POSTAL_CNTRY_NM" value="Yemen"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="MYT"/>
+			<column name="OBJ_ID" value="56908AA37995661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="YT"/>
+			<column name="POSTAL_CNTRY_NM" value="Mayotte"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ZAF"/>
+			<column name="OBJ_ID" value="56908AA379CE661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ZA"/>
+			<column name="POSTAL_CNTRY_NM" value="South Africa"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ZMB"/>
+			<column name="OBJ_ID" value="56908AA37A04661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ZM"/>
+			<column name="POSTAL_CNTRY_NM" value="Zambia"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ZWE"/>
+			<column name="OBJ_ID" value="56908AA37A05661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ZW"/>
+			<column name="POSTAL_CNTRY_NM" value="Zimbabwe"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_CNTRY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ALT_POSTAL_CNTRY_CD" value="ZZZ"/>
+			<column name="OBJ_ID" value="56908AA379B5661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="ZZ"/>
+			<column name="POSTAL_CNTRY_NM" value="Other Countries"/>
+			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

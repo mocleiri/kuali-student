@@ -1,0 +1,179 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_COMM_STATE-initial-data" author="alubbers">
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Atp relation is active"/>
+			<column name="ID" value="kuali.atp.atp.relation.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.atp.atp.relation.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Atp relation is inactive"/>
+			<column name="ID" value="kuali.atp.atp.relation.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="PROCESS_KEY" value="kuali.atp.atp.relation.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Milestone relation is active"/>
+			<column name="ID" value="kuali.atp.milestone.relation.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.atp.milestone.relation.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this Atp-Milestone relation is inactive"/>
+			<column name="ID" value="kuali.atp.milestone.relation.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="PROCESS_KEY" value="kuali.atp.milestone.relation.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this Time Period is just tentative"/>
+			<column name="ID" value="kuali.atp.state.Draft"/>
+			<column name="NAME" value="Draft"/>
+			<column name="PROCESS_KEY" value="kuali.atp.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this Time Period has been established"/>
+			<column name="ID" value="kuali.atp.state.Official"/>
+			<column name="NAME" value="Official"/>
+			<column name="PROCESS_KEY" value="kuali.atp.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="This issue is active and can be attached to holds "/>
+			<column name="ID" value="kuali.hold.issue.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.issue.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The hold is inactive an cannot be attached to new holds "/>
+			<column name="ID" value="kuali.hold.issue.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="PROCESS_KEY" value="kuali.hold.issue.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="This restriction is active and should be enforced"/>
+			<column name="ID" value="kuali.hold.restriction.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.restriction.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The restriction is inactive and should not be enforced"/>
+			<column name="ID" value="kuali.hold.restriction.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="PROCESS_KEY" value="kuali.hold.restriction.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="This hold is active and should be enforced"/>
+			<column name="ID" value="kuali.hold.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The hold was canceled or removed because it was originally put on in error"/>
+			<column name="ID" value="kuali.hold.state.canceled"/>
+			<column name="NAME" value="Canceled"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The hold was active and the issue has been resolved"/>
+			<column name="ID" value="kuali.hold.state.released"/>
+			<column name="NAME" value="Released"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The relationship between the two LUIs is active "/>
+			<column name="ID" value="kuali.lui.lui.relation.state.active"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.lui.lui.relationship.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The relationship between the two LUIs is in-active "/>
+			<column name="ID" value="kuali.lui.lui.relation.state.inactive"/>
+			<column name="NAME" value="Inactive"/>
+			<column name="PROCESS_KEY" value="kuali.lui.lui.relationship.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Approved and ready to be scheduled"/>
+			<column name="ID" value="kuali.lui.state.approved"/>
+			<column name="NAME" value="Approved"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Once offered but now canceled"/>
+			<column name="ID" value="kuali.lui.state.canceled"/>
+			<column name="NAME" value="Canceled"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Logically deleted before ever having been offered"/>
+			<column name="ID" value="kuali.lui.state.deleted"/>
+			<column name="NAME" value="Deleted"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Proposed for Departmental Planning purposed"/>
+			<column name="ID" value="kuali.lui.state.draft"/>
+			<column name="NAME" value="Draft"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Offered so it shows up in list of classes so student may register for the course "/>
+			<column name="ID" value="kuali.lui.state.offered"/>
+			<column name="NAME" value="Offered"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Approved and ready to be scheduled"/>
+			<column name="ID" value="kuali.lui.state.scheduled"/>
+			<column name="NAME" value="Scheduled"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Submitted to central admin for approval (or scheduling)"/>
+			<column name="ID" value="kuali.lui.state.submitted"/>
+			<column name="NAME" value="Submitted"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Suspends registration in the course but allows students who had already registered to stay in the course"/>
+			<column name="ID" value="kuali.lui.state.suspended"/>
+			<column name="NAME" value="Suspended"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this milestone is just tentative"/>
+			<column name="ID" value="kuali.milestone.state.Draft"/>
+			<column name="NAME" value="Draft"/>
+			<column name="PROCESS_KEY" value="kuali.milestone.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Indicates that this milestone has been established"/>
+			<column name="ID" value="kuali.milestone.state.Official"/>
+			<column name="NAME" value="Official"/>
+			<column name="PROCESS_KEY" value="kuali.milestone.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

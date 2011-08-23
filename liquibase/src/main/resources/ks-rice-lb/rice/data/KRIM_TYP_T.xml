@@ -1,0 +1,434 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="NM" value="Default"/>
+			<column name="NMSPC_CD" value="KUALI"/>
+			<column name="OBJ_ID" value="5ADF18B6D4827954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="NM" value="Namespace or Component"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4D77954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="namespaceOrComponentPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="101"/>
+			<column name="NM" value="College Type"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="COLLEGETYPE000000000000000000TYP"/>
+			<column name="SRVC_NM" value="kimRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="102"/>
+			<column name="NM" value="Department Type"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE000000000000000000TYP"/>
+			<column name="SRVC_NM" value="kimRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="103"/>
+			<column name="NM" value="Division Type"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DIVISIONTYPE00000000000000000TYP"/>
+			<column name="SRVC_NM" value="kimRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="104"/>
+			<column name="NM" value="Reference Type Permission"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DIVISIONTYPE00000000000000000TYO"/>
+			<column name="SRVC_NM" value="kimPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="107"/>
+			<column name="NM" value="Derived Role: Org Admin Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGADMINDERIVED00000000000000TYP"/>
+			<column name="SRVC_NM" value="ksOrgAdminRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="108"/>
+			<column name="NM" value="Derived Role: Org Committee Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGCOMMITTEEDERIVED0000000000TYP"/>
+			<column name="SRVC_NM" value="ksOrgCommitteeRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="109"/>
+			<column name="NM" value="Derived Role: KS Non-Adhoc Action Request Role Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGADMINDERIVED000000T0000000TYP"/>
+			<column name="SRVC_NM" value="ksNonAdhocActionRequestDerivedRoleTypeServiceImpl"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="11"/>
+			<column name="NM" value="Component Field"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4DC7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="componentFieldPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="110"/>
+			<column name="NM" value="Derived Role: KS Route Log Role Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGCOMMITTEEDERIVED0000000T00TYP"/>
+			<column name="SRVC_NM" value="ksRouteLogDerivedRoleTypeServiceImpl"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="111"/>
+			<column name="NM" value="Derived Role: KS Document Editor"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGCOMMITTEEDERIVED3600100T00TYP"/>
+			<column name="SRVC_NM" value="ksEditDocumentRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="112"/>
+			<column name="NM" value="Derived Role: KS Document Commenter"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGCOMMITTEEDERIVED3600129T00TYP"/>
+			<column name="SRVC_NM" value="ksCommentOnDocumentRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="113"/>
+			<column name="NM" value="Derived Role: KS Adhoc Action Request Role Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGCOMMITTEEDERIVED3689129T00TYP"/>
+			<column name="SRVC_NM" value="ksAdhocActionRequestDerivedRoleTypeServiceImpl"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="114"/>
+			<column name="NM" value="Organization Role Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE000930000000012300TYP"/>
+			<column name="SRVC_NM" value="ksOrganizationHierarchyRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="115"/>
+			<column name="NM" value="Derived Role: KS Completed Non-Adhoc Action Request Role Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGADMINDERIVEDED0000T0000000TYP"/>
+			<column name="SRVC_NM" value="ksNonAdhocDoneActionRequestDerivedRoleTypeServiceImpl"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="116"/>
+			<column name="NM" value="Derived Role: KS Completed Adhoc Action Request Role Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="ORGCOMMWSXEEDEIVED3689129T00TYP1"/>
+			<column name="SRVC_NM" value="ksAdhocDoneActionRequestDerivedRoleTypeServiceImpl"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="NM" value="Namespace or Action"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4E37954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="namespaceOrActionPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="NM" value="Field Permission Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="FIELDPERMISSION0000000000000TYP"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="121"/>
+			<column name="NM" value="Section Maintenance Permission Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE00093A106540012300TYP"/>
+			<column name="SRVC_NM" value="kimPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="13"/>
+			<column name="NM" value="Button"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4E77954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="buttonPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="130"/>
+			<column name="NM" value="Adhoc Permissions Type"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARUUUNTADMINREVIEWER000001237"/>
+			<column name="SRVC_NM" value="kimRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="14"/>
+			<column name="NM" value="Edit Mode & Document Type"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4EA7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="documentTypeAndEditModePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="15"/>
+			<column name="NM" value="Batch Feed or Job"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4ED7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="batchFeedOrJobPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="16"/>
+			<column name="NM" value="Parameter"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4F27954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="parameterPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="17"/>
+			<column name="NM" value="Campus"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4F77954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="campusRoleService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="18"/>
+			<column name="NM" value="Role"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D4F97954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="rolePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="19"/>
+			<column name="NM" value="Permission"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D4FD7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="permissionPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="2"/>
+			<column name="NM" value="Derived Role: Principal"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D4837954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="activePrincipalRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="NM" value="Responsibility"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D5017954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="responsibilityPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="21"/>
+			<column name="NM" value="Group"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D5057954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="groupPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="NM" value="Document Type (Permission)"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4AC7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="documentTypePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="4"/>
+			<column name="NM" value="Action Request Type"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4B57954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="actionRequestTypePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="42"/>
+			<column name="NM" value="Derived Role: Action Request"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D53B7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="actionRequestDerivedRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="43"/>
+			<column name="NM" value="Derived Role: Route Log"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D53C7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="routeLogDerivedRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="45"/>
+			<column name="NM" value="Derived Role: Permission (Edit Document)"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5B6013B3AD131A9CE0404F8189D87094"/>
+			<column name="SRVC_NM" value="documentEditorRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="NM" value="Ad Hoc Review"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4B87954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="adhocReviewPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="52"/>
+			<column name="NM" value="Document Type, Routing Node & Field(s)"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5C997D14EAC2FE40E0404F8189D87DC5"/>
+			<column name="SRVC_NM" value="documentTypeAndNodeAndFieldsPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="54"/>
+			<column name="NM" value="Document Type (Responsibility)"/>
+			<column name="NMSPC_CD" value="KR-KEW"/>
+			<column name="OBJ_ID" value="60432A73A6A29F65E0404F8189D86AA4"/>
+			<column name="SRVC_NM" value="documentTypeResponsibilityTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="56"/>
+			<column name="NM" value="Document Type & Existing Records Only"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="603B735FA6B9FE21E0404F8189D8083B"/>
+			<column name="SRVC_NM" value="documentTypeAndExistingRecordsOnlyPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="57"/>
+			<column name="NM" value="Component Section"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="603B735FA6BDFE21E0404F8189D8083B"/>
+			<column name="SRVC_NM" value="componentSectionPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="59"/>
+			<column name="NM" value="Document Type & Relationship to Note Author"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="606763510FBB96D3E0404F8189D857A2"/>
+			<column name="SRVC_NM" value="documentTypeAndRelationshipToNoteAuthorPermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="60"/>
+			<column name="NM" value="Derived Role: Permission (Open Document)"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="606763510FBC96D3E0404F8189D857A2"/>
+			<column name="SRVC_NM" value="documentOpenerRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="66"/>
+			<column name="NM" value="Derived Role: Permission (Initiate Document)"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="67F145466E8A9160E0404F8189D86771"/>
+			<column name="SRVC_NM" value="documentInitiatorRoleTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="67"/>
+			<column name="NM" value="Namespace"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="67F145466E8F9160E0404F8189D86771"/>
+			<column name="SRVC_NM" value="namespacePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="7"/>
+			<column name="NM" value="Document Type, Routing Node & Action Information"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4C07954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="reviewResponsibilityTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="NM" value="Document Type & Routing Node or State"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4C67954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="documentTypeAndNodeOrStatePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="9"/>
+			<column name="NM" value="Document Type & Attachment Type"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4CD7954E0404F8189D85002"/>
+			<column name="SRVC_NM" value="documentTypeAndAttachmentTypePermissionTypeService"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

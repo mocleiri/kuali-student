@@ -1,0 +1,125 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG_ORG_RELTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Administers"/>
+			<column name="OBJ_ID" value="8052C081024B4EDFB225F96143EF6033"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that this organization is administered by another"/>
+			<column name="REV_NAME" value="is Administered by"/>
+			<column name="TYPE_DESC" value="Describes where one organization is administratively responsible for another organization that is not simply "part" of that organization and where the relationship cannot be said to be so strong that there is a "reporting" relationship"/>
+			<column name="TYPE_KEY" value="kuali.org.Administer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Advises"/>
+			<column name="OBJ_ID" value="B4B60D00590B4068B36AB6EDC6C44A82"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that this organization receives advice from the leadership of another organization"/>
+			<column name="REV_NAME" value="is Advised by"/>
+			<column name="TYPE_DESC" value="Indicates that one organization provides advice to the leadership of another organization"/>
+			<column name="TYPE_KEY" value="kuali.org.Advisory"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="is Board of"/>
+			<column name="OBJ_ID" value="C8AD6A138C10463B8EC71E4B85F3AD90"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that one organization has at its Board (of Trustees) another organization"/>
+			<column name="REV_NAME" value="has Board of"/>
+			<column name="TYPE_DESC" value="Indicates that one organization if the Board (of Trustees) of another organization"/>
+			<column name="TYPE_KEY" value="kuali.org.Board"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Chartered"/>
+			<column name="OBJ_ID" value="0622B9EBC043443A9329EC561560FA1E"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that this organization exists because it is chartered or sponsored by another organization"/>
+			<column name="REV_NAME" value="is Chartered by"/>
+			<column name="TYPE_DESC" value="Indicates that this organization chartered or sponsored another organization"/>
+			<column name="TYPE_KEY" value="kuali.org.Charter"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Collaborate"/>
+			<column name="OBJ_ID" value="BDAD26F205DA4E0B858E7B0BA9940929"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="collaborates with"/>
+			<column name="REV_NAME" value="collaborates with"/>
+			<column name="TYPE_DESC" value="Peer Organizations Collaborating Together"/>
+			<column name="TYPE_KEY" value="kuali.org.Collaborate"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Contains"/>
+			<column name="OBJ_ID" value="24580447305A4FDD80646A38FE3682D3"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that one organization is part of another organization"/>
+			<column name="REV_NAME" value="is Part of"/>
+			<column name="TYPE_DESC" value="Indicates that this organization contains another organization"/>
+			<column name="TYPE_KEY" value="kuali.org.Contain"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="is Curriculum Parent of"/>
+			<column name="OBJ_ID" value="6314186326A743C3B03350B63467E4EF"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="REV_DESCR" value="Indicates that one organization is the Child of another organization in the Curriculum Hierarchy"/>
+			<column name="REV_NAME" value="is Curriculum Child of"/>
+			<column name="TYPE_DESC" value="Indicates that one organization is the Parent of another organization in the Curriculum Hierarchy"/>
+			<column name="TYPE_KEY" value="kuali.org.CurriculumParent"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Headquarters for"/>
+			<column name="OBJ_ID" value="BDD2BE20009F4D14BDB1295BEE310503"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="The administrative office for a larger division"/>
+			<column name="REV_NAME" value="has as its Headquarters"/>
+			<column name="TYPE_DESC" value="The headquarters of an administrative office for a larger division"/>
+			<column name="TYPE_KEY" value="kuali.org.HQ"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="is Curriculum Parent of"/>
+			<column name="OBJ_ID" value="AACD35C42D341061E040C60AF05B56E5"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="REV_DESCR" value="Indicates that this organization is the Child of another organization in the Curriculum Hierarchy"/>
+			<column name="REV_NAME" value="is Curriculum Child of"/>
+			<column name="TYPE_DESC" value="Indicates that this organization is the Parent of another organization in the Curriculum Hierarchy"/>
+			<column name="TYPE_KEY" value="kuali.org.Parent2CurriculumChild"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="has Subcommittee of"/>
+			<column name="OBJ_ID" value="E31F023B1587468C8CB9D959CDFA6452"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that this organization is a subcommittee of another"/>
+			<column name="REV_NAME" value="is Subcommittee of"/>
+			<column name="TYPE_DESC" value="Indicates this is organization has a subcommittee"/>
+			<column name="TYPE_KEY" value="kuali.org.Supercommittee"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Supervises"/>
+			<column name="OBJ_ID" value="2EC7AA7B781D48598A931BB9184D7CB2"/>
+			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
+			<column name="REV_DESCR" value="Indicates that the head of one organization is supervised by the head of another organization"/>
+			<column name="REV_NAME" value="is Supervised by"/>
+			<column name="TYPE_DESC" value="Indicates that the head of one organization has direct supervisory responsibility for the head of another organization"/>
+			<column name="TYPE_KEY" value="kuali.org.Supervise"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

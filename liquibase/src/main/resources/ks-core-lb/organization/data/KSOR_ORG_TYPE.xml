@@ -1,0 +1,156 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="NAME" value="Accrediting Body"/>
+			<column name="OBJ_ID" value="56BA7EBA46504F6F909399BACD6FC349"/>
+			<column name="TYPE_DESC" value="An Organization that accredits a school or program"/>
+			<column name="TYPE_KEY" value="kuali.org.AccreditingBody"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Adhoc Committee"/>
+			<column name="OBJ_ID" value="01DE7B79D43E4A4FBA6766083836D04A"/>
+			<column name="TYPE_DESC" value="An Adhoc Committee"/>
+			<column name="TYPE_KEY" value="kuali.org.AdhocCommittee"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Advisory Group"/>
+			<column name="OBJ_ID" value="4277458A78C94A01BE7E8D78928DFFF8"/>
+			<column name="TYPE_DESC" value="An Advisory Group"/>
+			<column name="TYPE_KEY" value="kuali.org.AdvisoryGroup"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Association"/>
+			<column name="OBJ_ID" value="7E6860AEAA554AFB9749E738CF1B2CFF"/>
+			<column name="TYPE_DESC" value="An Association"/>
+			<column name="TYPE_KEY" value="kuali.org.Association"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Board"/>
+			<column name="OBJ_ID" value="4552AF6B34754921BD0B702BC6840123"/>
+			<column name="TYPE_DESC" value="A Board of Directors"/>
+			<column name="TYPE_KEY" value="kuali.org.Board"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="COC"/>
+			<column name="OBJ_ID" value="9E267E440EFA424896118C29F2370765"/>
+			<column name="TYPE_DESC" value="A committee that approves curriculum"/>
+			<column name="TYPE_KEY" value="kuali.org.COC"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Center"/>
+			<column name="OBJ_ID" value="56945B656B56465DA553B7C5E18F3EE5"/>
+			<column name="TYPE_DESC" value="A Center"/>
+			<column name="TYPE_KEY" value="kuali.org.Center"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="College"/>
+			<column name="OBJ_ID" value="F06FCA26ED0F45C098F2D0DFEE93C170"/>
+			<column name="TYPE_DESC" value="A College"/>
+			<column name="TYPE_KEY" value="kuali.org.College"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Committee"/>
+			<column name="OBJ_ID" value="CDDB270555A441B985EABEE8DE72BF4A"/>
+			<column name="TYPE_DESC" value="A Committee"/>
+			<column name="TYPE_KEY" value="kuali.org.Committee"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Corporate Entity"/>
+			<column name="OBJ_ID" value="E15A3386C9AA420B9DADBC41EDA4CB1E"/>
+			<column name="TYPE_DESC" value="A legal corporate entity"/>
+			<column name="TYPE_KEY" value="kuali.org.CorporateEntity"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Department"/>
+			<column name="OBJ_ID" value="B3053CE179D240B1BDCDBBBD688D4A57"/>
+			<column name="TYPE_DESC" value="A Department"/>
+			<column name="TYPE_KEY" value="kuali.org.Department"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Division"/>
+			<column name="OBJ_ID" value="4F41F365EB334B02972B50F04ED7BDFE"/>
+			<column name="TYPE_DESC" value="A Division"/>
+			<column name="TYPE_KEY" value="kuali.org.Division"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Office"/>
+			<column name="OBJ_ID" value="FB800B4778114D6F8C5C18A258C46204"/>
+			<column name="TYPE_DESC" value="An Office"/>
+			<column name="TYPE_KEY" value="kuali.org.Office"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Program"/>
+			<column name="OBJ_ID" value="34057CCD853245A6868007576A1F5BC9"/>
+			<column name="TYPE_DESC" value="A Program"/>
+			<column name="TYPE_KEY" value="kuali.org.Program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="School"/>
+			<column name="OBJ_ID" value="5224CCD8A299446DA131DD22B4D1BBE9"/>
+			<column name="TYPE_DESC" value="A School"/>
+			<column name="TYPE_KEY" value="kuali.org.School"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Section"/>
+			<column name="OBJ_ID" value="F3509FD4C2724FBBA839D727F9F9DE58"/>
+			<column name="TYPE_DESC" value="A Section"/>
+			<column name="TYPE_KEY" value="kuali.org.Section"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Senate"/>
+			<column name="OBJ_ID" value="76F9F4423DD0425C99F074858EB725A3"/>
+			<column name="TYPE_DESC" value="A Deliberative body"/>
+			<column name="TYPE_KEY" value="kuali.org.Senate"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20100701000000"/>
+			<column name="NAME" value="Testing Service"/>
+			<column name="OBJ_ID" value="AACD35C42CF01061E040C60AF05B56E5"/>
+			<column name="TYPE_DESC" value="An organization creates and administers standardized tests"/>
+			<column name="TYPE_KEY" value="kuali.org.TestingService"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Work Group"/>
+			<column name="OBJ_ID" value="32496B0862C4431BAFF166305E4AD84D"/>
+			<column name="TYPE_DESC" value="A group organized for a particular purpose"/>
+			<column name="TYPE_KEY" value="kuali.org.WorkGroup"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

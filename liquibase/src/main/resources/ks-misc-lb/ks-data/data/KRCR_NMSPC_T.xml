@@ -1,0 +1,75 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRCR_NMSPC_T-initial-data" author="alubbers">
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="RICE"/>
+			<column name="NM" value="Service Bus"/>
+			<column name="NMSPC_CD" value="KR-BUS"/>
+			<column name="OBJ_ID" value="5B960CFDBB370FDFE0404F8189D83CBD"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="RICE"/>
+			<column name="NM" value="Identity Management"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="61645D045B0005D7E0404F8189D849B1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="RICE"/>
+			<column name="NM" value="Kuali Nervous System"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F595AD9BE0404F8189D80A6C"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="RICE"/>
+			<column name="NM" value="Notification"/>
+			<column name="NMSPC_CD" value="KR-NTFCN"/>
+			<column name="OBJ_ID" value="5B960CFDBB360FDFE0404F8189D83CBD"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="RICE"/>
+			<column name="NM" value="Enterprise Infrastructure"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5B960CFDBB390FDFE0404F8189D83CBD"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="RICE"/>
+			<column name="NM" value="Workflow"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5E1D690C419B3E2EE0404F8189D82677"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="STUDENT"/>
+			<column name="NM" value="Kuali Student Learning Unit Management"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="F102F3FA08CF45CFAA404FBB89D831AA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="APPL_ID" value="STUDENT"/>
+			<column name="NM" value="Kuali Student System"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="G102F3FA08CF45CFAA404FBB89D831AA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_NMSPC_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Kuali Systems"/>
+			<column name="NMSPC_CD" value="KUALI"/>
+			<column name="OBJ_ID" value="5ADF18B6D4817954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

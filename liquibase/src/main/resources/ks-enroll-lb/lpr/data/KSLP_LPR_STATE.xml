@@ -1,0 +1,40 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLP_LPR_STATE-initial-data" author="alubbers">
+		<insert tableName="KSLP_LPR_STATE">
+			<column name="DESCR" value="The student was registered but subsequently dropped the course or section within the normally allotted time period"/>
+			<column name="ID" value="kuali.lpr.state.dropped.early"/>
+			<column name="NAME" value="Dropped"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLP_LPR_STATE">
+			<column name="DESCR" value="The student was registered but subsequently dropped the course or section past the normally allotted time period, typically resulting in a special grade or mark to so indicate"/>
+			<column name="ID" value="kuali.lpr.state.dropped.late"/>
+			<column name="NAME" value="Dropped Late"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLP_LPR_STATE">
+			<column name="DESCR" value="The student has registered for the course by has not paid the fee"/>
+			<column name="ID" value="kuali.lpr.state.not.paid"/>
+			<column name="NAME" value="Fee Not Paid"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLP_LPR_STATE">
+			<column name="DESCR" value="The student plans on taking this course or program"/>
+			<column name="ID" value="kuali.lpr.state.planned"/>
+			<column name="NAME" value="Planned"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLP_LPR_STATE">
+			<column name="DESCR" value="The student is officially registered for the course or section"/>
+			<column name="ID" value="kuali.lpr.state.registered"/>
+			<column name="NAME" value="Registered"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLP_LPR_STATE">
+			<column name="DESCR" value="The student attempted to join but has been put on the waitlist"/>
+			<column name="ID" value="kuali.lpr.state.waitlisted"/>
+			<column name="NAME" value="Waitlisted"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

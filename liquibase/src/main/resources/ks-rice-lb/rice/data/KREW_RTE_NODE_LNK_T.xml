@@ -1,0 +1,84 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RTE_NODE_LNK_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2041"/>
+			<column name="TO_RTE_NODE_ID" value="2042"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2042"/>
+			<column name="TO_RTE_NODE_ID" value="2043"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2898"/>
+			<column name="TO_RTE_NODE_ID" value="2899"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2901"/>
+			<column name="TO_RTE_NODE_ID" value="2902"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2904"/>
+			<column name="TO_RTE_NODE_ID" value="2905"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2905"/>
+			<column name="TO_RTE_NODE_ID" value="2906"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2912"/>
+			<column name="TO_RTE_NODE_ID" value="2913"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2913"/>
+			<column name="TO_RTE_NODE_ID" value="2914"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2936"/>
+			<column name="TO_RTE_NODE_ID" value="2937"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2937"/>
+			<column name="TO_RTE_NODE_ID" value="2938"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2938"/>
+			<column name="TO_RTE_NODE_ID" value="2939"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2939"/>
+			<column name="TO_RTE_NODE_ID" value="2940"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2940"/>
+			<column name="TO_RTE_NODE_ID" value="2941"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2943"/>
+			<column name="TO_RTE_NODE_ID" value="2944"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2944"/>
+			<column name="TO_RTE_NODE_ID" value="2945"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2945"/>
+			<column name="TO_RTE_NODE_ID" value="2946"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2946"/>
+			<column name="TO_RTE_NODE_ID" value="2947"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2947"/>
+			<column name="TO_RTE_NODE_ID" value="2948"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2948"/>
+			<column name="TO_RTE_NODE_ID" value="2949"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_LNK_T">
+			<column name="FROM_RTE_NODE_ID" value="2949"/>
+			<column name="TO_RTE_NODE_ID" value="2950"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

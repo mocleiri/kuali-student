@@ -1,0 +1,106 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_HOLD_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Residency"/>
+			<column name="TYPE_DESC" value="Indicates there is a discrepancy or incomplete information to establish residency status"/>
+			<column name="TYPE_KEY" value="kuali.hold.issue.type.residency"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Unpaid fees"/>
+			<column name="TYPE_DESC" value="Indicates that this issue has to do with fees that were incurred but never paid"/>
+			<column name="TYPE_KEY" value="kuali.hold.issue.type.unpaid.fee"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Access Grades"/>
+			<column name="TYPE_DESC" value="Restricts students access to her grades"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.access.grades"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Add Charges Restriction"/>
+			<column name="TYPE_DESC" value="Cannot submit new charges to the student's account"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.add.charges"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Add/Drop Restriction"/>
+			<column name="TYPE_DESC" value="Cannot change registration"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.add.drop.class"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Award Degree Restriction"/>
+			<column name="TYPE_DESC" value="Cannot award degree"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.award.degree"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Bursar Refund"/>
+			<column name="TYPE_DESC" value="Stops a student from receiving a refund even if they have a creadit balance"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.bursar.refund"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Dorm Access Restriction"/>
+			<column name="TYPE_DESC" value="Student barred from access to the dorm"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.dorm.access"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Library Privileges Restriction"/>
+			<column name="TYPE_DESC" value="Cannot use library"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.library.privileges"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Receive Diploma Restriction"/>
+			<column name="TYPE_DESC" value="Cannot get physical diploma (don't mail or allow to be picked up"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.receive.diploma"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Registration Restriction"/>
+			<column name="TYPE_DESC" value="Cannot register"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.registration"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Transcript Restriction"/>
+			<column name="TYPE_DESC" value="Cannot order a transcript"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.request.transcript"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Status"/>
+			<column name="TYPE_DESC" value="Student is not allowed to register, be on campus, or use any campus facilities or resources"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.status"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Update Program"/>
+			<column name="TYPE_DESC" value="Blocks a student from changing her degree program"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.update.program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Verification"/>
+			<column name="TYPE_DESC" value="Blocks a student from having a request to verify her attendance or degrees processed"/>
+			<column name="TYPE_KEY" value="kuali.hold.restriction.type.verification"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Instructor Hold"/>
+			<column name="TYPE_DESC" value="This is a hold that applies to instructors"/>
+			<column name="TYPE_KEY" value="kuali.hold.type.instructor"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_TYPE">
+			<column name="NAME" value="Student Hold"/>
+			<column name="TYPE_DESC" value="This is a hold that applies to students"/>
+			<column name="TYPE_KEY" value="kuali.hold.type.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

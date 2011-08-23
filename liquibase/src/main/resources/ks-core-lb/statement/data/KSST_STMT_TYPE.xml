@@ -1,0 +1,105 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_STMT_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Academic Readiness Rules"/>
+			<column name="TYPE_DESC" value="Rules used in the evaluation of a person's academic readiness for enrollment."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Antirequisite"/>
+			<column name="TYPE_DESC" value="Add courses that, if completed, would prevent a student from enrolling in this course."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Corequisite"/>
+			<column name="TYPE_DESC" value="Add conditions that will restrict student enrollment, addressing restrictions to majors, locations, credit level requirements, etc. or Add courses, with or without grade requirements, which a student must have completed in order to enroll."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.academicReadiness.coreq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Prerequisites"/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Student Eligibility"/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.academicReadiness.studentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Student Eligibility + Prerequisite"/>
+			<column name="TYPE_DESC" value="Add conditions that will restrict student enrollment, addressing restrictions to majors, locations, credit level requirements, etc. or Add courses, with or without grade requirements, which a student must have completed in order to enroll."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Repeatable for Credit"/>
+			<column name="TYPE_DESC" value="Course repeatable for credit."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.credit.repeatable"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Courses that Restrict Credit"/>
+			<column name="TYPE_DESC" value="Enrollment in or completion of another course that will restrict the credits to be awarded."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.credit.restriction"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Credit Constraints"/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.creditConstraints"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Enrollment Eligibility"/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.enrollmentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Recommended Preparation"/>
+			<column name="TYPE_DESC" value="The courses and/or preparation added here will not prevent students from registering, but will be printed in the catalog."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.course.recommendedPreparation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Program Requirements List"/>
+			<column name="TYPE_DESC" value="List of program requirements (rules)."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Completion Requirements"/>
+			<column name="TYPE_DESC" value="Add conditions that will define how students may successfully complete this program."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Entrance Requirements"/>
+			<column name="TYPE_DESC" value="Add conditions that will restrict student entrance into this program."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Satisfactory Progress Requirements"/>
+			<column name="TYPE_DESC" value="Add conditions that will define how students will maintain satisfactory standing in this program."/>
+			<column name="TYPE_KEY" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,40 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_PHONE_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_PHONE_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="b"/>
+			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="OBJ_ID" value="5B97C50B03906110E0404F8189D85213"/>
+			<column name="PHONE_TYP_CD" value="HM"/>
+			<column name="PHONE_TYP_NM" value="Home"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PHONE_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="c"/>
+			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="OBJ_ID" value="5B97C50B03916110E0404F8189D85213"/>
+			<column name="PHONE_TYP_CD" value="MBL"/>
+			<column name="PHONE_TYP_NM" value="Mobile"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PHONE_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="d"/>
+			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="OBJ_ID" value="5B97C50B03926110E0404F8189D85213"/>
+			<column name="PHONE_TYP_CD" value="OTH"/>
+			<column name="PHONE_TYP_NM" value="Other"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PHONE_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="a"/>
+			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="OBJ_ID" value="5B97C50B03936110E0404F8189D85213"/>
+			<column name="PHONE_TYP_CD" value="WRK"/>
+			<column name="PHONE_TYP_NM" value="Work"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

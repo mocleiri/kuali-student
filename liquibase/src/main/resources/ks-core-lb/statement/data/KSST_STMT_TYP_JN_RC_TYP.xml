@@ -1,0 +1,641 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_STMT_TYP_JN_RC_TYP-initial-data" author="alubbers">
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CA-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.notcompleted"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CA-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.none"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CA-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.none"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CA-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.max"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CA-5"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.test.score.max"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CC-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.enrolled"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.coreq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CC-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.enrolled.nof"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.coreq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CC-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.enrolled.all"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.coreq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CCRC-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.notcompleted"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.credit.restriction"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CCRC-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.none"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.credit.restriction"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.all"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-10"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+			<column name="SORT_ORDER" value="10"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-11"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+			<column name="SORT_ORDER" value="11"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-12"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
+			<column name="SORT_ORDER" value="12"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-13"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
+			<column name="SORT_ORDER" value="13"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-5"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.min"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-6"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.max"/>
+			<column name="SORT_ORDER" value="6"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-7"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.permission.org.required"/>
+			<column name="SORT_ORDER" value="7"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-8"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.permission.instructor.required"/>
+			<column name="SORT_ORDER" value="8"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CP-9"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.test.score.min"/>
+			<column name="SORT_ORDER" value="9"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CRC-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.credits.repeat.max"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.credit.repeatable"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CRP-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.recommendedPreparation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CRP-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.recommendedPreparation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CS-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CS-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.org.program.admitted"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CS-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CS-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-10"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted"/>
+			<column name="SORT_ORDER" value="10"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-11"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.org.program.admitted"/>
+			<column name="SORT_ORDER" value="11"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-12"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted"/>
+			<column name="SORT_ORDER" value="12"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-13"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.permission.instructor.required"/>
+			<column name="SORT_ORDER" value="13"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-14"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.permission.org.required"/>
+			<column name="SORT_ORDER" value="14"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-15"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.test.score.min"/>
+			<column name="SORT_ORDER" value="15"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-16"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+			<column name="SORT_ORDER" value="16"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-17"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+			<column name="SORT_ORDER" value="17"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.all"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-5"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-6"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
+			<column name="SORT_ORDER" value="6"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-7"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.min"/>
+			<column name="SORT_ORDER" value="7"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-8"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+			<column name="SORT_ORDER" value="8"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="CSP-9"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.max"/>
+			<column name="SORT_ORDER" value="9"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.nof"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-10"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
+			<column name="SORT_ORDER" value="10"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-11"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.all"/>
+			<column name="SORT_ORDER" value="11"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-12"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
+			<column name="SORT_ORDER" value="12"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-13"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.min"/>
+			<column name="SORT_ORDER" value="13"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-14"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+			<column name="SORT_ORDER" value="14"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-15"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
+			<column name="SORT_ORDER" value="15"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-16"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
+			<column name="SORT_ORDER" value="16"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-17"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.max"/>
+			<column name="SORT_ORDER" value="17"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.all"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-20"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.cumulative.gpa.min"/>
+			<column name="SORT_ORDER" value="18"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.coursecompleted.nof"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-5"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.credits.min"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-6"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.residence.credits.final"/>
+			<column name="SORT_ORDER" value="6"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-7"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.enrolled.credits.final"/>
+			<column name="SORT_ORDER" value="7"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-8"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.completion.duration.afterentry"/>
+			<column name="SORT_ORDER" value="8"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PC-9"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.minors.nof"/>
+			<column name="SORT_ORDER" value="9"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.nof"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-10"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.none"/>
+			<column name="SORT_ORDER" value="10"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-11"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.all"/>
+			<column name="SORT_ORDER" value="11"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-12"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
+			<column name="SORT_ORDER" value="12"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-13"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.none"/>
+			<column name="SORT_ORDER" value="13"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-14"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.max"/>
+			<column name="SORT_ORDER" value="14"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-15"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.test.score.max"/>
+			<column name="SORT_ORDER" value="15"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-16"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.min"/>
+			<column name="SORT_ORDER" value="16"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-17"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+			<column name="SORT_ORDER" value="17"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-18"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.max"/>
+			<column name="SORT_ORDER" value="18"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-19"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
+			<column name="SORT_ORDER" value="19"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.notcompleted.nof"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.all"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.programset.coursecompleted.nof"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-5"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-6"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.test.score.min"/>
+			<column name="SORT_ORDER" value="6"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-7"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.admitted.credits"/>
+			<column name="SORT_ORDER" value="7"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-8"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.minor.admitted.classstanding"/>
+			<column name="SORT_ORDER" value="8"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PE-9"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
+			<column name="SORT_ORDER" value="9"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-1"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.admitted.credits"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-2"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.credits.max"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-3"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.completion.duration"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-4"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.candidate.status.duration"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-5"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-6"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.cumulative.gpa.min"/>
+			<column name="SORT_ORDER" value="6"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
+			<column name="ID" value="PSP-7"/>
+			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.program.duration.gpa.min"/>
+			<column name="SORT_ORDER" value="7"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

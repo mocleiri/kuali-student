@@ -1,0 +1,16 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP">
+			<column name="ORG_PERS_RELTN_TYPE_ID" value="kuali.org.PersonRelation.Professor"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Department"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP">
+			<column name="ORG_PERS_RELTN_TYPE_ID" value="kuali.org.PersonRelation.Head"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.School"/>
+		</insert>
+		<insert tableName="KSOR_ORG_TYPE_JN_ORG_PERRL_TYP">
+			<column name="ORG_PERS_RELTN_TYPE_ID" value="kuali.org.PersonRelation.Professor"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.School"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,19 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRSB_QRTZ_LOCKS-initial-data" author="alubbers">
+		<insert tableName="KRSB_QRTZ_LOCKS">
+			<column name="LOCK_NAME" value="CALENDAR_ACCESS"/>
+		</insert>
+		<insert tableName="KRSB_QRTZ_LOCKS">
+			<column name="LOCK_NAME" value="JOB_ACCESS"/>
+		</insert>
+		<insert tableName="KRSB_QRTZ_LOCKS">
+			<column name="LOCK_NAME" value="MISFIRE_ACCESS"/>
+		</insert>
+		<insert tableName="KRSB_QRTZ_LOCKS">
+			<column name="LOCK_NAME" value="STATE_ACCESS"/>
+		</insert>
+		<insert tableName="KRSB_QRTZ_LOCKS">
+			<column name="LOCK_NAME" value="TRIGGER_ACCESS"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,64 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_STATE_PROCESS-initial-data" author="alubbers">
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali atp-atp relation state process"/>
+			<column name="ID" value="kuali.atp.atp.relation.process"/>
+			<column name="NAME" value="kuali.atp.atp.relation.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali atp-milestone relation state process"/>
+			<column name="ID" value="kuali.atp.milestone.relation.process"/>
+			<column name="NAME" value="kuali.atp.milestone.relation.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali atp state process"/>
+			<column name="ID" value="kuali.atp.process"/>
+			<column name="NAME" value="kuali.atp.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali course offering process"/>
+			<column name="ID" value="kuali.course.offering.process"/>
+			<column name="NAME" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali hold issue process"/>
+			<column name="ID" value="kuali.hold.issue.process"/>
+			<column name="NAME" value="kuali.hold.issue.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali hold process student"/>
+			<column name="ID" value="kuali.hold.process.student"/>
+			<column name="NAME" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali hold restriction process"/>
+			<column name="ID" value="kuali.hold.restriction.process"/>
+			<column name="NAME" value="kuali.hold.restriction.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali lui capacity process"/>
+			<column name="ID" value="kuali.lui.capacity.process"/>
+			<column name="NAME" value="kuali.lui.capacity.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali lui-lui relationship process"/>
+			<column name="ID" value="kuali.lui.lui.relationship.process"/>
+			<column name="NAME" value="kuali.lui.lui.relationship.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali milestone state process"/>
+			<column name="ID" value="kuali.milestone.process"/>
+			<column name="NAME" value="kuali.milestone.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

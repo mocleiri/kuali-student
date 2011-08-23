@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RULE_EXT_VAL_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RULE_EXT_VAL_T">
+			<column name="KEY_CD" value="destination"/>
+			<column name="RULE_EXT_ID" value="1047"/>
+			<column name="RULE_EXT_VAL_ID" value="1048"/>
+			<column name="VAL" value="las vegas"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_EXT_VAL_T">
+			<column name="KEY_CD" value="campus"/>
+			<column name="RULE_EXT_ID" value="1104"/>
+			<column name="RULE_EXT_VAL_ID" value="1105"/>
+			<column name="VAL" value="IUB"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_EXT_VAL_T">
+			<column name="KEY_CD" value="campus"/>
+			<column name="RULE_EXT_ID" value="1107"/>
+			<column name="RULE_EXT_VAL_ID" value="1108"/>
+			<column name="VAL" value="IUPUI"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSDO_REF_OBJ_SUB_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSDO_REF_OBJ_SUB_TYPE">
+			<column name="NAME" value="Course"/>
+			<column name="OBJ_ID" value="E551BF0121A64B2C8F7A4CECD63C2E9E"/>
+			<column name="REF_OBJ_TYPE_KEY" value="kuali.org.RefObjectType.CluInfo"/>
+			<column name="TYPE_DESC" value="Sub Type for Course"/>
+			<column name="TYPE_KEY" value="kuali.org.RefObjectSubType.Course"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_REF_OBJ_SUB_TYPE">
+			<column name="NAME" value="Program"/>
+			<column name="OBJ_ID" value="1171A64A54734F4C9910C04F8EF991A9"/>
+			<column name="REF_OBJ_TYPE_KEY" value="kuali.org.RefObjectType.CluInfo"/>
+			<column name="TYPE_DESC" value="Sub Type for Program"/>
+			<column name="TYPE_KEY" value="kuali.org.RefObjectSubType.Program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_REF_OBJ_SUB_TYPE">
+			<column name="NAME" value="Proposal"/>
+			<column name="OBJ_ID" value="FFCC422C25A947A2B4E0AACC25C0D997"/>
+			<column name="REF_OBJ_TYPE_KEY" value="kuali.org.RefObjectType.ProposalInfo"/>
+			<column name="TYPE_DESC" value="Sub Type for Proposal"/>
+			<column name="TYPE_KEY" value="kuali.org.RefObjectSubType.Proposal"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

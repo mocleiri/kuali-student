@@ -1,0 +1,40 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_HOLD_RICH_TEXT-initial-data" author="alubbers">
+		<insert tableName="KSEN_HOLD_RICH_TEXT">
+			<column name="FORMATTED" value="<p>Issue Desc 101</p>"/>
+			<column name="ID" value="Issue-1-Desc"/>
+			<column name="PLAIN" value="Issue Desc 101"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_RICH_TEXT">
+			<column name="FORMATTED" value="<p>Issue Desc for deletion test</p>"/>
+			<column name="ID" value="Issue-2-Desc"/>
+			<column name="PLAIN" value="Issue Desc for deletion test"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_RICH_TEXT">
+			<column name="FORMATTED" value="<p>Hold Desc 101</p>"/>
+			<column name="ID" value="RICHTEXT-Hold-101"/>
+			<column name="PLAIN" value="Hold Desc 101"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_RICH_TEXT">
+			<column name="FORMATTED" value="<p>Hold Desc for deletion test</p>"/>
+			<column name="ID" value="RICHTEXT-Hold-201"/>
+			<column name="PLAIN" value="Hold Desc for deletion test"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_RICH_TEXT">
+			<column name="FORMATTED" value="<p>Hold Desc student</p>"/>
+			<column name="ID" value="RICHTEXT-Hold-301"/>
+			<column name="PLAIN" value="Hold Desc student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_HOLD_RICH_TEXT">
+			<column name="FORMATTED" value="<p>Hold Desc instructor</p>"/>
+			<column name="ID" value="RICHTEXT-Hold-401"/>
+			<column name="PLAIN" value="Hold Desc instructor"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

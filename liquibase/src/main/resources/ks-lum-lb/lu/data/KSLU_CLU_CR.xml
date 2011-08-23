@@ -1,0 +1,44 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_CLU_CR-initial-data" author="alubbers">
+		<insert tableName="KSLU_CLU_CR">
+			<column name="ID" value="CR-1"/>
+			<column name="INSTR_UNIT" value="0"/>
+			<column name="MAX_ALOW_INACV_ATP" value="ATP-INACT-1"/>
+			<column name="MAX_ALOW_INACV_TMQ" value="0"/>
+			<column name="MAX_TM_RSLT_RCGZ_ATP" value="ATP-RECOG-1"/>
+			<column name="MAX_TM_RSLT_RCGZ_TMQ" value="0"/>
+			<column name="MAX_TM_TO_COMP_ATP" value="ATP-MAXCOMPLETE-1"/>
+			<column name="MAX_TM_TO_COMP_TMQ" value="0"/>
+			<column name="MAX_TOT_UNIT" value="0"/>
+			<column name="MIN_TM_TO_COMP_ATP" value="ATP-MINCOMPLETE-1"/>
+			<column name="MIN_TM_TO_COMP_TMQ" value="0"/>
+			<column name="MIN_TOT_UNIT" value="0"/>
+			<column name="OBJ_ID" value="4216F5D9D1024602B21453AC8F0CD7F3"/>
+			<column name="REPEAT_CNT" value="Repeat Count"/>
+			<column name="REPEAT_TM_ATP" value="ATP-REPEAT-1"/>
+			<column name="REPEAT_TM_TMQ" value="0"/>
+			<column name="REPEAT_UNIT" value="Repeat Units"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_CLU_CR">
+			<column name="ID" value="CR-2"/>
+			<column name="INSTR_UNIT" value="0"/>
+			<column name="MAX_ALOW_INACV_ATP" value="ATP-INACT-2"/>
+			<column name="MAX_ALOW_INACV_TMQ" value="0"/>
+			<column name="MAX_TM_RSLT_RCGZ_ATP" value="ATP-RECOG-2"/>
+			<column name="MAX_TM_RSLT_RCGZ_TMQ" value="0"/>
+			<column name="MAX_TM_TO_COMP_ATP" value="ATP-MAXCOMPLETE-2"/>
+			<column name="MAX_TM_TO_COMP_TMQ" value="0"/>
+			<column name="MAX_TOT_UNIT" value="0"/>
+			<column name="MIN_TM_TO_COMP_ATP" value="ATP-MINCOMPLETE-2"/>
+			<column name="MIN_TM_TO_COMP_TMQ" value="0"/>
+			<column name="MIN_TOT_UNIT" value="0"/>
+			<column name="OBJ_ID" value="4E1136838D0B40628474B8B0986B599B"/>
+			<column name="REPEAT_CNT" value="Repeat Count"/>
+			<column name="REPEAT_TM_ATP" value="ATP-REPEAT-2"/>
+			<column name="REPEAT_TM_TMQ" value="0"/>
+			<column name="REPEAT_UNIT" value="Repeat Units"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,112 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RULE_RSP_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="org.kuali.rice.ken.kew.ChannelReviewerRoleAttribute!reviewers"/>
+			<column name="OBJ_ID" value="6166CBA1BBFC644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2020"/>
+			<column name="RULE_ID" value="1044"/>
+			<column name="RULE_RSP_ID" value="2021"/>
+			<column name="TYP" value="R"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="user4"/>
+			<column name="OBJ_ID" value="6166CBA1BBFD644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2022"/>
+			<column name="RULE_ID" value="1046"/>
+			<column name="RULE_RSP_ID" value="2023"/>
+			<column name="TYP" value="F"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="edu.sampleu.travel.workflow.EmployeeAttribute!employee"/>
+			<column name="OBJ_ID" value="6166CBA1BBFE644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2024"/>
+			<column name="RULE_ID" value="1049"/>
+			<column name="RULE_RSP_ID" value="2025"/>
+			<column name="TYP" value="R"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="edu.sampleu.travel.workflow.EmployeeAttribute!supervisr"/>
+			<column name="OBJ_ID" value="6166CBA1BBFF644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2026"/>
+			<column name="RULE_ID" value="1050"/>
+			<column name="RULE_RSP_ID" value="2027"/>
+			<column name="TYP" value="R"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="K"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="edu.sampleu.travel.workflow.EmployeeAttribute!director"/>
+			<column name="OBJ_ID" value="6166CBA1BC00644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2028"/>
+			<column name="RULE_ID" value="1051"/>
+			<column name="RULE_RSP_ID" value="2029"/>
+			<column name="TYP" value="R"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="edu.sampleu.travel.workflow.AccountAttribute!FO"/>
+			<column name="OBJ_ID" value="6166CBA1BC01644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2030"/>
+			<column name="RULE_ID" value="1052"/>
+			<column name="RULE_RSP_ID" value="2031"/>
+			<column name="TYP" value="R"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="2202"/>
+			<column name="OBJ_ID" value="6166CBA1BC02644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2040"/>
+			<column name="RULE_ID" value="1103"/>
+			<column name="RULE_RSP_ID" value="2041"/>
+			<column name="TYP" value="G"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="2203"/>
+			<column name="OBJ_ID" value="6166CBA1BC03644DE0404F8189D86C09"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2042"/>
+			<column name="RULE_ID" value="1106"/>
+			<column name="RULE_RSP_ID" value="2043"/>
+			<column name="TYP" value="G"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RULE_RSP_T">
+			<column name="ACTN_RQST_CD" value="A"/>
+			<column name="APPR_PLCY" value="F"/>
+			<column name="NM" value="9997"/>
+			<column name="OBJ_ID" value="B1FCE360-EA7A-C2B8-9D70-88C39A982094"/>
+			<column name="PRIO" value="1"/>
+			<column name="RSP_ID" value="2063"/>
+			<column name="RULE_ID" value="1642"/>
+			<column name="RULE_RSP_ID" value="2064"/>
+			<column name="TYP" value="G"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

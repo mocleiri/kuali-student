@@ -1,0 +1,96 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG_HIRCHY_JN_ORG_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.AdhocCommittee"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.AdvisoryGroup"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Association"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Board"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.COC"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.COC"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Center"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.College"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.College"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Committee"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.CorporateEntity"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Department"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Department"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Division"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Division"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Office"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Program"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Program"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.School"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Section"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Senate"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Curriculum"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.Senate"/>
+		</insert>
+		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
+			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
+			<column name="ORG_TYPE_ID" value="kuali.org.WorkGroup"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

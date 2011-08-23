@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREN_PRIO_T-initial-data" author="alubbers">
+		<insert tableName="KREN_PRIO_T">
+			<column name="DESC_TXT" value="Normal priority"/>
+			<column name="NM" value="Normal"/>
+			<column name="PRIO_ID" value="1"/>
+			<column name="PRIO_ORD" value="2"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREN_PRIO_T">
+			<column name="DESC_TXT" value="A low priority"/>
+			<column name="NM" value="Low"/>
+			<column name="PRIO_ID" value="2"/>
+			<column name="PRIO_ORD" value="3"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREN_PRIO_T">
+			<column name="DESC_TXT" value="A high priority"/>
+			<column name="NM" value="High"/>
+			<column name="PRIO_ID" value="3"/>
+			<column name="PRIO_ORD" value="1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

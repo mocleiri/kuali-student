@@ -1,0 +1,403 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_PRNCPL_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20081107094902"/>
+			<column name="OBJ_ID" value="5B1B6B919CCA6496E0404F8189D822F2"/>
+			<column name="PRNCPL_ID" value="1"/>
+			<column name="PRNCPL_NM" value="kr"/>
+			<column name="PRNCPL_PSWD" value="+vjSA7P5UtHrpUAfv0Ii2+UtYak=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="5"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="OBJ_ID" value="5B1ZZB919CCA6496E0404F8189D822F2"/>
+			<column name="PRNCPL_ID" value="5"/>
+			<column name="PRNCPL_NM" value="ks"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1100"/>
+			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="OBJ_ID" value="5B97C50B03C56110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="admin"/>
+			<column name="PRNCPL_NM" value="admin"/>
+			<column name="PRNCPL_PSWD" value="0DPiKuNIrrVmD8IUCuw1hQxNqZc=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1125"/>
+			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="OBJ_ID" value="5B97C50B03C66110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="admin1"/>
+			<column name="PRNCPL_NM" value="admin1"/>
+			<column name="PRNCPL_PSWD" value="bHyjRfY/g1yzU/8VvWxeBS7Ajno=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1126"/>
+			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="OBJ_ID" value="5B97C50B03C76110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="admin2"/>
+			<column name="PRNCPL_NM" value="admin2"/>
+			<column name="PRNCPL_PSWD" value="MV8WbFrKY6FX99QQB2dctEqUizM=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1129"/>
+			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="OBJ_ID" value="5B97C50B03C86110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="dev1"/>
+			<column name="PRNCPL_NM" value="dev1"/>
+			<column name="PRNCPL_PSWD" value="O0JVPE4yQejz+PvBmmn6L5Vwip0=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1130"/>
+			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="OBJ_ID" value="5B97C50B03C96110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="dev2"/>
+			<column name="PRNCPL_NM" value="dev2"/>
+			<column name="PRNCPL_PSWD" value="h4NWU/f3nRVCD8aZiL2tzWI7ExQ=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1135"/>
+			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="OBJ_ID" value="5B97C50B03CA6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="director"/>
+			<column name="PRNCPL_NM" value="director"/>
+			<column name="PRNCPL_PSWD" value="I1rP3xN19e/YAgOsp4Ki9eDxNas=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1121"/>
+			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="OBJ_ID" value="5B97C50B03CB6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="doug"/>
+			<column name="PRNCPL_NM" value="doug"/>
+			<column name="PRNCPL_PSWD" value="B5jr7Pt7xN+50ERcL6Aw62Th+hw=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1116"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03CC6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="earl"/>
+			<column name="PRNCPL_NM" value="earl"/>
+			<column name="PRNCPL_PSWD" value="QdkQsfakec4lsIHs7T6nlB8yndc=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1114"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03CD6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="edna"/>
+			<column name="PRNCPL_NM" value="edna"/>
+			<column name="PRNCPL_PSWD" value="QrzEI3skcJSucz9TMtsdptp+FE8=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1137"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03CE6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="employee"/>
+			<column name="PRNCPL_NM" value="employee"/>
+			<column name="PRNCPL_PSWD" value="yvMi8Lvtch6sSja/ev8RAwefryU=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1115"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03CF6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="eric"/>
+			<column name="PRNCPL_NM" value="eric"/>
+			<column name="PRNCPL_PSWD" value="lvFkrU2bKw2s+OvuK7Hus6pprfE=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1117"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03D06110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="erin"/>
+			<column name="PRNCPL_NM" value="erin"/>
+			<column name="PRNCPL_PSWD" value="KksXsRaCsilyYHmmMTYM8BakNFA=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1119"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03D16110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="fran"/>
+			<column name="PRNCPL_NM" value="fran"/>
+			<column name="PRNCPL_PSWD" value="8110xjKftidBo3IGp8t3anLI4y0=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1120"/>
+			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="OBJ_ID" value="5B97C50B03D26110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="frank"/>
+			<column name="PRNCPL_NM" value="frank"/>
+			<column name="PRNCPL_PSWD" value="hqjC2oUnocaXi9ym15hv4UrhR/4=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1118"/>
+			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="OBJ_ID" value="5B97C50B03D36110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="fred"/>
+			<column name="PRNCPL_NM" value="fred"/>
+			<column name="PRNCPL_PSWD" value="MQF6ciZl5K/OWGlQ9ClEptMx2r8=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1122"/>
+			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="OBJ_ID" value="5B97C50B03D46110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="idm1"/>
+			<column name="PRNCPL_NM" value="idm1"/>
+			<column name="PRNCPL_PSWD" value="kmFyAP54q0JquFaxCz2j63xxmKI=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1123"/>
+			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="OBJ_ID" value="5B97C50B03D56110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="idm2"/>
+			<column name="PRNCPL_NM" value="idm2"/>
+			<column name="PRNCPL_PSWD" value="5JYpOBQPNsrqmHG6APEYcJg9z4c=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1124"/>
+			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="OBJ_ID" value="5B97C50B03D66110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="idm3"/>
+			<column name="PRNCPL_NM" value="idm3"/>
+			<column name="PRNCPL_PSWD" value="jNbWHch0i6rlH2Qh29NspkM0190=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1136"/>
+			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="OBJ_ID" value="5B97C50B03BA6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="kuluser"/>
+			<column name="PRNCPL_NM" value="kuluser"/>
+			<column name="PRNCPL_PSWD" value="uR7RjfJyXK3FYADyi28Ay0vuepw=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1133"/>
+			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="OBJ_ID" value="5B97C50B03D76110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="newaccountuser"/>
+			<column name="PRNCPL_NM" value="newacctusr"/>
+			<column name="PRNCPL_PSWD" value="YAQGRACXOwl6Fvdv4n5mDTeRbhU=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1131"/>
+			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="OBJ_ID" value="5B97C50B03BB6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="notsys"/>
+			<column name="PRNCPL_NM" value="notsys"/>
+			<column name="PRNCPL_PSWD" value="q9EoXkICjL8tHSegViMrWlMvYqA=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1132"/>
+			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="OBJ_ID" value="5B97C50B03BC6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="notsysadm"/>
+			<column name="PRNCPL_NM" value="notsysadm"/>
+			<column name="PRNCPL_PSWD" value="ggubF+QrKg3EFHmKLCPJiyN/w5Y=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1109"/>
+			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="OBJ_ID" value="5B97C50B03D86110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="quickstart"/>
+			<column name="PRNCPL_NM" value="quickstart"/>
+			<column name="PRNCPL_PSWD" value="YDTPAXYEVeyInVwnd+dCo9UU4oM=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1134"/>
+			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="OBJ_ID" value="5B97C50B03D96110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="supervisor"/>
+			<column name="PRNCPL_NM" value="supervisr"/>
+			<column name="PRNCPL_PSWD" value="IY6gG8lF7BFqfAJ9WW/LUXDKeQk=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1127"/>
+			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="OBJ_ID" value="5B97C50B03DA6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="test1"/>
+			<column name="PRNCPL_NM" value="test1"/>
+			<column name="PRNCPL_PSWD" value="tESsBmE/yNY3lb6a0L6vVQEZNqw=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1128"/>
+			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="OBJ_ID" value="5B97C50B03DB6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="test2"/>
+			<column name="PRNCPL_NM" value="test2"/>
+			<column name="PRNCPL_PSWD" value="EJ9LPFDXsN9ynSmbxvjp75Bmlx8=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1101"/>
+			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="OBJ_ID" value="5B97C50B03BD6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testadmin1"/>
+			<column name="PRNCPL_NM" value="testadmin1"/>
+			<column name="PRNCPL_PSWD" value="2fD8gwn+QpOj4ZU3VvkbQ17mOdU=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1102"/>
+			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="OBJ_ID" value="5B97C50B03BE6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testadmin2"/>
+			<column name="PRNCPL_NM" value="testadmin2"/>
+			<column name="PRNCPL_PSWD" value="f8bIwmipu23wlBC+1LbcXluEs1o=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1103"/>
+			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="OBJ_ID" value="5B97C50B03BF6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testuser1"/>
+			<column name="PRNCPL_NM" value="testuser1"/>
+			<column name="PRNCPL_PSWD" value="vFGoPuoJhG3AJAfdCXmWiRKiB6k=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1104"/>
+			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="OBJ_ID" value="5B97C50B03C06110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testuser2"/>
+			<column name="PRNCPL_NM" value="testuser2"/>
+			<column name="PRNCPL_PSWD" value="O1u359Ev4+VrxpvcDbzDVvZMHXM=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1105"/>
+			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="OBJ_ID" value="5B97C50B03C16110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testuser3"/>
+			<column name="PRNCPL_NM" value="testuser3"/>
+			<column name="PRNCPL_PSWD" value="QSldBTgLD4f5owCNXrPJ6Bzene8=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1106"/>
+			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="OBJ_ID" value="5B97C50B03C26110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testuser4"/>
+			<column name="PRNCPL_NM" value="testuser4"/>
+			<column name="PRNCPL_PSWD" value="3so8fbzo6sNgRMUCQPV0PiHUkb4=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1107"/>
+			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="OBJ_ID" value="5B97C50B03C36110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testuser5"/>
+			<column name="PRNCPL_NM" value="testuser5"/>
+			<column name="PRNCPL_PSWD" value="BMfb10+6xlJ2PCoLg3ZQzpJtVhw=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1108"/>
+			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="OBJ_ID" value="5B97C50B03C46110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="testuser6"/>
+			<column name="PRNCPL_NM" value="testuser6"/>
+			<column name="PRNCPL_PSWD" value="bJOj2JS/AKbx1bjLXR8V1Umo5fU=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1110"/>
+			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="OBJ_ID" value="5B97C50B03DC6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="user1"/>
+			<column name="PRNCPL_NM" value="user1"/>
+			<column name="PRNCPL_PSWD" value="s9qne0wEqVUbh4HQMZH+CY8yXmc=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1111"/>
+			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="OBJ_ID" value="5B97C50B03DD6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="user2"/>
+			<column name="PRNCPL_NM" value="user2"/>
+			<column name="PRNCPL_PSWD" value="oYgcBu7JbbmQHHu/5BxCo/COnLQ=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1112"/>
+			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="OBJ_ID" value="5B97C50B03DE6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="user3"/>
+			<column name="PRNCPL_NM" value="user3"/>
+			<column name="PRNCPL_PSWD" value="C3+ElEbTODVG0VpICWYIRELNIZM=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PRNCPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1113"/>
+			<column name="LAST_UPDT_DT" value="20081113140648"/>
+			<column name="OBJ_ID" value="5B97C50B03DF6110E0404F8189D85213"/>
+			<column name="PRNCPL_ID" value="user4"/>
+			<column name="PRNCPL_NM" value="user4"/>
+			<column name="PRNCPL_PSWD" value="Bubu9q3y5fVOpsQ8N21tNmBfgQ4=(&^HSH#&)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

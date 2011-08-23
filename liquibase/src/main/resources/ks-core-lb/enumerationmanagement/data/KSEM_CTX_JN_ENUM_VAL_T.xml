@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEM_CTX_JN_ENUM_VAL_T-initial-data" author="alubbers">
+		<insert tableName="KSEM_CTX_JN_ENUM_VAL_T">
+			<column name="CTX_ID" value="9"/>
+			<column name="ENUM_VAL_ID" value="4fa57988-a40c-45c6-8b21-3a419389cc9c"/>
+		</insert>
+		<insert tableName="KSEM_CTX_JN_ENUM_VAL_T">
+			<column name="CTX_ID" value="8"/>
+			<column name="ENUM_VAL_ID" value="4fa57988-a40c-45c6-8b21-3a419389cc9c"/>
+		</insert>
+		<insert tableName="KSEM_CTX_JN_ENUM_VAL_T">
+			<column name="CTX_ID" value="7"/>
+			<column name="ENUM_VAL_ID" value="b75a9fac-fa91-4cf1-93ee-890189a454f9"/>
+		</insert>
+		<insert tableName="KSEM_CTX_JN_ENUM_VAL_T">
+			<column name="CTX_ID" value="9"/>
+			<column name="ENUM_VAL_ID" value="b75a9fac-fa91-4cf1-93ee-890189a454f9"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

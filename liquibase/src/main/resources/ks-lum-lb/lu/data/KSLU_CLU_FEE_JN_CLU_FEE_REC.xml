@@ -1,0 +1,12 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_CLU_FEE_JN_CLU_FEE_REC-initial-data" author="alubbers">
+		<insert tableName="KSLU_CLU_FEE_JN_CLU_FEE_REC">
+			<column name="CLU_FEE_ID" value="ed17a181-4952-4852-9e18-7353f409adfc"/>
+			<column name="CLU_FEE_REC_ID" value="466f80c3-2889-43b8-be32-7b60cb06a300"/>
+		</insert>
+		<insert tableName="KSLU_CLU_FEE_JN_CLU_FEE_REC">
+			<column name="CLU_FEE_ID" value="ed17a181-4952-4852-9e18-7353f409adfc"/>
+			<column name="CLU_FEE_REC_ID" value="886548f0-9b12-4534-bee3-7e8153402c8e"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

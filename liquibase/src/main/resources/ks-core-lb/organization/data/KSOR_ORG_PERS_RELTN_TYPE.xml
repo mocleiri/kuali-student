@@ -1,0 +1,212 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG_PERS_RELTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Administrative Assistant"/>
+			<column name="OBJ_ID" value="1A0236645C3146D5B00F65A2BBA56632"/>
+			<column name="TYPE_DESC" value="Administrative Assistant"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.AdminAssistant"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Administrative Member"/>
+			<column name="OBJ_ID" value="FB0770F1110644BF872B953BD494F898"/>
+			<column name="TYPE_DESC" value="Administrative Member"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Administrative Officer"/>
+			<column name="OBJ_ID" value="6CB844F31E764188A44014DE2C6797D6"/>
+			<column name="TYPE_DESC" value="Administrative Officer"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.AdministrativeOfficer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Associate Dean"/>
+			<column name="OBJ_ID" value="077692A566804315BB7660326F63E1F9"/>
+			<column name="TYPE_DESC" value="Associate Dean"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.AssocDean"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Associate Provost"/>
+			<column name="OBJ_ID" value="8F160D43C92C4746A7911B7D41378F5F"/>
+			<column name="TYPE_DESC" value="Associate Provost"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.AssocProvost"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Associate Registrar"/>
+			<column name="OBJ_ID" value="5C78C4ADF2B94F7CB2B27EFFD9560268"/>
+			<column name="TYPE_DESC" value="Associate Registrar"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.AssocRegistrar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Chair"/>
+			<column name="OBJ_ID" value="79D96ECC804244A3BB50A31EBEE557FD"/>
+			<column name="TYPE_DESC" value="Chair"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Chair"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Chancellor"/>
+			<column name="OBJ_ID" value="DE8B72325EA841939F89EBE0A24D8A3A"/>
+			<column name="TYPE_DESC" value="Chancellor"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Chancellor"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Co-Chair"/>
+			<column name="OBJ_ID" value="EFF0E7B63AC74A699A576A634757D311"/>
+			<column name="TYPE_DESC" value="Co-Chair"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Co-Chair"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Coordinator"/>
+			<column name="OBJ_ID" value="91EDD73D88644CC68304CD81B4C70ADD"/>
+			<column name="TYPE_DESC" value="Coordinator"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Coordinator"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Dean"/>
+			<column name="OBJ_ID" value="A49B227E87AA47E5973F4EE69A3D9839"/>
+			<column name="TYPE_DESC" value="Dean"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Dean"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Director"/>
+			<column name="OBJ_ID" value="7583E322EDE14ED8AA5DF0BE6625E754"/>
+			<column name="TYPE_DESC" value="Director"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Director"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Executive Vice President and Provost"/>
+			<column name="OBJ_ID" value="DDBFC3787030436D89F3C895C1B29399"/>
+			<column name="TYPE_DESC" value="Executive VP and Provost"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.EVPP"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Ex-Officio Member"/>
+			<column name="OBJ_ID" value="BCB77E77428F458F8204F7B7006D90CB"/>
+			<column name="TYPE_DESC" value="Ex-Officio Member"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Ex-Officio"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Executive Officer"/>
+			<column name="OBJ_ID" value="3923BB72EB1B494A8D3847078B286A43"/>
+			<column name="TYPE_DESC" value="Executive Officer"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.ExecutiveOfficer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Head"/>
+			<column name="OBJ_ID" value="6743FE59F5F349978C863711EB3FAA2F"/>
+			<column name="TYPE_DESC" value="Head"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Head"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Member"/>
+			<column name="OBJ_ID" value="2C1166B0CC1E461DBAD8B5BA70742F99"/>
+			<column name="TYPE_DESC" value="Member"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Member"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Officer"/>
+			<column name="OBJ_ID" value="B1C44C3014DD4151BBB11FA61E6508B2"/>
+			<column name="TYPE_DESC" value="Officer"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Officer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="President"/>
+			<column name="OBJ_ID" value="BF4407B314BB4B7B96781027897CF8D2"/>
+			<column name="TYPE_DESC" value="President"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.President"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Professor"/>
+			<column name="OBJ_ID" value="55A6EDCA21E84DB79C13FD9E79D8D452"/>
+			<column name="TYPE_DESC" value="Professor"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Professor"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Registrar"/>
+			<column name="OBJ_ID" value="24F2940C11704AA8A35B8185E0B8BF43"/>
+			<column name="TYPE_DESC" value="Registrar"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Registrar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Representative"/>
+			<column name="OBJ_ID" value="B813BB1513874D7CA461B72F9C27D09E"/>
+			<column name="TYPE_DESC" value="Representative of a constituency"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Rep"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Secretary"/>
+			<column name="OBJ_ID" value="19320F501D1446EE867578B384213AB0"/>
+			<column name="TYPE_DESC" value="Secretary"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Secretary"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Treasurer"/>
+			<column name="OBJ_ID" value="D106D34A0C924BA2919F3005F8D96C1D"/>
+			<column name="TYPE_DESC" value="Treasurer"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.Treasurer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Vice Chancellor"/>
+			<column name="OBJ_ID" value="29C08C5296A94160AA83A168A816B995"/>
+			<column name="TYPE_DESC" value="Vice Chancellor"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.ViceChancellor"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_PERS_RELTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Vice President"/>
+			<column name="OBJ_ID" value="63A88C5D97374651B58E0230ED957414"/>
+			<column name="TYPE_DESC" value="Vice President"/>
+			<column name="TYPE_KEY" value="kuali.org.PersonRelation.VicePresident"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

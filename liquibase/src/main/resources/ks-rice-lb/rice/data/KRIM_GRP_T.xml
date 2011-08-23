@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_GRP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_GRP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="GRP_DESC" value="WorkflowAdmin"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="GRP_NM" value="WorkflowAdmin"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20081113140721"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5B97C50B04A16110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_GRP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="GRP_DESC" value="Notification system admin group for automation."/>
+			<column name="GRP_ID" value="2000"/>
+			<column name="GRP_NM" value="NotificationAdmin"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20081113140721"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5B97C50B04A26110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

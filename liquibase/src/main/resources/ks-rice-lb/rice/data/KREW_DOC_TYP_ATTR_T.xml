@@ -1,0 +1,58 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_DOC_TYP_ATTR_T-initial-data" author="alubbers">
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2000"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="1"/>
+			<column name="RULE_ATTR_ID" value="1003"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2001"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="2"/>
+			<column name="RULE_ATTR_ID" value="1006"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2002"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="3"/>
+			<column name="RULE_ATTR_ID" value="1004"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2003"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="4"/>
+			<column name="RULE_ATTR_ID" value="1007"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2004"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="5"/>
+			<column name="RULE_ATTR_ID" value="1005"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2005"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="6"/>
+			<column name="RULE_ATTR_ID" value="1008"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2006"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="ORD_INDX" value="7"/>
+			<column name="RULE_ATTR_ID" value="1009"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2007"/>
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="ORD_INDX" value="1"/>
+			<column name="RULE_ATTR_ID" value="1003"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_ATTR_T">
+			<column name="DOC_TYP_ATTRIB_ID" value="2009"/>
+			<column name="DOC_TYP_ID" value="3001"/>
+			<column name="ORD_INDX" value="1"/>
+			<column name="RULE_ATTR_ID" value="1645"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

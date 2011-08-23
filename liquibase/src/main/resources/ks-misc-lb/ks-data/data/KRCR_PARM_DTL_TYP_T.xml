@@ -1,0 +1,212 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRCR_PARM_DTL_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="All"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A0BBD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="All"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Batch"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A0CBD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="Batch"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Document"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A0DBD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="Document"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Lookup"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A0EBD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="Lookup"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Purge Pending Attachments Step"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A0FBD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="PurgePendingAttachmentsStep"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Purge Session Documents Step"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A10BD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="PurgeSessionDocumentsStep"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Schedule Step"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69A9BABE4A11BD56E0404F8189D82B0F"/>
+			<column name="PARM_DTL_TYP_CD" value="ScheduleStep"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="All"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F596AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DTL_TYP_CD" value="All"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Batch"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F597AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DTL_TYP_CD" value="Batch"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Document"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F598AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DTL_TYP_CD" value="Document"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Lookup"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F599AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DTL_TYP_CD" value="Lookup"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Purge Pending Attachments Step"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D3577AEBE0404F8189D80321"/>
+			<column name="PARM_DTL_TYP_CD" value="PurgePendingAttachmentsStep"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Purge Session Documents Step"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D3567AEBE0404F8189D80321"/>
+			<column name="PARM_DTL_TYP_CD" value="PurgeSessionDocumentsStep"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Schedule Step"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D3587AEBE0404F8189D80321"/>
+			<column name="PARM_DTL_TYP_CD" value="ScheduleStep"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Action List"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="1821D8BAB21E498F9FB1ECCA25C37F9B"/>
+			<column name="PARM_DTL_TYP_CD" value="ActionList"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="All"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="705611FB54134417E0404F8189D8453B"/>
+			<column name="PARM_DTL_TYP_CD" value="All"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Backdoor"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="F7E44233C2C440FFB1A399548951160A"/>
+			<column name="PARM_DTL_TYP_CD" value="Backdoor"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="eDocLite"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="51DD5B9FACDD4EDAA9CA8D53A82FCCCA"/>
+			<column name="PARM_DTL_TYP_CD" value="EDocLite  "/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Feature"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="BBD9976498A4441F904013004F3D70B3"/>
+			<column name="PARM_DTL_TYP_CD" value="Feature"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Global Reviewer"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="C21B0C6229144F6FBC52A10A38E51E3B"/>
+			<column name="PARM_DTL_TYP_CD" value="GlobalReviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Mailer"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5DB9D1433E214325BE380C82762A223B"/>
+			<column name="PARM_DTL_TYP_CD" value="Mailer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Note"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="868D39EC269B4402B3136C74C2342F22"/>
+			<column name="PARM_DTL_TYP_CD" value="Note"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Notification"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="D04AFB1812E34723ABEB64986AC61DC9"/>
+			<column name="PARM_DTL_TYP_CD" value="Notification"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Quick Link"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="3E26DA76458A46D68CBAF209DA036157"/>
+			<column name="PARM_DTL_TYP_CD" value="QuickLinks"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Routing"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="583C2D3562D44DBAA5FEA998EB601DC9"/>
+			<column name="PARM_DTL_TYP_CD" value="Route"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_DTL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Route Queue"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="D4F6DDEF69B24265AA2A170A62A1CADB"/>
+			<column name="PARM_DTL_TYP_CD" value="RouteQueue"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSPR_PROPOSAL_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSPR_PROPOSAL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Create Course Proposal"/>
+			<column name="OBJ_ID" value="644BEFA1E0A740418D85FDC10B93DC29"/>
+			<column name="TYPE_DESC" value="A create course proposal type"/>
+			<column name="TYPE_KEY" value="kuali.proposal.type.course.create"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSPR_PROPOSAL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Modify Course Proposal"/>
+			<column name="OBJ_ID" value="8F4456ECC6A140479018CCF4970A1C7E"/>
+			<column name="TYPE_DESC" value="A modify course proposal type"/>
+			<column name="TYPE_KEY" value="kuali.proposal.type.course.modify"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSPR_PROPOSAL_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Retire Course Proposal"/>
+			<column name="OBJ_ID" value="9ADA9C5759BA40439240ED1C1A9B6EDF"/>
+			<column name="TYPE_DESC" value="A retire course proposal type"/>
+			<column name="TYPE_KEY" value="kuali.proposal.type.course.retire"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

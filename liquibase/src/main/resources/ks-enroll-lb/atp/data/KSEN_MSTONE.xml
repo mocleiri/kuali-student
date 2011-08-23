@@ -1,0 +1,74 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_MSTONE-initial-data" author="alubbers">
+		<insert tableName="KSEN_MSTONE">
+			<column name="ID" value="testDeleteId"/>
+			<column name="IS_ALL_DAY" value="0"/>
+			<column name="IS_DATE_RANGE" value="0"/>
+			<column name="MILESTONE_STATE_ID" value="kuali.milestone.state.Draft"/>
+			<column name="MILESTONE_TYPE_ID" value="kuali.atp.milestone.RegistrationPeriod"/>
+			<column name="NAME" value="testDeleteId"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-108"/>
+			<column name="START_DT" value="20111101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_MSTONE">
+			<column name="END_DT" value="20110720000000"/>
+			<column name="ID" value="testId"/>
+			<column name="IS_ALL_DAY" value="0"/>
+			<column name="IS_DATE_RANGE" value="1"/>
+			<column name="MILESTONE_STATE_ID" value="kuali.milestone.state.Draft"/>
+			<column name="MILESTONE_TYPE_ID" value="kuali.atp.milestone.AdvanceRegistrationPeriod"/>
+			<column name="NAME" value="testId"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-105"/>
+			<column name="START_DT" value="20110710000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_MSTONE">
+			<column name="END_DT" value="20111001000000"/>
+			<column name="ID" value="testId2"/>
+			<column name="IS_ALL_DAY" value="0"/>
+			<column name="IS_DATE_RANGE" value="1"/>
+			<column name="MILESTONE_STATE_ID" value="kuali.milestone.state.Draft"/>
+			<column name="MILESTONE_TYPE_ID" value="kuali.atp.milestone.RegistrationPeriod"/>
+			<column name="NAME" value="testId2"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-106"/>
+			<column name="START_DT" value="20110801000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_MSTONE">
+			<column name="ID" value="testId3"/>
+			<column name="IS_ALL_DAY" value="1"/>
+			<column name="IS_DATE_RANGE" value="0"/>
+			<column name="MILESTONE_STATE_ID" value="kuali.milestone.state.Draft"/>
+			<column name="MILESTONE_TYPE_ID" value="kuali.atp.milestone.DropDate"/>
+			<column name="NAME" value="testId3"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-107"/>
+			<column name="START_DT" value="20111101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_MSTONE">
+			<column name="END_DT" value="20010920000000"/>
+			<column name="ID" value="testKeyDate1"/>
+			<column name="IS_ALL_DAY" value="0"/>
+			<column name="IS_DATE_RANGE" value="1"/>
+			<column name="MILESTONE_STATE_ID" value="kuali.milestone.state.Draft"/>
+			<column name="MILESTONE_TYPE_ID" value="kuali.atp.milestone.AdvanceRegistrationPeriod"/>
+			<column name="NAME" value="testKeyDate1"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-5"/>
+			<column name="START_DT" value="20010910000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_MSTONE">
+			<column name="END_DT" value="20011001000000"/>
+			<column name="ID" value="testKeyDate2"/>
+			<column name="IS_ALL_DAY" value="0"/>
+			<column name="IS_DATE_RANGE" value="1"/>
+			<column name="MILESTONE_STATE_ID" value="kuali.milestone.state.Draft"/>
+			<column name="MILESTONE_TYPE_ID" value="kuali.atp.milestone.RegistrationPeriod"/>
+			<column name="NAME" value="testKeyDate2"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-6"/>
+			<column name="START_DT" value="20010801000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RULE_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RULE_T">
+			<column name="ACTVN_DT" value="20080801155902"/>
+			<column name="ACTV_IND" value="1"/>
+			<column name="CUR_IND" value="1"/>
+			<column name="DACTVN_DT" value="21000101000000"/>
+			<column name="DLGN_IND" value="0"/>
+			<column name="DOC_TYP_NM" value="SendNotificationRequest"/>
+			<column name="FRC_ACTN" value="1"/>
+			<column name="FRM_DT" value="20080801155902"/>
+			<column name="NM" value="SendNotificationRequest.Reviewers"/>
+			<column name="OBJ_ID" value="6166CBA1BBE9644DE0404F8189D86C09"/>
+			<column name="RULE_BASE_VAL_DESC" value="Notification Request Reviewers"/>
+			<column name="RULE_ID" value="1044"/>
+			<column name="RULE_TMPL_ID" value="1023"/>
+			<column name="RULE_VER_NBR" value="0"/>
+			<column name="TMPL_RULE_IND" value="0"/>
+			<column name="TO_DT" value="21000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,314 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="andy (generated)" id="1311191427300-634">
+  <addUniqueConstraint columnNames="VER_IND_ID, SEQ_NUM" constraintName="SYS_C0011370" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-635">
+  <addUniqueConstraint columnNames="RES_OPT_ID" constraintName="SYS_C0011378" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLURES_JN_RESOPT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-636">
+  <addUniqueConstraint columnNames="CLU_ACCRED_ID" constraintName="SYS_C0011436" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU_JN_ACCRED" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-637">
+  <addUniqueConstraint columnNames="ALT_CLU_ID" constraintName="SYS_C0011441" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU_JN_CLU_IDENT" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-638">
+  <addUniqueConstraint columnNames="CLU_INSTR_ID" constraintName="SYS_C0011444" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU_JN_CLU_INSTR" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-639">
+  <addUniqueConstraint columnNames="CLU_INSTR_ID" constraintName="SYS_C009456" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU_PUBL_JN_CLU_INSTR" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-640">
+  <addUniqueConstraint columnNames="VARI_KEY, OWNER" constraintName="SYS_C0011470" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU_PUBL_VARI" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-641">
+  <addUniqueConstraint columnNames="CLU_SET_ID, CLU_VER_IND_ID" constraintName="KSLU_CLU_SET_JN_CLU_I1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_CLU_SET_JN_CLU" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-642">
+  <addUniqueConstraint columnNames="SEARCHPARAMETERS_ID" constraintName="SYS_C0011543" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_MEMSHIP_KSLU_SPARAM" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-643">
+  <addUniqueConstraint columnNames="RSRC_TYPE_ID, CLU_ID" constraintName="SYS_C0011561" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_RSRC" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-644">
+  <addUniqueConstraint columnNames="VALUES_ID" constraintName="SYS_C0011566" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KSLU_SPARAM_KSLU_SPVALUE" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-984">
+  <addForeignKeyConstraint baseColumnNames="ACCT_ID" baseTableName="KSLU_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FK6" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_ACCT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-985">
+  <addForeignKeyConstraint baseColumnNames="FEE_ID" baseTableName="KSLU_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FK4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-986">
+  <addForeignKeyConstraint baseColumnNames="LUTYPE_ID" baseTableName="KSLU_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-987">
+  <addForeignKeyConstraint baseColumnNames="OFFIC_CLU_ID" baseTableName="KSLU_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FK5" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_IDENT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-988">
+  <addForeignKeyConstraint baseColumnNames="PRI_INSTR_ID" baseTableName="KSLU_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_INSTR" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-989">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLU_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-990">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_ACCRED_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ACCRED_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_ACCRED" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-991">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_ACCT_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ACCT_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_ACCT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-992">
+  <addForeignKeyConstraint baseColumnNames="AFFIL_ORG_ID" baseTableName="KSLU_CLU_ACCT_JN_AFFIL_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ACCT_JN_AFFIL_ORG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_AFFIL_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-993">
+  <addForeignKeyConstraint baseColumnNames="CLU_ACCT_ID" baseTableName="KSLU_CLU_ACCT_JN_AFFIL_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ACCT_JN_AFFIL_ORG_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_ACCT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-994">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_ADMIN_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ADMIN_ORG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-995">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_ADMIN_ORG_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ADMIN_ORG_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_ADMIN_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-996">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_ATP_TYPE_KEY" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ATP_TYPE_KEY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-997">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-998">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLU_CLU_FEE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-999">
+  <addForeignKeyConstraint baseColumnNames="CLUE_FEE_REC_ID" baseTableName="KSLU_CLU_FEE_AMOUNT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEE_AMOUNT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE_REC" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1000">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_FEE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1001">
+  <addForeignKeyConstraint baseColumnNames="CLU_FEE_ID" baseTableName="KSLU_CLU_FEE_JN_CLU_FEE_REC" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLUFEE_JN_CLUFEE_REC_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1002">
+  <addForeignKeyConstraint baseColumnNames="CLU_FEE_REC_ID" baseTableName="KSLU_CLU_FEE_JN_CLU_FEE_REC" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLUFEE_JN_CLUFEE_REC_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE_REC" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1003">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLU_CLU_FEE_REC" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEE_REC_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1004">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_FEE_REC_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEE_REC_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE_REC" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1005">
+  <addForeignKeyConstraint baseColumnNames="AFFIL_ORG_ID" baseTableName="KSLU_CLU_FEEREC_JN_AFFIL_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEEREC_JN_AFF_ORG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_AFFIL_ORG" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1006">
+  <addForeignKeyConstraint baseColumnNames="CLU_FEE_REC_ID" baseTableName="KSLU_CLU_FEEREC_JN_AFFIL_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_FEEREC_JN_AFF_ORG_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_FEE_REC" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1007">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_INSTR_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_INSTR_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_INSTR" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1008">
+  <addForeignKeyConstraint baseColumnNames="CLU_ACCRED_ID" baseTableName="KSLU_CLU_JN_ACCRED" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_ACCRED_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_ACCRED" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1009">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_JN_ACCRED" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_ACCRED_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1010">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_JN_CAMP_LOC" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_CAMP_LOC_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1011">
+  <addForeignKeyConstraint baseColumnNames="ALT_CLU_ID" baseTableName="KSLU_CLU_JN_CLU_IDENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_CLU_IDENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_IDENT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1012">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_JN_CLU_IDENT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_CLU_IDENT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1013">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_JN_CLU_INSTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_CLU_INSTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1014">
+  <addForeignKeyConstraint baseColumnNames="CLU_INSTR_ID" baseTableName="KSLU_CLU_JN_CLU_INSTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_CLU_INSTR_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_INSTR" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1015">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_JN_SUBJ_ORG" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_JN_SUBJ_ORG_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1016">
+  <addForeignKeyConstraint baseColumnNames="CLULO_RELTN_TYPE_ID" baseTableName="KSLU_CLU_LO_ALOW_RELTN_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_LO_ALOW_REL_TYPE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_LO_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1017">
+  <addForeignKeyConstraint baseColumnNames="LU_TYPE_ID" baseTableName="KSLU_CLU_LO_ALOW_RELTN_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_LO_ALOW_REL_TYPE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1018">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_LO_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_LO_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1019">
+  <addForeignKeyConstraint baseColumnNames="TYPE" baseTableName="KSLU_CLU_LO_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_LO_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_LO_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1020">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_LO_RELTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_LO_RELTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_LO_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1021">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_LO_RELTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_LO_REL_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_LO_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1022">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_PUB_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_PUB_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_PUB_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1023">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_PUBL" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_PUBL_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1024">
+  <addForeignKeyConstraint baseColumnNames="CLU_PUB_TYPE_ID" baseTableName="KSLU_CLU_PUBL" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_PUBL_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_PUBL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1025">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_PUBL_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_PUBL_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_PUBL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1026">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_PUBL_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_PUBL_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_PUBL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1027">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_PUBL_VARI" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_PUBL_VARI_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_PUBL" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1028">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_RESULT_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_RESULT_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_RSLT_TYP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1029">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLU_RSLT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_RSLT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1030">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLU_CLU_RSLT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_RSLT_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1031">
+  <addForeignKeyConstraint baseColumnNames="TYPE_KEY_ID" baseTableName="KSLU_CLU_RSLT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_RSLT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_RSLT_TYP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1032">
+  <addForeignKeyConstraint baseColumnNames="CLU_RSLT_TYPE_ID" baseTableName="KSLU_CLU_RSLT_LU_ALOW_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_RSLT_LU_ALOW_TYPE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_RSLT_TYP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1033">
+  <addForeignKeyConstraint baseColumnNames="LU_TYPE_ID" baseTableName="KSLU_CLU_RSLT_LU_ALOW_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_RSLT_LU_ALOW_TYPE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1034">
+  <addForeignKeyConstraint baseColumnNames="MEM_QUERY_ID" baseTableName="KSLU_CLU_SET" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_MEMSHIP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1035">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLU_CLU_SET" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1036">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_SET_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_SET" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1037">
+  <addForeignKeyConstraint baseColumnNames="CLU_SET_ID" baseTableName="KSLU_CLU_SET_JN_CLU" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_JN_CLU_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_SET" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1038">
+  <addForeignKeyConstraint baseColumnNames="CLU_SET_CHILD_ID" baseTableName="KSLU_CLU_SET_JN_CLU_SET" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_JN_CLU_SET_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_SET" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1039">
+  <addForeignKeyConstraint baseColumnNames="CLU_SET_PARENT_ID" baseTableName="KSLU_CLU_SET_JN_CLU_SET" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_JN_CLU_SET_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_SET" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1040">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLU_SET_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLU_SET_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_CLU_SET_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1041">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_CLUCLU_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLUCLU_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1042">
+  <addForeignKeyConstraint baseColumnNames="LU_RELTN_TYPE_ID" baseTableName="KSLU_CLUCLU_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLUCLU_RELTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LULU_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1043">
+  <addForeignKeyConstraint baseColumnNames="RELATED_CLU_ID" baseTableName="KSLU_CLUCLU_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLUCLU_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1044">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_CLUCLU_RELTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLUCLU_RELTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLUCLU_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1045">
+  <addForeignKeyConstraint baseColumnNames="CLU_RES_ID" baseTableName="KSLU_CLURES_JN_RESOPT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLURES_JN_RESOPT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU_RSLT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1046">
+  <addForeignKeyConstraint baseColumnNames="RES_OPT_ID" baseTableName="KSLU_CLURES_JN_RESOPT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_CLURES_JN_RESOPT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RSLT_OPT" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1047">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_DLVMTHD_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_DLVMTHD_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_DLVMTHD_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1048">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_INSTFRMT_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_INSTFRMT_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_INSTFRMT_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1049">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LU_CD_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_CD_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LU_CD_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1050">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_LU_CODE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_CODE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1051">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LU_CODE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_CODE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LU_CODE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1052">
+  <addForeignKeyConstraint baseColumnNames="LU_LU_RELTN_TYPE_ID" baseTableName="KSLU_LU_LU_ALOW_RELTN_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_LU_ALOW_RELTN_TYPE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LULU_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1053">
+  <addForeignKeyConstraint baseColumnNames="LU_REL_TYPE_ID" baseTableName="KSLU_LU_LU_ALOW_RELTN_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_LU_ALOW_RELTN_TYPE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1054">
+  <addForeignKeyConstraint baseColumnNames="LU_TYPE_ID" baseTableName="KSLU_LU_LU_ALOW_RELTN_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_LU_ALOW_RELTN_TYPE_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1055">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LU_PUBL_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_PUBL_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LU_PUBL_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1056">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LU_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LU_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1057">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_LUI" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LUI_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1058">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LUI_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LUI_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LUI" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1059">
+  <addForeignKeyConstraint baseColumnNames="LUI_ID" baseTableName="KSLU_LUILUI_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LUILUI_RELTN_FK3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LUI" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1060">
+  <addForeignKeyConstraint baseColumnNames="LULU_RELTN_TYPE_ID" baseTableName="KSLU_LUILUI_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LUILUI_RELTN_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LULU_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1061">
+  <addForeignKeyConstraint baseColumnNames="RELATED_LUI_ID" baseTableName="KSLU_LUILUI_RELTN" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LUILUI_RELTN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LUI" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1062">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LUILUI_RELTN_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LUILUI_RELTN_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LUILUI_RELTN" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1063">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_LULU_RELTN_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LULU_RELTN_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LULU_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1064">
+  <addForeignKeyConstraint baseColumnNames="LU_TYPE_ID" baseTableName="KSLU_LULU_RELTN_TYPE_JN_LU_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LULU_RELTYP_JN_LUTYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1065">
+  <addForeignKeyConstraint baseColumnNames="LULU_RELTN_TYPE_ID" baseTableName="KSLU_LULU_RELTN_TYPE_JN_LU_TYP" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_LULU_RELTYP_JN_LUTYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_LULU_RELTN_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1066">
+  <addForeignKeyConstraint baseColumnNames="KSLU_MEMSHIP_ID" baseTableName="KSLU_MEMSHIP_KSLU_SPARAM" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_MEMSHIP_KSLU_SPARAM_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_MEMSHIP" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1067">
+  <addForeignKeyConstraint baseColumnNames="SEARCHPARAMETERS_ID" baseTableName="KSLU_MEMSHIP_KSLU_SPARAM" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_MEMSHIP_KSLU_SPARAM_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_SPARAM" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1068">
+  <addForeignKeyConstraint baseColumnNames="RSLT_USG_TYPE_ID" baseTableName="KSLU_RSLT_COMP_USG_ALOW_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSLTCOMP_USG_ALOW_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_RSLT_USG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1069">
+  <addForeignKeyConstraint baseColumnNames="RES_USAGE_ID" baseTableName="KSLU_RSLT_OPT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSLT_OPT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_RSLT_USG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1070">
+  <addForeignKeyConstraint baseColumnNames="RT_DESCR_ID" baseTableName="KSLU_RSLT_OPT" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSLT_OPT_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_RICH_TEXT_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1071">
+  <addForeignKeyConstraint baseColumnNames="OWNER" baseTableName="KSLU_RSLT_USG_TYPE_ATTR" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSLT_USG_TYPE_ATTR_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_RSLT_USG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1072">
+  <addForeignKeyConstraint baseColumnNames="CLU_RSLT_USAGE_TYPE_ID" baseTableName="KSLU_RSLTUSAGE_LU_ALOW_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSLTUSAGE_LU_ALOW_TYP_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_RSLT_USG_TYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1073">
+  <addForeignKeyConstraint baseColumnNames="LU_TYPE_ID" baseTableName="KSLU_RSLTUSAGE_LU_ALOW_TYPE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSLTUSAGE_LU_ALOW_TYP_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="TYPE_KEY" referencedTableName="KSLU_LUTYPE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1074">
+  <addForeignKeyConstraint baseColumnNames="CLU_ID" baseTableName="KSLU_RSRC" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_RSRC_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_CLU" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1075">
+  <addForeignKeyConstraint baseColumnNames="KSLU_SPARAM_ID" baseTableName="KSLU_SPARAM_KSLU_SPVALUE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_SPARAM_KSLU_SPVALUE_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_SPARAM" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+<changeSet author="andy (generated)" id="1311191427300-1076">
+  <addForeignKeyConstraint baseColumnNames="VALUES_ID" baseTableName="KSLU_SPARAM_KSLU_SPVALUE" baseTableSchemaName="KSEMBEDDED" constraintName="KSLU_SPARAM_KSLU_SPVALUE_FK2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="ID" referencedTableName="KSLU_SPVALUE" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+</changeSet>
+</databaseChangeLog>

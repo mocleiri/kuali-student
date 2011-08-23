@@ -1,0 +1,67 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_EMP_STAT_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="01"/>
+			<column name="EMP_STAT_CD" value="A"/>
+			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="NM" value="Active"/>
+			<column name="OBJ_ID" value="5B97C50B037A6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="99"/>
+			<column name="EMP_STAT_CD" value="D"/>
+			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="NM" value="Deceased"/>
+			<column name="OBJ_ID" value="5B97C50B037B6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="04"/>
+			<column name="EMP_STAT_CD" value="L"/>
+			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="NM" value="On Non-Pay Leave"/>
+			<column name="OBJ_ID" value="5B97C50B037C6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="03"/>
+			<column name="EMP_STAT_CD" value="N"/>
+			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="NM" value="Status Not Yet Processed"/>
+			<column name="OBJ_ID" value="5B97C50B037D6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="02"/>
+			<column name="EMP_STAT_CD" value="P"/>
+			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="NM" value="Processing"/>
+			<column name="OBJ_ID" value="5B97C50B037E6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="10"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="NM" value="Retired"/>
+			<column name="OBJ_ID" value="5B97C50B037F6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMP_STAT_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="97"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="NM" value="Terminated"/>
+			<column name="OBJ_ID" value="5B97C50B03806110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,12 @@
+ks-data/uncategorized-create:KRCR_NMSPC_T
+ks-data/uncategorized-create:KRCR_PARM_DTL_TYP_T
+ks-data/uncategorized-create:KRCR_PARM_T
+ks-data/uncategorized-create:KRCR_PARM_TYP_T
+ks-data/uncategorized-create:KRLC_CMP_T
+ks-data/uncategorized-create:KRLC_CMP_TYP_T
+ks-data/uncategorized-create:KRLC_CNTRY_T
+ks-data/uncategorized-create:KRLC_CNTY_T
+ks-data/uncategorized-create:KRLC_PSTL_CD_T
+ks-data/uncategorized-create:KRLC_ST_T
+ks-data/uncategorized-create:KRSB_SVC_DSCRPTR_T
+ks-data/uncategorized-create:KS_DB_VERSION

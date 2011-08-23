@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_CLU_ACCRED-initial-data" author="alubbers">
+		<insert tableName="KSLU_CLU_ACCRED">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20100809122500"/>
+			<column name="EFF_DT" value="20100901100000"/>
+			<column name="ID" value="MAJOR-1"/>
+			<column name="OBJ_ID" value="E264827B869D40E3902E79486E6CE7E7"/>
+			<column name="ORG_ID" value="f94d7266-5d88-4d7a-a776-b0ec7cbbe041"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_CLU_ACCRED">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20100809122500"/>
+			<column name="EFF_DT" value="20100901100000"/>
+			<column name="ID" value="MAJOR-2"/>
+			<column name="OBJ_ID" value="2502BF3131DE40578817C190575A93FE"/>
+			<column name="ORG_ID" value="6d9d8e2b-dd3e-4d00-90b9-9ee2b13ee7ad"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,16 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSDO_REF_REL_TYP_JN_SUB_TYP-initial-data" author="alubbers">
+		<insert tableName="KSDO_REF_REL_TYP_JN_SUB_TYP">
+			<column name="REF_DOC_RELTN_TYPE_KEY" value="kuali.org.DocRelation.allObjectTypes"/>
+			<column name="REF_OBJ_SUB_TYPE_KEY" value="kuali.org.RefObjectSubType.Program"/>
+		</insert>
+		<insert tableName="KSDO_REF_REL_TYP_JN_SUB_TYP">
+			<column name="REF_DOC_RELTN_TYPE_KEY" value="kuali.org.DocRelation.allObjectTypes"/>
+			<column name="REF_OBJ_SUB_TYPE_KEY" value="kuali.org.RefObjectSubType.Course"/>
+		</insert>
+		<insert tableName="KSDO_REF_REL_TYP_JN_SUB_TYP">
+			<column name="REF_DOC_RELTN_TYPE_KEY" value="kuali.org.DocRelation.allObjectTypes"/>
+			<column name="REF_OBJ_SUB_TYPE_KEY" value="kuali.org.RefObjectSubType.Proposal"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

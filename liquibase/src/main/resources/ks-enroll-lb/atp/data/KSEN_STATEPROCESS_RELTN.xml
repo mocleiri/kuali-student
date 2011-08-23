@@ -1,0 +1,96 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_STATEPROCESS_RELTN-initial-data" author="alubbers">
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-1"/>
+			<column name="NEXT_STATEKEY" value="kuali.atp.state.Draft"/>
+			<column name="PROCESS_KEY" value="kuali.atp.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-10"/>
+			<column name="NEXT_STATEKEY" value="kuali.lui.state.draft"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-11"/>
+			<column name="NEXT_STATEKEY" value="kuali.lui.state.submitted"/>
+			<column name="PRIOR_STATEKEY" value="kuali.lui.state.draft"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-12"/>
+			<column name="NEXT_STATEKEY" value="kuali.lui.state.approved"/>
+			<column name="PRIOR_STATEKEY" value="kuali.lui.state.submitted"/>
+			<column name="PROCESS_KEY" value="kuali.course.offering.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-13"/>
+			<column name="NEXT_STATEKEY" value="kuali.lui.lui.relation.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.lui.lui.relationship.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-14"/>
+			<column name="NEXT_STATEKEY" value="kuali.lui.lui.relation.state.inactive"/>
+			<column name="PRIOR_STATEKEY" value="kuali.lui.lui.relation.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.lui.lui.relationship.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-2"/>
+			<column name="NEXT_STATEKEY" value="kuali.atp.state.Official"/>
+			<column name="PRIOR_STATEKEY" value="kuali.atp.state.Draft"/>
+			<column name="PROCESS_KEY" value="kuali.atp.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-3"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.restriction.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.restriction.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-4"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.restriction.state.inactive"/>
+			<column name="PRIOR_STATEKEY" value="kuali.hold.restriction.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.restriction.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-5"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.issue.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.issue.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-6"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.issue.state.inactive"/>
+			<column name="PRIOR_STATEKEY" value="kuali.hold.issue.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.issue.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-7"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-8"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.state.released"/>
+			<column name="PRIOR_STATEKEY" value="kuali.hold.state.active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-9"/>
+			<column name="NEXT_STATEKEY" value="kuali.hold.state.canceled"/>
+			<column name="PRIOR_STATEKEY" value="kuali.hold.state.released"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

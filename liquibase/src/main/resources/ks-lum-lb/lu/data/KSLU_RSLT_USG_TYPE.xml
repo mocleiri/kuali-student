@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_RSLT_USG_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSLU_RSLT_USG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Final Grade"/>
+			<column name="OBJ_ID" value="66CF4F9EA32B45959A91C3AEA33D0215"/>
+			<column name="TYPE_DESC" value="Final learning result for an LU. A stereotypical usage is the final grade in a course."/>
+			<column name="TYPE_KEY" value="lrType.finalGrade"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_RSLT_USG_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Midterm Grade"/>
+			<column name="OBJ_ID" value="1811D2788C914B1088FDCD845D56B75E"/>
+			<column name="TYPE_DESC" value="Midterm learning result for an LU. A stereotypical usage is the midterm grade in a course."/>
+			<column name="TYPE_KEY" value="lrType.midtermGrade"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

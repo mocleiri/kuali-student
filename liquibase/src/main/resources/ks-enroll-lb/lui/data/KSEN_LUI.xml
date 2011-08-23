@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_LUI-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUI">
+			<column name="CLU_ID" value="cluId1"/>
+			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EXP_DT" value="20111231000000"/>
+			<column name="ID" value="Lui-1"/>
+			<column name="NAME" value="Lui one"/>
+			<column name="RT_DESCR_ID" value="Lui-1-Desc"/>
+			<column name="STATE_ID" value="kuali.lui.state.draft"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="CLU_ID" value="cluId2"/>
+			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EXP_DT" value="20111231000000"/>
+			<column name="ID" value="Lui-2"/>
+			<column name="NAME" value="Lui rwo"/>
+			<column name="RT_DESCR_ID" value="Lui-2-Desc"/>
+			<column name="STATE_ID" value="kuali.lui.state.draft"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="CLU_ID" value="cluId3"/>
+			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EXP_DT" value="20111231000000"/>
+			<column name="ID" value="Lui-3"/>
+			<column name="NAME" value="Lui three"/>
+			<column name="RT_DESCR_ID" value="Lui-3-Desc"/>
+			<column name="STATE_ID" value="kuali.lui.state.draft"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="CLU_ID" value="cluId4"/>
+			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EXP_DT" value="20111231000000"/>
+			<column name="ID" value="Lui-4"/>
+			<column name="NAME" value="Lui four"/>
+			<column name="RT_DESCR_ID" value="Lui-4-Desc"/>
+			<column name="STATE_ID" value="kuali.lui.state.draft"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_RSP_TMPL_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_RSP_TMPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="7"/>
+			<column name="NM" value="Review"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADFE172441D6320E0404F8189D85169"/>
+			<column name="RSP_TMPL_ID" value="1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_RSP_TMPL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="54"/>
+			<column name="NM" value="Resolve Exception"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="60432A73A6A49F65E0404F8189D86AA4"/>
+			<column name="RSP_TMPL_ID" value="2"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_LUILUI_RELTN-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUILUI_RELTN">
+			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EXP_DT" value="20000101000000"/>
+			<column name="ID" value="LUILUIREL-1"/>
+			<column name="LUI_ID" value="Lui-1"/>
+			<column name="RELATED_LUI_ID" value="Lui-2"/>
+			<column name="STATE_ID" value="kuali.lui.lui.relation.state.active"/>
+			<column name="TYPE_ID" value="kuali.lui.lui.relation.associated"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUILUI_RELTN">
+			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EXP_DT" value="20000101000000"/>
+			<column name="ID" value="LUILUIREL-2"/>
+			<column name="LUI_ID" value="Lui-3"/>
+			<column name="RELATED_LUI_ID" value="Lui-4"/>
+			<column name="STATE_ID" value="kuali.lui.lui.relation.state.active"/>
+			<column name="TYPE_ID" value="kuali.lui.lui.relation.associated"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

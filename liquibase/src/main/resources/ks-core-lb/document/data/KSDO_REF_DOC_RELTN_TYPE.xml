@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSDO_REF_DOC_RELTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSDO_REF_DOC_RELTN_TYPE">
+			<column name="NAME" value="All Relations"/>
+			<column name="OBJ_ID" value="93D03807FC87493285690C148759085A"/>
+			<column name="TYPE_DESC" value="Relation for all known sub object types"/>
+			<column name="TYPE_KEY" value="kuali.org.DocRelation.allObjectTypes"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

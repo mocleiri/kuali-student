@@ -1,0 +1,356 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ENTITY_EMP_INFO_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000102"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1100"/>
+			<column name="ENTITY_EMP_ID" value="1100"/>
+			<column name="ENTITY_ID" value="1100"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B27CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000103"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1101"/>
+			<column name="ENTITY_EMP_ID" value="1101"/>
+			<column name="ENTITY_ID" value="1101"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B37CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000104"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1102"/>
+			<column name="ENTITY_EMP_ID" value="1102"/>
+			<column name="ENTITY_ID" value="1102"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B47CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000105"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1103"/>
+			<column name="ENTITY_EMP_ID" value="1103"/>
+			<column name="ENTITY_ID" value="1103"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B57CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000106"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="ENTITY_AFLTN_ID" value="1104"/>
+			<column name="ENTITY_EMP_ID" value="1104"/>
+			<column name="ENTITY_ID" value="1104"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B67CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="IN-IN"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000107"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="ENTITY_AFLTN_ID" value="1105"/>
+			<column name="ENTITY_EMP_ID" value="1105"/>
+			<column name="ENTITY_ID" value="1105"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B77CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="IN-IN"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000108"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="ENTITY_AFLTN_ID" value="1106"/>
+			<column name="ENTITY_EMP_ID" value="1106"/>
+			<column name="ENTITY_ID" value="1106"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B87CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000109"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="ENTITY_AFLTN_ID" value="1107"/>
+			<column name="ENTITY_EMP_ID" value="1107"/>
+			<column name="ENTITY_ID" value="1107"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0B97CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000110"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1108"/>
+			<column name="ENTITY_EMP_ID" value="1108"/>
+			<column name="ENTITY_ID" value="1108"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0BA7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000111"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="D"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="ENTITY_AFLTN_ID" value="1109"/>
+			<column name="ENTITY_EMP_ID" value="1109"/>
+			<column name="ENTITY_ID" value="1109"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0BB7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000112"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="R"/>
+			<column name="EMP_TYP_CD" value="P"/>
+			<column name="ENTITY_AFLTN_ID" value="1110"/>
+			<column name="ENTITY_EMP_ID" value="1110"/>
+			<column name="ENTITY_ID" value="1110"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0BC7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000113"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1111"/>
+			<column name="ENTITY_EMP_ID" value="1111"/>
+			<column name="ENTITY_ID" value="1111"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0BD7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000114"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1112"/>
+			<column name="ENTITY_EMP_ID" value="1112"/>
+			<column name="ENTITY_ID" value="1112"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0BE7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000115"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1113"/>
+			<column name="ENTITY_EMP_ID" value="1113"/>
+			<column name="ENTITY_ID" value="1113"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0BF7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000116"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1114"/>
+			<column name="ENTITY_EMP_ID" value="1114"/>
+			<column name="ENTITY_ID" value="1114"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0C07CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000117"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1115"/>
+			<column name="ENTITY_EMP_ID" value="1115"/>
+			<column name="ENTITY_ID" value="1115"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0C17CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000119"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1117"/>
+			<column name="ENTITY_EMP_ID" value="1117"/>
+			<column name="ENTITY_ID" value="1117"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0C37CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000124"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1122"/>
+			<column name="ENTITY_EMP_ID" value="1122"/>
+			<column name="ENTITY_ID" value="1122"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0C87CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-AFRI"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000125"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1123"/>
+			<column name="ENTITY_EMP_ID" value="1123"/>
+			<column name="ENTITY_ID" value="1123"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0C97CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000126"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1124"/>
+			<column name="ENTITY_EMP_ID" value="1124"/>
+			<column name="ENTITY_ID" value="1124"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0CA7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000127"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1125"/>
+			<column name="ENTITY_EMP_ID" value="1125"/>
+			<column name="ENTITY_ID" value="1125"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0CB7CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-BL"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMP_INFO_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="BASE_SLRY_AMT" value="50000"/>
+			<column name="EMP_ID" value="0000000139"/>
+			<column name="EMP_REC_ID" value="1"/>
+			<column name="EMP_STAT_CD" value="T"/>
+			<column name="EMP_TYP_CD" value="N"/>
+			<column name="ENTITY_AFLTN_ID" value="1137"/>
+			<column name="ENTITY_EMP_ID" value="1137"/>
+			<column name="ENTITY_ID" value="1137"/>
+			<column name="LAST_UPDT_DT" value="20080820184749"/>
+			<column name="OBJ_ID" value="54ECF3B7E0D77CDCE0404F8189D86ED9"/>
+			<column name="PRMRY_DEPT_CD" value="BL-IMU"/>
+			<column name="PRMRY_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

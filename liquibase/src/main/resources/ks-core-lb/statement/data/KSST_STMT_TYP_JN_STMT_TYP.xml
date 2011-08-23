@@ -1,0 +1,81 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_STMT_TYP_JN_STMT_TYP-initial-data" author="alubbers">
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.enrollmentEligibility"/>
+			<column name="ID" value="1"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+			<column name="ID" value="12"/>
+			<column name="SORT_ORDER" value="1"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+			<column name="ID" value="13"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+			<column name="ID" value="14"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+			<column name="ID" value="2"/>
+			<column name="SORT_ORDER" value="2"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.enrollmentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.coreq"/>
+			<column name="ID" value="3"/>
+			<column name="SORT_ORDER" value="3"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.enrollmentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.recommendedPreparation"/>
+			<column name="ID" value="4"/>
+			<column name="SORT_ORDER" value="4"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.enrollmentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+			<column name="ID" value="5"/>
+			<column name="SORT_ORDER" value="5"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.enrollmentEligibility"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.creditConstraints"/>
+			<column name="ID" value="6"/>
+			<column name="SORT_ORDER" value="6"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.credit.restriction"/>
+			<column name="ID" value="7"/>
+			<column name="SORT_ORDER" value="7"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.creditConstraints"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSST_STMT_TYP_JN_STMT_TYP">
+			<column name="CHLD_STMT_TYPE_ID" value="kuali.statement.type.course.credit.repeatable"/>
+			<column name="ID" value="8"/>
+			<column name="SORT_ORDER" value="8"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.creditConstraints"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

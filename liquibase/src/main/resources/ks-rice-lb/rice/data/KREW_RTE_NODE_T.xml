@@ -1,0 +1,434 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RTE_NODE_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2011"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="placeholder"/>
+			<column name="RTE_NODE_ID" value="2004"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2012"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="placeholder"/>
+			<column name="RTE_NODE_ID" value="2006"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="FNL_APRVR_IND" value="1"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Adhoc Routing"/>
+			<column name="RTE_NODE_ID" value="2039"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Initiated"/>
+			<column name="RTE_NODE_ID" value="2041"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="ReviewersNode"/>
+			<column name="RTE_MTHD_CD" value="FR"/>
+			<column name="RTE_MTHD_NM" value="ReviewersRouting"/>
+			<column name="RTE_NODE_ID" value="2042"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RequestsNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="RequestsNode"/>
+			<column name="RTE_MTHD_CD" value="FR"/>
+			<column name="RTE_MTHD_NM" value="NotificationRouting"/>
+			<column name="RTE_NODE_ID" value="2043"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RequestsNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2031"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Initiated"/>
+			<column name="RTE_NODE_ID" value="2061"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2032"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Initiated"/>
+			<column name="RTE_NODE_ID" value="2063"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2033"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Initiated"/>
+			<column name="RTE_NODE_ID" value="2065"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2034"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Initiated"/>
+			<column name="RTE_NODE_ID" value="2067"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2680"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="PreRoute"/>
+			<column name="RTE_NODE_ID" value="2840"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2995"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="AdHoc"/>
+			<column name="RTE_NODE_ID" value="2898"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2995"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="RoleType"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2899"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2996"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="AdHoc"/>
+			<column name="RTE_NODE_ID" value="2901"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2996"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="GroupType"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2902"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2997"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="AdHoc"/>
+			<column name="RTE_NODE_ID" value="2904"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2997"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="GroupType"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2905"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="2997"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="RoleType"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2906"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2998"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="AdHoc"/>
+			<column name="RTE_NODE_ID" value="2908"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="2999"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="AdHoc"/>
+			<column name="RTE_NODE_ID" value="2910"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3002"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="PreRoute"/>
+			<column name="RTE_NODE_ID" value="2912"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3002"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Department Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2913"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3002"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Publication Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2914"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="PreRoute"/>
+			<column name="RTE_NODE_ID" value="2936"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Department Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2937"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Division Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2938"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="College Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2939"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Senate Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2940"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Publication Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2941"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="PreRoute"/>
+			<column name="RTE_NODE_ID" value="2943"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Document Organization Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2944"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Publication Decision Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2945"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Department Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2946"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Division Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2947"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="College Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2948"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Senate Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2949"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Publication Review"/>
+			<column name="RTE_MTHD_CD" value="RM"/>
+			<column name="RTE_MTHD_NM" value="org.kuali.rice.kew.role.RoleRouteModule"/>
+			<column name="RTE_NODE_ID" value="2950"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.RoleNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="S"/>
+			<column name="DOC_TYP_ID" value="3009"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="AdHoc"/>
+			<column name="RTE_NODE_ID" value="2962"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="10"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

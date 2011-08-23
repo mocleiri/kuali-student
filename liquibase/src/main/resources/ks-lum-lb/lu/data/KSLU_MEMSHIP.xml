@@ -1,0 +1,34 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_MEMSHIP-initial-data" author="alubbers">
+		<insert tableName="KSLU_MEMSHIP">
+			<column name="ID" value="00cfbf51-4476-47b4-9cbd-e03f56bc5e24"/>
+			<column name="OBJ_ID" value="5fa65a70-272c-48d2-95cd-c6bf2ac4827e"/>
+			<column name="SEARCH_TYPE_KEY" value="lu.search.mostCurrent.union"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_MEMSHIP">
+			<column name="ID" value="29dc99e5-684b-4327-bdf4-9ee4af041b33"/>
+			<column name="OBJ_ID" value="7972ec6f-a475-4435-8c0a-0f5d3dc5cc1b"/>
+			<column name="SEARCH_TYPE_KEY" value="lu.search.mostCurrent.union"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_MEMSHIP">
+			<column name="ID" value="517e480c-67dc-48b5-80b1-43a6f935f793"/>
+			<column name="OBJ_ID" value="ae0a8ca1-c8af-4de7-ba7a-29c847d7b3cd"/>
+			<column name="SEARCH_TYPE_KEY" value="lu.search.mostCurrent.union"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_MEMSHIP">
+			<column name="ID" value="82fb2c63-70b7-45b4-8dbe-b4f8446ab353"/>
+			<column name="OBJ_ID" value="7194a4bf-89c2-4748-9daf-3a5027f7bac0"/>
+			<column name="SEARCH_TYPE_KEY" value="lu.search.mostCurrent.union"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_MEMSHIP">
+			<column name="ID" value="db6e05c3-9023-4092-aeff-a91be8a8d17a"/>
+			<column name="OBJ_ID" value="7ca1c415-c152-4369-b062-09de4f6b25bf"/>
+			<column name="SEARCH_TYPE_KEY" value="lu.search.mostCurrent.union"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

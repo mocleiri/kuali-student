@@ -1,0 +1,46 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_LUI_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="Associated"/>
+			<column name="TYPE_DESC" value="The first LUI is associated with the second LUI"/>
+			<column name="TYPE_KEY" value="kuali.lui.lui.relation.associated"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="Delivered Via"/>
+			<column name="TYPE_DESC" value="The first LUI is delivered via the the second LUI"/>
+			<column name="TYPE_KEY" value="kuali.lui.lui.relation.type.deliveredvia"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="Registered For Via"/>
+			<column name="TYPE_DESC" value="The second LUI is registered for by registering for the first LUI"/>
+			<column name="TYPE_KEY" value="kuali.lui.lui.relation.type.registeredforvia"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="Lab"/>
+			<column name="TYPE_DESC" value="Student working on projects in a defined laboratory space. Instructors are on-hand for students to ask questions and guidance"/>
+			<column name="TYPE_KEY" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="Lecture"/>
+			<column name="TYPE_DESC" value="Instructor presentation of course materials"/>
+			<column name="TYPE_KEY" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="Course Offering"/>
+			<column name="TYPE_DESC" value="An offering of a course for a particular term"/>
+			<column name="TYPE_KEY" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_TYPE">
+			<column name="NAME" value="registration Group"/>
+			<column name="TYPE_DESC" value="The collection of activity offerings of a single course that are grouped together for registration purposes"/>
+			<column name="TYPE_KEY" value="kuali.lui.type.registration.group"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

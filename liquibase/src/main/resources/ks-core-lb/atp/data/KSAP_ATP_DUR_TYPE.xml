@@ -1,0 +1,84 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSAP_ATP_DUR_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Four Years"/>
+			<column name="OBJ_ID" value="C096CD1873B8449D8BE43500BA409BB4"/>
+			<column name="TYPE_DESC" value="Four Year Program"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.FourYears"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Half  Semester"/>
+			<column name="OBJ_ID" value="9FC7830FFA9242CAA19DABE70ED55E8D"/>
+			<column name="TYPE_DESC" value="Half semester (8 weeks)"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.HalfSemester"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Mini-mester"/>
+			<column name="OBJ_ID" value="EA23D25BC73445E2BD8078D8470CCFD4"/>
+			<column name="TYPE_DESC" value="Very Short 3 week mini-mester used for Grad in Summer"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Mini-mester"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Period"/>
+			<column name="OBJ_ID" value="CF61B92769544DEAA0C9A9BA3198E187"/>
+			<column name="TYPE_DESC" value="Short one month term used for Winter Activities"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Period"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Semester"/>
+			<column name="OBJ_ID" value="D0AE0E8899A440CD938B2B1456F96829"/>
+			<column name="TYPE_DESC" value="Full 16 week semester used in fall and spring"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Semester"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Session"/>
+			<column name="OBJ_ID" value="A5519CD84117434597E53F23936F31BD"/>
+			<column name="TYPE_DESC" value="Short 6 week sessions used in summer"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Session"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="TBD"/>
+			<column name="OBJ_ID" value="68A3CB7919ED4C139148B430A3713CDC"/>
+			<column name="TYPE_DESC" value="Ad hoc period required for negotiated sessions"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.TBD"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Term"/>
+			<column name="OBJ_ID" value="BAD520382F18401F848AC1B670F2133E"/>
+			<column name="TYPE_DESC" value="12 week term used in the summer"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Term"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Week"/>
+			<column name="OBJ_ID" value="2DABD8E712274373906237B19735D8A8"/>
+			<column name="TYPE_DESC" value="1 week period"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Week"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_ATP_DUR_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Year"/>
+			<column name="OBJ_ID" value="65606AD8DF5A4BC3BB18E96526D20657"/>
+			<column name="TYPE_DESC" value="Full Year"/>
+			<column name="TYPE_KEY" value="kuali.atp.duration.Year"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

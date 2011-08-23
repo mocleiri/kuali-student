@@ -1,0 +1,284 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_RCTYP_JN_RCFLDTYP-initial-data" author="alubbers">
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.clu.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.all"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.completed.none"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.none"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.credits.completed.none"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.enrolled.all"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.enrolled.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.enrolled.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.gpa"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.grade.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.grade.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.grade.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.grade.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.credits.repeat.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.clu.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.enrolled"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.clu.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.notcompleted"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.org.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.org.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.permission.org.required"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.org.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.duration"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.org.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.duration"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.test.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.test.score.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.test.score"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.test.score.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.test.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.test.score.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.test.score"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.test.score.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.admitted.credits"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.duration"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.candidate.status.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.candidate.status.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.duration"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.completion.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.completion.duration"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.duration"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.completion.duration.afterentry"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.completion.duration.afterentry"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.credits.max"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.credits.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.gpa"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.cumulative.gpa.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.gpa"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.duration.gpa.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.durationType.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.duration.gpa.min"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.clu.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.enrolled.credits.final"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.enrolled.credits.final"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.minors.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.all"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.programset.completed.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.programset.coursecompleted.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.programset.coursecompleted.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.cluSet.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.programset.notcompleted.nof"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.program.clu.id"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.residence.credits.final"/>
+		</insert>
+		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
+			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
+			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.residence.credits.final"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

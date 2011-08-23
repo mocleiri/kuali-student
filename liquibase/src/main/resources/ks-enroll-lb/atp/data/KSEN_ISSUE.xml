@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_ISSUE-initial-data" author="alubbers">
+		<insert tableName="KSEN_ISSUE">
+			<column name="ID" value="Hold-Issue-1"/>
+			<column name="NAME" value="Issue one"/>
+			<column name="ORG_ID" value="102"/>
+			<column name="RT_DESCR_ID" value="Issue-1-Desc"/>
+			<column name="STATE_ID" value="kuali.hold.issue.state.active"/>
+			<column name="TYPE_ID" value="kuali.hold.issue.type.residency"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ISSUE">
+			<column name="ID" value="Hold-Issue-2"/>
+			<column name="NAME" value="Issue two"/>
+			<column name="ORG_ID" value="102"/>
+			<column name="RT_DESCR_ID" value="Issue-2-Desc"/>
+			<column name="STATE_ID" value="kuali.hold.issue.state.active"/>
+			<column name="TYPE_ID" value="kuali.hold.issue.type.residency"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

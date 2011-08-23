@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_EMAIL_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_EMAIL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="b"/>
+			<column name="EMAIL_TYP_CD" value="HM"/>
+			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="NM" value="Home"/>
+			<column name="OBJ_ID" value="5B97C50B03776110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMAIL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="c"/>
+			<column name="EMAIL_TYP_CD" value="OTH"/>
+			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="NM" value="Other"/>
+			<column name="OBJ_ID" value="5B97C50B03786110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_EMAIL_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="a"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="NM" value="Work"/>
+			<column name="OBJ_ID" value="5B97C50B03796110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,202 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ENTITY_EXT_ID_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4298"/>
+			<column name="ENTITY_ID" value="1100"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153567D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4299"/>
+			<column name="ENTITY_ID" value="1101"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153568D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4300"/>
+			<column name="ENTITY_ID" value="1102"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153569D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4301"/>
+			<column name="ENTITY_ID" value="1103"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15356AD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4302"/>
+			<column name="ENTITY_ID" value="1104"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15356BD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4303"/>
+			<column name="ENTITY_ID" value="1105"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15356CD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4304"/>
+			<column name="ENTITY_ID" value="1106"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15356DD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4305"/>
+			<column name="ENTITY_ID" value="1107"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15356ED022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4306"/>
+			<column name="ENTITY_ID" value="1108"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15356FD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4307"/>
+			<column name="ENTITY_ID" value="1109"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153570D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4308"/>
+			<column name="ENTITY_ID" value="1110"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153571D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4309"/>
+			<column name="ENTITY_ID" value="1111"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153572D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4310"/>
+			<column name="ENTITY_ID" value="1112"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153573D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4311"/>
+			<column name="ENTITY_ID" value="1113"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153574D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4312"/>
+			<column name="ENTITY_ID" value="1114"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153575D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4313"/>
+			<column name="ENTITY_ID" value="1115"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153576D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4314"/>
+			<column name="ENTITY_ID" value="1117"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153577D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4315"/>
+			<column name="ENTITY_ID" value="1122"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153578D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4316"/>
+			<column name="ENTITY_ID" value="1123"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E153579D022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4317"/>
+			<column name="ENTITY_ID" value="1124"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15357AD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4318"/>
+			<column name="ENTITY_ID" value="1125"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15357BD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EXT_ID_T">
+			<column name="ENTITY_EXT_ID_ID" value="4319"/>
+			<column name="ENTITY_ID" value="1137"/>
+			<column name="EXT_ID" value="XBy8HbA0p2kc3lalnjPKpA=="/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20090519221122"/>
+			<column name="OBJ_ID" value="6A4F5E15357CD022E0404F8189D863FE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

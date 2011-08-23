@@ -1,0 +1,508 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRLC_ST_T-initial-data" author="alubbers">
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A06661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="--"/>
+			<column name="POSTAL_STATE_NM" value="OUT OF COUNTRY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A3B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AA"/>
+			<column name="POSTAL_STATE_NM" value="ARMED FORCES AMERICAS (EXCEPT CANADA)"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A3C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AE"/>
+			<column name="POSTAL_STATE_NM" value="ARMED FORCES EURO/CANADA/AFRICA/MID EAST"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A07661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AK"/>
+			<column name="POSTAL_STATE_NM" value="ALASKA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A08661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AL"/>
+			<column name="POSTAL_STATE_NM" value="ALABAMA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A3D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AP"/>
+			<column name="POSTAL_STATE_NM" value="ARMED FORCES PACIFIC"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A09661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AR"/>
+			<column name="POSTAL_STATE_NM" value="ARKANSAS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A3E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AS"/>
+			<column name="POSTAL_STATE_NM" value="AMERICAN SAMOA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A0A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="AZ"/>
+			<column name="POSTAL_STATE_NM" value="ARIZONA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A0B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="CA"/>
+			<column name="POSTAL_STATE_NM" value="CALIFORNIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A0C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="CO"/>
+			<column name="POSTAL_STATE_NM" value="COLORADO"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A0D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="CT"/>
+			<column name="POSTAL_STATE_NM" value="CONNECTICUT"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A0E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="DC"/>
+			<column name="POSTAL_STATE_NM" value="DISTRICT OF COLUMBIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A0F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="DE"/>
+			<column name="POSTAL_STATE_NM" value="DELAWARE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A10661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="FL"/>
+			<column name="POSTAL_STATE_NM" value="FLORIDA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A3F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="FM"/>
+			<column name="POSTAL_STATE_NM" value="FEDERATED STATES OF MICRONESIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A11661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="GA"/>
+			<column name="POSTAL_STATE_NM" value="GEORGIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A40661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="GU"/>
+			<column name="POSTAL_STATE_NM" value="GUAM"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A12661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="HI"/>
+			<column name="POSTAL_STATE_NM" value="HAWAII"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A13661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="IA"/>
+			<column name="POSTAL_STATE_NM" value="IOWA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A14661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="ID"/>
+			<column name="POSTAL_STATE_NM" value="IDAHO"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A15661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="IL"/>
+			<column name="POSTAL_STATE_NM" value="ILLINOIS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A16661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="IN"/>
+			<column name="POSTAL_STATE_NM" value="INDIANA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A17661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="KS"/>
+			<column name="POSTAL_STATE_NM" value="KANSAS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A18661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="KY"/>
+			<column name="POSTAL_STATE_NM" value="KENTUCKY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A19661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="LA"/>
+			<column name="POSTAL_STATE_NM" value="LOUISIANA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A1A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MA"/>
+			<column name="POSTAL_STATE_NM" value="MASSACHUSETTS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A1B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MD"/>
+			<column name="POSTAL_STATE_NM" value="MARYLAND"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A1C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="ME"/>
+			<column name="POSTAL_STATE_NM" value="MAINE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A41661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MH"/>
+			<column name="POSTAL_STATE_NM" value="MARSHALL ISLANDS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A1D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MI"/>
+			<column name="POSTAL_STATE_NM" value="MICHIGAN"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A1E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MN"/>
+			<column name="POSTAL_STATE_NM" value="MINNESOTA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A1F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MO"/>
+			<column name="POSTAL_STATE_NM" value="MISSOURI"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A42661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MP"/>
+			<column name="POSTAL_STATE_NM" value="NORTHERN MARIANA ISLANDS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A20661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MS"/>
+			<column name="POSTAL_STATE_NM" value="MISSISSIPPI"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A21661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="MT"/>
+			<column name="POSTAL_STATE_NM" value="MONTANA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A22661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NC"/>
+			<column name="POSTAL_STATE_NM" value="NORTH CAROLINA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A23661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="ND"/>
+			<column name="POSTAL_STATE_NM" value="NORTH DAKOTA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A24661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NE"/>
+			<column name="POSTAL_STATE_NM" value="NEBRASKA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A25661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NH"/>
+			<column name="POSTAL_STATE_NM" value="NEW HAMPSHIRE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A26661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NJ"/>
+			<column name="POSTAL_STATE_NM" value="NEW JERSEY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A27661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NM"/>
+			<column name="POSTAL_STATE_NM" value="NEW MEXICO"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A28661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NV"/>
+			<column name="POSTAL_STATE_NM" value="NEVADA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A29661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="NY"/>
+			<column name="POSTAL_STATE_NM" value="NEW YORK"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A2A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="OH"/>
+			<column name="POSTAL_STATE_NM" value="OHIO"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A2B661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="OK"/>
+			<column name="POSTAL_STATE_NM" value="OKLAHOMA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A2C661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="OR"/>
+			<column name="POSTAL_STATE_NM" value="OREGON"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A2D661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="PA"/>
+			<column name="POSTAL_STATE_NM" value="PENNSYLVANIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A2E661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="PR"/>
+			<column name="POSTAL_STATE_NM" value="PUERTO RICO"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A43661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="PW"/>
+			<column name="POSTAL_STATE_NM" value="PALAU"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A2F661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="RI"/>
+			<column name="POSTAL_STATE_NM" value="RHODE ISLAND"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A30661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="SC"/>
+			<column name="POSTAL_STATE_NM" value="SOUTH CAROLINA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A31661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="SD"/>
+			<column name="POSTAL_STATE_NM" value="SOUTH DAKOTA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A32661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="TN"/>
+			<column name="POSTAL_STATE_NM" value="TENNESSEE"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A33661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="TX"/>
+			<column name="POSTAL_STATE_NM" value="TEXAS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A34661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="UT"/>
+			<column name="POSTAL_STATE_NM" value="UTAH"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A35661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="VA"/>
+			<column name="POSTAL_STATE_NM" value="VIRGINIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A44661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="VI"/>
+			<column name="POSTAL_STATE_NM" value="VIRGIN ISLANDS"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A36661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="VT"/>
+			<column name="POSTAL_STATE_NM" value="VERMONT"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A37661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="WA"/>
+			<column name="POSTAL_STATE_NM" value="WASHINGTON"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A38661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="WI"/>
+			<column name="POSTAL_STATE_NM" value="WISCONSIN"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A39661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="WV"/>
+			<column name="POSTAL_STATE_NM" value="WEST VIRGINIA"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRLC_ST_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="OBJ_ID" value="56908AA37A3A661BE0404F8189D81F46"/>
+			<column name="POSTAL_CNTRY_CD" value="US"/>
+			<column name="POSTAL_STATE_CD" value="WY"/>
+			<column name="POSTAL_STATE_NM" value="WYOMING"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,40 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_RULE_TMPL_T-initial-data" author="alubbers">
+		<insert tableName="KREW_RULE_TMPL_T">
+			<column name="NM" value="WorkflowDocumentDelegationTemplate"/>
+			<column name="OBJ_ID" value="6166CBA1BA86644DE0404F8189D86C09"/>
+			<column name="RULE_TMPL_DESC" value="WorkflowDocumentDelegationTemplate"/>
+			<column name="RULE_TMPL_ID" value="1015"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_T">
+			<column name="DLGN_RULE_TMPL_ID" value="1015"/>
+			<column name="NM" value="WorkflowDocumentTemplate"/>
+			<column name="OBJ_ID" value="6166CBA1BA87644DE0404F8189D86C09"/>
+			<column name="RULE_TMPL_DESC" value="Workflow Document Template"/>
+			<column name="RULE_TMPL_ID" value="1016"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_T">
+			<column name="NM" value="ReviewersRouting"/>
+			<column name="OBJ_ID" value="6166CBA1BA8C644DE0404F8189D86C09"/>
+			<column name="RULE_TMPL_DESC" value="Routes to channel reviewers"/>
+			<column name="RULE_TMPL_ID" value="1023"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_T">
+			<column name="NM" value="NotificationRouting"/>
+			<column name="OBJ_ID" value="6166CBA1BA8D644DE0404F8189D86C09"/>
+			<column name="RULE_TMPL_DESC" value="The standard rule template for sending notification messages."/>
+			<column name="RULE_TMPL_ID" value="1025"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_RULE_TMPL_T">
+			<column name="NM" value="RuleRoutingTemplate"/>
+			<column name="OBJ_ID" value="6166CBA1BA96644DE0404F8189D86C09"/>
+			<column name="RULE_TMPL_DESC" value="RuleRoutingTemplate"/>
+			<column name="RULE_TMPL_ID" value="1320"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

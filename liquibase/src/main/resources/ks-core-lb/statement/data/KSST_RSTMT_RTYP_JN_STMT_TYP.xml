@@ -1,0 +1,44 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSST_RSTMT_RTYP_JN_STMT_TYP-initial-data" author="alubbers">
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.antirequisites"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.corequisites"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.coreq"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.prerequisites"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.prereq"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.eligibilitiesandprerequisites"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.credit.repeatable"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.credit.repeatable"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.credit.restriction"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.credit.restriction"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.recommendedpreparation"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.course.recommendedPreparation"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.completion"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.completion"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.entrance"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.entrance"/>
+		</insert>
+		<insert tableName="KSST_RSTMT_RTYP_JN_STMT_TYP">
+			<column name="REF_STMT_REL_TYPE_ID" value="clu.satisfactoryprogress"/>
+			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

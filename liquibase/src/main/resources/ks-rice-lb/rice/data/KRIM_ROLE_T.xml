@@ -1,0 +1,528 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ROLE_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from the users in the Principal table. This role gives users high-level permissions to interact with RICE documents and to login to KUALI."/>
+			<column name="KIM_TYP_ID" value="2"/>
+			<column name="LAST_UPDT_DT" value="20081104143710"/>
+			<column name="NMSPC_CD" value="KUALI"/>
+			<column name="OBJ_ID" value="5ADF18B6D4847954E0404F8189D85002"/>
+			<column name="ROLE_ID" value="1"/>
+			<column name="ROLE_NM" value="User"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role is for use with administrative privilege for Organization"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20090821035258"/>
+			<column name="NMSPC_CD" value="KS_SYS"/>
+			<column name="OBJ_ID" value="27C403CC-3188-DF45-795D-2D6CC1DB0BDA"/>
+			<column name="ROLE_ID" value="10000"/>
+			<column name="ROLE_NM" value="Kuali Student Admin"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role is for use with all access permission for Organization with attached qualifiers"/>
+			<column name="KIM_TYP_ID" value="114"/>
+			<column name="LAST_UPDT_DT" value="20090821035258"/>
+			<column name="NMSPC_CD" value="KS_SYS"/>
+			<column name="OBJ_ID" value="FF497D87-0831-5C09-63ED-780565803526"/>
+			<column name="ROLE_ID" value="10001"/>
+			<column name="ROLE_NM" value="Kuali Orgainzation Maintenance"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role is for use with permission to add memberships to an Organization"/>
+			<column name="KIM_TYP_ID" value="114"/>
+			<column name="LAST_UPDT_DT" value="20090821035258"/>
+			<column name="NMSPC_CD" value="KS_SYS"/>
+			<column name="OBJ_ID" value="89AA5AFF-4891-ADAA-FBE0-5D8CC7DCBA0F"/>
+			<column name="ROLE_ID" value="10002"/>
+			<column name="ROLE_NM" value="Kuali Orgainzation Membership"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with that have received an action request for a given document."/>
+			<column name="KIM_TYP_ID" value="42"/>
+			<column name="LAST_UPDT_DT" value="20081114141017"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5BABFACC4F62A8EEE0404F8189D8770F"/>
+			<column name="ROLE_ID" value="59"/>
+			<column name="ROLE_NM" value="Approve Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from the initiator listed within the route log of a given document."/>
+			<column name="KIM_TYP_ID" value="43"/>
+			<column name="LAST_UPDT_DT" value="20081114141017"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5BABFACC4F63A8EEE0404F8189D8770F"/>
+			<column name="ROLE_ID" value="60"/>
+			<column name="ROLE_NM" value="Initiator"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from the initiator and action request recipients listed within the route log of a given document."/>
+			<column name="KIM_TYP_ID" value="43"/>
+			<column name="LAST_UPDT_DT" value="20081114141017"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5BABFACC4F64A8EEE0404F8189D8770F"/>
+			<column name="ROLE_ID" value="61"/>
+			<column name="ROLE_NM" value="Initiator or Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role can take superuser actions and blanket approve RICE documents as well as being able to modify and assign permissions, responsibilities and roles belonging to the KR namespaces."/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20081108115522"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5B31640F0105ADF1E0404F8189D84647"/>
+			<column name="ROLE_ID" value="63"/>
+			<column name="ROLE_NM" value="Technical Administrator"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with the Edit Document permission for a given document type.,"/>
+			<column name="KIM_TYP_ID" value="45"/>
+			<column name="LAST_UPDT_DT" value="20081114141017"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5BABFACC4F61A8EEE0404F8189D8770F"/>
+			<column name="ROLE_ID" value="66"/>
+			<column name="ROLE_NM" value="Document Editor"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from the user who took the Complete action on a given document."/>
+			<column name="KIM_TYP_ID" value="43"/>
+			<column name="LAST_UPDT_DT" value="20081114141017"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5BABFACC4F65A8EEE0404F8189D8770F"/>
+			<column name="ROLE_ID" value="67"/>
+			<column name="ROLE_NM" value="Router"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with the Open Document permission for a given document type.,"/>
+			<column name="KIM_TYP_ID" value="60"/>
+			<column name="LAST_UPDT_DT" value="20090113192616"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="606763510FBF96D3E0404F8189D857A2"/>
+			<column name="ROLE_ID" value="83"/>
+			<column name="ROLE_NM" value="Document Opener"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with an acknowledge action request in the route log of a given document."/>
+			<column name="KIM_TYP_ID" value="42"/>
+			<column name="LAST_UPDT_DT" value="20090121130202"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="6102F3FA08CE45CFE0404F8189D8317E"/>
+			<column name="ROLE_ID" value="88"/>
+			<column name="ROLE_NM" value="Acknowledge Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with an FYI action request in the route log of a given document."/>
+			<column name="KIM_TYP_ID" value="42"/>
+			<column name="LAST_UPDT_DT" value="20090121130203"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="6102F3FA08CF45CFE0404F8189D8317E"/>
+			<column name="ROLE_ID" value="89"/>
+			<column name="ROLE_NM" value="FYI Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARUUUNTADMINREVIEWER00000ROLE"/>
+			<column name="ROLE_ID" value="899"/>
+			<column name="ROLE_NM" value="Student System User Role"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role represents the KR System User, that is the user ID RICE uses when it takes programmed actions."/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20090806170249"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="61815E6C62D0B647E0404F8189D873B3"/>
+			<column name="ROLE_ID" value="90"/>
+			<column name="ROLE_NM" value="System User"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="102"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DEPARTMENTADMINREVIEWER00000ROLE"/>
+			<column name="ROLE_ID" value="900"/>
+			<column name="ROLE_NM" value="Department Admin Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="103"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DIVISIONADMINREVIEWER0000000ROLE"/>
+			<column name="ROLE_ID" value="901"/>
+			<column name="ROLE_NM" value="Division Admin Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="103"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DIVISIONCOMMITTEEREVIEWER000ROLE"/>
+			<column name="ROLE_ID" value="902"/>
+			<column name="ROLE_NM" value="Division Committee Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="101"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="COLLEGEADMINREVIEWER00000000ROLE"/>
+			<column name="ROLE_ID" value="905"/>
+			<column name="ROLE_NM" value="College Admin Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="101"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="COLLEGECOMMITTEEREVIEWER0000ROLE"/>
+			<column name="ROLE_ID" value="906"/>
+			<column name="ROLE_NM" value="College Committee Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="SENATEADMINREVIEWER000000000ROLE"/>
+			<column name="ROLE_ID" value="907"/>
+			<column name="ROLE_NM" value="Senate Admin Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="SENATECOMMITTEEREVIEWER00000ROLE"/>
+			<column name="ROLE_ID" value="908"/>
+			<column name="ROLE_NM" value="Senate Committee Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="PUBLICATIONREVIEWER000000000ROLE"/>
+			<column name="ROLE_ID" value="909"/>
+			<column name="ROLE_NM" value="Publication Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="107"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="OrgAdminReviewer000000000000ROLE"/>
+			<column name="ROLE_ID" value="910"/>
+			<column name="ROLE_NM" value="Org Admin Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="108"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="OrgCommitteeReviewer00000000ROLE"/>
+			<column name="ROLE_ID" value="911"/>
+			<column name="ROLE_NM" value="Org Committee Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="109"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTFDMINREVIEWER00000ROLE"/>
+			<column name="ROLE_ID" value="912"/>
+			<column name="ROLE_NM" value="Approve Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="109"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTGDMINREVIEWER0070ROLE"/>
+			<column name="ROLE_ID" value="913"/>
+			<column name="ROLE_NM" value="Acknowledge Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="109"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTHDMINREVIEWER00060ROLE"/>
+			<column name="ROLE_ID" value="914"/>
+			<column name="ROLE_NM" value="FYI Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="110"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTRDMINREVIEWER00800ROLE"/>
+			<column name="ROLE_ID" value="915"/>
+			<column name="ROLE_NM" value="Initiator or Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="110"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPAQWEENTWDMINREVIEWER00900ROLE"/>
+			<column name="ROLE_ID" value="916"/>
+			<column name="ROLE_NM" value="Router"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="102"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DEPARTMENTCOMITREVIEWER00000ROLE"/>
+			<column name="ROLE_ID" value="917"/>
+			<column name="ROLE_NM" value="Department Committee Reviewer"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="111"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEqARTMENT5DMINREVIEWER10330ROLE"/>
+			<column name="ROLE_ID" value="918"/>
+			<column name="ROLE_NM" value="Permission: KS-SYS Edit Document"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="112"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENT5DMIqREVIEWER13400ROLE"/>
+			<column name="ROLE_ID" value="919"/>
+			<column name="ROLE_NM" value="Permission: KS-SYS Comment on Document"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20091216111952"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTWDMINREVIEWER20000ROLE"/>
+			<column name="ROLE_ID" value="920"/>
+			<column name="ROLE_NM" value="Global Field Editor"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20091216111952"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMANTWDMINREVIEWER20000ROLE"/>
+			<column name="ROLE_ID" value="921"/>
+			<column name="ROLE_NM" value="Title/Description Field Editor"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="113"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMEN294DMI342VIEWER050000RO"/>
+			<column name="ROLE_ID" value="922"/>
+			<column name="ROLE_NM" value="Adhoc Approve Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="113"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEP295ENTGDMINREVIEWER00040ROLE"/>
+			<column name="ROLE_ID" value="923"/>
+			<column name="ROLE_NM" value="Adhoc Acknowledge Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="113"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMEN832MINREVIEWER00300ROE"/>
+			<column name="ROLE_ID" value="924"/>
+			<column name="ROLE_NM" value="Adhoc FYI Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="114"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="1234RTMENTAD8INREVIEWER00000ROLE"/>
+			<column name="ROLE_ID" value="925"/>
+			<column name="ROLE_NM" value="Organization Role"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="Role to find users who have an Approve action request that had been active and is now complete."/>
+			<column name="KIM_TYP_ID" value="115"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTFDMINREVIEWEEDC000ROLE"/>
+			<column name="ROLE_ID" value="926"/>
+			<column name="ROLE_NM" value="Completed Approve Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="Role to find users who have an Acknowledge action request that had been active and is now complete."/>
+			<column name="KIM_TYP_ID" value="115"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTGDMWSXEVIEWER0070ROLE"/>
+			<column name="ROLE_ID" value="927"/>
+			<column name="ROLE_NM" value="Completed Acknowledge Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="Role to find users who have an FYI action request that had been active and is now complete."/>
+			<column name="KIM_TYP_ID" value="115"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMENTHDMINQAZIEWER00060ROLE"/>
+			<column name="ROLE_ID" value="928"/>
+			<column name="ROLE_NM" value="Completed FYI Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role is for use with adding adhoc permissions for those who can edit a document."/>
+			<column name="KIM_TYP_ID" value="130"/>
+			<column name="LAST_UPDT_DT" value="20090821035258"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARUUUNTADMINREVIEWER000001234"/>
+			<column name="ROLE_ID" value="930"/>
+			<column name="ROLE_NM" value="Adhoc Permissions: Edit Document"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role is for use with adding adhoc permissions for those who can comment on a document."/>
+			<column name="KIM_TYP_ID" value="130"/>
+			<column name="LAST_UPDT_DT" value="20090821035258"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARUUUNTADMINREVIEWER000001235"/>
+			<column name="ROLE_ID" value="931"/>
+			<column name="ROLE_NM" value="Adhoc Permissions: Comment on Document"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="Role to find users who have an Adhoc Approve action request that had been active and is now complete."/>
+			<column name="KIM_TYP_ID" value="116"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMEN294DMI342VIEWQAZ50000RO"/>
+			<column name="ROLE_ID" value="932"/>
+			<column name="ROLE_NM" value="Completed Adhoc Approve Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="Role to find users who have an Adhoc Acknowledge action request that had been active and is now complete."/>
+			<column name="KIM_TYP_ID" value="116"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEP295ENRFVMINREVIEWER00040ROLE"/>
+			<column name="ROLE_ID" value="933"/>
+			<column name="ROLE_NM" value="Completed Adhoc Acknowledge Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="Role to find users who have an Adhoc FYI action request that had been active and is now complete."/>
+			<column name="KIM_TYP_ID" value="116"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPAWSXEN832MINREVIEWER00300ROE"/>
+			<column name="ROLE_ID" value="934"/>
+			<column name="ROLE_NM" value="Completed Adhoc FYI Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="KIM_TYP_ID" value="110"/>
+			<column name="LAST_UPDT_DT" value="20091130171546"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTQAZTRDMINREVIEWER00800ROLE"/>
+			<column name="ROLE_ID" value="935"/>
+			<column name="ROLE_NM" value="Initiator"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with the Initiate Document permission for a given document type."/>
+			<column name="KIM_TYP_ID" value="66"/>
+			<column name="LAST_UPDT_DT" value="20090806170249"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="67F145466E8B9160E0404F8189D86771"/>
+			<column name="ROLE_ID" value="95"/>
+			<column name="ROLE_NM" value="Document Initiator"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DESC_TXT" value="This role derives its members from users with an Approval action request (that was not generated via the ad-hoc recipients tab) in the route log of a given document."/>
+			<column name="KIM_TYP_ID" value="42"/>
+			<column name="LAST_UPDT_DT" value="20090806170249"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="67F145466EB09160E0404F8189D86771"/>
+			<column name="ROLE_ID" value="97"/>
+			<column name="ROLE_NM" value="Non-Ad Hoc Approve Request Recipient"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

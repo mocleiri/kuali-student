@@ -1,0 +1,148 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_DOC_TYP_PROC_T-initial-data" author="alubbers">
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2011"/>
+			<column name="DOC_TYP_PROC_ID" value="2005"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2004"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2012"/>
+			<column name="DOC_TYP_PROC_ID" value="2007"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2006"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2023"/>
+			<column name="DOC_TYP_PROC_ID" value="2040"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2039"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="DOC_TYP_PROC_ID" value="2044"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2041"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2031"/>
+			<column name="DOC_TYP_PROC_ID" value="2062"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2061"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2032"/>
+			<column name="DOC_TYP_PROC_ID" value="2064"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2063"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2033"/>
+			<column name="DOC_TYP_PROC_ID" value="2066"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2065"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2034"/>
+			<column name="DOC_TYP_PROC_ID" value="2068"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2067"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2680"/>
+			<column name="DOC_TYP_PROC_ID" value="2841"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2840"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2995"/>
+			<column name="DOC_TYP_PROC_ID" value="2900"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2898"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2996"/>
+			<column name="DOC_TYP_PROC_ID" value="2903"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2901"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2997"/>
+			<column name="DOC_TYP_PROC_ID" value="2907"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2904"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2998"/>
+			<column name="DOC_TYP_PROC_ID" value="2909"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2908"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="2999"/>
+			<column name="DOC_TYP_PROC_ID" value="2911"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2910"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="3002"/>
+			<column name="DOC_TYP_PROC_ID" value="2915"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2912"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="3004"/>
+			<column name="DOC_TYP_PROC_ID" value="2942"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2936"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="3003"/>
+			<column name="DOC_TYP_PROC_ID" value="2951"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2943"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="3009"/>
+			<column name="DOC_TYP_PROC_ID" value="2963"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2962"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="10"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

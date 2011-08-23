@@ -1,0 +1,448 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ENTITY_EMAIL_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1200"/>
+			<column name="ENTITY_ID" value="1100"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140655"/>
+			<column name="OBJ_ID" value="5B97C50B04066110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1201"/>
+			<column name="ENTITY_ID" value="1101"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140656"/>
+			<column name="OBJ_ID" value="5B97C50B04076110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1202"/>
+			<column name="ENTITY_ID" value="1102"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140656"/>
+			<column name="OBJ_ID" value="5B97C50B04086110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1203"/>
+			<column name="ENTITY_ID" value="1103"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140656"/>
+			<column name="OBJ_ID" value="5B97C50B04096110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1204"/>
+			<column name="ENTITY_ID" value="1104"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140656"/>
+			<column name="OBJ_ID" value="5B97C50B040A6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1205"/>
+			<column name="ENTITY_ID" value="1105"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140656"/>
+			<column name="OBJ_ID" value="5B97C50B040B6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1206"/>
+			<column name="ENTITY_ID" value="1106"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140656"/>
+			<column name="OBJ_ID" value="5B97C50B040C6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1207"/>
+			<column name="ENTITY_ID" value="1107"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140657"/>
+			<column name="OBJ_ID" value="5B97C50B040D6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1208"/>
+			<column name="ENTITY_ID" value="1108"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140657"/>
+			<column name="OBJ_ID" value="5B97C50B040E6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1209"/>
+			<column name="ENTITY_ID" value="1109"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140657"/>
+			<column name="OBJ_ID" value="5B97C50B040F6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1210"/>
+			<column name="ENTITY_ID" value="1110"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140657"/>
+			<column name="OBJ_ID" value="5B97C50B04106110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1211"/>
+			<column name="ENTITY_ID" value="1111"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140657"/>
+			<column name="OBJ_ID" value="5B97C50B04116110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1212"/>
+			<column name="ENTITY_ID" value="1112"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140657"/>
+			<column name="OBJ_ID" value="5B97C50B04126110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1213"/>
+			<column name="ENTITY_ID" value="1113"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140658"/>
+			<column name="OBJ_ID" value="5B97C50B04136110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1214"/>
+			<column name="ENTITY_ID" value="1114"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140658"/>
+			<column name="OBJ_ID" value="5B97C50B04146110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1215"/>
+			<column name="ENTITY_ID" value="1115"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140658"/>
+			<column name="OBJ_ID" value="5B97C50B04156110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1216"/>
+			<column name="ENTITY_ID" value="1116"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140658"/>
+			<column name="OBJ_ID" value="5B97C50B04166110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1217"/>
+			<column name="ENTITY_ID" value="1117"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140658"/>
+			<column name="OBJ_ID" value="5B97C50B04176110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1218"/>
+			<column name="ENTITY_ID" value="1118"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140658"/>
+			<column name="OBJ_ID" value="5B97C50B04186110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1219"/>
+			<column name="ENTITY_ID" value="1119"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B04196110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1220"/>
+			<column name="ENTITY_ID" value="1120"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B041A6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1221"/>
+			<column name="ENTITY_ID" value="1121"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B041B6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1222"/>
+			<column name="ENTITY_ID" value="1122"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B041C6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1223"/>
+			<column name="ENTITY_ID" value="1123"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B041D6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1224"/>
+			<column name="ENTITY_ID" value="1124"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B041E6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1225"/>
+			<column name="ENTITY_ID" value="1125"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140659"/>
+			<column name="OBJ_ID" value="5B97C50B041F6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1226"/>
+			<column name="ENTITY_ID" value="1126"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140700"/>
+			<column name="OBJ_ID" value="5B97C50B04206110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1227"/>
+			<column name="ENTITY_ID" value="1127"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140700"/>
+			<column name="OBJ_ID" value="5B97C50B04216110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1228"/>
+			<column name="ENTITY_ID" value="1128"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140700"/>
+			<column name="OBJ_ID" value="5B97C50B04226110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1229"/>
+			<column name="ENTITY_ID" value="1129"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140700"/>
+			<column name="OBJ_ID" value="5B97C50B04236110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1230"/>
+			<column name="ENTITY_ID" value="1130"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140700"/>
+			<column name="OBJ_ID" value="5B97C50B04246110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1231"/>
+			<column name="ENTITY_ID" value="1131"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140700"/>
+			<column name="OBJ_ID" value="5B97C50B04256110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1232"/>
+			<column name="ENTITY_ID" value="1132"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140701"/>
+			<column name="OBJ_ID" value="5B97C50B04266110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1233"/>
+			<column name="ENTITY_ID" value="1133"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140701"/>
+			<column name="OBJ_ID" value="5B97C50B04276110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1234"/>
+			<column name="ENTITY_ID" value="1134"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140701"/>
+			<column name="OBJ_ID" value="5B97C50B04286110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1235"/>
+			<column name="ENTITY_ID" value="1135"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140701"/>
+			<column name="OBJ_ID" value="5B97C50B04296110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_EMAIL_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DFLT_IND" value="Y"/>
+			<column name="EMAIL_ADDR" value="test@email.edu"/>
+			<column name="EMAIL_TYP_CD" value="WRK"/>
+			<column name="ENTITY_EMAIL_ID" value="1237"/>
+			<column name="ENTITY_ID" value="1137"/>
+			<column name="ENT_TYP_CD" value="PERSON"/>
+			<column name="LAST_UPDT_DT" value="20081113140701"/>
+			<column name="OBJ_ID" value="5B97C50B042B6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

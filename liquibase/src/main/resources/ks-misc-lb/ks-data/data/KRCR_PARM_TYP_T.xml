@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRCR_PARM_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRCR_PARM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Authorization"/>
+			<column name="OBJ_ID" value="53680C68F593AD9BE0404F8189D80A6C"/>
+			<column name="PARM_TYP_CD" value="AUTH"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Config"/>
+			<column name="OBJ_ID" value="53680C68F591AD9BE0404F8189D80A6C"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Help"/>
+			<column name="OBJ_ID" value="53680C68F594AD9BE0404F8189D80A6C"/>
+			<column name="PARM_TYP_CD" value="HELP"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="NM" value="Document Validation"/>
+			<column name="OBJ_ID" value="53680C68F592AD9BE0404F8189D80A6C"/>
+			<column name="PARM_TYP_CD" value="VALID"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

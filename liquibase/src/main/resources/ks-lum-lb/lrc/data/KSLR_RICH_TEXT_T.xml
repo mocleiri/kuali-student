@@ -1,0 +1,70 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLR_RICH_TEXT_T-initial-data" author="alubbers">
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="DEGREE-BA"/>
+			<column name="OBJ_ID" value="58CB0A4EC9BE4729A64BBBA1E084E7A5"/>
+			<column name="PLAIN" value="Bachelor of Arts (BA)"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="DEGREE-BMUS"/>
+			<column name="OBJ_ID" value="97B0128021354869808F39506F78C7C2"/>
+			<column name="PLAIN" value="Bachelor of Music (BSc)"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="DEGREE-BSC"/>
+			<column name="OBJ_ID" value="EA44C252B08F4B0E9C8AFC33627CF870"/>
+			<column name="PLAIN" value="Bachelor of Science (BSc)"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-100"/>
+			<column name="OBJ_ID" value="9A6A74BCDFD6415E841A40D5B9D2CE15"/>
+			<column name="PLAIN" value="Letter, satisfactory"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-101"/>
+			<column name="OBJ_ID" value="2D76017D7DF6457F990CB984AA54D8B7"/>
+			<column name="PLAIN" value="This course will have a student selectable pass/fail option"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-102"/>
+			<column name="OBJ_ID" value="D1DEE502F18C49FBB3B9C22FD7E8ADB0"/>
+			<column name="PLAIN" value="Percentage"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-103"/>
+			<column name="OBJ_ID" value="24B47A20936346D195F3AB0C77073823"/>
+			<column name="PLAIN" value="Recital review"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-104"/>
+			<column name="OBJ_ID" value="A4E3919B5D8548F19BE68436D71AEB24"/>
+			<column name="PLAIN" value="Design review"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-105"/>
+			<column name="OBJ_ID" value="2FE46EBE450B4AF090C68D4E9CA3EC64"/>
+			<column name="PLAIN" value="Completed notation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-106"/>
+			<column name="OBJ_ID" value="EA7AE91915174A30B3FA2B93C2593954"/>
+			<column name="PLAIN" value="This course can be audited"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLR_RICH_TEXT_T">
+			<column name="ID" value="RICHTEXT-LRC-RC-107"/>
+			<column name="OBJ_ID" value="FADE991246E446DD97DAC0E03D0652A6"/>
+			<column name="PLAIN" value="Satisfactory/unsatisfactory"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

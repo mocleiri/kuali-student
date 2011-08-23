@@ -1,0 +1,1183 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_PERM_ATTR_DATA_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="181"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.kew.documentoperation.web.DocumentOperationAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A25EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="140"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="183"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.ksb.security.admin.web.JavaSecurityManagementAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A27EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="141"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="185"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.ksb.messaging.web.MessageQueueAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A29EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="142"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="187"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.ksb.messaging.web.ServiceRegistryAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A2BEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="143"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="189"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.ksb.messaging.web.ThreadPoolAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A2DEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="144"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="191"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.ksb.messaging.web.QuartzQueueAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A2FEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="145"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="192"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="5B4F09744A30EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="146"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="193"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A31EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="147"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="194"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A32EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="148"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="195"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A33EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="149"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="196"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="18"/>
+			<column name="OBJ_ID" value="5B4F09744A34EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="150"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="197"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="19"/>
+			<column name="OBJ_ID" value="5B4F09744A35EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="151"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="198"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="OBJ_ID" value="5B4F09744A36EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="152"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="199"/>
+			<column name="ATTR_VAL" value="referenceType.clu.proposal"/>
+			<column name="KIM_ATTR_DEFN_ID" value="118"/>
+			<column name="KIM_TYP_ID" value="104"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F22"/>
+			<column name="PERM_ID" value="3000"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="200"/>
+			<column name="ATTR_VAL" value="referenceType.clu.proposal"/>
+			<column name="KIM_ATTR_DEFN_ID" value="118"/>
+			<column name="KIM_TYP_ID" value="104"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F23"/>
+			<column name="PERM_ID" value="2910"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="201"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="21"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="155"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="202"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A3AEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="156"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="203"/>
+			<column name="ATTR_VAL" value="KUALI"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="21"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F25"/>
+			<column name="PERM_ID" value="833"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="204"/>
+			<column name="ATTR_VAL" value="KUALI"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="18"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F26"/>
+			<column name="PERM_ID" value="834"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="205"/>
+			<column name="ATTR_VAL" value="KUALI"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="19"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F27"/>
+			<column name="PERM_ID" value="835"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="206"/>
+			<column name="ATTR_VAL" value="KUALI"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="OBJ_ID" value="5B4F09744A39EF33E0404F8189D84F28"/>
+			<column name="PERM_ID" value="836"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="211"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="5B4F09744A43EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="161"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="213"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="5B4F09744A45EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="162"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="216"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="16"/>
+			<column name="OBJ_ID" value="5B4F09744A48EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="163"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="217"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="15"/>
+			<column name="OBJ_ID" value="5B4F09744A49EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="164"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="218"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A4AEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="165"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="219"/>
+			<column name="ATTR_VAL" value="KR*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="5B4F09744A4BEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="166"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="220"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A4CEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="167"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="221"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A4DEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="168"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="222"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A4EEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="290"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="223"/>
+			<column name="ATTR_VAL" value="A"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="KIM_TYP_ID" value="4"/>
+			<column name="OBJ_ID" value="5B4F09744A4FEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="170"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="225"/>
+			<column name="ATTR_VAL" value="F"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="KIM_TYP_ID" value="4"/>
+			<column name="OBJ_ID" value="5B4F09744A51EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="172"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="226"/>
+			<column name="ATTR_VAL" value="K"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="KIM_TYP_ID" value="4"/>
+			<column name="OBJ_ID" value="5B4F09744A52EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="173"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="237"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5DEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="180"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="238"/>
+			<column name="ATTR_VAL" value="PreRoute"/>
+			<column name="KIM_ATTR_DEFN_ID" value="16"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5EEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="180"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="239"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="181"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="240"/>
+			<column name="ATTR_VAL" value="R"/>
+			<column name="KIM_ATTR_DEFN_ID" value="15"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A60EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="181"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="243"/>
+			<column name="ATTR_VAL" value="KimPrincipalImpl"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="11"/>
+			<column name="OBJ_ID" value="5B4F09744A63EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="183"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="244"/>
+			<column name="ATTR_VAL" value="password"/>
+			<column name="KIM_ATTR_DEFN_ID" value="6"/>
+			<column name="KIM_TYP_ID" value="11"/>
+			<column name="OBJ_ID" value="5B4F09744A64EF33E0404F8189D84F24"/>
+			<column name="PERM_ID" value="183"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="249"/>
+			<column name="ATTR_VAL" value="PreRoute"/>
+			<column name="KIM_ATTR_DEFN_ID" value="16"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B6013B3AD121A9CE0404F8189D87094"/>
+			<column name="PERM_ID" value="167"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3000"/>
+			<column name="ATTR_VAL" value="org.kuali.student.lum.course.dto.CourseInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7BB976406BAA02E0404F81A9D86F1B"/>
+			<column name="PERM_ID" value="3105"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3001"/>
+			<column name="ATTR_VAL" value="transcriptTitle"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976416BAA02E0404F8189D86F1C"/>
+			<column name="PERM_ID" value="3105"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3002"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976426BAA02E0404F8189D86F1D"/>
+			<column name="PERM_ID" value="3105"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3003"/>
+			<column name="ATTR_VAL" value="org.kuali.student.lum.course.dto.CourseInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976436BAA02E0404F8189D86F1E"/>
+			<column name="PERM_ID" value="3106"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3004"/>
+			<column name="ATTR_VAL" value="unitsContentOwner"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976446BAA02E0404F8189D86F1F"/>
+			<column name="PERM_ID" value="3106"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3005"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976456BAA02E0404F8189D86F1G"/>
+			<column name="PERM_ID" value="3106"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3006"/>
+			<column name="ATTR_VAL" value="org.kuali.student.lum.course.dto.CourseInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9AA6406BAA02E0404F8189D86F1H"/>
+			<column name="PERM_ID" value="3107"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3007"/>
+			<column name="ATTR_VAL" value="descr"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1I"/>
+			<column name="PERM_ID" value="3107"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3008"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02B04AAF8189D86F1J"/>
+			<column name="PERM_ID" value="3107"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3009"/>
+			<column name="ATTR_VAL" value="org.kuali.student.lum.course.dto.CourseInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1K"/>
+			<column name="PERM_ID" value="3108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3010"/>
+			<column name="ATTR_VAL" value="duration"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1L"/>
+			<column name="PERM_ID" value="3108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3011"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1M"/>
+			<column name="PERM_ID" value="3108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3012"/>
+			<column name="ATTR_VAL" value="Organization"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="EDC1B976406BAA02E0404F81A9D86F1B"/>
+			<column name="PERM_ID" value="3109"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3013"/>
+			<column name="ATTR_VAL" value="orgInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="WSX19976416BAA02E0404F8189D86F1C"/>
+			<column name="PERM_ID" value="3109"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3014"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="QAZ19976426QAZ12E0404F8189D86F1D"/>
+			<column name="PERM_ID" value="3109"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3015"/>
+			<column name="ATTR_VAL" value="Organization"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="EDC2B976406BAA02E0404F81A9D86F1B"/>
+			<column name="PERM_ID" value="3110"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3016"/>
+			<column name="ATTR_VAL" value="orgOrgRelationInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="WSX29976416BAA02E0404F8189D86F1C"/>
+			<column name="PERM_ID" value="3110"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3017"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="QAZ29976426QAZ12E0404F8189D86F1D"/>
+			<column name="PERM_ID" value="3110"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3018"/>
+			<column name="ATTR_VAL" value="Organization"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="EDC3B976406BAA02E0404F81A9D86F1B"/>
+			<column name="PERM_ID" value="3111"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3019"/>
+			<column name="ATTR_VAL" value="OrgPositionRestrictionInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="WSX39976416BAA02E0404F8189D86F1C"/>
+			<column name="PERM_ID" value="3111"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3020"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="QAZ39976426QAZ12E0404F8189D86F1D"/>
+			<column name="PERM_ID" value="3111"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3021"/>
+			<column name="ATTR_VAL" value="Organization"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="EDC4B976406BAA02E0404F81A9D86F1B"/>
+			<column name="PERM_ID" value="3112"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3022"/>
+			<column name="ATTR_VAL" value="orgPersonRelationInfo"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="WSX49976416BAA02E0404F8189D86F1C"/>
+			<column name="PERM_ID" value="3112"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3023"/>
+			<column name="ATTR_VAL" value="edit"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="KIM_TYP_ID" value="120"/>
+			<column name="OBJ_ID" value="QAZ49976426QAZ12E0404F8189D86F1D"/>
+			<column name="PERM_ID" value="3112"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3024"/>
+			<column name="ATTR_VAL" value="KS*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1D"/>
+			<column name="PERM_ID" value="2500"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3025"/>
+			<column name="ATTR_VAL" value="KS*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1C"/>
+			<column name="PERM_ID" value="2600"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3026"/>
+			<column name="ATTR_VAL" value="KS*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1B"/>
+			<column name="PERM_ID" value="2700"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3027"/>
+			<column name="ATTR_VAL" value="KS*"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="20"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1A"/>
+			<column name="PERM_ID" value="2800"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3028"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1E"/>
+			<column name="PERM_ID" value="2000"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3029"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1F"/>
+			<column name="PERM_ID" value="2100"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3030"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1G"/>
+			<column name="PERM_ID" value="2200"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3031"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="5C7D9976406BAR02E0404F8189D86F1G"/>
+			<column name="PERM_ID" value="2300"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3032"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5C7D9976406BAA02E0404F8189D86F1H"/>
+			<column name="PERM_ID" value="2400"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3033"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F24"/>
+			<column name="PERM_ID" value="3101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3034"/>
+			<column name="ATTR_VAL" value="R"/>
+			<column name="KIM_ATTR_DEFN_ID" value="15"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2T"/>
+			<column name="PERM_ID" value="3101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3035"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189RA4F24"/>
+			<column name="PERM_ID" value="3102"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3036"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2G"/>
+			<column name="PERM_ID" value="3103"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3037"/>
+			<column name="ATTR_VAL" value="R"/>
+			<column name="KIM_ATTR_DEFN_ID" value="15"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2F"/>
+			<column name="PERM_ID" value="3103"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3038"/>
+			<column name="ATTR_VAL" value="KualiStudentDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2E"/>
+			<column name="PERM_ID" value="3104"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3039"/>
+			<column name="ATTR_VAL" value="S"/>
+			<column name="KIM_ATTR_DEFN_ID" value="15"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2D"/>
+			<column name="PERM_ID" value="3104"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3040"/>
+			<column name="ATTR_VAL" value="kuali.proposal.type.course.modify"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2A"/>
+			<column name="PERM_ID" value="3113"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3041"/>
+			<column name="ATTR_VAL" value="R"/>
+			<column name="KIM_ATTR_DEFN_ID" value="15"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2B"/>
+			<column name="PERM_ID" value="3113"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="3042"/>
+			<column name="ATTR_VAL" value="Publication Decision Review"/>
+			<column name="KIM_ATTR_DEFN_ID" value="16"/>
+			<column name="KIM_TYP_ID" value="8"/>
+			<column name="OBJ_ID" value="5B4F09744A5FEF33E0404F8189DA4F2C"/>
+			<column name="PERM_ID" value="3113"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="376"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="9"/>
+			<column name="OBJ_ID" value="606763510FC496D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="259"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="379"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="9"/>
+			<column name="OBJ_ID" value="606763510FC796D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="261"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="384"/>
+			<column name="ATTR_VAL" value="RiceDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="59"/>
+			<column name="OBJ_ID" value="606763510FCE96D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="264"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="385"/>
+			<column name="ATTR_VAL" value="false"/>
+			<column name="KIM_ATTR_DEFN_ID" value="8"/>
+			<column name="KIM_TYP_ID" value="59"/>
+			<column name="OBJ_ID" value="606763510FCF96D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="264"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="431"/>
+			<column name="ATTR_VAL" value="IdentityManagementPersonDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="11"/>
+			<column name="OBJ_ID" value="6314CC58CF59B7B5E0404F8189D84439"/>
+			<column name="PERM_ID" value="306"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="432"/>
+			<column name="ATTR_VAL" value="taxId"/>
+			<column name="KIM_ATTR_DEFN_ID" value="6"/>
+			<column name="KIM_TYP_ID" value="11"/>
+			<column name="OBJ_ID" value="6314CC58CF5AB7B5E0404F8189D84439"/>
+			<column name="PERM_ID" value="306"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="478"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="662384B381BA67A1E0404F8189D868A6"/>
+			<column name="PERM_ID" value="332"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="479"/>
+			<column name="ATTR_VAL" value="F"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="662384B381BB67A1E0404F8189D868A6"/>
+			<column name="PERM_ID" value="332"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="480"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="662384B381BE67A1E0404F8189D868A6"/>
+			<column name="PERM_ID" value="333"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="481"/>
+			<column name="ATTR_VAL" value="K"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="662384B381BF67A1E0404F8189D868A6"/>
+			<column name="PERM_ID" value="333"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="482"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="662384B381C267A1E0404F8189D868A6"/>
+			<column name="PERM_ID" value="334"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="483"/>
+			<column name="ATTR_VAL" value="A"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="KIM_TYP_ID" value="5"/>
+			<column name="OBJ_ID" value="662384B381C367A1E0404F8189D868A6"/>
+			<column name="PERM_ID" value="334"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="701"/>
+			<column name="ATTR_VAL" value="RuleTemplate"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="A207FBACC3764793896D0D769F6DBBFF"/>
+			<column name="PERM_ID" value="701"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="702"/>
+			<column name="ATTR_VAL" value="EDocLiteStyle"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="37F35D51EE714A8B8A66802F89626C50"/>
+			<column name="PERM_ID" value="702"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="703"/>
+			<column name="ATTR_VAL" value="EDocLiteDefinition"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="950DE6A28C144A9B87CA2CFD9FF337C8"/>
+			<column name="PERM_ID" value="703"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="707"/>
+			<column name="ATTR_VAL" value="RuleAttribute"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="D270B9BA7E494507AD0B5D184AB13479"/>
+			<column name="PERM_ID" value="707"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="714"/>
+			<column name="ATTR_VAL" value="PessimisticLock"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="5BEE5EF7C03348D49125B0E87F764F28"/>
+			<column name="PERM_ID" value="714"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="719"/>
+			<column name="ATTR_VAL" value="ParameterDetailType"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="45EEFA6F23FD4015B927D1D19F482888"/>
+			<column name="PERM_ID" value="719"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="720"/>
+			<column name="ATTR_VAL" value="ParameterNamespace"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="FFF2C6639C6041F1B148AA9901C8A1F7"/>
+			<column name="PERM_ID" value="720"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="721"/>
+			<column name="ATTR_VAL" value="ParameterType"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="6D489E39C0BC4890803E3A5F412297BE"/>
+			<column name="PERM_ID" value="721"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="751"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="A3142D53EC1541BE92223181852C37CF"/>
+			<column name="PERM_ID" value="701"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="752"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="6250F01B4CA243FCBA64A93FE4EAFE83"/>
+			<column name="PERM_ID" value="702"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="753"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="E0F57E480CF646A585BC92E91AB5FB1D"/>
+			<column name="PERM_ID" value="703"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="757"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="266BD230C3AA40EB9FC8079FBB960DF0"/>
+			<column name="PERM_ID" value="707"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="764"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="2FF0786F86D845F097688A5F83ACF0A7"/>
+			<column name="PERM_ID" value="714"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="768"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="160C75C4C8A3411D8856A50F38487EB2"/>
+			<column name="PERM_ID" value="719"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="769"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="992DE7BE4C3C46F8AEDBE7925CBEE6B3"/>
+			<column name="PERM_ID" value="720"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="770"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="330AAEB4459F4A34BBF8FECEA9E23404"/>
+			<column name="PERM_ID" value="721"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="800"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FD296D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="801"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="801"/>
+			<column name="ATTR_VAL" value="RuleTemplate"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FD396D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="801"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="802"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FD596D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="802"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="803"/>
+			<column name="ATTR_VAL" value="EDocLiteStyle"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FD696D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="802"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="804"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FD896D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="803"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="805"/>
+			<column name="ATTR_VAL" value="EDocLiteDefinition"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FD996D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="803"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="806"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FDB96D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="807"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="807"/>
+			<column name="ATTR_VAL" value="RuleAttribute"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FDC96D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="807"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="814"/>
+			<column name="ATTR_VAL" value="PessimisticLock"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FE396D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="814"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="819"/>
+			<column name="ATTR_VAL" value="ParameterDetailType"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FE696D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="819"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="820"/>
+			<column name="ATTR_VAL" value="ParameterNamespace"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FE996D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="820"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="821"/>
+			<column name="ATTR_VAL" value="ParameterType"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FEC96D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="821"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="864"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FE296D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="814"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="868"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FE596D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="819"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="869"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FE896D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="820"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="870"/>
+			<column name="ATTR_VAL" value="KR-NS"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="10"/>
+			<column name="OBJ_ID" value="606763510FEB96D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="821"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="873"/>
+			<column name="ATTR_VAL" value="KR-WKFLW"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="606763510FF396D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="265"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="874"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.kew.batch.web.IngesterAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="606763510FF496D3E0404F8189D857A2"/>
+			<column name="PERM_ID" value="265"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="880"/>
+			<column name="ATTR_VAL" value="org.kuali.rice.ksb.messaging.web.ConfigViewerAction"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="KIM_TYP_ID" value="12"/>
+			<column name="OBJ_ID" value="ECCB8A6C-A0DA-5311-6A57-40F743EA334C"/>
+			<column name="PERM_ID" value="840"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_PERM_ATTR_DATA_T">
+			<column name="ATTR_DATA_ID" value="881"/>
+			<column name="ATTR_VAL" value="KualiDocument"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="KIM_TYP_ID" value="3"/>
+			<column name="OBJ_ID" value="717e2c18-89e4-11df-98b1-1300c9ee50c1"/>
+			<column name="PERM_ID" value="841"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

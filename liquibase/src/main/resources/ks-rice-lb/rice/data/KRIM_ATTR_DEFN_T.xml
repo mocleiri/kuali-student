@@ -1,0 +1,346 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ATTR_DEFN_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="1"/>
+			<column name="NM" value="beanName"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4887954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="10"/>
+			<column name="NM" value="editMode"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4917954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="101"/>
+			<column name="LBL" value="College"/>
+			<column name="NM" value="college"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="COLLEGETYPE00000000000000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="102"/>
+			<column name="LBL" value="Department"/>
+			<column name="NM" value="department"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE00000000000000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="103"/>
+			<column name="LBL" value="Division"/>
+			<column name="NM" value="division"/>
+			<column name="NMSPC_CD" value="KS-LUM"/>
+			<column name="OBJ_ID" value="DIVISIONTYPE0000000000000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="11"/>
+			<column name="NM" value="parameterName"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4927954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="110"/>
+			<column name="NM" value="dtoName"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="COLLEGESYSTYPE00000000000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="111"/>
+			<column name="NM" value="dtoFieldKey"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="COLLEGESY1TYPE00000000000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="112"/>
+			<column name="NM" value="fieldAccessLevel"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="COLLEGESY2TYPE00000000000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="114"/>
+			<column name="LBL" value="Organization"/>
+			<column name="NM" value="org"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE08000005430000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="115"/>
+			<column name="LBL" value="Screen Component"/>
+			<column name="NM" value="screenComponent"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE080WF005430000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="116"/>
+			<column name="LBL" value="Section ID"/>
+			<column name="NM" value="sectionId"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE080OFU05430000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="117"/>
+			<column name="LBL" value="Descends Hierarchy"/>
+			<column name="NM" value="descendHierarchy"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE080ED005430000ATTRDEF"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="118"/>
+			<column name="LBL" value="Reference Type Key"/>
+			<column name="NM" value="ksReferenceTypeKey"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARTMTYPE080ED005430000ATTRDEG"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="12"/>
+			<column name="NM" value="campusCode"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4937954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.student.bo.KualiStudentKimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="120"/>
+			<column name="LBL" value="Student Data Id"/>
+			<column name="NM" value="dataId"/>
+			<column name="NMSPC_CD" value="KS-SYS"/>
+			<column name="OBJ_ID" value="DEPARUUUNTADMINREVIEWER000001236"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="13"/>
+			<column name="NM" value="documentTypeName"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4947954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="14"/>
+			<column name="NM" value="actionRequestCd"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4957954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="15"/>
+			<column name="NM" value="routeStatusCode"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4967954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="16"/>
+			<column name="NM" value="routeNodeName"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5ADF18B6D4977954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="18"/>
+			<column name="NM" value="roleName"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D4997954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="19"/>
+			<column name="NM" value="permissionName"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D49A7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="2"/>
+			<column name="NM" value="actionClass"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4897954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="20"/>
+			<column name="NM" value="responsibilityName"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D49B7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="21"/>
+			<column name="NM" value="groupName"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="5ADF18B6D49C7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="3"/>
+			<column name="NM" value="buttonName"/>
+			<column name="NMSPC_CD" value="KR-SYS"/>
+			<column name="OBJ_ID" value="5ADF18B6D48A7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="4"/>
+			<column name="NM" value="namespaceCode"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D48B7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="40"/>
+			<column name="NM" value="required"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5C4970B2B2DF8277E0404F8189D80B30"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="41"/>
+			<column name="NM" value="actionDetailsAtRoleMemberLevel"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="5C4970B2B2E08277E0404F8189D80B30"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="42"/>
+			<column name="NM" value="documentNumber"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5C7D997640635002E0404F8189D86F11"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="44"/>
+			<column name="NM" value="sectionId"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="603B735FA6BCFE21E0404F8189D8083B"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="46"/>
+			<column name="NM" value="qualifierResolverProvidedIdentifier"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="69FA55ACC2EE2598E0404F8189D86880"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="5"/>
+			<column name="NM" value="componentName"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D48C7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="6"/>
+			<column name="NM" value="propertyName"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D48D7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="7"/>
+			<column name="NM" value="existingRecordsOnly"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="603B735FA6BAFE21E0404F8189D8083B"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="8"/>
+			<column name="NM" value="createdBySelfOnly"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D48F7954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ATTR_DEFN_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="CMPNT_NM" value="org.kuali.rice.kim.bo.impl.KimAttributes"/>
+			<column name="KIM_ATTR_DEFN_ID" value="9"/>
+			<column name="NM" value="attachmentTypeCode"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5ADF18B6D4907954E0404F8189D85002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

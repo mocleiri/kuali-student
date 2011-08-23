@@ -1,0 +1,224 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ROLE_RSP_ACTN_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="A102F3FA08CF45CFAA404FBB89D831AA"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="1000"/>
+			<column name="ROLE_RSP_ID" value="1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="A102F3FA08CF45CFAA404FQAZ9D831AA"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="1001"/>
+			<column name="ROLE_RSP_ID" value="1080"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview000ROLERSPACTN01"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60001"/>
+			<column name="ROLE_RSP_ID" value="5001"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview000ROLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60002"/>
+			<column name="ROLE_RSP_ID" value="5002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview000ROLERSPACTN03"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60003"/>
+			<column name="ROLE_RSP_ID" value="5003"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DepartmentReview000ROLERSPACTN04"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60004"/>
+			<column name="ROLE_RSP_ID" value="5004"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview000000ROLERSPACTN01"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60101"/>
+			<column name="ROLE_RSP_ID" value="5101"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview000000ROLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60102"/>
+			<column name="ROLE_RSP_ID" value="5102"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview000000ROLERSPACTN03"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60103"/>
+			<column name="ROLE_RSP_ID" value="5103"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="CollegeReview000000ROLERSPACTN04"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60104"/>
+			<column name="ROLE_RSP_ID" value="5104"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview00000ROLERSPACTN01"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60301"/>
+			<column name="ROLE_RSP_ID" value="5301"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview00000ROLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60302"/>
+			<column name="ROLE_RSP_ID" value="5302"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview00000ROLERSPACTN03"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60303"/>
+			<column name="ROLE_RSP_ID" value="5303"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="DivisionReview00000ROLERSPACTN04"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60304"/>
+			<column name="ROLE_RSP_ID" value="5304"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview0000000ROLERSPACTN01"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60401"/>
+			<column name="ROLE_RSP_ID" value="54301"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview0000000ROLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60402"/>
+			<column name="ROLE_RSP_ID" value="5402"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview0000000ROLERSPACTN03"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60403"/>
+			<column name="ROLE_RSP_ID" value="5403"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="F"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="SenateReview0000000ROLERSPACTN04"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60404"/>
+			<column name="ROLE_RSP_ID" value="5404"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview00ROLERSPACTN01"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60501"/>
+			<column name="ROLE_RSP_ID" value="5501"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview00ROLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60502"/>
+			<column name="ROLE_RSP_ID" value="5502"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview00SOLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60503"/>
+			<column name="ROLE_RSP_ID" value="5503"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
+			<column name="ACTN_PLCY_CD" value="F"/>
+			<column name="ACTN_TYP_CD" value="A"/>
+			<column name="FRC_ACTN" value="Y"/>
+			<column name="OBJ_ID" value="PublicationReview00TOLERSPACTN02"/>
+			<column name="ROLE_MBR_ID" value="*"/>
+			<column name="ROLE_RSP_ACTN_ID" value="60504"/>
+			<column name="ROLE_RSP_ID" value="5504"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

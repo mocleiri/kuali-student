@@ -1,0 +1,156 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSDO_DOCUMENT_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="doc"/>
+			<column name="OBJ_ID" value="AE87CE6EEB394BC0B2D58A0F282D4A26"/>
+			<column name="TYPE_DESC" value="doc Document"/>
+			<column name="TYPE_KEY" value="documentType.doc"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="docx"/>
+			<column name="OBJ_ID" value="C5B5A33151C74B168B7EDADD8A334F3E"/>
+			<column name="TYPE_DESC" value="docx Document"/>
+			<column name="TYPE_KEY" value="documentType.docx"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="gif"/>
+			<column name="OBJ_ID" value="E7DD458BCFDF407A8DB2921DD4119A0F"/>
+			<column name="TYPE_DESC" value="gif Document"/>
+			<column name="TYPE_KEY" value="documentType.gif"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="gz"/>
+			<column name="OBJ_ID" value="2C3A86FFA16F46CBBF3D1268F7178530"/>
+			<column name="TYPE_DESC" value="gz Document"/>
+			<column name="TYPE_KEY" value="documentType.gz"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="jpg"/>
+			<column name="OBJ_ID" value="AA462CC090874D20902776C50F7F838A"/>
+			<column name="TYPE_DESC" value="jpg Document"/>
+			<column name="TYPE_KEY" value="documentType.jpg"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="mp3"/>
+			<column name="OBJ_ID" value="3AFA6A6FF28E41ECA1CE3014E3224446"/>
+			<column name="TYPE_DESC" value="mp3 Document"/>
+			<column name="TYPE_KEY" value="documentType.mp3"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="pdf"/>
+			<column name="OBJ_ID" value="9C5FAB099C2A48A8AA3B6D78B4E41412"/>
+			<column name="TYPE_DESC" value="pdf Document"/>
+			<column name="TYPE_KEY" value="documentType.pdf"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="png"/>
+			<column name="OBJ_ID" value="AD23590EF7A14A8192ED86E64AB8ECBB"/>
+			<column name="TYPE_DESC" value="png Document"/>
+			<column name="TYPE_KEY" value="documentType.png"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="ppt"/>
+			<column name="OBJ_ID" value="D812213195BC43738A32E33654EA48B9"/>
+			<column name="TYPE_DESC" value="ppt Document"/>
+			<column name="TYPE_KEY" value="documentType.ppt"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="rar"/>
+			<column name="OBJ_ID" value="77BEFA57C9FF4E6BA1023D974662EE78"/>
+			<column name="TYPE_DESC" value="rar Document"/>
+			<column name="TYPE_KEY" value="documentType.rar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="rtf"/>
+			<column name="OBJ_ID" value="F5FD4EAE82514006BE40C66053D12FB7"/>
+			<column name="TYPE_DESC" value="rtf Document"/>
+			<column name="TYPE_KEY" value="documentType.rtf"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="tar"/>
+			<column name="OBJ_ID" value="A99E1C03770E409F999F6E541FD71330"/>
+			<column name="TYPE_DESC" value="tar Document"/>
+			<column name="TYPE_KEY" value="documentType.tar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="tif"/>
+			<column name="OBJ_ID" value="BE9EE19947CB4D17A348F667F7112519"/>
+			<column name="TYPE_DESC" value="tif Document"/>
+			<column name="TYPE_KEY" value="documentType.tif"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="tiff"/>
+			<column name="OBJ_ID" value="6CA5DDFDDBB74D7DA6F4C9B70AD3F7FE"/>
+			<column name="TYPE_DESC" value="tiff Document"/>
+			<column name="TYPE_KEY" value="documentType.tiff"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="txt"/>
+			<column name="OBJ_ID" value="DD23D50111ED4ED282B92B0B4929051A"/>
+			<column name="TYPE_DESC" value="txt Document"/>
+			<column name="TYPE_KEY" value="documentType.txt"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="wav"/>
+			<column name="OBJ_ID" value="723B39936223492C9048FF5E2EA866E0"/>
+			<column name="TYPE_DESC" value="wav Document"/>
+			<column name="TYPE_KEY" value="documentType.wav"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="xls"/>
+			<column name="OBJ_ID" value="8434B13071524672948B939BEDB32381"/>
+			<column name="TYPE_DESC" value="xls Document"/>
+			<column name="TYPE_KEY" value="documentType.xls"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="xml"/>
+			<column name="OBJ_ID" value="A131A32F58D540FEB7693E06F40F9A4D"/>
+			<column name="TYPE_DESC" value="xml Document"/>
+			<column name="TYPE_KEY" value="documentType.xml"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSDO_DOCUMENT_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="zip"/>
+			<column name="OBJ_ID" value="4E77E86AC00747B89177AA8009E6AE69"/>
+			<column name="TYPE_DESC" value="zip Document"/>
+			<column name="TYPE_KEY" value="documentType.zip"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

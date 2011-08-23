@@ -1,0 +1,68 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSAP_DT_RANGE_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Advance Registration Period"/>
+			<column name="OBJ_ID" value="C9A3B848EC96470DA86E9487A0662E7F"/>
+			<column name="TYPE_DESC" value="Advance Registration Period"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.AdvanceRegistrationPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Fall Break"/>
+			<column name="OBJ_ID" value="C784C90C365545D1A973B67EC130FED1"/>
+			<column name="TYPE_DESC" value="Fall Break"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.FallBreak"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Family Weekend"/>
+			<column name="OBJ_ID" value="E6B7A00F2FB7466A916909D40CB8CD1A"/>
+			<column name="TYPE_DESC" value="Family Weekend"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.FamilyWeekend"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Final Exam Period"/>
+			<column name="OBJ_ID" value="7C68763A12D742D195296C216B93DFA9"/>
+			<column name="TYPE_DESC" value="Final Examinations"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.FinalExamPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="New Student Orientation"/>
+			<column name="OBJ_ID" value="95F54004E218409C944A6AF70267ED88"/>
+			<column name="TYPE_DESC" value="New Student Orientation"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.NewStudentOrientation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Proposal Period"/>
+			<column name="OBJ_ID" value="0920DC59D6764C4991845FA2979C0EE4"/>
+			<column name="TYPE_DESC" value="Proposal Period"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.ProposalPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Reading Period"/>
+			<column name="OBJ_ID" value="89042CEF245A45A8AA9C8FF046FC5A97"/>
+			<column name="TYPE_DESC" value="Reading Days"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.ReadingPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_DT_RANGE_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Review Period"/>
+			<column name="OBJ_ID" value="A7658B4571E24684A8E8F96845AC72E0"/>
+			<column name="TYPE_DESC" value="Period within which proposal are grouped and reviewed together for approval"/>
+			<column name="TYPE_KEY" value="kuali.atp.DateRange.ReviewPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

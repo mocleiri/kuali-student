@@ -1,0 +1,3071 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSOR_ORG_POS_RESTR-initial-data" author="alubbers">
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Appointed by the Governor.  With the exception of the student member, each Regent is appointed for a term of five years, and may not serve more than two consecutive terms. The student regent is appointed for a one-year term, and may be reappointed. Regent"/>
+			<column name="ID" value="1"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2AC5B8560B2549EE85E34EC44BAD7BE8"/>
+			<column name="ORG" value="2"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Board of Regents"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of the Graduate School"/>
+			<column name="ID" value="10"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5B8CB786B94843F7A6DFEA5FF2ED152D"/>
+			<column name="ORG" value="26"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of the Graduate School"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214090829"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Geology COC"/>
+			<column name="ID" value="100"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D06E898FD3E146349F9350CD0529E267"/>
+			<column name="ORG" value="166"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Geology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the GenderStudies COC"/>
+			<column name="ID" value="101"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="4AB1E1446EB64106869F8EB86E810FC2"/>
+			<column name="ORG" value="167"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the GenderStudies COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the English COC"/>
+			<column name="ID" value="102"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="207CD8E946494B6DB6744F5D1E15A547"/>
+			<column name="ORG" value="147"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the English COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the FineArts COC"/>
+			<column name="ID" value="103"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="42489D5D9D7041C3BE2FCD381C81A9AF"/>
+			<column name="ORG" value="148"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the FineArts COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the French COC"/>
+			<column name="ID" value="104"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="3BFD96B724C84A928ECAAFBD755348C1"/>
+			<column name="ORG" value="149"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the French COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Geography COC"/>
+			<column name="ID" value="105"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B38943FB69174F42A74DDED80100AE94"/>
+			<column name="ORG" value="150"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Geography COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Linguistics COC"/>
+			<column name="ID" value="106"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B6511097129D4B308CBEEAFDE5010964"/>
+			<column name="ORG" value="151"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Linguistics COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Music COC"/>
+			<column name="ID" value="107"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D03E8F02457E419885977A6663C2F3BD"/>
+			<column name="ORG" value="152"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Music COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the History COC"/>
+			<column name="ID" value="108"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="FBA0FDB1E9224006BECAB264474EA74E"/>
+			<column name="ORG" value="153"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the History COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the PolySci COC"/>
+			<column name="ID" value="109"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="36618FF453F5410883A4C95E09A3F769"/>
+			<column name="ORG" value="154"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the PolySci COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
+			<column name="ID" value="11"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="8A76F502773C4378911083BCFA992049"/>
+			<column name="ORG" value="19"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AssocProvost"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094704"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Psychology COC"/>
+			<column name="ID" value="110"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="F8D2AAC22F524EC09F5C71103A37CC45"/>
+			<column name="ORG" value="155"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Psychology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Sociology COC"/>
+			<column name="ID" value="111"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7B61965660BB4C4DBCEDDB2C3DD32E58"/>
+			<column name="ORG" value="156"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Sociology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the InterdiscBSOS COC"/>
+			<column name="ID" value="112"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="DF2A4BAA38A14FF2A93C956FF7E880C1"/>
+			<column name="ORG" value="157"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the InterdiscBSOS COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Chemical COC"/>
+			<column name="ID" value="113"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="ED2D87D5D6F34E88945C7E83295A0D58"/>
+			<column name="ORG" value="158"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Chemical COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Civil COC"/>
+			<column name="ID" value="114"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0BB2C43AB6AB4202BEE021D9D2B90763"/>
+			<column name="ORG" value="159"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Civil COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Mechanical COC"/>
+			<column name="ID" value="115"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="EDA7595CA48B459289764A71016E083B"/>
+			<column name="ORG" value="160"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Mechanical COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the CompSci COC"/>
+			<column name="ID" value="116"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="008340E82DCC47D694A1F17B66A7587A"/>
+			<column name="ORG" value="161"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the CompSci COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Biology COC"/>
+			<column name="ID" value="117"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D8A9A130F6BC441CBA000BBBAA01AC7D"/>
+			<column name="ORG" value="162"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Biology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Biochemistry COC"/>
+			<column name="ID" value="118"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="C8C6343518604B21AF0C961DF20B1481"/>
+			<column name="ORG" value="163"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Biochemistry COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Botany COC"/>
+			<column name="ID" value="119"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="04F2EF91463141EE95D12A162413E1FD"/>
+			<column name="ORG" value="164"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Botany COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
+			<column name="ID" value="12"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="FF606401750945A8A853250DAC0E761D"/>
+			<column name="ORG" value="24"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214091403"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Chemistry COC"/>
+			<column name="ID" value="120"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9299581C4170459BAA35B974E31D56D0"/>
+			<column name="ORG" value="165"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Chemistry COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Geology COC"/>
+			<column name="ID" value="121"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="C4C07DFA2D3648AAA053449E93B32DB4"/>
+			<column name="ORG" value="166"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Geology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the GenderStudies COC"/>
+			<column name="ID" value="122"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="05CB2E93BF19432C89E5A374B81DF88A"/>
+			<column name="ORG" value="167"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the GenderStudies COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the English COC"/>
+			<column name="ID" value="124"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="710974F70B2944ECA641A20197151CD3"/>
+			<column name="ORG" value="147"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the English COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the FineArts COC"/>
+			<column name="ID" value="125"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="CFA39B1D5E07440286AF7DB92A98C1F0"/>
+			<column name="ORG" value="148"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the FineArts COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the French COC"/>
+			<column name="ID" value="126"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="1845CDDBECDE444F8A6FCE05DA59B3FE"/>
+			<column name="ORG" value="149"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the French COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Geography COC"/>
+			<column name="ID" value="127"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="CBF057B7BF1246289F1D987C268CECB9"/>
+			<column name="ORG" value="150"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Geography COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Linguistics COC"/>
+			<column name="ID" value="128"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="FE2BF70B9D214FBDAC61DCCED3F72C13"/>
+			<column name="ORG" value="151"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Linguistics COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Music COC"/>
+			<column name="ID" value="129"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="29C0DFD532E44A47AAC850B6B4FA3A88"/>
+			<column name="ORG" value="152"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Music COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the History COC"/>
+			<column name="ID" value="130"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7FAD14BDA9E44E8BADD05C22CAD9C3C3"/>
+			<column name="ORG" value="153"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the History COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the PolySci COC"/>
+			<column name="ID" value="131"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7727B992F0D145C3ABCE43290A76BFE4"/>
+			<column name="ORG" value="154"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the PolySci COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Psychology COC"/>
+			<column name="ID" value="132"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="8F7D59BD10D24720A2FFC91427EDD1A1"/>
+			<column name="ORG" value="155"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Psychology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Sociology COC"/>
+			<column name="ID" value="133"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="14C73D107A4342E4967CC4FD340AEF3E"/>
+			<column name="ORG" value="156"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Sociology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the InterdiscBSOS COC"/>
+			<column name="ID" value="134"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="F173441EA14A40FC9199BCF4C3CD2F3A"/>
+			<column name="ORG" value="157"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the InterdiscBSOS COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Chemical COC"/>
+			<column name="ID" value="135"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="551FA85539EC4040A6267B673BD4031B"/>
+			<column name="ORG" value="158"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Chemical COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Civil COC"/>
+			<column name="ID" value="136"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="58AAE6640C884E69B5066F0FD96B74E8"/>
+			<column name="ORG" value="159"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Civil COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Mechanical COC"/>
+			<column name="ID" value="137"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="DEC8A10B4901451984504FD06142D9AC"/>
+			<column name="ORG" value="160"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Mechanical COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the CompSci COC"/>
+			<column name="ID" value="138"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="79075047F8274BCE80C7983372BE5A20"/>
+			<column name="ORG" value="161"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the CompSci COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Biology COC"/>
+			<column name="ID" value="139"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9EFEC535FBB0413592D7E6B5D636AD24"/>
+			<column name="ORG" value="162"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Biology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Biochemistry COC"/>
+			<column name="ID" value="140"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="AFB36577839E4619B4E7FCCB3259E24F"/>
+			<column name="ORG" value="163"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Biochemistry COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Botany COC"/>
+			<column name="ID" value="141"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="C0EFC164F13944908634253BC63DCF26"/>
+			<column name="ORG" value="164"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Botany COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Chemistry COC"/>
+			<column name="ID" value="142"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0550FA4E73A243658D6D3626E69099EB"/>
+			<column name="ORG" value="165"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Chemistry COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the Geology COC"/>
+			<column name="ID" value="143"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2BDBE8D5FD054401AA7DA4A993276BB3"/>
+			<column name="ORG" value="166"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the Geology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the GenderStudies COC"/>
+			<column name="ID" value="144"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="78ED7940975F4EB39BC88BB5A1A07F74"/>
+			<column name="ORG" value="167"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the GenderStudies COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Composed of ALL the Administrative Members of each of the Departmental COCs"/>
+			<column name="ID" value="146"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9E3B0B33A664485E8C91A525069756DA"/>
+			<column name="ORG" value="142"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Ex-Officio"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Ex-Officio Member of the Dept COC Reps"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Named Chair"/>
+			<column name="ID" value="147"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B65231D4A66E4003A0752C479F8DE5E9"/>
+			<column name="ORG" value="171"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Geology CIC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="8 Other Named Faculty members from the department"/>
+			<column name="ID" value="148"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="F891EF3329F64712A370A9A0E0C037AA"/>
+			<column name="ORG" value="171"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Geology CIC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Must be the Chair of the Departmental COC"/>
+			<column name="ID" value="149"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D148E76D95FC4FEE9200BD8F6E2F39D7"/>
+			<column name="ORG" value="171"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Ex-Officio"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Ex-Officio Member of the Geology CIC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Officer of Chemical Engineering Dept"/>
+			<column name="ID" value="150"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="716949A514674F828201890B5EFCD2A5"/>
+			<column name="ORG" value="61"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdministrativeOfficer"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Officer of Chemical Engineering Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Officer of Civil Engineering Dept"/>
+			<column name="ID" value="151"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="6AA47FE73B464CB79549BDC354A3B633"/>
+			<column name="ORG" value="62"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdministrativeOfficer"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Officer of Civil Engineering Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Officer of Engineering College"/>
+			<column name="ID" value="152"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="48986E97A4924327B88B69CD14BE9D97"/>
+			<column name="ORG" value="31"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdministrativeOfficer"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Officer of Engineering College"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213104435"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Social Science Division COC"/>
+			<column name="ID" value="153"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="12EFA956097F48778790D5910508CF8A"/>
+			<column name="ORG" value="175"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Social Science Division COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105732"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="154"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D6E0A60FDF1046A7BF42627EFE85618A"/>
+			<column name="ORG" value="174"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Behavioral Science Division COC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Social Science Division COC"/>
+			<column name="ID" value="157"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="AE7E028F54C84AC487A83ECBF3DE666A"/>
+			<column name="ORG" value="175"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Social Science Division COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105732"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="158"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="110DDF67258D4B7EA3C8745C19BB571F"/>
+			<column name="ORG" value="174"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Behavioral Science Division COC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="161"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B92F2A403B374D51AC0728AAA41EA099"/>
+			<column name="ORG" value="177"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Undergrad Program COC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="162"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9A1B6AF3C9574E55B607771263D52B2A"/>
+			<column name="ORG" value="177"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Undergrad Program COC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Behavioral and Social Science College COC"/>
+			<column name="ID" value="167"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D212191946C64EBAB1E66C1F6ED479C6"/>
+			<column name="ORG" value="144"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Behavioral and Social Science College COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105920"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Behavioral and Social Science College COC"/>
+			<column name="ID" value="168"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D85A9BFCABDB4A8BB857C1CB6B8C84B8"/>
+			<column name="ORG" value="144"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Behavioral and Social Science College COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105920"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Life and Biology College COC"/>
+			<column name="ID" value="169"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="4AEE54B5CA5D423F85846D6B8F861F4D"/>
+			<column name="ORG" value="145"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Life and Biology College COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110923"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of Students"/>
+			<column name="ID" value="17"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="753671F292AE46F48106C29D3613E34A"/>
+			<column name="ORG" value="19"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of Students"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214094704"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the Life and Biology College COC"/>
+			<column name="ID" value="170"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D3FCD8F0CF7B4BBCA58B17841F0880E9"/>
+			<column name="ORG" value="145"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Life and Biology College COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110923"/>
+			<column name="VER_NBR" value="4"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of Publishing COC"/>
+			<column name="ID" value="171"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="AC6A3EA02EBE4048BE57E65A9F3FD392"/>
+			<column name="ORG" value="176"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of Publishing COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111226"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of Publishing COC"/>
+			<column name="ID" value="172"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="C08B0BBCD8B74A539960529A838A84D8"/>
+			<column name="ORG" value="176"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of Publishing COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111226"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="18"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="FFA458769DF2492A9B1C3EEA48DBEB66"/>
+			<column name="ORG" value="23"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AssocProvost"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Vice Provost for Information Technology & CIO "/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of Arts and Humanities"/>
+			<column name="ID" value="19"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2E0050ACC51A46C683851F8001051689"/>
+			<column name="ORG" value="28"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of Arts and Humanities"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111301"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="2"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="A26E9C1CAA8746E6964F66C7FDCF9A16"/>
+			<column name="ORG" value="2"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Treasurer"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Treasurer of the Board of Regents"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="20"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="A29A7F7CF3CB4BE6BC26ECC7D3F690D8"/>
+			<column name="ORG" value="50"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the English Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214143432"/>
+			<column name="DESCR" value="Member of the Mathematics Dept"/>
+			<column name="ID" value="20258ce0-be3b-4e5f-9590-f7a19fbc5a8c"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="40d6f69d-706a-498d-bb35-b5531efa3718"/>
+			<column name="ORG" value="205"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Mathematics Dept"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214143432"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="21"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="BD5ABE635662487B93DEC4896EE162D2"/>
+			<column name="ORG" value="51"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Fine Arts Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="22"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="C3A73CF5F2444D0597C0D906A90BC380"/>
+			<column name="ORG" value="52"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the French Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Geography Department"/>
+			<column name="ID" value="23"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9A980CB5E65F4A528B88360C790AA4C8"/>
+			<column name="ORG" value="53"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Geography Department"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110048"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213124958"/>
+			<column name="DESCR" value="Chair of the Medical School COC"/>
+			<column name="ID" value="23d1506a-a8ff-459c-8d01-0b25c9bdd159"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="d071e1fd-43ae-438c-aaa4-27dfcf7c2fc0"/>
+			<column name="ORG" value="170"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Medical School COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213125016"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="24"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="660B06C71E1B4962836E51099EC724B8"/>
+			<column name="ORG" value="54"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Linguistics Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="25"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7D466ACF61A441949A61006A29B7940A"/>
+			<column name="ORG" value="55"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Music Department"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean for Behavioral and Social Sciences"/>
+			<column name="ID" value="26"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5CC31D8424984CDDAE108B8F6F6BCF85"/>
+			<column name="ORG" value="29"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean for Behavioral and Social Sciences"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213103351"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="27"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="936C19868AAF4E93BA903FB6484AEA6D"/>
+			<column name="ORG" value="56"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the History Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="28"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="19769507A1BF466F947B8EEC704B3890"/>
+			<column name="ORG" value="57"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Political Science Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="29"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="999C51FBD20D48B5A3DEFA15FA3C6940"/>
+			<column name="ORG" value="58"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Psychology Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213122611"/>
+			<column name="DESCR" value="Chair of Animal and Avian Science Dept COC"/>
+			<column name="ID" value="2cae5071-5eed-4d93-86cf-0627680b6c6f"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9083c3c4-1443-4ee0-9c8c-dac23e1f8da8"/>
+			<column name="ORG" value="202"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of Animal and Avian Science Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122611"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Appointed by the Board of Regents.  The Chancellor is the administrative and executive head of Kuali University and exercises complete executive authority over the University, subject to the direction of the President.   The Chancellor is responsible for "/>
+			<column name="ID" value="3"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="AF68340D1A6B4407BC3479B45A4D65E4"/>
+			<column name="ORG" value="3"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chancellor"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chancellor"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="30"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="F8A137F2406642B696F6AA3A71BE1393"/>
+			<column name="ORG" value="59"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Sociology Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114631"/>
+			<column name="DESCR" value="Chair of African American Studies Dept COC"/>
+			<column name="ID" value="30928ac9-2076-4f88-aa63-c49bc3df5bd3"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="d0739854-0147-45de-85da-6b3d821907b7"/>
+			<column name="ORG" value="211"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of African American Studies Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114631"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Head of the Interdisciplinary Studies in Social Science Program"/>
+			<column name="ID" value="31"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0BAD6EFFCCBE4B2D8C50903994039DE8"/>
+			<column name="ORG" value="60"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Head"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Head of the Interdisciplinary Studies in Social Science Program"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121554"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of Engineering"/>
+			<column name="ID" value="32"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="810AA890FEC5478E8CA279E4EB8E3D6C"/>
+			<column name="ORG" value="31"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of Engineering"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213104435"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="33"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5F2A10D0A61C4C9AAA033831A4092AE7"/>
+			<column name="ORG" value="61"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Chemical Engineering Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="34"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="81079E76279841A78A4CF6B5FADEE2EE"/>
+			<column name="ORG" value="62"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Civil Engineering Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="35"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9DE81A014CB24207A2F101676EA35483"/>
+			<column name="ORG" value="63"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Mechanical Engineering Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="36"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5D5CABC6054A409A98E4BE8B69720B2E"/>
+			<column name="ORG" value="64"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Computer Science Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of the Science College"/>
+			<column name="ID" value="37"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="1A7907120CD3491685952EE15FC1EF71"/>
+			<column name="ORG" value="30"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of the Science College"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124303"/>
+			<column name="VER_NBR" value="5"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="38"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="4D1447FA673D40AC8D6B973993F15A9B"/>
+			<column name="ORG" value="65"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Biology Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="39"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5EE85BDFEB0C4505AC429D013E1AA7DE"/>
+			<column name="ORG" value="66"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Biochemistry Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114631"/>
+			<column name="DESCR" value="Member of African American Studies Dept COC"/>
+			<column name="ID" value="3ac710e3-722f-42ed-b42f-d38918e6e5e3"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="c9ac5a26-d4d4-4623-b020-cc337d774daa"/>
+			<column name="ORG" value="211"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of African American Studies Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114631"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213113449"/>
+			<column name="DESCR" value="Chair of the Art Hist & Arch COC"/>
+			<column name="ID" value="3f3085bf-5ad8-412d-ae37-11440d8d1a96"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="f703f52f-6698-4bc5-a291-16a3e5b31ed5"/>
+			<column name="ORG" value="213"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Art Hist & Arch COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113449"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="4"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="C84E553A98494C3DADD71049D6FEA9D7"/>
+			<column name="ORG" value="3"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.ViceChancellor"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chief Academic Officer and Executive Vice Chancellor"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="40"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="089D78B79C56484DBC7751BDF57C0207"/>
+			<column name="ORG" value="67"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Botany Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213120635"/>
+			<column name="DESCR" value="Chair of the Theatre, Dance, Perf Arts COC"/>
+			<column name="ID" value="4044012f-788e-4b79-b5a6-2428b72ef095"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="84097980-2651-4721-a838-f85b97c2ffec"/>
+			<column name="ORG" value="221"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Theatre, Dance, Perf Arts COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120811"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="41"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2BDF0BEAE64C4DCD8142DB11B00516AA"/>
+			<column name="ORG" value="68"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Chemistry Dept"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Geology Dept"/>
+			<column name="ID" value="42"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="4EEBB85F2AC943729FD7E8E8CF0E1EAE"/>
+			<column name="ORG" value="69"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Geology Dept"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213143638"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of the Business School"/>
+			<column name="ID" value="43"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="45170049337F40388EE0BE6C1EF1220E"/>
+			<column name="ORG" value="32"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of the Business School"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213111301"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="44"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="6D7FF9369784426AABDAB37C3C039E89"/>
+			<column name="ORG" value="70"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Head"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Head of the Accounting Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="45"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="DA8D2D3F9D5940688DA2021338B314DB"/>
+			<column name="ORG" value="71"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Head"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Head of the Finance Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="46"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="E23241E248ED47B990447979EEEB8F95"/>
+			<column name="ORG" value="72"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Head"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Head of the International Business Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="47"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="77FB05C9E9CC40399F579B59FB7EA51B"/>
+			<column name="ORG" value="73"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Head"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Head of the Marketing Section"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114001"/>
+			<column name="DESCR" value="Chair of the CCJS Dept COC"/>
+			<column name="ID" value="478be98f-107d-489e-9a93-0a189b056cf9"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7fb63188-5156-4c39-8239-84f5f33b00d5"/>
+			<column name="ORG" value="215"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the CCJS Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114024"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Dean of the Medical School"/>
+			<column name="ID" value="48"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="28D35E59BAFA4923803C64F5C83A7FF9"/>
+			<column name="ORG" value="34"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of the Medical School"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213101708"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="49"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="3C40118C621349A1A550B5CA30DE828F"/>
+			<column name="ORG" value="33"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Deal of the College of Education"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213115805"/>
+			<column name="DESCR" value="Member of the Philosophy Dept COC"/>
+			<column name="ID" value="4da903d7-2e75-4bc2-bfad-61e59f9de12d"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="70611d42-eb97-448b-a199-59d534bb6311"/>
+			<column name="ORG" value="219"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Philosophy Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115823"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="President of Kuali University"/>
+			<column name="ID" value="5"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="E46CD85ECBBD4788BB80B949FCB6C3CC"/>
+			<column name="ORG" value="6"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.President"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="President of Kuali University"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214093947"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="50"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2E966D638459427B8E2EFAF251C03EBD"/>
+			<column name="ORG" value="40"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Dean"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Dean of the College of Distance Education"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Extended Studies Program"/>
+			<column name="ID" value="51"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="EF7A5669A91340358F4FE469C7D8E237"/>
+			<column name="ORG" value="39"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Extended Studies Program"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213110612"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administers and supervises the implementation of all university financial aid policies, office procedures and funding programs. Supervise all office personnel. Plans, organizes and supervises the operational functions of the Financial Aid Office."/>
+			<column name="ID" value="52"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="DAB21FE580294D8C94F431FC28B0CA9D"/>
+			<column name="ORG" value="99"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Director"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Director of Financial Aid"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Oversee undergraduate students' college choice, transition to college, retention, and graduation rates. Manage and coordinate recruitment strategies with campus units involved in those areas, including the undergraduate admissions, scholarships and studen"/>
+			<column name="ID" value="53"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="07A2DE5DD9E84DEF8E50CB3FC37EFC79"/>
+			<column name="ORG" value="98"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Director"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Director of Admissions and Enrollment Planning"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Registrar oversee customer service to students, faculty members, administrators, alumni, and the general public in the areas of record keeping, course scheduling, course registration, exam scheduling, grades collection, program audit and evaluation, g"/>
+			<column name="ID" value="54"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="62B0A32ABEB14E8E8D40E799D901E9F8"/>
+			<column name="ORG" value="102"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Registrar"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Registrar"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Registrar oversee customer service to students, faculty members, administrators, alumni, and the general public in the areas of record keeping, course scheduling, course registration, exam scheduling, grades collection, program audit and evaluation, g"/>
+			<column name="ID" value="55"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9E577ED6904D440A8CF547D81F24ECA7"/>
+			<column name="ORG" value="103"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AssocRegistrar"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Associate Registrar for Curriculumn"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Registrar oversee customer service to students, faculty members, administrators, alumni, and the general public in the areas of record keeping, course scheduling, course registration, exam scheduling, grades collection, program audit and evaluation, g"/>
+			<column name="ID" value="56"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="1369FC361D9945899585CCBA1F0F4AAC"/>
+			<column name="ORG" value="102"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminAssistant"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Assistant in the Curriculumn Section of the Registrar's Office"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Director Student Accounts is responsible for tuition and student fee assessment, payment and collection.  "/>
+			<column name="ID" value="57"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="4508952E54D342379E43D69ACB20AB07"/>
+			<column name="ORG" value="107"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Director"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Bursar"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member terms are for one year beginning on July 1. Members may be reappointed by the units they represent.    The University Academic Advising Committee meets once a month throughout the academic year. The Committee membership is to include representative"/>
+			<column name="ID" value="58"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="3B3904E1F98E45E5AF13B7BEC5AE2844"/>
+			<column name="ORG" value="108"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Academic Advising Committee"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Committee membership includes: Associate Provost for Academic Programs, Council of Deans, Department Chairs Cabinet, Faculty, Senate, Student Government Association, Student Affairs "/>
+			<column name="ID" value="59"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2678F58916434F9BA170B0EE24CEDB7C"/>
+			<column name="ORG" value="111"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of ASPAC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213124842"/>
+			<column name="DESCR" value="Member of the Business School COC"/>
+			<column name="ID" value="5ee145f6-e65d-4c6d-a36c-c123163015d5"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9de51275-41ba-46ac-8808-8bc31405b75f"/>
+			<column name="ORG" value="168"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Business School COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124842"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The role of the Foundation Vice President includes developing policies, procedures, guidelines and long-range plans for the operation of the Kuali University Foundation, overseeing the financial affairs and investments of the Foundation, and serving as ad"/>
+			<column name="ID" value="6"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="49F72C7C2FC14652AF1F6D1788FA02DF"/>
+			<column name="ORG" value="11"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.VicePresident"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Foundation Vice President "/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Council's membership is to include representatives from: Admissions. Provost Division, Student Affairs, Each Academic College (approximately half should be faculty members), Senate, Student Government ?????? preferably a transfer student"/>
+			<column name="ID" value="60"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="6AA72C0110784C7DB074498A87436AA5"/>
+			<column name="ORG" value="112"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the Articulation Coordination Council"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="This committee consists of: Council of Deans member, Department Chairs Cabinet, Executive Vice President & Provost, Faculty, Senate Past President, Senate President, Senate President-Elect,  Student Government Association member"/>
+			<column name="ID" value="61"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="6F12879BFA8B480FBE034EB12B7613C2"/>
+			<column name="ORG" value="113"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213112941"/>
+			<column name="DESCR" value="Member of the College Arts and Hum COC"/>
+			<column name="ID" value="6161c095-35a7-4f68-8a17-03a1bdbd012a"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="2c3ccd5a-32a1-4483-a85a-7f81420e3509"/>
+			<column name="ORG" value="143"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the College Arts and Hum COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113246"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="This committee consists of: Associate Vice President - Budget & Planning, Executive Vice President & Provost, President of Kuali University, Vice President for Business & Finance, Vice President for Student Affairs"/>
+			<column name="ID" value="63"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="BECB5422DD1E4EF2951A214EA0C276F5"/>
+			<column name="ORG" value="114"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of Budget Cabinet"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213122048"/>
+			<column name="DESCR" value="Member of the College of Eng COC"/>
+			<column name="ID" value="633c2471-25b2-4f2c-8533-23d0faaf5736"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="870d0271-c9fd-4c15-b976-bd537f47ac57"/>
+			<column name="ORG" value="146"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the College of Eng COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122048"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Council of Deans has members from each college."/>
+			<column name="ID" value="64"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0557B0EF432C49D1B891B8E388016846"/>
+			<column name="ORG" value="119"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of The Council of Deans"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chairs of each academic department or program"/>
+			<column name="ID" value="65"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B8B91ACA018D4AAF9EA2F8381437D8CF"/>
+			<column name="ORG" value="120"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of Department Chairs Cabinet"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="??????45CFR46.107 IRB Membership (a) Each IRB shall have at least five members, with varying backgrounds to promote complete and adequate review of research activities commonly conducted by the institution. The IRB shall be sufficiently qualified through the e"/>
+			<column name="ID" value="66"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="8A59036F5D094F9A9491E26D5AD03931"/>
+			<column name="ORG" value="123"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the IRB"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213124958"/>
+			<column name="DESCR" value="Member of the Medical School COC"/>
+			<column name="ID" value="66bb93d8-73cf-420b-a615-856106a26fb1"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="d99644cf-537b-4bcb-b142-7e3442aceace"/>
+			<column name="ORG" value="170"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Medical School COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213125016"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The JAC is appointed by the President and is composed of ten faculty members nominated by the members of the University community or the Faculty Senate, five staff members nominated by the Vice President for Student Affairs, five graduate students nominat"/>
+			<column name="ID" value="67"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="416E8CA5736E4DB3B65D65C6AFB8A19A"/>
+			<column name="ORG" value="138"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the JAC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213121854"/>
+			<column name="DESCR" value="Member of the College of Educ COC"/>
+			<column name="ID" value="677491b9-c196-49f8-8eb2-c3e71de06c00"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9b814732-8fb5-44ce-b2fc-394042ee1153"/>
+			<column name="ORG" value="169"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the College of Educ COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121854"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213120635"/>
+			<column name="DESCR" value="Member of the Theatre, Dance, Perf Arts COC"/>
+			<column name="ID" value="67d869b6-b551-4f62-87e3-8a6f939191cf"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="cea03112-7e42-4543-b792-6015a91fc050"/>
+			<column name="ORG" value="221"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Theatre, Dance, Perf Arts COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120811"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Student Government members are elected by the students to a one year term. "/>
+			<column name="ID" value="68"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="50AD14AA50C549F99ABBB3AFFF3D985B"/>
+			<column name="ORG" value="132"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Rep"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Student Government Representative"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Student members are elected by the students for a one-year term. "/>
+			<column name="ID" value="69"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="AC4D4A80E5394BFAAE619C4D85C87D34"/>
+			<column name="ORG" value="133"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Rep"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Grad Student Representataive"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213124842"/>
+			<column name="DESCR" value="Chair of the Business School COC"/>
+			<column name="ID" value="6ab6c504-0aab-4665-9d43-bb7ecdce2439"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5c6608ef-cea1-49d7-aa5e-b42a4f2c112a"/>
+			<column name="ORG" value="168"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Business School COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124842"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Provost and Executive Vice President for Academic Affairs"/>
+			<column name="ID" value="7"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B1D49EAA893141CE931B7D5BF8AB58D6"/>
+			<column name="ORG" value="15"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.EVPP"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Provost and Executive Vice President for Academic Affairs"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213102017"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="70"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="DB01017FCAD04B259D11227810D93178"/>
+			<column name="ORG" value="134"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.President"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Senate President"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="71"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="12FF69D11B2D4DF2A0D76A9EAB3ECBBB"/>
+			<column name="ORG" value="135"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the AAC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="72"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="46235DA82E4E4951B4C335BCEF98084C"/>
+			<column name="ORG" value="136"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the FDARC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="73"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="843E54C2A69E421490A15BDE106232EC"/>
+			<column name="ORG" value="137"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of  the RPAC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="74"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="119B8F9B586D4536872EB6823504353A"/>
+			<column name="ORG" value="138"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the JAC"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="ID" value="75"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="FC705D05D8F1456AA68006D0DC566C9E"/>
+			<column name="ORG" value="140"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Faculty Governance Council"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the COC"/>
+			<column name="ID" value="76"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7342E3DB1C9040EFB11E75C2A9A861E0"/>
+			<column name="ORG" value="141"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Ex-Officio Member of the COC"/>
+			<column name="ID" value="77"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="E188AA10B1CB48608ACF6FEB07599B21"/>
+			<column name="ORG" value="141"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Ex-Officio"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Ex-Officio Member of the COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Member of the COC"/>
+			<column name="ID" value="78"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="20FFA6EBB5AC483E9DB1DD49CC0A57E6"/>
+			<column name="ORG" value="141"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Member of the COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Executive Officer of the COC"/>
+			<column name="ID" value="79"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0704822513BD4A4187A2288E2985F9D6"/>
+			<column name="ORG" value="141"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.ExecutiveOfficer"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Executive Officer of the COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114830"/>
+			<column name="DESCR" value="Member of the Economics Dept COC"/>
+			<column name="ID" value="7e83306b-b2a6-4606-b2f3-215a3d4cd531"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="62c38158-6015-43fc-bc56-c09502e54fcb"/>
+			<column name="ORG" value="217"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Economics Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114830"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="The Vice President for Student Affairs oversees student services and programs for the entire campus community. Composed of 15 departments and over 1500 staff members, the Division of Student Affairs is involved in all aspects of a student??????s life including"/>
+			<column name="ID" value="8"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="9FEAB0A29D84419FA177F0A9BB32AD66"/>
+			<column name="ORG" value="17"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.VicePresident"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Vice President of the Student Affairs"/>
+			<column name="UPDATEID" value="TESTUSER"/>
+			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Administrative Member of the COC"/>
+			<column name="ID" value="80"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="5DEC1FD8113C41D0A4DC6EF618EF2EAC"/>
+			<column name="ORG" value="141"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AdminMember"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Administrative Member of the COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the English COC"/>
+			<column name="ID" value="81"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="87E54B1AEA3C424B9915EE685F9E1FAD"/>
+			<column name="ORG" value="147"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the English COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Co-Chair of the FineArts COC"/>
+			<column name="ID" value="82"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="95D59AEFB83D4C3BB06721CF94B23A15"/>
+			<column name="ORG" value="148"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Co-Chair of the FineArts COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the French COC"/>
+			<column name="ID" value="83"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="FB4F7F3DFDBD426EB07CE7F9E046B904"/>
+			<column name="ORG" value="149"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the French COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Geography COC"/>
+			<column name="ID" value="84"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="00D3F83549DE4C08BB663FBEEB1FF1D0"/>
+			<column name="ORG" value="150"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Geography COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="VER_NBR" value="3"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Linguistics COC"/>
+			<column name="ID" value="85"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="E74DB68D31554FAE8B3398E475DD91CB"/>
+			<column name="ORG" value="151"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Linguistics COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Music COC"/>
+			<column name="ID" value="86"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="25095EE0C1D64FC39827CD5AF784A29C"/>
+			<column name="ORG" value="152"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Music COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the History COC"/>
+			<column name="ID" value="87"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="E6EE7BD2E2304D90B95DC005F166E4EC"/>
+			<column name="ORG" value="153"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the History COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the PolySci COC"/>
+			<column name="ID" value="88"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="B0DBA22A905245E0BB933E1B1B2BD3E2"/>
+			<column name="ORG" value="154"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the PolySci COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Psychology COC"/>
+			<column name="ID" value="89"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="49DED6C1D3494787A4DE92D5817FE137"/>
+			<column name="ORG" value="155"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Psychology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213112941"/>
+			<column name="DESCR" value="Chair of the College Arts and Hum COC"/>
+			<column name="ID" value="8933f274-9f7c-455b-8a3c-f5c7561eed34"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7c836151-9bdb-456b-bf93-8027b8437d15"/>
+			<column name="ORG" value="143"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the College Arts and Hum COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113246"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="VP for Business Administration and Finance"/>
+			<column name="ID" value="9"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="3D3C2384D87248C4A07E69B0EA22233D"/>
+			<column name="ORG" value="16"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.VicePresident"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="VP for Business Administration and Finance"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214095427"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Sociology COC"/>
+			<column name="ID" value="90"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0580423FDDEF4403B20B8A76340AFA0E"/>
+			<column name="ORG" value="156"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Sociology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the InterdiscBSOS COC"/>
+			<column name="ID" value="91"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="3010BD2582A64460813FB351099C8C09"/>
+			<column name="ORG" value="157"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the InterdiscBSOS COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Chemical COC"/>
+			<column name="ID" value="92"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D0C6916BE98942A49864F10A4A42C3C8"/>
+			<column name="ORG" value="158"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Chemical COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Civil COC"/>
+			<column name="ID" value="93"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="8DBD062878084BE189088D4ACFFCE68D"/>
+			<column name="ORG" value="159"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Civil COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Mechanical COC"/>
+			<column name="ID" value="94"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="D32F5799E861474582BEF19D99C01FA4"/>
+			<column name="ORG" value="160"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Mechanical COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the CompSci COC"/>
+			<column name="ID" value="95"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="7718CCDDDE984DC4A74CB1BA4E68D879"/>
+			<column name="ORG" value="161"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the CompSci COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Biology COC"/>
+			<column name="ID" value="96"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="54B7C8DEE3724BA58C0143175FA58ECE"/>
+			<column name="ORG" value="162"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Biology COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Biochemistry COC"/>
+			<column name="ID" value="97"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="736521331BCD43C49458F2E6EBA99BBD"/>
+			<column name="ORG" value="163"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Biochemistry COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Botany COC"/>
+			<column name="ID" value="98"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="8CA9AE2DF87549CCAB06ADC7B7F34617"/>
+			<column name="ORG" value="164"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Botany COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="ATP_DUR_TYP_KEY" value="1"/>
+			<column name="CREATEID" value="TESTUSER"/>
+			<column name="CREATETIME" value="20000101000000"/>
+			<column name="DESCR" value="Chair of the Chemistry COC"/>
+			<column name="ID" value="99"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="14C918638C244BF48BEEA6A69910B1EC"/>
+			<column name="ORG" value="165"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TM_QUANTITY" value="1"/>
+			<column name="TTL" value="Chair of the Chemistry COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114312"/>
+			<column name="DESCR" value="Member of the Physics Dept COC"/>
+			<column name="ID" value="a4ed027e-5a78-4c9a-bb99-dcc25c4cf216"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="4fe7947f-0a9d-4373-93e5-62789dd6a4aa"/>
+			<column name="ORG" value="207"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Physics Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114312"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114001"/>
+			<column name="DESCR" value="Member of the CCJS Dept COC"/>
+			<column name="ID" value="b6be0954-907f-472c-a15f-664acc3623fb"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="44efcb2a-3618-4d0a-949e-842a33b8febe"/>
+			<column name="ORG" value="215"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the CCJS Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114024"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213122048"/>
+			<column name="DESCR" value="Chair of the College of Eng COC"/>
+			<column name="ID" value="bd8ec13e-0caf-4b96-9c61-1aa27d1d4f84"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="89415129-16db-48e7-b780-b6eaecccea2a"/>
+			<column name="ORG" value="146"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the College of Eng COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122048"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213115805"/>
+			<column name="DESCR" value="Chair of the Philosophy Dept COC"/>
+			<column name="ID" value="c45c1a86-2cb1-42f4-8942-57050f520544"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="0a2fc8c1-c1c1-47e8-9e78-9497910e9932"/>
+			<column name="ORG" value="219"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Philosophy Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213115823"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114312"/>
+			<column name="DESCR" value="Chair of the Physics Dept COC"/>
+			<column name="ID" value="c5a80a40-b0d5-4304-b2d7-87c20ed39257"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="678bbc2e-f83d-44b8-9374-538f1e1b9b15"/>
+			<column name="ORG" value="207"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Physics Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114312"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101214143432"/>
+			<column name="DESCR" value="Chair of the Mathematics Dept"/>
+			<column name="ID" value="d00522cd-443e-448d-9462-63ef47a958aa"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="3055dd2e-1ce7-4a79-a400-fb1af1d86828"/>
+			<column name="ORG" value="205"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Mathematics Dept"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101214143432"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213113449"/>
+			<column name="DESCR" value="Member of the Art Hist & Arch COC"/>
+			<column name="ID" value="d66baff2-9757-4ee5-a663-8f58a281f14c"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="df7e6f1a-c5f6-4666-9146-2741e629b1fb"/>
+			<column name="ORG" value="213"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Art Hist & Arch COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213113449"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213114830"/>
+			<column name="DESCR" value="Chair of the Economics Dept COC"/>
+			<column name="ID" value="e635d2db-17e8-43e3-a183-c5e9724c9b7e"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="65705f70-a15d-43b0-aad8-83dd24487366"/>
+			<column name="ORG" value="217"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the Economics Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213114830"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213143638"/>
+			<column name="DESCR" value="Member of the Geology Dept"/>
+			<column name="ID" value="e944218f-9643-466c-a132-d7ca20ae6097"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="b8c9935d-1941-47d6-8aec-358da398fa0d"/>
+			<column name="ORG" value="69"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of the Geology Dept"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213143638"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213121854"/>
+			<column name="DESCR" value="Chair of the College of Educ COC"/>
+			<column name="ID" value="e9868e8b-14df-434b-8b19-6a764ed5f1e3"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="d5b38c78-eb40-4abb-8917-d06440799f84"/>
+			<column name="ORG" value="169"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
+			<column name="TTL" value="Chair of the College of Educ COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213121854"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSOR_ORG_POS_RESTR">
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" value="20101213122611"/>
+			<column name="DESCR" value="Member of Animal and Avian Science Dept COC"/>
+			<column name="ID" value="f9e87016-d54d-4dcf-9f3f-65babe73eb46"/>
+			<column name="MAX_NUM_RELTN" value="100"/>
+			<column name="MIN_NUM_RELTN" value="1"/>
+			<column name="OBJ_ID" value="bfc594fb-dc86-4297-8b36-5e950f238101"/>
+			<column name="ORG" value="202"/>
+			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
+			<column name="TTL" value="Member of Animal and Avian Science Dept COC"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" value="20101213122611"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

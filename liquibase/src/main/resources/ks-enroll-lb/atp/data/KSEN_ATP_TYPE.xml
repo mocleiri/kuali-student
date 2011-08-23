@@ -1,0 +1,242 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_ATP_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="kuali.atp.atp.relation.associated"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpAtpRelationInfo"/>
+			<column name="TYPE_DESC" value="kuali.atp.atp.relation.associated"/>
+			<column name="TYPE_KEY" value="kuali.atp.atp.relation.associated"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="kuali.atp.atp.relation.includes"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpAtpRelationInfo"/>
+			<column name="TYPE_DESC" value="kuali.atp.atp.relation.includes"/>
+			<column name="TYPE_KEY" value="kuali.atp.atp.relation.includes"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Advance Registration Period"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
+			<column name="TYPE_DESC" value="Advance Registration Period"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.AdvanceRegistrationPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Drop Date"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
+			<column name="TYPE_DESC" value="Drop Period Ends"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.DropDate"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Grades Due"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
+			<column name="TYPE_DESC" value="Grades Due"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.GradesDue"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Registration Period"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
+			<column name="TYPE_DESC" value="Registration Period"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.RegistrationPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Owns"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpMilestoneRelationInfo"/>
+			<column name="TYPE_DESC" value="Indicates the ATP owns the specified milestone"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.relation.owns"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Reuses"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpMilestoneRelationInfo"/>
+			<column name="TYPE_DESC" value="Indicates the ATP reuses the specified milestone that another ATP owns "/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.relation.reuses"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="AY"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Full Academic Year"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.AY"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Academic Calendar"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Academic Calendar"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.AcademicCalendar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Ad hoc"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Ad hoc"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Adhoc"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Campus Calendar"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Campus Calendar"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.CampusCalendar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="FY"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Fiscal Year"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.FY"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Fall"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Fall Semester"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Fall"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Fall-Spring"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Fall and Spring Semesters"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.FallSpring"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Fall Half-Semester 1"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Fall Half-Semester 1"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.HalfFall1"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Fall Half-Semester 2"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Fall Half-Semester 2"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.HalfFall2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Spring Half-Semester 1"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Spring Half-Semester 1"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.HalfSpring1"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Spring Half-Semester 1"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Spring Half-Semester 2"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.HalfSpring2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Holiday"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Holiday"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Holiday"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Mini Semester 1A"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Mini Semester 1A"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Mini-mester1A"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Mini Semester 1B"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Mini Semester 1B"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Mini-mester1B"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Mini Semester 2C"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Mini Semester 2C"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Mini-mester2C"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Mini Semester 2D"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Mini Semester 2D"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Mini-mester2D"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Session 1"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Session 1"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Session1"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Session 2"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Session 2"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Session2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Session G1"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Session G1"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.SessionG1"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Session G2"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Session G2"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.SessionG2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Spring"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Spring Semester"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Spring"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="SpringBreak"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Spring Break"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.SpringBreak"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Summer"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Summer Semester"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Summer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Summer Eve"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Summer Eve"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.SummerEve"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Thanksgiving"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Thanksgiving"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Thanksgiving"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Winter"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpInfo"/>
+			<column name="TYPE_DESC" value="Winter"/>
+			<column name="TYPE_KEY" value="kuali.atp.type.Winter"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

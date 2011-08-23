@@ -1,0 +1,46 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KREW_DOC_TYP_PLCY_RELN_T-initial-data" author="alubbers">
+		<insert tableName="KREW_DOC_TYP_PLCY_RELN_T">
+			<column name="DOC_PLCY_NM" value="ALLOW_UNREQUESTED_ACTION"/>
+			<column name="DOC_TYP_ID" value="3021"/>
+			<column name="OBJ_ID" value="8D0F3B86-4DA4-AEAF-636A-09F4A55F56A8"/>
+			<column name="PLCY_NM" value="0"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PLCY_RELN_T">
+			<column name="DOC_PLCY_NM" value="DEFAULT_APPROVE"/>
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="OBJ_ID" value="61BA2DCF3BE658EEE0404F8189D80CAE"/>
+			<column name="PLCY_NM" value="1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PLCY_RELN_T">
+			<column name="DOC_PLCY_NM" value="DEFAULT_APPROVE"/>
+			<column name="DOC_TYP_ID" value="2680"/>
+			<column name="OBJ_ID" value="61BA2DCF3BE858EEE0404F8189D80CAE"/>
+			<column name="PLCY_NM" value="1"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PLCY_RELN_T">
+			<column name="DOC_PLCY_NM" value="LOOK_FUTURE"/>
+			<column name="DOC_TYP_ID" value="2024"/>
+			<column name="OBJ_ID" value="61BA2DCF3BE758EEE0404F8189D80CAE"/>
+			<column name="PLCY_NM" value="1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PLCY_RELN_T">
+			<column name="DOC_PLCY_NM" value="LOOK_FUTURE"/>
+			<column name="DOC_TYP_ID" value="2680"/>
+			<column name="OBJ_ID" value="61BA2DCF3BE958EEE0404F8189D80CAE"/>
+			<column name="PLCY_NM" value="1"/>
+			<column name="VER_NBR" value="2"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_PLCY_RELN_T">
+			<column name="DOC_PLCY_NM" value="LOOK_FUTURE"/>
+			<column name="DOC_TYP_ID" value="3009"/>
+			<column name="OBJ_ID" value="A8AD6F3B-70F9-EFB0-20F6-DEEB0AF59671"/>
+			<column name="PLCY_NM" value="1"/>
+			<column name="VER_NBR" value="10"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

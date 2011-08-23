@@ -1,0 +1,81 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ENTITY_PRIV_PREF_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4016"/>
+			<column name="LAST_UPDT_DT" value="20081108164623"/>
+			<column name="OBJ_ID" value="5B35758A2D300503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="N"/>
+			<column name="SUPPRESS_EMAIL_IND" value="N"/>
+			<column name="SUPPRESS_NM_IND" value="N"/>
+			<column name="SUPPRESS_PHONE_IND" value="N"/>
+			<column name="SUPPRESS_PRSNL_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4026"/>
+			<column name="LAST_UPDT_DT" value="20081108164623"/>
+			<column name="OBJ_ID" value="5B35758A2D310503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="N"/>
+			<column name="SUPPRESS_EMAIL_IND" value="N"/>
+			<column name="SUPPRESS_NM_IND" value="Y"/>
+			<column name="SUPPRESS_PHONE_IND" value="N"/>
+			<column name="SUPPRESS_PRSNL_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4034"/>
+			<column name="LAST_UPDT_DT" value="20081108164624"/>
+			<column name="OBJ_ID" value="5B35758A2D320503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="N"/>
+			<column name="SUPPRESS_EMAIL_IND" value="Y"/>
+			<column name="SUPPRESS_NM_IND" value="N"/>
+			<column name="SUPPRESS_PHONE_IND" value="N"/>
+			<column name="SUPPRESS_PRSNL_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4043"/>
+			<column name="LAST_UPDT_DT" value="20081108164624"/>
+			<column name="OBJ_ID" value="5B35758A2D330503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="Y"/>
+			<column name="SUPPRESS_EMAIL_IND" value="N"/>
+			<column name="SUPPRESS_NM_IND" value="N"/>
+			<column name="SUPPRESS_PHONE_IND" value="N"/>
+			<column name="SUPPRESS_PRSNL_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4044"/>
+			<column name="LAST_UPDT_DT" value="20081108164624"/>
+			<column name="OBJ_ID" value="5B35758A2D340503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="N"/>
+			<column name="SUPPRESS_EMAIL_IND" value="N"/>
+			<column name="SUPPRESS_NM_IND" value="N"/>
+			<column name="SUPPRESS_PHONE_IND" value="Y"/>
+			<column name="SUPPRESS_PRSNL_IND" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4045"/>
+			<column name="LAST_UPDT_DT" value="20081108164624"/>
+			<column name="OBJ_ID" value="5B35758A2D350503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="N"/>
+			<column name="SUPPRESS_EMAIL_IND" value="N"/>
+			<column name="SUPPRESS_NM_IND" value="N"/>
+			<column name="SUPPRESS_PHONE_IND" value="N"/>
+			<column name="SUPPRESS_PRSNL_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
+			<column name="ENTITY_ID" value="4046"/>
+			<column name="LAST_UPDT_DT" value="20081108164624"/>
+			<column name="OBJ_ID" value="5B35758A2D360503E0404F8189D878D8"/>
+			<column name="SUPPRESS_ADDR_IND" value="Y"/>
+			<column name="SUPPRESS_EMAIL_IND" value="Y"/>
+			<column name="SUPPRESS_NM_IND" value="Y"/>
+			<column name="SUPPRESS_PHONE_IND" value="Y"/>
+			<column name="SUPPRESS_PRSNL_IND" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

@@ -1,0 +1,396 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSAP_MLSTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Admissions Application Due Early Cycle"/>
+			<column name="OBJ_ID" value="A58E956F8F784BB29C4DD6FF7B9ED4DB"/>
+			<column name="TYPE_DESC" value="Early Admissions Application Due Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.AdmissionsApplicationDueEarlyCycle"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Alumni Day"/>
+			<column name="OBJ_ID" value="870900CF9FCB40F38B83115E1B202940"/>
+			<column name="TYPE_DESC" value="Alumni Day"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.AlumniDay"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Baccalaureate"/>
+			<column name="OBJ_ID" value="5A340649A10E45F7BF7FA77EB5284986"/>
+			<column name="TYPE_DESC" value="Baccalaureate"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Baccalaureate"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Begin Packaging"/>
+			<column name="OBJ_ID" value="D27F931D062E4A4F9301B988E010B6EC"/>
+			<column name="TYPE_DESC" value="Packaging Process Begin Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.BeginPackaging"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Classes Begin"/>
+			<column name="OBJ_ID" value="3839C93114344FD3B2FA87E9CA9E6CA5"/>
+			<column name="TYPE_DESC" value="Classes Begin Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.ClassesBegin"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Classes End"/>
+			<column name="OBJ_ID" value="0FA1AC57E12E4477A2EE1BDA10B617E6"/>
+			<column name="TYPE_DESC" value="Classes End Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.ClassesEnd"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Commencement"/>
+			<column name="OBJ_ID" value="C769DD0BD7AE4DBA9A9B3B290B8A5CAD"/>
+			<column name="TYPE_DESC" value="Commencement"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Commencement"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Coordinators Kickoff Meeting"/>
+			<column name="OBJ_ID" value="2B6EE819BFF24FC89610901E6089E6CE"/>
+			<column name="TYPE_DESC" value="Coordinators Kickoff Meeting"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.CoordinatorsKickoffMeeting"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Course Selection Period End"/>
+			<column name="OBJ_ID" value="67D995B76DA748AFBE1BD432C4ECF713"/>
+			<column name="TYPE_DESC" value="Course Selection Period ends"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.CourseSelectionPeriodEnd"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Curriculum Committee Meeting"/>
+			<column name="OBJ_ID" value="714F3D3505DD405A86CBC11B34CDB53C"/>
+			<column name="TYPE_DESC" value="Curriculum Committee Meeting"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.CurriculumCommitteeMeeting"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Disburse Funds"/>
+			<column name="OBJ_ID" value="C27AB47E6988486CB08F53751F765CCD"/>
+			<column name="TYPE_DESC" value="Funds Disbursement Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.DisburseFunds"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Drop Date"/>
+			<column name="OBJ_ID" value="DF3C7C1983E44559A8399139DAF47459"/>
+			<column name="TYPE_DESC" value="Drop Period ends"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.DropDate"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Drop Deadline Without Record"/>
+			<column name="OBJ_ID" value="0FB23F33DEFD4A6A9876BAEA78FAE032"/>
+			<column name="TYPE_DESC" value="Deadline to drop w/o "W""/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Financial Aid Census"/>
+			<column name="OBJ_ID" value="38340FA50FF249D3B6B5B020931FF1BB"/>
+			<column name="TYPE_DESC" value="Financial Aid Census Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.FinancialAidCensus"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Generate Bills"/>
+			<column name="OBJ_ID" value="E2B59CF2812D4185833A7D329C17F4F5"/>
+			<column name="TYPE_DESC" value="Bills Generation Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.GenerateBills"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Grades Due"/>
+			<column name="OBJ_ID" value="C32E76F7B67B4E508AF84FAF163365B2"/>
+			<column name="TYPE_DESC" value="Grades Due "/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.GradesDue"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Graduation Application Deadline"/>
+			<column name="OBJ_ID" value="785BD6896C174C24BEF8059C9CED66C6"/>
+			<column name="TYPE_DESC" value="Deadline to apply for Graduation"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.GraduationApplicationDeadline"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Homecoming"/>
+			<column name="OBJ_ID" value="1EDC637CF6E24BBEAED6985263AF5CBE"/>
+			<column name="TYPE_DESC" value="Homecoming"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Homecoming"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Independence Day Observed"/>
+			<column name="OBJ_ID" value="963907B265BD4EBAA65E41326ACA0FD0"/>
+			<column name="TYPE_DESC" value="Independence Day Observed"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.IndependenceDayObserved"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Labor Day"/>
+			<column name="OBJ_ID" value="A7563000D10C4F7F8483584E28328FE0"/>
+			<column name="TYPE_DESC" value="Labor Day"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.LaborDay"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Last Minute Proposals Deadline"/>
+			<column name="OBJ_ID" value="6D16F3904FB84EC98AFC412568F38AFB"/>
+			<column name="TYPE_DESC" value="Deadline for Last Minute Proposals"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.LastMinuteProposalsDeadline"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Leave of Absense Begin"/>
+			<column name="OBJ_ID" value="C553B869C6894C458CE6A9A56A8F919F"/>
+			<column name="TYPE_DESC" value="Begin Leave of Absence option"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.LeaveofAbsenseBegin"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="MLK Day Observed"/>
+			<column name="OBJ_ID" value="EB92E03B3A1A4C018D36DED3A2F7EFEA"/>
+			<column name="TYPE_DESC" value="Martin Luther King, Jr. Day Observed"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.MLKDayObserved"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Mail Progress Reports"/>
+			<column name="OBJ_ID" value="DCAF67163ED94D9AA37D1A0CDED7178B"/>
+			<column name="TYPE_DESC" value="Satisfactory Progress Reports/Letters"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.MailProgressReports"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Major Changes Deadline"/>
+			<column name="OBJ_ID" value="AA8A2FA1B4F44F4FA0CB6B78D528A59A"/>
+			<column name="TYPE_DESC" value="Deadline for Proposals with Major Changes"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.MajorChangesDeadline"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Memorial Day Observed"/>
+			<column name="OBJ_ID" value="EC0814F98B1B433088D5176D4F618893"/>
+			<column name="TYPE_DESC" value="Memorial Day Observed"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.MemorialDayObserved"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Minor Changes Deadline"/>
+			<column name="OBJ_ID" value="BAB10682E5A246B1A3A8BC371CF20F64"/>
+			<column name="TYPE_DESC" value="Deadline for Proposals with Minor Changes"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.MinorChangesDeadline"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Move-in Date"/>
+			<column name="OBJ_ID" value="11AE10621E7E408FAE1A87D5B680B832"/>
+			<column name="TYPE_DESC" value="Move-in Date for Some category of students"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Move-inDate"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="New Student Convocation"/>
+			<column name="OBJ_ID" value="D36D24D2B46C4B02B8F95C98AB92D6E0"/>
+			<column name="TYPE_DESC" value="New Student Convocation and Opening Exercises"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.NewStudentConvocation"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Payment Due"/>
+			<column name="OBJ_ID" value="29CEB5B47D4747E0A2C658BE082FCBB0"/>
+			<column name="TYPE_DESC" value="Payment Due Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.PaymentDue"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Post Grades"/>
+			<column name="OBJ_ID" value="02972740246649D998D42A5DBE1C0839"/>
+			<column name="TYPE_DESC" value="Grades Posted"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.PostGrades"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Post Grades Midterm"/>
+			<column name="OBJ_ID" value="0ABE37AA97BE4BF5A53E1134CB15A5B0"/>
+			<column name="TYPE_DESC" value="Mid term Grades Posted"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.PostGradesMidterm"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Process Refunds"/>
+			<column name="OBJ_ID" value="D1BB32CB13A648E7964248D811322D86"/>
+			<column name="TYPE_DESC" value="Refund Process Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.ProcessRefunds"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Publish Changes On Line"/>
+			<column name="OBJ_ID" value="90DDF9E3DB99494A8FFFB497EC82E700"/>
+			<column name="TYPE_DESC" value="Approved Course Changes Published On-Line"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.PublishChangesOnLine"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Refund 100"/>
+			<column name="OBJ_ID" value="F9520F6BBF3542EFABFAADEEE65AF32E"/>
+			<column name="TYPE_DESC" value="Cancel w/ 100% refund Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Refund100"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Refund 20"/>
+			<column name="OBJ_ID" value="D53D3FE7AF4E4A21B4D68E4F5C4B7EAE"/>
+			<column name="TYPE_DESC" value="Cancel w/ 20% refund Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Refund20"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Refund 40"/>
+			<column name="OBJ_ID" value="22DB392C0F4148D59B058E7265103E86"/>
+			<column name="TYPE_DESC" value="Cancel w/ 40% refund Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Refund40"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Refund 50"/>
+			<column name="OBJ_ID" value="975FFF9554444BFBB70B357381ABC9D6"/>
+			<column name="TYPE_DESC" value="Cancel w/ 50% refund Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Refund50"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Refund 60"/>
+			<column name="OBJ_ID" value="5E5948C7607A425984003C6CC7C01094"/>
+			<column name="TYPE_DESC" value="Cancel w/ 60% refund Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Refund60"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Refund 80"/>
+			<column name="OBJ_ID" value="F822058120AC482384F14AB2D3AA483A"/>
+			<column name="TYPE_DESC" value="Cancel w/ 80% refund Date"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.Refund80"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Registration Begins"/>
+			<column name="OBJ_ID" value="8EECC40383FF4096ACA6FFF015FD7C10"/>
+			<column name="TYPE_DESC" value="Registration begins"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.RegistrationBegins"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Registration Begins Non Degree"/>
+			<column name="OBJ_ID" value="A70CAF9742894939B8C016E994F1D744"/>
+			<column name="TYPE_DESC" value="Registration for non-degree seeking students"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.RegistrationBeginsNonDegree"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Registration Begins Transfer"/>
+			<column name="OBJ_ID" value="AD09D1C702504E5DA1E6F8448459F532"/>
+			<column name="TYPE_DESC" value="Registration for Transfer Students"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.RegistrationBeginsTransfer"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Registration Begins for MBA"/>
+			<column name="OBJ_ID" value="E7D00A7CA974407FA531520AFAF05D64"/>
+			<column name="TYPE_DESC" value="MBA Registration begins"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.RegistrationBeginsforMBA"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Room Scheduling Begin"/>
+			<column name="OBJ_ID" value="F0798B0701044F9080903EFA9EFF98A3"/>
+			<column name="TYPE_DESC" value="Begin Room Scheduling for Next Year"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.RoomSchedulingBegin"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Spring Break Begins"/>
+			<column name="OBJ_ID" value="1D6E63070F8F49E6A60D3A860381AC31"/>
+			<column name="TYPE_DESC" value="Spring Break Begins"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.SpringBreakBegins"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Spring Break Ends"/>
+			<column name="OBJ_ID" value="D1D5AE0597E544A8B1407524A5931854"/>
+			<column name="TYPE_DESC" value="Spring Break Classes Resume"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.SpringBreakEnds"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Thanksgiving Break Begin"/>
+			<column name="OBJ_ID" value="6AE3F05A8E07417AB795B2668997948F"/>
+			<column name="TYPE_DESC" value="Thanksgiving Break Begins"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.ThanksgivingBreakBegin"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSAP_MLSTN_TYPE">
+			<column name="EFF_DT" value="20000101000000"/>
+			<column name="NAME" value="Thanksgiving Break End"/>
+			<column name="OBJ_ID" value="5251075D8F374D2E82758B542DC0BCC9"/>
+			<column name="TYPE_DESC" value="Thanksgiving Break ends"/>
+			<column name="TYPE_KEY" value="kuali.atp.Milestone.ThanksgivingBreakEnd"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

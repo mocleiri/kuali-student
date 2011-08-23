@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSEN_RESTRICTION-initial-data" author="alubbers">
+		<insert tableName="KSEN_RESTRICTION">
+			<column name="ID" value="Hold-Restriction-1"/>
+			<column name="NAME" value="Restriction one"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-Hold-101"/>
+			<column name="STATE_ID" value="kuali.hold.restriction.state.active"/>
+			<column name="TYPE_ID" value="kuali.hold.restriction.type.registration"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RESTRICTION">
+			<column name="ID" value="Hold-Restriction-2"/>
+			<column name="NAME" value="Restriction two"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-Hold-201"/>
+			<column name="STATE_ID" value="kuali.hold.restriction.state.active"/>
+			<column name="TYPE_ID" value="kuali.hold.restriction.type.receive.diploma"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

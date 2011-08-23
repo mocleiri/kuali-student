@@ -1,0 +1,284 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_ENTITY_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1"/>
+			<column name="LAST_UPDT_DT" value="20081107094902"/>
+			<column name="OBJ_ID" value="5B1B6B919CC96496E0404F8189D822F2"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1100"/>
+			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="OBJ_ID" value="5B97C50B03946110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1101"/>
+			<column name="LAST_UPDT_DT" value="20081113140636"/>
+			<column name="OBJ_ID" value="5B97C50B03956110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1102"/>
+			<column name="LAST_UPDT_DT" value="20081113140636"/>
+			<column name="OBJ_ID" value="5B97C50B03966110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1103"/>
+			<column name="LAST_UPDT_DT" value="20081113140636"/>
+			<column name="OBJ_ID" value="5B97C50B03976110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1104"/>
+			<column name="LAST_UPDT_DT" value="20081113140636"/>
+			<column name="OBJ_ID" value="5B97C50B03986110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1105"/>
+			<column name="LAST_UPDT_DT" value="20081113140636"/>
+			<column name="OBJ_ID" value="5B97C50B03996110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1106"/>
+			<column name="LAST_UPDT_DT" value="20081113140636"/>
+			<column name="OBJ_ID" value="5B97C50B039A6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1107"/>
+			<column name="LAST_UPDT_DT" value="20081113140637"/>
+			<column name="OBJ_ID" value="5B97C50B039B6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1108"/>
+			<column name="LAST_UPDT_DT" value="20081113140637"/>
+			<column name="OBJ_ID" value="5B97C50B039C6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1109"/>
+			<column name="LAST_UPDT_DT" value="20081113140637"/>
+			<column name="OBJ_ID" value="5B97C50B039D6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1110"/>
+			<column name="LAST_UPDT_DT" value="20081113140637"/>
+			<column name="OBJ_ID" value="5B97C50B039E6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1111"/>
+			<column name="LAST_UPDT_DT" value="20081113140637"/>
+			<column name="OBJ_ID" value="5B97C50B039F6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1112"/>
+			<column name="LAST_UPDT_DT" value="20081113140637"/>
+			<column name="OBJ_ID" value="5B97C50B03A06110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1113"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A16110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1114"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A26110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1115"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A36110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1116"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A46110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1117"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A56110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1118"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A66110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1119"/>
+			<column name="LAST_UPDT_DT" value="20081113140638"/>
+			<column name="OBJ_ID" value="5B97C50B03A76110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1120"/>
+			<column name="LAST_UPDT_DT" value="20081113140639"/>
+			<column name="OBJ_ID" value="5B97C50B03A86110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1121"/>
+			<column name="LAST_UPDT_DT" value="20081113140639"/>
+			<column name="OBJ_ID" value="5B97C50B03A96110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1122"/>
+			<column name="LAST_UPDT_DT" value="20081113140639"/>
+			<column name="OBJ_ID" value="5B97C50B03AA6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1123"/>
+			<column name="LAST_UPDT_DT" value="20081113140639"/>
+			<column name="OBJ_ID" value="5B97C50B03AB6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1124"/>
+			<column name="LAST_UPDT_DT" value="20081113140639"/>
+			<column name="OBJ_ID" value="5B97C50B03AC6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1125"/>
+			<column name="LAST_UPDT_DT" value="20081113140639"/>
+			<column name="OBJ_ID" value="5B97C50B03AD6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1126"/>
+			<column name="LAST_UPDT_DT" value="20081113140640"/>
+			<column name="OBJ_ID" value="5B97C50B03AE6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1127"/>
+			<column name="LAST_UPDT_DT" value="20081113140640"/>
+			<column name="OBJ_ID" value="5B97C50B03AF6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1128"/>
+			<column name="LAST_UPDT_DT" value="20081113140640"/>
+			<column name="OBJ_ID" value="5B97C50B03B06110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1129"/>
+			<column name="LAST_UPDT_DT" value="20081113140640"/>
+			<column name="OBJ_ID" value="5B97C50B03B16110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1130"/>
+			<column name="LAST_UPDT_DT" value="20081113140640"/>
+			<column name="OBJ_ID" value="5B97C50B03B26110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1131"/>
+			<column name="LAST_UPDT_DT" value="20081113140640"/>
+			<column name="OBJ_ID" value="5B97C50B03B36110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1132"/>
+			<column name="LAST_UPDT_DT" value="20081113140641"/>
+			<column name="OBJ_ID" value="5B97C50B03B46110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1133"/>
+			<column name="LAST_UPDT_DT" value="20081113140641"/>
+			<column name="OBJ_ID" value="5B97C50B03B56110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1134"/>
+			<column name="LAST_UPDT_DT" value="20081113140641"/>
+			<column name="OBJ_ID" value="5B97C50B03B66110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1135"/>
+			<column name="LAST_UPDT_DT" value="20081113140641"/>
+			<column name="OBJ_ID" value="5B97C50B03B76110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1136"/>
+			<column name="LAST_UPDT_DT" value="20081113140641"/>
+			<column name="OBJ_ID" value="5B97C50B03B86110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="1137"/>
+			<column name="LAST_UPDT_DT" value="20081113140641"/>
+			<column name="OBJ_ID" value="5B97C50B03B96110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRIM_ENTITY_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="ENTITY_ID" value="5"/>
+			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="OBJ_ID" value="VV1B6B919CC96496E0404F8189D822F2"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

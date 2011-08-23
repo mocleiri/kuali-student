@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_CLU_LO_RELTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSLU_CLU_LO_RELTN_TYPE">
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="OBJ_ID" value="B9B81FF5298B4F87883FC67E864C2A28"/>
+			<column name="TYPE_DESC" value="Default Clu-Lo relation type"/>
+			<column name="TYPE_KEY" value="kuali.lu.lo.relation.type.includes"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

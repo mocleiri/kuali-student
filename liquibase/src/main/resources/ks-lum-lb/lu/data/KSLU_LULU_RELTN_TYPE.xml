@@ -1,0 +1,84 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KSLU_LULU_RELTN_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="hasCoreProgram"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lu.lu.relation.type.hasCoreProgram"/>
+			<column name="NAME" value="hasCoreProgram"/>
+			<column name="OBJ_ID" value="64AF5BC0B13C47FF8853EE93AC14E463"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="hasMajorProgram"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lu.lu.relation.type.hasMajorProgram"/>
+			<column name="NAME" value="hasMajorProgram"/>
+			<column name="OBJ_ID" value="8CC18C4C1BA349389BA092C02588D7D9"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="hasProgramRequirement"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lu.lu.relation.type.hasProgramRequirement"/>
+			<column name="NAME" value="hasProgramRequirement"/>
+			<column name="OBJ_ID" value="7EA356A3330D49589DD33633FB40C4E2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="hasVariationProgram"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lu.lu.relation.type.hasVariationProgram"/>
+			<column name="NAME" value="hasVariationProgram"/>
+			<column name="OBJ_ID" value="A8E85D8551294948A5571FB0183766A2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="co-located"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lu.relation.type.co-located"/>
+			<column name="NAME" value="co-located"/>
+			<column name="OBJ_ID" value="1306E000A0AA46A59E5B171F4B038623"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="copyOfClu"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="kuali.lu.relation.type.copyOfClu"/>
+			<column name="NAME" value="copyOfClu"/>
+			<column name="OBJ_ID" value="38DD70E3625F4DD58A005F237013E93B"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="alias"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="luLuRelationType.alias"/>
+			<column name="NAME" value="alias"/>
+			<column name="OBJ_ID" value="5CA1B0C66AE14C5AAE41AB268ABAC582"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="colocated"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="luLuRelationType.colocated"/>
+			<column name="NAME" value="colocated"/>
+			<column name="OBJ_ID" value="22E2121CB4C24E56B10281CDE289A1D6"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="contains"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="luLuRelationType.contains"/>
+			<column name="NAME" value="contains"/>
+			<column name="OBJ_ID" value="4A81B3D370F247638635502CA93FACE8"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LULU_RELTN_TYPE">
+			<column name="DESCR" value="hasCourseFormat"/>
+			<column name="EFF_DT" value="20080101000000"/>
+			<column name="ID" value="luLuRelationType.hasCourseFormat"/>
+			<column name="NAME" value="hasCourseFormat"/>
+			<column name="OBJ_ID" value="51AD3134A670441CB2082E8D8001A026"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>

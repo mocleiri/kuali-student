@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeLog id="KRIM_EXT_ID_TYP_T-initial-data" author="alubbers">
+		<insert tableName="KRIM_EXT_ID_TYP_T">
+			<column name="ACTV_IND" value="Y"/>
+			<column name="DISPLAY_SORT_CD" value="03"/>
+			<column name="ENCR_REQ_IND" value="Y"/>
+			<column name="EXT_ID_TYP_CD" value="TAX"/>
+			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="NM" value="Tax ID"/>
+			<column name="OBJ_ID" value="5B97C50B038F6110E0404F8189D85213"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeLog>
+</databaseChangeLog>
