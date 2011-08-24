@@ -1,93 +1,93 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
     <changeSet id="ksen_atpatp_reltn-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK607450026252E155" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="ATP_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK607450028C6658A" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="ATP_ID" referencedTableName="KSEN_ATP" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK60745002C681D01E" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="RELATED_ATP_ID" referencedTableName="KSEN_ATP" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK60745002E4C71119" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="ATP_RELTN_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FK607450026252E155" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="ATP_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED"/>
+        <addForeignKeyConstraint constraintName="FK607450028C6658A" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="ATP_ID" referencedTableName="KSEN_ATP" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK60745002C681D01E" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="RELATED_ATP_ID" referencedTableName="KSEN_ATP" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK60745002E4C71119" baseTableName="KSEN_ATPATP_RELTN" baseColumnNames="ATP_RELTN_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_atpmstone_reltn-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK5480BC9B3B007502" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="MSTONE_ID" referencedTableName="KSEN_MSTONE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK5480BC9B6252E155" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="ATP_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK5480BC9B89043C68" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="AM_RELTN_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FK5480BC9B8C6658A" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="ATP_ID" referencedTableName="KSEN_ATP" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK5480BC9B3B007502" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="MSTONE_ID" referencedTableName="KSEN_MSTONE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK5480BC9B6252E155" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="ATP_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK5480BC9B89043C68" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="AM_RELTN_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK5480BC9B8C6658A" baseTableName="KSEN_ATPMSTONE_RELTN" baseColumnNames="ATP_ID" referencedTableName="KSEN_ATP" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_atp-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKFD3154F6252E155" baseTableName="KSEN_ATP" baseColumnNames="ATP_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKFD3154F6C2F628C" baseTableName="KSEN_ATP" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKFD3154F804B2705" baseTableName="KSEN_ATP" baseColumnNames="ATP_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FKFD3154F6252E155" baseTableName="KSEN_ATP" baseColumnNames="ATP_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKFD3154F6C2F628C" baseTableName="KSEN_ATP" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKFD3154F804B2705" baseTableName="KSEN_ATP" baseColumnNames="ATP_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_hold-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKEA92B02D654F946E" baseTableName="KSEN_HOLD" baseColumnNames="TYPE_ID" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FKEA92B02D98517E2C" baseTableName="KSEN_HOLD" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKEA92B02DB16974B" baseTableName="KSEN_HOLD" baseColumnNames="ISSUE_ID" referencedTableName="KSEN_ISSUE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FKEA92B02DCDDEC8D3" baseTableName="KSEN_HOLD" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_HOLD_RICH_TEXT" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FKEA92B02D654F946E" baseTableName="KSEN_HOLD" baseColumnNames="TYPE_ID" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKEA92B02D98517E2C" baseTableName="KSEN_HOLD" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKEA92B02DB16974B" baseTableName="KSEN_HOLD" baseColumnNames="ISSUE_ID" referencedTableName="KSEN_ISSUE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKEA92B02DCDDEC8D3" baseTableName="KSEN_HOLD" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_HOLD_RICH_TEXT" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_issue-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK67D35B0B654F946E" baseTableName="KSEN_ISSUE" baseColumnNames="TYPE_ID" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FK67D35B0B98517E2C" baseTableName="KSEN_ISSUE" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK67D35B0BCDDEC8D3" baseTableName="KSEN_ISSUE" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_HOLD_RICH_TEXT" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK67D35B0B654F946E" baseTableName="KSEN_ISSUE" baseColumnNames="TYPE_ID" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK67D35B0B98517E2C" baseTableName="KSEN_ISSUE" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK67D35B0BCDDEC8D3" baseTableName="KSEN_ISSUE" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_HOLD_RICH_TEXT" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_mstone-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK996BC8066C2F628C" baseTableName="KSEN_MSTONE" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK996BC806C06A3FE2" baseTableName="KSEN_MSTONE" baseColumnNames="MILESTONE_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK996BC806FB742D8" baseTableName="KSEN_MSTONE" baseColumnNames="MILESTONE_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FK996BC8066C2F628C" baseTableName="KSEN_MSTONE" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK996BC806C06A3FE2" baseTableName="KSEN_MSTONE" baseColumnNames="MILESTONE_STATE_ID" referencedTableName="KSEN_ATP_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK996BC806FB742D8" baseTableName="KSEN_MSTONE" baseColumnNames="MILESTONE_TYPE_ID" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_restriction-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKC2C6CC7E654F946E" baseTableName="KSEN_RESTRICTION" baseColumnNames="TYPE_ID" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FKC2C6CC7E98517E2C" baseTableName="KSEN_RESTRICTION" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKC2C6CC7ECDDEC8D3" baseTableName="KSEN_RESTRICTION" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_HOLD_RICH_TEXT" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FKC2C6CC7E654F946E" baseTableName="KSEN_RESTRICTION" baseColumnNames="TYPE_ID" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKC2C6CC7E98517E2C" baseTableName="KSEN_RESTRICTION" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKC2C6CC7ECDDEC8D3" baseTableName="KSEN_RESTRICTION" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_HOLD_RICH_TEXT" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_stateprocess_reltn-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKCDFDC0E024D2ACA6" baseTableName="KSEN_STATEPROCESS_RELTN" baseColumnNames="PRIOR_STATEKEY" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FKCDFDC0E09F94F29D" baseTableName="KSEN_STATEPROCESS_RELTN" baseColumnNames="NEXT_STATEKEY" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKCDFDC0E0D6162101" baseTableName="KSEN_STATEPROCESS_RELTN" baseColumnNames="PROCESS_KEY" referencedTableName="KSEN_STATE_PROCESS" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FKCDFDC0E024D2ACA6" baseTableName="KSEN_STATEPROCESS_RELTN" baseColumnNames="PRIOR_STATEKEY" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKCDFDC0E09F94F29D" baseTableName="KSEN_STATEPROCESS_RELTN" baseColumnNames="NEXT_STATEKEY" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FKCDFDC0E0D6162101" baseTableName="KSEN_STATEPROCESS_RELTN" baseColumnNames="PROCESS_KEY" referencedTableName="KSEN_STATE_PROCESS" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_typetype_reltn-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK71693C166C2F628C" baseTableName="KSEN_TYPETYPE_RELTN" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK71693C166C2F628C" baseTableName="KSEN_TYPETYPE_RELTN" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_atpatp_reltn_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK5480EC0E8934C5C5" baseTableName="KSEN_ATPATP_RELTN_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATPATP_RELTN" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK5480EC0EF1998125" baseTableName="KSEN_ATPATP_RELTN_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_TYPETYPE_RELTN" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK5480EC0E8934C5C5" baseTableName="KSEN_ATPATP_RELTN_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATPATP_RELTN" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK5480EC0EF1998125" baseTableName="KSEN_ATPATP_RELTN_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_TYPETYPE_RELTN" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_atpmstone_reltn_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK586D7715FC300ED8" baseTableName="KSEN_ATPMSTONE_RELTN_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATPMSTONE_RELTN" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK586D7715FC300ED8" baseTableName="KSEN_ATPMSTONE_RELTN_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATPMSTONE_RELTN" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_atp_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK3DFA6EE13309051A" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FK3DFA6EE162FD4240" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK3DFA6EE1BA0FC113" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_MSTONE" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK3DFA6EE13309051A" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK3DFA6EE162FD4240" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK3DFA6EE1BA0FC113" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_MSTONE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_hold_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK87BEEEC3DE9EDF87" baseTableName="KSEN_HOLD_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_HOLD" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK87BEEEC3DE9EDF87" baseTableName="KSEN_HOLD_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_HOLD" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_hold_type_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK31328E449E7CA6E1" baseTableName="KSEN_HOLD_TYPE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FK31328E449E7CA6E1" baseTableName="KSEN_HOLD_TYPE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_HOLD_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_issue_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKE52C5EA5E7C51BBD" baseTableName="KSEN_ISSUE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ISSUE" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FKE52C5EA5E7C51BBD" baseTableName="KSEN_ISSUE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ISSUE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_restriction_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK1F4DD12D828D9F0" baseTableName="KSEN_RESTRICTION_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_RESTRICTION" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK1F4DD12D828D9F0" baseTableName="KSEN_RESTRICTION_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_RESTRICTION" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_state_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK8193D5ED50135956" baseTableName="KSEN_STATE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FK8193D5EDD052F725" baseTableName="KSEN_STATE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_STATE_PROCESS" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK8193D5ED50135956" baseTableName="KSEN_STATE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+        <addForeignKeyConstraint constraintName="FK8193D5EDD052F725" baseTableName="KSEN_STATE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_STATE_PROCESS" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
 </databaseChangeLog>
