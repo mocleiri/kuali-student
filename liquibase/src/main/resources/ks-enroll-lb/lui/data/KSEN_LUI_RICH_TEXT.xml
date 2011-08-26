@@ -1,28 +1,28 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_LUI_RICH_TEXT-initial-data" author="alubbers">
+	<changeSet id="KSEN_LUI_RICH_TEXT-initial-data" author="alubbers">
 		<insert tableName="KSEN_LUI_RICH_TEXT">
-			<column name="FORMATTED" value="<p>Lui Desc 101</p>"/>
+			<column name="FORMATTED" value="&lt;p>Lui Desc 101&lt;/p>"/>
 			<column name="ID" value="Lui-1-Desc"/>
 			<column name="PLAIN" value="Lui Desc 101"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LUI_RICH_TEXT">
-			<column name="FORMATTED" value="<p>Lui Desc 201</p>"/>
+			<column name="FORMATTED" value="&lt;p>Lui Desc 201&lt;/p>"/>
 			<column name="ID" value="Lui-2-Desc"/>
 			<column name="PLAIN" value="Lui Desc 201"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LUI_RICH_TEXT">
-			<column name="FORMATTED" value="<p>Lui Desc 301</p>"/>
+			<column name="FORMATTED" value="&lt;p>Lui Desc 301&lt;/p>"/>
 			<column name="ID" value="Lui-3-Desc"/>
 			<column name="PLAIN" value="Lui Desc 301 for deletion"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LUI_RICH_TEXT">
-			<column name="FORMATTED" value="<p>Lui Desc 401</p>"/>
+			<column name="FORMATTED" value="&lt;p>Lui Desc 401&lt;/p>"/>
 			<column name="ID" value="Lui-4-Desc"/>
 			<column name="PLAIN" value="Lui Desc 401 for deletion"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

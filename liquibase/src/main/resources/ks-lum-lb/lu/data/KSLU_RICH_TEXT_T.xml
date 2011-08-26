@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_RICH_TEXT_T-initial-data" author="alubbers">
+	<changeSet id="KSLU_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSLU_RICH_TEXT_T">
 			<column name="ID" value="0000550e-f0db-4fe8-bda6-57ed10d217af"/>
 			<column name="OBJ_ID" value="21ee3b10-4ddf-4a22-86f4-f9b7c20cfa33"/>
@@ -580,10 +580,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for "decriminalization"."/>
+			<column name="FORMATTED" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for &quot;decriminalization&quot;."/>
 			<column name="ID" value="043f294d-7b4c-4f48-a44e-768c7ff41628"/>
 			<column name="OBJ_ID" value="9ed5f21f-5d39-4157-a181-0f48247cea59"/>
-			<column name="PLAIN" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for "decriminalization"."/>
+			<column name="PLAIN" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for &quot;decriminalization&quot;."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -3149,10 +3149,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="AP Comparative Government & Politics"/>
+			<column name="FORMATTED" value="AP Comparative Government &amp; Politics"/>
 			<column name="ID" value="188f0bd7-91b0-4581-81bb-dbd412cc35fa"/>
 			<column name="OBJ_ID" value="670878d5-b78b-4ed8-b025-718f24f717e9"/>
-			<column name="PLAIN" value="AP Comparative Government & Politics"/>
+			<column name="PLAIN" value="AP Comparative Government &amp; Politics"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -3577,10 +3577,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Set that holds just the one standardized test AP English Literature & Composition"/>
+			<column name="FORMATTED" value="Set that holds just the one standardized test AP English Literature &amp; Composition"/>
 			<column name="ID" value="1c0b5815-f650-4ef8-9510-005bd1a7c430"/>
 			<column name="OBJ_ID" value="20817812-b66d-41f5-8ce4-0320be33e632"/>
-			<column name="PLAIN" value="Set that holds just the one standardized test AP English Literature & Composition"/>
+			<column name="PLAIN" value="Set that holds just the one standardized test AP English Literature &amp; Composition"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -6065,10 +6065,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Set that holds just the one standardized test AP Comparative Government & Politics"/>
+			<column name="FORMATTED" value="Set that holds just the one standardized test AP Comparative Government &amp; Politics"/>
 			<column name="ID" value="2f394964-0f99-4736-b79d-8f7c752d0c65"/>
 			<column name="OBJ_ID" value="502c55ab-49cf-4aa2-911b-311a9ab47d91"/>
-			<column name="PLAIN" value="Set that holds just the one standardized test AP Comparative Government & Politics"/>
+			<column name="PLAIN" value="Set that holds just the one standardized test AP Comparative Government &amp; Politics"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -6563,10 +6563,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for "decriminalization"."/>
+			<column name="FORMATTED" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for &quot;decriminalization&quot;."/>
 			<column name="ID" value="343fc0de-c7fd-49e7-94ef-471abca5206f"/>
 			<column name="OBJ_ID" value="1aef2417-608c-4686-9955-43698fab91e5"/>
-			<column name="PLAIN" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for "decriminalization"."/>
+			<column name="PLAIN" value="Brief historical overview of criminological theory up to the 50's. Deviance. Labeling. Typologies. Most recent research in criminalistic subcultures and middle class delinquency. Recent proposals for &quot;decriminalization&quot;."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -7630,10 +7630,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Introduction to what geographers do and how they do it. Systematic study of issues regarding social and cultural systems from a global to a local scale. Looks at the distribution of these variables and answers the question "Why here, and not there"?"/>
+			<column name="FORMATTED" value="Introduction to what geographers do and how they do it. Systematic study of issues regarding social and cultural systems from a global to a local scale. Looks at the distribution of these variables and answers the question &quot;Why here, and not there&quot;?"/>
 			<column name="ID" value="3c58f0fd-681a-4481-858b-c1fa4011b4dc"/>
 			<column name="OBJ_ID" value="1e03f322-239e-4158-985e-3c617f0e3b80"/>
-			<column name="PLAIN" value="Introduction to what geographers do and how they do it. Systematic study of issues regarding social and cultural systems from a global to a local scale. Looks at the distribution of these variables and answers the question "Why here, and not there"?"/>
+			<column name="PLAIN" value="Introduction to what geographers do and how they do it. Systematic study of issues regarding social and cultural systems from a global to a local scale. Looks at the distribution of these variables and answers the question &quot;Why here, and not there&quot;?"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -8280,10 +8280,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="An introduction to private international law, defined as those substantive laws that a nation or nations have applied to private transactions involving transnational relationships. Private international law is often called the "conflict of laws" because it almost always arises to deal with the existence of a number of separate legal systems in the various states, each practicing their own 'municipal law' in ways that invariably raise real and potential conflicts requiring accommodation and cooperation."/>
+			<column name="FORMATTED" value="An introduction to private international law, defined as those substantive laws that a nation or nations have applied to private transactions involving transnational relationships. Private international law is often called the &quot;conflict of laws&quot; because it almost always arises to deal with the existence of a number of separate legal systems in the various states, each practicing their own 'municipal law' in ways that invariably raise real and potential conflicts requiring accommodation and cooperation."/>
 			<column name="ID" value="414644d3-5a5f-44ca-b3e4-1ccc8704f04c"/>
 			<column name="OBJ_ID" value="57edf576-9e7b-47ae-886f-c1bffd19f99d"/>
-			<column name="PLAIN" value="An introduction to private international law, defined as those substantive laws that a nation or nations have applied to private transactions involving transnational relationships. Private international law is often called the "conflict of laws" because it almost always arises to deal with the existence of a number of separate legal systems in the various states, each practicing their own 'municipal law' in ways that invariably raise real and potential conflicts requiring accommodation and cooperation."/>
+			<column name="PLAIN" value="An introduction to private international law, defined as those substantive laws that a nation or nations have applied to private transactions involving transnational relationships. Private international law is often called the &quot;conflict of laws&quot; because it almost always arises to deal with the existence of a number of separate legal systems in the various states, each practicing their own 'municipal law' in ways that invariably raise real and potential conflicts requiring accommodation and cooperation."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -16672,10 +16672,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="AP U.S. Government & Politics"/>
+			<column name="FORMATTED" value="AP U.S. Government &amp; Politics"/>
 			<column name="ID" value="83c5860e-1ca8-4f3c-9585-05c5b07d1ade"/>
 			<column name="OBJ_ID" value="f8c9e279-bdf5-4531-a8f9-03de9dd01ed1"/>
-			<column name="PLAIN" value="AP U.S. Government & Politics"/>
+			<column name="PLAIN" value="AP U.S. Government &amp; Politics"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -17029,7 +17029,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="How do you see the future?  More of everything: food, parks, leisure, personal electronic devices, peace between the nations?  Or more people, new diseases, traffic gridlock, and starvation?<br>The world is changing at unprecedented rates, primarily as a result of human actions. Opportunities for increased well-being of humans and the environment abound. On the other hand competition for resources such as fresh water and oil is reaching crisis proportions.<br>The future of humanity depends on skillful management of our environment by planning the social, urban, suburban and rural settings where we work, live and play.  Expert care of the environment is needed to maintain supplies of food, natural products, water, and the other resources on which life depends. New insights into the social, economic and urban environment can help control poverty and crime.<br>Geography concerns the relations between people and the natural world, the effects of ecosystems on human beings and vice versa, the choices people make, the effects of past actions on people today, and the effects of today's choices on future generations."/>
+			<column name="FORMATTED" value="How do you see the future?  More of everything: food, parks, leisure, personal electronic devices, peace between the nations?  Or more people, new diseases, traffic gridlock, and starvation?&lt;br>The world is changing at unprecedented rates, primarily as a result of human actions. Opportunities for increased well-being of humans and the environment abound. On the other hand competition for resources such as fresh water and oil is reaching crisis proportions.&lt;br>The future of humanity depends on skillful management of our environment by planning the social, urban, suburban and rural settings where we work, live and play.  Expert care of the environment is needed to maintain supplies of food, natural products, water, and the other resources on which life depends. New insights into the social, economic and urban environment can help control poverty and crime.&lt;br>Geography concerns the relations between people and the natural world, the effects of ecosystems on human beings and vice versa, the choices people make, the effects of past actions on people today, and the effects of today's choices on future generations."/>
 			<column name="ID" value="86335e1d-42f3-4ae1-b7a7-27532453dafc"/>
 			<column name="OBJ_ID" value="0d0fee10-6a2c-40fc-87c0-6ec9ac3f48e2"/>
 			<column name="PLAIN" value="How do you see the future?  More of everything: food, parks, leisure, personal electronic devices, peace between the nations?  Or more people, new diseases, traffic gridlock, and starvation?
@@ -18863,10 +18863,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Set that holds just the one standardized test AP English Language & Composition"/>
+			<column name="FORMATTED" value="Set that holds just the one standardized test AP English Language &amp; Composition"/>
 			<column name="ID" value="9460e9e3-54f6-42ed-9100-7d52ed791cda"/>
 			<column name="OBJ_ID" value="90f8019d-5b33-4571-9649-6770c5fa0731"/>
-			<column name="PLAIN" value="Set that holds just the one standardized test AP English Language & Composition"/>
+			<column name="PLAIN" value="Set that holds just the one standardized test AP English Language &amp; Composition"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -20334,10 +20334,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Students have a choice of taking either an ecological ("E") or molecular ("M") biology oriented test."/>
+			<column name="FORMATTED" value="Students have a choice of taking either an ecological (&quot;E&quot;) or molecular (&quot;M&quot;) biology oriented test."/>
 			<column name="ID" value="a1e6c2be-cab2-49a3-93f0-5ed1b591c415"/>
 			<column name="OBJ_ID" value="c298e2d6-3a03-490c-b9bf-eaecac797f1c"/>
-			<column name="PLAIN" value="Students have a choice of taking either an ecological ("E") or molecular ("M") biology oriented test."/>
+			<column name="PLAIN" value="Students have a choice of taking either an ecological (&quot;E&quot;) or molecular (&quot;M&quot;) biology oriented test."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -27258,10 +27258,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Students have a choice of taking either an ecological ("E") or molecular ("M") biology oriented test."/>
+			<column name="FORMATTED" value="Students have a choice of taking either an ecological (&quot;E&quot;) or molecular (&quot;M&quot;) biology oriented test."/>
 			<column name="ID" value="d870cefd-7d8b-47ea-9639-2d51c67460d9"/>
 			<column name="OBJ_ID" value="7d7d012b-f44b-4148-9c79-d2de5492012c"/>
-			<column name="PLAIN" value="Students have a choice of taking either an ecological ("E") or molecular ("M") biology oriented test."/>
+			<column name="PLAIN" value="Students have a choice of taking either an ecological (&quot;E&quot;) or molecular (&quot;M&quot;) biology oriented test."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -27504,10 +27504,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="A conceptional introduction to Judaism, analyzing its fundamental concepts from both analytical and historical perspectives. Discussion of "normative" Judaism as well as other conceptions of Judaism. Topics include: God, the Jewish people, authority, ethics, the sacred and the profane, particularism and universalism."/>
+			<column name="FORMATTED" value="A conceptional introduction to Judaism, analyzing its fundamental concepts from both analytical and historical perspectives. Discussion of &quot;normative&quot; Judaism as well as other conceptions of Judaism. Topics include: God, the Jewish people, authority, ethics, the sacred and the profane, particularism and universalism."/>
 			<column name="ID" value="dab679d7-d7a9-4057-82b5-c8c68566e268"/>
 			<column name="OBJ_ID" value="48f78936-5806-4425-a1f5-d504a233884c"/>
-			<column name="PLAIN" value="A conceptional introduction to Judaism, analyzing its fundamental concepts from both analytical and historical perspectives. Discussion of "normative" Judaism as well as other conceptions of Judaism. Topics include: God, the Jewish people, authority, ethics, the sacred and the profane, particularism and universalism."/>
+			<column name="PLAIN" value="A conceptional introduction to Judaism, analyzing its fundamental concepts from both analytical and historical perspectives. Discussion of &quot;normative&quot; Judaism as well as other conceptions of Judaism. Topics include: God, the Jewish people, authority, ethics, the sacred and the profane, particularism and universalism."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -28393,10 +28393,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="The mission of the Department of Criminal Justice & Criminology is to provide a supportive academic and professional environment for faculty and students. The Department promotes study and teaching concerning crime and delinquency and their prevention and control. The Department is a national and international leader in research and criminal justice education, and its Graduate Program is ranked number one in the field. Courses offered by this department may be found under the following acronym: CCJS."/>
+			<column name="FORMATTED" value="The mission of the Department of Criminal Justice &amp; Criminology is to provide a supportive academic and professional environment for faculty and students. The Department promotes study and teaching concerning crime and delinquency and their prevention and control. The Department is a national and international leader in research and criminal justice education, and its Graduate Program is ranked number one in the field. Courses offered by this department may be found under the following acronym: CCJS."/>
 			<column name="ID" value="e11907dc-1426-4c42-80ae-a9c246dba386"/>
 			<column name="OBJ_ID" value="956a6a9e-6864-4e6f-be7d-a0154cf4d67b"/>
-			<column name="PLAIN" value="The mission of the Department of Criminal Justice & Criminology is to provide a supportive academic and professional environment for faculty and students. The Department promotes study and teaching concerning crime and delinquency and their prevention and control. The Department is a national and international leader in research and criminal justice education, and its Graduate Program is ranked number one in the field. Courses offered by this department may be found under the following acronym: CCJS."/>
+			<column name="PLAIN" value="The mission of the Department of Criminal Justice &amp; Criminology is to provide a supportive academic and professional environment for faculty and students. The Department promotes study and teaching concerning crime and delinquency and their prevention and control. The Department is a national and international leader in research and criminal justice education, and its Graduate Program is ranked number one in the field. Courses offered by this department may be found under the following acronym: CCJS."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -28491,10 +28491,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="AP English Literature & Composition"/>
+			<column name="FORMATTED" value="AP English Literature &amp; Composition"/>
 			<column name="ID" value="e1ca687f-f476-46e0-8ce3-5a065664aaab"/>
 			<column name="OBJ_ID" value="c6910172-f435-4245-ac98-7a660596e5de"/>
-			<column name="PLAIN" value="AP English Literature & Composition"/>
+			<column name="PLAIN" value="AP English Literature &amp; Composition"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -30325,10 +30325,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="The Biological Sciences major offers a rigorous exposure to the modern experimental disciplines within Biology. The major is jointly offered by the Departments of Biology, Cell Biology & Molecular Genetics, and Entomology. All Biological Sciences majors complete a common sequence of introductory and supporting courses referred to as the Basic Program. In addition, students must complete an Advanced Program within one of the following specialization areas: Cell Biology & Genetics, Ecology & Evolution, General Biology, Microbiology, Physiology & Neurobiology, Individualized Studies."/>
+			<column name="FORMATTED" value="The Biological Sciences major offers a rigorous exposure to the modern experimental disciplines within Biology. The major is jointly offered by the Departments of Biology, Cell Biology &amp; Molecular Genetics, and Entomology. All Biological Sciences majors complete a common sequence of introductory and supporting courses referred to as the Basic Program. In addition, students must complete an Advanced Program within one of the following specialization areas: Cell Biology &amp; Genetics, Ecology &amp; Evolution, General Biology, Microbiology, Physiology &amp; Neurobiology, Individualized Studies."/>
 			<column name="ID" value="ef78f0bb-29ee-4d98-8e40-e246a96037c9"/>
 			<column name="OBJ_ID" value="5357a608-7567-4aa9-ab29-d7cdbfaf78cc"/>
-			<column name="PLAIN" value="The Biological Sciences major offers a rigorous exposure to the modern experimental disciplines within Biology. The major is jointly offered by the Departments of Biology, Cell Biology & Molecular Genetics, and Entomology. All Biological Sciences majors complete a common sequence of introductory and supporting courses referred to as the Basic Program. In addition, students must complete an Advanced Program within one of the following specialization areas: Cell Biology & Genetics, Ecology & Evolution, General Biology, Microbiology, Physiology & Neurobiology, Individualized Studies."/>
+			<column name="PLAIN" value="The Biological Sciences major offers a rigorous exposure to the modern experimental disciplines within Biology. The major is jointly offered by the Departments of Biology, Cell Biology &amp; Molecular Genetics, and Entomology. All Biological Sciences majors complete a common sequence of introductory and supporting courses referred to as the Basic Program. In addition, students must complete an Advanced Program within one of the following specialization areas: Cell Biology &amp; Genetics, Ecology &amp; Evolution, General Biology, Microbiology, Physiology &amp; Neurobiology, Individualized Studies."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -30541,10 +30541,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="Set that holds just the one standardized test AP U.S. Government & Politics"/>
+			<column name="FORMATTED" value="Set that holds just the one standardized test AP U.S. Government &amp; Politics"/>
 			<column name="ID" value="f10117c8-811a-4ae3-9e0e-20c03022a381"/>
 			<column name="OBJ_ID" value="2fa89b0b-f8f5-418e-a778-5ffaa3eff37b"/>
-			<column name="PLAIN" value="Set that holds just the one standardized test AP U.S. Government & Politics"/>
+			<column name="PLAIN" value="Set that holds just the one standardized test AP U.S. Government &amp; Politics"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -31510,10 +31510,10 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
-			<column name="FORMATTED" value="AP English Language & Composition"/>
+			<column name="FORMATTED" value="AP English Language &amp; Composition"/>
 			<column name="ID" value="f8518ded-c6fe-41b4-86b2-8976013ac42a"/>
 			<column name="OBJ_ID" value="f7e1df95-ba2c-42fc-9dbd-a295ca76c54d"/>
-			<column name="PLAIN" value="AP English Language & Composition"/>
+			<column name="PLAIN" value="AP English Language &amp; Composition"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_RICH_TEXT_T">
@@ -32608,5 +32608,5 @@ Geography concerns the relations between people and the natural world, the effec
 			<column name="PLAIN" value="The diversity, structure and function of organisms as understood from the perspective of their common physicochemical principles and unique evolutionary histories."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

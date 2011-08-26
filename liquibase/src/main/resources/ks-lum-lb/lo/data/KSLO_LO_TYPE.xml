@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLO_LO_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSLO_LO_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_TYPE">
 			<column name="DESCR" value="LO governed by an organization external to department, e.g., the college at large, or a state or accrediting organization"/>
 			<column name="EFF_DT" value="20080101000000"/>
@@ -16,5 +16,5 @@
 			<column name="OBJ_ID" value="77E6218ADA8A4C049F8D0A1F1DC94F99"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

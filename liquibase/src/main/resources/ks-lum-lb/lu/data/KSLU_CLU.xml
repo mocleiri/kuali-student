@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU">
 			<column name="CAN_CREATE_LUI" value="0"/>
 			<column name="CREATEID" value="admin"/>
@@ -41893,5 +41893,5 @@
 			<column name="VER_IND_ID" value="3b1c642a-e24d-4b54-b5b7-4e89766493e6"/>
 			<column name="VER_NBR" value="4"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

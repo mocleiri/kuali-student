@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_FEE-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_FEE-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_FEE">
 			<column name="CREATEID" value="fred"/>
 			<column name="CREATETIME" value="20101214112240"/>
@@ -4154,5 +4154,5 @@
 			<column name="UPDATETIME" value="20101210172115"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

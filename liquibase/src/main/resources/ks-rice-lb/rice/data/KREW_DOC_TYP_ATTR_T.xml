@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_DOC_TYP_ATTR_T-initial-data" author="alubbers">
+	<changeSet id="KREW_DOC_TYP_ATTR_T-initial-data" author="alubbers">
 		<insert tableName="KREW_DOC_TYP_ATTR_T">
 			<column name="DOC_TYP_ATTRIB_ID" value="2000"/>
 			<column name="DOC_TYP_ID" value="2023"/>
@@ -54,5 +54,5 @@
 			<column name="ORD_INDX" value="1"/>
 			<column name="RULE_ATTR_ID" value="1645"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

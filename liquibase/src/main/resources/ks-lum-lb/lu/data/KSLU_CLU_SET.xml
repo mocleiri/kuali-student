@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_SET-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_SET-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_SET">
 			<column name="CREATETIME" value="20101210172149"/>
 			<column name="EFF_DT" value="20000101000000"/>
@@ -131,7 +131,7 @@
 			<column name="CREATETIME" value="20101210172149"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ID" value="0db7a710-8a39-4698-b76c-f4661c9237ab"/>
-			<column name="NAME" value="AP U.S. Government & Politics"/>
+			<column name="NAME" value="AP U.S. Government &amp; Politics"/>
 			<column name="OBJ_ID" value="45bc3ce4-9dc8-4f91-9bc2-02e4625cfd14"/>
 			<column name="REUSABLE" value="1"/>
 			<column name="RT_DESCR_ID" value="f10117c8-811a-4ae3-9e0e-20c03022a381"/>
@@ -1435,7 +1435,7 @@
 			<column name="CREATETIME" value="20101210172147"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ID" value="66881961-6522-42a8-a1ee-76cbc9d9606f"/>
-			<column name="NAME" value="AP English Language & Composition"/>
+			<column name="NAME" value="AP English Language &amp; Composition"/>
 			<column name="OBJ_ID" value="389f71b7-87ea-4e93-b966-9056079bcafb"/>
 			<column name="REUSABLE" value="1"/>
 			<column name="RT_DESCR_ID" value="9460e9e3-54f6-42ed-9100-7d52ed791cda"/>
@@ -2070,7 +2070,7 @@
 			<column name="CREATETIME" value="20101210172147"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ID" value="9ba4fc81-9834-4322-9df9-fb412dd23e85"/>
-			<column name="NAME" value="AP Comparative Government & Politics"/>
+			<column name="NAME" value="AP Comparative Government &amp; Politics"/>
 			<column name="OBJ_ID" value="3b452504-f0d0-4278-87f6-c371cc6b3d26"/>
 			<column name="REUSABLE" value="1"/>
 			<column name="RT_DESCR_ID" value="2f394964-0f99-4736-b79d-8f7c752d0c65"/>
@@ -2325,7 +2325,7 @@
 			<column name="CREATETIME" value="20101210172147"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ID" value="a9ae2e78-ab0c-4e87-b132-de6c4d71ba27"/>
-			<column name="NAME" value="AP English Literature & Composition"/>
+			<column name="NAME" value="AP English Literature &amp; Composition"/>
 			<column name="OBJ_ID" value="75948cd2-e36e-4793-a237-1883c7aed3ca"/>
 			<column name="REUSABLE" value="1"/>
 			<column name="RT_DESCR_ID" value="1c0b5815-f650-4ef8-9510-005bd1a7c430"/>
@@ -3446,5 +3446,5 @@
 			<column name="UPDATETIME" value="20101210172148"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

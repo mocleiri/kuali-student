@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_LUTYPE-initial-data" author="alubbers">
+	<changeSet id="KSLU_LUTYPE-initial-data" author="alubbers">
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Core"/>
@@ -75,7 +75,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Homework"/>
-			<column name="OBJ_ID" value="AACD35C42CEA1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAD70DA0E040C60AF05B4490"/>
 			<column name="TYPE_DESC" value="Student's doing homework, problem sets and reading assignments and writing"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.Homework"/>
 			<column name="VER_NBR" value="0"/>
@@ -107,7 +107,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Web Discuss"/>
-			<column name="OBJ_ID" value="AACD35C42CE91061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAD60DA0E040C60AF05B4490"/>
 			<column name="TYPE_DESC" value="Web-based or technologically-mediated activities replacing standard discussion sections"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.WebDiscussion"/>
 			<column name="VER_NBR" value="0"/>
@@ -131,7 +131,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Standardized Test"/>
-			<column name="OBJ_ID" value="AACD35C42CEB1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAD80DA0E040C60AF05B4490"/>
 			<column name="TYPE_DESC" value="Standardized Test"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test"/>
 			<column name="VER_NBR" value="0"/>
@@ -139,7 +139,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Standardized Test Component"/>
-			<column name="OBJ_ID" value="AACD35C42CEC1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAD90DA0E040C60AF05B4490"/>
 			<column name="TYPE_DESC" value="Standardized Test Component"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test.component"/>
 			<column name="VER_NBR" value="0"/>
@@ -160,5 +160,5 @@
 			<column name="TYPE_KEY" value="luType.shell.program"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

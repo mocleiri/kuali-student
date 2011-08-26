@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_RTE_NODE_LNK_T-initial-data" author="alubbers">
+	<changeSet id="KREW_RTE_NODE_LNK_T-initial-data" author="alubbers">
 		<insert tableName="KREW_RTE_NODE_LNK_T">
 			<column name="FROM_RTE_NODE_ID" value="2041"/>
 			<column name="TO_RTE_NODE_ID" value="2042"/>
@@ -80,5 +80,5 @@
 			<column name="FROM_RTE_NODE_ID" value="2949"/>
 			<column name="TO_RTE_NODE_ID" value="2950"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

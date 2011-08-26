@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_TYP_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_TYP_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="1"/>
@@ -199,7 +199,7 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="14"/>
-			<column name="NM" value="Edit Mode & Document Type"/>
+			<column name="NM" value="Edit Mode &amp; Document Type"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="5ADF18B6D4EA7954E0404F8189D85002"/>
 			<column name="SRVC_NM" value="documentTypeAndEditModePermissionTypeService"/>
@@ -334,7 +334,7 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="52"/>
-			<column name="NM" value="Document Type, Routing Node & Field(s)"/>
+			<column name="NM" value="Document Type, Routing Node &amp; Field(s)"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5C997D14EAC2FE40E0404F8189D87DC5"/>
 			<column name="SRVC_NM" value="documentTypeAndNodeAndFieldsPermissionTypeService"/>
@@ -352,7 +352,7 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="56"/>
-			<column name="NM" value="Document Type & Existing Records Only"/>
+			<column name="NM" value="Document Type &amp; Existing Records Only"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="603B735FA6B9FE21E0404F8189D8083B"/>
 			<column name="SRVC_NM" value="documentTypeAndExistingRecordsOnlyPermissionTypeService"/>
@@ -370,7 +370,7 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="59"/>
-			<column name="NM" value="Document Type & Relationship to Note Author"/>
+			<column name="NM" value="Document Type &amp; Relationship to Note Author"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="606763510FBB96D3E0404F8189D857A2"/>
 			<column name="SRVC_NM" value="documentTypeAndRelationshipToNoteAuthorPermissionTypeService"/>
@@ -406,7 +406,7 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="7"/>
-			<column name="NM" value="Document Type, Routing Node & Action Information"/>
+			<column name="NM" value="Document Type, Routing Node &amp; Action Information"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="5ADF18B6D4C07954E0404F8189D85002"/>
 			<column name="SRVC_NM" value="reviewResponsibilityTypeService"/>
@@ -415,7 +415,7 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="8"/>
-			<column name="NM" value="Document Type & Routing Node or State"/>
+			<column name="NM" value="Document Type &amp; Routing Node or State"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5ADF18B6D4C67954E0404F8189D85002"/>
 			<column name="SRVC_NM" value="documentTypeAndNodeOrStatePermissionTypeService"/>
@@ -424,11 +424,11 @@
 		<insert tableName="KRIM_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="KIM_TYP_ID" value="9"/>
-			<column name="NM" value="Document Type & Attachment Type"/>
+			<column name="NM" value="Document Type &amp; Attachment Type"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="5ADF18B6D4CD7954E0404F8189D85002"/>
 			<column name="SRVC_NM" value="documentTypeAndAttachmentTypePermissionTypeService"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

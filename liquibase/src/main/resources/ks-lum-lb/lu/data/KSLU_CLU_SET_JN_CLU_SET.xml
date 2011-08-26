@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_SET_JN_CLU_SET-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_SET_JN_CLU_SET-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_SET_JN_CLU_SET">
 			<column name="CLU_SET_CHILD_ID" value="1269a3fa-cb27-42ae-a239-7445707b94cd"/>
 			<column name="CLU_SET_PARENT_ID" value="a3c605c9-2806-426f-87be-33dfd33a7ce6"/>
@@ -32,5 +32,5 @@
 			<column name="CLU_SET_CHILD_ID" value="9302298e-79ff-4dc0-8b06-59a3ab32074b"/>
 			<column name="CLU_SET_PARENT_ID" value="bd4d8d9c-c9d8-452e-a8f2-9586ab16d55d"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_ACCRED-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_ACCRED-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_ACCRED">
 			<column name="CREATEID" value="admin"/>
 			<column name="CREATETIME" value="20100809122500"/>
@@ -18,5 +18,5 @@
 			<column name="ORG_ID" value="6d9d8e2b-dd3e-4d00-90b9-9ee2b13ee7ad"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

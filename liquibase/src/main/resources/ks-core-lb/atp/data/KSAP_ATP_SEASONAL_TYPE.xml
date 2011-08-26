@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSAP_ATP_SEASONAL_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSAP_ATP_SEASONAL_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="AY"/>
@@ -52,7 +52,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Fall-Spring"/>
 			<column name="OBJ_ID" value="54FCCF8127464FB3B0D86692EA4093ED"/>
-			<column name="TYPE_DESC" value="Fall & Spring"/>
+			<column name="TYPE_DESC" value="Fall &amp; Spring"/>
 			<column name="TYPE_KEY" value="kuali.atp.season.Fall-Spring"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -232,5 +232,5 @@
 			<column name="TYPE_KEY" value="kuali.atp.season.Year4"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

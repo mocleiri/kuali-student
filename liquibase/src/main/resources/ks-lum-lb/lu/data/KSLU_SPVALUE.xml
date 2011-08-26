@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_SPVALUE-initial-data" author="alubbers">
+	<changeSet id="KSLU_SPVALUE-initial-data" author="alubbers">
 		<insert tableName="KSLU_SPVALUE">
 			<column name="ID" value="13641a88-30c4-4e13-a73e-38ada876b125"/>
 			<column name="OBJ_ID" value="c0b3ca8b-997a-4d73-bf04-3136f5ace035"/>
@@ -60,5 +60,5 @@
 			<column name="VALUE" value="400-499"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSOR_ORG-initial-data" author="alubbers">
+	<changeSet id="KSOR_ORG-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG">
 			<column name="CREATETIME" value="20100917121400"/>
 			<column name="EFF_DT" value="20100701000000"/>
@@ -840,7 +840,7 @@
 			<column name="ID" value="143"/>
 			<column name="LNG_NAME" value="College of Arts and Hum Curriculum Committee"/>
 			<column name="OBJ_ID" value="73C600734E6D4A1D83CD6F25C7395912"/>
-			<column name="SHRT_NAME" value="Arts&HumCOC"/>
+			<column name="SHRT_NAME" value="Arts&amp;HumCOC"/>
 			<column name="TYPE" value="kuali.org.COC"/>
 			<column name="UPDATEID" value="admin"/>
 			<column name="UPDATETIME" value="20101213113246"/>
@@ -866,7 +866,7 @@
 			<column name="ID" value="145"/>
 			<column name="LNG_NAME" value="College of Life and Chemical Sciences Curriculum Committee"/>
 			<column name="OBJ_ID" value="5794572325534298BFABAFFD2E672554"/>
-			<column name="SHRT_NAME" value="Life&ChemSciencesCOC"/>
+			<column name="SHRT_NAME" value="Life&amp;ChemSciencesCOC"/>
 			<column name="TYPE" value="kuali.org.COC"/>
 			<column name="UPDATEID" value="admin"/>
 			<column name="UPDATETIME" value="20101214110923"/>
@@ -1664,7 +1664,7 @@
 			<column name="CREATETIME" value="20101210172030"/>
 			<column name="EFF_DT" value="20100630030000"/>
 			<column name="ID" value="212"/>
-			<column name="LNG_NAME" value="Art History & Archaeology Dept"/>
+			<column name="LNG_NAME" value="Art History &amp; Archaeology Dept"/>
 			<column name="OBJ_ID" value="744b8527-f0b8-4453-aa32-4a2d8d012fe0"/>
 			<column name="SHRT_NAME" value="ArtHistArchaeology"/>
 			<column name="TYPE" value="kuali.org.Department"/>
@@ -1676,7 +1676,7 @@
 			<column name="CREATETIME" value="20101210172030"/>
 			<column name="EFF_DT" value="20100630030000"/>
 			<column name="ID" value="213"/>
-			<column name="LNG_NAME" value="Art History & Archaeology Curriculum Committee"/>
+			<column name="LNG_NAME" value="Art History &amp; Archaeology Curriculum Committee"/>
 			<column name="OBJ_ID" value="0e41a4b6-4dbd-48ec-bced-1d8e48b4b9c0"/>
 			<column name="SHRT_NAME" value="ArtHistArchaeologyCOC"/>
 			<column name="TYPE" value="kuali.org.COC"/>
@@ -1688,7 +1688,7 @@
 			<column name="CREATETIME" value="20101210172030"/>
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ID" value="214"/>
-			<column name="LNG_NAME" value="Criminology & Criminal Justice Dept"/>
+			<column name="LNG_NAME" value="Criminology &amp; Criminal Justice Dept"/>
 			<column name="OBJ_ID" value="2b02d683-177b-4a3b-9b07-cfcd06013d00"/>
 			<column name="SHRT_NAME" value="CrimCrimJus"/>
 			<column name="ST" value="Active"/>
@@ -1700,7 +1700,7 @@
 			<column name="CREATETIME" value="20101210172030"/>
 			<column name="EFF_DT" value="20100630030000"/>
 			<column name="ID" value="215"/>
-			<column name="LNG_NAME" value="Criminology & Criminal Justice Dept Curriculum Committee"/>
+			<column name="LNG_NAME" value="Criminology &amp; Criminal Justice Dept Curriculum Committee"/>
 			<column name="OBJ_ID" value="5ce93770-5a4c-42fb-b118-b57ac916aa95"/>
 			<column name="SHRT_NAME" value="CrimCrimJusCOC"/>
 			<column name="TYPE" value="kuali.org.COC"/>
@@ -2908,7 +2908,7 @@
 			<column name="CREATETIME" value="20090122000000"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ID" value="88"/>
-			<column name="LNG_NAME" value="Drug & Alcohol Awareness"/>
+			<column name="LNG_NAME" value="Drug &amp; Alcohol Awareness"/>
 			<column name="OBJ_ID" value="48CED857599347EBBDFE8A0F5720163C"/>
 			<column name="SHRT_NAME" value="DrugAlcohol"/>
 			<column name="ST" value="Active"/>
@@ -2935,7 +2935,7 @@
 			<column name="CREATETIME" value="20100917121357"/>
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ID" value="8d3d7c48-5845-4b4d-b98a-03274c43165a"/>
-			<column name="LNG_NAME" value="The American Alliance for Health, Physical Education, Recreation & Dance"/>
+			<column name="LNG_NAME" value="The American Alliance for Health, Physical Education, Recreation &amp; Dance"/>
 			<column name="OBJ_ID" value="1819C80B5F9446428E0DE840A8F970E4"/>
 			<column name="SHRT_NAME" value="AAPERD"/>
 			<column name="ST" value="Active"/>
@@ -3018,7 +3018,7 @@
 			<column name="CREATETIME" value="20090122000000"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ID" value="94"/>
-			<column name="LNG_NAME" value="Student Conduct & Judicial Affairs"/>
+			<column name="LNG_NAME" value="Student Conduct &amp; Judicial Affairs"/>
 			<column name="OBJ_ID" value="4CFCFA20BE414E678048701A1AD94835"/>
 			<column name="SHRT_NAME" value="StudentConductJudicial"/>
 			<column name="ST" value="Active"/>
@@ -3325,5 +3325,5 @@
 			<column name="UPDATETIME" value="20100917121359"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

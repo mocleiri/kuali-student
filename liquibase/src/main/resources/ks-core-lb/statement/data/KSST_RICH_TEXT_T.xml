@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_RICH_TEXT_T-initial-data" author="alubbers">
+	<changeSet id="KSST_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSST_RICH_TEXT_T">
 			<column name="ID" value="002a947f-ba07-4863-b23a-1365ac775a7d"/>
 			<column name="OBJ_ID" value="bd93f447-fde6-4ecb-98ff-d1aee8a05a7d"/>
@@ -4210,5 +4210,5 @@
 			<column name="OBJ_ID" value="e2cdb6a3-5168-460c-a2fe-4adb132c308c"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_ENTITY_ENT_TYP_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_ENTITY_ENT_TYP_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ENTITY_ENT_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1"/>
@@ -320,5 +320,5 @@
 			<column name="OBJ_ID" value="5B1B6B919CCB6VV6E040ZZ8189D822F2"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

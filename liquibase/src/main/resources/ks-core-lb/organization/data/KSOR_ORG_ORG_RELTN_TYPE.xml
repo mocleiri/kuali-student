@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSOR_ORG_ORG_RELTN_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSOR_ORG_ORG_RELTN_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Administers"/>
@@ -7,7 +7,7 @@
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
 			<column name="REV_DESCR" value="Indicates that this organization is administered by another"/>
 			<column name="REV_NAME" value="is Administered by"/>
-			<column name="TYPE_DESC" value="Describes where one organization is administratively responsible for another organization that is not simply "part" of that organization and where the relationship cannot be said to be so strong that there is a "reporting" relationship"/>
+			<column name="TYPE_DESC" value="Describes where one organization is administratively responsible for another organization that is not simply &quot;part&quot; of that organization and where the relationship cannot be said to be so strong that there is a &quot;reporting&quot; relationship"/>
 			<column name="TYPE_KEY" value="kuali.org.Administer"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -91,7 +91,7 @@
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="is Curriculum Parent of"/>
-			<column name="OBJ_ID" value="AACD35C42D341061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB210DA0E040C60AF05B4490"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Curriculum"/>
 			<column name="REV_DESCR" value="Indicates that this organization is the Child of another organization in the Curriculum Hierarchy"/>
 			<column name="REV_NAME" value="is Curriculum Child of"/>
@@ -121,5 +121,5 @@
 			<column name="TYPE_KEY" value="kuali.org.Supervise"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

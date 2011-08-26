@@ -1,10 +1,10 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_RTE_NODE_CFG_PARM_T-initial-data" author="alubbers">
+	<changeSet id="KREW_RTE_NODE_CFG_PARM_T-initial-data" author="alubbers">
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2012"/>
 			<column name="RTE_NODE_ID" value="2004"/>
-			<column name="VAL" value="<start name="placeholder"><activationType>S</activationType></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;placeholder&quot;>&lt;activationType>S&lt;/activationType>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -22,7 +22,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2015"/>
 			<column name="RTE_NODE_ID" value="2006"/>
-			<column name="VAL" value="<start name="placeholder"><activationType>S</activationType></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;placeholder&quot;>&lt;activationType>S&lt;/activationType>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -40,7 +40,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2118"/>
 			<column name="RTE_NODE_ID" value="2039"/>
-			<column name="VAL" value="<start name="Adhoc Routing"><activationType>S</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>true</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;Adhoc Routing&quot;>&lt;activationType>S&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>true&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -70,7 +70,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2123"/>
 			<column name="RTE_NODE_ID" value="2041"/>
-			<column name="VAL" value="<start name="Initiated"><activationType>S</activationType></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;Initiated&quot;>&lt;activationType>S&lt;/activationType>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -88,7 +88,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2126"/>
 			<column name="RTE_NODE_ID" value="2042"/>
-			<column name="VAL" value="<requests name="ReviewersNode"><ruleTemplate>ReviewersRouting</ruleTemplate></requests>"/>
+			<column name="VAL" value="&lt;requests name=&quot;ReviewersNode&quot;>&lt;ruleTemplate>ReviewersRouting&lt;/ruleTemplate>&lt;/requests>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleTemplate"/>
@@ -106,7 +106,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2129"/>
 			<column name="RTE_NODE_ID" value="2043"/>
-			<column name="VAL" value="<requests name="RequestsNode"><ruleTemplate>NotificationRouting</ruleTemplate></requests>"/>
+			<column name="VAL" value="&lt;requests name=&quot;RequestsNode&quot;>&lt;ruleTemplate>NotificationRouting&lt;/ruleTemplate>&lt;/requests>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleTemplate"/>
@@ -124,7 +124,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2170"/>
 			<column name="RTE_NODE_ID" value="2061"/>
-			<column name="VAL" value="<start name="Initiated"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;Initiated&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -154,7 +154,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2175"/>
 			<column name="RTE_NODE_ID" value="2063"/>
-			<column name="VAL" value="<start name="Initiated"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;Initiated&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -184,7 +184,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2180"/>
 			<column name="RTE_NODE_ID" value="2065"/>
-			<column name="VAL" value="<start name="Initiated"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;Initiated&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -214,7 +214,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2185"/>
 			<column name="RTE_NODE_ID" value="2067"/>
-			<column name="VAL" value="<start name="Initiated"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;Initiated&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -244,7 +244,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2380"/>
 			<column name="RTE_NODE_ID" value="2840"/>
-			<column name="VAL" value="<start name="PreRoute"><activationType>S</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;PreRoute&quot;>&lt;activationType>S&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -274,7 +274,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2430"/>
 			<column name="RTE_NODE_ID" value="2898"/>
-			<column name="VAL" value="<start name="AdHoc"/>"/>
+			<column name="VAL" value="&lt;start name=&quot;AdHoc&quot;/>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleSelector"/>
@@ -286,7 +286,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2432"/>
 			<column name="RTE_NODE_ID" value="2899"/>
-			<column name="VAL" value="<role name="RoleType"><qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver</qualifierResolverClass><activationType>P</activationType></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;RoleType&quot;>&lt;qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver&lt;/qualifierResolverClass>&lt;activationType>P&lt;/activationType>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="qualifierResolverClass"/>
@@ -310,7 +310,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2436"/>
 			<column name="RTE_NODE_ID" value="2901"/>
-			<column name="VAL" value="<start name="AdHoc"/>"/>
+			<column name="VAL" value="&lt;start name=&quot;AdHoc&quot;/>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleSelector"/>
@@ -322,7 +322,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2438"/>
 			<column name="RTE_NODE_ID" value="2902"/>
-			<column name="VAL" value="<role name="GroupType"><qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver</qualifierResolverClass><activationType>P</activationType></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;GroupType&quot;>&lt;qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver&lt;/qualifierResolverClass>&lt;activationType>P&lt;/activationType>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="qualifierResolverClass"/>
@@ -346,7 +346,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2442"/>
 			<column name="RTE_NODE_ID" value="2904"/>
-			<column name="VAL" value="<start name="AdHoc"/>"/>
+			<column name="VAL" value="&lt;start name=&quot;AdHoc&quot;/>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleSelector"/>
@@ -358,7 +358,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2444"/>
 			<column name="RTE_NODE_ID" value="2905"/>
-			<column name="VAL" value="<role name="GroupType"><qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver</qualifierResolverClass><activationType>P</activationType></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;GroupType&quot;>&lt;qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver&lt;/qualifierResolverClass>&lt;activationType>P&lt;/activationType>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="qualifierResolverClass"/>
@@ -382,7 +382,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2448"/>
 			<column name="RTE_NODE_ID" value="2906"/>
-			<column name="VAL" value="<role name="RoleType"><qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver</qualifierResolverClass><activationType>P</activationType></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;RoleType&quot;>&lt;qualifierResolverClass>org.kuali.rice.kim.workflow.attribute.KimTypeQualifierResolver&lt;/qualifierResolverClass>&lt;activationType>P&lt;/activationType>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="qualifierResolverClass"/>
@@ -406,7 +406,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2452"/>
 			<column name="RTE_NODE_ID" value="2908"/>
-			<column name="VAL" value="<start name="AdHoc"/>"/>
+			<column name="VAL" value="&lt;start name=&quot;AdHoc&quot;/>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleSelector"/>
@@ -418,7 +418,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2454"/>
 			<column name="RTE_NODE_ID" value="2910"/>
-			<column name="VAL" value="<start name="AdHoc"/>"/>
+			<column name="VAL" value="&lt;start name=&quot;AdHoc&quot;/>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleSelector"/>
@@ -430,7 +430,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2456"/>
 			<column name="RTE_NODE_ID" value="2912"/>
-			<column name="VAL" value="<start name="PreRoute"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;PreRoute&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -460,7 +460,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2461"/>
 			<column name="RTE_NODE_ID" value="2913"/>
-			<column name="VAL" value="<role name="Department Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.DepartmentCommitteeQualifierResolver</qualifierResolverClass></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Department Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.DepartmentCommitteeQualifierResolver&lt;/qualifierResolverClass>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -484,7 +484,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2465"/>
 			<column name="RTE_NODE_ID" value="2914"/>
-			<column name="VAL" value="<role name="Publication Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.PublicationQualifierResolver</qualifierResolverClass></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Publication Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.PublicationQualifierResolver&lt;/qualifierResolverClass>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -508,7 +508,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2535"/>
 			<column name="RTE_NODE_ID" value="2936"/>
-			<column name="VAL" value="<start name="PreRoute"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;PreRoute&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -538,7 +538,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2540"/>
 			<column name="RTE_NODE_ID" value="2937"/>
-			<column name="VAL" value="<role name="Department Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver</qualifierResolverClass><organizationTypeCode>kuali.org.Department</organizationTypeCode><organizationIdQualifierKey>departmentId</organizationIdQualifierKey><organizationShortNameQualifierKey>department</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Department Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver&lt;/qualifierResolverClass>&lt;organizationTypeCode>kuali.org.Department&lt;/organizationTypeCode>&lt;organizationIdQualifierKey>departmentId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>department&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -580,7 +580,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2547"/>
 			<column name="RTE_NODE_ID" value="2938"/>
-			<column name="VAL" value="<role name="Division Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver</qualifierResolverClass><organizationTypeCode>kuali.org.Division</organizationTypeCode><organizationIdQualifierKey>divisionId</organizationIdQualifierKey><organizationShortNameQualifierKey>division</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Division Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver&lt;/qualifierResolverClass>&lt;organizationTypeCode>kuali.org.Division&lt;/organizationTypeCode>&lt;organizationIdQualifierKey>divisionId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>division&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -622,7 +622,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2554"/>
 			<column name="RTE_NODE_ID" value="2939"/>
-			<column name="VAL" value="<role name="College Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver</qualifierResolverClass><organizationTypeCode>kuali.org.College</organizationTypeCode><organizationIdQualifierKey>collegeId</organizationIdQualifierKey><organizationShortNameQualifierKey>college</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;College Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver&lt;/qualifierResolverClass>&lt;organizationTypeCode>kuali.org.College&lt;/organizationTypeCode>&lt;organizationIdQualifierKey>collegeId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>college&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -664,7 +664,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2562"/>
 			<column name="RTE_NODE_ID" value="2940"/>
-			<column name="VAL" value="<role name="Senate Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver</qualifierResolverClass><organizationId>141</organizationId></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Senate Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver&lt;/qualifierResolverClass>&lt;organizationId>141&lt;/organizationId>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -694,7 +694,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2567"/>
 			<column name="RTE_NODE_ID" value="2941"/>
-			<column name="VAL" value="<role name="Publication Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver</qualifierResolverClass><organizationId>176</organizationId></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Publication Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver&lt;/qualifierResolverClass>&lt;organizationId>176&lt;/organizationId>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -724,7 +724,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2572"/>
 			<column name="RTE_NODE_ID" value="2943"/>
-			<column name="VAL" value="<start name="PreRoute"><activationType>P</activationType><mandatoryRoute>false</mandatoryRoute><finalApproval>false</finalApproval></start>"/>
+			<column name="VAL" value="&lt;start name=&quot;PreRoute&quot;>&lt;activationType>P&lt;/activationType>&lt;mandatoryRoute>false&lt;/mandatoryRoute>&lt;finalApproval>false&lt;/finalApproval>&lt;/start>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -754,7 +754,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2577"/>
 			<column name="RTE_NODE_ID" value="2944"/>
-			<column name="VAL" value="<role name="Document Organization Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrganizationQualifierResolver</qualifierResolverClass><organizationIdQualifierKey>orgId</organizationIdQualifierKey><organizationShortNameQualifierKey>org</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Document Organization Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrganizationQualifierResolver&lt;/qualifierResolverClass>&lt;organizationIdQualifierKey>orgId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>org&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -790,7 +790,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2583"/>
 			<column name="RTE_NODE_ID" value="2945"/>
-			<column name="VAL" value="<role name="Publication Decision Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver</qualifierResolverClass><organizationId>176</organizationId></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Publication Decision Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver&lt;/qualifierResolverClass>&lt;organizationId>176&lt;/organizationId>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -820,7 +820,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2588"/>
 			<column name="RTE_NODE_ID" value="2946"/>
-			<column name="VAL" value="<role name="Department Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver</qualifierResolverClass><organizationTypeCode>kuali.org.Department</organizationTypeCode><organizationIdQualifierKey>departmentId</organizationIdQualifierKey><organizationShortNameQualifierKey>department</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Department Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver&lt;/qualifierResolverClass>&lt;organizationTypeCode>kuali.org.Department&lt;/organizationTypeCode>&lt;organizationIdQualifierKey>departmentId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>department&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -862,7 +862,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2595"/>
 			<column name="RTE_NODE_ID" value="2947"/>
-			<column name="VAL" value="<role name="Division Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver</qualifierResolverClass><organizationTypeCode>kuali.org.Division</organizationTypeCode><organizationIdQualifierKey>divisionId</organizationIdQualifierKey><organizationShortNameQualifierKey>division</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Division Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver&lt;/qualifierResolverClass>&lt;organizationTypeCode>kuali.org.Division&lt;/organizationTypeCode>&lt;organizationIdQualifierKey>divisionId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>division&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -904,7 +904,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2602"/>
 			<column name="RTE_NODE_ID" value="2948"/>
-			<column name="VAL" value="<role name="College Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver</qualifierResolverClass><organizationTypeCode>kuali.org.College</organizationTypeCode><organizationIdQualifierKey>collegeId</organizationIdQualifierKey><organizationShortNameQualifierKey>college</organizationShortNameQualifierKey></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;College Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.CocOrgTypeQualifierResolver&lt;/qualifierResolverClass>&lt;organizationTypeCode>kuali.org.College&lt;/organizationTypeCode>&lt;organizationIdQualifierKey>collegeId&lt;/organizationIdQualifierKey>&lt;organizationShortNameQualifierKey>college&lt;/organizationShortNameQualifierKey>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -946,7 +946,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2609"/>
 			<column name="RTE_NODE_ID" value="2949"/>
-			<column name="VAL" value="<role name="Senate Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver</qualifierResolverClass><organizationId>141</organizationId></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Senate Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver&lt;/qualifierResolverClass>&lt;organizationId>141&lt;/organizationId>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -976,7 +976,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2614"/>
 			<column name="RTE_NODE_ID" value="2950"/>
-			<column name="VAL" value="<role name="Publication Review"><activationType>P</activationType><qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver</qualifierResolverClass><organizationId>176</organizationId></role>"/>
+			<column name="VAL" value="&lt;role name=&quot;Publication Review&quot;>&lt;activationType>P&lt;/activationType>&lt;qualifierResolverClass>org.kuali.student.lum.workflow.qualifierresolver.StaticOrganizationQualifierResolver&lt;/qualifierResolverClass>&lt;organizationId>176&lt;/organizationId>&lt;/role>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="activationType"/>
@@ -1006,7 +1006,7 @@
 			<column name="KEY_CD" value="contentFragment"/>
 			<column name="RTE_NODE_CFG_PARM_ID" value="2619"/>
 			<column name="RTE_NODE_ID" value="2962"/>
-			<column name="VAL" value="<start name="AdHoc"/>"/>
+			<column name="VAL" value="&lt;start name=&quot;AdHoc&quot;/>"/>
 		</insert>
 		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
 			<column name="KEY_CD" value="ruleSelector"/>
@@ -1014,5 +1014,5 @@
 			<column name="RTE_NODE_ID" value="2962"/>
 			<column name="VAL" value="Template"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

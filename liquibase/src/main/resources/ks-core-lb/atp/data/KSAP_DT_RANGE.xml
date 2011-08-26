@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSAP_DT_RANGE-initial-data" author="alubbers">
+	<changeSet id="KSAP_DT_RANGE-initial-data" author="alubbers">
 		<insert tableName="KSAP_DT_RANGE">
 			<column name="ATP_ID" value="kuali.atp.FA2008-2009"/>
 			<column name="CREATEID" value="SYSTEM"/>
@@ -544,5 +544,5 @@
 			<column name="UPDATETIME" value="20000101000000"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_RULE_EXPR_T-initial-data" author="alubbers">
+	<changeSet id="KREW_RULE_EXPR_T-initial-data" author="alubbers">
 		<insert tableName="KREW_RULE_EXPR_T">
 			<column name="OBJ_ID" value="616A0754-3BA6-39DF-9A1B-11432849DC6B"/>
 			<column name="RULE_EXPR" value="import edu.sampleu.recipe.util.RecipeUtils
@@ -10,8 +10,8 @@
 		        
 				String ingredients = RecipeUtils.getRecipeIngredientsFromRecipeDocumentContent(routeContext)
 		
-				if(StringUtils.containsIgnoreCase(ingredients, "chicken")) {
-					return RecipeUtils.constructGroupApprovalRequest("KR-WKFLW:ChickenRecipeMasters", rule)
+				if(StringUtils.containsIgnoreCase(ingredients, &quot;chicken&quot;)) {
+					return RecipeUtils.constructGroupApprovalRequest(&quot;KR-WKFLW:ChickenRecipeMasters&quot;, rule)
 		        } else {
 		        	/* Return an empty route request */
 		        	return RecipeUtils.constructEmptyApprovalRequest(rule);
@@ -33,12 +33,12 @@
 		        
 				String origin = RecipeUtils.getRecipeOriginFromRecipeDocumentContent(routeContext)
 				
-				QName serviceName = new QName("magazineNamespace", "magazineSoapService")
+				QName serviceName = new QName(&quot;magazineNamespace&quot;, &quot;magazineSoapService&quot;)
 				MagazineService magazineSoapService = (MagazineService) GlobalResourceLoader.getService(serviceName)
 				String managedMagazines[] = magazineSoapService.getAllManagedMagazines()
 		
 				if(ArrayUtils.contains(managedMagazines, origin)) {
-					return RecipeUtils.constructGroupApprovalRequest("KR-WKFLW:MagazineManagers", rule)
+					return RecipeUtils.constructGroupApprovalRequest(&quot;KR-WKFLW:MagazineManagers&quot;, rule)
 		        } else {
 		        	/* Return an empty route request */
 		        	return RecipeUtils.constructEmptyApprovalRequest(rule);
@@ -47,5 +47,5 @@
 			<column name="TYP" value="BSF:groovy"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

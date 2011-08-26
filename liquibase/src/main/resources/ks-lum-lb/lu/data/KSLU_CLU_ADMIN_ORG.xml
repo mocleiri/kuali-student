@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_ADMIN_ORG-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_ADMIN_ORG-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_ADMIN_ORG">
 			<column name="CLU_ID" value="REFERENCEPROG-CCJS"/>
 			<column name="ID" value="0081d90e-4ed7-4d67-b7f9-4554388cb1af"/>
@@ -6201,5 +6201,5 @@
 			<column name="TYPE" value="kuali.adminOrg.type.CurriculumOversight"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

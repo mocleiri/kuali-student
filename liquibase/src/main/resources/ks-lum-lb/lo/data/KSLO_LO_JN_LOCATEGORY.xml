@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLO_LO_JN_LOCATEGORY-initial-data" author="alubbers">
+	<changeSet id="KSLO_LO_JN_LOCATEGORY-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_JN_LOCATEGORY">
 			<column name="ID" value="03e712aa-ea30-4538-af34-54c6e9737c02"/>
 			<column name="LOCATEGORY_ID" value="d983c794-2e5c-4293-a833-babdc8f7897f"/>
@@ -154,5 +154,5 @@
 			<column name="OBJ_ID" value="3fc48415-63f9-453e-9ac4-c16f21e6f739"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

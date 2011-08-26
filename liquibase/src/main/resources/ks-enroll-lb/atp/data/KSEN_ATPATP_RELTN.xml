@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_ATPATP_RELTN-initial-data" author="alubbers">
+	<changeSet id="KSEN_ATPATP_RELTN-initial-data" author="alubbers">
 		<insert tableName="KSEN_ATPATP_RELTN">
 			<column name="ATP_ID" value="testAtpId1"/>
 			<column name="ATP_RELTN_TYPE_ID" value="kuali.atp.atp.relation.associated"/>
@@ -120,5 +120,5 @@
 			<column name="RELATED_ATP_ID" value="termRelationTestingTerm4"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

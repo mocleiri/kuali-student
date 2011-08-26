@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_ROLE_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_ROLE_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ROLE_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="This role derives its members from the users in the Principal table. This role gives users high-level permissions to interact with RICE documents and to login to KUALI."/>
@@ -524,5 +524,5 @@
 			<column name="ROLE_NM" value="Non-Ad Hoc Approve Request Recipient"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

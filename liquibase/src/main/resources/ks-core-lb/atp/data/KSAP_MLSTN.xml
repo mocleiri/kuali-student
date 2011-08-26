@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSAP_MLSTN-initial-data" author="alubbers">
+	<changeSet id="KSAP_MLSTN-initial-data" author="alubbers">
 		<insert tableName="KSAP_MLSTN">
 			<column name="ATP_ID" value="kuali.atp.AY2009-2010"/>
 			<column name="CREATEID" value="SYSTEM"/>
@@ -472,7 +472,7 @@
 			<column name="ID" value="131"/>
 			<column name="MLSTN_DT" value="20090101000000"/>
 			<column name="MLSTN_TYPE_ID" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
-			<column name="NAME" value="Deadline to withdraw w/o "W'"/>
+			<column name="NAME" value="Deadline to withdraw w/o &quot;W'"/>
 			<column name="OBJ_ID" value="0871DC520A3B42A78B25C6D0A20E6204"/>
 			<column name="RT_DESCR_ID" value="kuali.atp.Milestone.131"/>
 			<column name="STATE" value="Actual"/>
@@ -637,7 +637,7 @@
 			<column name="ID" value="142"/>
 			<column name="MLSTN_DT" value="20090606000000"/>
 			<column name="MLSTN_TYPE_ID" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
-			<column name="NAME" value="Deadline to drop w/o "W""/>
+			<column name="NAME" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="OBJ_ID" value="D8F6B2DD5D0B46BBA4F9145BB28B8E8D"/>
 			<column name="RT_DESCR_ID" value="kuali.atp.Milestone.142"/>
 			<column name="STATE" value="Actual"/>
@@ -997,7 +997,7 @@
 			<column name="ID" value="166"/>
 			<column name="MLSTN_DT" value="20100101000000"/>
 			<column name="MLSTN_TYPE_ID" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
-			<column name="NAME" value="Deadline to withdraw w/o "W'"/>
+			<column name="NAME" value="Deadline to withdraw w/o &quot;W'"/>
 			<column name="OBJ_ID" value="6CBAEB5828974DFF83013B20801BD79C"/>
 			<column name="RT_DESCR_ID" value="kuali.atp.Milestone.166"/>
 			<column name="STATE" value="Actual"/>
@@ -1162,7 +1162,7 @@
 			<column name="ID" value="177"/>
 			<column name="MLSTN_DT" value="20100606000000"/>
 			<column name="MLSTN_TYPE_ID" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
-			<column name="NAME" value="Deadline to drop w/o "W""/>
+			<column name="NAME" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="OBJ_ID" value="14775EBF97C14D9FA420EFD4CBAEAB17"/>
 			<column name="RT_DESCR_ID" value="kuali.atp.Milestone.177"/>
 			<column name="STATE" value="Actual"/>
@@ -1522,7 +1522,7 @@
 			<column name="ID" value="201"/>
 			<column name="MLSTN_DT" value="20110101000000"/>
 			<column name="MLSTN_TYPE_ID" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
-			<column name="NAME" value="Deadline to withdraw w/o "W'"/>
+			<column name="NAME" value="Deadline to withdraw w/o &quot;W'"/>
 			<column name="OBJ_ID" value="60EC4510CF5445618B1B8524AF30A230"/>
 			<column name="RT_DESCR_ID" value="kuali.atp.Milestone.201"/>
 			<column name="STATE" value="Tentative"/>
@@ -1687,7 +1687,7 @@
 			<column name="ID" value="212"/>
 			<column name="MLSTN_DT" value="20110606000000"/>
 			<column name="MLSTN_TYPE_ID" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
-			<column name="NAME" value="Deadline to drop w/o "W""/>
+			<column name="NAME" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="OBJ_ID" value="4B66FE32B2D54DF3B0BA1841875E34D8"/>
 			<column name="RT_DESCR_ID" value="kuali.atp.Milestone.212"/>
 			<column name="STATE" value="Tentative"/>
@@ -3480,5 +3480,5 @@
 			<column name="UPDATETIME" value="20000101000000"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

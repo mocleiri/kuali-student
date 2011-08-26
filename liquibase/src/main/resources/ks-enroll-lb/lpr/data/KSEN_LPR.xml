@@ -1,6 +1,6 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLP_LPR-initial-data" author="alubbers">
-		<insert tableName="KSLP_LPR">
+	<changeSet id="KSEN_LPR-initial-data" author="alubbers">
+		<insert tableName="KSEN_LPR">
 			<column name="EFFECTIVEDATE" value="20000101000000"/>
 			<column name="EXPIRATIONDATE" value="20001231000000"/>
 			<column name="ID" value="testLprId1"/>
@@ -10,5 +10,5 @@
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

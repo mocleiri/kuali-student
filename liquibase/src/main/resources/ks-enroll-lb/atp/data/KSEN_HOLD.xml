@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_HOLD-initial-data" author="alubbers">
+	<changeSet id="KSEN_HOLD-initial-data" author="alubbers">
 		<insert tableName="KSEN_HOLD">
 			<column name="EFF_DT" value="20110101000000"/>
 			<column name="ID" value="Hold-1"/>
@@ -28,5 +28,5 @@
 			<column name="TYPE_ID" value="kuali.hold.type.instructor"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

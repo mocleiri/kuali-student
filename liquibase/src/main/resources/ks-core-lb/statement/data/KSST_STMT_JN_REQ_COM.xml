@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_STMT_JN_REQ_COM-initial-data" author="alubbers">
+	<changeSet id="KSST_STMT_JN_REQ_COM-initial-data" author="alubbers">
 		<insert tableName="KSST_STMT_JN_REQ_COM">
 			<column name="REQ_COM_ID" value="9789556c-13b3-4f25-963b-70de685d1860"/>
 			<column name="STMT_ID" value="2b99a547-f5bb-41c3-83c6-df7cda747e46"/>
@@ -940,5 +940,5 @@
 			<column name="REQ_COM_ID" value="bf05483e-b711-48dc-b258-8944f2abe5d1"/>
 			<column name="STMT_ID" value="0be7aa53-3d84-4ab4-86f1-339b0a6ac7ce"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

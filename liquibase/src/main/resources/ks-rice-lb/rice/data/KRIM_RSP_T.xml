@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_RSP_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_RSP_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Kuali Student Exception Routing"/>
@@ -13,7 +13,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Department Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="DepartmentReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="DepartmentReview0000000000000RSP"/>
 			<column name="RSP_ID" value="300"/>
@@ -23,7 +23,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for College Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="CollegeReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="CollegeReview0000000000000000RSP"/>
 			<column name="RSP_ID" value="301"/>
@@ -33,7 +33,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Division Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="DivisionReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="DivisionReview000000000000000RSP"/>
 			<column name="RSP_ID" value="303"/>
@@ -43,7 +43,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Senate Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="SenateReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="SenateReview00000000000000000RSP"/>
 			<column name="RSP_ID" value="304"/>
@@ -53,7 +53,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Publication Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="PublicationReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="PublicationReview000000000000RSP"/>
 			<column name="RSP_ID" value="305"/>
@@ -63,7 +63,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Publication Decision Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="PublicationDecisionReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="87BF0F95-368E-8863-F65E-6AE4FDF96373"/>
 			<column name="RSP_ID" value="306"/>
@@ -73,7 +73,7 @@
 		<insert tableName="KRIM_RSP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Responsibility for Document Organization Review"/>
-			<column name="NM" value="Review"/>
+			<column name="NM" value="DocOrgReview"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="294E015D-D736-802E-2B98-0B8D62B66442"/>
 			<column name="RSP_ID" value="307"/>
@@ -90,5 +90,5 @@
 			<column name="RSP_TMPL_ID" value="2"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -74,14 +74,8 @@
     <changeSet author="andy (generated)" id="1311191427300-1167">
         <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_EDL_S"/>
     </changeSet>
-    <changeSet author="andy (generated)" id="1311191427300-1168">
-        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_HLP_S"/>
-    </changeSet>
     <changeSet author="andy (generated)" id="1311191427300-1169">
         <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_OUT_BOX_ITM_S"/>
-    </changeSet>
-    <changeSet author="andy (generated)" id="1311191427300-1170">
-        <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RIA_DOCTYPE_MAP_ID_S"/>
     </changeSet>
     <changeSet author="andy (generated)" id="1311191427300-1171">
         <createSequence schemaName="KSEMBEDDED" sequenceName="KREW_RSP_S"/>
@@ -247,6 +241,9 @@
     </changeSet>
     <changeSet author="andy (generated)" id="1311191427300-1225">
         <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CNTXT_VLD_RULE_S"/>
+    </changeSet>
+    <changeSet author="alubbers" id="sequence-KRMS_CTGRY_S">
+        <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_CTGRY_S"/>
     </changeSet>
     <changeSet author="andy (generated)" id="1311191427300-1226">
         <createSequence schemaName="KSEMBEDDED" sequenceName="KRMS_FUNC_PARM_S"/>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_RULE_RSP_T-initial-data" author="alubbers">
+	<changeSet id="KREW_RULE_RSP_T-initial-data" author="alubbers">
 		<insert tableName="KREW_RULE_RSP_T">
 			<column name="ACTN_RQST_CD" value="A"/>
 			<column name="APPR_PLCY" value="F"/>
@@ -108,5 +108,5 @@
 			<column name="TYP" value="G"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

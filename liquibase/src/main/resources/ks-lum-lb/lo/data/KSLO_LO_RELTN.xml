@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLO_LO_RELTN-initial-data" author="alubbers">
+	<changeSet id="KSLO_LO_RELTN-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
 			<column name="CREATETIME" value="20101213085042"/>
@@ -793,5 +793,5 @@
 			<column name="UPDATETIME" value="20101213084612"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

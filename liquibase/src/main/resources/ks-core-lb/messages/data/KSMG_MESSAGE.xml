@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSMG_MESSAGE-initial-data" author="alubbers">
+	<changeSet id="KSMG_MESSAGE-initial-data" author="alubbers">
 		<insert tableName="KSMG_MESSAGE">
 			<column name="GRP_NAME" value="common"/>
 			<column name="ID" value="0031def9-fbd9-4a08-a2d9-33c06f141a91"/>
@@ -228,7 +228,7 @@
 			<column name="ID" value="0cac93c8-a3c6-46b4-86fb-f0b52071a5e2"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluFormats-instruct"/>
-			<column name="MSG_VALUE" value="Each course format can consist of any number of activities, and you may have more than one course format for this <br/>course."/>
+			<column name="MSG_VALUE" value="Each course format can consist of any number of activities, and you may have more than one course format for this &lt;br/>course."/>
 			<column name="OBJ_ID" value="9829ee2d-9928-4afb-9d53-e66183ffa6c9"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -641,7 +641,7 @@
 			<column name="ID" value="1fdb7966-7d0c-4dc7-b2a8-91057276af22"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluProposalTitle-help"/>
-			<column name="MSG_VALUE" value="Avoid naming your proposal "my proposal" or "Sarah's Proposal" so that it can be easily identified later."/>
+			<column name="MSG_VALUE" value="Avoid naming your proposal &quot;my proposal&quot; or &quot;Sarah's Proposal&quot; so that it can be easily identified later."/>
 			<column name="OBJ_ID" value="fb501239-fd83-4caa-8264-90e8feffa070"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -695,7 +695,7 @@
 			<column name="ID" value="27494861-d70f-43a0-90e2-8867dea2bb60"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="kuali.statement.type.course.academicReadiness.coreq"/>
-			<column name="MSG_VALUE" value="<b>Students must enroll in:</b><br/> MATH 102 Mathematics 2\&nbsp;\&nbsp;\&nbsp;3 credits<br/>"/>
+			<column name="MSG_VALUE" value="&lt;b>Students must enroll in:&lt;/b>&lt;br/> MATH 102 Mathematics 2\&amp;nbsp;\&amp;nbsp;\&amp;nbsp;3 credits&lt;br/>"/>
 			<column name="OBJ_ID" value="D1231CDA-ECE8-AEF5-3470-A66D36A12A74"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
@@ -767,7 +767,7 @@
 			<column name="ID" value="29ed2385-a78d-453e-92bd-6095fe2237da"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluCurriculumOversight-instruct"/>
-			<column name="MSG_VALUE" value="This is the organization(s) responsible for the content of the program. This selection will determine <br/>the workflow/approval process for this <br>proposal."/>
+			<column name="MSG_VALUE" value="This is the organization(s) responsible for the content of the program. This selection will determine &lt;br/>the workflow/approval process for this &lt;br>proposal."/>
 			<column name="OBJ_ID" value="c4477e06-efba-4e64-8458-d2db1922d281"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -1396,7 +1396,7 @@
 			<column name="ID" value="4c2aeecd-ca93-40d5-9493-33173de24c02"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluProposalTitle-instruct"/>
-			<column name="MSG_VALUE" value="This title is used for identifying the proposal through the approval process.<br>It is highly recommended that you use the same name for the course and proposal title."/>
+			<column name="MSG_VALUE" value="This title is used for identifying the proposal through the approval process.&lt;br>It is highly recommended that you use the same name for the course and proposal title."/>
 			<column name="OBJ_ID" value="7b95fc57-ce5a-4441-928b-f5c9e6adf04d"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -1513,7 +1513,7 @@
 			<column name="ID" value="53138e3b-797b-4732-bd18-27dac1f145c1"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluCourseNumberOrTitle-help"/>
-			<column name="MSG_VALUE" value="Can't find the course?</br> 				If a course is still in proposal (pre-approval) stage,  				you may not be able to find it without being designated  				as a collaborator on that proposal. If you can't find a 				proposal you know exists, contact the author and ask  				them to make you a collaborator."/>
+			<column name="MSG_VALUE" value="Can't find the course?&lt;/br> 				If a course is still in proposal (pre-approval) stage,  				you may not be able to find it without being designated  				as a collaborator on that proposal. If you can't find a 				proposal you know exists, contact the author and ask  				them to make you a collaborator."/>
 			<column name="OBJ_ID" value="60f52670-73be-466c-939c-02f9709e4702"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -1756,7 +1756,7 @@
 			<column name="ID" value="611092d9-5883-42dc-b22b-ed12c24f22bc"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="kuali.statement.type.course.recommendedPreparation"/>
-			<column name="MSG_VALUE" value="<b>It is recommended that students have completed:</b><br/> MATH 103 Mathematics 3\&nbsp;\&nbsp;\&nbsp;3 credits<br/>"/>
+			<column name="MSG_VALUE" value="&lt;b>It is recommended that students have completed:&lt;/b>&lt;br/> MATH 103 Mathematics 3\&amp;nbsp;\&amp;nbsp;\&amp;nbsp;3 credits&lt;br/>"/>
 			<column name="OBJ_ID" value="06480D18-7A91-8CAE-7F88-493BE59F0C71"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
@@ -2069,7 +2069,7 @@
 			<column name="ID" value="71277d14-3542-44af-9132-432a93e431b6"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluLogistics-instruct"/>
-			<column name="MSG_VALUE" value="Indicate the scheduling, learning results and course format for this course.<br/>"/>
+			<column name="MSG_VALUE" value="Indicate the scheduling, learning results and course format for this course.&lt;br/>"/>
 			<column name="OBJ_ID" value="b8720593-2c12-4bff-8056-f53eb19e4584"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -2266,7 +2266,7 @@
 			<column name="ID" value="7ca855f6-4b4d-4926-8852-1e9ee3c01d7e"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="validation.validChars.relationalOperator"/>
-			<column name="MSG_VALUE" value="Can only contain one of these operators >,<,=,>=,<=, or <>"/>
+			<column name="MSG_VALUE" value="Can only contain one of these operators >,&lt;,=,>=,&lt;=, or &lt;>"/>
 			<column name="OBJ_ID" value="ad69d7a3-ba3f-4de4-a195-e8ea57161832"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -2356,7 +2356,7 @@
 			<column name="ID" value="81d26859-c5bf-463b-b18e-802ca4f2619a"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
-			<column name="MSG_VALUE" value="<b>Students must meet one of the following:</b><br/>- Must be registered majors in:<br/>\&nbsp;\&nbsp;\&nbsp;X major<br/>- Must obtian permission of course instructor<br/>- Must be of Junior standing<br/>- Must have earned a GPA of X or above<br/>- Must be students at the following campus(es)<br/>\&nbsp;\&nbsp;\&nbsp;X Campus</br><br/>Students must have completed:<br/>MATH 100 Introduction to Mathematics\&nbsp;\&nbsp;\&nbsp;3 credits<br/>"/>
+			<column name="MSG_VALUE" value="&lt;b>Students must meet one of the following:&lt;/b>&lt;br/>- Must be registered majors in:&lt;br/>\&amp;nbsp;\&amp;nbsp;\&amp;nbsp;X major&lt;br/>- Must obtian permission of course instructor&lt;br/>- Must be of Junior standing&lt;br/>- Must have earned a GPA of X or above&lt;br/>- Must be students at the following campus(es)&lt;br/>\&amp;nbsp;\&amp;nbsp;\&amp;nbsp;X Campus&lt;/br>&lt;br/>Students must have completed:&lt;br/>MATH 100 Introduction to Mathematics\&amp;nbsp;\&amp;nbsp;\&amp;nbsp;3 credits&lt;br/>"/>
 			<column name="OBJ_ID" value="4251E3C1-017B-DCBA-5FE9-603C76F486C5"/>
 			<column name="VER_NBR" value="8"/>
 		</insert>
@@ -2634,7 +2634,7 @@
 			<column name="ID" value="91dd1d74-f8dc-4743-92d5-e7b696c041a9"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluLearningResultAssessmentScale-help"/>
-			<column name="MSG_VALUE" value="<b>Letter, Standard Values</b><br/> 			A, B, C, D, F<br/><br/> 			<b>Satisfactory Values</b><br/> 			Satisfactory, unsatisfactory<br/><br/> 			<b>Percentage Values</b><br/> 			&gt;60% pass<br/><br/> 			<b>Recital Review</b><br/> 			Iorem ipsum description of recital review<br/><br/> 			<b>Design Review</b><br/> 			Iorem ipsum description of design review<br/><br/> 			<b>Completed Notation</b><br/> 			complete, incomplete<br/><br/>"/>
+			<column name="MSG_VALUE" value="&lt;b>Letter, Standard Values&lt;/b>&lt;br/> 			A, B, C, D, F&lt;br/>&lt;br/> 			&lt;b>Satisfactory Values&lt;/b>&lt;br/> 			Satisfactory, unsatisfactory&lt;br/>&lt;br/> 			&lt;b>Percentage Values&lt;/b>&lt;br/> 			&amp;gt;60% pass&lt;br/>&lt;br/> 			&lt;b>Recital Review&lt;/b>&lt;br/> 			Iorem ipsum description of recital review&lt;br/>&lt;br/> 			&lt;b>Design Review&lt;/b>&lt;br/> 			Iorem ipsum description of design review&lt;br/>&lt;br/> 			&lt;b>Completed Notation&lt;/b>&lt;br/> 			complete, incomplete&lt;br/>&lt;br/>"/>
 			<column name="OBJ_ID" value="56204fc9-73ca-435d-9880-d68e2300da16"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -2760,7 +2760,7 @@
 			<column name="ID" value="98c71ea6-0ff8-4e61-beca-3c698a3919f5"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluAdminOrg-instruct"/>
-			<column name="MSG_VALUE" value="List the organization(s) that can administer, or offer, this course. In most cases this will be the same <br/>as the Curriculum Oversight organization, but additional and/or alternate organizations can also be </br>listed as administering organizations."/>
+			<column name="MSG_VALUE" value="List the organization(s) that can administer, or offer, this course. In most cases this will be the same &lt;br/>as the Curriculum Oversight organization, but additional and/or alternate organizations can also be &lt;/br>listed as administering organizations."/>
 			<column name="OBJ_ID" value="7dd70e2b-ccdc-4e34-9b88-fd5de3670915"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -2874,20 +2874,20 @@
 		</insert>
 		<insert tableName="KSMG_MESSAGE">
 			<column name="GRP_NAME" value="validation"/>
-			<column name="ID" value="AACD35C42D131061E040C60AF05B56E5"/>
+			<column name="ID" value="AB57FF8BEB000DA0E040C60AF05B4490"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="validation.validChars.numeric.range"/>
 			<column name="MSG_VALUE" value="Single number or numeric range separated by a dash"/>
-			<column name="OBJ_ID" value="AACD35C42D141061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB010DA0E040C60AF05B4490"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSMG_MESSAGE">
 			<column name="GRP_NAME" value="validation"/>
-			<column name="ID" value="AACD35C42D151061E040C60AF05B56E5"/>
+			<column name="ID" value="AB57FF8BEB020DA0E040C60AF05B4490"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="validation.validChars.positive.numeric.range"/>
 			<column name="MSG_VALUE" value="Positive single number or postive numeric range separated by a dash"/>
-			<column name="OBJ_ID" value="AACD35C42D161061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB030DA0E040C60AF05B4490"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSMG_MESSAGE">
@@ -3012,7 +3012,7 @@
 			<column name="ID" value="a76c2b80-5a88-4838-9636-819c4e3d9311"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluAuthorsRationale"/>
-			<column name="MSG_VALUE" value="Authors & Rationale"/>
+			<column name="MSG_VALUE" value="Authors &amp; Rationale"/>
 			<column name="OBJ_ID" value="6c2e08bc-06d7-421e-857f-5fffce1a7a30"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -3030,7 +3030,7 @@
 			<column name="ID" value="a77b63d9-a7e7-467a-bcbf-d499e0f0651f"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="kuali.statement.type.course.academicReadiness.antireq"/>
-			<column name="MSG_VALUE" value="<b>Students must not have completed:</b><br/> MATH 150 Theoretical Mathematics\&nbsp;\&nbsp;\&nbsp;3 credits<br/>"/>
+			<column name="MSG_VALUE" value="&lt;b>Students must not have completed:&lt;/b>&lt;br/> MATH 150 Theoretical Mathematics\&amp;nbsp;\&amp;nbsp;\&amp;nbsp;3 credits&lt;br/>"/>
 			<column name="OBJ_ID" value="5174A1FF-FA83-56D6-91AD-FE61E4BD4653"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
@@ -3120,7 +3120,7 @@
 			<column name="ID" value="ae6528e1-5c0b-46a7-81df-d3b3967cb62d"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluTermsOffered-instruct"/>
-			<column name="MSG_VALUE" value="Selecting a single term will restrict this course to only that term. 'Any' will allow the course to be offered <br>in any term that matches the duration selected below."/>
+			<column name="MSG_VALUE" value="Selecting a single term will restrict this course to only that term. 'Any' will allow the course to be offered &lt;br>in any term that matches the duration selected below."/>
 			<column name="OBJ_ID" value="7a0c497d-de4c-41f9-aa81-072cd0b282b3"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -3640,7 +3640,7 @@
 			<column name="ID" value="cb56162e-8292-4997-ba75-c54ea0bf47b9"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluLearningObjectives-instruct"/>
-			<column name="MSG_VALUE" value="Use this tool to build a bullet-point style outline with a maximum of 250 characters for each learning objective.<br/>Or click the following link to search for existing learning objectives."/>
+			<column name="MSG_VALUE" value="Use this tool to build a bullet-point style outline with a maximum of 250 characters for each learning objective.&lt;br/>Or click the following link to search for existing learning objectives."/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSMG_MESSAGE">
@@ -4142,7 +4142,7 @@
 			<column name="ID" value="e34378ae-1a69-426b-b940-16e8b18ac3ee"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluLearningResults-instruct"/>
-			<column name="MSG_VALUE" value="There are two types of learning results, Grades/Assessments and Credits/Outcomes. You can add multiple options <br/>for either type, which can be used for multiple course formats, or to account for variations in course offerings."/>
+			<column name="MSG_VALUE" value="There are two types of learning results, Grades/Assessments and Credits/Outcomes. You can add multiple options &lt;br/>for either type, which can be used for multiple course formats, or to account for variations in course offerings."/>
 			<column name="OBJ_ID" value="20e18484-0475-4860-8220-163cdc6b908c"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -4412,7 +4412,7 @@
 			<column name="ID" value="f5634811-37c9-4ea7-bb64-bd052ec7ad82"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="cluSetEffectiveDate-instruct"/>
-			<column name="MSG_VALUE" value="You must select an date after which this Courseset will be active and available <br/> for use - you may select a date in the future."/>
+			<column name="MSG_VALUE" value="You must select an date after which this Courseset will be active and available &lt;br/> for use - you may select a date in the future."/>
 			<column name="OBJ_ID" value="6411F5BD-AAC4-6834-7F42-D21C155E5F2B"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
@@ -4576,5 +4576,5 @@
 			<column name="OBJ_ID" value="0F2734CD-CD5D-F883-58EF-3F53C57DEE51"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -11,12 +11,6 @@
 <changeSet author="andy (generated)" id="1311191427300-473">
   <addPrimaryKey columnNames="DOC_HDR_ID, RTE_NODE_INSTN_ID" constraintName="KREW_INIT_RTE_NODE_INSTN_TP1" tableName="KREW_INIT_RTE_NODE_INSTN_T" tablespace="USERS" />
 </changeSet>
-<changeSet author="andy (generated)" id="1311191427300-474">
-  <addPrimaryKey columnNames="DOC_HDR_ID, GRP_ID" constraintName="KREW_RMV_RPLC_GRP_TP1" tableName="KREW_RMV_RPLC_GRP_T" tablespace="USERS" />
-</changeSet>
-<changeSet author="andy (generated)" id="1311191427300-475">
-  <addPrimaryKey columnNames="DOC_HDR_ID, RULE_ID" constraintName="KREW_RMV_RPLC_RULE_TP1" tableName="KREW_RMV_RPLC_RULE_T" tablespace="USERS" />
-</changeSet>
 <changeSet author="andy (generated)" id="1311191427300-476">
   <addPrimaryKey columnNames="FROM_RTE_NODE_INSTN_ID, TO_RTE_NODE_INSTN_ID" constraintName="KREW_RTE_NODE_INSTN_LNK_TP1" tableName="KREW_RTE_NODE_INSTN_LNK_T" tablespace="USERS" />
 </changeSet>
@@ -338,8 +332,14 @@
 <changeSet author="andy (generated)" id="1311191427300-591">
   <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PERM_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_T" tablespace="USERS" />
 </changeSet>
+<changeSet author="andy (generated)" id="KRIM_PERM_T-unique-NM-NMSPC_CD">
+  <addUniqueConstraint columnNames="NM,NMSPC_CD" constraintName="KRIM_PERM_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_T" tablespace="USERS" />
+</changeSet>
 <changeSet author="andy (generated)" id="1311191427300-592">
   <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PERM_TMPL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_TMPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="KRIM_PERM_TMPL_T-unique-NM-NMSPC_CD">
+  <addUniqueConstraint columnNames="NM,NMSPC_CD" constraintName="KRIM_PERM_TMPL_TC1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PERM_TMPL_T" tablespace="USERS" />
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-593">
   <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_PHONE_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_PHONE_TYP_T" tablespace="USERS" />
@@ -383,8 +383,14 @@
 <changeSet author="andy (generated)" id="1311191427300-606">
   <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_RSP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_RSP_T" tablespace="USERS" />
 </changeSet>
+<changeSet author="andy (generated)" id="KRIM_RSP_T-unique-NM-NMSPC_CD">
+  <addUniqueConstraint columnNames="NM,NMSPC_CD" constraintName="KRIM_RSP_TC1" tableName="KRIM_RSP_T" />
+</changeSet>
 <changeSet author="andy (generated)" id="1311191427300-607">
   <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_RSP_TMPL_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_RSP_TMPL_T" tablespace="USERS" />
+</changeSet>
+<changeSet author="andy (generated)" id="KRIM_RSP_TMPL_T-unique-NM-NMSPC_CD">
+  <addUniqueConstraint columnNames="NM,NMSPC_CD" constraintName="KRIM_RSP_TMPL_TC1" tableName="KRIM_RSP_TMPL_T" />
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-608">
   <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRIM_TYP_ATTR_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRIM_TYP_ATTR_T" tablespace="USERS" />

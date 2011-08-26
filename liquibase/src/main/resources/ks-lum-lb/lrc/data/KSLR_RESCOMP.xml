@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLR_RESCOMP-initial-data" author="alubbers">
+	<changeSet id="KSLR_RESCOMP-initial-data" author="alubbers">
 		<insert tableName="KSLR_RESCOMP">
 			<column name="CREATETIME" value="20101210172116"/>
 			<column name="ID" value="kuali.creditType.credit.degree.1-2"/>
@@ -180,5 +180,5 @@
 			<column name="TYPE" value="kuali.resultComponentType.grade.finalGrade"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_SPARAM-initial-data" author="alubbers">
+	<changeSet id="KSLU_SPARAM-initial-data" author="alubbers">
 		<insert tableName="KSLU_SPARAM">
 			<column name="ID" value="036c3609-48da-432a-9949-0d93c3b99f05"/>
 			<column name="OBJ_ID" value="7a8c2188-f37b-4550-9b77-dcb94ff1f219"/>
@@ -60,5 +60,5 @@
 			<column name="SEARCH_PARAM_KEY" value="lu.queryParam.luOptionalDivision"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

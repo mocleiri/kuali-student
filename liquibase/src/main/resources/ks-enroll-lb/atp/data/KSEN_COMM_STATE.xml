@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_COMM_STATE-initial-data" author="alubbers">
+	<changeSet id="KSEN_COMM_STATE-initial-data" author="alubbers">
 		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="Indicates that this Atp-Atp relation is active"/>
 			<column name="ID" value="kuali.atp.atp.relation.state.active"/>
@@ -175,5 +175,5 @@
 			<column name="PROCESS_KEY" value="kuali.milestone.process"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

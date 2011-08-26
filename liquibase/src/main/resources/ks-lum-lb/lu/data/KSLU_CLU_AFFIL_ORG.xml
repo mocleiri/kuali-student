@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_AFFIL_ORG-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_AFFIL_ORG-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_AFFIL_ORG">
 			<column name="ID" value="119ce381-f322-4532-a635-51203fc9a3d3"/>
 			<column name="OBJ_ID" value="2acf44e4-dc6b-491e-94ad-eacbca5b3b88"/>
@@ -21,5 +21,5 @@
 			<column name="PERCT" value="75"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

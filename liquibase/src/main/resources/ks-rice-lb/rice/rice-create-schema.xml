@@ -342,7 +342,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-21">
   <createTable tableName="KREW_ACTN_ITM_T">
-    <column name="ACTN_ITM_ID" type="${integer.type}(14)">
+    <column name="ACTN_ITM_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_ACTN_ITM_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="PRNCPL_ID" type="java.sql.Types.VARCHAR(40)">
@@ -354,7 +354,7 @@
     <column name="RQST_CD" type="java.sql.Types.CHAR(1)">
       <constraints nullable="false" />
     </column>
-    <column name="ACTN_RQST_ID" type="${integer.type}(14)">
+    <column name="ACTN_RQST_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -372,7 +372,7 @@
     <column name="DOC_TYP_NM" type="java.sql.Types.VARCHAR(64)">
       <constraints nullable="false" />
     </column>
-    <column name="RSP_ID" type="${integer.type}(14)">
+    <column name="RSP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DLGN_TYP" type="java.sql.Types.VARCHAR(1)" />
@@ -385,21 +385,21 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-22">
   <createTable tableName="KREW_ACTN_RQST_T">
-    <column name="ACTN_RQST_ID" type="${integer.type}(14)">
+    <column name="ACTN_RQST_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_ACTN_RQST_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="PARNT_ID" type="${integer.type}(14)" />
+    <column name="PARNT_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="ACTN_RQST_CD" type="java.sql.Types.CHAR(1)">
       <constraints nullable="false" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="RULE_ID" type="${integer.type}(19)" />
+    <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="STAT_CD" type="java.sql.Types.CHAR(1)">
       <constraints nullable="false" />
     </column>
-    <column name="RSP_ID" type="${integer.type}(14)">
+    <column name="RSP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="PRNCPL_ID" type="java.sql.Types.VARCHAR(40)" />
@@ -414,8 +414,8 @@
     <column name="RTE_LVL_NBR" type="${integer.type}(8)">
       <constraints nullable="false" />
     </column>
-    <column name="RTE_NODE_INSTN_ID" type="${integer.type}(19)" />
-    <column name="ACTN_TKN_ID" type="${integer.type}(14)" />
+    <column name="RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)" />
+    <column name="ACTN_TKN_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="DOC_VER_NBR" type="${integer.type}(8)">
       <constraints nullable="false" />
     </column>
@@ -435,7 +435,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-23">
   <createTable tableName="KREW_ACTN_TKN_T">
-    <column name="ACTN_TKN_ID" type="${integer.type}(14)">
+    <column name="ACTN_TKN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_ACTN_TKN_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -462,7 +462,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-24">
   <createTable tableName="KREW_APP_DOC_STAT_TRAN_T">
-    <column name="APP_DOC_STAT_TRAN_ID" type="${integer.type}(19)">
+    <column name="APP_DOC_STAT_TRAN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_APP_DOC_STAT_TRAN_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)" />
@@ -477,10 +477,10 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-25">
   <createTable tableName="KREW_ATT_T">
-    <column name="ATTACHMENT_ID" type="${integer.type}(19)">
+    <column name="ATTACHMENT_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_ATT_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="NTE_ID" type="${integer.type}(19)">
+    <column name="NTE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="FILE_NM" type="java.sql.Types.VARCHAR(255)">
@@ -497,13 +497,13 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-26">
   <createTable tableName="KREW_DLGN_RSP_T">
-    <column name="DLGN_RULE_ID" type="${integer.type}(19)">
+    <column name="DLGN_RULE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DLGN_RSP_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RSP_ID" type="${integer.type}(19)">
+    <column name="RSP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="DLGN_RULE_BASE_VAL_ID" type="${integer.type}(19)">
+    <column name="DLGN_RULE_BASE_VAL_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DLGN_TYP" type="java.sql.Types.VARCHAR(20)">
@@ -525,7 +525,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-28">
   <createTable tableName="KREW_DOC_HDR_EXT_DT_T">
-    <column name="DOC_HDR_EXT_DT_ID" type="${integer.type}(19)">
+    <column name="DOC_HDR_EXT_DT_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_HDR_EXT_DT_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -539,7 +539,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-29">
   <createTable tableName="KREW_DOC_HDR_EXT_FLT_T">
-    <column name="DOC_HDR_EXT_FLT_ID" type="${integer.type}(19)">
+    <column name="DOC_HDR_EXT_FLT_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_HDR_EXT_FLT_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -553,7 +553,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-30">
   <createTable tableName="KREW_DOC_HDR_EXT_LONG_T">
-    <column name="DOC_HDR_EXT_LONG_ID" type="${integer.type}(19)">
+    <column name="DOC_HDR_EXT_LONG_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_HDR_EXT_LONG_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -567,7 +567,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-31">
   <createTable tableName="KREW_DOC_HDR_EXT_T">
-    <column name="DOC_HDR_EXT_ID" type="${integer.type}(19)">
+    <column name="DOC_HDR_EXT_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_HDR_EXT_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -584,7 +584,7 @@
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_HDR_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="DOC_TYP_ID" type="${integer.type}(19)" />
+    <column name="DOC_TYP_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="DOC_HDR_STAT_CD" type="java.sql.Types.CHAR(1)">
       <constraints nullable="false" />
     </column>
@@ -621,7 +621,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-33">
   <createTable tableName="KREW_DOC_LNK_T">
-    <column name="DOC_LNK_ID" type="${integer.type}(19)">
+    <column name="DOC_LNK_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_LNK_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="ORGN_DOC_ID" type="java.sql.Types.VARCHAR(40)">
@@ -634,7 +634,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-34">
   <createTable tableName="KREW_DOC_NTE_T">
-    <column name="DOC_NTE_ID" type="${integer.type}(19)">
+    <column name="DOC_NTE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_NTE_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -652,7 +652,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-35">
   <createTable tableName="KREW_DOC_TYP_APP_DOC_STAT_T">
-    <column name="DOC_TYP_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DOC_STAT_NM" type="java.sql.Types.VARCHAR(64)">
@@ -666,13 +666,13 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-36">
   <createTable tableName="KREW_DOC_TYP_ATTR_T">
-    <column name="DOC_TYP_ATTRIB_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_ATTRIB_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_TYP_ATTR_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="DOC_TYP_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="RULE_ATTR_ID" type="${integer.type}(19)">
+    <column name="RULE_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column defaultValueNumeric="0" name="ORD_INDX" type="${integer.type}(4)" />
@@ -680,7 +680,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-37">
   <createTable tableName="KREW_DOC_TYP_PLCY_RELN_T">
-    <column name="DOC_TYP_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DOC_PLCY_NM" type="java.sql.Types.VARCHAR(255)">
@@ -694,14 +694,15 @@
       <constraints nullable="false" />
     </column>
     <column name="PLCY_VAL" type="java.sql.Types.VARCHAR(64)" />
+    <column name="PLCY_DESC" type="java.sql.Types.VARCHAR(20)" />
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-38">
   <createTable tableName="KREW_DOC_TYP_PROC_T">
-    <column name="DOC_TYP_PROC_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_PROC_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_TYP_PROC_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="DOC_TYP_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="INIT_RTE_NODE_ID" type="${integer.type}(22)" />
@@ -716,16 +717,16 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-39">
   <createTable tableName="KREW_DOC_TYP_T">
-    <column name="DOC_TYP_ID" type="${integer.type}(19)">
+    <column name="DOC_TYP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_DOC_TYP_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="PARNT_ID" type="${integer.type}(19)" />
+    <column name="PARNT_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="DOC_TYP_NM" type="java.sql.Types.VARCHAR(64)" />
     <column defaultValueNumeric="0" name="DOC_TYP_VER_NBR" type="${integer.type}(10)" />
     <column name="ACTV_IND" type="BOOLEAN" />
     <column name="CUR_IND" type="BOOLEAN" />
     <column name="LBL" type="java.sql.Types.VARCHAR(128)" />
-    <column name="PREV_DOC_TYP_VER_NBR" type="${bigint.type}(19)" />
+    <column name="PREV_DOC_TYP_VER_NBR" type="java.sql.Types.VARCHAR(40)" />
     <column name="DOC_TYP_DESC" type="java.sql.Types.VARCHAR(4000)" />
     <column name="DOC_HDLR_URL" type="java.sql.Types.VARCHAR(255)" />
     <column name="POST_PRCSR" type="java.sql.Types.VARCHAR(255)" />
@@ -833,36 +834,19 @@
     <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
   </createTable>
 </changeSet>
-<changeSet author="andy (generated)" id="1311191427300-44">
-  <createTable tableName="KREW_HLP_T">
-    <column name="HLP_ID" type="${integer.type}(19)">
-      <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_HLP_TP1" primaryKeyTablespace="USERS" />
-    </column>
-    <column name="NM" type="java.sql.Types.VARCHAR(500)">
-      <constraints nullable="false" />
-    </column>
-    <column name="KEY_CD" type="java.sql.Types.VARCHAR(500)">
-      <constraints nullable="false" />
-    </column>
-    <column name="HLP_TXT" type="java.sql.Types.VARCHAR(4000)">
-      <constraints nullable="false" />
-    </column>
-    <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
-  </createTable>
-</changeSet>
 <changeSet author="andy (generated)" id="1311191427300-45">
   <createTable tableName="KREW_INIT_RTE_NODE_INSTN_T">
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="RTE_NODE_INSTN_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-46">
   <createTable tableName="KREW_OUT_BOX_ITM_T">
-    <column name="ACTN_ITM_ID" type="${integer.type}(14)">
+    <column name="ACTN_ITM_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_OUT_BOX_ITM_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="PRNCPL_ID" type="java.sql.Types.VARCHAR(40)">
@@ -874,7 +858,7 @@
     <column name="RQST_CD" type="java.sql.Types.CHAR(1)">
       <constraints nullable="false" />
     </column>
-    <column name="ACTN_RQST_ID" type="${integer.type}(14)">
+    <column name="ACTN_RQST_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
@@ -892,7 +876,7 @@
     <column name="DOC_TYP_NM" type="java.sql.Types.VARCHAR(64)">
       <constraints nullable="false" />
     </column>
-    <column name="RSP_ID" type="${integer.type}(14)">
+    <column name="RSP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="DLGN_TYP" type="java.sql.Types.VARCHAR(1)" />
@@ -902,78 +886,9 @@
     <column name="RQST_LBL" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
-<changeSet author="andy (generated)" id="1311191427300-47">
-  <createTable tableName="KREW_RIA_DOC_T">
-    <column name="RIA_ID" type="${integer.type}(22)">
-      <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RIA_DOC_TP1" primaryKeyTablespace="USERS" />
-    </column>
-    <column name="XML_CONTENT" type="java.sql.Types.VARCHAR(4000)" />
-    <column name="RIA_DOC_TYPE_NAME" type="java.sql.Types.VARCHAR(100)" />
-    <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
-      <constraints nullable="false" />
-    </column>
-    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
-      <constraints nullable="false" />
-    </column>
-  </createTable>
-</changeSet>
-<changeSet author="andy (generated)" id="1311191427300-48">
-  <createTable tableName="KREW_RIA_DOCTYPE_MAP_T">
-    <column name="ID" type="${integer.type}(22)">
-      <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RIA_DOCTYPE_MAP_TP1" primaryKeyTablespace="USERS" />
-    </column>
-    <column name="RIA_DOC_TYPE_NAME" type="java.sql.Types.VARCHAR(100)" />
-    <column name="UPDATED_AT" type="TIMESTAMP" />
-    <column name="RIA_URL" type="java.sql.Types.VARCHAR(255)" />
-    <column name="HELP_URL" type="java.sql.Types.VARCHAR(255)" />
-    <column name="EDITABLE" type="java.sql.Types.CHAR(1)" />
-    <column name="INIT_GROUPS" type="java.sql.Types.VARCHAR(255)" />
-    <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
-      <constraints nullable="false" />
-    </column>
-    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
-      <constraints nullable="false" />
-    </column>
-  </createTable>
-</changeSet>
-<changeSet author="andy (generated)" id="1311191427300-49">
-  <createTable tableName="KREW_RMV_RPLC_DOC_T">
-    <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
-      <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RMV_RPLC_DOC_TP1" primaryKeyTablespace="USERS" />
-    </column>
-    <column name="OPRN" type="java.sql.Types.CHAR(1)">
-      <constraints nullable="false" />
-    </column>
-    <column name="PRNCPL_ID" type="java.sql.Types.VARCHAR(40)">
-      <constraints nullable="false" />
-    </column>
-    <column name="RPLC_PRNCPL_ID" type="java.sql.Types.VARCHAR(40)" />
-    <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
-  </createTable>
-</changeSet>
-<changeSet author="andy (generated)" id="1311191427300-50">
-  <createTable tableName="KREW_RMV_RPLC_GRP_T">
-    <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
-      <constraints nullable="false" />
-    </column>
-    <column name="GRP_ID" type="${integer.type}(14)">
-      <constraints nullable="false" />
-    </column>
-  </createTable>
-</changeSet>
-<changeSet author="andy (generated)" id="1311191427300-51">
-  <createTable tableName="KREW_RMV_RPLC_RULE_T">
-    <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
-      <constraints nullable="false" />
-    </column>
-    <column name="RULE_ID" type="${integer.type}(19)">
-      <constraints nullable="false" />
-    </column>
-  </createTable>
-</changeSet>
 <changeSet author="andy (generated)" id="1311191427300-52">
   <createTable tableName="KREW_RTE_BRCH_PROTO_T">
-    <column name="RTE_BRCH_PROTO_ID" type="${integer.type}(19)">
+    <column name="RTE_BRCH_PROTO_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_BRCH_PROTO_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="BRCH_NM" type="java.sql.Types.VARCHAR(255)">
@@ -984,10 +899,10 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-53">
   <createTable tableName="KREW_RTE_BRCH_ST_T">
-    <column name="RTE_BRCH_ST_ID" type="${integer.type}(19)">
+    <column name="RTE_BRCH_ST_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_BRCH_ST_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RTE_BRCH_ID" type="${integer.type}(19)">
+    <column name="RTE_BRCH_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="KEY_CD" type="java.sql.Types.VARCHAR(255)">
@@ -999,25 +914,25 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-54">
   <createTable tableName="KREW_RTE_BRCH_T">
-    <column name="RTE_BRCH_ID" type="${integer.type}(19)">
+    <column name="RTE_BRCH_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_BRCH_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="NM" type="java.sql.Types.VARCHAR(255)">
       <constraints nullable="false" />
     </column>
-    <column name="PARNT_ID" type="${integer.type}(19)" />
-    <column name="INIT_RTE_NODE_INSTN_ID" type="${integer.type}(19)" />
-    <column name="SPLT_RTE_NODE_INSTN_ID" type="${integer.type}(19)" />
-    <column name="JOIN_RTE_NODE_INSTN_ID" type="${integer.type}(19)" />
+    <column name="PARNT_ID" type="java.sql.Types.VARCHAR(40)" />
+    <column name="INIT_RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)" />
+    <column name="SPLT_RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)" />
+    <column name="JOIN_RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)" />
     <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-55">
   <createTable tableName="KREW_RTE_NODE_CFG_PARM_T">
-    <column name="RTE_NODE_CFG_PARM_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_CFG_PARM_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_NODE_CFG_PARM_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RTE_NODE_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="KEY_CD" type="java.sql.Types.VARCHAR(255)">
@@ -1028,20 +943,20 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-56">
   <createTable tableName="KREW_RTE_NODE_INSTN_LNK_T">
-    <column name="FROM_RTE_NODE_INSTN_ID" type="${integer.type}(19)">
+    <column name="FROM_RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="TO_RTE_NODE_INSTN_ID" type="${integer.type}(19)">
+    <column name="TO_RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-57">
   <createTable tableName="KREW_RTE_NODE_INSTN_ST_T">
-    <column name="RTE_NODE_INSTN_ST_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_INSTN_ST_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_NODE_INSTN_ST_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RTE_NODE_INSTN_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="KEY_CD" type="java.sql.Types.VARCHAR(255)">
@@ -1053,17 +968,17 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-58">
   <createTable tableName="KREW_RTE_NODE_INSTN_T">
-    <column name="RTE_NODE_INSTN_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_NODE_INSTN_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_HDR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="RTE_NODE_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="BRCH_ID" type="${integer.type}(19)" />
-    <column name="PROC_RTE_NODE_INSTN_ID" type="${integer.type}(19)" />
+    <column name="BRCH_ID" type="java.sql.Types.VARCHAR(40)" />
+    <column name="PROC_RTE_NODE_INSTN_ID" type="java.sql.Types.VARCHAR(40)" />
     <column defaultValueNumeric="0" name="ACTV_IND" type="BOOLEAN">
       <constraints nullable="false" />
     </column>
@@ -1078,17 +993,17 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-59">
   <createTable tableName="KREW_RTE_NODE_LNK_T">
-    <column name="FROM_RTE_NODE_ID" type="${integer.type}(19)">
+    <column name="FROM_RTE_NODE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="TO_RTE_NODE_ID" type="${integer.type}(19)">
+    <column name="TO_RTE_NODE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-60">
   <createTable tableName="KREW_RTE_NODE_T">
-    <column name="RTE_NODE_ID" type="${integer.type}(19)">
+    <column name="RTE_NODE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RTE_NODE_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="DOC_TYP_ID" type="${integer.type}(19)" />
@@ -1103,7 +1018,7 @@
     <column name="FNL_APRVR_IND" type="BOOLEAN" />
     <column name="MNDTRY_RTE_IND" type="BOOLEAN" />
     <column name="ACTVN_TYP" type="java.sql.Types.VARCHAR(250)" />
-    <column name="BRCH_PROTO_ID" type="${integer.type}(19)" />
+    <column name="BRCH_PROTO_ID" type="java.sql.Types.VARCHAR(40)" />
     <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
     <column name="CONTENT_FRAGMENT" type="java.sql.Types.VARCHAR(4000)" />
     <column name="GRP_ID" type="java.sql.Types.VARCHAR(40)" />
@@ -1112,7 +1027,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-61">
   <createTable tableName="KREW_RULE_ATTR_T">
-    <column name="RULE_ATTR_ID" type="${integer.type}(19)">
+    <column name="RULE_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_ATTR_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="NM" type="java.sql.Types.VARCHAR(255)">
@@ -1136,7 +1051,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-62">
   <createTable tableName="KREW_RULE_EXPR_T">
-    <column name="RULE_EXPR_ID" type="${integer.type}(19)">
+    <column name="RULE_EXPR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_EXPR_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="TYP" type="java.sql.Types.VARCHAR(256)">
@@ -1151,7 +1066,7 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-63">
   <createTable tableName="KREW_RULE_EXT_T">
-    <column name="RULE_EXT_ID" type="${integer.type}(19)">
+    <column name="RULE_EXT_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_EXT_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="RULE_TMPL_ATTR_ID" type="${integer.type}(19)">
@@ -1165,10 +1080,10 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-64">
   <createTable tableName="KREW_RULE_EXT_VAL_T">
-    <column name="RULE_EXT_VAL_ID" type="${integer.type}(19)">
+    <column name="RULE_EXT_VAL_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_EXT_VAL_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RULE_EXT_ID" type="${integer.type}(19)">
+    <column name="RULE_EXT_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="VAL" type="java.sql.Types.VARCHAR(2000)">
@@ -1182,13 +1097,13 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-65">
   <createTable tableName="KREW_RULE_RSP_T">
-    <column name="RULE_RSP_ID" type="${integer.type}(19)">
+    <column name="RULE_RSP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_RSP_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RSP_ID" type="${integer.type}(19)">
+    <column name="RSP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="RULE_ID" type="${integer.type}(19)">
+    <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="PRIO" type="${integer.type}(5)" />
@@ -1204,12 +1119,12 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-66">
   <createTable tableName="KREW_RULE_T">
-    <column name="RULE_ID" type="${integer.type}(19)">
+    <column name="RULE_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="NM" type="java.sql.Types.VARCHAR(256)" />
-    <column name="RULE_TMPL_ID" type="${integer.type}(19)" />
-    <column name="RULE_EXPR_ID" type="${integer.type}(19)" />
+    <column name="RULE_TMPL_ID" type="java.sql.Types.VARCHAR(40)" />
+    <column name="RULE_EXPR_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="ACTV_IND" type="BOOLEAN">
       <constraints nullable="false" />
     </column>
@@ -1228,7 +1143,7 @@
     <column defaultValueNumeric="0" name="CUR_IND" type="BOOLEAN" />
     <column defaultValueNumeric="0" name="RULE_VER_NBR" type="${integer.type}(8)" />
     <column name="DLGN_IND" type="BOOLEAN" />
-    <column name="PREV_RULE_VER_NBR" type="${bigint.type}(19)" />
+    <column name="PREV_RULE_VER_NBR" type="java.sql.Types.VARCHAR(40)" />
     <column name="ACTVN_DT" type="TIMESTAMP" />
     <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
     <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
@@ -1238,13 +1153,13 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-67">
   <createTable tableName="KREW_RULE_TMPL_ATTR_T">
-    <column name="RULE_TMPL_ATTR_ID" type="${integer.type}(19)">
+    <column name="RULE_TMPL_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_TMPL_ATTR_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RULE_TMPL_ID" type="${integer.type}(19)">
+    <column name="RULE_TMPL_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
-    <column name="RULE_ATTR_ID" type="${integer.type}(19)">
+    <column name="RULE_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
     </column>
     <column name="REQ_IND" type="BOOLEAN">
@@ -1265,10 +1180,10 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-68">
   <createTable tableName="KREW_RULE_TMPL_OPTN_T">
-    <column name="RULE_TMPL_OPTN_ID" type="${integer.type}(19)">
+    <column name="RULE_TMPL_OPTN_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_TMPL_OPTN_TP1" primaryKeyTablespace="USERS" />
     </column>
-    <column name="RULE_TMPL_ID" type="${integer.type}(19)" />
+    <column name="RULE_TMPL_ID" type="java.sql.Types.VARCHAR(40)" />
     <column name="KEY_CD" type="java.sql.Types.VARCHAR(250)" />
     <column name="VAL" type="java.sql.Types.VARCHAR(2000)" />
     <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
@@ -1276,14 +1191,14 @@
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-69">
   <createTable tableName="KREW_RULE_TMPL_T">
-    <column name="RULE_TMPL_ID" type="${integer.type}(19)">
+    <column name="RULE_TMPL_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="KREW_RULE_TMPL_TP1" primaryKeyTablespace="USERS" />
     </column>
     <column name="NM" type="java.sql.Types.VARCHAR(250)">
       <constraints nullable="false" />
     </column>
     <column name="RULE_TMPL_DESC" type="java.sql.Types.VARCHAR(2000)" />
-    <column name="DLGN_RULE_TMPL_ID" type="${integer.type}(19)" />
+    <column name="DLGN_RULE_TMPL_ID" type="java.sql.Types.VARCHAR(40)" />
     <column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)" />
     <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
       <constraints nullable="false" />
@@ -2061,8 +1976,12 @@
       <constraints nullable="false" />
     </column>
     <column name="PERM_TMPL_ID" type="java.sql.Types.VARCHAR(40)" />
-    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)" />
-    <column name="NM" type="java.sql.Types.VARCHAR(100)" />
+    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false"/>
+    </column>
+    <column name="NM" type="java.sql.Types.VARCHAR(100)" >
+        <constraints nullable="false"/>
+    </column>
     <column name="DESC_TXT" type="java.sql.Types.VARCHAR(400)" />
     <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)" />
   </createTable>
@@ -2078,8 +1997,12 @@
     <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
       <constraints nullable="false" />
     </column>
-    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)" />
-    <column name="NM" type="java.sql.Types.VARCHAR(100)" />
+    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false"/>
+    </column>
+    <column name="NM" type="java.sql.Types.VARCHAR(100)" >
+        <constraints nullable="false"/>
+    </column>
     <column name="DESC_TXT" type="java.sql.Types.VARCHAR(400)" />
     <column name="KIM_TYP_ID" type="java.sql.Types.VARCHAR(40)">
       <constraints nullable="false" />
@@ -2811,8 +2734,12 @@
       <constraints nullable="false" />
     </column>
     <column name="RSP_TMPL_ID" type="java.sql.Types.VARCHAR(40)" />
-    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)" />
-    <column name="NM" type="java.sql.Types.VARCHAR(100)" />
+    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false"/>
+    </column>
+    <column name="NM" type="java.sql.Types.VARCHAR(100)" >
+        <constraints nullable="false"/>
+    </column>
     <column name="DESC_TXT" type="java.sql.Types.VARCHAR(400)" />
     <column defaultValue="Y" name="ACTV_IND" type="java.sql.Types.VARCHAR(1)" />
   </createTable>
@@ -2828,8 +2755,12 @@
     <column defaultValueNumeric="1" name="VER_NBR" type="${integer.type}(8)">
       <constraints nullable="false" />
     </column>
-    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)" />
-    <column name="NM" type="java.sql.Types.VARCHAR(80)" />
+    <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+        <constraints nullable="false"/>
+    </column>
+    <column name="NM" type="java.sql.Types.VARCHAR(100)" >
+        <constraints nullable="false"/>
+    </column>
     <column name="KIM_TYP_ID" type="java.sql.Types.VARCHAR(100)">
       <constraints nullable="false" />
     </column>

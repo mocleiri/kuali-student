@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_RULE_ATTR_T-initial-data" author="alubbers">
+	<changeSet id="KREW_RULE_ATTR_T-initial-data" author="alubbers">
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.kew.rule.RuleRoutingAttribute"/>
 			<column name="DESC_TXT" value="Rule Routing Attribute"/>
@@ -29,17 +29,17 @@
 			<column name="RULE_ATTR_ID" value="1004"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-              <fieldDef name="notificationChannel" title="Notification Channel">
-                  <display>
-                      <type>text</type>
-                  </display>
-                  <validation required="false"/>
-                  <fieldEvaluation>
-                      <xpathexpression>string(/documentContent/applicationContent/notification/channel/name)</xpathexpression>
-                  </fieldEvaluation>
-              </fieldDef>
-           </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+              &lt;fieldDef name=&quot;notificationChannel&quot; title=&quot;Notification Channel&quot;>
+                  &lt;display>
+                      &lt;type>text&lt;/type>
+                  &lt;/display>
+                  &lt;validation required=&quot;false&quot;/>
+                  &lt;fieldEvaluation>
+                      &lt;xpathexpression>string(/documentContent/applicationContent/notification/channel/name)&lt;/xpathexpression>
+                  &lt;/fieldEvaluation>
+              &lt;/fieldDef>
+           &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.kew.docsearch.xml.StandardGenericXMLSearchableAttribute"/>
@@ -50,17 +50,17 @@
 			<column name="RULE_ATTR_ID" value="1005"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-              <fieldDef name="notificationPriority" title="Notification Priority">
-                  <display>
-                      <type>text</type>
-                  </display>
-                  <validation required="false"/>
-                  <fieldEvaluation>
-                      <xpathexpression>string(/documentContent/applicationContent/notification/priority/name)</xpathexpression>
-                  </fieldEvaluation>
-              </fieldDef>
-           </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+              &lt;fieldDef name=&quot;notificationPriority&quot; title=&quot;Notification Priority&quot;>
+                  &lt;display>
+                      &lt;type>text&lt;/type>
+                  &lt;/display>
+                  &lt;validation required=&quot;false&quot;/>
+                  &lt;fieldEvaluation>
+                      &lt;xpathexpression>string(/documentContent/applicationContent/notification/priority/name)&lt;/xpathexpression>
+                  &lt;/fieldEvaluation>
+              &lt;/fieldDef>
+           &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.kew.docsearch.xml.StandardGenericXMLSearchableAttribute"/>
@@ -71,17 +71,17 @@
 			<column name="RULE_ATTR_ID" value="1006"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-              <fieldDef name="notificationContentType" title="Notification Content Type">
-                  <display>
-                      <type>text</type>
-                  </display>
-                  <validation required="false"/>
-                  <fieldEvaluation>
-                      <xpathexpression>string(/documentContent/applicationContent/notification/contentType/name)</xpathexpression>
-                  </fieldEvaluation>
-              </fieldDef>
-           </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+              &lt;fieldDef name=&quot;notificationContentType&quot; title=&quot;Notification Content Type&quot;>
+                  &lt;display>
+                      &lt;type>text&lt;/type>
+                  &lt;/display>
+                  &lt;validation required=&quot;false&quot;/>
+                  &lt;fieldEvaluation>
+                      &lt;xpathexpression>string(/documentContent/applicationContent/notification/contentType/name)&lt;/xpathexpression>
+                  &lt;/fieldEvaluation>
+              &lt;/fieldDef>
+           &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.kew.docsearch.xml.StandardGenericXMLSearchableAttribute"/>
@@ -92,17 +92,17 @@
 			<column name="RULE_ATTR_ID" value="1007"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-              <fieldDef name="notificationProducer" title="Notification Producer">
-                  <display>
-                      <type>text</type>
-                  </display>
-                  <validation required="false"/>
-                  <fieldEvaluation>
-                      <xpathexpression>string(/documentContent/applicationContent/notification/producer/name)</xpathexpression>
-                  </fieldEvaluation>
-              </fieldDef>
-           </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+              &lt;fieldDef name=&quot;notificationProducer&quot; title=&quot;Notification Producer&quot;>
+                  &lt;display>
+                      &lt;type>text&lt;/type>
+                  &lt;/display>
+                  &lt;validation required=&quot;false&quot;/>
+                  &lt;fieldEvaluation>
+                      &lt;xpathexpression>string(/documentContent/applicationContent/notification/producer/name)&lt;/xpathexpression>
+                  &lt;/fieldEvaluation>
+              &lt;/fieldDef>
+           &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.kew.docsearch.xml.StandardGenericXMLSearchableAttribute"/>
@@ -113,17 +113,17 @@
 			<column name="RULE_ATTR_ID" value="1008"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-              <fieldDef name="notificationRecipients" title="Notification Recipients">
-                  <display>
-                      <type>text</type>
-                  </display>
-                  <validation required="false"/>
-                  <fieldEvaluation>
-                      <xpathexpression>string(/documentContent/applicationContent/notification//recipients)</xpathexpression>
-                  </fieldEvaluation>
-              </fieldDef>
-           </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+              &lt;fieldDef name=&quot;notificationRecipients&quot; title=&quot;Notification Recipients&quot;>
+                  &lt;display>
+                      &lt;type>text&lt;/type>
+                  &lt;/display>
+                  &lt;validation required=&quot;false&quot;/>
+                  &lt;fieldEvaluation>
+                      &lt;xpathexpression>string(/documentContent/applicationContent/notification//recipients)&lt;/xpathexpression>
+                  &lt;/fieldEvaluation>
+              &lt;/fieldDef>
+           &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.kew.docsearch.xml.StandardGenericXMLSearchableAttribute"/>
@@ -134,17 +134,17 @@
 			<column name="RULE_ATTR_ID" value="1009"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-              <fieldDef name="notificationSenders" title="Notification Senders">
-                  <display>
-                      <type>text</type>
-                  </display>
-                  <validation required="false"/>
-                  <fieldEvaluation>
-                      <xpathexpression>string(/documentContent/applicationContent/notification//senders)</xpathexpression>
-                  </fieldEvaluation>
-              </fieldDef>
-           </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+              &lt;fieldDef name=&quot;notificationSenders&quot; title=&quot;Notification Senders&quot;>
+                  &lt;display>
+                      &lt;type>text&lt;/type>
+                  &lt;/display>
+                  &lt;validation required=&quot;false&quot;/>
+                  &lt;fieldEvaluation>
+                      &lt;xpathexpression>string(/documentContent/applicationContent/notification//senders)&lt;/xpathexpression>
+                  &lt;/fieldEvaluation>
+              &lt;/fieldDef>
+           &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.rice.ken.kew.ChannelReviewerRoleAttribute"/>
@@ -165,21 +165,21 @@
 			<column name="RULE_ATTR_ID" value="1233"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-        <fieldDef name="givenname" title="First name">
-          <display>
-            <type>text</type>
-          </display>
-          <searchDefinition autoWildcardLocation="prefixonly"/>
-          <validation required="true">
-            <regex>^[a-zA-Z ]+$</regex>
-            <message>Invalid first name</message>
-          </validation>
-          <fieldEvaluation>
-            <xpathexpression>//givenname/value</xpathexpression>
-          </fieldEvaluation>
-        </fieldDef>
-      </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+        &lt;fieldDef name=&quot;givenname&quot; title=&quot;First name&quot;>
+          &lt;display>
+            &lt;type>text&lt;/type>
+          &lt;/display>
+          &lt;searchDefinition autoWildcardLocation=&quot;prefixonly&quot;/>
+          &lt;validation required=&quot;true&quot;>
+            &lt;regex>^[a-zA-Z ]+$&lt;/regex>
+            &lt;message>Invalid first name&lt;/message>
+          &lt;/validation>
+          &lt;fieldEvaluation>
+            &lt;xpathexpression>//givenname/value&lt;/xpathexpression>
+          &lt;/fieldEvaluation>
+        &lt;/fieldDef>
+      &lt;/searchingConfig>"/>
 		</insert>
 		<insert tableName="KREW_RULE_ATTR_T">
 			<column name="CLS_NM" value="org.kuali.student.lum.workflow.search.OrgSearchAttribute"/>
@@ -190,17 +190,17 @@
 			<column name="RULE_ATTR_ID" value="1645"/>
 			<column name="RULE_ATTR_TYP_CD" value="SearchableXmlAttribute"/>
 			<column name="VER_NBR" value="1"/>
-			<column name="XML" value="<searchingConfig>
-                <fieldDef name="id" title="Organization">
-                    <display>
-                        <type>select</type>
-                           <values>kuali_values_finder_class(org.kuali.rice.student.lookup.keyvalues.OrgCocValuesFinder)</values>
-                    </display>
-                    <fieldEvaluation>
-                        <xpathexpression>wf:xstreamsafe('//cluProposalDocInfo/orgId')</xpathexpression>
-                    </fieldEvaluation>
-                </fieldDef>
-            </searchingConfig>"/>
+			<column name="XML" value="&lt;searchingConfig>
+                &lt;fieldDef name=&quot;id&quot; title=&quot;Organization&quot;>
+                    &lt;display>
+                        &lt;type>select&lt;/type>
+                           &lt;values>kuali_values_finder_class(org.kuali.rice.student.lookup.keyvalues.OrgCocValuesFinder)&lt;/values>
+                    &lt;/display>
+                    &lt;fieldEvaluation>
+                        &lt;xpathexpression>wf:xstreamsafe('//cluProposalDocInfo/orgId')&lt;/xpathexpression>
+                    &lt;/fieldEvaluation>
+                &lt;/fieldDef>
+            &lt;/searchingConfig>"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

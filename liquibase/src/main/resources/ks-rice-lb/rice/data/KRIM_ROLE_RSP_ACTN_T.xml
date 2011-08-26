@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_ROLE_RSP_ACTN_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_ROLE_RSP_ACTN_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ROLE_RSP_ACTN_T">
 			<column name="ACTN_PLCY_CD" value="F"/>
 			<column name="ACTN_TYP_CD" value="A"/>
@@ -220,5 +220,5 @@
 			<column name="ROLE_RSP_ID" value="5504"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

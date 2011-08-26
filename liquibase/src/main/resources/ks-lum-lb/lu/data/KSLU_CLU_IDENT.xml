@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_IDENT-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_IDENT-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_IDENT">
 			<column name="CD" value="GEOG202"/>
 			<column name="DIVISION" value="GEOG"/>
@@ -150,7 +150,7 @@
 			<column name="LNG_NAME" value="Blacks and the Law"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="3c0e2bb0-9c29-4ede-a89b-48bb0258cd1d"/>
-			<column name="SHRT_NAME" value="BLACKS & THE LAW"/>
+			<column name="SHRT_NAME" value="BLACKS &amp; THE LAW"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="443"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -306,7 +306,7 @@
 			<column name="LNG_NAME" value="Science and Technology in Western Civilization"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="fb26326e-1d55-4c22-a3dc-080d71eb1e52"/>
-			<column name="SHRT_NAME" value="SCI&TECH WEST CIV"/>
+			<column name="SHRT_NAME" value="SCI&amp;TECH WEST CIV"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="175"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -389,7 +389,7 @@
 			<column name="LNG_NAME" value="Defense Policy and Arms Control"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="8501df20-0db7-4a37-8ce6-d4ffa554d321"/>
-			<column name="SHRT_NAME" value="DEFENSE&ARMS CONTROL"/>
+			<column name="SHRT_NAME" value="DEFENSE&amp;ARMS CONTROL"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="405"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -454,7 +454,7 @@
 			<column name="LNG_NAME" value="Geographic Information Systems and Spatial Analysis"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="533a156f-4fe9-4e6a-981a-8db4eb73c6fd"/>
-			<column name="SHRT_NAME" value="GIS & SPAT ANALY"/>
+			<column name="SHRT_NAME" value="GIS &amp; SPAT ANALY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="473"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -632,7 +632,7 @@
 			<column name="LNG_NAME" value="Intermediate Macroeconomic Theory and Policy"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="452bfd7e-8764-4ca6-930e-aa69868a9fcd"/>
-			<column name="SHRT_NAME" value="INTRM MACROECON THRY&POL"/>
+			<column name="SHRT_NAME" value="INTRM MACROECON THRY&amp;POL"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="305"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -684,7 +684,7 @@
 			<column name="LNG_NAME" value="Statistics for Criminology and Criminal Justice"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="32be602c-3fe3-4445-abac-63f041af2780"/>
-			<column name="SHRT_NAME" value="STATISTICS CRIM & CJUS"/>
+			<column name="SHRT_NAME" value="STATISTICS CRIM &amp; CJUS"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="200"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -810,7 +810,7 @@
 			<column name="LNG_NAME" value="Human Anatomy and Physiology I"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="932e20eb-5fbe-45bc-b282-15a73a1666a2"/>
-			<column name="SHRT_NAME" value="HUMN ANAT&PHYSLG I"/>
+			<column name="SHRT_NAME" value="HUMN ANAT&amp;PHYSLG I"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="201"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -920,10 +920,10 @@
 			<column name="CD" value="AP-US-GOV"/>
 			<column name="DIVISION" value="AP"/>
 			<column name="ID" value="1c207b64-47c6-4653-9100-c5c91badc16b"/>
-			<column name="LNG_NAME" value="AP U.S. Government & Politics"/>
+			<column name="LNG_NAME" value="AP U.S. Government &amp; Politics"/>
 			<column name="LVL" value="UG"/>
 			<column name="OBJ_ID" value="8844e5aa-949d-4c8d-913d-03fd10dc6809"/>
-			<column name="SHRT_NAME" value="AP U.S. Government & Politics"/>
+			<column name="SHRT_NAME" value="AP U.S. Government &amp; Politics"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="US-GOV"/>
 			<column name="TYPE" value="kuali.lu.type.test.identifier.official"/>
@@ -1131,7 +1131,7 @@
 			<column name="LNG_NAME" value="Social Structure and Identity"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="676a3a28-bbfb-4f10-83c1-b24f5802a312"/>
-			<column name="SHRT_NAME" value="SOCIAL STRUCT&IDENTITY"/>
+			<column name="SHRT_NAME" value="SOCIAL STRUCT&amp;IDENTITY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="430"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1196,7 +1196,7 @@
 			<column name="LNG_NAME" value="Biogeography and Environmental Change"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="dcde59c7-cb32-412f-89d3-5205acf83da2"/>
-			<column name="SHRT_NAME" value="BIOGEOG & ENVRN CHANGE"/>
+			<column name="SHRT_NAME" value="BIOGEOG &amp; ENVRN CHANGE"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="442"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1222,7 +1222,7 @@
 			<column name="LNG_NAME" value="Economics of Poverty and Discrimination"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="da77d9f7-7720-4426-830e-4acd26466247"/>
-			<column name="SHRT_NAME" value="ECON POVERTY & DISCRIM"/>
+			<column name="SHRT_NAME" value="ECON POVERTY &amp; DISCRIM"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="375"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1309,7 +1309,7 @@
 			<column name="LNG_NAME" value="Arthropod Form and Function"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="1c55116f-63fc-49d4-93d5-4f91c94446a7"/>
-			<column name="SHRT_NAME" value="ARTHROPOD FORM&FUNCTION"/>
+			<column name="SHRT_NAME" value="ARTHROPOD FORM&amp;FUNCTION"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="480"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1335,7 +1335,7 @@
 			<column name="LNG_NAME" value="Maryland and Adjacent Areas"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="f45fb353-d6b1-4c75-a9c8-79b32b59b140"/>
-			<column name="SHRT_NAME" value="MD & ADJACENT AREAS"/>
+			<column name="SHRT_NAME" value="MD &amp; ADJACENT AREAS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="310"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1357,7 +1357,7 @@
 			<column name="LNG_NAME" value="Elements of Numbers and Operations"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="107291c8-47b4-4470-b5bb-5dae5d67a1e7"/>
-			<column name="SHRT_NAME" value="ELMNTS NMBRS & OPERTNS"/>
+			<column name="SHRT_NAME" value="ELMNTS NMBRS &amp; OPERTNS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="212"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1405,7 +1405,7 @@
 			<column name="LNG_NAME" value="The American City: Past and Present"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="5feda271-5341-48ff-a345-2b04478d35b9"/>
-			<column name="SHRT_NAME" value="AMER CITY PAST & PRESENT"/>
+			<column name="SHRT_NAME" value="AMER CITY PAST &amp; PRESENT"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="334"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -1925,7 +1925,7 @@
 			<column name="LNG_NAME" value="Law and Economics"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="1933652f-e90d-4f39-aa99-8498dae79c2c"/>
-			<column name="SHRT_NAME" value="LAW & ECONOMICS"/>
+			<column name="SHRT_NAME" value="LAW &amp; ECONOMICS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="456"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2003,7 +2003,7 @@
 			<column name="LNG_NAME" value="Crime and Delinquency Prevention"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="bfac05fa-f786-40d9-99f2-3fe2787d55c8"/>
-			<column name="SHRT_NAME" value="CRIME&DELINQ PREV"/>
+			<column name="SHRT_NAME" value="CRIME&amp;DELINQ PREV"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="451"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2309,7 +2309,7 @@
 			<column name="LNG_NAME" value="Civil Rights and the Constitution"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="68504e85-01e9-423b-88fa-068b94ed9af0"/>
-			<column name="SHRT_NAME" value="CIV RTS & CONSTIT"/>
+			<column name="SHRT_NAME" value="CIV RTS &amp; CONSTIT"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="432"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2474,7 +2474,7 @@
 			<column name="LNG_NAME" value="Ecology of Marsh and Dune Vegetation"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="180df9b5-32a9-424c-a034-e5f333c58dc9"/>
-			<column name="SHRT_NAME" value="ECOL MARSH&DUNE VEGETATN"/>
+			<column name="SHRT_NAME" value="ECOL MARSH&amp;DUNE VEGETATN"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="362"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2526,7 +2526,7 @@
 			<column name="LNG_NAME" value="Location Theory and Spatial Analysis"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="7f2c6bec-1646-4572-bf77-0eb42787ad9f"/>
-			<column name="SHRT_NAME" value="LOC THRY&SPATL ANALYSIS"/>
+			<column name="SHRT_NAME" value="LOC THRY&amp;SPATL ANALYSIS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="432"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2539,7 +2539,7 @@
 			<column name="LNG_NAME" value="Statistics for Criminology and Criminal Justice"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="64999259-c840-4321-8b11-65b151d0f8d4"/>
-			<column name="SHRT_NAME" value="STATISTICS CRIM & CJUS"/>
+			<column name="SHRT_NAME" value="STATISTICS CRIM &amp; CJUS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="200"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2734,7 +2734,7 @@
 			<column name="LNG_NAME" value="Remote Sensing: Digital Processing and Analysis"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="5b703cb9-54a7-4814-8af5-269e51d7fcde"/>
-			<column name="SHRT_NAME" value="RS:DIGITAL PROC & ANALYS"/>
+			<column name="SHRT_NAME" value="RS:DIGITAL PROC &amp; ANALYS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="472"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2924,7 +2924,7 @@
 			<column name="LNG_NAME" value="Field Training in Criminology and Corrections"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="6cbbe2fa-706a-47bc-b422-a7dccd9ef0a9"/>
-			<column name="SHRT_NAME" value="FIELD TRN CRIM & CORR"/>
+			<column name="SHRT_NAME" value="FIELD TRN CRIM &amp; CORR"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="359"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2963,7 +2963,7 @@
 			<column name="LNG_NAME" value="Psychology of Adulthood and Aging"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="92c702e4-f51c-4c83-9285-11cb1d75d221"/>
-			<column name="SHRT_NAME" value="PSYC ADULTHOOD & AGING"/>
+			<column name="SHRT_NAME" value="PSYC ADULTHOOD &amp; AGING"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="357"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -2976,7 +2976,7 @@
 			<column name="LNG_NAME" value="Action and Responsibility"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="c4a404ee-e0b9-4d87-8759-e7ded1ba70c8"/>
-			<column name="SHRT_NAME" value="ACTION & RESPONSIBILITY"/>
+			<column name="SHRT_NAME" value="ACTION &amp; RESPONSIBILITY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="282"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -3104,7 +3104,7 @@
 			<column name="LNG_NAME" value="Race, Crime and Criminal Justice"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="640a1fda-4a58-4ee8-8414-fb39249af4dd"/>
-			<column name="SHRT_NAME" value="RACE CRIME & CJUS"/>
+			<column name="SHRT_NAME" value="RACE CRIME &amp; CJUS"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="370"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -3303,7 +3303,7 @@
 			<column name="LNG_NAME" value="Gender and Performance"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="c16de45a-e628-4b50-9db7-f40989e8c4de"/>
-			<column name="SHRT_NAME" value="GENDER & PERFORMANCE"/>
+			<column name="SHRT_NAME" value="GENDER &amp; PERFORMANCE"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="195"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -3594,7 +3594,7 @@
 			<column name="LNG_NAME" value="Elements of Geometry and Measurement"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="90d2188a-d777-4a43-ae87-c2c10a4ec8ad"/>
-			<column name="SHRT_NAME" value="ELMNTS GEOM & MEASRMNT"/>
+			<column name="SHRT_NAME" value="ELMNTS GEOM &amp; MEASRMNT"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="213"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -3757,7 +3757,7 @@
 			<column name="LNG_NAME" value="Science, Technology, and the Black Community"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="eb19aa04-3358-476d-ad0e-e32f80caa038"/>
-			<column name="SHRT_NAME" value="SCI TECH&BLACK COMMUNITY"/>
+			<column name="SHRT_NAME" value="SCI TECH&amp;BLACK COMMUNITY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="441"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -3895,7 +3895,7 @@
 			<column name="LNG_NAME" value="Field and Laboratory Techniques in Environmental Science"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="33ed39e9-f956-4c6a-9c24-8aa0d1db7d5b"/>
-			<column name="SHRT_NAME" value="FLD&LAB TECHNQ ENV SCI"/>
+			<column name="SHRT_NAME" value="FLD&amp;LAB TECHNQ ENV SCI"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="418"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4073,7 +4073,7 @@
 			<column name="LNG_NAME" value="Law, Morality, War and Terrorism"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="7c637e9a-3c72-4425-97fd-627e2b1abf36"/>
-			<column name="SHRT_NAME" value="LAW MORALTY WAR&TERRORSM"/>
+			<column name="SHRT_NAME" value="LAW MORALTY WAR&amp;TERRORSM"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="403"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4377,7 +4377,7 @@
 			<column name="LNG_NAME" value="Medicinal and Poisonous Plants"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="eef17d8e-617f-4893-95aa-898c12e72452"/>
-			<column name="SHRT_NAME" value="MEDIC & POISONOUS PLANTS"/>
+			<column name="SHRT_NAME" value="MEDIC &amp; POISONOUS PLANTS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="493"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4480,7 +4480,7 @@
 			<column name="LNG_NAME" value="Biogeography and Environmental Change"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="b054d689-e07b-4a66-ab3e-e097ecf696cc"/>
-			<column name="SHRT_NAME" value="BIOGEOG & ENVRN CHANGE"/>
+			<column name="SHRT_NAME" value="BIOGEOG &amp; ENVRN CHANGE"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="442"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4532,7 +4532,7 @@
 			<column name="LNG_NAME" value="Love, Adventure, and Identity in Early English Literature"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="d6bec9bc-80f1-4082-b8ac-ed5d5ecba1f3"/>
-			<column name="SHRT_NAME" value="LOVE, ADV & IDENTITY"/>
+			<column name="SHRT_NAME" value="LOVE, ADV &amp; IDENTITY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="210"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4671,7 +4671,7 @@
 			<column name="LNG_NAME" value="Introductory Physics: Mechanics and Relativity"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="2843dcbb-b9ed-403e-b52f-3de40eb85406"/>
-			<column name="SHRT_NAME" value="INTRO PHYS:MECH&RELATIV"/>
+			<column name="SHRT_NAME" value="INTRO PHYS:MECH&amp;RELATIV"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="171"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4824,7 +4824,7 @@
 			<column name="LNG_NAME" value="Elements of Probability and Statistics"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="1e4c78e6-470a-40e8-a8df-d39a3c93ad90"/>
-			<column name="SHRT_NAME" value="ELMNTS OF PROB & STATS"/>
+			<column name="SHRT_NAME" value="ELMNTS OF PROB &amp; STATS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="214"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -4862,7 +4862,7 @@
 			<column name="LNG_NAME" value="Medicinal and Poisonous Plants"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="167ce4ec-247a-467d-b9df-a4ad880fec89"/>
-			<column name="SHRT_NAME" value="MEDIC & POISONOUS PLANTS"/>
+			<column name="SHRT_NAME" value="MEDIC &amp; POISONOUS PLANTS"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="493"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5030,7 +5030,7 @@
 			<column name="LNG_NAME" value="Elementary Statistics and Probability"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="01ccfe98-83ba-4abf-98ee-7856a3796c49"/>
-			<column name="SHRT_NAME" value="ELEM STAT & PROB"/>
+			<column name="SHRT_NAME" value="ELEM STAT &amp; PROB"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="100"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5456,7 +5456,7 @@
 			<column name="LNG_NAME" value="Thinking and Problem Solving"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="89b56314-89c8-4464-a694-6f09ae4772a1"/>
-			<column name="SHRT_NAME" value="THNK & PROB SOLVNG"/>
+			<column name="SHRT_NAME" value="THNK &amp; PROB SOLVNG"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="443"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5684,10 +5684,10 @@
 			<column name="CD" value="AP-ENG-LIT-COMP"/>
 			<column name="DIVISION" value="AP"/>
 			<column name="ID" value="a0e4d032-255b-489b-954c-0da72b305f6d"/>
-			<column name="LNG_NAME" value="AP English Literature & Composition"/>
+			<column name="LNG_NAME" value="AP English Literature &amp; Composition"/>
 			<column name="LVL" value="UG"/>
 			<column name="OBJ_ID" value="a3f5f8a6-dfc0-4d39-9493-087ac021e675"/>
-			<column name="SHRT_NAME" value="AP English Literature & Composition"/>
+			<column name="SHRT_NAME" value="AP English Literature &amp; Composition"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="ENG-LIT-COMP"/>
 			<column name="TYPE" value="kuali.lu.type.test.identifier.official"/>
@@ -5726,7 +5726,7 @@
 			<column name="LNG_NAME" value="Crime and Delinquency Prevention"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="80112e57-1b29-4357-add1-dcaf98f4a38e"/>
-			<column name="SHRT_NAME" value="CRIME&DELINQ PREV"/>
+			<column name="SHRT_NAME" value="CRIME&amp;DELINQ PREV"/>
 			<column name="ST" value="Approved"/>
 			<column name="SUFX_CD" value="451"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5791,7 +5791,7 @@
 			<column name="LNG_NAME" value="Political and Social Philosophy I"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="8505dc61-6226-4c98-876d-292a50d2f0fb"/>
-			<column name="SHRT_NAME" value="POLIT & SOC PHIL"/>
+			<column name="SHRT_NAME" value="POLIT &amp; SOC PHIL"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="245"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5804,7 +5804,7 @@
 			<column name="LNG_NAME" value="Land Use, Climate Change, and Sustainability"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="d3f579bb-6ff3-4944-af1a-ec21fb6f909c"/>
-			<column name="SHRT_NAME" value="LND USE,CLMT CHG & SUSTN"/>
+			<column name="SHRT_NAME" value="LND USE,CLMT CHG &amp; SUSTN"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="415"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5843,7 +5843,7 @@
 			<column name="LNG_NAME" value="The Hebrew Bible: Poetry and Prophecy"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="e61f6643-bd28-4449-a524-ed7a135be80c"/>
-			<column name="SHRT_NAME" value="HEBREW BIBLE:POET&PROPH"/>
+			<column name="SHRT_NAME" value="HEBREW BIBLE:POET&amp;PROPH"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="263"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -5882,7 +5882,7 @@
 			<column name="LNG_NAME" value="Social Stratification and Inequality"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="c08c1e10-58dd-4d86-9d45-b033fbbff794"/>
-			<column name="SHRT_NAME" value="SOCIAL STRAT&INEQU"/>
+			<column name="SHRT_NAME" value="SOCIAL STRAT&amp;INEQU"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="441"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6036,7 +6036,7 @@
 			<column name="LNG_NAME" value="Remote Sensing: Digital Processing and Analysis"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="3638dbe4-c338-4816-b21d-6ac3cc8c2424"/>
-			<column name="SHRT_NAME" value="RS:DIGITAL PROC & ANALYS"/>
+			<column name="SHRT_NAME" value="RS:DIGITAL PROC &amp; ANALYS"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="472"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6127,7 +6127,7 @@
 			<column name="LNG_NAME" value="Applied Probability and Statistics I"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="72c011e4-8385-48de-9528-f6924468476e"/>
-			<column name="SHRT_NAME" value="APPLIED PROB & STAT I"/>
+			<column name="SHRT_NAME" value="APPLIED PROB &amp; STAT I"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="400"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6205,7 +6205,7 @@
 			<column name="LNG_NAME" value="Black Theatre and Performance I"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="c60fca8e-9f51-4f78-88c1-9bb818170de3"/>
-			<column name="SHRT_NAME" value="BLACK THEATRE & PERF I"/>
+			<column name="SHRT_NAME" value="BLACK THEATRE &amp; PERF I"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="293"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6374,7 +6374,7 @@
 			<column name="LNG_NAME" value="Epidemiology and Public Health"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="01cabd37-719c-4d6e-bc7b-220a42f965a0"/>
-			<column name="SHRT_NAME" value="EPIDEMIOL&PUB HLTH"/>
+			<column name="SHRT_NAME" value="EPIDEMIOL&amp;PUB HLTH"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="425"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6564,7 +6564,7 @@
 			<column name="LNG_NAME" value="Washington, D.C.: Past and Present"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="e9454693-7d08-4f39-8aca-6d09211c6301"/>
-			<column name="SHRT_NAME" value="WASHINGTON PAST & PRSNT"/>
+			<column name="SHRT_NAME" value="WASHINGTON PAST &amp; PRSNT"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="410"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6600,10 +6600,10 @@
 			<column name="CD" value="AP-GOV-POL"/>
 			<column name="DIVISION" value="AP"/>
 			<column name="ID" value="bd541d89-3fb4-40cb-9e6e-84507aae8c95"/>
-			<column name="LNG_NAME" value="AP Comparative Government & Politics"/>
+			<column name="LNG_NAME" value="AP Comparative Government &amp; Politics"/>
 			<column name="LVL" value="UG"/>
 			<column name="OBJ_ID" value="914832cb-85e5-4b52-a3fa-03ca37a08937"/>
-			<column name="SHRT_NAME" value="AP Comparative Government & Politics"/>
+			<column name="SHRT_NAME" value="AP Comparative Government &amp; Politics"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="GOV-POL"/>
 			<column name="TYPE" value="kuali.lu.type.test.identifier.official"/>
@@ -6629,7 +6629,7 @@
 			<column name="LNG_NAME" value="Special Topics in Criminology and Criminal Justice"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="9a4ceef9-de9a-483c-95d5-cf6396cc7514"/>
-			<column name="SHRT_NAME" value="SP TPCS IN CRIM & CJ"/>
+			<column name="SHRT_NAME" value="SP TPCS IN CRIM &amp; CJ"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="278"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6694,7 +6694,7 @@
 			<column name="LNG_NAME" value="Treatment of Criminals and Delinquents"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="88496851-f56e-4822-8e44-e5f435936d00"/>
-			<column name="SHRT_NAME" value="TREAT CRIMIN&DELINQUNT"/>
+			<column name="SHRT_NAME" value="TREAT CRIMIN&amp;DELINQUNT"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="452"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6785,7 +6785,7 @@
 			<column name="LNG_NAME" value="Treatment of Criminals and Delinquents"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="e22bfef9-9932-4086-b44e-cfd723a4e2e8"/>
-			<column name="SHRT_NAME" value="TREAT CRIMIN&DELINQUNT"/>
+			<column name="SHRT_NAME" value="TREAT CRIMIN&amp;DELINQUNT"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="452"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6824,7 +6824,7 @@
 			<column name="LNG_NAME" value="College Algebra with Applications and Trigonometry"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="cb5fbcf2-614e-4ddc-bf7e-eae5f437ece1"/>
-			<column name="SHRT_NAME" value="COLLEG ALG W/APPL & TRIG"/>
+			<column name="SHRT_NAME" value="COLLEG ALG W/APPL &amp; TRIG"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="112"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6966,7 +6966,7 @@
 			<column name="LNG_NAME" value="Race, Crime and Criminal Justice"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="a755663d-7e94-45df-9b63-723bda8e249a"/>
-			<column name="SHRT_NAME" value="RACE CRIME & CJUS"/>
+			<column name="SHRT_NAME" value="RACE CRIME &amp; CJUS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="370"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -6989,10 +6989,10 @@
 			<column name="CD" value="AP-ENG-LANG-COMP"/>
 			<column name="DIVISION" value="AP"/>
 			<column name="ID" value="c4b2d4b8-0bc4-495d-a20b-80ddf07543bb"/>
-			<column name="LNG_NAME" value="AP English Language & Composition"/>
+			<column name="LNG_NAME" value="AP English Language &amp; Composition"/>
 			<column name="LVL" value="UG"/>
 			<column name="OBJ_ID" value="49ffc142-bb2a-49f2-9353-9ac500d82727"/>
-			<column name="SHRT_NAME" value="AP English Language & Composition"/>
+			<column name="SHRT_NAME" value="AP English Language &amp; Composition"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="ENG-LANG-COMP"/>
 			<column name="TYPE" value="kuali.lu.type.test.identifier.official"/>
@@ -7108,7 +7108,7 @@
 			<column name="LNG_NAME" value="General Physics: Mechanics and Particle Dynamics"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="360223c3-d312-42bd-8385-0c0abea70e19"/>
-			<column name="SHRT_NAME" value="MECH & PARTICLE DYNAM"/>
+			<column name="SHRT_NAME" value="MECH &amp; PARTICLE DYNAM"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="161"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7156,7 +7156,7 @@
 			<column name="LNG_NAME" value="Law and Society"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="c3ef4177-b8eb-46e3-b90e-1e1c9f953a1c"/>
-			<column name="SHRT_NAME" value="LAW & SOCIETY"/>
+			<column name="SHRT_NAME" value="LAW &amp; SOCIETY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="331"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7221,7 +7221,7 @@
 			<column name="LNG_NAME" value="Political Morality and Political Action"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="0291c725-d03c-4921-aed3-e606ae5fccf6"/>
-			<column name="SHRT_NAME" value="POL MORALTY&ACTION"/>
+			<column name="SHRT_NAME" value="POL MORALTY&amp;ACTION"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="341"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7312,7 +7312,7 @@
 			<column name="LNG_NAME" value="Art and Archaeology of Ancient America"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="3eb51b84-6c77-4b61-a756-270716893d64"/>
-			<column name="SHRT_NAME" value="ART&ARCHLGY ANCIENT AMER"/>
+			<column name="SHRT_NAME" value="ART&amp;ARCHLGY ANCIENT AMER"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="250"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7338,7 +7338,7 @@
 			<column name="LNG_NAME" value="Art and Archaeology of Africa"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="6d06277c-6bf3-4b4e-9a82-bc6562e290b2"/>
-			<column name="SHRT_NAME" value="ART & ARCH OF AFRICA"/>
+			<column name="SHRT_NAME" value="ART &amp; ARCH OF AFRICA"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="275"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7377,7 +7377,7 @@
 			<column name="LNG_NAME" value="Land Use, Climate Change, and Sustainability"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="1c66801f-c44e-4338-bd0b-375b32644a4b"/>
-			<column name="SHRT_NAME" value="LND USE,CLMT CHG & SUSTN"/>
+			<column name="SHRT_NAME" value="LND USE,CLMT CHG &amp; SUSTN"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="415"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7442,7 +7442,7 @@
 			<column name="LNG_NAME" value="Ecology of Marsh and Dune Vegetation"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="26f8a613-63fb-4200-a384-90ae0b9bb5e2"/>
-			<column name="SHRT_NAME" value="ECOL MARSH&DUNE VEGETATN"/>
+			<column name="SHRT_NAME" value="ECOL MARSH&amp;DUNE VEGETATN"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="362"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7455,7 +7455,7 @@
 			<column name="LNG_NAME" value="Cell Biology and Physiology"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="c3704372-8be4-4ea6-8ebc-a018305775ee"/>
-			<column name="SHRT_NAME" value="CELL BIO & PHYSIOLOGY"/>
+			<column name="SHRT_NAME" value="CELL BIO &amp; PHYSIOLOGY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="330"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7481,7 +7481,7 @@
 			<column name="LNG_NAME" value="Arthropod Form and Function"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="eee95f25-3545-40a7-9a79-bb2563e428c4"/>
-			<column name="SHRT_NAME" value="ARTHROPOD FORM&FUNCTION"/>
+			<column name="SHRT_NAME" value="ARTHROPOD FORM&amp;FUNCTION"/>
 			<column name="ST" value="Approved"/>
 			<column name="SUFX_CD" value="480"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7620,7 +7620,7 @@
 			<column name="LNG_NAME" value="Problems in Cartography and Geographic Information Science"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="bddb3f7f-6250-491b-aca3-1c3e9f4a8c1a"/>
-			<column name="SHRT_NAME" value="PROB CARTO & GISY"/>
+			<column name="SHRT_NAME" value="PROB CARTO &amp; GISY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="478"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7655,7 +7655,7 @@
 			<column name="LNG_NAME" value="Public Policy and the Black Community"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="36903b3c-f59f-488b-b959-c8afec48a41e"/>
-			<column name="SHRT_NAME" value="PUB POL&BLACK COMMUNITY"/>
+			<column name="SHRT_NAME" value="PUB POL&amp;BLACK COMMUNITY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="101"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7707,7 +7707,7 @@
 			<column name="LNG_NAME" value="Immigration and Ethnicity in America"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="a84cf818-1b0c-4e7d-907c-3d476a000377"/>
-			<column name="SHRT_NAME" value="IMMIGRATION & ETHNICITY"/>
+			<column name="SHRT_NAME" value="IMMIGRATION &amp; ETHNICITY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="222"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7730,7 +7730,7 @@
 			<column name="LNG_NAME" value="Insect Diversity and Classification"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="49e1e467-9c00-4afc-98b3-5a955dc98cdc"/>
-			<column name="SHRT_NAME" value="INSECT DIVERS & CLASS"/>
+			<column name="SHRT_NAME" value="INSECT DIVERS &amp; CLASS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="481"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7782,7 +7782,7 @@
 			<column name="LNG_NAME" value="Principles of Government and Politics"/>
 			<column name="LVL" value="100"/>
 			<column name="OBJ_ID" value="9148d0ef-ffac-414b-81b8-70bf4b2f581e"/>
-			<column name="SHRT_NAME" value="PRIN GOVT&POLITIC"/>
+			<column name="SHRT_NAME" value="PRIN GOVT&amp;POLITIC"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="100"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7821,7 +7821,7 @@
 			<column name="LNG_NAME" value="The Family and Social Class"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="fc6f5686-cc3b-4a2d-824f-70cfa66c680a"/>
-			<column name="SHRT_NAME" value="FAMILY & SOCIAL CLASS"/>
+			<column name="SHRT_NAME" value="FAMILY &amp; SOCIAL CLASS"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="442"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -7985,7 +7985,7 @@
 			<column name="LNG_NAME" value="Field Training in Criminology and Corrections"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="8e5fb71b-c08d-4b46-801a-8ea3830b48e1"/>
-			<column name="SHRT_NAME" value="FIELD TRN CRIM & CORR"/>
+			<column name="SHRT_NAME" value="FIELD TRN CRIM &amp; CORR"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="359"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8024,7 +8024,7 @@
 			<column name="LNG_NAME" value="Cell Biology and Physiology"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="174c6bc5-21ad-42c7-a159-cc69d12df9f8"/>
-			<column name="SHRT_NAME" value="CELL BIO & PHYSIOLOGY"/>
+			<column name="SHRT_NAME" value="CELL BIO &amp; PHYSIOLOGY"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="330"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8037,7 +8037,7 @@
 			<column name="LNG_NAME" value="The United States and Canada"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="faea0996-950e-4410-ab06-c44083367a82"/>
-			<column name="SHRT_NAME" value="U.S. & CANADA"/>
+			<column name="SHRT_NAME" value="U.S. &amp; CANADA"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="312"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8102,7 +8102,7 @@
 			<column name="LNG_NAME" value="Geographic Information Systems and Spatial Analysis"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="7ef03e11-a74f-4236-b785-ed043e7d6ca0"/>
-			<column name="SHRT_NAME" value="GIS & SPAT ANALY"/>
+			<column name="SHRT_NAME" value="GIS &amp; SPAT ANALY"/>
 			<column name="ST" value="Superseded"/>
 			<column name="SUFX_CD" value="473"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8366,7 +8366,7 @@
 			<column name="LNG_NAME" value="Applied Policy Analysis and the Black Community"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="1b77d38a-b5ab-446a-938d-41a3d7dccd4a"/>
-			<column name="SHRT_NAME" value="APP POL ANLYS&BLCK COMM"/>
+			<column name="SHRT_NAME" value="APP POL ANLYS&amp;BLCK COMM"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="301"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8418,7 +8418,7 @@
 			<column name="LNG_NAME" value="Epidemiology and Public Health"/>
 			<column name="LVL" value="400"/>
 			<column name="OBJ_ID" value="7a7a4971-a60a-46d2-87d5-1dbc9cd7f4cd"/>
-			<column name="SHRT_NAME" value="EPIDEMIOL&PUB HLTH"/>
+			<column name="SHRT_NAME" value="EPIDEMIOL&amp;PUB HLTH"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="425"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8698,7 +8698,7 @@
 			<column name="LNG_NAME" value="Black Theatre and Performance II"/>
 			<column name="LVL" value="200"/>
 			<column name="OBJ_ID" value="ce97aee4-320c-4103-b13c-e05234fd7f70"/>
-			<column name="SHRT_NAME" value="BLACK THEATRE & PERF II"/>
+			<column name="SHRT_NAME" value="BLACK THEATRE &amp; PERF II"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="294"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
@@ -8833,11 +8833,11 @@
 			<column name="LNG_NAME" value="Scarcity and Modern Society"/>
 			<column name="LVL" value="300"/>
 			<column name="OBJ_ID" value="02569ed9-b920-4ab6-9638-4e30760e8821"/>
-			<column name="SHRT_NAME" value="SCARCITY & MDRN SOCIETY"/>
+			<column name="SHRT_NAME" value="SCARCITY &amp; MDRN SOCIETY"/>
 			<column name="ST" value="Active"/>
 			<column name="SUFX_CD" value="305"/>
 			<column name="TYPE" value="kuali.lu.type.CreditCourse.identifier.official"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

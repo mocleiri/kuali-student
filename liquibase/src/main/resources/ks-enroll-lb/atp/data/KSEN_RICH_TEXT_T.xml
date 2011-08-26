@@ -1,154 +1,154 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_RICH_TEXT_T-initial-data" author="alubbers">
+	<changeSet id="KSEN_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 101</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 101&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-101"/>
 			<column name="PLAIN" value="Desc 101"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 102</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 102&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-102"/>
 			<column name="PLAIN" value="Desc 102"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 103</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 103&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-103"/>
 			<column name="PLAIN" value="Desc 103"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 104</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 104&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-104"/>
 			<column name="PLAIN" value="Desc 104"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 105</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 105&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-105"/>
 			<column name="PLAIN" value="Desc 105"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 106</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 106&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-106"/>
 			<column name="PLAIN" value="Desc 106"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 107</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 107&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-107"/>
 			<column name="PLAIN" value="Desc 107"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc 108</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc 108&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-108"/>
 			<column name="PLAIN" value="Desc 108"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Fall 2011</p>"/>
+			<column name="FORMATTED" value="&lt;p>Fall 2011&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-201"/>
 			<column name="PLAIN" value="Fall 2011"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Winter 2012</p>"/>
+			<column name="FORMATTED" value="&lt;p>Winter 2012&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-202"/>
 			<column name="PLAIN" value="Winter 2012"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Spring 2012</p>"/>
+			<column name="FORMATTED" value="&lt;p>Spring 2012&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-301"/>
 			<column name="PLAIN" value="Spring 2012"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Summer 2012</p>"/>
+			<column name="FORMATTED" value="&lt;p>Summer 2012&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-401"/>
 			<column name="PLAIN" value="Summer 2012"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Hold Desc 101</p>"/>
+			<column name="FORMATTED" value="&lt;p>Hold Desc 101&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-Hold-101"/>
 			<column name="PLAIN" value="Hold Desc 101"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Hold Desc for deletion test</p>"/>
+			<column name="FORMATTED" value="&lt;p>Hold Desc for deletion test&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-Hold-201"/>
 			<column name="PLAIN" value="Hold Desc for deletion test"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 1</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 1&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-1"/>
 			<column name="PLAIN" value="Desc term rich text 1"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 10</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 10&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-10"/>
 			<column name="PLAIN" value="Desc term rich text 10"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 11</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 11&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-11"/>
 			<column name="PLAIN" value="Desc term rich text 11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 2</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 2&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-2"/>
 			<column name="PLAIN" value="Desc term rich text 2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 3</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 3&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-3"/>
 			<column name="PLAIN" value="Desc term rich text 3"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 4</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 4&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-4"/>
 			<column name="PLAIN" value="Desc term rich text 4"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 5</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 5&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-5"/>
 			<column name="PLAIN" value="Desc term rich text 5"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 6</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 6&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-6"/>
 			<column name="PLAIN" value="Desc term rich text 6"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 7</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 7&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-7"/>
 			<column name="PLAIN" value="Desc term rich text 7"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 8</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 8&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-8"/>
 			<column name="PLAIN" value="Desc term rich text 8"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Desc term rich text 9</p>"/>
+			<column name="FORMATTED" value="&lt;p>Desc term rich text 9&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-9"/>
 			<column name="PLAIN" value="Desc term rich text 9"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

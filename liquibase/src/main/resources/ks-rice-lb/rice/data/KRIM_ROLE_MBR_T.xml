@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_ROLE_MBR_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_ROLE_MBR_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ROLE_MBR_T">
 			<column name="LAST_UPDT_DT" value="20090806170240"/>
 			<column name="MBR_ID" value="1"/>
@@ -63,5 +63,5 @@
 			<column name="ROLE_MBR_ID" value="2292"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

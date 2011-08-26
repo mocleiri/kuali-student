@@ -1,9 +1,9 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_PERM_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_PERM_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Document Operation screen."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Document Operation Screen"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="5B4F09744944EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="140"/>
@@ -13,7 +13,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Java Security Management screen."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Java Security Management Screen"/>
 			<column name="NMSPC_CD" value="KR-BUS"/>
 			<column name="OBJ_ID" value="5B4F09744945EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="141"/>
@@ -23,7 +23,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Message Queue screen."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Message Queue Screen"/>
 			<column name="NMSPC_CD" value="KR-BUS"/>
 			<column name="OBJ_ID" value="5B4F09744946EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="142"/>
@@ -33,7 +33,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Service Registry screen."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Service Registry Screen"/>
 			<column name="NMSPC_CD" value="KR-BUS"/>
 			<column name="OBJ_ID" value="5B4F09744947EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="143"/>
@@ -43,7 +43,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Thread Pool screen."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Thread Pool Screen"/>
 			<column name="NMSPC_CD" value="KR-BUS"/>
 			<column name="OBJ_ID" value="5B4F09744948EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="144"/>
@@ -53,7 +53,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Quartz Queue screen."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Quartz Queue Screen"/>
 			<column name="NMSPC_CD" value="KR-BUS"/>
 			<column name="OBJ_ID" value="5B4F09744949EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="145"/>
@@ -63,7 +63,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows a user to receive ad hoc requests for RICE Documents."/>
-			<column name="NM" value="Ad Hoc Review Document"/>
+			<column name="NM" value="Ad Hoc Review RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494AEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="146"/>
@@ -73,7 +73,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to open RICE Documents via the Super search option in Document Search and take Administrative workflow actions on them (such as approving the document, approving individual requests, or sending the document to a specified route node)."/>
-			<column name="NM" value="Administer Routing for Document"/>
+			<column name="NM" value="Administer Routing RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="147"/>
@@ -83,7 +83,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows access to the Blanket Approval button on RICE Documents."/>
-			<column name="NM" value="Blanket Approve Document"/>
+			<column name="NM" value="Blanket Approve RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494CEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="148"/>
@@ -93,7 +93,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes the initiation of RICE Documents."/>
-			<column name="NM" value="Initiate Document"/>
+			<column name="NM" value="Initiate RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494DEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="149"/>
@@ -143,7 +143,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to copy RICE Documents."/>
-			<column name="NM" value="Copy Document"/>
+			<column name="NM" value="Copy RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744954EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="156"/>
@@ -153,7 +153,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access Kuali RICE inquiries."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into RICE Records"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744959EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="161"/>
@@ -163,7 +163,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access Kuali RICE lookups."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up RICE Records"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974495AEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="162"/>
@@ -193,7 +193,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to open RICE Documents."/>
-			<column name="NM" value="Open Document"/>
+			<column name="NM" value="Open RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974495DEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="165"/>
@@ -203,7 +203,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access all RICE screens."/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use all RICE Screen"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974495EEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="166"/>
@@ -233,7 +233,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to take the Approve action on documents routed to them."/>
-			<column name="NM" value="Take Requested Action"/>
+			<column name="NM" value="Take Requested Approve Action"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="5B4F09744962EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="170"/>
@@ -243,7 +243,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to take the FYI action on documents routed to them."/>
-			<column name="NM" value="Take Requested Action"/>
+			<column name="NM" value="Take Requested FYI Action"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="5B4F09744964EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="172"/>
@@ -253,7 +253,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to take the Acknowledge action on documents routed to them."/>
-			<column name="NM" value="Take Requested Action"/>
+			<column name="NM" value="Take Requested Acknowledge Action"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="5B4F09744965EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="173"/>
@@ -263,7 +263,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to login to the Kuali portal."/>
-			<column name="NM" value="Log In"/>
+			<column name="NM" value="Log In Kuali Portal"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="5B4F09744966EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="174"/>
@@ -273,7 +273,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to edit Kuali documents that are in ENROUTE status."/>
-			<column name="NM" value="Edit Document"/>
+			<column name="NM" value="Edit Kuali ENROUTE Document Node Name PreRoute"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="5B4F0974496CEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="180"/>
@@ -283,7 +283,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to edit Kuali documents that are in ENROUTE status."/>
-			<column name="NM" value="Edit Document"/>
+			<column name="NM" value="Edit Kuali ENROUTE Document Route Status Code R"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="5B4F0974496DEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="181"/>
@@ -293,7 +293,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to view the entire Tax Identification Number on the Payee ACH document and Inquiry."/>
-			<column name="NM" value="Full Unmask Field"/>
+			<column name="NM" value="Full Unmask Tax Identification Number Payee ACH Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974496FEF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="183"/>
@@ -311,7 +311,8 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Blanket Approve Document"/>
+			<column name="DESC_TXT" value="Opens Access to all users and for all route states so we can set different perms for different states.  See other KS-SYS perms."/>
+			<column name="NM" value="Blanket Approve Allow All"/>
 			<column name="NMSPC_CD" value="KS-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494CEF33E04AAF8189D84F24"/>
 			<column name="PERM_ID" value="2100"/>
@@ -357,7 +358,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Users who can add notes and attachments to any document answering to the Kuali Document parent document type."/>
-			<column name="NM" value="Add Note / Attachment"/>
+			<column name="NM" value="Add Note / Attachment Kuali Document"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="606763510FC396D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="259"/>
@@ -376,7 +377,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to view notes and attachments on documents answering to the KualiDocument parent document type."/>
-			<column name="NM" value="View Note / Attachment"/>
+			<column name="NM" value="View Note / Attachment Kuali Document"/>
 			<column name="NMSPC_CD" value="KUALI"/>
 			<column name="OBJ_ID" value="606763510FC696D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="261"/>
@@ -386,7 +387,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to delete notes and attachments created by any user on documents answering to the RICE Document parent document type."/>
-			<column name="NM" value="Delete Note / Attachment"/>
+			<column name="NM" value="Delete Note / Attachment Kuali Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="606763510FCD96D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="264"/>
@@ -395,7 +396,7 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Screen XML Ingester Screen"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="606763510FF296D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="265"/>
@@ -433,7 +434,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Users who can save RICE documents"/>
-			<column name="NM" value="Save Document"/>
+			<column name="NM" value="Save RICE Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744961EF33E0404F8189D84F24"/>
 			<column name="PERM_ID" value="290"/>
@@ -501,7 +502,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to view the entire Tax Identification Number on the Person document and inquiry."/>
-			<column name="NM" value="Full Unmask Field"/>
+			<column name="NM" value="Full Unmask Tax Identification Number Person Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="6314CC58CF58B7B5E0404F8189D84439"/>
 			<column name="PERM_ID" value="306"/>
@@ -547,7 +548,8 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Blanket Approve"/>
+			<column name="DESC_TXT" value="Allows specified users to BA when the route status is Enroute"/>
+			<column name="NM" value="Blanket Approve when Routed"/>
 			<column name="NMSPC_CD" value="KS-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494BCF33E0R04EX189E8AAAB"/>
 			<column name="PERM_ID" value="3103"/>
@@ -556,7 +558,8 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Blanket Approve"/>
+			<column name="DESC_TXT" value="Allows specified users to BA when the route status is Saved"/>
+			<column name="NM" value="Blanket Approve when Saved"/>
 			<column name="NMSPC_CD" value="KS-SYS"/>
 			<column name="OBJ_ID" value="5B4F0974494BCF33E0R04EX189E8AABA"/>
 			<column name="PERM_ID" value="3104"/>
@@ -566,7 +569,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Edit Course Title"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit CourseInfo transcriptTitle"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0R04EX189D8AT24"/>
 			<column name="PERM_ID" value="3105"/>
@@ -576,7 +579,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Edit Course Unit Contents Owner"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit CourseInfo unitsContentOwner"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0R04EX189D8AT26"/>
 			<column name="PERM_ID" value="3106"/>
@@ -586,7 +589,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Edit Course Description"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit CourseInfo descr"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0R04EX189D8AT27"/>
 			<column name="PERM_ID" value="3107"/>
@@ -596,7 +599,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Edit Course Duration"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit CourseInfo duration"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF3AE0R04EX189D8AT27"/>
 			<column name="PERM_ID" value="3108"/>
@@ -605,7 +608,7 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit Organization orgInfo"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0R04EXQAZD8AT24"/>
 			<column name="PERM_ID" value="3109"/>
@@ -614,7 +617,7 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit Organization orgOrgRelationInfo"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0R04EXWSXD8AT26"/>
 			<column name="PERM_ID" value="3110"/>
@@ -623,7 +626,7 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit Organization OrgPositionRestrictionInfo"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF33E0R04EX189EDCT27"/>
 			<column name="PERM_ID" value="3111"/>
@@ -632,7 +635,7 @@
 		</insert>
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
-			<column name="NM" value="Access Permission"/>
+			<column name="NM" value="edit Organization orgPersonRelationInfo"/>
 			<column name="NMSPC_CD" value="KS-LUM"/>
 			<column name="OBJ_ID" value="5B4F0974494BEF3ARFV04EX189D8AT27"/>
 			<column name="PERM_ID" value="3112"/>
@@ -651,7 +654,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to send FYI ad hoc requests for Kuali Documents"/>
-			<column name="NM" value="Send Ad Hoc Request"/>
+			<column name="NM" value="Send FYI Request Kuali Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="662384B381B967A1E0404F8189D868A6"/>
 			<column name="PERM_ID" value="332"/>
@@ -661,7 +664,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to send Acknowledge ad hoc requests for Kuali Documents"/>
-			<column name="NM" value="Send Ad Hoc Request"/>
+			<column name="NM" value="Send Acknowledge Request Kuali Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="662384B381BD67A1E0404F8189D868A6"/>
 			<column name="PERM_ID" value="333"/>
@@ -671,7 +674,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to send Approve ad hoc requests for Kuali Documents"/>
-			<column name="NM" value="Send Ad Hoc Request"/>
+			<column name="NM" value="Send Approve Request Kuali Document"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="662384B381C167A1E0404F8189D868A6"/>
 			<column name="PERM_ID" value="334"/>
@@ -691,7 +694,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Rule Template lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up Rule Template"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="04C7706012554535AF8DC48DC6CC331C"/>
 			<column name="PERM_ID" value="701"/>
@@ -701,7 +704,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Stylesheet lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up Stylesheet"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="471FF4B19A4648D4B84194530AE22158"/>
 			<column name="PERM_ID" value="702"/>
@@ -711,7 +714,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the eDocLite lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up eDocLite"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="E6875070DC5B4FD59193F7445C33E7AB"/>
 			<column name="PERM_ID" value="703"/>
@@ -721,7 +724,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Rule Attribute lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up Rule Attribute"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="28CE0127B8A14AB4BFD39920C5398A69"/>
 			<column name="PERM_ID" value="707"/>
@@ -741,7 +744,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Parameter Component lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up Parameter Component"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="45F0E8E1B9784756A3C0582980912991"/>
 			<column name="PERM_ID" value="719"/>
@@ -751,7 +754,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Namespace lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up Namespace"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="FFF2C6639C6041F1B148AA9901C8A1F7"/>
 			<column name="PERM_ID" value="720"/>
@@ -761,7 +764,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Parameter Type lookup."/>
-			<column name="NM" value="Look Up Records"/>
+			<column name="NM" value="Look Up Parameter Type"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="B1BD57EE64274E62AC9425C7FF185A44"/>
 			<column name="PERM_ID" value="721"/>
@@ -771,7 +774,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Rule Template inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Rule Template"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="606763510FD196D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="801"/>
@@ -781,7 +784,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Stylesheet inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Stylesheet"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="606763510FD496D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="802"/>
@@ -791,7 +794,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the eDocLite inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into eDocLite"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="606763510FD796D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="803"/>
@@ -801,7 +804,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Rule Attribute inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Rule Attribute"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="606763510FDA96D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="807"/>
@@ -811,7 +814,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Pessimistic Lock inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Pessimistic"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="606763510FE196D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="814"/>
@@ -821,7 +824,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Parameter Component inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Parameter Component"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="606763510FE496D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="819"/>
@@ -831,7 +834,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Namespace inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Namespace"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="606763510FE796D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="820"/>
@@ -841,7 +844,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allow users to access the Parameter Type inquiry."/>
-			<column name="NM" value="Inquire Into Records"/>
+			<column name="NM" value="Inquire Into Parameter Type"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="606763510FEA96D3E0404F8189D857A2"/>
 			<column name="PERM_ID" value="821"/>
@@ -851,7 +854,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to modify the information on the Assignees Tab of the Group Document and the Group section of the Membership Tab on the Person Document for groups with the KUALI namespace."/>
-			<column name="NM" value="Populate Group"/>
+			<column name="NM" value="Populate Group KUALI Namespace"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744953EF33E0404F8189D84F25"/>
 			<column name="PERM_ID" value="833"/>
@@ -861,7 +864,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to modify the information on the Assignees Tab of the Role Document and the Roles section of the Membership Tab on the Person Document for Roles with the KUALI namespace."/>
-			<column name="NM" value="Assign Role"/>
+			<column name="NM" value="Assign Role KUALI Namespace"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744953EF33E0404F8189D84F26"/>
 			<column name="PERM_ID" value="834"/>
@@ -871,7 +874,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to modify the information on the Permissions tab of the Role Document for roles with the KUALI namespace."/>
-			<column name="NM" value="Grant Permission"/>
+			<column name="NM" value="Grant Permission KUALI Namespace"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744953EF33E0404F8189D84F27"/>
 			<column name="PERM_ID" value="835"/>
@@ -881,7 +884,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Authorizes users to modify the information on the Responsibility tab of the Role Document for roles with the KUALI namespace."/>
-			<column name="NM" value="Grant Responsibility"/>
+			<column name="NM" value="Grant Responsibility KUALI Namespace"/>
 			<column name="NMSPC_CD" value="KR-SYS"/>
 			<column name="OBJ_ID" value="5B4F09744953EF33E0404F8189D84F28"/>
 			<column name="PERM_ID" value="836"/>
@@ -891,7 +894,7 @@
 		<insert tableName="KRIM_PERM_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DESC_TXT" value="Allows users to access the Configuration Viewer screen"/>
-			<column name="NM" value="Use Screen"/>
+			<column name="NM" value="Use Configuration Viewer Screen"/>
 			<column name="NMSPC_CD" value="KR-BUS"/>
 			<column name="OBJ_ID" value="97469975-D110-9A65-5EE5-F21FD1BEB5B2"/>
 			<column name="PERM_ID" value="840"/>
@@ -907,5 +910,5 @@
 			<column name="PERM_TMPL_ID" value="51"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

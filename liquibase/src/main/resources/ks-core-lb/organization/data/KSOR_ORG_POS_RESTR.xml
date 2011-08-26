@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSOR_ORG_POS_RESTR-initial-data" author="alubbers">
+	<changeSet id="KSOR_ORG_POS_RESTR-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
@@ -1163,7 +1163,7 @@
 			<column name="ORG" value="23"/>
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.AssocProvost"/>
 			<column name="TM_QUANTITY" value="1"/>
-			<column name="TTL" value="Vice Provost for Information Technology & CIO "/>
+			<column name="TTL" value="Vice Provost for Information Technology &amp; CIO "/>
 			<column name="UPDATEID" value="TESTUSER"/>
 			<column name="UPDATETIME" value="20000101000000"/>
 			<column name="VER_NBR" value="0"/>
@@ -1621,14 +1621,14 @@
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
 			<column name="CREATETIME" value="20101213113449"/>
-			<column name="DESCR" value="Chair of the Art Hist & Arch COC"/>
+			<column name="DESCR" value="Chair of the Art Hist &amp; Arch COC"/>
 			<column name="ID" value="3f3085bf-5ad8-412d-ae37-11440d8d1a96"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
 			<column name="OBJ_ID" value="f703f52f-6698-4bc5-a291-16a3e5b31ed5"/>
 			<column name="ORG" value="213"/>
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
-			<column name="TTL" value="Chair of the Art Hist & Arch COC"/>
+			<column name="TTL" value="Chair of the Art Hist &amp; Arch COC"/>
 			<column name="UPDATEID" value="admin"/>
 			<column name="UPDATETIME" value="20101213113449"/>
 			<column name="VER_NBR" value="0"/>
@@ -2096,7 +2096,7 @@
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
 			<column name="CREATETIME" value="20000101000000"/>
-			<column name="DESCR" value="This committee consists of: Council of Deans member, Department Chairs Cabinet, Executive Vice President & Provost, Faculty, Senate Past President, Senate President, Senate President-Elect,  Student Government Association member"/>
+			<column name="DESCR" value="This committee consists of: Council of Deans member, Department Chairs Cabinet, Executive Vice President &amp; Provost, Faculty, Senate Past President, Senate President, Senate President-Elect,  Student Government Association member"/>
 			<column name="ID" value="61"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2127,7 +2127,7 @@
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
 			<column name="CREATETIME" value="20000101000000"/>
-			<column name="DESCR" value="This committee consists of: Associate Vice President - Budget & Planning, Executive Vice President & Provost, President of Kuali University, Vice President for Business & Finance, Vice President for Student Affairs"/>
+			<column name="DESCR" value="This committee consists of: Associate Vice President - Budget &amp; Planning, Executive Vice President &amp; Provost, President of Kuali University, Vice President for Business &amp; Finance, Vice President for Student Affairs"/>
 			<column name="ID" value="63"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2995,14 +2995,14 @@
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
 			<column name="CREATETIME" value="20101213113449"/>
-			<column name="DESCR" value="Member of the Art Hist & Arch COC"/>
+			<column name="DESCR" value="Member of the Art Hist &amp; Arch COC"/>
 			<column name="ID" value="d66baff2-9757-4ee5-a663-8f58a281f14c"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
 			<column name="OBJ_ID" value="df7e6f1a-c5f6-4666-9146-2741e629b1fb"/>
 			<column name="ORG" value="213"/>
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
-			<column name="TTL" value="Member of the Art Hist & Arch COC"/>
+			<column name="TTL" value="Member of the Art Hist &amp; Arch COC"/>
 			<column name="UPDATEID" value="admin"/>
 			<column name="UPDATETIME" value="20101213113449"/>
 			<column name="VER_NBR" value="0"/>
@@ -3067,5 +3067,5 @@
 			<column name="UPDATETIME" value="20101213122611"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

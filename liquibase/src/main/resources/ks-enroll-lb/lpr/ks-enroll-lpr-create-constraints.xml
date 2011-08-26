@@ -1,14 +1,14 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-    <changeSet id="kslp_lpr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK1BE1597B1D2EFA44" baseTableName="KSLP_LPR" baseColumnNames="RELATION_TYPE_ID" referencedTableName="KSLP_LPR_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FK1BE1597B61E975F6" baseTableName="KSLP_LPR" baseColumnNames="RELATION_STATE_ID" referencedTableName="KSLP_LPR_STATE" referencedColumnNames="ID" />
+    <changeSet id="ksen_lpr-foreign-keys" author="alubbers">
+        <addForeignKeyConstraint constraintName="FK1BE1597B1D2EFA44" baseTableName="KSEN_LPR" baseColumnNames="RELATION_TYPE_ID" referencedTableName="KSEN_LPR_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FK1BE1597B61E975F6" baseTableName="KSEN_LPR" baseColumnNames="RELATION_STATE_ID" referencedTableName="KSEN_LPR_STATE" referencedColumnNames="ID" />
     </changeSet>
 
-    <changeSet id="kslp_lpr_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKDF4BE635A8427FA" baseTableName="KSLP_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSLP_LPR_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FKDF4BE635DC3CD520" baseTableName="KSLP_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSLP_LPR" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKDF4BE635EA869E3D" baseTableName="KSLP_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSLP_LPR_STATE" referencedColumnNames="ID" />
+    <changeSet id="ksen_lpr_attr-foreign-keys" author="alubbers">
+        <addForeignKeyConstraint constraintName="FKDF4BE635A8427FA" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FKDF4BE635DC3CD520" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FKDF4BE635EA869E3D" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR_STATE" referencedColumnNames="ID" />
     </changeSet>
 
 </databaseChangeLog>

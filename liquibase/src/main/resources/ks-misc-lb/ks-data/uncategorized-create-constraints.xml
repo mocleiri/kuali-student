@@ -1,9 +1,9 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
   <changeSet author="andy (generated)" id="1311191427300-468">
-    <addPrimaryKey columnNames="NMSPC_CD, PARM_DTL_TYP_CD" constraintName="KRCR_PARM_DTL_TYP_TP1" tableName="KRCR_PARM_DTL_TYP_T" tablespace="USERS" />
+    <addPrimaryKey columnNames="NMSPC_CD, CMPNT_CD" constraintName="KRCR_CMPNT_TP1" tableName="KRCR_CMPNT_T" tablespace="USERS" />
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-469">
-    <addPrimaryKey columnNames="NMSPC_CD, PARM_DTL_TYP_CD, PARM_NM, APPL_ID" constraintName="KRCR_PARM_TP1" tableName="KRCR_PARM_T" tablespace="USERS" />
+    <addPrimaryKey columnNames="NMSPC_CD, CMPNT_CD, PARM_NM, APPL_ID" constraintName="KRCR_PARM_TP1" tableName="KRCR_PARM_T" tablespace="USERS" />
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-499">
     <addPrimaryKey columnNames="COUNTY_CD, STATE_CD, POSTAL_CNTRY_CD" constraintName="KRLC_CNTY_TP1" tableName="KRLC_CNTY_T" tablespace="USERS" />
@@ -18,7 +18,7 @@
     <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_NMSPC_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_NMSPC_T" tablespace="USERS" />
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-514">
-    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PARM_DTL_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_PARM_DTL_TYP_T" tablespace="USERS" />
+    <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PARM_DTL_TYP_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_CMPNT_T" tablespace="USERS" />
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-515">
     <addUniqueConstraint columnNames="OBJ_ID" constraintName="KRNS_PARM_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRCR_PARM_T" tablespace="USERS" />
@@ -45,7 +45,7 @@
     <addUniqueConstraint columnNames="OBJ_ID" constraintName="KR_STATE_TC0" deferrable="false" disabled="false" initiallyDeferred="false" tableName="KRLC_ST_T" tablespace="USERS" />
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-780">
-    <addForeignKeyConstraint baseColumnNames="NMSPC_CD" baseTableName="KRCR_PARM_DTL_TYP_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_PARM_DTL_TYP_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NMSPC_CD" referencedTableName="KRCR_NMSPC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
+    <addForeignKeyConstraint baseColumnNames="NMSPC_CD" baseTableName="KRCR_CMPNT_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_PARM_DTL_TYP_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NMSPC_CD" referencedTableName="KRCR_NMSPC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-781">
     <addForeignKeyConstraint baseColumnNames="NMSPC_CD" baseTableName="KRCR_PARM_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRNS_PARM_TR1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" referencedColumnNames="NMSPC_CD" referencedTableName="KRCR_NMSPC_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />

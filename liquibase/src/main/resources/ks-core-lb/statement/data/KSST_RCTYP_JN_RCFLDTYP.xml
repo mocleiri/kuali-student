@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_RCTYP_JN_RCFLDTYP-initial-data" author="alubbers">
+	<changeSet id="KSST_RCTYP_JN_RCFLDTYP-initial-data" author="alubbers">
 		<insert tableName="KSST_RCTYP_JN_RCFLDTYP">
 			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.course.clu.id"/>
 			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.course.completed"/>
@@ -280,5 +280,5 @@
 			<column name="REQ_COMP_FIELD_TYPE_ID" value="kuali.reqComponent.field.type.value.positive.integer"/>
 			<column name="REQ_COMP_TYPE_ID" value="kuali.reqComponent.type.program.residence.credits.final"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

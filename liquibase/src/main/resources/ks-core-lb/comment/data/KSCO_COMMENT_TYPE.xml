@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSCO_COMMENT_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSCO_COMMENT_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSCO_COMMENT_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Proposal"/>
@@ -88,5 +88,5 @@
 			<column name="TYPE_KEY" value="kuali.comment.type.workflowDecisionRationale.withdraw"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

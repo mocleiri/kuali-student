@@ -18,11 +18,11 @@
     </createTable>
   </changeSet>
   <changeSet author="andy (generated)" id="1311191427300-2">
-    <createTable tableName="KRCR_PARM_DTL_TYP_T">
+    <createTable tableName="KRCR_CMPNT_T">
       <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(20)">
         <constraints nullable="false" />
       </column>
-      <column name="PARM_DTL_TYP_CD" type="java.sql.Types.VARCHAR(100)">
+      <column name="CMPNT_CD" type="java.sql.Types.VARCHAR(100)">
         <constraints nullable="false" />
       </column>
       <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
@@ -42,7 +42,7 @@
       <column name="NMSPC_CD" type="java.sql.Types.VARCHAR(20)">
         <constraints nullable="false" />
       </column>
-      <column name="PARM_DTL_TYP_CD" type="java.sql.Types.VARCHAR(100)">
+      <column name="CMPNT_CD" type="java.sql.Types.VARCHAR(100)">
         <constraints nullable="false" />
       </column>
       <column name="PARM_NM" type="java.sql.Types.VARCHAR(255)">
@@ -57,9 +57,9 @@
       <column name="PARM_TYP_CD" type="java.sql.Types.VARCHAR(5)">
         <constraints nullable="false" />
       </column>
-      <column name="TXT" type="java.sql.Types.VARCHAR(4000)" />
+      <column name="VAL" type="java.sql.Types.VARCHAR(4000)" />
       <column name="PARM_DESC_TXT" type="java.sql.Types.VARCHAR(4000)" />
-      <column name="CONS_CD" type="java.sql.Types.VARCHAR(1)" />
+      <column name="EVAL_OPRTR_CD" type="java.sql.Types.VARCHAR(1)" />
       <column defaultValue="KUALI" name="APPL_ID" type="java.sql.Types.VARCHAR(20)">
         <constraints nullable="false" />
       </column>
@@ -107,9 +107,6 @@
         <constraints nullable="false" primaryKey="true" primaryKeyName="KRLC_CMP_TYP_TP1" primaryKeyTablespace="USERS" />
       </column>
       <column name="CMP_TYP_NM" type="java.sql.Types.VARCHAR(250)" />
-      <column name="DOBJ_MAINT_CD_ACTV_IND" type="java.sql.Types.VARCHAR(1)">
-        <constraints nullable="false" />
-      </column>
       <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)">
         <constraints nullable="false" />
       </column>
@@ -227,14 +224,5 @@
     <modifySql dbms="mysql">
       <replace replace="SYSDATE" with="CURRENT_TIMESTAMP" />
     </modifySql>
-  </changeSet>
-  <changeSet author="alubbers" id="mysql-index-length-updates" dbms="mysql">
-    <modifyDataType tableName="KREW_DOC_HDR_EXT_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
-    <modifyDataType tableName="KREW_RTE_BRCH_ST_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
-    <modifyDataType tableName="KREW_RTE_NODE_INSTN_ST_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
-    <modifyDataType tableName="KREW_RULE_EXT_VAL_T" columnName="KEY_CD" newDataType="java.sql.Types.VARCHAR(500)" />
-    <modifyDataType tableName="KRSB_BAM_T" columnName="MTHD_NM" newDataType="java.sql.Types.VARCHAR(500)" />
-    <modifyDataType tableName="KRSB_MSG_QUE_T" columnName="SVC_MTHD_NM" newDataType="java.sql.Types.VARCHAR(500)" />
-    <modifyDataType tableName="KRSB_MSG_QUE_T" columnName="IP_NBR" newDataType="java.sql.Types.VARCHAR(500)" />
   </changeSet>
 </databaseChangeLog>

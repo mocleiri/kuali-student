@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_STMT_JN_STMT-initial-data" author="alubbers">
+	<changeSet id="KSST_STMT_JN_STMT-initial-data" author="alubbers">
 		<insert tableName="KSST_STMT_JN_STMT">
 			<column name="CHLD_STMT_ID" value="166f284f-f20e-45ee-9111-84f4faeca224"/>
 			<column name="STMT_ID" value="50b23428-1070-42a4-af4d-65282e42601a"/>
@@ -132,5 +132,5 @@
 			<column name="CHLD_STMT_ID" value="fc5f7864-cb7d-41bc-8726-d0411c4edec9"/>
 			<column name="STMT_ID" value="a1e12187-a69f-42a8-a2bd-76cffd291c89"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

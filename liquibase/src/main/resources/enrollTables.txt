@@ -24,10 +24,10 @@ atp/ks-enroll-atp-create:KSEN_STATEPROCESS_RELTN
 atp/ks-enroll-atp-create:KSEN_STATE_ATTR 
 atp/ks-enroll-atp-create:KSEN_STATE_PROCESS 
 atp/ks-enroll-atp-create:KSEN_TYPETYPE_RELTN 
-lpr/ks-enroll-lpr-create:KSLP_LPR 
-lpr/ks-enroll-lpr-create:KSLP_LPR_ATTR 
-lpr/ks-enroll-lpr-create:KSLP_LPR_STATE 
-lpr/ks-enroll-lpr-create:KSLP_LPR_TYPE 
+lpr/ks-enroll-lpr-create:KSEN_LPR 
+lpr/ks-enroll-lpr-create:KSEN_LPR_ATTR 
+lpr/ks-enroll-lpr-create:KSEN_LPR_STATE 
+lpr/ks-enroll-lpr-create:KSEN_LPR_TYPE 
 lui/ks-enroll-lui-create:KSEN_LUI 
 lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN 
 lui/ks-enroll-lui-create:  KSEN_LUILUI_RELTN_ATTR

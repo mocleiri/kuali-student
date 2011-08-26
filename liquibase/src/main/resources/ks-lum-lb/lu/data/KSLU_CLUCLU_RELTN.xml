@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLUCLU_RELTN-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLUCLU_RELTN-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLUCLU_RELTN">
 			<column name="CLU_ID" value="150c7e42-2f87-458e-a48e-2d0243cbc52e"/>
 			<column name="CLU_RELTN_REQ" value="1"/>
@@ -14526,5 +14526,5 @@
 			<column name="UPDATETIME" value="20101214092052"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <include file="commonProperties.xml"/>
+    <include file="ks-core-lb/atp/ks-core-atp-create-schema.xml"/>
+
+    <include file="ks-core-lb/comment/ks-core-comment-create-schema.xml"/>
+    <include file="ks-core-lb/document/ks-core-document-create-schema.xml"/>
+    <include file="ks-core-lb/enumerationmanagement/ks-core-enumerationmanagement-create-schema.xml"/>
+    <include file="ks-core-lb/messages/ks-core-messages-create-schema.xml"/>
+    <include file="ks-core-lb/organization/ks-core-organization-create-schema.xml"/>
+    <include file="ks-core-lb/proposal/ks-core-proposal-create-schema.xml"/>
+    <include file="ks-core-lb/statement/ks-core-statement-create-schema.xml"/>
+
+    <include file="ks-enroll-lb/atp/ks-enroll-atp-create-schema.xml"/>
+    <include file="ks-enroll-lb/lpr/ks-enroll-lpr-create-schema.xml"/>
+    <include file="ks-enroll-lb/lui/ks-enroll-lui-create-schema.xml"/>
+
+    <include file="ks-lum-lb/lo/ks-lum-lo-create-schema.xml"/>
+    <include file="ks-lum-lb/lrc/ks-lum-lrc-create-schema.xml"/>
+    <include file="ks-lum-lb/lu/ks-lum-lu-create-schema.xml"/>
+
+    <include file="ks-rice-lb/rice/rice-create-schema.xml"/>
+    <include file="ks-rice-lb/rice-krms/krms-create-schema.xml"/>
+
+    <include file="ks-misc-lb/ks-data/uncategorized-create-schema.xml"/>
+
+</databaseChangeLog>
+

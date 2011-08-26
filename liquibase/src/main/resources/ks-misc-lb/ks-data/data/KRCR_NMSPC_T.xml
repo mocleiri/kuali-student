@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRCR_NMSPC_T-initial-data" author="alubbers">
+	<changeSet id="KRCR_NMSPC_T-initial-data" author="alubbers">
 		<insert tableName="KRCR_NMSPC_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="APPL_ID" value="RICE"/>
@@ -71,5 +71,5 @@
 			<column name="OBJ_ID" value="5ADF18B6D4817954E0404F8189D85002"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

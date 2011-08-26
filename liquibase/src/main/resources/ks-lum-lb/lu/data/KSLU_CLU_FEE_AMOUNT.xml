@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_FEE_AMOUNT-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_FEE_AMOUNT-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_FEE_AMOUNT">
 			<column name="CLUE_FEE_REC_ID" value="886548f0-9b12-4534-bee3-7e8153402c8e"/>
 			<column name="CURRENCY_QUANT" value="25"/>
@@ -16,5 +16,5 @@
 			<column name="OBJ_ID" value="cf907638-48ce-48fa-a099-f5d5e1ce0df1"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

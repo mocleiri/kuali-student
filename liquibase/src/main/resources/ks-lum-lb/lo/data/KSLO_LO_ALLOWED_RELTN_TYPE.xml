@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLO_LO_ALLOWED_RELTN_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSLO_LO_ALLOWED_RELTN_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_ALLOWED_RELTN_TYPE">
 			<column name="EFF_DT" value="20080101000000"/>
 			<column name="ID" value="dec1364f-eff0-41c6-9803-06a56ca5f192"/>
@@ -9,5 +9,5 @@
 			<column name="OBJ_ID" value="FA8956FF7473427D995F90006073929F"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

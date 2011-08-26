@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRLC_CNTRY_T-initial-data" author="alubbers">
+	<changeSet id="KRLC_CNTRY_T-initial-data" author="alubbers">
 		<insert tableName="KRLC_CNTRY_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ALT_POSTAL_CNTRY_CD" value="AND"/>
@@ -2223,5 +2223,5 @@
 			<column name="PSTL_CNTRY_RSTRC_IND" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -40,11 +40,6 @@ rice/rice-create:KREW_EDL_FLD_DMP_T
 rice/rice-create:KREW_HLP_T
 rice/rice-create:KREW_INIT_RTE_NODE_INSTN_T
 rice/rice-create:KREW_OUT_BOX_ITM_T
-rice/rice-create:KREW_RIA_DOCTYPE_MAP_T
-rice/rice-create:KREW_RIA_DOC_T
-rice/rice-create:KREW_RMV_RPLC_DOC_T
-rice/rice-create:KREW_RMV_RPLC_GRP_T
-rice/rice-create:KREW_RMV_RPLC_RULE_T
 rice/rice-create:KREW_RTE_BRCH_PROTO_T
 rice/rice-create:KREW_RTE_BRCH_ST_T
 rice/rice-create:KREW_RTE_BRCH_T
@@ -205,3 +200,5 @@ rice-krms/krms-create:KRMS_TERM_SPEC_T
 rice-krms/krms-create:KRMS_TERM_T
 rice-krms/krms-create:KRMS_TYP_ATTR_T
 rice-krms/krms-create:KRMS_TYP_T
+rice-krms/krms-create:KRMS_TERM_SPEC_CTGRY_T
+rice-krms/krms-create:KRMS_FUNC_CTGRY_T

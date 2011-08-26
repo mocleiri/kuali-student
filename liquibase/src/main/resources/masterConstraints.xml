@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <include file="ks-core-lb/atp/ks-core-atp-create-constraints.xml"/>
+    <include file="ks-core-lb/comment/ks-core-comment-create-constraints.xml"/>
+    <include file="ks-core-lb/document/ks-core-document-create-constraints.xml"/>
+    <include file="ks-core-lb/enumerationmanagement/ks-core-enumerationmanagement-create-constraints.xml"/>
+    <include file="ks-core-lb/messages/ks-core-messages-create-constraints.xml"/>
+    <include file="ks-core-lb/organization/ks-core-organization-create-constraints.xml"/>
+    <include file="ks-core-lb/proposal/ks-core-proposal-create-constraints.xml"/>
+    <include file="ks-core-lb/statement/ks-core-statement-create-constraints.xml"/>
+
+    <include file="ks-enroll-lb/atp/ks-enroll-atp-create-constraints.xml"/>
+    <include file="ks-enroll-lb/lpr/ks-enroll-lpr-create-constraints.xml"/>
+    <include file="ks-enroll-lb/lui/ks-enroll-lui-create-constraints.xml"/>
+
+    <include file="ks-lum-lb/lo/ks-lum-lo-create-constraints.xml"/>
+    <include file="ks-lum-lb/lrc/ks-lum-lrc-create-constraints.xml"/>
+    <include file="ks-lum-lb/lu/ks-lum-lu-create-constraints.xml"/>
+
+    <include file="ks-rice-lb/rice/rice-create-constraints.xml"/>
+    <include file="ks-rice-lb/rice-krms/krms-create-constraints.xml"/>
+
+    <include file="ks-misc-lb/ks-data/uncategorized-create-constraints.xml"/>
+
+</databaseChangeLog>

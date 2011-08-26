@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSAP_RICH_TEXT_T-initial-data" author="alubbers">
+	<changeSet id="KSAP_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="FORMATTED" value="Class of 2017 Sophomore Year"/>
 			<column name="ID" value="0028009a-e089-46c0-b3f0-aae95b866543"/>
@@ -6287,7 +6287,7 @@
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="ID" value="kuali.atp.Milestone.131"/>
 			<column name="OBJ_ID" value="C1453AB476FE48AFAD3B261435669572"/>
-			<column name="PLAIN" value="Deadline to withdraw w/o "W'"/>
+			<column name="PLAIN" value="Deadline to withdraw w/o &quot;W'"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_RICH_TEXT_T">
@@ -6353,7 +6353,7 @@
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="ID" value="kuali.atp.Milestone.142"/>
 			<column name="OBJ_ID" value="479F0958A39A46838843D2952B6C356A"/>
-			<column name="PLAIN" value="Deadline to drop w/o "W""/>
+			<column name="PLAIN" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_RICH_TEXT_T">
@@ -6497,7 +6497,7 @@
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="ID" value="kuali.atp.Milestone.166"/>
 			<column name="OBJ_ID" value="3E4AD7E80D184C2EA9F198F81E15D4DC"/>
-			<column name="PLAIN" value="Deadline to withdraw w/o "W'"/>
+			<column name="PLAIN" value="Deadline to withdraw w/o &quot;W'"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_RICH_TEXT_T">
@@ -6563,7 +6563,7 @@
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="ID" value="kuali.atp.Milestone.177"/>
 			<column name="OBJ_ID" value="CF4DBBBAEA7445A0B2DE77A1E7D05DC6"/>
-			<column name="PLAIN" value="Deadline to drop w/o "W""/>
+			<column name="PLAIN" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_RICH_TEXT_T">
@@ -6707,7 +6707,7 @@
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="ID" value="kuali.atp.Milestone.201"/>
 			<column name="OBJ_ID" value="4AFF611610FD4D7B929F3E91B7370262"/>
-			<column name="PLAIN" value="Deadline to withdraw w/o "W'"/>
+			<column name="PLAIN" value="Deadline to withdraw w/o &quot;W'"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_RICH_TEXT_T">
@@ -6773,7 +6773,7 @@
 		<insert tableName="KSAP_RICH_TEXT_T">
 			<column name="ID" value="kuali.atp.Milestone.212"/>
 			<column name="OBJ_ID" value="5A5E10EEA6CE4B18B6264BDF191CA5C4"/>
-			<column name="PLAIN" value="Deadline to drop w/o "W""/>
+			<column name="PLAIN" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_RICH_TEXT_T">
@@ -7490,5 +7490,5 @@
 			<column name="PLAIN" value="Curriculum Committee Meeting"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

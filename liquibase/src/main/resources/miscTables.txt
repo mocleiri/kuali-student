@@ -1,5 +1,5 @@
 ks-data/uncategorized-create:KRCR_NMSPC_T
-ks-data/uncategorized-create:KRCR_PARM_DTL_TYP_T
+ks-data/uncategorized-create:KRCR_CMPNT_T
 ks-data/uncategorized-create:KRCR_PARM_T
 ks-data/uncategorized-create:KRCR_PARM_TYP_T
 ks-data/uncategorized-create:KRLC_CMP_T

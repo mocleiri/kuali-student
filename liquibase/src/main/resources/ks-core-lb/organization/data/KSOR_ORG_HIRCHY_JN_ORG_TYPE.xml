@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSOR_ORG_HIRCHY_JN_ORG_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSOR_ORG_HIRCHY_JN_ORG_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG_HIRCHY_JN_ORG_TYPE">
 			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
 			<column name="ORG_TYPE_ID" value="kuali.org.AdhocCommittee"/>
@@ -92,5 +92,5 @@
 			<column name="ORG_HIRCHY_ID" value="kuali.org.hierarchy.Main"/>
 			<column name="ORG_TYPE_ID" value="kuali.org.WorkGroup"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

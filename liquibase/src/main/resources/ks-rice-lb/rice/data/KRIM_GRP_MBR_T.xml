@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_GRP_MBR_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_GRP_MBR_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_GRP_MBR_T">
 			<column name="GRP_ID" value="2000"/>
 			<column name="GRP_MBR_ID" value="1122"/>
@@ -36,5 +36,5 @@
 			<column name="OBJ_ID" value="6798B3E6C3C49827AE62E5F7A275A1A3"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSPR_PROPOSAL_REFTYPE-initial-data" author="alubbers">
+	<changeSet id="KSPR_PROPOSAL_REFTYPE-initial-data" author="alubbers">
 		<insert tableName="KSPR_PROPOSAL_REFTYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Clu Proposal Reference"/>
@@ -8,5 +8,5 @@
 			<column name="TYPE_KEY" value="kuali.proposal.referenceType.clu"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

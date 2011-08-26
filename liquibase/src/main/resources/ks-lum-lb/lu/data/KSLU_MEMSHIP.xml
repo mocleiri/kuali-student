@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_MEMSHIP-initial-data" author="alubbers">
+	<changeSet id="KSLU_MEMSHIP-initial-data" author="alubbers">
 		<insert tableName="KSLU_MEMSHIP">
 			<column name="ID" value="00cfbf51-4476-47b4-9cbd-e03f56bc5e24"/>
 			<column name="OBJ_ID" value="5fa65a70-272c-48d2-95cd-c6bf2ac4827e"/>
@@ -30,5 +30,5 @@
 			<column name="SEARCH_TYPE_KEY" value="lu.search.mostCurrent.union"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

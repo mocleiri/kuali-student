@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_REQ_COM_FIELD_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSST_REQ_COM_FIELD_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSST_REQ_COM_FIELD_TYPE">
 			<column name="DATA_TYPE" value="string"/>
 			<column name="DESCR" value="CLU identifier"/>
@@ -144,5 +144,5 @@
 			<column name="READ_ONLY" value="0"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

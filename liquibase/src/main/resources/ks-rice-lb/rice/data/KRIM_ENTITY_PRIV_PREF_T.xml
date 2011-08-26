@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_ENTITY_PRIV_PREF_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_ENTITY_PRIV_PREF_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ENTITY_PRIV_PREF_T">
 			<column name="ENTITY_ID" value="4016"/>
 			<column name="LAST_UPDT_DT" value="20081108164623"/>
@@ -77,5 +77,5 @@
 			<column name="SUPPRESS_PRSNL_IND" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

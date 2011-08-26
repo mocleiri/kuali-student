@@ -1,6 +1,6 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 <changeSet author="andy (generated)" id="1311191427300-308">
-  <createTable tableName="KSLP_LPR">
+  <createTable tableName="KSEN_LPR">
     <column name="ID" type="java.sql.Types.VARCHAR(255)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0057034" primaryKeyTablespace="USERS" />
     </column>
@@ -19,7 +19,7 @@
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-309">
-  <createTable tableName="KSLP_LPR_ATTR">
+  <createTable tableName="KSEN_LPR_ATTR">
     <column name="ID" type="java.sql.Types.VARCHAR(255)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0057036" primaryKeyTablespace="USERS" />
     </column>
@@ -30,7 +30,7 @@
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-310">
-  <createTable tableName="KSLP_LPR_STATE">
+  <createTable tableName="KSEN_LPR_STATE">
     <column name="ID" type="java.sql.Types.VARCHAR(255)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0057038" primaryKeyTablespace="USERS" />
     </column>
@@ -47,7 +47,7 @@
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-311">
-  <createTable tableName="KSLP_LPR_TYPE">
+  <createTable tableName="KSEN_LPR_TYPE">
     <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
       <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0057040" primaryKeyTablespace="USERS" />
     </column>

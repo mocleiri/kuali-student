@@ -174,22 +174,8 @@
 		</column>
 	</createTable>
     </changeSet>
-    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-1311191427300-1168">
-        <createTable tableName="KREW_HLP_S">
-		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
-			<constraints nullable="false" primaryKey="true" />
-		</column>
-	</createTable>
-    </changeSet>
     <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-1311191427300-1169">
         <createTable tableName="KREW_OUT_BOX_ITM_S">
-		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
-			<constraints nullable="false" primaryKey="true" />
-		</column>
-	</createTable>
-    </changeSet>
-    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-1311191427300-1170">
-        <createTable tableName="KREW_RIA_DOCTYPE_MAP_ID_S">
 		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
 			<constraints nullable="false" primaryKey="true" />
 		</column>
@@ -580,6 +566,15 @@
 		</column>
 	</createTable>
     </changeSet>
+
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequenceTable-KRMS_CTGRY_S">
+        <createTable tableName="KRMS_CTGRY_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+
     <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-1311191427300-1226">
         <createTable tableName="KRMS_FUNC_PARM_S">
 		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">

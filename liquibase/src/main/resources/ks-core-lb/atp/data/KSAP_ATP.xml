@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSAP_ATP-initial-data" author="alubbers">
+	<changeSet id="KSAP_ATP-initial-data" author="alubbers">
 		<insert tableName="KSAP_ATP">
 			<column name="CREATETIME" value="20101210172003"/>
 			<column name="END_DT" value="20090215000000"/>
@@ -10946,5 +10946,5 @@
 			<column name="UPDATETIME" value="20101210172023"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

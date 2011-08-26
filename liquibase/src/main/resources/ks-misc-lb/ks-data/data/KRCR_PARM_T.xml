@@ -1,655 +1,655 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRCR_PARM_T-initial-data" author="alubbers">
+	<changeSet id="KRCR_PARM_T-initial-data" author="alubbers">
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-IDM"/>
-			<column name="OBJ_ID" value="2238b58e-8fb9-102c-9461-def224dad9b3"/>
-			<column name="PARM_DESC_TXT" value="The maximum number of role or group members to display at once on their documents. If the number is above this value, the document will switch into a paging mode with only this many rows displayed at a time."/>
-			<column name="PARM_DTL_TYP_CD" value="Document"/>
-			<column name="PARM_NM" value="MAX_MEMBERS_PER_PAGE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="20"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-IDM"/>
-			<column name="OBJ_ID" value="61645D045B0105D7E0404F8189D849B1"/>
-			<column name="PARM_DTL_TYP_CD" value="PersonDocumentName"/>
-			<column name="PARM_NM" value="PREFIXES"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Ms;Mrs;Mr;Dr"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-IDM"/>
-			<column name="OBJ_ID" value="61645D045B0205D7E0404F8189D849B1"/>
-			<column name="PARM_DTL_TYP_CD" value="PersonDocumentName"/>
-			<column name="PARM_NM" value="SUFFIXES"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Jr;Sr;Mr;Md"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F59AAD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Flag for enabling/disabling (Y/N) the demonstration encryption check."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="CHECK_ENCRYPTION_SERVICE_OVERRIDE_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC723DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format dates to be used in a file name when DateTimeServiceImpl.toDateStringForFilename(Date) is called. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="DATE_TO_STRING_FORMAT_FOR_FILE_NAME"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="yyyyMMdd"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC725DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date to be displayed on a web page. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="DATE_TO_STRING_FORMAT_FOR_USER_INTERFACE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="MM/dd/yyyy"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="64B87B4C5E3B8F4CE0404F8189D8291A"/>
-			<column name="PARM_DESC_TXT" value="Used as the default country code when relating records that do not have a country code to records that do have a country code, e.g. validating a zip code where the country is not collected."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="DEFAULT_COUNTRY"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="US"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F59BAD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Flag for enabling/disabling direct inquiries on screens that are drawn by the nervous system (i.e. lookups and maintenance documents)"/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="ENABLE_DIRECT_INQUIRIES_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F59CAD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Indicates whether field level help links are enabled on lookup pages and documents."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="ENABLE_FIELD_LEVEL_HELP_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F59DAD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Maximum file upload size for the application. Used by PojoFormBase. Must be an integer, optionally followed by "K", "M", or "G". Only used if no other upload limits are in effect."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="MAX_FILE_SIZE_DEFAULT_UPLOAD"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="5M"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5a5fbe94-846f-102c-8db0-c405cae621f3"/>
-			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of regular expressions that identify 
-potentially sensitive data in strings.  These patterns will be matched 
-against notes, document explanations, and routing annotations."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="SENSITIVE_DATA_PATTERNS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="[0-9]{9};[0-9]{3}-[0-9]{2}-[0-9]{4}"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="e7d133f3-b5fe-11df-ad0a-d18f5709259f"/>
-			<column name="PARM_DESC_TXT" value="If set to 'Y' when sensitive data is found the user will be prompted to continue the action or cancel. If this is set to 'N' the user will be presented with an error message and will not be allowed to continue with the action until the sensitive data is removed."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="SENSITIVE_DATA_PATTERNS_WARNING_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC722DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of strings representing date formats that the DateTimeService will use to parse dates when DateTimeServiceImpl.convertToSqlDate(String) or DateTimeServiceImpl.convertToDate(String) is called. Note that patterns will be applied in the order listed (and the first applicable one will be used). For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="STRING_TO_DATE_FORMATS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="MM/dd/yyyy hh:mm a;MM/dd/yy;MM/dd/yyyy;MM-dd-yy;MMddyy;MMMM dd;yyyy;MM/dd/yy HH:mm:ss;MM/dd/yyyy HH:mm:ss;MM-dd-yy HH:mm:ss;MMddyy HH:mm:ss;MMMM dd HH:mm:ss;yyyy HH:mm:ss"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC727DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of strings representing date formats that the DateTimeService will use to parse date and times when DateTimeServiceImpl.convertToDateTime(String) or DateTimeServiceImpl.convertToSqlTimestamp(String) is called. Note that patterns will be applied in the order listed (and the first applicable one will be used). For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="STRING_TO_TIMESTAMP_FORMATS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="MM/dd/yyyy hh:mm a;MM/dd/yy;MM/dd/yyyy;MM-dd-yy;MMddyy;MMMM dd;yyyy;MM/dd/yy HH:mm:ss;MM/dd/yyyy HH:mm:ss;MM-dd-yy HH:mm:ss;MMddyy HH:mm:ss;MMMM dd HH:mm:ss;yyyy HH:mm:ss"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC724DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date and time string to be used in a file name when DateTimeServiceImpl.toDateTimeStringForFilename(Date) is called.. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="TIMESTAMP_TO_STRING_FORMAT_FOR_FILE_NAME"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="yyyyMMdd-HH-mm-ss-S"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC726DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date and time to be displayed on a web page. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
-			<column name="PARM_NM" value="TIMESTAMP_TO_STRING_FORMAT_FOR_USER_INTERFACE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="MM/dd/yyyy hh:mm a"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5A689075D35E7AEBE0404F8189D80321"/>
-			<column name="PARM_DESC_TXT" value="Batch file types that are active options for the file upload screen."/>
-			<column name="PARM_DTL_TYP_CD" value="Batch"/>
-			<column name="PARM_NM" value="ACTIVE_FILE_TYPES"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="collectorInputFileType;procurementCardInputFileType;enterpriseFeederFileSetType;assetBarcodeInventoryInputFileType;customerLoadInputFileType"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="AACD35C42E8E1061E040C60AF05B56E5"/>
-			<column name="PARM_DESC_TXT" value="Controls whether the nervous system will show the blanket approve button to a user who is authorized for blanket approval but is neither the initiator of the particular document nor the recipient of an active, pending, approve action request."/>
-			<column name="PARM_DTL_TYP_CD" value="Document"/>
-			<column name="PARM_NM" value="ALLOW_ENROUTE_BLANKET_APPROVE_WITHOUT_APPROVAL_REQUEST_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F59EAD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="If Y, the Route Report button will be displayed on the document actions bar if the document is using the default DocumentAuthorizerBase.getDocumentActionFlags to set the canPerformRouteReport property of the returned DocumentActionFlags instance."/>
-			<column name="PARM_DTL_TYP_CD" value="Document"/>
-			<column name="PARM_NM" value="DEFAULT_CAN_PERFORM_ROUTE_REPORT_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A0AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Maximum attachment upload size for the application. Used by KualiDocumentFormBase. Must be an integer, optionally followed by "K", "M", or "G"."/>
-			<column name="PARM_DTL_TYP_CD" value="Document"/>
-			<column name="PARM_NM" value="MAX_FILE_SIZE_ATTACHMENT"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="5M"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A1AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Some documents provide the functionality to send notes to another user using a workflow FYI or acknowledge functionality. This parameter specifies the default action that will be used when sending notes. This parameter should be one of the following 2 values: "K" for acknowledge or "F" for fyi. Depending on the notes and workflow service implementation, other values may be possible."/>
-			<column name="PARM_DTL_TYP_CD" value="Document"/>
-			<column name="PARM_NM" value="SEND_NOTE_WORKFLOW_NOTIFICATION_ACTIONS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="K"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A4AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="The number of minutes before a session expires that user should be warned when a document uses pessimistic locking."/>
-			<column name="PARM_DTL_TYP_CD" value="Document"/>
-			<column name="PARM_NM" value="SESSION_TIMEOUT_WARNING_MESSAGE_TIME"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="5"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A3AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Lookup results may continue to be persisted in the DB long after they are needed. This parameter represents the maximum amount of time, in seconds, that the results will be allowed to persist in the DB before they are deleted from the DB."/>
-			<column name="PARM_DTL_TYP_CD" value="Lookup"/>
-			<column name="PARM_NM" value="MULTIPLE_VALUE_RESULTS_EXPIRATION_SECONDS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="86400"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A6AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Maximum number of rows that will be displayed on a look-up results screen."/>
-			<column name="PARM_DTL_TYP_CD" value="Lookup"/>
-			<column name="PARM_NM" value="MULTIPLE_VALUE_RESULTS_PER_PAGE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="100"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A7AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="If a maxLength attribute has not been set on a lookup result field in the data dictionary, then the result column's max length will be the value of this parameter. Set this parameter to 0 for an unlimited default length or a positive value (i.e. greater than 0) for a finite max length."/>
-			<column name="PARM_DTL_TYP_CD" value="Lookup"/>
-			<column name="PARM_NM" value="RESULTS_DEFAULT_MAX_COLUMN_LENGTH"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="70"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="53680C68F5A8AD9BE0404F8189D80A6C"/>
-			<column name="PARM_DESC_TXT" value="Maximum number of results returned in a look-up query."/>
-			<column name="PARM_DTL_TYP_CD" value="Lookup"/>
-			<column name="PARM_NM" value="RESULTS_LIMIT"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="200"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5A689075D35A7AEBE0404F8189D80321"/>
-			<column name="PARM_DESC_TXT" value="Pending attachments are attachments that do not yet have a permanent link with the associated Business Object (BO). These pending attachments are stored in the attachments.pending.directory (defined in the configuration service). If the BO is never persisted, then this attachment will become orphaned (i.e. not associated with any BO), but will remain in this directory. The PurgePendingAttachmentsStep batch step deletes these pending attachment files that are older than the value of this parameter. The unit of this value is seconds. Do not set this value too short, as this will cause problems attaching files to BOs."/>
-			<column name="PARM_DTL_TYP_CD" value="PurgePendingAttachmentsStep"/>
-			<column name="PARM_NM" value="MAX_AGE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="86400"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5A689075D3597AEBE0404F8189D80321"/>
-			<column name="PARM_DESC_TXT" value="Determines the age of the session document records that the the step will operate on, e.g. if this param is set to 4, the rows with a last update timestamp older that 4 days prior to when the job is running will be deleted."/>
-			<column name="PARM_DTL_TYP_CD" value="PurgeSessionDocumentsStep"/>
-			<column name="PARM_NM" value="NUMBER_OF_DAYS_SINCE_LAST_UPDATE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="1"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5A689075D35C7AEBE0404F8189D80321"/>
-			<column name="PARM_DESC_TXT" value="Controls when the daily batch schedule should terminate. The scheduler service implementation compares the start time of the schedule job from quartz with this time on day after the schedule job started running."/>
-			<column name="PARM_DTL_TYP_CD" value="ScheduleStep"/>
-			<column name="PARM_NM" value="CUTOFF_TIME"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="02:00:00:AM"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5A689075D35D7AEBE0404F8189D80321"/>
-			<column name="PARM_DESC_TXT" value="Controls whether when the system is comparing the schedule start day & time with the scheduleStep_CUTOFF_TIME parameter, it considers the specified time to apply to the day after the schedule starts."/>
-			<column name="PARM_DTL_TYP_CD" value="ScheduleStep"/>
-			<column name="PARM_NM" value="CUTOFF_TIME_NEXT_DAY_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="5A689075D35B7AEBE0404F8189D80321"/>
-			<column name="PARM_DESC_TXT" value="Time in milliseconds that the scheduleStep should wait between iterations."/>
-			<column name="PARM_DTL_TYP_CD" value="ScheduleStep"/>
-			<column name="PARM_NM" value="STATUS_CHECK_INTERVAL"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="30000"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="ActionList"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="290E45BA032F4F4FB423CE5F78AC52E1"/>
 			<column name="PARM_DESC_TXT" value="Flag to specify if clicking on a Document ID from the Action List will load the Document in a new window."/>
-			<column name="PARM_DTL_TYP_CD" value="ActionList"/>
 			<column name="PARM_NM" value="ACTION_LIST_DOCUMENT_POPUP_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
+			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="ActionList"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="967B0311A5E94F7191B2C544FA7DE095"/>
 			<column name="PARM_DESC_TXT" value="Flag to specify if clicking on a Route Log from the Action List will load the Route Log in a new window."/>
-			<column name="PARM_DTL_TYP_CD" value="ActionList"/>
 			<column name="PARM_NM" value="ACTION_LIST_ROUTE_LOG_POPUP_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
+			<column name="VAL" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="ActionList"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="340789CDF30F4252A1A2A42AD39B90B2"/>
 			<column name="PARM_DESC_TXT" value="Default email address used for testing."/>
-			<column name="PARM_DTL_TYP_CD" value="ActionList"/>
 			<column name="PARM_NM" value="EMAIL_NOTIFICATION_TEST_ADDRESS"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="ActionList"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="2CE075BC0C59435CA6DEFF724492DE3F"/>
 			<column name="PARM_DESC_TXT" value="Throttles the number of results returned on all users Action Lists, regardless of their user preferences.  This is intended to be used in a situation where excessively large Action Lists are causing performance issues."/>
-			<column name="PARM_DTL_TYP_CD" value="ActionList"/>
 			<column name="PARM_NM" value="PAGE_SIZE_THROTTLE"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="ActionList"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="A87659E198214A8B90BE5BEF41630411"/>
 			<column name="PARM_DESC_TXT" value="Flag to determine whether or not to send email notification."/>
-			<column name="PARM_DTL_TYP_CD" value="ActionList"/>
 			<column name="PARM_NM" value="SEND_EMAIL_NOTIFICATION_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
+			<column name="VAL" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F59AAD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Flag for enabling/disabling (Y/N) the demonstration encryption check."/>
+			<column name="PARM_NM" value="CHECK_ENCRYPTION_SERVICE_OVERRIDE_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="664F8ABEC723DBCDE0404F8189D85427"/>
+			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format dates to be used in a file name when DateTimeServiceImpl.toDateStringForFilename(Date) is called. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
+			<column name="PARM_NM" value="DATE_TO_STRING_FORMAT_FOR_FILE_NAME"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="yyyyMMdd"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="664F8ABEC725DBCDE0404F8189D85427"/>
+			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date to be displayed on a web page. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
+			<column name="PARM_NM" value="DATE_TO_STRING_FORMAT_FOR_USER_INTERFACE"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="MM/dd/yyyy"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="64B87B4C5E3B8F4CE0404F8189D8291A"/>
+			<column name="PARM_DESC_TXT" value="Used as the default country code when relating records that do not have a country code to records that do have a country code, e.g. validating a zip code where the country is not collected."/>
+			<column name="PARM_NM" value="DEFAULT_COUNTRY"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="US"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F59BAD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Flag for enabling/disabling direct inquiries on screens that are drawn by the nervous system (i.e. lookups and maintenance documents)"/>
+			<column name="PARM_NM" value="ENABLE_DIRECT_INQUIRIES_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F59CAD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Indicates whether field level help links are enabled on lookup pages and documents."/>
+			<column name="PARM_NM" value="ENABLE_FIELD_LEVEL_HELP_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F59DAD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Maximum file upload size for the application. Used by PojoFormBase. Must be an integer, optionally followed by &quot;K&quot;, &quot;M&quot;, or &quot;G&quot;. Only used if no other upload limits are in effect."/>
+			<column name="PARM_NM" value="MAX_FILE_SIZE_DEFAULT_UPLOAD"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="5M"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5a5fbe94-846f-102c-8db0-c405cae621f3"/>
+			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of regular expressions that identify 
+potentially sensitive data in strings.  These patterns will be matched 
+against notes, document explanations, and routing annotations."/>
+			<column name="PARM_NM" value="SENSITIVE_DATA_PATTERNS"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="[0-9]{9};[0-9]{3}-[0-9]{2}-[0-9]{4}"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="e7d133f3-b5fe-11df-ad0a-d18f5709259f"/>
+			<column name="PARM_DESC_TXT" value="If set to 'Y' when sensitive data is found the user will be prompted to continue the action or cancel. If this is set to 'N' the user will be presented with an error message and will not be allowed to continue with the action until the sensitive data is removed."/>
+			<column name="PARM_NM" value="SENSITIVE_DATA_PATTERNS_WARNING_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="664F8ABEC722DBCDE0404F8189D85427"/>
+			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of strings representing date formats that the DateTimeService will use to parse dates when DateTimeServiceImpl.convertToSqlDate(String) or DateTimeServiceImpl.convertToDate(String) is called. Note that patterns will be applied in the order listed (and the first applicable one will be used). For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
+			<column name="PARM_NM" value="STRING_TO_DATE_FORMATS"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="MM/dd/yyyy hh:mm a;MM/dd/yy;MM/dd/yyyy;MM-dd-yy;MMddyy;MMMM dd;yyyy;MM/dd/yy HH:mm:ss;MM/dd/yyyy HH:mm:ss;MM-dd-yy HH:mm:ss;MMddyy HH:mm:ss;MMMM dd HH:mm:ss;yyyy HH:mm:ss"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="664F8ABEC727DBCDE0404F8189D85427"/>
+			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of strings representing date formats that the DateTimeService will use to parse date and times when DateTimeServiceImpl.convertToDateTime(String) or DateTimeServiceImpl.convertToSqlTimestamp(String) is called. Note that patterns will be applied in the order listed (and the first applicable one will be used). For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
+			<column name="PARM_NM" value="STRING_TO_TIMESTAMP_FORMATS"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="MM/dd/yyyy hh:mm a;MM/dd/yy;MM/dd/yyyy;MM-dd-yy;MMddyy;MMMM dd;yyyy;MM/dd/yy HH:mm:ss;MM/dd/yyyy HH:mm:ss;MM-dd-yy HH:mm:ss;MMddyy HH:mm:ss;MMMM dd HH:mm:ss;yyyy HH:mm:ss"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="664F8ABEC724DBCDE0404F8189D85427"/>
+			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date and time string to be used in a file name when DateTimeServiceImpl.toDateTimeStringForFilename(Date) is called.. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
+			<column name="PARM_NM" value="TIMESTAMP_TO_STRING_FORMAT_FOR_FILE_NAME"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="yyyyMMdd-HH-mm-ss-S"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="664F8ABEC726DBCDE0404F8189D85427"/>
+			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date and time to be displayed on a web page. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
+			<column name="PARM_NM" value="TIMESTAMP_TO_STRING_FORMAT_FOR_USER_INTERFACE"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="MM/dd/yyyy hh:mm a"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="5C731F2968A3689AE0404F8189D86653"/>
 			<column name="PARM_DESC_TXT" value="Flag for enabling/disabling document type permission checks to use KIM Permissions as priority over Document Type policies."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
 			<column name="PARM_NM" value="KIM_PRIORITY_ON_DOC_TYP_PERMS_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
+			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="4656B6E7E9844E2C9E2255014AFC86B5"/>
-			<column name="PARM_DESC_TXT" value="The maximum number of nodes the workflow engine will process before it determines the process is a runaway process.  This is prevent infinite "loops" in the workflow engine."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
+			<column name="PARM_DESC_TXT" value="The maximum number of nodes the workflow engine will process before it determines the process is a runaway process.  This is prevent infinite &quot;loops&quot; in the workflow engine."/>
 			<column name="PARM_NM" value="MAXIMUM_NODES_BEFORE_RUNAWAY"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="All"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="8A37388A2D7A46EF9E6BF3FA8D08A03A"/>
 			<column name="PARM_DESC_TXT" value="Flag to specify whether or not a file upload box is displayed for KEW notes which allows for uploading of an attachment with the note."/>
-			<column name="PARM_DTL_TYP_CD" value="All"/>
 			<column name="PARM_NM" value="SHOW_ATTACHMENTS_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
+			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Backdoor"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="9BD6785416434C4D9E5F05AF077DB9B7"/>
 			<column name="PARM_DESC_TXT" value="Flag to show the backdoor login."/>
-			<column name="PARM_DTL_TYP_CD" value="Backdoor"/>
 			<column name="PARM_NM" value="SHOW_BACK_DOOR_LOGIN_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
+			<column name="VAL" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Batch"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D35E7AEBE0404F8189D80321"/>
+			<column name="PARM_DESC_TXT" value="Batch file types that are active options for the file upload screen."/>
+			<column name="PARM_NM" value="ACTIVE_FILE_TYPES"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="collectorInputFileType;procurementCardInputFileType;enterpriseFeederFileSetType;assetBarcodeInventoryInputFileType;customerLoadInputFileType"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="DocSearchCriteriaDTO"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="E78100F6F14C4932B54F7719FA5C27E9"/>
 			<column name="PARM_DESC_TXT" value="Flag to specify if clicking on a Document ID from Document Search will load the Document in a new window."/>
-			<column name="PARM_DTL_TYP_CD" value="DocSearchCriteriaDTO"/>
 			<column name="PARM_NM" value="DOCUMENT_SEARCH_POPUP_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
+			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="DocSearchCriteriaDTO"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="632680DDE9A7478CBD379FAF90C7AE72"/>
 			<column name="PARM_DESC_TXT" value="Flag to specify if clicking on a Route Log from Document Search will load the Route Log in a new window."/>
-			<column name="PARM_DTL_TYP_CD" value="DocSearchCriteriaDTO"/>
 			<column name="PARM_NM" value="DOCUMENT_SEARCH_ROUTE_LOG_POPUP_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
+			<column name="VAL" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="DocSearchCriteriaDTO"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="D43459D143FC46C6BF83C71AC2383B76"/>
 			<column name="PARM_DESC_TXT" value="Limit of fetch more iterations for document searches."/>
-			<column name="PARM_DTL_TYP_CD" value="DocSearchCriteriaDTO"/>
 			<column name="PARM_NM" value="FETCH_MORE_ITERATION_LIMIT"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="DocSearchCriteriaDTO"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="E324D85082184EB6967537B3EE1F655B"/>
 			<column name="PARM_DESC_TXT" value="Maximum number of documents to return from a search."/>
-			<column name="PARM_DTL_TYP_CD" value="DocSearchCriteriaDTO"/>
 			<column name="PARM_NM" value="RESULT_CAP"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Document"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="2238b58e-8fb9-102c-9461-def224dad9b3"/>
+			<column name="PARM_DESC_TXT" value="The maximum number of role or group members to display at once on their documents. If the number is above this value, the document will switch into a paging mode with only this many rows displayed at a time."/>
+			<column name="PARM_NM" value="MAX_MEMBERS_PER_PAGE"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="20"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Document"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="AB57FF8BEC7B0DA0E040C60AF05B4490"/>
+			<column name="PARM_DESC_TXT" value="Controls whether the nervous system will show the blanket approve button to a user who is authorized for blanket approval but is neither the initiator of the particular document nor the recipient of an active, pending, approve action request."/>
+			<column name="PARM_NM" value="ALLOW_ENROUTE_BLANKET_APPROVE_WITHOUT_APPROVAL_REQUEST_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Document"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F59EAD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="If Y, the Route Report button will be displayed on the document actions bar if the document is using the default DocumentAuthorizerBase.getDocumentActionFlags to set the canPerformRouteReport property of the returned DocumentActionFlags instance."/>
+			<column name="PARM_NM" value="DEFAULT_CAN_PERFORM_ROUTE_REPORT_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="N"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Document"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A0AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Maximum attachment upload size for the application. Used by KualiDocumentFormBase. Must be an integer, optionally followed by &quot;K&quot;, &quot;M&quot;, or &quot;G&quot;."/>
+			<column name="PARM_NM" value="MAX_FILE_SIZE_ATTACHMENT"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="5M"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Document"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A1AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Some documents provide the functionality to send notes to another user using a workflow FYI or acknowledge functionality. This parameter specifies the default action that will be used when sending notes. This parameter should be one of the following 2 values: &quot;K&quot; for acknowledge or &quot;F&quot; for fyi. Depending on the notes and workflow service implementation, other values may be possible."/>
+			<column name="PARM_NM" value="SEND_NOTE_WORKFLOW_NOTIFICATION_ACTIONS"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="K"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Document"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A4AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="The number of minutes before a session expires that user should be warned when a document uses pessimistic locking."/>
+			<column name="PARM_NM" value="SESSION_TIMEOUT_WARNING_MESSAGE_TIME"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="5"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="EDocLite"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="68B2EA08E13A4FF3B9EDBD5415818C93"/>
 			<column name="PARM_DESC_TXT" value="Defines whether the debug transform is enabled for eDcoLite."/>
-			<column name="PARM_DTL_TYP_CD" value="EDocLite"/>
 			<column name="PARM_NM" value="DEBUG_TRANSFORM_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
+			<column name="VAL" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="EDocLite"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="FCAEE745A7E64AF5982937C47EBC2698"/>
 			<column name="PARM_DESC_TXT" value="Defines whether XSLTC is used for eDocLite."/>
-			<column name="PARM_DTL_TYP_CD" value="EDocLite"/>
 			<column name="PARM_NM" value="USE_XSLTC_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="N"/>
+			<column name="VAL" value="N"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Feature"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="BEBDBCFA74A5458EADE2CF075FFF206E"/>
 			<column name="PARM_DESC_TXT" value="A flag to specify whether the WorkflowInfo.isLastApproverAtNode(...) API method attempts to active requests first, prior to execution."/>
-			<column name="PARM_DTL_TYP_CD" value="Feature"/>
 			<column name="PARM_NM" value="IS_LAST_APPROVER_ACTIVATE_FIRST_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-WKFLW"/>
-			<column name="OBJ_ID" value="700AB6A6E23740D0B3E00E02A8FB6347"/>
-			<column name="PARM_DESC_TXT" value="Default from email address for notifications."/>
-			<column name="PARM_DTL_TYP_CD" value="Mailer"/>
-			<column name="PARM_NM" value="FROM_ADDRESS"/>
+			<column name="CMPNT_CD" value="Lookup"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A3AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Lookup results may continue to be persisted in the DB long after they are needed. This parameter represents the maximum amount of time, in seconds, that the results will be allowed to persist in the DB before they are deleted from the DB."/>
+			<column name="PARM_NM" value="MULTIPLE_VALUE_RESULTS_EXPIRATION_SECONDS"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="quickstart@localhost"/>
+			<column name="VAL" value="86400"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Lookup"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A6AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Maximum number of rows that will be displayed on a look-up results screen."/>
+			<column name="PARM_NM" value="MULTIPLE_VALUE_RESULTS_PER_PAGE"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="100"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Lookup"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A7AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="If a maxLength attribute has not been set on a lookup result field in the data dictionary, then the result column's max length will be the value of this parameter. Set this parameter to 0 for an unlimited default length or a positive value (i.e. greater than 0) for a finite max length."/>
+			<column name="PARM_NM" value="RESULTS_DEFAULT_MAX_COLUMN_LENGTH"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="70"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Lookup"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="53680C68F5A8AD9BE0404F8189D80A6C"/>
+			<column name="PARM_DESC_TXT" value="Maximum number of results returned in a look-up query."/>
+			<column name="PARM_NM" value="RESULTS_LIMIT"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="200"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Mailer"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-WKFLW"/>
+			<column name="OBJ_ID" value="700AB6A6E23740D0B3E00E02A8FB6347"/>
+			<column name="PARM_DESC_TXT" value="Default from email address for notifications."/>
+			<column name="PARM_NM" value="FROM_ADDRESS"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="quickstart@localhost"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="Notification"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="08280F2575904F3586CF48BB97907506"/>
 			<column name="PARM_DESC_TXT" value="Defines whether or not to send a notification to users excluded from a workgroup."/>
-			<column name="PARM_DTL_TYP_CD" value="Notification"/>
 			<column name="PARM_NM" value="NOTIFY_EXCLUDED_USERS_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="PersonDocumentName"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="61645D045B0105D7E0404F8189D849B1"/>
+			<column name="PARM_NM" value="PREFIXES"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="Ms;Mrs;Mr;Dr"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="PersonDocumentName"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-IDM"/>
+			<column name="OBJ_ID" value="61645D045B0205D7E0404F8189D849B1"/>
+			<column name="PARM_NM" value="SUFFIXES"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="Jr;Sr;Mr;Md"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="PurgePendingAttachmentsStep"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D35A7AEBE0404F8189D80321"/>
+			<column name="PARM_DESC_TXT" value="Pending attachments are attachments that do not yet have a permanent link with the associated Business Object (BO). These pending attachments are stored in the attachments.pending.directory (defined in the configuration service). If the BO is never persisted, then this attachment will become orphaned (i.e. not associated with any BO), but will remain in this directory. The PurgePendingAttachmentsStep batch step deletes these pending attachment files that are older than the value of this parameter. The unit of this value is seconds. Do not set this value too short, as this will cause problems attaching files to BOs."/>
+			<column name="PARM_NM" value="MAX_AGE"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="86400"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="PurgeSessionDocumentsStep"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D3597AEBE0404F8189D80321"/>
+			<column name="PARM_DESC_TXT" value="Determines the age of the session document records that the the step will operate on, e.g. if this param is set to 4, the rows with a last update timestamp older that 4 days prior to when the job is running will be deleted."/>
+			<column name="PARM_NM" value="NUMBER_OF_DAYS_SINCE_LAST_UPDATE"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="1"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="QuickLinks"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="5292CFD9A0EA48BEB22A2EB3B3BD3CDA"/>
 			<column name="PARM_DESC_TXT" value="Comma seperated list of Document Types to exclude from the Rule Quicklinks."/>
-			<column name="PARM_DTL_TYP_CD" value="QuickLinks"/>
 			<column name="PARM_NM" value="RESTRICT_DOCUMENT_TYPES"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Rule"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="E05A692D62E54B87901D872DC37208A1"/>
 			<column name="PARM_DESC_TXT" value="Indicator to determine if rule caching is enabled."/>
-			<column name="PARM_DTL_TYP_CD" value="Rule"/>
 			<column name="PARM_NM" value="CACHING_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
+			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Rule"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="BDE964269F2743338C00A4326B676195"/>
 			<column name="PARM_DESC_TXT" value="Defines custom Document Type processes to use for certain types of routing rules."/>
-			<column name="PARM_DTL_TYP_CD" value="Rule"/>
 			<column name="PARM_NM" value="CUSTOM_DOCUMENT_TYPES"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Rule"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="21EA54B9A9E846709E76C176DE0AF47C"/>
 			<column name="PARM_DESC_TXT" value="Specifies that maximum number of delegation rules that will be displayed on a Rule inquiry before the screen shows a count of delegate rules and provides a link for the user to show them."/>
-			<column name="PARM_DTL_TYP_CD" value="Rule"/>
 			<column name="PARM_NM" value="DELEGATE_LIMIT"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="20"/>
+			<column name="VAL" value="20"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Rule"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="96868C896B4B4A8BA87AD20E42948431"/>
 			<column name="PARM_DESC_TXT" value="Flag to determine whether or not a change to a routing rule should be applied retroactively to existing documents."/>
-			<column name="PARM_DTL_TYP_CD" value="Rule"/>
 			<column name="PARM_NM" value="GENERATE_ACTION_REQUESTS_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="Y"/>
+			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
 			<column name="APPL_ID" value="KUALI"/>
-			<column name="CONS_CD" value="A"/>
+			<column name="CMPNT_CD" value="Rule"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-WKFLW"/>
 			<column name="OBJ_ID" value="8AE796DB88484468830A8879630CCF5D"/>
 			<column name="PARM_DESC_TXT" value="Amount of time after a rule change is made before the rule cache update message is sent."/>
-			<column name="PARM_DTL_TYP_CD" value="Rule"/>
 			<column name="PARM_NM" value="RULE_CACHE_REQUEUE_DELAY"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="TXT" value="5000"/>
+			<column name="VAL" value="5000"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="ScheduleStep"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D35C7AEBE0404F8189D80321"/>
+			<column name="PARM_DESC_TXT" value="Controls when the daily batch schedule should terminate. The scheduler service implementation compares the start time of the schedule job from quartz with this time on day after the schedule job started running."/>
+			<column name="PARM_NM" value="CUTOFF_TIME"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="02:00:00:AM"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="ScheduleStep"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D35D7AEBE0404F8189D80321"/>
+			<column name="PARM_DESC_TXT" value="Controls whether when the system is comparing the schedule start day &amp; time with the scheduleStep_CUTOFF_TIME parameter, it considers the specified time to apply to the day after the schedule starts."/>
+			<column name="PARM_NM" value="CUTOFF_TIME_NEXT_DAY_IND"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="Y"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KRCR_PARM_T">
+			<column name="APPL_ID" value="KUALI"/>
+			<column name="CMPNT_CD" value="ScheduleStep"/>
+			<column name="EVAL_OPRTR_CD" value="A"/>
+			<column name="NMSPC_CD" value="KR-NS"/>
+			<column name="OBJ_ID" value="5A689075D35B7AEBE0404F8189D80321"/>
+			<column name="PARM_DESC_TXT" value="Time in milliseconds that the scheduleStep should wait between iterations."/>
+			<column name="PARM_NM" value="STATUS_CHECK_INTERVAL"/>
+			<column name="PARM_TYP_CD" value="CONFG"/>
+			<column name="VAL" value="30000"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeSet>
 </databaseChangeLog>

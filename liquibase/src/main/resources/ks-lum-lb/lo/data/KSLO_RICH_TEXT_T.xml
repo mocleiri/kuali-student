@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLO_RICH_TEXT_T-initial-data" author="alubbers">
+	<changeSet id="KSLO_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSLO_RICH_TEXT_T">
 			<column name="FORMATTED" value="Students should use these technologies to support written and oral presentations in Geography."/>
 			<column name="ID" value="00e4c757-4e21-4d7b-bba8-a8f4fa83487c"/>
@@ -1044,10 +1044,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="40f35dca-a775-4a93-a97d-921a1ad2e2a8"/>
 			<column name="OBJ_ID" value="ae3eeefd-921c-4b9d-b335-b7fbfe0b43e0"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -1996,10 +1996,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="6e1454c2-fdae-4620-9506-ad950f8932c9"/>
 			<column name="OBJ_ID" value="67cccf2c-d7e8-4c5d-9ee2-c4e297f2b223"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -2703,10 +2703,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="94ddd16c-6acf-4530-8cdc-ace749d724a9"/>
 			<column name="OBJ_ID" value="bc9910f8-9676-4271-ac9c-16a17048c4ab"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -2773,10 +2773,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="97227b7c-e1fc-4d00-9e3d-011ec4e88212"/>
 			<column name="OBJ_ID" value="0832f67b-7824-48e4-8927-72732e5acee7"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -2892,10 +2892,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="9ef80846-6829-4ccb-8b21-50da83b16416"/>
 			<column name="OBJ_ID" value="12d89a5d-dcf8-4a7a-86bd-25eee83d91f6"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -3039,21 +3039,21 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Learning objectives defined by faculty that are specific to a course</p>"/>
+			<column name="FORMATTED" value="&lt;p>Learning objectives defined by faculty that are specific to a course&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-10"/>
 			<column name="OBJ_ID" value="9B03E004EFC64F3C9F89706A08787365"/>
 			<column name="PLAIN" value="Learning objectives defined by faculty that are specific to a course"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Learning objectives mandated by the Institution. They represent learning objectives of the institutions general education and are inherited by all programs</p>"/>
+			<column name="FORMATTED" value="&lt;p>Learning objectives mandated by the Institution. They represent learning objectives of the institutions general education and are inherited by all programs&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-18"/>
 			<column name="OBJ_ID" value="91102394F6A94C6CB785EBF5D8B11059"/>
 			<column name="PLAIN" value="Learning objectives mandated by the Institution. They represent learning objectives of the institutions general education and are inherited by all programs"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="<p>Learning objectives mandated by the state</p>"/>
+			<column name="FORMATTED" value="&lt;p>Learning objectives mandated by the state&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-22"/>
 			<column name="OBJ_ID" value="E741E22AD46E4A8DB29C8E4BCD8FB75D"/>
 			<column name="PLAIN" value="Learning objectives mandated by the state"/>
@@ -3102,10 +3102,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="a54684f2-7bfa-44e7-afa3-38800da929c0"/>
 			<column name="OBJ_ID" value="e5262e42-b128-4c8f-9a5f-5505054d9258"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -3242,10 +3242,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="ae0cb458-2eb3-4582-8849-3fed6f857f49"/>
 			<column name="OBJ_ID" value="a11ebc1f-d9ba-485b-b707-69abc52e9a09"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -4019,10 +4019,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="dd4f800b-d44d-486a-8a72-f2c241542bef"/>
 			<column name="OBJ_ID" value="f9a18f2b-3e2c-4511-81c8-f2c7a36a9eed"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -4096,10 +4096,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="e0a6854e-0375-478e-a076-8aadcff881ae"/>
 			<column name="OBJ_ID" value="635d83db-b136-418d-92b1-1fc4aa1441fb"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -4565,10 +4565,10 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
-			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="FORMATTED" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="ID" value="fad9e3ab-4767-4d9d-a3e9-1deb1bb50a9d"/>
 			<column name="OBJ_ID" value="394cfa7a-82de-4f0a-8485-e3ae4df24ae5"/>
-			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical & biological process in mathematical form; solving equations for the value of physical, chemical, & biological variables."/>
+			<column name="PLAIN" value="Demonstrate an ability to apply quantitative methods, including interpretation of tabular data; expression of physical, chemical &amp; biological process in mathematical form; solving equations for the value of physical, chemical, &amp; biological variables."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_RICH_TEXT_T">
@@ -4627,5 +4627,5 @@
 			<column name="PLAIN" value="Students should demonstrate an understanding of the fundamental principles, concepts and knowledge of geographic technologies used in the acquisition, processing and analysis of spatial geographic data."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

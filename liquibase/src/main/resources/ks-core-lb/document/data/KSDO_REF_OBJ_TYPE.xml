@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSDO_REF_OBJ_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSDO_REF_OBJ_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSDO_REF_OBJ_TYPE">
 			<column name="NAME" value="CluInfo"/>
 			<column name="OBJ_ID" value="37BBBB615EA940CCBB56B7D9710882B0"/>
@@ -14,5 +14,5 @@
 			<column name="TYPE_KEY" value="kuali.org.RefObjectType.ProposalInfo"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

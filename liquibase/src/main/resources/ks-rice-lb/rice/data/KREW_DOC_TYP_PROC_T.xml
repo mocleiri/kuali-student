@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_DOC_TYP_PROC_T-initial-data" author="alubbers">
+	<changeSet id="KREW_DOC_TYP_PROC_T-initial-data" author="alubbers">
 		<insert tableName="KREW_DOC_TYP_PROC_T">
 			<column name="DOC_TYP_ID" value="2011"/>
 			<column name="DOC_TYP_PROC_ID" value="2005"/>
@@ -144,5 +144,5 @@
 			<column name="NM" value="PRIMARY"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_RSLT_OPT-initial-data" author="alubbers">
+	<changeSet id="KSLU_RSLT_OPT-initial-data" author="alubbers">
 		<insert tableName="KSLU_RSLT_OPT">
 			<column name="CREATETIME" value="20101210172118"/>
 			<column name="ID" value="00146cea-9404-46a9-9659-c92a6c06e621"/>
@@ -21553,5 +21553,5 @@
 			<column name="UPDATETIME" value="20101210172138"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

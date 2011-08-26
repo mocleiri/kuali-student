@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_STMT_TYP_JN_RC_TYP-initial-data" author="alubbers">
+	<changeSet id="KSST_STMT_TYP_JN_RC_TYP-initial-data" author="alubbers">
 		<insert tableName="KSST_STMT_TYP_JN_RC_TYP">
 			<column name="ID" value="CA-1"/>
 			<column name="REQ_COM_TYPE_ID" value="kuali.reqComponent.type.course.notcompleted"/>
@@ -637,5 +637,5 @@
 			<column name="STMT_TYPE_ID" value="kuali.statement.type.program.satisfactoryProgress"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_DOC_TYP_T-initial-data" author="alubbers">
+	<changeSet id="KREW_DOC_TYP_T-initial-data" author="alubbers">
 		<insert tableName="KREW_DOC_TYP_T">
 			<column name="ACTV_IND" value="1"/>
 			<column name="BLNKT_APPR_GRP_ID" value="1"/>
@@ -14,7 +14,7 @@
 			<column name="LBL" value="Workflow Maintenance Document Type Document"/>
 			<column name="OBJ_ID" value="6166CBA1BA5D644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -31,7 +31,7 @@
 			<column name="LBL" value="Rule Maintenance Document Type Document"/>
 			<column name="OBJ_ID" value="6166CBA1BA5E644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -81,7 +81,7 @@
 			<column name="LBL" value="Namespace"/>
 			<column name="OBJ_ID" value="6166CBA1BA71644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -99,7 +99,7 @@
 			<column name="LBL" value="Parameter Type Maintenance Document"/>
 			<column name="OBJ_ID" value="6166CBA1BA72644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -117,7 +117,7 @@
 			<column name="LBL" value="Parameter Detail Type Maintenance Document"/>
 			<column name="OBJ_ID" value="6166CBA1BA73644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -135,7 +135,7 @@
 			<column name="LBL" value="Parameter Maintenance Document"/>
 			<column name="OBJ_ID" value="6166CBA1BA74644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -148,7 +148,7 @@
 			<column name="DOC_TYP_VER_NBR" value="0"/>
 			<column name="LBL" value="KualiDocument"/>
 			<column name="OBJ_ID" value="6166CBA1BA81644DE0404F8189D86C09"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -176,7 +176,7 @@
 			<column name="LBL" value="Routing Rule Delegation"/>
 			<column name="OBJ_ID" value="A6DC8753-AF90-7A01-0EF7-E6D446529668"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -362,7 +362,7 @@
 		<insert tableName="KREW_DOC_TYP_T">
 			<column name="ACTV_IND" value="1"/>
 			<column name="CUR_IND" value="1"/>
-			<column name="DOC_HDLR_URL" value="${lum.application.url}/org.kuali.student.lum.lu.ui.main.LUMMain/LUMMain.jsp?view=COURSE_PROPOSAL&idType=documentNumber"/>
+			<column name="DOC_HDLR_URL" value="${lum.application.url}/org.kuali.student.lum.lu.ui.main.LUMMain/LUMMain.jsp?view=COURSE_PROPOSAL&amp;idType=documentNumber"/>
 			<column name="DOC_TYP_DESC" value="Kuali Student Credit Course Parent Document"/>
 			<column name="DOC_TYP_ID" value="3001"/>
 			<column name="DOC_TYP_NM" value="CluCreditCourseParentDocument"/>
@@ -425,7 +425,7 @@
 			<column name="LBL" value="Kuali Student Admin Maintenance Document"/>
 			<column name="OBJ_ID" value="2F5FDC52-1BEC-E2D5-97B1-15C46D50A563"/>
 			<column name="PARNT_ID" value="2681"/>
-			<column name="POST_PRCSR" value="org.kuali.rice.kns.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
@@ -537,5 +537,5 @@
 			<column name="RTE_VER_NBR" value="2"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

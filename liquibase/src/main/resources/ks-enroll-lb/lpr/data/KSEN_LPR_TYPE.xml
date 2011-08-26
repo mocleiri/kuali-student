@@ -1,52 +1,52 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLP_LPR_TYPE-initial-data" author="alubbers">
-		<insert tableName="KSLP_LPR_TYPE">
+	<changeSet id="KSEN_LPR_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Advisor"/>
 			<column name="TYPE_DESC" value="Advisor to students in the program"/>
 			<column name="TYPE_KEY" value="kuali.lpr.advisor"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Enrollee"/>
 			<column name="TYPE_DESC" value="Enrollee in the program"/>
 			<column name="TYPE_KEY" value="kuali.lpr.enrollee"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Proctor"/>
 			<column name="TYPE_DESC" value="Person who administers a test or examination"/>
 			<column name="TYPE_KEY" value="kuali.lpr.exam.proctor"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Supervisor"/>
 			<column name="TYPE_DESC" value="Supervisor"/>
 			<column name="TYPE_KEY" value="kuali.lpr.instructor.supervisor"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Assistant Instructor"/>
-			<column name="TYPE_DESC" value="Person who assists the main instructor but is still considered an "instructor""/>
+			<column name="TYPE_DESC" value="Person who assists the main instructor but is still considered an &quot;instructor&quot;"/>
 			<column name="TYPE_KEY" value="kuali.lpr.type.instructor.assistant"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Main Instructor"/>
 			<column name="TYPE_DESC" value="Main instructor(s) responsible for course or section"/>
 			<column name="TYPE_KEY" value="kuali.lpr.type.instructor.main"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Support instructor"/>
 			<column name="TYPE_DESC" value="Persons who support the course but not in any official teaching role"/>
 			<column name="TYPE_KEY" value="kuali.lpr.type.instructor.support"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-		<insert tableName="KSLP_LPR_TYPE">
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Registrant"/>
 			<column name="TYPE_DESC" value="Registrant who is taking the course"/>
 			<column name="TYPE_KEY" value="kuali.lpr.type.registrant"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

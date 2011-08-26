@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_REQ_COM_FIELD-initial-data" author="alubbers">
+	<changeSet id="KSST_REQ_COM_FIELD-initial-data" author="alubbers">
 		<insert tableName="KSST_REQ_COM_FIELD">
 			<column name="ID" value="00841809-4855-4a2c-806a-fb9a1fc87844"/>
 			<column name="OBJ_ID" value="923d5421-9dea-4c1a-b9a9-d231975c4987"/>
@@ -2569,5 +2569,5 @@
 			<column name="VALUE" value="485712a2-5559-44d5-9c5d-5c765910d5c0"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

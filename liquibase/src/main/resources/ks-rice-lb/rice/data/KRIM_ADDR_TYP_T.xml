@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KRIM_ADDR_TYP_T-initial-data" author="alubbers">
+	<changeSet id="KRIM_ADDR_TYP_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ADDR_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ADDR_TYP_CD" value="HM"/>
@@ -27,5 +27,5 @@
 			<column name="OBJ_ID" value="5B97C50B03726110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

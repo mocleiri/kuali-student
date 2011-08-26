@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_ATP_TYPE_KEY-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_ATP_TYPE_KEY-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_ATP_TYPE_KEY">
 			<column name="ATP_TYPE_KEY" value="kuali.atp.season.Fall"/>
 			<column name="CLU_ID" value="REFERENCECOURSECCJS452"/>
@@ -11277,5 +11277,5 @@
 			<column name="OBJ_ID" value="90a07138-2ff4-42e3-94cf-20303f17ab95"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

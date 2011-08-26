@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_ATP_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSEN_ATP_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSEN_ATP_TYPE">
 			<column name="NAME" value="kuali.atp.atp.relation.associated"/>
 			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/AtpAtpRelationInfo"/>
@@ -238,5 +238,5 @@
 			<column name="TYPE_KEY" value="kuali.atp.type.Winter"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

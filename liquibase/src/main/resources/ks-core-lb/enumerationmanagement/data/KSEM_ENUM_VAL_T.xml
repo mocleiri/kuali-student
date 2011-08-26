@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEM_ENUM_VAL_T-initial-data" author="alubbers">
+	<changeSet id="KSEM_ENUM_VAL_T-initial-data" author="alubbers">
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="52.0408"/>
 			<column name="CD" value="52.0408"/>
@@ -1707,7 +1707,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="09a9e57b-1078-4bfe-88fd-9bb7fc189b8c"/>
-			<column name="OBJ_ID" value="AACD35C42D2E1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB1B0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Corequisite"/>
 			<column name="VER_NBR" value="1"/>
@@ -2228,7 +2228,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="ID" value="0c253cda-8583-4608-9df8-5ae2c22777f6"/>
-			<column name="OBJ_ID" value="AACD35C42CB61061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA30DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="2321"/>
 			<column name="VAL" value="Part Time"/>
 			<column name="VER_NBR" value="0"/>
@@ -5950,7 +5950,7 @@
 			<column name="CD" value="SPEC"/>
 			<column name="ENUM_KEY" value="kuali.lu.code.UniversityClassification"/>
 			<column name="ID" value="205b06aa-15e1-4263-ba15-02573cf51040"/>
-			<column name="OBJ_ID" value="AACD35C42CB81061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA50DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="11"/>
 			<column name="VAL" value="Program Specialization"/>
 			<column name="VER_NBR" value="0"/>
@@ -7308,7 +7308,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="ID" value="27cac13b-5d76-4d4e-a556-5f485410b959"/>
-			<column name="OBJ_ID" value="AACD35C42CB71061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA40DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="2322"/>
 			<column name="VAL" value="Both"/>
 			<column name="VER_NBR" value="0"/>
@@ -7380,7 +7380,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="ID" value="2805b962-ad17-401d-bd53-b1fba35a3ef1"/>
-			<column name="OBJ_ID" value="AACD35C42D331061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB200DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="2"/>
 			<column name="VAL" value="Satisfactory Progress Requirements"/>
 			<column name="VER_NBR" value="2"/>
@@ -7902,7 +7902,7 @@
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="2b561e88-4b2d-437b-ae13-c3233be73e48"/>
-			<column name="OBJ_ID" value="AACD35C42D0B1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAF80DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="72"/>
 			<column name="VAL" value="Business Management"/>
 			<column name="VER_NBR" value="0"/>
@@ -9006,7 +9006,7 @@
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="31d25b7f-7822-4d24-997d-6324cfb46bad"/>
-			<column name="OBJ_ID" value="AACD35C42D101061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAFD0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="77"/>
 			<column name="VAL" value="Political Science"/>
 			<column name="VER_NBR" value="0"/>
@@ -9229,7 +9229,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="3322abe6-a514-46b9-a502-1799c9030906"/>
-			<column name="OBJ_ID" value="AACD35C42D1F1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB0C0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Student Oversight Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -10807,7 +10807,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="3c934273-0fce-4090-bb37-8343882b9dc4"/>
-			<column name="OBJ_ID" value="AACD35C42D1B1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB080DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Deployment Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -11669,7 +11669,7 @@
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="40e5d836-fff1-436c-b99c-8d16674022ff"/>
-			<column name="OBJ_ID" value="AACD35C42D0C1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAF90DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="73"/>
 			<column name="VAL" value="Criminal Justice"/>
 			<column name="VER_NBR" value="0"/>
@@ -13689,7 +13689,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="4bd0e397-0764-4f7a-a010-d9191e7c7af9"/>
-			<column name="OBJ_ID" value="AACD35C42D221061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB0F0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Control Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -14290,7 +14290,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="4fa57988-a40c-45c6-8b21-3a419389cc9c"/>
-			<column name="OBJ_ID" value="AACD35C42D1E1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB0B0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Curriculum Oversight Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -14311,7 +14311,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="4fb74c25-84e1-4df4-acd5-c9d9a8e393ee"/>
-			<column name="OBJ_ID" value="AACD35C42D1A1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB070DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Student Oversight Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -16243,7 +16243,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="596d5399-4899-4519-bff2-9067f2e027d6"/>
-			<column name="OBJ_ID" value="AACD35C42D1C1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB090DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Resources Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -17329,12 +17329,12 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_VAL_T">
-			<column name="ABBREV_VAL" value="Student Elig & Prereq"/>
+			<column name="ABBREV_VAL" value="Student Elig &amp; Prereq"/>
 			<column name="CD" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="5fcd4c7c-e638-4028-8287-68d7bd1f4988"/>
-			<column name="OBJ_ID" value="AACD35C42D2C1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB190DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="3"/>
 			<column name="VAL" value="Student Eligibility and Preqrequiste"/>
 			<column name="VER_NBR" value="1"/>
@@ -18743,7 +18743,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="67e99363-5be4-4996-aeef-aad3172c314f"/>
-			<column name="OBJ_ID" value="AACD35C42D231061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB100DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Institution"/>
 			<column name="VER_NBR" value="1"/>
@@ -21506,7 +21506,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="777dc110-1707-41ed-9014-13e6e769d815"/>
-			<column name="OBJ_ID" value="AACD35C42D2F1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB1C0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Courses that Restrict Credit"/>
 			<column name="VER_NBR" value="1"/>
@@ -22728,7 +22728,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="7db97425-d6bb-45b2-9873-1905d228f203"/>
-			<column name="OBJ_ID" value="AACD35C42D211061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB0E0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Resources Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -23990,7 +23990,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="850a28c9-ebfb-4199-8769-6693404ce4af"/>
-			<column name="OBJ_ID" value="AACD35C42D2A1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB170DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="1"/>
 			<column name="VAL" value="Cross-listed Courses"/>
 			<column name="VER_NBR" value="1"/>
@@ -24572,7 +24572,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="ID" value="8804149a-038a-47f7-932d-bcf392d3d263"/>
-			<column name="OBJ_ID" value="AACD35C42D311061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB1E0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="3"/>
 			<column name="VAL" value="Completion Requirements"/>
 			<column name="VER_NBR" value="2"/>
@@ -26284,7 +26284,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="91c476ec-89f5-4386-a52f-ab69064d0caa"/>
-			<column name="OBJ_ID" value="AACD35C42D201061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB0D0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Deployment Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -28537,7 +28537,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA61"/>
-			<column name="OBJ_ID" value="AACD35C42CB91061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA60DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="61"/>
 			<column name="VAL" value="Arts and Humanities"/>
 			<column name="VER_NBR" value="0"/>
@@ -28548,7 +28548,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA62"/>
-			<column name="OBJ_ID" value="AACD35C42CBA1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA70DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="62"/>
 			<column name="VAL" value="Bio Chemistry"/>
 			<column name="VER_NBR" value="0"/>
@@ -28559,7 +28559,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA63"/>
-			<column name="OBJ_ID" value="AACD35C42CBB1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA80DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="63"/>
 			<column name="VAL" value="Biometrics"/>
 			<column name="VER_NBR" value="0"/>
@@ -28570,7 +28570,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA64"/>
-			<column name="OBJ_ID" value="AACD35C42CBC1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA90DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="64"/>
 			<column name="VAL" value="Biological Sciences"/>
 			<column name="VER_NBR" value="0"/>
@@ -28581,7 +28581,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA65"/>
-			<column name="OBJ_ID" value="AACD35C42CBD1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAAA0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="65"/>
 			<column name="VAL" value="Gemstone"/>
 			<column name="VER_NBR" value="0"/>
@@ -28592,7 +28592,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA66"/>
-			<column name="OBJ_ID" value="AACD35C42CBE1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAAB0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="66"/>
 			<column name="VAL" value="Honors"/>
 			<column name="VER_NBR" value="0"/>
@@ -28603,7 +28603,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA67"/>
-			<column name="OBJ_ID" value="AACD35C42CBF1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAAC0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="67"/>
 			<column name="VAL" value="Math"/>
 			<column name="VER_NBR" value="0"/>
@@ -28614,7 +28614,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA68"/>
-			<column name="OBJ_ID" value="AACD35C42CC01061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAAD0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="68"/>
 			<column name="VAL" value="Physics"/>
 			<column name="VER_NBR" value="0"/>
@@ -28625,7 +28625,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA69"/>
-			<column name="OBJ_ID" value="AACD35C42CC11061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAAE0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="69"/>
 			<column name="VAL" value="Statistics"/>
 			<column name="VER_NBR" value="0"/>
@@ -28636,7 +28636,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA70"/>
-			<column name="OBJ_ID" value="AACD35C42CC21061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAAF0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="70"/>
 			<column name="VAL" value="University Studies"/>
 			<column name="VER_NBR" value="0"/>
@@ -29478,7 +29478,7 @@
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="a594b618-0d7b-4945-a970-805b8ec1eeb5"/>
-			<column name="OBJ_ID" value="AACD35C42D0E1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAFB0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="75"/>
 			<column name="VAL" value="Economics"/>
 			<column name="VER_NBR" value="0"/>
@@ -29549,7 +29549,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="a5d39acc-80d8-4cba-a8bb-13cce6561ab8"/>
-			<column name="OBJ_ID" value="AACD35C42D181061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB050DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Admistering Org"/>
 			<column name="VER_NBR" value="1"/>
@@ -29930,7 +29930,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="ID" value="a8fdd335-ecac-4075-9feb-89266fa6e4d7"/>
-			<column name="OBJ_ID" value="AACD35C42CB51061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAA20DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="2320"/>
 			<column name="VAL" value="Full Time"/>
 			<column name="VER_NBR" value="0"/>
@@ -30461,7 +30461,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="abb0a915-1400-4faf-8295-6baf28ff008d"/>
-			<column name="OBJ_ID" value="AACD35C42D1D1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB0A0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Control Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -32532,7 +32532,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="b75a9fac-fa91-4cf1-93ee-890189a454f9"/>
-			<column name="OBJ_ID" value="AACD35C42D171061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB040DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Curriculum Oversight"/>
 			<column name="VER_NBR" value="1"/>
@@ -32593,7 +32593,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="b7d8c960-fb52-4db9-8a02-99c6ad802d74"/>
-			<column name="OBJ_ID" value="AACD35C42D2B1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB180DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Jointly-Offered Courses"/>
 			<column name="VER_NBR" value="1"/>
@@ -33035,7 +33035,7 @@
 			<column name="ID" value="ba4f0029-6e29-450a-85f7-88d4309c061e"/>
 			<column name="OBJ_ID" value="9B44F94CC731414C9316805FC8315679"/>
 			<column name="SORT_KEY" value="990"/>
-			<column name="VAL" value="Command & Control (C3, C4I) Systems and Operations."/>
+			<column name="VAL" value="Command &amp; Control (C3, C4I) Systems and Operations."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_VAL_T">
@@ -35134,7 +35134,7 @@
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="c70d6d2d-b3cf-4346-a246-5a84874e343b"/>
-			<column name="OBJ_ID" value="AACD35C42D0A1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAF70DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="71"/>
 			<column name="VAL" value="Art History"/>
 			<column name="VER_NBR" value="0"/>
@@ -35455,7 +35455,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="ID" value="c8f2e35a-9bb2-4803-903a-ab877133840e"/>
-			<column name="OBJ_ID" value="AACD35C42D321061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB1F0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="1"/>
 			<column name="VAL" value="Entrance Requirements"/>
 			<column name="VER_NBR" value="2"/>
@@ -38175,7 +38175,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="d88d37fa-cdb0-458b-9e1f-c51100d51172"/>
-			<column name="OBJ_ID" value="AACD35C42D191061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB060DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Curriculum Oversight Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -40167,7 +40167,7 @@
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="e31e16b8-4b3b-4f3b-84a6-31a229eb65bb"/>
-			<column name="OBJ_ID" value="AACD35C42D121061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEAFF0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="79"/>
 			<column name="VAL" value="Theater"/>
 			<column name="VER_NBR" value="0"/>
@@ -42808,7 +42808,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.courseSet.types"/>
 			<column name="ID" value="f32403a1-cc9d-4004-9a95-f5da290b55e2"/>
-			<column name="OBJ_ID" value="AACD35C42D301061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB1D0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="2"/>
 			<column name="VAL" value="All Course Sets"/>
 			<column name="VER_NBR" value="4"/>
@@ -44079,7 +44079,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="fa86a628-9601-4308-8a28-71d406bd19e9"/>
-			<column name="OBJ_ID" value="AACD35C42D2D1061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEB1A0DA0E040C60AF05B4490"/>
 			<column name="SORT_KEY" value="4"/>
 			<column name="VAL" value="Antirequisite"/>
 			<column name="VER_NBR" value="1"/>
@@ -44944,5 +44944,5 @@
 			<column name="VAL" value="Dance, General."/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

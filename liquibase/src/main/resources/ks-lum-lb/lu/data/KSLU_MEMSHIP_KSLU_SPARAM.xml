@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_MEMSHIP_KSLU_SPARAM-initial-data" author="alubbers">
+	<changeSet id="KSLU_MEMSHIP_KSLU_SPARAM-initial-data" author="alubbers">
 		<insert tableName="KSLU_MEMSHIP_KSLU_SPARAM">
 			<column name="KSLU_MEMSHIP_ID" value="517e480c-67dc-48b5-80b1-43a6f935f793"/>
 			<column name="SEARCHPARAMETERS_ID" value="036c3609-48da-432a-9949-0d93c3b99f05"/>
@@ -40,5 +40,5 @@
 			<column name="KSLU_MEMSHIP_ID" value="29dc99e5-684b-4327-bdf4-9ee4af041b33"/>
 			<column name="SEARCHPARAMETERS_ID" value="f164e510-ae46-477b-85a3-aacec0d37111"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

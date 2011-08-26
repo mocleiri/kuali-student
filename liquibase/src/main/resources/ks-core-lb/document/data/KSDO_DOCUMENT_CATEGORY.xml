@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSDO_DOCUMENT_CATEGORY-initial-data" author="alubbers">
+	<changeSet id="KSDO_DOCUMENT_CATEGORY-initial-data" author="alubbers">
 		<insert tableName="KSDO_DOCUMENT_CATEGORY">
 			<column name="CATEGORY_ID" value="documentCategory.course"/>
 			<column name="EFF_DT" value="20000101000000"/>
@@ -16,5 +16,5 @@
 			<column name="RT_DESCR_ID" value="RT-DESC-DOCUMENT-1"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

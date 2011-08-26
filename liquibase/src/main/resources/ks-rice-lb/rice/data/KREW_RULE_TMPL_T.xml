@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KREW_RULE_TMPL_T-initial-data" author="alubbers">
+	<changeSet id="KREW_RULE_TMPL_T-initial-data" author="alubbers">
 		<insert tableName="KREW_RULE_TMPL_T">
 			<column name="NM" value="WorkflowDocumentDelegationTemplate"/>
 			<column name="OBJ_ID" value="6166CBA1BA86644DE0404F8189D86C09"/>
@@ -36,5 +36,5 @@
 			<column name="RULE_TMPL_ID" value="1320"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

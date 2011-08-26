@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSOR_ORG_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSOR_ORG_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG_TYPE">
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="NAME" value="Accrediting Body"/>
@@ -139,7 +139,7 @@
 		<insert tableName="KSOR_ORG_TYPE">
 			<column name="EFF_DT" value="20100701000000"/>
 			<column name="NAME" value="Testing Service"/>
-			<column name="OBJ_ID" value="AACD35C42CF01061E040C60AF05B56E5"/>
+			<column name="OBJ_ID" value="AB57FF8BEADD0DA0E040C60AF05B4490"/>
 			<column name="TYPE_DESC" value="An organization creates and administers standardized tests"/>
 			<column name="TYPE_KEY" value="kuali.org.TestingService"/>
 			<column name="VER_NBR" value="0"/>
@@ -152,5 +152,5 @@
 			<column name="TYPE_KEY" value="kuali.org.WorkGroup"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

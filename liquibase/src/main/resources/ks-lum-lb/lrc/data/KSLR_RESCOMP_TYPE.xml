@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLR_RESCOMP_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSLR_RESCOMP_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLR_RESCOMP_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Certificate"/>
@@ -56,5 +56,5 @@
 			<column name="TYPE_KEY" value="kuali.resultComponentType.grade.finalGrade"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

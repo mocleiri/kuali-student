@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="alubbers" id="mysql-index-length-updates" dbms="mysql">
+        <modifyDataType tableName="KREW_DOC_HDR_EXT_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
+        <modifyDataType tableName="KREW_RTE_BRCH_ST_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
+        <modifyDataType tableName="KREW_RTE_NODE_INSTN_ST_T" columnName="VAL" newDataType="java.sql.Types.VARCHAR(500)" />
+        <modifyDataType tableName="KREW_RULE_EXT_VAL_T" columnName="KEY_CD" newDataType="java.sql.Types.VARCHAR(500)" />
+        <modifyDataType tableName="KRSB_BAM_T" columnName="MTHD_NM" newDataType="java.sql.Types.VARCHAR(500)" />
+        <modifyDataType tableName="KRSB_MSG_QUE_T" columnName="SVC_MTHD_NM" newDataType="java.sql.Types.VARCHAR(500)" />
+        <modifyDataType tableName="KRSB_MSG_QUE_T" columnName="IP_NBR" newDataType="java.sql.Types.VARCHAR(500)" />
+    </changeSet>
+</databaseChangeLog>

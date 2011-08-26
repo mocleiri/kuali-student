@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLR_RESULT_VALUE-initial-data" author="alubbers">
+	<changeSet id="KSLR_RESULT_VALUE-initial-data" author="alubbers">
 		<insert tableName="KSLR_RESULT_VALUE">
 			<column name="ID" value="0-59%"/>
 			<column name="RSLT_COMP_ID" value="kuali.resultComponent.grade.percentage"/>
@@ -280,5 +280,5 @@
 			<column name="VALUE" value="2.0"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

@@ -1,128 +1,128 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSST_REQ_COM_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSST_REQ_COM_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Completed course"/>
-			<column name="TYPE_DESC" value="Must have successfully completed <course>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed &lt;course>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.completed"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="All of required courses"/>
-			<column name="TYPE_DESC" value="Must have successfully completed all courses from <courses>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed all courses from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.completed.all"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Completed n courses"/>
-			<column name="TYPE_DESC" value="Must have successfully completed no more than <n> courses from <courses>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed no more than &lt;n> courses from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.completed.max"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="N of required courses"/>
-			<column name="TYPE_DESC" value="Must have successfully completed a minimum of <n> courses from <courses>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed a minimum of &lt;n> courses from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.completed.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="None of required courses"/>
-			<column name="TYPE_DESC" value="Must not have successfully completed any courses from <courses>"/>
+			<column name="TYPE_DESC" value="Must not have successfully completed any courses from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.completed.none"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Maximum credit from courses"/>
-			<column name="TYPE_DESC" value="Must successfully complete no more than  <n> credits from <courses>"/>
+			<column name="TYPE_DESC" value="Must successfully complete no more than  &lt;n> credits from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.credits.completed.max"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Completed N credits from courses"/>
-			<column name="TYPE_DESC" value="Must have successfully completed a minimum of <n> credits from <courses>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed a minimum of &lt;n> credits from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.credits.completed.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Completed none credits from courses"/>
-			<column name="TYPE_DESC" value="Must not have successfully completed any credits from <courses>"/>
+			<column name="TYPE_DESC" value="Must not have successfully completed any credits from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.credits.completed.none"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Enrolled in all required courses"/>
-			<column name="TYPE_DESC" value="Must be concurrently enrolled in all courses from <courses>"/>
+			<column name="TYPE_DESC" value="Must be concurrently enrolled in all courses from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.enrolled.all"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Enrolled in N of required courses"/>
-			<column name="TYPE_DESC" value="Must be concurrently enrolled in a minimum of <n> courses from <courses>"/>
+			<column name="TYPE_DESC" value="Must be concurrently enrolled in a minimum of &lt;n> courses from &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.enrolled.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minimum overall GPA"/>
-			<column name="TYPE_DESC" value="Must have earned a minimum GPA of <GPA> in <courses>"/>
+			<column name="TYPE_DESC" value="Must have earned a minimum GPA of &lt;GPA> in &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.gpa.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Grade in required courses"/>
-			<column name="TYPE_DESC" value="Must not have earned a grade of <gradeType> <grade> or higher in <courses>"/>
+			<column name="TYPE_DESC" value="Must not have earned a grade of &lt;gradeType> &lt;grade> or higher in &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.grade.max"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Grade in required courses"/>
-			<column name="TYPE_DESC" value="Must have earned a minimum grade of <gradeType> <grade> in <courses>"/>
+			<column name="TYPE_DESC" value="Must have earned a minimum grade of &lt;gradeType> &lt;grade> in &lt;courses>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.grade.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minimum grade in required courses"/>
-			<column name="TYPE_DESC" value="Must successfully complete a minimum of <n> courses from <courses> with a minimum grade of <gradeType> <grade>"/>
+			<column name="TYPE_DESC" value="Must successfully complete a minimum of &lt;n> courses from &lt;courses> with a minimum grade of &lt;gradeType> &lt;grade>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.courseset.nof.grade.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Course repeatable for maximum credit"/>
-			<column name="TYPE_DESC" value="May be repeated for a maximum of <n> credits"/>
+			<column name="TYPE_DESC" value="May be repeated for a maximum of &lt;n> credits"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.credits.repeat.max"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Enrolled in course"/>
-			<column name="TYPE_DESC" value="Must be concurrently enrolled in <course> "/>
+			<column name="TYPE_DESC" value="Must be concurrently enrolled in &lt;course> "/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.enrolled"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Not completed course"/>
-			<column name="TYPE_DESC" value="Must not have successfully completed <course> "/>
+			<column name="TYPE_DESC" value="Must not have successfully completed &lt;course> "/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.notcompleted"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minimum credit completion in organization/department"/>
-			<column name="TYPE_DESC" value="Must have successfully completed a minimum of <n> credits from courses in the <org>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed a minimum of &lt;n> credits from courses in the &lt;org>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.org.credits.completed.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -143,91 +143,91 @@
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Organization permisison required"/>
-			<column name="TYPE_DESC" value="Permission of <administering org> required"/>
+			<column name="TYPE_DESC" value="Permission of &lt;administering org> required"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.permission.org.required"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Program admission restriction"/>
-			<column name="TYPE_DESC" value="Must have been admitted to the <program> program"/>
+			<column name="TYPE_DESC" value="Must have been admitted to the &lt;program> program"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.program.admitted"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Program admission for courses in duration"/>
-			<column name="TYPE_DESC" value="Students admitted to <program> may take no more than <n> courses in the <org> in <duration> <durationType>"/>
+			<column name="TYPE_DESC" value="Students admitted to &lt;program> may take no more than &lt;n> courses in the &lt;org> in &lt;duration> &lt;durationType>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.program.admitted.org.duration"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Program admission restriction"/>
-			<column name="TYPE_DESC" value="Must not have been admitted to the <program> program"/>
+			<column name="TYPE_DESC" value="Must not have been admitted to the &lt;program> program"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.program.notadmitted"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Program admission course restriction in duration"/>
-			<column name="TYPE_DESC" value="Students not admitted to <program> may take no more than <n> courses in the <org> in <duration> <durationType>"/>
+			<column name="TYPE_DESC" value="Students not admitted to &lt;program> may take no more than &lt;n> courses in the &lt;org> in &lt;duration> &lt;durationType>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.program.notadmitted.org.duration"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Maximum score on test"/>
-			<column name="TYPE_DESC" value="Must have achieved a score no higher than <score> on <test> "/>
+			<column name="TYPE_DESC" value="Must have achieved a score no higher than &lt;score> on &lt;test> "/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.test.score.max"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minimum score on test"/>
-			<column name="TYPE_DESC" value="Must have achieved a minimum score of <score> on <tests>"/>
+			<column name="TYPE_DESC" value="Must have achieved a minimum score of &lt;score> on &lt;tests>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.course.test.score.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Earning n credits"/>
-			<column name="TYPE_DESC" value="Must be admitted to program prior to earning <n> credits"/>
+			<column name="TYPE_DESC" value="Must be admitted to program prior to earning &lt;n> credits"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.admitted.credits"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Candidate status within duration after program entry"/>
-			<column name="TYPE_DESC" value="Must attain candidate status within <n> <duration> after program entry term"/>
+			<column name="TYPE_DESC" value="Must attain candidate status within &lt;n> &lt;duration> after program entry term"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.candidate.status.duration"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Not exceed n duration without completing program"/>
-			<column name="TYPE_DESC" value="Must not exceed <n> <duration> without completing program"/>
+			<column name="TYPE_DESC" value="Must not exceed &lt;n> &lt;duration> without completing program"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.completion.duration"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Complete program within duration after program entry"/>
-			<column name="TYPE_DESC" value="Must complete program within <n> <durations> after program entry term"/>
+			<column name="TYPE_DESC" value="Must complete program within &lt;n> &lt;durations> after program entry term"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.completion.duration.afterentry"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Earned more than n credits"/>
-			<column name="TYPE_DESC" value="Must not have earned more than <n> credits"/>
+			<column name="TYPE_DESC" value="Must not have earned more than &lt;n> credits"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.credits.max"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Earned minimum n credits"/>
-			<column name="TYPE_DESC" value="Must have earned a minimum of <n> total credits"/>
+			<column name="TYPE_DESC" value="Must have earned a minimum of &lt;n> total credits"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.credits.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -235,7 +235,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="EXPIR_DT" value="20371231000000"/>
 			<column name="NAME" value="Minimum cumulative GPA"/>
-			<column name="TYPE_DESC" value="Must have earned a minimum cumulative GPA of <GPA>"/>
+			<column name="TYPE_DESC" value="Must have earned a minimum cumulative GPA of &lt;GPA>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.cumulative.gpa.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -243,14 +243,14 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="EXPIR_DT" value="20371231000000"/>
 			<column name="NAME" value="Minimum duration GPA"/>
-			<column name="TYPE_DESC" value="Must have earned a minimum <duration> GPA of <GPA>"/>
+			<column name="TYPE_DESC" value="Must have earned a minimum &lt;duration> GPA of &lt;GPA>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.duration.gpa.min"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Program enrolled in graduation major for final credits"/>
-			<column name="TYPE_DESC" value="<program> student must be enrolled in their graduation major for the final <n> credits taken"/>
+			<column name="TYPE_DESC" value="&lt;program> student must be enrolled in their graduation major for the final &lt;n> credits taken"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.enrolled.credits.final"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -264,44 +264,44 @@
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minors as part of a program"/>
-			<column name="TYPE_DESC" value="Must earn no more than <n> minors as part of a program"/>
+			<column name="TYPE_DESC" value="Must earn no more than &lt;n> minors as part of a program"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.minors.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="All of required programs"/>
-			<column name="TYPE_DESC" value="Must have successfully completed all of <programs>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed all of &lt;programs>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.programset.completed.all"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minimum of n programs from programs"/>
-			<column name="TYPE_DESC" value="Must have successfully completed a minimum of <n> programs from <programs>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed a minimum of &lt;n> programs from &lt;programs>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.programset.completed.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Minimum courses from programs"/>
-			<column name="TYPE_DESC" value="Must have successfully completed a minimum of <n> courses from <programs>"/>
+			<column name="TYPE_DESC" value="Must have successfully completed a minimum of &lt;n> courses from &lt;programs>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.programset.coursecompleted.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Not completed any programs"/>
-			<column name="TYPE_DESC" value="Must not have successfully completed any of <programs>"/>
+			<column name="TYPE_DESC" value="Must not have successfully completed any of &lt;programs>"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.programset.notcompleted.nof"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Program final credits in residence"/>
-			<column name="TYPE_DESC" value="<program> students must take their final <n> credits in residence"/>
+			<column name="TYPE_DESC" value="&lt;program> students must take their final &lt;n> credits in residence"/>
 			<column name="TYPE_KEY" value="kuali.reqComponent.type.program.residence.credits.final"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

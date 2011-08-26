@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLU_CLU_JN_CLU_IDENT-initial-data" author="alubbers">
+	<changeSet id="KSLU_CLU_JN_CLU_IDENT-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_JN_CLU_IDENT">
 			<column name="ALT_CLU_ID" value="0d608580-baff-41bf-982b-18f5bf805b1a"/>
 			<column name="CLU_ID" value="REFERENCEPROG-CCJS"/>
@@ -148,5 +148,5 @@
 			<column name="ALT_CLU_ID" value="f69edf19-a229-417e-b5e0-642031cc1076"/>
 			<column name="CLU_ID" value="REFERENCECOURSEAASP298"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

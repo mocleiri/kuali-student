@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSLR_RICH_TEXT_T-initial-data" author="alubbers">
+	<changeSet id="KSLR_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSLR_RICH_TEXT_T">
 			<column name="ID" value="DEGREE-BA"/>
 			<column name="OBJ_ID" value="58CB0A4EC9BE4729A64BBBA1E084E7A5"/>
@@ -66,5 +66,5 @@
 			<column name="PLAIN" value="Satisfactory/unsatisfactory"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

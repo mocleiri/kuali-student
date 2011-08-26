@@ -1,5 +1,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSAP_MLSTN_TYPE-initial-data" author="alubbers">
+	<changeSet id="KSAP_MLSTN_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSAP_MLSTN_TYPE">
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Admissions Application Due Early Cycle"/>
@@ -100,7 +100,7 @@
 			<column name="EFF_DT" value="20000101000000"/>
 			<column name="NAME" value="Drop Deadline Without Record"/>
 			<column name="OBJ_ID" value="0FB23F33DEFD4A6A9876BAEA78FAE032"/>
-			<column name="TYPE_DESC" value="Deadline to drop w/o "W""/>
+			<column name="TYPE_DESC" value="Deadline to drop w/o &quot;W&quot;"/>
 			<column name="TYPE_KEY" value="kuali.atp.Milestone.DropDeadlineWithoutRecord"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -392,5 +392,5 @@
 			<column name="TYPE_KEY" value="kuali.atp.Milestone.ThanksgivingBreakEnd"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>

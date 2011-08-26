@@ -1,8 +1,8 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeLog id="KSEN_LUI_JN_LUI_INSTR-initial-data" author="alubbers">
+	<changeSet id="KSEN_LUI_JN_LUI_INSTR-initial-data" author="alubbers">
 		<insert tableName="KSEN_LUI_JN_LUI_INSTR">
 			<column name="LUI_ID" value="Lui-1"/>
 			<column name="LUI_INSTR_ID" value="LUI-INSTR-1"/>
 		</insert>
-	</changeLog>
+	</changeSet>
 </databaseChangeLog>
