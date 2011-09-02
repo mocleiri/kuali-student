@@ -16,6 +16,7 @@
     <column name="PERSONID" type="java.sql.Types.VARCHAR(255)" />
     <column name="RELATION_STATE_ID" type="java.sql.Types.VARCHAR(255)" />
     <column name="RELATION_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="COMMITMENTPERCENT" type="${decimal.type}(17,17)"/>
   </createTable>
 </changeSet>
 <changeSet author="andy (generated)" id="1311191427300-309">
