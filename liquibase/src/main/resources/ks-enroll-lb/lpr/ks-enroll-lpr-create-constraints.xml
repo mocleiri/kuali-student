@@ -10,5 +10,16 @@
         <addForeignKeyConstraint constraintName="FKDF4BE635DC3CD520" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR" referencedColumnNames="ID" />
         <addForeignKeyConstraint constraintName="FKDF4BE635EA869E3D" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR_STATE" referencedColumnNames="ID" />
     </changeSet>
+    
+    <changeSet id="ksen_lpr_roster-constraints" author="alubbers">
+	<addNotNullConstraint tableName="KSEN_LPR_ROSTER" columnName="ID" columnDataType="java.sql.Types.VARCHAR(255)" />
+	<addPrimaryKey tableName="KSEN_LPR_ROSTER" columnNames="ID" constraintName="KSEN_LPR_ROSTER_PK"/>
+	<addForeignKeyConstraint constraintName="KSEN_LPR_ROSTER_FK1" baseTableName="KSEN_LPR_ROSTER" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" />
+    </changeSet>
+    
+    <changeSet id="ksen_lprroster_lui_reltn-constraints" author="alubbers">
+	<addForeignKeyConstraint constraintName="KSEN_LPRROSTER_LUI_RELTN_FK1" baseTableName="KSEN_LPRROSTER_LUI_RELTN" baseColumnNames="LPRROSTER_ID" referencedTableName="KSEN_LPR_ROSTER" referencedColumnNames="ID" />
+	<addForeignKeyConstraint constraintName="KSEN_LPRROSTER_LUI_RELTN_FK2" baseTableName="KSEN_LPRROSTER_LUI_RELTN" baseColumnNames="LUI_ID" referencedTableName="KSEN_LUI" referencedColumnNames="ID" />
+    </changeSet>
 
 </databaseChangeLog>

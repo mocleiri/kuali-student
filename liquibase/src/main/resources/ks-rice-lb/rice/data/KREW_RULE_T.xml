@@ -4,7 +4,7 @@
 			<column name="ACTVN_DT" value="20080801155902"/>
 			<column name="ACTV_IND" value="1"/>
 			<column name="CUR_IND" value="1"/>
-			<column name="DACTVN_DT" value="20370101000000"/>
+			<column name="DACTVN_DT" value="21000101000000"/>
 			<column name="DLGN_IND" value="0"/>
 			<column name="DOC_TYP_NM" value="SendNotificationRequest"/>
 			<column name="FRC_ACTN" value="1"/>
@@ -16,7 +16,7 @@
 			<column name="RULE_TMPL_ID" value="1023"/>
 			<column name="RULE_VER_NBR" value="0"/>
 			<column name="TMPL_RULE_IND" value="0"/>
-			<column name="TO_DT" value="20370101000000"/>
+			<column name="TO_DT" value="21000101000000"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

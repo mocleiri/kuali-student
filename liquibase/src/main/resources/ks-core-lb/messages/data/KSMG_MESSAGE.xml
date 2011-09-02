@@ -2874,20 +2874,20 @@
 		</insert>
 		<insert tableName="KSMG_MESSAGE">
 			<column name="GRP_NAME" value="validation"/>
-			<column name="ID" value="AB57FF8BEB000DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1C28F6AE040C60AF05B7F22"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="validation.validChars.numeric.range"/>
 			<column name="MSG_VALUE" value="Single number or numeric range separated by a dash"/>
-			<column name="OBJ_ID" value="AB57FF8BEB010DA0E040C60AF05B4490"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1C38F6AE040C60AF05B7F22"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSMG_MESSAGE">
 			<column name="GRP_NAME" value="validation"/>
-			<column name="ID" value="AB57FF8BEB020DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1C48F6AE040C60AF05B7F22"/>
 			<column name="LOCALE" value="en"/>
 			<column name="MSG_ID" value="validation.validChars.positive.numeric.range"/>
 			<column name="MSG_VALUE" value="Positive single number or postive numeric range separated by a dash"/>
-			<column name="OBJ_ID" value="AB57FF8BEB030DA0E040C60AF05B4490"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1C58F6AE040C60AF05B7F22"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSMG_MESSAGE">

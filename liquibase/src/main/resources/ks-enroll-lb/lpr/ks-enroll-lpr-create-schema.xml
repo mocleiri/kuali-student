@@ -60,4 +60,31 @@
     <column name="REF_OBJECT_URI" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
+<changeSet author="alubbers" id="create-table-KSEN_LPR_ROSTER">
+	<createTable tableName="KSEN_LPR_ROSTER">
+		<column name="ID" type="java.sql.Types.VARCHAR(255)"/>
+		<column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+		<column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+		<column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+		<column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+		<column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+		<column name="VER_NBR" type="${bigint.type}(19)" />
+		<column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+		<column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+		<column name="MAX_CAPACITY" type="${integer.type}(10)" />
+		<column name="CHECK_IN_REQ" type="BOOLEAN" />
+		<column name="STATE_ID" type="java.sql.Types.VARCHAR(255)" />
+		<column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+		<column name="ATP_DUR_TYP_KEY" type="java.sql.Types.VARCHAR(255)" />
+		<column name="TM_QUANTITY" type="${integer.type}(10)" />
+	</createTable>
+</changeSet>
+
+<changeSet author="alubbers" id="create-table-KSEN_LPRROSTER_LUI_RELTN">
+	<createTable tableName="KSEN_LPRROSTER_LUI_RELTN">
+		<column name="LPRROSTER_ID" type="java.sql.Types.VARCHAR(255)"/>
+		<column name="LUI_ID" type="java.sql.Types.VARCHAR(255)" />
+	</createTable>
+</changeSet>
+
 </databaseChangeLog>

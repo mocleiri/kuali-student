@@ -4,21 +4,21 @@
 			<column name="CTX_KEY" value="kuali.lu.adminOrg.courseCurriculumOrg"/>
 			<column name="CTX_VAL" value="default"/>
 			<column name="ID" value="7"/>
-			<column name="OBJ_ID" value="AB57FF8BEB120DA0E040C60AF05B4490"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1D48F6AE040C60AF05B7F22"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEM_CTX_T">
 			<column name="CTX_KEY" value="kuali.lu.adminOrg.programCurriculumOrg"/>
 			<column name="CTX_VAL" value="default"/>
 			<column name="ID" value="8"/>
-			<column name="OBJ_ID" value="AB57FF8BEB130DA0E040C60AF05B4490"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1D58F6AE040C60AF05B7F22"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEM_CTX_T">
 			<column name="CTX_KEY" value="kuali.lu.adminOrg.courseProgramCurriculumOrg"/>
 			<column name="CTX_VAL" value="default"/>
 			<column name="ID" value="9"/>
-			<column name="OBJ_ID" value="AB57FF8BEB110DA0E040C60AF05B4490"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1D38F6AE040C60AF05B7F22"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

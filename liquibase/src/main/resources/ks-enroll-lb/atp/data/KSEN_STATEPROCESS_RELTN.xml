@@ -40,6 +40,12 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_STATEPROCESS_RELTN">
+			<column name="ID" value="PROCESS-15"/>
+			<column name="NEXT_STATEKEY" value="kuali.lpr.state.planned"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.process.student.course.registration"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATEPROCESS_RELTN">
 			<column name="ID" value="PROCESS-2"/>
 			<column name="NEXT_STATEKEY" value="kuali.atp.state.Official"/>
 			<column name="PRIOR_STATEKEY" value="kuali.atp.state.Draft"/>

@@ -2427,1094 +2427,1094 @@
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB220DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB230DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1E48F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1E58F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="28"/>
 			<column name="RELATED_ORG" value="143"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB240DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB250DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1E68F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1E78F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="29"/>
 			<column name="RELATED_ORG" value="144"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB260DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB270DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1E88F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1E98F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="30"/>
 			<column name="RELATED_ORG" value="145"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB280DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB290DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1EA8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1EB8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="31"/>
 			<column name="RELATED_ORG" value="146"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB2A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB2B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1EC8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1ED8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="50"/>
 			<column name="RELATED_ORG" value="147"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB2C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB2D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1EE8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1EF8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="51"/>
 			<column name="RELATED_ORG" value="148"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB2E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB2F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1F08F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1F18F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="52"/>
 			<column name="RELATED_ORG" value="149"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB300DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB310DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1F28F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1F38F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="53"/>
 			<column name="RELATED_ORG" value="150"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB320DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB330DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1F48F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1F58F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="54"/>
 			<column name="RELATED_ORG" value="151"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB340DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB350DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1F68F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1F78F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="55"/>
 			<column name="RELATED_ORG" value="152"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB360DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB370DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1F88F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1F98F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="56"/>
 			<column name="RELATED_ORG" value="153"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB380DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB390DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1FA8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1FB8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="57"/>
 			<column name="RELATED_ORG" value="154"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB3A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB3B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1FC8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1FD8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="58"/>
 			<column name="RELATED_ORG" value="155"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB3C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB3D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC1FE8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC1FF8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="59"/>
 			<column name="RELATED_ORG" value="156"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB3E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB3F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2008F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2018F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="60"/>
 			<column name="RELATED_ORG" value="157"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB400DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB410DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2028F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2038F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="61"/>
 			<column name="RELATED_ORG" value="158"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB420DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB430DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2048F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2058F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="62"/>
 			<column name="RELATED_ORG" value="159"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB440DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB450DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2068F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2078F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="63"/>
 			<column name="RELATED_ORG" value="160"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB460DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB470DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2088F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2098F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="64"/>
 			<column name="RELATED_ORG" value="161"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB480DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB490DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC20A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC20B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="65"/>
 			<column name="RELATED_ORG" value="162"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB4A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB4B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC20C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC20D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="66"/>
 			<column name="RELATED_ORG" value="163"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB4C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB4D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC20E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC20F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="67"/>
 			<column name="RELATED_ORG" value="164"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB4E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB4F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2108F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2118F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="68"/>
 			<column name="RELATED_ORG" value="165"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB500DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB510DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2128F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2138F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="69"/>
 			<column name="RELATED_ORG" value="166"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB520DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB530DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2148F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2158F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="49"/>
 			<column name="RELATED_ORG" value="167"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB540DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB550DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2168F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2178F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="32"/>
 			<column name="RELATED_ORG" value="168"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB560DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB570DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2188F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2198F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="33"/>
 			<column name="RELATED_ORG" value="169"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB580DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB590DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC21A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC21B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="34"/>
 			<column name="RELATED_ORG" value="170"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB5A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB5B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC21C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC21D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="180"/>
 			<column name="RELATED_ORG" value="174"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="19991231030000"/>
-			<column name="ID" value="AB57FF8BEB5C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB5D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC21E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC21F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="181"/>
 			<column name="RELATED_ORG" value="175"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB5E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB5F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2208F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2218F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="201"/>
 			<column name="RELATED_ORG" value="202"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20100630030000"/>
-			<column name="ID" value="AB57FF8BEB600DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB610DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2228F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2238F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="204"/>
 			<column name="RELATED_ORG" value="205"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB620DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB630DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2248F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2258F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="206"/>
 			<column name="RELATED_ORG" value="207"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20100630030000"/>
-			<column name="ID" value="AB57FF8BEB640DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB650DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2268F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2278F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="210"/>
 			<column name="RELATED_ORG" value="211"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20100630030000"/>
-			<column name="ID" value="AB57FF8BEB660DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB670DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2288F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2298F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="212"/>
 			<column name="RELATED_ORG" value="213"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20100630030000"/>
-			<column name="ID" value="AB57FF8BEB680DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB690DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC22A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC22B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="214"/>
 			<column name="RELATED_ORG" value="215"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB6A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB6B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC22C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC22D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="216"/>
 			<column name="RELATED_ORG" value="217"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB6C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB6D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC22E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC22F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="218"/>
 			<column name="RELATED_ORG" value="219"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20091231030000"/>
-			<column name="ID" value="AB57FF8BEB6E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB6F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2308F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2318F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="220"/>
 			<column name="RELATED_ORG" value="221"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Supervise"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB700DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB710DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2328F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2338F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="174"/>
 			<column name="RELATED_ORG" value="215"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB720DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB730DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2348F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2358F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="174"/>
 			<column name="RELATED_ORG" value="155"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB740DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB750DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2368F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2378F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="168"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB760DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB770DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2388F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2398F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="143"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB780DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB790DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC23A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC23B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="144"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123647"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB7A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB7B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC23C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC23D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="169"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123647"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB7C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB7D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC23E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC23F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="146"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB7E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB7F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2408F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2418F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="145"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB800DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB810DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2428F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2438F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="141"/>
 			<column name="RELATED_ORG" value="170"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB820DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB830DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2448F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2458F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="213"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB840DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB850DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2468F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2478F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="147"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB860DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB870DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2488F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2498F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="148"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB880DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB890DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC24A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC24B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="149"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB8A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB8B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC24C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC24D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="167"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB8C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB8D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC24E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC24F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="153"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB8E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB8F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2508F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2518F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="151"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB900DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB910DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2528F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2538F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="152"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB920DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB930DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2548F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2558F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="219"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB940DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB950DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2568F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2578F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="143"/>
 			<column name="RELATED_ORG" value="221"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB960DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB970DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2588F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2598F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="144"/>
 			<column name="RELATED_ORG" value="174"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB980DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB990DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC25A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC25B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="144"/>
 			<column name="RELATED_ORG" value="157"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB9A0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB9B0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC25C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC25D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="144"/>
 			<column name="RELATED_ORG" value="175"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB9C0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB9D0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC25E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC25F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="146"/>
 			<column name="RELATED_ORG" value="158"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEB9E0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEB9F0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2608F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2618F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="146"/>
 			<column name="RELATED_ORG" value="159"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBA00DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBA10DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2628F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2638F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="146"/>
 			<column name="RELATED_ORG" value="161"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBA20DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBA30DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2648F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2658F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="146"/>
 			<column name="RELATED_ORG" value="160"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBA40DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBA50DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2668F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2678F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="202"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBA60DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBA70DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2688F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2698F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="163"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBA80DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBA90DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC26A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC26B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="162"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBAA0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBAB0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC26C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC26D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="164"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBAC0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBAD0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC26E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC26F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="165"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBAE0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBAF0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2708F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2718F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="166"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBB00DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBB10DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2728F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2738F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="205"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBB20DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBB30DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2748F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2758F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="145"/>
 			<column name="RELATED_ORG" value="207"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBB40DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBB50DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2768F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2778F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="175"/>
 			<column name="RELATED_ORG" value="211"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBB60DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBB70DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC2788F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC2798F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="175"/>
 			<column name="RELATED_ORG" value="217"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBB80DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBB90DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC27A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC27B8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="175"/>
 			<column name="RELATED_ORG" value="150"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBBA0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBBB0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC27C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC27D8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="175"/>
 			<column name="RELATED_ORG" value="154"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">
 			<column name="CREATEID" value="nwright"/>
-			<column name="CREATETIME" value="20110825123648"/>
+			<column name="CREATETIME" value="20110831135414"/>
 			<column name="EFF_DT" value="20000101000000"/>
-			<column name="ID" value="AB57FF8BEBBC0DA0E040C60AF05B4490"/>
-			<column name="OBJ_ID" value="AB57FF8BEBBD0DA0E040C60AF05B4490"/>
+			<column name="ID" value="ABD1CCEDC27E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="ABD1CCEDC27F8F6AE040C60AF05B7F22"/>
 			<column name="ORG" value="175"/>
 			<column name="RELATED_ORG" value="156"/>
 			<column name="ST" value="Active"/>
 			<column name="TYPE" value="kuali.org.Parent2CurriculumChild"/>
 			<column name="UPDATEID" value="nwright"/>
-			<column name="UPDATETIME" value="20110825123648"/>
+			<column name="UPDATETIME" value="20110831135414"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN">

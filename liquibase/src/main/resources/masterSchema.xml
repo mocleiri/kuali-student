@@ -24,5 +24,7 @@
 
     <include file="ks-misc-lb/ks-data/uncategorized-create-schema.xml"/>
 
+    <include file="views.xml"/>
+
 </databaseChangeLog>
 

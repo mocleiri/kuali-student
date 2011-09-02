@@ -43,6 +43,12 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_STATE_PROCESS">
+			<column name="DESCR" value="kuali.lpr.process.student.course.registration"/>
+			<column name="ID" value="kuali.lpr.process.student.course.registration"/>
+			<column name="NAME" value="kuali.lpr.process.student.course.registration"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_STATE_PROCESS">
 			<column name="DESCR" value="kuali lui capacity process"/>
 			<column name="ID" value="kuali.lui.capacity.process"/>
 			<column name="NAME" value="kuali.lui.capacity.process"/>
