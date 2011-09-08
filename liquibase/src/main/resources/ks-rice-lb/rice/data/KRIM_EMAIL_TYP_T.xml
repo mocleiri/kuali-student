@@ -4,7 +4,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="b"/>
 			<column name="EMAIL_TYP_CD" value="HM"/>
-			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:31"/>
 			<column name="NM" value="Home"/>
 			<column name="OBJ_ID" value="5B97C50B03776110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -13,7 +13,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="c"/>
 			<column name="EMAIL_TYP_CD" value="OTH"/>
-			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:31"/>
 			<column name="NM" value="Other"/>
 			<column name="OBJ_ID" value="5B97C50B03786110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -22,7 +22,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="a"/>
 			<column name="EMAIL_TYP_CD" value="WRK"/>
-			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:31"/>
 			<column name="NM" value="Work"/>
 			<column name="OBJ_ID" value="5B97C50B03796110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>

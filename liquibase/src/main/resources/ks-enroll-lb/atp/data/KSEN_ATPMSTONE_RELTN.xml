@@ -4,8 +4,8 @@
 			<column name="AM_RELTN_TYPE_ID" value="kuali.atp.milestone.relation.owns"/>
 			<column name="ATP_ID" value="testAtpId1"/>
 			<column name="ATP_STATE_ID" value="kuali.atp.milestone.relation.state.active"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="ATPMSTONEREL-1"/>
 			<column name="MSTONE_ID" value="testId"/>
 			<column name="VER_NBR" value="0"/>
@@ -14,8 +14,8 @@
 			<column name="AM_RELTN_TYPE_ID" value="kuali.atp.milestone.relation.owns"/>
 			<column name="ATP_ID" value="testAtpId2"/>
 			<column name="ATP_STATE_ID" value="kuali.atp.milestone.relation.state.active"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="ATPMSTONEREL-2"/>
 			<column name="MSTONE_ID" value="testId2"/>
 			<column name="VER_NBR" value="0"/>
@@ -24,8 +24,8 @@
 			<column name="AM_RELTN_TYPE_ID" value="kuali.atp.milestone.relation.owns"/>
 			<column name="ATP_ID" value="testDeleteAtpId1"/>
 			<column name="ATP_STATE_ID" value="kuali.atp.milestone.relation.state.active"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="ATPMSTONEREL-3"/>
 			<column name="MSTONE_ID" value="testId"/>
 			<column name="VER_NBR" value="0"/>
@@ -34,8 +34,8 @@
 			<column name="AM_RELTN_TYPE_ID" value="kuali.atp.milestone.relation.owns"/>
 			<column name="ATP_ID" value="testDeleteAtpId2"/>
 			<column name="ATP_STATE_ID" value="kuali.atp.milestone.relation.state.active"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="ATPMSTONEREL-4"/>
 			<column name="MSTONE_ID" value="testId2"/>
 			<column name="VER_NBR" value="0"/>
@@ -44,8 +44,8 @@
 			<column name="AM_RELTN_TYPE_ID" value="kuali.atp.milestone.relation.owns"/>
 			<column name="ATP_ID" value="termRelationTestingTerm1"/>
 			<column name="ATP_STATE_ID" value="kuali.atp.milestone.relation.state.active"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="termRelationTestingRel-TermDate-1"/>
 			<column name="MSTONE_ID" value="testKeyDate1"/>
 			<column name="VER_NBR" value="0"/>

@@ -64,9 +64,7 @@
     </changeSet>
 
     <changeSet id="ksen_atp_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FK3DFA6EE13309051A" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
         <addForeignKeyConstraint constraintName="FK3DFA6EE162FD4240" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
-        <addForeignKeyConstraint constraintName="FK3DFA6EE1BA0FC113" baseTableName="KSEN_ATP_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_MSTONE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
     </changeSet>
 
     <changeSet id="ksen_hold_attr-foreign-keys" author="alubbers">
@@ -88,6 +86,13 @@
     <changeSet id="ksen_state_attr-foreign-keys" author="alubbers">
         <addForeignKeyConstraint constraintName="FK8193D5ED50135956" baseTableName="KSEN_STATE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
         <addForeignKeyConstraint constraintName="FK8193D5EDD052F725" baseTableName="KSEN_STATE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_STATE_PROCESS" referencedColumnNames="ID" baseTableSchemaName="KSEMBEDDED" referencedTableSchemaName="KSEMBEDDED" />
+    </changeSet>
+
+    <changeSet id="ksen_mstone_attr-foreign-keys" author="alubbers">
+        <addForeignKeyConstraint constraintName="FK3DFA6EE1BA0FC113" baseTableName="KSEN_MSTONE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_MSTONE" referencedColumnNames="ID" />
+    </changeSet>
+    <changeSet id="ksen_atptype_attr-foreign-keys" author="alubbers">
+        <addForeignKeyConstraint constraintName="FK3DFA6EE13309051A" baseTableName="KSEN_ATPTYPE_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_ATP_TYPE" referencedColumnNames="TYPE_KEY" />
     </changeSet>
 
 </databaseChangeLog>

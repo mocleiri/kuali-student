@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSLO_LO_RELTN_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_RELTN_TYPE">
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="kuali.lo.relation.type.inSupportOf"/>
 			<column name="NAME" value="inSupportOf"/>
 			<column name="OBJ_ID" value="6DFADEAABF6140689F8B6A10DFCFDAFF"/>
@@ -10,7 +10,7 @@
 		</insert>
 		<insert tableName="KSLO_LO_RELTN_TYPE">
 			<column name="DESCR" value="Parent-child relationship between a parent LO and sub LO. Currently used in the context of LOs that are related within a single CLU."/>
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="kuali.lo.relation.type.includes"/>
 			<column name="NAME" value="includes"/>
 			<column name="OBJ_ID" value="543596F0443D427CB8A3ADC65E68949C"/>

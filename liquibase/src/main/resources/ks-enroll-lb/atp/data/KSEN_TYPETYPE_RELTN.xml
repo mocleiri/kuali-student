@@ -1,9 +1,9 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_TYPETYPE_RELTN-initial-data" author="alubbers">
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731999D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4EBF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Lecture can only have a lecture as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Lecture"/>
 			<column name="RANK" value="1"/>
@@ -12,9 +12,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB37319A9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4ECF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Lab can only have a lab as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Lab"/>
 			<column name="RANK" value="1"/>
@@ -23,9 +23,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB37319B9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4EDF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Discussion can only have a discussion as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Discussion"/>
 			<column name="RANK" value="1"/>
@@ -34,9 +34,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB37319C9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4EEF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Tutorial can only have a tutorial as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Tutorial"/>
 			<column name="RANK" value="1"/>
@@ -45,9 +45,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB37319D9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4EFF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical WebLecture can only have a weblecture as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.WebLecture"/>
 			<column name="RANK" value="1"/>
@@ -56,9 +56,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB37319E9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F0F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical WebDiscussion can only have a webdiscussion as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.WebDiscussion"/>
 			<column name="RANK" value="1"/>
@@ -67,9 +67,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB37319F9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F1F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Directed can only have a directed as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Directed"/>
 			<column name="RANK" value="1"/>
@@ -78,9 +78,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A09D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F2F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Studio can only have a studio as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Studio"/>
 			<column name="RANK" value="1"/>
@@ -89,9 +89,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A19D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F3F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Correspond can only have a correspond as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Correspond"/>
 			<column name="RANK" value="1"/>
@@ -100,9 +100,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A29D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F4F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Activity can only have a activity as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Activity"/>
 			<column name="RANK" value="1"/>
@@ -111,9 +111,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A39D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F5F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Colloquium can only have a colloquium as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Colloquium"/>
 			<column name="RANK" value="1"/>
@@ -122,9 +122,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A49D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F6F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Demonstration can only have a demonstration as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Demonstration"/>
 			<column name="RANK" value="1"/>
@@ -133,9 +133,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A59D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F7F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Field can only have a field as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Field"/>
 			<column name="RANK" value="1"/>
@@ -144,9 +144,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A69D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F8F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Homework can only have a homework as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Homework"/>
 			<column name="RANK" value="1"/>
@@ -155,9 +155,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A79D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4F9F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Independ can only have a independ as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Independ"/>
 			<column name="RANK" value="1"/>
@@ -166,9 +166,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A89D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4FAF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Internship can only have a internship as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Internship"/>
 			<column name="RANK" value="1"/>
@@ -177,9 +177,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731A99D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4FBF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Private can only have a private as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Private"/>
 			<column name="RANK" value="1"/>
@@ -188,9 +188,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731AA9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4FCF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Recitation can only have a recitation as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Recitation"/>
 			<column name="RANK" value="1"/>
@@ -199,9 +199,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731AB9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4FDF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical Research can only have a research as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Research"/>
 			<column name="RANK" value="1"/>
@@ -210,9 +210,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731AC9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4FEF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical SelfPaced can only have a selfpaced as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.SelfPaced"/>
 			<column name="RANK" value="1"/>
@@ -221,9 +221,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731AD9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D4FFF046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical CompBased can only have a compbased as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.CompBased"/>
 			<column name="RANK" value="1"/>
@@ -232,9 +232,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
-			<column name="ID" value="ABD1CB3731AE9D11E040C60AF05B7F1A"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
+			<column name="ID" value="AC740864D500F046E040C60AF05B1F23"/>
 			<column name="NAME" value="A canonical VideoConf can only have a videoconf as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.VideoConf"/>
 			<column name="RANK" value="1"/>
@@ -243,8 +243,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="TYPETYPEREL-0"/>
 			<column name="NAME" value="Fall precedes Spring"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Fall"/>
@@ -254,8 +254,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="TYPETYPEREL-1"/>
 			<column name="NAME" value="Academic year contains semester"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AY"/>
@@ -265,8 +265,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="TYPETYPEREL-2"/>
 			<column name="NAME" value="Academic year contains semester"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AY"/>
@@ -276,8 +276,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="TYPETYPEREL-3"/>
 			<column name="NAME" value="Academic year contains semester"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AY"/>
@@ -287,8 +287,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="TYPETYPEREL-4"/>
 			<column name="NAME" value="Spring break is a holiday"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Holiday"/>
@@ -298,8 +298,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="TYPETYPEREL-5"/>
 			<column name="NAME" value="Thanksgiving is a holiday"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Holiday"/>
@@ -309,8 +309,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.1"/>
 			<column name="NAME" value="AcademicCalendar can contain FallSpring"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
@@ -320,8 +320,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.10"/>
 			<column name="NAME" value="AcademicCalendar can contain Session1"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
@@ -331,8 +331,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.11"/>
 			<column name="NAME" value="Session1 can contain Mini-mester1A"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Session1"/>
@@ -342,8 +342,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.12"/>
 			<column name="NAME" value="Session1 can contain Mini-mester1B"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Session1"/>
@@ -353,8 +353,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.13"/>
 			<column name="NAME" value="Summer can contain Session2"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Summer"/>
@@ -364,8 +364,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.14"/>
 			<column name="NAME" value="Session2 can contain Mini-mester2C"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Session2"/>
@@ -375,8 +375,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.15"/>
 			<column name="NAME" value="Session2 can contain Mini-mester2D"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Session2"/>
@@ -386,8 +386,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.16"/>
 			<column name="NAME" value="AcademicCalendar can contain SummerEve"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
@@ -397,8 +397,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.17"/>
 			<column name="NAME" value="SummerEve can contain SessionG1"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.SummerEve"/>
@@ -408,8 +408,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.18"/>
 			<column name="NAME" value="SummerEve can contain SessionG2"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.SummerEve"/>
@@ -419,8 +419,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.2"/>
 			<column name="NAME" value="AcademicCalendar can contain Fall"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
@@ -430,8 +430,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.3"/>
 			<column name="NAME" value="Fall can contain HalfFall1"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Fall"/>
@@ -441,8 +441,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.4"/>
 			<column name="NAME" value="Fall can contain HalfFall2"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Fall"/>
@@ -452,8 +452,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.5"/>
 			<column name="NAME" value="AcademicCalendar can contain Winter"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
@@ -463,8 +463,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.6"/>
 			<column name="NAME" value="AcademicCalendar can contain Spring"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
@@ -474,8 +474,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.7"/>
 			<column name="NAME" value="Spring can contain HalfSpring1"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Spring"/>
@@ -485,8 +485,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.8"/>
 			<column name="NAME" value="Spring can contain SpringBreak"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Spring"/>
@@ -496,8 +496,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.atp.type.type.relation.allowed.9"/>
 			<column name="NAME" value="Spring can contain HalfSpring2"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.Spring"/>
@@ -507,8 +507,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.1"/>
 			<column name="NAME" value="kuali.atp.type.Fall is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -518,8 +518,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.10"/>
 			<column name="NAME" value="kuali.atp.type.Session1 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -529,8 +529,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.11"/>
 			<column name="NAME" value="kuali.atp.type.Session2 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -540,8 +540,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.12"/>
 			<column name="NAME" value="kuali.atp.type.SessionG1 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -551,8 +551,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.13"/>
 			<column name="NAME" value="kuali.atp.type.SessionG2 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -562,8 +562,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.14"/>
 			<column name="NAME" value="kuali.atp.type.Spring is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -573,8 +573,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.15"/>
 			<column name="NAME" value="kuali.atp.type.SpringBreak is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -584,8 +584,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.16"/>
 			<column name="NAME" value="kuali.atp.type.Summer is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -595,8 +595,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.17"/>
 			<column name="NAME" value="kuali.atp.type.SummerEve is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -606,8 +606,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.18"/>
 			<column name="NAME" value="kuali.atp.type.Winter is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -617,8 +617,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.19"/>
 			<column name="NAME" value="kuali.atp.type.Adhoc is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -628,8 +628,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.2"/>
 			<column name="NAME" value="kuali.atp.type.HalfFall1 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -639,8 +639,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.3"/>
 			<column name="NAME" value="kuali.atp.type.HalfFall2 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -650,8 +650,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.4"/>
 			<column name="NAME" value="kuali.atp.type.HalfSpring1 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -661,8 +661,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.5"/>
 			<column name="NAME" value="kuali.atp.type.HalfSpring2 is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -672,8 +672,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.6"/>
 			<column name="NAME" value="kuali.atp.type.Mini-mester1A is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -683,8 +683,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.7"/>
 			<column name="NAME" value="kuali.atp.type.Mini-mester1B is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -694,8 +694,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.8"/>
 			<column name="NAME" value="kuali.atp.type.Mini-mester2C is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>
@@ -705,8 +705,8 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_TYPETYPE_RELTN">
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXPIR_DT" value="21000101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
 			<column name="ID" value="kuali.termtype.group.member.9"/>
 			<column name="NAME" value="kuali.atp.type.Mini-mester2D is a type of Term"/>
 			<column name="OWNER_TYPE_ID" value="kuali.atp.type.group.term"/>

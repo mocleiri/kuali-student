@@ -2,7 +2,7 @@
 	<changeSet id="KSLO_LO_CATEGORY-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085519"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:55:19"/>
 			<column name="ID" value="007a91fa-d954-41ac-aa19-96030e538fdc"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -10,12 +10,12 @@
 			<column name="OBJ_ID" value="ec7d75f2-6160-4bf1-af08-a12c6dce2549"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085519"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:55:19"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213090113"/>
+			<column name="CREATETIME" valueDate="2010-12-13T09:01:13"/>
 			<column name="ID" value="5074e8b8-d145-4199-8a72-6967925687df"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -23,12 +23,12 @@
 			<column name="OBJ_ID" value="2db8c431-f15f-4f91-9eb1-5801eed24f77"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213090113"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T09:01:13"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085542"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:55:42"/>
 			<column name="ID" value="54f620df-7063-4135-99b8-9cb247126279"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -36,12 +36,12 @@
 			<column name="OBJ_ID" value="0a6809b4-a04e-4f86-995c-e54cc0aa5c1e"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085542"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:55:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213090901"/>
+			<column name="CREATETIME" valueDate="2010-12-13T09:09:01"/>
 			<column name="ID" value="5628386f-89f0-4493-b02f-cf8a37d88e3b"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.subject"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -49,12 +49,12 @@
 			<column name="OBJ_ID" value="10b76801-aa50-41c1-b6ae-8a45f4b11474"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213090901"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T09:09:01"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085750"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:57:50"/>
 			<column name="ID" value="68a5312b-9adc-42f9-904e-86ec537fb9ea"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -62,12 +62,12 @@
 			<column name="OBJ_ID" value="37e81206-18fb-471c-8109-2607bffbacba"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085750"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:57:50"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085602"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:56:02"/>
 			<column name="ID" value="7b7ed7f1-25bd-437b-b47c-5ebe99d32e87"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -75,12 +75,12 @@
 			<column name="OBJ_ID" value="4edc7762-3ccd-4d3e-89bb-757f01befc8b"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085602"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:56:02"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085535"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:55:35"/>
 			<column name="ID" value="819f6a86-7b6c-4ed6-a1d1-6cba2d520ccc"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -88,12 +88,12 @@
 			<column name="OBJ_ID" value="34087f4d-d26f-4ff8-a8e8-85c4f53e722e"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085535"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:55:35"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213090158"/>
+			<column name="CREATETIME" valueDate="2010-12-13T09:01:58"/>
 			<column name="ID" value="b46e3e45-ae79-4741-be25-b86288b84303"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -101,12 +101,12 @@
 			<column name="OBJ_ID" value="5e4084e9-9012-43ff-9ea3-28fd7ce2b13d"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213090158"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T09:01:58"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213090143"/>
+			<column name="CREATETIME" valueDate="2010-12-13T09:01:43"/>
 			<column name="ID" value="d983c794-2e5c-4293-a833-babdc8f7897f"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -114,12 +114,12 @@
 			<column name="OBJ_ID" value="4e02f8a6-93a1-4da8-89b1-00ba1b738488"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213090143"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T09:01:43"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085503"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:55:03"/>
 			<column name="ID" value="f6426b18-986d-4891-95f5-5fb6ab22008f"/>
 			<column name="LO_CATEGORY_TYPE_ID" value="loCategoryType.skillarea"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -127,7 +127,7 @@
 			<column name="OBJ_ID" value="3f6432b6-8492-4a36-b789-3ab451b6e494"/>
 			<column name="STATE" value="active"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085503"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:55:03"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

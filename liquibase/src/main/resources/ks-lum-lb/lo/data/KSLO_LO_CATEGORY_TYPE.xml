@@ -2,7 +2,7 @@
 	<changeSet id="KSLO_LO_CATEGORY_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_CATEGORY_TYPE">
 			<column name="DESCR" value="Accreditation"/>
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="loCategoryType.accreditation"/>
 			<column name="NAME" value="Accreditation"/>
 			<column name="OBJ_ID" value="F475938A00DC461CB67C62C94A53E550"/>
@@ -10,7 +10,7 @@
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY_TYPE">
 			<column name="DESCR" value="Skill"/>
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="loCategoryType.skillarea"/>
 			<column name="NAME" value="Skill"/>
 			<column name="OBJ_ID" value="A72827C7B2884C20A4879822D39841D8"/>
@@ -18,7 +18,7 @@
 		</insert>
 		<insert tableName="KSLO_LO_CATEGORY_TYPE">
 			<column name="DESCR" value="Subject"/>
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="loCategoryType.subject"/>
 			<column name="NAME" value="Subject"/>
 			<column name="OBJ_ID" value="5498FE8008CB4CBEBDC9EB970470B38A"/>

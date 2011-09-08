@@ -4,7 +4,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="01"/>
 			<column name="EMP_STAT_CD" value="A"/>
-			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:31"/>
 			<column name="NM" value="Active"/>
 			<column name="OBJ_ID" value="5B97C50B037A6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -13,7 +13,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="99"/>
 			<column name="EMP_STAT_CD" value="D"/>
-			<column name="LAST_UPDT_DT" value="20081113140631"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:31"/>
 			<column name="NM" value="Deceased"/>
 			<column name="OBJ_ID" value="5B97C50B037B6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -22,7 +22,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="04"/>
 			<column name="EMP_STAT_CD" value="L"/>
-			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:32"/>
 			<column name="NM" value="On Non-Pay Leave"/>
 			<column name="OBJ_ID" value="5B97C50B037C6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -31,7 +31,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="03"/>
 			<column name="EMP_STAT_CD" value="N"/>
-			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:32"/>
 			<column name="NM" value="Status Not Yet Processed"/>
 			<column name="OBJ_ID" value="5B97C50B037D6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -40,7 +40,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="02"/>
 			<column name="EMP_STAT_CD" value="P"/>
-			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:32"/>
 			<column name="NM" value="Processing"/>
 			<column name="OBJ_ID" value="5B97C50B037E6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -49,7 +49,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="10"/>
 			<column name="EMP_STAT_CD" value="R"/>
-			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:32"/>
 			<column name="NM" value="Retired"/>
 			<column name="OBJ_ID" value="5B97C50B037F6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>
@@ -58,7 +58,7 @@
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="97"/>
 			<column name="EMP_STAT_CD" value="T"/>
-			<column name="LAST_UPDT_DT" value="20081113140632"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:32"/>
 			<column name="NM" value="Terminated"/>
 			<column name="OBJ_ID" value="5B97C50B03806110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>

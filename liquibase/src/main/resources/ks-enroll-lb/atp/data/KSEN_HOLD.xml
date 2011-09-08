@@ -1,28 +1,28 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_HOLD-initial-data" author="alubbers">
 		<insert tableName="KSEN_HOLD">
-			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="ID" value="Hold-1"/>
 			<column name="ISSUE_ID" value="Hold-Issue-1"/>
 			<column name="IS_OVERRIDABLE" value="1"/>
 			<column name="IS_WARNING" value="0"/>
 			<column name="NAME" value="Hold one"/>
 			<column name="PERS_ID" value="1"/>
-			<column name="RELEASED_DT" value="20111231000000"/>
+			<column name="RELEASED_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-Hold-301"/>
 			<column name="STATE_ID" value="kuali.hold.state.active"/>
 			<column name="TYPE_ID" value="kuali.hold.type.student"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_HOLD">
-			<column name="EFF_DT" value="20110101000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="ID" value="Hold-2"/>
 			<column name="ISSUE_ID" value="Hold-Issue-1"/>
 			<column name="IS_OVERRIDABLE" value="1"/>
 			<column name="IS_WARNING" value="0"/>
 			<column name="NAME" value="Hold two"/>
 			<column name="PERS_ID" value="1"/>
-			<column name="RELEASED_DT" value="20111231000000"/>
+			<column name="RELEASED_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-Hold-401"/>
 			<column name="STATE_ID" value="kuali.hold.state.active"/>
 			<column name="TYPE_ID" value="kuali.hold.type.instructor"/>

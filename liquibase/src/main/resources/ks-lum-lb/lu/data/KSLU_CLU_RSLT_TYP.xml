@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSLU_CLU_RSLT_TYP-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_RSLT_TYP">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Certificate"/>
 			<column name="OBJ_ID" value="812939CF237F4457BED0A6135AB739C9"/>
 			<column name="TYPE_DESC" value="Final learning result for a Certificate Program."/>
@@ -9,7 +9,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_CLU_RSLT_TYP">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Final Credits"/>
 			<column name="OBJ_ID" value="B76D726C8C184E0D9594F2A6FA4993F5"/>
 			<column name="TYPE_DESC" value="Final learning result for an LU. A stereotypical usage is the course credits."/>
@@ -17,7 +17,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_CLU_RSLT_TYP">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Degree"/>
 			<column name="OBJ_ID" value="A7EC40518F954C818C97A6D3EC8768A9"/>
 			<column name="TYPE_DESC" value="Final learning result for a degree"/>
@@ -25,7 +25,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_CLU_RSLT_TYP">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Final Grade"/>
 			<column name="OBJ_ID" value="10C75FAB3EB24D1DA7D0C87E63260C90"/>
 			<column name="TYPE_DESC" value="Final learning result for an LU. A stereotypical usage is the final grade in a course."/>

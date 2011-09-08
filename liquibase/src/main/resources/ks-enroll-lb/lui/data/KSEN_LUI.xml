@@ -2,8 +2,8 @@
 	<changeSet id="KSEN_LUI-initial-data" author="alubbers">
 		<insert tableName="KSEN_LUI">
 			<column name="CLU_ID" value="cluId1"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXP_DT" value="20111231000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXP_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="ID" value="Lui-1"/>
 			<column name="NAME" value="Lui one"/>
 			<column name="RT_DESCR_ID" value="Lui-1-Desc"/>
@@ -13,8 +13,8 @@
 		</insert>
 		<insert tableName="KSEN_LUI">
 			<column name="CLU_ID" value="cluId2"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXP_DT" value="20111231000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXP_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="ID" value="Lui-2"/>
 			<column name="NAME" value="Lui rwo"/>
 			<column name="RT_DESCR_ID" value="Lui-2-Desc"/>
@@ -24,8 +24,8 @@
 		</insert>
 		<insert tableName="KSEN_LUI">
 			<column name="CLU_ID" value="cluId3"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXP_DT" value="20111231000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXP_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="ID" value="Lui-3"/>
 			<column name="NAME" value="Lui three"/>
 			<column name="RT_DESCR_ID" value="Lui-3-Desc"/>
@@ -35,8 +35,8 @@
 		</insert>
 		<insert tableName="KSEN_LUI">
 			<column name="CLU_ID" value="cluId4"/>
-			<column name="EFF_DT" value="20110101000000"/>
-			<column name="EXP_DT" value="20111231000000"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXP_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="ID" value="Lui-4"/>
 			<column name="NAME" value="Lui four"/>
 			<column name="RT_DESCR_ID" value="Lui-4-Desc"/>

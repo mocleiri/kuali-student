@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSOR_ORG_ORG_RELTN_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Administers"/>
 			<column name="OBJ_ID" value="8052C081024B4EDFB225F96143EF6033"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -12,7 +12,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Advises"/>
 			<column name="OBJ_ID" value="B4B60D00590B4068B36AB6EDC6C44A82"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -23,7 +23,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="is Board of"/>
 			<column name="OBJ_ID" value="C8AD6A138C10463B8EC71E4B85F3AD90"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -34,7 +34,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Chartered"/>
 			<column name="OBJ_ID" value="0622B9EBC043443A9329EC561560FA1E"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -45,7 +45,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Collaborate"/>
 			<column name="OBJ_ID" value="BDAD26F205DA4E0B858E7B0BA9940929"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -56,7 +56,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Contains"/>
 			<column name="OBJ_ID" value="24580447305A4FDD80646A38FE3682D3"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -67,7 +67,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="is Curriculum Parent of"/>
 			<column name="OBJ_ID" value="6314186326A743C3B03350B63467E4EF"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Curriculum"/>
@@ -78,7 +78,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Headquarters for"/>
 			<column name="OBJ_ID" value="BDD2BE20009F4D14BDB1295BEE310503"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -89,9 +89,9 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="is Curriculum Parent of"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1E38F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB0F6D4CE040C60AF05B1F2B"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Curriculum"/>
 			<column name="REV_DESCR" value="Indicates that this organization is the Child of another organization in the Curriculum Hierarchy"/>
 			<column name="REV_NAME" value="is Curriculum Child of"/>
@@ -100,7 +100,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="has Subcommittee of"/>
 			<column name="OBJ_ID" value="E31F023B1587468C8CB9D959CDFA6452"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>
@@ -111,7 +111,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Supervises"/>
 			<column name="OBJ_ID" value="2EC7AA7B781D48598A931BB9184D7CB2"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Main"/>

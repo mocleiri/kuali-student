@@ -1,21 +1,21 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSST_OBJECT_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSST_OBJECT_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Kuali CLU"/>
 			<column name="TYPE_DESC" value="Kuali CLU"/>
 			<column name="TYPE_KEY" value="clu"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_OBJECT_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Kuali CLU"/>
 			<column name="TYPE_DESC" value="An course offered for academic credit"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.CreditCourse"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_OBJECT_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Kuali CLU"/>
 			<column name="TYPE_DESC" value="Program requirements"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.Requirement"/>

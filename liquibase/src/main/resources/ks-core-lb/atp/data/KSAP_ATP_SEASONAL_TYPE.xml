@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSAP_ATP_SEASONAL_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="AY"/>
 			<column name="OBJ_ID" value="6B7A1A1DBF534E5EBF130D6E824E9BE0"/>
 			<column name="TYPE_DESC" value="Academic Year"/>
@@ -9,7 +9,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Alternate Years Cycle"/>
 			<column name="OBJ_ID" value="DC3D3CB5F9774F24BC4A80220C3107C6"/>
 			<column name="TYPE_DESC" value="Every other Year Cycle"/>
@@ -17,7 +17,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Any"/>
 			<column name="OBJ_ID" value="5378F0807DE04202885E277898B8E43A"/>
 			<column name="TYPE_DESC" value="Any Time"/>
@@ -25,7 +25,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Even Years"/>
 			<column name="OBJ_ID" value="18A96883F267479687B66624BE62F3BB"/>
 			<column name="TYPE_DESC" value="Even Years"/>
@@ -33,7 +33,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="FY"/>
 			<column name="OBJ_ID" value="1AB2B105B19F413CAAA7840D7FAE2704"/>
 			<column name="TYPE_DESC" value="Fiscal Year"/>
@@ -41,7 +41,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall"/>
 			<column name="OBJ_ID" value="81124CAA22494E7E8801DEC2CF4CC729"/>
 			<column name="TYPE_DESC" value="Fall"/>
@@ -49,7 +49,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall-Spring"/>
 			<column name="OBJ_ID" value="54FCCF8127464FB3B0D86692EA4093ED"/>
 			<column name="TYPE_DESC" value="Fall &amp; Spring"/>
@@ -57,7 +57,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall 1"/>
 			<column name="OBJ_ID" value="B94E2526F3674C56B6CECB418B5C8E04"/>
 			<column name="TYPE_DESC" value="1st Half of Fall"/>
@@ -65,7 +65,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall 2"/>
 			<column name="OBJ_ID" value="EC17FDC9B6C043C19B13D6B746BBE92B"/>
 			<column name="TYPE_DESC" value="2nd Half of Fall"/>
@@ -73,7 +73,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Four Year Cycle"/>
 			<column name="OBJ_ID" value="5C7ED56FEBA5431D970368709CE6384A"/>
 			<column name="TYPE_DESC" value="Four Year Cycle"/>
@@ -81,7 +81,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Odd Years"/>
 			<column name="OBJ_ID" value="30F3BDBE9CA34555BFCA9CF38A2CA0EA"/>
 			<column name="TYPE_DESC" value="Odd Years"/>
@@ -89,7 +89,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring"/>
 			<column name="OBJ_ID" value="32E8FD6B6FE943D2A9ED0EF04C80A30B"/>
 			<column name="TYPE_DESC" value="Spring"/>
@@ -97,7 +97,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring 1"/>
 			<column name="OBJ_ID" value="56DED993BC2646D4A38F5E1F1FEBAD52"/>
 			<column name="TYPE_DESC" value="1st Half of Spring"/>
@@ -105,7 +105,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring 2"/>
 			<column name="OBJ_ID" value="30D0373A2E8B4891B67DA1A714413550"/>
 			<column name="TYPE_DESC" value="2nd Half of Spring"/>
@@ -113,7 +113,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring Break"/>
 			<column name="OBJ_ID" value="AA7A0545E0894F9DA4BAE7A73C88D242"/>
 			<column name="TYPE_DESC" value="Spring Break"/>
@@ -121,7 +121,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer"/>
 			<column name="OBJ_ID" value="04C6F97AF15745D380A647B11B7E9DF4"/>
 			<column name="TYPE_DESC" value="Summer"/>
@@ -129,7 +129,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer 1"/>
 			<column name="OBJ_ID" value="B8D05E8399D643598BAB07F58177B452"/>
 			<column name="TYPE_DESC" value="1st Half of Summer"/>
@@ -137,7 +137,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer 1A"/>
 			<column name="OBJ_ID" value="4A8441A9923F48E7878A09BFC70CC8AC"/>
 			<column name="TYPE_DESC" value="1A of Summer"/>
@@ -145,7 +145,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer 1B"/>
 			<column name="OBJ_ID" value="3ACA1C48CE9D4A67B22E43874BF944C1"/>
 			<column name="TYPE_DESC" value="1B of Summer"/>
@@ -153,7 +153,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer 2"/>
 			<column name="OBJ_ID" value="24A8AF1979CB4E368DE4AB14EC31A796"/>
 			<column name="TYPE_DESC" value="2nd Half of Summer"/>
@@ -161,7 +161,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer 2C"/>
 			<column name="OBJ_ID" value="64E908EB7195493EBBE86CA3471115F6"/>
 			<column name="TYPE_DESC" value="2C of Summer"/>
@@ -169,7 +169,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer 2D"/>
 			<column name="OBJ_ID" value="F3000BD5AC68469D894E1D6F125B9B40"/>
 			<column name="TYPE_DESC" value="2D of Summer"/>
@@ -177,7 +177,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Term 1"/>
 			<column name="OBJ_ID" value="A092C89C59B149CCB866048E8E1C0976"/>
 			<column name="TYPE_DESC" value="Term 1 of Year"/>
@@ -185,7 +185,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Term 2"/>
 			<column name="OBJ_ID" value="759FC9320B99441EAA4B26539CC0CEEB"/>
 			<column name="TYPE_DESC" value="Term 2 of Year"/>
@@ -193,7 +193,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Winter"/>
 			<column name="OBJ_ID" value="9D339B23F75640DBBB25FF7835D233BC"/>
 			<column name="TYPE_DESC" value="Winter Activity Period"/>
@@ -201,7 +201,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Year 1"/>
 			<column name="OBJ_ID" value="DDDCAC4D7AC64E5588F22E3EF26B3F6D"/>
 			<column name="TYPE_DESC" value="Year 1 of Program"/>
@@ -209,7 +209,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Year 2"/>
 			<column name="OBJ_ID" value="4E7CDD708BFD432D86F0E5F49B6A08FD"/>
 			<column name="TYPE_DESC" value="Year 2 of Program"/>
@@ -217,7 +217,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Year 3"/>
 			<column name="OBJ_ID" value="E8412789C6A9457DB671F03C0DC9AB38"/>
 			<column name="TYPE_DESC" value="Year 3 of Program"/>
@@ -225,7 +225,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSAP_ATP_SEASONAL_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Year 4"/>
 			<column name="OBJ_ID" value="2938F51317E54001BC22AEBE0C02C5D3"/>
 			<column name="TYPE_DESC" value="Year 4 of Program"/>

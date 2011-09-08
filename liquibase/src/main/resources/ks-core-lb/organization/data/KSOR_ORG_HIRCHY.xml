@@ -2,7 +2,7 @@
 	<changeSet id="KSOR_ORG_HIRCHY-initial-data" author="alubbers">
 		<insert tableName="KSOR_ORG_HIRCHY">
 			<column name="DESCR" value="Hierarchy used to Manage Curriculum"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="kuali.org.hierarchy.Curriculum"/>
 			<column name="NAME" value="Curriculum"/>
 			<column name="OBJ_ID" value="2E85AD7DFB5D4205B5778ECF594BC809"/>
@@ -11,7 +11,7 @@
 		</insert>
 		<insert tableName="KSOR_ORG_HIRCHY">
 			<column name="DESCR" value="Main Organizational Hierarchy"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="kuali.org.hierarchy.Main"/>
 			<column name="NAME" value="Main"/>
 			<column name="OBJ_ID" value="5CE044C1EFC2429A8C087EC1C357965C"/>

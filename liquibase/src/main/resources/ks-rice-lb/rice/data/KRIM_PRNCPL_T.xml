@@ -3,7 +3,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1"/>
-			<column name="LAST_UPDT_DT" value="20081107094902"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-07T09:49:02"/>
 			<column name="OBJ_ID" value="5B1B6B919CCA6496E0404F8189D822F2"/>
 			<column name="PRNCPL_ID" value="1"/>
 			<column name="PRNCPL_NM" value="kr"/>
@@ -13,7 +13,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="5"/>
-			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-11-30T17:15:45"/>
 			<column name="OBJ_ID" value="5B1ZZB919CCA6496E0404F8189D822F2"/>
 			<column name="PRNCPL_ID" value="5"/>
 			<column name="PRNCPL_NM" value="ks"/>
@@ -22,7 +22,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1100"/>
-			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:43"/>
 			<column name="OBJ_ID" value="5B97C50B03C56110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="admin"/>
 			<column name="PRNCPL_NM" value="admin"/>
@@ -32,7 +32,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1125"/>
-			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:44"/>
 			<column name="OBJ_ID" value="5B97C50B03C66110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="admin1"/>
 			<column name="PRNCPL_NM" value="admin1"/>
@@ -42,7 +42,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1126"/>
-			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:44"/>
 			<column name="OBJ_ID" value="5B97C50B03C76110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="admin2"/>
 			<column name="PRNCPL_NM" value="admin2"/>
@@ -52,7 +52,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1129"/>
-			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:44"/>
 			<column name="OBJ_ID" value="5B97C50B03C86110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="dev1"/>
 			<column name="PRNCPL_NM" value="dev1"/>
@@ -62,7 +62,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1130"/>
-			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:44"/>
 			<column name="OBJ_ID" value="5B97C50B03C96110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="dev2"/>
 			<column name="PRNCPL_NM" value="dev2"/>
@@ -72,7 +72,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1135"/>
-			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:44"/>
 			<column name="OBJ_ID" value="5B97C50B03CA6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="director"/>
 			<column name="PRNCPL_NM" value="director"/>
@@ -82,7 +82,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1121"/>
-			<column name="LAST_UPDT_DT" value="20081113140644"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:44"/>
 			<column name="OBJ_ID" value="5B97C50B03CB6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="doug"/>
 			<column name="PRNCPL_NM" value="doug"/>
@@ -92,7 +92,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1116"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03CC6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="earl"/>
 			<column name="PRNCPL_NM" value="earl"/>
@@ -102,7 +102,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1114"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03CD6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="edna"/>
 			<column name="PRNCPL_NM" value="edna"/>
@@ -112,7 +112,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1137"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03CE6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="employee"/>
 			<column name="PRNCPL_NM" value="employee"/>
@@ -122,7 +122,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1115"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03CF6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="eric"/>
 			<column name="PRNCPL_NM" value="eric"/>
@@ -132,7 +132,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1117"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03D06110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="erin"/>
 			<column name="PRNCPL_NM" value="erin"/>
@@ -142,7 +142,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1119"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03D16110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="fran"/>
 			<column name="PRNCPL_NM" value="fran"/>
@@ -152,7 +152,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1120"/>
-			<column name="LAST_UPDT_DT" value="20081113140645"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:45"/>
 			<column name="OBJ_ID" value="5B97C50B03D26110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="frank"/>
 			<column name="PRNCPL_NM" value="frank"/>
@@ -162,7 +162,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1118"/>
-			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:46"/>
 			<column name="OBJ_ID" value="5B97C50B03D36110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="fred"/>
 			<column name="PRNCPL_NM" value="fred"/>
@@ -172,7 +172,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1122"/>
-			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:46"/>
 			<column name="OBJ_ID" value="5B97C50B03D46110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="idm1"/>
 			<column name="PRNCPL_NM" value="idm1"/>
@@ -182,7 +182,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1123"/>
-			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:46"/>
 			<column name="OBJ_ID" value="5B97C50B03D56110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="idm2"/>
 			<column name="PRNCPL_NM" value="idm2"/>
@@ -192,7 +192,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1124"/>
-			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:46"/>
 			<column name="OBJ_ID" value="5B97C50B03D66110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="idm3"/>
 			<column name="PRNCPL_NM" value="idm3"/>
@@ -202,7 +202,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1136"/>
-			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:42"/>
 			<column name="OBJ_ID" value="5B97C50B03BA6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="kuluser"/>
 			<column name="PRNCPL_NM" value="kuluser"/>
@@ -212,7 +212,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1133"/>
-			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:46"/>
 			<column name="OBJ_ID" value="5B97C50B03D76110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="newaccountuser"/>
 			<column name="PRNCPL_NM" value="newacctusr"/>
@@ -222,7 +222,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1131"/>
-			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:42"/>
 			<column name="OBJ_ID" value="5B97C50B03BB6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="notsys"/>
 			<column name="PRNCPL_NM" value="notsys"/>
@@ -232,7 +232,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1132"/>
-			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:42"/>
 			<column name="OBJ_ID" value="5B97C50B03BC6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="notsysadm"/>
 			<column name="PRNCPL_NM" value="notsysadm"/>
@@ -242,7 +242,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1109"/>
-			<column name="LAST_UPDT_DT" value="20081113140646"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:46"/>
 			<column name="OBJ_ID" value="5B97C50B03D86110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="quickstart"/>
 			<column name="PRNCPL_NM" value="quickstart"/>
@@ -252,7 +252,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1134"/>
-			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:47"/>
 			<column name="OBJ_ID" value="5B97C50B03D96110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="supervisor"/>
 			<column name="PRNCPL_NM" value="supervisr"/>
@@ -262,7 +262,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1127"/>
-			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:47"/>
 			<column name="OBJ_ID" value="5B97C50B03DA6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="test1"/>
 			<column name="PRNCPL_NM" value="test1"/>
@@ -272,7 +272,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1128"/>
-			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:47"/>
 			<column name="OBJ_ID" value="5B97C50B03DB6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="test2"/>
 			<column name="PRNCPL_NM" value="test2"/>
@@ -282,7 +282,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1101"/>
-			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:42"/>
 			<column name="OBJ_ID" value="5B97C50B03BD6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testadmin1"/>
 			<column name="PRNCPL_NM" value="testadmin1"/>
@@ -292,7 +292,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1102"/>
-			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:42"/>
 			<column name="OBJ_ID" value="5B97C50B03BE6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testadmin2"/>
 			<column name="PRNCPL_NM" value="testadmin2"/>
@@ -302,7 +302,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1103"/>
-			<column name="LAST_UPDT_DT" value="20081113140642"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:42"/>
 			<column name="OBJ_ID" value="5B97C50B03BF6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testuser1"/>
 			<column name="PRNCPL_NM" value="testuser1"/>
@@ -312,7 +312,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1104"/>
-			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:43"/>
 			<column name="OBJ_ID" value="5B97C50B03C06110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testuser2"/>
 			<column name="PRNCPL_NM" value="testuser2"/>
@@ -322,7 +322,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1105"/>
-			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:43"/>
 			<column name="OBJ_ID" value="5B97C50B03C16110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testuser3"/>
 			<column name="PRNCPL_NM" value="testuser3"/>
@@ -332,7 +332,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1106"/>
-			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:43"/>
 			<column name="OBJ_ID" value="5B97C50B03C26110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testuser4"/>
 			<column name="PRNCPL_NM" value="testuser4"/>
@@ -342,7 +342,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1107"/>
-			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:43"/>
 			<column name="OBJ_ID" value="5B97C50B03C36110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testuser5"/>
 			<column name="PRNCPL_NM" value="testuser5"/>
@@ -352,7 +352,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1108"/>
-			<column name="LAST_UPDT_DT" value="20081113140643"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:43"/>
 			<column name="OBJ_ID" value="5B97C50B03C46110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="testuser6"/>
 			<column name="PRNCPL_NM" value="testuser6"/>
@@ -362,7 +362,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1110"/>
-			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:47"/>
 			<column name="OBJ_ID" value="5B97C50B03DC6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="user1"/>
 			<column name="PRNCPL_NM" value="user1"/>
@@ -372,7 +372,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1111"/>
-			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:47"/>
 			<column name="OBJ_ID" value="5B97C50B03DD6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="user2"/>
 			<column name="PRNCPL_NM" value="user2"/>
@@ -382,7 +382,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1112"/>
-			<column name="LAST_UPDT_DT" value="20081113140647"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:47"/>
 			<column name="OBJ_ID" value="5B97C50B03DE6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="user3"/>
 			<column name="PRNCPL_NM" value="user3"/>
@@ -392,7 +392,7 @@
 		<insert tableName="KRIM_PRNCPL_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="ENTITY_ID" value="1113"/>
-			<column name="LAST_UPDT_DT" value="20081113140648"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:48"/>
 			<column name="OBJ_ID" value="5B97C50B03DF6110E0404F8189D85213"/>
 			<column name="PRNCPL_ID" value="user4"/>
 			<column name="PRNCPL_NM" value="user4"/>

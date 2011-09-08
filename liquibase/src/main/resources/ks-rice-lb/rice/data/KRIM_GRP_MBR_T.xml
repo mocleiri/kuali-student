@@ -3,7 +3,7 @@
 		<insert tableName="KRIM_GRP_MBR_T">
 			<column name="GRP_ID" value="2000"/>
 			<column name="GRP_MBR_ID" value="1122"/>
-			<column name="LAST_UPDT_DT" value="20081208124957"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-12-08T12:49:57"/>
 			<column name="MBR_ID" value="notsysadm"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5B97C50B04CB6110E0404F8189D85213"/>
@@ -12,7 +12,7 @@
 		<insert tableName="KRIM_GRP_MBR_T">
 			<column name="GRP_ID" value="1"/>
 			<column name="GRP_MBR_ID" value="1123"/>
-			<column name="LAST_UPDT_DT" value="20081208124957"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-12-08T12:49:57"/>
 			<column name="MBR_ID" value="admin"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5B97C50B04CC6110E0404F8189D85213"/>
@@ -21,7 +21,7 @@
 		<insert tableName="KRIM_GRP_MBR_T">
 			<column name="GRP_ID" value="1"/>
 			<column name="GRP_MBR_ID" value="1124"/>
-			<column name="LAST_UPDT_DT" value="20081208124957"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-12-08T12:49:57"/>
 			<column name="MBR_ID" value="notsys"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5B97C50B04CD6110E0404F8189D85213"/>
@@ -30,7 +30,7 @@
 		<insert tableName="KRIM_GRP_MBR_T">
 			<column name="GRP_ID" value="2000"/>
 			<column name="GRP_MBR_ID" value="1207"/>
-			<column name="LAST_UPDT_DT" value="20090811085907"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-08-11T08:59:07"/>
 			<column name="MBR_ID" value="admin"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="6798B3E6C3C49827AE62E5F7A275A1A3"/>

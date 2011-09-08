@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KRIM_ROLE_MBR_T-initial-data" author="alubbers">
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20090806170240"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-08-06T17:02:40"/>
 			<column name="MBR_ID" value="1"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5B4B421E43857717E0404F8189D821F7"/>
@@ -10,7 +10,7 @@
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20081208124941"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-12-08T12:49:41"/>
 			<column name="MBR_ID" value="admin"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="D0B057F8E7B949EFA94AE8CDA47DE41B"/>
@@ -19,7 +19,7 @@
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-11-30T17:15:45"/>
 			<column name="MBR_ID" value="10000"/>
 			<column name="MBR_TYP_CD" value="R"/>
 			<column name="OBJ_ID" value="5BAA421QAZ85M717E04AAF8189D821F7"/>
@@ -28,7 +28,7 @@
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-11-30T17:15:45"/>
 			<column name="MBR_ID" value="admin"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5BAA421QAZ85M717ERTAAF8189D821F7"/>
@@ -37,7 +37,7 @@
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20091216111952"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-12-16T11:19:52"/>
 			<column name="MBR_ID" value="fred"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5BAA421E43857CC7E04AAF8189D821F7"/>
@@ -46,7 +46,7 @@
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20091216111952"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-12-16T11:19:52"/>
 			<column name="MBR_ID" value="fran"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5BAA421A43857717E04AAFAA89D821F7"/>
@@ -55,7 +55,7 @@
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRIM_ROLE_MBR_T">
-			<column name="LAST_UPDT_DT" value="20091130171545"/>
+			<column name="LAST_UPDT_DT" valueDate="2009-11-30T17:15:45"/>
 			<column name="MBR_ID" value="5"/>
 			<column name="MBR_TYP_CD" value="P"/>
 			<column name="OBJ_ID" value="5BAA421E4385M717E04AAF8189D821F7"/>

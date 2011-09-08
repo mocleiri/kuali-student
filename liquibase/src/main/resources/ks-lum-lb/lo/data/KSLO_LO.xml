@@ -2,7 +2,7 @@
 	<changeSet id="KSLO_LO-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="076a66e2-6611-4eb0-8768-4b183866be30"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -10,12 +10,12 @@
 			<column name="OBJ_ID" value="43268db4-1db2-415c-ae26-c5518d525d96"/>
 			<column name="RT_DESCR_ID" value="568fa000-c259-4ca3-b771-89e6b093e1f8"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="08dbee40-b444-4bb7-a5d1-6009c5d74a4b"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -23,12 +23,12 @@
 			<column name="OBJ_ID" value="ef6d8272-9460-4a1a-90d3-d7f7b46ac543"/>
 			<column name="RT_DESCR_ID" value="2097d762-71c4-4b25-baf8-cbd506552e64"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="09045591-28f5-4c5f-a33e-44dd5e4e08d5"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -36,12 +36,12 @@
 			<column name="OBJ_ID" value="9198a783-d631-49c7-a24e-8c061cda48ed"/>
 			<column name="RT_DESCR_ID" value="169a648a-c3cd-4d1a-9011-040925d91876"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="0b8edb93-87d8-4089-9c3c-c04654f6b3e5"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -49,12 +49,12 @@
 			<column name="OBJ_ID" value="3d83925d-9379-4ee7-a55e-3564dab23c79"/>
 			<column name="RT_DESCR_ID" value="1720558b-37d9-4c64-b4e5-7d780a288964"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="0b9b13d2-a0f7-4dce-8b1d-79a0a97294df"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -62,11 +62,11 @@
 			<column name="OBJ_ID" value="f64b7198-6b46-4c73-aa6e-9eb2cedf0616"/>
 			<column name="RT_DESCR_ID" value="482fa29c-0345-49ea-a8c6-cded72b057c6"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="0c22b7c3-aaf3-4861-9747-9c6dbdf5d733"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -74,12 +74,12 @@
 			<column name="OBJ_ID" value="963cc7be-6acc-41e0-b9b4-c0cb6527ad5f"/>
 			<column name="RT_DESCR_ID" value="dd2d05bd-f468-40c7-a05d-bf659416e62d"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="0cce31cd-3566-407f-ae34-d3f9972f85a8"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -87,11 +87,11 @@
 			<column name="OBJ_ID" value="465f4e40-c8a9-4f84-ad7c-614a6bfa62b3"/>
 			<column name="RT_DESCR_ID" value="200f76b2-378b-4607-b13e-2da6dce50baf"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="0f78c33b-86a7-4b2d-97d8-608faeb6f3be"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -99,12 +99,12 @@
 			<column name="OBJ_ID" value="edda2803-bad3-473f-aca6-f84e959dfa87"/>
 			<column name="RT_DESCR_ID" value="4efb55c2-8cba-4733-8f1b-cde3b68ef760"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="10aa8784-5fbb-44b8-97f8-f5bd855cdf14"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -112,12 +112,12 @@
 			<column name="OBJ_ID" value="f03b1055-d30b-4803-ae5a-95e190c9545d"/>
 			<column name="RT_DESCR_ID" value="61d90dec-2189-4c51-8dbd-b035197d225c"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="125b78b5-f99b-401f-8512-ffddda3004c0"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -125,12 +125,12 @@
 			<column name="OBJ_ID" value="16945f0e-3c6e-4e74-b3e0-c344213cf36b"/>
 			<column name="RT_DESCR_ID" value="ef879b5a-d851-4606-8c61-9000be65c172"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="173f4640-778c-4561-a6b9-40517a382d68"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -138,11 +138,11 @@
 			<column name="OBJ_ID" value="062ed290-a55f-4bda-8cf1-c3fd3a669b58"/>
 			<column name="RT_DESCR_ID" value="547de4ab-7968-4965-a64f-bdef39d62788"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="19f8d4eb-4886-4930-a23a-52e7902a7fef"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -150,12 +150,12 @@
 			<column name="OBJ_ID" value="4b199c27-c3aa-4fd6-a195-060600440432"/>
 			<column name="RT_DESCR_ID" value="1cde7b48-a2d2-4c0e-9c98-e58c6bf5fbdc"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214102531"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:25:31"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="223fef61-b58a-4fea-8f93-665778d7d4c5"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -163,12 +163,12 @@
 			<column name="OBJ_ID" value="c35d11df-b203-4795-9149-81527d86b9c8"/>
 			<column name="RT_DESCR_ID" value="a1779392-102f-4a5a-9715-45ff3d37ecd9"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="24cc8a07-0bee-4535-9a87-c680ae51183b"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -176,12 +176,12 @@
 			<column name="OBJ_ID" value="c7dd0472-9f88-4324-b390-df132d7c698d"/>
 			<column name="RT_DESCR_ID" value="ac6f43d2-08d0-4822-9657-146bf7d8ea04"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="2901a647-2d72-4d54-b54a-a319b801f9b0"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -189,11 +189,11 @@
 			<column name="OBJ_ID" value="e73b01ba-257f-4ca3-a197-d21e174b3200"/>
 			<column name="RT_DESCR_ID" value="325f9731-7816-453d-9a91-712e53eb54e4"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="2d90a43b-6733-4cb0-908e-f8712d76f8cf"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -201,12 +201,12 @@
 			<column name="OBJ_ID" value="5521dacf-9fed-45f7-88b7-333e71fe9cfe"/>
 			<column name="RT_DESCR_ID" value="5fd5b2ee-e5ec-4d9f-900f-f4c72ea617c6"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="32a7ed92-2cb7-48e4-8581-408a0417aaa2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -214,12 +214,12 @@
 			<column name="OBJ_ID" value="5f1c4b9b-e6b3-499a-8a92-ba5a138adeac"/>
 			<column name="RT_DESCR_ID" value="50f39400-ec4a-4ea1-9ce9-6d40280827ee"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="34a6da31-7abc-4be8-9484-3f464072804d"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -227,11 +227,11 @@
 			<column name="OBJ_ID" value="78dfdd59-7e57-43d4-a4ed-4af514a0d7d9"/>
 			<column name="RT_DESCR_ID" value="c59eaf69-1214-4efc-a32e-f0e948402961"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="35505ba1-5d21-45a7-b169-3a1fa1d12ce9"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -239,11 +239,11 @@
 			<column name="OBJ_ID" value="dbd44131-77af-49a4-8706-8b051fe69abf"/>
 			<column name="RT_DESCR_ID" value="8355de4f-d645-451a-b85a-85f4dcb591cc"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="39730629-9e41-4444-8bf4-e5226eaca4d3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -251,12 +251,12 @@
 			<column name="OBJ_ID" value="b74f7445-0f83-4a2a-b1f6-2e4c8298861f"/>
 			<column name="RT_DESCR_ID" value="293dbb80-796e-4b4e-9a0a-ff0b824689c6"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
-			<column name="EFF_DT" value="19910901000000"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
+			<column name="EFF_DT" valueDate="1991-09-01T00:00:00"/>
 			<column name="ID" value="3bed34f3-4c4a-4526-8969-2b440af5b91b"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -265,12 +265,12 @@
 			<column name="RT_DESCR_ID" value="ae088378-b9e1-45c0-9f7b-d7734e870261"/>
 			<column name="ST" value="Active"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T19:44:48"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
-			<column name="EFF_DT" value="19910901000000"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
+			<column name="EFF_DT" valueDate="1991-09-01T00:00:00"/>
 			<column name="ID" value="3e4d810e-db61-4934-8a9a-e0ab1e63c7a7"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -279,12 +279,12 @@
 			<column name="RT_DESCR_ID" value="d33b21b5-69e5-49ea-9aef-00ffc72213ea"/>
 			<column name="ST" value="Active"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T19:44:48"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="3fa0b0d8-bbd5-4bc5-90ae-1afb3f884a4c"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -292,12 +292,12 @@
 			<column name="OBJ_ID" value="9b846cf6-d0a7-4d76-bdab-5636834c1305"/>
 			<column name="RT_DESCR_ID" value="6a794342-df47-4819-b84d-3586543e3f62"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="4031fd9d-cd9b-41b9-ad50-ec232ee801ac"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -305,12 +305,12 @@
 			<column name="OBJ_ID" value="25ef1229-50c9-42b5-99cb-a18a6d86b2a3"/>
 			<column name="RT_DESCR_ID" value="cd265db2-6074-47c8-a9c8-5a92afafedcf"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="44389716-40e1-4440-8026-6393bb4d5131"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -318,12 +318,12 @@
 			<column name="OBJ_ID" value="362f95b9-1a91-4133-94c0-bf008f2e8879"/>
 			<column name="RT_DESCR_ID" value="1e91de55-1d6a-4fd8-8958-8a6ebca11690"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="4a3f887b-8895-4dfb-b7fb-12a68db2aa06"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -331,12 +331,12 @@
 			<column name="OBJ_ID" value="d167e789-7183-4373-bb1e-63b5863e29fa"/>
 			<column name="RT_DESCR_ID" value="1668b465-093e-4608-b63f-4da54804b7bd"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="4e9842c2-c844-403d-af93-2b7fdfcaa471"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -344,12 +344,12 @@
 			<column name="OBJ_ID" value="244df5f3-1595-4e96-8bed-3da5047930ec"/>
 			<column name="RT_DESCR_ID" value="5f13aa81-0003-45fd-bccb-66547b7f0bc0"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="4eaab6a1-9c20-4983-9ccd-816bb3822925"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -357,12 +357,12 @@
 			<column name="OBJ_ID" value="0a94c23c-57c4-4508-be9c-f152b6352e7b"/>
 			<column name="RT_DESCR_ID" value="1898c1d8-8cd4-4d4e-a3ee-f1afa0cbdedf"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="52622558-06e7-4f85-a8d7-bad0a157a1c3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -370,12 +370,12 @@
 			<column name="OBJ_ID" value="cc03ee4c-ba4e-4740-a9b4-b225ae3c2b4d"/>
 			<column name="RT_DESCR_ID" value="7decc296-c533-4cfa-a667-ff51514e75dc"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="5299f7ee-7986-4d72-98b4-4f9b33a0924b"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -383,11 +383,11 @@
 			<column name="OBJ_ID" value="4be0c7be-e9a9-4042-bee0-1cfceef88af0"/>
 			<column name="RT_DESCR_ID" value="f1c5caf7-54de-40ba-a6ea-154964847e02"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="579dccac-3967-4b05-b020-bc597ec2c3a9"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -395,12 +395,12 @@
 			<column name="OBJ_ID" value="61c86496-9cd4-49d7-96dd-3d7aabb1c65b"/>
 			<column name="RT_DESCR_ID" value="68b90777-f9b8-43f0-953d-2b6f3fdee709"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="59e1a36c-63d3-4e10-8607-840fa3c8e52c"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -408,11 +408,11 @@
 			<column name="OBJ_ID" value="cc22c73d-60ac-4927-83a6-c83d79280293"/>
 			<column name="RT_DESCR_ID" value="93091694-66be-4658-8b52-e904829e8f8d"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="5e008dcd-cc9a-4cc7-b5a3-a3c0707d455a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -420,11 +420,11 @@
 			<column name="OBJ_ID" value="22e9d722-da10-4471-a986-5657574ea38b"/>
 			<column name="RT_DESCR_ID" value="54754205-8d42-4bc4-aa96-c0a28e204f20"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214102531"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:25:31"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="5f7048e5-c149-4449-b244-62f7542b7c01"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -432,11 +432,11 @@
 			<column name="OBJ_ID" value="997f4a5a-9cf5-4e31-889b-8132eba28b45"/>
 			<column name="RT_DESCR_ID" value="6f178b19-0e3a-47b7-9589-11ef5e550aca"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="6259cf3c-fb94-45ba-983a-ca9c54763701"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -444,12 +444,12 @@
 			<column name="OBJ_ID" value="6d8b92a3-6e07-479c-9adb-51ac82f9dc52"/>
 			<column name="RT_DESCR_ID" value="a113de43-3d88-4da0-9757-4748dabf304d"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="626d3129-7a77-4ce5-afba-49908b5b7bb2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -457,12 +457,12 @@
 			<column name="OBJ_ID" value="6e78bcd5-d326-426a-93f2-b563c74c9b5d"/>
 			<column name="RT_DESCR_ID" value="5a012a86-964a-4e7a-a824-4dd1e474e715"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="6ac90330-da9c-4539-be93-f6fbc507204a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -470,12 +470,12 @@
 			<column name="OBJ_ID" value="41495014-5275-49cb-8039-d4511b1a7503"/>
 			<column name="RT_DESCR_ID" value="851e922b-e58c-45b9-b096-67e8a3f3bd71"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="6bc2d669-a57f-4ce0-8075-59b570124c19"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -483,12 +483,12 @@
 			<column name="OBJ_ID" value="da5ed27b-c13f-49ba-bcaa-5fd652ebf7f1"/>
 			<column name="RT_DESCR_ID" value="de902166-aca1-4810-931e-67a35483b0c2"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="6c1ab30d-b804-4cff-bbff-cf682a54ff67"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -496,12 +496,12 @@
 			<column name="OBJ_ID" value="4149645c-89b5-4207-8103-ef7e0a436f2f"/>
 			<column name="RT_DESCR_ID" value="da270513-2be6-4369-a374-06d176b173dd"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="6dc0ab8f-e53b-466c-a947-d3e5aa03386a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -509,12 +509,12 @@
 			<column name="OBJ_ID" value="189a4a39-d192-407e-9b8e-0db5f58cdc7e"/>
 			<column name="RT_DESCR_ID" value="3c41f61c-9385-4d12-89ff-859e65bf07ee"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="6dd2a6e5-248b-48d1-a774-29f1fea126bb"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -522,12 +522,12 @@
 			<column name="OBJ_ID" value="194678eb-e55b-4464-9395-81c5a6a50608"/>
 			<column name="RT_DESCR_ID" value="eddd0c37-d624-4fe3-8ad9-763642138609"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="6fd1fc60-12f9-4ede-a4cf-3305b09d1678"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -535,12 +535,12 @@
 			<column name="OBJ_ID" value="80c1c778-1bf0-4b4a-b2c6-3b67d2c55981"/>
 			<column name="RT_DESCR_ID" value="3e66b8f9-05f8-437b-ae5d-a8a454a59e6d"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="706e5d14-ec8f-446d-8f23-f1da6d9f8eb9"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -548,12 +548,12 @@
 			<column name="OBJ_ID" value="a7ce4474-ceab-4370-9d23-647906a361c8"/>
 			<column name="RT_DESCR_ID" value="a1516cba-ef7f-410a-986a-dbd055ac086a"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="70ba9591-b9bb-4d5f-89f4-48893d1034fc"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -561,12 +561,12 @@
 			<column name="OBJ_ID" value="a2d94d18-cbff-4adc-ad4f-d691586fd7db"/>
 			<column name="RT_DESCR_ID" value="e48ff2de-874b-4cbf-bd9f-04c0aa8f6418"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="7136bad7-b1e1-41da-9a5c-2c11ce3d8947"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -574,11 +574,11 @@
 			<column name="OBJ_ID" value="95f14260-c987-4e69-9d20-fc12ace57a92"/>
 			<column name="RT_DESCR_ID" value="ae604cb6-f87c-4896-9a81-738e80de0f80"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="73939e36-4e86-4c4e-8f57-d5a3b93dcbdb"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -586,12 +586,12 @@
 			<column name="OBJ_ID" value="050dc7c6-0b3f-43a9-80f0-910fdaf30165"/>
 			<column name="RT_DESCR_ID" value="0207d51c-4586-4de2-b452-04f18d936960"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="76cc094e-81a5-4764-8fa7-cab9c1755e07"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -599,11 +599,11 @@
 			<column name="OBJ_ID" value="e0781d90-c8a5-4bfe-9e39-62c2fec1d985"/>
 			<column name="RT_DESCR_ID" value="093e7326-39fb-4755-a5ad-16c2c5607ce8"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="7822d187-fe9e-4e43-8a25-fbc97c165192"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -611,12 +611,12 @@
 			<column name="OBJ_ID" value="52227ac1-908e-4a04-ac65-89b02d9737d0"/>
 			<column name="RT_DESCR_ID" value="ae0cb458-2eb3-4582-8849-3fed6f857f49"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="7c45b2db-72e4-4b60-b6a9-997d72068659"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -624,12 +624,12 @@
 			<column name="OBJ_ID" value="07d800ea-7b73-483c-a6e9-495361c493ae"/>
 			<column name="RT_DESCR_ID" value="c3c830bb-6446-4dfd-b798-4fbd32c0c814"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="7c60365a-edf9-41c1-bedb-9e963a1d7f2e"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -637,12 +637,12 @@
 			<column name="OBJ_ID" value="96aff3c6-340a-451e-9937-310f6fe9b8e7"/>
 			<column name="RT_DESCR_ID" value="f7a38b46-903a-4570-99df-db5de35248a6"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="7efcba05-9111-44c3-88c1-7a78414ddd4d"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -650,12 +650,12 @@
 			<column name="OBJ_ID" value="bf78e9ca-5fc7-46b1-8fe3-c25cb4fc2ce8"/>
 			<column name="RT_DESCR_ID" value="fe6a6755-4ba6-4ed4-8169-81b3fd4e13e0"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="830dd794-2686-4679-b34c-3bb0f402bf7d"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -663,12 +663,12 @@
 			<column name="OBJ_ID" value="7a8ebd85-6ba3-4a35-ada6-6977c972aad9"/>
 			<column name="RT_DESCR_ID" value="7c7821b2-f2a5-46d9-9b87-872e99ee50ca"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="930f4ae1-0e97-4bb5-986c-cb3c71c37032"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -676,12 +676,12 @@
 			<column name="OBJ_ID" value="3c578575-5c1d-44d9-a841-d897dd5e6983"/>
 			<column name="RT_DESCR_ID" value="82b0c859-5cb3-4bc1-857c-5def747e9e02"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="964e1e8d-cc49-412b-a899-36fd88b830d8"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -689,12 +689,12 @@
 			<column name="OBJ_ID" value="161c6553-d751-4274-ac3e-57b618955f91"/>
 			<column name="RT_DESCR_ID" value="70571161-58e0-459e-a097-b7a035853905"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="978ca72e-cdb6-4ed6-b057-0f58f0249de4"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -702,12 +702,12 @@
 			<column name="OBJ_ID" value="f0410dd5-0f5d-46b0-9bc4-a57c4e758176"/>
 			<column name="RT_DESCR_ID" value="6ec5d9ee-737c-4678-bf20-9810e7563600"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="97ea7028-183f-49dc-af89-8f4bb964eba3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -715,12 +715,12 @@
 			<column name="OBJ_ID" value="08c3218d-fd47-43f4-9d83-f82e381ee10c"/>
 			<column name="RT_DESCR_ID" value="67a37278-20f5-41cb-9e74-d73183f99586"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="9b07c128-b46d-4d3b-855e-803d263614d5"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -728,11 +728,11 @@
 			<column name="OBJ_ID" value="363f030c-4871-415e-bf8b-017ae36c7aaf"/>
 			<column name="RT_DESCR_ID" value="07f597bc-b0eb-4eb6-a789-7001bdafab7c"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="9c01136e-5a0f-4ca8-a19c-7afb191a8296"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -740,12 +740,12 @@
 			<column name="OBJ_ID" value="037b246b-344c-4482-989e-b07e5b179b94"/>
 			<column name="RT_DESCR_ID" value="4e0ecb4d-13bc-4cf0-815c-767a3e5640a4"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214102531"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:25:31"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG-GIS_1"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -753,12 +753,12 @@
 			<column name="OBJ_ID" value="372d2f75-13af-4266-9411-4f3535ebe8bc"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG-GIS_1"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG-GIS_2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -766,12 +766,12 @@
 			<column name="OBJ_ID" value="969f35c8-0ba3-48d8-9d84-d5c0b218a8a3"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG-GIS_2"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG-GIS_3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -779,12 +779,12 @@
 			<column name="OBJ_ID" value="bb2f50fb-41c5-457d-bf81-1c289649e043"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG-GIS_3"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG-GIS_4"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -792,12 +792,12 @@
 			<column name="OBJ_ID" value="b2b1ef54-880b-45a6-8288-9cee93af1912"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG-GIS_4"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG123_1"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -805,12 +805,12 @@
 			<column name="OBJ_ID" value="2862c844-64fc-4719-bf8e-f8fba2d46702"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG123_1"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG123_2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -818,12 +818,12 @@
 			<column name="OBJ_ID" value="95fb9374-3ee9-43f3-b43e-d476910d1f8e"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG123_2"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG123_3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -831,12 +831,12 @@
 			<column name="OBJ_ID" value="a0d3468b-4fc9-4ad2-9239-797eb8f4d4f8"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG123_3"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG123_4"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -844,12 +844,12 @@
 			<column name="OBJ_ID" value="0c145cef-2632-41f8-bf6f-f27fe15fa83b"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG123_4"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG170_1"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -857,12 +857,12 @@
 			<column name="OBJ_ID" value="1657b9cf-8067-46fb-b9a2-5c6212d876d5"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG170_1"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG170_2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -870,12 +870,12 @@
 			<column name="OBJ_ID" value="859355eb-b6be-4834-baa2-c19368b71373"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG170_2"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG170_3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -883,12 +883,12 @@
 			<column name="OBJ_ID" value="29542a5d-50c2-456f-b7b9-64d0fe31a603"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG170_3"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG170_4"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -896,12 +896,12 @@
 			<column name="OBJ_ID" value="0d59138d-ec4c-49a2-8789-c8d24866103f"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG170_4"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG170_5"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -909,12 +909,12 @@
 			<column name="OBJ_ID" value="931cec54-fd9e-40b5-a3f7-1f65ec9cf617"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG170_5"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG306_1"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -922,12 +922,12 @@
 			<column name="OBJ_ID" value="c1a92211-f9c5-4a4c-8b6e-067b09b64db4"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG306_1"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG306_2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -935,12 +935,12 @@
 			<column name="OBJ_ID" value="f122a2b5-13d1-4d8f-967e-28e91ef7034f"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG306_2"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG410_1"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -948,12 +948,12 @@
 			<column name="OBJ_ID" value="4f476e07-8822-40cf-885d-8b925c6fd29f"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG410_1"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG410_2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -961,12 +961,12 @@
 			<column name="OBJ_ID" value="0f666133-aeb9-4450-a079-40ab22adbf9b"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG410_2"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG410_3"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -974,12 +974,12 @@
 			<column name="OBJ_ID" value="f7d7a6dd-0b9f-409e-b49f-389fab572679"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG410_3"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG473_1"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -987,12 +987,12 @@
 			<column name="OBJ_ID" value="551de716-a743-4207-a4a6-b241ae38e697"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG473_1"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="REF_LO_GEOG473_2"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1000,12 +1000,12 @@
 			<column name="OBJ_ID" value="5a2474e3-172c-4e53-9511-7b4a644d9c31"/>
 			<column name="RT_DESCR_ID" value="REF_LO_RT_GEOG473_2"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="a01a8486-ca82-40a5-9a0a-30a6c28c706a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1013,12 +1013,12 @@
 			<column name="OBJ_ID" value="37b4141d-1077-4c0b-b9ba-8389c10902e1"/>
 			<column name="RT_DESCR_ID" value="2e6c622b-0801-4e2b-a76f-9e8a10180963"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="a12aff29-4dac-480c-8cfe-02fc80f80a3e"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1026,12 +1026,12 @@
 			<column name="OBJ_ID" value="4224c36c-32a4-48b0-81e7-d633bc83d9b6"/>
 			<column name="RT_DESCR_ID" value="8616f511-dab9-49af-8546-ea90df54d997"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="a86b01da-50fd-448f-8307-d1e481f6521b"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1039,12 +1039,12 @@
 			<column name="OBJ_ID" value="d90e2f19-3bd3-48c2-9ee4-98174179a412"/>
 			<column name="RT_DESCR_ID" value="f0815de9-004a-44f0-bbda-beebb9493068"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
-			<column name="EFF_DT" value="19910901000000"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
+			<column name="EFF_DT" valueDate="1991-09-01T00:00:00"/>
 			<column name="ID" value="a8ed06b9-ed73-4eaa-a2fa-83d806b23196"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1053,12 +1053,12 @@
 			<column name="RT_DESCR_ID" value="5dc64e33-c158-40a6-b4bf-288a692c216c"/>
 			<column name="ST" value="Active"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213194448"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T19:44:48"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="aa1130fe-2bcb-43e9-9cee-ed9e115e3016"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1066,12 +1066,12 @@
 			<column name="OBJ_ID" value="5984db55-3b4e-4206-b047-10514fca26ed"/>
 			<column name="RT_DESCR_ID" value="dcee76f2-c82e-4549-a5ef-7d5406975222"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="aba97ae6-e748-4625-88d1-d6f7e01dfc38"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1079,11 +1079,11 @@
 			<column name="OBJ_ID" value="10c20dd2-ecb4-495e-8aa1-b2cc55e5a3c7"/>
 			<column name="RT_DESCR_ID" value="6432189e-c66b-4b22-9bc5-29bed24bc7de"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="ae016948-3304-4f34-8b3c-ec4ad64720f0"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1091,12 +1091,12 @@
 			<column name="OBJ_ID" value="dcbbe503-f4c8-4963-a234-471aef377edd"/>
 			<column name="RT_DESCR_ID" value="37656b15-a4cb-4b6d-b1b8-9e4781bc81fb"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="af6305f3-d5b1-4bc0-8415-ad75c67369c9"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1104,12 +1104,12 @@
 			<column name="OBJ_ID" value="43517487-0d5e-4268-902d-9116da4b7507"/>
 			<column name="RT_DESCR_ID" value="d9bcc65c-7bee-4528-9a38-670c8bd66e90"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="b10dc068-28dd-4bc1-9a43-fbedc8a144e8"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1117,12 +1117,12 @@
 			<column name="OBJ_ID" value="1c481d2a-92d6-43d2-ad7c-4cbd85046d48"/>
 			<column name="RT_DESCR_ID" value="1f4b7ca7-3c80-44d6-a0fe-15abc4a2fc2e"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="b3d53939-ea7d-4b46-8eb3-12e64b2c332a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1130,12 +1130,12 @@
 			<column name="OBJ_ID" value="1a7228a7-66c6-42e3-a131-2f09ab708362"/>
 			<column name="RT_DESCR_ID" value="bd59f383-8932-40dc-acb1-13a19ac42fb3"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="b6189f9c-bb4c-4de4-b690-9850a8ce78fd"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1143,12 +1143,12 @@
 			<column name="OBJ_ID" value="ac41b132-1649-4f44-afe1-ca1683f8a7ab"/>
 			<column name="RT_DESCR_ID" value="6684b1e2-bca4-4b8e-b49b-d36eb66de3be"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="b70c8c15-8dde-46e2-ae9e-136029bff059"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1156,12 +1156,12 @@
 			<column name="OBJ_ID" value="d322879d-5efe-4b88-b74f-2072bcdf702a"/>
 			<column name="RT_DESCR_ID" value="890b59bd-97eb-4ddf-982c-aafaf1fb9ff8"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="b94ee642-3fc0-40c1-a8ce-e03a959c8527"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1169,12 +1169,12 @@
 			<column name="OBJ_ID" value="a415a8dd-9ab2-4050-9d5a-c68cb6da02ef"/>
 			<column name="RT_DESCR_ID" value="695087e7-8150-43ee-a994-cfd85b88becb"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="be939294-fcaa-4435-a145-54d5c5e7c2db"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1182,11 +1182,11 @@
 			<column name="OBJ_ID" value="a00d9147-22c5-461d-b917-74ec78a8f2af"/>
 			<column name="RT_DESCR_ID" value="6cef1f97-b0a0-4825-b6a5-e0abe8cdcf3b"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="c3715ce8-147a-4e15-9fe1-cbb54260759e"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1194,12 +1194,12 @@
 			<column name="OBJ_ID" value="337bb330-fad1-45ca-964b-44b45038d9c0"/>
 			<column name="RT_DESCR_ID" value="c978da88-6906-480c-9d27-2e9748a61d34"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="c3b20444-ee38-4c1f-8a78-8cf096fdd78e"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1207,12 +1207,12 @@
 			<column name="OBJ_ID" value="8c4f3dc3-7b50-48e0-b913-09fe9459d54f"/>
 			<column name="RT_DESCR_ID" value="6f4b9456-b1e4-4c5e-8aea-acb45aa33015"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="c668849a-bd17-412a-a188-9a90dca35db7"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1220,11 +1220,11 @@
 			<column name="OBJ_ID" value="5b2aac95-bc31-4c9b-a4ed-7eb92f42c9d7"/>
 			<column name="RT_DESCR_ID" value="01da31d9-79ae-407a-a919-1cafa78dd412"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="c7631535-7cd9-4fef-a70f-8f039607e1d0"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1232,12 +1232,12 @@
 			<column name="OBJ_ID" value="d42ad5e2-94e7-464f-a084-29f0e358cc0f"/>
 			<column name="RT_DESCR_ID" value="e54c722e-e1f7-490d-badc-0717161d56fd"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="cae8906e-aa30-47fb-890e-78d962711314"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1245,12 +1245,12 @@
 			<column name="OBJ_ID" value="b6950007-1fcf-4f96-b9c3-c9bd02edb795"/>
 			<column name="RT_DESCR_ID" value="5ecdf985-47ef-4746-a7f6-3d4b22512397"/>
 			<column name="UPDATEID" value="fred"/>
-			<column name="UPDATETIME" value="20101213151948"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:19:48"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="ce0c2ee1-06f8-4ad1-bc15-63746c56c86d"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1258,12 +1258,12 @@
 			<column name="OBJ_ID" value="5ca90548-c794-4867-a24e-10f534f0675c"/>
 			<column name="RT_DESCR_ID" value="4cff2102-1f95-450d-b8ce-80979ec194fd"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="cf215d7e-1c3b-42b4-897f-8977167809fb"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1271,12 +1271,12 @@
 			<column name="OBJ_ID" value="23472e81-11a8-4d64-a984-b3e225e7f1e5"/>
 			<column name="RT_DESCR_ID" value="b3a4c49a-a3e3-42e1-b50a-39a7891fe866"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="d1c9597b-795e-4b9d-a957-09b489a68a51"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1284,11 +1284,11 @@
 			<column name="OBJ_ID" value="71b430b8-cc9f-4b65-a3aa-4360ffe76534"/>
 			<column name="RT_DESCR_ID" value="ac19d52e-0a2c-4a07-86ef-7691aec990c5"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="dbbea6da-ab1f-48ad-a910-74486c67fab4"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1296,11 +1296,11 @@
 			<column name="OBJ_ID" value="e6331f76-acde-49a9-a694-b48a93759a87"/>
 			<column name="RT_DESCR_ID" value="4b625603-cd7b-4111-a2ce-6c18d56f78db"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="7"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172200"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:22:00"/>
 			<column name="ID" value="dc5e927a-339c-4231-ba24-5c3d697af587"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1308,12 +1308,12 @@
 			<column name="OBJ_ID" value="4c71643d-7d34-4fcd-8138-9d59a10977ec"/>
 			<column name="RT_DESCR_ID" value="50f4052c-eddb-44e5-a41a-61346777cdbe"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214105343"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:53:43"/>
 			<column name="VER_NBR" value="10"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="dedc20ad-5d70-439b-a5d8-096ca0bfb3fe"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1321,12 +1321,12 @@
 			<column name="OBJ_ID" value="d7871645-2a78-4919-9c7e-93c814edbed6"/>
 			<column name="RT_DESCR_ID" value="1f85d1b3-643f-499b-80ff-5b2d158b87bc"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="ec4c869f-24e7-47c9-b2f0-aba69f943b63"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1334,12 +1334,12 @@
 			<column name="OBJ_ID" value="04c9dcf9-8f58-4903-b992-7561bea0362c"/>
 			<column name="RT_DESCR_ID" value="899ed492-f3be-4a9c-873c-0fbaea1c9165"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="ecd1c580-52d4-47c1-bc33-29ed0200af87"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1347,12 +1347,12 @@
 			<column name="OBJ_ID" value="18f306ad-7fc6-4698-b506-37d55a0d0121"/>
 			<column name="RT_DESCR_ID" value="7598e7d3-7d3d-4429-9c0d-b1e399383392"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="ee9d23cd-b066-423e-a7c1-9bb9802be50a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1360,12 +1360,12 @@
 			<column name="OBJ_ID" value="753b6606-ca9d-4a6e-83bc-b53e77018d74"/>
 			<column name="RT_DESCR_ID" value="fa684bb7-81e5-4d76-b336-234a69d6901c"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="eeece09a-e723-4fc3-802c-dd46ac40ba5d"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1373,12 +1373,12 @@
 			<column name="OBJ_ID" value="e0d4bc39-95a6-4545-b9d1-ca65b3a90817"/>
 			<column name="RT_DESCR_ID" value="e95efc1a-1b5e-4eac-8ac0-db791e24ef0e"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="f730696f-f732-474b-918d-ac206606b82a"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1386,11 +1386,11 @@
 			<column name="OBJ_ID" value="c42056f4-9bf7-4bf4-88f1-660fbd65d332"/>
 			<column name="RT_DESCR_ID" value="519bec4a-472d-405b-8953-ab62c09960b7"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101213155310"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T15:53:10"/>
 			<column name="VER_NBR" value="6"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="f8b222c4-b632-42b5-9d0e-b1aaea5fe1cd"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1398,11 +1398,11 @@
 			<column name="OBJ_ID" value="1a84b4b8-e59b-4248-86bf-db0a0519f5cb"/>
 			<column name="RT_DESCR_ID" value="2c8107b4-d0a3-443b-b4af-c7a969d1b451"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214102531"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:25:31"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSLO_LO">
-			<column name="CREATETIME" value="20101210172159"/>
+			<column name="CREATETIME" valueDate="2010-12-10T17:21:59"/>
 			<column name="ID" value="fe94d276-1e7c-4704-984a-e2d88cdc46cb"/>
 			<column name="LOTYPE_ID" value="kuali.lo.type.singleUse"/>
 			<column name="LO_REPO_ID" value="kuali.loRepository.key.singleUse"/>
@@ -1410,7 +1410,7 @@
 			<column name="OBJ_ID" value="ac374337-a379-4919-874a-2b4cb80e4122"/>
 			<column name="RT_DESCR_ID" value="c0d37b53-ed67-4db0-8aa9-6430ee0a08f4"/>
 			<column name="UPDATEID" value="earl"/>
-			<column name="UPDATETIME" value="20101214102531"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:25:31"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 	</changeSet>

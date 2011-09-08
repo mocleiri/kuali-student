@@ -3,7 +3,7 @@
 		<insert tableName="KRIM_PHONE_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="b"/>
-			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:35"/>
 			<column name="OBJ_ID" value="5B97C50B03906110E0404F8189D85213"/>
 			<column name="PHONE_TYP_CD" value="HM"/>
 			<column name="PHONE_TYP_NM" value="Home"/>
@@ -12,7 +12,7 @@
 		<insert tableName="KRIM_PHONE_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="c"/>
-			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:35"/>
 			<column name="OBJ_ID" value="5B97C50B03916110E0404F8189D85213"/>
 			<column name="PHONE_TYP_CD" value="MBL"/>
 			<column name="PHONE_TYP_NM" value="Mobile"/>
@@ -21,7 +21,7 @@
 		<insert tableName="KRIM_PHONE_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="d"/>
-			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:35"/>
 			<column name="OBJ_ID" value="5B97C50B03926110E0404F8189D85213"/>
 			<column name="PHONE_TYP_CD" value="OTH"/>
 			<column name="PHONE_TYP_NM" value="Other"/>
@@ -30,7 +30,7 @@
 		<insert tableName="KRIM_PHONE_TYP_T">
 			<column name="ACTV_IND" value="Y"/>
 			<column name="DISPLAY_SORT_CD" value="a"/>
-			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:35"/>
 			<column name="OBJ_ID" value="5B97C50B03936110E0404F8189D85213"/>
 			<column name="PHONE_TYP_CD" value="WRK"/>
 			<column name="PHONE_TYP_NM" value="Work"/>

@@ -1,35 +1,35 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSST_NL_USAGE_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSST_NL_USAGE_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Kuali Catalog"/>
 			<column name="TYPE_DESC" value="Kuali Catalog"/>
 			<column name="TYPE_KEY" value="KUALI.CATALOG"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_NL_USAGE_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Rule Edit"/>
 			<column name="TYPE_DESC" value="Kuali Rule Edit"/>
 			<column name="TYPE_KEY" value="KUALI.RULE"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_NL_USAGE_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Rule Composition"/>
 			<column name="TYPE_DESC" value="Kuali Rule Composition"/>
 			<column name="TYPE_KEY" value="KUALI.RULE.COMPOSITION"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_NL_USAGE_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Rule Example"/>
 			<column name="TYPE_DESC" value="Kuali Rule Example"/>
 			<column name="TYPE_KEY" value="KUALI.RULE.EXAMPLE"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_NL_USAGE_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Rule Preview"/>
 			<column name="TYPE_DESC" value="Kuali Rule Preview"/>
 			<column name="TYPE_KEY" value="KUALI.RULE.PREVIEW"/>

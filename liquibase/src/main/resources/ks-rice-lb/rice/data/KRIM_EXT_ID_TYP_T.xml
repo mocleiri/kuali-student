@@ -5,7 +5,7 @@
 			<column name="DISPLAY_SORT_CD" value="03"/>
 			<column name="ENCR_REQ_IND" value="Y"/>
 			<column name="EXT_ID_TYP_CD" value="TAX"/>
-			<column name="LAST_UPDT_DT" value="20081113140635"/>
+			<column name="LAST_UPDT_DT" valueDate="2008-11-13T14:06:35"/>
 			<column name="NM" value="Tax ID"/>
 			<column name="OBJ_ID" value="5B97C50B038F6110E0404F8189D85213"/>
 			<column name="VER_NBR" value="1"/>

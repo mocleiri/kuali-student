@@ -9,6 +9,8 @@ require 'xmlsimple'
 @dataHeader = '<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">'
 @dataFooter = '</databaseChangeLog>'
 
+@dateTimeColumnSuffixes = ['DT', 'DTTM','TIME','DATE','TS','END','START']
+
 def writeInsertTags(inFileName, outFile)
 
 	table = XmlSimple.xml_in(inFileName)
@@ -21,13 +23,43 @@ def writeInsertTags(inFileName, outFile)
 				colValue.gsub!('&', '&amp;')
 				colValue.gsub!('<', '&lt;')
 				colValue.gsub!('"', '&quot;')
-				outFile.puts (@indent * 3) + '<column name="' + colName+ '" value="' + colValue + '"/>'
+				
+				# check for a date or timestamp column
+				colNameSuffix = ''
+				if colName.include? '_'
+					colNameSuffix = colName.split('_')[-1]
+				else
+					colNameSuffix = colName
+				end
+				
+				valueAttribute = 'value="' + colValue + '"'
+				
+				if @dateTimeColumnSuffixes.include? colNameSuffix or @dateTimeColumnSuffixes.include? colName[-4..-1]
+					colValue = convertDateTimeValue(colValue)
+					valueAttribute = 'valueDate="' + colValue + '"'
+				end
+				
+				outFile.puts (@indent * 3) + '<column name="' + colName+ '" ' + valueAttribute + '/>'
 			end
 			outFile.puts (@indent * 2) + '</insert>'
 		end
 		
 	end
 
+end
+
+def convertDateTimeValue(value)
+	
+	year = value[0..3]
+	month = value[4..5]
+	day = value[6..7]
+	hours = value[8..9]
+	minutes = value[10..11]
+	seconds = value[12..13]
+	
+	# Expected liquibase format is: YYYY-MM-DDThh:mm:ss
+	return year + '-' + month + '-' + day + 'T' + hours + ':' + minutes + ':' + seconds
+	
 end
 
 @tableModules = Hash.new
@@ -97,6 +129,9 @@ impexDir.each do |dirEntry|
 		outputFile.puts @indent + '</changeSet>'
 		outputFile.puts@dataFooter
 		outputFile.close
+		
+		
+		
 	end
 end
 

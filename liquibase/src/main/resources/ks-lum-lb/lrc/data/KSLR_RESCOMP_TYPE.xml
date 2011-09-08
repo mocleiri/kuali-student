@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSLR_RESCOMP_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Certificate"/>
 			<column name="OBJ_ID" value="BFE500B4290445B3B0D09A14D1AFE040"/>
 			<column name="TYPE_DESC" value="This records an awarded certificate"/>
@@ -9,7 +9,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Credits, Fixed"/>
 			<column name="OBJ_ID" value="7AECF0492B24496CA7FCDA083095E917"/>
 			<column name="TYPE_DESC" value="This records a single fixed number of credits that are awarded if the student passes the course."/>
@@ -17,7 +17,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Credits, Multiple"/>
 			<column name="OBJ_ID" value="AE5F2B5E42D14478884A141637B5D920"/>
 			<column name="TYPE_DESC" value="This records multiple numbers of credits that can be awarded for this course."/>
@@ -25,7 +25,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Credits, Variable"/>
 			<column name="OBJ_ID" value="E3822A13EC1A42AF9305EEE1B3224FAB"/>
 			<column name="TYPE_DESC" value="This records a range of number of credits that can be awarded for this course."/>
@@ -33,7 +33,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Degree"/>
 			<column name="OBJ_ID" value="0E192F1BA58149169AFB1C4A53546B64"/>
 			<column name="TYPE_DESC" value="This records a degree is awarded if the student completes the program"/>
@@ -41,7 +41,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Overall GPA "/>
 			<column name="OBJ_ID" value="A905E79D8BAC4A04A2610013490182AD"/>
 			<column name="TYPE_DESC" value="This records the overall GPA of a student in a program "/>
@@ -49,7 +49,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLR_RESCOMP_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Final Grade"/>
 			<column name="OBJ_ID" value="93923DA1E3874217B817D09C1BF3F20F"/>
 			<column name="TYPE_DESC" value="This records that a final grade is a result for this course"/>

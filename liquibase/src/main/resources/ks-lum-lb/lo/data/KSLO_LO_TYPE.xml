@@ -2,7 +2,7 @@
 	<changeSet id="KSLO_LO_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_TYPE">
 			<column name="DESCR" value="LO governed by an organization external to department, e.g., the college at large, or a state or accrediting organization"/>
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="kuali.lo.type.governed"/>
 			<column name="NAME" value="Governed"/>
 			<column name="OBJ_ID" value="602171427CC94F7FB0A55829AED3F082"/>
@@ -10,7 +10,7 @@
 		</insert>
 		<insert tableName="KSLO_LO_TYPE">
 			<column name="DESCR" value="LO created in support of programs or courses, e.g., faculty-inspired additional LO for a course"/>
-			<column name="EFF_DT" value="20080101000000"/>
+			<column name="EFF_DT" valueDate="2008-01-01T00:00:00"/>
 			<column name="ID" value="kuali.lo.type.singleUse"/>
 			<column name="NAME" value="Single use"/>
 			<column name="OBJ_ID" value="77E6218ADA8A4C049F8D0A1F1DC94F99"/>

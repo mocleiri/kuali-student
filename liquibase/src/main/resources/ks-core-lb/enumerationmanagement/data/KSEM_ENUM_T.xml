@@ -2,7 +2,7 @@
 	<changeSet id="KSEM_ENUM_T-initial-data" author="alubbers">
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="GroupNames for the message service"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="NAME" value="KS Message Group Names"/>
 			<column name="OBJ_ID" value="53413779-b770-4a5b-bc75-fcc6b60fb9db"/>
@@ -10,7 +10,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Locales for the message service."/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.locales"/>
 			<column name="NAME" value="KS Message Locales"/>
 			<column name="OBJ_ID" value="277e4ecc-7eba-4890-be7a-4df9dd8df5c3"/>
@@ -18,7 +18,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="ATP Durations"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.duration"/>
 			<column name="NAME" value="ATP Durations"/>
 			<column name="OBJ_ID" value="1C36B6742FF1437188CA6F29574FD344"/>
@@ -26,39 +26,39 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="ATP Intensity"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="NAME" value="ATP Intensity"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1638F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA8F6D4CE040C60AF05B1F2B"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Course Dependency Types"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="NAME" value="Course Dependency Types"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D68F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB026D4CE040C60AF05B1F2B"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Course Set Dependency Types"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.courseSet.types"/>
 			<column name="NAME" value="Course Set Dependency Types"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D88F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB046D4CE040C60AF05B1F2B"/>
 			<column name="VER_NBR" value="4"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Program Dependency Types"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="NAME" value="Program Dependency Types"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D78F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB036D4CE040C60AF05B1F2B"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Program Level"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.enum.lu.program.level"/>
 			<column name="NAME" value="Program Level"/>
 			<column name="OBJ_ID" value="99E334E9C3A749519C5563991834E56C"/>
@@ -66,7 +66,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="CIP 2000"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.enum.type.cip2000"/>
 			<column name="NAME" value="CIP Codes 2000"/>
 			<column name="OBJ_ID" value="9502109B1D344A78B7652A6A84EF52A8"/>
@@ -74,7 +74,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="CIP 2010"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.enum.type.cip2010"/>
 			<column name="NAME" value="CIP Codes 2010"/>
 			<column name="OBJ_ID" value="8F168A9D34784C34B81B3ED975F88B28"/>
@@ -82,7 +82,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Organization Types for Clu Admin Org"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="NAME" value="Clu Admin Org Types"/>
 			<column name="OBJ_ID" value="77534766-F76F-D61F-1A1C-FC091CD6E1C8"/>
@@ -90,7 +90,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Campus Location Enumeration"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.campusLocation"/>
 			<column name="NAME" value="Campus Location Enumeration"/>
 			<column name="OBJ_ID" value="5A9C2037DDE74C88944BFD4EA735AD96"/>
@@ -98,7 +98,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="University Classification"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.code.UniversityClassification"/>
 			<column name="NAME" value="University Classification"/>
 			<column name="OBJ_ID" value="9F830972EC5346438B869A645F3BC543"/>
@@ -106,7 +106,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Learning Unit Fee Type"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="NAME" value="Learning Unit Fee Type"/>
 			<column name="OBJ_ID" value="94AD1A22668545BABF8C9705A98E540C"/>
@@ -114,7 +114,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Learning Unit Rate Type"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.rateType"/>
 			<column name="NAME" value="Learning Unit Rate Type"/>
 			<column name="OBJ_ID" value="89EE4FF0E05B4ECEA56729963979EAF5"/>
@@ -122,7 +122,7 @@
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Final Exam Status"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.finalExam.status"/>
 			<column name="NAME" value="Final Exam 
 Status"/>
@@ -131,7 +131,7 @@ Status"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="Subject Area Enumeration"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="NAME" value="Subject Area Enumeration"/>
 			<column name="OBJ_ID" value="E26A3A0A41614AFFB04C270191627714"/>
@@ -139,7 +139,7 @@ Status"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
 			<column name="DESCR" value="KS Data States"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="NAME" value="KS Data States"/>
 			<column name="OBJ_ID" value="DDD8CECF38E84DD081284C8A8D843D0F"/>

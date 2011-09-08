@@ -1,21 +1,21 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSLU_CLU_SET_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSLU_CLU_SET_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Course Clu Set"/>
 			<column name="TYPE_DESC" value="Clu set for Courses"/>
 			<column name="TYPE_KEY" value="kuali.cluSet.type.CreditCourse"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_CLU_SET_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Program Clu Set"/>
 			<column name="TYPE_DESC" value="Clu set for programs"/>
 			<column name="TYPE_KEY" value="kuali.cluSet.type.Program"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_CLU_SET_TYPE">
-			<column name="EFF_DT" value="20100101000000"/>
+			<column name="EFF_DT" valueDate="2010-01-01T00:00:00"/>
 			<column name="NAME" value="Test Clu Set"/>
 			<column name="TYPE_DESC" value="Clu set for Tests"/>
 			<column name="TYPE_KEY" value="kuali.cluSet.type.Test"/>

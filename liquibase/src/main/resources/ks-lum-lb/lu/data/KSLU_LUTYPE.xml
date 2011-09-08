@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSLU_LUTYPE-initial-data" author="alubbers">
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Core"/>
 			<column name="OBJ_ID" value="F7E6BBECCF2C408E813497BBA8553E5A"/>
 			<column name="TYPE_DESC" value="Program containing core requirements"/>
@@ -9,7 +9,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Credit Course"/>
 			<column name="OBJ_ID" value="45F061A5111A417B8F401C0529809B5C"/>
 			<column name="TYPE_DESC" value="An course offered for academic credit"/>
@@ -17,7 +17,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Credit Course Format Shell"/>
 			<column name="OBJ_ID" value="31561FFA4B2043B98BE2ACC956C9FEE8"/>
 			<column name="TYPE_DESC" value="A shell for course formats"/>
@@ -25,7 +25,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Major"/>
 			<column name="OBJ_ID" value="E82DFABF0D99439FBF970CB09A4778B6"/>
 			<column name="TYPE_DESC" value="A Major Discipline"/>
@@ -33,7 +33,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Non-Credit Course"/>
 			<column name="OBJ_ID" value="74F7443203534261A2E9654AE6867A79"/>
 			<column name="TYPE_DESC" value="A course that is not offered for regular academic credit"/>
@@ -41,7 +41,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Req"/>
 			<column name="OBJ_ID" value="96EAAB2D6B884F388C3DA7858A6F3EB7"/>
 			<column name="TYPE_DESC" value="Program requirements"/>
@@ -49,7 +49,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Specialization"/>
 			<column name="OBJ_ID" value="1CEBE9BAC710481DA398C766B8EE113F"/>
 			<column name="TYPE_DESC" value="Specialization of a Major Discipline"/>
@@ -57,7 +57,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Directed"/>
 			<column name="OBJ_ID" value="279D87863C84442D927F317C29E436DE"/>
 			<column name="TYPE_DESC" value="The exchange of opinions or questions on course material, directed by the instructor."/>
@@ -65,7 +65,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Discussion"/>
 			<column name="OBJ_ID" value="2C116DCB4BE147E58E22946268DAF7F3"/>
 			<column name="TYPE_DESC" value="The exchange of opinions or questions on course material."/>
@@ -73,15 +73,15 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Homework"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1998F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAC56D4CE040C60AF05B1F2B"/>
 			<column name="TYPE_DESC" value="Student's doing homework, problem sets and reading assignments and writing"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.Homework"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Lab"/>
 			<column name="OBJ_ID" value="528734054E4A44E4AAE2789490A0D463"/>
 			<column name="TYPE_DESC" value="Student working on projects in a defined laboratory space.  Instructors are on-hand for students to ask questions and guidance."/>
@@ -89,7 +89,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Lecture"/>
 			<column name="OBJ_ID" value="3CB868F97F804AC0B4AE0F84174AE701"/>
 			<column name="TYPE_DESC" value="Instructor presentation of course materials."/>
@@ -97,7 +97,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Tutorial"/>
 			<column name="OBJ_ID" value="CF0872C0047A4809A3A77E813EEABDBF"/>
 			<column name="TYPE_DESC" value="Instructor or assistant walking through a learning practice."/>
@@ -105,15 +105,15 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Web Discuss"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1988F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAC46D4CE040C60AF05B1F2B"/>
 			<column name="TYPE_DESC" value="Web-based or technologically-mediated activities replacing standard discussion sections"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.WebDiscussion"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Web Lecture"/>
 			<column name="OBJ_ID" value="55AE1CB7FDEE43DDAE8E4DA47767CE21"/>
 			<column name="TYPE_DESC" value="Instructor presentation of course materials via the web"/>
@@ -121,7 +121,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Baccalaureate"/>
 			<column name="OBJ_ID" value="6A33734B7426482792951DD942080C05"/>
 			<column name="TYPE_DESC" value="A Baccalaureate"/>
@@ -129,23 +129,23 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Standardized Test"/>
-			<column name="OBJ_ID" value="ABD1CCEDC19A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAC66D4CE040C60AF05B1F2B"/>
 			<column name="TYPE_DESC" value="Standardized Test"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Standardized Test Component"/>
-			<column name="OBJ_ID" value="ABD1CCEDC19B8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAC76D4CE040C60AF05B1F2B"/>
 			<column name="TYPE_DESC" value="Standardized Test Component"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test.component"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Course"/>
 			<column name="OBJ_ID" value="A8F346262C1B41B79C36BA0E27790BAB"/>
 			<column name="TYPE_DESC" value="A Shell Course"/>
@@ -153,7 +153,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Program"/>
 			<column name="OBJ_ID" value="0F7597C4E8DE4B6EBBCCCB8B631B81C6"/>
 			<column name="TYPE_DESC" value="A Shell Program"/>

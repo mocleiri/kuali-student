@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSPR_PROPOSAL_REFTYPE-initial-data" author="alubbers">
 		<insert tableName="KSPR_PROPOSAL_REFTYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Clu Proposal Reference"/>
 			<column name="OBJ_ID" value="EEFBFD0AB3024EC89DAEBA81B90E265D"/>
 			<column name="TYPE_DESC" value="Clu proposal reference type"/>

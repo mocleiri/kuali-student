@@ -2,7 +2,7 @@
 	<changeSet id="KSDO_DOCUMENT_CATEGORY-initial-data" author="alubbers">
 		<insert tableName="KSDO_DOCUMENT_CATEGORY">
 			<column name="CATEGORY_ID" value="documentCategory.course"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Course Documents"/>
 			<column name="OBJ_ID" value="C72E90E456F44D9990F5C37B0C465750"/>
 			<column name="RT_DESCR_ID" value="RT-DESC-DOCUMENT-2"/>
@@ -10,7 +10,7 @@
 		</insert>
 		<insert tableName="KSDO_DOCUMENT_CATEGORY">
 			<column name="CATEGORY_ID" value="documentCategory.proposal"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Proposal Documents"/>
 			<column name="OBJ_ID" value="9574D1E895B64D4F9C7987393FCB2D60"/>
 			<column name="RT_DESCR_ID" value="RT-DESC-DOCUMENT-1"/>

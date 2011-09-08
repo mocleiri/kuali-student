@@ -3,7 +3,7 @@
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Appointed by the Governor.  With the exception of the student member, each Regent is appointed for a term of five years, and may not serve more than two consecutive terms. The student regent is appointed for a one-year term, and may be reappointed. Regent"/>
 			<column name="ID" value="1"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -14,13 +14,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Board of Regents"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of the Graduate School"/>
 			<column name="ID" value="10"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -31,13 +31,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of the Graduate School"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214090829"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T09:08:29"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Geology COC"/>
 			<column name="ID" value="100"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -48,13 +48,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Geology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:47:13"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the GenderStudies COC"/>
 			<column name="ID" value="101"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -65,13 +65,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the GenderStudies COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:55:17"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the English COC"/>
 			<column name="ID" value="102"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -82,13 +82,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the English COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:31:08"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the FineArts COC"/>
 			<column name="ID" value="103"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -99,13 +99,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the FineArts COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:09:58"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the French COC"/>
 			<column name="ID" value="104"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -116,13 +116,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the French COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:08:44"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Geography COC"/>
 			<column name="ID" value="105"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -133,13 +133,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Geography COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:55:38"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Linguistics COC"/>
 			<column name="ID" value="106"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -150,13 +150,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Linguistics COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:09:19"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Music COC"/>
 			<column name="ID" value="107"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -167,13 +167,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Music COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:59:14"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the History COC"/>
 			<column name="ID" value="108"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -184,13 +184,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the History COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:00:02"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the PolySci COC"/>
 			<column name="ID" value="109"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -201,13 +201,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the PolySci COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:49:57"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
 			<column name="ID" value="11"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -218,13 +218,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214094704"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T09:47:04"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Psychology COC"/>
 			<column name="ID" value="110"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -235,13 +235,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Psychology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:41:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Sociology COC"/>
 			<column name="ID" value="111"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -252,13 +252,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Sociology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:52:56"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the InterdiscBSOS COC"/>
 			<column name="ID" value="112"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -269,13 +269,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the InterdiscBSOS COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:16:49"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Chemical COC"/>
 			<column name="ID" value="113"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -286,13 +286,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Chemical COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:21:33"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Civil COC"/>
 			<column name="ID" value="114"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -303,13 +303,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Civil COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:22:14"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Mechanical COC"/>
 			<column name="ID" value="115"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -320,13 +320,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Mechanical COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:23:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the CompSci COC"/>
 			<column name="ID" value="116"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -337,13 +337,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the CompSci COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:22:57"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Biology COC"/>
 			<column name="ID" value="117"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -354,13 +354,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Biology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:04:30"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Biochemistry COC"/>
 			<column name="ID" value="118"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -371,13 +371,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Biochemistry COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:27:36"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Botany COC"/>
 			<column name="ID" value="119"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -388,13 +388,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Botany COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:46:40"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
 			<column name="ID" value="12"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -405,13 +405,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Associate Provost for Academic Affairs and Dean of Undergraduate Studies"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214091403"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T09:14:03"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Chemistry COC"/>
 			<column name="ID" value="120"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -422,13 +422,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Chemistry COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:26:59"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Geology COC"/>
 			<column name="ID" value="121"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -439,13 +439,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Geology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:47:13"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the GenderStudies COC"/>
 			<column name="ID" value="122"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -456,13 +456,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the GenderStudies COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:55:17"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the English COC"/>
 			<column name="ID" value="124"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -473,13 +473,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the English COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:31:08"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the FineArts COC"/>
 			<column name="ID" value="125"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -490,13 +490,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the FineArts COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:09:58"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the French COC"/>
 			<column name="ID" value="126"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -507,13 +507,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the French COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:08:44"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Geography COC"/>
 			<column name="ID" value="127"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -524,13 +524,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Geography COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:55:38"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Linguistics COC"/>
 			<column name="ID" value="128"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -541,13 +541,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Linguistics COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:09:19"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Music COC"/>
 			<column name="ID" value="129"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -558,13 +558,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Music COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:59:14"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the History COC"/>
 			<column name="ID" value="130"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -575,13 +575,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the History COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:00:02"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the PolySci COC"/>
 			<column name="ID" value="131"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -592,13 +592,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the PolySci COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:49:57"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Psychology COC"/>
 			<column name="ID" value="132"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -609,13 +609,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Psychology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:41:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Sociology COC"/>
 			<column name="ID" value="133"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -626,13 +626,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Sociology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:52:56"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the InterdiscBSOS COC"/>
 			<column name="ID" value="134"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -643,13 +643,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the InterdiscBSOS COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:16:49"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Chemical COC"/>
 			<column name="ID" value="135"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -660,13 +660,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Chemical COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:21:33"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Civil COC"/>
 			<column name="ID" value="136"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -677,13 +677,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Civil COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:22:14"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Mechanical COC"/>
 			<column name="ID" value="137"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -694,13 +694,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Mechanical COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:23:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the CompSci COC"/>
 			<column name="ID" value="138"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -711,13 +711,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the CompSci COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:22:57"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Biology COC"/>
 			<column name="ID" value="139"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -728,13 +728,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Biology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:04:30"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Biochemistry COC"/>
 			<column name="ID" value="140"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -745,13 +745,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Biochemistry COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:27:36"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Botany COC"/>
 			<column name="ID" value="141"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -762,13 +762,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Botany COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:46:40"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Chemistry COC"/>
 			<column name="ID" value="142"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -779,13 +779,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Chemistry COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:26:59"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the Geology COC"/>
 			<column name="ID" value="143"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -796,13 +796,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the Geology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124713"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:47:13"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the GenderStudies COC"/>
 			<column name="ID" value="144"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -813,13 +813,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the GenderStudies COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115517"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:55:17"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Composed of ALL the Administrative Members of each of the Departmental COCs"/>
 			<column name="ID" value="146"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -830,13 +830,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Ex-Officio Member of the Dept COC Reps"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Named Chair"/>
 			<column name="ID" value="147"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -847,13 +847,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Geology CIC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="8 Other Named Faculty members from the department"/>
 			<column name="ID" value="148"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -864,13 +864,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Geology CIC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Must be the Chair of the Departmental COC"/>
 			<column name="ID" value="149"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -881,13 +881,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Ex-Officio Member of the Geology CIC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Officer of Chemical Engineering Dept"/>
 			<column name="ID" value="150"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -898,13 +898,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Officer of Chemical Engineering Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Officer of Civil Engineering Dept"/>
 			<column name="ID" value="151"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -915,13 +915,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Officer of Civil Engineering Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Officer of Engineering College"/>
 			<column name="ID" value="152"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -932,13 +932,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Officer of Engineering College"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213104435"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T10:44:35"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Social Science Division COC"/>
 			<column name="ID" value="153"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -949,13 +949,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Social Science Division COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105732"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:57:32"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="154"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -965,13 +965,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Behavioral Science Division COC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Social Science Division COC"/>
 			<column name="ID" value="157"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -982,13 +982,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Social Science Division COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105732"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:57:32"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="158"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -998,13 +998,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Behavioral Science Division COC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="161"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1014,13 +1014,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Undergrad Program COC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="162"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1030,13 +1030,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Undergrad Program COC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Behavioral and Social Science College COC"/>
 			<column name="ID" value="167"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1047,13 +1047,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Behavioral and Social Science College COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105920"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:59:20"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Behavioral and Social Science College COC"/>
 			<column name="ID" value="168"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1064,13 +1064,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Behavioral and Social Science College COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105920"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:59:20"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Life and Biology College COC"/>
 			<column name="ID" value="169"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1081,13 +1081,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Life and Biology College COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214110923"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:09:23"/>
 			<column name="VER_NBR" value="4"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of Students"/>
 			<column name="ID" value="17"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1098,13 +1098,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of Students"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214094704"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T09:47:04"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the Life and Biology College COC"/>
 			<column name="ID" value="170"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1115,13 +1115,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Life and Biology College COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214110923"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:09:23"/>
 			<column name="VER_NBR" value="4"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of Publishing COC"/>
 			<column name="ID" value="171"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1132,13 +1132,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of Publishing COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111226"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:12:26"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of Publishing COC"/>
 			<column name="ID" value="172"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1149,13 +1149,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of Publishing COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111226"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:12:26"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="18"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1165,13 +1165,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Vice Provost for Information Technology &amp; CIO "/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of Arts and Humanities"/>
 			<column name="ID" value="19"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1182,13 +1182,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of Arts and Humanities"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111301"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:13:01"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="2"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1198,13 +1198,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Treasurer of the Board of Regents"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="20"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1214,12 +1214,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the English Department"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101214143432"/>
+			<column name="CREATETIME" valueDate="2010-12-14T14:34:32"/>
 			<column name="DESCR" value="Member of the Mathematics Dept"/>
 			<column name="ID" value="20258ce0-be3b-4e5f-9590-f7a19fbc5a8c"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1229,13 +1229,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Mathematics Dept"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214143432"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T14:34:32"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="21"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1245,13 +1245,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Fine Arts Department"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="22"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1261,13 +1261,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the French Department"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Geography Department"/>
 			<column name="ID" value="23"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1278,12 +1278,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Geography Department"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214110048"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:00:48"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213124958"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:49:58"/>
 			<column name="DESCR" value="Chair of the Medical School COC"/>
 			<column name="ID" value="23d1506a-a8ff-459c-8d01-0b25c9bdd159"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1293,13 +1293,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Medical School COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213125016"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:50:16"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="24"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1309,13 +1309,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Linguistics Department"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="25"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1325,13 +1325,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Music Department"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean for Behavioral and Social Sciences"/>
 			<column name="ID" value="26"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1342,13 +1342,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean for Behavioral and Social Sciences"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213103351"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T10:33:51"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="27"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1358,13 +1358,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the History Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="28"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1374,13 +1374,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Political Science Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="29"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1390,12 +1390,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Psychology Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213122611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:26:11"/>
 			<column name="DESCR" value="Chair of Animal and Avian Science Dept COC"/>
 			<column name="ID" value="2cae5071-5eed-4d93-86cf-0627680b6c6f"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1405,13 +1405,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of Animal and Avian Science Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:26:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Appointed by the Board of Regents.  The Chancellor is the administrative and executive head of Kuali University and exercises complete executive authority over the University, subject to the direction of the President.   The Chancellor is responsible for "/>
 			<column name="ID" value="3"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1422,13 +1422,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chancellor"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="30"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1438,12 +1438,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Sociology Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114631"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:46:31"/>
 			<column name="DESCR" value="Chair of African American Studies Dept COC"/>
 			<column name="ID" value="30928ac9-2076-4f88-aa63-c49bc3df5bd3"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1453,13 +1453,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of African American Studies Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114631"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:46:31"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Head of the Interdisciplinary Studies in Social Science Program"/>
 			<column name="ID" value="31"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1470,13 +1470,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Head of the Interdisciplinary Studies in Social Science Program"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213121554"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:15:54"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of Engineering"/>
 			<column name="ID" value="32"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1487,13 +1487,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of Engineering"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213104435"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T10:44:35"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="33"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1503,13 +1503,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Chemical Engineering Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="34"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1519,13 +1519,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Civil Engineering Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="35"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1535,13 +1535,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Mechanical Engineering Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="36"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1551,13 +1551,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Computer Science Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of the Science College"/>
 			<column name="ID" value="37"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1568,13 +1568,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of the Science College"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124303"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:43:03"/>
 			<column name="VER_NBR" value="5"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="38"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1584,13 +1584,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Biology Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="39"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1600,12 +1600,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Biochemistry Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114631"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:46:31"/>
 			<column name="DESCR" value="Member of African American Studies Dept COC"/>
 			<column name="ID" value="3ac710e3-722f-42ed-b42f-d38918e6e5e3"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1615,12 +1615,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of African American Studies Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114631"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:46:31"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213113449"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:34:49"/>
 			<column name="DESCR" value="Chair of the Art Hist &amp; Arch COC"/>
 			<column name="ID" value="3f3085bf-5ad8-412d-ae37-11440d8d1a96"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1630,13 +1630,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Art Hist &amp; Arch COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113449"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:34:49"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="4"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1646,13 +1646,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chief Academic Officer and Executive Vice Chancellor"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="40"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1662,12 +1662,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Botany Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213120635"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:06:35"/>
 			<column name="DESCR" value="Chair of the Theatre, Dance, Perf Arts COC"/>
 			<column name="ID" value="4044012f-788e-4b79-b5a6-2428b72ef095"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1677,13 +1677,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Theatre, Dance, Perf Arts COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120811"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:08:11"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="41"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1693,13 +1693,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Chemistry Dept"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Geology Dept"/>
 			<column name="ID" value="42"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1710,13 +1710,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Geology Dept"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213143638"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T14:36:38"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of the Business School"/>
 			<column name="ID" value="43"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1727,13 +1727,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of the Business School"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213111301"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:13:01"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="44"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1743,13 +1743,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Head of the Accounting Section"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="45"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1759,13 +1759,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Head of the Finance Section"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="46"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1775,13 +1775,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Head of the International Business Section"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="47"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1791,12 +1791,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Head of the Marketing Section"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114001"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:40:01"/>
 			<column name="DESCR" value="Chair of the CCJS Dept COC"/>
 			<column name="ID" value="478be98f-107d-489e-9a93-0a189b056cf9"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1806,13 +1806,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the CCJS Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114024"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:40:24"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Dean of the Medical School"/>
 			<column name="ID" value="48"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1823,13 +1823,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of the Medical School"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213101708"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T10:17:08"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="49"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1839,12 +1839,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Deal of the College of Education"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213115805"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:58:05"/>
 			<column name="DESCR" value="Member of the Philosophy Dept COC"/>
 			<column name="ID" value="4da903d7-2e75-4bc2-bfad-61e59f9de12d"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1854,13 +1854,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Philosophy Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115823"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:58:23"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="President of Kuali University"/>
 			<column name="ID" value="5"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1871,13 +1871,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="President of Kuali University"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214093947"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T09:39:47"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="50"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -1887,13 +1887,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Dean of the College of Distance Education"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Extended Studies Program"/>
 			<column name="ID" value="51"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1904,13 +1904,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Extended Studies Program"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213110612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:06:12"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administers and supervises the implementation of all university financial aid policies, office procedures and funding programs. Supervise all office personnel. Plans, organizes and supervises the operational functions of the Financial Aid Office."/>
 			<column name="ID" value="52"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1921,13 +1921,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Director of Financial Aid"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Oversee undergraduate students' college choice, transition to college, retention, and graduation rates. Manage and coordinate recruitment strategies with campus units involved in those areas, including the undergraduate admissions, scholarships and studen"/>
 			<column name="ID" value="53"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1938,13 +1938,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Director of Admissions and Enrollment Planning"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Registrar oversee customer service to students, faculty members, administrators, alumni, and the general public in the areas of record keeping, course scheduling, course registration, exam scheduling, grades collection, program audit and evaluation, g"/>
 			<column name="ID" value="54"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1955,13 +1955,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Registrar"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Registrar oversee customer service to students, faculty members, administrators, alumni, and the general public in the areas of record keeping, course scheduling, course registration, exam scheduling, grades collection, program audit and evaluation, g"/>
 			<column name="ID" value="55"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1972,13 +1972,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Associate Registrar for Curriculumn"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Registrar oversee customer service to students, faculty members, administrators, alumni, and the general public in the areas of record keeping, course scheduling, course registration, exam scheduling, grades collection, program audit and evaluation, g"/>
 			<column name="ID" value="56"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -1989,13 +1989,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Assistant in the Curriculumn Section of the Registrar's Office"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Director Student Accounts is responsible for tuition and student fee assessment, payment and collection.  "/>
 			<column name="ID" value="57"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2006,13 +2006,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Bursar"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member terms are for one year beginning on July 1. Members may be reappointed by the units they represent.    The University Academic Advising Committee meets once a month throughout the academic year. The Committee membership is to include representative"/>
 			<column name="ID" value="58"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2023,13 +2023,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Academic Advising Committee"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Committee membership includes: Associate Provost for Academic Programs, Council of Deans, Department Chairs Cabinet, Faculty, Senate, Student Government Association, Student Affairs "/>
 			<column name="ID" value="59"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2040,12 +2040,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of ASPAC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213124842"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:48:42"/>
 			<column name="DESCR" value="Member of the Business School COC"/>
 			<column name="ID" value="5ee145f6-e65d-4c6d-a36c-c123163015d5"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2055,13 +2055,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Business School COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124842"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:48:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The role of the Foundation Vice President includes developing policies, procedures, guidelines and long-range plans for the operation of the Kuali University Foundation, overseeing the financial affairs and investments of the Foundation, and serving as ad"/>
 			<column name="ID" value="6"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2072,13 +2072,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Foundation Vice President "/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Council's membership is to include representatives from: Admissions. Provost Division, Student Affairs, Each Academic College (approximately half should be faculty members), Senate, Student Government ?????? preferably a transfer student"/>
 			<column name="ID" value="60"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2089,13 +2089,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the Articulation Coordination Council"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="This committee consists of: Council of Deans member, Department Chairs Cabinet, Executive Vice President &amp; Provost, Faculty, Senate Past President, Senate President, Senate President-Elect,  Student Government Association member"/>
 			<column name="ID" value="61"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2105,12 +2105,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213112941"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:29:41"/>
 			<column name="DESCR" value="Member of the College Arts and Hum COC"/>
 			<column name="ID" value="6161c095-35a7-4f68-8a17-03a1bdbd012a"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2120,13 +2120,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the College Arts and Hum COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113246"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:32:46"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="This committee consists of: Associate Vice President - Budget &amp; Planning, Executive Vice President &amp; Provost, President of Kuali University, Vice President for Business &amp; Finance, Vice President for Student Affairs"/>
 			<column name="ID" value="63"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2137,12 +2137,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of Budget Cabinet"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213122048"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:20:48"/>
 			<column name="DESCR" value="Member of the College of Eng COC"/>
 			<column name="ID" value="633c2471-25b2-4f2c-8533-23d0faaf5736"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2152,13 +2152,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the College of Eng COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122048"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:20:48"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Council of Deans has members from each college."/>
 			<column name="ID" value="64"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2169,13 +2169,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of The Council of Deans"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chairs of each academic department or program"/>
 			<column name="ID" value="65"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2186,13 +2186,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of Department Chairs Cabinet"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="??????45CFR46.107 IRB Membership (a) Each IRB shall have at least five members, with varying backgrounds to promote complete and adequate review of research activities commonly conducted by the institution. The IRB shall be sufficiently qualified through the e"/>
 			<column name="ID" value="66"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2203,12 +2203,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the IRB"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213124958"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:49:58"/>
 			<column name="DESCR" value="Member of the Medical School COC"/>
 			<column name="ID" value="66bb93d8-73cf-420b-a615-856106a26fb1"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2218,13 +2218,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Medical School COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213125016"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:50:16"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The JAC is appointed by the President and is composed of ten faculty members nominated by the members of the University community or the Faculty Senate, five staff members nominated by the Vice President for Student Affairs, five graduate students nominat"/>
 			<column name="ID" value="67"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2235,12 +2235,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the JAC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213121854"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:18:54"/>
 			<column name="DESCR" value="Member of the College of Educ COC"/>
 			<column name="ID" value="677491b9-c196-49f8-8eb2-c3e71de06c00"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2250,12 +2250,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the College of Educ COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213121854"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:18:54"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213120635"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:06:35"/>
 			<column name="DESCR" value="Member of the Theatre, Dance, Perf Arts COC"/>
 			<column name="ID" value="67d869b6-b551-4f62-87e3-8a6f939191cf"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2265,13 +2265,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Theatre, Dance, Perf Arts COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120811"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:08:11"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Student Government members are elected by the students to a one year term. "/>
 			<column name="ID" value="68"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2282,13 +2282,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Student Government Representative"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Student members are elected by the students for a one-year term. "/>
 			<column name="ID" value="69"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2299,12 +2299,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Grad Student Representataive"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213124842"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:48:42"/>
 			<column name="DESCR" value="Chair of the Business School COC"/>
 			<column name="ID" value="6ab6c504-0aab-4665-9d43-bb7ecdce2439"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2314,13 +2314,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Business School COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124842"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:48:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Provost and Executive Vice President for Academic Affairs"/>
 			<column name="ID" value="7"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2331,13 +2331,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Provost and Executive Vice President for Academic Affairs"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213102017"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T10:20:17"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="70"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2347,13 +2347,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Senate President"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="71"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2363,13 +2363,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the AAC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="72"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2379,13 +2379,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the FDARC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="73"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2395,13 +2395,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of  the RPAC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="74"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2411,13 +2411,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the JAC"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="75"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
 			<column name="MIN_NUM_RELTN" value="1"/>
@@ -2427,13 +2427,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Faculty Governance Council"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the COC"/>
 			<column name="ID" value="76"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2444,13 +2444,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:10:47"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Ex-Officio Member of the COC"/>
 			<column name="ID" value="77"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2461,13 +2461,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Ex-Officio Member of the COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:10:47"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Member of the COC"/>
 			<column name="ID" value="78"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2478,13 +2478,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Member of the COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:10:47"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Executive Officer of the COC"/>
 			<column name="ID" value="79"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2495,12 +2495,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Executive Officer of the COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:10:47"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114830"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:48:30"/>
 			<column name="DESCR" value="Member of the Economics Dept COC"/>
 			<column name="ID" value="7e83306b-b2a6-4606-b2f3-215a3d4cd531"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2510,13 +2510,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Economics Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114830"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:48:30"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="The Vice President for Student Affairs oversees student services and programs for the entire campus community. Composed of 15 departments and over 1500 staff members, the Division of Student Affairs is involved in all aspects of a student??????s life including"/>
 			<column name="ID" value="8"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2527,13 +2527,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Vice President of the Student Affairs"/>
 			<column name="UPDATEID" value="TESTUSER"/>
-			<column name="UPDATETIME" value="20000101000000"/>
+			<column name="UPDATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Administrative Member of the COC"/>
 			<column name="ID" value="80"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2544,13 +2544,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Administrative Member of the COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214111047"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:10:47"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the English COC"/>
 			<column name="ID" value="81"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2561,13 +2561,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the English COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113108"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:31:08"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Co-Chair of the FineArts COC"/>
 			<column name="ID" value="82"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2578,13 +2578,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Co-Chair of the FineArts COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120958"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:09:58"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the French COC"/>
 			<column name="ID" value="83"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2595,13 +2595,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the French COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120844"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:08:44"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Geography COC"/>
 			<column name="ID" value="84"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2612,13 +2612,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Geography COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214105538"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T10:55:38"/>
 			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Linguistics COC"/>
 			<column name="ID" value="85"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2629,13 +2629,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Linguistics COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120919"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:09:19"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Music COC"/>
 			<column name="ID" value="86"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2646,13 +2646,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Music COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115914"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:59:14"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the History COC"/>
 			<column name="ID" value="87"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2663,13 +2663,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the History COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213120002"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:00:02"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the PolySci COC"/>
 			<column name="ID" value="88"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2680,13 +2680,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the PolySci COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114957"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:49:57"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Psychology COC"/>
 			<column name="ID" value="89"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2697,12 +2697,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Psychology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114127"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:41:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213112941"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:29:41"/>
 			<column name="DESCR" value="Chair of the College Arts and Hum COC"/>
 			<column name="ID" value="8933f274-9f7c-455b-8a3c-f5c7561eed34"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2712,13 +2712,13 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the College Arts and Hum COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113246"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:32:46"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="VP for Business Administration and Finance"/>
 			<column name="ID" value="9"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2729,13 +2729,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="VP for Business Administration and Finance"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214095427"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T09:54:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Sociology COC"/>
 			<column name="ID" value="90"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2746,13 +2746,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Sociology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115256"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:52:56"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the InterdiscBSOS COC"/>
 			<column name="ID" value="91"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2763,13 +2763,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the InterdiscBSOS COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213121649"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:16:49"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Chemical COC"/>
 			<column name="ID" value="92"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2780,13 +2780,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Chemical COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122133"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:21:33"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Civil COC"/>
 			<column name="ID" value="93"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2797,13 +2797,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Civil COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122214"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:22:14"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Mechanical COC"/>
 			<column name="ID" value="94"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2814,13 +2814,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Mechanical COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122327"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:23:27"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the CompSci COC"/>
 			<column name="ID" value="95"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2831,13 +2831,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the CompSci COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122257"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:22:57"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Biology COC"/>
 			<column name="ID" value="96"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2848,13 +2848,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Biology COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214110430"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T11:04:30"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Biochemistry COC"/>
 			<column name="ID" value="97"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2865,13 +2865,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Biochemistry COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122736"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:27:36"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Botany COC"/>
 			<column name="ID" value="98"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2882,13 +2882,13 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Botany COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213124640"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:46:40"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="ATP_DUR_TYP_KEY" value="1"/>
 			<column name="CREATEID" value="TESTUSER"/>
-			<column name="CREATETIME" value="20000101000000"/>
+			<column name="CREATETIME" valueDate="2000-01-01T00:00:00"/>
 			<column name="DESCR" value="Chair of the Chemistry COC"/>
 			<column name="ID" value="99"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2899,12 +2899,12 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="TTL" value="Chair of the Chemistry COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122659"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:26:59"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114312"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:43:12"/>
 			<column name="DESCR" value="Member of the Physics Dept COC"/>
 			<column name="ID" value="a4ed027e-5a78-4c9a-bb99-dcc25c4cf216"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2914,12 +2914,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Physics Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114312"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:43:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114001"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:40:01"/>
 			<column name="DESCR" value="Member of the CCJS Dept COC"/>
 			<column name="ID" value="b6be0954-907f-472c-a15f-664acc3623fb"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2929,12 +2929,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the CCJS Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114024"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:40:24"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213122048"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:20:48"/>
 			<column name="DESCR" value="Chair of the College of Eng COC"/>
 			<column name="ID" value="bd8ec13e-0caf-4b96-9c61-1aa27d1d4f84"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2944,12 +2944,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the College of Eng COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122048"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:20:48"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213115805"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:58:05"/>
 			<column name="DESCR" value="Chair of the Philosophy Dept COC"/>
 			<column name="ID" value="c45c1a86-2cb1-42f4-8942-57050f520544"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2959,12 +2959,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Philosophy Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213115823"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:58:23"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114312"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:43:12"/>
 			<column name="DESCR" value="Chair of the Physics Dept COC"/>
 			<column name="ID" value="c5a80a40-b0d5-4304-b2d7-87c20ed39257"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2974,12 +2974,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Physics Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114312"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:43:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101214143432"/>
+			<column name="CREATETIME" valueDate="2010-12-14T14:34:32"/>
 			<column name="DESCR" value="Chair of the Mathematics Dept"/>
 			<column name="ID" value="d00522cd-443e-448d-9462-63ef47a958aa"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -2989,12 +2989,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Mathematics Dept"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101214143432"/>
+			<column name="UPDATETIME" valueDate="2010-12-14T14:34:32"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213113449"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:34:49"/>
 			<column name="DESCR" value="Member of the Art Hist &amp; Arch COC"/>
 			<column name="ID" value="d66baff2-9757-4ee5-a663-8f58a281f14c"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -3004,12 +3004,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Art Hist &amp; Arch COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213113449"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:34:49"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213114830"/>
+			<column name="CREATETIME" valueDate="2010-12-13T11:48:30"/>
 			<column name="DESCR" value="Chair of the Economics Dept COC"/>
 			<column name="ID" value="e635d2db-17e8-43e3-a183-c5e9724c9b7e"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -3019,12 +3019,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the Economics Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213114830"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T11:48:30"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213143638"/>
+			<column name="CREATETIME" valueDate="2010-12-13T14:36:38"/>
 			<column name="DESCR" value="Member of the Geology Dept"/>
 			<column name="ID" value="e944218f-9643-466c-a132-d7ca20ae6097"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -3034,12 +3034,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of the Geology Dept"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213143638"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T14:36:38"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213121854"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:18:54"/>
 			<column name="DESCR" value="Chair of the College of Educ COC"/>
 			<column name="ID" value="e9868e8b-14df-434b-8b19-6a764ed5f1e3"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -3049,12 +3049,12 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Chair"/>
 			<column name="TTL" value="Chair of the College of Educ COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213121854"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:18:54"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSOR_ORG_POS_RESTR">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213122611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T12:26:11"/>
 			<column name="DESCR" value="Member of Animal and Avian Science Dept COC"/>
 			<column name="ID" value="f9e87016-d54d-4dcf-9f3f-65babe73eb46"/>
 			<column name="MAX_NUM_RELTN" value="100"/>
@@ -3064,7 +3064,7 @@
 			<column name="PERS_RELTN_TYPE" value="kuali.org.PersonRelation.Member"/>
 			<column name="TTL" value="Member of Animal and Avian Science Dept COC"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213122611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T12:26:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSCO_TAG_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSCO_TAG_TYPE">
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Default"/>
 			<column name="OBJ_ID" value="12A50145DB9448A199A26848B1F5CE54"/>
 			<column name="TYPE_DESC" value="Default tag type"/>

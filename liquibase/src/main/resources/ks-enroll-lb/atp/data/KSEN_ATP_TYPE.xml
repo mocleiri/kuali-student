@@ -29,10 +29,24 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Final Exam Period "/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
+			<column name="TYPE_DESC" value="Final Examinations"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.FinalExamPeriod"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
 			<column name="NAME" value="Grades Due"/>
 			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
 			<column name="TYPE_DESC" value="Grades Due"/>
 			<column name="TYPE_KEY" value="kuali.atp.milestone.GradesDue"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP_TYPE">
+			<column name="NAME" value="Instructional Period"/>
+			<column name="REF_OBJECT_URI" value="http:--student.kuali.org/wsdl/atp/MilestoneInfo"/>
+			<column name="TYPE_DESC" value="Dates between which classes should meet"/>
+			<column name="TYPE_KEY" value="kuali.atp.milestone.InstructionalPeriod"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP_TYPE">

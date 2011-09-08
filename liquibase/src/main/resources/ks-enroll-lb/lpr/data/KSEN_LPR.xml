@@ -1,13 +1,18 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_LPR-initial-data" author="alubbers">
 		<insert tableName="KSEN_LPR">
-			<column name="EFFECTIVEDATE" value="20000101000000"/>
-			<column name="EXPIRATIONDATE" value="20001231000000"/>
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" valueDate="2012-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="testLprId1"/>
 			<column name="LUIID" value="testLuiId1"/>
 			<column name="PERSONID" value="testPersonId1"/>
 			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" valueDate="2012-06-18T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

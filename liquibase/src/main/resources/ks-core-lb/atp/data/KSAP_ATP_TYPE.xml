@@ -2,7 +2,7 @@
 	<changeSet id="KSAP_ATP_TYPE-initial-data" author="alubbers">
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="AY"/>
 			<column name="OBJ_ID" value="760485DDB0E64D96A3E5F9783C716401"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.AY"/>
@@ -12,7 +12,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.TBD"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Adhoc"/>
 			<column name="OBJ_ID" value="B3B443C8D3D1490B9E7F1691CFC9628F"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Any"/>
@@ -22,7 +22,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Even Years"/>
 			<column name="OBJ_ID" value="E705BB172D14441BAACBA0E7D260AA29"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.EvenYears"/>
@@ -32,7 +32,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="FY"/>
 			<column name="OBJ_ID" value="5C7BD755F7A24E2F9138C5CAECE2B5AE"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.FY"/>
@@ -42,7 +42,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall"/>
 			<column name="OBJ_ID" value="736F8E8C89E04F76A4012254115ED145"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Fall"/>
@@ -52,7 +52,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall Even Years"/>
 			<column name="OBJ_ID" value="943DEB5A9E0141BEBD32C60F978F4D25"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Fall"/>
@@ -62,7 +62,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Fall Odd Years"/>
 			<column name="OBJ_ID" value="8E933F06216E408CBC97E5D2C2DF6737"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Fall"/>
@@ -72,7 +72,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Freshman Year"/>
 			<column name="OBJ_ID" value="7729299721D14E55A0C063567781412A"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Year1"/>
@@ -82,7 +82,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Freshman Year Term 1"/>
 			<column name="OBJ_ID" value="5AE4FCCC8F8B47B492390707CE6FB7F9"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term1"/>
@@ -92,7 +92,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Freshman Year Term 2"/>
 			<column name="OBJ_ID" value="C9C48C6B6B144907876378D0317392EB"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term2"/>
@@ -102,7 +102,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.HalfSemester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Half Fall 1"/>
 			<column name="OBJ_ID" value="5B096FF5512D4BB9B6099C4FD299EC5B"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Fall1"/>
@@ -112,7 +112,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.HalfSemester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Half Fall 2"/>
 			<column name="OBJ_ID" value="A8ABD3E0B2074F639544847441C0C824"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Fall2"/>
@@ -122,7 +122,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.HalfSemester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Half Spring 1"/>
 			<column name="OBJ_ID" value="6FB85A62E5EC49A98AA512E7C37ABA23"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Spring1"/>
@@ -132,7 +132,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.HalfSemester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Half Spring 2"/>
 			<column name="OBJ_ID" value="4C57528196D44353B726A4CF13BAD274"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Spring2"/>
@@ -142,7 +142,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Junior Year"/>
 			<column name="OBJ_ID" value="BAAF17D4DFA04465B1EDB3FC5A43CA46"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Year1"/>
@@ -152,7 +152,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Junior Year Term 1"/>
 			<column name="OBJ_ID" value="9F3E073E4D55415DA8386A2FD2A317F6"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term1"/>
@@ -162,7 +162,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Junior Year Term 2"/>
 			<column name="OBJ_ID" value="4953CA9C447F4B049D51412A6E833D52"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term2"/>
@@ -172,7 +172,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Mini-mester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Mini-mester 1A"/>
 			<column name="OBJ_ID" value="EA9E1D1CFA8F400980F59848F498AEDF"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer1A"/>
@@ -182,7 +182,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Mini-mester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Mini-mester 1B"/>
 			<column name="OBJ_ID" value="0E3CA9D453D844718DF63F66D28978B6"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer1B"/>
@@ -192,7 +192,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Mini-mester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Mini-mester 2C"/>
 			<column name="OBJ_ID" value="BBC049F98DFD4A5980A73013C3101566"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer2C"/>
@@ -202,7 +202,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Mini-mester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Mini-mester 2D"/>
 			<column name="OBJ_ID" value="0AB6E7FC659047BEAB62B54C361538C8"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer2D"/>
@@ -212,7 +212,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Odd Years"/>
 			<column name="OBJ_ID" value="010DEB0398314E6197C260B869414D90"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.OddYears"/>
@@ -222,7 +222,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Senior Year"/>
 			<column name="OBJ_ID" value="207E7E23901C41BBAA41DA6A4893C8B5"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Year4"/>
@@ -232,7 +232,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Senior Year Term 1"/>
 			<column name="OBJ_ID" value="3A0B7A1E8FF0431BB1913983AA760BB3"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term1"/>
@@ -242,7 +242,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Senior Year Term 2"/>
 			<column name="OBJ_ID" value="3CCEFCBE0F4841F790C50D51CCBD5EC9"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term2"/>
@@ -252,7 +252,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Session"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Session 1"/>
 			<column name="OBJ_ID" value="903E7055A6AA4BA3B9E696ED38C5AD9F"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer1"/>
@@ -262,7 +262,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Session"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Session 2"/>
 			<column name="OBJ_ID" value="87AAB22EA1E34938BFEC4ADE03131557"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer2"/>
@@ -272,7 +272,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Session"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Session G1"/>
 			<column name="OBJ_ID" value="C3B44CE699A44DA69DF9BA9316E06FB0"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer1"/>
@@ -282,7 +282,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Session"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Session G2"/>
 			<column name="OBJ_ID" value="F8CF24BB92B8481BB7A8E09249308760"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer2"/>
@@ -292,7 +292,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Year"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Sophomore Year"/>
 			<column name="OBJ_ID" value="467744C4CE7042CE9ADF4DB83889BC7A"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Year2"/>
@@ -302,7 +302,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Sophomore Year Term 1"/>
 			<column name="OBJ_ID" value="8872C5153A6640878DB887FAB58DCCC0"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term1"/>
@@ -312,7 +312,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Sophomore Year Term 2"/>
 			<column name="OBJ_ID" value="F739E5D46BF04BC392A55943EFF1DF18"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Term2"/>
@@ -322,7 +322,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring"/>
 			<column name="OBJ_ID" value="6E3F3F4F453A43B8A37373A6A003B20D"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Spring"/>
@@ -332,7 +332,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Week"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring Break"/>
 			<column name="OBJ_ID" value="9DA283BEB36C42F9BD7E9F156C46AA69"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.SpringBreak"/>
@@ -342,7 +342,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring Even Years"/>
 			<column name="OBJ_ID" value="626A93FF2507455F82D3E6F8CDB7B44C"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Spring"/>
@@ -352,7 +352,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Semester"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Spring Odd Years"/>
 			<column name="OBJ_ID" value="6C4507C51EB949F3BF63B528164CEAF9"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Spring"/>
@@ -362,7 +362,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Term"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer"/>
 			<column name="OBJ_ID" value="CAD2D061907C4865842056064DB3B346"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer"/>
@@ -372,7 +372,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Term"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Summer Eve"/>
 			<column name="OBJ_ID" value="D0DF697193884F83BC461E832CE6A611"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Summer"/>
@@ -382,7 +382,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.FourYears"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Undergrad Program"/>
 			<column name="OBJ_ID" value="AA88B78ECC634693A3A5733B88FA6F57"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.FourYearCycle"/>
@@ -392,7 +392,7 @@
 		</insert>
 		<insert tableName="KSAP_ATP_TYPE">
 			<column name="DUR_TYPE" value="kuali.atp.duration.Period"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Winter"/>
 			<column name="OBJ_ID" value="EC994F0A8ADA4410850F3E037422CFC3"/>
 			<column name="SEASONAL_TYPE" value="kuali.atp.season.Winter"/>

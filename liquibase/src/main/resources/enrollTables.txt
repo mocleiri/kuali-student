@@ -29,6 +29,7 @@ lpr/ks-enroll-lpr-create:KSEN_LPR_ATTR
 lpr/ks-enroll-lpr-create:KSEN_LPR_STATE 
 lpr/ks-enroll-lpr-create:KSEN_LPR_TYPE 
 lpr/ks-enroll-lpr-create:KSEN_LPR_ROSTER
+lpr/ks-enroll-lpr-create:KSEN_LPR_ROSTER_ENTRY
 lpr/ks-enroll-lpr-create:KSEN_LPRROSTER_LUI_RELTN
 lui/ks-enroll-lui-create:KSEN_LUI 
 lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN 

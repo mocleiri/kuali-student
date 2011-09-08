@@ -3,171 +3,171 @@
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
-			<column name="END_DT" value="20010601000000"/>
+			<column name="END_DT" valueDate="2001-06-01T00:00:00"/>
 			<column name="ID" value="termRelationTestingAcal1"/>
 			<column name="NAME" value="testingAcal1"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-3"/>
-			<column name="START_DT" value="20000901000000"/>
+			<column name="START_DT" valueDate="2000-09-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
-			<column name="END_DT" value="20020601000000"/>
+			<column name="END_DT" valueDate="2002-06-01T00:00:00"/>
 			<column name="ID" value="termRelationTestingAcal2"/>
 			<column name="NAME" value="testingAcal2"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-4"/>
-			<column name="START_DT" value="20010901000000"/>
+			<column name="START_DT" valueDate="2001-09-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Fall"/>
-			<column name="END_DT" value="20001231000000"/>
+			<column name="END_DT" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTerm1"/>
 			<column name="NAME" value="testingTerm1"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-1"/>
-			<column name="START_DT" value="20000901000000"/>
+			<column name="START_DT" valueDate="2000-09-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Spring"/>
-			<column name="END_DT" value="20010531000000"/>
+			<column name="END_DT" valueDate="2001-05-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTerm2"/>
 			<column name="NAME" value="testingTerm2"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-2"/>
-			<column name="START_DT" value="20010101000000"/>
+			<column name="START_DT" valueDate="2001-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Fall"/>
-			<column name="END_DT" value="20001231000000"/>
+			<column name="END_DT" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTerm3"/>
 			<column name="NAME" value="testingTerm3"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-7"/>
-			<column name="START_DT" value="20000901000000"/>
+			<column name="START_DT" valueDate="2000-09-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.HalfFall1"/>
-			<column name="END_DT" value="20110531000000"/>
+			<column name="END_DT" valueDate="2011-05-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTerm4"/>
 			<column name="NAME" value="testingTerm4"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-8"/>
-			<column name="START_DT" value="20110101000000"/>
+			<column name="START_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Fall"/>
-			<column name="END_DT" value="20001231000000"/>
+			<column name="END_DT" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTerm5"/>
 			<column name="NAME" value="testingTerm3"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-10"/>
-			<column name="START_DT" value="20000901000000"/>
+			<column name="START_DT" valueDate="2000-09-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.HalfFall2"/>
-			<column name="END_DT" value="20110531000000"/>
+			<column name="END_DT" valueDate="2011-05-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTerm6"/>
 			<column name="NAME" value="testingTerm4"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-11"/>
-			<column name="START_DT" value="20110101000000"/>
+			<column name="START_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.HalfFall1"/>
-			<column name="END_DT" value="20310531000000"/>
+			<column name="END_DT" valueDate="2031-05-31T00:00:00"/>
 			<column name="ID" value="termRelationTestingTermDelete"/>
 			<column name="NAME" value="testingTermDelete"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-9"/>
-			<column name="START_DT" value="20310101000000"/>
+			<column name="START_DT" valueDate="2031-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
-			<column name="END_DT" value="20120908000000"/>
+			<column name="END_DT" valueDate="2012-09-08T00:00:00"/>
 			<column name="ID" value="testAtpId1"/>
 			<column name="NAME" value="2011-2012 Academic Year"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-101"/>
-			<column name="START_DT" value="20110909000000"/>
+			<column name="START_DT" valueDate="2011-09-09T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.CampusCalendar"/>
-			<column name="END_DT" value="20120908000000"/>
+			<column name="END_DT" valueDate="2012-09-08T00:00:00"/>
 			<column name="ID" value="testAtpId2"/>
 			<column name="NAME" value="2011-2012 Campus Calendar"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-102"/>
-			<column name="START_DT" value="20110909000000"/>
+			<column name="START_DT" valueDate="2011-09-09T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.CampusCalendar"/>
-			<column name="END_DT" value="20001231000000"/>
+			<column name="END_DT" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="testDeleteAtpId1"/>
 			<column name="NAME" value="testDeleteAtp1"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-103"/>
-			<column name="START_DT" value="20000101000000"/>
+			<column name="START_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.CampusCalendar"/>
-			<column name="END_DT" value="20001231000000"/>
+			<column name="END_DT" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="testDeleteAtpId2"/>
 			<column name="NAME" value="testDeleteAtp2"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-104"/>
-			<column name="START_DT" value="20000101000000"/>
+			<column name="START_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Fall"/>
-			<column name="END_DT" value="20111216000000"/>
+			<column name="END_DT" valueDate="2011-12-16T00:00:00"/>
 			<column name="ID" value="testTermId1"/>
 			<column name="NAME" value="Fall 2011"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-201"/>
-			<column name="START_DT" value="20110928000000"/>
+			<column name="START_DT" valueDate="2011-09-28T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Winter"/>
-			<column name="END_DT" value="20120316000000"/>
+			<column name="END_DT" valueDate="2012-03-16T00:00:00"/>
 			<column name="ID" value="testTermId2"/>
 			<column name="NAME" value="Winter 2012"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-202"/>
-			<column name="START_DT" value="20120103000000"/>
+			<column name="START_DT" valueDate="2012-01-03T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Spring"/>
-			<column name="END_DT" value="20120608000000"/>
+			<column name="END_DT" valueDate="2012-06-08T00:00:00"/>
 			<column name="ID" value="testTermId3"/>
 			<column name="NAME" value="Spring 2012"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-301"/>
-			<column name="START_DT" value="20120326000000"/>
+			<column name="START_DT" valueDate="2012-03-26T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Summer"/>
-			<column name="END_DT" value="20120817000000"/>
+			<column name="END_DT" valueDate="2012-08-17T00:00:00"/>
 			<column name="ID" value="testTermId4"/>
 			<column name="NAME" value="Summer 2012"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-401"/>
-			<column name="START_DT" value="20120618000000"/>
+			<column name="START_DT" valueDate="2012-06-18T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

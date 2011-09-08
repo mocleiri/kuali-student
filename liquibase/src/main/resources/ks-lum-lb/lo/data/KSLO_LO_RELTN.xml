@@ -2,7 +2,7 @@
 	<changeSet id="KSLO_LO_RELTN-initial-data" author="alubbers">
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="00b766c9-e7e2-4e73-87ed-a49a9a84c6b6"/>
 			<column name="LO_ID" value="579dccac-3967-4b05-b020-bc597ec2c3a9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -10,12 +10,12 @@
 			<column name="RELATED_LO_ID" value="aba97ae6-e748-4625-88d1-d6f7e01dfc38"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="014d42e0-2445-44cd-b2ac-22777445aac2"/>
 			<column name="LO_ID" value="626d3129-7a77-4ce5-afba-49908b5b7bb2"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -23,12 +23,12 @@
 			<column name="RELATED_LO_ID" value="b70c8c15-8dde-46e2-ae9e-136029bff059"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="07b15390-4b44-4062-95b7-90122a787247"/>
 			<column name="LO_ID" value="0c22b7c3-aaf3-4861-9747-9c6dbdf5d733"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -36,12 +36,12 @@
 			<column name="RELATED_LO_ID" value="cae8906e-aa30-47fb-890e-78d962711314"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="0b2088ef-41da-45ca-8e6a-a182253701a9"/>
 			<column name="LO_ID" value="6259cf3c-fb94-45ba-983a-ca9c54763701"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -49,12 +49,12 @@
 			<column name="RELATED_LO_ID" value="5299f7ee-7986-4d72-98b4-4f9b33a0924b"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="0cf17251-3ffd-46f3-9169-bd6a6686a766"/>
 			<column name="LO_ID" value="0f78c33b-86a7-4b2d-97d8-608faeb6f3be"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -62,12 +62,12 @@
 			<column name="RELATED_LO_ID" value="76cc094e-81a5-4764-8fa7-cab9c1755e07"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="15bc9dab-a841-4ce1-b6dc-e7a2cfe4b0da"/>
 			<column name="LO_ID" value="7136bad7-b1e1-41da-9a5c-2c11ce3d8947"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -75,12 +75,12 @@
 			<column name="RELATED_LO_ID" value="97ea7028-183f-49dc-af89-8f4bb964eba3"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="16536018-c813-42d3-af7a-7cd7bdc0370c"/>
 			<column name="LO_ID" value="dbbea6da-ab1f-48ad-a910-74486c67fab4"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -88,12 +88,12 @@
 			<column name="RELATED_LO_ID" value="cf215d7e-1c3b-42b4-897f-8977167809fb"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="18644708-8ce0-406d-9ec6-ed31bb19d29a"/>
 			<column name="LO_ID" value="c3715ce8-147a-4e15-9fe1-cbb54260759e"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -101,12 +101,12 @@
 			<column name="RELATED_LO_ID" value="6ac90330-da9c-4539-be93-f6fbc507204a"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="1b4a427c-8519-4811-9f57-ff96ab6874e3"/>
 			<column name="LO_ID" value="dbbea6da-ab1f-48ad-a910-74486c67fab4"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -114,12 +114,12 @@
 			<column name="RELATED_LO_ID" value="a12aff29-4dac-480c-8cfe-02fc80f80a3e"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="24bde387-3729-4a01-9b8a-3d45fe2e3966"/>
 			<column name="LO_ID" value="7136bad7-b1e1-41da-9a5c-2c11ce3d8947"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -127,12 +127,12 @@
 			<column name="RELATED_LO_ID" value="b94ee642-3fc0-40c1-a8ce-e03a959c8527"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="29d7b6bf-6cb6-44f5-8dce-d0f0c9f2d201"/>
 			<column name="LO_ID" value="dbbea6da-ab1f-48ad-a910-74486c67fab4"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -140,12 +140,12 @@
 			<column name="RELATED_LO_ID" value="4031fd9d-cd9b-41b9-ad50-ec232ee801ac"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="335e26e8-13ca-4cf6-b958-a77143f8785c"/>
 			<column name="LO_ID" value="7136bad7-b1e1-41da-9a5c-2c11ce3d8947"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -153,12 +153,12 @@
 			<column name="RELATED_LO_ID" value="223fef61-b58a-4fea-8f93-665778d7d4c5"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="3b7a603e-2b26-454d-9038-43a9de71ce2c"/>
 			<column name="LO_ID" value="626d3129-7a77-4ce5-afba-49908b5b7bb2"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -166,12 +166,12 @@
 			<column name="RELATED_LO_ID" value="ec4c869f-24e7-47c9-b2f0-aba69f943b63"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="3f182e83-c52e-405e-b67f-be4288659149"/>
 			<column name="LO_ID" value="6259cf3c-fb94-45ba-983a-ca9c54763701"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -179,12 +179,12 @@
 			<column name="RELATED_LO_ID" value="32a7ed92-2cb7-48e4-8581-408a0417aaa2"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="3f4b6ffd-8488-4737-9e81-ca3c91d769a1"/>
 			<column name="LO_ID" value="0f78c33b-86a7-4b2d-97d8-608faeb6f3be"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -192,12 +192,12 @@
 			<column name="RELATED_LO_ID" value="a01a8486-ca82-40a5-9a0a-30a6c28c706a"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="42f91d83-0ffe-43d3-9f5d-aee4c96fd092"/>
 			<column name="LO_ID" value="73939e36-4e86-4c4e-8f57-d5a3b93dcbdb"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -205,12 +205,12 @@
 			<column name="RELATED_LO_ID" value="52622558-06e7-4f85-a8d7-bad0a157a1c3"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="431bc482-5f98-41bf-b51c-9d71a30ea1bf"/>
 			<column name="LO_ID" value="7136bad7-b1e1-41da-9a5c-2c11ce3d8947"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -218,12 +218,12 @@
 			<column name="RELATED_LO_ID" value="eeece09a-e723-4fc3-802c-dd46ac40ba5d"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="461ec872-bc85-4a1c-9886-08305df2723c"/>
 			<column name="LO_ID" value="076a66e2-6611-4eb0-8768-4b183866be30"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -231,12 +231,12 @@
 			<column name="RELATED_LO_ID" value="af6305f3-d5b1-4bc0-8415-ad75c67369c9"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="4a54a923-4fb4-496c-8ebb-56533dbef986"/>
 			<column name="LO_ID" value="2901a647-2d72-4d54-b54a-a319b801f9b0"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -244,12 +244,12 @@
 			<column name="RELATED_LO_ID" value="125b78b5-f99b-401f-8512-ffddda3004c0"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="4af830aa-a1a0-41ee-ab62-a2ba4a612faa"/>
 			<column name="LO_ID" value="73939e36-4e86-4c4e-8f57-d5a3b93dcbdb"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -257,12 +257,12 @@
 			<column name="RELATED_LO_ID" value="34a6da31-7abc-4be8-9484-3f464072804d"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="51c616be-9529-4c87-9eb3-b1386edd2520"/>
 			<column name="LO_ID" value="35505ba1-5d21-45a7-b169-3a1fa1d12ce9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -270,12 +270,12 @@
 			<column name="RELATED_LO_ID" value="24cc8a07-0bee-4535-9a87-c680ae51183b"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="58214d85-b241-41a0-8a72-3a664f390713"/>
 			<column name="LO_ID" value="7c45b2db-72e4-4b60-b6a9-997d72068659"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -283,12 +283,12 @@
 			<column name="RELATED_LO_ID" value="4a3f887b-8895-4dfb-b7fb-12a68db2aa06"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="61e2618d-c629-4593-941f-8898c89af627"/>
 			<column name="LO_ID" value="7c45b2db-72e4-4b60-b6a9-997d72068659"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -296,12 +296,12 @@
 			<column name="RELATED_LO_ID" value="44389716-40e1-4440-8026-6393bb4d5131"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="63c47ff4-1ec5-4f78-be63-b0d8fc1af106"/>
 			<column name="LO_ID" value="6259cf3c-fb94-45ba-983a-ca9c54763701"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -309,12 +309,12 @@
 			<column name="RELATED_LO_ID" value="f730696f-f732-474b-918d-ac206606b82a"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="66a68afc-417d-40c3-81fb-a119452316df"/>
 			<column name="LO_ID" value="6fd1fc60-12f9-4ede-a4cf-3305b09d1678"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -322,12 +322,12 @@
 			<column name="RELATED_LO_ID" value="aa1130fe-2bcb-43e9-9cee-ed9e115e3016"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="675dbba2-f867-431a-ac38-4894087fb461"/>
 			<column name="LO_ID" value="076a66e2-6611-4eb0-8768-4b183866be30"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -335,12 +335,12 @@
 			<column name="RELATED_LO_ID" value="0b8edb93-87d8-4089-9c3c-c04654f6b3e5"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="6a043f43-c317-4729-83d9-81d62cf20042"/>
 			<column name="LO_ID" value="6259cf3c-fb94-45ba-983a-ca9c54763701"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -348,12 +348,12 @@
 			<column name="RELATED_LO_ID" value="9b07c128-b46d-4d3b-855e-803d263614d5"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="6e7ba01b-13b6-4c57-9480-4fa3e51df74c"/>
 			<column name="LO_ID" value="73939e36-4e86-4c4e-8f57-d5a3b93dcbdb"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -361,12 +361,12 @@
 			<column name="RELATED_LO_ID" value="930f4ae1-0e97-4bb5-986c-cb3c71c37032"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="75bc2b1f-ae01-411f-acf6-e5aeb272ca32"/>
 			<column name="LO_ID" value="579dccac-3967-4b05-b020-bc597ec2c3a9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -374,12 +374,12 @@
 			<column name="RELATED_LO_ID" value="4eaab6a1-9c20-4983-9ccd-816bb3822925"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="77278ecc-05ab-4190-971a-605b1fd8a07a"/>
 			<column name="LO_ID" value="35505ba1-5d21-45a7-b169-3a1fa1d12ce9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -387,12 +387,12 @@
 			<column name="RELATED_LO_ID" value="0cce31cd-3566-407f-ae34-d3f9972f85a8"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="7cc1b11c-69ee-4b54-8436-8b204ffd1495"/>
 			<column name="LO_ID" value="7136bad7-b1e1-41da-9a5c-2c11ce3d8947"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -400,12 +400,12 @@
 			<column name="RELATED_LO_ID" value="59e1a36c-63d3-4e10-8607-840fa3c8e52c"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="8986fb9b-ef98-4de7-9723-25260915bc8e"/>
 			<column name="LO_ID" value="2901a647-2d72-4d54-b54a-a319b801f9b0"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -413,12 +413,12 @@
 			<column name="RELATED_LO_ID" value="964e1e8d-cc49-412b-a899-36fd88b830d8"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="8d11c5ee-ac61-44aa-b1d1-9aef5441d77e"/>
 			<column name="LO_ID" value="35505ba1-5d21-45a7-b169-3a1fa1d12ce9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -426,12 +426,12 @@
 			<column name="RELATED_LO_ID" value="6dc0ab8f-e53b-466c-a947-d3e5aa03386a"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="8d79e100-f86e-4ff4-89e2-48868c4382e5"/>
 			<column name="LO_ID" value="35505ba1-5d21-45a7-b169-3a1fa1d12ce9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -439,12 +439,12 @@
 			<column name="RELATED_LO_ID" value="706e5d14-ec8f-446d-8f23-f1da6d9f8eb9"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="965240d6-c867-42c5-afe4-e9fea211c6d5"/>
 			<column name="LO_ID" value="076a66e2-6611-4eb0-8768-4b183866be30"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -452,12 +452,12 @@
 			<column name="RELATED_LO_ID" value="09045591-28f5-4c5f-a33e-44dd5e4e08d5"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="9dd64079-28c3-4123-ae78-c8dd1930c303"/>
 			<column name="LO_ID" value="dbbea6da-ab1f-48ad-a910-74486c67fab4"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -465,12 +465,12 @@
 			<column name="RELATED_LO_ID" value="4e9842c2-c844-403d-af93-2b7fdfcaa471"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="a5194cb5-8ca4-4593-8862-1b4df91375b6"/>
 			<column name="LO_ID" value="2901a647-2d72-4d54-b54a-a319b801f9b0"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -478,12 +478,12 @@
 			<column name="RELATED_LO_ID" value="be939294-fcaa-4435-a145-54d5c5e7c2db"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="a7490ae2-27a7-4306-be04-d418ca722d19"/>
 			<column name="LO_ID" value="c3715ce8-147a-4e15-9fe1-cbb54260759e"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -491,12 +491,12 @@
 			<column name="RELATED_LO_ID" value="830dd794-2686-4679-b34c-3bb0f402bf7d"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="a9dc5e2d-3c08-4817-9a2d-39c246a15dd1"/>
 			<column name="LO_ID" value="626d3129-7a77-4ce5-afba-49908b5b7bb2"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -504,12 +504,12 @@
 			<column name="RELATED_LO_ID" value="173f4640-778c-4561-a6b9-40517a382d68"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="bb5e74c5-2bdf-4358-8782-b1508aeb3de6"/>
 			<column name="LO_ID" value="35505ba1-5d21-45a7-b169-3a1fa1d12ce9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -517,12 +517,12 @@
 			<column name="RELATED_LO_ID" value="b3d53939-ea7d-4b46-8eb3-12e64b2c332a"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="bf650fc2-eeaf-4061-ad57-3cb4832633b9"/>
 			<column name="LO_ID" value="579dccac-3967-4b05-b020-bc597ec2c3a9"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -530,12 +530,12 @@
 			<column name="RELATED_LO_ID" value="70ba9591-b9bb-4d5f-89f4-48893d1034fc"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="c5a28219-98dc-4c3f-b685-f2b28b71c435"/>
 			<column name="LO_ID" value="6fd1fc60-12f9-4ede-a4cf-3305b09d1678"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -543,12 +543,12 @@
 			<column name="RELATED_LO_ID" value="ce0c2ee1-06f8-4ad1-bc15-63746c56c86d"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="c7957a44-9796-4ebf-a0e2-e4fa658a3453"/>
 			<column name="LO_ID" value="c3715ce8-147a-4e15-9fe1-cbb54260759e"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -556,12 +556,12 @@
 			<column name="RELATED_LO_ID" value="7efcba05-9111-44c3-88c1-7a78414ddd4d"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="cd5e2ce7-a0b7-4300-bb01-48b3ff323921"/>
 			<column name="LO_ID" value="73939e36-4e86-4c4e-8f57-d5a3b93dcbdb"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -569,12 +569,12 @@
 			<column name="RELATED_LO_ID" value="0b9b13d2-a0f7-4dce-8b1d-79a0a97294df"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="cdcd7dab-2e33-4018-9923-7d39aa8849b2"/>
 			<column name="LO_ID" value="0f78c33b-86a7-4b2d-97d8-608faeb6f3be"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -582,12 +582,12 @@
 			<column name="RELATED_LO_ID" value="c668849a-bd17-412a-a188-9a90dca35db7"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="d333532a-b5f6-4b76-85bc-9eb89bd628e5"/>
 			<column name="LO_ID" value="dbbea6da-ab1f-48ad-a910-74486c67fab4"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -595,12 +595,12 @@
 			<column name="RELATED_LO_ID" value="ecd1c580-52d4-47c1-bc33-29ed0200af87"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="d4182d92-4638-49ab-b827-2507e28a9c8a"/>
 			<column name="LO_ID" value="626d3129-7a77-4ce5-afba-49908b5b7bb2"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -608,12 +608,12 @@
 			<column name="RELATED_LO_ID" value="a86b01da-50fd-448f-8307-d1e481f6521b"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="d5645bc4-9e26-46d8-973c-80084a8d1ad5"/>
 			<column name="LO_ID" value="0c22b7c3-aaf3-4861-9747-9c6dbdf5d733"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -621,12 +621,12 @@
 			<column name="RELATED_LO_ID" value="b6189f9c-bb4c-4de4-b690-9850a8ce78fd"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="d86cbd19-4e98-4417-a6e2-56ae2f9e2d66"/>
 			<column name="LO_ID" value="076a66e2-6611-4eb0-8768-4b183866be30"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -634,12 +634,12 @@
 			<column name="RELATED_LO_ID" value="3fa0b0d8-bbd5-4bc5-90ae-1afb3f884a4c"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="d87ef27d-6fc5-48e4-aa74-9da2058d38fb"/>
 			<column name="LO_ID" value="2901a647-2d72-4d54-b54a-a319b801f9b0"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -647,12 +647,12 @@
 			<column name="RELATED_LO_ID" value="6dd2a6e5-248b-48d1-a774-29f1fea126bb"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="dbd85b4d-3146-4a46-b8f0-7180d0966134"/>
 			<column name="LO_ID" value="c3715ce8-147a-4e15-9fe1-cbb54260759e"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -660,12 +660,12 @@
 			<column name="RELATED_LO_ID" value="c3b20444-ee38-4c1f-8a78-8cf096fdd78e"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213085042"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="ID" value="dec15d12-7f68-49f8-9daa-eeafd60c124f"/>
 			<column name="LO_ID" value="c3715ce8-147a-4e15-9fe1-cbb54260759e"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -673,12 +673,12 @@
 			<column name="RELATED_LO_ID" value="b10dc068-28dd-4bc1-9a43-fbedc8a144e8"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213085042"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:50:42"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="e863798e-814f-4d01-8bb8-f07d06783327"/>
 			<column name="LO_ID" value="7c45b2db-72e4-4b60-b6a9-997d72068659"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -686,12 +686,12 @@
 			<column name="RELATED_LO_ID" value="6bc2d669-a57f-4ce0-8075-59b570124c19"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="e8cb3747-36ee-4440-88a4-fa3348804125"/>
 			<column name="LO_ID" value="6259cf3c-fb94-45ba-983a-ca9c54763701"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -699,12 +699,12 @@
 			<column name="RELATED_LO_ID" value="6c1ab30d-b804-4cff-bbff-cf682a54ff67"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="e924013a-64d3-400d-8c5d-f35056d8e65c"/>
 			<column name="LO_ID" value="2901a647-2d72-4d54-b54a-a319b801f9b0"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -712,12 +712,12 @@
 			<column name="RELATED_LO_ID" value="ee9d23cd-b066-423e-a7c1-9bb9802be50a"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="f05cf8d6-17bc-4dc2-9a6d-25428295fa88"/>
 			<column name="LO_ID" value="626d3129-7a77-4ce5-afba-49908b5b7bb2"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -725,12 +725,12 @@
 			<column name="RELATED_LO_ID" value="d1c9597b-795e-4b9d-a957-09b489a68a51"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084611"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="ID" value="f0e7d78f-3fde-4eb2-93f5-abdeae90bdb5"/>
 			<column name="LO_ID" value="73939e36-4e86-4c4e-8f57-d5a3b93dcbdb"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -738,12 +738,12 @@
 			<column name="RELATED_LO_ID" value="08dbee40-b444-4bb7-a5d1-6009c5d74a4b"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084611"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:11"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="f256e1ba-9c88-416d-9243-5f5ad28a5a0c"/>
 			<column name="LO_ID" value="6fd1fc60-12f9-4ede-a4cf-3305b09d1678"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -751,12 +751,12 @@
 			<column name="RELATED_LO_ID" value="10aa8784-5fbb-44b8-97f8-f5bd855cdf14"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="f82f18df-56fe-479b-855e-d732f388f682"/>
 			<column name="LO_ID" value="6fd1fc60-12f9-4ede-a4cf-3305b09d1678"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -764,12 +764,12 @@
 			<column name="RELATED_LO_ID" value="7c60365a-edf9-41c1-bedb-9e963a1d7f2e"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="fc9cf955-d5ae-4ff3-9636-0d77c46569c4"/>
 			<column name="LO_ID" value="6fd1fc60-12f9-4ede-a4cf-3305b09d1678"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -777,12 +777,12 @@
 			<column name="RELATED_LO_ID" value="978ca72e-cdb6-4ed6-b057-0f58f0249de4"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLO_LO_RELTN">
 			<column name="CREATEID" value="admin"/>
-			<column name="CREATETIME" value="20101213084612"/>
+			<column name="CREATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="ID" value="fffeb324-0f6e-45ae-967f-c91c2d9a8d20"/>
 			<column name="LO_ID" value="7c45b2db-72e4-4b60-b6a9-997d72068659"/>
 			<column name="LO_LO_RELATION_TYPE_ID" value="kuali.lo.relation.type.includes"/>
@@ -790,7 +790,7 @@
 			<column name="RELATED_LO_ID" value="dedc20ad-5d70-439b-a5d8-096ca0bfb3fe"/>
 			<column name="ST" value="draft"/>
 			<column name="UPDATEID" value="admin"/>
-			<column name="UPDATETIME" value="20101213084612"/>
+			<column name="UPDATETIME" valueDate="2010-12-13T08:46:12"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

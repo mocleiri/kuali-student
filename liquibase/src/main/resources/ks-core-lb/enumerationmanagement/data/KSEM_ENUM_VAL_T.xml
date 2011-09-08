@@ -1613,7 +1613,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="program"/>
 			<column name="CD" value="program"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="ID" value="09020afd-f6d0-4e9e-8785-7ac956a639ee"/>
 			<column name="OBJ_ID" value="3cf916ec-1b07-4526-8969-bf07b495cded"/>
@@ -1704,10 +1704,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Corequisite"/>
 			<column name="CD" value="kuali.statement.type.course.academicReadiness.coreq"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="09a9e57b-1078-4bfe-88fd-9bb7fc189b8c"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1DD8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB096D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Corequisite"/>
 			<column name="VER_NBR" value="1"/>
@@ -2225,10 +2225,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Part Time"/>
 			<column name="CD" value="kuali.atp.intensity.parttime"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="ID" value="0c253cda-8583-4608-9df8-5ae2c22777f6"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1658F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA916D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="2321"/>
 			<column name="VAL" value="Part Time"/>
 			<column name="VER_NBR" value="0"/>
@@ -2946,7 +2946,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ROBT"/>
 			<column name="CD" value="ROBT"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="1"/>
 			<column name="OBJ_ID" value="FA36F46FB7174F06B93891A01C9BE176"/>
@@ -2957,7 +2957,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BOTA"/>
 			<column name="CD" value="BOTA"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="10"/>
 			<column name="OBJ_ID" value="7E11B65E970D49019481CC2C3C876045"/>
@@ -3148,7 +3148,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="CHEE"/>
 			<column name="CD" value="CHEE"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="11"/>
 			<column name="OBJ_ID" value="BE022003578140B698F831F0D67918AA"/>
@@ -3358,7 +3358,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="CHEM"/>
 			<column name="CD" value="CHEM"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="12"/>
 			<column name="OBJ_ID" value="D1A54FF6C4C0468FA4F29E485406CE1F"/>
@@ -3499,7 +3499,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="CIVI"/>
 			<column name="CD" value="CIVI"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="13"/>
 			<column name="OBJ_ID" value="52BE59B56B7B499E8ED8FC854F04EE58"/>
@@ -3710,7 +3710,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="CSCI"/>
 			<column name="CD" value="CSCI"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="14"/>
 			<column name="OBJ_ID" value="06B590CE84ED432FBC752B086B69B632"/>
@@ -3891,7 +3891,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="EDUC"/>
 			<column name="CD" value="EDUC"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="15"/>
 			<column name="OBJ_ID" value="C9878ADE94F64C2E81FEF3384900707A"/>
@@ -4102,7 +4102,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ENGL"/>
 			<column name="CD" value="ENGL"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="16"/>
 			<column name="OBJ_ID" value="63D84D075F834FAE98913D7DD7EC4C3E"/>
@@ -4283,7 +4283,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="FINA"/>
 			<column name="CD" value="FINA"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="17"/>
 			<column name="OBJ_ID" value="2A0EA884182E44DCAF5BF69C336AFA09"/>
@@ -4484,7 +4484,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="FREN"/>
 			<column name="CD" value="FREN"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="18"/>
 			<column name="OBJ_ID" value="2FF703CD80A8484F97604A5970CEBBB9"/>
@@ -4725,7 +4725,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="GEOG"/>
 			<column name="CD" value="GEOG"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="19"/>
 			<column name="OBJ_ID" value="B66FBD88E68040E1A4B6F75E87F09A98"/>
@@ -5836,7 +5836,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ROBT"/>
 			<column name="CD" value="ROBT"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="2"/>
 			<column name="OBJ_ID" value="D607F8DA97D04F46A5B60DA291936F94"/>
@@ -5847,7 +5847,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="GEOL"/>
 			<column name="CD" value="GEOL"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="20"/>
 			<column name="OBJ_ID" value="E0DFE01EE9254A92BC318DF2866FEB1A"/>
@@ -5950,7 +5950,7 @@
 			<column name="CD" value="SPEC"/>
 			<column name="ENUM_KEY" value="kuali.lu.code.UniversityClassification"/>
 			<column name="ID" value="205b06aa-15e1-4263-ba15-02573cf51040"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1678F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA936D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="11"/>
 			<column name="VAL" value="Program Specialization"/>
 			<column name="VER_NBR" value="0"/>
@@ -6048,7 +6048,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="HIST"/>
 			<column name="CD" value="HIST"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="21"/>
 			<column name="OBJ_ID" value="A2EF23CFC5A84137BA6084E19763910B"/>
@@ -6249,7 +6249,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="INTB"/>
 			<column name="CD" value="INTB"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="22"/>
 			<column name="OBJ_ID" value="A5EBE658AA1D4EEA949A19AA99598C91"/>
@@ -6440,7 +6440,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="LING"/>
 			<column name="CD" value="LING"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="23"/>
 			<column name="OBJ_ID" value="69AE00CF4660478B97BCE0578BF10042"/>
@@ -6611,7 +6611,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="MARK"/>
 			<column name="CD" value="MARK"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="24"/>
 			<column name="OBJ_ID" value="6FE4361284E04B76892606BBB6214F54"/>
@@ -6782,7 +6782,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="MENG"/>
 			<column name="CD" value="MENG"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="25"/>
 			<column name="OBJ_ID" value="CD4A611E960A4BD38469FF45DB40323B"/>
@@ -6953,7 +6953,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="MUSC"/>
 			<column name="CD" value="MUSC"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="26"/>
 			<column name="OBJ_ID" value="1F372CD4977D4224BAF4A1959D9A875D"/>
@@ -7164,7 +7164,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="PHIL"/>
 			<column name="CD" value="PHIL"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="27"/>
 			<column name="OBJ_ID" value="A57879F46FB7423194EC325D218ABD23"/>
@@ -7305,10 +7305,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Both"/>
 			<column name="CD" value="kuali.atp.intensity.both"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="ID" value="27cac13b-5d76-4d4e-a556-5f485410b959"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1668F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA926D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="2322"/>
 			<column name="VAL" value="Both"/>
 			<column name="VER_NBR" value="0"/>
@@ -7366,7 +7366,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="POLI"/>
 			<column name="CD" value="POLI"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="28"/>
 			<column name="OBJ_ID" value="83B7EF4FBB3645ADBF59198C8F063CCC"/>
@@ -7377,10 +7377,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Satisfactory Progress Requirements"/>
 			<column name="CD" value="kuali.statement.type.program.satisfactoryProgress"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="ID" value="2805b962-ad17-401d-bd53-b1fba35a3ef1"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1E28F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB0E6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="2"/>
 			<column name="VAL" value="Satisfactory Progress Requirements"/>
 			<column name="VER_NBR" value="2"/>
@@ -7528,7 +7528,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="PSYC"/>
 			<column name="CD" value="PSYC"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="29"/>
 			<column name="OBJ_ID" value="E74F2293B79F41CA884DABF8D4E58EF2"/>
@@ -7899,10 +7899,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BMGT"/>
 			<column name="CD" value="BMGT"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="2b561e88-4b2d-437b-ae13-c3233be73e48"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1BA8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAE66D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="72"/>
 			<column name="VAL" value="Business Management"/>
 			<column name="VER_NBR" value="0"/>
@@ -8680,7 +8680,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ROBT"/>
 			<column name="CD" value="ROBT"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="3"/>
 			<column name="OBJ_ID" value="DE1D0F1AE3F74504AF2EA59B2B248442"/>
@@ -8691,7 +8691,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="PUAD"/>
 			<column name="CD" value="PUAD"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="30"/>
 			<column name="OBJ_ID" value="479C7B2212234194AFBFD1064C0C89AC"/>
@@ -8862,7 +8862,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="SOCY"/>
 			<column name="CD" value="SOCY"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="31"/>
 			<column name="OBJ_ID" value="2795E89AB52D48E1826BC5D2CA4ED4B3"/>
@@ -9003,10 +9003,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="GVPT"/>
 			<column name="CD" value="GVPT"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="31d25b7f-7822-4d24-997d-6324cfb46bad"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1BF8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAEB6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="77"/>
 			<column name="VAL" value="Political Science"/>
 			<column name="VER_NBR" value="0"/>
@@ -9034,7 +9034,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="SOWK"/>
 			<column name="CD" value="SOWK"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="32"/>
 			<column name="OBJ_ID" value="3D7E7221936B4D85A1FDCCAF91445234"/>
@@ -9175,7 +9175,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="North"/>
 			<column name="CD" value="NO"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.campusLocation"/>
 			<column name="ID" value="33"/>
 			<column name="OBJ_ID" value="50F795EF658A4D5BA89BF4EF9FB125FB"/>
@@ -9226,10 +9226,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Student Oversight Unit"/>
 			<column name="CD" value="kuali.adminOrg.type.StudentOversightUnit"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="3322abe6-a514-46b9-a502-1799c9030906"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1CE8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAFA6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Student Oversight Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -9397,7 +9397,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="South"/>
 			<column name="CD" value="SO"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.campusLocation"/>
 			<column name="ID" value="34"/>
 			<column name="OBJ_ID" value="45CDEA3809424FE3921EAC06C2B89478"/>
@@ -9498,7 +9498,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="per day"/>
 			<column name="CD" value="kuali.atp.duration.day"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.duration"/>
 			<column name="ID" value="35"/>
 			<column name="OBJ_ID" value="C0B084D867FD4EF6B0E7F5F584372202"/>
@@ -9669,7 +9669,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="per week"/>
 			<column name="CD" value="kuali.atp.duration.week"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.duration"/>
 			<column name="ID" value="36"/>
 			<column name="OBJ_ID" value="DCA82E394B0C4288BBC068E0107701E9"/>
@@ -9730,7 +9730,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="clusetmanagement"/>
 			<column name="CD" value="clusetmanagement"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="ID" value="363af65b-52bc-4368-91f4-849bafa78bae"/>
 			<column name="OBJ_ID" value="83cebaf4-af1c-4eef-a659-26decbc11abe"/>
@@ -9851,7 +9851,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="per month"/>
 			<column name="CD" value="kuali.atp.duration.month"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.duration"/>
 			<column name="ID" value="37"/>
 			<column name="OBJ_ID" value="B8A59DEF17394D7EADAD127F44D57660"/>
@@ -10012,7 +10012,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Superseded"/>
 			<column name="CD" value="Superseded"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="38"/>
 			<column name="OBJ_ID" value="2D645753940144858F1353C6DC1D12D3"/>
@@ -10193,7 +10193,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Draft"/>
 			<column name="CD" value="Draft"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="39"/>
 			<column name="OBJ_ID" value="F404211B893C4C97A22F26B5333B62DE"/>
@@ -10804,10 +10804,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Deployment Division"/>
 			<column name="CD" value="kuali.adminOrg.type.DeploymentDivision"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="3c934273-0fce-4090-bb37-8343882b9dc4"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1CA8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF66D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Deployment Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -11515,7 +11515,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="AACH"/>
 			<column name="CD" value="AACH"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="4"/>
 			<column name="OBJ_ID" value="64B25D178BE3430883D05FB22BB660C7"/>
@@ -11666,10 +11666,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="CCJS"/>
 			<column name="CD" value="CCJS"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="40e5d836-fff1-436c-b99c-8d16674022ff"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1BB8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAE76D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="73"/>
 			<column name="VAL" value="Criminal Justice"/>
 			<column name="VER_NBR" value="0"/>
@@ -11697,7 +11697,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="submitted"/>
 			<column name="CD" value="submitted"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="41"/>
 			<column name="OBJ_ID" value="CF92038408BF4284A3FFA0A2CC03FB2E"/>
@@ -11888,7 +11888,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Withdrawn"/>
 			<column name="CD" value="Withdrawn"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="42"/>
 			<column name="OBJ_ID" value="67273517CCBF41E98F1010AF40998EA8"/>
@@ -12189,7 +12189,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Approved"/>
 			<column name="CD" value="Approved"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="43"/>
 			<column name="OBJ_ID" value="F0D20C91B9B54ED6B2C0D565F7B7D81A"/>
@@ -12320,7 +12320,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Inactive"/>
 			<column name="CD" value="Inactive"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="44"/>
 			<column name="OBJ_ID" value="1E9331842FF44052A58B6B2BB8F145E5"/>
@@ -12501,7 +12501,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Active"/>
 			<column name="CD" value="Active"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="45"/>
 			<column name="OBJ_ID" value="F296FA84CD884B8894D3299F944E1F59"/>
@@ -12722,7 +12722,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Retired"/>
 			<column name="CD" value="Retired"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.state"/>
 			<column name="ID" value="46"/>
 			<column name="OBJ_ID" value="62E96263484B4926AD62A74E4D8AE407"/>
@@ -12873,7 +12873,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Lab Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.labFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="47"/>
 			<column name="OBJ_ID" value="BC2FB8A42EA94E5DB6D839596436CBEE"/>
@@ -13014,7 +13014,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Material Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.materialFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="48"/>
 			<column name="OBJ_ID" value="F5768870E24A42E995FED7292FEDF84E"/>
@@ -13215,7 +13215,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Studio Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.studioFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="49"/>
 			<column name="OBJ_ID" value="7E3FEDAEEA624316BD7C9FC4463E33C5"/>
@@ -13686,10 +13686,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Financial Control Unit"/>
 			<column name="CD" value="kuali.adminOrg.type.FinancialControlUnit"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="4bd0e397-0764-4f7a-a010-d9191e7c7af9"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D18F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAFD6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Control Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -14287,10 +14287,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Curriculum Oversight Unit"/>
 			<column name="CD" value="kuali.adminOrg.type.CurriculumOversightUnit"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="4fa57988-a40c-45c6-8b21-3a419389cc9c"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1CD8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF96D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Curriculum Oversight Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -14308,10 +14308,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Student Oversight Division"/>
 			<column name="CD" value="kuali.adminOrg.type.StudentOversightDivision"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="4fb74c25-84e1-4df4-acd5-c9d9a8e393ee"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1C98F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF56D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Student Oversight Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -14399,7 +14399,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ACCT"/>
 			<column name="CD" value="ACCT"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="5"/>
 			<column name="OBJ_ID" value="B3D80ED2516140A78773B0F8EA79BEDF"/>
@@ -14410,7 +14410,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Field Trip Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.fieldTripFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="50"/>
 			<column name="OBJ_ID" value="74BD2B2C9DA44BAAA70ADF3AED789E57"/>
@@ -14641,7 +14641,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Field Study Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.fieldStudyFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="51"/>
 			<column name="OBJ_ID" value="0E657382FED64C8AB8C32E91482A2674"/>
@@ -14822,7 +14822,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Admin Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.administrativeFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="52"/>
 			<column name="OBJ_ID" value="D8A4F4CEE7794CF08FB97D83747E4AAB"/>
@@ -14973,7 +14973,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Coop Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.coopFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="53"/>
 			<column name="OBJ_ID" value="D3ECAE8E6DB84DE297511BAFC90EA880"/>
@@ -15164,7 +15164,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Greens Fee"/>
 			<column name="CD" value="kuali.enum.type.feeTypes.greensFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.feeType"/>
 			<column name="ID" value="54"/>
 			<column name="OBJ_ID" value="298989939253462883D61964E9782585"/>
@@ -15315,7 +15315,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Variable Rate Fee"/>
 			<column name="CD" value="variableRateFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.rateType"/>
 			<column name="ID" value="55"/>
 			<column name="OBJ_ID" value="D12B902F12C6431D809D70A8CF72A764"/>
@@ -15566,7 +15566,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Fixed Rate Fee"/>
 			<column name="CD" value="fixedRateFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.rateType"/>
 			<column name="ID" value="56"/>
 			<column name="OBJ_ID" value="A6E2E9AABE74434EB04443A4E75F35C5"/>
@@ -15717,7 +15717,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Multiple Rate Fee"/>
 			<column name="CD" value="multipleRateFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.rateType"/>
 			<column name="ID" value="57"/>
 			<column name="OBJ_ID" value="C6D700BE63FF428D84E581D7DCDF8D26"/>
@@ -15928,7 +15928,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Per Credit Fee"/>
 			<column name="CD" value="perCreditFee"/>
-			<column name="EFF_DT" value="20100407000000"/>
+			<column name="EFF_DT" valueDate="2010-04-07T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.fee.rateType"/>
 			<column name="ID" value="58"/>
 			<column name="OBJ_ID" value="398FD257174841C0964D833AECA1B792"/>
@@ -16139,7 +16139,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="AASP"/>
 			<column name="CD" value="AASP"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="59"/>
 			<column name="OBJ_ID" value="41973F945167495784C7E8A7718AE72D"/>
@@ -16240,10 +16240,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Financial Resources Division"/>
 			<column name="CD" value="kuali.adminOrg.type.FinancialResourcesDivision"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="596d5399-4899-4519-bff2-9067f2e027d6"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1CB8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF76D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Resources Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -17331,10 +17331,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Student Elig &amp; Prereq"/>
 			<column name="CD" value="kuali.statement.type.course.academicReadiness.studentEligibilityPrereq"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="5fcd4c7c-e638-4028-8287-68d7bd1f4988"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1DB8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB076D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="3"/>
 			<column name="VAL" value="Student Eligibility and Preqrequiste"/>
 			<column name="VER_NBR" value="1"/>
@@ -17382,7 +17382,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ARTS"/>
 			<column name="CD" value="ARTS"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="6"/>
 			<column name="OBJ_ID" value="FE9B3DD43F2D44F19C874282421C8AE2"/>
@@ -17393,7 +17393,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="AAST"/>
 			<column name="CD" value="AAST"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="60"/>
 			<column name="OBJ_ID" value="7693517071324554BC145DF2829AD463"/>
@@ -17504,7 +17504,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="common"/>
 			<column name="CD" value="common"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="ID" value="607edf67-3ef1-4570-8407-ffc605b8f6fb"/>
 			<column name="OBJ_ID" value="953bb24c-840c-4b95-a8ce-0f4d429abc61"/>
@@ -17605,7 +17605,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Standard final Exam"/>
 			<column name="CD" value="STD"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.finalExam.status"/>
 			<column name="ID" value="61"/>
 			<column name="OBJ_ID" value="B7AA6A025D9C491A87D31A6ACD8DB237"/>
@@ -17796,7 +17796,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Alternate final assessment"/>
 			<column name="CD" value="ALT"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.finalExam.status"/>
 			<column name="ID" value="62"/>
 			<column name="OBJ_ID" value="239C75A3DAAA486D8B0043CCD6F89744"/>
@@ -18047,7 +18047,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="No final exam or assessment"/>
 			<column name="CD" value="None"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.finalExam.status"/>
 			<column name="ID" value="63"/>
 			<column name="OBJ_ID" value="D150463AEF374825A0E8CB99A5D46366"/>
@@ -18168,7 +18168,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Extended"/>
 			<column name="CD" value="EX"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.campusLocation"/>
 			<column name="ID" value="64"/>
 			<column name="OBJ_ID" value="5AD835728CA74894B16AE32CCEFED971"/>
@@ -18419,7 +18419,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="All"/>
 			<column name="CD" value="AL"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.campusLocation"/>
 			<column name="ID" value="65"/>
 			<column name="OBJ_ID" value="D1E263A8272C4E9D84FECE754DCA98C5"/>
@@ -18740,10 +18740,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Institution"/>
 			<column name="CD" value="kuali.adminOrg.type.Institution"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="67e99363-5be4-4996-aeef-aad3172c314f"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D28F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAFE6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Institution"/>
 			<column name="VER_NBR" value="1"/>
@@ -19371,7 +19371,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="CHEM"/>
 			<column name="CD" value="CHEM"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="6b84a916-92a6-4538-bf00-fafb7d92b22e"/>
 			<column name="OBJ_ID" value="96ED3E513F49FE1EE040C60AF05B2BC9"/>
@@ -20132,7 +20132,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BENG"/>
 			<column name="CD" value="BENG"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="7"/>
 			<column name="OBJ_ID" value="7A965F3C2B8748838B77C5FE31CB5735"/>
@@ -21503,10 +21503,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Courses that Restrict Credit"/>
 			<column name="CD" value="kuali.statement.type.course.credit.restriction"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="777dc110-1707-41ed-9014-13e6e769d815"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1DE8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB0A6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Courses that Restrict Credit"/>
 			<column name="VER_NBR" value="1"/>
@@ -21964,7 +21964,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="SOCY"/>
 			<column name="CD" value="SOCY"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="79cc4865-fd18-44e0-997e-35df04afb4dc"/>
 			<column name="OBJ_ID" value="96ED3E513F4DFE1EE040C60AF05B2BC9"/>
@@ -22725,10 +22725,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Financial Resources Unit"/>
 			<column name="CD" value="kuali.adminOrg.type.FinancialResourcesUnit"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="7db97425-d6bb-45b2-9873-1905d228f203"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D08F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAFC6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Resources Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -23036,7 +23036,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BIOC"/>
 			<column name="CD" value="BIOC"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="8"/>
 			<column name="OBJ_ID" value="90F3AE3CB37F4EF9AE56B3C0EE6E3E1A"/>
@@ -23987,10 +23987,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="cross-listed"/>
 			<column name="CD" value="crossListed"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="850a28c9-ebfb-4199-8769-6693404ce4af"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1D98F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB056D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="1"/>
 			<column name="VAL" value="Cross-listed Courses"/>
 			<column name="VER_NBR" value="1"/>
@@ -24018,7 +24018,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="validation"/>
 			<column name="CD" value="validation"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="ID" value="852e87ca-94c6-4e41-a870-e923e87eb4fe"/>
 			<column name="OBJ_ID" value="c2e2afa8-3507-442e-b42c-3ee90a7ed446"/>
@@ -24569,10 +24569,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Completion Requirements"/>
 			<column name="CD" value="kuali.statement.type.program.completion"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="ID" value="8804149a-038a-47f7-932d-bcf392d3d263"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1E08F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB0C6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="3"/>
 			<column name="VAL" value="Completion Requirements"/>
 			<column name="VER_NBR" value="2"/>
@@ -26020,7 +26020,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BIOL"/>
 			<column name="CD" value="BIOL"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="9"/>
 			<column name="OBJ_ID" value="0C3BC6DB2F414EFBBFB7339FCC297760"/>
@@ -26281,10 +26281,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Deployment Unit"/>
 			<column name="CD" value="kuali.adminOrg.type.DeploymentUnit"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="91c476ec-89f5-4386-a52f-ab69064d0caa"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1CF8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAFB6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Deployment Unit"/>
 			<column name="VER_NBR" value="1"/>
@@ -26722,7 +26722,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="es"/>
 			<column name="CD" value="es"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.locales"/>
 			<column name="ID" value="94811268-45d7-445d-8818-aaa0d9ba5851"/>
 			<column name="OBJ_ID" value="613449a8-7ba9-41e1-a2b6-a4bebca951c2"/>
@@ -28033,7 +28033,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="en"/>
 			<column name="CD" value="en"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.locales"/>
 			<column name="ID" value="9cbf6b08-1169-43c7-8ffd-114ca3e46c0a"/>
 			<column name="OBJ_ID" value="f041c515-7ada-48f1-a922-13e0a4455186"/>
@@ -28534,10 +28534,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ARHU"/>
 			<column name="CD" value="ARHU"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA61"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1688F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA946D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="61"/>
 			<column name="VAL" value="Arts and Humanities"/>
 			<column name="VER_NBR" value="0"/>
@@ -28545,10 +28545,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BCHM"/>
 			<column name="CD" value="BCHM"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA62"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1698F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA956D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="62"/>
 			<column name="VAL" value="Bio Chemistry"/>
 			<column name="VER_NBR" value="0"/>
@@ -28556,10 +28556,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BIOM"/>
 			<column name="CD" value="BIOM"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA63"/>
-			<column name="OBJ_ID" value="ABD1CCEDC16A8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA966D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="63"/>
 			<column name="VAL" value="Biometrics"/>
 			<column name="VER_NBR" value="0"/>
@@ -28567,10 +28567,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="BSCI"/>
 			<column name="CD" value="BSCI"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA64"/>
-			<column name="OBJ_ID" value="ABD1CCEDC16B8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA976D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="64"/>
 			<column name="VAL" value="Biological Sciences"/>
 			<column name="VER_NBR" value="0"/>
@@ -28578,10 +28578,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="GEMS"/>
 			<column name="CD" value="GEMS"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA65"/>
-			<column name="OBJ_ID" value="ABD1CCEDC16C8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA986D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="65"/>
 			<column name="VAL" value="Gemstone"/>
 			<column name="VER_NBR" value="0"/>
@@ -28589,10 +28589,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="HONR"/>
 			<column name="CD" value="HONR"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA66"/>
-			<column name="OBJ_ID" value="ABD1CCEDC16D8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA996D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="66"/>
 			<column name="VAL" value="Honors"/>
 			<column name="VER_NBR" value="0"/>
@@ -28600,10 +28600,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="MATH"/>
 			<column name="CD" value="MATH"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA67"/>
-			<column name="OBJ_ID" value="ABD1CCEDC16E8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA9A6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="67"/>
 			<column name="VAL" value="Math"/>
 			<column name="VER_NBR" value="0"/>
@@ -28611,10 +28611,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="PHYS"/>
 			<column name="CD" value="PHYS"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA68"/>
-			<column name="OBJ_ID" value="ABD1CCEDC16F8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA9B6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="68"/>
 			<column name="VAL" value="Physics"/>
 			<column name="VER_NBR" value="0"/>
@@ -28622,10 +28622,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="STAT"/>
 			<column name="CD" value="STAT"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA69"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1708F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA9C6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="69"/>
 			<column name="VAL" value="Statistics"/>
 			<column name="VER_NBR" value="0"/>
@@ -28633,10 +28633,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="UNIV"/>
 			<column name="CD" value="UNIV"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="SUBJAREA70"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1718F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA9D6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="70"/>
 			<column name="VAL" value="University Studies"/>
 			<column name="VER_NBR" value="0"/>
@@ -29244,7 +29244,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="course"/>
 			<column name="CD" value="course"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="ID" value="a3ca8af5-11a7-41b1-b0a1-068065995569"/>
 			<column name="OBJ_ID" value="283bb291-487a-4b60-b4ed-787ffa81777f"/>
@@ -29475,10 +29475,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ECON"/>
 			<column name="CD" value="ECON"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="a594b618-0d7b-4945-a970-805b8ec1eeb5"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1BD8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAE96D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="75"/>
 			<column name="VAL" value="Economics"/>
 			<column name="VER_NBR" value="0"/>
@@ -29546,10 +29546,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Administering Org"/>
 			<column name="CD" value="kuali.adminOrg.type.Administration"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="a5d39acc-80d8-4cba-a8bb-13cce6561ab8"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1C78F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF36D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Admistering Org"/>
 			<column name="VER_NBR" value="1"/>
@@ -29927,10 +29927,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Full Time"/>
 			<column name="CD" value="kuali.atp.intensity.fulltime"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="ID" value="a8fdd335-ecac-4075-9feb-89266fa6e4d7"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1648F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FA906D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="2320"/>
 			<column name="VAL" value="Full Time"/>
 			<column name="VER_NBR" value="0"/>
@@ -30458,10 +30458,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Financial Control Division"/>
 			<column name="CD" value="kuali.adminOrg.type.FinancialControlDivision"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="abb0a915-1400-4faf-8295-6baf28ff008d"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1CC8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF86D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Financial Control Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -32529,10 +32529,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Curriculum Oversight"/>
 			<column name="CD" value="kuali.adminOrg.type.CurriculumOversight"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="b75a9fac-fa91-4cf1-93ee-890189a454f9"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1C68F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF26D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Curriculum Oversight"/>
 			<column name="VER_NBR" value="1"/>
@@ -32590,10 +32590,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Jointly-Offered"/>
 			<column name="CD" value="joint"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="b7d8c960-fb52-4db9-8a02-99c6ad802d74"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1DA8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB066D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Jointly-Offered Courses"/>
 			<column name="VER_NBR" value="1"/>
@@ -33151,7 +33151,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ENGL"/>
 			<column name="CD" value="ENGL"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="bb2ee74e-7db5-46bc-a263-3fa7ae98d89b"/>
 			<column name="OBJ_ID" value="96ED3E513F4BFE1EE040C60AF05B2BC9"/>
@@ -35131,10 +35131,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="ARTH"/>
 			<column name="CD" value="ARTH"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="c70d6d2d-b3cf-4346-a246-5a84874e343b"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1B98F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAE56D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="71"/>
 			<column name="VAL" value="Art History"/>
 			<column name="VER_NBR" value="0"/>
@@ -35452,10 +35452,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Entrance Requirements"/>
 			<column name="CD" value="kuali.statement.type.program.entrance"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="ID" value="c8f2e35a-9bb2-4803-903a-ab877133840e"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1E18F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB0D6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="1"/>
 			<column name="VAL" value="Entrance Requirements"/>
 			<column name="VER_NBR" value="2"/>
@@ -38172,10 +38172,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Curriculum Oversight Division"/>
 			<column name="CD" value="kuali.adminOrg.type.CurriculumOversightDivision"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.adminOrg"/>
 			<column name="ID" value="d88d37fa-cdb0-458b-9e1f-c51100d51172"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1C88F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAF46D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="0"/>
 			<column name="VAL" value="Curriculum Oversight Division"/>
 			<column name="VER_NBR" value="1"/>
@@ -38633,7 +38633,7 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="org"/>
 			<column name="CD" value="org"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="ks.message.groupNames"/>
 			<column name="ID" value="dade18a7-3962-472a-9157-d496c22f19d2"/>
 			<column name="OBJ_ID" value="c8dd8e84-28bc-4143-abf7-0c89f90d1bcb"/>
@@ -40164,10 +40164,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="THET"/>
 			<column name="CD" value="THET"/>
-			<column name="EFF_DT" value="20100701000000"/>
+			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.lu.subjectArea"/>
 			<column name="ID" value="e31e16b8-4b3b-4f3b-84a6-31a229eb65bb"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1C18F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FAED6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="79"/>
 			<column name="VAL" value="Theater"/>
 			<column name="VER_NBR" value="0"/>
@@ -42805,10 +42805,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="cluSet"/>
 			<column name="CD" value="cluSet"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.courseSet.types"/>
 			<column name="ID" value="f32403a1-cc9d-4004-9a95-f5da290b55e2"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1DF8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB0B6D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="2"/>
 			<column name="VAL" value="All Course Sets"/>
 			<column name="VER_NBR" value="4"/>
@@ -44076,10 +44076,10 @@
 		<insert tableName="KSEM_ENUM_VAL_T">
 			<column name="ABBREV_VAL" value="Antirequisite"/>
 			<column name="CD" value="kuali.statement.type.course.academicReadiness.antireq"/>
-			<column name="EFF_DT" value="20000101000000"/>
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="ID" value="fa86a628-9601-4308-8a28-71d406bd19e9"/>
-			<column name="OBJ_ID" value="ABD1CCEDC1DC8F6AE040C60AF05B7F22"/>
+			<column name="OBJ_ID" value="AC740A52FB086D4CE040C60AF05B1F2B"/>
 			<column name="SORT_KEY" value="4"/>
 			<column name="VAL" value="Antirequisite"/>
 			<column name="VER_NBR" value="1"/>
