@@ -75,7 +75,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Homework"/>
-			<column name="OBJ_ID" value="AC740A52FAC56D4CE040C60AF05B1F2B"/>
+			<column name="OBJ_ID" value="ACD7D0E16EBF1AD2E040C60AF05B2B6B"/>
 			<column name="TYPE_DESC" value="Student's doing homework, problem sets and reading assignments and writing"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.Homework"/>
 			<column name="VER_NBR" value="0"/>
@@ -107,7 +107,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Web Discuss"/>
-			<column name="OBJ_ID" value="AC740A52FAC46D4CE040C60AF05B1F2B"/>
+			<column name="OBJ_ID" value="ACD7D0E16EBE1AD2E040C60AF05B2B6B"/>
 			<column name="TYPE_DESC" value="Web-based or technologically-mediated activities replacing standard discussion sections"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.WebDiscussion"/>
 			<column name="VER_NBR" value="0"/>
@@ -131,7 +131,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Standardized Test"/>
-			<column name="OBJ_ID" value="AC740A52FAC66D4CE040C60AF05B1F2B"/>
+			<column name="OBJ_ID" value="ACD7D0E16EC01AD2E040C60AF05B2B6B"/>
 			<column name="TYPE_DESC" value="Standardized Test"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test"/>
 			<column name="VER_NBR" value="0"/>
@@ -139,7 +139,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Standardized Test Component"/>
-			<column name="OBJ_ID" value="AC740A52FAC76D4CE040C60AF05B1F2B"/>
+			<column name="OBJ_ID" value="ACD7D0E16EC11AD2E040C60AF05B2B6B"/>
 			<column name="TYPE_DESC" value="Standardized Test Component"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test.component"/>
 			<column name="VER_NBR" value="0"/>

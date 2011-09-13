@@ -2,13 +2,11 @@
 
     <changeSet id="ksen_lpr-foreign-keys" author="alubbers">
         <addForeignKeyConstraint constraintName="FK1BE1597B1D2EFA44" baseTableName="KSEN_LPR" baseColumnNames="RELATION_TYPE_ID" referencedTableName="KSEN_LPR_TYPE" referencedColumnNames="TYPE_KEY" />
-        <addForeignKeyConstraint constraintName="FK1BE1597B61E975F6" baseTableName="KSEN_LPR" baseColumnNames="RELATION_STATE_ID" referencedTableName="KSEN_LPR_STATE" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK1BE1597B61E975F6" baseTableName="KSEN_LPR" baseColumnNames="RELATION_STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
     </changeSet>
 
-    <changeSet id="ksen_lpr_attr-foreign-keys" author="alubbers">
-        <addForeignKeyConstraint constraintName="FKDF4BE635A8427FA" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR_TYPE" referencedColumnNames="TYPE_KEY" />
+    <changeSet id="ksen_lpr_attr-constraints" author="alubbers">
         <addForeignKeyConstraint constraintName="FKDF4BE635DC3CD520" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR" referencedColumnNames="ID" />
-        <addForeignKeyConstraint constraintName="FKDF4BE635EA869E3D" baseTableName="KSEN_LPR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LPR_STATE" referencedColumnNames="ID" />
     </changeSet>
     
     <changeSet id="ksen_lpr_roster-constraints" author="alubbers">

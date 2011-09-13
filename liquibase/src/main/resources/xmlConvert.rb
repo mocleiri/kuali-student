@@ -69,6 +69,11 @@ def parseConfigFile(configFile, moduleName)
 	configFile.each_line do |line|
 		parts = line.split(':')
 		
+		if parts[1] == nil
+			puts line + ' has a problem!!'
+			puts configFile.path + ' is the file'
+		end
+		
 		tableName = parts[1].strip
 		fileName = parts[0].strip
 		

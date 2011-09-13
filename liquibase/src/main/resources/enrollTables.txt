@@ -25,15 +25,18 @@ atp/ks-enroll-atp-create:KSEN_STATE_ATTR
 atp/ks-enroll-atp-create:KSEN_STATE_PROCESS 
 atp/ks-enroll-atp-create:KSEN_TYPETYPE_RELTN 
 lpr/ks-enroll-lpr-create:KSEN_LPR 
-lpr/ks-enroll-lpr-create:KSEN_LPR_ATTR 
-lpr/ks-enroll-lpr-create:KSEN_LPR_STATE 
+lpr/ks-enroll-lpr-create:KSEN_LPR_ATTR
 lpr/ks-enroll-lpr-create:KSEN_LPR_TYPE 
 lpr/ks-enroll-lpr-create:KSEN_LPR_ROSTER
 lpr/ks-enroll-lpr-create:KSEN_LPR_ROSTER_ENTRY
 lpr/ks-enroll-lpr-create:KSEN_LPRROSTER_LUI_RELTN
+lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS
+lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS_ATTR
+lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS_ITEMS
+lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS_ITEM_ATTR
 lui/ks-enroll-lui-create:KSEN_LUI 
 lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN 
-lui/ks-enroll-lui-create:  KSEN_LUILUI_RELTN_ATTR
+lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN_ATTR
 lui/ks-enroll-lui-create:KSEN_LUI_ATTR 
 lui/ks-enroll-lui-create:KSEN_LUI_INSTR 
 lui/ks-enroll-lui-create:KSEN_LUI_JN_LUI_INSTR 
@@ -41,7 +44,7 @@ lui/ks-enroll-lui-create:KSEN_LUI_JN_LUI_IDENT
 lui/ks-enroll-lui-create:KSEN_LUI_RICH_TEXT 
 lui/ks-enroll-lui-create:KSEN_LUI_TYPE 
 lui/ks-enroll-lui-create:KSEN_LUI_TYPE_ATTR
-lui/ks-enroll-lui-create:  KSEN_LUI_IDENT
-lui/ks-enroll-lui-create:  KSEN_LUI_IDENT_ATTR 
-lui/ks-enroll-lui-create:  KSEN_LUI_LUCD
-lui/ks-enroll-lui-create:  KSEN_LUI_LUCD_ATTR
+lui/ks-enroll-lui-create:KSEN_LUI_IDENT
+lui/ks-enroll-lui-create:KSEN_LUI_IDENT_ATTR
+lui/ks-enroll-lui-create:KSEN_LUI_LUCD
+lui/ks-enroll-lui-create:KSEN_LUI_LUCD_ATTR

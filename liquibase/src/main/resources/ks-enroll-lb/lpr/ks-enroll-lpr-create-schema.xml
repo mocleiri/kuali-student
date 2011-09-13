@@ -30,6 +30,8 @@
     <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
+
+<!--
 <changeSet author="andy (generated)" id="1311191427300-310">
   <createTable tableName="KSEN_LPR_STATE">
     <column name="ID" type="java.sql.Types.VARCHAR(255)">
@@ -47,6 +49,7 @@
     <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
+-->
 <changeSet author="andy (generated)" id="1311191427300-311">
   <createTable tableName="KSEN_LPR_TYPE">
     <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
@@ -106,5 +109,65 @@
         <column name="RELATION_TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
     </createTable>
 </changeSet>
+
+<changeSet id="create-table-KSEN_LPR_TRANS" author="alubbers">
+    <createTable tableName="KSEN_LPR_TRANS">
+        <column name="ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="CREATEID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="CREATETIME" type="java.sql.Types.TIMESTAMP"/>
+        <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP"/>
+        <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+        <column name="VER_NBR" type="${bigint.type}(19)" />
+        <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="REQ_PERSON_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="LPR_TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
+    </createTable>
+</changeSet>
+
+<changeSet id="create-table-KSEN_LPR_TRANS_ITEMS" author="alubbers">
+    <createTable tableName="KSEN_LPR_TRANS_ITEMS">
+        <column name="ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="CREATEID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="CREATETIME" type="java.sql.Types.TIMESTAMP"/>
+        <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP"/>
+        <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+        <column name="VER_NBR" type="${bigint.type}(19)" />
+        <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="PERSON_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="NEW_LUI_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="EXIST_LUI_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="LPR_TRANS_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
+    </createTable>
+</changeSet>
+<changeSet author="alubbers" id="create-table-KSEN_LPR_TRANS_ATTR">
+  <createTable tableName="KSEN_LPR_TRANS_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" />
+    </column>
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+  </createTable>
+</changeSet>
+<changeSet author="alubbers" id="create-table-KSEN_LPR_TRANS_ITEM_ATTR">
+  <createTable tableName="KSEN_LPR_TRANS_ITEM_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" />
+    </column>
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+  </createTable>
+</changeSet>
+
 
 </databaseChangeLog>
