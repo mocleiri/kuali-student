@@ -246,6 +246,41 @@
       </properties>
     </profile>
     <profile>
+      <id>1.3</id>
+      <properties>
+        <ks.hudson.job>1.3-full-build</ks.hudson.job>
+        <ks.deploy.version>1.3-SNAPSHOT</ks.deploy.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>dev2</id>
+      <properties>
+        <ks.deploy.environment.name>dev2</ks.deploy.environment.name>
+        <ks.deploy.remote.tomcat.user>deploy</ks.deploy.remote.tomcat.user>
+        <ks.deploy.remote.tomcat.home>/usr/local/tomcat_${ks.deploy.remote.tomcat.user}</ks.deploy.remote.tomcat.home>
+        <ks.deploy.remote.config.file>${ks.deploy.remote.tomcat.home}/kuali/main/dev/ks-embedded-config.xml</ks.deploy.remote.config.file>
+        <ks.deploy.remote.hostname>deploy2.ks.kuali.org</ks.deploy.remote.hostname>
+        <ks.deploy.remote.public.url>http://dev2.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.impex.url>jdbc:oracle:thin:@deploy2.ks.kuali.org:1521:KS</ks.deploy.impex.url>
+        <ks.deploy.impex.username>KSDEV</ks.deploy.impex.username>
+        <ks.deploy.impex.password>KSDEV</ks.deploy.impex.password>
+      </properties>
+    </profile>
+    <profile>
+      <id>staging2</id>
+      <properties>
+        <ks.deploy.environment.name>staging2</ks.deploy.environment.name>
+        <ks.deploy.remote.hostname>deploy2.ks.kuali.org</ks.deploy.remote.hostname>
+        <ks.deploy.remote.public.url>http://staging2.ks.kuali.org</ks.deploy.remote.public.url>
+        <ks.deploy.remote.tomcat.user>staging</ks.deploy.remote.tomcat.user>
+        <ks.deploy.remote.tomcat.home>/usr/local/tomcat_staging</ks.deploy.remote.tomcat.home>
+        <ks.deploy.remote.config.file>/home/staging/kuali/main/dev/ks-embedded-config.xml</ks.deploy.remote.config.file>
+        <ks.deploy.impex.url>jdbc:oracle:thin:@deploy2.ks.kuali.org:1521:KS</ks.deploy.impex.url>
+        <ks.deploy.impex.username>KSSTAGE</ks.deploy.impex.username>
+        <ks.deploy.impex.password>KSSTAGE</ks.deploy.impex.password>
+      </properties>
+    </profile>
+    <profile>
       <id>dev</id>
       <properties>
         <ks.deploy.environment.name>dev</ks.deploy.environment.name>
