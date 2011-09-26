@@ -75,18 +75,6 @@
 			<column name="CMPNT_CD" value="All"/>
 			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC723DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format dates to be used in a file name when DateTimeServiceImpl.toDateStringForFilename(Date) is called. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_NM" value="DATE_TO_STRING_FORMAT_FOR_FILE_NAME"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VAL" value="yyyyMMdd"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CMPNT_CD" value="All"/>
-			<column name="EVAL_OPRTR_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
 			<column name="OBJ_ID" value="664F8ABEC725DBCDE0404F8189D85427"/>
 			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date to be displayed on a web page. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
 			<column name="PARM_NM" value="DATE_TO_STRING_FORMAT_FOR_USER_INTERFACE"/>
@@ -166,54 +154,6 @@ against notes, document explanations, and routing annotations."/>
 			<column name="PARM_NM" value="SENSITIVE_DATA_PATTERNS_WARNING_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
 			<column name="VAL" value="N"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CMPNT_CD" value="All"/>
-			<column name="EVAL_OPRTR_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC722DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of strings representing date formats that the DateTimeService will use to parse dates when DateTimeServiceImpl.convertToSqlDate(String) or DateTimeServiceImpl.convertToDate(String) is called. Note that patterns will be applied in the order listed (and the first applicable one will be used). For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_NM" value="STRING_TO_DATE_FORMATS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VAL" value="MM/dd/yyyy hh:mm a;MM/dd/yy;MM/dd/yyyy;MM-dd-yy;MMddyy;MMMM dd;yyyy;MM/dd/yy HH:mm:ss;MM/dd/yyyy HH:mm:ss;MM-dd-yy HH:mm:ss;MMddyy HH:mm:ss;MMMM dd HH:mm:ss;yyyy HH:mm:ss"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CMPNT_CD" value="All"/>
-			<column name="EVAL_OPRTR_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC727DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A semi-colon delimted list of strings representing date formats that the DateTimeService will use to parse date and times when DateTimeServiceImpl.convertToDateTime(String) or DateTimeServiceImpl.convertToSqlTimestamp(String) is called. Note that patterns will be applied in the order listed (and the first applicable one will be used). For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_NM" value="STRING_TO_TIMESTAMP_FORMATS"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VAL" value="MM/dd/yyyy hh:mm a;MM/dd/yy;MM/dd/yyyy;MM-dd-yy;MMddyy;MMMM dd;yyyy;MM/dd/yy HH:mm:ss;MM/dd/yyyy HH:mm:ss;MM-dd-yy HH:mm:ss;MMddyy HH:mm:ss;MMMM dd HH:mm:ss;yyyy HH:mm:ss"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CMPNT_CD" value="All"/>
-			<column name="EVAL_OPRTR_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC724DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date and time string to be used in a file name when DateTimeServiceImpl.toDateTimeStringForFilename(Date) is called.. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_NM" value="TIMESTAMP_TO_STRING_FORMAT_FOR_FILE_NAME"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VAL" value="yyyyMMdd-HH-mm-ss-S"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CMPNT_CD" value="All"/>
-			<column name="EVAL_OPRTR_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="664F8ABEC726DBCDE0404F8189D85427"/>
-			<column name="PARM_DESC_TXT" value="A single date format string that the DateTimeService will use to format a date and time to be displayed on a web page. For a more technical description of how characters in the parameter value will be interpreted, please consult the javadocs for java.text.SimpleDateFormat. Any changes will be applied when the application is restarted."/>
-			<column name="PARM_NM" value="TIMESTAMP_TO_STRING_FORMAT_FOR_USER_INTERFACE"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VAL" value="MM/dd/yyyy hh:mm a"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">
@@ -338,7 +278,7 @@ against notes, document explanations, and routing annotations."/>
 			<column name="CMPNT_CD" value="Document"/>
 			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="ACD7D0E170631AD2E040C60AF05B2B6B"/>
+			<column name="OBJ_ID" value="AD91C75A9D24ED01E040C60AF05B7FD6"/>
 			<column name="PARM_DESC_TXT" value="Controls whether the nervous system will show the blanket approve button to a user who is authorized for blanket approval but is neither the initiator of the particular document nor the recipient of an active, pending, approve action request."/>
 			<column name="PARM_NM" value="ALLOW_ENROUTE_BLANKET_APPROVE_WITHOUT_APPROVAL_REQUEST_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
@@ -554,18 +494,6 @@ against notes, document explanations, and routing annotations."/>
 			<column name="PARM_DESC_TXT" value="Comma seperated list of Document Types to exclude from the Rule Quicklinks."/>
 			<column name="PARM_NM" value="RESTRICT_DOCUMENT_TYPES"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VER_NBR" value="1"/>
-		</insert>
-		<insert tableName="KRCR_PARM_T">
-			<column name="APPL_ID" value="KUALI"/>
-			<column name="CMPNT_CD" value="Rule"/>
-			<column name="EVAL_OPRTR_CD" value="A"/>
-			<column name="NMSPC_CD" value="KR-WKFLW"/>
-			<column name="OBJ_ID" value="E05A692D62E54B87901D872DC37208A1"/>
-			<column name="PARM_DESC_TXT" value="Indicator to determine if rule caching is enabled."/>
-			<column name="PARM_NM" value="CACHING_IND"/>
-			<column name="PARM_TYP_CD" value="CONFG"/>
-			<column name="VAL" value="Y"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KRCR_PARM_T">

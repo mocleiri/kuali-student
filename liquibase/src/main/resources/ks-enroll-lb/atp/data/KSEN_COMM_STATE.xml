@@ -92,6 +92,13 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The instructor is assigned to teach this course or section."/>
+			<column name="ID" value="kuali.lpr.state.assigned"/>
+			<column name="NAME" value="Assigned"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.process.instructor.course.assignment"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The student was registered but subsequently dropped the course or section within the normally allotted time period"/>
 			<column name="ID" value="kuali.lpr.state.dropped.early"/>
 			<column name="NAME" value="Dropped"/>

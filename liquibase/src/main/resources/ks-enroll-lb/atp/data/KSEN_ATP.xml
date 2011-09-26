@@ -137,7 +137,7 @@
 			<column name="ID" value="testTermId1"/>
 			<column name="NAME" value="Fall 2011"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-201"/>
-			<column name="START_DT" valueDate="2011-09-28T00:00:00"/>
+			<column name="START_DT" valueDate="2011-09-15T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">

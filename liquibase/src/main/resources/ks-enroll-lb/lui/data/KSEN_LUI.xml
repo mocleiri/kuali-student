@@ -1,11 +1,13 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_LUI-initial-data" author="alubbers">
 		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
 			<column name="CLU_ID" value="cluId1"/>
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXP_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="ID" value="Lui-1"/>
 			<column name="NAME" value="Lui one"/>
+			<column name="OFFIC_LUI_ID" value="LUI-IDENT-1"/>
 			<column name="RT_DESCR_ID" value="Lui-1-Desc"/>
 			<column name="STATE_ID" value="kuali.lui.state.draft"/>
 			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
@@ -23,11 +25,13 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
 			<column name="CLU_ID" value="cluId3"/>
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXP_DT" valueDate="2011-12-31T00:00:00"/>
 			<column name="ID" value="Lui-3"/>
 			<column name="NAME" value="Lui three"/>
+			<column name="OFFIC_LUI_ID" value="LUI-IDENT-2"/>
 			<column name="RT_DESCR_ID" value="Lui-3-Desc"/>
 			<column name="STATE_ID" value="kuali.lui.state.draft"/>
 			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>

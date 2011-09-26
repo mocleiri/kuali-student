@@ -656,4 +656,31 @@
 <changeSet author="andy (generated)" id="1311191427300-905">
   <addForeignKeyConstraint baseColumnNames="SVC_DSCRPTR_ID" baseTableName="KRSB_SVC_DEF_T" baseTableSchemaName="KSEMBEDDED" constraintName="KRSB_SVC_DEF_FK1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" referencedColumnNames="SVC_DSCRPTR_ID" referencedTableName="KRSB_SVC_DSCRPTR_T" referencedTableSchemaName="KSEMBEDDED" referencesUniqueColumn="false" />
 </changeSet>
+
+<changeSet author="alubbers" id="constraints-KREW_PPL_FLW_T">
+	<addForeignKeyConstraint baseColumnNames="TYP_ID" baseTableName="KREW_PPL_FLW_T" constraintName="KREW_PPL_FLW_FK1" referencedColumnNames="TYP_ID" referencedTableName="KREW_TYP_T" />
+	<addUniqueConstraint columnNames="NM,NMSPC_CD" constraintName="KREW_PPL_FLW_TU1" tableName="KREW_PPL_FLW_T" />
+</changeSet>
+
+<changeSet author="alubbers" id="unique-constraint-KREW_ATTR_DEFN_T">
+	<addUniqueConstraint columnNames="NM,NMSPC_CD" constraintName="KREW_ATTR_DEFN_TC1" tableName="KREW_ATTR_DEFN_T" />
+</changeSet>
+
+<changeSet author="alubbers" id="constraints-KREW_PPL_FLW_MBR_T">
+	<addForeignKeyConstraint baseColumnNames="DLGT_FRM_ID" baseTableName="KREW_PPL_FLW_MBR_T" constraintName="KREW_PPL_FLW_MBR_FK2" referencedColumnNames="PPL_FLW_MBR_ID" referencedTableName="KREW_PPL_FLW_MBR_T" />
+	<addForeignKeyConstraint baseColumnNames="PPL_FLW_ID" baseTableName="KREW_PPL_FLW_MBR_T" constraintName="KREW_PPL_FLW_MBR_FK1" referencedColumnNames="PPL_FLW_ID" referencedTableName="KREW_PPL_FLW_T" />
+	<addUniqueConstraint columnNames="PPL_FLW_ID,MBR_TYP_CD,MBR_ID,DLGT_FRM_ID" constraintName="KREW_PPL_FLW_MBR_TC1" tableName="KREW_PPL_FLW_MBR_T" />
+</changeSet>
+
+<changeSet author="alubbers" id="constraints-KREW_PPL_FLW_ATTR_T">
+	<addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KREW_PPL_FLW_ATTR_T" constraintName="KREW_PPL_FLW_ATTR_FK2" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KREW_ATTR_DEFN_T" />
+	<addForeignKeyConstraint baseColumnNames="PPL_FLW_ID" baseTableName="KREW_PPL_FLW_ATTR_T" constraintName="KREW_PPL_FLW_ATTR_FK1" referencedColumnNames="PPL_FLW_ID" referencedTableName="KREW_PPL_FLW_T" />
+</changeSet>
+
+<changeSet author="alubbers" id="constraints-KREW_TYP_ATTR_T">
+	<addForeignKeyConstraint baseColumnNames="ATTR_DEFN_ID" baseTableName="KREW_TYP_ATTR_T" constraintName="KREW_TYP_ATTR_FK1" referencedColumnNames="ATTR_DEFN_ID" referencedTableName="KREW_ATTR_DEFN_T" />
+	<addForeignKeyConstraint baseColumnNames="TYP_ID" baseTableName="KREW_TYP_ATTR_T" constraintName="KREW_TYP_ATTR_FK2" referencedColumnNames="TYP_ID" referencedTableName="KREW_TYP_T" />
+	<addUniqueConstraint columnNames="TYP_ID,ATTR_DEFN_ID" constraintName="KREW_TYP_ATTR_TC1" tableName="KREW_TYP_ATTR_T" />
+</changeSet>
+
 </databaseChangeLog>

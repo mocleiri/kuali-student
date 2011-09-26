@@ -695,4 +695,53 @@
             <column name="CD"/>
         </createIndex>
     </changeSet>
+    
+    <changeSet author="alubbers" id="create-index-KREW_TYP_T">
+        <createIndex indexName="KREW_TYP_TC1" tableName="KREW_TYP_T">
+            <column name="NM"/>
+	    <column name="NMSPC_CD"/>
+        </createIndex>
+    </changeSet>
+    
+    <changeSet author="alubbers" id="create-index-KREW_PPL_FLW_T">
+        <createIndex indexName="KREW_PPL_FLW_TC1" tableName="KREW_PPL_FLW_T">
+            <column name="NM"/>
+	    <column name="NMSPC_CD"/>
+        </createIndex>
+	<createIndex indexName="KREW_PPL_FLW_FK1" tableName="KREW_PPL_FLW_T">
+	    <column name="TYP_ID"/>
+        </createIndex>
+    </changeSet>
+    
+    <changeSet author="alubbers" id="create-index-KREW_PPL_FLW_MBR_T">
+	<createIndex indexName="KREW_PPL_FLW_MBR_FK2" tableName="KREW_PPL_FLW_MBR_T">
+	    <column name="DLGT_FRM_ID"/>
+        </createIndex>
+	<createIndex indexName="KREW_PPL_FLW_MBR_TI1" tableName="KREW_PPL_FLW_MBR_T">
+	    <column name="PPL_FLW_ID"/>
+        </createIndex>
+	<createIndex indexName="KREW_PPL_FLW_MBR_TI2" tableName="KREW_PPL_FLW_MBR_T">
+	    <column name="PPL_FLW_ID"/>
+	    <column name="PRIO"/>
+        </createIndex>
+    </changeSet>
+    
+    <changeSet author="alubbers" id="create-index-KREW_PPL_FLW_ATTR_T">
+	<createIndex indexName="KREW_PPL_FLW_ATTR_TI1" tableName="KREW_PPL_FLW_ATTR_T">
+		<column name="PPL_FLW_ID"/>
+	</createIndex>
+	<createIndex indexName="KREW_PPL_FLW_ATTR_TI2" tableName="KREW_PPL_FLW_ATTR_T">
+		<column name="ATTR_DEFN_ID"/>
+	</createIndex>
+    </changeSet>
+    
+    <changeSet author="alubbers" id="create-index-KREW_TYP_ATTR_T">
+	<createIndex indexName="KREW_TYP_ATTR_TI1" tableName="KREW_TYP_ATTR_T">
+		<column name="ATTR_DEFN_ID"/>
+	</createIndex>
+	<createIndex indexName="KREW_TYP_ATTR_TI2" tableName="KREW_TYP_ATTR_T">
+		<column name="TYP_ID"/>
+	</createIndex>
+    </changeSet>
+    
 </databaseChangeLog>

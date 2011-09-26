@@ -19,6 +19,7 @@ rice/rice-create:KREW_ACTN_RQST_T
 rice/rice-create:KREW_ACTN_TKN_T
 rice/rice-create:KREW_APP_DOC_STAT_TRAN_T
 rice/rice-create:KREW_ATT_T
+rice/rice-create:KREW_ATTR_DEFN_T
 rice/rice-create:KREW_DLGN_RSP_T
 rice/rice-create:KREW_DOC_HDR_CNTNT_T
 rice/rice-create:KREW_DOC_HDR_EXT_DT_T
@@ -40,6 +41,9 @@ rice/rice-create:KREW_EDL_FLD_DMP_T
 rice/rice-create:KREW_HLP_T
 rice/rice-create:KREW_INIT_RTE_NODE_INSTN_T
 rice/rice-create:KREW_OUT_BOX_ITM_T
+rice/rice-create:KREW_PPL_FLW_ATTR_T
+rice/rice-create:KREW_PPL_FLW_MBR_T
+rice/rice-create:KREW_PPL_FLW_T
 rice/rice-create:KREW_RTE_BRCH_PROTO_T
 rice/rice-create:KREW_RTE_BRCH_ST_T
 rice/rice-create:KREW_RTE_BRCH_T
@@ -59,6 +63,8 @@ rice/rice-create:KREW_RULE_TMPL_ATTR_T
 rice/rice-create:KREW_RULE_TMPL_OPTN_T
 rice/rice-create:KREW_RULE_TMPL_T
 rice/rice-create:KREW_STYLE_T
+rice/rice-create:KREW_TYP_ATTR_T
+rice/rice-create:KREW_TYP_T
 rice/rice-create:KREW_USR_OPTN_T
 rice/rice-create:KRIM_ADDR_TYP_T
 rice/rice-create:KRIM_AFLTN_TYP_T

@@ -15,5 +15,35 @@
 			<column name="UPDATETIME" valueDate="2012-06-18T00:00:00"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" valueDate="2012-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
+			<column name="ID" value="testLprId2"/>
+			<column name="LUIID" value="Lui-1"/>
+			<column name="PERSONID" value="admin"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" valueDate="2012-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="admin"/>
+			<column name="CREATETIME" valueDate="2012-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
+			<column name="ID" value="testLprId3"/>
+			<column name="LUIID" value="Lui-3"/>
+			<column name="PERSONID" value="admin"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" valueDate="2012-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

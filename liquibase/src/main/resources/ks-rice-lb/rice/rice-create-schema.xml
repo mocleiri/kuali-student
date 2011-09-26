@@ -3363,4 +3363,137 @@
     </column>
   </createTable>
 </changeSet>
+
+<changeSet author="alubbers" id="create-table-KREW_TYP_T">
+	<createTable tableName="KREW_TYP_T">
+		<column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" primaryKey="true"/>
+		</column>
+		<column name="NM" type="java.sql.Types.VARCHAR(100)">
+			<constraints nullable="false" />
+		</column>
+		<column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="SRVC_NM" type="java.sql.Types.VARCHAR(200)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ACTV" type="java.sql.Types.VARCHAR(1)" defaultValue="Y">
+			<constraints nullable="false" />
+		</column>
+		<column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+			<constraints nullable="false" />
+		</column>
+	</createTable>
+</changeSet>
+
+<changeSet author="alubbers" id="create-table-KREW_PPL_FLW_T">
+	<createTable tableName="KREW_PPL_FLW_T">
+		<column name="PPL_FLW_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+		<column name="NM" type="java.sql.Types.VARCHAR(100)">
+			<constraints nullable="false" />
+		</column>
+		<column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ACTV" type="java.sql.Types.VARCHAR(1)" defaultValue="Y">
+			<constraints nullable="false" />
+		</column>
+		<column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+			<constraints nullable="false" />
+		</column>
+		<column name="DESC_TXT" type="java.sql.Types.VARCHAR(4000)"/>
+	</createTable>
+</changeSet>
+
+<changeSet author="alubbers" id="create-table-KREW_ATTR_DEFN_T">
+	<createTable tableName="KREW_ATTR_DEFN_T">
+		<column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+		<column name="NM" type="java.sql.Types.VARCHAR(100)">
+			<constraints nullable="false" />
+		</column>
+		<column name="NMSPC_CD" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ACTV" type="java.sql.Types.VARCHAR(1)" defaultValue="Y">
+			<constraints nullable="false" />
+		</column>
+		<column name="CMPNT_NM" type="java.sql.Types.VARCHAR(100)"/>
+		<column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+			<constraints nullable="false" />
+		</column>
+		<column name="DESC_TXT" type="java.sql.Types.VARCHAR(40)"/>
+	</createTable>
+</changeSet>
+
+<changeSet author="alubbers" id="create-table-KREW_PPL_FLW_MBR_T">
+	<createTable tableName="KREW_PPL_FLW_MBR_T">
+		<column name="PPL_FLW_MBR_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+		<column name="PPL_FLW_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="MBR_TYP_CD" type="java.sql.Types.VARCHAR(1)">
+			<constraints nullable="false" />
+		</column>
+		<column name="MBR_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="PRIO" type="${integer.type}(8)"/>
+		<column name="DLGT_FRM_ID" type="java.sql.Types.VARCHAR(40)"/>
+		<column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+			<constraints nullable="false" />
+		</column>
+	</createTable>
+</changeSet>
+
+<changeSet author="alubbers" id="create-table-KREW_PPL_FLW_ATTR_T">
+	<createTable tableName="KREW_PPL_FLW_ATTR_T">
+		<column name="PPL_FLW_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+		<column name="PPL_FLW_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ATTR_VAL" type="java.sql.Types.VARCHAR(400)"/>
+		<column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+			<constraints nullable="false" />
+		</column>
+	</createTable>
+</changeSet>
+
+<changeSet author="alubbers" id="create-table-KREW_TYP_ATTR_T">
+	<createTable tableName="KREW_TYP_ATTR_T">
+		<column name="TYP_ATTR_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+		<column name="SEQ_NO" type="${integer.type}(5)">
+			<constraints nullable="false" />
+		</column>
+		<column name="TYP_ID" type="java.sql.Types.VARCHAR(40)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ATTR_DEFN_ID" type="java.sql.Types.VARCHAR(255)">
+			<constraints nullable="false" />
+		</column>
+		<column name="ACTV" type="java.sql.Types.VARCHAR(1)" defaultValue="Y">
+			<constraints nullable="false" />
+		</column>
+		<column defaultValueNumeric="0" name="VER_NBR" type="${integer.type}(8)">
+			<constraints nullable="false" />
+		</column>
+	</createTable>
+</changeSet>
+
 </databaseChangeLog>

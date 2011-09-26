@@ -750,4 +750,53 @@
 		</column>
 	</createTable>
     </changeSet>
+    
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-KREW_ATTR_DEFN">
+        <createTable tableName="KREW_ATTR_DEFN_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+    
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-KREW_PPL_FLW_ATTR">
+        <createTable tableName="KREW_PPL_FLW_ATTR_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+    
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-KREW_PPL_FLW_MBR">
+        <createTable tableName="KREW_PPL_FLW_MBR_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+    
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-KREW_PPL_FLW">
+        <createTable tableName="KREW_PPL_FLW_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+    
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-KREW_TYP_ATTR">
+        <createTable tableName="KREW_TYP_ATTR_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+    
+    <changeSet author="alubbers" dbms="mysql" id="mysql-sequence-KREW_TYP">
+        <createTable tableName="KREW_TYP_S">
+		<column name="id" autoIncrement="true" type="java.sql.Types.BIGINT(19)">
+			<constraints nullable="false" primaryKey="true" />
+		</column>
+	</createTable>
+    </changeSet>
+    
 </databaseChangeLog>

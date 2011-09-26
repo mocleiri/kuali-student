@@ -320,4 +320,28 @@
     <changeSet author="andy (generated)" id="1311191427300-1250">
         <createSequence schemaName="KSEMBEDDED" sequenceName="KRSB_SVC_DSCRPTR_S"/>
     </changeSet>
+    
+    <changeSet author="alubbers" id="sequence-KREW_ATTR_DEFN">
+        <createSequence sequenceName="KREW_ATTR_DEFN_S" />
+    </changeSet>
+    
+    <changeSet author="alubbers" id="sequence-KREW_PPL_FLW_ATTR">
+        <createSequence sequenceName="KREW_PPL_FLW_ATTR_S" />
+    </changeSet>
+    
+    <changeSet author="alubbers" id="sequence-KREW_PPL_FLW_MBR">
+        <createSequence sequenceName="KREW_PPL_FLW_MBR_S" />
+    </changeSet>
+    
+    <changeSet author="alubbers" id="sequence-KREW_PPL_FLW">
+        <createSequence sequenceName="KREW_PPL_FLW_S" />
+    </changeSet>
+    
+    <changeSet author="alubbers" id="sequence-KREW_TYP_ATTR">
+        <createSequence sequenceName="KREW_TYP_ATTR_S" />
+    </changeSet>
+    
+    <changeSet author="alubbers" id="sequence-KREW_TYP">
+        <createSequence sequenceName="KREW_TYP_S" />
+    </changeSet>
 </databaseChangeLog>

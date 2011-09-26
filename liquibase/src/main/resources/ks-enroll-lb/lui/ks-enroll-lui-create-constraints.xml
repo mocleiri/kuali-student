@@ -47,5 +47,9 @@
     <changeSet id="ksen_lui_lucd_attr-foreign-keys" author="alubbers">
         <addForeignKeyConstraint constraintName="FK95C7419C1170681" baseTableName="KSEN_LUI_LUCD_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LUI_LUCD" referencedColumnNames="ID" />
     </changeSet>
-
+    
+    <changeSet id="constraints-KSEN_LUI_MTG_SCHE" author="alubbers">
+        <addForeignKeyConstraint constraintName="KSEN_LUI_MTG_SCHE_FK_LUI" baseTableName="KSEN_LUI_MTG_SCHE" baseColumnNames="LUI_ID" referencedTableName="KSEN_LUI" referencedColumnNames="ID" />
+    </changeSet>
+    
 </databaseChangeLog>

@@ -4,9 +4,18 @@
 			<column name="CD" value="CHEM123"/>
 			<column name="DIVISION" value="CHEM"/>
 			<column name="ID" value="LUI-IDENT-1"/>
-			<column name="LNG_NAME" value="Chemistry 123"/>
+			<column name="LNG_NAME" value="Chemistry I"/>
 			<column name="SHRT_NAME" value="Chem 123"/>
 			<column name="SUFX_CD" value="123"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="CHEM234"/>
+			<column name="DIVISION" value="CHEM"/>
+			<column name="ID" value="LUI-IDENT-2"/>
+			<column name="LNG_NAME" value="Chemistry II"/>
+			<column name="SHRT_NAME" value="Chem 234"/>
+			<column name="SUFX_CD" value="234"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>
