@@ -25,6 +25,18 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Automatic Roster Entry"/>
+			<column name="TYPE_DESC" value="Roster Entry Automatic"/>
+			<column name="TYPE_KEY" value="kuali.lpr.roster.entry.type.automatic"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Student"/>
+			<column name="TYPE_DESC" value="Student"/>
+			<column name="TYPE_KEY" value="kuali.lpr.trans.item.add"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Assistant Instructor"/>
 			<column name="TYPE_DESC" value="Person who assists the main instructor but is still considered an &quot;instructor&quot;"/>
 			<column name="TYPE_KEY" value="kuali.lpr.type.instructor.assistant"/>
@@ -46,6 +58,12 @@
 			<column name="NAME" value="Registrant"/>
 			<column name="TYPE_DESC" value="Registrant who is taking the course"/>
 			<column name="TYPE_KEY" value="kuali.lpr.type.registrant"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Final Grade"/>
+			<column name="TYPE_DESC" value="Final Grade"/>
+			<column name="TYPE_KEY" value="kuali.lpr.type.roster.grade.final"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

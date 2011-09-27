@@ -75,7 +75,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Homework"/>
-			<column name="OBJ_ID" value="AD91C75A9B80ED01E040C60AF05B7FD6"/>
+			<column name="OBJ_ID" value="ADF4001BC59DC1E0E040C60AF05B1C0B"/>
 			<column name="TYPE_DESC" value="Student's doing homework, problem sets and reading assignments and writing"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.Homework"/>
 			<column name="VER_NBR" value="0"/>
@@ -107,7 +107,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Web Discuss"/>
-			<column name="OBJ_ID" value="AD91C75A9B7FED01E040C60AF05B7FD6"/>
+			<column name="OBJ_ID" value="ADF4001BC59CC1E0E040C60AF05B1C0B"/>
 			<column name="TYPE_DESC" value="Web-based or technologically-mediated activities replacing standard discussion sections"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.activity.WebDiscussion"/>
 			<column name="VER_NBR" value="0"/>
@@ -130,8 +130,24 @@
 		</insert>
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
+			<column name="NAME" value="Masters"/>
+			<column name="OBJ_ID" value="6A33734B7426482792951DD942080C05"/>
+			<column name="TYPE_DESC" value="Masters level program"/>
+			<column name="TYPE_KEY" value="kuali.lu.type.credential.Masters"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LUTYPE">
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
+			<column name="NAME" value="Professional"/>
+			<column name="OBJ_ID" value="ADF3FD469EBA0EABE040C60AF05B1C01"/>
+			<column name="TYPE_DESC" value="A program leading to a professional degree"/>
+			<column name="TYPE_KEY" value="kuali.lu.type.credential.Professional"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSLU_LUTYPE">
+			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Standardized Test"/>
-			<column name="OBJ_ID" value="AD91C75A9B81ED01E040C60AF05B7FD6"/>
+			<column name="OBJ_ID" value="ADF4001BC59EC1E0E040C60AF05B1C0B"/>
 			<column name="TYPE_DESC" value="Standardized Test"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test"/>
 			<column name="VER_NBR" value="0"/>
@@ -139,7 +155,7 @@
 		<insert tableName="KSLU_LUTYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="Standardized Test Component"/>
-			<column name="OBJ_ID" value="AD91C75A9B82ED01E040C60AF05B7FD6"/>
+			<column name="OBJ_ID" value="ADF4001BC59FC1E0E040C60AF05B1C0B"/>
 			<column name="TYPE_DESC" value="Standardized Test Component"/>
 			<column name="TYPE_KEY" value="kuali.lu.type.standardized.test.component"/>
 			<column name="VER_NBR" value="0"/>

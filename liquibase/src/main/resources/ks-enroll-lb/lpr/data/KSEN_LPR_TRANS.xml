@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LPR_TRANS-initial-data" author="alubbers">
+		<insert tableName="KSEN_LPR_TRANS">
+			<column name="CREATETIME" valueDate="2011-09-28T00:00:00"/>
+			<column name="ID" value="testLprTransId1"/>
+			<column name="LPR_TYPE_ID" value="kuali.lpr.trans.registrant"/>
+			<column name="REQ_PERSON_ID" value="admin-1"/>
+			<column name="STATE_ID" value="kuali.lpr.trans.registered"/>
+			<column name="UPDATEID" value="admin"/>
+			<column name="UPDATETIME" valueDate="2011-09-28T00:00:00"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LPR_ROSTER-initial-data" author="alubbers">
+		<insert tableName="KSEN_LPR_ROSTER">
+			<column name="ATP_DUR_TYP_KEY" value="testTermId1"/>
+			<column name="CHECK_IN_REQ" value="0"/>
+			<column name="ID" value="testLprRoster1"/>
+			<column name="MAX_CAPACITY" value="5"/>
+			<column name="NAME" value="Chemistry I Roster"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-9"/>
+			<column name="STATE_ID" value="kuali.lpr.type.roster.grade.final"/>
+			<column name="TYPE_ID" value="kuali.assessment.roster.state.ready"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

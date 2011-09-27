@@ -1,6 +1,13 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_COMM_STATE-initial-data" author="alubbers">
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Active Roster entry"/>
+			<column name="ID" value="kuali.assessment.roster.state.ready"/>
+			<column name="NAME" value="Assigned"/>
+			<column name="PROCESS_KEY" value="kuali.assessment.process.course.grading"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="Indicates that this Atp-Atp relation is active"/>
 			<column name="ID" value="kuali.atp.atp.relation.state.active"/>
 			<column name="NAME" value="Active"/>
@@ -141,6 +148,20 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The student is attemptng to enroll in this course or section."/>
+			<column name="ID" value="kuali.lpr.trans.item.new"/>
+			<column name="NAME" value="New"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.process.student.course.registration"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="This hold is active and should be enforced"/>
+			<column name="ID" value="kuali.lpr.trans.registered"/>
+			<column name="NAME" value="Active"/>
+			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The relationship between the two LUIs is active "/>
 			<column name="ID" value="kuali.lui.lui.relation.state.active"/>
 			<column name="NAME" value="Active"/>
@@ -222,6 +243,13 @@
 			<column name="ID" value="kuali.milestone.state.Official"/>
 			<column name="NAME" value="Official"/>
 			<column name="PROCESS_KEY" value="kuali.milestone.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The roster has been created and is ready to have grades entered"/>
+			<column name="ID" value="kuali.roster.entry.state.active"/>
+			<column name="NAME" value="Ready"/>
+			<column name="PROCESS_KEY" value="kuali.assessment.process.course.grading"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

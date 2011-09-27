@@ -1,0 +1,12 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LPR_TRANS_ITEMS-initial-data" author="alubbers">
+		<insert tableName="KSEN_LPR_TRANS_ITEMS">
+			<column name="ID" value="testLprTransItemId1"/>
+			<column name="LPR_TRANS_ID" value="testLprTransId1"/>
+			<column name="NEW_LUI_ID" value="Lui-1"/>
+			<column name="PERSON_ID" value="Student1"/>
+			<column name="STATE_ID" value="kuali.lpr.trans.item.new"/>
+			<column name="TYPE_ID" value="kuali.lpr.trans.item.add"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>
