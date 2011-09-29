@@ -858,6 +858,7 @@
                 </goals>
                 <configuration>
                   <url>${ks.deploy.remote.public.url}</url>
+                  <timeout>600</timeout>
                 </configuration>
               </execution>
             </executions>
