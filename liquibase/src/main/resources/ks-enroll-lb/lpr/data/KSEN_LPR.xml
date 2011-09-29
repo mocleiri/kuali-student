@@ -38,7 +38,7 @@
 			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="student1"/>
 			<column name="LUIID" value="Lui-1"/>
-			<column name="PERSONID" value="testPersonId1"/>
+			<column name="PERSONID" value="testuser1"/>
 			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
 			<column name="UPDATEID" value="admin"/>
@@ -53,7 +53,7 @@
 			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="student2"/>
 			<column name="LUIID" value="Lui-1"/>
-			<column name="PERSONID" value="testuser1"/>
+			<column name="PERSONID" value="testuser2"/>
 			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
 			<column name="UPDATEID" value="admin"/>
@@ -68,7 +68,7 @@
 			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="student3"/>
 			<column name="LUIID" value="Lui-1"/>
-			<column name="PERSONID" value="testuser2"/>
+			<column name="PERSONID" value="testuser3"/>
 			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
 			<column name="UPDATEID" value="admin"/>
@@ -83,7 +83,7 @@
 			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="student4"/>
 			<column name="LUIID" value="Lui-1"/>
-			<column name="PERSONID" value="testuser3"/>
+			<column name="PERSONID" value="testuser4"/>
 			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
 			<column name="UPDATEID" value="admin"/>
@@ -98,7 +98,7 @@
 			<column name="EXPIRATIONDATE" valueDate="2000-12-31T00:00:00"/>
 			<column name="ID" value="student5"/>
 			<column name="LUIID" value="Lui-1"/>
-			<column name="PERSONID" value="testuser4"/>
+			<column name="PERSONID" value="testuser5"/>
 			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
 			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
 			<column name="UPDATEID" value="admin"/>

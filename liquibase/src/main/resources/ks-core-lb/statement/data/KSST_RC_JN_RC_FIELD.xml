@@ -1,372 +1,372 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSST_RC_JN_RC_FIELD-initial-data" author="alubbers">
 		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="af92e426-33ff-461e-8bc2-c27bf69cb0d1"/>
+			<column name="REQ_COM_ID" value="d209801c-c83e-4b61-a7d6-dcf6eac1f192"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="3dbe42ea-c93c-473b-b4d5-0ccdba5910f6"/>
+			<column name="REQ_COM_ID" value="d209801c-c83e-4b61-a7d6-dcf6eac1f192"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="991fb25f-6986-4b16-aeee-81e6051a5412"/>
+			<column name="REQ_COM_ID" value="808e4be8-f871-4c4a-9dfe-8bd8bb33cc77"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="05092eb2-896d-403a-9915-246460d67c69"/>
+			<column name="REQ_COM_ID" value="808e4be8-f871-4c4a-9dfe-8bd8bb33cc77"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="f698c45e-da2d-48ba-90e3-ce0701a2cd24"/>
+			<column name="REQ_COM_ID" value="808e4be8-f871-4c4a-9dfe-8bd8bb33cc77"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="791a7834-c931-415a-ac16-89ef8294d5fc"/>
+			<column name="REQ_COM_ID" value="d57a0096-6909-437e-bd85-1eb16051e5ab"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="642cc7f3-2aee-4354-ac8a-0619b42948d0"/>
+			<column name="REQ_COM_ID" value="d57a0096-6909-437e-bd85-1eb16051e5ab"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="eed68869-3b30-4da6-9943-f648a404607c"/>
+			<column name="REQ_COM_ID" value="133e86e4-cfba-44ec-8d9a-bd5947b3c888"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="c566fc63-a056-4352-a8f7-14d81c3a945b"/>
+			<column name="REQ_COM_ID" value="133e86e4-cfba-44ec-8d9a-bd5947b3c888"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="571e3edf-49a6-4641-8854-b68790edca35"/>
+			<column name="REQ_COM_ID" value="133e86e4-cfba-44ec-8d9a-bd5947b3c888"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="d5f2f6b8-b26d-4324-afb6-80df295036cc"/>
+			<column name="REQ_COM_ID" value="20182016-dfa4-47ee-a05b-d93855358d31"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="0ebc5324-878f-46b6-be37-42e8b4ca7e03"/>
+			<column name="REQ_COM_ID" value="20182016-dfa4-47ee-a05b-d93855358d31"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e5821f3f-e960-4c00-83f9-7c8227a06909"/>
+			<column name="REQ_COM_ID" value="20182016-dfa4-47ee-a05b-d93855358d31"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="fae7821b-0cd3-4583-b1f7-c6a7b5c78627"/>
+			<column name="REQ_COM_ID" value="36bca947-d06b-46aa-bee2-c1e84ec6585a"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="1d3f03c5-c6f7-44e6-8b2b-81c93a515b07"/>
+			<column name="REQ_COM_ID" value="36bca947-d06b-46aa-bee2-c1e84ec6585a"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="3aed2936-efc3-4b5f-9418-51b903c8c7ed"/>
+			<column name="REQ_COM_ID" value="36bca947-d06b-46aa-bee2-c1e84ec6585a"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="78c3cf05-1629-4a42-8c32-88a059a38d26"/>
+			<column name="REQ_COM_ID" value="920f6546-2a1e-40fc-aa9e-ca87bb1b4d76"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="8ed77d3e-0244-4879-b171-7f8303e05ab0"/>
+			<column name="REQ_COM_ID" value="920f6546-2a1e-40fc-aa9e-ca87bb1b4d76"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="64e9d5df-0eeb-406d-81e3-ab83bcd2645e"/>
+			<column name="REQ_COM_ID" value="ffc5592c-1aff-4ee1-8f19-d0d6f0ec3920"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="d49857da-4951-4556-abe4-61103d8f31d6"/>
+			<column name="REQ_COM_ID" value="ffc5592c-1aff-4ee1-8f19-d0d6f0ec3920"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="31021082-c278-40cd-ab2d-0f4b7321ffcd"/>
+			<column name="REQ_COM_ID" value="e8b4652b-a6b8-43e4-90ef-c321497aa902"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="ca6ef8f6-6a1e-4076-beba-5397b617b638"/>
+			<column name="REQ_COM_ID" value="e8b4652b-a6b8-43e4-90ef-c321497aa902"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="5b3c8812-fb10-4fe0-b853-f12ed17a242e"/>
+			<column name="REQ_COM_ID" value="f632ee4f-3735-4609-84ee-7c94d03941f8"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="28de80d7-5414-43ff-9b54-2049d4ebb24b"/>
+			<column name="REQ_COM_ID" value="7fae1f54-50af-4b87-a5c1-ac0819c394e9"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e74c5e93-fcf4-44e6-b07f-142c834ad44d"/>
+			<column name="REQ_COM_ID" value="7fae1f54-50af-4b87-a5c1-ac0819c394e9"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e11cc73c-7851-4e33-971e-8b65d4c25b29"/>
+			<column name="REQ_COM_ID" value="4ad884ae-e63e-4baa-8219-42ad5751046a"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="8e9467e9-97c5-47c9-b851-20c2a4afad59"/>
+			<column name="REQ_COM_ID" value="6da8a100-2c83-4b06-b65a-4f9f59b35bbd"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e00edf63-5c92-4a7a-8e1e-dc785b917be5"/>
+			<column name="REQ_COM_ID" value="b8b6c213-7f48-46fd-8747-1809109c11c1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="432acccb-30c6-4300-9730-f2267dbb4e2a"/>
+			<column name="REQ_COM_ID" value="b8b6c213-7f48-46fd-8747-1809109c11c1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="d3473eb9-5250-4b59-beb3-5dc0f19337d4"/>
+			<column name="REQ_COM_ID" value="b8b6c213-7f48-46fd-8747-1809109c11c1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e3cfb566-ec2e-4bd3-8341-ef3e375b8195"/>
+			<column name="REQ_COM_ID" value="79f302f9-b6e5-427f-9f97-e3bf56347c35"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="48d43725-2e1f-4df1-ae8f-54a8e3d194f7"/>
+			<column name="REQ_COM_ID" value="79f302f9-b6e5-427f-9f97-e3bf56347c35"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="0de65d54-6332-4e2e-ba29-bda33e7b338a"/>
+			<column name="REQ_COM_ID" value="79f302f9-b6e5-427f-9f97-e3bf56347c35"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e89bb53f-81d5-471c-a041-58055ed6cf7d"/>
+			<column name="REQ_COM_ID" value="44cbedcb-a553-469c-8582-b921f9c38fac"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="200270b9-a18b-43e7-ae4d-8a4dafd70509"/>
+			<column name="REQ_COM_ID" value="7372a83f-a5da-4c18-a9d4-fb59f53db741"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="a55afd2a-8bf2-4641-a255-e71889ce6246"/>
+			<column name="REQ_COM_ID" value="7372a83f-a5da-4c18-a9d4-fb59f53db741"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="00841809-4855-4a2c-806a-fb9a1fc87844"/>
+			<column name="REQ_COM_ID" value="6da8a100-2c83-4b06-b65a-4f9f59b35bbd"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="c1787098-b5a6-414a-8295-c3751d31c14f"/>
+			<column name="REQ_COM_ID" value="6da8a100-2c83-4b06-b65a-4f9f59b35bbd"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="b27cff84-6f51-48f3-b07f-d8cdbab3b7c5"/>
+			<column name="REQ_COM_ID" value="9c982a23-cf95-405f-a997-9c389dc059b6"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="c120e573-39ef-4614-8ce1-de2aa129054c"/>
+			<column name="REQ_COM_ID" value="32d629f5-f89a-4d92-bc9e-ed91b36156e4"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="3d384465-cd86-40b8-87d9-1042ed1479cc"/>
+			<column name="REQ_COM_ID" value="32d629f5-f89a-4d92-bc9e-ed91b36156e4"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="5f6c930b-85f2-44f2-8d06-9b8eb884d2e1"/>
+			<column name="REQ_COM_ID" value="a3dee68d-8422-44d1-acba-f6fa1d77931f"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="8aa78a1b-4918-4554-b111-4cf6e9e2add5"/>
+			<column name="REQ_COM_ID" value="a3dee68d-8422-44d1-acba-f6fa1d77931f"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="949b71f8-4fd4-423a-bb29-1de953fefa28"/>
+			<column name="REQ_COM_ID" value="5905b48f-5cb1-4b3b-a663-a89a3d4197c9"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="a670a341-8915-4f98-a1b7-ad5740137282"/>
+			<column name="REQ_COM_ID" value="5905b48f-5cb1-4b3b-a663-a89a3d4197c9"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="b9985312-0f9b-4cdb-b8fb-c5382a02f9dd"/>
+			<column name="REQ_COM_ID" value="f60009fb-f4f6-4c05-b26d-90594b347ab1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="b961b3f4-6465-40d2-b5be-ab9688aedb89"/>
+			<column name="REQ_COM_ID" value="f60009fb-f4f6-4c05-b26d-90594b347ab1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="6febdca0-a8cc-4840-906b-e39fc9832524"/>
+			<column name="REQ_COM_ID" value="51a30dc1-011a-4fda-b620-2c0ef3ec03c3"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="082b2212-1a28-4727-b67a-dc50142d5753"/>
+			<column name="REQ_COM_ID" value="e460f279-6aee-4200-aab1-36da6e65c5b6"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="e70ccb0b-b38f-4875-8f54-21a7fdb87ee2"/>
+			<column name="REQ_COM_ID" value="e460f279-6aee-4200-aab1-36da6e65c5b6"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="973ec8ab-393d-4100-8ea9-1dbd47baa6e8"/>
+			<column name="REQ_COM_ID" value="9c982a23-cf95-405f-a997-9c389dc059b6"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="9476f013-1921-488c-81de-5eaf731efd62"/>
+			<column name="REQ_COM_ID" value="9c982a23-cf95-405f-a997-9c389dc059b6"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="3360840a-b86c-4603-b30a-ca9a0c894bf4"/>
+			<column name="REQ_COM_ID" value="2b3ffbca-3543-43e8-b3c2-0a1aed906ef2"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="9f4ad2f3-8dd7-4d58-9464-cb3f0b616725"/>
+			<column name="REQ_COM_ID" value="a23b6fcd-0d3e-4049-918d-916f767afdba"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="2eff03cd-0ebc-4732-9e68-dcb707424cd7"/>
+			<column name="REQ_COM_ID" value="a23b6fcd-0d3e-4049-918d-916f767afdba"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="42ab29e5-9730-4cd7-bba6-2711f4f9aaa2"/>
+			<column name="REQ_COM_ID" value="0138a716-7558-4371-bbd7-5b2532f1ea8e"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="ea1c8028-a87c-41c2-b79f-97e8bb719c26"/>
+			<column name="REQ_COM_ID" value="9789556c-13b3-4f25-963b-70de685d1860"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="a5fda1c5-f7b0-416d-980e-cc42341246a4"/>
+			<column name="REQ_COM_ID" value="2b3ffbca-3543-43e8-b3c2-0a1aed906ef2"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="fa49172e-505f-49d6-aa39-acc1d75f4aae"/>
+			<column name="REQ_COM_ID" value="2b3ffbca-3543-43e8-b3c2-0a1aed906ef2"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="74621f3b-9a0a-4bd9-924b-abcf7c57df25"/>
+			<column name="REQ_COM_ID" value="acd3aad2-75a2-4809-aa20-0d4ea4264402"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="7a41e70b-ca1c-4cf6-b8de-236cbc3ed777"/>
+			<column name="REQ_COM_ID" value="805f0f99-406b-489c-a471-c05de35822f1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="018988cf-0ae2-459b-93cb-4f8c1a368a35"/>
+			<column name="REQ_COM_ID" value="805f0f99-406b-489c-a471-c05de35822f1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="9c7a4b89-9720-40b5-8b5f-dbd44c04afa6"/>
+			<column name="REQ_COM_ID" value="805f0f99-406b-489c-a471-c05de35822f1"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="9438ec76-ab4a-4a58-9bce-291d14158731"/>
+			<column name="REQ_COM_ID" value="3ee6d7ce-720b-4277-9446-4baaff906b6b"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="a21a7bd0-a4aa-447d-933a-9a5c85e3dd68"/>
+			<column name="REQ_COM_ID" value="3ee6d7ce-720b-4277-9446-4baaff906b6b"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="f4dbac8c-e982-4d18-9b65-507000f07cf9"/>
+			<column name="REQ_COM_ID" value="3ee6d7ce-720b-4277-9446-4baaff906b6b"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="6def447d-fac3-4695-a3f8-c2bcbeea4f72"/>
+			<column name="REQ_COM_ID" value="032a51bb-c5c5-40bc-8186-0fd95bec9c01"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="3e856f7d-a1cb-4a62-9e7f-14361d573a58"/>
+			<column name="REQ_COM_ID" value="032a51bb-c5c5-40bc-8186-0fd95bec9c01"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="3b7a6cb3-d0f9-4ac8-90da-ec9ca7cf0d0e"/>
+			<column name="REQ_COM_ID" value="032a51bb-c5c5-40bc-8186-0fd95bec9c01"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="2558bd38-e967-48a8-a814-8868a3455f2b"/>
+			<column name="REQ_COM_ID" value="5eed269d-298c-4a30-916e-98d44508af71"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="af9a3262-ec04-4f21-a8ff-108e119c5a9a"/>
+			<column name="REQ_COM_ID" value="c7af838f-f007-43c2-b250-6e1eb3781404"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="8128fbba-3e5e-4805-ab05-38d3835f13d0"/>
+			<column name="REQ_COM_ID" value="22a37764-7900-4d94-b169-b750192fe952"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="1b829464-2cd3-4659-ba88-113aa82df9eb"/>
+			<column name="REQ_COM_ID" value="0402b53d-6508-4f28-b00a-686ed23614fd"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="cf305997-9d36-4887-ae56-8d7623d331a9"/>
+			<column name="REQ_COM_ID" value="0402b53d-6508-4f28-b00a-686ed23614fd"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="af5aa403-b374-4d9e-a525-f8f84655a388"/>
+			<column name="REQ_COM_ID" value="3f4cec57-cf8c-4aa5-91a9-61888dbb0ebd"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="6b5fd04b-3544-4118-bc86-3428b2be4f66"/>
+			<column name="REQ_COM_ID" value="99365d25-493b-4b7d-a12a-6d4ca30ca3bc"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="098b255a-7ca5-4fe8-850a-4135cc72b635"/>
+			<column name="REQ_COM_ID" value="23628512-7b76-4426-8b46-067c0d6ad3cf"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="549140cc-ce9d-4882-8917-4c96cbcf5838"/>
+			<column name="REQ_COM_ID" value="d831badb-3403-4ac8-91cb-aa89dbfccb17"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="6e074541-2cac-4651-9a37-73aa338bcca8"/>
+			<column name="REQ_COM_ID" value="9ca40ea5-59fd-4c0c-bc30-746c0dcf8887"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="8c89ee29-2d3c-454a-b3a6-953c3a05a83e"/>
+			<column name="REQ_COM_ID" value="a50b5807-f71f-4963-b02e-6d986cb48c85"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="1d577935-bdc5-4807-905e-0ffde22af348"/>
+			<column name="REQ_COM_ID" value="5194ec91-2db0-404d-a3d8-f07ed049985b"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="5533eb9f-986a-429f-9764-c088505c7701"/>
+			<column name="REQ_COM_ID" value="655b7aa9-799b-4796-893e-06973aecba27"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="eb8605e5-0eb4-44f6-acae-4d8a48821528"/>
+			<column name="REQ_COM_ID" value="655b7aa9-799b-4796-893e-06973aecba27"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="7ce2b3bf-f3f8-41eb-8ee7-89304b213599"/>
+			<column name="REQ_COM_ID" value="eb16785e-0823-4970-bb03-a022a75f8f52"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="7166b0e2-bcd6-427b-a422-5ebedc6ac898"/>
+			<column name="REQ_COM_ID" value="83829c56-2ce2-4f91-838b-6ac67a347372"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="b5b335b0-43a8-4a9a-a93e-c2cb51e007b3"/>
+			<column name="REQ_COM_ID" value="0475e30e-a49b-437c-815e-fced851c372d"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="38a4780f-494b-4eef-a353-6b90e03d9b7d"/>
+			<column name="REQ_COM_ID" value="0475e30e-a49b-437c-815e-fced851c372d"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="f6140417-fc1b-4b01-a654-4c8610a49d8e"/>
+			<column name="REQ_COM_ID" value="83829c56-2ce2-4f91-838b-6ac67a347372"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="d444633b-9744-46c0-9bc8-1b297009b4d4"/>
+			<column name="REQ_COM_ID" value="83829c56-2ce2-4f91-838b-6ac67a347372"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="8b879040-5d7d-47db-a039-177fb1fd343b"/>
+			<column name="REQ_COM_ID" value="d46df6e6-3405-4366-85ed-0a921394a84a"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
+			<column name="REQ_COM_FIELD_ID" value="79197b67-e1c1-4851-9b05-b13924de3456"/>
+			<column name="REQ_COM_ID" value="d8ad78fc-2389-4b52-bd57-7fa67bbbe664"/>
+		</insert>
+		<insert tableName="KSST_RC_JN_RC_FIELD">
 			<column name="REQ_COM_FIELD_ID" value="a6420f1b-c2eb-4c16-9b1a-aadd9d49292e"/>
 			<column name="REQ_COM_ID" value="edc7f723-67a1-4f5e-9d3e-24076dd8b804"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="daf2b4d5-693e-4c5a-bbb1-0c024d9d86da"/>
-			<column name="REQ_COM_ID" value="ad2d1ae7-ac61-4f53-bfb9-6642d1d866c7"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="ffe558e2-6dfd-435f-9d12-22ae40196d5c"/>
-			<column name="REQ_COM_ID" value="3dbb3c40-30d7-4ee2-bc89-eeb87014eb41"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="26760853-d91c-4276-8899-cf3030681224"/>
-			<column name="REQ_COM_ID" value="aa396fdc-b2e2-4e08-83ba-19dd3f317486"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="10f78d01-2e68-4f47-a8d7-a502cb004b00"/>
-			<column name="REQ_COM_ID" value="9d00060f-f482-4445-a05c-85db0c48a562"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9168683a-de3c-4b86-9cc2-9f583b68cc2a"/>
-			<column name="REQ_COM_ID" value="abbae172-3687-4d6f-b7a8-64e3c8766573"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="611ec83b-8e29-4d96-b5e6-f8022eca05eb"/>
-			<column name="REQ_COM_ID" value="a6020175-443c-4186-b3a1-95f47ab7d58b"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="ea1d458b-264c-4d66-a6d1-73343ed65dbd"/>
-			<column name="REQ_COM_ID" value="4487cc99-d10c-4a7e-a9da-c29f8cdf476b"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3463ad79-7f51-4d21-96fc-77134942aa86"/>
-			<column name="REQ_COM_ID" value="04d3e877-7cc2-4d9f-b3a7-effd157a53a9"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e84ab6fc-1c37-4726-b492-ee5c548a07ab"/>
-			<column name="REQ_COM_ID" value="d65f6882-8b74-435c-a09d-605a54b17fcd"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="cf5ca451-de18-4678-a60a-541bc7c43d14"/>
-			<column name="REQ_COM_ID" value="d65f6882-8b74-435c-a09d-605a54b17fcd"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="621c95d9-2674-4ff3-b655-0f070c8dfca8"/>
-			<column name="REQ_COM_ID" value="6fb13416-81ab-48b2-907d-061dbabc0693"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="98afd263-a434-4d2b-88d6-ade5feff4af1"/>
-			<column name="REQ_COM_ID" value="6fb13416-81ab-48b2-907d-061dbabc0693"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c7c1e2a1-aa27-40b0-b627-80e6ab42a886"/>
-			<column name="REQ_COM_ID" value="527d4553-f88c-4209-87ed-07dbea83ed7e"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="6a4e95da-ee02-4da7-a5b6-cc2e7ba9171c"/>
-			<column name="REQ_COM_ID" value="527d4553-f88c-4209-87ed-07dbea83ed7e"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="33404541-27f7-4496-aaa0-311eafa8fa42"/>
-			<column name="REQ_COM_ID" value="04d3e877-7cc2-4d9f-b3a7-effd157a53a9"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a0f19990-27f7-4979-9b23-1826ebc77f81"/>
-			<column name="REQ_COM_ID" value="04d3e877-7cc2-4d9f-b3a7-effd157a53a9"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="63a90d89-b424-4089-adb7-02d4251e8783"/>
-			<column name="REQ_COM_ID" value="4d35d921-8465-4956-a133-4c70a302e5b4"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="01343fc5-22cb-4587-ac51-8e8932bf6921"/>
-			<column name="REQ_COM_ID" value="e329bafc-5da2-4fbc-8855-f504dd1c89d2"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="0718d25a-f14e-4b0d-b043-3009064dd397"/>
-			<column name="REQ_COM_ID" value="e329bafc-5da2-4fbc-8855-f504dd1c89d2"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="78d3004b-8bed-4afc-a110-5dc46232edb6"/>
-			<column name="REQ_COM_ID" value="3e0aa269-baf7-4f2a-91c1-45816d55566b"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7f81a524-28a7-478a-a636-9443e78fac26"/>
-			<column name="REQ_COM_ID" value="a4c7f9f0-d04b-4926-836f-fb4fa7c06fa4"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a6a4dd55-99bf-4c54-aaf5-8b3cf1e67c72"/>
-			<column name="REQ_COM_ID" value="6ede8879-6822-4e41-aad4-271ae6d537e4"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d8ac1239-72e4-4224-b7da-d4412408fe62"/>
-			<column name="REQ_COM_ID" value="407d279a-cbb5-4cf5-8304-4cb8f0bf9efa"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a58c0637-1579-42eb-8862-82efcd26e5a8"/>
-			<column name="REQ_COM_ID" value="407d279a-cbb5-4cf5-8304-4cb8f0bf9efa"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9bcf4a4e-5295-49c9-810d-ad207d7c797c"/>
-			<column name="REQ_COM_ID" value="47839f54-a5f4-4b20-b922-809e7ee29cd6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3d3f2e36-ab04-49f9-90f4-a9ff5a6a5468"/>
-			<column name="REQ_COM_ID" value="4ff9c9f2-bcf5-4373-8068-ecbfc4911ba2"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="06abc3ab-7dac-437c-88de-734de7efaf38"/>
-			<column name="REQ_COM_ID" value="d767459f-571a-424e-b2dd-422317533080"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="58a5177f-ef67-4300-8a4b-2d732e35c5c6"/>
-			<column name="REQ_COM_ID" value="efea54ee-35e7-485d-85c6-3e4a98d36c82"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="afd445c5-e420-43b6-9a1e-1fdd42b2f825"/>
-			<column name="REQ_COM_ID" value="efea54ee-35e7-485d-85c6-3e4a98d36c82"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="77b6afa0-73b6-455f-a732-385e6599ee61"/>
-			<column name="REQ_COM_ID" value="efea54ee-35e7-485d-85c6-3e4a98d36c82"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="fc0d6763-64db-43bb-889e-8821418d734d"/>
-			<column name="REQ_COM_ID" value="37beae6c-6431-4610-ba13-455ff95f7357"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7bbd20cb-3fb8-4670-9531-a6ecb24951f6"/>
-			<column name="REQ_COM_ID" value="37beae6c-6431-4610-ba13-455ff95f7357"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="49b8da54-afae-4cd9-b0b2-3fc4932331ba"/>
-			<column name="REQ_COM_ID" value="6c1710f2-b69f-4cd8-abdd-9afb5863a431"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a017095c-0e7f-4312-9997-034d5c3addab"/>
-			<column name="REQ_COM_ID" value="6c1710f2-b69f-4cd8-abdd-9afb5863a431"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="2106fe53-11a4-4fa5-ab42-e453abf52521"/>
-			<column name="REQ_COM_ID" value="6c1710f2-b69f-4cd8-abdd-9afb5863a431"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="920fd265-dfa1-4568-95bf-1803481ae9e9"/>
-			<column name="REQ_COM_ID" value="f9847676-2847-4369-8e39-6dbfe7561a81"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="5636574b-160e-4805-bc6f-baceb25930d8"/>
-			<column name="REQ_COM_ID" value="f9847676-2847-4369-8e39-6dbfe7561a81"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c7213eae-1004-4d40-a8f7-ec474bf4d1a9"/>
-			<column name="REQ_COM_ID" value="f9847676-2847-4369-8e39-6dbfe7561a81"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="14665925-f50e-42d6-9e2b-ad9046a5ae96"/>
-			<column name="REQ_COM_ID" value="5fd26f88-7ab3-4e98-a1ce-cc819a350512"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="bf0ecc80-0acd-4ba2-87f2-9515daaa31ca"/>
-			<column name="REQ_COM_ID" value="da88dcb2-d23c-4e33-94bb-7e13990c3f79"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e3c0c6a4-76e0-49bd-bf36-ebe4dd5db01e"/>
-			<column name="REQ_COM_ID" value="1c62e164-817a-4d6f-865d-e41395b90a0b"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="80b2b3d0-cf77-4f7d-80d1-b76fe49014d9"/>
-			<column name="REQ_COM_ID" value="1b534fdc-b004-42d1-9ea9-886c8213e238"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="73a22e88-f5ed-4c92-8ddf-0629eead82bb"/>
-			<column name="REQ_COM_ID" value="20c17fe1-0a32-4ce0-a422-beba18f42f88"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="fdc0d34b-5d06-4208-8eb6-05a873ac76b9"/>
-			<column name="REQ_COM_ID" value="d767459f-571a-424e-b2dd-422317533080"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="0165219a-71ac-4bf1-83df-bb659e44e43c"/>
-			<column name="REQ_COM_ID" value="bef3031a-f25a-409c-8e46-4c7df29f2bca"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="154d5850-46a6-4873-a49e-5bbcf35f04ad"/>
-			<column name="REQ_COM_ID" value="e529bb35-cc0e-4861-be00-aed9d94818c8"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="f2b6c5ec-d8d7-4893-a625-f7a12e64a982"/>
-			<column name="REQ_COM_ID" value="4fc0a30f-11b8-459b-9027-2fe3e10e8f65"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="926da039-f8d5-4dbf-9046-e84ad9f627d0"/>
-			<column name="REQ_COM_ID" value="153e91a4-d81c-4c19-9e9c-b51c27e902c5"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="ef307ede-ea4d-41a5-8081-7c7edf6b3d53"/>
-			<column name="REQ_COM_ID" value="3382ef72-bb1e-441d-92ca-f5c6aba6f29c"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8629ac93-4f67-47b9-bc17-d47072e55d6c"/>
-			<column name="REQ_COM_ID" value="bef3031a-f25a-409c-8e46-4c7df29f2bca"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="101412e8-7a6b-4a34-82e6-9341d8babc42"/>
-			<column name="REQ_COM_ID" value="e65ae39d-4dcb-4c21-9c94-0d10cc6f756f"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d22eb9cc-b96c-4bbc-b333-29bb18799a86"/>
-			<column name="REQ_COM_ID" value="e65ae39d-4dcb-4c21-9c94-0d10cc6f756f"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c6e74d3d-ed40-4e11-b5f6-9804c2c27d08"/>
-			<column name="REQ_COM_ID" value="77c26eb9-7bf7-471e-b7eb-d057f482b67a"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c86dd2b0-9fa7-48c9-87bd-3b0e4fc56548"/>
-			<column name="REQ_COM_ID" value="c6ea0f3b-23a3-41ff-8069-af0e5c289626"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="de5401af-e876-4911-ae1d-8e7db6028262"/>
-			<column name="REQ_COM_ID" value="64938856-84e9-43c1-9b30-719132d565c0"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9042eaa3-b2a5-4c30-b7a6-389d650afee4"/>
-			<column name="REQ_COM_ID" value="becf7366-bb3d-4683-a293-0041fe73a1c6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d996979d-efb9-4f07-826b-df0e2f398241"/>
-			<column name="REQ_COM_ID" value="f933f477-415c-4e90-9c16-e3590355ea2e"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="81373cda-3d33-4688-bc2a-096e858182df"/>
-			<column name="REQ_COM_ID" value="7bbb5fa4-38fd-48b9-b8df-674d5fcd72f3"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="dfde4e09-f916-475a-9525-541088d71452"/>
-			<column name="REQ_COM_ID" value="fa109fef-80d8-4a7b-8bc4-c1d9c975cfde"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="f1e316ef-b0a1-4c2c-96f9-67b62e2685ca"/>
-			<column name="REQ_COM_ID" value="fa109fef-80d8-4a7b-8bc4-c1d9c975cfde"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="0b009fd3-85e9-4eca-9a2c-aeff75710719"/>
-			<column name="REQ_COM_ID" value="894c8b85-741e-4cb2-bc52-3c2cd19c677f"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9abb1342-cdf4-4323-ad7c-4a848e70b1eb"/>
-			<column name="REQ_COM_ID" value="0c8191a3-db93-4bc9-8833-d90e49f1766e"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7ea727be-c89e-49e4-9abe-39e1bc7d705f"/>
-			<column name="REQ_COM_ID" value="f52108fc-d76a-4bf1-9d4f-6b5aaadc5b1c"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="60171a16-7511-45a2-8bc8-bc8e3b1add16"/>
-			<column name="REQ_COM_ID" value="ecf70e71-440f-4fd8-bda2-73c886642cf1"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="2f7299ef-9d74-4582-abed-09c51eba646a"/>
-			<column name="REQ_COM_ID" value="f464157e-9a89-419a-a9c2-08957ba5d954"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="0d7eaa8f-570f-48b4-abe6-b068dcffde8b"/>
-			<column name="REQ_COM_ID" value="72f83d27-5bc3-491a-bc37-01bcbe56876f"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="45ccbf9a-1fe7-4d08-9048-7dddf7ba56a0"/>
-			<column name="REQ_COM_ID" value="72f83d27-5bc3-491a-bc37-01bcbe56876f"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7f33cb99-5a4a-494d-b793-58ebee06c7b1"/>
-			<column name="REQ_COM_ID" value="02ce2686-a9d6-4d4f-b00b-d51c8883bbc6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3930f19e-1357-45d0-84de-3f67e10e1160"/>
-			<column name="REQ_COM_ID" value="02ce2686-a9d6-4d4f-b00b-d51c8883bbc6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8d7b11f4-06ee-463b-9755-b73575787e4f"/>
-			<column name="REQ_COM_ID" value="02ce2686-a9d6-4d4f-b00b-d51c8883bbc6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="fe1818d0-1f63-4a1d-8e7f-c58a6ba6f1b9"/>
-			<column name="REQ_COM_ID" value="db7be832-1001-471e-98bb-dd4cee1d1fd5"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="1033b742-d1f4-463e-b4fc-3741ed67cea6"/>
-			<column name="REQ_COM_ID" value="db7be832-1001-471e-98bb-dd4cee1d1fd5"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="155ef9b5-2352-49df-9589-4e51ec2f98fc"/>
-			<column name="REQ_COM_ID" value="e708f716-8292-4d72-aa7a-3b84ea6f95ba"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="291e54d3-dd93-4695-9006-031507f2007c"/>
-			<column name="REQ_COM_ID" value="e708f716-8292-4d72-aa7a-3b84ea6f95ba"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9d703a10-5c1d-4cb0-85b0-8e5a8addebf8"/>
-			<column name="REQ_COM_ID" value="63efe8de-7474-47e9-8168-16fc12f4d2b6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9ae17bdc-0642-4a90-b4fb-4582f508275a"/>
-			<column name="REQ_COM_ID" value="7a7c75dc-f026-4f46-98c3-fa26df5952c7"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="5565ad53-89fe-4092-82e8-1e6deb77cf95"/>
-			<column name="REQ_COM_ID" value="a35f97ee-5c60-4623-b1f0-3a5a4455edf8"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="681cfd66-4775-48da-9613-410909c485d1"/>
-			<column name="REQ_COM_ID" value="a35f97ee-5c60-4623-b1f0-3a5a4455edf8"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="bb7ae9d6-5e1e-49d9-98d6-dd400143117b"/>
-			<column name="REQ_COM_ID" value="a35f97ee-5c60-4623-b1f0-3a5a4455edf8"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="fcb1abfc-610c-4cc5-81da-bf6cd8f4798a"/>
-			<column name="REQ_COM_ID" value="de274a5e-cb62-41e0-bf91-1c3ab8d646a1"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="238703cf-4095-4aec-80b0-e784e1ac8d99"/>
-			<column name="REQ_COM_ID" value="de274a5e-cb62-41e0-bf91-1c3ab8d646a1"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="06c3fd29-44d2-40cf-a478-e182db8d6687"/>
-			<column name="REQ_COM_ID" value="de274a5e-cb62-41e0-bf91-1c3ab8d646a1"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e3d5cb99-81f6-4007-85a5-b3f36ca4b288"/>
-			<column name="REQ_COM_ID" value="df041df4-059c-4abb-b8e7-4bab81a21e48"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="64bd8e3d-e273-43b3-ace1-1fc98ecaa29c"/>
-			<column name="REQ_COM_ID" value="4fbb56e9-156e-40f9-a2d6-1ca0529c8c87"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="989b6492-4891-40ff-9bfe-7cfd24ee8c82"/>
-			<column name="REQ_COM_ID" value="dc4a6cc0-df1c-4a8b-8104-afd56431856b"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="18c522d2-2b4d-42df-b660-6202a2c49d88"/>
-			<column name="REQ_COM_ID" value="0f5e4571-4a9f-4cb4-b924-d14d9e54280c"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="cbaca29f-b12e-49bb-86cb-a4422b79e39d"/>
-			<column name="REQ_COM_ID" value="b0938bed-4456-4d73-92e2-fc23196fee96"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3cecf379-f817-45dd-9f8c-da037ee18b52"/>
-			<column name="REQ_COM_ID" value="b0938bed-4456-4d73-92e2-fc23196fee96"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="deb65ddb-5c91-467e-9644-675824db813b"/>
-			<column name="REQ_COM_ID" value="284d0b96-606a-479a-991a-a147eddf4cd5"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="bf1e21e2-7199-4f45-bf9d-f35ef8fa23fd"/>
-			<column name="REQ_COM_ID" value="8bcd13f2-6835-4b81-b183-184a1b658cc6"/>
-		</insert>
-		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="680a440b-9e88-4cae-9d5a-fd5fe344e3fc"/>
-			<column name="REQ_COM_ID" value="8bcd13f2-6835-4b81-b183-184a1b658cc6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
 			<column name="REQ_COM_FIELD_ID" value="efb2f86e-dc84-408b-82b8-735c643ed49a"/>
@@ -1105,368 +1105,368 @@
 			<column name="REQ_COM_ID" value="35bd5908-1334-4ebd-bfb6-610922f693f8"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="af92e426-33ff-461e-8bc2-c27bf69cb0d1"/>
-			<column name="REQ_COM_ID" value="d209801c-c83e-4b61-a7d6-dcf6eac1f192"/>
+			<column name="REQ_COM_FIELD_ID" value="daf2b4d5-693e-4c5a-bbb1-0c024d9d86da"/>
+			<column name="REQ_COM_ID" value="ad2d1ae7-ac61-4f53-bfb9-6642d1d866c7"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3dbe42ea-c93c-473b-b4d5-0ccdba5910f6"/>
-			<column name="REQ_COM_ID" value="d209801c-c83e-4b61-a7d6-dcf6eac1f192"/>
+			<column name="REQ_COM_FIELD_ID" value="ffe558e2-6dfd-435f-9d12-22ae40196d5c"/>
+			<column name="REQ_COM_ID" value="3dbb3c40-30d7-4ee2-bc89-eeb87014eb41"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="991fb25f-6986-4b16-aeee-81e6051a5412"/>
-			<column name="REQ_COM_ID" value="808e4be8-f871-4c4a-9dfe-8bd8bb33cc77"/>
+			<column name="REQ_COM_FIELD_ID" value="26760853-d91c-4276-8899-cf3030681224"/>
+			<column name="REQ_COM_ID" value="aa396fdc-b2e2-4e08-83ba-19dd3f317486"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="05092eb2-896d-403a-9915-246460d67c69"/>
-			<column name="REQ_COM_ID" value="808e4be8-f871-4c4a-9dfe-8bd8bb33cc77"/>
+			<column name="REQ_COM_FIELD_ID" value="10f78d01-2e68-4f47-a8d7-a502cb004b00"/>
+			<column name="REQ_COM_ID" value="9d00060f-f482-4445-a05c-85db0c48a562"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="f698c45e-da2d-48ba-90e3-ce0701a2cd24"/>
-			<column name="REQ_COM_ID" value="808e4be8-f871-4c4a-9dfe-8bd8bb33cc77"/>
+			<column name="REQ_COM_FIELD_ID" value="9168683a-de3c-4b86-9cc2-9f583b68cc2a"/>
+			<column name="REQ_COM_ID" value="abbae172-3687-4d6f-b7a8-64e3c8766573"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="791a7834-c931-415a-ac16-89ef8294d5fc"/>
-			<column name="REQ_COM_ID" value="d57a0096-6909-437e-bd85-1eb16051e5ab"/>
+			<column name="REQ_COM_FIELD_ID" value="611ec83b-8e29-4d96-b5e6-f8022eca05eb"/>
+			<column name="REQ_COM_ID" value="a6020175-443c-4186-b3a1-95f47ab7d58b"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="642cc7f3-2aee-4354-ac8a-0619b42948d0"/>
-			<column name="REQ_COM_ID" value="d57a0096-6909-437e-bd85-1eb16051e5ab"/>
+			<column name="REQ_COM_FIELD_ID" value="ea1d458b-264c-4d66-a6d1-73343ed65dbd"/>
+			<column name="REQ_COM_ID" value="4487cc99-d10c-4a7e-a9da-c29f8cdf476b"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="eed68869-3b30-4da6-9943-f648a404607c"/>
-			<column name="REQ_COM_ID" value="133e86e4-cfba-44ec-8d9a-bd5947b3c888"/>
+			<column name="REQ_COM_FIELD_ID" value="3463ad79-7f51-4d21-96fc-77134942aa86"/>
+			<column name="REQ_COM_ID" value="04d3e877-7cc2-4d9f-b3a7-effd157a53a9"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c566fc63-a056-4352-a8f7-14d81c3a945b"/>
-			<column name="REQ_COM_ID" value="133e86e4-cfba-44ec-8d9a-bd5947b3c888"/>
+			<column name="REQ_COM_FIELD_ID" value="e84ab6fc-1c37-4726-b492-ee5c548a07ab"/>
+			<column name="REQ_COM_ID" value="d65f6882-8b74-435c-a09d-605a54b17fcd"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="571e3edf-49a6-4641-8854-b68790edca35"/>
-			<column name="REQ_COM_ID" value="133e86e4-cfba-44ec-8d9a-bd5947b3c888"/>
+			<column name="REQ_COM_FIELD_ID" value="cf5ca451-de18-4678-a60a-541bc7c43d14"/>
+			<column name="REQ_COM_ID" value="d65f6882-8b74-435c-a09d-605a54b17fcd"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d5f2f6b8-b26d-4324-afb6-80df295036cc"/>
-			<column name="REQ_COM_ID" value="20182016-dfa4-47ee-a05b-d93855358d31"/>
+			<column name="REQ_COM_FIELD_ID" value="621c95d9-2674-4ff3-b655-0f070c8dfca8"/>
+			<column name="REQ_COM_ID" value="6fb13416-81ab-48b2-907d-061dbabc0693"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="0ebc5324-878f-46b6-be37-42e8b4ca7e03"/>
-			<column name="REQ_COM_ID" value="20182016-dfa4-47ee-a05b-d93855358d31"/>
+			<column name="REQ_COM_FIELD_ID" value="98afd263-a434-4d2b-88d6-ade5feff4af1"/>
+			<column name="REQ_COM_ID" value="6fb13416-81ab-48b2-907d-061dbabc0693"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e5821f3f-e960-4c00-83f9-7c8227a06909"/>
-			<column name="REQ_COM_ID" value="20182016-dfa4-47ee-a05b-d93855358d31"/>
+			<column name="REQ_COM_FIELD_ID" value="c7c1e2a1-aa27-40b0-b627-80e6ab42a886"/>
+			<column name="REQ_COM_ID" value="527d4553-f88c-4209-87ed-07dbea83ed7e"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="fae7821b-0cd3-4583-b1f7-c6a7b5c78627"/>
-			<column name="REQ_COM_ID" value="36bca947-d06b-46aa-bee2-c1e84ec6585a"/>
+			<column name="REQ_COM_FIELD_ID" value="6a4e95da-ee02-4da7-a5b6-cc2e7ba9171c"/>
+			<column name="REQ_COM_ID" value="527d4553-f88c-4209-87ed-07dbea83ed7e"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="1d3f03c5-c6f7-44e6-8b2b-81c93a515b07"/>
-			<column name="REQ_COM_ID" value="36bca947-d06b-46aa-bee2-c1e84ec6585a"/>
+			<column name="REQ_COM_FIELD_ID" value="33404541-27f7-4496-aaa0-311eafa8fa42"/>
+			<column name="REQ_COM_ID" value="04d3e877-7cc2-4d9f-b3a7-effd157a53a9"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3aed2936-efc3-4b5f-9418-51b903c8c7ed"/>
-			<column name="REQ_COM_ID" value="36bca947-d06b-46aa-bee2-c1e84ec6585a"/>
+			<column name="REQ_COM_FIELD_ID" value="a0f19990-27f7-4979-9b23-1826ebc77f81"/>
+			<column name="REQ_COM_ID" value="04d3e877-7cc2-4d9f-b3a7-effd157a53a9"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="78c3cf05-1629-4a42-8c32-88a059a38d26"/>
-			<column name="REQ_COM_ID" value="920f6546-2a1e-40fc-aa9e-ca87bb1b4d76"/>
+			<column name="REQ_COM_FIELD_ID" value="63a90d89-b424-4089-adb7-02d4251e8783"/>
+			<column name="REQ_COM_ID" value="4d35d921-8465-4956-a133-4c70a302e5b4"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8ed77d3e-0244-4879-b171-7f8303e05ab0"/>
-			<column name="REQ_COM_ID" value="920f6546-2a1e-40fc-aa9e-ca87bb1b4d76"/>
+			<column name="REQ_COM_FIELD_ID" value="01343fc5-22cb-4587-ac51-8e8932bf6921"/>
+			<column name="REQ_COM_ID" value="e329bafc-5da2-4fbc-8855-f504dd1c89d2"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="64e9d5df-0eeb-406d-81e3-ab83bcd2645e"/>
-			<column name="REQ_COM_ID" value="ffc5592c-1aff-4ee1-8f19-d0d6f0ec3920"/>
+			<column name="REQ_COM_FIELD_ID" value="0718d25a-f14e-4b0d-b043-3009064dd397"/>
+			<column name="REQ_COM_ID" value="e329bafc-5da2-4fbc-8855-f504dd1c89d2"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d49857da-4951-4556-abe4-61103d8f31d6"/>
-			<column name="REQ_COM_ID" value="ffc5592c-1aff-4ee1-8f19-d0d6f0ec3920"/>
+			<column name="REQ_COM_FIELD_ID" value="78d3004b-8bed-4afc-a110-5dc46232edb6"/>
+			<column name="REQ_COM_ID" value="3e0aa269-baf7-4f2a-91c1-45816d55566b"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="31021082-c278-40cd-ab2d-0f4b7321ffcd"/>
-			<column name="REQ_COM_ID" value="e8b4652b-a6b8-43e4-90ef-c321497aa902"/>
+			<column name="REQ_COM_FIELD_ID" value="7f81a524-28a7-478a-a636-9443e78fac26"/>
+			<column name="REQ_COM_ID" value="a4c7f9f0-d04b-4926-836f-fb4fa7c06fa4"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="ca6ef8f6-6a1e-4076-beba-5397b617b638"/>
-			<column name="REQ_COM_ID" value="e8b4652b-a6b8-43e4-90ef-c321497aa902"/>
+			<column name="REQ_COM_FIELD_ID" value="a6a4dd55-99bf-4c54-aaf5-8b3cf1e67c72"/>
+			<column name="REQ_COM_ID" value="6ede8879-6822-4e41-aad4-271ae6d537e4"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="5b3c8812-fb10-4fe0-b853-f12ed17a242e"/>
-			<column name="REQ_COM_ID" value="f632ee4f-3735-4609-84ee-7c94d03941f8"/>
+			<column name="REQ_COM_FIELD_ID" value="d8ac1239-72e4-4224-b7da-d4412408fe62"/>
+			<column name="REQ_COM_ID" value="407d279a-cbb5-4cf5-8304-4cb8f0bf9efa"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="28de80d7-5414-43ff-9b54-2049d4ebb24b"/>
-			<column name="REQ_COM_ID" value="7fae1f54-50af-4b87-a5c1-ac0819c394e9"/>
+			<column name="REQ_COM_FIELD_ID" value="a58c0637-1579-42eb-8862-82efcd26e5a8"/>
+			<column name="REQ_COM_ID" value="407d279a-cbb5-4cf5-8304-4cb8f0bf9efa"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e74c5e93-fcf4-44e6-b07f-142c834ad44d"/>
-			<column name="REQ_COM_ID" value="7fae1f54-50af-4b87-a5c1-ac0819c394e9"/>
+			<column name="REQ_COM_FIELD_ID" value="9bcf4a4e-5295-49c9-810d-ad207d7c797c"/>
+			<column name="REQ_COM_ID" value="47839f54-a5f4-4b20-b922-809e7ee29cd6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e11cc73c-7851-4e33-971e-8b65d4c25b29"/>
-			<column name="REQ_COM_ID" value="4ad884ae-e63e-4baa-8219-42ad5751046a"/>
+			<column name="REQ_COM_FIELD_ID" value="3d3f2e36-ab04-49f9-90f4-a9ff5a6a5468"/>
+			<column name="REQ_COM_ID" value="4ff9c9f2-bcf5-4373-8068-ecbfc4911ba2"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8e9467e9-97c5-47c9-b851-20c2a4afad59"/>
-			<column name="REQ_COM_ID" value="6da8a100-2c83-4b06-b65a-4f9f59b35bbd"/>
+			<column name="REQ_COM_FIELD_ID" value="06abc3ab-7dac-437c-88de-734de7efaf38"/>
+			<column name="REQ_COM_ID" value="d767459f-571a-424e-b2dd-422317533080"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e00edf63-5c92-4a7a-8e1e-dc785b917be5"/>
-			<column name="REQ_COM_ID" value="b8b6c213-7f48-46fd-8747-1809109c11c1"/>
+			<column name="REQ_COM_FIELD_ID" value="58a5177f-ef67-4300-8a4b-2d732e35c5c6"/>
+			<column name="REQ_COM_ID" value="efea54ee-35e7-485d-85c6-3e4a98d36c82"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="432acccb-30c6-4300-9730-f2267dbb4e2a"/>
-			<column name="REQ_COM_ID" value="b8b6c213-7f48-46fd-8747-1809109c11c1"/>
+			<column name="REQ_COM_FIELD_ID" value="afd445c5-e420-43b6-9a1e-1fdd42b2f825"/>
+			<column name="REQ_COM_ID" value="efea54ee-35e7-485d-85c6-3e4a98d36c82"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d3473eb9-5250-4b59-beb3-5dc0f19337d4"/>
-			<column name="REQ_COM_ID" value="b8b6c213-7f48-46fd-8747-1809109c11c1"/>
+			<column name="REQ_COM_FIELD_ID" value="77b6afa0-73b6-455f-a732-385e6599ee61"/>
+			<column name="REQ_COM_ID" value="efea54ee-35e7-485d-85c6-3e4a98d36c82"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e3cfb566-ec2e-4bd3-8341-ef3e375b8195"/>
-			<column name="REQ_COM_ID" value="79f302f9-b6e5-427f-9f97-e3bf56347c35"/>
+			<column name="REQ_COM_FIELD_ID" value="fc0d6763-64db-43bb-889e-8821418d734d"/>
+			<column name="REQ_COM_ID" value="37beae6c-6431-4610-ba13-455ff95f7357"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="48d43725-2e1f-4df1-ae8f-54a8e3d194f7"/>
-			<column name="REQ_COM_ID" value="79f302f9-b6e5-427f-9f97-e3bf56347c35"/>
+			<column name="REQ_COM_FIELD_ID" value="7bbd20cb-3fb8-4670-9531-a6ecb24951f6"/>
+			<column name="REQ_COM_ID" value="37beae6c-6431-4610-ba13-455ff95f7357"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="0de65d54-6332-4e2e-ba29-bda33e7b338a"/>
-			<column name="REQ_COM_ID" value="79f302f9-b6e5-427f-9f97-e3bf56347c35"/>
+			<column name="REQ_COM_FIELD_ID" value="49b8da54-afae-4cd9-b0b2-3fc4932331ba"/>
+			<column name="REQ_COM_ID" value="6c1710f2-b69f-4cd8-abdd-9afb5863a431"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e89bb53f-81d5-471c-a041-58055ed6cf7d"/>
-			<column name="REQ_COM_ID" value="44cbedcb-a553-469c-8582-b921f9c38fac"/>
+			<column name="REQ_COM_FIELD_ID" value="a017095c-0e7f-4312-9997-034d5c3addab"/>
+			<column name="REQ_COM_ID" value="6c1710f2-b69f-4cd8-abdd-9afb5863a431"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="200270b9-a18b-43e7-ae4d-8a4dafd70509"/>
-			<column name="REQ_COM_ID" value="7372a83f-a5da-4c18-a9d4-fb59f53db741"/>
+			<column name="REQ_COM_FIELD_ID" value="2106fe53-11a4-4fa5-ab42-e453abf52521"/>
+			<column name="REQ_COM_ID" value="6c1710f2-b69f-4cd8-abdd-9afb5863a431"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a55afd2a-8bf2-4641-a255-e71889ce6246"/>
-			<column name="REQ_COM_ID" value="7372a83f-a5da-4c18-a9d4-fb59f53db741"/>
+			<column name="REQ_COM_FIELD_ID" value="920fd265-dfa1-4568-95bf-1803481ae9e9"/>
+			<column name="REQ_COM_ID" value="f9847676-2847-4369-8e39-6dbfe7561a81"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="00841809-4855-4a2c-806a-fb9a1fc87844"/>
-			<column name="REQ_COM_ID" value="6da8a100-2c83-4b06-b65a-4f9f59b35bbd"/>
+			<column name="REQ_COM_FIELD_ID" value="5636574b-160e-4805-bc6f-baceb25930d8"/>
+			<column name="REQ_COM_ID" value="f9847676-2847-4369-8e39-6dbfe7561a81"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c1787098-b5a6-414a-8295-c3751d31c14f"/>
-			<column name="REQ_COM_ID" value="6da8a100-2c83-4b06-b65a-4f9f59b35bbd"/>
+			<column name="REQ_COM_FIELD_ID" value="c7213eae-1004-4d40-a8f7-ec474bf4d1a9"/>
+			<column name="REQ_COM_ID" value="f9847676-2847-4369-8e39-6dbfe7561a81"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="b27cff84-6f51-48f3-b07f-d8cdbab3b7c5"/>
-			<column name="REQ_COM_ID" value="9c982a23-cf95-405f-a997-9c389dc059b6"/>
+			<column name="REQ_COM_FIELD_ID" value="14665925-f50e-42d6-9e2b-ad9046a5ae96"/>
+			<column name="REQ_COM_ID" value="5fd26f88-7ab3-4e98-a1ce-cc819a350512"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="c120e573-39ef-4614-8ce1-de2aa129054c"/>
-			<column name="REQ_COM_ID" value="32d629f5-f89a-4d92-bc9e-ed91b36156e4"/>
+			<column name="REQ_COM_FIELD_ID" value="bf0ecc80-0acd-4ba2-87f2-9515daaa31ca"/>
+			<column name="REQ_COM_ID" value="da88dcb2-d23c-4e33-94bb-7e13990c3f79"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3d384465-cd86-40b8-87d9-1042ed1479cc"/>
-			<column name="REQ_COM_ID" value="32d629f5-f89a-4d92-bc9e-ed91b36156e4"/>
+			<column name="REQ_COM_FIELD_ID" value="e3c0c6a4-76e0-49bd-bf36-ebe4dd5db01e"/>
+			<column name="REQ_COM_ID" value="1c62e164-817a-4d6f-865d-e41395b90a0b"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="5f6c930b-85f2-44f2-8d06-9b8eb884d2e1"/>
-			<column name="REQ_COM_ID" value="a3dee68d-8422-44d1-acba-f6fa1d77931f"/>
+			<column name="REQ_COM_FIELD_ID" value="80b2b3d0-cf77-4f7d-80d1-b76fe49014d9"/>
+			<column name="REQ_COM_ID" value="1b534fdc-b004-42d1-9ea9-886c8213e238"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8aa78a1b-4918-4554-b111-4cf6e9e2add5"/>
-			<column name="REQ_COM_ID" value="a3dee68d-8422-44d1-acba-f6fa1d77931f"/>
+			<column name="REQ_COM_FIELD_ID" value="73a22e88-f5ed-4c92-8ddf-0629eead82bb"/>
+			<column name="REQ_COM_ID" value="20c17fe1-0a32-4ce0-a422-beba18f42f88"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="949b71f8-4fd4-423a-bb29-1de953fefa28"/>
-			<column name="REQ_COM_ID" value="5905b48f-5cb1-4b3b-a663-a89a3d4197c9"/>
+			<column name="REQ_COM_FIELD_ID" value="fdc0d34b-5d06-4208-8eb6-05a873ac76b9"/>
+			<column name="REQ_COM_ID" value="d767459f-571a-424e-b2dd-422317533080"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a670a341-8915-4f98-a1b7-ad5740137282"/>
-			<column name="REQ_COM_ID" value="5905b48f-5cb1-4b3b-a663-a89a3d4197c9"/>
+			<column name="REQ_COM_FIELD_ID" value="0165219a-71ac-4bf1-83df-bb659e44e43c"/>
+			<column name="REQ_COM_ID" value="bef3031a-f25a-409c-8e46-4c7df29f2bca"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="b9985312-0f9b-4cdb-b8fb-c5382a02f9dd"/>
-			<column name="REQ_COM_ID" value="f60009fb-f4f6-4c05-b26d-90594b347ab1"/>
+			<column name="REQ_COM_FIELD_ID" value="154d5850-46a6-4873-a49e-5bbcf35f04ad"/>
+			<column name="REQ_COM_ID" value="e529bb35-cc0e-4861-be00-aed9d94818c8"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="b961b3f4-6465-40d2-b5be-ab9688aedb89"/>
-			<column name="REQ_COM_ID" value="f60009fb-f4f6-4c05-b26d-90594b347ab1"/>
+			<column name="REQ_COM_FIELD_ID" value="f2b6c5ec-d8d7-4893-a625-f7a12e64a982"/>
+			<column name="REQ_COM_ID" value="4fc0a30f-11b8-459b-9027-2fe3e10e8f65"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="6febdca0-a8cc-4840-906b-e39fc9832524"/>
-			<column name="REQ_COM_ID" value="51a30dc1-011a-4fda-b620-2c0ef3ec03c3"/>
+			<column name="REQ_COM_FIELD_ID" value="926da039-f8d5-4dbf-9046-e84ad9f627d0"/>
+			<column name="REQ_COM_ID" value="153e91a4-d81c-4c19-9e9c-b51c27e902c5"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="082b2212-1a28-4727-b67a-dc50142d5753"/>
-			<column name="REQ_COM_ID" value="e460f279-6aee-4200-aab1-36da6e65c5b6"/>
+			<column name="REQ_COM_FIELD_ID" value="ef307ede-ea4d-41a5-8081-7c7edf6b3d53"/>
+			<column name="REQ_COM_ID" value="3382ef72-bb1e-441d-92ca-f5c6aba6f29c"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="e70ccb0b-b38f-4875-8f54-21a7fdb87ee2"/>
-			<column name="REQ_COM_ID" value="e460f279-6aee-4200-aab1-36da6e65c5b6"/>
+			<column name="REQ_COM_FIELD_ID" value="8629ac93-4f67-47b9-bc17-d47072e55d6c"/>
+			<column name="REQ_COM_ID" value="bef3031a-f25a-409c-8e46-4c7df29f2bca"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="973ec8ab-393d-4100-8ea9-1dbd47baa6e8"/>
-			<column name="REQ_COM_ID" value="9c982a23-cf95-405f-a997-9c389dc059b6"/>
+			<column name="REQ_COM_FIELD_ID" value="101412e8-7a6b-4a34-82e6-9341d8babc42"/>
+			<column name="REQ_COM_ID" value="e65ae39d-4dcb-4c21-9c94-0d10cc6f756f"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9476f013-1921-488c-81de-5eaf731efd62"/>
-			<column name="REQ_COM_ID" value="9c982a23-cf95-405f-a997-9c389dc059b6"/>
+			<column name="REQ_COM_FIELD_ID" value="d22eb9cc-b96c-4bbc-b333-29bb18799a86"/>
+			<column name="REQ_COM_ID" value="e65ae39d-4dcb-4c21-9c94-0d10cc6f756f"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3360840a-b86c-4603-b30a-ca9a0c894bf4"/>
-			<column name="REQ_COM_ID" value="2b3ffbca-3543-43e8-b3c2-0a1aed906ef2"/>
+			<column name="REQ_COM_FIELD_ID" value="c6e74d3d-ed40-4e11-b5f6-9804c2c27d08"/>
+			<column name="REQ_COM_ID" value="77c26eb9-7bf7-471e-b7eb-d057f482b67a"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9f4ad2f3-8dd7-4d58-9464-cb3f0b616725"/>
-			<column name="REQ_COM_ID" value="a23b6fcd-0d3e-4049-918d-916f767afdba"/>
+			<column name="REQ_COM_FIELD_ID" value="c86dd2b0-9fa7-48c9-87bd-3b0e4fc56548"/>
+			<column name="REQ_COM_ID" value="c6ea0f3b-23a3-41ff-8069-af0e5c289626"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="2eff03cd-0ebc-4732-9e68-dcb707424cd7"/>
-			<column name="REQ_COM_ID" value="a23b6fcd-0d3e-4049-918d-916f767afdba"/>
+			<column name="REQ_COM_FIELD_ID" value="de5401af-e876-4911-ae1d-8e7db6028262"/>
+			<column name="REQ_COM_ID" value="64938856-84e9-43c1-9b30-719132d565c0"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="42ab29e5-9730-4cd7-bba6-2711f4f9aaa2"/>
-			<column name="REQ_COM_ID" value="0138a716-7558-4371-bbd7-5b2532f1ea8e"/>
+			<column name="REQ_COM_FIELD_ID" value="9042eaa3-b2a5-4c30-b7a6-389d650afee4"/>
+			<column name="REQ_COM_ID" value="becf7366-bb3d-4683-a293-0041fe73a1c6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="ea1c8028-a87c-41c2-b79f-97e8bb719c26"/>
-			<column name="REQ_COM_ID" value="9789556c-13b3-4f25-963b-70de685d1860"/>
+			<column name="REQ_COM_FIELD_ID" value="d996979d-efb9-4f07-826b-df0e2f398241"/>
+			<column name="REQ_COM_ID" value="f933f477-415c-4e90-9c16-e3590355ea2e"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a5fda1c5-f7b0-416d-980e-cc42341246a4"/>
-			<column name="REQ_COM_ID" value="2b3ffbca-3543-43e8-b3c2-0a1aed906ef2"/>
+			<column name="REQ_COM_FIELD_ID" value="81373cda-3d33-4688-bc2a-096e858182df"/>
+			<column name="REQ_COM_ID" value="7bbb5fa4-38fd-48b9-b8df-674d5fcd72f3"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="fa49172e-505f-49d6-aa39-acc1d75f4aae"/>
-			<column name="REQ_COM_ID" value="2b3ffbca-3543-43e8-b3c2-0a1aed906ef2"/>
+			<column name="REQ_COM_FIELD_ID" value="dfde4e09-f916-475a-9525-541088d71452"/>
+			<column name="REQ_COM_ID" value="fa109fef-80d8-4a7b-8bc4-c1d9c975cfde"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="74621f3b-9a0a-4bd9-924b-abcf7c57df25"/>
-			<column name="REQ_COM_ID" value="acd3aad2-75a2-4809-aa20-0d4ea4264402"/>
+			<column name="REQ_COM_FIELD_ID" value="f1e316ef-b0a1-4c2c-96f9-67b62e2685ca"/>
+			<column name="REQ_COM_ID" value="fa109fef-80d8-4a7b-8bc4-c1d9c975cfde"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7a41e70b-ca1c-4cf6-b8de-236cbc3ed777"/>
-			<column name="REQ_COM_ID" value="805f0f99-406b-489c-a471-c05de35822f1"/>
+			<column name="REQ_COM_FIELD_ID" value="0b009fd3-85e9-4eca-9a2c-aeff75710719"/>
+			<column name="REQ_COM_ID" value="894c8b85-741e-4cb2-bc52-3c2cd19c677f"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="018988cf-0ae2-459b-93cb-4f8c1a368a35"/>
-			<column name="REQ_COM_ID" value="805f0f99-406b-489c-a471-c05de35822f1"/>
+			<column name="REQ_COM_FIELD_ID" value="9abb1342-cdf4-4323-ad7c-4a848e70b1eb"/>
+			<column name="REQ_COM_ID" value="0c8191a3-db93-4bc9-8833-d90e49f1766e"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9c7a4b89-9720-40b5-8b5f-dbd44c04afa6"/>
-			<column name="REQ_COM_ID" value="805f0f99-406b-489c-a471-c05de35822f1"/>
+			<column name="REQ_COM_FIELD_ID" value="7ea727be-c89e-49e4-9abe-39e1bc7d705f"/>
+			<column name="REQ_COM_ID" value="f52108fc-d76a-4bf1-9d4f-6b5aaadc5b1c"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="9438ec76-ab4a-4a58-9bce-291d14158731"/>
-			<column name="REQ_COM_ID" value="3ee6d7ce-720b-4277-9446-4baaff906b6b"/>
+			<column name="REQ_COM_FIELD_ID" value="60171a16-7511-45a2-8bc8-bc8e3b1add16"/>
+			<column name="REQ_COM_ID" value="ecf70e71-440f-4fd8-bda2-73c886642cf1"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="a21a7bd0-a4aa-447d-933a-9a5c85e3dd68"/>
-			<column name="REQ_COM_ID" value="3ee6d7ce-720b-4277-9446-4baaff906b6b"/>
+			<column name="REQ_COM_FIELD_ID" value="2f7299ef-9d74-4582-abed-09c51eba646a"/>
+			<column name="REQ_COM_ID" value="f464157e-9a89-419a-a9c2-08957ba5d954"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="f4dbac8c-e982-4d18-9b65-507000f07cf9"/>
-			<column name="REQ_COM_ID" value="3ee6d7ce-720b-4277-9446-4baaff906b6b"/>
+			<column name="REQ_COM_FIELD_ID" value="0d7eaa8f-570f-48b4-abe6-b068dcffde8b"/>
+			<column name="REQ_COM_ID" value="72f83d27-5bc3-491a-bc37-01bcbe56876f"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="6def447d-fac3-4695-a3f8-c2bcbeea4f72"/>
-			<column name="REQ_COM_ID" value="032a51bb-c5c5-40bc-8186-0fd95bec9c01"/>
+			<column name="REQ_COM_FIELD_ID" value="45ccbf9a-1fe7-4d08-9048-7dddf7ba56a0"/>
+			<column name="REQ_COM_ID" value="72f83d27-5bc3-491a-bc37-01bcbe56876f"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3e856f7d-a1cb-4a62-9e7f-14361d573a58"/>
-			<column name="REQ_COM_ID" value="032a51bb-c5c5-40bc-8186-0fd95bec9c01"/>
+			<column name="REQ_COM_FIELD_ID" value="7f33cb99-5a4a-494d-b793-58ebee06c7b1"/>
+			<column name="REQ_COM_ID" value="02ce2686-a9d6-4d4f-b00b-d51c8883bbc6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="3b7a6cb3-d0f9-4ac8-90da-ec9ca7cf0d0e"/>
-			<column name="REQ_COM_ID" value="032a51bb-c5c5-40bc-8186-0fd95bec9c01"/>
+			<column name="REQ_COM_FIELD_ID" value="3930f19e-1357-45d0-84de-3f67e10e1160"/>
+			<column name="REQ_COM_ID" value="02ce2686-a9d6-4d4f-b00b-d51c8883bbc6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="2558bd38-e967-48a8-a814-8868a3455f2b"/>
-			<column name="REQ_COM_ID" value="5eed269d-298c-4a30-916e-98d44508af71"/>
+			<column name="REQ_COM_FIELD_ID" value="8d7b11f4-06ee-463b-9755-b73575787e4f"/>
+			<column name="REQ_COM_ID" value="02ce2686-a9d6-4d4f-b00b-d51c8883bbc6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="af9a3262-ec04-4f21-a8ff-108e119c5a9a"/>
-			<column name="REQ_COM_ID" value="c7af838f-f007-43c2-b250-6e1eb3781404"/>
+			<column name="REQ_COM_FIELD_ID" value="fe1818d0-1f63-4a1d-8e7f-c58a6ba6f1b9"/>
+			<column name="REQ_COM_ID" value="db7be832-1001-471e-98bb-dd4cee1d1fd5"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8128fbba-3e5e-4805-ab05-38d3835f13d0"/>
-			<column name="REQ_COM_ID" value="22a37764-7900-4d94-b169-b750192fe952"/>
+			<column name="REQ_COM_FIELD_ID" value="1033b742-d1f4-463e-b4fc-3741ed67cea6"/>
+			<column name="REQ_COM_ID" value="db7be832-1001-471e-98bb-dd4cee1d1fd5"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="1b829464-2cd3-4659-ba88-113aa82df9eb"/>
-			<column name="REQ_COM_ID" value="0402b53d-6508-4f28-b00a-686ed23614fd"/>
+			<column name="REQ_COM_FIELD_ID" value="155ef9b5-2352-49df-9589-4e51ec2f98fc"/>
+			<column name="REQ_COM_ID" value="e708f716-8292-4d72-aa7a-3b84ea6f95ba"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="cf305997-9d36-4887-ae56-8d7623d331a9"/>
-			<column name="REQ_COM_ID" value="0402b53d-6508-4f28-b00a-686ed23614fd"/>
+			<column name="REQ_COM_FIELD_ID" value="291e54d3-dd93-4695-9006-031507f2007c"/>
+			<column name="REQ_COM_ID" value="e708f716-8292-4d72-aa7a-3b84ea6f95ba"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="af5aa403-b374-4d9e-a525-f8f84655a388"/>
-			<column name="REQ_COM_ID" value="3f4cec57-cf8c-4aa5-91a9-61888dbb0ebd"/>
+			<column name="REQ_COM_FIELD_ID" value="9d703a10-5c1d-4cb0-85b0-8e5a8addebf8"/>
+			<column name="REQ_COM_ID" value="63efe8de-7474-47e9-8168-16fc12f4d2b6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="6b5fd04b-3544-4118-bc86-3428b2be4f66"/>
-			<column name="REQ_COM_ID" value="99365d25-493b-4b7d-a12a-6d4ca30ca3bc"/>
+			<column name="REQ_COM_FIELD_ID" value="9ae17bdc-0642-4a90-b4fb-4582f508275a"/>
+			<column name="REQ_COM_ID" value="7a7c75dc-f026-4f46-98c3-fa26df5952c7"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="098b255a-7ca5-4fe8-850a-4135cc72b635"/>
-			<column name="REQ_COM_ID" value="23628512-7b76-4426-8b46-067c0d6ad3cf"/>
+			<column name="REQ_COM_FIELD_ID" value="5565ad53-89fe-4092-82e8-1e6deb77cf95"/>
+			<column name="REQ_COM_ID" value="a35f97ee-5c60-4623-b1f0-3a5a4455edf8"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="549140cc-ce9d-4882-8917-4c96cbcf5838"/>
-			<column name="REQ_COM_ID" value="d831badb-3403-4ac8-91cb-aa89dbfccb17"/>
+			<column name="REQ_COM_FIELD_ID" value="681cfd66-4775-48da-9613-410909c485d1"/>
+			<column name="REQ_COM_ID" value="a35f97ee-5c60-4623-b1f0-3a5a4455edf8"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="6e074541-2cac-4651-9a37-73aa338bcca8"/>
-			<column name="REQ_COM_ID" value="9ca40ea5-59fd-4c0c-bc30-746c0dcf8887"/>
+			<column name="REQ_COM_FIELD_ID" value="bb7ae9d6-5e1e-49d9-98d6-dd400143117b"/>
+			<column name="REQ_COM_ID" value="a35f97ee-5c60-4623-b1f0-3a5a4455edf8"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8c89ee29-2d3c-454a-b3a6-953c3a05a83e"/>
-			<column name="REQ_COM_ID" value="a50b5807-f71f-4963-b02e-6d986cb48c85"/>
+			<column name="REQ_COM_FIELD_ID" value="fcb1abfc-610c-4cc5-81da-bf6cd8f4798a"/>
+			<column name="REQ_COM_ID" value="de274a5e-cb62-41e0-bf91-1c3ab8d646a1"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="1d577935-bdc5-4807-905e-0ffde22af348"/>
-			<column name="REQ_COM_ID" value="5194ec91-2db0-404d-a3d8-f07ed049985b"/>
+			<column name="REQ_COM_FIELD_ID" value="238703cf-4095-4aec-80b0-e784e1ac8d99"/>
+			<column name="REQ_COM_ID" value="de274a5e-cb62-41e0-bf91-1c3ab8d646a1"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="5533eb9f-986a-429f-9764-c088505c7701"/>
-			<column name="REQ_COM_ID" value="655b7aa9-799b-4796-893e-06973aecba27"/>
+			<column name="REQ_COM_FIELD_ID" value="06c3fd29-44d2-40cf-a478-e182db8d6687"/>
+			<column name="REQ_COM_ID" value="de274a5e-cb62-41e0-bf91-1c3ab8d646a1"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="eb8605e5-0eb4-44f6-acae-4d8a48821528"/>
-			<column name="REQ_COM_ID" value="655b7aa9-799b-4796-893e-06973aecba27"/>
+			<column name="REQ_COM_FIELD_ID" value="e3d5cb99-81f6-4007-85a5-b3f36ca4b288"/>
+			<column name="REQ_COM_ID" value="df041df4-059c-4abb-b8e7-4bab81a21e48"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7ce2b3bf-f3f8-41eb-8ee7-89304b213599"/>
-			<column name="REQ_COM_ID" value="eb16785e-0823-4970-bb03-a022a75f8f52"/>
+			<column name="REQ_COM_FIELD_ID" value="64bd8e3d-e273-43b3-ace1-1fc98ecaa29c"/>
+			<column name="REQ_COM_ID" value="4fbb56e9-156e-40f9-a2d6-1ca0529c8c87"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="7166b0e2-bcd6-427b-a422-5ebedc6ac898"/>
-			<column name="REQ_COM_ID" value="83829c56-2ce2-4f91-838b-6ac67a347372"/>
+			<column name="REQ_COM_FIELD_ID" value="989b6492-4891-40ff-9bfe-7cfd24ee8c82"/>
+			<column name="REQ_COM_ID" value="dc4a6cc0-df1c-4a8b-8104-afd56431856b"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="b5b335b0-43a8-4a9a-a93e-c2cb51e007b3"/>
-			<column name="REQ_COM_ID" value="0475e30e-a49b-437c-815e-fced851c372d"/>
+			<column name="REQ_COM_FIELD_ID" value="18c522d2-2b4d-42df-b660-6202a2c49d88"/>
+			<column name="REQ_COM_ID" value="0f5e4571-4a9f-4cb4-b924-d14d9e54280c"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="38a4780f-494b-4eef-a353-6b90e03d9b7d"/>
-			<column name="REQ_COM_ID" value="0475e30e-a49b-437c-815e-fced851c372d"/>
+			<column name="REQ_COM_FIELD_ID" value="cbaca29f-b12e-49bb-86cb-a4422b79e39d"/>
+			<column name="REQ_COM_ID" value="b0938bed-4456-4d73-92e2-fc23196fee96"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="f6140417-fc1b-4b01-a654-4c8610a49d8e"/>
-			<column name="REQ_COM_ID" value="83829c56-2ce2-4f91-838b-6ac67a347372"/>
+			<column name="REQ_COM_FIELD_ID" value="3cecf379-f817-45dd-9f8c-da037ee18b52"/>
+			<column name="REQ_COM_ID" value="b0938bed-4456-4d73-92e2-fc23196fee96"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="d444633b-9744-46c0-9bc8-1b297009b4d4"/>
-			<column name="REQ_COM_ID" value="83829c56-2ce2-4f91-838b-6ac67a347372"/>
+			<column name="REQ_COM_FIELD_ID" value="deb65ddb-5c91-467e-9644-675824db813b"/>
+			<column name="REQ_COM_ID" value="284d0b96-606a-479a-991a-a147eddf4cd5"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="8b879040-5d7d-47db-a039-177fb1fd343b"/>
-			<column name="REQ_COM_ID" value="d46df6e6-3405-4366-85ed-0a921394a84a"/>
+			<column name="REQ_COM_FIELD_ID" value="bf1e21e2-7199-4f45-bf9d-f35ef8fa23fd"/>
+			<column name="REQ_COM_ID" value="8bcd13f2-6835-4b81-b183-184a1b658cc6"/>
 		</insert>
 		<insert tableName="KSST_RC_JN_RC_FIELD">
-			<column name="REQ_COM_FIELD_ID" value="79197b67-e1c1-4851-9b05-b13924de3456"/>
-			<column name="REQ_COM_ID" value="d8ad78fc-2389-4b52-bd57-7fa67bbbe664"/>
+			<column name="REQ_COM_FIELD_ID" value="680a440b-9e88-4cae-9d5a-fd5fe344e3fc"/>
+			<column name="REQ_COM_ID" value="8bcd13f2-6835-4b81-b183-184a1b658cc6"/>
 		</insert>
 	</changeSet>
 </databaseChangeLog>

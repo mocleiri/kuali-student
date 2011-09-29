@@ -29,7 +29,7 @@
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.atptype.intensity"/>
 			<column name="NAME" value="ATP Intensity"/>
-			<column name="OBJ_ID" value="ADF4001BC567C1E0E040C60AF05B1C0B"/>
+			<column name="OBJ_ID" value="ADFA5577A3A2D781E040C60AF05B2A94"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
@@ -37,7 +37,7 @@
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.course.types"/>
 			<column name="NAME" value="Course Dependency Types"/>
-			<column name="OBJ_ID" value="ADF4001BC5DAC1E0E040C60AF05B1C0B"/>
+			<column name="OBJ_ID" value="ADFA5577A415D781E040C60AF05B2A94"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
@@ -45,7 +45,7 @@
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.courseSet.types"/>
 			<column name="NAME" value="Course Set Dependency Types"/>
-			<column name="OBJ_ID" value="ADF4001BC5DCC1E0E040C60AF05B1C0B"/>
+			<column name="OBJ_ID" value="ADFA5577A417D781E040C60AF05B2A94"/>
 			<column name="VER_NBR" value="4"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">
@@ -53,7 +53,7 @@
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ENUM_KEY" value="kuali.dependency.program.types"/>
 			<column name="NAME" value="Program Dependency Types"/>
-			<column name="OBJ_ID" value="ADF4001BC5DBC1E0E040C60AF05B1C0B"/>
+			<column name="OBJ_ID" value="ADFA5577A416D781E040C60AF05B2A94"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSEM_ENUM_T">

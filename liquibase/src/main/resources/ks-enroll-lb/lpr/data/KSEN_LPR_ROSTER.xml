@@ -7,8 +7,8 @@
 			<column name="MAX_CAPACITY" value="5"/>
 			<column name="NAME" value="Chemistry I Roster"/>
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-9"/>
-			<column name="STATE_ID" value="kuali.lpr.type.roster.grade.final"/>
-			<column name="TYPE_ID" value="kuali.assessment.roster.state.ready"/>
+			<column name="STATE_ID" value="kuali.assessment.roster.state.ready"/>
+			<column name="TYPE_ID" value="kuali.lpr.type.roster.grade.final"/>
 		</insert>
 	</changeSet>
 </databaseChangeLog>
