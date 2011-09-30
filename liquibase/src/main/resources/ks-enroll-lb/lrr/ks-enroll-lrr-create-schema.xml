@@ -1,0 +1,51 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet author="alubbers" id="create-KSEN_LRR">
+  <createTable tableName="KSEN_LRR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true" />
+    </column>
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+    <column name="CREATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LPR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RESULT_VALUE_KEY" type="java.sql.Types.VARCHAR(255)" />
+  </createTable>
+</changeSet>
+<changeSet author="alubbers" id="create-KSEN_LRR_ATTR">
+  <createTable tableName="KSEN_LRR_ATTR">
+    <column name="ID" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true"/>
+    </column>
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
+  </createTable>
+</changeSet>
+<changeSet author="alubbers" id="create-KSEN_LRR_LRC_RELTN">
+  <createTable tableName="KSEN_LRR_LRC_RELTN">
+    <column name="LRR_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="LRC_ID" type="java.sql.Types.VARCHAR(255)" />
+  </createTable>
+</changeSet>
+<changeSet author="alubbers" id="create-KSEN_LRR_TYPE">
+  <createTable tableName="KSEN_LRR_TYPE">
+    <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+      <constraints nullable="false" primaryKey="true"/>
+    </column>
+    <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+    <column name="VER_NBR" type="${bigint.type}(19)" />
+    <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)" />
+    <column name="EFF_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+    <column name="REF_OBJECT_URI" type="java.sql.Types.VARCHAR(255)" />
+  </createTable>
+</changeSet>
+</databaseChangeLog>

@@ -34,6 +34,10 @@ lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS
 lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS_ATTR
 lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS_ITEMS
 lpr/ks-enroll-lpr-create:KSEN_LPR_TRANS_ITEM_ATTR
+lrr/ks-enroll-lrr-create:KSEN_LRR
+lrr/ks-enroll-lrr-create:KSEN_LRR_ATTR
+lrr/ks-enroll-lrr-create:KSEN_LRR_TYPE
+lrr/ks-enroll-lrr-create:KSEN_LRR_LRC_RELTN
 lui/ks-enroll-lui-create:KSEN_LUI 
 lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN 
 lui/ks-enroll-lui-create:KSEN_LUILUI_RELTN_ATTR

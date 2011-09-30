@@ -3,7 +3,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB4F04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46E82532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Lecture can only have a lecture as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Lecture"/>
 			<column name="RANK" value="1"/>
@@ -14,7 +14,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5004C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46E92532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Lab can only have a lab as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Lab"/>
 			<column name="RANK" value="1"/>
@@ -25,7 +25,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5104C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46EA2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Discussion can only have a discussion as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Discussion"/>
 			<column name="RANK" value="1"/>
@@ -36,7 +36,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5204C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46EB2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Tutorial can only have a tutorial as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Tutorial"/>
 			<column name="RANK" value="1"/>
@@ -47,7 +47,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5304C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46EC2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical WebLecture can only have a weblecture as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.WebLecture"/>
 			<column name="RANK" value="1"/>
@@ -58,7 +58,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5404C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46ED2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical WebDiscussion can only have a webdiscussion as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.WebDiscussion"/>
 			<column name="RANK" value="1"/>
@@ -69,7 +69,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5504C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46EE2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Directed can only have a directed as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Directed"/>
 			<column name="RANK" value="1"/>
@@ -80,7 +80,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5604C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46EF2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Studio can only have a studio as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Studio"/>
 			<column name="RANK" value="1"/>
@@ -91,7 +91,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5704C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F02532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Correspond can only have a correspond as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Correspond"/>
 			<column name="RANK" value="1"/>
@@ -102,7 +102,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5804C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F12532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Activity can only have a activity as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Activity"/>
 			<column name="RANK" value="1"/>
@@ -113,7 +113,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5904C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F22532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Colloquium can only have a colloquium as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Colloquium"/>
 			<column name="RANK" value="1"/>
@@ -124,7 +124,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5A04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F32532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Demonstration can only have a demonstration as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Demonstration"/>
 			<column name="RANK" value="1"/>
@@ -135,7 +135,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5B04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F42532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Field can only have a field as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Field"/>
 			<column name="RANK" value="1"/>
@@ -146,7 +146,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5C04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F52532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Homework can only have a homework as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Homework"/>
 			<column name="RANK" value="1"/>
@@ -157,7 +157,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5D04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F62532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Independ can only have a independ as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Independ"/>
 			<column name="RANK" value="1"/>
@@ -168,7 +168,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5E04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F72532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Internship can only have a internship as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Internship"/>
 			<column name="RANK" value="1"/>
@@ -179,7 +179,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB5F04C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F82532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Private can only have a private as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Private"/>
 			<column name="RANK" value="1"/>
@@ -190,7 +190,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB6004C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46F92532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Recitation can only have a recitation as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Recitation"/>
 			<column name="RANK" value="1"/>
@@ -201,7 +201,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB6104C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46FA2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical Research can only have a research as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.Research"/>
 			<column name="RANK" value="1"/>
@@ -212,7 +212,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB6204C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46FB2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical SelfPaced can only have a selfpaced as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.SelfPaced"/>
 			<column name="RANK" value="1"/>
@@ -223,7 +223,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB6304C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46FC2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical CompBased can only have a compbased as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.CompBased"/>
 			<column name="RANK" value="1"/>
@@ -234,7 +234,7 @@
 		<insert tableName="KSEN_TYPETYPE_RELTN">
 			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
 			<column name="EXPIR_DT" valueDate="2100-01-01T00:00:00"/>
-			<column name="ID" value="ADFA52D3CB6404C1E040C60AF05B2A8B"/>
+			<column name="ID" value="AE2D94FC46FD2532E040C60AF05B5E52"/>
 			<column name="NAME" value="A canonical VideoConf can only have a videoconf as an offering"/>
 			<column name="OWNER_TYPE_ID" value="kuali.lu.type.activity.VideoConf"/>
 			<column name="RANK" value="1"/>

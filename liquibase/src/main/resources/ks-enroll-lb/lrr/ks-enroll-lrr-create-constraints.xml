@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="ksen_lrr-constraints" author="alubbers">
+        <addForeignKeyConstraint constraintName="FK1BE15Q7B1D2EA121" baseTableName="KSEN_LRR" baseColumnNames="RT_DESCR_ID" referencedTableName="KSEN_RICH_TEXT_T" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK1BE15Q7B1D2EF131" baseTableName="KSEN_LRR" baseColumnNames="TYPE_ID" referencedTableName="KSEN_LRR_TYPE" referencedColumnNames="TYPE_KEY" />
+        <addForeignKeyConstraint constraintName="FK1BE2597A61E975Q1" baseTableName="KSEN_LRR" baseColumnNames="STATE_ID" referencedTableName="KSEN_COMM_STATE" referencedColumnNames="ID" />
+    </changeSet>
+
+    <changeSet id="ksen_lrr_attr-constraints" author="alubbers">
+        <addForeignKeyConstraint constraintName="FKSF4BE635DC3CD510" baseTableName="KSEN_LRR_ATTR" baseColumnNames="OWNER" referencedTableName="KSEN_LRR" referencedColumnNames="ID" />
+    </changeSet>
+
+</databaseChangeLog>
