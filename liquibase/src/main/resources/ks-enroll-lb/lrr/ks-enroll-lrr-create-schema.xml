@@ -14,7 +14,7 @@
     <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)" />
     <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
     <column name="LPR_ID" type="java.sql.Types.VARCHAR(255)" />
-    <column name="RESULT_VALUE_KEY" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RESULT_VALUE_ID" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
 <changeSet author="alubbers" id="create-KSEN_LRR_ATTR">
@@ -28,10 +28,10 @@
     <column name="OWNER" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
-<changeSet author="alubbers" id="create-KSEN_LRR_LRC_RELTN">
-  <createTable tableName="KSEN_LRR_LRC_RELTN">
+<changeSet author="alubbers" id="create-KSEN_LRR_RES_SRC_RELTN">
+  <createTable tableName="KSEN_LRR_RES_SRC_RELTN">
     <column name="LRR_ID" type="java.sql.Types.VARCHAR(255)" />
-    <column name="LRC_ID" type="java.sql.Types.VARCHAR(255)" />
+    <column name="RES_SRC_ID" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
 <changeSet author="alubbers" id="create-KSEN_LRR_TYPE">
@@ -48,4 +48,32 @@
     <column name="REF_OBJECT_URI" type="java.sql.Types.VARCHAR(255)" />
   </createTable>
 </changeSet>
+    
+<changeSet id="create-KSEN_LRR_RES_SOURCE" author="alubbers">
+    <createTable tableName="KSEN_LRR_RES_SOURCE">
+        <column name="ID" type="java.sql.Types.VARCHAR(255)">
+            <constraints nullable="false" primaryKey="true"/>
+        </column>
+        <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+        <column name="VER_NBR" type="${bigint.type}(19)" />
+        <column name="CREATEID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="CREATETIME" type="TIMESTAMP"/>
+        <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="UPDATETIME" type="TIMESTAMP"/>
+        <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="ARTICULATE_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="RES_TRANS_ID" type="java.sql.Types.VARCHAR(255)"/>
+    </createTable>
+</changeSet>
+    
+<changeSet id="create-KSEN_LRR_RES_SOURCE_ATTR" author="alubbers">
+    <createTable tableName="KSEN_LRR_RES_SOURCE_ATTR">
+        <column name="ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)" />
+        <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)" />
+        <column name="OWNER" type="java.sql.Types.VARCHAR(255)"/>
+    </createTable>
+</changeSet>
+    
 </databaseChangeLog>

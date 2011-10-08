@@ -31,9 +31,27 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LPR_TYPE">
-			<column name="NAME" value="Student"/>
-			<column name="TYPE_DESC" value="Student"/>
-			<column name="TYPE_KEY" value="kuali.lpr.trans.item.add"/>
+			<column name="NAME" value="Roster final type"/>
+			<column name="TYPE_DESC" value="Roster final type"/>
+			<column name="TYPE_KEY" value="kuali.lpr.roster.type.course.final"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Add"/>
+			<column name="TYPE_DESC" value="Add student to course registration group"/>
+			<column name="TYPE_KEY" value="kuali.lpr.trans.item.type.add"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Student registrant"/>
+			<column name="TYPE_DESC" value="Student registrant"/>
+			<column name="TYPE_KEY" value="kuali.lpr.trans.registrant"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Register trans type"/>
+			<column name="TYPE_DESC" value="Register trans type"/>
+			<column name="TYPE_KEY" value="kuali.lpr.trans.type.register"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LPR_TYPE">

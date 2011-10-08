@@ -11,7 +11,8 @@
 
     <include file="ks-enroll-lb/atp/ks-enroll-atp-create-constraints.xml"/>
     <include file="ks-enroll-lb/lpr/ks-enroll-lpr-create-constraints.xml"/>
-    <include file="ks-enroll-lb/lpr/ks-enroll-lrr-create-constraints.xml"/>
+    <include file="ks-enroll-lb/lrr/ks-enroll-lrr-create-constraints.xml"/>
+    <include file="ks-enroll-lb/lrc/ks-enroll-lrc-create-constraints.xml"/>
     <include file="ks-enroll-lb/lui/ks-enroll-lui-create-constraints.xml"/>
 
     <include file="ks-lum-lb/lo/ks-lum-lo-create-constraints.xml"/>

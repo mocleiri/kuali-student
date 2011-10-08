@@ -13,7 +13,8 @@
 
     <include file="ks-enroll-lb/atp/ks-enroll-atp-create-schema.xml"/>
     <include file="ks-enroll-lb/lpr/ks-enroll-lpr-create-schema.xml"/>
-    <include file="ks-enroll-lb/lpr/ks-enroll-lrr-create-schema.xml"/>
+    <include file="ks-enroll-lb/lrr/ks-enroll-lrr-create-schema.xml"/>
+    <include file="ks-enroll-lb/lrc/ks-enroll-lrc-create-schema.xml"/>
     <include file="ks-enroll-lb/lui/ks-enroll-lui-create-schema.xml"/>
 
     <include file="ks-lum-lb/lo/ks-lum-lo-create-schema.xml"/>

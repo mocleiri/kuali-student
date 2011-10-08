@@ -122,6 +122,9 @@
         <column name="PERSON_ID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="NEW_LUI_ID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="EXIST_LUI_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="RESULTING_LPR_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="GROUP_ID" type="java.sql.Types.VARCHAR(255)"/>
+        <column name="STATUS" type="java.sql.Types.VARCHAR(255)"/>
         <column name="LPR_TRANS_ID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>

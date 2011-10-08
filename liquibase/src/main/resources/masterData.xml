@@ -11,7 +11,8 @@
 
     <includeAll path="ks-enroll-lb/atp/data/"/>
 	<includeAll path="ks-enroll-lb/lpr/data/"/>
-    <includeAll path="ks-enroll-lb/lrr/data/"/>
+    <!-- <includeAll path="ks-enroll-lb/lrr/data/"/> -->
+    <!-- <includeAll path="ks-enroll-lb/lrc/data/"/> -->
 	<includeAll path="ks-enroll-lb/lui/data/"/>
 
     <includeAll path="ks-lum-lb/lo/data/"/>

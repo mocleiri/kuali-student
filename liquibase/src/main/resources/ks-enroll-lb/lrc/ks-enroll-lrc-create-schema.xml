@@ -1,0 +1,113 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="create-KSEN_LRC_RES_SCALE" author="alubbers">
+        <createTable tableName="KSEN_LRC_RES_SCALE">
+            <column name="ID" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="VER_NBR" type="${bigint.type}(19)" />
+            <column name="CREATEID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="CREATETIME" type="java.sql.Types.TIMESTAMP"/>
+            <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EFFECTIVEDATE" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EXPIRATIONDATE" type="java.sql.Types.TIMESTAMP"/>
+            <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="MIN_VALUE" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="MAX_VALUE" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="INCR" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-KSEN_LRC_RES_SCALE_ATTR" author="alubbers">
+        <createTable tableName="KSEN_LRC_RES_SCALE_ATTR">
+            <column name="ID" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)"/>
+            <column name="OWNER" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-KSEN_LRC_RES_VALUE" author="alubbers">
+        <createTable tableName="KSEN_LRC_RES_VALUE">
+            <column name="ID" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="VER_NBR" type="${bigint.type}(19)" />
+            <column name="CREATEID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="CREATETIME" type="java.sql.Types.TIMESTAMP"/>
+            <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EFFECTIVEDATE" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EXPIRATIONDATE" type="java.sql.Types.TIMESTAMP"/>
+            <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="RES_SCALE_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="NUMERIC_VALUE" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="VALUE" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-KSEN_LRC_RES_VAL_GRP" author="alubbers">
+        <createTable tableName="KSEN_LRC_RES_VAL_GRP">
+            <column name="ID" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="VER_NBR" type="${bigint.type}(19)" />
+            <column name="CREATEID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="CREATETIME" type="java.sql.Types.TIMESTAMP"/>
+            <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EFFECTIVEDATE" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EXPIRATIONDATE" type="java.sql.Types.TIMESTAMP"/>
+            <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="MIN_VALUE" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="MAX_VALUE" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="INCR" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="RES_SCALE_ID" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-KSEN_LRC_RES_VAL_GRP_ATTR" author="alubbers">
+        <createTable tableName="KSEN_LRC_RES_VAL_GRP_ATTR">
+            <column name="ID" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)"/>
+            <column name="OWNER" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-KSEN_LRC_RVGP_RV_RELTN" author="alubbers">
+        <createTable tableName="KSEN_LRC_RVGP_RV_RELTN">
+            <column name="RES_VAL_GRP_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="RES_VAL_ID" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create-KSEN_LRC_TYPE" author="alubbers">
+        <createTable tableName="KSEN_LRC_TYPE">
+            <column name="TYPE_KEY" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="VER_NBR" type="${bigint.type}(19)" />
+            <column name="TYPE_DESC" type="java.sql.Types.VARCHAR(2000)"/>
+            <column name="EFF_DT" type="java.sql.Types.TIMESTAMP"/>
+            <column name="EXPIR_DT" type="java.sql.Types.TIMESTAMP"/>
+            <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="REF_OBJECT_URI" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

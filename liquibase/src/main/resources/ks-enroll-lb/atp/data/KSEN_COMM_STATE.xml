@@ -99,6 +99,13 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="New roster entry"/>
+			<column name="ID" value="kuali.lpr.roster.state.course.new"/>
+			<column name="NAME" value="New roster entry"/>
+			<column name="PROCESS_KEY" value="kuali.assessment.process.course.grading"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The instructor is assigned to teach this course or section."/>
 			<column name="ID" value="kuali.lpr.state.assigned"/>
 			<column name="NAME" value="Assigned"/>
@@ -149,7 +156,7 @@
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The student is attemptng to enroll in this course or section."/>
-			<column name="ID" value="kuali.lpr.trans.item.new"/>
+			<column name="ID" value="kuali.lpr.trans.item.state.new"/>
 			<column name="NAME" value="New"/>
 			<column name="PROCESS_KEY" value="kuali.lpr.process.student.course.registration"/>
 			<column name="VER_NBR" value="0"/>
