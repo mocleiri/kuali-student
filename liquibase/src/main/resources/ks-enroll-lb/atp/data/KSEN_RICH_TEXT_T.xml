@@ -49,6 +49,12 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Standard A-F Grading used by most courses and how most courses are shown on the external transcript&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-111"/>
+			<column name="PLAIN" value="Standard A-F Grading used by most courses and how most courses are shown on the external transcript"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
 			<column name="FORMATTED" value="&lt;p>Fall 2011&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-201"/>
 			<column name="PLAIN" value="Fall 2011"/>
@@ -58,6 +64,66 @@
 			<column name="FORMATTED" value="&lt;p>Winter 2012&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-202"/>
 			<column name="PLAIN" value="Winter 2012"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Standard A-F grading scale&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-221"/>
+			<column name="PLAIN" value="Standard A-F grading scale"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Excellent&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-222"/>
+			<column name="PLAIN" value="Excellent"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Good&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-223"/>
+			<column name="PLAIN" value="Good"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Average&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-224"/>
+			<column name="PLAIN" value="Average"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Below Average&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-225"/>
+			<column name="PLAIN" value="Below Average"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Failing&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-226"/>
+			<column name="PLAIN" value="Failing"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Pass/Fail grading scale&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-227"/>
+			<column name="PLAIN" value="Pass/Fail grading scale"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Pass/Fail grading used for courses that are only taught that way&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-228"/>
+			<column name="PLAIN" value="Pass/Fail grading used for courses that are only taught that way"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Pass&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-229"/>
+			<column name="PLAIN" value="Pass"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Fail&lt;/p>"/>
+			<column name="ID" value="RICHTEXT-230"/>
+			<column name="PLAIN" value="Fail"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">
@@ -148,6 +214,18 @@
 			<column name="FORMATTED" value="&lt;p>Desc term rich text 9&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-TRT-9"/>
 			<column name="PLAIN" value="Desc term rich text 9"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Not yet ready&lt;/p>"/>
+			<column name="ID" value="ResultSource1"/>
+			<column name="PLAIN" value="NA"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>Final Grade&lt;/p>"/>
+			<column name="ID" value="grade-final-desc"/>
+			<column name="PLAIN" value="Final Grade"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

@@ -91,7 +91,7 @@
 		<insert tableName="KSOR_ORG_ORG_RELTN_TYPE">
 			<column name="EFF_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="NAME" value="is Curriculum Parent of"/>
-			<column name="OBJ_ID" value="AEAA2F09A6F4DDA5E040C60AF05B42FF"/>
+			<column name="OBJ_ID" value="AF1BC8F90473CB76E040C60AF05B754E"/>
 			<column name="ORG_HIRCHY" value="kuali.org.hierarchy.Curriculum"/>
 			<column name="REV_DESCR" value="Indicates that this organization is the Child of another organization in the Curriculum Hierarchy"/>
 			<column name="REV_NAME" value="is Curriculum Child of"/>

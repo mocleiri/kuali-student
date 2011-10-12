@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRC_RES_VAL_GRP-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRC_RES_VAL_GRP">
+			<column name="ID" value="kuali.resultComponent.grade.letter"/>
+			<column name="NAME" value="Standard A-F Grading"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-111"/>
+			<column name="STATE_ID" value="kuali.result.values.group.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.values.group.type.multiple"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VAL_GRP">
+			<column name="ID" value="kuali.resultComponent.grade.passFail"/>
+			<column name="NAME" value="Pass/Fail Grading"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-228"/>
+			<column name="STATE_ID" value="kuali.result.values.group.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.values.group.type.multiple"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

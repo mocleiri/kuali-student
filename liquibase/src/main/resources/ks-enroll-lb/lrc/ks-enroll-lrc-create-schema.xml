@@ -16,6 +16,8 @@
             <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
             <column name="MIN_VALUE" type="java.sql.Types.VARCHAR(255)"/>
             <column name="MAX_VALUE" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
             <column name="INCR" type="java.sql.Types.VARCHAR(255)"/>
         </createTable>
     </changeSet>
@@ -48,8 +50,22 @@
             <column name="NAME" type="java.sql.Types.VARCHAR(255)"/>
             <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)"/>
             <column name="RES_SCALE_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
             <column name="NUMERIC_VALUE" type="java.sql.Types.VARCHAR(255)"/>
             <column name="VALUE" type="java.sql.Types.VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-KSEN_LRC_RES_VALUE_ATTR" author="alubbers">
+        <createTable tableName="KSEN_LRC_RES_VALUE_ATTR">
+            <column name="ID" type="java.sql.Types.VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="OBJ_ID" type="java.sql.Types.VARCHAR(36)"/>
+            <column name="ATTR_KEY" type="java.sql.Types.VARCHAR(255)"/>
+            <column name="ATTR_VALUE" type="java.sql.Types.VARCHAR(2000)"/>
+            <column name="OWNER" type="java.sql.Types.VARCHAR(255)"/>
         </createTable>
     </changeSet>
     

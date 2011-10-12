@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LPR_RV_GRP_RELTN-initial-data" author="alubbers">
+		<insert tableName="KSEN_LPR_RV_GRP_RELTN">
+			<column name="LPR_ID" value="student1"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LPR_RV_GRP_RELTN">
+			<column name="LPR_ID" value="student2"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LPR_RV_GRP_RELTN">
+			<column name="LPR_ID" value="student3"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.passFail"/>
+		</insert>
+		<insert tableName="KSEN_LPR_RV_GRP_RELTN">
+			<column name="LPR_ID" value="student4"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

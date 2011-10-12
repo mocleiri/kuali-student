@@ -1,0 +1,34 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRC_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRC_TYPE">
+			<column name="NAME" value="A-F Grading Scale"/>
+			<column name="TYPE_DESC" value="Standard A-F grading scale"/>
+			<column name="TYPE_KEY" value="kuali.result.scale.grade.letter"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LRC_TYPE">
+			<column name="NAME" value="Grade"/>
+			<column name="TYPE_DESC" value="The result of an assessment, typically of a course"/>
+			<column name="TYPE_KEY" value="kuali.result.scale.type.grade"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LRC_TYPE">
+			<column name="NAME" value="Fixed"/>
+			<column name="TYPE_DESC" value="A result grouping that includes just a single result value"/>
+			<column name="TYPE_KEY" value="kuali.result.values.group.type.fixed"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LRC_TYPE">
+			<column name="NAME" value="Multiple"/>
+			<column name="TYPE_DESC" value="Multiple explicitly named values from which one may be choosen"/>
+			<column name="TYPE_KEY" value="kuali.result.values.group.type.multiple"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LRC_TYPE">
+			<column name="NAME" value="Range"/>
+			<column name="TYPE_DESC" value="A grouping that indicates a range of numeric values with a specified increment. It is not necessary that all of the values within that range have been explicitly pre-defined"/>
+			<column name="TYPE_KEY" value="kuali.result.values.group.type.range"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

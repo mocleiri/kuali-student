@@ -10,6 +10,7 @@
     <column name="CREATETIME" type="java.sql.Types.TIMESTAMP" />
     <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)" />
     <column name="UPDATETIME" type="java.sql.Types.TIMESTAMP" />
+    <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
     <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
     <column name="STATE_ID" type="java.sql.Types.VARCHAR(255)" />
     <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)" />
@@ -60,6 +61,8 @@
         <column name="CREATETIME" type="TIMESTAMP"/>
         <column name="UPDATEID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="UPDATETIME" type="TIMESTAMP"/>
+        <column name="NAME" type="java.sql.Types.VARCHAR(255)" />
+        <column name="RT_DESCR_ID" type="java.sql.Types.VARCHAR(255)" />
         <column name="TYPE_ID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="ARTICULATE_ID" type="java.sql.Types.VARCHAR(255)"/>
         <column name="RES_TRANS_ID" type="java.sql.Types.VARCHAR(255)"/>

@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRR_RES_SRC_RELTN-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRR_RES_SRC_RELTN">
+			<column name="LRR_ID" value="student1-grade-final"/>
+			<column name="RES_SRC_ID" value="ResultSource-Sample1"/>
+		</insert>
+		<insert tableName="KSEN_LRR_RES_SRC_RELTN">
+			<column name="LRR_ID" value="student2-grade-final"/>
+			<column name="RES_SRC_ID" value="ResultSource-Sample1"/>
+		</insert>
+		<insert tableName="KSEN_LRR_RES_SRC_RELTN">
+			<column name="LRR_ID" value="student3-grade-final"/>
+			<column name="RES_SRC_ID" value="ResultSource-Sample1"/>
+		</insert>
+		<insert tableName="KSEN_LRR_RES_SRC_RELTN">
+			<column name="LRR_ID" value="student4-grade-final"/>
+			<column name="RES_SRC_ID" value="ResultSource-Sample1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

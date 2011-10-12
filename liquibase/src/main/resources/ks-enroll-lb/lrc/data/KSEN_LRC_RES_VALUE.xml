@@ -1,0 +1,67 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRC_RES_VALUE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.letter.a"/>
+			<column name="NAME" value="Excellent"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-222"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="A"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.letter.b"/>
+			<column name="NAME" value="Good"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-223"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="B"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.letter.c"/>
+			<column name="NAME" value="Average"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-224"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="C"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.letter.d"/>
+			<column name="NAME" value="Below Average"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-225"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="D"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.letter.f"/>
+			<column name="NAME" value="Failing"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.letter"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-226"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="F"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.pf.f"/>
+			<column name="NAME" value="Fail"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.pf"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-230"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="F"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_VALUE">
+			<column name="ID" value="kuali.result.value.grade.pf.p"/>
+			<column name="NAME" value="Pass"/>
+			<column name="RES_SCALE_ID" value="kuali.result.scale.grade.pf"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-229"/>
+			<column name="STATE_ID" value="kuali.result.value.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VALUE" value="P"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

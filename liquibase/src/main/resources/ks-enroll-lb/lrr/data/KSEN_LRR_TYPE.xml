@@ -1,0 +1,58 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRR_TYPE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Credential Awarded"/>
+			<column name="TYPE_DESC" value="Indicates the credential that was awarded"/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.credential.awarded "/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Credits Earned"/>
+			<column name="TYPE_DESC" value="Indicates the number of credits the student earned for successfully completing the course.  Often done via a calculation by looking at the calculated grade and either awarding the number of attempted credits if it is a passing grade."/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.credits.earned"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Administrative Final Grade"/>
+			<column name="TYPE_DESC" value="Administrative Grade that was recorded for this student"/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.final.grade.administrative"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Assigned Final Grade"/>
+			<column name="TYPE_DESC" value="Grade as it was originally submitted by the faculty member on the grade sheet."/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.final.grade.assigned"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Calculated Final Grade"/>
+			<column name="TYPE_DESC" value="Grade calculated based on the scale or option chosen and the grade actually submitted by the faculty member."/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.final.grade.calculated"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Interim Grade"/>
+			<column name="TYPE_DESC" value="Grade assigned during at an interim period often used to flag students who might be struggling"/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.interim.grade"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Standardized Test Ranking"/>
+			<column name="TYPE_DESC" value="The ranking of the student within the peer group who took the test during the same time period.  Often recorded as a percentage or a decile"/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.standardized.test.ranking"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="Standardized Test Score"/>
+			<column name="TYPE_DESC" value="A score a student got by taking standardized test."/>
+			<column name="TYPE_KEY" value="kuali.lrr.type.standardized.test.score"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR_TYPE">
+			<column name="NAME" value="NA"/>
+			<column name="TYPE_DESC" value="Not defined yet."/>
+			<column name="TYPE_KEY" value="result.source.type.notdefined.yet"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

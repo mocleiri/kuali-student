@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRC_RES_SCALE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRC_RES_SCALE">
+			<column name="ID" value="kuali.result.scale.grade.letter"/>
+			<column name="NAME" value="A-F Grading Scale"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-221"/>
+			<column name="STATE_ID" value="kuali.result.scale.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RES_SCALE">
+			<column name="ID" value="kuali.result.scale.grade.pf"/>
+			<column name="NAME" value="Pass/Fail Grading Scale"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-227"/>
+			<column name="STATE_ID" value="kuali.result.scale.state.approved"/>
+			<column name="TYPE_ID" value="kuali.result.scale.type.grade"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

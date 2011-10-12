@@ -1,0 +1,12 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRR_RES_SOURCE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRR_RES_SOURCE">
+			<column name="ARTICULATE_ID" value="articulate1"/>
+			<column name="ID" value="ResultSource-Sample1"/>
+			<column name="NAME" value="Articulate"/>
+			<column name="RT_DESCR_ID" value="ResultSource1"/>
+			<column name="TYPE_ID" value="result.source.type.notdefined.yet"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

@@ -1,13 +1,6 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_COMM_STATE-initial-data" author="alubbers">
 		<insert tableName="KSEN_COMM_STATE">
-			<column name="DESCR" value="Active Roster entry"/>
-			<column name="ID" value="kuali.assessment.roster.state.ready"/>
-			<column name="NAME" value="Assigned"/>
-			<column name="PROCESS_KEY" value="kuali.assessment.process.course.grading"/>
-			<column name="VER_NBR" value="0"/>
-		</insert>
-		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="Indicates that this Atp-Atp relation is active"/>
 			<column name="ID" value="kuali.atp.atp.relation.state.active"/>
 			<column name="NAME" value="Active"/>
@@ -100,9 +93,30 @@
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="New roster entry"/>
-			<column name="ID" value="kuali.lpr.roster.state.course.new"/>
+			<column name="ID" value="kuali.lpr.roster.state.created"/>
 			<column name="NAME" value="New roster entry"/>
-			<column name="PROCESS_KEY" value="kuali.assessment.process.course.grading"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.roster.process.course.grading"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Active Roster entry"/>
+			<column name="ID" value="kuali.lpr.roster.state.ready"/>
+			<column name="NAME" value="Assigned"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.roster.process.course.grading"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The roster has had information entered against it and it has been saved"/>
+			<column name="ID" value="kuali.lpr.roster.state.saved"/>
+			<column name="NAME" value="Saved"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.roster.process.course.grading"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The roster has has been submitted"/>
+			<column name="ID" value="kuali.lpr.roster.state.submitted"/>
+			<column name="NAME" value="Submitted"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.roster.process.course.grading"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
@@ -155,6 +169,13 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Transaction Item failed"/>
+			<column name="ID" value="kuali.lpr.trans.item.state.failed"/>
+			<column name="NAME" value="Transaction Item Failed"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.trans.item.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The student is attemptng to enroll in this course or section."/>
 			<column name="ID" value="kuali.lpr.trans.item.state.new"/>
 			<column name="NAME" value="New"/>
@@ -162,10 +183,38 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Transaction Item Succeeded"/>
+			<column name="ID" value="kuali.lpr.trans.item.state.succeeded"/>
+			<column name="NAME" value="Transaction Item Succeeded"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.trans.item.process"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="This hold is active and should be enforced"/>
 			<column name="ID" value="kuali.lpr.trans.registered"/>
 			<column name="NAME" value="Active"/>
 			<column name="PROCESS_KEY" value="kuali.hold.process.student"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The result (grade) has been vetted and is ready to be published to the student"/>
+			<column name="ID" value="kuali.lrr.state.accepted"/>
+			<column name="NAME" value="Accepted"/>
+			<column name="PROCESS_KEY" value="kuali.lrr.course.final.grading.lifecycle"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The result (grade) has been entered and has been saved but not yet been submitted"/>
+			<column name="ID" value="kuali.lrr.state.saved"/>
+			<column name="NAME" value="Saved"/>
+			<column name="PROCESS_KEY" value="kuali.lrr.course.final.grading.lifecycle"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The result (grade) has been formally submitted"/>
+			<column name="ID" value="kuali.lrr.state.submitted"/>
+			<column name="NAME" value="Submitted"/>
+			<column name="PROCESS_KEY" value="kuali.lrr.course.final.grading.lifecycle"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
@@ -253,10 +302,64 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Approved"/>
+			<column name="ID" value="kuali.result.scale.state.approved"/>
+			<column name="NAME" value="The result scale has been approved to be used and awarded"/>
+			<column name="PROCESS_KEY" value="kuali.result.scale.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Draft"/>
+			<column name="ID" value="kuali.result.scale.state.draft "/>
+			<column name="NAME" value="The result scale is just draft and cannot yet be used"/>
+			<column name="PROCESS_KEY" value="kuali.result.scale.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Retired"/>
+			<column name="ID" value="kuali.result.scale.state.retired"/>
+			<column name="NAME" value="The result scale has been retired and can still exist on records but can no longer be used"/>
+			<column name="PROCESS_KEY" value="kuali.result.scale.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Approved"/>
+			<column name="ID" value="kuali.result.value.state.approved"/>
+			<column name="NAME" value="The result value has been approved to be used and awarded"/>
+			<column name="PROCESS_KEY" value="kuali.result.value.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Draft"/>
+			<column name="ID" value="kuali.result.value.state.draft "/>
+			<column name="NAME" value="The result value is just draft and cannot yet be used"/>
+			<column name="PROCESS_KEY" value="kuali.result.value.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Retired"/>
+			<column name="ID" value="kuali.result.value.state.retired"/>
+			<column name="NAME" value="The result value has been retired and can still exist on records but can no longer be used"/>
+			<column name="PROCESS_KEY" value="kuali.result.value.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Approved"/>
+			<column name="ID" value="kuali.result.values.group.state.approved"/>
+			<column name="NAME" value="The result has been approved to be used and awarded"/>
+			<column name="PROCESS_KEY" value="kuali.result.values.group.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="Draft"/>
+			<column name="ID" value="kuali.result.values.group.state.draft"/>
+			<column name="NAME" value="The result is just draft and cannot yet be used"/>
+			<column name="PROCESS_KEY" value="kuali.result.values.group.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The result has been retired and can still exist on records but can no longer be used"/>
+			<column name="ID" value="kuali.result.values.group.state.retired"/>
+			<column name="NAME" value="Retired"/>
+			<column name="PROCESS_KEY" value="kuali.result.values.group.process"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The roster has been created and is ready to have grades entered"/>
 			<column name="ID" value="kuali.roster.entry.state.active"/>
 			<column name="NAME" value="Ready"/>
-			<column name="PROCESS_KEY" value="kuali.assessment.process.course.grading"/>
+			<column name="PROCESS_KEY" value="kuali.lpr.roster.process.course.grading"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

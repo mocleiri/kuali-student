@@ -1,0 +1,34 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRR-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRR">
+			<column name="ID" value="student1-grade-final"/>
+			<column name="LPR_ID" value="student1"/>
+			<column name="NAME" value="student1 grade final"/>
+			<column name="RESULT_VALUE_ID" value="kuali.result.value.grade.letter.a"/>
+			<column name="RT_DESCR_ID" value="grade-final-desc"/>
+			<column name="STATE_ID" value="kuali.lrr.state.saved"/>
+			<column name="TYPE_ID" value="kuali.lrr.type.final.grade.assigned"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR">
+			<column name="ID" value="student2-grade-final"/>
+			<column name="LPR_ID" value="student2"/>
+			<column name="NAME" value="student2 grade final"/>
+			<column name="RESULT_VALUE_ID" value="kuali.result.value.grade.letter.b"/>
+			<column name="RT_DESCR_ID" value="grade-final-desc"/>
+			<column name="STATE_ID" value="kuali.lrr.state.saved"/>
+			<column name="TYPE_ID" value="kuali.lrr.type.final.grade.assigned"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LRR">
+			<column name="ID" value="student3-grade-final"/>
+			<column name="LPR_ID" value="student3"/>
+			<column name="NAME" value="student3 grade final"/>
+			<column name="RESULT_VALUE_ID" value="kuali.result.value.grade.pf.f"/>
+			<column name="RT_DESCR_ID" value="grade-final-desc"/>
+			<column name="STATE_ID" value="kuali.lrr.state.saved"/>
+			<column name="TYPE_ID" value="kuali.lrr.type.final.grade.assigned"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

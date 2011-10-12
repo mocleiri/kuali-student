@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LRC_RVGP_RV_RELTN-initial-data" author="alubbers">
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.letter.a"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.letter.b"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.letter.c"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.letter.d"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.letter.f"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.passFail"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.pf.p"/>
+		</insert>
+		<insert tableName="KSEN_LRC_RVGP_RV_RELTN">
+			<column name="RES_VAL_GRP_ID" value="kuali.resultComponent.grade.passFail"/>
+			<column name="RES_VAL_ID" value="kuali.result.value.grade.pf.f"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>
