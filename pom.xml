@@ -8,7 +8,7 @@
  <name>KS-Loader</name>
  <url>http://maven.apache.org</url>
  <properties>
-  <kuali.student.version>1.2-M5-SNAPSHOT</kuali.student.version>
+  <kuali.student.version>1.2</kuali.student.version>
   <junit.version>4.4</junit.version>
   <atomikos.version>3.4.1</atomikos.version>
   <log4j.version>1.2.14</log4j.version>
