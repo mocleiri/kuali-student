@@ -4,8 +4,8 @@
 	
   	<entry-point class="org.kuali.student.lum.lu.ui.main.client.LUMMainEntryPoint"/>
     
-    <replace-with class="edu.kuali.config.lum.lu.ui.client.course.configuration.SampleCourseConfigurer">
-        <when-type-is class="org.kuali.student.lum.lu.ui.course.client.configuration.CourseConfigurer"/>
+    <replace-with class="edu.kuali.config.lum.lu.ui.client.course.configuration.SampleCourseProposalConfigurer">
+        <when-type-is class="org.kuali.student.lum.lu.ui.course.client.configuration.CourseProposalConfigurer"/>
     </replace-with>
     
     <replace-with class="edu.kuali.config.lum.lu.ui.client.theme.SampleCssImpl">

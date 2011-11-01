@@ -29,10 +29,11 @@
  */
 package edu.kuali.config.lum.lu.ui.client.course.configuration;
 
-import org.kuali.student.common.ui.client.configurable.mvc.views.SectionView;
-import org.kuali.student.common.ui.client.configurable.mvc.views.VerticalSectionView;
+import org.kuali.student.common.ui.client.configurable.mvc.FieldDescriptor;
+import org.kuali.student.common.ui.client.configurable.mvc.sections.Section;
+import org.kuali.student.common.ui.client.widgets.KSCharCount;
 import org.kuali.student.lum.common.client.lu.LUUIConstants;
-import org.kuali.student.lum.lu.ui.course.client.configuration.CourseConfigurer;
+import org.kuali.student.lum.lu.ui.course.client.configuration.CourseProposalConfigurer;
 
 
 /**
@@ -40,25 +41,23 @@ import org.kuali.student.lum.lu.ui.course.client.configuration.CourseConfigurer;
  *
  * @author Kuali Student Team
  */
-public class SampleCourseConfigurer extends CourseConfigurer {
+public class SampleCourseProposalConfigurer extends CourseProposalConfigurer {
    
 	@Override
-	public SectionView generateCourseInfoSection() {
-        VerticalSectionView section = initSectionView(CourseSections.COURSE_INFO, LUUIConstants.INFORMATION_LABEL_KEY);
-        addField(section, PROPOSAL_TITLE_PATH, generateMessageInfo(LUUIConstants.PROPOSAL_TITLE_LABEL_KEY));
-        addField(section, COURSE + "/" + COURSE_TITLE, generateMessageInfo(LUUIConstants.COURSE_TITLE_LABEL_KEY));
-        addField(section, COURSE + "/" + TRANSCRIPT_TITLE, generateMessageInfo(LUUIConstants.SHORT_TITLE_LABEL_KEY));
-        addField(section, COURSE + "/" + "newField", generateMessageInfo("New Field"));
-        section.addSection(generateCourseNumberSection());
+	public Section generateCourseInfoSection(Section section) {
 
+        addField(section, PROPOSAL_TITLE_PATH, generateMessageInfo(LUUIConstants.PROPOSAL_TITLE_LABEL_KEY));
+        addField(section, COURSE + "/" + TRANSCRIPT_TITLE, generateMessageInfo(LUUIConstants.SHORT_TITLE_LABEL_KEY), new KSCharCount(getMetaData(COURSE + "/" + TRANSCRIPT_TITLE)));
+        addField(section, COURSE + "/" + COURSE_TITLE, generateMessageInfo(LUUIConstants.COURSE_TITLE_LABEL_KEY));
+        section.addSection(generateCourseNumberSection());
+    	FieldDescriptor instructorsFd = addField(section, COURSE + "/" + INSTRUCTORS, generateMessageInfo(LUUIConstants.INSTRUCTORS_LABEL_KEY));
+        instructorsFd.setWidgetBinding(new KeyListModelWigetBinding("personId"));
+
+        section.addSection(generateDescriptionRationaleSection());
+        
         return section;
 	}
-	
-	@Override
-	protected SectionView generateActiveDatesSection() {
-		// TODO Auto-generated method stub
-		return super.generateActiveDatesSection();
-	}
+
 }
 
 
