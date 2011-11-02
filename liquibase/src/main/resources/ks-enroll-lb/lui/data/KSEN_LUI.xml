@@ -9,7 +9,7 @@
 			<column name="NAME" value="Lui one"/>
 			<column name="OFFIC_LUI_ID" value="LUI-IDENT-1"/>
 			<column name="RT_DESCR_ID" value="Lui-1-Desc"/>
-			<column name="STATE_ID" value="kuali.lui.state.draft"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
 			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -33,7 +33,7 @@
 			<column name="NAME" value="Lui three"/>
 			<column name="OFFIC_LUI_ID" value="LUI-IDENT-2"/>
 			<column name="RT_DESCR_ID" value="Lui-3-Desc"/>
-			<column name="STATE_ID" value="kuali.lui.state.draft"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
 			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
@@ -46,6 +46,335 @@
 			<column name="RT_DESCR_ID" value="Lui-4-Desc"/>
 			<column name="STATE_ID" value="kuali.lui.state.draft"/>
 			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG100"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100"/>
+			<column name="MAX_SEATS" value="60"/>
+			<column name="OFFIC_LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100OFFICIALID2"/>
+			<column name="RT_DESCR_ID" value="REFERENCECOURSEOFFERINGGEOG100DESCR2"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="2b7f8fee-f003-432c-9b56-9364adac1b00"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY1"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB10"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="2b7f8fee-f003-432c-9b56-9364adac1b00"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY2"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB19"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="2b7f8fee-f003-432c-9b56-9364adac1b00"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY3"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB23"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100REGGROUP1"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB14"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100REGGROUP2"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB28"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="Spring2011"/>
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG100"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+			<column name="MAX_SEATS" value="60"/>
+			<column name="OFFIC_LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011OFFICIALID2"/>
+			<column name="RT_DESCR_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011DESCR2"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="Spring2011"/>
+			<column name="CLU_ID" value="2b7f8fee-f003-432c-9b56-9364adac1b00"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY1"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631610"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="Spring2011"/>
+			<column name="CLU_ID" value="2b7f8fee-f003-432c-9b56-9364adac1b00"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY2"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631619"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="Spring2011"/>
+			<column name="CLU_ID" value="2b7f8fee-f003-432c-9b56-9364adac1b00"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY3"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631623"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="Spring2011"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011REGGROUP1"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631614"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="Spring2011"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011REGGROUP2"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631628"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG123"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123"/>
+			<column name="MAX_SEATS" value="50"/>
+			<column name="OFFIC_LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123OFFICIALID2"/>
+			<column name="RT_DESCR_ID" value="REFERENCECOURSEOFFERINGGEOG123DESCR2"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="026cfeb6-78b1-4d3c-b528-d6d04d0fff57"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY1"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43110"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="026cfeb6-78b1-4d3c-b528-d6d04d0fff57"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY2"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43119"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="026cfeb6-78b1-4d3c-b528-d6d04d0fff57"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY3"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43123"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123REGGROUP1"/>
+			<column name="MAX_SEATS" value="30"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43114"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123REGGROUP2"/>
+			<column name="MAX_SEATS" value="20"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43128"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG130"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130"/>
+			<column name="MAX_SEATS" value="25"/>
+			<column name="OFFIC_LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130OFFICIALID2"/>
+			<column name="RT_DESCR_ID" value="REFERENCECOURSEOFFERINGGEOG130DESCR2"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="7254b882-f291-4257-aad8-56c9bbf3a7ec"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY1"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257010"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="7254b882-f291-4257-aad8-56c9bbf3a7ec"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY2"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257019"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="7254b882-f291-4257-aad8-56c9bbf3a7ec"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY3"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257023"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130REGGROUP1"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257014"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130REGGROUP2"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257028"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="REFERENCECOURSEGEOG201"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="MAX_SEATS" value="80"/>
+			<column name="OFFIC_LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201OFFICIALID2"/>
+			<column name="RT_DESCR_ID" value="REFERENCECOURSEOFFERINGGEOG201DESCR2"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.course.offering"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="c744103f-adc9-40e4-8b09-be69fd0f9ac8"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19510"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lecture"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="c744103f-adc9-40e4-8b09-be69fd0f9ac8"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19519"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CLU_ID" value="c744103f-adc9-40e4-8b09-be69fd0f9ac8"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY3"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19523"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.activity.offering.lab"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1"/>
+			<column name="MAX_SEATS" value="40"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19514"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI">
+			<column name="ATP_ID" value="testTermId1"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP2"/>
+			<column name="MAX_SEATS" value="40"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19528"/>
+			<column name="STATE_ID" value="kuali.lui.state.offered"/>
+			<column name="TYPE_ID" value="kuali.lui.type.registration.group"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 	</changeSet>

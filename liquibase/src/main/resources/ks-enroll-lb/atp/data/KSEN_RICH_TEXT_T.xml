@@ -1,6 +1,12 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_RICH_TEXT_T-initial-data" author="alubbers">
 		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>2010-2011 Academic Calendar&lt;/p>"/>
+			<column name="ID" value="AcademicCalendar20102011"/>
+			<column name="PLAIN" value="2010-2011 Academic Calendar"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
 			<column name="FORMATTED" value="&lt;p>Desc 101&lt;/p>"/>
 			<column name="ID" value="RICHTEXT-101"/>
 			<column name="PLAIN" value="Desc 101"/>
@@ -220,6 +226,12 @@
 			<column name="FORMATTED" value="&lt;p>Not yet ready&lt;/p>"/>
 			<column name="ID" value="ResultSource1"/>
 			<column name="PLAIN" value="NA"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_RICH_TEXT_T">
+			<column name="FORMATTED" value="&lt;p>2011 Spring Term&lt;/p>"/>
+			<column name="ID" value="Spring2011"/>
+			<column name="PLAIN" value="2011 Spring Term"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_RICH_TEXT_T">

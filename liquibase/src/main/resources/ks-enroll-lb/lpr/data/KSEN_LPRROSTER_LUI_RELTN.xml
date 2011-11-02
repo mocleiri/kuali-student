@@ -4,5 +4,25 @@
 			<column name="LPRROSTER_ID" value="testLprRoster1"/>
 			<column name="LUI_ID" value="Lui-1"/>
 		</insert>
+		<insert tableName="KSEN_LPRROSTER_LUI_RELTN">
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011GRADINGROSTER"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+		</insert>
+		<insert tableName="KSEN_LPRROSTER_LUI_RELTN">
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG100GRADINGROSTER"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100"/>
+		</insert>
+		<insert tableName="KSEN_LPRROSTER_LUI_RELTN">
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG123GRADINGROSTER"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123"/>
+		</insert>
+		<insert tableName="KSEN_LPRROSTER_LUI_RELTN">
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG130GRADINGROSTER"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130"/>
+		</insert>
+		<insert tableName="KSEN_LPRROSTER_LUI_RELTN">
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTER"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

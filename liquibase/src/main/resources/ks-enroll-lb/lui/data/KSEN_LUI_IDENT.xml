@@ -18,5 +18,115 @@
 			<column name="SUFX_CD" value="234"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG100"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100OFFICIALID"/>
+			<column name="LNG_NAME" value="Introduction to Geography"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB2"/>
+			<column name="SUFX_CD" value="100"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG100"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100OFFICIALID2"/>
+			<column name="LNG_NAME" value="Introduction to Geography"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB18"/>
+			<column name="SUFX_CD" value="100"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG100FALL2010"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011OFFICIALID"/>
+			<column name="LNG_NAME" value="Introduction to Geography"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF63162"/>
+			<column name="SUFX_CD" value="100"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG100FALL2010"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011OFFICIALID2"/>
+			<column name="LNG_NAME" value="Introduction to Geography"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631618"/>
+			<column name="SUFX_CD" value="100"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG123"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123OFFICIALID"/>
+			<column name="LNG_NAME" value="Causes and Implications of Global Change"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD4312"/>
+			<column name="SUFX_CD" value="123"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG123"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123OFFICIALID2"/>
+			<column name="LNG_NAME" value="Causes and Implications of Global Change"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43118"/>
+			<column name="SUFX_CD" value="123"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG130"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130OFFICIALID"/>
+			<column name="LNG_NAME" value="Developing Countries"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D25702"/>
+			<column name="SUFX_CD" value="130"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG130"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130OFFICIALID2"/>
+			<column name="LNG_NAME" value="Developing Countries"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257018"/>
+			<column name="SUFX_CD" value="130"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG201"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201OFFICIALID"/>
+			<column name="LNG_NAME" value="Geography of Environmental Systems"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC1952"/>
+			<column name="SUFX_CD" value="201"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_IDENT">
+			<column name="CD" value="GEOG201"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="DIVISION" value="GEOG"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201OFFICIALID2"/>
+			<column name="LNG_NAME" value="Geography of Environmental Systems"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19518"/>
+			<column name="SUFX_CD" value="201"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

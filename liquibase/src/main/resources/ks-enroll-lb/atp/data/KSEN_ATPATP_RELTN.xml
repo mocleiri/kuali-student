@@ -1,6 +1,16 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_ATPATP_RELTN-initial-data" author="alubbers">
 		<insert tableName="KSEN_ATPATP_RELTN">
+			<column name="ATP_ID" value="termRelationTestingAcal1"/>
+			<column name="ATP_RELTN_TYPE_ID" value="kuali.atp.atp.relation.includes"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.atp.relation.state.active"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="ATPATPREL-0"/>
+			<column name="RELATED_ATP_ID" value="testTermId0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATPATP_RELTN">
 			<column name="ATP_ID" value="testAtpId1"/>
 			<column name="ATP_RELTN_TYPE_ID" value="kuali.atp.atp.relation.associated"/>
 			<column name="ATP_STATE_ID" value="kuali.atp.atp.relation.state.active"/>
@@ -78,6 +88,16 @@
 			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
 			<column name="ID" value="ATPATPREL-5"/>
 			<column name="RELATED_ATP_ID" value="testDeleteAtpId2"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATPATP_RELTN">
+			<column name="ATP_ID" value="AcademicCalendar20102011"/>
+			<column name="ATP_RELTN_TYPE_ID" value="kuali.atp.atp.relation.includes"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.atp.relation.state.active"/>
+			<column name="EFF_DT" valueDate="2011-01-01T00:00:00"/>
+			<column name="EXPIR_DT" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="AcademicCalendar20102011Spring2011"/>
+			<column name="RELATED_ATP_ID" value="Spring2011"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATPATP_RELTN">

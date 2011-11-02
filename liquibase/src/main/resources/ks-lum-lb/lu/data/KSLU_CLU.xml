@@ -25621,7 +25621,7 @@
 			<column name="ST" value="Active"/>
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="UPDATETIME" valueDate="2010-12-10T17:21:26"/>
-			<column name="VER_IND_ID" value="cfff5b07-4dd4-4ad8-8295-1bed0bd6648e"/>
+			<column name="VER_IND_ID" value="REFERENCECOURSEGEOG100"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSLU_CLU">
@@ -25631,7 +25631,7 @@
 			<column name="CLU_INTSTY_QTY" value="1"/>
 			<column name="CLU_INTSTY_TYPE" value="kuali.atp.duration.week"/>
 			<column name="CREATETIME" valueDate="2010-12-10T17:21:26"/>
-			<column name="CURR_VER_END" valueDate="2010-12-14T09:51:06"/>
+			<column name="CURR_VER_END" valueDate="2012-12-19T16:42:26"/>
 			<column name="CURR_VER_START" valueDate="2010-12-10T17:21:26"/>
 			<column name="DEF_ENRL_EST" value="0"/>
 			<column name="DEF_MAX_ENRL" value="0"/>
@@ -25651,7 +25651,7 @@
 			<column name="TM_QUANTITY" value="1"/>
 			<column name="UPDATEID" value="admin"/>
 			<column name="UPDATETIME" valueDate="2010-12-14T09:51:06"/>
-			<column name="VER_IND_ID" value="3ab0eb0e-1dd4-4888-ba96-3a94595c11cc"/>
+			<column name="VER_IND_ID" value="REFERENCECOURSEGEOG123"/>
 			<column name="VER_NBR" value="2"/>
 		</insert>
 		<insert tableName="KSLU_CLU">

@@ -63,3 +63,4 @@ lui/ks-enroll-lui-create:KSEN_LUI_IDENT_ATTR
 lui/ks-enroll-lui-create:KSEN_LUI_LUCD
 lui/ks-enroll-lui-create:KSEN_LUI_LUCD_ATTR
 lui/ks-enroll-lui-create:KSEN_LUI_MTG_SCHE
+lui/ks-enroll-lui-create:KSEN_LUI_RV_GRP_RELTN

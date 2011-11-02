@@ -1,6 +1,66 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_LPR_ROSTER_ENTRY-initial-data" author="alubbers">
 		<insert tableName="KSEN_LPR_ROSTER_ENTRY">
+			<column name="CREATEID" value="frank"/>
+			<column name="CREATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011GRADINGROSTERENTRYFRANK"/>
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011GRADINGROSTER"/>
+			<column name="LPR_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011FRANK"/>
+			<column name="OBJ_ID" value="72760860-fe7d-11e0-be50-0800200c9a66"/>
+			<column name="POSITION" value="1"/>
+			<column name="RELATION_STATE_ID" value="kuali.roster.entry.state.active"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.roster.entry.type.automatic"/>
+			<column name="UPDATEID" value="frank"/>
+			<column name="UPDATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER_ENTRY">
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTERENTRYEARL"/>
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTER"/>
+			<column name="LPR_ID" value="REFERENCECOURSEOFFERINGGEOG201EARL"/>
+			<column name="OBJ_ID" value="141d7b70-fd12-11e0-be50-0800200c9a66"/>
+			<column name="POSITION" value="1"/>
+			<column name="RELATION_STATE_ID" value="kuali.roster.entry.state.active"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.roster.entry.type.automatic"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER_ENTRY">
+			<column name="CREATEID" value="edna"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTERENTRYEDNA"/>
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTER"/>
+			<column name="LPR_ID" value="REFERENCECOURSEOFFERINGGEOG201EDNA"/>
+			<column name="OBJ_ID" value="b422b640-fd11-11e0-be50-0800200c9a66"/>
+			<column name="POSITION" value="1"/>
+			<column name="RELATION_STATE_ID" value="kuali.roster.entry.state.active"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.roster.entry.type.automatic"/>
+			<column name="UPDATEID" value="edna"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER_ENTRY">
+			<column name="CREATEID" value="eric"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTERENTRYERIC"/>
+			<column name="LPRROSTER_ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTER"/>
+			<column name="LPR_ID" value="REFERENCECOURSEOFFERINGGEOG201ERIC"/>
+			<column name="OBJ_ID" value="f6792110-fcf7-11e0-be50-0800200c9a66"/>
+			<column name="POSITION" value="1"/>
+			<column name="RELATION_STATE_ID" value="kuali.roster.entry.state.active"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.roster.entry.type.automatic"/>
+			<column name="UPDATEID" value="eric"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER_ENTRY">
 			<column name="ID" value="lprRosterEntry1"/>
 			<column name="LPRROSTER_ID" value="testLprRoster1"/>
 			<column name="LPR_ID" value="instructor1"/>

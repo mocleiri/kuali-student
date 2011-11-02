@@ -1362,7 +1362,7 @@
 			<column name="ID" value="8d003377-bc45-4afc-9092-e91890d54ddb"/>
 			<column name="OBJ_ID" value="f8dd44e2-5b18-47a8-a7fd-067841c6c126"/>
 			<column name="REQ_COM_FIELD_TYPE" value="kuali.reqComponent.field.type.course.clu.id"/>
-			<column name="VALUE" value="8df91968-9e50-4790-859c-996827130c8c"/>
+			<column name="VALUE" value="REFERENCECOURSEGEOG123"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_FIELD">
@@ -2223,7 +2223,7 @@
 			<column name="ID" value="e3c0c6a4-76e0-49bd-bf36-ebe4dd5db01e"/>
 			<column name="OBJ_ID" value="d2b61e2f-9d57-427b-9328-258ae1302479"/>
 			<column name="REQ_COM_FIELD_TYPE" value="kuali.reqComponent.field.type.course.clu.id"/>
-			<column name="VALUE" value="e011e055-0427-4581-9811-fa65c76baff8"/>
+			<column name="VALUE" value="REFERENCECOURSEGEOG100"/>
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSST_REQ_COM_FIELD">

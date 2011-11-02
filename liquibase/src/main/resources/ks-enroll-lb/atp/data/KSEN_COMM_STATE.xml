@@ -204,6 +204,13 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_COMM_STATE">
+			<column name="DESCR" value="The result (grade) has been deleted"/>
+			<column name="ID" value="kuali.lrr.state.deleted"/>
+			<column name="NAME" value="Deleted"/>
+			<column name="PROCESS_KEY" value="kuali.lrr.course.final.grading.lifecycle"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_COMM_STATE">
 			<column name="DESCR" value="The result (grade) has been entered and has been saved but not yet been submitted"/>
 			<column name="ID" value="kuali.lrr.state.saved"/>
 			<column name="NAME" value="Saved"/>

@@ -1,6 +1,466 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_LPR-initial-data" author="alubbers">
 		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY1INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY1"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB13"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY2INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY2"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB22"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY3INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY3"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB26"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB9"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="frank"/>
+			<column name="CREATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY1FRANK"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY1"/>
+			<column name="OBJ_ID" value="7fd10fa2-fe6e-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="frank"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="frank"/>
+			<column name="UPDATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY1INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY1"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631613"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="frank"/>
+			<column name="CREATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY2FRANK"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY2"/>
+			<column name="OBJ_ID" value="7fd10fa3-fe6e-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="frank"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="frank"/>
+			<column name="UPDATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY2INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY2"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631622"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY3INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY3"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631626"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="frank"/>
+			<column name="CREATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011FRANK"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+			<column name="OBJ_ID" value="7fd10fa1-fe6e-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="frank"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="frank"/>
+			<column name="UPDATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF63169"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="frank"/>
+			<column name="CREATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011REGGROUP1FRANK"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011REGGROUP1"/>
+			<column name="OBJ_ID" value="7fd10fa0-fe6e-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="frank"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="frank"/>
+			<column name="UPDATETIME" valueDate="2010-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY1INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY1"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43113"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY2INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY2"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43122"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY3INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY3"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43126"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG123"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD4319"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY1INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY1"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257013"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY2INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY2"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257022"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY3INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY3"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257026"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG130"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D25709"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1EARL"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1"/>
+			<column name="OBJ_ID" value="ff8b5e72-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="earl"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="edna"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1EDNA"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1"/>
+			<column name="OBJ_ID" value="903ca602-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="edna"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="edna"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="eric"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1ERIC"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1"/>
+			<column name="OBJ_ID" value="4cf06722-fcf7-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="eric"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19513"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2EARL"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2"/>
+			<column name="OBJ_ID" value="ff8b5e73-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="earl"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="edna"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2EDNA"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2"/>
+			<column name="OBJ_ID" value="903ca603-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="edna"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="edna"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="eric"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2ERIC"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2"/>
+			<column name="OBJ_ID" value="4cf06723-fcf7-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="eric"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19522"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY3INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY3"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19526"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201EARL"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="OBJ_ID" value="ff8b5e70-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="earl"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="edna"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201EDNA"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="OBJ_ID" value="903ca600-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="edna"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="edna"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="eric"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201ERIC"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="OBJ_ID" value="4cf06720-fcf7-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="eric"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201INSTRUCTOR"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC1959"/>
+			<column name="PERSONID" value="fran"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.assigned"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.instructor.main"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="earl"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1EARL"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1"/>
+			<column name="OBJ_ID" value="ff8b5e71-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="earl"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="earl"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="edna"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1EDNA"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1"/>
+			<column name="OBJ_ID" value="903ca601-fd11-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="edna"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="edna"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
+			<column name="COMMITMENTPERCENT" value="1"/>
+			<column name="CREATEID" value="eric"/>
+			<column name="CREATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="EFFECTIVEDATE" valueDate="2000-01-01T00:00:00"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1ERIC"/>
+			<column name="LUIID" value="REFERENCECOURSEOFFERINGGEOG201REGGROUP1"/>
+			<column name="OBJ_ID" value="4cf06721-fcf7-11e0-be50-0800200c9a66"/>
+			<column name="PERSONID" value="eric"/>
+			<column name="RELATION_STATE_ID" value="kuali.lpr.state.registered"/>
+			<column name="RELATION_TYPE_ID" value="kuali.lpr.type.registrant"/>
+			<column name="UPDATEID" value="eric"/>
+			<column name="UPDATETIME" valueDate="2011-06-18T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR">
 			<column name="COMMITMENTPERCENT" value="1"/>
 			<column name="CREATEID" value="admin"/>
 			<column name="CREATETIME" valueDate="2012-06-18T00:00:00"/>

@@ -43,6 +43,12 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_LPR_TYPE">
+			<column name="NAME" value="Drop"/>
+			<column name="TYPE_DESC" value="Drop Type for lpr transactions"/>
+			<column name="TYPE_KEY" value="kuali.lpr.trans.item.type.drop"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_TYPE">
 			<column name="NAME" value="Student registrant"/>
 			<column name="TYPE_DESC" value="Student registrant"/>
 			<column name="TYPE_KEY" value="kuali.lpr.trans.registrant"/>

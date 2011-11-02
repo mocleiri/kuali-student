@@ -1,6 +1,26 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_ATP-initial-data" author="alubbers">
 		<insert tableName="KSEN_ATP">
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
+			<column name="ATP_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
+			<column name="END_DT" valueDate="2011-08-31T00:00:00"/>
+			<column name="ID" value="AcademicCalendar20102011"/>
+			<column name="NAME" value="2010-2011 Academic Year"/>
+			<column name="RT_DESCR_ID" value="AcademicCalendar20102011"/>
+			<column name="START_DT" valueDate="2010-09-01T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP">
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
+			<column name="ATP_TYPE_ID" value="kuali.atp.type.Spring"/>
+			<column name="END_DT" valueDate="2011-06-08T00:00:00"/>
+			<column name="ID" value="Spring2011"/>
+			<column name="NAME" value="Spring 2011"/>
+			<column name="RT_DESCR_ID" value="Spring2011"/>
+			<column name="START_DT" valueDate="2011-03-26T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP">
 			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
 			<column name="END_DT" valueDate="2001-06-01T00:00:00"/>
@@ -91,7 +111,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
-			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.AcademicCalendar"/>
 			<column name="END_DT" valueDate="2012-09-08T00:00:00"/>
 			<column name="ID" value="testAtpId1"/>
@@ -131,7 +151,17 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
-			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
+			<column name="ATP_TYPE_ID" value="kuali.atp.type.Fall"/>
+			<column name="END_DT" valueDate="2010-12-16T00:00:00"/>
+			<column name="ID" value="testTermId0"/>
+			<column name="NAME" value="Fall 2010"/>
+			<column name="RT_DESCR_ID" value="RICHTEXT-201"/>
+			<column name="START_DT" valueDate="2010-09-15T00:00:00"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_ATP">
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Fall"/>
 			<column name="END_DT" valueDate="2011-12-16T00:00:00"/>
 			<column name="ID" value="testTermId1"/>
@@ -141,7 +171,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
-			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Winter"/>
 			<column name="END_DT" valueDate="2012-03-16T00:00:00"/>
 			<column name="ID" value="testTermId2"/>
@@ -151,7 +181,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
-			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Spring"/>
 			<column name="END_DT" valueDate="2012-06-08T00:00:00"/>
 			<column name="ID" value="testTermId3"/>
@@ -161,7 +191,7 @@
 			<column name="VER_NBR" value="0"/>
 		</insert>
 		<insert tableName="KSEN_ATP">
-			<column name="ATP_STATE_ID" value="kuali.atp.state.Draft"/>
+			<column name="ATP_STATE_ID" value="kuali.atp.state.Official"/>
 			<column name="ATP_TYPE_ID" value="kuali.atp.type.Summer"/>
 			<column name="END_DT" valueDate="2012-08-17T00:00:00"/>
 			<column name="ID" value="testTermId4"/>

@@ -1,6 +1,61 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KSEN_LPR_ROSTER-initial-data" author="alubbers">
 		<insert tableName="KSEN_LPR_ROSTER">
+			<column name="CHECK_IN_REQ" value="0"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100GRADINGROSTER"/>
+			<column name="MAX_CAPACITY" value="60"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB5"/>
+			<column name="STATE_ID" value="kuali.lpr.roster.state.ready"/>
+			<column name="TYPE_ID" value="kuali.lpr.roster.type.course.grade.final"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER">
+			<column name="CHECK_IN_REQ" value="0"/>
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011GRADINGROSTER"/>
+			<column name="MAX_CAPACITY" value="60"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF63165"/>
+			<column name="STATE_ID" value="kuali.lpr.roster.state.ready"/>
+			<column name="TYPE_ID" value="kuali.lpr.roster.type.course.grade.final"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER">
+			<column name="CHECK_IN_REQ" value="0"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123GRADINGROSTER"/>
+			<column name="MAX_CAPACITY" value="50"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD4315"/>
+			<column name="STATE_ID" value="kuali.lpr.roster.state.ready"/>
+			<column name="TYPE_ID" value="kuali.lpr.roster.type.course.grade.final"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER">
+			<column name="CHECK_IN_REQ" value="0"/>
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130GRADINGROSTER"/>
+			<column name="MAX_CAPACITY" value="50"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D25705"/>
+			<column name="STATE_ID" value="kuali.lpr.roster.state.ready"/>
+			<column name="TYPE_ID" value="kuali.lpr.roster.type.course.grade.final"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER">
+			<column name="CHECK_IN_REQ" value="0"/>
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201GRADINGROSTER"/>
+			<column name="MAX_CAPACITY" value="80"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC1955"/>
+			<column name="STATE_ID" value="kuali.lpr.roster.state.ready"/>
+			<column name="TYPE_ID" value="kuali.lpr.roster.type.course.grade.final"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LPR_ROSTER">
 			<column name="ATP_DUR_TYP_KEY" value="testTermId1"/>
 			<column name="CHECK_IN_REQ" value="0"/>
 			<column name="ID" value="testLprRoster1"/>
@@ -9,6 +64,7 @@
 			<column name="RT_DESCR_ID" value="RICHTEXT-TRT-9"/>
 			<column name="STATE_ID" value="kuali.lpr.roster.state.ready"/>
 			<column name="TYPE_ID" value="kuali.lpr.roster.type.course.grade.final"/>
+			<column name="VER_NBR" value="1"/>
 		</insert>
 	</changeSet>
 </databaseChangeLog>

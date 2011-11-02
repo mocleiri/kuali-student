@@ -232,5 +232,13 @@
 		</createTable>
 	</changeSet>
 	
+	<changeSet author="alubbers" id="KSEN_LUI_RV_GRP_RELTN-create">
+		<createTable tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" type="java.sql.Types.VARCHAR(255)"/>
+			<column name="LUI_ID" type="java.sql.Types.VARCHAR(255)"/>
+			<column name="RV_GRP_ID" type="java.sql.Types.VARCHAR(255)"/>
+		</createTable>
+	</changeSet>
+	
 	
 </databaseChangeLog>
