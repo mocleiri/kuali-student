@@ -1,15 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>ks-sample</artifactId>
-  <packaging>war</packaging>
-  <name>Kuali Student Sample Config</name>
+  <artifactId>ks-myschool</artifactId> 
+  <name>My School Config</name>
+  <packaging>war</packaging>  
   <description>Contains all KS modules and Rice</description>
   <parent>
     <groupId>org.kuali.student</groupId>
 	<artifactId>student</artifactId>
     <version>1.2</version>
   </parent>
+
   <properties>
     <ks.gwt.module.org>org.kuali.student.core.organization.ui.OrgEntry</ks.gwt.module.org>
     <ks.gwt.module.lum>edu.kuali.config.lum.lu.ui.SampleLUMMain</ks.gwt.module.lum>
