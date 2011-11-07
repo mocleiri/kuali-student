@@ -18,10 +18,7 @@ package edu.kuali.config.lum.lu.ui.client.theme;
 import org.kuali.student.lum.ui.theme.standard.client.LumClientBundle;
 
 import com.google.gwt.core.client.GWT;
-
-import com.google.gwt.resources.client.ClientBundleWithLookup;
 import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.resources.client.ImageResource;
 
 public interface SampleClientBundle extends LumClientBundle{
 
