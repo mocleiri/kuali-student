@@ -17,10 +17,8 @@ package edu.kuali.config.lum.lu.ui.client.theme;
 
 import org.kuali.student.lum.lu.ui.main.client.theme.LumCss;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ResourcePrototype;
-import com.google.gwt.user.client.Window;
 
 public class SampleCssImpl implements LumCss{
 
