@@ -90,7 +90,7 @@
     <import resource="classpath:ksb/ks-lu-context.xml"/>   
     <!-- TODO: RICE-M7 UPGRADE fix ks-admin
     <import resource="classpath:ks-embedded-admin-context.xml"/-->
-    
+
     <import resource="classpath:MyPlanSpringBeans.xml"/>
-	
+
 </beans>
