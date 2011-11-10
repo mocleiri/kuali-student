@@ -505,6 +505,9 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         if (isContainsButNotEndsWith(commonPrefix, "/apidocs/")) {
             return true;
         }
+        if (isContainsButNotEndsWith(commonPrefix, "/testapidocs/")) {
+            return true;
+        }
         if (isContainsButNotEndsWith(commonPrefix, "/xref/")) {
             return true;
         }
