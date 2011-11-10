@@ -174,7 +174,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             getLog().info("Updating indexes @ - " + getPrefix());
             getLog().info("Examining directory structure");
-            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), 0);
+            Depth depth = new Depth();
+            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), depth);
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
             ThreadHandler handler = getThreadHandler(udcs);
@@ -526,11 +527,11 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * Recurse the hierarchy of a bucket starting at "prefix" and S3PrefixContext objects corresponding to the directory
      * structure of the hierarchy
      */
-    protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, String prefix, int depth) {
+    protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, String prefix, Depth depth) {
 
         List<S3PrefixContext> list = new ArrayList<S3PrefixContext>();
 
-        if (depth > maxRecursionDepth) {
+        if (depth.getDepth() > maxRecursionDepth) {
             return list;
         }
 
@@ -539,11 +540,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
         // Recurse down the hierarchy
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
-        int depthPlusOne = depth++;
+        depth.increment();
         for (String commonPrefix : commonPrefixes) {
             getLog().info(commonPrefix + "@" + depth);
-            list.addAll(getS3PrefixContexts(context, commonPrefix, depthPlusOne));
+            list.addAll(getS3PrefixContexts(context, commonPrefix, depth));
         }
+        depth.decrement();
         return list;
     }
 
