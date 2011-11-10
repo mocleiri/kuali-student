@@ -159,6 +159,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private String browseHtml;
 
+    private int maxRecursionDepth = 3;
+
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
         try {
@@ -172,7 +174,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             getLog().info("Updating indexes @ - " + getPrefix());
             getLog().info("Examining directory structure");
-            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix());
+            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), 0);
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
             ThreadHandler handler = getThreadHandler(udcs);
@@ -524,9 +526,13 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * Recurse the hierarchy of a bucket starting at "prefix" and S3PrefixContext objects corresponding to the directory
      * structure of the hierarchy
      */
-    protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, String prefix) {
+    protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, String prefix, int depth) {
 
         List<S3PrefixContext> list = new ArrayList<S3PrefixContext>();
+
+        if (depth > maxRecursionDepth) {
+            return list;
+        }
 
         S3PrefixContext prefixContext = getS3PrefixContext(context, prefix);
         list.add(prefixContext);
@@ -538,7 +544,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
                 getLog().info("skipping: " + commonPrefix);
             } else {
                 getLog().info(commonPrefix);
-                list.addAll(getS3PrefixContexts(context, commonPrefix));
+                list.addAll(getS3PrefixContexts(context, commonPrefix, depth++));
             }
         }
         return list;
