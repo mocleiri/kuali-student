@@ -18,6 +18,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.wagon.TransferFailedException;
 import org.kuali.maven.common.UrlBuilder;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -54,6 +55,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  * @goal updateoriginbucket
  */
 public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
+    SimpleFormatter formatter = new SimpleFormatter();
 
     private static final String S3_INDEX_METADATA_KEY = "maven-cloudfront-plugin-index";
     private static final String S3_INDEX_CONTENT_TYPE = "text/html";
@@ -177,13 +179,38 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix());
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
-            for (UpdateDirectoryContext udc : udcs) {
-                updateDirectory(udc);
-            }
+            ThreadHandler handler = getThreadHandler(udcs);
+            getLog().info(getUploadStartMsg(udcs.size(), handler.getThreadCount(), handler.getRequestsPerThread()));
+            long start = System.currentTimeMillis();
+            handler.executeThreads();
             updateRoot(getS3PrefixContext(context, null));
+            long millis = System.currentTimeMillis() - start;
+            // One (or more) of the threads had an issue
+            if (handler.getException() != null) {
+                throw new TransferFailedException("Unexpected error", handler.getException());
+            }
+
+            // Show some stats
+            getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
+    }
+
+    protected String getUploadCompleteMsg(long millis, int count) {
+        String time = formatter.getTime(millis);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Updates: " + count);
+        sb.append("  Time: " + time);
+        return sb.toString();
+    }
+
+    protected String getUploadStartMsg(int updates, int threadCount, int updatesPerThread) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Updates: " + updates);
+        sb.append("  Threads: " + threadCount);
+        sb.append("  Updates Per Thread: " + updatesPerThread);
+        return sb.toString();
     }
 
     protected int getRequestsPerThread(int threads, int requests) {
@@ -223,6 +250,10 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             UpdateDirectoryThreadContext context = new UpdateDirectoryThreadContext();
             context.setContexts(contexts);
             context.setTracker(handler.getTracker());
+            context.setOffset(offset);
+            context.setLength(length);
+            context.setUpdater(this);
+            context.setHandler(handler);
             int id = i + 1;
             context.setId(id);
             Runnable runnable = new UpdateDirectoryThread(context);
@@ -392,12 +423,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             String sourceKey = context.getDefaultObjectKey();
             String destKey = copyToKey;
             CopyObjectRequest request = getCopyObjectRequest(bucket, sourceKey, destKey);
-            getLog().info("Copy: " + sourceKey + " to " + destKey);
+            getLog().debug("Copy: " + sourceKey + " to " + destKey);
             client.copyObject(request);
         } else {
             // Upload our custom content
             PutObjectRequest request = getPutIndexObjectRequest(context.getHtml(), copyToKey);
-            getLog().info("Put: " + copyToKey);
+            getLog().debug("Put: " + copyToKey);
             client.putObject(request);
         }
     }
