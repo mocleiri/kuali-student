@@ -494,17 +494,24 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return prefixContext;
     }
 
+    protected boolean isContainsButNotEndsWith(String s, String pattern) {
+        if (!s.contains(pattern)) {
+            return false;
+        }
+        return s.endsWith(pattern);
+    }
+
     protected boolean isSkip(String commonPrefix) {
-        if (commonPrefix.contains("/apidocs/")) {
+        if (isContainsButNotEndsWith(commonPrefix, "/apidocs/")) {
             return true;
         }
-        if (commonPrefix.contains("/xref/")) {
+        if (isContainsButNotEndsWith(commonPrefix, "/xref/")) {
             return true;
         }
-        if (commonPrefix.contains("/xref-test/")) {
+        if (isContainsButNotEndsWith(commonPrefix, "/xref-test/")) {
             return true;
         }
-        if (commonPrefix.contains("/src-html/")) {
+        if (isContainsButNotEndsWith(commonPrefix, "/src-html/")) {
             return true;
         }
         return false;
