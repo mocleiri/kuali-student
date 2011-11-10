@@ -53,12 +53,19 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  *
  * @goal updateoriginbucket
  */
-public class UpdateOriginBucketMojo extends S3Mojo {
+public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     private static final String S3_INDEX_METADATA_KEY = "maven-cloudfront-plugin-index";
     private static final String S3_INDEX_CONTENT_TYPE = "text/html";
     CloudFrontHtmlGenerator generator;
     S3DataConverter converter;
+
+    /**
+     * The groupId for the organization
+     *
+     * @parameter expression="${cloudfront.threadCount}" default-value="10"
+     */
+    private int threadCount;
 
     /**
      * The groupId for the organization
@@ -177,6 +184,53 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
+    }
+
+    protected int getRequestsPerThread(int threads, int requests) {
+        int requestsPerThread = requests / threads;
+        while (requestsPerThread * threads < requests) {
+            requestsPerThread++;
+        }
+        return requestsPerThread;
+    }
+
+    protected ThreadHandler getThreadHandler(List<UpdateDirectoryContext> contexts) {
+        int updateCounts = contexts.size();
+        int actualThreadCount = threadCount > updateCounts ? updateCounts : threadCount;
+        int requestsPerThread = getRequestsPerThread(actualThreadCount, contexts.size());
+        ThreadHandler handler = new ThreadHandler();
+        handler.setThreadCount(actualThreadCount);
+        handler.setRequestsPerThread(requestsPerThread);
+        ProgressTracker tracker = new PercentCompleteTracker();
+        tracker.setTotal(contexts.size());
+        handler.setTracker(tracker);
+        ThreadGroup group = new ThreadGroup("S3 Index Updaters");
+        group.setDaemon(true);
+        handler.setGroup(group);
+        Thread[] threads = getThreads(handler, contexts);
+        handler.setThreads(threads);
+        return handler;
+    }
+
+    protected Thread[] getThreads(ThreadHandler handler, List<UpdateDirectoryContext> contexts) {
+        Thread[] threads = new Thread[handler.getThreadCount()];
+        for (int i = 0; i < threads.length; i++) {
+            int offset = i * handler.getRequestsPerThread();
+            int length = handler.getRequestsPerThread();
+            if (offset + length > contexts.size()) {
+                length = contexts.size() - offset;
+            }
+            UpdateDirectoryThreadContext context = new UpdateDirectoryThreadContext();
+            context.setContexts(contexts);
+            context.setTracker(handler.getTracker());
+            int id = i + 1;
+            context.setId(id);
+            Runnable runnable = new UpdateDirectoryThread(context);
+            threads[i] = new Thread(handler.getGroup(), runnable, "S3-" + id);
+            threads[i].setUncaughtExceptionHandler(handler);
+            threads[i].setDaemon(true);
+        }
+        return threads;
     }
 
     protected List<UpdateDirectoryContext> getUpdateDirContexts(List<S3PrefixContext> contexts) {
@@ -316,6 +370,7 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         }
     }
 
+    @Override
     public void updateDirectory(UpdateDirectoryContext context) throws IOException {
         updateDirectory(context.getContext(), context.isCopyIfExists(), context.getCopyToKey());
     }
@@ -620,6 +675,14 @@ public class UpdateOriginBucketMojo extends S3Mojo {
 
     public void setUpdateChildModules(boolean updateChildModules) {
         this.updateChildModules = updateChildModules;
+    }
+
+    public int getThreadCount() {
+        return threadCount;
+    }
+
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
     }
 
 }
