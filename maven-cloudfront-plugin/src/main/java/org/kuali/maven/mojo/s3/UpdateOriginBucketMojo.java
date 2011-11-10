@@ -178,7 +178,9 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             getLog().info("Updating indexes @ - " + getPrefix());
             getLog().info("Examining directory structure");
             long startTime = System.currentTimeMillis();
+            System.out.print("[INFO] ");
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
+            System.out.println();
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
             ThreadHandler handler = getThreadHandler(udcs);
@@ -546,7 +548,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         depth.increment();
         for (String commonPrefix : commonPrefixes) {
-            getLog().info(commonPrefix + " @ " + depth.getDepth());
+            System.out.print(".");
+            getLog().debug(commonPrefix + " @ " + depth.getDepth());
             list.addAll(getS3PrefixContexts(context, commonPrefix, depth));
         }
         depth.decrement();
