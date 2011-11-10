@@ -171,6 +171,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
                 return;
             }
             getLog().info("Updating indexes @ - " + getPrefix());
+            getLog().info("Examining directory structure");
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix());
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
@@ -507,6 +508,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         // Recurse down the hierarchy
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         for (String commonPrefix : commonPrefixes) {
+            getLog().info(commonPrefix);
             list.addAll(getS3PrefixContexts(context, commonPrefix));
         }
         return list;
