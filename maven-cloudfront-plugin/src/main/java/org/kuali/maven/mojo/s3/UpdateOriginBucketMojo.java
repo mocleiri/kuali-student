@@ -176,9 +176,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
                 return;
             }
             getLog().info("Updating indexes @ - " + getPrefix());
-            getLog().info("Examining directory structure");
+            System.out.print("[INFO] Examining directory structure ");
             long startTime = System.currentTimeMillis();
-            System.out.print("[INFO] ");
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
             System.out.println();
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
