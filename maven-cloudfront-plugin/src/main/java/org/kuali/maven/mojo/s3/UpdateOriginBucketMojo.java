@@ -177,8 +177,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             getLog().info("Updating indexes @ - " + getPrefix());
             getLog().info("Examining directory structure");
-            Depth depth = new Depth();
-            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), depth);
+            long startTime = System.currentTimeMillis();
+            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
             ThreadHandler handler = getThreadHandler(udcs);
@@ -193,6 +193,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
             // Show some stats
             getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
+            getLog().info("Total time: " + formatter.getTime(System.currentTimeMillis() - startTime));
             updateRoot(getS3PrefixContext(context, null));
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
