@@ -159,7 +159,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private String browseHtml;
 
-    private int maxRecursionDepth = 3;
+    private int maxRecursionDepth = 5;
 
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
@@ -542,7 +542,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         depth.increment();
         for (String commonPrefix : commonPrefixes) {
-            getLog().info(commonPrefix + "@" + depth.getDepth());
+            getLog().info("Depth=" + depth.getDepth() + " " + commonPrefix);
             list.addAll(getS3PrefixContexts(context, commonPrefix, depth));
         }
         depth.decrement();
