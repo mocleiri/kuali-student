@@ -494,6 +494,22 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return prefixContext;
     }
 
+    protected boolean isSkip(String commonPrefix) {
+        if (commonPrefix.contains("/apidocs/")) {
+            return true;
+        }
+        if (commonPrefix.contains("/xref/")) {
+            return true;
+        }
+        if (commonPrefix.contains("/xref-test/")) {
+            return true;
+        }
+        if (commonPrefix.contains("/src-html/")) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Recurse the hierarchy of a bucket starting at "prefix" and S3PrefixContext objects corresponding to the directory
      * structure of the hierarchy
@@ -508,10 +524,10 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         // Recurse down the hierarchy
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         for (String commonPrefix : commonPrefixes) {
-            getLog().info(commonPrefix);
-            if (commonPrefix.contains("/apidocs/")) {
+            if (isSkip(commonPrefix)) {
                 getLog().info("skipping: " + commonPrefix);
             } else {
+                getLog().info(commonPrefix);
                 list.addAll(getS3PrefixContexts(context, commonPrefix));
             }
         }
