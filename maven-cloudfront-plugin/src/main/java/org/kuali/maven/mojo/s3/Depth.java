@@ -11,7 +11,7 @@ public class Depth {
         depth--;
     }
 
-    public int getDepth() {
+    public int getValue() {
         return depth;
     }
 
