@@ -93,11 +93,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     private boolean recurse;
 
     /**
-     * @parameter expression="${updateChildModules}" default-value="false"
-     */
-    private boolean updateChildModules;
-
-    /**
      * If true, "foo/bar/index.html" will get copied to "foo/bar/"
      *
      * @parameter expression="${copyDefaultObjectWithDelimiter}" default-value="true"
@@ -512,12 +507,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         // Recurse down the hierarchy
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         for (String commonPrefix : commonPrefixes) {
-            if (isChildModule(commonPrefix) && !isUpdateChildModules()) {
-                getLog().info("Skipping " + commonPrefix);
-                continue;
-            } else {
-                list.addAll(getS3PrefixContexts(context, commonPrefix));
-            }
+            list.addAll(getS3PrefixContexts(context, commonPrefix));
         }
         return list;
     }
@@ -698,14 +688,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     public void setOrganizationGroupId(final String organizationGroupId) {
         this.organizationGroupId = organizationGroupId;
-    }
-
-    public boolean isUpdateChildModules() {
-        return updateChildModules;
-    }
-
-    public void setUpdateChildModules(boolean updateChildModules) {
-        this.updateChildModules = updateChildModules;
     }
 
     public int getThreadCount() {
