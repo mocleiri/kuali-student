@@ -159,7 +159,10 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private String browseHtml;
 
-    private int maxRecursionDepth = 5;
+    /**
+     * @parameter expression="${cloudfront.maxUpdateDepth}" default-value="1";
+     */
+    private int maxUpdateDepth;
 
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
@@ -534,7 +537,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         S3PrefixContext prefixContext = getS3PrefixContext(context, prefix);
         list.add(prefixContext);
 
-        if (depth.getDepth() == maxRecursionDepth) {
+        if (depth.getDepth() == maxUpdateDepth) {
             return list;
         }
 
@@ -733,6 +736,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     public void setThreadCount(int threadCount) {
         this.threadCount = threadCount;
+    }
+
+    public int getMaxUpdateDepth() {
+        return maxUpdateDepth;
+    }
+
+    public void setMaxUpdateDepth(int maxUpdateDepth) {
+        this.maxUpdateDepth = maxUpdateDepth;
     }
 
 }
