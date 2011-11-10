@@ -183,7 +183,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             getLog().info(getUploadStartMsg(udcs.size(), handler.getThreadCount(), handler.getRequestsPerThread()));
             long start = System.currentTimeMillis();
             handler.executeThreads();
-            updateRoot(getS3PrefixContext(context, null));
             long millis = System.currentTimeMillis() - start;
             // One (or more) of the threads had an issue
             if (handler.getException() != null) {
@@ -192,6 +191,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
             // Show some stats
             getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
+            updateRoot(getS3PrefixContext(context, null));
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
