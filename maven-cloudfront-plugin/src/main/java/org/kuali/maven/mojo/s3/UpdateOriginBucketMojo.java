@@ -534,14 +534,13 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         S3PrefixContext prefixContext = getS3PrefixContext(context, prefix);
         list.add(prefixContext);
 
-        depth.increment();
-        if (depth.getDepth() > maxRecursionDepth) {
+        if (depth.getDepth() == maxRecursionDepth) {
             return list;
         }
 
-
         // Recurse down the hierarchy
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
+        depth.increment();
         for (String commonPrefix : commonPrefixes) {
             getLog().info(commonPrefix + "@" + depth.getDepth());
             list.addAll(getS3PrefixContexts(context, commonPrefix, depth));
