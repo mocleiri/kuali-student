@@ -509,7 +509,11 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         for (String commonPrefix : commonPrefixes) {
             getLog().info(commonPrefix);
-            list.addAll(getS3PrefixContexts(context, commonPrefix));
+            if (commonPrefix.contains("/apidocs/")) {
+                getLog().info("skipping: " + commonPrefix);
+            } else {
+                list.addAll(getS3PrefixContexts(context, commonPrefix));
+            }
         }
         return list;
     }
