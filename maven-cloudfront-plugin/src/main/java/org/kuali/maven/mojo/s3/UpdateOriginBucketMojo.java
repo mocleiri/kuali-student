@@ -78,9 +78,20 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     private int threads;
 
     /**
-     * The groupId for the organization
+     * The portion of the groupId implied by the hostname where content is published.
      *
-     * @parameter expression="${cloudfront.organizationGroupId}" default-value="org.kuali"
+     * For example, all of the groupId's for Kuali Foundation begin with "org.kuali" and the hostname where content gets
+     * published is "site.kuali.org". The base url for accessing the web content of a Kuali Foundation project is the
+     * groupId minus the portion implied by the hostname.
+     *
+     * For example, the Kuali Rice project has the groupId "org.kuali.rice" and content for the Kuali Rice project is
+     * published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is inferred from the hostname
+     * "site.kuali.org" and is thus removed when calculating the publish url in order to keep things a little more
+     * compact.
+     *
+     * If not supplied, the complete groupId is used.
+     *
+     * @parameter expression="${cloudfront.organizationGroupId}"
      */
     private String organizationGroupId;
 
