@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     private static final Timer TIMER = new Timer();
 
-
     /**
      * The number of threads to use when updating indexes
      *
@@ -82,16 +82,17 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     private int threads;
 
     /**
-     * The portion of the groupId implied by the hostname where content is published.
+     * The portion of the groupId that is implied by the hostname where content is published.
      *
-     * For example, all of the groupId's for Kuali Foundation begin with "org.kuali" and the hostname where content gets
-     * published is "site.kuali.org". The base url for accessing the web content of a Kuali Foundation project is the
-     * groupId minus the portion implied by the hostname.
+     * For example, all of the groupId's for Kuali Foundation begin with "org.kuali". The hostname where all Maven
+     * generated site content gets published is "site.kuali.org".
      *
-     * For example, the Kuali Rice project has the groupId "org.kuali.rice" and content for the Kuali Rice project is
-     * published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is inferred from the hostname
-     * "site.kuali.org" and is thus removed when calculating the url for publishing in order to keep things a little
-     * more compact.
+     * The base url for accessing the Maven generated web content for a Kuali Foundation project is the hostname plus
+     * the non-redundant portion of the groupId.
+     *
+     * For example, the Kuali Rice project has the groupId "org.kuali.rice". Content for the Kuali Rice project is
+     * published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname
+     * "site.kuali.org" and is thus removed when calculating the url in order to keep things a little more compact.
      *
      * If this parameter is not supplied, the complete groupId is used.
      *
@@ -207,19 +208,26 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private Integer maxKeys;
 
-    protected List<String> getPrefixes(S3BucketContext context) {
+    protected List<String> getPrefixes(ObjectListing listing, String prefix, String delimiter) {
+        List<String> commonPrefixes = listing.getCommonPrefixes();
+        List<String> pathPrefixes = getPathPrefixes(delimiter, prefix);
+        List<String> prefixes = new ArrayList<String>();
+        prefixes.addAll(commonPrefixes);
+        prefixes.addAll(pathPrefixes);
+        Collections.sort(prefixes);
+        return prefixes;
 
-        String bucket = context.getBucket();
+    }
+
+    protected ObjectListing getObjectListing(S3BucketContext context, ListObjectsRequest request) {
         String prefix = getPrefix();
+        String bucket = context.getBucket();
         String delimiter = context.getDelimiter();
-        AmazonS3Client client = context.getClient();
         Integer maxKeys = context.getMaxKeys();
-
-        ListObjectsRequest request = new ListObjectsRequest(bucket, prefix, null, delimiter, maxKeys);
 
         // This is the file system equivalent of typing "ls" in a directory
         long start = System.currentTimeMillis();
-        ObjectListing listing = client.listObjects(request);
+        ObjectListing listing = context.getClient().listObjects(request);
         long millis = System.currentTimeMillis() - start;
         TIMER.addMillis(millis);
         getLog().info(getListMsg(millis));
@@ -228,17 +236,24 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         if (listing.isTruncated()) {
             throw new AmazonServiceException("The listing for " + bucket + delimiter + prefix + " exceeded " + maxKeys);
         }
+        return listing;
+    }
 
-        List<String> commonPrefixes = listing.getCommonPrefixes();
-        List<String> upPrefixes = getPrefixesGoingUp(delimiter, prefix);
-        for (String upPrefix : upPrefixes) {
-            getLog().info(upPrefix);
+    protected List<ListObjectsRequest> getListObjectsRequests(S3BucketContext context, List<String> prefixes) {
+        List<ListObjectsRequest> requests = new ArrayList<ListObjectsRequest>();
+        for (String prefix : prefixes) {
+            ListObjectsRequest request = getListObjectsRequest(context, prefix);
+            requests.add(request);
         }
+        return requests;
+    }
 
-        List<String> prefixes = new ArrayList<String>();
-        prefixes.addAll(commonPrefixes);
-        return prefixes;
-
+    protected ListObjectsRequest getListObjectsRequest(S3BucketContext context, String prefix) {
+        String bucket = context.getBucket();
+        String delimiter = context.getDelimiter();
+        Integer maxKeys = context.getMaxKeys();
+        ListObjectsRequest request = new ListObjectsRequest(bucket, prefix, null, delimiter, maxKeys);
+        return request;
     }
 
     protected String getListMsg(long millis) {
@@ -262,10 +277,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             converter = new S3DataConverter(context);
             converter.setBrowseKey(getBrowseKey());
             getLog().info("Re-indexing - " + getPrefix());
-            getPrefixes(context);
-
-            // List<String> prefixes = getPrefixes(context);
-            // show(prefixes);
+            String prefix = getPrefix();
+            ListObjectsRequest request = getListObjectsRequest(context, prefix);
+            ObjectListing listing = getObjectListing(context, request);
+            List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
+            List<ListObjectsRequest> requests = getListObjectsRequests(context, prefixes);
+            show("Prefixes:", prefixes);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
@@ -367,7 +384,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return list;
     }
 
-    protected List<String> getPrefixesGoingUp(String delimiter, String startingPrefix) {
+    protected List<String> getPathPrefixes(String delimiter, String startingPrefix) {
         List<String> list = new ArrayList<String>();
 
         list.add(delimiter);
@@ -839,7 +856,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             converter.setBrowseKey(getBrowseKey());
             getLog().info("Re-indexing - " + getPrefix());
 
-            List<String> directories = getPrefixes(context);
+            // List<String> directories = getPrefixes(context);
 
             S3PrefixContext projectContext = getS3PrefixContext(context, getPrefix());
 
