@@ -219,7 +219,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         ObjectListing listing = client.listObjects(request);
 
         // If we have more than 1000 files/directories in the current directory we have an issue
-        if (listing.isTruncated()) {
+        if (!listing.isTruncated()) {
             throw new AmazonServiceException("The listing for " + bucket + delimiter + prefix + " exceeded " + maxKeys);
         }
 
