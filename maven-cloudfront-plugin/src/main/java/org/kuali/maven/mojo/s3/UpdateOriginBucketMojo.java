@@ -316,6 +316,24 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return requestsPerThread;
     }
 
+    protected ThreadHandler getObjectListingHandler(List<UpdateDirectoryContext> contexts) {
+        int updateCounts = contexts.size();
+        int actualThreadCount = threads > updateCounts ? updateCounts : threads;
+        int requestsPerThread = getRequestsPerThread(actualThreadCount, contexts.size());
+        ThreadHandler handler = new ThreadHandler();
+        handler.setThreadCount(actualThreadCount);
+        handler.setRequestsPerThread(requestsPerThread);
+        ProgressTracker tracker = new PercentCompleteTracker();
+        tracker.setTotal(contexts.size());
+        handler.setTracker(tracker);
+        ThreadGroup group = new ThreadGroup("S3 Index Updaters");
+        group.setDaemon(true);
+        handler.setGroup(group);
+        Thread[] threads = getThreads(handler, contexts);
+        handler.setThreads(threads);
+        return handler;
+    }
+
     protected ThreadHandler getThreadHandler(List<UpdateDirectoryContext> contexts) {
         int updateCounts = contexts.size();
         int actualThreadCount = threads > updateCounts ? updateCounts : threads;

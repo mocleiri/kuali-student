@@ -51,8 +51,10 @@ public class ThreadHandler implements UncaughtExceptionHandler {
         }
     }
 
+    @Override
     public synchronized void uncaughtException(Thread t, Throwable e) {
         this.stopThreads = true;
+        group.interrupt();
         this.exception = new RuntimeException("Unexpected issue in thread [" + t.getId() + ":" + t.getName() + "]", e);
     }
 
