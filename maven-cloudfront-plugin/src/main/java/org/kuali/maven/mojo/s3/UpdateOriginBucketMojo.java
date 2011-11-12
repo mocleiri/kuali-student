@@ -151,7 +151,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     private String directoryImage;
 
     /**
-     * When displaying timestamps, use this timezone
+     * When displaying the last modified timestamp, use this timezone
      *
      * @parameter expression="${cloudfront.timezone}" default-value="UTC"
      */
