@@ -190,8 +190,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
         try {
-            updateMojoState();
             getLog().info("Updating S3 bucket - " + getBucket());
+            updateMojoState();
             S3BucketContext context = getS3BucketContext();
             generator = new CloudFrontHtmlGenerator(context);
             converter = new S3DataConverter(context);
