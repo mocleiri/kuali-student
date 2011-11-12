@@ -16,7 +16,7 @@ public class ListIteratorThread<T> implements Runnable {
         int offset = context.getOffset();
         int length = context.getLength();
         List<T> list = context.getList();
-        ListElementHandler<T> handler = context.getElementHandler();
+        ElementHandler<T> handler = context.getElementHandler();
         for (int i = offset; i < offset + length; i++) {
             if (context.getThreadHandler().isStopThreads()) {
                 break;

@@ -11,7 +11,7 @@ public class ListIteratorContext<T> {
     ThreadHandler threadHandler;
     ProgressTracker tracker;
     List<T> list;
-    ListElementHandler<T> elementHandler;
+    ElementHandler<T> elementHandler;
 
     public List<T> getList() {
         return list;
@@ -61,11 +61,11 @@ public class ListIteratorContext<T> {
         this.id = id;
     }
 
-    public ListElementHandler<T> getElementHandler() {
+    public ElementHandler<T> getElementHandler() {
         return elementHandler;
     }
 
-    public void setElementHandler(ListElementHandler<T> contextHandler) {
+    public void setElementHandler(ElementHandler<T> contextHandler) {
         this.elementHandler = contextHandler;
     }
 

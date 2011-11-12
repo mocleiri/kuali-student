@@ -7,7 +7,7 @@ import org.kuali.maven.mojo.s3.UpdateOriginBucketMojo;
 
 import com.amazonaws.AmazonServiceException;
 
-public class UpdateDirectoryContextHandler implements ListElementHandler<UpdateDirectoryContext> {
+public class UpdateDirectoryContextHandler implements ElementHandler<UpdateDirectoryContext> {
 
     UpdateOriginBucketMojo mojo;
 

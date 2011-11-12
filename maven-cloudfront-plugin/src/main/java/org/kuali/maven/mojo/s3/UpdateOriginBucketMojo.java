@@ -296,9 +296,10 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             // leading back to and including the root directory
             List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
             List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
-            ListObjectsContextHandler listHandler = new ListObjectsContextHandler();
-            ThreadHandler handler = getThreadHandler2(contexts);
 
+            // Start some threads for listing the bucket contents
+            ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
+            ThreadHandler handler = getThreadHandler2(contexts);
 
             show("Prefixes:", prefixes);
 
@@ -336,20 +337,20 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return requestsPerThread;
     }
 
-    protected ThreadHandler getThreadHandler2(List<ListObjectsContext> contexts) {
-        int elementCount = contexts.size();
+    protected ThreadHandler getThreadHandler2(List<ListObjectsContext> list,) {
+        int elementCount = list.size();
         int actualThreadCount = threads > elementCount ? elementCount : threads;
-        int requestsPerThread = getRequestsPerThread(actualThreadCount, contexts.size());
+        int requestsPerThread = getRequestsPerThread(actualThreadCount, list.size());
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(actualThreadCount);
         handler.setElementsPerThread(requestsPerThread);
         ProgressTracker tracker = new PercentCompleteTracker();
-        tracker.setTotal(contexts.size());
+        tracker.setTotal(list.size());
         handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("S3 Index Updaters");
         group.setDaemon(true);
         handler.setGroup(group);
-        Thread[] threads = getListThreads(handler, contexts);
+        Thread[] threads = getListThreads(handler, list);
         handler.setThreads(threads);
         return handler;
     }
