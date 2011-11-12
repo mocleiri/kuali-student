@@ -231,7 +231,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
         removeModules(commonPrefixes, modules);
 
-        show("Common Prefix 1: ", commonPrefixes);
+        show("Common Prefix 2: ", commonPrefixes);
 
         List<String> prefixes = new ArrayList<String>();
         // prefixes.addAll(commonPrefixes);
