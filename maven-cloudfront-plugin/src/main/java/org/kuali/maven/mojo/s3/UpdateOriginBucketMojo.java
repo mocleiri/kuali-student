@@ -236,10 +236,11 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     protected boolean isMatch(S3PrefixContext context, String prefix, List<String> modules) {
         String contextPrefix = context.getPrefix();
         for (String module : modules) {
-            String modulePrefix = prefix + "/" + module;
+            String modulePrefix = prefix + module + "/";
+
             getLog().info(contextPrefix + " " + modulePrefix);
         }
-        return true;
+        return false;
     }
 
     protected void removeChildModules(List<S3PrefixContext> contexts) {
