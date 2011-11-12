@@ -2,7 +2,6 @@ package org.kuali.maven.mojo.s3.threads;
 
 import java.util.List;
 
-import org.kuali.maven.mojo.s3.ProgressTracker;
 
 public class ListIteratorContext<T> {
     int id;

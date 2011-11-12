@@ -25,6 +25,8 @@ import org.kuali.maven.mojo.s3.threads.ElementHandler;
 import org.kuali.maven.mojo.s3.threads.ListIteratorContext;
 import org.kuali.maven.mojo.s3.threads.ListIteratorThread;
 import org.kuali.maven.mojo.s3.threads.ListObjectsContextHandler;
+import org.kuali.maven.mojo.s3.threads.PercentCompleteTracker;
+import org.kuali.maven.mojo.s3.threads.ProgressTracker;
 import org.kuali.maven.mojo.s3.threads.ThreadHandler;
 import org.kuali.maven.mojo.s3.threads.ThreadHandlerFactory;
 import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThread;

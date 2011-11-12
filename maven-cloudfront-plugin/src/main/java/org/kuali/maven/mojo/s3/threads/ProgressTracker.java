@@ -1,4 +1,4 @@
-package org.kuali.maven.mojo.s3;
+package org.kuali.maven.mojo.s3.threads;
 
 import java.io.PrintStream;
 
