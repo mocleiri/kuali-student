@@ -7,15 +7,15 @@ import org.kuali.maven.mojo.s3.UpdateOriginBucketMojo;
 
 import com.amazonaws.AmazonServiceException;
 
-public class DirectoryUpdateHandler implements ListElementHandler<UpdateDirectoryContext> {
+public class UpdateDirectoryContextHandler implements ListElementHandler<UpdateDirectoryContext> {
 
     UpdateOriginBucketMojo mojo;
 
-    public DirectoryUpdateHandler() {
+    public UpdateDirectoryContextHandler() {
         this(null);
     }
 
-    public DirectoryUpdateHandler(UpdateOriginBucketMojo mojo) {
+    public UpdateDirectoryContextHandler(UpdateOriginBucketMojo mojo) {
         super();
         this.mojo = mojo;
     }

@@ -23,7 +23,7 @@ import org.apache.maven.wagon.TransferFailedException;
 import org.kuali.maven.common.UrlBuilder;
 import org.kuali.maven.mojo.s3.threads.ListIteratorContext;
 import org.kuali.maven.mojo.s3.threads.ListIteratorThread;
-import org.kuali.maven.mojo.s3.threads.ListObjectsHandler;
+import org.kuali.maven.mojo.s3.threads.ListObjectsContextHandler;
 import org.kuali.maven.mojo.s3.threads.ThreadHandler;
 import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThread;
 import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThreadContext;
@@ -296,7 +296,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             // leading back to and including the root directory
             List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
             List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
-            ListObjectsHandler listHandler = new ListObjectsHandler();
+            ListObjectsContextHandler listHandler = new ListObjectsContextHandler();
             ThreadHandler handler = getThreadHandler2(contexts);
 
 
