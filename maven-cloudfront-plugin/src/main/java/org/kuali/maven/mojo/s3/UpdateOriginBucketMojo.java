@@ -176,9 +176,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             generator = new CloudFrontHtmlGenerator(context);
             converter = new S3DataConverter(context);
             converter.setBrowseHtml(getBrowseKey());
-            if (!isRecurse()) {
-                return;
-            }
             getLog().info("Updating indexes @ - " + getPrefix());
             // System.out.print("[INFO] Examining directory structure ");
             long startTime = System.currentTimeMillis();
@@ -544,7 +541,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         S3PrefixContext prefixContext = getS3PrefixContext(context, prefix);
         list.add(prefixContext);
 
-        if (depth.getValue() == maxDepth) {
+        if (depth.getValue() == maxDepth || !isRecurse()) {
             return list;
         }
 
