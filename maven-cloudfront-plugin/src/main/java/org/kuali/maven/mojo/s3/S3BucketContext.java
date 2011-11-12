@@ -3,6 +3,7 @@ package org.kuali.maven.mojo.s3;
 import java.text.SimpleDateFormat;
 
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 
 /**
  * Holds context information for S3
@@ -17,6 +18,8 @@ public class S3BucketContext {
     String defaultObject;
     SimpleDateFormat lastModifiedDateFormatter;
     String about;
+    CannedAccessControlList acl;
+    Integer maxKeys;
 
     public AmazonS3Client getClient() {
         return client;
@@ -88,5 +91,21 @@ public class S3BucketContext {
 
     public void setAbout(final String about) {
         this.about = about;
+    }
+
+    public CannedAccessControlList getAcl() {
+        return acl;
+    }
+
+    public void setAcl(CannedAccessControlList acl) {
+        this.acl = acl;
+    }
+
+    public Integer getMaxKeys() {
+        return maxKeys;
+    }
+
+    public void setMaxKeys(Integer maxKeys) {
+        this.maxKeys = maxKeys;
     }
 }

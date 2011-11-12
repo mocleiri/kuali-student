@@ -22,6 +22,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.wagon.TransferFailedException;
 import org.kuali.maven.common.UrlBuilder;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -87,8 +88,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      *
      * For example, the Kuali Rice project has the groupId "org.kuali.rice" and content for the Kuali Rice project is
      * published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is inferred from the hostname
-     * "site.kuali.org" and is thus removed when calculating the publish url in order to keep things a little more
-     * compact.
+     * "site.kuali.org" and is thus removed when calculating the url for publishing in order to keep things a little
+     * more compact.
      *
      * If this parameter is not supplied, the complete groupId is used.
      *
@@ -182,7 +183,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     private String browseKey;
 
     /**
-     * The maximum depth of nested directories to update relative to the current directory
+     * The maximum depth of nested directories to update relative to the current project's directory
      *
      * @parameter expression="${cloudfront.maxDepth}" default-value="1"
      */
@@ -196,8 +197,39 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private CannedAccessControlList acl;
 
-    @Override
-    public void executeMojo() throws MojoExecutionException, MojoFailureException {
+    /**
+     * The maximum number of keys to list in one request.
+     *
+     * @parameter expression="${cloudfront.maxKeys}" default-value="1000"
+     * @required
+     */
+    private Integer maxKeys;
+
+    protected List<String> getDirectories(S3BucketContext context) {
+
+        String bucket = context.getBucket();
+        String prefix = getPrefix();
+        String delimiter = context.getDelimiter();
+        AmazonS3Client client = context.getClient();
+        Integer maxKeys = context.getMaxKeys();
+
+        ListObjectsRequest request = new ListObjectsRequest(bucket, prefix, null, delimiter, maxKeys);
+
+        // This is the file system equivalent of typing "ls" in a directory
+        ObjectListing listing = client.listObjects(request);
+
+        // If we have more than 1000 files/directories in the current directory we have an issue
+        if (listing.isTruncated()) {
+            throw new AmazonServiceException("The listing for " + bucket + delimiter + prefix + " exceeded " + maxKeys);
+        }
+
+        List<String> directories = new ArrayList<String>();
+        directories.addAll(listing.getCommonPrefixes());
+        return directories;
+
+    }
+
+    public void executeMojo2() throws MojoExecutionException, MojoFailureException {
         try {
             getLog().info("Updating S3 bucket - " + getBucket());
             updateMojoState();
@@ -206,6 +238,11 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             converter = new S3DataConverter(context);
             converter.setBrowseKey(getBrowseKey());
             getLog().info("Re-indexing - " + getPrefix());
+
+            List<String> directories = getDirectories(context);
+
+            S3PrefixContext projectContext = getS3PrefixContext(context, getPrefix());
+
             // System.out.print("[INFO] Examining directory structure ");
             long startTime = System.currentTimeMillis();
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
@@ -228,6 +265,27 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
             getLog().info("Total time: " + formatter.getTime(System.currentTimeMillis() - startTime));
             updateRoot(getS3PrefixContext(context, null));
+        } catch (Exception e) {
+            throw new MojoExecutionException("Unexpected error: ", e);
+        }
+    }
+
+    @Override
+    public void executeMojo() throws MojoExecutionException, MojoFailureException {
+        try {
+            getLog().info("Updating S3 bucket - " + getBucket());
+            updateMojoState();
+            S3BucketContext context = getS3BucketContext();
+            generator = new CloudFrontHtmlGenerator(context);
+            converter = new S3DataConverter(context);
+            converter.setBrowseKey(getBrowseKey());
+            getLog().info("Re-indexing - " + getPrefix());
+
+            List<String> dirs = getDirectories(context);
+            for (String dir : dirs) {
+                getLog().info(dir);
+            }
+
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
@@ -570,32 +628,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return prefixContext;
     }
 
-    protected boolean isContainsButNotEndsWith(String s, String pattern) {
-        if (!s.contains(pattern)) {
-            return false;
-        }
-        return s.endsWith(pattern);
-    }
-
-    protected boolean isSkip(String commonPrefix) {
-        if (isContainsButNotEndsWith(commonPrefix, "/apidocs/")) {
-            return true;
-        }
-        if (isContainsButNotEndsWith(commonPrefix, "/testapidocs/")) {
-            return true;
-        }
-        if (isContainsButNotEndsWith(commonPrefix, "/xref/")) {
-            return true;
-        }
-        if (isContainsButNotEndsWith(commonPrefix, "/xref-test/")) {
-            return true;
-        }
-        if (isContainsButNotEndsWith(commonPrefix, "/src-html/")) {
-            return true;
-        }
-        return false;
-    }
-
     /**
      * Recurse the hierarchy of a bucket starting at "prefix" and S3PrefixContext objects corresponding to the directory
      * structure of the hierarchy
@@ -823,6 +855,16 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     public void setAcl(CannedAccessControlList acl) {
         this.acl = acl;
+    }
+
+    @Override
+    public Integer getMaxKeys() {
+        return maxKeys;
+    }
+
+    @Override
+    public void setMaxKeys(Integer maxKeys) {
+        this.maxKeys = maxKeys;
     }
 
 }
