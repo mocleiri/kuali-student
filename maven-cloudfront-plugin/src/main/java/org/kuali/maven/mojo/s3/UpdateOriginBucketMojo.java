@@ -195,7 +195,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             generator = new CloudFrontHtmlGenerator(context);
             converter = new S3DataConverter(context);
             converter.setBrowseKey(getBrowseKey());
-            getLog().info("Updating indexes @ - " + getPrefix());
+            getLog().info("Re-indexing - " + getPrefix());
             // System.out.print("[INFO] Examining directory structure ");
             long startTime = System.currentTimeMillis();
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
