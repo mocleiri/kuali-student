@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ListIteratorThread<T> implements Runnable {
-    final Logger logger = LoggerFactory.getLogger(ListIteratorThread.class);
+    private final Logger logger = LoggerFactory.getLogger(ListIteratorThread.class);
 
     ListIteratorContext<T> context;
 
