@@ -153,7 +153,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     /**
      * When displaying the last modified timestamp, use this timezone
      *
-     * @parameter expression="${cloudfront.timezone}" default-value="GMT"
+     * @parameter expression="${cloudfront.timezone}" default-value="UTC"
      */
     private String timezone;
 
@@ -190,6 +190,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
         try {
+            updateMojoState();
             getLog().info("Updating S3 bucket - " + getBucket());
             S3BucketContext context = getS3BucketContext();
             generator = new CloudFrontHtmlGenerator(context);
@@ -357,12 +358,15 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         setPrefix(s);
     }
 
-    protected S3BucketContext getS3BucketContext() throws MojoExecutionException {
+    protected void updateMojoState() throws MojoExecutionException {
         updateCredentials();
         validateCredentials();
+        updatePrefix();
+    }
+
+    protected S3BucketContext getS3BucketContext() throws MojoExecutionException {
         AWSCredentials credentials = getCredentials();
         AmazonS3Client client = new AmazonS3Client(credentials);
-        updatePrefix();
         S3BucketContext context = new S3BucketContext();
         try {
             BeanUtils.copyProperties(context, this);
@@ -405,7 +409,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     /**
      * Return true if the Collection is null or contains no entries, false otherwise
      */
-    protected boolean isEmpty(final Collection<?> c) {
+    protected boolean isEmpty(Collection<?> c) {
         return c == null || c.size() == 0;
     }
 
