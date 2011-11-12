@@ -273,7 +273,9 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         for (String module : modules) {
             String modulePrefix1 = parentPrefix + module + "/";
             String modulePrefix2 = parentPrefix + parentArtifactId + "-" + module + "/";
-            getLog().info("prefix=" + prefix + " p1=" + modulePrefix1 + " p2=" + modulePrefix2);
+            getLog().info("prefix=" + prefix);
+            getLog().info("    p1=" + modulePrefix1);
+            getLog().info("    p2=" + modulePrefix2);
 
             if (prefix.equalsIgnoreCase(modulePrefix1)) {
                 getLog().info("Skipping " + prefix);
