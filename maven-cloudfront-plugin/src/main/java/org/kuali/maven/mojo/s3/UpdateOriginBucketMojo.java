@@ -224,12 +224,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         }
 
         List<String> commonPrefixes = listing.getCommonPrefixes();
-        show("Common Prefix: ", commonPrefixes);
+        show("Common Prefix 1: ", commonPrefixes);
 
         @SuppressWarnings("unchecked")
         List<String> modules = getProject().getModules();
 
-        // removeModules(commonPrefixes, modules);
+        removeModules(commonPrefixes, modules);
+
+        show("Common Prefix 1: ", commonPrefixes);
 
         List<String> prefixes = new ArrayList<String>();
         // prefixes.addAll(commonPrefixes);
@@ -268,7 +270,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         while (itr.hasNext()) {
             String prefix = itr.next();
             if (isMatch(prefix, modules)) {
-                getLog().info("Skipping " + prefix);
+                getLog().info("Removing " + prefix);
                 itr.remove();
             }
         }
