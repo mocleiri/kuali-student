@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.kuali.maven.mojo.s3.ProgressTracker;
 
-public class ListIteratorThreadContext<T> {
+public class ListIteratorContext<T> {
     int id;
     int offset;
     int length;

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 public abstract class ListIteratorThread<T> implements Runnable {
     final Logger logger = LoggerFactory.getLogger(ListIteratorThread.class);
 
-    ListIteratorThreadContext<T> context;
+    ListIteratorContext<T> context;
 
     @Override
     public void run() {
@@ -28,11 +28,11 @@ public abstract class ListIteratorThread<T> implements Runnable {
         logger.debug("Thread " + context.getId() + " stopping");
     }
 
-    public ListIteratorThreadContext<T> getContext() {
+    public ListIteratorContext<T> getContext() {
         return context;
     }
 
-    public void setContext(ListIteratorThreadContext<T> context) {
+    public void setContext(ListIteratorContext<T> context) {
         this.context = context;
     }
 
