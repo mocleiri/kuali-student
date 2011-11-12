@@ -224,6 +224,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         }
 
         List<String> commonPrefixes = listing.getCommonPrefixes();
+        show(commonPrefixes);
 
         @SuppressWarnings("unchecked")
         List<String> modules = getProject().getModules();
@@ -234,6 +235,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         prefixes.addAll(commonPrefixes);
         return prefixes;
 
+    }
+
+    protected void show(List<String> strings) {
+        for (String s : strings) {
+            getLog().info(s);
+        }
     }
 
     @Override
@@ -248,9 +255,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             getLog().info("Re-indexing - " + getPrefix());
 
             List<String> prefixes = getPrefixes(context);
-            for (String prefix : prefixes) {
-                getLog().info(prefix);
-            }
+            // show(prefixes);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
