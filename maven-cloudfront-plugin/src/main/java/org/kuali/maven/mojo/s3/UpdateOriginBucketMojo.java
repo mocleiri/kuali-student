@@ -253,6 +253,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             converter = new S3DataConverter(context);
             converter.setBrowseKey(getBrowseKey());
             getLog().info("Re-indexing - " + getPrefix());
+            getPrefixes(context);
 
             // List<String> prefixes = getPrefixes(context);
             // show(prefixes);
