@@ -485,6 +485,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     }
 
     protected S3PrefixContext getS3PrefixContext(S3BucketContext context, String prefix) {
+        getLog().info("Listing objects for " + prefix);
         ListObjectsRequest request = new ListObjectsRequest(context.getBucket(), prefix, null, context.getDelimiter(),
                 1000);
         ObjectListing objectListing = context.getClient().listObjects(request);
