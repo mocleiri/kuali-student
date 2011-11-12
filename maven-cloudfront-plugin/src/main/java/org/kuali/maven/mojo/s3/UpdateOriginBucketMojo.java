@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -210,6 +211,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
             // System.out.println();
             contexts.addAll(getContextsGoingUp(context, getPrefix()));
+            removeChildModules(contexts);
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
             ThreadHandler handler = getThreadHandler(udcs);
             getLog().info(getUploadStartMsg(udcs.size(), handler.getThreadCount(), handler.getRequestsPerThread()));
@@ -228,6 +230,28 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             updateRoot(getS3PrefixContext(context, null));
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
+        }
+    }
+
+    protected boolean isMatch(S3PrefixContext context, String prefix, List<String> modules) {
+        String contextPrefix = context.getPrefix();
+        for (String module : modules) {
+            String modulePrefix = prefix + "/" + module;
+            getLog().info(contextPrefix + " " + modulePrefix);
+        }
+        return true;
+    }
+
+    protected void removeChildModules(List<S3PrefixContext> contexts) {
+        @SuppressWarnings("unchecked")
+        List<String> modules = getProject().getModules();
+
+        Iterator<S3PrefixContext> itr = contexts.iterator();
+        while (itr.hasNext()) {
+            S3PrefixContext context = itr.next();
+            if (isMatch(context, getPrefix(), modules)) {
+                itr.remove();
+            }
         }
     }
 
