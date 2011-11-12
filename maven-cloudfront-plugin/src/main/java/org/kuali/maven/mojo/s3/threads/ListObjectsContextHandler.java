@@ -3,6 +3,7 @@ package org.kuali.maven.mojo.s3.threads;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.kuali.maven.mojo.s3.ListObjectsContext;
 import org.kuali.maven.mojo.s3.S3BucketContext;
 import org.slf4j.Logger;
@@ -14,8 +15,8 @@ import com.amazonaws.services.s3.model.ObjectListing;
 
 public class ListObjectsContextHandler implements ElementHandler<ListObjectsContext> {
     private final Logger logger = LoggerFactory.getLogger(ListObjectsContextHandler.class);
+    private final Object mutex = new Object();
 
-    Object mutex = new Object();
     List<ObjectListing> objectListings;
 
     @Override
@@ -24,6 +25,7 @@ public class ListObjectsContextHandler implements ElementHandler<ListObjectsCont
         AmazonS3Client client = bucketContext.getClient();
         ListObjectsRequest request = element.getRequest();
         request.getPrefix();
+        logger.info("[Thread:" + lpad(context.getId()) + ", Element:" + lpad(index) + "] " + request.getPrefix());
         ObjectListing listing = client.listObjects(request);
         synchronized (mutex) {
             if (objectListings == null) {
@@ -31,6 +33,10 @@ public class ListObjectsContextHandler implements ElementHandler<ListObjectsCont
             }
             objectListings.add(listing);
         }
+    }
+
+    protected String lpad(int i) {
+        return StringUtils.leftPad(i + "", 3, " ");
     }
 
     public List<ObjectListing> getObjectListings() {

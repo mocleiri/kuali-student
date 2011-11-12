@@ -85,7 +85,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     /**
      * The number of threads to use when updating indexes
      *
-     * @parameter expression="${cloudfront.threads}" default-value="3"
+     * @parameter expression="${cloudfront.threads}" default-value="10"
      */
     private int threads;
 
