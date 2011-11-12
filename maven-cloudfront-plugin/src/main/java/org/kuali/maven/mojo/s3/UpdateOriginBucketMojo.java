@@ -250,34 +250,33 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         }
     }
 
-    protected boolean isMatch(S3PrefixContext context, List<String> modules) {
+    protected boolean isMatch(String prefix, List<String> modules) {
         String parentPrefix = getPrefix();
         String parentArtifactId = getProject().getArtifactId();
-        String contextPrefix = context.getPrefix();
         for (String module : modules) {
             String modulePrefix1 = parentPrefix + module + "/";
             String modulePrefix2 = parentPrefix + parentArtifactId + "-" + module + "/";
 
-            if (contextPrefix.equalsIgnoreCase(modulePrefix1)) {
-                getLog().info("Skipping " + contextPrefix);
+            if (prefix.equalsIgnoreCase(modulePrefix1)) {
+                getLog().info("Skipping " + prefix);
                 return true;
             }
-            if (contextPrefix.equalsIgnoreCase(modulePrefix2)) {
-                getLog().info("Skipping " + contextPrefix);
+            if (prefix.equalsIgnoreCase(modulePrefix2)) {
+                getLog().info("Skipping " + prefix);
                 return true;
             }
         }
         return false;
     }
 
-    protected void removeChildModules(List<String> directories) {
+    protected void removeChildModules(List<String> prefixes) {
         @SuppressWarnings("unchecked")
         List<String> modules = getProject().getModules();
 
-        Iterator<S3PrefixContext> itr = contexts.iterator();
+        Iterator<String> itr = prefixes.iterator();
         while (itr.hasNext()) {
-            S3PrefixContext context = itr.next();
-            if (isMatch(context, modules)) {
+            String prefix = itr.next();
+            if (isMatch(prefix, modules)) {
                 itr.remove();
             }
         }
