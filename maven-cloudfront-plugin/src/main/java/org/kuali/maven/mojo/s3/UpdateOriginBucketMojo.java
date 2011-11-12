@@ -21,6 +21,8 @@ import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.wagon.TransferFailedException;
 import org.kuali.maven.common.UrlBuilder;
+import org.kuali.maven.mojo.s3.threads.ListIteratorContext;
+import org.kuali.maven.mojo.s3.threads.ListIteratorThread;
 import org.kuali.maven.mojo.s3.threads.ThreadHandler;
 import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThread;
 import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThreadContext;
@@ -281,8 +283,13 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             converter.setBrowseKey(getBrowseKey());
             getLog().info("Re-indexing - " + getPrefix());
             String prefix = getPrefix();
+
+            // Get the object listing for the current directory
             ListObjectsRequest request = getListObjectsRequest(context, prefix);
             ObjectListing listing = getObjectListing(context, request);
+
+            // Get a list of prefixes representing other directories in this directory AND the path of directories
+            // leading back to and including the root directory
             List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
             List<ListObjectsRequest> requests = getListObjectsRequests(context, prefixes);
             show("Prefixes:", prefixes);
@@ -290,6 +297,11 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
+    }
+
+    protected List<ObjectListing> getObjectListings(List<ListObjectsRequest> requests) {
+        List<ObjectListing> objectListings = new ArrayList<ObjectListing>();
+        return objectListings;
     }
 
     protected String getUploadCompleteMsg(long millis, int count) {
@@ -316,20 +328,20 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return requestsPerThread;
     }
 
-    protected ThreadHandler getObjectListingHandler(List<UpdateDirectoryContext> contexts) {
-        int updateCounts = contexts.size();
+    protected ThreadHandler getObjectListingHandler(List<ListObjectsRequest> requests) {
+        int updateCounts = requests.size();
         int actualThreadCount = threads > updateCounts ? updateCounts : threads;
-        int requestsPerThread = getRequestsPerThread(actualThreadCount, contexts.size());
+        int requestsPerThread = getRequestsPerThread(actualThreadCount, requests.size());
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(actualThreadCount);
         handler.setRequestsPerThread(requestsPerThread);
         ProgressTracker tracker = new PercentCompleteTracker();
-        tracker.setTotal(contexts.size());
+        tracker.setTotal(requests.size());
         handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("S3 Index Updaters");
         group.setDaemon(true);
         handler.setGroup(group);
-        Thread[] threads = getThreads(handler, contexts);
+        Thread[] threads = getListObjectThreads(handler, requests);
         handler.setThreads(threads);
         return handler;
     }
@@ -350,6 +362,32 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         Thread[] threads = getThreads(handler, contexts);
         handler.setThreads(threads);
         return handler;
+    }
+
+    protected Thread[] getListObjectThreads(ThreadHandler handler, List<ListObjectsRequest> requests) {
+        Thread[] threads = new Thread[handler.getThreadCount()];
+        for (int i = 0; i < threads.length; i++) {
+            int offset = i * handler.getRequestsPerThread();
+            int length = handler.getRequestsPerThread();
+            if (offset + length > requests.size()) {
+                length = requests.size() - offset;
+            }
+            ListIteratorContext<ListObjectsRequest> context = new ListIteratorContext<ListObjectsRequest>();
+            context.setList(requests);
+            context.setTracker(handler.getTracker());
+            context.setOffset(offset);
+            context.setLength(length);
+            context.setThreadHandler(handler);
+            int id = i + 1;
+            context.setId(id);
+            ListIteratorThread<ListObjectsRequest> thread = new ListIteratorThread<ListObjectsRequest>();
+            thread.setContext(context);
+
+            threads[i] = new Thread(handler.getGroup(), thread, "S3-" + id);
+            threads[i].setUncaughtExceptionHandler(handler);
+            threads[i].setDaemon(true);
+        }
+        return threads;
     }
 
     protected Thread[] getThreads(ThreadHandler handler, List<UpdateDirectoryContext> contexts) {
