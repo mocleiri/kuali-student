@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -270,40 +269,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
-    }
-
-    protected void removeModules(List<String> prefixes, List<String> modules) {
-        Iterator<String> itr = prefixes.iterator();
-        while (itr.hasNext()) {
-            String prefix = itr.next();
-            if (isMatch(prefix, modules)) {
-                getLog().info("Skipping " + prefix);
-                itr.remove();
-            }
-        }
-    }
-
-    protected boolean isMatch(String prefix, List<String> modules) {
-        String parentPrefix = getPrefix();
-        String parentArtifactId = getProject().getArtifactId();
-        for (String module : modules) {
-            String modulePrefix1 = parentPrefix + module + "/";
-            String modulePrefix2 = parentPrefix + parentArtifactId + "-" + module + "/";
-            int pad = 55;
-            StringBuilder sb = new StringBuilder();
-            sb.append(StringUtils.rightPad("p=" + prefix, pad, " "));
-            sb.append(StringUtils.rightPad(" p1=" + modulePrefix1, pad, " "));
-            sb.append(StringUtils.rightPad(" p2=" + modulePrefix2, pad, " "));
-            getLog().debug(sb.toString());
-
-            if (prefix.equalsIgnoreCase(modulePrefix1)) {
-                return true;
-            }
-            if (prefix.equalsIgnoreCase(modulePrefix2)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     protected String getUploadCompleteMsg(long millis, int count) {
