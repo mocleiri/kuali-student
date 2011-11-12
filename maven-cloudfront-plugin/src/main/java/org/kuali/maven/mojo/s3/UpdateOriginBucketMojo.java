@@ -205,7 +205,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private Integer maxKeys;
 
-    protected List<String> getDirectories(S3BucketContext context) {
+    protected List<String> getPrefixes(S3BucketContext context) {
 
         String bucket = context.getBucket();
         String prefix = getPrefix();
@@ -223,51 +223,10 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             throw new AmazonServiceException("The listing for " + bucket + delimiter + prefix + " exceeded " + maxKeys);
         }
 
-        List<String> directories = new ArrayList<String>();
-        directories.addAll(listing.getCommonPrefixes());
-        return directories;
+        List<String> prefixes = new ArrayList<String>();
+        prefixes.addAll(listing.getCommonPrefixes());
+        return prefixes;
 
-    }
-
-    public void executeMojo2() throws MojoExecutionException, MojoFailureException {
-        try {
-            getLog().info("Updating S3 bucket - " + getBucket());
-            updateMojoState();
-            S3BucketContext context = getS3BucketContext();
-            generator = new CloudFrontHtmlGenerator(context);
-            converter = new S3DataConverter(context);
-            converter.setBrowseKey(getBrowseKey());
-            getLog().info("Re-indexing - " + getPrefix());
-
-            List<String> directories = getDirectories(context);
-
-            S3PrefixContext projectContext = getS3PrefixContext(context, getPrefix());
-
-            // System.out.print("[INFO] Examining directory structure ");
-            long startTime = System.currentTimeMillis();
-            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
-            // System.out.println();
-            contexts.addAll(getContextsGoingUp(context, getPrefix()));
-            removeChildModules(contexts);
-            List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
-            ThreadHandler handler = getThreadHandler(udcs);
-            getLog().info(getUploadStartMsg(udcs.size(), handler.getThreadCount(), handler.getRequestsPerThread()));
-            long start = System.currentTimeMillis();
-            handler.executeThreads();
-            long millis = System.currentTimeMillis() - start;
-
-            // One (or more) of the threads had an issue
-            if (handler.getException() != null) {
-                throw new TransferFailedException("Unexpected error", handler.getException());
-            }
-
-            // Show some stats
-            getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
-            getLog().info("Total time: " + formatter.getTime(System.currentTimeMillis() - startTime));
-            updateRoot(getS3PrefixContext(context, null));
-        } catch (Exception e) {
-            throw new MojoExecutionException("Unexpected error: ", e);
-        }
     }
 
     @Override
@@ -281,9 +240,9 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             converter.setBrowseKey(getBrowseKey());
             getLog().info("Re-indexing - " + getPrefix());
 
-            List<String> dirs = getDirectories(context);
-            for (String dir : dirs) {
-                getLog().info(dir);
+            List<String> prefixes = getPrefixes(context);
+            for (String prefix : prefixes) {
+                getLog().info(prefix);
             }
 
         } catch (Exception e) {
@@ -311,7 +270,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return false;
     }
 
-    protected void removeChildModules(List<S3PrefixContext> contexts) {
+    protected void removeChildModules(List<String> directories) {
         @SuppressWarnings("unchecked")
         List<String> modules = getProject().getModules();
 
@@ -865,6 +824,47 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     @Override
     public void setMaxKeys(Integer maxKeys) {
         this.maxKeys = maxKeys;
+    }
+
+    public void executeMojo2() throws MojoExecutionException, MojoFailureException {
+        try {
+            getLog().info("Updating S3 bucket - " + getBucket());
+            updateMojoState();
+            S3BucketContext context = getS3BucketContext();
+            generator = new CloudFrontHtmlGenerator(context);
+            converter = new S3DataConverter(context);
+            converter.setBrowseKey(getBrowseKey());
+            getLog().info("Re-indexing - " + getPrefix());
+
+            List<String> directories = getPrefixes(context);
+
+            S3PrefixContext projectContext = getS3PrefixContext(context, getPrefix());
+
+            // System.out.print("[INFO] Examining directory structure ");
+            long startTime = System.currentTimeMillis();
+            List<S3PrefixContext> contexts = getS3PrefixContexts(context, getPrefix(), new Depth());
+            // System.out.println();
+            contexts.addAll(getContextsGoingUp(context, getPrefix()));
+            // removeChildModules(contexts);
+            List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
+            ThreadHandler handler = getThreadHandler(udcs);
+            getLog().info(getUploadStartMsg(udcs.size(), handler.getThreadCount(), handler.getRequestsPerThread()));
+            long start = System.currentTimeMillis();
+            handler.executeThreads();
+            long millis = System.currentTimeMillis() - start;
+
+            // One (or more) of the threads had an issue
+            if (handler.getException() != null) {
+                throw new TransferFailedException("Unexpected error", handler.getException());
+            }
+
+            // Show some stats
+            getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
+            getLog().info("Total time: " + formatter.getTime(System.currentTimeMillis() - startTime));
+            updateRoot(getS3PrefixContext(context, null));
+        } catch (Exception e) {
+            throw new MojoExecutionException("Unexpected error: ", e);
+        }
     }
 
 }
