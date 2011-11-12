@@ -169,23 +169,31 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * will not modify it. If it does not exist, this plugin will generate an html directory listing and place it into
      * the bucket under this key.
      *
-     * @parameter expression="${cloudfront.defaultObjectKey}" default-value="index.html";
+     * @parameter expression="${cloudfront.defaultObjectKey}" default-value="index.html"
      */
     private String defaultObjectKey;
 
     /**
      * The html for browsing a directory will be created under this key
      *
-     * @parameter expression="${cloudfront.browseKey}" default-value="browse.html";
+     * @parameter expression="${cloudfront.browseKey}" default-value="browse.html"
      */
     private String browseKey;
 
     /**
      * The maximum depth of nested directories to update relative to the current directory
      *
-     * @parameter expression="${cloudfront.maxDepth}" default-value="1";
+     * @parameter expression="${cloudfront.maxDepth}" default-value="1"
      */
     private int maxDepth;
+
+    /**
+     * The permissions for S3 objects created by this plugin
+     *
+     * @parameter expression="${cloudfront.acl}" default-value="PublicRead"
+     * @required
+     */
+    private CannedAccessControlList acl;
 
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
@@ -384,7 +392,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * S3_INDEX_CONTENT_TYPE, sets the ACL to PublicRead, and adds some custom metadata so we can positively identify it
      * as an object created by this plugin
      */
-    protected PutObjectRequest getPutIndexObjectRequest(final String html, final String key) {
+    protected PutObjectRequest getPutIndexObjectRequest(String html, String key) {
         InputStream in = new ByteArrayInputStream(html.getBytes());
         ObjectMetadata om = new ObjectMetadata();
         om.setCacheControl(getCacheControl());
@@ -393,7 +401,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         om.setContentLength(html.length());
         om.addUserMetadata(S3_INDEX_METADATA_KEY, "true");
         PutObjectRequest request = new PutObjectRequest(getBucket(), key, in, om);
-        request.setCannedAcl(CannedAccessControlList.PublicRead);
+        request.setCannedAcl(getAcl());
         return request;
     }
 
@@ -644,7 +652,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     protected CopyObjectRequest getCopyObjectRequest(final String bucket, final String sourceKey, final String destKey) {
         CopyObjectRequest request = new CopyObjectRequest(bucket, sourceKey, bucket, destKey);
-        request.setCannedAccessControlList(CannedAccessControlList.PublicRead);
+        request.setCannedAccessControlList(getAcl());
         return request;
     }
 
@@ -772,6 +780,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     public void setMaxDepth(int maxUpdateDepth) {
         this.maxDepth = maxUpdateDepth;
+    }
+
+    public CannedAccessControlList getAcl() {
+        return acl;
+    }
+
+    public void setAcl(CannedAccessControlList acl) {
+        this.acl = acl;
     }
 
 }
