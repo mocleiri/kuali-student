@@ -2,6 +2,8 @@ package org.kuali.maven.mojo.s3.threads;
 
 import java.util.List;
 
+import org.kuali.common.threads.ProgressTracker;
+import org.kuali.common.threads.ThreadHandler;
 import org.kuali.maven.mojo.s3.BucketUpdater;
 import org.kuali.maven.mojo.s3.UpdateDirectoryContext;
 

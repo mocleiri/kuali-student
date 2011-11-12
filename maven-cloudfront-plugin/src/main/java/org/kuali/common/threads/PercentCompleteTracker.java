@@ -1,4 +1,4 @@
-package org.kuali.maven.mojo.s3.threads;
+package org.kuali.common.threads;
 
 /**
  * Print a dot whenever there is progress of 2% or more

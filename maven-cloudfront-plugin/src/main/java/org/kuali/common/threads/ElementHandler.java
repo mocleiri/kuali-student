@@ -1,4 +1,4 @@
-package org.kuali.maven.mojo.s3.threads;
+package org.kuali.common.threads;
 
 public interface ElementHandler<T> {
     void handleElement(ListIteratorContext<T> context, int index, T element);
