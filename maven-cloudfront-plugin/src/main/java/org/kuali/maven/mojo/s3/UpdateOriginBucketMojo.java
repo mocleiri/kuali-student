@@ -36,16 +36,23 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  * <p>
  * This mojo updates a bucket serving as an origin for a Cloud Front distribution. It generates an html directory
  * listing for each "directory" in the bucket and stores the html under a key in the bucket such that a regular http
- * request for a directory returns the html instead of the XML for "object does not exist" Amazon would normally return.
- * For example: The url "http://www.mybucket.com/foo/bar" returns an html page containing a listing of all the files and
- * directories under "foo/bar" in the bucket.
+ * request for a directory returns html. What would happen otherwise is XML for "object does not exist" would be
+ * returned by Amazon.
+ * </p>
+ * <p>
+ * For example: The url "http://www.mybucket.com/foo/bar" will return an html page containing a listing of all the files
+ * and directories under "foo/bar" in the bucket.
  * </p>
  * <p>
  * If a directory contains an object with a key that is the same as the default object, the plugin copies the object to
- * a key representing the directory structure. For example, the url "http://www.mybucket.com/foo/bar/index.html"
- * represents an object in an S3 bucket under the key "foo/bar/index.html". This plugin will copy the object from the
- * key "foo/bar/index.html" to the key "foo/bar/". This causes the url "http://www.mybucket.com/foo/bar/" to return the
- * same content as the url "http://www.mybucket.com/foo/bar/index.html"
+ * a key representing the directory structure.
+ * </p>
+ *
+ * <p>
+ * For example, the url "http://www.mybucket.com/foo/bar/index.html" represents an object in an S3 bucket under the key
+ * "foo/bar/index.html". This plugin will copy the object from the key "foo/bar/index.html" to the key "foo/bar/". This
+ * causes the url "http://www.mybucket.com/foo/bar/" to return the same content as the url
+ * "http://www.mybucket.com/foo/bar/index.html"
  * </p>
  * <p>
  * It also generates an html directory listing at the root of the bucket hierarchy and places that html into the bucket
@@ -55,6 +62,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  * @goal updateoriginbucket
  */
 public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
+    UrlBuilder builder = new UrlBuilder();
     SimpleFormatter formatter = new SimpleFormatter();
 
     private static final String S3_INDEX_METADATA_KEY = "maven-cloudfront-plugin-index";
@@ -319,7 +327,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     }
 
     protected String getDefaultPrefix(MavenProject project, String groupId) {
-        UrlBuilder builder = new UrlBuilder();
 
         if (builder.isBaseCase(project, groupId)) {
             return builder.getSitePath(project, groupId) + "/" + project.getVersion();
