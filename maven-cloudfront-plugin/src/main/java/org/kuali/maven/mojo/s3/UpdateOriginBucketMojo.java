@@ -208,14 +208,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      */
     private CannedAccessControlList acl;
 
-    /**
-     * The maximum number of keys to list in one request.
-     *
-     * @parameter expression="${cloudfront.maxKeys}" default-value="1000"
-     * @required
-     */
-    private Integer maxKeys;
-
     protected List<String> getPrefixes(ObjectListing listing, String prefix, String delimiter) {
         List<String> commonPrefixes = listing.getCommonPrefixes();
         List<String> pathPrefixes = getPathPrefixes(delimiter, prefix);
@@ -303,6 +295,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             ThreadHandlerFactory factory = new ThreadHandlerFactory();
             ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
             ThreadHandler handler = factory.getThreadHandler(threads, contexts, elementHandler);
+            handler.executeThreads();
 
             show("Prefixes:", prefixes);
 
@@ -932,16 +925,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     public void setAcl(CannedAccessControlList acl) {
         this.acl = acl;
-    }
-
-    @Override
-    public Integer getMaxKeys() {
-        return maxKeys;
-    }
-
-    @Override
-    public void setMaxKeys(Integer maxKeys) {
-        this.maxKeys = maxKeys;
     }
 
     public void executeMojo2() throws MojoExecutionException, MojoFailureException {
