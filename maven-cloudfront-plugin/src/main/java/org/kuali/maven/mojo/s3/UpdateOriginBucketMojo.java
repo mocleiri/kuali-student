@@ -175,7 +175,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             S3BucketContext context = getS3BucketContext();
             generator = new CloudFrontHtmlGenerator(context);
             converter = new S3DataConverter(context);
-            converter.setBrowseHtml(getBrowseKey());
+            converter.setBrowseKey(getBrowseKey());
             getLog().info("Updating indexes @ - " + getPrefix());
             // System.out.print("[INFO] Examining directory structure ");
             long startTime = System.currentTimeMillis();
@@ -188,6 +188,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             long start = System.currentTimeMillis();
             handler.executeThreads();
             long millis = System.currentTimeMillis() - start;
+
             // One (or more) of the threads had an issue
             if (handler.getException() != null) {
                 throw new TransferFailedException("Unexpected error", handler.getException());
@@ -549,7 +550,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
         depth.increment();
         for (String commonPrefix : commonPrefixes) {
-            System.out.print(".");
+            // System.out.print(".");
             getLog().debug(commonPrefix + " @ " + depth.getValue());
             list.addAll(getS3PrefixContexts(context, commonPrefix, depth));
         }
