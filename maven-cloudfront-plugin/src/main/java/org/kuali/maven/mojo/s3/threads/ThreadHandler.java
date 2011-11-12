@@ -10,7 +10,7 @@ public class ThreadHandler implements UncaughtExceptionHandler {
     Thread[] threads;
     Throwable exception;
     boolean stopThreads;
-    int requestsPerThread;
+    int elementsPerThread;
     int threadCount;
     ProgressTracker tracker;
 
@@ -66,12 +66,12 @@ public class ThreadHandler implements UncaughtExceptionHandler {
         return stopThreads;
     }
 
-    public int getRequestsPerThread() {
-        return requestsPerThread;
+    public int getElementsPerThread() {
+        return elementsPerThread;
     }
 
-    public void setRequestsPerThread(int requestsPerThread) {
-        this.requestsPerThread = requestsPerThread;
+    public void setElementsPerThread(int requestsPerThread) {
+        this.elementsPerThread = requestsPerThread;
     }
 
     public int getThreadCount() {

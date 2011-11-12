@@ -1,11 +1,11 @@
 package org.kuali.maven.mojo.s3.threads;
 
-import com.amazonaws.services.s3.model.ListObjectsRequest;
+import org.kuali.maven.mojo.s3.ListObjectsContext;
 
-public class ListObjectsHandler implements ListHandler<ListObjectsRequest> {
+public class ListObjectsHandler implements ListElementHandler<ListObjectsContext> {
 
     @Override
-    public void handle(ListObjectsRequest context) {
+    public void handleElement(ListObjectsContext context) {
     }
 
 }
