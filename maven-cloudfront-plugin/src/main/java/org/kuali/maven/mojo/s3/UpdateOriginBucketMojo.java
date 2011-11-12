@@ -72,6 +72,8 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     CloudFrontHtmlGenerator generator;
     S3DataConverter converter;
 
+    private static final Timer TIMER = new Timer();
+
     /**
      * The number of threads to use when updating indexes
      *
@@ -216,7 +218,11 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         ListObjectsRequest request = new ListObjectsRequest(bucket, prefix, null, delimiter, maxKeys);
 
         // This is the file system equivalent of typing "ls" in a directory
+        long start = System.currentTimeMillis();
         ObjectListing listing = client.listObjects(request);
+        long millis = System.currentTimeMillis() - start;
+        TIMER.addMillis(millis);
+        getLog().info(getListMsg(millis));
 
         // If we have more than 1000 files/directories in the current directory we have an issue
         if (listing.isTruncated()) {
@@ -224,25 +230,26 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         }
 
         List<String> commonPrefixes = listing.getCommonPrefixes();
-        show("Common Prefix 1: ", commonPrefixes);
-
-        @SuppressWarnings("unchecked")
-        List<String> modules = getProject().getModules();
-
-        removeModules(commonPrefixes, modules);
-
-        show("Common Prefix 2: ", commonPrefixes);
+        List<String> upPrefixes = getPrefixesGoingUp(delimiter, prefix);
+        for (String upPrefix : upPrefixes) {
+            getLog().info(upPrefix);
+        }
 
         List<String> prefixes = new ArrayList<String>();
-        // prefixes.addAll(commonPrefixes);
+        prefixes.addAll(commonPrefixes);
         return prefixes;
 
     }
 
-    protected void show(String msg, List<String> strings) {
-        for (String s : strings) {
-            getLog().info(msg + s);
-        }
+    protected String getListMsg(long millis) {
+        long total = TIMER.getMillis();
+        long count = TIMER.getCount();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Listing Request:" + formatter.getTime(millis));
+        sb.append(" Total:" + formatter.getTime(total));
+        sb.append(" Count:" + count);
+        sb.append(" Avg:" + formatter.getTime(total / count));
+        return sb.toString();
     }
 
     @Override
@@ -270,7 +277,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         while (itr.hasNext()) {
             String prefix = itr.next();
             if (isMatch(prefix, modules)) {
-                getLog().info("Removing " + prefix);
+                getLog().info("Skipping " + prefix);
                 itr.remove();
             }
         }
@@ -282,9 +289,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         for (String module : modules) {
             String modulePrefix1 = parentPrefix + module + "/";
             String modulePrefix2 = parentPrefix + parentArtifactId + "-" + module + "/";
-            getLog().info("prefix=" + prefix);
-            // getLog().info("    p1=" + modulePrefix1);
-            // getLog().info("    p2=" + modulePrefix2);
+            int pad = 55;
+            StringBuilder sb = new StringBuilder();
+            sb.append(StringUtils.rightPad("p=" + prefix, pad, " "));
+            sb.append(StringUtils.rightPad(" p1=" + modulePrefix1, pad, " "));
+            sb.append(StringUtils.rightPad(" p2=" + modulePrefix2, pad, " "));
+            getLog().debug(sb.toString());
 
             if (prefix.equalsIgnoreCase(modulePrefix1)) {
                 return true;
@@ -387,6 +397,20 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             list.add(udc1);
             list.add(udc2);
 
+        }
+        return list;
+    }
+
+    protected List<String> getPrefixesGoingUp(String delimiter, String startingPrefix) {
+        List<String> list = new ArrayList<String>();
+
+        list.add(delimiter);
+
+        String[] prefixes = StringUtils.splitByWholeSeparator(startingPrefix, delimiter);
+        String newPrefix = "";
+        for (int i = 0; i < prefixes.length - 2; i++) {
+            newPrefix += prefixes[i] + delimiter;
+            list.add(newPrefix);
         }
         return list;
     }
@@ -877,6 +901,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             updateRoot(getS3PrefixContext(context, null));
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
+        }
+    }
+
+    protected void show(String msg, List<String> strings) {
+        for (String s : strings) {
+            getLog().info(msg + s);
         }
     }
 
