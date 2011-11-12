@@ -89,7 +89,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * "site.kuali.org" and is thus removed when calculating the publish url in order to keep things a little more
      * compact.
      *
-     * If not supplied, the complete groupId is used.
+     * If this parameter is not supplied, the complete groupId is used.
      *
      * @parameter expression="${cloudfront.organizationGroupId}"
      */
