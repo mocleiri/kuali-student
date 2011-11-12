@@ -223,8 +223,15 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             throw new AmazonServiceException("The listing for " + bucket + delimiter + prefix + " exceeded " + maxKeys);
         }
 
+        List<String> commonPrefixes = listing.getCommonPrefixes();
+
+        @SuppressWarnings("unchecked")
+        List<String> modules = getProject().getModules();
+
+        removeModules(commonPrefixes, modules);
+
         List<String> prefixes = new ArrayList<String>();
-        prefixes.addAll(listing.getCommonPrefixes());
+        prefixes.addAll(commonPrefixes);
         return prefixes;
 
     }
@@ -269,10 +276,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return false;
     }
 
-    protected void removeChildModules(List<String> prefixes) {
-        @SuppressWarnings("unchecked")
-        List<String> modules = getProject().getModules();
-
+    protected void removeModules(List<String> prefixes, List<String> modules) {
         Iterator<String> itr = prefixes.iterator();
         while (itr.hasNext()) {
             String prefix = itr.next();
