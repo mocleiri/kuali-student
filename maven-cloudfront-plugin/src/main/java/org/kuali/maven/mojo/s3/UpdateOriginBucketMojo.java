@@ -257,6 +257,16 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         }
     }
 
+    protected void removeModules(List<String> prefixes, List<String> modules) {
+        Iterator<String> itr = prefixes.iterator();
+        while (itr.hasNext()) {
+            String prefix = itr.next();
+            if (isMatch(prefix, modules)) {
+                itr.remove();
+            }
+        }
+    }
+
     protected boolean isMatch(String prefix, List<String> modules) {
         String parentPrefix = getPrefix();
         String parentArtifactId = getProject().getArtifactId();
@@ -274,16 +284,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
         }
         return false;
-    }
-
-    protected void removeModules(List<String> prefixes, List<String> modules) {
-        Iterator<String> itr = prefixes.iterator();
-        while (itr.hasNext()) {
-            String prefix = itr.next();
-            if (isMatch(prefix, modules)) {
-                itr.remove();
-            }
-        }
     }
 
     protected String getUploadCompleteMsg(long millis, int count) {
