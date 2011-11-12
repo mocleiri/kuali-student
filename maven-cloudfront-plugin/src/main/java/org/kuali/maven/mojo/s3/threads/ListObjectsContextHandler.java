@@ -5,20 +5,25 @@ import java.util.List;
 
 import org.kuali.maven.mojo.s3.ListObjectsContext;
 import org.kuali.maven.mojo.s3.S3BucketContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 
 public class ListObjectsContextHandler implements ElementHandler<ListObjectsContext> {
+    private final Logger logger = LoggerFactory.getLogger(ListObjectsContextHandler.class);
+
     Object mutex = new Object();
     List<ObjectListing> objectListings;
 
     @Override
-    public void handleElement(ListObjectsContext context) {
-        S3BucketContext bucketContext = context.getBucketContext();
+    public void handleElement(ListIteratorContext<ListObjectsContext> context, int index, ListObjectsContext element) {
+        S3BucketContext bucketContext = element.getBucketContext();
         AmazonS3Client client = bucketContext.getClient();
-        ListObjectsRequest request = context.getRequest();
+        ListObjectsRequest request = element.getRequest();
+        request.getPrefix();
         ObjectListing listing = client.listObjects(request);
         synchronized (mutex) {
             if (objectListings == null) {

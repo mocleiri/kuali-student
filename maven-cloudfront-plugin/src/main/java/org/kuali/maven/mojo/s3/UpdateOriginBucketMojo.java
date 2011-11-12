@@ -210,7 +210,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     protected List<String> getPrefixes(ObjectListing listing, String prefix, String delimiter) {
         List<String> commonPrefixes = listing.getCommonPrefixes();
-        List<String> pathPrefixes = getPathPrefixes(delimiter, prefix);
+        List<String> pathPrefixes = getPathsToRoot(delimiter, prefix);
         List<String> prefixes = new ArrayList<String>();
         prefixes.addAll(commonPrefixes);
         prefixes.addAll(pathPrefixes);
@@ -279,7 +279,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             generator = new CloudFrontHtmlGenerator(context);
             converter = new S3DataConverter(context);
             converter.setBrowseKey(getBrowseKey());
-            getLog().info("Re-indexing - " + getPrefix());
+            getLog().info("Re-indexing content for - " + getPrefix());
             String prefix = getPrefix();
 
             // Get the object listing for the current directory
@@ -296,8 +296,16 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
             ThreadHandler handler = factory.getThreadHandler(threads, contexts, elementHandler);
             handler.executeThreads();
+            if (handler.getException() != null) {
+                throw new MojoExecutionException("Unexpected error:", handler.getException());
+            }
+            List<ObjectListing> listings = elementHandler.getObjectListings();
+            listings.add(listing);
 
-            show("Prefixes:", prefixes);
+            getLog().info("listings: " + listings.size());
+            getLog().info("prefixes: " + prefixes.size());
+            getLog().info("contexts: " + contexts.size());
+            show("Prefix: ", prefixes);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
@@ -475,7 +483,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         return list;
     }
 
-    protected List<String> getPathPrefixes(String delimiter, String startingPrefix) {
+    protected List<String> getPathsToRoot(String delimiter, String startingPrefix) {
         List<String> list = new ArrayList<String>();
 
         list.add(delimiter);

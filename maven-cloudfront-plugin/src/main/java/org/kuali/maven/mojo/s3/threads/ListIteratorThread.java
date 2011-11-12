@@ -22,7 +22,7 @@ public class ListIteratorThread<T> implements Runnable {
                 break;
             }
             T element = list.get(i);
-            handler.handleElement(element);
+            handler.handleElement(context, i, element);
             context.getTracker().increment();
         }
         logger.debug("Stopping - " + context.getId());

@@ -1,11 +1,7 @@
 package org.kuali.maven.mojo.s3.threads;
 
-import java.io.IOException;
-
 import org.kuali.maven.mojo.s3.UpdateDirectoryContext;
 import org.kuali.maven.mojo.s3.UpdateOriginBucketMojo;
-
-import com.amazonaws.AmazonServiceException;
 
 public class UpdateDirectoryContextHandler implements ElementHandler<UpdateDirectoryContext> {
 
@@ -21,12 +17,8 @@ public class UpdateDirectoryContextHandler implements ElementHandler<UpdateDirec
     }
 
     @Override
-    public void handleElement(UpdateDirectoryContext context) {
-        try {
-            mojo.updateDirectory(context);
-        } catch (IOException e) {
-            throw new AmazonServiceException("Unexpected error", e);
-        }
+    public void handleElement(ListIteratorContext<UpdateDirectoryContext> context, int index,
+            UpdateDirectoryContext element) {
     }
 
     public UpdateOriginBucketMojo getMojo() {
