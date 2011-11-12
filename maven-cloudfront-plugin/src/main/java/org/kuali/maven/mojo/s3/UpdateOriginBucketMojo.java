@@ -73,6 +73,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     private static final Timer TIMER = new Timer();
 
+
     /**
      * The number of threads to use when updating indexes
      *
