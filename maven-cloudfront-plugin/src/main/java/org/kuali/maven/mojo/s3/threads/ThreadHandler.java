@@ -1,6 +1,8 @@
-package org.kuali.maven.mojo.s3;
+package org.kuali.maven.mojo.s3.threads;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+
+import org.kuali.maven.mojo.s3.ProgressTracker;
 
 public class ThreadHandler implements UncaughtExceptionHandler {
 

@@ -21,6 +21,9 @@ import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.wagon.TransferFailedException;
 import org.kuali.maven.common.UrlBuilder;
+import org.kuali.maven.mojo.s3.threads.ThreadHandler;
+import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThread;
+import org.kuali.maven.mojo.s3.threads.UpdateDirectoryThreadContext;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
