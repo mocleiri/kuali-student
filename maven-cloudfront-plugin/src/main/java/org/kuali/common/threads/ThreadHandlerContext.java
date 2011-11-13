@@ -5,6 +5,7 @@ import java.util.List;
 public class ThreadHandlerContext<T> {
     int min;
     int max;
+    int divisor;
     List<T> list;
     ElementHandler<T> handler;
     ProgressListener<T> listener;
@@ -47,6 +48,14 @@ public class ThreadHandlerContext<T> {
 
     public void setListener(ProgressListener<T> listener) {
         this.listener = listener;
+    }
+
+    public int getDivisor() {
+        return divisor;
+    }
+
+    public void setDivisor(int divisor) {
+        this.divisor = divisor;
     }
 
 }

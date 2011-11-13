@@ -289,12 +289,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             ListObjectsRequest request = getListObjectsRequest(context, prefix);
             ObjectListing listing = getObjectListing(context, request);
 
-            // Get a list of prefixes representing other directories in this directory AND the path of directories
-            // leading back to and including the root directory
+            // Get a list of prefixes representing other directories in this directory and the directories
+            // leading back to (and including) the root directory
             List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
             List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
 
-            // Start some threads for listing the bucket contents
+            // Start some threads for listing the contents of each directory
             ThreadHandlerFactory factory = new ThreadHandlerFactory();
             ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
 
