@@ -78,7 +78,7 @@ public class UpdateOriginBucketMojo extends S3Mojo {
     /**
      * The max number of threads to use when making calls to S3
      *
-     * @parameter expression="${cloudfront.threads}" default-value="10"
+     * @parameter expression="${cloudfront.threads}" default-value="20"
      */
     private int threads;
 
