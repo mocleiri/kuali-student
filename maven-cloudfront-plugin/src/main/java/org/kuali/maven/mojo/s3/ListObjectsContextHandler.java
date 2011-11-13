@@ -1,4 +1,4 @@
-package org.kuali.maven.mojo.s3.threads;
+package org.kuali.maven.mojo.s3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.common.threads.ElementHandler;
 import org.kuali.common.threads.ListIteratorContext;
-import org.kuali.maven.mojo.s3.ListObjectsContext;
-import org.kuali.maven.mojo.s3.S3BucketContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

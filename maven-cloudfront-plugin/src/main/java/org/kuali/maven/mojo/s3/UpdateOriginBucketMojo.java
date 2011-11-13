@@ -26,8 +26,6 @@ import org.kuali.common.threads.ThreadHandlerFactory;
 import org.kuali.common.threads.ThreadInvoker;
 import org.kuali.common.threads.listener.ConsoleListener;
 import org.kuali.maven.common.UrlBuilder;
-import org.kuali.maven.mojo.s3.threads.ListObjectsContextHandler;
-import org.kuali.maven.mojo.s3.threads.UpdateDirectoryContextHandler;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
