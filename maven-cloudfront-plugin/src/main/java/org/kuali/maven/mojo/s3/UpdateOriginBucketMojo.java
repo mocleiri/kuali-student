@@ -19,11 +19,12 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
-import org.kuali.common.threads.ConsoleListener;
 import org.kuali.common.threads.ElementHandler;
 import org.kuali.common.threads.ThreadHandler;
 import org.kuali.common.threads.ThreadHandlerContext;
 import org.kuali.common.threads.ThreadHandlerFactory;
+import org.kuali.common.threads.ThreadInvoker;
+import org.kuali.common.threads.listener.ConsoleListener;
 import org.kuali.maven.common.UrlBuilder;
 import org.kuali.maven.mojo.s3.threads.ListObjectsContextHandler;
 import org.kuali.maven.mojo.s3.threads.UpdateDirectoryContextHandler;
@@ -72,6 +73,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 public class UpdateOriginBucketMojo extends S3Mojo {
     UrlBuilder builder = new UrlBuilder();
     SimpleFormatter formatter = new SimpleFormatter();
+    ThreadInvoker invoker = new ThreadInvoker();
 
     private static final String S3_INDEX_METADATA_KEY = "maven-cloudfront-plugin-index";
     private static final String S3_INDEX_CONTENT_TYPE = "text/html";
@@ -290,7 +292,7 @@ public class UpdateOriginBucketMojo extends S3Mojo {
             List<S3PrefixContext> contexts = getS3PrefixContexts(context, listings);
             List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
             ElementHandler<UpdateDirectoryContext> handler = new UpdateDirectoryContextHandler(this);
-            invokeThreads(threads, handler, udcs);
+            invoker.invokeThreads(threads, handler, udcs);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
@@ -300,7 +302,7 @@ public class UpdateOriginBucketMojo extends S3Mojo {
     protected List<ObjectListing> getObjectListings(S3BucketContext context, List<String> prefixes, int maxThreads) {
         List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
         ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
-        invokeThreads(maxThreads, elementHandler, contexts);
+        invoker.invokeThreads(maxThreads, elementHandler, contexts);
         return elementHandler.getObjectListings();
     }
 
