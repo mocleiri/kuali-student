@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ks-myschool</artifactId> 
-  <name>My School Config</name>
+  <name>My School Config2</name>
   <packaging>war</packaging>  
   <description>Contains all KS modules and Rice</description>
   <parent>
