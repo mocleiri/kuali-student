@@ -34,6 +34,11 @@
       <version>1.0.21</version>
     </dependency>
     <dependency>
+      <groupId>org.kuali.common.threads</groupId>
+      <artifactId>kuali-threads</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-io</artifactId>
       <version>1.3.2</version>
