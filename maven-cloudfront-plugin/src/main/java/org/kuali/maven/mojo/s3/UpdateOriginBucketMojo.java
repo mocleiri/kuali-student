@@ -20,11 +20,8 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.kuali.common.threads.ElementHandler;
-import org.kuali.common.threads.ThreadHandler;
-import org.kuali.common.threads.ThreadHandlerContext;
-import org.kuali.common.threads.ThreadHandlerFactory;
+import org.kuali.common.threads.ExecutionStatistics;
 import org.kuali.common.threads.ThreadInvoker;
-import org.kuali.common.threads.listener.ConsoleListener;
 import org.kuali.maven.common.UrlBuilder;
 
 import com.amazonaws.AmazonServiceException;
@@ -79,9 +76,9 @@ public class UpdateOriginBucketMojo extends S3Mojo {
     S3DataConverter converter;
 
     /**
-     * The max number of threads to use when updating indexes
+     * The max number of threads to use when making calls to S3
      *
-     * @parameter expression="${cloudfront.threads}" default-value="30"
+     * @parameter expression="${cloudfront.threads}" default-value="10"
      */
     private int threads;
 
@@ -89,15 +86,9 @@ public class UpdateOriginBucketMojo extends S3Mojo {
      * This parameter should represent the portion of the groupId that is implied by the hostname where content is
      * published.
      *
-     * For example, the Kuali Rice project has the groupId "org.kuali.rice" whereas content for the Kuali Rice project
-     * is published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname
+     * For example, the Kuali Rice project has the groupId "org.kuali.rice" and content for the Kuali Rice project is
+     * published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname
      * "site.kuali.org" and is thus removed when calculating the url in order to keep things a little more compact.
-     *
-     * All of the groupId's for Kuali Foundation begin with "org.kuali". The hostname where all Maven generated site
-     * content gets published is "site.kuali.org".
-     *
-     * The base url for accessing the Maven generated web content is the hostname plus the non-redundant portion of the
-     * groupId.
      *
      * If this parameter is not supplied, the complete groupId is used.
      *
@@ -112,14 +103,6 @@ public class UpdateOriginBucketMojo extends S3Mojo {
      * @parameter expression="${cloudfront.cacheControl}" default-value="max-age=3600, must-revalidate"
      */
     private String cacheControl;
-
-    /**
-     * If true, the hierarchy underneath <code>prefix</code> will be recursively updated. If false, only the directory
-     * corresponding to the prefix will be updated along with the path back to the root of the bucket
-     *
-     * @parameter expression="${cloudfront.recurse}" default-value="true"
-     */
-    private boolean recurse;
 
     /**
      * If true, "foo/bar/index.html" will get copied to "foo/bar/"
@@ -191,20 +174,22 @@ public class UpdateOriginBucketMojo extends S3Mojo {
     private String browseKey;
 
     /**
-     * The maximum depth of nested directories to update relative to the current project's directory
-     *
-     * @parameter expression="${cloudfront.maxDepth}" default-value="1"
-     */
-    private int maxDepth;
-
-    /**
-     * The permissions for S3 objects created by this plugin
+     * The default permissions for S3 objects created by this plugin
      *
      * @parameter expression="${cloudfront.acl}" default-value="PublicRead"
      * @required
      */
     private CannedAccessControlList acl;
 
+    /**
+     * Return a listing of all the prefixes in this directory plus all the prefixes leading back to (and including) the
+     * root directory
+     *
+     * @param listing
+     * @param prefix
+     * @param delimiter
+     * @return
+     */
     protected List<String> getPrefixes(ObjectListing listing, String prefix, String delimiter) {
         List<String> commonPrefixes = listing.getCommonPrefixes();
         List<String> pathPrefixes = getPathsToRoot(delimiter, prefix);
@@ -213,9 +198,15 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         prefixes.addAll(pathPrefixes);
         Collections.sort(prefixes);
         return prefixes;
-
     }
 
+    /**
+     * Get an object listing for the current directory
+     *
+     * @param context
+     * @param request
+     * @return
+     */
     protected ObjectListing getObjectListing(S3BucketContext context, ListObjectsRequest request) {
         String prefix = getPrefix();
         String bucket = context.getBucket();
@@ -236,6 +227,13 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         return listing;
     }
 
+    /**
+     * Convert prefixes intl ListObjectContext objects
+     *
+     * @param bucketContext
+     * @param prefixes
+     * @return
+     */
     protected List<ListObjectsContext> getListObjectsContexts(S3BucketContext bucketContext, List<String> prefixes) {
         List<ListObjectsContext> contexts = new ArrayList<ListObjectsContext>();
         for (String prefix : prefixes) {
@@ -248,6 +246,13 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         return contexts;
     }
 
+    /**
+     * Given a prefix and a bucket context return a ListObjectsRequest object
+     *
+     * @param context
+     * @param prefix
+     * @return
+     */
     protected ListObjectsRequest getListObjectsRequest(S3BucketContext context, String prefix) {
         String bucket = context.getBucket();
         String delimiter = context.getDelimiter();
@@ -259,97 +264,111 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         return request;
     }
 
-    protected String getListMsg(int size, long millis) {
+    /**
+     * Show some information about the current directory
+     *
+     * @param subDirectoryCount
+     * @param millis
+     * @return
+     */
+    protected String getListMsg(int subDirectoryCount, long millis) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Listing:" + formatter.getTime(millis));
-        sb.append(" Dirs:" + size);
+        sb.append("S3 Directories: " + subDirectoryCount);
+        sb.append("  Listing Request: " + formatter.getTime(millis));
         return sb.toString();
     }
 
     @Override
     public void executeMojo() throws MojoExecutionException, MojoFailureException {
         try {
+            // Track what time we started
+            long start = System.currentTimeMillis();
             getLog().info("Updating S3 bucket - " + getBucket());
+
+            // Update properties on the mojo
             updateMojoState();
+
+            // Save some context info about the bucket we are updating
             S3BucketContext context = getS3BucketContext();
+
+            // Utilities for generating html
             generator = new CloudFrontHtmlGenerator(context);
             converter = new S3DataConverter(context);
             converter.setBrowseKey(getBrowseKey());
-            getLog().info("Re-indexing content for - " + getPrefix());
-            String prefix = getPrefix();
 
-            // Get the object listing for the current directory
+            // Show what we are up to
+            String prefix = getPrefix();
+            getLog().info("Re-indexing content for - " + prefix);
+
+            // Get the object listing for this projects directory
             ListObjectsRequest request = getListObjectsRequest(context, prefix);
-            ObjectListing listing = getObjectListing(context, request);
+
+            // This object listing is a reflection of the projects directory out on S3
+            ObjectListing projectDirectory = getObjectListing(context, request);
 
             // Get a list of prefixes representing other directories in this directory and the directories
             // leading back to (and including) the root directory
-            List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
-            List<ObjectListing> listings = getObjectListings(context, prefixes, threads);
-            listings.add(listing);
-            List<S3PrefixContext> contexts = getS3PrefixContexts(context, listings);
-            List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
-            ElementHandler<UpdateDirectoryContext> handler = new UpdateDirectoryContextHandler(this);
-            invoker.invokeThreads(threads, handler, udcs);
+            List<String> prefixes = getPrefixes(projectDirectory, prefix, context.getDelimiter());
 
+            // Make a multi-threaded call out to S3 to obtain object summaries for all of the prefixes
+            List<ObjectListing> listings = getObjectListings(context, prefixes, threads);
+
+            // Add the ObjectListing for the projects directory
+            listings.add(projectDirectory);
+
+            // Convert ObjectListings into S3PrefixContext objects (this generates the html)
+            List<S3PrefixContext> contexts = getS3PrefixContexts(context, listings);
+
+            // Convert S3PrefixContext objects into UpdateDirectoryContext objects
+            List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
+
+            // Create a thread safe handler for dealing with elements in the list
+            ElementHandler<UpdateDirectoryContext> handler = new UpdateDirectoryContextHandler(this);
+
+            // Make a multi-threaded call out to S3. This creates and/or updates html indexes
+            ExecutionStatistics stats = invoker.invokeThreads(threads, handler, udcs);
+
+            // Print some diagnostics
+            long millis = stats.getExecutionTime();
+            long count = stats.getIterationCount();
+            getLog().info("Updated " + count + " bucket keys.  Time: " + formatter.getTime(millis));
+            getLog().info("S3 Bucket update complete - " + getBucket());
+            getLog().info("Total time: " + formatter.getTime(System.currentTimeMillis() - start));
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
     }
 
+    /**
+     * Make a multi-threaded call to S3 to acquire ObjectListing objects for each of the prefixes
+     *
+     * @param context
+     * @param prefixes
+     * @param maxThreads
+     * @return
+     */
     protected List<ObjectListing> getObjectListings(S3BucketContext context, List<String> prefixes, int maxThreads) {
         List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
         ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
-        invoker.invokeThreads(maxThreads, elementHandler, contexts);
+        ExecutionStatistics stats = invoker.invokeThreads(maxThreads, elementHandler, contexts);
+        long millis = stats.getExecutionTime();
+        long count = stats.getIterationCount();
+        getLog().info("Acquired listings for " + count + " prefixes.  Time: " + formatter.getTime(millis));
         return elementHandler.getObjectListings();
     }
 
-    protected <T> void invokeThreads(int maxThreads, ElementHandler<T> elementHandler, List<T> list) {
-        ThreadHandlerFactory factory = new ThreadHandlerFactory();
-        ThreadHandlerContext<T> thc = new ThreadHandlerContext<T>();
-        thc.setMax(maxThreads);
-        thc.setHandler(elementHandler);
-        thc.setList(list);
-        thc.setListener(new ConsoleListener<T>());
-        ThreadHandler<T> handler = factory.getThreadHandler(thc);
-        int elementsPerThread = handler.getElementsPerThread();
-        getLog().info("Acquiring info [t:" + handler.getThreadCount() + " e:" + elementsPerThread + "]");
-        long start = System.currentTimeMillis();
-        handler.executeThreads();
-        long millis = System.currentTimeMillis() - start;
-        int count = handler.getNotifier().getProgress();
-        getLog().debug("count=" + count);
-        String time = formatter.getTime(millis);
-        String avg = "?";
-        if (count > 0) {
-            avg = formatter.getTime(millis / count);
-        }
-        getLog().info("Requests:" + count + " Time:" + time + " Avg:" + avg);
-        if (handler.getException() != null) {
-            throw new AmazonServiceException("Unexpected error:", handler.getException());
-        }
-    }
-
-    protected String getUploadCompleteMsg(long millis, int count) {
-        String time = formatter.getTime(millis);
-        StringBuilder sb = new StringBuilder();
-        sb.append("Updates: " + count);
-        sb.append("  Time: " + time);
-        return sb.toString();
-    }
-
-    protected String getUploadStartMsg(int updates, int threadCount, int updatesPerThread) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Updates: " + updates);
-        sb.append("  Threads: " + threadCount);
-        sb.append("  Updates Per Thread: " + updatesPerThread);
-        return sb.toString();
-    }
-
+    /**
+     * Convert S3PrefixContext objects into UpdateDirectoryContext objects. Each S3PrefixContext object generates two S3
+     * calls. One for the prefix with the delimiter and one for the prefix without the delimiter.
+     *
+     * @param contexts
+     * @return
+     */
     protected List<UpdateDirectoryContext> getUpdateDirContexts(List<S3PrefixContext> contexts) {
         List<UpdateDirectoryContext> list = new ArrayList<UpdateDirectoryContext>();
         for (S3PrefixContext context : contexts) {
 
+            // Root object requires special handling
             if (context.isRoot()) {
                 UpdateDirectoryContext udc = new UpdateDirectoryContext();
                 udc.setContext(context);
@@ -357,6 +376,7 @@ public class UpdateOriginBucketMojo extends S3Mojo {
                 continue;
             }
 
+            // Create context info for prefixes with and without the delimiter
             String delimiter = context.getBucketContext().getDelimiter();
             String trimmedPrefix = converter.getTrimmedPrefix(context.getPrefix(), delimiter);
 
@@ -377,6 +397,14 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         return list;
     }
 
+    /**
+     * Split the string up and return a list of Strings representing the path from the starting prefix back to (and
+     * including) the root of the bucket.
+     *
+     * @param delimiter
+     * @param startingPrefix
+     * @return
+     */
     protected List<String> getPathsToRoot(String delimiter, String startingPrefix) {
         List<String> list = new ArrayList<String>();
 
@@ -391,28 +419,14 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         return list;
     }
 
-    protected List<S3PrefixContext> getContextsGoingUp(S3BucketContext context, String startingPrefix)
-            throws IOException {
-        List<S3PrefixContext> list = new ArrayList<S3PrefixContext>();
-
-        if (StringUtils.isEmpty(startingPrefix)) {
-            return list;
-        }
-
-        String[] prefixes = StringUtils.splitByWholeSeparator(startingPrefix, context.getDelimiter());
-        if (prefixes.length == 1) {
-            return list;
-        }
-        String newPrefix = "";
-        for (int i = 0; i < prefixes.length - 2; i++) {
-            newPrefix += prefixes[i] + context.getDelimiter();
-            list.add(getS3PrefixContext(context, newPrefix));
-        }
-        return list;
-    }
-
+    /**
+     * Get a default prefix into the bucket from the project + groupId
+     *
+     * @param project
+     * @param groupId
+     * @return
+     */
     protected String getDefaultPrefix(MavenProject project, String groupId) {
-
         if (builder.isBaseCase(project, groupId)) {
             return builder.getSitePath(project, groupId) + "/" + project.getVersion();
         } else {
@@ -420,6 +434,9 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         }
     }
 
+    /**
+     * If they supplied a prefix use it. Otherwise generate one from the project metadata
+     */
     protected void updatePrefix() {
         String s = getPrefix();
         if (StringUtils.isEmpty(s)) {
@@ -431,12 +448,18 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         setPrefix(s);
     }
 
+    /**
+     * Update the state of this mojo from the project metadata
+     */
     protected void updateMojoState() throws MojoExecutionException {
         updateCredentials();
         validateCredentials();
         updatePrefix();
     }
 
+    /**
+     * Get context information about the bucket we are operating on
+     */
     protected S3BucketContext getS3BucketContext() throws MojoExecutionException {
         AWSCredentials credentials = getCredentials();
         AmazonS3Client client = new AmazonS3Client(credentials);
@@ -584,6 +607,9 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         client.putObject(request2);
     }
 
+    /**
+     * Convert ObjectListing objects into S3PrefixContext objects
+     */
     protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, List<ObjectListing> listings) {
         List<S3PrefixContext> contexts = new ArrayList<S3PrefixContext>();
         for (ObjectListing listing : listings) {
@@ -593,6 +619,9 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         return contexts;
     }
 
+    /**
+     * Convert an ObjectListing into an S3PrefixContext
+     */
     protected S3PrefixContext getS3PrefixContext(S3BucketContext context, ObjectListing objectListing) {
         String prefix = objectListing.getPrefix();
         String delimiter = context.getDelimiter();
@@ -612,67 +641,6 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         prefixContext.setBucketContext(context);
         prefixContext.setBrowseHtmlKey(browseHtmlKey);
         return prefixContext;
-    }
-
-    protected S3PrefixContext getS3PrefixContext(S3BucketContext context, String prefix) {
-        getLog().info("Listing objects for " + prefix);
-        ListObjectsRequest request = new ListObjectsRequest(context.getBucket(), prefix, null, context.getDelimiter(),
-                1000);
-        ObjectListing objectListing = context.getClient().listObjects(request);
-        List<String[]> data = converter.getData(objectListing, prefix, context.getDelimiter());
-        String html = generator.getHtml(data, prefix, context.getDelimiter());
-        String defaultObjectKey = StringUtils.isEmpty(prefix) ? getDefaultObjectKey() : prefix + getDefaultObjectKey();
-        String browseHtmlKey = StringUtils.isEmpty(prefix) ? getBrowseKey() : prefix + getBrowseKey();
-        // Is this the root of the bucket?
-        boolean isRoot = StringUtils.isEmpty(prefix);
-
-        S3PrefixContext prefixContext = new S3PrefixContext();
-        prefixContext.setObjectListing(objectListing);
-        prefixContext.setHtml(html);
-        prefixContext.setRoot(isRoot);
-        prefixContext.setDefaultObjectKey(defaultObjectKey);
-        prefixContext.setPrefix(prefix);
-        prefixContext.setBucketContext(context);
-        prefixContext.setBrowseHtmlKey(browseHtmlKey);
-        return prefixContext;
-    }
-
-    /**
-     * Recurse the hierarchy of a bucket starting at "prefix" and S3PrefixContext objects corresponding to the directory
-     * structure of the hierarchy
-     */
-    protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, String prefix, Depth depth) {
-
-        List<S3PrefixContext> list = new ArrayList<S3PrefixContext>();
-
-        S3PrefixContext prefixContext = getS3PrefixContext(context, prefix);
-        list.add(prefixContext);
-
-        if (depth.getValue() == maxDepth || !isRecurse()) {
-            return list;
-        }
-
-        // Recurse down the hierarchy
-        List<String> commonPrefixes = prefixContext.getObjectListing().getCommonPrefixes();
-        depth.increment();
-        for (String commonPrefix : commonPrefixes) {
-            // System.out.print(".");
-            getLog().debug(commonPrefix + " @ " + depth.getValue());
-            list.addAll(getS3PrefixContexts(context, commonPrefix, depth));
-        }
-        depth.decrement();
-        return list;
-    }
-
-    protected boolean isChildModule(String commonPrefix) {
-        @SuppressWarnings("unchecked")
-        List<String> modules = getProject().getModules();
-        for (String module : modules) {
-            if (commonPrefix.endsWith(module + "/")) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -813,21 +781,6 @@ public class UpdateOriginBucketMojo extends S3Mojo {
     }
 
     /**
-     * @return the recurse
-     */
-    public boolean isRecurse() {
-        return recurse;
-    }
-
-    /**
-     * @param recurse
-     *            the recurse to set
-     */
-    public void setRecurse(final boolean recurse) {
-        this.recurse = recurse;
-    }
-
-    /**
      * @return the organizationGroupId
      */
     public String getOrganizationGroupId() {
@@ -850,14 +803,6 @@ public class UpdateOriginBucketMojo extends S3Mojo {
         this.threads = threadCount;
     }
 
-    public int getMaxDepth() {
-        return maxDepth;
-    }
-
-    public void setMaxDepth(int maxUpdateDepth) {
-        this.maxDepth = maxUpdateDepth;
-    }
-
     public CannedAccessControlList getAcl() {
         return acl;
     }
@@ -865,11 +810,4 @@ public class UpdateOriginBucketMojo extends S3Mojo {
     public void setAcl(CannedAccessControlList acl) {
         this.acl = acl;
     }
-
-    protected void show(String msg, List<String> strings) {
-        for (String s : strings) {
-            getLog().info(msg + s);
-        }
-    }
-
 }
