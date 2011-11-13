@@ -2,7 +2,7 @@ package org.kuali.maven.mojo.s3.threads;
 
 import java.util.List;
 
-import org.kuali.common.threads.ProgressTracker;
+import org.kuali.common.threads.ProgressNotifier;
 import org.kuali.common.threads.ThreadHandler;
 import org.kuali.maven.mojo.s3.BucketUpdater;
 import org.kuali.maven.mojo.s3.UpdateDirectoryContext;
@@ -14,7 +14,7 @@ public class UpdateDirectoryThreadContext {
     int length;
     BucketUpdater updater;
     ThreadHandler handler;
-    ProgressTracker tracker;
+    ProgressNotifier tracker;
 
     public List<UpdateDirectoryContext> getContexts() {
         return contexts;
@@ -56,11 +56,11 @@ public class UpdateDirectoryThreadContext {
         this.handler = handler;
     }
 
-    public ProgressTracker getTracker() {
+    public ProgressNotifier getTracker() {
         return tracker;
     }
 
-    public void setTracker(ProgressTracker tracker) {
+    public void setTracker(ProgressNotifier tracker) {
         this.tracker = tracker;
     }
 

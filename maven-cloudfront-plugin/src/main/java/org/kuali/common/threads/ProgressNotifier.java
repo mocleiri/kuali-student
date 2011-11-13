@@ -2,7 +2,7 @@ package org.kuali.common.threads;
 
 import java.io.PrintStream;
 
-public class ProgressTracker {
+public class ProgressNotifier {
 
     int count;
     int total;

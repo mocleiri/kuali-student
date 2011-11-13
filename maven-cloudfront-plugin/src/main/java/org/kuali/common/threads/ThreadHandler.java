@@ -11,7 +11,7 @@ public class ThreadHandler implements UncaughtExceptionHandler {
     boolean stopThreads;
     int elementsPerThread;
     int threadCount;
-    ProgressTracker tracker;
+    ProgressNotifier tracker;
 
     public ThreadGroup getGroup() {
         return group;
@@ -81,11 +81,11 @@ public class ThreadHandler implements UncaughtExceptionHandler {
         this.threadCount = threadCount;
     }
 
-    public ProgressTracker getTracker() {
+    public ProgressNotifier getTracker() {
         return tracker;
     }
 
-    public void setTracker(ProgressTracker tracker) {
+    public void setTracker(ProgressNotifier tracker) {
         this.tracker = tracker;
     }
 }

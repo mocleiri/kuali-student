@@ -12,7 +12,7 @@ public class ThreadHandlerFactory {
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(threadCount);
         handler.setElementsPerThread(elementsPerThread);
-        ProgressTracker tracker = new PercentCompleteTracker();
+        ProgressNotifier tracker = new PercentCompleteTracker();
         tracker.setTotal(list.size());
         handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("List Iterator Threads");

@@ -24,7 +24,7 @@ import org.kuali.common.threads.ElementHandler;
 import org.kuali.common.threads.ListIteratorContext;
 import org.kuali.common.threads.ListIteratorThread;
 import org.kuali.common.threads.PercentCompleteTracker;
-import org.kuali.common.threads.ProgressTracker;
+import org.kuali.common.threads.ProgressNotifier;
 import org.kuali.common.threads.ThreadHandler;
 import org.kuali.common.threads.ThreadHandlerFactory;
 import org.kuali.maven.common.UrlBuilder;
@@ -350,7 +350,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(threadCount);
         handler.setElementsPerThread(elementsPerThread);
-        ProgressTracker tracker = new PercentCompleteTracker();
+        ProgressNotifier tracker = new PercentCompleteTracker();
         tracker.setTotal(list.size());
         handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("S3 Index Updaters");
@@ -368,7 +368,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(actualThreadCount);
         handler.setElementsPerThread(requestsPerThread);
-        ProgressTracker tracker = new PercentCompleteTracker();
+        ProgressNotifier tracker = new PercentCompleteTracker();
         tracker.setTotal(contexts.size());
         handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("S3 Index Updaters");

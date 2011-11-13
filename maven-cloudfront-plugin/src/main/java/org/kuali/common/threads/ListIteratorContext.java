@@ -8,7 +8,7 @@ public class ListIteratorContext<T> {
     int offset;
     int length;
     ThreadHandler threadHandler;
-    ProgressTracker tracker;
+    ProgressNotifier tracker;
     List<T> list;
     ElementHandler<T> elementHandler;
 
@@ -44,11 +44,11 @@ public class ListIteratorContext<T> {
         this.threadHandler = handler;
     }
 
-    public ProgressTracker getTracker() {
+    public ProgressNotifier getTracker() {
         return tracker;
     }
 
-    public void setTracker(ProgressTracker tracker) {
+    public void setTracker(ProgressNotifier tracker) {
         this.tracker = tracker;
     }
 

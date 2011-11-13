@@ -3,7 +3,7 @@ package org.kuali.common.threads;
 /**
  * Print a dot whenever there is progress of 2% or more
  */
-public class PercentCompleteTracker extends ProgressTracker {
+public class PercentCompleteTracker extends ProgressNotifier {
     int percentageIncrement = 2;
     int percentCompletePrevious;
 
