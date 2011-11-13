@@ -44,7 +44,7 @@ public class UpdateDirectoryThread implements Runnable {
                 throw new AmazonServiceException("Unexpected error", e);
             }
             logger.debug(leftPad(context.getId() + "", 2, " ") + " - " + udc.getCopyToKey());
-            context.getTracker().increment();
+            // context.getTracker().increment();
         }
         logger.debug("Thread " + context.getId() + " stopping");
     }

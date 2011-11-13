@@ -23,9 +23,8 @@ import org.apache.maven.wagon.TransferFailedException;
 import org.kuali.common.threads.ElementHandler;
 import org.kuali.common.threads.ListIteratorContext;
 import org.kuali.common.threads.ListIteratorThread;
-import org.kuali.common.threads.PercentCompleteTracker;
-import org.kuali.common.threads.ProgressNotifier;
 import org.kuali.common.threads.ThreadHandler;
+import org.kuali.common.threads.ThreadHandlerContext;
 import org.kuali.common.threads.ThreadHandlerFactory;
 import org.kuali.maven.common.UrlBuilder;
 import org.kuali.maven.mojo.s3.threads.ListObjectsContextHandler;
@@ -85,14 +84,15 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     private static final Timer TIMER = new Timer();
 
     /**
-     * The number of threads to use when updating indexes
+     * The max number of threads to use when updating indexes
      *
-     * @parameter expression="${cloudfront.threads}" default-value="10"
+     * @parameter expression="${cloudfront.maxThreads}" default-value="30"
      */
-    private int threads;
+    private int maxThreads;
 
     /**
-     * The portion of the groupId that is implied by the hostname where content is published.
+     * This parameter should represent the portion of the groupId that is implied by the hostname where content is
+     * published.
      *
      * For example, all of the groupId's for Kuali Foundation begin with "org.kuali". The hostname where all Maven
      * generated site content gets published is "site.kuali.org".
@@ -100,9 +100,9 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * The base url for accessing the Maven generated web content for a Kuali Foundation project is the hostname plus
      * the non-redundant portion of the groupId.
      *
-     * For example, the Kuali Rice project has the groupId "org.kuali.rice". Content for the Kuali Rice project is
-     * published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname
-     * "site.kuali.org" and is thus removed when calculating the url in order to keep things a little more compact.
+     * The Kuali Rice project has the groupId "org.kuali.rice". Content for the Kuali Rice project is published under
+     * "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname "site.kuali.org" and
+     * is thus removed when calculating the url in order to keep things a little more compact.
      *
      * If this parameter is not supplied, the complete groupId is used.
      *
@@ -228,13 +228,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         Integer maxKeys = context.getMaxKeys();
 
         // This is the file system equivalent of typing "ls" in a directory
+        // No objects are retrieved, just metadata about the objects
         long start = System.currentTimeMillis();
         ObjectListing listing = context.getClient().listObjects(request);
         long millis = System.currentTimeMillis() - start;
         TIMER.addMillis(millis);
         getLog().info(getListMsg(millis));
 
-        // If we have more than 1000 files/directories in the current directory we have an issue
+        // If we have more than 1000 objects in the current directory we have an issue
         if (listing.isTruncated()) {
             throw new AmazonServiceException("The listing for " + bucket + delimiter + prefix + " exceeded " + maxKeys);
         }
@@ -296,7 +297,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             // Start some threads for listing the bucket contents
             ThreadHandlerFactory factory = new ThreadHandlerFactory();
             ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
-            ThreadHandler handler = factory.getThreadHandler(threads, contexts, elementHandler);
+
+            ThreadHandlerContext<ListObjectsContext> thc = new ThreadHandlerContext<ListObjectsContext>();
+            thc.setMax(maxThreads);
+            thc.setHandler(elementHandler);
+            thc.setList(contexts);
+            ThreadHandler<ListObjectsContext> handler = factory.getThreadHandler(thc);
             handler.executeThreads();
             if (handler.getException() != null) {
                 throw new MojoExecutionException("Unexpected error:", handler.getException());
@@ -307,7 +313,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             getLog().info("listings: " + listings.size());
             getLog().info("prefixes: " + prefixes.size());
             getLog().info("contexts: " + contexts.size());
-            show("Prefix: ", prefixes);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
@@ -345,14 +350,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     protected <T> ThreadHandler getThreadHandler2(List<T> list, ElementHandler<T> elementHandler) {
         int elementCount = list.size();
-        int threadCount = threads > elementCount ? elementCount : threads;
+        int threadCount = maxThreads > elementCount ? elementCount : maxThreads;
         int elementsPerThread = getElementsPerThread(threadCount, list.size());
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(threadCount);
         handler.setElementsPerThread(elementsPerThread);
-        ProgressNotifier tracker = new PercentCompleteTracker();
-        tracker.setTotal(list.size());
-        handler.setTracker(tracker);
+        // ProgressNotifier tracker = new PercentCompleteTracker();
+        // tracker.setTotal(list.size());
+        // handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("S3 Index Updaters");
         group.setDaemon(true);
         handler.setGroup(group);
@@ -363,14 +368,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     protected ThreadHandler getThreadHandler(List<UpdateDirectoryContext> contexts) {
         int updateCounts = contexts.size();
-        int actualThreadCount = threads > updateCounts ? updateCounts : threads;
+        int actualThreadCount = maxThreads > updateCounts ? updateCounts : maxThreads;
         int requestsPerThread = getElementsPerThread(actualThreadCount, contexts.size());
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(actualThreadCount);
         handler.setElementsPerThread(requestsPerThread);
-        ProgressNotifier tracker = new PercentCompleteTracker();
-        tracker.setTotal(contexts.size());
-        handler.setTracker(tracker);
+        // ProgressNotifier tracker = new PercentCompleteTracker();
+        // tracker.setTotal(contexts.size());
+        // handler.setTracker(tracker);
         ThreadGroup group = new ThreadGroup("S3 Index Updaters");
         group.setDaemon(true);
         handler.setGroup(group);
@@ -913,12 +918,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         this.organizationGroupId = organizationGroupId;
     }
 
-    public int getThreads() {
-        return threads;
+    public int getMaxThreads() {
+        return maxThreads;
     }
 
-    public void setThreads(int threadCount) {
-        this.threads = threadCount;
+    public void setMaxThreads(int threadCount) {
+        this.maxThreads = threadCount;
     }
 
     public int getMaxDepth() {

@@ -4,7 +4,9 @@ import java.util.List;
 
 public class ThreadHandlerFactory {
 
-    public <T> ThreadHandler<T> getThreadHandler(int threadCount, List<T> list, ElementHandler<T> elementHandler) {
+    public <T> ThreadHandler<T> getThreadHandler(ThreadHandlerContext<T> context) {
+        List<T> list = context.getList();
+        int threadCount = context.getMax();
         int elementCount = list.size();
         int actualThreadCount = threadCount > elementCount ? elementCount : threadCount;
         int elementsPerThread = getElementsPerThread(actualThreadCount, list.size());
@@ -19,7 +21,7 @@ public class ThreadHandlerFactory {
         ThreadGroup group = new ThreadGroup("List Iterator Threads");
         group.setDaemon(true);
         handler.setGroup(group);
-        Thread[] threads = getThreads(handler, list, elementHandler);
+        Thread[] threads = getThreads(handler, list, context.getHandler());
         handler.setThreads(threads);
         return handler;
     }
