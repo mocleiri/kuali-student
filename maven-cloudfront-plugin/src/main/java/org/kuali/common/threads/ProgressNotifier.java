@@ -2,7 +2,7 @@ package org.kuali.common.threads;
 
 public class ProgressNotifier<T> {
 
-    ProgressListener<T> listener;
+    ProgressListener<T> listener = new NoOpListener<T>();
     int progress;
     int total;
 
