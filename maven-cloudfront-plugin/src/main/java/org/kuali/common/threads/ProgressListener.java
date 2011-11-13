@@ -1,10 +1,9 @@
 package org.kuali.common.threads;
 
-public interface ProgressListener {
-    void started(ProgressEvent event);
+public interface ProgressListener<T> {
+    void progressStarted();
 
-    void progress(ProgressEvent event);
+    void progressOccurred(int count, int total, ProgressEvent<T> event);
 
-    void completed(ProgressEvent event);
-
+    void progressCompleted();
 }

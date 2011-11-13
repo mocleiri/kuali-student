@@ -2,8 +2,7 @@ package org.kuali.common.threads;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-
-public class ThreadHandler implements UncaughtExceptionHandler {
+public class ThreadHandler<T> implements UncaughtExceptionHandler {
 
     ThreadGroup group;
     Thread[] threads;
@@ -11,7 +10,7 @@ public class ThreadHandler implements UncaughtExceptionHandler {
     boolean stopThreads;
     int elementsPerThread;
     int threadCount;
-    ProgressNotifier tracker;
+    ProgressNotifier<T> notifier;
 
     public ThreadGroup getGroup() {
         return group;
@@ -81,11 +80,11 @@ public class ThreadHandler implements UncaughtExceptionHandler {
         this.threadCount = threadCount;
     }
 
-    public ProgressNotifier getTracker() {
-        return tracker;
+    public ProgressNotifier<T> getNotifier() {
+        return notifier;
     }
 
-    public void setTracker(ProgressNotifier tracker) {
-        this.tracker = tracker;
+    public void setNotifier(ProgressNotifier<T> notifier) {
+        this.notifier = notifier;
     }
 }

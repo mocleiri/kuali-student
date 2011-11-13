@@ -2,19 +2,20 @@ package org.kuali.common.threads;
 
 import java.util.List;
 
-
 public class ThreadHandlerFactory {
 
-    public <T> ThreadHandler getThreadHandler(int threadCount, List<T> list, ElementHandler<T> elementHandler) {
+    public <T> ThreadHandler<T> getThreadHandler(int threadCount, List<T> list, ElementHandler<T> elementHandler) {
         int elementCount = list.size();
         int actualThreadCount = threadCount > elementCount ? elementCount : threadCount;
         int elementsPerThread = getElementsPerThread(actualThreadCount, list.size());
-        ThreadHandler handler = new ThreadHandler();
+        ThreadHandler<T> handler = new ThreadHandler<T>();
         handler.setThreadCount(threadCount);
         handler.setElementsPerThread(elementsPerThread);
-        ProgressNotifier tracker = new PercentCompleteTracker();
-        tracker.setTotal(list.size());
-        handler.setTracker(tracker);
+        ProgressListener<T> listener = new PercentCompleteTracker<T>();
+        ProgressNotifier<T> notifier = new ProgressNotifier<T>();
+        notifier.setListener(listener);
+        notifier.setTotal(list.size());
+        handler.setNotifier(notifier);
         ThreadGroup group = new ThreadGroup("List Iterator Threads");
         group.setDaemon(true);
         handler.setGroup(group);
@@ -24,14 +25,14 @@ public class ThreadHandlerFactory {
     }
 
     protected int getElementsPerThread(int threads, int elements) {
-        int requestsPerThread = elements / threads;
-        while (requestsPerThread * threads < elements) {
-            requestsPerThread++;
+        int elementsPerThread = elements / threads;
+        while (elementsPerThread * threads < elements) {
+            elementsPerThread++;
         }
-        return requestsPerThread;
+        return elementsPerThread;
     }
 
-    protected <T> Thread[] getThreads(ThreadHandler threadHandler, List<T> list, ElementHandler<T> elementHandler) {
+    protected <T> Thread[] getThreads(ThreadHandler<T> threadHandler, List<T> list, ElementHandler<T> elementHandler) {
         Thread[] threads = new Thread[threadHandler.getThreadCount()];
         for (int i = 0; i < threads.length; i++) {
             int offset = i * threadHandler.getElementsPerThread();
@@ -41,7 +42,7 @@ public class ThreadHandlerFactory {
             }
             ListIteratorContext<T> context = new ListIteratorContext<T>();
             context.setList(list);
-            context.setTracker(threadHandler.getTracker());
+            context.setTracker(threadHandler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setThreadHandler(threadHandler);

@@ -2,22 +2,21 @@ package org.kuali.common.threads;
 
 import java.util.List;
 
-
 public class ListIteratorContext<T> {
     int id;
     int offset;
     int length;
-    ThreadHandler threadHandler;
-    ProgressNotifier tracker;
+    ThreadHandler<T> threadHandler;
+    ProgressNotifier<T> tracker;
     List<T> list;
     ElementHandler<T> elementHandler;
 
-    public List<T> getList() {
-        return list;
+    public int getId() {
+        return id;
     }
 
-    public void setList(List<T> contexts) {
-        this.list = contexts;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getOffset() {
@@ -36,36 +35,36 @@ public class ListIteratorContext<T> {
         this.length = length;
     }
 
-    public ThreadHandler getThreadHandler() {
+    public ThreadHandler<T> getThreadHandler() {
         return threadHandler;
     }
 
-    public void setThreadHandler(ThreadHandler handler) {
-        this.threadHandler = handler;
+    public void setThreadHandler(ThreadHandler<T> threadHandler) {
+        this.threadHandler = threadHandler;
     }
 
-    public ProgressNotifier getTracker() {
+    public ProgressNotifier<T> getTracker() {
         return tracker;
     }
 
-    public void setTracker(ProgressNotifier tracker) {
+    public void setTracker(ProgressNotifier<T> tracker) {
         this.tracker = tracker;
     }
 
-    public int getId() {
-        return id;
+    public List<T> getList() {
+        return list;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setList(List<T> list) {
+        this.list = list;
     }
 
     public ElementHandler<T> getElementHandler() {
         return elementHandler;
     }
 
-    public void setElementHandler(ElementHandler<T> contextHandler) {
-        this.elementHandler = contextHandler;
+    public void setElementHandler(ElementHandler<T> elementHandler) {
+        this.elementHandler = elementHandler;
     }
 
 }

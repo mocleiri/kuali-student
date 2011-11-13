@@ -1,40 +1,32 @@
 package org.kuali.common.threads;
 
-import java.io.PrintStream;
+public class ProgressNotifier<T> {
 
-public class ProgressNotifier {
-
-    int count;
+    ProgressListener<T> listener;
+    int progress;
     int total;
-    PrintStream out = System.out;
-    String startToken = "[INFO] Progress: ";
-    String completeToken = "\n";
-    String progressToken = ".";
 
-    public synchronized int getCount() {
-        return count;
+    public synchronized int getProgress() {
+        return progress;
     }
 
-    public synchronized void increment() {
-        if (count == 0) {
-            showProgressStart();
+    public synchronized void notify(ProgressEvent<T> event) {
+        if (progress == 0) {
+            listener.progressStarted();
         }
-        showProgress(++count, total);
-        if (count == total) {
-            showProgressComplete();
+        progress++;
+        listener.progressOccurred(progress, total, event);
+        if (progress == total) {
+            listener.progressCompleted();
         }
     }
 
-    protected void showProgressComplete() {
-        out.print(completeToken);
+    public ProgressListener<T> getListener() {
+        return listener;
     }
 
-    protected void showProgressStart() {
-        out.print(startToken);
-    }
-
-    protected void showProgress(int count, int total) {
-        out.print(progressToken);
+    public void setListener(ProgressListener<T> listener) {
+        this.listener = listener;
     }
 
     public int getTotal() {
@@ -43,38 +35,6 @@ public class ProgressNotifier {
 
     public void setTotal(int total) {
         this.total = total;
-    }
-
-    public PrintStream getOut() {
-        return out;
-    }
-
-    public void setOut(PrintStream out) {
-        this.out = out;
-    }
-
-    public String getStartToken() {
-        return startToken;
-    }
-
-    public void setStartToken(String startToken) {
-        this.startToken = startToken;
-    }
-
-    public String getCompleteToken() {
-        return completeToken;
-    }
-
-    public void setCompleteToken(String completeToken) {
-        this.completeToken = completeToken;
-    }
-
-    public String getProgressToken() {
-        return progressToken;
-    }
-
-    public void setProgressToken(String progressToken) {
-        this.progressToken = progressToken;
     }
 
 }

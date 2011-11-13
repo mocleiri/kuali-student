@@ -389,7 +389,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             ListIteratorContext<ListObjectsContext> context = new ListIteratorContext<ListObjectsContext>();
             context.setList(contexts);
-            context.setTracker(handler.getTracker());
+            context.setTracker(handler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setThreadHandler(handler);
@@ -415,7 +415,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             ListIteratorContext<T> context = new ListIteratorContext<T>();
             context.setList(list);
-            context.setTracker(threadHandler.getTracker());
+            context.setTracker(threadHandler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setThreadHandler(threadHandler);
@@ -442,7 +442,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             UpdateDirectoryThreadContext context = new UpdateDirectoryThreadContext();
             context.setContexts(contexts);
-            context.setTracker(handler.getTracker());
+            context.setTracker(handler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setUpdater(this);
@@ -970,7 +970,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
 
             // Show some stats
-            getLog().info(getUploadCompleteMsg(millis, handler.getTracker().getCount()));
+            getLog().info(getUploadCompleteMsg(millis, handler.getNotifier().getProgress()));
             getLog().info("Total time: " + formatter.getTime(System.currentTimeMillis() - startTime));
             updateRoot(getS3PrefixContext(context, null));
         } catch (Exception e) {
