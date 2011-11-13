@@ -1,80 +1,249 @@
-<?xml version="1.0" encoding="UTF-8"?>
-  <!--
-    Copyright 2009 The Kuali Foundation Licensed under the Educational Community
-    License, Version 2.0 (the "License"); you may not use this file except in
-    compliance with the License. You may obtain a copy of the License at
-    http://www.osedu.org/licenses/ECL-2.0 Unless required by applicable law or
-    agreed to in writing, software distributed under the License is distributed
-    on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-    express or implied. See the License for the specific language governing
-    permissions and limitations under the License.
-  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.kuali.student</groupId>
-  <artifactId>student</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Kuali Student</name>
-  <modules>
-    <module>ks-security</module>
-    <module>ks-core</module>
-    <module>brms</module>
-    <module>ks-lum</module>
-    <module>ks-web</module>
-  </modules>
-  <repositories>
-    <repository>
-      <id>kuali.release</id>
-      <name>Main Kuali Repository</name>
-      <url>https://test.kuali.org/maven</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>kuali.s3.release</id>
-      <name>Main Kuali Repository</name>
-      <url>http://maven.kuali.org/release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <scm>
-    <connection>scm:svn:https://test.kuali.org/svn/student/branches/ks-1.0.x</connection>
-    <developerConnection>scm:svn:https://test.kuali.org/svn/student/branches/ks-1.0.x</developerConnection>
-  </scm>
-  <distributionManagement>
-    <repository>
-      <id>kuali.release</id>
-      <name>Main Kuali Repository</name>
-      <url>s3://maven.kuali.org/release</url>
-    </repository>
-    <snapshotRepository>
-      <id>kuali.snapshot</id>
-      <name>Kuali Snapshot Repository</name>
-      <url>s3://maven.kuali.org/snapshot</url>
-    </snapshotRepository>
-  </distributionManagement>
+  <artifactId>ks-myschool</artifactId> 
+  <name>My School Config</name>
+  <packaging>war</packaging>  
+  <description>Contains all KS modules and Rice</description>
+  <parent>
+    <groupId>org.kuali.student</groupId>
+	<artifactId>student</artifactId>
+    <version>1.2</version>
+  </parent>
+
+  <properties>
+    <ks.gwt.module.org>org.kuali.student.core.organization.ui.OrgEntry</ks.gwt.module.org>
+    <ks.gwt.module.lum>edu.kuali.config.lum.lu.ui.SampleLUMMain</ks.gwt.module.lum>
+  </properties>
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.kuali.maven</groupId>
-        <artifactId>kuali-wagon-s3</artifactId>
-        <version>1.0.6</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.0</version>
+        <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <preparationGoals>clean install</preparationGoals>
-          <arguments>-Dmaven.test.skip=true</arguments>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <phase>${ks.gwt.compile.phase}</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <modules>
+            <module>${ks.gwt.module.org}</module>
+            <module>${ks.gwt.module.lum}</module>
+          </modules>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>tomcat-maven-plugin</artifactId>
+        <version>1.0-beta-1</version>
+        <configuration>
+          <path>/ks-sample</path>
+          <port>8081</port>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>${oracle.ojdbc.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <webappDirectory>${project.build.directory}/${project.artifactId}-webapp</webappDirectory>
+          <dependentWarExcludes>**/web.xml,WEB-INF/lib/**,**/sampleTravelApplication.tag,org.kuali.student.*.ui.*/** </dependentWarExcludes>
         </configuration>
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+    </dependency>
+ 	<dependency>
+      <groupId>org.kuali.student.web</groupId>
+      <artifactId>ks-embedded</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <scope>runtime</scope>
+    </dependency>
+ <!--<dependency>
+      <groupId>org.kuali.rice</groupId>
+      <artifactId>rice-web</artifactId>
+      <version>${kuali.rice.version}</version>
+      <type>war</type>
+      <scope>runtime</scope>
+    </dependency> -->
+    <dependency>
+      <groupId>org.kuali.rice</groupId>
+      <artifactId>rice-impl</artifactId>
+      <version>${kuali.rice.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.admin</groupId>
+      <artifactId>ks-admin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-rice</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-ui</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.core</groupId>
+      <artifactId>ks-core-impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.common</groupId>
+      <artifactId>ks-common-ui</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.security</groupId>
+      <artifactId>ks-sts</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- these are needed for rice jsp's to work properly -->
+    <dependency>
+      <groupId>tomcat</groupId>
+      <artifactId>jasper-compiler</artifactId>
+      <version>5.5.15</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>tomcat</groupId>
+      <artifactId>jasper-compiler-jdt</artifactId>
+      <version>5.5.15</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>tomcat</groupId>
+      <artifactId>jasper-runtime</artifactId>
+      <version>5.5.15</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jdt</groupId>
+      <artifactId>core</artifactId>
+      <version>3.1.1</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!--  Sources for GWT Compile -->
+    <dependency>
+      <groupId>org.kuali.student.core</groupId>
+      <artifactId>ks-core-ui</artifactId>
+      <classifier>sources</classifier>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.core</groupId>
+      <artifactId>ks-core-rice</artifactId>
+      <classifier>sources</classifier>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.common</groupId>
+      <artifactId>ks-common-ui</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.common</groupId>
+      <artifactId>ks-common-api</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.core</groupId>
+      <artifactId>ks-core-api</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.common</groupId>
+      <artifactId>ks-common-util</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.common</groupId>
+      <artifactId>ks-common-impl</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-ui</artifactId>
+      <classifier>sources</classifier>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-program</artifactId>
+      <classifier>sources</classifier>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-ui-common</artifactId>
+      <classifier>sources</classifier>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.student.lum</groupId>
+      <artifactId>ks-lum-api</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>backport-util-concurrent</groupId>
+      <artifactId>backport-util-concurrent</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jsr107cache</groupId>
+      <artifactId>jsr107cache</artifactId>
+    </dependency>
+  </dependencies>
 </project>
