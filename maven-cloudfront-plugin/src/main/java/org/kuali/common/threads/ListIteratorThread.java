@@ -26,7 +26,7 @@ public class ListIteratorThread<T> implements Runnable {
             ProgressEvent<T> event = new ProgressEvent<T>();
             event.setElement(element);
             event.setIndex(i);
-            context.getTracker().notify(event);
+            context.getNotifier().notify(event);
         }
         logger.debug("Stopping - " + context.getId());
     }

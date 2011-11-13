@@ -6,7 +6,7 @@ public class ThreadHandler<T> implements UncaughtExceptionHandler {
 
     ThreadGroup group;
     Thread[] threads;
-    Throwable exception;
+    Exception exception;
     boolean stopThreads;
     int elementsPerThread;
     int threadCount;
@@ -56,12 +56,12 @@ public class ThreadHandler<T> implements UncaughtExceptionHandler {
         this.exception = new RuntimeException("Unexpected issue in thread [" + t.getId() + ":" + t.getName() + "]", e);
     }
 
-    public Throwable getException() {
-        return exception;
-    }
-
     public synchronized boolean isStopThreads() {
         return stopThreads;
+    }
+
+    public Exception getException() {
+        return exception;
     }
 
     public int getElementsPerThread() {

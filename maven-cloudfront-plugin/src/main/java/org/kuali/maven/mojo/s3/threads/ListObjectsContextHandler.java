@@ -27,7 +27,7 @@ public class ListObjectsContextHandler implements ElementHandler<ListObjectsCont
         AmazonS3Client client = bucketContext.getClient();
         ListObjectsRequest request = element.getRequest();
         request.getPrefix();
-        logger.info("[Thread:" + lpad(context.getId()) + ", Element:" + lpad(index) + "] " + request.getPrefix());
+        logger.debug("[Thread:" + lpad(context.getId()) + ", Element:" + lpad(index) + "] " + request.getPrefix());
         ObjectListing listing = client.listObjects(request);
         synchronized (mutex) {
             if (objectListings == null) {

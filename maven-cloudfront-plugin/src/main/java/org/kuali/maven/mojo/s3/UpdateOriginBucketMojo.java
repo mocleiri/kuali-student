@@ -20,6 +20,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.wagon.TransferFailedException;
+import org.kuali.common.threads.ConsoleListener;
 import org.kuali.common.threads.ElementHandler;
 import org.kuali.common.threads.ListIteratorContext;
 import org.kuali.common.threads.ListIteratorThread;
@@ -86,23 +87,23 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
     /**
      * The max number of threads to use when updating indexes
      *
-     * @parameter expression="${cloudfront.maxThreads}" default-value="30"
+     * @parameter expression="${cloudfront.threads}" default-value="30"
      */
-    private int maxThreads;
+    private int threads;
 
     /**
      * This parameter should represent the portion of the groupId that is implied by the hostname where content is
      * published.
      *
-     * For example, all of the groupId's for Kuali Foundation begin with "org.kuali". The hostname where all Maven
-     * generated site content gets published is "site.kuali.org".
+     * For example, the Kuali Rice project has the groupId "org.kuali.rice" whereas content for the Kuali Rice project
+     * is published under "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname
+     * "site.kuali.org" and is thus removed when calculating the url in order to keep things a little more compact.
      *
-     * The base url for accessing the Maven generated web content for a Kuali Foundation project is the hostname plus
-     * the non-redundant portion of the groupId.
+     * All of the groupId's for Kuali Foundation begin with "org.kuali". The hostname where all Maven generated site
+     * content gets published is "site.kuali.org".
      *
-     * The Kuali Rice project has the groupId "org.kuali.rice". Content for the Kuali Rice project is published under
-     * "site.kuali.org/rice". The "org.kuali" portion of the groupId is implied from the hostname "site.kuali.org" and
-     * is thus removed when calculating the url in order to keep things a little more compact.
+     * The base url for accessing the Maven generated web content is the hostname plus the non-redundant portion of the
+     * groupId.
      *
      * If this parameter is not supplied, the complete groupId is used.
      *
@@ -232,8 +233,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         long start = System.currentTimeMillis();
         ObjectListing listing = context.getClient().listObjects(request);
         long millis = System.currentTimeMillis() - start;
-        TIMER.addMillis(millis);
-        getLog().info(getListMsg(millis));
+        getLog().info(getListMsg(listing.getCommonPrefixes().size(), millis));
 
         // If we have more than 1000 objects in the current directory we have an issue
         if (listing.isTruncated()) {
@@ -258,18 +258,17 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         String bucket = context.getBucket();
         String delimiter = context.getDelimiter();
         Integer maxKeys = context.getMaxKeys();
+        if (prefix.equals(delimiter)) {
+            prefix = null;
+        }
         ListObjectsRequest request = new ListObjectsRequest(bucket, prefix, null, delimiter, maxKeys);
         return request;
     }
 
-    protected String getListMsg(long millis) {
-        long total = TIMER.getMillis();
-        long count = TIMER.getCount();
+    protected String getListMsg(int size, long millis) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Listing Request:" + formatter.getTime(millis));
-        sb.append(" Total:" + formatter.getTime(total));
-        sb.append(" Count:" + count);
-        sb.append(" Avg:" + formatter.getTime(total / count));
+        sb.append("Request:" + formatter.getTime(millis));
+        sb.append(" Dirs:" + size);
         return sb.toString();
     }
 
@@ -292,31 +291,40 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             // Get a list of prefixes representing other directories in this directory and the directories
             // leading back to (and including) the root directory
             List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
-            List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
-
-            // Start some threads for listing the contents of each directory
-            ThreadHandlerFactory factory = new ThreadHandlerFactory();
-            ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
-
-            ThreadHandlerContext<ListObjectsContext> thc = new ThreadHandlerContext<ListObjectsContext>();
-            thc.setMax(maxThreads);
-            thc.setHandler(elementHandler);
-            thc.setList(contexts);
-            ThreadHandler<ListObjectsContext> handler = factory.getThreadHandler(thc);
-            handler.executeThreads();
-            if (handler.getException() != null) {
-                throw new MojoExecutionException("Unexpected error:", handler.getException());
-            }
-            List<ObjectListing> listings = elementHandler.getObjectListings();
+            List<ObjectListing> listings = getObjectListings(context, prefixes, threads);
             listings.add(listing);
-
-            getLog().info("listings: " + listings.size());
-            getLog().info("prefixes: " + prefixes.size());
-            getLog().info("contexts: " + contexts.size());
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
         }
+    }
+
+    protected List<ObjectListing> getObjectListings(S3BucketContext context, List<String> prefixes, int maxThreads) {
+        List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
+
+        // Start some threads for listing the contents of each directory
+        ThreadHandlerFactory factory = new ThreadHandlerFactory();
+        ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
+
+        ThreadHandlerContext<ListObjectsContext> thc = new ThreadHandlerContext<ListObjectsContext>();
+        thc.setMax(maxThreads);
+        thc.setHandler(elementHandler);
+        thc.setList(contexts);
+        thc.setListener(new ConsoleListener<ListObjectsContext>());
+        ThreadHandler<ListObjectsContext> handler = factory.getThreadHandler(thc);
+        int elementsPerThread = handler.getElementsPerThread();
+        getLog().info("Acquiring index info [t:" + handler.getThreadCount() + " e:" + elementsPerThread + "]");
+        long start = System.currentTimeMillis();
+        handler.executeThreads();
+        long millis = System.currentTimeMillis() - start;
+        int count = handler.getNotifier().getProgress();
+        String time = formatter.getTime(millis);
+        String avg = formatter.getTime(millis / count);
+        getLog().info("Requests:" + count + " Time:" + time + " Avg:" + avg);
+        if (handler.getException() != null) {
+            throw new AmazonServiceException("Unexpected error acquiring object listings.", handler.getException());
+        }
+        return elementHandler.getObjectListings();
     }
 
     protected List<ObjectListing> getObjectListings(List<ListObjectsContext> contexts) {
@@ -350,7 +358,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     protected <T> ThreadHandler getThreadHandler2(List<T> list, ElementHandler<T> elementHandler) {
         int elementCount = list.size();
-        int threadCount = maxThreads > elementCount ? elementCount : maxThreads;
+        int threadCount = threads > elementCount ? elementCount : threads;
         int elementsPerThread = getElementsPerThread(threadCount, list.size());
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(threadCount);
@@ -368,7 +376,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     protected ThreadHandler getThreadHandler(List<UpdateDirectoryContext> contexts) {
         int updateCounts = contexts.size();
-        int actualThreadCount = maxThreads > updateCounts ? updateCounts : maxThreads;
+        int actualThreadCount = threads > updateCounts ? updateCounts : threads;
         int requestsPerThread = getElementsPerThread(actualThreadCount, contexts.size());
         ThreadHandler handler = new ThreadHandler();
         handler.setThreadCount(actualThreadCount);
@@ -394,7 +402,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             ListIteratorContext<ListObjectsContext> context = new ListIteratorContext<ListObjectsContext>();
             context.setList(contexts);
-            context.setTracker(handler.getNotifier());
+            context.setNotifier(handler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setThreadHandler(handler);
@@ -420,7 +428,7 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             }
             ListIteratorContext<T> context = new ListIteratorContext<T>();
             context.setList(list);
-            context.setTracker(threadHandler.getNotifier());
+            context.setNotifier(threadHandler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setThreadHandler(threadHandler);
@@ -918,12 +926,12 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         this.organizationGroupId = organizationGroupId;
     }
 
-    public int getMaxThreads() {
-        return maxThreads;
+    public int getThreads() {
+        return threads;
     }
 
-    public void setMaxThreads(int threadCount) {
-        this.maxThreads = threadCount;
+    public void setThreads(int threadCount) {
+        this.threads = threadCount;
     }
 
     public int getMaxDepth() {

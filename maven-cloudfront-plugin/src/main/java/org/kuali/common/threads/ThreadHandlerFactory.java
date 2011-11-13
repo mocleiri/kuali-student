@@ -6,12 +6,12 @@ public class ThreadHandlerFactory {
 
     public <T> ThreadHandler<T> getThreadHandler(ThreadHandlerContext<T> context) {
         List<T> list = context.getList();
-        int threadCount = context.getMax();
-        int elementCount = list.size();
-        int actualThreadCount = threadCount > elementCount ? elementCount : threadCount;
+        int max = context.getMax();
+        int min = context.getMin();
+        int actualThreadCount = getActualThreadCount(max, min, list.size(), context.getDivisor());
         int elementsPerThread = getElementsPerThread(actualThreadCount, list.size());
         ThreadHandler<T> handler = new ThreadHandler<T>();
-        handler.setThreadCount(threadCount);
+        handler.setThreadCount(actualThreadCount);
         handler.setElementsPerThread(elementsPerThread);
         ProgressNotifier<T> notifier = new ProgressNotifier<T>();
         notifier.setListener(context.getListener());
@@ -23,6 +23,30 @@ public class ThreadHandlerFactory {
         Thread[] threads = getThreads(handler, list, context.getHandler());
         handler.setThreads(threads);
         return handler;
+    }
+
+    protected int getActualThreadCount(int maxThreads, int minThreads, int elementCount, int divisor) {
+
+        if (maxThreads > elementCount) {
+            // No need for more threads than elements
+            maxThreads = elementCount;
+        }
+
+        if (minThreads > elementCount) {
+            // If there are fewer elements than min threads, drop down to elementCount
+            minThreads = elementCount;
+        }
+        int actualThreadCount = maxThreads;
+        if (divisor > 0) {
+            actualThreadCount = elementCount / divisor;
+        }
+        if (actualThreadCount > maxThreads) {
+            actualThreadCount = maxThreads;
+        }
+        if (actualThreadCount < minThreads) {
+            actualThreadCount = minThreads;
+        }
+        return actualThreadCount;
     }
 
     protected int getElementsPerThread(int threads, int elements) {
@@ -43,7 +67,7 @@ public class ThreadHandlerFactory {
             }
             ListIteratorContext<T> context = new ListIteratorContext<T>();
             context.setList(list);
-            context.setTracker(threadHandler.getNotifier());
+            context.setNotifier(threadHandler.getNotifier());
             context.setOffset(offset);
             context.setLength(length);
             context.setThreadHandler(threadHandler);

@@ -21,7 +21,7 @@ public class ConsoleListener<T> implements ProgressListener<T> {
 
     @Override
     public void progressOccurred(int count, int total, ProgressEvent<T> event) {
-        out.println(progressToken);
+        out.print(progressToken);
     }
 
 }
