@@ -8,7 +8,7 @@ public class ThreadHandlerContext<T> {
     int divisor;
     List<T> list;
     ElementHandler<T> handler;
-    ProgressListener<T> listener;
+    ProgressListener<T> listener = new NoOpListener<T>();
 
     public int getMin() {
         return min;

@@ -3,7 +3,7 @@ package org.kuali.common.threads;
 /**
  * Print a dot whenever there is progress of 2% or more
  */
-public class PercentCompleteTracker<T> extends ConsoleListener<T> {
+public class PercentCompleteListener<T> extends ConsoleListener<T> {
     int percentageIncrement = 2;
     int percentCompletePrevious;
 

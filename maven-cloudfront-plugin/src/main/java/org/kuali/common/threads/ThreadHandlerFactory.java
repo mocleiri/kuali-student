@@ -10,6 +10,9 @@ public class ThreadHandlerFactory {
         int min = context.getMin();
         int actualThreadCount = getActualThreadCount(max, min, list.size(), context.getDivisor());
         int elementsPerThread = getElementsPerThread(actualThreadCount, list.size());
+        while (elementsPerThread * (actualThreadCount - 1) > list.size()) {
+            actualThreadCount--;
+        }
         ThreadHandler<T> handler = new ThreadHandler<T>();
         handler.setThreadCount(actualThreadCount);
         handler.setElementsPerThread(elementsPerThread);
@@ -28,12 +31,12 @@ public class ThreadHandlerFactory {
     protected int getActualThreadCount(int maxThreads, int minThreads, int elementCount, int divisor) {
 
         if (maxThreads > elementCount) {
-            // No need for more threads than elements
+            // If there are fewer elements than max threads, drop maxThreads down to elementCount
             maxThreads = elementCount;
         }
 
         if (minThreads > elementCount) {
-            // If there are fewer elements than min threads, drop down to elementCount
+            // If there are fewer elements than min threads, drop minThreads down to elementCount
             minThreads = elementCount;
         }
         int actualThreadCount = maxThreads;

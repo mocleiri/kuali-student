@@ -20,11 +20,13 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.kuali.common.threads.ConsoleListener;
+import org.kuali.common.threads.ElementHandler;
 import org.kuali.common.threads.ThreadHandler;
 import org.kuali.common.threads.ThreadHandlerContext;
 import org.kuali.common.threads.ThreadHandlerFactory;
 import org.kuali.maven.common.UrlBuilder;
 import org.kuali.maven.mojo.s3.threads.ListObjectsContextHandler;
+import org.kuali.maven.mojo.s3.threads.UpdateDirectoryContextHandler;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
@@ -67,7 +69,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  *
  * @goal updateoriginbucket
  */
-public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
+public class UpdateOriginBucketMojo extends S3Mojo {
     UrlBuilder builder = new UrlBuilder();
     SimpleFormatter formatter = new SimpleFormatter();
 
@@ -285,6 +287,10 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
             List<String> prefixes = getPrefixes(listing, prefix, context.getDelimiter());
             List<ObjectListing> listings = getObjectListings(context, prefixes, threads);
             listings.add(listing);
+            List<S3PrefixContext> contexts = getS3PrefixContexts(context, listings);
+            List<UpdateDirectoryContext> udcs = getUpdateDirContexts(contexts);
+            ElementHandler<UpdateDirectoryContext> handler = new UpdateDirectoryContextHandler(this);
+            invokeThreads(threads, handler, udcs);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Unexpected error: ", e);
@@ -293,35 +299,35 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
     protected List<ObjectListing> getObjectListings(S3BucketContext context, List<String> prefixes, int maxThreads) {
         List<ListObjectsContext> contexts = getListObjectsContexts(context, prefixes);
-
-        // Start some threads for listing the contents of each directory
-        ThreadHandlerFactory factory = new ThreadHandlerFactory();
         ListObjectsContextHandler elementHandler = new ListObjectsContextHandler();
+        invokeThreads(maxThreads, elementHandler, contexts);
+        return elementHandler.getObjectListings();
+    }
 
-        ThreadHandlerContext<ListObjectsContext> thc = new ThreadHandlerContext<ListObjectsContext>();
+    protected <T> void invokeThreads(int maxThreads, ElementHandler<T> elementHandler, List<T> list) {
+        ThreadHandlerFactory factory = new ThreadHandlerFactory();
+        ThreadHandlerContext<T> thc = new ThreadHandlerContext<T>();
         thc.setMax(maxThreads);
         thc.setHandler(elementHandler);
-        thc.setList(contexts);
-        thc.setListener(new ConsoleListener<ListObjectsContext>());
-        ThreadHandler<ListObjectsContext> handler = factory.getThreadHandler(thc);
+        thc.setList(list);
+        thc.setListener(new ConsoleListener<T>());
+        ThreadHandler<T> handler = factory.getThreadHandler(thc);
         int elementsPerThread = handler.getElementsPerThread();
-        getLog().info("Acquiring index info [t:" + handler.getThreadCount() + " e:" + elementsPerThread + "]");
+        getLog().info("Acquiring info [t:" + handler.getThreadCount() + " e:" + elementsPerThread + "]");
         long start = System.currentTimeMillis();
         handler.executeThreads();
         long millis = System.currentTimeMillis() - start;
         int count = handler.getNotifier().getProgress();
+        getLog().debug("count=" + count);
         String time = formatter.getTime(millis);
-        String avg = formatter.getTime(millis / count);
+        String avg = "?";
+        if (count > 0) {
+            avg = formatter.getTime(millis / count);
+        }
         getLog().info("Requests:" + count + " Time:" + time + " Avg:" + avg);
         if (handler.getException() != null) {
-            throw new AmazonServiceException("Unexpected error acquiring object listings.", handler.getException());
+            throw new AmazonServiceException("Unexpected error:", handler.getException());
         }
-        return elementHandler.getObjectListings();
-    }
-
-    protected List<ObjectListing> getObjectListings(List<ListObjectsContext> contexts) {
-        List<ObjectListing> objectListings = new ArrayList<ObjectListing>();
-        return objectListings;
     }
 
     protected String getUploadCompleteMsg(long millis, int count) {
@@ -345,6 +351,9 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         for (S3PrefixContext context : contexts) {
 
             if (context.isRoot()) {
+                UpdateDirectoryContext udc = new UpdateDirectoryContext();
+                udc.setContext(context);
+                list.add(udc);
                 continue;
             }
 
@@ -493,7 +502,6 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
         }
     }
 
-    @Override
     public void updateDirectory(UpdateDirectoryContext context) throws IOException {
         updateDirectory(context.getContext(), context.isCopyIfExists(), context.getCopyToKey());
     }
@@ -547,6 +555,14 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
      * If this is the root of the bucket and the default object either does not exist or was created by this plugin,
      * overwrite the default object with newly generated html. Otherwise, do nothing.
      */
+    public void updateRoot(UpdateDirectoryContext udc) throws IOException {
+        updateRoot(udc.getContext());
+    }
+
+    /**
+     * If this is the root of the bucket and the default object either does not exist or was created by this plugin,
+     * overwrite the default object with newly generated html. Otherwise, do nothing.
+     */
     protected void updateRoot(S3PrefixContext context) throws IOException {
         AmazonS3Client client = context.getBucketContext().getClient();
 
@@ -558,14 +574,44 @@ public class UpdateOriginBucketMojo extends S3Mojo implements BucketUpdater {
 
         boolean isCreateOrUpdateDefaultObject = isCreateOrUpdateDefaultObject(context);
         if (!isCreateOrUpdateDefaultObject) {
-            getLog().info("Put: " + sb.toString());
+            getLog().debug("Put: " + sb.toString());
             return;
         }
 
         // Update the default object
         PutObjectRequest request2 = getPutIndexObjectRequest(context.getHtml(), context.getDefaultObjectKey());
-        getLog().info("Put: " + sb.toString() + ", " + context.getDefaultObjectKey());
+        getLog().debug("Put: " + sb.toString() + ", " + context.getDefaultObjectKey());
         client.putObject(request2);
+    }
+
+    protected List<S3PrefixContext> getS3PrefixContexts(S3BucketContext context, List<ObjectListing> listings) {
+        List<S3PrefixContext> contexts = new ArrayList<S3PrefixContext>();
+        for (ObjectListing listing : listings) {
+            S3PrefixContext prefixContext = getS3PrefixContext(context, listing);
+            contexts.add(prefixContext);
+        }
+        return contexts;
+    }
+
+    protected S3PrefixContext getS3PrefixContext(S3BucketContext context, ObjectListing objectListing) {
+        String prefix = objectListing.getPrefix();
+        String delimiter = context.getDelimiter();
+        List<String[]> data = converter.getData(objectListing, prefix, delimiter);
+        String html = generator.getHtml(data, prefix, delimiter);
+        String defaultObjectKey = StringUtils.isEmpty(prefix) ? getDefaultObjectKey() : prefix + getDefaultObjectKey();
+        String browseHtmlKey = StringUtils.isEmpty(prefix) ? getBrowseKey() : prefix + getBrowseKey();
+        // Is this the root of the bucket?
+        boolean isRoot = StringUtils.isEmpty(prefix);
+
+        S3PrefixContext prefixContext = new S3PrefixContext();
+        prefixContext.setObjectListing(objectListing);
+        prefixContext.setHtml(html);
+        prefixContext.setRoot(isRoot);
+        prefixContext.setDefaultObjectKey(defaultObjectKey);
+        prefixContext.setPrefix(prefix);
+        prefixContext.setBucketContext(context);
+        prefixContext.setBrowseHtmlKey(browseHtmlKey);
+        return prefixContext;
     }
 
     protected S3PrefixContext getS3PrefixContext(S3BucketContext context, String prefix) {
