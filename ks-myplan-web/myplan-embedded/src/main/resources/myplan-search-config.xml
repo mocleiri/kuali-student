@@ -48,28 +48,30 @@
                 <entry key="myplan.lu.search.current">
                     <value>
                         SELECT
-                        clu.id
+                            clu.id
                         FROM Clu clu
                         LEFT JOIN clu.officialIdentifier officialIdentifier
                         LEFT JOIN clu.descr cludesc
                         WHERE
-                        clu.version.currentVersionStart &lt;= CURRENT_DATE
-                        AND
-                        (
-                        clu.version.currentVersionEnd &gt; CURRENT_DATE
-                        OR
-                        clu.version.currentVersionEnd IS NULL
-                        )
-                        AND
-                        (
-                        officialIdentifier.longName LIKE UPPER( '%'||:queryText||'%' )
-                        OR
-                        officialIdentifier.division LIKE UPPER( '%'||:queryText||'%' )
-                        OR
-                        officialIdentifier.code LIKE UPPER( '%'||:queryText||'%' )
-                        OR
-                        UPPER(cludesc.plain) LIKE UPPER( '%'||:queryText||'%' )
-                        )
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                            (
+                                officialIdentifier.longName LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                officialIdentifier.division LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                officialIdentifier.code LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                UPPER(cludesc.plain) LIKE UPPER( '%'||:queryText||'%' )
+                            )
+                            AND
+                            officialIdentifier.level LIKE :queryLevel
                     </value>
                 </entry>
 
