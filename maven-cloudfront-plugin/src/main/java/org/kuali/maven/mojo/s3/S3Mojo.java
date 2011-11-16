@@ -26,8 +26,7 @@ public abstract class S3Mojo extends BaseMojo {
     Mimetypes mimeTypes = Mimetypes.getInstance();
 
     /**
-     * This is the id of the server from settings.xml containing Amazon AWS
-     * credentials.
+     * This is the id of the server from settings.xml containing Amazon AWS credentials.
      *
      * @parameter expression="${cloudfront.serverId}"
      */
@@ -76,8 +75,7 @@ public abstract class S3Mojo extends BaseMojo {
      */
     private String bucket;
 
-    protected ObjectMetadata getObjectMetadata(final String location,
-            final Resource resource) throws IOException {
+    protected ObjectMetadata getObjectMetadata(String location, Resource resource) throws IOException {
         ObjectMetadata om = new ObjectMetadata();
         String contentType = mimeTypes.getMimetype(location);
         om.setContentType(contentType);
@@ -85,20 +83,17 @@ public abstract class S3Mojo extends BaseMojo {
         return om;
     }
 
-    protected PutObjectRequest getPutObjectRequest(final String location, final String key)
-            throws IOException {
+    protected PutObjectRequest getPutObjectRequest(final String location, final String key) throws IOException {
         ResourceLoader loader = new DefaultResourceLoader();
         Resource resource = loader.getResource(location);
         InputStream in = resource.getInputStream();
         ObjectMetadata objectMetadata = getObjectMetadata(location, resource);
-        PutObjectRequest request = new PutObjectRequest(getBucket(), key, in,
-                objectMetadata);
+        PutObjectRequest request = new PutObjectRequest(getBucket(), key, in, objectMetadata);
         request.setCannedAcl(CannedAccessControlList.PublicRead);
         return request;
     }
 
-    protected PutObjectRequest getPutObjectRequest(final String location)
-            throws IOException {
+    protected PutObjectRequest getPutObjectRequest(final String location) throws IOException {
         String key = location.substring(1);
         return getPutObjectRequest(location, key);
     }
