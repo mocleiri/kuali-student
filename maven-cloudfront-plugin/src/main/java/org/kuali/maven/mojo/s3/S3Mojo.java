@@ -29,49 +29,49 @@ public abstract class S3Mojo extends BaseMojo {
      * This is the id of the server from settings.xml containing Amazon AWS
      * credentials.
      *
-     * @parameter expression="${serverId}"
+     * @parameter expression="${cloudfront.serverId}"
      */
     private String serverId;
 
     /**
      * Only update the bucket hierarchy underneath this prefix.
      *
-     * @parameter expression="${prefix}"
+     * @parameter expression="${cloudfront.prefix}"
      */
     private String prefix;
 
     /**
      * The delimiter used to organize keys into a hierarchy.
      *
-     * @parameter expression="${delimiter}" default-value="/"
+     * @parameter expression="${cloudfront.delimiter}" default-value="/"
      */
     private String delimiter;
 
     /**
      * Maximum number of keys to return per query.
      *
-     * @parameter expression="${maxKeys}"
+     * @parameter expression="${cloudfront.maxKeys}"
      */
     private Integer maxKeys;
 
     /**
      * Amazon AWS Access Key Id. See also <code>serverId</code>.
      *
-     * @parameter expression="${accessKeyId}"
+     * @parameter expression="${cloudfront.accessKeyId}"
      */
     private String accessKeyId;
 
     /**
      * Amazon AWS Secret Access Key. See also <code>serverId</code>.
      *
-     * @parameter expression="${secretAccessKey}"
+     * @parameter expression="${cloudfront.secretAccessKey}"
      */
     private String secretAccessKey;
 
     /**
      * The name of the bucket to update.
      *
-     * @parameter expression="${bucket}"
+     * @parameter expression="${cloudfront.bucket}"
      * @required
      */
     private String bucket;
