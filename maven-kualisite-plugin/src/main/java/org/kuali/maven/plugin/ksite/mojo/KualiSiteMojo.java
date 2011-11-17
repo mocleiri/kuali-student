@@ -50,7 +50,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
      * The prefix for the location that artifacts can be downloaded from
      *
      * @parameter expression="${downloadPrefix}"
-     * default-value="http://s3browse.springsource.com/browse/maven.kuali.org/"
+     *            default-value="http://s3browse.springsource.com/browse/maven.kuali.org/"
      */
     private String downloadPrefix;
 
@@ -107,32 +107,33 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     }
 
-    /**
-     * Return true if "s" is empty or contains "token"
-     */
-    protected boolean isReplace(final String s, final String token) {
-        if (StringUtils.isEmpty(s)) {
-            return true;
-        }
-        int pos = s.indexOf(token);
-        if (pos != -1) {
-            return true;
-        }
-        return false;
+    protected boolean containsUnresolvedProperty(String s) {
+        return s.contains("${");
     }
 
-    protected void warn(final String pomString, final String calculatedString, final String propertyDescription) {
+    /**
+     * Return true if "s" is empty or is an unresolved property
+     */
+    protected boolean isUnresolved(String s) {
+        if (StringUtils.isEmpty(s)) {
+            return true;
+        } else {
+            return containsUnresolvedProperty(s);
+        }
+    }
+
+    protected void warn(String pomString, String calculatedString, String propertyDescription) {
         getLog().warn("****************************************");
         getLog().warn(propertyDescription + " mismatch");
-        getLog().warn("Value from the POM: " + pomString);
-        getLog().warn("  Calculated value: " + calculatedString);
+        getLog().warn("  Supplied Value: " + pomString);
+        getLog().warn("Calculated value: " + calculatedString);
         getLog().warn("****************************************");
     }
 
     /**
      * Return true if the 2 urls are exactly the same or if the only thing different about them is a trailing slash
      */
-    protected boolean isUrlMatch(final String url1, final String url2) {
+    protected boolean isUrlMatch(String url1, String url2) {
         if (url1.equals(url2)) {
             return true;
         }
@@ -145,9 +146,9 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
         return false;
     }
 
-    protected void handleDownloadUrl(final String downloadUrl, final DistributionManagement dm) {
-        if (isReplace(dm.getDownloadUrl(), "${kuali.site.download.url}")) {
-            getLog().info("Setting download url to " + downloadUrl + " (was " + dm.getDownloadUrl() + ")");
+    protected void handleDownloadUrl(String downloadUrl, DistributionManagement dm) {
+        if (isUnresolved(dm.getDownloadUrl())) {
+            getLog().info("Setting download url to " + downloadUrl);
             dm.setDownloadUrl(downloadUrl);
             return;
         }
@@ -157,21 +158,21 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
         getLog().info("Using download url from the POM " + dm.getDownloadUrl());
     }
 
-    protected void handlePublishUrl(final String publishUrl, final Site site) {
-        if (isReplace(site.getUrl(), "${kuali.site.publish.url}")) {
-            getLog().info("Setting site publication url to " + publishUrl + " (was " + site.getUrl() + ")");
+    protected void handlePublishUrl(String publishUrl, Site site) {
+        if (isUnresolved(site.getUrl())) {
+            getLog().info("Setting site publication url to " + publishUrl);
             site.setUrl(publishUrl);
             return;
         }
         if (!isUrlMatch(publishUrl, site.getUrl())) {
             warn(site.getUrl(), publishUrl, "Site publication url");
         }
-        getLog().info("Using site publication url from the POM " + site.getUrl());
+        getLog().info("Using site publication url - " + site.getUrl());
     }
 
-    protected void handlePublicUrl(final String publicUrl, final MavenProject project) {
-        if (isReplace(project.getUrl(), "${kuali.site.public.url}")) {
-            getLog().info("Setting public url to " + publicUrl + " (was " + project.getUrl() + ")");
+    protected void handlePublicUrl(String publicUrl, MavenProject project) {
+        if (isUnresolved(project.getUrl())) {
+            getLog().info("Setting public url to " + publicUrl);
             project.setUrl(publicUrl);
             return;
         }
@@ -190,7 +191,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param project
-     * the project to set
+     *            the project to set
      */
     public void setProject(final MavenProject project) {
         this.project = project;
@@ -206,7 +207,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param bucket
-     * the bucket to set
+     *            the bucket to set
      */
     public void setBucket(final String bucket) {
         this.bucket = bucket;
@@ -222,7 +223,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param hostname
-     * the hostname to set
+     *            the hostname to set
      */
     public void setHostname(final String hostname) {
         this.hostname = hostname;
@@ -238,7 +239,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param downloadPrefix
-     * the downloadPrefix to set
+     *            the downloadPrefix to set
      */
     public void setDownloadPrefix(final String downloadPrefix) {
         this.downloadPrefix = downloadPrefix;
@@ -254,7 +255,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param parentGroupId
-     * the parentGroupId to set
+     *            the parentGroupId to set
      */
     public void setOrganizationGroupId(final String parentGroupId) {
         this.organizationGroupId = parentGroupId;
@@ -270,7 +271,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param publishUrlProtocol
-     * the publishUrlProtocol to set
+     *            the publishUrlProtocol to set
      */
     public void setPublishUrlProtocol(final String publishUrlProtocol) {
         this.publishUrlProtocol = publishUrlProtocol;
@@ -286,7 +287,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param publicUrlProtocol
-     * the publicUrlProtocol to set
+     *            the publicUrlProtocol to set
      */
     public void setPublicUrlProtocol(final String publicUrlProtocol) {
         this.publicUrlProtocol = publicUrlProtocol;
@@ -302,7 +303,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param downloadSnapshotPrefix
-     * the downloadSnapshotPrefix to set
+     *            the downloadSnapshotPrefix to set
      */
     public void setDownloadSnapshotPrefix(final String downloadSnapshotPrefix) {
         this.downloadSnapshotPrefix = downloadSnapshotPrefix;
@@ -318,7 +319,7 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
      * @param downloadReleasePrefix
-     * the downloadReleasePrefix to set
+     *            the downloadReleasePrefix to set
      */
     public void setDownloadReleasePrefix(final String downloadReleasePrefix) {
         this.downloadReleasePrefix = downloadReleasePrefix;
