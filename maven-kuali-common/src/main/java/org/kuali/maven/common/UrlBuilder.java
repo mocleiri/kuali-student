@@ -14,17 +14,16 @@ public class UrlBuilder {
     private static final Logger logger = LoggerFactory.getLogger(UrlBuilder.class);
 
     /**
-     * Return true if the group id of the project positively matches the organizationGroupId. Return false if it does
-     * not, or if we can't make a comparison
+     * Return true if the groupId of the project positively matches the groupId passed in. False otherwise.
      */
-    protected boolean isTargetGroupId(MavenProject project, String organizationGroupId) {
+    protected boolean isTargetGroupId(MavenProject project, String groupId) {
         // Return false if we can't do a meaningful comparison
-        if (project == null || organizationGroupId == null) {
+        if (project == null || groupId == null) {
             return false;
         }
 
         // Check that it matches our target groupId
-        return organizationGroupId.equals(project.getGroupId());
+        return groupId.equals(project.getGroupId());
     }
 
     /**
@@ -60,9 +59,12 @@ public class UrlBuilder {
     /**
      * Return true if the artifact id should be appended to the url for site publication.
      *
-     * This method returns false when generating the html web site for the top level pom for a top level Kuali project.
+     * This method returns false for multi-module projects where the top level project's artifact id matches the final
+     * portion of the groupId.
      *
-     * We want the url to be site.kuali.org/rice not site.kuali.org/rice/rice
+     * For example, the Kuali Student top level pom has the groupId "org.kuali.student" and the artifactId "student". We
+     * want to translate that groupId + artifactId into "site.kuali.org/student" NOT "site.kuali.org/student/student"
+     *
      */
     protected boolean isAppendArtifactId(MavenProject project, String trimmedGroupId) {
         // Always append the artifactId for single module projects
@@ -88,7 +90,7 @@ public class UrlBuilder {
     }
 
     /**
-     * Return the portion to the right of the hostname for the published Maven web site
+     * Return the portion to the right of the hostname for the Maven web site
      */
     public String getSitePath(MavenProject project, String organizationGroupId) {
         String trimmedGroupId = getTrimmedGroupId(project, organizationGroupId);
@@ -106,7 +108,7 @@ public class UrlBuilder {
     }
 
     /**
-     * Return true if the Collection passed in is null or size zero
+     * Return true if the Collection passed in is null or size zero, false otherwise
      */
     protected boolean isEmpty(Collection<?> c) {
         if (c == null || c.isEmpty()) {
@@ -116,108 +118,88 @@ public class UrlBuilder {
         }
     }
 
-    protected String getBaseUrl(String baseUrl, MavenProject project, SiteContext context) {
+    protected String getSiteUrl(MavenProject project, String urlBase, SiteContext context) {
+        String organizationGroupId = context.getOrganizationGroupId();
+        String trimmedGroupId = getTrimmedGroupId(project, organizationGroupId);
+        boolean appendArtifactId = isAppendArtifactId(project, trimmedGroupId);
         StringBuilder sb = new StringBuilder();
-        sb.append(baseUrl);
-        if (!baseUrl.endsWith("/")) {
+        sb.append(urlBase);
+        if (!urlBase.endsWith("/")) {
             sb.append("/");
         }
-        sb.append(getSitePath(project, context.getOrganizationGroupId()));
-        sb.append("/");
+        sb.append(getGroupIdPath(trimmedGroupId));
+        if (trimmedGroupId.length() > 0) {
+            sb.append("/");
+        }
+        if (appendArtifactId) {
+            sb.append(project.getArtifactId());
+            sb.append("/");
+        }
         sb.append(project.getVersion());
         sb.append("/");
         return sb.toString();
     }
 
-    protected String getBaseUrl(String protocol, String hostname, MavenProject project, SiteContext context) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(protocol);
-        sb.append("://");
-        sb.append(hostname);
-        sb.append("/");
-        sb.append(getSitePath(project, context.getOrganizationGroupId()));
-        return sb.toString();
-    }
-
-    public boolean isBaseCase(MavenProject project, String organizationGroupId) {
-        // If this is the organizations groupId return true
-        // This happens when using Maven to generate a site about the Kuali
-        // parent pom itself
-        if (isTargetGroupId(project, organizationGroupId)) {
-            return true;
-        }
-
-        // Otherwise, inspect the parent project
-        MavenProject parent = project.getParent();
-
-        // If there is no parent, return true
-        if (parent == null) {
-            return true;
-        }
-
-        // If the parent groupId is the organizations groupId return true
-        if (isTargetGroupId(parent, organizationGroupId)) {
-            return true;
-        }
-
-        // False otherwise
-        return false;
+    public String getPublishUrl(MavenProject project, SiteContext context) {
+        return getSiteUrl(project, context.getPublishBase(), context);
     }
 
     public String getPublicUrl(MavenProject project, SiteContext context) {
-        String organizationGroupId = context.getOrganizationGroupId();
-        if (isBaseCase(project, organizationGroupId)) {
-            return getBaseUrl(context.getPublicUrlProtocol(), context.getHostname(), project, context);
-        } else {
-            return getPublicUrl(project.getParent(), context) + project.getArtifactId() + "/";
-        }
+        return getSiteUrl(project, context.getPublicBase(), context);
     }
 
-    public String getPublishUrlBase(MavenProject project, SiteContext context) {
-        String baseUrl1 = System.getProperty("site.publish.base");
-        String baseUrl2 = project.getProperties().getProperty("site.publish.base");
-        if (StringUtils.isEmpty(baseUrl1) && StringUtils.isEmpty(baseUrl2)) {
-            logger.warn("site.publish.base not set");
-        }
-        return StringUtils.isEmpty(baseUrl1) ? baseUrl2 : baseUrl1;
-    }
-
-    public boolean isSnapshot(MavenProject project) {
-        String version = project.getVersion();
-        int pos = version.toUpperCase().indexOf("SNAPSHOT");
-        boolean isSnapshot = pos != -1;
-        return isSnapshot;
-    }
-
-    public MavenProject getMavenProject(String groupId, String artifactId, String packaging) {
-        MavenProject project = new MavenProject();
-        project.setGroupId(groupId);
-        project.setArtifactId(artifactId);
-        project.setPackaging(packaging);
-        return project;
-    }
-
+    /**
+     * Return the fully qualified URL for downloading a Kuali artifact from Kuali's Maven repo.
+     */
     public String getDownloadUrl(MavenProject project, SiteContext context) {
-        String prefix = context.getDownloadPrefix();
+        String baseUrl = context.getDownloadBase();
         StringBuilder sb = new StringBuilder();
-        sb.append(prefix);
-        if (!prefix.endsWith("/")) {
+        sb.append(baseUrl);
+        if (!baseUrl.endsWith("/")) {
             sb.append("/");
         }
-        if (isSnapshot(project)) {
-            sb.append(context.getDownloadSnapshotPrefix());
-        } else {
-            sb.append(context.getDownloadReleasePrefix());
-        }
+        sb.append(getDownloadPath(project, context));
         sb.append("/");
-        String groupId = project.getGroupId();
-        sb.append(groupId.replace('.', '/'));
+        sb.append(getGroupIdPath(project.getGroupId()));
         sb.append("/");
         sb.append(project.getArtifactId());
         sb.append("/");
         sb.append(project.getVersion());
         sb.append("/");
         return sb.toString();
+    }
+
+    /**
+     * Decide between "snapshot", "release", and "external"
+     */
+    protected String getDownloadPath(MavenProject project, SiteContext context) {
+        // All snapshots (Kuali and non-Kuali) go into the "snapshot" folder
+        if (isSnapshot(project)) {
+            return context.getDownloadSnapshotPath();
+        }
+
+        // If we get here we are dealing with a non-snapshot artifact
+
+        // Would be good to positively identify something as a release artifact
+        // instead of assuming "non-snapshot" == "release"
+
+        if (isKuali(project, context)) {
+            // For Kuali projects, this is "release"
+            return context.getDownloadReleasePath();
+        } else {
+            // For non-Kuali projects, this is "external"
+            return context.getDownloadExternalPath();
+        }
+    }
+
+    protected boolean isKuali(MavenProject project, SiteContext context) {
+        String organizationGroupId = context.getOrganizationGroupId();
+        return project.getGroupId().startsWith(organizationGroupId);
+    }
+
+    protected boolean isSnapshot(MavenProject project) {
+        String version = project.getVersion().toUpperCase();
+        return version.contains("SNAPSHOT");
     }
 
 }

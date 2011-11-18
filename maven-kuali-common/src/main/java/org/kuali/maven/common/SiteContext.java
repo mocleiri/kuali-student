@@ -1,19 +1,28 @@
 package org.kuali.maven.common;
 
+/**
+ *
+ */
 public interface SiteContext {
+
+    // The group id for the organization ie "org.kuali"
     public String getOrganizationGroupId();
 
-    public String getDownloadSnapshotPrefix();
+    // The base url for downloading ie "http://s3browse.springsource.com/browse/maven.kuali.org/"
+    public String getDownloadBase();
 
-    public String getDownloadReleasePrefix();
+    // The path to append to downloadBase for snapshot artifacts ie "snapshot"
+    public String getDownloadSnapshotPath();
 
-    public String getDownloadPrefix();
+    // The path to append to downloadBase for release artifacts ie "release"
+    public String getDownloadReleasePath();
 
-    public String getBucket();
+    // The path to append to downloadBase for non-Kuali artifacts ie "external"
+    public String getDownloadExternalPath();
 
-    public String getHostname();
+    // The base url for the public web site ie "http://site.kuali.org"
+    public String getPublicBase();
 
-    public String getPublicUrlProtocol();
-
-    public String getPublishUrlProtocol();
+    // The base url for publishing the public web site ie "s3://site.origin.kuali.org"
+    public String getPublishBase();
 }
