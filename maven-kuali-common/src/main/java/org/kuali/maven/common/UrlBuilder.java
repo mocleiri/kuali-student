@@ -118,6 +118,9 @@ public class UrlBuilder {
         }
     }
 
+    /**
+     * Return a fully qualified url given a MavenProject, urlBase, and a SiteContext
+     */
     protected String getSiteUrl(MavenProject project, String urlBase, SiteContext context) {
         String organizationGroupId = context.getOrganizationGroupId();
         String trimmedGroupId = getTrimmedGroupId(project, organizationGroupId);
@@ -140,10 +143,16 @@ public class UrlBuilder {
         return sb.toString();
     }
 
+    /**
+     * Return the fully qualified url where this MavenProject will be published.
+     */
     public String getPublishUrl(MavenProject project, SiteContext context) {
         return getSiteUrl(project, context.getPublishBase(), context);
     }
 
+    /**
+     * Return the fully qualified url where this MavenProject can be publicly accessible.
+     */
     public String getPublicUrl(MavenProject project, SiteContext context) {
         return getSiteUrl(project, context.getPublicBase(), context);
     }
@@ -174,7 +183,7 @@ public class UrlBuilder {
      */
     protected String getDownloadPath(MavenProject project, SiteContext context) {
         // All snapshots (Kuali and non-Kuali) go into the "snapshot" folder
-        if (isSnapshot(project)) {
+        if (isSnapshot(project.getVersion())) {
             return context.getDownloadSnapshotPath();
         }
 
@@ -183,7 +192,7 @@ public class UrlBuilder {
         // Would be good to positively identify something as a release artifact
         // instead of assuming "non-snapshot" == "release"
 
-        if (isKuali(project, context)) {
+        if (isOrganizationProject(project, context.getOrganizationGroupId())) {
             // For Kuali projects, this is "release"
             return context.getDownloadReleasePath();
         } else {
@@ -192,14 +201,12 @@ public class UrlBuilder {
         }
     }
 
-    protected boolean isKuali(MavenProject project, SiteContext context) {
-        String organizationGroupId = context.getOrganizationGroupId();
+    protected boolean isOrganizationProject(MavenProject project, String organizationGroupId) {
         return project.getGroupId().startsWith(organizationGroupId);
     }
 
-    protected boolean isSnapshot(MavenProject project) {
-        String version = project.getVersion().toUpperCase();
-        return version.contains("SNAPSHOT");
+    protected boolean isSnapshot(String version) {
+        return version.toUpperCase().contains("SNAPSHOT");
     }
 
 }
