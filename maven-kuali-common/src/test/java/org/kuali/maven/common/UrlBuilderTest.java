@@ -8,31 +8,43 @@ import org.junit.Test;
 
 public class UrlBuilderTest {
     UrlBuilder builder = new UrlBuilder();
+    SiteContext context = new DefaultSiteContext();
 
     @Test
     public void test1() {
-        SiteContext context = new DefaultSiteContext();
         MavenProject project = getTopLevelRice();
-        System.out.println(builder.getDownloadUrl(project, context));
-        System.out.println(builder.getPublicUrl(project, context));
-        System.out.println(builder.getPublishUrl(project, context));
+        show(project);
     }
 
     @Test
     public void test2() {
-        SiteContext context = new DefaultSiteContext();
-        MavenProject project = getTopLevelRice();
+        MavenProject project = getMavenProject(getKualiParentGAV());
+        show(project);
+    }
+
+    @Test
+    public void test3() {
+        MavenProjectTest project = getTopLevelRice();
+        List<MavenProjectTest> children = project.getChildren();
+        for (MavenProjectTest child : children) {
+            show(child);
+        }
+
+    }
+
+    protected void show(MavenProject project) {
         System.out.println(builder.getDownloadUrl(project, context));
         System.out.println(builder.getPublicUrl(project, context));
         System.out.println(builder.getPublishUrl(project, context));
+        System.out.println();
     }
 
     protected GAV getKualiParentGAV() {
-        return new GAV("org.kuali", "kuali", "29-SNAPSHOT");
+        return new GAV("org.kuali.pom", "kuali", "29-SNAPSHOT");
     }
 
     protected GAV getKualiCommonGAV() {
-        return new GAV("org.kuali", "kuali-common", "110-SNAPSHOT");
+        return new GAV("org.kuali.pom", "kuali-common", "110-SNAPSHOT");
     }
 
     protected GAV getRiceGAV() {
@@ -46,9 +58,26 @@ public class UrlBuilderTest {
         return gavs;
     }
 
-    protected MavenProject getTopLevelRice() {
+    protected List<MavenProjectTest> getMavenProjects(List<GAV> gavs) {
+        List<MavenProjectTest> projects = new ArrayList<MavenProjectTest>();
+        for (GAV gav : gavs) {
+            projects.add(getMavenProject(gav));
+        }
+        return projects;
+    }
+
+    protected MavenProject getRiceModule() {
         MavenProjectTest project = getMavenProject(getRiceGAV());
         project.setParent(getMavenProject(getKualiCommonGAV()));
+        project.setModules(getModules(getRiceModuleGAVs()));
+        return project;
+    }
+
+    protected MavenProjectTest getTopLevelRice() {
+        MavenProjectTest project = getMavenProject(getRiceGAV());
+        project.setParent(getMavenProject(getKualiCommonGAV()));
+        List<MavenProjectTest> children = getMavenProjects(getRiceModuleGAVs());
+        project.setChildren(children);
         project.setModules(getModules(getRiceModuleGAVs()));
         return project;
     }

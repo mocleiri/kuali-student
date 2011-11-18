@@ -7,6 +7,7 @@ import org.apache.maven.project.MavenProject;
 
 public class MavenProjectTest extends MavenProject {
     List<String> modules;
+    List<MavenProjectTest> children;
 
     public MavenProjectTest() {
         super();
@@ -23,6 +24,14 @@ public class MavenProjectTest extends MavenProject {
 
     public void setModules(List<String> modules) {
         this.modules = modules;
+    }
+
+    public List<MavenProjectTest> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<MavenProjectTest> children) {
+        this.children = children;
     }
 
 }
