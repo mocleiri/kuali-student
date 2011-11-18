@@ -84,7 +84,7 @@ public class UrlBuilder {
     /**
      * Return true if the project has no parent, OR is one of the official org POM's. False otherwise.
      */
-    public boolean isTopLevelProject(MavenProject project, List<MavenProject> orgPoms) {
+    protected boolean isTopLevelProject(MavenProject project, List<MavenProject> orgPoms) {
         MavenProject parent = project.getParent();
         if (parent == null) {
             return true;
@@ -266,7 +266,7 @@ public class UrlBuilder {
     /**
      * Return a List representing the complete hierarchy for this project.
      *
-     * The list is ordered from the top level pom down to the project passed in
+     * The list is ordered where the top level pom is first, and the current project is last
      */
     protected List<MavenProject> getProjectPath(MavenProject project) {
         List<MavenProject> projects = new ArrayList<MavenProject>();
