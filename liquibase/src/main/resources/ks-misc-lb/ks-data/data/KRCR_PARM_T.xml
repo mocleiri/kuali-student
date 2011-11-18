@@ -278,7 +278,7 @@ against notes, document explanations, and routing annotations."/>
 			<column name="CMPNT_CD" value="Document"/>
 			<column name="EVAL_OPRTR_CD" value="A"/>
 			<column name="NMSPC_CD" value="KR-NS"/>
-			<column name="OBJ_ID" value="B0A286B305B1648DE040C60AF05B486F"/>
+			<column name="OBJ_ID" value="B0C53ED4C5B4179CE040C60AF05B26B9"/>
 			<column name="PARM_DESC_TXT" value="Controls whether the nervous system will show the blanket approve button to a user who is authorized for blanket approval but is neither the initiator of the particular document nor the recipient of an active, pending, approve action request."/>
 			<column name="PARM_NM" value="ALLOW_ENROUTE_BLANKET_APPROVE_WITHOUT_APPROVAL_REQUEST_IND"/>
 			<column name="PARM_TYP_CD" value="CONFG"/>

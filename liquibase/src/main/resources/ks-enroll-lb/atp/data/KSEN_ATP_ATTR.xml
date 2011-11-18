@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_ATP_ATTR-initial-data" author="alubbers">
+		<insert tableName="KSEN_ATP_ATTR">
+			<column name="ATTR_KEY" value="CredentialProgramType"/>
+			<column name="ATTR_VALUE" value="kuali.lu.type.credential.Baccalaureate"/>
+			<column name="ID" value="REFERENCEAY2011-2012CREDENTIALPROGRAMTYPE"/>
+			<column name="OBJ_ID" value="201E87EBD8EB48FDA655BFBB88D4006D"/>
+			<column name="OWNER" value="testAtpId1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

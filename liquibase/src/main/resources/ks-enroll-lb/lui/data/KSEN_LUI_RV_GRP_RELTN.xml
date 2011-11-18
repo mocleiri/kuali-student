@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LUI_RV_GRP_RELTN-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="50D39EC5276B47C49899107D684629EB0"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="50D39EC5276B47C49899107D684629EB1"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="50D39EC5276B47C49899107D684629EB2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="50D39EC5276B47C49899107D684629EB3"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="50D39EC5276B47C49899107D684629EB4"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="LuiLrc1"/>
+			<column name="LUI_ID" value="Lui-1"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+		<insert tableName="KSEN_LUI_RV_GRP_RELTN">
+			<column name="ID" value="LuiLrc2"/>
+			<column name="LUI_ID" value="Lui-2"/>
+			<column name="RV_GRP_ID" value="kuali.resultComponent.grade.letter"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

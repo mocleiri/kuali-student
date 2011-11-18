@@ -163,7 +163,7 @@
 			<column name="OBJ_ID" value="6166CBA1BA82644DE0404F8189D86C09"/>
 			<column name="PARNT_ID" value="2680"/>
 			<column name="RTE_VER_NBR" value="2"/>
-			<column name="VER_NBR" value="2"/>
+			<column name="VER_NBR" value="3"/>
 		</insert>
 		<insert tableName="KREW_DOC_TYP_T">
 			<column name="ACTV_IND" value="1"/>
@@ -549,6 +549,23 @@
 			<column name="GRP_ID" value="1"/>
 			<column name="LBL" value="Course Offering Info Maintenance Document"/>
 			<column name="OBJ_ID" value="48c8e031-ed88-4492-817a-848b2109808d"/>
+			<column name="PARNT_ID" value="2681"/>
+			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
+			<column name="RTE_VER_NBR" value="2"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KREW_DOC_TYP_T">
+			<column name="ACTV_IND" value="1"/>
+			<column name="BLNKT_APPR_GRP_ID" value="1"/>
+			<column name="CUR_IND" value="1"/>
+			<column name="DOC_HDLR_URL" value="${application.url}/spring/maintenance?methodToCall=docHandler&amp;dataObjectClassName=org.kuali.student.enrollment.class2.acal.dto.AcademicCalendarWrapper"/>
+			<column name="DOC_TYP_DESC" value="New Academic Calendar"/>
+			<column name="DOC_TYP_ID" value="3020"/>
+			<column name="DOC_TYP_NM" value="AcademicCalendarWrapperMaintenanceDocument"/>
+			<column name="DOC_TYP_VER_NBR" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="LBL" value="Academic Calendar Maintenance Document"/>
+			<column name="OBJ_ID" value="97a4a467-5403-4d6d-922b-6c35c91de521"/>
 			<column name="PARNT_ID" value="2681"/>
 			<column name="POST_PRCSR" value="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"/>
 			<column name="RTE_VER_NBR" value="2"/>

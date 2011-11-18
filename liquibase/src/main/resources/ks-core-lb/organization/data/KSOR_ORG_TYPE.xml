@@ -139,7 +139,7 @@
 		<insert tableName="KSOR_ORG_TYPE">
 			<column name="EFF_DT" valueDate="2010-07-01T00:00:00"/>
 			<column name="NAME" value="Testing Service"/>
-			<column name="OBJ_ID" value="B0A286B30413648DE040C60AF05B486F"/>
+			<column name="OBJ_ID" value="B0C53ED4C416179CE040C60AF05B26B9"/>
 			<column name="TYPE_DESC" value="An organization creates and administers standardized tests"/>
 			<column name="TYPE_KEY" value="kuali.org.TestingService"/>
 			<column name="VER_NBR" value="0"/>

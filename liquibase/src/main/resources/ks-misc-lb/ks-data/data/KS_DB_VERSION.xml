@@ -1,14 +1,14 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	<changeSet id="KS_DB_VERSION-initial-data" author="alubbers">
 		<insert tableName="KS_DB_VERSION">
-			<column name="BUILD_ID" value="1.3-ks-impex-build-138"/>
-			<column name="BUILD_TIMESTAMP" value="2011-10-31 19:31 EST"/>
+			<column name="BUILD_ID" value="1.3-ks-impex-build-143"/>
+			<column name="BUILD_TIMESTAMP" value="2011-11-02 12:56 EST"/>
 			<column name="MODULE_NAME" value="ks-core-sql"/>
 			<column name="VERSION" value="1.3.0-SNAPSHOT"/>
 		</insert>
 		<insert tableName="KS_DB_VERSION">
-			<column name="BUILD_ID" value="1.3-ks-impex-build-138"/>
-			<column name="BUILD_TIMESTAMP" value="2011-10-31 19:31 EST"/>
+			<column name="BUILD_ID" value="1.3-ks-impex-build-143"/>
+			<column name="BUILD_TIMESTAMP" value="2011-11-02 12:56 EST"/>
 			<column name="MODULE_NAME" value="ks-lum-sql"/>
 			<column name="VERSION" value="1.3.0-SNAPSHOT"/>
 		</insert>

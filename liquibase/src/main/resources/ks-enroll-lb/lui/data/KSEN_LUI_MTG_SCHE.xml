@@ -1,0 +1,139 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LUI_MTG_SCHE-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100MTGSCHED1"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY1"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB11"/>
+			<column name="TM_PRD" value="MO,WE;1300,1400"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100MTGSCHED2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY2"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB20"/>
+			<column name="TM_PRD" value="TU,TH;1300,1400"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100MTGSCHED3"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100ACTIVITY3"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB24"/>
+			<column name="TM_PRD" value="TU,TH;1500,1600"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011MTGSCHED1"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY1"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631611"/>
+			<column name="TM_PRD" value="MO,WE;1300,1400"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011MTGSCHED2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY2"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631620"/>
+			<column name="TM_PRD" value="TU,TH;1300,1400"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011MTGSCHED3"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011ACTIVITY3"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631624"/>
+			<column name="TM_PRD" value="TU,TH;1500,1600"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123MTGSCHED1"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY1"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43111"/>
+			<column name="TM_PRD" value="TU,WE;0900,1030"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123MTGSCHED2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY2"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43120"/>
+			<column name="TM_PRD" value="TU,TH;1300,1400"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123MTGSCHED3"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123ACTIVITY3"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43124"/>
+			<column name="TM_PRD" value="TU,WE;1200,1300"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130MTGSCHED1"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY1"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257011"/>
+			<column name="TM_PRD" value="TU,TH;1300,1450"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130MTGSCHED2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY2"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257020"/>
+			<column name="TM_PRD" value="MO,WE,FR;1030,1130"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130MTGSCHED3"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130ACTIVITY3"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257024"/>
+			<column name="TM_PRD" value="MO,WE,FR;0930,1030"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201MTGSCHED1"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY1"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19511"/>
+			<column name="TM_PRD" value="MO,WE;1100,1200"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201MTGSCHED2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY2"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19520"/>
+			<column name="TM_PRD" value="TU,TH;1300,1400"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_MTG_SCHE">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201MTGSCHED3"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201ACTIVITY3"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19524"/>
+			<column name="TM_PRD" value="TU,TH;1500,1600"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

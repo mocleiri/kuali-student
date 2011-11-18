@@ -1049,5 +1049,40 @@
 			<column name="RTE_NODE_ID" value="2964"/>
 			<column name="VAL" value="Template"/>
 		</insert>
+		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
+			<column name="KEY_CD" value="contentFragment"/>
+			<column name="RTE_NODE_CFG_PARM_ID" value="2626"/>
+			<column name="RTE_NODE_ID" value="2965"/>
+			<column name="VAL" value="&lt;start name=&quot;Initiated&quot;>
+&lt;activationType>P&lt;/activationType>
+&lt;mandatoryRoute>false&lt;/mandatoryRoute>
+&lt;finalApproval>false&lt;/finalApproval>
+&lt;/start>
+"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
+			<column name="KEY_CD" value="activationType"/>
+			<column name="RTE_NODE_CFG_PARM_ID" value="2627"/>
+			<column name="RTE_NODE_ID" value="2965"/>
+			<column name="VAL" value="P"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
+			<column name="KEY_CD" value="mandatoryRoute"/>
+			<column name="RTE_NODE_CFG_PARM_ID" value="2628"/>
+			<column name="RTE_NODE_ID" value="2965"/>
+			<column name="VAL" value="false"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
+			<column name="KEY_CD" value="finalApproval"/>
+			<column name="RTE_NODE_CFG_PARM_ID" value="2629"/>
+			<column name="RTE_NODE_ID" value="2965"/>
+			<column name="VAL" value="false"/>
+		</insert>
+		<insert tableName="KREW_RTE_NODE_CFG_PARM_T">
+			<column name="KEY_CD" value="ruleSelector"/>
+			<column name="RTE_NODE_CFG_PARM_ID" value="2630"/>
+			<column name="RTE_NODE_ID" value="2965"/>
+			<column name="VAL" value="Template"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

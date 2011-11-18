@@ -441,5 +441,16 @@
 			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
+		<insert tableName="KREW_RTE_NODE_T">
+			<column name="ACTVN_TYP" value="P"/>
+			<column name="DOC_TYP_ID" value="3020"/>
+			<column name="FNL_APRVR_IND" value="0"/>
+			<column name="GRP_ID" value="1"/>
+			<column name="MNDTRY_RTE_IND" value="0"/>
+			<column name="NM" value="Initiated"/>
+			<column name="RTE_NODE_ID" value="2965"/>
+			<column name="TYP" value="org.kuali.rice.kew.engine.node.InitialNode"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

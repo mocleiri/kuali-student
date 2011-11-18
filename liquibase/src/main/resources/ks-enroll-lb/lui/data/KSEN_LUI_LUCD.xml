@@ -1,0 +1,104 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="KSEN_LUI_LUCD-initial-data" author="alubbers">
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100HONORS"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB4"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100HONORS2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100"/>
+			<column name="OBJ_ID" value="2FBF60BD85E448A6AB8A333A6D9A62AB17"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011HONORS"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF63164"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011HONORS2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG100SPRING2011"/>
+			<column name="OBJ_ID" value="EF76F01208BB4548ACBA56DB4AAF631617"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-19T16:42:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123HONORS"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD4314"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG123HONORS2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG123"/>
+			<column name="OBJ_ID" value="BF0242C0827B41138BAF7A4CBECFD43117"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130HONORS"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D25704"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG130HONORS2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG130"/>
+			<column name="OBJ_ID" value="AFC579834097866CE040F50A8B7D257017"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T13:39:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201HONORS"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC1954"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="0"/>
+		</insert>
+		<insert tableName="KSEN_LUI_LUCD">
+			<column name="CREATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="ID" value="REFERENCECOURSEOFFERINGGEOG201HONORS2"/>
+			<column name="LUI_ID" value="REFERENCECOURSEOFFERINGGEOG201"/>
+			<column name="OBJ_ID" value="F85B5A4A880546D9825F5FD5417FC19517"/>
+			<column name="TYPE" value="kuali.lu.code.honorsOffering"/>
+			<column name="UPDATETIME" valueDate="2011-10-21T15:35:26"/>
+			<column name="VALUE" value="0"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

@@ -152,5 +152,13 @@
 			<column name="NM" value="PRIMARY"/>
 			<column name="VER_NBR" value="1"/>
 		</insert>
+		<insert tableName="KREW_DOC_TYP_PROC_T">
+			<column name="DOC_TYP_ID" value="3020"/>
+			<column name="DOC_TYP_PROC_ID" value="2966"/>
+			<column name="INIT_IND" value="1"/>
+			<column name="INIT_RTE_NODE_ID" value="2965"/>
+			<column name="NM" value="PRIMARY"/>
+			<column name="VER_NBR" value="1"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>
