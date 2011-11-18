@@ -1,5 +1,8 @@
 package org.kuali.maven.plugin.ksite.mojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.model.DistributionManagement;
 import org.apache.maven.model.Site;
@@ -13,69 +16,67 @@ import org.kuali.maven.common.UrlBuilder;
 /**
  * This plugin organizes/standardizes the maven site publication process for the Kuali organization
  *
- * @goal updatesiteproperties
+ * @goal set
  * @phase pre-site
  */
 public class KualiSiteMojo extends AbstractMojo implements SiteContext {
 
     /**
-     * The prefix into the bucket when downloading a snapshot version
+     * The path into the bucket when downloading a snapshot version
      *
-     * @parameter expression="${downloadSnapshotPrefix}" default-value="snapshot"
+     * @parameter expression="${ksite.downloadSnapshotPath}" default-value="snapshot"
      */
-    private String downloadSnapshotPrefix;
+    private String downloadSnapshotPath;
 
     /**
-     * The prefix into the bucket when downloading a release version
+     * The path into the bucket when downloading a release version
      *
-     * @parameter expression="${downloadReleasePrefix}" default-value="release"
+     * @parameter expression="${ksite.downloadReleasePath}" default-value="release"
      */
-    private String downloadReleasePrefix;
+    private String downloadReleasePath;
 
     /**
-     * The protocol used when publishing the web site
+     * The path into the bucket when downloading a release version
      *
-     * @parameter expression="${publishUrlProtocol}" default-value="s3"
+     * @parameter expression="${ksite.downloadExternalPath}" default-value="external"
      */
-    private String publishUrlProtocol;
+    private String downloadExternalPath;
 
     /**
-     * The protocol for the public facing website
+     * The base url for publishing Maven web sites
      *
-     * @parameter expression="${publicUrlProtocol}" default-value="http"
+     * @parameter expression="${ksite.publishUrlBase}" default-value="s3://site.origin.kuali.org"
      */
-    private String publicUrlProtocol;
+    private String publishBase;
+
+    /**
+     * The base url for where the public accesses the Maven web sites
+     *
+     * @parameter expression="${ksite.publicUrlBase}" default-value="http://site.kuali.org"
+     */
+    private String publicBase;
 
     /**
      * The prefix for the location that artifacts can be downloaded from
      *
-     * @parameter expression="${downloadPrefix}"
+     * @parameter expression="${ksite.downloadBase}"
      *            default-value="http://s3browse.springsource.com/browse/maven.kuali.org/"
      */
-    private String downloadPrefix;
+    private String downloadBase;
 
     /**
      * The groupId for the organization
      *
-     * @parameter expression="${organizationGroupId}" default-value="org.kuali"
+     * @parameter expression="${ksite.organizationGroupId}" default-value="org.kuali"
      */
     private String organizationGroupId;
 
     /**
-     * The name of the AWS bucket the site gets published to
+     * If the version number for a pom contains this string it is assumed to be a SNAPSHOT artifact
      *
-     * @parameter expression="${bucket}" default-value="site.origin.kuali.org"
-     * @required
+     * @parameter expression="${ksite.snapshotSnippet}" default-value="SNAPSHOT"
      */
-    private String bucket;
-
-    /**
-     * The public DNS name for the site
-     *
-     * @parameter expression="${hostname}" default-value="site.kuali.org"
-     * @required
-     */
-    private String hostname;
+    private String snapshotSnippet;
 
     /**
      * The Maven project this plugin runs in.
@@ -86,14 +87,27 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
      */
     private MavenProject project;
 
+    /**
+     * GAV strings representing organizational poms eg "org.kuali.pom:kuali" and "org.kuali.pom:kuali-common"
+     *
+     * @parameter
+     */
+    private List<String> orgPomGavs;
+
+    @Override
+    public List<MavenProject> getOrgPoms() {
+        List<MavenProject> projects = new ArrayList<MavenProject>();
+        return projects;
+    }
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         UrlBuilder builder = new UrlBuilder();
 
         // Generate our urls
         String publicUrl = builder.getPublicUrl(getProject(), this);
-        String publishUrl = builder.getPublishUrl(getProject(), this);
         String downloadUrl = builder.getDownloadUrl(getProject(), this);
+        String publishUrl = builder.getPublishUrl(getProject(), this);
 
         // Get a reference to the relevant model objects
         MavenProject project = getProject();
@@ -198,54 +212,6 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
     }
 
     /**
-     * @return the bucket
-     */
-    @Override
-    public String getBucket() {
-        return bucket;
-    }
-
-    /**
-     * @param bucket
-     *            the bucket to set
-     */
-    public void setBucket(final String bucket) {
-        this.bucket = bucket;
-    }
-
-    /**
-     * @return the hostname
-     */
-    @Override
-    public String getHostname() {
-        return hostname;
-    }
-
-    /**
-     * @param hostname
-     *            the hostname to set
-     */
-    public void setHostname(final String hostname) {
-        this.hostname = hostname;
-    }
-
-    /**
-     * @return the downloadPrefix
-     */
-    @Override
-    public String getDownloadPrefix() {
-        return downloadPrefix;
-    }
-
-    /**
-     * @param downloadPrefix
-     *            the downloadPrefix to set
-     */
-    public void setDownloadPrefix(final String downloadPrefix) {
-        this.downloadPrefix = downloadPrefix;
-    }
-
-    /**
      * @return the parentGroupId
      */
     @Override
@@ -261,68 +227,75 @@ public class KualiSiteMojo extends AbstractMojo implements SiteContext {
         this.organizationGroupId = parentGroupId;
     }
 
-    /**
-     * @return the publishUrlProtocol
-     */
     @Override
-    public String getPublishUrlProtocol() {
-        return publishUrlProtocol;
+    public String getDownloadSnapshotPath() {
+        return downloadSnapshotPath;
     }
 
-    /**
-     * @param publishUrlProtocol
-     *            the publishUrlProtocol to set
-     */
-    public void setPublishUrlProtocol(final String publishUrlProtocol) {
-        this.publishUrlProtocol = publishUrlProtocol;
+    public void setDownloadSnapshotPath(String downloadSnapshotPath) {
+        this.downloadSnapshotPath = downloadSnapshotPath;
     }
 
-    /**
-     * @return the publicUrlProtocol
-     */
     @Override
-    public String getPublicUrlProtocol() {
-        return publicUrlProtocol;
+    public String getDownloadReleasePath() {
+        return downloadReleasePath;
     }
 
-    /**
-     * @param publicUrlProtocol
-     *            the publicUrlProtocol to set
-     */
-    public void setPublicUrlProtocol(final String publicUrlProtocol) {
-        this.publicUrlProtocol = publicUrlProtocol;
+    public void setDownloadReleasePath(String downloadReleasePath) {
+        this.downloadReleasePath = downloadReleasePath;
     }
 
-    /**
-     * @return the downloadSnapshotPrefix
-     */
     @Override
-    public String getDownloadSnapshotPrefix() {
-        return downloadSnapshotPrefix;
+    public String getDownloadExternalPath() {
+        return downloadExternalPath;
     }
 
-    /**
-     * @param downloadSnapshotPrefix
-     *            the downloadSnapshotPrefix to set
-     */
-    public void setDownloadSnapshotPrefix(final String downloadSnapshotPrefix) {
-        this.downloadSnapshotPrefix = downloadSnapshotPrefix;
+    public void setDownloadExternalPath(String downloadExternalPath) {
+        this.downloadExternalPath = downloadExternalPath;
     }
 
-    /**
-     * @return the downloadReleasePrefix
-     */
     @Override
-    public String getDownloadReleasePrefix() {
-        return downloadReleasePrefix;
+    public String getDownloadBase() {
+        return downloadBase;
     }
 
-    /**
-     * @param downloadReleasePrefix
-     *            the downloadReleasePrefix to set
-     */
-    public void setDownloadReleasePrefix(final String downloadReleasePrefix) {
-        this.downloadReleasePrefix = downloadReleasePrefix;
+    public void setDownloadBase(String downloadBase) {
+        this.downloadBase = downloadBase;
+    }
+
+    public List<String> getOrgPomGavs() {
+        return orgPomGavs;
+    }
+
+    public void setOrgPomGavs(List<String> orgPomGavs) {
+        this.orgPomGavs = orgPomGavs;
+    }
+
+    @Override
+    public String getSnapshotSnippet() {
+        return snapshotSnippet;
+    }
+
+    public void setSnapshotSnippet(String snapshotSnippet) {
+        this.snapshotSnippet = snapshotSnippet;
+    }
+
+    @Override
+    public String getPublishBase() {
+        return publishBase;
+    }
+
+    public void setPublishBase(String publishBase) {
+        this.publishBase = publishBase;
+    }
+
+    @Override
+    public String getPublicBase() {
+        return publicBase;
+    }
+
+    public void setPublicBase(String publicBase) {
+        this.publicBase = publicBase;
     }
 
 }
