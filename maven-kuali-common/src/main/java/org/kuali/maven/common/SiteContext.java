@@ -1,9 +1,17 @@
 package org.kuali.maven.common;
 
+import java.util.List;
+
+import org.apache.maven.project.MavenProject;
+
 /**
  *
  */
 public interface SiteContext {
+
+    // If a version contains this text it is assumed to be a snapshot version of an artifact
+    // This is usually just "SNAPSHOT"
+    public String getSnapshotSnippet();
 
     // The group id for the organization ie "org.kuali"
     public String getOrganizationGroupId();
@@ -25,4 +33,7 @@ public interface SiteContext {
 
     // The base url for publishing the public web site ie "s3://site.origin.kuali.org"
     public String getPublishBase();
+
+    // POM's for the organization
+    public List<MavenProject> getOrgPoms();
 }
