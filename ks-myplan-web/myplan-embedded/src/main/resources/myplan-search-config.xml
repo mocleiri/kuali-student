@@ -45,11 +45,13 @@
     <bean id="queryMap" parent="queryMap-parent">
         <property name="sourceMap">
             <map merge="true">
+
                 <entry key="myplan.lu.search.current">
                     <value>
                         SELECT
                             clu.id
-                        FROM Clu clu
+                        FROM CluCampusLocation loc
+                        LEFT JOIN loc.clu clu
                         LEFT JOIN clu.officialIdentifier officialIdentifier
                         LEFT JOIN clu.descr cludesc
                         WHERE
@@ -62,19 +64,20 @@
                             )
                             AND
                             (
-                                officialIdentifier.longName LIKE UPPER( '%'||:queryText||'%' )
+                                UPPER( officialIdentifier.longName ) LIKE UPPER( '%'||:queryText||'%' )
                                 OR
                                 officialIdentifier.division LIKE UPPER( '%'||:queryText||'%' )
                                 OR
                                 officialIdentifier.code LIKE UPPER( '%'||:queryText||'%' )
                                 OR
-                                UPPER(cludesc.plain) LIKE UPPER( '%'||:queryText||'%' )
+                                UPPER( cludesc.plain ) LIKE UPPER( '%'||:queryText||'%' )
                             )
                             AND
                             officialIdentifier.level LIKE :queryLevel
+                            AND
+                            loc.campusLocation IN ( :campus1, :campus2, :campus3 )
                     </value>
                 </entry>
-
             </map>
         </property>
     </bean>
