@@ -39,6 +39,8 @@
             <list>
                 <value>classpath:UifMyPlanDefinitions.xml</value>
                 <value>classpath:CourseSearchUI.xml</value>
+                <value>classpath:CourseDetailsUI.xml</value>
+
                 <!-- <value>classpath:CourseView.xml</value> -->
 
                 <!--
