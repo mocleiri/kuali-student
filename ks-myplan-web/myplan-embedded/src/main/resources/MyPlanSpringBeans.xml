@@ -53,7 +53,7 @@
         </property>
         <property name="packagePrefixes">
             <list>
-                <value>edu.uw.myplan.trng.</value>
+                <value>org.kuali.student.myplan.</value>
             </list>
         </property>
     </bean>
