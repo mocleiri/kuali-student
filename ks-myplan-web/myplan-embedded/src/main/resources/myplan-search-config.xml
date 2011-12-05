@@ -28,7 +28,92 @@
 
     <import resource="classpath:lu-search-config.xml"/>
 
+    <search:searchType id="myplan.distinct.clu.divisions">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <!-- this is wrong, but works. i haven't figured out how to create a new "bean" for this purpose -->
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
     <search:searchType id="myplan.lu.search.current">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.lu.search.current.allcampus">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.lu.search.fulltext">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.lu.search.divisionAndCode">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.lu.search.divisionAndLevel">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.lu.search.division">
         <search:searchResultTypeInfo>
             <search:name>myplan name</search:name>
             <search:desc>myplan desc</search:desc>
@@ -45,6 +130,15 @@
     <bean id="queryMap" parent="queryMap-parent">
         <property name="sourceMap">
             <map merge="true">
+
+                <entry key="myplan.distinct.clu.divisions">
+                    <value>
+                        SELECT
+                            distinct( ident.division )
+                        FROM CluIdentifier ident
+                        WHERE ident.division IS NOT null
+                    </value>
+                </entry>
 
                 <entry key="myplan.lu.search.current">
                     <value>
@@ -76,6 +170,120 @@
                             officialIdentifier.level LIKE :queryLevel
                             AND
                             loc.campusLocation IN ( :campus1, :campus2, :campus3 )
+                    </value>
+                </entry>
+
+                <entry key="myplan.lu.search.current.allcampus">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM CluCampusLocation loc
+                        LEFT JOIN loc.clu clu
+                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        LEFT JOIN clu.descr cludesc
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                            (
+                                UPPER( officialIdentifier.longName ) LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                officialIdentifier.division LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                officialIdentifier.code LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                UPPER( cludesc.plain ) LIKE UPPER( '%'||:queryText||'%' )
+                            )
+                            AND
+                            officialIdentifier.level LIKE :queryLevel
+                    </value>
+                </entry>
+
+                <entry key="myplan.lu.search.fulltext">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM Clu clu
+                        LEFT JOIN clu.officialIdentifier ident
+                        LEFT JOIN clu.descr cludesc
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                            (
+                                UPPER( ident.longName ) LIKE UPPER( '%'||:queryText||'%' )
+                                OR
+                                UPPER( cludesc.plain ) LIKE UPPER( '%'||:queryText||'%' )
+                            )
+                    </value>
+                </entry>
+
+                <entry key="myplan.lu.search.divisionAndCode">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM Clu clu
+                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                                officialIdentifier.division = :division
+                            AND
+                                officialIdentifier.suffixCode = :code
+                    </value>
+                </entry>
+                <entry key="myplan.lu.search.divisionAndLevel">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM Clu clu
+                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                                officialIdentifier.division = :division
+                            AND
+                                officialIdentifier.level = :level
+                    </value>
+                </entry>
+                <entry key="myplan.lu.search.division">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM Clu clu
+                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                                officialIdentifier.division = :division
                     </value>
                 </entry>
             </map>
