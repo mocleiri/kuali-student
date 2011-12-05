@@ -92,6 +92,5 @@
     <import resource="classpath:ks-embedded-admin-context.xml"/-->
 
     <import resource="classpath:MyPlanSpringBeans.xml"/>
-    <import resource="classpath:uw-override-context.xml"/>
 
 </beans>
