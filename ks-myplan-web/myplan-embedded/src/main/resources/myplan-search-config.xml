@@ -27,6 +27,86 @@
 	 ">
 
     <import resource="classpath:lu-search-config.xml"/>
+    <search:searchType id="myplan.course.info">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <search:resultColumn id="boogie.longname">
+                    <search:name>longname</search:name>
+                    <search:desc>longname</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.suffixcode">
+                    <search:name>longname</search:name>
+                    <search:desc>longname</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.division">
+                    <search:name>longname</search:name>
+                    <search:desc>longname</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.credits">
+                    <search:name>longname</search:name>
+                    <search:desc>longname</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.course.info.atp">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <!-- this is wrong, but works. i haven't figured out how to create a new "bean" for this purpose -->
+                <ref bean="lu.resultColumn.cluId"/>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
+
+    <search:searchType id="myplan.course.info.credits.details">
+        <search:searchResultTypeInfo>
+            <search:name>myplan name</search:name>
+            <search:desc>myplan desc</search:desc>
+            <search:resultColumns>
+                <search:resultColumn id="boogie.id">
+                    <search:name>max</search:name>
+                    <search:desc>max</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.type">
+                    <search:name>max</search:name>
+                    <search:desc>max</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.min">
+                    <search:name>max</search:name>
+                    <search:desc>max</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.max">
+                    <search:name>max</search:name>
+                    <search:desc>max</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+            </search:resultColumns>
+        </search:searchResultTypeInfo>
+        <search:searchCriteriaTypeInfo>
+            <search:queryParams>
+            </search:queryParams>
+        </search:searchCriteriaTypeInfo>
+    </search:searchType>
 
     <search:searchType id="myplan.distinct.clu.divisions">
         <search:searchResultTypeInfo>
@@ -139,76 +219,13 @@
                         WHERE ident.division IS NOT null
                     </value>
                 </entry>
-
+<!--
                 <entry key="myplan.lu.search.current">
                     <value>
                         SELECT
                             clu.id
                         FROM CluCampusLocation loc
                         LEFT JOIN loc.clu clu
-                        LEFT JOIN clu.officialIdentifier officialIdentifier
-                        LEFT JOIN clu.descr cludesc
-                        WHERE
-                            clu.version.currentVersionStart &lt;= CURRENT_DATE
-                            AND
-                            (
-                                clu.version.currentVersionEnd &gt; CURRENT_DATE
-                                OR
-                                clu.version.currentVersionEnd IS NULL
-                            )
-                            AND
-                            (
-                                UPPER( officialIdentifier.longName ) LIKE UPPER( '%'||:queryText||'%' )
-                                OR
-                                officialIdentifier.division LIKE UPPER( '%'||:queryText||'%' )
-                                OR
-                                officialIdentifier.code LIKE UPPER( '%'||:queryText||'%' )
-                                OR
-                                UPPER( cludesc.plain ) LIKE UPPER( '%'||:queryText||'%' )
-                            )
-                            AND
-                            officialIdentifier.level LIKE :queryLevel
-                            AND
-                            loc.campusLocation IN ( :campus1, :campus2, :campus3 )
-                    </value>
-                </entry>
-
-                <entry key="myplan.lu.search.current.allcampus">
-                    <value>
-                        SELECT
-                            clu.id
-                        FROM CluCampusLocation loc
-                        LEFT JOIN loc.clu clu
-                        LEFT JOIN clu.officialIdentifier officialIdentifier
-                        LEFT JOIN clu.descr cludesc
-                        WHERE
-                            clu.version.currentVersionStart &lt;= CURRENT_DATE
-                            AND
-                            (
-                                clu.version.currentVersionEnd &gt; CURRENT_DATE
-                                OR
-                                clu.version.currentVersionEnd IS NULL
-                            )
-                            AND
-                            (
-                                UPPER( officialIdentifier.longName ) LIKE UPPER( '%'||:queryText||'%' )
-                                OR
-                                officialIdentifier.division LIKE UPPER( '%'||:queryText||'%' )
-                                OR
-                                officialIdentifier.code LIKE UPPER( '%'||:queryText||'%' )
-                                OR
-                                UPPER( cludesc.plain ) LIKE UPPER( '%'||:queryText||'%' )
-                            )
-                            AND
-                            officialIdentifier.level LIKE :queryLevel
-                    </value>
-                </entry>
-
-                <entry key="myplan.lu.search.fulltext">
-                    <value>
-                        SELECT
-                            clu.id
-                        FROM Clu clu
                         LEFT JOIN clu.officialIdentifier ident
                         LEFT JOIN clu.descr cludesc
                         WHERE
@@ -221,10 +238,76 @@
                             )
                             AND
                             (
-                                UPPER( ident.longName ) LIKE UPPER( '%'||:queryText||'%' )
+                                UPPER( ident.longName ) LIKE '%'||:queryText||'%'
                                 OR
-                                UPPER( cludesc.plain ) LIKE UPPER( '%'||:queryText||'%' )
+                                ident.division LIKE '%'||:queryText||'%'
+                                OR
+                                ident.code LIKE '%'||:queryText||'%'
+                                OR
+                                UPPER( cludesc.plain ) LIKE '%'||:queryText||'%'
                             )
+                            AND
+                            ident.level LIKE :queryLevel
+                            AND
+                            loc.campusLocation IN ( :campus1, :campus2, :campus3 )
+                    </value>
+                </entry>
+
+                <entry key="myplan.lu.search.current.allcampus">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM CluCampusLocation loc
+                        LEFT JOIN loc.clu clu
+                        LEFT JOIN clu.officialIdentifier ident
+                        LEFT JOIN clu.descr cludesc
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                            (
+                                UPPER( ident.longName ) LIKE '%'||:queryText||'%'
+                                OR
+                                ident.division LIKE '%'||:queryText||'%'
+                                OR
+                                ident.code LIKE '%'||:queryText||'%'
+                                OR
+                                UPPER( cludesc.plain ) LIKE '%'||:queryText||'%'
+                            )
+                            AND
+                            ident.level LIKE :queryLevel
+                    </value>
+                </entry>
+-->
+                <entry key="myplan.lu.search.fulltext">
+                    <value>
+                        SELECT
+                            clu.id
+                        FROM CluCampusLocation loc
+                        JOIN loc.clu clu
+                        JOIN clu.officialIdentifier ident
+                        JOIN clu.descr cludesc
+                        WHERE
+                            clu.version.currentVersionStart &lt;= CURRENT_DATE
+                            AND
+                            (
+                                clu.version.currentVersionEnd &gt; CURRENT_DATE
+                                OR
+                                clu.version.currentVersionEnd IS NULL
+                            )
+                            AND
+                            (
+                                UPPER( ' ' || ident.longName || ' ' ) LIKE '% '||:queryText||' %'
+                                OR
+                                UPPER( ' ' || cludesc.plain || ' ' ) LIKE '% '||:queryText||' %'
+                            )
+                            AND
+                                loc.campusLocation IN ( :campus1, :campus2, :campus3 )
                     </value>
                 </entry>
 
@@ -232,8 +315,9 @@
                     <value>
                         SELECT
                             clu.id
-                        FROM Clu clu
-                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        FROM CluCampusLocation loc
+                        JOIN loc.clu clu
+                        JOIN clu.officialIdentifier ident
                         WHERE
                             clu.version.currentVersionStart &lt;= CURRENT_DATE
                             AND
@@ -243,17 +327,22 @@
                                 clu.version.currentVersionEnd IS NULL
                             )
                             AND
-                                officialIdentifier.division = :division
+                                ident.division = :division
                             AND
-                                officialIdentifier.suffixCode = :code
+                                ident.suffixCode = :code
+                            AND
+                               loc.campusLocation IN ( :campus1, :campus2, :campus3 )
+                        ORDER BY
+                            ident.suffixCode
                     </value>
                 </entry>
                 <entry key="myplan.lu.search.divisionAndLevel">
                     <value>
                         SELECT
                             clu.id
-                        FROM Clu clu
-                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        FROM CluCampusLocation loc
+                        JOIN loc.clu clu
+                        JOIN clu.officialIdentifier ident
                         WHERE
                             clu.version.currentVersionStart &lt;= CURRENT_DATE
                             AND
@@ -263,17 +352,22 @@
                                 clu.version.currentVersionEnd IS NULL
                             )
                             AND
-                                officialIdentifier.division = :division
+                                ident.division = :division
                             AND
-                                officialIdentifier.level = :level
+                                ident.level = :level
+                            AND
+                                loc.campusLocation IN ( :campus1, :campus2, :campus3 )
+                        ORDER BY
+                            ident.suffixCode
                     </value>
                 </entry>
                 <entry key="myplan.lu.search.division">
                     <value>
                         SELECT
                             clu.id
-                        FROM Clu clu
-                        LEFT JOIN clu.officialIdentifier officialIdentifier
+                        FROM CluCampusLocation loc
+                        JOIN loc.clu clu
+                        JOIN clu.officialIdentifier ident
                         WHERE
                             clu.version.currentVersionStart &lt;= CURRENT_DATE
                             AND
@@ -283,7 +377,68 @@
                                 clu.version.currentVersionEnd IS NULL
                             )
                             AND
-                                officialIdentifier.division = :division
+                                ident.division = :division
+                            AND
+                                loc.campusLocation IN ( :campus1, :campus2, :campus3 )
+                        ORDER BY
+                            ident.suffixCode
+                    </value>
+                </entry>
+                <entry key="myplan.course.info">
+                    <value>NATIVE:
+                        SELECT
+                            ident.LNG_NAME,
+                            ident.SUFX_CD,
+                            ident.DIVISION,
+                            opt.RES_COMP_ID
+                        FROM
+                            KSLU_CLU clu,
+                            KSLU_CLU_IDENT ident,
+                            KSLU_CLU_RSLT res,
+                            KSLU_CLURES_JN_RESOPT jn,
+                            KSLU_RSLT_OPT opt
+                        WHERE
+                            clu.offic_clu_id = ident.id
+                            and
+                            clu.id = res.clu_id
+                            AND
+                            res.id = jn.clu_res_id
+                            AND
+                            jn.res_opt_id = opt.id
+                            AND
+                            res.TYPE_KEY_ID = 'kuali.resultType.creditCourseResult'
+                            AND
+                            clu.id = :courseID
+                    </value>
+                </entry>
+
+
+
+                <entry key="myplan.course.info.atp">
+                    <value>NATIVE:
+                        SELECT
+                            ATP_TYPE_KEY
+                        FROM KSLU_CLU_ATP_TYPE_KEY
+                        WHERE
+                            clu_id = :courseID
+                    </value>
+                </entry>
+                <entry key="myplan.course.info.credits.details">
+                    <value>NATIVE:
+                        SELECT
+                            max( v.rslt_comp_id ),
+                            max( c.type ),
+                            min( to_number( v.value )),
+                            max( to_number( v.value ))
+                        from
+                            kslr_result_value v,
+                            kslr_rescomp c
+                        where
+                            c.id = v.rslt_comp_id
+                        and
+                            c.type like 'kuali.resultComponentType.credit.degree.%'
+                        group by
+                            v.rslt_comp_id
                     </value>
                 </entry>
             </map>
