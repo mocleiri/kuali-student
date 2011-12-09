@@ -105,9 +105,11 @@
     </property>
   </bean>
 
+  <!-- doesn't work, copied krad-servlet instead
   <context:component-scan base-package="edu.kuali.rice.krad.ks.uim.sample" />
   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+  -->
 
 </beans>
 
