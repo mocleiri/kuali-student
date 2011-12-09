@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   ~ Copyright 2006-2011 The Kuali Foundation
   ~
@@ -20,14 +21,23 @@
                     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
   
 
-  <bean id="ks-uim-sample-view1" parent="FormView">
-    <property name="id" value="ks-uim-sample-view1"/>
-    <property name="title" value="KS UIM Sample"/>
-    <property name="entryPageId" value="page1"/>
+  <bean id="ks-uim-sample-view1" parent="KsUimSampleView"
+      p:id="ks-uim-sample-view1"
+      p:title="KS UIM Sample"
+    />
+
+  <bean id="KsUimSampleView" parent="FormView"
+      p:entryPageId="page1"
+      p:formClass="org.kuali.rice.krad.uim.sample.KsUimSampleForm"
+      p:header.render="false"
+      p:footer.render="false"
+      p:breadcrumbs.render="false"
+    >
+    <!-- property name="template" value="/WEB-INF/jsp/KsUimSampleView.jsp"/ -->
+    <property name="additionalCssFiles" ref="ks-uim-css" />
     <property name="items">
       <list>
-        <!-- bean parent="Page_Disclosure" p:id="page1" -->
-        <bean parent="Page_Render" p:id="page1">
+        <bean parent="PageNoHeader" p:id="page1">
           <property name="items">
             <list>
               <!-- ref bean="testSection1"/ -->
@@ -37,29 +47,11 @@
         </bean>
       </list>
     </property>
-    <property name="additionalCssFiles" ref="ks-uim-css" />
-<!--
-    <property name="additionalCssFiles">
-      <list merge="true">
-        <value>/krad/css/ks/ks-theme.css</value>
-        <value>/krad/css/ks/fss-theme-ks.css</value>
-        <value>/css/registration.css</value>
-      </list>
-    </property>
--->
-    <property name="formClass" value="org.kuali.rice.krad.uim.sample.KsUimSampleForm"/>
-    <!-- property name="template" value="/WEB-INF/jsp/KsUimSampleView.jsp" / -->
-    <property name="header.render" value="false"/>
-    <property name="footer.render" value="false"/>
-    <property name="breadcrumbs.render" value="false"/>
   </bean>
 
-  <bean id="Page_Render" parent="Page">
-    <property name="header.render" value="false"/>
-  </bean>
-  <bean id="Header_NoRender" parent="Header">
-    <property name="render" value="false"/>
-  </bean>
+  <bean id="PageNoHeader" parent="Page"
+      p:header.render="false"
+    />
 
   <!-- hack to merge a list with one of those util:lists -->
   <bean id="ks-uim-css" class="org.apache.commons.collections.ListUtils" factory-method="union">
@@ -68,7 +60,7 @@
     </constructor-arg>
     <constructor-arg>
       <list>
-        <value>/css/registration.css</value>
+        <value>/css/ks-uim-sample.css</value>
       </list>
     </constructor-arg>
   </bean>
@@ -88,9 +80,13 @@
     <property name="title" value="testGroup1"/>
     <property name="items">
       <list>
-        <bean parent="InputField_Form" p:propertyName="field1" p:label="field1" p:maxLength="20"
-              p:instructionalText="p:instructionalText" p:readOnly="false"
+        <bean parent="InputField_Form"
+              p:propertyName="field1"
+              p:label="field1"
+              p:maxLength="20"
+              p:readOnly="false"
               p:alternateDisplayPropertyName="field2">
+          <!-- property name="instructionalText" value="Instructional text" -->
           <property name="control">
             <bean id="myField" parent="TextControl" p:size="15" p:watermarkText="watermark"/>
           </property>
@@ -101,7 +97,10 @@
             <bean parent="TextControl" p:size="20"/>
           </property>
         </bean>
-        <bean parent="InputField_Form" p:propertyName="field3" p:label="field3" p:maxLength="9"
+        <bean parent="InputField_Form"
+              p:propertyName="field3"
+              p:label="field3"
+              p:maxLength="9"
               p:hiddenPropertyNames="hidden1,hidden2">
           <property name="control">
             <bean parent="DateControl" p:size="10" p:watermarkText="mm/dd/yyyy"/>
@@ -109,7 +108,7 @@
         </bean>
       </list>
     </property>
-    <property name="instructionalText" value="Provide basic information for the ACH Bank"/>
+    <!-- property name="instructionalText" value="Instructional text goes here"/ -->
   </bean>
 
   <bean id="testGroup2" parent="GroupGridLayout">
