@@ -35,4 +35,15 @@
         <constructor-arg index="0" value="classpath:ks-courseInfo-dictionary-context.xml, classpath:ks-programInfo-dictionary-context.xml, classpath:ks-statement-dictionary-context.xml, classpath:ks-lrc-dictionary-context.xml, classpath:uw-courseInfo-dictionary-override.xml"/>
     </bean>
 
+
+    <!-- Override acalService bean with UW implementation -->
+    <bean id="acalService" class="org.kuali.student.myplan.course.service.UwAcademicCalendarServiceImpl" />
+
+
+    <bean id="luSearchManager"
+          class="org.kuali.student.common.search.service.impl.SearchManagerImpl">
+        <constructor-arg index="0" value="classpath:myplan-search-config.xml"/>
+        <property name="crossSearchManager" ref="lumCrossServiceSearchManager"/>
+    </bean>
+
 </beans>

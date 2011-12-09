@@ -108,12 +108,4 @@
       </bean>
     -->
     <!-- KNS POC configuration ends -->
-
-    <bean id="luSearchManager"
-          class="org.kuali.student.common.search.service.impl.SearchManagerImpl">
-        <constructor-arg index="0"
-                         value="classpath:myplan-search-config.xml"/>
-        <property name="crossSearchManager" ref="lumCrossServiceSearchManager"/>
-    </bean>
-
 </beans>
