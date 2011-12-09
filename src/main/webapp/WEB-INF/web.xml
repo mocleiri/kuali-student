@@ -48,7 +48,7 @@
 
   <filter>
     <filter-name>UserLoginFilter</filter-name>
-    <filter-class>org.kuali.rice.krad.uim.sample.UserLoginBypassFilter</filter-class>
+    <filter-class>org.kuali.rice.kew.web.UserLoginFilter</filter-class>
   </filter>
 
   <filter>

@@ -21,11 +21,11 @@
   <param name="app.context.name">ks-uim-sample</param>
 
   <!-- <param name="filter.login.class">org.kuali.rice.kew.web.DummyLoginFilter</param> -->
-  <param name="filter.login.class">org.kuali.rice.krad.uim.sample.UserLoginBypassFilter</param>
+  <param name="filter.login.class">edu.kuali.rice.krad.ks.uim.sample.UserLoginBypassFilter</param>
   <param name="filtermapping.login.1">/*</param>
 
 	<!-- default user is 'admin' -->
-	<param name="automatic.login.user">frank</param>
+	<param name="filter.login.automatic.user">frank</param>
 
   <param name="config.location">classpath:META-INF/common-config-defaults.xml</param>
   <param name="config.location">classpath:META-INF/common-config-locations.xml</param>
