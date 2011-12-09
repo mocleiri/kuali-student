@@ -219,71 +219,7 @@
                         WHERE ident.division IS NOT null
                     </value>
                 </entry>
-<!--
-                <entry key="myplan.lu.search.current">
-                    <value>
-                        SELECT
-                            clu.id
-                        FROM CluCampusLocation loc
-                        LEFT JOIN loc.clu clu
-                        LEFT JOIN clu.officialIdentifier ident
-                        LEFT JOIN clu.descr cludesc
-                        WHERE
-                            clu.version.currentVersionStart &lt;= CURRENT_DATE
-                            AND
-                            (
-                                clu.version.currentVersionEnd &gt; CURRENT_DATE
-                                OR
-                                clu.version.currentVersionEnd IS NULL
-                            )
-                            AND
-                            (
-                                UPPER( ident.longName ) LIKE '%'||:queryText||'%'
-                                OR
-                                ident.division LIKE '%'||:queryText||'%'
-                                OR
-                                ident.code LIKE '%'||:queryText||'%'
-                                OR
-                                UPPER( cludesc.plain ) LIKE '%'||:queryText||'%'
-                            )
-                            AND
-                            ident.level LIKE :queryLevel
-                            AND
-                            loc.campusLocation IN ( :campus1, :campus2, :campus3 )
-                    </value>
-                </entry>
 
-                <entry key="myplan.lu.search.current.allcampus">
-                    <value>
-                        SELECT
-                            clu.id
-                        FROM CluCampusLocation loc
-                        LEFT JOIN loc.clu clu
-                        LEFT JOIN clu.officialIdentifier ident
-                        LEFT JOIN clu.descr cludesc
-                        WHERE
-                            clu.version.currentVersionStart &lt;= CURRENT_DATE
-                            AND
-                            (
-                                clu.version.currentVersionEnd &gt; CURRENT_DATE
-                                OR
-                                clu.version.currentVersionEnd IS NULL
-                            )
-                            AND
-                            (
-                                UPPER( ident.longName ) LIKE '%'||:queryText||'%'
-                                OR
-                                ident.division LIKE '%'||:queryText||'%'
-                                OR
-                                ident.code LIKE '%'||:queryText||'%'
-                                OR
-                                UPPER( cludesc.plain ) LIKE '%'||:queryText||'%'
-                            )
-                            AND
-                            ident.level LIKE :queryLevel
-                    </value>
-                </entry>
--->
                 <entry key="myplan.lu.search.fulltext">
                     <value>
                         SELECT
@@ -388,8 +324,8 @@
                     <value>NATIVE:
                         SELECT
                             ident.LNG_NAME,
-                            ident.SUFX_CD,
-                            ident.DIVISION,
+                            trim( ident.SUFX_CD ),
+                            trim( ident.DIVISION ),
                             opt.RES_COMP_ID
                         FROM
                             KSLU_CLU clu,
