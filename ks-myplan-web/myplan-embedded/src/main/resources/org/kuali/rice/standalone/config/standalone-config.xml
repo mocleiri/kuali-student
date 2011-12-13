@@ -166,6 +166,14 @@
 
     <param name="css.files" override="true">ks-myplan/css/myplan.css,${css.files}</param>
 
+    <!-- TODO: UW SPECIFIC - UW Service Service Rest client defaults. -->
+    <param name="uw.studentservice.impl">edu.uw.kuali.student.lib.client.studentservice.FauxStudentServiceClientImpl</param>
+    <param name="uw.studentservice.url">https://ucswseval1.cac.washington.edu</param>
+    <param name="uw.keystore.filename">null</param>
+    <param name="uw.keystore.password">null</param>
+    <param name="uw.truststore.filename">null</param>
+    <param name="uw.truststore.password">null</param>
+
     <!-- default config files -->
     <param name="config.location">${user.home}/kuali/main/${environment}/myplan-config.xml</param>
     <param name="config.location">${additional.config.locations}</param>

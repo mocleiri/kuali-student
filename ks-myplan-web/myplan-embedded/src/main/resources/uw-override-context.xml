@@ -37,8 +37,18 @@
 
 
     <!-- Override acalService bean with UW implementation -->
-    <bean id="acalService" class="org.kuali.student.myplan.course.service.UwAcademicCalendarServiceImpl" />
+    <bean id="acalService" class="org.kuali.student.myplan.course.service.UwAcademicCalendarServiceImpl">
+        <property name="studentServiceClient" ref="studentServiceClient"/>
+    </bean>
 
+    <!-- These configuration items are UW specific and should move to a UW-specific config file. -->
+    <bean id="studentServiceClient" class="${uw.studentservice.impl}">
+        <constructor-arg><value>${uw.studentservice.url}</value></constructor-arg>
+        <constructor-arg><value>${uw.keystore.filename}</value></constructor-arg>
+        <constructor-arg><value>${uw.keystore.password}</value></constructor-arg>
+        <constructor-arg><value>${uw.truststore.filename}</value></constructor-arg>
+        <constructor-arg><value>${uw.truststore.password}</value></constructor-arg>
+    </bean>
 
     <bean id="luSearchManager"
           class="org.kuali.student.common.search.service.impl.SearchManagerImpl">
