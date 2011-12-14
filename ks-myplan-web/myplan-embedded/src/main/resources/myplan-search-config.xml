@@ -33,16 +33,19 @@
             <search:desc>myplan desc</search:desc>
             <search:resultColumns>
                 <search:resultColumn id="boogie.longname">
-                    <search:name>longname</search:name>
-                    <search:desc>longname</search:desc>
+                    <search:name/>
+                    <search:desc/>
                     <search:dataType>string</search:dataType>
                 </search:resultColumn>
                 <search:resultColumn id="boogie.suffixcode">
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.division">
                     <search:name>longname</search:name>
                     <search:desc>longname</search:desc>
                     <search:dataType>string</search:dataType>
                 </search:resultColumn>
-                <search:resultColumn id="boogie.division">
+                <search:resultColumn id="boogie.level">
                     <search:name>longname</search:name>
                     <search:desc>longname</search:desc>
                     <search:dataType>string</search:dataType>
@@ -347,6 +350,7 @@
                         ident.LNG_NAME,
                         trim( ident.SUFX_CD ),
                         trim( ident.DIVISION ),
+                        trim( ident.LVL ),
                         opt.RES_COMP_ID
                         FROM
                         KSLU_CLU clu,
