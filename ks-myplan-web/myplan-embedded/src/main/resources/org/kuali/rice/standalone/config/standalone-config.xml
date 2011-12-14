@@ -35,7 +35,6 @@
     <!-- BEGIN KUALI STUDENT SETTINGS -->
     <param name="config.location">classpath:META-INF/ks-core-config.xml</param>
     <param name="config.location">classpath:META-INF/ks-lum-config.xml</param>
-    <param name="config.location">classpath:META-INF/ks-enroll-config.xml</param>
     <param name="config.location">classpath:ks-security-config.xml</param>
 
     <param name="db.vendor">oracle</param>
@@ -177,6 +176,9 @@
     <!-- default config files -->
     <param name="config.location">${user.home}/kuali/main/${environment}/myplan-config.xml</param>
     <param name="config.location">${additional.config.locations}</param>
+
+    <param name="css.files" override="true">${css.files}</param>
+    <param name="javascript.files" override="true">${javascript.files}</param>
 
     <param name="ks.institutional.context">classpath:uw-override-context.xml</param>
 </config>
