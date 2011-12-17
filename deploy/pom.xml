@@ -242,7 +242,7 @@
       <id>1.2</id>
       <properties>
         <ks.hudson.job>1.2-full-build</ks.hudson.job>
-        <ks.deploy.version>1.2.1-SNAPSHOT</ks.deploy.version>
+        <ks.deploy.version>1.2.2-SNAPSHOT</ks.deploy.version>
       </properties>
     </profile>
     <profile>
