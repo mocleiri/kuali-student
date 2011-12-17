@@ -394,7 +394,7 @@
                         AND
                         ATTR_VALUE = 'true'
                         AND
-                        ATTR_NAME like 'genEdRequirement%'
+                        ATTR_NAME like 'kuali.uw.lu.genedreq.%'
                     </value>
                 </entry>
 

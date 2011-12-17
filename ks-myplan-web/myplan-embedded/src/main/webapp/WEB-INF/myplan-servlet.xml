@@ -7,8 +7,16 @@
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+  <context:annotation-config/>
+
   <context:component-scan base-package="org.kuali.rice.krad" />
   <context:component-scan base-package="org.kuali.student.myplan.course" />
+  <context:component-scan base-package="edu.uw.kuali.student.myplan"/>
+
+
+  <!-- Custom UW ATP Comparator bean -->
+  <bean id="atpTypeComparator" class="edu.uw.kuali.student.myplan.util.TermInfoComparator"/>
+
 
   <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
