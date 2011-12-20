@@ -20,7 +20,7 @@
   <strong>MyPlan -- Find Courses</strong>
   <ul class="chan">
       <li><portal:portalLink displayTitle="true" title="Course Lookup" url="${ConfigProperties.application.url}/myplan/lookup?methodToCall=start&dataObjectClassName=org.kuali.student.lum.course.dto.CourseInfo&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true" /></li> 
-  	  <li><portal:portalLink displayTitle="true" title="Course Search" url="${ConfigProperties.application.url}/myplan/course?methodToCall=start&viewId=courseSearchView&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"/></li>	
+  	  <li><a href="${ConfigProperties.application.url}/myplan/course?methodToCall=start&viewId=courseSearchView" target="_new">Course Search</a></li>
   </ul>      
 </div>
 <channel:portalChannelBottom />
