@@ -45,6 +45,12 @@ public abstract class Transaction {
 	String documentReference; 
 	/** If this value is non null, it points to the most recent memo line that refers to this transaction. For example, if the system locks the transaction and enters a memo line in the account memo, the CSR would be able to pull up the transaction and see the memo line directly, instead of having to search for it.*/
 	String memoReference;
+	/** the rollupId is an institutionally specified group of transactions that are rolled up on the initial view of an account, if the transactions fall in to a specified academic
+	 * time period. For example, setting this flag on all tution charges to TUITION would cause all tuition charges to roll up into a single line. If a school charges mandatory fees
+	 * as single transactions, this could also be rolled up in this way. This can be set on a per-charge basis, or can be pulled from the default in the TransactionType.
+	 * 
+	 */
+	String rollupId;
 		
 	
 	/** This will allocate the value of amount on the transaction. A check will be made to ensure that the allocated amount
@@ -100,7 +106,8 @@ public abstract class Transaction {
 	/**
 	 * If the reverse method is called, the system will generate a negative transaction for the type of the original transaction. A memo transaction will be generated, and
 	 * the transactions will be locked together. Subject to user customization, the transactions may be marked as hidden. (likely that credits will not be hidden, debits will.)
-	 * 
+	 * A charge to an account may be reversed when a mistake is made, or a refund is issued. A payment may be reversed when a payment bounces, or for some other reason is entered
+	 * on to the account and is not payable.
 	 */
 	public void reverse(){
 		
