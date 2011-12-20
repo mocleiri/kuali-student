@@ -33,7 +33,6 @@
             <search:desc>myplan desc</search:desc>
             <search:resultColumns>
                 <search:resultColumn id="boogie.longname">
-                    <search:name/>
                     <search:desc/>
                     <search:dataType>string</search:dataType>
                 </search:resultColumn>
@@ -51,6 +50,11 @@
                     <search:dataType>string</search:dataType>
                 </search:resultColumn>
                 <search:resultColumn id="boogie.credits">
+                    <search:name>longname</search:name>
+                    <search:desc>longname</search:desc>
+                    <search:dataType>string</search:dataType>
+                </search:resultColumn>
+                <search:resultColumn id="boogie.code">
                     <search:name>longname</search:name>
                     <search:desc>longname</search:desc>
                     <search:dataType>string</search:dataType>
