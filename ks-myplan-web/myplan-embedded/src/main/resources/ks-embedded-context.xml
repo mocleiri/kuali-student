@@ -21,6 +21,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:ehcache="http://www.springmodules.org/schema/ehcache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
                            http://www.springframework.org/schema/tx
@@ -30,11 +31,12 @@
 
 
 	<!-- This file allows the overriding of beans that are common in all KS modules(core, lum etc...) -->
+    <!--
 	<bean id="identityServiceClient" class="org.kuali.rice.ksb.messaging.KSBClientProxyFactoryBean">
 		<property name="serviceEndpointInterface" value="org.kuali.rice.kim.service.IdentityService" />
 		<property name="serviceQName" value="{http://rice.kuali.org/wsdl/kim}kimIdentityServiceSOAP" />
 	</bean>
-	
+	-->
 	<bean id="ksCacheManager" class="net.sf.ehcache.CacheManager">
 		<constructor-arg index="0" type="java.net.URL" value="${ks.cache.config.file}" />
 	</bean>
@@ -69,6 +71,12 @@
 		<property name="enabled" value="${ks.statement.enable.caching}"/>
 	</bean>
 
+    <bean id="luMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
+        <property name="cacheName" value="luCache" />
+        <property name="cacheManager" ref="ksCacheManager"/>
+        <property name="enabled" value="${ks.lu.enable.caching}"/>
+    </bean>
+
 	<aop:config>
 		<aop:aspect id="enumCacheAroundSearch" ref="enumMethodCacheAdvisor">
 			<aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.search*(..))" method="getFromCache" />
@@ -76,6 +84,7 @@
 			<aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.updateEnumeratedValue*(..))" method="invalidateCache" />
 		</aop:aspect>
 		<aop:aspect id="atpCacheAroundSearch" ref="atpMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.getAtpType(..))" method="getFromCache" />
 			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.search*(..))" method="getFromCache" />
 			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.add*(..))" method="invalidateCache" />
 			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.update*(..))" method="invalidateCache" />
@@ -108,6 +117,14 @@
 			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.create*(..))" method="invalidateCache" />
 			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.delete*(..))" method="invalidateCache" />
 		</aop:aspect>
+        <aop:aspect id="luCacheAroundSearch" ref="luMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lu.service.impl.*.search(..))" method="getFromCache" />
+        </aop:aspect>
+<!--
+        <aop:aspect id="courseSearchFormCache" ref="courseSearchFormCache">
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lu.service.impl.*.search(..))" method="getFromCache" />
+        </aop:aspect>
+-->
 	</aop:config>
 	<bean id="ks.messageServiceMock" class="org.kuali.student.core.messages.service.impl.MessageServiceMock">
 		<property name="messageFiles">

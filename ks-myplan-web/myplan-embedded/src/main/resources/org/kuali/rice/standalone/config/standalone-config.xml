@@ -162,6 +162,7 @@
     <param name="ks.org.enable.caching">true</param>
     <param name="ks.lrc.enable.caching">true</param>
     <param name="ks.statement.enable.caching">true</param>
+    <param name="ks.lu.enable.caching">true</param>
 
     <param name="css.files" override="true">ks-myplan/css/myplan.css,${css.files}</param>
 

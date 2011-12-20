@@ -108,4 +108,6 @@
       </bean>
     -->
     <!-- KNS POC configuration ends -->
+    <import resource="classpath:ks-embedded-context.xml"/>
+
 </beans>
