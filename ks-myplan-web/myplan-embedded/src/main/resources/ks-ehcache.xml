@@ -59,4 +59,22 @@
         timeToLiveSeconds="120"
         statistics="true"
         />
+    <cache
+        name="searchFormCache"
+        maxElementsInMemory="5000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="12000"
+        statistics="false"
+        />
+    <cache
+        name="academicCalendarCache"
+        maxElementsInMemory="100"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="12000"
+        statistics="false"
+        />
 </ehcache>
