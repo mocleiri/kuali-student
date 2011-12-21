@@ -7,14 +7,16 @@ package com.sigmasys.kuali.ksa.rm;
  *
  */
 public abstract class Debit extends Transaction {
+	
 	/** If a transaction is deferred, then it will be marked as true here. Deferred transactions also bear the identifier of the deferment transaction that offsets them. in
 	 * defermentId
 	 */
-	boolean isdeferred;
+	private boolean isdeferred;
+	
 	/** the identifier of the deferment that offsets this transaction. If this is null, isDeferred will also be set to false.
 	 * 
 	 */
-	String defermentId;
+	private String defermentId;
 	
 	/** using the transacitonType, return a list of the general ledger accounts that this debit will feed. This will require the
 	 * effectiveDate of the transaction, as some GL codes will change after certain periods of time.

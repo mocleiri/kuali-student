@@ -1,22 +1,25 @@
 package com.sigmasys.kuali.ksa.rm;
 
+import java.util.Date;
+import java.math.BigDecimal;
+
 public class Deferment extends Credit {
 
 	/*
 	 * All deferments are set with an expiration date. If the date passes, then the deferment is expired, and the payment application system will
 	 * remove the allocation of the deferment, and the charge it is applied to will become due.
 	 */
-	Date expirationDate;
+	private Date expirationDate;
 	
 	/*
 	 * A deferment is always issued against a debit. This value shows the system which debit has been deferred. Once a deferment is expired, this value remains to show 
 	 * the original status and intention of the deferment.
 	 */
-	String deferredTransactionId;
+	private String deferredTransactionId;
 	/* a deferment is the only type of transaction whose amount can be altered. For audit purposes, the original value of the deferment is set permanently in this attribute,
 	 * even if the deferment is reduced or expired, the original value will be accessible here.
 	 */
-	BigDecimal originalDefermentAmount;
+	private BigDecimal originalDefermentAmount;
 	
 	/*
 	 * A deferment may be expired automatically (when the date of the deferment passes) or be expired manually but the system, either through user intervention, or by 
@@ -32,9 +35,8 @@ public class Deferment extends Credit {
 	 * This returns the expiration status and is true if the deferment has expired.
 	 */
 	public boolean getExpirationStatus(){
-		
-		
-	
+		// TODO:
+		return false;
 	}
 	/*
 	 * A deferment may be reduced or set to zero after expiration. Often, the value of a deferment may not exceed the debit balance on the account to prevent a

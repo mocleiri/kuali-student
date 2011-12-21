@@ -8,7 +8,7 @@ public abstract class Credit extends Transaction {
 	/** if set to true, the amount may be refunded to the student subject to any other clearing rules, for example, a check 10-day waiting period, etc. 
 	 * This will be set to false in the case of tuition deposits, etc, which may not be refunded to a student, but may be allocated to charges on the account.
 	 * */
-	boolean isRefundable;
+	private boolean isRefundable;
 	
 
 }
