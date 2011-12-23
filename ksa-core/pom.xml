@@ -22,38 +22,59 @@
         <groupId>com.sigmasys.kuali.ksa</groupId>
         <artifactId>ksa-common</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>com.sigmasys.kuali.ksa.core</groupId>
     <artifactId>ksa-core</artifactId>
     <name>KS Core</name>
 
-    <!-- skipping tests until integrated with ks test environment -->
+    <properties>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
+        <finalName>ksa-core-jar</finalName>
         <plugins>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/java</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
                 <configuration>
-                    <skipTests>false</skipTests>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
 
-    <repositories>
-        <repository>
-            <id>kuali.nexus</id>
-            <name>Nexus Repository Manager</name>
-            <url>http://nexus.kuali.org/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
 
