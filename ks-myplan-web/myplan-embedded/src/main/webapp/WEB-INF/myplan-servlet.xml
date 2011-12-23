@@ -17,6 +17,9 @@
   <!-- Custom UW ATP Comparator bean -->
   <bean id="atpTypeComparator" class="edu.uw.kuali.student.myplan.util.TermInfoComparator"/>
 
+  <!-- Search Strategy -->
+  <bean id="courseSearchStrategy" class="org.kuali.student.myplan.course.controller.CourseSearchStrategy" />
+
 
   <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

@@ -166,10 +166,6 @@
         </dependency>
         <!-- End beanutils work-around -->
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-        </dependency>
         <!-- added by bonnie -->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -260,27 +256,6 @@
             <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>backport-util-concurrent</groupId>
-            <artifactId>backport-util-concurrent</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jsr107cache</groupId>
-            <artifactId>jsr107cache</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>antlr</groupId>
-            <artifactId>antlr</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.security.version}</version>
         </dependency>
 
 
