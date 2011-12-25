@@ -1,6 +1,14 @@
 package com.sigmasys.kuali.ksa.service.hibernate;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Interceptor;
 import org.hibernate.jdbc.BatchingBatcher;
+import org.hibernate.jdbc.ConnectionManager;
+import org.hibernate.jdbc.Expectation;
+import org.hibernate.jdbc.NonBatchingBatcher;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * Custom BatchingBatcher that extends Hibernate's BatchingBatcher
@@ -12,6 +20,7 @@ public class HibernateBatcher extends BatchingBatcher {
 	
 
     private NonBatchingBatcher nonBatchingBatcher;
+
 
     public HibernateBatcher(ConnectionManager connectionManager, Interceptor interceptor) {
         super(connectionManager, interceptor);
