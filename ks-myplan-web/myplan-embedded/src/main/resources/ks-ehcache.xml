@@ -77,4 +77,13 @@
         timeToLiveSeconds="12000"
         statistics="false"
         />
+    <cache name="courseSearchCache"
+           maxElementsInMemory="100"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="120"
+           statistics="true"
+            />
+
 </ehcache>
