@@ -54,6 +54,8 @@
         <hibernate.version>4.0.0.Final</hibernate.version>
         <atomikos.version>3.7.0</atomikos.version>
         <gwt.version>2.4.0</gwt.version>
+        <gxt.version>2.2.5</gxt.version>
+        <gwt-log.version>3.1.7</gwt-log.version>
         <kuali.rice.version>1.0.3.3</kuali.rice.version>
         <kuali.student.version>1.2</kuali.student.version>
     </properties>
@@ -329,26 +331,17 @@
             <classifier>sources</classifier>
             <scope>provided</scope>
         </dependency>
-
+        
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-incubator</artifactId>
-            <version>2.3.0</version>
-            <scope>provided</scope>
+            <groupId>com.extjs</groupId>
+            <artifactId>gxt</artifactId>
+            <version>${gxt.version}</version>
         </dependency>
-
+       
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <version>${gwt.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-            <scope>provided</scope>
+            <groupId>com.google.code.gwt-log</groupId>
+            <artifactId>gwt-log</artifactId>
+            <version>${gwt-log.version}</version>
         </dependency>
 
         <dependency>
