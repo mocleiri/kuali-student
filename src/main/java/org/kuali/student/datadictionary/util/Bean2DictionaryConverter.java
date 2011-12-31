@@ -172,6 +172,7 @@ public class Bean2DictionaryConverter {
             }
             pt = workAround(clazz, pd.getReadMethod().getName());
         }
+        
         if (List.class.equals(pt)) {
             pt = ComplexSubstructuresHelper.getActualClassFromList(clazz, pd.getName());
         }
@@ -230,7 +231,7 @@ public class Bean2DictionaryConverter {
         } else if (String.class.equals(pt)) {
             return DataType.STRING;
         } else if (List.class.equals(pt)) {
-            throw new RuntimeException("Found bit can't have a list of lists, List<List<?>> in " + context);
+            throw new RuntimeException("Found list can't have a list of lists, List<List<?>> in " + context);
         } else if (Enum.class.isAssignableFrom(pt)) {
             return DataType.STRING;
         } else if (Object.class.equals(pt)) {

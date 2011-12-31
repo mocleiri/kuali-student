@@ -22,6 +22,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ComplexSubstructuresHelper {
         BeanInfo beanInfo;
         Class<?> clazz;
         try {
-           clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
+            clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
             // had to change the standard Class.forName below to the above so it uses the right class loader
             // that is defined in KSDictionaryDocMojo.java
 //            clazz = Class.forName(className);
@@ -81,6 +82,9 @@ public class ComplexSubstructuresHelper {
     }
 
     public static Class<?> getActualClassFromList(Class<?> originalClass, String fieldName) {
+        if (originalClass.isInterface()) {
+            throw new RuntimeException("Interface used in getter, use xxxInfo instead for field: " + originalClass.getName() + "." + fieldName);
+        }
         // recursively check super classes for field if not declared on this class
         Class<?> classToCheck = originalClass;
         while (true) {
@@ -93,13 +97,13 @@ public class ComplexSubstructuresHelper {
             } catch (NoSuchFieldException ex) {
                 classToCheck = classToCheck.getSuperclass();
                 if (classToCheck == null) {
-                    throw new RuntimeException(originalClass.getName(), ex);
+                    throw new RuntimeException("No such field: " + originalClass.getName() + "." + fieldName, ex);
                 }
                 if (classToCheck.equals(Object.class)) {
-                    throw new RuntimeException(originalClass.getName(), ex);
+                    throw new RuntimeException("No such field: " + originalClass.getName() + "." + fieldName, ex);
                 }
             } catch (SecurityException ex) {
-                throw new RuntimeException(ex);
+                throw new RuntimeException(originalClass.getName() + "." + fieldName, ex);
             }
         }
     }

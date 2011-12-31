@@ -17,7 +17,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.kuali.student.contract.model.test.source.IdEntity;
 
 @SuppressWarnings("serial")
 @XmlTransient
