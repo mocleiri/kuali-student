@@ -20,6 +20,12 @@
     <repositories>
 
         <repository>
+            <id>UCDavis</id>
+            <name>UC Davis</name>
+            <url>http://maven.ucdavis.edu/maven2</url>
+        </repository>
+
+        <repository>
             <id>repo1</id>
             <name>Maven Repository Switchboard</name>
             <url>http://repo1.maven.org/maven2</url>
@@ -29,6 +35,17 @@
             <id>kuali.nexus</id>
             <name>Nexus Repository Manager</name>
             <url>http://nexus.kuali.org/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>google-maven-snapshot-repository</id>
+            <name>Google Maven Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>GXT</id>
+            <url>http://maven.jahia.org/maven2/</url>
         </repository>
 
     </repositories>
@@ -54,7 +71,7 @@
         <hibernate.version>4.0.0.Final</hibernate.version>
         <atomikos.version>3.7.0</atomikos.version>
         <gwt.version>2.4.0</gwt.version>
-        <gxt.version>2.2.5</gxt.version>
+        <gxt.version>2.2.5-gwt22</gxt.version>
         <gwt-log.version>3.1.7</gwt-log.version>
         <kuali.rice.version>1.0.3.3</kuali.rice.version>
         <kuali.student.version>1.2</kuali.student.version>
@@ -331,15 +348,15 @@
             <classifier>sources</classifier>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
             <version>${gxt.version}</version>
         </dependency>
-       
+
         <dependency>
-            <groupId>com.google.code.gwt-log</groupId>
+            <groupId>com.allen-sauer.gwt.log</groupId>
             <artifactId>gwt-log</artifactId>
             <version>${gwt-log.version}</version>
         </dependency>
