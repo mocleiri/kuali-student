@@ -39,6 +39,6 @@
 	<import resource="classpath:org/kuali/rice/core/RiceDataSourceSpringBeans.xml"/>
 	<import resource="classpath:org/kuali/rice/config/RiceSpringBeans.xml"/>
 	
-	<import resource="classpath:KsUimSampleModuleBeans.xml"/>
+	<import resource="classpath:SpringModuleBeans.xml"/>
 	 
 </beans>

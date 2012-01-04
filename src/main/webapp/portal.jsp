@@ -38,18 +38,9 @@
 <c:choose>
   <c:when test="${ empty channelUrl }">
     <ul>
-      <li><portal:portalLink displayTitle="true" title="Widget Attempt 1" url="/kr-krad/ks-uim?viewId=ks-uim-sample-view1&methodToCall=start" /></li>
-    </ul>
-    <ul>
-      <li><portal:portalLink displayTitle="true" title="Layout Test" url="/kr-krad/uilayouttest?viewId=LayoutTestView&methodToCall=start" /></li>
-      <li><portal:portalLink displayTitle="true" title="Uif Components (Kitchen Sink)" url="/kr-krad/uicomponents?viewId=UifCompView&methodToCall=start&readOnlyFields=field91" /></li>
-      <li><portal:portalLink displayTitle="true" title="Test View 1" url="/kr-krad/uitest?viewId=Travel-testView1&methodToCall=start" /></li>
-      <li><portal:portalLink displayTitle="true" title="Test View 2" url="/kr-krad/uitest?viewId=Travel-testView2&methodToCall=start" /></li>
-      <li><portal:portalLink displayTitle="true" title="Test View 3" url="/kr-krad/uitest?viewId=Travel-testView3&methodToCall=start" /></li>
-    </ul>
-    <ul>
-      <li><portal:portalLink displayTitle="true" title="Demo Course Offering" url="/kr-krad/courseOffering?viewId=CourseOfferingView&methodToCall=start" /></li>
-      <li><portal:portalLink displayTitle="true" title="Demo Registration" url="/kr-krad/registration?viewId=RegistrationView&methodToCall=start" /></li>
+      <li><portal:portalLink displayTitle="true" title="Buttons" url="/kr-krad/ks-uim?viewId=WidgetView&methodToCall=buttons" /></li>
+      <li><portal:portalLink displayTitle="true" title="Widget 2" url="/kr-krad/ks-uim?viewId=ks-uim-sample-view1&methodToCall=widget2" /></li>
+      <li><portal:portalLink displayTitle="true" title="Widget 3" url="/kr-krad/ks-uim?viewId=ks-uim-sample-view1&methodToCall=widget3" /></li>
     </ul>
   </c:when>
   <c:otherwise>

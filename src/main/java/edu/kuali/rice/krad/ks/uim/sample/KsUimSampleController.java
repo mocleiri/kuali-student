@@ -19,7 +19,8 @@ package edu.kuali.rice.krad.ks.uim.sample;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.kuali.rice.krad.ks.uim.sample.KsUimSampleForm;
+import edu.kuali.rice.krad.ks.uim.sample.DummyForm;
+
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.kuali.rice.krad.web.form.UifFormBase;
@@ -47,29 +48,48 @@ public class KsUimSampleController extends UifControllerBase {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected KsUimSampleForm createInitialForm(HttpServletRequest request) {
-        return new KsUimSampleForm();
+    protected DummyForm createInitialForm(HttpServletRequest request) {
+        return new DummyForm();
     }
 
 	@Override
 	@RequestMapping(params = "methodToCall=start")
 	public ModelAndView start(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
-	    KsUimSampleForm uiTestForm = (KsUimSampleForm) form;
+	    DummyForm uiTestForm = (DummyForm) form;
 
-		uiTestForm.setField5("a14");
+		uiTestForm.setStringField1("Field One");
+		uiTestForm.setStringField2("Field Two");
 
-		uiTestForm.setField1("Field1");
-		uiTestForm.setField2("Field2");
-
-        uiTestForm.setHidden1("Hidden1");
-        uiTestForm.setHidden2("Hidden2");
-
-		return super.start(uiTestForm, result, request, response);
+		//return super.start(uiTestForm, result, request, response);
+        return getUIFModelAndView(uiTestForm);
 	}
 
+    @RequestMapping(params = "methodToCall=testCall")
+    public ModelAndView testCall(@ModelAttribute("KualiForm") DummyForm form, BindingResult result,
+            HttpServletRequest request, HttpServletResponse response) {
+        form.setStringField1("Field One");
+        form.setStringField2("Field Two");
+        return getUIFModelAndView(form);
+    }
+
+    @RequestMapping(params = "methodToCall=buttons")
+    public ModelAndView buttons(@ModelAttribute("KualiForm") DummyForm form, BindingResult result,
+            HttpServletRequest request, HttpServletResponse response) {
+        form.setStringField1("Field #1");
+        form.setStringField2("Field #2");
+        return getUIFModelAndView(form);
+    }
+
+    @RequestMapping(params = "methodToCall=someWidget")
+    public ModelAndView someWidget(@ModelAttribute("KualiForm") DummyForm form, BindingResult result,
+            HttpServletRequest request, HttpServletResponse response) {
+        return getUIFModelAndView(form, "someWidget");
+    }
+
+/*
 	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-	public ModelAndView save(@ModelAttribute("KualiForm") KsUimSampleForm uiTestForm, BindingResult result,
+	public ModelAndView save(@ModelAttribute("KualiForm") DummyForm uiTestForm, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
 		//For testing server side errors:
 		if(uiTestForm.getField2().equals("server_error")){
@@ -90,13 +110,16 @@ public class KsUimSampleController extends UifControllerBase {
 
 		return getUIFModelAndView(uiTestForm, "page1");
 	}
+*/
 
+/*
 	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=close")
-	public ModelAndView close(@ModelAttribute("KualiForm") KsUimSampleForm uiTestForm, BindingResult result,
+	public ModelAndView close(@ModelAttribute("KualiForm") DummyForm uiTestForm, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
 
 		return getUIFModelAndView(uiTestForm, "page1");
 	}
+*/
 
 }
 

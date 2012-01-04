@@ -53,18 +53,14 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-  <bean id="sampleAppModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
+  <bean id="ksUimSampleModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
     <property name="namespaceCode" value="tv"/>
     <property name="initializeDataDictionary" value="true"/>
+    <!-- property name="dataDictionaryService" ref="ksUimSampleDataDictionaryService"/ -->
     <property name="dataDictionaryPackages">
       <list>
-<!--
-        <value>classpath:edu/kuali/rice/krad/ks/uim/sample/Travel-testView1.xml</value>
-        <value>classpath:edu/kuali/rice/krad/ks/uim/sample/KsUimSampleView.xml</value>
-        <value>classpath:org/kuali/rice/krad/uim/sample/Travel-testView1.xml</value>
-        <value>classpath:org/kuali/rice/krad/uim/sample/KsUimSampleView.xml</value>
--->
-        <value>classpath:edu/kuali/rice/krad/ks/uim/sample/KsUimSampleView.xml</value>
+        <!--<value>classpath:edu/kuali/rice/krad/ks/uim/sample/KsUimSampleView.xml</value>-->
+        <value>classpath:edu/kuali/rice/krad/ks/uim/sample/WidgetView.xml</value>
       </list>
     </property>
     <property name="databaseRepositoryFilePaths">
@@ -79,28 +75,41 @@
     </property>
   </bean>
 
-  <bean id="sampleAppModuleService" class="org.kuali.rice.krad.service.impl.ModuleServiceBase">
-    <property name="moduleConfiguration" ref="sampleAppModuleConfiguration"/>
+<!--
+  <bean id="setReloadingDataDictionary" depends-on="dataDictionaryService" lazy-init="false"
+        class="edu.kuali.rice.krad.ks.uim.sample.ReloadingDataDictionarySetter">
+    <property name="dataDictionary" ref="kradReloadingDataDictionary"/>
+  </bean>
+  <bean id="kradReloadingDataDictionary" class="org.kuali.rice.krad.datadictionary.ReloadingDataDictionary"/>
+-->
+
+  <bean id="ksUimSampleModuleService" class="org.kuali.rice.krad.service.impl.ModuleServiceBase">
+    <property name="moduleConfiguration" ref="ksUimSampleModuleConfiguration"/>
   </bean>
 
   <bean class="org.kuali.rice.core.framework.resourceloader.RiceSpringResourceLoaderConfigurer">
     <property name="localServiceName" value="SampleAppContext"/>
   </bean>
 
+<!-- //test
+  <bean id="configurationService" class="org.kuali.rice.krad.config.GlobalResourceLoaderServiceFactoryBean">
+    <property name="serviceName" value="kualiConfigurationService"/>
+  </bean>
+-->
   <bean id="rice.ksb.serviceBus"
         class="org.kuali.rice.krad.config.GlobalResourceLoaderServiceFactoryBean">
     <property name="serviceName" value="rice.ksb.serviceBus"/>
   </bean>
 
-  <bean id="sampleAppPeopleFlowTypeService"
+  <bean id="ksUimSamplePeopleFlowTypeService"
         class="org.kuali.rice.krad.workflow.DataDictionaryPeopleFlowTypeServiceImpl"/>
 
   <bean class="org.kuali.rice.ksb.api.bus.support.ServiceBusExporter">
     <property name="serviceBus" ref="rice.ksb.serviceBus"/>
     <property name="serviceDefinition">
       <bean class="org.kuali.rice.ksb.api.bus.support.SoapServiceDefinition"
-            p:service-ref="sampleAppPeopleFlowTypeService"
-            p:localServiceName="sampleAppPeopleFlowTypeService"
+            p:service-ref="ksUimSamplePeopleFlowTypeService"
+            p:localServiceName="ksUimSamplePeopleFlowTypeService"
             p:serviceInterface="org.kuali.rice.kew.framework.peopleflow.PeopleFlowTypeService"/>
     </property>
   </bean>
@@ -112,4 +121,3 @@
   -->
 
 </beans>
-

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright 2006-2011 The Kuali Foundation
+  ~
+  ~ Licensed under the Educational Community License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.opensource.org/licenses/ecl2.php
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  
+
+  <bean id="WidgetView" parent="WidgetViewParent" p:title="KS KRAD Widgets" />
+<!--  p:id="widget-view-1" -->
+
+<!--  p:entryPageId="page1" -->
+  <bean id="WidgetViewParent" parent="FormView"
+        p:formClass="edu.kuali.rice.krad.ks.uim.sample.DummyForm"
+        p:header.render="false"
+        p:footer.render="false"
+        p:breadcrumbs.render="false"
+    >
+    <!-- property name="template" value="/WEB-INF/jsp/templates/View.jsp"/ -->
+    <property name="additionalCssFiles" ref="ks-uim-css" />
+    <property name="items">
+      <list>
+        <bean parent="PageNoHeader" p:id="buttons">
+          <property name="items">
+            <list>
+              <ref bean="groupButtons"/>
+            </list>
+          </property>
+        </bean>
+        <bean parent="PageNoHeader" p:id="someWidget">
+          <property name="items">
+            <list>
+              <ref bean="groupWidget"/>
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+
+<!--  p:entryPageId="page1" -->
+  <bean id="WidgetView2" parent="FormView"
+      p:formClass="edu.kuali.rice.krad.ks.uim.sample.DummyForm"
+      p:header.render="false"
+      p:footer.render="false"
+      p:breadcrumbs.render="false"
+    >
+    <!-- property name="template" value="/WEB-INF/jsp/templates/View.jsp"/ -->
+    <property name="additionalCssFiles" ref="ks-uim-css" />
+<!--
+    <property name="items">
+      <list>
+        <bean parent="PageNoHeader" p:id="page1">
+          <property name="items">
+            <list>
+              <!== ref bean="testSection1"/ ==>
+              <ref bean="group1b"/>
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+-->
+  </bean>
+
+  <bean id="PageNoHeader" parent="Page"
+      p:header.render="false"
+    />
+
+  <bean id="groupButtons" parent="GroupGridLayout">
+    <property name="title" value="Section Title" />
+    <property name="layoutManager.numberOfColumns" value="4" />
+    <property name="instructionalText" value="GroupGridLayout number of columns = 4" />
+    <!-- property name="disclosure.render" value="false" / -->
+    <!-- property name="styleClasses" value="group_header" / -->
+    <property name="layoutManager.renderAlternatingHeaderColumns" value="false"/>
+    <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+    <property name="items">
+      <list>
+<!--
+        <bean parent="TextTestField" p:propertyName="stringField1" />
+        <bean parent="TextAreaTestField" p:propertyName="stringField2" />
+        <bean parent="TextTestField" p:propertyName="stringField3" />
+        <bean parent="TextAreaTestField" p:propertyName="stringField4" />
+-->
+        <bean parent="ActionField" p:actionLabel="Primary" p:clientSideJs="alert('Click.');"/>
+        <bean parent="ActionField" p:actionLabel="Primary 2" p:clientSideJs="alert('Click.');"/>
+        <bean parent="ActionField" p:actionLabel="Primary 3" p:clientSideJs="alert('Click.');"/>
+        <bean parent="ActionField" p:actionLabel="Primary 4" p:clientSideJs="alert('Click.');"/>
+        <bean parent="ActionField" p:actionLabel="Primary 5" p:clientSideJs="alert('Click.');"/>
+      </list>
+    </property>
+  </bean>
+  <bean id="TextAreaTestField" parent="InputField_Form"
+    abstract="true" p:label="Field Label" p:labelPlacement="TOP"
+    p:instructionalText="Instructions Instructions Instructions" p:constraintText="Constraint text"
+    p:labelField.styleClasses="labelTop" p:labelField.renderColon="false"
+    p:required="true">
+    <property name="control">
+      <bean parent="TextAreaControl" p:textExpand="true" p:rows="5"
+        p:cols="40" p:watermarkText="Text Here..." />
+    </property>
+  </bean>
+  <bean id="TextTestField" parent="InputField_Form" abstract="true"
+    p:label="Field Label" p:labelPlacement="TOP"
+    p:instructionalText="Instructions Instructions Instructions" p:constraintText="Constraint text"
+    p:labelField.styleClasses="labelTop" p:labelField.renderColon="false"
+    p:required="true">
+    <property name="control">
+      <bean parent="TextControl" p:size="30" p:watermarkText="Enter Data" />
+    </property>
+  </bean>
+
+<!--
+  <bean id="groupButtons" parent="GroupGridLayout">
+    <property name="title" value="groupButtons"/>
+-->
+  <bean id="groupButtons2" parent="GroupSection">
+    <property name="title" value="groupButtons"/>
+    <!-- property name="instructionalText" value="Field Groups can have multiple fields"/ -->
+    <property name="items">
+      <list>
+        <bean parent="FieldGroup" p:label="Field Group 3" p:group.layoutManager.orientation="VERTICAL">
+          <!-- property name="group.instructionalText" value="Field group with input and action field"/ -->
+          <property name="items">
+            <list>
+              <bean parent="ActionField" p:actionLabel="Primary" p:clientSideJs="alert('Primary button');"/>
+              <bean parent="ActionField_Secondary" p:actionLabel="Secondary" p:clientSideJs="alert('Secondary button');">
+                <property name="actionImage">
+                  <bean parent="ImageField" p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
+                </property>
+              </bean>
+              <bean parent="ActionField_Secondary" p:actionLabel="Secondary 2" p:clientSideJs="alert('Click');">
+                <property name="styleClasses" ref="ks-uim-button-secondary"/>
+              </bean>
+              <bean parent="ActionField_Small" p:actionLabel="Small" />
+              <bean parent="ActionField_SmallSecondary" p:actionLabel="Sm 2nd" />
+              <bean parent="ActionLinkField" p:actionLabel="ActionLinkField image left (default)"
+                    p:clientSideJs="alert('You clicked a button');">
+                <property name="actionImage">
+                  <bean parent="ImageField" p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"
+                        p:altText="Search"/>
+                </property>
+              </bean>
+              <bean parent="ActionImageField" p:actionLabel="image">
+                <property name="actionImage">
+                  <bean parent="ImageField" p:source="@{#ConfigProperties['krad.externalizable.images.url']}down.png"
+                        p:altText="ActionImageField demonstration"/>
+                </property>
+              </bean>
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="groupWidget" parent="GroupGridLayout">
+    <property name="title" value="groupWidget"/>
+    <property name="items">
+      <list>
+        <bean parent="InputField_Form"
+              p:propertyName="stringField3"
+              p:label="field3"
+              p:maxLength="20"
+              p:readOnly="false">
+          <property name="control">
+            <bean parent="TextControl" p:size="15" p:watermarkText="watermark"/>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+
+  <!-- hack to merge a list with one of those util:lists -->
+  <bean id="ks-uim-button-secondary" class="org.apache.commons.collections.ListUtils" factory-method="union">
+    <constructor-arg value="#{ActionField_Secondary.styleClasses}"/>
+    <constructor-arg>
+      <list>
+        <value>ks-uim-button-image</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <!-- hack to merge a list with one of those util:lists -->
+  <bean id="ks-uim-css" class="org.apache.commons.collections.ListUtils" factory-method="union">
+    <constructor-arg>
+      <ref bean="ks-css" />
+    </constructor-arg>
+    <constructor-arg>
+      <list>
+        <value>/css/ks-uim-sample.css</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+</beans>
