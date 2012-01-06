@@ -26,19 +26,19 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- insert any overrides to the generated object definitions here -->
         <property name="collections">
             <list>
-                <ref bean="TestAcademicCalendarInfo.campusCalendarKeys"/>
+                <ref bean="TestAcademicCalendarInfo.holidayCalendarIds"/>
             </list>
         </property>
     </bean>
    
-    <bean id="TestAcademicCalendarInfo.campusCalendarKeys" parent="TestAcademicCalendarInfo.campusCalendarKeys-parent"/>
-    <bean id="TestAcademicCalendarInfo.campusCalendarKeys-parent" abstract="true" parent="CollectionDefinition">
+    <bean id="TestAcademicCalendarInfo.holidayCalendarIds" parent="TestAcademicCalendarInfo.holidayCalendarIds-parent"/>
+    <bean id="TestAcademicCalendarInfo.holidayCalendarIds-parent" abstract="true" parent="CollectionDefinition">
         <property name="dataObjectClass" value="java.lang.String"/>
-        <property name="name" value="campusCalendarKeys"/>
-        <property name="shortLabel" value="Campus Calendar Keys"/>
+        <property name="name" value="holidayCalendarIds"/>
+        <property name="shortLabel" value="Holiday Calendar Ids"/>
         <property name="summary">
             <value>
-Campus calendar keys
+Holiday calendar 
             </value>
         </property>
         <property name="label" value="campus calendar keys"/>
@@ -68,10 +68,10 @@ Campus calendar keys
 	<!-- insert any overrides to the generated attribute definitions here -->
     </bean>
 
-    <bean id="TestAcademicCalendarInfo.name" parent="TestAcademicCalendarInfo.name-parent"/>
-    <bean id="TestAcademicCalendarInfo.name-parent" abstract="true" parent="TestAcademicCalendarInfo.name-generated">
+    <!--bean id="TestAcademicCalendarInfo.name" parent="TestAcademicCalendarInfo.name-parent"/>
+    <bean id="TestAcademicCalendarInfo.name-parent" abstract="true" parent="TestAcademicCalendarInfo.name-generated"-->
 	<!-- insert any overrides to the generated attribute definitions here -->
-    </bean>
+    <!--/bean-->
 
     <bean id="TestAcademicCalendarInfo.descr" parent="TestAcademicCalendarInfo.descr-parent"/>
     <bean id="TestAcademicCalendarInfo.descr-parent" abstract="true" parent="TestAcademicCalendarInfo.descr-generated">
@@ -166,7 +166,7 @@ Campus calendar keys
 				<ref bean="TestAcademicCalendarInfo.key"/>
 				<ref bean="TestAcademicCalendarInfo.typeKey"/>
 				<ref bean="TestAcademicCalendarInfo.stateKey"/>
-				<ref bean="TestAcademicCalendarInfo.name"/>
+				<!--ref bean="TestAcademicCalendarInfo.name"/-->
 				<ref bean="TestAcademicCalendarInfo.descr"/>
 				<ref bean="TestAcademicCalendarInfo.descr.plain"/>
 				<ref bean="TestAcademicCalendarInfo.descr.formatted"/>
@@ -214,10 +214,10 @@ Unique identifier for the type of this academic calendar.
 		<property name="childEntryName" value="stateKey"/>
 	</bean>
 
-	<bean id="TestAcademicCalendarInfo.name-generated" abstract="true" parent="BaseKuali.name">
+	<!--bean id="TestAcademicCalendarInfo.name-generated" abstract="true" parent="BaseKuali.name">
 		<property name="name" value="name"/>
 		<property name="childEntryName" value="name"/>
-	</bean>
+	</bean-->
 
 	<bean id="TestAcademicCalendarInfo.descr-generated" abstract="true" parent="BaseKuali.descr">
 		<property name="name" value="descr"/>
