@@ -16,17 +16,20 @@ import org.kuali.student.enrollment.lpr.dto.LprTransactionInfo;
 import org.kuali.student.enrollment.lpr.dto.LprTransactionItemInfo;
 import org.kuali.student.enrollment.lpr.infc.LprTransaction;
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 
 @Entity
 @Table(name = "KSEN_LPR_TRANS")
-public class LprTransactionEntity extends MetaEntity implements AttributeOwner<LprTransAttributeEntity> {
+public class LprTransactionEntity extends MetaEntity implements AttributeOwner<LprTransAttributeEntity>, NameOwner<LprTransNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<LprTransNameEntity> names = new ArrayList<LprTransNameEntity>();
 
     @Column(name = "REQ_PERSON_ID")
     private String requestingPersonId;
@@ -54,7 +57,12 @@ public class LprTransactionEntity extends MetaEntity implements AttributeOwner<L
 
     public LprTransactionEntity(LprTransaction lprTransaction) {
         super(lprTransaction);
-        this.name = lprTransaction.getName();
+        this.setNames(new ArrayList<LprTransNameEntity>());
+        if (null != lprTransaction.getNames()) {
+            for (Name name : lprTransaction.getNames()) {
+                this.getNames().add(new LprTransNameEntity(name));
+            }
+        }
         this.requestingPersonId = lprTransaction.getRequestingPersonId();
         this.lprTransactionItems = new ArrayList<LprTransactionItemEntity>();
         this.setId(lprTransaction.getId());
@@ -89,7 +97,12 @@ public class LprTransactionEntity extends MetaEntity implements AttributeOwner<L
             }
             lpr.setAttributes(atts);
         }
-        lpr.setName(getName());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (LprTransNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        lpr.setNames(names);
         lpr.setRequestingPersonId(getRequestingPersonId());
         List<LprTransactionItemInfo> lprItemsInfo = new ArrayList<LprTransactionItemInfo>();
         if (lprTransactionItems != null) {
@@ -102,12 +115,12 @@ public class LprTransactionEntity extends MetaEntity implements AttributeOwner<L
 
     }
 
-    public String getName() {
-        return name;
+    public List<LprTransNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<LprTransNameEntity> names) {
+        this.names = names;
     }
 
     public LprRichTextEntity getDescr() {

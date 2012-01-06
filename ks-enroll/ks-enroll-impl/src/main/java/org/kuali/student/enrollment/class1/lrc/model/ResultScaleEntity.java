@@ -1,24 +1,28 @@
 package org.kuali.student.enrollment.class1.lrc.model;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.lum.lrc.dto.ResultScaleInfo;
 import org.kuali.student.r2.lum.lrc.dto.ResultValueRangeInfo;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "KSEN_LRC_RES_SCALE")
-public class ResultScaleEntity extends MetaEntity implements AttributeOwner<ResultScaleAttributeEntity> {
+public class ResultScaleEntity extends MetaEntity implements AttributeOwner<ResultScaleAttributeEntity>, NameOwner<ResultScaleNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<ResultScaleNameEntity> names = new ArrayList<ResultScaleNameEntity>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -56,7 +60,12 @@ public class ResultScaleEntity extends MetaEntity implements AttributeOwner<Resu
 
     public ResultScaleEntity(ResultScaleInfo dto){
         super(dto);
-        this.setName(dto.getName());
+        this.setNames(new ArrayList<ResultScaleNameEntity>());
+        if (null != dto.getNames()) {
+            for (Name name : dto.getNames()) {
+                this.getNames().add(new ResultScaleNameEntity(name));
+            }
+        }
         this.setId(dto.getKey());
         if (dto.getDescr() != null) {
             ResultScaleRichTextEntity entityDesc = new ResultScaleRichTextEntity(dto.getDescr());
@@ -81,12 +90,12 @@ public class ResultScaleEntity extends MetaEntity implements AttributeOwner<Resu
         }
     }
 
-    public String getName() {
-        return name;
+    public List<ResultScaleNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<ResultScaleNameEntity> names) {
+        this.names = names;
     }
 
     public ResultScaleRichTextEntity getDescr() {
@@ -168,7 +177,12 @@ public class ResultScaleEntity extends MetaEntity implements AttributeOwner<Resu
          ResultScaleInfo info = new ResultScaleInfo();
 
          info.setKey(getId());
-         info.setName(getName());
+         List<NameInfo> names = new ArrayList<NameInfo>();
+         for (ResultScaleNameEntity name : getNames()) {
+             NameInfo nameInfo = name.toDto();
+             names.add(nameInfo);
+         }
+         info.setNames(names);
 
          if (getDescr() != null){
             info.setDescr(getDescr().toDto());

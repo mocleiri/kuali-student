@@ -1,24 +1,28 @@
 package org.kuali.student.enrollment.class1.lrc.model;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.lum.lrc.dto.ResultValueRangeInfo;
 import org.kuali.student.r2.lum.lrc.dto.ResultValuesGroupInfo;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "KSEN_LRC_RES_VAL_GRP")
-public class ResultValuesGroupEntity extends MetaEntity implements AttributeOwner<ResultValuesGroupAttributeEntity>{
+public class ResultValuesGroupEntity extends MetaEntity implements AttributeOwner<ResultValuesGroupAttributeEntity>, NameOwner<ResultValuesGroupNameEntity>{
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<ResultValuesGroupNameEntity> names = new ArrayList<ResultValuesGroupNameEntity>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -61,7 +65,12 @@ public class ResultValuesGroupEntity extends MetaEntity implements AttributeOwne
 
     public ResultValuesGroupEntity(ResultValuesGroupInfo dto){
         super(dto);
-        this.setName(dto.getName());
+        this.setNames(new ArrayList<ResultValuesGroupNameEntity>());
+        if (null != dto.getNames()) {
+            for (Name name : dto.getNames()) {
+                this.getNames().add(new ResultValuesGroupNameEntity(name));
+            }
+        }
         this.setId(dto.getKey());
         if (dto.getDescr() != null) {
             ResultValuesGroupRichTextEntity entityDesc = new ResultValuesGroupRichTextEntity(dto.getDescr());
@@ -87,12 +96,12 @@ public class ResultValuesGroupEntity extends MetaEntity implements AttributeOwne
         }
     }
 
-    public String getName() {
-        return name;
+    public List<ResultValuesGroupNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<ResultValuesGroupNameEntity> names) {
+        this.names = names;
     }
 
     public LrcTypeEntity getType() {
@@ -190,7 +199,12 @@ public class ResultValuesGroupEntity extends MetaEntity implements AttributeOwne
          ResultValuesGroupInfo info = new ResultValuesGroupInfo();
 
          info.setKey(getId());
-         info.setName(getName());
+         List<NameInfo> names = new ArrayList<NameInfo>();
+         for (ResultValuesGroupNameEntity name : getNames()) {
+             NameInfo nameInfo = name.toDto();
+             names.add(nameInfo);
+         }
+         info.setNames(names);
 
          if (getDescr() != null){
             info.setDescr(getDescr().toDto());

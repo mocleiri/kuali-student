@@ -16,18 +16,21 @@ import javax.persistence.Table;
 import org.kuali.student.enrollment.class1.lui.model.LuiEntity;
 import org.kuali.student.enrollment.lpr.dto.LprRosterInfo;
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.TimeAmountInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 
 @Entity
 @Table(name = "KSEN_LPR_ROSTER")
-public class LprRosterEntity extends MetaEntity implements AttributeOwner<LprRosterAttributeEntity> {
+public class LprRosterEntity extends MetaEntity implements AttributeOwner<LprRosterAttributeEntity>, NameOwner<LprRosterNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<LprRosterNameEntity> names = new ArrayList<LprRosterNameEntity>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -73,7 +76,12 @@ public class LprRosterEntity extends MetaEntity implements AttributeOwner<LprRos
             this.setAtpDurationTypeKey(dto.getCheckInFrequency().getAtpDurationTypeKey());
             this.setTimeQuantity(dto.getCheckInFrequency().getTimeQuantity());
         }
-        this.setName(dto.getName());
+        this.setNames(new ArrayList<LprRosterNameEntity>());
+        if (null != dto.getNames()) {
+            for (Name name : dto.getNames()) {
+                this.getNames().add(new LprRosterNameEntity(name));
+            }
+        }
         if (dto.getDescr() != null) {
             LprRichTextEntity entityDesc = new LprRichTextEntity(dto.getDescr());
             this.setDescr(entityDesc);
@@ -166,12 +174,12 @@ public class LprRosterEntity extends MetaEntity implements AttributeOwner<LprRos
         this.descr = descr;
     }
 
-    public String getName() {
-        return name;
+    public List<LprRosterNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<LprRosterNameEntity> names) {
+        this.names = names;
     }
 
     public LprRosterInfo toDto() {
@@ -183,7 +191,12 @@ public class LprRosterEntity extends MetaEntity implements AttributeOwner<LprRos
         info.setCheckInFrequency(timeAmountInfo);
         info.setCheckInRequired(this.getCheckInRequired());
         info.setMaximumCapacity(this.getMaximumCapacity());
-        info.setName(this.getName());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (LprRosterNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        info.setNames(names);
         info.setStateKey(getLprRosterState().getId());
         info.setTypeKey(getLprRosterType().getId());
         if (getAssociatedLuis() != null) {
