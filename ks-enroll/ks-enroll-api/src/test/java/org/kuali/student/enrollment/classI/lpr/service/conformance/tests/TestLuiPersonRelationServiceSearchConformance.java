@@ -15,8 +15,6 @@
  */
 package org.kuali.student.enrollment.classI.lpr.service.conformance.tests;
 
-import static org.junit.Assert.assertEquals;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,6 +43,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author nwright
  */
 
+@Ignore
 public class TestLuiPersonRelationServiceSearchConformance {
 
     public TestLuiPersonRelationServiceSearchConformance() {
