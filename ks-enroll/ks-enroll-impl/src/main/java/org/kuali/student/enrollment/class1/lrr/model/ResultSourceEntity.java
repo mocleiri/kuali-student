@@ -2,20 +2,24 @@ package org.kuali.student.enrollment.class1.lrr.model;
 
 import org.kuali.student.enrollment.lrr.dto.ResultSourceInfo;
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "KSEN_LRR_RES_SOURCE")
-public class ResultSourceEntity extends MetaEntity implements AttributeOwner<ResultSourceAttributeEntity> {
+public class ResultSourceEntity extends MetaEntity implements AttributeOwner<ResultSourceAttributeEntity>, NameOwner<ResultSourceNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<ResultSourceNameEntity> names = new ArrayList<ResultSourceNameEntity>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -40,7 +44,13 @@ public class ResultSourceEntity extends MetaEntity implements AttributeOwner<Res
 
     public ResultSourceEntity(ResultSourceInfo dto){
         super(dto);
-        setName(dto.getName());
+        this.setNames(new ArrayList<ResultSourceNameEntity>());
+        if (null != dto.getNames()) {
+            for (Name name : dto.getNames()) {
+                this.getNames().add(new ResultSourceNameEntity(name));
+            }
+        }
+        
         setId(dto.getId());
         setArticulationId(dto.getArticulationId());
         setResultTransformationId(dto.getResultTransformationId());
@@ -57,12 +67,12 @@ public class ResultSourceEntity extends MetaEntity implements AttributeOwner<Res
 
     }
 
-    public String getName() {
-        return name;
+    public List<ResultSourceNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<ResultSourceNameEntity> names) {
+        this.names = names;
     }
 
     public ResultSourceRichTextEntity getDescr() {
@@ -110,7 +120,12 @@ public class ResultSourceEntity extends MetaEntity implements AttributeOwner<Res
     public ResultSourceInfo toDto() {
         ResultSourceInfo dto = new ResultSourceInfo();
         dto.setId(getId());
-        dto.setName(getName());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (ResultSourceNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        dto.setNames(names);
 
         dto.setArticulationId(getArticulationId());
         dto.setResultTransformationId(getResultTransformationId());

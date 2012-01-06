@@ -1,25 +1,27 @@
 package org.kuali.student.enrollment.class1.lrr.model;
 
-import org.kuali.student.enrollment.class1.lrc.model.ResultValueEntity;
 import org.kuali.student.enrollment.lrr.dto.LearningResultRecordInfo;
 import org.kuali.student.enrollment.lrr.infc.LearningResultRecord;
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
-import org.kuali.student.r2.lum.lrc.infc.ResultValue;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "KSEN_LRR")
-public class LearningResultRecordEntity extends MetaEntity implements AttributeOwner<LrrAttributeEntity> {
+public class LearningResultRecordEntity extends MetaEntity implements AttributeOwner<LrrAttributeEntity>, NameOwner<LrrNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<LrrNameEntity> names = new ArrayList<LrrNameEntity>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -54,7 +56,13 @@ public class LearningResultRecordEntity extends MetaEntity implements AttributeO
         super(dto);
 
         this.setId(dto.getId());
-        this.setName(dto.getName());
+        this.setNames(new ArrayList<LrrNameEntity>());
+        if (null != dto.getNames()) {
+            for (Name name : dto.getNames()) {
+                this.getNames().add(new LrrNameEntity(name));
+            }
+        }
+        
         this.setLprId(dto.getLprId());
         this.setResultValueId(dto.getResultValueKey());
 
@@ -70,12 +78,12 @@ public class LearningResultRecordEntity extends MetaEntity implements AttributeO
         }
     }
 
-    public String getName() {
-        return name;
+    public List<LrrNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<LrrNameEntity> names) {
+        this.names = names;
     }
 
     public LrrRichTextEntity getDescr() {
@@ -144,7 +152,12 @@ public class LearningResultRecordEntity extends MetaEntity implements AttributeO
         LearningResultRecordInfo info = new LearningResultRecordInfo();
         info.setId(getId());
         info.setLprId(lprId);
-        info.setName(getName());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (LrrNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        info.setNames(names);
 
         if (getDescr() != null){
             info.setDescr(getDescr().toDto());

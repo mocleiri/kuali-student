@@ -6,10 +6,13 @@ import org.kuali.student.enrollment.lui.infc.Lui;
 import org.kuali.student.enrollment.lui.infc.LuiIdentifier;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.MeetingScheduleInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
 import org.kuali.student.r2.common.infc.MeetingSchedule;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.lum.lu.dto.LuCodeInfo;
 import org.kuali.student.r2.lum.lu.infc.LuCode;
@@ -23,9 +26,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "KSEN_LUI")
-public class LuiEntity extends MetaEntity implements AttributeOwner<LuiAttributeEntity> {
-    @Column(name = "NAME")
-    private String name;
+public class LuiEntity extends MetaEntity implements AttributeOwner<LuiAttributeEntity>, NameOwner<LuiNameEntity> {
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<LuiNameEntity> names = new ArrayList<LuiNameEntity>();
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -43,7 +47,7 @@ public class LuiEntity extends MetaEntity implements AttributeOwner<LuiAttribute
 	private String cluId;
 	
 	@Column(name="ATP_ID")
-	private String atpKey;
+	private String atpId;
     
 	@Column(name="REF_URL")
 	private String referenceURL;
@@ -108,8 +112,14 @@ public class LuiEntity extends MetaEntity implements AttributeOwner<LuiAttribute
     	super(lui); 
         try {   
         	this.setId(lui.getId());
-        	this.setName(lui.getName());
-        	this.setAtpKey(lui.getAtpKey());
+        	this.setNames(new ArrayList<LuiNameEntity>());
+            if (null != lui.getNames()) {
+                for (Name name : lui.getNames()) {
+                    this.getNames().add(new LuiNameEntity(name));
+                }
+            }
+            
+        	this.setAtpId(lui.getAtpId());
         	this.setCluId(lui.getCluId());
         	this.setMaxSeats(lui.getMaximumEnrollment());        	
         	this.setMinSeats(lui.getMinimumEnrollment());     
@@ -180,8 +190,14 @@ public class LuiEntity extends MetaEntity implements AttributeOwner<LuiAttribute
     public LuiInfo toDto(){
     	LuiInfo obj = new LuiInfo();
     	obj.setId(getId());
-    	obj.setName(name);
-    	obj.setAtpKey(atpKey);
+    	List<NameInfo> names = new ArrayList<NameInfo>();
+        for (LuiNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        obj.setNames(names);
+        
+    	obj.setAtpId(atpId);
     	obj.setCluId(cluId);
         if (null != officialIdentifier) {
             obj.setOfficialIdentifier(officialIdentifier.toDto());
@@ -281,20 +297,20 @@ public class LuiEntity extends MetaEntity implements AttributeOwner<LuiAttribute
 		this.cluId = cluId;
 	}
 
-	public String getName() {
-		return name;
+	public List<LuiNameEntity> getNames() {
+		return names;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNames(List<LuiNameEntity> names) {
+		this.names = names;
 	}
 
-	public String getAtpKey() {
-		return atpKey;
+	public String getAtpId() {
+		return atpId;
 	}
 
-	public void setAtpKey(String atpKey) {
-		this.atpKey = atpKey;
+	public void setAtpId(String atpId) {
+		this.atpId = atpId;
 	}
 
 	public LuiRichTextEntity getDescr() {
