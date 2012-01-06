@@ -30,6 +30,7 @@ import org.kuali.rice.core.api.config.property.Config;
 import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.core.impl.config.property.JAXBConfigImpl;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
 import org.kuali.student.r2.common.infc.ValidationResult;
 import org.kuali.student.r2.common.util.RichTextHelper;
@@ -113,8 +114,9 @@ public class TestRiceDataDictionaryValidatorImplAgainstAtp {
 
     private AtpInfo getDefaultAtpInfo() {
         AtpInfo atp = new AtpInfo();
-        atp.setKey("org.kuali.test.atp");
-        atp.setName("test atp");
+        atp.setId("org.kuali.test.atp");
+        atp.setNames(new ArrayList<NameInfo>());
+        atp.getNames().add(new NameInfo("en", "test atp"));
         atp.setTypeKey(AtpServiceConstants.ATP_ACADEMIC_CALENDAR_TYPE_KEY);
         atp.setStateKey(AtpServiceConstants.ATP_DRAFT_STATE_KEY);
         atp.setStartDate(parseDate("2010-01-01"));
@@ -230,7 +232,8 @@ public class TestRiceDataDictionaryValidatorImplAgainstAtp {
         validationType = DataDictionaryValidator.ValidationType.FULL_VALIDATION;
         atp = this.getDefaultAtpInfo();
         context = getContext1();
-        atp.setName("this has \n an embedded return");
+        atp.setNames(new ArrayList<NameInfo>());
+        atp.getNames().add(new NameInfo("en", "this has \n an embedded return"));
         result = intstance.validate(validationType, atp, context);
         for (ValidationResult vri : result) {
             System.out.println(vri.getElement() + " " + vri.getLevel() + " " + vri.getMessage());
@@ -244,9 +247,9 @@ public class TestRiceDataDictionaryValidatorImplAgainstAtp {
         validationType = DataDictionaryValidator.ValidationType.FULL_VALIDATION;
         atp = this.getDefaultAtpInfo();
         context = getContext1();
-        atp.setName(
-                "This has is a really long name in fact it is so long that it goes on and on and on and on sometimes I think it will go on forever"
-                + " but not really because the limit should be at 255 becaue that is the default in the dictionary and now I think I should stop typing");
+        atp.setNames(new ArrayList<NameInfo>());
+        atp.getNames().add(new NameInfo("en", "This has is a really long name in fact it is so long that it goes on and on and on and on sometimes I think it will go on forever"
+                + " but not really because the limit should be at 255 becaue that is the default in the dictionary and now I think I should stop typing"));
         result = intstance.validate(validationType, atp, context);
         for (ValidationResult vri : result) {
             System.out.println(vri.getElement() + " " + vri.getLevel() + " " + vri.getMessage());
@@ -260,9 +263,10 @@ public class TestRiceDataDictionaryValidatorImplAgainstAtp {
         validationType = DataDictionaryValidator.ValidationType.FULL_VALIDATION;
         atp = this.getDefaultAtpInfo();
         context = getContext1();
-        atp.setName(
+        atp.setNames(new ArrayList<NameInfo>());
+        atp.getNames().add(new NameInfo("en", 
                 "test atp                                                                                                                            "
-                + "                                                                                                                                    ");
+                + "                                                                                                                                    "));
         result = intstance.validate(validationType, atp, context);
         for (ValidationResult vri : result) {
             System.out.println(vri.getElement() + " " + vri.getLevel() + " " + vri.getMessage());
