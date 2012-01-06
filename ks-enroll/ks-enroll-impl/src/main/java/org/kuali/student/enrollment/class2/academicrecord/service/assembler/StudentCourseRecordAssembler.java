@@ -61,9 +61,9 @@ public class StudentCourseRecordAssembler implements DTOAssembler<StudentCourseR
 			courseRecord.setActivityCode(regGroup.getActivityRegistrations().get(0).getActivityOffering().getActivityCode());
 		
 		try{
-			if(co.getTermKey() != null){
-				AtpInfo atp = getAtpService().getAtp(co.getTermKey(), context);
-					courseRecord.setTermName(atp.getName());
+			if(co.getTermId() != null){
+				AtpInfo atp = getAtpService().getAtp(co.getTermId(), context);
+					courseRecord.setTermNames(atp.getNames());
 					courseRecord.setCourseBeginDate(atp.getStartDate());
 					courseRecord.setCourseEndDate(atp.getEndDate());
 						
