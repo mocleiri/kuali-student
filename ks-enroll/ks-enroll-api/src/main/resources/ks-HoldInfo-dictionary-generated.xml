@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Tue Sep 06 14:26:48 EDT 2011
+		This dictionary file was automatically generated on Sat Dec 31 12:02:12 EST 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -60,7 +60,6 @@ Information about a Hold.
 				<ref bean="HoldInfo.id"/>
 				<ref bean="HoldInfo.typeKey"/>
 				<ref bean="HoldInfo.stateKey"/>
-				<ref bean="HoldInfo.name"/>
 				<ref bean="HoldInfo.issueKey"/>
 				<ref bean="HoldInfo.personId"/>
 				<ref bean="HoldInfo.isWarning"/>
@@ -79,6 +78,7 @@ Information about a Hold.
 
 		<property name="collections">
 			<list>
+				<ref bean="HoldInfo.names"/>
 			</list>
 		</property>
 	</bean>
@@ -95,8 +95,23 @@ Information about a Hold.
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="HoldInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="HoldInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="HoldInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">
@@ -155,16 +170,16 @@ A description of the entity.
 
 	<bean id="HoldInfo.issueKey-generated" abstract="true" parent="BaseKuali.string">
 		<property name="name" value="issueKey"/>
-		<property name="shortLabel" value="Issue Id"/>
+		<property name="shortLabel" value="Issue Key"/>
 		<property name="summary">
 			<value>
-The Issue Key.
+The Issue Id.
 			</value>
 		</property>
 		<property name="label" value="Issue Id"/>
 		<property name="description">
 			<value>
-The Issue Key.
+The Issue Id.
 			</value>
 		</property>
 		<property name="required" value="true"/>
