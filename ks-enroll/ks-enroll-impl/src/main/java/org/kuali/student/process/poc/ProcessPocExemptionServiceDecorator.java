@@ -6,6 +6,7 @@ package org.kuali.student.process.poc;
 
 import java.util.Date;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.util.constants.ExemptionServiceConstants;
 import org.kuali.student.r2.core.exemption.dto.ExemptionInfo;
 import org.kuali.student.r2.core.exemption.service.ExemptionService;
@@ -30,7 +31,7 @@ public class ProcessPocExemptionServiceDecorator extends ExemptionServiceDecorat
         ExemptionInfo exemption = new ExemptionInfo();
 //        exemption.setTypeKey(ExemptionServiceConstants.);
         exemption.setStateKey(ExemptionServiceConstants.EXEMPTION_ACTIVE_STATE_KEY);
-        exemption.setName("test exemption for ");
+        exemption.getNames().add(new NameInfo("en","test exemption for "));
         exemption.setEffectiveDate(new Date());
         exemption.setMilestoneOverride(null);
 //        exemption.setPersonId(ProcessPocConstants.PERSON_ID_CLIFFORD_RIDDLE_2397);

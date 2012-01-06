@@ -13,17 +13,21 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.StateProcessInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.infc.StateProcess;
 
 @Entity
 @Table(name = "KSEN_STATE_PROCESS")
-public class StateProcessEntity extends MetaEntity implements AttributeOwner<StateAttributeEntity> {
-	@Column(name="NAME")
-    private String name;
+public class StateProcessEntity extends MetaEntity implements AttributeOwner<StateAttributeEntity>, NameOwner<StateProcessNameEntity> {
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<StateProcessNameEntity> names = new ArrayList<StateProcessNameEntity>();
 
     @Column(name="DESCR")
     private String description;
@@ -39,12 +43,12 @@ public class StateProcessEntity extends MetaEntity implements AttributeOwner<Sta
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<StateAttributeEntity> attributes;
     
-	public String getName() {
-		return name;
+	public List<StateProcessNameEntity> getNames() {
+		return names;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNames(List<StateProcessNameEntity> names) {
+		this.names = names;
 	}
 
 	public String getDescription() {
@@ -85,7 +89,12 @@ public class StateProcessEntity extends MetaEntity implements AttributeOwner<Sta
 		super();
 		try{
 			this.setId(process.getKey());
-			this.setName(process.getName());
+			this.setNames(new ArrayList<StateProcessNameEntity>());
+	        if (null != process.getNames()) {
+	            for (Name name : process.getNames()) {
+	                this.getNames().add(new StateProcessNameEntity(name));
+	            }
+	        }
 			this.setDescription(process.getDescr());
 			this.setVersionNumber((long) 0);
 			this.setEffectiveDate(process.getEffectiveDate());
@@ -105,7 +114,12 @@ public class StateProcessEntity extends MetaEntity implements AttributeOwner<Sta
 	public StateProcessInfo toDto(){
 		StateProcessInfo process = StateProcessInfo.newInstance();
 		process.setKey(getId());
-		process.setName(name);
+		List<NameInfo> names = new ArrayList<NameInfo>();
+        for (StateProcessNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        process.setNames(names);
 		process.setDescr(description);
 		process.setEffectiveDate(effectiveDate);
 		process.setExpirationDate(expirationDate);

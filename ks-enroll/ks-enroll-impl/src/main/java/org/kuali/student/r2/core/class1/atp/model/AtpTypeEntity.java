@@ -1,6 +1,5 @@
 package org.kuali.student.r2.core.class1.atp.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 

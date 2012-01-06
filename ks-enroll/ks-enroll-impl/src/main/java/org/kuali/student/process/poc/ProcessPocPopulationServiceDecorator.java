@@ -5,6 +5,7 @@
 package org.kuali.student.process.poc;
 
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.util.constants.PopulationServiceConstants;
 import org.kuali.student.r2.core.hold.dto.IssueInfo;
 import org.kuali.student.r2.core.population.dto.PopulationInfo;
@@ -28,7 +29,7 @@ public class ProcessPocPopulationServiceDecorator extends PopulationServiceDecor
         context.setPrincipalId("POC-Initializer");
 
         PopulationInfo summerOnly = new PopulationInfo();
-        summerOnly.setName("summer only students");
+        summerOnly.getNames().add(new NameInfo("en","summer only students"));
         summerOnly.setTypeKey(PopulationServiceConstants.SUMMER_ONLY_STUDENTS_POPULATION_KEY);
 //        summerOnly.setStateKey(PopulationServiceConstants.);
         try {
@@ -38,7 +39,7 @@ public class ProcessPocPopulationServiceDecorator extends PopulationServiceDecor
         }
 
         IssueInfo overdueBookIssue = new IssueInfo();
-        overdueBookIssue.setName("Overdue Library Issue");
+        overdueBookIssue.getNames().add(new NameInfo("en","Overdue Library Issue"));
 //        overdueBookIssue.setTypeKey(PopulationServiceConstants.OVERDUE_LIBRARY_MATERIALS_ISSUE_TYPE_KEY);
 //        overdueBookIssue.setStateKey(PopulationServiceConstants.ISSUE_ACTIVE_STATE_KEY);
 //        try {

@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.TypeTypeRelationInfo;
 import org.kuali.student.r2.common.infc.Attribute;
 import org.kuali.student.r2.common.infc.TypeTypeRelation;
@@ -42,8 +43,8 @@ public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner
     @Column(name = "RANK")
     private Integer rank;
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<TypeNameEntity> names = new ArrayList<TypeNameEntity>();
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -169,12 +170,12 @@ public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner
         this.rank = rank;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(List<TypeNameEntity> names) {
+        this.names = names;
     }
 
-    public String getName() {
-        return name;
+    public List<TypeNameEntity> getNames() {
+        return names;
     }
 
     public void setDescr(AtpRichTextEntity descr) {
@@ -201,7 +202,13 @@ public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner
         typeTypeRel.setEffectiveDate(new Date(effectiveDate.getTime()));
         typeTypeRel.setExpirationDate(new Date(expirationDate.getTime()));
         typeTypeRel.setKey(getId());
-        typeTypeRel.setName(name);
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (TypeNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        typeTypeRel.setNames(names);
+        
         typeTypeRel.setOwnerTypeKey(ownerTypeId);
         typeTypeRel.setRelatedTypeKey(relatedTypeId);
         typeTypeRel.setMeta(super.toDTO());

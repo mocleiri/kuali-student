@@ -1,9 +1,12 @@
 package org.kuali.student.r2.core.class1.atp.model;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.core.atp.dto.AtpInfo;
 import org.kuali.student.r2.core.atp.infc.Atp;
@@ -15,9 +18,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "KSEN_ATP")
-public class AtpEntity extends MetaEntity implements AttributeOwner<AtpAttributeEntity> {
-    @Column(name = "NAME")
-    private String name;
+public class AtpEntity extends MetaEntity implements AttributeOwner<AtpAttributeEntity>, NameOwner<AtpNameEntity> {
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<AtpNameEntity> names = new ArrayList<AtpNameEntity>();
+    
+    @Column(name = "ADMIN_ORG_ID")
+    private String adminOrgId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -48,9 +55,14 @@ public class AtpEntity extends MetaEntity implements AttributeOwner<AtpAttribute
 
     public AtpEntity(Atp atp) {
         super(atp);
-        this.setId(atp.getKey());
-        this.setName(atp.getName());
-
+        this.setId(atp.getId());
+        this.setNames(new ArrayList<AtpNameEntity>());
+        if (null != atp.getNames()) {
+            for (Name name : atp.getNames()) {
+                this.getNames().add(new AtpNameEntity(name));
+            }
+        }
+		this.setAdminOrgId(atp.getAdminOrgId());
         if (atp.getStartDate() != null) {
             this.setStartDate(atp.getStartDate());
         }
@@ -60,6 +72,7 @@ public class AtpEntity extends MetaEntity implements AttributeOwner<AtpAttribute
         if (atp.getDescr() != null) {
             this.setDescr(new AtpRichTextEntity(atp.getDescr()));
         }
+        
         this.setAttributes(new ArrayList<AtpAttributeEntity>());
         if (null != atp.getAttributes()) {
             for (Attribute att : atp.getAttributes()) {
@@ -68,12 +81,12 @@ public class AtpEntity extends MetaEntity implements AttributeOwner<AtpAttribute
         }
     }
 
-    public String getName() {
-        return name;
+    public List<AtpNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<AtpNameEntity> names) {
+        this.names = names;
     }
 
     public AtpRichTextEntity getDescr() {
@@ -128,12 +141,27 @@ public class AtpEntity extends MetaEntity implements AttributeOwner<AtpAttribute
         return attributes;
     }
 
+    public String getAdminOrgId() {
+        return adminOrgId;
+    }
+
+    public void setAdminOrgId(String adminOrgId) {
+        this.adminOrgId = adminOrgId;
+    }
+
     public AtpInfo toDto() {
         AtpInfo atp = new AtpInfo();
-        atp.setKey(getId());
-        atp.setName(name);
+        atp.setId(getId());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (AtpNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        atp.setNames(names);
+        
         atp.setStartDate(startDate);
         atp.setEndDate(endDate);
+        atp.setAdminOrgId(getAdminOrgId());
         if (atpType != null)
             atp.setTypeKey(atpType.getId());
         if (atpState != null)

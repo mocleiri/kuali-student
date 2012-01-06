@@ -24,6 +24,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.TypeInfo;
 
 
@@ -66,7 +67,13 @@ public abstract class TypeEntity<T extends BaseAttributeEntity<?>> extends BaseT
 
 	public TypeInfo toDto() {
 		TypeInfo typeInfo = new TypeInfo();
-		typeInfo.setName(this.getName());
+		List<NameInfo> names = new ArrayList<NameInfo>();
+        for (TypeNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        typeInfo.setNames(names);
+        
 		typeInfo.setKey(this.getId());
 		typeInfo.setRefObjectURI(getRefObjectURI());
 		typeInfo.setDescr(this.getDescr());

@@ -16,7 +16,7 @@ public class GradeValuesGroupAssembler implements DTOAssembler<GradeValuesGroupI
         if(resultValuesGroupInfo != null){
             GradeValuesGroupInfo gradeValuesGroupInfo = new GradeValuesGroupInfo();
             resultValuesGroupInfo.setKey(resultValuesGroupInfo.getKey());
-            gradeValuesGroupInfo.setName(resultValuesGroupInfo.getName());
+            gradeValuesGroupInfo.setNames(resultValuesGroupInfo.getNames());
             gradeValuesGroupInfo.setDescr(resultValuesGroupInfo.getDescr());
             gradeValuesGroupInfo.setTypeKey(resultValuesGroupInfo.getTypeKey());
             gradeValuesGroupInfo.setStateKey(resultValuesGroupInfo.getStateKey());

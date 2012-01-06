@@ -6,6 +6,7 @@ package org.kuali.student.process.poc;
 
 import java.util.Date;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.util.constants.HoldServiceConstants;
 import org.kuali.student.r2.core.hold.dto.HoldInfo;
 import org.kuali.student.r2.core.hold.dto.IssueInfo;
@@ -44,7 +45,7 @@ public class ProcessPocHoldServiceDecorator extends HoldServiceDecorator {
     private IssueInfo _createIssue(String key, String name, String type, ContextInfo context) {
         IssueInfo issue = new IssueInfo();
         issue.setKey(key);
-        issue.setName(name);
+        issue.getNames().add(new NameInfo("en",name));
         issue.setTypeKey(type);
         issue.setStateKey(HoldServiceConstants.ISSUE_ACTIVE_STATE_KEY);
         try {
@@ -60,7 +61,7 @@ public class ProcessPocHoldServiceDecorator extends HoldServiceDecorator {
         hold.setTypeKey(HoldServiceConstants.STUDENT_HOLD_TYPE_KEY);
         hold.setStateKey(HoldServiceConstants.HOLD_ACTIVE_STATE_KEY);
         hold.setIssueKey(issue.getKey());
-        hold.setName(issue.getName());
+        hold.setNames(issue.getNames());
         hold.setIsOverridable(true);
         hold.setIsWarning(false);
         hold.setEffectiveDate(new Date());

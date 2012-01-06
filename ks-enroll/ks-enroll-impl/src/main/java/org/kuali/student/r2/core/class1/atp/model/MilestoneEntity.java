@@ -15,19 +15,22 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.core.atp.dto.MilestoneInfo;
 import org.kuali.student.r2.core.atp.infc.Milestone;
 
 @Entity
 @Table(name = "KSEN_MSTONE")
-public class MilestoneEntity extends MetaEntity implements AttributeOwner<MilestoneAttributeEntity> {
+public class MilestoneEntity extends MetaEntity implements AttributeOwner<MilestoneAttributeEntity>, NameOwner<MilestoneNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<MilestoneNameEntity> names = new ArrayList<MilestoneNameEntity>();
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "RT_DESCR_ID")
@@ -63,7 +66,7 @@ public class MilestoneEntity extends MetaEntity implements AttributeOwner<Milest
 
     public MilestoneEntity(Milestone milestone) {
         super(milestone);
-        this.setId(milestone.getKey());
+        this.setId(milestone.getId());
         this.setAllDay(milestone.getIsAllDay());
         this.setDateRange(milestone.getIsDateRange());
         this.setDescr(new AtpRichTextEntity(milestone.getDescr()));
@@ -73,7 +76,13 @@ public class MilestoneEntity extends MetaEntity implements AttributeOwner<Milest
         AtpTypeEntity type = new AtpTypeEntity();
         type.setId(milestone.getTypeKey());
         this.setAtpType(type);
-        this.name = milestone.getName();
+        this.setNames(new ArrayList<MilestoneNameEntity>());
+        if (null != milestone.getNames()) {
+            for (Name name : milestone.getNames()) {
+                this.getNames().add(new MilestoneNameEntity(name));
+            }
+        }
+        
         this.descr = null != milestone.getDescr() ? new AtpRichTextEntity(milestone.getDescr()) : null;
         this.startDate = null != milestone.getStartDate() ? new Date(milestone.getStartDate().getTime()) : null;
         this.endDate = null != milestone.getEndDate() ? new Date(milestone.getEndDate().getTime()) : null;
@@ -86,12 +95,12 @@ public class MilestoneEntity extends MetaEntity implements AttributeOwner<Milest
         }
     }
     
-    public String getName() {
-        return name;
+    public List<MilestoneNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<MilestoneNameEntity> names) {
+        this.names = names;
     }
 
     public AtpRichTextEntity getDescr() {
@@ -164,8 +173,14 @@ public class MilestoneEntity extends MetaEntity implements AttributeOwner<Milest
     public MilestoneInfo toDto() {
         MilestoneInfo info = new MilestoneInfo();
         
-        info.setKey(getId());
-        info.setName(getName());
+        info.setId(getId());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (MilestoneNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        info.setNames(names);
+        
         info.setTypeKey(null != atpType ? atpType.getId() : null);
         info.setStateKey(null != atpState ? atpState.getId() : null);
         info.setStartDate(getStartDate());

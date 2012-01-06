@@ -131,7 +131,7 @@ public class RegRequestAssembler implements DTOAssembler<RegRequestInfo, LprTran
         lprTransactionItemInfo.setId(regRequestItem.getId());
         lprTransactionItemInfo.setExistingLuiId(regRequestItem.getExistingRegGroupId());
         lprTransactionItemInfo.setNewLuiId(regRequestItem.getNewRegGroupId());
-        lprTransactionItemInfo.setName(regRequestItem.getName());
+        lprTransactionItemInfo.setNames(regRequestItem.getNames());
         lprTransactionItemInfo.setPersonId(regRequestItem.getStudentId());
         lprTransactionItemInfo.setGroupId(regRequestItem.getId());
         if (responseItem != null) {
