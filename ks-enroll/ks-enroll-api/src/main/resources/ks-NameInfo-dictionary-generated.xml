@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Sat Dec 31 12:02:11 EST 2011
+		This dictionary file was automatically generated on Tue Sep 06 14:26:48 EDT 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -38,14 +38,14 @@ plus any of its dependencies -->
 	<!-- ********************************************************************************************************** -->
 	<import resource="classpath:ks-base-dictionary.xml"/>
 
-	<!-- OfferingInstructorInfo-->
-	<bean id="OfferingInstructorInfo-generated" abstract="true" parent="DataObjectEntry">
-		<property name="name" value="offeringInstructorInfo"/>
-		<property name="dataObjectClass" value="org.kuali.student.enrollment.courseoffering.dto.OfferingInstructorInfo"/>
-		<property name="objectLabel" value="Offering Instructor"/>
+	<!-- NameInfo-->
+	<bean id="NameInfo-generated" abstract="true" parent="DataObjectEntry">
+		<property name="name" value="nameInfo"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
+		<property name="objectLabel" value="Fee"/>
 		<property name="objectDescription">
 			<value>
-Information about a potential instructor for a lui.
+Information about a name related to an learning unit
 			</value>
 		</property>
 		<property name="primaryKeys">
@@ -56,17 +56,14 @@ Information about a potential instructor for a lui.
 
 		<property name="attributes">
 			<list>
-				<ref bean="OfferingInstructorInfo.id"/>
-				<ref bean="OfferingInstructorInfo.personId"/>
-				<ref bean="OfferingInstructorInfo.percentageEffort"/>
-				<ref bean="OfferingInstructorInfo.typeKey"/>
-				<ref bean="OfferingInstructorInfo.stateKey"/>
+				<ref bean="NameInfo.locale"/>
+				<ref bean="NameInfo.name"/>
+				<ref bean="NameInfo.id"/>
 			</list>
 		</property>
 
 		<property name="complexAttributes">
 			<list>
-				<ref bean="OfferingInstructorInfo.meta"/>
 			</list>
 		</property>
 
@@ -76,53 +73,41 @@ Information about a potential instructor for a lui.
 		</property>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.id-generated" abstract="true" parent="BaseKuali.id">
-		<property name="name" value="id"/>
-	</bean>
-
-	<bean id="OfferingInstructorInfo.personId-generated" abstract="true" parent="BaseKuali.personId">
-		<property name="name" value="personId"/>
-		<property name="shortLabel" value="Person Id"/>
+	<bean id="NameInfo.locale-generated" abstract="true" parent="BaseKuali.string">
+		<property name="name" value="locale"/>
+		<property name="shortLabel" value="Locale"/>
 		<property name="summary">
 			<value>
-Unique identifier for a person record.
+A locale that identifies the type of the name. 
 			</value>
 		</property>
-		<property name="label" value="Person Id"/>
+		<property name="label" value="Locale"/>
 		<property name="description">
 			<value>
-Unique identifier for a person record.
+A locale that identifies the type of the name.
 			</value>
 		</property>
 		<property name="required" value="false"/>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.percentageEffort-generated" abstract="true" parent="BaseKuali.float">
-		<property name="name" value="percentageEffort"/>
-		<property name="shortLabel" value="Percentage Effort"/>
+	<bean id="NameInfo.name-generated" abstract="true" parent="BaseKuali.string">
+		<property name="name" value="name"/>
+		<property name="shortLabel" value="Name"/>
 		<property name="summary">
 			<value>
-Percentage involvement of the instructor in the
+A name. 
 			</value>
 		</property>
-		<property name="label" value="Percentage Effort"/>
+		<property name="label" value="Name"/>
 		<property name="description">
 			<value>
-Percentage involvement of the instructor in the
+A name.
 			</value>
 		</property>
 		<property name="required" value="false"/>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.typeKey-generated" abstract="true" parent="BaseKuali.typeKey">
-		<property name="name" value="typeKey"/>
-	</bean>
-
-	<bean id="OfferingInstructorInfo.stateKey-generated" abstract="true" parent="BaseKuali.stateKey">
-		<property name="name" value="stateKey"/>
-	</bean>
-
-	<bean id="OfferingInstructorInfo.meta-generated" abstract="true" parent="ComplexAttributeDefinition">
+	<bean id="NameInfo.meta-generated" abstract="true" parent="ComplexAttributeDefinition">
 		<property name="name" value="meta"/>
 		<property name="shortLabel" value="Meta"/>
 		<property name="summary">
@@ -168,11 +153,11 @@ being thrown.
 
 				<property name="attributes">
 					<list>
-						<ref bean="OfferingInstructorInfo.meta.versionInd"/>
-						<ref bean="OfferingInstructorInfo.meta.createTime"/>
-						<ref bean="OfferingInstructorInfo.meta.createId"/>
-						<ref bean="OfferingInstructorInfo.meta.updateTime"/>
-						<ref bean="OfferingInstructorInfo.meta.updateId"/>
+						<ref bean="NameInfo.meta.versionInd"/>
+						<ref bean="NameInfo.meta.createTime"/>
+						<ref bean="NameInfo.meta.createId"/>
+						<ref bean="NameInfo.meta.updateTime"/>
+						<ref bean="NameInfo.meta.updateId"/>
 					</list>
 				</property>
 
@@ -189,23 +174,23 @@ being thrown.
 		</property>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.meta.versionInd-generated" abstract="true" parent="BaseKuali.meta.versionInd">
+	<bean id="NameInfo.meta.versionInd-generated" abstract="true" parent="BaseKuali.meta.versionInd">
 		<property name="name" value="versionInd"/>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.meta.createTime-generated" abstract="true" parent="BaseKuali.meta.createTime">
+	<bean id="NameInfo.meta.createTime-generated" abstract="true" parent="BaseKuali.meta.createTime">
 		<property name="name" value="createTime"/>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.meta.createId-generated" abstract="true" parent="BaseKuali.meta.createId">
+	<bean id="NameInfo.meta.createId-generated" abstract="true" parent="BaseKuali.meta.createId">
 		<property name="name" value="createId"/>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.meta.updateTime-generated" abstract="true" parent="BaseKuali.meta.updateTime">
+	<bean id="NameInfo.meta.updateTime-generated" abstract="true" parent="BaseKuali.meta.updateTime">
 		<property name="name" value="updateTime"/>
 	</bean>
 
-	<bean id="OfferingInstructorInfo.meta.updateId-generated" abstract="true" parent="BaseKuali.meta.updateId">
+	<bean id="NameInfo.meta.updateId-generated" abstract="true" parent="BaseKuali.meta.updateId">
 		<property name="name" value="updateId"/>
 	</bean>
 </beans>

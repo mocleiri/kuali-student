@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Mon Sep 12 14:39:44 EDT 2011
+		This dictionary file was automatically generated on Sat Dec 31 12:02:12 EST 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -60,11 +60,10 @@ Detailed information about a single LUI.
 				<ref bean="LuiInfo.id"/>
 				<ref bean="LuiInfo.typeKey"/>
 				<ref bean="LuiInfo.stateKey"/>
-				<ref bean="LuiInfo.name"/>
 				<ref bean="LuiInfo.effectiveDate"/>
 				<ref bean="LuiInfo.expirationDate"/>
 				<ref bean="LuiInfo.cluId"/>
-				<ref bean="LuiInfo.atpKey"/>
+				<ref bean="LuiInfo.atpId"/>
 				<ref bean="LuiInfo.maximumEnrollment"/>
 				<ref bean="LuiInfo.minimumEnrollment"/>
 				<ref bean="LuiInfo.referenceURL"/>
@@ -82,6 +81,7 @@ Detailed information about a single LUI.
 
 		<property name="collections">
 			<list>
+				<ref bean="LuiInfo.names"/>
 				<ref bean="LuiInfo.alternateIdentifiers"/>
 				<ref bean="LuiInfo.luiCodes"/>
 				<ref bean="LuiInfo.fees"/>
@@ -103,8 +103,23 @@ Detailed information about a single LUI.
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="LuiInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="LuiInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="LuiInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">
@@ -496,16 +511,16 @@ a Course Format.
 		<property name="dataObjectClass" value="java.lang.String"/>
 	</bean>
 
-	<bean id="LuiInfo.atpKey-generated" abstract="true" parent="BaseKuali.atpKey">
-		<property name="name" value="atpKey"/>
-		<property name="shortLabel" value="Atp Key"/>
+	<bean id="LuiInfo.atpId-generated" abstract="true" parent="BaseKuali.atpId">
+		<property name="name" value="atpId"/>
+		<property name="shortLabel" value="Atp Id"/>
 		<property name="summary">
 			<value>
 The unique identifier for the Academic Time Period (ATP)
 for which this instance is offered.
 			</value>
 		</property>
-		<property name="label" value="Atp Key"/>
+		<property name="label" value="Atp Id"/>
 		<property name="description">
 			<value>
 The unique identifier for the Academic Time Period (ATP)

@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Tue Sep 06 14:26:48 EDT 2011
+		This dictionary file was automatically generated on Sat Dec 31 12:02:12 EST 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -52,16 +52,15 @@ point in time or a range depending on the value of isDateRange().
 		<property name="titleAttribute" value="name"/>
 		<property name="primaryKeys">
 			<list>
-				<value>key</value>
+				<value>id</value>
 			</list>
 		</property>
 
 		<property name="attributes">
 			<list>
-				<ref bean="MilestoneInfo.key"/>
+				<ref bean="MilestoneInfo.id"/>
 				<ref bean="MilestoneInfo.typeKey"/>
 				<ref bean="MilestoneInfo.stateKey"/>
-				<ref bean="MilestoneInfo.name"/>
 				<ref bean="MilestoneInfo.isAllDay"/>
 				<ref bean="MilestoneInfo.isDateRange"/>
 				<ref bean="MilestoneInfo.startDate"/>
@@ -78,12 +77,13 @@ point in time or a range depending on the value of isDateRange().
 
 		<property name="collections">
 			<list>
+				<ref bean="MilestoneInfo.names"/>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="MilestoneInfo.key-generated" abstract="true" parent="BaseKuali.key">
-		<property name="name" value="key"/>
+	<bean id="MilestoneInfo.id-generated" abstract="true" parent="BaseKuali.id">
+		<property name="name" value="id"/>
 	</bean>
 
 	<bean id="MilestoneInfo.typeKey-generated" abstract="true" parent="BaseKuali.typeKey">
@@ -94,8 +94,23 @@ point in time or a range depending on the value of isDateRange().
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="MilestoneInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="MilestoneInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="MilestoneInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">

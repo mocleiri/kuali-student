@@ -60,7 +60,6 @@ Information about a Restriction.
 				<ref bean="RestrictionInfo.key"/>
 				<ref bean="RestrictionInfo.typeKey"/>
 				<ref bean="RestrictionInfo.stateKey"/>
-				<ref bean="RestrictionInfo.name"/>
 			</list>
 		</property>
 
@@ -73,6 +72,7 @@ Information about a Restriction.
 
 		<property name="collections">
 			<list>
+				<ref bean="RestrictionInfo.names"/>
 			</list>
 		</property>
 	</bean>
@@ -89,8 +89,23 @@ Information about a Restriction.
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="RestrictionInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="RestrictionInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="RestrictionInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">

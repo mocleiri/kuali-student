@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Thu Sep 15 10:48:45 EDT 2011
+		This dictionary file was automatically generated on Sat Dec 31 12:02:11 EST 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -65,7 +65,6 @@ are ordered using rank to enable the most restrictive pools to be filled first.
 				<ref bean="SeatPoolDefinitionInfo.id"/>
 				<ref bean="SeatPoolDefinitionInfo.typeKey"/>
 				<ref bean="SeatPoolDefinitionInfo.stateKey"/>
-				<ref bean="SeatPoolDefinitionInfo.name"/>
 			</list>
 		</property>
 
@@ -79,6 +78,7 @@ are ordered using rank to enable the most restrictive pools to be filled first.
 
 		<property name="collections">
 			<list>
+				<ref bean="SeatPoolDefinitionInfo.names"/>
 			</list>
 		</property>
 	</bean>
@@ -212,8 +212,23 @@ Statement that defines the capacity restriction that apply to this seat pool
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="SeatPoolDefinitionInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="SeatPoolDefinitionInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="SeatPoolDefinitionInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">

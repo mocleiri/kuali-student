@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Tue Sep 06 14:26:48 EDT 2011
+		This dictionary file was automatically generated on Sat Dec 31 12:02:12 EST 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -60,7 +60,6 @@ Detailed information about a LUI to LUI relationship.
 				<ref bean="LuiLuiRelationInfo.id"/>
 				<ref bean="LuiLuiRelationInfo.typeKey"/>
 				<ref bean="LuiLuiRelationInfo.stateKey"/>
-				<ref bean="LuiLuiRelationInfo.name"/>
 				<ref bean="LuiLuiRelationInfo.luiId"/>
 				<ref bean="LuiLuiRelationInfo.relatedLuiId"/>
 				<ref bean="LuiLuiRelationInfo.effectiveDate"/>
@@ -77,6 +76,7 @@ Detailed information about a LUI to LUI relationship.
 
 		<property name="collections">
 			<list>
+				<ref bean="LuiLuiRelationInfo.names"/>
 			</list>
 		</property>
 	</bean>
@@ -93,8 +93,23 @@ Detailed information about a LUI to LUI relationship.
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="LuiLuiRelationInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="LuiLuiRelationInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="LuiLuiRelationInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">

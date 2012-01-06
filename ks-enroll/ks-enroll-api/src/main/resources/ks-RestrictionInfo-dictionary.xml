@@ -57,8 +57,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="RestrictionInfo.name" parent="RestrictionInfo.name-parent"/>
-	<bean id="RestrictionInfo.name-parent" abstract="true" parent="RestrictionInfo.name-generated">
+	<bean id="RestrictionInfo.names" parent="RestrictionInfo.names-parent"/>
+	<bean id="RestrictionInfo.names-parent" abstract="true" parent="RestrictionInfo.names-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 

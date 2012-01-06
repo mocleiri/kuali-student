@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	<!-- ********************************************************
 		                       WARNING 
 		             DO NOT UPDATE THIS FILE MANUALLY
-		This dictionary file was automatically generated on Tue Sep 06 14:26:48 EDT 2011
+		This dictionary file was automatically generated on Sat Dec 31 12:02:12 EST 2011
 		The DictionaryGeneratorMojo reads the service contract 
 		and creates these ks-XXXX-dictionary-generated.xml files.
 
@@ -60,7 +60,6 @@ Detailed information about learning unit codes.
 				<ref bean="LuCodeInfo.id"/>
 				<ref bean="LuCodeInfo.typeKey"/>
 				<ref bean="LuCodeInfo.stateKey"/>
-				<ref bean="LuCodeInfo.name"/>
 				<ref bean="LuCodeInfo.value"/>
 			</list>
 		</property>
@@ -74,6 +73,7 @@ Detailed information about learning unit codes.
 
 		<property name="collections">
 			<list>
+				<ref bean="LuCodeInfo.names"/>
 			</list>
 		</property>
 	</bean>
@@ -90,8 +90,23 @@ Detailed information about learning unit codes.
 		<property name="name" value="stateKey"/>
 	</bean>
 
-	<bean id="LuCodeInfo.name-generated" abstract="true" parent="BaseKuali.name">
-		<property name="name" value="name"/>
+	<bean id="LuCodeInfo.names-generated" abstract="true" parent="CollectionDefinition">
+		<property name="name" value="names"/>
+		<property name="shortLabel" value="Names"/>
+		<property name="summary">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="label" value="Names"/>
+		<property name="elementLabel" value="Name"/>
+		<property name="description">
+			<value>
+Names associated with the course offering. 
+			</value>
+		</property>
+		<property name="minOccurs" value="0"/>
+		<property name="dataObjectClass" value="org.kuali.student.r2.common.dto.NameInfo"/>
 	</bean>
 
 	<bean id="LuCodeInfo.descr-generated" abstract="true" parent="ComplexAttributeDefinition">
