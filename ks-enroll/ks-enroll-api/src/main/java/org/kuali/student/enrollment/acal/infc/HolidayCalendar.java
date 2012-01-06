@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2010 The Kuali Foundation Licensed under the
  * Educational Community License, Version 2.0 (the "License"); you may
  * not use this file except in compliance with the License. You may
@@ -22,34 +22,34 @@ import org.kuali.student.r2.common.infc.IdEntity;
 
 
 /**
- * Information about an Academic Calendar.
+ * Information about a Holiday Calendar. A Holiday Calendar is used
+ * for holidays and other non-instructional days. A Holiday Calendar
+ * is used to share those special days among AcademicCalendars.
  *
  * @author tom
  * @since Tue Apr 05 14:22:34 EDT 2011
  */ 
 
-public interface AcademicCalendar 
+public interface HolidayCalendar 
     extends IdEntity {
-    
+
     /**
-     * The holiday calendar id corresponding to this academic
-     * calendar. A multi-year academic calendar may have more than one
-     * holiday calendar.
+     * The campuses to which this calendar pertains.
      *
-     * @name Holiday Calendar Ids
+     * @name Campus Keys
      */
-    public List<String> getHolidayCalendarIds();
-    
+    public List<String> getCampusKeys();
+
     /**
-     * The administrative organization responsible for maintaining
+     * The adminsitrative organization responsible for maintaining
      * this calendar.
      *
      * @name AdminOrg Id
      */
     public String getAdminOrgId();
-    
+   
     /**
-     * Date and time the term became effective. This
+     * Date and time the holiday calendar became effective. This
      * does not provide a bound on date ranges or milestones
      * associated with this time period, but instead indicates the
      * time period proper. This is a similar concept to the effective
@@ -62,7 +62,7 @@ public interface AcademicCalendar
     public Date getStartDate();
 
     /**
-     * Date and time the term expires. This does not
+     * Date and time the holiday calendar expires. This does not
      * provide a bound on date ranges or milestones associated with
      * this time period, but instead indicates the time period
      * proper. If specified, this must be greater than or equal to the

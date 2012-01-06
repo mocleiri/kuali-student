@@ -16,6 +16,7 @@
 package org.kuali.student.r2.common.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.infc.Type;
 import org.w3c.dom.Element;
 
@@ -37,8 +39,8 @@ public class TypeInfo extends HasAttributesInfo implements Type, Serializable {
     @XmlAttribute
 	private String key;
 	
-	@XmlElement
-	private String name;
+    @XmlElement
+    private List<NameInfo> names;
 	
 	@XmlElement
 	private String descr;
@@ -58,7 +60,7 @@ public class TypeInfo extends HasAttributesInfo implements Type, Serializable {
     
 	public TypeInfo() {
 		key = null;
-		name = null;
+		names = null;
 		descr = null;
 		effectiveDate = null;
 		expirationDate = null;
@@ -69,7 +71,12 @@ public class TypeInfo extends HasAttributesInfo implements Type, Serializable {
 	public TypeInfo(Type type) {
 		super(type);
 		this.key = type.getKey();
-		this.name = type.getName();
+		this.names = new ArrayList<NameInfo>();
+        if (null != type.getNames()) {
+            for (Name name : type.getNames()) {
+                this.getNames().add(new NameInfo(name));
+            }
+        }
 		this.descr = type.getDescr();
     	this.effectiveDate = null != type.getEffectiveDate() ? new Date(type.getEffectiveDate().getTime()) : null;
     	this.expirationDate = null != type.getExpirationDate() ? new Date(type.getExpirationDate().getTime()) : null;
@@ -87,13 +94,13 @@ public class TypeInfo extends HasAttributesInfo implements Type, Serializable {
     }
 
 	@Override
-    public String getName() {
-        return name;
+    public List<NameInfo> getNames() {
+        return names;
     }
 
 	
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<NameInfo> names) {
+        this.names = names;
     }
 
 	@Override

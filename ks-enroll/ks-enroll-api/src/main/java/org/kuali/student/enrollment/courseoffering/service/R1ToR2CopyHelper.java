@@ -8,6 +8,7 @@ import org.kuali.student.enrollment.courseoffering.dto.OfferingInstructorInfo;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.CurrencyAmountInfo;
 import org.kuali.student.r2.common.dto.MetaInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.RichTextInfo;
 import org.kuali.student.r2.lum.lrc.dto.ResultValuesGroupInfo;
 import org.kuali.student.r2.lum.lu.dto.AffiliatedOrgInfo;
@@ -165,7 +166,8 @@ public class R1ToR2CopyHelper {
         r2.setExpirationDate(r1.getExpirationDate());
         r2.setKey(r1.getId());
         r2.setMeta(copyMetaInfo(r1.getMetaInfo()));
-        r2.setName(r1.getName());
+        r2.setNames(new ArrayList<NameInfo>());
+        r2.getNames().add(new NameInfo("en", r1.getName()));
         r2.setResultValueKeys(r1.getResultValues());
         // TODO: deail with ranges perhaps by interrogating the result values to see if it is a range?
         r2.setResultValueRange(null);

@@ -16,8 +16,10 @@
 package org.kuali.student.enrollment.academicrecord.infc;
 
 import java.util.Date;
+import java.util.List;
 
 import org.kuali.student.r2.common.infc.IdNamelessEntity;
+import org.kuali.student.r2.common.infc.Name;
 
 /**
  * Information about a Student Course Record. A Student Course Record
@@ -107,7 +109,7 @@ public interface StudentCourseRecord
      * @impl retrieved from the Term related to the Course Offering 
      *       in the Course Registration
      */
-    public String getTermName();
+    public List<? extends Name> getTermNames();
 
     /**
      * The start date of the course.

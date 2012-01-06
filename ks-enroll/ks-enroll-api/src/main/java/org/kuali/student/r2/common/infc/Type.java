@@ -7,6 +7,8 @@
  */
 package org.kuali.student.r2.common.infc;
 
+import java.util.List;
+
 
 /**
  * Detailed Information about a Type
@@ -28,7 +30,7 @@ public interface Type extends HasKey, HasAttributes, HasEffectiveDates {
      * @readOnly
      * @required
      */
-    public String getName();
+    public List<? extends Name> getNames();
     
 
     /**

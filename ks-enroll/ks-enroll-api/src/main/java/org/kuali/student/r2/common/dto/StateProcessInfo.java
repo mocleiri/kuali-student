@@ -16,6 +16,7 @@
 package org.kuali.student.r2.common.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.infc.State;
 import org.kuali.student.r2.common.infc.StateProcess;
 import org.kuali.student.r2.common.infc.Type;
@@ -33,14 +35,14 @@ import org.w3c.dom.Element;
 
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StateProcessInfo", propOrder = {"key", "name", "descr", "effectiveDate", "expirationDate", "attributes", "_futureElements"})
+@XmlType(name = "StateProcessInfo", propOrder = {"key", "names", "descr", "effectiveDate", "expirationDate", "attributes", "_futureElements"})
 public class StateProcessInfo extends HasAttributesInfo implements StateProcess, Serializable {
 	
     @XmlAttribute
 	private String key;
 	
 	@XmlElement
-	private String name;
+	private List<NameInfo> names;
 	
 	@XmlElement
 	private String descr;
@@ -64,7 +66,7 @@ public class StateProcessInfo extends HasAttributesInfo implements StateProcess,
     
 	public StateProcessInfo() {
 		key = null;
-		name = null;
+		names = null;
 		descr = null;
 		effectiveDate = null;
 		expirationDate = null;
@@ -74,7 +76,12 @@ public class StateProcessInfo extends HasAttributesInfo implements StateProcess,
 	public StateProcessInfo(Type type) {
 		super(type);
 		this.key = type.getKey();
-		this.name = type.getName();
+		this.names = new ArrayList<NameInfo>();
+        if (null != type.getNames()) {
+            for (Name name : type.getNames()) {
+                this.getNames().add(new NameInfo(name));
+            }
+        }
 		this.descr = type.getDescr();
     	this.effectiveDate = null != type.getEffectiveDate() ? new Date(type.getEffectiveDate().getTime()) : null;
     	this.expirationDate = null != type.getExpirationDate() ? new Date(type.getExpirationDate().getTime()) : null;
@@ -90,14 +97,13 @@ public class StateProcessInfo extends HasAttributesInfo implements StateProcess,
         this.key = key;
     }
 
-	@Override
-    public String getName() {
-        return name;
+    @Override
+    public List<NameInfo> getNames() {
+        return names;
     }
 
-	
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<NameInfo> names) {
+        this.names = names;
     }
 
 	@Override

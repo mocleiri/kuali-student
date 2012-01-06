@@ -9,43 +9,51 @@
 package org.kuali.student.r2.common.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.kuali.student.r2.common.infc.Entity;
+import org.kuali.student.r2.common.infc.Name;
 
 @SuppressWarnings("serial")
 @XmlTransient
 public abstract class EntityInfo extends TypeStateEntityInfo implements Entity, Serializable {
 
     @XmlElement
-    private String name;
+    private List<NameInfo> names;
 
     @XmlElement
     private RichTextInfo descr;
 
     public EntityInfo() {
         super();
-        name = null;
+        names = null;
         descr = null;
     }
 
     public EntityInfo(Entity entity) {
         super(entity);
         if (null != entity) {
-            this.name = entity.getName();
+            this.names = new ArrayList<NameInfo>();
+            if (null != entity.getNames()) {
+                for (Name name : entity.getNames()) {
+                    this.getNames().add(new NameInfo(name));
+                }
+            }
             this.descr = (null != entity.getDescr()) ? new RichTextInfo(entity.getDescr()) : null;
         }
     }
 
     @Override
-    public String getName() {
-        return name;
+    public List<NameInfo> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<NameInfo> names) {
+        this.names = names;
     }
 
     @Override

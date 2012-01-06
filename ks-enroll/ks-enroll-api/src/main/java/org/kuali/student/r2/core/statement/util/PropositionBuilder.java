@@ -1,4 +1,4 @@
-package org.kuali.student.core.statement.util;
+package org.kuali.student.r2.core.statement.util;
 
 import org.kuali.rice.krms.api.repository.LogicalOperator;
 import org.kuali.rice.krms.framework.engine.Agenda;

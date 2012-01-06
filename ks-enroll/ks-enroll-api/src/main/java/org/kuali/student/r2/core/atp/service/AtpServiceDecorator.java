@@ -38,19 +38,6 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public List<String> getDataDictionaryEntryKeys(ContextInfo context) throws OperationFailedException, MissingParameterException, PermissionDeniedException {
-
-        return getNextDecorator().getDataDictionaryEntryKeys(context);
-    }
-
-    @Override
-    public DictionaryEntryInfo getDataDictionaryEntry(String entryKey, ContextInfo context) throws OperationFailedException, MissingParameterException, PermissionDeniedException,
-            DoesNotExistException {
-
-        return getNextDecorator().getDataDictionaryEntry(entryKey, context);
-    }
-
-    @Override
     public TypeInfo getType(String typeKey, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException {
 
         return getNextDecorator().getType(typeKey, context);
@@ -114,22 +101,22 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public AtpInfo getAtp(String atpKey, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+    public AtpInfo getAtp(String atpId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
 
-        return getNextDecorator().getAtp(atpKey, context);
+        return getNextDecorator().getAtp(atpId, context);
     }
 
     @Override
-    public List<AtpInfo> getAtpsByKeys(List<String> atpKeyList, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
+    public List<AtpInfo> getAtpsByIds(List<String> atpIdList, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
             PermissionDeniedException {
 
-        return getNextDecorator().getAtpsByKeys(atpKeyList, context);
+        return getNextDecorator().getAtpsByIds(atpIdList, context);
     }
 
     @Override
-    public List<String> getAtpKeysByType(String atpTypeKey, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+    public List<String> getAtpIdsByType(String atpTypeKey, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
 
-        return getNextDecorator().getAtpKeysByType(atpTypeKey, context);
+        return getNextDecorator().getAtpIdsByType(atpTypeKey, context);
     }
 
     @Override
@@ -174,17 +161,17 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public MilestoneInfo getMilestone(String milestoneKey, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
+    public MilestoneInfo getMilestone(String milestoneId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
             PermissionDeniedException {
 
-        return getNextDecorator().getMilestone(milestoneKey, context);
+        return getNextDecorator().getMilestone(milestoneId, context);
     }
 
     @Override
-    public List<MilestoneInfo> getMilestonesByIds(List<String> milestoneKeyList, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException,
+    public List<MilestoneInfo> getMilestonesByIds(List<String> milestoneIdList, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException {
 
-        return getNextDecorator().getMilestonesByIds(milestoneKeyList, context);
+        return getNextDecorator().getMilestonesByIds(milestoneIdList, context);
     }
 
     @Override
@@ -195,21 +182,21 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public List<MilestoneInfo> getMilestonesForAtp(String atpKey, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+    public List<MilestoneInfo> getMilestonesForAtp(String atpId, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
 
-        return getNextDecorator().getMilestonesForAtp(atpKey, context);
+        return getNextDecorator().getMilestonesForAtp(atpId, context);
     }
 
     @Override
-    public List<MilestoneInfo> getMilestonesByDatesForAtp(@WebParam(name = "atpKey") String atpKey, @WebParam(name = "startDate") Date startDate, @WebParam(name = "endDate") Date endDate,
+    public List<MilestoneInfo> getMilestonesByDatesForAtp(@WebParam(name = "atpId") String atpId, @WebParam(name = "startDate") Date startDate, @WebParam(name = "endDate") Date endDate,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getMilestonesByDatesForAtp(atpKey, startDate, endDate, contextInfo);
+        return getNextDecorator().getMilestonesByDatesForAtp(atpId, startDate, endDate, contextInfo);
     }
 
     @Override
-    public List<MilestoneInfo> getMilestonesByTypeForAtp(@WebParam(name = "atpKey") String atpKey, @WebParam(name = "milestoneTypeKey") String milestoneTypeKey,
+    public List<MilestoneInfo> getMilestonesByTypeForAtp(@WebParam(name = "atpId") String atpId, @WebParam(name = "milestoneTypeKey") String milestoneTypeKey,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getMilestonesByTypeForAtp(atpKey, milestoneTypeKey, contextInfo);
+        return getNextDecorator().getMilestonesByTypeForAtp(atpId, milestoneTypeKey, contextInfo);
     }
 
     @Override
@@ -220,10 +207,10 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public List<String> searchForAtpKeys(QueryByCriteria criteria, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException,
+    public List<String> searchForAtpIds(QueryByCriteria criteria, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException,
             PermissionDeniedException {
 
-        return getNextDecorator().searchForAtpKeys(criteria, context);
+        return getNextDecorator().searchForAtpIds(criteria, context);
     }
 
     @Override
@@ -240,24 +227,29 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public AtpInfo createAtp(String atpKey, AtpInfo atpInfo, ContextInfo context) throws AlreadyExistsException, DataValidationErrorException, InvalidParameterException, MissingParameterException,
+    public AtpInfo createAtp(String atpId, AtpInfo atpInfo, ContextInfo context) throws AlreadyExistsException, DataValidationErrorException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException {
 
-        return getNextDecorator().createAtp(atpKey, atpInfo, context);
+        return getNextDecorator().createAtp(atpId, atpInfo, context);
     }
 
     @Override
-    public AtpInfo updateAtp(String atpKey, AtpInfo atpInfo, ContextInfo context) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException, MissingParameterException,
+    public AtpInfo updateAtp(String atpId, AtpInfo atpInfo, ContextInfo context) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException, VersionMismatchException, ReadOnlyException {
 
-        return getNextDecorator().updateAtp(atpKey, atpInfo, context);
+        return getNextDecorator().updateAtp(atpId, atpInfo, context);
     }
 
     @Override
-    public StatusInfo deleteAtp(String atpKey, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
+    public StatusInfo deleteAtp(String atpId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
             PermissionDeniedException {
 
-        return getNextDecorator().deleteAtp(atpKey, context);
+        return getNextDecorator().deleteAtp(atpId, context);
+    }
+
+    @Override
+    public List<MilestoneInfo> getImpactedMilestones(String milestoneId, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getImpactedMilestones(milestoneId, contextInfo);
     }
 
     @Override
@@ -289,29 +281,34 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public MilestoneInfo updateMilestone(String milestoneKey, MilestoneInfo milestoneInfo, ContextInfo context) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException,
+    public MilestoneInfo updateMilestone(String milestoneId, MilestoneInfo milestoneInfo, ContextInfo context) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException,
             MissingParameterException, OperationFailedException, PermissionDeniedException, VersionMismatchException, ReadOnlyException {
 
-        return getNextDecorator().updateMilestone(milestoneKey, milestoneInfo, context);
+        return getNextDecorator().updateMilestone(milestoneId, milestoneInfo, context);
     }
 
     @Override
-    public StatusInfo deleteMilestone(String milestoneKey, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
+    public StatusInfo deleteMilestone(String milestoneId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
             PermissionDeniedException {
 
-        return getNextDecorator().deleteMilestone(milestoneKey, context);
+        return getNextDecorator().deleteMilestone(milestoneId, context);
     }
 
     @Override
-    public StatusInfo addMilestoneToAtp(@WebParam(name = "milestoneId") String milestoneId, @WebParam(name = "atpKey") String atpKey, @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    public MilestoneInfo calculateMilestone(String milestoneId, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().calculateMilestone(milestoneId, contextInfo);
+    }
+
+    @Override
+    public StatusInfo addMilestoneToAtp(@WebParam(name = "milestoneId") String milestoneId, @WebParam(name = "atpId") String atpId, @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws AlreadyExistsException, DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().addMilestoneToAtp(milestoneId, atpKey, contextInfo);
+        return getNextDecorator().addMilestoneToAtp(milestoneId, atpId, contextInfo);
     }
 
     @Override
-    public StatusInfo removeMilestoneFromAtp(@WebParam(name = "milestoneId") String milestoneId, @WebParam(name = "atpKey") String atpKey, @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    public StatusInfo removeMilestoneFromAtp(@WebParam(name = "milestoneId") String milestoneId, @WebParam(name = "atpId") String atpId, @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().removeMilestoneFromAtp(milestoneId, atpKey, contextInfo);
+        return getNextDecorator().removeMilestoneFromAtp(milestoneId, atpId, contextInfo);
     }
 
     @Override
@@ -328,23 +325,23 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public List<AtpAtpRelationInfo> getAtpAtpRelationsByAtp(String atpKey, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException,
+    public List<AtpAtpRelationInfo> getAtpAtpRelationsByAtp(String atpId, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException,
             PermissionDeniedException {
 
-        return getNextDecorator().getAtpAtpRelationsByAtp(atpKey, context);
+        return getNextDecorator().getAtpAtpRelationsByAtp(atpId, context);
     }
 
     @Override
-    public List<AtpAtpRelationInfo> getAtpAtpRelationsByAtps(@WebParam(name = "atpKey") String atpKey, @WebParam(name = "contextInfo") ContextInfo contextInfo) throws InvalidParameterException,
+    public List<AtpAtpRelationInfo> getAtpAtpRelationsByAtps(@WebParam(name = "atpId") String atpId, @WebParam(name = "contextInfo") ContextInfo contextInfo) throws InvalidParameterException,
             MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getAtpAtpRelationsByAtps(atpKey, contextInfo);
+        return getNextDecorator().getAtpAtpRelationsByAtps(atpId, contextInfo);
     }
 
     @Override
-    public AtpAtpRelationInfo createAtpAtpRelation(String atpKey, String atpPeerKey, AtpAtpRelationInfo atpAtpRelationInfo, ContextInfo contextInfo) throws DoesNotExistException,
+    public AtpAtpRelationInfo createAtpAtpRelation(String atpId, String atpPeerKey, AtpAtpRelationInfo atpAtpRelationInfo, ContextInfo contextInfo) throws DoesNotExistException,
             DataValidationErrorException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
 
-        return getNextDecorator().createAtpAtpRelation(atpKey, atpPeerKey, atpAtpRelationInfo, contextInfo);
+        return getNextDecorator().createAtpAtpRelation(atpId, atpPeerKey, atpAtpRelationInfo, contextInfo);
     }
 
     @Override
@@ -354,16 +351,16 @@ public class AtpServiceDecorator implements AtpService {
     }
 
     @Override
-    public List<ValidationResultInfo> validateAtpAtpRelation(String validationTypeKey, String atpKey, String atpPeerKey, String atpAtpRelationTypeKey, AtpAtpRelationInfo atpAtpRelationInfo,
+    public List<ValidationResultInfo> validateAtpAtpRelation(String validationTypeKey, String atpId, String atpPeerKey, String atpAtpRelationTypeKey, AtpAtpRelationInfo atpAtpRelationInfo,
             ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
 
-        return getNextDecorator().validateAtpAtpRelation(validationTypeKey, atpKey, atpPeerKey, atpAtpRelationTypeKey, atpAtpRelationInfo, contextInfo);
+        return getNextDecorator().validateAtpAtpRelation(validationTypeKey, atpId, atpPeerKey, atpAtpRelationTypeKey, atpAtpRelationInfo, contextInfo);
     }
 
     @Override
-    public List<AtpAtpRelationInfo> getAtpAtpRelationsByTypeAndAtp(String atpKey, String relationType, ContextInfo context) throws InvalidParameterException, MissingParameterException,
+    public List<AtpAtpRelationInfo> getAtpAtpRelationsByTypeAndAtp(String atpId, String relationType, ContextInfo context) throws InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getAtpAtpRelationsByTypeAndAtp(atpKey, relationType, context);
+        return getNextDecorator().getAtpAtpRelationsByTypeAndAtp(atpId, relationType, context);
     }
 
     @Override

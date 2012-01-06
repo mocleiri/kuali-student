@@ -15,6 +15,8 @@
 
 package org.kuali.student.r2.common.infc;
 
+import java.util.List;
+
 /**
  * A common interface pattern for service entities.
  *
@@ -31,7 +33,7 @@ public interface Entity
      * @name Name
      */
 
-    public String getName();
+    public List<? extends Name> getNames();
 
 
     /**

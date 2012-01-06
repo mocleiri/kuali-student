@@ -7,6 +7,8 @@
  */
 package org.kuali.student.r2.common.infc;
 
+import java.util.List;
+
 
 /**
  * Detailed Information about a State Process
@@ -26,7 +28,7 @@ public interface StateProcess extends HasKey, HasAttributes, HasEffectiveDates {
      * @readOnly
      * @required
      */
-    public String getName();
+    public List<? extends Name> getNames();
     
 
     /**

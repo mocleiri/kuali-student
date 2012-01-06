@@ -16,6 +16,7 @@
 package org.kuali.student.enrollment.academicrecord.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.kuali.student.enrollment.academicrecord.infc.StudentCourseRecord;
 import org.kuali.student.r2.common.dto.IdNamelessEntityInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
+import org.kuali.student.r2.common.infc.Name;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -34,7 +37,7 @@ import org.w3c.dom.Element;
         "id", "typeKey", "stateKey", 
         "sourceTypeKey", "courseRegistrationId",
 	"personId", "courseTitle", "courseCode", "activityCode", 
-        "termName", "courseBeginDate", "courseEndDate", 
+        "termNames", "courseBeginDate", "courseEndDate", 
         "assignedGradeValue", "assignedGradeScaleKey", 
         "administrativeGradeValue", "administrativeGradeScaleKey", 
         "calculatedGradeValue", "calculatedGradeScaleKey", 
@@ -67,7 +70,7 @@ public class StudentCourseRecordInfo
     private String activityCode;
 
     @XmlElement
-    private String termName;
+    private List<NameInfo> termNames;
 
     @XmlElement
     private Date courseBeginDate;
@@ -118,7 +121,7 @@ public class StudentCourseRecordInfo
         courseTitle = null;
         courseCode = null;
         activityCode = null;
-        termName = null;
+        termNames = null;
         courseBeginDate = null;
         courseEndDate = null;
         assignedGradeValue = null;
@@ -151,7 +154,13 @@ public class StudentCourseRecordInfo
         courseTitle = scr.getCourseTitle();
         courseCode = scr.getCourseCode();
         activityCode = scr.getActivityCode();
-        termName = scr.getTermName();
+        termNames = new ArrayList<NameInfo>();
+        if (null != scr.getTermNames()) {
+            for (Name name : scr.getTermNames()) {
+                termNames.add(new NameInfo(name));
+            }
+        }
+        
         courseBeginDate = scr.getCourseBeginDate();
         courseEndDate = scr.getCourseEndDate();
         assignedGradeValue = scr.getAssignedGradeValue();
@@ -224,12 +233,12 @@ public class StudentCourseRecordInfo
     }
 
     @Override
-    public String getTermName() {
-        return termName;
+    public List<NameInfo> getTermNames() {
+        return termNames;
     }
 
-    public void setTermName(String termName) {
-        this.termName = termName;
+    public void setTermNames(List<NameInfo> termNames) {
+        this.termNames = termNames;
     }
 
     @Override

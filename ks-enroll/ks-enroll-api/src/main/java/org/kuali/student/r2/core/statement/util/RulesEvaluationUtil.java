@@ -1,4 +1,4 @@
-package org.kuali.student.core.statement.util;
+package org.kuali.student.r2.core.statement.util;
 
 import org.joda.time.DateTime;
 import org.kuali.rice.krms.api.engine.*;

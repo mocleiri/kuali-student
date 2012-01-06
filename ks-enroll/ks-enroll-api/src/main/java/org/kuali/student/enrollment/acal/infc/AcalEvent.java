@@ -21,14 +21,13 @@ import org.kuali.student.r2.common.infc.IdEntity;
 
 
 /**
- * Information about a key date. A key date may represent a single
- * point in time or a range depending on the value of isDateRange().
+ * Information about a milestone for an AcademicCalendar.
  *
  * @author tom
  * @since Tue Apr 05 14:22:34 EDT 2011
  */ 
 
-public interface KeyDate 
+public interface AcalEvent 
     extends IdEntity {
 
     /**

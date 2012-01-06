@@ -27,19 +27,6 @@ public abstract class GradingServiceDecorator implements GradingService {
     }
 
     @Override
-    public List<String> getDataDictionaryEntryKeys(ContextInfo context) throws OperationFailedException,
-            MissingParameterException, PermissionDeniedException {
-        return getNextDecorator().getDataDictionaryEntryKeys(context);
-    }
-
-    @Override
-    public DictionaryEntryInfo getDataDictionaryEntry(String entryKey, ContextInfo context)
-            throws OperationFailedException, MissingParameterException, PermissionDeniedException,
-            DoesNotExistException {
-        return getNextDecorator().getDataDictionaryEntry(entryKey, context);
-    }
-
-    @Override
     public TypeInfo getGradeRosterType(String gradeRosterTypeKey, ContextInfo context) throws DoesNotExistException,
             InvalidParameterException, MissingParameterException, OperationFailedException {
         return getNextDecorator().getGradeRosterType(gradeRosterTypeKey, context);
@@ -52,10 +39,10 @@ public abstract class GradingServiceDecorator implements GradingService {
     }
 
     @Override
-    public List<GradeRosterInfo> getGradeRostersByGraderAndTerm(String graderId, String termKey, ContextInfo context)
+    public List<GradeRosterInfo> getGradeRostersByGraderAndTerm(String graderId, String termId, ContextInfo context)
             throws DoesNotExistException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getGradeRostersByGraderAndTerm(graderId, termKey, context);
+        return getNextDecorator().getGradeRostersByGraderAndTerm(graderId, termId, context);
     }
 
     @Override
