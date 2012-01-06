@@ -11,6 +11,7 @@ import org.kuali.student.enrollment.grading.dto.GradeValuesGroupInfo;
 import org.kuali.student.enrollment.grading.service.GradingService;
 import org.kuali.student.r2.common.datadictionary.dto.DictionaryEntryInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.TypeInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
@@ -69,7 +70,8 @@ public class GradingServiceMockImpl implements GradingService {
         gradeRosterEntryIds.add("3");
 
         gradeRosterInfo1.setGradeRosterEntryIds(gradeRosterEntryIds);
-        gradeRosterInfo1.setName("Fundamentals of Physics I");
+        gradeRosterInfo1.setNames(new ArrayList<NameInfo>());
+        gradeRosterInfo1.getNames().add(new NameInfo("en", "Fundamentals of Physics I"));
         gradeRosterInfo1.setTypeKey("FINAL_TYPE_KEY");
         List grader = new ArrayList();
         grader.add("admin");
@@ -170,18 +172,6 @@ public class GradingServiceMockImpl implements GradingService {
         validGradesCache.put("percent", percentGradesResultValuesGroupInfo);
     }
 
-    @Override
-    public List<String> getDataDictionaryEntryKeys(ContextInfo context) throws OperationFailedException,
-            MissingParameterException, PermissionDeniedException {
-        return new ArrayList<String>();
-    }
-
-    @Override
-    public DictionaryEntryInfo getDataDictionaryEntry(String entryKey, ContextInfo context)
-            throws OperationFailedException, MissingParameterException, PermissionDeniedException,
-            DoesNotExistException {
-        return null;
-    }
 
     @Override
     public TypeInfo getGradeRosterType(String gradeRosterTypeKey, ContextInfo context) throws DoesNotExistException,
@@ -198,15 +188,15 @@ public class GradingServiceMockImpl implements GradingService {
     }
 
     @Override
-    public List<GradeRosterInfo> getGradeRostersByGraderAndTerm(String graderId, String termKey, ContextInfo context)
+    public List<GradeRosterInfo> getGradeRostersByGraderAndTerm(String graderId, String termId, ContextInfo context)
             throws DoesNotExistException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException {
 
         List<GradeRosterInfo> gradeRosters = new ArrayList<GradeRosterInfo>();
-        if (termCourseOfferingsCache.get(termKey) != null) {
+        if (termCourseOfferingsCache.get(termId) != null) {
             for (GradeRosterInfo gradeRoster : gradeRostersCache.values()) {
                 if (gradeRoster.getGraderIds().contains(graderId)
-                        && termCourseOfferingsCache.get(termKey).contains(gradeRoster.getCourseOfferingId())) {
+                        && termCourseOfferingsCache.get(termId).contains(gradeRoster.getCourseOfferingId())) {
                     gradeRosters.add(gradeRoster);
                 }
 
