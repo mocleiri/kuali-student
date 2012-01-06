@@ -26,10 +26,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.core.hold.dto.IssueInfo;
 import org.kuali.student.r2.core.hold.infc.Issue;
@@ -43,10 +45,10 @@ import org.kuali.student.r2.core.hold.infc.Issue;
 
 @Entity
 @Table(name = "KSEN_ISSUE")
-public class IssueEntity extends MetaEntity implements AttributeOwner<IssueAttributeEntity> {
+public class IssueEntity extends MetaEntity implements AttributeOwner<IssueAttributeEntity>, NameOwner<IssueNameEntity> {
 
-    @Column(name = "NAME")
-    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<IssueNameEntity> names = new ArrayList<IssueNameEntity>();
     
     @Column(name = "ORG_ID")
     private String organizationId;
@@ -71,7 +73,13 @@ public class IssueEntity extends MetaEntity implements AttributeOwner<IssueAttri
 
     public IssueEntity(Issue issue) {
         super(issue);
-        setName(issue.getName());
+        this.setNames(new ArrayList<IssueNameEntity>());
+        if (null != issue.getNames()) {
+            for (Name name : issue.getNames()) {
+                this.getNames().add(new IssueNameEntity(name));
+            }
+        }
+        
         setOrganizationId(issue.getOrganizationId());
         setIssueType(new HoldTypeEntity());
         issueType.setId(issue.getTypeKey());
@@ -91,12 +99,12 @@ public class IssueEntity extends MetaEntity implements AttributeOwner<IssueAttri
         return attributes;
     }
 
-    public String getName() {
-        return name;
+    public List<IssueNameEntity> getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(List<IssueNameEntity> names) {
+        this.names = names;
     }
 
     public String getOrganizationId() {
@@ -135,7 +143,13 @@ public class IssueEntity extends MetaEntity implements AttributeOwner<IssueAttri
         IssueInfo info = new IssueInfo();
         
         info.setKey(getId());
-        info.setName(getName());
+        List<NameInfo> names = new ArrayList<NameInfo>();
+        for (IssueNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        info.setNames(names);
+        
         info.setTypeKey(getIssueType().getId());
         info.setStateKey(getIssueState().getId());
         info.setOrganizationId(getOrganizationId());

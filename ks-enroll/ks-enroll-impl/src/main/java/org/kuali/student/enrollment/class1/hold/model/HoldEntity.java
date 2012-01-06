@@ -13,19 +13,24 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.entity.AttributeOwner;
 import org.kuali.student.r2.common.entity.MetaEntity;
+import org.kuali.student.r2.common.entity.NameOwner;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.core.hold.dto.HoldInfo;
 import org.kuali.student.r2.core.hold.infc.Hold;
 
 @Entity
 @Table(name = "KSEN_HOLD")
-public class HoldEntity extends MetaEntity implements AttributeOwner<HoldAttributeEntity>{
-    @Column(name = "NAME")
-    private String name;
+public class HoldEntity extends MetaEntity implements AttributeOwner<HoldAttributeEntity>, NameOwner<HoldNameEntity>{
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<HoldNameEntity> names = new ArrayList<HoldNameEntity>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -74,7 +79,13 @@ public class HoldEntity extends MetaEntity implements AttributeOwner<HoldAttribu
         super(hold); 
         try {
 	        this.setId(hold.getId());
-	        this.setName(hold.getName());
+	        this.setNames(new ArrayList<HoldNameEntity>());
+	        if (null != hold.getNames()) {
+	            for (Name name : hold.getNames()) {
+	                this.getNames().add(new HoldNameEntity(name));
+	            }
+	        }
+	        
 	        if (hold.getEffectiveDate() != null)
 	        	this.setEffectiveDate(hold.getEffectiveDate());
 	        if (hold.getReleasedDate() != null)
@@ -100,7 +111,13 @@ public class HoldEntity extends MetaEntity implements AttributeOwner<HoldAttribu
     public HoldInfo toDto() {
     	HoldInfo obj = new HoldInfo();
     	obj.setId(getId());
-    	obj.setName(name);
+    	List<NameInfo> names = new ArrayList<NameInfo>();
+        for (HoldNameEntity name : getNames()) {
+            NameInfo nameInfo = name.toDto();
+            names.add(nameInfo);
+        }
+        obj.setNames(names);
+        
         obj.setEffectiveDate(effectiveDate);
         obj.setReleasedDate(releasedDate);
         obj.setIsWarning(isWarning);
@@ -127,12 +144,12 @@ public class HoldEntity extends MetaEntity implements AttributeOwner<HoldAttribu
     }
 
 
-	public String getName() {
-		return name;
+	public List<HoldNameEntity> getNames() {
+		return names;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNames(List<HoldNameEntity> names) {
+		this.names = names;
 	}
 
 	public HoldRichTextEntity getDescr() {
