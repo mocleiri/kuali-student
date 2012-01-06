@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.infc.Attribute;
+import org.kuali.student.r2.common.infc.Name;
 import org.kuali.student.r2.common.infc.Type;
 import org.kuali.student.r2.common.util.constants.LuiPersonRelationServiceConstants;
 
@@ -52,7 +54,7 @@ public enum LuiPersonRelationTypeEnum implements Type, Serializable {
      */
     public static final LuiPersonRelationTypeEnum[] COURSE_STUDENT_TYPES = {REGISTRANT};
     private static final long serialVersionUID = 1L;
-    private String name;
+    private List<NameInfo> names;
     private String descr;
     private Date effectiveDate;
     private Date expirationDate;
@@ -61,7 +63,8 @@ public enum LuiPersonRelationTypeEnum implements Type, Serializable {
 
     LuiPersonRelationTypeEnum(String key, String name, String descr, Date effectiveDate, Date expirationDate, List<Attribute> attributes) {
         this.key = key;
-        this.name = name;
+        this.names = new ArrayList<NameInfo>();
+        this.names.add(new NameInfo("en", name));
         this.descr = descr;
         this.effectiveDate = effectiveDate;
         this.expirationDate = expirationDate;
@@ -69,8 +72,8 @@ public enum LuiPersonRelationTypeEnum implements Type, Serializable {
     }
 
     @Override
-    public String getName() {
-        return this.name;
+    public List<NameInfo> getNames() {
+        return this.names;
     }
 
     @Override
@@ -136,8 +139,8 @@ public enum LuiPersonRelationTypeEnum implements Type, Serializable {
     }
 
     
-    public void setName(String name) {
-        this.name = name;
+    public void setName(List<NameInfo> names) {
+        this.names = names;
     }
 
     
