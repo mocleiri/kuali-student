@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.kuali.student.common.test.spring.AbstractTransactionalDaoTest;
 import org.kuali.student.common.test.spring.Dao;
@@ -28,7 +27,7 @@ public class TestAtpAtpRelationDao extends AbstractTransactionalDaoTest{
         assertNotNull(atpRel);
         AtpTypeEntity atpType = atpRel.getAtpType();
         assertNotNull(atpType);
-        assertEquals(AtpServiceConstants.ATP_ATP_RELATION_INCLUDES_TYPE_KEY, atpType.getName());
+        assertEquals(AtpServiceConstants.ATP_ATP_RELATION_INCLUDES_TYPE_KEY, atpType.getNames().get(0));
     }
 
     @Test

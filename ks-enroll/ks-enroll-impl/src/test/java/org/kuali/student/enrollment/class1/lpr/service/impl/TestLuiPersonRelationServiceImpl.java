@@ -25,7 +25,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.student.enrollment.lpr.dto.LprRosterEntryInfo;
@@ -36,6 +35,7 @@ import org.kuali.student.enrollment.lpr.dto.LuiPersonRelationInfo;
 import org.kuali.student.enrollment.lpr.service.LuiPersonRelationService;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.RichTextInfo;
 import org.kuali.student.r2.common.dto.StateInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
@@ -307,7 +307,7 @@ public class TestLuiPersonRelationServiceImpl {
         assertEquals(info.getDescr().getPlain(), LPR_ROSTER_DESC);
         assertEquals(info.getCheckInFrequency().getAtpDurationTypeKey(), ATP_DURATION_KEY);
         assertEquals(info.getCheckInFrequency().getTimeQuantity().intValue(), TIME_QTY);
-        assertEquals(info.getName(), LPR_ROSTER_NAME);
+        assertEquals(info.getNames().get(0), LPR_ROSTER_NAME);
         assertEquals(info.getAssociatedLuiIds().size(), 1);
         assertEquals(info.getAssociatedLuiIds().get(0), LUI_ID);
 
@@ -447,7 +447,8 @@ public class TestLuiPersonRelationServiceImpl {
         try {
             lprTransactionInfo = lprServiceValidationDecorator.createLprTransaction(lprTransactionInfo, callContext);
             lprTransactionInfo = lprServiceValidationDecorator.getLprTransaction(lprTransactionInfo.getId(), callContext);
-            lprTransactionInfo.setName(updateName);
+            lprTransactionInfo.setNames(new ArrayList<NameInfo>());
+            lprTransactionInfo.getNames().add(new NameInfo("en", updateName));
             lprTransactionInfo.setStateKey(LuiPersonRelationServiceConstants.ACTIVE_STATE_KEY);
             lprTransactionInfo = lprServiceValidationDecorator.updateLprTransaction(lprTransactionInfo.getId(), lprTransactionInfo,
                     callContext);
@@ -455,7 +456,7 @@ public class TestLuiPersonRelationServiceImpl {
             fail(e.getMessage());
         }
         assertNotNull(lprTransactionInfo);
-        assertTrue(lprTransactionInfo.getName().equals(updateName));
+        assertTrue(lprTransactionInfo.getNames().get(0).equals(updateName));
         try {
             lprTransactionInfo = lprServiceValidationDecorator.getLprTransaction(lprTransactionInfo.getId(), callContext);
             assertNotNull(lprTransactionInfo);
@@ -553,7 +554,8 @@ public class TestLuiPersonRelationServiceImpl {
 
     private LprTransactionInfo createLprTransaction() {
         LprTransactionInfo lprTransactionInfo = new LprTransactionInfo();
-        lprTransactionInfo.setName(LPR_TRANSACTION_NAME);
+        lprTransactionInfo.setNames(new ArrayList<NameInfo>());
+        lprTransactionInfo.getNames().add(new NameInfo("en", LPR_TRANSACTION_NAME));
         lprTransactionInfo.setRequestingPersonId(PERSONID1);
         lprTransactionInfo.setTypeKey(LuiPersonRelationServiceConstants.LPRTRANS_REGISTER_TYPE_KEY);
         lprTransactionInfo.setStateKey(LuiPersonRelationServiceConstants.LPRTRANS_NEW_STATE_KEY);
@@ -586,7 +588,8 @@ public class TestLuiPersonRelationServiceImpl {
         desc.setPlain(LPR_ROSTER_DESC);
         lprRosterInfo.setDescr(desc);
 
-        lprRosterInfo.setName(LPR_ROSTER_NAME);
+        lprRosterInfo.setNames(new ArrayList<NameInfo>());
+        lprRosterInfo.getNames().add(new NameInfo("en", LPR_ROSTER_NAME));
         List<String> luiIds = new ArrayList<String>();
         luiIds.add(LUI_ID);
         lprRosterInfo.setAssociatedLuiIds(luiIds);

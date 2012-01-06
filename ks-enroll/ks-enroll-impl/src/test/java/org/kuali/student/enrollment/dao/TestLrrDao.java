@@ -7,6 +7,7 @@ import org.kuali.student.common.test.spring.PersistenceFileLocation;
 import org.kuali.student.enrollment.class1.lrr.dao.LrrDao;
 import org.kuali.student.enrollment.class1.lrr.model.LearningResultRecordEntity;
 import org.kuali.student.enrollment.class1.lrr.model.LrrAttributeEntity;
+import org.kuali.student.enrollment.class1.lrr.model.LrrNameEntity;
 import org.kuali.student.enrollment.class1.lrr.model.LrrRichTextEntity;
 import org.kuali.student.enrollment.class1.lrr.model.LrrTypeEntity;
 import org.kuali.student.r2.common.model.StateEntity;
@@ -29,7 +30,7 @@ public class TestLrrDao extends AbstractTransactionalDaoTest {
         LearningResultRecordEntity lrr = dao.find("student1-grade-final-lecture");
         assertNotNull(lrr);
         assertNotNull(lrr.getResultValueId());
-        assertNotNull(lrr.getName());
+        assertNotNull(lrr.getNames().get(0));
         assertNotNull(lrr.getDescr());
         assertNotNull(lrr.getLprId());
         assertNotNull(lrr.getLrrState());
@@ -52,7 +53,8 @@ public class TestLrrDao extends AbstractTransactionalDaoTest {
         String resultValueId = "resultValueId";
 
         lrr.setId(id);
-        lrr.setName(name);
+        lrr.setNames(new ArrayList<LrrNameEntity>());
+        lrr.getNames().add(new LrrNameEntity("en", name));
         lrr.setLprId(lprId);
         lrr.setAttributes(attributes);
         lrr.setDescr(descr);
@@ -65,7 +67,7 @@ public class TestLrrDao extends AbstractTransactionalDaoTest {
         lrr = dao.find(id);
         assertNotNull("LRR is null after create.", lrr);
         assertEquals("ID does not match after create.", id, lrr.getId());
-        assertEquals("Name does not match after create.", name, lrr.getName());
+        assertEquals("Name does not match after create.", name, lrr.getNames().get(0).getName());
         assertEquals("LPR ID does not match after create.", lprId, lrr.getLprId());
         assertEquals("Attributes does not match after create.", attributes, lrr.getAttributes());
         assertEquals("Descr does not match after create.", descr, lrr.getDescr());
@@ -74,10 +76,11 @@ public class TestLrrDao extends AbstractTransactionalDaoTest {
         assertEquals("Result Value Key does not match after create.", resultValueId, lrr.getResultValueId());
         
         // Update
-        lrr.setName("Updated LRR");
+        lrr.setNames(new ArrayList<LrrNameEntity>());
+        lrr.getNames().add(new LrrNameEntity("en", "Updated LRR"));
         dao.persist(lrr);
         lrr = dao.find(id);
-        assertEquals("Name does not match after update.", "Updated LRR", lrr.getName());
+        assertEquals("Name does not match after update.", "Updated LRR", lrr.getNames().get(0));
         
         // Delete
         dao.remove(lrr);

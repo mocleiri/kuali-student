@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationAttributeEntity;
 import org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationEntity;
 import org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationTypeEntity;
+import org.kuali.student.r2.common.entity.TypeNameEntity;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +56,8 @@ public class DataLoader {
 
     private LuiPersonRelationTypeEntity createPersonRelationType() {
         LuiPersonRelationTypeEntity personRelationType = new LuiPersonRelationTypeEntity();
-        personRelationType.setName(TEST_VALUE_1);
+        personRelationType.setNames(new ArrayList<TypeNameEntity>());
+        personRelationType.getNames().add(new TypeNameEntity("en", TEST_VALUE_1));
         personRelationType.setDescr(TEST_VALUE_2);
         return personRelationType;
     }

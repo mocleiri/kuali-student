@@ -5,8 +5,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+
 import org.kuali.student.r2.common.dto.ContextInfo;
-import org.kuali.student.r2.common.infc.RichText;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.util.constants.LrcServiceConstants;
 import org.kuali.student.r2.lum.lrc.dto.ResultScaleInfo;
 import org.kuali.student.r2.lum.lrc.dto.ResultValueInfo;
@@ -19,7 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class TestLRCServiceImpl {
     public void testGetResultValuesGroup() throws Exception {
 
         ResultValuesGroup group = lrcService.getResultValuesGroup("kuali.resultComponent.grade.passFail",contextInfo);
-        assertEquals(group.getName(), "Pass/Fail Grading");
+        assertEquals(group.getNames().get(0), "Pass/Fail Grading");
         assertEquals(group.getTypeKey(), LrcServiceConstants.RESULT_VALUES_GROUP_TYPE_KEY_MULTIPLE);
         assertEquals(group.getStateKey(),"kuali.result.values.group.state.approved");
         assertEquals(group.getResultScaleKey(), LrcServiceConstants.RESULT_SCALE_KEY_GRADE_LETTER);
@@ -81,7 +81,8 @@ public class TestLRCServiceImpl {
     @Ignore("Not yet implemented fully.")
     public void testCreateResultValuesGroup() throws Exception {
         ResultValuesGroupInfo info = new ResultValuesGroupInfo();
-        info.setName("TestName");
+        info.setNames(new ArrayList<NameInfo>());
+        info.getNames().add(new NameInfo("en", "TestName"));
         info.setKey("test.key");
         info.setStateKey("kuali.result.values.group.state.approved");
         info.setTypeKey(LrcServiceConstants.RESULT_VALUES_GROUP_TYPE_KEY_MULTIPLE);
@@ -122,7 +123,7 @@ public class TestLRCServiceImpl {
         ResultValueInfo info = lrcService.getResultValue(LrcServiceConstants.RESULT_VALUE_KEY_GRADE_LETTER_A,contextInfo);
 
         assertNotNull(info);
-        assertEquals(info.getName(),"Excellent");
+        assertEquals(info.getNames().get(0),"Excellent");
         assertEquals(info.getStateKey(),"kuali.result.value.state.approved");
         assertEquals(info.getTypeKey(),LrcServiceConstants.RESULT_VALUES_GROUP_TYPE_KEY_GRADE);
         assertEquals(info.getResultScaleKey(),LrcServiceConstants.RESULT_SCALE_KEY_GRADE_LETTER);
@@ -164,7 +165,7 @@ public class TestLRCServiceImpl {
         ResultScaleInfo info = lrcService.getResultScale(LrcServiceConstants.RESULT_SCALE_KEY_GRADE_LETTER,contextInfo);
 
         assertNotNull(info);
-        assertEquals(info.getName(),"A-F Grading Scale");
+        assertEquals(info.getNames().get(0),"A-F Grading Scale");
         assertEquals(info.getStateKey(),"kuali.result.scale.state.approved");
         assertEquals(info.getTypeKey(),LrcServiceConstants.RESULT_VALUES_GROUP_TYPE_KEY_GRADE);
     }

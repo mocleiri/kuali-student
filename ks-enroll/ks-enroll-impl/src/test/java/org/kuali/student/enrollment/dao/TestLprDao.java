@@ -17,7 +17,6 @@ import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.kuali.student.common.test.spring.AbstractTransactionalDaoTest;
 import org.kuali.student.common.test.spring.Dao;
@@ -27,7 +26,6 @@ import org.kuali.student.enrollment.class1.lpr.dao.LprTypeDao;
 import org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationEntity;
 import org.kuali.student.enrollment.class1.lpr.service.utilities.Constants;
 import org.kuali.student.r2.common.dao.StateDao;
-import org.kuali.student.r2.common.util.constants.LuiPersonRelationServiceConstants;
 
 @PersistenceFileLocation("classpath:META-INF/acal-persistence.xml")
 public class TestLprDao extends AbstractTransactionalDaoTest {

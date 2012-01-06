@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.kuali.student.common.test.spring.Dao;
 import org.kuali.student.common.test.spring.PersistenceFileLocation;
 import org.kuali.student.enrollment.class1.hold.model.HoldRichTextEntity;
 import org.kuali.student.enrollment.class1.hold.model.IssueEntity;
+import org.kuali.student.enrollment.class1.hold.model.IssueNameEntity;
 import org.kuali.student.r2.common.util.constants.HoldServiceConstants;
 
 @PersistenceFileLocation("classpath:META-INF/persistence_jta.xml")
@@ -24,7 +26,7 @@ public class TestIssueDao extends AbstractTransactionalDaoTest {
     public void testGetIssue() {
         IssueEntity obj = dao.find("Hold-Issue-1");
         assertNotNull(obj);
-        assertEquals("Issue one", obj.getName());
+        assertEquals("Issue one", obj.getNames().get(0));
         assertEquals(HoldServiceConstants.ISSUE_ACTIVE_STATE_KEY, obj.getIssueState().getId());
         assertEquals(HoldServiceConstants.RESIDENCY_ISSUE_TYPE_KEY, obj.getIssueType().getId());
         assertEquals("Issue Desc 101", obj.getDescr().getPlain());
@@ -35,14 +37,15 @@ public class TestIssueDao extends AbstractTransactionalDaoTest {
         IssueEntity existingEntity = dao.find("Hold-Issue-1");
 
         IssueEntity obj = new IssueEntity();
-        obj.setName("Issue Test");
+        obj.setNames(new ArrayList<IssueNameEntity>());
+        obj.getNames().add(new IssueNameEntity("en", "Issue Test"));
         obj.setDescr(new HoldRichTextEntity("plain", "formatted"));
         obj.setIssueState(existingEntity.getIssueState());
         obj.setIssueType(existingEntity.getIssueType());
         dao.persist(obj);
         assertNotNull(obj.getId());
         IssueEntity obj2 = dao.find(obj.getId());
-        assertEquals("Issue Test", obj2.getName());
+        assertEquals("Issue Test", obj2.getNames().get(0));
         assertEquals("plain", obj2.getDescr().getPlain());
     }
 
@@ -50,12 +53,13 @@ public class TestIssueDao extends AbstractTransactionalDaoTest {
     public void testUpdateIssue() {
         IssueEntity existingEntity = dao.find("Hold-Issue-1");
 
-        existingEntity.setName("Issue Updated");
+        existingEntity.setNames(new ArrayList<IssueNameEntity>());
+        existingEntity.getNames().add(new IssueNameEntity("en", "Issue Updated"));
         existingEntity.setDescr(new HoldRichTextEntity("plain", "formatted"));
         dao.merge(existingEntity);
 
         IssueEntity obj2 = dao.find(existingEntity.getId());
-        assertEquals("Issue Updated", obj2.getName());
+        assertEquals("Issue Updated", obj2.getNames().get(0));
         assertEquals("plain", obj2.getDescr().getPlain());
     }
 

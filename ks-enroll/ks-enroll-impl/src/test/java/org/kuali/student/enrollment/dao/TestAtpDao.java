@@ -4,7 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Ignore;
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.kuali.student.common.test.spring.AbstractTransactionalDaoTest;
 import org.kuali.student.common.test.spring.Dao;
@@ -12,6 +13,7 @@ import org.kuali.student.common.test.spring.PersistenceFileLocation;
 import org.kuali.student.r2.core.class1.atp.dao.AtpDao;
 import org.kuali.student.r2.core.class1.atp.model.AtpAttributeEntity;
 import org.kuali.student.r2.core.class1.atp.model.AtpEntity;
+import org.kuali.student.r2.core.class1.atp.model.AtpNameEntity;
 import org.kuali.student.r2.core.class1.atp.model.AtpRichTextEntity;
 
 @PersistenceFileLocation("classpath:META-INF/persistence_jta.xml")
@@ -23,7 +25,7 @@ public class TestAtpDao extends AbstractTransactionalDaoTest {
     public void testGetAtp() {
         AtpEntity atp = dao.find("testAtpId1");
         assertNotNull(atp);
-        assertEquals("testAtp1", atp.getName());         
+        assertEquals("testAtp1", atp.getNames().get(0));         
         assertEquals("Desc 101", atp.getDescr().getPlain());   
     }
     
@@ -33,7 +35,8 @@ public class TestAtpDao extends AbstractTransactionalDaoTest {
         AtpEntity existingEntity = dao.find("testAtpId1");
         
         AtpEntity atp = new AtpEntity();
-        atp.setName("atpTest");
+        atp.setNames(new ArrayList<AtpNameEntity>());
+        atp.getNames().add(new AtpNameEntity("en", "atpTest"));
         atp.setDescr(new AtpRichTextEntity("plain", "formatted"));
         atp.setAtpState(existingEntity.getAtpState());
         atp.setAtpType(existingEntity.getAtpType());
@@ -46,7 +49,7 @@ public class TestAtpDao extends AbstractTransactionalDaoTest {
         assertNotNull(atp.getId());
         
         AtpEntity atp2 = dao.find(atp.getId());
-        assertEquals("atpTest", atp2.getName());         
+        assertEquals("atpTest", atp2.getNames().get(0));         
         assertEquals("plain", atp2.getDescr().getPlain());   
         assertEquals(1, atp2.getAttributes().size());
         assertEquals("kuali.lu.type.credential.Baccalaureate", atp2.getAttributes().get(0).getValue());

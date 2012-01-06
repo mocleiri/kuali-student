@@ -4,11 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.kuali.student.common.test.spring.AbstractTransactionalDaoTest;
 import org.kuali.student.common.test.spring.Dao;
 import org.kuali.student.common.test.spring.PersistenceFileLocation;
 import org.kuali.student.enrollment.class1.hold.model.HoldEntity;
+import org.kuali.student.enrollment.class1.hold.model.HoldNameEntity;
 import org.kuali.student.enrollment.class1.hold.model.HoldRichTextEntity;
 import org.kuali.student.r2.common.util.constants.HoldServiceConstants;
 
@@ -22,7 +25,7 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 		try{
 			HoldEntity obj = dao.find("Hold-1");
 			assertNotNull(obj);
-	        assertEquals("Hold one", obj.getName()); 
+	        assertEquals("Hold one", obj.getNames().get(0)); 
 	        assertEquals(HoldServiceConstants.HOLD_ACTIVE_STATE_KEY, obj.getHoldState().getId()); 
 	        assertEquals(HoldServiceConstants.STUDENT_HOLD_TYPE_KEY, obj.getHoldType().getId()); 
 	        assertEquals("Hold Desc student", obj.getDescr().getPlain());  
@@ -37,7 +40,8 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 			HoldEntity existingEntity = dao.find("Hold-1");
 	        
 			HoldEntity obj = new HoldEntity();
-			obj.setName("Hold Test");
+			obj.setNames(new ArrayList<HoldNameEntity>());
+			obj.getNames().add(new HoldNameEntity("en", "Hold Test"));
 			obj.setDescr(new HoldRichTextEntity("plain", "formatted"));
 			obj.setHoldState(existingEntity.getHoldState());
 			obj.setHoldType(existingEntity.getHoldType());
@@ -45,7 +49,7 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 	        dao.persist(obj);
 	        assertNotNull(obj.getId());
 	        HoldEntity obj2 = dao.find(obj.getId());
-	        assertEquals("Hold Test", obj2.getName());         
+	        assertEquals("Hold Test", obj2.getNames().get(0));         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 	        assertEquals(HoldServiceConstants.HOLD_ACTIVE_STATE_KEY, obj2.getHoldState().getId()); 
 	        assertEquals(HoldServiceConstants.STUDENT_HOLD_TYPE_KEY, obj2.getHoldType().getId()); 
@@ -60,12 +64,13 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 		try{
 			HoldEntity existingEntity = dao.find("Hold-1");
 	       
-			existingEntity.setName("Hold Updated");
+			existingEntity.setNames(new ArrayList<HoldNameEntity>());
+			existingEntity.getNames().add(new HoldNameEntity("en", "Hold Updated"));
 			existingEntity.setDescr(new HoldRichTextEntity("plain", "formatted"));
 	        dao.merge(existingEntity);
 
 	        HoldEntity obj2 = dao.find(existingEntity.getId());
-	        assertEquals("Hold Updated", obj2.getName());         
+	        assertEquals("Hold Updated", obj2.getNames().get(0));         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 		}catch (Exception ex){
 			ex.printStackTrace();

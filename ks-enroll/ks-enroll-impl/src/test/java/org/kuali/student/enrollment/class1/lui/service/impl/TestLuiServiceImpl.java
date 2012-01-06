@@ -11,7 +11,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.student.enrollment.courseoffering.dto.OfferingInstructorInfo;
@@ -19,6 +18,7 @@ import org.kuali.student.enrollment.lui.dto.LuiInfo;
 import org.kuali.student.enrollment.lui.dto.LuiLuiRelationInfo;
 import org.kuali.student.enrollment.lui.service.LuiService;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.CircularRelationshipException;
@@ -72,7 +72,7 @@ public class TestLuiServiceImpl {
 
             LuiInfo obj = luiServiceValidation.getLui("Lui-1", callContext);
             assertNotNull(obj);
-            assertEquals("Lui one", obj.getName());
+            assertEquals("Lui one", obj.getNames().get(0));
             assertEquals(LuiServiceConstants.LUI_DRAFT_STATE_KEY, obj.getStateKey());
             assertEquals(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY, obj.getTypeKey());
             assertEquals("Lui Desc 101", obj.getDescr().getPlain());
@@ -127,7 +127,8 @@ public class TestLuiServiceImpl {
     public void testCreateLui() throws AlreadyExistsException, DataValidationErrorException, DoesNotExistException,
             InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
         LuiInfo info = new LuiInfo();
-        info.setName("Test lui one");
+        info.setNames(new ArrayList<NameInfo>());
+        info.getNames().add(new NameInfo("en", "Test lui one"));
         info.setStateKey(LuiServiceConstants.LUI_DRAFT_STATE_KEY);
         info.setTypeKey(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY);
         info.setEffectiveDate(Calendar.getInstance().getTime());
@@ -138,7 +139,7 @@ public class TestLuiServiceImpl {
         }
         // info.setStudySubjectArea("Math");
         info.setCluId("testCluId");
-        info.setAtpKey("testAtpId1");
+        info.setAtpId("testAtpId1");
 
         List<OfferingInstructorInfo> instructors = new ArrayList<OfferingInstructorInfo>();
         OfferingInstructorInfo instructor = new OfferingInstructorInfo();
@@ -152,13 +153,13 @@ public class TestLuiServiceImpl {
         // try{
         created = luiServiceValidation.createLui("testCluId", "testAtpId1", info, callContext);
         assertNotNull(created);
-        assertEquals("Test lui one", created.getName());
+        assertEquals("Test lui one", created.getNames().get(0));
         assertEquals(LuiServiceConstants.LUI_DRAFT_STATE_KEY, created.getStateKey());
         assertEquals(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY, created.getTypeKey());
         assertEquals(Integer.valueOf(25), created.getMaximumEnrollment());
         assertEquals(Integer.valueOf(10), created.getMinimumEnrollment());
         assertEquals("testCluId", created.getCluId());
-        assertEquals("testAtpId1", created.getAtpKey());
+        assertEquals("testAtpId1", created.getAtpId());
         // assertEquals("Math", created.getStudySubjectArea());
         // assertTrue(created.getInstructors().size() == 1);
 
@@ -170,13 +171,13 @@ public class TestLuiServiceImpl {
         try {
             LuiInfo retrieved = luiServiceValidation.getLui(created.getId(), callContext);
             assertNotNull(retrieved);
-            assertEquals("Test lui one", retrieved.getName());
+            assertEquals("Test lui one", retrieved.getNames().get(0));
             assertEquals(LuiServiceConstants.LUI_DRAFT_STATE_KEY, retrieved.getStateKey());
             assertEquals(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY, retrieved.getTypeKey());
             assertEquals(Integer.valueOf(25), retrieved.getMaximumEnrollment());
             assertEquals(Integer.valueOf(10), retrieved.getMinimumEnrollment());
             assertEquals("testCluId", retrieved.getCluId());
-            assertEquals("testAtpId1", retrieved.getAtpKey());
+            assertEquals("testAtpId1", retrieved.getAtpId());
             // assertEquals("Math", retrieved.getStudySubjectArea());
             // assertTrue(retrieved.getInstructors().size() == 1);
             // assertEquals("Org-1",
@@ -194,7 +195,7 @@ public class TestLuiServiceImpl {
         LuiInfo info = luiServiceValidation.getLui("Lui-1", callContext);
         assertNotNull(info);
         assertEquals("Lui-1", info.getId());
-        assertEquals("Lui one", info.getName());
+        assertEquals("Lui one", info.getNames().get(0));
 
         LuiInfo modified = new LuiInfo(info);
         modified.setStateKey(LuiServiceConstants.LUI_APROVED_STATE_KEY);
@@ -253,7 +254,8 @@ public class TestLuiServiceImpl {
             DataValidationErrorException, DoesNotExistException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException {
         LuiInfo info = new LuiInfo();
-        info.setName("Test lui-Lui relation");
+        info.setNames(new ArrayList<NameInfo>());
+        info.getNames().add(new NameInfo("en", "Test lui-Lui relation"));
         info.setStateKey(LuiServiceConstants.LUI_DRAFT_STATE_KEY);
         info.setTypeKey(LuiServiceConstants.LAB_ACTIVITY_OFFERING_TYPE_KEY);
         info.setEffectiveDate(Calendar.getInstance().getTime());

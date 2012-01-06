@@ -4,12 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.kuali.student.common.test.spring.AbstractTransactionalDaoTest;
 import org.kuali.student.common.test.spring.Dao;
 import org.kuali.student.common.test.spring.PersistenceFileLocation;
 import org.kuali.student.enrollment.class1.hold.model.HoldRichTextEntity;
 import org.kuali.student.enrollment.class1.hold.model.RestrictionEntity;
+import org.kuali.student.enrollment.class1.hold.model.RestrictionNameEntity;
 import org.kuali.student.r2.common.util.constants.HoldServiceConstants;
 
 @PersistenceFileLocation("classpath:META-INF/persistence_jta.xml")
@@ -22,7 +25,7 @@ public class TestRestrictionDao extends AbstractTransactionalDaoTest{
 		try{
 			RestrictionEntity obj = dao.find("Hold-Restriction-1");
 			assertNotNull(obj);
-	        assertEquals("Restriction one", obj.getName()); 
+	        assertEquals("Restriction one", obj.getNames().get(0)); 
 	        assertEquals(HoldServiceConstants.RESTRICTION_ACIVE_STATE_KEY, obj.getRestrictionState().getId()); 
 	        assertEquals(HoldServiceConstants.REGISTERATION_RESTRICTION_TYPE_KEY, obj.getRestrictionType().getId()); 
 	        assertEquals("Hold Desc 101", obj.getDescr().getPlain());  
@@ -37,14 +40,15 @@ public class TestRestrictionDao extends AbstractTransactionalDaoTest{
 			RestrictionEntity existingEntity = dao.find("Hold-Restriction-1");
 	        
 			RestrictionEntity obj = new RestrictionEntity();
-			obj.setName("Restriction Test");
+			obj.setNames(new ArrayList<RestrictionNameEntity>());
+            obj.getNames().add(new RestrictionNameEntity("en", "Restriction Test"));
 			obj.setDescr(new HoldRichTextEntity("plain", "formatted"));
 			obj.setRestrictionState(existingEntity.getRestrictionState());
 			obj.setRestrictionType(existingEntity.getRestrictionType());
 	        dao.persist(obj);
 	        assertNotNull(obj.getId());
 	        RestrictionEntity obj2 = dao.find(obj.getId());
-	        assertEquals("Restriction Test", obj2.getName());         
+	        assertEquals("Restriction Test", obj2.getNames().get(0));         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 		}catch (Exception ex){
 			ex.printStackTrace();
@@ -56,12 +60,13 @@ public class TestRestrictionDao extends AbstractTransactionalDaoTest{
 		try{
 			RestrictionEntity existingEntity = dao.find("Hold-Restriction-1");
 	       
-			existingEntity.setName("Restriction Updated");
+			existingEntity.setNames(new ArrayList<RestrictionNameEntity>());
+			existingEntity.getNames().add(new RestrictionNameEntity("en", "Restriction Updated"));
 			existingEntity.setDescr(new HoldRichTextEntity("plain", "formatted"));
 	        dao.merge(existingEntity);
 
 	        RestrictionEntity obj2 = dao.find(existingEntity.getId());
-	        assertEquals("Restriction Updated", obj2.getName());         
+	        assertEquals("Restriction Updated", obj2.getNames().get(0));         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 		}catch (Exception ex){
 			ex.printStackTrace();

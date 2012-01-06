@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
@@ -19,16 +18,13 @@ import org.kuali.student.enrollment.courseregistration.dto.RegRequestInfo;
 import org.kuali.student.enrollment.courseregistration.dto.RegRequestItemInfo;
 import org.kuali.student.enrollment.courseregistration.dto.RegResponseInfo;
 import org.kuali.student.enrollment.courseregistration.service.CourseRegistrationService;
-import org.kuali.student.enrollment.grading.dto.GradeRosterEntryInfo;
 import org.kuali.student.enrollment.grading.dto.GradeRosterInfo;
 import org.kuali.student.enrollment.grading.service.GradingService;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.OperationStatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
-import org.kuali.student.r2.common.exceptions.MissingParameterException;
-import org.kuali.student.r2.common.exceptions.OperationFailedException;
-import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
 import org.kuali.student.r2.common.infc.ValidationResult;
 import org.kuali.student.r2.common.util.constants.AtpServiceConstants;
 import org.kuali.student.r2.common.util.constants.LuiPersonRelationServiceConstants;
@@ -57,14 +53,15 @@ public class TestCourseRegistrationServiceImpl {
     private RegRequestInfo createDummyRegRequest() {
         RegRequestInfo regRequest = new RegRequestInfo();
         regRequest.setRequestorId("Student1");
-        regRequest.setTermKey(AtpServiceConstants.ATP_SENIOR_YEAR_TERM_1_TYPE_KEY);
+        regRequest.setTermId(AtpServiceConstants.ATP_SENIOR_YEAR_TERM_1_TYPE_KEY);
         regRequest.setStateKey(LuiPersonRelationServiceConstants.LPRTRANS_NEW_STATE_KEY);
         regRequest.setTypeKey(LuiPersonRelationServiceConstants.LPRTRANS_REGISTER_TYPE_KEY);
 
         RegRequestItemInfo regRequestItem = new RegRequestItemInfo();
         regRequestItem.setCreditOptionKey("kuali.credit.option.RVG1");
         regRequestItem.setGradingOptionKey("kuali.grading.option.RVG1");
-        regRequestItem.setName("TRANS NAME");
+        regRequestItem.setNames(new ArrayList<NameInfo>());
+        regRequestItem.getNames().add(new NameInfo("en", "TRANS NAME"));
         regRequestItem.setOkToHoldList(false);
         regRequestItem.setOkToWaitlist(false);
         regRequestItem.setStudentId("Student1");
