@@ -17,28 +17,35 @@
         <class>org.kuali.student.enrollment.class1.lpr.model.LprTransactionItemEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LprTransItemAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LprTransAttributeEntity</class>
+        <class>org.kuali.student.enrollment.class1.lpr.model.LprTransNameEntity</class>
 
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultValueAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultValueEntity</class>
+        <class>org.kuali.student.enrollment.class1.lrc.model.ResultValueNameEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultValueRichTextEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultValuesGroupEntity</class>
+        <class>org.kuali.student.enrollment.class1.lrc.model.ResultValuesGroupNameEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultValuesGroupRichTextEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.LrcTypeEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultValuesGroupAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultScaleAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultScaleEntity</class>
+        <class>org.kuali.student.enrollment.class1.lrc.model.ResultScaleNameEntity</class>
         <class>org.kuali.student.enrollment.class1.lrc.model.ResultScaleRichTextEntity</class>
 
         <class>org.kuali.student.enrollment.class1.lrr.model.LearningResultRecordEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.LrrTypeEntity</class>
+        <class>org.kuali.student.enrollment.class1.lrr.model.LrrNameEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.LrrAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.LrrRichTextEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.ResultSourceEntity</class>
+        <class>org.kuali.student.enrollment.class1.lrr.model.ResultSourceNameEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.ResultSourceRichTextEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.ResultSourceAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lrr.model.ResultSourceTypeEntity</class>
 
         <class>org.kuali.student.enrollment.class1.lui.model.LuiEntity</class>
+        <class>org.kuali.student.enrollment.class1.lui.model.LuiNameEntity</class>
         <class>org.kuali.student.enrollment.class1.lui.model.LuiAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lui.model.LuiInstructorEntity</class>
         <class>org.kuali.student.enrollment.class1.lui.model.LuiRichTextEntity</class>
@@ -54,11 +61,14 @@
         <class>org.kuali.student.enrollment.class1.lui.model.LuiResultValuesGroupRelationEntity</class>
 
         <class>org.kuali.student.r2.common.entity.BaseAttributeEntity</class>
+        <class>org.kuali.student.r2.common.entity.BaseTypeEntity</class>
         <class>org.kuali.student.r2.common.entity.TypeEntity</class>
+        <class>org.kuali.student.r2.common.entity.TypeNameEntity</class>
 
 		<class>org.kuali.student.r2.common.model.StateEntity</class>
 		<class>org.kuali.student.r2.common.model.StateAttributeEntity</class>
 	  	<class>org.kuali.student.r2.common.model.StateProcessEntity</class>
+	  	<class>org.kuali.student.r2.common.model.StateProcessNameEntity</class>
  		<class>org.kuali.student.r2.common.model.StateProcessRelationEntity</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

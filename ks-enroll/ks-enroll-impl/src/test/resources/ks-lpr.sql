@@ -13,20 +13,36 @@
 -- permissions and limitations under the License.
 --
 //StateProcessEntity
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.atp.process', 'kuali.atp.process', 'kuali atp state process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.milestone.process', 'kuali.milestone.process', 'kuali milestone state process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.atp.atp.relation.process', 'kuali.atp.atp.relation.process', 'kuali atp-atp relation state process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.atp.milestone.relation.process', 'kuali.atp.milestone.relation.process', 'kuali atp-milestone relation state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.process', 'kuali atp state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.milestone.process', 'kuali milestone state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.atp.relation.process', 'kuali atp-atp relation state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.milestone.relation.process', 'kuali atp-milestone relation state process', 0)
 
 //HOLD Process
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.hold.restriction.process', 'kuali.hold.restriction.process', 'kuali hold restriction process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.hold.issue.process', 'kuali.hold.issue.process', 'kuali hold issue process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.hold.process.student', 'kuali.hold.process.student', 'kuali hold process student', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.hold.restriction.process', 'kuali hold restriction process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.hold.issue.process', 'kuali hold issue process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.hold.process.student', 'kuali hold process student', 0)
 
 //LUI Process
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.course.offering.process', 'kuali.course.offering.process', 'kuali course offering process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.lui.capacity.process', 'kuali.lui.capacity.process', 'kuali lui capacity process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.lui.lui.relationship.process', 'kuali.lui.lui.relationship.process', 'kuali lui-lui relationship process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.course.offering.process', 'kuali course offering process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.lui.capacity.process', 'kuali lui capacity process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.lui.lui.relationship.process', 'kuali lui-lui relationship process', 0)
+
+//StateProcessEntity Name
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.atp.process.name', 'en', 'kuali atp state process', 'kuali.atp.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.milestone.process.name', 'en', 'kuali milestone state process', 'kuali.milestone.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.atp.atp.relation.process.name', 'en', 'kuali atp-atp relation state process', 'kuali.atp.atp.relation.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.atp.milestone.relation.process.name', 'en', 'kuali atp-milestone relation state process', 'kuali.atp.milestone.relation.process')
+
+//HOLD Process Name
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.hold.restriction.process.name', 'en', 'kuali hold restriction process', 'kuali.hold.restriction.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.hold.issue.process.name', 'en', 'kuali hold issue process', 'kuali.hold.issue.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.hold.process.student.name', 'en', 'kuali hold process student', 'kuali.hold.process.student')
+
+//LUI Process Name
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.course.offering.process.name', 'en', 'kuali course offering process', 'kuali.course.offering.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.lui.capacity.process.name', 'en', 'kuali lui capacity process', 'kuali.lui.capacity.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.lui.lui.relationship.process.name', 'en', 'kuali lui-lui relationship process', 'kuali.lui.lui.relationship.process')
 
 //StateEntity
 INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kuali.atp.state.Draft', 'Draft', 'kuali.atp.process', 'Indicates that this Time Period is just tentative', 0)
@@ -103,7 +119,7 @@ INSERT INTO KSEN_STATEPROCESS_RELTN(ID, PROCESS_KEY, PRIOR_STATEKEY, NEXT_STATEK
 
 //AtpTypeEntity
 INSERT INTO KSEN_ATP_TYPE(TYPE_KEY, NAME, TYPE_DESC, REF_OBJECT_URI, VER_NBR) VALUES ('kuali.atp.type.AcademicCalendar', 'Academic Calendar', 'Academic Calendar', 'http://student.kuali.org/wsdl/atp/AtpInfo', 0)
-INSERT INTO KSEN_ATP_TYPE(TYPE_KEY, NAME, TYPE_DESC, REF_OBJECT_URI, VER_NBR) VALUES ('kuali.atp.type.CampusCalendar', 'Campus Calendar', 'Campus Calendar', 'http://student.kuali.org/wsdl/atp/AtpInfo', 0)
+INSERT INTO KSEN_ATP_TYPE(TYPE_KEY, NAME, TYPE_DESC, REF_OBJECT_URI, VER_NBR) VALUES ('kuali.atp.type.HolidayCalendar', 'Holiday Calendar', 'Holiday Calendar', 'http://student.kuali.org/wsdl/atp/AtpInfo', 0)
 INSERT INTO KSEN_ATP_TYPE(TYPE_KEY, NAME, TYPE_DESC, REF_OBJECT_URI, VER_NBR) VALUES ('kuali.atp.type.Fall', 'Fall', 'Fall Semester', 'http://student.kuali.org/wsdl/atp/AtpInfo', 0)
 INSERT INTO KSEN_ATP_TYPE(TYPE_KEY, NAME, TYPE_DESC, REF_OBJECT_URI, VER_NBR) VALUES ('kuali.atp.type.Spring', 'Spring', 'Spring Semester', 'http://student.kuali.org/wsdl/atp/AtpInfo', 0)
 INSERT INTO KSEN_ATP_TYPE (TYPE_KEY, NAME, TYPE_DESC, REF_OBJECT_URI, VER_NBR) VALUES ('kuali.atp.type.winter', 'Winter', 'Winter Term', 'http://student.kuali.org/wsdl/atp/AtpInfo', 0)

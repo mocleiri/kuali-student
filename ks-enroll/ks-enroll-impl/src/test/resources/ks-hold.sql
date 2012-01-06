@@ -7,9 +7,14 @@ INSERT INTO KSEN_HOLD_RICH_TEXT (ID, FORMATTED, PLAIN,VER_NBR) VALUES ('RICHTEXT
 INSERT INTO KSEN_HOLD_RICH_TEXT (ID, FORMATTED, PLAIN,VER_NBR) VALUES ('RICHTEXT-Hold-401', '<p>Hold Desc instructor</p>', 'Hold Desc instructor',0)
 
 //StateProcessEntity for Hold Process
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.hold.restriction.process', 'kuali.hold.restriction.process', 'kuali hold restriction process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.hold.issue.process', 'kuali.hold.issue.process', 'kuali hold issue process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.hold.process.student', 'kuali.hold.process.student', 'kuali hold process student', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.hold.restriction.process', 'kuali hold restriction process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.hold.issue.process', 'kuali hold issue process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.hold.process.student', 'kuali hold process student', 0)
+
+//StateProcessEntity for Hold Process Name
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.hold.restriction.process.name', 'en', 'kuali hold restriction process', 'kuali.hold.restriction.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.hold.issue.process.name', 'en', 'kuali hold issue process', 'kuali.hold.issue.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OWNER) VALUES ('kuali.hold.process.student.name', 'en', 'kuali hold process student', 'kuali.hold.process.student')
 
 // Hold States
 INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kuali.hold.restriction.state.active', 'Active', 'kuali.hold.restriction.process', 'This restriction is active and should be enforced', 0)

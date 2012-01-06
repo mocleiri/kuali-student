@@ -10,12 +10,15 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
         <class>org.kuali.student.r2.common.entity.BaseAttributeEntity</class>
+        <class>org.kuali.student.r2.common.entity.NameEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationTypeEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LuiPersonRelationAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LprTransactionEntity</class>
         <class>org.kuali.student.enrollment.class1.lpr.model.LprTransactionItemEntity</class>
+        
         <class>org.kuali.student.r2.core.class1.atp.model.AtpEntity</class>
+        <class>org.kuali.student.r2.core.class1.atp.model.AtpNameEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.AtpAttributeEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.AtpStateEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.AtpTypeEntity</class>
@@ -24,22 +27,29 @@
         <class>org.kuali.student.r2.core.class1.atp.model.AtpAtpRelationEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.AtpAtpRelationAttributeEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.MilestoneEntity</class>
+        <class>org.kuali.student.r2.core.class1.atp.model.MilestoneNameEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.MilestoneAttributeEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.AtpMilestoneRelationEntity</class>
         <class>org.kuali.student.r2.core.class1.atp.model.AtpMilestoneRelationAttributeEntity</class>
 		<class>org.kuali.student.r2.common.model.StateEntity</class>
 		<class>org.kuali.student.r2.common.model.StateAttributeEntity</class>
 	  	<class>org.kuali.student.r2.common.model.StateProcessEntity</class>
+	  	<class>org.kuali.student.r2.common.model.StateProcessNameEntity</class>
  		<class>org.kuali.student.r2.common.model.StateProcessRelationEntity</class>
+ 		<class>org.kuali.student.r2.common.entity.BaseTypeEntity</class>
         <class>org.kuali.student.r2.common.entity.TypeEntity</class>
+        <class>org.kuali.student.r2.common.entity.TypeNameEntity</class>
         <class>org.kuali.student.r2.common.entity.TypeTypeRelationEntity</class>
         <class>org.kuali.student.r2.common.entity.TypeTypeRelationAttributeEntity</class>
         
         <class>org.kuali.student.enrollment.class1.hold.model.RestrictionEntity</class>
+        <class>org.kuali.student.enrollment.class1.hold.model.RestrictionNameEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.RestrictionAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.IssueEntity</class>
+        <class>org.kuali.student.enrollment.class1.hold.model.IssueNameEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.IssueAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.HoldEntity</class>
+        <class>org.kuali.student.enrollment.class1.hold.model.HoldNameEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.HoldAttributeEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.HoldRichTextEntity</class>
         <class>org.kuali.student.enrollment.class1.hold.model.HoldTypeEntity</class>
