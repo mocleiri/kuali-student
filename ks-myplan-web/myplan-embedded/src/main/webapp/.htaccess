@@ -1,0 +1,24 @@
+#
+#  Pubcookie authentication.
+#
+AuthType UWNetID
+PubcookieAppID MyPlan 
+require valid-user
+#
+#  Redirect to https
+#
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{REMOTE_USER} !^$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/myplan-embedded-dev/$1 [R,L]
+
+# Lop off jsessionids
+ReWriteRule ^(.*);jsessionid=.*$ /myplan-embedded-dev/$1 [PT]
+
+#
+#  If the server name is myplandev01 then go to ajp, otherwise, go to the balancer.
+#
+RewriteCond %{SERVER_NAME} myplandev01
+RewriteRule ^(.*)$ ajp://localhost:8009/myplan-embedded-dev/$1 [P,L]
+RewriteRule ^(.*)$ balancer://tomcat/myplan-embedded-dev/$1 [P,L]
+
