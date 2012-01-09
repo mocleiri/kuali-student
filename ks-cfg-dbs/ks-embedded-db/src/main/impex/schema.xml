@@ -4458,9 +4458,9 @@
         <column name="LOCALE" size="255" type="VARCHAR"/>
         <column name="NAME" size="255" type="VARCHAR"/>
         <column name="OWNER" size="255" type="VARCHAR"/>
-        <foreign-key foreignTable="KSEN_ATP" name="FK3DFA6EE162FD4240">
+        <!--foreign-key foreignTable="KSEN_ATP" name="FK3DFA6EE162FD4241">
             <reference foreign="ID" local="OWNER"/>
-        </foreign-key>
+        </foreign-key-->
     </table>
     <table name="KSEN_ATP_STATE">
         <column name="ID" primaryKey="true" size="255" type="VARCHAR"/>
