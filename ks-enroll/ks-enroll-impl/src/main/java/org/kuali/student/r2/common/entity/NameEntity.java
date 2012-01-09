@@ -10,7 +10,7 @@ import org.kuali.student.r2.common.infc.Name;
 
 @MappedSuperclass
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"LOCALE", "OWNER"})})
-public abstract class NameEntity<T extends NameOwner<?>> extends BaseVersionEntity implements Name {
+public abstract class NameEntity<T extends NameOwner<?>> extends BaseEntity implements Name {
 
     @Column(name = "LOCALE")
     private String locale;
