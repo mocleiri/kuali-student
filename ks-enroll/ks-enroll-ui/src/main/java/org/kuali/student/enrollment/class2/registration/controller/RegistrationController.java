@@ -50,6 +50,7 @@ import org.kuali.student.lum.course.service.CourseService;
 import org.kuali.student.lum.course.service.CourseServiceConstants;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.MeetingScheduleInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
 import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.infc.Context;
@@ -106,7 +107,8 @@ public class RegistrationController extends UifControllerBase {
         regRequestItem.setNewRegGroupId(regGroupWrapper.getRegistrationGroup().getId());
         regRequestItem.setCreditOptionKey("kuali.credit.option.RVG1");
         regRequestItem.setGradingOptionKey("kuali.grading.option.RVG1");
-        regRequestItem.setName(regGroupWrapper.getRegistrationGroup().getName());
+        regRequestItem.setNames(new ArrayList<NameInfo>());
+        regRequestItem.getNames().add(new NameInfo("en", regGroupWrapper.getRegistrationGroup().getNames().get(0).getName()));
         regRequestItem.setOkToHoldList(false);
         regRequestItem.setOkToWaitlist(regGroupWrapper.getRegistrationGroup().getHasWaitlist());
         return regRequestItem;
@@ -120,7 +122,8 @@ public class RegistrationController extends UifControllerBase {
         regRequestItem.setExistingRegGroupId(regGroupWrapper.getRegistrationGroup().getId());
         regRequestItem.setCreditOptionKey("kuali.credit.option.RVG1");
         regRequestItem.setGradingOptionKey("kuali.grading.option.RVG1");
-        regRequestItem.setName(regGroupWrapper.getRegistrationGroup().getName());
+        regRequestItem.setNames(new ArrayList<NameInfo>());
+        regRequestItem.getNames().add(new NameInfo("en", regGroupWrapper.getRegistrationGroup().getNames().get(0).getName()));
         regRequestItem.setOkToHoldList(false);
         regRequestItem.setOkToWaitlist(regGroupWrapper.getRegistrationGroup().getHasWaitlist());
         return regRequestItem;

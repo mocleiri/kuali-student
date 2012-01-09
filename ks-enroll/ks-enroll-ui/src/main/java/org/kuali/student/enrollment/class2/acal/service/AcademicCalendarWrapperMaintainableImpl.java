@@ -12,6 +12,7 @@ import org.kuali.student.enrollment.class2.acal.dto.AcademicCalendarWrapper;
 import org.kuali.student.enrollment.class2.acal.dto.TermWrapper;
 import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.NameInfo;
 import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.infc.Attribute;
 import org.kuali.student.r2.common.util.constants.AcademicCalendarServiceConstants;
@@ -83,7 +84,8 @@ public class AcademicCalendarWrapperMaintainableImpl extends MaintainableImpl {
 //                    String termId = getTermInfoKey (termInfo);
 //                    termInfo.setKey(termId);
                     String termName = getTermInfoName(termInfo);
-                    termInfo.setName(termName);
+                    termInfo.setNames(new ArrayList<NameInfo>());
+                    termInfo.getNames().add(new NameInfo("en", termName));
                     termInfo.setStateKey(AtpServiceConstants.ATP_OFFICIAL_STATE_KEY);
                     
                     //prepare classesMeetDates

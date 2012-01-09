@@ -23,14 +23,12 @@ import org.kuali.student.enrollment.grading.service.GradingService;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.util.constants.GradingServiceConstants;
-import org.kuali.student.test.utilities.TestHelper;
 
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.krad.keyvalues.KeyValuesBase;
-import org.kuali.rice.krad.util.ErrorMessage;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class CourseOfferingForGradingKeyValues extends KeyValuesBase {
@@ -39,7 +37,7 @@ public class CourseOfferingForGradingKeyValues extends KeyValuesBase {
     public List getKeyValues() {
         List keyValues = new ArrayList();
 
-        ContextInfo context = TestHelper.getContext1();
+        ContextInfo context = getContext1();
 
         GradingService gradingService = (GradingService) GlobalResourceLoader.getService(new QName(GradingServiceConstants.NAMESPACE, GradingServiceConstants.SERVICE_NAME_LOCAL_PART));
 
@@ -51,7 +49,7 @@ public class CourseOfferingForGradingKeyValues extends KeyValuesBase {
             if (gradeRosterInfoList != null){
                 List courseOfferingList = new ArrayList();
                 for (GradeRosterInfo rosterInfo : gradeRosterInfoList){
-                    keyValues.add(new ConcreteKeyValue(rosterInfo.getCourseOfferingId(), rosterInfo.getName()));
+                    keyValues.add(new ConcreteKeyValue(rosterInfo.getCourseOfferingId(), rosterInfo.getNames().get(0).getName()));
                 }
             }
         } catch (DoesNotExistException e) {
@@ -67,6 +65,10 @@ public class CourseOfferingForGradingKeyValues extends KeyValuesBase {
         }
 
         return keyValues;
+    }
+    
+    private ContextInfo getContext1() {
+        return ContextInfo.getInstance("principalId.1", "en", "us");
     }
 
 }

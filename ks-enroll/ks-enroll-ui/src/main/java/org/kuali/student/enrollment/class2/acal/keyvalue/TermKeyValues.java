@@ -95,7 +95,7 @@ public class TermKeyValues extends KeyValuesBase implements Serializable {
         List<KeyValue> keyValues = new ArrayList<KeyValue>();
 
         for(TermInfo term : terms) {
-            keyValues.add(new ConcreteKeyValue(term.getId(), term.getName()));
+            keyValues.add(new ConcreteKeyValue(term.getId(), term.getNames().get(0).getName()));
         }
 
         return keyValues;

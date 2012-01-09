@@ -46,7 +46,6 @@ import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.util.constants.*;
 import org.kuali.student.r2.lum.lrc.dto.ResultValueInfo;
-import org.kuali.student.test.utilities.TestHelper;
 
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
@@ -93,7 +92,7 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
     @Override
     public List<GradeStudent> loadStudents(String selectedCourse,GradingForm gradingForm) throws Exception {
 
-        ContextInfo context = TestHelper.getContext1();
+        ContextInfo context = getContext1();
 
         IdentityService identityService = (IdentityService) GlobalResourceLoader.getService(new QName(
                 GradingConstants.IDENTITY_SERVICE_URL, GradingConstants.IDENTITY_SERVICE_NAME));
@@ -160,7 +159,7 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
 
     public boolean saveGrades(GradingForm gradingForm)throws Exception {
 
-        ContextInfo context = TestHelper.getContext1();
+        ContextInfo context = getContext1();
 
         List<GradeStudent> gradeStudentList = gradingForm.getStudents();
         boolean updateRoster = false;
@@ -185,7 +184,7 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
 
     public boolean submitGradeRoster(GradingForm gradingForm)throws Exception {
         boolean save = saveGrades(gradingForm);
-        ContextInfo context = TestHelper.getContext1();
+        ContextInfo context = getContext1();
 
         for (GradeRosterInfo info : gradingForm.getRosterInfos()){
             getGradingService().updateFinalGradeRosterState(info.getId(), LuiPersonRelationServiceConstants.LPRROSTER_COURSE_FINAL_GRADEROSTER_SUBMITTED_STATE_KEY,context);
@@ -219,7 +218,7 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
         }
 
         studentGradeForm.setCreditList(creditList);
-        studentGradeForm.setTitle(term.getName() + " Grades");
+        studentGradeForm.setTitle(term.getNames().get(0).getName() + " Grades");
     }
 
     private TermInfo getCurrentACal(){
@@ -251,7 +250,7 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
             throw new RuntimeException("No record found for the selected term");
         }
 
-        form.setSelectedTerm(term.getName());
+        form.setSelectedTerm(term.getNames().get(0).getName());
 
         List<CourseOfferingInfo> courseOfferingInfoList = new ArrayList<CourseOfferingInfo>();
 
@@ -259,7 +258,7 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
             List<String> coIds = getCOService().getCourseOfferingIdsByTermAndInstructorId(term.getId(), context.getPrincipalId(), context);
 
             if (coIds == null || coIds.isEmpty()){
-                GlobalVariables.getMessageMap().putInfo("firstName",GradingConstants.INFO_COURSE_NOT_FOUND_TO_GRADE,term.getName());
+                GlobalVariables.getMessageMap().putInfo("firstName",GradingConstants.INFO_COURSE_NOT_FOUND_TO_GRADE,term.getNames().get(0).getName());
                 return;
             }
 
@@ -305,5 +304,9 @@ public class GradingViewHelperServiceImpl extends ViewHelperServiceImpl implemen
             academicRecordService = (AcademicRecordService) GlobalResourceLoader.getService(new QName(AcademicRecordServiceConstants.NAMESPACE, AcademicRecordServiceConstants.SERVICE_NAME));
         }
         return academicRecordService;
+    }
+    
+    private ContextInfo getContext1() {
+        return ContextInfo.getInstance("principalId.1", "en", "us");
     }
 }

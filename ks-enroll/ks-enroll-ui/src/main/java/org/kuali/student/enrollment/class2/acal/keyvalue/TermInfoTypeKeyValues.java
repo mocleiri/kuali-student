@@ -69,16 +69,16 @@ public class TermInfoTypeKeyValues extends KeyValuesBase implements Serializable
         	for (TypeInfo typeInfo : typeInfoList){
         		String typeKey = typeInfo.getKey();
         		if (typeKey.equalsIgnoreCase(FALL_TERM_TYPE_KEY)){
-        			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getName()));
+        			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getNames().get(0).getName()));
         		}
         		else if(typeKey.equalsIgnoreCase(WINTER_TERM_TYPE_KEY)){
-        			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getName()));
+        			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getNames().get(0).getName()));
         		}
         		else if (typeKey.equalsIgnoreCase(SPRING_TERM_TYPE_KEY)){
-        			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getName()));
+        			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getNames().get(0).getName()));
         		}
         		else if (typeKey.equalsIgnoreCase(SUMMER_TERM_TYPE_KEY)){
-         			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getName()));
+         			keyValues.add(new ConcreteKeyValue(typeKey, typeInfo.getNames().get(0).getName()));
         		}
         	}
             
