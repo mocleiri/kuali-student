@@ -23,7 +23,7 @@ import org.kuali.student.r2.core.class1.atp.model.AtpRichTextEntity;
 
 @Entity
 @Table(name = "KSEN_TYPETYPE_RELTN")
-public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner<TypeTypeRelationAttributeEntity> {
+public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner<TypeTypeRelationAttributeEntity>, NameOwner<TypeTypeRelationNameEntity> {
     
 //    @ManyToOne
 //    @JoinColumn(name="OWNER_TYPE_ID")
@@ -44,7 +44,7 @@ public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner
     private Integer rank;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private List<TypeNameEntity> names = new ArrayList<TypeNameEntity>();
+    private List<TypeTypeRelationNameEntity> names = new ArrayList<TypeTypeRelationNameEntity>();
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RT_DESCR_ID")
@@ -170,11 +170,11 @@ public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner
         this.rank = rank;
     }
 
-    public void setName(List<TypeNameEntity> names) {
+    public void setNames(List<TypeTypeRelationNameEntity> names) {
         this.names = names;
     }
 
-    public List<TypeNameEntity> getNames() {
+    public List<TypeTypeRelationNameEntity> getNames() {
         return names;
     }
 
@@ -203,7 +203,7 @@ public class TypeTypeRelationEntity extends MetaEntity implements AttributeOwner
         typeTypeRel.setExpirationDate(new Date(expirationDate.getTime()));
         typeTypeRel.setKey(getId());
         List<NameInfo> names = new ArrayList<NameInfo>();
-        for (TypeNameEntity name : getNames()) {
+        for (TypeTypeRelationNameEntity name : getNames()) {
             NameInfo nameInfo = name.toDto();
             names.add(nameInfo);
         }

@@ -10,33 +10,33 @@ import org.kuali.student.r2.common.infc.Name;
 
 @Entity
 @Table(name = "KSEN_TYPE_NAME")
-public class TypeNameEntity extends NameEntity<BaseTypeEntity>{
+public class TypeTypeRelationNameEntity extends NameEntity<TypeTypeRelationEntity>{
 
     @ManyToOne
     @JoinColumn(name = "OWNER")
-    private BaseTypeEntity owner;
+    private TypeTypeRelationEntity owner;
 
-    public TypeNameEntity(Name name) {
+    public TypeTypeRelationNameEntity(Name name) {
         super(name);
     }
     
-    public TypeNameEntity(String locale, String name) {
+    public TypeTypeRelationNameEntity(String locale, String name) {
         super(locale, name);
     }
     
-    public TypeNameEntity(Name name, BaseTypeEntity owner) {
+    public TypeTypeRelationNameEntity(Name name, TypeTypeRelationEntity owner) {
         super(name);
         setOwner(owner);
     }
 
     @Override
-    public void setOwner(BaseTypeEntity owner) {
+    public void setOwner(TypeTypeRelationEntity owner) {
         this.owner = owner;
         
     }
 
     @Override
-    public BaseTypeEntity getOwner() {
+    public TypeTypeRelationEntity getOwner() {
         return owner;
     }
 }

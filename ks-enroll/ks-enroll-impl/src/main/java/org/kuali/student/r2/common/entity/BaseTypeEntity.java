@@ -1,27 +1,24 @@
 package org.kuali.student.r2.common.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.kuali.student.common.entity.KSEntityConstants;
 
-@Entity
+
+@MappedSuperclass
 @AttributeOverrides({
 @AttributeOverride(name="id", column=@Column(name="TYPE_KEY"))})
-public class BaseTypeEntity extends BaseVersionEntity implements NameOwner<TypeNameEntity> {
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private List<TypeNameEntity> names = new ArrayList<TypeNameEntity>();
+public class BaseTypeEntity extends BaseVersionEntity {
+	@Column(name = "NAME")
+	private String name;
 	
 	@Column(name = "TYPE_DESC",length=KSEntityConstants.LONG_TEXT_LENGTH)
 	private String descr;
@@ -34,12 +31,12 @@ public class BaseTypeEntity extends BaseVersionEntity implements NameOwner<TypeN
 	@Column(name = "EXPIR_DT")
 	private Date expirationDate;
 
-	public List<TypeNameEntity> getNames() {
-		return names;
+	public String getName() {
+		return name;
 	}
 
-	public void setNames(List<TypeNameEntity> names) {
-		this.names = names;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getEffectiveDate() {

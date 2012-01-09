@@ -67,12 +67,8 @@ public abstract class TypeEntity<T extends BaseAttributeEntity<?>> extends BaseT
 
 	public TypeInfo toDto() {
 		TypeInfo typeInfo = new TypeInfo();
-		List<NameInfo> names = new ArrayList<NameInfo>();
-        for (TypeNameEntity name : getNames()) {
-            NameInfo nameInfo = name.toDto();
-            names.add(nameInfo);
-        }
-        typeInfo.setNames(names);
+		typeInfo.setNames(new ArrayList<NameInfo>());
+        typeInfo.getNames().add(new NameInfo("en", this.getName()));
         
 		typeInfo.setKey(this.getId());
 		typeInfo.setRefObjectURI(getRefObjectURI());
