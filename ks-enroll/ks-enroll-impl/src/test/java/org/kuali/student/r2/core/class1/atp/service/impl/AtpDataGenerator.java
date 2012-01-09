@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.kuali.student.r2.common.entity.TypeNameEntity;
 import org.kuali.student.r2.common.model.StateEntity;
 import org.kuali.student.r2.core.class1.atp.model.AtpAttributeEntity;
 import org.kuali.student.r2.core.class1.atp.model.AtpEntity;
@@ -53,8 +52,7 @@ public class AtpDataGenerator {
 
     private AtpTypeEntity createType() {
         AtpTypeEntity atpType = new AtpTypeEntity();
-        atpType.setNames(new ArrayList<TypeNameEntity>());
-        atpType.getNames().add(new TypeNameEntity("en", "type1"));
+        atpType.setName("type1");
         atpType.setDescr("type1 descr");
         return atpType;
     }

@@ -27,7 +27,7 @@ public class TestAtpAtpRelationDao extends AbstractTransactionalDaoTest{
         assertNotNull(atpRel);
         AtpTypeEntity atpType = atpRel.getAtpType();
         assertNotNull(atpType);
-        assertEquals(AtpServiceConstants.ATP_ATP_RELATION_INCLUDES_TYPE_KEY, atpType.getNames().get(0));
+        assertEquals(AtpServiceConstants.ATP_ATP_RELATION_INCLUDES_TYPE_KEY, atpType.getName());
     }
 
     @Test
