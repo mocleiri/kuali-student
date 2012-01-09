@@ -34,9 +34,9 @@
     
     <class>org.kuali.student.r2.common.entity.BaseTypeEntity</class>
     <class>org.kuali.student.r2.common.entity.TypeEntity</class>
-    <class>org.kuali.student.r2.common.entity.TypeNameEntity</class>
     <class>org.kuali.student.r2.common.entity.TypeTypeRelationEntity</class>
     <class>org.kuali.student.r2.common.entity.TypeTypeRelationAttributeEntity</class>
+    <class>org.kuali.student.r2.common.entity.TypeTypeRelationNameEntity</class>
 
     <!-- Statement Persistence -->
     <class>org.kuali.student.core.statement.entity.RefStatementRelation</class>
