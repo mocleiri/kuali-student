@@ -4340,8 +4340,8 @@
         <column name="UPDATEID" size="255" type="VARCHAR"/>
         <column name="UPDATETIME" type="TIMESTAMP"/>
         <column name="END_DT" type="TIMESTAMP"/>
-        <column name="NAME" size="255" type="VARCHAR"/>
         <column name="START_DT" type="TIMESTAMP"/>
+        <column name="ADMIN_ORG_ID" size="50" type="VARCHAR"/>
         <column name="ATP_STATE_ID" required="true" size="255" type="VARCHAR"/>
         <column name="ATP_TYPE_ID" required="true" size="255" type="VARCHAR"/>
         <column name="RT_DESCR_ID" size="255" type="VARCHAR"/>
@@ -4447,6 +4447,16 @@
         <column name="OBJ_ID" size="36" type="VARCHAR"/>
         <column name="ATTR_KEY" size="255" type="VARCHAR"/>
         <column name="ATTR_VALUE" size="2000" type="VARCHAR"/>
+        <column name="OWNER" size="255" type="VARCHAR"/>
+        <foreign-key foreignTable="KSEN_ATP" name="FK3DFA6EE162FD4240">
+            <reference foreign="ID" local="OWNER"/>
+        </foreign-key>
+    </table>
+    <table name="KSEN_ATP_NAME">
+        <column name="ID" primaryKey="true" size="255" type="VARCHAR"/>
+        <column name="OBJ_ID" size="36" type="VARCHAR"/>
+        <column name="LOCALE" size="255" type="VARCHAR"/>
+        <column name="NAME" size="255" type="VARCHAR"/>
         <column name="OWNER" size="255" type="VARCHAR"/>
         <foreign-key foreignTable="KSEN_ATP" name="FK3DFA6EE162FD4240">
             <reference foreign="ID" local="OWNER"/>
