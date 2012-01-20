@@ -41,7 +41,7 @@
                 <value>classpath:CourseSearchUI.xml</value>
                 <value>classpath:CourseDetailsUI.xml</value>
                 <value>classpath:SavedCoursesUI.xml</value>
-
+                
                 <!-- <value>classpath:CourseView.xml</value> -->
 
                 <!--

@@ -39,6 +39,48 @@
 
     <param name="db.vendor">oracle</param>
 
+
+    <param name="jpa.vendor">hibernate</param>
+
+	<param name="ks.myplan.datasource.driver.name.oracle">oracle.jdbc.OracleDriver</param>
+	<param name="ks.myplan.datasource.driver.name.derby">org.apache.derby.jdbc.ClientDriver</param>
+	<param name="ks.myplan.datasource.driver.name.mysql">com.mysql.jdbc.Driver</param>
+	<param name="ks.myplan.datasource.driver.name">${ks.myplan.datasource.driver.name.${db.vendor}}</param>
+
+	<param name="ks.myplan.datasource.url.oracle">jdbc:oracle:thin:@localhost:1521:XE</param>
+	<param name="ks.myplan.datasource.url.derby">jdbc:derby://localhost:1527/derby/enroll;create=true</param>
+	<param name="ks.myplan.datasource.url.mysql">jdbc:mysql://localhost/KSEMBEDDED</param>
+    <param name="ks.myplan.datasource.url">${ks.myplan.datasource.url.${db.vendor}}</param>
+
+	<param name="ks.myplan.jpa.DatabasePlatform.oracle">org.hibernate.dialect.Oracle10gDialect</param>
+	<param name="ks.myplan.jpa.DatabasePlatform.derby">org.hibernate.dialect.DerbyDialect</param>
+	<param name="ks.myplan.jpa.DatabasePlatform.mysql">org.hibernate.dialect.MySQLDialect</param>
+	<param name="ks.myplan.jpa.DatabasePlatform">${ks.myplan.jpa.DatabasePlatform.${db.vendor}}</param>
+
+	<param name="ks.myplan.datasource.validationQuery.oracle">select 1 from dual</param>
+	<param name="ks.myplan.datasource.validationQuery.derby">values(1)</param>
+	<param name="ks.myplan.datasource.validationQuery.mysql">select 1</param>
+	<param name="ks.myplan.datasource.validationQuery">${ks.myplan.datasource.validationQuery.${db.vendor}}</param>
+
+	<param name="ks.myplan.datasource.username">ksmyplan</param>
+	<param name="ks.myplan.datasource.password">ksmyplan</param>
+
+    <param name="ks.myplan.datasource.maxSize" override="false">10</param>
+    <param name="ks.myplan.datasource.minSize" override="false">2</param>
+    <param name="ks.myplan.datasource.maxWait" override="false">600</param>
+
+    <param name="ks.myplan.jpa.showSql">false</param>
+    <param name="ks.myplan.jpa.generateDdl">false</param>
+    <param name="ks.myplan.jpa.JpaProperties.hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JOTMTransactionManagerLookup</param>
+    <param name="ks.myplan.jpa.JpaProperties.hibernate.hbm2ddl.auto">validate</param>
+    <param name="ks.myplan.jpa.JpaProperties.hibernate.connection.release_mode">after_statement</param>
+    <param name="ks.myplan.jpa.JpaProperties.hibernate.connection.autocommit">false</param>
+
+    <param name="ks.myplan.bus.security">false</param>
+
+    <param name="ks.myplan.doDataLoad">false</param>
+
+
     <!-- used to show KS links in Rice Portal -->
     <param name="portal.show.sample.app">true</param>
 
@@ -57,7 +99,7 @@
     <param name="xml.pipeline.lifecycle.enabled">true</param>
     <param name="email.reminder.lifecycle.enabled">true</param>
     <param name="plugin.registry.enabled">false</param>
-    <param name="notification.quartz.autostartup">false</param>
+    <param name="notification.quartz.autostartup">true</param>
     <param name="notification.concurrent.jobs">false</param>
 
     <param name="simpleDocumentActionsService.security">false</param>

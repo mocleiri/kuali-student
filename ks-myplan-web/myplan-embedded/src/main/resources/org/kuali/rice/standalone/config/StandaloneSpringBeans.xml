@@ -55,7 +55,7 @@
                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 
-		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="properties" ref="configProperties" />
 	</bean>
 
@@ -91,6 +91,8 @@
     <!-- TODO: RICE-M7 UPGRADE fix ks-admin
     <import resource="classpath:ks-embedded-admin-context.xml"/-->
 
+    <import resource="classpath:ksb/ks-myplan-context.xml"/>
+    <import resource="classpath:ks-myplan-ApplicationContext.xml" />
     <import resource="classpath:MyPlanSpringBeans.xml"/>
     <import resource="classpath:uw-override-context.xml"/>
 

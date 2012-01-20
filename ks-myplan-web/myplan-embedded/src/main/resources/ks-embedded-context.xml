@@ -29,7 +29,6 @@
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-
 	<!-- This file allows the overriding of beans that are common in all KS modules(core, lum etc...) -->
     <!--
 	<bean id="identityServiceClient" class="org.kuali.rice.ksb.messaging.KSBClientProxyFactoryBean">
@@ -88,8 +87,6 @@
         <property name="cacheManager" ref="ksCacheManager"/>
         <property name="enabled" value="${ks.academicCalendar.enable.caching}"/>
     </bean>
-
-
 
 	<aop:config>
 		<aop:aspect id="enumCacheAroundSearch" ref="enumMethodCacheAdvisor">
