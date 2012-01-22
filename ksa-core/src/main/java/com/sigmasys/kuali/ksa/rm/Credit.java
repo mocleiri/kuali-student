@@ -13,7 +13,7 @@ public abstract class Credit extends Transaction {
 	/* A reference to the type of credit this is. Credit types define the clearing period for a transaction, refund preferences, charges that can be paid by the credit, etc.
 	 * 
 	 */
-	String creditType;
+	private String creditType;
 	
 	
 
