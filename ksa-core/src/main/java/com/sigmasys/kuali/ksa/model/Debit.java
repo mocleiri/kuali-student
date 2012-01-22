@@ -39,7 +39,7 @@ public abstract class Debit extends Transaction {
     }
 
     /**
-     * using the transacitonType, return a list of the general ledger accounts that this debit will feed. This will require the
+     * using the transactionType, return a list of the general ledger accounts that this debit will feed. This will require the
      * effectiveDate of the transaction, as some GL codes will change after certain periods of time.
      */
     public void getGlAccounts() {
@@ -47,7 +47,7 @@ public abstract class Debit extends Transaction {
     }
 
     /**
-     * As getGlaccounts, but also returns the breakout of the amounts to the general ledger accounts. For example, if this transaction is
+     * As getGlAccounts(), but also returns the breakout of the amounts to the general ledger accounts. For example, if this transaction is
      * for $1000, and sends 30% to account 111 and 70% to 222 then the system will return the breakout amounts as well as the gl accounts.
      */
     public void getGlAccountsWithBreakdown() {
