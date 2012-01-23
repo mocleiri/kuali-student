@@ -59,7 +59,7 @@ public abstract class Transaction {
     /**
      * This flag, when true, indicates that the transaction is 'internal', and will not, in most cases, be displayed to the customer. In most cases, internal transactions will be allocated and locked against an equivalent transaction. An example of this would be if a charge is incorrectly applied to an account, a reversal transaction would be created, the transactions could then be allocated together, and marked as internal.
      */
-    protected boolean internalTransaction;
+    protected boolean internal;
 
     /**
      * This is the amount of the transaction that has been allocated. For example, if a $1000 payment is put towards a $2000 charge, the $1000 will have a $1000 allocation amount, and the $2000 charge will have a $1000 allocation amount. The PA module is responsible for allocating charges to payments.
@@ -102,30 +102,10 @@ public abstract class Transaction {
     protected String rollupId;
 
 
-
     public Transaction(TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 
-
-    /**
-     * This will allocate the value of amount on the transaction. A check will be made to ensure that the allocated amount
-     * is equal to or less than the localAmount, less any lockedAllocationAmount. The expectation is that this method will only
-     * be called by the payment application module.
-     * <p/>
-     * It can throw the following exceptions: (I don't fully know how to establish exceptions, so if you could give me some pointers, that would be great.)
-     * AmountExceedsAvailableValue
-     */
-    public void allocateAmount(BigDecimal amount) {
-    }
-
-    /**
-     * This will allocate a locked amount on the transaction. A check will be made to ensure that the lockedAmount and the allocateAmount don't exceed the ledgerAmount
-     * of the transaction. Setting an amount as locked prevents the payment application system from reallocating the balance elsewhere. /*
-     */
-    public void allocateLockedAmount(BigDecimal amount) {
-
-    }
 
     /**
      * This method can set the internal switch on or off for a transaction. I cannot think of a time when an internal transaction would
@@ -134,26 +114,18 @@ public abstract class Transaction {
      */
 
     public void setInternal(boolean internal) {
-
+        this.internal = internal;
     }
 
     /**
-     * If a document reference is altered, then a new one can be re-referenced. The documents associated wtih each transaction give more details about the transaction, and are
+     * If a document reference is altered, then a new one can be re-referenced. The documents associated with each transaction give more details about the transaction, and are
      * for information for both the student and the CSR. For example, if the bookstore wanted to, it could lists the books it had sold in a transaction so the student would be
      * able to drill down and see what books made up a line on their statement.
      */
-    public void setDocumentReference(String newDocumentReference) {
-
+    public void setDocumentReference(String documentReference) {
+        this.documentReference = documentReference;
     }
 
-    /**
-     * If a memos can be generated in a number of ways. If a memo is generated against a transaction, it is placed in the main memo account, and also the memoReference is
-     * set to point to that memo. This allows the CSR to see the most recent memo associated with a certain transaction. Certain transaction instantiations will generate a memo
-     * as soon as they are created.
-     */
-    public void generateTransactionMemo(String memoText) {
-
-    }
 
     /**
      * If the reverse method is called, the system will generate a negative transaction for the type of the original transaction. A memo transaction will be generated, and
