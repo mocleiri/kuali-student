@@ -2,6 +2,15 @@ package com.sigmasys.kuali.ksa.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
 
 
 /**
@@ -9,11 +18,17 @@ import java.util.Date;
  *
  * @author Paul Heald
  */
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Transaction {
 
     /**
      * The unique transaction identifier for the KSA product.
      */
+	@Id
+    @Column(name = "TRANSACTION_ID", nullable = false, unique = true, updatable = false)
+    @GeneratedValue(generator = "transactionIdGenerator")
+    @SequenceGenerator(name = "transactionIdGenerator", sequenceName = "TRANSACTION_ID_SEQ")
     protected String id;
 
     /**
@@ -100,6 +115,11 @@ public abstract class Transaction {
      * as single transactions, this could also be rolled up in this way. This can be set on a per-charge basis, or can be pulled from the default in the TransactionType.
      */
     protected String rollupId;
+    
+    /**
+     * List of tags associated with the current transaction
+     */
+    protected List<Tag> tags;
 
 
     public Transaction(TransactionType transactionType) {
@@ -112,7 +132,6 @@ public abstract class Transaction {
      * not also be locked (tbd) so we should ensure that if a transaction is being set to internal, its lockedAllocationAmount == ledgerAmount.
      * Internal transactions are not generally displayed to the user, and are only displayed to the CSR when asked for.
      */
-
     public void setInternal(boolean internal) {
         this.internal = internal;
     }
@@ -126,31 +145,11 @@ public abstract class Transaction {
         this.documentReference = documentReference;
     }
 
-
-    /**
-     * If the reverse method is called, the system will generate a negative transaction for the type of the original transaction. A memo transaction will be generated, and
-     * the transactions will be locked together. Subject to user customization, the transactions may be marked as hidden. (likely that credits will not be hidden, debits will.)
-     * A charge to an account may be reversed when a mistake is made, or a refund is issued. A payment may be reversed when a payment bounces, or for some other reason is entered
-     * on to the account and is not payable.
-     */
-    public void reverse() {
-
-    }
-
     /**
      * Using the transaction code and the effective date of the transaction, return an array of the tags associated with this transaction.
      */
-    public void getTags() {
-
-    }
-
-    /**
-     * Writes the transaction to the ledger. At this point, certain attributes such as transaction code and ledger date will be
-     * provided to the object.
-     */
-
-    public void save() {
-
+    public List<Tag> getTags() {
+    	return tags;
     }
 
 }
