@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!-- Copyright 2007-2009 The Kuali Foundation Licensed under the Educational
+         Community License, Version 2.0 (the "License"); you may not use this file
+         except in compliance with the License. You may obtain a copy of the License
+         at http://www.opensource.org/licenses/ecl2.php Unless required by applicable
+         law or agreed to in writing, software distributed under the License is distributed
+         on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+         express or implied. See the License for the specific language governing permissions
+         and limitations under the License. -->
+
+
+    <bean id="courseSearchView" parent="KSFormView">
+        <property name="id" value="courseSearchView"/>
+        <property name="breadcrumbs.render" value="false"/>
+        <property name="styleClasses" value="myplan"/>
+        <property name="entryPageId" value="course_search"/>
+
+        <property name="additionalCssFiles">
+            <list>
+                <value>/ks-myplan/css/course-search.css</value>
+            </list>
+        </property>
+        <property name="additionalScriptFiles">
+            <list>
+                <value>/ks-myplan/scripts/myplan.widgets.js</value>
+                <value>/ks-myplan/scripts/course-search.js</value>
+            </list>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Page" p:id="course_search">
+                    <property name="title" value="Find Courses"/>
+                    <property name="items">
+                        <list>
+                            <ref bean="course_search_page"/>
+                        </list>
+                    </property>
+                    <property name="footer">
+                        <bean parent="Footer"/>
+                    </property>
+                </bean>
+                <bean parent="Page" p:id="course_search_result">
+                    <property name="title" value="Find Courses"/>
+                    <property name="items">
+                        <list>
+                            <ref bean="course_search_result_page"/>
+                        </list>
+                    </property>
+                    <property name="footer">
+                        <bean parent="Footer"/>
+                    </property>
+                </bean>
+                <!--
+                // Removed by Garett - 01/17/2012 - using render property to show empty collection content
+                <bean parent="Page" p:id="course_search_no_results">
+                    <property name="title" value="Find Courses"/>
+                    <property name="items">
+                        <list>
+                            <ref bean="course_search_no_results_page"/>
+                        </list>
+                    </property>
+                    <property name="footer">
+                        <bean parent="Footer"/>
+                    </property>
+                </bean>-->
+            </list>
+        </property>
+        <property name="footer.render" value="false"/>
+        <property name="formClass" value="org.kuali.student.myplan.course.form.CourseSearchForm"/>
+    </bean>
+
+
+    <!-- Layout for Course Search Form Page -->
+    <bean id="course_search_page" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <!--<property name="layoutManager">
+            <bean parent="BoxLayoutManager"/>
+        </property>-->
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="fl-container-auto"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_instructions"/>
+                <ref bean="course_search_panel"/>
+                <ref bean="mystuff_panel"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- Layout for Course Search Result Page -->
+    <bean id="course_search_result_page" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <!--<property name="layoutManager">
+            <bean parent="BoxLayoutManager"/>
+        </property>-->
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="fl-container-auto"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_instructions"/>
+                <ref bean="course_search_result_panel"/>
+                <ref bean="mystuff_panel"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Layout for Course Search No Results Found -->
+    <!--<bean id="course_search_no_results_page" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="styleClasses" value="fl-container-auto"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_instructions"/>
+                <ref bean="course_search_no_results_panel"/>
+                <ref bean="mystuff_panel"/>
+            </list>
+        </property>
+    </bean>-->
+
+    <!-- Group for Course Search Functions only -->
+    <bean id="course_search_panel" parent="Group">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="fl-container-720 fl-force-left fl-push"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_functions"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_instructions" parent="MessageField"
+                      p:messageText="Enter a course code, title, or a keyword to search in Course Catalog and Time Schedule if applicable"/>
+
+    <!-- Group for Course Search Functions and Results -->
+    <bean id="course_search_result_panel" parent="Group">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="fl-container-720 fl-force-left fl-push"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_functions"/>
+                <ref bean="course_search_result_section"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Group for Course Search Results and Facets -->
+    <bean id="course_search_result_section" parent="Group">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="noMarginPadding"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_results_panel"/>
+                <ref bean="course_search_no_results_found"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="mystuff_panel" parent="Group" p:title="YOUR STUFF (TBD)">
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="fl-container-200 fl-force-left"/>
+        <property name="items">
+            <list>
+                <!-- <ref bean="watch_list_backup"/>
+                <ref bean="watch_list_empty"/> -->
+                <ref bean="watch_list"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="watch_list" parent="Group" p:title="Watch List (TBD)">
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value=""/>
+        <property name="onDocumentReadyScript" value="
+            jq(document).ajaxComplete(function() {
+                    truncateField('saved_courses_summary');
+                });
+            retrieveContent('watch_list', 'saved_courses_summary', 'lookup?methodToCall=search&amp;viewId=SavedCoursesSummaryView');
+        "/>
+    </bean>
+<!--
+    <bean id="watch_list_backup" parent="Group" p:title="Watch List (TBD)">
+        <property name="disclosure.render" value="false"/>
+        <property name="styleClasses" value=""/>
+        <property name="render" value="@{getSavedCoursesItemList().size() gt 0 ? 'true' : 'false'}"/>
+        <property name="items">
+            <list>
+                <ref bean="saved_courses_summary_list"/>
+                <bean parent="LinkField" p:linkLabel="View @{getSavedCoursesItemList().size() lt 2 ? 'course' : 'all '+getSavedCoursesItemList().size()+' courses'} in full details" p:hrefText="#link"
+                      p:title="View @{getSavedCoursesItemList().size() lt 2 ? 'course' : 'all '+getSavedCoursesItemList().size()+' courses'} in full details" p:styleClasses="link_viewall" p:target=""/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="watch_list_empty" parent="Group" p:title="Watch List (TBD)">
+        <property name="disclosure.render" value="false"/>
+        <property name="styleClasses" value=""/>
+        <property name="render" value="@{getSavedCoursesItemList().size() gt 0 ? 'false' : 'true'}"/>
+        <property name="items">
+            <list>
+                <ref bean="saved_courses_summary_list_empty" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="saved_courses_summary_list_empty" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="styleClasses" value=""/>
+        <property name="items">
+            <list>
+                <bean parent="MessageField"
+                      p:messageText="You don't have any saved courses. Save a course by adding ("/>
+                <bean parent="ImageField" p:source="/myplan-embedded-dev/ks-myplan/images/btnAdd.png" p:altText="Example of Add to Plan button"/>
+                <bean parent="MessageField"
+                      p:messageText=") from the search results (TBD)"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="saved_courses_summary_list" parent="ListGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.SavedCoursesItem"/>
+        <property name="propertyName" value="savedCoursesItemList"/>
+        <property name="items">
+            <list>
+                <bean parent="FieldGroup" p:labelField.render="false">
+                    <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="MessageField" p:messageText="@{#line.code}"  p:styleClasses="courseCode fl-text-bold" />
+                            <bean parent="MessageField" p:messageText="@{#line.title}" p:styleClasses="courseName" />
+                            <bean parent="MessageField" p:messageText="@{#line.credit}" p:styleClasses="courseCredits" />
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+     -->
+
+    <!-- Group for Search Fields Container -->
+    <bean id="course_search_functions" parent="Group">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_fields"/>
+                <ref bean="course_search_params"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Group for Search Input Fields -->
+    <bean id="course_search_fields" parent="FieldGroup">
+        <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+        <property name="group.errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean id="course_search_query" parent="InputField_Form" p:propertyName="searchQuery"
+                    p:label="Search for" p:labelPlacement="LEFT"
+                    p:labelField.renderColon="false" p:labelField.styleClasses="fl-txt-bold" p:styleClasses="search-text">
+                    <property name="control">
+                        <bean parent="TextControl" p:watermarkText="E.g. English 1xx, CHEM 142" />
+                    </property>
+                </bean>
+                <bean parent="InputField_Form" p:propertyName="searchTerm" p:label="in" p:labelPlacement="LEFT"
+                      p:labelField.renderColon="false">
+
+                    <property name="control">
+                        <bean parent="SelectControl"/>
+                    </property>
+
+                    <property name="optionsFinder">
+                        <bean class="org.kuali.student.myplan.course.util.PublishedTermsListBuilder" />
+                    </property>
+                </bean>
+                <bean parent="ActionField" p:methodToCall="searchForCourses"
+                    p:actionLabel="Search" p:jumpToIdAfterSubmit="TOP" p:styleClasses="search-submit kr-button-primary"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Group for Search Input Parameters -->
+    <bean id="course_search_params" parent="FieldGroup">
+        <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+        <property name="group.errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="InputField_Form" p:propertyName="campusSeattle"
+                      p:label="Seattle campus" p:labelPlacement="RIGHT" p:defaultValue="true">
+                    <property name="control">
+                        <bean parent="CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="InputField_Form" p:propertyName="campusTacoma"
+                      p:label="Tacoma campus" p:labelPlacement="RIGHT" p:defaultValue="true">
+                    <property name="control">
+                        <bean parent="CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="InputField_Form" p:propertyName="campusBothell"
+                      p:label="Bothell campus" p:labelPlacement="RIGHT" p:defaultValue="true">
+                    <property name="control">
+                        <bean parent="CheckboxControl"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Layout for No Results Found  -->
+    <bean id="course_search_no_results_found" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <property name="styleClasses" value=""/>
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="render" value="@{getCourseSearchResults().size() gt 0 ? 'false' : 'true'}"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_result_facets"/>
+                <ref bean="empty_table"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Group for Empty Table Result Set -->
+    <bean id="empty_table" parent="Group">
+        <property name="disclosure.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean id="empty_table_header" parent="MessageField" p:messageText="0 results found" p:styleClasses="dataTables_info"/>
+                <bean id="empty_table_help" parent="Group">
+                    <property name="header.render" value="false"/>
+                    <property name="disclosure.render" value="false"/>
+                    <property name="errorsField.render" value="false"/>
+                    <property name="items">
+                        <list>
+                            <bean id="empty_table_message1" parent="MessageField" p:messageText="We couldn't find anything matching your search."/>
+                            <bean id="empty_table_message2" parent="MessageField" p:messageText="A few suggestions:"/>
+                            <bean id="empty_table_message_list" parent="Group">
+                                <property name="disclosure.render" value="false"/>
+                                <property name="header.render" value="false"/>
+                                <property name="errorsField.render" value="false"/>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="MessageField" p:messageText="Check your spelling"/>
+                                        <bean parent="MessageField" p:messageText="Try a more general search (Any quarter, ENGL 1xx)"/>
+                                        <bean parent="MessageField" p:messageText="Use at least 2 characters"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Layout for Search Facets and Search Results -->
+    <bean id="course_search_results_panel" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <property name="styleClasses" value=""/>
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="render" value="@{getCourseSearchResults().size() gt 0 ? 'true' : 'false'}"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_result_facets"/>
+                <ref bean="course_search_results"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Group for Search Results List -->
+    <bean id="course_search_results" parent="Group">
+        <property name="styleClasses" value=""/>
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <ref bean="course_search_results_list_items"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_results_list_items" parent="CollectionGroupTableLayout"
+          p:layoutManager.numberOfColumns="12">
+        <property name="disclosure.render" value="false"/>
+        <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.CourseSearchItem"/>
+        <property name="propertyName" value="courseSearchResults"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.id" value="course_search_results_datatable"/>
+        <property name="layoutManager.sequencePropertyName" value="code"/>
+        <property name="layoutManager.sequenceFieldPrototype.label" value="Code"/>
+        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="bindingInfo.bindToForm" value="true"/>
+        <!-- Have to turn off emptyTableMessage, so that oLanguage option is not overridden by code -->
+        <property name="layoutManager.richTable.emptyTableMessage" value=""/>
+        <!-- Have to enable disableTableSort, so that aoColumns option is not overridden by code -->
+        <property name="layoutManager.richTable.disableTableSort"
+                  value="true"/>
+        <property name="layoutManager.richTable.componentOptions">
+            <map merge="true">
+
+                <entry key="oLanguage"
+                       value="{'sLengthMenu':'Show _MENU_', 'sEmptyTable':'0 results found', 'sZeroRecords':'0 results found', 'sProcessing':'DataTables is currently busy', 'sInfo':'Showing _START_-_END_ of _TOTAL_ results', 'sInfoFiltered':''}"/>
+                <entry key="iDisplayLength" value="20"/>
+                <entry key="aLengthMenu" value="[ 20, 50, 100 ]"/>
+                <entry key="sDom" value="ilrtSp"/>
+                <entry key="sPaginationType" value="full_numbers"/>
+                <entry key="bRetrieve" value="true"/>
+                <entry key="bAutoWidth" value="false"/>
+                <entry key="bDeferRender" value="true"/>
+                <entry key="bScrollCollapse" value="true"/>
+                <entry key="bStateSave" value="true"/>
+                <entry key="aoColumns"
+                       value="[
+                            {'bSortable':true, 'bSearchable':false},
+                            {'bSortable':true, 'bSearchable':false, 'sWidth':'175px'},
+                            {'bSortable':false, 'bSearchable':false},
+                            {'bSortable':false, 'bSearchable':false},
+                            {'bSortable':false, 'bSearchable':false},
+                            {'bSortable':false, 'bSearchable':false},
+                            {'sTitle':'facetQuarter', 'bVisible':false},
+                            {'sTitle':'facetScheduled', 'bVisible':false},
+                            {'sTitle':'facetGenEduReq', 'bVisible':false},
+                            {'sTitle':'facetCredits', 'bVisible':false},
+                            {'sTitle':'facetLevel', 'bVisible':false},
+                            {'sTitle':'facetCurriculum', 'bVisible':false}
+                        ]"/>
+                <entry key="fnDrawCallback"
+                       value="function() {
+                            if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) > 1)  {
+                                jq('.dataTables_paginate span').not('.first, .last').show();
+                            } else {
+                                jq('.dataTables_paginate span').hide();
+                            }
+                       }"/>
+            </map>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="DataField" p:propertyName="code" p:label="Code" p:readOnly="true">
+                    <property name="styleClasses" value="courseCode"/>
+                </bean>
+
+                <!--  TODO: This is a better way to create this field (once InputField is available).
+                <bean parent="InputField" p:propertyName="code" p:label="Code" p:styleClasses="courseCode">
+                    <property name="fieldInquiry.dataObjectClassName" value="org.kuali.student.lum.course.dto.CourseInfo"/>
+                    <property name="fieldInquiry.inquiryParameters">
+                        <map>
+                            <entry key="courseCode" value="code"/>
+                        </map>
+                    </property>
+                    </bean>
+                -->
+
+                <bean parent="LinkField" p:label="Course Name" p:title="@{#line.courseName}" p:linkLabel="@{#line.courseName}" p:styleClasses="courseName" p:target=""
+                      p:hrefText="/myplan-embedded-dev/myplan/inquiry?methodToCall=start&amp;dataObjectClassName=org.kuali.student.myplan.course.dataobject.CourseDetails&amp;courseId=@{#line.courseId}" />
+
+                <!--
+                <bean parent="InputField" p:propertyName="courseName"
+                      p:label="Course Name" p:readOnly="true">
+                    <property name="styleClasses" value="courseName"/>
+                    <property name="control">
+                        <bean parent="TextControl"/>
+                    </property>
+                </bean>  -->
+                <bean parent="DataField" p:propertyName="credit" p:label="Credits"
+                      p:readOnly="true">
+                    <property name="styleClasses" value="courseCredits"/>
+                </bean>
+                <bean parent="DataField" p:propertyName="scheduledAndOfferedTerms"
+                      p:label="Quarter Offered" p:readOnly="true">
+                    <property name="styleClasses" value="courseQuarter"/>
+                </bean>
+                <bean parent="DataField" p:propertyName="genEduReq"
+                      p:label="Gen Edu Req" p:readOnly="true">
+                    <property name="styleClasses" value="courseGenEduReq"/>
+                </bean>
+                <bean parent="ActionImageField" p:label="Add" p:clientSideJs="alert('Selected course has been added successfully');">
+                    <property name="actionImage">
+                        <bean parent="ImageField" p:source="/myplan-embedded-dev/ks-myplan/images/btnAdd.png" p:altText="Add course to MyPlan"/>
+                    </property>
+                </bean>
+                <bean parent="DataField" p:propertyName="quartersFacetKey" p:label="Quarter Projected"
+                      p:readOnly="true">
+                </bean>
+                <bean parent="DataField" p:propertyName="scheduledFacetKey" p:label="Quarter Scheduled"
+                      p:readOnly="true">
+                </bean>
+                <bean parent="DataField" p:propertyName="genEduReqFacetKey" p:label="Gen Edu Req"
+                      p:readOnly="true">
+                </bean>
+                <bean parent="DataField" p:propertyName="creditsFacetKey" p:label="Credits"
+                      p:readOnly="true">
+                </bean>
+                <bean parent="DataField" p:propertyName="courseLevelFacetKey" p:label="Course Level"
+                      p:readOnly="true">
+                </bean>
+                <bean parent="DataField" p:propertyName="curriculumFacetKey" p:label="Course Prefix"
+                      p:readOnly="true">
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Group for Search Facets -->
+    <bean id="course_search_result_facets" parent="Group" p:title="Narrow Results">
+        <property name="styleClasses" value="fl-container-flex15 fl-force-left"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <ref bean="facet_quarter"/>
+                <ref bean="facet_genedureq"/>
+                <ref bean="facet_credits"/>
+                <ref bean="facet_level"/>
+                <ref bean="facet_curriculum"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Terms/Scheduled Terms/Quarters Facet -->
+    <bean id="facet_quarter" parent="Group" p:title="Quarter">
+        <property name="disclosure.render" value="true"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="facets"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="All" p:styleClasses="facetQuarter item all checked"
+                      p:clientSideJs="facetFilter('facetQuarter', 'All', this);"/>
+                <ref bean="course_search_facet_quarter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_facet_quarter" parent="CollectionGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.footer.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
+        <property name="propertyName" value="termsFacetItems"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="@{#line.displayName}" p:styleClasses="facetQuarter item" p:clientSideJs="facetFilter('facetQuarter', '@{#line.key}', this);" p:labelField.render="false"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Gen Edu Req Facets -->
+    <bean id="facet_genedureq" parent="Group" p:title="Gen. Edu. Req.">
+        <property name="disclosure.render" value="true"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="facets"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="All" p:styleClasses="facetGenEduReq item all checked"
+                      p:clientSideJs="facetFilter('facetGenEduReq', 'All', this);"/>
+                <ref bean="course_search_facet_genedureq"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_facet_genedureq" parent="CollectionGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.footer.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="collectionObjectClass"
+                  value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
+        <property name="propertyName" value="genEduReqFacetItems"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="@{#line.displayName}" p:styleClasses="facetGenEduReq item" p:clientSideJs="facetFilter('facetGenEduReq', '@{#line.key}', this);" p:labelField.render="false"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Credits Facets -->
+    <bean id="facet_credits" parent="Group" p:title="Credits">
+        <property name="disclosure.render" value="true"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="facets"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="All" p:styleClasses="facetCredits item all checked"
+                      p:clientSideJs="facetFilter('facetCredits', 'All', this);"/>
+                <ref bean="course_search_facet_credits"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_facet_credits" parent="CollectionGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.footer.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="collectionObjectClass"
+                  value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
+        <property name="propertyName" value="creditsFacetItems"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="@{#line.displayName}" p:styleClasses="facetCredits item"
+                      p:clientSideJs="facetFilter('facetCredits', '@{#line.key}', this);" p:labelField.render="false"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Course Level Facets -->
+    <bean id="facet_level" parent="Group" p:title="Course Level">
+        <property name="disclosure.render" value="true"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="facets"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="All" p:styleClasses="facetLevel item all checked"
+                      p:clientSideJs="facetFilter('facetLevel', 'All', this);"/>
+                <ref bean="course_search_facet_level"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_facet_level" parent="CollectionGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.footer.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="collectionObjectClass"
+                  value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
+        <property name="propertyName" value="courseLevelFacetItems"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="@{#line.displayName}" p:styleClasses="facetLevel item"
+                      p:clientSideJs="facetFilter('facetLevel', '@{#line.key}', this);" p:labelField.render="false"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Subject Area Facets -->
+    <bean id="facet_curriculum" parent="Group" p:title="Course Prefix">
+        <property name="disclosure.render" value="true"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="styleClasses" value="facets"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="All" p:styleClasses="facetCurriculum item all checked"
+                      p:clientSideJs="facetFilter('facetCurriculum', 'All', this);"/>
+                <ref bean="course_search_facet_curriculum"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_search_facet_curriculum" parent="CollectionGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.footer.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="collectionObjectClass"
+                  value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
+        <property name="propertyName" value="curriculumFacetItems"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionLinkField" p:actionLabel="@{#line.displayName}" p:styleClasses="facetCurriculum item" p:title="@{#line.displayName}"
+                      p:clientSideJs="facetFilter('facetCurriculum', '@{#line.key}', this);" p:labelField.render="false"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
+
+

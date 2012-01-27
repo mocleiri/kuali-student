@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!--
+     Copyright 2007-2009 The Kuali Foundation
+
+     Licensed under the Educational Community License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ecl2.php
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+    -->
+    <bean id="SavedCoursesItem" parent="SavedCoursesItem-parentBean"/>
+    <bean id="SavedCoursesItem-parentBean" abstract="true" parent="DataObjectEntry">
+        <property name="objectLabel" value="Saved Courses"/>
+        <property name="dataObjectClass" value="org.kuali.student.myplan.course.dataobject.SavedCoursesItem"/>
+        <property name="titleAttribute" value=""/>
+        <property name="attributes">
+            <list>
+                <ref bean="SavedCoursesItem.id"/>
+                <ref bean="SavedCoursesItem.dateAdded"/>
+            </list>
+        </property>
+        <property name="complexAttributes">
+            <list>
+                <ref bean="SavedCoursesItem.courseDetails"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="SavedCoursesItem.id" parent="SavedCoursesItem.id-parentBean"/>
+    <bean id="SavedCoursesItem.id-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="name" value="id"/>
+        <property name="dataType" value="STRING"/>
+        <property name="label" value="Watch List Item ID"/>
+        <property name="shortLabel" value="Watch List Item ID"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="10"/>
+        <property name="validCharactersConstraint">
+            <bean parent="NoWhitespacePatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="10"/>
+        </property>
+    </bean>
+
+
+    <bean id="SavedCoursesItem.courseDetails" parent="ComplexAttributeDefinition">
+        <property name="name" value="courseDetails"/>
+         <property name="dataObjectEntry" ref="CourseDetails"/>
+    </bean>
+
+    <bean id="SavedCoursesItem.dateAdded" parent="SavedCoursesItem.dateAdded-parentBean"/>
+    <bean id="SavedCoursesItem.dateAdded-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="name" value="dateAdded"/>
+        <property name="dataType" value="DATE"/>
+        <property name="label" value="Date Added"/>
+        <property name="shortLabel" value="Added"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="16"/>
+        <property name="validCharactersConstraint">
+            <bean parent="AnyCharacterPatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="20"/>
+        </property>
+    </bean>
+
+    <bean id="SavedCoursesSummaryView" parent="KSLookupView">
+        <property name="title" value="Saved Courses Summary"/>
+        <property name="breadcrumbs.render" value="false"/>
+        <property name="page.header.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="dataObjectClassName" value="org.kuali.student.myplan.course.dataobject.SavedCoursesItem"/>
+        <property name="viewHelperServiceClassName"
+                  value="org.kuali.student.myplan.course.service.SavedCoursesLookupableHelperImpl"/>
+        <property name="singlePageView" value="true"/>
+        <property name="styleClasses" value="myplan"/>
+        <property name="additionalCssFiles">
+            <list>
+                <value>/ks-myplan/css/course-search.css</value>
+            </list>
+        </property>
+        <property name="additionalScriptFiles">
+            <list>
+                <value>/ks-myplan/scripts/myplan.widgets.js</value>
+            </list>
+        </property>
+        <property name="criteriaFields">
+            <list/>
+        </property>
+        <property name="resultFields">
+            <list/>
+        </property>
+
+        <!-- Not Displaying any criteria -->
+        <property name="criteriaGroup">
+            <bean parent="GroupBodyOnly"/>
+        </property>
+        <property name="resultsGroup">
+            <bean id="saved_courses_summary" parent="saved_courses_summary_list"/>
+        </property>
+        <property name="footer">
+            <bean parent="Footer"/>
+        </property>
+    </bean>
+
+    <bean id="saved_courses_summary_list" parent="ListGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.SavedCoursesItem"/>
+        <property name="propertyName" value="searchResults"/>
+        <property name="onDocumentReadyScript" value="truncateField('saved_courses_summary');"/>
+        <property name="items">
+            <list>
+                <bean parent="FieldGroup" p:labelField.render="false">
+                    <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="MessageField" p:messageText="@{#line.courseDetails.code}"
+                                  p:styleClasses="courseCode fl-text-bold"/>
+                            <bean parent="MessageField" p:messageText="@{#line.courseDetails.courseTitle}"
+                                  p:styleClasses="courseName ellipsis"/>
+                            <bean parent="MessageField" p:messageText="@{#line.courseDetails.credit}"
+                                  p:styleClasses="courseCredits"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+        <property name="footer">
+            <bean parent="saved_courses_summary_footer"/>
+        </property>
+    </bean>
+
+    <bean id="saved_courses_summary_footer" parent="Group">
+        <property name="disclosure.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="LinkField" p:linkLabel="View @{searchResults.size() lt 2 ? 'course' : 'all '+searchResults.size()+' courses'} in full details" p:hrefText="#link"
+                      p:title="View @{searchResults.size() lt 2 ? 'course' : 'all '+searchResults.size()+' courses'} in full details" p:styleClasses="link_viewall" p:target="">
+                    <property name="render" value="@{searchResults.size() gt 0 ? 'true' : 'false'}"/>
+                </bean>
+                <bean parent="Group" p:layoutManager.orientation="HORIZONTAL">
+                    <property name="header.render" value="false"/>
+                    <property name="disclosure.render" value="false"/>
+                    <property name="errorsField.render" value="false"/>
+                    <property name="render" value="@{searchResults.size() gt 0 ? 'false' : 'true'}"/>
+                    <property name="styleClasses" value=""/>
+                    <property name="items">
+                        <list>
+                            <bean parent="MessageField"
+                                  p:messageText="You don't have any saved courses. Save a course by adding ("/>
+                            <bean parent="ImageField" p:source="/myplan-embedded-dev/ks-myplan/images/btnAdd.png"
+                                  p:altText="Example of Add to Plan button"/>
+                            <bean parent="MessageField"
+                                  p:messageText=") from the search results (TBD)"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="SavedCoursesDetailView" parent="KSLookupView">
+        <property name="title" value="Saved Courses Detail"/>
+        <property name="viewName" value="SavedCoursesDetailView"/>
+        <property name="breadcrumbs.render" value="false"/>
+        <property name="page.header.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="dataObjectClassName" value="org.kuali.student.myplan.course.dataobject.SavedCoursesItem"/>
+        <property name="viewHelperServiceClassName"
+                  value="org.kuali.student.myplan.course.service.SavedCoursesLookupableHelperImpl"/>
+        <property name="singlePageView" value="true"/>
+        <property name="styleClasses" value="myplan"/>
+        <property name="additionalCssFiles">
+            <list>
+                <value>/ks-myplan/css/course-search.css</value>
+            </list>
+        </property>
+        <property name="additionalScriptFiles">
+            <list>
+                <value>/ks-myplan/scripts/myplan.widgets.js</value>
+            </list>
+        </property>
+        <property name="criteriaFields">
+            <list/>
+        </property>
+        <property name="resultFields">
+            <list/>
+        </property>
+
+        <!-- Not Displaying any criteria -->
+        <property name="criteriaGroup">
+            <bean parent="GroupBodyOnly"/>
+        </property>
+        <property name="resultsGroup">
+            <bean id="saved_courses_detail" parent="saved_courses_detail_list"/>
+        </property>
+        <property name="footer">
+            <bean parent="Footer"/>
+        </property>
+    </bean>
+
+    <bean id="saved_courses_detail_list" parent="ListGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.errorsField.render" value="false"/>
+        <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.SavedCoursesItem"/>
+        <property name="propertyName" value="searchResults"/>
+        <property name="items">
+            <list>
+                <bean parent="FieldGroup" p:labelField.render="false">
+                    <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="MessageField" p:messageText="@{#line.courseDetails.code}"
+                                  p:styleClasses="courseCode fl-text-bold"/>
+                            <bean parent="MessageField" p:messageText="@{#line.courseDetails.courseTitle}"
+                                  p:styleClasses="courseName fl-text-bold"/>
+                            <bean parent="MessageField" p:messageText="(@{#line.courseDetails.credit})"
+                                  p:styleClasses="courseCredits fl-text-bold"/>
+                            <bean parent="MessageField" p:messageText="I &amp; S, W" p:styleClasses="courseGenEduReq"/>
+                            <bean parent="MessageField" p:messageText="(@{#line.dateAdded})" p:styleClasses="dateAdded"
+                                  p:labelField.render="true"/>
+                        </list>
+                    </property>
+                </bean>
+                <!--
+
+                // Garett - 01/23/2012
+                // Having labelField throws exception: Cannot convert value of type [java.lang.String] to required type [org.kuali.rice.krad.uif.field.LabelField] for property 'labelField'
+
+                <bean parent="FieldGroup" p:labelField.render="false">
+        <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+        <property name="items">
+            <list>
+                <bean parent="MessageField" p:labelField="Scheduled For" p:messageText="&lt;dl&gt;&lt;dd&gt;WI 13&lt;/dd&gt;&lt;dd&gt;SP 13&lt;/dd&gt;&lt;/dl&gt;" p:styleClasses="courseQuarterScheduled" p:labelField.render="true"/>
+                <bean parent="MessageField" p:labelField="Projected For" p:messageText="&lt;dl&gt;&lt;dd&gt;Winter&lt;/dd&gt;&lt;dd&gt;Summer&lt;/dd&gt;&lt;/dl&gt;" p:styleClasses="courseQuarterProjected" p:labelField.render="true"/>
+                <bean parent="MessageField" p:labelField="Last Offered" p:messageText="Spring 2011" p:styleClasses="courseLastOffered" p:labelField.render="true"/>
+            </list>
+        </property>
+    </bean>
+                <bean parent="FieldGroup" p:labelField.render="false">
+        <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+        <property name="items">
+            <list>
+                <bean parent="MessageField" p:labelField="Course Requisites" p:messageText="This is the course requisites." p:styleClasses="courseRequisites" p:labelField.render="true"/>
+            </list>
+        </property>
+    </bean>
+                <bean parent="FieldGroup" p:labelField.render="false">
+        <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+        <property name="items">
+            <list>
+                <bean parent="MessageField" p:labelField="Course Description" p:messageText="This is the course description." p:styleClasses="courseDescription" p:labelField.render="true"/>
+            </list>
+        </property>
+    </bean>
+                -->
+            </list>
+        </property>
+    </bean>
+
+    <!-- Saved courses actions view and response pages -->
+
+    <bean id="savedCoursesListActionsView" parent="KSFormView">
+        <property name="id" value="savedCoursesListActionsView"/>
+        <property name="formClass" value="org.kuali.student.myplan.course.form.SavedCoursesListForm"/>
+        <property name="breadcrumbs.render" value="false"/>
+        <property name="footer.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Page" p:id="add_plan_item_result">
+                    <property name="items">
+                        <list>
+                            <ref bean="add_plan_item_page"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Page" p:id="remove_plan_item_result">
+                    <property name="items">
+                        <list>
+                            <ref bean="remove_plan_item_page"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+     <bean id="add_plan_item_page"  parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="true"/>
+        <property name="items">
+            <list>
+                <bean parent="DataField" p:propertyName="planItemId" p:label="Plan Item Id"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="remove_plan_item_page" parent="Group" p:layoutManager.orientation="HORIZONTAL">
+        <property name="header.render" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="true"/>
+        <property name="items">
+            <list>
+                 <bean parent="MessageField" p:messageText="Remove Some Text."/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
