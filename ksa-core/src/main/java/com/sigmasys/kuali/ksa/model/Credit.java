@@ -10,11 +10,6 @@ public abstract class Credit extends Transaction {
 	 * */
 	protected boolean isRefundable;
 
-
-    public Credit(CreditType creditType) {
-        super(creditType);
-    }
-
     public boolean isRefundable() {
         return isRefundable;
     }

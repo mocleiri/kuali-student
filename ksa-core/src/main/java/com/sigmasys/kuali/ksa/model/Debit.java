@@ -15,12 +15,7 @@ public abstract class Debit extends Transaction {
      */
     protected Deferment deferment;
 
-
-    public Debit(DebitType debitType) {
-        super(debitType);
-    }
-
-
+    
     /**
      * If a transaction is deferred, then it will return true here.
      * Deferred transactions also bear the identifier of the deferment transaction that offsets them in deferment

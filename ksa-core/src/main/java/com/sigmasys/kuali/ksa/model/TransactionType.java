@@ -2,25 +2,43 @@ package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Column;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+
 /**
- * TransactionType enum defines different transaction types existing in KSA.
+ * TransactionType defines different transaction types existing in KSA.
  *
  * User: mivanov
  * Date: 1/22/12
  * Time: 3:46 PM
  * @author Michael Ivanov
  */
+@Entity
+@IdClass(TransactionTypeId.class)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class TransactionType {
     
-    private String id;
+	@Id
+	@Column(name = "ID")
+    protected String id;
     
-    private String subCode;
+	@Id
+	@Column(name = "SUBCODE")
+    protected String subCode;
     
-    private Date startDate;
+	@Column(name = "START_DATE")
+    protected Date startDate;
     
-    private Date endDate;
+	@Column(name = "END_DATE")
+    protected Date endDate;
     
-    private String description;
+	@Column(name = "DEF_TRN_TXT")
+    protected String description;
 
     public String getId() {
         return id;

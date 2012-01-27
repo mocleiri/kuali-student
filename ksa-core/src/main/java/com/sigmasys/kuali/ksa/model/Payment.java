@@ -2,10 +2,17 @@ package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+
 /*
  * Concrete payment class. 
  * 
  */
+
+@Entity
+@DiscriminatorValue("P")
 public class Payment extends Credit {
 
     /**
@@ -17,13 +24,8 @@ public class Payment extends Credit {
      * which is set for transactions which are inherently non refundable,
      * such as tuition deposits, etc.
      */
+	@Column(name = "CLEAR_DATE")
     private Date clearDate;
-
-
-    public Payment(CreditType creditType) {
-        super(creditType);
-    }
-
 
     public Date getClearDate() {
         return clearDate;

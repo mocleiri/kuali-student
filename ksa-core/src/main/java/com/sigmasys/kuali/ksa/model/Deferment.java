@@ -3,12 +3,19 @@ package com.sigmasys.kuali.ksa.model;
 import java.util.Date;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("D")
 public class Deferment extends Credit {
 
     /**
       * All deferments are set with an expiration date. If the date passes, then the deferment is expired, and the payment application system will
       * remove the allocation of the deferment, and the charge it is applied to will become due.
       */
+	@Column(name = "EXPIRATION_DATE")
     private Date expirationDate;
 
     /**
@@ -16,24 +23,22 @@ public class Deferment extends Credit {
       * Once a deferment is expired, this value remains to show
       * the original status and intention of the deferment.
       */
-    private String deferredTransactionId;
+	@Column(name = "DEFER_TRN_ID")
+    private Long deferredTransactionId;
 
     /** a deferment is the only type of transaction whose amount can be altered. For audit purposes,
       * the original value of the deferment is set permanently in this attribute,
       * even if the deferment is reduced or expired, the original value will be accessible here.
       */
+	@Column(name = "ORIG_DEFER_AMOUNT")
     private BigDecimal originalDefermentAmount;
 
 
-    public Deferment(CreditType creditType) {
-       super(creditType);
-    }
-
-    public void setDeferredTransactionId(String deferredTransactionId) {
+    public void setDeferredTransactionId(Long deferredTransactionId) {
         this.deferredTransactionId = deferredTransactionId;
     }
 
-    public String getDeferredTransactionId() {
+    public Long getDeferredTransactionId() {
         return deferredTransactionId;
     }
 

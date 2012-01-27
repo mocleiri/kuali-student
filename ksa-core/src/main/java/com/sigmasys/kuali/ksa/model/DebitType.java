@@ -1,5 +1,9 @@
 package com.sigmasys.kuali.ksa.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * DebitType
  * Defines information about the debit.
@@ -13,11 +17,14 @@ package com.sigmasys.kuali.ksa.model;
  * Date: 1/22/12
  * Time: 4:13 PM
  */
+@Entity
+@Table(name = "KSSA_DEBIT_TYPE")
 public class DebitType extends TransactionType {
 
     /**
      * Transaction priority
      */
+	@Column(name = "PRIORITY")
     private Integer priority;
 
 
