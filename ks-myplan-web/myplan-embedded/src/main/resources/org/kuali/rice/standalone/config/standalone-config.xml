@@ -80,6 +80,8 @@
 
     <param name="ks.myplan.doDataLoad">false</param>
 
+    <!-- MyPlan properties file containin Error Messages -->
+    <param name="rice.struts.message.resources" override="true">${rice.struts.message.resources},org.kuali.student.myplan.KSMyPlan-ApplicationResources</param>
 
     <!-- used to show KS links in Rice Portal -->
     <param name="portal.show.sample.app">true</param>
@@ -229,4 +231,7 @@
     <param name="javascript.files" override="true">${javascript.files}</param>
 
     <param name="ks.institutional.context">classpath:uw-override-context.xml</param>
+
+
+
 </config>
