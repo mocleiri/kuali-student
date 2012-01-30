@@ -1,4 +1,4 @@
-package com.sigmasys.kuali.ksa.service.jpa;
+package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.TransactionService;

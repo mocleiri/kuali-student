@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-lazy-init="true">
+
+
+    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
+          destroy-method="close">
+        <property name="forceShutdown" value="true"/>
+    </bean>
+
+    <!-- XA data source definitions -->
+    <bean id="xaDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" abstract="true">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="poolSize" value="5"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="testQuery" value="select 1 from dual"/>
+    </bean>
+
+    <bean id="ksaDataSource" class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean" parent="xaDataSource">
+        <property name="uniqueResourceName" value="ksaDataSource"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+        <property name="user" value="KSA"/>
+        <property name="password" value="KSA"/>
+    </bean>
+
+    <bean id="kualiDataSource" class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean" parent="xaDataSource">
+        <property name="uniqueResourceName" value="kualiDataSource"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+        <property name="user" value="KUALI"/>
+        <property name="password" value="KUALI"/>
+    </bean>
+
+
+    <!-- JNDI bindings -->
+    <bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
+        <property name="bindings">
+            <map>
+                <entry key="java:comp/TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="java:comp/UserTransaction" value-ref="atomikosTransactionManager"/>
+                <entry key="javax.transaction.TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="javax.transaction.UserTransaction" value-ref="atomikosTransactionManager"/>
+                <entry key="CoreDS" value-ref="ksaDataSource"/>
+                <entry key="SonarDS" value-ref="kualiDataSource"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

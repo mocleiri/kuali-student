@@ -49,6 +49,13 @@
     <orderEntry type="library" name="Maven: javassist:javassist:3.12.1.GA" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:4.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.beanlib:beanlib-hibernate:5.0.2beta" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.beanlib:beanlib:5.0.2beta" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.3" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
+    <orderEntry type="library" name="Maven: cglib:cglib:2.1_3" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm:2.2.3" level="project" />
+    <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
     <orderEntry type="library" name="Maven: com.atomikos:transactions-jdbc:3.7.0" level="project" />
     <orderEntry type="library" name="Maven: com.atomikos:transactions-jta:3.7.0" level="project" />
     <orderEntry type="library" name="Maven: com.atomikos:transactions:3.7.0" level="project" />
@@ -56,16 +63,13 @@
     <orderEntry type="library" name="Maven: com.atomikos:atomikos-util:3.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxws:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: xml-resolver:xml-resolver:1.2" level="project" />
-    <orderEntry type="library" name="Maven: asm:asm:2.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-api:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-common-utilities:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ws.commons.schema:XmlSchema:1.4.5" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.neethi:neethi:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-common-schemas:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-core:2.2.9" level="project" />
