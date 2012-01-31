@@ -42,6 +42,9 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ksa-core" />
+  </component>
   <component name="IdProvider" IDEtalkID="E7294B2E839222E60827EF57A05B4DDC" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />

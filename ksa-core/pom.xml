@@ -19,7 +19,7 @@
 	</parent>
 
 	<groupId>com.sigmasys.kuali.ksa.core</groupId>
-	<artifactId>ksa-war</artifactId>
+	<artifactId>ksa</artifactId>
 	<name>KSA webapp</name>
 
 	<version>1.0.0-SNAPSHOT</version>
