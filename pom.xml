@@ -116,6 +116,13 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springunit</groupId>
+            <artifactId>springunit</artifactId>
+            <version>0.6</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <artifactId>servlet-api</artifactId>
@@ -171,7 +178,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

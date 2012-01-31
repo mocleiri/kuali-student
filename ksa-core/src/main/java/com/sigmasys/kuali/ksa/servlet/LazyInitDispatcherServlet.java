@@ -16,9 +16,7 @@ import java.util.Map;
 
 /**
  * LazyInitDispatcherServlet.
- * User: ivanovm
- * Date: Apr 13, 2010
- * Time: 4:17:31 PM
+ * User: Michael Ivanov
  */
 @SuppressWarnings("serial")
 public class LazyInitDispatcherServlet extends DispatcherServlet {
