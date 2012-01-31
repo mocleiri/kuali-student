@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <!-- Default page to serve -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/META-INF/ksa-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.sigmasys.kuali.ksa.servlet.WebappContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.sigmasys.kuali.ksa.servlet.RequestContextListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>springDispatcher</servlet-name>
+        <servlet-class>com.sigmasys.kuali.ksa.servlet.LazyInitDispatcherServlet</servlet-class>
+        <!--  Tell this servlet to use ROOT spring context -->
+        <init-param>
+            <param-name>contextAttribute</param-name>
+            <param-value>org.springframework.web.context.WebApplicationContext.ROOT</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>*.service</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>*.webservice</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>/command</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>coreFilter</filter-name>
+        <filter-class>com.sigmasys.kuali.ksa.servlet.CoreFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>coreFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    
+</web-app>
