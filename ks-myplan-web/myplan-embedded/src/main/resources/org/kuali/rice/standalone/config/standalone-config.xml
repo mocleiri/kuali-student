@@ -80,6 +80,8 @@
 
     <param name="ks.myplan.doDataLoad">false</param>
 
+    <param name="ks.myplan.externalizable.images.url">/myplan-embedded-dev/ks-myplan/images/</param>
+
     <!-- MyPlan properties file containin Error Messages -->
     <param name="rice.struts.message.resources" override="true">${rice.struts.message.resources},org.kuali.student.myplan.KSMyPlan-ApplicationResources</param>
 
