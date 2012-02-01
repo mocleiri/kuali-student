@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-lazy-init="true">
+
+	<!-- Configure KSA-specific implementations of Rice services/beans here -->
+	<bean id="riceConfigurer" class="org.kuali.rice.core.config.RiceConfigurer">
+		<property name="dataSource" ref="riceDataSource" />
+		<property name="serverDataSource" ref="riceDataSource" />
+		<property name="transactionManager" ref="atomikosTransactionManager" />
+		<property name="userTransaction" ref="atomikosTransactionManager" />
+		<property name="serviceNamespace" value="rice"/>
+		<!-- property name="ksbConfigurer">
+			<bean class="org.kuali.rice.ksb.messaging.config.KSBConfigurer">
+				<property name="serviceServletUrl" value="${serviceServletUrl}" />
+			</bean>
+		</property -->
+		<property name="kewConfigurer">
+			<bean class="org.kuali.rice.kew.config.KEWConfigurer">
+				<property name="clientProtocol" value="local" />
+			</bean>
+		</property>
+		<property name="knsConfigurer">
+			<bean class="org.kuali.rice.kns.config.KNSConfigurer" />
+		</property>
+		<property name="kimConfigurer">
+			<bean class="org.kuali.rice.kim.config.KIMConfigurer" />
+		</property>
+		<property name="kcbConfigurer">
+			<bean class="org.kuali.rice.kcb.config.KCBConfigurer" />
+		</property>
+		<property name="additionalSpringFiles">
+			<list>
+				<value>classpath:/META-INF/ksa-context.xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+</beans>
