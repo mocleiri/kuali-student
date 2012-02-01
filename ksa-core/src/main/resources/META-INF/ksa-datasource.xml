@@ -6,11 +6,6 @@
        default-lazy-init="true">
 
 
-    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
-          destroy-method="close">
-        <property name="forceShutdown" value="true"/>
-    </bean>
-
     <!-- XA data source definitions -->
     <bean id="xaDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" abstract="true">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -27,11 +22,11 @@
         <property name="password" value="KSA"/>
     </bean>
 
-    <bean id="kualiDataSource" class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean" parent="xaDataSource">
-        <property name="uniqueResourceName" value="kualiDataSource"/>
+    <bean id="riceDataSource" class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean" parent="xaDataSource">
+        <property name="uniqueResourceName" value="riceDataSource"/>
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
-        <property name="user" value="KUALI"/>
-        <property name="password" value="KUALI"/>
+        <property name="user" value="RICE"/>
+        <property name="password" value="RICE"/>
     </bean>
 
 
@@ -43,8 +38,8 @@
                 <entry key="java:comp/UserTransaction" value-ref="atomikosTransactionManager"/>
                 <entry key="javax.transaction.TransactionManager" value-ref="atomikosTransactionManager"/>
                 <entry key="javax.transaction.UserTransaction" value-ref="atomikosTransactionManager"/>
-                <entry key="CoreDS" value-ref="ksaDataSource"/>
-                <entry key="SonarDS" value-ref="kualiDataSource"/>
+                <entry key="KsaDS" value-ref="ksaDataSource"/>
+                <entry key="RiceDS" value-ref="riceDataSource"/>
             </map>
         </property>
     </bean>
