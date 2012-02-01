@@ -1,0 +1,185 @@
+body {
+    font-size: 12px;
+    line-height: 1em;
+    font-family: arial,helvetica,clean,sans-serif;
+}
+.myplan a,
+.myplan a:hover,
+.myplan a:active,
+.myplan a:focus {
+    outline: 0;
+    white-space: normal;
+    overflow:  auto;
+    color:#1d8fd9;
+}
+
+#view_div {
+	margin:0 auto;
+	padding: 10px 0 10px 10px;
+	width: 950px;
+    /*min-width: 940px;
+    max-width: 1440px;*/
+}
+#viewfooter_div {
+    clear: both;
+}
+.myplan .kr-breadcrumbs,
+.myplan #viewpage_div,
+.myplan #viewheader_div,
+.myplan #viewlayout_div {
+	margin: 0;
+	padding: 0;
+    width: auto;
+}
+.myplan .kr-breadcrumbs {
+    margin: 0 0 1em 0;
+}
+.myplan .summary {
+	max-width: none;
+    margin: 0 0 10px 0;
+    display: block;
+}
+.myplan .boxLayoutVerticalItem {
+	margin: 0 0 10px 0;
+    padding: 0;
+}
+.myplan .boxLayoutHorizontalItem {
+	margin: 0 10px 0 0;
+    padding: 0;
+}
+
+/* My Stuff */
+#mystuff_panel_div {
+	margin: 0;
+    border: solid 1px #ccc;
+}
+#mystuff_panel_div .kr-section-subhead {
+    display:block;
+    text-align:center;
+    background: #ccc;
+    font-weight: normal;
+    padding: 5px;
+    line-height: 1.5em;
+}
+#mystuff_panel_div .boxLayoutVerticalItem {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Watch List */
+#watch_list_div {
+    border-bottom: solid 1px #ccc;
+}
+#watch_list_div .kr-section-subhead,
+#watch_list_empty_div .kr-section-subhead
+{
+    background: #e4e4e4;
+}
+#saved_courses_summary_list_empty_div .boxLayoutVerticalItem,
+#saved_courses_summary_list_empty_div .boxLayoutHorizontalItem {
+    margin:0;
+    padding: 0;
+    float: none;
+    display: inline;
+}
+#saved_courses_summary_list_empty_div>div>div>span {
+    text-align: center;
+    padding: 3em 6px;
+    line-height: 1.5em;
+    display: block;
+    overflow: auto;
+}
+#saved_courses_summary_list_empty_div span img {
+    vertical-align: text-bottom;
+}
+#saved_courses_summary_group ul,
+#saved_courses_summary_group ul li .boxLayoutVerticalItem,
+#saved_courses_summary_group ul li .boxLayoutHorizontalItem {
+    margin:0;
+    padding: 0;
+}
+#saved_courses_summary_group ul li {
+    border-bottom:dotted 1px #aaaaaa;
+    padding:6px;
+    display: block;
+    clear:both;
+    cursor: pointer;
+    font-size: 95%;
+}
+#saved_courses_summary_group ul li .boxLayoutHorizontalItem span {
+    float: left;
+    margin-right: 0.4em;
+}
+#saved_courses_summary_group ul li .boxLayoutHorizontalItem span.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+span.link_viewall {
+    display:block;
+    text-align:right;
+    padding:6px;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+}
+.ellipsis.multiline {
+    white-space: normal;
+}
+button.kr-button-primary {
+	background-image: -moz-linear-gradient(top, #8bcefd, #007dd6);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #8bcefd), color-stop(1, #007dd6));
+    background-image: -o-linear-gradient(top,rgba(139,206,253,1),rgba(0,125,214,1));    /* be nice to Opera */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8bcefd, endColorstr=#007dd6);  /* IE7 and older */
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#8bcefd, EndColorStr=#007dd6);  /*IE8 */
+    background: linear-gradient(top, rgba(139,206,253,1) 0%, rgba(0,125,214,1) 100%);  /* for the future */
+	background-color:#007dd6;
+	color: #fff;
+	text-shadow: none;
+	border: solid 1px #969696;
+	padding: 5px 20px;
+    margin: 0;
+    border-radius: 4px;
+    line-height: 1em;
+}
+
+.noMarginPadding>div>div>span>span.boxLayoutVerticalItem,
+.noMarginPadding>div>div>span>span.boxLayoutHorizontalItem {
+    margin: 0;
+    padding: 0;
+}
+
+/* Text styles */
+.fl-text-italic {
+    font-style: italic !important;
+}
+/* beginning of scrollbar */
+::-webkit-scrollbar{
+        width:8px;
+        height:8px;}
+
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment{
+        display:block;
+        height:0;
+        background-color:transparent;}
+
+::-webkit-scrollbar-track {
+		margin: 2px;}
+
+::-webkit-scrollbar-track-piece{
+        background-color:#eee;
+        -webkit-border-radius:8px;}
+
+::-webkit-scrollbar-thumb:vertical{
+        height:50px;background-color:#999;
+        -webkit-border-radius:8px;}
+
+::-webkit-scrollbar-thumb:horizontal{
+        width:50px;background-color:#999;
+        -webkit-border-radius:8px;}
+/* end of scrollbar */

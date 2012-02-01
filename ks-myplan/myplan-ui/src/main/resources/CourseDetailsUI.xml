@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!--
+     Copyright 2007-2009 The Kuali Foundation
+
+     Licensed under the Educational Community License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ecl2.php
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+    -->
+    <import resource="classpath:ks-base-dictionary.xml"/>
+
+
+    <bean id="CourseDetails" parent="CourseDetails-parentBean"/>
+    <bean id="CourseDetails-parentBean" abstract="true" parent="DataObjectEntry">
+        <property name="objectLabel" value="Course Details"/>
+        <property name="dataObjectClass" value="org.kuali.student.myplan.course.dataobject.CourseDetails"/>
+        <property name="titleAttribute" value="courseId"/>
+        <property name="attributes">
+            <list>
+                <ref bean="CourseDetails.courseId"/>
+                <ref bean="CourseDetails.code"/>
+                <ref bean="CourseDetails.courseTitle"/>
+                <ref bean="CourseDetails.credit"/>
+                <ref bean="CourseDetails.courseDescription"/>
+            </list>
+        </property>
+
+        <property name="collections">
+            <list>
+                <ref bean="CourseDetails.campusLocations"/>
+                <ref bean="CourseDetails.scheduledTerms"/>
+                <ref bean="CourseDetails.termsOffered"/>
+                <ref bean="CourseDetails.requisites"/>
+                <ref bean="CourseDetails.genEdRequirements"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="CourseDetails.courseId" parent="CourseDetails.courseId-parentBean"/>
+    <bean id="CourseDetails.courseId-parentBean" abstract="true" parent="BaseKuali.idField">
+        <property name="name" value="courseId"/>
+        <property name="dataType" value="STRING"/>
+        <property name="label" value="Course ID"/>
+        <property name="shortLabel" value="ID"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="100"/>
+        <property name="validCharactersConstraint">
+            <bean parent="NoWhitespacePatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="100"/>
+        </property>
+    </bean>
+
+    <bean id="CourseDetails.code" parent="CourseDetails.code-parentBean"/>
+    <bean id="CourseDetails.code-parentBean" abstract="true" parent="BaseKuali.string">
+        <property name="name" value="code"/>
+        <property name="dataType" value="STRING"/>
+        <property name="label" value="Course Code"/>
+        <property name="shortLabel" value="Course"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="10"/>
+        <property name="validCharactersConstraint">
+            <bean parent="AnyCharacterPatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="10"/>
+        </property>
+    </bean>
+
+    <bean id="CourseDetails.courseTitle" parent="CourseDetails.courseTitle-parentBean"/>
+    <bean id="CourseDetails.courseTitle-parentBean" abstract="true" parent="BaseKuali.string">
+        <property name="name" value="courseTitle"/>
+        <property name="dataType" value="STRING"/>
+        <property name="label" value="Course Title"/>
+        <property name="shortLabel" value="Course Title"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="40"/>
+        <property name="validCharactersConstraint">
+            <bean parent="AnyCharacterPatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="40"/>
+        </property>
+    </bean>
+
+    <bean id="CourseDetails.credit" parent="CourseDetails.credit-parentBean"/>
+    <bean id="CourseDetails.credit-parentBean" abstract="true" parent="BaseKuali.string">
+        <property name="name" value="credit"/>
+        <property name="dataType" value="STRING"/>
+        <property name="label" value="Course Credit"/>
+        <property name="shortLabel" value="Credit"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="20"/>
+        <property name="validCharactersConstraint">
+            <bean parent="AnyCharacterPatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="20"/>
+        </property>
+    </bean>
+
+    <bean id="CourseDetails.courseDescription" parent="CourseDetails.courseDescription-parentBean"/>
+    <bean id="CourseDetails.courseDescription-parentBean" abstract="true" parent="BaseKuali.stringLong">
+        <property name="name" value="courseDescription"/>
+        <property name="dataType" value="STRING"/>
+        <property name="label" value="Course Description"/>
+        <property name="shortLabel" value="Description"/>
+        <property name="forceUppercase" value="false"/>
+        <property name="maxLength" value="200"/>
+        <property name="validCharactersConstraint">
+            <bean parent="AnyCharacterPatternConstraint"/>
+        </property>
+        <property name="controlField">
+            <bean parent="TextControl" p:size="200"/>
+        </property>
+    </bean>
+
+    <bean id="CourseDetails.campusLocations" parent="CourseDetails.campusLocations-parentBean"/>
+    <bean id="CourseDetails.campusLocations-parentBean" abstract="true" parent="CollectionDefinition">
+        <property name="name" value="campusLocations"/>
+        <property name="shortLabel" value="Locations"/>
+        <property name="summary">
+            <value>Campus Locations</value>
+        </property>
+        <property name="label" value="Campus Locations"/>
+        <property name="elementLabel" value="Campus Locations"/>
+        <property name="minOccurs" value="0"/>
+        <property name="dataObjectClass" value="java.lang.String"/>
+    </bean>
+
+    <bean id="CourseDetails.scheduledTerms" parent="CourseDetails.scheduledTerms-parentBean"/>
+    <bean id="CourseDetails.scheduledTerms-parentBean" abstract="true" parent="CollectionDefinition">
+        <property name="name" value="scheduledTerms"/>
+        <property name="shortLabel" value="Scheduled Quarter"/>
+        <property name="summary">
+            <value>Scheduled Quarter</value>
+        </property>
+        <property name="label" value="Scheduled Quarter"/>
+        <property name="minOccurs" value="0"/>
+        <property name="dataObjectClass" value="java.lang.String"/>
+    </bean>
+
+    <bean id="CourseDetails.termsOffered" parent="CourseDetails.termsOffered-parentBean"/>
+    <bean id="CourseDetails.termsOffered-parentBean" abstract="true" parent="CollectionDefinition">
+        <property name="name" value="termsOffered"/>
+        <property name="shortLabel" value="Projected Quarter"/>
+        <property name="summary">
+            <value>Projected Quarter</value>
+        </property>
+        <property name="label" value="Projected Quarter"/>
+        <property name="minOccurs" value="0"/>
+        <property name="dataObjectClass" value="java.lang.String"/>
+    </bean>
+
+
+    <bean id="CourseDetails.requisites" parent="CourseDetails.requisites-parentBean"/>
+    <bean id="CourseDetails.requisites-parentBean" abstract="true" parent="CollectionDefinition">
+        <property name="name" value="requisites"/>
+        <property name="shortLabel" value="Course Requisites"/>
+        <property name="summary">
+            <value>Course Requisites</value>
+        </property>
+        <property name="label" value="Course Requisites"/>
+        <property name="elementLabel" value="Course Requisites"/>
+        <property name="minOccurs" value="0"/>
+        <property name="dataObjectClass" value="java.lang.String"/>
+    </bean>
+
+
+    <bean id="CourseDetails.genEdRequirements" parent="CourseDetails.genEdRequirements-parentBean"/>
+    <bean id="CourseDetails.genEdRequirements-parentBean" abstract="true" parent="CollectionDefinition">
+        <property name="name" value="genEdRequirements"/>
+        <property name="shortLabel" value="Gen Edu. Requirements"/>
+        <property name="summary">
+            <value>General Educational Requirements</value>
+        </property>
+        <property name="label" value="Gen Edu. Requirements"/>
+        <property name="elementLabel" value="Gen Edu. Requirements"/>
+        <property name="minOccurs" value="0"/>
+        <property name="dataObjectClass" value="java.lang.String"/>
+    </bean>
+
+
+    <bean id="CourseDetails-InquiryView" parent="KSInquiryView">
+        <property name="breadcrumbs.render" value="false"/>
+        <property name="page.header.render" value="false"/>
+        <!--<property name="title" value="@{dataObject.code} @{dataObject.courseTitle} (@{dataObject.credit})"/>-->
+        <property name="dataObjectClassName" value="org.kuali.student.myplan.course.dataobject.CourseDetails"/>
+        <property name="viewHelperServiceClassName"
+                  value="org.kuali.student.myplan.course.service.CourseDetailsInquiryViewHelperServiceImpl"/>
+        <property name="singlePageView" value="true"/>
+        <property name="styleClasses" value="myplan"/>
+        <property name="additionalCssFiles">
+            <list>
+                <value>/ks-myplan/css/course-search.css</value>
+            </list>
+        </property>
+        <property name="additionalScriptFiles">
+            <list>
+                <value>/ks-myplan/scripts/myplan.widgets.js</value>
+            </list>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Page" p:id="CourseDetails" p:title="@{dataObject.code} @{dataObject.courseTitle} (@{dataObject.credit})">
+                    <property name="items">
+						<list>
+                            <ref bean="course_details_page"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+        <property name="footer">
+            <bean parent="Footer"/>
+        </property>
+        <property name="header">
+            <ref bean="course_details_back_link"/>
+        </property>
+    </bean>
+
+    <bean id="course_details_back_link" parent="HeaderPage_NoActions">
+        <property name="items">
+            <bean parent="ActionLinkField" p:actionLabel="Back to Search Results" p:title="Back to Search Results" p:clientSideJs="history.go(-1)" p:styleClasses="link_back" />
+        </property>
+    </bean>
+
+    <!-- Layout for Course Search Form Page -->
+    <bean id="course_details_page" parent="Group"
+          p:layoutManager.orientation="HORIZONTAL">
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="styleClasses" value=""/>
+        <property name="items">
+            <list>
+                <ref bean="course_details_panel"/>
+                <ref bean="mystuff_panel"/>
+            </list>
+        </property>
+    </bean>
+    <!--<bean id="mystuff_panel_temp" parent="Group" p:title="YOUR STUFF (TBD)">
+        <property name="disclosure.render" value="false"/>
+        <property name="styleClasses" value="fl-container-200 fl-force-left"/>
+        <property name="items">
+            <list>
+
+            </list>
+        </property>
+    </bean>-->
+
+    <bean id="course_details_panel" parent="Group">
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="styleClasses" value="fl-container-700"/>
+        <property name="items">
+            <list>
+               <!-- <bean parent="MessageField" p:messageText="@{dataObject.code} @{dataObject.courseTitle} (@{dataObject.credit})"/>-->
+                <ref bean="course_details_addtoplan"/>
+                <ref bean="course_details_overview"/>
+                <!-- <ref bean="course_details_time_schedule"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_details_addtoplan" parent="Group"
+          p:layoutManager.orientation="HORIZONTAL">
+        <property name="disclosure.render" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="ActionField"
+                      p:actionLabel="Add this Course"
+                      p:clientSideJs="alert('This course has been added successfully');"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="course_details_overview" parent="GroupSectionGridLayout">
+        <property name="layoutManager.numberOfColumns" value="2"/>
+        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+        <property name="errorsField.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="DataField" p:propertyName="courseDescription" p:label="Course Description"/>
+
+                <bean parent="FieldGroup" p:label="Course Requisites">
+                    <property name="group.layoutManager.orientation" value="VERTICAL"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="DataField" p:propertyName="requisites" p:labelField.render="false" p:escapeHtmlInPropertyValue="false" p:styleClasses="vertical">
+                                <property name="formatter" ref="data_list_formatter"/>
+                                <property name="render" value="@{dataObject.requisites.size() gt 0 ? 'true' : 'false'}"/>
+                            </bean>
+                            <bean parent="MessageField" p:messageText="None" p:render="@{dataObject.requisites.size() gt 0 ? 'false' : 'true'}"/>
+                            <bean parent="FieldGroup" p:labelField.render="false" p:styleClasses="source">
+                                <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="MessageField" p:messageText="(Source:"/>
+                                        <bean parent="LinkField" p:linkLabel="Course Catalog" p:hrefText="http://www.washington.edu/students/crscat/"
+                                              p:title="Course Catalog" p:target="" p:labelField.render="false"/>
+                                        <bean parent="MessageField" p:messageText=")"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+
+                <bean parent="FieldGroup" p:label="Quarters">
+                    <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                    <property name="group.errorsField.render" value="false"/>
+                    <property name="group.header.render" value="false"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="DataField" p:propertyName="scheduledTerms" p:labelField.render="false" p:styleClasses="icon" >
+                                <property name="formatter" ref="scheduled_terms_formatter"/>
+                            </bean>
+                            <bean parent="FieldGroup" p:labelField.render="false" p:styleClasses="source">
+                                <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                                <property name="group.errorsField.render" value="false"/>
+                                <property name="group.header.render" value="false"/>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="MessageField" p:messageText="(Source:"/>
+                                        <bean parent="LinkField" p:linkLabel="Time Schedule" p:hrefText="http://www.washington.edu/students/timeschd/@{dataObject.campusLocations.contains('Seattle') ? '' : dataObject.campusLocations.get(0).substring(0,1) + '/' } "
+                                              p:title="Time Schedule" p:target="" p:labelField.render="false"/>
+                                        <bean parent="MessageField" p:messageText=")"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+
+                <bean parent="FieldGroup" p:label="">
+                    <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                    <property name="group.errorsField.render" value="false"/>
+                    <property name="group.header.render" value="false"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="MessageField" p:messageText="@{dataObject.termsOffered.size() eq 0 ? 'No projected quarter information is available' : 'Projected to be offered in '}"/>
+                            <bean parent="DataField" p:propertyName="termsOffered" p:labelField.render="false" p:styleClasses="horizontal">
+                                <property name="formatter" ref="data_list_formatter"/>
+                            </bean>
+                            <bean parent="MessageField" p:messageText="@{dataObject.termsOffered.size() eq 0 ? '' : 'quarters'}"/>
+                            <bean parent="FieldGroup" p:labelField.render="false" p:styleClasses="source">
+                                <property name="group.layoutManager.orientation" value="HORIZONTAL"/>
+                                <property name="group.errorsField.render" value="false"/>
+                                <property name="group.header.render" value="false"/>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="MessageField" p:messageText="(Source:"/>
+                                        <bean parent="LinkField" p:linkLabel="Course Catalog" p:hrefText="http://www.washington.edu/students/crscat/"
+                                              p:title="Course Catalog" p:target="" p:labelField.render="false"/>
+                                        <bean parent="MessageField" p:messageText=")"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+
+                <bean parent="DataField" p:propertyName="credit" p:label="Credits"/>
+
+                <bean parent="DataField" p:propertyName="genEdRequirements" p:label="General Edu. Requirements"
+                      p:styleClasses="vertical">
+                    <property name="formatter" ref="data_list_formatter"/>
+                    <property name="render" value="@{dataObject.genEdRequirements.size() gt 0 ? 'true' : 'false'}"/>
+                </bean>
+                <bean parent="MessageField" p:label="General Edu. Requirements" p:messageText="None" p:labelField.render="true"
+                      p:render="@{dataObject.genEdRequirements.size() gt 0 ? 'false' : 'true'}"/>
+
+
+                <bean parent="DataField" p:propertyName="campusLocations" p:label="Campus" p:styleClasses="horizontal">
+                    <property name="formatter" ref="data_list_formatter"/>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
+
+    <!-- Uncomment after fixing the time schedule link issue -->
+    <!--
+    <bean id="course_details_time_schedule" parent="CollectionGroup">
+        <property name="disclosure.render" value="false"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.footer.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
+        <property name="header.render" value="false"/>
+        <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.CourseDetails"/>
+        <property name="propertyName" value="scheduledTerms"/>
+        <property name="items">
+            <list>
+                <bean parent="LinkField" p:linkLabel="&gt;&gt; See full details about this course in &lt;strong&gt;@{#line} Time Schedule&lt;/strong&gt;"
+                      p:title="See full details about this course in @{#line} Time Schedule"
+                      p:hrefText="http://www.washington.edu/students/timeschd/" p:labelField.render="false" p:target=""/>
+            </list>
+        </property>
+    </bean>
+    -->
+
+    <bean id="data_list_formatter" class="org.kuali.student.myplan.course.util.CollectionListFormatter">
+        <property name="emptyListMessage" value="None"/>
+    </bean>
+
+    <bean id="scheduled_terms_formatter" class="edu.uw.kuali.student.myplan.util.ScheduledTermsFormatter"/>
+
+</beans>
