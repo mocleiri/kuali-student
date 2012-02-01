@@ -23,6 +23,8 @@ import com.sigmasys.kuali.ksa.util.RequestUtils;
 @Transactional
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public abstract class AbstractServiceTest implements ApplicationContextAware {
+	
+	public static final String TEST_USER_ID = "guest";
 
     protected Log logger = LogFactory.getLog(getClass());
 
@@ -31,8 +33,10 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
     public AbstractServiceTest() {
         if (isWebContext) {
             // Setting up the test HTTP environment
+        	MockHttpServletRequest request = new MockHttpServletRequest();
+        	request.setRemoteUser(TEST_USER_ID);
             RequestUtils.setServletContext(new MockServletContext());
-            RequestUtils.setThreadRequest(new MockHttpServletRequest());
+            RequestUtils.setThreadRequest(request);
             RequestUtils.setThreadResponse(new MockHttpServletResponse());
         }
     }
@@ -48,7 +52,7 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
 
         if (isWebContext) {
             UserSessionManager sessionManager = ContextUtils.getBean("userSessionManager");
-            sessionManager.createSession(RequestUtils.getThreadRequest(), RequestUtils.getThreadResponse(), "guest");
+            sessionManager.createSession(RequestUtils.getThreadRequest(), RequestUtils.getThreadResponse(), TEST_USER_ID);
         }
     }
 
