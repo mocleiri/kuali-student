@@ -25,7 +25,7 @@ public class TestAtpDao extends AbstractTransactionalDaoTest {
     public void testGetAtp() {
         AtpEntity atp = dao.find("testAtpId1");
         assertNotNull(atp);
-        assertEquals("testAtp1", atp.getNames().get(0));         
+        assertEquals("testAtp1", atp.getNames().get(0).getName());         
         assertEquals("Desc 101", atp.getDescr().getPlain());   
     }
     
@@ -49,7 +49,7 @@ public class TestAtpDao extends AbstractTransactionalDaoTest {
         assertNotNull(atp.getId());
         
         AtpEntity atp2 = dao.find(atp.getId());
-        assertEquals("atpTest", atp2.getNames().get(0));         
+        assertEquals("atpTest", atp2.getNames().get(0).getName());         
         assertEquals("plain", atp2.getDescr().getPlain());   
         assertEquals(1, atp2.getAttributes().size());
         assertEquals("kuali.lu.type.credential.Baccalaureate", atp2.getAttributes().get(0).getValue());

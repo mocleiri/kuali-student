@@ -31,7 +31,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HolidayInfo", propOrder = { 
-                "id", "typeKey", "stateKey", "name", "descr", 
+                "id", "typeKey", "stateKey", "names", "descr", 
                 "isInstructionalDay", "isAllDay", "isDateRange",
 		"startDate", "endDate", 
                 "meta", "attributes", "_futureElements" })

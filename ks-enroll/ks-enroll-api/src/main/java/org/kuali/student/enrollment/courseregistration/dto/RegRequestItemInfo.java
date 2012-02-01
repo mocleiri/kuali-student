@@ -18,7 +18,7 @@ import org.kuali.student.r2.common.infc.RichText;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RegRequestItemInfo", propOrder = {"id", "name", "descr", "typeKey", "stateKey", "studentId",
+@XmlType(name = "RegRequestItemInfo", propOrder = {"id", "names", "descr", "typeKey", "stateKey", "studentId",
         "newRegGroupId", "existingRegGroupId", "okToWaitlist", "okToHoldList", "gradingOptionKey", "creditOptionKey",
         "meta", "attributes", "_futureElements"})
 public class RegRequestItemInfo extends IdEntityInfo implements RegRequestItem, Serializable {

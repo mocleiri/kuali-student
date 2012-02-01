@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CampusCalendarInfo", propOrder = { "key", "typeKey",
-		"stateKey", "name", "descr", "startDate", "endDate", "location",
+		"stateKey", "names", "descr", "startDate", "endDate", "location",
 		"meta", "attributes", "_futureElements" })
 public class CampusCalendarInfo extends KeyEntityInfo implements
 		CampusCalendar, Serializable {

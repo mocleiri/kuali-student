@@ -25,6 +25,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.student.enrollment.lpr.dto.LprRosterEntryInfo;
@@ -307,7 +308,7 @@ public class TestLuiPersonRelationServiceImpl {
         assertEquals(info.getDescr().getPlain(), LPR_ROSTER_DESC);
         assertEquals(info.getCheckInFrequency().getAtpDurationTypeKey(), ATP_DURATION_KEY);
         assertEquals(info.getCheckInFrequency().getTimeQuantity().intValue(), TIME_QTY);
-        assertEquals(info.getNames().get(0), LPR_ROSTER_NAME);
+        assertEquals(info.getNames().get(0).getName(), LPR_ROSTER_NAME);
         assertEquals(info.getAssociatedLuiIds().size(), 1);
         assertEquals(info.getAssociatedLuiIds().get(0), LUI_ID);
 
@@ -385,6 +386,7 @@ public class TestLuiPersonRelationServiceImpl {
             lprId = lprServiceValidationDecorator.createLpr(PERSONID2, "Lui-1",
                     LuiPersonRelationServiceConstants.INSTRUCTOR_MAIN_TYPE_KEY, lprInfo, callContext);
             LuiPersonRelationInfo newInfo = lprServiceValidationDecorator.getLpr(lprId,callContext);
+            assertNotNull(newInfo);
             List<LuiPersonRelationInfo> info = lprServiceValidationDecorator.getLprsByPersonAndTypeForAtp(PERSONID2, "testTermId4",
                     LuiPersonRelationServiceConstants.INSTRUCTOR_MAIN_TYPE_KEY, callContext);
             assertNotNull(info);
@@ -456,7 +458,7 @@ public class TestLuiPersonRelationServiceImpl {
             fail(e.getMessage());
         }
         assertNotNull(lprTransactionInfo);
-        assertTrue(lprTransactionInfo.getNames().get(0).equals(updateName));
+        assertTrue(lprTransactionInfo.getNames().get(0).getName().equals(updateName));
         try {
             lprTransactionInfo = lprServiceValidationDecorator.getLprTransaction(lprTransactionInfo.getId(), callContext);
             assertNotNull(lprTransactionInfo);

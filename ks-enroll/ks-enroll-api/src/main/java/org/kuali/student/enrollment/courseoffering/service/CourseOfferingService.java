@@ -160,11 +160,12 @@ public interface CourseOfferingService {
      * @throws MissingParameterException missing courseId or termId
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
+     * @throws AlreadyExistsException 
      */
     public List<String> getCourseOfferingIdsByTermAndSubjectArea(@WebParam(name = "termId") String termId,
             @WebParam(name = "subjectArea") String subjectArea, @WebParam(name = "context") ContextInfo context)
             throws DoesNotExistException, InvalidParameterException, MissingParameterException,
-            OperationFailedException, PermissionDeniedException;
+            OperationFailedException, PermissionDeniedException, AlreadyExistsException;
 
     /**
      * Retrieve CourseOffering ids for a given term and instructor id

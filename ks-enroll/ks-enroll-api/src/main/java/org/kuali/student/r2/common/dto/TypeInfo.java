@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TypeInfo", propOrder = {"key", "name", "descr", "effectiveDate", "expirationDate", "refObjectURI", "attributes", "_futureElements"})
+@XmlType(name = "TypeInfo", propOrder = {"key", "names", "descr", "effectiveDate", "expirationDate", "refObjectURI", "attributes", "_futureElements"})
 public class TypeInfo extends HasAttributesInfo implements Type, Serializable {
 	
     @XmlAttribute

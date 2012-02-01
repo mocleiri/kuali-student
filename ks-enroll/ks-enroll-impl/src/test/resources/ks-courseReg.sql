@@ -87,17 +87,26 @@ INSERT INTO KSEN_LUI_RICH_TEXT (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('CO-2-Des
 INSERT INTO KSEN_LUI_RICH_TEXT (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('CO-3-Desc', '<p>CO Desc 301</p>', 'CO Desc 301',0)
 
 //Course offerings for elegibility checking
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, EFF_DT, EXP_DT, VER_NBR, ATP_ID) VALUES ('courseOffering1', 'Lui one',  'CLU-1', 'kuali.lui.type.course.offering', 'kuali.lui.state.draft', 'CO-1-Desc', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 0,'testAtpId1')
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, EFF_DT, EXP_DT, VER_NBR, ATP_ID) VALUES ('courseOffering2', 'Lui two',  'CLU-4', 'kuali.lui.type.course.offering', 'kuali.lui.state.draft', 'CO-2-Desc', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 0,'testAtpId1')
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, EFF_DT, EXP_DT, VER_NBR, ATP_ID) VALUES ('courseOffering3', 'Lui three', 'CLU-3', 'kuali.lui.type.course.offering', 'kuali.lui.state.draft', 'CO-3-Desc', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 0,'testAtpId1')
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, EFF_DT, EXP_DT, VER_NBR, ATP_ID) VALUES ('courseOffering1', 'CLU-1', 'kuali.lui.type.course.offering', 'kuali.lui.state.draft', 'CO-1-Desc', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 0,'testAtpId1')
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, EFF_DT, EXP_DT, VER_NBR, ATP_ID) VALUES ('courseOffering2', 'CLU-4', 'kuali.lui.type.course.offering', 'kuali.lui.state.draft', 'CO-2-Desc', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 0,'testAtpId1')
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, EFF_DT, EXP_DT, VER_NBR, ATP_ID) VALUES ('courseOffering3', 'CLU-3', 'kuali.lui.type.course.offering', 'kuali.lui.state.draft', 'CO-3-Desc', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 0,'testAtpId1')
+
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('courseOffering1.name', 'en', 'Lui one', '', 'courseOffering1')
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('courseOffering2.name', 'en', 'Lui two', '', 'courseOffering2')
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('courseOffering3.name', 'en', 'Lui three', '', 'courseOffering3')
+
 
 // LuiPersonRelationEntity
 INSERT INTO KSEN_LPR (ID, CREATEID, CREATETIME, UPDATEID, UPDATETIME, PERSONID, LUIID, COMMITMENTPERCENT, EFFECTIVEDATE, EXPIRATIONDATE, RELATION_TYPE_ID, RELATION_STATE_ID, VER_NBR) VALUES ('testStudent1Co1', 'admin', {ts '1900-01-01 00:00:00.0'}, 'admin', {ts '2000-01-01 00:00:00.0'}, 'testStudentId1', 'courseOffering1', .5, {ts '2000-01-01 00:00:00.0'}, {ts '2100-12-31 00:00:00.0'}, 'kuali.lpr.type.registrant', 'kuali.lpr.state.registered', 0)
 INSERT INTO KSEN_LPR (ID, CREATEID, CREATETIME, UPDATEID, UPDATETIME, PERSONID, LUIID, COMMITMENTPERCENT, EFFECTIVEDATE, EXPIRATIONDATE, RELATION_TYPE_ID, RELATION_STATE_ID, VER_NBR) VALUES ('testStudent2Co1', 'admin', {ts '1900-01-01 00:00:00.0'}, 'admin', {ts '2000-01-01 00:00:00.0'}, 'testStudentId2', 'courseOffering2', .5, {ts '2000-01-01 00:00:00.0'}, {ts '2100-12-31 00:00:00.0'}, 'kuali.lpr.type.registrant', 'kuali.lpr.state.registered', 0)
 
 //Learning Result Records
-INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-final-lecture', 'testStudent1Co1', 'student1 grade final lecture', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student1-grade-value-final-lecture', 0)
-INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-interim-lecture', 'testStudent1Co1', 'student1 grade interim lecture', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student1-grade-value-interim-lecture', 0)
+INSERT INTO KSEN_LRR(ID, LPR_ID, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-final-lecture', 'student1 grade final lecture', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student1-grade-value-final-lecture', 0)
+INSERT INTO KSEN_LRR(ID, LPR_ID, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-interim-lecture', 'student1 grade interim lecture', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student1-grade-value-interim-lecture', 0)
+--INSERT INTO KSEN_LRR_NAME (ID, LOCALE, NAME, OWNER) VALUES ('student1-grade-final-lecture.name', 'en', 'testStudent1Co1', 'student1-grade-final-lecture')
+--INSERT INTO KSEN_LRR_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('student1-grade-interim-lecture.name', 'en', 'testStudent1Co1', '', 'student1-grade-interim-lecture')
+
+
 --INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student2-grade-final-lecture', 'testStudent2Co1', 'student2 grade final lecture', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student2-grade-value-final-lecture', 0)
 --INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student2-grade-interim-lecture', 'testStudent2Co1', 'student2 grade interim lecture', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student2-grade-value-interim-lecture', 0)
 
@@ -133,11 +142,13 @@ INSERT INTO KSEN_LUI_RICH_TEXT (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('LUI-CO-1
 -- title of course offering:
 INSERT INTO KSEN_LUI_IDENT (ID, CD, DIVISION, SUFX_CD, LNG_NAME, SHRT_NAME, VER_NBR) VALUES ('LUI-CO-1-IDENT', 'CRSOFFER1', 'CRSOFFER', '1', 'Course Offering 1', 'Crs Offer 1', 1)
 -- actual course offering:
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, MAX_SEATS, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-CO-1', 'CO 1',  'CLU-1', 'kuali.lui.type.course.offering', 'kuali.lui.state.offered', 'LUI-CO-1-RT', 'LUI-CO-1-IDENT', 50, 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, MAX_SEATS, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-CO-1', 'CLU-1', 'kuali.lui.type.course.offering', 'kuali.lui.state.offered', 'LUI-CO-1-RT', 'LUI-CO-1-IDENT', 50, 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('LUI-CO-1.name', 'en', 'CO 1', '', 'LUI-CO-1')
 -- set grading method on course offering:  // undefined: kuali.resultComponent.grade.letter
 INSERT INTO KSEN_LUI_RV_GRP_RELTN (ID, LUI_ID, RV_GRP_ID) VALUES ('LUI-CO-1-RV-1', 'LUI-CO-1', 'kuali.resultComponent.grade.letter')
 -- final grade roster for course offering:
-INSERT INTO KSEN_LPR_ROSTER (ID, NAME, TYPE_ID, STATE_ID, MAX_CAPACITY, CHECK_IN_REQ, CREATETIME, VER_NBR) VALUES ('LPR-CO-1-GRADEROSTER', 'Course Offering 1 Grade Roster', 'kuali.lpr.roster.type.course.grade.final', 'kuali.lpr.roster.state.ready', 50, 0, {ts '2011-01-01 00:00:00.0'}, 1)
+INSERT INTO KSEN_LPR_ROSTER (ID, TYPE_ID, STATE_ID, MAX_CAPACITY, CHECK_IN_REQ, CREATETIME, VER_NBR) VALUES ('LPR-CO-1-GRADEROSTER', 'kuali.lpr.roster.type.course.grade.final', 'kuali.lpr.roster.state.ready', 50, 0, {ts '2011-01-01 00:00:00.0'}, 1)
+INSERT INTO KSEN_LPR_ROSTER_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('LPR-CO-1-GRADEROSTER.name', 'en', 'Course Offering 1 Grade Roster', '', 'LPR-CO-1-GRADEROSTER')
 -- associate grade roster with course offering
 INSERT INTO KSEN_LPRROSTER_LUI_RELTN (LUI_ID, LPRROSTER_ID) VALUES ('LUI-CO-1', 'LPR-CO-1-GRADEROSTER')
 
@@ -146,7 +157,8 @@ INSERT INTO KSEN_LUI_RICH_TEXT (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('LUI-ACT-
 -- title of activity:
 INSERT INTO KSEN_LUI_IDENT (ID, CD, DIVISION, SUFX_CD, LNG_NAME, SHRT_NAME, VER_NBR) VALUES ('LUI-ACT-1-IDENT', 'ACTIVITY1', 'ACTIVITY', '1', 'Activity 1', 'Actvty 1', 1)
 -- add activity to course offering:  // undefined: CLU-ACT-1
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, MAX_SEATS, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-ACT-1', 'Activity 1',  'CLU-ACT-1', 'kuali.lui.type.activity.offering.lecture', 'kuali.lui.state.offered', 'LUI-ACT-1-RT', 'LUI-ACT-1-IDENT', 20, 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, MAX_SEATS, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-ACT-1', 'CLU-ACT-1', 'kuali.lui.type.activity.offering.lecture', 'kuali.lui.state.offered', 'LUI-ACT-1-RT', 'LUI-ACT-1-IDENT', 20, 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('LUI-ACT-1.name', 'en', 'Activity 1', '', 'LUI-ACT-1')
 -- set meeting time for activity:
 INSERT INTO KSEN_LUI_MTG_SCHE (ID, LUI_ID, SPACE_ID, TM_PRD, CREATETIME ,VER_NBR) VALUES ('LUI-ACT-1-MEET', 'LUI-CO-1', '', 'WE,TH;1300,1400', {ts '2011-01-01 00:00:00.0'}, 1)
 -- assign instructor for activity:
@@ -159,7 +171,8 @@ INSERT INTO KSEN_LUI_RICH_TEXT (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('LUI-ACT-
 -- title of activity:
 INSERT INTO KSEN_LUI_IDENT (ID, CD, DIVISION, SUFX_CD, LNG_NAME, SHRT_NAME, VER_NBR) VALUES ('LUI-ACT-2-IDENT', 'ACTIVITY2', 'ACTIVITY', '2', 'Activity 2', 'Actvty 2', 1)
 -- add activity to course offering:  // undefined: CLU-ACT-1
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, MAX_SEATS, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-ACT-2', 'Activity 2',  'CLU-ACT-2', 'kuali.lui.type.activity.offering.lab', 'kuali.lui.state.offered', 'LUI-ACT-2-RT', 'LUI-ACT-2-IDENT', 20, 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, MAX_SEATS, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-ACT-2', 'CLU-ACT-2', 'kuali.lui.type.activity.offering.lab', 'kuali.lui.state.offered', 'LUI-ACT-2-RT', 'LUI-ACT-2-IDENT', 20, 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('LUI-ACT-2.name', 'en', 'Activity 2', '', 'LUI-ACT-2')
 -- set meeting time for activity:
 INSERT INTO KSEN_LUI_MTG_SCHE (ID, LUI_ID, SPACE_ID, TM_PRD, CREATETIME ,VER_NBR) VALUES ('LUI-ACT-2-MEET', 'LUI-ACT-2', '', 'MO,TU,FR;0930,1030', {ts '2011-01-01 00:00:00.0'}, 1)
 -- assign instructor for activity:
@@ -168,7 +181,8 @@ INSERT INTO KSEN_LPR (ID, LUIID, PERSONID, RELATION_STATE_ID, RELATION_TYPE_ID, 
 INSERT INTO KSEN_LUILUI_RELTN (ID, LUI_ID, RELATED_LUI_ID, STATE_ID, TYPE_ID, CREATETIME, VER_NBR) VALUES ('LUI-REL-ACT2-CO1', 'LUI-ACT-2', 'LUI-CO-1', 'kuali.lui.lui.relation.state.active', 'kuali.lui.lui.relation.type.registeredforvia', {ts '2011-01-01 00:00:00.0'}, 1)
 
 -- create registration group to hold course offering & activities:
-INSERT INTO KSEN_LUI (ID, NAME, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-RG-1', 'RegGroup 1', '', 'kuali.lui.type.registration.group', 'kuali.lui.state.offered', 'LUI-ACT-1-RT', 'LUI-ACT-1-IDENT', 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI (ID, CLU_ID, TYPE_ID, STATE_ID, RT_DESCR_ID, OFFIC_LUI_ID, ATP_ID, EFF_DT, EXP_DT, VER_NBR) VALUES ('LUI-RG-1', '', 'kuali.lui.type.registration.group', 'kuali.lui.state.offered', 'LUI-ACT-1-RT', 'LUI-ACT-1-IDENT', 'kuali.atp.type.winter', {ts '2011-01-01 00:00:00.0'}, {ts '2011-12-31 00:00:00.0'}, 1)
+INSERT INTO KSEN_LUI_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('LUI-RG-1.name', 'en', 'RegGroup 1', '', 'LUI-RG-1')
 -- associate registration group with course offering & activityies:
 INSERT INTO KSEN_LUILUI_RELTN (ID, LUI_ID, RELATED_LUI_ID, STATE_ID, TYPE_ID, CREATETIME, VER_NBR) VALUES ('LUI-REL-RG1-CO1', 'LUI-RG-1', 'LUI-CO-1', 'kuali.lui.lui.relation.state.active', 'kuali.lui.lui.relation.type.registeredforvia', {ts '2011-01-01 00:00:00.0'}, 1)
 INSERT INTO KSEN_LUILUI_RELTN (ID, LUI_ID, RELATED_LUI_ID, STATE_ID, TYPE_ID, CREATETIME, VER_NBR) VALUES ('LUI-REL-RG1-ACT1', 'LUI-RG-1', 'LUI-ACT-1', 'kuali.lui.lui.relation.state.active', 'kuali.lui.lui.relation.type.registeredforvia', {ts '2011-01-01 00:00:00.0'}, 1)

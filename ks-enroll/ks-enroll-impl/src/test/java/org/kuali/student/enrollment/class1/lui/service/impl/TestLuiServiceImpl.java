@@ -72,7 +72,7 @@ public class TestLuiServiceImpl {
 
             LuiInfo obj = luiServiceValidation.getLui("Lui-1", callContext);
             assertNotNull(obj);
-            assertEquals("Lui one", obj.getNames().get(0));
+            assertEquals("Lui one", obj.getNames().get(0).getName());
             assertEquals(LuiServiceConstants.LUI_DRAFT_STATE_KEY, obj.getStateKey());
             assertEquals(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY, obj.getTypeKey());
             assertEquals("Lui Desc 101", obj.getDescr().getPlain());
@@ -153,7 +153,7 @@ public class TestLuiServiceImpl {
         // try{
         created = luiServiceValidation.createLui("testCluId", "testAtpId1", info, callContext);
         assertNotNull(created);
-        assertEquals("Test lui one", created.getNames().get(0));
+        assertEquals("Test lui one", created.getNames().get(0).getName());
         assertEquals(LuiServiceConstants.LUI_DRAFT_STATE_KEY, created.getStateKey());
         assertEquals(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY, created.getTypeKey());
         assertEquals(Integer.valueOf(25), created.getMaximumEnrollment());
@@ -171,7 +171,7 @@ public class TestLuiServiceImpl {
         try {
             LuiInfo retrieved = luiServiceValidation.getLui(created.getId(), callContext);
             assertNotNull(retrieved);
-            assertEquals("Test lui one", retrieved.getNames().get(0));
+            assertEquals("Test lui one", retrieved.getNames().get(0).getName());
             assertEquals(LuiServiceConstants.LUI_DRAFT_STATE_KEY, retrieved.getStateKey());
             assertEquals(LuiServiceConstants.COURSE_OFFERING_TYPE_KEY, retrieved.getTypeKey());
             assertEquals(Integer.valueOf(25), retrieved.getMaximumEnrollment());
@@ -195,7 +195,7 @@ public class TestLuiServiceImpl {
         LuiInfo info = luiServiceValidation.getLui("Lui-1", callContext);
         assertNotNull(info);
         assertEquals("Lui-1", info.getId());
-        assertEquals("Lui one", info.getNames().get(0));
+        assertEquals("Lui one", info.getNames().get(0).getName());
 
         LuiInfo modified = new LuiInfo(info);
         modified.setStateKey(LuiServiceConstants.LUI_APROVED_STATE_KEY);

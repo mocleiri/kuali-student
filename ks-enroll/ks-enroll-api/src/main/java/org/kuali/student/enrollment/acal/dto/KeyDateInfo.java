@@ -31,7 +31,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KeyDateInfo", propOrder = { 
-                "id", "typeKey", "stateKey", "name", "descr", 
+                "id", "typeKey", "stateKey", "names", "descr", 
                  "isAllDay", "isDateRange", "startDate", "endDate",
 		"meta", "attributes", "_futureElements" })
 

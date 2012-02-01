@@ -25,7 +25,7 @@ public class TestRestrictionDao extends AbstractTransactionalDaoTest{
 		try{
 			RestrictionEntity obj = dao.find("Hold-Restriction-1");
 			assertNotNull(obj);
-	        assertEquals("Restriction one", obj.getNames().get(0)); 
+	        assertEquals("Restriction one", obj.getNames().get(0).getName()); 
 	        assertEquals(HoldServiceConstants.RESTRICTION_ACIVE_STATE_KEY, obj.getRestrictionState().getId()); 
 	        assertEquals(HoldServiceConstants.REGISTERATION_RESTRICTION_TYPE_KEY, obj.getRestrictionType().getId()); 
 	        assertEquals("Hold Desc 101", obj.getDescr().getPlain());  
@@ -48,7 +48,7 @@ public class TestRestrictionDao extends AbstractTransactionalDaoTest{
 	        dao.persist(obj);
 	        assertNotNull(obj.getId());
 	        RestrictionEntity obj2 = dao.find(obj.getId());
-	        assertEquals("Restriction Test", obj2.getNames().get(0));         
+	        assertEquals("Restriction Test", obj2.getNames().get(0).getName());         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 		}catch (Exception ex){
 			ex.printStackTrace();
@@ -66,7 +66,7 @@ public class TestRestrictionDao extends AbstractTransactionalDaoTest{
 	        dao.merge(existingEntity);
 
 	        RestrictionEntity obj2 = dao.find(existingEntity.getId());
-	        assertEquals("Restriction Updated", obj2.getNames().get(0));         
+	        assertEquals("Restriction Updated", obj2.getNames().get(0).getName());         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 		}catch (Exception ex){
 			ex.printStackTrace();

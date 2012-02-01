@@ -17,6 +17,9 @@ public class LprTransNameEntity extends NameEntity<LprTransactionEntity>{
     @JoinColumn(name = "OWNER")
     private LprTransactionEntity owner;
     
+    public LprTransNameEntity() {
+    }
+    
     public LprTransNameEntity(Name name) {
         super(name);
     }

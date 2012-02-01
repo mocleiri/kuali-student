@@ -41,7 +41,7 @@ import org.kuali.student.r2.lum.lu.infc.Revenue;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LuiInfo", propOrder = {"id", "typeKey", "stateKey", "name",
+@XmlType(name = "LuiInfo", propOrder = {"id", "typeKey", "stateKey", "names",
     "descr", "effectiveDate", "expirationDate",
     "officialIdentifier", "alternateIdentifiers", "cluId",
     "cluCluRelationIds", "atpId", "luiCodes",

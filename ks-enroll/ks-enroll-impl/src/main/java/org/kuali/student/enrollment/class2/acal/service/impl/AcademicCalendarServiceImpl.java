@@ -190,7 +190,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
     @Override
     @Transactional
     public AcademicCalendarInfo createAcademicCalendar(String academicCalendarTypeKey, AcademicCalendarInfo academicCalendarInfo, ContextInfo context) throws DataValidationErrorException,
-            InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+            InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, AlreadyExistsException {
 
         try {
             AtpInfo toCreate = acalAssembler.disassemble(academicCalendarInfo, context);
@@ -199,8 +199,6 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
             processAcalToCcalRelation(createdAtp.getId(), academicCalendarInfo.getHolidayCalendarIds(), context);
             return acalAssembler.assemble(createdAtp, context);
 
-        } catch (AlreadyExistsException e) {
-            throw new OperationFailedException(e.getMessage());
         } catch (AssemblyException ex) {
             throw new OperationFailedException(ex.getMessage());
         }
@@ -260,7 +258,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
     @Override
     public AcademicCalendarInfo copyAcademicCalendar(String academicCalendarId, Integer startYear, Integer endYear, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException,
-            MissingParameterException, OperationFailedException, PermissionDeniedException {
+            MissingParameterException, OperationFailedException, PermissionDeniedException, AlreadyExistsException {
 
         AcademicCalendarInfo templateAcademicCalendar = getAcademicCalendar(academicCalendarId, contextInfo);
         AcademicCalendarInfo academicCalendar = new AcademicCalendarInfo(templateAcademicCalendar);
@@ -270,7 +268,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
         academicCalendar.setNames(templateAcademicCalendar.getNames());
         academicCalendar.setDescr(new RichTextInfo(templateAcademicCalendar.getDescr()));
         academicCalendar.setTypeKey(templateAcademicCalendar.getTypeKey());
-        academicCalendar.setHolidayCalendarIds(copyHolidayCalendars(templateAcademicCalendar, contextInfo));
+        //academicCalendar.setHolidayCalendarIds(copyHolidayCalendars(templateAcademicCalendar, contextInfo));
 
         try {
             academicCalendar = createAcademicCalendar(academicCalendar.getId(), academicCalendar, contextInfo);
@@ -378,7 +376,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
     }
 
     private TermInfo copyTerm(String templateTermId, String newTermId, Map<String, KeyDateInfo> templateDatesToNewDates, ContextInfo context) throws InvalidParameterException,
-            MissingParameterException, DoesNotExistException, PermissionDeniedException, OperationFailedException {
+            MissingParameterException, DoesNotExistException, PermissionDeniedException, OperationFailedException, AlreadyExistsException {
         TermInfo templateTerm = getTerm(templateTermId, context);
 
         TermInfo term = new TermInfo(templateTerm);
@@ -494,6 +492,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
         List<HolidayCalendarInfo> holidayCalendarInfos = new ArrayList<HolidayCalendarInfo>();
         for (AtpInfo atp : atps) {
             try {
+            	System.out.println("inside atp loop: " + atp.getId() );
                 holidayCalendarInfos.add(holidayCalendarAssembler.assemble(atp, context));
             } catch (AssemblyException e) {
                 throw new OperationFailedException("AssemblyException : " + e.getMessage());
@@ -623,7 +622,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
     @Override
     public TermInfo getTerm(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
-            PermissionDeniedException {
+            PermissionDeniedException, AlreadyExistsException {
         AtpInfo atp = atpService.getAtp(termId, context);
         TermInfo term = null;
 
@@ -698,7 +697,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
     @Override
     public List<TermInfo> getIncludedTermsInTerm(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
-            PermissionDeniedException {
+            PermissionDeniedException, AlreadyExistsException {
 
         // check for a valid term
         TermInfo parentTerm = getTerm(termId, context);
@@ -727,7 +726,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
     @Override
     public List<TermInfo> getContainingTerms(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
-            PermissionDeniedException {
+            PermissionDeniedException, AlreadyExistsException {
 
         // check for a valid term
         TermInfo term = getTerm(termId, context);
@@ -766,27 +765,19 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
     @Override
     @Transactional
     public TermInfo createTerm(String termTypeKey, TermInfo termInfo, ContextInfo context) throws DataValidationErrorException, InvalidParameterException, MissingParameterException,
-            OperationFailedException, PermissionDeniedException {
+            OperationFailedException, PermissionDeniedException, AlreadyExistsException {
         AtpInfo atp;
-
+        TermInfo newTerm = null;
         if (checkTypeForTermType(termTypeKey, context)) {
             try {
                 atp = termAssembler.disassemble(termInfo, context);
+                AtpInfo newAtp = atpService.createAtp(atp.getId(), atp, context);
+                newTerm = termAssembler.assemble(newAtp, context);
             } catch (AssemblyException e) {
-                throw new OperationFailedException("AssemblyException : " + e.getMessage());
-            }
-
-            try {
-                AtpInfo newAtp = atpService.createAtp(termTypeKey, atp, context);
-                termInfo = termAssembler.assemble(newAtp, context);
-            } catch (AssemblyException e) {
-                throw new OperationFailedException("Error assembling term", e);
-            } catch (AlreadyExistsException e) {
-                e.printStackTrace();
+                throw new OperationFailedException("Assembly error", e);
             }
         }
-
-        return termInfo;
+        return newTerm;
     }
 
     @Override

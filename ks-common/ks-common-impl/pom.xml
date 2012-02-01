@@ -43,10 +43,6 @@
     <dependency>
       <groupId>org.kuali.rice</groupId>
       <artifactId>rice-kim-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kuali.rice</groupId>
-      <artifactId>rice-kim-api</artifactId>
       <version>${kuali.rice.version}</version>
     </dependency>
 

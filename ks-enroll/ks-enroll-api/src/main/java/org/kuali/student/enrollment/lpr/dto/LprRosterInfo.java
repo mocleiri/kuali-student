@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LprRosterInfo", propOrder = {"id", "typeKey", "stateKey", "name", "descr", "associatedLuiIds",
+@XmlType(name = "LprRosterInfo", propOrder = {"id", "typeKey", "stateKey", "names", "descr", "associatedLuiIds",
         "maximumCapacity", "checkInRequired", "checkInFrequency", "meta", "attributes", "_futureElements"})
         
 public class LprRosterInfo extends IdEntityInfo implements LprRoster, Serializable {

@@ -16,7 +16,7 @@ import org.kuali.student.r2.lum.lrc.dto.ResultValueRangeInfo;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GradeValuesGroupInfo", propOrder = {"key", "typeKey", "stateKey", "name", "descr", "resultValueInfos",
+@XmlType(name = "GradeValuesGroupInfo", propOrder = {"key", "typeKey", "stateKey", "names", "descr", "resultValueInfos",
         "resultValueRange", "meta", "attributes", "_futureElements"})
 public class GradeValuesGroupInfo extends KeyEntityInfo implements GradeValuesGroup {
 

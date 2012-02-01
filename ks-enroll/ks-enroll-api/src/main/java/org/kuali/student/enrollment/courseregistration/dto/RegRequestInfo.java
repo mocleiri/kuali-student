@@ -16,7 +16,7 @@ import org.kuali.student.r2.common.dto.IdEntityInfo;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RegRequestInfo", propOrder = {"id", "name", "descr", "typeKey", "stateKey", "requestorId", "termId",
+@XmlType(name = "RegRequestInfo", propOrder = {"id", "names", "descr", "typeKey", "stateKey", "requestorId", "termId",
         "regRequestItems", "meta", "attributes", "_futureElements"})
 public class RegRequestInfo extends IdEntityInfo implements RegRequest, Serializable {
 

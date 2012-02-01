@@ -120,7 +120,7 @@ public class CourseOfferingServiceAuthorizationDecorator extends CourseOfferingS
 			String termId, String subjectArea, ContextInfo context)
 			throws DoesNotExistException, InvalidParameterException,
 			MissingParameterException, OperationFailedException,
-			PermissionDeniedException {
+			PermissionDeniedException, AlreadyExistsException {
         if (null == context) {
             throw new MissingParameterException();
         }

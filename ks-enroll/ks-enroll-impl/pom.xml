@@ -88,11 +88,5 @@
 					<artifactId>ks-lum-impl</artifactId>
 					<version>${project.version}</version>
     		</dependency>
-            <dependency>
-                <groupId>org.kuali.student.enroll</groupId>
-                <artifactId>ks-enroll-api</artifactId>
-                <version>${project.version}</version>
-                <type>test-jar</type>
-            </dependency>
     </dependencies>
 </project>

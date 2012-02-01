@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResultScaleInfo", propOrder = {
-        "key", "typeKey", "stateKey", "name", "descr", 
+        "key", "typeKey", "stateKey", "names", "descr", 
         "resultValueRange", "effectiveDate", "expirationDate", 
         "meta", "attributes", "_futureElements"})
 

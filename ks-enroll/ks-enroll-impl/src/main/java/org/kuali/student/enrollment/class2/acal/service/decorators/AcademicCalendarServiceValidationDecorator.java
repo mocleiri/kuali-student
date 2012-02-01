@@ -55,7 +55,7 @@ public class AcademicCalendarServiceValidationDecorator extends AcademicCalendar
 
     @Override
     public AcademicCalendarInfo createAcademicCalendar(String academicCalendarKey, AcademicCalendarInfo academicCalendarInfo, ContextInfo context) throws DataValidationErrorException,
-            InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, DoesNotExistException, ReadOnlyException {
+            InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, DoesNotExistException, ReadOnlyException, AlreadyExistsException {
         _academicCalendarFullValidation(academicCalendarKey, academicCalendarInfo, context);
         return getNextDecorator().createAcademicCalendar(academicCalendarKey, academicCalendarInfo, context);
     }
@@ -135,7 +135,7 @@ public class AcademicCalendarServiceValidationDecorator extends AcademicCalendar
 
     @Override
     public TermInfo createTerm(String termId, TermInfo termInfo, ContextInfo context) throws DataValidationErrorException, InvalidParameterException,
-            MissingParameterException, OperationFailedException, PermissionDeniedException, DoesNotExistException, ReadOnlyException {
+            MissingParameterException, OperationFailedException, PermissionDeniedException, DoesNotExistException, ReadOnlyException, AlreadyExistsException {
         _termFullValidation(termInfo, context);
         return this.getNextDecorator().createTerm(termId, termInfo, context);
     }

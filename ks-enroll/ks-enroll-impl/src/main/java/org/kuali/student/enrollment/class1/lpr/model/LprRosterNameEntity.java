@@ -17,6 +17,9 @@ public class LprRosterNameEntity extends NameEntity<LprRosterEntity>{
     @JoinColumn(name = "OWNER")
     private LprRosterEntity owner;
     
+    public LprRosterNameEntity() {
+    }
+    
     public LprRosterNameEntity(Name name) {
         super(name);
     }

@@ -26,7 +26,7 @@ public class TestIssueDao extends AbstractTransactionalDaoTest {
     public void testGetIssue() {
         IssueEntity obj = dao.find("Hold-Issue-1");
         assertNotNull(obj);
-        assertEquals("Issue one", obj.getNames().get(0));
+        assertEquals("Issue one", obj.getNames().get(0).getName());
         assertEquals(HoldServiceConstants.ISSUE_ACTIVE_STATE_KEY, obj.getIssueState().getId());
         assertEquals(HoldServiceConstants.RESIDENCY_ISSUE_TYPE_KEY, obj.getIssueType().getId());
         assertEquals("Issue Desc 101", obj.getDescr().getPlain());
@@ -45,7 +45,7 @@ public class TestIssueDao extends AbstractTransactionalDaoTest {
         dao.persist(obj);
         assertNotNull(obj.getId());
         IssueEntity obj2 = dao.find(obj.getId());
-        assertEquals("Issue Test", obj2.getNames().get(0));
+        assertEquals("Issue Test", obj2.getNames().get(0).getName());
         assertEquals("plain", obj2.getDescr().getPlain());
     }
 
@@ -59,7 +59,7 @@ public class TestIssueDao extends AbstractTransactionalDaoTest {
         dao.merge(existingEntity);
 
         IssueEntity obj2 = dao.find(existingEntity.getId());
-        assertEquals("Issue Updated", obj2.getNames().get(0));
+        assertEquals("Issue Updated", obj2.getNames().get(0).getName());
         assertEquals("plain", obj2.getDescr().getPlain());
     }
 

@@ -36,7 +36,7 @@ import java.util.List;
  *      "https://test.kuali.org/confluence/display/KULSTU/loDisplayInfo+Structure"
  *      >LoDisplayInfo</>
  */
-@XmlType(name = "LoDisplayInfo", propOrder = {"id", "typeKey", "stateKey", "name", "descr", "loInfo", "loDisplayInfoList", "parentRelType", "parentLoRelationid", "loCategoryInfoList", "meta",
+@XmlType(name = "LoDisplayInfo", propOrder = {"id", "typeKey", "stateKey", "names", "descr", "loInfo", "loDisplayInfoList", "parentRelType", "parentLoRelationid", "loCategoryInfoList", "meta",
         "attributes", "_futureElements"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class LoDisplayInfo extends IdEntityInfo implements LoDisplay, Serializable {

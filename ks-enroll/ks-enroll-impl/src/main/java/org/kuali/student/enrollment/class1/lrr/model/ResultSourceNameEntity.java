@@ -16,6 +16,9 @@ public class ResultSourceNameEntity extends NameEntity<ResultSourceEntity>{
     @JoinColumn(name = "OWNER")
     private ResultSourceEntity owner;
     
+    public ResultSourceNameEntity() {
+    }
+    
     public ResultSourceNameEntity(Name name) {
         super(name);
     }

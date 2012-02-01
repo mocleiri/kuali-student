@@ -193,7 +193,7 @@ public class AcademicCalendarServiceAuthorizationDecorator
 
     @Override
     public AcademicCalendarInfo createAcademicCalendar(String academicCalendarTypeKey, AcademicCalendarInfo academicCalendarInfo, ContextInfo contextInfo) throws DataValidationErrorException,
-            DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
+            DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException, AlreadyExistsException {
         if (null == contextInfo) {
             throw new MissingParameterException();
         }
@@ -236,7 +236,7 @@ public class AcademicCalendarServiceAuthorizationDecorator
 
     @Override
     public AcademicCalendarInfo copyAcademicCalendar(String academicCalendarId, Integer startYear, Integer endYear, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException,
-            MissingParameterException, OperationFailedException, PermissionDeniedException {
+            MissingParameterException, OperationFailedException, PermissionDeniedException, AlreadyExistsException {
 
         if (null == contextInfo) {
             throw new MissingParameterException();
@@ -543,7 +543,7 @@ public class AcademicCalendarServiceAuthorizationDecorator
 
     @Override
     public TermInfo getTerm(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
-            PermissionDeniedException {
+            PermissionDeniedException, AlreadyExistsException {
         if (null == context) {
             throw new MissingParameterException();
         }
@@ -615,7 +615,7 @@ public class AcademicCalendarServiceAuthorizationDecorator
 
     @Override
     public List<TermInfo> getIncludedTermsInTerm(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
-            PermissionDeniedException {
+            PermissionDeniedException, AlreadyExistsException {
 
         if (null == context) {
             throw new MissingParameterException();
@@ -630,7 +630,7 @@ public class AcademicCalendarServiceAuthorizationDecorator
 
     @Override
     public List<TermInfo> getContainingTerms(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
-            PermissionDeniedException {
+            PermissionDeniedException, AlreadyExistsException {
         if (null == context) {
             throw new MissingParameterException();
         }
@@ -672,7 +672,7 @@ public class AcademicCalendarServiceAuthorizationDecorator
 
     @Override
     public TermInfo createTerm(String termTypeKey, TermInfo termInfo, ContextInfo context) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException,
-            MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
+            MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException, AlreadyExistsException {
         if (null == context) {
             throw new MissingParameterException();
         }
@@ -767,7 +767,18 @@ public class AcademicCalendarServiceAuthorizationDecorator
             throw new PermissionDeniedException();
         }
     }
-
+    @Override
+    public KeyDateInfo createKeyDate(String termId, String keyDateTypeKey, KeyDateInfo keyDateInfo, ContextInfo contextInfo) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
+    	if (null == contextInfo) {
+            throw new MissingParameterException();
+        }
+    	if (permissionService.isAuthorized(contextInfo.getPrincipalId(), ENRLLMENT_NAMESPACE, SERVICE_NAME + "getKeyDateType", null, null)) {
+            
+    	return getNextDecorator().createKeyDate(termId, keyDateTypeKey, keyDateInfo, contextInfo);
+    	} else {
+            throw new OperationFailedException("Permission Denied.");
+        }
+    }
     @Override
     public TypeInfo getKeyDateType(String keyDateTypeKey, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException {
         if (null == context) {

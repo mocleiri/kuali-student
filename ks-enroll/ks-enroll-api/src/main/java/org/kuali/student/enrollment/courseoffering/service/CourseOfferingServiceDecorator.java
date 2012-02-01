@@ -64,7 +64,7 @@ public class CourseOfferingServiceDecorator implements CourseOfferingService {
     @Override
     public List<String> getCourseOfferingIdsByTermAndSubjectArea(String termId, String subjectArea, ContextInfo context)
             throws DoesNotExistException, InvalidParameterException, MissingParameterException,
-            OperationFailedException, PermissionDeniedException {
+            OperationFailedException, PermissionDeniedException, AlreadyExistsException {
         return getNextDecorator().getCourseOfferingIdsByTermAndSubjectArea(termId, subjectArea, context);
     }
 

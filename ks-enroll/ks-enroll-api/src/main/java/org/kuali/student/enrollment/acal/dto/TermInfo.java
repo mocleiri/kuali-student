@@ -31,7 +31,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TermInfo", propOrder = {
-                "id", "typeKey", "stateKey", "name", "descr", 
+                "id", "typeKey", "stateKey", "names", "descr", 
                 "code", "startDate", "endDate", 
                 "meta", "attributes", "_futureElements"})
 

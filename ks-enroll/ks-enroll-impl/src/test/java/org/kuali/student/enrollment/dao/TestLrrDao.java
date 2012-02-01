@@ -80,7 +80,7 @@ public class TestLrrDao extends AbstractTransactionalDaoTest {
         lrr.getNames().add(new LrrNameEntity("en", "Updated LRR"));
         dao.persist(lrr);
         lrr = dao.find(id);
-        assertEquals("Name does not match after update.", "Updated LRR", lrr.getNames().get(0));
+        assertEquals("Name does not match after update.", "Updated LRR", lrr.getNames().get(0).getName());
         
         // Delete
         dao.remove(lrr);

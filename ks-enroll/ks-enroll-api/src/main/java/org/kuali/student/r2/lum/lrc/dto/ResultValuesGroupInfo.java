@@ -47,7 +47,7 @@ import org.w3c.dom.Element;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GradeValuesGroupInfo", propOrder = { 
-        "key", "typeKey", "stateKey", "name", "descr", "resultScaleKey", 
+        "key", "typeKey", "stateKey", "names", "descr", "resultScaleKey", 
         "resultValueKeys", "resultValueRange", "effectiveDate",
         "expirationDate", "meta", "attributes", "_futureElements" })
 

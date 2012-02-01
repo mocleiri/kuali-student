@@ -16,6 +16,9 @@ public class IssueNameEntity extends NameEntity<IssueEntity>{
     @JoinColumn(name = "OWNER")
     private IssueEntity owner;
     
+    public IssueNameEntity() {
+    }
+    
     public IssueNameEntity(Name name) {
         super(name);
     }

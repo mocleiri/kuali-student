@@ -16,6 +16,9 @@ public class LuiNameEntity extends NameEntity<LuiEntity>{
     @JoinColumn(name = "OWNER")
     private LuiEntity owner;
     
+    public LuiNameEntity() {
+    }
+    
     public LuiNameEntity(Name name) {
         super(name);
     }

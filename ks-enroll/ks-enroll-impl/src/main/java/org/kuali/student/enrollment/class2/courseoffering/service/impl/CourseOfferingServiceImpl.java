@@ -169,7 +169,7 @@ public class CourseOfferingServiceImpl implements CourseOfferingService{
 			String subjectArea, ContextInfo context)
 			throws DoesNotExistException, InvalidParameterException,
 			MissingParameterException, OperationFailedException,
-			PermissionDeniedException {
+			PermissionDeniedException, AlreadyExistsException {
 		// TODO UNHACK THIS HACK!!
 
         TermInfo term = acalService.getTerm(termId, context);

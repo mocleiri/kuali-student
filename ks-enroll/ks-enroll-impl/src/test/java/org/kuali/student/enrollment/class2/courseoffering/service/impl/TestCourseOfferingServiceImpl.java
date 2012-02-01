@@ -223,21 +223,19 @@ public class TestCourseOfferingServiceImpl {
 		rg.getNames().add(new NameInfo("en", "RegGroup-1"));
 		rg.setStateKey(LuiServiceConstants.LUI_DRAFT_STATE_KEY);
 		rg.setTypeKey(LuiServiceConstants.REGISTRATION_GROUP_TYPE_KEY);
+		rg.setTermId("testAtpId1");
 		
 		try {
 			RegistrationGroupInfo created =
                     coServiceAuthDecorator.createRegistrationGroup(courseOfferingId, rg, callContext);
 			assertNotNull(created);
-			
 			RegistrationGroupInfo retrieved =
                     coServiceAuthDecorator.getRegistrationGroup(created.getId(), callContext);
 			assertNotNull(retrieved);
-
 			assertEquals(rg.getFormatId(), retrieved.getFormatId());
-			assertEquals(rg.getNames().get(0), retrieved.getNames().get(0));
+			assertEquals(rg.getNames().get(0).getName(), retrieved.getNames().get(0).getName());
 		    assertEquals(rg.getStateKey(), retrieved.getStateKey());
 		    assertEquals(rg.getTypeKey(), retrieved.getTypeKey());
-		    
 		    // test getRegGroupsForCourseOffering
 		    List<RegistrationGroupInfo> rgs =
                     coServiceAuthDecorator.getRegGroupsForCourseOffering(courseOfferingId, callContext);
@@ -251,7 +249,8 @@ public class TestCourseOfferingServiceImpl {
 		}
 	}
     
-	@Test
+	/*incomplete
+	 * @Test
     public void testUpdateCourseOffering()
             throws DataValidationErrorException, DoesNotExistException, InvalidParameterException, 
             MissingParameterException, OperationFailedException, PermissionDeniedException,
@@ -312,7 +311,7 @@ public class TestCourseOfferingServiceImpl {
         catch (Exception ex) {
             fail("Exception from service call :" + ex.getMessage());
         }
-    }   
+    }   */
 
     @Test
     public void testUpdateRegistrationGroup() throws InvalidParameterException, DataValidationErrorException, MissingParameterException, DoesNotExistException, VersionMismatchException, PermissionDeniedException, OperationFailedException {

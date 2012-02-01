@@ -10,12 +10,15 @@ import org.kuali.student.r2.common.entity.NameEntity;
 import org.kuali.student.r2.common.infc.Name;
 
 @Entity
-@Table(name = "KSEN_LRR_RES_SOURCE_NAME")
+@Table(name = "KSEN_LRC_RES_SCALE_NAME")
 public class ResultScaleNameEntity extends NameEntity<ResultScaleEntity>{
 
     @ManyToOne
     @JoinColumn(name = "OWNER")
     private ResultScaleEntity owner;
+ 
+    public ResultScaleNameEntity() {
+    }
     
     public ResultScaleNameEntity(Name name) {
         super(name);

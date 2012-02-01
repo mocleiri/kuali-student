@@ -9,12 +9,15 @@ import org.kuali.student.r2.common.entity.NameEntity;
 import org.kuali.student.r2.common.infc.Name;
 
 @Entity
-@Table(name = "KSEN_LRR_RES_SOURCE_NAME")
+@Table(name = "KSEN_LRC_RES_VAL_GRP_NAME")
 public class ResultValuesGroupNameEntity extends NameEntity<ResultValuesGroupEntity>{
 
     @ManyToOne
     @JoinColumn(name = "OWNER")
     private ResultValuesGroupEntity owner;
+    
+    public ResultValuesGroupNameEntity() {
+    }
     
     public ResultValuesGroupNameEntity(Name name) {
         super(name);

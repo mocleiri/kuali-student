@@ -34,7 +34,7 @@ import org.kuali.student.r2.lum.lu.infc.LuCode;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LuCodeInfo", propOrder = { "id", "typeKey", "stateKey", 
-                "name", "descr", "value", 
+                "names", "descr", "value", 
                 "meta", "attributes", "_futureElements" })
 public class LuCodeInfo extends IdEntityInfo implements LuCode, Serializable {
 

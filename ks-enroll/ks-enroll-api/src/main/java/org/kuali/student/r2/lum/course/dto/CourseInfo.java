@@ -44,7 +44,7 @@ import org.w3c.dom.Element;
  * @author Kuali Student Team (sambitpa@kuali.org)
  */
 
-@XmlType(name = "CourseInfo", propOrder = {"id", "typeKey", "stateKey", "name", "descr", "code", "courseNumberSuffix", "level", "courseTitle", "transcriptTitle", "formats", "termsOffered",
+@XmlType(name = "CourseInfo", propOrder = {"id", "typeKey", "stateKey", "names", "descr", "code", "courseNumberSuffix", "level", "courseTitle", "transcriptTitle", "formats", "termsOffered",
         "duration", "joints", "crossListings", "variations", "subjectArea", "campusLocations", "outOfClassHours", "primaryInstructor", "instructors", "unitsDeployment", "feeJustification",
         "unitsContentOwner", "fees", "revenues", "expenditure", "courseSpecificLOs", "gradingOptionIds", "creditOptionKeys", "specialTopicsCourse", "pilotCourse", "startTerm", "endTerm",
         "effectiveDate", "expirationDate", "versionInfo", "meta", "attributes", "versionInfo", "_futureElements"})

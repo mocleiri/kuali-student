@@ -16,6 +16,10 @@ public class TypeTypeRelationNameEntity extends NameEntity<TypeTypeRelationEntit
     @JoinColumn(name = "OWNER")
     private TypeTypeRelationEntity owner;
 
+    public TypeTypeRelationNameEntity(){
+    	
+    }
+    
     public TypeTypeRelationNameEntity(Name name) {
         super(name);
     }

@@ -24,7 +24,7 @@ import org.kuali.student.r2.common.dto.IdEntityInfo;
 import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ResultSourceInfo", propOrder = {"id", "typeKey", "name", "descr", "articulationId",
+@XmlType(name = "ResultSourceInfo", propOrder = {"id", "typeKey", "names", "descr", "articulationId",
         "resultTransformationId", "meta", "attributes", "_futureElements"})
 public class ResultSourceInfo extends IdEntityInfo implements ResultSource, Serializable {
 

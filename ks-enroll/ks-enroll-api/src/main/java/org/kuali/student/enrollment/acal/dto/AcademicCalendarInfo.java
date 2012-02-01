@@ -32,7 +32,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AcademicCalendarInfo", propOrder = { 
-                "id", "typeKey", "stateKey", "name", "descr", 
+                "id", "typeKey", "stateKey", "names", "descr", 
                 "holidayCalendarIds", "adminOrgId", "startDate", "endDate", 
 		"meta", "attributes", "_futureElements" })
 

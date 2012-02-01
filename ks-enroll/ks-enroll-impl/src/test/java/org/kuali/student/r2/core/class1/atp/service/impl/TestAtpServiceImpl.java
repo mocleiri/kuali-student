@@ -63,7 +63,7 @@ public class TestAtpServiceImpl {
 			AtpInfo atpInfo = atpService.getAtp("testAtpId1", callContext);
 			assertNotNull(atpInfo);
 			assertEquals("testAtpId1", atpInfo.getId());
-			assertEquals("testAtp1", atpInfo.getNames().get(0));
+			assertEquals("testAtp1", atpInfo.getNames().get(0).getName());
 			assertEquals("Desc 101", atpInfo.getDescr().getPlain());
 			assertEquals("kuali.atp.state.Draft", atpInfo.getStateKey());
 			assertEquals("kuali.atp.type.AcademicCalendar", atpInfo.getTypeKey());
@@ -84,7 +84,8 @@ public class TestAtpServiceImpl {
         AtpInfo atpInfo = new AtpInfo();
         atpInfo.setId("newId");
         atpInfo.setNames(new ArrayList<NameInfo>());
-        atpInfo.getNames().add(new NameInfo("en", "newId"));
+        atpInfo.getNames().add(new NameInfo("en", "newIdEnglish"));
+        atpInfo.getNames().add(new NameInfo("za", "nuweIdAfrikaans"));
         atpInfo.setTypeKey("kuali.atp.type.AcademicCalendar");
         atpInfo.setStateKey("kuali.atp.state.Draft");
         atpInfo.setStartDate(Calendar.getInstance().getTime());
@@ -107,7 +108,14 @@ public class TestAtpServiceImpl {
 		AtpInfo fetched = atpService.getAtp("newId", callContext);
 		assertNotNull(fetched);
 		assertEquals("newId", fetched.getId());
-		assertEquals("newId", fetched.getNames().get(0));
+		for(NameInfo name : fetched.getNames()){
+			if (name.getLocale().equals("en")){
+				assertEquals("newIdEnglish", name.getName());
+			}else if (name.getLocale().equals("za")){
+				assertEquals("nuweIdAfrikaans", name.getName());
+			}
+		}		
+		
 		assertEquals("TestDesc1", fetched.getDescr().getPlain());
 		assertEquals("kuali.atp.state.Draft", fetched.getStateKey());
 		assertEquals("kuali.atp.type.AcademicCalendar", fetched.getTypeKey());
@@ -124,7 +132,7 @@ public class TestAtpServiceImpl {
             fail("Exception thrown when updating ATP: " + e.getMessage());
         }
         assertNotNull(updated);
-        assertEquals(atpNameOrig + "updated", updated.getNames().get(0));
+        assertEquals(atpNameOrig + "updated", updated.getNames().get(0).getName());
         
         // test delete
         atpInfo = atpService.getAtp("testDeleteAtpId1", callContext);
@@ -151,7 +159,7 @@ public class TestAtpServiceImpl {
             fail("Exception thrown when updating ATP: " + e.getMessage());
         }
         assertNotNull(updated);
-        assertEquals(atpNameOrig, updated.getNames().get(0));
+        assertEquals(atpNameOrig, updated.getNames().get(0).getName());
     }
     
     @Test
@@ -172,7 +180,7 @@ public class TestAtpServiceImpl {
             fail(e.getMessage());
         }
         assertNotNull(updated);
-        assertEquals(atpNameOrig + "updated", updated.getNames().get(0));
+        assertEquals(atpNameOrig + "updated", updated.getNames().get(0).getName());
     }
     
     @Test
@@ -268,7 +276,7 @@ public class TestAtpServiceImpl {
             MilestoneInfo created = atpService.createMilestone(milestone, callContext);
             assertNotNull(created);
             assertEquals("newId", created.getId());
-            assertEquals("testCreate", created.getNames().get(0));
+            assertEquals("testCreate", created.getNames().get(0).getName());
         } catch (ReadOnlyException e) {
             fail(e.getMessage());
         }
@@ -313,14 +321,14 @@ public class TestAtpServiceImpl {
             MilestoneInfo created = atpService.createMilestone(milestone, callContext);
             assertNotNull(created);
             assertEquals("newId2", created.getId());
-            assertEquals("testCreate", created.getNames().get(0));
+            assertEquals("testCreate", created.getNames().get(0).getName());
         } catch (ReadOnlyException e) {
             fail(e.getMessage());
         }
 
         MilestoneInfo updateData = atpService.getMilestone("newId2", callContext);
         
-        String updatedName = "updated " + updateData.getNames().get(0);
+        String updatedName = "updated " + updateData.getNames().get(0).getName();
         
         updateData.setNames(new ArrayList<NameInfo>());
         updateData.getNames().add(new NameInfo("en", updatedName));
@@ -333,13 +341,13 @@ public class TestAtpServiceImpl {
         }
         assertNotNull(updated);
         assertEquals(updated.getId(), "newId2");
-        assertEquals(updated.getNames().get(0), updatedName);
+        assertEquals(updated.getNames().get(0).getName(), updatedName);
         
         // now fetch the updated milestone fresh, and check fields
         updated = atpService.getMilestone("newId2", callContext);
         assertNotNull(updated);
         assertEquals(updated.getId(), "newId2");
-        assertEquals(updated.getNames().get(0), updatedName);
+        assertEquals(updated.getNames().get(0).getName(), updatedName);
         
         
         MilestoneInfo shouldBeNull = null;
@@ -386,7 +394,7 @@ public class TestAtpServiceImpl {
         MilestoneInfo milestoneInfo = atpService.getMilestone("testId", callContext);
         assertNotNull(milestoneInfo);
         assertEquals("testId", milestoneInfo.getId());
-        assertEquals("testId", milestoneInfo.getNames().get(0));
+        assertEquals("testId", milestoneInfo.getNames().get(0).getName());
         assertEquals("Desc 105", milestoneInfo.getDescr().getPlain());
         assertEquals(AtpServiceConstants.MILESTONE_DRAFT_STATE_KEY, milestoneInfo.getStateKey());
         assertEquals("kuali.atp.milestone.AdvanceRegistrationPeriod", milestoneInfo.getTypeKey());

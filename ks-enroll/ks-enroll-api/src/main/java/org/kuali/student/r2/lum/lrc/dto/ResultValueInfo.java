@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResultValueInfo", propOrder = {"key", "typeKey", "stateKey",
-        "name", "descr", "resultScaleKey", "numericValue", "value",
+        "names", "descr", "resultScaleKey", "numericValue", "value",
         "effectiveDate", "expirationDate", "meta", "attributes",
         "_futureElements"})
 public class ResultValueInfo extends KeyEntityInfo implements ResultValue,

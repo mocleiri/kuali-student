@@ -10,12 +10,16 @@ import org.kuali.student.r2.common.entity.NameEntity;
 import org.kuali.student.r2.common.infc.Name;
 
 @Entity
-@Table(name = "KSEN_LRR_NAME")
+@Table(name = "KSEN_LRC_RES_VALUE_NAME")
 public class ResultValueNameEntity extends NameEntity<ResultValueEntity>{
 
     @ManyToOne
     @JoinColumn(name = "OWNER")
     private ResultValueEntity owner;
+    
+    public ResultValueNameEntity() {
+
+    }
     
     public ResultValueNameEntity(Name name) {
         super(name);

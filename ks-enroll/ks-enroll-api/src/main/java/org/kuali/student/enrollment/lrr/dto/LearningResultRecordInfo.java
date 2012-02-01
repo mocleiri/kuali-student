@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
  * Information about the Learning Result Record Info.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LearningResultRecordInfo", propOrder = {"id", "name", "descr", "typeKey", "stateKey", "lprId", "resultValueKey", "resultSourceIdList", "meta", "attributes", "_futureElements"})
+@XmlType(name = "LearningResultRecordInfo", propOrder = {"id", "names", "descr", "typeKey", "stateKey", "lprId", "resultValueKey", "resultSourceIdList", "meta", "attributes", "_futureElements"})
 public class LearningResultRecordInfo extends IdEntityInfo implements LearningResultRecord, Serializable {
 
     private static final long serialVersionUID = 1L;

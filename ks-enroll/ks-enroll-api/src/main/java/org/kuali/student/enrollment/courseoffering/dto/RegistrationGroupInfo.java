@@ -30,7 +30,7 @@ import org.w3c.dom.Element;
     "isHonorsOffering", "maximumEnrollment", 
     "minimumEnrollment", "hasWaitlist", "waitlistTypeKey", "waitlistMaximum", 
     "isWaitlistCheckinRequired", "waitlistCheckinFrequency", "id", 
-    "typeKey", "stateKey", "name", "descr", "meta", "attributes", "_futureElements"})
+    "typeKey", "stateKey", "names", "descr", "meta", "attributes", "_futureElements"})
 public class RegistrationGroupInfo extends IdEntityInfo implements RegistrationGroup {
 
     private static final long serialVersionUID = 1L;

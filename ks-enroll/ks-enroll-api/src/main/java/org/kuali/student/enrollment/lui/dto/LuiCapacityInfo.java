@@ -35,7 +35,7 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LuiCapacityInfo", propOrder = { "id", "typeKey",
-                "stateKey", "name", "descr", "luiIds", "maximumSeatCount", 
+                "stateKey", "names", "descr", "luiIds", "maximumSeatCount", 
                 "processingOrder", "effectiveDate", "expirationDate", 
                 "meta", "attributes", "_futureElements" })
 

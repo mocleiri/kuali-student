@@ -16,6 +16,9 @@ public class LrrNameEntity extends NameEntity<LearningResultRecordEntity>{
     @JoinColumn(name = "OWNER")
     private LearningResultRecordEntity owner;
     
+    public LrrNameEntity() {
+    }
+    
     public LrrNameEntity(Name name) {
         super(name);
     }

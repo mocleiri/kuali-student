@@ -37,7 +37,7 @@ import org.w3c.dom.Element;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SeatPoolDefinitionInfo", propOrder = {"registrationGroupIds", "courseOfferingId", 
         "maximumSeatCount", "processingPriority", "capacityRestrictionRule",
-        "id", "typeKey", "stateKey", "name", "descr", "meta", "attributes", "_futureElements"})
+        "id", "typeKey", "stateKey", "names", "descr", "meta", "attributes", "_futureElements"})
 public class SeatPoolDefinitionInfo extends IdEntityInfo implements SeatPoolDefinition {
 
     private static final long serialVersionUID = 1L;

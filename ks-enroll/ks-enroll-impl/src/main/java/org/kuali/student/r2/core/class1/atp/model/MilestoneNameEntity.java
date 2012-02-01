@@ -16,6 +16,9 @@ public class MilestoneNameEntity extends NameEntity<MilestoneEntity>{
     @JoinColumn(name = "OWNER")
     private MilestoneEntity owner;
     
+    public MilestoneNameEntity(){
+    	
+    }
     public MilestoneNameEntity(Name name) {
         super(name);
     }

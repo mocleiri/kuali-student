@@ -25,7 +25,7 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 		try{
 			HoldEntity obj = dao.find("Hold-1");
 			assertNotNull(obj);
-	        assertEquals("Hold one", obj.getNames().get(0)); 
+	        assertEquals("Hold one", obj.getNames().get(0).getName()); 
 	        assertEquals(HoldServiceConstants.HOLD_ACTIVE_STATE_KEY, obj.getHoldState().getId()); 
 	        assertEquals(HoldServiceConstants.STUDENT_HOLD_TYPE_KEY, obj.getHoldType().getId()); 
 	        assertEquals("Hold Desc student", obj.getDescr().getPlain());  
@@ -49,7 +49,7 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 	        dao.persist(obj);
 	        assertNotNull(obj.getId());
 	        HoldEntity obj2 = dao.find(obj.getId());
-	        assertEquals("Hold Test", obj2.getNames().get(0));         
+	        assertEquals("Hold Test", obj2.getNames().get(0).getName());         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 	        assertEquals(HoldServiceConstants.HOLD_ACTIVE_STATE_KEY, obj2.getHoldState().getId()); 
 	        assertEquals(HoldServiceConstants.STUDENT_HOLD_TYPE_KEY, obj2.getHoldType().getId()); 
@@ -70,7 +70,7 @@ public class TestHoldDao extends AbstractTransactionalDaoTest{
 	        dao.merge(existingEntity);
 
 	        HoldEntity obj2 = dao.find(existingEntity.getId());
-	        assertEquals("Hold Updated", obj2.getNames().get(0));         
+	        assertEquals("Hold Updated", obj2.getNames().get(0).getName());         
 	        assertEquals("plain", obj2.getDescr().getPlain()); 
 		}catch (Exception ex){
 			ex.printStackTrace();

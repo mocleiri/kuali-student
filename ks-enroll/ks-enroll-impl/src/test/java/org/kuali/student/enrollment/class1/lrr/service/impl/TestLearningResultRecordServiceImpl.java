@@ -71,7 +71,7 @@ public class TestLearningResultRecordServiceImpl {
             assertNotNull("Result has no Result Source ID List.", lrr.getResultSourceIdList());
             assertFalse("Result has populated Result Source ID List.", lrr.getResultSourceIdList().size() > 0); // TODO change when added.
             assertNotNull("Result has no Result Value Key.", lrr.getResultValueKey());
-            assertNotNull("Result has no Name.", lrr.getNames().get(0));
+            assertNotNull("Result has no Name.", lrr.getNames().get(0).getName());
             assertNotNull("Result has no State Key.", lrr.getStateKey());
             assertNotNull("Result has no Type Key.", lrr.getTypeKey());
 

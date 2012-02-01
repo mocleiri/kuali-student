@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GradeRosterInfo", propOrder = {"gradeRosterEntryIds", "graderIds", "activityOfferingIds",
-        "courseOfferingId", "id", "typeKey", "stateKey", "name", "descr", "meta", "attributes", "_futureElements"})
+        "courseOfferingId", "id", "typeKey", "stateKey", "names", "descr", "meta", "attributes", "_futureElements"})
 public class GradeRosterInfo extends IdEntityInfo implements GradeRoster, Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -33,15 +33,20 @@ INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kua
 INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kuali.lrr.state.submitted', 'Submitted', 'kuali.lrr.course.final.grading.lifecycle', 'The result (grade) has been formally submitted', 0)
 INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kuali.lrr.state.accepted', 'Accepted', 'kuali.lrr.course.final.grading.lifecycle', 'The result (grade) has been vetted and is ready to be published to the student', 0)
 
-
-
 INSERT INTO KSEN_LPR (ID, VER_NBR, LUIID, PERSONID, COMMITMENTPERCENT, RELATION_STATE_ID, RELATION_TYPE_ID) VALUES ('student1', 0, 'Lui-1','testPersonId1', 1, 'kuali.lpr.state.registered', 'kuali.lpr.type.registrant')
 INSERT INTO KSEN_LPR (ID, VER_NBR, LUIID, PERSONID, COMMITMENTPERCENT, RELATION_STATE_ID, RELATION_TYPE_ID) VALUES ('student2', 0, 'Lui-1','testPersonId2', 1, 'kuali.lpr.state.registered', 'kuali.lpr.type.registrant')
 
 INSERT INTO KSEN_RICH_TEXT_T (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('grade-final-lecture-desc', '<p>Final Grade for Lecture</p>', 'Final Grade for Lecture', 0)
 INSERT INTO KSEN_RICH_TEXT_T (ID, FORMATTED, PLAIN, VER_NBR) VALUES ('grade-interim-lecture-desc', '<p>Interim Grade for Lecture</p>', 'Interim Grade for Lecture', 0)
-INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-final-lecture', 'student1', 'student1 grade final lecture', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student1-grade-value-final-lecture', 0)
-INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-interim-lecture', 'student1', 'student1 grade interim lecture', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student1-grade-value-interim-lecture', 0)
-INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student2-grade-final-lecture', 'student2', 'student2 grade final lecture', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student2-grade-value-final-lecture', 0)
-INSERT INTO KSEN_LRR(ID, LPR_ID, NAME, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student2-grade-interim-lecture', 'student2', 'student2 grade interim lecture', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student2-grade-value-interim-lecture', 0)
 
+INSERT INTO KSEN_LRR(ID, LPR_ID, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-final-lecture', 'student1', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student1-grade-value-final-lecture', 0)
+INSERT INTO KSEN_LRR_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('student1-grade-final-lecture.name', 'en', 'student1 grade final lecture', '', 'student1-grade-final-lecture')
+
+INSERT INTO KSEN_LRR(ID, LPR_ID, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student1-grade-interim-lecture', 'student1', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student1-grade-value-interim-lecture', 0)
+INSERT INTO KSEN_LRR_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('student1-grade-interim-lecture.name', 'en', 'student1 grade interim lecture', '', 'student1-grade-interim-lecture')
+
+INSERT INTO KSEN_LRR(ID, LPR_ID, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student2-grade-final-lecture', 'student2', 'grade-final-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.final.grade.assigned', 'student2-grade-value-final-lecture', 0)
+INSERT INTO KSEN_LRR_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('student2-grade-final-lecture.name', 'en', 'student2 grade final lecture', '', 'student2-grade-final-lecture')
+
+INSERT INTO KSEN_LRR(ID, LPR_ID, RT_DESCR_ID, STATE_ID, TYPE_ID, RESULT_VALUE_ID, VER_NBR) VALUES('student2-grade-interim-lecture', 'student2', 'grade-interim-lecture-desc', 'kuali.lrr.state.saved', 'kuali.lrr.type.interim.grade', 'student2-grade-value-interim-lecture', 0)
+INSERT INTO KSEN_LRR_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('student2-grade-interim-lecture.name', 'en', 'student2 grade interim lecture', '', 'student2-grade-interim-lecture')

@@ -18,6 +18,9 @@ public abstract class NameEntity<T extends NameOwner<?>> extends BaseEntity impl
     @Column(name = "NAME")
     private String name;
     
+    public NameEntity(){
+    	
+    }
     public NameEntity(Name name) {
         this.locale = name.getLocale();
         this.name = name.getName();

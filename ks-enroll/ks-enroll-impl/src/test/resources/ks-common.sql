@@ -12,16 +12,15 @@ INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kua
 INSERT INTO KSEN_COMM_STATE (ID, NAME, PROCESS_KEY, DESCR, VER_NBR) VALUES ('kuali.atp.milestone.relation.state.inactive', 'Inactive', 'kuali.atp.milestone.relation.process', 'Indicates that this Atp-Milestone relation is inactive', 0)
 
 //StateProcessEntity
-INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.process', 'kuali.atp.process', 'kuali atp state process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.milestone.process', 'kuali.milestone.process', 'kuali milestone state process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.atp.relation.process', 'kuali.atp.atp.relation.process', 'kuali atp-atp relation state process', 0)
-INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.milestone.relation.process', 'kuali.atp.milestone.relation.process', 'kuali atp-milestone relation state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.process', 'kuali atp state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.milestone.process',  'kuali milestone state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.atp.relation.process', 'kuali atp-atp relation state process', 0)
+INSERT INTO KSEN_STATE_PROCESS (ID, DESCR, VER_NBR) VALUES ('kuali.atp.milestone.relation.process', 'kuali atp-milestone relation state process', 0)
 
-//StateProcessEntity
-INSERT INTO KSEN_STATE_PROCESS_NAME (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.atp.process', 'kuali.atp.process', 'kuali atp state process', 0)
-INSERT INTO KSEN_STATE_PROCESS_NAME (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.milestone.process', 'kuali.milestone.process', 'kuali milestone state process', 0)
-INSERT INTO KSEN_STATE_PROCESS_NAME (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.atp.atp.relation.process', 'kuali.atp.atp.relation.process', 'kuali atp-atp relation state process', 0)
-INSERT INTO KSEN_STATE_PROCESS_NAME (ID, NAME, DESCR, VER_NBR) VALUES ('kuali.atp.milestone.relation.process', 'kuali.atp.milestone.relation.process', 'kuali atp-milestone relation state process', 0)
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('kuali.atp.process.name', 'en', 'kuali.atp.process', '', 'kuali.atp.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('kuali.milestone.process.name', 'en', 'kuali.milestone.process' ,'','kuali.milestone.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('kuali.atp.atp.relation.process.name', 'en', 'kuali.atp.atp.relation.process','','kuali.atp.atp.relation.process')
+INSERT INTO KSEN_STATE_PROCESS_NAME (ID, LOCALE, NAME, OBJ_ID, OWNER) VALUES ('kuali.atp.milestone.relation.process.name', 'en', 'kuali.atp.milestone.relation.process','','kuali.atp.milestone.relation.process')
 
 //StateProcessRelationEntity
 INSERT INTO KSEN_STATEPROCESS_RELTN(ID, PROCESS_KEY, PRIOR_STATEKEY, NEXT_STATEKEY, VER_NBR)VALUES('PROCESS-1', 'kuali.atp.process', null, 'kuali.atp.state.Draft', 0)

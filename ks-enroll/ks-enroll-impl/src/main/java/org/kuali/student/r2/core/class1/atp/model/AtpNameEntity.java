@@ -16,6 +16,9 @@ public class AtpNameEntity extends NameEntity<AtpEntity>{
     @JoinColumn(name = "OWNER")
     private AtpEntity owner;
 
+    public AtpNameEntity(){
+    	
+    }
     public AtpNameEntity(Name name) {
         super(name);
     }

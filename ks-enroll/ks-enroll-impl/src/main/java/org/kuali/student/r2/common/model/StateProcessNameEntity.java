@@ -16,6 +16,10 @@ public class StateProcessNameEntity extends NameEntity<StateProcessEntity>{
     @JoinColumn(name = "OWNER")
     private StateProcessEntity owner;
 
+    public StateProcessNameEntity(){
+    	
+    }
+    
     public StateProcessNameEntity(Name name) {
         super(name);
     }

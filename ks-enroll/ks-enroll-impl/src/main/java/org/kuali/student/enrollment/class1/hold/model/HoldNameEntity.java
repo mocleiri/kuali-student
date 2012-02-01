@@ -16,6 +16,10 @@ public class HoldNameEntity extends NameEntity<HoldEntity>{
     @JoinColumn(name = "OWNER")
     private HoldEntity owner;
     
+    public HoldNameEntity() {
+
+    }
+    
     public HoldNameEntity(Name name) {
         super(name);
     }

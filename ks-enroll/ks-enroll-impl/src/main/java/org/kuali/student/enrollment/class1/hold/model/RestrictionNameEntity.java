@@ -16,6 +16,9 @@ public class RestrictionNameEntity extends NameEntity<RestrictionEntity>{
     @JoinColumn(name = "OWNER")
     private RestrictionEntity owner;
     
+    public RestrictionNameEntity() {
+    }
+    
     public RestrictionNameEntity(Name name) {
         super(name);
     }
