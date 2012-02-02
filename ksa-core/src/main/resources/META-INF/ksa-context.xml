@@ -19,7 +19,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		<constructor-arg index="0" value="KSA" />
 		<constructor-arg index="1" value="0" />
 		<property name="location" value="classpath:/ksa.properties" />
-		<property name="dataSource" ref="ksaDataSource" />
+		<!-- TODO: uncomment the following line when we have an established KSA DB connection -->
+		<!--  property name="dataSource" ref="ksaDataSource" / -->
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
@@ -43,14 +44,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<bean id="ksaEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="ksa" />
-		<property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml" />
-		<property name="persistenceUnitPostProcessors" ref="jpaEntityFinder" />
-		<property name="loadTimeWeaver" ref="loadTimeWeaver" />
-	</bean>
-
-	<bean id="riceEntityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitName" value="rice" />
 		<property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml" />
 		<property name="persistenceUnitPostProcessors" ref="jpaEntityFinder" />
 		<property name="loadTimeWeaver" ref="loadTimeWeaver" />

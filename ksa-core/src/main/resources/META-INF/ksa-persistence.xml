@@ -4,18 +4,6 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
              http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
 
-    <persistence-unit name="rice" transaction-type="JTA">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>KualiDS</jta-data-source>
-        <properties>
-            <property name="hibernate.default_schema" value="RICE"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-            <property name="hibernate.jdbc.fetch_size" value="1000"/>
-            <property name="hibernate.transaction.manager_lookup_class"
-                                  value="com.sigmasys.kuali.ksa.service.jta.AtomikosTransactionManagerLookup"/>
-        </properties>
-    </persistence-unit>
-
     <persistence-unit name="ksa" transaction-type="JTA">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>KsaDS</jta-data-source>

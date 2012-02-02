@@ -46,7 +46,6 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         setOrder(order);
     }
 
-    @Required
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         loadDatabaseParameters();
@@ -56,10 +55,21 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     	loadDatabaseParameters(false);
     }
     
+    private void validateJdbcTemplate() {
+    	if( jdbcTemplate == null ) {
+    		logger.error("jdbcTemplate is null");
+    		throw new IllegalStateException("jdbcTemplate is null");
+    	}
+    }
+    
     protected void loadDatabaseParameters(boolean refreshOnly) {
+    	
+    	validateJdbcTemplate();
+    	
     	if (!refreshOnly) {
     		databaseProperties.clear();
     	}
+    	
         String query = "select NAME as name, VALUE as value from " + schemaPrefix + "KSA_CONFIG";
         jdbcTemplate.query(query, new HashMap<String, Object>(), new RowCallbackHandler() {
             public void processRow(ResultSet rs) throws SQLException {
@@ -130,8 +140,13 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     private int deleteDatabaseParameters(Set<String> paramNames) {
+    	
+    	validateJdbcTemplate();
+    	
         List<String> paramNameList = new ArrayList<String>(paramNames);
+        
         logger.debug("Deleting the following properties from KSA_CONFIG: " + paramNameList);
+        
         if (!paramNameList.isEmpty()) {
             Map<String, String> parameterMap = new HashMap<String, String>(paramNameList.size());
             StringBuilder sql = new StringBuilder("delete from " + schemaPrefix + "KSA_CONFIG where NAME in (");
@@ -156,6 +171,8 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     private int updateDatabaseParameters(List<InitialParameter> params) {
+    	
+    	validateJdbcTemplate();
 
         logger.debug("Deleting the following parameters from KSA_CONFIG: " + params);
         // Deleting the old parameters within the same transaction

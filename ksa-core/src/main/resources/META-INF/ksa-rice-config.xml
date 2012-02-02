@@ -1,36 +1,4 @@
 <config>
-
-	<!-- Client Database Settings -->
-	<param name="datasource.ojb.platform">Oracle9i</param>
-	<param name="datasource.platform">org.kuali.rice.core.database.platform.OraclePlatform</param>
-	<param name="datasource.url">jdbc:oracle:thin:@localhost</param>
-	<param name="datasource.username">KSA</param>
-	<param name="datasource.password">KSA</param>
-	<param name="datasource.driver.name">oracle.jdbc.OracleDriver</param>
-	<param name="datasource.pool.minSize">1</param>
-	<param name="datasource.pool.maxSize">10</param>
-	<param name="datasource.pool.maxWait">5000</param>
-	<param name="datasource.pool.lifeTime">5000</param>
-	<param name="datasource.pool.sleepTime">5000</param>
-	<param name="datasource.pool.validationQuery">select 1 from dual</param>
-	<param name="datasource.pool.inactiveConnectionTimeout">120</param>
-	<param name="datasource.pool.maxStatements">0</param>
-	
-	
-	<!--  Rice Standalone Database Settings -->
-	<param name="standalone.datasource.ojb.platform">Oracle9i</param>
-	<param name="standalone.datasource.platform">org.kuali.rice.core.database.platform.OraclePlatform</param>
-	<param name="standalone.datasource.url">jdbc:oracle:thin:@localhost:1521:ORCL</param>
-	<param name="standalone.datasource.driver.name">oracle.jdbc.driver.OracleDriver</param>
-	<param name="standalone.datasource.pool.validationQuery">select 1 from dual</param>
-	<param name="standalone.datasource.pool.maxWait">30000</param>
-	<param name="standalone.datasource.pool.size">30</param>
-	<param name="standalone.datasource.pool.maxActive">50</param>
-	<param name="standalone.datasource.minIdle">7</param>
-	<param name="standalone.datasource.initialSize">7</param>
-	<param name="standalone.datasource.accessToUnderlyingConnectionAllowed">true</param>
-	<param name="standalone.datasource.username">riceuser</param>
-	<param name="standalone.datasource.password">ricepassword</param>
 	
 	<!--  log4j Settings -->
 	<param name="log4j.reload.minutes">5</param>

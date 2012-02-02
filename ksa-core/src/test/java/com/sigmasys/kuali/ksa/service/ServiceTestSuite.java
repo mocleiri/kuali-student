@@ -14,7 +14,7 @@ import com.sigmasys.kuali.ksa.service.AbstractServiceTest;
  * User: Michael Ivanov
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses(value = {TransactionServiceTest.class, KimServiceTest.class})
+@Suite.SuiteClasses(value = {TransactionServiceTest.class})
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_CONTEXT})
 public class ServiceTestSuite extends AbstractServiceTest {
 
