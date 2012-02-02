@@ -57,6 +57,8 @@ public class TermInfoMaintainableImpl extends MaintainableImpl {
             
         }catch (ReadOnlyException roe) {      
             
+        } catch (AlreadyExistsException e) {
+
         }
     }
 
@@ -76,6 +78,8 @@ public class TermInfoMaintainableImpl extends MaintainableImpl {
             
         }catch (DoesNotExistException dee){
             
+        } catch (AlreadyExistsException e) {
+
         }
         return null;
   

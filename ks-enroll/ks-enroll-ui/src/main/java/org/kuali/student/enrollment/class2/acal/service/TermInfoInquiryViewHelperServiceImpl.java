@@ -11,11 +11,7 @@ import org.kuali.rice.krad.inquiry.InquirableImpl;
 import org.kuali.student.enrollment.acal.dto.TermInfo;
 import org.kuali.student.enrollment.acal.service.AcademicCalendarService;
 import org.kuali.student.r2.common.dto.ContextInfo;
-import org.kuali.student.r2.common.exceptions.DoesNotExistException;
-import org.kuali.student.r2.common.exceptions.InvalidParameterException;
-import org.kuali.student.r2.common.exceptions.MissingParameterException;
-import org.kuali.student.r2.common.exceptions.OperationFailedException;
-import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
+import org.kuali.student.r2.common.exceptions.*;
 
 public class TermInfoInquiryViewHelperServiceImpl extends InquirableImpl {
     public final static String TERM_TYPE_KEY = "typeKey";
@@ -41,8 +37,10 @@ public class TermInfoInquiryViewHelperServiceImpl extends InquirableImpl {
 	    		
 	    	}catch (PermissionDeniedException pde){
 	    		
-	    	}
-	    	return null;
+	    	} catch (AlreadyExistsException e) {
+
+            }
+         return null;
 
 		 
 	 }

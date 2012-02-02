@@ -61,8 +61,10 @@ public class TermWrapperInquiryViewHelperServiceImpl extends InquirableImpl {
 
     	}catch (PermissionDeniedException pde){
 
-    	}
-    	return null;
+    	} catch (AlreadyExistsException e) {
+
+        }
+        return null;
 
     }
 

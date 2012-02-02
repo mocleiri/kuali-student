@@ -14,14 +14,7 @@ import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.student.enrollment.acal.service.AcademicCalendarService;
 import org.kuali.student.enrollment.acal.dto.AcademicCalendarInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
-import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
-import org.kuali.student.r2.common.exceptions.InvalidParameterException;
-import org.kuali.student.r2.common.exceptions.MissingParameterException;
-import org.kuali.student.r2.common.exceptions.OperationFailedException;
-import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
-import org.kuali.student.r2.common.exceptions.DoesNotExistException;
-import org.kuali.student.r2.common.exceptions.ReadOnlyException;
-import org.kuali.student.r2.common.exceptions.VersionMismatchException;
+import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.util.constants.AtpServiceConstants;
 
 public class AcademicCalendarInfoMaintainableImpl extends MaintainableImpl {
@@ -64,9 +57,11 @@ public class AcademicCalendarInfoMaintainableImpl extends MaintainableImpl {
             
         } catch (ReadOnlyException roe) {
             
+        } catch (AlreadyExistsException e) {
+
         }
-        
-        
+
+
     }
 
     @Override

@@ -71,8 +71,10 @@ public class TermWrapperLookupableImpl extends LookupableImpl {
             System.out.println("call getAcademicCalendarService().getKeyDatesForTerm(termId, context), and get OperationFailedException:  "+ofe.toString());
     	}catch (PermissionDeniedException pde){
             System.out.println("call getAcademicCalendarService().getKeyDatesForTerm(termId, context), and get PermissionDeniedException:  "+pde.toString());
-    	}
-    	return null;
+    	} catch (AlreadyExistsException e) {
+
+        }
+        return null;
     }
 
     protected AcademicCalendarService getAcademicCalendarService() {

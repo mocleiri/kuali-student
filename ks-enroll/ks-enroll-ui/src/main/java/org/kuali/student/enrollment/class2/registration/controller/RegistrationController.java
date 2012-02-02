@@ -294,7 +294,7 @@ public class RegistrationController extends UifControllerBase {
         return getUIFModelAndView(registrationForm);
     }
 
-    protected List<String> getCourseOfferingIds(RegistrationForm registrationForm, ContextInfo context) throws InvalidParameterException, MissingParameterException, DoesNotExistException, PermissionDeniedException, OperationFailedException {
+    protected List<String> getCourseOfferingIds(RegistrationForm registrationForm, ContextInfo context) throws InvalidParameterException, MissingParameterException, DoesNotExistException, PermissionDeniedException, OperationFailedException, AlreadyExistsException {
         // if the coures offering code is not blank... assume the value in the selectbox is inconsequential
         if (StringUtils.isNotBlank(registrationForm.getCourseOfferingCode())) {
             GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, RiceKeyConstants.ERROR_CUSTOM, "Searching by Course Offering Code is not yet implemented");

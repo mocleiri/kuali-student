@@ -121,8 +121,10 @@ public class TermWrapperMaintainableImpl extends MaintainableImpl {
             
         }catch (VersionMismatchException vme){
             
-        }       
-        
+        } catch (AlreadyExistsException e) {
+
+        }
+
     }
 
     @Override
@@ -177,6 +179,8 @@ public class TermWrapperMaintainableImpl extends MaintainableImpl {
                 System.out.println("call getAcademicCalendarService().getKeyDatesForTerm(termId, context), and get OperationFailedException:  "+ofe.toString());
            }catch (PermissionDeniedException pde){
                 System.out.println("call getAcademicCalendarService().getKeyDatesForTerm(termId, context), and get PermissionDeniedException:  "+pde.toString());
+           } catch (AlreadyExistsException e) {
+
            }
            dataObject = termWrapper;
 

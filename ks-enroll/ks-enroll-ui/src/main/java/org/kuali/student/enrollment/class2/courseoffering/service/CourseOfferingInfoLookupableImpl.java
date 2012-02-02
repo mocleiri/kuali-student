@@ -26,7 +26,7 @@ public class CourseOfferingInfoLookupableImpl extends LookupableImpl {
         String termId = fieldValues.get(TERM_FIELD_NAME);
         String subjectArea = fieldValues.get(SUBJECT_AREA_FIELD_NAME);
 
-        List<CourseOfferingInfo> courseOfferings;
+        List<CourseOfferingInfo> courseOfferings = null;
 
         try {
             List<String> courseOfferingIds = getCourseOfferingService().getCourseOfferingIdsByTermAndSubjectArea(termId, subjectArea, context);
@@ -46,6 +46,8 @@ public class CourseOfferingInfoLookupableImpl extends LookupableImpl {
             throw new RuntimeException(e);
         } catch (PermissionDeniedException e) {
             throw new RuntimeException(e);
+        } catch (AlreadyExistsException e) {
+
         }
 
         return courseOfferings;
