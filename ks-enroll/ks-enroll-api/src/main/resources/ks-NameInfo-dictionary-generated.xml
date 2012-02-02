@@ -106,6 +106,10 @@ A name.
 		</property>
 		<property name="required" value="false"/>
 	</bean>
+	
+	<bean id="NameInfo.id-generated" abstract="true" parent="BaseKuali.id">
+		<property name="name" value="id"/>
+	</bean>
 
 	<bean id="NameInfo.meta-generated" abstract="true" parent="ComplexAttributeDefinition">
 		<property name="name" value="meta"/>

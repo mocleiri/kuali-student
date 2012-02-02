@@ -34,78 +34,58 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 		that are encoded here.
 	************************************************************* -->
 	<!-- The following file gets generated during the build and gets put into the target/classes directory -->
-	<import resource="classpath:ks-FeeInfo-dictionary-generated.xml"/>
+	<import resource="classpath:ks-NameInfo-dictionary-generated.xml"/>
 	<!-- TODO: remove these once the jira about lists of complex objects gets fixed -->
 	<import resource="classpath:ks-CurrencyAmountInfo-dictionary.xml"/>
 
-	<!-- FeeInfo-->
-	<bean id="FeeInfo" parent="FeeInfo-parent"/>
-	<bean id="FeeInfo-parent" abstract="true" parent="FeeInfo-generated">
+	<!-- NameInfo-->
+	<bean id="NameInfo" parent="NameInfo-parent"/>
+	<bean id="NameInfo-parent" abstract="true" parent="NameInfo-generated">
 	<!-- insert any overrides to the generated object definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.feeType" parent="FeeInfo.feeType-parent"/>
-	<bean id="FeeInfo.feeType-parent" abstract="true" parent="FeeInfo.feeType-generated">
+	<bean id="NameInfo.name" parent="NameInfo.name-parent"/>
+	<bean id="NameInfo.name-parent" abstract="true" parent="NameInfo.name-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.rateType" parent="FeeInfo.rateType-parent"/>
-	<bean id="FeeInfo.rateType-parent" abstract="true" parent="FeeInfo.rateType-generated">
+	<bean id="NameInfo.locale" parent="NameInfo.locale-parent"/>
+	<bean id="NameInfo.locale-parent" abstract="true" parent="NameInfo.locale-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.feeAmounts" parent="FeeInfo.feeAmounts-parent"/>
-	<bean id="FeeInfo.feeAmounts-parent" abstract="true" parent="FeeInfo.feeAmounts-generated">
+	<bean id="NameInfo.id" parent="NameInfo.id-parent"/>
+	<bean id="NameInfo.id-parent" abstract="true" parent="NameInfo.id-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.descr" parent="FeeInfo.descr-parent"/>
-	<bean id="FeeInfo.descr-parent" abstract="true" parent="FeeInfo.descr-generated">
+	<bean id="NameInfo.meta" parent="NameInfo.meta-parent"/>
+	<bean id="NameInfo.meta-parent" abstract="true" parent="NameInfo.meta-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.descr.plain" parent="FeeInfo.descr.plain-parent"/>
-	<bean id="FeeInfo.descr.plain-parent" abstract="true" parent="FeeInfo.descr.plain-generated">
+	<bean id="NameInfo.meta.versionInd" parent="NameInfo.meta.versionInd-parent"/>
+	<bean id="NameInfo.meta.versionInd-parent" abstract="true" parent="NameInfo.meta.versionInd-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.descr.formatted" parent="FeeInfo.descr.formatted-parent"/>
-	<bean id="FeeInfo.descr.formatted-parent" abstract="true" parent="FeeInfo.descr.formatted-generated">
+	<bean id="NameInfo.meta.createTime" parent="NameInfo.meta.createTime-parent"/>
+	<bean id="NameInfo.meta.createTime-parent" abstract="true" parent="NameInfo.meta.createTime-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.id" parent="FeeInfo.id-parent"/>
-	<bean id="FeeInfo.id-parent" abstract="true" parent="FeeInfo.id-generated">
+	<bean id="NameInfo.meta.createId" parent="NameInfo.meta.createId-parent"/>
+	<bean id="NameInfo.meta.createId-parent" abstract="true" parent="NameInfo.meta.createId-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.meta" parent="FeeInfo.meta-parent"/>
-	<bean id="FeeInfo.meta-parent" abstract="true" parent="FeeInfo.meta-generated">
+	<bean id="NameInfo.meta.updateTime" parent="NameInfo.meta.updateTime-parent"/>
+	<bean id="NameInfo.meta.updateTime-parent" abstract="true" parent="NameInfo.meta.updateTime-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 
-	<bean id="FeeInfo.meta.versionInd" parent="FeeInfo.meta.versionInd-parent"/>
-	<bean id="FeeInfo.meta.versionInd-parent" abstract="true" parent="FeeInfo.meta.versionInd-generated">
-	<!-- insert any overrides to the generated attribute definitions here -->
-	</bean>
-
-	<bean id="FeeInfo.meta.createTime" parent="FeeInfo.meta.createTime-parent"/>
-	<bean id="FeeInfo.meta.createTime-parent" abstract="true" parent="FeeInfo.meta.createTime-generated">
-	<!-- insert any overrides to the generated attribute definitions here -->
-	</bean>
-
-	<bean id="FeeInfo.meta.createId" parent="FeeInfo.meta.createId-parent"/>
-	<bean id="FeeInfo.meta.createId-parent" abstract="true" parent="FeeInfo.meta.createId-generated">
-	<!-- insert any overrides to the generated attribute definitions here -->
-	</bean>
-
-	<bean id="FeeInfo.meta.updateTime" parent="FeeInfo.meta.updateTime-parent"/>
-	<bean id="FeeInfo.meta.updateTime-parent" abstract="true" parent="FeeInfo.meta.updateTime-generated">
-	<!-- insert any overrides to the generated attribute definitions here -->
-	</bean>
-
-	<bean id="FeeInfo.meta.updateId" parent="FeeInfo.meta.updateId-parent"/>
-	<bean id="FeeInfo.meta.updateId-parent" abstract="true" parent="FeeInfo.meta.updateId-generated">
+	<bean id="NameInfo.meta.updateId" parent="NameInfo.meta.updateId-parent"/>
+	<bean id="NameInfo.meta.updateId-parent" abstract="true" parent="NameInfo.meta.updateId-generated">
 	<!-- insert any overrides to the generated attribute definitions here -->
 	</bean>
 </beans>
