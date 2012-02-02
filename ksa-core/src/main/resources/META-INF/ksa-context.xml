@@ -15,11 +15,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<!-- process @Transactional to create transaction proxies -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="initialParameterConfigurer" class="org.finra.core.server.config.InitialParameterConfigurer">
-		<constructor-arg index="0" value="SONARDBA" />
+	<bean id="initialParameterConfigurer" class="com.sigmasys.kuali.ksa.util.InitialParameterConfigurer">
+		<constructor-arg index="0" value="KSA" />
 		<constructor-arg index="1" value="0" />
-		<property name="location" value="classpath:/application.properties" />
-		<property name="dataSource" ref="coreDataSource" />
+		<property name="location" value="classpath:/ksa.properties" />
+		<property name="dataSource" ref="ksaDataSource" />
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
@@ -68,7 +68,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		<property name="forceShutdown" value="true" />
 	</bean>
 
-	<import resource="classpath:/META-INF/rice-context.xml" />
+	<import resource="classpath:/META-INF/ksa-rice-context.xml" />
 
 	<import resource="classpath:/META-INF/ksa-datasource.xml" />
 

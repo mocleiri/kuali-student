@@ -11,12 +11,13 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<bean id="config" class="org.kuali.rice.core.config.spring.ConfigFactoryBean">
 		<property name="configLocations">
 			<list>
-				<value>classpath:/META-INF/rice-config.xml</value>
+				<value>classpath:/META-INF/ksa-rice-config.xml</value>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="configProps" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	<bean id="configProps"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="targetObject" ref="config" />
 		<property name="targetMethod" value="getProperties" />
 	</bean>
@@ -28,16 +29,19 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<!-- Configure KSA-specific implementations of Rice services/beans here -->
 	<bean id="riceConfigurer" class="org.kuali.rice.core.config.RiceConfigurer">
-	    <property name="rootConfig" ref="config" />
+		<property name="rootConfig" ref="config" />
 		<property name="dataSource" ref="riceDataSource" />
 		<property name="serverDataSource" ref="riceDataSource" />
 		<property name="transactionManager" ref="atomikosTransactionManager" />
 		<property name="userTransaction" ref="atomikosTransactionManager" />
 		<property name="serviceNamespace" value="rice" />
-		<property name="platform" value="org.kuali.rice.core.database.platform.OraclePlatform" />
-		<!-- property name="ksbConfigurer"> <bean class="org.kuali.rice.ksb.messaging.config.KSBConfigurer"> 
-			<property name="serviceServletUrl" value="${serviceServletUrl}" /> </bean> 
-			</property -->
+		<property name="platform"
+			value="org.kuali.rice.core.database.platform.OraclePlatform" />
+		<property name="ksbConfigurer">
+			<bean class="org.kuali.rice.ksb.messaging.config.KSBConfigurer">
+				<property name="serviceServletUrl" value="${serviceServletUrl}" />
+			</bean>
+		</property>
 		<property name="kewConfigurer">
 			<bean class="org.kuali.rice.kew.config.KEWConfigurer">
 				<property name="clientProtocol" value="local" />
