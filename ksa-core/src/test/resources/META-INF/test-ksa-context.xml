@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-lazy-init="true">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.sigmasys.kuali.ksa" />
+
+	<!-- process @Transactional to create transaction proxies -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="loadTimeWeaver"
+		class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+
+    <bean id="initialParameterConfigurer" class="com.sigmasys.kuali.ksa.util.InitialParameterConfigurer">
+		<constructor-arg index="0" value="KSA" />
+		<constructor-arg index="1" value="0" />
+		<property name="location" value="classpath:/ksa.properties" />
+		<!--  property name="dataSource" ref="ksaDataSource" / -->
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+
+	<!-- child modules can define their our bean with this name and list of 
+		core and their packages containing jpa entities -->
+	<bean id="jpaEntityFinder" class="com.sigmasys.kuali.ksa.util.PackageMappingPostProcessor">
+		<property name="packageNames">
+			<list>
+				<value>com.sigmasys.kuali.ksa.model</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ksaEntityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="ksa" />
+		<property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml" />
+		<property name="persistenceUnitPostProcessors" ref="jpaEntityFinder" />
+		<property name="loadTimeWeaver" ref="loadTimeWeaver" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">
+		<property name="userTransaction">
+			<bean class="com.atomikos.icatch.jta.UserTransactionImp" />
+		</property>
+	</bean>
+
+	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
+		destroy-method="close">
+		<property name="forceShutdown" value="true" />
+	</bean>
+	
+	 <!-- JNDI bindings -->
+    <bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
+        <property name="bindings">
+            <map>
+                <entry key="java:comp/TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="java:comp/UserTransaction" value-ref="atomikosTransactionManager"/>
+                <entry key="javax.transaction.TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="javax.transaction.UserTransaction" value-ref="atomikosTransactionManager"/>
+            </map>
+        </property>
+    </bean>
+
+
+</beans>
