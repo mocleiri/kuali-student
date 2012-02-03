@@ -329,7 +329,6 @@
       <servlet-name>myplan</servlet-name>
       <url-pattern>/myplan/*</url-pattern>
     </servlet-mapping> 	
-    
 
 	<session-config>
 		<session-timeout>60</session-timeout>

@@ -2,7 +2,7 @@
 #  Pubcookie authentication.
 #
 AuthType UWNetID
-PubcookieAppID MyPlan 
+PubcookieAppID KualiStudent 
 require valid-user
 #
 #  Redirect to https
@@ -10,15 +10,15 @@ require valid-user
 RewriteEngine on
 RewriteCond %{HTTPS} off
 RewriteCond %{REMOTE_USER} !^$
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/myplan-embedded-dev/$1 [R,L]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/student/$1 [R,L]
 
 # Lop off jsessionids
-ReWriteRule ^(.*);jsessionid=.*$ /myplan-embedded-dev/$1 [PT]
+ReWriteRule ^(.*);jsessionid=.*$ /student/$1 [PT]
 
 #
 #  If the server name is uwksdev01 then go to ajp, otherwise, go to the balancer.
 #
 RewriteCond %{SERVER_NAME} uwksdev01
-RewriteRule ^(.*)$ ajp://localhost:8009/myplan-embedded-dev/$1 [P,L]
-RewriteRule ^(.*)$ balancer://tomcat/myplan-embedded-dev/$1 [P,L]
+RewriteRule ^(.*)$ ajp://localhost:8009/student/$1 [P,L]
+RewriteRule ^(.*)$ balancer://tomcat/student/$1 [P,L]
 
