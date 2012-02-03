@@ -23,6 +23,13 @@
     syntax: ${varname} ${institution}
 -->
 <config>
+
+<param name="location.ehcache.config.location" override="false">classpath:ks-ehcache.xml</param>
+
+    <param name="appserver.url">http://localhost:8080</param>
+    <param name="app.code">student</param>
+    <param name="application.url">${appserver.url}/${app.code}</param>
+
     <param name="module.name">myplan-embedded</param>
     <param name="application.id">myplan</param>
     <param name="config.location">classpath:META-INF/standalone-config-defaults.xml</param>
@@ -80,16 +87,13 @@
 
     <param name="ks.myplan.doDataLoad">false</param>
 
-    <param name="ks.myplan.externalizable.images.url">/myplan-embedded-dev/ks-myplan/images/</param>
+    <param name="ks.myplan.externalizable.images.url">/${app.code}/ks-myplan/images/</param>
 
     <!-- MyPlan properties file containin Error Messages -->
     <param name="rice.struts.message.resources" override="true">${rice.struts.message.resources},org.kuali.student.myplan.KSMyPlan-ApplicationResources</param>
 
     <!-- used to show KS links in Rice Portal -->
     <param name="portal.show.sample.app">true</param>
-
-    <param name="appserver.url">http://localhost:8080</param>
-    <param name="app.code">myplan-embedded</param>
 
     <param name="log4j.settings.path">classpath:META-INF/log4j.properties</param>
     <param name="rice.logging.configure">true</param>
