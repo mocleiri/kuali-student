@@ -18,7 +18,7 @@ import com.sigmasys.kuali.ksa.service.AbstractServiceTest;
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_CONTEXT})
 public class ServiceTestSuite extends AbstractServiceTest {
 
-    public static final String TEST_CONTEXT = "/META-INF/ksa-context.xml";
+    public static final String TEST_CONTEXT = "/META-INF/test-ksa-context.xml";
 
     public static Test suite() {
         return new JUnit4TestAdapter(ServiceTestSuite.class);
