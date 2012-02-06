@@ -19,7 +19,7 @@ import com.sigmasys.kuali.ksa.util.RequestUtils;
 
 @UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { ServiceTestSuite.TEST_CONTEXT })
+@ContextConfiguration(locations = { ServiceTestSuite.TEST_CONTEXT, "/META-INF/ksa-rice-context.xml" })
 public class KimServiceTest extends AbstractServiceTest {
 	
 	@Autowired

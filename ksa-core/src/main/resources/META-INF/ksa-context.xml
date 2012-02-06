@@ -62,6 +62,4 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	
 	<import resource="classpath:/META-INF/ksa-rice-context.xml" />
 
-	<import resource="classpath:/META-INF/ksa-datasource.xml" />
-
 </beans>
