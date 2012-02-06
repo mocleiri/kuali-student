@@ -11,14 +11,8 @@ RewriteEngine on
 RewriteCond %{HTTPS} off
 RewriteCond %{REMOTE_USER} !^$
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/student/$1 [R,L]
-
 # Lop off jsessionids
 ReWriteRule ^(.*);jsessionid=.*$ /student/$1 [PT]
-
-#
-#  If the server name is uwksdev01 then go to ajp, otherwise, go to the balancer.
-#
-RewriteCond %{SERVER_NAME} uwksdev01
+# To Tomcat
 RewriteRule ^(.*)$ ajp://localhost:8009/student/$1 [P,L]
-RewriteRule ^(.*)$ balancer://tomcat/student/$1 [P,L]
 
