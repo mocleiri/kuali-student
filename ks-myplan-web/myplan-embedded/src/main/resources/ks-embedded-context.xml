@@ -88,46 +88,64 @@
         <property name="enabled" value="${ks.academicCalendar.enable.caching}"/>
     </bean>
 
-	<aop:config>
-		<aop:aspect id="enumCacheAroundSearch" ref="enumMethodCacheAdvisor">
-			<aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.search*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.addEnumeratedValue*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.updateEnumeratedValue*(..))" method="invalidateCache" />
-		</aop:aspect>
-		<aop:aspect id="atpCacheAroundSearch" ref="atpMethodCacheAdvisor">
+    <!--  MyPlan Cache beans -->
+    <bean id="myplanCacheManager" class="net.sf.ehcache.CacheManager">
+        <constructor-arg index="0" type="java.net.URL" value="${myplan.cache.config.file}" />
+    </bean>
+
+    <bean id="courseSearchMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
+        <property name="cacheName" value="courseSearchCache" />
+        <property name="cacheManager" ref="myplanCacheManager"/>
+        <property name="enabled" value="${myplan.courseSearch.enable.caching}"/>
+    </bean>
+
+    <bean id="courseOfferingSearchMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
+        <property name="cacheName" value="courseOfferingCache" />
+        <property name="cacheManager" ref="myplanCacheManager"/>
+        <property name="enabled" value="${ks.courseOffering.enable.caching}"/>
+    </bean>
+
+    <!-- AOP intercepts -->
+    <aop:config>
+        <aop:aspect id="enumCacheAroundSearch" ref="enumMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.search*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.addEnumeratedValue*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.enumerationmanagement.service.impl.*.updateEnumeratedValue*(..))" method="invalidateCache" />
+        </aop:aspect>
+        <aop:aspect id="atpCacheAroundSearch" ref="atpMethodCacheAdvisor">
             <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.getAtpType(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.search*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.add*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.update*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.create*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.delete*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.remove*(..))" method="invalidateCache" />
-		</aop:aspect>
-		<aop:aspect id="orgCacheAroundSearch" ref="orgMethodCacheAdvisor">
-			<aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.search*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.add*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.update*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.create*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.delete*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.remove*(..))" method="invalidateCache" />
-		</aop:aspect>
-		<aop:aspect id="lrcCacheAroundSearch" ref="lrcMethodCacheAdvisor">
-			<aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.search*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.add*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.update*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.create*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.delete*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.remove*(..))" method="invalidateCache" />
-		</aop:aspect>
-		<aop:aspect id="statementCacheAroundSearch" ref="statementMethodCacheAdvisor">
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.search*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.translate*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.getNaturalLanguageFor*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.getReqComponentTypesForStatementType*(..))" method="getFromCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.update*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.create*(..))" method="invalidateCache" />
-			<aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.delete*(..))" method="invalidateCache" />
-		</aop:aspect>
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.search*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.add*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.update*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.create*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.delete*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.atp.service.impl.*.remove*(..))" method="invalidateCache" />
+        </aop:aspect>
+        <aop:aspect id="orgCacheAroundSearch" ref="orgMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.search*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.add*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.update*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.create*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.delete*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.organization.service.impl.*.remove*(..))" method="invalidateCache" />
+        </aop:aspect>
+        <aop:aspect id="lrcCacheAroundSearch" ref="lrcMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.search*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.add*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.update*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.create*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.delete*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.lum.lrc.service.impl.*.remove*(..))" method="invalidateCache" />
+        </aop:aspect>
+        <aop:aspect id="statementCacheAroundSearch" ref="statementMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.search*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.translate*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.getNaturalLanguageFor*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.getReqComponentTypesForStatementType*(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.update*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.create*(..))" method="invalidateCache" />
+            <aop:around pointcut="execution(*  org.kuali.student.core.statement.service.impl.*.delete*(..))" method="invalidateCache" />
+        </aop:aspect>
 
         <aop:aspect id="luCacheAroundSearch" ref="luMethodCacheAdvisor">
             <aop:around pointcut="execution(*  org.kuali.student.lum.lu.service.impl.*.search(..))" method="getFromCache" />
@@ -143,23 +161,17 @@
             <aop:around pointcut="execution(*  org.kuali.student.myplan.course.controller.CourseSearchStrategy.fetchCourseDivisions())" method="getFromCache" />
         </aop:aspect>
         -->
-        <aop:aspect id="courseSearchCacheAroundSearch" ref="courseSearchMethodCacheAdvisor">
-          <aop:around pointcut="execution(* org.kuali.student.myplan.course.controller.CourseSearchController.getCreditMap(..))" method="getFromCache" />
+
+        <aop:aspect id="courseOfferingAroundSearch" ref="courseOfferingSearchMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwCourseOfferingServiceImpl.getCourseOfferingsForCourseAndTerm(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwCourseOfferingServiceImpl.getCourseOfferingIdsByTermAndSubjectArea(..))" method="getFromCache" />
         </aop:aspect>
 
-	</aop:config>
-    <bean id="myplanCacheManager" class="net.sf.ehcache.CacheManager">
-    <!--    <constructor-arg index="0" type="java.net.URL" value="${myplan.cache.config.file}" /> -->
-         <constructor-arg index="0" type="java.net.URL" value="classpath:myplan-ehcache.xml" />
+        <aop:aspect id="courseSearchCacheAroundSearch" ref="courseSearchMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.myplan.course.controller.CourseSearchController.getCreditMap(..))" method="getFromCache" />
+        </aop:aspect>
 
-     </bean>
-
-     <bean id="courseSearchMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
-       <property name="cacheName" value="courseSearchCache" />
-       <property name="cacheManager" ref="myplanCacheManager"/>
-   <!--    <property name="enabled" value="${myplan.courseSearch.enable.caching}"/> -->
-         <property name="enabled" value="true"/>
-     </bean>
+    </aop:config>
 
 
 	<bean id="ks.messageServiceMock" class="org.kuali.student.core.messages.service.impl.MessageServiceMock">

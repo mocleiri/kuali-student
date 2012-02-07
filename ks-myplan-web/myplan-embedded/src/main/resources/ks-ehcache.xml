@@ -2,7 +2,7 @@
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
          monitoring="autodetect"
          updateCheck="false"
-         Name="ksCacheManager"
+         name="ksCacheManager"
          dynamicConfig="true" >
 
 	<diskStore path="java.io.tmpdir" />

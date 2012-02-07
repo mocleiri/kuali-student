@@ -16,6 +16,7 @@
          </properties> -->
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -43,7 +44,7 @@
                         </systemProperty>
                     </systemProperties>
                     <webAppConfig>
-                        <contextPath>/myplan-embedded-dev</contextPath>
+                        <contextPath>/student</contextPath>
                     </webAppConfig>
                 </configuration>
                 <dependencies>
@@ -67,7 +68,7 @@
                 <version>1.0-beta-1</version>
                 <configuration>
 
-                    <path>/myplan-embedded-dev</path>
+                    <path>/student</path>
                     <port>8080</port>
                     <!-- <path>/kr-dev</path> <port>8080</port> -->
 
