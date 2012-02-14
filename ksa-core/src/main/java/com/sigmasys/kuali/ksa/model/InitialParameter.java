@@ -48,28 +48,7 @@ public class InitialParameter implements Comparable<InitialParameter> {
 		if (getName() == null) {
 			return -1;
 		}
-		return getName().compareTo(param.getName());
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
-			return false;
-		}
-		InitialParameter para = (InitialParameter) obj;
-		if (this.getName() == null) {
-			// When both are null the two entities are new, but not necessarily equal
-			return para.getName() == null && super.equals(obj);
-		}
-		return this.getName().equals(para.getName());
-	}
-
-	@Override
-	public int hashCode() {
-		return 31 + ((getName() == null) ? super.hashCode() : getName().hashCode());
+		return getName().toLowerCase().compareTo(param.getName().toLowerCase());
 	}
 	
 	public InitialParameter copy() {
