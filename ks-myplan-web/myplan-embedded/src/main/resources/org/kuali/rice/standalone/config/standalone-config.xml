@@ -236,5 +236,39 @@
     <!--<param name="css.files" override="true">${css.files}</param>-->
     <!--<param name="javascript.files" override="true">${javascript.files}</param>-->
 
+    <!-- stuff for uAchieve Degree Audit -->
+    <!--# jTDS-->
+
+    <param name="uachieveapi.jdbc.driver">net.sourceforge.jtds.jdbc.Driver</param>
+    <param name="uachieveapi.jdbc.url">jdbc:jtds:sqlserver://dasql2.admin.washington.edu/MyPlanTest;ssl=require</param>
+
+    <!--# Microsoft JDBC-->
+    <!--
+        <param name="uachieveapi.jdbc.driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</param>
+        <param name="uachieveapi.jdbc.url">jdbc:sqlserver://dasql2.admin.washington.edu;databaseName=MyPlanTest</param>
+    -->
+
+    <param name="uachieveapi.jdbc.username">sdbmp</param>
+    <param name="uachieveapi.jdbc.password">J1D2G3K$S5c6h7v8y</param>
+
+    <param name="uachieveapi.hibernate.dialect">org.hibernate.dialect.SQLServerDialect</param>
+    <param name="uachieveapi.hibernate.show_sql">true</param>
+    <param name="uachieveapi.hibernate.useViews">false</param>
+
+    <!--# Database Connection Pooling-->
+    <param name="uachieveapi.c3p0.minPoolSize">3</param>
+    <param name="uachieveapi.c3p0.maxPoolSize">20</param>
+    <param name="uachieveapi.c3p0.checkoutTimeout">4500</param>
+    <param name="uachieveapi.c3p0.acquireIncrement">2</param>
+    <param name="uachieveapi.c3p0.maxStatements">0</param>
+    <param name="uachieveapi.c3p0.idleConnectionTestPeriod">1800</param>
+    <param name="uachieveapi.c3p0.maxIdleTime">7200</param>
+
+    <!--#Cache Properties-->
+    <param name="uachieveapi.hibernate.use_query_cache">false</param>
+    <param name="uachieveapi.hibernate.use_second_level_cache">false</param>
+    <param name="uachieveapi.hibernate.generate_statistics">false</param>
+    <param name="uachieveapi.hibernate.use_structured_entries">true</param>
+
     <param name="ks.institutional.context">classpath:uw-override-context.xml</param>
 </config>
