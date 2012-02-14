@@ -4,25 +4,26 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 
+@SuppressWarnings("serial")
 public class TransactionTypeId implements Serializable {
 	
-	    private String id;    
+	    private Long id;    
 	    private String subCode;
 	    
 	    
 	    public TransactionTypeId() {
 	    }
 	    
-	    public TransactionTypeId(String id, String subCode) {
+	    public TransactionTypeId(Long id, String subCode) {
 	        setId(id);
 	        setSubCode(subCode);
 	    }
 	    
 	    @Column(name = "ID")
-	    public String getId() {
+	    public Long getId() {
 	        return id;
 	    }
-	    public void setId(String id) {
+	    public void setId(Long id) {
 	        this.id = id;
 	    }
 	    

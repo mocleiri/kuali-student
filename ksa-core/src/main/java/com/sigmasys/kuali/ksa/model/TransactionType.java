@@ -25,7 +25,7 @@ public abstract class TransactionType {
     
 	@Id
 	@Column(name = "ID")
-    protected String id;
+    protected Long id;
     
 	@Id
 	@Column(name = "SUBCODE")
@@ -40,11 +40,11 @@ public abstract class TransactionType {
 	@Column(name = "DEF_TRN_TXT")
     protected String description;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

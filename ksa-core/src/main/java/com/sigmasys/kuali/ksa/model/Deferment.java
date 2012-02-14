@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue("D")
@@ -59,34 +60,13 @@ public class Deferment extends Credit {
     }
 
     /*
-    * A deferment may be expired automatically (when the date of the deferment passes) or be expired manually but the system,
-    * either through user intervention, or by
-    * a payment being received on the account that removes the need for the deferment.
-    * If, for example, an account is paid in full, the deferment would have to be expired, otherwise
-    * a credit balance would technically occur on the account.
-    */
-    public void expire() {
-
-
-    }
-
-    /*
       * This returns the expiration status and is true if the deferment has expired.
       */
+    @Transient
     public boolean isExpired() {
         // TODO:
         return false;
     }
 
-    /*
-      * A deferment may be reduced or set to zero after expiration.
-      * Often, the value of a deferment may not exceed the debit balance on the account to prevent a
-      * credit balance being available for refund on the strength of a deferment.
-      * A deferment may not be increased. Should such a situation arise, the deferment would need to
-      * be expired, and a new deferment issued.
-      */
-    public void reduceDeferment(BigDecimal newAmount) {
-
-    }
 }
 

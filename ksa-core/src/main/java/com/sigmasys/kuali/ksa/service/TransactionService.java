@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import java.math.BigDecimal;
 
+import com.sigmasys.kuali.ksa.model.Deferment;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
 /**
@@ -20,6 +21,7 @@ public interface TransactionService {
 
 	/**
 	 * Creates a new transaction and persists it the data store
+	 * 
 	 * @return Transaction instance
 	 */
 	Transaction createTransaction();
@@ -31,7 +33,7 @@ public interface TransactionService {
 	 * @param transactionId
 	 *            transaction ID
 	 */
-	void removeTransaction(String transactionId);
+	void removeTransaction(Long transactionId);
 
 	/**
 	 * This will allocate the value of amount on the transaction. A check will
@@ -46,7 +48,7 @@ public interface TransactionService {
 	 *            amount of money to be allocated TODO -
 	 * @throws MaxAmountExceededException
 	 */
-	void allocateAmount(String transactionId, BigDecimal amount);
+	void allocateAmount(Long transactionId, BigDecimal amount);
 
 	/**
 	 * This will allocate a locked amount on the transaction. A check will be
@@ -60,7 +62,7 @@ public interface TransactionService {
 	 *            amount of money to be allocated TODO -
 	 * @throws MaxAmountExceededException
 	 */
-	void allocateLockedAmount(String transactionId, BigDecimal amount);
+	void allocateLockedAmount(Long transactionId, BigDecimal amount);
 
 	/**
 	 * If a memos can be generated in a number of ways. If a memo is generated
@@ -75,7 +77,7 @@ public interface TransactionService {
 	 * @param memoText
 	 *            memo text
 	 */
-	void generateTransactionMemo(String transactionId, String memoText);
+	void generateTransactionMemo(Long transactionId, String memoText);
 
 	/**
 	 * If the reverse method is called, the system will generate a negative
@@ -87,6 +89,33 @@ public interface TransactionService {
 	 * be reversed when a payment bounces, or for some other reason is entered
 	 * on to the account and is not payable.
 	 */
-	void reverseTransaction(String transactionId);
+	void reverseTransaction(Long transactionId);
+
+	/**
+	 * A deferment may be expired automatically (when the date of the deferment
+	 * passes) or be expired manually but the system, either through user
+	 * intervention, or by a payment being received on the account that removes
+	 * the need for the deferment. If, for example, an account is paid in full,
+	 * the deferment would have to be expired, otherwise a credit balance would
+	 * technically occur on the account.
+	 */
+	void expireDeferment(Long defermentId);
+
+	/**
+	 * A deferment may be reduced or set to zero after expiration. Often, the
+	 * value of a deferment may not exceed the debit balance on the account to
+	 * prevent a credit balance being available for refund on the strength of a
+	 * deferment. A deferment may not be increased. Should such a situation
+	 * arise, the deferment would need to be expired, and a new deferment
+	 * issued.
+	 */
+	void reduceDeferment(Long defermentId, BigDecimal newAmount);
+	
+	/**
+     * Automatically generates a deferment transaction, 
+     * allocates and locks the two transactions together.
+     */
+
+    Deferment deferTransaction(Long transactionId);
 
 }

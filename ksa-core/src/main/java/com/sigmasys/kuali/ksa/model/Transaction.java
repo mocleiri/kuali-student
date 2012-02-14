@@ -9,20 +9,21 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 
 /**
  * Transaction is an abstract class, used to generate different types of transactions within the system.
  *
- * @author Paul Heald
+ * @author Paul Heald, Michael Ivanov
  */
 @Entity
 @Table(name="TRANSACTION")
@@ -34,9 +35,13 @@ public abstract class Transaction {
      * The unique transaction identifier for the KSA product.
      */
 	@Id
-    @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @GeneratedValue(generator = "transactionIdGenerator")
-    @SequenceGenerator(name = "transactionIdGenerator", sequenceName = "TRANSACTION_ID_SEQ")
+	@Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @TableGenerator(name="TABLE_GEN", 
+        table="SEQUENCE_TABLE", 
+        pkColumnName="SEQ_NAME",
+        valueColumnName="SEQ_VALUE", 
+        pkColumnValue="TRANSACTION_SEQ")
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="TABLE_GEN")
     protected Long id;
 
     /**

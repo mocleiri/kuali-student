@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Column;
+import javax.persistence.Transient;
 
 /*
  * Concrete payment class. 
@@ -38,6 +39,7 @@ public class Payment extends Credit {
     /*
     * Using the payment type and effective date, look up the priority of the payment for the payment application system.
     */
+    @Transient
     public void getPriority() {
         // TODO
     }
@@ -47,6 +49,7 @@ public class Payment extends Credit {
       * Using the payment type and effective date, look up the types of debits that can be paid with this payment.
       * This will be used by the payment application system.
       */
+    @Transient
     public void getAllowableCharges() {
         // TODO
     }
