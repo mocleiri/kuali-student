@@ -248,8 +248,8 @@
         <param name="uachieveapi.jdbc.url">jdbc:sqlserver://dasql2.admin.washington.edu;databaseName=MyPlanTest</param>
     -->
 
-    <param name="uachieveapi.jdbc.username">sdbmp</param>
-    <param name="uachieveapi.jdbc.password">J1D2G3K$S5c6h7v8y</param>
+    <param name="uachieveapi.jdbc.username">username</param>
+    <param name="uachieveapi.jdbc.password">password</param>
 
     <param name="uachieveapi.hibernate.dialect">org.hibernate.dialect.SQLServerDialect</param>
     <param name="uachieveapi.hibernate.show_sql">true</param>
