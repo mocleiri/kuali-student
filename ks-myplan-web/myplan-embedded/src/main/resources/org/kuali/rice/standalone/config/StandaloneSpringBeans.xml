@@ -63,7 +63,6 @@
 		<property name="configLocations">
 			<list>
 				<value>classpath:org/kuali/rice/standalone/config/standalone-config.xml</value>
-                <value>classpath:META-INF/ks-myplan-config.xml</value>
 			</list>
 		</property>
 	</bean>
