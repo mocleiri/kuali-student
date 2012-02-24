@@ -50,7 +50,7 @@ public abstract class Transaction {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
 	    @JoinColumn(name="TYPE_ID", referencedColumnName = "ID"),
-	    @JoinColumn(name="TYPE_SUBCODE", referencedColumnName = "SUBCODE")
+	    @JoinColumn(name="TYPE_SUB_CODE", referencedColumnName = "SUB_CODE")
 	})
     protected TransactionType transactionType;
 
