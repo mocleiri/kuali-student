@@ -3,7 +3,7 @@ package com.sigmasys.kuali.ksa.util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
-import org.hibernate.engine.SessionFactoryImplementor;
+
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
@@ -91,11 +91,6 @@ public final class CommonUtils {
         int contextEnd = request.getContextPath().length();
         int folderEnd = requestedUri.lastIndexOf('/') + 1;
         return requestedUri.substring(contextEnd, folderEnd);
-    }
-
-    public static String getDefaultHibernateSchema(EntityManager em) {
-        SessionFactoryImplementor sfi = (SessionFactoryImplementor) ((Session) em.getDelegate()).getSessionFactory();
-        return sfi.getSettings().getDefaultSchemaName();
     }
 
 }

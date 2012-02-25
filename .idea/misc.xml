@@ -186,6 +186,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
   <component name="SvnBranchConfigurationManager17">
     <option name="myConfigurationMap">
       <map>
