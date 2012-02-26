@@ -43,6 +43,7 @@
 	<param name="transaction.timeout">300</param>
 
 	<!-- KIM -->
+    <param name="kim.mode">EMBEDDED</param>
 	<param name="kim.cache.entity.max.size">100</param>
 	<param name="kim.cache.entity.max.age.seconds">3600</param>
 	

@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.kuali.rice.kim.api.identity.principal.Principal;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.kim.api.identity.IdentityService;
-import org.kuali.rice.core.impl.config.module.CoreConfigurer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
