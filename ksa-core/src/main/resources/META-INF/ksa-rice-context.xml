@@ -8,7 +8,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
 	default-lazy-init="true">
 
-	<bean id="config" class="org.kuali.rice.core.config.spring.ConfigFactoryBean">
+	<bean id="config" class="org.kuali.rice.core.impl.config.property.ConfigFactoryBean">
 		<property name="configLocations">
 			<list>
 				<value>classpath:/META-INF/ksa-rice-config.xml</value>
@@ -28,39 +28,13 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean>
 
 	<!-- Configure KSA-specific implementations of Rice services/beans here -->
-	<bean id="riceConfigurer" class="org.kuali.rice.core.config.RiceConfigurer">
-		<property name="rootConfig" ref="config" />
+	<bean id="riceConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer">
 		<property name="dataSource" ref="ksaDataSource" />
 		<property name="serverDataSource" ref="riceDataSource" />
 		<property name="nonTransactionalDataSource" ref="riceDataSource" />
 		<property name="transactionManager" ref="atomikosTransactionManager" />
 		<property name="userTransaction" ref="atomikosTransactionManager" />
-		<property name="serviceNamespace" value="rice" />
 		<property name="platform" value="Oracle" />
-		<property name="ksbConfigurer">
-			<bean class="org.kuali.rice.ksb.messaging.config.KSBConfigurer">
-				<property name="serviceServletUrl" value="${serviceServletUrl}" />
-			</bean>
-		</property>
-		<property name="kewConfigurer">
-			<bean class="org.kuali.rice.kew.config.KEWConfigurer">
-				<property name="clientProtocol" value="local" />
-			</bean>
-		</property>
-		<property name="knsConfigurer">
-			<bean class="org.kuali.rice.kns.config.KNSConfigurer" />
-		</property>
-		<property name="kimConfigurer">
-			<bean class="org.kuali.rice.kim.config.KIMConfigurer" />
-		</property>
-		<property name="kcbConfigurer">
-			<bean class="org.kuali.rice.kcb.config.KCBConfigurer" />
-		</property>
-		<property name="additionalSpringFiles">
-			<list>
-				<value>classpath:/META-INF/ksa-context.xml</value>
-			</list>
-		</property>
 	</bean>
 
     <import resource="classpath:/META-INF/ksa-datasource.xml" />

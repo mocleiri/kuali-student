@@ -14,11 +14,11 @@ import com.sigmasys.kuali.ksa.service.AbstractServiceTest;
  * User: Michael Ivanov
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses(value = {TransactionServiceTest.class})
-@ContextConfiguration(locations = {ServiceTestSuite.TEST_CONTEXT})
+@Suite.SuiteClasses(value = {TransactionServiceTest.class, KimServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
-    public static final String TEST_CONTEXT = "/META-INF/test-ksa-context.xml";
+    public static final String TEST_KSA_CONTEXT = "/META-INF/test-ksa-context.xml";
+    public static final String TEST_RICE_CONTEXT = "/META-INF/ksa-rice-context.xml";
 
     public static Test suite() {
         return new JUnit4TestAdapter(ServiceTestSuite.class);
