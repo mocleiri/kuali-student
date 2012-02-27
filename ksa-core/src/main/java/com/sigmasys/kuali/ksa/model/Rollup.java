@@ -2,22 +2,16 @@ package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.persistence.*;
 
 
 /**
- * Transaction is an abstract class, used to generate different types of transactions within the system.
+ * Transaction rollup.
  *
- * @author Paul Heald, Michael Ivanov
+ * @author Michael Ivanov
  */
 @Entity
-@Table(name="KSSA_TRANSACTION")
+@Table(name="KSSA_ROLLUP")
 public class Rollup {
 
     /**
@@ -56,6 +50,7 @@ public class Rollup {
      */
 	@Column(name = "LAST_UPDATE")
     private Date lastUpdate;
+
 
 	public Long getId() {
 		return id;

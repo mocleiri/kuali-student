@@ -53,6 +53,16 @@ public abstract class Transaction {
 	    @JoinColumn(name="TYPE_SUB_CODE", referencedColumnName = "SUB_CODE")
 	})
     protected TransactionType transactionType;
+
+
+    /**
+         * the rollup is an institutionally specified group of transactions that are rolled up on the initial view of an account, if the transactions fall in to a specified academic
+         * time period. For example, setting this flag on all tuition charges to TUITION would cause all tuition charges to roll up into a single line. If a school charges mandatory fees
+         * as single transactions, this could also be rolled up in this way. This can be set on a per-charge basis, or can be pulled from the default in the TransactionType.
+         */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="DEF_ROLLUP_ID_FK")
+    protected Rollup rollup;
 	
 	/**
 	 * User account name, i.e. "pheald"
@@ -87,13 +97,13 @@ public abstract class Transaction {
     /**
      * This is the value of the transaction in the system currency. This is the number that is used as the core value of the transaction. All calculations are performed against this number.
      */
-	@Column(name = "AMOUNT")
+	@Column(name = "AMNT")
     protected BigDecimal amount;
 
     /**
      * This is the native amount of the transaction in the currency in which it was created. For most transactions, this will be identical to the localAmount, as most transactions occur in the local currency.
      */
-	@Column(name = "NATIVE_AMOUNT")
+	@Column(name = "NATIVE_AMNT")
     protected BigDecimal nativeAmount;
 
     /**
@@ -148,14 +158,6 @@ public abstract class Transaction {
 	@Column(name = "MEMO_REF")
     protected String memoReference;
 
-    /**
-     * the rollupId is an institutionally specified group of transactions that are rolled up on the initial view of an account, if the transactions fall in to a specified academic
-     * time period. For example, setting this flag on all tuition charges to TUITION would cause all tuition charges to roll up into a single line. If a school charges mandatory fees
-     * as single transactions, this could also be rolled up in this way. This can be set on a per-charge basis, or can be pulled from the default in the TransactionType.
-     */
-	@Column(name = "ROLLUP_ID")
-    protected Long rollupId;
-   
 
 	public Long getId() {
 		return id;
@@ -244,14 +246,6 @@ public abstract class Transaction {
 	public void setMemoReference(String memoReference) {
 		this.memoReference = memoReference;
 	}
-
-	public Long getRollupId() {
-		return rollupId;
-	}
-
-	public void setRollupId(Long rollupId) {
-		this.rollupId = rollupId;
-	}
 	
 	 /**
      * This method can set the internal switch on or off for a transaction. I cannot think of a time when an internal transaction would
@@ -280,8 +274,46 @@ public abstract class Transaction {
 		return documentReference;
 	}
 
-    
-  
+
+    public Rollup getRollup() {
+        return rollup;
+    }
+
+    public void setRollup(Rollup rollup) {
+        this.rollup = rollup;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public BigDecimal getAllocatedAmount() {
+        return allocatedAmount;
+    }
+
+    public void setAllocatedAmount(BigDecimal allocatedAmount) {
+        this.allocatedAmount = allocatedAmount;
+    }
 }
 	
 
