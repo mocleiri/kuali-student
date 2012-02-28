@@ -13,7 +13,7 @@ import javax.persistence.Transient;
  */
 
 @Entity
-@DiscriminatorValue("P")
+@DiscriminatorValue("TCP")
 public class Payment extends Credit {
 
     /**
@@ -25,9 +25,9 @@ public class Payment extends Credit {
      * which is set for transactions which are inherently non refundable,
      * such as tuition deposits, etc.
      */
-	@Column(name = "CLEAR_DATE")
     private Date clearDate;
 
+    @Column(name = "CLEAR_DATE")
     public Date getClearDate() {
         return clearDate;
     }

@@ -16,6 +16,23 @@ public class GlBreakdown {
     /**
      * The unique transaction identifier for the KSA product.
      */
+    private Long id;
+
+    /**
+     * GL account
+     */
+    private String account;
+
+
+    private BigDecimal amount;
+
+
+    /**
+     * Reference to DEBIT type
+     */
+    private DebitType debitType;
+
+
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
     @TableGenerator(name = "TABLE_GEN",
@@ -24,29 +41,6 @@ public class GlBreakdown {
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "GL_BREAKDOWN_SEQ")
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
-    private Long id;
-
-    /**
-     * GL account
-     */
-    @Column(name = "GL_ACCOUNT")
-    private String name;
-
-
-    @Column(name = "BREAKDOWN")
-    private BigDecimal amount;
-
-
-    /**
-     * Reference to DEBIT type
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "DEBIT_TYPE_ID_FK", referencedColumnName = "ID"),
-            @JoinColumn(name = "DEBIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
-    })
-    protected DebitType debitType;
-
     public Long getId() {
         return id;
     }
@@ -55,6 +49,7 @@ public class GlBreakdown {
         this.id = id;
     }
 
+    @Column(name = "BREAKDOWN")
     public BigDecimal getAmount() {
         return amount;
     }
@@ -63,14 +58,20 @@ public class GlBreakdown {
         this.amount = amount;
     }
 
-    public String getName() {
-        return name;
+    @Column(name = "GL_ACCOUNT")
+    public String getAccount() {
+        return account;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "DEBIT_TYPE_ID_FK", referencedColumnName = "ID"),
+            @JoinColumn(name = "DEBIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
+    })
     public DebitType getDebitType() {
         return debitType;
     }

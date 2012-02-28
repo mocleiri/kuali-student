@@ -1,13 +1,9 @@
 package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * CreditType
@@ -16,24 +12,34 @@ import javax.persistence.Table;
  * <p/>
  * <p/>
  * <p/>
- * User: mike
- * Date: 1/22/12
- * Time: 4:13 PM
+ * @author Michael Ivanov
  */
 @Entity
 @Table(name = "KSSA_CREDIT_TYPE")
 public class CreditType extends TransactionType {
 
-	@Column(name = "CLEAR_DATE")
     private Date clearDate;
-    
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REFUND_RULE_ID")
+
     private RefundRule refundRule;
-    
-	@Column(name = "AUTH_TEXT")
+
     private String authorizationText;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "KSSA_CREDIT_TAG",
+            joinColumns = {
+                    @JoinColumn(name = "CREDIT_TYPE_ID_FK"),
+                    @JoinColumn(name = "CREDIT_TYPE_SUB_CODE_FK")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "TAG_ID_FK")
+            }
+    )
+    @Override
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    @Column(name = "CLEAR_DATE")
     public Date getClearDate() {
         return clearDate;
     }
@@ -42,6 +48,8 @@ public class CreditType extends TransactionType {
         this.clearDate = clearDate;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REFUND_RULE_ID")
     public RefundRule getRefundRule() {
         return refundRule;
     }
@@ -50,6 +58,7 @@ public class CreditType extends TransactionType {
         this.refundRule = refundRule;
     }
 
+    @Column(name = "AUTH_TEXT")
     public String getAuthorizationText() {
         return authorizationText;
     }

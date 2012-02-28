@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,23 +24,29 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class TransactionType {
     
-	@Id
-	@Column(name = "ID")
+
     protected Long id;
     
-	@Id
-	@Column(name = "SUBCODE")
     protected String subCode;
-    
-	@Column(name = "START_DATE")
+
     protected Date startDate;
-    
-	@Column(name = "END_DATE")
+
     protected Date endDate;
-    
-	@Column(name = "DEF_TRN_TXT")
+
     protected String description;
 
+    protected List<Tag> tags;
+
+
+    /**
+     * It needs to be implemented in DebitType and CreditType
+     * @return list of tags
+     */
+    public abstract List<Tag> getTags();
+
+
+    @Id
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }
@@ -48,6 +55,8 @@ public abstract class TransactionType {
         this.id = id;
     }
 
+    @Id
+    @Column(name = "SUB_CODE")
     public String getSubCode() {
         return subCode;
     }
@@ -56,6 +65,7 @@ public abstract class TransactionType {
         this.subCode = subCode;
     }
 
+    @Column(name = "START_DATE")
     public Date getStartDate() {
         return startDate;
     }
@@ -64,6 +74,7 @@ public abstract class TransactionType {
         this.startDate = startDate;
     }
 
+    @Column(name = "END_DATE")
     public Date getEndDate() {
         return endDate;
     }
@@ -72,6 +83,7 @@ public abstract class TransactionType {
         this.endDate = endDate;
     }
 
+    @Column(name = "DEF_TRN_TXT")
     public String getDescription() {
         return description;
     }
@@ -80,4 +92,7 @@ public abstract class TransactionType {
         this.description = description;
     }
 
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }

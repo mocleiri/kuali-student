@@ -9,29 +9,27 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 @Entity
-@DiscriminatorValue("D")
+@DiscriminatorValue("TCD")
 public class Deferment extends Credit {
 
     /**
-      * All deferments are set with an expiration date. If the date passes, then the deferment is expired, and the payment application system will
-      * remove the allocation of the deferment, and the charge it is applied to will become due.
-      */
-	@Column(name = "EXPIRATION_DATE")
+     * All deferments are set with an expiration date. If the date passes, then the deferment is expired, and the payment application system will
+     * remove the allocation of the deferment, and the charge it is applied to will become due.
+     */
     private Date expirationDate;
 
     /**
-      * A deferment is always issued against a debit. This value shows the system which debit has been deferred.
-      * Once a deferment is expired, this value remains to show
-      * the original status and intention of the deferment.
-      */
-	@Column(name = "DEFER_TRN_ID")
+     * A deferment is always issued against a debit. This value shows the system which debit has been deferred.
+     * Once a deferment is expired, this value remains to show
+     * the original status and intention of the deferment.
+     */
     private Long deferredTransactionId;
 
-    /** a deferment is the only type of transaction whose amount can be altered. For audit purposes,
-      * the original value of the deferment is set permanently in this attribute,
-      * even if the deferment is reduced or expired, the original value will be accessible here.
-      */
-	@Column(name = "ORIG_DEFER_AMOUNT")
+    /**
+     * a deferment is the only type of transaction whose amount can be altered. For audit purposes,
+     * the original value of the deferment is set permanently in this attribute,
+     * even if the deferment is reduced or expired, the original value will be accessible here.
+     */
     private BigDecimal originalDefermentAmount;
 
 
@@ -39,10 +37,12 @@ public class Deferment extends Credit {
         this.deferredTransactionId = deferredTransactionId;
     }
 
+    @Column(name = "DEFER_ID")
     public Long getDeferredTransactionId() {
         return deferredTransactionId;
     }
 
+    @Column(name = "EXPIRATION_DATE")
     public Date getExpirationDate() {
         return expirationDate;
     }
@@ -51,6 +51,7 @@ public class Deferment extends Credit {
         this.expirationDate = expirationDate;
     }
 
+    @Column(name = "ORIG_DEFER_AMOUNT")
     public BigDecimal getOriginalDefermentAmount() {
         return originalDefermentAmount;
     }

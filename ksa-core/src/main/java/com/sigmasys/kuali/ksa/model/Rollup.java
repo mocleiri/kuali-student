@@ -17,41 +17,37 @@ public class Rollup {
     /**
      * The unique transaction identifier for the KSA product.
      */
-	@Id
-	@Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name="TABLE_GEN", 
-        table="SEQUENCE_TABLE", 
-        pkColumnName="SEQ_NAME",
-        valueColumnName="SEQ_VALUE", 
-        pkColumnValue="ROLLUP_SEQ")
-    @GeneratedValue(strategy=GenerationType.TABLE, generator="TABLE_GEN")
     protected Long id;
 
 	/**
      * Rollup name
      */
-	@Column(name = "NAME")
     private String name;
 	
 	/**
      * Creator user ID
      */
-	@Column(name = "CREATOR_ID")
     private String creatorId;
 
 	/**
      * Editor user ID
      */
-	@Column(name = "EDITOR_ID")
     private String editorId;
 	
 	/**
      * Editor user ID
      */
-	@Column(name = "LAST_UPDATE")
     private Date lastUpdate;
 
 
+    @Id
+    	@Column(name = "ID", nullable = false, unique = true, updatable = false)
+        @TableGenerator(name="TABLE_GEN",
+            table="SEQUENCE_TABLE",
+            pkColumnName="SEQ_NAME",
+            valueColumnName="SEQ_VALUE",
+            pkColumnValue="ROLLUP_SEQ")
+        @GeneratedValue(strategy=GenerationType.TABLE, generator="TABLE_GEN")
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +56,7 @@ public class Rollup {
 		this.id = id;
 	}
 
+    @Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
@@ -68,6 +65,7 @@ public class Rollup {
 		this.name = name;
 	}
 
+    @Column(name = "CREATOR_ID")
 	public String getCreatorId() {
 		return creatorId;
 	}
@@ -76,6 +74,7 @@ public class Rollup {
 		this.creatorId = creatorId;
 	}
 
+    @Column(name = "EDITOR_ID")
 	public String getEditorId() {
 		return editorId;
 	}
@@ -84,6 +83,7 @@ public class Rollup {
 		this.editorId = editorId;
 	}
 
+    @Column(name = "LAST_UPDATE")
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}

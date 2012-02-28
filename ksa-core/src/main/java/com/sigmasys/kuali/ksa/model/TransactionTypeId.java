@@ -27,7 +27,7 @@ public class TransactionTypeId implements Serializable {
 	        this.id = id;
 	    }
 	    
-	    @Column(name = "SUBCODE")
+	    @Column(name = "SUB_CODE")
 	    public String getSubCode() {
 	        return subCode;
 	    }
