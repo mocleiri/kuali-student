@@ -6,7 +6,7 @@
     <artifactId>service-contracts</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>lum-api</artifactId>
+  <artifactId>ks-lum-api</artifactId>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
