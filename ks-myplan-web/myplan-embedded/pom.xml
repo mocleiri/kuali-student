@@ -17,11 +17,17 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
+	    <resources>
+            <resource>
+        		<directory>src/main/resources</directory>
+        		<filtering>true</filtering>
+      		</resource>
+    	</resources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
@@ -95,6 +101,25 @@
                     </dependentWarExcludes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                      <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>create</goal>
+                            </goals>
+                      </execution>
+                </executions>
+                <configuration>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

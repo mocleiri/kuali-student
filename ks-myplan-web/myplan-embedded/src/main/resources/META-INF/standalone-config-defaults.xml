@@ -23,6 +23,10 @@
         syntax: ${varname} ${institution}
     -->
 <config>
+
+    <!-- Build info for app header -->
+    <param name="version">${project.name} :: ${project.version} :: #${buildNumber} :: ${kuali.build.timestamp}</param>
+
     <!-- Change Configurer Modes to LOCAL -->
     <param name="location.mode">LOCAL</param>
     <param name="coreservice.mode">LOCAL</param>
