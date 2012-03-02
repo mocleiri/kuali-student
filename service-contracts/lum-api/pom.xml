@@ -9,7 +9,7 @@
   <artifactId>lum-api</artifactId>
   <dependencies>
     <dependency>
-      <groupId>org.kuali.student.service</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>core-api</artifactId>
       <version>${project.version}</version>
     </dependency>
