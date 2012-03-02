@@ -9,7 +9,7 @@
   <artifactId>common-api</artifactId>
   <dependencies>
     <dependency>
-      <groupId>org.kuali.student.service-api</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>common-ws</artifactId>
       <version>${project.version}</version>
     </dependency>
