@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <artifactId>service-contracts</artifactId>
-        <groupId>org.kuali.student.service-contracts</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-
-    <groupId>org.kuali.student.service-contracts</groupId>
-
-    <artifactId>lum-api</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kuali.student.services</groupId>
+    <artifactId>service-contracts</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.kuali.student.service-contracts</groupId>
-            <artifactId>core-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gwtx</groupId>
-            <artifactId>gwtx</artifactId>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+  </parent>
+  <artifactId>lum-api</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>org.kuali.student.service</groupId>
+      <artifactId>core-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gwtx</groupId>
+      <artifactId>gwtx</artifactId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 </project>
