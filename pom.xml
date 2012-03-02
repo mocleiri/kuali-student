@@ -12,10 +12,11 @@
   <packaging>pom</packaging>
   <modules>
     <module>ks-common</module>
+    <!-- 
     <module>ks-security</module>
     <module>ks-core-impl</module>
     <module>ks-core-web</module>
     <module>ks-core-ui</module>
-    <module>ks-core-sql</module>
+    <module>ks-core-sql</module> -->
   </modules>
 </project>
