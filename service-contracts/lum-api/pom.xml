@@ -13,10 +13,5 @@
       <artifactId>core-api</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.google.code.gwtx</groupId>
-      <artifactId>gwtx</artifactId>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 </project>
