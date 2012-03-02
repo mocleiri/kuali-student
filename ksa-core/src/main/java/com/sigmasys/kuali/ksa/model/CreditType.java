@@ -20,6 +20,8 @@ public class CreditType extends TransactionType {
 
     private Date clearDate;
 
+    private Integer clearPeriod;
+
     private RefundRule refundRule;
 
     private String authorizationText;
@@ -65,5 +67,14 @@ public class CreditType extends TransactionType {
 
     public void setAuthorizationText(String authorizationText) {
         this.authorizationText = authorizationText;
+    }
+
+    @Column(name = "DEF_CLEAR_PERIOD")
+    public Integer getClearPeriod() {
+        return clearPeriod;
+    }
+
+    public void setClearPeriod(Integer clearPeriod) {
+        this.clearPeriod = clearPeriod;
     }
 }

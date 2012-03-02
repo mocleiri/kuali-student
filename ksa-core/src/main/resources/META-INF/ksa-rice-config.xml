@@ -1,99 +1,99 @@
 <config>
 	
 	<!--  log4j Settings -->
-	<param name="log4j.reload.minutes">5</param>
-	<param name="log4j.settings.path">classpath:/log4j.properties</param>
+	<param ipAddress="log4j.reload.minutes">5</param>
+	<param ipAddress="log4j.settings.path">classpath:/log4j.properties</param>
 
 	<!--  Bus Configuration  -->
-	<param name="dev.mode">false</param>
-	<param name="message.persistence">true</param>
-	<param name="message.delivery">async</param>
-	<param name="Routing.ImmediateExceptionRouting">true</param>
-	<param name="RouteQueue.timeIncrement">60000</param>
-	<param name="RouteQueue.maxRetryAttempts">6</param>
+	<param ipAddress="dev.mode">false</param>
+	<param ipAddress="message.persistence">true</param>
+	<param ipAddress="message.delivery">async</param>
+	<param ipAddress="Routing.ImmediateExceptionRouting">true</param>
+	<param ipAddress="RouteQueue.timeIncrement">60000</param>
+	<param ipAddress="RouteQueue.maxRetryAttempts">6</param>
 
 	<!--  Quartz Configuration  -->
-	<param name="useQuartzDatabase">true</param>
-	<param name="ksb.org.quartz.scheduler.instanceName">Embedded KSB Scheduler</param>
-	<param name="ksb.org.quartz.scheduler.instanceId">AUTO</param>
-	<param name="ksb.org.quartz.threadPool.threadCount">5</param>
-	<param name="ksb.org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</param>
+	<param ipAddress="useQuartzDatabase">true</param>
+	<param ipAddress="ksb.org.quartz.scheduler.instanceName">Embedded KSB Scheduler</param>
+	<param ipAddress="ksb.org.quartz.scheduler.instanceId">AUTO</param>
+	<param ipAddress="ksb.org.quartz.threadPool.threadCount">5</param>
+	<param ipAddress="ksb.org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</param>
 
 	<!--  Workflow Upload Configuration (for stand-alone)  -->
-	<param name="data.xml.pollIntervalSecs">30</param>
-	<param name="initialDelaySecs">10</param>
-	<param name="simpleDocumentActionsService.security">true</param>
-	<param name="secure.workflowdocument.javaservice.endpoint">true</param>
-	<param name="secure.workflowutility.javaservice.endpoint">true</param>
-	<param name="keystore.file">security/rice.keystore</param>
-	<param name="keystore.alias">rice</param>
-	<param name="keystore.password">r1c3pw</param>
+	<param ipAddress="data.xml.pollIntervalSecs">30</param>
+	<param ipAddress="initialDelaySecs">10</param>
+	<param ipAddress="simpleDocumentActionsService.security">true</param>
+	<param ipAddress="secure.workflowdocument.javaservice.endpoint">true</param>
+	<param ipAddress="secure.workflowutility.javaservice.endpoint">true</param>
+	<param ipAddress="keystore.file">security/rice.keystore</param>
+	<param ipAddress="keystore.alias">rice</param>
+	<param ipAddress="keystore.password">r1c3pw</param>
 
 	<!-- Standalone Server URL -->
-	<param name="serviceServletUrl">http://ricehost.ucdavis.edu/rice-context/remoting</param>
+	<param ipAddress="serviceServletUrl">http://ricehost.ucdavis.edu/rice-context/remoting</param>
 	
 	<!-- XML ingester directories -->
-	<param name="data.xml.root.location">/opt/ears/${environment}/en/xml</param>
-	<param name="data.xml.pending.location">${data.xml.root.location}pending</param>
-	<param name="data.xml.loaded.location">${data.xml.root.location}loaded</param>
-	<param name="data.xml.problem.location">${data.xml.root.location}problem</param>
-	<param name="attachment.dir.location">/opt/ears/</param>
+	<param ipAddress="data.xml.root.location">/opt/ears/${environment}/en/xml</param>
+	<param ipAddress="data.xml.pending.location">${data.xml.root.location}pending</param>
+	<param ipAddress="data.xml.loaded.location">${data.xml.root.location}loaded</param>
+	<param ipAddress="data.xml.problem.location">${data.xml.root.location}problem</param>
+	<param ipAddress="attachment.dir.location">/opt/ears/</param>
 
 	<!-- UserTransaction properties -->
-	<param name="transaction.timeout">300</param>
+	<param ipAddress="transaction.timeout">300</param>
 
 	<!-- KIM -->
-    <param name="kim.mode">EMBEDDED</param>
-	<param name="kim.cache.entity.max.size">100</param>
-	<param name="kim.cache.entity.max.age.seconds">3600</param>
+    <param ipAddress="kim.mode">EMBEDDED</param>
+	<param ipAddress="kim.cache.entity.max.size">100</param>
+	<param ipAddress="kim.cache.entity.max.age.seconds">3600</param>
 	
-	<param name="kim.cache.group.max.size">100</param>
-	<param name="kim.cache.group.max.age.seconds">3600</param>
+	<param ipAddress="kim.cache.group.max.size">100</param>
+	<param ipAddress="kim.cache.group.max.age.seconds">3600</param>
 	
-	<param name="kim.cache.permission.max.size">100</param>
-	<param name="kim.cache.permission.max.age.seconds">3600</param>
+	<param ipAddress="kim.cache.permission.max.size">100</param>
+	<param ipAddress="kim.cache.permission.max.age.seconds">3600</param>
 	
-	<param name="kim.cache.responsibility.max.size">100</param>
-	<param name="kim.cache.responsibility.max.age.seconds">3600</param>
+	<param ipAddress="kim.cache.responsibility.max.size">100</param>
+	<param ipAddress="kim.cache.responsibility.max.age.seconds">3600</param>
 	
-	<param name="kim.cache.role.max.size">100</param>
-	<param name="kim.cache.role.max.age.seconds">3600</param>
+	<param ipAddress="kim.cache.role.max.size">100</param>
+	<param ipAddress="kim.cache.role.max.age.seconds">3600</param>
 	
-	<param name="kim.cache.person.max.size">100</param>
-	<param name="kim.cache.person.max.age.seconds">3600</param>
+	<param ipAddress="kim.cache.person.max.size">100</param>
+	<param ipAddress="kim.cache.person.max.age.seconds">3600</param>
 	
-	<param name="kim.identityArchiveServiceImpl.executionIntervalSeconds">600</param>
-	<param name="kim.identityArchiveServiceImpl.maxWriteQueueSize">600</param>
-	<param name="kim.soapExposedService.jaxws.security">false</param>
+	<param ipAddress="kim.identityArchiveServiceImpl.executionIntervalSeconds">600</param>
+	<param ipAddress="kim.identityArchiveServiceImpl.maxWriteQueueSize">600</param>
+	<param ipAddress="kim.soapExposedService.jaxws.security">false</param>
 	
 	<!--  KNS -->
-	<param name="kns.cache.parameter.max.size">100</param>
-	<param name="kns.cache.parameter.max.age.seconds">3600</param>
+	<param ipAddress="kns.cache.parameter.max.size">100</param>
+	<param ipAddress="kns.cache.parameter.max.age.seconds">3600</param>
 	
-	<param name="kns.cache.nonDatabaseComponent.max.size">100</param>
-	<param name="kns.cache.nonDatabaseComponent.max.age.seconds">3600</param>
+	<param ipAddress="kns.cache.nonDatabaseComponent.max.size">100</param>
+	<param ipAddress="kns.cache.nonDatabaseComponent.max.age.seconds">3600</param>
 	
 	<!-- KCB & KEN--> 
-    <param name="kcb.messaging.synchronous">false</param> 
-    <param name="kcb.messageprocessing.startDelayMS">75000</param> 
-    <param name="kcb.messageprocessing.repeatIntervalMS">30000</param> 
-    <param name="kcb.quartz.group">KCB-Delivery</param> 
-    <param name="kcb.quartz.job.name">MessageProcessingJobDetail</param> 
-    <param name="kcb.maxProcessAttempts">3</param> 
-    <param name="kcb.messaging.synchronous">false</param> 
-    <param name="kcb.smtp.host">localhost</param>
-    <param name="kcb.url">http://localhost/kcb</param>
-    <param name="ken.system.user">notsys</param>    
-    <param name="ken.url">http://localhost/ken</param>  
+    <param ipAddress="kcb.messaging.synchronous">false</param>
+    <param ipAddress="kcb.messageprocessing.startDelayMS">75000</param>
+    <param ipAddress="kcb.messageprocessing.repeatIntervalMS">30000</param>
+    <param ipAddress="kcb.quartz.group">KCB-Delivery</param>
+    <param ipAddress="kcb.quartz.job.ipAddress">MessageProcessingJobDetail</param>
+    <param ipAddress="kcb.maxProcessAttempts">3</param>
+    <param ipAddress="kcb.messaging.synchronous">false</param>
+    <param ipAddress="kcb.smtp.host">localhost</param>
+    <param ipAddress="kcb.url">http://localhost/kcb</param>
+    <param ipAddress="ken.system.user">notsys</param>
+    <param ipAddress="ken.url">http://localhost/ken</param>
     
     <!--  Rice CXF -->
-    <param name="rice.cxf.client.connectionTimeout">30000</param> 
-    <param name="rice.cxf.client.receiveTimeout">120000</param> 
-    <param name="rice.cxf.client.allowChunking">true</param> 
+    <param ipAddress="rice.cxf.client.connectionTimeout">30000</param>
+    <param ipAddress="rice.cxf.client.receiveTimeout">120000</param>
+    <param ipAddress="rice.cxf.client.allowChunking">true</param>
     
-    <param name="mail.relay.server">localhost</param>
-	<param name="mailing.list.batch">mailing.list.batch</param>
-	<param name="kr.incident.mailing.list"></param>
-	<param name="session.document.cache.size">10</param>
+    <param ipAddress="mail.relay.server">localhost</param>
+	<param ipAddress="mailing.list.batch">mailing.list.batch</param>
+	<param ipAddress="kr.incident.mailing.list"></param>
+	<param ipAddress="session.document.cache.size">10</param>
  
 </config>

@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class GlBreakdown {
 
     /**
-     * The unique transaction identifier for the KSA product.
+     * The unique identifier
      */
     private Long id;
 
