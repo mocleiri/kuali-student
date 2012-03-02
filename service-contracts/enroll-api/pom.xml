@@ -9,17 +9,17 @@
   <artifactId>enroll-api</artifactId>
   <dependencies>
     <dependency>
-      <groupId>org.kuali.student.services</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>core-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.kuali.student.services</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>lum-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.kuali.student.services</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>common-api</artifactId>
       <version>${project.version}</version>
     </dependency>

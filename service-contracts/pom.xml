@@ -13,8 +13,8 @@
   <modules>
     <module>common-ws</module>
     <module>common-api</module>
+    <module>core-api</module>
     <!--
-      <module>core-api</module>
       <module>enroll-api</module>
     -->
   </modules>
