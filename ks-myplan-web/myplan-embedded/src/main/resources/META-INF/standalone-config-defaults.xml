@@ -23,9 +23,12 @@
         syntax: ${varname} ${institution}
     -->
 <config>
-
     <!-- Build info for app header -->
-    <param name="version">${project.name} :: ${project.version} :: #${buildNumber} :: ${kuali.build.timestamp}</param>
+    <param name="version">${project.name} :: ${project.version} :: Rev ${buildNumber} :: ${kuali.build.timestamp}</param>
+    
+    <!-- PubCookie Login config   -->
+    <param name="filter.login.class">org.kuali.rice.kew.web.UserLoginFilter</param>
+    <param name="filtermapping.login.1">/*</param>
 
     <!-- Change Configurer Modes to LOCAL -->
     <param name="location.mode">LOCAL</param>

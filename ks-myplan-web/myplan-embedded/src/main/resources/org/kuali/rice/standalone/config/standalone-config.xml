@@ -145,7 +145,6 @@
     <!--    <param name="filter.login.class">org.kuali.rice.kew.web.DummyLoginFilter</param>-->
     <!--    <param name="filtermapping.login.1">/*</param>-->
 
-
     <!-- additional config files -->
     <!--
         Setting this property allows selective loading lum or core project or both
