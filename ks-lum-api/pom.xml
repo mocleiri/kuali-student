@@ -7,6 +7,7 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>ks-lum-api</artifactId>
+  <name>KS LUM Services API</name>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
