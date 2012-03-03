@@ -9,10 +9,10 @@
   <artifactId>ks-common</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>ks-common-ui</module>
+    <module>ks-common-util</module>
     <!--
+      <module>ks-common-ui</module>
       <module>common-impl</module>
-      <module>common-util</module>
       <module>cxf</module>
       <module>eclipselink</module>
       <module>hibernate</module>
