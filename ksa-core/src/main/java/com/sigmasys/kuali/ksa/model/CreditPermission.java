@@ -60,7 +60,7 @@ public class CreditPermission {
         this.priority = priority;
     }
 
-    @Column(name = "ALLOWABLE_DEBIT_TYPE_ID_FK")
+    @Column(name = "ALLOWABLE_DEBIT_TYPE_ID")
     public String getAllowableDebitType() {
         return allowableDebitType;
     }
