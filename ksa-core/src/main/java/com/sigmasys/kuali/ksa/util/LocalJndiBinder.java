@@ -11,12 +11,14 @@ import java.rmi.registry.Registry;
 import java.util.Map;
 import java.util.Properties;
 
+import org.springframework.core.Ordered;
+
 /**
  * LocalJndiBinder. Provides local JNDI context.
  *
  * @author ivanovm
  */
-public class LocalJndiBinder {
+public class LocalJndiBinder implements Ordered {
 
     private static final Log logger = LogFactory.getLog(LocalJndiBinder.class);
 
@@ -53,6 +55,12 @@ public class LocalJndiBinder {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
+    }
+    
+    @Override
+    public int getOrder() {
+    	// This service should be initialized ahead of all others
+    	return 0;
     }
 
 }

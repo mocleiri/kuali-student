@@ -1,7 +1,7 @@
 <config>
 
     <param name="rice.version">2.0</param>
-    <param name="datasource.platform">Oracle</param>
+    <param name="datasource.platform">oracle.jdbc.driver.OracleDriver</param>
 
 	<!--  log4j Settings -->
 	<param name="log4j.reload.minutes">5</param>
@@ -69,7 +69,7 @@
 	<param name="kim.identityArchiveServiceImpl.maxWriteQueueSize">600</param>
 	<param name="kim.soapExposedService.jaxws.security">false</param>
 
-    <param name="kim.ehcache.config.location">ehcache.xml</param>
+    <param name="kim.ehcache.config.location">kim-ehcache.xml</param>
 
 
 	
