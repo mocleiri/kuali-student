@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
@@ -10,6 +11,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
        default-lazy-init="true">
 
     <bean id="config" class="org.kuali.rice.core.impl.config.property.ConfigFactoryBean">
+        <property name="initialize" value="true"/>
         <property name="configLocations">
             <list>
                 <value>classpath:/META-INF/ksa-rice-config.xml</value>
@@ -36,11 +38,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
-    <bean id="kimIdentityService" class="org.kuali.rice.krad.config.GlobalResourceLoaderServiceFactoryBean">
-        <property name="serviceName" value="kimIdentityService"/>
-    </bean>
-
-
     <import resource="classpath:/META-INF/ksa-datasource.xml"/>
+
+    <import resource="classpath:org/kuali/rice/kim/impl/config/KimEmbeddedSpringBeans.xml"/>
 
 </beans>

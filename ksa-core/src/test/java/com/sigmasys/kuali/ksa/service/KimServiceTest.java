@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.sigmasys.kuali.ksa.util.ContextUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,7 +40,7 @@ public class KimServiceTest extends AbstractServiceTest {
 		
 		Assert.notNull(userId);
 		
-		IdentityService service = KimApiServiceLocator.getIdentityService();
+		IdentityService service = ContextUtils.getBean("identityService",IdentityService.class);
 		
 		Principal principal = service.getPrincipal("mivanov");
 		

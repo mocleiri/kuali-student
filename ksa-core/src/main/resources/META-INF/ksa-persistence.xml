@@ -12,7 +12,19 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
             <property name="hibernate.jdbc.fetch_size" value="1000"/>
             <property name="hibernate.transaction.manager_lookup_class"
-                                              value="com.sigmasys.kuali.ksa.service.jta.AtomikosTransactionManagerLookup"/>
+                      value="com.sigmasys.kuali.ksa.service.jta.AtomikosTransactionManagerLookup"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="rice" transaction-type="JTA">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <jta-data-source>RiceDS</jta-data-source>
+        <properties>
+            <property name="hibernate.default_schema" value="KSA"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+            <property name="hibernate.jdbc.fetch_size" value="1000"/>
+            <property name="hibernate.transaction.manager_lookup_class"
+                      value="com.sigmasys.kuali.ksa.service.jta.AtomikosTransactionManagerLookup"/>
         </properties>
     </persistence-unit>
 
