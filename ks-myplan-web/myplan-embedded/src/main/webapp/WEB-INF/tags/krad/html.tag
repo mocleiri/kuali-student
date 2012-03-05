@@ -90,7 +90,7 @@
                 My<strong>Plan</strong> <span>One-stop Academic Planner</span>
             </div>
             <div id="appuser_div">
-                <div class="name">Welcome, *firstname*</div>
+                <div class="name">Welcome, ${UserSession.person.firstName}</div>
                 <div class="links">
                     <ul>
                         <li><a href="#">Log out</a></li>
