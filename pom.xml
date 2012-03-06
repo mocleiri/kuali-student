@@ -14,13 +14,4 @@
   <properties>
     <ks.services.version>1.0.0-SNAPSHOT</ks.services.version>
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.kuali.student.services</groupId>
-        <artifactId>ks-common-api</artifactId>
-        <version>${ks.common-api.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 </project>
