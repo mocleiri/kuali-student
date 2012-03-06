@@ -16,8 +16,8 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>KSA</name>
-    
-   <properties>
+
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.1.0.RELEASE</spring.version>
         <hibernate.version>4.0.0.Final</hibernate.version>
@@ -27,8 +27,10 @@
         <gwt-log.version>3.1.7</gwt-log.version>
         <kuali.rice.version>2.0.0-rc3</kuali.rice.version>
         <kuali.student.version>1.2</kuali.student.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <junit.version>4.10</junit.version>
     </properties>
-    
+
 
     <repositories>
 
@@ -78,7 +80,7 @@
         <url>https://test.kuali.org/svn/student/contrib/ksa/trunk</url>
     </scm>
 
-  
+
     <build>
         <plugins>
 
@@ -115,7 +117,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -136,7 +138,6 @@
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <version>1.1</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Dependencies -->
@@ -282,12 +283,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
+            <version>${slf4j.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>
@@ -326,6 +327,12 @@
             <version>1.1.1</version>
         </dependency>
 
+        <dependency>
+        	<groupId>commons-lang</groupId>
+        	<artifactId>commons-lang</artifactId>
+        	<version>2.6</version>
+        </dependency>
+
         <!-- Pom dependencies for impl specific jars -->
         <dependency>
             <groupId>org.kuali.student.common</groupId>
@@ -352,6 +359,18 @@
                 <exclusion>
                     <artifactId>spring-web</artifactId>
                     <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -415,6 +434,26 @@
                 <exclusion>
                     <artifactId>log4j</artifactId>
                     <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>asm</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-collections</artifactId>
+                    <groupId>commons-collections</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-pool</artifactId>
+                    <groupId>commons-pool</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -631,6 +670,78 @@
                 <exclusion>
                     <artifactId>bsf</artifactId>
                     <groupId>bsf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>wss4j</artifactId>
+                    <groupId>org.apache.ws.security</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-frontend-simple</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-databinding-jaxb</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-transports-http</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-ws-security</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-bindings-soap</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-core</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-api</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hibernate-core</artifactId>
+                    <groupId>org.hibernate</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hibernate-jpa-2.0-api</artifactId>
+                    <groupId>org.hibernate.javax.persistence</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-expression</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-dbcp</artifactId>
+                    <groupId>commons-dbcp</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-common-utilities</artifactId>
+                    <groupId>org.apache.cxf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cxf-rt-bindings-xml</artifactId>
+                    <groupId>org.apache.cxf</groupId>
                 </exclusion>
             </exclusions>
         </dependency>

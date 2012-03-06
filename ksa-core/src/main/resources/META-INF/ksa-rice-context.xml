@@ -34,11 +34,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="serverDataSource" ref="riceDataSource"/>
         <property name="nonTransactionalDataSource" ref="riceDataSource"/>
         <property name="transactionManager" ref="atomikosTransactionManager"/>
-        <property name="userTransaction" ref="atomikosTransactionManager"/>
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
         <property name="platform" value="Oracle"/>
     </bean>
-
-    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
 
     <import resource="classpath:org/kuali/rice/kim/impl/config/KimEmbeddedSpringBeans.xml"/>
 

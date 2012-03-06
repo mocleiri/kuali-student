@@ -9,12 +9,29 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
        default-lazy-init="true">
 
+    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
+
+    <!-- JNDI bindings -->
+    <bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
+        <property name="bindings">
+            <map>
+                <entry key="java:comp/TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="java:comp/UserTransaction" value-ref="atomikosUserTransaction"/>
+                <entry key="javax.transaction.TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="javax.transaction.UserTransaction" value-ref="atomikosUserTransaction"/>
+                <entry key="KsaDS" value-ref="ksaDataSource"/>
+                <entry key="RiceDS" value-ref="riceDataSource"/>
+            </map>
+        </property>
+    </bean>
+
     <context:annotation-config/>
 
     <context:component-scan base-package="com.sigmasys.kuali.ksa"/>
 
     <!-- process @Transactional to create transaction proxies -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
@@ -62,10 +79,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
 
-    <bean id="userTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
+    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
 
     <bean id="transactionManager" class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">
-        <property name="userTransaction" ref="userTransaction"/>
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
     </bean>
 
     <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"

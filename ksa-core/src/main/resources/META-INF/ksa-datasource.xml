@@ -30,18 +30,4 @@
     </bean>
 
 
-    <!-- JNDI bindings -->
-    <bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
-        <property name="bindings">
-            <map>
-                <entry key="java:comp/TransactionManager" value-ref="atomikosTransactionManager"/>
-                <entry key="java:comp/UserTransaction" value-ref="atomikosTransactionManager"/>
-                <entry key="javax.transaction.TransactionManager" value-ref="atomikosTransactionManager"/>
-                <entry key="javax.transaction.UserTransaction" value-ref="atomikosTransactionManager"/>
-                <entry key="KsaDS" value-ref="ksaDataSource"/>
-                <entry key="RiceDS" value-ref="riceDataSource"/>
-            </map>
-        </property>
-    </bean>
-
 </beans>
