@@ -11,15 +11,16 @@
   <packaging>pom</packaging>
   <modules>
     <module>ks-common-util</module>
+    <module>ks-common-test</module>
+    <module>ks-common-impl</module>
     <!--
       <module>ks-common-ui</module>
-      <module>common-impl</module>
       <module>cxf</module>
       <module>eclipselink</module>
       <module>hibernate</module>
       <module>jta</module>
       <module>metro</module>
       <module>rice-lessdep</module>
-      <module>common-test</module> -->
+    -->
   </modules>
-</project>
+</project> 
