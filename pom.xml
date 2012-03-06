@@ -12,7 +12,7 @@
   <name>KS Parent POM</name>
   <packaging>pom</packaging>
   <properties>
-    <ks.common-api.version>1.0.0-SNAPSHOT</ks.common-api.version>
+    <ks.services.version>1.0.0-SNAPSHOT</ks.services.version>
   </properties>
   <dependencyManagement>
     <dependencies>
