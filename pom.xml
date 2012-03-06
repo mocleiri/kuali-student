@@ -6,18 +6,21 @@
     <artifactId>kuali-common</artifactId>
     <version>1.0.33</version>
   </parent>
-  <groupId>org.kuali.student.core</groupId>
-  <artifactId>ks-core</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <name>KS Core</name>
+  <groupId>org.kuali.student.pom</groupId>
+  <artifactId>student-parent</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+  <name>KS Parent POM</name>
   <packaging>pom</packaging>
-  <modules>
-    <module>ks-common</module>
-    <!--
-      <module>ks-security</module>
-      <module>ks-core-impl</module>
-      <module>ks-core-web</module>
-      <module>ks-core-ui</module>
-      <module>ks-core-sql</module> -->
-  </modules>
+  <properties>
+    <ks.common-api.version>1.0.0-SNAPSHOT</ks.common-api.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kuali.student.services</groupId>
+        <artifactId>ks-common-api</artifactId>
+        <version>${ks.common-api.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
