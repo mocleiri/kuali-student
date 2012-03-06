@@ -11,7 +11,7 @@
     <dependency>
       <groupId>org.kuali.student.services</groupId>
       <artifactId>ks-common-api</artifactId>
-      <version>2.0.0-SNAPSHOT</version>
+      <version>${ks.common-api.version}</version>
     </dependency>
     <dependency>
       <groupId>org.kuali.student.core</groupId>
