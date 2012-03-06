@@ -10,7 +10,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
        default-lazy-init="true">
 
-    <bean id="config" class="org.kuali.rice.core.impl.config.property.ConfigFactoryBean">
+    <bean id="config" class="org.kuali.rice.core.impl.config.property.ConfigFactoryBean" depends-on="jndiBinder">
         <property name="initialize" value="true"/>
         <property name="configLocations">
             <list>
@@ -29,7 +29,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
     <!-- Configure KSA-specific implementations of Rice services/beans here -->
-    <bean id="coreConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer">
+    <bean id="coreConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer" depends-on="jndiBinder">
         <property name="dataSource" ref="ksaDataSource"/>
         <property name="serverDataSource" ref="riceDataSource"/>
         <property name="nonTransactionalDataSource" ref="riceDataSource"/>
@@ -38,6 +38,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
-    <import resource="classpath:org/kuali/rice/kim/impl/config/KimEmbeddedSpringBeans.xml"/>
+    <import resource="classpath:/META-INF/kim-embedded-spring-beans.xml"/>
 
 </beans>

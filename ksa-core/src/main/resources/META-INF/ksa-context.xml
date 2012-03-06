@@ -79,15 +79,20 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
 
-    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
-
-    <bean id="transactionManager" class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">
-        <property name="userTransaction" ref="atomikosUserTransaction"/>
+    <!-- Atomikos UserTransaction implementation -->
+    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
+         <property name="transactionTimeout" value="300"/> 
+    </bean>
+    
+    <!-- Atomikos JTA TransactionManager implementation -->
+    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" destroy-method="close">
+        <property name="forceShutdown" value="true"/>
     </bean>
 
-    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
-          destroy-method="close">
-        <property name="forceShutdown" value="true"/>
+    <!--  Spring JTA TransactionManager -->
+    <bean id="transactionManager" class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
+        <property name="transactionManager" ref="atomikosTransactionManager"/>
     </bean>
 
     <import resource="classpath:/META-INF/ksa-rice-context.xml"/>
