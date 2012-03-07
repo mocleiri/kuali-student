@@ -43,21 +43,12 @@
                 <value>classpath:CourseSearchUI.xml</value>
                 <value>classpath:CourseDetailsUI.xml</value>
                 <value>classpath:SavedCoursesUI.xml</value>
-                <value>classpath:DegreeAuditUI.xml</value>
+                <value>classpath:DegreeAuditDetailsUI.xml</value>
+                <value>classpath:DegreeAuditsUI.xml</value>
                 <!--
                 <value>classpath:org/kuali/student/myplan/mobile/MyPlanMobileUI.xml</value>
                 <value>classpath:org/kuali/student/myplan/mobile/UifMobileDefinitions.xml</value>
                 -->
-
-
-                <!-- <value>classpath:CourseView.xml</value> -->
-
-                <!--
-                    <value>classpath:AcademicCalendarWrapperMaintenance.xml</value>
-                     <value>classpath:HoldInfo.xml</value>
-                     <value>classpath:IssueInfo.xml</value>
-                     <value>classpath:HoldInfoMaintenanceView.xml</value>
-                    -->
             </list>
         </property>
         <property name="packagePrefixes">
