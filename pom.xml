@@ -14,5 +14,8 @@
   <properties>
     <ks.api.version>1.0.0-SNAPSHOT</ks.api.version>
     <ks.core.version>2.0.0-SNAPSHOT</ks.core.version>
+
+    <!-- Remove plugin.jar.version as soon as the modules actually have content in them -->
+    <plugin.jar.version>2.3.2</plugin.jar.version>
   </properties>
 </project>
