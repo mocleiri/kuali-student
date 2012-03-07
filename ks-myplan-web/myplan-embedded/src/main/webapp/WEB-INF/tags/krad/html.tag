@@ -82,28 +82,6 @@
 
   <body>
     <!----------------------------------- MyPlan Header --------------------------------------->
-    <div id="app">
-
-    <div id="appheader_div">
-        <div id="appheading_div">
-            <div id="applogo_div">
-                My<strong>Plan</strong> <span>One-stop Academic Planner</span>
-            </div>
-            <div id="appuser_div">
-                <div class="name">Welcome, ${UserSession.person.firstName}</div>
-                <div class="links">
-                    <ul>
-                        <li><a href="#">Log out</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="appnav_div">
-            [ Global Navigation ]
-        </div>
-    </div>
-
     <div id="view_div">
      <krad:div component="${view}">
 
@@ -141,10 +119,5 @@
      </krad:div>
     </div>
 
-    <div id="appfooter_div">
-
-    </div>
-
-    </div>
   </body>
 </html>
