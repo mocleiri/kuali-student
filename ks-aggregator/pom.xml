@@ -12,6 +12,7 @@
   <name>KS Aggregator POM</name>
   <packaging>pom</packaging>
   <modules>
+    <module>ks-parent</module>
     <module>ks-api</module>
     <module>ks-core</module>
   </modules>
