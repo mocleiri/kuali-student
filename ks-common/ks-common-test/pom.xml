@@ -7,6 +7,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>ks-common-test</artifactId>
+  <name>KS Common Test</name>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>

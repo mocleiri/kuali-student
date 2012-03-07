@@ -9,7 +9,7 @@
   <artifactId>ks-common-impl</artifactId>
   <dependencies>
     <dependency>
-      <groupId>org.kuali.student.services</groupId>
+      <groupId>org.kuali.student.api</groupId>
       <artifactId>ks-common-api</artifactId>
       <version>${ks.api.version}</version>
     </dependency>
