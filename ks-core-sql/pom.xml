@@ -7,4 +7,5 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>ks-core-sql</artifactId>
+  <name>KS Core SQL</name>
 </project>
