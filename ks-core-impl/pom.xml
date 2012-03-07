@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>core</artifactId>
-    <groupId>org.kuali.student.core</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>org.kuali.student.core</groupId>
-  <artifactId>core-impl</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
+  <parent>
+    <groupId>org.kuali.student.core</groupId>
+    <artifactId>ks-core</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>ks-core-impl</artifactId>
+  <name>KS Core Impl</name>
   <dependencies>
     <dependency>
-      <groupId>org.kuali.student.core.common</groupId>
-      <artifactId>common-util</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ks-common-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.kuali.student.service-contracts</groupId>
-      <artifactId>core-api</artifactId>
+      <groupId>org.kuali.student.api</groupId>
+      <artifactId>ks-core-api</artifactId>
+      <version>${ks.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ks-common-impl</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.kuali.student.core.common</groupId>
-      <artifactId>common-impl</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.kuali.rice</groupId>
-      <artifactId>rice-kim-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kuali.student.core.common</groupId>
-      <artifactId>common-test</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ks-common-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.kuali.student.core.common</groupId>
-      <artifactId>rice-lessdep</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>ks-rice-lessdep</artifactId>
       <version>${project.version}</version>
       <type>pom</type>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.openjpa</groupId>
-      <artifactId>openjpa</artifactId>
-      <version>2.0.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
