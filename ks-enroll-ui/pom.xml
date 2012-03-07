@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>ks-enroll</artifactId>
-        <groupId>org.kuali.student.enroll</groupId>
-        <version>5.0.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>ks-enroll</artifactId>
+    <groupId>org.kuali.student.enroll</groupId>
+    <version>5.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>ks-enroll-ui</artifactId>
+  <name>KS Enroll UI</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.kuali.student.services</groupId>
+      <artifactId>ks-enroll-api</artifactId>
+      <version>${ks.api.version}</version>
+    </dependency>
 
-    <artifactId>ks-enroll-ui</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.kuali.student.services</groupId>
-            <artifactId>ks-enroll-api</artifactId>
-            <version>${ks.api.version}</version>
-        </dependency>
-
-        <!-- Added test jar to be able to wire in mock services, remove after actual implementations are complete -->
-        <dependency>
-            <groupId>org.kuali.student.services</groupId>
-            <artifactId>ks-enroll-api</artifactId>
-            <version>${ks.api.version}</version>
-            <type>test-jar</type>
-        </dependency>
-    </dependencies>
+    <!-- Added test jar to be able to wire in mock services, remove after actual implementations are complete -->
+    <dependency>
+      <groupId>org.kuali.student.services</groupId>
+      <artifactId>ks-enroll-api</artifactId>
+      <version>${ks.api.version}</version>
+      <type>test-jar</type>
+    </dependency>
+  </dependencies>
 </project>
