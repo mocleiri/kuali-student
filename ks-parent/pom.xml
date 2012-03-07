@@ -18,4 +18,8 @@
     <!-- Remove plugin.jar.version as soon as the modules actually have content in them -->
     <plugin.jar.version>2.3.2</plugin.jar.version>
   </properties>
+  <modules>
+    <module>ks-api</module>
+    <module>ks-core</module>
+  </modules>
 </project>
