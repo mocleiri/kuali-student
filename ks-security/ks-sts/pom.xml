@@ -7,6 +7,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>ks-sts</artifactId>
+  <name>KS STS</name>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
