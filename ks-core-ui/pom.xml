@@ -25,7 +25,7 @@
       <artifactId>ks-core-api</artifactId>
       <version>${ks.api.version}</version>
     </dependency>
-    <!-- Uncomment these once the modules have source code in them -->
+    <!-- Uncomment the "source" dependencies after the modules have source code in them -->
     <!--
       <dependency>
       <groupId>org.kuali.student.api</groupId>
