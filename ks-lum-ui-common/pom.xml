@@ -45,12 +45,12 @@
             <version>${ks.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-core-api</artifactId>
             <version>${ks.api.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-core-api</artifactId>
             <version>${ks.api.version}</version>
             <classifier>sources</classifier>
@@ -65,12 +65,12 @@
 
         <!-- LUM Dependencies -->
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-lum-api</artifactId>
             <version>${ks.api.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-lum-api</artifactId>
             <version>${ks.api.version}</version>
             <classifier>sources</classifier>

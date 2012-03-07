@@ -62,14 +62,14 @@
             <version>${ks.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-core-api</artifactId>
             <version>${ks.api.version}</version>
             <classifier>sources</classifier>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-lum-api</artifactId>
             <version>${ks.api.version}</version>
         </dependency>
@@ -94,7 +94,7 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-lum-api</artifactId>
             <version>${ks.api.version}</version>
             <classifier>sources</classifier>
@@ -120,7 +120,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.services</groupId>
+            <groupId>org.kuali.student.api</groupId>
             <artifactId>ks-common-api</artifactId>
             <version>${ks.api.version}</version>
             <classifier>sources</classifier>
