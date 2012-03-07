@@ -38,6 +38,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
+    <bean id="kimConfigurer" class="org.kuali.rice.kim.config.KIMConfigurer" depends-on="coreConfigurer"/>
+
     <import resource="classpath:/META-INF/kim-embedded-spring-beans.xml"/>
     
 
