@@ -29,7 +29,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
     <!-- Configure KSA-specific implementations of Rice services/beans here -->
-    <bean id="coreConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer" depends-on="jndiBinder">
+    <bean id="coreConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer">
         <property name="dataSource" ref="ksaDataSource"/>
         <property name="serverDataSource" ref="riceDataSource"/>
         <property name="nonTransactionalDataSource" ref="riceDataSource"/>
@@ -39,5 +39,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
     <import resource="classpath:/META-INF/kim-embedded-spring-beans.xml"/>
+    
 
 </beans>

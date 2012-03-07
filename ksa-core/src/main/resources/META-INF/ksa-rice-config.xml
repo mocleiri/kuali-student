@@ -1,4 +1,6 @@
 <config>
+   
+    <param name="application.id">KSA</param>
 
     <param name="rice.version">2.0</param>
     <param name="datasource.platform">oracle.jdbc.driver.OracleDriver</param>

@@ -12,55 +12,79 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.springframework.core.Ordered;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * LocalJndiBinder. Provides local JNDI context.
- *
+ * 
  * @author ivanovm
  */
 public class LocalJndiBinder implements Ordered {
 
-    private static final Log logger = LogFactory.getLog(LocalJndiBinder.class);
+	private static final Log logger = LogFactory.getLog(LocalJndiBinder.class);
 
-    private final InitialContext initialContext;
+	private static final AtomicBoolean isInitialized = new AtomicBoolean();
 
-    public LocalJndiBinder() throws Exception {
-    	logger.debug("JNDI binder initializing...");
-        try {
-            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-        } catch (RemoteException t) {
-            logger.error(t.getMessage(), t);
-        }
+	private static InitialContext initialContext;
 
-        Properties jndiEnv = new Properties();
-        jndiEnv.put(Context.INITIAL_CONTEXT_FACTORY, com.sun.jndi.rmi.registry.RegistryContextFactory.class.getName());
-        jndiEnv.put(Context.PROVIDER_URL, "rmi://localhost:" + Registry.REGISTRY_PORT);
+	public LocalJndiBinder(Map<String, Object> beans) throws Exception {
 
-        // Adding JNDI props to system properties to make them visible to all JNDI clients within the JVM
-        System.getProperties().putAll(jndiEnv);
+		if (isInitialized.get()) {
+			return;
+		}
 
-        initialContext = new InitialContext(jndiEnv);
-        
-        logger.debug("JNDI binder initialized");
-    }
+		logger.debug("JNDI binder initializing...");
 
-    public void setBindings(Map<String, Object> beans) {
-        try {
-            for (Map.Entry<String, Object> beanMapping : beans.entrySet()) {
-                String name = beanMapping.getKey();
-                Object bean = beanMapping.getValue();
-                initialContext.rebind(name, bean);
-                logger.debug("Added JNDI binding: name = " + name + " value = " + bean.getClass().getName());
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
-    }
-    
-    @Override
-    public int getOrder() {
-    	// This service should be initialized ahead of all others
-    	return 0;
-    }
+		try {
+			
+			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+
+			Properties jndiEnv = new Properties();
+			jndiEnv.put(Context.INITIAL_CONTEXT_FACTORY, com.sun.jndi.rmi.registry.RegistryContextFactory.class.getName());
+			jndiEnv.put(Context.PROVIDER_URL, "rmi://localhost:" + Registry.REGISTRY_PORT);
+
+			// Adding JNDI props to system properties to make them visible to
+			// all JNDI clients within the JVM
+			System.getProperties().putAll(jndiEnv);
+
+			initialContext = new InitialContext(jndiEnv);
+
+			isInitialized.set(true);
+
+			logger.debug("JNDI binder initialized");
+			
+			setBindings(beans);
+
+		} catch (RemoteException t) {
+			logger.error(t.getMessage(), t);
+		}
+
+	}
+
+	protected void setBindings(Map<String, Object> beans) {
+		
+		if (initialContext == null) {
+			logger.error("Initial context is null");
+			throw new IllegalStateException("Initial context is null");
+		}
+		
+		for (Map.Entry<String, Object> beanMapping : beans.entrySet()) {
+		     try {
+				String name = beanMapping.getKey();
+				Object bean = beanMapping.getValue();
+				initialContext.rebind(name, bean);
+				logger.debug("Added JNDI binding: name = " + name + " value = " + bean.getClass().getName());
+		     } catch (Exception e) {
+				logger.error(e.getMessage(), e);
+			 }
+		}
+		
+	}
+
+	@Override
+	public int getOrder() {
+		// This service should be initialized ahead of all others
+		return 0;
+	}
 
 }

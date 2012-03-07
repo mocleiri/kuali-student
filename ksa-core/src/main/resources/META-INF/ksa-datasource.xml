@@ -4,6 +4,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-lazy-init="true">
+       
+    <!-- Atomikos UserTransaction implementation -->
+    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
+         <property name="transactionTimeout" value="300"/> 
+    </bean>
+    
+    <!-- Atomikos JTA TransactionManager implementation -->
+    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" destroy-method="close">
+        <property name="forceShutdown" value="true"/>
+    </bean>
+
+    <!--  Spring JTA TransactionManager -->
+    <bean id="transactionManager" class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
+        <property name="transactionManager" ref="atomikosTransactionManager"/>
+    </bean>   
 
 
     <!-- XA data source definitions -->
