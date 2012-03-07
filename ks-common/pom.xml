@@ -14,13 +14,11 @@
     <module>ks-common-test</module>
     <module>ks-common-impl</module>
     <module>ks-common-ui</module>
-    <!--
-      <module>cxf</module>
-      <module>eclipselink</module>
-      <module>hibernate</module>
-      <module>jta</module>
-      <module>metro</module>
-      <module>rice-lessdep</module>
-    -->
+    <module>ks-cxf</module>
+    <module>ks-eclipselink</module>
+    <module>ks-hibernate</module>
+    <module>ks-jta</module>
+    <module>ks-metro</module>
+    <module>ks-rice-lessdep</module>
   </modules>
 </project> 
