@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ks-enroll</artifactId>
         <groupId>org.kuali.student.enroll</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,38 +15,38 @@
         <dependency>
             <groupId>org.kuali.student.services</groupId>
             <artifactId>ks-enroll-api</artifactId>
-            <version>${project.version}</version>
+            <version>${ks.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.kuali.student.services</groupId>
             <artifactId>ks-enroll-api</artifactId>
-            <version>${project.version}</version>
+            <version>${ks.api.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-common-impl</artifactId>
-            <version>${project.version}</version>
+            <version>${ks.core.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-common-test</artifactId>
-            <version>${project.version}</version>
+            <version>${ks.core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-hibernate</artifactId>
-            <version>${project.version}</version>
+            <artifactId>hibernate</artifactId>
+            <version>${ks.core.version}</version>
             <type>pom</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.kuali.student.lum</groupId>
             <artifactId>ks-lum-impl</artifactId>
-            <version>${project.version}</version>
+            <version>${ks.lum.version}</version>
         </dependency>
     </dependencies>
 </project>
