@@ -14,5 +14,9 @@
       <artifactId>ks-common-api</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.kuali.rice</groupId>
+      <artifactId>rice-kim-api</artifactId>
+    </dependency>
   </dependencies>
 </project>
