@@ -17,7 +17,6 @@
   <context:component-scan base-package="org.kuali.student.myplan.audit" />
   <context:component-scan base-package="edu.uw.kuali.student.myplan"/>
 
-
   <!-- Custom UW ATP Comparator bean -->
   <bean id="atpTypeComparator" class="edu.uw.kuali.student.myplan.util.TermInfoComparator"/>
 

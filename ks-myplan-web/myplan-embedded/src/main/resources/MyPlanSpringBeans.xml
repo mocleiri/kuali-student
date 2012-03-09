@@ -45,6 +45,8 @@
                 <value>classpath:SavedCoursesUI.xml</value>
                 <value>classpath:DegreeAuditDetailsUI.xml</value>
                 <value>classpath:DegreeAuditsUI.xml</value>
+
+                <value>classpath:ks-AuditReportInfo-dictionary.xml</value>
                 <!--
                 <value>classpath:org/kuali/student/myplan/mobile/MyPlanMobileUI.xml</value>
                 <value>classpath:org/kuali/student/myplan/mobile/UifMobileDefinitions.xml</value>
