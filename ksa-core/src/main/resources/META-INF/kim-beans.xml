@@ -33,11 +33,12 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
                            http://www.springframework.org/schema/util
-                           http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+                           http://www.springframework.org/schema/util/spring-util-2.5.xsd" default-lazy-init="true">
 
-    <bean id="kimDataSource"
-          class="org.kuali.rice.core.framework.persistence.jdbc.datasource.PrimaryDataSourceFactoryBean"
-          lazy-init="true">
+    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
+
+    <!--bean id="kimDataSource"
+          class="org.kuali.rice.core.framework.persistence.jdbc.datasource.PrimaryDataSourceFactoryBean">
         <property name="preferredDataSourceParams">
             <list>
                 <value>kim.datasource</value>
@@ -49,22 +50,22 @@
             </list>
         </property>
         <property name="serverDataSource" value="true"/>
-    </bean>
+    </bean-->
 
     <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
         <property name="jcdAliases">
             <list>
-                <value>kimDataSource</value>
+                <value>riceDataSource</value>
             </list>
         </property>
-        <property name="metadataLocation" value="classpath:org/kuali/rice/kim/config/OJB-repository-kim.xml"/>
+        <property name="metadataLocation" value="classpath:/META-INF/ojb-repository-kim.xml"/>
     </bean>
 
     <bean id="dbPlatform" class="org.kuali.rice.core.framework.persistence.platform.OraclePlatform"/>
 
     <bean id="kimPlatformAwareDao"
           class="org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb" abstract="true">
-        <property name="jcdAlias" value="kimDataSource"/>
+        <property name="jcdAlias" value="riceDataSource"/>
         <property name="dbPlatform" ref="dbPlatform"/>
     </bean>
 
@@ -81,7 +82,7 @@
     <bean id="kimEntityManagerFactory"
           class=" org.kuali.rice.krad.app.persistence.jpa.RiceEntityManagerProxyFactoryBean">
         <constructor-arg value="rice.kim"/>
-        <constructor-arg ref="kimDataSource"/>
+        <constructor-arg ref="riceDataSource"/>
     </bean>
 
     <bean id="kimEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
@@ -155,6 +156,7 @@
 
 
     <bean id="kimIdentityService" class="org.kuali.rice.kim.impl.identity.IdentityServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
         <property name="criteriaLookupService" ref="criteriaLookupService"/>
     </bean>
 

@@ -5,6 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.core.api.resourceloader.ResourceLoader;
+import org.kuali.rice.core.framework.persistence.ojb.RiceDataSourceConnectionFactory;
+import org.kuali.rice.core.framework.persistence.ojb.TransactionManagerFactory;
 import org.kuali.rice.core.framework.resourceloader.SpringResourceLoader;
 import org.kuali.rice.core.impl.config.property.JAXBConfigImpl;
 import org.springframework.context.ApplicationContext;
@@ -19,6 +21,7 @@ import com.sigmasys.kuali.ksa.annotation.UseWebContext;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 
+import javax.transaction.TransactionManager;
 import javax.xml.namespace.QName;
 import java.io.IOException;
 
@@ -35,6 +38,7 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
     private static final Log logger = LogFactory.getLog(AbstractServiceTest.class);
 
     public static final String TEST_USER_ID = "guest";
+
     public static final String RICE_RESOURCE_LOADER_BEANS_CONTEXT = "classpath:/META-INF/rice-resource-loader-beans.xml";
     public static final String RICE_CONFIG_CONTEXT = "classpath:/META-INF/ksa-rice-config.xml";
 
@@ -80,10 +84,15 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
 
         ContextUtils.initContext(applicationContext);
 
+        RiceDataSourceConnectionFactory.addBeanFactory(applicationContext);
+
         if (isWebContext) {
             UserSessionManager sessionManager = ContextUtils.getBean("userSessionManager");
             sessionManager.createSession(RequestUtils.getThreadRequest(), RequestUtils.getThreadResponse(), TEST_USER_ID);
         }
+
+        TransactionManager transactionManager = ContextUtils.getBean("atomikosTransactionManager");
+        TransactionManagerFactory.setTransactionManager(transactionManager);
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) {

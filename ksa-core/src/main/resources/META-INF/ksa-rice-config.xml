@@ -5,6 +5,12 @@
     <param name="rice.version">2.0</param>
     <param name="datasource.platform">oracle.jdbc.driver.OracleDriver</param>
 
+    <!-- OJB parameters -->
+    <param name="rice.custom.ojb.properties">OJB.properties</param>
+    <param name="datasource.ojb.platform">oracle.jdbc.driver.OracleDriver</param>
+
+    <param name="rice.struts.message.resources"></param>
+
 	<!--  log4j Settings -->
 	<param name="log4j.reload.minutes">5</param>
 	<param name="log4j.settings.path">classpath:/log4j.properties</param>

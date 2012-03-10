@@ -39,7 +39,7 @@ public class KimServiceTest extends AbstractServiceTest {
 		
 		Assert.notNull(userId);
 		
-		IdentityService service = ContextUtils.getBean("identityService",IdentityService.class);
+		IdentityService service = ContextUtils.getBean("kimIdentityService",IdentityService.class);
 		
 		Principal principal = service.getPrincipal("mivanov");
 		
