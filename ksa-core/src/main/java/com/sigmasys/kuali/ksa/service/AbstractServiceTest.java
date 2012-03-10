@@ -63,7 +63,7 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
             // Setting up the test HTTP environment
             MockHttpServletRequest request = new MockHttpServletRequest();
             request.setRemoteUser(TEST_USER_ID);
-            RequestUtils.setServletContext(new MockServletContext());
+            RequestUtils.setServletContext(servletContext);
             RequestUtils.setThreadRequest(request);
             RequestUtils.setThreadResponse(new MockHttpServletResponse());
         }
