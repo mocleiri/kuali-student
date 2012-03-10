@@ -4,9 +4,7 @@ import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.springframework.test.context.ContextConfiguration;
 
-import com.sigmasys.kuali.ksa.service.AbstractServiceTest;
 
 /**
  * ServiceTestSuite is a test suite that runs all the declared service tests
