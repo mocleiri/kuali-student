@@ -69,16 +69,19 @@
         <property name="dbPlatform" ref="dbPlatform"/>
     </bean>
 
-    <bean id="kimRoleDao" class="org.kuali.rice.kim.impl.role.RoleDaoOjb" parent="kimPlatformAwareDao"/>
+    <!-- KIM DAO -->
+    <bean id="roleDao" class="org.kuali.rice.kim.impl.role.RoleDaoOjb" parent="kimPlatformAwareDao"/>
+
     <bean id="criteriaLookupDao" class="org.kuali.rice.krad.criteria.CriteriaLookupDaoOjb"
           parent="kimPlatformAwareDao"/>
+
     <bean id="persistenceDao" class="org.kuali.rice.krad.dao.impl.PersistenceDaoOjb" parent="kimPlatformAwareDao"/>
+
     <bean id="businessObjectDao" class="org.kuali.rice.krad.dao.impl.BusinessObjectDaoOjb" parent="kimPlatformAwareDao">
         <constructor-arg ref="persistenceStructureService"/>
     </bean>
 
     <!-- START JPA CONFIGURATION -->
-
     <bean id="kimEntityManagerFactory"
           class=" org.kuali.rice.krad.app.persistence.jpa.RiceEntityManagerProxyFactoryBean">
         <constructor-arg value="rice.kim"/>
@@ -88,26 +91,11 @@
     <bean id="kimEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
         <property name="entityManagerFactory" ref="kimEntityManagerFactory"/>
     </bean>
-
     <!-- END JPA CONFIGURATION -->
-    <!--
-          Identity Service
-    -->
-
-    <bean id="personService" class="org.kuali.rice.kim.impl.identity.PersonServiceImpl">
-        <property name="personEntityTypeCodes">
-            <list>
-                <value>PERSON</value>
-                <value>SYSTEM</value>
-            </list>
-        </property>
-    </bean>
 
     <bean id="criteriaLookupService" class="org.kuali.rice.krad.criteria.CriteriaLookupServiceImpl">
         <property name="criteriaLookupDao" ref="criteriaLookupDao"/>
     </bean>
-
-    <bean id="kimAuthenticationService" class="org.kuali.rice.kim.impl.identity.AuthenticationServiceImpl"/>
 
     <!-- persistence service -->
 
@@ -148,16 +136,42 @@
 
     <bean id="businessObjectService" class="org.kuali.rice.krad.service.impl.BusinessObjectServiceImpl">
         <property name="businessObjectDao" ref="businessObjectDao"/>
-        <property name="personService" ref="personService"/>
+        <property name="personService" ref="kimPersonService"/>
         <property name="persistenceService" ref="persistenceService"/>
         <property name="dataObjectMetaDataService" ref="dataObjectMetaDataService"/>
         <property name="persistenceStructureService" ref="persistenceStructureService"/>
     </bean>
 
 
+    <!-- KIM API service definitions -->
     <bean id="kimIdentityService" class="org.kuali.rice.kim.impl.identity.IdentityServiceImpl">
         <property name="businessObjectService" ref="businessObjectService"/>
         <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="kimGroupService" class="org.kuali.rice.kim.impl.group.GroupServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="kimRoleService" class="org.kuali.rice.kim.impl.role.RoleServiceImpl">
+        <property name="roleDao" ref="roleDao"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="kimAuthenticationService" class="org.kuali.rice.kim.impl.identity.AuthenticationServiceImpl"/>
+
+    <bean id="kimPersonService" class="org.kuali.rice.kim.impl.identity.PersonServiceImpl">
+        <property name="personEntityTypeCodes">
+            <list>
+                <value>PERSON</value>
+                <value>SYSTEM</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="kimTypeInfoService" class="org.kuali.rice.kim.impl.type.KimTypeInfoServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
     </bean>
 
 
