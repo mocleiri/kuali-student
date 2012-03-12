@@ -169,7 +169,7 @@
         <dependency>
             <groupId>org.kuali.student.common</groupId>
             <artifactId>ks-common-impl</artifactId>
-            <version>1.3.0-SNAPSHOT</version>
+            <version>${kuali.student.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-beanutils</groupId>
