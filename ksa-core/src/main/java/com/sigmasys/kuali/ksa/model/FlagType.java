@@ -18,12 +18,12 @@ import java.util.Date;
 public class FlagType {
 
     /**
-     * Activity type ID
+     * Flag type ID
      */
     private Long id;
 
     /**
-     * Activity type name
+     * Flag type name
      */
     private String name;
 
@@ -48,7 +48,7 @@ public class FlagType {
     private String editorId;
 
     /**
-     * Editor user ID
+     * Timestamp
      */
     private Date lastUpdate;
 

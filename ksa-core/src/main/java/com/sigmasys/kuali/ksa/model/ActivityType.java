@@ -38,7 +38,7 @@ public class ActivityType {
     private String editorId;
 
     /**
-     * Editor user ID
+     * Timestamp
      */
     private Date lastUpdate;
 

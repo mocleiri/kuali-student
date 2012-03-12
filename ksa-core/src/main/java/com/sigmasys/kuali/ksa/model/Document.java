@@ -40,7 +40,7 @@ public class Document {
     private String editorId;
 
     /**
-     * Editor user ID
+     * Timestamp
      */
     private Date lastUpdate;
 

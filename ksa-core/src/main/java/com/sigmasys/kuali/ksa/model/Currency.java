@@ -39,7 +39,7 @@ public class Currency {
     private String editorId;
 
     /**
-     * Editor user ID
+     * Timestamp
      */
     private Date lastUpdate;
 

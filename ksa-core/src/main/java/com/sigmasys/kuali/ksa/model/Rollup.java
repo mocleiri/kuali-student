@@ -4,50 +4,44 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-
 /**
  * Transaction rollup.
- *
+ * 
  * @author Michael Ivanov
  */
 @Entity
-@Table(name="KSSA_ROLLUP")
+@Table(name = "KSSA_ROLLUP")
 public class Rollup {
 
-    /**
-     * The unique transaction identifier for the KSA product.
-     */
-    protected Long id;
+	/**
+	 * The unique transaction identifier for the KSA product.
+	 */
+	protected Long id;
 
 	/**
-     * Rollup name
-     */
-    private String name;
-	
-	/**
-     * Creator user ID
-     */
-    private String creatorId;
+	 * Rollup name
+	 */
+	private String name;
 
 	/**
-     * Editor user ID
-     */
-    private String editorId;
-	
+	 * Creator user ID
+	 */
+	private String creatorId;
+
 	/**
-     * Editor user ID
-     */
-    private Date lastUpdate;
+	 * Editor user ID
+	 */
+	private String editorId;
 
+	/**
+	 * Timestamp
+	 */
+	private Date lastUpdate;
 
-    @Id
-    	@Column(name = "ID", nullable = false, unique = true, updatable = false)
-        @TableGenerator(name="TABLE_GEN",
-            table="SEQUENCE_TABLE",
-            pkColumnName="SEQ_NAME",
-            valueColumnName="SEQ_VALUE",
-            pkColumnValue="ROLLUP_SEQ")
-        @GeneratedValue(strategy=GenerationType.TABLE, generator="TABLE_GEN")
+	@Id
+	@Column(name = "ID", nullable = false, unique = true, updatable = false)
+	@TableGenerator(name = "TABLE_GEN", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_NAME", valueColumnName = "SEQ_VALUE", pkColumnValue = "ROLLUP_SEQ")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
 	public Long getId() {
 		return id;
 	}
@@ -56,7 +50,7 @@ public class Rollup {
 		this.id = id;
 	}
 
-    @Column(name = "NAME")
+	@Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
@@ -65,7 +59,7 @@ public class Rollup {
 		this.name = name;
 	}
 
-    @Column(name = "CREATOR_ID")
+	@Column(name = "CREATOR_ID")
 	public String getCreatorId() {
 		return creatorId;
 	}
@@ -74,7 +68,7 @@ public class Rollup {
 		this.creatorId = creatorId;
 	}
 
-    @Column(name = "EDITOR_ID")
+	@Column(name = "EDITOR_ID")
 	public String getEditorId() {
 		return editorId;
 	}
@@ -83,7 +77,7 @@ public class Rollup {
 		this.editorId = editorId;
 	}
 
-    @Column(name = "LAST_UPDATE")
+	@Column(name = "LAST_UPDATE")
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}
@@ -91,8 +85,5 @@ public class Rollup {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-  
+
 }
-	
-
-

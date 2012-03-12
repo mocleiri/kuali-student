@@ -49,7 +49,7 @@ public abstract class TransactionType {
     private String editorId;
 
     /**
-     * Editor user ID
+     * Timestamp
      */
     private Date lastUpdate;
 

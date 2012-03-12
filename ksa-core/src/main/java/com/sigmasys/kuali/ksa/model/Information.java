@@ -17,12 +17,12 @@ import java.util.Date;
 public class Information {
 
     /**
-     * Activity type ID
+     * Information ID
      */
     private Long id;
 
     /**
-     * Activity type name
+     * Information name
      */
     private String name;
 
@@ -72,7 +72,7 @@ public class Information {
     private String editorId;
 
     /**
-     * Editor user ID
+     * Timestamp
      */
     private Date lastUpdate;
 
