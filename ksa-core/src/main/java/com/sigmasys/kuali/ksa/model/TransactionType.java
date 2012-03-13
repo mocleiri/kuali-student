@@ -3,12 +3,7 @@ package com.sigmasys.kuali.ksa.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Column;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 
 /**
@@ -25,10 +20,7 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class TransactionType implements Identifiable {
 
-
-    protected Long id;
-
-    protected String subCode;
+    protected TransactionTypeId id;
 
     protected Date startDate;
 
@@ -62,25 +54,14 @@ public abstract class TransactionType implements Identifiable {
     public abstract List<Tag> getTags();
 
 
-    @Id
-    @Column(name = "ID")
     @Override
-    public Long getId() {
+    @EmbeddedId
+    public TransactionTypeId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(TransactionTypeId id) {
         this.id = id;
-    }
-
-    @Id
-    @Column(name = "SUB_CODE")
-    public String getSubCode() {
-        return subCode;
-    }
-
-    public void setSubCode(String subCode) {
-        this.subCode = subCode;
     }
 
     @Column(name = "START_DATE")
