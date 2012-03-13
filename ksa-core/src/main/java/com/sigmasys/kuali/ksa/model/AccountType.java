@@ -1,0 +1,29 @@
+package com.sigmasys.kuali.ksa.model;
+
+import javax.persistence.*;
+
+/**
+ * Account type.
+ * <p/>
+ * User: mike
+ * Date: 1/22/12
+ * Time: 3:47 PM
+ */
+@Entity
+@Table(name = "KSSA_ACNT_STATUS_TYPE")
+public class AccountType extends AuditableEntity {
+
+
+    @Id
+    @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @TableGenerator(name = "TABLE_GEN_ACNT_TYPE",
+            table = "SEQUENCE_TABLE",
+            pkColumnName = "SEQ_NAME",
+            valueColumnName = "SEQ_VALUE",
+            pkColumnValue = "ACCOUNT_TYPE_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_ACNT_TYPE")
+    @Override
+    public Long getId() {
+        return id;
+    }
+}
