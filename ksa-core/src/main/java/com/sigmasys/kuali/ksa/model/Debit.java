@@ -22,6 +22,7 @@ public abstract class Debit extends Transaction {
     /**
      * If a transaction is deferred, then it will return true here.
      * Deferred transactions also bear the identifier of the deferment transaction that offsets them in deferment
+     * @return boolean value
      */
     @Column(name = "DEFER_STAT")
     public Boolean isDeferred() {

@@ -1,11 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
-import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Currency model.
@@ -16,78 +12,19 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "KSSA_CURRENCY")
-public class Currency {
-
-    /**
-     * Currency ID
-     */
-    private String id;
-
-    /**
-     * Currency name
-     */
-    private String name;
-
-    /**
-     * Creator user ID
-     */
-    private String creatorId;
-
-    /**
-     * Editor user ID
-     */
-    private String editorId;
-
-    /**
-     * Timestamp
-     */
-    private Date lastUpdate;
-
+public class Currency extends AuditableEntity {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    public String getId() {
+    @TableGenerator(name = "TABLE_GEN_CURRENCY",
+            table = "SEQUENCE_TABLE",
+            pkColumnName = "SEQ_NAME",
+            valueColumnName = "SEQ_VALUE",
+            pkColumnValue = "CURRENCY_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_CURRENCY")
+    @Override
+    public Long getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(name = "CREATOR_ID")
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    @Column(name = "EDITOR_ID")
-    public String getEditorId() {
-        return editorId;
-    }
-
-    public void setEditorId(String editorId) {
-        this.editorId = editorId;
-    }
-
-    @Column(name = "LAST_UPDATE")
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
 
 }

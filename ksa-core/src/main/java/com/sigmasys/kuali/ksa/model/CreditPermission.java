@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_CREDIT_PERMISSION")
-public class CreditPermission {
+public class CreditPermission implements Identifiable {
 
     /**
      * The unique identifier
@@ -37,12 +37,13 @@ public class CreditPermission {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN",
+    @TableGenerator(name = "TABLE_GEN_CREDIT_PERM",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "CREDIT_PERMISSION_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_CREDIT_PERM")
+    @Override
     public Long getId() {
         return id;
     }

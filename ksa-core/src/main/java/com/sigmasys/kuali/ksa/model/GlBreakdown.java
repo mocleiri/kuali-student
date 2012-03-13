@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "KSSA_GL_BREAKDOWN")
-public class GlBreakdown {
+public class GlBreakdown implements Identifiable {
 
     /**
      * The unique identifier
@@ -35,12 +35,13 @@ public class GlBreakdown {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN",
+    @TableGenerator(name = "TABLE_GEN_GL_BR",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "GL_BREAKDOWN_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_GL_BR")
+    @Override
     public Long getId() {
         return id;
     }

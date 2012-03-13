@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "KSSA_ALLOCATION")
-public class Allocation {
+public class Allocation implements Identifiable {
 
     /**
      * The unique identifier
@@ -43,12 +43,13 @@ public class Allocation {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN",
+    @TableGenerator(name = "TABLE_GEN_ALLOC",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "ALLOCATION_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_ALLOC")
+    @Override
     public Long getId() {
         return id;
     }

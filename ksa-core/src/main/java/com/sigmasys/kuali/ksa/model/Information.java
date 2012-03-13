@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "KSSA_INFORMATION")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Information {
+public class Information implements Identifiable {
 
     /**
      * Information ID
@@ -79,6 +79,13 @@ public class Information {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @TableGenerator(name = "TABLE_GEN_INFO",
+            table = "SEQUENCE_TABLE",
+            pkColumnName = "SEQ_NAME",
+            valueColumnName = "SEQ_VALUE",
+            pkColumnValue = "INFORMATION_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_INFO")
+    @Override
     public Long getId() {
         return id;
     }

@@ -12,6 +12,7 @@ import javax.persistence.*;
  * <p/>
  * <p/>
  * <p/>
+ *
  * @author Michael Ivanov
  */
 @Entity
@@ -22,7 +23,7 @@ public class CreditType extends TransactionType {
 
     private Integer clearPeriod;
 
-    private RefundRule refundRule;
+    private String refundRule;
 
     private String authorizationText;
 
@@ -50,13 +51,12 @@ public class CreditType extends TransactionType {
         this.clearDate = clearDate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REFUND_RULE_ID")
-    public RefundRule getRefundRule() {
+    @Column(name = "REFUND_RULE")
+    public String getRefundRule() {
         return refundRule;
     }
 
-    public void setRefundRule(RefundRule refundRule) {
+    public void setRefundRule(String refundRule) {
         this.refundRule = refundRule;
     }
 

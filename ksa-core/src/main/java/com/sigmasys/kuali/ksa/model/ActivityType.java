@@ -1,10 +1,6 @@
 package com.sigmasys.kuali.ksa.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
 
 /**
  * Activity type.
@@ -15,78 +11,19 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "KSSA_ACTIVITY_TYPE")
-public class ActivityType {
-
-    /**
-     * Activity type ID
-     */
-    private Long id;
-
-    /**
-     * Activity type name
-     */
-    private String name;
-
-    /**
-     * Creator user ID
-     */
-    private String creatorId;
-
-    /**
-     * Editor user ID
-     */
-    private String editorId;
-
-    /**
-     * Timestamp
-     */
-    private Date lastUpdate;
+public class ActivityType extends AuditableEntity {
 
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @TableGenerator(name = "TABLE_GEN_ACT_TYPE",
+            table = "SEQUENCE_TABLE",
+            pkColumnName = "SEQ_NAME",
+            valueColumnName = "SEQ_VALUE",
+            pkColumnValue = "ACTIVITY_TYPE_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_ACT_TYPE")
+    @Override
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(name = "CREATOR_ID")
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    @Column(name = "EDITOR_ID")
-    public String getEditorId() {
-        return editorId;
-    }
-
-    public void setEditorId(String editorId) {
-        this.editorId = editorId;
-    }
-
-    @Column(name = "LAST_UPDATE")
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
 }

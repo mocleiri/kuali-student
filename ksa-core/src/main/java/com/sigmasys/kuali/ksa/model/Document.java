@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "KSSA_DOCUMENT")
-public class Document {
+public class Document implements Identifiable {
 
     /**
      * Document ID
@@ -52,12 +52,13 @@ public class Document {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN",
+    @TableGenerator(name = "TABLE_GEN_DOC",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "DOCUMENT_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_DOC")
+    @Override
     public Long getId() {
         return id;
     }

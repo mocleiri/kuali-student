@@ -28,7 +28,7 @@ import javax.persistence.TableGenerator;
 @Table(name = "KSSA_TRANSACTION")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Transaction {
+public abstract class Transaction implements Identifiable {
 
     /**
      * The unique transaction identifier for the KSA product.
@@ -128,12 +128,13 @@ public abstract class Transaction {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN",
+    @TableGenerator(name = "TABLE_GEN_TRAN",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "TRANSACTION_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_TRAN")
+    @Override
     public Long getId() {
         return id;
     }

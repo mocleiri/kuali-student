@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "KSSA_ACTIVITY")
-public class Activity {
+public class Activity implements Identifiable {
 
     /**
      * Activity ID
@@ -67,12 +67,13 @@ public class Activity {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN",
+    @TableGenerator(name = "TABLE_GEN_ACT",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "ACTIVITY_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_ACT")
+    @Override
     public Long getId() {
         return id;
     }

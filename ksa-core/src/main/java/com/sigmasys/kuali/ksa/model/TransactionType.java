@@ -23,7 +23,7 @@ import javax.persistence.InheritanceType;
 @Entity
 @IdClass(TransactionTypeId.class)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class TransactionType {
+public abstract class TransactionType implements Identifiable {
 
 
     protected Long id;
@@ -64,6 +64,7 @@ public abstract class TransactionType {
 
     @Id
     @Column(name = "ID")
+    @Override
     public Long getId() {
         return id;
     }
