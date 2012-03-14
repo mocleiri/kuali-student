@@ -9,14 +9,13 @@
   <artifactId>ks-lum-ui</artifactId>
   <name>KS LUM UI</name>
   <dependencies>
-    <!-- Uncomment the "source" dependences after the modules actually contain source code
-      <dependency>
+    <dependency>
       <groupId>org.kuali.student.lum</groupId>
       <artifactId>ks-lum-program</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
-      </dependency> -->
+    </dependency>
     <dependency>
       <groupId>org.kuali.student.lum</groupId>
       <artifactId>ks-lum-program</artifactId>

@@ -10,14 +10,13 @@
   <name>KS LUM Program</name>
   <description>KS Program</description>
   <dependencies>
-    <!-- Uncomment the "source" dependencies after the modules actually contain source code
-      <dependency>
+    <dependency>
       <groupId>org.kuali.student.lum</groupId>
       <artifactId>ks-lum-ui-common</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
-      </dependency> -->
+    </dependency>
     <dependency>
       <groupId>org.kuali.student.lum</groupId>
       <artifactId>ks-lum-ui-common</artifactId>

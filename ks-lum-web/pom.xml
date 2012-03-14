@@ -54,28 +54,27 @@
       <artifactId>ks-lum-impl</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <!-- Uncomment the "source" directories once the modules actually contain source code
-      <dependency>
+    <dependency>
       <groupId>org.kuali.student.core</groupId>
       <artifactId>ks-core-ui</artifactId>
       <classifier>sources</classifier>
       <version>${ks.core.version}</version>
       <scope>provided</scope>
-      </dependency>
-      <dependency>
+    </dependency>
+    <dependency>
       <groupId>org.kuali.student.core</groupId>
       <artifactId>ks-common-ui</artifactId>
       <version>${ks.core.version}</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
-      </dependency>
-      <dependency>
+    </dependency>
+    <dependency>
       <groupId>org.kuali.student.api</groupId>
       <artifactId>ks-core-api</artifactId>
       <version>${ks.api.version}</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
-      </dependency> -->
+    </dependency>
     <!-- Deps needed for LUM UI GWT -->
     <dependency>
       <groupId>org.kuali.student.lum</groupId>
