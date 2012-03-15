@@ -140,21 +140,21 @@
             <version>${ks.api.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <!-- Deps needed for LUM UI GWT -->
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-ui</artifactId>
             <classifier>sources</classifier>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-ui</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
@@ -167,13 +167,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-program</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-program</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
@@ -200,14 +200,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-ui-common</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-ui-common</artifactId>
             <version>${project.version}</version>
         </dependency>

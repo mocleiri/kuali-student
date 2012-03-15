@@ -11,14 +11,14 @@
   <description>KS Program</description>
   <dependencies>
     <dependency>
-      <groupId>org.kuali.student.lum</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>ks-lum-ui-common</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.kuali.student.lum</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>ks-lum-ui-common</artifactId>
       <version>${project.version}</version>
     </dependency>

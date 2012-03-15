@@ -124,19 +124,19 @@
     </profiles>
     <dependencies>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-program</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-program</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-impl</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>

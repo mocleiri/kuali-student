@@ -75,13 +75,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-impl</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.lum</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ks-lum-rice</artifactId>
             <version>${project.version}</version>
         </dependency>
