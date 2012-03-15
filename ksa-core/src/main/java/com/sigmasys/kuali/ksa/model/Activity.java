@@ -155,7 +155,7 @@ public class Activity implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TYPE_FK")
+    @JoinColumn(name = "ACTIVITY_TYPE_ID_FK")
     public ActivityType getType() {
         return type;
     }

@@ -65,6 +65,11 @@ public class ElectronicContact implements Identifiable {
      */
     private Date lastUpdate;
 
+    /**
+     * Reference to the corresponding account
+     */
+    private Account account;
+
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
@@ -162,5 +167,15 @@ public class ElectronicContact implements Identifiable {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACNT_ID_FK")
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

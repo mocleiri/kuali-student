@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Person name model.
- * One KSA account can be associated with one or more person names.
+ * Postal address
  * <p/>
  * <p/>
  * User: ivanovm
@@ -13,43 +12,49 @@ import java.util.Date;
  * Time: 3:56 PM
  */
 @Entity
-@Table(name = "KSSA_PERSON_NAME")
-public class PersonName implements Identifiable {
+@Table(name = "KSSA_POSTAL_ADDRESS")
+public class PostalAddress implements Identifiable {
 
     /**
-     * Person name ID
+     * Address ID
      */
     private Long id;
 
     /**
-     * KIM Entity name type
+     * KIM address type
      */
-    private String kimNameType;
+    private String kimAddressType;
 
     /**
-     * First name
+     * Street address 1
      */
-    private String firstName;
+    private String streetAddress1;
 
     /**
-     * Middle name
+     * Street address 1
      */
-    private String middleName;
+    private String streetAddress2;
 
     /**
-     * Last name
+     * Street address 1
      */
-    private String lastName;
+    private String streetAddress3;
 
     /**
-     * Suffix
+     * Postal (zip) code
      */
-    private String suffix;
+    private String postalCode;
 
     /**
-     * Title
+     * Country
      */
-    private String title;
+    private String country;
+
+    /**
+     * State
+     */
+    private String state;
+
 
     /**
      * Creator user ID
@@ -67,7 +72,7 @@ public class PersonName implements Identifiable {
     private Date lastUpdate;
 
     /**
-     * Indicates whether this person name is default
+     * Indicates whether this address is default
      */
     private boolean isDefault;
 
@@ -79,12 +84,12 @@ public class PersonName implements Identifiable {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN_PERSON",
+    @TableGenerator(name = "TABLE_GEN_ADDRESS",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
-            pkColumnValue = "PERSON_NAME_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_PERSON")
+            pkColumnValue = "ADDRESS_NAME_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_ADDRESS")
     @Override
     public Long getId() {
         return id;
@@ -94,58 +99,67 @@ public class PersonName implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "KIM_NAME_TYPE")
-    public String getKimNameType() {
-        return kimNameType;
+    @Column(name = "KIM_ADDRESS_TYPE")
+    public String getKimAddressType() {
+        return kimAddressType;
     }
 
-    public void setKimNameType(String kimNameType) {
-        this.kimNameType = kimNameType;
+    public void setKimAddressType(String kimAddressType) {
+        this.kimAddressType = kimAddressType;
     }
 
-    @Column(name = "FIRST_NAME")
-    public String getFirstName() {
-        return firstName;
+    @Column(name = "LINE1")
+    public String getStreetAddress1() {
+        return streetAddress1;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setStreetAddress1(String streetAddress1) {
+        this.streetAddress1 = streetAddress1;
     }
 
-    @Column(name = "MIDDLE_NAME")
-    public String getMiddleName() {
-        return middleName;
+    @Column(name = "LINE2")
+    public String getStreetAddress2() {
+        return streetAddress2;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setStreetAddress2(String streetAddress2) {
+        this.streetAddress2 = streetAddress2;
     }
 
-    @Column(name = "LAST_NAME")
-    public String getLastName() {
-        return lastName;
+    @Column(name = "LINE3")
+    public String getStreetAddress3() {
+        return streetAddress3;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setStreetAddress3(String streetAddress3) {
+        this.streetAddress3 = streetAddress3;
     }
 
-    @Column(name = "SUFFIX")
-    public String getSuffix() {
-        return suffix;
+    @Column(name = "POSTAL_CODE")
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    @Column(name = "TITLE")
-    public String getTitle() {
-        return title;
+    @Column(name = "COUNTRY_CODE")
+    public String getCountry() {
+        return country;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Column(name = "STATE_CODE")
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     @Column(name = "CREATOR_ID")

@@ -3,14 +3,14 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 
 /**
- * Account type.
+ * Late periods model
  * <p/>
  * User: mike
  * Date: 1/22/12
  * Time: 3:47 PM
  */
 @Entity
-@Table(name = "KSSA_LATE_PERIODS")
+@Table(name = "KSSA_LATE_PERIOD")
 public class LatePeriod extends AuditableEntity {
 
     private boolean isDefault;
@@ -22,12 +22,12 @@ public class LatePeriod extends AuditableEntity {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
-    @TableGenerator(name = "TABLE_GEN_ACNT_TYPE",
+    @TableGenerator(name = "TABLE_GEN_LATE_PERIOD",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
-            pkColumnValue = "ACCOUNT_TYPE_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_ACNT_TYPE")
+            pkColumnValue = "LATE_PERIOD_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_LATE_PERIOD")
     @Override
     public Long getId() {
         return id;

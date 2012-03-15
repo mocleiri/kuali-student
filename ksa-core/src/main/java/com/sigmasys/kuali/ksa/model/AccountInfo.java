@@ -71,7 +71,7 @@ public class AccountInfo implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TAX_TYPE_FK")
+    @JoinColumn(name = "TAX_TYPE_ID_FK")
     public TaxType getTaxType() {
         return taxType;
     }
@@ -81,7 +81,7 @@ public class AccountInfo implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BANK_TYPE_FK")
+    @JoinColumn(name = "BANK_TYPE_ID_FK")
     public BankType getBankType() {
         return bankType;
     }

@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * KSA Account model
@@ -52,6 +53,26 @@ public abstract class Account implements Identifiable {
      * Credit limit
      */
     protected BigDecimal creditLimit;
+
+    /**
+     * Late period
+     */
+    protected LatePeriod latePeriod;
+
+    /**
+     * Collection of associated person names
+     */
+    protected List<PersonName> personNames;
+
+    /**
+     * Collection of associated electronic contacts
+     */
+    protected List<ElectronicContact> electronicContacts;
+
+    /**
+     * Collection of associated postal addresses
+     */
+    protected List<PostalAddress> postalAddresses;
 
 
     @Id
@@ -117,5 +138,42 @@ public abstract class Account implements Identifiable {
 
     public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LATE_PERIOD_ID_FK")
+    public LatePeriod getLatePeriod() {
+        return latePeriod;
+    }
+
+    public void setLatePeriod(LatePeriod latePeriod) {
+        this.latePeriod = latePeriod;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
+    public List<PersonName> getPersonNames() {
+        return personNames;
+    }
+
+    public void setPersonNames(List<PersonName> personNames) {
+        this.personNames = personNames;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
+    public List<ElectronicContact> getElectronicContacts() {
+        return electronicContacts;
+    }
+
+    public void setElectronicContacts(List<ElectronicContact> electronicContacts) {
+        this.electronicContacts = electronicContacts;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
+    public List<PostalAddress> getPostalAddresses() {
+        return postalAddresses;
+    }
+
+    public void setPostalAddresses(List<PostalAddress> postalAddresses) {
+        this.postalAddresses = postalAddresses;
     }
 }
