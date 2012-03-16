@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 
 
 /**
- * GL Breakdown model.
+ * General Ledger Breakdown model.
  *
  * @author Michael Ivanov
  */
 @Entity
 @Table(name = "KSSA_GL_BREAKDOWN")
-public class GlBreakdown implements Identifiable {
+public class GeneralLedgerBreakdown implements Identifiable {
 
     /**
      * The unique identifier
