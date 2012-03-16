@@ -32,6 +32,11 @@ public class GeneralLedgerBreakdown implements Identifiable {
      */
     private DebitType debitType;
 
+    /**
+     * Reference to general ledger type
+     */
+    private GeneralLedgerType generalLedgerType;
+
 
     @Id
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
@@ -79,6 +84,16 @@ public class GeneralLedgerBreakdown implements Identifiable {
 
     public void setDebitType(DebitType debitType) {
         this.debitType = debitType;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GL_TYPE_ID_FK")
+    public GeneralLedgerType getGeneralLedgerType() {
+        return generalLedgerType;
+    }
+
+    public void setGeneralLedgerType(GeneralLedgerType generalLedgerType) {
+        this.generalLedgerType = generalLedgerType;
     }
 }
 	
