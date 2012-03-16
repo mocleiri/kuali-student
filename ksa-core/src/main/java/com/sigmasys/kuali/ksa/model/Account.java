@@ -25,9 +25,9 @@ public abstract class Account implements Identifiable {
     protected String id;
 
     /**
-     * KIM Entity ID
+     * Entity ID
      */
-    protected String kimEntityId;
+    protected String entityId;
 
     /**
      * Creation date
@@ -86,13 +86,13 @@ public abstract class Account implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "KIM_ENTITY")
-    public String getKimEntityId() {
-        return kimEntityId;
+    @Column(name = "ENTITY_ID")
+    public String getEntityId() {
+        return entityId;
     }
 
-    public void setKimEntityId(String kimEntityId) {
-        this.kimEntityId = kimEntityId;
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     @Column(name = "CREATION_DATE")
