@@ -15,7 +15,7 @@ public class ActivityType extends AuditableEntity {
 
 
     @Id
-    @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_ACT_TYPE",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",

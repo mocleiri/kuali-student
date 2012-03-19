@@ -12,7 +12,10 @@ import org.junit.runners.Suite;
  * User: Michael Ivanov
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses(value = {TransactionServiceTest.class, KimServiceTest.class})
+@Suite.SuiteClasses(value = {
+        DatabaseUtilsTest.class,
+        TransactionServiceTest.class,
+        KimServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/ksa-context.xml";

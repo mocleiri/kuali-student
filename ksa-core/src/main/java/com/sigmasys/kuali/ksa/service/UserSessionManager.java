@@ -11,10 +11,9 @@ public interface UserSessionManager {
      *
      * @param request    the HTTP request
      * @param response   the HTTP response
-     * @param user       the User instance
-     * @param userGroups user groups
+     * @param userId     the User ID
      */
-    void createSession(HttpServletRequest request, HttpServletResponse response, String userName);
+    void createSession(HttpServletRequest request, HttpServletResponse response, String userId);
 
     /**
      * Destroys the current HTTP session

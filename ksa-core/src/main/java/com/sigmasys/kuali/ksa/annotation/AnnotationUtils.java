@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.annotation;
 
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -106,21 +107,29 @@ public class AnnotationUtils {
         return null;
     }
 
-    public static <A extends Annotation> Set<String> findAnnotatedClasses(Class<A> annotationClass,
-                                                                          ResourceLoader resourceLoader,
-                                                                          String... packageNames) {
+    /**
+     * A modified version of Spring's findAnnotatedClasses that returns  a set of classes
+     * instead of a set of string values with the default resource loader.
+     *
+     * @param annotationClass annotation
+     * @param packageNames    package names where to look for the annotation
+     * @param <A>             annotation type
+     * @return a set of Class instances
+     */
+    public static <A extends Annotation> Set<Class> findAnnotatedClasses(Class<A> annotationClass,
+                                                                         String... packageNames) {
 
         final String CLASS_RESOURCE_PATTERN = "**/*.class";
 
         final ResourcePatternResolver resourcePatternResolver =
-                ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
+                ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
 
         final MetadataReaderFactory metadataReaderFactory = new SimpleMetadataReaderFactory();
         final TypeFilter annotationFilter = new AnnotationTypeFilter(annotationClass);
 
         try {
 
-            final Set<String> annotatedClasses = new HashSet<String>();
+            final Set<Class> annotatedClasses = new HashSet<Class>();
 
             for (String packageName : packageNames) {
 
@@ -137,7 +146,7 @@ public class AnnotationUtils {
                             Class<?> annotatedClass = Class.forName(metadataReader.getAnnotationMetadata().getClassName());
                             A annotation = annotatedClass.getAnnotation(annotationClass);
                             if (annotation != null) {
-                                annotatedClasses.add(annotatedClass.getName());
+                                annotatedClasses.add(annotatedClass);
                             }
                         }
                     }
@@ -150,4 +159,6 @@ public class AnnotationUtils {
             throw new RuntimeException("Failure during classpath scanning", ex);
         }
     }
+
+
 }

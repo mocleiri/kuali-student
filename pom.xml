@@ -21,6 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.1.0.RELEASE</spring.version>
         <hibernate.version>4.0.0.Final</hibernate.version>
+        <jta.version>1.1</jta.version>
         <atomikos.version>3.7.0</atomikos.version>
         <gwt.version>2.4.0</gwt.version>
         <gxt.version>2.2.5-gwt22</gxt.version>
@@ -128,16 +129,16 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
-            <version>1.0</version>
-        </dependency>
+            <version>${jpa.version}</version>
+        </dependency-->
 
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
-            <version>1.1</version>
+            <version>${jta.version}</version>
         </dependency>
 
         <!-- Spring Dependencies -->
@@ -216,6 +217,12 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
         </dependency>
 
         <dependency>
@@ -328,9 +335,9 @@
         </dependency>
 
         <dependency>
-        	<groupId>commons-lang</groupId>
-        	<artifactId>commons-lang</artifactId>
-        	<version>2.6</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
         </dependency>
 
         <!-- Pom dependencies for impl specific jars -->
@@ -457,12 +464,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
             <groupId>org.kuali.rice</groupId>
             <artifactId>rice-kim-impl</artifactId>
             <version>${kuali.rice.version}</version>
-        </dependency>    
+        </dependency>
 
         <dependency>
             <groupId>org.kuali.rice</groupId>

@@ -16,7 +16,6 @@ import javax.persistence.*;
  * @author Michael Ivanov
  */
 @Entity
-@IdClass(TransactionTypeId.class)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class TransactionType implements Identifiable {
 
@@ -51,6 +50,7 @@ public abstract class TransactionType implements Identifiable {
      *
      * @return list of tags
      */
+    @Transient
     public abstract List<Tag> getTags();
 
 

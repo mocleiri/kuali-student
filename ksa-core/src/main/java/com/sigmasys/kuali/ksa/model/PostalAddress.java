@@ -83,7 +83,7 @@ public class PostalAddress implements Identifiable {
 
 
     @Id
-    @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_ADDRESS",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",

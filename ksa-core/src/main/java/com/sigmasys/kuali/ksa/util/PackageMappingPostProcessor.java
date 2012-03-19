@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.util;
 
 import com.sigmasys.kuali.ksa.annotation.AnnotationUtils;
-import org.springframework.core.io.DefaultResourceLoader;
+
 import org.springframework.orm.jpa.persistenceunit.MutablePersistenceUnitInfo;
 import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
 
@@ -19,10 +19,9 @@ public class PackageMappingPostProcessor implements PersistenceUnitPostProcessor
     private String[] packageNames;
 
     public void postProcessPersistenceUnitInfo(MutablePersistenceUnitInfo pui) {
-        Set<String> annotatedEntities = AnnotationUtils.findAnnotatedClasses(Entity.class,
-                new DefaultResourceLoader(), packageNames);
-        for (String entityClass : annotatedEntities) {
-            pui.addManagedClassName(entityClass);
+        Set<Class> annotatedClasses = AnnotationUtils.findAnnotatedClasses(Entity.class, packageNames);
+        for (Class entityClass : annotatedClasses) {
+            pui.addManagedClassName(entityClass.getName());
         }
         pui.setExcludeUnlistedClasses(true);
     }

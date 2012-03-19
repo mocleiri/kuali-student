@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class BankType extends AuditableEntity {
 
     @Id
-    @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_BANK_TYPE",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",

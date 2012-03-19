@@ -13,77 +13,71 @@ import org.springframework.stereotype.Service;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 
 /**
- * UserSessionManagerImpl. User: Michael Ivanov
- * 
+ * UserSessionManagerImpl. A default implementation of UserSessionManager interface.
+ *
+ * @author Michael Ivanov
  */
 @Service("userSessionManager")
 public class UserSessionManagerImpl implements UserSessionManager {
 
-	private static final Log logger = LogFactory.getLog(UserSessionManagerImpl.class);
+    private static final Log logger = LogFactory.getLog(UserSessionManagerImpl.class);
 
-	private static final String USER_ID = "userId";
+    private static final String USER_ID = "userId";
 
-	/**
-	 * Creates a new HTTP session
-	 * 
-	 * @param request
-	 *            the HTTP request
-	 * @param response
-	 *            the HTTP response
-	 * @param user
-	 *            the User instance
-	 */
-	@Transactional
-	public void createSession(HttpServletRequest request,
-			HttpServletResponse response, String userId) {
-		HttpSession session = request.getSession(true);
-		// Storing user ID in the session
-		session.setAttribute(USER_ID, userId);
-		logger.info("Creating session for user Id: " + userId);
-	}
+    /**
+     * Creates a new HTTP session
+     *
+     * @param request  the HTTP request
+     * @param response the HTTP response
+     * @param userId   the User ID
+     */
+    @Transactional
+    public void createSession(HttpServletRequest request,
+                              HttpServletResponse response, String userId) {
+        HttpSession session = request.getSession(true);
+        // Storing user ID in the session
+        session.setAttribute(USER_ID, userId);
+        logger.info("Creating session for user Id: " + userId);
+    }
 
-	/**
-	 * Destroys the current HTTP session
-	 * 
-	 * @param request
-	 *            the HTTP request
-	 */
-	public void destroySession(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			// Invalidating HTTP session
-			session.invalidate();
-		}
-	}
+    /**
+     * Destroys the current HTTP session
+     *
+     * @param request the HTTP request
+     */
+    public void destroySession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            // Invalidating HTTP session
+            session.invalidate();
+        }
+    }
 
-	/**
-	 * Checks if the HTTP session is valid.
-	 * 
-	 * @param request
-	 *            the HTTP request
-	 * @param response
-	 *            the HTTP response
-	 * @return true if the session is valid.
-	 */
-	public boolean isSessionValid(HttpServletRequest request,
-			HttpServletResponse response) {
-		HttpSession session = request.getSession(false);
-		return session != null && session.getAttribute(USER_ID) != null;
-	}
+    /**
+     * Checks if the HTTP session is valid.
+     *
+     * @param request  the HTTP request
+     * @param response the HTTP response
+     * @return true if the session is valid.
+     */
+    public boolean isSessionValid(HttpServletRequest request,
+                                  HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        return session != null && session.getAttribute(USER_ID) != null;
+    }
 
-	/**
-	 * Returns the user ID
-	 * 
-	 * @param request
-	 *            HttpServletRequest
-	 * @return the user ID
-	 */
-	public String getUserId(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			return (String) session.getAttribute(USER_ID);
-		}
-		throw new IllegalStateException("HTTP session is null");
-	}
+    /**
+     * Returns the user ID
+     *
+     * @param request HttpServletRequest
+     * @return the user ID
+     */
+    public String getUserId(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            return (String) session.getAttribute(USER_ID);
+        }
+        throw new IllegalStateException("HTTP session is null");
+    }
 
 }

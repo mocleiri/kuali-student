@@ -127,7 +127,7 @@ public abstract class Transaction implements Identifiable {
 
 
     @Id
-    @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_TRAN",
             table = "SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",

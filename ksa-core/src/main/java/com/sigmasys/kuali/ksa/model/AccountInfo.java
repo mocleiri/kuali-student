@@ -42,7 +42,7 @@ public class AccountInfo implements Identifiable {
 
 
     @Id
-    @Column(name = "ID", nullable = false, unique = true, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false)
     @Override
     public String getId() {
         return id;
