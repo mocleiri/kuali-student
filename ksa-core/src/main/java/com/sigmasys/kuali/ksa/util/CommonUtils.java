@@ -29,7 +29,7 @@ public final class CommonUtils {
                 props = new Properties();
                 InputStream in = clazz.getClassLoader().getResourceAsStream(name);
                 if (in == null) {
-                    logger.warn("Resource not found. Name: " + name);
+                    logger.warn("Resource '" + name + "' is not found");
                     return null;
                 }
                 props.load(in);

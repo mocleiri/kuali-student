@@ -10,7 +10,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
        default-lazy-init="true">
 
-    <bean id="config" class="org.kuali.rice.core.impl.config.property.ConfigFactoryBean" depends-on="jndiBinder">
+    <bean id="config" class="org.kuali.rice.core.impl.config.property.ConfigFactoryBean">
         <property name="initialize" value="true"/>
         <property name="configLocations">
             <list>

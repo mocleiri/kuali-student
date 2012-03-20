@@ -6,7 +6,7 @@
 
     <persistence-unit name="ksa" transaction-type="JTA">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>KsaDS</jta-data-source>
+        <!-- jta-data-source>KsaDS</jta-data-source -->
         <properties>
             <property name="hibernate.default_schema" value="KSA"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
@@ -18,7 +18,7 @@
 
     <persistence-unit name="rice" transaction-type="JTA">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>RiceDS</jta-data-source>
+        <!-- jta-data-source>RiceDS</jta-data-source -->
         <properties>
             <property name="hibernate.default_schema" value="KSA"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>

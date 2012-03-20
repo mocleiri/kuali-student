@@ -12,7 +12,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <import resource="classpath:/META-INF/ksa-datasource.xml"/>
 
     <!-- JNDI bindings -->
-    <bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
+    <!-- bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
         <constructor-arg>
             <map>
                 <entry key="java:comp/TransactionManager" value-ref="atomikosTransactionManager"/>
@@ -23,7 +23,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                 <entry key="RiceDS" value-ref="riceDataSource"/>
             </map>
         </constructor-arg>
-    </bean>
+    </bean -->
 
     <context:annotation-config/>
 
@@ -66,6 +66,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean id="ksaEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="ksa"/>
+        <property name="dataSource" ref="ksaDataSource"/>
         <property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml"/>
         <property name="persistenceUnitPostProcessors" ref="ksaEntityFinder"/>
         <property name="loadTimeWeaver" ref="loadTimeWeaver"/>
@@ -73,11 +74,14 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean id="riceEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="rice"/>
+        <property name="dataSource" ref="riceDataSource"/>
         <property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml"/>
         <property name="persistenceUnitPostProcessors" ref="riceEntityFinder"/>
         <property name="loadTimeWeaver" ref="loadTimeWeaver"/>
     </bean>
 
     <import resource="classpath:/META-INF/ksa-rice-context.xml"/>
+
+    <import resource="classpath:/META-INF/krad-context.xml"/>
 
 </beans>
