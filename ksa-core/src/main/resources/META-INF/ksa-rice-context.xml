@@ -38,7 +38,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
+    <bean id="kimConfigurer" class="org.kuali.rice.kim.config.KIMConfigurer" depends-on="coreConfigurer"/>
+    <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="coreConfigurer"/>
+
     <import resource="classpath:/META-INF/kim-beans.xml"/>
-    
+
 
 </beans>

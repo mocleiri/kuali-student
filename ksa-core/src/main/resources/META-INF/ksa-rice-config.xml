@@ -3,7 +3,7 @@
     <param name="application.id">KSA</param>
 
     <param name="rice.version">2.0</param>
-    <param name="datasource.platform">oracle.jdbc.driver.OracleDriver</param>
+    <param name="datasource.platform">org.kuali.rice.core.framework.persistence.platform.OraclePlatform</param>
 
     <!-- OJB parameters -->
     <param name="rice.custom.ojb.properties">OJB.properties</param>
@@ -14,6 +14,9 @@
 	<!--  log4j Settings -->
 	<param name="log4j.reload.minutes">5</param>
 	<param name="log4j.settings.path">classpath:/log4j.properties</param>
+
+    <!-- CORE Settings -->
+    <param name="core.mode">LOCAL</param>
 
 	<!--  Bus Configuration  -->
 	<param name="dev.mode">false</param>
@@ -105,10 +108,13 @@
     <param name="rice.cxf.client.connectionTimeout">30000</param> 
     <param name="rice.cxf.client.receiveTimeout">120000</param> 
     <param name="rice.cxf.client.allowChunking">true</param> 
-    
+
+    <!-- KRAD Settings -->
+    <param name="kr.mode">LOCAL</param>
+    <param name="kr.incident.mailing.list"></param>
+
     <param name="mail.relay.server">localhost</param>
 	<param name="mailing.list.batch">mailing.list.batch</param>
-	<param name="kr.incident.mailing.list"></param>
 	<param name="session.document.cache.size">10</param>
  
 </config>

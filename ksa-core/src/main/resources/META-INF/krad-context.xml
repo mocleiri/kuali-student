@@ -54,7 +54,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    <bean id="kradHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="interceptors">
             <list>
                 <ref bean="uifControllerHandlerInterceptor"/>
