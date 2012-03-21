@@ -34,6 +34,7 @@
     <context:component-scan base-package="org.kuali.rice.krad"/>
     <context:component-scan base-package="org.kuali.rice.core.web"/>
     <context:component-scan base-package="org.kuali.rice.kew.impl.peopleflow"/>
+    <context:component-scan base-package="edu.sampleu"/>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -54,7 +55,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="kradHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    <bean id="kradHandlerMapping"
+          class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="interceptors">
             <list>
                 <ref bean="uifControllerHandlerInterceptor"/>
@@ -105,5 +107,48 @@
             </list>
         </property>
     </bean>
+
+    <bean id="sampleAppModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
+        <property name="namespaceCode" value="tv"/>
+        <property name="initializeDataDictionary" value="false"/>
+        <property name="dataDictionaryService" ref="dataDictionaryService"/>
+        <property name="dataDictionaryPackages">
+            <list>
+                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficer.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficerInfo.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficer-Extension.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficerMaintenanceDocument.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccount.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountInfo.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountExtension.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountMaintenanceDocument.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountType.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountUseRate.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/TravelRequestDocument.xml</value>
+                <value>classpath:edu/sampleu/travel/datadictionary/SampleAppAttributes.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/TravelAccountInquiry.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/TestKNSInquiries.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/TravelAccountLookup.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/TravelAccountTypeLookup.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/TravelAccountMaintenance.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/Travel-testView1.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/Travel-testView2.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/FiscalOfficerView.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/FiscalOfficerLookup.xml</value>
+                <value>classpath:edu/sampleu/travel/uif/TravelAlternateViews.xml</value>
+            </list>
+        </property>
+        <!--property name="databaseRepositoryFilePaths">
+            <list>
+                <value>OJB-repository-sampleapp.xml</value>
+            </list>
+        </property-->
+        <property name="packagePrefixes">
+            <list>
+                <value>edu.sampleu.travel</value>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>

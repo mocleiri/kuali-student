@@ -43,5 +43,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <import resource="classpath:/META-INF/kim-beans.xml"/>
 
+    <import resource="classpath:/META-INF/krad-context.xml"/>
 
 </beans>
