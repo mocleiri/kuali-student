@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2006-2007 The Kuali Foundation
+
+  Licensed under the Educational Community License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.opensource.org/licenses/ecl2.php
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-2.5.xsd	
+                           http://www.springframework.org/schema/lang
+                           http://www.springframework.org/schema/lang/spring-lang-2.5.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util-2.5.xsd" default-lazy-init="true">
+
+    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
+
+    <!--bean id="kimDataSource"
+          class="org.kuali.rice.core.framework.persistence.jdbc.datasource.PrimaryDataSourceFactoryBean">
+        <property name="preferredDataSourceParams">
+            <list>
+                <value>kim.datasource</value>
+            </list>
+        </property>
+        <property name="preferredDataSourceJndiParams">
+            <list>
+                <value>kim.datasource.jndi.location</value>
+            </list>
+        </property>
+        <property name="serverDataSource" value="true"/>
+    </bean-->
+
+    <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
+        <property name="jcdAliases">
+            <list>
+                <value>riceDataSource</value>
+            </list>
+        </property>
+        <property name="metadataLocation" value="classpath:/META-INF/ojb-repository-kim.xml"/>
+    </bean>
+
+    <bean id="dbPlatform" class="org.kuali.rice.core.framework.persistence.platform.OraclePlatform"/>
+
+    <bean id="kimPlatformAwareDao"
+          class="org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb" abstract="true">
+        <property name="jcdAlias" value="riceDataSource"/>
+        <property name="dbPlatform" ref="dbPlatform"/>
+    </bean>
+
+    <!-- KIM DAO -->
+    <bean id="roleDao" class="org.kuali.rice.kim.impl.role.RoleDaoOjb" parent="kimPlatformAwareDao"/>
+
+    <bean id="criteriaLookupDao" class="org.kuali.rice.krad.criteria.CriteriaLookupDaoOjb"
+          parent="kimPlatformAwareDao"/>
+
+    <bean id="persistenceDao" class="org.kuali.rice.krad.dao.impl.PersistenceDaoOjb" parent="kimPlatformAwareDao"/>
+
+    <bean id="businessObjectDao" class="org.kuali.rice.krad.dao.impl.BusinessObjectDaoOjb" parent="kimPlatformAwareDao">
+        <constructor-arg ref="persistenceStructureService"/>
+    </bean>
+
+    <!-- START JPA CONFIGURATION -->
+    <bean id="kimEntityManagerFactory"
+          class=" org.kuali.rice.krad.app.persistence.jpa.RiceEntityManagerProxyFactoryBean">
+        <constructor-arg value="rice.kim"/>
+        <constructor-arg ref="riceDataSource"/>
+    </bean>
+
+    <bean id="kimEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name="entityManagerFactory" ref="kimEntityManagerFactory"/>
+    </bean>
+    <!-- END JPA CONFIGURATION -->
+
+    <bean id="criteriaLookupService" class="org.kuali.rice.krad.criteria.CriteriaLookupServiceImpl">
+        <property name="criteriaLookupDao" ref="criteriaLookupDao"/>
+    </bean>
+
+    <!-- persistence service -->
+
+    <bean id="persistenceStructureServiceJpa"
+          class="org.kuali.rice.krad.service.impl.PersistenceStructureServiceJpaImpl"/>
+    <bean id="persistenceStructureServiceOjb"
+          class="org.kuali.rice.krad.service.impl.PersistenceStructureServiceOjbImpl"/>
+
+    <bean id="persistenceStructureService" class="org.kuali.rice.krad.service.impl.PersistenceStructureServiceImpl">
+        <property name="persistenceStructureServiceJpa" ref="persistenceStructureServiceJpa"/>
+        <property name="persistenceStructureServiceOjb" ref="persistenceStructureServiceOjb"/>
+    </bean>
+
+    <bean id="persistenceService" class="org.kuali.rice.krad.service.impl.PersistenceServiceOjbImpl">
+        <property name="persistenceDao" ref="persistenceDao"/>
+    </bean>
+
+    <!-- end of persistence service -->
+
+
+    <bean id="kualiConfigurationService" class="org.kuali.rice.krad.service.impl.ConfigurationServiceImpl"/>
+    <bean id="kualiModuleService" class="org.kuali.rice.krad.service.impl.KualiModuleServiceImpl"/>
+
+    <bean id="dataDictionaryService" class="org.kuali.rice.krad.service.impl.DataDictionaryServiceImpl">
+        <property name="kualiConfigurationService" ref="kualiConfigurationService"/>
+        <property name="kualiModuleService" ref="kualiModuleService"/>
+    </bean>
+
+    <bean id="viewDictionaryService" class="org.kuali.rice.krad.uif.service.impl.ViewDictionaryServiceImpl">
+        <property name="dataDictionaryService" ref="dataDictionaryService"/>
+    </bean>
+
+    <bean id="dataObjectMetaDataService" class="org.kuali.rice.krad.service.impl.DataObjectMetaDataServiceImpl">
+        <property name="dataDictionaryService" ref="dataDictionaryService"/>
+        <property name="kualiModuleService" ref="kualiModuleService"/>
+        <property name="persistenceStructureService" ref="persistenceStructureService"/>
+    </bean>
+
+    <bean id="businessObjectService" class="org.kuali.rice.krad.service.impl.BusinessObjectServiceImpl">
+        <property name="businessObjectDao" ref="businessObjectDao"/>
+        <property name="personService" ref="kimPersonService"/>
+        <property name="persistenceService" ref="persistenceService"/>
+        <property name="dataObjectMetaDataService" ref="dataObjectMetaDataService"/>
+        <property name="persistenceStructureService" ref="persistenceStructureService"/>
+    </bean>
+
+
+    <!-- KIM API service definitions -->
+    <bean id="kimIdentityService" class="org.kuali.rice.kim.impl.identity.IdentityServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="kimGroupService" class="org.kuali.rice.kim.impl.group.GroupServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="kimRoleService" class="org.kuali.rice.kim.impl.role.RoleServiceImpl">
+        <property name="roleDao" ref="roleDao"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="kimAuthenticationService" class="org.kuali.rice.kim.impl.identity.AuthenticationServiceImpl"/>
+
+    <bean id="kimPersonService" class="org.kuali.rice.kim.impl.identity.PersonServiceImpl">
+        <property name="personEntityTypeCodes">
+            <list>
+                <value>PERSON</value>
+                <value>SYSTEM</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="kimTypeInfoService" class="org.kuali.rice.kim.impl.type.KimTypeInfoServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
+    </bean>
+
+
+</beans>

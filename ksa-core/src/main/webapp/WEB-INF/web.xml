@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <!-- Default page to serve -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/META-INF/ksa-context.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>web.bootstrap.spring.file</param-name>
+        <param-value>classpath:/META-INF/ksa-context.xml</param-value>
+    </context-param>
+
+
+    <listener>
+        <listener-class>com.sigmasys.kuali.ksa.servlet.WebappContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.sigmasys.kuali.ksa.servlet.RequestContextListener</listener-class>
+    </listener>
+
+    <!-- KRAD listeners BEGIN -->
+    <listener>
+        <listener-class>org.kuali.rice.krad.web.session.NonSerializableSessionListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.kuali.rice.core.web.listener.KualiInitializeListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.kuali.rice.core.web.listener.BootstrapListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.kuali.rice.krad.web.listener.KualiHttpSessionListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.apache.tiles.web.startup.simple.SimpleTilesListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.kuali.rice.core.framework.config.module.WebModuleLoaderListener</listener-class>
+    </listener>
+    <!-- KRAD listeners END -->
+
+
+    <servlet>
+        <servlet-name>springDispatcher</servlet-name>
+        <servlet-class>com.sigmasys.kuali.ksa.servlet.LazyInitDispatcherServlet</servlet-class>
+        <!--  Tell this servlet to use ROOT spring context -->
+        <init-param>
+            <param-name>contextAttribute</param-name>
+            <param-value>org.springframework.web.context.WebApplicationContext.ROOT</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>krad</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>*.service</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>*.webservice</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>/command</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>krad</servlet-name>
+        <url-pattern>/kr-krad/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>coreFilter</filter-name>
+        <filter-class>com.sigmasys.kuali.ksa.servlet.CoreFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>HideWebInfFilter</filter-name>
+        <filter-class>org.kuali.rice.krad.web.filter.HideWebInfFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>ResponseOverrideFilter</filter-name>
+        <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>BootstrapFilter</filter-name>
+        <filter-class>org.kuali.rice.kew.web.BootstrapFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>UserLoginFilter</filter-name>
+        <filter-class>org.kuali.rice.kew.web.UserLoginFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>UserPreferencesFilter</filter-name>
+        <filter-class>org.kuali.rice.kew.web.UserPreferencesFilter</filter-class>
+    </filter>
+
+
+    <filter-mapping>
+        <filter-name>coreFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>HideWebInfFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ResponseOverrideFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>BootstrapFilter</filter-name>
+        <servlet-name>krad</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserLoginFilter</filter-name>
+        <servlet-name>krad</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserPreferencesFilter</filter-name>
+        <servlet-name>krad</servlet-name>
+    </filter-mapping>
+
+    <!-- only need to include this for the kuali tlds
+             since tld file will only be searched from within other jars -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://www.kuali.org/jsp/jstl/functions</taglib-uri>
+            <taglib-location>/WEB-INF/tld/kuali-func.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+
+</web-app>

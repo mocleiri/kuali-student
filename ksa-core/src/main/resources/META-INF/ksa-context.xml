@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+       default-lazy-init="true">
+
+    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
+
+    <!-- JNDI bindings -->
+    <!-- bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
+        <constructor-arg>
+            <map>
+                <entry key="java:comp/TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="java:comp/UserTransaction" value-ref="atomikosUserTransaction"/>
+                <entry key="javax.transaction.TransactionManager" value-ref="atomikosTransactionManager"/>
+                <entry key="javax.transaction.UserTransaction" value-ref="atomikosUserTransaction"/>
+                <entry key="KsaDS" value-ref="ksaDataSource"/>
+                <entry key="RiceDS" value-ref="riceDataSource"/>
+            </map>
+        </constructor-arg>
+    </bean -->
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.sigmasys.kuali.ksa"/>
+
+    <!-- process @Transactional to create transaction proxies -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <bean id="loadTimeWeaver" class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+
+    <bean id="initialParameterConfigurer" class="com.sigmasys.kuali.ksa.util.InitialParameterConfigurer">
+        <constructor-arg index="0" value="KSA"/>
+        <constructor-arg index="1" value="0"/>
+        <property name="location" value="classpath:/ksa.properties"/>
+        <!--  property name="dataSource" ref="ksaDataSource" / -->
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!-- child modules can define their our bean with this name and list of
+         core and their packages containing jpa entities -->
+    <bean id="ksaEntityFinder" class="com.sigmasys.kuali.ksa.util.PackageMappingPostProcessor">
+        <property name="packageNames">
+            <list>
+                <value>com.sigmasys.kuali.ksa.model</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="riceEntityFinder" class="com.sigmasys.kuali.ksa.util.PackageMappingPostProcessor">
+        <property name="packageNames">
+            <list>
+                <value>org.kuali.rice</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="ksaEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="ksa"/>
+        <property name="dataSource" ref="ksaDataSource"/>
+        <property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml"/>
+        <property name="persistenceUnitPostProcessors" ref="ksaEntityFinder"/>
+        <property name="loadTimeWeaver" ref="loadTimeWeaver"/>
+    </bean>
+
+    <bean id="riceEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="rice"/>
+        <property name="dataSource" ref="riceDataSource"/>
+        <property name="persistenceXmlLocation" value="classpath:/META-INF/ksa-persistence.xml"/>
+        <property name="persistenceUnitPostProcessors" ref="riceEntityFinder"/>
+        <property name="loadTimeWeaver" ref="loadTimeWeaver"/>
+    </bean>
+
+    <import resource="classpath:/META-INF/ksa-rice-context.xml"/>
+
+    <import resource="classpath:/META-INF/krad-context.xml"/>
+
+</beans>
