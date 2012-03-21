@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="includeDocumentHeaderFields" required="false" description="Whether to include the document number as a hidden field." %>
 <%@ attribute name="includeEditMode" required="false" description="Whether to include the current edit modes as hidden fields." %>
 

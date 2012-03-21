@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <c:set var="ruleAttributes" value="${DataDictionary.RuleBaseValues.attributes}" />
 
 <kul:tabTop tabTitle="Choose Parent Rule" defaultOpen="true">

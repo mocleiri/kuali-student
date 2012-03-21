@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="resourceKey" required="false" description="The resource key to use as help text." %>
 <%@ attribute name="businessObjectClassName" required="false" description="The class of the business object the help text is assoicated with." %>
 <%@ attribute name="attributeName" required="false" description="The name of the attribute which will have help text rendered for it; requires to be used in conjunction with the businessObjectClassName attribute." %>

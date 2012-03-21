@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 
 <%@ attribute name="attributeEntry" required="true" type="java.util.Map" description="A Map of data dictionary information about the property which is having its input rendered." %>

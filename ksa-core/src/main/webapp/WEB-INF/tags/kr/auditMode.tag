@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="documentTypeName" required="true" description="The name of the document type displayed by the page rendering this tag; used to lookup the document type level help icon rendered on this page." %>
 <%@ attribute name="categories" required="true" description="The categories of audit error clusters this tag should render errors for." %>
 

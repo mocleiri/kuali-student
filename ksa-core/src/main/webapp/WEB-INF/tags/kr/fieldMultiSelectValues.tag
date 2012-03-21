@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="field" required="true" type="org.kuali.rice.kns.web.ui.Field" description="The field to render option lines for." %>
 

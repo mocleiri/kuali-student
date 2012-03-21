@@ -15,7 +15,7 @@
 --%>
 <%@ tag body-content="scriptless" %> 
 
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="map" required="true" type="java.util.Map" description="The Map to iterate they keys over." %>
 <%@ attribute name="valueVar" required="true" rtexprvalue="false" description="The name of the variable to put the values in the map attribute into, as the Map is iterated over." %>

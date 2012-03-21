@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="tabTitle" required="true" description="The title of the tab the group of audit errors are being displayed on." %>
 <%@ attribute name="defaultOpen" required="true" description="Whether the tab the group of audit errors is displayed on should be rendered as open as an initial state." %>

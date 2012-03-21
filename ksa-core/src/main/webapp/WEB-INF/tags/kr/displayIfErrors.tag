@@ -15,7 +15,7 @@
 --%>
 <%@ tag body-content="scriptless" %> 
 
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="keyMatch" required="true" %>
 

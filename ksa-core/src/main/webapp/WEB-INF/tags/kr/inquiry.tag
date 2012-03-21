@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="boClassName" required="true" description="The class name of the business object this inquiry is being rendered for." %>
 <%@ attribute name="keyValues" required="true" description="The set of keys and values which are the primary key of the business object." %>
 <%@ attribute name="render" required="true"

@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%-- the value of the name attribute comes from KRADConstants.GLOBAL_MESSAGES
 the value of the property attribute comes from org.apache.struts.action.ActionMessages.GLOBAL_MESSAGE --%>

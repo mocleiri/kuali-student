@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <c:set var="docTypeAttributes" value="${DataDictionary.DocumentType.attributes}" />
 <c:set var="ruleTemplateAttributes" value="${DataDictionary.RuleTemplateBo.attributes}" />
 

@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="valign" required="false" description="The verticle alignment of the table cell" %>
 <%@ attribute name="cellClass" required="false" description="Style class of the table cell" %>
 <%@ attribute name="textAlign" required="false" description="Horizontal Text alignment property" %>

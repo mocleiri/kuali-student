@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="responsibilityIdx" required="true" description="The index of the responsibility in the list of responsibilities on this IdentityManagementRoleDocument to display the role responsibility actions for." %>
 
 <c:set var="responsibility" value="${KualiForm.document.responsibilities[responsibilityIdx]}"/>

@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ tag body-content="scriptless" %>
 <%@ attribute name="byteSize" required="true" description="The size, in bytes, to display as a file size." %>
 

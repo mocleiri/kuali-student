@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="keyMatch" required="true" description="A concatenated String with properties to match error keys with, each seperated by a comma." %>
 <%@ attribute name="auditMatch" required="false" description="Audit information which errors should be matched against if no errors were matched by keyMatch." %>

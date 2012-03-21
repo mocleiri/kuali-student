@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="tabTitle" required="true" description="The label to render for the tab." %>
 <%@ attribute name="defaultOpen" required="true" description="Whether the tab should default to rendering as open." %>
 <%@ attribute name="tabErrorKey" required="false" description="The property key this tab should display errors associated with." %>

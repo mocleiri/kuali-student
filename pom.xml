@@ -479,6 +479,12 @@
 
         <dependency>
             <groupId>org.kuali.rice</groupId>
+            <artifactId>rice-krms-impl</artifactId>
+            <version>${kuali.rice.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kuali.rice</groupId>
             <artifactId>rice-impl</artifactId>
             <version>${kuali.rice.version}</version>
             <exclusions>

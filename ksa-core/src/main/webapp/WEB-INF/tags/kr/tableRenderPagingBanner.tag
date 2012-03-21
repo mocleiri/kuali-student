@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="pageNumber" required="true" description="The current page, starting from 0" %>
 <%@ attribute name="totalPages" required="true" description="The number of pages" %>

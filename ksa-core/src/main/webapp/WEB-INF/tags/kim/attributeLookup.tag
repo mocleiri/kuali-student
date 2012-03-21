@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp" %>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp" %>
 <%@ attribute name="attributeDefinitions" required="true" type="java.util.List"
               description="The list of KIM Attribute Fields." %>
 <%@ attribute name="pathPrefix" required="true"

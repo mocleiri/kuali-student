@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ tag body-content="empty" %>
 <%@ attribute name="delegationMemberIdx" required="true" description="The index of the delegation member information on the IdentityManagementPersonDocument to display qualifiers for." %>
 

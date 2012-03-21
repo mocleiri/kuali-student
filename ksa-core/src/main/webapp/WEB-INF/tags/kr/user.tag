@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="userIdFieldName" required="true" description="The name of the property which will be populated with the principal name." %>
 <%@ attribute name="universalIdFieldName" required="true" description="The name of the field which will be populated with the principal id." %>

@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 --%>
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <%@ attribute name="textAreaFieldName" required="true" description="The name of the field populated by the text area window." %>
 <%@ attribute name="action" required="true" description="The name of the action method to be filled in by the text area window." %>
 <%@ attribute name="textAreaLabel" required="true" description="The label to render as part of the text area." %>

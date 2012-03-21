@@ -17,7 +17,7 @@
     description="This tag evaluates a String as an EL name, returning the Map named by the String.
     It would not be needed if there were some way to evaluate the contents of an EL as an EL." %>
 
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 
 <%@ attribute name="mapName" required="true"
     description="The name of the map to return, e.g., 'DataDictionary.Budget.attributes.budgetAgency'.

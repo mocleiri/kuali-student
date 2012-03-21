@@ -12,7 +12,8 @@
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
-          <root url="file://$MODULE_DIR$/target/generated-sources/annotations" />
+          <root url="file://$MODULE_DIR$/src/test/java" />
+          <root url="file://$MODULE_DIR$/src/test/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -35,8 +36,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: cglib:cglib:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: asm:asm:3.3.1" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
@@ -200,6 +199,9 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: xerces:xercesImpl:2.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.15.0-GA" level="project" />
     <orderEntry type="library" name="Maven: org.kuali.rice:rice-core-service-impl:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.kuali.rice:rice-krms-impl:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.kuali.rice:rice-krms-framework:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.kuali.rice:rice-krms-api:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.kuali.rice:rice-impl:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.kuali.rice:rice-ken-api:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.kuali.rice:rice-kew-impl:2.0.0" level="project" />

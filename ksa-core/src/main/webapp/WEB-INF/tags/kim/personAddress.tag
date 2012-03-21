@@ -19,7 +19,7 @@
    }
 </style>
 
-<%@ include file="/kr/WEB-INF/jsp/tldHeader.jsp"%>
+<%@ include file="/WEB-INF/jsp/tldHeader.jsp"%>
 <c:set var="docAddressAttributes" value="${DataDictionary.PersonDocumentAddress.attributes}" />
 
 <c:set var="canModify" scope="request" value="${!KualiForm.document.privacy.suppressAddress || KualiForm.canOverrideEntityPrivacyPreferences}" />
