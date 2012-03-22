@@ -4,6 +4,9 @@ import com.sigmasys.kuali.ksa.model.Constants;
 import org.kuali.rice.core.api.config.module.RunMode;
 import org.kuali.rice.core.framework.config.module.ModuleConfigurer;
 import org.kuali.rice.core.framework.config.module.WebModuleConfiguration;
+import org.kuali.rice.core.framework.persistence.ojb.RiceDataSourceConnectionFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.List;
  *         Date: 3/22/12
  *         Time: 12:17 AM
  */
-public class KsaConfigurer extends ModuleConfigurer {
+public class KsaConfigurer extends ModuleConfigurer implements ApplicationContextAware {
 
     private static final String KSA_BEANS_PATH = "classpath:/META-INF/";
     private static final String KSA_BEANS_FILE = KSA_BEANS_PATH + "ksa-beans.xml";
@@ -50,5 +53,11 @@ public class KsaConfigurer extends ModuleConfigurer {
         WebModuleConfiguration configuration = super.loadWebModule();
         configuration.setWebSpringFiles(Arrays.asList(KSA_BEANS_FILE));
         return configuration;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        // Required by Rice OJB
+        RiceDataSourceConnectionFactory.addBeanFactory(applicationContext);
     }
 }
