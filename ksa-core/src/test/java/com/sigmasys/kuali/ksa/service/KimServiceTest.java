@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.kuali.rice.kim.api.identity.AuthenticationService;
-import org.kuali.rice.kim.api.identity.principal.Principal;
 import org.kuali.rice.kim.api.identity.IdentityService;
 
+import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,7 +29,24 @@ public class KimServiceTest extends AbstractServiceTest {
     @Autowired
     private UserSessionManager userSessionManager;
 
-    //@Test
+    @Test
+    public void getIdentityService() throws Exception {
+
+        HttpServletRequest request = RequestUtils.getThreadRequest();
+
+        Assert.notNull(request);
+
+        IdentityService service = ContextUtils.getBean("kimIdentityService", IdentityService.class);
+
+        Assert.notNull(service);
+
+        service = KimApiServiceLocator.getIdentityService();
+
+        Assert.notNull(service);
+
+    }
+
+    @Test
     public void getUserId() throws Exception {
 
         HttpServletRequest request = RequestUtils.getThreadRequest();
@@ -40,24 +57,9 @@ public class KimServiceTest extends AbstractServiceTest {
 
         Assert.notNull(userId);
 
-        IdentityService service = ContextUtils.getBean("kimIdentityService", IdentityService.class);
-
-        Principal principal = service.getPrincipal(userId);
-
-        Assert.isNull(principal);
-
-    }
-
-    @Test
-    public void getRemoteUserId() throws Exception {
-
-        HttpServletRequest request = RequestUtils.getThreadRequest();
-
-        Assert.notNull(request);
-
         AuthenticationService service = ContextUtils.getBean("kimAuthenticationService", AuthenticationService.class);
 
-        String userId = service.getPrincipalName(request);
+        userId = service.getPrincipalName(request);
 
         Assert.notNull(userId);
 
