@@ -28,6 +28,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="properties" ref="configProps"/>
     </bean>
 
+    <bean id="riceResourceLoaderConfigurer" class="org.kuali.rice.core.framework.resourceloader.RiceSpringResourceLoaderConfigurer">
+        <property name="localServiceName" value="ksa"/>
+    </bean>
+
     <!-- Configure KSA-specific implementations of Rice services/beans here -->
     <bean id="coreConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer">
         <property name="dataSource" ref="ksaDataSource"/>
@@ -41,7 +45,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="kimConfigurer" class="org.kuali.rice.kim.config.KIMConfigurer" depends-on="coreConfigurer"/>
     <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="coreConfigurer"/>
 
-    <import resource="classpath:/META-INF/kim-beans.xml"/>
+    <import resource="classpath:/META-INF/kim-context.xml"/>
 
     <import resource="classpath:/META-INF/krad-context.xml"/>
 

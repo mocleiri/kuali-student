@@ -166,6 +166,9 @@
           <element id="library" level="project" name="Maven: xerces:xercesImpl:2.9.1" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.15.0-GA" />
           <element id="library" level="project" name="Maven: org.kuali.rice:rice-core-service-impl:2.0.0" />
+          <element id="library" level="project" name="Maven: org.kuali.rice:rice-krms-impl:2.0.0" />
+          <element id="library" level="project" name="Maven: org.kuali.rice:rice-krms-framework:2.0.0" />
+          <element id="library" level="project" name="Maven: org.kuali.rice:rice-krms-api:2.0.0" />
           <element id="library" level="project" name="Maven: org.kuali.rice:rice-impl:2.0.0" />
           <element id="library" level="project" name="Maven: org.kuali.rice:rice-ken-api:2.0.0" />
           <element id="library" level="project" name="Maven: org.kuali.rice:rice-kew-impl:2.0.0" />
