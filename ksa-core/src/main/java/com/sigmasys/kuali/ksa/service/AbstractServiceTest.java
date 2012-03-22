@@ -40,7 +40,7 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
     public static final String TEST_USER_ID = "guest";
 
     public static final String RICE_RESOURCE_LOADER_BEANS_CONTEXT = "classpath:/META-INF/rice-resource-loader-beans.xml";
-    public static final String RICE_CONFIG_CONTEXT = "classpath:/META-INF/ksa-rice-config.xml";
+    public static final String RICE_CONFIG_CONTEXT = "classpath:/META-INF/ksa-config.xml";
 
     private static final MockServletContext servletContext = new MockServletContext();
 

@@ -22,6 +22,6 @@
                         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <import resource="classpath:/META-INF/krad-context.xml"/>
+    <import resource="classpath:/META-INF/krad-beans.xml"/>
 
 </beans>

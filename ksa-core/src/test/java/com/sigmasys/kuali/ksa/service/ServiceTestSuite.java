@@ -19,7 +19,6 @@ import org.junit.runners.Suite;
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/ksa-context.xml";
-    public static final String TEST_RICE_CONTEXT = "/META-INF/ksa-rice-context.xml";
 
     public static Test suite() {
         return new JUnit4TestAdapter(ServiceTestSuite.class);

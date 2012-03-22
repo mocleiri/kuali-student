@@ -35,22 +35,6 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-2.5.xsd" default-lazy-init="true">
 
-    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
-
-    <!--bean id="kimDataSource"
-          class="org.kuali.rice.core.framework.persistence.jdbc.datasource.PrimaryDataSourceFactoryBean">
-        <property name="preferredDataSourceParams">
-            <list>
-                <value>kim.datasource</value>
-            </list>
-        </property>
-        <property name="preferredDataSourceJndiParams">
-            <list>
-                <value>kim.datasource.jndi.location</value>
-            </list>
-        </property>
-        <property name="serverDataSource" value="true"/>
-    </bean-->
 
     <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
         <property name="jcdAliases">

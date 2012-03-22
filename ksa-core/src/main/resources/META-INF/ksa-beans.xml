@@ -9,8 +9,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
        default-lazy-init="true">
 
-    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
-
     <!-- JNDI bindings -->
     <!-- bean id="jndiBinder" class="com.sigmasys.kuali.ksa.util.LocalJndiBinder" lazy-init="false">
         <constructor-arg>
@@ -80,6 +78,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="loadTimeWeaver" ref="loadTimeWeaver"/>
     </bean>
 
-    <import resource="classpath:/META-INF/ksa-rice-context.xml"/>
+    <import resource="classpath:/META-INF/ksa-datasource.xml"/>
+
+    <import resource="classpath:/META-INF/kim-beans.xml"/>
 
 </beans>

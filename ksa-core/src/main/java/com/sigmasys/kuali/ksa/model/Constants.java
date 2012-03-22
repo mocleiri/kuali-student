@@ -6,6 +6,9 @@ package com.sigmasys.kuali.ksa.model;
  * @author Michael Ivanov
  */
 public interface Constants {
+    
+    // Generic constants
+    String MODULE_NAME = "KSA";
 
     // Persistence units
     String KSA_PERSISTENCE_UNIT = "ksa";

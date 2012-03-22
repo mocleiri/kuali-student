@@ -21,6 +21,10 @@
     <!-- CORE Settings -->
     <param name="core.mode">LOCAL</param>
 
+    <!-- KSA Settings -->
+    <param name="ksa.mode">LOCAL</param>
+
+
     <!--  Bus Configuration  -->
     <param name="dev.mode">false</param>
     <param name="message.persistence">true</param>

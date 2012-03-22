@@ -74,8 +74,6 @@
         <property name="kualiModuleService" ref="kualiModuleService"/>
     </bean>
 
-    <bean id="kualiModuleService" class="org.kuali.rice.krad.service.impl.KualiModuleServiceImpl"/>
-
     <bean id="exceptionResolver" class="org.kuali.rice.krad.web.bind.UifHandlerExceptionResolver"/>
 
     <bean class="org.kuali.rice.krad.web.controller.UifAnnotationMethodHandleAdapter">
