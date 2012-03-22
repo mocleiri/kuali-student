@@ -13,62 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- #u300{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:300;
-}
-#u400{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:400;
-}
-#u500{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:500;
-}
-#u700{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:700;
-}
-#u300i{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:300;
-	font-style:italic;	
-}
-#u400i{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:400;
-	font-style:italic;	
-}
-#u500i{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:500;
-	font-style:italic;	
-}
-#u700i{
-	font-family: 'Ubuntu', sans-serif;
-	font-weight:700;
-	font-style:italic;	
-}
-#um400{
-	font-family: 'Ubuntu Mono', sans-serif;
-	font-weight:400;
-}
-#um700{
-	font-family: 'Ubuntu Mono', sans-serif;
-	font-weight:700;
-}
-#um400i{
-	font-family: 'Ubuntu Mono', sans-serif;
-	font-weight:400;
-	font-style:italic;	
-}
-#um700i{
-	font-family: 'Ubuntu Mono', sans-serif;
-	font-weight:700;
-	font-style:italic;	
-}
- 
+
 body
 {
 	font-size: 71%;
