@@ -41,11 +41,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean id="ksaConfigurer" class="com.sigmasys.kuali.ksa.config.KsaConfigurer" depends-on="coreConfigurer"/>
 
-    <bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="ksaConfigurer"/>
+    <!--bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="ksaConfigurer"/-->
 
-    <bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="ksbConfigurer"/>
+    <!--bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="ksaConfigurer"/ -->
 
-    <bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="kewConfigurer"/>
+    <bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="ksaConfigurer"/>
 
     <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="kenConfigurer"/>
 
