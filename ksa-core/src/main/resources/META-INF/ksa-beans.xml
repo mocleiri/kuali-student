@@ -35,7 +35,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean id="loadTimeWeaver" class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
 
-    <bean id="initialParameterConfigurer" class="com.sigmasys.kuali.ksa.util.InitialParameterConfigurer">
+    <bean id="initialParameterConfigurer" class="com.sigmasys.kuali.ksa.config.InitialParameterConfigurer">
         <constructor-arg index="0" value="KSA"/>
         <constructor-arg index="1" value="0"/>
         <property name="location" value="classpath:/ksa.properties"/>

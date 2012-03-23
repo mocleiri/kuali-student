@@ -4,16 +4,6 @@
 
     <param name="application.id">KSA</param>
 
-    <!-- HTTP session parameters -->
-    <param name="enableSerializationCheck">false</param>
-
-    <param name="rice.version">2.0</param>
-    <param name="datasource.platform">org.kuali.rice.core.framework.persistence.platform.OraclePlatform</param>
-
-    <!-- OJB parameters -->
-    <param name="rice.custom.ojb.properties">OJB.properties</param>
-    <param name="datasource.ojb.platform">oracle.jdbc.driver.OracleDriver</param>
-
     <!--  log4j Settings -->
     <param name="log4j.reload.minutes">5</param>
     <param name="log4j.settings.path">classpath:/log4j.properties</param>
