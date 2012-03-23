@@ -74,7 +74,7 @@
     <servlet>
         <servlet-name>krad</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>3</load-on-startup>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet>
@@ -141,6 +141,17 @@
         <filter-class>org.kuali.rice.kew.web.BootstrapFilter</filter-class>
     </filter>
 
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <servlet-name>krad</servlet-name>
+    </filter-mapping>
+
+
     <!-- filter>
         <filter-name>UserLoginFilter</filter-name>
         <filter-class>org.kuali.rice.kew.web.DummyLoginFilter</filter-class>
@@ -149,12 +160,12 @@
             <param-value>false</param-value>
         </init-param>
         <filter-class>org.kuali.rice.kew.web.UserLoginFilter</filter-class>
-    </filter -->
+    </filter>
 
     <filter>
         <filter-name>UserPreferencesFilter</filter-name>
         <filter-class>org.kuali.rice.kew.web.UserPreferencesFilter</filter-class>
-    </filter>
+    </filter -->
 
 
     <filter-mapping>
@@ -180,12 +191,12 @@
     <!-- filter-mapping>
         <filter-name>UserLoginFilter</filter-name>
         <servlet-name>krad</servlet-name>
-    </filter-mapping -->
+    </filter-mapping>
 
     <filter-mapping>
         <filter-name>UserPreferencesFilter</filter-name>
         <servlet-name>krad</servlet-name>
-    </filter-mapping>
+    </filter-mapping -->
 
     <filter-mapping>
         <filter-name>BootstrapFilter</filter-name>
@@ -195,12 +206,12 @@
     <!-- filter-mapping>
         <filter-name>UserLoginFilter</filter-name>
         <servlet-name>action</servlet-name>
-    </filter-mapping -->
+    </filter-mapping>
 
     <filter-mapping>
         <filter-name>UserPreferencesFilter</filter-name>
         <servlet-name>action</servlet-name>
-    </filter-mapping>
+    </filter-mapping -->
 
 
     <!-- only need to include this for the kuali tlds

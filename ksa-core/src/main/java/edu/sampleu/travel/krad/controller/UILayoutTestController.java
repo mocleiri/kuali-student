@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controller for the Test UI Page
- * 
+ *
  * @author Kuali Rice Team (rice.collab@kuali.org)
  */
 @Controller
@@ -45,27 +45,27 @@ public class UILayoutTestController extends UifControllerBase {
         return new UifComponentsTestForm();
     }
 
-	@Override
-	@RequestMapping(params = "methodToCall=start")
-	public ModelAndView start(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
-			HttpServletRequest request, HttpServletResponse response) {
-	    UifComponentsTestForm uiTestForm = (UifComponentsTestForm) form;
+    @Override
+    @RequestMapping(params = "methodToCall=start", method = RequestMethod.GET)
+    public ModelAndView start(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+        UifComponentsTestForm uiTestForm = (UifComponentsTestForm) form;
 
-		return super.start(uiTestForm, result, request, response);
-	}
+        return super.start(uiTestForm, result, request, response);
+    }
 
-	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-	public ModelAndView save(@ModelAttribute("KualiForm") UifComponentsTestForm uiTestForm, BindingResult result,
-			HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    public ModelAndView save(@ModelAttribute("KualiForm") UifComponentsTestForm uiTestForm, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
 
-		return getUIFModelAndView(uiTestForm, "page2");
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=close")
-	public ModelAndView close(@ModelAttribute("KualiForm") UifComponentsTestForm uiTestForm, BindingResult result,
-			HttpServletRequest request, HttpServletResponse response) {
+        return getUIFModelAndView(uiTestForm, "page2");
+    }
 
-		return getUIFModelAndView(uiTestForm, "page1");
-	}
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=close")
+    public ModelAndView close(@ModelAttribute("KualiForm") UifComponentsTestForm uiTestForm, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+
+        return getUIFModelAndView(uiTestForm, "page1");
+    }
 
 }
