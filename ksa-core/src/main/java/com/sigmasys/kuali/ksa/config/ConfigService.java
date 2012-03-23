@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.config;
 
 import com.sigmasys.kuali.ksa.model.InitialParameter;
+import com.sigmasys.kuali.ksa.util.InitialParameterConfigurer;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -25,7 +26,7 @@ public class ConfigService {
 
 
     @Autowired
-    private InitialParameterConfigurer parameterConfigurer;
+    private InitialParameterConfigure parameterConfigurer;
 
 
     public String getInitialParameter(String name) {
