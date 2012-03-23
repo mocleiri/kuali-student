@@ -9,11 +9,13 @@ body {
     position:relative;
 }
 #header {
-    background:#ff0;
-    padding:10px;
+    background: #a02919;
+    padding:1px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
 }
 #body {
-    padding:10px;
+    padding:1px;
     padding-bottom:70px;   /* Height of the footer */
 }
 
