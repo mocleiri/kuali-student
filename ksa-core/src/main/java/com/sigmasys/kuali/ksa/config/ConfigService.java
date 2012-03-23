@@ -26,7 +26,7 @@ public class ConfigService {
 
 
     @Autowired
-    private InitialParameterConfigure parameterConfigurer;
+    private InitialParameterConfigurer parameterConfigurer;
 
 
     public String getInitialParameter(String name) {
