@@ -1,0 +1,33 @@
+<config>
+
+    <param name="config.location">classpath:/META-INF/common-config-defaults.xml</param>
+
+    <param name="application.id">KSA</param>
+
+    <!-- HTTP session parameters -->
+    <param name="enableSerializationCheck">false</param>
+
+    <param name="rice.version">2.0</param>
+    <param name="datasource.platform">org.kuali.rice.core.framework.persistence.platform.OraclePlatform</param>
+
+    <!-- OJB parameters -->
+    <param name="rice.custom.ojb.properties">OJB.properties</param>
+    <param name="datasource.ojb.platform">oracle.jdbc.driver.OracleDriver</param>
+
+    <!--  log4j Settings -->
+    <param name="log4j.reload.minutes">5</param>
+    <param name="log4j.settings.path">classpath:/log4j.properties</param>
+
+    <!-- Modes -->
+    <param name="core.mode">LOCAL</param>
+    <param name="ksa.mode">LOCAL</param>
+    <param name="ksb.mode">LOCAL</param>
+    <param name="kr.mode">LOCAL</param>
+    <param name="ken.mode">EMBEDDED</param>
+    <param name="kew.mode">EMBEDDED</param>
+    <param name="kim.mode">EMBEDDED</param>
+
+    <!-- UserTransaction properties -->
+    <param name="transaction.timeout">300</param>
+
+</config>
