@@ -29,12 +29,13 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
                         http://www.springframework.org/schema/tx
-                        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+                        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"
+       default-lazy-init="true">
 
     <context:component-scan base-package="org.kuali.rice.krad"/>
     <context:component-scan base-package="org.kuali.rice.core.web"/>
     <context:component-scan base-package="org.kuali.rice.kew.impl.peopleflow"/>
-    <context:component-scan base-package="edu.sampleu"/>
+    <context:component-scan base-package="com.sigmasys.kuali.ksa.krad"/>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -71,7 +72,9 @@
     <bean id="moduleLockingHandlerInterceptor"
           class="org.kuali.rice.krad.web.controller.ModuleLockingHandlerInterceptor">
         <property name="moduleLockedMapping" value="module-locked"/>
-        <property name="kualiModuleService" ref="kualiModuleService"/>
+        <property name="kualiModuleService">
+            <bean class="org.kuali.rice.krad.service.impl.KualiModuleServiceImpl"/>
+        </property>
     </bean>
 
     <bean id="exceptionResolver" class="org.kuali.rice.krad.web.bind.UifHandlerExceptionResolver"/>
@@ -106,44 +109,27 @@
         </property>
     </bean>
 
-    <bean id="sampleAppModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
-        <property name="namespaceCode" value="tv"/>
+
+    <bean id="kradModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
+        <property name="namespaceCode" value="KSA"/>
         <property name="initializeDataDictionary" value="true"/>
-        <property name="dataDictionaryService" ref="dataDictionaryService"/>
+        <!--property name="dataDictionaryService">
+            <bean class="org.kuali.rice.krad.service.impl.DataDictionaryServiceImpl"/>
+        </property-->
         <property name="dataDictionaryPackages">
             <list>
-                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficer.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficerInfo.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficer-Extension.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/FiscalOfficerMaintenanceDocument.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccount.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountInfo.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountExtension.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountMaintenanceDocument.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountType.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelAccountUseRate.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/TravelRequestDocument.xml</value>
-                <value>classpath:edu/sampleu/travel/datadictionary/SampleAppAttributes.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/TravelAccountInquiry.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/TestKNSInquiries.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/TravelAccountLookup.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/TravelAccountTypeLookup.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/TravelAccountMaintenance.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/Travel-testView1.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/Travel-testView2.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/FiscalOfficerView.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/FiscalOfficerLookup.xml</value>
-                <value>classpath:edu/sampleu/travel/uif/TravelAlternateViews.xml</value>
+                <value>classpath:com/sigmasys/kuali/ksa/krad</value>
             </list>
         </property>
-        <!--property name="databaseRepositoryFilePaths">
-            <list>
-                <value>OJB-repository-sampleapp.xml</value>
-            </list>
+        <!-- property name="databaseRepositoryFilePaths">
+          <list>
+
+            <value>OJB-repository-sampleapp.xml</value>
+          </list>
         </property-->
         <property name="packagePrefixes">
             <list>
-                <value>edu.sampleu.travel</value>
+                <value>com.sigmasys.kuali.ksa</value>
             </list>
         </property>
     </bean>
