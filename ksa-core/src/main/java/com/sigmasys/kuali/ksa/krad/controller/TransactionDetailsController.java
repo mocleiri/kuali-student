@@ -50,7 +50,7 @@ public class TransactionDetailsController extends UifControllerBase {
 
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    public ModelAndView save(@ModelAttribute TransactionDetailsForm form, BindingResult result,
+    public ModelAndView save(@ModelAttribute("KualiForm") TransactionDetailsForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
         // TODO:
 
@@ -58,7 +58,7 @@ public class TransactionDetailsController extends UifControllerBase {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute TransactionDetailsForm form, BindingResult result,
+    public ModelAndView get(@ModelAttribute("KualiForm") TransactionDetailsForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
         Transaction transaction = new Charge();
