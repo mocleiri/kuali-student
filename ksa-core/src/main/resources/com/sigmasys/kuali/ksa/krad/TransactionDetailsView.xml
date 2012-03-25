@@ -23,11 +23,10 @@
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <bean id="TransactionDetailsView" parent="Uif-FormView">
-        <property name="id" value="TransactionDetailsView"/>
+    <bean id="TransactionDetails-LookupView" parent="Uif-LookupView">
+        <property name="id" value="TransactionDetails-FormView"/>
         <property name="title" value="Transaction Details"/>
-        <property name="viewTypeName" value="DEFAULT"/>
-        <property name="entryPageId" value="page1"/>
+        <property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Transaction" />
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:propertyName="id"/>
@@ -35,7 +34,6 @@
                 <bean parent="Uif-InputField" p:propertyName="statementText"/>
             </list>
         </property>
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionDetailsForm"/>
     </bean>
 
 </beans>

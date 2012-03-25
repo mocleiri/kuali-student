@@ -109,30 +109,25 @@
         </property>
     </bean>
 
-
-    <bean id="kradModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
+    <!--bean id="kradModuleConfiguration" class="org.kuali.rice.krad.bo.ModuleConfiguration">
         <property name="namespaceCode" value="KSA"/>
         <property name="initializeDataDictionary" value="true"/>
-        <!--property name="dataDictionaryService">
-            <bean class="org.kuali.rice.krad.service.impl.DataDictionaryServiceImpl"/>
-        </property-->
         <property name="dataDictionaryPackages">
             <list>
                 <value>classpath:com/sigmasys/kuali/ksa/krad</value>
             </list>
         </property>
-        <!-- property name="databaseRepositoryFilePaths">
+        <property name="databaseRepositoryFilePaths">
           <list>
-
             <value>OJB-repository-sampleapp.xml</value>
           </list>
-        </property-->
+        </property>
         <property name="packagePrefixes">
             <list>
                 <value>com.sigmasys.kuali.ksa</value>
             </list>
         </property>
-    </bean>
+    </bean-->
 
 
 </beans>
