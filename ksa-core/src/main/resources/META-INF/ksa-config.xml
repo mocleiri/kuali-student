@@ -2,6 +2,8 @@
 
     <param name="config.location">classpath:/META-INF/common-config-defaults.xml</param>
 
+    <param name="app.context.name" value=""/>
+
     <param name="validate.data.dictionary">false</param>
 
     <param name="application.id">KSA</param>

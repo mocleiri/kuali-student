@@ -126,6 +126,17 @@
         <property name="persistenceStructureService" ref="persistenceStructureService"/>
     </bean>
 
+    <bean id="parameterRepositoryService" class="org.kuali.rice.coreservice.impl.parameter.ParameterRepositoryServiceImpl">
+        <property name="businessObjectService" ref="businessObjectService"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+    </bean>
+
+    <bean id="parameterService" class="org.kuali.rice.coreservice.impl.parameter.ParameterServiceImpl">
+        <property name="parameterRepositoryService" ref="parameterRepositoryService"/>
+        <property name="kualiModuleService" ref="kualiModuleService"/>
+        <property name="applicationId" value="${application.id}"/>
+    </bean>
+
 
     <!-- KIM API service definitions -->
     <bean id="kimIdentityService" class="org.kuali.rice.kim.impl.identity.IdentityServiceImpl">
