@@ -45,14 +45,17 @@ public class TransactionDetailsController extends UifControllerBase {
      */
     @Override
     protected TransactionDetailsForm createInitialForm(HttpServletRequest request) {
-        return new TransactionDetailsForm();
+        TransactionDetailsForm form = new TransactionDetailsForm();
+        form.setTransaction(createTransaction(false));
+        return form;
     }
 
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
     public ModelAndView save(@ModelAttribute("KualiForm") TransactionDetailsForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
-        // TODO:
+
+        form.setTransaction(createTransaction(true));
 
         return getUIFModelAndView(form);
     }
@@ -61,19 +64,25 @@ public class TransactionDetailsController extends UifControllerBase {
     public ModelAndView get(@ModelAttribute("KualiForm") TransactionDetailsForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
+        form.setTransaction(createTransaction(false));
+
+        return getUIFModelAndView(form);
+    }
+
+
+    private Transaction createTransaction(boolean updated) {
         Transaction transaction = new Charge();
-        transaction.setId(1L);
-        transaction.setExternalId("externalId_1");
+        transaction.setId(38000L);
+        transaction.setExternalId("134500");
         transaction.setAmount(new BigDecimal(1050.34));
         transaction.setLedgerDate(new Date());
         transaction.setInternal(false);
         transaction.setEffectiveDate(new Date());
-        transaction.setDocumentReference("Doc reference");
-        transaction.setResponsibleEntity("Responsible entity");
-
-        form.setTransaction(transaction);
-
-        return getUIFModelAndView(form);
+        transaction.setDocumentReference("Readme.txt");
+        transaction.setResponsibleEntity("Entity #2");
+        transaction.setStatementText("Here goes statement text");
+        transaction.setMemoReference(updated ? "Updated" : "");
+        return transaction;
     }
 
 

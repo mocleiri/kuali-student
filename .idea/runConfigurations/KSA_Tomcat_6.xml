@@ -2,7 +2,8 @@
   <configuration default="false" name="KSA Tomcat 6" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 6">
     <option name="OPEN_IN_BROWSER" value="false" />
     <option name="COMMON_VM_ARGUMENTS" value="-mx512m -ms256m" />
-    <option name="UPDATING_POLICY" value="restart-server" />
+    <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+    <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
     <deployment>
       <artifact name="ksa-core:war exploded">
         <settings>

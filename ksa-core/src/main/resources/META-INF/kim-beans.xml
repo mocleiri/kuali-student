@@ -36,7 +36,7 @@
                            http://www.springframework.org/schema/util/spring-util-2.5.xsd" default-lazy-init="true">
 
 
-    <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
+    <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer" lazy-init="false">
         <property name="jcdAliases">
             <list>
                 <value>riceDataSource</value>
@@ -156,6 +156,16 @@
 
     <bean id="kimTypeInfoService" class="org.kuali.rice.kim.impl.type.KimTypeInfoServiceImpl">
         <property name="businessObjectService" ref="businessObjectService"/>
+    </bean>
+
+    <bean id="kimViewPermissionTypeService" class="org.kuali.rice.krad.kim.ViewPermissionTypeServiceImpl"/>
+
+    <bean id="kimPermissionService" class="org.kuali.rice.kim.impl.permission.PermissionServiceImpl">
+        <property name="roleService" ref="kimRoleService"/>
+        <property name="criteriaLookupService" ref="criteriaLookupService"/>
+        <property name="defaultPermissionTypeService" ref="kimViewPermissionTypeService"/>
+        <property name="businessObjectService" ref="businessObjectService"/>
+        <property name="kimTypeInfoService" ref="kimTypeInfoService"/>
     </bean>
 
 

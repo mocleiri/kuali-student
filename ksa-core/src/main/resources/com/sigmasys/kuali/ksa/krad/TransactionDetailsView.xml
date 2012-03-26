@@ -23,15 +23,30 @@
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <bean id="TransactionDetails-LookupView" parent="Uif-LookupView">
+    <bean id="TransactionDetails-FormView" parent="Uif-FormView">
         <property name="id" value="TransactionDetails-FormView"/>
-        <property name="title" value="Transaction Details"/>
-        <property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Transaction" />
+        <property name="title" value="Transaction Details View"/>
+        <property name="readOnly" value="true"/>
+        <!-- property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Transaction"/ -->
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionDetailsForm"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="id"/>
-                <bean parent="Uif-InputField" p:propertyName="externalId"/>
-                <bean parent="Uif-InputField" p:propertyName="statementText"/>
+                <bean parent="Uif-Page" p:id="page1" p:title="Transaction Details 1">
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.id" p:label="Transaction ID"/>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.externalId" p:label="External ID"/>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.effectiveDate" p:label="Effective Date"/>
+                            <bean parent="Uif-InputField" p:propertyName="formattedAmount" p:label="Amount"/>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.documentReference"
+                                  p:label="Document reference:"/>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.responsibleEntity"
+                                                              p:label="Responsible Entity"/>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.statementText" p:label="Statement"/>
+                            <bean parent="Uif-InputField" p:propertyName="transaction.memoReference" p:label="Memo"/>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>

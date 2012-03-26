@@ -7,6 +7,7 @@ import org.kuali.rice.core.framework.config.module.WebModuleConfiguration;
 import org.kuali.rice.core.framework.persistence.ojb.RiceDataSourceConnectionFactory;
 import org.kuali.rice.krad.service.DataDictionaryService;
 import org.kuali.rice.krad.service.KRADServiceLocatorWeb;
+import org.kuali.rice.krad.uif.service.impl.ViewServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
@@ -91,6 +92,7 @@ public class KsaConfigurer extends ModuleConfigurer implements ApplicationContex
             DataDictionaryService dataDictionaryService = KRADServiceLocatorWeb.getDataDictionaryService();
             try {
                 dataDictionaryService.addDataDictionaryLocations(getDataDictionaryPackages());
+                ((ViewServiceImpl)KRADServiceLocatorWeb.getViewService()).setDataDictionaryService(dataDictionaryService);
             } catch (Exception e) {
                 throw new RuntimeException("Cannot add KSA packages to data dictionary locations: " + e.getMessage(), e);
             }
