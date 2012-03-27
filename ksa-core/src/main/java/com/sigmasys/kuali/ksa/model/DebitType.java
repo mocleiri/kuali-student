@@ -17,7 +17,7 @@ import java.util.List;
  * Time: 4:13 PM
  */
 @Entity
-@Table(name = "KSSA_DEBIT_TYPE")
+@DiscriminatorValue("D")
 public class DebitType extends TransactionType {
 
     /**

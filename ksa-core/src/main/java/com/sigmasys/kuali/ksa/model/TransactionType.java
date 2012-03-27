@@ -16,7 +16,9 @@ import javax.persistence.*;
  * @author Michael Ivanov
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "KSSA_TRANSACTION_TYPE")
+@DiscriminatorColumn(name = "TYPE")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class TransactionType implements Identifiable {
 
     protected TransactionTypeId id;

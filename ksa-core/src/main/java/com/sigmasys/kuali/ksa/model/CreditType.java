@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @author Michael Ivanov
  */
 @Entity
-@Table(name = "KSSA_CREDIT_TYPE")
+@DiscriminatorValue("C")
 public class CreditType extends TransactionType {
 
     private Date clearDate;
@@ -31,7 +31,7 @@ public class CreditType extends TransactionType {
     @JoinTable(name = "KSSA_CREDIT_TAG",
             joinColumns = {
                     @JoinColumn(name = "CREDIT_TYPE_ID_FK"),
-                    @JoinColumn(name = "CREDIT_TYPE_SUB_CODE_FK")
+                    @JoinColumn(name = "CREDIT_SUB_CODE_FK")
             },
             inverseJoinColumns = {
                     @JoinColumn(name = "TAG_ID_FK")
