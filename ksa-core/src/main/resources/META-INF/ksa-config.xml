@@ -2,11 +2,11 @@
 
     <param name="config.location">classpath:/META-INF/common-config-defaults.xml</param>
 
-    <param name="app.context.name" value=""/>
+    <param name="application.id">KSA</param>
+
+    <param name="app.context.name">ksa</param>
 
     <param name="validate.data.dictionary">false</param>
-
-    <param name="application.id">KSA</param>
 
     <!--  log4j Settings -->
     <param name="log4j.reload.minutes">5</param>

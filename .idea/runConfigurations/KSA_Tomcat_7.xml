@@ -7,7 +7,7 @@
     <deployment>
       <artifact name="ksa-core:war exploded">
         <settings>
-          <option name="CONTEXT_PATH" value="/" />
+          <option name="CONTEXT_PATH" value="/ksa" />
         </settings>
       </artifact>
     </deployment>
@@ -27,13 +27,13 @@
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                      " />
+        <option name="SCRIPT" value="                         " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </STARTUP>
       <SHUTDOWN>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                      " />
+        <option name="SCRIPT" value="                         " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </SHUTDOWN>
@@ -42,13 +42,13 @@
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                      " />
+        <option name="SCRIPT" value="                         " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </STARTUP>
       <SHUTDOWN>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                      " />
+        <option name="SCRIPT" value="                         " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </SHUTDOWN>
@@ -57,13 +57,13 @@
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                      " />
+        <option name="SCRIPT" value="                         " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </STARTUP>
       <SHUTDOWN>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                      " />
+        <option name="SCRIPT" value="                         " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </SHUTDOWN>
