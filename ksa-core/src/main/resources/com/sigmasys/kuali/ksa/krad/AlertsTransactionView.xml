@@ -9,14 +9,13 @@
        http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
     <bean id="AlertsTransactionView" parent="Uif-FormView">
-        <p:theme name="theme">
+        <property name="theme">
             <bean parent="Uif-KradTheme"/>
+        </property>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm"/>
         <property name="title" value="Alerts Recent Transactions"/>
         <property name="entryPageId" value="AlertsRecentTransLayoutSectionPage"/>
-        <property name="navigation">
-            <ref bean="AlertsRecentTransStdLayoutNav"/>
-        </property>
+        <property name="navigation" ref="AlertsRecentTransStdLayoutNav"/>
         <property name="items">
             <list>
                 <bean id="AlertsRecentTransLayoutSectionPage" parent="Uif-Page" p:title="Page Title">
@@ -32,7 +31,7 @@
                             </property>
                         </bean>
                     </property>
-<!--                    <property name="items">
+                    <!--                    <property name="items">
                         <list>
                             <ref bean="Demo-StandardLayout-Section1"/>
                             <ref bean="Demo-StandardLayout-Section2"/>
@@ -40,7 +39,7 @@
                         </list>
                     </property>-->
                 </bean>
-<!--                <bean id="Demo-StandardLayout-CollectionSectionsPage" parent="Uif-Page" p:title="Page Title">
+                <!--                <bean id="Demo-StandardLayout-CollectionSectionsPage" parent="Uif-Page" p:title="Page Title">
                     <property name="items">
                         <list>
                             <ref bean="Demo-StandardLayout-CollectionSection1"/>
@@ -60,8 +59,8 @@
                 <bean parent="Uif-HeaderField-Two" p:headerText="Navigation Title"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransLayoutSectionPage"
                       p:actionLabel="Standard Sections"/>
-<!--                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Demo-StandardLayout-CollectionSectionsPage"
-                      p:actionLabel="Collection Sections"/>-->
+                <!--                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Demo-StandardLayout-CollectionSectionsPage"
+               p:actionLabel="Collection Sections"/>-->
             </list>
         </property>
     </bean>
