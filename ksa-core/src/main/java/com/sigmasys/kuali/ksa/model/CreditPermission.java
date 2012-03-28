@@ -72,8 +72,8 @@ public class CreditPermission implements Identifiable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "CREDIT_TYPE_ID_FK", referencedColumnName = "ID"),
-            @JoinColumn(name = "CREDIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
+            @JoinColumn(name = "TRANSACTION_TYPE_ID_FK", referencedColumnName = "ID"),
+            @JoinColumn(name = "TRANSACTION_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
     })
     public CreditType getCreditType() {
         return creditType;

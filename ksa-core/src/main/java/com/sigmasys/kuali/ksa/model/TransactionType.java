@@ -47,15 +47,6 @@ public abstract class TransactionType implements Identifiable {
     private Date lastUpdate;
 
 
-    /**
-     * It needs to be implemented in DebitType and CreditType
-     *
-     * @return list of tags
-     */
-    @Transient
-    public abstract List<Tag> getTags();
-
-
     @Override
     @EmbeddedId
     public TransactionTypeId getId() {
@@ -91,6 +82,25 @@ public abstract class TransactionType implements Identifiable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * Returns the list of associated tags
+     *
+     * @return list of tags
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "KSSA_TRANSACTION_TYPE_TAG",
+            joinColumns = {
+                    @JoinColumn(name = "TRANSACTION_TYPE_ID_FK"),
+                    @JoinColumn(name = "TRANSACTION_TYPE_SUB_CODE_FK")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "TAG_ID_FK")
+            }
+    )
+    public List<Tag> getTags() {
+        return tags;
     }
 
     public void setTags(List<Tag> tags) {

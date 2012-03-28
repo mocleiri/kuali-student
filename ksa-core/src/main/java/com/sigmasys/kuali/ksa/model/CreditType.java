@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -27,20 +26,6 @@ public class CreditType extends TransactionType {
 
     private String authorizationText;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "KSSA_CREDIT_TAG",
-            joinColumns = {
-                    @JoinColumn(name = "CREDIT_TYPE_ID_FK"),
-                    @JoinColumn(name = "CREDIT_SUB_CODE_FK")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "TAG_ID_FK")
-            }
-    )
-    @Override
-    public List<Tag> getTags() {
-        return tags;
-    }
 
     @Column(name = "CLEAR_DATE")
     public Date getClearDate() {

@@ -75,8 +75,8 @@ public class GeneralLedgerBreakdown implements Identifiable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "DEBIT_TYPE_ID_FK", referencedColumnName = "ID"),
-            @JoinColumn(name = "DEBIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
+            @JoinColumn(name = "TRANSACTION_TYPE_ID_FK", referencedColumnName = "ID"),
+            @JoinColumn(name = "TRANSACTION_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
     })
     public DebitType getDebitType() {
         return debitType;
