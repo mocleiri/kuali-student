@@ -39,17 +39,16 @@
         <property name="initializeDataDictionary" value="true"/>
         <property name="dataDictionaryPackages">
             <list>
+                <!-- Import these data dictionaries to allow the UI to use them -->
+               <!-- <value>classpath:ks-PlanItemInfo-dictionary.xml</value> -->
+                <value>classpath:ks-AuditReportInfo-dictionary.xml</value>
+
                 <value>classpath:UifMyPlanDefinitions.xml</value>
                 <value>classpath:CourseSearchUI.xml</value>
                 <value>classpath:CourseDetailsUI.xml</value>
                 <value>classpath:SavedCoursesUI.xml</value>
                 <value>classpath:DegreeAuditUI.xml</value>
                 <value>classpath:PlannedCoursesUI.xml</value>
-
-                <!-- Import these data dictionaries to allow the UI to use them -->
-                <value>classpath:ks-PlanItemInfo-dictionary.xml</value>
-                <value>classpath:ks-AuditReportInfo-dictionary.xml</value>
-
                 <value>classpath:DegreeAuditDetailsUI.xml</value>
                 <!--
                 <value>classpath:org/kuali/student/myplan/mobile/MyPlanMobileUI.xml</value>
