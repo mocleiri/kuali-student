@@ -9,6 +9,7 @@
        http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
     <bean id="AlertsTransactionView" parent="Uif-FormView">
+        <property name="readOnly" value="true"/>
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
