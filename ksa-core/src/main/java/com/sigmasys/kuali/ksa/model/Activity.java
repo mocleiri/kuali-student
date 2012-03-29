@@ -55,11 +55,6 @@ public class Activity implements Identifiable {
     private String attribute;
 
     /**
-     * Level
-     */
-    private String level;
-
-    /**
      * Activity type
      */
     private ActivityType type;
@@ -109,7 +104,7 @@ public class Activity implements Identifiable {
         this.entityId = entityId;
     }
 
-    @Column(name = "DATE")
+    @Column(name = "CREATION_DATE")
     public Date getTimestamp() {
         return timestamp;
     }
@@ -144,15 +139,6 @@ public class Activity implements Identifiable {
 
     public void setAttribute(String attribute) {
         this.attribute = attribute;
-    }
-
-    @Column(name = "LEVEL", length = 10)
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

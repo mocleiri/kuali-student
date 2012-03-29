@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class FlagType extends AuditableEntity {
 
     /**
-     * Level
+     * Access Level
      */
-    private Integer level;
+    private Integer accessLevel;
 
 
     @Id
@@ -32,13 +32,13 @@ public class FlagType extends AuditableEntity {
         return id;
     }
 
-    @Column(name = "LEVEL")
-    public Integer getLevel() {
-        return level;
+    @Column(name = "ACCESS_LEVEL")
+    public Integer getAccessLevel() {
+        return accessLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setAccessLevel(Integer accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
 }

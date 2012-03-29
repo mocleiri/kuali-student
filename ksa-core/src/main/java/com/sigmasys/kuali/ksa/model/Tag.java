@@ -11,8 +11,10 @@ import javax.persistence.*;
 @Table(name = "KSSA_TAG")
 public class Tag extends AuditableEntity {
 
-
-    private Integer level;
+    /**
+     * Access level
+     */
+    private Integer accessLevel;
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -28,13 +30,13 @@ public class Tag extends AuditableEntity {
     }
 
 
-    @Column(name = "LEVEL")
-    public Integer getLevel() {
-        return level;
+    @Column(name = "ACCESS_LEVEL")
+    public Integer getAccessLevel() {
+        return accessLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setAccessLevel(Integer accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
 }

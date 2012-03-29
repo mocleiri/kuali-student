@@ -42,9 +42,9 @@ public class Information implements Identifiable {
     private Account account;
 
     /**
-     * Level
+     * Access Level
      */
-    private Integer level;
+    private Integer accessLevel;
 
     /**
      * Flag info
@@ -89,13 +89,13 @@ public class Information implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "LEVEL")
-    public Integer getLevel() {
-        return level;
+    @Column(name = "ACCESS_LEVEL")
+    public Integer getAccessLevel() {
+        return accessLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setAccessLevel(Integer accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
     @Column(name = "RESP_ENTITY", length = 45)
