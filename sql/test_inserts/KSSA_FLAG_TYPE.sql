@@ -1,0 +1,4 @@
+REM INSERTING into KSSA_FLAG_TYPE
+Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (1,'pheald','Account is in good standing.',null,to_timestamp('27-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'In Good Standing',1);
+Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (2,'pheald','Account is currently in good standing but has had a history of problems.',null,to_timestamp('27-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Currently in Good Standing',2);
+Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (3,'pheald','Account is in collections',null,to_timestamp('27-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'In Collections',2);
