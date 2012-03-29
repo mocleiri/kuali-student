@@ -122,6 +122,7 @@ public abstract class Account implements Identifiable {
         isKimAccount = kimAccount;
     }
 
+    @org.hibernate.annotations.Type(type="yes_no")
     @Column(name = "CAN_AUTHENTICATE")
     public Boolean isAbleToAuthenticate() {
         return ableToAuthenticate;

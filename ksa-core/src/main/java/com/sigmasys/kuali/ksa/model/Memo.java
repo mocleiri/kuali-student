@@ -14,7 +14,12 @@ public class Memo extends Information {
     /**
      * Follow up memo
      */
-    private Memo followUpMemo;
+    private Memo nextMemo;
+
+    /**
+     * Prior memo
+     */
+    private Memo previousMemo;
 
     /**
      * Text
@@ -33,13 +38,23 @@ public class Memo extends Information {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FOLLOWUP_ID")
-    public Memo getFollowUpMemo() {
-        return followUpMemo;
+    @JoinColumn(name = "NEXT_ID")
+    public Memo getNextMemo() {
+        return nextMemo;
     }
 
-    public void setFollowUpMemo(Memo followUpMemo) {
-        this.followUpMemo = followUpMemo;
+    public void setNextMemo(Memo nextMemo) {
+        this.nextMemo = nextMemo;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PREV_ID")
+    public Memo getPreviousMemo() {
+        return previousMemo;
+    }
+
+    public void setPreviousMemo(Memo previousMemo) {
+        this.previousMemo = previousMemo;
     }
 }
 

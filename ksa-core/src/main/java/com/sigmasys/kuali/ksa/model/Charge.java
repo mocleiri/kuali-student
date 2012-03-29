@@ -8,7 +8,5 @@ import javax.persistence.Entity;
 public class Charge extends Debit {
 
 
-
-
 }
 

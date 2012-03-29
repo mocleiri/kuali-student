@@ -29,7 +29,8 @@ public abstract class Debit extends Transaction {
      * Deferred transactions also bear the identifier of the deferment transaction that offsets them in deferment
      * @return boolean value
      */
-    @Column(name = "DEFER_STAT", length = 1)
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "DEFER_STAT")
     public Boolean isDeferred() {
         return deferred;
     }
@@ -38,7 +39,8 @@ public abstract class Debit extends Transaction {
         this.deferred = deferred;
     }
 
-    @Column(name = "IS_GL_OVERRIDEN", length = 1)
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "IS_GL_OVERRIDEN")
     public Boolean isGlOverriden() {
         return glOverriden;
     }

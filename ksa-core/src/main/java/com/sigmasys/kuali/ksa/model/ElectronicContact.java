@@ -184,7 +184,8 @@ public class ElectronicContact implements Identifiable {
         this.account = account;
     }
 
-    @Column(name = "IS_DEFAULT", length = 1)
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "IS_DEFAULT")
     public Boolean isDefault() {
         return isDefault;
     }

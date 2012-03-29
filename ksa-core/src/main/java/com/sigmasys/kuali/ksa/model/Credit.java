@@ -13,7 +13,8 @@ public abstract class Credit extends Transaction {
 	protected Boolean isRefundable;
 
 
-    @Column(name = "IS_REFUNDABLE", length = 1)
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "IS_REFUNDABLE")
     public Boolean isRefundable() {
         return isRefundable;
     }

@@ -189,7 +189,8 @@ public class PostalAddress implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @Column(name = "IS_DEFAULT", length = 1)
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "IS_DEFAULT")
     public Boolean isDefault() {
         return isDefault;
     }

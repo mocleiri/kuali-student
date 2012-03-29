@@ -120,6 +120,11 @@ public abstract class Transaction implements Identifiable {
      */
     private Account account;
 
+    /**
+     * Indicates whether GL entry has been generated
+     */
+    private Boolean glEntryGenerated;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -234,7 +239,8 @@ public abstract class Transaction implements Identifiable {
         this.internal = internal;
     }
 
-    @Column(name = "IS_INTERNAL_TRN", length = 1)
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "IS_INTERNAL_TRN")
     public Boolean isInternal() {
         return internal;
     }
@@ -256,7 +262,7 @@ public abstract class Transaction implements Identifiable {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DEF_ROLLUP_ID_FK")
+    @JoinColumn(name = "ROLLUP_ID_FK")
     public Rollup getRollup() {
         return rollup;
     }
@@ -302,6 +308,16 @@ public abstract class Transaction implements Identifiable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @org.hibernate.annotations.Type(type="yes_no")
+    @Column(name = "GL_ENTRY_GENERATED")
+    public boolean isGlEntryGenerated() {
+        return glEntryGenerated;
+    }
+
+    public void setGlEntryGenerated(boolean glEntryGenerated) {
+        this.glEntryGenerated = glEntryGenerated;
     }
 }
 	
