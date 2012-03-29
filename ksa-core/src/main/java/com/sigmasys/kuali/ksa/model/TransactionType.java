@@ -75,7 +75,7 @@ public abstract class TransactionType implements Identifiable {
         this.endDate = endDate;
     }
 
-    @Column(name = "DEF_TRN_TXT")
+    @Column(name = "DEF_TRN_TXT", length = 100)
     public String getDescription() {
         return description;
     }
@@ -107,7 +107,7 @@ public abstract class TransactionType implements Identifiable {
         this.tags = tags;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -116,7 +116,7 @@ public abstract class TransactionType implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }

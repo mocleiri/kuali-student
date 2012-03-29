@@ -36,7 +36,7 @@ public class CreditType extends TransactionType {
         this.clearDate = clearDate;
     }
 
-    @Column(name = "REFUND_RULE")
+    @Column(name = "REFUND_RULE", length = 2000)
     public String getRefundRule() {
         return refundRule;
     }
@@ -45,7 +45,7 @@ public class CreditType extends TransactionType {
         this.refundRule = refundRule;
     }
 
-    @Column(name = "AUTH_TEXT")
+    @Column(name = "AUTH_TXT", length = 45)
     public String getAuthorizationText() {
         return authorizationText;
     }
@@ -54,7 +54,7 @@ public class CreditType extends TransactionType {
         this.authorizationText = authorizationText;
     }
 
-    @Column(name = "DEF_CLEAR_PERIOD")
+    @Column(name = "CLEAR_PERIOD")
     public Integer getClearPeriod() {
         return clearPeriod;
     }

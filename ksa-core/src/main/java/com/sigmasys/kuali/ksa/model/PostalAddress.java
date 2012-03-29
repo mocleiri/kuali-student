@@ -74,7 +74,7 @@ public class PostalAddress implements Identifiable {
     /**
      * Indicates whether this address is default
      */
-    private boolean isDefault;
+    private Boolean isDefault;
 
     /**
      * Reference to the corresponding account
@@ -99,7 +99,7 @@ public class PostalAddress implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "KIM_ADDRESS_TYPE")
+    @Column(name = "KIM_ADDRESS_TYPE", length = 45)
     public String getKimAddressType() {
         return kimAddressType;
     }
@@ -108,7 +108,7 @@ public class PostalAddress implements Identifiable {
         this.kimAddressType = kimAddressType;
     }
 
-    @Column(name = "LINE1")
+    @Column(name = "LINE1", length = 100)
     public String getStreetAddress1() {
         return streetAddress1;
     }
@@ -117,7 +117,7 @@ public class PostalAddress implements Identifiable {
         this.streetAddress1 = streetAddress1;
     }
 
-    @Column(name = "LINE2")
+    @Column(name = "LINE2", length = 100)
     public String getStreetAddress2() {
         return streetAddress2;
     }
@@ -126,7 +126,7 @@ public class PostalAddress implements Identifiable {
         this.streetAddress2 = streetAddress2;
     }
 
-    @Column(name = "LINE3")
+    @Column(name = "LINE3", length = 100)
     public String getStreetAddress3() {
         return streetAddress3;
     }
@@ -135,7 +135,7 @@ public class PostalAddress implements Identifiable {
         this.streetAddress3 = streetAddress3;
     }
 
-    @Column(name = "POSTAL_CODE")
+    @Column(name = "POSTAL_CODE", length = 12)
     public String getPostalCode() {
         return postalCode;
     }
@@ -144,7 +144,7 @@ public class PostalAddress implements Identifiable {
         this.postalCode = postalCode;
     }
 
-    @Column(name = "COUNTRY_CODE")
+    @Column(name = "COUNTRY_CODE", length = 10)
     public String getCountry() {
         return country;
     }
@@ -153,7 +153,7 @@ public class PostalAddress implements Identifiable {
         this.country = country;
     }
 
-    @Column(name = "STATE_CODE")
+    @Column(name = "STATE_CODE", length = 5)
     public String getState() {
         return state;
     }
@@ -162,7 +162,7 @@ public class PostalAddress implements Identifiable {
         this.state = state;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -171,7 +171,7 @@ public class PostalAddress implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }
@@ -189,12 +189,12 @@ public class PostalAddress implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @Column(name = "IS_DEFAULT")
-    public boolean isDefault() {
+    @Column(name = "IS_DEFAULT", length = 1)
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean isDefault) {
+    public void setDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
 

@@ -71,10 +71,10 @@ public class AlertsTransactionController extends UifControllerBase {
       transaction.setLedgerDate(new Date());
       transaction.setInternal(false);*/
       alertsTransaction.setEffectiveDate(new Date());
-/*      transaction.setDocumentReference("Readme.txt");
+/*
       transaction.setResponsibleEntity("Entity #2");
       transaction.setStatementText("Here goes statement text");
-      transaction.setMemoReference(updated ? "Updated" : "");*/
+     */
       return alertsTransaction;
    }
 

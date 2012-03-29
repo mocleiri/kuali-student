@@ -64,7 +64,7 @@ public class GeneralLedgerBreakdown implements Identifiable {
         this.amount = amount;
     }
 
-    @Column(name = "GL_ACCOUNT")
+    @Column(name = "GL_ACCOUNT", length = 45)
     public String getAccount() {
         return account;
     }

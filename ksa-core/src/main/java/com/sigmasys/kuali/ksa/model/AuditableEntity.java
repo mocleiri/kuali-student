@@ -51,7 +51,7 @@ public abstract class AuditableEntity implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", length = 100)
     public String getName() {
         return name;
     }
@@ -60,7 +60,7 @@ public abstract class AuditableEntity implements Identifiable {
         this.name = name;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -69,7 +69,7 @@ public abstract class AuditableEntity implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }
@@ -87,7 +87,7 @@ public abstract class AuditableEntity implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 2000)
     public String getDescription() {
         return description;
     }

@@ -16,7 +16,12 @@ public abstract class Debit extends Transaction {
      * The reference to Deferment that offsets this transaction.
      * If this is null, isDeferred will also be set to false.
      */
-    protected boolean deferred;
+    protected Boolean deferred;
+
+    /**
+     * Indicates if debit has been overriden by GL
+     */
+    protected Boolean glOverriden;
 
     
     /**
@@ -24,13 +29,22 @@ public abstract class Debit extends Transaction {
      * Deferred transactions also bear the identifier of the deferment transaction that offsets them in deferment
      * @return boolean value
      */
-    @Column(name = "DEFER_STAT")
+    @Column(name = "DEFER_STAT", length = 1)
     public Boolean isDeferred() {
         return deferred;
     }
 
-    public void setDeferred(boolean deferred) {
+    public void setDeferred(Boolean deferred) {
         this.deferred = deferred;
+    }
+
+    @Column(name = "IS_GL_OVERRIDEN", length = 1)
+    public Boolean isGlOverriden() {
+        return glOverriden;
+    }
+
+    public void setGlOverriden(Boolean glOverriden) {
+        this.glOverriden = glOverriden;
     }
 
     /**

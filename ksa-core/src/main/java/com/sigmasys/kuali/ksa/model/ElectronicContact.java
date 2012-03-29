@@ -70,6 +70,11 @@ public class ElectronicContact implements Identifiable {
      */
     private Account account;
 
+    /**
+     * Is default
+     */
+    private Boolean isDefault;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -88,7 +93,7 @@ public class ElectronicContact implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "KIM_EMAIL_ADDRESS_TYPE")
+    @Column(name = "KIM_EMAIL_ADDRESS_TYPE", length = 45)
     public String getKimEmailAddressType() {
         return kimEmailAddressType;
     }
@@ -97,7 +102,7 @@ public class ElectronicContact implements Identifiable {
         this.kimEmailAddressType = kimEmailAddressType;
     }
 
-    @Column(name = "KIM_PHONE_TYPE")
+    @Column(name = "KIM_PHONE_TYPE", length = 45)
     public String getKimPhoneType() {
         return kimPhoneType;
     }
@@ -106,7 +111,7 @@ public class ElectronicContact implements Identifiable {
         this.kimPhoneType = kimPhoneType;
     }
 
-    @Column(name = "EMAIL_ADDRESS")
+    @Column(name = "EMAIL_ADDRESS", length = 255)
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -115,7 +120,7 @@ public class ElectronicContact implements Identifiable {
         this.emailAddress = emailAddress;
     }
 
-    @Column(name = "PHONE_COUNTRY")
+    @Column(name = "PHONE_COUNTRY", length = 5)
     public String getPhoneCountry() {
         return phoneCountry;
     }
@@ -124,7 +129,7 @@ public class ElectronicContact implements Identifiable {
         this.phoneCountry = phoneCountry;
     }
 
-    @Column(name = "PHONE_NUMBER")
+    @Column(name = "PHONE_NUMBER", length = 20)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -133,7 +138,7 @@ public class ElectronicContact implements Identifiable {
         this.phoneNumber = phoneNumber;
     }
 
-    @Column(name = "PHONE_EXTN")
+    @Column(name = "PHONE_EXTN", length = 10)
     public String getPhoneExtension() {
         return phoneExtension;
     }
@@ -142,7 +147,7 @@ public class ElectronicContact implements Identifiable {
         this.phoneExtension = phoneExtension;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -151,7 +156,7 @@ public class ElectronicContact implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }
@@ -177,5 +182,14 @@ public class ElectronicContact implements Identifiable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Column(name = "IS_DEFAULT", length = 1)
+    public Boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 }

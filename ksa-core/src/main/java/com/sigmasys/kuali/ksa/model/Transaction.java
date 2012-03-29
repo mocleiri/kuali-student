@@ -85,7 +85,7 @@ public abstract class Transaction implements Identifiable {
     /**
      * This flag, when true, indicates that the transaction is 'internal', and will not, in most cases, be displayed to the customer. In most cases, internal transactions will be allocated and locked against an equivalent transaction. An example of this would be if a charge is incorrectly applied to an account, a reversal transaction would be created, the transactions could then be allocated together, and marked as internal.
      */
-    protected boolean internal;
+    protected Boolean internal;
 
     /**
      * This is the amount of the transaction that has been allocated. For example, if a $1000 payment is put towards a $2000 charge, the $1000 will have a $1000 allocation amount, and the $2000 charge will have a $1000 allocation amount. The PA module is responsible for allocating charges to payments.
@@ -113,12 +113,7 @@ public abstract class Transaction implements Identifiable {
     /**
      * A reference to an external document that gives more granular information about the transaction. This information will be different depending on the type of transaction. The information will be available when a user "drills down" into a transaction. It will contain information relating to the charge or payment, such as the contact details for the department who generated a charge, and other information as made available by the system. For example, a charge from the bookstore may list the items purchased. The document referenced will be an XML document, allowing flexible creation of different document types by the institutions themselves. Some basic document types will be defined by the project.
      */
-    protected String documentReference;
-
-    /**
-     * If this value is non null, it points to the most recent memo line that refers to this transaction. For example, if the system locks the transaction and enters a memo line in the account memo, the CSR would be able to pull up the transaction and see the memo line directly, instead of having to search for it.
-     */
-    protected String memoReference;
+    protected Document document;
 
     /**
      * Reference to the corresponding account
@@ -156,7 +151,7 @@ public abstract class Transaction implements Identifiable {
         this.transactionType = transactionType;
     }
 
-    @Column(name = "EXTN_ID")
+    @Column(name = "EXTN_ID", length = 45)
     public String getExternalId() {
         return externalId;
     }
@@ -210,7 +205,7 @@ public abstract class Transaction implements Identifiable {
         this.lockedAllocatedAmount = lockedAllocatedAmount;
     }
 
-    @Column(name = "RESP_ENTITY")
+    @Column(name = "RESP_ENTITY", length = 45)
     public String getResponsibleEntity() {
         return responsibleEntity;
     }
@@ -219,22 +214,13 @@ public abstract class Transaction implements Identifiable {
         this.responsibleEntity = responsibleEntity;
     }
 
-    @Column(name = "STATEMENT_TXT")
+    @Column(name = "STATEMENT_TXT", length = 100)
     public String getStatementText() {
         return statementText;
     }
 
     public void setStatementText(String statementText) {
         this.statementText = statementText;
-    }
-
-    @Column(name = "MEMO_REF")
-    public String getMemoReference() {
-        return memoReference;
-    }
-
-    public void setMemoReference(String memoReference) {
-        this.memoReference = memoReference;
     }
 
     /**
@@ -244,12 +230,12 @@ public abstract class Transaction implements Identifiable {
      *
      * @param internal true/false
      */
-    public void setInternal(boolean internal) {
+    public void setInternal(Boolean internal) {
         this.internal = internal;
     }
 
-    @Column(name = "INTERNAL")
-    public boolean isInternal() {
+    @Column(name = "IS_INTERNAL_TRN", length = 1)
+    public Boolean isInternal() {
         return internal;
     }
 
@@ -258,13 +244,14 @@ public abstract class Transaction implements Identifiable {
      * for information for both the student and the CSR. For example, if the bookstore wanted to, it could lists the books it had sold in a transaction so the student would be
      * able to drill down and see what books made up a line on their statement.
      */
-    public void setDocumentReference(String documentReference) {
-        this.documentReference = documentReference;
+    public void setDocument(Document document) {
+        this.document = document;
     }
 
-    @Column(name = "DOC_REF")
-    public String getDocumentReference() {
-        return documentReference;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DOCUMENT_ID_FK")
+    public Document getDocument() {
+        return document;
     }
 
 
@@ -289,7 +276,7 @@ public abstract class Transaction implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CURRENCY_ID")
+    @JoinColumn(name = "CURRENCY_ID_FK")
     public Currency getCurrency() {
         return currency;
     }

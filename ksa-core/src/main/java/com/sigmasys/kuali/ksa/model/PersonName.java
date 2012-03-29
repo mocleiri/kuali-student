@@ -69,7 +69,7 @@ public class PersonName implements Identifiable {
     /**
      * Indicates whether this person name is default
      */
-    private boolean isDefault;
+    private Boolean isDefault;
 
     /**
      * Reference to the corresponding account
@@ -94,7 +94,7 @@ public class PersonName implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "KIM_NAME_TYPE")
+    @Column(name = "KIM_NAME_TYPE", length = 45)
     public String getKimNameType() {
         return kimNameType;
     }
@@ -103,7 +103,7 @@ public class PersonName implements Identifiable {
         this.kimNameType = kimNameType;
     }
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRST_NAME", length = 100)
     public String getFirstName() {
         return firstName;
     }
@@ -112,7 +112,7 @@ public class PersonName implements Identifiable {
         this.firstName = firstName;
     }
 
-    @Column(name = "MIDDLE_NAME")
+    @Column(name = "MIDDLE_NAME", length = 100)
     public String getMiddleName() {
         return middleName;
     }
@@ -121,7 +121,7 @@ public class PersonName implements Identifiable {
         this.middleName = middleName;
     }
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "LAST_NAME", length = 100)
     public String getLastName() {
         return lastName;
     }
@@ -130,7 +130,7 @@ public class PersonName implements Identifiable {
         this.lastName = lastName;
     }
 
-    @Column(name = "SUFFIX")
+    @Column(name = "SUFFIX", length = 10)
     public String getSuffix() {
         return suffix;
     }
@@ -139,7 +139,7 @@ public class PersonName implements Identifiable {
         this.suffix = suffix;
     }
 
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", length = 10)
     public String getTitle() {
         return title;
     }
@@ -148,7 +148,7 @@ public class PersonName implements Identifiable {
         this.title = title;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -157,7 +157,7 @@ public class PersonName implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }
@@ -175,12 +175,12 @@ public class PersonName implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @Column(name = "IS_DEFAULT")
-    public boolean isDefault() {
+    @Column(name = "IS_DEFAULT", length = 1)
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean isDefault) {
+    public void setDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
 

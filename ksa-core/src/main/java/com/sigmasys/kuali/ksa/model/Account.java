@@ -42,12 +42,12 @@ public abstract class Account implements Identifiable {
     /**
      * Last KIM update date
      */
-    protected boolean isKimAccount;
+    protected Boolean isKimAccount;
 
     /**
      * True if the user can authenticate
      */
-    protected boolean ableToAuthenticate;
+    protected Boolean ableToAuthenticate;
 
     /**
      * Credit limit
@@ -76,7 +76,7 @@ public abstract class Account implements Identifiable {
 
 
     @Id
-    @Column(name = "ID", nullable = false, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false, length = 45)
     @Override
     public String getId() {
         return id;
@@ -86,7 +86,7 @@ public abstract class Account implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "ENTITY_ID")
+    @Column(name = "ENTITY_ID", length = 45)
     public String getEntityId() {
         return entityId;
     }
@@ -114,20 +114,20 @@ public abstract class Account implements Identifiable {
     }
 
     @Column(name = "IS_KIM_ACNT")
-    public boolean isKimAccount() {
+    public Boolean isKimAccount() {
         return isKimAccount;
     }
 
-    public void setKimAccount(boolean kimAccount) {
+    public void setKimAccount(Boolean kimAccount) {
         isKimAccount = kimAccount;
     }
 
     @Column(name = "CAN_AUTHENTICATE")
-    public boolean isAbleToAuthenticate() {
+    public Boolean isAbleToAuthenticate() {
         return ableToAuthenticate;
     }
 
-    public void setAbleToAuthenticate(boolean ableToAuthenticate) {
+    public void setAbleToAuthenticate(Boolean ableToAuthenticate) {
         this.ableToAuthenticate = ableToAuthenticate;
     }
 

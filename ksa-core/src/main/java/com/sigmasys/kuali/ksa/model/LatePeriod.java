@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "KSSA_LATE_PERIOD")
 public class LatePeriod extends AuditableEntity {
 
-    private boolean isDefault;
+    private Boolean isDefault;
 
     private Integer daysLate1;
     private Integer daysLate2;
@@ -33,12 +33,12 @@ public class LatePeriod extends AuditableEntity {
         return id;
     }
 
-    @Column(name = "IS_DEFAULT")
-    public boolean isDefault() {
+    @Column(name = "IS_DEFAULT", length = 1)
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
     }
 

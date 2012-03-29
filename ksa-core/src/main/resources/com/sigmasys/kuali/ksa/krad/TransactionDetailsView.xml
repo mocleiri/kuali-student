@@ -38,12 +38,9 @@
                             <bean parent="Uif-InputField" p:propertyName="transaction.externalId" p:label="External ID"/>
                             <bean parent="Uif-InputField" p:propertyName="transaction.effectiveDate" p:label="Effective Date"/>
                             <bean parent="Uif-InputField" p:propertyName="formattedAmount" p:label="Amount"/>
-                            <bean parent="Uif-InputField" p:propertyName="transaction.documentReference"
-                                  p:label="Document reference:"/>
                             <bean parent="Uif-InputField" p:propertyName="transaction.responsibleEntity"
                                                               p:label="Responsible Entity"/>
                             <bean parent="Uif-InputField" p:propertyName="transaction.statementText" p:label="Statement"/>
-                            <bean parent="Uif-InputField" p:propertyName="transaction.memoReference" p:label="Memo"/>
                         </list>
                     </property>
                 </bean>

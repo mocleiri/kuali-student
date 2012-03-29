@@ -85,7 +85,7 @@ public class Document implements Identifiable {
         this.creationDate = creationDate;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -94,7 +94,7 @@ public class Document implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }
@@ -112,7 +112,7 @@ public class Document implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @Column(name = "EDIT_REASON")
+    @Column(name = "EDIT_REASON", length = 512)
     public String getEditReason() {
         return editReason;
     }

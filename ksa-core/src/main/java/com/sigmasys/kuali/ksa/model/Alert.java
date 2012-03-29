@@ -16,7 +16,7 @@ public class Alert extends Information {
      */
     private String text;
 
-    @Column(name = "TEXT")
+    @Column(name = "TEXT", length = 4000)
     public String getText() {
         return text;
     }

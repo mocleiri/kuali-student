@@ -18,10 +18,6 @@ public class FlagType extends AuditableEntity {
      */
     private Integer level;
 
-    /**
-     * Flag info
-     */
-    private String flagInfo;
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -43,15 +39,6 @@ public class FlagType extends AuditableEntity {
 
     public void setLevel(Integer level) {
         this.level = level;
-    }
-
-    @Column(name = "FLAG_INFO")
-    public String getFlagInfo() {
-        return flagInfo;
-    }
-
-    public void setFlagInfo(String flagInfo) {
-        this.flagInfo = flagInfo;
     }
 
 }

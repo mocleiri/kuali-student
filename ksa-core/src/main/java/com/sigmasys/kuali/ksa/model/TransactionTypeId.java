@@ -10,33 +10,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TransactionTypeId implements Serializable {
 
-    private Long id;
-    private String subCode;
+    private String id;
+    private Integer subCode;
 
 
     public TransactionTypeId() {
     }
 
-    public TransactionTypeId(Long id, String subCode) {
+    public TransactionTypeId(String id, Integer subCode) {
         setId(id);
         setSubCode(subCode);
     }
 
-    @Column(name = "ID")
-    public Long getId() {
+    @Column(name = "ID", length = 20)
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     @Column(name = "SUB_CODE")
-    public String getSubCode() {
+    public Integer getSubCode() {
         return subCode;
     }
 
-    public void setSubCode(String subCode) {
+    public void setSubCode(Integer subCode) {
         this.subCode = subCode;
     }
 

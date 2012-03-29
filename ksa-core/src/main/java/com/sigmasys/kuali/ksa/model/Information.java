@@ -22,11 +22,6 @@ public class Information implements Identifiable {
     private Long id;
 
     /**
-     * Information name
-     */
-    private String name;
-
-    /**
      * Creation date
      */
     private Date creationDate;
@@ -44,7 +39,7 @@ public class Information implements Identifiable {
     /**
      * Account
      */
-    private String account;
+    private Account account;
 
     /**
      * Level
@@ -94,15 +89,6 @@ public class Information implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Column(name = "LEVEL")
     public Integer getLevel() {
         return level;
@@ -112,7 +98,7 @@ public class Information implements Identifiable {
         this.level = level;
     }
 
-    @Column(name = "FLAG_INFO")
+    @Column(name = "RESP_ENTITY", length = 45)
     public String getResponsibleEntity() {
         return responsibleEntity;
     }
@@ -121,7 +107,7 @@ public class Information implements Identifiable {
         this.responsibleEntity = responsibleEntity;
     }
 
-    @Column(name = "CREATOR_ID")
+    @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
     }
@@ -130,7 +116,7 @@ public class Information implements Identifiable {
         this.creatorId = creatorId;
     }
 
-    @Column(name = "EDITOR_ID")
+    @Column(name = "EDITOR_ID", length = 45)
     public String getEditorId() {
         return editorId;
     }
@@ -175,12 +161,13 @@ public class Information implements Identifiable {
         this.expirationDate = expirationDate;
     }
 
-    @Column(name = "ACCOUNT")
-    public String getAccount() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACNT_ID_FK")
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(String account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 

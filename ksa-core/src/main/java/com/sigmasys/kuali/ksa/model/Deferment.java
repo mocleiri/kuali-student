@@ -25,13 +25,6 @@ public class Deferment extends Credit {
      */
     private Long deferredTransactionId;
 
-    /**
-     * a deferment is the only type of transaction whose amount can be altered. For audit purposes,
-     * the original value of the deferment is set permanently in this attribute,
-     * even if the deferment is reduced or expired, the original value will be accessible here.
-     */
-    private BigDecimal originalDefermentAmount;
-
 
     public void setDeferredTransactionId(Long deferredTransactionId) {
         this.deferredTransactionId = deferredTransactionId;
@@ -49,15 +42,6 @@ public class Deferment extends Credit {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
-    }
-
-    @Column(name = "ORIG_DEFER_AMOUNT")
-    public BigDecimal getOriginalDefermentAmount() {
-        return originalDefermentAmount;
-    }
-
-    public void setOriginalDefermentAmount(BigDecimal originalDefermentAmount) {
-        this.originalDefermentAmount = originalDefermentAmount;
     }
 
     /*

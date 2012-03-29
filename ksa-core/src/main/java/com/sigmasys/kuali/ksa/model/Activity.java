@@ -45,9 +45,9 @@ public class Activity implements Identifiable {
     private String logDetail;
 
     /**
-     * User ID
+     * Account
      */
-    private String account;
+    private Account account;
 
     /**
      * Attribute
@@ -55,9 +55,9 @@ public class Activity implements Identifiable {
     private String attribute;
 
     /**
-     * Log details
+     * Level
      */
-    private Integer level;
+    private String level;
 
     /**
      * Activity type
@@ -82,7 +82,7 @@ public class Activity implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "IP")
+    @Column(name = "IP", length = 32)
     public String getIpAddress() {
         return ipAddress;
     }
@@ -91,7 +91,7 @@ public class Activity implements Identifiable {
         this.ipAddress = ipAddress;
     }
 
-    @Column(name = "MAC")
+    @Column(name = "MAC", length = 12)
     public String getMacAddress() {
         return macAddress;
     }
@@ -100,7 +100,7 @@ public class Activity implements Identifiable {
         this.macAddress = macAddress;
     }
 
-    @Column(name = "ENTITY_ID")
+    @Column(name = "ENTITY_ID", length = 45)
     public String getEntityId() {
         return entityId;
     }
@@ -118,7 +118,7 @@ public class Activity implements Identifiable {
         this.timestamp = timestamp;
     }
 
-    @Column(name = "LOG_DETAIL")
+    @Column(name = "LOG_DETAIL", length = 200)
     public String getLogDetail() {
         return logDetail;
     }
@@ -127,16 +127,17 @@ public class Activity implements Identifiable {
         this.logDetail = logDetail;
     }
 
-    @Column(name = "ACCOUNT")
-    public String getAccount() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACNT_ID_FK")
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(String account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 
-    @Column(name = "ATTRIBUTE")
+    @Column(name = "ATTRIBUTE", length = 200)
     public String getAttribute() {
         return attribute;
     }
@@ -145,12 +146,12 @@ public class Activity implements Identifiable {
         this.attribute = attribute;
     }
 
-    @Column(name = "LEVEL")
-    public Integer getLevel() {
+    @Column(name = "LEVEL", length = 10)
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 

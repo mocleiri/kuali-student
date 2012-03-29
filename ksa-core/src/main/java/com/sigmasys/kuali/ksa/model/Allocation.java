@@ -30,9 +30,9 @@ public class Allocation implements Identifiable {
 
 
     /**
-     * User ID
+     * Account reference
      */
-    private String account;
+    private Account account;
 
 
     /**
@@ -78,12 +78,13 @@ public class Allocation implements Identifiable {
         this.secondTransaction = secondTransaction;
     }
 
-    @Column(name = "ACCOUNT")
-    public String getAccount() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACNT_ID_FK")
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(String account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 
