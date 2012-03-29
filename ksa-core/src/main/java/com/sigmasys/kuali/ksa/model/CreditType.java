@@ -18,23 +18,12 @@ import javax.persistence.*;
 @DiscriminatorValue("C")
 public class CreditType extends TransactionType {
 
-    private Date clearDate;
-
     private Integer clearPeriod;
 
     private String refundRule;
 
     private String authorizationText;
 
-
-    @Column(name = "CLEAR_DATE")
-    public Date getClearDate() {
-        return clearDate;
-    }
-
-    public void setClearDate(Date clearDate) {
-        this.clearDate = clearDate;
-    }
 
     @Column(name = "REFUND_RULE", length = 2000)
     public String getRefundRule() {
