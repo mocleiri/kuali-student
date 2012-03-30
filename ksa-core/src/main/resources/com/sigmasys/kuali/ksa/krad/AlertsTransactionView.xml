@@ -73,6 +73,7 @@
     </bean>
 
 
+    <!-- a column section of boxes that references a horizontal sub section -->
     <bean id="First-Glance" parent="Uif-VerticalBoxSection">
         <property name="title" value="First Glance"/>
         <property name="instructionalText" value="Key information"/>
@@ -84,13 +85,14 @@
         </property>
     </bean>
 
+    <!-- a row of boxes fields are provided from the corresponding form class -->
     <bean id="First-Glance-Section" parent="Uif-HorizontalBoxSubSection">
         <property name="title" value="First Glance"/>
         <property name="instructionalText" value="Key Information"/>
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField-LabelTop" p:propertyName="formattedAmount" p:label="Balance">
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="totalAmnt" p:label="Balance">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>

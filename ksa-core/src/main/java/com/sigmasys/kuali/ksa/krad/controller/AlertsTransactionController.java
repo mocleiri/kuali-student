@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -51,12 +52,18 @@ public class AlertsTransactionController extends UifControllerBase {
 
       List<AccountTrans> accntTransLst = form.getAccntTransLst();
 
+      BigDecimal totalAmnt = form.getTotalAmnt();
+
       for (int i = 0; i < 3; i++)
       {
          Transaction trns = createTransaction(false);
          accntTransLst.add(new AccountTrans(trns.getLedgerDate(), trns.getStatementText(),
                trns.getExternalId(), trns.getAmount()));
+
+         totalAmnt = totalAmnt.add(trns.getAmount());
       }
+
+      form.setTotalAmnt(totalAmnt);
 
       form.setAccntTransLst(accntTransLst);
 
@@ -71,12 +78,18 @@ public class AlertsTransactionController extends UifControllerBase {
 
       List<AccountTrans> accntTransLst = form.getAccntTransLst();
 
+      BigDecimal totalAmnt = form.getTotalAmnt();
+
       for (int i = 0; i < 3; i++)
       {
          Transaction trns = createTransaction(false);
          accntTransLst.add(new AccountTrans(trns.getLedgerDate(), trns.getStatementText(),
                trns.getExternalId(), trns.getAmount()));
+
+         totalAmnt = totalAmnt.add(trns.getAmount());
       }
+
+      form.setTotalAmnt(totalAmnt);
 
       form.setAccntTransLst(accntTransLst);
 
@@ -97,7 +110,6 @@ public class AlertsTransactionController extends UifControllerBase {
       alertsTransaction.setResponsibleEntity("Entity #2");
       alertsTransaction.setStatementText("Here goes statement text - " + (updated ? "Updated" : "Initial"));
 
-      
       return alertsTransaction;
    }
 
