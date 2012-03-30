@@ -82,7 +82,7 @@
 </head>
 
 <body OnLoad ="document.loginForm.userName.focus();">
-<jsp:useBean id="userLogin" scope="session" class="com.sigmasys.kuali.ksa.servlet.LoginServlet"/>
+<jsp:useBean id="userLogin" scope="session" class="com.sigmasys.kuali.ksa.temp.LoginServlet"/>
 <div class="build">${ConfigProperties.version} (${ConfigProperties.datasource.ojb.platform})</div>
 
 <form name="loginForm" action="LoginServlet" method="post" >

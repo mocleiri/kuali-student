@@ -216,7 +216,7 @@
     <servlet>
         <display-name>LoginServlet</display-name>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.sigmasys.kuali.ksa.servlet.LoginServlet</servlet-class>
+        <servlet-class>com.sigmasys.kuali.ksa.temp.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

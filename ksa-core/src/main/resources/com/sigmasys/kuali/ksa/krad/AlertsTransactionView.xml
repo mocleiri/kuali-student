@@ -128,7 +128,7 @@
         <property name="title" value="Recent Transactions"/>
         <property name="instructionalText"
                   value="Recent Transactions"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.util.AccountTrans"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.temp.AccountTrans"/>
         <property name="propertyName" value="accntTransLst"/>
         <property name="layoutManager.sequencePropertyName" value="ledgerDate"/>
         <property name="layoutManager.richTable.render" value="false"/>

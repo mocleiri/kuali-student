@@ -4,8 +4,7 @@ import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm;
 
 import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.util.AccountTrans;
+import com.sigmasys.kuali.ksa.temp.AccountTrans;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -95,11 +94,9 @@ public class AlertsTransactionController extends UifControllerBase {
       alertsTransaction.setLedgerDate(new Date());
       alertsTransaction.setInternal(false);
       alertsTransaction.setEffectiveDate(new Date());
-      alertsTransaction.setDocumentReference("Readme.txt");
       alertsTransaction.setResponsibleEntity("Entity #2");
-      alertsTransaction.setStatementText("Here goes statement text");
-      alertsTransaction.setMemoReference(updated ? "Updated" : "");
-      
+      alertsTransaction.setStatementText("Here goes statement text - " + (updated ? "Updated" : "Initial"));
+
       
       return alertsTransaction;
    }
