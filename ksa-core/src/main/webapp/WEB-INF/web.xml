@@ -213,6 +213,17 @@
         <servlet-name>action</servlet-name>
     </filter-mapping -->
 
+    <servlet>
+        <display-name>LoginServlet</display-name>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.sigmasys.kuali.ksa.servlet.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
 
     <!-- only need to include this for the kuali tlds
 since tld file will only be searched from within other jars -->

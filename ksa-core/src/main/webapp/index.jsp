@@ -1,9 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <%--<link href="/css/portal.css" rel="stylesheet" type="text/css">--%>
+
 <head>
     <title>Persona</title>
-    <link href="/css/styles.css" rel="stylesheet" type="text/css">
-    <link href="/css/portal.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -103,7 +105,7 @@
         </tbody>
     </table>
 </div>
-<div id="footer" align="center">
+<div id="ksa-footer" align="center">
     <%@ include file="/WEB-INF/jsp/ksaFooter.jsp" %>
 </div>
 </body>

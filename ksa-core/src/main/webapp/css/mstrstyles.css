@@ -4,23 +4,23 @@ body {
     padding:0;
     height:100%;
 }
-#container {
+#ksa-container {
     min-height:100%;
     position:relative;
 }
-#header {
+#ksa-header {
     background: #a02919;
     padding:1px;
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
 }
-#body {
+#ksa-body {
     padding:1px;
     padding-bottom:70px;   /* Height of the footer */
 }
 
 /* footer section */
-#footer {
+#ksa-footer {
     position:absolute;
     bottom:0;
     width:100%;
@@ -36,31 +36,31 @@ body {
     /*background:#6cf;*/
 }
 
-#footer a:link
+#ksa-footer a:link
 {
     color: #FFFFFF;
     text-decoration: underline;
 }
 
-#footer a:visited
+#ksa-footer a:visited
 {
     color: #FFFFFF;
     text-decoration: underline;
 }
 
-#footer a:hover
+#ksa-footer a:hover
 {
     color: #000000;
     text-decoration: underline;
 }
 
-#footer a:active
+#ksa-footer a:active
 {
     color: #000000;
     text-decoration: underline;
 }
 
-#footer-nav
+#ksa-footer-nav
 {
     background-image:   url("/images/leftback.gif");
     background-repeat: no-repeat;
@@ -68,7 +68,7 @@ body {
     background-color: #FFFFFF;
 }
 
-#footer-nav-focus
+#ksa-footer-nav-focus
 {
     background-image:   url("/images/bl-bevel-focus.gif");
     background-repeat: no-repeat;
@@ -77,49 +77,49 @@ body {
     background-position: left bottom;
 }
 
-#footer-nav  a:link
+#ksa-footer-nav  a:link
 {
     color: #000000;
     text-decoration: none;
 }
 
-#footer-nav  a:visited
+#ksa-footer-nav  a:visited
 {
     color: #000000;
     text-decoration: none;
 }
 
-#footer-nav  a:hover
+#ksa-footer-nav  a:hover
 {
     color: #990000;
     text-decoration: underline;
 }
 
-#footer-nav  a:active
+#ksa-footer-nav  a:active
 {
     color: #333333;
     text-decoration: underline;
 }
 
-#footer-nav-focus  a:link
+#ksa-footer-nav-focus  a:link
 {
     color: #000000;
     text-decoration: none;
 }
 
-#footer-nav-focus  a:visited
+#ksa-footer-nav-focus  a:visited
 {
     color: #000000;
     text-decoration: none;
 }
 
-#footer-nav-focus  a:hover
+#ksa-footer-nav-focus  a:hover
 {
     color: #990000;
     text-decoration: underline;
 }
 
-#footer-nav-focus  a:active
+#ksa-footer-nav-focus  a:active
 {
     color: #333333;
     text-decoration: underline;
