@@ -9,7 +9,7 @@ import java.util.List;
  * KSA Account model
  * <p/>
  * <p/>
- * User: ivanovm
+ * @author Michael Ivanov
  * Date: 3/13/12
  * Time: 3:56 PM
  */
