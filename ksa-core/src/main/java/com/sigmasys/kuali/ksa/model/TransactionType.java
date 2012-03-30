@@ -32,6 +32,11 @@ public abstract class TransactionType implements Identifiable {
     protected List<Tag> tags;
 
     /**
+     * The default rollup
+     */
+    protected Rollup rollup;
+
+    /**
      * Creator user ID
      */
     private String creatorId;
@@ -105,6 +110,16 @@ public abstract class TransactionType implements Identifiable {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DEF_ROLLUP_ID_FK")
+    public Rollup getRollup() {
+        return rollup;
+    }
+
+    public void setRollup(Rollup rollup) {
+        this.rollup = rollup;
     }
 
     @Column(name = "CREATOR_ID", length = 45)
