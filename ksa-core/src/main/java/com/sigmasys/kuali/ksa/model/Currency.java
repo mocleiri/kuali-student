@@ -14,6 +14,8 @@ import javax.persistence.*;
 @Table(name = "KSSA_CURRENCY")
 public class Currency extends AuditableEntity {
 
+    private String iso;
+
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_CURRENCY",
@@ -27,4 +29,12 @@ public class Currency extends AuditableEntity {
         return id;
     }
 
+    @Column(name = "ISO", length = 10)
+    public String getIso() {
+        return iso;
+    }
+
+    public void setIso(String iso) {
+        this.iso = iso;
+    }
 }
