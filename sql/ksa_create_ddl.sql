@@ -3,7 +3,7 @@
 -- It needs to be run by the schema owner
 -- Creating sequence table
 
-create table KSA.SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char),  SEQ_VALUE number(10,0) ) ;
+create table KSA.KSSA_SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char),  SEQ_VALUE number(10,0) ) ;
 
 -- Creating base tables
 
@@ -28,9 +28,8 @@ create table KSA.KSSA_ROLLUP (ID number(19,0) not null, CREATOR_ID varchar2(45 c
 create table KSA.KSSA_TAG (ID number(19,0) not null, CREATOR_ID varchar2(45 char), DESCRIPTION varchar2(2000 char), EDITOR_ID varchar2(45 char), LAST_UPDATE timestamp, NAME varchar2(100 char), ACCESS_LEVEL number(10,0), primary key (ID));
 create table KSA.KSSA_TAX_TYPE (ID number(19,0) not null, CREATOR_ID varchar2(45 char), DESCRIPTION varchar2(2000 char), EDITOR_ID varchar2(45 char), LAST_UPDATE timestamp, NAME varchar2(100 char), primary key (ID));
 create table KSA.KSSA_TRANSACTION (TYPE varchar2(31 char) not null, ID number(19,0) not null, ALLOCATED number(19,2), AMNT number(19,2), EFFECTIVE_DATE timestamp, EXTN_ID varchar2(45 char), GL_ENTRY_GENERATED char(1 char), IS_INTERNAL_TRN char(1 char), LEDGER_DATE timestamp, LOCKED_ALLOCATED number(19,2), NATIVE_AMNT number(19,2), ORIG_DATE timestamp, RESP_ENTITY varchar2(45 char), STATEMENT_TXT varchar2(100 char), CLEAR_DATE timestamp, DEFER_ID number(19,0), EXPIRATION_DATE timestamp, ACNT_ID_FK varchar2(45 char), CURRENCY_ID_FK number(19,0), DOCUMENT_ID_FK number(19,0), ROLLUP_ID_FK number(19,0), TYPE_ID varchar2(20 char), TYPE_SUB_CODE number(10,0), primary key (ID));
-create table KSA.KSSA_TRANSACTION_TYPE (TYPE varchar2(31 char) not null, ID varchar2(20 char) not null, SUB_CODE number(10,0) not null, CREATOR_ID varchar2(45 char), DEF_TRN_TXT varchar2(100 char), EDITOR_ID varchar2(45 char), END_DATE timestamp, LAST_UPDATE timestamp, START_DATE timestamp, AUTH_TXT varchar2(45 char), CLEAR_PERIOD number(10,0), REFUND_RULE varchar2(2000 char), PRIORITY number(10,0), primary key (ID, SUB_CODE));
+create table KSA.KSSA_TRANSACTION_TYPE (TYPE varchar2(31 char) not null, ID varchar2(20 char) not null, SUB_CODE number(10,0) not null, CREATOR_ID varchar2(45 char), DEF_TRN_TXT varchar2(100 char), EDITOR_ID varchar2(45 char), END_DATE timestamp, LAST_UPDATE timestamp, START_DATE timestamp, PRIORITY number(10,0), AUTH_TXT varchar2(45 char), CLEAR_PERIOD number(10,0), REFUND_RULE varchar2(2000 char), DEF_ROLLUP_ID_FK number(19,0), primary key (ID, SUB_CODE));
 create table KSA.KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK varchar2(20 char) not null, TRANSACTION_TYPE_SUB_CODE_FK number(10,0) not null, TAG_ID_FK number(19,0) not null);
-
 
 -- Creating constraints
 

@@ -75,7 +75,7 @@ public class Information implements Identifiable {
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_INFO",
-            table = "SEQUENCE_TABLE",
+            table = "KSSA_SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "INFORMATION_SEQ")

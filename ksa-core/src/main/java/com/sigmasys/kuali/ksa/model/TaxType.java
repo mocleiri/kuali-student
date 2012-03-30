@@ -16,7 +16,7 @@ public class TaxType extends AuditableEntity {
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_TAX_TYPE",
-            table = "SEQUENCE_TABLE",
+            table = "KSSA_SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "TAX_TYPE_SEQ")

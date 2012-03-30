@@ -19,7 +19,7 @@ public class Tag extends AuditableEntity {
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_TAG",
-            table = "SEQUENCE_TABLE",
+            table = "KSSA_SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
             pkColumnValue = "TAG_SEQ")
