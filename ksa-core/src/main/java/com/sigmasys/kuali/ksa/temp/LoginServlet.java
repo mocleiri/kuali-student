@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
          user.setUserName(request.getParameter("userName"));
          user.setPswd(request.getParameter("pswd"));
 
-         user = loginCredentials.login(user);
+         user = LoginCredentials.login(user);
 
          if (user.isValidUser())
          {

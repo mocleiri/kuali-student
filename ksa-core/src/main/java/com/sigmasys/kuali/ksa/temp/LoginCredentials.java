@@ -7,7 +7,7 @@ package com.sigmasys.kuali.ksa.temp;
  * Time: 8:38 PM
  * To change this template use File | Settings | File Templates.
  */
-public class loginCredentials {
+public class LoginCredentials {
 
     private static String defaultUserName;
     private static String defaultPswd;
