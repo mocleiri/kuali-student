@@ -1,11 +1,18 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.util.AccountTrans;
 import org.kuali.rice.krad.web.form.UifFormBase;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlertsTransactionForm extends UifFormBase {
 
    private Transaction alertTransaction;
+   private List<AccountTrans> accntTransLst= new ArrayList<AccountTrans>();
+
 
    public Transaction getTransaction() {
       return alertTransaction;
@@ -13,5 +20,24 @@ public class AlertsTransactionForm extends UifFormBase {
 
    public void setTransaction(Transaction transaction) {
       this.alertTransaction = transaction;
+   }
+
+   public BigDecimal getFormattedAmount() {
+      if ( alertTransaction != null ) {
+         BigDecimal amount = alertTransaction.getAmount();
+         if (amount != null) {
+            return amount.setScale(5, BigDecimal.ROUND_CEILING);
+         }
+      }
+      return BigDecimal.ZERO;
+   }
+
+
+   public List<AccountTrans> getAccntTransLst() {
+      return accntTransLst;
+   }
+
+   public void setAccntTransLst(List<AccountTrans> accntTransLst) {
+      this.accntTransLst = accntTransLst;
    }
 }
