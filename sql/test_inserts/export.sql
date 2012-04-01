@@ -7,7 +7,7 @@
 --   DATA FOR TABLE KSSA_ALLOCATION
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ALLOCATION
+-- INSERTING into KSSA_ALLOCATION
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_ALLOCATION
@@ -17,7 +17,7 @@ REM INSERTING into KSSA_ALLOCATION
 --   DATA FOR TABLE KSSA_TRANSACTION_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_TRANSACTION_TYPE
+-- INSERTING into KSSA_TRANSACTION_TYPE
 Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('D','1292',1,'pheald','MACQUARIE UNIVERSITY PAYMENT',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
 Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('D','1293',1,'pheald','ACC INT''L ACAD COLLABORATION',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
 Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('D','1294',1,'pheald','ACC INT''L ACAD COLLABOR PMT',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
@@ -262,7 +262,7 @@ Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITO
 --   DATA FOR TABLE KSSA_INFORMATION
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_INFORMATION
+-- INSERTING into KSSA_INFORMATION
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_INFORMATION
@@ -273,7 +273,7 @@ REM INSERTING into KSSA_INFORMATION
 --   DATA FOR TABLE KSSA_TAG
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_TAG
+-- INSERTING into KSSA_TAG
 Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (1,'pheald','This item will be reported on IRS form 1098(T).',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'1098T',3);
 Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (2,'pheald','This item is considered cash for the combined-cash limit tracking requirement.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Cash or Equivalent',5);
 
@@ -286,7 +286,7 @@ Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCES
 --   DATA FOR TABLE KSSA_ACTIVITY_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ACTIVITY_TYPE
+-- INSERTING into KSSA_ACTIVITY_TYPE
 Insert into KSSA_ACTIVITY_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (1,'pheald','Emergencies - system is unusable.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'emerg');
 Insert into KSSA_ACTIVITY_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (2,'pheald','Action must be taken immediately.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'alert');
 Insert into KSSA_ACTIVITY_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (3,'pheald','Critical Conditions.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'crit');
@@ -304,7 +304,7 @@ Insert into KSSA_ACTIVITY_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,
 --   DATA FOR TABLE KSSA_LATE_PERIOD
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_LATE_PERIOD
+-- INSERTING into KSSA_LATE_PERIOD
 Insert into KSSA_LATE_PERIOD (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,DAYS_LATE1,DAYS_LATE2,DAYS_LATE3,IS_DEFAULT) values (1,'pheald','Standard 30/60/90 Late-period definition.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Standard',30,60,90,'Y');
 Insert into KSSA_LATE_PERIOD (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,DAYS_LATE1,DAYS_LATE2,DAYS_LATE3,IS_DEFAULT) values (2,'pheald','Extended late period defintion used for businesses who pay by the middle of the semester.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Extended',90,120,150,'N');
 
@@ -316,7 +316,7 @@ Insert into KSSA_LATE_PERIOD (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NA
 --   DATA FOR TABLE KSSA_POSTAL_ADDRESS
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_POSTAL_ADDRESS
+-- INSERTING into KSSA_POSTAL_ADDRESS
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_POSTAL_ADDRESS
@@ -326,7 +326,7 @@ REM INSERTING into KSSA_POSTAL_ADDRESS
 --   DATA FOR TABLE KSSA_ACNT
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ACNT
+-- INSERTING into KSSA_ACNT
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_ACNT
@@ -336,7 +336,7 @@ REM INSERTING into KSSA_ACNT
 --   DATA FOR TABLE KSSA_TRANSACTION_TYPE_TAG
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_TRANSACTION_TYPE_TAG
+-- INSERTING into KSSA_TRANSACTION_TYPE_TAG
 Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('1292',1,1);
 Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('1293',1,1);
 Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('1294',1,1);
@@ -581,7 +581,7 @@ Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_S
 --   DATA FOR TABLE KSSA_ROLLUP
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ROLLUP
+-- INSERTING into KSSA_ROLLUP
 Insert into KSSA_ROLLUP (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (1,'pheald','All of the charges that were accrued at the bookstore.',null,to_timestamp('23-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Bookstore Charges');
 Insert into KSSA_ROLLUP (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (2,'pheald','All forms of financial aid.',null,to_timestamp('23-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Financial Aid Payments');
 Insert into KSSA_ROLLUP (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (3,'pheald','Tuition Charges for the undergraduate programs.',null,to_timestamp('23-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Undergraduate Tuition Charges');
@@ -597,7 +597,7 @@ Insert into KSSA_ROLLUP (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) v
 --   DATA FOR TABLE KSSA_ACNT_STATUS_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ACNT_STATUS_TYPE
+-- INSERTING into KSSA_ACNT_STATUS_TYPE
 Insert into KSSA_ACNT_STATUS_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (2,'pheald','Account is in good standing but has a history of delinquency',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Currently In Good Standing');
 Insert into KSSA_ACNT_STATUS_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (3,'pheald','Account is in collections.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'In Collections');
 Insert into KSSA_ACNT_STATUS_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (4,'pheald','Account is in process of being closed.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Closing');
@@ -612,7 +612,7 @@ Insert into KSSA_ACNT_STATUS_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDA
 --   DATA FOR TABLE KSSA_SEQUENCE_TABLE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_SEQUENCE_TABLE
+-- INSERTING into KSSA_SEQUENCE_TABLE
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_SEQUENCE_TABLE
@@ -622,7 +622,7 @@ REM INSERTING into KSSA_SEQUENCE_TABLE
 --   DATA FOR TABLE KSSA_DOCUMENT
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_DOCUMENT
+-- INSERTING into KSSA_DOCUMENT
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_DOCUMENT
@@ -632,7 +632,7 @@ REM INSERTING into KSSA_DOCUMENT
 --   DATA FOR TABLE KSSA_CURRENCY
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_CURRENCY
+-- INSERTING into KSSA_CURRENCY
 Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (1,'pheald','United States Dollar',null,to_timestamp('26-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Dollar','usd');
 Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (2,'pheald','British Pound as used in the United Kingdom. Also referred to as sterling.',null,to_timestamp('26-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Pound','gbp');
 Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (3,'pheald','Australian Dollar.',null,to_timestamp('26-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Dollar','aud');
@@ -647,7 +647,7 @@ Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,
 --   DATA FOR TABLE KSSA_FLAG_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_FLAG_TYPE
+-- INSERTING into KSSA_FLAG_TYPE
 Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (1,'pheald','Account has been taken over allowable credit limit.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Over Limit',1);
 Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (2,'pheald','The address on the account has been flagged as invalid. Please verify.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Bad Address',0);
 Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ACCESS_LEVEL) values (3,'pheald','The user has passed a bad check to the office.',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'Bad Check',1);
@@ -661,7 +661,7 @@ Insert into KSSA_FLAG_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME
 --   DATA FOR TABLE KSSA_GL_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_GL_TYPE
+-- INSERTING into KSSA_GL_TYPE
 Insert into KSSA_GL_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (0,'pheald','GeneralGeneral GL Type',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'General');
 
 ---------------------------------------------------
@@ -672,7 +672,7 @@ Insert into KSSA_GL_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) 
 --   DATA FOR TABLE KSSA_TRANSACTION
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_TRANSACTION
+-- INSERTING into KSSA_TRANSACTION
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_TRANSACTION
@@ -682,7 +682,7 @@ REM INSERTING into KSSA_TRANSACTION
 --   DATA FOR TABLE KSSA_ACTIVITY
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ACTIVITY
+-- INSERTING into KSSA_ACTIVITY
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_ACTIVITY
@@ -692,7 +692,7 @@ REM INSERTING into KSSA_ACTIVITY
 --   DATA FOR TABLE KSSA_CREDIT_PERMISSION
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_CREDIT_PERMISSION
+-- INSERTING into KSSA_CREDIT_PERMISSION
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_CREDIT_PERMISSION
@@ -702,7 +702,7 @@ REM INSERTING into KSSA_CREDIT_PERMISSION
 --   DATA FOR TABLE KSSA_ELECTRONIC_CONTACT
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_ELECTRONIC_CONTACT
+-- INSERTING into KSSA_ELECTRONIC_CONTACT
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_ELECTRONIC_CONTACT
@@ -712,7 +712,7 @@ REM INSERTING into KSSA_ELECTRONIC_CONTACT
 --   DATA FOR TABLE KSSA_GL_BREAKDOWN
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_GL_BREAKDOWN
+-- INSERTING into KSSA_GL_BREAKDOWN
 Insert into KSSA_GL_BREAKDOWN (ID,GL_ACCOUNT,BREAKDOWN,TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,GL_TYPE_ID_FK) values (200,'01-1-11700 0599',0,'1547',1,0);
 Insert into KSSA_GL_BREAKDOWN (ID,GL_ACCOUNT,BREAKDOWN,TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,GL_TYPE_ID_FK) values (201,'01-1-11700 0189',0,'1548',1,0);
 Insert into KSSA_GL_BREAKDOWN (ID,GL_ACCOUNT,BREAKDOWN,TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,GL_TYPE_ID_FK) values (202,'01-1-11700 0599',0,'1549',1,0);
@@ -957,7 +957,7 @@ Insert into KSSA_GL_BREAKDOWN (ID,GL_ACCOUNT,BREAKDOWN,TRANSACTION_TYPE_ID_FK,TR
 --   DATA FOR TABLE KSSA_TAX_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_TAX_TYPE
+-- INSERTING into KSSA_TAX_TYPE
 Insert into KSSA_TAX_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (1,'pheald','US Social Security Nuber',null,to_timestamp('27-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'US Social SecurityNumber');
 
 ---------------------------------------------------
@@ -968,7 +968,7 @@ Insert into KSSA_TAX_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME)
 --   DATA FOR TABLE KSSA_BANK_TYPE
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_BANK_TYPE
+-- INSERTING into KSSA_BANK_TYPE
 Insert into KSSA_BANK_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME) values (1,'pheald','This type of field is used to record automated clearing house transactions for payments to accounts within the United States of America. The required information for this type of transaction is the routing number, the account number, and the account type.',null,to_timestamp('30-MAR-20 12.00.00.000000000 PM','DD-MON-RR HH.MI.SS.FF AM'),'US ACH.');
 
 ---------------------------------------------------
@@ -979,7 +979,7 @@ Insert into KSSA_BANK_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME
 --   DATA FOR TABLE KSSA_PERSON_NAME
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_PERSON_NAME
+-- INSERTING into KSSA_PERSON_NAME
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_PERSON_NAME
