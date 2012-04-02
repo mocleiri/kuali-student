@@ -74,6 +74,11 @@ public abstract class Account implements Identifiable {
      */
     protected List<PostalAddress> postalAddresses;
 
+    /**
+     * Account Type
+     */
+    protected AccountType type;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false, length = 45)
@@ -177,5 +182,15 @@ public abstract class Account implements Identifiable {
 
     public void setPostalAddresses(List<PostalAddress> postalAddresses) {
         this.postalAddresses = postalAddresses;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACNT_STATUS_TYPE_ID_FK")
+    public AccountType getType() {
+        return type;
+    }
+
+    public void setType(AccountType type) {
+        this.type = type;
     }
 }
