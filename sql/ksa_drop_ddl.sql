@@ -3,6 +3,7 @@
 -- It needs to be run by the schema owner
 
 drop table KSA.KSSA_ACNT cascade constraints;
+drop table KSA.KSSA_ACNT_PROTECTED_INFO cascade constraints;
 drop table KSA.KSSA_ACNT_STATUS_TYPE cascade constraints;
 drop table KSA.KSSA_ACTIVITY cascade constraints;
 drop table KSA.KSSA_ACTIVITY_TYPE cascade constraints;

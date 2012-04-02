@@ -8,6 +8,7 @@ create table KSA.KSSA_SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char) not null,  SE
 -- Creating base tables
 
 create table KSA.KSSA_ACNT (TYPE varchar2(31 char) not null, ID varchar2(45 char) not null, CAN_AUTHENTICATE char(1 char), CREATION_DATE timestamp, CREDIT_LIMIT number(19,2), ENTITY_ID varchar2(45 char), IS_KIM_ACNT char(1 char), LAST_KIM_UPDATE timestamp, LATE1 number(19,2), LATE2 number(19,2), LATE3 number(19,2), DUE number(19,2), LATE_LAST_UPDATE timestamp, OUTSTANDING number(19,2), LATE_PERIOD_ID_FK number(19,0), primary key (ID));
+create table KSA.KSSA_ACNT_PROTECTED_INFO (ID varchar2(45 char) not null, BANK_DETAILS varchar2(100 char), TAX_REFERENCE varchar2(45 char), BANK_TYPE_ID_FK number(19,0), TAX_TYPE_ID_FK number(19,0), primary key (ID));
 create table KSA.KSSA_ACNT_STATUS_TYPE (ID number(19,0) not null, CREATOR_ID varchar2(45 char), DESCRIPTION varchar2(2000 char), EDITOR_ID varchar2(45 char), LAST_UPDATE timestamp, NAME varchar2(100 char), primary key (ID));
 create table KSA.KSSA_ACTIVITY (ID number(19,0) not null, ATTRIBUTE varchar2(200 char), ENTITY_ID varchar2(45 char), IP varchar2(32 char), LOG_DETAIL varchar2(200 char), MAC varchar2(12 char), CREATION_DATE timestamp, ACNT_ID_FK varchar2(45 char), ACTIVITY_TYPE_ID_FK number(19,0), primary key (ID));
 create table KSA.KSSA_ACTIVITY_TYPE (ID number(19,0) not null, CREATOR_ID varchar2(45 char), DESCRIPTION varchar2(2000 char), EDITOR_ID varchar2(45 char), LAST_UPDATE timestamp, NAME varchar2(100 char), primary key (ID));
@@ -34,6 +35,8 @@ create table KSA.KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK varchar2(20 c
 -- Creating constraints
 
 alter table KSA.KSSA_ACNT add constraint FKB8F7925156D383B8 foreign key (LATE_PERIOD_ID_FK) references KSA.KSSA_LATE_PERIOD;
+alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726D2C28B62A foreign key (BANK_TYPE_ID_FK) references KSA.KSSA_BANK_TYPE;
+alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726DACFC7690 foreign key (TAX_TYPE_ID_FK) references KSA.KSSA_TAX_TYPE;
 alter table KSA.KSSA_ACTIVITY add constraint FK7D1E4778D043544A foreign key (ACTIVITY_TYPE_ID_FK) references KSA.KSSA_ACTIVITY_TYPE;
 alter table KSA.KSSA_ACTIVITY add constraint FK7D1E477898518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_ALLOCATION add constraint FKC2912B0998518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
