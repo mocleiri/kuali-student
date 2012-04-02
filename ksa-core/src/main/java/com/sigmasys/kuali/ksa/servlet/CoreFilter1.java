@@ -25,7 +25,7 @@ import java.util.Set;
  * @author ivanovm
  */
 
-public class CoreFilter implements Filter {
+public class CoreFilter1 implements Filter {
 
     public static final String TRUSTED_URLS_PARAM = "trustedUrls";
 
