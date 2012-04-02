@@ -34,7 +34,7 @@ public class CreditType extends TransactionType {
         this.refundRule = refundRule;
     }
 
-    @Column(name = "AUTH_TXT", length = 45)
+    @Column(name = "AUTH_TXT", length = 1000)
     public String getAuthorizationText() {
         return authorizationText;
     }
