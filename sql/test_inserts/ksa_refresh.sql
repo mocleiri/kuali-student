@@ -37,7 +37,7 @@ create table KSA.KSSA_SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char) not null,  SE
 
 -- Creating base tables
 
-create table KSA.KSSA_ACNT (TYPE varchar2(31 char) not null, ID varchar2(45 char) not null, CAN_AUTHENTICATE char(1 char), CREATION_DATE timestamp, CREDIT_LIMIT number(19,2), ENTITY_ID varchar2(45 char), IS_KIM_ACNT number(1,0), LAST_KIM_UPDATE timestamp, LATE_PERIOD_ID_FK number(19,0), primary key (ID));
+create table KSA.KSSA_ACNT (TYPE varchar2(31 char) not null, ID varchar2(45 char) not null, CAN_AUTHENTICATE char(1 char), CREATION_DATE timestamp, CREDIT_LIMIT number(19,2), ENTITY_ID varchar2(45 char), IS_KIM_ACNT char(1 char), LAST_KIM_UPDATE timestamp, LATE1 number(19,2), LATE2 number(19,2), LATE3 number(19,2), DUE number(19,2), LATE_LAST_UPDATE timestamp, OUTSTANDING number(19,2), LATE_PERIOD_ID_FK number(19,0), primary key (ID));
 create table KSA.KSSA_ACNT_STATUS_TYPE (ID number(19,0) not null, CREATOR_ID varchar2(45 char), DESCRIPTION varchar2(2000 char), EDITOR_ID varchar2(45 char), LAST_UPDATE timestamp, NAME varchar2(100 char), primary key (ID));
 create table KSA.KSSA_ACTIVITY (ID number(19,0) not null, ATTRIBUTE varchar2(200 char), ENTITY_ID varchar2(45 char), IP varchar2(32 char), LOG_DETAIL varchar2(200 char), MAC varchar2(12 char), CREATION_DATE timestamp, ACNT_ID_FK varchar2(45 char), ACTIVITY_TYPE_ID_FK number(19,0), primary key (ID));
 create table KSA.KSSA_ACTIVITY_TYPE (ID number(19,0) not null, CREATOR_ID varchar2(45 char), DESCRIPTION varchar2(2000 char), EDITOR_ID varchar2(45 char), LAST_UPDATE timestamp, NAME varchar2(100 char), primary key (ID));
