@@ -152,20 +152,20 @@
     </filter-mapping>
 
 
-    <!-- filter>
+    <filter>
         <filter-name>UserLoginFilter</filter-name>
-        <filter-class>org.kuali.rice.kew.web.DummyLoginFilter</filter-class>
+        <!--filter-class>org.kuali.rice.kew.web.DummyLoginFilter</filter-class>
         <init-param>
             <param-name>showPassword</param-name>
-            <param-value>false</param-value>
-        </init-param>
+            <param-value>true</param-value>
+        </init-param-->
         <filter-class>org.kuali.rice.kew.web.UserLoginFilter</filter-class>
     </filter>
 
-    <filter>
+    <!--filter>
         <filter-name>UserPreferencesFilter</filter-name>
         <filter-class>org.kuali.rice.kew.web.UserPreferencesFilter</filter-class>
-    </filter -->
+    </filter-->
 
 
     <filter-mapping>
@@ -188,30 +188,30 @@
         <servlet-name>krad</servlet-name>
     </filter-mapping>
 
-    <!-- filter-mapping>
+    <filter-mapping>
         <filter-name>UserLoginFilter</filter-name>
         <servlet-name>krad</servlet-name>
     </filter-mapping>
 
-    <filter-mapping>
+    <!--filter-mapping>
         <filter-name>UserPreferencesFilter</filter-name>
         <servlet-name>krad</servlet-name>
-    </filter-mapping -->
+    </filter-mapping-->
 
     <filter-mapping>
         <filter-name>BootstrapFilter</filter-name>
         <servlet-name>action</servlet-name>
     </filter-mapping>
 
-    <!-- filter-mapping>
+    <filter-mapping>
         <filter-name>UserLoginFilter</filter-name>
         <servlet-name>action</servlet-name>
     </filter-mapping>
 
-    <filter-mapping>
+    <!--filter-mapping>
         <filter-name>UserPreferencesFilter</filter-name>
         <servlet-name>action</servlet-name>
-    </filter-mapping -->
+    </filter-mapping-->
 
     <servlet>
         <display-name>LoginServlet</display-name>

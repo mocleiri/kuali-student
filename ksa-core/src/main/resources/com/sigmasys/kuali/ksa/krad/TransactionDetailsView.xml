@@ -26,7 +26,7 @@
     <bean id="TransactionDetails-FormView" parent="Uif-FormView">
         <property name="id" value="TransactionDetails-FormView"/>
         <property name="title" value="Transaction Details View"/>
-        <property name="readOnly" value="true"/>
+        <!--property name="readOnly" value="true"/-->
         <!-- property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Transaction"/ -->
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionDetailsForm"/>
         <property name="items">

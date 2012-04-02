@@ -6,12 +6,13 @@ import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kuali.rice.kim.impl.identity.PersonImpl;
+import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.krad.UserSession;
 import org.kuali.rice.krad.util.KRADConstants;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -85,8 +86,8 @@ public class CoreFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
 
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         // Initializing services if necessary
         synchronized (lock) {
@@ -105,24 +106,22 @@ public class CoreFilter implements Filter {
 
             boolean isSessValid = sessionManager.isSessionValid(httpRequest, httpResponse);
 
+            HttpServletRequest wrappedRequest = null;
+
             if (!isTrustedUrl && !isSessValid) {
                 // TODO: Get the real user name from the HTTP request
-                final String userId = "guest";
+                final String userId = "admin";
                 if (userId != null) {
                     sessionManager.createSession(httpRequest, httpResponse, userId);
                     // Creating KRAD UserSession and put it as an attribute into HTTP session
                     UserSession userSession = new UserSession(userId) {
-                        @Override
+                         @Override
                         protected void initPerson(String principalName) {
-                            // TODO: get rid of that crap :)
-                            PersonImpl person = new PersonImpl();
-                            person.setPrincipalName(userId);
-                            person.setName("Test User");
-                            person.setActive(true);
                             try {
+                                PersonService personService = ContextUtils.getBean("kimAuthenticationManager");
                                 Field field = UserSession.class.getDeclaredField("person");
                                 field.setAccessible(true);
-                                field.set(this, person);
+                                field.set(this, personService.getPerson(userId));
                             } catch (Exception e) {
                                 logger.error(e);
                             }
@@ -143,7 +142,13 @@ public class CoreFilter implements Filter {
                             return userId;
                         }
                     };
-                    httpRequest.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
+                    wrappedRequest = new HttpServletRequestWrapper(httpRequest) {
+                        @Override
+                        public String getRemoteUser() {
+                            return userId;
+                        }
+                    };
+                    wrappedRequest.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
                     logger.info("New HTTP session is created for " + userId);
                 } else {
                     httpResponse.sendError(401, "User can not be authenticated");
@@ -159,7 +164,7 @@ public class CoreFilter implements Filter {
             }
 
             // Chaining
-            chain.doFilter(request, response);
+            chain.doFilter(wrappedRequest != null ? wrappedRequest : request, response);
 
         } catch (Throwable t) {
             logger.error("Error occured while serving HTTP request: " + t.getMessage(), t);

@@ -3,7 +3,7 @@
 -- It needs to be run by the schema owner
 -- Creating sequence table
 
-create table KSA.KSSA_SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char),  SEQ_VALUE number(10,0) ) ;
+create table KSA.KSSA_SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char) not null,  SEQ_VALUE number(10,0) not null, primary key (SEQ_NAME) ) ;
 
 -- Creating base tables
 
