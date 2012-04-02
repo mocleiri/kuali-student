@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Login Filter
+ * Main KSA Filter
  *
  * @author Michael Ivanov
  *         Date: 4/2/12
