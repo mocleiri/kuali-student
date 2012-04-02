@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,6 +10,7 @@ import java.util.Date;
  *
  * @author Michael Ivanov
  */
+@MappedSuperclass
 public abstract class ChargeableAccount extends Account {
 
     /**

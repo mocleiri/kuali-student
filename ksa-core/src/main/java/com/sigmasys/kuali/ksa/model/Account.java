@@ -113,6 +113,7 @@ public abstract class Account implements Identifiable {
         this.lastKimUpdate = lastKimUpdate;
     }
 
+    @org.hibernate.annotations.Type(type="yes_no")
     @Column(name = "IS_KIM_ACNT")
     public Boolean isKimAccount() {
         return isKimAccount;
