@@ -42,7 +42,7 @@ public abstract class Debit extends Transaction {
     }
 
     @org.hibernate.annotations.Type(type="yes_no")
-    @Column(name = "IS_GL_OVERRIDEN")
+    @Column(name = "IS_GL_OVERRIDDEN")
     public Boolean isGlOverriden() {
         return glOverriden;
     }
