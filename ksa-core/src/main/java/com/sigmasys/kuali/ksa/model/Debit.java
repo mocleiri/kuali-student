@@ -32,7 +32,7 @@ public abstract class Debit extends Transaction {
      * @return boolean value
      */
     @org.hibernate.annotations.Type(type="yes_no")
-    @Column(name = "IS_DEFERED")
+    @Column(name = "IS_DEFERRED")
     public Boolean isDeferred() {
         return deferred;
     }
