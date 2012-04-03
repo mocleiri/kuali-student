@@ -39,7 +39,7 @@ public class LazyInitDispatcherServlet extends DispatcherServlet {
         for (String beanName : context.getBeanDefinitionNames()) {
             UrlMapping urlMapping = context.findAnnotationOnBean(beanName, UrlMapping.class);
             if (urlMapping != null) {
-                String url = urlMapping.name();
+                String url = urlMapping.value();
                 if (!url.isEmpty() && !url.endsWith("/")) {
                     url += "/";
                 }

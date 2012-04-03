@@ -30,7 +30,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <!-- Configure KSA-specific implementations of Rice services/beans here -->
     <bean id="coreConfigurer" class="org.kuali.rice.core.impl.config.module.CoreConfigurer">
-        <property name="dataSource" ref="ksaDataSource"/>
+        <property name="dataSource" ref="riceDataSource"/>
         <property name="serverDataSource" ref="riceDataSource"/>
         <property name="nonTransactionalDataSource" ref="riceDataSource"/>
         <property name="transactionManager" ref="atomikosTransactionManager"/>
@@ -38,10 +38,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
+    <!--bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="coreConfigurer"/-->
 
-    <!--bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="ksaConfigurer"/-->
-
-    <!--bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="ksaConfigurer"/ -->
+    <!-- bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="ksbConfigurer"/ -->
 
     <bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="coreConfigurer"/>
 
@@ -54,6 +53,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
             </list>
         </property>
     </bean>
+
+    <bean id="coreServiceConfigurer" class="org.kuali.rice.coreservice.impl.config.CoreServiceConfigurer" depends-on="ksaConfigurer"/>
 
 
 </beans>

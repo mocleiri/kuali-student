@@ -35,14 +35,14 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-2.5.xsd" default-lazy-init="true">
 
-    <bean id="coreServiceOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
+    <bean id="coreServiceOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer"
+          lazy-init="false">
         <property name="jcdAliases">
             <list>
                 <value>riceDataSource</value>
             </list>
         </property>
-        <property name="metadataLocation"
-                  value="classpath:org/kuali/rice/coreservice/config/OJB-repository-core-service.xml"/>
+        <property name="metadataLocation" value="classpath:/META-INF/ojb-repository-core-service.xml"/>
     </bean>
 
     <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer"
@@ -58,7 +58,7 @@
     <bean id="dbPlatform" class="org.kuali.rice.core.framework.persistence.platform.OraclePlatform"/>
 
     <bean id="kimPlatformAwareDao"
-         class="org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb" abstract="true">
+          class="org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb" abstract="true">
         <property name="jcdAlias" value="riceDataSource"/>
         <property name="dbPlatform" ref="dbPlatform"/>
     </bean>
@@ -66,7 +66,8 @@
     <!-- KIM DAO -->
     <bean id="roleDao" class="org.kuali.rice.kim.impl.role.RoleDaoOjb" parent="kimPlatformAwareDao"/>
 
-    <bean id="criteriaLookupDao" class="org.kuali.rice.krad.criteria.CriteriaLookupDaoOjb" parent="kimPlatformAwareDao"/>
+    <bean id="criteriaLookupDao" class="org.kuali.rice.krad.criteria.CriteriaLookupDaoOjb"
+          parent="kimPlatformAwareDao"/>
 
     <bean id="persistenceDao" class="org.kuali.rice.krad.dao.impl.PersistenceDaoOjb" parent="kimPlatformAwareDao"/>
 
@@ -75,7 +76,8 @@
     </bean>
 
     <!-- START JPA CONFIGURATION -->
-    <bean id="kimEntityManagerFactory" class=" org.kuali.rice.krad.app.persistence.jpa.RiceEntityManagerProxyFactoryBean">
+    <bean id="kimEntityManagerFactory"
+          class=" org.kuali.rice.krad.app.persistence.jpa.RiceEntityManagerProxyFactoryBean">
         <constructor-arg value="rice.kim"/>
         <constructor-arg ref="riceDataSource"/>
     </bean>
@@ -128,7 +130,7 @@
 
     <bean id="businessObjectService" class="org.kuali.rice.krad.service.impl.BusinessObjectServiceImpl">
         <property name="businessObjectDao" ref="businessObjectDao"/>
-        <property name="personService" ref="kimPersonService"/>
+        <property name="personService" ref="personService"/>
         <property name="persistenceService" ref="persistenceService"/>
         <property name="dataObjectMetaDataService" ref="dataObjectMetaDataService"/>
         <property name="persistenceStructureService" ref="persistenceStructureService"/>
@@ -165,7 +167,7 @@
 
     <bean id="kimAuthenticationService" class="org.kuali.rice.kim.impl.identity.AuthenticationServiceImpl"/>
 
-    <bean id="kimPersonService" class="org.kuali.rice.kim.impl.identity.PersonServiceImpl">
+    <bean id="personService" class="org.kuali.rice.kim.impl.identity.PersonServiceImpl">
         <property name="personEntityTypeCodes">
             <list>
                 <value>PERSON</value>

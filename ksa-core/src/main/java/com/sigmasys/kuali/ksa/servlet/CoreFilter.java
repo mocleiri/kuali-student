@@ -108,15 +108,19 @@ public class CoreFilter implements Filter {
 
         if (kradSession == null || !sessionManager.isSessionValid(request, response)) {
 
-            IdentityService identityService = ContextUtils.getBean("kimIdentityService", IdentityService.class);
             request.setAttribute("showPasswordField", true);
 
-            final String userId = request.getParameter("__login_user");
-            final String password = request.getParameter("__login_pw");
+            String queryString = request.getQueryString();
+            request.setAttribute("redirectUrl",
+                    request.getRequestURI() + (queryString != null ? "?" + queryString : ""));
+
+            final String userId = request.getParameter("userId");
+            final String password = request.getParameter("password");
 
             if (userId != null) {
 
-                // Very simple password checking. Nothing hashed or encrypted. This is strictly for demonstration purposes only.
+                // Very simple password checking. Nothing hashed or encrypted.
+                IdentityService identityService = ContextUtils.getBean("kimIdentityService", IdentityService.class);
                 final Principal principal =
                         isTrustedUrl(request) ?
                                 identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
@@ -188,7 +192,7 @@ public class CoreFilter implements Filter {
             if (sessionManager != null) {
                 sessionManager.destroySession(request);
             }
-            request.setAttribute("invalidAuth", true);
+            request.setAttribute("invalidLogin", true);
             request.getRequestDispatcher(loginPath).forward(request, response);
         }
     }

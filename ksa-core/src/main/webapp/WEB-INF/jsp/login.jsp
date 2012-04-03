@@ -86,7 +86,7 @@
 
 <div class="build">${ConfigProperties.version} (${ConfigProperties.datasource.ojb.platform})</div>
 
-<form name="loginForm" action="" method="post">
+<form name="loginForm" action="redirect" method="POST">
 
 <div class="body">
         <table id="login" cellspacing="0" cellpadding="0" align="center">
@@ -99,7 +99,7 @@
 	                <label>Username:&nbsp;</label>
 	            </td>
 	            <td class="rightTd" align="left">
-	                <input type="text" name="__login_user" value="" size="20"/>
+	                <input type="text" name="userId" value="" size="20"/>
 	            </td>
             </tr>
             <c:set var="invalidAuthMsg" value="Invalid username" />
@@ -109,21 +109,22 @@
             <td class="leftTd" width="Infinity%" align="right">
                 <label>Password:&nbsp;</label>
             </td>
-              <td class="rightTd" align="left"><input type="password" name="__login_pw" value="" size="20"/></td>
+              <td class="rightTd" align="left">
+                  <input type="password" name="password" value="" size="20"/></td>
             </tr>
             </c:if>
-            <c:if test="${requestScope.invalidAuth}">
+            <c:if test="${requestScope.invalidLogin}">
             <tr>
               <td align="center" colspan="2"><strong>${invalidAuthMsg}</strong></td>
             </tr>
             </c:if>
             <tr>
               <td id="buttonRow" height="30" colspan="2" align="center"><input type="submit" value="Login"/>
-              <!-- input type="image" title="Click to login." value="login" name="imageField" src="${pageContext.request.contextPath}/rice-portal/images/tinybutton-login.gif"/ -->
               </td>
             </tr>
           </tbody>
         </table>
 </div>
+    <input type = "hidden" name = "redirectUrl" value = "${requestScope.redirectUrl}"/></td>
 </form>
 </body>
