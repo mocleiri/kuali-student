@@ -17,11 +17,13 @@ import java.util.Properties;
  */
 public class AtomikosTransactionManagerLookup implements TransactionManagerLookup {
 
+    public static final String ATOMIKOS_TRANSACTION_MANAGER_BEAN_NAME = "atomikosTransactionManager";
+
 
     @Override
     public TransactionManager getTransactionManager(Properties props) throws HibernateException {
         try {
-            return ContextUtils.getBean("atomikosTransactionManager", TransactionManager.class);
+            return ContextUtils.getBean(ATOMIKOS_TRANSACTION_MANAGER_BEAN_NAME, TransactionManager.class);
         } catch (Exception e) {
             throw new HibernateException("Could not obtain Atomikos JTA transaction manager instance", e);
         }
