@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 /**
@@ -9,6 +10,7 @@ import javax.persistence.Transient;
  *
  * @author Paul Heald
  */
+@MappedSuperclass
 public abstract class Debit extends Transaction {
 
 
@@ -30,7 +32,7 @@ public abstract class Debit extends Transaction {
      * @return boolean value
      */
     @org.hibernate.annotations.Type(type="yes_no")
-    @Column(name = "DEFER_STAT")
+    @Column(name = "IS_DEFERED")
     public Boolean isDeferred() {
         return deferred;
     }

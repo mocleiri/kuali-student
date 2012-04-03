@@ -125,6 +125,11 @@ public abstract class Transaction implements Identifiable {
      */
     private Boolean glEntryGenerated;
 
+    /**
+     * Refund rule
+     */
+    private String refundRule;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -145,8 +150,8 @@ public abstract class Transaction implements Identifiable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID"),
-            @JoinColumn(name = "TYPE_SUB_CODE", referencedColumnName = "SUB_CODE")
+            @JoinColumn(name = "TRANSACTION_TYPE_ID_FK", referencedColumnName = "ID"),
+            @JoinColumn(name = "TRANSACTION_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
     })
     public TransactionType getTransactionType() {
         return transactionType;
@@ -239,7 +244,7 @@ public abstract class Transaction implements Identifiable {
         this.internal = internal;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_INTERNAL_TRN")
     public Boolean isInternal() {
         return internal;
@@ -310,7 +315,7 @@ public abstract class Transaction implements Identifiable {
         this.account = account;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "GL_ENTRY_GENERATED")
     public boolean isGlEntryGenerated() {
         return glEntryGenerated;
@@ -318,6 +323,15 @@ public abstract class Transaction implements Identifiable {
 
     public void setGlEntryGenerated(boolean glEntryGenerated) {
         this.glEntryGenerated = glEntryGenerated;
+    }
+
+    @Column(name = "REFUND_RULE", length = 2000)
+    public String getRefundRule() {
+        return refundRule;
+    }
+
+    public void setRefundRule(String refundRule) {
+        this.refundRule = refundRule;
     }
 }
 	
