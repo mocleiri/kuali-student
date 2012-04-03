@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.servlet;
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.IdentityService;
@@ -94,88 +95,102 @@ public class CoreFilter implements Filter {
     private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        final UserSession kradSession = KRADUtils.getUserSessionFromRequest(request);
+        try {
 
-        final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
+            // Expose thread local response to the entire application
+            RequestUtils.setThreadResponse(response);
 
-        // Initializing services if necessary
-        synchronized (lock) {
-            if (!isInitialized) {
-                initTrustedUrls();
-                isInitialized = true;
+            final UserSession kradSession = KRADUtils.getUserSessionFromRequest(request);
+
+            final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
+
+            // Initializing services if necessary
+            synchronized (lock) {
+                if (!isInitialized) {
+                    initTrustedUrls();
+                    isInitialized = true;
+                }
             }
-        }
 
-        if (kradSession == null || !sessionManager.isSessionValid(request, response)) {
+            if (kradSession == null || !sessionManager.isSessionValid(request, response)) {
 
-            request.setAttribute("showPasswordField", true);
+                request.setAttribute("showPasswordField", true);
 
-            String queryString = request.getQueryString();
-            request.setAttribute("redirectUrl",
-                    request.getRequestURI() + (queryString != null ? "?" + queryString : ""));
+                String queryString = request.getQueryString();
+                request.setAttribute("redirectUrl",
+                        request.getRequestURI() + (queryString != null ? "?" + queryString : ""));
 
-            final String userId = request.getParameter("userId");
-            final String password = request.getParameter("password");
+                final String userId = request.getParameter("userId");
+                final String password = request.getParameter("password");
 
-            if (userId != null) {
+                if (userId != null) {
 
-                // Very simple password checking. Nothing hashed or encrypted.
-                IdentityService identityService = ContextUtils.getBean("kimIdentityService", IdentityService.class);
-                final Principal principal =
-                        isTrustedUrl(request) ?
-                                identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
-                                identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
+                    // Very simple password checking. Nothing hashed or encrypted.
+                    IdentityService identityService = ContextUtils.getBean("kimIdentityService", IdentityService.class);
+                    final Principal principal =
+                            isTrustedUrl(request) ?
+                                    identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
+                                    identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
 
-                if (principal != null) {
+                    if (principal != null) {
 
-                    // Creating HTTP session
-                    sessionManager.createSession(request, response, userId);
+                        // Creating HTTP session
+                        sessionManager.createSession(request, response, userId);
 
-                    // wrap the request with the remote user
-                    // UserLoginFilter and WebAuthenticationService will create the session
-                    request = new HttpServletRequestWrapper(request) {
-                        @Override
-                        public String getRemoteUser() {
-                            return userId;
-                        }
-                    };
-
-                    // Creating KRAD UserSession and put it as an attribute into HTTP session
-                    UserSession userSession = new UserSession(userId) {
-                        @Override
-                        protected void initPerson(String principalName) {
-                            try {
-                                final PersonService personService = ContextUtils.getBean(PersonService.class);
-                                Field field = UserSession.class.getDeclaredField("person");
-                                field.setAccessible(true);
-                                field.set(this, personService.getPerson(userId));
-                            } catch (Exception e) {
-                                logger.error(e);
+                        // wrap the request with the remote user
+                        // UserLoginFilter and WebAuthenticationService will create the session
+                        request = new HttpServletRequestWrapper(request) {
+                            @Override
+                            public String getRemoteUser() {
+                                return userId;
                             }
-                        }
-                    };
+                        };
 
-                    request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
+                        // Creating KRAD UserSession and put it as an attribute into HTTP session
+                        UserSession userSession = new UserSession(userId) {
+                            @Override
+                            protected void initPerson(String principalName) {
+                                try {
+                                    final PersonService personService = ContextUtils.getBean(PersonService.class);
+                                    Field field = UserSession.class.getDeclaredField("person");
+                                    field.setAccessible(true);
+                                    field.set(this, personService.getPerson(userId));
+                                } catch (Exception e) {
+                                    logger.error(e);
+                                }
+                            }
+                        };
+
+                        request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
+
+                    } else {
+                        handleInvalidLogin(request, response);
+                    }
 
                 } else {
-                    handleInvalidLogin(request, response);
+                    // No session has been established and this is not a login form submission, so forward to login page
+                    request.getRequestDispatcher(loginPath).forward(request, response);
+                    return;
                 }
-
             } else {
-                // No session has been established and this is not a login form submission, so forward to login page
-                request.getRequestDispatcher(loginPath).forward(request, response);
-                return;
+                request = new HttpServletRequestWrapper(request) {
+                    @Override
+                    public String getRemoteUser() {
+                        return kradSession.getPrincipalName();
+                    }
+                };
             }
-        } else {
-            request = new HttpServletRequestWrapper(request) {
-                @Override
-                public String getRemoteUser() {
-                    return kradSession.getPrincipalName();
-                }
-            };
-        }
 
-        chain.doFilter(request, response);
+            logger.info("USER-REQUEST-INFO: user = '" + sessionManager.getUserId(request) +
+                    "' requested URI = '" + request.getRequestURI() + "'");
+
+            chain.doFilter(request, response);
+
+        } catch (Throwable t) {
+            logger.error("Error occured while serving HTTP request: " + t.getMessage(), t);
+        } finally {
+            RequestUtils.setThreadResponse(null);
+        }
     }
 
     /**
