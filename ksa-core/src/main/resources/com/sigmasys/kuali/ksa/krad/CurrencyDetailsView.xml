@@ -29,7 +29,7 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.CurrencyDetailsForm"/>
         <property name="items">
             <list>
-                <bean parent="Uif-Page" p:id="page1" p:title="Currency Details)">
+                <bean parent="Uif-Page" p:id="page1" p:title="Currency Details (ISO = @{currency.iso})">
                     <property name="items">
                         <list>
                             <bean parent="Uif-InputField" p:propertyName="currency.name" p:label="Name"/>

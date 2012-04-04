@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="CurrencyListView" parent="Uif-FormView" p:footer.render="false">
+        <property name="id" value="CurrencyListView"/>
+        <property name="title" value="Currency"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.CurrencyListForm"/>
+        <property name="readOnly" value="true"/>
+        <property name="items">
+            <bean parent="Uif-Page" p:id="page1" p:title="Currency List">
+                <property name="items">
+                    <list>
+                        <ref bean="CurrencyList"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+
+    <bean id="CurrencyList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="7">
+        <property name="title" value="Available Currencies"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="propertyName" value="currencies"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="ISO" p:propertyName="iso" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Creator" p:propertyName="creatorId" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Editor" p:propertyName="editorId" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Last update" p:propertyName="lastUpdate" p:required="true"/>
+                <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
+                    p:hrefText="currencyDetails?viewId=CurrencyDetailsView&amp;methodToCall=get&amp;iso=@{currencies[0].iso}"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
+
+
