@@ -36,7 +36,7 @@
                 <bean parent="Uif-InputField" p:label="Editor" p:propertyName="editorId" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Last update" p:propertyName="lastUpdate" p:required="true"/>
                 <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
-                    p:hrefText="currencyDetails?viewId=CurrencyDetailsView&amp;methodToCall=get&amp;iso=@{currencies[0].iso}"/>
+                    p:hrefText="currencyDetails?viewId=CurrencyDetailsView&amp;methodToCall=get&amp;iso=@{#line.iso}"/>
             </list>
         </property>
     </bean>
