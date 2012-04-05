@@ -1,22 +1,13 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.Deferment;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.Pair;
+import com.sigmasys.kuali.ksa.model.SortOrder;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.service.UserSessionManager;
-import com.sigmasys.kuali.ksa.util.RequestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,15 +18,8 @@ import java.util.List;
  */
 @Service("currencyService")
 @Transactional(readOnly = true)
-public class CurrencyServiceImpl implements CurrencyService {
-
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
-    protected EntityManager em;
-
-    @Autowired
-    private UserSessionManager userSessionManager;
-
-
+@SuppressWarnings("unchecked")
+public class CurrencyServiceImpl extends GenericPersistenceService implements CurrencyService {
 
     /**
      * Returns Currency by ID
@@ -45,7 +29,7 @@ public class CurrencyServiceImpl implements CurrencyService {
      */
     @Override
     public Currency getCurrency(Long id) {
-        return em.find(Currency.class, id);
+        return getEntity(id, Currency.class);
     }
 
     /**
@@ -72,8 +56,7 @@ public class CurrencyServiceImpl implements CurrencyService {
      */
     @Override
     public List<Currency> getCurrencies() {
-        Query query = em.createQuery("select c from Currency c order by c.iso desc");
-        return query.getResultList();
+        return getEntities(Currency.class, new Pair<String, SortOrder>("iso", SortOrder.DESC));
     }
 
     /**
@@ -86,16 +69,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     @Transactional(readOnly = false)
     public Long persistCurrency(Currency currency) {
-        String userId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
-        currency.setLastUpdate(new Date());
-        if (currency.getId() == null) {
-            currency.setCreatorId(userId);
-            em.persist(currency);
-        } else {
-            currency.setEditorId(userId);
-            em.merge(currency);
-        }
-        return currency.getId();
+        return persistEntity(currency);
     }
 
 }
