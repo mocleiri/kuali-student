@@ -40,6 +40,11 @@ public class Allocation implements Identifiable {
      */
     private BigDecimal amount;
 
+    /**
+     * Is locked
+     */
+    private Boolean isLocked;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -95,6 +100,16 @@ public class Allocation implements Identifiable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    @org.hibernate.annotations.Type(type = "yes_no")
+    @Column(name = "IS_LOCKED")
+    public Boolean getLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(Boolean locked) {
+        isLocked = locked;
     }
 }
 	
