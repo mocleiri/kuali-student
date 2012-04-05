@@ -117,8 +117,9 @@ public class CoreFilter implements Filter {
                 request.setAttribute("showPasswordField", true);
 
                 String queryString = request.getQueryString();
-                request.setAttribute("redirectUrl",
-                        request.getRequestURI() + (queryString != null ? "?" + queryString : ""));
+
+                final String redirectUrl = request.getRequestURI() + (queryString != null ? "?" + queryString : "");
+                request.setAttribute("redirectUrl", redirectUrl);
 
                 final String userId = request.getParameter("userId");
                 final String password = request.getParameter("password");
@@ -163,12 +164,20 @@ public class CoreFilter implements Filter {
 
                         request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
 
+                        // If the request has redirectUrl parameter ->
+                        // redirect to the location specified by redirectUrl
+                        String targetUrl = request.getParameter("redirectUrl");
+                        if (targetUrl != null && !targetUrl.trim().isEmpty()) {
+                            response.sendRedirect(targetUrl);
+                        }
+
                     } else {
                         handleInvalidLogin(request, response);
                     }
 
                 } else {
-                    // No session has been established and this is not a login form submission, so forward to login page
+                    // No session has been established and this is not a login form submission,
+                    // so forward to login page
                     request.getRequestDispatcher(loginPath).forward(request, response);
                     return;
                 }

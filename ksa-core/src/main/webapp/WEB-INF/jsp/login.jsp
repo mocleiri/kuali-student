@@ -18,18 +18,19 @@
 <%@ include file="/WEB-INF/jsp/tldHeader.jsp" %>
 
 <html>
-  <head>
+<head>
     <title>Login</title>
-	<c:forEach items="${fn:split(ConfigProperties.portal.css.files, ',')}" var="cssFile">
-		<c:if test="${fn:length(fn:trim(cssFile)) > 0}">
-	        <link href="${pageContext.request.contextPath}/${fn:trim(cssFile)}" rel="stylesheet" type="text/css" />
-		</c:if>
-	</c:forEach>
-	<c:forEach items="${fn:split(ConfigProperties.portal.javascript.files, ',')}" var="javascriptFile">
-		<c:if test="${fn:length(fn:trim(javascriptFile)) > 0}">
-	        <script language="JavaScript" type="text/javascript" src="${ConfigProperties.application.url}/${fn:trim(javascriptFile)}"></script>
-		</c:if>
-	</c:forEach>
+    <c:forEach items="${fn:split(ConfigProperties.portal.css.files, ',')}" var="cssFile">
+        <c:if test="${fn:length(fn:trim(cssFile)) > 0}">
+            <link href="${pageContext.request.contextPath}/${fn:trim(cssFile)}" rel="stylesheet" type="text/css"/>
+        </c:if>
+    </c:forEach>
+    <c:forEach items="${fn:split(ConfigProperties.portal.javascript.files, ',')}" var="javascriptFile">
+        <c:if test="${fn:length(fn:trim(javascriptFile)) > 0}">
+            <script language="JavaScript" type="text/javascript"
+                    src="${ConfigProperties.application.url}/${fn:trim(javascriptFile)}"></script>
+        </c:if>
+    </c:forEach>
 
     <style type="text/css">
         div.body {
@@ -80,51 +81,52 @@
         }
 
     </style>
-  </head>
+</head>
 
 <body OnLoad="document.loginForm.__login_user.focus();">
 
 <div class="build">${ConfigProperties.version} (${ConfigProperties.datasource.ojb.platform})</div>
 
-<form name="loginForm" action="redirect" method="POST">
+<!-- The redirect is performed by CoreFilter upon successful logon so the form action is empty -->
+<form name="loginForm" action="" method="POST">
 
-<div class="body">
+    <div class="body">
         <table id="login" cellspacing="0" cellpadding="0" align="center">
-          <tbody>
+            <tbody>
             <tr>
-              <th colspan="2">Login</th>
+                <th colspan="2">Login</th>
             </tr>
             <tr>
-	            <td class="leftTd" align="right" width="Infinity%">
-	                <label>Username:&nbsp;</label>
-	            </td>
-	            <td class="rightTd" align="left">
-	                <input type="text" name="userId" value="" size="20"/>
-	            </td>
+                <td class="leftTd" align="right" width="Infinity%">
+                    <label>Username:&nbsp;</label>
+                </td>
+                <td class="rightTd" align="left">
+                    <input type="text" name="userId" value="" size="20"/>
+                </td>
             </tr>
-            <c:set var="invalidAuthMsg" value="Invalid username" />
+            <c:set var="invalidAuthMsg" value="Invalid username"/>
             <c:if test="${requestScope.showPasswordField}">
-            <c:set var="invalidAuthMsg" value="Invalid username or password" />
-            <tr>
-            <td class="leftTd" width="Infinity%" align="right">
-                <label>Password:&nbsp;</label>
-            </td>
-              <td class="rightTd" align="left">
-                  <input type="password" name="password" value="" size="20"/></td>
-            </tr>
+                <c:set var="invalidAuthMsg" value="Invalid username or password"/>
+                <tr>
+                    <td class="leftTd" width="Infinity%" align="right">
+                        <label>Password:&nbsp;</label>
+                    </td>
+                    <td class="rightTd" align="left">
+                        <input type="password" name="password" value="" size="20"/></td>
+                </tr>
             </c:if>
             <c:if test="${requestScope.invalidLogin}">
-            <tr>
-              <td align="center" colspan="2"><strong>${invalidAuthMsg}</strong></td>
-            </tr>
+                <tr>
+                    <td align="center" colspan="2"><strong>${invalidAuthMsg}</strong></td>
+                </tr>
             </c:if>
             <tr>
-              <td id="buttonRow" height="30" colspan="2" align="center"><input type="submit" value="Login"/>
-              </td>
+                <td id="buttonRow" height="30" colspan="2" align="center"><input type="submit" value="Login"/>
+                </td>
             </tr>
-          </tbody>
+            </tbody>
         </table>
-</div>
-    <input type = "hidden" name = "redirectUrl" value = "${requestScope.redirectUrl}"/></td>
+    </div>
+    <input type="hidden" name="redirectUrl" value="${requestScope.redirectUrl}"/></td>
 </form>
 </body>
