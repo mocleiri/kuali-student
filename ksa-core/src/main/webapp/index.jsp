@@ -19,15 +19,16 @@
                     <th colspan="6">Persona</th>
                 </tr>
                 <tr>
-                    <td class="leftTd" align="right"><a href="login.jsp?persona=bursar"> <img src="images/persona-bursar.png" alt="persona: bursar" width="140" height="140"
-                                                                                               border="0"></a></td>
+                    <td class="leftTd" align="right"><a href="login.jsp?persona=bursar">
+                        <img src="images/persona-bursar.png" alt="persona: bursar" width="140" height="140" border="0"></a></td>
                     <td align="left" nowrap class="rightTd" ><p><strong>Ida Bozwumon</strong><br>
                         <span >Bursar</span></p>
                         <hr/>
-                        <p >&bull; <a href="login.jsp?persona=bursar">Select for UX
+                        <p >&bull; <a href="http://localhost:8080/ksa/uif/currencyDetails?methodToCall=get&viewId=CurrencyDetailsView&iso=gbp">Select for UX
                             test</a><br>
                             &bull; <a href="media/persona-bursar.pdf">View detailed persona</a></p></td>
-                    <td class="leftTd" align="right"><a href="login.jsp?persona=student"> <img src="images/persona-student.png" alt="persona: student" width="140" height="140"
+                    <td class="leftTd" align="right"><a href="">
+                        <img src="images/persona-student.png" alt="persona: student" width="140" height="140"
                                                                                                 border="0"></a></td>
                     <td align="left" nowrap class="rightTd" ><p><strong>Wanda Lyrn</strong><br>
                         <span >Student</span></p>
@@ -66,7 +67,7 @@
                     <td align="left" nowrap class="rightTd" ><p><strong>Hal Kanni-Helfew</strong><br>
                         <span >Customer Service Representative</span></p>
                         <hr/>
-                        <p >&bull; <a href="login.jsp?persona=student">Select for UX
+                        <p >&bull; <a href="http://localhost:8080/ksa/uif/ovrVwAlertsTrans?methodToCall=get&viewId=StudentTransactionOverview">Select for UX
                             test</a><br>
                             &bull; <a href="media/persona-customer_service_representative.pdf">View detailed persona</a></p></td>
                 </tr>
@@ -76,7 +77,7 @@
                     <td align="left" nowrap class="rightTd" ><strong>Missy Munni</strong><br>
                         <span >Cashier</span>
                         <hr/>
-                        <p >&bull; <a href="login.jsp?persona=cashier">Select for UX
+                        <p >&bull; <a href="http://localhost:8080/ksa/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">Select for UX
                             test</a><br>
                             &bull; <a href="media/persona-cashier.pdf">View detailed persona</a></p></td>
                     <td class="leftTd" align="right"><a href="login.jsp?persona=supervising_cashier"> <img src="images/persona-supervising_cashier.png" alt="persona: supervising cashier" width="140" height="140"
