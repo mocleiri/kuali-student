@@ -1,9 +1,8 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm;
-
+import com.sigmasys.kuali.ksa.krad.form.OvrVwAlertsTransForm;
 import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.temp.AccountTrans;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.stereotype.Controller;
@@ -16,31 +15,25 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Date: 3/27/12
- * Time: 10:32 AM
- */
-
 @Controller
-@RequestMapping(value = "/alertsTransaction")
-public class AlertsTransactionController extends UifControllerBase {
+@RequestMapping(value = "/ovrVwAlertsTrans")
+public class OvrVwAlertsTransController extends UifControllerBase {
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
-   protected AlertsTransactionForm createInitialForm(HttpServletRequest request) {
-      AlertsTransactionForm form = new AlertsTransactionForm();
+   protected OvrVwAlertsTransForm createInitialForm(HttpServletRequest request) {
+      OvrVwAlertsTransForm form = new OvrVwAlertsTransForm();
       form.setTransaction(createTransaction(false));
       return form;
    }
 
    /**
-    * Submit
+    *
     * @param form
     * @param result
     * @param request
@@ -48,14 +41,14 @@ public class AlertsTransactionController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=submit")
-   public ModelAndView submit(@ModelAttribute ("KualiForm") AlertsTransactionForm form, BindingResult result,
+   public ModelAndView submit(@ModelAttribute ("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
       return getUIFModelAndView(form);
    }
 
    /**
-    * Save
+    *
     * @param form
     * @param result
     * @param request
@@ -63,7 +56,7 @@ public class AlertsTransactionController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   public ModelAndView save(@ModelAttribute("KualiForm") AlertsTransactionForm form, BindingResult result,
+   public ModelAndView save(@ModelAttribute("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
       List<AccountTrans> accntTransLst = form.getAccntTransLst();
@@ -89,7 +82,7 @@ public class AlertsTransactionController extends UifControllerBase {
    }
 
    /**
-    * Cancel
+    *
     * @param form
     * @param result
     * @param request
@@ -97,14 +90,14 @@ public class AlertsTransactionController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") AlertsTransactionForm form, BindingResult result,
+   public ModelAndView cancel(@ModelAttribute ("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do cancel stuff...
       return getUIFModelAndView(form);
    }
 
    /**
-    * Refresh
+    *
     * @param form
     * @param result
     * @param request
@@ -112,22 +105,14 @@ public class AlertsTransactionController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute ("KualiForm") AlertsTransactionForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
+   public ModelAndView refresh(@ModelAttribute ("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);
    }
 
-   /**
-    * Get
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") AlertsTransactionForm form, BindingResult result,
+   public ModelAndView get(@ModelAttribute("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
       List<AccountTrans> accntTransLst = form.getAccntTransLst();
@@ -170,5 +155,4 @@ public class AlertsTransactionController extends UifControllerBase {
 
       return alertsTransaction;
    }
-
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean parent="Uif-FormView" id="StudentTransactionOverview">
+        <property name="title" value="Student Accounts"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.OvrVwAlertsTransForm"/>
+        <property name="theme">
+            <bean parent="Uif-KradTheme"/>
+        </property>
+        <!--<property name="controllerRequestMapping" value="ovrVwAlertsTrans" />-->
+        <property name="readOnly" value="true"/>
+        <property name="entryPageId" value="SummaryPage"/>
+        <property name="navigation">
+            <ref bean="StudentTransactionOverview-Menu"/>
+        </property>
+        <property name="items">
+            <list>
+
+                <bean parent="Uif-Page" p:id="SummaryPage" p:title="Overview">
+                    <property name="items">
+                        <list>
+                            <!--<ref bean="UifLayoutView-BoxSection1"/>
+                            <ref bean="UifLayoutView-BoxSection2"/>
+                            <ref bean="UifLayoutView-BoxLayoutFluidContainers"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-Page" p:id="AlertsPage" p:title="Alerts">
+                    <property name="items">
+                        <list>
+                            <!--<ref bean="UifLayoutView-BoxHorizontalNestedVertical"/>
+                            <ref bean="UifLayoutView-BoxVerticalNestedHorizontal"/>
+                            <ref bean="UifLayoutView-BoxNestedControls"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-Page" p:id="HistoryPage" p:title="Transactions">
+                    <property name="items">
+                        <list>
+                            <!--<ref bean="UifLayoutView-BoxHorizontalNestedVertical"/>
+                            <ref bean="UifLayoutView-BoxVerticalNestedHorizontal"/>
+                            <ref bean="UifLayoutView-BoxNestedControls"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
+
+    <!--
+        Theme
+    -->
+
+<!--    <bean id="StdntTransOvrVwSkin" parent="StudentTransactionOverview">
+        <property name="theme">
+            <bean parent="Uif-ClassicKnsTheme"/>
+        </property>
+    </bean>-->
+    <!--
+       Student Account navigation menu by tabs
+    -->
+
+    <bean parent="Uif-TabNavigationGroup" id="StudentTransactionOverview-Menu">
+        <property name="items">
+            <list>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SummaryPage" p:actionLabel="Summary"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsPage" p:actionLabel="Alerts"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HistoryPage" p:actionLabel="History"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="KSALayoutNav" parent="Uif-MenuNavigationGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-HeaderField-Two" p:headerText="Student Accounts"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountSummaryPage"
+                      p:actionLabel="Summary Overview"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransactionsPage"
+                      p:actionLabel="Alerts / Recent Transactions"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountTransactionPage"
+                      p:actionLabel="Transaction Detail"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--
+       Student Account Summary
+    -->
+
+
+    <!--<bean parent=""/>-->
+    <!--
+       Student Account Alerts
+    -->
+
+    <!--<bean parent=""/>-->
+    <!--
+       Student Account History
+    -->
+
+    <!--<bean parent=""/>-->
+
+</beans>

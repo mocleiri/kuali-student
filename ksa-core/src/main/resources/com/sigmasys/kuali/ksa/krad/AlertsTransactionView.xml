@@ -2,91 +2,135 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:osgi="http://www.springframework.org/schema/osgi"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/osgi
-       http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="AlertsTransactionView" parent="Uif-FormView">
         <property name="id" value="AlertsTransactionView"/>
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
+        <property name="header.render" value="true"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm"/>
-        <property name="title" value="Alerts Recent Transactions"/>
-        <property name="readOnly" value="true"/>
-        <property name="entryPageId" value="AlertsRecentTransLayoutSectionPage"/>
-        <property name="navigation" ref="AlertsRecentTransStdLayoutNav"/>
+        <!--<property name="controllerRequestMapping" value="alertsTransaction" />-->
+        <property name="title" value="Student Accounts"/>
+        <!--<property name="readOnly" value="true"/>-->
+        <property name="entryPageId" value="AccountSummaryPage"/>
+        <property name="navigation" ref="KSALayoutNav"/>
         <property name="items">
             <list>
                 <!--<bean parent="Uif-Link" p:linkLabel="Transaction Detail"
                       <p:hrefText="uif/transactionDetails?methodToCall=get&viewId=TransactionDetails-FormView"/>-->
-                <bean id="AlertsRecentTransLayoutSectionPage" parent="Uif-Page" p:title="Alerts Recent Transactions">
+                <bean id="AccountSummaryPage" parent="Uif-Page" p:title="Account Summary">
+                    <property name="items">
+                        <list>
+                            <ref bean="Account_Summary" />
+                        </list>
+                    </property>
+                </bean>
+                <bean id="AlertsRecentTransactionsPage" parent="Uif-Page" p:title="Alerts Recent Transactions">
                     <property name="header.group">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
                                     <bean parent="Uif-ActionLink"
-                                          p:clientSideJs="alert('You clicked the link');" p:actionLabel="Method Link1"/>
+                                          p:methodToCall="refresh" p:actionLabel="Refresh"/>
                                     <bean parent="Uif-ActionLink"
-                                          p:clientSideJs="alert('You clicked the link');" p:actionLabel="Method Link 2"/>
+                                          p:methodToCall="refresh" p:actionLabel="Save and Continue"/>
                                 </list>
                             </property>
                         </bean>
                     </property>
                     <property name="items">
                         <list>
-                            <ref bean="First-Glance"/>
+                            <ref bean="First_Glance"/>
                         </list>
                     </property>
                 </bean>
-                <!--                <bean id="Demo-StandardLayout-CollectionSectionsPage" parent="Uif-Page" p:title="Page Title">
+                <bean id="AccountTransactionPage" parent="Uif-Page" p:title="Transaction Details">
                     <property name="items">
                         <list>
-                            <ref bean="Demo-StandardLayout-CollectionSection1"/>
-                            <ref bean="Demo-StandardLayout-CollectionSection2"/>
-                            <ref bean="Demo-StandardLayout-Section4"/>
+                            <ref bean="Account_Transaction" />
                         </list>
                     </property>
-                </bean>-->
+                </bean>
             </list>
         </property>
     </bean>
 
-<!--    <bean id="AlertsRecentTransLayout-KSA" parent="AlertsTransactionView">
+<!--    <bean id="AlertsRecentTransLayout_KSA" parent="AlertsTransactionView">
         <property name="theme">
             <bean parent="Uif-ClassicKnsTheme"/>
         </property>
     </bean>-->
 
-    <bean id="AlertsRecentTransStdLayoutNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSALayoutNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderField-Two" p:headerText="Student Accounts"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransLayoutSectionPage"
-                      p:actionLabel="Alerts / Recent Transactions"/>
-                <!--                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Demo-StandardLayout-CollectionSectionsPage"
-               p:actionLabel="Collection Sections"/>-->
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountSummaryPage"
+                    p:actionLabel="Summary Overview"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransactionsPage"
+                    p:actionLabel="Alerts / Recent Transactions"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountTransactionPage"
+                      p:actionLabel="Transaction Detail"/>
             </list>
         </property>
     </bean>
 
 
     <!-- a column section of boxes that references a horizontal sub section -->
-    <bean id="First-Glance" parent="Uif-VerticalBoxSection">
+    <bean id="Account_Summary" parent="Uif-VerticalBoxSection">
+        <property name="title" value="Overview"/>
+        <property name="instructionalText" value="Account Summary"/>
+        <property name="items">
+            <list>
+                <ref bean="Overview_Section"/>
+                <!--<ref bean="Recent_Transaction_Section"/>-->
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="First_Glance" parent="Uif-VerticalBoxSection">
         <property name="title" value="First Glance"/>
         <property name="instructionalText" value="Key information"/>
         <property name="items">
             <list>
-                <ref bean="First-Glance-Section"/>
-                <ref bean="Recent-Transaction-Section"/>
+                <ref bean="First_Glance_Section"/>
+                <ref bean="Recent_Transaction_Section"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- a row of boxes fields are provided from the corresponding form class -->
+    <bean id="Overview_Section" parent="Uif-HorizontalBoxSubSection">
+        <property name="title" value="Summary"/>
+        <property name="instructionalText" value="This is an overview highlighting key account information"/>
+        <property name="readOnly" value="true"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="totalAmnt" p:label="Balance">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="transaction.effectiveDate" p:label="Effective Date">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="transaction.statementText" p:label="Statement">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
 
     <!-- a row of boxes fields are provided from the corresponding form class -->
-    <bean id="First-Glance-Section" parent="Uif-HorizontalBoxSubSection">
+    <bean id="First_Glance_Section" parent="Uif-HorizontalBoxSubSection">
         <property name="title" value="First Glance"/>
         <property name="instructionalText" value="Key Information"/>
         <property name="readOnly" value="true"/>
@@ -111,7 +155,7 @@
         </property>
     </bean>
 
-<!--    <bean id="Recent-Transaction-Section" parent="Uif-GridSubSection">
+<!--    <bean id="Recent_Transaction_Section" parent="Uif-GridSubSection">
         <property name="title" value="Recent Transactions"/>
         <property name="instructionalText" value="A list of the most recent transactions"/>
         <property name="items">
@@ -126,7 +170,7 @@
     </bean>-->
 
 
-    <bean id="Recent-Transaction-Section" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4">
+    <bean id="Recent_Transaction_Section" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4">
         <property name="title" value="Recent Transactions"/>
         <property name="instructionalText"
                   value="Recent Transactions"/>
@@ -147,6 +191,22 @@
                 </bean>
                 <bean parent="Uif-InputField" p:label="Category" p:propertyName="externalID" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="Account_Transaction" parent="Uif-VerticalBoxSection">
+        <property name="title" value="Transaction Details"/>
+        <property name="instructionalText" value="This is a single transaction"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="transaction.id" p:label="Transaction ID"/>
+                <bean parent="Uif-InputField" p:propertyName="transaction.externalId" p:label="External ID"/>
+                <bean parent="Uif-InputField" p:propertyName="transaction.effectiveDate" p:label="Effective Date"/>
+                <bean parent="Uif-InputField" p:propertyName="formattedAmount" p:label="Amount"/>
+                <bean parent="Uif-InputField" p:propertyName="transaction.responsibleEntity"
+                      p:label="Responsible Entity"/>
+                <bean parent="Uif-InputField" p:propertyName="transaction.statementText" p:label="Statement"/>
             </list>
         </property>
     </bean>
