@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(value = {
         DatabaseUtilsTest.class,
         TransactionServiceTest.class,
+        CurrencyServiceTest.class,
         KimServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 

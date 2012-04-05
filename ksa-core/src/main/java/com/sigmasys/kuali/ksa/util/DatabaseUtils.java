@@ -35,8 +35,10 @@ public class DatabaseUtils {
     }
 
     /**
-     * Create the SQL script to create all tables.
+     * Creates the SQL script to create all tables.
      *
+     * @param em JPA Entity Manager
+     * @param packageNames array of package names where to look for annotated entities
      * @return A {@link String} representing the SQL script.
      */
     public static String generateCreateTablesSql(EntityManager em, String... packageNames) {
@@ -46,8 +48,10 @@ public class DatabaseUtils {
     }
 
     /**
-     * Create the SQL script to drop all tables.
+     * Creates the SQL script to drop all tables.
      *
+     * @param em JPA Entity Manager
+     * @param packageNames array of package names where to look for annotated entities
      * @return A {@link String} representing the SQL script.
      */
     public static String generateDropTablesSql(EntityManager em, String... packageNames) {
