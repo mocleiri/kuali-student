@@ -98,6 +98,8 @@ public class GenericPersistenceService {
         // Persisting the JPA entity with Entity Manager
         if (entity.getId() == null) {
             em.persist(entity);
+        } else {
+            em.merge(entity);
         }
 
         em.flush();
