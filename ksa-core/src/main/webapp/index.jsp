@@ -24,7 +24,7 @@
                     <td align="left" nowrap class="rightTd" ><p><strong>Ida Bozwumon</strong><br>
                         <span >Bursar</span></p>
                         <hr/>
-                        <p >&bull; <a href="http://localhost:8080/ksa/uif/currencyDetails?methodToCall=get&viewId=CurrencyDetailsView&iso=gbp">Select for UX
+                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/currencyList?methodToCall=get&viewId=CurrencyListView">Select for UX
                             test</a><br>
                             &bull; <a href="media/persona-bursar.pdf">View detailed persona</a></p></td>
                     <td class="leftTd" align="right"><a href="">
