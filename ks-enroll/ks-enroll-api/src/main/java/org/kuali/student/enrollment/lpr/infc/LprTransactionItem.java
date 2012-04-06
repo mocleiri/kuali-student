@@ -12,7 +12,7 @@ import org.kuali.student.r2.common.infc.IdEntity;
  * @author Kuali Student Team (sambit)
  */
 
-public interface LPRTransactionItemTemp extends IdEntity {
+public interface LprTransactionItem extends IdEntity {
 
     /**
      * The possible types of the LPR transaction item e.g. ADD, UPDATE, DROP,
