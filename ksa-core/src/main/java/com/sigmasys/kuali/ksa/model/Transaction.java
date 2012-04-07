@@ -95,7 +95,7 @@ public abstract class Transaction implements Identifiable {
     /**
      * This value is set to a value (up to the maximum of localAmount) and is the value of the transaction that has been allocated, and may not be reallocated by the payment application routine. Most commonly, the entire transaction will be locked, by setting the lockedAllocationAmount to the localValue.
      * Schools will also likely lock their allocations of transactions before the current period of time (for example, if an allocation was made with a payment in a pervious year, it will not
-     * be allowed to be deallocated by the system.
+     * be allowed to be de-allocated by the system.
      */
     protected BigDecimal lockedAllocatedAmount;
 

@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.sigmasys.kuali.ksa.model.Deferment;
 import com.sigmasys.kuali.ksa.model.Transaction;
@@ -16,19 +17,43 @@ public interface TransactionService {
 
 
     /**
-     * Creates a new transaction and persists it the data store
+     * Returns Transaction by ID
      *
+     * @param id Transaction ID
      * @return Transaction instance
      */
-    Transaction createTransaction();
+    Transaction getTransaction(Long id);
 
     /**
-     * Removes the transaction object from the persistence store by the given
-     * transaction ID
+     * Returns all transactions sorted by ID
      *
-     * @param transactionId transaction ID
+     * @return List of transactions
      */
-    void removeTransaction(Long transactionId);
+    List<Transaction> getTransactions();
+
+    /**
+     * Returns all transactions sorted by ID
+     *
+     * @return List of transactions
+     */
+    List<Transaction> getTransactions(String userId);
+
+    /**
+     * Persists the transaction in the database.
+     * Creates a new entity when ID is null and updates the existing one otherwise.
+     *
+     * @param transaction Transaction instance
+     * @return Transaction ID
+     */
+    Long persistTransaction(Transaction transaction);
+
+    /**
+     * Removes the transaction from the database.
+     *
+     * @param id Transaction ID
+     * @return true if the Transaction entity has been deleted
+     */
+    boolean deleteTransaction(Long id);
 
     /**
      * This will allocate the value of amount on the transaction. A check will
@@ -39,7 +64,6 @@ public interface TransactionService {
      *
      * @param transactionId transaction ID
      * @param amount        amount of money to be allocated TODO -
-     * @throws MaxAmountExceededException
      */
     void allocateAmount(Long transactionId, BigDecimal amount);
 
@@ -51,7 +75,6 @@ public interface TransactionService {
      *
      * @param transactionId transaction ID
      * @param amount        amount of money to be allocated TODO -
-     * @throws MaxAmountExceededException
      */
     void allocateLockedAmount(Long transactionId, BigDecimal amount);
 

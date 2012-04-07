@@ -1,15 +1,15 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.Deferment;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Transaction service JPA implementation.
@@ -19,33 +19,67 @@ import java.math.BigDecimal;
  */
 @Service("transactionService")
 @Transactional(readOnly = true)
-public class TransactionServiceImpl implements TransactionService {
+@SuppressWarnings("unchecked")
+public class TransactionServiceImpl extends GenericPersistenceService implements TransactionService {
 
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
-    protected EntityManager em;
 
     /**
-     * Creates a new transaction and persists it the data store
+     * Returns Transaction by ID
      *
+     * @param id Transaction ID
      * @return Transaction instance
      */
     @Override
-    @Transactional(readOnly = false)
-    public Transaction createTransaction() {
-        // TODO
-        return null;
+    public Transaction getTransaction(Long id) {
+        return getEntity(id, Transaction.class);
+    }
+
+
+    /**
+     * Returns all transactions sorted by ID
+     *
+     * @return List of transactions
+     */
+    @Override
+    public List<Transaction> getTransactions() {
+        return getEntities(Transaction.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
     }
 
     /**
-     * Removes the transaction object from the persistence store by the given
-     * transaction ID
+     * Returns all transactions sorted by ID
      *
-     * @param transactionId transaction ID
+     * @return List of transactions
+     */
+    @Override
+    public List<Transaction> getTransactions(String userId) {
+        Query query = em.createQuery("select t from Transaction t where t.account.id = :userId order by t.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    /**
+     * Persists the transaction in the database.
+     * Creates a new entity when ID is null and updates the existing one otherwise.
+     *
+     * @param transaction Transaction instance
+     * @return Transaction ID
      */
     @Override
     @Transactional(readOnly = false)
-    public void removeTransaction(Long transactionId) {
-        // TODO
+    public Long persistTransaction(Transaction transaction) {
+        return persistEntity(transaction);
+    }
+
+    /**
+     * Removes the transaction from the database.
+     *
+     * @param id Transaction ID
+     * @return true if the Transaction entity has been deleted
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public boolean deleteTransaction(Long id) {
+        return deleteEntity(id, Transaction.class);
     }
 
     @Override
