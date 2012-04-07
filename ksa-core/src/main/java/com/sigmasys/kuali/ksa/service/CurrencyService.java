@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.Currency;
+
 import java.util.List;
 
 /**
@@ -42,5 +43,13 @@ public interface CurrencyService {
      * @return Currency ID
      */
     Long persistCurrency(Currency currency);
+
+    /**
+     * Removes the currency from the database.
+     *
+     * @param id Currency ID
+     * @return true if the Currency entity has been deleted
+     */
+    boolean deleteCurrency(Long id);
 
 }

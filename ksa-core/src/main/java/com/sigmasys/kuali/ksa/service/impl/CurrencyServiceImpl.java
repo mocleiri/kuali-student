@@ -72,4 +72,16 @@ public class CurrencyServiceImpl extends GenericPersistenceService implements Cu
         return persistEntity(currency);
     }
 
+    /**
+     * Removes the currency from the database.
+     *
+     * @param id Currency ID
+     * @return true if the Currency entity has been deleted
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public boolean deleteCurrency(Long id) {
+        return deleteEntity(id, Currency.class);
+    }
+
 }

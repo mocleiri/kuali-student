@@ -44,9 +44,24 @@ public class GenericPersistenceService {
         return em.find(entityClass, id);
     }
 
+    /**
+     * Removes Identifiable entity by ID
+     *
+     * @param id Entity ID
+     * @return Identifiable instance
+     */
+    @Transactional(readOnly = false)
+    public <T extends Identifiable> boolean deleteEntity(Serializable id, Class<T> entityClass) {
+        String entityName = entityClass.getSimpleName();
+        Query query = em.createQuery("delete from " + entityName + " where id = :id");
+        query.setParameter("id", id);
+        int updatedRows = query.executeUpdate();
+        return updatedRows > 0;
+    }
+
 
     /**
-     * Returns the list of all entities for the given class
+     * Returns the list of all Identifiable entities for the given class
      *
      * @return List of Identifiable objects
      */
@@ -75,7 +90,7 @@ public class GenericPersistenceService {
     }
 
     /**
-     * Persists the entity in the database.
+     * Persists the Identifiable entity in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *
      * @param entity Identifiable instance
