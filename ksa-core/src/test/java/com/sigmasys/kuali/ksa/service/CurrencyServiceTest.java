@@ -72,20 +72,6 @@ public class CurrencyServiceTest extends AbstractServiceTest {
 
     }
 
-    @Test
-       public void deleteCurrency() throws Exception {
-
-           Currency currency = currencyService.getCurrency("usd");
-
-           Assert.notNull(currency);
-           Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
-
-           boolean isDeleted = currencyService.deleteCurrency(currency.getId());
-
-           Assert.isTrue(isDeleted);
-
-       }
-
 
     /*@Test
     public void createCurrency() throws Exception {

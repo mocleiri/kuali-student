@@ -27,6 +27,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         List<Transaction> transactions = transactionService.getTransactions();
 
         Assert.notNull(transactions);
+        Assert.notEmpty(transactions);
 
         // Add more assertions when we have some test data
     }
@@ -37,6 +38,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         List<Charge> charges = transactionService.getCharges();
 
         Assert.notNull(charges);
+        Assert.notEmpty(charges);
 
         // Add more assertions when we have some test data
     }
