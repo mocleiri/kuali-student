@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.sigmasys.kuali.ksa.model.Charge;
 import com.sigmasys.kuali.ksa.model.Deferment;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
@@ -37,6 +38,13 @@ public interface TransactionService {
      * @return List of transactions
      */
     List<Transaction> getTransactions(String userId);
+
+    /**
+     * Returns all charges sorted by ID
+     *
+     * @return List of all charges
+     */
+    List<Charge> getCharges();
 
     /**
      * Persists the transaction in the database.

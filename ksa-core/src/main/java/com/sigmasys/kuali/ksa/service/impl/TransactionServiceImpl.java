@@ -46,6 +46,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns all charges sorted by ID
+     *
+     * @return List of all charges
+     */
+    @Override
+    public List<Charge> getCharges() {
+        return getEntities(Charge.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+    }
+
+    /**
      * Returns all transactions sorted by ID
      *
      * @return List of transactions
