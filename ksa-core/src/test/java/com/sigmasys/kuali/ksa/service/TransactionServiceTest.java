@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 
+import com.sigmasys.kuali.ksa.model.Charge;
 import com.sigmasys.kuali.ksa.model.Transaction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,16 @@ public class TransactionServiceTest extends AbstractServiceTest {
         List<Transaction> transactions = transactionService.getTransactions();
 
         Assert.notNull(transactions);
+
+        // Add more assertions when we have some test data
+    }
+
+    @Test
+    public void getCharges() throws Exception {
+
+        List<Charge> charges = transactionService.getCharges();
+
+        Assert.notNull(charges);
 
         // Add more assertions when we have some test data
     }

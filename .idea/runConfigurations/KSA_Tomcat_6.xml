@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="KSA Tomcat 6" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 6">
     <option name="OPEN_IN_BROWSER" value="false" />
-    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:7777/ksa/" />
     <option name="COMMON_VM_ARGUMENTS" value="-mx512m -ms256m" />
     <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
     <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
       <artifact name="ksa-core:war exploded">
         <settings>
@@ -14,7 +14,7 @@
     </deployment>
     <server-settings>
       <option name="BASE_DIRECTORY_NAME" value="Unnamed_ksa" />
-      <option name="HTTP_PORT" value="7777" />
+      <option name="DEPLOY_TOMCAT_APPS" value="true" />
     </server-settings>
     <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -29,13 +29,13 @@
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                " />
+        <option name="SCRIPT" value="               " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </STARTUP>
       <SHUTDOWN>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="                " />
+        <option name="SCRIPT" value="               " />
         <option name="VM_PARAMETERS" value="" />
         <option name="PROGRAM_PARAMETERS" value="" />
       </SHUTDOWN>
@@ -44,30 +44,30 @@
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="\usr\tomcat\bin\catalina.sh run               " />
+        <option name="SCRIPT" value="/usr/tomcat/bin/catalina.sh" />
         <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="run" />
       </STARTUP>
       <SHUTDOWN>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="\usr\tomcat\bin\catalina.sh stop               " />
+        <option name="SCRIPT" value="/usr/tomcat/bin/catalina.sh" />
         <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="stop" />
       </SHUTDOWN>
     </ConfigurationWrapper>
     <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="\usr\tomcat\bin\catalina.sh run               " />
+        <option name="SCRIPT" value="/usr/tomcat/bin/catalina.sh" />
         <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="run" />
       </STARTUP>
       <SHUTDOWN>
         <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="\usr\tomcat\bin\catalina.sh stop               " />
+        <option name="SCRIPT" value="/usr/tomcat/bin/catalina.sh" />
         <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="stop" />
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method>
