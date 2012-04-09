@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <bean id="ChargeMaintenanceVw" parent="Uif-FormView">
+        <property name="id" value="ChargeMaintenanceVw"/>
+        <property name="title" value="Charge Maintenance"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.ChargeMaintForm"/>
+        <!--<property name="defaultBindingObjectPath" value="travelAccount1"/>-->
+        <property name="theme">
+            <bean parent="Uif-KradTheme"/>
+        </property>
+        <property name="entryPageId" value="chargePage"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-Disclosure-Page" p:id="chargePage">
+                    <property name="items">
+                        <list>
+                            <ref bean="chargeUpdateSection"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="chargeUpdateSection" parent="Uif-Disclosure-VerticalBoxSection">
+        <property name="title" value="Charge Info"/>
+        <property name="items">
+            <list>
+                <ref bean="chargeUpdateGroup"/>
+            </list>
+        </property>
+    </bean>
+
+
+<!--    <bean id="testSection5-cgrid" parent="chargeUpdateSection">
+        <property name="title" value="Banking Info - Non Table"/>
+        <property name="componentModifiers">
+            <list>
+            </list>
+        </property>
+        <property name="items">
+            <list>
+                <ref bean="testGroup3-cgrid"/>
+            </list>
+        </property>
+    </bean>-->
+
+
+    <bean id="chargeUpdateGroup" parent="Uif-GridSection">
+        <property name="title" value="Charge Group"/>
+        <property name="instructionalText" value="Charge transaction maintenance"/>
+        <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Charge"/>
+        <property name="propertyName" value="charge"/>-->
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Ledger Date" p:maxLength="9">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="10"/>
+                    </property>
+                </bean>
+<!--                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
+                    </property>
+                </bean>-->
+                <bean parent="Uif-InputField" p:propertyName="charge.refundRule" p:label="Refund Rule">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.originationDate" p:label="Origination Date" p:maxLength="9">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="10" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.responsibleEntity" p:label="Responsible Entity" p:colSpan="3"
+                      p:labelField.colSpan="1" p:maxLength="45">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="46"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.amount" p:label="Amount" p:maxLength="21">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.currency" p:label="Currency" p:maxLength="5">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="6" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.statementText" p:label="Statement Description" p:rowSpan="2"
+                      p:labelField.rowSpan="2">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date" p:maxLength="9">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="10"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

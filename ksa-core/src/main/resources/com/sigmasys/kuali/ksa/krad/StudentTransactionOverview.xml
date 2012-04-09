@@ -5,14 +5,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean parent="Uif-FormView" id="StudentTransactionOverview">
+    <bean parent="Uif-FormView" id="StudentTransactionOverview" p:footer.render="false">
         <property name="title" value="Student Accounts"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.OvrVwAlertsTransForm"/>
+        <property name="readOnly" value="true"/>
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
         <!--<property name="controllerRequestMapping" value="ovrVwAlertsTrans" />-->
-        <property name="readOnly" value="true"/>
         <property name="entryPageId" value="SummaryPage"/>
         <property name="navigation">
             <ref bean="StudentTransactionOverview-Menu"/>
@@ -23,8 +23,8 @@
                 <bean parent="Uif-Page" p:id="SummaryPage" p:title="Overview">
                     <property name="items">
                         <list>
-                            <!--<ref bean="UifLayoutView-BoxSection1"/>
-                            <ref bean="UifLayoutView-BoxSection2"/>
+                            <ref bean="GenericCollectionGroup"/>
+                            <!--<ref bean="UifLayoutView-BoxSection2"/>
                             <ref bean="UifLayoutView-BoxLayoutFluidContainers"/>-->
                         </list>
                     </property>
@@ -94,8 +94,11 @@
 
     <!--
        Student Account Summary
+       p:header.styleClasses="group_header"
     -->
-
+    <bean id="GenericCollectionGroup" parent="Uif-StackedCollectionSection" p:disclosure.render="false">
+        <property name="readOnly" value="true"/>
+    </bean>
 
     <!--<bean parent=""/>-->
     <!--
