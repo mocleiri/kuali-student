@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.service.CalendarService;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -179,5 +181,10 @@ public class Information implements Identifiable {
 
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
+    }
+
+    @Transient
+    public int getDaysBeforeDueDate() {
+        return CalendarService.getInstance().getCalendarDaysBetween(getEffectiveDate(), new Date());
     }
 }
