@@ -3,8 +3,10 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.OvrVwAlertsTransForm;
 import com.sigmasys.kuali.ksa.model.Charge;
 import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.temp.AccountTrans;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,13 +24,15 @@ import java.util.List;
 @RequestMapping(value = "/ovrVwAlertsTrans")
 public class OvrVwAlertsTransController extends UifControllerBase {
 
+   @Autowired
+   private TransactionService transactionService;
+
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
    protected OvrVwAlertsTransForm createInitialForm(HttpServletRequest request) {
       OvrVwAlertsTransForm form = new OvrVwAlertsTransForm();
-      form.setTransaction(createTransaction(false));
       return form;
    }
 
@@ -111,6 +115,14 @@ public class OvrVwAlertsTransController extends UifControllerBase {
       return getUIFModelAndView(form);
    }
 
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
    public ModelAndView get(@ModelAttribute("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {

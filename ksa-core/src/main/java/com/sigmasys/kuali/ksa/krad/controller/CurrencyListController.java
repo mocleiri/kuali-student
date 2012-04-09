@@ -53,9 +53,43 @@ public class CurrencyListController extends UifControllerBase {
     public ModelAndView get(@ModelAttribute("KualiForm") CurrencyListForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
+       String methodValue = request.getParameter("methodToCall");
+       if (methodValue.compareTo("deleteLine") == 0)
+       {
+          String id = request.getParameter("id");
+          if (id == null || id.isEmpty()) {
+             throw new IllegalArgumentException("'id' request parameter must be specified");
+          }
+
+          // remove a currency record by ISO type
+          boolean rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
+       }
+
         form.setCurrencies(currencyService.getCurrencies());
 
         return getUIFModelAndView(form);
     }
 
+
+/*
+   @RequestMapping(method=RequestMethod.POST, params="methodToCall=delete")
+   public ModelAndView delete(@ModelAttribute ("KualiForm") CurrencyListForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+
+      // do delete on a single id type record
+
+      String id = request.getParameter("id");
+      if (id == null || id.isEmpty()) {
+         throw new IllegalArgumentException("'id' request parameter must be specified");
+      }
+
+      // remove a currency record by ISO type
+      int rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
+
+      // refresh the list of currencies. the form and view manage the refresh
+      form.setCurrencies(currencyService.getCurrencies());
+
+      return getUIFModelAndView(form);
+   }
+*/
 }

@@ -1,50 +1,35 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.temp.AccountTrans;
+import com.sigmasys.kuali.ksa.model.Charge;
 import org.kuali.rice.krad.web.form.UifFormBase;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.text.ParseException;
 
 public class AlertsTransactionForm extends UifFormBase {
 
-   private Transaction alertTransaction;
-
-   private List<AccountTrans> accntTransLst= new ArrayList<AccountTrans>();
+   private List<Charge> charges;
 
    private BigDecimal totalAmnt = new BigDecimal(BigInteger.ZERO);
 
-   public Transaction getTransaction() {
-      return alertTransaction;
-   }
+   private Date lastLedgerDate;
 
-   public void setTransaction(Transaction transaction) {
-      this.alertTransaction = transaction;
-   }
+   private String lastStatementText;
 
-   public BigDecimal getFormattedAmount() {
-      if ( alertTransaction != null ) {
-         BigDecimal amount = alertTransaction.getAmount();
-         if (amount != null) {
-            return amount.setScale(5, BigDecimal.ROUND_CEILING);
-         }
-      }
-      return BigDecimal.ZERO;
-   }
+   private String workSetRows;
 
+   private Date minQueryDate;
 
-   public List<AccountTrans> getAccntTransLst() {
-      return accntTransLst;
-   }
+   private Date maxQueryDate;
 
-   public void setAccntTransLst(List<AccountTrans> accntTransLst) {
-      this.accntTransLst = accntTransLst;
-   }
-
-
+   /**
+    * Get the total amount calculated from all list charges
+    * @return
+    */
    public BigDecimal getTotalAmnt() {
       if (totalAmnt != null) {
          return totalAmnt.setScale(5, BigDecimal.ROUND_CEILING);
@@ -53,7 +38,106 @@ public class AlertsTransactionForm extends UifFormBase {
       return BigDecimal.ZERO;
    }
 
+   /**
+    * Set the total amount from all list charges
+    *
+    * @param totalAmnt
+    */
    public void setTotalAmnt(BigDecimal totalAmnt) {
       this.totalAmnt = totalAmnt;
+   }
+
+   /**
+    * Return a list of charges
+    *
+    * @return
+    */
+   public List<Charge> getCharges() {
+      return charges;
+   }
+
+   /**
+    * Set the charges list
+    *
+    * @param charges
+    */
+   public void setCharges(List<Charge> charges) {
+      this.charges = charges;
+
+      // calculate the total amount if there is a list available
+
+      if (this.charges != null) {
+         try {
+            lastLedgerDate = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1970");
+         } catch (ParseException e) {
+            e.printStackTrace();
+         }
+         lastStatementText = "";
+
+         for (int i = 0; i < this.charges.size(); i++)
+         {
+            Charge chrg = this.charges.get(i);
+            this.totalAmnt = this.totalAmnt.add(chrg.getAmount());
+
+            // compare to get the latest ledger and effective date
+            Date ledgerDate = chrg.getLedgerDate();
+            String tranStatement = chrg.getStatementText();
+
+            if(ledgerDate.compareTo(lastLedgerDate) > 0){
+               //System.out.println("Date1 is after Date2");
+               lastLedgerDate = ledgerDate;
+               lastStatementText = tranStatement;
+            }else if(ledgerDate.compareTo(lastLedgerDate) < 0){
+               // skip setting earliest date, holding current value
+               //System.out.println("Date1 is before Date2");
+            }else if(ledgerDate.compareTo(lastLedgerDate) == 0){
+               // chances of both dates being the same is minimum or maximum
+               // might have to compare another field to make a determination
+               //System.out.println("Date1 is equal to Date2");
+            }else{
+               //System.out.println("How to get here?");
+            }
+         }
+      }
+   }
+
+   public Date getLastLedgerDate() {
+      return lastLedgerDate;
+   }
+
+   public void setLastLedgerDate(Date lastLedgerDate) {
+      this.lastLedgerDate = lastLedgerDate;
+   }
+
+   public String getLastStatementText() {
+      return lastStatementText;
+   }
+
+   public void setLastStatementText(String lastStatementText) {
+      this.lastStatementText = lastStatementText;
+   }
+
+   public String getWorkSetRows() {
+      return workSetRows;
+   }
+
+   public void setWorkSetRows(String workSetRows) {
+      this.workSetRows = workSetRows;
+   }
+
+   public Date getMinQueryDate() {
+      return minQueryDate;
+   }
+
+   public void setMinQueryDate(Date minQueryDate) {
+      this.minQueryDate = minQueryDate;
+   }
+
+   public Date getMaxQueryDate() {
+      return maxQueryDate;
+   }
+
+   public void setMaxQueryDate(Date maxQueryDate) {
+      this.maxQueryDate = maxQueryDate;
    }
 }

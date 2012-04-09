@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OvrVwAlertsTransForm extends UifFormBase {
-   private static final long serialVersionUID = -7525378097732916418L;
+   private static final long serialVersionUID = -7525378097732916420L;
 
    private Transaction alertTransaction;
 
