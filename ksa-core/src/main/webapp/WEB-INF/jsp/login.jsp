@@ -83,7 +83,7 @@
     </style>
 </head>
 
-<body OnLoad="document.loginForm.__login_user.focus();">
+<body OnLoad="document.loginForm.userId.focus();">
 
 <div class="build">${ConfigProperties.version} (${ConfigProperties.datasource.ojb.platform})</div>
 
