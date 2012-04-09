@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * CalendarService. Singleton.
  *
- * @author Michael
+ * @author Michael Ivanov
  *         Date: 4/9/12
  */
 public class CalendarService {
