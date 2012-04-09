@@ -3,7 +3,7 @@ package com.sigmasys.kuali.ksa.model.search;
 import java.io.Serializable;
 
 /**
- * This class is used as a criteria in the search of KSA JPA entities.
+ * This is a base class that is used as a search criteria in the search of JPA entities.
  *
  * @author Michael Ivanov
  *         Date: 4/8/12
