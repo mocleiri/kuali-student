@@ -13,6 +13,9 @@ public class CalendarService {
 
     private static final CalendarService singleton = new CalendarService();
 
+    private CalendarService() {
+    }
+
     public static CalendarService getInstance() {
         return singleton;
     }
