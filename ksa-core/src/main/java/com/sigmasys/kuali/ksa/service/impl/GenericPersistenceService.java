@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.search.SearchCriteria;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +62,26 @@ public class GenericPersistenceService {
 
 
     /**
-     * Returns the list of all Identifiable entities for the given class
+     * Returns the list of all Identifiable entities for the given class with the default search criteria.
      *
+     * @param entityClass Entity Class
+     * @param orderBy     array of fields used in "order by" clause
      * @return List of Identifiable objects
      */
     public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, Pair<String, SortOrder>... orderBy) {
+        return getEntities(entityClass, new SearchCriteria() {}, orderBy);
+    }
+
+    /**
+     * Returns the list of all Identifiable entities for the given class.
+     *
+     * @param entityClass    Entity Class
+     * @param searchCriteria Search Criteria
+     * @param orderBy        array of fields used in "order by" clause
+     * @return List of Identifiable objects
+     */
+    public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
+                                                        Pair<String, SortOrder>... orderBy) {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<T> criteria = criteriaBuilder.createQuery(entityClass);
@@ -86,8 +102,14 @@ public class GenericPersistenceService {
 
         Query query = em.createQuery(criteria.select(selection));
 
+        if (searchCriteria.getLimit() != SearchCriteria.UNLIMITED_ITEMS_NUMBER) {
+            query.setFirstResult(searchCriteria.getOffset());
+            query.setMaxResults(searchCriteria.getLimit());
+        }
+
         return query.getResultList();
     }
+
 
     /**
      * Persists the Identifiable entity in the database.

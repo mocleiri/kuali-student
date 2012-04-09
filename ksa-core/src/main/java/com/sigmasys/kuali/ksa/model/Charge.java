@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("TDC")
+@DiscriminatorValue(TransactionTypeValue.CHARGE_CODE)
 public class Charge extends Debit {
 
 

@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 @Entity
-@DiscriminatorValue("TCD")
+@DiscriminatorValue(TransactionTypeValue.DEFERMENT_CODE)
 public class Deferment extends Credit {
 
     /**

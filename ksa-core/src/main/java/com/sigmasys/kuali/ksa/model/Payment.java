@@ -13,7 +13,7 @@ import javax.persistence.Transient;
  */
 
 @Entity
-@DiscriminatorValue("TCP")
+@DiscriminatorValue(TransactionTypeValue.PAYMENT_CODE)
 public class Payment extends Credit {
 
     /**
