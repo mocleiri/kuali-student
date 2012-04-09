@@ -80,7 +80,7 @@ public class GenericPersistenceService {
      * @param orderBy        array of fields used in "order by" clause
      * @return List of Identifiable objects
      */
-    public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
+    protected <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
                                                         Pair<String, SortOrder>... orderBy) {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
