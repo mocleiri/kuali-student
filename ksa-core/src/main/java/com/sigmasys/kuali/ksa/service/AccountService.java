@@ -45,7 +45,7 @@ public interface AccountService {
      * @param ignoreDeferment
      * @return
      */
-    BigDecimal getOutstantingBalance(Boolean ignoreDeferment);
+    BigDecimal getOutstandingBalance(Boolean ignoreDeferment);
 
     /**
      *

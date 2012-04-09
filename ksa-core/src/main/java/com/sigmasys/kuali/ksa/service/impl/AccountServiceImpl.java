@@ -36,7 +36,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
     @Override
-    public BigDecimal getOutstantingBalance(Boolean ignoreDeferment) {
+    public BigDecimal getOutstandingBalance(Boolean ignoreDeferment) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
