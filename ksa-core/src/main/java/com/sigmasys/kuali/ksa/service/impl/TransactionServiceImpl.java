@@ -5,8 +5,6 @@ import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
@@ -86,6 +84,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     public List<Charge> getCharges() {
         return getEntities(Charge.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+    }
+
+    /**
+     * Returns all payments sorted by ID
+     *
+     * @return List of all payments
+     */
+    @Override
+    public List<Payment> getPayments() {
+        return getEntities(Payment.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+    }
+
+    /**
+     * Returns all deferments sorted by ID
+     *
+     * @return List of all deferments
+     */
+    @Override
+    public List<Deferment> getDeferments() {
+        return getEntities(Deferment.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
     }
 
     /**

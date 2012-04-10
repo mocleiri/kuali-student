@@ -72,6 +72,20 @@ public interface TransactionService {
     List<Charge> getCharges();
 
     /**
+     * Returns all payments sorted by ID
+     *
+     * @return List of all payments
+     */
+    List<Payment> getPayments();
+
+    /**
+     * Returns all deferments sorted by ID
+     *
+     * @return List of all deferments
+     */
+    List<Deferment> getDeferments();
+
+    /**
      * Persists the transaction in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *
