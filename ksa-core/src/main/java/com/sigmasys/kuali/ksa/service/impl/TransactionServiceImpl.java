@@ -34,6 +34,39 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return getEntity(id, Transaction.class);
     }
 
+    /**
+     * Returns Charge by ID
+     *
+     * @param id Charge ID
+     * @return Charge instance
+     */
+    @Override
+    public Charge getCharge(Long id) {
+        return getEntity(id, Charge.class);
+    }
+
+    /**
+     * Returns Payment by ID
+     *
+     * @param id Payment ID
+     * @return Payment instance
+     */
+    @Override
+    public Payment getPayment(Long id) {
+        return getEntity(id, Payment.class);
+    }
+
+    /**
+     * Returns Deferment by ID
+     *
+     * @param id Deferment ID
+     * @return Deferment instance
+     */
+    @Override
+    public Deferment getDeferment(Long id) {
+        return getEntity(id, Deferment.class);
+    }
+
 
     /**
      * Returns all transactions sorted by ID

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sigmasys.kuali.ksa.model.Charge;
 import com.sigmasys.kuali.ksa.model.Deferment;
+import com.sigmasys.kuali.ksa.model.Payment;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
 /**
@@ -24,6 +25,30 @@ public interface TransactionService {
      * @return Transaction instance
      */
     Transaction getTransaction(Long id);
+
+    /**
+     * Returns Charge by ID
+     *
+     * @param id Charge ID
+     * @return Charge instance
+     */
+    Charge getCharge(Long id);
+
+    /**
+     * Returns Payment by ID
+     *
+     * @param id Payment ID
+     * @return Payment instance
+     */
+    Payment getPayment(Long id);
+
+    /**
+     * Returns Deferment by ID
+     *
+     * @param id Deferment ID
+     * @return Deferment instance
+     */
+    Deferment getDeferment(Long id);
 
     /**
      * Returns all transactions sorted by ID
