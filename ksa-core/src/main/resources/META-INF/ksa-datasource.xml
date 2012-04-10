@@ -31,14 +31,14 @@
 
     <bean id="ksaDataSource" class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean" parent="xaDataSource">
         <property name="uniqueResourceName" value="ksaDataSource"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+        <property name="url" value="jdbc:oracle:thin:@TP_Z60T_1.sigmasys.com:1521:XE"/>
         <property name="user" value="ksa"/>
         <property name="password" value="ksa123"/>
     </bean>
 
     <bean id="riceDataSource" class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean" parent="xaDataSource">
         <property name="uniqueResourceName" value="riceDataSource"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+        <property name="url" value="jdbc:oracle:thin:@TP_Z60T_1.sigmasys.com:1521:XE"/>
         <property name="user" value="rice"/>
         <property name="password" value="rice123"/>
     </bean>

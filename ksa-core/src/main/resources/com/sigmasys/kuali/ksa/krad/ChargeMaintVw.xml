@@ -63,10 +63,10 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Ledger Date" p:maxLength="9">
+                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Ledger Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-DateControl" p:size="10"/>
+                        <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
 <!--                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
@@ -81,14 +81,13 @@
                         <bean parent="Uif-TextControl" p:size="45"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.originationDate" p:label="Origination Date" p:maxLength="9">
+                <bean parent="Uif-InputField" p:propertyName="charge.originationDate" p:label="Origination Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-DateControl" p:size="10" />
+                        <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.responsibleEntity" p:label="Responsible Entity" p:colSpan="3"
-                      p:labelField.colSpan="1" p:maxLength="45">
+                <bean parent="Uif-InputField" p:propertyName="charge.responsibleEntity" p:label="Responsible Entity" p:maxLength="45">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="46"/>
@@ -100,7 +99,7 @@
                         <bean parent="Uif-TextControl" p:size="22" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.currency" p:label="Currency" p:maxLength="5">
+                <bean parent="Uif-InputField" p:propertyName="charge.currency.iso" p:label="Currency" p:maxLength="5">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="6" />
@@ -113,10 +112,10 @@
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date" p:maxLength="9">
+                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-DateControl" p:size="10"/>
+                        <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
             </list>
