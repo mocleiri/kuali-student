@@ -306,11 +306,11 @@ public abstract class Transaction implements Identifiable {
 
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "GL_ENTRY_GENERATED")
-    public boolean isGlEntryGenerated() {
+    public Boolean isGlEntryGenerated() {
         return glEntryGenerated;
     }
 
-    public void setGlEntryGenerated(boolean glEntryGenerated) {
+    public void setGlEntryGenerated(Boolean glEntryGenerated) {
         this.glEntryGenerated = glEntryGenerated;
     }
 
