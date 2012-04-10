@@ -58,7 +58,7 @@ public class ChargeMaintController extends UifControllerBase {
          throw new IllegalArgumentException("'id' request parameter must be specified");
       }
 
-      Charge charge = (Charge)transactionService.getTransaction(Long.valueOf(id));
+      Charge charge = transactionService.getCharge(Long.valueOf(id));
 
       form.setCharge(charge);
 
