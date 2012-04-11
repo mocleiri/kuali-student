@@ -73,7 +73,7 @@ public class CurrencyListController extends UifControllerBase {
     }
 
 
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=addCurrType")
+   @RequestMapping(method=RequestMethod.POST)
    public ModelAndView addCurrType(@ModelAttribute ("KualiForm") CurrencyListForm form, BindingResult result,
                                     HttpServletRequest request, HttpServletResponse response) {
 
