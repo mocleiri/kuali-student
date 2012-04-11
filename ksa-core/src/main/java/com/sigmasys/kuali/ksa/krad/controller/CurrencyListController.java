@@ -80,16 +80,12 @@ public class CurrencyListController extends UifControllerBase {
       // add a Currency Type
       Currency currency = new Currency();
 
-      String isoVal = form.getIso();
-      String currName = form.getName();
-      String currDes = form.getDescription();
-
-      currency.setIso(isoVal);
+      currency.setIso(form.getIso());
       currency.setName(form.getName());
       currency.setDescription(form.getDescription());
 
       // remove a currency record by ISO type
-      Long rowsAffected = currencyService.persistCurrency(currency);
+      Long currencyId = currencyService.persistCurrency(currency);
 
       // refresh the list of currencies. the form and view manage the refresh
       form.setCurrencies(currencyService.getCurrencies());

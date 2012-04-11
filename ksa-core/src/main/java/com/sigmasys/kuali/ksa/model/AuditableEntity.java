@@ -45,6 +45,7 @@ public abstract class AuditableEntity implements Identifiable {
     private Date lastUpdate;
 
 
+    @Transient
     public abstract Long getId();
 
     public void setId(Long id) {
