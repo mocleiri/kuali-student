@@ -15,6 +15,11 @@ public class CurrencyListForm extends UifFormBase {
 
     private List<Currency> currencies;
 
+    private String iso;
+
+    private String name;
+
+    private String description;
 
     public List<Currency> getCurrencies() {
         return currencies;
@@ -23,4 +28,28 @@ public class CurrencyListForm extends UifFormBase {
     public void setCurrencies(List<Currency> currencies) {
         this.currencies = currencies;
     }
+
+   public String getIso() {
+      return iso;
+   }
+
+   public void setIso(String iso) {
+      this.iso = iso;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getDescription() {
+      return description;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
 }

@@ -16,6 +16,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CurrencyListForm;
+import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,7 @@ public class CurrencyListController extends UifControllerBase {
              throw new IllegalArgumentException("'id' request parameter must be specified");
           }
 
-          // remove a currency record by ISO type
+          // remove a currency record by ID
           boolean rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
        }
 
@@ -71,6 +72,29 @@ public class CurrencyListController extends UifControllerBase {
     }
 
 
+   @RequestMapping(method=RequestMethod.POST, params="methodToCall=addCurrType")
+   public ModelAndView addCurrType(@ModelAttribute ("KualiForm") CurrencyListForm form, BindingResult result,
+                                    HttpServletRequest request, HttpServletResponse response) {
+
+      // add a Currency Type
+      Currency currency = new Currency();
+
+      String isoVal = form.getIso();
+      String currName = form.getName();
+      String currDes = form.getDescription();
+
+      currency.setIso(isoVal);
+      currency.setName(form.getName());
+      currency.setDescription(form.getDescription());
+
+      // remove a currency record by ISO type
+      Long rowsAffected = currencyService.persistCurrency(currency);
+
+      // refresh the list of currencies. the form and view manage the refresh
+      form.setCurrencies(currencyService.getCurrencies());
+
+      return getUIFModelAndView(form);
+   }
 /*
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=delete")
    public ModelAndView delete(@ModelAttribute ("KualiForm") CurrencyListForm form, BindingResult result,
