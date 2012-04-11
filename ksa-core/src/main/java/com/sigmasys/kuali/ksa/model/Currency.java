@@ -29,7 +29,7 @@ public class Currency extends AuditableEntity {
         return id;
     }
 
-    @Column(name = "ISO", length = 10)
+    @Column(name = "ISO", unique = true, nullable = false, length = 10)
     public String getIso() {
         return iso;
     }
