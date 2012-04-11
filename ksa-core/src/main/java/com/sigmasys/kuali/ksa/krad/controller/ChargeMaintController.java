@@ -7,6 +7,7 @@ import org.kuali.rice.krad.web.controller.UifControllerBase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/chargeMaintVw")
+@Transactional(readOnly = true)
 public class ChargeMaintController extends UifControllerBase {
 
    @Autowired
@@ -93,6 +95,7 @@ public class ChargeMaintController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
+   @Transactional(readOnly = false)
    public ModelAndView submit(@ModelAttribute("KualiForm") ChargeMaintForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
@@ -108,6 +111,7 @@ public class ChargeMaintController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+   @Transactional(readOnly = false)
    public ModelAndView save(@ModelAttribute("KualiForm") ChargeMaintForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 

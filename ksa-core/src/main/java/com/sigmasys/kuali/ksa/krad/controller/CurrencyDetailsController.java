@@ -22,6 +22,7 @@ import com.sigmasys.kuali.ksa.service.CurrencyService;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "/currencyDetails")
+@Transactional(readOnly = true)
 public class CurrencyDetailsController extends UifControllerBase {
 
     @Autowired
@@ -53,6 +55,7 @@ public class CurrencyDetailsController extends UifControllerBase {
 
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
     public ModelAndView save(@ModelAttribute("KualiForm") CurrencyDetailsForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 

@@ -7,6 +7,7 @@ import org.kuali.rice.krad.web.controller.UifControllerBase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/alertsTransaction")
+@Transactional(readOnly = true)
 public class AlertsTransactionController extends UifControllerBase {
 
    @Autowired
@@ -51,6 +53,7 @@ public class AlertsTransactionController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=submit")
+   @Transactional(readOnly = false)
    public ModelAndView submit(@ModelAttribute ("KualiForm") AlertsTransactionForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
@@ -66,6 +69,7 @@ public class AlertsTransactionController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+   @Transactional(readOnly = false)
    public ModelAndView save(@ModelAttribute("KualiForm") AlertsTransactionForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 

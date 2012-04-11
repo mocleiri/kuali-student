@@ -21,6 +21,7 @@ import com.sigmasys.kuali.ksa.krad.form.TransactionDetailsForm;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,7 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping(value = "/transactionDetails")
+@Transactional(readOnly = true)
 public class TransactionDetailsController extends UifControllerBase {
 
     /**
@@ -53,6 +55,7 @@ public class TransactionDetailsController extends UifControllerBase {
 
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
     public ModelAndView save(@ModelAttribute("KualiForm") TransactionDetailsForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
