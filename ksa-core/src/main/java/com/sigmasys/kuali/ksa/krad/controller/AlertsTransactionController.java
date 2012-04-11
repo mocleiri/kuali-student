@@ -2,10 +2,9 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm;
-
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.temp.AccountTrans;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,9 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -105,6 +101,11 @@ public class AlertsTransactionController extends UifControllerBase {
    public ModelAndView refresh(@ModelAttribute ("KualiForm") AlertsTransactionForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
+
+      List<Charge> charges = transactionService.getCharges();
+
+      form.setCharges(charges);
+
       return getUIFModelAndView(form);
    }
 

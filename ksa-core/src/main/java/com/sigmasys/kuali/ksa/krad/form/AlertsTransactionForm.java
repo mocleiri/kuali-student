@@ -101,42 +101,82 @@ public class AlertsTransactionForm extends UifFormBase {
       }
    }
 
+   /**
+    * Get the last ledger date
+    * @return
+    */
    public Date getLastLedgerDate() {
       return lastLedgerDate;
    }
 
+   /**
+    * Set the last ledger date
+    * @param lastLedgerDate
+    */
    public void setLastLedgerDate(Date lastLedgerDate) {
       this.lastLedgerDate = lastLedgerDate;
    }
 
+   /**
+    * Get the Last StatementText
+    * @return
+    */
    public String getLastStatementText() {
       return lastStatementText;
    }
 
+   /**
+    * Set the Last StatementText
+    * @param lastStatementText
+    */
    public void setLastStatementText(String lastStatementText) {
       this.lastStatementText = lastStatementText;
    }
 
+   /**
+    * Get the working set rows for pagination
+    * @return
+    */
    public String getWorkSetRows() {
       return workSetRows;
    }
 
+   /**
+    * Set the working set rows for pagination
+    * @param workSetRows
+    */
    public void setWorkSetRows(String workSetRows) {
       this.workSetRows = workSetRows;
    }
 
+   /**
+    * Get the offset minQueryDate for pagination
+    * @return
+    */
    public Date getMinQueryDate() {
       return minQueryDate;
    }
 
+   /**
+    * Set the offset minQueryDate for pagination
+    * @param minQueryDate
+    */
    public void setMinQueryDate(Date minQueryDate) {
       this.minQueryDate = minQueryDate;
    }
 
+   /**
+    * Get the limit maxQueryDate for pagination
+    * @return
+    */
    public Date getMaxQueryDate() {
       return maxQueryDate;
    }
 
+   /**
+    * Set the limit maxQueryDate for pagination
+    * @param maxQueryDate
+    */
    public void setMaxQueryDate(Date maxQueryDate) {
       this.maxQueryDate = maxQueryDate;
    }

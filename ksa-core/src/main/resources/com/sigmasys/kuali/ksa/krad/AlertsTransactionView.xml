@@ -10,9 +10,7 @@
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
-        <property name="header.render" value="true"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm"/>
-        <!--<property name="controllerRequestMapping" value="alertsTransaction" />-->
         <property name="title" value="Student Accounts"/>
         <property name="entryPageId" value="AccountSummaryPage"/>
         <property name="navigation" ref="KSALayoutNav"/>
@@ -46,13 +44,6 @@
                         </list>
                     </property>
                 </bean>
-<!--                <bean id="AccountTransactionPage" parent="Uif-Page" p:title="Transaction Details">
-                    <property name="items">
-                        <list>
-                            <ref bean="Account_Transaction" />
-                        </list>
-                    </property>
-                </bean>-->
             </list>
         </property>
     </bean>
@@ -76,7 +67,7 @@
     </bean>
 
 
-    <!-- a column section of boxes that references a horizontal sub section -->
+    <!-- a vertical column section of boxes that references a horizontal sub section -->
     <bean id="Account_Summary" parent="Uif-VerticalBoxSection">
         <property name="title" value="Overview"/>
         <property name="instructionalText" value="Account Summary"/>
@@ -86,7 +77,8 @@
             </list>
         </property>
     </bean>
-    
+
+    <!-- a vertical column section of boxes that references a horizontal sub section -->
     <bean id="First_Glance" parent="Uif-VerticalBoxSection">
         <property name="title" value="First Glance"/>
         <property name="instructionalText" value="Key information"/>
@@ -100,7 +92,7 @@
     </bean>
 
 
-    <!-- a row of boxes fields are provided from the corresponding form class -->
+    <!-- a horizontal row of boxes fields are provided from the corresponding form class -->
     <bean id="Overview_Section" parent="Uif-HorizontalBoxSubSection">
         <property name="title" value="Summary"/>
         <property name="instructionalText" value="This is an overview highlighting key account information"/>
@@ -126,7 +118,7 @@
         </property>
     </bean>
 
-    <!-- a horizontal row of txst boxes, read only, fields are provided from the corresponding form class -->
+    <!-- a horizontal row of text boxes, read only, fields are provided from the corresponding form class -->
     <bean id="First_Glance_Section" parent="Uif-HorizontalBoxSubSection">
         <property name="title" value="First Glance"/>
         <property name="instructionalText" value="Key Information"/>
@@ -228,23 +220,6 @@
             </list>
         </property>
     </bean>
-
-<!--    &lt;!&ndash; a single transaction editable &ndash;&gt;
-    <bean id="Account_Transaction" parent="Uif-VerticalBoxSection">
-        <property name="title" value="Transaction Details"/>
-        <property name="instructionalText" value="This is a single transaction"/>
-        <property name="items">
-            <list>
-                &lt;!&ndash;<bean parent="Uif-InputField" p:propertyName="id" p:label="Transaction ID"/>&ndash;&gt;
-                <bean parent="Uif-InputField" p:propertyName="nativeAmount" p:label="Native Amount"/>
-                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date"/>
-                &lt;!&ndash;<bean parent="Uif-InputField" p:propertyName="formattedAmount" p:label="Amount"/>&ndash;&gt;
-                <bean parent="Uif-InputField" p:propertyName="responsibleEntity"
-                      p:label="Responsible Entity"/>
-                <bean parent="Uif-InputField" p:propertyName="statementText" p:label="Statement"/>
-            </list>
-        </property>
-    </bean>-->
 
 </beans>
 

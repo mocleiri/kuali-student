@@ -19,6 +19,7 @@ import com.sigmasys.kuali.ksa.krad.form.CurrencyListForm;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

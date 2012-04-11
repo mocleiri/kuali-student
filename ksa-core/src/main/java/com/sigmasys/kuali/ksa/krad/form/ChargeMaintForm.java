@@ -26,7 +26,7 @@ public class ChargeMaintForm extends UifFormBase {
    }
 
    /**
-    * Set the charge model
+    * Set the Charge model
     * @param charge
     */
    public void setCharge(Charge charge) {

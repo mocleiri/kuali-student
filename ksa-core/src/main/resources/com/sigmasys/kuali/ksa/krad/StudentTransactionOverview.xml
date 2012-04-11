@@ -12,7 +12,6 @@
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
-        <!--<property name="controllerRequestMapping" value="ovrVwAlertsTrans" />-->
         <property name="entryPageId" value="SummaryPage"/>
         <property name="navigation">
             <ref bean="StudentTransactionOverview-Menu"/>

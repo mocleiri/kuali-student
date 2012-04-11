@@ -13,10 +13,18 @@ public class CurrencyDetailsForm extends UifFormBase {
 
     private Currency currency;
 
+   /**
+    * Get the Currency model object
+    * @return
+    */
     public Currency getCurrency() {
         return currency;
     }
 
+   /**
+    * Set teh Currency model object
+    * @param currency
+    */
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
