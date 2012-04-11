@@ -73,7 +73,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
     }
 
 
-    /*@Test
+    @Test
     public void createCurrency() throws Exception {
 
         Currency currency = new Currency();
@@ -86,6 +86,6 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         Assert.notNull(id);
         Assert.isTrue(id > 0);
 
-    }*/
+    }
 
 }

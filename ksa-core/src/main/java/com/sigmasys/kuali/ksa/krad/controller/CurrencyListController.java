@@ -22,6 +22,7 @@ import org.kuali.rice.krad.web.controller.UifControllerBase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "/currencyList")
+@Transactional(readOnly = true)
 public class CurrencyListController extends UifControllerBase {
 
     @Autowired
@@ -74,6 +76,7 @@ public class CurrencyListController extends UifControllerBase {
 
 
    @RequestMapping(method=RequestMethod.POST)
+   @Transactional(readOnly = false)
    public ModelAndView addCurrType(@ModelAttribute ("KualiForm") CurrencyListForm form, BindingResult result,
                                     HttpServletRequest request, HttpServletResponse response) {
 
