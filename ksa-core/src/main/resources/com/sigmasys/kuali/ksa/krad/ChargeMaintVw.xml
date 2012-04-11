@@ -6,11 +6,12 @@
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <bean id="ChargeMaintenanceVw" parent="Uif-FormView">
+    <bean id="ChargeMaintenanceVw" parent="Uif-FormView" p:footer.render="false">
         <property name="id" value="ChargeMaintenanceVw"/>
         <property name="title" value="Charge Maintenance"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.ChargeMaintForm"/>
-        <!--<property name="defaultBindingObjectPath" value="travelAccount1"/>-->
+        <property name="readOnly" value="true"/>
+
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
@@ -30,7 +31,7 @@
 
 
     <bean id="chargeUpdateSection" parent="Uif-Disclosure-VerticalBoxSection">
-        <property name="title" value="Charge Info"/>
+        <property name="title" value="Charge Details"/>
         <property name="items">
             <list>
                 <ref bean="chargeUpdateGroup"/>
@@ -54,7 +55,7 @@
 
 
     <bean id="chargeUpdateGroup" parent="Uif-GridSection">
-        <property name="title" value="Charge Group"/>
+        <!--<property name="title" value="Charge Group"/>-->
         <property name="instructionalText" value="Charge transaction maintenance"/>
         <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Charge"/>
         <property name="propertyName" value="charge"/>-->
@@ -69,12 +70,14 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-<!--                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
+<!--
+                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
                     </property>
-                </bean>-->
+                </bean>
+-->
                 <bean parent="Uif-InputField" p:propertyName="charge.refundRule" p:label="Refund Rule">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">

@@ -71,8 +71,6 @@
                     p:actionLabel="Summary Overview"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransactionsPage"
                     p:actionLabel="Alerts / Recent Transactions"/>
-<!--                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountTransactionPage"
-                      p:actionLabel="Transaction Detail"/>-->
             </list>
         </property>
     </bean>
@@ -209,11 +207,12 @@
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Charge"/>
         <property name="propertyName" value="charges"/>
-        <property name="layoutManager.sequencePropertyName" value="ledgerDate"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label=" Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
                       p:constraintText="Requires Date be filled out">
                     <property name="dependencyConstraints">
@@ -222,9 +221,9 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Native Amount" p:propertyName="nativeAmount" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
-                <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
+                <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.iso" p:required="true"/>
+                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
                       p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
             </list>
         </property>

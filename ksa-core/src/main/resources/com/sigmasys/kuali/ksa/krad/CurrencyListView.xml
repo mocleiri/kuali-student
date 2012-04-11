@@ -11,9 +11,10 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.CurrencyListForm"/>
         <property name="readOnly" value="true"/>
         <property name="items">
-            <bean parent="Uif-Page" p:id="page1" p:title="Currency List">
+            <bean parent="Uif-Page" p:id="CurrencyTypeLstPage" p:title="Currency Type">
                 <property name="items">
                     <list>
+                        <bean parent="Uif-ActionLink" p:methodToCall="addType" p:actionLabel="Add"/>
                         <ref bean="CurrencyList"/>
                     </list>
                 </property>
@@ -22,24 +23,47 @@
     </bean>
 
 
+    <bean parent="Uif-LightBox"/>
+<!--    <bean id="AddNewType" parent="Uif-QuickFinder">
+        <property name="quickfinderActionField">
+            <bean parent="Uif-ActionLink" p:methodToCall="add" p:actionLabel="Add"
+                  p:styleClasses="kr-quickfinder action">
+                <property name="lightBoxLookup">
+                    <bean parent="Uif-LightBoxPost" p:lookupReturnByScript="true"/>
+                </property>
+            </bean>
+        </property>
+    </bean>-->
+
     <!-- Collection list of currency types -->
 
-    <bean id="CurrencyList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="8">
-        <property name="title" value="Currency Type"/>
+    <bean id="CurrencyList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5">
+        <property name="title" value="View Currency Types"/>
         <property name="instructionalText"
-                  value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes uesed in this application." />
+                  value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application." />
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="propertyName" value="currencies"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="ISO" p:propertyName="iso" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="Creator" p:propertyName="creatorId" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="Editor" p:propertyName="editorId" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="Last update" p:propertyName="lastUpdate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description">
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Statement description..." p:maxLength="2000"/>
+                    </property>
+                </bean>
 
                 <!--p:actionParameters="iso=@{#line.iso}"-->
                 <!--<bean parent="Uif-ActionLink" p:methodToCall="delete"  p:actionLabel="Delete"/>-->
