@@ -99,7 +99,7 @@
         <property name="enabled" value="${myplan.courseSearch.enable.caching}"/>
     </bean>
 
-    <bean id="courseOfferingSearchMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
+    <bean id="courseOfferingSearchMethodCacheAdvisor" class="org.kuali.student.myplan.util.QueryMethodArgsCacheAdvice">
         <property name="cacheName" value="courseOfferingCache" />
         <property name="cacheManager" ref="myplanCacheManager"/>
         <property name="enabled" value="${ks.courseOffering.enable.caching}"/>
