@@ -147,8 +147,8 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         account.setPostalAddresses(Arrays.asList(address));
 
         // "Account is in good standing" (Paul) ID = 1
-        AccountType statusType = getEntity(1, AccountType.class);
-        account.setType(statusType);
+        AccountStatusType statusType = getEntity(1, AccountStatusType.class);
+        account.setStatusType(statusType);
 
         // Making Account persistent
         account = persistEntity(account);

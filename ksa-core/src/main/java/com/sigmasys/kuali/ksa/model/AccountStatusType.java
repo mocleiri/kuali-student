@@ -3,7 +3,7 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 
 /**
- * Account type.
+ * Account status type.
  * <p/>
  * User: mike
  * Date: 1/22/12
@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_ACNT_STATUS_TYPE")
-public class AccountType extends AuditableEntity {
+public class AccountStatusType extends AuditableEntity {
 
 
     @Id

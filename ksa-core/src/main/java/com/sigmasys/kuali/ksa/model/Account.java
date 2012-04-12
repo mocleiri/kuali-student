@@ -75,9 +75,9 @@ public abstract class Account implements Identifiable {
     protected List<PostalAddress> postalAddresses;
 
     /**
-     * Account Type
+     * Account Status Type
      */
-    protected AccountType type;
+    protected AccountStatusType statusType;
 
 
     @Id
@@ -186,11 +186,11 @@ public abstract class Account implements Identifiable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACNT_STATUS_TYPE_ID_FK")
-    public AccountType getType() {
-        return type;
+    public AccountStatusType getStatusType() {
+        return statusType;
     }
 
-    public void setType(AccountType type) {
-        this.type = type;
+    public void setStatusType(AccountStatusType statusType) {
+        this.statusType = statusType;
     }
 }
