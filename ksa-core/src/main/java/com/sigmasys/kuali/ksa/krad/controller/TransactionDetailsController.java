@@ -54,7 +54,7 @@ public class TransactionDetailsController extends UifControllerBase {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @RequestMapping(method = RequestMethod.POST)
     @Transactional(readOnly = false)
     public ModelAndView save(@ModelAttribute("KualiForm") TransactionDetailsForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
