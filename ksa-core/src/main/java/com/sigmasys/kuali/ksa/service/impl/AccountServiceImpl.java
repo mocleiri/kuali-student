@@ -87,6 +87,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return the account instance or null if the account does not exist
      */
     @Override
+    @Transactional(readOnly = false)
     public Account getAccount(String accountId) {
         Account account = getEntity(accountId, Account.class);
         if (account == null) {
@@ -114,6 +115,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         account.setAbleToAuthenticate(true);
         account.setEntityId(person.getEntityId());
         account.setKimAccount(true);
+        account.setCreditLimit(new BigDecimal(0.0));
 
         PersonName personName = new PersonName();
         personName.setCreatorId("system");
@@ -126,7 +128,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         personName.setDefault(true);
 
         // Making PersonName persistent and generate ID
-        personName = persistEntity(personName);
+        persistEntity(personName);
 
         PostalAddress address = new PostalAddress();
         address.setCreatorId("system");
@@ -141,17 +143,29 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         address.setStreetAddress3(person.getAddressLine3());
 
         // Making PostalAddress persistent and generate ID
-        address = persistEntity(address);
+        persistEntity(address);
 
         account.setPersonNames(Arrays.asList(personName));
         account.setPostalAddresses(Arrays.asList(address));
 
         // "Account is in good standing" (Paul) ID = 1
-        AccountStatusType statusType = getEntity(1, AccountStatusType.class);
-        account.setStatusType(statusType);
+        AccountStatusType statusType = getEntity(1L, AccountStatusType.class);
+        if (statusType != null) {
+            account.setStatusType(statusType);
+        }
+
+        // Late Period with ID = 1
+        LatePeriod latePeriod = getEntity(1L, LatePeriod.class);
+        if (latePeriod != null) {
+            account.setLatePeriod(latePeriod);
+        }
 
         // Making Account persistent
-        account = persistEntity(account);
+        persistEntity(account);
+
+        // Linking PersonName and PostalAddress back to already persisted Account
+        personName.setAccount(account);
+        address.setAccount(account);
 
         return account;
 

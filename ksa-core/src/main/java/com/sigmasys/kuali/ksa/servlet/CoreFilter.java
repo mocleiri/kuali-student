@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.servlet;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
@@ -134,6 +136,10 @@ public class CoreFilter implements Filter {
                                     identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
 
                     if (principal != null) {
+
+                        // If the KSA account does nto exist the following method is supposed to create it
+                        // from the corresponding KIM Person object
+                        Account account = ContextUtils.getBean(AccountService.class).getAccount(userId);
 
                         // Creating HTTP session
                         sessionManager.createSession(request, response, userId);
