@@ -9,9 +9,10 @@ import java.util.Set;
  * KSA Account model
  * <p/>
  * <p/>
+ *
  * @author Michael Ivanov
- * Date: 3/13/12
- * Time: 3:56 PM
+ *         Date: 3/13/12
+ *         Time: 3:56 PM
  */
 @Entity
 @Table(name = "KSSA_ACNT")
@@ -118,7 +119,7 @@ public abstract class Account implements Identifiable {
         this.lastKimUpdate = lastKimUpdate;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_KIM_ACNT")
     public Boolean isKimAccount() {
         return isKimAccount;
@@ -128,7 +129,7 @@ public abstract class Account implements Identifiable {
         isKimAccount = kimAccount;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "CAN_AUTHENTICATE")
     public Boolean isAbleToAuthenticate() {
         return ableToAuthenticate;
@@ -192,5 +193,44 @@ public abstract class Account implements Identifiable {
 
     public void setStatusType(AccountStatusType statusType) {
         this.statusType = statusType;
+    }
+
+    @Transient
+    public PersonName getDefaultPersonName() {
+        Set<PersonName> personNames = getPersonNames();
+        if (personNames != null) {
+            for (PersonName personName : personNames) {
+                if (personName.isDefault()) {
+                    return personName;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Transient
+    public PostalAddress getDefaultPostalAddress() {
+        Set<PostalAddress> postalAddresses = getPostalAddresses();
+        if (postalAddresses != null) {
+            for (PostalAddress postalAddress : postalAddresses) {
+                if (postalAddress.isDefault()) {
+                    return postalAddress;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Transient
+    public ElectronicContact getDefaultElectronicContact() {
+        Set<ElectronicContact> electronicContacts = getElectronicContacts();
+        if (electronicContacts != null) {
+            for (ElectronicContact electronicContact : electronicContacts) {
+                if (electronicContact.isDefault()) {
+                    return electronicContact;
+                }
+            }
+        }
+        return null;
     }
 }

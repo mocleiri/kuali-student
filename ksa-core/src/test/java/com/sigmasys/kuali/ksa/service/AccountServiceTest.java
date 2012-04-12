@@ -61,6 +61,9 @@ public class AccountServiceTest extends AbstractServiceTest {
         Assert.notEmpty(account.getPersonNames());
         Assert.notEmpty(account.getPostalAddresses());
 
+        Assert.notNull(account.getDefaultPersonName());
+        Assert.notNull(account.getDefaultPostalAddress());
+
         // Add more assertions when we have some test data
     }
 
