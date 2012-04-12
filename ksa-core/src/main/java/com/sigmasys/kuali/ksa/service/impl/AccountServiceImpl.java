@@ -148,17 +148,20 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         // TODO - populate the missing fields
         // TODO: figure out how to distinguish Delegate and DirectCharge account types
 
+        final String creatorId = "system";
+        final Date creationDate = new Date();
+
         Account account = new DirectChargeAccount();
         account.setId(person.getPrincipalName());
-        account.setCreationDate(new Date());
+        account.setCreationDate(creationDate);
         account.setAbleToAuthenticate(true);
         account.setEntityId(person.getEntityId());
         account.setKimAccount(true);
         account.setCreditLimit(new BigDecimal(0.0));
 
         PersonName personName = new PersonName();
-        personName.setCreatorId("system");
-        personName.setLastUpdate(new Date());
+        personName.setCreatorId(creatorId);
+        personName.setLastUpdate(creationDate);
         personName.setDefault(true);
         personName.setFirstName(person.getFirstName());
         personName.setMiddleName(person.getMiddleName());
@@ -170,8 +173,8 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         persistEntity(personName);
 
         PostalAddress address = new PostalAddress();
-        address.setCreatorId("system");
-        address.setLastUpdate(new Date());
+        address.setCreatorId(creatorId);
+        address.setLastUpdate(creationDate);
         address.setDefault(true);
         address.setPostalCode(person.getAddressPostalCode());
         address.setCountry(person.getAddressCountryCode());
@@ -184,8 +187,21 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         // Making PostalAddress persistent and generate ID
         persistEntity(address);
 
+        ElectronicContact electronicContact = new ElectronicContact();
+        electronicContact.setCreatorId(creatorId);
+        electronicContact.setLastUpdate(creationDate);
+        electronicContact.setDefault(true);
+        electronicContact.setKimEmailAddressType(person.getEmailAddress());
+        electronicContact.setPhoneNumber(person.getPhoneNumber());
+        electronicContact.setPhoneCountry(person.getAddressCountryCode());
+
+        // Making ElectronicContact persistent and generate ID
+        persistEntity(electronicContact);
+
+        // Setting references to Account
         account.setPersonNames(new HashSet<PersonName>(Arrays.asList(personName)));
         account.setPostalAddresses(new HashSet<PostalAddress>(Arrays.asList(address)));
+        account.setElectronicContacts(new HashSet<ElectronicContact>(Arrays.asList(electronicContact)));
 
         // "Account is in good standing" (Paul) ID = 1
         AccountStatusType statusType = getEntity(1L, AccountStatusType.class);
@@ -202,9 +218,10 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         // Making Account persistent
         persistEntity(account);
 
-        // Linking PersonName and PostalAddress back to already persisted Account
+        // Linking PersonName, PostalAddress and ElectronicContact back to already persisted Account
         personName.setAccount(account);
         address.setAccount(account);
+        electronicContact.setAccount(account);
 
         return account;
 

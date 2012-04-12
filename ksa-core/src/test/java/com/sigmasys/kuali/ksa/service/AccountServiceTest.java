@@ -59,12 +59,15 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(account.getPersonNames());
         Assert.notNull(account.getPostalAddresses());
+        Assert.notNull(account.getElectronicContacts());
 
         Assert.notEmpty(account.getPersonNames());
         Assert.notEmpty(account.getPostalAddresses());
+        Assert.notEmpty(account.getElectronicContacts());
 
         Assert.notNull(account.getDefaultPersonName());
         Assert.notNull(account.getDefaultPostalAddress());
+        Assert.notNull(account.getDefaultElectronicContact());
 
         // Add more assertions when we have some test data
     }
@@ -83,12 +86,15 @@ public class AccountServiceTest extends AbstractServiceTest {
 
             Assert.notNull(account.getPersonNames());
             Assert.notNull(account.getPostalAddresses());
+            Assert.notNull(account.getElectronicContacts());
 
             Assert.notEmpty(account.getPersonNames());
             Assert.notEmpty(account.getPostalAddresses());
+            Assert.notEmpty(account.getElectronicContacts());
 
             Assert.notNull(account.getDefaultPersonName());
             Assert.notNull(account.getDefaultPostalAddress());
+            Assert.notNull(account.getDefaultElectronicContact());
 
         }
 
