@@ -87,7 +87,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return the account instance or null if the account does not exist
      */
     @Override
-    @Transactional(readOnly = false)
     public Account getFullAccount(String accountId) {
         Query query = em.createQuery("select a from Account a " +
                 "left outer join fetch a.personNames pn " +
@@ -99,6 +98,22 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         query.setParameter("id", accountId);
         List<Account> accounts = query.getResultList();
         return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
+    }
+
+    /**
+     * This methods fetches all KSA accounts and all their associations.
+     *
+     * @return the list account instances
+     */
+    @Override
+    public List<Account> getFullAccounts() {
+        Query query = em.createQuery("select a from Account a " +
+                "left outer join fetch a.personNames pn " +
+                "left outer join fetch a.postalAddresses pa " +
+                "left outer join fetch a.electronicContacts ec " +
+                "left outer join fetch a.statusType st " +
+                "left outer join fetch a.latePeriod lp");
+        return query.getResultList();
     }
 
     /**

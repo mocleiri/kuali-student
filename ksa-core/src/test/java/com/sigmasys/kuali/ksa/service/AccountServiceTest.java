@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -63,6 +65,32 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(account.getDefaultPersonName());
         Assert.notNull(account.getDefaultPostalAddress());
+
+        // Add more assertions when we have some test data
+    }
+
+    @Test
+    public void getFullAccounts() throws Exception {
+
+        List<Account> accounts = accountService.getFullAccounts();
+
+        Assert.notNull(accounts);
+        Assert.notEmpty(accounts);
+
+        for (Account account : accounts) {
+
+            Assert.notNull(account);
+
+            Assert.notNull(account.getPersonNames());
+            Assert.notNull(account.getPostalAddresses());
+
+            Assert.notEmpty(account.getPersonNames());
+            Assert.notEmpty(account.getPostalAddresses());
+
+            Assert.notNull(account.getDefaultPersonName());
+            Assert.notNull(account.getDefaultPostalAddress());
+
+        }
 
         // Add more assertions when we have some test data
     }
