@@ -10,9 +10,12 @@ import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Currency service JPA implementation.
@@ -78,17 +81,38 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
     /**
+     * This methods fetches Account and all its associations by account ID.
+     *
+     * @param accountId Account ID
+     * @return the account instance or null if the account does not exist
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Account getFullAccount(String accountId) {
+        Query query = em.createQuery("select a from Account a " +
+                "left outer join fetch a.personNames pn " +
+                "left outer join fetch a.postalAddresses pa " +
+                "left outer join fetch a.electronicContacts ec " +
+                "left outer join fetch a.statusType st " +
+                "left outer join fetch a.latePeriod lp " +
+                "where a.id = :id");
+        query.setParameter("id", accountId);
+        List<Account> accounts = query.getResultList();
+        return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
+    }
+
+    /**
      * This method is used to verify that an account exists before a transaction or other operations are
      * performed on the account. There is an initial inquiry into the KSA store. If no account exist, then there is
      * an inquiry into KIM. If KIM also returns no result, then false is returned. If a KIM account does exist, then
      * a KSA account is created, using the KIM information as a template.
      *
-     * @param accountId
+     * @param accountId Account ID
      * @return the account instance or null if the account does not exist
      */
     @Override
     @Transactional(readOnly = false)
-    public Account getAccount(String accountId) {
+    public Account getOrCreateAccount(String accountId) {
         Account account = getEntity(accountId, Account.class);
         if (account == null) {
             PersonService personService = KimApiServiceLocator.getPersonService();
@@ -145,8 +169,8 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         // Making PostalAddress persistent and generate ID
         persistEntity(address);
 
-        account.setPersonNames(Arrays.asList(personName));
-        account.setPostalAddresses(Arrays.asList(address));
+        account.setPersonNames(new HashSet<PersonName>(Arrays.asList(personName)));
+        account.setPostalAddresses(new HashSet<PostalAddress>(Arrays.asList(address)));
 
         // "Account is in good standing" (Paul) ID = 1
         AccountStatusType statusType = getEntity(1L, AccountStatusType.class);

@@ -3,7 +3,7 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * KSA Account model
@@ -62,17 +62,17 @@ public abstract class Account implements Identifiable {
     /**
      * Collection of associated person names
      */
-    protected List<PersonName> personNames;
+    protected Set<PersonName> personNames;
 
     /**
      * Collection of associated electronic contacts
      */
-    protected List<ElectronicContact> electronicContacts;
+    protected Set<ElectronicContact> electronicContacts;
 
     /**
      * Collection of associated postal addresses
      */
-    protected List<PostalAddress> postalAddresses;
+    protected Set<PostalAddress> postalAddresses;
 
     /**
      * Account Status Type
@@ -158,29 +158,29 @@ public abstract class Account implements Identifiable {
     }
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
-    public List<PersonName> getPersonNames() {
+    public Set<PersonName> getPersonNames() {
         return personNames;
     }
 
-    public void setPersonNames(List<PersonName> personNames) {
+    public void setPersonNames(Set<PersonName> personNames) {
         this.personNames = personNames;
     }
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
-    public List<ElectronicContact> getElectronicContacts() {
+    public Set<ElectronicContact> getElectronicContacts() {
         return electronicContacts;
     }
 
-    public void setElectronicContacts(List<ElectronicContact> electronicContacts) {
+    public void setElectronicContacts(Set<ElectronicContact> electronicContacts) {
         this.electronicContacts = electronicContacts;
     }
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
-    public List<PostalAddress> getPostalAddresses() {
+    public Set<PostalAddress> getPostalAddresses() {
         return postalAddresses;
     }
 
-    public void setPostalAddresses(List<PostalAddress> postalAddresses) {
+    public void setPostalAddresses(Set<PostalAddress> postalAddresses) {
         this.postalAddresses = postalAddresses;
     }
 

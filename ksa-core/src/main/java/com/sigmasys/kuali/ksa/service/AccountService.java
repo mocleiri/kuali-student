@@ -1,13 +1,11 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Deferment;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Account service declares business operations on Student Accounts and related
@@ -89,9 +87,17 @@ public interface AccountService {
      *     an inquiry into KIM. If KIM also returns no result, then false is returned. If a KIM account does exist, then
      *     a KSA account is created, using the KIM information as a template.
      *
-     * @param accountId
+     * @param accountId Account ID
      * @return the account instance or null if the account does not exist
      */
-    Account getAccount(String accountId);
+    Account getOrCreateAccount(String accountId);
+
+    /**
+     * This methods fetches Account and all its associations by account ID.
+     *
+     * @param accountId Account ID
+     * @return the account instance or null if the account does not exist
+     */
+    Account getFullAccount(String accountId);
 
 }

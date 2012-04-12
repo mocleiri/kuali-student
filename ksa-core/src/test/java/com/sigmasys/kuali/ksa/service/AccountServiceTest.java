@@ -24,7 +24,7 @@ public class AccountServiceTest extends AbstractServiceTest {
     @Test
     public void getAccount() throws Exception {
 
-        Account account = accountService.getAccount("admin1");
+        Account account = accountService.getOrCreateAccount("admin1");
 
         Assert.notNull(account);
         Assert.notNull(account.getEntityId());
@@ -39,6 +39,27 @@ public class AccountServiceTest extends AbstractServiceTest {
         Assert.notNull(person.getEntityId());
 
         Assert.isTrue(account.getEntityId().equals(person.getEntityId()));
+
+        // Add more assertions when we have some test data
+    }
+
+    @Test
+    public void getFullAccount() throws Exception {
+
+        Account account = accountService.getOrCreateAccount("admin1");
+
+        Assert.notNull(account);
+        Assert.notNull(account.getEntityId());
+
+        account = accountService.getFullAccount(account.getId());
+
+        Assert.notNull(account);
+
+        Assert.notNull(account.getPersonNames());
+        Assert.notNull(account.getPostalAddresses());
+
+        Assert.notEmpty(account.getPersonNames());
+        Assert.notEmpty(account.getPostalAddresses());
 
         // Add more assertions when we have some test data
     }

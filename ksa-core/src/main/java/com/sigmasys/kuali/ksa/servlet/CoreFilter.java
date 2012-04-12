@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.servlet;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
-import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
@@ -137,10 +136,6 @@ public class CoreFilter implements Filter {
 
                     if (principal != null) {
 
-                        // If the KSA account does nto exist the following method is supposed to create it
-                        // from the corresponding KIM Person object
-                        Account account = ContextUtils.getBean(AccountService.class).getAccount(userId);
-
                         // Creating HTTP session
                         sessionManager.createSession(request, response, userId);
 
@@ -169,6 +164,10 @@ public class CoreFilter implements Filter {
                         };
 
                         request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
+
+                        // If the KSA account does nto exist the following method is supposed to create it
+                        // from the corresponding KIM Person object
+                        ContextUtils.getBean(AccountService.class).getOrCreateAccount(userId);
 
                         // If the request has redirectUrl parameter ->
                         // redirect to the location specified by redirectUrl
