@@ -9,7 +9,7 @@ import javax.persistence.Entity;
  * @author Michael Ivanov
  */
 @Entity
-@DiscriminatorValue("AND")
+@DiscriminatorValue(AccountTypeValue.DELEGATE_CODE)
 public class DelegateAccount extends Account {
 
 

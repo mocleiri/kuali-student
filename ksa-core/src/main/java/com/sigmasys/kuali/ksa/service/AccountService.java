@@ -89,18 +89,9 @@ public interface AccountService {
      *     an inquiry into KIM. If KIM also returns no result, then false is returned. If a KIM account does exist, then
      *     a KSA account is created, using the KIM information as a template.
      *
-     * @param accountIdentifer
-     * @return
+     * @param accountId
+     * @return the account instance or null if the account does not exist
      */
-    Boolean doesAccountExist(String accountIdentifer);
-
-    /**
-     *  Check ONLY if the account exists in the KSA system. Return either true or false
-     */
-    Boolean doesKsaAccountExist(String accountIdentifier);
-
-    Account instantiateKsaAccount();
-    
-    Account instantiateKsaAccount(String accountIdentifier);
+    Account getAccount(String accountId);
 
 }

@@ -1,10 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * A direct charge account
@@ -12,7 +9,7 @@ import java.util.Date;
  * @author Michael Ivanov
  */
 @Entity
-@DiscriminatorValue("ACD")
+@DiscriminatorValue(AccountTypeValue.DIRECT_CHARGE_CODE)
 public class DirectChargeAccount extends ChargeableAccount {
 
 
