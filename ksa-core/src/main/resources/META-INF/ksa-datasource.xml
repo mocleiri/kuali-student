@@ -4,10 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-lazy-init="true">
-       
+
     <!-- Atomikos UserTransaction implementation -->
     <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
-    
+
     <!-- Atomikos JTA TransactionManager implementation -->
     <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" destroy-method="close">
         <property name="forceShutdown" value="true"/>
@@ -17,15 +17,18 @@
     <bean id="transactionManager" class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">
         <property name="userTransaction" ref="atomikosUserTransaction"/>
         <property name="transactionManager" ref="atomikosTransactionManager"/>
-    </bean>   
+    </bean>
 
 
     <!-- XA data source definitions -->
-    <bean id="xaDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" abstract="true">
+    <bean id="xaDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean"
+          init-method="init"
+          destroy-method="close"
+          abstract="true">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
         <property name="minPoolSize" value="5"/>
         <property name="poolSize" value="5"/>
-        <property name="maxPoolSize" value="20"/>
+        <property name="maxPoolSize" value="5"/>
         <property name="testQuery" value="select 1 from dual"/>
     </bean>
 
