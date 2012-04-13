@@ -112,7 +112,10 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
                 "left outer join fetch a.postalAddresses pa " +
                 "left outer join fetch a.electronicContacts ec " +
                 "left outer join fetch a.statusType st " +
-                "left outer join fetch a.latePeriod lp");
+                "left outer join fetch a.latePeriod lp " +
+                "where pn.default = true and " +
+                "      pa.default = true and " +
+                "      ec.default = true");
         return query.getResultList();
     }
 
