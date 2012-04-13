@@ -1,10 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.OvrVwAlertsTransForm;
-import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 
+import com.sigmasys.kuali.ksa.temp.AccountInfo;
 import com.sigmasys.kuali.ksa.temp.AccountTrans;
 
 import org.kuali.rice.krad.web.controller.UifControllerBase;
@@ -19,22 +20,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
-@RequestMapping(value = "/ovrVwAlertsTrans")
-public class OvrVwAlertsTransController extends UifControllerBase {
+@RequestMapping(value = "/transOvrVw")
+public class TransOvrController extends UifControllerBase {
 
    @Autowired
-   private TransactionService transactionService;
+   private AccountService accountService;
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
-   protected OvrVwAlertsTransForm createInitialForm(HttpServletRequest request) {
-      OvrVwAlertsTransForm form = new OvrVwAlertsTransForm();
+   protected TransOvrForm createInitialForm(HttpServletRequest request) {
+      TransOvrForm form = new TransOvrForm();
       return form;
    }
 
@@ -47,7 +47,7 @@ public class OvrVwAlertsTransController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=submit")
-   public ModelAndView submit(@ModelAttribute ("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
+   public ModelAndView submit(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
       return getUIFModelAndView(form);
@@ -62,10 +62,10 @@ public class OvrVwAlertsTransController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   public ModelAndView save(@ModelAttribute("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
+   public ModelAndView save(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
-      List<AccountTrans> accntTransLst = form.getAccntTransLst();
+/*      List<AccountTrans> accntTransLst = form.getAccntTransLst();
 
       BigDecimal totalAmnt = form.getTotalAmnt();
 
@@ -82,7 +82,7 @@ public class OvrVwAlertsTransController extends UifControllerBase {
 
       form.setAccntTransLst(accntTransLst);
 
-      form.setTransaction(createTransaction(true));
+      form.setTransaction(createTransaction(true));*/
 
       return getUIFModelAndView(form);
    }
@@ -96,7 +96,7 @@ public class OvrVwAlertsTransController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
+   public ModelAndView cancel(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do cancel stuff...
       return getUIFModelAndView(form);
@@ -111,7 +111,7 @@ public class OvrVwAlertsTransController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute ("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
+   public ModelAndView refresh(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);
@@ -126,9 +126,43 @@ public class OvrVwAlertsTransController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") OvrVwAlertsTransForm form, BindingResult result,
+   public ModelAndView get(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
+      AccountInfo accountInfo = new AccountInfo();
+      List<Account> accountList = accountService.getFullAccounts();
+      List<PersonName> personNameList = new ArrayList<PersonName>();
+      List<PostalAddress> postalAddressList = new ArrayList<PostalAddress>();
+
+      for (int i = 0; i < accountList.size(); i++)
+      {
+         Set<PersonName> personNameSet = accountList.get(i).getPersonNames();
+         Set<PostalAddress > postalAddressSet = accountList.get(i).getPostalAddresses();
+
+         Iterator<PersonName> personNameIterator = personNameSet.iterator();
+         while (personNameIterator.hasNext()) {
+            PersonName personName = personNameIterator.next();
+
+            if (personName.isDefault()){
+               personNameList.add(personName);
+            }
+         }
+
+         Iterator<PostalAddress> postalAddressIterator = postalAddressSet.iterator();
+         while(postalAddressIterator.hasNext()) {
+            PostalAddress postalAddress = postalAddressIterator.next();
+
+            if (postalAddress.isDefault()) {
+               postalAddressList.add(postalAddress);
+            }
+         }
+      }
+
+      accountInfo.setPersonNames(personNameList); //(accountService.getFullAccounts());
+      accountInfo.setPostalAddresses(postalAddressList);
+
+      form.setAccountInfo(accountInfo);
+/*
       List<AccountTrans> accntTransLst = form.getAccntTransLst();
 
       BigDecimal totalAmnt = form.getTotalAmnt();
@@ -147,6 +181,7 @@ public class OvrVwAlertsTransController extends UifControllerBase {
       form.setAccntTransLst(accntTransLst);
 
       form.setTransaction(createTransaction(false));
+*/
 
       return getUIFModelAndView(form);
    }

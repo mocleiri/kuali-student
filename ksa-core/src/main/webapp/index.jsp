@@ -107,7 +107,7 @@
                         <span >Customer Service Representative</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/ovrVwAlertsTrans?methodToCall=get&viewId=StudentTransactionOverview">
+                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-customer_service_representative.pdf">View detailed persona</a>

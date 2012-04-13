@@ -2,39 +2,41 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean parent="Uif-FormView" id="StudentTransactionOverview" p:footer.render="false">
-        <property name="title" value="Student Accounts"/>
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.OvrVwAlertsTransForm"/>
-        <property name="readOnly" value="true"/>
+    <bean id="StudentTransactionOverview" parent="Uif-FormView" p:footer.render="false">
+        <property name="title" value="Student Transaction Overview"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransOvrForm"/>
         <property name="theme">
             <bean parent="Uif-KradTheme"/>
         </property>
-        <property name="entryPageId" value="SummaryPage"/>
+        <property name="entryPageId" value="StudentTransactionLookupPage"/>
         <property name="navigation">
-            <ref bean="StudentTransactionOverview-Menu"/>
+            <ref bean="KSATransOvrVwNav"/>
         </property>
         <property name="items">
             <list>
-
-                <bean parent="Uif-Page" p:id="SummaryPage" p:title="Overview">
+                <bean parent="Uif-Page" p:id="StudentTransactionLookupPage" p:title="Quick Menu">
                     <property name="items">
                         <list>
-                            <ref bean="GenericCollectionGroup"/>
+                            <ref bean="QueryByName"/>
                             <!--<ref bean="UifLayoutView-BoxSection2"/>
                             <ref bean="UifLayoutView-BoxLayoutFluidContainers"/>-->
                         </list>
                     </property>
                 </bean>
 
+<!--
                 <bean parent="Uif-Page" p:id="AlertsPage" p:title="Alerts">
                     <property name="items">
                         <list>
-                            <!--<ref bean="UifLayoutView-BoxHorizontalNestedVertical"/>
+                            &lt;!&ndash;<ref bean="UifLayoutView-BoxHorizontalNestedVertical"/>
                             <ref bean="UifLayoutView-BoxVerticalNestedHorizontal"/>
-                            <ref bean="UifLayoutView-BoxNestedControls"/>-->
+                            <ref bean="UifLayoutView-BoxNestedControls"/>&ndash;&gt;
                         </list>
                     </property>
                 </bean>
@@ -42,12 +44,13 @@
                 <bean parent="Uif-Page" p:id="HistoryPage" p:title="Transactions">
                     <property name="items">
                         <list>
-                            <!--<ref bean="UifLayoutView-BoxHorizontalNestedVertical"/>
+                            &lt;!&ndash;<ref bean="UifLayoutView-BoxHorizontalNestedVertical"/>
                             <ref bean="UifLayoutView-BoxVerticalNestedHorizontal"/>
-                            <ref bean="UifLayoutView-BoxNestedControls"/>-->
+                            <ref bean="UifLayoutView-BoxNestedControls"/>&ndash;&gt;
                         </list>
                     </property>
                 </bean>
+-->
 
             </list>
         </property>
@@ -66,26 +69,26 @@
        Student Account navigation menu by tabs
     -->
 
-    <bean parent="Uif-TabNavigationGroup" id="StudentTransactionOverview-Menu">
+<!--    <bean parent="Uif-TabNavigationGroup" id="StudentTransactionOverview-Menu">
         <property name="items">
             <list>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SummaryPage" p:actionLabel="Summary"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="StudentTransactionLookupPage" p:actionLabel="Summary"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsPage" p:actionLabel="Alerts"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HistoryPage" p:actionLabel="History"/>
             </list>
         </property>
-    </bean>
+    </bean>-->
 
-    <bean id="KSALayoutNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSATransOvrVwNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderField-Two" p:headerText="Student Accounts"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountSummaryPage"
-                      p:actionLabel="Summary Overview"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransactionsPage"
+                <bean parent="Uif-HeaderField-Two" p:headerText="KSA Navigation"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="StudentTransactionLookupPage"
+                      p:actionLabel="Transaction Summary Overview"/>
+<!--                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransactionsPage"
                       p:actionLabel="Alerts / Recent Transactions"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountTransactionPage"
-                      p:actionLabel="Transaction Detail"/>
+                      p:actionLabel="Transaction Detail"/>-->
             </list>
         </property>
     </bean>
@@ -95,9 +98,99 @@
        Student Account Summary
        p:header.styleClasses="group_header"
     -->
-    <bean id="GenericCollectionGroup" parent="Uif-StackedCollectionSection" p:disclosure.render="false">
-        <property name="readOnly" value="true"/>
+    <bean id="QueryByName" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL"
+          p:title="Progressive Disclosure of Groups">
+    <!--<property name="disclosure.render" value="false" />-->
+
+    <property name="items">
+        <list>
+            <bean parent="Uif-InputField" p:label="Search By Name"
+                  p:instructionalText="Enter a name to search transactions"
+                  p:width="auto" p:propertyName="studentLookupByName">
+                <property name="control">
+                    <bean parent="Uif-TextControl" p:size="20" p:maxLength="100">
+<!--
+                        <property name="options">
+                            <list>
+                                <bean parent="Uif-KeyLabelPair" p:key="showTxNameMatches"
+                                      p:value="Show Transaction Match for search criteria" />
+                            </list>
+                        </property>
+-->
+                    </bean>
+                </property>
+            </bean>
+<!--            <bean parent="Uif-HorizontalBoxSection"
+                  p:progressiveRender="field38 eq 'show1'" p:title="Group 1"
+                  p:disclosure.render="false">
+                <property name="items">
+                    <list>
+                        <bean parent="GenericTextField" p:label="Field 1A"
+                              p:propertyName="field39" />
+                        <bean parent="GenericTextField" p:label="Field 2A"
+                              p:propertyName="field40" />
+                        <bean parent="GenericTextField" p:label="Field 3A"
+                              p:propertyName="field41" />
+                    </list>
+                </property>
+            </bean>-->
+
+            <!--p:progressiveRenderViaAJAX="true" p:progressiveRender="studentLookupByName eq 'showTxNameMatches'" p:disclosure.render="false"-->
+            <bean parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="8"
+
+                  p:title="Matching Transactions" >
+                <property name="readOnly" value="true"/>
+                <!--<property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.temp.AccountInfo"/>
+                <property name="propertyName" value="accountInfo"/>-->
+                <property name="layoutManager.sequencePropertyName" value="id"/>
+                <property name="layoutManager.richTable.render" value="false"/>
+                <property name="layoutManager.renderSequenceField" value="false"/>
+                <property name="items">
+                    <list>
+                        <bean parent="Uif-InputField" p:label="Last Name" p:propertyName="personNames.lastName" >
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="25" p:maxLength="100"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-InputField" p:label="First Name" p:propertyName="personNames.firstName" >
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="25" p:maxLength="100"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-InputField" p:label="Middle Init." p:propertyName="personNames.middleName">
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="3" p:maxLength="100"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-InputField" p:label="Address" p:propertyName="postalAddresses.line1">
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="25" p:maxLength="100"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-InputField" p:label="State" p:propertyName="postalAddresses.state_code">
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="6" p:maxLength="5"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-InputField" p:label="Postal Code" p:propertyName="postalAddresses.postal_code">
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="13" p:maxLength="12"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-InputField" p:label="Country" p:propertyName="postalAddresses.country_code">
+                            <property name="control">
+                                <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-Link" p:linkLabel="Select" p:target="_self"
+                              p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                    </list>
+                </property>
+            </bean>
+        </list>
+    </property>
     </bean>
+
 
     <!--<bean parent=""/>-->
     <!--

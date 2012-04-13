@@ -13,7 +13,7 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm"/>
         <property name="title" value="Student Accounts"/>
         <property name="entryPageId" value="AccountSummaryPage"/>
-        <property name="navigation" ref="KSALayoutNav"/>
+        <property name="navigation" ref="KSAAlertsTransNav"/>
         <property name="items">
             <list>
                 <!--<bean parent="Uif-Link" p:linkLabel="Transaction Detail"
@@ -54,7 +54,7 @@
         </property>
     </bean>-->
 
-    <bean id="KSALayoutNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSAAlertsTransNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderField-Two" p:headerText="Student Accounts"/>
@@ -204,7 +204,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label=" Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
                       p:constraintText="Requires Date be filled out">
                     <property name="dependencyConstraints">
