@@ -38,11 +38,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
-    <!--bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="coreConfigurer"/-->
+    <bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="coreConfigurer"/>
 
     <!-- bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="ksbConfigurer"/ -->
 
-    <bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="coreConfigurer"/>
+    <bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="ksbConfigurer"/>
 
     <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="kenConfigurer"/>
 

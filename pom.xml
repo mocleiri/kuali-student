@@ -26,7 +26,7 @@
         <gwt.version>2.4.0</gwt.version>
         <gxt.version>2.2.5-gwt22</gxt.version>
         <gwt-log.version>3.1.7</gwt-log.version>
-        <kuali.rice.version>2.0.0</kuali.rice.version>
+        <kuali.rice.version>2.1.0-M2</kuali.rice.version>
         <kuali.student.version>1.2</kuali.student.version>
         <slf4j.version>1.6.4</slf4j.version>
         <junit.version>4.10</junit.version>
