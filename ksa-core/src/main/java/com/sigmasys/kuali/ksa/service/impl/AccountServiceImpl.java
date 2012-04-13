@@ -107,7 +107,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      */
     @Override
     public List<Account> getFullAccounts() {
-        Query query = em.createQuery("select a from Account a " +
+        Query query = em.createQuery("select distinct a from Account a " +
                 "left outer join fetch a.personNames pn " +
                 "left outer join fetch a.postalAddresses pa " +
                 "left outer join fetch a.electronicContacts ec " +

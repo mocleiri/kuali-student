@@ -8,9 +8,6 @@ import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.temp.AccountInfo;
 import org.kuali.rice.krad.web.form.UifFormBase;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransOvrForm extends UifFormBase {
@@ -20,7 +17,7 @@ public class TransOvrForm extends UifFormBase {
    private String studentLookupByName;
 
    // result set of matching persons and address postal information
-   private List<Account> accountBrowseList;
+   private List<Account> accounts;
 
    private AccountInfo accountInfo;
 
@@ -158,17 +155,17 @@ public class TransOvrForm extends UifFormBase {
     * Encapsulates Person and Address model
     * @return
     */
-   public List<Account> getAccountBrowseList() {
-      return accountBrowseList;
+   public List<Account> getAccounts() {
+      return accounts;
    }
 
    /**
     * Set the accountBrowseList
     * Encapsulates Person and Address model
-    * @param accountBrowseList
+    * @param accounts
     */
-   public void setAccountBrowseList(List<Account> accountBrowseList) {
-      this.accountBrowseList = accountBrowseList;
+   public void setAccounts(List<Account> accounts) {
+      this.accounts = accounts;
    }
 
    public AccountInfo getAccountInfo() {

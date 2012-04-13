@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "KSSA_ACNT")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Account implements Identifiable {
+public class Account implements Identifiable {
 
     /**
      * Account ID (User ID)
@@ -80,6 +80,9 @@ public abstract class Account implements Identifiable {
      */
     protected AccountStatusType statusType;
 
+
+    protected Account() {
+    }
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false, length = 45)

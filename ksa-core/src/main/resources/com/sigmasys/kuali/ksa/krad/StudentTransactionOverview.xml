@@ -140,44 +140,44 @@
 
                   p:title="Matching Transactions" >
                 <property name="readOnly" value="true"/>
-                <!--<property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.temp.AccountInfo"/>
-                <property name="propertyName" value="accountInfo"/>-->
+                <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
+                <property name="propertyName" value="accounts"/>
                 <property name="layoutManager.sequencePropertyName" value="id"/>
                 <property name="layoutManager.richTable.render" value="false"/>
                 <property name="layoutManager.renderSequenceField" value="false"/>
                 <property name="items">
                     <list>
-                        <bean parent="Uif-InputField" p:label="Last Name" p:propertyName="personNames.lastName" >
+                        <bean parent="Uif-InputField" p:label="Last Name" p:propertyName="defaultPersonName.lastName" >
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="25" p:maxLength="100"/>
                             </property>
                         </bean>
-                        <bean parent="Uif-InputField" p:label="First Name" p:propertyName="personNames.firstName" >
+                        <bean parent="Uif-InputField" p:label="First Name" p:propertyName="defaultPersonName.firstName" >
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="25" p:maxLength="100"/>
                             </property>
                         </bean>
-                        <bean parent="Uif-InputField" p:label="Middle Init." p:propertyName="personNames.middleName">
+                        <bean parent="Uif-InputField" p:label="Middle Init." p:propertyName="defaultPersonName.middleName">
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="3" p:maxLength="100"/>
                             </property>
                         </bean>
-                        <bean parent="Uif-InputField" p:label="Address" p:propertyName="postalAddresses.line1">
+                        <bean parent="Uif-InputField" p:label="Address" p:propertyName="defaultPostalAddress.streetAddress1">
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="25" p:maxLength="100"/>
                             </property>
                         </bean>
-                        <bean parent="Uif-InputField" p:label="State" p:propertyName="postalAddresses.state_code">
+                        <bean parent="Uif-InputField" p:label="State" p:propertyName="defaultPostalAddress.state">
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="6" p:maxLength="5"/>
                             </property>
                         </bean>
-                        <bean parent="Uif-InputField" p:label="Postal Code" p:propertyName="postalAddresses.postal_code">
+                        <bean parent="Uif-InputField" p:label="Postal Code" p:propertyName="defaultPostalAddress.postalCode">
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="13" p:maxLength="12"/>
                             </property>
                         </bean>
-                        <bean parent="Uif-InputField" p:label="Country" p:propertyName="postalAddresses.country_code">
+                        <bean parent="Uif-InputField" p:label="Country" p:propertyName="defaultPostalAddress.country">
                             <property name="control">
                                 <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
                             </property>

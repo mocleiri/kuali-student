@@ -3,10 +3,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
-
-import com.sigmasys.kuali.ksa.temp.AccountInfo;
-import com.sigmasys.kuali.ksa.temp.AccountTrans;
 
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,79 +125,9 @@ public class TransOvrController extends UifControllerBase {
    public ModelAndView get(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
-      AccountInfo accountInfo = new AccountInfo();
-      List<Account> accountList = accountService.getFullAccounts();
-      List<PersonName> personNameList = new ArrayList<PersonName>();
-      List<PostalAddress> postalAddressList = new ArrayList<PostalAddress>();
-
-      for (int i = 0; i < accountList.size(); i++)
-      {
-         Set<PersonName> personNameSet = accountList.get(i).getPersonNames();
-         Set<PostalAddress > postalAddressSet = accountList.get(i).getPostalAddresses();
-
-         Iterator<PersonName> personNameIterator = personNameSet.iterator();
-         while (personNameIterator.hasNext()) {
-            PersonName personName = personNameIterator.next();
-
-            if (personName.isDefault()){
-               personNameList.add(personName);
-            }
-         }
-
-         Iterator<PostalAddress> postalAddressIterator = postalAddressSet.iterator();
-         while(postalAddressIterator.hasNext()) {
-            PostalAddress postalAddress = postalAddressIterator.next();
-
-            if (postalAddress.isDefault()) {
-               postalAddressList.add(postalAddress);
-            }
-         }
-      }
-
-      accountInfo.setPersonNames(personNameList); //(accountService.getFullAccounts());
-      accountInfo.setPostalAddresses(postalAddressList);
-
-      form.setAccountInfo(accountInfo);
-/*
-      List<AccountTrans> accntTransLst = form.getAccntTransLst();
-
-      BigDecimal totalAmnt = form.getTotalAmnt();
-
-      for (int i = 0; i < 3; i++)
-      {
-         Transaction trns = createTransaction(false);
-         accntTransLst.add(new AccountTrans(trns.getLedgerDate(), trns.getStatementText(),
-               trns.getExternalId(), trns.getAmount()));
-
-         totalAmnt = totalAmnt.add(trns.getAmount());
-      }
-
-      form.setTotalAmnt(totalAmnt);
-
-      form.setAccntTransLst(accntTransLst);
-
-      form.setTransaction(createTransaction(false));
-*/
+      form.setAccounts(accountService.getFullAccounts());
 
       return getUIFModelAndView(form);
    }
 
-   /**
-    *
-    * @param updated
-    * @return
-    */
-   private Transaction createTransaction(boolean updated) {
-      Transaction alertsTransaction = new Charge();
-      alertsTransaction.setId(38000L);
-      alertsTransaction.setExternalId("134500");
-      alertsTransaction.setAmount(new BigDecimal(1050.34));
-      alertsTransaction.setLedgerDate(new Date());
-      alertsTransaction.setInternal(false);
-      alertsTransaction.setEffectiveDate(new Date());
-      alertsTransaction.setResponsibleEntity("Entity #2");
-      alertsTransaction.setStatementText("Here goes statement text - " + (updated ? "Updated" : "Initial"));
-
-      return alertsTransaction;
-   }
 }
