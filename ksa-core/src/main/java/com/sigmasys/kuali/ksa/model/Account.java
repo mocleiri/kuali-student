@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -80,8 +81,36 @@ public class Account implements Identifiable {
      */
     protected AccountStatusType statusType;
 
+   /**
+    * lastName, firstName of the default PersonName Set record
+    */
+    private String compositeDefaultPersonName;
 
-    protected Account() {
+   /**
+    * Address line 1, state, postalCode, and country of the default PostalAddress Set record
+    */
+    private String compositeDefaultPostalAddress;
+
+    public Account() {
+    }
+
+    public Account(Account orgAccount) {
+       id = orgAccount.id;
+       entityId = orgAccount.entityId;
+       creationDate = orgAccount.creationDate;
+       lastKimUpdate = orgAccount.lastKimUpdate;
+       isKimAccount = orgAccount.isKimAccount;
+       ableToAuthenticate = orgAccount.ableToAuthenticate;
+       creditLimit = orgAccount.creditLimit;
+       latePeriod = orgAccount.latePeriod;
+       personNames = new HashSet<PersonName>(orgAccount.personNames);
+       electronicContacts = new HashSet<ElectronicContact>(orgAccount.electronicContacts);
+       postalAddresses = new HashSet<PostalAddress>(orgAccount.postalAddresses);
+       statusType = orgAccount.statusType;
+    }
+
+    public Account CopyOf() {
+       return new Account(this);
     }
 
     @Id
@@ -236,4 +265,36 @@ public class Account implements Identifiable {
         }
         return null;
     }
+
+   /**
+    * Get lastName, firstName of the default PersonName Set record
+    */
+   @Transient
+   public String getCompositeDefaultPersonName() {
+      return compositeDefaultPersonName;
+   }
+
+   /**
+    * Set lastName, firstName of the default PersonName Set record
+    * @param compositeDefaultPersonName
+    */
+   public void setCompositeDefaultPersonName(String compositeDefaultPersonName) {
+      this.compositeDefaultPersonName = compositeDefaultPersonName;
+   }
+
+   /**
+    * Get Address line 1, state, postalCode, and country of the default PostalAddress Set record
+    */
+   @Transient
+   public String getCompositeDefaultPostalAddress() {
+      return compositeDefaultPostalAddress;
+   }
+
+   /**
+    * Set Address line 1, state, postalCode, and country of the default PostalAddress Set record
+    * @param compositeDefaultPostalAddress
+    */
+   public void setCompositeDefaultPostalAddress(String compositeDefaultPostalAddress) {
+      this.compositeDefaultPostalAddress = compositeDefaultPostalAddress;
+   }
 }

@@ -14,8 +14,7 @@ import java.util.Map;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class AccountTrans  implements Serializable {
-   private static final long serialVersionUID = -7525378097732916411L;
+public class AccountTrans {
 
    private Date ledgerDate;
    private String statementText;

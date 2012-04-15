@@ -77,11 +77,10 @@
                         <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
                     </property>
                 </bean>
--->
-                <bean parent="Uif-InputField" p:propertyName="charge.refundRule" p:label="Refund Rule">
+-->             <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="45"/>
+                        <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="charge.originationDate" p:label="Origination Date" p:maxLength="10">
@@ -115,10 +114,10 @@
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="charge.refundRule" p:label="Refund Rule">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-DateControl" p:size="11"/>
+                        <bean parent="Uif-TextControl" p:size="45"/>
                     </property>
                 </bean>
             </list>

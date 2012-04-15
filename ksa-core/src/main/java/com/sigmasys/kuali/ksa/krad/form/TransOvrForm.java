@@ -1,13 +1,9 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.PersonName;
-import com.sigmasys.kuali.ksa.model.PostalAddress;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.Charge;
 
-import com.sigmasys.kuali.ksa.temp.AccountInfo;
 import org.kuali.rice.krad.web.form.UifFormBase;
-
 import java.util.List;
 
 public class TransOvrForm extends UifFormBase {
@@ -17,64 +13,9 @@ public class TransOvrForm extends UifFormBase {
    private String studentLookupByName;
 
    // result set of matching persons and address postal information
-   private List<Account> accounts;
+   private List<Account> accountBrowseList;
 
-   private AccountInfo accountInfo;
-
-   // result set of matching persons
-   private List<PersonName> personNameBrowseList;
-
-   // result set of matching postal address per person
-   private PostalAddress postalAddrPerPerson;
-
-   // a list of Transactions - non-specific browse list
-   private List<Transaction> transactionsBrowseList;
-
-/*   private Transaction alertTransaction;
-
-   private List<AccountTrans> accntTransLst= new ArrayList<AccountTrans>();
-
-   private BigDecimal totalAmnt = new BigDecimal(BigInteger.ZERO);
-
-   public Transaction getTransaction() {
-      return alertTransaction;
-   }
-
-   public void setTransaction(Transaction transaction) {
-      this.alertTransaction = transaction;
-   }
-
-   public BigDecimal getFormattedAmount() {
-      if ( alertTransaction != null ) {
-         BigDecimal amount = alertTransaction.getAmount();
-         if (amount != null) {
-            return amount.setScale(5, BigDecimal.ROUND_CEILING);
-         }
-      }
-      return BigDecimal.ZERO;
-   }
-
-
-   public List<AccountTrans> getAccntTransLst() {
-      return accntTransLst;
-   }
-
-   public void setAccntTransLst(List<AccountTrans> accntTransLst) {
-      this.accntTransLst = accntTransLst;
-   }
-
-
-   public BigDecimal getTotalAmnt() {
-      if (totalAmnt != null) {
-         return totalAmnt.setScale(5, BigDecimal.ROUND_CEILING);
-      }
-
-      return BigDecimal.ZERO;
-   }
-
-   public void setTotalAmnt(BigDecimal totalAmnt) {
-      this.totalAmnt = totalAmnt;
-   }*/
+   private List<Charge> chargeList;
 
    /**
     * Get the student name
@@ -97,82 +38,36 @@ public class TransOvrForm extends UifFormBase {
    }
 
    /**
-    * Get the PersonNameBrowseList
-    * A list of students matching the studentLookupByName
-    * The query will use the is_default is 'Y'
-    * @return
-    */
-   public List<PersonName> getPersonNameBrowseList() {
-      return personNameBrowseList;
-   }
-
-   /**
-    * Set the PersonNameBrowseList
-    * A list of students matching the studentLookupByName
-    * The query will use the is_default is 'Y'
-    * @param personNameBrowseList
-    */
-   public void setPersonNameBrowseList(List<PersonName> personNameBrowseList) {
-      this.personNameBrowseList = personNameBrowseList;
-   }
-
-   /**
-    * Get the PostalAccress
-    * A single record where the query uses is_default is 'Y'
-    * @return
-    */
-   public PostalAddress getPostalAddrPerPerson() {
-      return postalAddrPerPerson;
-   }
-
-   /**
-    * Set the PostalAccress
-    * A single record where the query uses is_default is 'Y'
-    * @param postalAddrPerPerson
-    */
-   public void setPostalAddrPerPerson(PostalAddress postalAddrPerPerson) {
-      this.postalAddrPerPerson = postalAddrPerPerson;
-   }
-
-   /**
-    * Get the list of Transactions associated with the
-    * @return
-    */
-   public List<Transaction> getTransactionsBrowseList() {
-      return transactionsBrowseList;
-   }
-
-   /**
-    *
-    * @param transactionsBrowseList
-    */
-   public void setTransactionsBrowseList(List<Transaction> transactionsBrowseList) {
-      this.transactionsBrowseList = transactionsBrowseList;
-   }
-
-   /**
     * Get the accountBrowseList
     * Encapsulates Person and Address model
     * @return
     */
-   public List<Account> getAccounts() {
-      return accounts;
+   public List<Account> getAccountBrowseList() {
+      return accountBrowseList;
    }
 
    /**
     * Set the accountBrowseList
     * Encapsulates Person and Address model
-    * @param accounts
+    * @param accountBrowseList
     */
-   public void setAccounts(List<Account> accounts) {
-      this.accounts = accounts;
+   public void setAccountBrowseList(List<Account> accountBrowseList) {
+      this.accountBrowseList = accountBrowseList;
    }
 
-   public AccountInfo getAccountInfo() {
-      return accountInfo;
+   /**
+    * Get the list of Charges found via a selected Account
+    * @return
+    */
+   public List<Charge> getChargeList() {
+      return chargeList;
    }
 
-   public void setAccountInfo(AccountInfo accountInfo) {
-      this.accountInfo = accountInfo;
+   /**
+    * Set the list of Charges found via a selected Account
+    * @param chargeList
+    */
+   public void setChargeList(List<Charge> chargeList) {
+      this.chargeList = chargeList;
    }
 }
