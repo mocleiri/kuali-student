@@ -87,6 +87,19 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns all charges by account ID
+     *
+     * @param userId Account ID
+     * @return List of all charges by account ID
+     */
+    @Override
+    public List<Charge> getCharges(String userId) {
+        Query query = em.createQuery("select c from Charge c where c.account.id = :userId order by c.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    /**
      * Returns all payments sorted by ID
      *
      * @return List of all payments
@@ -109,6 +122,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     /**
      * Returns all transactions sorted by ID
      *
+     * @param userId Account ID
      * @return List of transactions
      */
     @Override

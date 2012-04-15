@@ -65,6 +65,14 @@ public interface TransactionService {
     List<Transaction> getTransactions(String userId);
 
     /**
+     * Returns all charges by account ID
+     *
+     * @param userId Account ID
+     * @return List of all charges by account ID
+     */
+    List<Charge> getCharges(String userId);
+
+    /**
      * Returns all charges sorted by ID
      *
      * @return List of all charges
