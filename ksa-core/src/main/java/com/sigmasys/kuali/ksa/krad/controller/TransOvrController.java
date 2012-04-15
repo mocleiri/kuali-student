@@ -151,28 +151,28 @@ public class TransOvrController extends UifControllerBase {
 
                 Account accountCopy = account.getCopy();
 
-                StringBuilder sbPN = new StringBuilder();
-                StringBuilder sbPA = new StringBuilder();
+                StringBuilder personNameBuilder = new StringBuilder();
+                StringBuilder postalAddressBuilder = new StringBuilder();
 
                 // create the composite default person name
 
-                sbPN.append(personName.getLastName());
-                sbPN.append(", ");
-                sbPN.append(personName.getFirstName());
+                personNameBuilder.append(personName.getLastName());
+                personNameBuilder.append(", ");
+                personNameBuilder.append(personName.getFirstName());
 
-                accountCopy.setCompositeDefaultPersonName(sbPN.toString());
+                accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
 
                 // create the composite default postal address
                 if (postalAddress != null) {
-                    sbPA.append(postalAddress.getStreetAddress1());
-                    sbPA.append(", ");
-                    sbPA.append(postalAddress.getState());
-                    sbPA.append(" ");
-                    sbPA.append(postalAddress.getPostalCode());
-                    sbPA.append(" ");
-                    sbPA.append(postalAddress.getCountry());
+                    postalAddressBuilder.append(postalAddress.getStreetAddress1());
+                    postalAddressBuilder.append(", ");
+                    postalAddressBuilder.append(postalAddress.getState());
+                    postalAddressBuilder.append(" ");
+                    postalAddressBuilder.append(postalAddress.getPostalCode());
+                    postalAddressBuilder.append(" ");
+                    postalAddressBuilder.append(postalAddress.getCountry());
 
-                    accountCopy.setCompositeDefaultPostalAddress(sbPA.toString());
+                    accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
                 }
 
                 // add each account copy to a list
