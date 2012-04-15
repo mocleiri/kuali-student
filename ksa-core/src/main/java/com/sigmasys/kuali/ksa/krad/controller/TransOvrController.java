@@ -33,8 +33,7 @@ public class TransOvrController extends UifControllerBase {
      */
     @Override
     protected TransOvrForm createInitialForm(HttpServletRequest request) {
-        TransOvrForm form = new TransOvrForm();
-        return form;
+        return new TransOvrForm();
     }
 
     /**
