@@ -81,37 +81,20 @@ public class Account implements Identifiable {
      */
     protected AccountStatusType statusType;
 
-   /**
-    * lastName, firstName of the default PersonName Set record
-    */
+    /**
+     * lastName, firstName of the default PersonName Set record
+     */
     private String compositeDefaultPersonName;
 
-   /**
-    * Address line 1, state, postalCode, and country of the default PostalAddress Set record
-    */
+    /**
+     * Address line 1, state, postalCode, and country of the default PostalAddress Set record
+     */
     private String compositeDefaultPostalAddress;
 
-    public Account() {
+
+    protected Account() {
     }
 
-    public Account(Account orgAccount) {
-       id = orgAccount.id;
-       entityId = orgAccount.entityId;
-       creationDate = orgAccount.creationDate;
-       lastKimUpdate = orgAccount.lastKimUpdate;
-       isKimAccount = orgAccount.isKimAccount;
-       ableToAuthenticate = orgAccount.ableToAuthenticate;
-       creditLimit = orgAccount.creditLimit;
-       latePeriod = orgAccount.latePeriod;
-       personNames = new HashSet<PersonName>(orgAccount.personNames);
-       electronicContacts = new HashSet<ElectronicContact>(orgAccount.electronicContacts);
-       postalAddresses = new HashSet<PostalAddress>(orgAccount.postalAddresses);
-       statusType = orgAccount.statusType;
-    }
-
-    public Account CopyOf() {
-       return new Account(this);
-    }
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false, length = 45)
@@ -266,35 +249,57 @@ public class Account implements Identifiable {
         return null;
     }
 
-   /**
-    * Get lastName, firstName of the default PersonName Set record
-    */
-   @Transient
-   public String getCompositeDefaultPersonName() {
-      return compositeDefaultPersonName;
-   }
+    /**
+     * Get lastName, firstName of the default PersonName Set record
+     */
+    @Transient
+    public String getCompositeDefaultPersonName() {
+        return compositeDefaultPersonName;
+    }
 
-   /**
-    * Set lastName, firstName of the default PersonName Set record
-    * @param compositeDefaultPersonName
-    */
-   public void setCompositeDefaultPersonName(String compositeDefaultPersonName) {
-      this.compositeDefaultPersonName = compositeDefaultPersonName;
-   }
+    /**
+     * Set lastName, firstName of the default PersonName Set record
+     *
+     * @param compositeDefaultPersonName
+     */
+    public void setCompositeDefaultPersonName(String compositeDefaultPersonName) {
+        this.compositeDefaultPersonName = compositeDefaultPersonName;
+    }
 
-   /**
-    * Get Address line 1, state, postalCode, and country of the default PostalAddress Set record
-    */
-   @Transient
-   public String getCompositeDefaultPostalAddress() {
-      return compositeDefaultPostalAddress;
-   }
+    /**
+     * Get Address line 1, state, postalCode, and country of the default PostalAddress Set record
+     */
+    @Transient
+    public String getCompositeDefaultPostalAddress() {
+        return compositeDefaultPostalAddress;
+    }
 
-   /**
-    * Set Address line 1, state, postalCode, and country of the default PostalAddress Set record
-    * @param compositeDefaultPostalAddress
-    */
-   public void setCompositeDefaultPostalAddress(String compositeDefaultPostalAddress) {
-      this.compositeDefaultPostalAddress = compositeDefaultPostalAddress;
-   }
+    /**
+     * Set Address line 1, state, postalCode, and country of the default PostalAddress Set record
+     *
+     * @param compositeDefaultPostalAddress
+     */
+    public void setCompositeDefaultPostalAddress(String compositeDefaultPostalAddress) {
+        this.compositeDefaultPostalAddress = compositeDefaultPostalAddress;
+    }
+
+
+    @Transient
+    public Account getCopy() {
+        Account account = new Account();
+        account.setId(getId());
+        account.setEntityId(getEntityId());
+        account.setStatusType(getStatusType());
+        account.setCreationDate(getCreationDate());
+        account.setLastKimUpdate(getLastKimUpdate());
+        account.setKimAccount(isKimAccount());
+        account.setLatePeriod(getLatePeriod());
+        account.setAbleToAuthenticate(isAbleToAuthenticate());
+        account.setCreditLimit(getCreditLimit());
+        account.setPersonNames(new HashSet<PersonName>(getPersonNames()));
+        account.setElectronicContacts(new HashSet<ElectronicContact>(getElectronicContacts()));
+        account.setPostalAddresses(new HashSet<PostalAddress>(getPostalAddresses()));
+        return account;
+    }
+
 }

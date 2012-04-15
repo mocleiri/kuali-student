@@ -22,177 +22,170 @@ import java.util.*;
 @RequestMapping(value = "/transOvrVw")
 public class TransOvrController extends UifControllerBase {
 
-   @Autowired
-   private AccountService accountService;
+    @Autowired
+    private AccountService accountService;
 
-   @Autowired
-   private TransactionService transactionService;
+    @Autowired
+    private TransactionService transactionService;
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected TransOvrForm createInitialForm(HttpServletRequest request) {
-      TransOvrForm form = new TransOvrForm();
-      return form;
-   }
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected TransOvrForm createInitialForm(HttpServletRequest request) {
+        TransOvrForm form = new TransOvrForm();
+        return form;
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=submit")
-   public ModelAndView submit(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   public ModelAndView save(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
-      // do save stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
-
-      // just for the transactions by person page
-      String pageId = request.getParameter("pageId");
-
-      if (pageId != null && pageId.compareTo("TransByPersonPage") == 0) {
-         String id = request.getParameter("id");
-         if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("'id' request parameter must be specified");
-         }
-
-         List<Charge> charges = transactionService.getCharges(id);
-
-         form.setChargeList(charges);
-      }
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * User searches on a (last) name. The result set is iterated over to create the composite PersonName
-    * and composite address using default records, eventfully creating a browse list that can be displayed
-    * and selected from for further processing as desired.
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=searchByName")
-   public ModelAndView searchByName(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    public ModelAndView submit(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
+        // do submit stuff...
 
-      // we do not have a query by name or partial name via last name or contains yet
-      // if no result set from getting full accounts than the List is empty
-      // otherwise the lit contains records and a compsite person name and postal address
+        return getUIFModelAndView(form);
+    }
 
-      String studentLookupByName = form.getStudentLookupByName();
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    public ModelAndView save(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
+        // do save stuff...
+        return getUIFModelAndView(form);
+    }
 
-      // query for all accounts
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
 
-      List<Account> accountSearchList = accountService.getFullAccounts();
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
+                            HttpServletRequest request, HttpServletResponse response) {
 
-      // create a a list of Account objects for display requirements
+        // just for the transactions by person page
+        String pageId = request.getParameter("pageId");
 
-      List<Account> accountList = new ArrayList<Account>();
-
-      // if we have a result set of Accounts from the query
-
-      Iterator<Account> accountIterator = accountSearchList.iterator();
-      while (accountIterator.hasNext()) {
-         Account account = accountIterator.next();
-
-         PersonName pnDflt = account.getDefaultPersonName();
-         if (pnDflt != null &&
-               pnDflt.getLastName().indexOf(studentLookupByName) != -1) {
-
-            // an account should have a default PersonName and default PostalAddress
-
-            PostalAddress paDflt = account.getDefaultPostalAddress();
-
-            Account accountCopy = account.CopyOf();
-
-            StringBuilder sbPN = new StringBuilder();
-            StringBuilder sbPA = new StringBuilder();
-
-            // create the composite default person name
-
-            if (pnDflt != null) {
-               sbPN.append(pnDflt.getLastName());
-               sbPN.append(", ");
-               sbPN.append(pnDflt.getFirstName());
-
-               accountCopy.setCompositeDefaultPersonName(sbPN.toString());
+        if (pageId != null && pageId.compareTo("TransByPersonPage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
-            // create the composite default postal address
-            if (paDflt != null) {
-               sbPA.append(paDflt.getStreetAddress1());
-               sbPA.append(", ");
-               sbPA.append(paDflt.getState());
-               sbPA.append(" ");
-               sbPA.append(paDflt.getPostalCode());
-               sbPA.append(" ");
-               sbPA.append(paDflt.getCountry());
+            List<Charge> charges = transactionService.getCharges(id);
 
-               accountCopy.setCompositeDefaultPostalAddress(sbPA.toString());
+            form.setChargeList(charges);
+        }
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * User searches on a (last) name. The result set is iterated over to create the composite PersonName
+     * and composite address using default records, eventfully creating a browse list that can be displayed
+     * and selected from for further processing as desired.
+     *
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByName")
+    public ModelAndView searchByName(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
+
+        // we do not have a query by name or partial name via last name or contains yet
+        // if no result set from getting full accounts than the List is empty
+        // otherwise the lit contains records and a compsite person name and postal address
+
+        String studentLookupByName = form.getStudentLookupByName();
+
+        // query for all accounts
+
+        List<Account> accountSearchList = accountService.getFullAccounts();
+
+        // create a a list of Account objects for display requirements
+
+        List<Account> accountList = new ArrayList<Account>();
+
+        // if we have a result set of Accounts from the query
+
+        for (Account account : accountSearchList) {
+
+            PersonName personName = account.getDefaultPersonName();
+
+            if (personName != null && personName.getLastName().contains(studentLookupByName)) {
+
+                // an account should have a default PersonName and default PostalAddress
+
+                PostalAddress postalAddress = account.getDefaultPostalAddress();
+
+                Account accountCopy = account.getCopy();
+
+                StringBuilder sbPN = new StringBuilder();
+                StringBuilder sbPA = new StringBuilder();
+
+                // create the composite default person name
+
+                sbPN.append(personName.getLastName());
+                sbPN.append(", ");
+                sbPN.append(personName.getFirstName());
+
+                accountCopy.setCompositeDefaultPersonName(sbPN.toString());
+
+                // create the composite default postal address
+                if (postalAddress != null) {
+                    sbPA.append(postalAddress.getStreetAddress1());
+                    sbPA.append(", ");
+                    sbPA.append(postalAddress.getState());
+                    sbPA.append(" ");
+                    sbPA.append(postalAddress.getPostalCode());
+                    sbPA.append(" ");
+                    sbPA.append(postalAddress.getCountry());
+
+                    accountCopy.setCompositeDefaultPostalAddress(sbPA.toString());
+                }
+
+                // add each account copy to a list
+
+                accountList.add(accountCopy);
             }
+        }
 
-            // add each account copy to a list
+        // set the account list derived from the full search list
 
-            accountList.add(accountCopy);
-         }
-      }
+        form.setAccountBrowseList(accountList);
 
-      // set the account list derived from the full search list
-
-      form.setAccountBrowseList(accountList);
-
-      // do a search by name returning account info
-      return getUIFModelAndView(form);
-   }
+        // do a search by name returning account info
+        return getUIFModelAndView(form);
+    }
 }
