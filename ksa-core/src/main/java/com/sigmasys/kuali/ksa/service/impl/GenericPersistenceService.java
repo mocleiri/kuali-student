@@ -65,23 +65,23 @@ public class GenericPersistenceService {
      * Returns the list of all Identifiable entities for the given class with the default search criteria.
      *
      * @param entityClass Entity Class
-     * @param orderBy     array of fields used in "order by" clause
+     * @param orderBy     array of fields used in "order by" clause, can be null
      * @return List of Identifiable objects
      */
     public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, Pair<String, SortOrder>... orderBy) {
-        return getEntities(entityClass, new SearchCriteria() {}, orderBy);
+        return getEntities(entityClass, null, orderBy);
     }
 
     /**
      * Returns the list of all Identifiable entities for the given class.
      *
      * @param entityClass    Entity Class
-     * @param searchCriteria Search Criteria
-     * @param orderBy        array of fields used in "order by" clause
+     * @param searchCriteria Search Criteria, can be null
+     * @param orderBy        optional array of fields used in "order by" clause, can be null
      * @return List of Identifiable objects
      */
     protected <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
-                                                        Pair<String, SortOrder>... orderBy) {
+                                                           Pair<String, SortOrder>... orderBy) {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<T> criteria = criteriaBuilder.createQuery(entityClass);
@@ -90,21 +90,25 @@ public class GenericPersistenceService {
 
         criteria.select(selection);
 
-        Order[] orders = new Order[orderBy.length];
-        int i = 0;
-        for (Pair<String, SortOrder> order : orderBy) {
-            Path field = selection.get(order.getA());
-            SortOrder sortOrder = order.getB();
-            orders[i++] = (SortOrder.ASC == sortOrder) ? criteriaBuilder.asc(field) : criteriaBuilder.desc(field);
+        if (orderBy != null) {
+            Order[] orders = new Order[orderBy.length];
+            int i = 0;
+            for (Pair<String, SortOrder> order : orderBy) {
+                Path field = selection.get(order.getA());
+                SortOrder sortOrder = order.getB();
+                orders[i++] = (SortOrder.ASC == sortOrder) ? criteriaBuilder.asc(field) : criteriaBuilder.desc(field);
+            }
+            criteria.orderBy(orders);
         }
-
-        criteria.orderBy(orders);
 
         Query query = em.createQuery(criteria.select(selection));
 
-        if (searchCriteria.getLimit() != SearchCriteria.UNLIMITED_ITEMS_NUMBER) {
-            query.setFirstResult(searchCriteria.getOffset());
-            query.setMaxResults(searchCriteria.getLimit());
+        // TODO: based on the search criteria build Predicate
+        if (searchCriteria != null) {
+            if (searchCriteria.getLimit() != SearchCriteria.UNLIMITED_ITEMS_NUMBER) {
+                query.setFirstResult(searchCriteria.getOffset());
+                query.setMaxResults(searchCriteria.getLimit());
+            }
         }
 
         return query.getResultList();
