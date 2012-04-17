@@ -134,6 +134,19 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns all deferments by account ID
+     *
+     * @param userId Account ID
+     * @return List of all deferments by account ID
+     */
+    @Override
+    public List<Deferment> getDeferments(String userId) {
+        Query query = em.createQuery("select d from Deferment d where d.account.id = :userId order by d.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    /**
      * Returns all transactions sorted by ID
      *
      * @param userId Account ID

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
@@ -152,10 +151,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionService.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TransactionService.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="61" selection-start="1826" selection-end="2016" vertical-scroll-proportion="0.0">
+            <state line="106" column="18" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.70030123">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -163,10 +162,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionServiceImpl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TransactionServiceImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="65" selection-start="3146" selection-end="3146" vertical-scroll-proportion="0.56842107">
+            <state line="142" column="25" selection-start="3603" selection-end="3603" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#492#522#0" expanded="true" />
               </folding>
@@ -245,8 +244,8 @@
         <option value="$PROJECT_DIR$/sql/rice-impex-client-bootstrap-data.sql" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Account.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
       </list>
     </option>
   </component>
@@ -1778,7 +1777,11 @@
       <created>1334515809101</created>
       <updated>1334515809101</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="refactoring">
+      <created>1334625557101</created>
+      <updated>1334625557101</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1814,7 +1817,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30341464" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20097561" sideWeight="0.49839744" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21581197" sideWeight="0.11632454" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21581197" sideWeight="0.15835777" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23949169" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1822,10 +1825,10 @@
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11431624" sideWeight="0.5102639" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11431624" sideWeight="0.69501466" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21581197" sideWeight="0.38709676" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48973608" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21581197" sideWeight="0.52981424" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30498534" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2197,20 +2200,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="61" selection-start="1826" selection-end="2016" vertical-scroll-proportion="0.0">
+        <state line="142" column="25" selection-start="3603" selection-end="3603" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#492#522#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="65" selection-start="3146" selection-end="3146" vertical-scroll-proportion="0.56842107">
+        <state line="106" column="18" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.70030123">
           <folding>
-            <element signature="e#492#522#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

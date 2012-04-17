@@ -102,6 +102,14 @@ public interface TransactionService {
     List<Deferment> getDeferments();
 
     /**
+     * Returns all deferments by account ID
+     *
+     * @param userId Account ID
+     * @return List of all deferments by account ID
+     */
+    List<Deferment> getDeferments(String userId);
+
+    /**
      * Persists the transaction in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *
