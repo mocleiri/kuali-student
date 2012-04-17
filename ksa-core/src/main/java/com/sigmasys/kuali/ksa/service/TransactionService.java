@@ -87,6 +87,14 @@ public interface TransactionService {
     List<Payment> getPayments();
 
     /**
+     * Returns all payments by account ID
+     *
+     * @param userId Account ID
+     * @return List of all payments by account ID
+     */
+    List<Payment> getPayments(String userId);
+
+    /**
      * Returns all deferments sorted by ID
      *
      * @return List of all deferments
