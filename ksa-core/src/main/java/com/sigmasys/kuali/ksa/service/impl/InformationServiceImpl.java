@@ -65,7 +65,20 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Returns all Memo entities sorted by Account ID in the descendant order
+     * Returns all Alert entities by Account ID
+     *
+     * @param userId Account ID
+     * @return List of memos
+     */
+    @Override
+    public List<Alert> getAlerts(String userId) {
+        Query query = em.createQuery("select a from Alert a where a.account.id = :userId order by a.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    /**
+     * Returns all Memo entities by Account ID
      *
      * @param userId Account ID
      * @return List of memos
