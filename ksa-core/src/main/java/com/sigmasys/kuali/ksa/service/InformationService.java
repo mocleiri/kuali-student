@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.Alert;
+import com.sigmasys.kuali.ksa.model.Flag;
 import com.sigmasys.kuali.ksa.model.Information;
 import com.sigmasys.kuali.ksa.model.Memo;
 
@@ -46,7 +47,7 @@ public interface InformationService {
 
 
     /**
-     * Returns all Alert entities sorted by Account ID
+     * Returns all Alert entities by Account ID
      *
      * @param userId Account ID
      * @return List of alerts
@@ -54,7 +55,15 @@ public interface InformationService {
     List<Alert> getAlerts(String userId);
 
     /**
-     * Returns all Memo entities sorted by Account ID
+     * Returns all Flag entities by Account ID
+     *
+     * @param userId Account ID
+     * @return List of flags
+     */
+    List<Flag> getFlags(String userId);
+
+    /**
+     * Returns all Memo entities by Account ID
      *
      * @param userId Account ID
      * @return List of memos

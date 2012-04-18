@@ -78,6 +78,18 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns all Flag entities by Account ID
+     *
+     * @param userId Account ID
+     * @return List of flags
+     */
+    public List<Flag> getFlags(String userId) {
+        Query query = em.createQuery("select f from Flag f where f.account.id = :userId order by f.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    /**
      * Returns all Memo entities by Account ID
      *
      * @param userId Account ID
