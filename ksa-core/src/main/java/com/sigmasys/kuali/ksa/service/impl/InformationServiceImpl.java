@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Michael Ivanov
  */
-@Service("currencyService")
+@Service("informationService")
 @Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
 public class InformationServiceImpl extends GenericPersistenceService implements InformationService {
@@ -62,6 +62,19 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     @Override
     public List<Memo> getMemos() {
         return getEntities(Memo.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+    }
+
+    /**
+     * Returns all Memo entities sorted by Account ID in the descendant order
+     *
+     * @param userId Account ID
+     * @return List of memos
+     */
+    @Override
+    public List<Memo> getMemos(String userId) {
+        Query query = em.createQuery("select m from Memo m where m.account.id = :userId order by m.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 
     /**

@@ -44,6 +44,14 @@ public interface InformationService {
     List<Memo> getMemos();
 
     /**
+     * Returns all Memo entities sorted by Account ID in the descendant order
+     *
+     * @param userId Account ID
+     * @return List of memos
+     */
+    List<Memo> getMemos(String userId);
+
+    /**
      * Persists the memo in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *
