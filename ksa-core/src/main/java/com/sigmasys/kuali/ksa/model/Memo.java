@@ -3,12 +3,12 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 
 /**
- * Memo
+ * Memo entity.
  *
  * @author Michael Ivanov
  */
 @Entity
-@DiscriminatorValue("M")
+@DiscriminatorValue(InformationTypeValue.MEMO_CODE)
 public class Memo extends Information {
 
     /**

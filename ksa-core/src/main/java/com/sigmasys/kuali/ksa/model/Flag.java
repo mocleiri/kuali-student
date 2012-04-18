@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @author Michael Ivanov
  */
 @Entity
-@DiscriminatorValue("F")
+@DiscriminatorValue(InformationTypeValue.FLAG_CODE)
 public class Flag extends Information {
 
     /**

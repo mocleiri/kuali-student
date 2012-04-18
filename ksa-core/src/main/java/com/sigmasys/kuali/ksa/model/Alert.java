@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @author Michael Ivanov
  */
 @Entity
-@DiscriminatorValue("A")
+@DiscriminatorValue(InformationTypeValue.ALERT_CODE)
 public class Alert extends Information {
 
     /**

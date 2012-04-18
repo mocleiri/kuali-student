@@ -1,7 +1,8 @@
 package com.sigmasys.kuali.ksa.model;
 
 /**
- * Transaction type value enum. It is used to distinguish different transaction types in the KSA code and UI forms
+ * Transaction type value enum.
+ * It is used to distinguish different transaction types in the KSA code and UI forms
  *
  * @author Michael Ivanov
  */
