@@ -1,8 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
+@SuppressWarnings("unchecked")
 public class TransactionServiceTest extends AbstractServiceTest {
 
 
@@ -65,6 +65,5 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         // Add more assertions when we have some test data
     }
-
 
 }

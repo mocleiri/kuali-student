@@ -21,7 +21,7 @@ import java.util.List;
  * Currency service JPA implementation.
  * <p/>
  *
- * @author Tim Bornholtz
+ * @author Tim Bornholtz, Michael Ivanov
  */
 @Service("accountService")
 @Transactional(readOnly = true)
@@ -30,23 +30,72 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     private static final Log logger = LogFactory.getLog(AccountServiceImpl.class);
 
+    /**
+     * This process creates a temporary subset of the account as if the account were being administered
+     * as a balance forward account. This permits aging the account in a way that is not affected by the
+     * payment application methodology. This temporary array is passed to the ageDebt() method.
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     */
     @Override
-    public void rebalance(Boolean ignoreDeferment) {
+    public void rebalance(String userId, boolean ignoreDeferment) {
+        BigDecimal dueBalance = getDueBalance(userId, ignoreDeferment);
+        BigDecimal accountBalance = dueBalance;
+        BigDecimal remainingBalance = dueBalance;
+        Query query = em.createQuery("select t from Transaction t " +
+                " where t.account.id = :userId and " +
+                "       t.effectiveDate <= CURRENT_DATE and type(t) in (:chargeCode)");
+        query.setParameter("userId", userId);
+        query.setParameter("chargeCode", Charge.class);
+        List<Debit> debits = query.getResultList();
+        // TODO
+    }
+
+
+    @Override
+    public void ageDebt(boolean ignoreDeferment) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    /**
+     * Returns the total balance due of all active transactions.
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return total amount of balance due
+     */
     @Override
-    public void ageDebt(Boolean ignoreDeferment) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public BigDecimal getDueBalance(String userId, boolean ignoreDeferment) {
+        Query query = em.createQuery("select t from Transaction t " +
+                " where t.account.id = :userId and t.effectiveDate <= CURRENT_DATE");
+        query.setParameter("userId", userId);
+        List<Transaction> transactions = query.getResultList();
+        BigDecimal amountBilled = BigDecimal.ZERO;
+        BigDecimal amountPaid = BigDecimal.ZERO;
+        for (Transaction transaction : transactions) {
+            if (transaction instanceof Debit) {
+                Debit debit = (Debit) transaction;
+                amountBilled = amountBilled.add(debit.getAmount());
+            } else if (transaction instanceof Credit) {
+                boolean includeAmount = true;
+                if (transaction instanceof Deferment) {
+                    if (ignoreDeferment || ((Deferment) transaction).isExpired()) {
+                        includeAmount = false;
+                    }
+                }
+                if (includeAmount) {
+                    Credit credit = (Credit) transaction;
+                    amountPaid = amountPaid.add(credit.getAllocatedAmount());
+                    amountPaid = amountPaid.add(credit.getLockedAllocatedAmount());
+                }
+            }
+        }
+        return amountBilled.subtract(amountPaid);
     }
 
     @Override
-    public BigDecimal getDueBalance(Boolean ignoreDeferment) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public BigDecimal getOutstandingBalance(Boolean ignoreDeferment) {
+    public BigDecimal getOutstandingBalance(boolean ignoreDeferment) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

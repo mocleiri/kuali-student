@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -101,4 +102,21 @@ public class AccountServiceTest extends AbstractServiceTest {
         // Add more assertions when we have some test data
     }
 
+    @Test
+    public void getDueBalance() {
+
+        String userId = "admin";
+
+        BigDecimal balanceDue = accountService.getDueBalance(userId, false);
+
+        Assert.notNull(balanceDue);
+        Assert.isTrue(balanceDue.compareTo(BigDecimal.ZERO) >= 0);
+
+    }
+
+    @Test
+    public void rebalance() {
+        String userId = "admin";
+        accountService.rebalance(userId, false);
+    }
 }

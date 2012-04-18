@@ -13,36 +13,41 @@ import java.util.List;
  * objects
  * <p/>
  *
- * @author Tim Bornholtz
+ * @author Tim Bornholtz, Michael Ivanov
  */
 @WebService(name = "AccountService", targetNamespace = "http://ksa.kuali.org/wsdl/account")
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public interface AccountService {
+
     /**
      * This process creates a temporary subset of the account as if the account were being administered
      * as a balance forward account. This permits aging the account in a way that is not affected by the
      * payment application methodology. This temporary array is passed to the ageDebt() method.
      *
-     * @param ignoreDeferment
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
      */
-    void rebalance(Boolean ignoreDeferment);
+    void rebalance(String userId, boolean ignoreDeferment);
 
     /**
      * @param ignoreDeferment
      */
-    void ageDebt(Boolean ignoreDeferment);
+    void ageDebt(boolean ignoreDeferment);
+
+    /**
+     * Returns the total balance due of all active transactions.
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return total amount of balance due
+     */
+    BigDecimal getDueBalance(String userId, boolean ignoreDeferment);
 
     /**
      * @param ignoreDeferment
      * @return
      */
-    BigDecimal getDueBalance(Boolean ignoreDeferment);
-
-    /**
-     * @param ignoreDeferment
-     * @return
-     */
-    BigDecimal getOutstandingBalance(Boolean ignoreDeferment);
+    BigDecimal getOutstandingBalance(boolean ignoreDeferment);
 
     /**
      * @return
