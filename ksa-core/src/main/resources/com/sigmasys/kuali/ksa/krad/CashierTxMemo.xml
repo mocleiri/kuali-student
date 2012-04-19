@@ -470,7 +470,7 @@
                                     <bean parent="Uif-DropdownControl"/>
                                 </property>
                                 <property name="optionsFinder">
-                                    <bean class="com.sigmasys.kuali.ksa.util.InformationTypeKeyValues" p:blankOption="false"/>
+                                    <bean class="com.sigmasys.kuali.ksa.krad.util.InformationTypeKeyValues" p:blankOption="false"/>
                                 </property>
                             </bean>
                             <bean parent="Uif-InputField" p:propertyName="memoText" p:label="Memo Text"
