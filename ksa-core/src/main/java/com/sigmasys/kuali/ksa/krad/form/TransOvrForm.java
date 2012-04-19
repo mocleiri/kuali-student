@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.krad.form;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Charge;
 
+import com.sigmasys.kuali.ksa.model.Payment;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import java.util.List;
 
@@ -16,6 +17,16 @@ public class TransOvrForm extends UifFormBase {
    private List<Account> accountBrowseList;
 
    private List<Charge> chargeList;
+
+   // result set of charges
+   private List<Payment> paymentList;
+
+   // a single charge
+   private Charge charge;
+
+   // a single payment
+   private Payment payment;
+
 
    /**
     * Get the student name
@@ -69,5 +80,53 @@ public class TransOvrForm extends UifFormBase {
     */
    public void setChargeList(List<Charge> chargeList) {
       this.chargeList = chargeList;
+   }
+
+   /**
+    * Get the list of Payments found via a selected Account
+    * @return
+    */
+   public List<Payment> getPaymentList() {
+      return paymentList;
+   }
+
+   /**
+    * Set the list of Payments found via a selected Account
+    * @param paymentList
+    */
+   public void setPaymentList(List<Payment> paymentList) {
+      this.paymentList = paymentList;
+   }
+
+   /**
+    * Get a charge object
+    * @return
+    */
+   public Charge getCharge() {
+      return charge;
+   }
+
+   /**
+    * Set a charge object
+    * @param charge
+    */
+   public void setCharge(Charge charge) {
+      this.charge = charge;
+   }
+
+   /**
+    * Get a Payment object
+    * @return
+    */
+   public Payment getPayment() {
+      return payment;
+   }
+
+   /**
+    * Set a Payment object
+    * @param payment
+    */
+   public void setPayment(Payment payment) {
+      this.payment = payment;
    }
 }

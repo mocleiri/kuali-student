@@ -93,18 +93,48 @@ public class TransOvrController extends UifControllerBase {
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
 
-        if (pageId != null && pageId.compareTo("TransByPersonPage") == 0) {
+        if (pageId != null && pageId.compareTo("bursaTransByPersonPage") == 0) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
+            // charges by ID
             List<Charge> charges = transactionService.getCharges(id);
 
+            // payments by ID
+            List<Payment> payments = transactionService.getPayments(id);
+
             form.setChargeList(charges);
+
+            form.setPaymentList(payments);
         }
 
-        return getUIFModelAndView(form);
+       if (pageId != null && pageId.compareTo("bursaChargePage") == 0) {
+          String id = request.getParameter("id");
+          if (id == null || id.isEmpty()) {
+             throw new IllegalArgumentException("'id' request parameter must be specified");
+          }
+
+          // charge by ID
+          Charge charge = transactionService.getCharge(Long.valueOf(id));
+
+          form.setCharge(charge);
+       }
+
+       if (pageId != null && pageId.compareTo("bursaPaymentPage") == 0) {
+          String id = request.getParameter("id");
+          if (id == null || id.isEmpty()) {
+             throw new IllegalArgumentException("'id' request parameter must be specified");
+          }
+
+          // payment by ID
+          Payment payment = transactionService.getPayment(Long.valueOf(id));
+
+          form.setPayment(payment);
+       }
+
+       return getUIFModelAndView(form);
     }
 
     /**
