@@ -133,10 +133,11 @@ public interface TransactionService {
      * this method will only be called by the payment application module.
      * <p/>
      *
-     * @param transactionId transaction ID
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
      * @param amount        amount of money to be allocated TODO -
      */
-    void allocateAmount(Long transactionId, BigDecimal amount);
+    void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
 
     /**
      * This will allocate a locked amount on the transaction. A check will be
@@ -144,10 +145,12 @@ public interface TransactionService {
      * the ledgerAmount of the transaction. Setting an amount as locked prevents
      * the payment application system from reallocating the balance elsewhere.
      *
-     * @param transactionId transaction ID
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
      * @param amount        amount of money to be allocated TODO -
      */
-    void allocateLockedAmount(Long transactionId, BigDecimal amount);
+    void createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+
 
     /**
      * If a memos can be generated in a number of ways. If a memo is generated

@@ -194,13 +194,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Override
     @Transactional(readOnly = false)
-    public void allocateAmount(Long transactionId, BigDecimal amount) {
+    public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
         // TODO
     }
 
     @Override
     @Transactional(readOnly = false)
-    public void allocateLockedAmount(Long transactionId, BigDecimal amount) {
+    public void createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
         // TODO
     }
 

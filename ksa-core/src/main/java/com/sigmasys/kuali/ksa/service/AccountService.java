@@ -57,19 +57,21 @@ public interface AccountService {
     BigDecimal getOutstandingBalance(String userId, boolean ignoreDeferment);
 
     /**
-     * @return
+     * Returns unallocated balance for the given Account ID
+     *
+     * @param userId Account ID
+     * @return unallocated balance
      */
-    BigDecimal getUnallocatedBalance();
+    BigDecimal getUnallocatedBalance(String userId);
 
     /**
-     * @return
+     * Returns the deferred amount
+     *
+     * @param userId Account ID
+     * @return deferred amount
      */
-    BigDecimal getDeferredAmount();
+    BigDecimal getDeferredAmount(String userId);
 
-    /**
-     * moving a transaction from a pre-effective state to an effective state.
-     */
-    void makeEffective();
 
     /**
      * Simple Balance Forward Only
@@ -81,17 +83,15 @@ public interface AccountService {
      * Deferments, when created, are allocated to their charge using lockedAllocationAmount.
      * A more complex, rule-based payment application system, that takes into account payment
      * divisions, priority codes, etc. will be developed to supplement this algorithm.
+     *
+     * @param userId Account ID
      */
+    void paymentApplication(String userId);
 
-    void paymentApplication();
-
-    void createAllocation(Transaction transaction1, Transaction transaction2, BigDecimal allocationAmount);
-
-    void createLockedAllocation(Transaction transaction1, Transaction transaction2, BigDecimal allocationAmount);
 
     /**
      * This method is used to verify that an account exists before a transaction or other operations are
-     * performed on the account. There is an initial inquiry into the KSA store. If no account exist, then there is
+     * performed on the account. There is an initial inquiry into the KSA store. If no account exists, then there is
      * an inquiry into KIM. If KIM also returns no result, then false is returned. If a KIM account does exist, then
      * a KSA account is created, using the KIM information as a template.
      *
@@ -99,6 +99,14 @@ public interface AccountService {
      * @return the account instance or null if the account does not exist
      */
     Account getOrCreateAccount(String userId);
+
+    /**
+     * Checks if KSA account exists
+     *
+     * @param userId Account ID
+     * @return true if the account exists, false otherwise
+     */
+    boolean doesKsaAccountExist(String userId);
 
     /**
      * This methods fetches Account and all its associations by account ID.

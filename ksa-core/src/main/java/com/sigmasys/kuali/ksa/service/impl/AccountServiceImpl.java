@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.Person;
@@ -32,6 +33,9 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     @Autowired
     private CalendarService calendarService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     /**
      * This process creates a temporary subset of the account as if the account were being administered
@@ -158,8 +162,25 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      */
     @Override
     public BigDecimal getDueBalance(String userId, boolean ignoreDeferment) {
+        return getBalance(userId, ignoreDeferment, false);
+    }
+
+    /**
+     * Returns the outstanding balance for the given account
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return total amount of outstanding balance
+     */
+    @Override
+    public BigDecimal getOutstandingBalance(String userId, boolean ignoreDeferment) {
+        return getBalance(userId, ignoreDeferment, true);
+    }
+
+    public BigDecimal getBalance(String userId, boolean ignoreDeferment, boolean notYetEffective) {
+        final String sign = notYetEffective ? ">" : "<=";
         Query query = em.createQuery("select t from Transaction t " +
-                " where t.account.id = :userId and t.effectiveDate <= CURRENT_DATE");
+                " where t.account.id = :userId and t.effectiveDate " + sign + " CURRENT_DATE");
         query.setParameter("userId", userId);
         List<Transaction> transactions = query.getResultList();
         BigDecimal amountBilled = BigDecimal.ZERO;
@@ -195,45 +216,64 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
     /**
-     * Returns the outstanding balance for the given account
+     * Returns unallocated balance for the given Account ID
      *
-     * @param userId          Account ID
-     * @param ignoreDeferment boolean value
-     * @return total amount of outstanding balance
+     * @param userId Account ID
+     * @return unallocated balance
      */
     @Override
-    public BigDecimal getOutstandingBalance(String userId, boolean ignoreDeferment) {
-        return null;
+    public BigDecimal getUnallocatedBalance(String userId) {
+        List<Payment> payments = transactionService.getPayments(userId);
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (Payment payment : payments) {
+            BigDecimal amount = (payment.getAmount() != null) ? payment.getAmount() : BigDecimal.ZERO;
+            BigDecimal allocatedAmount = (payment.getAllocatedAmount() != null) ?
+                    payment.getAllocatedAmount() : BigDecimal.ZERO;
+            BigDecimal lockedAllocatedAmount = (payment.getLockedAllocatedAmount() != null) ?
+                    payment.getLockedAllocatedAmount() : BigDecimal.ZERO;
+            BigDecimal difference = amount.subtract(allocatedAmount.add(lockedAllocatedAmount));
+            if (difference.compareTo(BigDecimal.ZERO) > 0) {
+                totalAmount = totalAmount.add(difference);
+            }
+        }
+        return totalAmount;
     }
 
+    /**
+     * Returns the deferred amount
+     *
+     * @param userId Account ID
+     * @return deferred amount
+     */
     @Override
-    public BigDecimal getUnallocatedBalance() {
-        return null;
+    public BigDecimal getDeferredAmount(String userId) {
+        List<Deferment> deferments = transactionService.getDeferments(userId);
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        Date curDate = new Date();
+        for (Deferment deferment : deferments) {
+            Date expirationDate = deferment.getExpirationDate();
+            if (expirationDate == null || curDate.before(expirationDate)) {
+                totalAmount = totalAmount.add(deferment.getAmount());
+            }
+        }
+        return totalAmount;
     }
 
+
     @Override
-    public BigDecimal getDeferredAmount() {
-        return null;
+    public void paymentApplication(String userId) {
+        // TODO
     }
 
+    /**
+     * Checks if KSA account exists
+     *
+     * @param userId Account ID
+     * @return true if the account exists, false otherwise
+     */
     @Override
-    public void makeEffective() {
-
-    }
-
-    @Override
-    public void paymentApplication() {
-
-    }
-
-    @Override
-    public void createAllocation(Transaction transaction1, Transaction transaction2, BigDecimal allocationAmount) {
-
-    }
-
-    @Override
-    public void createLockedAllocation(Transaction transaction1, Transaction transaction2, BigDecimal allocationAmount) {
-
+    public boolean doesKsaAccountExist(String userId) {
+        return getEntity(userId, Account.class) != null;
     }
 
     /**
