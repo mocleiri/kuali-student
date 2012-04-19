@@ -57,8 +57,6 @@
     <bean id="chargeUpdateGroup" parent="Uif-GridSection">
         <!--<property name="title" value="Charge Group"/>-->
         <property name="instructionalText" value="Charge transaction maintenance"/>
-        <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Charge"/>
-        <property name="propertyName" value="charge"/>-->
         <property name="layoutManager">
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
         </property>

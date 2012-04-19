@@ -32,18 +32,18 @@
                 <bean parent="Uif-Page" p:id="page1" p:title="Currency Details (ISO = @{currency.iso})">
                     <property name="items">
                         <list>
-                            <bean parent="Uif-InputField" p:propertyName="currency.iso" p:label="Symbol">
+                            <bean parent="Uif-InputField" p:propertyName="currency.iso" p:labelPlacement="TOP" p:label="Symbol">
                                 <property name="readOnly" value="true"/>
                                 <property name="control">
                                     <bean parent="Uif-TextControl" p:size="11" p:maxLength="10" />
                                 </property>
                             </bean>
-                            <bean parent="Uif-InputField" p:propertyName="currency.name" p:label="Name" p:required="true">
+                            <bean parent="Uif-InputField" p:propertyName="currency.name" p:label="Name" p:labelPlacement="TOP" p:required="true">
                                 <property name="control">
                                     <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
                                 </property>
                             </bean>
-                            <bean parent="Uif-InputField" p:label="Description" p:propertyName="currency.description">
+                            <bean parent="Uif-InputField" p:label="Description" p:propertyName="currency.description" p:labelPlacement="TOP" >
                                 <property name="control">
                                     <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
                                           p:watermarkText="Key in the statement description here..." p:maxLength="2000"/>
