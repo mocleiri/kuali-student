@@ -58,8 +58,15 @@ public class CashierTxMemoForm extends UifFormBase {
 
    private BigDecimal aged90;
 
+   private boolean ignoreDeferment;
+
    private List<Memo> memoList;
 
+   private String memoText;
+
+   private String memoType;
+
+   private InformationTypeValue informationTypeValue;
 
    /**
     * Get the student name
@@ -256,5 +263,37 @@ public class CashierTxMemoForm extends UifFormBase {
          return value.setScale(5, BigDecimal.ROUND_CEILING);
       }
       return BigDecimal.ZERO;
+   }
+
+   public String getMemoText() {
+      return memoText;
+   }
+
+   public void setMemoText(String memoText) {
+      this.memoText = memoText;
+   }
+
+   public String getMemoType() {
+      return memoType;
+   }
+
+   public void setMemoType(String informationTypeValue) {
+      this.memoType = memoType;
+   }
+
+   public InformationTypeValue getInformationTypeValue() {
+      return informationTypeValue;
+   }
+
+   public void setInformationTypeValue(InformationTypeValue informationTypeValue) {
+      this.informationTypeValue = informationTypeValue;
+   }
+
+   public boolean getIgnoreDeferment() {
+      return ignoreDeferment;
+   }
+
+   public void setIgnoreDeferment(boolean ignoreDeferment) {
+      this.ignoreDeferment = ignoreDeferment;
    }
 }

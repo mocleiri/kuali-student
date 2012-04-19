@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
+import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 
 import org.kuali.rice.krad.web.controller.UifControllerBase;
@@ -30,6 +31,9 @@ public class CashierTxMemoController extends UifControllerBase {
 
    @Autowired
    private AccountService accountService;
+
+   @Autowired
+   private InformationService informationService;
 
    @Autowired
    private TransactionService transactionService;
@@ -129,6 +133,10 @@ public class CashierTxMemoController extends UifControllerBase {
          form.setSelectedId(id);
 
          Account accountById = accountService.getFullAccount(id);
+         ChargeableAccount chargeableAccount = null;
+         if (accountById != null) {
+            chargeableAccount = (ChargeableAccount) accountById;
+         }
 
          PersonName personName = accountById.getDefaultPersonName();
          PostalAddress postalAddress = accountById.getDefaultPostalAddress();
@@ -238,6 +246,7 @@ public class CashierTxMemoController extends UifControllerBase {
 
          // Memo (Information table)
 
+/*
          List<Memo> memoList = new ArrayList<Memo>();
          Memo memo = new Memo();
          memo.setId(Long.valueOf(id));
@@ -245,7 +254,8 @@ public class CashierTxMemoController extends UifControllerBase {
          memo.setNextMemo(memo);
          memo.setText("04/05/2012 - Student advised that Direct Loan financial aid submission cutoff date is 04/25/2012.");
          memoList.add(memo);
-         form.setMemoList(memoList);
+*/
+         form.setMemoList(informationService.getMemos(id));
       }
 
       return getUIFModelAndView(form);
@@ -329,6 +339,72 @@ public class CashierTxMemoController extends UifControllerBase {
       form.setAccountBrowseList(accountList);
 
       // do a search by name returning account info
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebit")
+   public ModelAndView ageDebit(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+
+      // do aging of transactions stuff...
+      //String id = request.getParameterMap().get("id").toString();
+      ChargeableAccount chargeableAccount = accountService.ageDebt("1", form.getIgnoreDeferment());
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addMemo")
+   public ModelAndView addMemo(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+      // do addMemo stuff...
+
+      String memoType = form.getMemoType();
+
+      String selId = form.getSelectedId();
+
+      InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, memoType);
+
+      Information info = null;
+      switch(informationType) {
+         case ALERT:
+            Alert alert = new Alert();
+            alert.setId(1L);
+            alert.setText(form.getMemoText());
+            info = alert;
+            break;
+         case FLAG:
+            Flag flag = new Flag();
+            flag.setId(1L);
+            info = flag;
+            break;
+         case MEMO:
+            Memo memo = new Memo();
+            memo.setId(1L);
+            memo.setText(form.getMemoText());
+            //informationService.persistMemo(memo);
+            break;
+         default:
+            break;
+      }
+
+      if (info != null)
+      {
+         informationService.persistInformation(info);
+      }
       return getUIFModelAndView(form);
    }
 
