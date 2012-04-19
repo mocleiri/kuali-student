@@ -71,20 +71,20 @@ public interface InformationService {
     List<Memo> getMemos(String userId);
 
     /**
-     * Persists the memo in the database.
+     * Persists Information in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *
-     * @param memo Memo instance
-     * @return Memo ID
+     * @param information Information instance
+     * @return Information ID
      */
-    Long persistMemo(Memo memo);
+    Long persistInformation(Information information);
 
     /**
-     * Removes the memo from the database.
+     * Removes Information from the database.
      *
-     * @param id Memo ID
-     * @return true if the Memo entity has been deleted
+     * @param id Information ID
+     * @return true if Information entity has been deleted
      */
-    boolean deleteMemo(Long id);
+    boolean deleteInformation(Long id);
 
 }

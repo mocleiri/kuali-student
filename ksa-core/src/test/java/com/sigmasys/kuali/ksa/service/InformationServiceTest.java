@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.Date;
 import java.util.List;
 
 @UseWebContext
@@ -58,12 +59,58 @@ public class InformationServiceTest extends AbstractServiceTest {
 
         memo.setText("Blah Blah Blah");
 
-        informationService.persistMemo(memo);
+        informationService.persistInformation(memo);
 
         memo = informationService.getMemo(1L);
 
         Assert.notNull(memo);
         Assert.isTrue(memo.getText().equals("Blah Blah Blah"));
+
+    }
+
+    @Test
+    public void createMemo() throws Exception {
+
+        Memo memo = new Memo();
+        memo.setText("Memo text");
+        memo.setCreatorId("admin");
+        memo.setCreationDate(new Date());
+        memo.setEffectiveDate(new Date());
+
+        Long id = informationService.persistInformation(memo);
+
+        Assert.notNull(id);
+
+        memo = informationService.getMemo(id);
+
+        Assert.notNull(memo);
+        Assert.isTrue(memo.getId().equals(id));
+        Assert.isTrue(memo.getText().equals("Memo text"));
+
+    }
+
+    @Test
+    public void deleteMemo() throws Exception {
+
+        Memo memo = new Memo();
+        memo.setText("Memo text");
+        memo.setCreatorId("admin");
+        memo.setCreationDate(new Date());
+        memo.setEffectiveDate(new Date());
+
+        Long id = informationService.persistInformation(memo);
+
+        Assert.notNull(id);
+
+        memo = informationService.getMemo(id);
+
+        Assert.notNull(memo);
+        Assert.isTrue(memo.getId().equals(id));
+        Assert.isTrue(memo.getText().equals("Memo text"));
+
+        boolean isDeleted = informationService.deleteInformation(memo.getId());
+
+        Assert.isTrue(isDeleted);
 
     }
 

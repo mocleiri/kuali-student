@@ -101,28 +101,25 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Persists the memo in the database.
+     * Persists Information in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *
-     * @param memo Memo instance
-     * @return Memo ID
+     * @param information Information instance
+     * @return Information ID
      */
     @Override
-    @Transactional(readOnly = false)
-    public Long persistMemo(Memo memo) {
-        return persistEntity(memo);
+    public Long persistInformation(Information information) {
+        return persistEntity(information);
     }
 
     /**
-     * Removes the memo from the database.
+     * Removes Information from the database.
      *
-     * @param id Memo ID
-     * @return true if the Memo entity has been deleted
+     * @param id Information ID
+     * @return true if Information entity has been deleted
      */
-    @Override
-    @Transactional(readOnly = false)
-    public boolean deleteMemo(Long id) {
-        return deleteEntity(id, Memo.class);
+    public boolean deleteInformation(Long id) {
+        return deleteEntity(id, Information.class);
     }
 
 }
