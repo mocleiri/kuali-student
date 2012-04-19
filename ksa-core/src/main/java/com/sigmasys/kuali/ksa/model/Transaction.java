@@ -137,7 +137,7 @@ public abstract class Transaction implements Identifiable {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
             @JoinColumn(name = "TRANSACTION_TYPE_ID_FK", referencedColumnName = "ID"),
             @JoinColumn(name = "TRANSACTION_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
@@ -248,14 +248,14 @@ public abstract class Transaction implements Identifiable {
         this.document = document;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DOCUMENT_ID_FK")
     public Document getDocument() {
         return document;
     }
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLLUP_ID_FK")
     public Rollup getRollup() {
         return rollup;
@@ -275,7 +275,7 @@ public abstract class Transaction implements Identifiable {
         this.amount = amount;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CURRENCY_ID_FK")
     public Currency getCurrency() {
         return currency;
@@ -294,7 +294,7 @@ public abstract class Transaction implements Identifiable {
         this.allocatedAmount = allocatedAmount;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACNT_ID_FK")
     public Account getAccount() {
         return account;

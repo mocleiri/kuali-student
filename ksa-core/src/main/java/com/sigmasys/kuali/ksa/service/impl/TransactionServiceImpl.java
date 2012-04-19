@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,6 +21,21 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class TransactionServiceImpl extends GenericPersistenceService implements TransactionService {
 
+
+    private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
+        Query query = em.createQuery("select t from " + entityType.getName() + " t " +
+                " left outer join fetch t.transactionType tt " +
+                " left outer join fetch t.account a " +
+                " left outer join fetch t.currency c " +
+                " left outer join fetch t.rollup r " +
+                " left outer join fetch t.document d " +
+                ((userIds != null && userIds.length > 0) ? " where t.account.id in (:userIds) " : "") +
+                " order by t.id desc");
+        if (userIds != null && userIds.length > 0) {
+            query.setParameter("userIds", Arrays.asList(userIds));
+        }
+        return (List<T>) query.getResultList();
+    }
 
     /**
      * Returns Transaction by ID
@@ -73,7 +89,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Transaction> getTransactions() {
-        return getEntities(Transaction.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+        return getTransactions(Transaction.class);
     }
 
     /**
@@ -83,7 +99,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Charge> getCharges() {
-        return getEntities(Charge.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+        return getTransactions(Charge.class);
     }
 
     /**
@@ -94,9 +110,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Charge> getCharges(String userId) {
-        Query query = em.createQuery("select c from Charge c where c.account.id = :userId order by c.id desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getTransactions(Charge.class, userId);
     }
 
     /**
@@ -106,7 +120,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Payment> getPayments() {
-        return getEntities(Payment.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+        return getTransactions(Payment.class);
     }
 
     /**
@@ -117,9 +131,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Payment> getPayments(String userId) {
-        Query query = em.createQuery("select p from Payment p where p.account.id = :userId order by p.id desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getTransactions(Payment.class, userId);
     }
 
 
@@ -130,7 +142,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Deferment> getDeferments() {
-        return getEntities(Deferment.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+        return getTransactions(Deferment.class);
     }
 
     /**
@@ -141,9 +153,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Deferment> getDeferments(String userId) {
-        Query query = em.createQuery("select d from Deferment d where d.account.id = :userId order by d.id desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getTransactions(Deferment.class, userId);
     }
 
     /**
@@ -154,9 +164,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Transaction> getTransactions(String userId) {
-        Query query = em.createQuery("select t from Transaction t where t.account.id = :userId order by t.id desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getTransactions(Transaction.class, userId);
     }
 
     /**
@@ -272,5 +280,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     public void getGlAccountsWithBreakdown() {
         // TODO
     }
+
 
 }
