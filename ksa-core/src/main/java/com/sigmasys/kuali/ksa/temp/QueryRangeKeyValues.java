@@ -50,7 +50,6 @@ public class QueryRangeKeyValues extends KeyValuesBase {
    public void setBlankOption(boolean blankOption) {
       this.blankOption = blankOption;
    }
-
 }
 
 
