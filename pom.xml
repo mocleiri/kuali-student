@@ -661,10 +661,6 @@
                     <groupId>commons-beanutils</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>commons-fileupload</artifactId>
-                    <groupId>commons-fileupload</groupId>
-                </exclusion>
-                <exclusion>
                     <artifactId>oro</artifactId>
                     <groupId>oro</groupId>
                 </exclusion>
@@ -1025,10 +1021,6 @@
                 <exclusion>
                     <artifactId>commons-beanutils</artifactId>
                     <groupId>commons-beanutils</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-fileupload</artifactId>
-                    <groupId>commons-fileupload</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>oro</artifactId>
