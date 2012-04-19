@@ -32,7 +32,7 @@
                             <span >Bursar</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/currencyList?methodToCall=get&viewId=CurrencyListView">
+                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-bursar.pdf">View detailed persona</a>
@@ -97,6 +97,7 @@
                             &bull; <a href="media/persona-faculty_advisor.pdf">View detailed persona</a>
                         </p>
                     </td>
+
                     <td class="leftTd" align="right" width="Infinity%">
                         <a href="login.jsp?persona=customer_service_representative">
                             <img src="images/persona-customer_service_representative.png" alt="persona customer service representative" width="140" height="140" border="0">
@@ -107,7 +108,7 @@
                         <span >Customer Service Representative</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
+                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-customer_service_representative.pdf">View detailed persona</a>
@@ -123,7 +124,7 @@
                         <strong>Missy Munni</strong><br>
                         <span >Cashier</span>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
+                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-cashier.pdf">View detailed persona</a>
@@ -137,7 +138,8 @@
                         <span >Supervising Cashier</span>
                         </p>
                         <hr/>
-                        <p >&bull; UX Work in Progress<br>
+                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/currencyList?methodToCall=get&viewId=CurrencyListView">
+                            UX Work in Progress<br>
                             &bull; <a href="media/persona-supervising_cashier.pdf">View detailed persona</a>
                         </p>
                     </td>
