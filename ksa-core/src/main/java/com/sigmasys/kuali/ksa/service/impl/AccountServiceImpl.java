@@ -62,9 +62,10 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         BigDecimal remainingBalance = dueBalance;
 
         for (Debit debit : debits) {
-            if (debit.getAmount().compareTo(remainingBalance) < 0) {
-                balancedDebits.add(new Pair<Debit, BigDecimal>(debit, debit.getAmount()));
-                remainingBalance = remainingBalance.subtract(debit.getAmount());
+            BigDecimal amount = debit.getAmount() != null ? debit.getAmount() : BigDecimal.ZERO;
+            if (amount.compareTo(remainingBalance) < 0) {
+                balancedDebits.add(new Pair<Debit, BigDecimal>(debit, amount));
+                remainingBalance = remainingBalance.subtract(amount);
             } else {
                 balancedDebits.add(new Pair<Debit, BigDecimal>(debit, remainingBalance));
                 break;
@@ -166,7 +167,8 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         for (Transaction transaction : transactions) {
             if (transaction instanceof Debit) {
                 Debit debit = (Debit) transaction;
-                amountBilled = amountBilled.add(debit.getAmount());
+                BigDecimal amount = debit.getAmount() != null ? debit.getAmount() : BigDecimal.ZERO;
+                amountBilled = amountBilled.add(amount);
             } else if (transaction instanceof Credit) {
                 boolean includeAmount = true;
                 if (transaction instanceof Deferment) {
@@ -176,8 +178,16 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
                 }
                 if (includeAmount) {
                     Credit credit = (Credit) transaction;
-                    amountPaid = amountPaid.add(credit.getAllocatedAmount());
-                    amountPaid = amountPaid.add(credit.getLockedAllocatedAmount());
+                    BigDecimal allocatedAmount = credit.getAllocatedAmount();
+                    if (allocatedAmount == null) {
+                        allocatedAmount = BigDecimal.ZERO;
+                    }
+                    BigDecimal lockedAllocatedAmount = credit.getLockedAllocatedAmount();
+                    if (lockedAllocatedAmount == null) {
+                        lockedAllocatedAmount = BigDecimal.ZERO;
+                    }
+                    amountPaid = amountPaid.add(allocatedAmount);
+                    amountPaid = amountPaid.add(lockedAllocatedAmount);
                 }
             }
         }

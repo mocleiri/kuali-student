@@ -115,6 +115,8 @@ public class AccountServiceTest extends AbstractServiceTest {
         Assert.notNull(balanceDue);
         Assert.isTrue(balanceDue.compareTo(BigDecimal.ZERO) >= 0);
 
+        System.out.println("Due balance = " + balanceDue);
+
     }
 
     @Test
@@ -126,8 +128,10 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(amounts);
 
-        for ( Pair<Debit, BigDecimal> pair : amounts) {
-           System.out.println("Debit = " + pair.getA() + ", amount = " + pair.getB());
+        for (Pair<Debit, BigDecimal> pair : amounts) {
+            Assert.notNull(pair.getA());
+            Assert.notNull(pair.getB());
+            System.out.println("Debit date = " + pair.getA().getEffectiveDate() + ", amount = " + pair.getB());
         }
 
     }
@@ -137,12 +141,24 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         String userId = "admin";
 
-        ChargeableAccount account = accountService.ageDebt(userId, false);
+        ChargeableAccount account = (ChargeableAccount) accountService.getFullAccount(userId);
+
+        Assert.notNull(account);
+
+        System.out.println("Amount Late1 After = " + account.getAmountLate1());
+        System.out.println("Amount Late2 After = " + account.getAmountLate2());
+        System.out.println("Amount Late3 After = " + account.getAmountLate3());
+
+        account = accountService.ageDebt(userId, false);
 
         Assert.notNull(account);
         Assert.notNull(account.getAmountLate1());
         Assert.notNull(account.getAmountLate2());
         Assert.notNull(account.getAmountLate3());
+
+        System.out.println("Amount Late1 After = " + account.getAmountLate1());
+        System.out.println("Amount Late2 After = " + account.getAmountLate2());
+        System.out.println("Amount Late3 After = " + account.getAmountLate3());
 
     }
 }

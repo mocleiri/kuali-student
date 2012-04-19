@@ -49,8 +49,7 @@ public class Deferment extends Credit {
       */
     @Transient
     public boolean isExpired() {
-        // TODO:
-        return false;
+        return new Date().after(getExpirationDate());
     }
 
 }
