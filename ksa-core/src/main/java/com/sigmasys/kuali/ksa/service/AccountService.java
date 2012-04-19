@@ -1,9 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Debit;
-import com.sigmasys.kuali.ksa.model.Pair;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.*;
 
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -33,9 +30,13 @@ public interface AccountService {
     List<Pair<Debit, BigDecimal>> rebalance(String userId, boolean ignoreDeferment);
 
     /**
-     * @param ignoreDeferment
+     * Aging debts for a chargeable account.
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return a chargeable account being updated
      */
-    void ageDebt(boolean ignoreDeferment);
+    ChargeableAccount ageDebt(String userId, boolean ignoreDeferment);
 
     /**
      * Returns the total balance due of all active transactions.
@@ -91,18 +92,18 @@ public interface AccountService {
      * an inquiry into KIM. If KIM also returns no result, then false is returned. If a KIM account does exist, then
      * a KSA account is created, using the KIM information as a template.
      *
-     * @param accountId Account ID
+     * @param userId Account ID
      * @return the account instance or null if the account does not exist
      */
-    Account getOrCreateAccount(String accountId);
+    Account getOrCreateAccount(String userId);
 
     /**
      * This methods fetches Account and all its associations by account ID.
      *
-     * @param accountId Account ID
+     * @param userId Account ID
      * @return the account instance or null if the account does not exist
      */
-    Account getFullAccount(String accountId);
+    Account getFullAccount(String userId);
 
     /**
      * This methods fetches all KSA accounts and all their associations.

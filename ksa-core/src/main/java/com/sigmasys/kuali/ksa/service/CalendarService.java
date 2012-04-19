@@ -1,20 +1,23 @@
 package com.sigmasys.kuali.ksa.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Calendar;
 import java.util.Date;
 
 /**
- * CalendarService. Singleton.
+ * CalendarService. Can be a singleton or Spring-managed bean.
  *
  * @author Michael Ivanov
  *         Date: 4/9/12
  */
+@Service("calendarService")
+@Transactional(readOnly = true)
 public class CalendarService {
 
     private static final CalendarService singleton = new CalendarService();
 
-    private CalendarService() {
-    }
 
     public static CalendarService getInstance() {
         return singleton;

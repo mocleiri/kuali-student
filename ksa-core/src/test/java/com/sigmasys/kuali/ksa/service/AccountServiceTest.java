@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.ChargeableAccount;
 import com.sigmasys.kuali.ksa.model.Debit;
 import com.sigmasys.kuali.ksa.model.Pair;
 import org.junit.Test;
@@ -128,6 +129,20 @@ public class AccountServiceTest extends AbstractServiceTest {
         for ( Pair<Debit, BigDecimal> pair : amounts) {
            System.out.println("Debit = " + pair.getA() + ", amount = " + pair.getB());
         }
+
+    }
+
+    @Test
+    public void ageDebt() {
+
+        String userId = "admin";
+
+        ChargeableAccount account = accountService.ageDebt(userId, false);
+
+        Assert.notNull(account);
+        Assert.notNull(account.getAmountLate1());
+        Assert.notNull(account.getAmountLate2());
+        Assert.notNull(account.getAmountLate3());
 
     }
 }

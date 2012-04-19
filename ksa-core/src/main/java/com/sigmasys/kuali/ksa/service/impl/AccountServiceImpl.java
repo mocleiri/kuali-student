@@ -2,11 +2,13 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
+import com.sigmasys.kuali.ksa.service.CalendarService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,10 @@ import java.util.*;
 public class AccountServiceImpl extends GenericPersistenceService implements AccountService {
 
     private static final Log logger = LogFactory.getLog(AccountServiceImpl.class);
+
+
+    @Autowired
+    private CalendarService calendarService;
 
     /**
      * This process creates a temporary subset of the account as if the account were being administered
@@ -72,8 +78,10 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         }
 
         if (accountBalance.compareTo(dueBalance) != 0) {
-            throw new IllegalStateException("The balance due " + dueBalance + " does not match " +
-                    "the summarized distributed amount " + accountBalance);
+            String errMsq = "The balance due " + dueBalance + " does not match " +
+                    "the summarized distributed amount " + accountBalance;
+            logger.error(errMsq);
+            throw new IllegalStateException(errMsq);
         }
 
         return balancedDebits;
@@ -81,9 +89,63 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
 
+    /**
+     * Aging debts for a chargeable account.
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return a chargeable account being updated
+     */
     @Override
-    public void ageDebt(boolean ignoreDeferment) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public ChargeableAccount ageDebt(String userId, boolean ignoreDeferment) {
+
+        Account account = getFullAccount(userId);
+        if (account == null) {
+            String errMsg = "Account with ID '" + userId + "' does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+        if (!(account instanceof ChargeableAccount)) {
+            String errMsg = "Account must be of '" + ChargeableAccount.class.getName() + "' type";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        LatePeriod latePeriod = account.getLatePeriod();
+
+        final Date curDate = new Date();
+        final Date lateDate1 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate1());
+        final Date lateDate2 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate2());
+        final Date lateDate3 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate3());
+
+        BigDecimal lateAmount1 = BigDecimal.ZERO;
+        BigDecimal lateAmount2 = BigDecimal.ZERO;
+        BigDecimal lateAmount3 = BigDecimal.ZERO;
+
+        List<Pair<Debit, BigDecimal>> balancedDebits = rebalance(userId, ignoreDeferment);
+        for (Pair<Debit, BigDecimal> pair : balancedDebits) {
+            Debit debit = pair.getA();
+            BigDecimal amount = pair.getB();
+            if (debit.getEffectiveDate().compareTo(lateDate1) <= 0 &&
+                    debit.getEffectiveDate().compareTo(lateDate2) > 0) {
+                lateAmount1 = lateAmount1.add(amount);
+            } else if (debit.getEffectiveDate().compareTo(lateDate2) <= 0 &&
+                    debit.getEffectiveDate().compareTo(lateDate3) > 0) {
+                lateAmount2 = lateAmount2.add(amount);
+            } else if (debit.getEffectiveDate().compareTo(lateDate3) <= 0) {
+                lateAmount3 = lateAmount3.add(amount);
+            }
+        }
+
+        ChargeableAccount chargeableAccount = (ChargeableAccount) account;
+        chargeableAccount.setAmountLate1(lateAmount1);
+        chargeableAccount.setAmountLate2(lateAmount2);
+        chargeableAccount.setAmountLate3(lateAmount3);
+        chargeableAccount.setLateLastUpdate(curDate);
+
+        persistEntity(chargeableAccount);
+
+        return chargeableAccount;
     }
 
     /**
@@ -160,11 +222,11 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     /**
      * This methods fetches Account and all its associations by account ID.
      *
-     * @param accountId Account ID
+     * @param userId Account ID
      * @return the account instance or null if the account does not exist
      */
     @Override
-    public Account getFullAccount(String accountId) {
+    public Account getFullAccount(String userId) {
         Query query = em.createQuery("select a from Account a " +
                 "left outer join fetch a.personNames pn " +
                 "left outer join fetch a.postalAddresses pa " +
@@ -172,7 +234,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
                 "left outer join fetch a.statusType st " +
                 "left outer join fetch a.latePeriod lp " +
                 "where a.id = :id");
-        query.setParameter("id", accountId);
+        query.setParameter("id", userId);
         List<Account> accounts = query.getResultList();
         return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
     }
@@ -202,16 +264,16 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * an inquiry into KIM. If KIM also returns no result, then false is returned. If a KIM account does exist, then
      * a KSA account is created, using the KIM information as a template.
      *
-     * @param accountId Account ID
+     * @param userId Account ID
      * @return the account instance or null if the account does not exist
      */
     @Override
     @Transactional(readOnly = false)
-    public Account getOrCreateAccount(String accountId) {
-        Account account = getEntity(accountId, Account.class);
+    public Account getOrCreateAccount(String userId) {
+        Account account = getEntity(userId, Account.class);
         if (account == null) {
             PersonService personService = KimApiServiceLocator.getPersonService();
-            Person person = personService.getPersonByPrincipalName(accountId);
+            Person person = personService.getPersonByPrincipalName(userId);
             if (person == null) {
                 String errMsg = "The user '" + person + "' does not exist";
                 logger.error(errMsg);
