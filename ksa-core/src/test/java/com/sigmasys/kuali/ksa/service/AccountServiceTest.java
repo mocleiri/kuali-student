@@ -145,9 +145,9 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(account);
 
-        System.out.println("Amount Late1 After = " + account.getAmountLate1());
-        System.out.println("Amount Late2 After = " + account.getAmountLate2());
-        System.out.println("Amount Late3 After = " + account.getAmountLate3());
+        System.out.println("Amount Late1 Before = " + account.getAmountLate1());
+        System.out.println("Amount Late2 Before = " + account.getAmountLate2());
+        System.out.println("Amount Late3 Before = " + account.getAmountLate3());
 
         account = accountService.ageDebt(userId, false);
 
