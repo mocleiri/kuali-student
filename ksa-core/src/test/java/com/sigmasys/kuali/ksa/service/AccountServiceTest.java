@@ -11,6 +11,7 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -161,4 +162,12 @@ public class AccountServiceTest extends AbstractServiceTest {
         System.out.println("Amount Late3 After = " + account.getAmountLate3());
 
     }
+
+    /*@Rollback(false)
+    @Test
+    public void getOrCreateAccount() {
+        String userId = "admin";
+        accountService.getOrCreateAccount(userId);
+    }*/
+
 }

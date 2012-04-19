@@ -194,39 +194,46 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         return amountBilled.subtract(amountPaid);
     }
 
+    /**
+     * Returns the outstanding balance for the given account
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return total amount of outstanding balance
+     */
     @Override
-    public BigDecimal getOutstandingBalance(boolean ignoreDeferment) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public BigDecimal getOutstandingBalance(String userId, boolean ignoreDeferment) {
+        return null;
     }
 
     @Override
     public BigDecimal getUnallocatedBalance() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public BigDecimal getDeferredAmount() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public void makeEffective() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
     public void paymentApplication() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
     public void createAllocation(Transaction transaction1, Transaction transaction2, BigDecimal allocationAmount) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
     public void createLockedAllocation(Transaction transaction1, Transaction transaction2, BigDecimal allocationAmount) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     /**
@@ -331,7 +338,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         address.setPostalCode(person.getAddressPostalCode());
         address.setCountry(person.getAddressCountryCode());
         address.setState(person.getAddressStateProvinceCode());
-        // TODO: no city ??
+        address.setCity(person.getAddressCity());
         address.setStreetAddress1(person.getAddressLine1());
         address.setStreetAddress2(person.getAddressLine2());
         address.setStreetAddress3(person.getAddressLine3());

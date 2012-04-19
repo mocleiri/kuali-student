@@ -48,10 +48,13 @@ public interface AccountService {
     BigDecimal getDueBalance(String userId, boolean ignoreDeferment);
 
     /**
-     * @param ignoreDeferment
-     * @return
+     * Returns the outstanding balance for the given account
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return total amount of outstanding balance
      */
-    BigDecimal getOutstandingBalance(boolean ignoreDeferment);
+    BigDecimal getOutstandingBalance(String userId, boolean ignoreDeferment);
 
     /**
      * @return

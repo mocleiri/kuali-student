@@ -55,6 +55,10 @@ public class PostalAddress implements Identifiable {
      */
     private String state;
 
+    /**
+     * City
+     */
+    private String city;
 
     /**
      * Creator user ID
@@ -162,6 +166,15 @@ public class PostalAddress implements Identifiable {
         this.state = state;
     }
 
+    @Column(name = "CITY", length = 100)
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
@@ -189,7 +202,7 @@ public class PostalAddress implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_DEFAULT")
     public Boolean isDefault() {
         return isDefault;
