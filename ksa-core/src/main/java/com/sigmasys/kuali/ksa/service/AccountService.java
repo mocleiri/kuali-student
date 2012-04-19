@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Debit;
+import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
 import javax.jws.WebService;
@@ -26,8 +28,9 @@ public interface AccountService {
      *
      * @param userId          Account ID
      * @param ignoreDeferment boolean value
+     * @return a list of pairs [Debit, BigDecimal]
      */
-    void rebalance(String userId, boolean ignoreDeferment);
+    List<Pair<Debit, BigDecimal>> rebalance(String userId, boolean ignoreDeferment);
 
     /**
      * @param ignoreDeferment

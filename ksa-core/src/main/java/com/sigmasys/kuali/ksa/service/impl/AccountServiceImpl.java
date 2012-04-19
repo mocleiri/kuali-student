@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Currency service JPA implementation.
@@ -37,19 +34,50 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      *
      * @param userId          Account ID
      * @param ignoreDeferment boolean value
+     * @return a list of pairs [Debit, BigDecimal]
      */
     @Override
-    public void rebalance(String userId, boolean ignoreDeferment) {
-        BigDecimal dueBalance = getDueBalance(userId, ignoreDeferment);
-        BigDecimal accountBalance = dueBalance;
-        BigDecimal remainingBalance = dueBalance;
+    public List<Pair<Debit, BigDecimal>> rebalance(String userId, boolean ignoreDeferment) {
+
         Query query = em.createQuery("select t from Transaction t " +
                 " where t.account.id = :userId and " +
-                "       t.effectiveDate <= CURRENT_DATE and type(t) in (:chargeCode)");
+                "       t.effectiveDate <= CURRENT_DATE and type(t) in (:chargeCode) " +
+                " order by t.effectiveDate desc");
+
         query.setParameter("userId", userId);
         query.setParameter("chargeCode", Charge.class);
+
         List<Debit> debits = query.getResultList();
-        // TODO
+
+        List<Pair<Debit, BigDecimal>> balancedDebits = new LinkedList<Pair<Debit, BigDecimal>>();
+
+        // Distributing balance due among the most recent debits
+        BigDecimal dueBalance = getDueBalance(userId, ignoreDeferment);
+        BigDecimal remainingBalance = dueBalance;
+
+        for (Debit debit : debits) {
+            if (debit.getAmount().compareTo(remainingBalance) < 0) {
+                balancedDebits.add(new Pair<Debit, BigDecimal>(debit, debit.getAmount()));
+                remainingBalance = remainingBalance.subtract(debit.getAmount());
+            } else {
+                balancedDebits.add(new Pair<Debit, BigDecimal>(debit, remainingBalance));
+                break;
+            }
+        }
+
+        // Checking that the due balance equals the sum of split amounts
+        BigDecimal accountBalance = BigDecimal.ZERO;
+        for (Pair<Debit, BigDecimal> pair : balancedDebits) {
+            accountBalance = accountBalance.add(pair.getB());
+        }
+
+        if (accountBalance.compareTo(dueBalance) != 0) {
+            throw new IllegalStateException("The balance due " + dueBalance + " does not match " +
+                    "the summarized distributed amount " + accountBalance);
+        }
+
+        return balancedDebits;
+
     }
 
 

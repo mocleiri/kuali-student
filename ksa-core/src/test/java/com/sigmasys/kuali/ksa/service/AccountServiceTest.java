@@ -2,6 +2,8 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Debit;
+import com.sigmasys.kuali.ksa.model.Pair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.rice.kim.api.identity.Person;
@@ -116,7 +118,16 @@ public class AccountServiceTest extends AbstractServiceTest {
 
     @Test
     public void rebalance() {
+
         String userId = "admin";
-        accountService.rebalance(userId, false);
+
+        List<Pair<Debit, BigDecimal>> amounts = accountService.rebalance(userId, false);
+
+        Assert.notNull(amounts);
+
+        for ( Pair<Debit, BigDecimal> pair : amounts) {
+           System.out.println("Debit = " + pair.getA() + ", amount = " + pair.getB());
+        }
+
     }
 }
