@@ -170,7 +170,7 @@
                         <bean parent="Uif-DropdownControl"/>
                     </property>
                     <property name="optionsFinder">
-                        <bean class="com.sigmasys.kuali.ksa.temp.QueryRangeKeyValues" p:blankOption="false"/>
+                        <bean class="com.sigmasys.kuali.ksa.krad.util.QueryRangeKeyValues" p:blankOption="false"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField-LabelTop" p:propertyName="minQueryDate" p:label="From Date"
