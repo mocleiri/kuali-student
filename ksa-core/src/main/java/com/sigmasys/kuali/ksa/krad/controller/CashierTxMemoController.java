@@ -227,9 +227,9 @@ public class CashierTxMemoController extends UifControllerBase {
      * @param response
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebit")
-    public ModelAndView ageDebit(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
-                                 HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
+    public ModelAndView ageDebt(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
 
         // do aging of transactions stuff...
         String accountId = form.getSelectedId();

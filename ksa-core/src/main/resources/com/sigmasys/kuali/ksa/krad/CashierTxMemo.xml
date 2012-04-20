@@ -424,7 +424,7 @@
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageDebit" p:actionLabel="Age Transactions" >
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageDebt" p:actionLabel="Age Transactions" >
                     <!--<property name="actionImage">
                         <bean parent="Uif-ImageField"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
