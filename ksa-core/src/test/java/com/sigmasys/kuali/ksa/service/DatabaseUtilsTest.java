@@ -27,7 +27,7 @@ public class DatabaseUtilsTest extends AbstractServiceTest {
         Assert.notNull(sql);
         Assert.isTrue(sql.length() > 1);
 
-        System.out.println("Generated CreateSchema DDL:\n" + sql);
+        logger.info("Generated CreateSchema DDL:\n" + sql);
 
     }
 
@@ -39,7 +39,7 @@ public class DatabaseUtilsTest extends AbstractServiceTest {
         Assert.notNull(sql);
         Assert.isTrue(sql.length() > 1);
 
-        System.out.println("Generated DropSchema DDL:\n" + sql);
+        logger.info("Generated DropSchema DDL:\n" + sql);
 
     }
 

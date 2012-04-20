@@ -116,7 +116,7 @@ public class AccountServiceTest extends AbstractServiceTest {
         Assert.notNull(balanceDue);
         Assert.isTrue(balanceDue.compareTo(BigDecimal.ZERO) >= 0);
 
-        System.out.println("Due balance = " + balanceDue);
+        logger.info("Due balance = " + balanceDue);
 
     }
 
@@ -132,7 +132,7 @@ public class AccountServiceTest extends AbstractServiceTest {
         for (Pair<Debit, BigDecimal> pair : amounts) {
             Assert.notNull(pair.getA());
             Assert.notNull(pair.getB());
-            System.out.println("Debit date = " + pair.getA().getEffectiveDate() + ", amount = " + pair.getB());
+            logger.info("Debit date = " + pair.getA().getEffectiveDate() + ", amount = " + pair.getB());
         }
 
     }
@@ -153,9 +153,9 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(account);
 
-        System.out.println("Amount Late1 Before = " + account.getAmountLate1());
-        System.out.println("Amount Late2 Before = " + account.getAmountLate2());
-        System.out.println("Amount Late3 Before = " + account.getAmountLate3());
+        logger.info("Amount Late1 Before = " + account.getAmountLate1());
+        logger.info("Amount Late2 Before = " + account.getAmountLate2());
+        logger.info("Amount Late3 Before = " + account.getAmountLate3());
 
         account = accountService.ageDebt(userId, false);
 
@@ -164,9 +164,9 @@ public class AccountServiceTest extends AbstractServiceTest {
         Assert.notNull(account.getAmountLate2());
         Assert.notNull(account.getAmountLate3());
 
-        System.out.println("Amount Late1 After = " + account.getAmountLate1());
-        System.out.println("Amount Late2 After = " + account.getAmountLate2());
-        System.out.println("Amount Late3 After = " + account.getAmountLate3());
+        logger.info("Amount Late1 After = " + account.getAmountLate1());
+        logger.info("Amount Late2 After = " + account.getAmountLate2());
+        logger.info("Amount Late3 After = " + account.getAmountLate3());
 
     }
 

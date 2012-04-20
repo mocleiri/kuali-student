@@ -12,172 +12,180 @@ import java.text.ParseException;
 
 public class AlertsTransactionForm extends UifFormBase {
 
-   private List<Charge> charges;
+    private List<Charge> charges;
 
-   private BigDecimal totalAmnt = new BigDecimal(BigInteger.ZERO);
+    private BigDecimal totalAmnt = new BigDecimal(BigInteger.ZERO);
 
-   private Date lastLedgerDate;
+    private Date lastLedgerDate;
 
-   private String lastStatementText;
+    private String lastStatementText;
 
-   private String workSetRows;
+    private String workSetRows;
 
-   private Date minQueryDate;
+    private Date minQueryDate;
 
-   private Date maxQueryDate;
+    private Date maxQueryDate;
 
-   /**
-    * Get the total amount calculated from all list charges
-    * @return
-    */
-   public BigDecimal getTotalAmnt() {
-      if (totalAmnt != null) {
-         return totalAmnt.setScale(5, BigDecimal.ROUND_CEILING);
-      }
+    /**
+     * Get the total amount calculated from all list charges
+     *
+     * @return
+     */
+    public BigDecimal getTotalAmnt() {
+        if (totalAmnt != null) {
+            return totalAmnt.setScale(5, BigDecimal.ROUND_CEILING);
+        }
 
-      return BigDecimal.ZERO;
-   }
+        return BigDecimal.ZERO;
+    }
 
-   /**
-    * Set the total amount from all list charges
-    *
-    * @param totalAmnt
-    */
-   public void setTotalAmnt(BigDecimal totalAmnt) {
-      this.totalAmnt = totalAmnt;
-   }
+    /**
+     * Set the total amount from all list charges
+     *
+     * @param totalAmnt
+     */
+    public void setTotalAmnt(BigDecimal totalAmnt) {
+        this.totalAmnt = totalAmnt;
+    }
 
-   /**
-    * Return a list of charges
-    *
-    * @return
-    */
-   public List<Charge> getCharges() {
-      return charges;
-   }
+    /**
+     * Return a list of charges
+     *
+     * @return
+     */
+    public List<Charge> getCharges() {
+        return charges;
+    }
 
-   /**
-    * Set the charges list
-    *
-    * @param charges
-    */
-   public void setCharges(List<Charge> charges) {
-      this.charges = charges;
+    /**
+     * Set the charges list
+     *
+     * @param charges
+     */
+    public void setCharges(List<Charge> charges) {
 
-      // calculate the total amount if there is a list available
+        this.charges = charges;
 
-      if (this.charges != null) {
-         try {
-            lastLedgerDate = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1970");
-         } catch (ParseException e) {
-            e.printStackTrace();
-         }
-         lastStatementText = "";
+        // calculate the total amount if there is a list available
 
-         for (int i = 0; i < this.charges.size(); i++)
-         {
-            Charge chrg = this.charges.get(i);
-            this.totalAmnt = this.totalAmnt.add(chrg.getAmount());
-
-            // compare to get the latest ledger and effective date
-            Date ledgerDate = chrg.getLedgerDate();
-            String tranStatement = chrg.getStatementText();
-
-            if(ledgerDate.compareTo(lastLedgerDate) > 0){
-               //System.out.println("Date1 is after Date2");
-               lastLedgerDate = ledgerDate;
-               lastStatementText = tranStatement;
-            }else if(ledgerDate.compareTo(lastLedgerDate) < 0){
-               // skip setting earliest date, holding current value
-               //System.out.println("Date1 is before Date2");
-            }else if(ledgerDate.compareTo(lastLedgerDate) == 0){
-               // chances of both dates being the same is minimum or maximum
-               // might have to compare another field to make a determination
-               //System.out.println("Date1 is equal to Date2");
-            }else{
-               //System.out.println("How to get here?");
+        if (this.charges != null) {
+            try {
+                lastLedgerDate = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1970");
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-         }
-      }
-   }
+            lastStatementText = "";
 
-   /**
-    * Get the last ledger date
-    * @return
-    */
-   public Date getLastLedgerDate() {
-      return lastLedgerDate;
-   }
+            for (Charge charge : charges) {
 
-   /**
-    * Set the last ledger date
-    * @param lastLedgerDate
-    */
-   public void setLastLedgerDate(Date lastLedgerDate) {
-      this.lastLedgerDate = lastLedgerDate;
-   }
+                totalAmnt = totalAmnt.add(charge.getAmount());
 
-   /**
-    * Get the Last StatementText
-    * @return
-    */
-   public String getLastStatementText() {
-      return lastStatementText;
-   }
+                // compare to get the latest ledger and effective date
+                Date ledgerDate = charge.getLedgerDate();
+                String tranStatement = charge.getStatementText();
 
-   /**
-    * Set the Last StatementText
-    * @param lastStatementText
-    */
-   public void setLastStatementText(String lastStatementText) {
-      this.lastStatementText = lastStatementText;
-   }
+                if (ledgerDate.compareTo(lastLedgerDate) > 0) {
+                    lastLedgerDate = ledgerDate;
+                    lastStatementText = tranStatement;
+                } else if (ledgerDate.compareTo(lastLedgerDate) < 0) {
+                    // skip setting earliest date, holding current value
+                } else if (ledgerDate.compareTo(lastLedgerDate) == 0) {
+                    // chances of both dates being the same is minimum or maximum
+                    // might have to compare another field to make a determination
+                } else {
+                    // How to get here?
+                }
+            }
+        }
+    }
 
-   /**
-    * Get the working set rows for pagination
-    * @return
-    */
-   public String getWorkSetRows() {
-      return workSetRows;
-   }
+    /**
+     * Get the last ledger date
+     *
+     * @return
+     */
+    public Date getLastLedgerDate() {
+        return lastLedgerDate;
+    }
 
-   /**
-    * Set the working set rows for pagination
-    * @param workSetRows
-    */
-   public void setWorkSetRows(String workSetRows) {
-      this.workSetRows = workSetRows;
-   }
+    /**
+     * Set the last ledger date
+     *
+     * @param lastLedgerDate
+     */
+    public void setLastLedgerDate(Date lastLedgerDate) {
+        this.lastLedgerDate = lastLedgerDate;
+    }
 
-   /**
-    * Get the offset minQueryDate for pagination
-    * @return
-    */
-   public Date getMinQueryDate() {
-      return minQueryDate;
-   }
+    /**
+     * Get the Last StatementText
+     *
+     * @return
+     */
+    public String getLastStatementText() {
+        return lastStatementText;
+    }
 
-   /**
-    * Set the offset minQueryDate for pagination
-    * @param minQueryDate
-    */
-   public void setMinQueryDate(Date minQueryDate) {
-      this.minQueryDate = minQueryDate;
-   }
+    /**
+     * Set the Last StatementText
+     *
+     * @param lastStatementText
+     */
+    public void setLastStatementText(String lastStatementText) {
+        this.lastStatementText = lastStatementText;
+    }
 
-   /**
-    * Get the limit maxQueryDate for pagination
-    * @return
-    */
-   public Date getMaxQueryDate() {
-      return maxQueryDate;
-   }
+    /**
+     * Get the working set rows for pagination
+     *
+     * @return
+     */
+    public String getWorkSetRows() {
+        return workSetRows;
+    }
 
-   /**
-    * Set the limit maxQueryDate for pagination
-    * @param maxQueryDate
-    */
-   public void setMaxQueryDate(Date maxQueryDate) {
-      this.maxQueryDate = maxQueryDate;
-   }
+    /**
+     * Set the working set rows for pagination
+     *
+     * @param workSetRows
+     */
+    public void setWorkSetRows(String workSetRows) {
+        this.workSetRows = workSetRows;
+    }
+
+    /**
+     * Get the offset minQueryDate for pagination
+     *
+     * @return
+     */
+    public Date getMinQueryDate() {
+        return minQueryDate;
+    }
+
+    /**
+     * Set the offset minQueryDate for pagination
+     *
+     * @param minQueryDate
+     */
+    public void setMinQueryDate(Date minQueryDate) {
+        this.minQueryDate = minQueryDate;
+    }
+
+    /**
+     * Get the limit maxQueryDate for pagination
+     *
+     * @return
+     */
+    public Date getMaxQueryDate() {
+        return maxQueryDate;
+    }
+
+    /**
+     * Set the limit maxQueryDate for pagination
+     *
+     * @param maxQueryDate
+     */
+    public void setMaxQueryDate(Date maxQueryDate) {
+        this.maxQueryDate = maxQueryDate;
+    }
 }

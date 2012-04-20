@@ -145,7 +145,7 @@ public class CryptUtils {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String[] keys = generateRsaKey(2048);
         System.out.println("private key = \n" + keys[0] + "\n");
         System.out.println("public key = \n" + keys[1] + "\n");
@@ -156,6 +156,6 @@ public class CryptUtils {
         System.out.println("encoded password=" + encPassword);
         String decPassword = decryptRsa(encPassword, keys[0]);
         System.out.println("decoded password=" + decPassword);
-    }
+    }*/
 
 }

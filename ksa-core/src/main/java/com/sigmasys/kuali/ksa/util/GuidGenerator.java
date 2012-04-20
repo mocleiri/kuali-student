@@ -100,9 +100,9 @@ public class GuidGenerator {
     // methods
     //
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
     /**
      * GuidGenerator() - default constructor
-     *
      */
     public GuidGenerator() {
 
@@ -139,6 +139,7 @@ public class GuidGenerator {
     // private routines to protect class static vars
     //
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
     /**
      * getNano atomically increments and returns nanoCounter
      */
@@ -256,6 +257,7 @@ public class GuidGenerator {
     // public access and process methods
     //
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
     /**
      * getNewGuid calls set to generate a new GUID
      *
@@ -334,20 +336,5 @@ public class GuidGenerator {
         setLastTime(millitime - nanomod);
     }
 
-    /**
-     * main is the unit testing interface that creates a new Guid instance and prints result of getNewGuid to System.out
-     *
-     * @param args array for input arguments
-     */
-    public static void main(String args[]) {
-        try {
-            GuidGenerator g = new GuidGenerator("abcdefghijkl");
-            System.out.println("New GUID is " + g.getNewGuid());
-            g = new GuidGenerator();
-            System.out.println("New GUID is " + g.getNewGuid());
-        } catch (Exception e) {
-            System.out.println("GuidGenerator::main threw " + e.getClass() + " with message: " + e.getMessage());
-        }
-    }
 }
 

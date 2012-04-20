@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -25,6 +27,8 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
     public static final String TEST_USER_ID = "guest";
 
     private final boolean isWebContext = isWebContext();
+
+    protected final Log logger = LogFactory.getLog(getClass());
 
     public AbstractServiceTest() {
         if (isWebContext) {
