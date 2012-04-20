@@ -233,9 +233,8 @@ public class CashierTxMemoController extends UifControllerBase {
 
         // do aging of transactions stuff...
         String accountId = form.getSelectedId();
-        long id = Long.valueOf(accountId);
 
-        if (id != -1) {
+        if (accountId != null && !accountId.trim().isEmpty()) {
             // age the indexed Account Transactions
             ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
             // populate the form using the id
