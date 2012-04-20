@@ -44,7 +44,7 @@ public class CashierTxMemoController extends UifControllerBase {
     @Override
     protected CashierTxMemoForm createInitialForm(HttpServletRequest request) {
         CashierTxMemoForm form = new CashierTxMemoForm();
-        form.setMemoType("MEMO");
+        form.setInfoType("MEMO");
         return form;
     }
 
@@ -259,7 +259,7 @@ public class CashierTxMemoController extends UifControllerBase {
         String accountId = form.getSelectedId();
         long id = Long.valueOf(accountId);
         String infoType = "MEMO";
-        form.setMemoType(infoType);
+        form.setInfoType(infoType);
 
         if (id != -1 && accountId != null) {
 

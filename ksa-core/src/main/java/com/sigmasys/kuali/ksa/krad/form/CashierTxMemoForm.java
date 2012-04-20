@@ -81,7 +81,7 @@ public class CashierTxMemoForm extends UifFormBase {
    private String infoText;
 
    // the type of information
-   private String memoType;
+   private String infoType;
 
    // deprecated in this class
    private InformationTypeValue informationTypeValue;
@@ -444,16 +444,16 @@ public class CashierTxMemoForm extends UifFormBase {
     *
     * @return
     */
-   public String getMemoType() {
-      return memoType;
+   public String getInfoType() {
+      return infoType;
    }
 
    /**
     * Set the memo type
-    * @param memoType
+    * @param infoType
     */
-   public void setMemoType(String memoType) {
-      this.memoType = memoType;
+   public void setInfoType(String infoType) {
+      this.infoType = infoType;
    }
 
    /**
