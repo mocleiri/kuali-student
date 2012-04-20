@@ -58,7 +58,7 @@
 
         <!-- Begin required KNS mappings -->
         <action path="/portal" name="KualiForm" type="org.kuali.rice.kns.web.struts.action.KualiPortalAction">
-            <forward name="basic" path="/portal.jsp"/>
+            <forward name="basic" path="/index.jsp"/>
         </action>
 
         <action path="/backdoorlogin" name="BackdoorForm" scope="request" parameter="methodToCall"
@@ -71,7 +71,7 @@
         <action path="/logout" name="KualiLogoutForm" type="org.kuali.rice.kns.web.struts.action.KualiLogoutAction"/>
 
         <action path="/index" name="KualiForm" type="org.kuali.rice.kns.web.struts.action.KualiSimpleAction">
-            <forward name="basic" path="/portal.jsp"/>
+            <forward name="basic" path="/index.jsp"/>
         </action>
 
     </action-mappings>
