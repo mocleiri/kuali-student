@@ -257,11 +257,10 @@ public class CashierTxMemoController extends UifControllerBase {
         // do addMemo stuff...
 
         String accountId = form.getSelectedId();
-        long id = Long.valueOf(accountId);
-        String infoType = "MEMO";
+        String infoType = InformationTypeValue.MEMO.name();
         form.setInfoType(infoType);
 
-        if (id != -1 && accountId != null) {
+        if (accountId != null && !accountId.trim().isEmpty()) {
 
             //String memoType = form.getMemoType();
 
@@ -271,30 +270,27 @@ public class CashierTxMemoController extends UifControllerBase {
 
             InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
 
-            Information info = null;
+            Information info;
             switch (informationType) {
                 case ALERT:
                     Alert alert = new Alert();
-                    alert.setId(id);
                     alert.setText(form.getInfoText());
                     info = alert;
                     break;
                 case FLAG:
                     Flag flag = new Flag();
-                    flag.setId(id);
+                    flag.setSeverity(0);
                     info = flag;
                     break;
                 case MEMO:
                     Memo memo = new Memo();
-                    memo.setId(id);
                     memo.setText(form.getInfoText());
                     info = memo;
                     break;
                 default:
-                    break;
+                    throw new IllegalStateException("Unknown Information Type '" + informationType);
             }
 
-            if (info != null) {
                 info.setAccount(account);
                 info.setCreationDate(new Date());
                 info.setEffectiveDate(new Date());
@@ -302,7 +298,6 @@ public class CashierTxMemoController extends UifControllerBase {
                 //info.setCreatorId();
                 //info.setResponsibleEntity();
                 informationService.persistInformation(info);
-            }
 
             // populate the form using the id
             PopulateForm(accountId, form);
