@@ -669,10 +669,6 @@
                     <groupId>taglibs</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jstl</artifactId>
-                    <groupId>javax.servlet</groupId>
-                </exclusion>
-                <exclusion>
                     <artifactId>struts</artifactId>
                     <groupId>struts</groupId>
                 </exclusion>
@@ -1029,10 +1025,6 @@
                 <exclusion>
                     <artifactId>standard</artifactId>
                     <groupId>taglibs</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jstl</artifactId>
-                    <groupId>javax.servlet</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>struts</artifactId>
