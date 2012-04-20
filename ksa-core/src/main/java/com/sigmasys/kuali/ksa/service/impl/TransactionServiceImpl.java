@@ -2,6 +2,8 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.TransactionService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,8 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class TransactionServiceImpl extends GenericPersistenceService implements TransactionService {
 
+    private static final Log logger = LogFactory.getLog(TransactionServiceImpl.class);
+
 
     private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
         Query query = em.createQuery("select t from " + entityType.getName() + " t " +
@@ -37,6 +41,19 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return (List<T>) query.getResultList();
     }
 
+    private <T extends Transaction> T getTransaction(Long id, Class<T> entityType) {
+        Query query = em.createQuery("select t from " + entityType.getName() + " t " +
+                " left outer join fetch t.transactionType tt " +
+                " left outer join fetch t.account a " +
+                " left outer join fetch t.currency c " +
+                " left outer join fetch t.rollup r " +
+                " left outer join fetch t.document d " +
+                " where t.id = :id ");
+        query.setParameter("id", id);
+        List<T> transactions = query.getResultList();
+        return (transactions != null && !transactions.isEmpty()) ? transactions.get(0) : null;
+    }
+
     /**
      * Returns Transaction by ID
      *
@@ -45,7 +62,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Transaction getTransaction(Long id) {
-        return getEntity(id, Transaction.class);
+        return getTransaction(id, Transaction.class);
     }
 
     /**
@@ -56,7 +73,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Charge getCharge(Long id) {
-        return getEntity(id, Charge.class);
+        return getTransaction(id, Charge.class);
     }
 
     /**
@@ -67,7 +84,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Payment getPayment(Long id) {
-        return getEntity(id, Payment.class);
+        return getTransaction(id, Payment.class);
     }
 
     /**
@@ -78,7 +95,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Deferment getDeferment(Long id) {
-        return getEntity(id, Deferment.class);
+        return getTransaction(id, Deferment.class);
     }
 
 
