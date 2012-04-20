@@ -457,7 +457,7 @@
     <bean id="cashierMemos" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="1"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:title="Alerts / Flags / Memos">
+          p:title="Memos">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
         <property name="propertyName" value="memoList"/>
