@@ -43,7 +43,9 @@ public class CashierTxMemoController extends UifControllerBase {
     */
    @Override
    protected CashierTxMemoForm createInitialForm(HttpServletRequest request) {
-      return new CashierTxMemoForm();
+      CashierTxMemoForm form = new CashierTxMemoForm();
+      form.setMemoType("MEMO");
+      return form;
    }
 
    /**
@@ -129,133 +131,7 @@ public class CashierTxMemoController extends UifControllerBase {
             throw new IllegalArgumentException("'id' request parameter must be specified");
          }
 
-         // store the selected account ID
-         form.setSelectedId(id);
-
-         Account accountById = accountService.getFullAccount(id);
-         ChargeableAccount chargeableAccount = null;
-         if (accountById != null) {
-            chargeableAccount = (ChargeableAccount) accountById;
-         }
-
-         PersonName personName = accountById.getDefaultPersonName();
-         PostalAddress postalAddress = accountById.getDefaultPostalAddress();
-
-         accountById.setCompositeDefaultPersonName(CreatePersonName(personName));
-         accountById.setCompositeDefaultPostalAddress(CreateCompositePostalAddress(postalAddress));
-         List<Account> accountList = new ArrayList<Account>();
-         accountList.add(accountById);
-         // no session scope
-         form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
-         // a list of one
-         form.setAccountBrowseList(accountList);
-         form.setCompositePersonName(accountById.getCompositeDefaultPersonName());
-         form.setCompositePostalAddress(accountById.getCompositeDefaultPostalAddress());
-
-/*
-         for (Account account : accountList) {
-
-            if (account.getId().matches(id)) {
-               form.setCompositePersonName(account.getCompositeDefaultPersonName());
-               form.setCompositePostalAddress(account.getCompositeDefaultPostalAddress());
-            }
-         }
-*/
-
-         // Account Status summation totals
-         // charges by ID
-         List<Charge> charges = transactionService.getCharges(id);
-
-         // payments by ID
-         List<Payment> payments = transactionService.getPayments(id);
-         // deferments by ID
-         List<Deferment> deferments = transactionService.getDeferments(id);
-
-         // set the form data
-
-         form.setChargeList(charges);
-         form.setPaymentList(payments);
-         form.setDefermentList(deferments);
-
-         // stubbed in data
-         BigDecimal pastDue = BigDecimal.ZERO;
-         BigDecimal balance = BigDecimal.ZERO;
-         BigDecimal future = BigDecimal.ZERO;
-         BigDecimal deferment = BigDecimal.ZERO;
-
-         for (Charge chrg : charges) {
-            balance = balance.add(chrg.getAmount());
-         }
-
-         for (Payment paymnt : payments) {
-            balance = balance.subtract(paymnt.getAmount());
-            future = future.add(paymnt.getAmount());
-         }
-
-         for (Deferment dfrmnt : deferments) {
-            pastDue = pastDue.add(dfrmnt.getAmount());
-            deferment = deferment.add(dfrmnt.getAmount());
-         }
-
-         form.setPastDue(pastDue);
-         form.setBalance(balance);
-         form.setFuture(future);
-         form.setDefermentTotal(deferment);
-
-         // Alerts and Flags
-         List<Memo> informationList = new ArrayList<Memo>();
-         Memo information1 = new Memo();
-         information1.setId(1L);
-         information1.setAccount(accountById);
-         information1.setText("04/12/2012 - Please contact the university Customer Service Representative Hal Kanni-Helfew at (555) 867-5309.");
-
-         Memo information2 = new Memo();
-         information2.setId(2L);
-         information2.setAccount(accountById);
-         information2.setText("03/26/2012 - Check #199 bounced due to insufficient funds.");
-
-         Memo information3 = new Memo();
-         information3.setId(3L);
-         information3.setAccount(accountById);
-         information3.setText("03/11/2012 - Permanent address does not appear to be valid.");
-
-         Memo information4 = new Memo();
-         information4.setId(4L);
-         information4.setAccount(accountById);
-         information4.setText("03/11/2012 - Please contact Supervising Cashier Bill Peymaster.");
-
-         informationList.add(information1);
-         informationList.add(information2);
-         informationList.add(information3);
-         informationList.add(information4);
-
-         form.setAlertFlagList(informationList);
-
-
-         // Aging
-         Calendar calendar = Calendar.getInstance();
-         // 10 days ago
-         calendar.add(Calendar.DAY_OF_YEAR, - 10);
-         Date lastAgeDate = calendar.getTime();
-         form.setLastAgeDate(lastAgeDate);
-
-         form.setAged30(new BigDecimal(68.96));
-         form.setAged60(new BigDecimal(28.88));
-         form.setAged90(BigDecimal.ZERO);
-         form.setAgedTotal(new BigDecimal(97.84));
-
-         // Memo (Information table)
-
-/*
-         List<Memo> memoList = new ArrayList<Memo>();
-         Memo memo = new Memo();
-         memo.setId(Long.valueOf(id));
-         memo.setPreviousMemo(memo);
-         memo.setNextMemo(memo);
-         memo.setText("04/05/2012 - Student advised that Direct Loan financial aid submission cutoff date is 04/25/2012.");
-         memoList.add(memo);
-*/
-         form.setMemoList(informationService.getMemos(id));
+         PopulateForm(id, form);
       }
 
       return getUIFModelAndView(form);
@@ -318,6 +194,8 @@ public class CashierTxMemoController extends UifControllerBase {
             // create the composite default postal address
             if (postalAddress != null) {
                postalAddressBuilder.append(postalAddress.getStreetAddress1());
+               postalAddressBuilder.append(" ");
+               postalAddressBuilder.append(postalAddress.getCity());
                postalAddressBuilder.append(", ");
                postalAddressBuilder.append(postalAddress.getState());
                postalAddressBuilder.append(" ");
@@ -354,8 +232,15 @@ public class CashierTxMemoController extends UifControllerBase {
                               HttpServletRequest request, HttpServletResponse response) {
 
       // do aging of transactions stuff...
-      //String id = request.getParameterMap().get("id").toString();
-      ChargeableAccount chargeableAccount = accountService.ageDebt("1", form.getIgnoreDeferment());
+      String accountId = form.getSelectedId();
+      long id = Long.valueOf(accountId);
+
+      if (id != -1) {
+         // age the indexed Account Transactions
+         ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+         // populate the form using the id
+         PopulateForm(accountId, form);
+      }
 
       return getUIFModelAndView(form);
    }
@@ -372,39 +257,59 @@ public class CashierTxMemoController extends UifControllerBase {
                               HttpServletRequest request, HttpServletResponse response) {
       // do addMemo stuff...
 
-      String memoType = form.getMemoType();
+      String accountId = form.getSelectedId();
+      long id = Long.valueOf(accountId);
+      String infoType = "MEMO";
+      form.setMemoType(infoType);
 
-      String selId = form.getSelectedId();
+      if (id != -1 && accountId != null) {
 
-      InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, memoType);
+      //String memoType = form.getMemoType();
 
-      Information info = null;
-      switch(informationType) {
-         case ALERT:
-            Alert alert = new Alert();
-            alert.setId(1L);
-            alert.setText(form.getMemoText());
-            info = alert;
-            break;
-         case FLAG:
-            Flag flag = new Flag();
-            flag.setId(1L);
-            info = flag;
-            break;
-         case MEMO:
-            Memo memo = new Memo();
-            memo.setId(1L);
-            memo.setText(form.getMemoText());
-            //informationService.persistMemo(memo);
-            break;
-         default:
-            break;
+      Account account = accountService.getFullAccount(accountId);
+
+         //form.setSelectedId(accountId);
+
+         InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
+
+         Information info = null;
+         switch(informationType) {
+            case ALERT:
+               Alert alert = new Alert();
+               alert.setId(id);
+               alert.setText(form.getInfoText());
+               info = alert;
+               break;
+            case FLAG:
+               Flag flag = new Flag();
+               flag.setId(id);
+               info = flag;
+               break;
+            case MEMO:
+               Memo memo = new Memo();
+               memo.setId(id);
+               memo.setText(form.getInfoText());
+               info = memo;
+               break;
+            default:
+               break;
+         }
+
+         if (info != null)
+         {
+            info.setAccount(account);
+            info.setCreationDate(new Date());
+            info.setEffectiveDate(new Date());
+            info.setLastUpdate(new Date());
+            //info.setCreatorId();
+            //info.setResponsibleEntity();
+            informationService.persistInformation(info);
+         }
+
+         // populate the form using the id
+         PopulateForm(accountId, form);
       }
 
-      if (info != null)
-      {
-         informationService.persistInformation(info);
-      }
       return getUIFModelAndView(form);
    }
 
@@ -442,6 +347,8 @@ public class CashierTxMemoController extends UifControllerBase {
 
       if (postalAddress != null) {
          postalAddressBuilder.append(postalAddress.getStreetAddress1());
+         postalAddressBuilder.append(" ");
+         postalAddressBuilder.append(postalAddress.getCity());
          postalAddressBuilder.append(", ");
          postalAddressBuilder.append(postalAddress.getState());
          postalAddressBuilder.append(" ");
@@ -451,5 +358,115 @@ public class CashierTxMemoController extends UifControllerBase {
       }
 
       return postalAddressBuilder.toString();
+   }
+
+   private void PopulateForm(String id, CashierTxMemoForm form) {
+
+      // store the selected account ID
+      form.setSelectedId(id);
+
+      boolean ignoreDeferments = form.getIgnoreDeferment();
+
+      Account accountById = accountService.getFullAccount(id);
+      ChargeableAccount chargeableAccount = null;
+      if (accountById != null) {
+         chargeableAccount = (ChargeableAccount) accountById;
+      }
+
+      PersonName personName = accountById.getDefaultPersonName();
+      PostalAddress postalAddress = accountById.getDefaultPostalAddress();
+
+      accountById.setCompositeDefaultPersonName(CreatePersonName(personName));
+      accountById.setCompositeDefaultPostalAddress(CreateCompositePostalAddress(postalAddress));
+      List<Account> accountList = new ArrayList<Account>();
+      accountList.add(accountById);
+
+      // no session scope
+      form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
+      // a list of one
+      form.setAccountBrowseList(accountList);
+      form.setCompositePersonName(accountById.getCompositeDefaultPersonName());
+      form.setCompositePostalAddress(accountById.getCompositeDefaultPostalAddress());
+
+      // Account Status summation totals
+      // charges by ID
+      List<Charge> charges = transactionService.getCharges(id);
+
+      // payments by ID
+      List<Payment> payments = transactionService.getPayments(id);
+
+      // deferments by ID
+      List<Deferment> deferments = transactionService.getDeferments(id);
+
+      // set the form data
+
+      form.setChargeList(charges);
+      form.setPaymentList(payments);
+      form.setDefermentList(deferments);
+
+      // stubbed in data
+      BigDecimal pastDue = BigDecimal.ZERO;
+      BigDecimal balance = BigDecimal.ZERO;
+      BigDecimal future = BigDecimal.ZERO;
+      BigDecimal deferment = BigDecimal.ZERO;
+
+      if (chargeableAccount != null) {
+         pastDue = accountService.getOutstandingBalance(id, ignoreDeferments) != null ? accountService.getOutstandingBalance(id, ignoreDeferments) : BigDecimal.ZERO;
+         balance = accountService.getDueBalance(id, ignoreDeferments) != null ? accountService.getDueBalance(id, ignoreDeferments) : BigDecimal.ZERO;
+         future = accountService.getUnallocatedBalance(id) != null ? accountService.getUnallocatedBalance(id) : BigDecimal.ZERO;
+         deferment = accountService.getDeferredAmount(id) != null ? accountService.getDeferredAmount(id) : BigDecimal.ZERO;
+
+         // Aging
+
+         Date lastAgeDate = chargeableAccount.getLateLastUpdate();
+         form.setLastAgeDate(lastAgeDate);
+
+         form.setAged30(chargeableAccount.getAmountLate1());
+         form.setAged60(chargeableAccount.getAmountLate2());
+         form.setAged90(chargeableAccount.getAmountLate3());
+         BigDecimal agedTotal = BigDecimal.ZERO;
+         agedTotal = agedTotal.add(chargeableAccount.getAmountLate1());
+         agedTotal = agedTotal.add(chargeableAccount.getAmountLate2());
+         agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
+         form.setAgedTotal(agedTotal);
+      }
+
+      form.setPastDue(pastDue);
+      form.setBalance(balance);
+      form.setFuture(future);
+      form.setDefermentTotal(deferment);
+
+      // Alerts and Flags
+      List<Alert> informationList = new ArrayList<Alert>();
+      Alert information1 = new Alert();
+      information1.setId(1L);
+      information1.setAccount(accountById);
+      information1.setText("04/12/2012 - Please contact the university Customer Service Representative Hal Kanni-Helfew at (555) 867-5309.");
+
+      Alert information2 = new Alert();
+      information2.setId(2L);
+      information2.setAccount(accountById);
+      information2.setText("03/26/2012 - Check #199 bounced due to insufficient funds.");
+
+      Alert information3 = new Alert();
+      information3.setId(3L);
+      information3.setAccount(accountById);
+      information3.setText("03/11/2012 - Permanent address does not appear to be valid.");
+
+      Alert information4 = new Alert();
+      information4.setId(4L);
+      information4.setAccount(accountById);
+      information4.setText("03/11/2012 - Please contact Supervising Cashier Bill Peymaster.");
+
+      informationList.add(information1);
+      informationList.add(information2);
+      informationList.add(information3);
+      informationList.add(information4);
+
+      form.setAlertList(informationList);
+
+      form.setFlagList(informationService.getFlags(id));
+
+      form.setMemoList(informationService.getMemos(id));
    }
 }

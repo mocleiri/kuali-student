@@ -32,40 +32,58 @@ public class CashierTxMemoForm extends UifFormBase {
    // Account Status values
    private BigDecimal pastDue;
 
+   // the account balance
    private BigDecimal balance;
 
+   // unallocated balance
    private BigDecimal future;
 
+   // deferment sum
    private BigDecimal defermentTotal;
 
    // ID and Bio information
    private String selectedId;
 
+   // PersonName fields concatenated
    private String compositePersonName;
 
+   // PostalAddress fields concatenated
    private String compositePostalAddress;
 
-   // Alerts and Flags
-   private List<Memo> alertFlagList;
+   // Alerts
+   private List<Alert> alertList;
 
+   // Flags
+   private List<Flag> flagList;
+
+   // the last aging date
    private Date lastAgeDate;
 
+   // sum of aged values
    private BigDecimal agedTotal;
 
+   // amountLate1
    private BigDecimal aged30;
 
+   // amountLate2
    private BigDecimal aged60;
 
+   // amountLate3
    private BigDecimal aged90;
 
+   // Aged debit flag
    private boolean ignoreDeferment;
 
+   // a list of Memos
    private List<Memo> memoList;
 
-   private String memoText;
+   // the Information Text field
+   private String infoText;
 
+   // the type of information
    private String memoType;
 
+   // deprecated in this class
    private InformationTypeValue informationTypeValue;
 
    /**
@@ -138,126 +156,267 @@ public class CashierTxMemoForm extends UifFormBase {
       this.paymentList = paymentList;
    }
 
+   /**
+    * Get the deferment list
+    * @return
+    */
    public List<Deferment> getDefermentList() {
       return defermentList;
    }
 
+   /**
+    * Set the deferment list
+    * @param defermentList
+    */
    public void setDefermentList(List<Deferment> defermentList) {
       this.defermentList = defermentList;
    }
 
+   /**
+    * Get the past due value
+    * @return
+    */
    public BigDecimal getPastDue() {
       return pastDue;
    }
 
+   /**
+    * Set the past due value
+    * @param pastDue
+    */
    public void setPastDue(BigDecimal pastDue) {
       this.pastDue = pastDue;
    }
 
+   /**
+    * Get the due balance
+    * @return
+    */
    public BigDecimal getBalance() {
       return balance;
    }
 
+   /**
+    * Set the due balance
+    * @param balance
+    */
    public void setBalance(BigDecimal balance) {
       this.balance = balance;
    }
 
+   /**
+    * Get the future value
+    * @return
+    */
    public BigDecimal getFuture() {
       return future;
    }
 
+   /**
+    * Set the future value
+    * @param future
+    */
    public void setFuture(BigDecimal future) {
       this.future = future;
    }
 
+   /**
+    * Get the deferment total
+    * @return
+    */
    public BigDecimal getDefermentTotal() {
       return defermentTotal;
    }
 
+   /**
+    * Set the deferment total
+    * @param defermentTotal
+    */
    public void setDefermentTotal(BigDecimal defermentTotal) {
       this.defermentTotal = defermentTotal;
    }
 
+   /**
+    * Get the selected table line item id
+    * @return
+    */
    public String getSelectedId() {
       return selectedId;
    }
 
+   /**
+    * Set the selected table line item id
+    * @param selectedId
+    */
    public void setSelectedId(String selectedId) {
       this.selectedId = selectedId;
    }
 
+   /**
+    * Get the composite person name
+    * @return
+    */
    public String getCompositePersonName() {
       return compositePersonName;
    }
 
+   /**
+    * Set the composite person name
+    * @param compositePersonName
+    */
    public void setCompositePersonName(String compositePersonName) {
       this.compositePersonName = compositePersonName;
    }
 
+   /**
+    * Get the composite postal address
+    * @return
+    */
    public String getCompositePostalAddress() {
       return compositePostalAddress;
    }
 
+   /**
+    * Set the composite postal address
+    * @param compositePostalAddress
+    */
    public void setCompositePostalAddress(String compositePostalAddress) {
       this.compositePostalAddress = compositePostalAddress;
    }
 
-   public List<Memo> getAlertFlagList() {
-      return alertFlagList;
+   /**
+    * Get the alert list
+    * @return
+    */
+   public List<Alert> getAlertList() {
+      return alertList;
    }
 
-   public void setAlertFlagList(List<Memo> alertFlagList) {
-      this.alertFlagList = alertFlagList;
+   /**
+    * Set the alert list
+    * @param alertList
+    */
+   public void setAlertList(List<Alert> alertList) {
+      this.alertList = alertList;
    }
 
+   /**
+    * Get the flag list
+    * @return
+    */
+   public List<Flag> getFlagList() {
+      return flagList;
+   }
+
+   /**
+    * Set the flag list
+    * @param flagList
+    */
+   public void setFlagList(List<Flag> flagList) {
+      this.flagList = flagList;
+   }
+
+   /**
+    * Get the last aging date
+    * @return
+    */
    public Date getLastAgeDate() {
       return lastAgeDate;
    }
 
+   /**
+    * Set the last aging date
+    * @param lastAgeDate
+    */
    public void setLastAgeDate(Date lastAgeDate) {
       this.lastAgeDate = lastAgeDate;
    }
 
+   /**
+    * Get the age total sum
+    * @return
+    */
    public BigDecimal getAgedTotal() {
       return getFormattedAmount(agedTotal);
    }
 
+   /**
+    * Set the age total sum
+    * @param agedTotal
+    */
    public void setAgedTotal(BigDecimal agedTotal) {
       this.agedTotal = agedTotal;
    }
 
+   /**
+    * Get the 30 day age value
+    * @return
+    */
    public BigDecimal getAged30() {
       return getFormattedAmount(aged30);
    }
 
+   /**
+    * Set the 30 day age value
+    * @param aged30
+    */
    public void setAged30(BigDecimal aged30) {
       this.aged30 = aged30;
    }
 
+   /**
+    * Get the 60 day age value
+    * @return
+    */
    public BigDecimal getAged60() {
       return getFormattedAmount(aged60);
    }
 
+   /**
+    * Set the 60 day age value
+    * @param aged60
+    */
    public void setAged60(BigDecimal aged60) {
       this.aged60 = aged60;
    }
 
+   /**
+    * Get the 90 day age value
+    * @return
+    */
    public BigDecimal getAged90() {
       return getFormattedAmount(aged90);
    }
 
+   /**
+    * Set the 90 day age value
+    * @param aged90
+    */
    public void setAged90(BigDecimal aged90) {
       this.aged90 = aged90;
    }
 
+   /**
+    * Get the memo list
+    * @return
+    */
    public List<Memo> getMemoList() {
       return memoList;
    }
 
+   /**
+    * Set the memo list
+    * @param memoList
+    */
    public void setMemoList(List<Memo> memoList) {
       this.memoList = memoList;
    }
 
+   /**
+    * Get the formatted BigDecimal value
+    * @param value
+    * @return
+    */
    public BigDecimal getFormattedAmount(BigDecimal value) {
       if (value != null) {
          return value.setScale(5, BigDecimal.ROUND_CEILING);
@@ -265,34 +424,66 @@ public class CashierTxMemoForm extends UifFormBase {
       return BigDecimal.ZERO;
    }
 
-   public String getMemoText() {
-      return memoText;
+   /**
+    * Get the infomation text
+    * @return
+    */
+   public String getInfoText() {
+      return infoText;
    }
 
-   public void setMemoText(String memoText) {
-      this.memoText = memoText;
+   /**
+    * Set the infomation text
+    * @param infoText
+    */
+   public void setInfoText(String infoText) {
+      this.infoText = infoText;
    }
 
+   /**
+    *
+    * @return
+    */
    public String getMemoType() {
       return memoType;
    }
 
-   public void setMemoType(String informationTypeValue) {
+   /**
+    * Set the memo type
+    * @param memoType
+    */
+   public void setMemoType(String memoType) {
       this.memoType = memoType;
    }
 
+   /**
+    * Not used
+    * @return
+    */
    public InformationTypeValue getInformationTypeValue() {
       return informationTypeValue;
    }
 
+   /**
+    * Not used
+    * @param informationTypeValue
+    */
    public void setInformationTypeValue(InformationTypeValue informationTypeValue) {
       this.informationTypeValue = informationTypeValue;
    }
 
+   /**
+    * Get ignoreDeferment flag
+    * @return
+    */
    public boolean getIgnoreDeferment() {
       return ignoreDeferment;
    }
 
+   /**
+    * Set ignoreDeferment flag
+    * @param ignoreDeferment
+    */
    public void setIgnoreDeferment(boolean ignoreDeferment) {
       this.ignoreDeferment = ignoreDeferment;
    }

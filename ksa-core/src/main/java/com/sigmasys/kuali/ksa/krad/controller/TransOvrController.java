@@ -194,6 +194,8 @@ public class TransOvrController extends UifControllerBase {
                 // create the composite default postal address
                 if (postalAddress != null) {
                     postalAddressBuilder.append(postalAddress.getStreetAddress1());
+                    postalAddressBuilder.append(" ");
+                    postalAddressBuilder.append(postalAddress.getCity());
                     postalAddressBuilder.append(", ");
                     postalAddressBuilder.append(postalAddress.getState());
                     postalAddressBuilder.append(" ");
