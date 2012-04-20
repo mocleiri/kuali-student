@@ -137,6 +137,13 @@ public class AccountServiceTest extends AbstractServiceTest {
 
     }
 
+    @Rollback(false)
+    @Test
+    public void getOrCreateAccount() {
+        String userId = "admin";
+        accountService.getOrCreateAccount(userId);
+    }
+
     @Test
     public void ageDebt() {
 
@@ -163,11 +170,5 @@ public class AccountServiceTest extends AbstractServiceTest {
 
     }
 
-    /*@Rollback(false)
-    @Test
-    public void getOrCreateAccount() {
-        String userId = "admin";
-        accountService.getOrCreateAccount(userId);
-    }*/
 
 }
