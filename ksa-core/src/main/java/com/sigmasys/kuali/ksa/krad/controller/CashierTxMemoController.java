@@ -91,6 +91,57 @@ public class CashierTxMemoController extends UifControllerBase {
         return getUIFModelAndView(form);
     }
 
+   /**
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+   public ModelAndView refresh(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+      // do refresh stuff...
+      String accountId = form.getSelectedId();
+      PopulateForm(accountId, form);
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCharge")
+   public ModelAndView addCharge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+      // do refresh stuff...
+      String accountId = form.getSelectedId();
+      PopulateForm(accountId, form);
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makePayment")
+   public ModelAndView makePayment(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+      // do refresh stuff...
+      String accountId = form.getSelectedId();
+      PopulateForm(accountId, form);
+
+      return getUIFModelAndView(form);
+   }
+
     /**
      * @param form
      * @param result
@@ -124,7 +175,7 @@ public class CashierTxMemoController extends UifControllerBase {
         }
 
 
-        // for the bio, aging tx alerts and
+        // for the bio, aging tx alerts flags and memo
         if (pageId != null && pageId.compareTo("CashierTxBioAgeOvrVwPage") == 0) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
@@ -293,7 +344,7 @@ public class CashierTxMemoController extends UifControllerBase {
 
                 info.setAccount(account);
                 info.setCreationDate(new Date());
-                info.setEffectiveDate(new Date());
+                info.setEffectiveDate(form.getInfoEffectiveDate());
                 info.setLastUpdate(new Date());
                 //info.setCreatorId();
                 //info.setResponsibleEntity();
