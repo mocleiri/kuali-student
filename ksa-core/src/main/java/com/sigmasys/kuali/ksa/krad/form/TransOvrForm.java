@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.krad.form;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Charge;
 
+import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.model.Payment;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import java.util.List;
@@ -12,6 +13,8 @@ public class TransOvrForm extends UifFormBase {
 
    // use this object as a query argument for matching transactions by student name
    private String studentLookupByName;
+
+   private String selectedPersonName;
 
    // result set of matching persons and address postal information
    private List<Account> accountBrowseList;
@@ -27,6 +30,16 @@ public class TransOvrForm extends UifFormBase {
    // a single payment
    private Payment payment;
 
+   // Currency stuff
+   private List<Currency> currencies;
+
+   private Currency currency;
+
+   private String iso;
+
+   private String currencyName;
+
+   private String currencyDescription;
 
    /**
     * Get the student name
@@ -46,6 +59,22 @@ public class TransOvrForm extends UifFormBase {
     */
    public void setStudentLookupByName(String studentLookupByName) {
       this.studentLookupByName = studentLookupByName;
+   }
+
+   /**
+    * Get the selected person name
+    * @return
+    */
+   public String getSelectedPersonName() {
+      return selectedPersonName;
+   }
+
+   /**
+    * Set the selected person name
+    * @param selectedPersonName
+    */
+   public void setSelectedPersonName(String selectedPersonName) {
+      this.selectedPersonName = selectedPersonName;
    }
 
    /**
@@ -128,5 +157,87 @@ public class TransOvrForm extends UifFormBase {
     */
    public void setPayment(Payment payment) {
       this.payment = payment;
+   }
+
+   // Currency get/Set methods
+
+   /**
+    * Get the list of Currency objects
+    * @return
+    */
+   public List<Currency> getCurrencies() {
+      return currencies;
+   }
+
+   /**
+    * Set the list of Currency objects
+    * @param currencies
+    */
+   public void setCurrencies(List<Currency> currencies) {
+      this.currencies = currencies;
+   }
+
+   /**
+    * Get the Currency model object
+    * @return
+    */
+   public Currency getCurrency() {
+      return currency;
+   }
+
+   /**
+    * Set teh Currency model object
+    * @param currency
+    */
+   public void setCurrency(Currency currency) {
+      this.currency = currency;
+   }
+
+   /**
+    * Get the ISO symbol
+    * @return
+    */
+   public String getIso() {
+      return iso;
+   }
+
+   /**
+    * Set the ISO symbol
+    * @param iso
+    */
+   public void setIso(String iso) {
+      this.iso = iso;
+   }
+
+   /**
+    * Get the currencyName
+    * @return
+    */
+   public String getCurrencyName() {
+      return currencyName;
+   }
+
+   /**
+    * Set the Name
+    * @param currencyName
+    */
+   public void setCurrencyName(String currencyName) {
+      this.currencyName = currencyName;
+   }
+
+   /**
+    * Get the currency description
+    * @return
+    */
+   public String getCurrencyDescription() {
+      return currencyDescription;
+   }
+
+   /**
+    * Set  the currency description
+    * @param currencyDescription
+    */
+   public void setCurrencyDescription(String currencyDescription) {
+      this.currencyDescription = currencyDescription;
    }
 }

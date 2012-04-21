@@ -86,6 +86,8 @@ public class CashierTxMemoForm extends UifFormBase {
    // deprecated in this class
    private InformationTypeValue informationTypeValue;
 
+   private Date infoEffectiveDate;
+
    /**
     * Get the student name
     * Possible uses is a query match for transactions
@@ -486,5 +488,21 @@ public class CashierTxMemoForm extends UifFormBase {
     */
    public void setIgnoreDeferment(boolean ignoreDeferment) {
       this.ignoreDeferment = ignoreDeferment;
+   }
+
+   /**
+    * Get the info effective date
+    * @return
+    */
+   public Date getInfoEffectiveDate() {
+      return infoEffectiveDate;
+   }
+
+   /**
+    * Set the info effective date
+    * @param infoEffectiveDate
+    */
+   public void setInfoEffectiveDate(Date infoEffectiveDate) {
+      this.infoEffectiveDate = infoEffectiveDate;
    }
 }
