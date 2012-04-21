@@ -34,24 +34,42 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="bursaTransByPersonPage" p:title="Transactions for selected Person">
+                <bean parent="Uif-Page" p:id="bursaTransByPersonPage" p:title="Transactions for selected person @{selectedPersonName}">
                     <property name="items">
                         <list>
                             <ref bean="bursaTransactionsReviewPage"/>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="bursaChargePage">
+                <bean parent="Uif-Page" p:id="bursaChargePage" p:title="Charge Detail - @{selectedPersonName}">
                     <property name="items">
                         <list>
                             <ref bean="bursaChargeReviewSection"/>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="bursaPaymentPage">
+                <bean parent="Uif-Page" p:id="bursaPaymentPage" p:title="Payment Detail - @{selectedPersonName}" >
                     <property name="items">
                         <list>
                             <ref bean="bursaPaymentReviewSection"/>
+                        </list>
+                    </property>
+                </bean>
+
+                <!-- Currency stuff -->
+
+                <bean parent="Uif-Page" p:id="bursaCurrencyPage" p:title="Currency Type">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaAddCurrencyType"/>
+                            <ref bean="bursaCurrencyList"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="bursaCurrencyEditPage" p:title="Currency Details (ISO = @{currency.iso})">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaCurrencyDetail"/>
                         </list>
                     </property>
                 </bean>
@@ -91,7 +109,9 @@
                 <bean parent="Uif-Link" p:linkLabel="Transactions for a Person" p:target="_self"
                       p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
                 <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
-                      p:hrefText="currencyList?methodToCall=get&amp;viewId=CurrencyListView"/>
+                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+<!--                <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
+                      p:hrefText="currencyList?methodToCall=get&amp;viewId=CurrencyListView"/>-->
             </list>
         </property>
     </bean>
@@ -176,7 +196,7 @@
     <bean id="bursaTransactionsReviewPage" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
           p:title="Selected Transactions"
-          p:instructionalText="The following is a list of transactions for the selected person">
+          p:instructionalText="The following is a list of transactions for the selected person @{selectedPersonName}">
         <property name="disclosure.render" value="false" />
         <property name="items">
             <list>
@@ -257,7 +277,7 @@
 
     <!-- -->
     <bean id="bursaChargeReviewSection" parent="Uif-Disclosure-VerticalBoxSection">
-        <property name="title" value="Charge Details"/>
+        <!--<property name="title" value="Charge Details - @{selectedPersonName}"/>-->
         <property name="items">
             <list>
                 <ref bean="bursaChargeReviewGrid"/>
@@ -268,7 +288,7 @@
     <!-- -->
     <bean id="bursaChargeReviewGrid" parent="Uif-GridSection">
         <!--<property name="title" value="Charge Group"/>-->
-        <property name="instructionalText" value="Charge transaction maintenance"/>
+        <!--<property name="instructionalText" value="Charge transaction for  @{selectedPersonName}"/>-->
         <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Charge"/>-->
         <!--<property name="propertyName" value="charge"/>-->
         <property name="readOnly" value="true"/>
@@ -340,7 +360,7 @@
 
     <!-- -->
     <bean id="bursaPaymentReviewSection" parent="Uif-Disclosure-VerticalBoxSection">
-        <property name="title" value="Payment Details"/>
+        <!--<property name="title" value="Payment Details - @{selectedPersonName}"/>-->
         <property name="items">
             <list>
                 <ref bean="bursaPaymentReviewGrid"/>
@@ -351,7 +371,7 @@
     <!-- -->
     <bean id="bursaPaymentReviewGrid" parent="Uif-GridSection">
         <!--<property name="title" value="Payment Group"/>-->
-        <property name="instructionalText" value="Payment transaction maintenance"/>
+        <!--<property name="instructionalText" value="Payment transaction for @{selectedPersonName}" />-->
         <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Payment"/>-->
         <!--<property name="propertyName" value="payment"/>-->
         <property name="readOnly" value="true"/>
@@ -420,4 +440,106 @@
         </property>
     </bean>
 
+    <!-- Currency views -->
+    <bean id="bursaAddCurrencyType" parent="Uif-HorizontalBoxSection">
+        <property name="title" value="Add Currency Type"/>
+        <property name="instructionalText" value="Input fields to add a currency * denotes a required field"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso" p:labelPlacement="TOP" p:required="true" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="currencyName" p:labelPlacement="TOP" p:required="true" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="currencyDescription" p:labelPlacement="TOP" >
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Paste or key in the description here..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="addCurrType" p:actionLabel="Add">
+                    <property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Collection list of currency types -->
+
+    <bean id="bursaCurrencyList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5">
+        <property name="title" value="View Currency Types"/>
+        <property name="instructionalText"
+                  value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application." />
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="readOnly" value="true"/>
+        <property name="propertyName" value="currencies"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description">
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Statement description..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-Link" p:linkLabel="Delete" p:target="_self"
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>
+                <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;iso=@{#line.iso}"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="bursaCurrencyDetail" parent="Uif-VerticalBoxSection">
+        <property name="title" value="Currency Details View"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="currency.iso" p:labelPlacement="TOP" p:label="Symbol">
+                    <property name="readOnly" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="currency.name" p:label="Name" p:labelPlacement="TOP" p:required="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="currency.description" p:labelPlacement="TOP" >
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Key in the statement description here..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="save"
+                      p:actionLabel="Save">
+                    <!--<property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>-->
+                </bean>
+            </list>
+        </property>
+    </bean>
 </beans>
