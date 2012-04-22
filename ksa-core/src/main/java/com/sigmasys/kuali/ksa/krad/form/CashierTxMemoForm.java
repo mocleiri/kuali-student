@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.*;
+import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.web.form.UifFormBase;
 
 import java.math.BigDecimal;
@@ -188,8 +189,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the past due value
     * @return
     */
-   public BigDecimal getPastDue() {
-      return pastDue;
+   public KualiDecimal getPastDue() {
+      return new KualiDecimal(pastDue);
    }
 
    /**
@@ -204,8 +205,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the due balance
     * @return
     */
-   public BigDecimal getBalance() {
-      return balance;
+   public KualiDecimal getBalance() {
+      return new KualiDecimal(balance);
    }
 
    /**
@@ -220,8 +221,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the future value
     * @return
     */
-   public BigDecimal getFuture() {
-      return future;
+   public KualiDecimal getFuture() {
+      return new KualiDecimal(future);
    }
 
    /**
@@ -236,8 +237,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the deferment total
     * @return
     */
-   public BigDecimal getDefermentTotal() {
-      return defermentTotal;
+   public KualiDecimal getDefermentTotal() {
+      return new KualiDecimal(defermentTotal);
    }
 
    /**
@@ -348,8 +349,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the age total sum
     * @return
     */
-   public BigDecimal getAgedTotal() {
-      return getFormattedAmount(agedTotal);
+   public KualiDecimal getAgedTotal() {
+      return new KualiDecimal(getFormattedAmount(agedTotal));
    }
 
    /**
@@ -364,8 +365,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the 30 day age value
     * @return
     */
-   public BigDecimal getAged30() {
-      return getFormattedAmount(aged30);
+   public KualiDecimal getAged30() {
+      return new KualiDecimal(getFormattedAmount(aged30));
    }
 
    /**
@@ -380,8 +381,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the 60 day age value
     * @return
     */
-   public BigDecimal getAged60() {
-      return getFormattedAmount(aged60);
+   public KualiDecimal getAged60() {
+      return new KualiDecimal(getFormattedAmount(aged60));
    }
 
    /**
@@ -396,8 +397,8 @@ public class CashierTxMemoForm extends UifFormBase {
     * Get the 90 day age value
     * @return
     */
-   public BigDecimal getAged90() {
-      return getFormattedAmount(aged90);
+   public KualiDecimal getAged90() {
+      return new KualiDecimal(getFormattedAmount(aged90));
    }
 
    /**
