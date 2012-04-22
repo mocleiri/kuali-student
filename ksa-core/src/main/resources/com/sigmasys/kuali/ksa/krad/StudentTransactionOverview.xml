@@ -229,7 +229,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true" p:align="right"/>
                 <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
                       p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaChargePage&amp;methodToCall=get&amp;id=@{#line.id}"/>
                 <!--<bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
@@ -261,7 +261,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true" p:align="right"/>
                 <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
                       p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaPaymentPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
 <!--
