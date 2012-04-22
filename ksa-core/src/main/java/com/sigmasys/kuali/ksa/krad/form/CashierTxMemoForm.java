@@ -24,7 +24,7 @@ public class CashierTxMemoForm extends UifFormBase {
    // result set of charges
    private List<Charge> chargeList;
 
-   // result set of charges
+   // result set of payments
    private List<Payment> paymentList;
 
    private List<Deferment> defermentList;
@@ -87,6 +87,16 @@ public class CashierTxMemoForm extends UifFormBase {
    private InformationTypeValue informationTypeValue;
 
    private Date infoEffectiveDate;
+
+   // Use for adding a charge
+   Charge charge;
+
+   // use for adding a payment
+   private Payment payment;
+
+   private String chargeTransTypeValue;
+
+   private String paymentTransTypeValue;
 
    /**
     * Get the student name
@@ -504,5 +514,69 @@ public class CashierTxMemoForm extends UifFormBase {
     */
    public void setInfoEffectiveDate(Date infoEffectiveDate) {
       this.infoEffectiveDate = infoEffectiveDate;
+   }
+
+   /**
+    * Get the Charge
+    * @return
+    */
+   public Charge getCharge() {
+      return charge;
+   }
+
+   /**
+    * Set the Charge
+    * @param charge
+    */
+   public void setCharge(Charge charge) {
+      this.charge = charge;
+   }
+
+   /**
+    * Get a Payment
+    * @return
+    */
+   public Payment getPayment() {
+      return payment;
+   }
+
+   /**
+    * Set a Payment
+    * @param payment
+    */
+   public void setPayment(Payment payment) {
+      this.payment = payment;
+   }
+
+   /**
+    * Get pseudo charge transaction type value
+    * @return
+    */
+   public String getChargeTransTypeValue() {
+      return chargeTransTypeValue;
+   }
+
+   /**
+    * Set pseudo charge transaction type value
+    * @param chargeTransTypeValue
+    */
+   public void setChargeTransTypeValue(String chargeTransTypeValue) {
+      this.chargeTransTypeValue = chargeTransTypeValue;
+   }
+
+   /**
+    * Get pseudo payment transaction type value
+    * @return
+    */
+   public String getPaymentTransTypeValue() {
+      return paymentTransTypeValue;
+   }
+
+   /**
+    * Set pseudo payment transaction type value
+    * @param paymentTransTypeValue
+    */
+   public void setPaymentTransTypeValue(String paymentTransTypeValue) {
+      this.paymentTransTypeValue = paymentTransTypeValue;
    }
 }

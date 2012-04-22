@@ -2,7 +2,9 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.AccountService;
+import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 
@@ -33,6 +35,9 @@ public class CashierTxMemoController extends UifControllerBase {
     private AccountService accountService;
 
     @Autowired
+    private CurrencyService currencyService;
+
+    @Autowired
     private InformationService informationService;
 
     @Autowired
@@ -45,6 +50,8 @@ public class CashierTxMemoController extends UifControllerBase {
     protected CashierTxMemoForm createInitialForm(HttpServletRequest request) {
         CashierTxMemoForm form = new CashierTxMemoForm();
         form.setInfoType("MEMO");
+        form.setChargeTransTypeValue("6");
+        form.setPaymentTransTypeValue("5");
         return form;
     }
 
@@ -120,7 +127,25 @@ public class CashierTxMemoController extends UifControllerBase {
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       String accountId = form.getSelectedId();
-      PopulateForm(accountId, form);
+      if (accountId != null && !accountId.trim().isEmpty()) {
+
+         Account account = accountService.getFullAccount(accountId);
+
+         Charge charge = form.getCharge();
+         String chargeTransactionType = form.getChargeTransTypeValue();
+
+         Currency currency = currencyService.getCurrency(charge.getCurrency().getIso());
+         charge.setAccount(account);
+         charge.setCurrency(currency);
+
+
+         //TransactionTypeValue transactionTypeValue = Enum.valueOf(TransactionTypeValue.class, chargeTransactionType);
+         // TransactionType transactionType = transactionService.getTransactionType(transactionTypeValue);
+         //charge.setTransactionType(transactionType);
+
+         transactionService.persistTransaction(charge);
+         PopulateForm(accountId, form);
+      }
 
       return getUIFModelAndView(form);
    }
@@ -137,7 +162,48 @@ public class CashierTxMemoController extends UifControllerBase {
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       String accountId = form.getSelectedId();
-      PopulateForm(accountId, form);
+      if (accountId != null && !accountId.trim().isEmpty()) {
+
+         Payment payment = form.getPayment();
+         Account account = payment.getAccount();
+         Currency currency  = payment.getCurrency();
+         TransactionType transactionType = payment.getTransactionType();
+
+         //transactionService.persistTransaction(form.getPayment());
+         PopulateForm(accountId, form);
+      }
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submitPayAge")
+   public ModelAndView submitPayAge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                                   HttpServletRequest request, HttpServletResponse response) {
+      // do make payment and age stuff...
+
+      String accountId = form.getSelectedId();
+
+      if (accountId != null && !accountId.trim().isEmpty()) {
+
+         Payment payment = form.getPayment();
+         Account account = payment.getAccount();
+         Currency currency  = payment.getCurrency();
+         TransactionType transactionType = payment.getTransactionType();
+
+         //transactionService.persistTransaction(form.getPayment());
+
+         // age the indexed Account Transactions
+         ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+         // populate the form using the id
+         PopulateForm(accountId, form);
+      }
 
       return getUIFModelAndView(form);
    }
@@ -173,7 +239,6 @@ public class CashierTxMemoController extends UifControllerBase {
 
             form.setPaymentList(payments);
         }
-
 
         // for the bio, aging tx alerts flags and memo
         if (pageId != null && pageId.compareTo("CashierTxBioAgeOvrVwPage") == 0) {
