@@ -334,9 +334,8 @@ public abstract class Transaction implements Identifiable {
     @Transient
     public String getFormattedAmount() {
         if (currency != null && amount != null) {
-            java.util.Currency curr = java.util.Currency.getInstance(currency.getIso());
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
-            numberFormat.setCurrency(curr);
+            numberFormat.setCurrency(java.util.Currency.getInstance(currency.getIso()));
             return numberFormat.format(amount);
         }
         return "";
