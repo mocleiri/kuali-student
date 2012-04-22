@@ -67,6 +67,21 @@
                         </list>
                     </property>
                 </bean>
+
+                <bean parent="Uif-Page" p:id="cashierChargePage" p:title="Add a Charge">
+                    <property name="items">
+                        <list>
+                            <ref bean="cashierAddCharge"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="cashierPaymentPage" p:title="Make a Payment">
+                    <property name="items">
+                        <list>
+                            <ref bean="cashierMakePayment"/>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
@@ -311,19 +326,10 @@
                         <bean parent="Uif-CurrencyTextControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addCharge" p:actionLabel="Add Charge">
-                    <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"
-                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>-->
-                </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="makePayment"
-                      p:actionLabel="Make Payment">
-                    <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"
-                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>-->
-                </bean>
+                <bean parent="Uif-SecondaryNavigationActionButton" p:navigateToPageId="cashierChargePage"
+                      p:actionLabel="Add Charge"/>
+                <bean parent="Uif-SecondaryNavigationActionButton" p:navigateToPageId="cashierPaymentPage"
+                      p:actionLabel="Make Payment"/>
             </list>
         </property>
     </bean>
@@ -559,6 +565,209 @@
                                 </property>
                             </bean>
                         </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Add a charge -->
+    <bean id="cashierAddCharge" parent="Uif-Disclosure-VerticalBoxSection">
+        <property name="title" value="Create a Charge"/>
+        <property name="items">
+            <list>
+                <ref bean="cashierChargeInsertGroup"/>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addCharge" p:actionLabel="Add Charge">
+<!--
+                    <property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>
+-->
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cashierChargeInsertGroup" parent="Uif-GridSection">
+        <!--<property name="title" value="Charge Group"/>-->
+        <property name="instructionalText" value="Add Charge information"/>
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Ledger Date"
+                      p:maxLength="10" >
+                    <!--p:required="true">-->
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+<!--
+                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
+                    </property>
+                </bean>
+-->
+                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date"
+                      p:maxLength="10" >
+                    <!--p:required="true">-->
+                <property name="bindingInfo.bindToForm" value="true"/>
+                <property name="control">
+                    <bean parent="Uif-DateControl" p:size="11"/>
+                </property>
+            </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.originationDate" p:label="Origination Date"
+                      p:maxLength="10" >
+                    <!--p:required="true">-->
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="chargeTransTypeValue" p:label="Type" p:maxLength="45"
+                    p:defaultValue="6" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DropdownControl"/>
+                    </property>
+                    <property name="optionsFinder">
+                        <bean class="com.sigmasys.kuali.ksa.krad.util.ChargeTypeKeyValues" p:blankOption="false"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.amount" p:label="Amount"
+                      p:maxLength="10" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="11" />
+                    </property>
+                </bean>
+                <!-- Need a drop down of currencies -->
+                <bean parent="Uif-InputField" p:propertyName="charge.currency.iso" p:label="Currency" p:maxLength="5">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="6" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.statementText" p:label="Statement Description" p:rowSpan="2"
+                      p:labelField.rowSpan="2">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.responsibleEntity" p:label="Responsible Entity" p:maxLength="45">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="46"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Make a Payment -->
+    <bean id="cashierMakePayment" parent="Uif-Disclosure-VerticalBoxSection">
+        <property name="title" value="Make a Payment"/>
+        <property name="items">
+            <list>
+                <ref bean="cashierPaymentInsertGroup"/>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="makePayment" p:actionLabel="Add Payment">
+                    <!--<property name="actionImage">-->
+                        <!--<bean parent="Uif-ImageField"-->
+                              <!--p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>-->
+                    <!--</property>-->
+                </bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitPayAge" p:actionLabel="Submit and Age">
+<!--                    <property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>-->
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cashierPaymentInsertGroup" parent="Uif-GridSection">
+        <!--<property name="title" value="Payment Group"/>-->
+        <property name="instructionalText" value="Add Payment information"/>
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="payment.ledgerDate" p:label="Ledger Date"
+                      p:maxLength="10" >
+                    <!--p:required="true">-->
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+<!--
+                <bean parent="Uif-InputField" p:propertyName="payment.account" p:label="Account" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
+                    </property>
+                </bean>
+-->
+                <bean parent="Uif-InputField" p:propertyName="payment.effectiveDate" p:label="Effective Date"
+                      p:maxLength="10" >
+                    <!--p:required="true">-->
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.originationDate" p:label="Origination Date"
+                      p:maxLength="10" >
+                    <!--p:required="true">-->
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="paymentTransTypeValue" p:label="Type" p:maxLength="45"
+                      p:defaultValue="5"
+                      p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DropdownControl"/>
+                    </property>
+                    <property name="optionsFinder">
+                        <bean class="com.sigmasys.kuali.ksa.krad.util.PaymentTypeKeyValues" p:blankOption="false"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.amount" p:label="Amount"
+                      p:maxLength="10" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="11" />
+                    </property>
+                </bean>
+                <!-- Need a drop down of currencies -->
+                <bean parent="Uif-InputField" p:propertyName="payment.currency.iso" p:label="Currency" p:maxLength="5">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="6" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.statementText" p:label="Statement Description" p:rowSpan="2"
+                      p:labelField.rowSpan="2">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.responsibleEntity" p:label="Responsible Entity" p:maxLength="45">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="46"/>
                     </property>
                 </bean>
             </list>
