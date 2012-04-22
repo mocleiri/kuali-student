@@ -1,9 +1,13 @@
 package com.sigmasys.kuali.ksa.model;
 
 import com.sigmasys.kuali.ksa.service.CalendarService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.*;
 
@@ -18,6 +22,8 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Transaction implements Identifiable {
+
+    private static final Log logger = LogFactory.getLog(Transaction.class);
 
     /**
      * The unique transaction identifier for the KSA product.
@@ -269,6 +275,22 @@ public abstract class Transaction implements Identifiable {
     @Column(name = "AMNT")
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    @Transient
+    public String getFormattedAmount(){
+        String iso = this.currency.getIso();
+
+        java.util.Currency curr = java.util.Currency.getInstance(this.currency.getIso());
+
+        logger.info("Currency set to: " + curr.getCurrencyCode() + " : " + curr.getDisplayName() + " : " + curr.getSymbol());
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        numberFormat.setCurrency(curr);
+        return numberFormat.format(amount);
+    }
+
+    public void setFormattedAmount(String formattedAmount){
+
     }
 
     public void setAmount(BigDecimal amount) {
