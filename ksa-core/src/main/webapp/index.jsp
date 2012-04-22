@@ -17,12 +17,12 @@
                 <tbody>
 
                 <tr>
-                    <th colspan="6">Persona</th>
+                    <th colspan="6"><h2>Persona</h2></th>
                 </tr>
 
                 <tr>
                     <td class="leftTd" align="right">
-                        <a href="login.jsp?persona=bursar">
+                        <a href="${ConfigProperties.application.url}/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
                             <img src="images/persona-bursar.png" alt="persona: bursar" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -39,7 +39,7 @@
                         </p>
                     </td>
                     <td class="leftTd" align="right">
-                        <a href="">
+                        <a href="#">
                             <img src="images/persona-student.png" alt="persona: student" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -53,7 +53,7 @@
                         </p>
                     </td>
                     <td class="leftTd" align="right">
-                        <a href="login.jsp?persona=parent">
+                        <a href="#">
                             <img src="images/persona-parent.png" alt="persona: parent" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -70,7 +70,7 @@
 
                 <tr>
                     <td class="leftTd" align="right">
-                        <a href="login.jsp?persona=sponsor">
+                        <a href="#">
                             <img src="images/persona-sponsor.png" alt="persona: sponsor" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -84,7 +84,7 @@
                         </p>
                     </td>
                     <td class="leftTd" align="right">
-                        <a href="login.jsp?persona=faculty_advisor">
+                        <a href="#">
                             <img src="images/persona-faculty_advisor.png" alt="persona: faculty advisor" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -99,7 +99,7 @@
                     </td>
 
                     <td class="leftTd" align="right" width="Infinity%">
-                        <a href="login.jsp?persona=customer_service_representative">
+                        <a href="${ConfigProperties.application.url}/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
                             <img src="images/persona-customer_service_representative.png" alt="persona customer service representative" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -117,7 +117,7 @@
                 </tr>
 
                 <tr>
-                    <td class="leftTd" align="right"><a href="login.jsp?persona=cashier">
+                    <td class="leftTd" align="right"><a href="${ConfigProperties.application.url}/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
                         <img src="images/persona-cashier.png" alt="persona: cashier" width="140" height="140" border="0"></a>
                     </td>
                     <td align="left" nowrap class="rightTd" >
@@ -130,7 +130,7 @@
                             &bull; <a href="media/persona-cashier.pdf">View detailed persona</a>
                         </p>
                     </td>
-                    <td class="leftTd" align="right"><a href="login.jsp?persona=supervising_cashier">
+                    <td class="leftTd" align="right"><a href="#">
                         <img src="images/persona-supervising_cashier.png" alt="persona: supervising cashier" width="140" height="140" border="0"></a>
                     </td>
                     <td align="left" nowrap class="rightTd" >
@@ -138,19 +138,18 @@
                         <span >Supervising Cashier</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/currencyList?methodToCall=get&viewId=CurrencyListView">
-                            UX Work in Progress<br>
+                        <p >&bull; UX Work in Progress<br>
                             &bull; <a href="media/persona-supervising_cashier.pdf">View detailed persona</a>
                         </p>
                     </td>
-                    <td class="leftTd" align="right"><a href="login.jsp?persona=administrative_liaison">
+                    <td class="leftTd" align="right"><a href="#">
                         <img src="images/persona-administrative_liaison.png" alt="persona: administrative liaison" width="140" height="140" border="0"></a></td>
                     <td align="left" nowrap class="rightTd" >
                         <p><strong>Dana N. Tyree</strong><br>
                         <span >Administrative Liaison</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="login.jsp?persona=administrative_liaison">Select for UX test</a><br>
+                        <p >&bull; UX Work in Progress<br>
                             &bull; <a href="media/persona-administrative_liaison.pdf">View detailed persona</a>
                         </p>
                     </td>
