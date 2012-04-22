@@ -22,7 +22,7 @@
 
                 <tr>
                     <td class="leftTd" align="right">
-                        <a href="${ConfigProperties.application.url}/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
+                        <a href="<%= request.getContextPath() %>/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
                             <img src="images/persona-bursar.png" alt="persona: bursar" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -32,7 +32,7 @@
                             <span >Bursar</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
+                        <p >&bull; <a href="<%= request.getContextPath() %>/uif/transOvrVw?methodToCall=get&viewId=StudentTransactionOverview">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-bursar.pdf">View detailed persona</a>
@@ -99,7 +99,7 @@
                     </td>
 
                     <td class="leftTd" align="right" width="Infinity%">
-                        <a href="${ConfigProperties.application.url}/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
+                        <a href="<%= request.getContextPath() %>/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
                             <img src="images/persona-customer_service_representative.png" alt="persona customer service representative" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -108,7 +108,7 @@
                         <span >Customer Service Representative</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
+                        <p >&bull; <a href="<%= request.getContextPath() %>/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-customer_service_representative.pdf">View detailed persona</a>
@@ -117,14 +117,14 @@
                 </tr>
 
                 <tr>
-                    <td class="leftTd" align="right"><a href="${ConfigProperties.application.url}/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
+                    <td class="leftTd" align="right"><a href="/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
                         <img src="images/persona-cashier.png" alt="persona: cashier" width="140" height="140" border="0"></a>
                     </td>
                     <td align="left" nowrap class="rightTd" >
                         <strong>Missy Munni</strong><br>
                         <span >Cashier</span>
                         <hr/>
-                        <p >&bull; <a href="${ConfigProperties.application.url}/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
+                        <p >&bull; <a href="<%= request.getContextPath() %>/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-cashier.pdf">View detailed persona</a>
