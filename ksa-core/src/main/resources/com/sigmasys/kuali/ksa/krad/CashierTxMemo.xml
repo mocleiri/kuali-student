@@ -286,9 +286,9 @@
                 <ref bean="cashierAlertsDetails"/>
                 <ref bean="cashierFlagDetails"/>
                 <ref bean="cashierAgingDetails"/>
-                <ref bean="cashierMemos"/>
                 <bean parent="Uif-SecondaryNavigationActionButton" p:navigateToPageId="CashierAddMemoPage"
                       p:actionLabel="Add Information"/>
+                <ref bean="cashierMemos"/>
             </list>
         </property>
     </bean>
