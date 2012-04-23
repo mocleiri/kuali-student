@@ -92,6 +92,8 @@ public class CustomerServiceForm extends UifFormBase {
 
    private String infoDeleteStatus;
 
+   private String infoAddStatus;
+
    // use for adding a charge
    private Charge charge;
 
@@ -538,7 +540,7 @@ public class CustomerServiceForm extends UifFormBase {
    }
 
    /**
-    *
+    * Get the delete status when removing an Info object
     * @return
     */
    public String getInfoDeleteStatus() {
@@ -546,11 +548,27 @@ public class CustomerServiceForm extends UifFormBase {
    }
 
    /**
-    *
+    * Set the delete status when removing an Info object
     * @param infoDeleteStatus
     */
    public void setInfoDeleteStatus(String infoDeleteStatus) {
       this.infoDeleteStatus = infoDeleteStatus;
+   }
+
+   /**
+    * Get the add status from persisting an info object
+    * @return
+    */
+   public String getInfoAddStatus() {
+      return infoAddStatus;
+   }
+
+   /**
+    * Set the add status from persisting an info object
+    * @param infoAddStatus
+    */
+   public void setInfoAddStatus(String infoAddStatus) {
+      this.infoAddStatus = infoAddStatus;
    }
 
    /**

@@ -416,13 +416,17 @@ public class CustomerServiceController extends UifControllerBase {
                throw new IllegalStateException("Unknown Information Type '" + informationType);
          }
 
-         info.setAccount(account);
-         info.setCreationDate(new Date());
-         info.setEffectiveDate(form.getInfoEffectiveDate());
-         info.setLastUpdate(new Date());
-         //info.setCreatorId();
-         //info.setResponsibleEntity();
-         informationService.persistInformation(info);
+         if (info != null) {
+            info.setAccount(account);
+            info.setCreationDate(new Date());
+            info.setEffectiveDate(form.getInfoEffectiveDate());
+            info.setLastUpdate(new Date());
+            //info.setCreatorId();
+            //info.setResponsibleEntity();
+            Long infoId = informationService.persistInformation(info);
+
+            form.setInfoAddStatus(infoId > 0 ? "Success" : "Unable to add");
+         }
 
          // populate the form using the id
          PopulateForm(accountId, form);

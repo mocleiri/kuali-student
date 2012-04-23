@@ -90,6 +90,8 @@ public class CashierTxMemoForm extends UifFormBase {
 
    private Date infoEffectiveDate;
 
+   private String infoAddStatus;
+
    // use for adding a charge
    private Charge charge;
 
@@ -516,6 +518,22 @@ public class CashierTxMemoForm extends UifFormBase {
     */
    public void setInfoEffectiveDate(Date infoEffectiveDate) {
       this.infoEffectiveDate = infoEffectiveDate;
+   }
+
+   /**
+    * Get the add status from persisting an info object
+    * @return
+    */
+   public String getInfoAddStatus() {
+      return infoAddStatus;
+   }
+
+   /**
+    * Set the add status from persisting an info object
+    * @param infoAddStatus
+    */
+   public void setInfoAddStatus(String infoAddStatus) {
+      this.infoAddStatus = infoAddStatus;
    }
 
    /**
