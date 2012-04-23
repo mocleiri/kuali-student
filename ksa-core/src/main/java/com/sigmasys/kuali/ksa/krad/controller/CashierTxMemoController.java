@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static com.sigmasys.kuali.ksa.util.CommonUtils.*;
+
 /**
  * User: dmulderink
  * Date: 4/16/12
@@ -49,7 +51,7 @@ public class CashierTxMemoController extends UifControllerBase {
     @Override
     protected CashierTxMemoForm createInitialForm(HttpServletRequest request) {
         CashierTxMemoForm form = new CashierTxMemoForm();
-        form.setInfoType("MEMO");
+        form.setInfoType(InformationTypeValue.MEMO.name());
         form.setChargeTransTypeValue("6");
         form.setPaymentTransTypeValue("5");
         return form;
@@ -98,115 +100,97 @@ public class CashierTxMemoController extends UifControllerBase {
         return getUIFModelAndView(form);
     }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      String accountId = form.getSelectedId();
-      PopulateForm(accountId, form);
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        String accountId = form.getSelectedId();
+        populateForm(accountId, form);
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCharge")
-   public ModelAndView addCharge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      String accountId = form.getSelectedId();
-      if (accountId != null && !accountId.trim().isEmpty()) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCharge")
+    public ModelAndView addCharge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                                  HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        String accountId = form.getSelectedId();
+        if (accountId != null && !accountId.trim().isEmpty()) {
 
-         Account account = accountService.getFullAccount(accountId);
+            Account account = accountService.getFullAccount(accountId);
 
-         Charge charge = form.getCharge();
-         String chargeTransactionType = form.getChargeTransTypeValue();
+            Charge charge = form.getCharge();
 
-         Currency currency = currencyService.getCurrency(charge.getCurrency().getIso());
-         charge.setAccount(account);
-         charge.setCurrency(currency);
+            Currency currency = currencyService.getCurrency(charge.getCurrency().getIso());
+            charge.setAccount(account);
+            charge.setCurrency(currency);
 
 
-         //TransactionTypeValue transactionTypeValue = Enum.valueOf(TransactionTypeValue.class, chargeTransactionType);
-         // TransactionType transactionType = transactionService.getTransactionType(transactionTypeValue);
-         //charge.setTransactionType(transactionType);
+            //TransactionTypeValue transactionTypeValue = Enum.valueOf(TransactionTypeValue.class, chargeTransactionType);
+            // TransactionType transactionType = transactionService.getTransactionType(transactionTypeValue);
+            //charge.setTransactionType(transactionType);
 
-         transactionService.persistTransaction(charge);
-         PopulateForm(accountId, form);
-      }
+            transactionService.persistTransaction(charge);
+            populateForm(accountId, form);
+        }
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makePayment")
-   public ModelAndView makePayment(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      String accountId = form.getSelectedId();
-      if (accountId != null && !accountId.trim().isEmpty()) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makePayment")
+    public ModelAndView makePayment(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                                    HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        String accountId = form.getSelectedId();
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            populateForm(accountId, form);
+        }
 
-         Payment payment = form.getPayment();
-         Account account = payment.getAccount();
-         Currency currency  = payment.getCurrency();
-         TransactionType transactionType = payment.getTransactionType();
+        return getUIFModelAndView(form);
+    }
 
-         //transactionService.persistTransaction(form.getPayment());
-         PopulateForm(accountId, form);
-      }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submitPayAge")
+    public ModelAndView submitPayAge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
+        // do make payment and age stuff...
 
-      return getUIFModelAndView(form);
-   }
+        String accountId = form.getSelectedId();
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submitPayAge")
-   public ModelAndView submitPayAge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
-                                   HttpServletRequest request, HttpServletResponse response) {
-      // do make payment and age stuff...
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            // populate the form using the id
+            populateForm(accountId, form);
+        }
 
-      String accountId = form.getSelectedId();
-
-      if (accountId != null && !accountId.trim().isEmpty()) {
-
-         Payment payment = form.getPayment();
-         Account account = payment.getAccount();
-         Currency currency  = payment.getCurrency();
-         TransactionType transactionType = payment.getTransactionType();
-
-         //transactionService.persistTransaction(form.getPayment());
-
-         // age the indexed Account Transactions
-         ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
-         // populate the form using the id
-         PopulateForm(accountId, form);
-      }
-
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
     /**
      * @param form
@@ -222,7 +206,7 @@ public class CashierTxMemoController extends UifControllerBase {
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
 
-       // Deprecated
+        // Deprecated
         if (pageId != null && pageId.compareTo("CashierTxListByPersonPage") == 0) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
@@ -248,7 +232,7 @@ public class CashierTxMemoController extends UifControllerBase {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
-            PopulateForm(id, form);
+            populateForm(id, form);
         }
 
         return getUIFModelAndView(form);
@@ -302,23 +286,23 @@ public class CashierTxMemoController extends UifControllerBase {
 
                 // create the composite default person name
 
-                personNameBuilder.append(personName.getLastName());
+                personNameBuilder.append(nvl(personName.getLastName()));
                 personNameBuilder.append(", ");
-                personNameBuilder.append(personName.getFirstName());
+                personNameBuilder.append(nvl(personName.getFirstName()));
 
                 accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
 
                 // create the composite default postal address
                 if (postalAddress != null) {
-                    postalAddressBuilder.append(postalAddress.getStreetAddress1());
+                    postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
                     postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(postalAddress.getCity());
+                    postalAddressBuilder.append(nvl(postalAddress.getCity()));
                     postalAddressBuilder.append(", ");
-                    postalAddressBuilder.append(postalAddress.getState());
+                    postalAddressBuilder.append(nvl(postalAddress.getState()));
                     postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(postalAddress.getPostalCode());
+                    postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
                     postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(postalAddress.getCountry());
+                    postalAddressBuilder.append(nvl(postalAddress.getCountry()));
 
                     accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
                 }
@@ -355,7 +339,7 @@ public class CashierTxMemoController extends UifControllerBase {
             // age the indexed Account Transactions
             ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
             // populate the form using the id
-            PopulateForm(accountId, form);
+            populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -379,11 +363,7 @@ public class CashierTxMemoController extends UifControllerBase {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-            //String memoType = form.getMemoType();
-
             Account account = accountService.getFullAccount(accountId);
-
-            //form.setSelectedId(accountId);
 
             InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
 
@@ -408,19 +388,17 @@ public class CashierTxMemoController extends UifControllerBase {
                     throw new IllegalStateException("Unknown Information Type '" + informationType);
             }
 
-            if (info != null) {
-                info.setAccount(account);
-                info.setCreationDate(new Date());
-                info.setEffectiveDate(form.getInfoEffectiveDate());
-                info.setLastUpdate(new Date());
-                //info.setCreatorId();
-                //info.setResponsibleEntity();
-               Long infoId = informationService.persistInformation(info);
+            info.setAccount(account);
+            info.setCreationDate(new Date());
+            info.setEffectiveDate(form.getInfoEffectiveDate());
+            info.setLastUpdate(new Date());
+            //info.setCreatorId();
+            //info.setResponsibleEntity();
+            Long infoId = informationService.persistInformation(info);
 
-               form.setInfoAddStatus(infoId > 0 ? "Success" : "Unable to add");
-            }
+            form.setInfoAddStatus(infoId > 0 ? "Success" : "Unable to add");
             // populate the form using the id
-            PopulateForm(accountId, form);
+            populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -432,7 +410,7 @@ public class CashierTxMemoController extends UifControllerBase {
      * @param personName
      * @return
      */
-    private String CreatePersonName(PersonName personName) {
+    private String createPersonName(PersonName personName) {
 
         StringBuilder personNameBuilder = new StringBuilder();
 
@@ -440,9 +418,9 @@ public class CashierTxMemoController extends UifControllerBase {
 
             // create the composite default person name
 
-            personNameBuilder.append(personName.getLastName());
+            personNameBuilder.append(nvl(personName.getLastName()));
             personNameBuilder.append(", ");
-            personNameBuilder.append(personName.getFirstName());
+            personNameBuilder.append(nvl(personName.getFirstName()));
         }
 
         return personNameBuilder.toString();
@@ -454,28 +432,28 @@ public class CashierTxMemoController extends UifControllerBase {
      * @param postalAddress
      * @return
      */
-    private String CreateCompositePostalAddress(PostalAddress postalAddress) {
+    private String createCompositePostalAddress(PostalAddress postalAddress) {
 
         StringBuilder postalAddressBuilder = new StringBuilder();
 
         // create the composite default postal address
 
         if (postalAddress != null) {
-            postalAddressBuilder.append(postalAddress.getStreetAddress1());
+            postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
             postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(postalAddress.getCity());
+            postalAddressBuilder.append(nvl(postalAddress.getCity()));
             postalAddressBuilder.append(", ");
-            postalAddressBuilder.append(postalAddress.getState());
+            postalAddressBuilder.append(nvl(postalAddress.getState()));
             postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(postalAddress.getPostalCode());
+            postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
             postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(postalAddress.getCountry());
+            postalAddressBuilder.append(nvl(postalAddress.getCountry()));
         }
 
         return postalAddressBuilder.toString();
     }
 
-    private void PopulateForm(String id, CashierTxMemoForm form) {
+    private void populateForm(String id, CashierTxMemoForm form) {
 
         // store the selected account ID
         form.setSelectedId(id);
@@ -483,16 +461,17 @@ public class CashierTxMemoController extends UifControllerBase {
         boolean ignoreDeferments = form.getIgnoreDeferment();
 
         Account accountById = accountService.getFullAccount(id);
-        ChargeableAccount chargeableAccount = null;
-        if (accountById != null) {
-            chargeableAccount = (ChargeableAccount) accountById;
+        if (accountById == null) {
+            throw new IllegalStateException("Cannot find Account by ID = " + id);
         }
+
+        ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
 
         PersonName personName = accountById.getDefaultPersonName();
         PostalAddress postalAddress = accountById.getDefaultPostalAddress();
 
-        accountById.setCompositeDefaultPersonName(CreatePersonName(personName));
-        accountById.setCompositeDefaultPostalAddress(CreateCompositePostalAddress(postalAddress));
+        accountById.setCompositeDefaultPersonName(createPersonName(personName));
+        accountById.setCompositeDefaultPostalAddress(createCompositePostalAddress(postalAddress));
         List<Account> accountList = new ArrayList<Account>();
         accountList.add(accountById);
 
@@ -519,39 +498,31 @@ public class CashierTxMemoController extends UifControllerBase {
         form.setPaymentList(payments);
         form.setDefermentList(deferments);
 
-        // stubbed in data
-        BigDecimal pastDue = BigDecimal.ZERO;
-        BigDecimal balance = BigDecimal.ZERO;
-        BigDecimal future = BigDecimal.ZERO;
-        BigDecimal deferment = BigDecimal.ZERO;
+        BigDecimal pastDue = accountService.getOutstandingBalance(id, ignoreDeferments) != null ? accountService.getOutstandingBalance(id, ignoreDeferments) : BigDecimal.ZERO;
+        BigDecimal balance = accountService.getDueBalance(id, ignoreDeferments) != null ? accountService.getDueBalance(id, ignoreDeferments) : BigDecimal.ZERO;
+        BigDecimal future = accountService.getUnallocatedBalance(id) != null ? accountService.getUnallocatedBalance(id) : BigDecimal.ZERO;
+        BigDecimal deferment = accountService.getDeferredAmount(id) != null ? accountService.getDeferredAmount(id) : BigDecimal.ZERO;
 
-        if (chargeableAccount != null) {
-            pastDue = accountService.getOutstandingBalance(id, ignoreDeferments) != null ? accountService.getOutstandingBalance(id, ignoreDeferments) : BigDecimal.ZERO;
-            balance = accountService.getDueBalance(id, ignoreDeferments) != null ? accountService.getDueBalance(id, ignoreDeferments) : BigDecimal.ZERO;
-            future = accountService.getUnallocatedBalance(id) != null ? accountService.getUnallocatedBalance(id) : BigDecimal.ZERO;
-            deferment = accountService.getDeferredAmount(id) != null ? accountService.getDeferredAmount(id) : BigDecimal.ZERO;
+        // Aging
 
-            // Aging
+        Date lastAgeDate = chargeableAccount.getLateLastUpdate();
+        form.setLastAgeDate(lastAgeDate);
 
-            Date lastAgeDate = chargeableAccount.getLateLastUpdate();
-            form.setLastAgeDate(lastAgeDate);
+        form.setAged30(chargeableAccount.getAmountLate1());
+        form.setAged60(chargeableAccount.getAmountLate2());
+        form.setAged90(chargeableAccount.getAmountLate3());
 
-            form.setAged30(chargeableAccount.getAmountLate1());
-            form.setAged60(chargeableAccount.getAmountLate2());
-            form.setAged90(chargeableAccount.getAmountLate3());
+        BigDecimal agedTotal = BigDecimal.ZERO;
 
-            BigDecimal agedTotal = BigDecimal.ZERO;
-
-            if (chargeableAccount.getAmountLate1() != null &&
-                    chargeableAccount.getAmountLate2() != null &&
-                    chargeableAccount.getAmountLate3() != null) {
-                agedTotal = agedTotal.add(chargeableAccount.getAmountLate1());
-                agedTotal = agedTotal.add(chargeableAccount.getAmountLate2());
-                agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
-            }
-
-            form.setAgedTotal(agedTotal);
+        if (chargeableAccount.getAmountLate1() != null &&
+                chargeableAccount.getAmountLate2() != null &&
+                chargeableAccount.getAmountLate3() != null) {
+            agedTotal = agedTotal.add(chargeableAccount.getAmountLate1());
+            agedTotal = agedTotal.add(chargeableAccount.getAmountLate2());
+            agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
         }
+
+        form.setAgedTotal(agedTotal);
 
         form.setPastDue(pastDue);
         form.setBalance(balance);

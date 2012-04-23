@@ -93,4 +93,8 @@ public final class CommonUtils {
         return requestedUri.substring(contextEnd, folderEnd);
     }
 
+    public static String nvl(String value) {
+        return (value != null) ? value : "";
+    }
+
 }

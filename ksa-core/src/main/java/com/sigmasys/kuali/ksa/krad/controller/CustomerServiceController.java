@@ -3,10 +3,8 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.CustomerServiceForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sun.net.httpserver.Authenticator;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.sigmasys.kuali.ksa.util.CommonUtils.*;
+
 /**
  * User: dmulderink
  * Date: 4/22/12
@@ -32,391 +32,345 @@ import java.util.List;
 @RequestMapping(value = "/customerService")
 public class CustomerServiceController extends UifControllerBase {
 
-   @Autowired
-   private AccountService accountService;
+    @Autowired
+    private AccountService accountService;
 
-   @Autowired
-   private CurrencyService currencyService;
+    @Autowired
+    private InformationService informationService;
 
-   @Autowired
-   private InformationService informationService;
+    @Autowired
+    private TransactionService transactionService;
 
-   @Autowired
-   private TransactionService transactionService;
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected CustomerServiceForm createInitialForm(HttpServletRequest request) {
+        CustomerServiceForm form = new CustomerServiceForm();
+        form.setInfoType(InformationTypeValue.MEMO.name());
+        form.setChargeTransTypeValue("6");
+        form.setPaymentTransTypeValue("5");
+        return form;
+    }
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected CustomerServiceForm createInitialForm(HttpServletRequest request) {
-      CustomerServiceForm form = new CustomerServiceForm();
-      form.setInfoType("MEMO");
-      form.setChargeTransTypeValue("6");
-      form.setPaymentTransTypeValue("5");
-      return form;
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
-   public ModelAndView submit(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   public ModelAndView save(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
-      // do save stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    public ModelAndView submit(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      String accountId = form.getSelectedId();
-      PopulateForm(accountId, form);
+        // do submit stuff...
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCharge")
-   public ModelAndView addCharge(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                                 HttpServletRequest request, HttpServletResponse response) {
-      // do add charge stuff...
-      String accountId = form.getSelectedId();
-      if (accountId != null && !accountId.trim().isEmpty()) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    public ModelAndView save(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
+        // do save stuff...
+        return getUIFModelAndView(form);
+    }
 
-         Account account = accountService.getFullAccount(accountId);
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
 
-         Charge charge = form.getCharge();
-         String chargeTransactionType = form.getChargeTransTypeValue();
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        String accountId = form.getSelectedId();
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            populateForm(accountId, form);
+        }
 
-         Currency currency = currencyService.getCurrency(charge.getCurrency().getIso());
-         charge.setAccount(account);
-         charge.setCurrency(currency);
+        return getUIFModelAndView(form);
+    }
 
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCharge")
+    public ModelAndView addCharge(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                  HttpServletRequest request, HttpServletResponse response) {
+        // do add charge stuff...
+        String accountId = form.getSelectedId();
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            populateForm(accountId, form);
+        }
 
-         //TransactionTypeValue transactionTypeValue = Enum.valueOf(TransactionTypeValue.class, chargeTransactionType);
-         // TransactionType transactionType = transactionService.getTransactionType(transactionTypeValue);
-         //charge.setTransactionType(transactionType);
+        return getUIFModelAndView(form);
+    }
 
-         //transactionService.persistTransaction(charge);
-         PopulateForm(accountId, form);
-      }
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makePayment")
-   public ModelAndView makePayment(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                                   HttpServletRequest request, HttpServletResponse response) {
-      // do make payment stuff...
-      String accountId = form.getSelectedId();
-      if (accountId != null && !accountId.trim().isEmpty()) {
-
-         Payment payment = form.getPayment();
-         Account account = payment.getAccount();
-         Currency currency  = payment.getCurrency();
-         TransactionType transactionType = payment.getTransactionType();
-
-         //transactionService.persistTransaction(form.getPayment());
-         PopulateForm(accountId, form);
-      }
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submitPaymentAge")
-   public ModelAndView submitPayAge(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makePayment")
+    public ModelAndView makePayment(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
                                     HttpServletRequest request, HttpServletResponse response) {
+        // do make payment stuff...
+        String accountId = form.getSelectedId();
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            populateForm(accountId, form);
+        }
 
-      // do make payment and age stuff...
+        return getUIFModelAndView(form);
+    }
 
-      String accountId = form.getSelectedId();
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submitPaymentAge")
+    public ModelAndView submitPayAge(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
 
-      if (accountId != null && !accountId.trim().isEmpty()) {
+        // do make payment and age stuff...
 
-         Payment payment = form.getPayment();
-         Account account = payment.getAccount();
-         Currency currency  = payment.getCurrency();
-         TransactionType transactionType = payment.getTransactionType();
+        String accountId = form.getSelectedId();
 
-         //transactionService.persistTransaction(form.getPayment());
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            // age the indexed Account Transactions
+            ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+            // populate the form using the id
+            populateForm(accountId, form);
+        }
 
-         // age the indexed Account Transactions
-         ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
-         // populate the form using the id
-         PopulateForm(accountId, form);
-      }
+        return getUIFModelAndView(form);
+    }
 
-      return getUIFModelAndView(form);
-   }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                            HttpServletRequest request, HttpServletResponse response) {
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
+        // just for the transactions by person page
+        String pageId = request.getParameter("pageId");
 
-      // just for the transactions by person page
-      String pageId = request.getParameter("pageId");
-
-      // for the bio, aging tx alerts flags and memo
-      if (pageId != null && pageId.compareTo("CustomerServicePersonOvrVwPage") == 0) {
-         String id = request.getParameter("id");
-         if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("'id' request parameter must be specified");
-         }
-
-         PopulateForm(id, form);
-      }
-
-      if (pageId != null && pageId.compareTo("CustomerServiceDeleteMemoPage") == 0) {
-         String memoId = request.getParameter("id");
-         if (memoId == null || memoId.isEmpty()) {
-            throw new IllegalArgumentException("'id' request parameter must be specified");
-         }
-
-         //PopulateForm(id, form);
-         String infoType = InformationTypeValue.MEMO.name();
-         InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
-
-         Memo memo = informationService.getMemo(Long.valueOf(memoId));
-         form.setMemo(memo);
-
-         form.setInfoType("M");
-         form.setInfoEffectiveDate(memo.getEffectiveDate());
-         form.setInfoCreationDate(memo.getCreationDate());
-         form.setInfoText(memo.getText());
-         String creatorId = memo.getCreatorId();
-         String editorId = memo.getEditorId();
-         String responsibleEntity = memo.getResponsibleEntity();
-         Integer accesslvl = memo.getAccessLevel();
-
-         form.setInfoDeleteStatus("");
-      }
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * User searches on a (last) name. The result set is iterated over to create the composite PersonName
-    * and composite address using default records, eventfully creating a browse list that can be displayed
-    * and selected from for further processing as desired.
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByName")
-   public ModelAndView searchByName(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                                    HttpServletRequest request, HttpServletResponse response) {
-
-      // we do not have a query by name or partial name via last name or contains yet
-      // if no result set from getting full accounts than the List is empty
-      // otherwise the lit contains records and a compsite person name and postal address
-
-      String studentLookupByName = form.getStudentLookupByName();
-
-      // query for all accounts
-
-      List<Account> accountSearchList = accountService.getFullAccounts();
-
-      // create a a list of Account objects for display requirements
-
-      List<Account> accountList = new ArrayList<Account>();
-
-      // if we have a result set of Accounts from the query
-
-      for (Account account : accountSearchList) {
-
-         PersonName personName = account.getDefaultPersonName();
-
-         if (personName != null && personName.getLastName().contains(studentLookupByName)) {
-
-            // an account should have a default PersonName and default PostalAddress
-
-            PostalAddress postalAddress = account.getDefaultPostalAddress();
-
-            Account accountCopy = account.getCopy();
-
-            StringBuilder personNameBuilder = new StringBuilder();
-            StringBuilder postalAddressBuilder = new StringBuilder();
-
-            // create the composite default person name
-
-            personNameBuilder.append(personName.getLastName());
-            personNameBuilder.append(", ");
-            personNameBuilder.append(personName.getFirstName());
-
-            accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
-
-            // create the composite default postal address
-            if (postalAddress != null) {
-               postalAddressBuilder.append(postalAddress.getStreetAddress1());
-               postalAddressBuilder.append(" ");
-               postalAddressBuilder.append(postalAddress.getCity());
-               postalAddressBuilder.append(", ");
-               postalAddressBuilder.append(postalAddress.getState());
-               postalAddressBuilder.append(" ");
-               postalAddressBuilder.append(postalAddress.getPostalCode());
-               postalAddressBuilder.append(" ");
-               postalAddressBuilder.append(postalAddress.getCountry());
-
-               accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
+        // for the bio, aging tx alerts flags and memo
+        if (pageId != null && pageId.compareTo("CustomerServicePersonOvrVwPage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
-            // add each account copy to a list
+            populateForm(id, form);
+        }
 
-            accountList.add(accountCopy);
-         }
-      }
+        if (pageId != null && pageId.compareTo("CustomerServiceDeleteMemoPage") == 0) {
+            String memoId = request.getParameter("id");
+            if (memoId == null || memoId.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
+            }
 
-      // set the account list derived from the full search list
+            Memo memo = informationService.getMemo(Long.valueOf(memoId));
+            form.setMemo(memo);
 
-      form.setAccountBrowseList(accountList);
+            form.setInfoType("M");
+            form.setInfoEffectiveDate(memo.getEffectiveDate());
+            form.setInfoCreationDate(memo.getCreationDate());
+            form.setInfoText(memo.getText());
+            form.setInfoDeleteStatus("");
+        }
 
-      // do a search by name returning account info
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
-   public ModelAndView ageDebt(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * User searches on a (last) name. The result set is iterated over to create the composite PersonName
+     * and composite address using default records, eventfully creating a browse list that can be displayed
+     * and selected from for further processing as desired.
+     *
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByName")
+    public ModelAndView searchByName(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
 
-      // do aging of transactions stuff...
-      String accountId = form.getSelectedId();
+        // we do not have a query by name or partial name via last name or contains yet
+        // if no result set from getting full accounts than the List is empty
+        // otherwise the lit contains records and a compsite person name and postal address
 
-      if (accountId != null && !accountId.trim().isEmpty()) {
-         // age the indexed Account Transactions
-         ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
-         // populate the form using the id
-         PopulateForm(accountId, form);
-      }
+        String studentLookupByName = form.getStudentLookupByName();
 
-      return getUIFModelAndView(form);
-   }
+        // query for all accounts
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addMemo")
-   public ModelAndView addMemo(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do addMemo stuff...
+        List<Account> accountSearchList = accountService.getFullAccounts();
 
-      String accountId = form.getSelectedId();
-      String infoType = InformationTypeValue.MEMO.name();
-      form.setInfoType(infoType);
+        // create a a list of Account objects for display requirements
 
-      if (accountId != null && !accountId.trim().isEmpty()) {
+        List<Account> accountList = new ArrayList<Account>();
 
-         //String memoType = form.getMemoType();
+        // if we have a result set of Accounts from the query
 
-         Account account = accountService.getFullAccount(accountId);
+        for (Account account : accountSearchList) {
 
-         //form.setSelectedId(accountId);
+            PersonName personName = account.getDefaultPersonName();
 
-         InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
+            if (personName != null && personName.getLastName().contains(studentLookupByName)) {
 
-         Information info;
-         switch (informationType) {
-            case ALERT:
-               Alert alert = new Alert();
-               alert.setText(form.getInfoText());
-               info = alert;
-               break;
-            case FLAG:
-               Flag flag = new Flag();
-               flag.setSeverity(0);
-               info = flag;
-               break;
-            case MEMO:
-               Memo memo = new Memo();
-               memo.setText(form.getInfoText());
-               info = memo;
-               break;
-            default:
-               throw new IllegalStateException("Unknown Information Type '" + informationType);
-         }
+                // an account should have a default PersonName and default PostalAddress
 
-         if (info != null) {
+                PostalAddress postalAddress = account.getDefaultPostalAddress();
+
+                Account accountCopy = account.getCopy();
+
+                StringBuilder personNameBuilder = new StringBuilder();
+                StringBuilder postalAddressBuilder = new StringBuilder();
+
+                // create the composite default person name
+
+                personNameBuilder.append(nvl(personName.getLastName()));
+                personNameBuilder.append(", ");
+                personNameBuilder.append(nvl(personName.getFirstName()));
+
+                accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
+
+                // create the composite default postal address
+                if (postalAddress != null) {
+                    postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
+                    postalAddressBuilder.append(" ");
+                    postalAddressBuilder.append(nvl(postalAddress.getCity()));
+                    postalAddressBuilder.append(", ");
+                    postalAddressBuilder.append(nvl(postalAddress.getState()));
+                    postalAddressBuilder.append(" ");
+                    postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
+                    postalAddressBuilder.append(" ");
+                    postalAddressBuilder.append(nvl(postalAddress.getCountry()));
+
+                    accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
+                }
+
+                // add each account copy to a list
+
+                accountList.add(accountCopy);
+            }
+        }
+
+        // set the account list derived from the full search list
+
+        form.setAccountBrowseList(accountList);
+
+        // do a search by name returning account info
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
+    public ModelAndView ageDebt(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+
+        // do aging of transactions stuff...
+        String accountId = form.getSelectedId();
+
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            // age the indexed Account Transactions
+            ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+            // populate the form using the id
+            populateForm(accountId, form);
+        }
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addMemo")
+    public ModelAndView addMemo(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do addMemo stuff...
+
+        String accountId = form.getSelectedId();
+        String infoType = InformationTypeValue.MEMO.name();
+        form.setInfoType(infoType);
+
+        if (accountId != null && !accountId.trim().isEmpty()) {
+
+            Account account = accountService.getFullAccount(accountId);
+
+            InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
+
+            Information info;
+            switch (informationType) {
+                case ALERT:
+                    Alert alert = new Alert();
+                    alert.setText(form.getInfoText());
+                    info = alert;
+                    break;
+                case FLAG:
+                    Flag flag = new Flag();
+                    flag.setSeverity(0);
+                    info = flag;
+                    break;
+                case MEMO:
+                    Memo memo = new Memo();
+                    memo.setText(form.getInfoText());
+                    info = memo;
+                    break;
+                default:
+                    throw new IllegalStateException("Unknown Information Type '" + informationType);
+            }
+
             info.setAccount(account);
             info.setCreationDate(new Date());
             info.setEffectiveDate(form.getInfoEffectiveDate());
@@ -426,201 +380,192 @@ public class CustomerServiceController extends UifControllerBase {
             Long infoId = informationService.persistInformation(info);
 
             form.setInfoAddStatus(infoId > 0 ? "Success" : "Unable to add");
-         }
 
-         // populate the form using the id
-         PopulateForm(accountId, form);
-      }
+            // populate the form using the id
+            populateForm(accountId, form);
+        }
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=deleteMemo")
-   public ModelAndView deleteMemo(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do deleteMemo stuff...
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=deleteMemo")
+    public ModelAndView deleteMemo(@ModelAttribute("KualiForm") CustomerServiceForm form, BindingResult result,
+                                   HttpServletRequest request, HttpServletResponse response) {
+        // do deleteMemo stuff...
 
-      boolean deleteStatus = false;
-      Memo memo = form.getMemo();
+        Memo memo = form.getMemo();
 
-      if (memo != null) {
-         deleteStatus = informationService.deleteInformation(memo.getId());
-         form.setInfoDeleteStatus(deleteStatus == true ? "Success" : "Failed to remove");
-      }
+        if (memo != null) {
+            boolean deleteStatus = informationService.deleteInformation(memo.getId());
+            form.setInfoDeleteStatus(deleteStatus == true ? "Success" : "Failed to remove");
+        }
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * Create a composite person name from PersonName record fields
-    *
-    * @param personName
-    * @return
-    */
-   private String CreatePersonName(PersonName personName) {
+    /**
+     * Create a composite person name from PersonName record fields
+     *
+     * @param personName
+     * @return
+     */
+    private String createPersonName(PersonName personName) {
 
-      StringBuilder personNameBuilder = new StringBuilder();
+        StringBuilder personNameBuilder = new StringBuilder();
 
-      if (personName != null) {
+        if (personName != null) {
 
-         // create the composite default person name
+            // create the composite default person name
 
-         personNameBuilder.append(personName.getLastName());
-         personNameBuilder.append(", ");
-         personNameBuilder.append(personName.getFirstName());
-      }
+            personNameBuilder.append(nvl(personName.getLastName()));
+            personNameBuilder.append(", ");
+            personNameBuilder.append(nvl(personName.getFirstName()));
+        }
 
-      return personNameBuilder.toString();
-   }
+        return personNameBuilder.toString();
+    }
 
-   /**
-    * Create a composite postal address from PostalAddress record fields
-    *
-    * @param postalAddress
-    * @return
-    */
-   private String CreateCompositePostalAddress(PostalAddress postalAddress) {
+    /**
+     * Create a composite postal address from PostalAddress record fields
+     *
+     * @param postalAddress
+     * @return
+     */
+    private String createCompositePostalAddress(PostalAddress postalAddress) {
 
-      StringBuilder postalAddressBuilder = new StringBuilder();
+        StringBuilder postalAddressBuilder = new StringBuilder();
 
-      // create the composite default postal address
+        // create the composite default postal address
 
-      if (postalAddress != null) {
-         postalAddressBuilder.append(postalAddress.getStreetAddress1());
-         postalAddressBuilder.append(" ");
-         postalAddressBuilder.append(postalAddress.getCity());
-         postalAddressBuilder.append(", ");
-         postalAddressBuilder.append(postalAddress.getState());
-         postalAddressBuilder.append(" ");
-         postalAddressBuilder.append(postalAddress.getPostalCode());
-         postalAddressBuilder.append(" ");
-         postalAddressBuilder.append(postalAddress.getCountry());
-      }
+        if (postalAddress != null) {
+            postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(nvl(postalAddress.getCity()));
+            postalAddressBuilder.append(", ");
+            postalAddressBuilder.append(nvl(postalAddress.getState()));
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(nvl(postalAddress.getCountry()));
+        }
 
-      return postalAddressBuilder.toString();
-   }
+        return postalAddressBuilder.toString();
+    }
 
-   private void PopulateForm(String id, CustomerServiceForm form) {
+    private void populateForm(String id, CustomerServiceForm form) {
 
-      // store the selected account ID
-      form.setSelectedId(id);
+        // store the selected account ID
+        form.setSelectedId(id);
 
-      boolean ignoreDeferments = form.getIgnoreDeferment();
+        boolean ignoreDeferments = form.getIgnoreDeferment();
 
-      Account accountById = accountService.getFullAccount(id);
-      ChargeableAccount chargeableAccount = null;
-      if (accountById != null) {
-         chargeableAccount = (ChargeableAccount) accountById;
-      }
+        Account accountById = accountService.getFullAccount(id);
+        if (accountById == null) {
+            throw new IllegalStateException("Cannot find Account by ID = " + id);
+        }
 
-      PersonName personName = accountById.getDefaultPersonName();
-      PostalAddress postalAddress = accountById.getDefaultPostalAddress();
+        ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
 
-      accountById.setCompositeDefaultPersonName(CreatePersonName(personName));
-      accountById.setCompositeDefaultPostalAddress(CreateCompositePostalAddress(postalAddress));
-      List<Account> accountList = new ArrayList<Account>();
-      accountList.add(accountById);
+        PersonName personName = accountById.getDefaultPersonName();
+        PostalAddress postalAddress = accountById.getDefaultPostalAddress();
 
-      // no session scope
-      form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
-      // a list of one
-      form.setAccountBrowseList(accountList);
-      form.setCompositePersonName(accountById.getCompositeDefaultPersonName());
-      form.setCompositePostalAddress(accountById.getCompositeDefaultPostalAddress());
+        accountById.setCompositeDefaultPersonName(createPersonName(personName));
+        accountById.setCompositeDefaultPostalAddress(createCompositePostalAddress(postalAddress));
+        List<Account> accountList = new ArrayList<Account>();
+        accountList.add(accountById);
 
-      // Account Status summation totals
-      // charges by ID
-      List<Charge> charges = transactionService.getCharges(id);
+        // no session scope
+        form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
+        // a list of one
+        form.setAccountBrowseList(accountList);
+        form.setCompositePersonName(accountById.getCompositeDefaultPersonName());
+        form.setCompositePostalAddress(accountById.getCompositeDefaultPostalAddress());
 
-      // payments by ID
-      List<Payment> payments = transactionService.getPayments(id);
+        // Account Status summation totals
+        // charges by ID
+        List<Charge> charges = transactionService.getCharges(id);
 
-      // deferments by ID
-      List<Deferment> deferments = transactionService.getDeferments(id);
+        // payments by ID
+        List<Payment> payments = transactionService.getPayments(id);
 
-      // set the form data
+        // deferments by ID
+        List<Deferment> deferments = transactionService.getDeferments(id);
 
-      form.setChargeList(charges);
-      form.setPaymentList(payments);
-      form.setDefermentList(deferments);
+        // set the form data
 
-      // stubbed in data
-      BigDecimal pastDue = BigDecimal.ZERO;
-      BigDecimal balance = BigDecimal.ZERO;
-      BigDecimal future = BigDecimal.ZERO;
-      BigDecimal deferment = BigDecimal.ZERO;
+        form.setChargeList(charges);
+        form.setPaymentList(payments);
+        form.setDefermentList(deferments);
 
-      if (chargeableAccount != null) {
-         pastDue = accountService.getOutstandingBalance(id, ignoreDeferments) != null ? accountService.getOutstandingBalance(id, ignoreDeferments) : BigDecimal.ZERO;
-         balance = accountService.getDueBalance(id, ignoreDeferments) != null ? accountService.getDueBalance(id, ignoreDeferments) : BigDecimal.ZERO;
-         future = accountService.getUnallocatedBalance(id) != null ? accountService.getUnallocatedBalance(id) : BigDecimal.ZERO;
-         deferment = accountService.getDeferredAmount(id) != null ? accountService.getDeferredAmount(id) : BigDecimal.ZERO;
+        BigDecimal pastDue = accountService.getOutstandingBalance(id, ignoreDeferments) != null ? accountService.getOutstandingBalance(id, ignoreDeferments) : BigDecimal.ZERO;
+        BigDecimal balance = accountService.getDueBalance(id, ignoreDeferments) != null ? accountService.getDueBalance(id, ignoreDeferments) : BigDecimal.ZERO;
+        BigDecimal future = accountService.getUnallocatedBalance(id) != null ? accountService.getUnallocatedBalance(id) : BigDecimal.ZERO;
+        BigDecimal deferment = accountService.getDeferredAmount(id) != null ? accountService.getDeferredAmount(id) : BigDecimal.ZERO;
 
-         // Aging
+        // Aging
 
-         Date lastAgeDate = chargeableAccount.getLateLastUpdate();
-         form.setLastAgeDate(lastAgeDate);
+        Date lastAgeDate = chargeableAccount.getLateLastUpdate();
+        form.setLastAgeDate(lastAgeDate);
 
-         form.setAged30(chargeableAccount.getAmountLate1());
-         form.setAged60(chargeableAccount.getAmountLate2());
-         form.setAged90(chargeableAccount.getAmountLate3());
+        form.setAged30(chargeableAccount.getAmountLate1());
+        form.setAged60(chargeableAccount.getAmountLate2());
+        form.setAged90(chargeableAccount.getAmountLate3());
 
-         BigDecimal agedTotal = BigDecimal.ZERO;
+        BigDecimal agedTotal = BigDecimal.ZERO;
 
-         if (chargeableAccount.getAmountLate1() != null &&
-               chargeableAccount.getAmountLate2() != null &&
-               chargeableAccount.getAmountLate3() != null) {
+        if (chargeableAccount.getAmountLate1() != null &&
+                chargeableAccount.getAmountLate2() != null &&
+                chargeableAccount.getAmountLate3() != null) {
             agedTotal = agedTotal.add(chargeableAccount.getAmountLate1());
             agedTotal = agedTotal.add(chargeableAccount.getAmountLate2());
             agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
-         }
+        }
 
-         form.setAgedTotal(agedTotal);
-      }
+        form.setAgedTotal(agedTotal);
 
-      form.setPastDue(pastDue);
-      form.setBalance(balance);
-      form.setFuture(future);
-      form.setDefermentTotal(deferment);
+        form.setPastDue(pastDue);
+        form.setBalance(balance);
+        form.setFuture(future);
+        form.setDefermentTotal(deferment);
 
-      // Alerts and Flags
-      List<Alert> informationList = new ArrayList<Alert>();
-      Alert information1 = new Alert();
-      information1.setId(1L);
-      information1.setAccount(accountById);
-      information1.setText("04/12/2012 - Please contact the university Customer Service Representative Hal Kanni-Helfew at (555) 867-5309.");
+        // Alerts and Flags
+        List<Alert> informationList = new ArrayList<Alert>();
+        Alert information1 = new Alert();
+        information1.setId(1L);
+        information1.setAccount(accountById);
+        information1.setText("04/12/2012 - Please contact the university Customer Service Representative Hal Kanni-Helfew at (555) 867-5309.");
 
-      Alert information2 = new Alert();
-      information2.setId(2L);
-      information2.setAccount(accountById);
-      information2.setText("03/26/2012 - Check #199 bounced due to insufficient funds.");
+        Alert information2 = new Alert();
+        information2.setId(2L);
+        information2.setAccount(accountById);
+        information2.setText("03/26/2012 - Check #199 bounced due to insufficient funds.");
 
-      Alert information3 = new Alert();
-      information3.setId(3L);
-      information3.setAccount(accountById);
-      information3.setText("03/11/2012 - Permanent address does not appear to be valid.");
+        Alert information3 = new Alert();
+        information3.setId(3L);
+        information3.setAccount(accountById);
+        information3.setText("03/11/2012 - Permanent address does not appear to be valid.");
 
-      Alert information4 = new Alert();
-      information4.setId(4L);
-      information4.setAccount(accountById);
-      information4.setText("03/11/2012 - Please contact Supervising Cashier Bill Peymaster.");
+        Alert information4 = new Alert();
+        information4.setId(4L);
+        information4.setAccount(accountById);
+        information4.setText("03/11/2012 - Please contact Supervising Cashier Bill Peymaster.");
 
-      informationList.add(information1);
-      informationList.add(information2);
-      informationList.add(information3);
-      informationList.add(information4);
+        informationList.add(information1);
+        informationList.add(information2);
+        informationList.add(information3);
+        informationList.add(information4);
 
-      form.setAlertList(informationList);
+        form.setAlertList(informationList);
 
-      form.setFlagList(informationService.getFlags(id));
+        form.setFlagList(informationService.getFlags(id));
 
-      form.setMemoList(informationService.getMemos(id));
-   }
+        form.setMemoList(informationService.getMemos(id));
+    }
 }
