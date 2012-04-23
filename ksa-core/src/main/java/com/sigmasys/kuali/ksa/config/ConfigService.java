@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.config;
 
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -8,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.annotation.PostConstruct;
+import java.util.*;
 
 /**
  * KSA Config Service
@@ -24,10 +23,21 @@ import java.util.Set;
 @Transactional(readOnly = true)
 public class ConfigService {
 
-
     @Autowired
     private InitialParameterConfigurer parameterConfigurer;
 
+
+    @PostConstruct
+    private void postConstruct() {
+        // Setting up locale if "locale" initial parameters exist
+        String localeLang = getInitialParameter(Constants.LOCALE_LANG_PARAM_NAME);
+        if (localeLang != null && !localeLang.trim().isEmpty()) {
+            String localeCountry = getInitialParameter(Constants.LOCALE_COUNTRY_PARAM_NAME);
+            Locale locale = (localeCountry != null && !localeCountry.trim().isEmpty()) ?
+                    new Locale(localeLang, localeCountry) : new Locale(localeLang);
+            Locale.setDefault(locale);
+        }
+    }
 
     public String getInitialParameter(String name) {
         return getInitialParameters().get(name);

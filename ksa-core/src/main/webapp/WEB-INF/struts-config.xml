@@ -56,10 +56,16 @@
 
     <action-mappings>
 
-        <!-- Begin required KNS mappings -->
-        <action path="/portal" name="KualiForm" type="org.kuali.rice.kns.web.struts.action.KualiPortalAction">
-            <forward name="basic" path="/index.jsp"/>
+        <action
+            path="/portal"
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/index.jsp">
         </action>
+
+        <!-- Begin required KNS mappings -->
+        <!--action path="/portal" name="KualiForm" type="org.kuali.rice.kns.web.struts.action.KualiPortalAction">
+            <forward name="basic" path="/index.jsp"/>
+        </action-->
 
         <action path="/backdoorlogin" name="BackdoorForm" scope="request" parameter="methodToCall"
                 input="/WEB-INF/jsp/backdoor/index.jsp" type="org.kuali.rice.kns.web.struts.action.BackdoorAction">
