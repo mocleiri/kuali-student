@@ -10,10 +10,10 @@ import java.util.List;
 
 /**
  * User: dmulderink
- * Date: 4/16/12
- * Time: 2:49 PM
+ * Date: 4/22/12
+ * Time: 6:27 PM
  */
-public class CashierTxMemoForm extends UifFormBase {
+public class CustomerServiceForm extends UifFormBase {
    private static final long serialVersionUID = -7525378097732916420L;
 
    // use this object as a query argument for matching transactions by student name
@@ -28,7 +28,6 @@ public class CashierTxMemoForm extends UifFormBase {
    // result set of payments
    private List<Payment> paymentList;
 
-   // result set of deferments
    private List<Deferment> defermentList;
 
    // Account Status values
@@ -85,9 +84,6 @@ public class CashierTxMemoForm extends UifFormBase {
    // the type of information
    private String infoType;
 
-   // deprecated in this class
-   private InformationTypeValue informationTypeValue;
-
    private Date infoEffectiveDate;
 
    // use for adding a charge
@@ -99,6 +95,7 @@ public class CashierTxMemoForm extends UifFormBase {
    private String chargeTransTypeValue;
 
    private String paymentTransTypeValue;
+
 
    /**
     * Get the student name
@@ -484,22 +481,6 @@ public class CashierTxMemoForm extends UifFormBase {
     */
    public void setInfoType(String infoType) {
       this.infoType = infoType;
-   }
-
-   /**
-    * Not used
-    * @return
-    */
-   public InformationTypeValue getInformationTypeValue() {
-      return informationTypeValue;
-   }
-
-   /**
-    * Not used
-    * @param informationTypeValue
-    */
-   public void setInformationTypeValue(InformationTypeValue informationTypeValue) {
-      this.informationTypeValue = informationTypeValue;
    }
 
    /**

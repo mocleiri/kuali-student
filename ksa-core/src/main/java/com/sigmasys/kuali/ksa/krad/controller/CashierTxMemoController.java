@@ -222,6 +222,7 @@ public class CashierTxMemoController extends UifControllerBase {
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
 
+       // Deprecated
         if (pageId != null && pageId.compareTo("CashierTxListByPersonPage") == 0) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
