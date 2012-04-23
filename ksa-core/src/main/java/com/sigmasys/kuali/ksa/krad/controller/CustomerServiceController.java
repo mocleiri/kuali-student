@@ -6,6 +6,7 @@ import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sun.net.httpserver.Authenticator;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -234,20 +235,28 @@ public class CustomerServiceController extends UifControllerBase {
       }
 
       if (pageId != null && pageId.compareTo("CustomerServiceDeleteMemoPage") == 0) {
-         String id = request.getParameter("id");
-         if (id == null || id.isEmpty()) {
+         String memoId = request.getParameter("id");
+         if (memoId == null || memoId.isEmpty()) {
             throw new IllegalArgumentException("'id' request parameter must be specified");
          }
 
-         Memo memo = informationService.getMemo(Long.valueOf(id));
+         //PopulateForm(id, form);
+         String infoType = InformationTypeValue.MEMO.name();
+         InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
 
-         form.setInfoType("Memo");
+         Memo memo = informationService.getMemo(Long.valueOf(memoId));
+         form.setMemo(memo);
+
+         form.setInfoType("M");
          form.setInfoEffectiveDate(memo.getEffectiveDate());
+         form.setInfoCreationDate(memo.getCreationDate());
          form.setInfoText(memo.getText());
          String creatorId = memo.getCreatorId();
          String editorId = memo.getEditorId();
-         String xx = memo.getResponsibleEntity();
+         String responsibleEntity = memo.getResponsibleEntity();
          Integer accesslvl = memo.getAccessLevel();
+
+         form.setInfoDeleteStatus("");
       }
 
       return getUIFModelAndView(form);
@@ -434,15 +443,13 @@ public class CustomerServiceController extends UifControllerBase {
                                HttpServletRequest request, HttpServletResponse response) {
       // do deleteMemo stuff...
 
-      String id = request.getParameter("id");
-      String accountId = form.getSelectedId();
-      // just for the transactions by person page
-      String pageId = request.getParameter("pageId");
+      boolean deleteStatus = false;
+      Memo memo = form.getMemo();
 
-      informationService.deleteInformation(Long.valueOf(id));
-
-      // populate the form using the id
-      PopulateForm(accountId, form);
+      if (memo != null) {
+         deleteStatus = informationService.deleteInformation(memo.getId());
+         form.setInfoDeleteStatus(deleteStatus == true ? "Success" : "Failed to remove");
+      }
 
       return getUIFModelAndView(form);
    }

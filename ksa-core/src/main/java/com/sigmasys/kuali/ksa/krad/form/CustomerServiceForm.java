@@ -78,13 +78,19 @@ public class CustomerServiceForm extends UifFormBase {
    // a list of Memos
    private List<Memo> memoList;
 
+   private Memo memo;
+
    // the Information Text field
    private String infoText;
 
    // the type of information
    private String infoType;
 
+   private Date infoCreationDate;
+
    private Date infoEffectiveDate;
+
+   private String infoDeleteStatus;
 
    // use for adding a charge
    private Charge charge;
@@ -440,6 +446,22 @@ public class CustomerServiceForm extends UifFormBase {
    }
 
    /**
+    * Get the memo selected from the table
+    * @return
+    */
+   public Memo getMemo() {
+      return memo;
+   }
+
+   /**
+    * Set the memo selected from the table
+    * @param memo
+    */
+   public void setMemo(Memo memo) {
+      this.memo = memo;
+   }
+
+   /**
     * Get the formatted BigDecimal value
     * @param value
     * @return
@@ -484,6 +506,22 @@ public class CustomerServiceForm extends UifFormBase {
    }
 
    /**
+    * Get the info creation date
+    * @return
+    */
+   public Date getInfoCreationDate() {
+      return infoCreationDate;
+   }
+
+   /**
+    * Set the info creation date
+    * @param infoCreationDate
+    */
+   public void setInfoCreationDate(Date infoCreationDate) {
+      this.infoCreationDate = infoCreationDate;
+   }
+
+   /**
     * Get the info effective date
     * @return
     */
@@ -497,6 +535,22 @@ public class CustomerServiceForm extends UifFormBase {
     */
    public void setInfoEffectiveDate(Date infoEffectiveDate) {
       this.infoEffectiveDate = infoEffectiveDate;
+   }
+
+   /**
+    *
+    * @return
+    */
+   public String getInfoDeleteStatus() {
+      return infoDeleteStatus;
+   }
+
+   /**
+    *
+    * @param infoDeleteStatus
+    */
+   public void setInfoDeleteStatus(String infoDeleteStatus) {
+      this.infoDeleteStatus = infoDeleteStatus;
    }
 
    /**
