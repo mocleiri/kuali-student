@@ -66,4 +66,19 @@ public class TransactionServiceTest extends AbstractServiceTest {
         // Add more assertions when we have some test data
     }
 
+    @Test
+    public void getChargesWithFormattedAmounts() throws Exception {
+
+        List<Charge> charges = transactionService.getCharges();
+
+        Assert.notNull(charges);
+        Assert.notEmpty(charges);
+
+        for (Charge charge : charges) {
+            Assert.notNull(charge.getFormattedAmount());
+            logger.info("Formatted amount = " + charge.getFormattedAmount());
+        }
+
+    }
+
 }
