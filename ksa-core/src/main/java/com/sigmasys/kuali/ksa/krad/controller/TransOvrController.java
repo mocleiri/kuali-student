@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.CurrencyDetailsForm;
 import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
@@ -21,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+
+import static com.sigmasys.kuali.ksa.util.CommonUtils.*;
 
 @Controller
 @RequestMapping(value = "/transOvrVw")
@@ -109,7 +110,7 @@ public class TransOvrController extends UifControllerBase {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
-            String personName = CreateCompositeDefaultPersonName(id);
+            String personName = createCompositeDefaultPersonName(id);
             form.setSelectedPersonName(personName);
 
             // charges by ID
@@ -123,72 +124,71 @@ public class TransOvrController extends UifControllerBase {
             form.setPaymentList(payments);
         }
 
-       if (pageId != null && pageId.compareTo("bursaChargePage") == 0) {
-          String id = request.getParameter("id");
-          if (id == null || id.isEmpty()) {
-             throw new IllegalArgumentException("'id' request parameter must be specified");
-          }
-
-          // charge by ID
-          Charge charge = transactionService.getCharge(Long.valueOf(id));
-
-          if (charge != null) {
-             PersonName personName = charge.getAccount().getDefaultPersonName();
-             String compositePersonName = CreateCompositeDefaultPersonName(personName);
-             form.setSelectedPersonName(compositePersonName);
-          }
-
-          form.setCharge(charge);
-       }
-
-       if (pageId != null && pageId.compareTo("bursaPaymentPage") == 0) {
-          String id = request.getParameter("id");
-          if (id == null || id.isEmpty()) {
-             throw new IllegalArgumentException("'id' request parameter must be specified");
-          }
-
-          // payment by ID
-          Payment payment = transactionService.getPayment(Long.valueOf(id));
-
-          if (payment != null) {
-             PersonName personName = payment.getAccount().getDefaultPersonName();
-             String compositePersonName = CreateCompositeDefaultPersonName(personName);
-             form.setSelectedPersonName(compositePersonName);
-          }
-
-          form.setPayment(payment);
-       }
-
-       // Currency type
-       if (pageId != null && pageId.compareTo("bursaCurrencyPage") == 0) {
-          String subMethod = request.getParameter("subMethod");
-          if (subMethod != null && subMethod.compareTo("deleteCurr") == 0)
-          {
-             String id = request.getParameter("id");
-             if (id == null || id.isEmpty()) {
+        if (pageId != null && pageId.compareTo("bursaChargePage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
-             }
+            }
 
-             // remove a currency record by ID
-             boolean rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
-          }
+            // charge by ID
+            Charge charge = transactionService.getCharge(Long.valueOf(id));
 
-          form.setCurrencies(currencyService.getCurrencies());
-       }
+            if (charge != null) {
+                PersonName personName = charge.getAccount().getDefaultPersonName();
+                String compositePersonName = createCompositeDefaultPersonName(personName);
+                form.setSelectedPersonName(compositePersonName);
+            }
 
-       // Currency type
-       if (pageId != null && pageId.compareTo("bursaCurrencyEditPage") == 0) {
-          String iso = request.getParameter("iso");
-          if (iso == null || iso.isEmpty()) {
-             throw new IllegalArgumentException("'iso' request parameter must be specified");
-          }
+            form.setCharge(charge);
+        }
 
-          Currency currency = currencyService.getCurrency(iso);
+        if (pageId != null && pageId.compareTo("bursaPaymentPage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
+            }
 
-          form.setCurrency(currency);
-       }
+            // payment by ID
+            Payment payment = transactionService.getPayment(Long.valueOf(id));
 
-       return getUIFModelAndView(form);
+            if (payment != null) {
+                PersonName personName = payment.getAccount().getDefaultPersonName();
+                String compositePersonName = createCompositeDefaultPersonName(personName);
+                form.setSelectedPersonName(compositePersonName);
+            }
+
+            form.setPayment(payment);
+        }
+
+        // Currency type
+        if (pageId != null && pageId.compareTo("bursaCurrencyPage") == 0) {
+            String subMethod = request.getParameter("subMethod");
+            if (subMethod != null && subMethod.compareTo("deleteCurr") == 0) {
+                String id = request.getParameter("id");
+                if (id == null || id.isEmpty()) {
+                    throw new IllegalArgumentException("'id' request parameter must be specified");
+                }
+
+                // remove a currency record by ID
+                boolean rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
+            }
+
+            form.setCurrencies(currencyService.getCurrencies());
+        }
+
+        // Currency type
+        if (pageId != null && pageId.compareTo("bursaCurrencyEditPage") == 0) {
+            String iso = request.getParameter("iso");
+            if (iso == null || iso.isEmpty()) {
+                throw new IllegalArgumentException("'iso' request parameter must be specified");
+            }
+
+            Currency currency = currencyService.getCurrency(iso);
+
+            form.setCurrency(currency);
+        }
+
+        return getUIFModelAndView(form);
     }
 
     /**
@@ -239,23 +239,23 @@ public class TransOvrController extends UifControllerBase {
 
                 // create the composite default person name
 
-                personNameBuilder.append(personName.getLastName());
+                personNameBuilder.append(nvl(personName.getLastName()));
                 personNameBuilder.append(", ");
-                personNameBuilder.append(personName.getFirstName());
+                personNameBuilder.append(nvl(personName.getFirstName()));
 
                 accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
 
                 // create the composite default postal address
                 if (postalAddress != null) {
-                    postalAddressBuilder.append(postalAddress.getStreetAddress1());
+                    postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
                     postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(postalAddress.getCity());
+                    postalAddressBuilder.append(nvl(postalAddress.getCity()));
                     postalAddressBuilder.append(", ");
-                    postalAddressBuilder.append(postalAddress.getState());
+                    postalAddressBuilder.append(nvl(postalAddress.getState()));
                     postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(postalAddress.getPostalCode());
+                    postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
                     postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(postalAddress.getCountry());
+                    postalAddressBuilder.append(nvl(postalAddress.getCountry()));
 
                     accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
                 }
@@ -274,92 +274,52 @@ public class TransOvrController extends UifControllerBase {
         return getUIFModelAndView(form);
     }
 
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=addCurrType")
-   @Transactional(readOnly = false)
-   public ModelAndView addCurrType(@ModelAttribute ("KualiForm") TransOvrForm form, BindingResult result,
-                                   HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCurrType")
+    @Transactional(readOnly = false)
+    public ModelAndView addCurrType(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
+                                    HttpServletRequest request, HttpServletResponse response) {
 
-      // add a Currency Type
-      Currency currency = new Currency();
+        // add a Currency Type
+        Currency currency = new Currency();
 
-      currency.setIso(form.getIso());
-      currency.setName(form.getCurrencyName());
-      currency.setDescription(form.getCurrencyDescription());
+        currency.setIso(form.getIso());
+        currency.setName(form.getCurrencyName());
+        currency.setDescription(form.getCurrencyDescription());
 
-      // remove a currency record by ISO type
-      Long currencyId = currencyService.persistCurrency(currency);
+        // remove a currency record by ISO type
+        currencyService.persistCurrency(currency);
 
-      // refresh the list of currencies. the form and view manage the refresh
-      form.setCurrencies(currencyService.getCurrencies());
+        // refresh the list of currencies. the form and view manage the refresh
+        form.setCurrencies(currencyService.getCurrencies());
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-/*   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=deleteCurrency")
-   public ModelAndView deleteCurrency(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
+    private String createCompositeDefaultPersonName(String id) {
+        Account accountById = accountService.getFullAccount(id);
+        if (accountById == null) {
+            throw new IllegalStateException("Cannot find Account by ID = " + id);
+        }
+        return createCompositeDefaultPersonName(accountById.getDefaultPersonName());
+    }
 
-      String id = request.getParameter("id");
-      if (id == null || id.isEmpty()) {
-         throw new IllegalArgumentException("'id' request parameter must be specified");
-      }
+    private String createCompositeDefaultPersonName(PersonName personName) {
 
-      // remove a currency record by ID
-      boolean rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
+        String compositeDefaultPersonName = "";
 
-      form.setCurrencies(currencyService.getCurrencies());
+        if (personName != null) {
 
-      return getUIFModelAndView(form);
-   }*/
+            StringBuilder personNameBuilder = new StringBuilder();
 
-   private String CreateCompositeDefaultPersonName(String id) {
+            // create the composite default person name
 
-      String compositeDefaultPersonName = "";
-      Account accountById = accountService.getFullAccount(id);
+            personNameBuilder.append(nvl(personName.getLastName()));
+            personNameBuilder.append(", ");
+            personNameBuilder.append(nvl(personName.getFirstName()));
 
-      if (accountById != null) {
+            compositeDefaultPersonName = personNameBuilder.toString();
+        }
 
-         PersonName personName = accountById.getDefaultPersonName();
-
-         StringBuilder personNameBuilder = new StringBuilder();
-
-         // create the composite default person name
-
-         personNameBuilder.append(personName.getLastName());
-         personNameBuilder.append(", ");
-         personNameBuilder.append(personName.getFirstName());
-
-         compositeDefaultPersonName = personNameBuilder.toString();
-      }
-
-      return compositeDefaultPersonName;
-   }
-
-   private String CreateCompositeDefaultPersonName(PersonName personName) {
-
-      String compositeDefaultPersonName = "";
-
-      if (personName != null) {
-
-         StringBuilder personNameBuilder = new StringBuilder();
-
-         // create the composite default person name
-
-         personNameBuilder.append(personName.getLastName());
-         personNameBuilder.append(", ");
-         personNameBuilder.append(personName.getFirstName());
-
-         compositeDefaultPersonName = personNameBuilder.toString();
-      }
-
-      return compositeDefaultPersonName;
-   }
+        return compositeDefaultPersonName;
+    }
 }

@@ -404,7 +404,7 @@ public class CustomerServiceController extends UifControllerBase {
 
         if (memo != null) {
             boolean deleteStatus = informationService.deleteInformation(memo.getId());
-            form.setInfoDeleteStatus(deleteStatus == true ? "Success" : "Failed to remove");
+            form.setInfoDeleteStatus(deleteStatus ? "Success" : "Failed to remove");
         }
 
         return getUIFModelAndView(form);
