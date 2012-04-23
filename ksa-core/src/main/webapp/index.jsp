@@ -99,7 +99,7 @@
                     </td>
 
                     <td class="leftTd" align="right" width="Infinity%">
-                        <a href="<%= request.getContextPath() %>/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
+                        <a href="<%= request.getContextPath() %>/uif/customerService?methodToCall=get&viewId=CustomerServiceView">
                             <img src="images/persona-customer_service_representative.png" alt="persona customer service representative" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -108,7 +108,7 @@
                         <span >Customer Service Representative</span>
                         </p>
                         <hr/>
-                        <p >&bull; <a href="<%= request.getContextPath() %>/uif/alertsTransaction?methodToCall=get&viewId=AlertsTransactionView">
+                        <p >&bull; <a href="<%= request.getContextPath() %>/uif/customerService?methodToCall=get&viewId=CustomerServiceView">
                             Select for UX test
                         </a><br>
                             &bull; <a href="media/persona-customer_service_representative.pdf">View detailed persona</a>
