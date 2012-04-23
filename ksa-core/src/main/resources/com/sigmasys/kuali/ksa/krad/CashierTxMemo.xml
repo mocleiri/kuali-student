@@ -564,6 +564,14 @@
                                           p:watermarkText="Type in information text here..."/>
                                 </property>
                             </bean>
+                            <bean parent="Uif-InputField" p:propertyName="infoAddStatus" p:label="Add Status"
+                                  p:labelPlacement="TOP" p:maxLength="20" >
+                                <property name="bindingInfo.bindToForm" value="true"/>
+                                <property name="readOnly" value="true"/>
+                                <property name="control">
+                                    <bean parent="Uif-TextControl" p:size="21" />
+                                </property>
+                            </bean>
                         </list>
                     </property>
                 </bean>
