@@ -77,24 +77,6 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet>
-        <servlet-name>action</servlet-name>
-        <servlet-class>org.kuali.rice.kns.web.struts.action.KualiActionServlet</servlet-class>
-        <init-param>
-            <param-name>config</param-name>
-            <param-value>/WEB-INF/struts-config.xml</param-value>
-        </init-param>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>3</param-value>
-        </init-param>
-        <init-param>
-            <param-name>detail</param-name>
-            <param-value>3</param-value>
-        </init-param>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-
     <servlet-mapping>
         <servlet-name>springDispatcher</servlet-name>
         <url-pattern>*.service</url-pattern>
@@ -108,11 +90,6 @@
     <servlet-mapping>
         <servlet-name>krad</servlet-name>
         <url-pattern>/uif/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>action</servlet-name>
-        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -174,11 +151,6 @@
         <filter-name>UserPreferencesFilter</filter-name>
         <servlet-name>krad</servlet-name>
     </filter-mapping-->
-
-    <filter-mapping>
-        <filter-name>BootstrapFilter</filter-name>
-        <servlet-name>action</servlet-name>
-    </filter-mapping>
 
     <!--filter-mapping>
         <filter-name>UserPreferencesFilter</filter-name>
