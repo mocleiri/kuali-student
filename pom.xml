@@ -22,6 +22,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
                 <module>ks-core-ui</module>
                 <module>ks-core-web</module>
             </modules>
@@ -30,6 +31,7 @@
             <id>sql-only</id>
             <modules>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
             </modules>
         </profile>
         <profile>
@@ -39,6 +41,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
                 <module>ks-core-ui</module>
             </modules>
         </profile>
@@ -49,6 +52,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
                 <module>ks-core-ui</module>
             </modules>
         </profile>
@@ -59,6 +63,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
                 <module>ks-core-ui</module>
             </modules>
         </profile>
@@ -69,6 +74,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
                 <module>ks-core-ui</module>
             </modules>
         </profile>
@@ -79,6 +85,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
                 <module>ks-core-ui</module>
             </modules>
         </profile>
@@ -89,6 +96,7 @@
                 <module>ks-security</module>
                 <module>ks-core-impl</module>
                 <module>ks-core-sql</module>
+                <module>ks-rice-sql</module>
             </modules>
         </profile>
     </profiles>
