@@ -3,4 +3,4 @@
 @test_inserts/ksa_test_data_dml.sql
 @ksa_constraints_ddl.sql
 
-quit
+commit;
