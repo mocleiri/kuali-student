@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.ChargeableAccount;
 import com.sigmasys.kuali.ksa.model.Debit;
 import com.sigmasys.kuali.ksa.model.Pair;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.rice.kim.api.identity.Person;
@@ -27,6 +28,13 @@ public class AccountServiceTest extends AbstractServiceTest {
 
     @Autowired
     private AccountService accountService;
+
+    @Before
+    public void setUpWithinTransaction() {
+        // set up test data within the transaction
+        String userId = "admin";
+        accountService.getOrCreateAccount(userId);
+    }
 
     @Test
     public void getAccount() throws Exception {
@@ -135,13 +143,6 @@ public class AccountServiceTest extends AbstractServiceTest {
             logger.info("Debit date = " + pair.getA().getEffectiveDate() + ", amount = " + pair.getB());
         }
 
-    }
-
-    @Rollback(false)
-    @Test
-    public void getOrCreateAccount() {
-        String userId = "admin";
-        accountService.getOrCreateAccount(userId);
     }
 
     @Test
