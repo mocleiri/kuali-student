@@ -16,9 +16,8 @@ import java.security.MessageDigest;
 
 /**
  * Contains encryption/decryption methods of commonly used algorithms.
- * User: ivanovm, FINRA
- * Date: Aug 26, 2009
- * Time: 12:17:36 PM
+ *
+ * @author Michael Ivanov
  */
 @SuppressWarnings("all")
 public class CryptUtils {

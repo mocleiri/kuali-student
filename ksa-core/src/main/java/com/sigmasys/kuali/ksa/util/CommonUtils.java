@@ -85,7 +85,7 @@ public final class CommonUtils {
 
     public static String getModuleBaseUrl(HttpServletRequest request) {
         // Initializing base service URL, i.e.
-        // http://localhost:8080/sonar/org.finra.sonar.Application/Application.html
+        // http://localhost:8080/sonar/org.kuali.ksa.Application/Application.html
         // will return /org.finra.sonar.Application/
         String requestedUri = request.getRequestURI();
         int contextEnd = request.getContextPath().length();
