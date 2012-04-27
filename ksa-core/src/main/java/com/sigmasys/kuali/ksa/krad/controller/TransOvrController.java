@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
+import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.AccountService;
@@ -110,8 +111,8 @@ public class TransOvrController extends UifControllerBase {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
-            String personName = createCompositeDefaultPersonName(id);
-            form.setSelectedPersonName(personName);
+            String compositePersonName = createCompositeDefaultPersonName(id);
+            form.setSelectedPersonName(compositePersonName);
 
             // charges by ID
             List<Charge> charges = transactionService.getCharges(id);
@@ -135,7 +136,8 @@ public class TransOvrController extends UifControllerBase {
 
             if (charge != null) {
                 PersonName personName = charge.getAccount().getDefaultPersonName();
-                String compositePersonName = createCompositeDefaultPersonName(personName);
+                PersonPostal personPostal = new PersonPostal();
+                String compositePersonName = personPostal.CreateCompositePersonName(personName);
                 form.setSelectedPersonName(compositePersonName);
             }
 
@@ -153,7 +155,8 @@ public class TransOvrController extends UifControllerBase {
 
             if (payment != null) {
                 PersonName personName = payment.getAccount().getDefaultPersonName();
-                String compositePersonName = createCompositeDefaultPersonName(personName);
+                PersonPostal personPostal = new PersonPostal();
+                String compositePersonName = personPostal.CreateCompositePersonName(personName);
                 form.setSelectedPersonName(compositePersonName);
             }
 
@@ -234,31 +237,12 @@ public class TransOvrController extends UifControllerBase {
 
                 Account accountCopy = account.getCopy();
 
-                StringBuilder personNameBuilder = new StringBuilder();
-                StringBuilder postalAddressBuilder = new StringBuilder();
+                PersonPostal personPostal = new PersonPostal();
 
-                // create the composite default person name
-
-                personNameBuilder.append(nvl(personName.getLastName()));
-                personNameBuilder.append(", ");
-                personNameBuilder.append(nvl(personName.getFirstName()));
-
-                accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
-
-                // create the composite default postal address
-                if (postalAddress != null) {
-                    postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
-                    postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(nvl(postalAddress.getCity()));
-                    postalAddressBuilder.append(", ");
-                    postalAddressBuilder.append(nvl(postalAddress.getState()));
-                    postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
-                    postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(nvl(postalAddress.getCountry()));
-
-                    accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
-                }
+                String compositePersonName = personPostal.CreateCompositePersonName(personName);
+                accountCopy.setCompositeDefaultPersonName(compositePersonName);
+                String compositePostalAddress = personPostal.CreateCompositePostalAddress(postalAddress);
+                accountCopy.setCompositeDefaultPostalAddress(compositePostalAddress);
 
                 // add each account copy to a list
 
@@ -300,26 +284,9 @@ public class TransOvrController extends UifControllerBase {
         if (accountById == null) {
             throw new IllegalStateException("Cannot find Account by ID = " + id);
         }
-        return createCompositeDefaultPersonName(accountById.getDefaultPersonName());
-    }
 
-    private String createCompositeDefaultPersonName(PersonName personName) {
-
-        String compositeDefaultPersonName = "";
-
-        if (personName != null) {
-
-            StringBuilder personNameBuilder = new StringBuilder();
-
-            // create the composite default person name
-
-            personNameBuilder.append(nvl(personName.getLastName()));
-            personNameBuilder.append(", ");
-            personNameBuilder.append(nvl(personName.getFirstName()));
-
-            compositeDefaultPersonName = personNameBuilder.toString();
-        }
-
-        return compositeDefaultPersonName;
+        PersonPostal personPostal = new PersonPostal();
+        PersonName personName = accountById.getDefaultPersonName();
+        return personPostal.CreateCompositePersonName(personName);
     }
 }

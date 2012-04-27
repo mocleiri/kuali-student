@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Information main class
@@ -70,6 +71,12 @@ public class Information implements Identifiable {
      * Timestamp
      */
     private Date lastUpdate;
+
+   /**
+    * Concatenation of one or more fields
+    */
+    private String compositeInfo;
+
 
 
     @Id
@@ -181,4 +188,15 @@ public class Information implements Identifiable {
         this.transaction = transaction;
     }
 
+   /**
+    * A composition of fields
+    */
+   @Transient
+   public String getCompositeInfo() {
+      return compositeInfo;
+   }
+
+   public void setCompositeInfo(String compositeInfo) {
+      this.compositeInfo = compositeInfo;
+   }
 }

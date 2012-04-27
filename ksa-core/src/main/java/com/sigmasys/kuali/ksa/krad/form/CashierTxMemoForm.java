@@ -98,8 +98,10 @@ public class CashierTxMemoForm extends UifFormBase {
    // use for adding a payment
    private Payment payment;
 
+   // the transaction type for a charge
    private String chargeTransTypeValue;
 
+   // the transaction type for a payment
    private String paymentTransTypeValue;
 
    /**

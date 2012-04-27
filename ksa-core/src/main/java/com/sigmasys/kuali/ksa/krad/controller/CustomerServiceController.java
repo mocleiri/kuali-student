@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CustomerServiceForm;
+import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
+import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
@@ -264,31 +266,10 @@ public class CustomerServiceController extends UifControllerBase {
 
                 Account accountCopy = account.getCopy();
 
-                StringBuilder personNameBuilder = new StringBuilder();
-                StringBuilder postalAddressBuilder = new StringBuilder();
-
-                // create the composite default person name
-
-                personNameBuilder.append(nvl(personName.getLastName()));
-                personNameBuilder.append(", ");
-                personNameBuilder.append(nvl(personName.getFirstName()));
-
-                accountCopy.setCompositeDefaultPersonName(personNameBuilder.toString());
-
-                // create the composite default postal address
-                if (postalAddress != null) {
-                    postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
-                    postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(nvl(postalAddress.getCity()));
-                    postalAddressBuilder.append(", ");
-                    postalAddressBuilder.append(nvl(postalAddress.getState()));
-                    postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
-                    postalAddressBuilder.append(" ");
-                    postalAddressBuilder.append(nvl(postalAddress.getCountry()));
-
-                    accountCopy.setCompositeDefaultPostalAddress(postalAddressBuilder.toString());
-                }
+               // format the name and address as a single string of each
+               PersonPostal personPostal = new PersonPostal();
+               accountCopy.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
+               accountCopy.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
 
                 // add each account copy to a list
 
@@ -410,55 +391,11 @@ public class CustomerServiceController extends UifControllerBase {
         return getUIFModelAndView(form);
     }
 
-    /**
-     * Create a composite person name from PersonName record fields
-     *
-     * @param personName
-     * @return
-     */
-    private String createPersonName(PersonName personName) {
-
-        StringBuilder personNameBuilder = new StringBuilder();
-
-        if (personName != null) {
-
-            // create the composite default person name
-
-            personNameBuilder.append(nvl(personName.getLastName()));
-            personNameBuilder.append(", ");
-            personNameBuilder.append(nvl(personName.getFirstName()));
-        }
-
-        return personNameBuilder.toString();
-    }
-
-    /**
-     * Create a composite postal address from PostalAddress record fields
-     *
-     * @param postalAddress
-     * @return
-     */
-    private String createCompositePostalAddress(PostalAddress postalAddress) {
-
-        StringBuilder postalAddressBuilder = new StringBuilder();
-
-        // create the composite default postal address
-
-        if (postalAddress != null) {
-            postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
-            postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(nvl(postalAddress.getCity()));
-            postalAddressBuilder.append(", ");
-            postalAddressBuilder.append(nvl(postalAddress.getState()));
-            postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
-            postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(nvl(postalAddress.getCountry()));
-        }
-
-        return postalAddressBuilder.toString();
-    }
-
+   /**
+    * Populate the form per business needs for a single account by the account identifier
+    * @param id
+    * @param form
+    */
     private void populateForm(String id, CustomerServiceForm form) {
 
         // store the selected account ID
@@ -476,8 +413,11 @@ public class CustomerServiceController extends UifControllerBase {
         PersonName personName = accountById.getDefaultPersonName();
         PostalAddress postalAddress = accountById.getDefaultPostalAddress();
 
-        accountById.setCompositeDefaultPersonName(createPersonName(personName));
-        accountById.setCompositeDefaultPostalAddress(createCompositePostalAddress(postalAddress));
+        // format the name and address as a single string of each
+        PersonPostal personPostal = new PersonPostal();
+        accountById.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
+        accountById.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
+
         List<Account> accountList = new ArrayList<Account>();
         accountList.add(accountById);
 
@@ -535,37 +475,31 @@ public class CustomerServiceController extends UifControllerBase {
         form.setFuture(future);
         form.setDefermentTotal(deferment);
 
-        // Alerts and Flags
-        List<Alert> informationList = new ArrayList<Alert>();
-        Alert information1 = new Alert();
-        information1.setId(1L);
-        information1.setAccount(accountById);
-        information1.setText("04/12/2012 - Please contact the university Customer Service Representative Hal Kanni-Helfew at (555) 867-5309.");
+       // Alerts, Flags and Memos
+       List<Alert> alerts = informationService.getAlerts(id);
 
-        Alert information2 = new Alert();
-        information2.setId(2L);
-        information2.setAccount(accountById);
-        information2.setText("03/26/2012 - Check #199 bounced due to insufficient funds.");
+       AlertsFlagsMemos afm = new AlertsFlagsMemos();
+       // Alerts
+       for (Alert alert : alerts) {
 
-        Alert information3 = new Alert();
-        information3.setId(3L);
-        information3.setAccount(accountById);
-        information3.setText("03/11/2012 - Permanent address does not appear to be valid.");
+          alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
+       }
 
-        Alert information4 = new Alert();
-        information4.setId(4L);
-        information4.setAccount(accountById);
-        information4.setText("03/11/2012 - Please contact Supervising Cashier Bill Peymaster.");
+       form.setAlertList(alerts);
 
-        informationList.add(information1);
-        informationList.add(information2);
-        informationList.add(information3);
-        informationList.add(information4);
+       // Flags
+       // Flags do not have a Text field and throws an exception when there are flag records TODO
+       //form.setFlagList(informationService.getFlags(id));
 
-        form.setAlertList(informationList);
+       List<Memo> memos = informationService.getMemos(id);
 
-        form.setFlagList(informationService.getFlags(id));
+       // Alerts
+       for (Memo memo : memos) {
 
-        form.setMemoList(informationService.getMemos(id));
+          memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
+
+       }
+
+       form.setMemoList(memos);
     }
 }

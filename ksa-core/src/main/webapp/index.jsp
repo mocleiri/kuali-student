@@ -90,7 +90,7 @@
                     </td>
                     <td align="left" nowrap class="rightTd" >
                         <p><strong>Will N. Lyten</strong><br>
-                        <span >Faculty Advisor/Department Liason</span>
+                        <span >Faculty Advisor/Department Liaison</span>
                         </p>
                         <hr/>
                         <p >&bull; UX Work in Progress<br>
@@ -117,8 +117,10 @@
                 </tr>
 
                 <tr>
-                    <td class="leftTd" align="right"><a href="/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
-                        <img src="images/persona-cashier.png" alt="persona: cashier" width="140" height="140" border="0"></a>
+                    <td class="leftTd" align="right">
+                        <a href="<%= request.getContextPath() %>/uif/cashierTxMemo?methodToCall=get&viewId=CashierTxMemoView">
+                            <img src="images/persona-cashier.png" alt="persona: cashier" width="140" height="140" border="0">
+                        </a>
                     </td>
                     <td align="left" nowrap class="rightTd" >
                         <strong>Missy Munni</strong><br>
@@ -131,7 +133,8 @@
                         </p>
                     </td>
                     <td class="leftTd" align="right"><a href="#">
-                        <img src="images/persona-supervising_cashier.png" alt="persona: supervising cashier" width="140" height="140" border="0"></a>
+                            <img src="images/persona-supervising_cashier.png" alt="persona: supervising cashier" width="140" height="140" border="0">
+                        </a>
                     </td>
                     <td align="left" nowrap class="rightTd" >
                         <p><strong>Bill Peymaster</strong><br>
@@ -142,14 +145,19 @@
                             &bull; <a href="media/persona-supervising_cashier.pdf">View detailed persona</a>
                         </p>
                     </td>
-                    <td class="leftTd" align="right"><a href="#">
-                        <img src="images/persona-administrative_liaison.png" alt="persona: administrative liaison" width="140" height="140" border="0"></a></td>
+                    <td class="leftTd" align="right">
+                        <a href="<%= request.getContextPath() %>/uif/adminLiaisonVw?methodToCall=get&viewId=AdminLiaisonView">
+                            <img src="images/persona-administrative_liaison.png" alt="persona: administrative liaison" width="140" height="140" border="0">
+                        </a>
+                    </td>
                     <td align="left" nowrap class="rightTd" >
                         <p><strong>Dana N. Tyree</strong><br>
                         <span >Administrative Liaison</span>
                         </p>
                         <hr/>
-                        <p >&bull; UX Work in Progress<br>
+                        <p >&bull; <a href="<%= request.getContextPath() %>/uif/adminLiaisonVw?methodToCall=get&viewId=AdminLiaisonView">
+                            Select for UX test
+                        </a><br>
                             &bull; <a href="media/persona-administrative_liaison.pdf">View detailed persona</a>
                         </p>
                     </td>

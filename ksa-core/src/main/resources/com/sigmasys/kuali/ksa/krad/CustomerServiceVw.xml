@@ -210,9 +210,7 @@
                 <ref bean="customerServiceAlertsDetails"/>
                 <ref bean="customerServiceFlagDetails"/>
                 <ref bean="customerServiceAgingDetails"/>
-                <bean parent="Uif-SecondaryNavigationActionButton" p:navigateToPageId="CustomerServiceAddMemoPage"
-                      p:actionLabel="Add Information"/>
-                <ref bean="customerServiceMemos"/>
+                <ref bean="customerServiceMemosGroup"/>
             </list>
         </property>
     </bean>
@@ -294,7 +292,8 @@
           p:layoutManager.numberOfColumns="1"
           p:title="Alerts"
           p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true">
+          p:progressiveRenderViaAJAX="true"
+          p:instructionalText="Creation date then alert information">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Alert"/>
         <property name="propertyName" value="alertList"/>
@@ -303,7 +302,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="text" p:maxLength="99">
+                <bean parent="Uif-InputField" p:propertyName="compositeInfo" p:maxLength="99">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="100"/>
                     </property>
@@ -317,7 +316,8 @@
           p:layoutManager.numberOfColumns="1"
           p:title="Flags"
           p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true">
+          p:progressiveRenderViaAJAX="true"
+          p:instructionalText="Creation date then flag information">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Flag"/>
         <property name="propertyName" value="flagList"/>
@@ -393,11 +393,24 @@
         </property>
     </bean>
 
+    <bean id="customerServiceMemosGroup" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL"
+          p:title="Memos">
+        <property name="disclosure.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-SecondaryNavigationActionButton" p:navigateToPageId="CustomerServiceAddMemoPage"
+                      p:actionLabel="Add Information"/>
+                <ref bean="customerServiceMemos"/>
+            </list>
+        </property>
+    </bean>
+
     <!-- Memo and Information list -->
-    <bean id="customerServiceMemos" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5"
+    <bean id="customerServiceMemos" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="2"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:title="Memos" >
+          p:title="Memos"
+          p:instructionalText="Creation date then memo information">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
         <property name="propertyName" value="memoList"/>
@@ -406,6 +419,13 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
+                <bean parent="Uif-InputField" p:propertyName="compositeInfo" p:maxLength="99">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="100"/>
+                    </property>
+                </bean>
+<!--
+
                 <bean parent="Uif-InputField" p:propertyName="lastUpdate" p:label="Last Update"
                       p:labelPlacement="TOP" p:maxLength="10" >
                     <property name="control">
@@ -431,6 +451,8 @@
                               p:watermarkText="Information text..." p:maxLength="2000"/>
                     </property>
                 </bean>
+
+-->
 
                 <!-- Select to Remove -->
                 <!-- Use this to display the combined account, bio, aging and alerts -->
