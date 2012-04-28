@@ -27,7 +27,7 @@ public class ProxyEntityAnnotationResolver {
         boolean proxyEntities = false;
 
         try {
-            // If either class or method has annotation, use proxied call
+            // If either class or method has annotation, use proxy
             ProxyEntity proxyAnnotation = method.getAnnotation(ProxyEntity.class);
 
             if (proxyAnnotation == null) {
