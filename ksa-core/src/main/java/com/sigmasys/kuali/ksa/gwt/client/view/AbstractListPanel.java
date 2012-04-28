@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class ListPanel<M extends BaseModel> extends ContentPanel {
+public abstract class AbstractListPanel<M extends BaseModel> extends ContentPanel {
 
     public static final int DEFAULT_NUMBER_OF_ITEMS_PER_PAGE = 50;
 
@@ -46,7 +46,7 @@ public abstract class ListPanel<M extends BaseModel> extends ContentPanel {
 
     private Long startLoadingTime, endLoadingTime;
 
-    private DetailsPanel<M> detailsPanel;
+    private AbstractDetailsPanel<M> detailsPanel;
     private SearchPanel<M> searchPanel;
 
     private Boolean selectFirstRow;
@@ -62,11 +62,11 @@ public abstract class ListPanel<M extends BaseModel> extends ContentPanel {
 
     private int selectedAllTotalCount;
 
-    public ListPanel() {
+    public AbstractListPanel() {
         this(null, false);
     }
 
-    public ListPanel(boolean loadFirstPageOnCreation) {
+    public AbstractListPanel(boolean loadFirstPageOnCreation) {
         this(null, loadFirstPageOnCreation);
     }
 
@@ -74,11 +74,11 @@ public abstract class ListPanel<M extends BaseModel> extends ContentPanel {
      * Do nto select first row after load
      */
 
-    public ListPanel(SearchCriteria criteria, boolean loadFirstPageOnCreation) {
+    public AbstractListPanel(SearchCriteria criteria, boolean loadFirstPageOnCreation) {
         this(criteria, loadFirstPageOnCreation, false);
     }
 
-    public ListPanel(SearchCriteria criteria, boolean loadFirstPageOnCreation, boolean selectFirstRow) {
+    public AbstractListPanel(SearchCriteria criteria, boolean loadFirstPageOnCreation, boolean selectFirstRow) {
 
         this.loadFirstPageOnCreation = loadFirstPageOnCreation;
         if (isSelectOnAllPagesButtonEnabled()) {
@@ -504,11 +504,11 @@ public abstract class ListPanel<M extends BaseModel> extends ContentPanel {
 
     protected abstract void loadData(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<M>> callback);
 
-    public DetailsPanel<M> getDetailsPanel() {
+    public AbstractDetailsPanel<M> getDetailsPanel() {
         return detailsPanel;
     }
 
-    public void setDetailsPanel(DetailsPanel<M> detailsPanel) {
+    public void setDetailsPanel(AbstractDetailsPanel<M> detailsPanel) {
         this.detailsPanel = detailsPanel;
     }
 

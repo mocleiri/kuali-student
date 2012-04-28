@@ -11,54 +11,59 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 
-public class CompositePanel<M extends BaseModel> extends LayoutContainer {
+/**
+ * AbstractCompositePanel
+ *
+ * @param <M>
+ */
+public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer {
 
     private final SearchPanel<M> searchPanel;
-    private final ListPanel<M> listPanel;
-    private final DetailsPanel<M> detailsPanel;
+    private final AbstractListPanel<M> listPanel;
+    private final AbstractDetailsPanel<M> detailsPanel;
 
     private boolean collapseSearchPanel;
     private boolean wasSearchPanelCollapsedOrExpanded;
     private boolean searchOnOpen;
     private boolean isFirstTime = true;
 
-    public CompositePanel(SearchPanel<M> searchPanel,
-                          ListPanel<M> listPanel,
-                          DetailsPanel<M> detailsPanel,
-                          float westWidth,
-                          float southHeight,
-                          boolean searchOnOpen) {
+    public AbstractCompositePanel(SearchPanel<M> searchPanel,
+                                  AbstractListPanel<M> listPanel,
+                                  AbstractDetailsPanel<M> detailsPanel,
+                                  float westWidth,
+                                  float southHeight,
+                                  boolean searchOnOpen) {
         this(searchPanel, listPanel, detailsPanel, westWidth, 200, southHeight, searchOnOpen);
     }
 
-    public CompositePanel(SearchPanel<M> searchPanel,
-                          ListPanel<M> listPanel,
-                          DetailsPanel<M> detailsPanel,
-                          float westWidth,
-                          float southHeight,
-                          boolean searchOnOpen,
-                          boolean collapseSearchPanel) {
+    public AbstractCompositePanel(SearchPanel<M> searchPanel,
+                                  AbstractListPanel<M> listPanel,
+                                  AbstractDetailsPanel<M> detailsPanel,
+                                  float westWidth,
+                                  float southHeight,
+                                  boolean searchOnOpen,
+                                  boolean collapseSearchPanel) {
         this(searchPanel, listPanel, detailsPanel, westWidth, 200, southHeight, searchOnOpen, collapseSearchPanel);
     }
 
-    public CompositePanel(SearchPanel<M> searchPanel,
-                          ListPanel<M> listPanel,
-                          DetailsPanel<M> detailsPanel,
-                          float westWidth,
-                          float centerHeight,
-                          float southHeight,
-                          boolean searchOnOpen) {
+    public AbstractCompositePanel(SearchPanel<M> searchPanel,
+                                  AbstractListPanel<M> listPanel,
+                                  AbstractDetailsPanel<M> detailsPanel,
+                                  float westWidth,
+                                  float centerHeight,
+                                  float southHeight,
+                                  boolean searchOnOpen) {
         this(searchPanel, listPanel, detailsPanel, westWidth, centerHeight, southHeight, searchOnOpen, false);
     }
 
-    public CompositePanel(SearchPanel<M> searchPanel,
-                          ListPanel<M> listPanel,
-                          DetailsPanel<M> detailsPanel,
-                          float westWidth,
-                          float centerHeight,
-                          float southHeight,
-                          boolean searchOnOpen,
-                          boolean collapseSearchPanel) {
+    public AbstractCompositePanel(SearchPanel<M> searchPanel,
+                                  AbstractListPanel<M> listPanel,
+                                  AbstractDetailsPanel<M> detailsPanel,
+                                  float westWidth,
+                                  float centerHeight,
+                                  float southHeight,
+                                  boolean searchOnOpen,
+                                  boolean collapseSearchPanel) {
 
         this.listPanel = listPanel;
         this.detailsPanel = detailsPanel;
@@ -85,7 +90,7 @@ public class CompositePanel<M extends BaseModel> extends LayoutContainer {
 
         if (searchPanel != null) {
 
-            searchPanel.setViewer(this);
+            searchPanel.setCompositePanel(this);
             searchPanel.setListPanel(listPanel);
             searchPanel.setDetailsPanel(detailsPanel);
 
@@ -176,11 +181,11 @@ public class CompositePanel<M extends BaseModel> extends LayoutContainer {
         return searchPanel;
     }
 
-    public ListPanel<M> getListPanel() {
+    public AbstractListPanel<M> getListPanel() {
         return listPanel;
     }
 
-    public DetailsPanel<M> getDetailsPanel() {
+    public AbstractDetailsPanel<M> getDetailsPanel() {
         return detailsPanel;
     }
 

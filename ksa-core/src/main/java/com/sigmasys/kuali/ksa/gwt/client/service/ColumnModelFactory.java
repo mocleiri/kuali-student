@@ -4,7 +4,7 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.sigmasys.kuali.ksa.gwt.client.view.ListPanel;
+import com.sigmasys.kuali.ksa.gwt.client.view.AbstractListPanel;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public interface ColumnModelFactory<M extends BaseModel> {
 
     // To make it list panel aware
-    void setListPanel(ListPanel<M> listPanel);
+    void setListPanel(AbstractListPanel<M> listPanel);
 
     // To process grid pre loading
     void processPostLoading(LoadEvent be);

@@ -9,11 +9,11 @@ public interface SearchPanel<M extends BaseModel> {
 
     void expand();
 
-    void setViewer(CompositePanel<M> viewer);
+    void setCompositePanel(AbstractCompositePanel<M> compositePanel);
 
-    void setListPanel(ListPanel<M> listPanel);
+    void setListPanel(AbstractListPanel<M> listPanel);
 
-    void setDetailsPanel(DetailsPanel<M> detailsPanel);
+    void setDetailsPanel(AbstractDetailsPanel<M> detailsPanel);
 
     void submitForm();
 
