@@ -36,8 +36,7 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
         return result;
     }
 
-    protected int countEntities(SearchCriteria searchCriteria,
-                                                   SearchQueryBuilder queryBuilder) throws GwtError {
+    protected int countEntities(SearchCriteria searchCriteria, SearchQueryBuilder queryBuilder) throws GwtError {
 
         SearchQueryBuilder builder = queryBuilder.copy();
 
@@ -53,13 +52,9 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
 
     }
 
-    protected <T> List<T> searchEntities(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
-                                         String sortField, int offset, int limit) throws GwtError {
-        return searchEntities(queryBuilder, sc, sortDir, sortField, offset, limit, false);
-    }
     
-    protected <T> List<T> searchEntities(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
-            String sortField, int offset, int limit, boolean readOnly) throws GwtError {
+    protected <T> List<T> findEntities(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
+            String sortField, int offset, int limit) throws GwtError {
 
 
         String hql = queryBuilder.buildQuery(sc, sortDir, sortField);
@@ -80,10 +75,6 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
             query.setFirstResult(offset);
             query.setMaxResults(limit);
         }
-        
-        if (readOnly) {
-            query.setHint("org.hibernate.readOnly", true);
-        }
 
         long statsBegin = System.currentTimeMillis();
 
@@ -99,17 +90,12 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
         return queryBuilder.isUseNativeSql() ? em.createNativeQuery(hql) : em.createQuery(hql);
     }
 
-    protected <T> List<T> searchEntities(SearchQueryBuilder queryBuilder, SearchCriteria searchCriteria) throws GwtError {
-        return searchEntities(queryBuilder, searchCriteria, null, null, 0, UNLIMITED_ITEMS_NUMBER);
-    }
-
-    protected <T> PagingLoadResult<T> buildPagingLoadResult(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
-            String sortField, int offset, int limit) throws GwtError {
-        return buildPagingLoadResult(queryBuilder, sc, sortDir, sortField, offset, limit, false);
+    protected <T> List<T> findEntities(SearchQueryBuilder queryBuilder, SearchCriteria searchCriteria) throws GwtError {
+        return findEntities(queryBuilder, searchCriteria, null, null, 0, UNLIMITED_ITEMS_NUMBER);
     }
     
     protected <T> PagingLoadResult<T> buildPagingLoadResult(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
-                                                            String sortField, int offset, int limit, boolean readOnly) throws GwtError {
+                                                            String sortField, int offset, int limit) throws GwtError {
         int numberOfItems = 0;
         if (sc.isRunCount()) {
             numberOfItems = countEntities(sc, queryBuilder);
@@ -122,7 +108,7 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
             }
         }
         logger.info("offset after adjustment = " + offset);
-        List<T> items = searchEntities(queryBuilder, sc, sortDir, sortField, offset, limit, readOnly);
+        List<T> items = findEntities(queryBuilder, sc, sortDir, sortField, offset, limit);
         return (sc.isRunCount()) ?
                 new PagingLoadResultImpl(items, offset, numberOfItems) : new PagingLoadResultImpl(items);
     }

@@ -1,8 +1,8 @@
 package com.sigmasys.kuali.ksa.gwt.client.model;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.sigmasys.kuali.ksa.model.Identifiable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -11,7 +11,9 @@ import java.util.Map;
  *
  * @author Michael Ivanov
  */
-public abstract class AbstractModel extends BaseModel implements Identifiable {
+public abstract class AbstractModel extends BaseModel {
+
+    public abstract Serializable getId();
 
     public boolean equals(Object obj) {
         if (obj == null) {

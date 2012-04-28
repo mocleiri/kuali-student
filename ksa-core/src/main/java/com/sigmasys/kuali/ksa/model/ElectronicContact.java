@@ -36,7 +36,7 @@ public class ElectronicContact implements Identifiable {
     private String emailAddress;
 
     /**
-     * Last name
+     * Phone country
      */
     private String phoneCountry;
 
@@ -46,7 +46,7 @@ public class ElectronicContact implements Identifiable {
     private String phoneNumber;
 
     /**
-     * Title
+     * Phone extension
      */
     private String phoneExtension;
 
