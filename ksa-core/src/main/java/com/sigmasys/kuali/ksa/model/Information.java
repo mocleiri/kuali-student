@@ -48,7 +48,7 @@ public class Information implements Identifiable {
     private Integer accessLevel;
 
     /**
-     * Flag info
+     * Responsible Entity
      */
     private String responsibleEntity;
 
