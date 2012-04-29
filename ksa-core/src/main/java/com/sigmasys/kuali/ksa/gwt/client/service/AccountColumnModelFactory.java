@@ -24,15 +24,6 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
     public static final String LABEL_COUNTRY = "Country";
 
 
-    private static final AccountColumnModelFactory instance = new AccountColumnModelFactory();
-
-    public static AccountColumnModelFactory getInstance() {
-        return instance;
-    }
-
-    protected AccountColumnModelFactory() {
-    }
-
     public List<ColumnConfig> getColumnConfigs() {
 
         final DateTimeFormat dateFormat = DateTimeFormat.getFormat(Constants.DATE_FORMAT_US);

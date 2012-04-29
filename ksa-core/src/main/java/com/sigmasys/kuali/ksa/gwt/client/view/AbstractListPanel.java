@@ -210,6 +210,7 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
         if (contextMenu != null) {
             grid.setContextMenu(contextMenu);
         }
+
         grid.setStyleAttribute("borderTop", "none");
 
         // Getting auto expand column name
@@ -218,6 +219,7 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
             grid.setAutoExpandColumn(autoExpandColumn);
             grid.setAutoExpandMax(3000);
         }
+
         add(grid);
 
         Listener<SelectionChangedEvent<M>> selectionChangeListener = new Listener<SelectionChangedEvent<M>>() {
@@ -486,7 +488,7 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
         synchronizeToolBar();
     }
 
-    public void onEmptyRowSelection() {
+    protected void onEmptyRowSelection() {
         hideDetailsPanelOnEmptyRowSelection();
         synchronizeToolBar();
     }
