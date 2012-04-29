@@ -12,10 +12,12 @@ import com.sigmasys.kuali.ksa.model.Constants;
 @SuppressWarnings("unchecked")
 public class ServiceFactory {
 
+    private static final GwtConfigServiceAsync configService;
     private static final GwtAccountServiceAsync accountService;
 
     // Initialization of the remote services
     static {
+        configService = initService(GWT.create(GwtConfigService.class), Constants.CONFIG_SERVICE_URL);
         accountService = initService(GWT.create(GwtAccountService.class), Constants.ACCOUNT_SERVICE_URL);
     }
 
@@ -25,6 +27,10 @@ public class ServiceFactory {
     protected static <T> T initService(Object asyncService, String serviceUrl) {
         ((ServiceDefTarget) asyncService).setServiceEntryPoint(serviceUrl);
         return (T) asyncService;
+    }
+
+    public static GwtConfigServiceAsync getConfigService() {
+           return configService;
     }
 
     public static GwtAccountServiceAsync getAccountService() {

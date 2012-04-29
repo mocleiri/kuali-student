@@ -32,6 +32,7 @@ public interface Constants {
     String TIME_FORMAT_MINUTES = "HH:mm";
 
     // URL mapping constants
+    String CONFIG_SERVICE_URL = "config.service";
     String ACCOUNT_SERVICE_URL = "account.service";
 
 }
