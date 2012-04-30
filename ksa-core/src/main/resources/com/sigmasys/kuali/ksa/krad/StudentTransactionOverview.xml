@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean id="StudentTransactionOverview" parent="Uif-FormView" p:footer.render="false">
+        <property name="title" value="Student Transaction Overview"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransOvrForm"/>
+        <property name="theme">
+            <bean parent="Uif-KradTheme"/>
+        </property>
+        <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
+        <property name="navigation">
+            <ref bean="KSATransOvrVwNav"/>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-Page" p:id="bursaQuickMenuOptionsPage" p:title="Quick Options">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaQuickOptions"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="bursaPersonLookupPage" p:title="Query for Persons">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaQueryByName"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="bursaTransByPersonPage" p:title="Transactions for selected person @{selectedPersonName}">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaTransactionsReviewPage"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="bursaChargePage" p:title="Charge Detail - @{selectedPersonName}">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaChargeReviewSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="bursaPaymentPage" p:title="Payment Detail - @{selectedPersonName}" >
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaPaymentReviewSection"/>
+                        </list>
+                    </property>
+                </bean>
+
+                <!-- Currency stuff -->
+
+                <bean parent="Uif-Page" p:id="bursaCurrencyPage" p:title="Currency Type">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaAddCurrencyType"/>
+                            <ref bean="bursaCurrencyList"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="bursaCurrencyEditPage" p:title="Currency Details (ISO = @{currency.iso})">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaCurrencyDetail"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Student Account navigation menu by tabs -->
+<!--    <bean parent="Uif-TabNavigationGroup" id="StudentTransactionOverview-Menu">
+        <property name="items">
+            <list>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="bursaPersonLookupPage" p:actionLabel="Summary"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsPage" p:actionLabel="Alerts"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HistoryPage" p:actionLabel="History"/>
+            </list>
+        </property>
+    </bean>-->
+
+    <bean id="KSATransOvrVwNav" parent="Uif-MenuNavigationGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-HeaderField-Two" p:headerText="KSA Navigation"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="bursaQuickMenuOptionsPage"
+                      p:actionLabel="Quick Options"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- A quick menu of options with links to other pages -->
+    <bean id="bursaQuickOptions" parent="Uif-VerticalBoxSection"
+        p:layoutManager.orientation="VERTICAL"
+        p:title="Find accounts by name"
+        p:instructionalText="Select a quick navigation link from the options listed here.">
+        <property name="disclosure.render" value="false" />
+        <property name="items">
+            <list>
+                <bean parent="Uif-Link" p:linkLabel="Transactions for a Person" p:target="_self"
+                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
+                <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
+                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+<!--                <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
+                      p:hrefText="currencyList?methodToCall=get&amp;viewId=CurrencyListView"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- Lookup a person, select to view their transactions and drill down to transaction detail -->
+    <bean id="bursaQueryByName" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="Find accounts by name">
+        <property name="disclosure.render" value="false" />
+        <property name="items">
+            <list>
+                <ref bean="bursaFindMatchesByAccountName" />
+                <ref bean="bursaMatchingAccountList" />
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="bursaFindMatchesByAccountName" parent="Uif-HorizontalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Search By Name"
+                      p:instructionalText="Enter a name to search transactions"
+                      p:width="auto" p:propertyName="studentLookupByName" p:required="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="25" p:maxLength="100">
+<!--
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="showTxNameMatches"
+                                          p:value="Show Transaction Match for search criteria" />
+                                </list>
+                            </property>
+-->
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByName" p:actionLabel="Search">
+                    <property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- This is the list of matching accounts and address based on the search by name value -->
+    <!--p:progressiveRenderViaAJAX="true" p:progressiveRender="studentLookupByName eq 'showTxNameMatches'" p:disclosure.render="false"-->
+    <bean id="bursaMatchingAccountList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="3"
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true"
+          p:title="Matching Persons and Description"
+          p:instructionalText="Select a line item to view transactions for the person.">
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
+        <property name="propertyName" value="accountBrowseList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="compositeDefaultPersonName" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="60" p:maxLength="59"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="compositeDefaultPostalAddress" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-Link" p:linkLabel="Select" p:target="_self"
+                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaTransByPersonPage&amp;id=@{#line.id}" />
+                <!--p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- A list of detailed charges and payments for a person 3 -->
+    <bean id="bursaTransactionsReviewPage" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="Selected Transactions"
+          p:instructionalText="The following is a list of transactions for the selected person @{selectedPersonName}">
+        <property name="disclosure.render" value="false" />
+        <property name="items">
+            <list>
+                <ref bean="bursaChargeDetails" />
+                <ref bean="bursaPaymentDetails" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- Charge detail list by person, by Charge transactions -->
+    <bean id="bursaChargeDetails"  parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4"
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true"
+          p:title="Charges"
+          p:instructionalText="Select a line item to view transactions for the person.">
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Charge"/>
+        <property name="propertyName" value="chargeList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
+                      p:constraintText="Requires Date be filled out">
+                    <property name="dependencyConstraints">
+                        <list>
+                            <bean parent="PrerequisiteConstraint" p:propertyName="ledgerDate"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true" p:align="right"/>
+                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaChargePage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <!--<bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
+                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- Payment detail list by person, by payment transactions -->
+    <bean id="bursaPaymentDetails" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4"
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true"
+          p:title="Payments"
+          p:instructionalText="Select a line item to view transactions for the person.">
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Payment"/>
+        <property name="propertyName" value="paymentList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
+                      p:constraintText="Requires Date be filled out">
+                    <property name="dependencyConstraints">
+                        <list>
+                            <bean parent="PrerequisiteConstraint" p:propertyName="ledgerDate"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true" p:align="right"/>
+                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaPaymentPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+<!--
+                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
+                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
+-->
+
+            </list>
+        </property>
+    </bean>
+
+    <!-- -->
+    <bean id="bursaChargeReviewSection" parent="Uif-Disclosure-VerticalBoxSection">
+        <!--<property name="title" value="Charge Details - @{selectedPersonName}"/>-->
+        <property name="items">
+            <list>
+                <ref bean="bursaChargeReviewGrid"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- -->
+    <bean id="bursaChargeReviewGrid" parent="Uif-GridSection">
+        <!--<property name="title" value="Charge Group"/>-->
+        <!--<property name="instructionalText" value="Charge transaction for  @{selectedPersonName}"/>-->
+        <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Charge"/>-->
+        <!--<property name="propertyName" value="charge"/>-->
+        <property name="readOnly" value="true"/>
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Ledger Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+<!--
+                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
+                    </property>
+                </bean>
+-->
+                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.originationDate" p:label="Origination Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.responsibleEntity" p:label="Responsible Entity" p:maxLength="45">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="46"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.amount" p:label="Amount" p:maxLength="21">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.currency.iso" p:label="Currency" p:maxLength="5">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="6" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.statementText" p:label="Statement Description" p:rowSpan="2"
+                      p:labelField.rowSpan="2">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="charge.refundRule" p:label="Refund Rule">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- -->
+    <bean id="bursaPaymentReviewSection" parent="Uif-Disclosure-VerticalBoxSection">
+        <!--<property name="title" value="Payment Details - @{selectedPersonName}"/>-->
+        <property name="items">
+            <list>
+                <ref bean="bursaPaymentReviewGrid"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- -->
+    <bean id="bursaPaymentReviewGrid" parent="Uif-GridSection">
+        <!--<property name="title" value="Payment Group"/>-->
+        <!--<property name="instructionalText" value="Payment transaction for @{selectedPersonName}" />-->
+        <!--<property name="dataObjectClassName" value="com.sigmasys.kuali.ksa.model.Payment"/>-->
+        <!--<property name="propertyName" value="payment"/>-->
+        <property name="readOnly" value="true"/>
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="payment.ledgerDate" p:label="Ledger Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+<!--
+                <bean parent="Uif-InputField" p:propertyName="payment.account" p:label="Account" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
+                    </property>
+                </bean>
+-->             <bean parent="Uif-InputField" p:propertyName="payment.effectiveDate" p:label="Effective Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.originationDate" p:label="Origination Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.responsibleEntity" p:label="Responsible Entity" p:maxLength="45">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="46"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.amount" p:label="Amount" p:maxLength="21">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.currency.iso" p:label="Currency" p:maxLength="5">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="6" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.statementText" p:label="Statement Description" p:rowSpan="2"
+                      p:labelField.rowSpan="2">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.refundRule" p:label="Refund Rule">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Currency views -->
+    <bean id="bursaAddCurrencyType" parent="Uif-HorizontalBoxSection">
+        <property name="title" value="Add Currency Type"/>
+        <property name="instructionalText" value="Input fields to add a currency * denotes a required field"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso" p:labelPlacement="TOP" p:required="true" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="currencyName" p:labelPlacement="TOP" p:required="true" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="currencyDescription" p:labelPlacement="TOP" >
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Paste or key in the description here..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="addCurrType" p:actionLabel="Add">
+                    <property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Collection list of currency types -->
+
+    <bean id="bursaCurrencyList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5">
+        <property name="title" value="View Currency Types"/>
+        <property name="instructionalText"
+                  value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application." />
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="readOnly" value="true"/>
+        <property name="propertyName" value="currencies"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description">
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Statement description..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-Link" p:linkLabel="Delete" p:target="_self"
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>
+                <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;iso=@{#line.iso}"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="bursaCurrencyDetail" parent="Uif-VerticalBoxSection">
+        <property name="title" value="Currency Details View"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="currency.iso" p:labelPlacement="TOP" p:label="Symbol">
+                    <property name="readOnly" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="currency.name" p:label="Name" p:labelPlacement="TOP" p:required="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="currency.description" p:labelPlacement="TOP" >
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Key in the statement description here..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="save"
+                      p:actionLabel="Save">
+                    <!--<property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>-->
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>
