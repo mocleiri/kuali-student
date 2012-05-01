@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
     protected abstract EntityManager getEntityManager();
 
 
-    protected <T> List<T> populateListFromResult(List<T> result) {
+    protected <T extends Serializable> List<T> populateListFromResult(List<T> result) {
         return result;
     }
 
@@ -40,21 +41,21 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
 
         SearchQueryBuilder builder = queryBuilder.copy();
 
-            String hql = builder.buildCountQuery(searchCriteria);
+        String hql = builder.buildCountQuery(searchCriteria);
 
         logger.debug("count query = " + hql);
 
         Query query = getQuery(builder, hql);
 
-            Object countResult = query.getSingleResult();
-            return  countResult instanceof BigDecimal ? ((BigDecimal) countResult).intValue() :
-                    ((Long) countResult).intValue();
+        Object countResult = query.getSingleResult();
+        return countResult instanceof BigDecimal ? ((BigDecimal) countResult).intValue() :
+                ((Long) countResult).intValue();
 
     }
 
-    
-    protected <T> List<T> findEntities(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
-            String sortField, int offset, int limit) throws GwtError {
+
+    protected <T extends Serializable> List<T> findEntities(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
+                                                            String sortField, int offset, int limit) throws GwtError {
 
 
         String hql = queryBuilder.buildQuery(sc, sortDir, sortField);
@@ -79,7 +80,7 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
         long statsBegin = System.currentTimeMillis();
 
         List<T> result = populateListFromResult(query.getResultList());
-        
+
         logger.info("searchEntities done in: " + (System.currentTimeMillis() - statsBegin) + " ms");
 
         return result;
@@ -90,12 +91,14 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
         return queryBuilder.isUseNativeSql() ? em.createNativeQuery(hql) : em.createQuery(hql);
     }
 
-    protected <T> List<T> findEntities(SearchQueryBuilder queryBuilder, SearchCriteria searchCriteria) throws GwtError {
+    protected <T extends Serializable> List<T> findEntities(SearchQueryBuilder queryBuilder,
+                                                            SearchCriteria searchCriteria) throws GwtError {
         return findEntities(queryBuilder, searchCriteria, null, null, 0, UNLIMITED_ITEMS_NUMBER);
     }
-    
-    protected <T> PagingLoadResult<T> buildPagingLoadResult(SearchQueryBuilder queryBuilder, SearchCriteria sc, String sortDir,
-                                                            String sortField, int offset, int limit) throws GwtError {
+
+    protected <T extends Serializable> PagingLoadResult<T> buildPagingLoadResult(SearchQueryBuilder queryBuilder,
+                                                                                 SearchCriteria sc, String sortDir,
+                                                                                 String sortField, int offset, int limit) throws GwtError {
         int numberOfItems = 0;
         if (sc.isRunCount()) {
             numberOfItems = countEntities(sc, queryBuilder);

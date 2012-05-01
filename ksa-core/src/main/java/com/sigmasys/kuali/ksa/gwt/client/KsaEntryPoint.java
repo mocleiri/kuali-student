@@ -9,11 +9,14 @@ import com.sigmasys.kuali.ksa.gwt.client.model.ReferenceData;
 import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
+import com.sigmasys.kuali.ksa.gwt.client.view.KsaDesktop;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class KsaEntryPoint implements EntryPoint {
+
+    private final KsaDesktop desktop = new KsaDesktop();
 
     private MessageBox waitingBox;
     private ReferenceData referenceData;
@@ -44,14 +47,20 @@ public class KsaEntryPoint implements EntryPoint {
 
     protected void loadReferenceData() {
         try {
-            Log.debug("Loading Reference data");
+            Log.debug("Initializing KSA Desktop...");
             // Start loading reference data asynchronously
             ServiceFactory.getConfigService().getReferenceData(new GenericCallback<ReferenceData>() {
                 public void onSuccess(ReferenceData referenceData) {
                     try {
-                        Log.debug("Load Reference data done");
+
                         setReferenceData(referenceData);
+
+                        desktop.init();
+
                         closeWaitingBox();
+
+                        Log.debug("KSA Desktop has been initialized");
+
                     } catch (Throwable t) {
                         handleError(t);
                     }

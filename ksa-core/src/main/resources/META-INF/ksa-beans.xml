@@ -30,8 +30,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <!-- process @Transactional to create transaction proxies -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter"/>
-
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
     <bean id="loadTimeWeaver" class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>

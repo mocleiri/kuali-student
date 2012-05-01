@@ -88,6 +88,7 @@ public class KsaDesktop extends Desktop {
 
 
         final Window ksaWindow = new Window();
+        ksaWindow.setHeading("Kuali Student Accounts");
         ksaWindow.setMinimizable(true);
         ksaWindow.setMaximizable(true);
         ksaWindow.setClosable(true);
@@ -96,7 +97,7 @@ public class KsaDesktop extends Desktop {
         ksaWindow.add(new KsaPanel());
 
 
-        addShortcut("KSA", ksaWindow, "ksa-shortcut");
+        addShortcut("Kuali Student Accounts", ksaWindow, "ksa-shortcut");
 
         // Creating "Start" menu
         final StartMenu menu = taskBar.getStartMenu();
@@ -104,7 +105,7 @@ public class KsaDesktop extends Desktop {
         //menu.setHeading("Admin");
         //menu.setIconStyle("user");
 
-        MenuItem menuItem = new MenuItem("KSA");
+        MenuItem menuItem = new MenuItem("Kuali Student Accounts");
         menuItem.setData(WINDOW_KEY, ksaWindow);
         menuItem.setIconStyle("tabs");
         menuItem.addSelectionListener(listener);

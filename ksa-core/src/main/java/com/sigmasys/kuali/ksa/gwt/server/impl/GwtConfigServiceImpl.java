@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.gwt.client.model.GwtError;
 import com.sigmasys.kuali.ksa.gwt.client.model.ReferenceData;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtConfigService;
+import com.sigmasys.kuali.ksa.gwt.server.AbstractRemoteService;
 import com.sigmasys.kuali.ksa.model.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @UrlMapping(Constants.CONFIG_SERVICE_URL)
 @Service("gwtConfigService")
 @Transactional(readOnly = true)
-public class GwtConfigServiceImpl implements GwtConfigService {
+public class GwtConfigServiceImpl extends AbstractRemoteService implements GwtConfigService {
 
     @Autowired
     private ConfigService configService;

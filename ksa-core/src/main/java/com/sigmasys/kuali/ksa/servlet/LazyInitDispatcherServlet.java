@@ -7,11 +7,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.HandlerAdapter;
+import org.springframework.web.servlet.handler.SimpleServletHandlerAdapter;
+import org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter;
 
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +38,9 @@ public class LazyInitDispatcherServlet extends DispatcherServlet {
 
     @Override
     protected void initStrategies(ApplicationContext context) {
+
         super.initStrategies(context);
+
         urlHandlerMapping = context.getBean(DispatcherServlet.HANDLER_MAPPING_BEAN_NAME, UrlHandlerMapping.class);
 
         // Registering bean names with their URLs retrieved from @UrlMapping within the given context
@@ -44,6 +52,8 @@ public class LazyInitDispatcherServlet extends DispatcherServlet {
                 logger.debug("Added new URL handler, bean name = '" + beanName + "', URL = '" + serviceUrl + "'");
             }
         }
+
+        initHandlerAdapters();
     }
 
     private synchronized void registerHandler(HttpServletRequest request) {
@@ -77,6 +87,23 @@ public class LazyInitDispatcherServlet extends DispatcherServlet {
             }
         }
     }
+
+    private void initHandlerAdapters() {
+        try {
+            Field field = DispatcherServlet.class.getDeclaredField("handlerAdapters");
+            field.setAccessible(true);
+            List<HandlerAdapter> handlerAdapters = (List<HandlerAdapter>) field.get(this);
+            if ( handlerAdapters == null ) {
+                handlerAdapters = new LinkedList<HandlerAdapter>();
+            }
+            handlerAdapters.add(new SimpleServletHandlerAdapter());
+            handlerAdapters.add(new SimpleControllerHandlerAdapter());
+            field.set(this, handlerAdapters);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
 
     @Override
     protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {

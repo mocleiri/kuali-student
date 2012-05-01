@@ -213,5 +213,4 @@ public class AccountModel extends AbstractModel {
         this.daysLate3 = daysLate3;
     }
 
-
 }
