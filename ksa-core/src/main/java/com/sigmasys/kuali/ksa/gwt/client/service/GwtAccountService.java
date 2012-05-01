@@ -6,6 +6,8 @@ import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
 import com.sigmasys.kuali.ksa.gwt.client.model.GwtError;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 
+import java.util.List;
+
 /**
  * GwtAccountService
  *
@@ -15,5 +17,7 @@ public interface GwtAccountService extends RemoteService {
 
     PagingLoadResult<AccountModel> findAccounts(SearchCriteria searchCriteria, String sortDir,
                                                            String sortField, int offset, int limit) throws GwtError;
+
+    List<String> getExistingCountryCodes() throws GwtError;
 
 }

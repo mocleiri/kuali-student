@@ -13,12 +13,16 @@ import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LatePeriod;
 import com.sigmasys.kuali.ksa.model.PostalAddress;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +34,8 @@ import java.util.List;
 @Service("gwtAccountService")
 @Transactional(readOnly = true)
 public class GwtAccountServiceImpl extends AbstractSearchService implements GwtAccountService {
+
+    private static final Log logger = LogFactory.getLog(GwtAccountServiceImpl.class);
 
     private static final String select = "select distinct account ";
 
@@ -112,6 +118,17 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
         model.setStreetAddress(streetAddress);
 
         return model;
+    }
+
+    @Override
+    public List<String> getExistingCountryCodes() throws GwtError {
+        Query query = em.createQuery("select distinct country from PostalAddress order by country asc");
+        List<String> results = query.getResultList();
+        if (results != null && !results.isEmpty()) {
+            List<String> countries = new ArrayList<String>(results);
+            logger.info("Existing countries: " + countries);
+        }
+        return new ArrayList<String>();
     }
 
 }

@@ -181,6 +181,7 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
         }
 
         grid = new Grid<M>(store, cm);
+        grid.setWidth("100%");
         grid.setStripeRows(true);
         grid.setLoadMask(true);
         // grid.setBorders(true);

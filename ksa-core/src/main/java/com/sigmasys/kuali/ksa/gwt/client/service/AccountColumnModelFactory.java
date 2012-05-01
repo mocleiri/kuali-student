@@ -31,41 +31,41 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
 
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
-        ColumnConfig column = new ColumnConfig(AccountModel.COLUMN_ID, LABEL_ID, 60);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        ColumnConfig column = new ColumnConfig(AccountModel.COLUMN_ID, LABEL_ID, 70);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
-        column = new ColumnConfig(AccountModel.COLUMN_CREATION_DATE, LABEL_CREATION_DATE, 75);
+        column = new ColumnConfig(AccountModel.COLUMN_CREATION_DATE, LABEL_CREATION_DATE, 90);
         column.setDateTimeFormat(dateFormat);
         column.setAlignment(HorizontalAlignment.RIGHT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_FIRST_NAME, LABEL_FIRST_NAME, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_LAST_NAME, LABEL_LAST_NAME, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_EMAIL_ADDRESS, LABEL_EMAIL_ADDRESS, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_PHONE_NUMBER, LABEL_PHONE_NUMBER, 80);
         column.setAlignment(HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(AccountModel.COLUMN_STREET_ADDRESS, LABEL_STREET_ADDRESS, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column = new ColumnConfig(AccountModel.COLUMN_STREET_ADDRESS, LABEL_STREET_ADDRESS, 120);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_CITY, LABEL_CITY, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_STATE, LABEL_STATE, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_POSTAL_CODE, LABEL_POSTAL_CODE, 80);
@@ -73,7 +73,7 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
         columns.add(column);
 
         column = new ColumnConfig(AccountModel.COLUMN_COUNTRY, LABEL_COUNTRY, 80);
-        column.setAlignment(HorizontalAlignment.RIGHT);
+        column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
         return columns;
