@@ -216,6 +216,7 @@
     <param name="myplan.cache.config.file">classpath:myplan-ehcache.xml</param>
     <param name="myplan.courseSearch.enable.caching">true</param>
     <param name="ks.courseOffering.enable.caching">true</param>
+    <param name="ks.academicRecord.enable.caching">true</param>
 
     <!--<param name="css.files" override="true">ks-myplan/css/myplan.css,${css.files}</param>-->
 

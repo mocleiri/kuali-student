@@ -105,6 +105,12 @@
         <property name="enabled" value="${ks.courseOffering.enable.caching}"/>
     </bean>
 
+    <bean id="academicRecordCacheAdvisor" class="org.kuali.student.myplan.util.QueryMethodArgsCacheAdvice">
+        <property name="cacheName" value="academicRecordCache" />
+        <property name="cacheManager" ref="myplanCacheManager"/>
+        <property name="enabled" value="${ks.academicRecord.enable.caching}"/>
+    </bean>
+
     <!-- AOP intercepts -->
     <aop:config>
         <aop:aspect id="enumCacheAroundSearch" ref="enumMethodCacheAdvisor">
@@ -166,6 +172,11 @@
             <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwCourseOfferingServiceImpl.getCourseOfferingsForCourseAndTerm(..))" method="getFromCache" />
             <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwCourseOfferingServiceImpl.getCourseOfferingIdsByTermAndSubjectArea(..))" method="getFromCache" />
             <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwCourseOfferingServiceImpl.searchForCourseOfferings(..))" method="getFromCache" />
+        </aop:aspect>
+
+        <aop:aspect id="academicRecordAroundSearch" ref="academicRecordCacheAdvisor">
+            <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwAcademicRecordServiceImpl.getCompletedCourseRecords(..))" method="getFromCache" />
+
         </aop:aspect>
 
         <aop:aspect id="courseSearchCacheAroundSearch" ref="courseSearchMethodCacheAdvisor">
