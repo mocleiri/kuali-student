@@ -122,7 +122,8 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
 
     @Override
     public List<String> getExistingCountryCodes() throws GwtError {
-        Query query = em.createQuery("select distinct country from PostalAddress order by country asc");
+        Query query = em.createQuery("select distinct country from PostalAddress " +
+                "where country is not null order by country asc");
         List<String> results = query.getResultList();
         if (results != null && !results.isEmpty()) {
             List<String> countries = new ArrayList<String>(results);

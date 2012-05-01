@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.gwt.client.model;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  *
  * @author Michael Ivanov
  */
-public abstract class AbstractSearchCriteria implements Serializable {
+public abstract class AbstractSearchCriteria implements Serializable, IsSerializable {
 
     protected String name;
 
