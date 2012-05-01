@@ -83,7 +83,7 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
         model.setCreationDate(account.getCreationDate());
         model.setKimAccount(account.isKimAccount());
         model.setLastKimUpdate(account.getLastKimUpdate());
-        model.setCreditLimit(account.getCreditLimit());
+        model.setCreditLimit(account.getCreditLimit() != null ? account.getCreditLimit().doubleValue() : null);
 
         LatePeriod latePeriod = account.getLatePeriod();
         model.setDaysLate1(latePeriod.getDaysLate1());

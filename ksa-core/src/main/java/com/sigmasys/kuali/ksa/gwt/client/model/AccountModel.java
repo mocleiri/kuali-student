@@ -99,11 +99,11 @@ public class AccountModel extends AbstractModel {
         set(COLUMN_IS_KIM_ACCOUNT, kimAccount);
     }
 
-    public BigDecimal getCreditLimit() {
+    public Double getCreditLimit() {
         return get(COLUMN_CREDIT_LIMIT);
     }
 
-    public void setCreditLimit(BigDecimal creditLimit) {
+    public void setCreditLimit(Double creditLimit) {
         set(COLUMN_CREDIT_LIMIT, creditLimit);
     }
 
