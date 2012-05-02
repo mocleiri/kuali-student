@@ -127,6 +127,7 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
         if (results != null && !results.isEmpty()) {
             List<String> countries = new ArrayList<String>(results);
             logger.info("Existing countries: " + countries);
+            return countries;
         }
         return new ArrayList<String>();
     }

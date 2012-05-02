@@ -23,7 +23,7 @@ import static com.sigmasys.kuali.ksa.gwt.client.service.validator.DateComparator
 
 public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
 
-    private static final int ELEMENT_WIDTH = 180;
+    private static final int ELEMENT_WIDTH = 190;
 
     private EntityNameField userId;
     private EntityNameField firstName;
@@ -70,7 +70,7 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
         panel.add(emailAddressLabel);
         panel.add(emailAddress);
 
-        creationDate = new DateRangeField(Style.Orientation.HORIZONTAL, "From Date", "To Date", 100, 5);
+        creationDate = new DateRangeField(Style.Orientation.HORIZONTAL, "From Date", "To Date", 95, 6);
         creationDate.addToValidator(new DateComparatorValidator(Operation.LESS_OR_EQUAL, new Date()));
         creationDate.setAllowBlank(false);
         Text creationDateLabel = WidgetFactory.createText("Creation Date");
@@ -84,11 +84,12 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
         panel.add(city);
 
         state = new EntityNameField();
-        city.setWidth(ELEMENT_WIDTH);
+        state.setWidth(ELEMENT_WIDTH);
         Text stateLabel = WidgetFactory.createText("State:");
         panel.add(stateLabel);
-        panel.add(city);
+        panel.add(state);
 
+        final ListStore<StringModelData> listStore = new ListStore<StringModelData>();
         country = new ListViewAdapter<StringModelData>();
         country.setDisplayProperty(StringModelData.DISPLAY_VALUE_KEY);
         country.setWidth(ELEMENT_WIDTH / 2);
@@ -96,9 +97,8 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
         ServiceFactory.getAccountService().getExistingCountryCodes(new GenericCallback<List<String>>() {
             @Override
             public void onSuccess(List<String> countries) {
+                listStore.removeAll();
                 if (countries != null) {
-                    ListStore<StringModelData> listStore = country.getListView().getStore();
-                    listStore.removeAll();
                     for (String code : countries) {
                         listStore.add(new StringModelData(code));
                     }

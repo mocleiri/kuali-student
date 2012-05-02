@@ -148,6 +148,7 @@ public abstract class AbstractSearchPanel<M extends BaseModel> extends FormPanel
 
             TableLayout layout = new TableLayout(2);
             layout.setCellSpacing(2);
+            layout.setCellPadding(3);
 
             setLayout(layout);
 
