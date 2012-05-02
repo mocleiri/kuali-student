@@ -22,7 +22,7 @@ public class AccountCompositePanel extends AbstractCompositePanel<AccountModel> 
                 new AccountDetailsPanel(),
                 300,
                 300,
-                250,
+                300,
                 searchCriteria != null
         );
     }
