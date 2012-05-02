@@ -146,9 +146,11 @@ public abstract class AbstractSearchPanel<M extends BaseModel> extends FormPanel
 
             setScrollMode(Scroll.AUTOY);
 
-            TableLayout tl = new TableLayout(2);
-            tl.setCellSpacing(2);
-            setLayout(tl);
+            TableLayout layout = new TableLayout(2);
+            layout.setCellSpacing(2);
+            layout.setCellPadding(3);
+
+            setLayout(layout);
 
             ToolBar tb = getToolBar();
             if (tb != null) {

@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.gwt.client.view;
 
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.Component;
@@ -22,7 +23,7 @@ import static com.sigmasys.kuali.ksa.gwt.client.service.validator.DateComparator
 
 public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
 
-    private static final int ELEMENT_WIDTH = 170;
+    private static final int ELEMENT_WIDTH = 180;
 
     private EntityNameField userId;
     private EntityNameField firstName;
@@ -32,81 +33,99 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
 
     private DateRangeField creationDate;
 
-    private ListViewAdapter<StringModelData> country;
     private EntityNameField city;
+    private EntityNameField state;
+    private ListViewAdapter<StringModelData> country;
 
     @Override
     protected void fillSearchElementsContainer(LayoutContainer panel) {
 
         userId = new EntityNameField();
         userId.setWidth(ELEMENT_WIDTH);
-        Text userIdLabel = WidgetFactory.createText("Account ID");
+        Text userIdLabel = WidgetFactory.createText("Account ID:");
         panel.add(userIdLabel);
         panel.add(userId);
 
         firstName = new EntityNameField();
         firstName.setWidth(ELEMENT_WIDTH);
-        Text firstNameLabel = WidgetFactory.createText("First Name");
+        Text firstNameLabel = WidgetFactory.createText("First Name:");
         panel.add(firstNameLabel);
         panel.add(firstName);
 
         lastName = new EntityNameField();
         lastName.setWidth(ELEMENT_WIDTH);
-        Text lastNameLabel = WidgetFactory.createText("Last Name");
+        Text lastNameLabel = WidgetFactory.createText("Last Name:");
         panel.add(lastNameLabel);
         panel.add(lastName);
 
         phoneNumber = new EntityNameField();
         phoneNumber.setWidth(ELEMENT_WIDTH);
-        Text phoneNumberLabel = WidgetFactory.createText("Phone number");
+        Text phoneNumberLabel = WidgetFactory.createText("Phone number:");
         panel.add(phoneNumberLabel);
         panel.add(phoneNumber);
 
         emailAddress = new EntityNameField();
         emailAddress.setWidth(ELEMENT_WIDTH);
-        Text emailAddressLabel = WidgetFactory.createText("Email address");
+        Text emailAddressLabel = WidgetFactory.createText("Email address:");
         panel.add(emailAddressLabel);
         panel.add(emailAddress);
 
-        creationDate = new DateRangeField("From Date", "To Date");
+        creationDate = new DateRangeField(Style.Orientation.HORIZONTAL, "From Date", "To Date", 100, 5);
         creationDate.addToValidator(new DateComparatorValidator(Operation.LESS_OR_EQUAL, new Date()));
         creationDate.setAllowBlank(false);
         Text creationDateLabel = WidgetFactory.createText("Creation Date");
         panel.add(creationDateLabel);
         panel.add(creationDate);
 
+        city = new EntityNameField();
+        city.setWidth(ELEMENT_WIDTH);
+        Text cityLabel = WidgetFactory.createText("City:");
+        panel.add(cityLabel);
+        panel.add(city);
+
+        state = new EntityNameField();
+        city.setWidth(ELEMENT_WIDTH);
+        Text stateLabel = WidgetFactory.createText("State:");
+        panel.add(stateLabel);
+        panel.add(city);
+
         country = new ListViewAdapter<StringModelData>();
-        country.setWidth(ELEMENT_WIDTH);
-        country.setHeight(200);
+        country.setDisplayProperty(StringModelData.DISPLAY_VALUE_KEY);
+        country.setWidth(ELEMENT_WIDTH / 2);
+        country.setHeight(100);
         ServiceFactory.getAccountService().getExistingCountryCodes(new GenericCallback<List<String>>() {
             @Override
             public void onSuccess(List<String> countries) {
-                if (countries != null && !countries.isEmpty()) {
-                    ListStore<StringModelData> store = country.getListView().getStore();
+                if (countries != null) {
+                    ListStore<StringModelData> listStore = country.getListView().getStore();
+                    listStore.removeAll();
                     for (String code : countries) {
-                        store.add(new StringModelData(code));
+                        listStore.add(new StringModelData(code));
                     }
                 }
             }
         });
-        Text countryLabel = WidgetFactory.createText("Country");
+        Text countryLabel = WidgetFactory.createText("Country:");
         panel.add(countryLabel);
         panel.add(country);
 
-        city = new EntityNameField();
-        city.setWidth(ELEMENT_WIDTH);
-        Text cityLabel = WidgetFactory.createText("City");
-        panel.add(cityLabel);
-        panel.add(city);
-
-
         // TODO -- add form bindings if necessary
+        addFieldBinding(userId, AccountModel.ID);
+        addFieldBinding(firstName, AccountModel.FIRST_NAME);
+        addFieldBinding(lastName, AccountModel.LAST_NAME);
+        addFieldBinding(phoneNumber, AccountModel.PHONE_NUMBER);
+        addFieldBinding(emailAddress, AccountModel.EMAIL_ADDRESS);
+        addFieldBinding(creationDate, AccountModel.CREATION_DATE);
+        addFieldBinding(city, AccountModel.CITY);
+        addFieldBinding(state, AccountModel.STATE);
+        addFieldBinding(country, AccountModel.COUNTRY);
+
     }
 
 
     @Override
     protected Component[] getEnterKeyDownEventAwareComponents() {
-        return new Component[]{userId, firstName, lastName, phoneNumber, emailAddress, creationDate, city};
+        return new Component[]{userId, firstName, lastName, phoneNumber, emailAddress, creationDate, city, state};
     }
 
 }

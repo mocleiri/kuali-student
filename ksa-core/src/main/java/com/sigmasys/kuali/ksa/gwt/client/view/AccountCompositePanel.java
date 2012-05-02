@@ -20,8 +20,8 @@ public class AccountCompositePanel extends AbstractCompositePanel<AccountModel> 
                 new AccountSearchPanel(),
                 new AccountListPanel(),
                 new AccountDetailsPanel(),
-                250,
-                400,
+                300,
+                300,
                 250,
                 searchCriteria != null
         );

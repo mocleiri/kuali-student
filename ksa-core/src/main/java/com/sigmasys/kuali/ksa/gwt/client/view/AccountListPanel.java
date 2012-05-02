@@ -27,7 +27,6 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
 
     private Button addChargeButton;
     private Button makePaymentButton;
-    private Button addInformationButton;
     private Button ageDebtButton;
 
 
@@ -48,14 +47,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             }
         });
 
-        addInformationButton = new Button("Add Information");
-        addInformationButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
-            public void handleEvent(BaseEvent be) {
-                // TODO
-            }
-        });
-
-        ageDebtButton = new Button("Add Information");
+        ageDebtButton = new Button("Age Transactions");
         ageDebtButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
             public void handleEvent(BaseEvent be) {
                 // TODO
@@ -68,8 +60,6 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
         toolBar.add(addChargeButton);
         toolBar.add(new SeparatorToolItem());
         toolBar.add(makePaymentButton);
-        toolBar.add(new SeparatorToolItem());
-        toolBar.add(addInformationButton);
         toolBar.add(new SeparatorToolItem());
         toolBar.add(ageDebtButton);
 
@@ -106,7 +96,6 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
     protected void enableButtons(boolean enabled) {
         addChargeButton.setEnabled(enabled);
         makePaymentButton.setEnabled(enabled);
-        addInformationButton.setEnabled(enabled);
         ageDebtButton.setEnabled(enabled);
     }
 

@@ -22,7 +22,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,19 +36,19 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
 
     private static final Log logger = LogFactory.getLog(GwtAccountServiceImpl.class);
 
-    private static final String select = "select distinct account ";
+    private static final String select = "select distinct account";
 
     private static final String from =
             "from Account account " +
                     "left outer join fetch account.personNames person " +
-                    "left outer join fetch account.postalAddresses postalAddress " +
+                    "left outer join fetch account.postalAddresses address " +
                     "left outer join fetch account.electronicContacts contact " +
                     "left outer join fetch account.statusType statusType " +
-                    "left outer join fetch account.latePeriod latePeriod ";
+                    "left outer join fetch account.latePeriod latePeriod";
 
     private static final String where =
             "      person.default = true and " +
-                    "      postalAddress.default = true and " +
+                    "      address.default = true and " +
                     "      contact.default = true ";
 
     private static final String defaultOrder = "account.creationDate desc";

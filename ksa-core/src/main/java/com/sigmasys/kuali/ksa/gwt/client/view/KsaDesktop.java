@@ -8,7 +8,6 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Window;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
 
@@ -87,15 +86,7 @@ public class KsaDesktop extends Desktop {
         };
 
 
-        final Window ksaWindow = new Window();
-        ksaWindow.setHeading("Kuali Student Accounts");
-        ksaWindow.setMinimizable(true);
-        ksaWindow.setMaximizable(true);
-        ksaWindow.setClosable(true);
-        ksaWindow.setSize(1000, 700);
-        ksaWindow.setLayout(new FitLayout());
-        ksaWindow.add(new KsaPanel());
-
+        final Window ksaWindow = new KsaWindow();
 
         addShortcut("Kuali Student Accounts", ksaWindow, "ksa-shortcut");
 

@@ -22,8 +22,6 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
     private final AbstractListPanel<M> listPanel;
     private final AbstractDetailsPanel<M> detailsPanel;
 
-    private boolean collapseSearchPanel;
-    private boolean wasSearchPanelCollapsedOrExpanded;
     private boolean searchOnOpen;
     private boolean isFirstTime = true;
 
@@ -40,36 +38,14 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
                                   AbstractListPanel<M> listPanel,
                                   AbstractDetailsPanel<M> detailsPanel,
                                   float westWidth,
-                                  float southHeight,
-                                  boolean searchOnOpen,
-                                  boolean collapseSearchPanel) {
-        this(searchPanel, listPanel, detailsPanel, westWidth, 200, southHeight, searchOnOpen, collapseSearchPanel);
-    }
-
-    public AbstractCompositePanel(SearchPanel<M> searchPanel,
-                                  AbstractListPanel<M> listPanel,
-                                  AbstractDetailsPanel<M> detailsPanel,
-                                  float westWidth,
                                   float centerHeight,
                                   float southHeight,
                                   boolean searchOnOpen) {
-        this(searchPanel, listPanel, detailsPanel, westWidth, centerHeight, southHeight, searchOnOpen, false);
-    }
-
-    public AbstractCompositePanel(SearchPanel<M> searchPanel,
-                                  AbstractListPanel<M> listPanel,
-                                  AbstractDetailsPanel<M> detailsPanel,
-                                  float westWidth,
-                                  float centerHeight,
-                                  float southHeight,
-                                  boolean searchOnOpen,
-                                  boolean collapseSearchPanel) {
 
         this.listPanel = listPanel;
         this.detailsPanel = detailsPanel;
         this.searchPanel = searchPanel;
         this.searchOnOpen = searchOnOpen;
-        this.collapseSearchPanel = collapseSearchPanel;
 
         setLayout(new BorderLayout());
 
@@ -79,7 +55,7 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
         if (listPanel != null && detailsPanel != null) {
             southData = new BorderLayoutData(LayoutRegion.SOUTH, southHeight);
             southData.setSplit(true);
-            southData.setCollapsible(isSearchPanelCollapsible());
+            southData.setCollapsible(true);
             southData.setFloatable(true);
             southData.setMargins(new Margins(5, 0, 0, 0));
             detailsPanel.setListPanel(listPanel);
@@ -149,18 +125,13 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
     @Override
     protected void onAttach() {
         super.onAttach();
-        Log.debug("CaseViewer onAttach onAttach onAttach onAttach");
-        if (!wasSearchPanelCollapsedOrExpanded && searchPanel != null) {
-            if (collapseSearchPanel) {
-                searchPanel.collapse();
-            } else {
-                searchPanel.expand();
-            }
-            wasSearchPanelCollapsedOrExpanded = true;
+        if (searchPanel != null) {
+            searchPanel.expand();
         }
+
         if (searchOnOpen && isFirstTime) {
             isFirstTime = false;
-            Log.debug("CaseViewer (" + getClass() + ") search()");
+            Log.debug("AbstractCompositePanel (" + getClass() + ") search()");
             Timer t = new Timer() {
                 @Override
                 public void run() {
@@ -168,12 +139,6 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
                 }
             };
             t.schedule(10);
-        }
-    }
-
-    protected void collapseSearchPanel() {
-        if (searchPanel != null) {
-            searchPanel.collapse();
         }
     }
 
@@ -187,14 +152,6 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
 
     public AbstractDetailsPanel<M> getDetailsPanel() {
         return detailsPanel;
-    }
-
-    public boolean getCollapseSearchPanel() {
-        return collapseSearchPanel;
-    }
-
-    public void setCollapseSearchPanel(boolean collapseSearchPanel) {
-        this.collapseSearchPanel = collapseSearchPanel;
     }
 
     public void search() {
@@ -213,7 +170,4 @@ public class AbstractCompositePanel<M extends BaseModel> extends LayoutContainer
         }
     }
 
-    protected boolean isSearchPanelCollapsible() {
-        return true;
-    }
 }

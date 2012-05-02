@@ -323,13 +323,12 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
     @Override
     protected void onAttach() {
         super.onAttach();
-        Log.debug("CaseListPanel onAttach onAttach onAttach onAttach");
         if (loadFirstPageOnCreation && firstTime) {
             firstTime = false;
             new Timer() {
                 @Override
                 public void run() {
-                    Log.debug("CaseListPanel (" + getClass() + ") loadPageWithZeroOffset()");
+                    Log.debug("AbstractListPanel (" + getClass() + ") loadPageWithZeroOffset()");
                     loadPageWithZeroOffset();
                 }
             }.schedule(2);

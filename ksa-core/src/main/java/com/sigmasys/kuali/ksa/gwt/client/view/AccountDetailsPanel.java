@@ -45,74 +45,81 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
     public AccountDetailsPanel() {
 
+        setHeading("Account Details");
+
         setScrollMode(Style.Scroll.AUTO);
 
         VerticalPanel panel = new VerticalPanel();
         panel.setHorizontalAlign(Style.HorizontalAlignment.LEFT);
 
         TableLayout layout = new TableLayout(4);
+        layout.setCellPadding(10);
 
         contactPanel = new LayoutContainer(layout);
-        contactPanel.add(WidgetFactory.createTextBold("Account ID"));
-        contactPanel.add(WidgetFactory.createTextBold("User Name"));
-        contactPanel.add(WidgetFactory.createTextBold("Address"));
-        contactPanel.add(WidgetFactory.createTextBold("Phone #"));
+        contactPanel.add(WidgetFactory.createText("Account ID"));
+        contactPanel.add(WidgetFactory.createText("User Name"));
+        contactPanel.add(WidgetFactory.createText("Address"));
+        contactPanel.add(WidgetFactory.createText("Phone #"));
         contactPanel.add(userId);
         contactPanel.add(userName);
         contactPanel.add(address);
         contactPanel.add(phone);
 
         layout = new TableLayout(6);
+        layout.setCellPadding(10);
 
         statusPanel = new LayoutContainer(layout);
-        statusPanel.add(WidgetFactory.createTextBold("Past Due"));
-        statusPanel.add(WidgetFactory.createTextBold("Balance"));
-        statusPanel.add(WidgetFactory.createTextBold("Future"));
-
-        TableData td = new TableData();
-        td.setColspan(3);
-        statusPanel.add(WidgetFactory.createTextBold("Deferments"), td);
+        statusPanel.add(WidgetFactory.createText("Past Due"));
+        statusPanel.add(WidgetFactory.createText("Balance"));
+        statusPanel.add(WidgetFactory.createText("Future"));
+        statusPanel.add(WidgetFactory.createText("Deferments"));
+        statusPanel.add(addChargeButton);
+        statusPanel.add(makePaymentButton);
 
         statusPanel.add(pastDue);
         statusPanel.add(balance);
         statusPanel.add(future);
+
+        TableData td = new TableData();
+        td.setColspan(3);
         statusPanel.add(deferments);
 
-        statusPanel.add(addChargeButton);
-        statusPanel.add(makePaymentButton);
 
-        layout = new TableLayout(7);
+        layout = new TableLayout(6);
+        layout.setCellPadding(10);
 
         ageDebtPanel = new LayoutContainer(layout);
-        ageDebtPanel.add(WidgetFactory.createTextBold("Last age date"));
-        ageDebtPanel.add(WidgetFactory.createTextBold("30"));
-        ageDebtPanel.add(WidgetFactory.createTextBold("60"));
-
-        td = new TableData();
-        td.setColspan(3);
-
-        ageDebtPanel.add(WidgetFactory.createTextBold("90"), td);
+        ageDebtPanel.add(WidgetFactory.createText("Last Age Date"));
+        ageDebtPanel.add(WidgetFactory.createText("30"));
+        ageDebtPanel.add(WidgetFactory.createText("60"));
+        ageDebtPanel.add(WidgetFactory.createText("90"));
 
         ignoreDefermentCheckBox = new CheckBox();
         ignoreDefermentCheckBox.setValue(true);
         ignoreDefermentCheckBox.setBoxLabel("Ignore Deferment");
 
-        ageDebtPanel.add(lastAgeDate);
-        ageDebtPanel.add(latePeriod1);
-        ageDebtPanel.add(latePeriod2);
-        ageDebtPanel.add(latePeriod3);
         ageDebtPanel.add(ignoreDefermentCheckBox);
         ageDebtPanel.add(ageDebtButton);
 
-        panel.add(WidgetFactory.createTextBold("<h1>Account Information</h1>"));
+        ageDebtPanel.add(lastAgeDate);
+        ageDebtPanel.add(latePeriod1);
+        ageDebtPanel.add(latePeriod2);
+
+        td = new TableData();
+        td.setColspan(3);
+        ageDebtPanel.add(latePeriod3, td);
+
+
+        panel.add(WidgetFactory.createTextBold("Account Information"));
         panel.add(contactPanel);
 
-        panel.add(WidgetFactory.createTextBold("<h1>Account Status</h1>"));
+        panel.add(WidgetFactory.createTextBold("Account Status"));
         panel.add(statusPanel);
 
-        panel.add(WidgetFactory.createTextBold("<h1>Aged Transactions</h1>"));
+        panel.add(WidgetFactory.createTextBold("Aged Transactions"));
         panel.add(ageDebtPanel);
 
+        add(panel);
 
     }
 
@@ -125,11 +132,19 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         }
 
         userId.setText(model.getId());
-        userName.setText(model.getFirstName() + " " +
-                ((model.getMiddleName() != null) ? model.getMiddleName() : "") +
-                model.getLastName());
-        address.setText(model.getCountry() + ", " + model.getPostalCode() + ", " +
-                model.getState() + ", " + model.getCity() + ", " + model.getStreetAddress());
+
+        userName.setText(
+                ((model.getFirstName() != null) ? model.getFirstName() : "") + " " +
+                        ((model.getMiddleName() != null) ? model.getMiddleName() : "") +
+                        ((model.getLastName() != null) ? model.getLastName() : ""));
+
+        address.setText(
+                model.getStreetAddress() + ", " +
+                        model.getCity() + ", " +
+                        model.getState() + ", " +
+                        model.getPostalCode() + ", " +
+                        model.getCountry());
+
         phone.setText(model.getPhoneNumber());
 
         // TODO - populate the other fields
