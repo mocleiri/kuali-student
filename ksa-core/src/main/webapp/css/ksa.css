@@ -126,7 +126,7 @@
 }
 
 .icon-calendar {
-    background-image: url(../images/icons/calendar-16x16.png) !important;
+    background-image: url(../images/icons/calendar-16x16.gif) !important;
 }
 
 .icon-owner {
@@ -150,7 +150,7 @@
 }
 
 .icon-upload {
-    background-image: url(../images/icons/upload-16x16.png) !important;
+    background-image: url(../images/icons/upload-16x16.gif) !important;
 }
 
 .icon-download {
@@ -230,7 +230,7 @@
 }
 
 .icon-add {
-    background-image: url(../images/icons/add-16x16.png) !important;
+    background-image: url(../images/icons/add-16x16.gif) !important;
 }
 
 .icon-plugin {

@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.gwt.client.view;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Text;
@@ -23,7 +24,7 @@ import static com.sigmasys.kuali.ksa.gwt.client.service.validator.DateComparator
 
 public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
 
-    private static final int ELEMENT_WIDTH = 190;
+    private static final int ELEMENT_WIDTH = 200;
 
     private EntityNameField userId;
     private EntityNameField firstName;
@@ -72,8 +73,8 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
 
         creationDate = new DateRangeField(Style.Orientation.HORIZONTAL, "From Date", "To Date", 95, 6);
         creationDate.addToValidator(new DateComparatorValidator(Operation.LESS_OR_EQUAL, new Date()));
-        creationDate.setAllowBlank(false);
-        Text creationDateLabel = WidgetFactory.createText("Creation Date");
+        creationDate.setAllowBlank(true);
+        Text creationDateLabel = WidgetFactory.createText("Creation Date:");
         panel.add(creationDateLabel);
         panel.add(creationDate);
 
@@ -89,18 +90,17 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
         panel.add(stateLabel);
         panel.add(state);
 
-        final ListStore<StringModelData> listStore = new ListStore<StringModelData>();
-        country = new ListViewAdapter<StringModelData>();
+        country = new ListViewAdapter<StringModelData>( new ListStore<StringModelData>());
         country.setDisplayProperty(StringModelData.DISPLAY_VALUE_KEY);
         country.setWidth(ELEMENT_WIDTH / 2);
         country.setHeight(100);
         ServiceFactory.getAccountService().getExistingCountryCodes(new GenericCallback<List<String>>() {
             @Override
             public void onSuccess(List<String> countries) {
-                listStore.removeAll();
                 if (countries != null) {
                     for (String code : countries) {
-                        listStore.add(new StringModelData(code));
+                        Log.debug("Adding country code: " + code);
+                        country.addToStore(new StringModelData(code));
                     }
                 }
             }

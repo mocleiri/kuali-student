@@ -49,6 +49,9 @@ public class DateComparatorValidator implements Validator {
         DateField dateField = (DateField) field;
 
         if (StringUtils.isEmpty(value)) {
+            if (dateField.getAllowBlank()) {
+                return null;
+            }
             return "Date field cannot be empty";
         }
 

@@ -59,7 +59,7 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
 
 
         String hql = queryBuilder.buildQuery(sc, sortDir, sortField);
-        logger.debug("searchEntities HQL:" + hql);
+        logger.debug("findEntities HQL:" + hql);
         Query query = getQuery(queryBuilder, hql);
 
         if (limit != UNLIMITED_ITEMS_NUMBER || !sc.isUnlimitedRows()) {
@@ -81,7 +81,7 @@ public abstract class AbstractSearchService extends AbstractRemoteService {
 
         List<T> result = populateListFromResult(query.getResultList());
 
-        logger.info("searchEntities done in: " + (System.currentTimeMillis() - statsBegin) + " ms");
+        logger.info("findEntities done in: " + (System.currentTimeMillis() - statsBegin) + " ms");
 
         return result;
     }

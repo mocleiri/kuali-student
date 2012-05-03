@@ -34,6 +34,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
     protected ToolBar createTopComponent() {
 
         addChargeButton = new Button("Add Charge");
+        addChargeButton.setIconStyle("icon-add");
         addChargeButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
             public void handleEvent(BaseEvent be) {
                 // TODO
@@ -41,6 +42,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
         });
 
         makePaymentButton = new Button("Make Payment");
+        makePaymentButton.setIconStyle("icon-upload");
         makePaymentButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
             public void handleEvent(BaseEvent be) {
                 // TODO
@@ -48,6 +50,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
         });
 
         ageDebtButton = new Button("Age Transactions");
+        ageDebtButton.setIconStyle("icon-calendar");
         ageDebtButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
             public void handleEvent(BaseEvent be) {
                 // TODO

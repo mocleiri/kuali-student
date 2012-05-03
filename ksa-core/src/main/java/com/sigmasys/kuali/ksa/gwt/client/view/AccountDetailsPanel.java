@@ -6,6 +6,7 @@ import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
@@ -32,9 +33,9 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
     protected final CheckBox ignoreDefermentCheckBox;
 
-    protected final Button addChargeButton = new Button("Add Charge");
-    protected final Button makePaymentButton = new Button("Make Payment");
-    protected final Button ageDebtButton = new Button("Age Transactions");
+    protected final Button addChargeButton;
+    protected final Button makePaymentButton;
+    protected final Button ageDebtButton;
 
     protected final LayoutContainer contactPanel;
     protected final LayoutContainer statusPanel;
@@ -49,8 +50,20 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
         setScrollMode(Style.Scroll.AUTO);
 
+        setLayout(new FitLayout());
+
         VerticalPanel panel = new VerticalPanel();
         panel.setHorizontalAlign(Style.HorizontalAlignment.LEFT);
+        panel.setStyleName("bg-white");
+
+        addChargeButton = new Button("Add Charge");
+        addChargeButton.setIconStyle("icon-add");
+
+        makePaymentButton = new Button("Make Payment");
+        makePaymentButton.setIconStyle("icon-upload");
+
+        ageDebtButton = new Button("Age Transactions");
+        ageDebtButton.setIconStyle("icon-calendar");
 
         TableLayout layout = new TableLayout(4);
         layout.setCellPadding(10);
