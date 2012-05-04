@@ -4,14 +4,13 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.*;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridSelectionModel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.TableData;
-import com.extjs.gxt.ui.client.widget.layout.TableLayout;
+import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.gwt.user.client.Command;
 import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
 import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
@@ -156,13 +155,13 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         ageDebtPanel.add(lateAmount3, td);
 
 
-        panel.add(WidgetFactory.createTextBold("Account Information"));
+        panel.add(WidgetFactory.createTextBold("&nbsp;Account Information"));
         panel.add(contactPanel);
 
-        panel.add(WidgetFactory.createTextBold("Account Status"));
+        panel.add(WidgetFactory.createTextBold("&nbsp;Account Status"));
         panel.add(statusPanel);
 
-        panel.add(WidgetFactory.createTextBold("Aged Transactions"));
+        panel.add(WidgetFactory.createTextBold("&nbsp;Aged Transactions"));
         panel.add(ageDebtPanel);
 
         add(panel);
@@ -289,7 +288,10 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
             @Override
             protected void init() {
-                add(WidgetFactory.createTextBold(message));
+                setLayout(new BorderLayout());
+                BorderLayoutData layoutData = new BorderLayoutData(Style.LayoutRegion.CENTER);
+                layoutData.setMargins(new Margins(10, 10, 10, 10));
+                add(WidgetFactory.createTextBold(message), layoutData);
             }
 
             @Override
