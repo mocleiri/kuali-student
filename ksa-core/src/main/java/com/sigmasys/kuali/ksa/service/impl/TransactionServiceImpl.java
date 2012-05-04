@@ -1,16 +1,20 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Transaction service JPA implementation.
@@ -25,6 +29,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     private static final Log logger = LogFactory.getLog(TransactionServiceImpl.class);
 
+    @Autowired
+    private CurrencyService currencyService;
 
     private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
         Query query = em.createQuery("select t from " + entityType.getName() + " t " +
@@ -53,6 +59,56 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         List<T> transactions = query.getResultList();
         return (transactions != null && !transactions.isEmpty()) ? transactions.get(0) : null;
     }
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param id            Transaction type ID
+     * @param userId        Account ID
+     * @param effectiveDate Transaction effective Date
+     * @param amount        Transaction amount
+     * @return new Transaction instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Transaction createTransaction(TransactionTypeId id, String userId, Date effectiveDate, BigDecimal amount) {
+
+        TransactionType transactionType = em.find(TransactionType.class, id);
+        if (transactionType == null) {
+            String errMsg = "Transaction type does not exist for the given ID = " + id;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Account account = em.find(Account.class, userId);
+        if (account == null) {
+            String errMsg = "Account does not exist for the given ID = " + userId;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        String currencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+        Currency currency = currencyService.getCurrency(currencyCode);
+        if (currency == null) {
+            String errMsg = "Currency does not exist for the given ISO code = " + currencyCode;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Transaction transaction = (transactionType instanceof CreditType) ? new Charge() : new Payment();
+
+        transaction.setTransactionType(transactionType);
+        transaction.setAccount(account);
+        transaction.setCurrency(currency);
+
+        transaction.setEffectiveDate(effectiveDate);
+        transaction.setNativeAmount(amount);
+
+        persistTransaction(transaction);
+
+        return transaction;
+    }
+
 
     /**
      * Returns Transaction by ID

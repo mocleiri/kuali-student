@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.springframework.util.Assert;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,6 +23,36 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private AccountService accountService;
+
+    @Before
+    public void setUpWithinTransaction() {
+        // set up test data within the transaction
+        String userId = "admin";
+        accountService.getOrCreateAccount(userId);
+    }
+
+    @Test
+    public void createTransactions() throws Exception {
+
+        TransactionTypeId id = new TransactionTypeId("1020", 1);
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getCurrency());
+
+        Assert.isTrue("USD".equals(transaction.getCurrency().getIso()));
+        Assert.isTrue("admin".equals(transaction.getAccount().getId()));
+        Assert.isTrue(new Date().after(transaction.getEffectiveDate()));
+        Assert.isTrue(new BigDecimal(10e5).equals(transaction.getNativeAmount()));
+
+    }
 
     @Test
     public void getTransactions() throws Exception {

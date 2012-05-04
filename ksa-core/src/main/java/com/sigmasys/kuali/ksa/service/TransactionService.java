@@ -1,12 +1,10 @@
 package com.sigmasys.kuali.ksa.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
-import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.Deferment;
-import com.sigmasys.kuali.ksa.model.Payment;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.*;
 
 /**
  * Transaction service declares business operations on Transaction and related
@@ -16,6 +14,18 @@ import com.sigmasys.kuali.ksa.model.Transaction;
  * @author Michael Ivanov
  */
 public interface TransactionService {
+
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param id Transaction type ID
+     * @param userId Account ID
+     * @param effectiveDate Transaction effective Date
+     * @param amount Transaction amount
+     * @return new Transaction instance
+     */
+    Transaction createTransaction(TransactionTypeId id, String userId, Date effectiveDate, BigDecimal amount);
 
 
     /**
