@@ -17,6 +17,7 @@ import org.junit.runners.Suite;
         TransactionServiceTest.class,
         CurrencyServiceTest.class,
         AccountServiceTest.class,
+        ActivityServiceTest.class,
         KimServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 

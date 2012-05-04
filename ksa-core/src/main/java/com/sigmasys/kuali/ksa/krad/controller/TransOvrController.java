@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
-import static com.sigmasys.kuali.ksa.util.CommonUtils.*;
-
 @Controller
 @RequestMapping(value = "/transOvrVw")
 public class TransOvrController extends UifControllerBase {
