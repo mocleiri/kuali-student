@@ -390,7 +390,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         electronicContact.setCreatorId(creatorId);
         electronicContact.setLastUpdate(creationDate);
         electronicContact.setDefault(true);
-        electronicContact.setKimEmailAddressType(person.getEmailAddress());
+        electronicContact.setEmailAddress(person.getEmailAddress());
         electronicContact.setPhoneNumber(person.getPhoneNumber());
         electronicContact.setPhoneCountry(person.getAddressCountryCode());
 
