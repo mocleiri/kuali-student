@@ -35,7 +35,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void createTransactions() throws Exception {
+    public void createTransaction() throws Exception {
 
         TransactionTypeId id = new TransactionTypeId("1020", 1);
 
