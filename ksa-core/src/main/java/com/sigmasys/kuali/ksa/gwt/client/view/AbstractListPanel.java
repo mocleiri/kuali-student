@@ -44,8 +44,6 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
     private Button selectOnAllPagesItem;
     private LabelToolItem statusLabel;
 
-    private Long startLoadingTime, endLoadingTime;
-
     private AbstractDetailsPanel<M> detailsPanel;
     private SearchPanel<M> searchPanel;
 
@@ -154,14 +152,11 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
                 setGridDisabled(false);
                 setPagingToolbarDisabled(false);
 
-                endLoadingTime = System.currentTimeMillis();
-                if (startLoadingTime != null) {
-                    Log.debug("Loading is done in " + (endLoadingTime - startLoadingTime) + " ms");
-                }
                 // To remove vertical scroll bar and show top of the grid.
                 if (grid.getStore().getCount() > 0) {
                     grid.getView().focusRow(0);
                 }
+
                 columnModelFactory.processPostLoading(be);
                 undoSelectOnAllPages();
             }
@@ -419,12 +414,10 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
     }
 
     public void loadPageWithZeroOffset() {
-        startLoadingTime = System.currentTimeMillis();
         pagingLoader.load(0, getNumberOfItemsPerPage());
     }
 
     public void loadPageWithCurrentOffsetAndLimit() {
-        startLoadingTime = System.currentTimeMillis();
         pagingLoader.load();
     }
 

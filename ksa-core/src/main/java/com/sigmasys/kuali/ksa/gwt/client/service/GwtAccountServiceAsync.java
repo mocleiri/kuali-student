@@ -20,4 +20,14 @@ public interface GwtAccountServiceAsync  {
 
     void getExistingCountryCodes(AsyncCallback<List<String>> callback);
 
+    void getOutstandingBalance(String userId, boolean ignoreDeferment, AsyncCallback<Double> callback);
+
+    void getDueBalance(String userId, boolean ignoreDeferment, AsyncCallback<Double> callback);
+
+    void getUnallocatedBalance(String userId, AsyncCallback<Double> callback);
+
+    void getDeferredAmount(String userId, AsyncCallback<Double> callback);
+
+    void ageDebt(String userId, boolean ignoreDeferment, AsyncCallback<AccountModel> callback);
+
 }

@@ -72,39 +72,39 @@ public class AbstractDetailsContainer extends ContentPanel {
         addTo(container, label, tooltip, value, true);
     }
 
-    protected String displayDouble(Double number) {
+    public static String displayDouble(Double number) {
         return number == null ? "" : number.toString();
     }
 
-    protected String displayDouble2(Double number) {
+    public static String displayDouble2(Double number) {
         return number == null ? "" : DOUBLE2_DISPLAY_FORMAT.format(number);
     }
 
-    protected String displayLong(Long number) {
+    public static String displayLong(Long number) {
         return number == null ? "" : LONG_DISPLAY_FORMAT.format(number);
     }
 
-    protected String displayInt(Integer number) {
+    public static String displayInt(Integer number) {
         return number == null ? "" : LONG_DISPLAY_FORMAT.format(number);
     }
 
-    protected String displayText(String text) {
+    public static String displayText(String text) {
         return text == null ? "" : text.trim();
     }
 
-    protected String displayDate(Date date) {
+    public static String displayDate(Date date) {
         return date == null ? "" : DATE_DISPLAY_FORMAT.format(date);
     }
 
-    protected String displayTimeStamp(Date date) {
+    public static String displayTimeStamp(Date date) {
         return date == null ? "" : TIMESTAMP_DISPLAY_FORMAT.format(date);
     }
 
-    protected String displayTimeOnly(Date date) {
+    public static String displayTimeOnly(Date date) {
         return date == null ? "" : TIME_DISPLAY_FORMAT.format(date);
     }
 
-    protected String displayTimestampNoMs(Date date) {
+    public static String displayTimestampNoMs(Date date) {
         return date == null ? "" : TIMESTAMP_DISPLAY_FORMAT_NO_MS.format(date);
     }
 

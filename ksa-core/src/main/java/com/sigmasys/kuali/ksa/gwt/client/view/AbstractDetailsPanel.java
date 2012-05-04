@@ -6,6 +6,8 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Text;
 
+import java.util.Date;
+
 /**
  * AbstractDetailsPanel
  *
@@ -52,6 +54,30 @@ public abstract class AbstractDetailsPanel<M extends BaseModel> extends ContentP
 
     protected void addTo(LayoutContainer container, String label, Text value) {
         AbstractDetailsContainer.addTo(container, label, value);
+    }
+
+    protected String displayDouble2(Double number) {
+        return AbstractDetailsContainer.displayDouble2(number);
+    }
+
+    protected String displayLong(Long number) {
+        return AbstractDetailsContainer.displayLong(number);
+    }
+
+    protected String displayInt(Integer number) {
+        return AbstractDetailsContainer.displayInt(number);
+    }
+
+    protected String displayDate(Date date) {
+        return AbstractDetailsContainer.displayDate(date);
+    }
+
+    protected String displayTimeStamp(Date date) {
+        return AbstractDetailsContainer.displayTimeStamp(date);
+    }
+
+    protected String displayTimeOnly(Date date) {
+        return AbstractDetailsContainer.displayTimeOnly(date);
     }
 
 }

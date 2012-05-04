@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.gwt.client.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -41,7 +40,7 @@ public class AccountModel extends AbstractModel {
     public static final String COLUMN_CREDIT_LIMIT = "credit_limit";
     public static final String COLUMN_FIRST_NAME = "first_name";
     public static final String COLUMN_MIDDLE_NAME = "middle_name";
-    public static final String COLUMN_LAST_NAME = "last_Name";
+    public static final String COLUMN_LAST_NAME = "last_name";
     public static final String COLUMN_EMAIL_ADDRESS = "email_address";
     public static final String COLUMN_PHONE_NUMBER = "phone_number";
     public static final String COLUMN_COUNTRY = "country";
@@ -52,10 +51,14 @@ public class AccountModel extends AbstractModel {
 
 
     private Integer daysLate1;
-
     private Integer daysLate2;
-
     private Integer daysLate3;
+
+    private Double amountLate1;
+    private Double amountLate2;
+    private Double amountLate3;
+
+    private Date lateLastUpdate;
 
 
     public String getId() {
@@ -213,4 +216,35 @@ public class AccountModel extends AbstractModel {
         this.daysLate3 = daysLate3;
     }
 
+    public Double getAmountLate1() {
+        return amountLate1;
+    }
+
+    public void setAmountLate1(Double amountLate1) {
+        this.amountLate1 = amountLate1;
+    }
+
+    public Double getAmountLate2() {
+        return amountLate2;
+    }
+
+    public void setAmountLate2(Double amountLate2) {
+        this.amountLate2 = amountLate2;
+    }
+
+    public Double getAmountLate3() {
+        return amountLate3;
+    }
+
+    public void setAmountLate3(Double amountLate3) {
+        this.amountLate3 = amountLate3;
+    }
+
+    public Date getLateLastUpdate() {
+        return lateLastUpdate;
+    }
+
+    public void setLateLastUpdate(Date lateLastUpdate) {
+        this.lateLastUpdate = lateLastUpdate;
+    }
 }

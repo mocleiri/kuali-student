@@ -1,35 +1,42 @@
 package com.sigmasys.kuali.ksa.gwt.client.view;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.Text;
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
+import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.*;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridSelectionModel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
+import com.google.gwt.user.client.Command;
 import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
+import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
+import com.sigmasys.kuali.ksa.gwt.client.service.GwtAccountServiceAsync;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
+import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
+import com.sigmasys.kuali.ksa.gwt.client.view.widget.OkCancelDialog;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
 
 public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
-    protected final Text pastDue = WidgetFactory.createText("");
-    protected final Text balance = WidgetFactory.createText("");
-    protected final Text future = WidgetFactory.createText("");
-    protected final Text deferments = WidgetFactory.createText("");
+    protected final Text pastDue = WidgetFactory.createStyledText("", "text-link");
+    protected final Text balance = WidgetFactory.createStyledText("", "text-link");
+    protected final Text future = WidgetFactory.createStyledText("", "text-link");
+    protected final Text deferment = WidgetFactory.createStyledText("", "text-link");
 
-    protected final Text userId = WidgetFactory.createText("");
-    protected final Text userName = WidgetFactory.createText("");
-    protected final Text address = WidgetFactory.createText("");
-    protected final Text phone = WidgetFactory.createText("");
+    protected final Text userId = WidgetFactory.createStyledText("", "text-link");
+    protected final Text userName = WidgetFactory.createStyledText("", "text-link");
+    protected final Text address = WidgetFactory.createStyledText("", "text-link");
+    protected final Text phone = WidgetFactory.createStyledText("", "text-link");
 
-    protected final Text lastAgeDate = WidgetFactory.createText("");
-    protected final Text latePeriod1 = WidgetFactory.createText("");
-    protected final Text latePeriod2 = WidgetFactory.createText("");
-    protected final Text latePeriod3 = WidgetFactory.createText("");
-
+    protected final Text lastAgeDate = WidgetFactory.createStyledText("", "text-link");
+    protected final Text lateAmount1 = WidgetFactory.createStyledText("", "text-link");
+    protected final Text lateAmount2 = WidgetFactory.createStyledText("", "text-link");
+    protected final Text lateAmount3 = WidgetFactory.createStyledText("", "text-link");
 
     protected final CheckBox ignoreDefermentCheckBox;
 
@@ -46,6 +53,9 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
     public AccountDetailsPanel() {
 
+        final int CELL_PADDING = 10;
+        final int CELL_SPACING = 0;
+
         setHeading("Account Details");
 
         setScrollMode(Style.Scroll.AUTO);
@@ -57,16 +67,37 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         panel.setStyleName("bg-white");
 
         addChargeButton = new Button("Add Charge");
-        addChargeButton.setIconStyle("icon-add");
+        addChargeButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
+            public void handleEvent(BaseEvent be) {
+                // TODO
+                createYesNoDialog("Add Charge", "Are you sure you want to add a charge?", null).show();
+            }
+        });
 
         makePaymentButton = new Button("Make Payment");
-        makePaymentButton.setIconStyle("icon-upload");
+        makePaymentButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
+            public void handleEvent(BaseEvent be) {
+                // TODO
+                createYesNoDialog("Make Payment", "Are you sure you want to make a payment?", null).show();
+            }
+        });
 
         ageDebtButton = new Button("Age Transactions");
-        ageDebtButton.setIconStyle("icon-calendar");
+        ageDebtButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
+            public void handleEvent(BaseEvent be) {
+                Command command = new Command() {
+                    @Override
+                    public void execute() {
+                        ageDebt();
+                    }
+                };
+                createYesNoDialog("Age Transactions", "Are you sure you want to age transactions?", command).show();
+            }
+        });
 
         TableLayout layout = new TableLayout(4);
-        layout.setCellPadding(10);
+        layout.setCellPadding(CELL_PADDING);
+        layout.setCellSpacing(CELL_SPACING);
 
         contactPanel = new LayoutContainer(layout);
         contactPanel.add(WidgetFactory.createText("Account ID"));
@@ -79,13 +110,14 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         contactPanel.add(phone);
 
         layout = new TableLayout(6);
-        layout.setCellPadding(10);
+        layout.setCellPadding(CELL_PADDING);
+        layout.setCellSpacing(CELL_SPACING);
 
         statusPanel = new LayoutContainer(layout);
         statusPanel.add(WidgetFactory.createText("Past Due"));
         statusPanel.add(WidgetFactory.createText("Balance"));
         statusPanel.add(WidgetFactory.createText("Future"));
-        statusPanel.add(WidgetFactory.createText("Deferments"));
+        statusPanel.add(WidgetFactory.createText("Deferment"));
         statusPanel.add(addChargeButton);
         statusPanel.add(makePaymentButton);
 
@@ -95,11 +127,12 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
         TableData td = new TableData();
         td.setColspan(3);
-        statusPanel.add(deferments);
+        statusPanel.add(deferment);
 
 
         layout = new TableLayout(6);
-        layout.setCellPadding(10);
+        layout.setCellPadding(CELL_PADDING);
+        layout.setCellSpacing(CELL_SPACING);
 
         ageDebtPanel = new LayoutContainer(layout);
         ageDebtPanel.add(WidgetFactory.createText("Last Age Date"));
@@ -115,12 +148,12 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         ageDebtPanel.add(ageDebtButton);
 
         ageDebtPanel.add(lastAgeDate);
-        ageDebtPanel.add(latePeriod1);
-        ageDebtPanel.add(latePeriod2);
+        ageDebtPanel.add(lateAmount1);
+        ageDebtPanel.add(lateAmount2);
 
         td = new TableData();
         td.setColspan(3);
-        ageDebtPanel.add(latePeriod3, td);
+        ageDebtPanel.add(lateAmount3, td);
 
 
         panel.add(WidgetFactory.createTextBold("Account Information"));
@@ -136,6 +169,50 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
     }
 
+    private void ageDebt() {
+        final AccountModel model = ageDebtButton.getData("model");
+        if (model != null && model.getId() != null) {
+            try {
+                AccountDetailsPanel.this.mask("Processing...");
+                boolean ignoreDeferment = ignoreDefermentCheckBox.getValue() != null ?
+                        ignoreDefermentCheckBox.getValue() : false;
+                ServiceFactory.getAccountService().ageDebt(model.getId(), ignoreDeferment,
+                        new GenericCallback<AccountModel>() {
+                            @Override
+                            public void onSuccess(AccountModel result) {
+                                updateView(result);
+                                Grid<AccountModel> grid = getListPanel().getGrid();
+                                ListStore<AccountModel> listStore = grid.getStore();
+                                int index = listStore.indexOf(model);
+                                if (index >= 0) {
+                                    listStore.remove(model);
+                                    listStore.insert(result, index);
+                                    getListPanel().refreshGridRows(listStore.getModels());
+                                    GridSelectionModel<AccountModel> selectionModel = grid.getSelectionModel();
+                                    selectionModel.select(result, false);
+                                    grid.setSelectionModel(selectionModel);
+                                    grid.getView().refresh(false);
+                                }
+                                AccountDetailsPanel.this.unmask();
+                                Info.display("Success", "Aging completed");
+                                if ( index >= 0) {
+                                    grid.getView().focusRow(index);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                AccountDetailsPanel.this.unmask();
+                                super.onFailure(t);
+                            }
+                        });
+            } catch (Exception e) {
+                Log.error(e.getMessage(), e);
+                AccountDetailsPanel.this.unmask();
+            }
+        }
+    }
+
     @Override
     public void updateView(AccountModel model) {
 
@@ -143,6 +220,8 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
             GwtErrorHandler.error("AccountModel is null");
             return;
         }
+
+        ageDebtButton.setData("model", model);
 
         userId.setText(model.getId());
 
@@ -160,7 +239,66 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
         phone.setText(model.getPhoneNumber());
 
+        lateAmount1.setText(displayDouble2(model.getAmountLate1()));
+        lateAmount2.setText(displayDouble2(model.getAmountLate2()));
+        lateAmount3.setText(displayDouble2(model.getAmountLate3()));
+
+        lastAgeDate.setText(displayDate(model.getLateLastUpdate()));
+
+        GwtAccountServiceAsync accountService = ServiceFactory.getAccountService();
+
+        accountService.getOutstandingBalance(model.getId(), true, new GenericCallback<Double>() {
+            @Override
+            public void onSuccess(Double result) {
+                pastDue.setText(displayDouble2(result));
+            }
+        });
+
+        accountService.getDueBalance(model.getId(), true, new GenericCallback<Double>() {
+            @Override
+            public void onSuccess(Double result) {
+                balance.setText(displayDouble2(result));
+            }
+        });
+
+        accountService.getUnallocatedBalance(model.getId(), new GenericCallback<Double>() {
+            @Override
+            public void onSuccess(Double result) {
+                future.setText(displayDouble2(result));
+            }
+        });
+
+        accountService.getDeferredAmount(model.getId(), new GenericCallback<Double>() {
+            @Override
+            public void onSuccess(Double result) {
+                deferment.setText(displayDouble2(result));
+            }
+        });
+
         // TODO - populate the other fields
 
+    }
+
+    private Dialog createYesNoDialog(final String title, final String message, final Command command) {
+        return new OkCancelDialog(title) {
+
+            {
+                okText = "Yes";
+                cancelText = "No";
+            }
+
+            @Override
+            protected void init() {
+                add(WidgetFactory.createTextBold(message));
+            }
+
+            @Override
+            protected void onOkClicked() {
+                hide();
+                if (command != null) {
+                    command.execute();
+                }
+            }
+        };
     }
 }

@@ -22,9 +22,9 @@
 }
 
 #ksa-shortcut img {
-    width: 40px;
-    height: 40px;
-    background-image: url(../images/icons/financial_icon.png) !important;
+    width: 42px;
+    height: 42px;
+    background-image: url(../images/icons/at-icon.png) !important;
 }
 
 #accessControl-shortcut img {
@@ -129,6 +129,18 @@
     background-image: url(../images/icons/calendar-16x16.gif) !important;
 }
 
+.icon-calculator {
+    background-image: url(../images/icons/calculator.png) !important;
+}
+
+.icon-coins {
+    background-image: url(../images/icons/coins.png) !important;
+}
+
+.icon-card {
+    background-image: url(../images/icons/credit_card.png) !important;
+}
+
 .icon-owner {
     background-image: url(../images/icons/icon-owner.png) !important;
 }
@@ -157,9 +169,6 @@
     background-image: url(../images/icons/download-16x16.png) !important;
 }
 
-.icon-parse {
-    background-image: url(../images/icons/promote.png) !important;
-}
 
 .icon-copy {
     background-image: url(../images/icons/document.gif) !important;
@@ -169,7 +178,7 @@
     background-image: url(../images/icons/quote.gif) !important;
 }
 
-.icon-promote-alert {
+.icon-alert {
     background-image: url(../images/icons/promote.png) !important;
 }
 
@@ -213,7 +222,7 @@
     background-image: url(../images/icons/memo.gif) !important;
 }
 
-.user {
+.icon-user {
     background-image: url(../images/icons/fam/user.png) !important;
 }
 

@@ -4,6 +4,7 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.desktop.client.Desktop;
 import com.extjs.gxt.desktop.client.Shortcut;
 import com.extjs.gxt.desktop.client.StartMenu;
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -27,6 +28,11 @@ public class KsaDesktop extends Desktop {
     public static final String WINDOW_KEY = "window";
 
     private SelectionListener<ComponentEvent> shortcutListener;
+
+
+    public KsaDesktop() {
+        Registry.register(KsaDesktop.class.getName(), this);
+    }
 
     /*
      * Adds new window to desktop. Do not use addWindow() directly.
@@ -88,7 +94,7 @@ public class KsaDesktop extends Desktop {
 
         final Window ksaWindow = new KsaWindow();
 
-        addShortcut("Kuali Student Accounts", ksaWindow, "ksa-shortcut");
+        addShortcut("KSA", ksaWindow, "ksa-shortcut");
 
         // Creating "Start" menu
         final StartMenu menu = taskBar.getStartMenu();
@@ -123,6 +129,7 @@ public class KsaDesktop extends Desktop {
         s.setId(id);
         s.setData(WINDOW_KEY, window);
         s.addSelectionListener(shortcutListener);
+        s.setToolTip("Kuali Student Accounts");
         addShortcut(s);
     }
 

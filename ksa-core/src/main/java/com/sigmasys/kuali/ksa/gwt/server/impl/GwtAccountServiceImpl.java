@@ -8,19 +8,20 @@ import com.sigmasys.kuali.ksa.gwt.client.model.PagingLoadResultImpl;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtAccountService;
 import com.sigmasys.kuali.ksa.gwt.server.AbstractSearchService;
+import com.sigmasys.kuali.ksa.gwt.server.AccountColumnMapper;
 import com.sigmasys.kuali.ksa.gwt.server.SearchQueryBuilder;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.LatePeriod;
-import com.sigmasys.kuali.ksa.model.PostalAddress;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.AccountService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import java.util.List;
 @UrlMapping(Constants.ACCOUNT_SERVICE_URL)
 @Service("gwtAccountService")
 @Transactional(readOnly = true)
+@SuppressWarnings("unchecked")
 public class GwtAccountServiceImpl extends AbstractSearchService implements GwtAccountService {
 
     private static final Log logger = LogFactory.getLog(GwtAccountServiceImpl.class);
@@ -57,6 +59,9 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
     @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
     protected EntityManager em;
 
+    @Autowired
+    private AccountService accountService;
+
 
     @Override
     protected EntityManager getEntityManager() {
@@ -66,8 +71,10 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
     @Override
     public PagingLoadResult<AccountModel> findAccounts(SearchCriteria searchCriteria, String sortDir,
                                                        String sortField, int offset, int limit) throws GwtError {
+        logger.info("sortDir = " + sortDir + ", sortField = " + sortField);
         SearchQueryBuilder queryBuilder = new SearchQueryBuilder(select, from, where);
         queryBuilder.setDefaultSort(defaultOrder);
+        queryBuilder.setSortMapping(new AccountColumnMapper());
         // TODO: provide query builder customization for streetAddress
         PagingLoadResult<Account> loadResult =
                 buildPagingLoadResult(queryBuilder, searchCriteria, sortDir, sortField, offset, limit);
@@ -86,9 +93,15 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
         model.setId(account.getId());
         model.setEntityId(account.getEntityId());
         model.setCreationDate(account.getCreationDate());
+
         model.setKimAccount(account.isKimAccount());
         model.setLastKimUpdate(account.getLastKimUpdate());
         model.setCreditLimit(account.getCreditLimit() != null ? account.getCreditLimit().doubleValue() : null);
+
+        PersonName personName = account.getDefaultPersonName();
+        model.setFirstName(personName.getFirstName());
+        model.setMiddleName(personName.getMiddleName());
+        model.setLastName(personName.getLastName());
 
         LatePeriod latePeriod = account.getLatePeriod();
         model.setDaysLate1(latePeriod.getDaysLate1());
@@ -116,6 +129,17 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
 
         model.setStreetAddress(streetAddress);
 
+        if (account instanceof ChargeableAccount) {
+            ChargeableAccount chargeableAccount = (ChargeableAccount) account;
+            BigDecimal value = chargeableAccount.getAmountLate1();
+            model.setAmountLate1(value != null ? value.doubleValue() : 0.0);
+            value = chargeableAccount.getAmountLate2();
+            model.setAmountLate2(value != null ? value.doubleValue() : 0.0);
+            value = chargeableAccount.getAmountLate3();
+            model.setAmountLate3(value != null ? value.doubleValue() : 0.0);
+            model.setLateLastUpdate(chargeableAccount.getLateLastUpdate());
+        }
+
         return model;
     }
 
@@ -132,4 +156,32 @@ public class GwtAccountServiceImpl extends AbstractSearchService implements GwtA
         return new ArrayList<String>();
     }
 
+    @Override
+    public Double getOutstandingBalance(String userId, boolean ignoreDeferment) {
+        BigDecimal value = accountService.getOutstandingBalance(userId, ignoreDeferment);
+        return value != null ? value.doubleValue() : 0.0;
+    }
+
+    @Override
+    public Double getDueBalance(String userId, boolean ignoreDeferment) {
+        BigDecimal value = accountService.getDueBalance(userId, ignoreDeferment);
+        return value != null ? value.doubleValue() : 0.0;
+    }
+
+    @Override
+    public Double getUnallocatedBalance(String userId) {
+        BigDecimal value = accountService.getUnallocatedBalance(userId);
+        return value != null ? value.doubleValue() : 0.0;
+    }
+
+    @Override
+    public Double getDeferredAmount(String userId) {
+        BigDecimal value = accountService.getDeferredAmount(userId);
+        return value != null ? value.doubleValue() : 0.0;
+    }
+
+    @Override
+    public AccountModel ageDebt(String userId, boolean ignoreDeferment) {
+        return createModelFrom(accountService.ageDebt(userId, ignoreDeferment));
+    }
 }

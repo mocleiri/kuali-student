@@ -64,7 +64,7 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
         column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
-        column = new ColumnConfig(AccountModel.COLUMN_STATE, LABEL_STATE, 80);
+        column = new ColumnConfig(AccountModel.COLUMN_STATE, LABEL_STATE, 60);
         column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
@@ -72,7 +72,7 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
         column.setAlignment(HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(AccountModel.COLUMN_COUNTRY, LABEL_COUNTRY, 80);
+        column = new ColumnConfig(AccountModel.COLUMN_COUNTRY, LABEL_COUNTRY, 90);
         column.setAlignment(HorizontalAlignment.LEFT);
         columns.add(column);
 
