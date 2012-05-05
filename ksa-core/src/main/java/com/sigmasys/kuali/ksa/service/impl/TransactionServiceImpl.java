@@ -72,6 +72,22 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public Transaction createTransaction(TransactionTypeId id, String userId, Date effectiveDate, BigDecimal amount) {
+        return createTransaction(id, null, userId, effectiveDate, amount);
+    }
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param id            Transaction type ID
+     * @param userId        Account ID
+     * @param effectiveDate Transaction effective Date
+     * @param amount        Transaction amount
+     * @return new Transaction instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Transaction createTransaction(TransactionTypeId id, String externalId, String userId, Date effectiveDate,
+                                         BigDecimal amount) {
 
         TransactionType transactionType = em.find(TransactionType.class, id);
         if (transactionType == null) {
@@ -101,6 +117,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         transaction.setAccount(account);
         transaction.setCurrency(currency);
 
+        transaction.setExternalId(externalId);
         transaction.setEffectiveDate(effectiveDate);
         transaction.setNativeAmount(amount);
 

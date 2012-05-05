@@ -19,13 +19,26 @@ public interface TransactionService {
     /**
      * Creates a new transaction based on the given parameters
      *
-     * @param id Transaction type ID
-     * @param userId Account ID
+     * @param id            Transaction type ID
+     * @param userId        Account ID
      * @param effectiveDate Transaction effective Date
-     * @param amount Transaction amount
+     * @param amount        Transaction amount
      * @return new Transaction instance
      */
     Transaction createTransaction(TransactionTypeId id, String userId, Date effectiveDate, BigDecimal amount);
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param id            Transaction type ID
+     * @param externalId    Transaction external ID
+     * @param userId        Account ID
+     * @param effectiveDate Transaction effective Date
+     * @param amount        Transaction amount
+     * @return new Transaction instance
+     */
+    Transaction createTransaction(TransactionTypeId id, String externalId, String userId, Date effectiveDate,
+                                  BigDecimal amount);
 
 
     /**
@@ -145,7 +158,7 @@ public interface TransactionService {
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
-     * @param amount        amount of money to be allocated TODO -
+     * @param amount         amount of money to be allocated TODO -
      */
     void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
 
@@ -157,7 +170,7 @@ public interface TransactionService {
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
-     * @param amount        amount of money to be allocated TODO -
+     * @param amount         amount of money to be allocated TODO -
      */
     void createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
 
