@@ -73,6 +73,15 @@
                         </list>
                     </property>
                 </bean>
+
+                <!-- Activity stuff -->
+                <bean parent="Uif-Page" p:id="bursaActivityPage" p:title="Activity">
+                    <property name="items">
+                        <list>
+                            <ref bean="bursaActivityList"/>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
@@ -110,8 +119,8 @@
                       p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
                 <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
                       p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
-<!--                <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
-                      p:hrefText="currencyList?methodToCall=get&amp;viewId=CurrencyListView"/>-->
+                <bean parent="Uif-Link" p:linkLabel="Activity" p:target="_self"
+                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
             </list>
         </property>
     </bean>
@@ -540,4 +549,42 @@
             </list>
         </property>
     </bean>
+
+    <!-- Activity tuff -->
+    <bean id="bursaActivityList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4">
+        <property name="title" value="Recent Activity"/>
+
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Activity"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="readOnly" value="true"/>
+        <property name="propertyName" value="activities"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Creation Date" p:propertyName="timestamp">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Attribute" p:propertyName="attribute">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21" p:maxLength="20"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Type" p:propertyName="type.name">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="logDetail">
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Activity description..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
 </beans>
