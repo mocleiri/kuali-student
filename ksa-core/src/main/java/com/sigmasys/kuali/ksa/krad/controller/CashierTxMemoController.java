@@ -52,8 +52,6 @@ public class CashierTxMemoController extends UifControllerBase {
     protected CashierTxMemoForm createInitialForm(HttpServletRequest request) {
         CashierTxMemoForm form = new CashierTxMemoForm();
         form.setInfoType(InformationTypeValue.MEMO.name());
-        form.setChargeTransTypeValue("6");
-        form.setPaymentTransTypeValue("5");
         return form;
     }
 
@@ -127,25 +125,26 @@ public class CashierTxMemoController extends UifControllerBase {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCharge")
     public ModelAndView addCharge(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
                                   HttpServletRequest request, HttpServletResponse response) {
-        // do refresh stuff...
+        // do addCharge stuff...
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-            Account account = accountService.getFullAccount(accountId);
+           Date dtNow = new Date();
 
-            Charge charge = form.getCharge();
+           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getChargeTransTypeValue(), 1);
+           Transaction transaction =
+                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
+                                                      form.getCharge().getAmount());
 
-            Currency currency = currencyService.getCurrency(charge.getCurrency().getIso());
-            charge.setAccount(account);
-            charge.setCurrency(currency);
+           if (transaction != null) {
+              form.setTransactionStatus("Success");
+           }
+           else {
+              form.setTransactionStatus("Failed to add charge");
+           }
 
-
-            //TransactionTypeValue transactionTypeValue = Enum.valueOf(TransactionTypeValue.class, chargeTransactionType);
-            // TransactionType transactionType = transactionService.getTransactionType(transactionTypeValue);
-            //charge.setTransactionType(transactionType);
-
-            transactionService.persistTransaction(charge);
-            populateForm(accountId, form);
+           // populate the form using the id
+           populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -161,10 +160,26 @@ public class CashierTxMemoController extends UifControllerBase {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makePayment")
     public ModelAndView makePayment(@ModelAttribute("KualiForm") CashierTxMemoForm form, BindingResult result,
                                     HttpServletRequest request, HttpServletResponse response) {
-        // do refresh stuff...
+        // do makePayment stuff...
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
-            populateForm(accountId, form);
+
+           Date dtNow = new Date();
+
+           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getPaymentTransTypeValue(), 1);
+           Transaction transaction =
+                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
+                       form.getPayment().getAmount());
+
+           if (transaction != null) {
+              form.setTransactionStatus("Success");
+           }
+           else {
+              form.setTransactionStatus("Failed to add payment");
+           }
+
+           // populate the form using the id
+           populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -185,6 +200,28 @@ public class CashierTxMemoController extends UifControllerBase {
         String accountId = form.getSelectedId();
 
         if (accountId != null && !accountId.trim().isEmpty()) {
+
+           Date dtNow = new Date();
+
+           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getPaymentTransTypeValue(), 1);
+           Transaction transaction =
+                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
+                       form.getPayment().getAmount());
+
+           if (transaction != null) {
+              ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+
+              if (chargeableAccount != null) {
+                 form.setTransactionStatus("Success");
+              }
+              else {
+                 form.setTransactionStatus("Failed to age transactions");
+              }
+           }
+           else {
+              form.setTransactionStatus("Failed to add payment");
+           }
+
             // populate the form using the id
             populateForm(accountId, form);
         }
@@ -491,7 +528,6 @@ public class CashierTxMemoController extends UifControllerBase {
         for (Memo memo : memos) {
 
            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
-
         }
 
         form.setMemoList(memos);

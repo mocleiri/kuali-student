@@ -104,6 +104,8 @@ public class CashierTxMemoForm extends UifFormBase {
    // the transaction type for a payment
    private String paymentTransTypeValue;
 
+   // multipurpose status field
+   private String transactionStatus;
    /**
     * Get the student name
     * Possible uses is a query match for transactions
@@ -600,5 +602,13 @@ public class CashierTxMemoForm extends UifFormBase {
     */
    public void setPaymentTransTypeValue(String paymentTransTypeValue) {
       this.paymentTransTypeValue = paymentTransTypeValue;
+   }
+
+   public String getTransactionStatus() {
+      return transactionStatus;
+   }
+
+   public void setTransactionStatus(String transactionStatus) {
+      this.transactionStatus = transactionStatus;
    }
 }

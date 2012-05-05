@@ -50,8 +50,6 @@ public class CustomerServiceController extends UifControllerBase {
     protected CustomerServiceForm createInitialForm(HttpServletRequest request) {
         CustomerServiceForm form = new CustomerServiceForm();
         form.setInfoType(InformationTypeValue.MEMO.name());
-        form.setChargeTransTypeValue("6");
-        form.setPaymentTransTypeValue("5");
         return form;
     }
 
@@ -130,7 +128,23 @@ public class CustomerServiceController extends UifControllerBase {
         // do add charge stuff...
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
-            populateForm(accountId, form);
+
+           Date dtNow = new Date();
+
+           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getChargeTransTypeValue(), 1);
+           Transaction transaction =
+                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
+                       form.getCharge().getAmount());
+
+           if (transaction != null) {
+              form.setTransactionStatus("Success");
+           }
+           else {
+              form.setTransactionStatus("Failed to add charge");
+           }
+
+           // populate the form using the id
+           populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -149,6 +163,22 @@ public class CustomerServiceController extends UifControllerBase {
         // do make payment stuff...
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
+
+           Date dtNow = new Date();
+
+           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getPaymentTransTypeValue(), 1);
+           Transaction transaction =
+                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
+                       form.getPayment().getAmount());
+
+           if (transaction != null) {
+              form.setTransactionStatus("Success");
+           }
+           else {
+              form.setTransactionStatus("Failed to add payment");
+           }
+
+           // populate the form using the id
             populateForm(accountId, form);
         }
 
@@ -171,10 +201,31 @@ public class CustomerServiceController extends UifControllerBase {
         String accountId = form.getSelectedId();
 
         if (accountId != null && !accountId.trim().isEmpty()) {
-            // age the indexed Account Transactions
-            ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
-            // populate the form using the id
-            populateForm(accountId, form);
+
+           Date dtNow = new Date();
+
+           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getPaymentTransTypeValue(), 1);
+           Transaction transaction =
+                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
+                       form.getPayment().getAmount());
+
+           if (transaction != null) {
+              // age the indexed Account Transactions
+              ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+
+              if (chargeableAccount != null) {
+                 form.setTransactionStatus("Success");
+              }
+              else {
+                 form.setTransactionStatus("Failed to age transactions");
+              }
+           }
+           else {
+              form.setTransactionStatus("Failed to add payment");
+           }
+
+           // populate the form using the id
+           populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);

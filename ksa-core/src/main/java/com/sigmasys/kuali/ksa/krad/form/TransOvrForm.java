@@ -1,10 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.*;
 
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.Payment;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import java.util.List;
 
@@ -40,6 +37,9 @@ public class TransOvrForm extends UifFormBase {
    private String currencyName;
 
    private String currencyDescription;
+
+   // a list of activities
+   private List<Activity> activities;
 
    /**
     * Get the student name
@@ -239,5 +239,21 @@ public class TransOvrForm extends UifFormBase {
     */
    public void setCurrencyDescription(String currencyDescription) {
       this.currencyDescription = currencyDescription;
+   }
+
+   /**
+    * Get a list of activities
+    * @return
+    */
+   public List<Activity> getActivities() {
+      return activities;
+   }
+
+   /**
+    * Set a list of activities
+    * @param activities
+    */
+   public void setActivities(List<Activity> activities) {
+      this.activities = activities;
    }
 }

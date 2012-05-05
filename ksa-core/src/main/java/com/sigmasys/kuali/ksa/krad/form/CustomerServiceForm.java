@@ -104,6 +104,8 @@ public class CustomerServiceForm extends UifFormBase {
 
    private String paymentTransTypeValue;
 
+   // multipurpose status field
+   private String transactionStatus;
 
    /**
     * Get the student name
@@ -633,5 +635,13 @@ public class CustomerServiceForm extends UifFormBase {
     */
    public void setPaymentTransTypeValue(String paymentTransTypeValue) {
       this.paymentTransTypeValue = paymentTransTypeValue;
+   }
+
+   public String getTransactionStatus() {
+      return transactionStatus;
+   }
+
+   public void setTransactionStatus(String transactionStatus) {
+      this.transactionStatus = transactionStatus;
    }
 }

@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.AccountService;
+import com.sigmasys.kuali.ksa.service.ActivityService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 
@@ -28,6 +29,9 @@ public class TransOvrController extends UifControllerBase {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    ActivityService activityService;
 
     @Autowired
     private CurrencyService currencyService;
@@ -177,7 +181,7 @@ public class TransOvrController extends UifControllerBase {
             form.setCurrencies(currencyService.getCurrencies());
         }
 
-        // Currency type
+        // Currency type edit
         if (pageId != null && pageId.compareTo("bursaCurrencyEditPage") == 0) {
             String iso = request.getParameter("iso");
             if (iso == null || iso.isEmpty()) {
@@ -187,6 +191,11 @@ public class TransOvrController extends UifControllerBase {
             Currency currency = currencyService.getCurrency(iso);
 
             form.setCurrency(currency);
+        }
+
+        if (pageId != null && pageId.compareTo("bursaActivityPage") == 0) {
+           List<Activity> tmpActivities = activityService.getActivities();
+           form.setActivities(activityService.getActivities());
         }
 
         return getUIFModelAndView(form);

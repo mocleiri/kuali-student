@@ -29,12 +29,8 @@ public class PaymentTypeKeyValues extends KeyValuesBase {
          keyValues.add(new ConcreteKeyValue("", ""));
       }
       keyValues.add(new ConcreteKeyValue("0", "Cash"));                       // cash
-      keyValues.add(new ConcreteKeyValue("1", "Check - In Person"));          // chip
-      keyValues.add(new ConcreteKeyValue("2", "Check - Mail"));               // chma
-      keyValues.add(new ConcreteKeyValue("3", "Credit card - Email"));        // ccma
-      keyValues.add(new ConcreteKeyValue("4", "Credit card In Person"));      // ccip
-      keyValues.add(new ConcreteKeyValue("5", "Credit card On Line"));        // ccol
-      keyValues.add(new ConcreteKeyValue("6", "Electronic funds transfer"));  // ach
+      keyValues.add(new ConcreteKeyValue("1", "Check"));                      // check
+      keyValues.add(new ConcreteKeyValue("2", "Credit"));                     // credit
 
       return keyValues;
    }
