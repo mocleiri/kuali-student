@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.Activity;
-import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.ActivityService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +51,24 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
      */
     @Override
     public List<Activity> getActivities() {
-        return getActivities(null);
+        return getActivities((Long) null);
+    }
+
+    /**
+     * Returns all activities sorted by ID in the descendant order for the given Account ID.
+     *
+     * @param userId Account ID
+     * @return List of activities
+     */
+    @Override
+    public List<Activity> getActivities(String userId) {
+        Query query = em.createQuery("select act from Activity act " +
+                " left outer join fetch act.type t " +
+                " left outer join fetch act.account a " +
+                " where a.id = :userId " +
+                " order by act.id desc");
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 
     /**

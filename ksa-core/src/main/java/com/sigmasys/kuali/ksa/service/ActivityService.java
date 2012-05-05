@@ -28,6 +28,14 @@ public interface ActivityService {
     List<Activity> getActivities();
 
     /**
+     * Returns all activities sorted by ID in the descendant order for the given Account ID.
+     *
+     * @param userId Account ID
+     * @return List of activities
+     */
+    List<Activity> getActivities(String userId);
+
+    /**
      * Persists the activity in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *

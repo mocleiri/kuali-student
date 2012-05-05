@@ -22,6 +22,7 @@ public class ActivityServiceTest extends AbstractServiceTest {
     @Autowired
     private ActivityService activityService;
 
+
     @Test
     public void getActivity() throws Exception {
 
@@ -48,6 +49,17 @@ public class ActivityServiceTest extends AbstractServiceTest {
         }
 
     }
+
+    @Test
+    public void getActivitiesForUser() throws Exception {
+
+        List<Activity> activities = activityService.getActivities("admin");
+
+        Assert.notNull(activities);
+        Assert.isTrue(activities.isEmpty());
+
+    }
+
 
     @Test
     public void updateActivity() throws Exception {
