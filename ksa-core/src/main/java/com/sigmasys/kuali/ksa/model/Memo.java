@@ -21,21 +21,6 @@ public class Memo extends Information {
      */
     private Memo previousMemo;
 
-    /**
-     * Text
-     */
-    private String text;
-
-
-    @Column(name = "TEXT", length = 4000)
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "NEXT_ID")

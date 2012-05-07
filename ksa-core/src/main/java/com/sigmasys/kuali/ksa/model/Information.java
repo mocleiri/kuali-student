@@ -23,6 +23,11 @@ public class Information implements Identifiable {
     private Long id;
 
     /**
+     * Text
+     */
+    private String text;
+
+    /**
      * Creation date
      */
     private Date creationDate;
@@ -186,6 +191,15 @@ public class Information implements Identifiable {
 
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
+    }
+
+    @Column(name = "TEXT", length = 4000)
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
    /**
