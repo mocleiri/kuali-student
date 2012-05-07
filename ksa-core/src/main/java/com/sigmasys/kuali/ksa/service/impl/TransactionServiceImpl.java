@@ -285,7 +285,45 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
-        // TODO
+
+        Transaction transaction1 = getTransaction(transactionId1);
+        if (transaction1 == null) {
+            throw new IllegalArgumentException("Transaction with ID = " + transactionId1 + " does not exist");
+        }
+
+        Transaction transaction2 = getTransaction(transactionId2);
+        if (transaction2 == null) {
+            throw new IllegalArgumentException("Transaction with ID = " + transactionId2 + " does not exist");
+        }
+
+        if (transaction1.getAccount() == null || transaction2.getAccount() == null) {
+            throw new IllegalStateException("Transaction must be associated with Account");
+        }
+
+        String userId = transaction1.getAccount().getId();
+        if (!userId.equals(transaction2.getAccount().getId())) {
+            throw new IllegalStateException("Transactions must be associated with the same account");
+        }
+
+        Query query = em.createQuery("select a from Allocation a " +
+                " fetch join firstTransaction t1 " +
+                " fetch join secondTransaction t2 " +
+                " where a.account.id = :userId");
+        query.setParameter("userId", userId);
+
+        List<Allocation> allocations = query.getResultList();
+        for (Allocation allocation : allocations) {
+            Long id1 = allocation.getFirstTransaction().getId();
+            Long id2 = allocation.getSecondTransaction().getId();
+            if ((id1.equals(transactionId1) && id2.equals(transactionId2)) ||
+                    (id1.equals(transactionId2) && id2.equals(transactionId1))) {
+                // TODO
+                deleteEntity(allocation.getId(), Allocation.class);
+                // TODO
+            }
+        }
+
+
     }
 
     @Override
@@ -296,7 +334,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Override
     @Transactional(readOnly = false)
-    public void generateTransactionMemo(Long transactionId, String memoText) {
+    public void createTransactionMemo(Long transactionId, String memoText) {
         // TODO
     }
 

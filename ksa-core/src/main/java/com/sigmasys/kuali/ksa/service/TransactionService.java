@@ -186,7 +186,7 @@ public interface TransactionService {
      * @param transactionId transaction ID
      * @param memoText      memo text
      */
-    void generateTransactionMemo(Long transactionId, String memoText);
+    void createTransactionMemo(Long transactionId, String memoText);
 
     /**
      * If the reverse method is called, the system will generate a negative
