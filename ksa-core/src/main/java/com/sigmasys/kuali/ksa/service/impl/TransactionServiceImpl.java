@@ -111,7 +111,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new IllegalArgumentException(errMsg);
         }
 
-        Transaction transaction = (transactionType instanceof CreditType) ? new Charge() : new Payment();
+        Transaction transaction = (transactionType instanceof CreditType) ? new Payment() : new Charge();
 
         transaction.setTransactionType(transactionType);
         transaction.setAccount(account);
