@@ -284,7 +284,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Override
     @Transactional(readOnly = false)
-    public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
+    public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount) {
 
         Transaction transaction1 = getTransaction(transactionId1);
         if (transaction1 == null) {
@@ -317,13 +317,36 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             Long id2 = allocation.getSecondTransaction().getId();
             if ((id1.equals(transactionId1) && id2.equals(transactionId2)) ||
                     (id1.equals(transactionId2) && id2.equals(transactionId1))) {
-                // TODO
+                BigDecimal allocatedAmount1 = transaction1.getAllocatedAmount() != null ?
+                        transaction1.getAllocatedAmount() : BigDecimal.ZERO;
+                BigDecimal allocatedAmount2 = transaction2.getAllocatedAmount() != null ?
+                        transaction2.getAllocatedAmount() : BigDecimal.ZERO;
+                transaction1.setAllocatedAmount(allocatedAmount1.subtract(allocation.getAmount()));
+                transaction2.setAllocatedAmount(allocatedAmount2.subtract(allocation.getAmount()));
                 deleteEntity(allocation.getId(), Allocation.class);
-                // TODO
             }
         }
 
+        BigDecimal unallocatedAmount1 = getUnallocatedAmount(transaction1);
+        BigDecimal unallocatedAmount2 = getUnallocatedAmount(transaction2);
 
+        // TODO:
+        // UNDER CONSTRUCTION
+
+    }
+
+    private BigDecimal getUnallocatedAmount(Transaction transaction) {
+
+        BigDecimal amount = transaction.getAmount() != null ?
+                transaction.getAmount() : BigDecimal.ZERO;
+
+        BigDecimal allocatedAmount = transaction.getAllocatedAmount() != null ?
+                transaction.getAllocatedAmount() : BigDecimal.ZERO;
+
+        BigDecimal lockedAllocatedAmount = transaction.getLockedAllocatedAmount() != null ?
+                transaction.getLockedAllocatedAmount() : BigDecimal.ZERO;
+
+        return amount.subtract(allocatedAmount.add(lockedAllocatedAmount));
     }
 
     @Override
