@@ -1,7 +1,5 @@
 package com.sigmasys.kuali.ksa.model;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 /**
@@ -15,7 +13,7 @@ import javax.persistence.*;
  * @author Michael Ivanov
  */
 @Entity
-@DiscriminatorValue("C")
+@DiscriminatorValue(TransactionType.CREDIT_TYPE)
 public class CreditType extends TransactionType {
 
     private Integer clearPeriod;

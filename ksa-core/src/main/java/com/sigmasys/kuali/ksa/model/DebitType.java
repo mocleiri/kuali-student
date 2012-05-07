@@ -16,7 +16,7 @@ import javax.persistence.*;
  * Time: 4:13 PM
  */
 @Entity
-@DiscriminatorValue("D")
+@DiscriminatorValue(TransactionType.DEBIT_TYPE)
 public class DebitType extends TransactionType {
 
     /**

@@ -21,6 +21,11 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class TransactionType implements Identifiable {
 
+    // Discriminator type value constants
+    public static final String DEBIT_TYPE = "D";
+    public static final String CREDIT_TYPE = "C";
+
+
     protected TransactionTypeId id;
 
     protected Date startDate;
