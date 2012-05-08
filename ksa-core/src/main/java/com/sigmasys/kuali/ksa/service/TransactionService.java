@@ -19,26 +19,38 @@ public interface TransactionService {
     /**
      * Creates a new transaction based on the given parameters
      *
-     * @param id            Transaction type ID
-     * @param userId        Account ID
-     * @param effectiveDate Transaction effective Date
-     * @param amount        Transaction amount
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
      * @return new Transaction instance
      */
-    Transaction createTransaction(TransactionTypeId id, String userId, Date effectiveDate, BigDecimal amount);
+    Transaction createTransaction(String transactionTypeId, String userId, Date effectiveDate, BigDecimal amount);
 
     /**
      * Creates a new transaction based on the given parameters
      *
-     * @param id            Transaction type ID
-     * @param externalId    Transaction external ID
-     * @param userId        Account ID
-     * @param effectiveDate Transaction effective Date
-     * @param amount        Transaction amount
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param externalId        Transaction external ID
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
      * @return new Transaction instance
      */
-    Transaction createTransaction(TransactionTypeId id, String externalId, String userId, Date effectiveDate,
+    Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
                                   BigDecimal amount);
+
+    /**
+     * Returns the transaction type instance for the given transaction type ID and effective date
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param effectiveDate     Transaction effective Date
+     * @return TransactionType instance
+     */
+    TransactionType getTransactionType(String transactionTypeId, Date effectiveDate);
 
 
     /**

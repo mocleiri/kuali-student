@@ -129,22 +129,20 @@ public class CashierTxMemoController extends UifControllerBase {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
+            Date dtNow = new Date();
 
-           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getChargeTransTypeValue(), 1);
-           Transaction transaction =
-                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
-                                                      form.getCharge().getAmount());
+            Transaction transaction =
+                    transactionService.createTransaction(form.getChargeTransTypeValue(), accountId, dtNow,
+                            form.getCharge().getAmount());
 
-           if (transaction != null) {
-              form.setTransactionStatus("Success");
-           }
-           else {
-              form.setTransactionStatus("Failed to add charge");
-           }
+            if (transaction != null) {
+                form.setTransactionStatus("Success");
+            } else {
+                form.setTransactionStatus("Failed to add charge");
+            }
 
-           // populate the form using the id
-           populateForm(accountId, form);
+            // populate the form using the id
+            populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -164,22 +162,20 @@ public class CashierTxMemoController extends UifControllerBase {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
+            Date dtNow = new Date();
 
-           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getPaymentTransTypeValue(), 1);
-           Transaction transaction =
-                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
-                       form.getPayment().getAmount());
+            Transaction transaction =
+                    transactionService.createTransaction(form.getPaymentTransTypeValue(), accountId, dtNow,
+                            form.getPayment().getAmount());
 
-           if (transaction != null) {
-              form.setTransactionStatus("Success");
-           }
-           else {
-              form.setTransactionStatus("Failed to add payment");
-           }
+            if (transaction != null) {
+                form.setTransactionStatus("Success");
+            } else {
+                form.setTransactionStatus("Failed to add payment");
+            }
 
-           // populate the form using the id
-           populateForm(accountId, form);
+            // populate the form using the id
+            populateForm(accountId, form);
         }
 
         return getUIFModelAndView(form);
@@ -201,26 +197,23 @@ public class CashierTxMemoController extends UifControllerBase {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
+            Date dtNow = new Date();
 
-           TransactionTypeId transactionTypeId = new TransactionTypeId(form.getPaymentTransTypeValue(), 1);
-           Transaction transaction =
-                 transactionService.createTransaction(transactionTypeId, accountId, dtNow,
-                       form.getPayment().getAmount());
+            Transaction transaction =
+                    transactionService.createTransaction(form.getPaymentTransTypeValue(), accountId, dtNow,
+                            form.getPayment().getAmount());
 
-           if (transaction != null) {
-              ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+            if (transaction != null) {
+                ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
 
-              if (chargeableAccount != null) {
-                 form.setTransactionStatus("Success");
-              }
-              else {
-                 form.setTransactionStatus("Failed to age transactions");
-              }
-           }
-           else {
-              form.setTransactionStatus("Failed to add payment");
-           }
+                if (chargeableAccount != null) {
+                    form.setTransactionStatus("Success");
+                } else {
+                    form.setTransactionStatus("Failed to age transactions");
+                }
+            } else {
+                form.setTransactionStatus("Failed to add payment");
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -319,7 +312,7 @@ public class CashierTxMemoController extends UifControllerBase {
 
                 Account accountCopy = account.getCopy();
 
-               // format the name and address as a single string of each
+                // format the name and address as a single string of each
 
                 accountCopy.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
                 accountCopy.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
@@ -422,11 +415,12 @@ public class CashierTxMemoController extends UifControllerBase {
     }
 
 
-   /**
-    * Populate the form per business needs for a single account by the account identifier
-    * @param id
-    * @param form
-    */
+    /**
+     * Populate the form per business needs for a single account by the account identifier
+     *
+     * @param id
+     * @param form
+     */
     private void populateForm(String id, CashierTxMemoForm form) {
 
         // store the selected account ID
@@ -513,7 +507,7 @@ public class CashierTxMemoController extends UifControllerBase {
         // Alerts
         for (Alert alert : alerts) {
 
-           alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
+            alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
         }
 
         form.setAlertList(alerts);
@@ -527,7 +521,7 @@ public class CashierTxMemoController extends UifControllerBase {
         // Alerts
         for (Memo memo : memos) {
 
-           memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
+            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
         }
 
         form.setMemoList(memos);

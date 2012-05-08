@@ -39,7 +39,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
     @Test
     public void createTransaction() throws Exception {
 
-        TransactionTypeId id = new TransactionTypeId("1020", 1);
+        String id = "1020";
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 

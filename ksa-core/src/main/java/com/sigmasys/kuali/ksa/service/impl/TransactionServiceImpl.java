@@ -73,16 +73,59 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     /**
      * Creates a new transaction based on the given parameters
      *
-     * @param id            Transaction type ID
-     * @param userId        Account ID
-     * @param effectiveDate Transaction effective Date
-     * @param amount        Transaction amount
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
      * @return new Transaction instance
      */
     @Override
     @Transactional(readOnly = false)
-    public Transaction createTransaction(TransactionTypeId id, String userId, Date effectiveDate, BigDecimal amount) {
-        return createTransaction(id, null, userId, effectiveDate, amount);
+    public Transaction createTransaction(String transactionTypeId, String userId, Date effectiveDate, BigDecimal amount) {
+        return createTransaction(transactionTypeId, null, userId, effectiveDate, amount);
+    }
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
+     * @return new Transaction instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
+                                         BigDecimal amount) {
+        TransactionTypeId id = getTransactionType(transactionTypeId, effectiveDate).getId();
+        return createTransaction(id, externalId, userId, effectiveDate, amount);
+    }
+
+    /**
+     * Returns the transaction type instance for the given transaction type ID and effective date
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param effectiveDate     Transaction effective Date
+     * @return TransactionType instance
+     */
+    @Override
+    public TransactionType getTransactionType(String transactionTypeId, Date effectiveDate) {
+        Query query = em.createQuery("select t from TransactionType t " +
+                " where t.id.id = :transactionTypeId and :effectiveDate >= t.startDate and " +
+                " (t.endDate is null or t.endDate > :effectiveDate)");
+        query.setParameter("transactionTypeId", transactionTypeId);
+        query.setParameter("effectiveDate", effectiveDate);
+        List<TransactionType> transactionTypes = query.getResultList();
+        if (transactionTypes != null && !transactionTypes.isEmpty()) {
+            return transactionTypes.get(0);
+        }
+        String errMsg = "Cannot find TransactionType for ID = " + transactionTypeId + " and date = " + effectiveDate;
+        logger.error(errMsg);
+        throw new IllegalStateException(errMsg);
     }
 
     /**
@@ -94,10 +137,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param amount        Transaction amount
      * @return new Transaction instance
      */
-    @Override
     @Transactional(readOnly = false)
-    public Transaction createTransaction(TransactionTypeId id, String externalId, String userId, Date effectiveDate,
-                                         BigDecimal amount) {
+    protected Transaction createTransaction(TransactionTypeId id, String externalId, String userId, Date effectiveDate,
+                                            BigDecimal amount) {
 
         TransactionType transactionType = em.find(TransactionType.class, id);
         if (transactionType == null) {
