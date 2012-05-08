@@ -445,13 +445,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             allocation.setLocked(false);
             transaction1.setLockedAllocatedAmount(newAmount);
             transaction2.setLockedAllocatedAmount(newAmount);
+        } else {
+            String errMsg = "Illegal allocation. Transaction IDs: " + transactionId1 + ", " + transactionId2 +
+                    " Amount: " + newAmount;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
-
-        String errMsg = "Illegal allocation. Transaction IDs: " + transactionId1 + ", " + transactionId2 +
-                " Amount: " + newAmount;
-        logger.error(errMsg);
-        throw new IllegalStateException(errMsg);
-
     }
 
     private BigDecimal getUnallocatedAmount(Transaction transaction) {
