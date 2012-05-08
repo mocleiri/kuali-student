@@ -321,21 +321,29 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         Transaction transaction1 = getTransaction(transactionId1);
         if (transaction1 == null) {
-            throw new IllegalArgumentException("Transaction with ID = " + transactionId1 + " does not exist");
+            String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         Transaction transaction2 = getTransaction(transactionId2);
         if (transaction2 == null) {
-            throw new IllegalArgumentException("Transaction with ID = " + transactionId2 + " does not exist");
+            String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         if (transaction1.getAccount() == null || transaction2.getAccount() == null) {
-            throw new IllegalStateException("Transaction must be associated with Account");
+            String errMsg = "Transaction must be associated with Account";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
 
         String userId = transaction1.getAccount().getId();
         if (!userId.equals(transaction2.getAccount().getId())) {
-            throw new IllegalStateException("Transactions must be associated with the same account");
+            String errMsg = "Both transactions must be associated with the same account";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
 
         Query query = em.createQuery("select a from Allocation a " +
@@ -362,6 +370,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         BigDecimal unallocatedAmount1 = getUnallocatedAmount(transaction1);
         BigDecimal unallocatedAmount2 = getUnallocatedAmount(transaction2);
+
+        if (unallocatedAmount1.compareTo(newAmount) < 0 || unallocatedAmount2.compareTo(newAmount) < 0) {
+            String errMsg = "Not enough balance to cover the allocation amount " + newAmount;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
 
         // TODO:
         // UNDER CONSTRUCTION
