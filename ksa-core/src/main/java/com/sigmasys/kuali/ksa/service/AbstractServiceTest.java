@@ -24,7 +24,7 @@ import com.sigmasys.kuali.ksa.util.RequestUtils;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public abstract class AbstractServiceTest implements ApplicationContextAware {
 
-    public static final String TEST_USER_ID = "guest";
+    public static final String TEST_USER_ID = "admin";
 
     private final boolean isWebContext = isWebContext();
 

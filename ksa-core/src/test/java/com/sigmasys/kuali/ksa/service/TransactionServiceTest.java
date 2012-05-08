@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 
+import com.sigmasys.kuali.ksa.annotation.UseWebContext;
 import com.sigmasys.kuali.ksa.model.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 @SuppressWarnings("unchecked")

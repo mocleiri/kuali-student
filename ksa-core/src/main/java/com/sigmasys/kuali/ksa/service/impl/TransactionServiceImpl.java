@@ -1,8 +1,11 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.service.UserSessionManager;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Autowired
     private CurrencyService currencyService;
+
+    @Autowired
+    private CalendarService calendarService;
+
+    @Autowired
+    private UserSessionManager userSessionManager;
+
 
     private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
         Query query = em.createQuery("select t from " + entityType.getName() + " t " +
@@ -120,6 +130,29 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         transaction.setExternalId(externalId);
         transaction.setEffectiveDate(effectiveDate);
         transaction.setNativeAmount(amount);
+        transaction.setAmount(amount);
+        transaction.setAllocatedAmount(BigDecimal.ZERO);
+        transaction.setLockedAllocatedAmount(BigDecimal.ZERO);
+
+        transaction.setRollup(transactionType.getRollup());
+        transaction.setStatementText(transactionType.getDescription());
+        transaction.setGlEntryGenerated(false);
+        transaction.setInternal(false);
+
+        transaction.setResponsibleEntity(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
+
+        if ( transaction instanceof Payment) {
+            CreditType creditType = (CreditType) transactionType;
+            Payment payment = (Payment) transaction;
+            int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
+            payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
+            payment.setRefundRule(creditType.getRefundRule());
+            payment.setRefundable(creditType.getRefundRule() != null);
+        } else {
+            Charge charge = (Charge) transaction;
+            charge.setDeferred(false);
+            charge.setGlOverriden(false);
+        }
 
         persistTransaction(transaction);
 
