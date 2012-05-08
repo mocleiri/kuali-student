@@ -183,7 +183,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         transaction.setResponsibleEntity(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
 
-        if ( transaction instanceof Payment) {
+        if (transaction instanceof Payment) {
             CreditType creditType = (CreditType) transactionType;
             Payment payment = (Payment) transaction;
             int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
@@ -381,7 +381,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new IllegalStateException(errMsg);
         }
 
-        String userId = transaction1.getAccount().getId();
+        Account account = transaction1.getAccount();
+        String userId = account.getId();
         if (!userId.equals(transaction2.getAccount().getId())) {
             String errMsg = "Both transactions must be associated with the same account";
             logger.error(errMsg);
@@ -419,8 +420,37 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new IllegalStateException(errMsg);
         }
 
-        // TODO:
-        // UNDER CONSTRUCTION
+        TransactionType transactionType1 = transaction1.getTransactionType();
+        TransactionType transactionType2 = transaction2.getTransactionType();
+
+        boolean canAllocate = false;
+        if ((transactionType1 instanceof DebitType && transactionType2 instanceof DebitType) ||
+                (transactionType1 instanceof CreditType && transactionType2 instanceof CreditType)) {
+            canAllocate = (unallocatedAmount1.compareTo(BigDecimal.ZERO) > 0 &&
+                    unallocatedAmount2.compareTo(BigDecimal.ZERO) > 0);
+        } else if ((transactionType1 instanceof DebitType && transactionType2 instanceof CreditType) ||
+                (transactionType1 instanceof CreditType && transactionType2 instanceof DebitType)) {
+            canAllocate = (unallocatedAmount1.compareTo(BigDecimal.ZERO) > 0 &&
+                    unallocatedAmount2.compareTo(BigDecimal.ZERO) < 0) ||
+                    (unallocatedAmount1.compareTo(BigDecimal.ZERO) < 0 &&
+                            unallocatedAmount2.compareTo(BigDecimal.ZERO) > 0);
+        }
+
+        if (canAllocate) {
+            Allocation allocation = new Allocation();
+            allocation.setAccount(account);
+            allocation.setFirstTransaction(transaction1);
+            allocation.setSecondTransaction(transaction2);
+            allocation.setAmount(newAmount);
+            allocation.setLocked(false);
+            transaction1.setLockedAllocatedAmount(newAmount);
+            transaction2.setLockedAllocatedAmount(newAmount);
+        }
+
+        String errMsg = "Illegal allocation. Transaction IDs: " + transactionId1 + ", " + transactionId2 +
+                " Amount: " + newAmount;
+        logger.error(errMsg);
+        throw new IllegalStateException(errMsg);
 
     }
 
