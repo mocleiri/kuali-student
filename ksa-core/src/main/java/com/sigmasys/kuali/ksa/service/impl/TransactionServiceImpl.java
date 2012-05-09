@@ -359,7 +359,17 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Override
     @Transactional(readOnly = false)
-    public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount) {
+    public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
+        createAllocation(transactionId1, transactionId2, amount, false);
+    }
+
+    protected void createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount, boolean locked) {
+
+        if (newAmount == null || newAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            String errMsg = "The allocation amount should be a positive number";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
 
         Transaction transaction1 = getTransaction(transactionId1);
         if (transaction1 == null) {
@@ -424,12 +434,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         TransactionType transactionType2 = transaction2.getTransactionType();
 
         boolean canAllocate = false;
-        if ((transactionType1 instanceof DebitType && transactionType2 instanceof DebitType) ||
-                (transactionType1 instanceof CreditType && transactionType2 instanceof CreditType)) {
+        if ((transactionType1 instanceof DebitType && transactionType2 instanceof CreditType) ||
+                (transactionType1 instanceof CreditType && transactionType2 instanceof DebitType)) {
             canAllocate = (unallocatedAmount1.compareTo(BigDecimal.ZERO) > 0 &&
                     unallocatedAmount2.compareTo(BigDecimal.ZERO) > 0);
-        } else if ((transactionType1 instanceof DebitType && transactionType2 instanceof CreditType) ||
-                (transactionType1 instanceof CreditType && transactionType2 instanceof DebitType)) {
+        } else if ((transactionType1 instanceof DebitType && transactionType2 instanceof DebitType) ||
+                (transactionType1 instanceof CreditType && transactionType2 instanceof CreditType)) {
             canAllocate = (unallocatedAmount1.compareTo(BigDecimal.ZERO) > 0 &&
                     unallocatedAmount2.compareTo(BigDecimal.ZERO) < 0) ||
                     (unallocatedAmount1.compareTo(BigDecimal.ZERO) < 0 &&
@@ -442,9 +452,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             allocation.setFirstTransaction(transaction1);
             allocation.setSecondTransaction(transaction2);
             allocation.setAmount(newAmount);
-            allocation.setLocked(false);
-            transaction1.setLockedAllocatedAmount(newAmount);
-            transaction2.setLockedAllocatedAmount(newAmount);
+            allocation.setLocked(locked);
+            if (locked) {
+                transaction1.setLockedAllocatedAmount(newAmount);
+                transaction2.setLockedAllocatedAmount(newAmount);
+            } else {
+                transaction1.setAllocatedAmount(newAmount);
+                transaction2.setAllocatedAmount(newAmount);
+            }
         } else {
             String errMsg = "Illegal allocation. Transaction IDs: " + transactionId1 + ", " + transactionId2 +
                     " Amount: " + newAmount;
@@ -453,7 +468,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
     }
 
-    private BigDecimal getUnallocatedAmount(Transaction transaction) {
+    protected BigDecimal getUnallocatedAmount(Transaction transaction) {
 
         BigDecimal amount = transaction.getAmount() != null ?
                 transaction.getAmount() : BigDecimal.ZERO;
@@ -464,13 +479,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         BigDecimal lockedAllocatedAmount = transaction.getLockedAllocatedAmount() != null ?
                 transaction.getLockedAllocatedAmount() : BigDecimal.ZERO;
 
-        return amount.subtract(allocatedAmount.add(lockedAllocatedAmount));
+        return amount.subtract(allocatedAmount.add(lockedAllocatedAmount)).abs();
     }
 
     @Override
     @Transactional(readOnly = false)
     public void createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
-        // TODO
+        createAllocation(transactionId1, transactionId2, amount, true);
     }
 
     @Override
