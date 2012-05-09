@@ -400,8 +400,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         Query query = em.createQuery("select a from Allocation a " +
-                " fetch join firstTransaction t1 " +
-                " fetch join secondTransaction t2 " +
+                " join fetch a.firstTransaction t1 " +
+                " join fetch a.secondTransaction t2 " +
                 " where a.account.id = :userId");
         query.setParameter("userId", userId);
 
@@ -415,8 +415,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                         transaction1.getAllocatedAmount() : BigDecimal.ZERO;
                 BigDecimal allocatedAmount2 = transaction2.getAllocatedAmount() != null ?
                         transaction2.getAllocatedAmount() : BigDecimal.ZERO;
-                transaction1.setAllocatedAmount(allocatedAmount1.subtract(allocation.getAmount()));
-                transaction2.setAllocatedAmount(allocatedAmount2.subtract(allocation.getAmount()));
+                BigDecimal newAllocatedAmount1 = (allocatedAmount1.compareTo(BigDecimal.ZERO) >= 0) ?
+                        allocatedAmount1.subtract(allocation.getAmount()) :
+                        allocatedAmount1.add(allocation.getAmount());
+                BigDecimal newAllocatedAmount2 = (allocatedAmount2.compareTo(BigDecimal.ZERO) >= 0) ?
+                        allocatedAmount2.subtract(allocation.getAmount()) :
+                        allocatedAmount2.add(allocation.getAmount());
+                transaction1.setAllocatedAmount(newAllocatedAmount1);
+                transaction2.setAllocatedAmount(newAllocatedAmount2);
                 deleteEntity(allocation.getId(), Allocation.class);
             }
         }
@@ -424,7 +430,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         BigDecimal unallocatedAmount1 = getUnallocatedAmount(transaction1);
         BigDecimal unallocatedAmount2 = getUnallocatedAmount(transaction2);
 
-        if (unallocatedAmount1.compareTo(newAmount) < 0 || unallocatedAmount2.compareTo(newAmount) < 0) {
+        if (unallocatedAmount1.abs().compareTo(newAmount) < 0 || unallocatedAmount2.abs().compareTo(newAmount) < 0) {
             String errMsg = "Not enough balance to cover the allocation amount " + newAmount;
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
@@ -479,7 +485,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         BigDecimal lockedAllocatedAmount = transaction.getLockedAllocatedAmount() != null ?
                 transaction.getLockedAllocatedAmount() : BigDecimal.ZERO;
 
-        return amount.subtract(allocatedAmount.add(lockedAllocatedAmount)).abs();
+        return amount.subtract(allocatedAmount.add(lockedAllocatedAmount));
     }
 
     @Override

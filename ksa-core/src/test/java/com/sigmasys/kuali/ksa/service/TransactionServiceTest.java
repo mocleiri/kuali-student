@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.springframework.util.Assert;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,8 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class TransactionServiceTest extends AbstractServiceTest {
 
+    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
+    protected EntityManager em;
 
     @Autowired
     private TransactionService transactionService;
@@ -53,6 +57,46 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.isTrue("admin".equals(transaction.getAccount().getId()));
         Assert.isTrue(new Date().after(transaction.getEffectiveDate()));
         Assert.isTrue(new BigDecimal(10e5).equals(transaction.getNativeAmount()));
+
+    }
+
+    @Test
+    public void createAllocation() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction1 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(100));
+        Transaction transaction2 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(-100));
+
+        Assert.notNull(transaction1);
+        Assert.notNull(transaction2);
+        Assert.notNull(transaction1.getId());
+        Assert.notNull(transaction2.getId());
+        Assert.notNull(transaction1.getAmount());
+        Assert.notNull(transaction2.getAmount());
+
+        // Creating an allocation between 2 new transactions
+        Allocation allocation = new Allocation();
+        allocation.setFirstTransaction(transaction1);
+        allocation.setSecondTransaction(transaction2);
+        allocation.setAmount(new BigDecimal(10));
+        allocation.setLocked(true);
+        allocation.setAccount(transaction1.getAccount());
+        em.persist(allocation);
+
+        transactionService.createAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90));
+
+        transaction1 = transactionService.getTransaction(transaction1.getId());
+        transaction2 = transactionService.getTransaction(transaction2.getId());
+
+        Assert.notNull(transaction1);
+        Assert.notNull(transaction2);
+        Assert.notNull(transaction1.getId());
+        Assert.notNull(transaction2.getId());
+
+        Assert.isTrue(new BigDecimal(90).equals(transaction1.getAllocatedAmount()));
+        Assert.isTrue(new BigDecimal(90).equals(transaction2.getAllocatedAmount()));
+
 
     }
 
