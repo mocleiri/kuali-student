@@ -47,7 +47,7 @@ public class Activity implements Identifiable {
     /**
      * Account
      */
-    private Account account;
+    private String accountId;
 
     /**
      * Attribute
@@ -122,14 +122,13 @@ public class Activity implements Identifiable {
         this.logDetail = logDetail;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACNT_ID_FK")
-    public Account getAccount() {
-        return account;
+    @Column(name = "ACNT_ID_FK")
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     @Column(name = "ATTRIBUTE", length = 200)

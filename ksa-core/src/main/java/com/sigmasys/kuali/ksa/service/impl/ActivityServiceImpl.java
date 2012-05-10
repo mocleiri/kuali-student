@@ -23,7 +23,6 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
     private List<Activity> getActivities(Long id) {
         Query query = em.createQuery("select act from Activity act " +
                 " left outer join fetch act.type t " +
-                " left outer join fetch act.account a " +
                 ((id != null) ? " where act.id = :id " : "") +
                 " order by act.id desc");
         if (id != null) {
@@ -64,8 +63,7 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
     public List<Activity> getActivities(String userId) {
         Query query = em.createQuery("select act from Activity act " +
                 " left outer join fetch act.type t " +
-                " left outer join fetch act.account a " +
-                " where a.id = :userId " +
+                " where act.accountId = :userId " +
                 " order by act.id desc");
         query.setParameter("userId", userId);
         return query.getResultList();
