@@ -21,7 +21,6 @@ public class AlertsFlagsMemos {
 
          StringBuilder sba = new StringBuilder();
 
-         //sba.append(alert.getCreationDate().toString());
          SimpleDateFormat dtFrmt = new SimpleDateFormat("MM/dd/yyyy");
          StringBuilder sbDt = new StringBuilder(dtFrmt.format(alert.getCreationDate()));
          String infoDate = sbDt.toString();
@@ -43,7 +42,6 @@ public class AlertsFlagsMemos {
 
          StringBuilder sba = new StringBuilder();
 
-         //sba.append(alert.getCreationDate().toString());
          SimpleDateFormat dtFrmt = new SimpleDateFormat("MM/dd/yyyy");
          StringBuilder sbDt = new StringBuilder(dtFrmt.format(memo.getCreationDate()));
 
@@ -51,10 +49,12 @@ public class AlertsFlagsMemos {
          sba.append(infoDate);
 
          sba.append("  ");
-/*         sba.append(dtFrmt.format(memo.getEffectiveDate()));
+/*
+         sba.append(dtFrmt.format(memo.getEffectiveDate()));
          sba.append("  ");
          sba.append(dtFrmt.format(memo.getLastUpdate()));
-         sba.append("  ");*/
+         sba.append("  ");
+*/
          sba.append(memo.getText());
          compositeMemo = sba.toString();
       }
@@ -67,17 +67,16 @@ public class AlertsFlagsMemos {
       String compositeFlag = "";
 
       if (flag != null) {
-
+         String flgDesc = flag.getType().getDescription();
          StringBuilder sba = new StringBuilder();
 
-         //sba.append(alert.getCreationDate().toString());
          SimpleDateFormat dtFrmt = new SimpleDateFormat("MM/dd/yyyy");
          StringBuilder sbDt = new StringBuilder(dtFrmt.format(flag.getCreationDate()));
          String infoDate = sbDt.toString();
          sba.append(infoDate);
 
          sba.append(" ");
-         //sba.append(flag.getText()); TODO
+         sba.append(flag.getType().getDescription());
          compositeFlag = sba.toString();
       }
 

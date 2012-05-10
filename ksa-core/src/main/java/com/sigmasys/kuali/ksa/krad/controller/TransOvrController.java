@@ -44,6 +44,7 @@ public class TransOvrController extends UifControllerBase {
      */
     @Override
     protected TransOvrForm createInitialForm(HttpServletRequest request) {
+
         return new TransOvrForm();
     }
 
@@ -75,7 +76,6 @@ public class TransOvrController extends UifControllerBase {
         // do save stuff...
 
         currencyService.persistCurrency(form.getCurrency());
-
         return getUIFModelAndView(form);
     }
 
@@ -279,6 +279,9 @@ public class TransOvrController extends UifControllerBase {
 
         // remove a currency record by ISO type
         currencyService.persistCurrency(currency);
+        StringBuilder sb = new StringBuilder();
+        sb.append("New currency ");
+        sb.append(currency.getName());
 
         // refresh the list of currencies. the form and view manage the refresh
         form.setCurrencies(currencyService.getCurrencies());

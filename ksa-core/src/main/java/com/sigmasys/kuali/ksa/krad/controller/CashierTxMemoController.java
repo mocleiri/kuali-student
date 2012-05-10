@@ -4,7 +4,6 @@ import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
 import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
@@ -129,17 +128,30 @@ public class CashierTxMemoController extends UifControllerBase {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-            Date dtNow = new Date();
+           Date dtNow = new Date();
+           Transaction transaction = null;
+           StringBuilder sb = new StringBuilder();
+           sb.append("Add charge ");
 
-            Transaction transaction =
-                    transactionService.createTransaction(form.getChargeTransTypeValue(), accountId, dtNow,
-                            form.getCharge().getAmount());
+           try {
+              transaction =
+                 transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
+                                                      accountId, dtNow, form.getCharge().getAmount());
 
-            if (transaction != null) {
-                form.setTransactionStatus("Success");
-            } else {
-                form.setTransactionStatus("Failed to add charge");
-            }
+           } catch (IllegalArgumentException iaexp) {
+              form.setTransactionStatus(iaexp.getMessage());
+              sb.append(iaexp.getMessage());
+           } catch(Exception exp) {
+              form.setTransactionStatus(exp.getMessage());
+              sb.append(exp.getMessage());
+           } finally {
+              // persisting the transaction should return a Long in the TransactionServiceImpl
+              // the local transaction would be set to a return object if persisted, otherwise null
+              if (transaction != null) {
+                 form.setTransactionStatus("Success");
+                 sb.append(transaction.getId().toString());
+              }
+           }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -162,17 +174,29 @@ public class CashierTxMemoController extends UifControllerBase {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-            Date dtNow = new Date();
+           Date dtNow = new Date();
+           Transaction transaction = null;
+           StringBuilder sb = new StringBuilder();
+           sb.append("Make payment ");
 
-            Transaction transaction =
-                    transactionService.createTransaction(form.getPaymentTransTypeValue(), accountId, dtNow,
-                            form.getPayment().getAmount());
-
-            if (transaction != null) {
-                form.setTransactionStatus("Success");
-            } else {
-                form.setTransactionStatus("Failed to add payment");
-            }
+           try {
+              transaction =
+                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
+                                                      accountId, dtNow, form.getPayment().getAmount());
+           } catch (IllegalArgumentException iaexp) {
+              form.setTransactionStatus(iaexp.getMessage());
+              sb.append(iaexp.getMessage());
+           } catch(Exception exp) {
+              form.setTransactionStatus(exp.getMessage());
+              sb.append(exp.getMessage());
+           } finally {
+              // persisting the transaction should return a Long in the TransactionServiceImpl
+              // the local transaction would be set to a return object if persisted, otherwise null
+              if (transaction != null) {
+                 form.setTransactionStatus("Success");
+                 sb.append(transaction.getId().toString());
+              }
+           }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -197,23 +221,29 @@ public class CashierTxMemoController extends UifControllerBase {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-            Date dtNow = new Date();
+           Date dtNow = new Date();
+           Transaction transaction = null;
 
-            Transaction transaction =
-                    transactionService.createTransaction(form.getPaymentTransTypeValue(), accountId, dtNow,
-                            form.getPayment().getAmount());
+           try {
+              transaction =
+                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
+                                                      accountId, dtNow, form.getPayment().getAmount());
+           } catch (IllegalArgumentException iaexp) {
+              form.setTransactionStatus(iaexp.getMessage());
+           } catch(Exception exp) {
+              form.setTransactionStatus(exp.getMessage());
+           } finally {
+              // persisting the transaction should return a Long in the TransactionServiceImpl
+              // the local transaction would be set to a return object if persisted, otherwise null
+              if (transaction != null) {
+                 // age the indexed Account Transactions
+                 ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
 
-            if (transaction != null) {
-                ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
-
-                if (chargeableAccount != null) {
+                 if (chargeableAccount != null) {
                     form.setTransactionStatus("Success");
-                } else {
-                    form.setTransactionStatus("Failed to age transactions");
-                }
-            } else {
-                form.setTransactionStatus("Failed to add payment");
-            }
+                 }
+              }
+           }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -514,7 +544,14 @@ public class CashierTxMemoController extends UifControllerBase {
 
         // Flags
         // Flags do not have a Text field and throws an exception when there are flag records TODO
-        //form.setFlagList(informationService.getFlags(id));
+        List<Flag> flags = informationService.getFlags(id);
+
+        for (Flag flag : flags) {
+
+           flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
+        }
+
+        form.setFlagList(flags);
 
         List<Memo> memos = informationService.getMemos(id);
 
