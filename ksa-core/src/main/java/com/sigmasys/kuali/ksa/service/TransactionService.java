@@ -4,7 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.*;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 
 /**
  * Transaction service declares business operations on Transaction and related
@@ -13,7 +17,14 @@ import com.sigmasys.kuali.ksa.model.*;
  *
  * @author Michael Ivanov
  */
+@Url(TransactionService.SERVICE_URL)
+@WebService(serviceName = TransactionService.SERVICE_NAME, portName = TransactionService.PORT_NAME,
+        targetNamespace = Constants.WS_NAMESPACE)
 public interface TransactionService {
+
+    public static final String SERVICE_URL = "transaction.webservice";
+    public static final String SERVICE_NAME = "TransactionService";
+    public static final String PORT_NAME = SERVICE_NAME + "Port";
 
 
     /**
@@ -26,6 +37,7 @@ public interface TransactionService {
      * @param amount            Transaction amount
      * @return new Transaction instance
      */
+    @WebMethod(exclude = true)
     Transaction createTransaction(String transactionTypeId, String userId, Date effectiveDate, BigDecimal amount);
 
     /**
@@ -90,6 +102,7 @@ public interface TransactionService {
      *
      * @return List of transactions
      */
+    @WebMethod(exclude = true)
     List<Transaction> getTransactions();
 
     /**
@@ -112,6 +125,7 @@ public interface TransactionService {
      *
      * @return List of all charges
      */
+    @WebMethod(exclude = true)
     List<Charge> getCharges();
 
     /**
@@ -119,6 +133,7 @@ public interface TransactionService {
      *
      * @return List of all payments
      */
+    @WebMethod(exclude = true)
     List<Payment> getPayments();
 
     /**
@@ -134,6 +149,7 @@ public interface TransactionService {
      *
      * @return List of all deferments
      */
+    @WebMethod(exclude = true)
     List<Deferment> getDeferments();
 
     /**

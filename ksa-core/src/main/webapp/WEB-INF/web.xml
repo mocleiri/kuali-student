@@ -20,6 +20,9 @@
         <param-value>classpath:/META-INF/ksa-context.xml</param-value>
     </context-param>
 
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
 
     <listener>
         <listener-class>com.sigmasys.kuali.ksa.servlet.WebappContextLoaderListener</listener-class>
@@ -62,7 +65,7 @@
 
     <servlet>
         <servlet-name>springDispatcher</servlet-name>
-        <servlet-class>com.sigmasys.kuali.ksa.servlet.LazyInitDispatcherServlet</servlet-class>
+        <servlet-class>com.sigmasys.kuali.ksa.servlet.WebServiceDispatcherServlet</servlet-class>
         <!--  Tell this servlet to use ROOT spring context -->
         <init-param>
             <param-name>contextAttribute</param-name>

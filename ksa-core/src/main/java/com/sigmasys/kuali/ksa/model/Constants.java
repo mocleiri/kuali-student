@@ -18,6 +18,9 @@ public interface Constants {
     String LOCALE_LANG_PARAM_NAME = "ksa.locale.lang";
     String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
 
+    // WS constants
+    String WS_NAMESPACE =  "http://sigmasys.com/";
+
     // ---------------------------------------------------------------
     // DATE FORMATS
     // ---------------------------------------------------------------

@@ -9,12 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/main/resources" />
-          <root url="file://$MODULE_DIR$/src/test/java" />
-          <root url="file://$MODULE_DIR$/src/test/resources" />
-        </sourceRoots>
       </configuration>
     </facet>
     <facet type="gwt" name="GWT">
@@ -45,6 +39,25 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="gwt-user" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:jaxws-rt:2.2.6" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.ws:jaxws-api:2.2.8" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.soap:saaj-api:1.3.4" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish:javax.annotation:3.1.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.jws:jsr181-api:1.0-MR1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.5" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.messaging.saaj:saaj-impl:1.3.18" level="project" />
+    <orderEntry type="library" name="Maven: org.jvnet.mimepull:mimepull:1.8" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.stream.buffer:streambuffer:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.woodstox:woodstox-core-asl:4.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.woodstox:stax2-api:3.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:policy:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.txw2:txw2:20110809" level="project" />
+    <orderEntry type="library" name="Maven: relaxngDatatype:relaxngDatatype:20020414" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.gmbal:gmbal-api-only:3.1.0-b001" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.external:management-api:3.0.0-b012" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.ha:ha-api:3.1.8" level="project" />
+    <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.4" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
@@ -98,7 +111,6 @@
     <orderEntry type="library" name="Maven: org.apache.neethi:neethi:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-common-schemas:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-core:2.2.9" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.1.13" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-bindings-soap:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-tools-common:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-databinding-jaxb:2.2.9" level="project" />
@@ -109,16 +121,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.xml.bind:jaxb-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ws.security:wss4j:1.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.apache.santuario:xmlsec:1.4.3" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.soap:saaj-api:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-transports-http:2.2.9" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.ws:webservices-rt:1.4" level="project" />
     <orderEntry type="library" name="Maven: javax.xml:webservices-api:1.4" level="project" />
-    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.jax-ws-commons.spring:jaxws-spring:1.8" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xbean:xbean-spring:2.7" level="project" />
-    <orderEntry type="library" name="Maven: javax.jws:jsr181-api:1.0-MR1" level="project" />
-    <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.annotation:jsr250-api:1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
     <orderEntry type="library" name="Maven: com.extjs:gxt:2.2.5-gwt22" level="project" />

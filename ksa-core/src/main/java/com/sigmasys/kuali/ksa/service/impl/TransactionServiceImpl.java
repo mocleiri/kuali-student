@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -27,6 +29,8 @@ import java.util.Locale;
  */
 @Service("transactionService")
 @Transactional(readOnly = true)
+@WebService(serviceName = TransactionService.SERVICE_NAME, portName = TransactionService.PORT_NAME,
+        targetNamespace = Constants.WS_NAMESPACE)
 @SuppressWarnings("unchecked")
 public class TransactionServiceImpl extends GenericPersistenceService implements TransactionService {
 
@@ -81,6 +85,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return new Transaction instance
      */
     @Override
+    @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public Transaction createTransaction(String transactionTypeId, String userId, Date effectiveDate, BigDecimal amount) {
         return createTransaction(transactionTypeId, null, userId, effectiveDate, amount);
@@ -91,6 +96,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
      *                          based on the effective date
+     * @param externalId            Transaction External ID
      * @param userId            Account ID
      * @param effectiveDate     Transaction effective Date
      * @param amount            Transaction amount
@@ -253,6 +259,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return List of transactions
      */
     @Override
+    @WebMethod(exclude = true)
     public List<Transaction> getTransactions() {
         return getTransactions(Transaction.class);
     }
@@ -263,6 +270,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return List of all charges
      */
     @Override
+    @WebMethod(exclude = true)
     public List<Charge> getCharges() {
         return getTransactions(Charge.class);
     }
@@ -284,6 +292,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return List of all payments
      */
     @Override
+    @WebMethod(exclude = true)
     public List<Payment> getPayments() {
         return getTransactions(Payment.class);
     }
@@ -306,6 +315,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return List of all deferments
      */
     @Override
+    @WebMethod(exclude = true)
     public List<Deferment> getDeferments() {
         return getTransactions(Deferment.class);
     }
@@ -553,23 +563,5 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         // TODO
         return null;
     }
-
-
-    /**
-     * using the transactionType, return a list of the general ledger accounts that this debit will feed. This will require the
-     * effectiveDate of the transaction, as some GL codes will change after certain periods of time.
-     */
-    public void getGlAccounts() {
-        // TODO
-    }
-
-    /**
-     * As getGlAccounts(), but also returns the breakout of the amounts to the general ledger accounts. For example, if this transaction is
-     * for $1000, and sends 30% to account 111 and 70% to 222 then the system will return the breakout amounts as well as the gl accounts.
-     */
-    public void getGlAccountsWithBreakdown() {
-        // TODO
-    }
-
 
 }

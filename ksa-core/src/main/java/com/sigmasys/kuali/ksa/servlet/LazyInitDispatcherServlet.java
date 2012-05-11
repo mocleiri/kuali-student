@@ -22,9 +22,10 @@ import java.util.Map;
 
 /**
  * LazyInitDispatcherServlet.
- * User: Michael Ivanov
+ *
+ * @author Michael Ivanov
  */
-@SuppressWarnings("serial")
+@SuppressWarnings("unchecked")
 public class LazyInitDispatcherServlet extends DispatcherServlet {
 
     private static final Log logger = LogFactory.getLog(LazyInitDispatcherServlet.class);
@@ -93,7 +94,7 @@ public class LazyInitDispatcherServlet extends DispatcherServlet {
             Field field = DispatcherServlet.class.getDeclaredField("handlerAdapters");
             field.setAccessible(true);
             List<HandlerAdapter> handlerAdapters = (List<HandlerAdapter>) field.get(this);
-            if ( handlerAdapters == null ) {
+            if (handlerAdapters == null) {
                 handlerAdapters = new LinkedList<HandlerAdapter>();
             }
             handlerAdapters.add(new SimpleServletHandlerAdapter());
