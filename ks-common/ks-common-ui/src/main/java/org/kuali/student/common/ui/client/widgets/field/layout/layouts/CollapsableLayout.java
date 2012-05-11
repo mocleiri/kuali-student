@@ -20,20 +20,29 @@ import org.kuali.student.common.ui.client.widgets.field.layout.button.ButtonLayo
 import org.kuali.student.common.ui.client.widgets.field.layout.element.FieldElement;
 import org.kuali.student.common.ui.client.widgets.search.CollapsablePanel;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * A layout which uses collapsable panel to collapse its content.  Otherwise identical to VerticalFieldLayout.
+ * @author Kuali Student Team
+ *
+ */
+@Deprecated
 public class CollapsableLayout extends FieldLayout{
 
 	private VerticalFieldLayout verticalLayout = new VerticalFieldLayout();
 	private CollapsablePanel panel;
 	
 	public CollapsableLayout(String title){
-		panel = new CollapsablePanel(title, verticalLayout, false);
+	    panel = GWT.create(CollapsablePanel.class);
+        panel.initialise(title, verticalLayout, false);
 		this.add(panel);
 	}
 	
 	public CollapsableLayout(String title, boolean isOpen){
-		panel = new CollapsablePanel(title, verticalLayout, isOpen);
+	    panel = GWT.create(CollapsablePanel.class);
+        panel.initialise(title, verticalLayout, isOpen);
 		this.add(panel);
 	}
 	
