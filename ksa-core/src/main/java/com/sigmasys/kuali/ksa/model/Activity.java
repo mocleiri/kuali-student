@@ -50,9 +50,14 @@ public class Activity implements Identifiable {
     private String accountId;
 
     /**
-     * Attribute
+     * Old attribute value
      */
-    private String attribute;
+    private String oldAttribute;
+
+    /**
+     * New attribute value
+     */
+    private String newAttribute;
 
     /**
      * Activity type
@@ -131,13 +136,22 @@ public class Activity implements Identifiable {
         this.accountId = accountId;
     }
 
-    @Column(name = "ATTRIBUTE", length = 200)
-    public String getAttribute() {
-        return attribute;
+    @Column(name = "OLD_ATTRIBUTE", length = 4000)
+    public String getOldAttribute() {
+        return oldAttribute;
     }
 
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
+    public void setOldAttribute(String oldAttribute) {
+        this.oldAttribute = oldAttribute;
+    }
+
+    @Column(name = "NEW_ATTRIBUTE", length = 4000)
+    public String getNewAttribute() {
+        return newAttribute;
+    }
+
+    public void setNewAttribute(String newAttribute) {
+        this.newAttribute = newAttribute;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

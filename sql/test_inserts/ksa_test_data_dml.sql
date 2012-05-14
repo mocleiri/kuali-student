@@ -1074,20 +1074,20 @@ Insert into KSSA_CREDIT_PERMISSION (ID,ALLOWABLE_DEBIT_TYPE_MASK,PRIORITY,TRANSA
 ---------------------------------------------------
 
 
-INSERT INTO KSSA_ACTIVITY (id, attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
+INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
 VALUES (1, 'Liaison', '20', '000.000.000.000', 'Batch XML Processing', null, to_timestamp('27-APR-12 09:23:31.654000', 'DD-Mon-RR HH24:MI:SS.FF'), null, 7);
 
-INSERT INTO KSSA_ACTIVITY (id, attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
+INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
 VALUES (2, 'Liaison', '20', '000.000.000.000', 'Batch XML Processing', null, to_timestamp('03-MAY-12 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'), null, 7);
 
-INSERT INTO KSSA_ACTIVITY (id, attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
+INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
 VALUES (3, 'CSR', '65', '010.012.025.148', 'KSA Login', null, to_timestamp('03-MAY-12 15:34:42.253000', 'DD-Mon-RR HH24:MI:SS.FF'), 'user1', 7);
 
-INSERT INTO KSSA_ACTIVITY (id, attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
+INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
 VALUES (4, 'Liaison', '20', '000.000.000.000', 'Upload XML File', null, to_timestamp('03-MAY-12 14:27:35.154000', 'DD-Mon-RR HH24:MI:SS.FF'), null, 7);
 
-INSERT INTO KSSA_ACTIVITY (id, attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
+INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
 VALUES (5, 'CSR', '65', '000.000.000.000', 'Age Accounts', null, to_timestamp('03-MAY-12 07:48:54.814000', 'DD-Mon-RR HH24:MI:SS.FF'), 'user1', 7);
 
-INSERT INTO KSSA_ACTIVITY (id, attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
+INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
 VALUES (6, 'CSR', '65', '000.000.000.000', 'Add Charge', null, to_timestamp('03-MAY-12 07:56:14.684000', 'DD-Mon-RR HH24:MI:SS.FF'), 'user1', 7);

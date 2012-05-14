@@ -71,7 +71,7 @@ public class ActivityServiceTest extends AbstractServiceTest {
 
         Assert.isTrue(activity.getId().equals(1L));
 
-        activity.setAttribute("Attribute_1");
+        activity.setOldAttribute("Attribute_1");
 
 
         activityService.persistActivity(activity);
@@ -79,8 +79,8 @@ public class ActivityServiceTest extends AbstractServiceTest {
         activity = activityService.getActivity(1L);
 
         Assert.notNull(activity);
-        Assert.notNull(activity.getAttribute());
-        Assert.isTrue(activity.getAttribute().equals("Attribute_1"));
+        Assert.notNull(activity.getOldAttribute());
+        Assert.isTrue(activity.getOldAttribute().equals("Attribute_1"));
 
     }
 
