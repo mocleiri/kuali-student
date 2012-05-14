@@ -5,18 +5,25 @@ import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.ChargeableAccount;
 import com.sigmasys.kuali.ksa.model.Debit;
 import com.sigmasys.kuali.ksa.model.Pair;
+import com.sun.corba.se.spi.activation.EndPointInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
+import org.kuali.rice.ksb.api.KsbApiServiceLocator;
+import org.kuali.rice.ksb.api.bus.Endpoint;
+import org.kuali.rice.ksb.service.KSBServiceLocator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import javax.xml.namespace.QName;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.List;
 
 
@@ -167,6 +174,33 @@ public class AccountServiceTest extends AbstractServiceTest {
         logger.info("Amount Late1 After = " + account.getAmountLate1());
         logger.info("Amount Late2 After = " + account.getAmountLate2());
         logger.info("Amount Late3 After = " + account.getAmountLate3());
+
+    }
+
+    @Test
+    public void getAccountKsb() {
+
+        String userId = "admin";
+
+        QName serviceName = new QName("http://sigmasys.com/ksa", "accountService");
+
+        Endpoint endpoint = KsbApiServiceLocator.getServiceBus().getEndpoint(serviceName);
+
+        Assert.notNull(endpoint);
+        Assert.notNull(endpoint.getServiceConfiguration());
+        URL endpointUrl = endpoint.getServiceConfiguration().getEndpointUrl();
+        Assert.notNull(endpointUrl);
+
+        logger.info("Endpoint URL = " + endpointUrl);
+
+        AccountService service = (AccountService) KsbApiServiceLocator.getServiceBus().getService(serviceName);
+
+
+        Assert.notNull(service);
+
+        Account account = service.getFullAccount(userId);
+
+        Assert.notNull(account);
 
     }
 

@@ -80,6 +80,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>ksbDispatcher</servlet-name>
+        <servlet-class>org.kuali.rice.ksb.messaging.servlet.KSBDispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>springDispatcher</servlet-name>
         <url-pattern>*.service</url-pattern>
@@ -88,6 +94,11 @@
     <servlet-mapping>
         <servlet-name>springDispatcher</servlet-name>
         <url-pattern>*.webservice</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ksbDispatcher</servlet-name>
+        <url-pattern>/remoting/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

@@ -38,7 +38,16 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
-    <bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="coreConfigurer"/>
+    <bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="coreConfigurer">
+        <property name="services">
+            <bean id="accountServiceDefinition" class="com.sigmasys.kuali.ksa.service.KsaServiceDefinition"
+                  p:serviceNameSpaceURI="http://sigmasys.com/ksa"
+                  p:localServiceName="accountService"
+                  p:jaxWsService="true"
+                  p:busSecurity="false"
+                  p:service-ref="accountService"/>
+        </property>
+    </bean>
 
     <!-- bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="ksbConfigurer"/ -->
 
@@ -54,7 +63,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         </property>
     </bean>
 
-    <bean id="coreServiceConfigurer" class="org.kuali.rice.coreservice.impl.config.CoreServiceConfigurer" depends-on="ksaConfigurer"/>
+    <bean id="coreServiceConfigurer" class="org.kuali.rice.coreservice.impl.config.CoreServiceConfigurer"
+          depends-on="ksaConfigurer"/>
 
 
 </beans>
