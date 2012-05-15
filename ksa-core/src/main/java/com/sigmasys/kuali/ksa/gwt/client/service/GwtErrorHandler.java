@@ -14,7 +14,7 @@ import com.sigmasys.kuali.ksa.gwt.client.model.GwtError;
  */
 public class GwtErrorHandler {
 
-    private static final String DEFAULT_ERROR_MESSAGE = "Error occured.";
+    private static final String DEFAULT_ERROR_MESSAGE = "Error occurred.";
 
     public static final String COMMON_ERROR_PREFIX = "Request failed.";
     public static final String COMMON_ERROR_SUFFIX = "See server log for details.";
@@ -73,7 +73,7 @@ public class GwtErrorHandler {
         if (listener != null) {
             messageBox.addCallback(listener);
         }
-        GWT.log("Error occured: " + errorMessage);
+        GWT.log("Error occurred: " + errorMessage);
         if (!visible) {
             messageBox.setMessage(errorMessage);
             messageBox.setIcon(MessageBox.ERROR);

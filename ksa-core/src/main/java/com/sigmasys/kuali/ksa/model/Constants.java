@@ -19,7 +19,7 @@ public interface Constants {
     String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
 
     // WS constants
-    String WS_NAMESPACE =  "http://sigmasys.com/";
+    String WS_NAMESPACE = "http://sigmasys.com/";
 
     // ---------------------------------------------------------------
     // DATE FORMATS
@@ -37,5 +37,6 @@ public interface Constants {
     // URL mapping constants
     String CONFIG_SERVICE_URL = "config.service";
     String ACCOUNT_SERVICE_URL = "account.service";
+    String TRANSACTION_SERVICE_URL = "transaction.service";
 
 }
