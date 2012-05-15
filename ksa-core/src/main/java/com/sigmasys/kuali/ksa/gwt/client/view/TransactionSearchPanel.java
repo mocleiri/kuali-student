@@ -46,8 +46,7 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
    private EntityNameField city;
    private EntityNameField state;
    private ListViewAdapter<StringModelData> country;
-
-   private SimpleComboBox<String> transactionTypes;
+   private ListViewAdapter<StringModelData> transactionTypes;
 
    @Override
    protected void fillSearchElementsContainer(LayoutContainer panel) {
@@ -120,21 +119,14 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
       panel.add(countryLabel);
       panel.add(country);
 
-      transactionTypes = new SimpleComboBox<String>();
-      transactionTypes.add(TransactionModel.transactionTypes);
-      transactionTypes.setSimpleValue("All");
-      transactionTypes.setTriggerAction(ComboBox.TriggerAction.ALL);
-      transactionTypes.setForceSelection(true);
-      transactionTypes.setAllowBlank(false);
-      transactionTypes.setEditable(false);
-      transactionTypes.setWidth(100);
-      transactionTypes.addListener(Events.Select, new Listener<FieldEvent>() {
-         public void handleEvent(FieldEvent be) {
-            @SuppressWarnings("unchecked")
-            String newTransType = ((SimpleComboValue<String>) be.getField().getValue()).getValue();
-            TransactionModel.setSelectedTransactionType(newTransType);
-         }
-      });
+      transactionTypes = new ListViewAdapter<StringModelData>( new ListStore<StringModelData>());
+      transactionTypes.setDisplayProperty(StringModelData.DISPLAY_VALUE_KEY);
+      transactionTypes.setWidth(ELEMENT_WIDTH / 2);
+      transactionTypes.setHeight(100);
+      for (String transType : TransactionModel.transactionTypes) {
+         Log.debug("Adding transaction type: " + transType);
+         transactionTypes.addToStore(new StringModelData(transType));
+      }
       Text transactionTypesLabel = WidgetFactory.createText("Transaction Type:");
       panel.add(transactionTypesLabel);
       panel.add(transactionTypes);
