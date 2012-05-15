@@ -78,5 +78,4 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
 
         return columns;
     }
-
 }

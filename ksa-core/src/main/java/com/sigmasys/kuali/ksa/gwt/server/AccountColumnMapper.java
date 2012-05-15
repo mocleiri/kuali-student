@@ -13,12 +13,12 @@ import java.util.Map;
  */
 public class AccountColumnMapper extends AbstractColumnMapper {
 
-    @Override
+   @Override
 	protected Map<String, String> getFieldTranslationMapping() {
         return new HashMap<String, String>();
     }
 
-    @Override
+   @Override
 	protected Map<String, String> getFieldSortMapping() {
         Map<String, String> sortMap = new HashMap<String, String>();
         sortMap.put(AccountModel.COLUMN_ID, AccountModel.ID);

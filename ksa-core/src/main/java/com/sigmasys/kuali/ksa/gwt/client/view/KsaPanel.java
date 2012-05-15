@@ -32,8 +32,7 @@ public class KsaPanel extends TabPanel {
         tabItem.setIconStyle("icon-card");
         tabItem.setLayout(new FitLayout());
         tabItem.setScrollMode(Style.Scroll.AUTO);
-        // TODO
-        tabItem.add(new LayoutContainer());
+        tabItem.add(new TransactionCompositePanel());
         add(tabItem);
 
         tabItem = new TabItem("Payments");

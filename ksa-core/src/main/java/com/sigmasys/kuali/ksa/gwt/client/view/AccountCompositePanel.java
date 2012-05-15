@@ -26,5 +26,4 @@ public class AccountCompositePanel extends AbstractCompositePanel<AccountModel> 
                 searchCriteria != null
         );
     }
-
 }
