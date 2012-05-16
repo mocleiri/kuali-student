@@ -5,6 +5,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
 
+import java.util.List;
+
 
 /**
  * GwtTransactionServiceAsync
@@ -14,7 +16,9 @@ import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
 public interface GwtTransactionServiceAsync {
 
     void findTransactions(SearchCriteria searchCriteria, String sortDir,
-                      String sortField, int offset, int limit,
-                      AsyncCallback<PagingLoadResult<TransactionModel>> callback);
+                          String sortField, int offset, int limit,
+                          AsyncCallback<PagingLoadResult<TransactionModel>> callback);
+
+    void getExistingCurrencyCodes(AsyncCallback<List<String>> callback);
 
 }

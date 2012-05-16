@@ -9,6 +9,7 @@ import com.sigmasys.kuali.ksa.gwt.server.AbstractSearchService;
 import com.sigmasys.kuali.ksa.gwt.server.SearchQueryBuilder;
 import com.sigmasys.kuali.ksa.gwt.server.TransactionColumnMapper;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,7 +52,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
     protected EntityManager em;
 
     @Autowired
-    private TransactionService transactionService;
+    private CurrencyService currencyService;
 
 
     @Override
@@ -113,6 +114,16 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         }
 
         return model;
+    }
+
+    @Override
+    public List<String> getExistingCurrencyCodes() throws GwtError {
+        List<Currency> currencies = currencyService.getCurrencies();
+        List<String> currencyCodes = new ArrayList<String>(currencies.size());
+        for ( Currency currency : currencies) {
+            currencyCodes.add(currency.getIso());
+        }
+        return currencyCodes;
     }
 
 }

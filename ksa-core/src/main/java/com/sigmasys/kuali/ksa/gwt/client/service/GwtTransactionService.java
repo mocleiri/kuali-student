@@ -6,6 +6,8 @@ import com.sigmasys.kuali.ksa.gwt.client.model.GwtError;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
 
+import java.util.List;
+
 
 /**
  * GwtTransactionService
@@ -16,6 +18,8 @@ public interface GwtTransactionService extends RemoteService {
 
     PagingLoadResult<TransactionModel> findTransactions(SearchCriteria searchCriteria, String sortDir,
                                                         String sortField, int offset, int limit) throws GwtError;
+
+    List<String> getExistingCurrencyCodes() throws GwtError;
 
 
 }
