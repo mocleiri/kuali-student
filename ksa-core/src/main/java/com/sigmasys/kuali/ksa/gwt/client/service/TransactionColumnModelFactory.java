@@ -26,7 +26,7 @@ import java.util.List;
 public class TransactionColumnModelFactory extends AbstractColumnModelFactory<TransactionModel> {
 
     public static final String LABEL_ID = "Transaction ID";
-    public static final String LABEL_TYPE = "Origination Date";
+    public static final String LABEL_TYPE = "Transaction Type";
     public static final String LABEL_ORIGINATION_DATE = "Origination Date";
     public static final String LABEL_EFFECTIVE_DATE = "Effective Date";
     public static final String LABEL_ACCOUNT_ID = "Account ID";
@@ -42,15 +42,15 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
 
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
-        ColumnConfig column = new ColumnConfig(TransactionModel.COLUMN_ID, LABEL_ID, 100);
+        ColumnConfig column = new ColumnConfig(TransactionModel.COLUMN_ID, LABEL_ID, 90);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_ACCOUNT_ID, LABEL_ACCOUNT_ID, 100);
+        column = new ColumnConfig(TransactionModel.COLUMN_ACCOUNT_ID, LABEL_ACCOUNT_ID, 80);
         column.setAlignment(Style.HorizontalAlignment.LEFT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.TYPE, LABEL_TYPE, 100);
+        column = new ColumnConfig(TransactionModel.TYPE, LABEL_TYPE, 90);
         column.setAlignment(Style.HorizontalAlignment.LEFT);
         column.setRenderer(new GridCellRenderer<TransactionModel>() {
             @Override
@@ -66,17 +66,17 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         });
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_ORIGINATION_DATE, LABEL_ORIGINATION_DATE, 110);
+        column = new ColumnConfig(TransactionModel.COLUMN_ORIGINATION_DATE, LABEL_ORIGINATION_DATE, 100);
         column.setDateTimeFormat(dateFormat);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_EFFECTIVE_DATE, LABEL_EFFECTIVE_DATE, 110);
+        column = new ColumnConfig(TransactionModel.COLUMN_EFFECTIVE_DATE, LABEL_EFFECTIVE_DATE, 100);
         column.setDateTimeFormat(dateFormat);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_AMOUNT, LABEL_AMOUNT, 90);
+        column = new ColumnConfig(TransactionModel.COLUMN_AMOUNT, LABEL_AMOUNT, 80);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
