@@ -56,7 +56,7 @@ public class CurrencyServiceImpl extends GenericPersistenceService implements Cu
      */
     @Override
     public List<Currency> getCurrencies() {
-        return getEntities(Currency.class, new Pair<String, SortOrder>("iso", SortOrder.DESC));
+        return getEntities(Currency.class, new Pair<String, SortOrder>("iso", SortOrder.ASC));
     }
 
     /**
