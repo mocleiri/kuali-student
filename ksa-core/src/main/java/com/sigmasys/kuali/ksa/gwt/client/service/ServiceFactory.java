@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.sigmasys.kuali.ksa.model.Constants;
 
 /**
- * ServiceFactory creates GWT async services.
+ * ServiceFactory creates GWT Async services.
  *
  * @author Michael Ivanov
  */
@@ -14,11 +14,13 @@ public class ServiceFactory {
 
     private static final GwtConfigServiceAsync configService;
     private static final GwtAccountServiceAsync accountService;
+    private static final GwtTransactionServiceAsync transactionService;
 
     // Initialization of the remote services
     static {
         configService = initService(GWT.create(GwtConfigService.class), Constants.CONFIG_SERVICE_URL);
         accountService = initService(GWT.create(GwtAccountService.class), Constants.ACCOUNT_SERVICE_URL);
+        transactionService = initService(GWT.create(GwtTransactionService.class), Constants.TRANSACTION_SERVICE_URL);
     }
 
     private ServiceFactory() {
@@ -30,11 +32,15 @@ public class ServiceFactory {
     }
 
     public static GwtConfigServiceAsync getConfigService() {
-           return configService;
+        return configService;
     }
 
     public static GwtAccountServiceAsync getAccountService() {
         return accountService;
+    }
+
+    public static GwtTransactionServiceAsync getTransactionService() {
+        return transactionService;
     }
 
 }

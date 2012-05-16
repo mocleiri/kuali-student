@@ -6,8 +6,8 @@ import java.util.*;
  * Transaction model
  *
  * @author dmulderink, mivanov
- * Date: 5/11/12
- * Time: 1:20 PM
+ *         Date: 5/11/12
+ *         Time: 1:20 PM
  */
 public class TransactionModel extends AbstractModel {
 
@@ -36,7 +36,7 @@ public class TransactionModel extends AbstractModel {
 
 
     public static final String RESPONSIBLE_ENTITY = "transaction.responsibleEntity";
-    public static final String STATEMENT_TXT = "transaction.statementText";
+    public static final String STATEMENT_TEXT = "transaction.statementText";
     public static final String REFUND_RULE = "transaction.refundRule";
 
 
@@ -64,7 +64,7 @@ public class TransactionModel extends AbstractModel {
 
 
     public static final String COLUMN_RESPONSIBLE_ENTITY = "trans_responsible_entity";
-    public static final String COLUMN_STATEMENT_TXT = "trans_statement_text";
+    public static final String COLUMN_STATEMENT_TEXT = "trans_statement_text";
     public static final String COLUMN_REFUND_RULE = "trans_refund_rule";
 
     private TransactionType type;
@@ -126,11 +126,11 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_EXTERNAL_ID, externalId);
     }
 
-    public String getGlEntryGenerated() {
+    public Boolean isGlEntryGenerated() {
         return get(COLUMN_GL_ENTRY_GENERATED);
     }
 
-    public void setGlEntryGenerated(String glEntryGenerated) {
+    public void setGlEntryGenerated(Boolean glEntryGenerated) {
         set(COLUMN_GL_ENTRY_GENERATED, glEntryGenerated);
     }
 
@@ -150,11 +150,11 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_LEDGER_DATE, ledgerDate);
     }
 
-    public String getLockedAllocatedAmount() {
+    public Double getLockedAllocatedAmount() {
         return get(COLUMN_LOCKED_ALLOCATED_AMOUNT);
     }
 
-    public void setLockedAllocated(String lockedAllocatedAmount) {
+    public void setLockedAllocatedAmount(Double lockedAllocatedAmount) {
         set(COLUMN_LOCKED_ALLOCATED_AMOUNT, lockedAllocatedAmount);
     }
 
@@ -190,12 +190,12 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_RESPONSIBLE_ENTITY, entityId);
     }
 
-    public String getStatementTxt() {
-        return get(COLUMN_STATEMENT_TXT);
+    public String getStatementText() {
+        return get(COLUMN_STATEMENT_TEXT);
     }
 
-    public void setStatementTxt(String statementText) {
-        set(COLUMN_STATEMENT_TXT, statementText);
+    public void setStatementText(String statementText) {
+        set(COLUMN_STATEMENT_TEXT, statementText);
     }
 
     public String getCurrencyCode() {

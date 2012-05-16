@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.gwt.server.impl;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.sigmasys.kuali.ksa.annotation.UrlMapping;
 import com.sigmasys.kuali.ksa.gwt.client.model.*;
+import com.sigmasys.kuali.ksa.gwt.client.model.TransactionType;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtTransactionService;
 import com.sigmasys.kuali.ksa.gwt.server.AbstractSearchService;
 import com.sigmasys.kuali.ksa.gwt.server.SearchQueryBuilder;
@@ -81,8 +82,35 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         TransactionModel model = new TransactionModel();
         model.setId(transaction.getId());
         model.setExternalId(transaction.getExternalId());
+        model.setTypeId(transaction.getTransactionType().getId().getId());
+        model.setTypeSubCode(transaction.getTransactionType().getId().getSubCode());
 
-        // TODO:
+        model.setAmount(transaction.getAmount() != null ? transaction.getAmount().doubleValue() : 0.0);
+        model.setNativeAmount(transaction.getNativeAmount() != null ? transaction.getNativeAmount().doubleValue() : 0.0);
+        model.setAllocatedAmount(transaction.getAllocatedAmount() != null ?
+                transaction.getAllocatedAmount().doubleValue() : 0.0);
+        model.setLockedAllocatedAmount(transaction.getLockedAllocatedAmount() != null ?
+                transaction.getAllocatedAmount().doubleValue() : 0.0);
+
+        model.setAccountId(transaction.getAccount().getId());
+        model.setCurrencyCode(transaction.getCurrency().getIso());
+
+        model.setEffectiveDate(transaction.getEffectiveDate());
+        model.setLedgerDate(transaction.getLedgerDate());
+        model.setOriginationDate(transaction.getOriginationDate());
+        model.setGlEntryGenerated(transaction.isGlEntryGenerated());
+        model.setInternal(transaction.isInternal());
+        model.setRefundRule(transaction.getRefundRule());
+        model.setStatementText(transaction.getStatementText());
+        model.setResponsibleEntity(transaction.getResponsibleEntity());
+
+        if (transaction instanceof Charge) {
+            model.setType(TransactionType.CHARGE);
+        } else if (transaction instanceof Payment) {
+            model.setType(TransactionType.PAYMENT);
+        } else if (transaction instanceof Deferment) {
+            model.setType(TransactionType.DEFERMENT);
+        }
 
         return model;
     }

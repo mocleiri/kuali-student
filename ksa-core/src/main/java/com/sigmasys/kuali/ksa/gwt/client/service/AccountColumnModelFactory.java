@@ -27,7 +27,7 @@ public class AccountColumnModelFactory extends AbstractColumnModelFactory<Accoun
     public List<ColumnConfig> getColumnConfigs() {
 
         final DateTimeFormat dateFormat = DateTimeFormat.getFormat(Constants.DATE_FORMAT_US);
-        final DateTimeFormat timeFormat = DateTimeFormat.getFormat(Constants.TIME_FORMAT);
+        //final DateTimeFormat timeFormat = DateTimeFormat.getFormat(Constants.TIME_FORMAT);
 
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 

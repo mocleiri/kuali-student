@@ -1,24 +1,16 @@
 package com.sigmasys.kuali.ksa.gwt.client.view;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.*;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridSelectionModel;
 import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.gwt.user.client.Command;
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
-import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
-import com.sigmasys.kuali.ksa.gwt.client.service.GwtAccountServiceAsync;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
-import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.OkCancelDialog;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
 
@@ -34,7 +26,7 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
    protected final Text accountId = WidgetFactory.createStyledText("", "text-link");
 
    // Charge - aka Debit type
-   protected final Text isDefered = WidgetFactory.createStyledText("", "text-link");
+   protected final Text isDeferred = WidgetFactory.createStyledText("", "text-link");
 
    // Payment - aka Credit type
    protected final Text isRefundable = WidgetFactory.createStyledText("", "text-link");
@@ -119,7 +111,7 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
 
       TableData td = new TableData();
       td.setColspan(1);
-      debitPanel.add(isDefered);
+      debitPanel.add(isDeferred);
 
       // -----
       layout = new TableLayout(4);

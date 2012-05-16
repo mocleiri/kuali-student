@@ -22,20 +22,24 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
     public static final String LABEL_ID = "Transaction ID";
     public static final String LABEL_ORIGINATION_DATE = "Origination Date";
     public static final String LABEL_EFFECTIVE_DATE = "Effective Date";
+    public static final String LABEL_ACCOUNT_ID = "Account ID";
     public static final String LABEL_AMOUNT = "Amount";
     public static final String LABEL_CURRENCY = "Currency";
     public static final String LABEL_TYPE_ID = "Type ID";
     public static final String LABEL_TYPE_SUB_CODE = "Type SubCode";
-    public static final String LABEL_DESCRIPTION = "Description";
+    public static final String LABEL_STATEMENT = "Statement";
 
     public List<ColumnConfig> getColumnConfigs() {
 
         final DateTimeFormat dateFormat = DateTimeFormat.getFormat(Constants.DATE_FORMAT_US);
-        final DateTimeFormat timeFormat = DateTimeFormat.getFormat(Constants.TIME_FORMAT);
 
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
         ColumnConfig column = new ColumnConfig(TransactionModel.COLUMN_ID, LABEL_ID, 100);
+        column.setAlignment(Style.HorizontalAlignment.LEFT);
+        columns.add(column);
+
+        column = new ColumnConfig(TransactionModel.COLUMN_ACCOUNT_ID, LABEL_ACCOUNT_ID, 100);
         column.setAlignment(Style.HorizontalAlignment.LEFT);
         columns.add(column);
 
@@ -61,11 +65,11 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_SUB_CODE, LABEL_TYPE_SUB_CODE, 80);
+        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_SUB_CODE, LABEL_TYPE_SUB_CODE, 100);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_STATEMENT_TXT, LABEL_DESCRIPTION, 120);
+        column = new ColumnConfig(TransactionModel.COLUMN_STATEMENT_TEXT, LABEL_STATEMENT, 120);
         column.setAlignment(Style.HorizontalAlignment.LEFT);
         columns.add(column);
 

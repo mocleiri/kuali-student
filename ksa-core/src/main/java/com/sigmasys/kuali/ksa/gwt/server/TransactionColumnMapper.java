@@ -25,11 +25,12 @@ public class TransactionColumnMapper extends AbstractColumnMapper {
         sortMap.put(TransactionModel.COLUMN_ID, TransactionModel.ID);
         sortMap.put(TransactionModel.COLUMN_ORIGINATION_DATE, TransactionModel.ORIGINATION_DATE);
         sortMap.put(TransactionModel.COLUMN_EFFECTIVE_DATE, TransactionModel.EFFECTIVE_DATE);
+        sortMap.put(TransactionModel.COLUMN_ACCOUNT_ID, TransactionModel.ACCOUNT_ID);
         sortMap.put(TransactionModel.COLUMN_AMOUNT, TransactionModel.AMOUNT);
         sortMap.put(TransactionModel.COLUMN_CURRENCY_CODE, TransactionModel.CURRENCY_CODE);
         sortMap.put(TransactionModel.COLUMN_TYPE_ID, TransactionModel.TYPE_ID);
         sortMap.put(TransactionModel.COLUMN_TYPE_SUB_CODE, TransactionModel.TYPE_SUB_CODE);
-        sortMap.put(TransactionModel.COLUMN_STATEMENT_TXT, TransactionModel.STATEMENT_TXT);
+        sortMap.put(TransactionModel.COLUMN_STATEMENT_TEXT, TransactionModel.STATEMENT_TEXT);
         return sortMap;
     }
 
