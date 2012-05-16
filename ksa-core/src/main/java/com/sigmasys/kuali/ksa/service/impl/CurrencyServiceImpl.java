@@ -50,7 +50,7 @@ public class CurrencyServiceImpl extends GenericPersistenceService implements Cu
     }
 
     /**
-     * Returns all currencies sorted by ISO in the descendant order
+     * Returns all currencies sorted by ISO in the ascending order
      *
      * @return List of currencies
      */
