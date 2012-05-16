@@ -3,10 +3,8 @@ package org.kuali.student.core.statement.util;
 import org.joda.time.DateTime;
 import org.kuali.rice.krms.api.engine.*;
 import org.kuali.rice.krms.framework.engine.*;
-import org.kuali.student.common.util.krms.ManualContextProvider;
-import org.kuali.student.common.util.krms.RulesExecutionConstants;
 import org.kuali.student.core.statement.dto.ReqComponentInfo;
-import org.kuali.student.core.statement.dto.StatementInfo;
+import org.kuali.student.krms.ManualContextProvider;
 
 import java.util.*;
 

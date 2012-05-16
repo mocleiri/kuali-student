@@ -3,7 +3,7 @@ package org.kuali.student.enrollment.class1.lu.termresolver;
 import org.kuali.rice.krms.api.engine.TermResolutionException;
 import org.kuali.rice.krms.api.engine.TermResolver;
 
-import org.kuali.student.common.util.krms.RulesExecutionConstants;
+import org.kuali.student.krms.RulesExecutionConstants;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.lum.clu.service.CluService;
 

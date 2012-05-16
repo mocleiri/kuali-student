@@ -7,16 +7,12 @@ import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.krad.uif.control.UifKeyValuesFinderBase;
 import org.kuali.rice.krad.uif.view.ViewModel;
 import org.kuali.student.enrollment.acal.dto.HolidayCalendarInfo;
-import org.kuali.student.enrollment.acal.dto.HolidayInfo;
 import org.kuali.student.enrollment.acal.service.AcademicCalendarService;
-import org.kuali.student.enrollment.class2.acal.dto.HolidayCalendarWrapper;
-import org.kuali.student.enrollment.class2.acal.dto.HolidayWrapper;
 import org.kuali.student.enrollment.class2.acal.form.AcademicCalendarForm;
 import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.exceptions.*;
 import org.kuali.student.r2.common.util.constants.AtpServiceConstants;
-import org.kuali.student.r2.core.type.dto.TypeInfo;
 
 import javax.xml.namespace.QName;
 import java.io.Serializable;
@@ -37,36 +33,73 @@ public class HolidayWrapperListFinder extends UifKeyValuesFinderBase implements 
         List<KeyValue> keyValues = new ArrayList<KeyValue>();
         AcademicCalendarForm acalForm = (AcademicCalendarForm)model;
         Date startDate = acalForm.getAcademicCalendarInfo().getStartDate(); 
-        if (startDate == null) {
+        Date endDate = acalForm.getAcademicCalendarInfo().getEndDate();
+        SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy");
+        List<HolidayCalendarInfo> holidayCalendarInfoList = new ArrayList<HolidayCalendarInfo>();
+        //when there's no user input on acalInfo startDate and endDate, set startDate equal to current date.
+        // Therefore, it uses the current year to pull out available official HC list
+        if (startDate == null && endDate == null ) {
             startDate = new Date();
         }
 
-        if (startDate != null){
-            SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy");
+        //When the user inputs both startDate and endDate,
+        if (startDate != null && endDate != null)  {
             Integer theStartYear = new Integer(simpleDateformat.format(startDate));
-            ContextInfo context = new ContextInfo();
-            try{
-                List<HolidayCalendarInfo> holidayCalendarInfoList = getAcalService().getHolidayCalendarsByStartYear(theStartYear, context);
-                for(HolidayCalendarInfo holidayCalendarInfo:holidayCalendarInfoList){
-                    ConcreteKeyValue keyValue = new ConcreteKeyValue();
-                    keyValue.setKey(holidayCalendarInfo.getId());
-                    keyValue.setValue(holidayCalendarInfo.getName());
-                    keyValues.add(keyValue);
+            Integer theEndYear = new Integer(simpleDateformat.format(endDate));
+            if (theEndYear <= theStartYear){
+                //only query HC based on theStartYear
+                holidayCalendarInfoList = buildOfficialHolidayCalendarInfoList(theStartYear);
+                
+            }else{
+                for (int year=theStartYear.intValue(); year<=theEndYear.intValue(); year++ ){
+                    holidayCalendarInfoList.addAll(buildOfficialHolidayCalendarInfoList(new Integer(year)));
                 }
-                return keyValues;
-
-            }catch (InvalidParameterException ipe){
-                System.out.println("call AcademicCalendarService.getHolidayCalendarsByStartYear(startYear, context), and get InvalidParameterException:  "+ipe.toString());
-            }catch (MissingParameterException mpe){
-                System.out.println("call AcademicCalendarService.getHolidayCalendarsByStartYear(startYear, context), and get MissingParameterException:  "+mpe.toString());
-            }catch (OperationFailedException ofe){
-                System.out.println("call AcademicCalendarService.getHolidayCalendarsByStartYear(startYear, context), and get OperationFailedException:  "+ofe.toString());
-            }catch (PermissionDeniedException pde){
-                System.out.println("call AcademicCalendarService.getHolidayCalendarsByStartYear(startYear, context), and get PermissionDeniedException:  "+pde.toString());
             }
         }
-
+        // When an user only inputs the startDate or endDate, use the year information from either startDate or
+        // endDate field to pull out available official HC List
+        else {
+            Integer theStartYear;
+            if (startDate != null)
+                theStartYear = new Integer(simpleDateformat.format(startDate));
+            else
+                theStartYear = new Integer(simpleDateformat.format(endDate));
+            holidayCalendarInfoList = buildOfficialHolidayCalendarInfoList(theStartYear);
+        }
+        
+        for(HolidayCalendarInfo holidayCalendarInfo:holidayCalendarInfoList){
+            ConcreteKeyValue keyValue = new ConcreteKeyValue();
+            keyValue.setKey(holidayCalendarInfo.getId());
+            keyValue.setValue(holidayCalendarInfo.getName());
+            keyValues.add(keyValue);
+        }
         return keyValues;
+
+
+    }
+
+    //Only return HCs that are official
+    private List<HolidayCalendarInfo> buildOfficialHolidayCalendarInfoList(Integer theStartYear){
+        List<HolidayCalendarInfo> hcList = new ArrayList<HolidayCalendarInfo>();
+        List<HolidayCalendarInfo> hcOfficialList = new ArrayList<HolidayCalendarInfo>();
+        try{
+            hcList = getAcalService().getHolidayCalendarsByStartYear(theStartYear, new ContextInfo());
+            for(HolidayCalendarInfo hc : hcList) {
+                if (StringUtils.equals(hc.getStateKey(), AtpServiceConstants.ATP_OFFICIAL_STATE_KEY)){
+                    hcOfficialList.add(hc);
+                }
+            }
+        }catch (InvalidParameterException ipe){
+            throw new RuntimeException(ipe);
+        }catch (MissingParameterException mpe){
+            throw new RuntimeException(mpe);
+        }catch (OperationFailedException ofe){
+            throw new RuntimeException(ofe);
+        }catch (PermissionDeniedException pde){
+            throw new RuntimeException(pde);
+        }
+        return  hcOfficialList;
+        
     }
 
     public AcademicCalendarService getAcalService() {

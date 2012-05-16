@@ -25,8 +25,8 @@ import org.kuali.rice.krms.api.engine.ResultEvent;
 import org.kuali.rice.krms.api.engine.Term;
 import org.kuali.rice.krms.framework.engine.PropositionResult;
 import org.kuali.rice.krms.framework.engine.result.BasicResult;
-import org.kuali.student.common.util.krms.RulesExecutionConstants;
-import org.kuali.student.common.util.krms.proposition.AbstractLeafProposition;
+import org.kuali.student.krms.RulesExecutionConstants;
+import org.kuali.student.krms.proposition.AbstractLeafProposition;
 import org.kuali.student.r2.core.atp.dto.MilestoneInfo;
 import org.kuali.student.r2.core.exemption.infc.DateOverride;
 

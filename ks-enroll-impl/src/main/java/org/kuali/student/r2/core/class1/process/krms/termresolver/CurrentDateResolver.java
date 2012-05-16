@@ -17,7 +17,7 @@ package org.kuali.student.r2.core.class1.process.krms.termresolver;
 
 import org.kuali.rice.krms.api.engine.TermResolutionException;
 import org.kuali.rice.krms.api.engine.TermResolver;
-import org.kuali.student.common.util.krms.RulesExecutionConstants;
+import org.kuali.student.krms.RulesExecutionConstants;
 
 import java.util.Calendar;
 import java.util.Collections;

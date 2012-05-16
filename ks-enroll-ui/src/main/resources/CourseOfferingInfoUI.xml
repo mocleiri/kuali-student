@@ -37,15 +37,12 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 <ref bean="CourseOfferingInfo.typeKey"/>
                 <ref bean="CourseOfferingInfo.stateKey"/>
                 <ref bean="CourseOfferingInfo.courseNumberSuffix"/>
-                <ref bean="CourseOfferingInfo.courseTitle"/>
+                <ref bean="CourseOfferingInfo.courseOfferingTitle"/>
                 <ref bean="CourseOfferingInfo.isHonorsOffering"/>
-                <ref bean="CourseOfferingInfo.hasFinalExam"/>
                 <ref bean="CourseOfferingInfo.minimumEnrollment"/>
-                <ref bean="CourseOfferingInfo.gradeRosterLevelTypeKey"/>
+                <ref bean="CourseOfferingInfo.waitlistLevelTypeKey"/>
                 <ref bean="CourseOfferingInfo.hasWaitlist"/>
                 <ref bean="CourseOfferingInfo.waitlistTypeKey"/>
-                <ref bean="CourseOfferingInfo.waitlistMaximum"/>
-                <ref bean="CourseOfferingInfo.isWaitlistCheckinRequired"/>
                 <ref bean="CourseOfferingInfo.fundingSource"/>
                 <ref bean="CourseOfferingInfo.isFinancialAidEligible"/>
             </list>
@@ -53,10 +50,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         <property name="complexAttributes">
             <list>
                 <ref bean="CourseOfferingInfo.descr"/>
-                <ref bean="CourseOfferingInfo.creditOptions"/> 
-                <ref bean="CourseOfferingInfo.expenditure"/>
-                <ref bean="CourseOfferingInfo.waitlistCheckinFrequency"/>                
-                <ref bean="CourseOfferingInfo.meta"/>                
+                <ref bean="CourseOfferingInfo.meta"/>
             </list>
         </property> 
     </bean>
@@ -149,7 +143,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <bean id="CourseOfferingInfo-MaintenanceView" parent="KSMaintenanceView">
         <property name="title" value="Course Offering Maintenance"/>
         <property name="dataObjectClassName" value="org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo"/>
-        <property name="viewHelperServiceClassName" value="org.kuali.student.enrollment.class2.courseoffering.service.CourseOfferingInfoMaintainableImpl" />
+        <property name="viewHelperServiceClassName" value="org.kuali.student.enrollment.class2.courseoffering.service.impl.CourseOfferingInfoMaintainableImpl" />
         <property name="header">
              <ref bean="KSHeader_Empty" />
         </property>
@@ -199,7 +193,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                                 <property name="fieldLookup.dataObjectClassName" value="org.kuali.rice.kim.api.identity.Person"/>
                                 <property name="fieldLookup.fieldConversions">
                                     <map>
-                                        <entry key="principalId" value="personId"/>
+                                        <entry key="principal   Id" value="personId"/>
                                     </map>
                                 </property> 
                             </bean>                             
@@ -223,7 +217,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 
     <bean id="CourseOfferingInfoMaintenanceDocument" parent="uifMaintenanceDocumentEntry">
         <property name="dataObjectClass" value="org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo"/>
-        <property name="maintainableClass" value="org.kuali.student.enrollment.class2.courseoffering.service.CourseOfferingInfoMaintainableImpl"/>
+        <property name="maintainableClass" value="org.kuali.student.enrollment.class2.courseoffering.service.impl.CourseOfferingInfoMaintainableImpl"/>
         <property name="businessRulesClass" value="org.kuali.student.enrollment.class2.courseoffering.validation.impl.CourseOfferingRule" />
         <property name="documentTypeName" value="CourseOfferingInfoMaintenanceDocument"/>
         <property name="documentAuthorizerClass" value="org.kuali.rice.krad.maintenance.MaintenanceDocumentAuthorizerBase"/>
