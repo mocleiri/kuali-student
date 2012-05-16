@@ -29,7 +29,7 @@ public interface CurrencyService {
     Currency getCurrency(String iso);
 
     /**
-     * Returns all currencies sorted by ISO in the descendant order
+     * Returns all currencies sorted by ISO in the ascending order
      *
      * @return List of currencies
      */
