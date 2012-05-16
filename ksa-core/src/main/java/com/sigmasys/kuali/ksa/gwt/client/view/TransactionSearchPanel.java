@@ -65,7 +65,7 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
         effectiveDate = new DateRangeField(Style.Orientation.HORIZONTAL, "From Date", "To Date", 95, 6);
         effectiveDate.setAllowBlank(true);
         panel.add(WidgetFactory.createText("Effective Date:"));
-        panel.add(originationDate);
+        panel.add(effectiveDate);
 
         currency = new ListViewAdapter<StringModelData>(new ListStore<StringModelData>());
         currency.setDisplayProperty(StringModelData.DISPLAY_VALUE_KEY);
