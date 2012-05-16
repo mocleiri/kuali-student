@@ -6,9 +6,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Text;
-import com.sigmasys.kuali.ksa.gwt.client.model.StringModelData;
-import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
-import com.sigmasys.kuali.ksa.gwt.client.model.TransactionType;
+import com.sigmasys.kuali.ksa.gwt.client.model.*;
 import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.DateRangeField;
@@ -16,6 +14,7 @@ import com.sigmasys.kuali.ksa.gwt.client.view.widget.EntityNameField;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.ListViewAdapter;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
     private DateRangeField effectiveDate;
 
     private ListViewAdapter<StringModelData> currency;
-    private ListViewAdapter<StringModelData> transactionType;
+    private ListViewAdapter<PropertyModelData> transactionType;
 
     @Override
     protected void fillSearchElementsContainer(LayoutContainer panel) {
@@ -85,13 +84,13 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
         panel.add(WidgetFactory.createText("Currency:"));
         panel.add(currency);
 
-        transactionType = new ListViewAdapter<StringModelData>(new ListStore<StringModelData>());
-        transactionType.setDisplayProperty(StringModelData.DISPLAY_VALUE_KEY);
+        transactionType = new ListViewAdapter<PropertyModelData>(new ListStore<PropertyModelData>());
+        transactionType.setDisplayProperty(PropertyModelData.DISPLAY_VALUE_KEY);
         transactionType.setWidth(ELEMENT_WIDTH / 2);
         transactionType.setHeight(100);
         for (TransactionType type : TransactionType.values()) {
             Log.debug("Adding transaction type: " + type);
-            transactionType.addToStore(new StringModelData(type.toString()));
+            transactionType.addToStore(new PropertyModelData(type.name(), type.toString()));
         }
         Text transactionTypesLabel = WidgetFactory.createText("Transaction Type:");
         panel.add(transactionTypesLabel);
@@ -107,6 +106,16 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
 
     }
 
+    @Override
+    protected void beforePerformSearch(SearchCriteria searchCriteria) {
+        List<PropertyModelData> selectedItems = transactionType.getSelectedItems();
+        HashSet<TransactionType> selectedTypes = new HashSet<TransactionType>(selectedItems.size());
+        for ( PropertyModelData selectedItem : selectedItems ) {
+            selectedTypes.add(Enum.valueOf(TransactionType.class, selectedItem.getKey()));
+        }
+        searchCriteria.put(TransactionModel.TYPE, selectedTypes);
+        super.beforePerformSearch(searchCriteria);
+    }
 
     @Override
     protected Component[] getEnterKeyDownEventAwareComponents() {

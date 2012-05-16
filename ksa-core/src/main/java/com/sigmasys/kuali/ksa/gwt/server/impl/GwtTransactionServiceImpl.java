@@ -10,7 +10,6 @@ import com.sigmasys.kuali.ksa.gwt.server.SearchQueryBuilder;
 import com.sigmasys.kuali.ksa.gwt.server.TransactionColumnMapper;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * GwtTransactionService implementation
@@ -64,10 +64,25 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
     public PagingLoadResult<TransactionModel> findTransactions(SearchCriteria searchCriteria, String sortDir,
                                                                String sortField, int offset, int limit) throws GwtError {
         logger.info("sortDir = " + sortDir + ", sortField = " + sortField);
-        SearchQueryBuilder queryBuilder = new SearchQueryBuilder(select, from);
+
+        StringBuilder where = new StringBuilder("");
+        Set<TransactionType> transactionTypes = (Set<TransactionType>) searchCriteria.get(TransactionModel.TYPE);
+        if (transactionTypes != null && !transactionTypes.isEmpty()) {
+            where.append(" type(transaction) in ( ");
+            int i = 0;
+            for (TransactionType type : transactionTypes) {
+                where.append(type.toString());
+                if (++i < transactionTypes.size()) {
+                    where.append(",");
+                }
+            }
+            where.append(")");
+        }
+
+        SearchQueryBuilder queryBuilder = new SearchQueryBuilder(select, from, where.toString());
         queryBuilder.setDefaultSort(defaultOrder);
         queryBuilder.setSortMapping(new TransactionColumnMapper());
-        // TODO: provide query builder customization for transaction types ?
+
         PagingLoadResult<Transaction> loadResult =
                 buildPagingLoadResult(queryBuilder, searchCriteria, sortDir, sortField, offset, limit);
 
@@ -120,7 +135,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
     public List<String> getExistingCurrencyCodes() throws GwtError {
         List<Currency> currencies = currencyService.getCurrencies();
         List<String> currencyCodes = new ArrayList<String>(currencies.size());
-        for ( Currency currency : currencies) {
+        for (Currency currency : currencies) {
             currencyCodes.add(currency.getIso());
         }
         return currencyCodes;

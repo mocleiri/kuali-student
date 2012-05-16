@@ -1,9 +1,15 @@
 package com.sigmasys.kuali.ksa.gwt.client.service;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
+import com.sigmasys.kuali.ksa.gwt.client.model.TransactionType;
 import com.sigmasys.kuali.ksa.model.Constants;
 
 import java.util.ArrayList;
@@ -20,6 +26,7 @@ import java.util.List;
 public class TransactionColumnModelFactory extends AbstractColumnModelFactory<TransactionModel> {
 
     public static final String LABEL_ID = "Transaction ID";
+    public static final String LABEL_TYPE = "Origination Date";
     public static final String LABEL_ORIGINATION_DATE = "Origination Date";
     public static final String LABEL_EFFECTIVE_DATE = "Effective Date";
     public static final String LABEL_ACCOUNT_ID = "Account ID";
@@ -36,11 +43,27 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
         ColumnConfig column = new ColumnConfig(TransactionModel.COLUMN_ID, LABEL_ID, 100);
-        column.setAlignment(Style.HorizontalAlignment.LEFT);
+        column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
         column = new ColumnConfig(TransactionModel.COLUMN_ACCOUNT_ID, LABEL_ACCOUNT_ID, 100);
         column.setAlignment(Style.HorizontalAlignment.LEFT);
+        columns.add(column);
+
+        column = new ColumnConfig(TransactionModel.TYPE, LABEL_TYPE, 100);
+        column.setAlignment(Style.HorizontalAlignment.LEFT);
+        column.setRenderer(new GridCellRenderer<TransactionModel>() {
+            @Override
+            public Object render(TransactionModel model, String s, ColumnData column, int i, int j, ListStore store, Grid grid) {
+                if (model != null) {
+                    TransactionType transactionType = model.getType();
+                    if (transactionType != null) {
+                        return transactionType.toString();
+                    }
+                }
+                return null;
+            }
+        });
         columns.add(column);
 
         column = new ColumnConfig(TransactionModel.COLUMN_ORIGINATION_DATE, LABEL_ORIGINATION_DATE, 110);

@@ -14,6 +14,7 @@ public class TransactionModel extends AbstractModel {
 
     // The search criteria keys
     public static final String ID = "transaction.id";
+    public static final String TYPE = "trans_type";
 
     public static final String TYPE_ID = "type.id.id";
     public static final String TYPE_SUB_CODE = "type.id.subCode";
@@ -67,7 +68,8 @@ public class TransactionModel extends AbstractModel {
     public static final String COLUMN_STATEMENT_TEXT = "trans_statement_text";
     public static final String COLUMN_REFUND_RULE = "trans_refund_rule";
 
-    private TransactionType type;
+    // That's necessary for GWT internal serialization
+    private TransactionType _transactionType;
 
 
     public Long getId() {
@@ -215,10 +217,10 @@ public class TransactionModel extends AbstractModel {
     }
 
     public TransactionType getType() {
-        return type;
+        return get(TYPE);
     }
 
     public void setType(TransactionType type) {
-        this.type = type;
+        set(TYPE, type);
     }
 }
