@@ -74,7 +74,7 @@
         timeToLiveSeconds="12000"
         statistics="false"
         />
-    <cache
+   <!-- <cache
         name="academicCalendarCache"
         maxElementsInMemory="100"
         eternal="false"
@@ -82,7 +82,7 @@
         timeToIdleSeconds="0"
         timeToLiveSeconds="12000"
         statistics="false"
-        />
+        />-->
     <!--
     <cache name="courseSearchCache"
            maxElementsInMemory="5000"

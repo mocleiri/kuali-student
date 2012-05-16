@@ -82,15 +82,16 @@
         <property name="enabled" value="${ks.searchForm.enable.caching}"/>
     </bean>
 
-    <bean id="academicCalendarCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
-        <property name="cacheName" value="academicCalendarCache" />
-        <property name="cacheManager" ref="ksCacheManager"/>
-        <property name="enabled" value="${ks.academicCalendar.enable.caching}"/>
-    </bean>
 
     <!--  MyPlan Cache beans -->
     <bean id="myplanCacheManager" class="net.sf.ehcache.CacheManager">
         <constructor-arg index="0" type="java.net.URL" value="${myplan.cache.config.file}" />
+    </bean>
+
+    <bean id="academicCalendarCacheAdvisor" class="org.kuali.student.myplan.util.QueryMethodArgsCacheAdvice">
+        <property name="cacheName" value="academicCalendarCache" />
+        <property name="cacheManager" ref="myplanCacheManager"/>
+        <property name="enabled" value="${ks.academicCalendar.enable.caching}"/>
     </bean>
 
     <bean id="courseSearchMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
@@ -158,7 +159,7 @@
         </aop:aspect>
 
         <aop:aspect id="academicCalendarCacheAroundSearch" ref="academicCalendarCacheAdvisor">
-            <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwAcademicCalendarServiceImpl.getCurrentTerms(..))" method="getFromCache" />
+            <aop:around pointcut="execution(*  edu.uw.kuali.student.service.impl.UwAcademicCalendarServiceImpl.searchForTerms(..))" method="getFromCache" />
         </aop:aspect>
 
         <!--

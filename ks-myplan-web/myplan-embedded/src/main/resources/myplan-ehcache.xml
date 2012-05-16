@@ -25,6 +25,8 @@
 
     <cache name="courseOfferingCache" maxElementsInMemory="5000" eternal="false" overflowToDisk="true"
            timeToIdleSeconds="0" timeToLiveSeconds="43200" statistics="true" />
+    <cache name="academicCalendarCache" maxElementsInMemory="5000" eternal="false" overflowToDisk="true"
+           timeToIdleSeconds="0" timeToLiveSeconds="43200" statistics="true" />
     <cache name="academicRecordCache" maxElementsInMemory="5000" eternal="false" overflowToDisk="true"
            timeToIdleSeconds="0" timeToLiveSeconds="43200" statistics="true" />
 </ehcache>
