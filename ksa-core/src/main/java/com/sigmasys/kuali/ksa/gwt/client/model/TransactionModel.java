@@ -3,73 +3,71 @@ package com.sigmasys.kuali.ksa.gwt.client.model;
 import java.util.*;
 
 /**
- * User: dmulderink
+ * Transaction model
+ *
+ * @author dmulderink, mivanov
  * Date: 5/11/12
  * Time: 1:20 PM
  */
 public class TransactionModel extends AbstractModel {
 
-    // TODO
-
-    // ---------------------------------------------------------------
-    // TRANSACTION TYPES
-    // ---------------------------------------------------------------
-
-    public static final List<String> transactionTypes = Arrays.asList("All", "Charge", "Deferment", "Payment");
 
     // The search criteria keys
     public static final String ID = "transaction.id";
-    public static final String TYPE = "transaction.type";
-    public static final String ALLOCATED = "transaction.allocated";
-    public static final String AMNT = "transaction.amnt";
+
+    public static final String TYPE_ID = "type.id.id";
+    public static final String TYPE_SUB_CODE = "type.id.subCode";
+    public static final String CURRENCY_CODE = "currency.iso";
+    public static final String ACCOUNT_ID = "account.id";
+
+    public static final String AMOUNT = "transaction.amount";
+    public static final String ALLOCATED_AMOUNT = "transaction.allocatedAmount";
+    public static final String LOCKED_ALLOCATED_AMOUNT = "transaction.lockedAllocatedAmount";
+    public static final String NATIVE_AMOUNT = "transaction.nativeAmount";
+
+
     public static final String EFFECTIVE_DATE = "transaction.effectiveDate";
-    public static final String EXTN_ID = "transaction.extnId";
-    public static final String GL_ENTRY_GENERATED = "transaction.glEntryGenerated";
-    public static final String IS_INTERNAL_TRN = "transaction.isInternalTrn";
+    public static final String ORIGINATION_DATE = "transaction.originationDate";
     public static final String LEDGER_DATE = "transaction.ledgerDate";
-    public static final String LOCKED_ALLOCATED = "transaction.lockedAllocated";
-    public static final String NATIVE_AMNT = "transaction.nativeAmnt";
-    public static final String ORIG_DATE = "transaction.origDate";
-    public static final String REFUND_RULE = "transaction.refundRule";
-    public static final String RESP_ENTITY = "transaction.respEntity";
+
+    public static final String EXTERNAL_ID = "transaction.externalId";
+    public static final String GL_ENTRY_GENERATED = "transaction.glEntryGenerated";
+    public static final String INTERNAL = "transaction.internal";
+
+
+    public static final String RESPONSIBLE_ENTITY = "transaction.responsibleEntity";
     public static final String STATEMENT_TXT = "transaction.statementText";
-    public static final String IS_REFUNDABLE = "transaction.isRefundable";
-    public static final String DEFER_ID = "transaction.deferId";
-    public static final String EXPIRATION_DATE = "transaction.expirationId";
-    public static final String CLEAR_DATE = "transaction.clearDate";
-    public static final String IS_DEFERRED = "transaction.isDeferred";
-    public static final String IS_GL_OVERRIDDEN = "transaction.isGLOverridden";
-    public static final String TRANSACTION_TYPE_ID_FK = "transaction.transaction_type_id_fk";
-    public static final String TRANSACTION_TYPE_SUB_CODE_FK = "transaction.transaction_type_sub_code_fk";
-    public static final String ROLLUP_ID_FK = "transaction.rollup_id_fk";
-    public static final String CURRENCY_ID_FK = "transaction.currency_id_fk";
+    public static final String REFUND_RULE = "transaction.refundRule";
+
 
     // The real column names
-    public static final String COLUMN_TYPE = "trans_type";
     public static final String COLUMN_ID = "trans_id";
-    public static final String COLUMN_ALLOCATED = "allocated";
-    public static final String COLUMN_AMNT = "amnt";
-    public static final String COLUMN_EFFECTIVE_DATE = "effective_date";
-    public static final String COLUMN_EXTERNAL_ID = "extn_Id";
-    public static final String COLUMN_GL_ENTRY_GENERATED = "gl_entry_generated";
-    public static final String COLUMN_IS_INTERNAL_TRN = "is_internal_trn";
-    public static final String COLUMN_LEDGER_DATE = "ledger_date";
-    public static final String COLUMN_LOCKED_ALLOCATED = "locked_allocated";
-    public static final String COLUMN_NATIVE_AMNT = "native_amnt";
-    public static final String COLUMN_ORIG_DATE = "orig_date";
-    public static final String COLUMN_REFUND_RULE = "refund_rle";
-    public static final String COLUMN_RESP_ENTITY = "resp_entity";
-    public static final String COLUMN_STATEMENT_TXT = "statement_text";
-    public static final String COLUMN_IS_REFUNDABLE = "is_refundable";
-    public static final String COLUMN_DEFER_ID = "defer_id";
-    public static final String COLUMN_EXPIRATION_DATE = "expiration_id";
-    public static final String COLUMN_CLEAR_DATE = "clear_date";
-    public static final String COLUMN_IS_DEFERRED = "is_deferred";
-    public static final String COLUMN_IS_GL_OVERRIDDEN = "is_gl_overridden";
-    public static final String COLUMN_TRANSACTION_TYPE_ID_FK = "transaction_type_id_fk";
-    public static final String COLUMN_TRANSACTION_TYPE_SUB_CODE_FK = "transaction_type_sub_code_fk";
-    public static final String COLUMN_ROLLUP_ID_FK = "rollup_id_fk";
-    public static final String COLUMN_CURRENCY_ID_FK = "currency_id_fk";
+    public static final String COLUMN_TYPE_ID = "trans_type_id";
+    public static final String COLUMN_TYPE_SUB_CODE = "trans_type_sub_code";
+
+    public static final String COLUMN_CURRENCY_CODE = "currency_code";
+    public static final String COLUMN_ACCOUNT_ID = "account_id";
+
+    public static final String COLUMN_AMOUNT = "trans_amount";
+    public static final String COLUMN_ALLOCATED_AMOUNT = "trans_allocated_amount";
+    public static final String COLUMN_LOCKED_ALLOCATED_AMOUNT = "trans_locked_allocated_amount";
+    public static final String COLUMN_NATIVE_AMOUNT = "trans_native_amount";
+
+
+    public static final String COLUMN_EFFECTIVE_DATE = "trans_effective_date";
+    public static final String COLUMN_ORIGINATION_DATE = "trans_orig_date";
+    public static final String COLUMN_LEDGER_DATE = "trans_ledger_date";
+
+    public static final String COLUMN_EXTERNAL_ID = "trans_external_id";
+    public static final String COLUMN_GL_ENTRY_GENERATED = "trans_gl_entry_generated";
+    public static final String COLUMN_INTERNAL = "trans_internal";
+
+
+    public static final String COLUMN_RESPONSIBLE_ENTITY = "trans_responsible_entity";
+    public static final String COLUMN_STATEMENT_TXT = "trans_statement_text";
+    public static final String COLUMN_REFUND_RULE = "trans_refund_rule";
+
+    private TransactionType type;
 
 
     public Long getId() {
@@ -80,28 +78,36 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_ID, id);
     }
 
-    public String getType() {
-        return get(COLUMN_TYPE);
+    public String getTypeId() {
+        return get(COLUMN_TYPE_ID);
     }
 
-    public void setType(String type) {
-        set(COLUMN_TYPE, type);
+    public void setTypeId(String id) {
+        set(COLUMN_TYPE_ID, id);
     }
 
-    public Double getAllocated() {
-        return get(COLUMN_ALLOCATED);
+    public Integer getTypeSubCode() {
+        return get(COLUMN_TYPE_SUB_CODE);
     }
 
-    public void setAllocated(Double allocated) {
-        set(COLUMN_ALLOCATED, allocated);
+    public void setTypeSubCode(Integer subCode) {
+        set(COLUMN_TYPE_SUB_CODE, subCode);
     }
 
-    public Double getAmnt() {
-        return get(COLUMN_AMNT);
+    public Double getAllocatedAmount() {
+        return get(COLUMN_ALLOCATED_AMOUNT);
     }
 
-    public void setAmnt(Double amnt) {
-        set(COLUMN_AMNT, amnt);
+    public void setAllocatedAmount(Double allocatedAmount) {
+        set(COLUMN_ALLOCATED_AMOUNT, allocatedAmount);
+    }
+
+    public Double getAmount() {
+        return get(COLUMN_AMOUNT);
+    }
+
+    public void setAmount(Double amount) {
+        set(COLUMN_AMOUNT, amount);
     }
 
     public Date getEffectiveDate() {
@@ -128,12 +134,12 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_GL_ENTRY_GENERATED, glEntryGenerated);
     }
 
-    public Boolean getIsInternalTrn() {
-        return get(COLUMN_IS_INTERNAL_TRN);
+    public Boolean isInternal() {
+        return get(COLUMN_INTERNAL);
     }
 
-    public void setIsInternalTrn(Boolean isInternalTrn) {
-        set(COLUMN_IS_INTERNAL_TRN, isInternalTrn);
+    public void setInternal(Boolean internal) {
+        set(COLUMN_INTERNAL, internal);
     }
 
     public Date getLedgerDate() {
@@ -144,28 +150,28 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_LEDGER_DATE, ledgerDate);
     }
 
-    public String getLockedAllocated() {
-        return get(COLUMN_LOCKED_ALLOCATED);
+    public String getLockedAllocatedAmount() {
+        return get(COLUMN_LOCKED_ALLOCATED_AMOUNT);
     }
 
-    public void setLockedAllocated(String lockedAllocated) {
-        set(COLUMN_LOCKED_ALLOCATED, lockedAllocated);
+    public void setLockedAllocated(String lockedAllocatedAmount) {
+        set(COLUMN_LOCKED_ALLOCATED_AMOUNT, lockedAllocatedAmount);
     }
 
-    public Double getNativeAmnt() {
-        return get(COLUMN_NATIVE_AMNT);
+    public Double getNativeAmount() {
+        return get(COLUMN_NATIVE_AMOUNT);
     }
 
-    public void setNativeAmnt(Double nativeAmnt) {
-        set(COLUMN_NATIVE_AMNT, nativeAmnt);
+    public void setNativeAmount(Double nativeAmount) {
+        set(COLUMN_NATIVE_AMOUNT, nativeAmount);
     }
 
-    public Date getOrigDate() {
-        return get(COLUMN_ORIG_DATE);
+    public Date getOriginationDate() {
+        return get(COLUMN_ORIGINATION_DATE);
     }
 
-    public void setOrigDate(Date origDate) {
-        set(COLUMN_ORIG_DATE, origDate);
+    public void setOriginationDate(Date date) {
+        set(COLUMN_ORIGINATION_DATE, date);
     }
 
     public String getRefundRule() {
@@ -176,12 +182,12 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_REFUND_RULE, refundRule);
     }
 
-    public String getRespEntity() {
-        return get(COLUMN_RESP_ENTITY);
+    public String getResponsibleEntity() {
+        return get(COLUMN_RESPONSIBLE_ENTITY);
     }
 
-    public void setRespEntity(String entityId) {
-        set(COLUMN_RESP_ENTITY, entityId);
+    public void setResponsibleEntity(String entityId) {
+        set(COLUMN_RESPONSIBLE_ENTITY, entityId);
     }
 
     public String getStatementTxt() {
@@ -192,83 +198,27 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_STATEMENT_TXT, statementText);
     }
 
-    public Boolean getIsRefundable() {
-        return get(COLUMN_IS_REFUNDABLE);
+    public String getCurrencyCode() {
+        return get(COLUMN_CURRENCY_CODE);
     }
 
-    public void setIsRefundable(Boolean isRefundable) {
-        set(COLUMN_IS_REFUNDABLE, isRefundable);
+    public void setCurrencyCode(String iso) {
+        set(COLUMN_CURRENCY_CODE, iso);
     }
 
-    public String getDeferId() {
-        return get(COLUMN_DEFER_ID);
+    public String getAccountId() {
+        return get(COLUMN_CURRENCY_CODE);
     }
 
-    public void setDeferId(String deferId) {
-        set(COLUMN_DEFER_ID, deferId);
+    public void setAccountId(String accountId) {
+        set(COLUMN_ACCOUNT_ID, accountId);
     }
 
-    public Date getExpirationDate() {
-        return get(COLUMN_EXPIRATION_DATE);
+    public TransactionType getType() {
+        return type;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        set(COLUMN_EXPIRATION_DATE, expirationDate);
-    }
-
-    public Date getClearDate() {
-        return get(COLUMN_CLEAR_DATE);
-    }
-
-    public void setClearDate(Date clearDate) {
-        set(COLUMN_CLEAR_DATE, clearDate);
-    }
-
-    public Boolean getIsDeferred() {
-        return get(COLUMN_IS_DEFERRED);
-    }
-
-    public void setIsDeferred(Boolean isDeferred) {
-        set(COLUMN_IS_DEFERRED, isDeferred);
-    }
-
-    public Boolean getIsGlOverridden() {
-        return get(COLUMN_IS_GL_OVERRIDDEN);
-    }
-
-    public void setIsGlOverridden(Boolean isGlOveridden) {
-        set(COLUMN_IS_GL_OVERRIDDEN, isGlOveridden);
-    }
-
-    public String getTransactionTypeIdFk() {
-        return get(COLUMN_TRANSACTION_TYPE_ID_FK);
-    }
-
-    public void setTransactionTypeIdFk(String TransactionTypeIdFk) {
-        set(COLUMN_TRANSACTION_TYPE_ID_FK, TransactionTypeIdFk);
-    }
-
-    public String getTransactionTypeSubCodeFk() {
-        return get(COLUMN_TRANSACTION_TYPE_SUB_CODE_FK);
-    }
-
-    public void setTransactionTypeSubCodeFk(String TransactionTypeSubCodeFk) {
-        set(COLUMN_TRANSACTION_TYPE_SUB_CODE_FK, TransactionTypeSubCodeFk);
-    }
-
-    public String getRollupIdFk() {
-        return get(COLUMN_ROLLUP_ID_FK);
-    }
-
-    public void setRollupIdFk(String RollupIdFk) {
-        set(COLUMN_ROLLUP_ID_FK, RollupIdFk);
-    }
-
-    public String getCurrencyIdFk() {
-        return get(COLUMN_CURRENCY_ID_FK);
-    }
-
-    public void setCurrencyIdFk(String CurrencyIdFk) {
-        set(COLUMN_CURRENCY_ID_FK, CurrencyIdFk);
+    public void setType(TransactionType type) {
+        this.type = type;
     }
 }

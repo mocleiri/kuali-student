@@ -199,7 +199,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         } else {
             Charge charge = (Charge) transaction;
             charge.setDeferred(false);
-            charge.setGlOverriden(false);
+            charge.setGlOverridden(false);
         }
 
         persistTransaction(transaction);

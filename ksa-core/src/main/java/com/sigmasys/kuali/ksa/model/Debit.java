@@ -23,7 +23,7 @@ public abstract class Debit extends Transaction {
     /**
      * Indicates if debit has been overriden by GL
      */
-    protected Boolean glOverriden;
+    protected Boolean glOverridden;
 
     
     /**
@@ -43,12 +43,12 @@ public abstract class Debit extends Transaction {
 
     @org.hibernate.annotations.Type(type="yes_no")
     @Column(name = "IS_GL_OVERRIDDEN")
-    public Boolean isGlOverriden() {
-        return glOverriden;
+    public Boolean isGlOverridden() {
+        return glOverridden;
     }
 
-    public void setGlOverriden(Boolean glOverriden) {
-        this.glOverriden = glOverriden;
+    public void setGlOverridden(Boolean glOverridden) {
+        this.glOverridden = glOverridden;
     }
 
     /**
