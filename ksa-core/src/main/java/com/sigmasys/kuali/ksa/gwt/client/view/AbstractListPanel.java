@@ -23,6 +23,7 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.sigmasys.kuali.ksa.gwt.client.model.NavigationContext;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 import com.sigmasys.kuali.ksa.gwt.client.service.ColumnModelFactory;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
@@ -71,9 +72,12 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
     /*
      * Do nto select first row after load
      */
-
     public AbstractListPanel(SearchCriteria criteria, boolean loadFirstPageOnCreation) {
         this(criteria, loadFirstPageOnCreation, false);
+    }
+
+    public AbstractListPanel(NavigationContext navigationContext) {
+        this(navigationContext.getSearchCriteria(), false, false);
     }
 
     public AbstractListPanel(SearchCriteria criteria, boolean loadFirstPageOnCreation, boolean selectFirstRow) {
@@ -326,7 +330,7 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
                     Log.debug("AbstractListPanel (" + getClass() + ") loadPageWithZeroOffset()");
                     loadPageWithZeroOffset();
                 }
-            }.schedule(2);
+            }.schedule(5);
         }
     }
 

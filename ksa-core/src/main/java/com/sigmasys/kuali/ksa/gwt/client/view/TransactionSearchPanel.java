@@ -13,9 +13,11 @@ import com.sigmasys.kuali.ksa.gwt.client.view.widget.DateRangeField;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.EntityNameField;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.ListViewAdapter;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
+import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.EntityRefName;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TransactionSearchPanel
@@ -24,6 +26,7 @@ import java.util.List;
  *         Date: 5/14/12
  *         Time: 12:31 PM
  */
+@SuppressWarnings("unchecked")
 public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel> {
 
     private static final int ELEMENT_WIDTH = 200;
@@ -38,8 +41,15 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
     private ListViewAdapter<StringModelData> currency;
     private ListViewAdapter<PropertyModelData> transactionType;
 
+
+    public TransactionSearchPanel(NavigationContext context) {
+        super(context);
+    }
+
     @Override
     protected void fillSearchElementsContainer(LayoutContainer panel) {
+
+        SearchCriteria searchCriteria = navigationContext.getSearchCriteria();
 
         transactionId = new EntityNameField();
         transactionId.setWidth(ELEMENT_WIDTH);
@@ -48,8 +58,17 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
 
         accountId = new EntityNameField();
         accountId.setWidth(ELEMENT_WIDTH);
+        if (searchCriteria != null) {
+            String defaultAccountId = (String) searchCriteria.get(TransactionModel.ACCOUNT_ID);
+            if (defaultAccountId != null) {
+                accountId.setValue(new EntityRefName(defaultAccountId));
+                accountId.setEnabled(false);
+            }
+        }
+
         panel.add(WidgetFactory.createText("Account ID:"));
         panel.add(accountId);
+
 
         statementText = new EntityNameField();
         statementText.setWidth(ELEMENT_WIDTH);
@@ -88,10 +107,26 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
         transactionType.setDisplayProperty(PropertyModelData.DISPLAY_VALUE_KEY);
         transactionType.setWidth(ELEMENT_WIDTH / 2);
         transactionType.setHeight(100);
+
+        // If we come with the navigation context and search criteria we need to check if there are any default
+        // transaction types to set
+        Set<TransactionType> transactionTypes = (searchCriteria != null) ?
+                (Set<TransactionType>) searchCriteria.get(TransactionModel.TYPE) : null;
+
         for (TransactionType type : TransactionType.values()) {
             Log.debug("Adding transaction type: " + type);
-            transactionType.addToStore(new PropertyModelData(type.name(), type.toString()));
+            PropertyModelData modelData = new PropertyModelData(type.name(), type.toString());
+            transactionType.addToStore(modelData);
+            if (transactionTypes != null && transactionTypes.contains(type)) {
+                transactionType.getListView().getSelectionModel().select(modelData, true);
+            }
         }
+
+        if (transactionTypes != null && !transactionTypes.isEmpty()) {
+            transactionType.setEnabled(false);
+        }
+
+
         Text transactionTypesLabel = WidgetFactory.createText("Transaction Type:");
         panel.add(transactionTypesLabel);
         panel.add(transactionType);
@@ -110,7 +145,7 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
     protected void beforePerformSearch(SearchCriteria searchCriteria) {
         List<PropertyModelData> selectedItems = transactionType.getSelectedItems();
         HashSet<TransactionType> selectedTypes = new HashSet<TransactionType>(selectedItems.size());
-        for ( PropertyModelData selectedItem : selectedItems ) {
+        for (PropertyModelData selectedItem : selectedItems) {
             selectedTypes.add(Enum.valueOf(TransactionType.class, selectedItem.getKey()));
         }
         searchCriteria.put(TransactionModel.TYPE, selectedTypes);

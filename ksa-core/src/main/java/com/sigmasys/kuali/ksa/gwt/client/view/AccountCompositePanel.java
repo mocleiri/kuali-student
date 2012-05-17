@@ -2,7 +2,7 @@ package com.sigmasys.kuali.ksa.gwt.client.view;
 
 
 import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
-import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
+import com.sigmasys.kuali.ksa.gwt.client.model.NavigationContext;
 
 /**
  * AccountCompositePanel
@@ -12,18 +12,18 @@ import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 public class AccountCompositePanel extends AbstractCompositePanel<AccountModel> {
 
     public AccountCompositePanel() {
-        this(null);
+        this(NavigationContext.getDefaultContext());
     }
 
-    public AccountCompositePanel(SearchCriteria searchCriteria) {
+    public AccountCompositePanel(NavigationContext context) {
         super(
-                new AccountSearchPanel(),
-                new AccountListPanel(),
+                new AccountSearchPanel(context),
+                new AccountListPanel(context),
                 new AccountDetailsPanel(),
                 300,
                 300,
                 350,
-                searchCriteria != null
+                context != null && context.getSearchCriteria() != null
         );
     }
 }

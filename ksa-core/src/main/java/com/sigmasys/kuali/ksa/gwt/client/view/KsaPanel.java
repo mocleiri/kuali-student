@@ -28,13 +28,15 @@ public class KsaPanel extends TabPanel {
         tabItem.add(new AccountCompositePanel());
         add(tabItem);
 
-        tabItem = new TabItem("Charges");
-        tabItem.setIconStyle("icon-card");
+        tabItem = new TabItem("Transactions");
+        tabItem.setIconStyle("tabs");
+        //tabItem.setIconStyle("icon-card");
         tabItem.setLayout(new FitLayout());
         tabItem.setScrollMode(Style.Scroll.AUTO);
         tabItem.add(new TransactionCompositePanel());
         add(tabItem);
 
+        /*
         tabItem = new TabItem("Payments");
         tabItem.setIconStyle("icon-coins");
         tabItem.setLayout(new FitLayout());
@@ -50,6 +52,7 @@ public class KsaPanel extends TabPanel {
         // TODO
         tabItem.add(new LayoutContainer());
         add(tabItem);
+        */
 
         tabItem = new TabItem("Alerts");
         tabItem.setIconStyle("icon-alert");

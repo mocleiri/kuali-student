@@ -18,14 +18,16 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
+import com.sigmasys.kuali.ksa.gwt.client.model.*;
 import com.sigmasys.kuali.ksa.gwt.client.service.AccountColumnModelFactory;
 import com.sigmasys.kuali.ksa.gwt.client.service.ColumnModelFactory;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.OkCancelDialog;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 
 /**
@@ -42,15 +44,33 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
     private Button viewDefermentsButton;
     private Button ageDebtButton;
 
-    private void addTabItem(String name) {
+    public AccountListPanel(NavigationContext navigationContext) {
+        super(navigationContext);
+    }
+
+    private void addTransactionTab(String name, String accountId, TransactionType transactionType) {
         KsaPanel panel = Registry.get(KsaPanel.class.getName());
         if (panel != null) {
             TabItem item = new TabItem(name);
             item.setLayout(new FitLayout());
             item.setClosable(true);
-            item.setIconStyle("tabs");
-            // TODO:
-            item.add(WidgetFactory.createTextBold("COMING SOON!!!"));
+            String iconStyle = "tabs";
+            switch (transactionType) {
+                case CHARGE:
+                    iconStyle = "icon-card";
+                    break;
+                case PAYMENT:
+                    iconStyle = "icon-coins";
+                    break;
+                case DEFERMENT:
+                    iconStyle = "icon-calculator";
+                    break;
+            }
+            item.setIconStyle(iconStyle);
+            SearchCriteria criteria = new SearchCriteria();
+            criteria.put(TransactionModel.ACCOUNT_ID, accountId);
+            criteria.put(TransactionModel.TYPE, new HashSet<TransactionType>(Arrays.asList(transactionType)));
+            item.add(new TransactionCompositePanel(new NavigationContext(criteria)));
             panel.add(item);
             panel.setSelection(item);
         }
@@ -66,7 +86,8 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             public void handleEvent(BaseEvent be) {
                 AccountModel model = getSelectedItem();
                 if (model != null) {
-                    addTabItem("Charges (Account ID: " + model.getId() + ")");
+                    addTransactionTab("Charges (Account ID: " + model.getId() + ")", model.getId(),
+                            TransactionType.CHARGE);
                 }
             }
         });
@@ -77,7 +98,8 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             public void handleEvent(BaseEvent be) {
                 AccountModel model = getSelectedItem();
                 if (model != null) {
-                    addTabItem("Payments (Account ID: " + model.getId() + ")");
+                    addTransactionTab("Payments (Account ID: " + model.getId() + ")", model.getId(),
+                            TransactionType.PAYMENT);
                 }
             }
         });
@@ -88,7 +110,8 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             public void handleEvent(BaseEvent be) {
                 AccountModel model = getSelectedItem();
                 if (model != null) {
-                    addTabItem("Deferments (Account ID: " + model.getId() + ")");
+                    addTransactionTab("Deferments (Account ID: " + model.getId() + ")", model.getId(),
+                            TransactionType.DEFERMENT);
                 }
             }
         });

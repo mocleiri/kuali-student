@@ -23,6 +23,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Timer;
+import com.sigmasys.kuali.ksa.gwt.client.model.NavigationContext;
 import com.sigmasys.kuali.ksa.gwt.client.model.SearchCriteria;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
 
@@ -51,10 +52,12 @@ public abstract class AbstractSearchPanel<M extends BaseModel> extends FormPanel
     protected final Button searchButton = new Button("Search");
     protected final Button resetButton = new Button("Reset");
 
+    protected NavigationContext navigationContext;
 
     private boolean topPanel;
 
-    protected Listener<ComponentEvent> enterHitListener = new Listener<ComponentEvent>() {
+
+    protected final Listener<ComponentEvent> enterHitListener = new Listener<ComponentEvent>() {
         public void handleEvent(ComponentEvent event) {
             if (event.getKeyCode() == KeyCodes.KEY_ENTER) {
                 submitForm();
@@ -98,9 +101,22 @@ public abstract class AbstractSearchPanel<M extends BaseModel> extends FormPanel
         }
     }
 
+    // Constructors
     public AbstractSearchPanel() {
+        this(NavigationContext.getDefaultContext());
+    }
+
+    public AbstractSearchPanel(NavigationContext context) {
+
+        navigationContext = context;
 
         searchCriteriaModel = new SearchCriteriaModel();
+
+        SearchCriteria searchCriteria = navigationContext.getSearchCriteria();
+        if (searchCriteria != null) {
+            searchCriteriaModel.fromSearchCriteria(searchCriteria);
+        }
+
         formBinding = new FormBinding(this);
 
         setHeading("Search");

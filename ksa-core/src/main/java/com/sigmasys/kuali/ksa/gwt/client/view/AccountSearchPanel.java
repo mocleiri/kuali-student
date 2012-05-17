@@ -8,6 +8,7 @@ import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
 import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
+import com.sigmasys.kuali.ksa.gwt.client.model.NavigationContext;
 import com.sigmasys.kuali.ksa.gwt.client.model.StringModelData;
 import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
@@ -37,6 +38,10 @@ public class AccountSearchPanel extends AbstractSearchPanel<AccountModel> {
     private EntityNameField city;
     private EntityNameField state;
     private ListViewAdapter<StringModelData> country;
+
+    public AccountSearchPanel(NavigationContext context) {
+        super(context);
+    }
 
     @Override
     protected void fillSearchElementsContainer(LayoutContainer panel) {
