@@ -86,7 +86,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             public void handleEvent(BaseEvent be) {
                 AccountModel model = getSelectedItem();
                 if (model != null) {
-                    addTransactionTab("Charges (Account ID: " + model.getId() + ")", model.getId(),
+                    addTransactionTab("Charges (" + model.getId() + ")", model.getId(),
                             TransactionType.CHARGE);
                 }
             }
@@ -98,7 +98,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             public void handleEvent(BaseEvent be) {
                 AccountModel model = getSelectedItem();
                 if (model != null) {
-                    addTransactionTab("Payments (Account ID: " + model.getId() + ")", model.getId(),
+                    addTransactionTab("Payments (" + model.getId() + ")", model.getId(),
                             TransactionType.PAYMENT);
                 }
             }
@@ -110,7 +110,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             public void handleEvent(BaseEvent be) {
                 AccountModel model = getSelectedItem();
                 if (model != null) {
-                    addTransactionTab("Deferments (Account ID: " + model.getId() + ")", model.getId(),
+                    addTransactionTab("Deferments (" + model.getId() + ")", model.getId(),
                             TransactionType.DEFERMENT);
                 }
             }
@@ -126,7 +126,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
                         @Override
                         protected void init() {
                             setModal(false);
-                            setHeading("Age Transactions (Account ID: " + model.getId() + ")");
+                            setHeading("Age Transactions (" + model.getId() + ")");
                             setResizable(true);
                             setClosable(true);
                             setSize(700, 400);
