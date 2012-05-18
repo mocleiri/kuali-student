@@ -10,6 +10,7 @@ import com.sigmasys.kuali.ksa.gwt.server.SearchQueryBuilder;
 import com.sigmasys.kuali.ksa.gwt.server.TransactionColumnMapper;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +56,9 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
 
     @Autowired
     private CurrencyService currencyService;
+
+    @Autowired
+    private TransactionService transactionService;
 
 
     @Override
@@ -140,5 +146,26 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         }
         return currencyCodes;
     }
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param externalId        Transaction External ID
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
+     * @return new Transaction instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public TransactionModel createTransaction(String transactionTypeId, String externalId, String userId,
+                                              Date effectiveDate, Double amount) throws GwtError {
+        Transaction transaction = transactionService.createTransaction(transactionTypeId, externalId, userId,
+                effectiveDate, new BigDecimal(amount));
+        return createModelFrom(transaction);
+    }
+
 
 }
