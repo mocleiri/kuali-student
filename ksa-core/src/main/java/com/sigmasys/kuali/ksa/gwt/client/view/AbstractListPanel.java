@@ -184,6 +184,7 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
         grid.setLoadMask(true);
         grid.setBorders(true);
         grid.setColumnLines(true);
+        grid.getView().setAutoFill(true);
 
         if (isCheckBoxSelection()) {
             grid.setSelectionModel(sm);
