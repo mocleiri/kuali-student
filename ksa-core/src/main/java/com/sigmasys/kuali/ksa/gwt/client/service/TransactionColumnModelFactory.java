@@ -65,6 +65,14 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         });
         columns.add(column);
 
+        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_ID, LABEL_TYPE_ID, 70);
+        column.setAlignment(Style.HorizontalAlignment.RIGHT);
+        columns.add(column);
+
+        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_SUB_CODE, LABEL_TYPE_SUB_CODE, 95);
+        column.setAlignment(Style.HorizontalAlignment.RIGHT);
+        columns.add(column);
+
         column = new ColumnConfig(TransactionModel.COLUMN_ORIGINATION_DATE, LABEL_ORIGINATION_DATE, 100);
         column.setDateTimeFormat(dateFormat);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
@@ -80,14 +88,6 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         columns.add(column);
 
         column = new ColumnConfig(TransactionModel.COLUMN_CURRENCY_CODE, LABEL_CURRENCY, 70);
-        column.setAlignment(Style.HorizontalAlignment.RIGHT);
-        columns.add(column);
-
-        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_ID, LABEL_TYPE_ID, 70);
-        column.setAlignment(Style.HorizontalAlignment.RIGHT);
-        columns.add(column);
-
-        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_SUB_CODE, LABEL_TYPE_SUB_CODE, 95);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
