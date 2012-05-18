@@ -5,7 +5,6 @@ import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.Text;
 import com.sigmasys.kuali.ksa.gwt.client.model.*;
 import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
@@ -59,9 +58,9 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
         accountId = new EntityNameField();
         accountId.setWidth(ELEMENT_WIDTH);
         if (searchCriteria != null) {
-            String defaultAccountId = (String) searchCriteria.get(TransactionModel.ACCOUNT_ID);
+            EntityRefName defaultAccountId = (EntityRefName) searchCriteria.get(TransactionModel.ACCOUNT_ID);
             if (defaultAccountId != null) {
-                accountId.setValue(new EntityRefName(defaultAccountId));
+                accountId.setValue(defaultAccountId);
                 accountId.setEnabled(false);
             }
         }
@@ -72,7 +71,7 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
 
         statementText = new EntityNameField();
         statementText.setWidth(ELEMENT_WIDTH);
-        panel.add(WidgetFactory.createText("Statement text:"));
+        panel.add(WidgetFactory.createText("Statement:"));
         panel.add(statementText);
 
         originationDate = new DateRangeField(Style.Orientation.HORIZONTAL, "From Date", "To Date", 95, 6);
@@ -110,14 +109,14 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
 
         // If we come with the navigation context and search criteria we need to check if there are any default
         // transaction types to set
-        Set<TransactionType> transactionTypes = (searchCriteria != null) ?
-                (Set<TransactionType>) searchCriteria.get(TransactionModel.TYPE) : null;
+        Set<PropertyModelData> transactionTypes = (searchCriteria != null) ?
+                (Set<PropertyModelData>) searchCriteria.get(TransactionModel.TYPE) : null;
 
         for (TransactionType type : TransactionType.values()) {
             Log.debug("Adding transaction type: " + type);
             PropertyModelData modelData = new PropertyModelData(type.name(), type.toString());
             transactionType.addToStore(modelData);
-            if (transactionTypes != null && transactionTypes.contains(type)) {
+            if (transactionTypes != null && transactionTypes.contains(modelData)) {
                 transactionType.getListView().getSelectionModel().select(modelData, true);
             }
         }
@@ -126,9 +125,7 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
             transactionType.setEnabled(false);
         }
 
-
-        Text transactionTypesLabel = WidgetFactory.createText("Transaction Type:");
-        panel.add(transactionTypesLabel);
+        panel.add(WidgetFactory.createText("Transaction Type:"));
         panel.add(transactionType);
 
         // TODO -- add form bindings if necessary

@@ -112,10 +112,10 @@ public abstract class AbstractSearchPanel<M extends BaseModel> extends FormPanel
 
         searchCriteriaModel = new SearchCriteriaModel();
 
-        /*SearchCriteria searchCriteria = navigationContext.getSearchCriteria();
+        SearchCriteria searchCriteria = navigationContext.getSearchCriteria();
         if (searchCriteria != null) {
             searchCriteriaModel.fromSearchCriteria(searchCriteria);
-        }*/
+        }
 
         formBinding = new FormBinding(this);
 

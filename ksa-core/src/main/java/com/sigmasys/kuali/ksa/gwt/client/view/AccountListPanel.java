@@ -24,6 +24,7 @@ import com.sigmasys.kuali.ksa.gwt.client.service.ColumnModelFactory;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.OkCancelDialog;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
+import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.EntityRefName;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -68,8 +69,9 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             }
             item.setIconStyle(iconStyle);
             SearchCriteria criteria = new SearchCriteria();
-            criteria.put(TransactionModel.ACCOUNT_ID, accountId);
-            criteria.put(TransactionModel.TYPE, new HashSet<TransactionType>(Arrays.asList(transactionType)));
+            criteria.put(TransactionModel.ACCOUNT_ID, new EntityRefName(accountId));
+            PropertyModelData typeModel = new PropertyModelData(transactionType.name(), transactionType.toString());
+            criteria.put(TransactionModel.TYPE, new HashSet<PropertyModelData>(Arrays.asList(typeModel)));
             item.add(new TransactionCompositePanel(new NavigationContext(criteria)));
             panel.add(item);
             panel.setSelection(item);
