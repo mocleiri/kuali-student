@@ -50,11 +50,15 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
     }
 
     private void addTransactionTab(String name, String accountId, TransactionType transactionType) {
+
         KsaPanel panel = Registry.get(KsaPanel.class.getName());
+
         if (panel != null) {
+
             TabItem item = new TabItem(name);
             item.setLayout(new FitLayout());
             item.setClosable(true);
+
             String iconStyle = "tabs";
             switch (transactionType) {
                 case CHARGE:
@@ -67,11 +71,15 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
                     iconStyle = "icon-calculator";
                     break;
             }
+
             item.setIconStyle(iconStyle);
+
             SearchCriteria criteria = new SearchCriteria();
             criteria.put(TransactionModel.ACCOUNT_ID, new EntityRefName(accountId));
             criteria.put(TransactionModel.TYPE, new HashSet<TransactionType>(Arrays.asList(transactionType)));
+
             item.add(new TransactionCompositePanel(new NavigationContext(criteria)));
+
             panel.add(item);
             panel.setSelection(item);
         }
