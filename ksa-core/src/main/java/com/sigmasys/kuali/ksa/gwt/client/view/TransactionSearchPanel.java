@@ -109,14 +109,14 @@ public class TransactionSearchPanel extends AbstractSearchPanel<TransactionModel
 
         // If we come with the navigation context and search criteria we need to check if there are any default
         // transaction types to set
-        Set<PropertyModelData> transactionTypes = (searchCriteria != null) ?
-                (Set<PropertyModelData>) searchCriteria.get(TransactionModel.TYPE) : null;
+        Set<TransactionType> transactionTypes = (searchCriteria != null) ?
+                (Set<TransactionType>) searchCriteria.get(TransactionModel.TYPE) : null;
 
         for (TransactionType type : TransactionType.values()) {
             Log.debug("Adding transaction type: " + type);
             PropertyModelData modelData = new PropertyModelData(type.name(), type.toString());
             transactionType.addToStore(modelData);
-            if (transactionTypes != null && transactionTypes.contains(modelData)) {
+            if (transactionTypes != null && transactionTypes.contains(type)) {
                 transactionType.getListView().getSelectionModel().select(modelData, true);
             }
         }

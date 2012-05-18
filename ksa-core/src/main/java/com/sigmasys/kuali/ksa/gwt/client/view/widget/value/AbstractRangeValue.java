@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.gwt.client.view.widget.value;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import java.io.Serializable;
 
 
@@ -9,7 +11,7 @@ import java.io.Serializable;
  * @param <V> Serializable type
  * @author Michael Ivanov
  */
-public abstract class AbstractRangeValue<V extends Serializable> implements Serializable {
+public abstract class AbstractRangeValue<V extends Serializable> implements Serializable, IsSerializable {
 
     private V from;
     private V to;

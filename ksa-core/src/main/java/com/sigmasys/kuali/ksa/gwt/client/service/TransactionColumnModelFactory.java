@@ -32,7 +32,7 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
     public static final String LABEL_AMOUNT = "Amount";
     public static final String LABEL_CURRENCY = "Currency";
     public static final String LABEL_TYPE_ID = "Type ID";
-    public static final String LABEL_TYPE_SUB_CODE = "Type SubCode";
+    public static final String LABEL_TYPE_SUB_CODE = "Type Subcode";
     public static final String LABEL_STATEMENT = "Statement";
 
     public List<ColumnConfig> getColumnConfigs() {
@@ -41,7 +41,7 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
 
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
-        ColumnConfig column = new ColumnConfig(TransactionModel.COLUMN_ID, LABEL_ID, 90);
+        ColumnConfig column = new ColumnConfig(TransactionModel.COLUMN_ID, LABEL_ID, 95);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
@@ -49,7 +49,7 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         column.setAlignment(Style.HorizontalAlignment.LEFT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.TYPE, LABEL_TYPE, 90);
+        column = new ColumnConfig(TransactionModel.TYPE, LABEL_TYPE, 95);
         column.setAlignment(Style.HorizontalAlignment.LEFT);
         column.setRenderer(new GridCellRenderer<TransactionModel>() {
             @Override
@@ -83,11 +83,11 @@ public class TransactionColumnModelFactory extends AbstractColumnModelFactory<Tr
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_ID, LABEL_TYPE_ID, 80);
+        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_ID, LABEL_TYPE_ID, 70);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 
-        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_SUB_CODE, LABEL_TYPE_SUB_CODE, 100);
+        column = new ColumnConfig(TransactionModel.COLUMN_TYPE_SUB_CODE, LABEL_TYPE_SUB_CODE, 95);
         column.setAlignment(Style.HorizontalAlignment.RIGHT);
         columns.add(column);
 

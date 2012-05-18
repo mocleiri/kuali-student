@@ -70,8 +70,7 @@ public class AccountListPanel extends AbstractListPanel<AccountModel> {
             item.setIconStyle(iconStyle);
             SearchCriteria criteria = new SearchCriteria();
             criteria.put(TransactionModel.ACCOUNT_ID, new EntityRefName(accountId));
-            PropertyModelData typeModel = new PropertyModelData(transactionType.name(), transactionType.toString());
-            criteria.put(TransactionModel.TYPE, new HashSet<PropertyModelData>(Arrays.asList(typeModel)));
+            criteria.put(TransactionModel.TYPE, new HashSet<TransactionType>(Arrays.asList(transactionType)));
             item.add(new TransactionCompositePanel(new NavigationContext(criteria)));
             panel.add(item);
             panel.setSelection(item);

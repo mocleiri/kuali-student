@@ -181,14 +181,17 @@ public abstract class AbstractListPanel<M extends BaseModel> extends ContentPane
 
         grid = new Grid<M>(store, cm);
         grid.setWidth("100%");
-        grid.setStripeRows(true);
         grid.setLoadMask(true);
-        // grid.setBorders(true);
+        grid.setBorders(true);
+        grid.setColumnLines(true);
+
         if (isCheckBoxSelection()) {
             grid.setSelectionModel(sm);
             grid.addPlugin(sm);
         }
+
         grid.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
+
         setGridDisabled(true);
 
         // empty row selection will be taken care of by selection change
