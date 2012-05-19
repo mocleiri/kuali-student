@@ -83,10 +83,20 @@
     </bean>
 
 
+
+
+
     <!--  MyPlan Cache beans -->
     <bean id="myplanCacheManager" class="net.sf.ehcache.CacheManager">
         <constructor-arg index="0" type="java.net.URL" value="${myplan.cache.config.file}" />
     </bean>
+    <bean id="degreeAuditMethodCacheAdvisor" class="org.kuali.student.common.util.spring.MethodArgsToObjectEhcacheAdvice">
+        <property name="cacheName" value="degreeAuditCache" />
+        <property name="cacheManager" ref="myplanCacheManager"/>
+        <property name="enabled" value="${ks.degreeAudit.enable.caching}"/>
+    </bean>
+
+
 
     <bean id="academicCalendarCacheAdvisor" class="org.kuali.student.myplan.util.QueryMethodArgsCacheAdvice">
         <property name="cacheName" value="academicCalendarCache" />
@@ -184,7 +194,14 @@
             <aop:around pointcut="execution(*  org.kuali.student.myplan.course.controller.CourseSearchController.getCreditMap(..))" method="getFromCache" />
         </aop:aspect>
 
+        <aop:aspect id="degreeAuditAroundSearch" ref="degreeAuditMethodCacheAdvisor">
+            <aop:around pointcut="execution(*  org.kuali.student.myplan.audit.service.DegreeAuditServiceImpl.getAuditPrograms(..))" method="getFromCache" />
+
+        </aop:aspect>
+
     </aop:config>
+
+
 
 
 	<bean id="ks.messageServiceMock" class="org.kuali.student.core.messages.service.impl.MessageServiceMock">
