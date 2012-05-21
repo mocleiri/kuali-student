@@ -23,6 +23,7 @@
         <hibernate.version>4.1.2.Final</hibernate.version>
         <jta.version>1.1</jta.version>
         <atomikos.version>3.7.0</atomikos.version>
+        <drools.version>5.4.0.Final</drools.version>
         <gwt.version>2.4.0</gwt.version>
         <gxt.version>2.2.5-gwt22</gxt.version>
         <gwt-log.version>3.1.7</gwt-log.version>
@@ -116,6 +117,28 @@
     </modules>
 
     <dependencies>
+
+        <!-- Drools Rule Engine -->
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-compiler</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-decisiontables</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-templates</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
 
         <!-- JAX-WS stuff -->
         <dependency>
