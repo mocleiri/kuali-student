@@ -2,8 +2,6 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.*;
 
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -14,8 +12,6 @@ import java.util.List;
  *
  * @author Tim Bornholtz, Michael Ivanov
  */
-@WebService(name = "AccountService", targetNamespace = "http://ksa.kuali.org/wsdl/account")
-@SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public interface AccountService {
 
     /**
