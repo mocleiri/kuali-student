@@ -19,338 +19,335 @@ import java.util.Date;
 /**
  * A subclass of {@link com.extjs.gxt.ui.client.widget.Window} which mimics the behavior
  * of (and is based on the source code of) a {@link com.extjs.gxt.ui.client.widget.tips.ToolTip}.
- *  
- * @author sackj
+ *
+ * @author Michael Ivanov
  */
 public class WindowToolTip extends Window {
 
-	private int quickShowInterval = 250;
-	private boolean constrainPosition = true;
-	private boolean autoHide = true;
-	private int dismissDelay = 5000;
-	private int hideDelay = 200;
-	private int[] mouseOffset = new int[] { 10, 10 };
-	private int showDelay = 500;
-	private boolean trackMouse;
-	private Component target;
-	private Point targetXY = new Point(0, 0);
-	private Timer dismissTimer;
-	private Timer showTimer;
-	private Timer hideTimer;
-	private Listener<ComponentEvent> listener;
-	private Date lastActive;
+    private int quickShowInterval = 250;
+    private boolean constrainPosition = true;
+    private boolean autoHide = true;
+    private int dismissDelay = 5000;
+    private int hideDelay = 200;
+    private int[] mouseOffset = new int[]{10, 10};
+    private int showDelay = 500;
+    private boolean trackMouse;
+    private Component target;
+    private Point targetXY = new Point(0, 0);
+    private Timer dismissTimer;
+    private Timer showTimer;
+    private Timer hideTimer;
+    private Listener<ComponentEvent> listener;
+    private Date lastActive;
 
-	private static WindowToolTip previouslyShownWindowToolTip = null;
+    private static WindowToolTip previouslyShownWindowToolTip = null;
 
-	/**
-	 * Creates a new tip instance.
-	 */
-	public WindowToolTip() {
-		hidden = true;
-		lastActive = new Date();
-	}
+    /**
+     * Creates a new tip instance.
+     */
+    public WindowToolTip() {
+        hidden = true;
+        lastActive = new Date();
+    }
 
-	/**
-	 * Creates a new tool tip.
-	 * 
-	 * @param target
-	 *            the target widget
-	 */
-	public WindowToolTip(Component target) {
-		this();
-		initTarget(target);
-	}
+    /**
+     * Creates a new tool tip.
+     *
+     * @param target the target widget
+     */
+    public WindowToolTip(Component target) {
+        this();
+        initTarget(target);
+    }
 
-	@Override
-	public void hide() {
+    @Override
+    public void hide() {
 
-		clearTimers();
-		lastActive = new Date();
+        clearTimers();
+        lastActive = new Date();
 
-		super.hide();
+        super.hide();
 
-		if (isAttached()) {
-			RootPanel.get().remove(this);
-		}
-	}
+        if (isAttached()) {
+            RootPanel.get().remove(this);
+        }
+    }
 
-	/**
-	 * Shows this tip at the specified position.
-	 * 
-	 * @param x
-	 *            the x coordinate
-	 * @param y
-	 *            the y coordinate
-	 */
-	public void showAt(int x, int y) {
+    /**
+     * Shows this tip at the specified position.
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    public void showAt(int x, int y) {
 
-		if (disabled)
-			return;
-		lastActive = new Date();
-		clearTimers();
+        if (disabled)
+            return;
+        lastActive = new Date();
+        clearTimers();
 
-		if (!isAttached()) {
-			RootPanel.get().add(this);
-		}
-		super.show();
+        if (!isAttached()) {
+            RootPanel.get().add(this);
+        }
+        super.show();
 
-		Point p = new Point(x, y);
-		if (constrainPosition) {
-			p = el().adjustForConstraints(p);
-		}
-		setPagePosition(p.x + XDOM.getBodyScrollLeft(), p.y
-				+ XDOM.getBodyScrollTop());
-		el().setVisibility(true);
+        Point p = new Point(x, y);
+        if (constrainPosition) {
+            p = el().adjustForConstraints(p);
+        }
+        setPagePosition(p.x + XDOM.getBodyScrollLeft(), p.y
+                + XDOM.getBodyScrollTop());
+        el().setVisibility(true);
 
-		if (dismissDelay > 0 && autoHide) {
-			dismissTimer = new Timer() {
-				public void run() {
-					hide();
-				}
-			};
-			dismissTimer.schedule(dismissDelay);
-		}
+        if (dismissDelay > 0 && autoHide) {
+            dismissTimer = new Timer() {
+                public void run() {
+                    hide();
+                }
+            };
+            dismissTimer.schedule(dismissDelay);
+        }
 
-	}
+    }
 
-	/**
-	 * Shows this tip at the specified position.
-	 * 
-	 * @param point
-	 *            the position
-	 */
-	public void showAt(Point point) {
-		showAt(point.x, point.y);
-	}
+    /**
+     * Shows this tip at the specified position.
+     *
+     * @param point the position
+     */
+    public void showAt(Point point) {
+        showAt(point.x, point.y);
+    }
 
-	@Override
-	protected void onDisable() {
-		super.onDisable();
-		hide();
-	}
+    @Override
+    protected void onDisable() {
+        super.onDisable();
+        hide();
+    }
 
-	public void initTarget(final Component target) {
-		if (this.target != null) {
-			this.target.removeListener(Events.OnMouseOver, listener);
-			this.target.removeListener(Events.OnMouseOut, listener);
-			this.target.removeListener(Events.OnMouseMove, listener);
-			this.target.removeListener(Events.Hide, listener);
-			this.target.removeListener(Events.Detach, listener);
-			this.target.removeListener(Events.Render, listener);
-		}
+    public void initTarget(final Component target) {
+        if (this.target != null) {
+            this.target.removeListener(Events.OnMouseOver, listener);
+            this.target.removeListener(Events.OnMouseOut, listener);
+            this.target.removeListener(Events.OnMouseMove, listener);
+            this.target.removeListener(Events.Hide, listener);
+            this.target.removeListener(Events.Detach, listener);
+            this.target.removeListener(Events.Render, listener);
+        }
 
-		this.target = target;
-		if (listener == null) {
-			listener = new Listener<ComponentEvent>() {
-				public void handleEvent(ComponentEvent be) {
-					Element source = target.getElement();
-					EventType type = be.getType();
-					if (type == Events.OnMouseOver) {
-						Element from = DOM.eventGetFromElement(be.getEvent());
-						if (from != null && !DOM.isOrHasChild(source, from)) {
-							onTargetOver(be);
-						}
-					} else if (type == Events.OnMouseOut) {
-						Element to = DOM.eventGetToElement(be.getEvent());
-						if (to != null && !DOM.isOrHasChild(source, to)) {
-							onTargetOut(be);
-						}
-					} else if (type == Events.OnMouseMove) {
-						onMouseMove(be);
-					} else if (type == Events.Hide || type == Events.Detach) {
-						hide();
-					}
-				}
-			};
-		}
-		if (target != null) {
-			target.addListener(Events.OnMouseOver, listener);
-			target.addListener(Events.Render, listener);
-			target.addListener(Events.OnMouseOut, listener);
-			target.addListener(Events.OnMouseMove, listener);
-			target.addListener(Events.Hide, listener);
-			target.addListener(Events.Detach, listener);
-			target.sinkEvents(Event.ONMOUSEOVER | Event.ONMOUSEOUT
-					| Event.ONMOUSEMOVE);
-		}
-	}
+        this.target = target;
+        if (listener == null) {
+            listener = new Listener<ComponentEvent>() {
+                public void handleEvent(ComponentEvent be) {
+                    Element source = target.getElement();
+                    EventType type = be.getType();
+                    if (type == Events.OnMouseOver) {
+                        Element from = DOM.eventGetFromElement(be.getEvent());
+                        if (from != null && !DOM.isOrHasChild(source, from)) {
+                            onTargetOver(be);
+                        }
+                    } else if (type == Events.OnMouseOut) {
+                        Element to = DOM.eventGetToElement(be.getEvent());
+                        if (to != null && !DOM.isOrHasChild(source, to)) {
+                            onTargetOut(be);
+                        }
+                    } else if (type == Events.OnMouseMove) {
+                        onMouseMove(be);
+                    } else if (type == Events.Hide || type == Events.Detach) {
+                        hide();
+                    }
+                }
+            };
+        }
+        if (target != null) {
+            target.addListener(Events.OnMouseOver, listener);
+            target.addListener(Events.Render, listener);
+            target.addListener(Events.OnMouseOut, listener);
+            target.addListener(Events.OnMouseMove, listener);
+            target.addListener(Events.Hide, listener);
+            target.addListener(Events.Detach, listener);
+            target.sinkEvents(Event.ONMOUSEOVER | Event.ONMOUSEOUT
+                    | Event.ONMOUSEMOVE);
+        }
+    }
 
-	@Override
-	public void show() {
+    @Override
+    public void show() {
 
-		if (previouslyShownWindowToolTip != null) {
-			previouslyShownWindowToolTip.hide();
-		}
+        if (previouslyShownWindowToolTip != null) {
+            previouslyShownWindowToolTip.hide();
+        }
 
-		if (disabled)
-			return;
-		showAt(getTargetXY(0));
+        if (disabled) {
+            return;
+        }
 
-		previouslyShownWindowToolTip = this;
+        showAt(getTargetXY(0));
 
-	}
+        previouslyShownWindowToolTip = this;
 
-	protected void clearTimer(String timer) {
-		if (timer.equals("hide")) {
-			if (hideTimer != null) {
-				hideTimer.cancel();
-				hideTimer = null;
-			}
-		} else if (timer.equals("dismiss")) {
-			if (dismissTimer != null) {
-				dismissTimer.cancel();
-				dismissTimer = null;
-			}
-		} else if (timer.equals("show")) {
-			if (showTimer != null) {
-				showTimer.cancel();
-				showTimer = null;
-			}
-		}
-	}
+    }
 
-	protected void clearTimers() {
-		clearTimer("show");
-		clearTimer("dismiss");
-		clearTimer("hide");
-	}
+    protected void clearTimer(String timer) {
+        if (timer.equals("hide")) {
+            if (hideTimer != null) {
+                hideTimer.cancel();
+                hideTimer = null;
+            }
+        } else if (timer.equals("dismiss")) {
+            if (dismissTimer != null) {
+                dismissTimer.cancel();
+                dismissTimer = null;
+            }
+        } else if (timer.equals("show")) {
+            if (showTimer != null) {
+                showTimer.cancel();
+                showTimer = null;
+            }
+        }
+    }
 
-	protected void delayShow() {
-		if (hidden && showTimer == null) {
-			if ((new Date().getTime() - lastActive.getTime()) < quickShowInterval) {
-				show();
-			} else {
-				showTimer = new Timer() {
-					public void run() {
-						show();
-					}
-				};
-				showTimer.schedule(showDelay);
-			}
+    protected void clearTimers() {
+        clearTimer("show");
+        clearTimer("dismiss");
+        clearTimer("hide");
+    }
 
-		} else if (!hidden && autoHide) {
-			show();
-		}
-	}
+    protected void delayShow() {
+        if (hidden && showTimer == null) {
+            if ((new Date().getTime() - lastActive.getTime()) < quickShowInterval) {
+                show();
+            } else {
+                showTimer = new Timer() {
+                    public void run() {
+                        show();
+                    }
+                };
+                showTimer.schedule(showDelay);
+            }
 
-	protected void onMouseMove(ComponentEvent ce) {
-		targetXY = ce.getXY();
-		if (!hidden && trackMouse) {
-			Point p = getTargetXY(0);
-			if (constrainPosition) {
-				p = el().adjustForConstraints(p);
-			}
-			setPagePosition(p);
-		}
-	}
+        } else if (!hidden && autoHide) {
+            show();
+        }
+    }
 
-	protected void onTargetOut(ComponentEvent ce) {
-		if (disabled) {
-			return;
-		}
-		clearTimer("show");
-		if (autoHide) {
-			delayHide();
-		}
-	}
+    protected void onMouseMove(ComponentEvent ce) {
+        targetXY = ce.getXY();
+        if (!hidden && trackMouse) {
+            Point p = getTargetXY(0);
+            if (constrainPosition) {
+                p = el().adjustForConstraints(p);
+            }
+            setPagePosition(p);
+        }
+    }
 
-	protected void onTargetOver(ComponentEvent ce) {
-		if (disabled || !ce.within(target.getElement())) {
-			return;
-		}
+    protected void onTargetOut(ComponentEvent ce) {
+        if (disabled) {
+            return;
+        }
+        clearTimer("show");
+        if (autoHide) {
+            delayHide();
+        }
+    }
 
-		clearTimer("hide");
-		targetXY = ce.getXY();
-		delayShow();
-	}
+    protected void onTargetOver(ComponentEvent ce) {
+        if (disabled || !ce.within(target.getElement())) {
+            return;
+        }
 
-	private void delayHide() {
-		if (!hidden && hideTimer == null) {
-			if (hideDelay == 0) {
-				hide();
-				return;
-			}
-			hideTimer = new Timer() {
-				public void run() {
-					hide();
-				}
-			};
-			hideTimer.schedule(hideDelay);
-		}
-	}
+        clearTimer("hide");
+        targetXY = ce.getXY();
+        delayShow();
+    }
 
-	private Point getTargetXY(int targetCounter) {
-		int[] mouseOffset = this.mouseOffset;
-		int x = targetXY.x + mouseOffset[0];
-		int y = targetXY.y + mouseOffset[1];
-		return new Point(x, y);
-	}
+    private void delayHide() {
+        if (!hidden && hideTimer == null) {
+            if (hideDelay == 0) {
+                hide();
+                return;
+            }
+            hideTimer = new Timer() {
+                public void run() {
+                    hide();
+                }
+            };
+            hideTimer.schedule(hideDelay);
+        }
+    }
 
-	/**
-	 * Returns the quick show interval.
-	 * 
-	 * @return the quick show interval
-	 */
-	public int getQuickShowInterval() {
-		return quickShowInterval;
-	}
+    private Point getTargetXY(int targetCounter) {
+        int[] mouseOffset = this.mouseOffset;
+        int x = targetXY.x + mouseOffset[0];
+        int y = targetXY.y + mouseOffset[1];
+        return new Point(x, y);
+    }
 
-	/**
-	 * Sets the quick show interval (defaults to 250).
-	 * 
-	 * @param quickShowInterval
-	 *            the quick show interval
-	 */
-	public void setQuickShowInterval(int quickShowInterval) {
-		this.quickShowInterval = quickShowInterval;
-	}
+    /**
+     * Returns the quick show interval.
+     *
+     * @return the quick show interval
+     */
+    public int getQuickShowInterval() {
+        return quickShowInterval;
+    }
 
-	public boolean isAutoHide() {
-		return autoHide;
-	}
+    /**
+     * Sets the quick show interval (defaults to 250).
+     *
+     * @param quickShowInterval the quick show interval
+     */
+    public void setQuickShowInterval(int quickShowInterval) {
+        this.quickShowInterval = quickShowInterval;
+    }
 
-	public void setAutoHide(boolean autoHide) {
-		this.autoHide = autoHide;
-	}
+    public boolean isAutoHide() {
+        return autoHide;
+    }
 
-	public int getDismissDelay() {
-		return dismissDelay;
-	}
+    public void setAutoHide(boolean autoHide) {
+        this.autoHide = autoHide;
+    }
 
-	public void setDismissDelay(int dismissDelay) {
-		this.dismissDelay = dismissDelay;
-	}
+    public int getDismissDelay() {
+        return dismissDelay;
+    }
 
-	public int getHideDelay() {
-		return hideDelay;
-	}
+    public void setDismissDelay(int dismissDelay) {
+        this.dismissDelay = dismissDelay;
+    }
 
-	public void setHideDelay(int hideDelay) {
-		this.hideDelay = hideDelay;
-	}
+    public int getHideDelay() {
+        return hideDelay;
+    }
 
-	public int[] getMouseOffset() {
-		return mouseOffset;
-	}
+    public void setHideDelay(int hideDelay) {
+        this.hideDelay = hideDelay;
+    }
 
-	public void setMouseOffset(int[] mouseOffset) {
-		this.mouseOffset = mouseOffset;
-	}
+    public int[] getMouseOffset() {
+        return mouseOffset;
+    }
 
-	public int getShowDelay() {
-		return showDelay;
-	}
+    public void setMouseOffset(int[] mouseOffset) {
+        this.mouseOffset = mouseOffset;
+    }
 
-	public void setShowDelay(int showDelay) {
-		this.showDelay = showDelay;
-	}
+    public int getShowDelay() {
+        return showDelay;
+    }
 
-	public boolean isTrackMouse() {
-		return trackMouse;
-	}
+    public void setShowDelay(int showDelay) {
+        this.showDelay = showDelay;
+    }
 
-	public void setTrackMouse(boolean trackMouse) {
-		this.trackMouse = trackMouse;
-	}
+    public boolean isTrackMouse() {
+        return trackMouse;
+    }
+
+    public void setTrackMouse(boolean trackMouse) {
+        this.trackMouse = trackMouse;
+    }
 
 }
