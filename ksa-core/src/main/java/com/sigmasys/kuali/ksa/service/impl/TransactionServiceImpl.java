@@ -1,10 +1,8 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.service.CalendarService;
-import com.sigmasys.kuali.ksa.service.CurrencyService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.service.UserSessionManager;
+import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,6 +14,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -36,11 +35,22 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     private static final Log logger = LogFactory.getLog(TransactionServiceImpl.class);
 
+    private static final String DEFERMENT_TYPE_ID = "deferment.type.id";
+
+    @Autowired
+    private ConfigService configService;
+
+    @Autowired
+    private AccountService accountService;
+
     @Autowired
     private CurrencyService currencyService;
 
     @Autowired
     private CalendarService calendarService;
+
+    @Autowired
+    private InformationService informationService;
 
     @Autowired
     private UserSessionManager userSessionManager;
@@ -96,7 +106,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
      *                          based on the effective date
-     * @param externalId            Transaction External ID
+     * @param externalId        Transaction External ID
      * @param userId            Account ID
      * @param effectiveDate     Transaction effective Date
      * @param amount            Transaction amount
@@ -504,10 +514,96 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         createAllocation(transactionId1, transactionId2, amount, true);
     }
 
+    /**
+     * Creates a new memo based on the given parameters
+     *
+     * @param transactionId  Transaction ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
     @Override
     @Transactional(readOnly = false)
-    public void createTransactionMemo(Long transactionId, String memoText) {
-        // TODO
+    public Memo createMemo(Long transactionId, String memoText, Integer accessLevel,
+                           Date effectiveDate, Date expirationDate, Long prevMemoId) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Memo memo = createMemo(transaction.getAccount().getId(), memoText, accessLevel,
+                effectiveDate, expirationDate, prevMemoId);
+
+        memo.setTransaction(transaction);
+
+        return memo;
+
+    }
+
+    /**
+     * Creates a new memo based on the given parameters
+     *
+     * @param accountId      Account ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Memo createMemo(String accountId, String memoText, Integer accessLevel,
+                           Date effectiveDate, Date expirationDate, Long prevMemoId) {
+
+        if (accountId == null) {
+            String errMsg = "Account ID cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + accountId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Memo newMemo = new Memo();
+        newMemo.setText(memoText);
+        newMemo.setAccount(account);
+        newMemo.setAccessLevel(accessLevel);
+
+        Memo prevMemo = null;
+        if (prevMemoId != null) {
+            prevMemo = informationService.getMemo(prevMemoId);
+            if (prevMemo == null) {
+                String errMsg = "Memo with ID = " + prevMemoId + " does not exist";
+                logger.error(errMsg);
+                throw new IllegalArgumentException(errMsg);
+            }
+            newMemo.setPreviousMemo(prevMemo);
+            prevMemo.setNextMemo(newMemo);
+        }
+
+        Date curDate = new Date();
+        newMemo.setCreationDate(curDate);
+        newMemo.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
+        newMemo.setExpirationDate(expirationDate != null ? expirationDate : null);
+
+        persistEntity(newMemo);
+
+        if (prevMemo != null) {
+            prevMemo.setNextMemo(newMemo);
+        }
+
+        return newMemo;
     }
 
     /**
@@ -554,14 +650,87 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Automatically generates a deferment transaction,
+     * Automatically generates a deferment transaction for the given transaction,
      * allocates and locks the two transactions together.
+     *
+     * @param transactionId   Charge ID
+     * @param partialAmount   the amount to be used for the deferment
+     * @param expirationDate  the deferment expiration date
+     * @param memoText        the text of the new memo created for the deferment
+     * @param defermentTypeId the deferment type ID
+     * @return new Deferment instance
      */
     @Override
     @Transactional(readOnly = false)
-    public Deferment deferTransaction(Long transactionId) {
-        // TODO
-        return null;
+    public Deferment deferTransaction(Long transactionId, BigDecimal partialAmount,
+                                      Date expirationDate, String memoText, String defermentTypeId) {
+
+        Charge transaction = getCharge(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (transaction.isDeferred()) {
+            logger.info("Transaction with ID = " + transactionId + " has already been deferred");
+            Query query = em.createQuery("select d from Deferment d where d.deferredTransactionId = :id");
+            query.setParameter("id", transactionId);
+            List<Deferment> deferments = query.getResultList();
+            if (deferments != null && !deferments.isEmpty()) {
+                return deferments.get(0);
+            }
+            String errMsg = "Deferment cannot be found for the deferred transaction with ID = " + transactionId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        BigDecimal originalAmount = (transaction.getAmount() != null) ? transaction.getAmount() : BigDecimal.ZERO;
+
+        if (partialAmount == null) {
+            partialAmount = originalAmount;
+        }
+
+        if (partialAmount.compareTo(originalAmount) > 0) {
+            String errMsg = "Deferment cannot be greater than the original amount = " + originalAmount;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        // If the deferment type ID is null -> use the default one defined in ksa.properties
+        if (defermentTypeId == null) {
+            defermentTypeId = configService.getInitialParameter(DEFERMENT_TYPE_ID);
+        }
+
+        TransactionType transactionType = getTransactionType(defermentTypeId, transaction.getEffectiveDate());
+
+        Date curDate = new Date();
+
+        Deferment deferment = new Deferment();
+        deferment.setTransactionType(transactionType);
+        deferment.setDeferredTransactionId(transactionId);
+        deferment.setEffectiveDate(curDate);
+        deferment.setExpirationDate(expirationDate);
+        deferment.setAccount(transaction.getAccount());
+        deferment.setNativeAmount(transaction.getNativeAmount());
+        deferment.setAmount(transaction.getAmount());
+        deferment.setCurrency(transaction.getCurrency());
+
+        DateFormat dateFormat = DateFormat.getDateInstance();
+        String dateValue = (expirationDate != null) ? dateFormat.format(expirationDate) : "N/A";
+        deferment.setStatementText("Deferment of \"" + transaction.getStatementText() + "\". Expires on " + dateValue);
+
+        // Storing a new deferment with the generated Deferment ID
+        Long defermentId = persistTransaction(deferment);
+
+        transaction.setDeferred(true);
+
+        // Creating a new memo
+        createMemo(defermentId, memoText, 0, curDate, expirationDate, null);
+
+        createLockedAllocation(defermentId, transactionId, partialAmount);
+
+        return deferment;
     }
 
 }

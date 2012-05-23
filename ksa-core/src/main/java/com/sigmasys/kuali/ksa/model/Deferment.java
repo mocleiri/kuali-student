@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.model;
 
 import java.util.Date;
-import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -49,7 +48,8 @@ public class Deferment extends Credit {
       */
     @Transient
     public boolean isExpired() {
-        return new Date().after(getExpirationDate());
+        Date expirationDate = getExpirationDate();
+        return (expirationDate != null) && new Date().after(expirationDate);
     }
 
 }

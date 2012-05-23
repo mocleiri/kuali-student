@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.service;
 
-import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.drools.KnowledgeBase;

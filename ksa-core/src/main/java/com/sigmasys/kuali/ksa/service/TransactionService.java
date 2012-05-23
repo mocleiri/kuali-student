@@ -204,17 +204,43 @@ public interface TransactionService {
 
 
     /**
-     * If a memos can be generated in a number of ways. If a memo is generated
+     * Memos can be generated in a number of ways. If a memo is generated
      * against a transaction, it is placed in the main memo account, and also
      * the memoReference is set to point to that memo. This allows the CSR to
      * see the most recent memo associated with a certain transaction. Certain
      * transaction instantiations will generate a memo as soon as they are
      * created.
      *
-     * @param transactionId transaction ID
-     * @param memoText      memo text
+     * @param transactionId  Transaction ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
      */
-    void createTransactionMemo(Long transactionId, String memoText);
+    @WebMethod(exclude = true)
+    Memo createMemo(Long transactionId, String memoText, Integer accessLevel,
+                    Date effectiveDate, Date expirationDate, Long prevMemoId);
+
+    /**
+     * Memos can be generated in a number of ways. If a memo is generated
+     * against a transaction, it is placed in the main memo account, and also
+     * the memoReference is set to point to that memo. This allows the CSR to
+     * see the most recent memo associated with a certain transaction. Certain
+     * transaction instantiations will generate a memo as soon as they are
+     * created.
+     *
+     * @param accountId      Account ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
+    Memo createMemo(String accountId, String memoText, Integer accessLevel,
+                    Date effectiveDate, Date expirationDate, Long prevMemoId);
 
     /**
      * If the reverse method is called, the system will generate a negative
@@ -249,9 +275,17 @@ public interface TransactionService {
     void reduceDeferment(Long defermentId, BigDecimal newAmount);
 
     /**
-     * Automatically generates a deferment transaction,
+     * Automatically generates a deferment transaction for the given transaction,
      * allocates and locks the two transactions together.
+     *
+     * @param transactionId   Charge ID
+     * @param partialAmount   the amount to be used for the deferment
+     * @param expirationDate  the deferment expiration date
+     * @param memoText        the text of the new memo created for the deferment
+     * @param defermentTypeId the deferment type ID
+     * @return new Deferment instance
      */
-    Deferment deferTransaction(Long transactionId);
+    Deferment deferTransaction(Long transactionId, BigDecimal partialAmount,
+                               Date expirationDate, String memoText, String defermentTypeId);
 
 }
