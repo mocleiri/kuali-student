@@ -9,7 +9,8 @@ import org.junit.runners.Suite;
 /**
  * ServiceTestSuite is a test suite that runs all the declared service tests
  * <p/>
- * User: Michael Ivanov
+ *
+ * @author Michael Ivanov
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses(value = {
@@ -18,7 +19,8 @@ import org.junit.runners.Suite;
         CurrencyServiceTest.class,
         AccountServiceTest.class,
         ActivityServiceTest.class,
-        KimServiceTest.class})
+        KimServiceTest.class,
+        DroolsServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/ksa-context.xml";

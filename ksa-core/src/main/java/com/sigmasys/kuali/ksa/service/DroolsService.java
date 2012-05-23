@@ -11,7 +11,10 @@ import org.drools.command.CommandFactory;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.ExecutionResults;
 import org.drools.runtime.StatelessKnowledgeSession;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +25,12 @@ import java.util.Map;
  * @author Michael Ivanov
  *         Date: 5/21/12
  */
+@SuppressWarnings("unchecked")
+@Service("droolsService")
+@Transactional
 public class DroolsService {
 
     private static final Log logger = LogFactory.getLog(DroolsService.class);
-
-    private static final String RULE_PATH = "/rules";
 
     static {
         System.setProperty("drools.compiler", "JANINO");
@@ -41,19 +45,19 @@ public class DroolsService {
         try {
             KnowledgeBase knowledgeBase = knowledgeBases.get(drlFileName);
             if (knowledgeBase == null) {
-                String drl = CommonUtils.getResourceAsString(RULE_PATH + "/" + drlFileName);
-                logger.info("Retrieved the following Drools rule set:\n" + drl);
-                KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-                kbuilder.add(ResourceFactory.newByteArrayResource(drl.getBytes("UTF-8")), ResourceType.DRL);
-                handleErrors(kbuilder.getErrors(), drlFileName);
+                KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+                InputStream inputStream = getClass().getResourceAsStream(drlFileName);
+                builder.add(ResourceFactory.newInputStreamResource(inputStream), ResourceType.XDRL);
+                handleErrors(builder.getErrors(), drlFileName);
                 knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
-                knowledgeBase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+                knowledgeBase.addKnowledgePackages(builder.getKnowledgePackages());
                 knowledgeBases.put(drlFileName, knowledgeBase);
             }
             return knowledgeBase;
         } catch (Throwable t) {
-            logger.error("Cannot retrieve KnowledgeBase from '" + drlFileName + "'", t);
-            throw new RuntimeException("Cannot retrieve KnowledgeBase from" + drlFileName + "'", t);
+            String errMsg = "Cannot retrieve KnowledgeBase from '" + drlFileName + "'";
+            logger.error(errMsg, t);
+            throw new RuntimeException(errMsg, t);
         }
     }
 
@@ -69,19 +73,19 @@ public class DroolsService {
         }
     }
 
-    private Object fireRules(KnowledgeBase knowledgeBase, Object argument) {
+    private <T> T fireRules(KnowledgeBase knowledgeBase, T argument) {
         try {
             StatelessKnowledgeSession session = knowledgeBase.newStatelessKnowledgeSession();
             Command command = CommandFactory.newInsert(argument, "object");
             ExecutionResults results = session.execute(CommandFactory.newBatchExecution(Arrays.asList(command)));
-            return results.getValue("object");
+            return (T) results.getValue("object");
         } catch (Throwable t) {
             logger.error(t.getMessage(), t);
             throw new RuntimeException(t.getMessage(), t);
         }
     }
 
-    public Object fireRules(String drlFileName, Object argument) {
+    public <T> T fireRules(String drlFileName, T argument) {
         return fireRules(getKnowledgeBase(drlFileName), argument);
     }
 
