@@ -61,6 +61,66 @@ public class TransactionServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void createMemo() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e8));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+
+        Memo memo = transactionService.createMemo(transaction.getId(), "New memo for 1020", 0, new Date(), null, null);
+
+        Assert.notNull(memo);
+        Assert.notNull(memo.getId());
+        Assert.notNull(memo.getAccount());
+        Assert.notNull(memo.getTransaction());
+
+        Assert.isTrue("New memo for 1020".equals(memo.getText()));
+        Assert.isTrue(TEST_USER_ID.equals(memo.getCreatorId()));
+        Assert.isTrue(TEST_USER_ID.equals(memo.getResponsibleEntity()));
+
+        Assert.isTrue(new Date().after(memo.getEffectiveDate()));
+        Assert.isTrue(new Date().after(memo.getCreationDate()));
+
+        Assert.isTrue(0 == memo.getAccessLevel());
+
+        Assert.isNull(memo.getExpirationDate());
+        Assert.isNull(memo.getPreviousMemo());
+
+    }
+
+    @Test
+    public void deferTransaction() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+
+        Deferment deferment = transactionService.deferTransaction(transaction.getId(), new BigDecimal(10e5 / 2),
+                new Date(System.currentTimeMillis() + 100 * 1000), "New deferment for 1020", "DEF");
+
+        Assert.notNull(deferment);
+        Assert.notNull(deferment.getId());
+        Assert.notNull(deferment.getTransactionType());
+        Assert.notNull(deferment.getAccount());
+        Assert.notNull(deferment.getCurrency());
+        Assert.notNull(deferment.getAmount());
+
+        Assert.isTrue("USD".equals(deferment.getCurrency().getIso()));
+        Assert.isTrue("admin".equals(deferment.getAccount().getId()));
+        Assert.isTrue(TEST_USER_ID.equals(deferment.getResponsibleEntity()));
+
+        Assert.isTrue(new Date().after(deferment.getEffectiveDate()));
+        Assert.isTrue(new BigDecimal(10e5).equals(deferment.getNativeAmount()));
+
+    }
+
+    @Test
     public void createAllocation() throws Exception {
 
         String id = "1020";

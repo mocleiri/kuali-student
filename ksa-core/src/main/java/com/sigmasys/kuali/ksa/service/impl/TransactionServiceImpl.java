@@ -592,6 +592,10 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             prevMemo.setNextMemo(newMemo);
         }
 
+        String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+        newMemo.setCreatorId(creatorId);
+        newMemo.setResponsibleEntity(creatorId);
+
         Date curDate = new Date();
         newMemo.setCreationDate(curDate);
         newMemo.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
@@ -719,6 +723,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         DateFormat dateFormat = DateFormat.getDateInstance();
         String dateValue = (expirationDate != null) ? dateFormat.format(expirationDate) : "N/A";
         deferment.setStatementText("Deferment of \"" + transaction.getStatementText() + "\". Expires on " + dateValue);
+
+        deferment.setResponsibleEntity(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
 
         // Storing a new deferment with the generated Deferment ID
         Long defermentId = persistTransaction(deferment);
