@@ -4,6 +4,8 @@ import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.service.UserSessionManager;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.Person;
@@ -36,6 +38,9 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private UserSessionManager userSessionManager;
 
     /**
      * This process creates a temporary subset of the account as if the account were being administered
@@ -425,4 +430,41 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         return account;
 
     }
+
+    /**
+     * Creates and associate a new person name object with the given Account ID.
+     *
+     * @param userId     Account ID
+     * @param personName Person name
+     * @return new PersonName instance with ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public PersonName addPersonName(String userId, PersonName personName) {
+
+        Account account = getFullAccount(userId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + userId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (personName.isDefault() != null && personName.isDefault()) {
+            Set<PersonName> personNames = account.getPersonNames();
+            if (personNames != null) {
+                for (PersonName name : personNames) {
+                    name.setDefault(false);
+                }
+            }
+        }
+
+        personName.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
+        personName.setLastUpdate(new Date());
+        personName.setAccount(account);
+
+        persistEntity(personName);
+
+        return personName;
+    }
+
 }

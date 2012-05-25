@@ -119,4 +119,14 @@ public interface AccountService {
      */
     List<Account> getFullAccounts();
 
+
+    /**
+     * Creates and associate a new person name object with the given Account ID.
+     *
+     * @param userId Account ID
+     * @param personName Person name
+     * @return new PersonName instance with ID
+     */
+    PersonName addPersonName(String userId, PersonName personName);
+
 }

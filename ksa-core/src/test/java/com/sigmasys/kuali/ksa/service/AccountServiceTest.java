@@ -1,21 +1,16 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.ChargeableAccount;
-import com.sigmasys.kuali.ksa.model.Debit;
-import com.sigmasys.kuali.ksa.model.Pair;
-import com.sun.corba.se.spi.activation.EndPointInfo;
+import com.sigmasys.kuali.ksa.annotation.UseWebContext;
+import com.sigmasys.kuali.ksa.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.ksb.api.KsbApiServiceLocator;
 import org.kuali.rice.ksb.api.bus.Endpoint;
-import org.kuali.rice.ksb.service.KSBServiceLocator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,7 +21,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 
-
+@UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 public class AccountServiceTest extends AbstractServiceTest {
@@ -201,6 +196,30 @@ public class AccountServiceTest extends AbstractServiceTest {
         Account account = service.getFullAccount(userId);
 
         Assert.notNull(account);
+
+    }
+
+    @Test
+    public void addPersonName() {
+
+        String userId = "admin";
+
+        PersonName personName = new PersonName();
+        personName.setTitle("Mr.");
+        personName.setFirstName("AdminFirst");
+        personName.setMiddleName("AdminMiddle");
+        personName.setLastName("AdminLast");
+        personName.setDefault(true);
+
+        personName = accountService.addPersonName(userId, personName);
+
+        Assert.notNull(personName);
+        Assert.notNull(personName.getId());
+        Assert.isTrue("AdminFirst".equals(personName.getFirstName()));
+        Assert.isTrue("AdminMiddle".equals(personName.getMiddleName()));
+        Assert.isTrue("AdminLast".equals(personName.getLastName()));
+        Assert.notNull(personName.isDefault());
+        Assert.isTrue(personName.isDefault());
 
     }
 
