@@ -19,7 +19,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.sigmasys.kuali.ksa.gwt.client.model.AccountModel;
 import com.sigmasys.kuali.ksa.gwt.client.model.NavigationContext;
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
 import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
@@ -62,13 +61,13 @@ public class TransactionListPanel extends AbstractListPanel<TransactionModel> {
                 if (model != null) {
                     addChargeButton.setData("model", model);
                     Command command = new Command() {
-                      @Override
-                      public void execute() {
-                         addCharge();
-                      }
-                   };
-                   Info.display("Add Charge", "Add Charge");
-                   createAddTransactionDlg("Charge", model, command).show();;
+                        @Override
+                        public void execute() {
+                            addCharge();
+                        }
+                    };
+                    Info.display("Add Charge", "Add Charge");
+                    createAddTransactionDlg("Charge", model, command).show();
 
                 }
             }
@@ -80,16 +79,16 @@ public class TransactionListPanel extends AbstractListPanel<TransactionModel> {
             public void handleEvent(BaseEvent be) {
                 TransactionModel model = getSelectedItem();
                 if (model != null) {
-                   addPaymentButton.setData("model", model);
-                   Command command = new Command() {
-                      @Override
-                      public void execute() {
-                         addPayment();
-                      }
-                   };
+                    addPaymentButton.setData("model", model);
+                    Command command = new Command() {
+                        @Override
+                        public void execute() {
+                            addPayment();
+                        }
+                    };
 
-                   Info.display("Add Payment", "Add Payment");
-                   createAddTransactionDlg("Payment", model, command).show();
+                    Info.display("Add Payment", "Add Payment");
+                    createAddTransactionDlg("Payment", model, command).show();
                 }
             }
         });
@@ -101,8 +100,8 @@ public class TransactionListPanel extends AbstractListPanel<TransactionModel> {
                 TransactionModel model = getSelectedItem();
                 if (model != null) {
 
-                   Info.display("Defer Transaction", "Defer Transaction");
-                   deferTransactionButton.setData("model", model);
+                    Info.display("Defer Transaction", "Defer Transaction");
+                    deferTransactionButton.setData("model", model);
                 }
             }
         });
@@ -122,75 +121,75 @@ public class TransactionListPanel extends AbstractListPanel<TransactionModel> {
         return toolBar;
     }
 
-   private void addCharge() {
-      final TransactionModel model = addChargeButton.getData("model");
-      final String transType = addChargeButton.getData("type");
-      final Double amount = addChargeButton.getData("amount");
-      final String extnId = addChargeButton.getData("extnId");
-      if (model != null && model.getId() != null && transType != null && amount != null && extnId != null) {
-         createTransactionModel("Charge", transType, extnId, model, amount);
-      }
-   }
+    private void addCharge() {
+        final TransactionModel model = addChargeButton.getData("model");
+        final String transType = addChargeButton.getData("type");
+        final Double amount = addChargeButton.getData("amount");
+        final String extnId = addChargeButton.getData("extnId");
+        if (model != null && model.getId() != null && transType != null && amount != null && extnId != null) {
+            createTransactionModel("Charge", transType, extnId, model, amount);
+        }
+    }
 
-   private void addPayment() {
-      final TransactionModel model = addPaymentButton.getData("model");
-      final String transType = addPaymentButton.getData("type");
-      final Double amount = addPaymentButton.getData("amount");
-      final String extnId = addPaymentButton.getData("extnId");
-      if (model != null && model.getId() != null && transType != null && amount != null && extnId != null) {
-         createTransactionModel("Payment", transType, extnId, model, amount);
-      }
-   }
+    private void addPayment() {
+        final TransactionModel model = addPaymentButton.getData("model");
+        final String transType = addPaymentButton.getData("type");
+        final Double amount = addPaymentButton.getData("amount");
+        final String extnId = addPaymentButton.getData("extnId");
+        if (model != null && model.getId() != null && transType != null && amount != null && extnId != null) {
+            createTransactionModel("Payment", transType, extnId, model, amount);
+        }
+    }
 
-   private void createTransactionModel(final String eventType, String transType,
-                                       String extnId, final TransactionModel model, Double amount) {
-      final AbstractDetailsPanel<TransactionModel> tdp = getDetailsPanel();
+    private void createTransactionModel(final String eventType, String transType,
+                                        String extnId, final TransactionModel model, Double amount) {
+        final AbstractDetailsPanel<TransactionModel> tdp = getDetailsPanel();
 
-      try {
-         tdp.mask("Processing...");
-         ServiceFactory.getTransactionService().createTransaction(
-               transType, extnId, model.getAccountId(), new Date(), amount,
-               new AsyncCallback<TransactionModel>() {
-                  @Override
-                  public void onSuccess(TransactionModel result) {
-                     // TODO Update the detail when adding a charge or payment making
-                     // the new transaction visible in the detail panel
-                     //updateView(result);
-                     Grid<TransactionModel> grid = getGrid();
-                     ListStore<TransactionModel> listStore = grid.getStore();
-                     int indexCount = listStore.getCount();
-                     if (indexCount < 0) {
-                        indexCount = 0;
-                     }
+        try {
+            tdp.mask("Processing...");
+            ServiceFactory.getTransactionService().createTransaction(
+                    transType, extnId, model.getAccountId(), new Date(), amount,
+                    new AsyncCallback<TransactionModel>() {
+                        @Override
+                        public void onSuccess(TransactionModel result) {
+                            // TODO Update the detail when adding a charge or payment making
+                            // the new transaction visible in the detail panel
+                            //updateView(result);
+                            Grid<TransactionModel> grid = getGrid();
+                            ListStore<TransactionModel> listStore = grid.getStore();
+                            int indexCount = listStore.getCount();
+                            if (indexCount < 0) {
+                                indexCount = 0;
+                            }
 
-                     listStore.insert(result, indexCount);
-                     refreshGridRows(listStore.getModels());
-                     GridSelectionModel<TransactionModel> selectionModel = grid.getSelectionModel();
-                     selectionModel.select(result, false);
-                     grid.setSelectionModel(selectionModel);
-                     grid.getView().refresh(false);
+                            listStore.insert(result, indexCount);
+                            refreshGridRows(listStore.getModels());
+                            GridSelectionModel<TransactionModel> selectionModel = grid.getSelectionModel();
+                            selectionModel.select(result, false);
+                            grid.setSelectionModel(selectionModel);
+                            grid.getView().refresh(false);
 
-                     tdp.unmask();
-                     String displayValue = "Add " + eventType + " completed";
-                     Info.display("Success", displayValue);
-                     if ( indexCount >= 0) {
-                        grid.getView().focusRow(indexCount);
-                     }
-                  }
+                            tdp.unmask();
+                            String displayValue = "Add " + eventType + " completed";
+                            Info.display("Success", displayValue);
+                            if (indexCount >= 0) {
+                                grid.getView().focusRow(indexCount);
+                            }
+                        }
 
-                  @Override
-                  public void onFailure(Throwable t) {
-                     tdp.unmask();
-                     //super.onFailure(t);
-                  }
-               });
-      } catch (Exception e) {
-         Log.error(e.getMessage(), e);
-         tdp.unmask();
-      }
-   }
+                        @Override
+                        public void onFailure(Throwable t) {
+                            tdp.unmask();
+                            //super.onFailure(t);
+                        }
+                    });
+        } catch (Exception e) {
+            Log.error(e.getMessage(), e);
+            tdp.unmask();
+        }
+    }
 
-   @Override
+    @Override
     protected ColumnModelFactory<TransactionModel> getColumnModelFactory() {
         return COLUMN_FACTORY;
     }
@@ -239,70 +238,69 @@ public class TransactionListPanel extends AbstractListPanel<TransactionModel> {
         super.onMultipleRowSelection(items);
     }
 
-   private Dialog createAddTransactionDlg(final String eventType, final TransactionModel model, final Command command) {
-      final int ELEMENT_TYPE_WIDTH = 50;
-      final int ELEMENT_AMOUNT_WIDTH = 80;
-      final int ELEMENT_EXTN_ID_WIDTH = 100;
+    private Dialog createAddTransactionDlg(final String eventType, final TransactionModel model, final Command command) {
+        final int ELEMENT_TYPE_WIDTH = 50;
+        final int ELEMENT_AMOUNT_WIDTH = 80;
+        final int ELEMENT_EXTN_ID_WIDTH = 100;
 
-      final EntityNameField transType = new EntityNameField();
-      final EntityNameField transAmount = new EntityNameField();
-      final EntityNameField transExtnId = new EntityNameField();
+        final EntityNameField transType = new EntityNameField();
+        final EntityNameField transAmount = new EntityNameField();
+        final EntityNameField transExtnId = new EntityNameField();
 
-      final String transTitle = "Add " + eventType;
+        final String transTitle = "Add " + eventType;
 
-      return new OkCancelDialog(transTitle) {
+        return new OkCancelDialog(transTitle) {
 
-         @Override
-         protected void init() {
-            setModal(false);
-            setHeading("Add Transaction (Account ID: " + model.getAccountId() + ")");
-            setResizable(true);
-            setClosable(true);
-            setSize(700, 400);
+            @Override
+            protected void init() {
+                setModal(false);
+                setHeading("Add Transaction (Account ID: " + model.getAccountId() + ")");
+                setResizable(true);
+                setClosable(true);
+                setSize(700, 400);
 
-            TableLayout layout = new TableLayout(2);
-            layout.setCellSpacing(2);
-            layout.setCellPadding(3);
+                TableLayout layout = new TableLayout(2);
+                layout.setCellSpacing(2);
+                layout.setCellPadding(3);
 
-            setLayout(layout);
+                setLayout(layout);
 
-            transType.setWidth(ELEMENT_TYPE_WIDTH);
-            Text transTypeLabel = WidgetFactory.createText("Transaction Type:");
-            add(transTypeLabel);
-            add(transType);
+                transType.setWidth(ELEMENT_TYPE_WIDTH);
+                Text transTypeLabel = WidgetFactory.createText("Transaction Type:");
+                add(transTypeLabel);
+                add(transType);
 
-            transAmount.setWidth(ELEMENT_AMOUNT_WIDTH);
-            Text transAmountLabel = WidgetFactory.createText("Amount:");
-            add(transAmountLabel);
-            add(transAmount);
+                transAmount.setWidth(ELEMENT_AMOUNT_WIDTH);
+                Text transAmountLabel = WidgetFactory.createText("Amount:");
+                add(transAmountLabel);
+                add(transAmount);
 
-            transExtnId.setWidth(ELEMENT_EXTN_ID_WIDTH);
-            Text transExtnIdLabel = eventType.compareTo("Charge") == 0 ?
-                  WidgetFactory.createText("External ID:") : WidgetFactory.createText("Authorization Code:");
-            add(transExtnIdLabel);
-            add(transExtnId);
+                transExtnId.setWidth(ELEMENT_EXTN_ID_WIDTH);
+                Text transExtnIdLabel = eventType.compareTo("Charge") == 0 ?
+                        WidgetFactory.createText("External ID:") : WidgetFactory.createText("Authorization Code:");
+                add(transExtnIdLabel);
+                add(transExtnId);
 
-            transType.focus();
-         }
-
-         @Override
-         protected void onOkClicked() {
-            if (eventType.compareTo("Charge") == 0) {
-               addChargeButton.setData("type", transType.getRawValue());
-               addChargeButton.setData("amount", Double.parseDouble(transAmount.getRawValue()));
-               addChargeButton.setData("extnId", transExtnId.getRawValue());
-            }
-            else if (eventType.compareTo("Payment") == 0) {
-               addPaymentButton.setData("type", transType.getRawValue());
-               addPaymentButton.setData("amount", Double.parseDouble(transAmount.getRawValue()));
-               addPaymentButton.setData("extnId", transExtnId.getRawValue());
+                transType.focus();
             }
 
-            hide();
-            if (command != null) {
-               command.execute();
+            @Override
+            protected void onOkClicked() {
+                if (eventType.compareTo("Charge") == 0) {
+                    addChargeButton.setData("type", transType.getRawValue());
+                    addChargeButton.setData("amount", Double.parseDouble(transAmount.getRawValue()));
+                    addChargeButton.setData("extnId", transExtnId.getRawValue());
+                } else if (eventType.compareTo("Payment") == 0) {
+                    addPaymentButton.setData("type", transType.getRawValue());
+                    addPaymentButton.setData("amount", Double.parseDouble(transAmount.getRawValue()));
+                    addPaymentButton.setData("extnId", transExtnId.getRawValue());
+                }
+
+                hide();
+                if (command != null) {
+                    command.execute();
+                }
             }
-         }
-      };
-   }
+        };
+    }
 }
