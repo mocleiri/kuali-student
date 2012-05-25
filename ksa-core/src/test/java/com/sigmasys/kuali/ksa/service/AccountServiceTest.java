@@ -183,7 +183,9 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(endpoint);
         Assert.notNull(endpoint.getServiceConfiguration());
+
         URL endpointUrl = endpoint.getServiceConfiguration().getEndpointUrl();
+
         Assert.notNull(endpointUrl);
 
         logger.info("Endpoint URL = " + endpointUrl);
@@ -215,11 +217,67 @@ public class AccountServiceTest extends AbstractServiceTest {
 
         Assert.notNull(personName);
         Assert.notNull(personName.getId());
+
         Assert.isTrue("AdminFirst".equals(personName.getFirstName()));
         Assert.isTrue("AdminMiddle".equals(personName.getMiddleName()));
         Assert.isTrue("AdminLast".equals(personName.getLastName()));
+
         Assert.notNull(personName.isDefault());
         Assert.isTrue(personName.isDefault());
+
+    }
+
+    @Test
+    public void addPostalAddress() {
+
+        String userId = "admin";
+
+        PostalAddress postalAddress = new PostalAddress();
+        postalAddress.setCountry("Russia");
+        postalAddress.setState("N/A");
+        postalAddress.setCity("Saint Petersburg");
+        postalAddress.setStreetAddress1("1917 Lenin avenue");
+        postalAddress.setPostalCode("198330");
+        postalAddress.setDefault(true);
+
+        postalAddress = accountService.addPostalAddress(userId, postalAddress);
+
+        Assert.notNull(postalAddress);
+        Assert.notNull(postalAddress.getId());
+
+        Assert.isTrue("Russia".equals(postalAddress.getCountry()));
+        Assert.isTrue("N/A".equals(postalAddress.getState()));
+        Assert.isTrue("Saint Petersburg".equals(postalAddress.getCity()));
+        Assert.isTrue("1917 Lenin avenue".equals(postalAddress.getStreetAddress1()));
+        Assert.isTrue("198330".equals(postalAddress.getPostalCode()));
+
+        Assert.notNull(postalAddress.isDefault());
+        Assert.isTrue(postalAddress.isDefault());
+
+    }
+
+    @Test
+    public void addElectronicContact() {
+
+        String userId = "admin";
+
+        ElectronicContact contact = new ElectronicContact();
+        contact.setPhoneCountry("7");
+        contact.setPhoneNumber("812-378-56-47");
+        contact.setEmailAddress("admin@yahoo.com");
+        contact.setDefault(true);
+
+        contact = accountService.addElectronicContact(userId, contact);
+
+        Assert.notNull(contact);
+        Assert.notNull(contact.getId());
+
+        Assert.isTrue("7".equals(contact.getPhoneCountry()));
+        Assert.isTrue("812-378-56-47".equals(contact.getPhoneNumber()));
+        Assert.isTrue("admin@yahoo.com".equals(contact.getEmailAddress()));
+
+        Assert.notNull(contact.isDefault());
+        Assert.isTrue(contact.isDefault());
 
     }
 

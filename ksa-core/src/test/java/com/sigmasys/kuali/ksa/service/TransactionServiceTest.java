@@ -55,7 +55,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Assert.isTrue("USD".equals(transaction.getCurrency().getIso()));
         Assert.isTrue("admin".equals(transaction.getAccount().getId()));
-        Assert.isTrue(new Date().after(transaction.getEffectiveDate()));
+        Assert.isTrue(new Date().compareTo(transaction.getEffectiveDate()) >= 0);
         Assert.isTrue(new BigDecimal(10e5).equals(transaction.getNativeAmount()));
 
     }
@@ -81,8 +81,8 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.isTrue(TEST_USER_ID.equals(memo.getCreatorId()));
         Assert.isTrue(TEST_USER_ID.equals(memo.getResponsibleEntity()));
 
-        Assert.isTrue(new Date().after(memo.getEffectiveDate()));
-        Assert.isTrue(new Date().after(memo.getCreationDate()));
+        Assert.isTrue(new Date().compareTo(memo.getEffectiveDate()) >= 0);
+        Assert.isTrue(new Date().compareTo(memo.getCreationDate()) >= 0);
 
         Assert.isTrue(0 == memo.getAccessLevel());
 
@@ -115,7 +115,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.isTrue("admin".equals(deferment.getAccount().getId()));
         Assert.isTrue(TEST_USER_ID.equals(deferment.getResponsibleEntity()));
 
-        Assert.isTrue(new Date().after(deferment.getEffectiveDate()));
+        Assert.isTrue(new Date().compareTo(deferment.getEffectiveDate()) >= 0);
         Assert.isTrue(new BigDecimal(10e5).equals(deferment.getNativeAmount()));
 
     }

@@ -10,7 +10,7 @@ import java.util.List;
  * objects
  * <p/>
  *
- * @author Tim Bornholtz, Michael Ivanov
+ * @author Michael Ivanov
  */
 public interface AccountService {
 
@@ -121,12 +121,30 @@ public interface AccountService {
 
 
     /**
-     * Creates and associate a new person name object with the given Account ID.
+     * Creates and associates a new person name object with the given Account ID.
      *
      * @param userId Account ID
      * @param personName Person name
      * @return new PersonName instance with ID
      */
     PersonName addPersonName(String userId, PersonName personName);
+
+    /**
+     * Creates and associates a new postal address with the given Account ID.
+     *
+     * @param userId     Account ID
+     * @param postalAddress Postal address
+     * @return new PostalAddress instance with ID
+     */
+    PostalAddress addPostalAddress(String userId, PostalAddress postalAddress);
+
+    /**
+     * Creates and associates a new electronic contact with the given Account ID.
+     *
+     * @param userId     Account ID
+     * @param electronicContact Electronic contact
+     * @return new ElectronicContact instance with ID
+     */
+    ElectronicContact addElectronicContact(String userId, ElectronicContact electronicContact);
 
 }

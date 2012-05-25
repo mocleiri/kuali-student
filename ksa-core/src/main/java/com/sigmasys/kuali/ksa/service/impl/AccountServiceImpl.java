@@ -23,7 +23,7 @@ import java.util.*;
  * Currency service JPA implementation.
  * <p/>
  *
- * @author Tim Bornholtz, Michael Ivanov
+ * @author Michael Ivanov
  */
 @Service("accountService")
 @Transactional(readOnly = true)
@@ -432,7 +432,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
     /**
-     * Creates and associate a new person name object with the given Account ID.
+     * Creates and associates a new person name object with the given Account ID.
      *
      * @param userId     Account ID
      * @param personName Person name
@@ -465,6 +465,79 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         persistEntity(personName);
 
         return personName;
+    }
+
+    /**
+     * Creates and associates a new postal address object with the given Account ID.
+     *
+     * @param userId     Account ID
+     * @param postalAddress Postal address
+     * @return new PostalAddress instance with ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public PostalAddress addPostalAddress(String userId, PostalAddress postalAddress) {
+
+        Account account = getFullAccount(userId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + userId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (postalAddress.isDefault() != null && postalAddress.isDefault()) {
+            Set<PostalAddress> addresses = account.getPostalAddresses();
+            if (addresses != null) {
+                for (PostalAddress address : addresses) {
+                    address.setDefault(false);
+                }
+            }
+        }
+
+        postalAddress.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
+        postalAddress.setLastUpdate(new Date());
+        postalAddress.setAccount(account);
+
+        persistEntity(postalAddress);
+
+        return postalAddress;
+    }
+
+    /**
+     * Creates and associates a new electronic contact with the given Account ID.
+     *
+     * @param userId     Account ID
+     * @param electronicContact Electronic contact
+     * @return new ElectronicContact instance with ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public ElectronicContact addElectronicContact(String userId, ElectronicContact electronicContact) {
+
+        Account account = getFullAccount(userId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + userId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (electronicContact.isDefault() != null && electronicContact.isDefault()) {
+            Set<ElectronicContact> contacts = account.getElectronicContacts();
+            if (contacts != null) {
+                for (ElectronicContact contact : contacts) {
+                    contact.setDefault(false);
+                }
+            }
+        }
+
+        electronicContact.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
+        electronicContact.setLastUpdate(new Date());
+        electronicContact.setAccount(account);
+
+        persistEntity(electronicContact);
+
+        return electronicContact;
+
     }
 
 }
