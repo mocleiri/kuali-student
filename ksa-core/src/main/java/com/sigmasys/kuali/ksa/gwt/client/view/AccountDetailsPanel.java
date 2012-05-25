@@ -39,8 +39,6 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
 
     protected final CheckBox ignoreDefermentCheckBox;
 
-    protected final Button addChargeButton;
-    protected final Button makePaymentButton;
     protected final Button ageDebtButton;
 
     protected final LayoutContainer contactPanel;
@@ -64,22 +62,6 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         VerticalPanel panel = new VerticalPanel();
         panel.setHorizontalAlign(Style.HorizontalAlignment.LEFT);
         panel.setStyleName("bg-white");
-
-        addChargeButton = new Button("Add Charge");
-        addChargeButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
-            public void handleEvent(BaseEvent be) {
-                // TODO
-                createYesNoDialog("Add Charge", "Are you sure you want to add a charge?", null).show();
-            }
-        });
-
-        makePaymentButton = new Button("Make Payment");
-        makePaymentButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
-            public void handleEvent(BaseEvent be) {
-                // TODO
-                createYesNoDialog("Make Payment", "Are you sure you want to make a payment?", null).show();
-            }
-        });
 
         ageDebtButton = new Button("Age Transactions");
         ageDebtButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
@@ -108,7 +90,7 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         contactPanel.add(address);
         contactPanel.add(phone);
 
-        layout = new TableLayout(6);
+        layout = new TableLayout(4);
         layout.setCellPadding(CELL_PADDING);
         layout.setCellSpacing(CELL_SPACING);
 
@@ -117,8 +99,6 @@ public class AccountDetailsPanel extends AbstractDetailsPanel<AccountModel> {
         statusPanel.add(WidgetFactory.createText("Balance"));
         statusPanel.add(WidgetFactory.createText("Future"));
         statusPanel.add(WidgetFactory.createText("Deferment"));
-        statusPanel.add(addChargeButton);
-        statusPanel.add(makePaymentButton);
 
         statusPanel.add(pastDue);
         statusPanel.add(balance);

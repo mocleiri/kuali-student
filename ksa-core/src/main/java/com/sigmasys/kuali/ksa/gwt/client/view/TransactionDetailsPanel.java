@@ -1,18 +1,22 @@
 package com.sigmasys.kuali.ksa.gwt.client.view;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.*;
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridSelectionModel;
 import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionModel;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
+import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.OkCancelDialog;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.WidgetFactory;
+
+import java.util.Date;
 
 /**
  * User: dmulderink
@@ -40,11 +44,6 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
    protected final LayoutContainer debitPanel;
    protected final LayoutContainer creditPanel;
    protected final LayoutContainer specialPanel;
-   //protected final LayoutContainer statusPanel;
-
-   protected final Button addChargeButton;
-   protected final Button makePaymentButton;
-   protected final Button ageDebtButton;
 
    public TransactionDetailsPanel() {
 
@@ -61,36 +60,6 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
       panel.setHorizontalAlign(Style.HorizontalAlignment.LEFT);
       panel.setStyleName("bg-white");
 
-      addChargeButton = new Button("Add Charge");
-      addChargeButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
-         public void handleEvent(BaseEvent be) {
-            // TODO
-            createYesNoDialog("Add Charge", "Are you sure you want to add a charge?", null).show();
-         }
-      });
-
-      makePaymentButton = new Button("Make Payment");
-      makePaymentButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
-         public void handleEvent(BaseEvent be) {
-            // TODO
-            createYesNoDialog("Make Payment", "Are you sure you want to make a payment?", null).show();
-         }
-      });
-
-      ageDebtButton = new Button("Age Transactions");
-      ageDebtButton.addListener(Events.OnClick, new Listener<BaseEvent>() {
-         public void handleEvent(BaseEvent be) {
-            Command command = new Command() {
-               @Override
-               public void execute() {
-                  ageDebt();
-               }
-            };
-            createYesNoDialog("Age Transactions", "Are you sure you want to age transactions?", command).show();
-         }
-      });
-
-
       // -----
       TableLayout layout = new TableLayout(1);
       layout.setCellPadding(CELL_PADDING);
@@ -101,20 +70,20 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
       commonPanel.add(accountId);
 
       // -----
-      layout = new TableLayout(2);
+      layout = new TableLayout(1);
       layout.setCellPadding(CELL_PADDING);
       layout.setCellSpacing(CELL_SPACING);
 
       debitPanel = new LayoutContainer(layout);
       debitPanel.add(WidgetFactory.createText("Deferred"));
-      debitPanel.add(addChargeButton);
+      //debitPanel.add(addChargeButton);
 
       TableData td = new TableData();
       td.setColspan(1);
       debitPanel.add(isDeferred);
 
       // -----
-      layout = new TableLayout(4);
+      layout = new TableLayout(3);
       layout.setCellPadding(CELL_PADDING);
       layout.setCellSpacing(CELL_SPACING);
 
@@ -122,7 +91,7 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
       creditPanel.add(WidgetFactory.createText("Refundable"));
       creditPanel.add(WidgetFactory.createText("Refund Rule"));
       creditPanel.add(WidgetFactory.createText("Clear Date"));
-      creditPanel.add(makePaymentButton);
+      //creditPanel.add(makePaymentButton);
 
       creditPanel.add(isRefundable);
       creditPanel.add(refundRule);
@@ -153,53 +122,6 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
       panel.add(WidgetFactory.createTextBold("&nbsp;Deferments"));
       panel.add(specialPanel);
       add(panel);
-
-   }
-
-   private void ageDebt() {
-/*
-      final AccountModel model = ageDebtButton.getData("model");
-      if (model != null && model.getId() != null) {
-         try {
-            AccountDetailsPanel.this.mask("Processing...");
-            boolean ignoreDeferment = ignoreDefermentCheckBox.getValue() != null ?
-                  ignoreDefermentCheckBox.getValue() : false;
-            ServiceFactory.getAccountService().ageDebt(model.getId(), ignoreDeferment,
-                  new GenericCallback<AccountModel>() {
-                     @Override
-                     public void onSuccess(AccountModel result) {
-                        updateView(result);
-                        Grid<AccountModel> grid = getListPanel().getGrid();
-                        ListStore<AccountModel> listStore = grid.getStore();
-                        int index = listStore.indexOf(model);
-                        if (index >= 0) {
-                           listStore.remove(model);
-                           listStore.insert(result, index);
-                           getListPanel().refreshGridRows(listStore.getModels());
-                           GridSelectionModel<AccountModel> selectionModel = grid.getSelectionModel();
-                           selectionModel.select(result, false);
-                           grid.setSelectionModel(selectionModel);
-                           grid.getView().refresh(false);
-                        }
-                        AccountDetailsPanel.this.unmask();
-                        Info.display("Success", "Aging completed");
-                        if ( index >= 0) {
-                           grid.getView().focusRow(index);
-                        }
-                     }
-
-                     @Override
-                     public void onFailure(Throwable t) {
-                        AccountDetailsPanel.this.unmask();
-                        super.onFailure(t);
-                     }
-                  });
-         } catch (Exception e) {
-            Log.error(e.getMessage(), e);
-            AccountDetailsPanel.this.unmask();
-         }
-      }
-*/
    }
 
    @Override
@@ -210,8 +132,12 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
          return;
       }
 
-      // TODO: TransactionService implementation
-      //GwtTransactionServiceAsync accountService = ServiceFactory.getTransactionService();
+      accountId.setText(model.getId().toString());
+      //isDeferred.setText(model.get);
+      //isRefundable
+      refundRule.setText(model.getRefundRule());
+      //clearDate.setText(model.);
+      //expireDate.setText(displayDate(model.get);
 
    }
 
@@ -240,5 +166,73 @@ public class TransactionDetailsPanel extends AbstractDetailsPanel<TransactionMod
          }
       };
    }
+
+/*
+   private Dialog createAddTransactionDlg(final String eventType, final AccountModel model, final Command command) {
+      final int ELEMENT_TYPE_WIDTH = 50;
+      final int ELEMENT_AMOUNT_WIDTH = 80;
+      final int ELEMENT_EXTN_ID_WIDTH = 100;
+
+      final EntityNameField transType = new EntityNameField();
+      final EntityNameField transAmount = new EntityNameField();
+      final EntityNameField transExtnId = new EntityNameField();
+
+      final String transTitle = "Add " + eventType;
+
+      return new OkCancelDialog(transTitle) {
+
+         @Override
+         protected void init() {
+            setModal(false);
+            setHeading("Add Transaction (Account ID: " + model.getId() + ")");
+            setResizable(true);
+            setClosable(true);
+            setSize(700, 400);
+
+            TableLayout layout = new TableLayout(2);
+            layout.setCellSpacing(2);
+            layout.setCellPadding(3);
+
+            setLayout(layout);
+
+            transType.setWidth(ELEMENT_TYPE_WIDTH);
+            Text transTypeLabel = WidgetFactory.createText("Transaction Type:");
+            add(transTypeLabel);
+            add(transType);
+
+            transAmount.setWidth(ELEMENT_AMOUNT_WIDTH);
+            Text transAmountLabel = WidgetFactory.createText("Amount:");
+            add(transAmountLabel);
+            add(transAmount);
+
+            transExtnId.setWidth(ELEMENT_EXTN_ID_WIDTH);
+            Text transExtnIdLabel = eventType.compareTo("Charge") == 0 ?
+                  WidgetFactory.createText("External ID:") : WidgetFactory.createText("Authorization Code:");
+            add(transExtnIdLabel);
+            add(transExtnId);
+
+         }
+
+         @Override
+         protected void onOkClicked() {
+            if (eventType.compareTo("Charge") == 0) {
+               addChargeButton.setData("type", transType.getRawValue());
+               addChargeButton.setData("amount", Double.parseDouble(transAmount.getRawValue()));
+               addChargeButton.setData("extnId", transExtnId.getRawValue());
+            }
+            else if (eventType.compareTo("Payment") == 0) {
+               makePaymentButton.setData("type", transType.getRawValue());
+               makePaymentButton.setData("amount", Double.parseDouble(transAmount.getRawValue()));
+               makePaymentButton.setData("extnId", transExtnId.getRawValue());
+            }
+
+            hide();
+            if (command != null) {
+               command.execute();
+            }
+         }
+      };
+   }
+*/
 
 }

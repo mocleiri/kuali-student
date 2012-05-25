@@ -11,7 +11,6 @@ import java.util.*;
  */
 public class TransactionModel extends AbstractModel {
 
-
     // The search criteria keys
     public static final String ID = "transaction.id";
     public static final String TYPE = "trans_type";
@@ -209,7 +208,7 @@ public class TransactionModel extends AbstractModel {
     }
 
     public String getAccountId() {
-        return get(COLUMN_CURRENCY_CODE);
+        return get(COLUMN_ACCOUNT_ID);
     }
 
     public void setAccountId(String accountId) {
