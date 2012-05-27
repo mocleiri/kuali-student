@@ -15,12 +15,14 @@ public class ServiceFactory {
     private static final GwtConfigServiceAsync configService;
     private static final GwtAccountServiceAsync accountService;
     private static final GwtTransactionServiceAsync transactionService;
+    private static final GwtCurrencyServiceAsync currencyService;
 
     // Initialization of the remote services
     static {
         configService = initService(GWT.create(GwtConfigService.class), Constants.CONFIG_SERVICE_URL);
         accountService = initService(GWT.create(GwtAccountService.class), Constants.ACCOUNT_SERVICE_URL);
         transactionService = initService(GWT.create(GwtTransactionService.class), Constants.TRANSACTION_SERVICE_URL);
+        currencyService = initService(GWT.create(GwtCurrencyService.class), Constants.CURRENCY_SERVICE_URL);
     }
 
     private ServiceFactory() {
@@ -41,6 +43,10 @@ public class ServiceFactory {
 
     public static GwtTransactionServiceAsync getTransactionService() {
         return transactionService;
+    }
+
+    public static GwtCurrencyServiceAsync getCurrencyService() {
+           return currencyService;
     }
 
 }

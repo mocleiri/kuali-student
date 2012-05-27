@@ -51,11 +51,12 @@
                 <executions>
                     <execution>
                         <configuration>
+                            <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
                             <extraJvmArgs>${jvm.args}</extraJvmArgs>
                             <modules>
                                 <module>com.sigmasys.kuali.ksa.gwt.Ksa</module>
                             </modules>
-                            <style>PRETTY</style>
+                            <style>OBFUSCATED</style>
                         </configuration>
                         <goals>
                             <goal>compile</goal>

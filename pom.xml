@@ -140,9 +140,34 @@
             <version>${drools.version}</version>
         </dependency>
         <dependency>
-        	<groupId>org.codehaus.janino</groupId>
-        	<artifactId>janino</artifactId>
-        	<version>2.5.16</version>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>2.5.16</version>
+        </dependency>
+
+        <!-- GXT and GWT dependencies -->
+        <dependency>
+            <groupId>com.extjs</groupId>
+            <artifactId>gxt</artifactId>
+            <version>${gxt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.allen-sauer.gwt.log</groupId>
+            <artifactId>gwt-log</artifactId>
+            <version>${gwt-log.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${gwt.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>com.google.gwt</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- JAX-WS stuff -->
@@ -509,30 +534,6 @@
             <artifactId>jaxb-api</artifactId>
             <version>2.1</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.extjs</groupId>
-            <artifactId>gxt</artifactId>
-            <version>${gxt.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.allen-sauer.gwt.log</groupId>
-            <artifactId>gwt-log</artifactId>
-            <version>${gwt-log.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <version>${gwt.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>junit</artifactId>
-                    <groupId>com.google.gwt</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
