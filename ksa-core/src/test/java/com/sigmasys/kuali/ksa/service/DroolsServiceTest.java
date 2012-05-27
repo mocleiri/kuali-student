@@ -30,7 +30,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.notNull(currency);
         Assert.isTrue(currency.getIso().equals("USD"));
 
-        currency = droolsService.fireRules("/drools/currency.drl", currency);
+        currency = droolsService.fireRules("/drools/currency.xdrl", currency);
 
         Assert.notNull(currency);
         Assert.isTrue(currency.getEditorId().equals("admin"));
