@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.model.Flag;
 import com.sigmasys.kuali.ksa.model.Information;
 import com.sigmasys.kuali.ksa.model.Memo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -86,5 +87,44 @@ public interface InformationService {
      * @return true if Information entity has been deleted
      */
     boolean deleteInformation(Long id);
+
+    /**
+     * Memos can be generated in a number of ways. If a memo is generated
+     * against a transaction, it is placed in the main memo account, and also
+     * the memoReference is set to point to that memo. This allows the CSR to
+     * see the most recent memo associated with a certain transaction. Certain
+     * transaction instantiations will generate a memo as soon as they are
+     * created.
+     *
+     * @param transactionId  Transaction ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
+    Memo createMemo(Long transactionId, String memoText, Integer accessLevel,
+                    Date effectiveDate, Date expirationDate, Long prevMemoId);
+
+    /**
+     * Memos can be generated in a number of ways. If a memo is generated
+     * against a transaction, it is placed in the main memo account, and also
+     * the memoReference is set to point to that memo. This allows the CSR to
+     * see the most recent memo associated with a certain transaction. Certain
+     * transaction instantiations will generate a memo as soon as they are
+     * created.
+     *
+     * @param accountId      Account ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
+    Memo createMemo(String accountId, String memoText, Integer accessLevel,
+                    Date effectiveDate, Date expirationDate, Long prevMemoId);
+
 
 }

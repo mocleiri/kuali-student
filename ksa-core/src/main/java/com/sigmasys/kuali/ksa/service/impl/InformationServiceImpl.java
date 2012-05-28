@@ -1,11 +1,19 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.service.UserSessionManager;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +26,20 @@ import java.util.List;
 @Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
 public class InformationServiceImpl extends GenericPersistenceService implements InformationService {
+
+
+    private static final Log logger = LogFactory.getLog(InformationServiceImpl.class);
+
+
+    @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private UserSessionManager userSessionManager;
+
 
     /**
      * Returns Information by ID
@@ -120,6 +142,102 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     public boolean deleteInformation(Long id) {
         return deleteEntity(id, Information.class);
+    }
+
+    /**
+     * Creates a new memo based on the given parameters
+     *
+     * @param transactionId  Transaction ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Memo createMemo(Long transactionId, String memoText, Integer accessLevel,
+                           Date effectiveDate, Date expirationDate, Long prevMemoId) {
+
+        Transaction transaction = transactionService.getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Memo memo = createMemo(transaction.getAccount().getId(), memoText, accessLevel,
+                effectiveDate, expirationDate, prevMemoId);
+
+        memo.setTransaction(transaction);
+
+        return memo;
+
+    }
+
+    /**
+     * Creates a new memo based on the given parameters
+     *
+     * @param accountId      Account ID
+     * @param memoText       Memo text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @param prevMemoId     Previous Memo ID
+     * @return new Memo instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Memo createMemo(String accountId, String memoText, Integer accessLevel,
+                           Date effectiveDate, Date expirationDate, Long prevMemoId) {
+
+        if (accountId == null) {
+            String errMsg = "Account ID cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + accountId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Memo newMemo = new Memo();
+        newMemo.setText(memoText);
+        newMemo.setAccount(account);
+        newMemo.setAccessLevel(accessLevel);
+
+        Memo prevMemo = null;
+        if (prevMemoId != null) {
+            prevMemo = getMemo(prevMemoId);
+            if (prevMemo == null) {
+                String errMsg = "Memo with ID = " + prevMemoId + " does not exist";
+                logger.error(errMsg);
+                throw new IllegalArgumentException(errMsg);
+            }
+            newMemo.setPreviousMemo(prevMemo);
+            prevMemo.setNextMemo(newMemo);
+        }
+
+        String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+        newMemo.setCreatorId(creatorId);
+        newMemo.setResponsibleEntity(creatorId);
+
+        Date curDate = new Date();
+        newMemo.setCreationDate(curDate);
+        newMemo.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
+        newMemo.setExpirationDate(expirationDate != null ? expirationDate : null);
+
+        persistEntity(newMemo);
+
+        if (prevMemo != null) {
+            prevMemo.setNextMemo(newMemo);
+        }
+
+        return newMemo;
     }
 
 }

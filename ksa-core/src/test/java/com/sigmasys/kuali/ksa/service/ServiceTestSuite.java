@@ -20,7 +20,8 @@ import org.junit.runners.Suite;
         AccountServiceTest.class,
         ActivityServiceTest.class,
         KimServiceTest.class,
-        DroolsServiceTest.class})
+        DroolsServiceTest.class,
+        InformationServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/ksa-context.xml";

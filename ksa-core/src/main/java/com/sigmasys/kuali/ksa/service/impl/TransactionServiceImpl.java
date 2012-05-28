@@ -41,9 +41,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     private ConfigService configService;
 
     @Autowired
-    private AccountService accountService;
-
-    @Autowired
     private CurrencyService currencyService;
 
     @Autowired
@@ -515,102 +512,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Creates a new memo based on the given parameters
-     *
-     * @param transactionId  Transaction ID
-     * @param memoText       Memo text
-     * @param accessLevel    Access level
-     * @param effectiveDate  Effective date
-     * @param expirationDate Expiration date
-     * @param prevMemoId     Previous Memo ID
-     * @return new Memo instance
-     */
-    @Override
-    @Transactional(readOnly = false)
-    public Memo createMemo(Long transactionId, String memoText, Integer accessLevel,
-                           Date effectiveDate, Date expirationDate, Long prevMemoId) {
-
-        Transaction transaction = getTransaction(transactionId);
-        if (transaction == null) {
-            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
-            logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
-        }
-
-        Memo memo = createMemo(transaction.getAccount().getId(), memoText, accessLevel,
-                effectiveDate, expirationDate, prevMemoId);
-
-        memo.setTransaction(transaction);
-
-        return memo;
-
-    }
-
-    /**
-     * Creates a new memo based on the given parameters
-     *
-     * @param accountId      Account ID
-     * @param memoText       Memo text
-     * @param accessLevel    Access level
-     * @param effectiveDate  Effective date
-     * @param expirationDate Expiration date
-     * @param prevMemoId     Previous Memo ID
-     * @return new Memo instance
-     */
-    @Override
-    @Transactional(readOnly = false)
-    public Memo createMemo(String accountId, String memoText, Integer accessLevel,
-                           Date effectiveDate, Date expirationDate, Long prevMemoId) {
-
-        if (accountId == null) {
-            String errMsg = "Account ID cannot be null";
-            logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
-        }
-
-        Account account = accountService.getFullAccount(accountId);
-        if (account == null) {
-            String errMsg = "Account with ID = " + accountId + " does not exist";
-            logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
-        }
-
-        Memo newMemo = new Memo();
-        newMemo.setText(memoText);
-        newMemo.setAccount(account);
-        newMemo.setAccessLevel(accessLevel);
-
-        Memo prevMemo = null;
-        if (prevMemoId != null) {
-            prevMemo = informationService.getMemo(prevMemoId);
-            if (prevMemo == null) {
-                String errMsg = "Memo with ID = " + prevMemoId + " does not exist";
-                logger.error(errMsg);
-                throw new IllegalArgumentException(errMsg);
-            }
-            newMemo.setPreviousMemo(prevMemo);
-            prevMemo.setNextMemo(newMemo);
-        }
-
-        String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
-        newMemo.setCreatorId(creatorId);
-        newMemo.setResponsibleEntity(creatorId);
-
-        Date curDate = new Date();
-        newMemo.setCreationDate(curDate);
-        newMemo.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
-        newMemo.setExpirationDate(expirationDate != null ? expirationDate : null);
-
-        persistEntity(newMemo);
-
-        if (prevMemo != null) {
-            prevMemo.setNextMemo(newMemo);
-        }
-
-        return newMemo;
-    }
-
-    /**
      * If the reverse method is called, the system will generate a negative
      * transaction for the type of the original transaction. A memo transaction
      * will be generated, and the transactions will be locked together. Subject
@@ -732,7 +633,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         transaction.setDeferred(true);
 
         // Creating a new memo
-        createMemo(defermentId, memoText, 0, curDate, expirationDate, null);
+        informationService.createMemo(defermentId, memoText, 0, curDate, expirationDate, null);
 
         createLockedAllocation(defermentId, transactionId, partialAmount);
 

@@ -60,36 +60,6 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
-    @Test
-    public void createMemo() throws Exception {
-
-        String id = "1020";
-
-        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e8));
-
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-
-        Memo memo = transactionService.createMemo(transaction.getId(), "New memo for 1020", 0, new Date(), null, null);
-
-        Assert.notNull(memo);
-        Assert.notNull(memo.getId());
-        Assert.notNull(memo.getAccount());
-        Assert.notNull(memo.getTransaction());
-
-        Assert.isTrue("New memo for 1020".equals(memo.getText()));
-        Assert.isTrue(TEST_USER_ID.equals(memo.getCreatorId()));
-        Assert.isTrue(TEST_USER_ID.equals(memo.getResponsibleEntity()));
-
-        Assert.isTrue(new Date().compareTo(memo.getEffectiveDate()) >= 0);
-        Assert.isTrue(new Date().compareTo(memo.getCreationDate()) >= 0);
-
-        Assert.isTrue(0 == memo.getAccessLevel());
-
-        Assert.isNull(memo.getExpirationDate());
-        Assert.isNull(memo.getPreviousMemo());
-
-    }
 
     @Test
     public void deferTransaction() throws Exception {
