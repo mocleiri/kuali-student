@@ -2,6 +2,8 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.annotation.UseWebContext;
+import com.sigmasys.kuali.ksa.gwt.client.model.CurrencyModel;
+import com.sigmasys.kuali.ksa.gwt.client.service.GwtCurrencyService;
 import com.sigmasys.kuali.ksa.model.Currency;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +23,9 @@ public class CurrencyServiceTest extends AbstractServiceTest {
 
     @Autowired
     private CurrencyService currencyService;
+
+    @Autowired
+    private GwtCurrencyService gwtCurrencyService;
 
     @Test
     public void getCurrency() throws Exception {
@@ -87,5 +92,71 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         Assert.isTrue(id > 0);
 
     }
+
+    @Test
+    public void getGwtCurrencies() throws Exception {
+
+        List<CurrencyModel> currencies = gwtCurrencyService.getCurrencies();
+
+        Assert.notNull(currencies);
+        Assert.isTrue(!currencies.isEmpty());
+
+        for (CurrencyModel currency : currencies) {
+            Assert.notNull(currency);
+            Assert.notNull(currency.getId());
+            Assert.notNull(currency.getIso());
+        }
+
+    }
+
+    @Test
+    public void updateGwtCurrency() throws Exception {
+
+        CurrencyModel currency = gwtCurrencyService.getCurrency("usd");
+
+        Assert.notNull(currency);
+        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+
+        currency.setDescription("Test description");
+
+        gwtCurrencyService.persistCurrency(currency);
+
+        currency = gwtCurrencyService.getCurrency(1L);
+
+        Assert.notNull(currency);
+        Assert.isTrue(currency.getDescription().equals("Test description"));
+
+    }
+
+    @Test
+    public void createGwtCurrency() throws Exception {
+
+        CurrencyModel currency = new CurrencyModel();
+        currency.setIso("mavr");
+        currency.setName("Mavrody");
+        currency.setDescription("Mavrody's currency");
+
+        Long id = gwtCurrencyService.persistCurrency(currency);
+
+        Assert.notNull(id);
+        Assert.isTrue(id > 0);
+
+    }
+
+    @Test
+    public void getGwtCurrency() throws Exception {
+
+        CurrencyModel currency = gwtCurrencyService.getCurrency("usd");
+
+        Assert.notNull(currency);
+        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+
+        currency = gwtCurrencyService.getCurrency(1L);
+
+        Assert.notNull(currency);
+        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+
+    }
+
 
 }
