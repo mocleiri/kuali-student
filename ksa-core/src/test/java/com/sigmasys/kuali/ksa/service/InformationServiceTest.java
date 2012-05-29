@@ -2,9 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.annotation.UseWebContext;
-import com.sigmasys.kuali.ksa.model.Information;
-import com.sigmasys.kuali.ksa.model.Memo;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -162,5 +160,65 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.isNull(memo.getPreviousMemo());
 
     }
+
+    @Test
+    public void createAlertForTransaction() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e8));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+
+        Alert alert = informationService.createAlert(transaction.getId(), "New alert for 1020", 0, new Date(), null);
+
+        Assert.notNull(alert);
+        Assert.notNull(alert.getId());
+        Assert.notNull(alert.getAccount());
+        Assert.notNull(alert.getTransaction());
+
+        Assert.isTrue("New alert for 1020".equals(alert.getText()));
+        Assert.isTrue(TEST_USER_ID.equals(alert.getCreatorId()));
+        Assert.isTrue(TEST_USER_ID.equals(alert.getResponsibleEntity()));
+
+        Assert.isTrue(new Date().compareTo(alert.getEffectiveDate()) >= 0);
+        Assert.isTrue(new Date().compareTo(alert.getCreationDate()) >= 0);
+
+        Assert.isTrue(0 == alert.getAccessLevel());
+
+        Assert.isNull(alert.getExpirationDate());
+
+    }
+
+    @Test
+    public void createFlagForTransaction() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e8));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+
+        Flag flag = informationService.createFlag(transaction.getId(), 1L, 1, 1, new Date(), null);
+
+        Assert.notNull(flag);
+        Assert.notNull(flag.getId());
+        Assert.notNull(flag.getAccount());
+        Assert.notNull(flag.getTransaction());
+
+        Assert.isTrue(TEST_USER_ID.equals(flag.getCreatorId()));
+        Assert.isTrue(TEST_USER_ID.equals(flag.getResponsibleEntity()));
+
+        Assert.isTrue(new Date().compareTo(flag.getEffectiveDate()) >= 0);
+        Assert.isTrue(new Date().compareTo(flag.getCreationDate()) >= 0);
+
+        Assert.isTrue(1 == flag.getAccessLevel());
+
+        Assert.isNull(flag.getExpirationDate());
+
+    }
+
 
 }
