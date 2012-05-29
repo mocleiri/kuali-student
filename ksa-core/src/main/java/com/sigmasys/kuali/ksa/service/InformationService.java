@@ -127,4 +127,57 @@ public interface InformationService {
                     Date effectiveDate, Date expirationDate, Long prevMemoId);
 
 
+    /**
+     * Creates a new flag based on the given parameters
+     *
+     * @param transactionId  Transaction ID
+     * @param flagTypeId     Flag Type ID
+     * @param accessLevel    Access level
+     * @param severity       Severity
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Flag instance
+     */
+    Flag createFlag(Long transactionId, Long flagTypeId, Integer accessLevel,
+                    Integer severity, Date effectiveDate, Date expirationDate);
+
+    /**
+     * Creates a new flag based on the given parameters
+     *
+     * @param accountId      Account ID
+     * @param flagTypeId     Flag Type ID
+     * @param accessLevel    Access level
+     * @param severity       Severity
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Flag instance
+     */
+    Flag createFlag(String accountId, Long flagTypeId, Integer accessLevel,
+                    Integer severity, Date effectiveDate, Date expirationDate);
+
+    /**
+     * Creates a new alert based on the given parameters
+     *
+     * @param transactionId  Transaction ID
+     * @param alertText      Alert text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Alert instance
+     */
+    Alert createAlert(Long transactionId, String alertText, Integer accessLevel, Date effectiveDate, Date expirationDate);
+
+    /**
+     * Creates a new alert based on the given parameters
+     *
+     * @param accountId      Account ID
+     * @param alertText      Alert text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Alert instance
+     */
+    Alert createAlert(String accountId, String alertText, Integer accessLevel, Date effectiveDate, Date expirationDate);
+
+
 }

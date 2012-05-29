@@ -229,7 +229,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
         Date curDate = new Date();
         newMemo.setCreationDate(curDate);
         newMemo.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
-        newMemo.setExpirationDate(expirationDate != null ? expirationDate : null);
+        newMemo.setExpirationDate(expirationDate);
 
         persistEntity(newMemo);
 
@@ -240,4 +240,171 @@ public class InformationServiceImpl extends GenericPersistenceService implements
         return newMemo;
     }
 
+    /**
+     * Creates a new flag based on the given parameters
+     *
+     * @param transactionId  Transaction ID
+     * @param flagTypeId     Flag Type ID
+     * @param accessLevel    Access level
+     * @param severity       Severity
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Flag instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Flag createFlag(Long transactionId, Long flagTypeId, Integer accessLevel,
+                           Integer severity, Date effectiveDate, Date expirationDate) {
+
+        Transaction transaction = transactionService.getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Flag flag = createFlag(transaction.getAccount().getId(), flagTypeId, accessLevel, severity,
+                effectiveDate, expirationDate);
+
+        flag.setTransaction(transaction);
+
+        return flag;
+
+    }
+
+    /**
+     * Creates a new flag based on the given parameters
+     *
+     * @param accountId      Account ID
+     * @param flagTypeId     Flag Type ID
+     * @param accessLevel    Access level
+     * @param severity       Severity
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Flag instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Flag createFlag(String accountId, Long flagTypeId, Integer accessLevel,
+                           Integer severity, Date effectiveDate, Date expirationDate) {
+
+        if (accountId == null) {
+            String errMsg = "Account ID cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + accountId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        FlagType flagType = getEntity(flagTypeId, FlagType.class);
+        if (flagType == null) {
+            String errMsg = "FlagType with ID = " + flagTypeId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+
+        Flag flag = new Flag();
+        flag.setType(flagType);
+        flag.setAccount(account);
+        flag.setAccessLevel(accessLevel);
+        flag.setSeverity(severity);
+
+        String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+        flag.setCreatorId(creatorId);
+        flag.setResponsibleEntity(creatorId);
+
+        Date curDate = new Date();
+        flag.setCreationDate(curDate);
+        flag.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
+        flag.setExpirationDate(expirationDate);
+
+        persistEntity(flag);
+
+        return flag;
+    }
+
+
+    /**
+     * Creates a new alert based on the given parameters
+     *
+     * @param transactionId  Transaction ID
+     * @param alertText      Alert text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Alert instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Alert createAlert(Long transactionId, String alertText, Integer accessLevel, Date effectiveDate,
+                             Date expirationDate) {
+
+        Transaction transaction = transactionService.getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Alert alert = createAlert(transaction.getAccount().getId(), alertText, accessLevel,
+                effectiveDate, expirationDate);
+
+        alert.setTransaction(transaction);
+
+        return alert;
+
+    }
+
+    /**
+     * Creates a new alert based on the given parameters
+     *
+     * @param accountId      Account ID
+     * @param alertText      Alert text
+     * @param accessLevel    Access level
+     * @param effectiveDate  Effective date
+     * @param expirationDate Expiration date
+     * @return new Alert instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Alert createAlert(String accountId, String alertText, Integer accessLevel, Date effectiveDate,
+                             Date expirationDate) {
+
+        if (accountId == null) {
+            String errMsg = "Account ID cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + accountId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Alert alert = new Alert();
+        alert.setText(alertText);
+        alert.setAccount(account);
+        alert.setAccessLevel(accessLevel);
+
+        String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+        alert.setCreatorId(creatorId);
+        alert.setResponsibleEntity(creatorId);
+
+        Date curDate = new Date();
+        alert.setCreationDate(curDate);
+        alert.setEffectiveDate(effectiveDate != null ? effectiveDate : curDate);
+        alert.setExpirationDate(expirationDate);
+
+        persistEntity(alert);
+
+        return alert;
+    }
 }
