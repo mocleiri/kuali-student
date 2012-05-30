@@ -869,7 +869,7 @@
 
     <bean id="academicRecordCollection" parent="Uif-StackedCollectionGroup" p:headerText="Completed">
         <property name="header">
-            <bean parent="Uif-HeaderField-Six"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="layoutManager">
             <bean parent="Uif-StackedCollectionLayout-WithBoxItems">
@@ -911,7 +911,7 @@
 
     <bean id="plannedCollection" parent="Uif-StackedCollectionGroup" p:headerText="Planned">
         <property name="header">
-            <bean parent="Uif-HeaderField-Six"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="layoutManager">
             <bean parent="Uif-StackedCollectionLayout-WithBoxItems">
@@ -964,7 +964,7 @@
 
     <bean id="backupCollection" parent="Uif-StackedCollectionGroup" p:headerText="Backup">
         <property name="header">
-            <bean parent="Uif-HeaderField-Six"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="layoutManager">
             <bean parent="Uif-StackedCollectionLayout-WithBoxItems">
