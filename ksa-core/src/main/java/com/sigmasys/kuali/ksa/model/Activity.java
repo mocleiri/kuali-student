@@ -35,6 +35,16 @@ public class Activity implements Identifiable {
     private String entityId;
 
     /**
+     * Entity Type
+     */
+    private String entityType;
+
+    /**
+     * Account ID associated with Entity ID and Type
+     */
+    private String accountId;
+
+    /**
      * Timestamp
      */
     private Date timestamp;
@@ -45,9 +55,9 @@ public class Activity implements Identifiable {
     private String logDetail;
 
     /**
-     * Account
+     * Creator ID
      */
-    private String accountId;
+    private String creatorId;
 
     /**
      * Old attribute value
@@ -100,7 +110,7 @@ public class Activity implements Identifiable {
         this.macAddress = macAddress;
     }
 
-    @Column(name = "ENTITY_ID", length = 45)
+    @Column(name = "ALTERED_ENTITY_ID", length = 256)
     public String getEntityId() {
         return entityId;
     }
@@ -118,7 +128,7 @@ public class Activity implements Identifiable {
         this.timestamp = timestamp;
     }
 
-    @Column(name = "LOG_DETAIL", length = 200)
+    @Column(name = "LOG_DETAIL", length = 1024)
     public String getLogDetail() {
         return logDetail;
     }
@@ -127,13 +137,31 @@ public class Activity implements Identifiable {
         this.logDetail = logDetail;
     }
 
-    @Column(name = "ACNT_ID_FK")
+    @Column(name = "CREATOR_ID", length = 45)
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    @Column(name = "ALTERED_ACNT_ID", length = 45)
     public String getAccountId() {
         return accountId;
     }
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    @Column(name = "ALTERED_ENTITY_TYPE", length = 256)
+    public String getEntityType() {
+        return entityType;
+    }
+
+    public void setEntityType(String entityType) {
+        this.entityType = entityType;
     }
 
     @Column(name = "OLD_ATTRIBUTE", length = 4000)

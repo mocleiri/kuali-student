@@ -131,6 +131,7 @@ Insert into KSSA_TAX_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME)
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_TRANSACTION_TYPE
+Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('C','DEF',1,'admin','DEFAULT DEFERMENT TYPE',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
 Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('D','1553',1,'pheald','PHYSICS LAB FEE',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
 Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('D','1554',1,'pheald','AOSC LAB FEE',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
 Insert into KSSA_TRANSACTION_TYPE (TYPE,ID,SUB_CODE,CREATOR_ID,DEF_TRN_TXT,EDITOR_ID,END_DATE,LAST_UPDATE,START_DATE,AUTH_TXT,CLEAR_PERIOD,REFUND_RULE,PRIORITY,DEF_ROLLUP_ID_FK) values ('D','1555',1,'pheald','CLICKER FEE',null,null,to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('29-MAR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,1,3);
@@ -1072,22 +1073,3 @@ Insert into KSSA_CREDIT_PERMISSION (ID,ALLOWABLE_DEBIT_TYPE_MASK,PRIORITY,TRANSA
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_CREDIT_PERMISSION
 ---------------------------------------------------
-
-
-INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
-VALUES (1, 'Liaison', '20', '000.000.000.000', 'Batch XML Processing', null, to_timestamp('27-APR-12 09:23:31.654000', 'DD-Mon-RR HH24:MI:SS.FF'), null, 7);
-
-INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
-VALUES (2, 'Liaison', '20', '000.000.000.000', 'Batch XML Processing', null, to_timestamp('03-MAY-12 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'), null, 7);
-
-INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
-VALUES (3, 'CSR', '65', '010.012.025.148', 'KSA Login', null, to_timestamp('03-MAY-12 15:34:42.253000', 'DD-Mon-RR HH24:MI:SS.FF'), 'user1', 7);
-
-INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
-VALUES (4, 'Liaison', '20', '000.000.000.000', 'Upload XML File', null, to_timestamp('03-MAY-12 14:27:35.154000', 'DD-Mon-RR HH24:MI:SS.FF'), null, 7);
-
-INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
-VALUES (5, 'CSR', '65', '000.000.000.000', 'Age Accounts', null, to_timestamp('03-MAY-12 07:48:54.814000', 'DD-Mon-RR HH24:MI:SS.FF'), 'user1', 7);
-
-INSERT INTO KSSA_ACTIVITY (id, old_attribute, entity_id, ip, log_detail, mac, creation_date, acnt_id_fk, activity_type_id_fk)
-VALUES (6, 'CSR', '65', '000.000.000.000', 'Add Charge', null, to_timestamp('03-MAY-12 07:56:14.684000', 'DD-Mon-RR HH24:MI:SS.FF'), 'user1', 7);

@@ -63,7 +63,7 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
     public List<Activity> getActivities(String userId) {
         Query query = em.createQuery("select act from Activity act " +
                 " left outer join fetch act.type t " +
-                " where act.accountId = :userId " +
+                " where act.creatorId = :userId " +
                 " order by act.id desc");
         query.setParameter("userId", userId);
         return query.getResultList();
