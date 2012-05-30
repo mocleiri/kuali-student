@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>Standalone</display-name>
 
+    <!-- On the application servers this param is set in /usr/local/tomcat/conf/context.xml and will not allow overrides. -->
     <context-param>
       <param-name>environment</param-name>
       <param-value>dev</param-value>
@@ -13,7 +14,6 @@
       <param-name>web.bootstrap.spring.file</param-name>
       <param-value>classpath:org/kuali/rice/standalone/config/StandaloneSpringBeans.xml</param-value>
     </context-param>
-
 
     <!-- KS Spring Security Config - Begin .... !!! REMOVE THIS AFTER PERFORMANCE TESTING !!! -->
 	<context-param>
