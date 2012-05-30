@@ -55,7 +55,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="kenConfigurer"/>
 
-    <bean id="ksaConfigurer" class="com.sigmasys.kuali.ksa.config.KsaConfigurer" depends-on="kradConfigurer">
+    <bean id="kimConfigurer" class="org.kuali.rice.kim.config.KIMConfigurer" depends-on="kradConfigurer"/>
+
+    <bean id="ksaConfigurer" class="com.sigmasys.kuali.ksa.config.KsaConfigurer" depends-on="kimConfigurer">
         <property name="dataDictionaryPackages">
             <list>
                 <value>classpath:com/sigmasys/kuali/ksa/krad</value>

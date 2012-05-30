@@ -1213,9 +1213,9 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-beanutils</groupId>
+            <groupId>org.kuali.commons</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
+            <version>1.8.3-kuali</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
