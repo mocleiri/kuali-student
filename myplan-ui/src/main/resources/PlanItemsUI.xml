@@ -496,7 +496,7 @@
     <!--
      This is the Actions menu on the term view page.
     -->
-    <bean id="PlannedCourseMenuItem-FormView" parent="MyPlanFormView">
+    <bean id="PlannedCourseMenuItem-FormView" parent="MyPlanBaseFormView">
         <property name="id" value="PlannedCourseMenuItem-FormView"/>
         <property name="breadcrumbs.render" value="false"/>
         <property name="footer.render" value="false"/>
@@ -691,6 +691,15 @@
         <property name="page.header.render" value="false"/>
         <property name="onDocumentReadyScript" value="
             if ( jq('#planned_courses_detail_list_group ul:not(.errorLines) li').length > 0 ) {
+                var iMaxHeight = 0;
+                jq('#planned_courses_detail_list_group ul:not(.errorLines) li').each(function() {
+                    if ( jq(this).height() > iMaxHeight ) {
+                        iMaxHeight = jq(this).height();
+                    }
+                });
+                jq('#planned_courses_detail_list_group ul:not(.errorLines) li').each(function() {
+                    jq(this).height(iMaxHeight);
+                });
                 jq('#planned_courses_detail_list_group').jCarouselLite({
                     btnNext: '.myplan-carousel-next',
                     btnPrev: '.myplan-carousel-prev',
@@ -708,7 +717,7 @@
         </property>
         <property name="additionalScriptFiles">
             <list>
-                <value>/ks-myplan/plugins/jcarousellite.js</value>
+                <value>ks-myplan/plugins/jcarousellite.js</value>
             </list>
         </property>
         <property name="items">

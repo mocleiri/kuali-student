@@ -30,10 +30,14 @@ a:focus {
     border: none;
     color: #1d8fd9;
 }
-#view_div {
+#Uif-Application {
 	margin:0 auto;
 	padding: 10px 0 10px 10px;
 	width: 950px;
+}
+.uif-pageContentWrapper,
+.uif-viewHeader {
+    margin: 0;
 }
 #appheader_div {
 	width: 940px;
@@ -98,10 +102,10 @@ a:focus {
     background: #f5f5f5;
     color: #999999;
     padding: 15px;
-    margin: 10px 0px 0px 0px;
+    margin: 10px auto 0px;
     width: 908px;
 }
-.myplan-view #viewpage_div {
+.myplan-view #Uif-ViewContentWrapper {
 	min-height: 450px;
 }
 /* Overwrite KRAD Styles ########################################################################### */
@@ -145,17 +149,16 @@ a:focus {
     padding: 0;
     margin: 0;
 }
-.myplan-button,
-.myplan-button:hover {
+button.myplan-button,
+button.myplan-button:hover  {
     line-height: 22px;
     height: 24px;
 	padding: 0px 10px;
-    margin: 0;
     border: solid 1px #969696;
     border-radius: 4px;
 }
-.myplan-button-blue,
-.myplan-button-blue:hover {
+button.myplan-button-blue,
+button.myplan-button-blue:hover {
 	color: #FFF;
     text-shadow: 0px 1px 0px #333;
     background: #007DD6;
@@ -167,8 +170,8 @@ a:focus {
     background: linear-gradient(top, #8BCEFD 0%, #007DD6 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8BCEFD', endColorstr='#007DD6', GradientType=0);  /* IE6-9 */
 }
-.myplan-button-gray,
-.myplan-button-gray:hover {
+button.myplan-button-gray,
+button.myplan-button-gray:hover {
     color: #333;
     text-shadow: 0px 1px 0px #FFF;
     background: #EBEBEB;
@@ -180,8 +183,8 @@ a:focus {
     background: linear-gradient(top, #FDFDFD 0%, #EBEBEB 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FDFDFD', endColorstr='#EBEBEB', GradientType=0);  /* IE6-9 */
 }
-.myplan-button-transparent,
-.myplan-button-transparent:hover {
+button.myplan-button-transparent,
+button.myplan-button-transparent:hover {
     color: #1D8FD9;
     text-shadow: none;
     border-color: transparent !important;

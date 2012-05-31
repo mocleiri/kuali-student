@@ -82,7 +82,7 @@
     <bean id="course_details_actions" parent="Uif-HorizontalBoxGroup" p:style="margin-bottom: 25px;">
         <property name="items">
             <list>
-                <bean parent="Uif-ActionField" p:actionLabel="Add to Plan"
+                <bean parent="Uif-PrimaryActionButton" p:actionLabel="Add to Plan"
                       p:id="@{dataObject.courseId}_addPlannedCourse">
                     <property name="clientSideJs"
                               value="openPlanItemPopUp('@{dataObject.courseId}','add_dialog_page',{courseId:'@{dataObject.courseId}',pageId:'add_dialog_page', moveCourse:'false'},e,null,{tail:{hidden:true},position:'right',align:'top'});"/>
@@ -93,7 +93,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-ActionField" p:actionLabel="Bookmark Course"
+                <bean parent="Uif-PrimaryActionButton" p:actionLabel="Bookmark Course"
                       p:id="@{dataObject.courseId}_addSavedCourse"
                       p:render="@{dataObject.inSavedCourseList ? false : true}">
                     <property name="onDocumentReadyScript"
