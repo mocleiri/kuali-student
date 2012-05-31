@@ -130,15 +130,13 @@ a:focus {
     width: auto;
     clear: both;
 }
-.myplan-view .boxLayoutVerticalItem,
-.jquerybubblepopup .boxLayoutVerticalItem {
+.myplan-view .uif-boxLayoutVerticalItem,
+.jquerybubblepopup .uif-boxLayoutVerticalItem {
 	margin: 0 0 10px 0;
-    padding: 0;
 }
-.myplan-view .boxLayoutHorizontalItem,
-.jquerybubblepopup .boxLayoutHorizontalItem {
+.myplan-view .uif-boxLayoutHorizontalItem,
+.jquerybubblepopup .uif-boxLayoutHorizontalItem {
 	margin: 0 10px 0 0;
-    padding:  0;
 }
 .myplan-view .uif-instructionalMessage {
 	max-width: none;
