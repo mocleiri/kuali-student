@@ -103,6 +103,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      * @param userId Account ID
      * @return List of flags
      */
+    @Override
     public List<Flag> getFlags(String userId) {
         Query query = em.createQuery("select f from Flag f where f.account.id = :userId order by f.id desc");
         query.setParameter("userId", userId);
@@ -130,6 +131,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      * @return Information ID
      */
     @Override
+    @Transactional(readOnly = false)
     public Long persistInformation(Information information) {
         return persistEntity(information);
     }
@@ -140,6 +142,8 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      * @param id Information ID
      * @return true if Information entity has been deleted
      */
+    @Override
+    @Transactional(readOnly = false)
     public boolean deleteInformation(Long id) {
         return deleteEntity(id, Information.class);
     }

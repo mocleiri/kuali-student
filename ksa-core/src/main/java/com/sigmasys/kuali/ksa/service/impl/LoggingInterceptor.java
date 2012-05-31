@@ -4,9 +4,6 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -34,15 +31,15 @@ public class LoggingInterceptor implements MethodInterceptor {
 
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        //Method targetMethod = invocation.getMethod();
-        //for (Method method : targetObject.getClass().getMethods()) {
-        //    if (methodsMatch(targetMethod, method)) {
+        Method targetMethod = invocation.getMethod();
+        for (Method method : targetObject.getClass().getMethods()) {
+            if (methodsMatch(targetMethod, method)) {
                 Object result = invocation.proceed();
                 log(invocation);
                 return result;
-        //    }
-        //}
-        //return invocation.proceed();
+            }
+        }
+        return invocation.proceed();
     }
 
     private boolean methodsMatch(Method method1, Method method2) {
@@ -65,22 +62,26 @@ public class LoggingInterceptor implements MethodInterceptor {
     private void log(MethodInvocation invocation) {
 
         Method method = invocation.getMethod();
+        String className = method.getDeclaringClass().getSimpleName();
         Object[] arguments = invocation.getArguments();
         Class<?>[] paramTypes = method.getParameterTypes();
 
         StringBuilder logBuffer = new StringBuilder("Performed method call: ");
+        logBuffer.append(className);
+        logBuffer.append(" :: ");
         logBuffer.append(method.getReturnType().getSimpleName());
         logBuffer.append(" ");
         logBuffer.append(method.getName());
-        logBuffer.append(" (");
+        logBuffer.append("(");
 
         for (int i = 0; i < arguments.length; i++) {
             if (i > 0) {
                 logBuffer.append(", ");
             }
             logBuffer.append(paramTypes[i].getSimpleName());
-            logBuffer.append(" ");
+            logBuffer.append(" '");
             logBuffer.append(arguments[i]);
+            logBuffer.append("'");
         }
         logBuffer.append(")");
 

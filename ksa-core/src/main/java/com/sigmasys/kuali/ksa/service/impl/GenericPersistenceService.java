@@ -3,21 +3,21 @@ package com.sigmasys.kuali.ksa.service.impl;
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.search.SearchCriteria;
+import com.sigmasys.kuali.ksa.service.AopProxy;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.aopalliance.aop.Advice;
-import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ import java.util.List;
 @Service("persistenceService")
 @Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
-public class GenericPersistenceService {
+public class GenericPersistenceService implements AopProxy {
 
     @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
     protected EntityManager em;
@@ -41,27 +41,18 @@ public class GenericPersistenceService {
     @Autowired
     private ConfigService configService;
 
-    private final ProxyFactory proxyFactory;
-
-    public GenericPersistenceService() {
-        proxyFactory = new ProxyFactory(this);
-    }
-
-    @PostConstruct
-    private void postConstruct() {
-        if (Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
-            // Setting up the logging interceptor
-            addAdvice(new LoggingInterceptor(this));
-        }
-    }
 
     /**
      * Adds AOP advice to the current instance.
-     *
-     * @param advice Advice instance
      */
-    protected void addAdvice(Advice advice) {
-        proxyFactory.addAdvice(advice);
+    @Override
+    public List<Advice> getAdvices() {
+        LinkedList<Advice> advices = new LinkedList<Advice>();
+        if (Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
+            // Setting up the logging interceptor
+            advices.add(new LoggingInterceptor(this));
+        }
+        return advices;
     }
 
     /**

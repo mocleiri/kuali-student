@@ -97,5 +97,15 @@ public abstract class AuditableEntity implements Identifiable {
         this.description = description;
     }
 
-
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", creatorId='" + creatorId + '\'' +
+                ", editorId='" + editorId + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                '}';
+    }
 }
