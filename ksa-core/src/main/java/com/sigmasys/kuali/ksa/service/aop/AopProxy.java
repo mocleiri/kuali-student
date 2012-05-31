@@ -1,4 +1,4 @@
-package com.sigmasys.kuali.ksa.service;
+package com.sigmasys.kuali.ksa.service.aop;
 
 import org.aopalliance.aop.Advice;
 

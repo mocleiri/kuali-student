@@ -35,8 +35,7 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-2.5.xsd" default-lazy-init="true">
 
-    <bean id="coreServiceOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer"
-          lazy-init="false">
+    <bean id="coreServiceOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
         <property name="jcdAliases">
             <list>
                 <value>riceDataSource</value>
@@ -45,8 +44,7 @@
         <property name="metadataLocation" value="classpath:/META-INF/ojb-repository-core-service.xml"/>
     </bean>
 
-    <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer"
-          lazy-init="false">
+    <bean id="kimOjbConfigurer" class="org.kuali.rice.core.framework.persistence.ojb.BaseOjbConfigurer">
         <property name="jcdAliases">
             <list>
                 <value>riceDataSource</value>
