@@ -149,25 +149,24 @@
         <property name="items">
             <list>
                 <!-- Course Description -->
-                <bean parent="Uif-DataField" p:label="Course Description" p:propertyName="courseDescription"
-                      p:fieldLabel.renderColon="false">
+                <bean parent="Uif-HorizontalFieldGroup" p:label="Course Description" p:fieldLabel.renderColon="false">
                     <property name="fieldLabel.cssClasses">
                         <list merge="true">
                             <value>myplan-text-align-left</value>
                             <value>myplan-text-nowrap</value>
                         </list>
                     </property>
-                    <property name="render" value="@{dataObject.courseDescription ne null ? true : false}"/>
-                </bean>
-                <!-- If Course Description is empty-->
-                <bean parent="Uif-Message" p:title="Course Description" p:messageText="No description is available">
-                    <property name="cssClasses">
-                        <list merge="true">
-                            <value>myplan-text-align-left</value>
-                            <value>myplan-text-nowrap</value>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-DataField" p:fieldLabel.render="false" p:propertyName="courseDescription">
+                                <property name="render" value="@{dataObject.courseDescription ne null ? true : false}"/>
+                            </bean>
+                            <!-- If Course Description is empty-->
+                            <bean parent="Uif-Message" p:messageText="No description is available">
+                                <property name="render" value="@{dataObject.courseDescription ne null ? false : true}"/>
+                            </bean>
                         </list>
                     </property>
-                    <property name="render" value="@{dataObject.courseDescription ne null ? false : true}"/>
                 </bean>
 
                 <!-- Requisites -->

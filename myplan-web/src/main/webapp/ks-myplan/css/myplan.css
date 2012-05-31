@@ -109,15 +109,14 @@ a:focus {
 	min-height: 450px;
 }
 /* Overwrite KRAD Styles ########################################################################### */
-.myplan-view #viewpage_div,
-.myplan-view #viewheader_div,
+.myplan-view #Uif-PageContentWrapper,
 .myplan-view #viewfooter_div {
 	margin: 0;
 	padding: 0;
     width: auto;
     clear: both;
 }
-.myplan-view #viewnavigation_div {
+.myplan-view #Uif-Navigation {
 	display: none;
 }
 .myplan-view .uif-pageHeaderField .uif-header {
