@@ -270,7 +270,7 @@
                                                 </list>
                                             </property>
                                         </bean>
-                                        <bean parent="Uif-Message" p:messageText="quarters" p:style="margin: 0 0.33em 0 0;"
+                                        <bean parent="Uif-Message" p:messageText="quarters"
                                               p:render="@{dataObject.termsOffered.size() gt 0 ? true : false}"/>
                                         <bean parent="Uif-Message" p:messageText="(Source: Course Catalog)">
                                             <property name="cssClasses">
