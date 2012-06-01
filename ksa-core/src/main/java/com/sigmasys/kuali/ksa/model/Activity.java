@@ -25,11 +25,6 @@ public class Activity implements Identifiable {
     private String ipAddress;
 
     /**
-     * MAC address
-     */
-    private String macAddress;
-
-    /**
      * Entity ID
      */
     private String entityId;
@@ -38,6 +33,11 @@ public class Activity implements Identifiable {
      * Entity Type
      */
     private String entityType;
+
+    /**
+     * Entity property name
+     */
+    private String entityProperty;
 
     /**
      * Account ID associated with Entity ID and Type
@@ -99,15 +99,6 @@ public class Activity implements Identifiable {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
-    }
-
-    @Column(name = "MAC", length = 12)
-    public String getMacAddress() {
-        return macAddress;
-    }
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
     }
 
     @Column(name = "ALTERED_ENTITY_ID", length = 256)
@@ -190,5 +181,14 @@ public class Activity implements Identifiable {
 
     public void setType(ActivityType type) {
         this.type = type;
+    }
+
+    @Column(name = "ALTERED_ENTITY_PROPERTY", length = 100)
+    public String getEntityProperty() {
+        return entityProperty;
+    }
+
+    public void setEntityProperty(String entityProperty) {
+        this.entityProperty = entityProperty;
     }
 }

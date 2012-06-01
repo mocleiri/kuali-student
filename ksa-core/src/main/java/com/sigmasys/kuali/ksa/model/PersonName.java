@@ -8,13 +8,14 @@ import java.util.Date;
  * One KSA account can be associated with one or more person names.
  * <p/>
  * <p/>
- * User: ivanovm
- * Date: 3/13/12
- * Time: 3:56 PM
+ *
+ * @author Michael Ivanov
+ *         Date: 3/13/12
+ *         Time: 3:56 PM
  */
 @Entity
 @Table(name = "KSSA_PERSON_NAME")
-public class PersonName implements Identifiable {
+public class PersonName extends AccountIdAware implements Identifiable {
 
     /**
      * Person name ID
@@ -175,7 +176,7 @@ public class PersonName implements Identifiable {
         this.lastUpdate = lastUpdate;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_DEFAULT")
     public Boolean isDefault() {
         return isDefault;

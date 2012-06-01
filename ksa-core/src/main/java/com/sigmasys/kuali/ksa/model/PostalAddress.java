@@ -7,13 +7,14 @@ import java.util.Date;
  * Postal address
  * <p/>
  * <p/>
- * User: ivanovm
- * Date: 3/13/12
- * Time: 3:56 PM
+ *
+ * @author Michael Ivanov
+ *         Date: 3/13/12
+ *         Time: 3:56 PM
  */
 @Entity
 @Table(name = "KSSA_POSTAL_ADDRESS")
-public class PostalAddress implements Identifiable {
+public class PostalAddress extends AccountIdAware implements Identifiable {
 
     /**
      * Address ID

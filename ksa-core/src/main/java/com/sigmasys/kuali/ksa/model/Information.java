@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Information main class
  * <p/>
- * User: mike
+ * @author Michael Ivanov
  * Date: 1/22/12
  * Time: 3:47 PM
  */
@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "KSSA_INFORMATION")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Information implements Identifiable {
+public class Information  extends AccountIdAware implements Identifiable {
 
     /**
      * Information ID

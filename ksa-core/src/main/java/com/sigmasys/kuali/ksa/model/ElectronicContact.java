@@ -7,13 +7,14 @@ import java.util.Date;
  * Electronic contact
  * <p/>
  * <p/>
- * User: ivanovm
- * Date: 3/13/12
- * Time: 3:56 PM
+ *
+ * @author Michael Ivanov
+ *         Date: 3/13/12
+ *         Time: 3:56 PM
  */
 @Entity
 @Table(name = "KSSA_ELECTRONIC_CONTACT")
-public class ElectronicContact implements Identifiable {
+public class ElectronicContact extends AccountIdAware implements Identifiable {
 
     /**
      * Person name ID
@@ -184,7 +185,7 @@ public class ElectronicContact implements Identifiable {
         this.account = account;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_DEFAULT")
     public Boolean isDefault() {
         return isDefault;

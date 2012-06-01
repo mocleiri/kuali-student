@@ -2,7 +2,9 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.annotation.AnnotationUtils;
 import com.sigmasys.kuali.ksa.annotation.Auditable;
+import com.sigmasys.kuali.ksa.model.AccountIdAware;
 import com.sigmasys.kuali.ksa.model.Activity;
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.Identifiable;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
@@ -37,16 +39,24 @@ import java.util.Iterator;
  * @author Michael Ivanov
  */
 @SuppressWarnings("serial")
-public abstract class AuditTrailInterceptor extends EmptyInterceptor {
-
+public class AuditTrailInterceptor extends EmptyInterceptor {
 
     private static final Log logger = LogFactory.getLog(AuditTrailInterceptor.class);
 
+    private static final String ENTITY_MANAGER_FACTORY_BEAN_NAME = "ksaEntityManagerFactory";
 
     protected SessionFactory sessionFactory;
 
 
-    protected abstract EntityManagerFactoryInfo getEntityManagerFactoryInfo();
+    /**
+     * This method can be overridden by subclasses to return a different instance of
+     * Spring's EntityManagerFactory.
+     *
+     * @return EntityManagerFactoryInfo instance
+     */
+    protected EntityManagerFactoryInfo getEntityManagerFactoryInfo() {
+        return ContextUtils.getBean(ENTITY_MANAGER_FACTORY_BEAN_NAME);
+    }
 
     /**
      * Lazy initializes the session factory and stores it for obtaining session in the future
@@ -63,7 +73,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
         return sessionFactory;
     }
 
-    private void onCollectionCreateRemove(Object collectionObject, Serializable id) {
+    private void onCollectionCreateRemove(Object collectionObject, Serializable id, boolean isCreate) {
 
         if (collectionObject instanceof PersistentCollection) {
 
@@ -80,8 +90,13 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
                 if (collection instanceof Collection<?>) {
                     Collection<?> javaCollection = (Collection<?>) collection;
                     String propertyName = getPropertyName(collection);
+                    Class ownerClass = collection.getOwner().getClass();
                     for (Object item : javaCollection) {
-                        createActivityForCollectionItem(session, id, collection, userId, item, propertyName, true);
+                        String newValue = isCreate ? getPropertyValue(item) : null;
+                        String oldValue = isCreate ? null : getPropertyValue(item);
+                        String logDetail = isCreate ? "Persistent collection create" : "Persistent collection remove";
+                        createActivityLog(session, id, ownerClass, userId, item, propertyName,
+                                oldValue, newValue, logDetail);
                     }
                 }
             }
@@ -90,12 +105,12 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
 
     @Override
     public void onCollectionRecreate(Object collectionObject, Serializable id) throws CallbackException {
-        onCollectionCreateRemove(collectionObject, id);
+        onCollectionCreateRemove(collectionObject, id, true);
     }
 
     @Override
     public void onCollectionRemove(Object collectionObject, Serializable id) throws CallbackException {
-        onCollectionCreateRemove(collectionObject, id);
+        onCollectionCreateRemove(collectionObject, id, false);
     }
 
 
@@ -139,17 +154,24 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
 
                 String propertyName = getPropertyName(collection);
 
+                Class ownerClass = collection.getOwner().getClass();
+
                 for (int i = 0; entries.hasNext(); i++) {
                     Object entry = entries.next();
                     if (collection.needsInserting(entry, i, elemType)) {
-                        createActivityForCollectionItem(session, id, collection, userId, entry, propertyName, true);
+                        String newValue = getPropertyValue(entry);
+                        createActivityLog(session, id, ownerClass, userId, entry, propertyName,
+                                null, newValue, "Persistent collection insert");
                     }
                 }
 
                 boolean deleteByIndex = !collectionPersister.isOneToMany() && collectionPersister.hasIndex();
                 entries = collection.getDeletes(collectionPersister, !deleteByIndex);
                 while (entries.hasNext()) {
-                    createActivityForCollectionItem(session, id, collection, userId, entries.next(), propertyName, false);
+                    Object entry = entries.next();
+                    String oldValue = getPropertyValue(entry);
+                    createActivityLog(session, id, ownerClass, userId, entry, propertyName,
+                            oldValue, null, "Persistent collection remove");
                 }
             }
         }
@@ -205,25 +227,26 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
         return propertyName;
     }
 
-    protected void createActivityForCollectionItem(Session session, Serializable id, PersistentCollection collection,
-                                                   String userId, Object entry, String propertyName, boolean isInsert) {
-
-        Object owner = collection.getOwner();
-        String propertyValue = getPropertyValue(entry);
+    protected void createActivityLog(Session session, Serializable id, Class entityClass,
+                                     String userId, Object entry, String propertyName,
+                                     String oldValue, String newValue, String logDetail) {
 
         Activity activity = new Activity();
         activity.setEntityId(id.toString());
-        activity.setEntityType(owner.getClass().getSimpleName());
+        activity.setEntityType(entityClass.getSimpleName());
         activity.setCreatorId(userId);
         activity.setIpAddress(RequestUtils.getClientIpAddress());
-        activity.setLogDetail("Persistent collection insert/remove");
+        activity.setLogDetail(logDetail);
 
-        activity.setOldAttribute(isInsert ? null : propertyValue);
-        activity.setNewAttribute(isInsert ? propertyValue : null);
+        activity.setEntityProperty(propertyName);
+        activity.setOldAttribute(oldValue);
+        activity.setNewAttribute(newValue);
 
         activity.setTimestamp(new Date());
 
-        // TODO - persist activity
+        if (entry instanceof AccountIdAware) {
+            activity.setAccountId(((AccountIdAware) entry).getAccountId());
+        }
 
         session.save(activity);
 
@@ -260,6 +283,8 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
                     continue;
                 }
 
+                createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], oldValue,
+                        null, "Persistent entity delete");
 
             }
         }
@@ -302,10 +327,9 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
                         continue;
                     }
 
-                    // Insert audit trail record
-                    Activity activity = new Activity();
+                    createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], oldValue,
+                            newValue, "Persistent entity update");
 
-                    // TODO
                 }
             }
         }
@@ -337,15 +361,14 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
                 }
 
                 String newValue = getPropertyValue(state[i]);
+
                 if (newValue == null) {
                     //nothing changed -- null to null 
                     continue;
                 }
 
-                // Insert audit trail record
-                Activity activity = new Activity();
-
-                // TODO
+                createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], null,
+                        newValue, "Persistent entity create");
             }
         }
         return false;
@@ -367,7 +390,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
     }
 
     protected String getFormattedDate(Date date) {
-        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(date);
+        return new SimpleDateFormat(Constants.TIMESTAMP_FORMAT_NO_MS).format(date);
     }
 
     private boolean objectsMatch(Object a, Object b) {

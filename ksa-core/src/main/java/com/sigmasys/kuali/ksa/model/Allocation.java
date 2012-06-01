@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "KSSA_ALLOCATION")
-public class Allocation implements Identifiable {
+public class Allocation extends AccountIdAware implements Identifiable {
 
     /**
      * The unique identifier

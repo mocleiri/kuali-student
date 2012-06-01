@@ -19,7 +19,7 @@ import javax.persistence.*;
 @Table(name = "KSSA_TRANSACTION")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Transaction implements Identifiable {
+public abstract class Transaction extends AccountIdAware implements Identifiable {
 
 
     /**
