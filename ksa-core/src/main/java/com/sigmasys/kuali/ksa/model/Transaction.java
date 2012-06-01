@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.annotation.Auditable;
 import com.sigmasys.kuali.ksa.service.CalendarService;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import javax.persistence.*;
  *
  * @author Paul Heald, Michael Ivanov
  */
+@Auditable
 @Entity
 @Table(name = "KSSA_TRANSACTION")
 @DiscriminatorColumn(name = "TYPE")

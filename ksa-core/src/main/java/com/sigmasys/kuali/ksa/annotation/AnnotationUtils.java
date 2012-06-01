@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.annotation;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.core.type.classreading.MetadataReader;
@@ -20,6 +19,11 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Spring-based customized version of AnnotationUtils
+ *
+ * @author Michael Ivanov
+ */
 public class AnnotationUtils {
 
     /**

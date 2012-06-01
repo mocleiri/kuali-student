@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.annotation.Auditable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,6 +13,7 @@ import java.util.Date;
  * Date: 3/13/12
  * Time: 3:56 PM
  */
+@Auditable
 @MappedSuperclass
 public abstract class AuditableEntity implements Identifiable {
 

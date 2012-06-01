@@ -13,18 +13,17 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.CallbackException;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.collection.internal.AbstractPersistentCollection;
 import org.hibernate.collection.spi.PersistentCollection;
-import org.hibernate.ejb.HibernateEntityManagerFactory;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.persister.collection.CollectionPersister;
 import org.hibernate.type.EmbeddedComponentType;
 import org.hibernate.type.Type;
 import org.springframework.beans.BeanUtils;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.orm.jpa.EntityManagerFactoryInfo;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -39,38 +38,39 @@ import java.util.Iterator;
  * @author Michael Ivanov
  */
 @SuppressWarnings("serial")
+@Transactional
 public class AuditTrailInterceptor extends EmptyInterceptor {
 
     private static final Log logger = LogFactory.getLog(AuditTrailInterceptor.class);
 
     private static final String ENTITY_MANAGER_FACTORY_BEAN_NAME = "ksaEntityManagerFactory";
 
-    protected SessionFactory sessionFactory;
-
+    private EntityManager entityManager;
 
     /**
      * This method can be overridden by subclasses to return a different instance of
      * Spring's EntityManagerFactory.
      *
-     * @return EntityManagerFactoryInfo instance
+     * @return EntityManagerFactory instance
      */
-    protected EntityManagerFactoryInfo getEntityManagerFactoryInfo() {
+    protected EntityManagerFactory getEntityManagerFactory() {
         return ContextUtils.getBean(ENTITY_MANAGER_FACTORY_BEAN_NAME);
     }
 
     /**
-     * Lazy initializes the session factory and stores it for obtaining session in the future
+     * Lazily initializes the entity manager and stores it for obtaining the same instance in the future
      *
-     * @return SessionFactory
+     * @return EntityManager instance
      */
-    protected synchronized SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            EntityManagerFactoryInfo factoryInfo = getEntityManagerFactoryInfo();
-            HibernateEntityManagerFactory entityManagerFactory = (HibernateEntityManagerFactory)
-                    factoryInfo.getNativeEntityManagerFactory();
-            sessionFactory = entityManagerFactory.getSessionFactory();
+    protected synchronized EntityManager getEntityManager() {
+        if (entityManager == null || !entityManager.isOpen()) {
+            entityManager = getEntityManagerFactory().createEntityManager();
         }
-        return sessionFactory;
+        return entityManager;
+    }
+
+    protected Session getSession() {
+        return (Session) getEntityManager().getDelegate();
     }
 
     private void onCollectionCreateRemove(Object collectionObject, Serializable id, boolean isCreate) {
@@ -83,11 +83,12 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
             if (auditable != null) {
 
-                Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
-                UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-                String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
-
                 if (collection instanceof Collection<?>) {
+
+                    Session session = getSession();
+                    UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
+                    String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
+
                     Collection<?> javaCollection = (Collection<?>) collection;
                     String propertyName = getPropertyName(collection);
                     Class ownerClass = collection.getOwner().getClass();
@@ -98,6 +99,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                         createActivityLog(session, id, ownerClass, userId, item, propertyName,
                                 oldValue, newValue, logDetail);
                     }
+
+                    session.flush();
                 }
             }
         }
@@ -148,7 +151,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                 Iterator entries = collection.entries(collectionPersister);
                 Type elemType = collectionPersister.getElementType();
 
-                Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
+                Session session = getSession();
                 UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
                 String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
@@ -173,6 +176,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                     createActivityLog(session, id, ownerClass, userId, entry, propertyName,
                             oldValue, null, "Persistent collection remove");
                 }
+
+                session.flush();
             }
         }
     }
@@ -248,8 +253,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
             activity.setAccountId(((AccountIdAware) entry).getAccountId());
         }
 
-        session.save(activity);
-
+        session.persist(activity);
     }
 
 
@@ -260,7 +264,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
         if (auditable != null) {
 
-            Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
+            Session session = getSession();
             UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
             String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
@@ -287,6 +291,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                         null, "Persistent entity delete");
 
             }
+
+            session.flush();
         }
     }
 
@@ -301,7 +307,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
         if (auditable != null) {
 
-            Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
+            Session session = getSession();
             UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
             String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
@@ -332,6 +338,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
                 }
             }
+
+            session.flush();
         }
         return false;
     }
@@ -343,7 +351,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
         if (auditable != null) {
 
-            Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
+            Session session = getSession();
             UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
             String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
@@ -370,6 +378,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                 createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], null,
                         newValue, "Persistent entity create");
             }
+
+            session.flush();
         }
         return false;
     }
