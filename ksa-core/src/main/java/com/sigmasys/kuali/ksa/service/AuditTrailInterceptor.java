@@ -63,45 +63,49 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
         return sessionFactory;
     }
 
-    private void onCollectionCreateRemove(Object collectionObject, Serializable key) {
+    private void onCollectionCreateRemove(Object collectionObject, Serializable id) {
 
         if (collectionObject instanceof PersistentCollection) {
 
             PersistentCollection collection = (PersistentCollection) collectionObject;
 
-            Auditable classAuditable = AnnotationUtils.getAnnotation(Auditable.class, collection.getOwner());
+            Auditable auditable = AnnotationUtils.getAnnotation(Auditable.class, collection.getOwner());
 
-            if (classAuditable != null) {
+            if (auditable != null) {
 
                 Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
                 UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-                String userName = sessionManager.getUserId(RequestUtils.getThreadRequest());
+                String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
                 if (collection instanceof Collection<?>) {
                     Collection<?> javaCollection = (Collection<?>) collection;
-                    for (Object javaObject : javaCollection) {
-                        createActivityLog(session, key, collection, userName, javaObject, classAuditable, true);
+                    String propertyName = getPropertyName(collection);
+                    for (Object item : javaCollection) {
+                        createActivityForCollectionItem(session, id, collection, userId, item, propertyName, true);
                     }
                 }
             }
         }
     }
 
-    public void onCollectionRecreate(Object collectionObject, Serializable key) throws CallbackException {
-        onCollectionCreateRemove(collectionObject, key);
+    @Override
+    public void onCollectionRecreate(Object collectionObject, Serializable id) throws CallbackException {
+        onCollectionCreateRemove(collectionObject, id);
     }
 
-    public void onCollectionRemove(Object collectionObject, Serializable key) throws CallbackException {
-        onCollectionCreateRemove(collectionObject, key);
+    @Override
+    public void onCollectionRemove(Object collectionObject, Serializable id) throws CallbackException {
+        onCollectionCreateRemove(collectionObject, id);
     }
 
 
     /**
      * This method is called if entries were added or removed from a collection
      * But Hibernate is not very smart, and can call this method even if there are no changes to be persisted,
-     * so we have special logic to check and filture that out
+     * so we have special logic to check and filter that out
      */
-    public void onCollectionUpdate(Object collectionObject, Serializable key) throws CallbackException {
+    @Override
+    public void onCollectionUpdate(Object collectionObject, Serializable id) throws CallbackException {
 
         if (collectionObject instanceof AbstractPersistentCollection) {
 
@@ -131,19 +135,21 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
 
                 Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
                 UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-                String userName = sessionManager.getUserId(RequestUtils.getThreadRequest());
+                String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
+
+                String propertyName = getPropertyName(collection);
 
                 for (int i = 0; entries.hasNext(); i++) {
                     Object entry = entries.next();
                     if (collection.needsInserting(entry, i, elemType)) {
-                        createActivityLog(session, key, collection, userName, entry, auditable, true);
+                        createActivityForCollectionItem(session, id, collection, userId, entry, propertyName, true);
                     }
                 }
 
                 boolean deleteByIndex = !collectionPersister.isOneToMany() && collectionPersister.hasIndex();
                 entries = collection.getDeletes(collectionPersister, !deleteByIndex);
                 while (entries.hasNext()) {
-                    createActivityLog(session, key, collection, userName, entries.next(), auditable, false);
+                    createActivityForCollectionItem(session, id, collection, userId, entries.next(), propertyName, false);
                 }
             }
         }
@@ -199,30 +205,27 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
         return propertyName;
     }
 
-    protected void createActivityLog(Session session, Serializable key, PersistentCollection collection,
-                                     String userName, Object entry, Auditable auditable, boolean isInsert) {
+    protected void createActivityForCollectionItem(Session session, Serializable id, PersistentCollection collection,
+                                                   String userId, Object entry, String propertyName, boolean isInsert) {
 
         Object owner = collection.getOwner();
-        String propertyName = getPropertyName(collection);
         String propertyValue = getPropertyValue(entry);
 
         Activity activity = new Activity();
+        activity.setEntityId(id.toString());
+        activity.setEntityType(owner.getClass().getSimpleName());
+        activity.setCreatorId(userId);
+        activity.setIpAddress(RequestUtils.getClientIpAddress());
+        activity.setLogDetail("Persistent collection insert/remove");
 
-        /*if (isInsert) {
-            activity.setOldValue(null);
-            activity.setNewValue(entryStrRep);
-            activity.setOldValueReadable(null);
-            activity.setNewValueReadable(entryStrRepRd);
-        } else {
-            activity.setOldValue(entryStrRep);
-            activity.setNewValue(null);
-            activity.setOldValueReadable(entryStrRepRd);
-            activity.setNewValueReadable(null);
-        }
-        activity.setUserName(userName);
-        activity.setCreationTimestamp(new Date());  */
+        activity.setOldAttribute(isInsert ? null : propertyValue);
+        activity.setNewAttribute(isInsert ? propertyValue : null);
+
+        activity.setTimestamp(new Date());
 
         // TODO - persist activity
+
+        session.save(activity);
 
     }
 
@@ -236,7 +239,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
 
             Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
             UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            String userName = sessionManager.getUserId(RequestUtils.getThreadRequest());
+            String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
             for (int i = 0; i < state.length; i++) {
 
@@ -257,10 +260,6 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
                     continue;
                 }
 
-                // Insert audit trail record
-                Activity activity = new Activity();
-
-                // TODO
 
             }
         }
@@ -269,6 +268,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
     /**
      * This method is called when entity has changes
      */
+    @Override
     public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState,
                                 String[] propertyNames, Type[] types) {
 
@@ -278,7 +278,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
 
             Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
             UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            String userName = sessionManager.getUserId(RequestUtils.getThreadRequest());
+            String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
             for (int i = 0; i < currentState.length; i++) {
 
@@ -312,31 +312,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
         return false;
     }
 
-
-    protected void persistActivity(Object entity, Session session, Activity activity) {
-        // TODO
-    }
-
-    protected String getPropertyValue(Object object) {
-
-        if (object == null) {
-            return null;
-        }
-
-        if (object instanceof Identifiable) {
-            // For entities use their id instead of toString()
-            Serializable objectId = ((Identifiable) object).getId();
-            return (objectId != null) ? objectId.toString() : null;
-        }
-
-        return (object instanceof Date) ? getDatePropertyValue((Date) object) : object.toString();
-    }
-
-    protected String getDatePropertyValue(Date date) {
-        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(date);
-    }
-
-
+    @Override
     public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
 
         Auditable auditable = AnnotationUtils.getAnnotation(Auditable.class, entity);
@@ -345,7 +321,7 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
 
             Session session = SessionFactoryUtils.getSession(getSessionFactory(), false);
             UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            String userName = sessionManager.getUserId(RequestUtils.getThreadRequest());
+            String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
             // Insert audit trail records for each property
             for (int i = 0; i < state.length; i++) {
@@ -373,6 +349,25 @@ public abstract class AuditTrailInterceptor extends EmptyInterceptor {
             }
         }
         return false;
+    }
+
+    protected String getPropertyValue(Object object) {
+
+        if (object == null) {
+            return null;
+        }
+
+        if (object instanceof Identifiable) {
+            // For entities use their id instead of toString()
+            Serializable objectId = ((Identifiable) object).getId();
+            return (objectId != null) ? objectId.toString() : null;
+        }
+
+        return (object instanceof Date) ? getFormattedDate((Date) object) : object.toString();
+    }
+
+    protected String getFormattedDate(Date date) {
+        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(date);
     }
 
     private boolean objectsMatch(Object a, Object b) {

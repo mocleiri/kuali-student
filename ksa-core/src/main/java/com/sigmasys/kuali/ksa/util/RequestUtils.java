@@ -4,6 +4,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * HTTP request utility-methods.
+ *
+ * @author Michael Ivanov
+ */
 public class RequestUtils {
 
     private static final ThreadLocal<HttpServletRequest> perThreadRequest = new ThreadLocal<HttpServletRequest>();
@@ -36,5 +42,41 @@ public class RequestUtils {
     public static void setServletContext(ServletContext servletContext) {
         RequestUtils.servletContext = servletContext;
     }
+
+    public static String getClientIpAddress(HttpServletRequest request) {
+
+        if (request == null) {
+           return null;
+        }
+
+        String ip = request.getHeader("X-Forwarded-For");
+
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+
+        return ip;
+    }
+
+    public static String getClientIpAddress() {
+        return getClientIpAddress(getThreadRequest());
+    }
+
 
 }
