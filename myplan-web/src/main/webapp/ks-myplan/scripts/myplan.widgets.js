@@ -64,9 +64,10 @@ function openPopUp(id, getId, methodToCall, action, retrieveOptions, e, selector
     var popupBoxId = popupBox.GetBubblePopupID();
 	popupBox.FreezeBubblePopup();
 
-    jq(document).mouseup(function(e) {
+    jq(document).bind('click', function(e) {
         if ( jq('#' + popupBoxId).has(e.target).length === 0 ){
             fnCloseAllPopups();
+            jq(this).unbind('click');
         }
     });
 
@@ -80,7 +81,7 @@ function openPopUp(id, getId, methodToCall, action, retrieveOptions, e, selector
     var elementToBlock = jq("#" + id  + "_popup");
 
 	var updateRefreshableComponentCallback = function(htmlContent){
-		var component = jq("#" + getId + "_div", htmlContent);
+		var component = jq("#" + getId, htmlContent);
 		elementToBlock.unblock({onUnblock: function(){
             if (jq("#" + id  + "_popup").length){
                 popupBox.SetBubblePopupInnerHtml(component);
@@ -89,7 +90,7 @@ function openPopUp(id, getId, methodToCall, action, retrieveOptions, e, selector
                     fnCloseAllPopups();
                 });
             }
-            runHiddenScripts(getId + "_div");
+            runHiddenScripts(getId);
 			}
 		});
 	};
@@ -140,9 +141,10 @@ function openPlanItemPopUp(id, getId, retrieveOptions, e, selector, popupOptions
     fnPositionPopUp(popupBoxId);
 	popupBox.FreezeBubblePopup();
 
-    jq(document).mouseup(function(e) {
+    jq(document).bind('click', function(e) {
         if ( jq('#' + popupBoxId).has(e.target).length === 0 ){
             fnCloseAllPopups();
+            jq(this).unbind('click');
         }
     });
 
@@ -163,7 +165,7 @@ function openPlanItemPopUp(id, getId, retrieveOptions, e, selector, popupOptions
             var oError = jq("<div />").attr("id","error_div").html(sError).addClass("myplan-message-border myplan-message-error");
             var component = jq("<div />").css("padding-right","24px").html(oError);
         } else {
-            var component = jq("#" + getId + "_div", htmlContent);
+            var component = jq("#" + getId, htmlContent);
             var planForm = jq('<form />').attr("id", id + "_form").attr("action", "plan").attr("method", "post");
         }
         elementToBlock.unblock({onUnblock: function(){
@@ -177,7 +179,7 @@ function openPlanItemPopUp(id, getId, retrieveOptions, e, selector, popupOptions
                     popupBox.RemoveBubblePopup();
                 });
             }
-            runHiddenScripts(getId + "_div");
+            runHiddenScripts(getId);
         }});
 	};
 
@@ -451,17 +453,17 @@ function myplanAjaxSubmitForm(methodToCall, successCallback, additionalData, ele
 ######################################################################################
  */
 function truncateField(id) {
-    jq("[id^='" + id + "']").each(function() {
+    jq("#" + id).each(function() {
         jq(this).css("display","block");
-        var margin = Math.ceil(parseFloat(jq(this).find("span.boxLayoutHorizontalItem span").css("margin-right")));
+        var margin = Math.ceil(parseFloat(jq(this).find(".uif-boxLayoutHorizontalItem").css("margin-right")));
         var fixed = 0;
-        var fields = jq(this).find("span.boxLayoutHorizontalItem span").not(".myplan-text-ellipsis").length;
-        jq(this).find("span.boxLayoutHorizontalItem span").not(".myplan-text-ellipsis").each(function() {
+        var fields = jq(this).find(".uif-boxLayoutHorizontalItem:not(.myplan-text-ellipsis)").length;
+        jq(this).find(".uif-boxLayoutHorizontalItem:not(.myplan-text-ellipsis)").each(function() {
         	fixed = fixed + jq(this).width();
         });
         var ellipsis = jq(this).width() - ( ( fixed + 1 ) + ( margin * fields ) );
-        jq(this).find("span.boxLayoutHorizontalItem span").last().css("margin-right", 0);
-        jq(this).find("span.boxLayoutHorizontalItem span.myplan-text-ellipsis").width(ellipsis);
+        jq(this).find(".uif-boxLayoutHorizontalItem").last().css("margin-right", 0);
+        jq(this).find(".uif-boxLayoutHorizontalItem.myplan-text-ellipsis").width(ellipsis);
     });
 }
 /*
@@ -477,10 +479,10 @@ function fnPopoverSlider(showId, parentId, direction) {
     } else {
         newDirection = 'left';
     }
-    jq("#" + parentId + "_group > .uif-horizontalBoxLayout > .boxLayoutHorizontalItem > div:visible").hide("slide", {
+    jq("#" + parentId + " > .uif-horizontalBoxLayout > div.uif-boxLayoutHorizontalItem:visible").hide("slide", {
         direction: direction
     }, 100, function() {
-        jq("#" + parentId + "_group > .uif-horizontalBoxLayout > .boxLayoutHorizontalItem > div").filter("#" + showId + "_div").show("slide", {
+        jq("#" + parentId + " > .uif-horizontalBoxLayout > div.uif-boxLayoutHorizontalItem").filter("#" + showId).show("slide", {
             direction: newDirection
         }, 100, function() {});
     });

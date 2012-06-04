@@ -356,8 +356,8 @@ button.myplan-button-transparent:hover {
 	border-radius: 8px;
     overflow: hidden;
 }
-.myplan-remove-margin span.boxLayoutVerticalItem,
-.myplan-remove-margin span.boxLayoutHorizontalItem {
+.myplan-remove-margin .uif-boxLayoutVerticalItem,
+.myplan-remove-margin .uif-boxLayoutHorizontalItem {
     margin: 0;
     padding: 0;
 }
@@ -443,7 +443,7 @@ button.myplan-button-transparent:hover {
 .myplan-facets-panel a, .myplan-facets-panel a:hover{
     color: #000;
 }
-.myplan-facets-panel .boxLayoutVerticalItem,
+.myplan-facets-panel .uif-boxLayoutVerticalItem,
 .myplan-facets-panel .myplan-facets-group ul,
 .myplan-facets-panel .myplan-facets-group ul li {
     margin: 0;
@@ -655,15 +655,15 @@ button.myplan-button-transparent:hover {
 .myplan-course-details table th {
     padding-bottom: 1.8em;
 }
-.myplan-course-details table td .boxLayoutHorizontalItem {
+.myplan-course-details table td .uif-boxLayoutHorizontalItem {
     margin: 0 0.33em 0 0;
 }
 /* MyPlan Section (right side container) ########################################################################### */
 .myplan-section {
     border: solid 1px #ccc;
 }
-.myplan-section .boxLayoutVerticalItem,
-.myplan-section .boxLayoutHorizontalItem {
+.myplan-section .uif-boxLayoutVerticalItem,
+.myplan-section .uif-boxLayoutHorizontalItem {
     margin: 0;
     padding: 0;
 }
@@ -704,11 +704,11 @@ button.myplan-button-transparent:hover {
 .myplan-saved-courses-summary ul li:hover {
     background: #a9a9a9;
 }
-.myplan-saved-courses-summary ul li .boxLayoutHorizontalItem span {
+.myplan-saved-courses-summary ul li .uif-boxLayoutHorizontalItem span {
     float: left;
     margin-right: 0.4em;
 }
-.myplan-saved-courses-summary ul li .boxLayoutHorizontalItem span.ellipsis {
+.myplan-saved-courses-summary ul li .uif-boxLayoutHorizontalItem span.ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -742,10 +742,10 @@ button.myplan-button-transparent:hover {
 .myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout {
 	float: none !important;
 }
-.myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout span.boxLayoutHorizontalItem {
+.myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout .uif-boxLayoutHorizontalItem {
     width: 19%;
 }
-.myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout span.boxLayoutHorizontalItem:first-child {
+.myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout a.uif-boxLayoutHorizontalItem {
     width: 62%;
 }
 /* Course Details Popup ########################################################################### */
@@ -788,7 +788,7 @@ button.myplan-button-transparent:hover {
 .myplan-recent-audit ul li:first-child {
     border: none;
 }
-.myplan-recent-audit ul li .boxLayoutHorizontalItem span {
+.myplan-recent-audit ul li .uif-boxLayoutHorizontalItem span {
     float: left;
     margin-right: 0.4em;
 }
