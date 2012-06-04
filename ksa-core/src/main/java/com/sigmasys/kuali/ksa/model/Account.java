@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.annotation.Auditable;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,6 +17,7 @@ import java.util.Set;
  *         Date: 3/13/12
  *         Time: 3:56 PM
  */
+@Auditable
 @Entity
 @Table(name = "KSSA_ACNT")
 @DiscriminatorColumn(name = "TYPE")

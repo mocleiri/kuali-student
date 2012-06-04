@@ -11,9 +11,15 @@ import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;
@@ -28,7 +34,7 @@ import java.util.*;
 @Service("accountService")
 @Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
-public class AccountServiceImpl extends GenericPersistenceService implements AccountService {
+public class AccountServiceImpl extends GenericPersistenceService implements AccountService, BeanFactoryAware {
 
     private static final Log logger = LogFactory.getLog(AccountServiceImpl.class);
 
@@ -41,6 +47,17 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     @Autowired
     private UserSessionManager userSessionManager;
+
+    private PlatformTransactionManager transactionManager;
+    private DefaultTransactionDefinition transactionDefinition;
+
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) {
+        transactionManager = beanFactory.getBean("transactionManager", PlatformTransactionManager.class);
+        transactionDefinition = new DefaultTransactionDefinition();
+        transactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    }
 
     /**
      * This process creates a temporary subset of the account as if the account were being administered
@@ -330,7 +347,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return the account instance or null if the account does not exist
      */
     @Override
-    @Transactional(readOnly = false)
     public Account getOrCreateAccount(String userId) {
         Account account = getEntity(userId, Account.class);
         if (account == null) {
@@ -349,85 +365,97 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     private Account createAccount(Person person) {
 
-        // TODO - populate the missing fields
-        // TODO: figure out how to distinguish Delegate and DirectCharge account types
+        TransactionStatus transaction = transactionManager.getTransaction(transactionDefinition);
 
-        final String creatorId = "system";
-        final Date creationDate = new Date();
+        try {
 
-        Account account = new DirectChargeAccount();
-        account.setId(person.getPrincipalName());
-        account.setCreationDate(creationDate);
-        account.setAbleToAuthenticate(true);
-        account.setEntityId(person.getEntityId());
-        account.setKimAccount(true);
-        account.setCreditLimit(new BigDecimal(0.0));
+            // TODO - populate the missing fields
+            // TODO: figure out how to distinguish Delegate and DirectCharge account types
 
-        PersonName personName = new PersonName();
-        personName.setCreatorId(creatorId);
-        personName.setLastUpdate(creationDate);
-        personName.setDefault(true);
-        personName.setFirstName(person.getFirstName());
-        personName.setMiddleName(person.getMiddleName());
-        personName.setLastName(person.getLastName());
-        personName.setKimNameType(person.getEntityTypeCode());
-        personName.setDefault(true);
+            final String creatorId = "system";
+            final Date creationDate = new Date();
 
-        // Making PersonName persistent and generate ID
-        persistEntity(personName);
+            Account account = new DirectChargeAccount();
+            account.setId(person.getPrincipalName());
+            account.setCreationDate(creationDate);
+            account.setAbleToAuthenticate(true);
+            account.setEntityId(person.getEntityId());
+            account.setKimAccount(true);
+            account.setCreditLimit(new BigDecimal(0.0));
 
-        PostalAddress address = new PostalAddress();
-        address.setCreatorId(creatorId);
-        address.setLastUpdate(creationDate);
-        address.setDefault(true);
-        address.setPostalCode(person.getAddressPostalCode());
-        address.setCountry(person.getAddressCountryCode());
-        address.setState(person.getAddressStateProvinceCode());
-        address.setCity(person.getAddressCity());
-        address.setStreetAddress1(person.getAddressLine1());
-        address.setStreetAddress2(person.getAddressLine2());
-        address.setStreetAddress3(person.getAddressLine3());
+            PersonName personName = new PersonName();
+            personName.setCreatorId(creatorId);
+            personName.setLastUpdate(creationDate);
+            personName.setDefault(true);
+            personName.setFirstName(person.getFirstName());
+            personName.setMiddleName(person.getMiddleName());
+            personName.setLastName(person.getLastName());
+            personName.setKimNameType(person.getEntityTypeCode());
+            personName.setDefault(true);
 
-        // Making PostalAddress persistent and generate ID
-        persistEntity(address);
+            // Making PersonName persistent and generate ID
+            persistEntity(personName);
 
-        ElectronicContact electronicContact = new ElectronicContact();
-        electronicContact.setCreatorId(creatorId);
-        electronicContact.setLastUpdate(creationDate);
-        electronicContact.setDefault(true);
-        electronicContact.setEmailAddress(person.getEmailAddress());
-        electronicContact.setPhoneNumber(person.getPhoneNumber());
-        electronicContact.setPhoneCountry(person.getAddressCountryCode());
+            PostalAddress address = new PostalAddress();
+            address.setCreatorId(creatorId);
+            address.setLastUpdate(creationDate);
+            address.setDefault(true);
+            address.setPostalCode(person.getAddressPostalCode());
+            address.setCountry(person.getAddressCountryCode());
+            address.setState(person.getAddressStateProvinceCode());
+            address.setCity(person.getAddressCity());
+            address.setStreetAddress1(person.getAddressLine1());
+            address.setStreetAddress2(person.getAddressLine2());
+            address.setStreetAddress3(person.getAddressLine3());
 
-        // Making ElectronicContact persistent and generate ID
-        persistEntity(electronicContact);
+            // Making PostalAddress persistent and generate ID
+            persistEntity(address);
 
-        // Setting references to Account
-        account.setPersonNames(new HashSet<PersonName>(Arrays.asList(personName)));
-        account.setPostalAddresses(new HashSet<PostalAddress>(Arrays.asList(address)));
-        account.setElectronicContacts(new HashSet<ElectronicContact>(Arrays.asList(electronicContact)));
+            ElectronicContact electronicContact = new ElectronicContact();
+            electronicContact.setCreatorId(creatorId);
+            electronicContact.setLastUpdate(creationDate);
+            electronicContact.setDefault(true);
+            electronicContact.setEmailAddress(person.getEmailAddress());
+            electronicContact.setPhoneNumber(person.getPhoneNumber());
+            electronicContact.setPhoneCountry(person.getAddressCountryCode());
 
-        // "Account is in good standing" (Paul) ID = 1
-        AccountStatusType statusType = getEntity(1L, AccountStatusType.class);
-        if (statusType != null) {
-            account.setStatusType(statusType);
+            // Making ElectronicContact persistent and generate ID
+            persistEntity(electronicContact);
+
+            // Setting references to Account
+            account.setPersonNames(new HashSet<PersonName>(Arrays.asList(personName)));
+            account.setPostalAddresses(new HashSet<PostalAddress>(Arrays.asList(address)));
+            account.setElectronicContacts(new HashSet<ElectronicContact>(Arrays.asList(electronicContact)));
+
+            // "Account is in good standing" (Paul) ID = 1
+            AccountStatusType statusType = getEntity(1L, AccountStatusType.class);
+            if (statusType != null) {
+                account.setStatusType(statusType);
+            }
+
+            // Late Period with ID = 1
+            LatePeriod latePeriod = getEntity(1L, LatePeriod.class);
+            if (latePeriod != null) {
+                account.setLatePeriod(latePeriod);
+            }
+
+            // Making Account persistent
+            persistEntity(account);
+
+            // Linking PersonName, PostalAddress and ElectronicContact back to already persisted Account
+            personName.setAccount(account);
+            address.setAccount(account);
+            electronicContact.setAccount(account);
+
+            transactionManager.commit(transaction);
+
+            return account;
+
+        } catch (Throwable t) {
+            transactionManager.rollback(transaction);
+            logger.error(t.getMessage(), t);
+            throw new RuntimeException(t);
         }
-
-        // Late Period with ID = 1
-        LatePeriod latePeriod = getEntity(1L, LatePeriod.class);
-        if (latePeriod != null) {
-            account.setLatePeriod(latePeriod);
-        }
-
-        // Making Account persistent
-        persistEntity(account);
-
-        // Linking PersonName, PostalAddress and ElectronicContact back to already persisted Account
-        personName.setAccount(account);
-        address.setAccount(account);
-        electronicContact.setAccount(account);
-
-        return account;
 
     }
 
@@ -470,7 +498,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     /**
      * Creates and associates a new postal address object with the given Account ID.
      *
-     * @param userId     Account ID
+     * @param userId        Account ID
      * @param postalAddress Postal address
      * @return new PostalAddress instance with ID
      */
@@ -506,7 +534,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     /**
      * Creates and associates a new electronic contact with the given Account ID.
      *
-     * @param userId     Account ID
+     * @param userId            Account ID
      * @param electronicContact Electronic contact
      * @return new ElectronicContact instance with ID
      */

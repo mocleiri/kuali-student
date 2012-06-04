@@ -20,9 +20,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.1.1.RELEASE</spring.version>
-        <hibernate.version>4.1.2.Final</hibernate.version>
+        <hibernate.version>4.1.4.Final</hibernate.version>
         <jta.version>1.1</jta.version>
-        <atomikos.version>3.7.0</atomikos.version>
+        <atomikos.version>3.8.0</atomikos.version>
         <drools.version>5.4.0.Final</drools.version>
         <gwt.version>2.4.0</gwt.version>
         <gxt.version>2.2.5-gwt22</gxt.version>

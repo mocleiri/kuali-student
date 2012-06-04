@@ -4,6 +4,8 @@ import org.aopalliance.aop.Advice;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,9 @@ import java.util.List;
  * @author Michael Ivanov
  */
 @Service
-public class AopBeanPostProcessor implements BeanPostProcessor {
+public class AopBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
+
+    private BeanFactory beanFactory;
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -25,7 +29,7 @@ public class AopBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof AopProxy) {
-            List<Advice> advices = ((AopProxy) bean).getAdvices();
+            List<Advice> advices = ((AopProxy) bean).getAdvices(beanFactory);
             if (advices != null) {
                 Advised advised;
                 if (bean instanceof Advised) {
@@ -44,4 +48,8 @@ public class AopBeanPostProcessor implements BeanPostProcessor {
         return bean;
     }
 
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+         this.beanFactory = beanFactory;
+    }
 }

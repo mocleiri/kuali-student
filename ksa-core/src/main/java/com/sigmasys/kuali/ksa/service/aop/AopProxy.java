@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service.aop;
 
 import org.aopalliance.aop.Advice;
+import org.springframework.beans.factory.BeanFactory;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  */
 public interface AopProxy {
 
-    List<Advice> getAdvices();
+    List<Advice> getAdvices(BeanFactory beanFactory);
 
 }

@@ -8,6 +8,7 @@ import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.service.aop.LoggingInterceptor;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.aopalliance.aop.Advice;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,11 +48,13 @@ public class GenericPersistenceService implements AopProxy {
      * Adds AOP advice to the current instance.
      */
     @Override
-    public List<Advice> getAdvices() {
+    public List<Advice> getAdvices(BeanFactory beanFactory) {
         LinkedList<Advice> advices = new LinkedList<Advice>();
         if (Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
             // Setting up the logging interceptor
-            advices.add(new LoggingInterceptor(this));
+            LoggingInterceptor loggingInterceptor = beanFactory.getBean(LoggingInterceptor.class);
+            loggingInterceptor.setTargetObject(this);
+            advices.add(loggingInterceptor);
         }
         return advices;
     }

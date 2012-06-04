@@ -4,6 +4,10 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 
@@ -12,6 +16,9 @@ import java.lang.reflect.Method;
  *
  * @author Michael Ivanov
  */
+@Service
+@Transactional
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class LoggingInterceptor implements MethodInterceptor {
 
     private final Log logger = LogFactory.getLog(getClass());
@@ -34,9 +41,8 @@ public class LoggingInterceptor implements MethodInterceptor {
         Method targetMethod = invocation.getMethod();
         for (Method method : targetObject.getClass().getMethods()) {
             if (methodsMatch(targetMethod, method)) {
-                Object result = invocation.proceed();
                 log(invocation);
-                return result;
+                break;
             }
         }
         return invocation.proceed();
