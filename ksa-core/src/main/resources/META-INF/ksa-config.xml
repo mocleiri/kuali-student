@@ -18,7 +18,7 @@
     <param name="ksb.mode">LOCAL</param>
     <param name="kr.mode">LOCAL</param>
     <param name="ken.mode">LOCAL</param>
-    <param name="kew.mode">EMBEDDED</param>
+    <param name="kew.mode">LOCAL</param>
     <param name="kim.mode">EMBEDDED</param>
 
     <!-- UserTransaction properties -->
