@@ -20,10 +20,10 @@
     <param name="kr.mode">LOCAL</param>
     <param name="ken.mode">LOCAL</param>
     <param name="kew.mode">LOCAL</param>
-    <param name="kim.mode">EMBEDDED</param>
+    <param name="kim.mode">LOCAL</param>
 
-    <!-- Configuring additional Spring beans for UI -->
-    <param name="rice.kim.additionalSpringFiles">classpath:org/kuali/rice/kim/impl/config/KimWebSpringBeans.xml</param>
+    <param name="rice.kew.jpa.enabled">true</param>
+    <param name="rice.kim.jpa.enabled">true</param>
 
     <!-- UserTransaction properties -->
     <param name="transaction.timeout">300</param>

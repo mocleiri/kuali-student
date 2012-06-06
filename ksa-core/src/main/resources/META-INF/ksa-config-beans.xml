@@ -56,7 +56,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="kimConfigurer" class="org.kuali.rice.kim.config.KIMConfigurer" depends-on="kradConfigurer"/>
 
     <bean id="coreServiceConfigurer" class="org.kuali.rice.coreservice.impl.config.CoreServiceConfigurer"
-              depends-on="kimConfigurer"/>
+          depends-on="kimConfigurer"/>
 
     <bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="coreServiceConfigurer"/>
 
