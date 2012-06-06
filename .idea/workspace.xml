@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/KSA_Tomcat_7.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/KSA_Tomcat_7.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/ksa-core.iml" afterPath="$PROJECT_DIR$/ksa-core/ksa-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/krad-beans.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/krad-beans.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/UserSessionManager.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/UserSessionManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/UserSessionManagerImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/UserSessionManagerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/servlet/CoreFilter.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/servlet/CoreFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-beans.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-beans.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-context.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-context.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/struts-config.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/struts-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/portal.jsp" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/portal.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/log4j.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml" />
     </list>
     <ignored path="ksa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,91 +99,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ksa-config.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml">
+      <file leaf-file-name="AopUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/support/AopUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="0" selection-start="912" selection-end="912" vertical-scroll-proportion="0.0">
+            <state line="317" column="0" selection-start="11952" selection-end="11952" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="struts-config.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/struts-config.xml">
+      <file leaf-file-name="ReflectiveMethodInvocation.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="42" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0">
+            <state line="171" column="0" selection-start="5985" selection-end="5985" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="immutableBar.tag" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/tags/rice-portal/immutableBar.tag">
+      <file leaf-file-name="JdkDynamicAopProxy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/JdkDynamicAopProxy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="54" selection-start="753" selection-end="753" vertical-scroll-proportion="-0.46153846">
+            <state line="201" column="0" selection-start="7545" selection-end="7545" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="portal.jsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/portal.jsp">
+      <file leaf-file-name="SessionDocumentServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.1.0/rice-impl-2.1.0-sources.jar!/org/kuali/rice/kns/service/impl/SessionDocumentServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="45" selection-start="736" selection-end="736" vertical-scroll-proportion="0.65789473">
+            <state line="259" column="57" selection-start="10728" selection-end="10728" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="riceTldHeader.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/rice-portal/jsp/sys/riceTldHeader.jsp">
+      <file leaf-file-name="UserSession.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-app-framework/2.1.0/rice-krad-app-framework-2.1.0-sources.jar!/org/kuali/rice/krad/UserSession.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="41" selection-start="671" selection-end="671" vertical-scroll-proportion="-11.115385">
+            <state line="36" column="69" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tldHeader.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/kr/WEB-INF/jsp/tldHeader.jsp">
+      <file leaf-file-name="CoreFilter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/servlet/CoreFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="162" column="96" selection-start="6257" selection-end="6257" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/index.jsp">
+      <file leaf-file-name="HttpSession.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/google/gwt/gwt-user/2.4.0/gwt-user-2.4.0.jar!/javax/servlet/http/HttpSession.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="9" column="21" selection-start="234" selection-end="234" vertical-scroll-proportion="-5.44">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KualiPropertyMessageResourcesFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.1.0/rice-impl-2.1.0-sources.jar!/org/kuali/rice/kns/web/struts/action/KualiPropertyMessageResourcesFactory.java">
+      <file leaf-file-name="UserSessionManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/UserSessionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="36" selection-start="1988" selection-end="1988" vertical-scroll-proportion="0.0">
+            <state line="17" column="24" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KRADConstants.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-app-framework/2.1.0/rice-krad-app-framework-2.1.0-sources.jar!/org/kuali/rice/krad/util/KRADConstants.java">
+      <file leaf-file-name="UserSessionManagerImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/UserSessionManagerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="31" selection-start="7688" selection-end="7688" vertical-scroll-proportion="0.0">
+            <state line="35" column="95" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.5013477">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="identityManagementRoleDocument.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/jsp/identityManagementRoleDocument.jsp">
+      <file leaf-file-name="TransactionInterceptor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/3.1.1.RELEASE/spring-tx-3.1.1.RELEASE-sources.jar!/org/springframework/transaction/interceptor/TransactionInterceptor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="4.0384617">
+            <state line="109" column="0" selection-start="4688" selection-end="4688" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -204,15 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/CurrencyListView.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jta/AtomikosDataSourceBean.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/jta.properties" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/sql/rice-impex-client-bootstrap-data.sql" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Account.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
@@ -222,9 +211,18 @@
         <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/krad-beans.xml" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-context.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/portal.jsp" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/struts-config.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CryptUtils.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-beans.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/rice-beans.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/UserSessionManager.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/UserSessionManagerImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/servlet/CoreFilter.java" />
       </list>
     </option>
   </component>
@@ -837,6 +835,124 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -948,11 +1064,11 @@
       <recent name="com.sigmasys.kuali.ksa.servlet" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\ksa\ksa-core\src\main\resources\META-INF" />
       <recent name="$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad" />
       <recent name="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF" />
       <recent name="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF" />
       <recent name="$PROJECT_DIR$/.idea" />
-      <recent name="$PROJECT_DIR$/ksa-core/src/main/resources" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.KSA Tomcat 7">
@@ -1480,7 +1596,11 @@
       <created>1339008418103</created>
       <updated>1339008418103</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Configured Kuali Location service, changed the Struts action mapping and the KSA config files">
+      <created>1339015037117</created>
+      <updated>1339015037117</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1513,7 +1633,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280363" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30341464" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46424517" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20097561" sideWeight="0.49839744" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2021104" sideWeight="0.323496" order="2" side_tool="true" content_ui="tabs" />
@@ -1523,10 +1643,10 @@
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16558442" sideWeight="0.63564134" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16558442" sideWeight="0.50964814" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33035713" sideWeight="0.63564134" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3643587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16720779" sideWeight="0.50964814" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4903519" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26197457" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1574,7 +1694,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected Tomcat config settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Configured Kuali Location service, changed the Struts action mapping and the KSA config files" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1587,7 +1707,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="added &quot;readOnly&quot;" />
     <MESSAGE value="Updated JPA mapping, provided lengths" />
     <MESSAGE value="Moved Dave's stuff to temp package" />
     <MESSAGE value="Replaced &quot;REM&quot; with &quot;--&quot;" />
@@ -1612,6 +1731,7 @@
     <MESSAGE value="fixed Maven dependencies to get rid of conflicting jar-files, included istack-runtime environment (needed by JAX WS)" />
     <MESSAGE value="Fixed the JTA transaction configuration, configured KEW  Spring beans (used by KIM UI), fixed the Spring's bean initialization order, fixed the Maven dependencies to get rid of conflicting jar-files, included istack-runtime environment (needed by JAX WS)" />
     <MESSAGE value="Corrected Tomcat config settings" />
+    <MESSAGE value="Configured Kuali Location service, changed the Struts action mapping and the KSA config files" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1655,83 +1775,26 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ksa-core/pom.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-core-api/2.1.0/rice-core-api-2.1.0-sources.jar!/org/kuali/rice/core/api/CoreConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="28" column="35" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-location-framework/2.1.0/rice-location-framework-2.1.0-sources.jar!/org/kuali/rice/location/framework/campus/CampusValuesFinder.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-core-api/2.1.0/rice-core-api-2.1.0-sources.jar!/org/kuali/rice/core/api/CoreApiServiceLocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="75" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.0">
+        <state line="48" column="53" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-location-api/2.1.0/rice-location-api-2.1.0-sources.jar!/org/kuali/rice/location/api/services/LocationApiServiceLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="77" selection-start="1515" selection-end="1515" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-location-impl/2.1.0/rice-location-impl-2.1.0.jar!/org/kuali/rice/location/impl/config/LocationConfigurer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="31" selection-start="173" selection-end="191" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#422#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-location-api/2.1.0/rice-location-api-2.1.0-sources.jar!/org/kuali/rice/location/api/LocationConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="35" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-location-impl/2.1.0/rice-location-impl-2.1.0-sources.jar!/org/kuali/rice/location/impl/config/LocationConfigurer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="41" selection-start="630" selection-end="665" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="40" selection-start="1055" selection-end="1055" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml">
       <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="11" selection-start="1446" selection-end="1446" vertical-scroll-proportion="-2.4">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="77" selection-start="1140" selection-end="1140" vertical-scroll-proportion="-8.688889">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/krad-beans.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="78" selection-start="2832" selection-end="2832" vertical-scroll-proportion="-2.4">
+        <state line="103" column="43" selection-start="5207" selection-end="5207" vertical-scroll-proportion="-11.5">
           <folding />
         </state>
       </provider>
@@ -1741,77 +1804,140 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="58" selection-start="805" selection-end="805" vertical-scroll-proportion="-4.911111">
+        <state line="6" column="75" selection-start="429" selection-end="429" vertical-scroll-proportion="-2.2666667">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.1.0/rice-impl-2.1.0-sources.jar!/org/kuali/rice/kns/web/struts/action/KualiPropertyMessageResourcesFactory.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="36" selection-start="1988" selection-end="1988" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-app-framework/2.1.0/rice-krad-app-framework-2.1.0-sources.jar!/org/kuali/rice/krad/util/KRADConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="31" selection-start="7688" selection-end="7688" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/jsp/identityManagementRoleDocument.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="4.0384617">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/rice-portal/jsp/sys/riceTldHeader.jsp">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-beans.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="41" selection-start="671" selection-end="671" vertical-scroll-proportion="-11.115385">
+        <state line="78" column="0" selection-start="4011" selection-end="4011" vertical-scroll-proportion="-8.777778">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/kr/WEB-INF/jsp/tldHeader.jsp">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/rice-beans.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="7" column="114" selection-start="455" selection-end="455" vertical-scroll-proportion="-2.6444445">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="912" selection-end="912" vertical-scroll-proportion="0.0">
+        <state line="19" column="59" selection-start="636" selection-end="636" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/kim/WEB-INF/struts-config.xml">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="42" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0">
+        <state line="33" column="56" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.1.0/rice-impl-2.1.0-sources.jar!/org/kuali/rice/krad/service/impl/BusinessObjectServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="0" selection-start="2932" selection-end="2932" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/tags/rice-portal/immutableBar.tag">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/support/AopUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="54" selection-start="753" selection-end="753" vertical-scroll-proportion="-0.46153846">
+        <state line="317" column="0" selection-start="11952" selection-end="11952" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/portal.jsp">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/3.1.1.RELEASE/spring-tx-3.1.1.RELEASE-sources.jar!/org/springframework/transaction/interceptor/TransactionInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="45" selection-start="736" selection-end="736" vertical-scroll-proportion="0.65789473">
+        <state line="109" column="0" selection-start="4688" selection-end="4688" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="0" selection-start="5985" selection-end="5985" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/JdkDynamicAopProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="201" column="0" selection-start="7545" selection-end="7545" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/UserSessionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="24" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/gwt/gwt-user/2.4.0/gwt-user-2.4.0.jar!/javax/servlet/http/HttpSession.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="21" selection-start="234" selection-end="234" vertical-scroll-proportion="-5.44">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/servlet/CoreFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="162" column="96" selection-start="6257" selection-end="6257" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.1.0/rice-impl-2.1.0-sources.jar!/org/kuali/rice/kns/service/impl/SessionDocumentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="259" column="57" selection-start="10728" selection-end="10728" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-app-framework/2.1.0/rice-krad-app-framework-2.1.0-sources.jar!/org/kuali/rice/krad/UserSession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="69" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/UserSessionManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="95" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.5013477">
           <folding />
         </state>
       </provider>

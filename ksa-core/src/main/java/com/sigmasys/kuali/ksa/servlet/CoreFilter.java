@@ -19,6 +19,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -144,7 +145,7 @@ public class CoreFilter implements Filter {
                     if (principal != null) {
 
                         // Creating HTTP session
-                        sessionManager.createSession(request, response, userId);
+                        final HttpSession session = sessionManager.createSession(request, response, userId);
 
                         // wrap the request with the remote user
                         // UserLoginFilter and WebAuthenticationService will create the session
@@ -157,6 +158,12 @@ public class CoreFilter implements Filter {
 
                         // Creating KRAD UserSession and put it as an attribute into HTTP session
                         UserSession userSession = new UserSession(userId) {
+
+                            @Override
+                            public String getKualiSessionId() {
+                                return session.getId();
+                            }
+
                             @Override
                             protected void initPerson(String principalName) {
                                 try {

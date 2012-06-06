@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public interface UserSessionManager {
 
@@ -12,8 +13,9 @@ public interface UserSessionManager {
      * @param request    the HTTP request
      * @param response   the HTTP response
      * @param userId     the User ID
+     * @return a new HTTPSession
      */
-    void createSession(HttpServletRequest request, HttpServletResponse response, String userId);
+    HttpSession createSession(HttpServletRequest request, HttpServletResponse response, String userId);
 
     /**
      * Destroys the current HTTP session

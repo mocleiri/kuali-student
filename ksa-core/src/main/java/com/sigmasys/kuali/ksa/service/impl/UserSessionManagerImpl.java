@@ -30,14 +30,15 @@ public class UserSessionManagerImpl implements UserSessionManager {
      * @param request  the HTTP request
      * @param response the HTTP response
      * @param userId   the User ID
+     * @return a new HTTP Session
      */
     @Transactional
-    public void createSession(HttpServletRequest request,
-                              HttpServletResponse response, String userId) {
+    public HttpSession createSession(HttpServletRequest request, HttpServletResponse response, String userId) {
         HttpSession session = request.getSession(true);
         // Storing user ID in the session
         session.setAttribute(USER_ID, userId);
         logger.info("Creating session for user Id: " + userId);
+        return session;
     }
 
     /**
