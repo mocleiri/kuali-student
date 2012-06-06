@@ -103,13 +103,13 @@
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>classpath:org/kuali/rice/krad/ApplicationResources</value>
-                <value>classpath:org/kuali/rice/krad/KRAD-ApplicationResources</value>
-                <value>classpath:org/kuali/rice/kim/ApplicationResources</value>
-                <value>classpath:org/kuali/rice/ksb/ApplicationResources</value>
-                <value>classpath:org/kuali/rice/kew/ApplicationResources</value>
-                <value>classpath:org/kuali/rice/core/web/cache/CacheApplicationResources</value>
-                <value>classpath:org/kuali/rice/krms/ApplicationResources</value>
+                <value>org/kuali/rice/krad/ApplicationResources</value>
+                <value>org/kuali/rice/krad/KRAD-ApplicationResources</value>
+                <value>org/kuali/rice/kim/ApplicationResources</value>
+                <value>org/kuali/rice/ksb/ApplicationResources</value>
+                <value>org/kuali/rice/kew/ApplicationResources</value>
+                <value>org/kuali/rice/core/web/cache/CacheApplicationResources</value>
+                <value>org/kuali/rice/krms/ApplicationResources</value>
             </list>
         </property>
     </bean>
