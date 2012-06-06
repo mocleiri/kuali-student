@@ -70,7 +70,7 @@
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method>
-      <option name="BuildArtifacts" enabled="false">
+      <option name="BuildArtifacts" enabled="true">
         <artifact name="ksa-core:war exploded" />
       </option>
     </method>
