@@ -231,6 +231,9 @@
     <!--<param name="css.files" override="true">${css.files}</param>-->
     <!--<param name="javascript.files" override="true">${javascript.files}</param>-->
 
+    <!--R-->
+    <param name="courseSearchBaseUrl">${application.url}</param>
+
 
     <param name="ks.institutional.context">classpath:uw-override-context.xml</param>
 </config>

@@ -15,7 +15,7 @@
     <bean name="springRouter" class="org.restlet.ext.spring.SpringBeanRouter"/>
 
     <!-- Define all the routes -->
-    <bean name="/course" class="edu.uw.kuali.student.service.rest.impl.CourseSearchRestServiceImpl" scope="prototype"
+    <bean name="/course/{queryText}/{termParam}/{campusParam}" class="edu.uw.kuali.student.service.rest.impl.CourseSearchRestServiceImpl" scope="prototype"
           autowire="byName"/>
 
 </beans>
