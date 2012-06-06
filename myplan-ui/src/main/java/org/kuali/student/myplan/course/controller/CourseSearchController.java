@@ -271,6 +271,36 @@ public class CourseSearchController extends UifControllerBase {
         return credit;
     }
 
+    public CourseSearchForm courseSearch(CourseSearchForm form, String studentId) {
+        try {
+            List<SearchRequest> requests = searcher.queryToRequests(form);
+            List<Hit> hits = processSearchRequests(requests);
+            List<CourseSearchItem> courseList = new ArrayList<CourseSearchItem>();
+            Map<String, CourseSearchItem.PlanState> courseStatusMap = getCourseStatusMap(studentId);
+            for (Hit hit : hits) {
+                CourseSearchItem course = getCourseInfo(hit.courseID);
+                if (isCourseOffered(form, course)) {
+                    loadScheduledTerms(course);
+                    loadTermsOffered(course);
+                    loadGenEduReqs(course);
+                    String courseId = course.getCourseId();
+                    if (courseStatusMap.containsKey(courseId)) {
+                        course.setStatus(courseStatusMap.get(courseId));
+                    }
+                    courseList.add(course);
+                    if (courseList.size() >= MAX_HITS) {
+                        break;
+                    }
+                }
+            }
+            form.setCourseSearchResults(courseList);
+            return form;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     @RequestMapping(params = "methodToCall=searchForCourses")
     public ModelAndView searchForCourses(@ModelAttribute("KualiForm") CourseSearchForm form, BindingResult result,
@@ -282,16 +312,18 @@ public class CourseSearchController extends UifControllerBase {
             List<Hit> hits = processSearchRequests(requests);
             logger.info("No of actual records pulled in:" + hits.size());
             List<CourseSearchItem> courseList = new ArrayList<CourseSearchItem>();
-
-            Set<String> savedCourseSet = getSavedCourseSet();
+            Person user = GlobalVariables.getUserSession().getPerson();
+            String studentID = user.getPrincipalId();
+            Map<String, CourseSearchItem.PlanState> courseStatusMap = getCourseStatusMap(studentID);
             for (Hit hit : hits) {
                 CourseSearchItem course = getCourseInfo(hit.courseID);
                 if (isCourseOffered(form, course)) {
                     loadScheduledTerms(course);
                     loadTermsOffered(course);
                     loadGenEduReqs(course);
-                    if (savedCourseSet.contains(course.getCourseId())) {
-                        course.setStatus(CourseSearchItem.PlanState.SAVED);
+                    String courseId = course.getCourseId();
+                    if (courseStatusMap.containsKey(courseId)) {
+                        course.setStatus(courseStatusMap.get(courseId));
                     }
 
                     courseList.add(course);
@@ -466,6 +498,44 @@ public class CourseSearchController extends UifControllerBase {
         this.academicPlanService = academicPlanService;
     }
 
+    private Map<String, CourseSearchItem.PlanState> getCourseStatusMap(String studentID) throws Exception {
+        logger.info("Start of method getCourseStatusMap of CourseSearchController:" + System.currentTimeMillis());
+        AcademicPlanService academicPlanService = getAcademicPlanService();
+
+
+        ContextInfo context = new ContextInfo();
+
+
+        String planTypeKey = AcademicPlanServiceConstants.LEARNING_PLAN_TYPE_PLAN;
+
+        Map<String, CourseSearchItem.PlanState> savedCourseSet = new HashMap<String, CourseSearchItem.PlanState>();
+
+        /*
+         *  For each plan item in each plan set the state based on the type.
+         */
+        List<LearningPlanInfo> learningPlanList = academicPlanService.getLearningPlansForStudentByType(studentID, planTypeKey, context);
+        for (LearningPlan learningPlan : learningPlanList) {
+            String learningPlanID = learningPlan.getId();
+            List<PlanItemInfo> planItemList = academicPlanService.getPlanItemsInPlan(learningPlanID, context);
+            for (PlanItem planItem : planItemList) {
+                String courseID = planItem.getRefObjectId();
+                CourseSearchItem.PlanState state;
+                if (planItem.getTypeKey().equals(PlanConstants.LEARNING_PLAN_ITEM_TYPE_WISHLIST)) {
+                    state = CourseSearchItem.PlanState.SAVED;
+                } else if (planItem.getTypeKey().equals(PlanConstants.LEARNING_PLAN_ITEM_TYPE_PLANNED)
+                        || planItem.getTypeKey().equals(PlanConstants.LEARNING_PLAN_ITEM_TYPE_BACKUP)) {
+                    state = CourseSearchItem.PlanState.IN_PLAN;
+                } else {
+                    throw new RuntimeException("Unknown plan item type.");
+                }
+                savedCourseSet.put(courseID, state);
+            }
+        }
+        logger.info("End of method getCourseStatusMap of CourseSearchController:" + System.currentTimeMillis());
+        return savedCourseSet;
+    }
+
+
     private Set<String> getSavedCourseSet() throws Exception {
         logger.info("Start of method getSavedCourseSet of CourseSearchController:" + System.currentTimeMillis());
         AcademicPlanService academicPlanService = getAcademicPlanService();
@@ -543,7 +613,7 @@ public class CourseSearchController extends UifControllerBase {
             creditsFacet.process(course);
             termsFacet.process(course);
         }
-         /*Removing Duplicate entries from genEduReqFacet*/
+        /*Removing Duplicate entries from genEduReqFacet*/
         List<FacetItem> genEduReqFacetItems = new ArrayList<FacetItem>();
         for (FacetItem facetItem : genEduReqFacet.getFacetItems()) {
             boolean itemExists = false;
