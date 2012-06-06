@@ -129,7 +129,7 @@ public class CoreFilter implements Filter {
                 if (userId != null) {
 
                     // Very simple password checking. Nothing hashed or encrypted.
-                    IdentityService identityService = KimApiServiceLocator.getIdentityService();
+                    final IdentityService identityService = KimApiServiceLocator.getIdentityService();
                     if (identityService == null) {
                         Exception e = new IllegalStateException("IdentityService is null");
                         logger.error(e.getMessage(), e);
@@ -160,7 +160,7 @@ public class CoreFilter implements Filter {
                             @Override
                             protected void initPerson(String principalName) {
                                 try {
-                                    final PersonService personService = ContextUtils.getBean(PersonService.class);
+                                    final PersonService personService = KimApiServiceLocator.getPersonService();
                                     Field field = UserSession.class.getDeclaredField("person");
                                     field.setAccessible(true);
                                     field.set(this, personService.getPerson(userId));
