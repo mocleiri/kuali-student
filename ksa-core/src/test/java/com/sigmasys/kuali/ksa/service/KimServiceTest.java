@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.sigmasys.kuali.ksa.util.ContextUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -11,6 +10,7 @@ import org.kuali.rice.kim.api.identity.AuthenticationService;
 import org.kuali.rice.kim.api.identity.IdentityService;
 
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
+import org.kuali.rice.kim.impl.identity.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -36,11 +36,11 @@ public class KimServiceTest extends AbstractServiceTest {
 
         Assert.notNull(request);
 
-        IdentityService service = ContextUtils.getBean("kimIdentityService", IdentityService.class);
+        //IdentityService service = ContextUtils.getBean("kimIdentityService", IdentityService.class);
 
-        Assert.notNull(service);
+        //Assert.notNull(service);
 
-        service = KimApiServiceLocator.getIdentityService();
+        IdentityService service = KimApiServiceLocator.getIdentityService();
 
         Assert.notNull(service);
 
@@ -57,7 +57,8 @@ public class KimServiceTest extends AbstractServiceTest {
 
         Assert.notNull(userId);
 
-        AuthenticationService service = ContextUtils.getBean("kimAuthenticationService", AuthenticationService.class);
+        AuthenticationService service = new AuthenticationServiceImpl();
+        // ContextUtils.getBean("kimAuthenticationService", AuthenticationService.class);
 
         userId = service.getPrincipalName(request);
 

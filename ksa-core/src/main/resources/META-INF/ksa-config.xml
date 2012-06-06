@@ -14,12 +14,16 @@
 
     <!-- Modes -->
     <param name="core.mode">LOCAL</param>
+    <param name="coreservice.mode">LOCAL</param>
     <param name="ksa.mode">LOCAL</param>
     <param name="ksb.mode">LOCAL</param>
     <param name="kr.mode">LOCAL</param>
     <param name="ken.mode">LOCAL</param>
     <param name="kew.mode">LOCAL</param>
     <param name="kim.mode">EMBEDDED</param>
+
+    <!-- Configuring additional Spring beans for UI -->
+    <param name="rice.kim.additionalSpringFiles">classpath:org/kuali/rice/kim/impl/config/KimWebSpringBeans.xml</param>
 
     <!-- UserTransaction properties -->
     <param name="transaction.timeout">300</param>
@@ -40,6 +44,5 @@
     <!--	<param name="ksb.org.quartz.jobStore.isClustered">true</param>-->
     <param name="ksb.org.quartz.threadPool.threadCount">1</param>
     <param name="ksb.org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</param>
-
 
 </config>

@@ -212,6 +212,10 @@
                     <artifactId>jaxws-rt</artifactId>
                     <groupId>com.sun.xml.ws</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>stax2-api</artifactId>
+                    <groupId>org.codehaus.woodstox</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -249,12 +253,12 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <artifactId>servlet-api</artifactId>
             <groupId>javax.servlet</groupId>
             <version>2.5</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency-->
 
         <!--dependency>
             <groupId>javax.persistence</groupId>
@@ -845,6 +849,10 @@
                     <artifactId>cxf-rt-bindings-xml</artifactId>
                     <groupId>org.apache.cxf</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>jstl-impl</artifactId>
+                    <groupId>org.glassfish.web</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -1203,6 +1211,10 @@
                     <artifactId>cxf-rt-bindings-xml</artifactId>
                     <groupId>org.apache.cxf</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>jstl-impl</artifactId>
+                    <groupId>org.glassfish.web</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -1228,6 +1240,12 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>javax.servlet</groupId>
+        	<artifactId>jstl</artifactId>
+        	<version>1.2</version>
         </dependency>
 
     </dependencies>

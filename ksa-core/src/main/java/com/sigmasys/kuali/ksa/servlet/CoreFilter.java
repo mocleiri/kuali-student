@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.IdentityService;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.identity.principal.Principal;
+import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.krad.UserSession;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.KRADUtils;
@@ -128,7 +129,13 @@ public class CoreFilter implements Filter {
                 if (userId != null) {
 
                     // Very simple password checking. Nothing hashed or encrypted.
-                    IdentityService identityService = ContextUtils.getBean("kimIdentityService", IdentityService.class);
+                    IdentityService identityService = KimApiServiceLocator.getIdentityService();
+                    if (identityService == null) {
+                        Exception e = new IllegalStateException("IdentityService is null");
+                        logger.error(e.getMessage(), e);
+                        throw e;
+                    }
+
                     final Principal principal =
                             isTrustedUrl(request) ?
                                     identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
