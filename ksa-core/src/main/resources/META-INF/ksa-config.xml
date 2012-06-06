@@ -21,6 +21,7 @@
     <param name="ken.mode">LOCAL</param>
     <param name="kew.mode">LOCAL</param>
     <param name="kim.mode">LOCAL</param>
+    <param name="location.mode">LOCAL</param>
 
     <param name="rice.kew.jpa.enabled">true</param>
     <param name="rice.kim.jpa.enabled">true</param>

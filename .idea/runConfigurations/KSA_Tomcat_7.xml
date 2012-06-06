@@ -4,7 +4,6 @@
     <option name="COMMON_VM_ARGUMENTS" value="-mx768m -ms256m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m" />
     <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
     <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
-    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
       <artifact name="ksa-core:war exploded">
         <settings>

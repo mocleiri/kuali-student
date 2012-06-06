@@ -60,7 +60,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean id="kewConfigurer" class="org.kuali.rice.kew.config.KEWConfigurer" depends-on="coreServiceConfigurer"/>
 
-    <bean id="ksaConfigurer" class="com.sigmasys.kuali.ksa.config.KsaConfigurer" depends-on="kewConfigurer">
+    <bean id="locationConfigurer" class="org.kuali.rice.location.impl.config.LocationConfigurer"
+          depends-on="kewConfigurer"/>
+
+    <bean id="ksaConfigurer" class="com.sigmasys.kuali.ksa.config.KsaConfigurer" depends-on="locationConfigurer">
         <property name="dataDictionaryPackages">
             <list>
                 <value>classpath:com/sigmasys/kuali/ksa/krad</value>

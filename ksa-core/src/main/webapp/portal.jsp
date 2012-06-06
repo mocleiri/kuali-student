@@ -20,8 +20,7 @@
 //need to change path of the included file 
 %>
 
-<portal:portalTop />
-<portal:portalTabs selectedTab="${sessionScope.selectedTab}" />
-<portal:portalBody selectedTab="${sessionScope.selectedTab}"
-	channelTitle="${param.channelTitle}" channelUrl="${gotoUrl}" />
-<portal:portalBottom />
+<%
+    String redirectUrl = "kim/index.jsp";
+    response.sendRedirect(redirectUrl);
+%>

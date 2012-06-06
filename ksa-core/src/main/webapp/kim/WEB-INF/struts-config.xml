@@ -60,12 +60,12 @@
 		<!--  Required KNS Action Mappings -->
 		<action path="/portal" name="KualiForm"
 			type="org.kuali.rice.kns.web.struts.action.KualiPortalAction">
-			<forward name="basic" path="/portal.jsp" />
+			<forward name="basic" path="/WEB-INF/index.jsp" />
 		</action>
 
 		<action path="/index" name="KualiForm"
 			type="org.kuali.rice.kns.web.struts.action.KualiSimpleAction">
-			<forward name="basic" path="/portal.jsp" />
+			<forward name="basic" path="/WEB-INF/index.jsp" />
 		</action>
 		
 		<action path="/updateTextArea" name="KualiForm" type="org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase">
@@ -103,4 +103,5 @@
 
     <controller processorClass="org.kuali.rice.kns.web.struts.action.KualiRequestProcessor" />
     <message-resources factory="org.kuali.rice.kns.web.struts.action.KualiPropertyMessageResourcesFactory" parameter="" />
+
 </struts-config>
