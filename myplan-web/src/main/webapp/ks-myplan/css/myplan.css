@@ -242,10 +242,10 @@ button.myplan-button-transparent:hover {
 .myplan-carousel-list > .uif-headerField .uif-header {
     text-align: center;
 }
-.myplan-carousel-list > div[id$='_group'] {
+.myplan-carousel-list {
     overflow: hidden;
 }
-.myplan-carousel-list > div[id$='_group'] ul {
+.myplan-carousel-list ul {
     width: 20000em;
 }
 .myplan-carousel-list ul,
@@ -258,32 +258,36 @@ button.myplan-button-transparent:hover {
     float:left;
 }
 .myplan-carousel-list ul li > .uif-group {
-    border:solid 1px #ccc;
+    border:solid 1px #d6d6d6;
     width: 160px;
     margin: 0 10px;
     border-radius: 4px;
+    background: url(../images/bkgrdDotted.gif);
 }
 .myplan-carousel-list ul li .uif-group .uif-groupHeader {
     display:block;
     white-space:nowrap;
     text-align:center;
-    background:#ccc;
+    background:#d6d6d6;
     font-weight:bold;
-    padding:5px 0px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 4px 4px 0px 0px;
+}
+.myplan-carousel-list ul li .uif-group .uif-groupHeader.myplan-term-past {
+    color: #fff;
+}
+.myplan-carousel-list ul li .uif-group .uif-groupHeader.myplan-term-current {
+    background-color: #797979;
+    color: #fff;
 }
 .myplan-carousel-list ul li .uif-group .uif-stackedCollectionLayout {
     overflow: hidden;
-    background: url(../images/bkgrdDotted.gif);
+    background: none;
+    padding: 0px;
 }
-.myplan-carousel-list ul li .myplan-carousel-term.myplan-term-completed .uif-stackedCollectionLayout {
-    height: 27px;
-    overflow: hidden;
-}
-.myplan-carousel-list ul li .myplan-carousel-term.myplan-term-planned .uif-stackedCollectionLayout {
+.myplan-carousel-list ul li .myplan-carousel-term.myplan-term-fixed-height .uif-stackedCollectionLayout {
     height: 208px;
-}
-.myplan-carousel-list ul li .myplan-carousel-term.myplan-term-backup .uif-stackedCollectionLayout {
-    height: 52px;
 }
 .myplan-carousel-list ul li .uif-group .uif-stackedCollectionLayout .uif-collectionItem,
 .myplan-carousel-list ul li .myplan-carousel-term .uif-headerField .uif-header {
@@ -296,7 +300,7 @@ button.myplan-button-transparent:hover {
     height: 25px;
     line-height: 25px;
 }
-.myplan-carousel-list ul li .myplan-carousel-term .uif-headerField .uif-header {
+.myplan-carousel-list ul li .myplan-carousel-term h6.uif-headerText {
     color: #aaa;
     font-weight: normal;
     text-transform: uppercase;
@@ -315,7 +319,6 @@ button.myplan-button-transparent:hover {
 }
 .myplan-backup-link {
     font-size:90%;
-    background: url(../images/bkgrdDotted.gif);
     padding: 0 5px;
     height: 25px;
     line-height: 25px;

@@ -894,7 +894,8 @@
             <list>
                 <bean p:id="@{#line.courseId}_completed" parent="Uif-LinkField"
                       p:linkText="@{#line.courseCode} (@{#line.credit}) @{#line.grade}"
-                      p:label="@{#line.courseTitle}" p:target="" p:href="#"
+                      p:target="" p:href="#"
+                      p:fieldLabel.render="false"
                       p:render="@{#line.courseCode ne null and #line.courseId ne null ? true : false}"
                       p:onClickScript="openPopUp('@{#line.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseId}',acadRecAtpId:'@{#line.atpId}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
                         />
@@ -944,7 +945,7 @@
             <list>
                 <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-LinkField"
                       p:linkText="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"
-                      p:label="@{#line.courseDetails.courseTitle}" p:target="" p:href="#"
+                      p:fieldLabel.render="false" p:target="" p:href="#"
                       p:onClickScript="openPopUp('@{#line.courseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseDetails.courseId}',dateAdded:'@{#line.planItemDataObject.dateAdded}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
                       p:render="@{#line.courseDetails.code ne null ? true : false}"/>
             </list>
@@ -1005,7 +1006,7 @@
             <list>
                 <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-LinkField"
                       p:linkText="@{#line.CourseDetails.code} (@{#line.CourseDetails.credit})"
-                      p:label="@{#line.CourseDetails.courseTitle}" p:target="" p:href="#"
+                      p:fieldLabel.render="false" p:target="" p:href="#"
                       p:onClickScript="openPopUp('@{#line.CourseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.CourseDetails.courseId}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
                       p:render="@{#line.courseDetails.code ne null ? true : false}"/>
             </list>
