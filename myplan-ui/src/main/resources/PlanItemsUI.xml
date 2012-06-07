@@ -77,7 +77,7 @@
                             </bean>
                             <!--<bean p:id="@{#line.planItemDataObject.id}_saved" parent="Uif-Link"
                                   p:linkText="@{#line.courseDetails.courseTitle}"
-                                  p:title="@{#line.courseDetails.courseTitle}">
+                                  p:label="@{#line.courseDetails.courseTitle}">
                                 <property name="onClickScript"
                                           value="openPlanItemPopUp('@{#line.courseDetails.courseId}','add_remove_course_popover_page',{planItemId:'@{#line.planItemDataObject.id}', courseId:'@{#line.courseDetails.courseId}'},e,'li',{tail:{align:'top'},align:'top'});"/>
                                 <property name="target" value=""/>
@@ -261,7 +261,7 @@
                     </property>
                     <property name="items">
                         <list>
-                            <bean parent="Uif-Link" p:target="">
+                            <bean parent="Uif-LinkField" p:target="">
                                 <property name="cssClasses">
                                     <list merge="true">
                                         <value>fl-text-bold</value>
@@ -269,7 +269,7 @@
                                 </property>
                                 <property name="linkText"
                                           value="@{#line.courseDetails.code} @{#line.courseDetails.courseTitle} (@{#line.courseDetails.credit})"/>
-                                <property name="title"
+                                <property name="label"
                                           value="@{#line.courseDetails.code} @{#line.courseDetails.courseTitle} (@{#line.courseDetails.credit})"/>
                                 <property name="href"
                                           value="inquiry?methodToCall=start&amp;viewId=CourseDetails-InquiryView&amp;courseId=@{#line.courseDetails.courseId}"/>
@@ -781,9 +781,14 @@
                             <bean parent="Uif-ImageField" p:altText="Previous Academic Year"
                                   p:cssClasses="myplan-carousel-prev" p:style="line-height:24px !important;"
                                   p:source="@{#ConfigProperties['ks.myplan.externalizable.images.url']}btnPrev.png"/>
-                            <bean parent="Uif-Message" p:messageText="Academic Year"
+                            <bean parent="Uif-MessageField"
                                   p:cssClasses="myplan-plan-header fl-text-bold fl-font-size-130"
-                                  p:style="line-height:24px !important;"/>
+                                  p:style="line-height:24px !important;">
+                                <property name="message">
+                                    <bean parent="Uif-Message" p:messageText="Academic Year"/>
+                                </property>
+
+                            </bean>
                             <bean parent="Uif-ImageField" p:altText="Next Academic Year"
                                   p:cssClasses="myplan-carousel-next" p:style="line-height:24px !important;"
                                   p:source="@{#ConfigProperties['ks.myplan.externalizable.images.url']}btnNext.png"/>
@@ -887,16 +892,19 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean p:id="@{#line.courseId}_completed" parent="Uif-Link"
+                <bean p:id="@{#line.courseId}_completed" parent="Uif-LinkField"
                       p:linkText="@{#line.courseCode} (@{#line.credit}) @{#line.grade}"
-                      p:title="@{#line.courseTitle}" p:target="" p:href="#"
+                      p:label="@{#line.courseTitle}" p:target="" p:href="#"
                       p:render="@{#line.courseCode ne null and #line.courseId ne null ? true : false}"
                       p:onClickScript="openPopUp('@{#line.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseId}',acadRecAtpId:'@{#line.atpId}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
                         />
-                <bean parent="Uif-Message" p:messageText="@{#line.courseCode} (@{#line.credit})"
+                <bean parent="Uif-MessageField"
                       p:cssClasses="myplan-carousel-term-credits"
-                      p:render="@{#line.courseCode ne null and #line.courseId eq null ? true : false}"/>
-
+                      p:render="@{#line.courseCode ne null and #line.courseId eq null ? true : false}">
+                    <property name="message">
+                        <bean parent="Uif-Message" p:messageText="@{#line.courseCode} (@{#line.credit})"/>
+                    </property>
+                </bean>
             </list>
         </property>
         <property name="collectionLookup.quickfinderAction.render" value="false"/>
@@ -934,9 +942,9 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-Link"
+                <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-LinkField"
                       p:linkText="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"
-                      p:title="@{#line.courseDetails.courseTitle}" p:target="" p:href="#"
+                      p:label="@{#line.courseDetails.courseTitle}" p:target="" p:href="#"
                       p:onClickScript="openPopUp('@{#line.courseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseDetails.courseId}',dateAdded:'@{#line.planItemDataObject.dateAdded}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
                       p:render="@{#line.courseDetails.code ne null ? true : false}"/>
             </list>
@@ -995,9 +1003,9 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-Link"
+                <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-LinkField"
                       p:linkText="@{#line.CourseDetails.code} (@{#line.CourseDetails.credit})"
-                      p:title="@{#line.CourseDetails.courseTitle}" p:target="" p:href="#"
+                      p:label="@{#line.CourseDetails.courseTitle}" p:target="" p:href="#"
                       p:onClickScript="openPopUp('@{#line.CourseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.CourseDetails.courseId}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
                       p:render="@{#line.courseDetails.code ne null ? true : false}"/>
             </list>
@@ -1051,17 +1059,24 @@
                     </property>
                     <property name="render" value="@{courseDetails.scheduledTerms.size() gt 0 ? true : false}"/>
                 </bean>
-                <bean parent="Uif-Message" p:title="Scheduled for" p:messageText="Not currently scheduled"
+                <bean parent="Uif-MessageField" p:label="Scheduled for"
                       p:cssClasses="fl-text-gray myplan-text-normal"
-                      p:render="@{courseDetails.scheduledTerms.size() eq 0 ? true : false}"/>
+                      p:render="@{courseDetails.scheduledTerms.size() eq 0 ? true : false}">
+                    <property name="message">
+                        <bean parent="Uif-Message" p:messageText="Not currently scheduled"/>
+                    </property>
+                </bean>
                 <!-- Last Offered -->
                 <bean parent="Uif-DataField" p:label="Last Offered" p:propertyName="courseDetails.lastOffered"
                       p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal" p:labelPlacement="LEFT"
                       p:render="@{courseDetails.lastOffered ne null and courseDetails.scheduledTerms.size() eq 0 ? true : false}"/>
-                <bean parent="Uif-Message" p:title="Last Offered"
-                      p:messageText="Not offered for more than 10 years"
+                <bean parent="Uif-MessageField" p:label="Last Offered"
                       p:cssClasses="fl-text-gray myplan-text-normal"
-                      p:render="@{courseDetails.lastOffered eq null and courseDetails.scheduledTerms.size() eq 0 ? true : false}"/>
+                      p:render="@{courseDetails.lastOffered eq null and courseDetails.scheduledTerms.size() eq 0 ? true : false}">
+                    <property name="message">
+                        <bean parent="Uif-Message" p:messageText="Not offered for more than 10 years"/>
+                    </property>
+                </bean>
 
                 <!-- <bean parent="Uif-DataField" p:label="Last Offered" p:propertyName="lastOffered"
                      p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal" p:labelPlacement="LEFT">

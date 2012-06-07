@@ -115,7 +115,7 @@
         <property name="formClass" value="org.kuali.student.myplan.audit.form.DegreeAuditForm"/>
     </bean>
 
-    <bean id="audit_report_section" parent="Uif-VerticalBoxSubSection" p:errorsField.render="false"
+    <bean id="audit_report_section" parent="Uif-VerticalBoxSubSection"
           p:progressiveRenderViaAJAX="true" p:refreshWhenChangedPropertyNames="#form.field44">
         <property name="cssClasses">
             <list merge="true">
@@ -124,7 +124,7 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-VerticalBoxGroup" p:errorsField.render="false">
+                <bean parent="Uif-VerticalBoxGroup" >
                     <property name="items">
                         <list>
                             <bean id="txtaudit" parent="Uif-Message" p:messageText="@{getAuditHtml()}"
@@ -136,7 +136,7 @@
         </property>
     </bean>
 
-    <bean id="run_degree_audits" parent="Uif-VerticalBoxGroup" p:errorsField.render="false" p:width="700px">
+    <bean id="run_degree_audits" parent="Uif-VerticalBoxGroup"  p:width="700px">
         <property name="cssClasses">
             <list merge="true">
                 <value>fl-container-700</value>
@@ -163,7 +163,6 @@
     </bean>
 
     <bean id="campus_params" parent="Uif-HorizontalFieldGroup" p:style="margin: 0px 7px; display:block;">
-        <property name="group.errorsField.render" value="false"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:propertyName="campusParam" p:width="600px">
@@ -178,7 +177,6 @@
         </property>
     </bean>
     <bean id="program_params" parent="Uif-HorizontalFieldGroup" p:style="margin: 0px 7px; display:block;">
-        <property name="group.errorsField.render" value="false"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:propertyName="programParam" p:width="600px"
