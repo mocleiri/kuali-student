@@ -4,20 +4,18 @@
 #################################################################
  */
 function fnAddPlanItem (atpId, type, planItemId, courseCode, courseTitle, courseCredits) {
-    var item = '\
-		<span class="fieldLine boxLayoutVerticalItem clearfix">\
-    		<div class="uif-collectionItem" id="' + planItemId + '_div">\
-				<span class="fieldLine boxLayoutVerticalItem clearfix">\
-					<span class="uif-field uif-link"><a id="' + planItemId + '_' + type + '" href="#" target="" title="' + courseTitle + '" class="uif-field uif-link">' + courseCode + ' (' + courseCredits + ')</a></span>\
-					<input name="script" type="hidden" value="jq(\'#\' + \'' + planItemId + '_' + type + '\').click(function(e) { openPopUp(\'' + planItemId + '\',\'add_planned_course\',\'startAddPlannedCourseForm\',\'plan\',{viewId:\'PlannedCourseMenuItem-FormView\',planItemId:\'' + planItemId + '\'},e,\'.uif-collectionItem\',{width:\'150px\'},{tail:{align:\'top\'},align:\'top\',position:\'right\'},false); });">\
-				</span>\
-			</div>\
-		</span>\
-	';
-    jq(item).prependTo("." + atpId + ".myplan-term-" + type + " .uif-stackedCollectionLayout > span").children(".uif-collectionItem").css({backgroundColor:"#ffffcc"}).hide().fadeIn(250).animate({backgroundColor:"#ffffff"}, 1500, function() {
+    var item = '<div id="' + planItemId + '_div" class="uif-group uif-boxGroup uif-verticalBoxGroup uif-collectionItem uif-boxCollectionItem">' +
+        '<div class="uif-boxLayout uif-verticalBoxLayout clearfix">' +
+        '<div id="' + planItemId + '_planned" class="uif-field uif-linkField">' +
+	    '<a href="#" target="" class="uif-link">' + courseCode + ' (' + courseCredits + ')</a>' +
+		'</div>' +
+		'<input name="script" type="hidden" data-role="script" data-for="' + planItemId + '_planned" value="jQuery(\'#\' + \'' + planItemId + '_planned\').click(function(e) { openPopUp(\'' + planItemId + '\',\'add_planned_course\',\'startAddPlannedCourseForm\',\'plan\',{viewId:\'PlannedCourseMenuItem-FormView\',dateAdded:\'2012-05-10 11:07:19.767\',planItemId:\'' + planItemId + '\'},e,\'.uif-collectionItem\',{width:\'150px\'},{tail:{align:\'top\'},align:\'top\',position:\'right\'},false); });">' +
+	    '</div>' +
+        '</div>';
+
+    jq(item).prependTo("." + atpId + ".myplan-term-" + type + " .uif-stackedCollectionLayout").css({backgroundColor:"#ffffcc"}).hide().fadeIn(250).animate({backgroundColor:"#ffffff"}, 1500, function() {
         runHiddenScripts(planItemId + "_div");
     });
-
 }
 /*
 #################################################################
@@ -100,7 +98,7 @@ function fnUpdateSavedCount (savedItemCount) {
 #################################################################
  */
 function fnUpdateCredits (atpId, termCredits) {
-    jq("." + atpId + ".myplan-term-planned .myplan-carousel-term-total span.myplan-carousel-term-credits").fadeOut(250, function() {
+    jq("." + atpId + ".myplan-term-planned .myplan-carousel-term-total .myplan-carousel-term-credits .uif-message").fadeOut(250, function() {
         jq(this).html(termCredits).fadeIn(250);
     });
 }

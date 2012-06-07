@@ -36,7 +36,8 @@ a:focus {
 	width: 950px;
 }
 .uif-pageContentWrapper,
-.uif-viewHeader {
+.uif-viewHeader,
+.uif-header {
     margin: 0;
 }
 #appheader_div {
@@ -286,19 +287,22 @@ button.myplan-button-transparent:hover {
     background: none;
     padding: 0px;
 }
+.myplan-carousel-list ul li .uif-group .uif-stackedCollectionLayout > .uif-collectionItem {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    background: none;
+}
 .myplan-carousel-list ul li .myplan-carousel-term.myplan-term-fixed-height .uif-stackedCollectionLayout {
     height: 208px;
 }
-.myplan-carousel-list ul li .uif-group .uif-stackedCollectionLayout .uif-collectionItem,
-.myplan-carousel-list ul li .myplan-carousel-term .uif-headerField .uif-header {
-    display: block;
-    padding: 0 5px;
-}
-.myplan-carousel-list ul li .uif-group .uif-stackedCollectionLayout .uif-collectionItem {
+.myplan-carousel-list ul li .myplan-carousel-term .uif-linkField .uif-link {
     margin-top: 1px;
     font-size: 90%;
     height: 25px;
     line-height: 25px;
+    padding: 0 5px 0 24px;
+    display: block;
 }
 .myplan-carousel-list ul li .myplan-carousel-term h6.uif-headerText {
     color: #aaa;
@@ -308,6 +312,8 @@ button.myplan-button-transparent:hover {
     background: #f5f5f5;
     height: 26px;
     line-height: 26px;
+    padding: 0 5px;
+    display: block;
 }
 .myplan-carousel-prev,
 .myplan-carousel-next {
@@ -334,7 +340,6 @@ button.myplan-button-transparent:hover {
 }
 .myplan-carousel-term-total {
     background:#d6d6d6;
-    padding:5px;
     overflow:hidden;
     font-weight:bold;
     color:#666;
@@ -342,16 +347,16 @@ button.myplan-button-transparent:hover {
     height: 26px;
     line-height: 26px;
 }
-.myplan-carousel-term-total table[role="presentation"] {
+.myplan-carousel-term-total table {
     margin: 0;
 }
-.myplan-carousel-term-total table[role="presentation"] th {
+.myplan-carousel-term-total table th {
     text-align: left;
-    padding: 0;
+    padding: 0 0 0 5px;
 }
-.myplan-carousel-term-total table[role="presentation"] td {
+.myplan-carousel-term-total table td {
     text-align: right;
-    padding: 0;
+    padding: 0 5px 0 0;
 }
 /* Layout styles ########################################################################### */
 .myplan-container-720 {
@@ -750,16 +755,6 @@ button.myplan-button-transparent:hover {
 }
 .myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout {
 	float: none !important;
-}
-.myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout .uif-boxLayoutHorizontalItem {
-    width: 19%;
-}
-.myplan-saved-courses-detail .myplan-saved-courses-detail-heading .uif-boxLayout a.uif-boxLayoutHorizontalItem {
-    width: 62%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
 }
 /* Course Details Popup ########################################################################### */
 
