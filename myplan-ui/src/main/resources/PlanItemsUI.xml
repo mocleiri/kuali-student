@@ -55,6 +55,10 @@
         <property name="collectionObjectClass"
                   value="org.kuali.student.myplan.plan.dataobject.PlannedCourseDataObject"/>
         <property name="propertyName" value="searchResults"/>
+        <property name="renderAddLine" value="false"/>
+        <property name="renderLineActions" value="false"/>
+        <property name="disclosure.render" value="false"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="filters">
             <list>
                 <bean parent="Uif-ConditionalCollectionFilter" p:expression="#index lt 7"/>
@@ -63,6 +67,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-HorizontalFieldGroup" p:fieldLabel.render="false" p:id="@{#line.planItemDataObject.id}" p:style="cursor:pointer;">
+
                     <property name="onDocumentReadyScript" value="truncateField('@{#line.planItemDataObject.id}');"/>
                     <property name="onClickScript"
                               value="openPlanItemPopUp('@{#line.courseDetails.courseId}','add_remove_course_popover_page',{planItemId:'@{#line.planItemDataObject.id}', courseId:'@{#line.courseDetails.courseId}'},e,'li',{tail:{align:'top'},align:'top'});"/>
@@ -588,7 +593,7 @@
 
                 <bean p:id="@{planItemId}_delete" parent="Uif-Link" p:target=""
                       p:linkText="Delete from the Bookmarked List"
-                      p:title="Delete from the Bookmarked List" p:hrefText="#"
+                      p:title="Delete from the Bookmarked List" p:href="#"
                       p:render="@{acadRecAtpId eq null ? true : false}">
                     <property name="onClickScript"
                               value="openPlanItemPopUp('@{planItemId}','plan_item_delete_page',{planItemId:'@{planItemId}',pageId:'plan_item_delete_page'},e,null,{tail:{hidden:true},align:'top'});"/>
@@ -814,6 +819,7 @@
     </bean>
     <bean id="planned_courses_detail_list" parent="Uif-ListCollectionSection">
         <property name="collectionObjectClass" value="org.kuali.student.myplan.plan.dataobject.PlannedTerm"/>
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="propertyName" value="searchResults"/>
         <property name="cssClasses">
             <list merge="true">
