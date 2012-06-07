@@ -93,8 +93,10 @@ public class KsaDesktop extends Desktop {
 
 
         final Window ksaWindow = new KsaWindow();
+        final Window kimWindow = new KimWindow();
 
         addShortcut("KSA", ksaWindow, "ksa-shortcut");
+        addShortcut("KIM", kimWindow, "accessControl-shortcut");
 
         // Creating "Start" menu
         final StartMenu menu = taskBar.getStartMenu();
@@ -102,8 +104,14 @@ public class KsaDesktop extends Desktop {
         //menu.setHeading("Admin");
         //menu.setIconStyle("user");
 
-        MenuItem menuItem = new MenuItem("Kuali Student Accounts");
+        MenuItem menuItem = new MenuItem(ksaWindow.getHeading());
         menuItem.setData(WINDOW_KEY, ksaWindow);
+        menuItem.setIconStyle("tabs");
+        menuItem.addSelectionListener(listener);
+        menu.add(menuItem);
+
+        menuItem = new MenuItem(kimWindow.getHeading());
+        menuItem.setData(WINDOW_KEY, kimWindow);
         menuItem.setIconStyle("tabs");
         menuItem.addSelectionListener(listener);
         menu.add(menuItem);
@@ -124,13 +132,15 @@ public class KsaDesktop extends Desktop {
     }
 
     public void addShortcut(String title, Window window, String id) {
-        Shortcut s = new Shortcut();
-        s.setText(title);
-        s.setId(id);
-        s.setData(WINDOW_KEY, window);
-        s.addSelectionListener(shortcutListener);
-        s.setToolTip("Kuali Student Accounts");
-        addShortcut(s);
+        Shortcut shortcut = new Shortcut();
+        shortcut.setText(title);
+        shortcut.setId(id);
+        shortcut.setData(WINDOW_KEY, window);
+        shortcut.addSelectionListener(shortcutListener);
+        if (window.getHeading() != null) {
+            shortcut.setToolTip(window.getHeading());
+        }
+        addShortcut(shortcut);
     }
 
 }

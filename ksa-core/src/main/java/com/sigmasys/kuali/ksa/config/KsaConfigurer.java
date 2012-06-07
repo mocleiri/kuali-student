@@ -89,12 +89,15 @@ public class KsaConfigurer extends ModuleConfigurer implements ApplicationContex
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if (applicationEvent instanceof ContextRefreshedEvent) {
-            DataDictionaryService dataDictionaryService = KRADServiceLocatorWeb.getDataDictionaryService();
-            try {
-                dataDictionaryService.addDataDictionaryLocations(getDataDictionaryPackages());
-                ((ViewServiceImpl)KRADServiceLocatorWeb.getViewService()).setDataDictionaryService(dataDictionaryService);
-            } catch (Exception e) {
-                throw new RuntimeException("Cannot add KSA packages to data dictionary locations: " + e.getMessage(), e);
+            List<String> locations = getDataDictionaryPackages();
+            if (locations != null && !locations.isEmpty()) {
+                DataDictionaryService dataDictionaryService = KRADServiceLocatorWeb.getDataDictionaryService();
+                try {
+                    dataDictionaryService.addDataDictionaryLocations(locations);
+                    ((ViewServiceImpl) KRADServiceLocatorWeb.getViewService()).setDataDictionaryService(dataDictionaryService);
+                } catch (Exception e) {
+                    throw new RuntimeException("Cannot add KSA packages to data dictionary locations: " + e.getMessage(), e);
+                }
             }
         }
     }

@@ -3,9 +3,13 @@ package com.sigmasys.kuali.ksa.util;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 /**
- *
  * HTTP request utility-methods.
  *
  * @author Michael Ivanov
@@ -46,7 +50,7 @@ public class RequestUtils {
     public static String getClientIpAddress(HttpServletRequest request) {
 
         if (request == null) {
-           return null;
+            return null;
         }
 
         String ip = request.getHeader("X-Forwarded-For");
@@ -76,6 +80,27 @@ public class RequestUtils {
 
     public static String getClientIpAddress() {
         return getClientIpAddress(getThreadRequest());
+    }
+
+    public static String getIPAddress() {
+        try {
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = networkInterfaces.nextElement();
+                if (!networkInterface.isLoopback() && networkInterface.isUp()) {
+                    Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+                    while (addresses.hasMoreElements()) {
+                        InetAddress inetAddress = addresses.nextElement();
+                        if (inetAddress instanceof Inet4Address) {
+                            return inetAddress.getHostAddress();
+                        }
+                    }
+                }
+            }
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
 

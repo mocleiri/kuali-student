@@ -16,59 +16,95 @@
 
 --%>
 <html>
-<title>Kuali Identity Management</title>
-</html>
+
+<head>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0">
+
+    <title>Kuali Identity Management</title>
+
+    <!-- Include application code -->
+    <script type="text/javascript" language="javascript" src="ksa/ksa.nocache.js"></script>
+</head>
+
 <body>
-<b>Kuali Identity Management</b>
+
+<div align="center">
+    <b>Kuali Identity Management</b>
+</div>
+
 <br/>
 <br/>
-<table border="1" cellspacing="0">
-    <tr>
-        <th>Lookups</th>
-        <th>Documents</th>
-    </tr>
-    <tr>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.api.identity.Person&docFormKey=88888888&returnLocation=${ConfigProperties.kim.url}/index.jsp&hideReturnLink=true&showMaintenanceLinks=true">Person</a>
-        </td>
-        <td>
-            <a href="${ConfigProperties.kim.url}/identityManagementPersonDocument.do?methodToCall=docHandler&command=initiate&docTypeName=IdentityManagementPersonDocument">Create New Person</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.role.RoleBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Role</a>
-        </td>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMRD">Role Document (started via type lookup)</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.permission.UberPermissionBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Permission</a>
-        </td>
-        <td>
-            (No Doc Yet)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.responsibility.UberResponsibilityBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Responsibility</a>
-        </td>
-        <td>
-            (No Doc Yet)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.group.GroupBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Group</a>
-        </td>
-        <td>
-            <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMGD">Group Document (started via type lookup)</a>
-        </td>
-    </tr>
-</table>            
-<div align="center" id="footer-copyright"> Copyright 2005-2012 The Kuali Foundation. All rights reserved.<BR/>Portions of Kuali Rice are copyrighted by other parties as described in the <a href="../acknowledgments.jsp">Acknowledgments</a> screen.</div>
+<br/>
+
+<div align="center" style="padding-bottom:100px;">
+
+    <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>Lookups</th>
+            <th>Documents</th>
+        </tr>
+        <tr>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.api.identity.Person&docFormKey=88888888&returnLocation=${ConfigProperties.kim.url}/index.jsp&hideReturnLink=true&showMaintenanceLinks=true">Person</a>
+            </td>
+            <td>
+                <a href="${ConfigProperties.kim.url}/identityManagementPersonDocument.do?methodToCall=docHandler&command=initiate&docTypeName=IdentityManagementPersonDocument">Create
+                    New Person</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.role.RoleBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Role</a>
+            </td>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMRD">Role
+                    Document (started via type lookup)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.permission.UberPermissionBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Permission</a>
+            </td>
+            <td>
+                (No Doc Yet)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.responsibility.UberResponsibilityBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Responsibility</a>
+            </td>
+            <td>
+                (No Doc Yet)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.group.GroupBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Group</a>
+            </td>
+            <td>
+                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMGD">Group
+                    Document (started via type lookup)</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div align="center" style="position:absolute; bottom:0; width:100%; height:100px;">
+    Copyright 2005-2012 The Kuali Foundation. All rights reserved.<br/>Portions
+    of Kuali Rice are copyrighted by other parties as described in the
+    <a href="../acknowledgments.jsp">Acknowledgments</a> screen.
+</div>
+
 </body>
 </html>
 

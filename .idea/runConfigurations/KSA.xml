@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="KSA" type="GWT.ConfigurationType" factoryName="GWT Configuration">
+    <module name="ksa-core" />
+    <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m" />
+    <option name="SHELL_PARAMETERS" value="-noserver -port 8080 -war C:\projects\ksa\ksa-core\target\ksa" />
+    <option name="RUN_PAGE" value="/ksa/gwt.html" />
+    <option name="GWT_MODULE" value="com.sigmasys.kuali.ksa.gwt.Ksa" />
+    <option name="OPEN_IN_BROWSER" value="false" />
+    <option name="BROWSER" value="Chrome" />
+    <RunnerSettings RunnerId="Run" />
+    <ConfigurationWrapper RunnerId="Run" />
+    <method>
+      <option name="Make" enabled="false" />
+    </method>
+  </configuration>
+</component>

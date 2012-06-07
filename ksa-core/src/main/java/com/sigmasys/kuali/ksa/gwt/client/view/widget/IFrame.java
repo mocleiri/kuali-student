@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Frame;
 /**
  * An extension to GWT version of iframe.
  * <p/>
+ *
  * @author Michael Ivanov
  */
 public class IFrame extends Frame {
@@ -18,6 +19,11 @@ public class IFrame extends Frame {
     public IFrame(String url) {
         super(url);
         setFrameBorder(0);
+    }
+
+    public IFrame(String url, String style) {
+        this(url);
+        setStyleName(style);
     }
 
     protected FrameElement getFrameElement() {
