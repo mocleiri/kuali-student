@@ -52,12 +52,6 @@
         </repository>
 
         <repository>
-            <id>kuali.nexus</id>
-            <name>Nexus Repository Manager</name>
-            <url>http://nexus.kuali.org/content/groups/public</url>
-        </repository>
-
-        <repository>
             <id>google-maven-snapshot-repository</id>
             <name>Google Maven Snapshot Repository</name>
             <url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
