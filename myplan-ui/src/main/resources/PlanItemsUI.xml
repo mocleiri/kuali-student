@@ -975,33 +975,14 @@
         </property>
         <property name="collectionLookup.quickfinderAction.render" value="false"/>
         <property name="footer">
-            <bean parent="term_total_credits" p:cssClasses="myplan-carousel-term-total" p:render="@{#line.openForPlanning ? true : false}"/>
-        </property>
-    </bean>
-
-    <bean id="term_no_courses" parent="Uif-VerticalBoxGroup">
-        <property name="items">
-            <list>
-                <bean parent="Uif-Message" p:messageText="No courses planned.">
-                    <property name="style" value="margin-top:1px; font-size:90%; height:25px; line-height:25px; padding:0 5px; display:block;"/>
-                    <property name="cssClasses">
-                        <list merge="true">
-                            <value>fl-text-gray</value>
-                            <value>myplan-text-italic</value>
-                        </list>
-                    </property>
-                </bean>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="term_total_credits" parent="Uif-VerticalBoxGroup">
-        <property name="items">
-            <list>
-                <bean parent="Uif-MessageField" p:label="Total Credits" p:cssClasses="myplan-carousel-term-credits">
-                    <property name="messageText" value="@{#line.credits ne null ? #line.credits : '0'}"/>
-                </bean>
-            </list>
+            <bean parent="Uif-VerticalBoxGroup">
+                <property name="items">
+                    <list>
+                        <bean parent="term_total_credits" p:cssClasses="myplan-carousel-term-total" p:render="@{#line.openForPlanning ? true : false}"/>
+                        <bean parent="term_no_courses" p:render="@{!#line.openForPlanning and #line.plannedList.size() eq 0 ? true : false}"/>
+                    </list>
+                </property>
+            </bean>
         </property>
     </bean>
 
@@ -1052,14 +1033,31 @@
         </property>
     </bean>
 
-    <!--<bean id="term_backup_link" parent="Uif-VerticalBoxGroup">
+    <bean id="term_no_courses" parent="Uif-VerticalBoxGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="&lt;span&gt;Show&lt;/span&gt; # more courses" p:href="#"
-                      p:onClickScript="fnToggleBackup(e);"/>
+                <bean parent="Uif-Message" p:messageText="No courses planned.">
+                    <property name="style" value="margin-top:1px; font-size:90%; height:25px; line-height:25px; padding:0 5px; display:block;"/>
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>fl-text-gray</value>
+                            <value>myplan-text-italic</value>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
-    </bean>-->
+    </bean>
+
+    <bean id="term_total_credits" parent="Uif-VerticalBoxGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-MessageField" p:label="Total Credits" p:cssClasses="myplan-carousel-term-credits">
+                    <property name="messageText" value="@{#line.credits ne null ? #line.credits : '0'}"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
 
     <!-- ################# Course Details Summary Bean ############################# -->

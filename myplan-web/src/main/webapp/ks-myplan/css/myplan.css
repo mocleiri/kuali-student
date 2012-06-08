@@ -259,7 +259,7 @@ button.myplan-button-transparent:hover {
     float:left;
 }
 .myplan-carousel-list ul li > .uif-group {
-    border:solid 1px #d6d6d6;
+    border:solid 1px #ccc;
     width: 160px;
     margin: 0 10px;
     border-radius: 4px;
@@ -270,18 +270,20 @@ button.myplan-button-transparent:hover {
     display:block;
     white-space:nowrap;
     text-align:center;
-    background:#d6d6d6;
+    background:#ccc;
+    color: #333;
     font-weight:bold;
     height: 26px;
     line-height: 26px;
     border-radius: 4px 4px 0px 0px;
 }
 .myplan-carousel-list ul li .uif-group .uif-groupHeader.myplan-term-past {
-    color: #fff;
+    color: #aaa;
 }
 .myplan-carousel-list ul li .uif-group .uif-groupHeader.myplan-term-current {
-    background-color: #797979;
+    background-color: #666;
     color: #fff;
+    font-size: 1.25em;
 }
 .myplan-carousel-list ul li .uif-group .uif-stackedCollectionLayout {
     overflow: hidden;
@@ -325,7 +327,7 @@ button.myplan-button-transparent:hover {
     visibility: hidden;
 }
 .myplan-carousel-term-total {
-    background:#d6d6d6;
+    background:#ccc;
     font-weight:bold;
     color:#666;
     font-size:90%;
