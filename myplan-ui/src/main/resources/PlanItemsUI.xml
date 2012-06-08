@@ -813,20 +813,17 @@
                 <!-- This hidden field is only rendered for the ATP that should have focus in the UI. The value of "index" will
                      be used to initialize the javascript "carousellite" component. It should only be displayed for the PlanTerm
                      that should get focus -->
-                <bean id="atp_start_index" parent="Uif-InputField" p:propertyName="index"
-                      p:render="@{#line.index ge 0 ? true : false}">
+                <bean id="atp_start_index" parent="Uif-InputField" p:propertyName="index" p:render="@{#line.index ge 0 ? true : false}">
                     <property name="control">
                         <bean parent="Uif-HiddenControl"/>
                     </property>
                 </bean>
                 <bean parent="Uif-DataField" p:propertyName="qtrYear" p:cssClasses="uif-groupHeader @{#line.currentTermForView ? 'myplan-term-current' : (!#line.currentTermForView and #line.openForPlanning ? 'myplan-term-future' : 'myplan-term-past')}"
                       p:fieldLabel.render="false"/>
-                <bean parent="Uif-MessageField" p:fieldLabel.render="false">
+                <bean parent="Uif-MessageField">
                     <property name="style" value="color:#aaa; font-weight:normal; text-transform:uppercase; font-size:85%; background:#f5f5f5; height:26px; line-height:26px; padding:0 5px; display:block;"/>
                     <property name="render" value="@{#line.completedTerm or #line.academicRecord.size() gt 0 or !#line.openForPlanning ? true : false}"/>
-                    <property name="message">
-                        <bean parent="Uif-Message" p:messageText="@{#line.completedTerm ? 'Completed': (#line.academicRecord.size() gt 0 or !#line.openForPlanning)? 'Registered' : 'Blank'}"/>
-                    </property>
+                    <property name="messageText" value="@{#line.completedTerm ? 'Completed': (#line.academicRecord.size() gt 0 or !#line.openForPlanning)? 'Registered' : ''}"/>
                 </bean>
             </list>
         </property>
@@ -879,18 +876,52 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean p:id="@{#line.courseId}_completed" parent="Uif-LinkField"
-                      p:linkText="@{#line.courseCode} (@{#line.credit}) @{#line.grade}"
-                      p:target="" p:href="#"
-                      p:fieldLabel.render="false"
-                      p:render="@{#line.courseCode ne null and #line.courseId ne null ? true : false}"
-                      p:onClickScript="openPopUp('@{#line.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseId}',acadRecAtpId:'@{#line.atpId}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
-                        />
-                <bean parent="Uif-MessageField"
-                      p:cssClasses="myplan-carousel-term-credits"
-                      p:render="@{#line.courseCode ne null and #line.courseId eq null ? true : false}">
-                    <property name="message">
-                        <bean parent="Uif-Message" p:messageText="@{#line.courseCode} (@{#line.credit})"/>
+                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseCode ne null and #line.courseId ne null ? true : false}" p:style="cursor:pointer;"
+                      p:onClickScript="openPopUp('@{#line.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseId}',acadRecAtpId:'@{#line.atpId}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);">
+                    <property name="items">
+                        <list>
+                            <!-- TODO: Change ID to unique for repeated courses -->
+                            <!-- Course matches course id -->
+                            <bean p:id="@{#line.courseId}_completed" parent="Uif-MessageField">
+                               <property name="messageText" value="@{#line.courseCode} (@{#line.credit})"/>
+                            </bean>
+                            <!-- Grade -->
+                            <bean parent="Uif-MessageField" p:render="@{#line.grade ne null ? true : false}">
+                                <property name="messageText" value="@{#line.grade}"/>
+                                <property name="style" value="float:right;"/>
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>fl-text-gray</value>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseCode ne null and #line.courseId eq null ? true : false}" p:style="cursor:default;">
+                    <property name="items">
+                        <list>
+                            <!-- TODO: Change ID to unique for repeated courses -->
+                            <!-- Course NOT matching any course id -->
+                            <bean p:id="@{#line.courseId}_completed" parent="Uif-MessageField">
+                                <property name="messageText" value="@{#line.courseCode} (@{#line.credit})"/>
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>fl-text-silver</value>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!-- Grade -->
+                            <bean parent="Uif-MessageField" p:render="@{#line.grade ne null ? true : false}">
+                                <property name="messageText" value="@{#line.grade}"/>
+                                <property name="style" value="float:right;"/>
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>fl-text-gray</value>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
                     </property>
                 </bean>
             </list>
@@ -930,11 +961,16 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-LinkField"
-                      p:linkText="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"
-                      p:fieldLabel.render="false" p:target="" p:href="#"
-                      p:onClickScript="openPopUp('@{#line.courseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseDetails.courseId}',dateAdded:'@{#line.planItemDataObject.dateAdded}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
-                      p:render="@{#line.courseDetails.code ne null ? true : false}"/>
+                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseDetails.code ne null ? true : false}" p:style="cursor:pointer;"
+                      p:onClickScript="openPopUp('@{#line.courseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseDetails.courseId}',dateAdded:'@{#line.planItemDataObject.dateAdded}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);">
+                    <property name="items">
+                        <list>
+                            <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-MessageField">
+                               <property name="messageText" value="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"/>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
         <property name="collectionLookup.quickfinderAction.render" value="false"/>
@@ -946,19 +982,24 @@
     <bean id="term_no_courses" parent="Uif-VerticalBoxGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-Message" p:messageText="No Courses" p:style="margin-top:1px; font-size:90%; height:25px; line-height:25px; padding:0 5px 0 24px; display:block;"/>
+                <bean parent="Uif-Message" p:messageText="No courses planned.">
+                    <property name="style" value="margin-top:1px; font-size:90%; height:25px; line-height:25px; padding:0 5px; display:block;"/>
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>fl-text-gray</value>
+                            <value>myplan-text-italic</value>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
 
-    <bean id="term_total_credits" parent="Uif-GridGroup">
-        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+    <bean id="term_total_credits" parent="Uif-VerticalBoxGroup">
         <property name="items">
             <list>
                 <bean parent="Uif-MessageField" p:label="Total Credits" p:cssClasses="myplan-carousel-term-credits">
-                    <property name="message">
-                        <bean parent="Uif-Message" p:messageText="@{#line.credits}"/>
-                    </property>
+                    <property name="messageText" value="@{#line.credits ne null ? #line.credits : '0'}"/>
                 </bean>
             </list>
         </property>
@@ -992,11 +1033,16 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-LinkField"
-                      p:linkText="@{#line.CourseDetails.code} (@{#line.CourseDetails.credit})"
-                      p:fieldLabel.render="false" p:target="" p:href="#"
-                      p:onClickScript="openPopUp('@{#line.CourseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.CourseDetails.courseId}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);"
-                      p:render="@{#line.courseDetails.code ne null ? true : false}"/>
+                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseDetails.code ne null ? true : false}" p:style="cursor:pointer;"
+                      p:onClickScript="openPopUp('@{#line.CourseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.CourseDetails.courseId}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);">
+                    <property name="items">
+                        <list>
+                            <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-MessageField">
+                               <property name="messageText" value="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"/>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
         <property name="collectionLookup.quickfinderAction.render" value="false"/>
