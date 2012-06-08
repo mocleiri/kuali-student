@@ -6,9 +6,7 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.sigmasys.kuali.ksa.gwt.client.model.ReferenceData;
-import com.sigmasys.kuali.ksa.gwt.client.service.GenericCallback;
-import com.sigmasys.kuali.ksa.gwt.client.service.GwtErrorHandler;
-import com.sigmasys.kuali.ksa.gwt.client.service.ServiceFactory;
+import com.sigmasys.kuali.ksa.gwt.client.service.*;
 import com.sigmasys.kuali.ksa.gwt.client.view.KsaDesktop;
 
 /**
@@ -19,7 +17,6 @@ public class KsaEntryPoint implements EntryPoint {
     private final KsaDesktop desktop = new KsaDesktop();
 
     private MessageBox waitingBox;
-    private ReferenceData referenceData;
 
     public KsaEntryPoint() {
         Registry.register(KsaEntryPoint.class.getName(), this);
@@ -40,57 +37,14 @@ public class KsaEntryPoint implements EntryPoint {
         Log.debug("onModuleLoad Finish");
     }
 
-    public static KsaEntryPoint getInstance() {
-        return Registry.get(KsaEntryPoint.class.getName());
+    private void loadReferenceData() {
+        ReferenceDataProvider.addAfterSetCommand(new ReferenceDataCommand() {
+            @Override
+            public void execute(ReferenceData referenceData) {
+                desktop.init();
+            }
+        });
+        ReferenceDataProvider.init(waitingBox);
     }
 
-
-    protected void loadReferenceData() {
-        try {
-            Log.debug("Initializing KSA Desktop...");
-            // Start loading reference data asynchronously
-            ServiceFactory.getConfigService().getReferenceData(new GenericCallback<ReferenceData>() {
-                public void onSuccess(ReferenceData referenceData) {
-                    try {
-
-                        setReferenceData(referenceData);
-
-                        desktop.init();
-
-                        closeWaitingBox();
-
-                        Log.debug("KSA Desktop has been initialized");
-
-                    } catch (Throwable t) {
-                        handleError(t);
-                    }
-                }
-
-                public void onFailure(Throwable t) {
-                    handleError(t);
-                }
-            });
-        } catch (Throwable t) {
-            handleError(t);
-        }
-    }
-
-    private void closeWaitingBox() {
-        if (waitingBox != null && waitingBox.isVisible()) {
-            waitingBox.close();
-        }
-    }
-
-    private void handleError(Throwable t) {
-        closeWaitingBox();
-        GwtErrorHandler.error("Cannot retrieve reference data. " + t.getMessage(), t);
-    }
-
-    public void setReferenceData(ReferenceData referenceData) {
-        this.referenceData = referenceData;
-    }
-
-    public ReferenceData getReferenceData() {
-        return referenceData;
-    }
 }
