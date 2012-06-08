@@ -694,20 +694,16 @@ button.myplan-button-transparent:hover {
     text-align: center;
     text-transform: none;
 }
-.myplan-section .uif-header.uif-subSectionHeaderField {
-    background: #ccc;
+.myplan-section .uif-listCollectionGroup ul {
+    min-height: 24px;
 }
-/* Saved Courses Summary Styles ########################################################################### */
-.myplan-saved-courses-summary div.blockElement {
+.myplan-section div.blockElement {
     left: 92px !important;
     top: 4px !important;
     border: none;
     width: 16px;
 }
-.myplan-saved-courses-summary > div[id$='_group']{
-    min-height: 24px;
-}
-.myplan-saved-courses-summary ul li {
+.myplan-section .uif-listCollectionGroup ul li {
     border-bottom:dotted 1px #aaaaaa;
     padding: 6px 4px;
     display: block;
@@ -715,21 +711,15 @@ button.myplan-button-transparent:hover {
     cursor: pointer;
     font-size: 95%;
 }
-.myplan-saved-courses-summary ul li:hover {
+.myplan-section .uif-listCollectionGroup ul li:hover {
     background: #a9a9a9;
 }
-.myplan-saved-courses-summary ul li .uif-boxLayoutHorizontalItem span {
-    float: left;
-    margin-right: 0.4em;
-}
-.myplan-saved-courses-summary ul li .uif-boxLayoutHorizontalItem span.ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-}
+/* Saved Courses Summary Styles ########################################################################### */
 
+/* Recent Audit List Styles ########################################################################### */
+.myplan-recent-audit ul li:first-child {
+    border: none;
+}
 /* Saved Courses Detail Styles ########################################################################### */
 .myplan-saved-courses-detail {
     line-height: 1.8em;
@@ -757,7 +747,6 @@ button.myplan-button-transparent:hover {
 	float: none !important;
 }
 /* Course Details Popup ########################################################################### */
-
 .myplan-popup-close {
     cursor: pointer;
     position: absolute;
@@ -771,34 +760,6 @@ button.myplan-button-transparent:hover {
 }
 .jquerybubblepopup-innerHtml div.blockElement {
     top: 0px !important;
-}
-/* Recent Audit List Styles ########################################################################### */
-.myplan-recent-audit div.blockElement {
-    left: 92px !important;
-    top: 4px !important;
-    border: none;
-    width: 16px;
-}
-.myplan-recent-audit > div[id$='_group']{
-    min-height: 24px;
-}
-.myplan-recent-audit ul li {
-    border-top:dotted 1px #aaaaaa;
-    padding: 6px 4px;
-    display: block;
-    clear:both;
-    cursor: pointer;
-    font-size: 95%;
-}
-.myplan-recent-audit ul li:hover {
-    background: #a9a9a9;
-}
-.myplan-recent-audit ul li:first-child {
-    border: none;
-}
-.myplan-recent-audit ul li .uif-boxLayoutHorizontalItem span {
-    float: left;
-    margin-right: 0.4em;
 }
 
 /* beginning of scrollbar ########################################################################### */

@@ -214,6 +214,9 @@
     </bean>
 
     <bean id="myplan_section" parent="Uif-VerticalBoxSubSection" p:headerText="YOUR STUFF (TBD)">
+        <property name="header">
+            <bean parent="Uif-HeaderFive" p:style="background: #ccc;" />
+        </property>
         <property name="cssClasses">
             <list merge="true">
                 <value>fl-container-200</value>
@@ -237,7 +240,7 @@
             </list>
         </property>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="onDocumentReadyScript" value="
             myplanRetrieveComponent('watch_list','saved_courses_summary','search','lookup',{viewId:'SavedCoursesSummary-LookupView'});
@@ -268,7 +271,7 @@
             </list>
         </property>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
 
         <property name="onDocumentReadyScript"

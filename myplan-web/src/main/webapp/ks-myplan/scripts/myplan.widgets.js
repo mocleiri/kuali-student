@@ -457,13 +457,12 @@ function myplanAjaxSubmitForm(methodToCall, successCallback, additionalData, ele
 function truncateField(id) {
     jq("#" + id).each(function() {
         jq(this).css("display","block");
-        var margin = Math.ceil(parseFloat(jq(this).find(".uif-boxLayoutHorizontalItem").css("margin-right")));
-        var fixed = 0;
-        var fields = jq(this).find(".uif-boxLayoutHorizontalItem:not(.myplan-text-ellipsis)").length;
+        var fixed = margin = 0;
         jq(this).find(".uif-boxLayoutHorizontalItem:not(.myplan-text-ellipsis)").each(function() {
         	fixed = fixed + jq(this).width();
+            margin = margin + Math.ceil(parseFloat(jq(this).css("margin-right")));
         });
-        var ellipsis = jq(this).width() - ( ( fixed + 1 ) + ( margin * fields ) );
+        var ellipsis = jq(this).width() - ( ( fixed + 1 ) + margin );
         jq(this).find(".uif-boxLayoutHorizontalItem").last().css("margin-right", 0);
         jq(this).find(".uif-boxLayoutHorizontalItem.myplan-text-ellipsis").width(ellipsis);
     });

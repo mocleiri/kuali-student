@@ -139,14 +139,21 @@
     </bean>
 
     <bean id="degree_audits_summary_list" parent="Uif-ListCollectionSection" p:headerText="Recent Audit Reports">
+        <property name="header">
+            <bean parent="Uif-HeaderSix"/>
+        </property>
+        <property name="cssClasses">
+            <list merge="true">
+                <value>myplan-recent-audit</value>
+            </list>
+        </property>
         <property name="layoutManager.lineGroupPrototype.disclosure.render" value="false"/>
         <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="collectionObjectClass" value="org.kuali.student.myplan.audit.dataobject.DegreeAuditItem"/>
         <property name="propertyName" value="searchResults"/>
         <property name="items">
             <list>
-                <bean parent="Uif-HorizontalFieldGroup" p:fieldLabel.render="false" p:id="@{#line.report.auditId}">
-                    <property name="onDocumentReadyScript" value="truncateField('@{#line.report.auditId}');"/>
+                <bean parent="Uif-VerticalFieldGroup" p:fieldLabel.render="false" p:id="@{#line.report.auditId}">
                     <property name="items">
                         <list>
                             <bean parent="Uif-LinkField" p:linkText="@{#line.programTitle}"
