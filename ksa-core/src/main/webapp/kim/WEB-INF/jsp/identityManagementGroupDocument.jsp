@@ -51,7 +51,6 @@
         <kul:adHocRecipients /> 
         <kul:routeLog />
     </c:if>
-    <kul:superUserActions />
 	<kul:panelFooter />
     <c:if test="${inquiry}">
         </div>

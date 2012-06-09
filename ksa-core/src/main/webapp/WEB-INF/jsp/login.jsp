@@ -127,6 +127,6 @@
             </tbody>
         </table>
     </div>
-    <input type="hidden" name="redirectUrl" value="${requestScope.redirectUrl}"/></td>
+    <input type="hidden" name="redirectUrl" value="${requestScope.redirectUrl}"/>
 </form>
 </body>

@@ -48,25 +48,25 @@
         </tr>
         <tr>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.api.identity.Person&docFormKey=88888888&returnLocation=${ConfigProperties.kim.url}/index.jsp&hideReturnLink=true&showMaintenanceLinks=true">Person</a>
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.api.identity.Person&docFormKey=88888888&returnLocation=index.jsp&hideReturnLink=true&showMaintenanceLinks=true">Person</a>
             </td>
             <td>
-                <a href="${ConfigProperties.kim.url}/identityManagementPersonDocument.do?methodToCall=docHandler&command=initiate&docTypeName=IdentityManagementPersonDocument">Create
+                <a href="<%= request.getContextPath() %>/kim/identityManagementPersonDocument.do?methodToCall=docHandler&command=initiate&docTypeName=IdentityManagementPersonDocument&returnLocation=index.jsp&hideReturnLink=true&showMaintenanceLinks=true">Create
                     New Person</a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.role.RoleBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Role</a>
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.role.RoleBo&docFormKey=88888888&returnLocation=portal.do&hideReturnLink=true&showMaintenanceLinks=true">Role</a>
             </td>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMRD">Role
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMRD">Role
                     Document (started via type lookup)</a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.permission.UberPermissionBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Permission</a>
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.permission.UberPermissionBo&docFormKey=88888888&returnLocation=portal.do&hideReturnLink=true&showMaintenanceLinks=true">Permission</a>
             </td>
             <td>
                 (No Doc Yet)
@@ -74,7 +74,7 @@
         </tr>
         <tr>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.responsibility.UberResponsibilityBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Responsibility</a>
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.responsibility.UberResponsibilityBo&docFormKey=88888888&returnLocation=portal.do&hideReturnLink=true&showMaintenanceLinks=true">Responsibility</a>
             </td>
             <td>
                 (No Doc Yet)
@@ -82,10 +82,10 @@
         </tr>
         <tr>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.group.GroupBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&showMaintenanceLinks=true">Group</a>
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kim.impl.group.GroupBo&docFormKey=88888888&returnLocation=portal.do&hideReturnLink=true&showMaintenanceLinks=true">Group</a>
             </td>
             <td>
-                <a href="${ConfigProperties.kr.url}/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMGD">Group
+                <a href="<%= request.getContextPath() %>/kr/lookup.do?methodToCall=search&businessObjectClassName=org.kuali.rice.kim.impl.type.KimTypeBo&returnLocation=portal.do&docFormKey=IMGD">Group
                     Document (started via type lookup)</a>
             </td>
         </tr>
