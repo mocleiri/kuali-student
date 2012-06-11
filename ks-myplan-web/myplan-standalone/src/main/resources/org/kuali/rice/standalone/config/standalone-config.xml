@@ -23,7 +23,7 @@
     syntax: ${varname} ${institution}
 -->
 <config>
-<param name="appserver.url">http://localhost:8080</param>
+    <param name="appserver.url">http://localhost:8080</param>
     <param name="app.code">student</param>
     <param name="application.url">${appserver.url}/${app.code}</param>
 
