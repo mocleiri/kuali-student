@@ -1,8 +1,12 @@
 package com.sigmasys.kuali.ksa.config;
 
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.kuali.rice.core.api.config.property.Config;
+import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.Ordered;
 import org.springframework.jdbc.core.RowCallbackHandler;
@@ -35,6 +39,8 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     private String schemaPrefix;
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    private Config riceConfig;
+
 
     public InitialParameterConfigurer(String schemaName) {
         this(schemaName, Ordered.LOWEST_PRECEDENCE);
@@ -50,26 +56,30 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         loadDatabaseParameters();
     }
 
+    public void setRiceConfig(Config riceConfig) {
+        this.riceConfig = riceConfig;
+    }
+
     protected void loadDatabaseParameters() {
-    	loadDatabaseParameters(false);
+        loadDatabaseParameters(false);
     }
-    
+
     private void validateJdbcTemplate() {
-    	if( jdbcTemplate == null ) {
-    		logger.error("jdbcTemplate is null");
-    		throw new IllegalStateException("jdbcTemplate is null");
-    	}
+        if (jdbcTemplate == null) {
+            logger.error("jdbcTemplate is null");
+            throw new IllegalStateException("jdbcTemplate is null");
+        }
     }
-    
+
     protected void loadDatabaseParameters(boolean refreshOnly) {
-    	
-    	validateJdbcTemplate();
-    	
-    	if (!refreshOnly) {
-    		databaseProperties.clear();
-    	}
-    	
-        String query = "select NAME as name, VALUE as value from " + schemaPrefix + "KSA_CONFIG";
+
+        validateJdbcTemplate();
+
+        if (!refreshOnly) {
+            databaseProperties.clear();
+        }
+
+        String query = "select NAME as name, VALUE as value from " + schemaPrefix + "KSSA_CONFIG";
         jdbcTemplate.query(query, new HashMap<String, Object>(), new RowCallbackHandler() {
             public void processRow(ResultSet rs) throws SQLException {
                 String name = rs.getString("name");
@@ -78,7 +88,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
             }
         });
     }
-    
+
     @Override
     protected void loadProperties(Properties props) throws IOException {
 
@@ -91,6 +101,26 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         props.putAll(readOnlyProperties);
 
         logger.debug("Initial parameters = " + props);
+
+        if (riceConfig != null) {
+
+            logger.debug("Initializing rice configuration...");
+
+            // Additional properties set up
+            String hostName = props.getProperty(Constants.APPLICATION_HOST_PARAM_NAME);
+            if (hostName == null) {
+                hostName = RequestUtils.getIPAddress();
+            }
+
+            logger.debug("Setting the Rice application host name to " + hostName);
+            riceConfig.putProperty(Constants.APPLICATION_HOST_PARAM_NAME, hostName);
+
+            riceConfig.parseConfig();
+            ConfigContext.init(riceConfig);
+
+            logger.debug("Rice configuration has been initialized");
+
+        }
     }
 
     private Map<String, String> getParameters(Properties props) {
@@ -133,19 +163,19 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     public int deleteInitialParameters(Set<String> paramNames) {
-    	int deleted = deleteDatabaseParameters(paramNames);
-    	loadDatabaseParameters();
-    	return deleted;
+        int deleted = deleteDatabaseParameters(paramNames);
+        loadDatabaseParameters();
+        return deleted;
     }
 
     private int deleteDatabaseParameters(Set<String> paramNames) {
-    	
-    	validateJdbcTemplate();
-    	
+
+        validateJdbcTemplate();
+
         List<String> paramNameList = new ArrayList<String>(paramNames);
-        
+
         logger.debug("Deleting the following properties from KSA_CONFIG: " + paramNameList);
-        
+
         if (!paramNameList.isEmpty()) {
             Map<String, String> parameterMap = new HashMap<String, String>(paramNameList.size());
             StringBuilder sql = new StringBuilder("delete from " + schemaPrefix + "KSA_CONFIG where NAME in (");
@@ -164,14 +194,14 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     public int updateInitialParameters(List<InitialParameter> params) {
-    	int updated = updateDatabaseParameters(params);
-    	loadDatabaseParameters();
-    	return updated;
+        int updated = updateDatabaseParameters(params);
+        loadDatabaseParameters();
+        return updated;
     }
 
     private int updateDatabaseParameters(List<InitialParameter> params) {
-    	
-    	validateJdbcTemplate();
+
+        validateJdbcTemplate();
 
         logger.debug("Deleting the following parameters from KSA_CONFIG: " + params);
         // Deleting the old parameters within the same transaction
@@ -204,7 +234,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         }
         return 0;
     }
-    
+
     public String getSchemaPrefix() {
         return schemaPrefix;
     }

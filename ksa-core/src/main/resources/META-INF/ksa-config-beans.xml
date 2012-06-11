@@ -10,8 +10,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
        default-lazy-init="true">
 
-    <bean id="config" class="com.sigmasys.kuali.ksa.config.RiceConfigFactoryBean">
-        <property name="initialize" value="true"/>
+    <bean id="riceConfig" class="com.sigmasys.kuali.ksa.config.RiceConfigFactoryBean">
         <property name="configLocations">
             <list>
                 <value>classpath:/META-INF/ksa-config.xml</value>
@@ -20,7 +19,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
     <bean id="configProps" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject" ref="config"/>
+        <property name="targetObject" ref="riceConfig"/>
         <property name="targetMethod" value="getProperties"/>
     </bean>
 

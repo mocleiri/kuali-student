@@ -5,6 +5,10 @@
 
 create table KSA.KSSA_SEQUENCE_TABLE ( SEQ_NAME varchar2(255 char) not null,  SEQ_VALUE number(10,0) not null, primary key (SEQ_NAME) ) ;
 
+-- KSA config table
+
+create table KSA.KSSA_CONFIG ( NAME varchar2(512) not null,  VALUE varchar2(1024), primary key (NAME) ) ;
+
 -- Creating base tables
 
 create table KSA.KSSA_ACNT (TYPE varchar2(31 char) not null, ID varchar2(45 char) not null, CAN_AUTHENTICATE char(1 char), CREATION_DATE timestamp, CREDIT_LIMIT number(19,2), ENTITY_ID varchar2(45 char), IS_KIM_ACNT char(1 char), LAST_KIM_UPDATE timestamp, LATE1 number(19,2), LATE2 number(19,2), LATE3 number(19,2), DUE number(19,2), LATE_LAST_UPDATE timestamp, OUTSTANDING number(19,2), DATE_OF_BIRTH date, LATE_PERIOD_ID_FK number(19,0), ACNT_STATUS_TYPE_ID_FK number(19,0), primary key (ID));

@@ -24,6 +24,9 @@ public interface Constants {
     // WS constants
     String WS_NAMESPACE = "http://sigmasys.com/";
 
+    // Rice constants
+    String APPLICATION_HOST_PARAM_NAME  = "application.host";
+
     // ---------------------------------------------------------------
     // DATE FORMATS
     // ---------------------------------------------------------------
