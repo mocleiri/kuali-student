@@ -4,14 +4,22 @@
 #################################################################
  */
 function fnAddPlanItem (atpId, type, planItemId, courseCode, courseTitle, courseCredits) {
-    var item = '<div id="' + planItemId + '_div" class="uif-group uif-boxGroup uif-verticalBoxGroup uif-collectionItem uif-boxCollectionItem">' +
-        '<div class="uif-boxLayout uif-verticalBoxLayout clearfix">' +
-        '<div id="' + planItemId + '_planned" class="uif-field uif-linkField">' +
-	    '<a href="#" target="" class="uif-link">' + courseCode + ' (' + courseCredits + ')</a>' +
-		'</div>' +
-		'<input name="script" type="hidden" data-role="script" data-for="' + planItemId + '_planned" value="jQuery(\'#\' + \'' + planItemId + '_planned\').click(function(e) { openPopUp(\'' + planItemId + '\',\'add_planned_course\',\'startAddPlannedCourseForm\',\'plan\',{viewId:\'PlannedCourseMenuItem-FormView\',dateAdded:\'2012-05-10 11:07:19.767\',planItemId:\'' + planItemId + '\'},e,\'.uif-collectionItem\',{width:\'150px\'},{tail:{align:\'top\'},align:\'top\',position:\'right\'},false); });">' +
-	    '</div>' +
-        '</div>';
+    var item = '<div id="' + planItemId + '_div" title="' + courseTitle + '" class="uif-group uif-boxGroup uif-verticalBoxGroup uif-collectionItem uif-boxCollectionItem">' +
+                    '<div class="uif-boxLayout uif-verticalBoxLayout clearfix">' +
+                        '<div id="' + planItemId + '_' + type + '" class="uif-field uif-fieldGroup uif-horizontalFieldGroup" style="cursor:pointer;">' +
+                            '<fieldset>' +
+                                '<div class="uif-group uif-boxGroup uif-horizontalBoxGroup">' +
+                                    '<div class="uif-boxLayout uif-horizontalBoxLayout clearfix">' +
+                                        '<div class="uif-field uif-messageField uif-boxLayoutHorizontalItem uif-boxLayoutHorizontalItem">' +
+                                            '<span class="uif-message">' + courseCode + ' (' + courseCredits + ')</span>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</fieldset>' +
+                        '</div>' +
+                        '<input name="script" type="hidden" value="jQuery(\'#\' + \'' + planItemId + '_' + type + '\').click(function(e) { openPopUp(\'' + planItemId + '\',\'add_planned_course\',\'startAddPlannedCourseForm\',\'plan\',{viewId:\'PlannedCourseMenuItem-FormView\',dateAdded:\'2012-06-04 10:34:05.21\',planItemId:\'' + planItemId + '\'},e,\'.uif-collectionItem\',{width:\'150px\'},{tail:{align:\'top\'},align:\'top\',position:\'right\'},false); });">' +
+                    '</div>' +
+                '</div>';
 
     jq(item).prependTo("." + atpId + ".myplan-term-" + type + " .uif-stackedCollectionLayout").css({backgroundColor:"#ffffcc"}).hide().fadeIn(250).animate({backgroundColor:"#ffffff"}, 1500, function() {
         runHiddenScripts(planItemId + "_div");
@@ -24,64 +32,11 @@ function fnAddPlanItem (atpId, type, planItemId, courseCode, courseTitle, course
  */
 function fnRemovePlanItem (atpId, type, planItemId) {
     jq("#" + planItemId).unbind('click');
-    jq("." + atpId + ".myplan-term-" + type + " .uif-stackedCollectionLayout .uif-collectionItem #" + planItemId + "_" + type).parents(".uif-collectionItem").parent("span").fadeOut(250, function(){
+    jq("." + atpId + ".myplan-term-" + type + " .uif-stackedCollectionLayout .uif-collectionItem #" + planItemId + "_" + type).parents(".uif-collectionItem").fadeOut(250, function(){
         jq(this).remove();
     });
 }
-/*
-#################################################################
-    Function: add course to saved courses list
-#################################################################
- */
-function fnAddSavedItem (planItemId, courseId, courseCode, courseTitle, courseCredits) {
-    var item = '\
-		<li>\
-	        <div class="uif-group uif-boxGroup uif-verticalBoxGroup uif-boxSection">\
-                <div>\
-                    <div id="' + planItemId + '_div" class="uif-boxLayout uif-verticalBoxLayout fieldLine clearfix">\
-                        <span class="fieldLine boxLayoutVerticalItem clearfix">\
-                            <span id="' + planItemId + '_span" class="uif-field uif-fieldGroup uif-horizontalFieldGroup">\
-                            <div class="uif-group uif-boxGroup uif-verticalBoxGroup">\
-                                <div>\
-                                    <div style="float:left;" class="uif-boxLayout uif-verticalBoxLayout fieldLine clearfix">\
-                                        <span class="boxLayoutHorizontalItem ">\
-                                            <span class="uif-field uif-messageField fl-text-bold">' + courseCode + '</span>\
-                                        </span>\
-                                        <span class="boxLayoutHorizontalItem ">\
-                                            <span class="uif-field uif-link myplan-text-ellipsis">\
-                                                <a id="' + planItemId + '_saved" href="#" target="" title="' + courseTitle + '" class="uif-field uif-link myplan-text-ellipsis">' + courseTitle + '</a>\
-                                            </span>\
-                                            <input name="script" type="hidden" value="jq(\'#\' +\'124_line0\').click(function(e) { openPlanItemPopUp(\'' + courseId + '\',\'add_remove_course_popover_page\',{courseId:\'' + courseId + '\'},e,\'li\',{tail:{align:\'top\'},align:\'top\'}); });">\
-                                        </span>\
-                                        <span class="boxLayoutHorizontalItem ">\
-                                            <span class="uif-field uif-messageField">(' + courseCredits + ')</span>\
-                                        </span>\
-                                    </div>\
-                                </div>\
-                            </div>\
-                            </span>\
-                            <input name="script" type="hidden" value="jq(document).ready(function(){truncateField(\'' + planItemId + '\');});">\
-                        </span>\
-                    </div>\
-                </div>\
-            </div>\
-        </li>\
-    ';
-    jq(item).prependTo(".myplan-saved-courses-summary ul").css({backgroundColor:"#ffffcc"}).hide().fadeIn(250).animate({backgroundColor:"#ffffff"}, 1500, function() {
-        runHiddenScripts(planItemId + "_div");
-    });
 
-}
-/*
-#################################################################
-    Function: remove course from saved courses list
-#################################################################
- */
-function fnRemoveSavedItem (planItemId, cssStyle) {
-    jq("." + cssStyle + " #" + planItemId + "_span").parents("li").fadeOut(250, function(){
-        jq(this).remove();
-    });
-}
 /*
 #################################################################
     Function: update the count of saved courses
@@ -98,7 +53,7 @@ function fnUpdateSavedCount (savedItemCount) {
 #################################################################
  */
 function fnUpdateCredits (atpId, termCredits) {
-    jq("." + atpId + ".myplan-term-planned .myplan-carousel-term-total .myplan-carousel-term-credits .uif-message").fadeOut(250, function() {
+    jq("." + atpId + ".myplan-term-planned .myplan-carousel-term-total .myplan-carousel-term-credits span.uif-message").not(".uif-requiredMessage").fadeOut(250, function() {
         jq(this).html(termCredits).fadeIn(250);
     });
 }

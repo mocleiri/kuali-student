@@ -188,7 +188,7 @@ function openPlanItemPopUp(id, getId, retrieveOptions, e, selector, popupOptions
 	myplanAjaxSubmitForm("startAddPlannedCourseForm", updateRefreshableComponentCallback, {reqComponentId: id, skipViewInit: "false"}, elementToBlock, id);
     jq("form#"+ id + "_form").remove();
 }
-function openDialog(sText, e) {
+function openDialog(sText, e, close) {
     stopEvent(e);
 
     var dialogHtml = jq('<div />').html(sText).css({
@@ -220,12 +220,16 @@ function openDialog(sText, e) {
 
     fnPositionPopUp(popupBoxId);
 
-    jq("html, #" + popupBoxId + " img.myplan-popup-close").click(function() {
-		fnCloseAllPopups();
-	});
-    jq('#' + popupBoxId).click(function(event){
-    	event.stopPropagation();
- 	});
+    jq(document).bind('click', function(e) {
+        var tempTarget = (e.target) ? e.target : e.srcElement;
+        if ( jq(tempTarget).parents("div.jquerybubblepopup.jquerybubblepopup-myplan").length === 0) {
+            fnCloseAllPopups();
+            jq(document).unbind('click');
+        }
+    });
+    jq("#" + popupBoxId + " img.myplan-popup-close").click(function() {
+        fnCloseAllPopups();
+    });
 }
 
 function fnPositionPopUp(popupBoxId) {
@@ -251,12 +255,15 @@ function myplanAjaxSubmitPlanItem(id, type, methodToCall, e, bDialog) {
     jq('form#' + id + '_form input[name="viewId"]').remove();
     jq('<input type="hidden" name="viewId" value="PlannedCourse-FormView" />').appendTo(jq("form#" + id + "_form"));
     var updateRefreshableComponentCallback = function(htmlContent){
-        var status = jq.trim( jq("#request_status_item_key", htmlContent).text().toLowerCase() );
+        // if (typeof (console) !== "undefined") console.log( jq('<div>').append(htmlContent).html() );
+        var status = jq.trim( jq("span#request_status_item_key", htmlContent).text().toLowerCase() );
+        eval( jq("input[data-for='plan_item_action_response_page']", htmlContent).val().replace("#plan_item_action_response_page","body") );
+        // if (typeof (console) !== "undefined") console.log( jq('body').data('validationMessages') );
         elementToBlock.unblock();
         switch (status) {
             case 'success':
-                var oMessage = { 'message' : jq.trim( jq("#errorsFieldForPage_infoMessages ul li:first", htmlContent).text() ), 'cssClass':'myplan-message-border myplan-message-success' };
-                var json = jq.parseJSON( jq.trim( jq("#json_events_item_key", htmlContent).text().replace(/\\/g,"") ) );
+                var oMessage = { 'message' : jq('body').data('validationMessages').serverInfo[0], 'cssClass':'myplan-message-border myplan-message-success' };
+                var json = jq.parseJSON( jq.trim( jq("span#json_events_item_key", htmlContent).text().replace(/\\/g,"") ) );
                 for (var key in json) {
                     if (json.hasOwnProperty(key)) {
                         eval('jq.publish("' + key + '", [' + JSON.stringify( jq.extend(json[key], oMessage) ) + ']);');
@@ -264,7 +271,7 @@ function myplanAjaxSubmitPlanItem(id, type, methodToCall, e, bDialog) {
                 }
                 break;
             case 'error':
-                var oMessage = { 'message' : jq.trim( jq("#errorsFieldForPage_errorMessages ul li:first", htmlContent).text() ), 'cssClass':'myplan-message-border myplan-message-error' };
+                var oMessage = { 'message' : jq('body').data('validationMessages').serverErrors[0], 'cssClass':'myplan-message-border myplan-message-error' };
                 if (!bDialog) {
                     var sContent = jq("<div />").append(oMessage.message).addClass("myplan-message-noborder myplan-message-error").css({"background-color":"transparent","color":"#ff0606","border":"none"});
                     var sHtml = jq("<div />").append('<div class="uif-headerField uif-sectionHeaderField"><h3 class="uif-header">' + targetText + '</h3></div>').append(sContent);
@@ -495,12 +502,14 @@ function fnPopoverSlider(showId, parentId, direction) {
  */
 function fnCloseAllPopups() {
     jq("div.jquerybubblepopup.jquerybubblepopup-myplan").remove();
+    /*
     jq("*").each(function() {
         if ( jq(this).HasBubblePopup() ) {
             jq(this).HideAllBubblePopups();
             jq(this).RemoveBubblePopup();
         }
     });
+    */
 }
 /*
 ######################################################################################

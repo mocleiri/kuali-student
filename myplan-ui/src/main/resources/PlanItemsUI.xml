@@ -876,16 +876,15 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseCode ne null and #line.courseId ne null ? true : false}" p:style="cursor:pointer;"
+                <!-- TODO: Change ID to unique for repeated courses -->
+                <bean p:id="@{#line.courseId}_completed" parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseCode ne null and #line.courseId ne null ? true : false}" p:style="cursor:pointer;"
                       p:onClickScript="openPopUp('@{#line.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseId}',acadRecAtpId:'@{#line.atpId}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);">
                     <property name="items">
                         <list>
-                            <!-- TODO: Change ID to unique for repeated courses -->
-                            <!-- Course matches course id -->
-                            <bean p:id="@{#line.courseId}_completed" parent="Uif-MessageField">
-                               <property name="messageText" value="@{#line.courseCode} (@{#line.credit})"/>
+                            <bean parent="Uif-MessageField">
+                                <property name="messageText" value="@{#line.courseCode} (@{#line.credit})"/>
+                                <property name="title" value="@{#line.courseTitle}"/>
                             </bean>
-                            <!-- Grade -->
                             <bean parent="Uif-MessageField" p:render="@{#line.grade ne null ? true : false}">
                                 <property name="messageText" value="@{#line.grade}"/>
                                 <property name="style" value="float:right;"/>
@@ -898,12 +897,11 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseCode ne null and #line.courseId eq null ? true : false}" p:style="cursor:default;">
+                <!-- TODO: Change ID to unique for repeated courses -->
+                <bean p:id="@{#line.courseId}_completed" parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseCode ne null and #line.courseId eq null ? true : false}" p:style="cursor:default;">
                     <property name="items">
                         <list>
-                            <!-- TODO: Change ID to unique for repeated courses -->
-                            <!-- Course NOT matching any course id -->
-                            <bean p:id="@{#line.courseId}_completed" parent="Uif-MessageField">
+                            <bean parent="Uif-MessageField">
                                 <property name="messageText" value="@{#line.courseCode} (@{#line.credit})"/>
                                 <property name="cssClasses">
                                     <list merge="true">
@@ -911,7 +909,6 @@
                                     </list>
                                 </property>
                             </bean>
-                            <!-- Grade -->
                             <bean parent="Uif-MessageField" p:render="@{#line.grade ne null ? true : false}">
                                 <property name="messageText" value="@{#line.grade}"/>
                                 <property name="style" value="float:right;"/>
@@ -961,11 +958,11 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseDetails.code ne null ? true : false}" p:style="cursor:pointer;"
+                <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseDetails.code ne null ? true : false}" p:style="cursor:pointer;"
                       p:onClickScript="openPopUp('@{#line.courseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.courseDetails.courseId}',dateAdded:'@{#line.planItemDataObject.dateAdded}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);">
                     <property name="items">
                         <list>
-                            <bean p:id="@{#line.planItemDataObject.id}_planned" parent="Uif-MessageField">
+                            <bean parent="Uif-MessageField">
                                <property name="messageText" value="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"/>
                             </bean>
                         </list>
@@ -1014,11 +1011,11 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseDetails.code ne null ? true : false}" p:style="cursor:pointer;"
+                <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-HorizontalFieldGroup" p:render="@{#line.courseDetails.code ne null ? true : false}" p:style="cursor:pointer;"
                       p:onClickScript="openPopUp('@{#line.CourseDetails.courseId}','add_planned_course','startAddPlannedCourseForm','plan',{viewId:'PlannedCourseMenuItem-FormView',courseId:'@{#line.CourseDetails.courseId}',planItemId:'@{#line.planItemDataObject.id}'},e,'.uif-collectionItem',{width:'150px'},{tail:{align:'top'},align:'top',position:'right'},false);">
                     <property name="items">
                         <list>
-                            <bean p:id="@{#line.planItemDataObject.id}_backup" parent="Uif-MessageField">
+                            <bean parent="Uif-MessageField">
                                <property name="messageText" value="@{#line.courseDetails.code} (@{#line.courseDetails.credit})"/>
                             </bean>
                         </list>
