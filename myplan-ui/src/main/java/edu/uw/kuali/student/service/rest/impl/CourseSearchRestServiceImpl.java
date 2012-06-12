@@ -97,7 +97,7 @@ public class CourseSearchRestServiceImpl extends ServerResource {
                     append("\"inquiry?methodToCall=start&viewId=CourseDetails-InquiryView&courseId=").
                     append(item.getCourseId()).append("\\").append("\" target=\\").append("\"_self\\").
                     append("\" title=\\").append("\"").append(item.getCourseName()).append("\\").append("\"").
-                    append(" style=\\").append("\"width: 175px;\\").append("\" class=\\").
+                    append(" style=\\").append("\"width: 171px;\\").append("\" class=\\").
                     append("\"myplan-text-ellipsis\\").append("\"  >").append(item.getCourseName()).append("</a>\"").append(",\"").
                     append(item.getCredit()).append("\",").append(scheduledAndOfferedTerms).append(",\"").
                     append(item.getGenEduReq()).append("\",\"").append(item.getStatus().getLabel()).append("\"]").append(", ");

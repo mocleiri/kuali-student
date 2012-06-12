@@ -258,7 +258,6 @@ function myplanAjaxSubmitPlanItem(id, type, methodToCall, e, bDialog) {
         // if (typeof (console) !== "undefined") console.log( jq('<div>').append(htmlContent).html() );
         var status = jq.trim( jq("span#request_status_item_key", htmlContent).text().toLowerCase() );
         eval( jq("input[data-for='plan_item_action_response_page']", htmlContent).val().replace("#plan_item_action_response_page","body") );
-        // if (typeof (console) !== "undefined") console.log( jq('body').data('validationMessages') );
         elementToBlock.unblock();
         switch (status) {
             case 'success':

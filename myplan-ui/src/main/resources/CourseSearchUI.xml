@@ -245,6 +245,11 @@
     </bean>
     <bean id="course_search_results" parent="Uif-DataTable"
           p:ajaxSource="@{#ConfigProperties['courseSearchBaseUrl']}/search/course/@{searchQuery}/@{searchTerm}/@{campusSelect}">
+        <property name="cssClasses">
+            <list merge="true">
+                <value>myplan-course-search-results-datatable</value>
+            </list>
+        </property>
         <property name="richTable.templateOptions">
             <map merge="true">
                 <entry key="oLanguage"
@@ -263,12 +268,12 @@
                 <entry key="aaSorting" value="[]"/>
                 <entry key="aoColumns"
                        value="[
-                            {'bSortable':true, 'bSearchable':false},
-                            {'bSortable':true, 'bSearchable':false, 'sWidth':'175px'},
-                            {'bSortable':false, 'bSearchable':false},
-                            {'bSortable':false, 'bSearchable':false},
-                            {'bSortable':false, 'bSearchable':false},
-                            {'bSortable':false, 'bSearchable':false}
+                            {'sTitle':'Code','bSortable':true, 'bSearchable':false, 'sClass':'fl-text-bold myplan-text-nowrap', 'sWidth':'69px'},
+                            {'sTitle':'Course Name','bSortable':true, 'bSearchable':false, 'sWidth':'171px'},
+                            {'sTitle':'Credit','bSortable':false, 'bSearchable':false, 'sWidth':'34px'},
+                            {'sTitle':'Quarter Offered', 'bSortable':false, 'bSearchable':false, 'sClass':'myplan-data-list', 'sWidth':'122px'},
+                            {'sTitle':'Gen Edu Req', 'bSortable':false, 'bSearchable':false, 'sWidth':'74px'},
+                            {'sTitle':'Bookmark', 'bSortable':false, 'bSearchable':false, 'sClass':'fl-text-align-center', 'sWidth':'72px'}
                         ]"/>
                 <entry key="fnDrawCallback"
                        value="function() {
@@ -470,7 +475,7 @@
     <!-- Group for Search Facets -->
     <bean id="course_search_results_facets" parent="Uif-VerticalBoxGroup" p:headerText="Narrow Results By">
         <property name="header">
-            <bean parent="Uif-HeaderFour"/>
+            <bean parent="Uif-HeaderFive"/>
         </property>
         <property name="cssClasses">
             <list merge="true">
@@ -492,7 +497,7 @@
     <bean id="facet_quarter" parent="Uif-VerticalBoxGroup" p:headerText="Quarter">
         <property name="disclosure.render" value="true"/>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="cssClasses">
             <list merge="true">
@@ -518,6 +523,7 @@
     </bean>
 
     <bean id="course_search_facet_quarter" parent="Uif-ListCollectionGroup">
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="collectionObjectClass" value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
         <property name="propertyName" value="termsFacetItems"/>
         <property name="items">
@@ -539,7 +545,7 @@
     <bean id="facet_genedureq" parent="Uif-VerticalBoxGroup" p:headerText="Gen. Edu. Req.">
         <property name="disclosure.render" value="true"/>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="cssClasses">
             <list merge="true">
@@ -565,6 +571,7 @@
     </bean>
 
     <bean id="course_search_facet_genedureq" parent="Uif-ListCollectionGroup">
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="collectionObjectClass"
                   value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
         <property name="propertyName" value="genEduReqFacetItems"/>
@@ -587,7 +594,7 @@
     <bean id="facet_credits" parent="Uif-VerticalBoxGroup" p:headerText="Credits">
         <property name="disclosure.render" value="true"/>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="cssClasses">
             <list merge="true">
@@ -613,6 +620,7 @@
     </bean>
 
     <bean id="course_search_facet_credits" parent="Uif-ListCollectionGroup">
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="collectionObjectClass"
                   value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
         <property name="propertyName" value="creditsFacetItems"/>
@@ -635,7 +643,7 @@
     <bean id="facet_level" parent="Uif-VerticalBoxGroup" p:headerText="Course Level">
         <property name="disclosure.render" value="true"/>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="cssClasses">
             <list merge="true">
@@ -661,6 +669,7 @@
     </bean>
 
     <bean id="course_search_facet_level" parent="Uif-ListCollectionGroup">
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="collectionObjectClass"
                   value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
         <property name="propertyName" value="courseLevelFacetItems"/>
@@ -683,7 +692,7 @@
     <bean id="facet_curriculum" parent="Uif-VerticalBoxGroup" p:headerText="Course Prefix">
         <property name="disclosure.render" value="true"/>
         <property name="header">
-            <bean parent="Uif-HeaderFive"/>
+            <bean parent="Uif-HeaderSix"/>
         </property>
         <property name="cssClasses">
             <list merge="true">
@@ -709,6 +718,7 @@
     </bean>
 
     <bean id="course_search_facet_curriculum" parent="Uif-ListCollectionGroup">
+        <property name="layoutManager.lineGroupPrototype.header.render" value="false"/>
         <property name="collectionObjectClass"
                   value="org.kuali.student.myplan.course.dataobject.FacetItem"/>
         <property name="propertyName" value="curriculumFacetItems"/>

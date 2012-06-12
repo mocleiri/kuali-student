@@ -75,7 +75,6 @@
         <property name="items">
             <list>
                 <bean parent="Uif-HorizontalFieldGroup" p:fieldLabel.render="false" p:id="@{#line.planItemDataObject.id}" p:style="cursor:pointer;">
-
                     <property name="onDocumentReadyScript" value="truncateField('@{#line.planItemDataObject.id}');"/>
                     <property name="onClickScript"
                               value="openPlanItemPopUp('@{#line.courseDetails.courseId}','add_remove_course_popover_page',{planItemId:'@{#line.planItemDataObject.id}', courseId:'@{#line.courseDetails.courseId}'},e,'li',{tail:{align:'top'},align:'top'});"/>
