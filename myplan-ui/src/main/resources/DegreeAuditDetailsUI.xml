@@ -99,7 +99,7 @@
                                             <property name="headerText" value="OTHER STUFF[TBD]"/>
                                             <property name="items">
                                                 <list>
-                                                      <ref bean="watch_list"/>
+                                                    <ref bean="watch_list"/>
                                                 </list>
                                             </property>
                                         </bean>
@@ -124,7 +124,7 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-VerticalBoxGroup" >
+                <bean parent="Uif-VerticalBoxGroup">
                     <property name="items">
                         <list>
                             <bean id="txtaudit" parent="Uif-Message" p:messageText="@{getAuditHtml()}"
@@ -136,7 +136,7 @@
         </property>
     </bean>
 
-    <bean id="run_degree_audits" parent="Uif-VerticalBoxGroup"  p:width="700px">
+    <bean id="run_degree_audits" parent="Uif-VerticalBoxGroup" p:width="700px">
         <property name="cssClasses">
             <list merge="true">
                 <value>fl-container-700</value>
@@ -151,6 +151,7 @@
                 <ref bean="select_instruction"/>
                 <ref bean="campus_params"/>
                 <ref bean="program_params"/>
+                <ref bean="audit_type"/>
                 <ref bean="audit_instruction"/>
             </list>
         </property>
@@ -223,6 +224,26 @@
             <list merge="true">
                 <value>myplan-button</value>
                 <value>myplan-button-blue</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="audit_type" parent="Uif-HorizontalFieldGroup" p:style="margin: 0px 7px; display:block;">
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="auditType" p:width="200px" p:defaultValue="kauli.audit.type.default">
+                    <property name="control">
+                        <bean parent="Uif-HorizontalRadioControl">
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="kauli.audit.type.default" p:value="Text"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="kauli.audit.type.html" p:value="HTML"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
