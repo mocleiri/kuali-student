@@ -6,9 +6,8 @@ import javax.persistence.*;
 /**
  * Language model.
  * <p/>
- * User: mike
- * Date: 1/22/12
- * Time: 3:47 PM
+ *
+ * @author Michael Ivanov
  */
 @Entity
 @Table(name = "KSSA_LANGUAGE")
@@ -29,7 +28,7 @@ public class Language extends AuditableEntity {
         return id;
     }
 
-    @Column(name = "LOCALE", unique = true, nullable = false, length = 5)
+    @Column(name = "LOCALE", unique = true, nullable = false, length = 20)
     public String getLocale() {
         return locale;
     }

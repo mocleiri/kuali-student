@@ -25,6 +25,7 @@ insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('ROLLUP_SEQ', 1001
 insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('TAG_SEQ', 1001);
 insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('TAX_TYPE_SEQ', 1001);
 insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('TRANSACTION_SEQ', 1001);
+insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('LANGUAGE_SEQ', 1001);
 
 
 ---------------------------------------------------

@@ -9,9 +9,8 @@ import java.util.Date;
  * AuditableEntity.
  * It provides basic information about who/when created/updated the entity
  * <p/>
- * User: ivanovm
- * Date: 3/13/12
- * Time: 3:56 PM
+ *
+ * @author Michael Ivanov
  */
 @Auditable
 @MappedSuperclass
