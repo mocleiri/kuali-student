@@ -29,3 +29,4 @@ drop table KSA.KSSA_TRANSACTION_TYPE cascade constraints;
 drop table KSA.KSSA_TRANSACTION_TYPE_TAG cascade constraints;
 drop table KSA.KSSA_LANGUAGE cascade constraints;
 drop table KSA.KSSA_SEQUENCE_TABLE cascade constraints;
+drop table KSA.KSSA_UI_STRING cascade constraints;

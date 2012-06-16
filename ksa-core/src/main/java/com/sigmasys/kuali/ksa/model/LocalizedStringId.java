@@ -1,32 +1,31 @@
 package com.sigmasys.kuali.ksa.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
- * The composite primary key for TransactionType entity
+ * The composite primary key for LocalizedString entity
  *
  * @author Michael Ivanov
  */
 @SuppressWarnings("serial")
 @Embeddable
-public class TransactionTypeId implements Serializable {
+public class LocalizedStringId implements Serializable {
 
     private String id;
-    private Integer subCode;
+    private String locale;
 
 
-    public TransactionTypeId() {
+    public LocalizedStringId() {
     }
 
-    public TransactionTypeId(String id, Integer subCode) {
+    public LocalizedStringId(String id, String locale) {
         setId(id);
-        setSubCode(subCode);
+        setLocale(locale);
     }
 
-    @Column(name = "ID", length = 20)
+    @Column(name = "ID", length = 128)
     public String getId() {
         return id;
     }
@@ -35,13 +34,13 @@ public class TransactionTypeId implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "SUB_CODE")
-    public Integer getSubCode() {
-        return subCode;
+    @Column(name = "LOCALE", length = 20)
+    public String getLocale() {
+        return locale;
     }
 
-    public void setSubCode(Integer subCode) {
-        this.subCode = subCode;
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class TransactionTypeId implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((subCode == null) ? 0 : subCode.hashCode());
+        result = prime * result + ((locale == null) ? 0 : locale.hashCode());
         return result;
     }
 
@@ -68,7 +67,7 @@ public class TransactionTypeId implements Serializable {
             return false;
         }
 
-        TransactionTypeId other = (TransactionTypeId) obj;
+        LocalizedStringId other = (LocalizedStringId) obj;
 
         if (getId() == null) {
             if (other.getId() != null) {
@@ -78,11 +77,11 @@ public class TransactionTypeId implements Serializable {
             return false;
         }
 
-        if (getSubCode() == null) {
-            if (other.getSubCode() != null) {
+        if (getLocale() == null) {
+            if (other.getLocale() != null) {
                 return false;
             }
-        } else if (!getSubCode().equals(other.getSubCode())) {
+        } else if (!getLocale().equals(other.getLocale())) {
             return false;
         }
 
