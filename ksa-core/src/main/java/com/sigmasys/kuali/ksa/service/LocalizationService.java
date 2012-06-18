@@ -1,8 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import java.io.Reader;
-
 /**
  * Localization Service
  * <p/>
@@ -23,9 +21,9 @@ public interface LocalizationService {
     /**
      * Imports the locale-aware resources specified by java.io.Reader for the given import type.
      *
-     * @param reader java.io.Reader of the resources to be imported
+     * @param content    the content of the resources to be imported
      * @param importType Import type
      */
-    void importResources(Reader reader, ImportType importType);
+    void importResources(String content, ImportType importType);
 
 }
