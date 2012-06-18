@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.xliff;
 
+import java.io.Reader;
 import java.io.StringReader;
 
 import java.util.HashMap;
@@ -42,13 +43,19 @@ public class XliffParser {
 
 
     /**
-     * Parses the xliff file.
+     * Parses the xliff content
      */
-    public Map<String, TransUnit> parseXliff(String content) {
+    public Map<String, TransUnit> parse(String xliffContent) {
+        return parse(new StringReader(xliffContent));
+    }
 
+    /**
+     * Parses the xliff reading its content from the Reader
+     */
+    public Map<String, TransUnit> parse(Reader xliffReader) {
         try {
             Map<String, TransUnit> transUnits = new HashMap<String, TransUnit>();
-            XMLStreamReader streamReader = xmlInputFactory.createXMLStreamReader(new StringReader(content));
+            XMLStreamReader streamReader = xmlInputFactory.createXMLStreamReader(xliffReader);
             while (streamReader.next() != XMLEvent.END_DOCUMENT) {
                 int eventType = streamReader.getEventType();
                 switch (eventType) {
