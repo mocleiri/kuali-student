@@ -24,7 +24,7 @@ public class XliffParserTest extends AbstractServiceTest {
     @Test
     public void parseXliff() throws Exception {
 
-        String content = CommonUtils.getResourceAsString("us-jp-xliff.xml");
+        String content = CommonUtils.getResourceAsString("xliff/us-jp-xliff.xml");
         Xliff xliff = xliffParser.parse(content);
 
         Assert.notNull(xliff);

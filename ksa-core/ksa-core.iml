@@ -9,12 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/main/resources" />
-          <root url="file://$MODULE_DIR$/src/test/java" />
-          <root url="file://$MODULE_DIR$/src/test/resources" />
-        </sourceRoots>
       </configuration>
     </facet>
     <facet type="gwt" name="GWT">
@@ -36,8 +30,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/test-annotations" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -73,6 +66,7 @@
     <orderEntry type="library" name="Maven: org.jvnet.mimepull:mimepull:1.8" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.stream.buffer:streambuffer:1.4" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.woodstox:woodstox-core-asl:4.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.woodstox:stax2-api:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.ws:policy:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.txw2:txw2:20110809" level="project" />
     <orderEntry type="library" name="Maven: relaxngDatatype:relaxngDatatype:20020414" level="project" />

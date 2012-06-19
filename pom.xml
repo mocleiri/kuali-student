@@ -182,10 +182,10 @@
                     <groupId>org.jvnet.staxex</groupId>
                     <artifactId>stax-ex</artifactId>
                 </exclusion>
-                <exclusion>
+                <!--exclusion>
                     <groupId>org.codehaus.woodstox</groupId>
                     <artifactId>wstx-asl</artifactId>
-                </exclusion>
+                </exclusion-->
                 <exclusion>
                     <groupId>javax.xml.bind</groupId>
                     <artifactId>jsr173_api</artifactId>
@@ -198,10 +198,10 @@
                     <artifactId>jaxws-rt</artifactId>
                     <groupId>com.sun.xml.ws</groupId>
                 </exclusion>
-                <exclusion>
+                <!--exclusion>
                     <artifactId>stax2-api</artifactId>
                     <groupId>org.codehaus.woodstox</groupId>
-                </exclusion>
+                </exclusion-->
                 <exclusion>
                     <artifactId>jaxb-impl</artifactId>
                     <groupId>com.sun.xml.bind</groupId>

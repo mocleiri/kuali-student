@@ -63,10 +63,10 @@ public class XmlSchemaValidator {
         // Validate the document against the schema
         try {
             validator.validate(source);
-            logger.info("XML schema is valid");
+            logger.info("XML is valid");
             return true;
         } catch (Throwable t) {
-            logger.info("XML schema is invalid", t);
+            logger.info("XML is invalid", t);
             return false;
         }
 

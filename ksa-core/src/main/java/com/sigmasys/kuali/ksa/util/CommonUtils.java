@@ -2,10 +2,6 @@ package com.sigmasys.kuali.ksa.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Session;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
-
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.*;
@@ -51,15 +47,19 @@ public final class CommonUtils {
     }
 
     public static String getResourceAsString(String resource) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        if (classLoader == null) {
+            classLoader = CommonUtils.class.getClassLoader();
+        }
+        if (classLoader == null) {
+            classLoader = ClassLoader.getSystemClassLoader();
+        }
+        return getResourceAsString(resource, classLoader);
+    }
+
+    public static String getResourceAsString(String resource, ClassLoader classLoader) {
         BufferedInputStream in = null;
         try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            if (classLoader == null) {
-                classLoader = CommonUtils.class.getClassLoader();
-            }
-            if (classLoader == null) {
-                classLoader = ClassLoader.getSystemClassLoader();
-            }
             in = new BufferedInputStream(classLoader.getResourceAsStream(resource));
             byte[] buffer = new byte[1024];
             StringBuilder stringBuffer = new StringBuilder();

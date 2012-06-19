@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.2">
-    <file original="Graphic Example.psd"
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2"
+       xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+       xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+
+    <file original="xliffExample.xml"
           source-language="en-US" target-language="ja-JP"
-          tool="Rainbow" datatype="photoshop">
+          tool="Rainbow" datatype="xml">
         <header>
             <skl>
-                <external-file uid="3BB236513BB24732" href="Graphic Example.psd.skl"/>
+                <external-file uid="3BB236513BB24732" href="xliffExample.xml.skl"/>
             </skl>
             <phase-group>
                 <phase phase-name="extract" process-name="extraction"
-                       tool="Rainbow" date="20010926T152258Z"
+                       tool="Rainbow" date="2002-01-25T21:06:00Z"
                        company-name="NeverLand Inc." job-id="123"
                        contact-name="Peter Pan" contact-email="ppan@example.com">
                     <note>Make sure to use the glossary I sent you yesterday.
@@ -37,4 +40,5 @@
             </trans-unit>
         </body>
     </file>
+
 </xliff>

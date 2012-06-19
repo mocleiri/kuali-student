@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -33,18 +34,20 @@ public class XliffParser {
 
     private static final String XLIFF_SCHEMA_LOCATION = "classpath*:xliff-core-1.2-transitional.xsd";
 
+    private static final String XLIFF_NAMESPACE = "urn:oasis:names:tc:xliff:document:1.2";
+
     private static final String ID = "id";
-    private static final String FILE = "file";
-    private static final String TRANS_UNIT = "trans-unit";
-    private static final String SOURCE = "source";
-    private static final String TARGET = "target";
+    private static final String FILE = new QName(XLIFF_NAMESPACE, "file").toString();
+    private static final String TRANS_UNIT = new QName(XLIFF_NAMESPACE, "trans-unit").toString();
+    private static final String SOURCE = new QName(XLIFF_NAMESPACE, "source").toString();
+    private static final String TARGET = new QName(XLIFF_NAMESPACE, "target").toString();
     private static final String SOURCE_LANGUAGE = "source-language";
     private static final String TARGET_LANGUAGE = "target-language";
 
     private final XMLInputFactory2 xmlInputFactory;
     private final XmlSchemaValidator schemaValidator;
 
-    private XliffParser() {
+    public XliffParser() {
         xmlInputFactory = (XMLInputFactory2) XMLInputFactory.newInstance();
         xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
@@ -75,14 +78,17 @@ public class XliffParser {
                 switch (eventType) {
                     case XMLEvent.START_ELEMENT:
                         String currentElement = streamReader.getName().toString();
+                        logger.info("Processing '" + currentElement + "'...");
                         if (FILE.equals(currentElement)) {
                             String sourceLanguage = null;
                             String targetLanguage = null;
                             for (int i = 0; i < streamReader.getAttributeCount(); i++) {
                                 String attrName = streamReader.getAttributeName(i).toString();
                                 if (SOURCE_LANGUAGE.equals(attrName)) {
+                                    logger.info("Processing '" + SOURCE_LANGUAGE + "'...");
                                     sourceLanguage = streamReader.getAttributeValue(i);
                                 } else if (TARGET_LANGUAGE.equals(attrName)) {
+                                    logger.info("Processing '" + TARGET_LANGUAGE + "'...");
                                     targetLanguage = streamReader.getAttributeValue(i);
                                 }
                             }
@@ -119,8 +125,15 @@ public class XliffParser {
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
-        xliff.setSourceLanguage(values[0].toLowerCase());
-        xliff.setSourceCountry(values[1].toUpperCase());
+        String languageCode = values[0].toLowerCase();
+        String countryCode = values[1].toUpperCase();
+        if (SOURCE_LANGUAGE.equals(attributeName)) {
+            xliff.setSourceLanguage(languageCode);
+            xliff.setSourceCountry(countryCode);
+        } else if (TARGET_LANGUAGE.equals(attributeName)) {
+            xliff.setTargetLanguage(languageCode);
+            xliff.setTargetCountry(countryCode);
+        }
     }
 
 
@@ -137,6 +150,7 @@ public class XliffParser {
         for (int i = 0; i < streamReader.getAttributeCount(); i++) {
             String attrName = streamReader.getAttributeName(i).toString();
             if (ID.equals(attrName)) {
+                logger.info("Processing " + TRANS_UNIT + "'s ID...");
                 transUnitId = streamReader.getAttributeValue(i);
                 break;
             }
@@ -162,9 +176,11 @@ public class XliffParser {
                     case XMLEvent.CHARACTERS:
                         String text = streamReader.getText();
                         if (SOURCE.equals(currentElement)) {
+                            logger.info("Processing '" + SOURCE + "'...");
                             transUnit.setSource(text);
                         }
                         if (TARGET.equals(currentElement)) {
+                            logger.info("Processing '" + TARGET + "'...");
                             transUnit.setTarget(text);
                         }
                 }
