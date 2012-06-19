@@ -8,6 +8,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -16,32 +17,47 @@ import javax.xml.validation.Validator;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.net.URL;
+import java.util.*;
+
 
 public class XmlSchemaValidator {
 
     private static final Log logger = LogFactory.getLog(XmlSchemaValidator.class);
 
-    private static final SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+    private static final SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+    private static final ResourcePatternResolver resourcePatternResolver =
+            ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
 
     private final Schema schema;
 
-    public XmlSchemaValidator(String schemaLocation) {
-        schema = getSchema(schemaLocation);
+    public XmlSchemaValidator(String... schemaLocations) {
+        schema = getSchema(schemaLocations);
     }
 
-    private Schema getSchema(String schemaLocation) {
-        try {
-            ResourcePatternResolver resourcePatternResolver =
-                    ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
+    private List<Source> getSchemaSources(String... schemaLocations) throws IOException {
+        List<Source> schemaSources = new LinkedList<Source>();
+        for (String schemaLocation : schemaLocations) {
             Resource[] resources = resourcePatternResolver.getResources(schemaLocation);
-            if (resources == null || resources.length < 1) {
-                String errMsg = "Cannot retrieve the XML schema located at " + schemaLocation;
-                logger.error(errMsg);
-                throw new IllegalStateException(errMsg);
+            if (resources != null) {
+                for (Resource resource : resources) {
+                    schemaSources.add(new StreamSource(resource.getURL().toExternalForm()));
+                }
             }
-            URL schemaUrl = resources[0].getURL();
-            return schemaFactory.newSchema(schemaUrl);
+        }
+        return schemaSources;
+    }
+
+    private Schema getSchema(String... schemaLocations) {
+        try {
+            List<Source> schemaSources = getSchemaSources(schemaLocations);
+            if (!schemaSources.isEmpty()) {
+                return schemaFactory.newSchema(schemaSources.toArray(new Source[schemaSources.size()]));
+            }
+            HashSet<String> locations = new HashSet<String>(Arrays.asList(schemaLocations));
+            String errMsg = "Cannot retrieve the XML schema located at " + locations;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
@@ -71,5 +87,6 @@ public class XmlSchemaValidator {
         }
 
     }
+
 
 }

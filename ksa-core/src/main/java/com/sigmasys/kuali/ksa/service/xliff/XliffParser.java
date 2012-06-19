@@ -33,6 +33,7 @@ public class XliffParser {
     private static final Log logger = LogFactory.getLog(XliffParser.class);
 
     private static final String XLIFF_SCHEMA_LOCATION = "classpath*:xliff-core-1.2-transitional.xsd";
+    private static final String XML_SCHEMA_LOCATION = "classpath*:xml.xsd";
 
     private static final String XLIFF_NAMESPACE = "urn:oasis:names:tc:xliff:document:1.2";
 
@@ -53,7 +54,7 @@ public class XliffParser {
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
         xmlInputFactory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.FALSE);
         xmlInputFactory.configureForSpeed();
-        schemaValidator = new XmlSchemaValidator(XLIFF_SCHEMA_LOCATION);
+        schemaValidator = new XmlSchemaValidator(XML_SCHEMA_LOCATION, XLIFF_SCHEMA_LOCATION);
     }
 
     /**
