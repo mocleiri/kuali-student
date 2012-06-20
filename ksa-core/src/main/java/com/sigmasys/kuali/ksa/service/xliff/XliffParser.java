@@ -38,6 +38,7 @@ public class XliffParser {
     private static final String XLIFF_NAMESPACE = "urn:oasis:names:tc:xliff:document:1.2";
 
     private static final String ID = "id";
+    private static final String MAX_BYTES = "maxbytes";
     private static final String FILE = new QName(XLIFF_NAMESPACE, "file").toString();
     private static final String TRANS_UNIT = new QName(XLIFF_NAMESPACE, "trans-unit").toString();
     private static final String SOURCE = new QName(XLIFF_NAMESPACE, "source").toString();
@@ -75,32 +76,30 @@ public class XliffParser {
             Map<String, TransUnit> transUnits = new HashMap<String, TransUnit>();
             XMLStreamReader streamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xliffContent));
             while (streamReader.next() != XMLEvent.END_DOCUMENT) {
-                int eventType = streamReader.getEventType();
-                switch (eventType) {
-                    case XMLEvent.START_ELEMENT:
-                        String currentElement = streamReader.getName().toString();
-                        logger.info("Processing '" + currentElement + "'...");
-                        if (FILE.equals(currentElement)) {
-                            String sourceLanguage = null;
-                            String targetLanguage = null;
-                            for (int i = 0; i < streamReader.getAttributeCount(); i++) {
-                                String attrName = streamReader.getAttributeName(i).toString();
-                                if (SOURCE_LANGUAGE.equals(attrName)) {
-                                    logger.info("Processing '" + SOURCE_LANGUAGE + "'...");
-                                    sourceLanguage = streamReader.getAttributeValue(i);
-                                } else if (TARGET_LANGUAGE.equals(attrName)) {
-                                    logger.info("Processing '" + TARGET_LANGUAGE + "'...");
-                                    targetLanguage = streamReader.getAttributeValue(i);
-                                }
-                            }
-                            setLanguage(xliff, SOURCE_LANGUAGE, sourceLanguage);
-                            setLanguage(xliff, TARGET_LANGUAGE, targetLanguage);
-                        } else if (TRANS_UNIT.equals(currentElement)) {
-                            TransUnit transUnit = getTransUnit(streamReader, eventType);
-                            if (transUnit.getId() != null) {
-                                transUnits.put(transUnit.getId(), transUnit);
+                if (XMLEvent.START_ELEMENT == streamReader.getEventType()) {
+                    String currentElement = streamReader.getName().toString();
+                    logger.info("Processing '" + currentElement + "'...");
+                    if (FILE.equals(currentElement)) {
+                        String sourceLanguage = null;
+                        String targetLanguage = null;
+                        for (int i = 0; i < streamReader.getAttributeCount(); i++) {
+                            String attrName = streamReader.getAttributeName(i).toString();
+                            if (SOURCE_LANGUAGE.equals(attrName)) {
+                                logger.info("Processing '" + SOURCE_LANGUAGE + "'...");
+                                sourceLanguage = streamReader.getAttributeValue(i);
+                            } else if (TARGET_LANGUAGE.equals(attrName)) {
+                                logger.info("Processing '" + TARGET_LANGUAGE + "'...");
+                                targetLanguage = streamReader.getAttributeValue(i);
                             }
                         }
+                        setLanguage(xliff, SOURCE_LANGUAGE, sourceLanguage);
+                        setLanguage(xliff, TARGET_LANGUAGE, targetLanguage);
+                    } else if (TRANS_UNIT.equals(currentElement)) {
+                        TransUnit transUnit = getTransUnit(streamReader);
+                        if (transUnit.getId() != null) {
+                            transUnits.put(transUnit.getId(), transUnit);
+                        }
+                    }
                 }
             }
 
@@ -142,18 +141,21 @@ public class XliffParser {
      * Retrieve one &lt;trans-unit/&gt; contents.
      *
      * @param streamReader XML Stream reader
-     * @param eventType    Type of event where parsing stopped in previous step
      * @return Trans unit read
      */
-    private TransUnit getTransUnit(XMLStreamReader streamReader, int eventType) {
+    private TransUnit getTransUnit(XMLStreamReader streamReader) {
 
         String transUnitId = null;
+        Integer maxBytes = null;
         for (int i = 0; i < streamReader.getAttributeCount(); i++) {
             String attrName = streamReader.getAttributeName(i).toString();
+            String attrValue = streamReader.getAttributeValue(i);
             if (ID.equals(attrName)) {
-                logger.info("Processing " + TRANS_UNIT + "'s ID...");
-                transUnitId = streamReader.getAttributeValue(i);
-                break;
+                logger.info("Processing " + TRANS_UNIT + "'s " + ID + "...");
+                transUnitId = attrValue;
+            } else if (ID.equals(attrName)) {
+                logger.info("Processing " + TRANS_UNIT + "'s " + MAX_BYTES + "...");
+                maxBytes = (attrValue != null && !attrValue.isEmpty()) ? Integer.valueOf(attrValue) : null;
             }
         }
 
@@ -161,13 +163,12 @@ public class XliffParser {
 
             TransUnit transUnit = new TransUnit();
             transUnit.setId(transUnitId);
+            transUnit.setMaxBytes(maxBytes);
 
             // Read until </trans-unit>
             String currentElement = "";
-            while (!(TRANS_UNIT.equals(currentElement) && eventType == XMLEvent.END_ELEMENT)) {
-                streamReader.next();
-                eventType = streamReader.getEventType();
-                switch (eventType) {
+            while (!(TRANS_UNIT.equals(currentElement) && streamReader.next() == XMLEvent.END_ELEMENT)) {
+                switch (streamReader.getEventType()) {
                     case XMLEvent.START_ELEMENT:
                         currentElement = streamReader.getName().toString();
                         break;

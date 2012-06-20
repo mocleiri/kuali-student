@@ -12,6 +12,7 @@ public class TransUnit implements Serializable {
     private String id;
     private String source;
     private String target;
+    private Integer maxBytes;
 
     /**
      * Setter for id property.
@@ -70,5 +71,13 @@ public class TransUnit implements Serializable {
      */
     public String getTarget() {
         return target;
+    }
+
+    public Integer getMaxBytes() {
+        return maxBytes;
+    }
+
+    public void setMaxBytes(Integer maxBytes) {
+        this.maxBytes = maxBytes;
     }
 }

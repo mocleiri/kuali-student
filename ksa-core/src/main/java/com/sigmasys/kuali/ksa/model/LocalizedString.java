@@ -55,4 +55,14 @@ public class LocalizedString implements Identifiable {
     public void setOverridden(Boolean overridden) {
         isOverridden = overridden;
     }
+
+    @Override
+    public String toString() {
+        return "LocalizedString{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                ", maxLength=" + maxLength +
+                ", isOverridden=" + isOverridden +
+                '}';
+    }
 }

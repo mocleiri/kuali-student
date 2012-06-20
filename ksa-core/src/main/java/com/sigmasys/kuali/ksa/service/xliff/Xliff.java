@@ -57,4 +57,12 @@ public class Xliff implements Serializable {
     public void setTargetCountry(String targetCountry) {
         this.targetCountry = targetCountry;
     }
+
+    public String getSourceLocale() {
+        return (sourceLanguage != null && sourceCountry != null) ? sourceLanguage + "_" + sourceCountry : null;
+    }
+
+    public String getTargetLocale() {
+        return (targetLanguage != null && targetCountry != null) ? targetLanguage + "_" + targetCountry : null;
+    }
 }
