@@ -153,7 +153,7 @@ public class XliffParser {
             if (ID.equals(attrName)) {
                 logger.info("Processing " + TRANS_UNIT + "'s " + ID + "...");
                 transUnitId = attrValue;
-            } else if (ID.equals(attrName)) {
+            } else if (MAX_BYTES.equals(attrName)) {
                 logger.info("Processing " + TRANS_UNIT + "'s " + MAX_BYTES + "...");
                 maxBytes = (attrValue != null && !attrValue.isEmpty()) ? Integer.valueOf(attrValue) : null;
             }
@@ -167,8 +167,11 @@ public class XliffParser {
 
             // Read until </trans-unit>
             String currentElement = "";
-            while (!(TRANS_UNIT.equals(currentElement) && streamReader.next() == XMLEvent.END_ELEMENT)) {
-                switch (streamReader.getEventType()) {
+            int eventType = XMLEvent.START_DOCUMENT;
+            while (!(TRANS_UNIT.equals(currentElement) && eventType == XMLEvent.END_ELEMENT)) {
+                streamReader.next();
+                eventType = streamReader.getEventType();
+                switch (eventType) {
                     case XMLEvent.START_ELEMENT:
                         currentElement = streamReader.getName().toString();
                         break;
