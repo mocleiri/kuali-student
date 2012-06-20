@@ -19,7 +19,11 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.*;
 
-
+/**
+ * XmlSchemaValidator
+ *
+ * @author Michael Ivanov
+ */
 public class XmlSchemaValidator {
 
     private static final Log logger = LogFactory.getLog(XmlSchemaValidator.class);
