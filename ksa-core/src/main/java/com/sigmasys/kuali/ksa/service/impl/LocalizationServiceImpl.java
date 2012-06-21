@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
@@ -13,6 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,11 +27,15 @@ import java.util.Map;
  *
  * @author Michael Ivanov
  */
+@SuppressWarnings("unchecked")
 @Service("localizationService")
 @Transactional(readOnly = true)
 public class LocalizationServiceImpl extends GenericPersistenceService implements LocalizationService {
 
     private static final Log logger = LogFactory.getLog(LocalizationServiceImpl.class);
+
+    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
+    protected EntityManager em;
 
     @Autowired
     private XliffParser xliffParser;
@@ -84,6 +94,24 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
         localizedString.setMaxLength(transUnit.getMaxBytes());
         localizedString.setOverridden(isOverridden);
         persistEntity(localizedString);
+    }
+
+    /**
+     * Returns all the localized strings for the given locale
+     *
+     * @param locale the locale string, i.e. "en_US", "fr_FR"
+     * @return a map of localized strings
+     */
+    @Override
+    public Map<String, LocalizedString> getLocalizedStrings(String locale) {
+        Query query = em.createQuery("select s from LocalizedString s where s.id.locale = :locale");
+        query.setParameter("locale", locale);
+        List<LocalizedString> entities = (List<LocalizedString>) query.getResultList();
+        Map<String, LocalizedString> localizedStrings = new HashMap<String, LocalizedString>(entities.size());
+        for (LocalizedString localizedString : entities) {
+            localizedStrings.put(localizedString.getId().getId(), localizedString);
+        }
+        return localizedStrings;
     }
 
 }

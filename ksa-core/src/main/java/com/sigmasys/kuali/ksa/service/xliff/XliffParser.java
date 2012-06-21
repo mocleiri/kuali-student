@@ -63,6 +63,10 @@ public class XliffParser {
      */
     public Xliff parse(String xliffContent) {
 
+        if (logger.isDebugEnabled()) {
+            logger.debug("Parsing XLIFF:\n" + xliffContent);
+        }
+
         try {
 
             // Validating the content against the XLIFF schema
@@ -75,7 +79,8 @@ public class XliffParser {
             Xliff xliff = new Xliff();
             Map<String, TransUnit> transUnits = new HashMap<String, TransUnit>();
             XMLStreamReader streamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xliffContent));
-            while (streamReader.next() != XMLEvent.END_DOCUMENT) {
+            while (streamReader.hasNext()) {
+                streamReader.next();
                 if (XMLEvent.START_ELEMENT == streamReader.getEventType()) {
                     String currentElement = streamReader.getName().toString();
                     logger.info("Processing '" + currentElement + "'...");
@@ -167,27 +172,25 @@ public class XliffParser {
 
             // Read until </trans-unit>
             String currentElement = "";
-            int eventType = XMLEvent.START_DOCUMENT;
-            while (!(TRANS_UNIT.equals(currentElement) && eventType == XMLEvent.END_ELEMENT)) {
+            int eventType = streamReader.getEventType();
+            while (streamReader.hasNext()) {
+                if (TRANS_UNIT.equals(currentElement) && eventType == XMLEvent.END_ELEMENT) {
+                    logger.info("Processing of " + TRANS_UNIT + "' has been completed");
+                    break;
+                }
                 streamReader.next();
                 eventType = streamReader.getEventType();
-                switch (eventType) {
-                    case XMLEvent.START_ELEMENT:
-                        currentElement = streamReader.getName().toString();
-                        break;
-                    case XMLEvent.END_ELEMENT:
-                        currentElement = streamReader.getName().toString();
-                        break;
-                    case XMLEvent.CHARACTERS:
-                        String text = streamReader.getText();
+                if (eventType == XMLEvent.START_ELEMENT || eventType == XMLEvent.END_ELEMENT) {
+                    currentElement = streamReader.getName().toString();
+                    if (eventType == XMLEvent.START_ELEMENT) {
                         if (SOURCE.equals(currentElement)) {
                             logger.info("Processing '" + SOURCE + "'...");
-                            transUnit.setSource(text);
-                        }
-                        if (TARGET.equals(currentElement)) {
+                            transUnit.setSource(streamReader.getElementText());
+                        } else if (TARGET.equals(currentElement)) {
                             logger.info("Processing '" + TARGET + "'...");
-                            transUnit.setTarget(text);
+                            transUnit.setTarget(streamReader.getElementText());
                         }
+                    }
                 }
             }
 

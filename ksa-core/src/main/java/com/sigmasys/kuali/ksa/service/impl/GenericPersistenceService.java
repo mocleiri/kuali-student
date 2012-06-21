@@ -84,6 +84,16 @@ public class GenericPersistenceService implements AopProxy {
         return updatedRows > 0;
     }
 
+    /**
+     * Returns the list of all Identifiable entities for the given class with the default search criteria.
+     *
+     * @param entityClass Entity Class
+     * @return List of Identifiable objects
+     */
+    public <T extends Identifiable> List<T> getEntities(Class<T> entityClass) {
+        return getEntities(entityClass, (Pair<String, SortOrder>) null);
+    }
+
 
     /**
      * Returns the list of all Identifiable entities for the given class with the default search criteria.
@@ -114,7 +124,7 @@ public class GenericPersistenceService implements AopProxy {
 
         criteria.select(selection);
 
-        if (orderBy != null) {
+        if (orderBy != null && orderBy.length > 0) {
             Order[] orders = new Order[orderBy.length];
             int i = 0;
             for (Pair<String, SortOrder> order : orderBy) {
