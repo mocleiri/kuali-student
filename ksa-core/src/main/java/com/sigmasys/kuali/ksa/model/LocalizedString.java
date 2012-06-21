@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.model;
 
 
+import com.sigmasys.kuali.ksa.annotation.Auditable;
+
 import javax.persistence.*;
 
 /**
@@ -9,6 +11,7 @@ import javax.persistence.*;
  *
  * @author Michael Ivanov
  */
+@Auditable
 @Entity
 @Table(name = "KSSA_UI_STRING")
 public class LocalizedString implements Identifiable {

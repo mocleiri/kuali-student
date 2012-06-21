@@ -59,15 +59,23 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
 
         LocalizedStringId id = new LocalizedStringId(transUnit.getId(), locale);
         LocalizedString localizedString = getEntity(id, LocalizedString.class);
-
-        if (ImportType.NEW_ONLY == importType && localizedString != null) {
-            logger.info("The following localized string is ignored because it exists and " +
-                    "'NEW_ONLY' import type is ON: " + localizedString);
-            return;
-        }
-
         boolean isOverridden = (localizedString != null);
-        if (localizedString == null) {
+
+        if (localizedString != null) {
+            if (ImportType.NEW_ONLY == importType) {
+                logger.info("The following localized string is ignored because it already exists and " +
+                        "the import type is set to 'NEW_ONLY': " + localizedString);
+                return;
+            } else if (ImportType.FULL_NO_OVERRIDE == importType) {
+                Boolean canBeOverridden = localizedString.getOverridden();
+                if (canBeOverridden != null && !canBeOverridden) {
+                    logger.info("The following localized string is ignored because it already exists, " +
+                            "cannot be overridden and the import type is set to 'FULL_NO_OVERRIDE': " +
+                            localizedString);
+                    return;
+                }
+            }
+        } else {
             localizedString = new LocalizedString();
             localizedString.setId(id);
         }
