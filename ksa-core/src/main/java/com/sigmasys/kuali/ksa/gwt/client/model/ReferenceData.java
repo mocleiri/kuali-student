@@ -12,6 +12,7 @@ import java.util.Map;
 public class ReferenceData implements Serializable {
 
     private Map<String, String> initialParameters;
+    private Map<String, String> localizedParameters;
 
 
     public Map<String, String> getInitialParameters() {
@@ -22,8 +23,19 @@ public class ReferenceData implements Serializable {
         this.initialParameters = initialParameters;
     }
 
-    public String getParameter(String name) {
+    public String getInitialParameter(String name) {
         return ( initialParameters != null ) ? initialParameters.get(name) : null;
     }
 
+    public Map<String, String> getLocalizedParameters() {
+        return localizedParameters;
+    }
+
+    public void setLocalizedParameters(Map<String, String> localizedParameters) {
+        this.localizedParameters = localizedParameters;
+    }
+
+    public String getLocalizedParameter(String name) {
+           return ( localizedParameters != null ) ? localizedParameters.get(name) : null;
+    }
 }

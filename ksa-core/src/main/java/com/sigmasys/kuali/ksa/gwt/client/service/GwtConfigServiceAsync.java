@@ -12,4 +12,6 @@ public interface GwtConfigServiceAsync {
 
     void getReferenceData(AsyncCallback<ReferenceData> callback);
 
+    void getReferenceData(String language, String country, AsyncCallback<ReferenceData> callback);
+
 }

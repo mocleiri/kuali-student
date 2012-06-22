@@ -13,4 +13,6 @@ public interface GwtConfigService extends RemoteService {
 
     ReferenceData getReferenceData() throws GwtError;
 
+    ReferenceData getReferenceData(String language, String country) throws GwtError;
+
 }

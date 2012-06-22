@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Locale;
+
 
 /**
  * GwtConfigService implementation
@@ -30,6 +32,15 @@ public class GwtConfigServiceImpl extends AbstractRemoteService implements GwtCo
     public ReferenceData getReferenceData() throws GwtError {
         ReferenceData referenceData = new ReferenceData();
         referenceData.setInitialParameters(configService.getInitialParameters());
+        referenceData.setLocalizedParameters(configService.getLocalizedParameters(Locale.getDefault()));
+        return referenceData;
+    }
+
+    @Override
+    public ReferenceData getReferenceData(String language, String country) throws GwtError {
+        ReferenceData referenceData = new ReferenceData();
+        referenceData.setInitialParameters(configService.getInitialParameters());
+        referenceData.setLocalizedParameters(configService.getLocalizedParameters(new Locale(language, country)));
         return referenceData;
     }
 

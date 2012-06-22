@@ -2,6 +2,8 @@ package com.sigmasys.kuali.ksa.config;
 
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
+import com.sigmasys.kuali.ksa.model.LocalizedString;
+import com.sigmasys.kuali.ksa.service.LocalizationService;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -26,6 +28,9 @@ public class ConfigService {
     @Autowired
     private InitialParameterConfigurer parameterConfigurer;
 
+    @Autowired
+    private LocalizationService localizationService;
+
 
     @PostConstruct
     private void postConstruct() {
@@ -38,6 +43,22 @@ public class ConfigService {
             Locale.setDefault(locale);
         }
     }
+
+    public Map<String, String> getLocalizedParameters(Locale locale) {
+        if ( locale == null ) {
+            throw new IllegalArgumentException("Locale cannot be null");
+        }
+        Map<String, LocalizedString> localizedStrings = localizationService.getLocalizedStrings(locale.toString());
+        if (localizedStrings != null) {
+            Map<String, String> localizedParameters = new HashMap<String, String>(localizedStrings.size());
+            for (LocalizedString localizedString : localizedStrings.values()) {
+                localizedParameters.put(localizedString.getId().getId(), localizedString.getValue());
+            }
+            return localizedParameters;
+        }
+        return new HashMap<String, String>();
+    }
+
 
     public String getInitialParameter(String name) {
         return getInitialParameters().get(name);
