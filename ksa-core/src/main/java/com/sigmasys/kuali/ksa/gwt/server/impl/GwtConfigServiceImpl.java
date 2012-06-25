@@ -30,10 +30,8 @@ public class GwtConfigServiceImpl extends AbstractRemoteService implements GwtCo
 
     @Override
     public ReferenceData getReferenceData() throws GwtError {
-        ReferenceData referenceData = new ReferenceData();
-        referenceData.setInitialParameters(configService.getInitialParameters());
-        referenceData.setLocalizedParameters(configService.getLocalizedParameters(Locale.getDefault()));
-        return referenceData;
+        Locale locale = Locale.getDefault();
+        return getReferenceData(locale.getLanguage(), locale.getCountry());
     }
 
     @Override
