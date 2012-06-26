@@ -3,7 +3,11 @@
     <!--  TransactionService WS Endpoint -->
     <endpoint name="TransactionService"
               implementation="com.sigmasys.kuali.ksa.service.impl.TransactionServiceImpl"
-              url-pattern="/transaction.webservice"
-            />
+              url-pattern="/transaction.webservice"/>
+
+    <!--  LocalizationService WS Endpoint -->
+    <endpoint name="LocalizationService"
+              implementation="com.sigmasys.kuali.ksa.service.impl.LocalizationServiceImpl"
+              url-pattern="/localization.webservice"/>
 
 </endpoints>

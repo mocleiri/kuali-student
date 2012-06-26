@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -30,6 +32,8 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 @Service("localizationService")
 @Transactional(readOnly = true)
+@WebService(serviceName = LocalizationService.SERVICE_NAME, portName = LocalizationService.PORT_NAME,
+        targetNamespace = Constants.WS_NAMESPACE)
 public class LocalizationServiceImpl extends GenericPersistenceService implements LocalizationService {
 
     private static final Log logger = LogFactory.getLog(LocalizationServiceImpl.class);
@@ -103,6 +107,7 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
      * @return a map of localized strings
      */
     @Override
+    @WebMethod(exclude = true)
     public Map<String, LocalizedString> getLocalizedStrings(String locale) {
         Query query = em.createQuery("select s from LocalizedString s where s.id.locale = :locale");
         query.setParameter("locale", locale);

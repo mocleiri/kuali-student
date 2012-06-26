@@ -50,7 +50,7 @@ public class GenericPersistenceService implements AopProxy {
     @Override
     public List<Advice> getAdvices(BeanFactory beanFactory) {
         LinkedList<Advice> advices = new LinkedList<Advice>();
-        if (Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
+        if (configService != null && Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
             // Setting up the logging interceptor
             LoggingInterceptor loggingInterceptor = beanFactory.getBean(LoggingInterceptor.class);
             loggingInterceptor.setTargetObject(this);

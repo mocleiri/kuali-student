@@ -3,8 +3,11 @@ package com.sigmasys.kuali.ksa.service.jaxws;
 import com.sigmasys.kuali.ksa.annotation.AnnotationUtils;
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sun.net.httpserver.HttpServer;
+import org.springframework.aop.TargetSource;
+import org.springframework.aop.framework.Advised;
 import org.springframework.remoting.jaxws.SimpleHttpServerJaxWsServiceExporter;
 
+import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 import java.net.BindException;
 import java.net.InetSocketAddress;
@@ -59,6 +62,32 @@ public class JaxWsServiceExporter extends SimpleHttpServerJaxWsServiceExporter {
             }
         }
         super.afterPropertiesSet();
+    }
+
+    /**
+     * Create the actual Endpoint instance.
+     *
+     * @param bean the service object to wrap
+     * @return the Endpoint instance
+     * @see Endpoint#create(Object)
+     * @see Endpoint#create(String, Object)
+     */
+    @Override
+    protected Endpoint createEndpoint(Object bean) {
+        try {
+            Class<?> beanClass = bean.getClass();
+            Object source = bean;
+            WebService webServiceAnnotation = beanClass.getAnnotation(WebService.class);
+            while (webServiceAnnotation == null && (source instanceof Advised)) {
+                Advised advised = (Advised) bean;
+                source = advised.getTargetSource().getTarget();
+                webServiceAnnotation = (source != null) ? source.getClass().getAnnotation(WebService.class) : null;
+            }
+            return super.createEndpoint(source);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     @Override

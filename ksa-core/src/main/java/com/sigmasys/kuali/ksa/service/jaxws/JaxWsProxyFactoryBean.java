@@ -51,6 +51,7 @@ public class JaxWsProxyFactoryBean extends JaxWsPortClientInterceptor implements
             setServiceName(webServiceAnnotation.serviceName());
             setNamespaceUri(webServiceAnnotation.targetNamespace());
             setPortName(webServiceAnnotation.portName());
+
         } catch (Throwable t) {
             String msg = getClass().getSimpleName() + " initialization failed: " + t.getMessage();
             logger.severe(msg);

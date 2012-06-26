@@ -8,23 +8,16 @@
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd"
        default-lazy-init="true">
 
+    <import resource="classpath:/META-INF/ksa-context.xml"/>
+
     <bean id="baseServiceUrl" class="java.lang.String">
-        <constructor-arg type="java.lang.String" value="http://localhost:7777"/>
+        <constructor-arg type="java.lang.String" value="http://localhost:11111"/>
     </bean>
 
+    <!-- JAX WS Exporter finds all services annotated with @WebService and exports on the local HTTP server
+       running at 'baseServiceUrl' -->
     <bean id="jaxWsServiceExporter" class="com.sigmasys.kuali.ksa.service.jaxws.JaxWsServiceExporter" lazy-init="false">
         <property name="baseServiceUrl" ref="baseServiceUrl"/>
-    </bean>
-
-    <bean id="wsProxyFactoryBean" class="com.sigmasys.kuali.ksa.service.jaxws.JaxWsProxyFactoryBean" abstract="true">
-        <property name="lookupServiceOnStartup" value="false"/>
-        <property name="maintainSession" value="true"/>
-        <property name="baseServiceUrl" ref="baseServiceUrl"/>
-    </bean>
-
-    <bean id="localizationService" class="com.sigmasys.kuali.ksa.service.jaxws.JaxWsProxyFactoryBean"
-          parent="wsProxyFactoryBean">
-        <property name="serviceInterface" value="com.sigmasys.kuali.ksa.service.LocalizationService"/>
     </bean>
 
 </beans>

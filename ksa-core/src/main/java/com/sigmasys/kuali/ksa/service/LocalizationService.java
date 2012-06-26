@@ -1,8 +1,12 @@
 package com.sigmasys.kuali.ksa.service;
 
 
+import com.sigmasys.kuali.ksa.annotation.Url;
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import java.util.Map;
 
 /**
@@ -11,7 +15,14 @@ import java.util.Map;
  *
  * @author Michael Ivanov
  */
+@Url(LocalizationService.SERVICE_URL)
+@WebService(serviceName = LocalizationService.SERVICE_NAME, portName = LocalizationService.PORT_NAME,
+        targetNamespace = Constants.WS_NAMESPACE)
 public interface LocalizationService {
+
+    public static final String SERVICE_URL = "localization.webservice";
+    public static final String SERVICE_NAME = "LocalizationService";
+    public static final String PORT_NAME = SERVICE_NAME + "Port";
 
     /**
      * Import type of locale-aware resources
@@ -36,6 +47,7 @@ public interface LocalizationService {
      * @param locale the locale string, i.e. "en_US", "fr_FR"
      * @return  a map of localized strings
      */
+    @WebMethod(exclude = true)
     Map<String, LocalizedString> getLocalizedStrings(String locale);
 
 }
