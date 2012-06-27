@@ -17,11 +17,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.springframework.util.Assert;
 
-import com.sigmasys.kuali.ksa.annotation.UseWebContext;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 
 
-@UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 public class KimServiceTest extends AbstractServiceTest {

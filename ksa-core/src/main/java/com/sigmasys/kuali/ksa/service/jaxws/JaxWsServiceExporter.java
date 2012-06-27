@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.service.jaxws;
 import com.sigmasys.kuali.ksa.annotation.AnnotationUtils;
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sun.net.httpserver.HttpServer;
-import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.Advised;
 import org.springframework.remoting.jaxws.SimpleHttpServerJaxWsServiceExporter;
 
@@ -115,7 +114,7 @@ public class JaxWsServiceExporter extends SimpleHttpServerJaxWsServiceExporter {
     @Override
     public void destroy() {
         super.destroy();
-        if (baseServiceUrl != null) {
+        if (baseServiceUrl != null && server != null) {
             logger.info("Stopping HttpServer");
             server.stop(0);
         }

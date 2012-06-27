@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.annotation.UseWebContext;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Activity;
 import org.junit.Before;
@@ -15,7 +14,6 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-@UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 @Transactional

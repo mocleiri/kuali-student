@@ -31,6 +31,7 @@ public class JaxWsProxyFactoryBean extends JaxWsPortClientInterceptor implements
         super.afterPropertiesSet();
 
         try {
+
             // Retrieving service URL from @Url annotation
             Url urlAnnotation = getServiceInterface().getAnnotation(Url.class);
             if (urlAnnotation == null) {
@@ -39,13 +40,16 @@ public class JaxWsProxyFactoryBean extends JaxWsPortClientInterceptor implements
                 logger.severe(errMsg);
                 throw new IllegalStateException(errMsg);
             }
+
             serviceUrl = urlAnnotation.value();
             if (!baseServiceUrl.endsWith("/") && !serviceUrl.startsWith("/")) {
                 baseServiceUrl += "/";
             }
+
             final String endpointAddress = baseServiceUrl + serviceUrl;
             setEndpointAddress(endpointAddress);
             setWsdlDocumentUrl(new URL(endpointAddress + "?wsdl"));
+
             // Retrieving service name, port name and namespace from @WebService annotation
             WebService webServiceAnnotation = getServiceInterface().getAnnotation(WebService.class);
             setServiceName(webServiceAnnotation.serviceName());

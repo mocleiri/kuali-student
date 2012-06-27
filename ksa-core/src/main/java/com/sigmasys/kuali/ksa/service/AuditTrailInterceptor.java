@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.servlet.http.HttpServletRequest;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -86,8 +87,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                 if (collection instanceof Collection<?>) {
 
                     Session session = getSession();
-                    UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-                    String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
+
+                    String userId = getUserId();
 
                     Collection<?> javaCollection = (Collection<?>) collection;
                     String propertyName = getPropertyName(collection);
@@ -152,8 +153,8 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                 Type elemType = collectionPersister.getElementType();
 
                 Session session = getSession();
-                UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-                String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
+
+                String userId = getUserId();
 
                 String propertyName = getPropertyName(collection);
 
@@ -265,8 +266,6 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
         if (auditable != null) {
 
             Session session = getSession();
-            UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
             for (int i = 0; i < state.length; i++) {
 
@@ -287,7 +286,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                     continue;
                 }
 
-                createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], oldValue,
+                createActivityLog(session, id, entity.getClass(), getUserId(), entity, propertyNames[i], oldValue,
                         null, "Persistent entity delete");
 
             }
@@ -308,8 +307,6 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
         if (auditable != null) {
 
             Session session = getSession();
-            UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
             for (int i = 0; i < currentState.length; i++) {
 
@@ -333,7 +330,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                         continue;
                     }
 
-                    createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], oldValue,
+                    createActivityLog(session, id, entity.getClass(), getUserId(), entity, propertyNames[i], oldValue,
                             newValue, "Persistent entity update");
 
                 }
@@ -352,8 +349,6 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
         if (auditable != null) {
 
             Session session = getSession();
-            UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            String userId = sessionManager.getUserId(RequestUtils.getThreadRequest());
 
             // Insert audit trail records for each property
             for (int i = 0; i < state.length; i++) {
@@ -375,7 +370,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                     continue;
                 }
 
-                createActivityLog(session, id, entity.getClass(), userId, entity, propertyNames[i], null,
+                createActivityLog(session, id, entity.getClass(), getUserId(), entity, propertyNames[i], null,
                         newValue, "Persistent entity create");
             }
 
@@ -406,4 +401,14 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
     private boolean objectsMatch(Object a, Object b) {
         return (a == null && b == null) || (a != null && a.equals(b));
     }
+
+    private String getUserId() {
+        HttpServletRequest request = RequestUtils.getThreadRequest();
+        if (request != null) {
+            UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
+            return sessionManager.getUserId(request);
+        }
+        return null;
+    }
+
 }

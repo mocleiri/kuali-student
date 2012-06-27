@@ -1,13 +1,13 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.annotation.UseWebContext;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -17,13 +17,13 @@ import java.util.Map;
 import static com.sigmasys.kuali.ksa.service.LocalizationService.ImportType;
 
 
-@UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 public class LocalizationServiceTest extends AbstractServiceTest {
 
 
     @Autowired
+    @Qualifier("localizationService")
     private LocalizationService localizationService;
 
     @Test

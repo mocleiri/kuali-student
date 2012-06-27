@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.annotation.UseWebContext;
 import com.sigmasys.kuali.ksa.gwt.client.model.CurrencyModel;
 import com.sigmasys.kuali.ksa.gwt.client.service.GwtCurrencyService;
 import com.sigmasys.kuali.ksa.model.Currency;
@@ -16,7 +15,6 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-@UseWebContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 @Transactional

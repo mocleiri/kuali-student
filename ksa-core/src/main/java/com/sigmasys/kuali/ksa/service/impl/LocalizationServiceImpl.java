@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Localization Service
+ * Localization Service implementation.
  * <p/>
  *
  * @author Michael Ivanov
@@ -107,12 +106,11 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
      * @return a map of localized strings
      */
     @Override
-    @WebMethod(exclude = true)
-    public Map<String, LocalizedString> getLocalizedStrings(String locale) {
+    public HashMap<String, LocalizedString> getLocalizedStrings(String locale) {
         Query query = em.createQuery("select s from LocalizedString s where s.id.locale = :locale");
         query.setParameter("locale", locale);
         List<LocalizedString> entities = (List<LocalizedString>) query.getResultList();
-        Map<String, LocalizedString> localizedStrings = new HashMap<String, LocalizedString>(entities.size());
+        HashMap<String, LocalizedString> localizedStrings = new HashMap<String, LocalizedString>(entities.size());
         for (LocalizedString localizedString : entities) {
             localizedStrings.put(localizedString.getId().getId(), localizedString);
         }

@@ -5,9 +5,8 @@ import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
-import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Localization Service
@@ -47,7 +46,6 @@ public interface LocalizationService {
      * @param locale the locale string, i.e. "en_US", "fr_FR"
      * @return  a map of localized strings
      */
-    @WebMethod(exclude = true)
-    Map<String, LocalizedString> getLocalizedStrings(String locale);
+    HashMap<String, LocalizedString> getLocalizedStrings(String locale);
 
 }

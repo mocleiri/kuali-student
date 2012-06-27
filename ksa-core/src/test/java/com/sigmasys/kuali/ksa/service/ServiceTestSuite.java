@@ -24,11 +24,11 @@ import org.junit.runners.Suite;
         InformationServiceTest.class,
         LanguageServiceTest.class,
         XliffParserTest.class,
-        LocalizationServiceTest.class})
+        LocalizationServiceTest.class,
+        LocalizationWebServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
-    public static final String TEST_KSA_CONTEXT = "/META-INF/ksa-context.xml";
-    public static final String TEST_WS_CONTEXT = "/META-INF/ws-context.xml";
+    public static final String TEST_KSA_CONTEXT = "/META-INF/test-context.xml";
 
     public static Test suite() {
         return new JUnit4TestAdapter(ServiceTestSuite.class);
