@@ -4,6 +4,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
+import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
 import com.sigmasys.kuali.ksa.service.xliff.TransUnit;
 import com.sigmasys.kuali.ksa.service.xliff.Xliff;
@@ -14,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -29,10 +30,8 @@ import java.util.Map;
  * @author Michael Ivanov
  */
 @SuppressWarnings("unchecked")
-@Service("localizationService")
+@Service(LocalizationService.SERVICE_NAME)
 @Transactional(readOnly = true)
-@WebService(serviceName = LocalizationService.SERVICE_NAME, portName = LocalizationService.PORT_NAME,
-        targetNamespace = Constants.WS_NAMESPACE)
 public class LocalizationServiceImpl extends GenericPersistenceService implements LocalizationService {
 
     private static final Log logger = LogFactory.getLog(LocalizationServiceImpl.class);
@@ -48,27 +47,33 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
      *
      * @param content    the content of the resources to be imported
      * @param importType Import type
+     * @return a map of localized strings for the target locale
      */
     @Override
     @Transactional(readOnly = false)
-    public void importResources(String content, ImportType importType) {
+    public ArrayList<Pair<String, LocalizedString>> importResources(String content, ImportType importType) {
 
         Xliff xliff = xliffParser.parse(content);
 
         String sourceLocale = xliff.getSourceLocale();
         String targetLocale = xliff.getTargetLocale();
 
-        Map<String, TransUnit> transUnits = xliff.getTransUnits();
-        if (transUnits != null) {
-            for (TransUnit transUnit : transUnits.values()) {
+        ArrayList<Pair<String, LocalizedString>> targetStrings = null;
+        Map<String, TransUnit> transUnitMap = xliff.getTransUnits();
+        if (transUnitMap != null) {
+            Collection<TransUnit> transUnits = transUnitMap.values();
+            targetStrings = new ArrayList<Pair<String, LocalizedString>>(transUnits.size());
+            for (TransUnit transUnit : transUnits) {
                 persistTransUnit(transUnit, sourceLocale, importType, true);
-                persistTransUnit(transUnit, targetLocale, importType, false);
+                LocalizedString string = persistTransUnit(transUnit, targetLocale, importType, false);
+                targetStrings.add(new Pair<String, LocalizedString>(string.getId().getId(), string));
             }
         }
 
+        return (targetStrings != null) ? targetStrings : new ArrayList<Pair<String, LocalizedString>>();
     }
 
-    private void persistTransUnit(TransUnit transUnit, String locale, ImportType importType, boolean isSource) {
+    private LocalizedString persistTransUnit(TransUnit transUnit, String locale, ImportType importType, boolean isSource) {
 
         LocalizedStringId id = new LocalizedStringId(transUnit.getId(), locale);
         LocalizedString localizedString = getEntity(id, LocalizedString.class);
@@ -78,14 +83,14 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
             if (ImportType.NEW_ONLY == importType) {
                 logger.info("The following localized string is ignored because it already exists and " +
                         "the import type is set to 'NEW_ONLY': " + localizedString);
-                return;
+                return localizedString;
             } else if (ImportType.FULL_NO_OVERRIDE == importType) {
                 Boolean canBeOverridden = localizedString.getOverridden();
                 if (canBeOverridden != null && !canBeOverridden) {
                     logger.info("The following localized string is ignored because it already exists, " +
                             "cannot be overridden and the import type is set to 'FULL_NO_OVERRIDE': " +
                             localizedString);
-                    return;
+                    return localizedString;
                 }
             }
         } else {
@@ -97,6 +102,7 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
         localizedString.setMaxLength(transUnit.getMaxBytes());
         localizedString.setOverridden(isOverridden);
         persistEntity(localizedString);
+        return localizedString;
     }
 
     /**
@@ -106,15 +112,15 @@ public class LocalizationServiceImpl extends GenericPersistenceService implement
      * @return a map of localized strings
      */
     @Override
-    public HashMap<String, LocalizedString> getLocalizedStrings(String locale) {
+    public ArrayList<Pair<String, LocalizedString>> getLocalizedStrings(String locale) {
         Query query = em.createQuery("select s from LocalizedString s where s.id.locale = :locale");
         query.setParameter("locale", locale);
         List<LocalizedString> entities = (List<LocalizedString>) query.getResultList();
-        HashMap<String, LocalizedString> localizedStrings = new HashMap<String, LocalizedString>(entities.size());
+        ArrayList<Pair<String, LocalizedString>> strings = new ArrayList<Pair<String, LocalizedString>>(entities.size());
         for (LocalizedString localizedString : entities) {
-            localizedStrings.put(localizedString.getId().getId(), localizedString);
+            strings.add(new Pair<String, LocalizedString>(localizedString.getId().getId(), localizedString));
         }
-        return localizedStrings;
+        return strings;
     }
 
 }

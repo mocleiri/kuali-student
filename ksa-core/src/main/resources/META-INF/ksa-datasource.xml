@@ -6,11 +6,14 @@
        default-lazy-init="true">
 
     <!-- Atomikos UserTransaction implementation -->
-    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
+    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
+        <property name="transactionTimeout" value="600"/>
+    </bean>
 
     <!-- Atomikos JTA TransactionManager implementation -->
     <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager">
         <property name="forceShutdown" value="false"/>
+        <property name="transactionTimeout" value="600"/>
     </bean>
 
     <!--  Spring JTA TransactionManager -->

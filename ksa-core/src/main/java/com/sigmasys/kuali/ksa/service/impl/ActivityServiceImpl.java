@@ -24,7 +24,7 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
         Query query = em.createQuery("select act from Activity act " +
                 " left outer join fetch act.type t " +
                 ((id != null) ? " where act.id = :id " : "") +
-                " order by act.id desc");
+                " order by act.timestamp desc");
         if (id != null) {
             query.setParameter("id", id);
         }
@@ -64,7 +64,7 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
         Query query = em.createQuery("select act from Activity act " +
                 " left outer join fetch act.type t " +
                 " where act.creatorId = :userId " +
-                " order by act.id desc");
+                " order by act.timestamp desc");
         query.setParameter("userId", userId);
         return query.getResultList();
     }

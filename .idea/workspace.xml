@@ -2,18 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationWebService.java" />
+      <change type="MOVED" beforePath="C:\projects\ksa\ksa-core\src\main\java\com\sigmasys\kuali\ksa\service\AbstractSessionAwareWebService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AbstractWebContextAwareService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/ksa-core.iml" afterPath="$PROJECT_DIR$/ksa-core/ksa-core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/ConfigService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/ConfigService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Activity.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Activity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AuditTrailInterceptor.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AuditTrailInterceptor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/LocalizationService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/LocalizationService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/LoggingInterceptor.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/LoggingInterceptor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/ActivityServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/ActivityServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsProxyFactoryBean.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsProxyFactoryBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/sun-jaxws.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/sun-jaxws.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java" afterPath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java" afterPath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java" afterPath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/test/resources/META-INF/ws-context.xml" afterPath="$PROJECT_DIR$/ksa-core/src/test/resources/META-INF/ws-context.xml" />
     </list>
     <ignored path="ksa.iws" />
@@ -104,37 +110,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ws-context.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/test/resources/META-INF/ws-context.xml">
+      <file leaf-file-name="LocalizationServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="77" selection-start="715" selection-end="715" vertical-scroll-proportion="0.0">
+            <state line="120" column="74" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5124#5155#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Map.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.6.0_30/src.zip!/java/util/Map.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="304" column="18" selection-start="14798" selection-end="14798" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EndpointFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/sun/xml/ws/jaxws-rt/2.2.6/jaxws-rt-2.2.6-sources.jar!/com/sun/xml/ws/server/EndpointFactory.java">
+      <file leaf-file-name="Xliff.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/Xliff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="386" column="0" selection-start="17714" selection-end="17714" vertical-scroll-proportion="0.0">
+            <state line="64" column="18" selection-start="1530" selection-end="1530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EndpointImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/sun/xml/ws/jaxws-rt/2.2.6/jaxws-rt-2.2.6-sources.jar!/com/sun/xml/ws/transport/http/server/EndpointImpl.java">
+      <file leaf-file-name="LocalizedString.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/LocalizedString.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="253" column="0" selection-start="9902" selection-end="9902" vertical-scroll-proportion="-3.72">
+            <state line="16" column="13" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JaxWsServiceExporter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java">
+      <file leaf-file-name="LocalizationWebService.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationWebService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="73" selection-start="2661" selection-end="2661" vertical-scroll-proportion="0.0">
+            <state line="16" column="31" selection-start="524" selection-end="524" vertical-scroll-proportion="0.87741935">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,56 +160,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Advised.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/Advised.java">
+      <file leaf-file-name="Pair.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="11" selection-start="2210" selection-end="2210" vertical-scroll-proportion="0.0">
+            <state line="10" column="13" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TargetSource.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/TargetSource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="11" selection-start="2234" selection-end="2234" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AopBeanPostProcessor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="39" selection-start="1142" selection-end="1219" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleHttpServerJaxWsServiceExporter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.1.1.RELEASE/spring-web-3.1.1.RELEASE-sources.jar!/org/springframework/remoting/jaxws/SimpleHttpServerJaxWsServiceExporter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="168" column="0" selection-start="5612" selection-end="5612" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractJaxWsServiceExporter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.1.1.RELEASE/spring-web-3.1.1.RELEASE-sources.jar!/org/springframework/remoting/jaxws/AbstractJaxWsServiceExporter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="175" column="57" selection-start="5729" selection-end="6196" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocalizationWebServiceTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LocalizationWebServiceTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="55" selection-start="97" selection-end="97" vertical-scroll-proportion="0.13746631">
-              <folding />
+            <state line="31" column="15" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConfigService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/ConfigService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="75" selection-start="2296" selection-end="2296" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalizationServiceTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="47" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalizationService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/LocalizationService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="24" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -209,27 +226,27 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/xliff-core-1.2-transitional.xsd" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/xliff-core-1.2-strict.xsd" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/Xliff.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/TransUnit.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/XliffParser.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/LocalizedString.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/gwt/server/impl/GwtConfigServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/JaxWsServiceExporter.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Activity.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/ActivityServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AuditTrailInterceptor.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/UserSessionManagerImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AbstractSessionAwareWebService.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/LoggingInterceptor.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationServiceWrapper.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AbstractWebContextAwareService.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/sun-jaxws.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/test/resources/META-INF/ws-context.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/XliffParser.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/ConfigService.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/LocalizationService.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsProxyFactoryBean.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-beans.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-context.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/test/resources/META-INF/ws-context.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationWebService.java" />
       </list>
     </option>
   </component>
@@ -343,16 +360,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -363,6 +370,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="ksa-core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1498,9 +1515,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sigmasys.kuali.ksa.service.impl" />
       <recent name="com.sigmasys.kuali.ksa.service" />
       <recent name="com.sigmasys.kuali.ksa.service.jaxws" />
-      <recent name="com.sigmasys.kuali.ksa.service.impl" />
       <recent name="com.sigmasys.kuali.ksa.model" />
       <recent name="com.sigmasys.kuali.ksa.gwt.client.view" />
     </key>
@@ -2119,7 +2136,11 @@
       <created>1340665603118</created>
       <updated>1340665603118</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Configured JUnit with JAX WS to test Localization and Transaction web services from the command line, added LocalizationWebServiceTest, got JaxWsServiceExporter working with CGLIB proxies by overriding createEndpoint() method, fixed the web service endpoint names,  added the Spring context for testing web services, debugging">
+      <created>1340751594097</created>
+      <updated>1340751594097</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2150,6 +2171,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46849942" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46424517" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2161,17 +2183,16 @@
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14379086" sideWeight="0.5223368" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20996732" sideWeight="0.44444445" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24754901" sideWeight="0.5223368" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47766322" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34150326" sideWeight="0.44444445" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5555556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22680412" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46878546" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2213,7 +2234,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Registered LocalizationService on KSB, implemented JaxWsProxyFactoryBean and JaxWsServiceExporter for web service testing, created ws-context.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Configured JUnit with JAX WS to test Localization and Transaction web services from the command line, added LocalizationWebServiceTest, got JaxWsServiceExporter working with CGLIB proxies by overriding createEndpoint() method, fixed the web service endpoint names,  added the Spring context for testing web services, debugging" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -2226,7 +2247,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Added getCharge(), getPayment() and getDeferment() methods, replaced lazy fetching with eager" />
     <MESSAGE value="Restored &quot;localhost&quot; as the majority are using locally installed Oracle" />
     <MESSAGE value="switched to Rice 2.1.0-M2 release" />
     <MESSAGE value="Added getCharges(String userId)" />
@@ -2251,6 +2271,7 @@
     <MESSAGE value="Worked on LocalizationServiceImpl, implemented importResources() logic based on the different import types, made LocalizedString auditable, updated the Data Model document." />
     <MESSAGE value="Refactored getReferenceData()" />
     <MESSAGE value="Registered LocalizationService on KSB, implemented JaxWsProxyFactoryBean and JaxWsServiceExporter for web service testing, created ws-context.xml" />
+    <MESSAGE value="Configured JUnit with JAX WS to test Localization and Transaction web services from the command line, added LocalizationWebServiceTest, got JaxWsServiceExporter working with CGLIB proxies by overriding createEndpoint() method, fixed the web service endpoint names,  added the Spring context for testing web services, debugging" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -2294,149 +2315,51 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#744#774#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.1.1.RELEASE/spring-beans-3.1.1.RELEASE-sources.jar!/org/springframework/beans/factory/FactoryBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="17" selection-start="2293" selection-end="2293" vertical-scroll-proportion="0.0">
+        <state line="83" column="14" selection-start="3065" selection-end="3065" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.1.1.RELEASE/spring-web-3.1.1.RELEASE-sources.jar!/org/springframework/remoting/jaxws/JaxWsPortClientInterceptor.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_30/src.zip!/javax/xml/ws/WebServiceContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="308" column="26" selection-start="9124" selection-end="9124" vertical-scroll-proportion="0.0">
+        <state line="27" column="17" selection-start="778" selection-end="778" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/AdvisedSupport.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-entitymanager/4.1.4.Final/hibernate-entitymanager-4.1.4.Final-sources.jar!/org/hibernate/ejb/AbstractEntityManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="390" column="16" selection-start="11787" selection-end="11787" vertical-scroll-proportion="0.0">
+        <state line="982" column="0" selection-start="33398" selection-end="33398" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/ProxyFactory.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/LoggingInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="11" selection-start="1223" selection-end="1223" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="57" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1092#1122#0" expanded="true" />
-            <element signature="e#1601#1609#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/ProxyConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="16" selection-start="4107" selection-end="4107" vertical-scroll-proportion="0.0">
+        <state line="53" column="0" selection-start="1619" selection-end="1619" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsProxyFactoryBean.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AbstractWebContextAwareService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="2076" selection-end="2076" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="22.95">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-beans.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="4" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-16.6">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="51" selection-start="935" selection-end="935" vertical-scroll-proportion="-7.25">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/xml/ws/jaxws-rt/2.2.6/jaxws-rt-2.2.6-sources.jar!/com/sun/xml/ws/server/EndpointFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="386" column="0" selection-start="17714" selection-end="17714" vertical-scroll-proportion="0.0">
+        <state line="2" column="46" selection-start="74" selection-end="74" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/xml/ws/jaxws-rt/2.2.6/jaxws-rt-2.2.6-sources.jar!/com/sun/xml/ws/transport/http/server/EndpointImpl.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/sun-jaxws.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="253" column="0" selection-start="9902" selection-end="9902" vertical-scroll-proportion="-3.72">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.1.1.RELEASE/spring-web-3.1.1.RELEASE-sources.jar!/org/springframework/remoting/jaxws/SimpleHttpServerJaxWsServiceExporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="0" selection-start="5612" selection-end="5612" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.1.1.RELEASE/spring-web-3.1.1.RELEASE-sources.jar!/org/springframework/remoting/jaxws/AbstractJaxWsServiceExporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="57" selection-start="5729" selection-end="6196" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="39" selection-start="1142" selection-end="1219" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/framework/Advised.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="11" selection-start="2210" selection-end="2210" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.1.1.RELEASE/spring-aop-3.1.1.RELEASE-sources.jar!/org/springframework/aop/TargetSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="11" selection-start="2234" selection-end="2234" vertical-scroll-proportion="0.0">
+        <state line="8" column="21" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/test/resources/META-INF/ws-context.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="77" selection-start="715" selection-end="715" vertical-scroll-proportion="0.0">
+        <state line="26" column="26" selection-start="1343" selection-end="1363" vertical-scroll-proportion="-11.9">
           <folding />
         </state>
       </provider>
@@ -2444,19 +2367,121 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/aop/AopBeanPostProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="73" selection-start="2661" selection-end="2661" vertical-scroll-proportion="0.0">
+        <state line="34" column="48" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="43" selection-start="2704" selection-end="2704" vertical-scroll-proportion="-6.8">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="13" selection-start="6357" selection-end="6357" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1092#1122#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/XliffParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="65" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/Xliff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="18" selection-start="1530" selection-end="1530" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_30/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="304" column="18" selection-start="14798" selection-end="14798" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/LocalizedString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/ConfigService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="75" selection-start="2296" selection-end="2296" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="47" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/LocalizationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="24" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="74" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5124#5155#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="55" selection-start="97" selection-end="97" vertical-scroll-proportion="0.13746631">
+        <state line="31" column="15" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="13" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/LocalizationWebService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="524" selection-end="524" vertical-scroll-proportion="0.87741935">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

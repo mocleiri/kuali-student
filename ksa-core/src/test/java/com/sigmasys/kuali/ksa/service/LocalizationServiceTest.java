@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
+import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-import java.util.Map;
+import java.util.List;
 
 import static com.sigmasys.kuali.ksa.service.LocalizationService.ImportType;
 
@@ -23,7 +24,7 @@ public class LocalizationServiceTest extends AbstractServiceTest {
 
 
     @Autowired
-    @Qualifier("localizationService")
+    @Qualifier(LocalizationService.SERVICE_NAME)
     private LocalizationService localizationService;
 
     @Test
@@ -33,15 +34,15 @@ public class LocalizationServiceTest extends AbstractServiceTest {
 
         localizationService.importResources(xliff, ImportType.FULL);
 
-        Map<String, LocalizedString> strings = localizationService.getLocalizedStrings("en_US");
+        List<Pair<String, LocalizedString>> strings = localizationService.getLocalizedStrings("en_US");
 
         Assert.notNull(strings);
         Assert.notEmpty(strings);
 
-        for (Map.Entry<String, LocalizedString> entry : strings.entrySet()) {
+        for (Pair<String, LocalizedString> pair : strings) {
 
-            String id = entry.getKey();
-            LocalizedString string = entry.getValue();
+            String id = pair.getA();
+            LocalizedString string = pair.getB();
 
             System.out.println("Retrieved LocalizedString: id = " + id + ", value = " + string);
 

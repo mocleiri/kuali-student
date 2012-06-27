@@ -7,7 +7,7 @@
 
     <!--  LocalizationService WS Endpoint -->
     <endpoint name="LocalizationService"
-              implementation="com.sigmasys.kuali.ksa.service.impl.LocalizationServiceImpl"
+              implementation="com.sigmasys.kuali.ksa.service.impl.LocalizationWebService"
               url-pattern="/localization.webservice"/>
 
 </endpoints>

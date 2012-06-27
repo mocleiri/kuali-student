@@ -78,7 +78,8 @@ public class LoggingInterceptor implements MethodInterceptor {
         Object[] arguments = invocation.getArguments();
         Class<?>[] paramTypes = method.getParameterTypes();
 
-        String userId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+        String userId = (RequestUtils.getThreadRequest() != null) ?
+                userSessionManager.getUserId(RequestUtils.getThreadRequest()) : "unknown";
 
         StringBuilder logBuffer = new StringBuilder("User '" + (userId != null ? userId : "unknown") + "' ");
         logBuffer.append("performed the method call: ");

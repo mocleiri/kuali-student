@@ -162,11 +162,13 @@ public class GenericPersistenceService implements AopProxy {
         if (entity instanceof AuditableEntity) {
             AuditableEntity auditableEntity = (AuditableEntity) entity;
             auditableEntity.setLastUpdate(new Date());
-            String userId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
-            if (auditableEntity.getId() == null) {
-                auditableEntity.setCreatorId(userId);
-            } else {
-                auditableEntity.setEditorId(userId);
+            if (RequestUtils.getThreadRequest() != null) {
+                String userId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+                if (auditableEntity.getId() == null) {
+                    auditableEntity.setCreatorId(userId);
+                } else {
+                    auditableEntity.setEditorId(userId);
+                }
             }
         }
 

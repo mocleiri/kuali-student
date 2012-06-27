@@ -3,11 +3,13 @@ package com.sigmasys.kuali.ksa.config;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
+import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,7 @@ public class ConfigService {
     private InitialParameterConfigurer parameterConfigurer;
 
     @Autowired
+    @Qualifier(LocalizationService.SERVICE_NAME)
     private LocalizationService localizationService;
 
 
@@ -45,14 +48,15 @@ public class ConfigService {
     }
 
     public Map<String, String> getLocalizedParameters(Locale locale) {
-        if ( locale == null ) {
+        if (locale == null) {
             throw new IllegalArgumentException("Locale cannot be null");
         }
-        Map<String, LocalizedString> localizedStrings = localizationService.getLocalizedStrings(locale.toString());
+        List<Pair<String, LocalizedString>> localizedStrings =
+                localizationService.getLocalizedStrings(locale.toString());
         if (localizedStrings != null) {
             Map<String, String> localizedParameters = new HashMap<String, String>(localizedStrings.size());
-            for (LocalizedString localizedString : localizedStrings.values()) {
-                localizedParameters.put(localizedString.getId().getId(), localizedString.getValue());
+            for (Pair<String, LocalizedString> pair : localizedStrings) {
+                localizedParameters.put(pair.getA(), pair.getB().getValue());
             }
             return localizedParameters;
         }

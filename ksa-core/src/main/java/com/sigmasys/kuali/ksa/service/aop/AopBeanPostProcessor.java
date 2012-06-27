@@ -9,6 +9,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Service;
 
+import javax.jws.WebService;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class AopBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof AopProxy) {
+        if (bean instanceof AopProxy && !bean.getClass().isAnnotationPresent(WebService.class)) {
             List<Advice> advices = ((AopProxy) bean).getAdvices(beanFactory);
             if (advices != null) {
                 Advised advised;

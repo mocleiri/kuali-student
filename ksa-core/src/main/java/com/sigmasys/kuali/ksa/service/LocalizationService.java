@@ -4,9 +4,10 @@ package com.sigmasys.kuali.ksa.service;
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
+import com.sigmasys.kuali.ksa.model.Pair;
 
 import javax.jws.WebService;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Localization Service
@@ -37,15 +38,16 @@ public interface LocalizationService {
      *
      * @param content    the content of the resources to be imported
      * @param importType Import type
+     * @return a map of localized strings for the target locale
      */
-    void importResources(String content, ImportType importType);
+    ArrayList<Pair<String, LocalizedString>> importResources(String content, ImportType importType);
 
     /**
      * Returns all the localized strings for the given locale
      *
      * @param locale the locale string, i.e. "en_US", "fr_FR"
-     * @return  a map of localized strings
+     * @return a map of localized strings
      */
-    HashMap<String, LocalizedString> getLocalizedStrings(String locale);
+    ArrayList<Pair<String, LocalizedString>> getLocalizedStrings(String locale);
 
 }
