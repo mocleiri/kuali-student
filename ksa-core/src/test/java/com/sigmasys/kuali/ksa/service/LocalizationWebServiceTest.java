@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
-import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,23 +28,21 @@ public class LocalizationWebServiceTest extends AbstractServiceTest {
 
         String xliff = CommonUtils.getResourceAsString("xliff/us-jp-xliff.xml");
 
-        List<Pair<String, LocalizedString>> strings =
-                localizationService.importResources(xliff, LocalizationService.ImportType.FULL);
+        List<LocalizedString> strings = localizationService.importResources(xliff, LocalizationService.ImportType.FULL);
 
         Assert.notNull(strings);
         Assert.notEmpty(strings);
 
-        for (Pair<String, LocalizedString> pair : strings) {
+        for (LocalizedString string : strings) {
 
-            String id = pair.getA();
-            LocalizedString string = pair.getB();
+            String id = string.getId().getId();
 
             System.out.println("Retrieved LocalizedString: id = " + id + ", value = " + string);
 
             Assert.notNull(string);
             Assert.notNull(string.getId());
             Assert.isTrue(id.equals(string.getId().getId()));
-            Assert.isTrue(new LocalizedStringId(id, "en_US").equals(string.getId()));
+            Assert.isTrue(new LocalizedStringId(id, "ja_JP").equals(string.getId()));
             Assert.notNull(string.getOverridden());
             Assert.notNull(string.getValue());
             Assert.isTrue(!string.getValue().trim().isEmpty());

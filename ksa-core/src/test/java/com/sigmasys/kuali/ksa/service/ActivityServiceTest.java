@@ -35,6 +35,7 @@ public class ActivityServiceTest extends AbstractServiceTest {
 
         // Creating a new activity
         Activity activity = new Activity();
+        activity.setId(activityId);
         activity.setAccountId(userId);
         activity.setEntityId(userId);
         activity.setEntityType(Account.class.getSimpleName());

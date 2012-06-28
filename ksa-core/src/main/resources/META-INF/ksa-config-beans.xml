@@ -48,10 +48,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                       p:service-ref="accountService"/>
                 <bean class="com.sigmasys.kuali.ksa.service.KsaServiceDefinition"
                       p:serviceNameSpaceURI="http://sigmasys.com/ksa"
-                      p:localServiceName="LocalizationService"
+                      p:localServiceName="localizationService"
                       p:jaxWsService="true"
                       p:busSecurity="false"
-                      p:service-ref="LocalizationService"/>
+                      p:service-ref="localizationService"/>
             </list>
         </property>
     </bean>

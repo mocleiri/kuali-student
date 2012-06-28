@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.config;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
-import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -31,7 +30,7 @@ public class ConfigService {
     private InitialParameterConfigurer parameterConfigurer;
 
     @Autowired
-    @Qualifier(LocalizationService.SERVICE_NAME)
+    @Qualifier("localizationService")
     private LocalizationService localizationService;
 
 
@@ -51,12 +50,12 @@ public class ConfigService {
         if (locale == null) {
             throw new IllegalArgumentException("Locale cannot be null");
         }
-        List<Pair<String, LocalizedString>> localizedStrings =
+        List<LocalizedString> localizedStrings =
                 localizationService.getLocalizedStrings(locale.toString());
         if (localizedStrings != null) {
             Map<String, String> localizedParameters = new HashMap<String, String>(localizedStrings.size());
-            for (Pair<String, LocalizedString> pair : localizedStrings) {
-                localizedParameters.put(pair.getA(), pair.getB().getValue());
+            for (LocalizedString string : localizedStrings) {
+                localizedParameters.put(string.getId().getId(), string.getValue());
             }
             return localizedParameters;
         }

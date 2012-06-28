@@ -3,14 +3,13 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
-import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.service.AbstractWebContextAwareService;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import org.springframework.stereotype.Service;
 
 import javax.jws.WebService;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Localization Service implementation.
@@ -26,7 +25,7 @@ public class LocalizationWebService extends AbstractWebContextAwareService imple
 
 
     private LocalizationService getLocalizationService() {
-        return ContextUtils.getBean(LocalizationService.SERVICE_NAME, LocalizationService.class);
+        return ContextUtils.getBean("localizationService", LocalizationService.class);
     }
 
     /**
@@ -37,7 +36,7 @@ public class LocalizationWebService extends AbstractWebContextAwareService imple
      * @return a map  of localized strings for the target locale
      */
     @Override
-    public ArrayList<Pair<String, LocalizedString>> importResources(String content, ImportType importType) {
+    public List<LocalizedString> importResources(String content, ImportType importType) {
         return getLocalizationService().importResources(content, importType);
     }
 
@@ -48,7 +47,7 @@ public class LocalizationWebService extends AbstractWebContextAwareService imple
      * @return a map of localized strings
      */
     @Override
-    public ArrayList<Pair<String, LocalizedString>> getLocalizedStrings(String locale) {
+    public List<LocalizedString> getLocalizedStrings(String locale) {
         return getLocalizationService().getLocalizedStrings(locale);
     }
 

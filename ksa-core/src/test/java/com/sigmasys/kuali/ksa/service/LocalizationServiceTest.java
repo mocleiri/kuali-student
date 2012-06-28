@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
-import com.sigmasys.kuali.ksa.model.Pair;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +23,7 @@ public class LocalizationServiceTest extends AbstractServiceTest {
 
 
     @Autowired
-    @Qualifier(LocalizationService.SERVICE_NAME)
+    @Qualifier("localizationService")
     private LocalizationService localizationService;
 
     @Test
@@ -34,15 +33,14 @@ public class LocalizationServiceTest extends AbstractServiceTest {
 
         localizationService.importResources(xliff, ImportType.FULL);
 
-        List<Pair<String, LocalizedString>> strings = localizationService.getLocalizedStrings("en_US");
+        List<LocalizedString> strings = localizationService.getLocalizedStrings("en_US");
 
         Assert.notNull(strings);
         Assert.notEmpty(strings);
 
-        for (Pair<String, LocalizedString> pair : strings) {
+        for (LocalizedString string : strings) {
 
-            String id = pair.getA();
-            LocalizedString string = pair.getB();
+            String id = string.getId().getId();
 
             System.out.println("Retrieved LocalizedString: id = " + id + ", value = " + string);
 
