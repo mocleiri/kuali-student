@@ -3,7 +3,7 @@ package com.sigmasys.kuali.ksa.transform;
 import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.util.XMLGregorianCalendarConversionUtil;
+//import com.sigmasys.kuali.ksa.util.XMLGregorianCalendarConversionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.xml.bind.JAXBContext;
@@ -98,7 +98,7 @@ public class XmlToObj {
                         // add the accepted or failed transactions to the appropriate response list
                         // add one for each accepted or failed transactions to the appropriate number scalar
 
-                        Date effectiveDate = XMLGregorianCalendarConversionUtil.asDate(trans.getEffectiveDate());
+                        Date effectiveDate =  null; //XMLGregorianCalendarConversionUtil.asDate(trans.getEffectiveDate());
                         persistTransaction(trans.getTransactionType().toString(),
                               trans.getAccount().toString(), effectiveDate, trans.getAmount());
 
@@ -161,7 +161,7 @@ public class XmlToObj {
                   meetsRequiredInputs = verifyRequiredValues(trans);
                   if (meetsRequiredInputs) {
 
-                     Date effectiveDate = XMLGregorianCalendarConversionUtil.asDate(trans.getEffectiveDate());
+                     Date effectiveDate = null; //XMLGregorianCalendarConversionUtil.asDate(trans.getEffectiveDate());
                      persistTransaction(trans.getTransactionType().toString(),
                            trans.getAccount().toString(), effectiveDate, trans.getAmount());
 
@@ -256,7 +256,7 @@ public class XmlToObj {
 
             if (transaction != null) {
                retIdValue = transaction.getId();
-               xmlGCLedgerDate = XMLGregorianCalendarConversionUtil.asXMLGregorianCalendar(transaction.getLedgerDate());
+               xmlGCLedgerDate = null; //XMLGregorianCalendarConversionUtil.asXMLGregorianCalendar(transaction.getLedgerDate());
             }
          }
       }
