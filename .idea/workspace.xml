@@ -170,10 +170,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="XmlToObj.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="XmlToObj.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/transform/XmlToObj.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="54" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.08695652">
+            <state line="36" column="54" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -185,7 +185,19 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="153" selection-start="983" selection-end="983" vertical-scroll-proportion="-9.6">
+            <state line="29" column="137" selection-start="1461" selection-end="1461" vertical-scroll-proportion="-18.1">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ksa-datasource.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://C:/Copy of KSAGXTSandbox/ksa-core/src/main/resources/META-INF/ksa-datasource.xml">
+          <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="77" selection-start="1828" selection-end="1851" vertical-scroll-proportion="0.91343284">
               <folding />
             </state>
           </provider>
@@ -204,15 +216,6 @@
         <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="4" column="82" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ksa-config-beans.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="43" selection-start="2704" selection-end="2704" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -258,7 +261,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/xliff/XliffParser.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/gwt/client/model/ReferenceData.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/gwt/server/impl/GwtConfigServiceImpl.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/gwt/client/service/GwtConfigServiceAsync.java" />
@@ -274,6 +276,7 @@
         <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationServiceTest.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/LocalizationWebServiceTest.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" />
       </list>
     </option>
   </component>
@@ -1843,11 +1846,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/jaxws/JaxWsServiceExporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="34" selection-start="3100" selection-end="3100" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.1.1.RELEASE/spring-web-3.1.1.RELEASE-sources.jar!/org/springframework/remoting/jaxws/AbstractJaxWsServiceExporter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="180" column="32" selection-start="6162" selection-end="6162" vertical-scroll-proportion="0.0" />
@@ -1914,16 +1912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="153" selection-start="983" selection-end="983" vertical-scroll-proportion="-9.6">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionImportServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="0" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0">
@@ -1942,7 +1930,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/transform/XmlToObj.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="54" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.08695652">
+        <state line="36" column="54" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="137" selection-start="1461" selection-end="1461" vertical-scroll-proportion="-18.1">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Copy of KSAGXTSandbox/ksa-core/src/main/resources/META-INF/ksa-datasource.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="77" selection-start="1828" selection-end="1851" vertical-scroll-proportion="0.91343284">
           <folding />
         </state>
       </provider>
