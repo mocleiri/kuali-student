@@ -15,6 +15,15 @@
           <root url="file://$MODULE_DIR$/target/generated-sources/annotations" />
         </sourceRoots>
       </configuration>
+      <facet type="struts" name="Struts">
+        <configuration>
+          <option name="myStrutsValidationEnabled" value="true" />
+          <option name="myTilesValidationEnabled" value="true" />
+          <option name="myValidatorValidationEnabled" value="true" />
+          <option name="myReportErrorsAsWarnings" value="true" />
+          <option name="mySuppressPropertiesValidation" value="false" />
+        </configuration>
+      </facet>
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
@@ -24,6 +33,35 @@
         <setting name="gwtSdkUrl" value="file://$MAVEN_REPOSITORY$/com/google/gwt/gwt-dev/2.4.0/" />
         <setting name="gwtSdkType" value="maven" />
         <setting name="webFacet" value="Web" />
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="" />
+        <datasource-mapping>
+          <factory-entry name="ksa" value="ksaDataSource" />
+          <factory-entry name="rice" value="riceDataSource" />
+        </datasource-mapping>
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/ksa-persistence.xml" />
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset1" name="Xml Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/rice-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-datasource.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/AdminLiaisonView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/AlertsTransactionView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/krad-servlet.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/StudentTransactionOverview.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/UifWidgetsDefinitions.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/CashierTxMemo.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/CustomerServiceVw.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-config-beans.xml</file>
+        </fileset>
       </configuration>
     </facet>
   </component>
@@ -38,8 +76,6 @@
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/test-annotations" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
-      <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
