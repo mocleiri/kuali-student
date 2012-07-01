@@ -25,7 +25,8 @@ import org.junit.runners.Suite;
         LanguageServiceTest.class,
         XliffParserTest.class,
         LocalizationServiceTest.class,
-        LocalizationWebServiceTest.class})
+        LocalizationWebServiceTest.class,
+        TransactionImportServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/test-context.xml";
