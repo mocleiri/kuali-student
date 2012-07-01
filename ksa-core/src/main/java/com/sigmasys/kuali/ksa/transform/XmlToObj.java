@@ -44,7 +44,7 @@ public class XmlToObj {
       String batchStatus = "incomplete";
       ObjectFactory of = new ObjectFactory();
 
-      KsaBatchTransactionResponse.Accepted accepted= of.createKsaBatchTransactionResponseAccepted();
+      KsaBatchTransactionResponse.Accepted accepted = of.createKsaBatchTransactionResponseAccepted();
       KsaBatchTransactionResponse.Failed failed = of.createKsaBatchTransactionResponseFailed();
       KsaBatchTransactionResponse.BatchSummary batchSummary = of.createKsaBatchTransactionResponseBatchSummary();
       KsaBatchTransactionResponse ksaBatchTransactionResponse = of.createKsaBatchTransactionResponse();
