@@ -256,7 +256,7 @@ public class XmlToObj {
 
             if (transaction != null) {
                retIdValue = transaction.getId();
-               xmlGCLedgerDate = null; //XMLGregorianCalendarConversionUtil.asXMLGregorianCalendar(transaction.getLedgerDate());
+               xmlGCLedgerDate = null; XMLGregorianCalendarConversionUtil.asXMLGregorianCalendar(transaction.getLedgerDate());
             }
          }
       }
