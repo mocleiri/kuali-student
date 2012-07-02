@@ -42,7 +42,6 @@ public class TransactionImportServiceImpl implements TransactionImportService {
    private final XmlSchemaValidator schemaValidator =
          new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
 
-
    private Long retIdValue = 0L;
    private XMLGregorianCalendar xmlGCLedgerDate;
    KsaBatchTransactionResponse ksaBatchTransactionResponse;
@@ -53,7 +52,12 @@ public class TransactionImportServiceImpl implements TransactionImportService {
    @Autowired
    private TransactionService transactionService;
 
-
+   /**
+    * This is the service method exposed to up load and process an XML string
+    * Use of base 64 string can be optional
+    * @param base64Xml
+    * @return
+    */
    @WebMethod
    public String xmlUpload(String base64Xml) {
 
@@ -105,7 +109,7 @@ public class TransactionImportServiceImpl implements TransactionImportService {
    }
 
    /**
-    *
+    * Convert an XML input transaction representation to a Transaction with persistence
     * @param is
     * @return
     */
@@ -264,7 +268,7 @@ public class TransactionImportServiceImpl implements TransactionImportService {
    }
 
    /**
-    *
+    * Validate inputs are provided. Validate amount is positive number?
     * @param ksaTransaction
     * @return
     */
@@ -286,7 +290,9 @@ public class TransactionImportServiceImpl implements TransactionImportService {
    }
 
    /**
-    *
+    * Check if an account exists, otherwise an error.
+    * Create a persisted database transaction, otherwise an error
+    * Failure is noted as an incomplete batch or single transaction processing
     * @param transactionTypeId
     * @param userId
     * @param effectiveDate
