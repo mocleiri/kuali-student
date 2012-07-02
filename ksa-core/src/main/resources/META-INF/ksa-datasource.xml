@@ -6,14 +6,11 @@
        default-lazy-init="true">
 
     <!-- Atomikos UserTransaction implementation -->
-    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
-        <property name="transactionTimeout" value="600"/>
-    </bean>
+    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
 
     <!-- Atomikos JTA TransactionManager implementation -->
     <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager">
         <property name="forceShutdown" value="false"/>
-        <property name="transactionTimeout" value="600"/>
     </bean>
 
     <!--  Spring JTA TransactionManager -->
@@ -34,14 +31,14 @@
 
     <bean id="ksaDataSource" class="com.sigmasys.kuali.ksa.service.jta.AtomikosDataSourceBean" parent="xaDataSource">
         <property name="uniqueResourceName" value="ksaDataSource"/>
-        <property name="url" value="jdbc:oracle:thin:@TP_Z60T_1.sigmasys.com:1521:XE"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
         <property name="user" value="ksa"/>
         <property name="password" value="ksa123"/>
     </bean>
 
     <bean id="riceDataSource" class="com.sigmasys.kuali.ksa.service.jta.AtomikosDataSourceBean" parent="xaDataSource">
         <property name="uniqueResourceName" value="riceDataSource"/>
-        <property name="url" value="jdbc:oracle:thin:@TP_Z60T_1.sigmasys.com:1521:XE"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
         <property name="user" value="rice"/>
         <property name="password" value="rice123"/>
     </bean>
