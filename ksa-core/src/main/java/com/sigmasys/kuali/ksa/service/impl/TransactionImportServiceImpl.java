@@ -42,7 +42,7 @@ public class TransactionImportServiceImpl implements TransactionImportService {
    private final XmlSchemaValidator schemaValidator =
          new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
 
-   private String batchStatus = "incomplete";
+
    private Long retIdValue = 0L;
    private XMLGregorianCalendar xmlGCLedgerDate;
    KsaBatchTransactionResponse ksaBatchTransactionResponse;
@@ -56,6 +56,7 @@ public class TransactionImportServiceImpl implements TransactionImportService {
 
    @WebMethod
    public String xmlUpload(String base64Xml) {
+
       String xmlToPersistResponse = "";
       boolean validSchema = false;
 
@@ -110,6 +111,7 @@ public class TransactionImportServiceImpl implements TransactionImportService {
     */
    private String convertXmlToTransaction(InputStream is) {
 
+      String batchStatus = "incomplete";
       String uuidBatchIdentifier = null;
       BigDecimal totalValue = BigDecimal.ZERO;
       BigDecimal acceptedValue = BigDecimal.ZERO;
