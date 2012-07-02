@@ -11,6 +11,7 @@ package com.sigmasys.kuali.ksa.transform;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -106,11 +107,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class KsaBatchTransactionResponse {
 
     @XmlElement(name = "response-identifier", required = true)
-    protected Object responseIdentifier;
+    protected String responseIdentifier;
     @XmlElement(name = "response-to-batch-identifier", required = true)
-    protected Object responseToBatchIdentifier;
+    protected String responseToBatchIdentifier;
     @XmlElement(name = "batch-status", required = true)
-    protected Object batchStatus;
+    protected String batchStatus;
     @XmlElement(required = true)
     protected KsaBatchTransactionResponse.Accepted accepted;
     @XmlElement(required = true)
@@ -123,10 +124,10 @@ public class KsaBatchTransactionResponse {
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getResponseIdentifier() {
+    public String getResponseIdentifier() {
         return responseIdentifier;
     }
 
@@ -135,10 +136,10 @@ public class KsaBatchTransactionResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setResponseIdentifier(Object value) {
+    public void setResponseIdentifier(String value) {
         this.responseIdentifier = value;
     }
 
@@ -147,10 +148,10 @@ public class KsaBatchTransactionResponse {
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getResponseToBatchIdentifier() {
+    public String getResponseToBatchIdentifier() {
         return responseToBatchIdentifier;
     }
 
@@ -159,10 +160,10 @@ public class KsaBatchTransactionResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setResponseToBatchIdentifier(Object value) {
+    public void setResponseToBatchIdentifier(String value) {
         this.responseToBatchIdentifier = value;
     }
 
@@ -171,10 +172,10 @@ public class KsaBatchTransactionResponse {
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBatchStatus() {
+    public String getBatchStatus() {
         return batchStatus;
     }
 
@@ -183,10 +184,10 @@ public class KsaBatchTransactionResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBatchStatus(Object value) {
+    public void setBatchStatus(String value) {
         this.batchStatus = value;
     }
 

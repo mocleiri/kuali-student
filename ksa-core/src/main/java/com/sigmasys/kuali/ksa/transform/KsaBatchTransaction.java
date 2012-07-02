@@ -10,6 +10,7 @@ package com.sigmasys.kuali.ksa.transform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -46,7 +47,7 @@ import javax.xml.bind.annotation.XmlType;
 public class KsaBatchTransaction {
 
     @XmlElement(name = "batch-identifier", required = true)
-    protected Object batchIdentifier;
+    protected String batchIdentifier;
     @XmlElement(name = "ksa-transaction", required = true)
     protected List<KsaTransaction> ksaTransaction;
 
@@ -55,10 +56,10 @@ public class KsaBatchTransaction {
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBatchIdentifier() {
+    public String getBatchIdentifier() {
         return batchIdentifier;
     }
 
@@ -67,10 +68,10 @@ public class KsaBatchTransaction {
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBatchIdentifier(Object value) {
+    public void setBatchIdentifier(String value) {
         this.batchIdentifier = value;
     }
 

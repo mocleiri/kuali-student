@@ -2,7 +2,7 @@
 <ksa-batch-transaction xsi:noNamespaceSchemaLocation="Transactions.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <batch-identifier>IMPORT001</batch-identifier>
 	<ksa-transaction>
-		<account>pheald</account>
+		<account>user1</account>
 		<incoming-identifier>HOUSING-10291</incoming-identifier>
 		<effective-date>2012-08-01</effective-date>
 		<origination-date>2012-06-07</origination-date>
@@ -15,10 +15,10 @@
             <email-address>tjefferson@gmail.com</email-address>
 			<open-document>Housing charge for the academic year 2012-2013 for Room 123 Barnes Hall.</open-document>
 		</document>
-		<transaction-type>1008</transaction-type>
+		<transaction-type>1020</transaction-type>
 	</ksa-transaction>
    <ksa-transaction>
-      <account>mivanov</account>
+      <account>user2</account>
       <incoming-identifier>HOUSING-10292</incoming-identifier>
       <effective-date>2012-08-02</effective-date>
       <origination-date>2012-06-08</origination-date>
@@ -31,10 +31,10 @@
           <email-address>thelton@yahoo.com</email-address>
          <open-document>Housing charge for the academic year 2012-2013 for Room 456 Barnes Hall.</open-document>
       </document>
-      <transaction-type>1008</transaction-type>
+      <transaction-type>1020</transaction-type>
    </ksa-transaction>
    <ksa-transaction>
-      <account>dmulder</account>
+      <account>user3</account>
       <incoming-identifier>HOUSING-10293</incoming-identifier>
       <effective-date>2012-08-03</effective-date>
       <origination-date>2012-06-09</origination-date>
@@ -47,6 +47,6 @@
           <email-address>asugar@gmail.uk.com</email-address>
          <open-document>Housing charge for the academic year 2012-2013 for Room 789 Barnes Hall.</open-document>
       </document>
-      <transaction-type>1008</transaction-type>
+      <transaction-type>1020</transaction-type>
    </ksa-transaction>
 </ksa-batch-transaction>

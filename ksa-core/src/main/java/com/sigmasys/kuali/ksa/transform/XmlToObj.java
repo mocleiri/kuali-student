@@ -33,9 +33,6 @@ public class XmlToObj {
    @Autowired
    private TransactionService transactionService;
 
-   public void XMLObj() {
-
-   }
    /*
      Unmarshal is the process of converting an XML file content into a class object
      Marshall is a class object to XML
