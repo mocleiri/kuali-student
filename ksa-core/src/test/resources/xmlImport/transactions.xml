@@ -34,19 +34,35 @@
       <transaction-type>1020</transaction-type>
    </ksa-transaction>
    <ksa-transaction>
-      <account>user3</account>
-      <incoming-identifier>HOUSING-10293</incoming-identifier>
-      <effective-date>2012-08-03</effective-date>
-      <origination-date>2012-06-09</origination-date>
-      <amount>9000.00</amount>
-      <native-amount>9000.00</native-amount>
-      <currency>USD</currency>
-      <document>
-          <person-to-contact>Sir Alan Sugar</person-to-contact>
-          <telephone-number>450-666-7891</telephone-number>
-          <email-address>asugar@gmail.uk.com</email-address>
-         <open-document>Housing charge for the academic year 2012-2013 for Room 789 Barnes Hall.</open-document>
-      </document>
-      <transaction-type>1020</transaction-type>
-   </ksa-transaction>
+        <account>user3</account>
+        <incoming-identifier>HOUSING-10293</incoming-identifier>
+        <effective-date>2012-08-03</effective-date>
+        <origination-date>2012-06-09</origination-date>
+        <amount>9000.00</amount>
+        <native-amount>9000.00</native-amount>
+        <currency>USD</currency>
+        <document>
+            <person-to-contact>Sir Alan Sugar</person-to-contact>
+            <telephone-number>450-666-7891</telephone-number>
+            <email-address>asugar@gmail.uk.com</email-address>
+            <open-document>Housing charge for the academic year 2012-2013 for Room 789 Barnes Hall.</open-document>
+        </document>
+        <transaction-type>1020</transaction-type>
+    </ksa-transaction>
+    <ksa-transaction>
+        <account>user4</account>
+        <incoming-identifier>HOUSING-10293</incoming-identifier>
+        <effective-date>2012-08-03</effective-date>
+        <origination-date>2012-06-10</origination-date>
+        <amount>5000.00</amount>
+        <native-amount>5000.00</native-amount>
+        <currency>USD</currency>
+        <document>
+            <person-to-contact>Alan Peabody</person-to-contact>
+            <telephone-number>459-823-1568</telephone-number>
+            <email-address>apeabody@gmail.uk.com</email-address>
+            <open-document>Housing charge for the academic year 2012-2013 for Room 789 Barnes Hall.</open-document>
+        </document>
+        <transaction-type>1020</transaction-type>
+    </ksa-transaction>
 </ksa-batch-transaction>
