@@ -6,6 +6,9 @@ import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.core.impl.config.property.ConfigFactoryBean;
 import org.kuali.rice.core.impl.config.property.JAXBConfigImpl;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * RiceConfigFactoryBean.
@@ -26,14 +29,11 @@ public class RiceConfigFactoryBean extends ConfigFactoryBean {
         if (ConfigContext.getCurrentContextConfig() != null) {
             oldConfig = ConfigContext.getCurrentContextConfig();
         }
-        JAXBConfigImpl config;
-        if (CONFIG_OVERRIDE_LOCATION != null) {
-            config = new JAXBConfigImpl(CONFIG_OVERRIDE_LOCATION, oldConfig);
-        } else {
-            config = new JAXBConfigImpl(getConfigLocations(), oldConfig);
-        }
 
-        return config;
+        List<String> configLocations =
+                (CONFIG_OVERRIDE_LOCATION != null) ? Arrays.asList(CONFIG_OVERRIDE_LOCATION) : getConfigLocations();
+
+        return new JAXBConfigImpl(configLocations, oldConfig);
 
     }
 
