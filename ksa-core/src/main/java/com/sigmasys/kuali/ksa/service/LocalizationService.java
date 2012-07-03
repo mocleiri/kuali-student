@@ -19,9 +19,9 @@ import java.util.List;
         targetNamespace = Constants.WS_NAMESPACE)
 public interface LocalizationService {
 
-    public static final String SERVICE_URL = "localization.webservice";
-    public static final String SERVICE_NAME = "LocalizationService";
-    public static final String PORT_NAME = SERVICE_NAME + "Port";
+    String SERVICE_URL = "localization.webservice";
+    String SERVICE_NAME = "LocalizationService";
+    String PORT_NAME = SERVICE_NAME + "Port";
 
     /**
      * Import type of locale-aware resources

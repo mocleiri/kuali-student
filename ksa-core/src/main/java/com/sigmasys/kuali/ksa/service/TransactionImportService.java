@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 /**
@@ -10,12 +11,20 @@ import javax.jws.WebService;
  */
 @Url(TransactionImportService.SERVICE_URL)
 @WebService(serviceName = TransactionImportService.SERVICE_NAME, portName = TransactionImportService.PORT_NAME,
-      targetNamespace = Constants.WS_NAMESPACE)
+        targetNamespace = Constants.WS_NAMESPACE)
 public interface TransactionImportService {
 
-   public static final String SERVICE_URL = "transactionImport.webservice";
-   public static final String SERVICE_NAME = "TransactionImportService";
-   public static final String PORT_NAME = SERVICE_NAME + "Port";
+    String SERVICE_URL = "transactionImport.webservice";
+    String SERVICE_NAME = "TransactionImportService";
+    String PORT_NAME = SERVICE_NAME + "Port";
 
-   public String xmlUpload(String base64Xml);
+    /**
+     * This is the service method exposed to up load and process transactions
+     *
+     * @param xml XML content
+     * @return XML response
+     */
+    @WebMethod
+    public String importTransactions(String xml);
+
 }

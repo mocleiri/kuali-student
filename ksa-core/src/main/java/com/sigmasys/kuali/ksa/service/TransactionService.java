@@ -22,9 +22,9 @@ import javax.jws.WebService;
         targetNamespace = Constants.WS_NAMESPACE)
 public interface TransactionService {
 
-    public static final String SERVICE_URL = "transaction.webservice";
-    public static final String SERVICE_NAME = "TransactionService";
-    public static final String PORT_NAME = SERVICE_NAME + "Port";
+    String SERVICE_URL = "transaction.webservice";
+    String SERVICE_NAME = "TransactionService";
+    String PORT_NAME = SERVICE_NAME + "Port";
 
 
     /**
