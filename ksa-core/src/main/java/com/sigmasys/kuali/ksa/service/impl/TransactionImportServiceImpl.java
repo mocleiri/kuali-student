@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.model.BatchReceipt;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.AccountService;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.persistence.Query;
 import javax.xml.bind.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.*;
@@ -32,7 +34,7 @@ import java.util.UUID;
 @WebService(serviceName = TransactionImportService.SERVICE_NAME, portName = TransactionImportService.PORT_NAME,
         targetNamespace = Constants.WS_NAMESPACE)
 @SuppressWarnings("unchecked")
-public class TransactionImportServiceImpl implements TransactionImportService {
+public class TransactionImportServiceImpl extends GenericPersistenceService implements TransactionImportService {
 
     private static final Log logger = LogFactory.getLog(TransactionImportServiceImpl.class);
 
@@ -53,13 +55,42 @@ public class TransactionImportServiceImpl implements TransactionImportService {
 
 
     /**
+     * Persist the given batch receipt in the database
+     *
+     * @param batchReceipt BatchReceipt instance
+     * @return BatchReceipt ID
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public Long persistBatchReceipt(BatchReceipt batchReceipt) {
+        return persistEntity(batchReceipt);
+    }
+
+    /**
+     * Returns BatchReceipt by the given ID
+     *
+     * @param id batchReceipt ID
+     * @return BatchReceipt instance
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public BatchReceipt getBatchReceipt(Long id) {
+        Query query = em.createQuery("select br from BatchReceipt br " +
+                " left outer join fetch br.account a " +
+                " where br.id = :id ");
+        query.setParameter("id", id);
+        List<BatchReceipt> batchReceipts = query.getResultList();
+        return (batchReceipts != null && !batchReceipts.isEmpty()) ? batchReceipts.get(0) : null;
+    }
+
+
+    /**
      * This is the service method exposed to up load and process transactions
      *
      * @param xml XML content
      * @return XML response
      */
     @Override
-    @WebMethod
     public String importTransactions(String xml) {
         try {
             // validate against schema

@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
+import com.sigmasys.kuali.ksa.model.BatchReceipt;
 import com.sigmasys.kuali.ksa.model.Constants;
 
 import javax.jws.WebMethod;
@@ -24,7 +25,24 @@ public interface TransactionImportService {
      * @param xml XML content
      * @return XML response
      */
-    @WebMethod
-    public String importTransactions(String xml);
+    String importTransactions(String xml);
+
+    /**
+     * Persist the given batch receipt in the database
+     *
+     * @param batchReceipt BatchReceipt instance
+     * @return BatchReceipt ID
+     */
+    @WebMethod(exclude = true)
+    Long persistBatchReceipt(BatchReceipt batchReceipt);
+
+    /**
+     * Returns BatchReceipt by the given ID
+     *
+     * @param id batchReceipt ID
+     * @return BatchReceipt instance
+     */
+    @WebMethod(exclude = true)
+    BatchReceipt getBatchReceipt(Long id);
 
 }
