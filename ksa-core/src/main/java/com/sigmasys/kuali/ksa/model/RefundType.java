@@ -12,7 +12,9 @@ import javax.persistence.*;
 @Table(name = "KSSA_REFUND_TYPE")
 public class RefundType extends AuditableEntity {
 
-    private TransactionType transactionType;
+    private CreditType creditType;
+
+    private DebitType debitType;
 
 
     @Id
@@ -30,14 +32,27 @@ public class RefundType extends AuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "TRANSACTION_TYPE_ID_FK", referencedColumnName = "ID"),
-            @JoinColumn(name = "TRANSACTION_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
+            @JoinColumn(name = "CREDIT_TYPE_ID_FK", referencedColumnName = "ID"),
+            @JoinColumn(name = "CREDIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
     })
-    public TransactionType getTransactionType() {
-        return transactionType;
+    public CreditType getCreditType() {
+        return creditType;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
+    public void setCreditType(CreditType creditType) {
+        this.creditType = creditType;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "DEBIT_TYPE_ID_FK", referencedColumnName = "ID"),
+            @JoinColumn(name = "DEBIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
+    })
+    public DebitType getDebitType() {
+        return debitType;
+    }
+
+    public void setDebitType(DebitType debitType) {
+        this.debitType = debitType;
     }
 }

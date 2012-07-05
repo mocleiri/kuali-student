@@ -67,6 +67,7 @@ public class Document implements Identifiable {
         this.id = id;
     }
 
+    @Lob
     @Column(name = "DOCUMENT")
     public String getBody() {
         return body;

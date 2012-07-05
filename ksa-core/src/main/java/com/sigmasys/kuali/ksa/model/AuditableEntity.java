@@ -42,7 +42,12 @@ public abstract class AuditableEntity implements Identifiable {
     private String editorId;
 
     /**
-     * Timestamp
+     * Creation timestamp
+     */
+    private Date creationDate;
+
+    /**
+     * Update timestamp
      */
     private Date lastUpdate;
 
@@ -99,14 +104,24 @@ public abstract class AuditableEntity implements Identifiable {
         this.description = description;
     }
 
+    @Column(name = "CREATION_DATE")
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "id=" + id +
+        return getClass().getSimpleName() +
+                "{id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", creatorId='" + creatorId + '\'' +
                 ", editorId='" + editorId + '\'' +
+                ", creationDate=" + creationDate +
                 ", lastUpdate=" + lastUpdate +
                 '}';
     }

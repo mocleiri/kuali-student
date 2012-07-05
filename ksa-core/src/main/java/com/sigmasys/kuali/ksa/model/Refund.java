@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.annotation.Auditable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,6 +11,7 @@ import java.util.Date;
  *
  * @author Michael Ivanov
  */
+@Auditable
 @Entity
 @Table(name = "KSSA_REFUND")
 public class Refund implements Identifiable {
@@ -26,7 +29,7 @@ public class Refund implements Identifiable {
     /**
      * Timestamp
      */
-    private Date timestamp;
+    private Date creationDate;
 
     /**
      * Request date
@@ -118,12 +121,12 @@ public class Refund implements Identifiable {
     }
 
     @Column(name = "CREATION_DATE")
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Column(name = "REQUEST_DATE")
@@ -145,7 +148,7 @@ public class Refund implements Identifiable {
         this.transaction = transaction;
     }
 
-    @Column(name = "ATTRIBUTE")
+    @Column(name = "ATTRIBUTE", length = 1024)
     public String getAttribute() {
         return attribute;
     }
