@@ -137,16 +137,12 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         ksaBatchTransactionResponse.setAccepted(accepted);
         ksaBatchTransactionResponse.setFailed(failed);
 
-        // TODO Should this come from a config file?
-        Class modelClass = KsaBatchTransaction.class;
-
         if (reader != null) {
             try {
 
-                JAXBContext jaxbContext = JAXBContext.newInstance(modelClass);
+                JAXBContext jaxbContext = JAXBContext.newInstance(KsaBatchTransaction.class);
                 Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
 
-                boolean meetsRequiredInputs = false;
                 boolean failureNoted = false;
 
                 if (unMarshaller != null) {
@@ -165,9 +161,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                         int transIndx = 0;
 
                         for (KsaTransaction trans : ksaTransactionList) {
-                            meetsRequiredInputs = verifyRequiredValues(trans);
+                            boolean meetsRequiredInputs = verifyRequiredValues(trans);
                             if (meetsRequiredInputs) {
-                                System.out.println(trans);
 
                                 // Perform TransactionService insert to persist object
                                 // use the return value to further distinguish success or failure
@@ -310,7 +305,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                     transaction =
                             transactionService.createTransaction(transactionTypeId, userId, effectiveDate, amount);
                 } catch (Exception exp) {
-                    logger.error(exp.getLocalizedMessage());
+                    logger.error(exp.getMessage(), exp);
                 } finally {
                     if (transaction != null) {
                         retIdValue = transaction.getId();
