@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 /**
- * General ledger transaction status
+ * General ledger transaction status.
  *
  * @author Michael Ivanov
  */

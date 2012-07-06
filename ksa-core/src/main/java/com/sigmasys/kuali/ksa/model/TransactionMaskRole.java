@@ -24,7 +24,7 @@ public class TransactionMaskRole extends AuditableEntity {
             table = "KSSA_SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
-            pkColumnValue = "TRAN_MASK_ROLE_SEQ")
+            pkColumnValue = "TRANSACTION_MASK_ROLE_SEQ")
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_TRAN_MASK_ROLE")
     @Override
     public Long getId() {

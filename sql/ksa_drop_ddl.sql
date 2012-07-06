@@ -19,6 +19,8 @@ drop table KSA.KSSA_DOCUMENT cascade constraints;
 drop table KSA.KSSA_ELECTRONIC_CONTACT cascade constraints;
 drop table KSA.KSSA_FLAG_TYPE cascade constraints;
 drop table KSA.KSSA_GL_BREAKDOWN cascade constraints;
+drop table KSA.KSSA_GL_TRANSACTION cascade constraints;
+drop table KSA.KSSA_GL_TRANSMISSION cascade constraints;
 drop table KSA.KSSA_GL_TYPE cascade constraints;
 drop table KSA.KSSA_INFORMATION cascade constraints;
 drop table KSA.KSSA_LANGUAGE cascade constraints;
