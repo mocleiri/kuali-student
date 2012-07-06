@@ -37,6 +37,9 @@ public class CryptUtils {
     private static final BASE64Encoder encoder = new BASE64Encoder();
     private static final BASE64Decoder decoder = new BASE64Decoder();
 
+    private CryptUtils() {
+    }
+
 
     private static String keyToString(Key key) {
         try {

@@ -5,7 +5,7 @@ package com.sigmasys.kuali.ksa.model;
  *
  * @author Michael Ivanov
  */
-public enum BatchReceiptStatus {
+public enum BatchReceiptStatus implements Identifiable {
 
     IN_PROCESS(BatchReceiptStatus.IN_PROCESS_CODE),
     FAILED(BatchReceiptStatus.FAILED_CODE),
@@ -17,14 +17,15 @@ public enum BatchReceiptStatus {
     public static final String PARTIALLY_ACCEPTED_CODE = "P";
     public static final String ACCEPTED_CODE = "E";
 
-    private String code;
+    private String id;
 
-    private BatchReceiptStatus(String code) {
-        this.code = code;
+    private BatchReceiptStatus(String id) {
+        this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    @Override
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -42,12 +43,4 @@ public enum BatchReceiptStatus {
         throw new IllegalStateException("No batch receipt status found for " + name() + " value");
     }
 
-    public static BatchReceiptStatus findByCode(String code) {
-        for (BatchReceiptStatus status : values()) {
-            if (status.getCode().equals(code)) {
-                return status;
-            }
-        }
-        return null;
-    }
 }

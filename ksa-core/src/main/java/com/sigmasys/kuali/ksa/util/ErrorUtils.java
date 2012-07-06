@@ -2,11 +2,15 @@ package com.sigmasys.kuali.ksa.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import java.sql.SQLException;
 
 public class ErrorUtils {
 
     private static final Log logger = LogFactory.getLog(ErrorUtils.class);
+
+    private ErrorUtils() {
+    }
 
     public static String getMessage(Throwable t) {
         return retrieveErrorMessages(t);

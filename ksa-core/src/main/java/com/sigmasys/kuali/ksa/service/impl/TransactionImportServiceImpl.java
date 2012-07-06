@@ -7,7 +7,7 @@ import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionImportService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.transform.*;
-import com.sigmasys.kuali.ksa.util.XMLGregorianCalendarConversionUtil;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -176,7 +176,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                                 // add the accepted or failed transactions to the appropriate response list
                                 // add one for each accepted or failed transactions to the appropriate number scalar
 
-                                Date effectiveDate = XMLGregorianCalendarConversionUtil.asDate(trans.getEffectiveDate());
+                                Date effectiveDate = CalendarUtils.asDate(trans.getEffectiveDate());
 
                                 persistTransaction(trans.getTransactionType(),
                                         trans.getAccount(), effectiveDate, trans.getAmount());
@@ -309,7 +309,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 } finally {
                     if (transaction != null) {
                         retIdValue = transaction.getId();
-                        xmlGCLedgerDate = XMLGregorianCalendarConversionUtil.asXMLGregorianCalendar(transaction.getLedgerDate());
+                        xmlGCLedgerDate = CalendarUtils.asXmlGregorianCalendar(transaction.getLedgerDate());
                     } else {
                         // transaction create failed
                         // log the reason

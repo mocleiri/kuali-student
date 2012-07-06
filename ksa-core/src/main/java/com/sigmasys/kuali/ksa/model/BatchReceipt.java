@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.util.EnumUtils;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -83,12 +85,12 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
 
     @PrePersist
     void populateDBFields() {
-      statusCode = (status != null) ? status.getCode() : null;
+      statusCode = (status != null) ? status.getId() : null;
     }
 
     @PostLoad
     void populateTransientFields() {
-      status = (statusCode != null) ? BatchReceiptStatus.findByCode(statusCode) : null;
+      status = (statusCode != null) ? EnumUtils.findById(BatchReceiptStatus.class, statusCode) : null;
     }
 
 

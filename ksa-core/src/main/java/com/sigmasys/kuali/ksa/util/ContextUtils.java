@@ -5,9 +5,9 @@ import org.springframework.context.ApplicationContext;
 /**
  * ContextUtils
  *
- * @author ivanovm
+ * @author Michael Ivanov
  */
-
+@SuppressWarnings("unchecked")
 public class ContextUtils {
 
     private static ApplicationContext applicationContext;

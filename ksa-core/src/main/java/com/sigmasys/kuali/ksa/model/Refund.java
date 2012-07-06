@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
+import com.sigmasys.kuali.ksa.util.EnumUtils;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -85,12 +86,12 @@ public class Refund implements Identifiable {
 
     @PrePersist
     void populateDBFields() {
-        statusCode = (status != null) ? status.getCode() : null;
+        statusCode = (status != null) ? status.getId() : null;
     }
 
     @PostLoad
     void populateTransientFields() {
-        status = (statusCode != null) ? RefundStatus.findByCode(statusCode) : null;
+        status = (statusCode != null) ? EnumUtils.findById(RefundStatus.class, statusCode): null;
     }
 
     @Id
