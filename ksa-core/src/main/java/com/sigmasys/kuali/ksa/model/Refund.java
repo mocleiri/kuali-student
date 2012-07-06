@@ -138,8 +138,8 @@ public class Refund implements Identifiable {
         this.requestDate = requestDate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TRANSACTION_ID_FK")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TRANSACTION_ID_FK", unique = true, nullable = false)
     public Transaction getTransaction() {
         return transaction;
     }
