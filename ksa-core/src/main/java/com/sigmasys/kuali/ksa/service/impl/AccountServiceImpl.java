@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * Currency service JPA implementation.
+ * Account service implementation.
  * <p/>
  *
  * @author Michael Ivanov
