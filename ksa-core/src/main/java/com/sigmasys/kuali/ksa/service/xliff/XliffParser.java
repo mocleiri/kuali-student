@@ -32,8 +32,8 @@ public class XliffParser {
 
     private static final Log logger = LogFactory.getLog(XliffParser.class);
 
-    private static final String XLIFF_SCHEMA_LOCATION = "classpath*:xliff-core-1.2-transitional.xsd";
-    private static final String XML_SCHEMA_LOCATION = "classpath*:xml.xsd";
+    private static final String XLIFF_SCHEMA_LOCATION = "classpath*:/xsd/xliff-core-1.2-transitional.xsd";
+    private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
 
     private static final String XLIFF_NAMESPACE = "urn:oasis:names:tc:xliff:document:1.2";
 

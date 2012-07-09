@@ -38,8 +38,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     private static final Log logger = LogFactory.getLog(TransactionImportServiceImpl.class);
 
-    private static final String IMPORT_SCHEMA_LOCATION = "classpath*:ConsolidatedSchemata.xsd";
-    private static final String XML_SCHEMA_LOCATION = "classpath*:xml.xsd";
+    private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/transaction-import.xsd";
+    private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
 
     private final static XmlSchemaValidator schemaValidator =
             new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
