@@ -30,12 +30,29 @@ public interface AccessControlService {
 
 
     /**
-     * Returns the list of transaction type masks that the given user ID can have access to.
+     * Returns the list of transaction type IDs that the given user can access.
+     *
+     * @param userId Account ID
+     * @return a list of transaction type IDs
+     */
+    List<String> getAllowedTransactionTypes(String userId);
+
+    /**
+     * Returns the list of transaction type masks that the given user can access.
      *
      * @param userId Account ID
      * @return a list of transaction type masks
      */
     List<String> getAllowedTransactionTypeMasks(String userId);
+
+
+    /**
+     * Returns the list of transaction type IDs that the given set of roles can access.
+     *
+     * @param roleNames a set of role names
+     * @return a list of transaction type IDs
+     */
+    List<String> getTransactionTypesByRoleNames(Set<String> roleNames);
 
 
     /**

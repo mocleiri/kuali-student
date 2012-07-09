@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccessControlService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,7 +10,6 @@ import org.kuali.rice.core.api.membership.MemberType;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.kim.api.identity.IdentityService;
 import org.kuali.rice.kim.api.identity.principal.Principal;
-import org.kuali.rice.kim.api.permission.PermissionService;
 import org.kuali.rice.kim.api.role.Role;
 import org.kuali.rice.kim.api.role.RoleMember;
 import org.kuali.rice.kim.api.role.RoleService;
@@ -23,9 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -43,26 +38,37 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     private static final Log logger = LogFactory.getLog(AccessControlServiceImpl.class);
 
 
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
-    protected EntityManager em;
-
-
-    @Autowired
-    private TransactionService transactionService;
-
     @Autowired
     private UserSessionManager userSessionManager;
 
     private IdentityService identityService;
-    private PermissionService permissionService;
     private RoleService roleService;
+
+    private final Set<String> transactionTypeIds = new HashSet<String>();
+    private final Map<String, String> transactionTypeMasks = new HashMap<String, String>();
 
 
     @PostConstruct
     private void postConstruct() {
         identityService = KimApiServiceLocator.getIdentityService();
-        permissionService = KimApiServiceLocator.getPermissionService();
         roleService = KimApiServiceLocator.getRoleService();
+        refresh();
+    }
+
+    private void loadTransactionTypeMasks() {
+        transactionTypeMasks.clear();
+        List<TransactionMaskRole> maskRoles = getEntities(TransactionMaskRole.class);
+        for (TransactionMaskRole maskRole : maskRoles) {
+            transactionTypeMasks.put(maskRole.getRoleName(), maskRole.getTypeMask());
+        }
+    }
+
+    private void loadTransactionTypeIds() {
+        transactionTypeIds.clear();
+        List<TransactionType> transactionTypes = getEntities(TransactionType.class);
+        for (TransactionType transactionType : transactionTypes) {
+            transactionTypeIds.add(transactionType.getId().getId());
+        }
     }
 
     private List<Role> getKimRoles(String userId) {
@@ -120,24 +126,45 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
         return Collections.emptySet();
     }
 
-
-    @Override
-    public List<String> getAllowedTransactionTypeMasks(String userId) {
-        Set<String> roleNames = getRoles(userId);
-        if (!roleNames.isEmpty()) {
-            Query query = em.createQuery("select t from " + TransactionMaskRole.class.getSimpleName() + " t " +
-                    " where t.roleName in (:roleNames)");
-            query.setParameter("roleNames", roleNames);
-            List<TransactionMaskRole> maskRoles = query.getResultList();
-            if (maskRoles != null && !maskRoles.isEmpty()) {
-                List<String> typeMasks = new ArrayList<String>(maskRoles.size());
-                for (TransactionMaskRole maskRole : maskRoles) {
-                    typeMasks.add(maskRole.getTypeMask());
+    private List<String> getTransactionTypeMasksByRoleNames(Set<String> roleNames) {
+        if (roleNames != null && !roleNames.isEmpty()) {
+            if (!transactionTypeMasks.isEmpty()) {
+                List<String> typeMasks = new LinkedList<String>();
+                for (Map.Entry<String, String> roleMask : transactionTypeMasks.entrySet()) {
+                    String roleName = roleMask.getKey();
+                    String typeMask = roleMask.getValue();
+                    if (roleNames.contains(roleName)) {
+                        typeMasks.add(typeMask);
+                    }
                 }
                 return typeMasks;
             }
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<String> getAllowedTransactionTypeMasks(String userId) {
+        return getTransactionTypeMasksByRoleNames(getRoles(userId));
+    }
+
+    @Override
+    public List<String> getAllowedTransactionTypes(String userId) {
+        return getTransactionTypesByRoleNames(getRoles(userId));
+    }
+
+    @Override
+    public List<String> getTransactionTypesByRoleNames(Set<String> roleNames) {
+        List<String> typeMasks = getTransactionTypeMasksByRoleNames(roleNames);
+        List<String> transactionTypes = new LinkedList<String>();
+        for (String typeMask : typeMasks) {
+            for (String transactionTypeId : transactionTypeIds) {
+                if (Pattern.matches(typeMask, transactionTypeId)) {
+                    transactionTypes.add(transactionTypeId);
+                }
+            }
+        }
+        return transactionTypes;
     }
 
     @Override
@@ -169,6 +196,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
 
     @Override
     public void refresh() {
-        // TODO: Reload the attributes from the KIM and KSA databases
+        loadTransactionTypeMasks();
+        loadTransactionTypeIds();
     }
 }

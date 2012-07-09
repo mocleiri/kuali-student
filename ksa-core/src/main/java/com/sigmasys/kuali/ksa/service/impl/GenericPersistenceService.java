@@ -91,7 +91,7 @@ public class GenericPersistenceService implements AopProxy {
      * @return List of Identifiable objects
      */
     public <T extends Identifiable> List<T> getEntities(Class<T> entityClass) {
-        return getEntities(entityClass, (Pair<String, SortOrder>) null);
+        return getEntities(entityClass, (Pair<String, SortOrder>[]) null);
     }
 
 
