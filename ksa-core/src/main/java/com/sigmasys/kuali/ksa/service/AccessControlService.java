@@ -1,7 +1,5 @@
 package com.sigmasys.kuali.ksa.service;
 
-import com.sigmasys.kuali.ksa.model.TransactionTypeId;
-
 import java.util.List;
 import java.util.Set;
 
@@ -15,12 +13,20 @@ public interface AccessControlService {
 
 
     /**
+     * Returns a set of Permission names for the given user ID
+     *
+     * @param userId Account ID
+     * @return a set of permission names
+     */
+    Set<String> getPermissions(String userId);
+
+    /**
      * Returns a set of Role names for the given user ID
      *
      * @param userId Account ID
      * @return a set of role names
      */
-    Set<String> getRoleNames(String userId);
+    Set<String> getRoles(String userId);
 
 
     /**
