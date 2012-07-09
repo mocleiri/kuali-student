@@ -25,7 +25,8 @@ public interface TransactionImportService {
      * @param xml XML content
      * @return XML response
      */
-    String importTransactions(String xml);
+    @WebMethod
+    public String processTransactions(String xml);
 
     /**
      * Persist the given batch receipt in the database

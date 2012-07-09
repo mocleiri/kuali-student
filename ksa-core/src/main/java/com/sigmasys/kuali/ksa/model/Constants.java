@@ -46,4 +46,5 @@ public interface Constants {
     String TRANSACTION_SERVICE_URL = "transaction.service";
     String CURRENCY_SERVICE_URL = "currency.service";
 
+    String IMPORT_SINGLE_BATCH_FALURE = "ksa.import.single.batch.failure";
 }
