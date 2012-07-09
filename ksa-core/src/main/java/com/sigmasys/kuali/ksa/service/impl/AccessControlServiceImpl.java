@@ -105,9 +105,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     public boolean isTransactionTypeAllowed(String userId, String transactionTypeId) {
         List<String> typeMasks = getAllowedTransactionTypeMasks(userId);
         for ( String typeMask : typeMasks) {
-             Pattern pattern = Pattern.compile(typeMask);
-             Matcher matcher = pattern.matcher(transactionTypeId);
-             if ( matcher.matches() ) {
+             if ( Pattern.matches(typeMask, transactionTypeId) ) {
                  return true;
              }
         }
