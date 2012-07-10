@@ -25,7 +25,7 @@ public interface Constants {
     String WS_NAMESPACE = "http://sigmasys.com/";
 
     // Rice constants
-    String APPLICATION_HOST_PARAM_NAME  = "application.host";
+    String APPLICATION_HOST_PARAM_NAME = "application.host";
 
     // ---------------------------------------------------------------
     // DATE FORMATS
@@ -46,5 +46,6 @@ public interface Constants {
     String TRANSACTION_SERVICE_URL = "transaction.service";
     String CURRENCY_SERVICE_URL = "currency.service";
 
-    String IMPORT_SINGLE_BATCH_FALURE = "ksa.import.single.batch.failure";
+    String IMPORT_SINGLE_BATCH_FAILURE = "ksa.import.single.batch.failure";
+
 }

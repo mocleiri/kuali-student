@@ -48,9 +48,9 @@ public class ObjectFactory {
      * Create an instance of {@link BatchAch }
      * 
      */
-    public BatchAch createBatchAch() {
+    /*public BatchAch createBatchAch() {
         return new BatchAch();
-    }
+    }*/
 
     /**
      * Create an instance of {@link BatchAccountResponse.Rejected }
@@ -200,9 +200,9 @@ public class ObjectFactory {
      * Create an instance of {@link BatchAch.BatchControl }
      * 
      */
-    public BatchAch.BatchControl createBatchAchBatchControl() {
+    /*public BatchAch.BatchControl createBatchAchBatchControl() {
         return new BatchAch.BatchControl();
-    }
+    }*/
 
     /**
      * Create an instance of {@link RequestFailure }
@@ -280,9 +280,9 @@ public class ObjectFactory {
      * Create an instance of {@link Ach }
      * 
      */
-    public Ach createAch() {
+    /*public Ach createAch() {
         return new Ach();
-    }
+    }*/
 
     /**
      * Create an instance of {@link KsaBill }

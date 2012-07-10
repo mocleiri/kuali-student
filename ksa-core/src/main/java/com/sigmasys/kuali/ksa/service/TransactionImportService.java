@@ -25,7 +25,6 @@ public interface TransactionImportService {
      * @param xml XML content
      * @return XML response
      */
-    @WebMethod
     public String processTransactions(String xml);
 
     /**
