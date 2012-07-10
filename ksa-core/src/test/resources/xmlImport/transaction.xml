@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ksa-transaction xsi:noNamespaceSchemaLocation="Transaction.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <account-identifier>user5</account-identifier>
+    <account-identifier>admin</account-identifier>
     <incoming-identifier>HOUSING-10291</incoming-identifier>
     <effective-date>2012-08-01</effective-date>
     <origination-date>2012-06-07</origination-date>

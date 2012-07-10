@@ -2,7 +2,7 @@
 <ksa-batch-transaction xsi:noNamespaceSchemaLocation="Transactions.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <batch-identifier>IMPORT001</batch-identifier>
 	<ksa-transaction>
-		<account-identifier>user1</account-identifier>
+		<account-identifier>admin</account-identifier>
 		<incoming-identifier>HOUSING-10291</incoming-identifier>
 		<effective-date>2012-08-01</effective-date>
 		<origination-date>2012-06-07</origination-date>
@@ -18,7 +18,7 @@
 		<transaction-type>1020</transaction-type>
 	</ksa-transaction>
    <ksa-transaction>
-      <account-identifier>user2</account-identifier>
+      <account-identifier>admin</account-identifier>
       <incoming-identifier>HOUSING-10292</incoming-identifier>
       <effective-date>2012-08-02</effective-date>
       <origination-date>2012-06-08</origination-date>
@@ -34,7 +34,7 @@
       <transaction-type>1020</transaction-type>
    </ksa-transaction>
    <ksa-transaction>
-        <account-identifier>user3</account-identifier>
+        <account-identifier>admin</account-identifier>
         <incoming-identifier>HOUSING-10293</incoming-identifier>
         <effective-date>2012-08-03</effective-date>
         <origination-date>2012-06-09</origination-date>

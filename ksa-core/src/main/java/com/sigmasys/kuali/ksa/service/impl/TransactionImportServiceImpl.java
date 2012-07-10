@@ -64,6 +64,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     @Autowired
     private ConfigService configService;
 
+    private final ObjectFactory objectFactory = new ObjectFactory();
+
     private Boolean singleBatchFailure = true;
 
     private Boolean isBatch = true;
@@ -77,9 +79,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private int numberOfAccepted = 0;
     private int numberOfFailed = 0;
 
+    // TODO: Dave, you cannot store the request/response objects in the global variables
+    // TODO: this instance is stateless and can be shared between multiple user sessions
     private KsaBatchTransaction ksaBatchTransaction;
 
-    private ObjectFactory objectFactory;
     private KsaBatchTransactionResponse.Accepted accepted;
     private KsaBatchTransactionResponse.Failed failed;
     private KsaBatchTransactionResponse.BatchSummary batchSummary;
@@ -149,7 +152,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private String parseTransactions(String xml) {
 
         String batchStatus = "incomplete";
-        String uuidBatchResponseIdentifier = null;
+        String uuidBatchResponseIdentifier;
         String uuidBatchIdentifier;
         int batchSize = 0;
 
@@ -161,7 +164,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         numberOfAccepted = 0;
         numberOfFailed = 0;
 
-        objectFactory = new ObjectFactory();
         accepted = objectFactory.createKsaBatchTransactionResponseAccepted();
         failed = objectFactory.createKsaBatchTransactionResponseFailed();
         batchSummary = objectFactory.createKsaBatchTransactionResponseBatchSummary();
@@ -363,8 +365,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
             if (unMarshaller != null) {
 
+                // TODO: Dave, this class instance is stateless so
+                // TODO: you can't store the results in global variables
                 // multiple unmarshaled transaction objects
-                ksaBatchTransaction = (KsaBatchTransaction) unMarshaller.unmarshal(reader);
+                KsaTransaction transaction = (KsaTransaction) unMarshaller.unmarshal(reader);
 
                 exitState = true;
             }
@@ -457,18 +461,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * using KIM details to supplement KSA account. Return true if the account exists
      * otherwise false if no account from getOrCreateAccount method combined with KIM
      *
-     * @param accountId
+     * @param accountId Account ID
      */
     private boolean doesImportAccountExist(String accountId) {
-       com.sigmasys.kuali.ksa.model.Account account = null;
-       if (accountId != null) {
-          try {
-             account = accountService.getOrCreateAccount(accountId);
-          } catch (IllegalStateException iseExp) {
-             logger.error(iseExp.getLocalizedMessage());
-          }
-       }
-       return account != null ? true : false;
+        return accountService.getOrCreateAccount(accountId) != null;
     }
 
     /**
@@ -495,7 +491,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * @return
      */
     private boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate) {
-        boolean exitState = false;
+        boolean exitState;
 
         // TODO getAccountBlockedStatus
         if (doesImportAccountExist(accountId) && isTransactionCodeValid(transactionType, effectiveDate)) {
@@ -514,7 +510,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * @return
      */
     private boolean isWithinCreditLimit(String accountId) {
-        boolean exitState = false;
+        boolean exitState;
 
         // TODO need to define a method that checks account is not over credit limit
         //exitState = transactionService.isWithinCreditLimit(accountId);
@@ -667,7 +663,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 transaction.setExternalId(ksaTransaction.getIncomingIdentifier());
 
                 if (transaction instanceof Payment) {
-                    TransactionType transactionType = em.find(TransactionType.class, ksaTransaction.getTransactionType().toString());
+                    TransactionType transactionType = em.find(TransactionType.class, ksaTransaction.getTransactionType());
                     CreditType creditType = (CreditType) transactionType;
                     Payment payment = (Payment) transaction;
                     int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
