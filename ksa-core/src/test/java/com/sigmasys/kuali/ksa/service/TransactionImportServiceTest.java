@@ -23,13 +23,42 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
     @Test
     public void batchImportTest() {
         try {
-            batchImport();
+           singleImport();
+           batchImport();
+           batchImportFail();;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
     }
 
-    /**
+   /**
+    * This is a single KsaTransaction import to be wrapped in a batch
+    * @throws Exception
+    */
+   private void singleImport() throws Exception {
+
+      String begValue = "<batch-status>";
+      String endValue = "</batch-status>";
+
+      String content = CommonUtils.getResourceAsString("xmlImport/transaction.xml");
+
+      Assert.notNull(content);
+      String response = transactionImportService.processTransactions(content);
+      Assert.notNull(response);
+      System.out.println(response);
+
+      int begIndex = response.indexOf(begValue) + begValue.length();
+      int endIndex = response.indexOf(endValue);
+
+      String batchStatus = response.substring(begIndex, endIndex);
+      System.out.println("Batch Status " + batchStatus);
+
+      Assert.hasText(batchStatus);
+      Assert.hasText(batchStatus, "complete");
+
+   }
+
+   /**
      * The transactions.xml file contains 3 transactions to import
      * All transaction should have valid information so you should except
      * a "complete" batch status. Likewise changing the account to a unknown
@@ -59,4 +88,32 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
         Assert.hasText(batchStatus, "complete");
     }
 
+   /**
+    * The transactions_fail.xml file contains 4 transactions to import
+    * The fourth transaction has an invalid account so you should except
+    * and "incomplete" batch status. Likewise changing the account to a known
+    * value would negate this test. Other values can be adjusted to suit needs
+    * @throws Exception
+    */
+   public void batchImportFail() throws Exception{
+      String begValue = "<batch-status>";
+      String endValue = "</batch-status>";
+      String content = CommonUtils.getResourceAsString("xmlImport/transactions_fail.xml");
+
+      Assert.notNull(content);
+
+      Assert.notNull(content);
+      String response = transactionImportService.processTransactions(content);
+
+      System.out.println(response);
+
+      int begIndex = response.indexOf(begValue) + begValue.length();
+      int endIndex = response.indexOf(endValue);
+
+      String batchStatus = response.substring(begIndex, endIndex);
+      System.out.println("Batch Status " + batchStatus);
+
+      Assert.hasText(batchStatus);
+      Assert.hasText(batchStatus, "incomplete");
+   }
 }

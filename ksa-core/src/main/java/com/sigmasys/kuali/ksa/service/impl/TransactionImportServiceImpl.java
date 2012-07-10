@@ -74,8 +74,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private BigDecimal totalValueCredit = BigDecimal.ZERO;
     private BigDecimal totalValueDebits = BigDecimal.ZERO;
 
-    private int numberOfAccepted;
-    private int numberOfFailed;
+    private int numberOfAccepted = 0;
+    private int numberOfFailed = 0;
 
     private KsaBatchTransaction ksaBatchTransaction;
 
@@ -85,7 +85,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private KsaBatchTransactionResponse.BatchSummary batchSummary;
     private KsaBatchTransactionResponse ksaBatchTransactionResponse;
 
-    private List<KsaTransaction> ksaTransactionList;
+    private List<KsaTransaction> acceptedKsaTransactionList;
     private com.sigmasys.kuali.ksa.model.Account firstAccount;
 
     /**
@@ -153,12 +153,20 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         String uuidBatchIdentifier;
         int batchSize = 0;
 
+        totalValue = BigDecimal.ZERO;
+        acceptedValue = BigDecimal.ZERO;
+        failedValue = BigDecimal.ZERO;
+        totalValueCredit = BigDecimal.ZERO;
+        totalValueDebits = BigDecimal.ZERO;
+        numberOfAccepted = 0;
+        numberOfFailed = 0;
+
         objectFactory = new ObjectFactory();
         accepted = objectFactory.createKsaBatchTransactionResponseAccepted();
         failed = objectFactory.createKsaBatchTransactionResponseFailed();
         batchSummary = objectFactory.createKsaBatchTransactionResponseBatchSummary();
         ksaBatchTransactionResponse = objectFactory.createKsaBatchTransactionResponse();
-        ksaTransactionList = new ArrayList<KsaTransaction>();
+        acceptedKsaTransactionList = new ArrayList<KsaTransaction>();
 
         ksaBatchTransactionResponse.setBatchSummary(batchSummary);
         ksaBatchTransactionResponse.setAccepted(accepted);
@@ -214,8 +222,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                         } else if (!batchIsQualified && !singleBatchFailure) {
                             failureNoted = processTransactions();
                         } else {
-                            for (KsaTransaction trans : ksaTransactionList) {
-                                accepted.getKsaTransactionAndTransactionDetails().add(trans);
+                            for (KsaTransaction acceptedTrans : acceptedKsaTransactionList) {
+                                accepted.getKsaTransactionAndTransactionDetails().add(acceptedTrans);
                             }
                         }
 
@@ -290,7 +298,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private boolean processTransactions() {
         boolean failureNoted = false;
 
-        for (KsaTransaction trans : ksaTransactionList) {
+        for (KsaTransaction trans : acceptedKsaTransactionList) {
             // Perform TransactionService insert to persist object
             // use the return value to further distinguish success or failure
             // the return value would be the transaction id
@@ -452,8 +460,15 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * @param accountId
      */
     private boolean doesImportAccountExist(String accountId) {
-        com.sigmasys.kuali.ksa.model.Account account = accountService.getOrCreateAccount(accountId);
-        return account != null;
+       com.sigmasys.kuali.ksa.model.Account account = null;
+       if (accountId != null) {
+          try {
+             account = accountService.getOrCreateAccount(accountId);
+          } catch (IllegalStateException iseExp) {
+             logger.error(iseExp.getLocalizedMessage());
+          }
+       }
+       return account != null ? true : false;
     }
 
     /**
@@ -509,7 +524,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     }
 
     /**
-     * check i fthe given transationType ID is defined
+     * check if the given TransationType ID is defined
      *
      * @param transactionType
      * @param effectiveDate
@@ -617,8 +632,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         } else {
             // place the transaction in the accepted list
             qualified = true;
-            ksaTransactionList.add(ksaTransaction);
-            //accepted.getKsaTransactionAndTransactionDetails().add(ksaTransaction);
+            acceptedKsaTransactionList.add(ksaTransaction);
         }
 
         return qualified;
