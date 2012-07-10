@@ -205,7 +205,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                             }
                         }
 
-                        batchIsQualified = failed.getKsaTransactionAndReason().size() == 0 ? true : false;
+                        batchIsQualified = failed.getKsaTransactionAndReason().isEmpty();
 
                         // process the accepted list
                         // no failed rejects and singleBatchFailure is false
