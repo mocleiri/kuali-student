@@ -12,9 +12,9 @@ import javax.persistence.*;
 @Table(name = "KSSA_REFUND_TYPE")
 public class RefundType extends AuditableEntity {
 
-    private CreditType creditType;
+    private String creditTypeId;
 
-    private DebitType debitType;
+    private String debitTypeId;
 
 
     @Id
@@ -30,29 +30,21 @@ public class RefundType extends AuditableEntity {
         return id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "CREDIT_TYPE_ID_FK", referencedColumnName = "ID"),
-            @JoinColumn(name = "CREDIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
-    })
-    public CreditType getCreditType() {
-        return creditType;
+    @Column(name = "CREDIT_TYPE_ID", length = 20)
+    public String getCreditTypeId() {
+        return creditTypeId;
     }
 
-    public void setCreditType(CreditType creditType) {
-        this.creditType = creditType;
+    public void setCreditTypeId(String creditTypeId) {
+        this.creditTypeId = creditTypeId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "DEBIT_TYPE_ID_FK", referencedColumnName = "ID"),
-            @JoinColumn(name = "DEBIT_TYPE_SUB_CODE_FK", referencedColumnName = "SUB_CODE")
-    })
-    public DebitType getDebitType() {
-        return debitType;
+    @Column(name = "DEBIT_TYPE_ID", length = 20)
+    public String getDebitTypeId() {
+        return debitTypeId;
     }
 
-    public void setDebitType(DebitType debitType) {
-        this.debitType = debitType;
+    public void setDebitTypeId(String debitTypeId) {
+        this.debitTypeId = debitTypeId;
     }
 }
