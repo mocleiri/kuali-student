@@ -150,9 +150,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
         String batchStatus = "incomplete";
         String uuidBatchResponseIdentifier = null;
-        String uuidBatchIdentifier = null;
+        String uuidBatchIdentifier;
         int batchSize = 0;
-        boolean firstTime = true;
 
         objectFactory = new ObjectFactory();
         accepted = objectFactory.createKsaBatchTransactionResponseAccepted();
@@ -307,7 +306,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             KsaTransaction ksaTransaction = persistTransaction(trans);
 
             if (ksaTransaction != null) {
-                // add the KsaTransaction object to the accepted's KsaTransactionAndTransactionDetails
+                // add the KsaTransaction object to the accepted KsaTransactionAndTransactionDetails
                 accepted.getKsaTransactionAndTransactionDetails().add(ksaTransaction);
 
                 numberOfAccepted++;
