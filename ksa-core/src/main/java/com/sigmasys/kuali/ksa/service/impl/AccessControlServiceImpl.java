@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccessControlService;
-import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.criteria.*;
@@ -16,7 +15,6 @@ import org.kuali.rice.kim.api.role.RoleService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.kim.impl.KIMPropertyConstants;
 import org.kuali.rice.kim.impl.role.RolePermissionBo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,15 +35,14 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
 
     private static final Log logger = LogFactory.getLog(AccessControlServiceImpl.class);
 
+    private static final String CRITERIA_LOOKUP_SERVICE_NAME = "criteriaLookupService";
 
-    @Autowired
-    private UserSessionManager userSessionManager;
-
-    private IdentityService identityService;
-    private RoleService roleService;
 
     private final Set<String> transactionTypeIds = new HashSet<String>();
     private final Map<String, String> transactionTypeMasks = new HashMap<String, String>();
+
+    private IdentityService identityService;
+    private RoleService roleService;
 
 
     @PostConstruct
@@ -59,7 +56,10 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
         transactionTypeMasks.clear();
         List<TransactionMaskRole> maskRoles = getEntities(TransactionMaskRole.class);
         for (TransactionMaskRole maskRole : maskRoles) {
-            transactionTypeMasks.put(maskRole.getRoleName(), maskRole.getTypeMask());
+            String roleName = maskRole.getRoleName();
+            String typeMask = maskRole.getTypeMask();
+            logger.debug("Loading [roleName = '" + roleName + "', typeMask = '" + typeMask + "']");
+            transactionTypeMasks.put(roleName, typeMask);
         }
     }
 
@@ -67,7 +67,9 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
         transactionTypeIds.clear();
         List<TransactionType> transactionTypes = getEntities(TransactionType.class);
         for (TransactionType transactionType : transactionTypes) {
-            transactionTypeIds.add(transactionType.getId().getId());
+            String transactionTypeId = transactionType.getId().getId();
+            logger.debug("Loading [Transaction Type ID = '" + transactionTypeId + "']");
+            transactionTypeIds.add(transactionTypeId);
         }
     }
 
@@ -112,7 +114,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
             }
             Predicate predicate = PredicateFactory.in(KIMPropertyConstants.RoleMember.ROLE_ID, roleIds.toArray());
             QueryByCriteria criteria = QueryByCriteria.Builder.fromPredicates(predicate);
-            CriteriaLookupService lookupService = GlobalResourceLoader.getService("criteriaLookupService");
+            CriteriaLookupService lookupService = GlobalResourceLoader.getService(CRITERIA_LOOKUP_SERVICE_NAME);
             GenericQueryResults<RolePermissionBo> results = lookupService.lookup(RolePermissionBo.class, criteria);
             List<RolePermissionBo> permissions = results.getResults();
             if (permissions != null && !permissions.isEmpty()) {

@@ -60,5 +60,33 @@ public class AccessControlServiceTest extends AbstractServiceTest {
         logger.info("Permission names: " + permissions);
     }
 
+    @Test
+    public void hasPermissions() throws Exception {
+
+        final String[] permissions = {"Use Configuration Viewer Screen",
+                "Inquire Into Pessimistic",
+                "Use Java Security Management Screen",
+                "Grant Permission KUALI Namespace",
+                "Modify Batch Job",
+                "Look Up Rule Attribute",
+                "Maintain System Parameter"};
+
+        boolean result = accessControlService.hasPermissions("admin", permissions);
+
+        Assert.isTrue(result);
+
+        result = accessControlService.hasPermission("admin", permissions[0]);
+
+        Assert.isTrue(result);
+
+    }
+
+    @Test
+    public void refresh() throws Exception {
+
+        accessControlService.refresh();
+
+    }
+
 
 }

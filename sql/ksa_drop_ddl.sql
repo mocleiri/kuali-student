@@ -37,4 +37,5 @@ drop table KSA.KSSA_TRANSACTION_MASK_ROLE cascade constraints;
 drop table KSA.KSSA_TRANSACTION_TYPE cascade constraints;
 drop table KSA.KSSA_TRANSACTION_TYPE_TAG cascade constraints;
 drop table KSA.KSSA_UI_STRING cascade constraints;
+drop table KSA.KSSA_XML cascade constraints;
 drop table KSA.KSSA_SEQUENCE_TABLE cascade constraints;

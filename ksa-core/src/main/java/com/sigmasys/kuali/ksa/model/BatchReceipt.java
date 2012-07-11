@@ -77,6 +77,16 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
      */
     private BigDecimal volumeOfRejectedTransactions;
 
+    /**
+     * Reference to incoming XML document
+     */
+    private XmlDocument incomingXml;
+
+    /**
+     * Reference to outgoing XML document
+     */
+    private XmlDocument outgoingXml;
+
 
     private BatchReceiptStatus status;
 
@@ -85,12 +95,12 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
 
     @PrePersist
     void populateDBFields() {
-      statusCode = (status != null) ? status.getId() : null;
+        statusCode = (status != null) ? status.getId() : null;
     }
 
     @PostLoad
     void populateTransientFields() {
-      status = (statusCode != null) ? EnumUtils.findById(BatchReceiptStatus.class, statusCode) : null;
+        status = (statusCode != null) ? EnumUtils.findById(BatchReceiptStatus.class, statusCode) : null;
     }
 
 
@@ -139,7 +149,7 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "ACNT_ID_FK")
+    @JoinColumn(name = "ACNT_ID_FK")
     public Account getAccount() {
         return account;
     }
@@ -211,6 +221,26 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
         this.volumeOfRejectedTransactions = volumeOfRejectedTransactions;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INCOMING_XML_ID_FK")
+    public XmlDocument getIncomingXml() {
+        return incomingXml;
+    }
+
+    public void setIncomingXml(XmlDocument incomingXml) {
+        this.incomingXml = incomingXml;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OUTGOING_XML_ID_FK")
+    public XmlDocument getOutgoingXml() {
+        return outgoingXml;
+    }
+
+    public void setOutgoingXml(XmlDocument outgoingXml) {
+        this.outgoingXml = outgoingXml;
+    }
+
     @Transient
     public BatchReceiptStatus getStatus() {
         return status;
@@ -228,6 +258,7 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
     protected String getStatusCode() {
         return statusCode;
     }
+
 }
 	
 
