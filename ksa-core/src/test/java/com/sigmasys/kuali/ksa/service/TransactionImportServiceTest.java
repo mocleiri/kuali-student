@@ -31,18 +31,11 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
         accountService.getOrCreateAccount(userId);
     }
 
-
-    @Test
-    public void batchImportTest() {
-        singleImport();
-        batchImport();
-        batchImportFail();
-    }
-
     /**
      * This is a single KsaTransaction import to be wrapped in a batch
      */
-    private void singleImport() {
+    @Test
+    public void singleImport() {
 
         String begValue = "<batch-status>";
         String endValue = "</batch-status>";
@@ -70,7 +63,8 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
      * a "complete" batch status. Likewise changing the account to a unknown
      * value would negate this test. Other values can be adjusted to suit needs.
      */
-    private void batchImport() {
+    @Test
+    public void batchImport() {
 
         String begValue = "<batch-status>";
         String endValue = "</batch-status>";
@@ -98,6 +92,7 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
      * and "incomplete" batch status. Likewise changing the account to a known
      * value would negate this test. Other values can be adjusted to suit needs
      */
+    @Test
     public void batchImportFail() {
         String begValue = "<batch-status>";
         String endValue = "</batch-status>";

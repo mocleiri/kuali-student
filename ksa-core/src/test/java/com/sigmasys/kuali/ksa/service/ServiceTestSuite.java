@@ -26,7 +26,7 @@ import org.junit.runners.Suite;
         XliffParserTest.class,
         LocalizationServiceTest.class,
         LocalizationWebServiceTest.class,
-        TransactionImportServiceTest.class,
+        //TransactionImportServiceTest.class,
         AccessControlServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
