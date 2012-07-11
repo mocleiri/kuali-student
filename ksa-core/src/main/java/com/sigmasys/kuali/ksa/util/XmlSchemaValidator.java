@@ -6,7 +6,6 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
-import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
@@ -68,11 +67,11 @@ public class XmlSchemaValidator {
         }
     }
 
-    public boolean validateXml(String xml) throws SAXException, IOException {
+    public boolean validateXml(String xml) {
         return validateXml(new StringReader(xml));
     }
 
-    public boolean validateXml(Reader reader) throws SAXException, IOException {
+    public boolean validateXml(Reader reader) {
 
         // Get a validator from the schema.
         Validator validator = schema.newValidator();
