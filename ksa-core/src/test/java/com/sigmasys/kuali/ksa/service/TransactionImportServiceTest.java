@@ -34,9 +34,9 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
 
     @Test
     public void batchImportTest() {
-        //singleImport();
-        //batchImport();
-        //batchImportFail();
+        singleImport();
+        batchImport();
+        batchImportFail();
     }
 
     /**
@@ -62,7 +62,6 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
 
         Assert.hasText(batchStatus);
         Assert.hasText(batchStatus, "complete");
-
     }
 
     /**
@@ -103,8 +102,6 @@ public class TransactionImportServiceTest extends AbstractServiceTest {
         String begValue = "<batch-status>";
         String endValue = "</batch-status>";
         String content = CommonUtils.getResourceAsString("xmlImport/transactions_fail.xml");
-
-        Assert.notNull(content);
 
         Assert.notNull(content);
         String response = transactionImportService.processTransactions(content);

@@ -47,7 +47,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private final static XmlSchemaValidator schemaValidator =
             new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
 
-    private XMLGregorianCalendar xmlGCLedgerDate;
 
     @Autowired
     private AccountService accountService;
@@ -63,33 +62,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     @Autowired
     private ConfigService configService;
-
-    private final ObjectFactory objectFactory = new ObjectFactory();
-
-    private Boolean singleBatchFailure = true;
-
-    private Boolean isBatch = true;
-
-    private BigDecimal totalValue = BigDecimal.ZERO;
-    private BigDecimal acceptedValue = BigDecimal.ZERO;
-    private BigDecimal failedValue = BigDecimal.ZERO;
-    private BigDecimal totalValueCredit = BigDecimal.ZERO;
-    private BigDecimal totalValueDebits = BigDecimal.ZERO;
-
-    private int numberOfAccepted = 0;
-    private int numberOfFailed = 0;
-
-    // TODO: Dave, you cannot store the request/response objects in the global variables
-    // TODO: this instance is stateless and can be shared between multiple user sessions
-    private KsaBatchTransaction ksaBatchTransaction;
-
-    private KsaBatchTransactionResponse.Accepted accepted;
-    private KsaBatchTransactionResponse.Failed failed;
-    private KsaBatchTransactionResponse.BatchSummary batchSummary;
-    private KsaBatchTransactionResponse ksaBatchTransactionResponse;
-
-    private List<KsaTransaction> acceptedKsaTransactionList;
-    private com.sigmasys.kuali.ksa.model.Account firstAccount;
 
     /**
      * Persist the given batch receipt in the database
@@ -138,14 +110,15 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 throw new RuntimeException(errMsg);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            logger.error(e.getLocalizedMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     /**
-     * Convert an XML input transaction representation to a Transaction with persistence
-     *
+     * Convert an XML input transaction representation to a Transaction and persist
+     * the transaction. Separate filed reject KsaTransactions from valid acceptable
+     * KsaTransactions for further processing
      * @param xml String
      * @return XML content as String
      */
@@ -156,35 +129,38 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         String uuidBatchIdentifier;
         int batchSize = 0;
 
-        totalValue = BigDecimal.ZERO;
-        acceptedValue = BigDecimal.ZERO;
-        failedValue = BigDecimal.ZERO;
-        totalValueCredit = BigDecimal.ZERO;
-        totalValueDebits = BigDecimal.ZERO;
-        numberOfAccepted = 0;
-        numberOfFailed = 0;
+        BigDecimal totalValue = BigDecimal.ZERO;
+        BigDecimal acceptedValue = BigDecimal.ZERO;
+        BigDecimal failedValue = BigDecimal.ZERO;
+        BigDecimal totalValueCredit = BigDecimal.ZERO;
+        BigDecimal totalValueDebits = BigDecimal.ZERO;
+        int numberOfAccepted = 0;
+        int numberOfFailed = 0;
+        XMLGregorianCalendar xmlGCLedgerDate = null;
+        com.sigmasys.kuali.ksa.model.Account firstAccount = null;
 
-        accepted = objectFactory.createKsaBatchTransactionResponseAccepted();
-        failed = objectFactory.createKsaBatchTransactionResponseFailed();
-        batchSummary = objectFactory.createKsaBatchTransactionResponseBatchSummary();
-        ksaBatchTransactionResponse = objectFactory.createKsaBatchTransactionResponse();
-        acceptedKsaTransactionList = new ArrayList<KsaTransaction>();
+        ObjectFactory objectFactory = new ObjectFactory();
+        KsaBatchTransactionResponse.Accepted accepted = objectFactory.createKsaBatchTransactionResponseAccepted();
+        KsaBatchTransactionResponse.Failed failed = objectFactory.createKsaBatchTransactionResponseFailed();
+        KsaBatchTransactionResponse.BatchSummary batchSummary = objectFactory.createKsaBatchTransactionResponseBatchSummary();
+        KsaBatchTransactionResponse ksaBatchTransactionResponse = objectFactory.createKsaBatchTransactionResponse();
+        List<KsaTransaction> acceptedKsaTransactionList = new ArrayList<KsaTransaction>();
 
         ksaBatchTransactionResponse.setBatchSummary(batchSummary);
         ksaBatchTransactionResponse.setAccepted(accepted);
         ksaBatchTransactionResponse.setFailed(failed);
 
-        singleBatchFailure = Boolean.valueOf(configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE));
+        Boolean singleBatchFailure = Boolean.valueOf(configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE));
 
         if (xml != null) {
 
             // determine if batch or single transaction
             StringReader batchReader = new StringReader(xml);
-            isBatch = extractBatchXml(batchReader);
+            KsaBatchTransaction ksaBatchTransaction = extractBatchXml(batchReader);
 
-            if (!isBatch) {
+            if (ksaBatchTransaction == null) {
                 StringReader singleReader = new StringReader(xml);
-                isBatch = extractSingleXml(singleReader);
+                ksaBatchTransaction = extractSingleXml(singleReader);
             }
 
             try {
@@ -207,11 +183,47 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                         for (KsaTransaction trans : ksaTransactionList) {
 
                             // pre determine, qualify the transaction create accepted and rejected lists of transactions
-                            qualifyTransaction(trans);
+                           Date effectiveDate = CalendarUtils.asDate(trans.getEffectiveDate());
+                           String errMsg = "";
+                           if (!verifyRequiredValues(trans)) {
+                              errMsg = "Required values are missing from transaction ";
+                           } else if (!doesImportAccountExist(trans.getAccountIdentifier())) {
+                              errMsg = "Account does not exist";
+                           } else if (!isTransactionAllowed(trans.getAccountIdentifier(), trans.getTransactionType(), effectiveDate)) {
+                              errMsg = "Transaction not allowed";
+                           } else if (!isWithinCreditLimit(trans.getAccountIdentifier())) {
+                              errMsg = "Account has insufficient credit";
+                           }
+                           if (!isTransactionCodeValid(trans.getTransactionType(), effectiveDate)) {
+                              errMsg = "No such transaction code";
+                           }
+                           if (!isRefundRuleValid(trans.getRefundRule())) {
+                              // applies to Payments
+                              errMsg = "Invalid refund rule";
+                           }
 
-                            // the KsaTransaction might not have an account which will be created later
+                           if (errMsg.length() > 0) {
+                              // place the transaction in the failed list
+                              failed.getKsaTransactionAndReason().add(trans);
+                              failed.getKsaTransactionAndReason().add(errMsg);
+                              numberOfFailed++;
+                              failedValue = failedValue.add(trans.getAmount());
+                              totalValue = totalValue.add(trans.getAmount());
+                           } else {
+                              // place the transaction in the accepted list
+                              acceptedKsaTransactionList.add(trans);
+                           }
+
+                           // the KsaTransaction might not have an account which will be created later
                             if (firstAccount == null) {
-                                uuidBatchResponseIdentifier = createBatchReceipt(trans.getAccountIdentifier());
+                               com.sigmasys.kuali.ksa.model.Account fullAccount =
+                                     accountService.getFullAccount(trans.getAccountIdentifier());
+
+                               if (fullAccount != null) {
+                                  firstAccount = fullAccount;
+                                  uuidBatchResponseIdentifier = UUID.randomUUID().toString();
+                                  ksaBatchTransactionResponse.setResponseIdentifier(uuidBatchResponseIdentifier);
+                               }
                             }
                         }
 
@@ -219,16 +231,71 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
                         // process the accepted list
                         // no failed rejects and singleBatchFailure is false
-                        if (batchIsQualified && !singleBatchFailure) {
-                            failureNoted = processTransactions();
-                        } else if (!batchIsQualified && !singleBatchFailure) {
-                            failureNoted = processTransactions();
+                        if ((batchIsQualified && !singleBatchFailure) ||
+                           (!batchIsQualified && !singleBatchFailure)) {
+                           for (KsaTransaction tmpTransaction : acceptedKsaTransactionList) {
+                              // Perform TransactionService insert to persist object
+                              // use the return value to further distinguish success or failure
+                              // the return value would be a Transaction
+                              // Use the amount to update the totalValue
+
+                              totalValue = totalValue.add(tmpTransaction.getAmount());
+
+                              // returns a KsaTransaction oon success, otherwise null on failure
+                              // add the accepted or failed transactions to the appropriate response list
+                              // add one for each accepted or failed transactions to the appropriate number scalar
+
+                              Transaction transaction = createTransaction(tmpTransaction);
+
+                              if (transaction != null) {
+                                 // The return value from TransactionService persistTransaction returns
+                                 // the Transaction which is morphed into a KsaTransaction
+
+                                 KsaTransaction persistedKsaTransaction = persistTransaction(transaction, tmpTransaction);
+                                 // refund applies to credit type only
+                                 if (transaction instanceof Payment) {
+                                    totalValueCredit = totalValueCredit.add(transaction.getAmount());
+                                    Payment payment = (Payment) transaction;
+                                    persistedKsaTransaction.setRefundRule(payment.getRefundRule());
+                                    persistedKsaTransaction.setIsRefundable(payment.isRefundable());
+                                 } else {
+                                    totalValueDebits = totalValueDebits.add(transaction.getAmount());
+                                 }
+
+                                 xmlGCLedgerDate = CalendarUtils.asXmlGregorianCalendar(transaction.getLedgerDate());
+
+                                 // add the KsaTransaction object to the accepted KsaTransactionAndTransactionDetails
+                                 accepted.getKsaTransactionAndTransactionDetails().add(persistedKsaTransaction);
+
+                                 numberOfAccepted++;
+                                 acceptedValue = acceptedValue.add(persistedKsaTransaction.getAmount());
+
+                                 // add the ID and LedgerDate to the TransactionDetails and then to the KsaTransactionAndTransactionDetails
+                                 KsaBatchTransactionResponse.Accepted.TransactionDetails transactionDetails =
+                                       new KsaBatchTransactionResponse.Accepted.TransactionDetails();
+
+                                 transactionDetails.setTransactionId(transaction.getId().toString());
+                                 transactionDetails.setAcceptedDate(xmlGCLedgerDate);
+                                 accepted.getKsaTransactionAndTransactionDetails().add(transactionDetails);
+
+                              } else {
+                                 failureNoted = true;
+                                 // add the KsaTransactionAndReason object to the failed's KsaTransactionAndReason
+                                 failed.getKsaTransactionAndReason().add(tmpTransaction);
+
+                                 numberOfFailed++;
+                                 failedValue = failedValue.add(tmpTransaction.getAmount());
+
+                                 // add the reason to the KsaTransactionAndReason
+                                 failed.getKsaTransactionAndReason().add("Unable to create or persist transaction id " +
+                                       tmpTransaction.getAccountIdentifier());
+                              }
+                           }
                         } else {
                             for (KsaTransaction acceptedTrans : acceptedKsaTransactionList) {
                                 accepted.getKsaTransactionAndTransactionDetails().add(acceptedTrans);
                             }
                         }
-
                     }
                 }
 
@@ -266,10 +333,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             jxbExp.printStackTrace();
             logger.error(jxbExp.getLocalizedMessage());
         } finally {
-            // TODO see commented set methods
-            // fill in the BatchReceipt and persist
-/*
-         batchReceipt = new BatchReceipt();
+
+         // fill in the BatchReceipt and persist
+
+         BatchReceipt batchReceipt = new BatchReceipt();
          batchReceipt.setAccount(firstAccount);
          batchReceipt.setBatchDate(new Date());
          batchReceipt.setCreditOfAcceptedTransactions(totalValueCredit);
@@ -279,74 +346,31 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
          batchReceipt.setNumberOfRejectedTransactions(numberOfFailed);
          batchReceipt.setNumberOfTransactions(batchSize);
          batchReceipt.setReceiptDate(new Date());
-         //batchReceipt.setStatus(new BatchReceiptStatus("E"));
+         if (batchStatus.compareTo("complete") == 0) {
+            batchReceipt.setStatus(BatchReceiptStatus.ACCEPTED);
+         } else {
+            batchReceipt.setStatus(BatchReceiptStatus.FAILED);
+         }
          batchReceipt.setTotalVolume(totalValue);
          batchReceipt.setVolumeOfRejectedTransactions(failedValue);
-         //batchReceipt.setIncomingXMLLocation(xml);
-         //batchReceipt.setoutgoingXMLLocation(writer);
-         persistBatchReceipt(batchReceipt);
-*/
-        }
+         XmlDocument xmlInDocument = new XmlDocument();
+         xmlInDocument.setXml(xml);
+         batchReceipt.setIncomingXml(xmlInDocument);
+         XmlDocument xmlOutDocument = new XmlDocument();
+         xmlOutDocument.setXml(writer.toString());
+         batchReceipt.setOutgoingXml(xmlOutDocument);
+
+         try {
+            persistBatchReceipt(batchReceipt);
+         } catch (IllegalStateException ise) {
+            logger.error(ise.getLocalizedMessage(), ise);
+         }
+
+      }
 
         // return the XML marshaled result or exception
-        return writer.toString();
-    }
-
-    /**
-     * Use the accepted list to produce transactions
-     *
-     * @return
-     */
-    private boolean processTransactions() {
-        boolean failureNoted = false;
-
-        for (KsaTransaction trans : acceptedKsaTransactionList) {
-            // Perform TransactionService insert to persist object
-            // use the return value to further distinguish success or failure
-            // the return value would be the transaction id
-            // Use the amount to update the totalValue
-            // Do we really know the actual transaction without from the TransactionService
-
-            totalValue = totalValue.add(trans.getAmount());
-
-            // returns a KsaTransaction oon success, otherwise null on failure
-            // add the accepted or failed transactions to the appropriate response list
-            // add one for each accepted or failed transactions to the appropriate number scalar
-
-            KsaTransaction ksaTransaction = persistTransaction(trans);
-
-            if (ksaTransaction != null) {
-                // add the KsaTransaction object to the accepted KsaTransactionAndTransactionDetails
-                accepted.getKsaTransactionAndTransactionDetails().add(ksaTransaction);
-
-                numberOfAccepted++;
-                acceptedValue = acceptedValue.add(trans.getAmount());
-
-                // add the ID and LedgerDate to the TransactionDetails and then to the KsaTransactionAndTransactionDetails
-                KsaBatchTransactionResponse.Accepted.TransactionDetails transactionDetails =
-                        new KsaBatchTransactionResponse.Accepted.TransactionDetails();
-
-                // The return value from TransactionService persistTransaction returns
-                // the Transaction which is morphed into a KsaTransaction
-                transactionDetails.setTransactionId(ksaTransaction.getAccountIdentifier());
-                transactionDetails.setAcceptedDate(xmlGCLedgerDate);
-                accepted.getKsaTransactionAndTransactionDetails().add(transactionDetails);
-
-            } else {
-                failureNoted = true;
-                // add the KsaTransactionAndReason object to the failed's KsaTransactionAndReason
-                failed.getKsaTransactionAndReason().add(trans);
-
-                numberOfFailed++;
-                failedValue = failedValue.add(trans.getAmount());
-
-                // add the reason to the KsaTransactionAndReason
-                failed.getKsaTransactionAndReason().add("Unable to create or persist transaction id " + trans.getAccountIdentifier());
-            }
-        }
-
-        return failureNoted;
-    }
+      return writer.toString();
+   }
 
     /**
      * Attempt to unmarshal a batch input XML file
@@ -354,25 +378,20 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      *
      * @param reader
      */
-    private boolean extractBatchXml(StringReader reader) {
-
-        boolean exitState = false;
-
+    private KsaBatchTransaction extractBatchXml(StringReader reader) {
+       KsaBatchTransaction ksaBatchTransaction = null;
         try {
 
             JAXBContext jaxbContext = JAXBContext.newInstance(KsaBatchTransaction.class);
             Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
 
             if (unMarshaller != null) {
-
-                // TODO: Dave, this class instance is stateless so
-                // TODO: you can't store the results in global variables
                 // multiple unmarshaled transaction objects
-                KsaTransaction transaction = (KsaTransaction) unMarshaller.unmarshal(reader);
-
-                exitState = true;
+               ksaBatchTransaction = (KsaBatchTransaction) unMarshaller.unmarshal(reader);
             }
-
+        } catch (UnmarshalException ume) {
+           ume.printStackTrace();
+           logger.error(ume.getLocalizedMessage());
         } catch (JAXBException jxbExp) {
             jxbExp.printStackTrace();
             // log the exception
@@ -381,7 +400,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             logger.error(e.getLocalizedMessage(), e);
         }
 
-        return exitState;
+        return ksaBatchTransaction;
     }
 
     /**
@@ -391,9 +410,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * @param reader
      * @return
      */
-    private boolean extractSingleXml(StringReader reader) {
+    private KsaBatchTransaction extractSingleXml(StringReader reader) {
 
-        boolean exitState = false;
+       KsaBatchTransaction ksaBatchTransaction = null;
 
         try {
 
@@ -407,10 +426,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
                 ksaBatchTransaction = new KsaBatchTransaction();
                 ksaBatchTransaction.getKsaTransaction().add(ksaTransaction);
-
-                exitState = true;
             }
-
+        } catch (UnmarshalException ume) {
+           ume.printStackTrace();
+           logger.error(ume.getLocalizedMessage());
         } catch (JAXBException jxbExp) {
             jxbExp.printStackTrace();
             // log the exception
@@ -419,7 +438,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             logger.error(e.getLocalizedMessage(), e);
         }
 
-        return exitState;
+        return ksaBatchTransaction;
     }
 
     /**
@@ -434,26 +453,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         // TODO check batch identifier has not been previously used with BatchReceipt
         //exitState = BatchReceipt.checkUsage(uuidBatchIdentifier);
         return exitState;
-    }
-
-    /**
-     * Create a batch receipt UUID for this run
-     *
-     * @param accountId
-     * @return
-     */
-    private String createBatchReceipt(String accountId) {
-        String uuidValue = null;
-        // TODO Create a unique BatchReceipt UUID
-
-        com.sigmasys.kuali.ksa.model.Account fullAccount = accountService.getFullAccount(accountId);
-
-        if (fullAccount != null) {
-            firstAccount = fullAccount;
-            uuidValue = UUID.randomUUID().toString();
-            ksaBatchTransactionResponse.setResponseIdentifier(uuidValue);
-        }
-        return uuidValue;
     }
 
     /**
@@ -520,7 +519,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     }
 
     /**
-     * check if the given TransationType ID is defined
+     * Check if the given TransationType ID is defined
      *
      * @param transactionType
      * @param effectiveDate
@@ -551,8 +550,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private boolean isRefundRuleValid(String refundRule) {
         boolean exitState = false;
 
-        // TODO page 50 of Process Diagram and TransactionType model
-        // TODO find the given Refund Rule and work over similar to below
         // example A(100)(pheald) or S(45)
         // transactionService.isRefundRule(refundRule);
 
@@ -589,63 +586,12 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     }
 
     /**
-     * Predetermine the other data qualifications for this transaction
-     * before attempting to produce the transaction. Any failure in the
-     * sequence sends the transaction to a fail state list with a known message
-     *
+     * Create a basic transaction
+     * return a Transaction if persisted, otherwise a null value
      * @param ksaTransaction
      * @return
      */
-    private boolean qualifyTransaction(KsaTransaction ksaTransaction) {
-        String errMsg = "";
-        boolean qualified = false;
-        Date effectiveDate = CalendarUtils.asDate(ksaTransaction.getEffectiveDate());
-
-        if (!verifyRequiredValues(ksaTransaction)) {
-            errMsg = "Required values are missing from transaction ";
-        } else if (!doesImportAccountExist(ksaTransaction.getAccountIdentifier())) {
-            errMsg = "Account does not exist";
-        } else if (!isTransactionAllowed(ksaTransaction.getAccountIdentifier(), ksaTransaction.getTransactionType(), effectiveDate)) {
-            errMsg = "Transaction not allowed";
-        } else if (!isWithinCreditLimit(ksaTransaction.getAccountIdentifier())) {
-            errMsg = "Account has insufficient credit";
-        }
-        if (!isTransactionCodeValid(ksaTransaction.getTransactionType(), effectiveDate)) {
-            errMsg = "No such transaction code";
-        }
-        if (!isRefundRuleValid(ksaTransaction.getRefundRule())) {
-            // applies to Payments
-            errMsg = "Invalid refund rule";
-        }
-
-        if (errMsg.length() > 0) {
-            // place the transaction in the failed list
-            failed.getKsaTransactionAndReason().add(ksaTransaction);
-            failed.getKsaTransactionAndReason().add(errMsg);
-            numberOfFailed++;
-            failedValue = failedValue.add(ksaTransaction.getAmount());
-            totalValue = totalValue.add(ksaTransaction.getAmount());
-        } else {
-            // place the transaction in the accepted list
-            qualified = true;
-            acceptedKsaTransactionList.add(ksaTransaction);
-        }
-
-        return qualified;
-    }
-
-    /**
-     * Create a persisted database transaction, otherwise an error
-     * return a KsaTransaction if persisted, otherwise a null value
-     * Store other types like document and override
-     *
-     * @param ksaTransaction
-     * @return
-     */
-    private KsaTransaction persistTransaction(KsaTransaction ksaTransaction) {
-        xmlGCLedgerDate = null;
-
-        KsaTransaction retKsaTrans = null;
+    private Transaction createTransaction(KsaTransaction ksaTransaction) {
         Transaction transaction = null;
         try {
             Date effectiveDate = CalendarUtils.asDate(ksaTransaction.getEffectiveDate());
@@ -653,68 +599,68 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             transaction =
                     transactionService.createTransaction(ksaTransaction.getTransactionType(),
                             ksaTransaction.getAccountIdentifier(), effectiveDate, ksaTransaction.getAmount());
-
-            if (transaction != null) {
-                Date originationDate = CalendarUtils.asDate(ksaTransaction.getOriginationDate());
-                Currency currency = currencyService.getCurrency(ksaTransaction.getCurrency());
-                transaction.setNativeAmount(ksaTransaction.getNativeAmount());
-                transaction.setOriginationDate(originationDate);
-                transaction.setCurrency(currency);
-                transaction.setExternalId(ksaTransaction.getIncomingIdentifier());
-
-                if (transaction instanceof Payment) {
-                    TransactionType transactionType = em.find(TransactionType.class, ksaTransaction.getTransactionType());
-                    CreditType creditType = (CreditType) transactionType;
-                    Payment payment = (Payment) transaction;
-                    int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
-                    payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
-                    payment.setRefundable(ksaTransaction.isIsRefundable());
-                    payment.setRefundRule(ksaTransaction.getRefundRule());
-                }
-
-                // TODO What to do persist where and what document and override plus other types
-                // Save additional information concerning the transaction above and beyond the basic transction created
-                if (transactionService.persistTransaction(transaction) > 0) {
-
-                    // persist incoming ksaTransaction document
-
-                    // persist incoming ksaTransaction override
-
-                    retKsaTrans = new KsaTransaction();
-                    retKsaTrans.setAccountIdentifier(transaction.getId().toString());
-                    retKsaTrans.setIncomingIdentifier(transaction.getExternalId());
-                    retKsaTrans.setEffectiveDate(CalendarUtils.asXmlGregorianCalendar(transaction.getEffectiveDate()));
-                    retKsaTrans.setOriginationDate(CalendarUtils.asXmlGregorianCalendar(transaction.getOriginationDate()));
-                    retKsaTrans.setAmount(transaction.getAmount());
-                    retKsaTrans.setNativeAmount(transaction.getNativeAmount());
-                    retKsaTrans.setCurrency(transaction.getCurrency().getIso());
-                    retKsaTrans.setTransactionType(transaction.getTransactionType().getId().getId());
-                    // document
-                    // TODO set the return ksaTransaction document info
-                    retKsaTrans.setDocument(ksaTransaction.getDocument());
-                    // override
-                    // TODO set the return ksaTransaction override info
-
-                    // refund applies to credit type only
-                    if (transaction instanceof Payment) {
-                        totalValueCredit = totalValueCredit.add(transaction.getAmount());
-                        Payment payment = (Payment) transaction;
-                        retKsaTrans.setRefundRule(payment.getRefundRule());
-                        retKsaTrans.setIsRefundable(payment.isRefundable());
-                    } else {
-                        totalValueDebits = totalValueDebits.add(transaction.getAmount());
-                    }
-                }
-            }
-
         } catch (Exception exp) {
-            logger.error(exp.getLocalizedMessage());
-            logger.error("The transaction failed to create trans type " + ksaTransaction.getTransactionType() +
-                    " for account " + ksaTransaction.getAccountIdentifier());
-        } finally {
-            xmlGCLedgerDate = CalendarUtils.asXmlGregorianCalendar(transaction.getLedgerDate());
+           logger.error(exp.getLocalizedMessage());
+           logger.error("The transaction failed to create trans type " + ksaTransaction.getTransactionType() +
+                 " for account " + ksaTransaction.getAccountIdentifier());
         }
 
+        return  transaction;
+    }
+
+   /**
+    * persist the extra Transaction field information from the incoming KsaTransaction
+    * return a revised KsaTransaction
+    * @param transaction
+    * @param ksaTransaction
+    * @return
+    */
+   private KsaTransaction persistTransaction(Transaction transaction, KsaTransaction ksaTransaction) {
+      KsaTransaction retKsaTrans = null;
+
+      if (transaction != null) {
+         Date effectiveDate = CalendarUtils.asDate(ksaTransaction.getEffectiveDate());
+         Date originationDate = CalendarUtils.asDate(ksaTransaction.getOriginationDate());
+         Currency currency = currencyService.getCurrency(ksaTransaction.getCurrency());
+         transaction.setNativeAmount(ksaTransaction.getNativeAmount());
+         transaction.setOriginationDate(originationDate);
+         transaction.setCurrency(currency);
+         transaction.setExternalId(ksaTransaction.getIncomingIdentifier());
+
+         if (transaction instanceof Payment) {
+            TransactionType transactionType = em.find(TransactionType.class, ksaTransaction.getTransactionType());
+            CreditType creditType = (CreditType) transactionType;
+            Payment payment = (Payment) transaction;
+            int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
+            payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
+            payment.setRefundable(ksaTransaction.isIsRefundable());
+            payment.setRefundRule(ksaTransaction.getRefundRule());
+         }
+
+         // TODO What to do persist where and what document and override plus other types
+         // Save additional information concerning the transaction above and beyond the basic transction created
+         if (transactionService.persistTransaction(transaction) > 0) {
+
+            // persist incoming ksaTransaction document
+
+            // persist incoming ksaTransaction override
+
+            // setup the return KsaTransaction
+            retKsaTrans = new KsaTransaction();
+            retKsaTrans.setAccountIdentifier(ksaTransaction.getAccountIdentifier());
+            retKsaTrans.setIncomingIdentifier(transaction.getExternalId());
+            retKsaTrans.setEffectiveDate(CalendarUtils.asXmlGregorianCalendar(transaction.getEffectiveDate()));
+            retKsaTrans.setOriginationDate(CalendarUtils.asXmlGregorianCalendar(transaction.getOriginationDate()));
+            retKsaTrans.setAmount(transaction.getAmount());
+            retKsaTrans.setNativeAmount(transaction.getNativeAmount());
+            retKsaTrans.setCurrency(transaction.getCurrency().getIso());
+            retKsaTrans.setTransactionType(transaction.getTransactionType().getId().getId());
+            // document
+            retKsaTrans.setDocument(ksaTransaction.getDocument());
+            // override
+            retKsaTrans.setOverride(ksaTransaction.getOverride());
+         }
+      }
         return retKsaTrans;
     }
 }
