@@ -36,3 +36,4 @@ alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB5F7D721E7 foreign key (
 alter table KSA.KSSA_TRANSACTION_TYPE add constraint FK81104B8496077E1 foreign key (DEF_ROLLUP_ID_FK) references KSA.KSSA_ROLLUP;
 alter table KSA.KSSA_TRANSACTION_TYPE_TAG add constraint FKA1635C3F47AB5D71 foreign key (TAG_ID_FK) references KSA.KSSA_TAG;
 alter table KSA.KSSA_TRANSACTION_TYPE_TAG add constraint FKA1635C3FCE008744 foreign key (TRANSACTION_TYPE_ID_FK, TRANSACTION_TYPE_SUB_CODE_FK) references KSA.KSSA_TRANSACTION_TYPE;
+alter table KSA.KSSA_USER_PREF add constraint FK30763ECE98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;

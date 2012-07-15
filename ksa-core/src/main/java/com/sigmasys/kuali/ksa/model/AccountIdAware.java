@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @MappedSuperclass
 public abstract class AccountIdAware {
 
-    private String accountId;
+    protected String accountId;
 
     @Column(name = "ACNT_ID_FK", insertable = false, updatable = false, length = 45)
     public String getAccountId() {
