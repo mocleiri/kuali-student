@@ -17,12 +17,6 @@ import javax.persistence.*;
 @Table(name = "KSSA_USER_PREF")
 public class UserPreference extends AccountIdAware implements Identifiable {
 
-
-    /**
-     * The Account reference
-     */
-    private Account account;
-
     /**
      * The preference name
      */
@@ -33,14 +27,23 @@ public class UserPreference extends AccountIdAware implements Identifiable {
      */
     private String value;
 
+    public UserPreference() {
+    }
+
+    public UserPreference(String userId, String name, String value) {
+        setAccountId(userId);
+        setName(name);
+        setValue(value);
+    }
 
     @Transient
     public UserPreferenceId getId() {
-        return new UserPreferenceId(getAccountId(), getName());
+        return (getAccountId() != null && getName() != null) ?
+                new UserPreferenceId(getAccountId(), getName()) : null;
     }
 
     @Id
-    @Column(name = "ACNT_ID_FK", insertable = false, updatable = false, length = 45)
+    @Column(name = "ACNT_ID_FK", length = 45)
     public String getAccountId() {
         return accountId;
     }
@@ -64,13 +67,4 @@ public class UserPreference extends AccountIdAware implements Identifiable {
         this.value = value;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACNT_ID_FK")
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

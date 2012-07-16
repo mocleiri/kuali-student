@@ -179,7 +179,7 @@ public class CoreFilter implements Filter {
 
                         request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
 
-                        // If the KSA account does nto exist the following method is supposed to create it
+                        // If the KSA account does not exist the following method is supposed to create it
                         // from the corresponding KIM Person object
                         ContextUtils.getBean(AccountService.class).getOrCreateAccount(userId);
 
