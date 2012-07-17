@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.UserPreference;
+import com.sigmasys.kuali.ksa.model.UserPreferenceId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +51,35 @@ public class UserPreferenceServiceTest extends AbstractServiceTest {
 
 
     }
+
+    @Test
+    public void updateUserPreference() {
+
+        createUserPreference();
+
+        List<UserPreference> userPrefs = userPreferenceService.getUserPreferences("admin");
+
+        Assert.notNull(userPrefs);
+        Assert.notEmpty(userPrefs);
+        Assert.isTrue(userPrefs.size() > 1);
+
+        UserPreference userPref = userPrefs.get(0);
+        userPref.setValue("test.1.value.updated");
+
+        UserPreferenceId userPrefId = userPref.getId();
+
+        userPref = userPreferenceService.persistUserPreference(userPref);
+
+        Assert.notNull(userPref);
+        Assert.notNull(userPref.getId());
+
+        Assert.isTrue(userPref.getId().equals(userPrefId));
+
+        Assert.isTrue("test.1.value.updated".equals(userPref.getValue()));
+
+
+    }
+
 
     @Test
     public void getUserPreferences() {

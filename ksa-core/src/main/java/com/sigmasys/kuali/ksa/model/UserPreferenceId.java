@@ -51,15 +51,9 @@ public class UserPreferenceId implements Serializable {
 
         UserPreferenceId that = (UserPreferenceId) o;
 
-        if ((name != null) ? !name.equals(that.name) : that.name != null) {
-            return false;
-        }
+        return !((name != null) ? !name.equals(that.name) : that.name != null) &&
+                !((accountId != null) ? !accountId.equals(that.accountId) : that.accountId != null);
 
-        if ((accountId != null) ? !accountId.equals(that.accountId) : that.accountId != null) {
-            return false;
-        }
-
-        return true;
     }
 
     @Override

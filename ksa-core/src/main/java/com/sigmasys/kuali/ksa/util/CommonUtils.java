@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.*;
@@ -13,29 +14,24 @@ public final class CommonUtils {
 
     private static final Log logger = LogFactory.getLog(CommonUtils.class);
 
-    private static final Map<String, Properties> propertiesMap = new HashMap<String, Properties>();
 
     private CommonUtils() {
     }
 
-    public static synchronized Properties getProperties(String name, Class<?> clazz) {
-        Properties props = propertiesMap.get(name);
-        if (props == null) {
-            try {
-                props = new Properties();
-                InputStream in = clazz.getClassLoader().getResourceAsStream(name);
-                if (in == null) {
-                    logger.warn("Resource '" + name + "' is not found");
-                    return null;
-                }
-                props.load(in);
-                propertiesMap.put(name, props);
-            } catch (Exception e) {
-                logger.error("Exception occured while loading properties: ", e);
-                throw new RuntimeException("Exception occured while loading properties: ", e);
+    public static Properties getProperties(String name, Class<?> clazz) {
+        try {
+            Properties props = new Properties();
+            InputStream in = clazz.getClassLoader().getResourceAsStream(name);
+            if (in == null) {
+                logger.warn("Resource '" + name + "' is not found");
+                return null;
             }
+            props.load(in);
+            return props;
+        } catch (Exception e) {
+            logger.error("Exception occurred while loading properties: ", e);
+            throw new RuntimeException("Exception occurred while loading properties: ", e);
         }
-        return props;
     }
 
     public static Properties getProperties(String name) {
@@ -82,7 +78,6 @@ public final class CommonUtils {
         }
     }
 
-
     public static String getModuleBaseUrl(HttpServletRequest request) {
         // Initializing base service URL, i.e.
         // http://localhost:8080/sonar/org.kuali.ksa.Application/Application.html
@@ -95,6 +90,34 @@ public final class CommonUtils {
 
     public static String nvl(String value) {
         return (value != null) ? value : "";
+    }
+
+    /**
+     * Fetch the entire contents of a text file, and return it in a String.
+     * This style of implementation does not throw Exceptions to the caller.
+     *
+     * @param file is a file which already exists and can be read.
+     */
+    public static String getText(File file) {
+        try {
+            StringBuilder builder = new StringBuilder();
+            BufferedReader input = new BufferedReader(new FileReader(file));
+            try {
+                String lineSeparator = System.getProperty("line.separator");
+                if (lineSeparator == null) {
+                    lineSeparator = "\n";
+                }
+                for (String line; (line = input.readLine()) != null; ) {
+                    builder.append(line);
+                    builder.append(lineSeparator);
+                }
+                return builder.toString();
+            } finally {
+                input.close();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
 }
