@@ -35,18 +35,18 @@ public class CurrencyServiceImpl extends GenericPersistenceService implements Cu
     /**
      * Returns Currency by ISO symbol
      *
-     * @param iso ISO currency name
+     * @param code ISO currency code
      * @return Currency instance
      */
     @Override
-    public Currency getCurrency(String iso) {
-        Query query = em.createQuery("select c from Currency c where upper(c.iso) = upper(:iso)");
-        query.setParameter("iso", iso);
+    public Currency getCurrency(String code) {
+        Query query = em.createQuery("select c from Currency c where upper(c.code) = upper(:code)");
+        query.setParameter("code", code);
         List<Currency> currencies = query.getResultList();
         if (currencies != null && !currencies.isEmpty()) {
             return currencies.get(0);
         }
-        throw new IllegalArgumentException("Currency with ISO = '" + iso + "' does not exist");
+        throw new IllegalArgumentException("Currency with ISO = '" + code + "' does not exist");
     }
 
     /**
@@ -56,7 +56,7 @@ public class CurrencyServiceImpl extends GenericPersistenceService implements Cu
      */
     @Override
     public List<Currency> getCurrencies() {
-        return getEntities(Currency.class, new Pair<String, SortOrder>("iso", SortOrder.ASC));
+        return getEntities(Currency.class, new Pair<String, SortOrder>("code", SortOrder.ASC));
     }
 
     /**

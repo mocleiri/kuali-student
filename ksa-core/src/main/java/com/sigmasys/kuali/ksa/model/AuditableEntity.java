@@ -22,6 +22,11 @@ public abstract class AuditableEntity implements Identifiable {
     protected Long id;
 
     /**
+     * Entity code
+     */
+    protected String code;
+
+    /**
      * Entity name
      */
     private String name;
@@ -57,6 +62,15 @@ public abstract class AuditableEntity implements Identifiable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Column(name = "CODE", length = 100)
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Column(name = "NAME", length = 100)
@@ -117,6 +131,7 @@ public abstract class AuditableEntity implements Identifiable {
     public String toString() {
         return getClass().getSimpleName() +
                 "{id=" + id +
+                ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", creatorId='" + creatorId + '\'' +

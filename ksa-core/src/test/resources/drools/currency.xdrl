@@ -15,11 +15,11 @@
 
                 <and-constraint-connective>
 
-                    <field-constraint field-name="iso">
+                    <field-constraint field-name="code">
                         <variable-restriction evaluator="!=" identifier="null"/>
                     </field-constraint>
 
-                    <field-constraint field-name="iso">
+                    <field-constraint field-name="code">
                         <literal-restriction evaluator="==" value="USD"/>
                     </field-constraint>
 
@@ -44,11 +44,11 @@
 
                 <and-constraint-connective>
 
-                    <field-constraint field-name="iso">
+                    <field-constraint field-name="code">
                         <variable-restriction evaluator="!=" identifier="null"/>
                     </field-constraint>
 
-                    <field-constraint field-name="iso">
+                    <field-constraint field-name="code">
                         <literal-restriction evaluator="==" value="USD"/>
                     </field-constraint>
 

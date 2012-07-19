@@ -28,7 +28,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Currency currency = currencyService.getCurrency("USD");
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equals("USD"));
+        Assert.isTrue(currency.getCode().equals("USD"));
 
         currency = droolsService.fireRules("/drools/currency.xdrl", currency);
 

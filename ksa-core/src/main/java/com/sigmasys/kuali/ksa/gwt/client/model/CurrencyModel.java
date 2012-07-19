@@ -9,14 +9,14 @@ package com.sigmasys.kuali.ksa.gwt.client.model;
  */
 public class CurrencyModel extends AuditableEntityModel {
 
-    private static final String ISO = "iso";
+    private static final String CODE = "code";
 
 
-    public String getIso() {
-        return get(ISO);
+    public String getCode() {
+        return get(CODE);
     }
 
-    public void setIso(String iso) {
-        set(ISO, iso);
+    public void setCode(String code) {
+        set(CODE, code);
     }
 }

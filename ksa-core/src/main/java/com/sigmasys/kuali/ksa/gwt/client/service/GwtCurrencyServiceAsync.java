@@ -19,11 +19,11 @@ public interface GwtCurrencyServiceAsync {
     /**
      * Returns Currency by ISO symbol
      *
-     * @param iso ISO currency name
+     * @param code ISO currency code
      * @throws com.sigmasys.kuali.ksa.gwt.client.model.GwtError
      *
      */
-    void getCurrency(String iso, AsyncCallback<CurrencyModel> callback);
+    void getCurrency(String code, AsyncCallback<CurrencyModel> callback);
 
     /**
      * Returns all currencies sorted by ISO in the ascending order

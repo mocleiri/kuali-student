@@ -51,7 +51,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction.getAccount());
         Assert.notNull(transaction.getCurrency());
 
-        Assert.isTrue("USD".equals(transaction.getCurrency().getIso()));
+        Assert.isTrue("USD".equals(transaction.getCurrency().getCode()));
         Assert.isTrue("admin".equals(transaction.getAccount().getId()));
         Assert.isTrue(new Date().compareTo(transaction.getEffectiveDate()) >= 0);
         Assert.isTrue(new BigDecimal(10e5).equals(transaction.getNativeAmount()));
@@ -79,7 +79,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(deferment.getCurrency());
         Assert.notNull(deferment.getAmount());
 
-        Assert.isTrue("USD".equals(deferment.getCurrency().getIso()));
+        Assert.isTrue("USD".equals(deferment.getCurrency().getCode()));
         Assert.isTrue("admin".equals(deferment.getAccount().getId()));
         Assert.isTrue(TEST_USER_ID.equals(deferment.getResponsibleEntity()));
 

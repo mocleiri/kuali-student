@@ -183,19 +183,19 @@ public class TransOvrController extends UifControllerBase {
 
         // Currency type edit
         if (pageId != null && pageId.compareTo("bursaCurrencyEditPage") == 0) {
-            String iso = request.getParameter("iso");
-            if (iso == null || iso.isEmpty()) {
-                throw new IllegalArgumentException("'iso' request parameter must be specified");
+
+            String code = request.getParameter("code");
+            if (code == null || code.isEmpty()) {
+                throw new IllegalArgumentException("'code' request parameter must be specified");
             }
 
-            Currency currency = currencyService.getCurrency(iso);
+            Currency currency = currencyService.getCurrency(code);
 
             form.setCurrency(currency);
         }
 
         if (pageId != null && pageId.compareTo("bursaActivityPage") == 0) {
-           List<Activity> tmpActivities = activityService.getActivities();
-           form.setActivities(activityService.getActivities());
+            form.setActivities(activityService.getActivities());
         }
 
         return getUIFModelAndView(form);
@@ -273,7 +273,7 @@ public class TransOvrController extends UifControllerBase {
         // add a Currency Type
         Currency currency = new Currency();
 
-        currency.setIso(form.getIso());
+        currency.setCode(form.getCode());
         currency.setName(form.getCurrencyName());
         currency.setDescription(form.getCurrencyDescription());
 

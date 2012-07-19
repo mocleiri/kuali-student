@@ -26,11 +26,11 @@ public interface GwtCurrencyService extends RemoteService {
     /**
      * Returns Currency by ISO symbol
      *
-     * @param iso ISO currency name
+     * @param code ISO currency code
      * @return CurrencyModel instance
      * @throws GwtError
      */
-    CurrencyModel getCurrency(String iso) throws GwtError;
+    CurrencyModel getCurrency(String code) throws GwtError;
 
     /**
      * Returns all currencies sorted by ISO in the ascending order

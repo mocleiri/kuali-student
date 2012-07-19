@@ -32,12 +32,12 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         Currency currency = currencyService.getCurrency("usd");
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+        Assert.isTrue(currency.getCode().equalsIgnoreCase("usd"));
 
         currency = currencyService.getCurrency(1L);
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+        Assert.isTrue(currency.getCode().equalsIgnoreCase("usd"));
 
     }
 
@@ -52,7 +52,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         for (Currency currency : currencies) {
             Assert.notNull(currency);
             Assert.notNull(currency.getId());
-            Assert.notNull(currency.getIso());
+            Assert.notNull(currency.getCode());
         }
 
     }
@@ -64,7 +64,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         Currency currency = currencyService.getCurrency("usd");
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+        Assert.isTrue(currency.getCode().equalsIgnoreCase("usd"));
 
         currency.setDescription("Test description");
 
@@ -82,7 +82,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
     public void createCurrency() throws Exception {
 
         Currency currency = new Currency();
-        currency.setIso("mavr");
+        currency.setCode("mavr");
         currency.setName("Mavrody");
         currency.setDescription("Mavrody's currency");
 
@@ -104,7 +104,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         for (CurrencyModel currency : currencies) {
             Assert.notNull(currency);
             Assert.notNull(currency.getId());
-            Assert.notNull(currency.getIso());
+            Assert.notNull(currency.getCode());
         }
 
     }
@@ -115,7 +115,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         CurrencyModel currency = gwtCurrencyService.getCurrency("usd");
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+        Assert.isTrue(currency.getCode().equalsIgnoreCase("usd"));
 
         currency.setDescription("Test description");
 
@@ -132,7 +132,7 @@ public class CurrencyServiceTest extends AbstractServiceTest {
     public void createGwtCurrency() throws Exception {
 
         CurrencyModel currency = new CurrencyModel();
-        currency.setIso("mavr");
+        currency.setCode("mavr");
         currency.setName("Mavrody");
         currency.setDescription("Mavrody's currency");
 
@@ -149,12 +149,12 @@ public class CurrencyServiceTest extends AbstractServiceTest {
         CurrencyModel currency = gwtCurrencyService.getCurrency("usd");
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+        Assert.isTrue(currency.getCode().equalsIgnoreCase("usd"));
 
         currency = gwtCurrencyService.getCurrency(1L);
 
         Assert.notNull(currency);
-        Assert.isTrue(currency.getIso().equalsIgnoreCase("usd"));
+        Assert.isTrue(currency.getCode().equalsIgnoreCase("usd"));
 
     }
 

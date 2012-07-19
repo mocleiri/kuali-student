@@ -66,7 +66,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="bursaCurrencyEditPage" p:title="Currency Details (ISO = @{currency.iso})">
+                <bean parent="Uif-Page" p:id="bursaCurrencyEditPage" p:title="Currency Details (ISO = @{currency.code})">
                     <property name="items">
                         <list>
                             <ref bean="bursaCurrencyDetail"/>
@@ -342,7 +342,7 @@
                         <bean parent="Uif-TextControl" p:size="22" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.currency.iso" p:label="Currency" p:maxLength="5">
+                <bean parent="Uif-InputField" p:propertyName="charge.currency.code" p:label="Currency" p:maxLength="5">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="6" />
@@ -424,7 +424,7 @@
                         <bean parent="Uif-TextControl" p:size="22" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="payment.currency.iso" p:label="Currency" p:maxLength="5">
+                <bean parent="Uif-InputField" p:propertyName="payment.currency.code" p:label="Currency" p:maxLength="5">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="6" />
@@ -453,7 +453,7 @@
         <property name="instructionalText" value="Input fields to add a currency * denotes a required field"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso" p:labelPlacement="TOP" p:required="true" >
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="code" p:labelPlacement="TOP" p:required="true" >
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
                     </property>
@@ -493,7 +493,7 @@
         <property name="propertyName" value="currencies"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="iso">
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="code">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
                     </property>
@@ -513,7 +513,7 @@
                 <bean parent="Uif-Link" p:linkLabel="Delete" p:target="_self"
                       p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>
                 <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
-                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;iso=@{#line.iso}"/>
+                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;code=@{#line.code}"/>
             </list>
         </property>
     </bean>
@@ -522,7 +522,7 @@
         <property name="title" value="Currency Details View"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="currency.iso" p:labelPlacement="TOP" p:label="Symbol">
+                <bean parent="Uif-InputField" p:propertyName="currency.code" p:labelPlacement="TOP" p:label="Symbol">
                     <property name="readOnly" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="11" p:maxLength="10" />

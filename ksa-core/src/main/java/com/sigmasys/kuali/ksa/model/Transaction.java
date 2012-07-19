@@ -337,7 +337,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     public String getFormattedAmount() {
         if (currency != null && amount != null) {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
-            numberFormat.setCurrency(java.util.Currency.getInstance(currency.getIso()));
+            numberFormat.setCurrency(java.util.Currency.getInstance(currency.getCode()));
             return numberFormat.format(amount);
         }
         return "";

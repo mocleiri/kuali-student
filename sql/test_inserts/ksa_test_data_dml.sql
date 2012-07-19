@@ -1051,11 +1051,11 @@ Insert into KSSA_LATE_PERIOD (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NA
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_CURRENCY
-Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (4,'pheald','Euro',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Euro','EUR');
-Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (1,'pheald','United States Dollar as used in the USA.','admin',to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Dollar','USD');
-Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (2,'pheald','British Pound as used in the United Kingdom. Also referred to as sterling.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Sterling','GBP');
-Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (3,'pheald','Australian Dollar.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Dollar','AUD');
-Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,ISO) values (5,'pheald','South African Rand',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Rand','ZAR');
+Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE) values (4,'pheald','Euro',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Euro','EUR');
+Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE) values (1,'pheald','United States Dollar as used in the USA.','admin',to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Dollar','USD');
+Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE) values (2,'pheald','British Pound as used in the United Kingdom. Also referred to as sterling.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Sterling','GBP');
+Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE) values (3,'pheald','Australian Dollar.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Dollar','AUD');
+Insert into KSSA_CURRENCY (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE) values (5,'pheald','South African Rand',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Rand','ZAR');
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_CURRENCY

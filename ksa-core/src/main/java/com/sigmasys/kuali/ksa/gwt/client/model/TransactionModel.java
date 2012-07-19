@@ -17,7 +17,7 @@ public class TransactionModel extends AbstractModel {
 
     public static final String TYPE_ID = "type.id.id";
     public static final String TYPE_SUB_CODE = "type.id.subCode";
-    public static final String CURRENCY_CODE = "currency.iso";
+    public static final String CURRENCY_CODE = "currency.code";
     public static final String ACCOUNT_ID = "account.id";
 
     public static final String AMOUNT = "transaction.amount";
@@ -203,8 +203,8 @@ public class TransactionModel extends AbstractModel {
         return get(COLUMN_CURRENCY_CODE);
     }
 
-    public void setCurrencyCode(String iso) {
-        set(COLUMN_CURRENCY_CODE, iso);
+    public void setCurrencyCode(String code) {
+        set(COLUMN_CURRENCY_CODE, code);
     }
 
     public String getAccountId() {

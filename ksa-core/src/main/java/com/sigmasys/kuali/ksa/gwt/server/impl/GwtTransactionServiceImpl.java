@@ -115,7 +115,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
                 transaction.getAllocatedAmount().doubleValue() : 0.0);
 
         model.setAccountId(transaction.getAccount().getId());
-        model.setCurrencyCode(transaction.getCurrency().getIso());
+        model.setCurrencyCode(transaction.getCurrency().getCode());
 
         model.setEffectiveDate(transaction.getEffectiveDate());
         model.setLedgerDate(transaction.getLedgerDate());
@@ -142,7 +142,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         List<Currency> currencies = currencyService.getCurrencies();
         List<String> currencyCodes = new ArrayList<String>(currencies.size());
         for (Currency currency : currencies) {
-            currencyCodes.add(currency.getIso());
+            currencyCodes.add(currency.getCode());
         }
         return currencyCodes;
     }

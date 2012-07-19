@@ -238,7 +238,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.iso" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.code" p:required="true"/>
                 <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
                       p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
             </list>
@@ -269,7 +269,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
-                <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.iso" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.code" p:required="true"/>
                 <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
                       p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
             </list>

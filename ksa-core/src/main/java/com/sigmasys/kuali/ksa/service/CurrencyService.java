@@ -23,10 +23,10 @@ public interface CurrencyService {
     /**
      * Returns Currency by ISO symbol
      *
-     * @param iso ISO currency name
+     * @param code ISO currency code
      * @return Currency instance
      */
-    Currency getCurrency(String iso);
+    Currency getCurrency(String code);
 
     /**
      * Returns all currencies sorted by ISO in the ascending order

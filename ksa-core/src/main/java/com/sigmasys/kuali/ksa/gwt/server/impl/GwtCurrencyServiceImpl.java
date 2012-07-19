@@ -41,12 +41,12 @@ public class GwtCurrencyServiceImpl extends AbstractRemoteService implements Gwt
     /**
      * Returns Currency by ISO symbol
      *
-     * @param iso ISO currency name
+     * @param code ISO currency code
      * @return CurrencyModel instance
      */
     @Override
-    public CurrencyModel getCurrency(String iso) {
-        return createModel(currencyService.getCurrency(iso));
+    public CurrencyModel getCurrency(String code) {
+        return createModel(currencyService.getCurrency(code));
     }
 
     /**
@@ -94,7 +94,7 @@ public class GwtCurrencyServiceImpl extends AbstractRemoteService implements Gwt
     private CurrencyModel createModel(Currency currency) {
         CurrencyModel model = new CurrencyModel();
         model.setId(currency.getId());
-        model.setIso(currency.getIso());
+        model.setCode(currency.getCode());
         model.setName(currency.getName());
         model.setDescription(currency.getDescription());
         model.setCreatorId(currency.getCreatorId());
@@ -106,7 +106,7 @@ public class GwtCurrencyServiceImpl extends AbstractRemoteService implements Gwt
     private Currency createModel(CurrencyModel currency) {
         Currency model = new Currency();
         model.setId(currency.getId());
-        model.setIso(currency.getIso());
+        model.setCode(currency.getCode());
         model.setName(currency.getName());
         model.setDescription(currency.getDescription());
         model.setCreatorId(currency.getCreatorId());

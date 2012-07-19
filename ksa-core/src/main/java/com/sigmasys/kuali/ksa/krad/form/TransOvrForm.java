@@ -32,7 +32,7 @@ public class TransOvrForm extends UifFormBase {
 
    private Currency currency;
 
-   private String iso;
+   private String code;
 
    private String currencyName;
 
@@ -197,16 +197,16 @@ public class TransOvrForm extends UifFormBase {
     * Get the ISO symbol
     * @return
     */
-   public String getIso() {
-      return iso;
+   public String getCode() {
+      return code;
    }
 
    /**
     * Set the ISO symbol
-    * @param iso
+    * @param code
     */
-   public void setIso(String iso) {
-      this.iso = iso;
+   public void setCode(String code) {
+      this.code = code;
    }
 
    /**
