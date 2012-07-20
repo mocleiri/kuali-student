@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +29,17 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
     protected final Log logger = LogFactory.getLog(getClass());
 
     public AbstractServiceTest() {
+
         // Setting up the test HTTP environment
-        MockHttpServletRequest request = new MockHttpServletRequest();
+
+        MockServletContext context = new MockServletContext();
+
+        MockHttpServletRequest request = new MockHttpServletRequest(context);
         request.setRemoteUser(TEST_USER_ID);
+        request.setSession(new MockHttpSession());
+
         RequestUtils.setServletContext(new MockServletContext());
+
         RequestUtils.setThreadRequest(request);
         RequestUtils.setThreadResponse(new MockHttpServletResponse());
     }

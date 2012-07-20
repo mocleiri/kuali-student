@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.search.SearchCriteria;
+import com.sigmasys.kuali.ksa.service.PersistenceService;
 import com.sigmasys.kuali.ksa.service.aop.AopProxy;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.service.aop.LoggingInterceptor;
@@ -32,7 +33,7 @@ import java.util.List;
 @Service("persistenceService")
 @Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
-public class GenericPersistenceService implements AopProxy {
+public class GenericPersistenceService implements PersistenceService {
 
     @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
     protected EntityManager em;
@@ -65,6 +66,7 @@ public class GenericPersistenceService implements AopProxy {
      * @param id Entity ID
      * @return Identifiable instance
      */
+    @Override
     public <T extends Identifiable> T getEntity(Serializable id, Class<T> entityClass) {
         return em.find(entityClass, id);
     }
@@ -75,6 +77,7 @@ public class GenericPersistenceService implements AopProxy {
      * @param id Entity ID
      * @return Identifiable instance
      */
+    @Override
     @Transactional(readOnly = false)
     public <T extends Identifiable> boolean deleteEntity(Serializable id, Class<T> entityClass) {
         String entityName = entityClass.getSimpleName();
@@ -90,6 +93,7 @@ public class GenericPersistenceService implements AopProxy {
      * @param entityClass Entity Class
      * @return List of Identifiable objects
      */
+    @Override
     public <T extends Identifiable> List<T> getEntities(Class<T> entityClass) {
         return getEntities(entityClass, (Pair<String, SortOrder>[]) null);
     }
@@ -102,6 +106,7 @@ public class GenericPersistenceService implements AopProxy {
      * @param orderBy     array of fields used in "order by" clause, can be null
      * @return List of Identifiable objects
      */
+    @Override
     public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, Pair<String, SortOrder>... orderBy) {
         return getEntities(entityClass, null, orderBy);
     }
@@ -114,8 +119,9 @@ public class GenericPersistenceService implements AopProxy {
      * @param orderBy        optional array of fields used in "order by" clause, can be null
      * @return List of Identifiable objects
      */
-    protected <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
-                                                           Pair<String, SortOrder>... orderBy) {
+    @Override
+    public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
+                                                        Pair<String, SortOrder>... orderBy) {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<T> criteria = criteriaBuilder.createQuery(entityClass);
@@ -156,6 +162,7 @@ public class GenericPersistenceService implements AopProxy {
      * @param entity Identifiable instance
      * @return Entity ID
      */
+    @Override
     @Transactional(readOnly = false)
     public <T extends Serializable> T persistEntity(Identifiable entity) {
 

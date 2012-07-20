@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 
-import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.model.LocalizedStringId;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
@@ -14,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,9 +31,6 @@ import java.util.Map;
 public class LocalizationServiceImpl extends GenericPersistenceService implements LocalizationService {
 
     private static final Log logger = LogFactory.getLog(LocalizationServiceImpl.class);
-
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
-    protected EntityManager em;
 
     @Autowired
     private XliffParser xliffParser;

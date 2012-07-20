@@ -37,18 +37,21 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
 
     private static final String CRITERIA_LOOKUP_SERVICE_NAME = "criteriaLookupService";
 
-
     private final Set<String> transactionTypeIds = new HashSet<String>();
     private final Map<String, String> transactionTypeMasks = new HashMap<String, String>();
 
-    private IdentityService identityService;
-    private RoleService roleService;
+
+    private IdentityService getIdentityService() {
+        return KimApiServiceLocator.getIdentityService();
+    }
+
+    private RoleService getRoleService() {
+        return KimApiServiceLocator.getRoleService();
+    }
 
 
     @PostConstruct
     private void postConstruct() {
-        identityService = KimApiServiceLocator.getIdentityService();
-        roleService = KimApiServiceLocator.getRoleService();
         refresh();
     }
 
@@ -74,19 +77,19 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     }
 
     private List<Role> getKimRoles(String userId) {
-        Principal principal = identityService.getPrincipalByPrincipalName(userId);
+        Principal principal = getIdentityService().getPrincipalByPrincipalName(userId);
         Predicate memberPredicate =
                 PredicateFactory.equal(KIMPropertyConstants.RoleMember.MEMBER_ID, principal.getPrincipalId());
         Predicate memberTypePredicate =
                 PredicateFactory.equal(KIMPropertyConstants.RoleMember.MEMBER_TYPE_CODE, MemberType.PRINCIPAL.getCode());
         QueryByCriteria criteria = QueryByCriteria.Builder.fromPredicates(memberPredicate, memberTypePredicate);
-        List<RoleMember> roleMembers = roleService.findRoleMembers(criteria).getResults();
+        List<RoleMember> roleMembers = getRoleService().findRoleMembers(criteria).getResults();
         if (roleMembers != null && !roleMembers.isEmpty()) {
             List<String> roleIds = new ArrayList<String>(roleMembers.size());
             for (RoleMember roleMember : roleMembers) {
                 roleIds.add(roleMember.getRoleId());
             }
-            return roleService.getRoles(roleIds);
+            return getRoleService().getRoles(roleIds);
         }
         return Collections.emptyList();
     }

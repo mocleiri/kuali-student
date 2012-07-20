@@ -52,6 +52,12 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                       p:jaxWsService="true"
                       p:busSecurity="false"
                       p:service-ref="localizationService"/>
+                <bean class="com.sigmasys.kuali.ksa.service.KsaServiceDefinition"
+                      p:serviceNameSpaceURI="http://sigmasys.com/ksa"
+                      p:localServiceName="transactionImportService"
+                      p:jaxWsService="true"
+                      p:busSecurity="false"
+                      p:service-ref="transactionImportService"/>
             </list>
         </property>
     </bean>
