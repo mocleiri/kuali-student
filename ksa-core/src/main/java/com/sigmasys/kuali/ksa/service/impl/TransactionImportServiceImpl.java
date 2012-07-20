@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jws.WebService;
 import javax.persistence.Query;
 import javax.xml.bind.*;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -30,6 +31,8 @@ import java.util.UUID;
  */
 @Service("transactionImportService")
 @Transactional(readOnly = true)
+@WebService(serviceName = TransactionImportService.SERVICE_NAME, portName = TransactionImportService.PORT_NAME,
+        targetNamespace = Constants.WS_NAMESPACE)
 @SuppressWarnings("unchecked")
 public class TransactionImportServiceImpl extends GenericPersistenceService implements TransactionImportService {
 
@@ -71,7 +74,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * @param batchReceipt BatchReceipt instance
      * @return BatchReceipt ID
      */
-    @Transactional(readOnly = false)
     protected Long persistBatchReceipt(BatchReceipt batchReceipt) {
         return persistEntity(batchReceipt);
     }
