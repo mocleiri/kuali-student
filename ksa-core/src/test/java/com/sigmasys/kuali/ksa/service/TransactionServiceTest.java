@@ -188,4 +188,30 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void getTransactionType() throws Exception {
+
+        String id = "1020";
+
+        TransactionType transactionType = transactionService.getTransactionType(id, new Date());
+
+        Assert.notNull(transactionType);
+        Assert.notNull(transactionType.getId());
+        Assert.isTrue("1020".equals(transactionType.getId().getId()));
+
+    }
+
+    @Test
+    public void getTransactionTypeClass() throws Exception {
+
+        String id = "1020";
+
+        Class<TransactionType> debitTypeClass = transactionService.getTransactionTypeClass(id);
+
+        Assert.notNull(debitTypeClass);
+        Assert.notNull(debitTypeClass.equals(DebitType.class));
+
+    }
+
+
 }

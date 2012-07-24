@@ -249,4 +249,13 @@ public interface TransactionService {
     Deferment deferTransaction(Long transactionId, BigDecimal partialAmount,
                                Date expirationDate, String memoText, String defermentTypeId);
 
+    /**
+     * Returns the transaction type for the given transaction type ID
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK
+     * @return a subclass of TransactionType
+     */
+    @WebMethod(exclude = true)
+    <T extends TransactionType> Class<T> getTransactionTypeClass(String transactionTypeId);
+
 }

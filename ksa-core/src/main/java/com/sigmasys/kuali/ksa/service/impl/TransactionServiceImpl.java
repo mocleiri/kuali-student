@@ -555,6 +555,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns the transaction type for the given transaction type ID
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK
+     * @return a subclass of TransactionType
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public <T extends TransactionType> Class<T> getTransactionTypeClass(String transactionTypeId) {
+        Query query = em.createQuery("select t from TransactionType t " +
+                " where t.id.id = :transactionTypeId");
+        query.setParameter("transactionTypeId", transactionTypeId);
+        List<T> transactionTypes = query.getResultList();
+        if (transactionTypes != null && !transactionTypes.isEmpty()) {
+            T transactionType = transactionTypes.get(0);
+            return (transactionType != null) ? (Class<T>) transactionType.getClass() : null;
+        }
+        return null;
+    }
+
+    /**
      * Automatically generates a deferment transaction for the given transaction,
      * allocates and locks the two transactions together.
      *
