@@ -4,11 +4,12 @@ import javax.persistence.*;
 
 /**
  * Account protected information
- *
  * <p/>
+ * <p/>
+ *
  * @author Michael Ivanov
- * Date: 1/22/12
- * Time: 3:47 PM
+ *         Date: 1/22/12
+ *         Time: 3:47 PM
  */
 @Entity
 @Table(name = "KSSA_ACNT_PROTECTED_INFO")
@@ -38,6 +39,11 @@ public class AccountProtectedInfo implements Identifiable {
      * Bank type
      */
     private BankType bankType;
+
+    /**
+     * ID type
+     */
+    private IdType idType;
 
 
     @Id
@@ -87,5 +93,15 @@ public class AccountProtectedInfo implements Identifiable {
 
     public void setBankType(BankType bankType) {
         this.bankType = bankType;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_TYPE_ID_FK")
+    public IdType getIdType() {
+        return idType;
+    }
+
+    public void setIdType(IdType idType) {
+        this.idType = idType;
     }
 }

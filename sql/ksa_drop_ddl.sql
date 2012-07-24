@@ -22,6 +22,7 @@ drop table KSA.KSSA_GL_BREAKDOWN cascade constraints;
 drop table KSA.KSSA_GL_TRANSACTION cascade constraints;
 drop table KSA.KSSA_GL_TRANSMISSION cascade constraints;
 drop table KSA.KSSA_GL_TYPE cascade constraints;
+drop table KSA.KSSA_ID_TYPE cascade constraints;
 drop table KSA.KSSA_INFORMATION cascade constraints;
 drop table KSA.KSSA_LANGUAGE cascade constraints;
 drop table KSA.KSSA_LATE_PERIOD cascade constraints;
