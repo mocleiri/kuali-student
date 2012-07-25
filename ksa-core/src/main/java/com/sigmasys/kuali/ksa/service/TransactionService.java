@@ -177,6 +177,40 @@ public interface TransactionService {
      */
     boolean deleteTransaction(Long id);
 
+
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @return true if transactionId1 can pay transactionId2, false - otherwise
+     */
+    @WebMethod(exclude = true)
+    boolean canPay(Long transactionId1, Long transactionId2);
+
+
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param priority       priority
+     * @return true if transactionId1 can pay transactionId2, false - otherwise
+     */
+    @WebMethod(exclude = true)
+    boolean canPay(Long transactionId1, Long transactionId2, int priority);
+
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param priorityFrom   lower priority boundary
+     * @param priorityTo     upper priority boundary
+     * @return true if transactionId1 can pay transactionId2, false - otherwise
+     */
+    boolean canPay(Long transactionId1, Long transactionId2, int priorityFrom, int priorityTo);
+
     /**
      * This will allocate the value of amount on the transaction. A check will
      * be made to ensure that the allocated amount is equal to or less than the

@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Transaction service JPA implementation.
@@ -658,6 +659,115 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         createLockedAllocation(defermentId, transactionId, partialAmount);
 
         return deferment;
+    }
+
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @return true if transactionId1 can pay transactionId2, false - otherwise
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public boolean canPay(Long transactionId1, Long transactionId2) {
+        return canPay(transactionId1, transactionId2, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param priority       priority
+     * @return true if transactionId1 can pay transactionId2, false - otherwise
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public boolean canPay(Long transactionId1, Long transactionId2, int priority) {
+        return canPay(transactionId1, transactionId2, priority, priority);
+    }
+
+
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param priorityFrom   lower priority boundary
+     * @param priorityTo     upper priority boundary
+     * @return true if transactionId1 can pay transactionId2, false - otherwise
+     */
+    @Override
+    public boolean canPay(Long transactionId1, Long transactionId2, int priorityFrom, int priorityTo) {
+
+        if (priorityFrom > priorityTo) {
+            String errMsg = "priorityFrom must be less or equal to priorityTo";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Transaction transaction1 = getTransaction(transactionId1);
+        if (transaction1 == null) {
+            String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Transaction transaction2 = getTransaction(transactionId2);
+        if (transaction2 == null) {
+            String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        boolean compatible = false;
+
+        if (transaction1 instanceof Payment && transaction2 instanceof Charge) {
+            if (transaction1.getAmount() != null && transaction1.getAmount().compareTo(BigDecimal.ZERO) > 0 &&
+                    transaction2.getAmount() != null && transaction2.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+                compatible = true;
+            }
+        } else if (transaction1 instanceof Payment && transaction2 instanceof Payment) {
+            if (transaction1.getAmount() != null && transaction1.getAmount().compareTo(BigDecimal.ZERO) > 0 &&
+                    transaction2.getAmount() != null && transaction2.getAmount().compareTo(BigDecimal.ZERO) < 0) {
+                compatible = true;
+            }
+        } else if (transaction1 instanceof Charge && transaction2 instanceof Charge) {
+            if (transaction1.getAmount() != null && transaction1.getAmount().compareTo(BigDecimal.ZERO) > 0 &&
+                    transaction2.getAmount() != null && transaction2.getAmount().compareTo(BigDecimal.ZERO) < 0) {
+                return true;
+            }
+        }
+
+        if (!compatible) {
+            return false;
+        }
+
+        TransactionTypeId creditTypeId = transaction1.getTransactionType().getId();
+        TransactionTypeId debitTypeId = transaction2.getTransactionType().getId();
+
+        Query query =
+                em.createQuery("select cp from CreditPermission cp where cp.creditType.id = :id" +
+                        " cp.priority between :priorityFrom and :priorityTo");
+
+        query.setParameter("id", creditTypeId);
+        query.setParameter("priorityFrom", priorityFrom);
+        query.setParameter("priorityTo", priorityTo);
+
+        List<CreditPermission> creditPermissions = query.getResultList();
+
+        if (creditPermissions != null) {
+            for (CreditPermission creditPermission : creditPermissions) {
+                String debitTypeMask = creditPermission.getAllowableDebitType();
+                if (debitTypeMask != null && Pattern.matches(debitTypeMask, debitTypeId.getId())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }
