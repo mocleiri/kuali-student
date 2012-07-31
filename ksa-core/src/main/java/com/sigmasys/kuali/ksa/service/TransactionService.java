@@ -220,9 +220,10 @@ public interface TransactionService {
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
-     * @param amount         amount of money to be allocated TODO -
+     * @param amount         amount of money to be allocated
+     * @return a new allocation
      */
-    void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+    Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
 
     /**
      * This will allocate a locked amount on the transaction. A check will be
@@ -232,9 +233,36 @@ public interface TransactionService {
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
-     * @param amount         amount of money to be allocated TODO -
+     * @param amount         amount of money to be allocated
+     * @return a new allocation
      */
-    void createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+    Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+
+    /**
+     * Removes all allocations associated with the given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     */
+    void removeAllocations(Long transactionId1);
+
+    /**
+     * Removes allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     */
+    void removeAllocation(Long transactionId1, Long transactionId2);
+
+    /**
+     * Removes locked allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     */
+    void removeLockedAllocation(Long transactionId1, Long transactionId2);
 
 
     /**

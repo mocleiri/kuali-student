@@ -31,6 +31,10 @@ public class TransactionServiceTest extends AbstractServiceTest {
     @Autowired
     private AccountService accountService;
 
+    private Transaction transaction1;
+    private Transaction transaction2;
+    private Allocation allocation;
+
     @Before
     public void setUpWithinTransaction() {
         // set up test data within the transaction
@@ -88,13 +92,12 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
-    @Test
-    public void createAllocation() throws Exception {
+    private void createAllocation(boolean locked) {
 
         String id = "1020";
 
-        Transaction transaction1 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(100));
-        Transaction transaction2 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(-100));
+        transaction1 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(100));
+        transaction2 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(-100));
 
         Assert.notNull(transaction1);
         Assert.notNull(transaction2);
@@ -103,16 +106,19 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction1.getAmount());
         Assert.notNull(transaction2.getAmount());
 
-        // Creating an allocation between 2 new transactions
-        Allocation allocation = new Allocation();
-        allocation.setFirstTransaction(transaction1);
-        allocation.setSecondTransaction(transaction2);
-        allocation.setAmount(new BigDecimal(10));
-        allocation.setLocked(true);
-        allocation.setAccount(transaction1.getAccount());
-        em.persist(allocation);
+        allocation =
+                locked ?
+                        transactionService.createLockedAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90)) :
+                        transactionService.createAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90));
 
-        transactionService.createAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90));
+        Assert.notNull(allocation);
+        Assert.notNull(allocation.getId());
+        Assert.notNull(allocation.getFirstTransaction());
+        Assert.notNull(allocation.getSecondTransaction());
+        Assert.notNull(allocation.getFirstTransaction().getId());
+        Assert.notNull(allocation.getSecondTransaction().getId());
+        Assert.isTrue(allocation.getFirstTransaction().getId().equals(transaction1.getId()));
+        Assert.isTrue(allocation.getSecondTransaction().getId().equals(transaction2.getId()));
 
         transaction1 = transactionService.getTransaction(transaction1.getId());
         transaction2 = transactionService.getTransaction(transaction2.getId());
@@ -122,9 +128,58 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction1.getId());
         Assert.notNull(transaction2.getId());
 
-        Assert.isTrue(new BigDecimal(90).equals(transaction1.getAllocatedAmount()));
-        Assert.isTrue(new BigDecimal(90).equals(transaction2.getAllocatedAmount()));
+        Assert.isTrue(new BigDecimal(90).equals(allocation.getAmount()));
 
+        BigDecimal allocatedAmount1 = locked ?
+                transaction1.getLockedAllocatedAmount() :
+                transaction1.getAllocatedAmount();
+
+        BigDecimal allocatedAmount2 = locked ?
+                transaction2.getLockedAllocatedAmount() :
+                transaction2.getAllocatedAmount();
+
+        Assert.isTrue(new BigDecimal(90).equals(allocatedAmount1));
+        Assert.isTrue(new BigDecimal(90).equals(allocatedAmount2));
+    }
+
+    @Test
+    public void createAllocation() throws Exception {
+
+        createAllocation(false);
+
+    }
+
+    @Test
+    public void createLockedAllocation() throws Exception {
+
+        createAllocation(true);
+
+    }
+
+    @Test
+    public void removeAllocation() throws Exception {
+
+        createAllocation();
+
+        transactionService.removeAllocation(transaction1.getId(), transaction2.getId());
+
+    }
+
+    @Test
+    public void removeLockedAllocation() throws Exception {
+
+        createLockedAllocation();
+
+        transactionService.removeLockedAllocation(transaction1.getId(), transaction2.getId());
+
+    }
+
+    @Test
+    public void removeAllocations() throws Exception {
+
+        createAllocation();
+
+        transactionService.removeAllocations(transaction2.getId());
 
     }
 

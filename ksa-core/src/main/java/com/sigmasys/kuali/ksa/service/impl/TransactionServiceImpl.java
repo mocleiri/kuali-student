@@ -375,13 +375,25 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return deleteEntity(id, Transaction.class);
     }
 
+    /**
+     * This will allocate the value of amount on the transaction. A check will
+     * be made to ensure that the allocated amount is equal to or less than the
+     * localAmount, less any lockedAllocationAmount. The expectation is that
+     * this method will only be called by the payment application module.
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param amount         amount of money to be allocated
+     * @return a new allocation
+     */
     @Override
     @Transactional(readOnly = false)
-    public void createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
-        createAllocation(transactionId1, transactionId2, amount, false);
+    public Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
+        return createAllocation(transactionId1, transactionId2, amount, false);
     }
 
-    protected void createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount, boolean locked) {
+    protected Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount, boolean locked) {
 
         if (newAmount == null || newAmount.compareTo(BigDecimal.ZERO) <= 0) {
             String errMsg = "The allocation amount should be a positive number";
@@ -471,12 +483,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         if (canAllocate) {
+
             Allocation allocation = new Allocation();
             allocation.setAccount(account);
             allocation.setFirstTransaction(transaction1);
             allocation.setSecondTransaction(transaction2);
             allocation.setAmount(newAmount);
             allocation.setLocked(locked);
+
+            persistEntity(allocation);
+
             if (locked) {
                 transaction1.setLockedAllocatedAmount(newAmount);
                 transaction2.setLockedAllocatedAmount(newAmount);
@@ -484,6 +500,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 transaction1.setAllocatedAmount(newAmount);
                 transaction2.setAllocatedAmount(newAmount);
             }
+
+            return allocation;
+
         } else {
             String errMsg = "Illegal allocation. Transaction IDs: " + transactionId1 + ", " + transactionId2 +
                     " Amount: " + newAmount;
@@ -506,10 +525,136 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return amount.subtract(allocatedAmount.add(lockedAllocatedAmount));
     }
 
+    /**
+     * This will allocate a locked amount on the transaction. A check will be
+     * made to ensure that the lockedAmount and the allocateAmount don't exceed
+     * the ledgerAmount of the transaction. Setting an amount as locked prevents
+     * the payment application system from reallocating the balance elsewhere.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param amount         amount of money to be allocated
+     * @return a new allocation
+     */
     @Override
     @Transactional(readOnly = false)
-    public void createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
-        createAllocation(transactionId1, transactionId2, amount, true);
+    public Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
+        return createAllocation(transactionId1, transactionId2, amount, true);
+    }
+
+    /**
+     * Removes all allocations associated with the given transactions
+     * <p/>
+     *
+     * @param transactionId Transaction ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void removeAllocations(Long transactionId) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Query query = em.createQuery("select a from Allocation a " +
+                " left outer join fetch a.firstTransaction t1 " +
+                " left outer join fetch a.secondTransaction t2 " +
+                " where t1.id = :id or t2.id = :id");
+        query.setParameter("id", transactionId);
+
+        List<Allocation> allocations = query.getResultList();
+
+        for (Allocation allocation : allocations) {
+            Long transactionId1 = allocation.getFirstTransaction().getId();
+            Long transactionId2 = allocation.getSecondTransaction().getId();
+            removeAllocation(transactionId1, transactionId2, allocation.isLocked());
+        }
+
+    }
+
+    /**
+     * Removes allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void removeAllocation(Long transactionId1, Long transactionId2) {
+        removeAllocation(transactionId1, transactionId2, false);
+    }
+
+    /**
+     * Removes locked allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void removeLockedAllocation(Long transactionId1, Long transactionId2) {
+        removeAllocation(transactionId1, transactionId2, true);
+    }
+
+    protected void removeAllocation(Long transactionId1, Long transactionId2, boolean locked) {
+
+        Transaction transaction1 = getTransaction(transactionId1);
+        if (transaction1 == null) {
+            String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Transaction transaction2 = getTransaction(transactionId2);
+        if (transaction2 == null) {
+            String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Query query = em.createQuery("select a from Allocation a " +
+                " where a.firstTransaction.id = :id1 and a.secondTransaction.id = :id2");
+        query.setParameter("id1", transactionId1);
+        query.setParameter("id2", transactionId2);
+
+        List<Allocation> allocations = query.getResultList();
+        if (allocations == null || allocations.isEmpty()) {
+            String errMsg = "Allocation does not exist for transactions: '" + transactionId1 +
+                    "' and '" + transactionId2 + "'";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        for (Allocation allocation : allocations) {
+
+            BigDecimal allocatedAmount = (allocation.getAmount() != null) ?
+                    allocation.getAmount() : BigDecimal.ZERO;
+
+            BigDecimal allocatedAmount1 = locked ? transaction1.getLockedAllocatedAmount() :
+                    transaction1.getAllocatedAmount();
+
+            BigDecimal allocatedAmount2 = locked ? transaction2.getLockedAllocatedAmount() :
+                    transaction2.getAllocatedAmount();
+
+            if (allocatedAmount1 == null) {
+                allocatedAmount1 = BigDecimal.ZERO;
+            }
+
+            if (allocatedAmount2 == null) {
+                allocatedAmount2 = BigDecimal.ZERO;
+            }
+
+            transaction1.setAllocatedAmount(allocatedAmount1.subtract(allocatedAmount));
+            transaction2.setAllocatedAmount(allocatedAmount2.subtract(allocatedAmount));
+
+            deleteEntity(allocation.getId(), Allocation.class);
+        }
+
     }
 
     /**

@@ -104,7 +104,7 @@ public class Allocation extends AccountIdAware implements Identifiable {
 
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_LOCKED")
-    public Boolean getLocked() {
+    public Boolean isLocked() {
         return isLocked;
     }
 
