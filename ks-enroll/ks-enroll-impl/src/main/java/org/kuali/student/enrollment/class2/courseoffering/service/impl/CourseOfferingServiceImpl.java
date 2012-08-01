@@ -1,17 +1,5 @@
 package org.kuali.student.enrollment.class2.courseoffering.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.jws.WebParam;
-import javax.xml.namespace.QName;
-
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.criteria.GenericQueryResults;
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
@@ -57,7 +45,6 @@ import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.CircularRelationshipException;
 import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
 import org.kuali.student.r2.common.exceptions.DependentObjectsExistException;
-import org.kuali.student.r2.common.exceptions.DisabledIdentifierException;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
 import org.kuali.student.r2.common.exceptions.MissingParameterException;
@@ -76,6 +63,17 @@ import org.kuali.student.r2.core.type.dto.TypeInfo;
 import org.kuali.student.r2.core.type.dto.TypeTypeRelationInfo;
 import org.kuali.student.r2.core.type.service.TypeService;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.jws.WebParam;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class CourseOfferingServiceImpl implements CourseOfferingService {
@@ -230,7 +228,6 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
 
 
     @Override
-
     @Transactional(readOnly = true)
     public CourseOfferingInfo getCourseOffering(String courseOfferingId, ContextInfo context)
             throws DoesNotExistException, InvalidParameterException, MissingParameterException,
@@ -435,7 +432,13 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
         return this.businessLogic.rolloverCourseOffering(sourceCourseOfferingId, targetTermId, optionKeys, context);
     }
 
-
+    @Override
+    @Transactional(readOnly = false, noRollbackFor = {DoesNotExistException.class}, rollbackFor = {Throwable.class})
+    public CourseOfferingInfo copyCourseOffering(String sourceCourseOfferingId, String targetTermId, List<String> optionKeys, ContextInfo context) throws AlreadyExistsException,
+            DataValidationErrorException, DoesNotExistException, DataValidationErrorException, InvalidParameterException,
+            MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
+        return this.businessLogic.copyCourseOffering(sourceCourseOfferingId, targetTermId, optionKeys, context);
+    }
 
     @Override
     @Transactional(readOnly = false, noRollbackFor = {DoesNotExistException.class}, rollbackFor = {Throwable.class})
@@ -1645,58 +1648,6 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
         this.offeringCodeGenerator = offeringCodeGenerator;
     }
 
-    @Override
-    public TermInfo getTerm(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        AtpInfo atp = atpService.getAtp(termId, context);
-        TermInfo term = null;
-        TermAssembler termAssembler = getTermAssembler();
-        if (termAssembler == null) {
-            setTermAssembler(new TermAssembler());
-        }
-
-        if (atp != null && checkTypeForTermType(atp.getTypeKey(), context)) {
-            try {
-                term = getTermAssembler().assemble(atp, context);
-            } catch (AssemblyException e) {
-                throw new OperationFailedException("AssemblyException : " + e.getMessage());
-            }
-        } else {
-            throw new DoesNotExistException("This is either not valid Atp or not valid Term. " + termId);
-        }
-
-        return term;
-    }
-
-    private boolean checkTypeForTermType(String typeKey, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        List<TypeInfo> types = getTermTypes(context);
-        return checkTypeInTypes(typeKey, types);
-    }
-
-    @Override
-    public List<TypeInfo> getTermTypes(ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-
-        List<TypeTypeRelationInfo> relations = null;
-        try {
-            relations = typeService.getTypeTypeRelationsByOwnerAndType(AtpServiceConstants.ATP_TERM_GROUPING_TYPE_KEY, TypeServiceConstants.TYPE_TYPE_RELATION_GROUP_TYPE_KEY, context);
-        } catch (DoesNotExistException e) {
-            throw new OperationFailedException(e.getMessage(), e);
-        }
-
-        if (relations != null) {
-            List<TypeInfo> results = new ArrayList<TypeInfo>(relations.size());
-            for (TypeTypeRelationInfo rel : relations) {
-                try {
-                    results.add(typeService.getType(rel.getRelatedTypeKey(), context));
-                } catch (DoesNotExistException e) {
-                    throw new OperationFailedException(e.getMessage(), e);
-                }
-            }
-
-            return results;
-        }
-
-        return null;
-    }
 
     public TermAssembler getTermAssembler() {
         if (termAssembler == null) {
@@ -1768,5 +1719,5 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
 		 throw new UnsupportedOperationException();
 	}
 
-    
+
 }

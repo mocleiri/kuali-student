@@ -17,12 +17,13 @@ import org.kuali.student.enrollment.class2.population.dto.PopulationWrapper;
 import org.kuali.student.enrollment.class2.population.service.PopulationWrapperMaintainable;
 
 import javax.xml.namespace.QName;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
 public class PopulationWrapperMaintainableImpl extends MaintainableImpl implements PopulationWrapperMaintainable{
     private transient PopulationService populationService;
-    private ContextInfo contextInfo;
-    final Logger logger = Logger.getLogger(PopulationWrapperMaintainableImpl.class);
+ //   final transient Logger logger = Logger.getLogger(PopulationWrapperMaintainableImpl.class);
     
     @Override
     public void saveDataObject() {
@@ -35,26 +36,7 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
                 updatePopulation(wrapper);
             }
      
-        } catch (DataValidationErrorException e){
-            logger.error("PopulationWrapperMaintainableImpl data validation error. ", e);
-            throw new RuntimeException("PopulationWrapperMaintainableImpl data validation error. ", e);
-        } catch (InvalidParameterException e) {
-            logger.error("PopulationWrapperMaintainableImpl invalid parameter. ", e);
-            throw new RuntimeException("PopulationWrapperMaintainableImpl invalid parameter. ", e);
-        } catch (MissingParameterException e) {
-            logger.error("PopulationWrapperMaintainableImpl missing parameter. ", e);
-            throw new RuntimeException("PopulationWrapperMaintainableImpl missing parameter. ", e);
-        } catch (OperationFailedException e) {
-            logger.error("PopulationWrapperMaintainableImpl operation failed. ", e);
-            throw new RuntimeException("PopulationWrapperMaintainableImpl operation failed. ", e);
-        } catch (PermissionDeniedException e) {
-            logger.error("PopulationWrapperMaintainableImpl permission denied. ", e);
-            throw new RuntimeException("PopulationWrapperMaintainableImpl permission denied. ", e);
-        } catch (ReadOnlyException e) {
-            logger.error("PopulationWrapperMaintainableImpl read only exception. ", e);
-            throw new RuntimeException("PopulationWrapperMaintainableImpl read only exception. ", e);
-        }catch (Exception e) {
-            logger.error("PopulationWrapperMaintainableImpl exception. ", e);
+        } catch (Exception e) {
             throw new RuntimeException("PopulationWrapperMaintainableImpl exception. ", e);
         }
 
@@ -66,7 +48,6 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
             String populationId =  dataObjectKeys.get("id");
             PopulationWrapper wrapper = getPopulation(populationId);
             wrapper.setId(populationId);
-            wrapper.setInCreateMode(false);
             wrapper.setPageTitle("Edit Population");
             if (PopulationServiceConstants.POPULATION_RULE_TYPE_RULE_KEY.equals(wrapper.getPopulationRuleInfo().getTypeKey())){
                 //core type by rule
@@ -75,11 +56,24 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
             else {
                 //constructed type by combining populations
                 wrapper.setCreateByRule(false);
+                List<String> childPopulationIds = wrapper.getPopulationRuleInfo().getChildPopulationIds();
+                List<PopulationInfo> childPopulations = new ArrayList<PopulationInfo>();
+                if(!childPopulationIds.isEmpty()) {
+                    childPopulations = getChildPopulations(childPopulationIds);
+                }
+                wrapper.setChildPopulations(childPopulations);
+                // To display operation type as text
+                if (wrapper.getOperationType().equals(PopulationServiceConstants.POPULATION_RULE_TYPE_UNION_KEY)) {
+                    wrapper.setOperationTypeText("Union");
+                } else if (wrapper.getOperationType().equals(PopulationServiceConstants.POPULATION_RULE_TYPE_INTERSECTION_KEY)) {
+                    wrapper.setOperationTypeText("Intersection");
+                } else if (wrapper.getOperationType().equals(PopulationServiceConstants.POPULATION_RULE_TYPE_EXCLUSION_KEY)) {
+                    wrapper.setOperationTypeText("Exclusion");
+                }
             }
 
             return wrapper;
         } catch (Exception e) {
-            logger.error("Fail to retrieve Population for edit.", e);
             throw new RuntimeException("Fail to retrieve Population for edit.", e);
         }
     }
@@ -110,8 +104,19 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
         PopulationWrapper wrapper = new PopulationWrapper();
 
         try {
-            wrapper.setPopulationInfo(getPopulationService().getPopulation(populationId, getContextInfo()));
-            wrapper.setPopulationRuleInfo(getPopulationService().getPopulationRuleForPopulation(populationId, getContextInfo()));
+            ContextInfo context = ContextInfo.createDefaultContextInfo();
+            wrapper.setPopulationInfo(getPopulationService().getPopulation(populationId, context));
+            wrapper.setPopulationRuleInfo(getPopulationService().getPopulationRuleForPopulation(populationId, context));
+            wrapper.setOperationType(wrapper.getPopulationRuleInfo().getTypeKey());
+            if(wrapper.getPopulationRuleInfo().getReferencePopulationId() != null){
+                PopulationInfo referencePopulation = getPopulationService().getPopulation(wrapper.getPopulationRuleInfo().getReferencePopulationId(), context);
+                wrapper.setReferencePopulation(referencePopulation);
+            }
+            wrapper.getChildPopulations().clear();
+            for(String childPopulationId : wrapper.getPopulationRuleInfo().getChildPopulationIds()){
+                wrapper.getChildPopulations().add(getPopulationService().getPopulation(childPopulationId, context));
+            }
+
         } catch (Exception ex){
             throw new RuntimeException(ex);
         }
@@ -121,10 +126,21 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
 
     // create the PopulationInfo and PopulationRuleInfo
     public PopulationWrapper createPopulation(PopulationWrapper wrapper) throws Exception {
-        PopulationInfo populationInfo = wrapper.getPopulationInfo();
-        getPopulationService().createPopulation(wrapper.getPopulationInfo(), getContextInfo());
-        PopulationRuleInfo  populationRuleInfo = getPopulationService().createPopulationRule(wrapper.getPopulationRuleInfo(), getContextInfo());
-        getPopulationService().applyPopulationRuleToPopulation(populationRuleInfo.getId(), populationInfo.getId(),getContextInfo());
+        ContextInfo context = ContextInfo.createDefaultContextInfo();
+
+        PopulationInfo populationInfo = getPopulationService().createPopulation(wrapper.getPopulationInfo(), context);
+
+        wrapper.getPopulationRuleInfo().getChildPopulationIds().clear();
+        for(PopulationInfo childPopulation : wrapper.getChildPopulations()){
+            wrapper.getPopulationRuleInfo().getChildPopulationIds().add(childPopulation.getId());
+        }
+        if(wrapper.getReferencePopulation()!=null){
+            wrapper.getPopulationRuleInfo().setReferencePopulationId(wrapper.getReferencePopulation().getId());
+        }
+        PopulationRuleInfo  populationRuleInfo = getPopulationService().createPopulationRule(wrapper.getPopulationRuleInfo(), context);
+
+        getPopulationService().applyPopulationRuleToPopulation(populationRuleInfo.getId(), populationInfo.getId(), context);
+
         wrapper.setPopulationInfo(populationInfo);
         wrapper.setPopulationRuleInfo(populationRuleInfo);
         wrapper.setId(populationInfo.getId());
@@ -132,8 +148,32 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
     }
 
     public void updatePopulation(PopulationWrapper wrapper) throws Exception {
-        getPopulationService().updatePopulation(wrapper.getId(), wrapper.getPopulationInfo(), getContextInfo());
-        getPopulationService().updatePopulationRule(wrapper.getPopulationRuleInfo().getId(), wrapper.getPopulationRuleInfo(), getContextInfo());
+        ContextInfo context = ContextInfo.createDefaultContextInfo();
+
+        PopulationInfo populationInfo = getPopulationService().updatePopulation(wrapper.getId(), wrapper.getPopulationInfo(), context);
+
+        wrapper.getPopulationRuleInfo().getChildPopulationIds().clear();
+        for(PopulationInfo childPopulation : wrapper.getChildPopulations()){
+            wrapper.getPopulationRuleInfo().getChildPopulationIds().add(childPopulation.getId());
+        }
+        if(wrapper.getReferencePopulation()!=null){
+            wrapper.getPopulationRuleInfo().setReferencePopulationId(wrapper.getReferencePopulation().getId());
+        }
+        PopulationRuleInfo populationRuleInfo = getPopulationService().updatePopulationRule(wrapper.getPopulationRuleInfo().getId(), wrapper.getPopulationRuleInfo(), context);
+
+        wrapper.setPopulationInfo(populationInfo);
+        wrapper.setPopulationRuleInfo(populationRuleInfo);
+        wrapper.setId(populationInfo.getId());
+    }
+    
+    public List<PopulationInfo> getChildPopulations(List<String> childPopulationIds) throws Exception{
+        ContextInfo context = ContextInfo.createDefaultContextInfo();
+        List<PopulationInfo> childPopulations = new ArrayList<PopulationInfo>(); 
+        for (String id : childPopulationIds){
+            PopulationInfo populationInfo = getPopulationService().getPopulation(id, context);
+            childPopulations.add(populationInfo);
+        }
+        return childPopulations;
     }
 
     /**
@@ -148,6 +188,14 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
             populationInfo.setTypeKey(PopulationServiceConstants.POPULATION_STUDENT_TYPE_KEY);
             PopulationRuleInfo populationRuleInfo = wrapper.getPopulationRuleInfo();
             populationRuleInfo.setStateKey(PopulationServiceConstants.POPULATION_RULE_ACTIVE_STATE_KEY);
+            populationRuleInfo.setVariesByTime(false);
+            populationRuleInfo.setSupportsGetMembers(false);
+            if (wrapper.isCreateByRule()) {
+                populationRuleInfo.setTypeKey(PopulationServiceConstants.POPULATION_RULE_TYPE_RULE_KEY);
+            }
+            else {
+                populationRuleInfo.setTypeKey(wrapper.getOperationType());
+            }
         }
         super.prepareForSave();
     }
@@ -157,13 +205,6 @@ public class PopulationWrapperMaintainableImpl extends MaintainableImpl implemen
             populationService = (PopulationService) GlobalResourceLoader.getService(new QName(PopulationServiceConstants.NAMESPACE, "PopulationService"));
         }
         return populationService;
-    }
-
-    public ContextInfo getContextInfo() {
-        if (contextInfo == null) {
-            contextInfo = ContextBuilder.loadContextInfo();
-        }
-        return contextInfo;
     }
 
 }

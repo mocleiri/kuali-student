@@ -101,7 +101,7 @@ public class TermRelatedBoTest extends AbstractBoTest {
 		// Term
 		TermDefinition termDefinition = 
 			TermDefinition.Builder.create(null, TermSpecificationDefinition.Builder.create(outputTermSpec), Collections.singletonList(termParamBuilder)).build();
-		termBoService.createTerm(termDefinition);
+		termBoService.createTermDefinition(termDefinition);
 	}
 	
 }

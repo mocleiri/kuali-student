@@ -39,11 +39,11 @@ import org.w3c.dom.Element;
         "id", "typeKey", "stateKey", "descr", "courseId",
         "termId", "courseCode", "courseOfferingCode", "courseNumberSuffix", "courseOfferingTitle",
         "creditCnt", "isHonorsOffering", "instructors", "subjectArea", "unitsDeploymentOrgIds",
-        "unitsContentOwnerOrgIds",  "maximumEnrollment",
-        "minimumEnrollment", "jointOfferingIds", "gradingOptionId",
+        "unitsContentOwnerOrgIds",  "maximumEnrollment", 
+        "minimumEnrollment", "jointOfferingIds", "gradingOptionId", "gradingOption",
         "studentRegistrationGradingOptions", "creditOptionDisplay", "creditOptionId",
-        "waitlistLevelTypeKey", "waitlistMaximum", "hasWaitlist", "waitlistTypeKey","campusLocations",
-        "isEvaluated", "fundingSource", "isFeeAtActivityOffering",
+        "waitlistLevelTypeKey", "waitlistMaximum", "hasWaitlist", "waitlistTypeKey","campusLocations", 
+        "isEvaluated", "fundingSource", "isFeeAtActivityOffering", "courseNumberInternalSuffix",
         "isFinancialAidEligible", "courseOfferingURL", "finalExamType",
         "meta", "attributes", "_futureElements"})
 
@@ -96,11 +96,13 @@ public class CourseOfferingInfo
     private String gradingOptionId;
 
     @XmlAnyElement
+    private String gradingOption;
+
+    @XmlAnyElement
     private String creditCnt;
 
     @XmlElement
     private List<String> studentRegistrationGradingOptions;
-
 
     @XmlElement
     private String creditOptionDisplay;
@@ -150,6 +152,9 @@ public class CourseOfferingInfo
     @XmlAnyElement
     private List<Element> _futureElements;
 
+    @XmlElement
+    private String courseNumberInternalSuffix;
+
     /**
      * Constructs a new CourseOfferingInfo.
      */
@@ -176,9 +181,11 @@ public class CourseOfferingInfo
         
 
         this.courseOfferingTitle = offering.getCourseOfferingTitle();
+        this.courseCode = offering.getCourseCode();
         this.courseOfferingCode = offering.getCourseOfferingCode();
         this.courseOfferingCode = offering.getCourseOfferingCode();
         this.courseNumberSuffix = offering.getCourseNumberSuffix();
+        this.courseNumberInternalSuffix = offering.getCourseNumberInternalSuffix();
         this.subjectArea = offering.getSubjectArea();
         this.isHonorsOffering = offering.getIsHonorsOffering();
 
@@ -191,6 +198,8 @@ public class CourseOfferingInfo
         this.unitsContentOwnerOrgIds = offering.getUnitsContentOwnerOrgIds();
 
         this.gradingOptionId =  offering.getGradingOptionId();
+        this.creditCnt = offering.getCreditCnt();
+        this.gradingOption = offering.getGradingOption();
         this.studentRegistrationGradingOptions = (null != offering.getStudentRegistrationGradingOptions()) ? new ArrayList<String>(offering.getStudentRegistrationGradingOptions()) : null;
         this.creditOptionDisplay = offering.getCreditOptionDisplay();
         this.creditOptionId = offering.getCreditOptionId();
@@ -260,6 +269,15 @@ public class CourseOfferingInfo
     }
 
     @Override
+    public String getCourseCode() {
+        return this.courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    @Override
     public String getCourseOfferingCode() {
         return this.courseOfferingCode;
     }
@@ -275,6 +293,15 @@ public class CourseOfferingInfo
 
     public void setCourseNumberSuffix(String courseNumberSuffix) {
         this.courseNumberSuffix = courseNumberSuffix;
+    }
+
+    @Override
+    public String getCourseNumberInternalSuffix() {
+        return courseNumberInternalSuffix;
+    }
+
+    public void setCourseNumberInternalSuffix(String courseNumberInternalSuffix) {
+        this.courseNumberInternalSuffix = courseNumberInternalSuffix;
     }
 
     @Override
@@ -494,7 +521,7 @@ public class CourseOfferingInfo
 
    
     
-    public void setIsFeeAtActivityOffering(Boolean isFeeAtActivityOffering) {
+     public void setIsFeeAtActivityOffering(Boolean isFeeAtActivityOffering) {
 		this.isFeeAtActivityOffering = isFeeAtActivityOffering;
 	}
 
@@ -517,6 +544,15 @@ public class CourseOfferingInfo
 	}
 
     @Override
+    public String getGradingOption() {
+        return gradingOption;
+    }
+
+    public void setGradingOption(String gradingOption) {
+       this.gradingOption = gradingOption;
+    }
+
+    @Override
     public String getCreditCnt() {
         return creditCnt;
     }
@@ -525,14 +561,6 @@ public class CourseOfferingInfo
         this.creditCnt = creditCnt;
     }
 
-    @Override
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
 
     @Override
     public String toString() {

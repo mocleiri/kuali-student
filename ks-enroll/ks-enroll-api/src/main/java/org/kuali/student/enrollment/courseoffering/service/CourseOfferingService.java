@@ -473,7 +473,35 @@ public interface CourseOfferingService extends CourseOfferingServiceBusinessLogi
             InvalidParameterException, MissingParameterException, 
             OperationFailedException, PermissionDeniedException, ReadOnlyException;
 
-    
+    /**
+    * Creates a new course offering based on the source course offering.
+    *
+    * Fields in course offering will be initialized with data from the source
+    * course offering.
+    * .
+    *
+    * @param sourceCourseOfferingId  The id of the course offering to be rolled over.
+    * @param targetTermId Unique key of the term in which the course is rolled over into
+    * @param optionKeys keys that control optional processing
+    * @param context      Context information containing the principalId and locale
+    *                     information about the caller of service operation
+    * @return newly created CourseOfferingInfo
+    * @throws DoesNotExistException        sourceCoId not found
+    * @throws AlreadyExistsException       if the course offering already exists in the target term and
+    *                                      skip if already exists option is specified
+    * @throws DataValidationErrorException data in system is not valid or not valid for an option key specified
+    * @throws InvalidParameterException    One or more parameters invalid
+    * @throws MissingParameterException    One or more parameters missing
+    * @throws OperationFailedException     unable to complete request
+    * @throws PermissionDeniedException    authorization failure
+    */
+   @Override
+   public CourseOfferingInfo copyCourseOffering(@WebParam(name = "sourceCourseOfferingId") String sourceCourseOfferingId,  @WebParam(name = "targetTermId") String targetTermId, @WebParam(name = "optionKeys") List<String> optionKeys,  @WebParam(name = "context") ContextInfo context) throws AlreadyExistsException,
+           DoesNotExistException, DataValidationErrorException,
+           InvalidParameterException, MissingParameterException,
+           OperationFailedException, PermissionDeniedException, ReadOnlyException;
+
+
     /**
      * Updates an existing CourseOffering.
      *
@@ -1590,35 +1618,5 @@ public interface CourseOfferingService extends CourseOfferingServiceBusinessLogi
      * @throws PermissionDeniedException
      */
     public List<String> searchForSeatpoolDefinitionIds(@WebParam(name = "criteria") QueryByCriteria criteria, @WebParam(name = "context") ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
-
-    /**
-     * Retrieves a single Term by a Term Id.
-     *
-     * @param termId      the identifier for the Term to be retrieved
-     * @param contextInfo information containing the principalId and locale
-     *                    information about the caller of service operation
-     * @return the Term requested
-     * @throws DoesNotExistException     termIs is not found
-     * @throws InvalidParameterException contextInfo isnot valid
-     * @throws MissingParameterException termId or contextInfo is missing or
-     *                                   null
-     * @throws OperationFailedException  unable to complete request
-     * @throws PermissionDeniedException an authorization failure occurred
-     */
-    public TermInfo getTerm(@WebParam(name = "termId") String termId, @WebParam(name = "contextInfo") ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
-
-    /**
-     * Gets the valid Term types.
-     *
-     * @param contextInfo information containing the principalId and locale
-     *                    information about the caller of service operation
-     * @return a list of valid Term Types
-     * @throws InvalidParameterException contextInfo is not value
-     * @throws MissingParameterException contextInfo is missing or null
-     * @throws OperationFailedException  unable to complete request
-     * @throws PermissionDeniedException an authorization failure occurred
-     */
-    public List<TypeInfo> getTermTypes(@WebParam(name = "contextInfo") ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
-
 
 }

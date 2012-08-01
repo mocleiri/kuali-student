@@ -53,6 +53,11 @@
         ID="kuali.format.offering.process"
         NAME="kuali.format.offering.process" VER_NBR="1"/>
     <KSEN_STATE_LIFECYCLE CREATEID="SYSTEMLOADER"
+        CREATETIME="20120717000000"
+        DESCR_FORMATTED="kuali.hold.issue.process state lifecycle"
+        DESCR_PLAIN="kuali.hold.issue.process state lifecycle"
+        ID="kuali.hold.issue.process" NAME="kuali.hold.issue.process" VER_NBR="1"/>
+    <KSEN_STATE_LIFECYCLE CREATEID="SYSTEMLOADER"
         CREATETIME="20120301000000"
         DESCR_FORMATTED="kuali.lpr.lifecycle.instructor.course.assignment state lifecycle"
         DESCR_PLAIN="kuali.lpr.lifecycle.instructor.course.assignment state lifecycle"
@@ -74,4 +79,28 @@
         DESCR_PLAIN="kuali.population.population.rule.lifecycle state lifecycle"
         ID="kuali.population.population.rule.lifecycle"
         NAME="kuali.population.population.rule.lifecycle" VER_NBR="0"/>
+    <KSEN_STATE_LIFECYCLE CREATEID="SYSTEMLOADER"
+        CREATETIME="20120730000000"
+        DESCR_FORMATTED="kuali.process.check.lifecycle state lifecycle"
+        DESCR_PLAIN="kuali.process.check.lifecycle state lifecycle"
+        ID="kuali.process.check.lifecycle"
+        NAME="kuali.process.check.lifecycle" VER_NBR="1"/>
+    <KSEN_STATE_LIFECYCLE CREATEID="SYSTEMLOADER"
+        CREATETIME="20120730000000"
+        DESCR_FORMATTED="kuali.process.instruction.lifecycle state lifecycle"
+        DESCR_PLAIN="kuali.process.instruction.lifecycle state lifecycle"
+        ID="kuali.process.instruction.lifecycle"
+        NAME="kuali.process.instruction.lifecycle" VER_NBR="1"/>
+    <KSEN_STATE_LIFECYCLE CREATEID="SYSTEMLOADER"
+        CREATETIME="20120730000000"
+        DESCR_FORMATTED="kuali.process.process.lifecycle state lifecycle"
+        DESCR_PLAIN="kuali.process.process.lifecycle state lifecycle"
+        ID="kuali.process.process.lifecycle"
+        NAME="kuali.process.process.lifecycle" VER_NBR="1"/>
+    <KSEN_STATE_LIFECYCLE CREATEID="SYSTEMLOADER"
+        CREATETIME="20120301000000"
+        DESCR_FORMATTED="kuali.soc.rollover.result.process state lifecycle"
+        DESCR_PLAIN="kuali.soc.rollover.result.process state lifecycle"
+        ID="kuali.soc.rollover.result.process"
+        NAME="kuali.soc.rollover.result.process" VER_NBR="1"/>
 </dataset>

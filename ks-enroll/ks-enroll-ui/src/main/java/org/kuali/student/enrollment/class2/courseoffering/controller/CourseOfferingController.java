@@ -5,15 +5,13 @@ import org.kuali.rice.core.api.criteria.Predicate;
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.core.api.util.RiceKeyConstants;
+import org.kuali.rice.krad.uif.UifParameters;
+import org.kuali.rice.krad.uif.util.ObjectPropertyUtils;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.web.controller.MaintenanceDocumentController;
 import org.kuali.rice.krad.web.form.MaintenanceForm;
-import org.kuali.student.common.search.dto.SearchParam;
-import org.kuali.student.common.search.dto.SearchRequest;
-import org.kuali.student.common.search.dto.SearchResult;
-import org.kuali.student.common.search.dto.SearchResultCell;
-import org.kuali.student.common.search.dto.SearchResultRow;
+import org.kuali.student.common.search.dto.*;
 import org.kuali.student.enrollment.acal.constants.AcademicCalendarServiceConstants;
 import org.kuali.student.enrollment.acal.dto.TermInfo;
 import org.kuali.student.enrollment.acal.service.AcademicCalendarService;
@@ -21,15 +19,23 @@ import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingCrea
 import org.kuali.student.enrollment.class2.courseoffering.dto.ExistingCourseOffering;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingResourceLoader;
 import org.kuali.student.enrollment.class2.courseoffering.util.ViewHelperUtil;
+import org.kuali.student.enrollment.courseoffering.dto.ActivityOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
+import org.kuali.student.enrollment.courseoffering.dto.FormatOfferingInfo;
+import org.kuali.student.enrollment.courseoffering.dto.OfferingInstructorInfo;
 import org.kuali.student.enrollment.courseoffering.service.CourseOfferingService;
 import org.kuali.student.enrollment.courseofferingset.service.CourseOfferingSetService;
 import org.kuali.student.lum.course.dto.CourseInfo;
 import org.kuali.student.lum.course.service.CourseService;
 import org.kuali.student.lum.lu.service.LuService;
+import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.util.ContextUtils;
+import org.kuali.student.r2.common.util.constants.CourseOfferingSetServiceConstants;
+import org.kuali.student.r2.common.util.constants.LuiServiceConstants;
 import org.kuali.student.r2.core.type.service.TypeService;
+import org.kuali.student.r2.lum.lrc.dto.ResultValuesGroupInfo;
+import org.kuali.student.r2.lum.lrc.service.LRCService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.kuali.rice.core.api.criteria.PredicateFactory.equal;
@@ -55,6 +62,7 @@ public class CourseOfferingController extends MaintenanceDocumentController {
     private CourseOfferingSetService socService;
     private ContextInfo contextInfo;
     private TypeService typeService;
+    private transient LRCService lrcService;
 
     @RequestMapping(params = "methodToCall=loadCourseCatalog")
     public ModelAndView loadCourseCatalog(@ModelAttribute("KualiForm") MaintenanceForm form, BindingResult result,
@@ -76,7 +84,7 @@ public class CourseOfferingController extends MaintenanceDocumentController {
 
         if (course != null && term != null) {
             coWrapper.setCourse(course);
-            coWrapper.setCreditCount(course.getCreditOptions().get(0).getResultValues().get(0));
+            coWrapper.setCreditCount(ViewHelperUtil.trimTrailing0(course.getCreditOptions().get(0).getResultValues().get(0)));
             coWrapper.setShowAllSections(true);
             coWrapper.setShowCatalogLink(false);
             coWrapper.setShowTermOfferingLink(true);
@@ -88,11 +96,9 @@ public class CourseOfferingController extends MaintenanceDocumentController {
             coWrapper.getExistingCourseOfferings().clear();
 
             for (CourseOfferingInfo courseOfferingInfo : courseOfferingInfos) {
-                ExistingCourseOffering co = new ExistingCourseOffering();
-                co.setCourseOfferingCode(courseOfferingInfo.getCourseOfferingCode());
-                co.setCourseTitle(courseOfferingInfo.getCourseOfferingTitle());
+                ExistingCourseOffering co = new ExistingCourseOffering(courseOfferingInfo);
                 co.setCredits(ViewHelperUtil.getCreditCount(courseOfferingInfo, course));
-                co.setGrading(courseOfferingInfo.getGradingOptionId());
+                co.setGrading(getGradingOption(courseOfferingInfo.getGradingOptionId()));
                 coWrapper.getExistingCourseOfferings().add(co);
             }
 
@@ -100,16 +106,14 @@ public class CourseOfferingController extends MaintenanceDocumentController {
             coWrapper.setNoOfTermOfferings(courseOfferingInfos.size());
 
             for (CourseOfferingInfo courseOfferingInfo : courseOfferingInfos) {
-                ExistingCourseOffering co = new ExistingCourseOffering();
+                ExistingCourseOffering co = new ExistingCourseOffering(courseOfferingInfo);
                 TermInfo termInfo = getAcademicCalendarService().getTerm(courseOfferingInfo.getTermId(),getContextInfo());
                 if (StringUtils.isNotBlank(courseOfferingInfo.getGradingOptionId())){
 
                 }
                 co.setTermCode(termInfo.getName());
-                co.setCourseOfferingCode(courseOfferingInfo.getCourseOfferingCode());
-                co.setCourseTitle(courseOfferingInfo.getCourseOfferingTitle());
                 co.setCredits(ViewHelperUtil.getCreditCount(courseOfferingInfo, course));
-                co.setGrading(courseOfferingInfo.getGradingOptionId());
+                co.setGrading(getGradingOption(courseOfferingInfo.getGradingOptionId()));
                 coWrapper.getExistingTermOfferings().add(co);
             }
 
@@ -117,13 +121,14 @@ public class CourseOfferingController extends MaintenanceDocumentController {
 
             if (course == null && term == null){
                 GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, RiceKeyConstants.ERROR_CUSTOM, "Both Catalog Course Code and Target Term are invalid");
+                coWrapper.setInvalidTargetTermError("Target Term, Catalog Course Code invalid"); // Temp error message, will be removed once the above error works
             } else {
                 if (term == null) {
                     GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, RiceKeyConstants.ERROR_CUSTOM, "Invalid Target Term");
-                    coWrapper.setInvalidTargetTermError("Invalid Target Term");
+                    coWrapper.setInvalidTargetTermError("Invalid Target Term"); // Temp error message, will be removed once the above error works
                 } else if (course == null) {
                     GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, RiceKeyConstants.ERROR_CUSTOM, "Invalid Catalog Course Code");
-                    coWrapper.setInvalidCatalogCourseCodeError("Invalid Catalog Course Code");
+                    coWrapper.setInvalidCatalogCourseCodeError("Invalid Catalog Course Code"); // Temp error message, will be removed once the above error works
                 }
             }
             coWrapper.clear();
@@ -131,6 +136,18 @@ public class CourseOfferingController extends MaintenanceDocumentController {
         }
 
         return getUIFModelAndView(form);
+    }
+
+    private String getGradingOption(String gradingOptionId)throws Exception{
+        String gradingOption = "";
+        if(StringUtils.isNotBlank(gradingOptionId)){
+            ResultValuesGroupInfo rvg = getLrcService().getResultValuesGroup(gradingOptionId, getContextInfo());
+            if(rvg!= null && StringUtils.isNotBlank(rvg.getName())){
+               gradingOption = rvg.getName();
+            }
+        }
+
+        return gradingOption;
     }
 
     @RequestMapping(params = "methodToCall=createFromCatalog")
@@ -143,6 +160,140 @@ public class CourseOfferingController extends MaintenanceDocumentController {
         wrapper.setShowTermOfferingLink(true);
 
         return getUIFModelAndView(form);
+    }
+
+    @RequestMapping(params = "methodToCall=copyExistingCourseOffering")
+    public ModelAndView copyExistingCourseOffering(@ModelAttribute("KualiForm") MaintenanceForm form, BindingResult result,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        CourseOfferingInfo existingCO = ((ExistingCourseOffering)getSelectedObject(form)).getCourseOfferingInfo();
+        CourseOfferingCreateWrapper wrapper = (CourseOfferingCreateWrapper)form.getDocument().getNewMaintainableObject().getDataObject();
+
+        List<String> optionKeys = new ArrayList<String>();
+
+        if (wrapper.isExcludeInstructorInformation()){
+            optionKeys.add(CourseOfferingSetServiceConstants.NO_INSTRUCTORS_OPTION_KEY);
+        }
+
+        if (wrapper.isExcludeCancelledActivityOfferings()){
+            optionKeys.add("exclude cancel AO");
+        }
+
+        if (wrapper.isExcludeSchedulingInformation()){
+            optionKeys.add(CourseOfferingSetServiceConstants.NO_SCHEDULE_OPTION_KEY);
+        }
+
+        if (wrapper.isExcludeInstructorInformation()){
+            optionKeys.add(CourseOfferingSetServiceConstants.NO_INSTRUCTORS_OPTION_KEY);
+        }
+
+        CourseOfferingInfo newCO = copyCourseOffering(wrapper,existingCO,optionKeys);
+
+        CourseOfferingCreateWrapper createWrapper = (CourseOfferingCreateWrapper)form.getDocument().getNewMaintainableObject().getDataObject();
+
+        ExistingCourseOffering newWrapper = new ExistingCourseOffering(newCO);
+
+        CourseInfo course = getCourseInfo(existingCO.getCourseCode());
+        newWrapper.setCredits(ViewHelperUtil.getCreditCount(newCO, course));
+        newWrapper.setGrading(getGradingOption(newCO.getGradingOptionId()));
+        createWrapper.getExistingTermOfferings().add(newWrapper);
+
+
+        return getUIFModelAndView(form);
+
+    }
+
+    private CourseOfferingInfo copyCourseOffering(CourseOfferingCreateWrapper wrapper,CourseOfferingInfo sourceCo,List<String> optionKeys){
+        CourseOfferingInfo targetCo = new CourseOfferingInfo(sourceCo);
+        targetCo.setId(null);
+
+        // clear out the ids on the internal sub-objects too
+        for (OfferingInstructorInfo instr : targetCo.getInstructors()) {
+            instr.setId(null);
+        }
+
+        for (AttributeInfo attr : targetCo.getAttributes()) {
+            attr.setId(null);
+        }
+        targetCo.setMeta(null);
+
+        if (optionKeys.contains(CourseOfferingSetServiceConstants.NO_INSTRUCTORS_OPTION_KEY)) {
+            targetCo.getInstructors().clear();
+        }
+
+        targetCo.setStateKey(LuiServiceConstants.LUI_CO_STATE_DRAFT_KEY);
+
+        try{
+            targetCo = getCourseOfferingService().createCourseOffering(targetCo.getCourseId(), targetCo.getTermId(), targetCo.getTypeKey(), targetCo, optionKeys, getContextInfo());
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+
+        List<FormatOfferingInfo> foInfos = null;
+        try {
+            foInfos = this.getCourseOfferingService().getFormatOfferingsByCourseOffering(sourceCo.getId(), getContextInfo());
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+
+
+        int aoCount = 0;
+        for (FormatOfferingInfo sourceFo : foInfos) {
+            FormatOfferingInfo targetFo = new FormatOfferingInfo(sourceFo);
+            targetFo.setId(null);
+            // clear out the ids on the internal sub-objects
+            for (AttributeInfo attr : targetFo.getAttributes()) {
+                attr.setId(null);
+            }
+            targetFo.setCourseOfferingId(targetCo.getId());
+            targetFo.setMeta(null);
+            targetFo.setStateKey(LuiServiceConstants.LUI_FO_STATE_DRAFT_KEY);
+
+            try {
+                targetFo = getCourseOfferingService().createFormatOffering(targetFo.getCourseOfferingId(), targetFo.getFormatId(), targetFo.getTypeKey(), targetFo, getContextInfo());
+            }catch(Exception e){
+                throw new RuntimeException(e);
+            }
+
+            List<ActivityOfferingInfo> aoInfoList = null;
+            try {
+                aoInfoList = getCourseOfferingService().getActivityOfferingsByFormatOffering(sourceFo.getId(), getContextInfo());
+            }catch(Exception e){
+                throw new RuntimeException(e);
+            }
+
+            for (ActivityOfferingInfo sourceAo : aoInfoList) {
+                ActivityOfferingInfo targetAo = new ActivityOfferingInfo(sourceAo);
+                targetAo.setId(null);
+                // clear out the ids on the internal sub-objects
+                for (AttributeInfo attr : targetAo.getAttributes()) {
+                    attr.setId(null);
+                }
+                for (OfferingInstructorInfo instr : targetAo.getInstructors()) {
+                    instr.setId(null);
+                }
+                targetAo.setFormatOfferingId(targetFo.getId());
+                targetAo.setMeta(null);
+
+                if (optionKeys.contains(CourseOfferingSetServiceConstants.NO_SCHEDULE_OPTION_KEY)) {
+                    targetAo.setScheduleId(null);
+                    // TODO: set the schedule request to null as well
+                }
+
+                if (optionKeys.contains(CourseOfferingSetServiceConstants.NO_INSTRUCTORS_OPTION_KEY)) {
+                    targetAo.getInstructors().clear();
+                }
+
+                targetAo.setStateKey(LuiServiceConstants.LUI_AO_STATE_DRAFT_KEY);
+                try {
+                    targetAo = getCourseOfferingService().createActivityOffering(targetAo.getFormatOfferingId(), targetAo.getActivityId(),targetAo.getTypeKey(), targetAo, getContextInfo());
+                }catch(Exception e){
+                    throw new RuntimeException(e);
+                }
+                aoCount++;
+            }
+        }
+        return targetCo;
     }
 
     @RequestMapping(params = "methodToCall=createFromTermOffering")
@@ -182,6 +333,28 @@ public class CourseOfferingController extends MaintenanceDocumentController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private Object getSelectedObject(MaintenanceForm theForm){
+        String selectedCollectionPath = theForm.getActionParamaterValue(UifParameters.SELLECTED_COLLECTION_PATH);
+        if (StringUtils.isBlank(selectedCollectionPath)) {
+            throw new RuntimeException("Selected collection was not set");
+        }
+
+        int selectedLineIndex = -1;
+        String selectedLine = theForm.getActionParamaterValue(UifParameters.SELECTED_LINE_INDEX);
+        if (StringUtils.isNotBlank(selectedLine)) {
+            selectedLineIndex = Integer.parseInt(selectedLine);
+        }
+
+        if (selectedLineIndex == -1) {
+            throw new RuntimeException("Selected line index was not set");
+        }
+
+        Collection<Object> collection = ObjectPropertyUtils.getPropertyValue(theForm, selectedCollectionPath);
+        Object selectedObject = ((List<Object>) collection).get(selectedLineIndex);
+
+        return selectedObject;
     }
 
     public ContextInfo getContextInfo() {
@@ -283,4 +456,10 @@ public class CourseOfferingController extends MaintenanceDocumentController {
         return socService;
     }
 
+   protected LRCService getLrcService() {
+        if(lrcService == null) {
+            lrcService = CourseOfferingResourceLoader.loadLrcService();
+        }
+        return this.lrcService;
+    }
 }

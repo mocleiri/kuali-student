@@ -32,7 +32,6 @@ import org.kuali.rice.core.api.membership.MemberType;
 import org.kuali.rice.kim.framework.type.KimTypeService;
 
 import javax.jws.WebParam;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * @author nwright
@@ -236,14 +235,6 @@ public class RoleServiceMockImpl implements RoleService {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean principalHasRole(@WebParam(name = "principalId") String principalId,
-                                    @WebParam(name = "roleIds") List<String> roleIds,
-                                    @WebParam(name = "qualification")  Map<String, String> qualification,
-                                    boolean checkDelegations) throws RiceIllegalArgumentException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /**
@@ -581,21 +572,6 @@ public class RoleServiceMockImpl implements RoleService {
     }
 
     @Override
-    public DelegateMember updateDelegateMember(@WebParam(name = "delegateMember") DelegateMember delegateMember) throws RiceIllegalArgumentException, RiceIllegalStateException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public DelegateMember createDelegateMember(@WebParam(name = "delegateMember") DelegateMember delegateMember) throws RiceIllegalArgumentException, RiceIllegalStateException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void removeDelegateMembers(@WebParam(name = "delegateMembers") List<DelegateMember> delegateMembers) throws RiceIllegalArgumentException, RiceIllegalStateException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public Role createRole(Role role) throws RiceIllegalArgumentException, RiceIllegalStateException {
           throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -641,16 +617,6 @@ public class RoleServiceMockImpl implements RoleService {
     @Override
     public void revokePermissionFromRole(String permissionId, String roleId) throws RiceIllegalArgumentException {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isDerivedRole(@WebParam(name = "roleId") String roleId) throws RiceIllegalArgumentException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public boolean isDynamicRoleMembership(@WebParam(name = "roleId") String roleId) throws RiceIllegalArgumentException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
 

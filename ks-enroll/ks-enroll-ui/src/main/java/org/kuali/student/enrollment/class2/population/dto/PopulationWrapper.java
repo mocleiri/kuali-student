@@ -21,6 +21,7 @@ import org.kuali.student.r2.core.population.dto.PopulationInfo;
 import org.kuali.student.r2.core.population.dto.PopulationRuleInfo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 //import java.util.ArrayList;
 //import java.util.List;
@@ -33,27 +34,28 @@ import java.util.List;
 public class PopulationWrapper implements Serializable {
     private String id;
     private PopulationInfo populationInfo; //The core info (name+description+meta)
-    private PopulationRuleInfo  populationRuleInfo;
+    private PopulationRuleInfo populationRuleInfo;
     private String keyword;
     private String operationType;
+    private String operationTypeText;
     private String populationRuleTypeKeyName;
     private String populationStateKeyName;
     private boolean createByRule;
-    private boolean inCreateMode;
     private boolean enableCreateButton;
     private String pageTitle;
 
     private List<PopulationInfo> childPopulations;
+    private PopulationInfo referencePopulation;
 
     public PopulationWrapper(){
         createByRule = true;
-        inCreateMode = true;
         enableCreateButton = true;
         operationType = PopulationServiceConstants.POPULATION_RULE_TYPE_UNION_KEY;
         pageTitle="Create a New Population";
         populationInfo = new PopulationInfo();
         populationRuleInfo = new PopulationRuleInfo();
-
+        childPopulations = new ArrayList<PopulationInfo>();
+        referencePopulation = new PopulationInfo();
     }
 
     public String getId() {
@@ -96,6 +98,14 @@ public class PopulationWrapper implements Serializable {
         this.operationType = operationType;
     }
 
+    public String getOperationTypeText() {
+        return operationTypeText;
+    }
+
+    public void setOperationTypeText(String operationTypeText) {
+        this.operationTypeText = operationTypeText;
+    }
+
     public String getPopulationRuleTypeKeyName() {
         return populationRuleTypeKeyName;
     }
@@ -118,14 +128,6 @@ public class PopulationWrapper implements Serializable {
 
     public void setCreateByRule(boolean createByRule) {
         this.createByRule = createByRule;
-    }
-
-    public boolean isInCreateMode() {
-        return inCreateMode;
-    }
-
-    public void setInCreateMode(boolean inCreateMode) {
-        this.inCreateMode = inCreateMode;
     }
 
     public boolean isEnableCreateButton() {
@@ -151,5 +153,14 @@ public class PopulationWrapper implements Serializable {
     public void setChildPopulations(List<PopulationInfo> childPopulations) {
         this.childPopulations = childPopulations;
     }
+
+    public PopulationInfo getReferencePopulation() {
+        return referencePopulation;
+    }
+
+    public void setReferencePopulation(PopulationInfo referencePopulation) {
+        this.referencePopulation = referencePopulation;
+    }
+
 
 }

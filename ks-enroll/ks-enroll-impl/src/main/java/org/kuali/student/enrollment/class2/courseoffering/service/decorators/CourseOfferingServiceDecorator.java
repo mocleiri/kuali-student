@@ -467,6 +467,13 @@ public class CourseOfferingServiceDecorator implements CourseOfferingService {
     }
 
     @Override
+    public CourseOfferingInfo copyCourseOffering(String sourceCoId, String targetTermId, List<String> optionKeys, ContextInfo context) throws AlreadyExistsException,
+            DataValidationErrorException, DoesNotExistException, DataValidationErrorException, InvalidParameterException,
+            MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
+        return getNextDecorator().copyCourseOffering(sourceCoId, targetTermId, optionKeys, context);
+    }
+
+    @Override
     public List<String> getValidRolloverOptionKeys(ContextInfo context) throws InvalidParameterException,
             MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
         return getNextDecorator().getValidRolloverOptionKeys(context);
@@ -479,16 +486,6 @@ public class CourseOfferingServiceDecorator implements CourseOfferingService {
     }
 
 
-    @Override
-    public TermInfo getTerm(String termId, ContextInfo context) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getTerm(termId, context);
-    }
-
-    @Override
-    public List<TypeInfo> getTermTypes(ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
-        return getNextDecorator().getTermTypes(context);
-    }
-
 	@Override
 	public StatusInfo addSeatPoolDefinitionToActivityOffering(
 			String seatPoolDefinitionId, String activityOfferingId,
@@ -497,7 +494,7 @@ public class CourseOfferingServiceDecorator implements CourseOfferingService {
 			MissingParameterException, OperationFailedException,
 			PermissionDeniedException {
 		return getNextDecorator().addSeatPoolDefinitionToActivityOffering(seatPoolDefinitionId, activityOfferingId, contextInfo);
-				
+
 	}
 
 	@Override
@@ -516,7 +513,7 @@ public class CourseOfferingServiceDecorator implements CourseOfferingService {
 			OperationFailedException, PermissionDeniedException
 			 {
 		return getNextDecorator().deleteActivityOfferingCascaded(activityOfferingId, context);
-	} 
-    
-    
+	}
+
+
 }

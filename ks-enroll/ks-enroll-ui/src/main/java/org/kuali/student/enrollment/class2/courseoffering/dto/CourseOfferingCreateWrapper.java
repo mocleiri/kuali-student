@@ -28,7 +28,6 @@ public class CourseOfferingCreateWrapper implements Serializable{
 
     private CourseInfo course;
     private CourseOfferingInfo coInfo;
-
     private TermInfo term;
 
     private List<FormatOfferingInfo> formatOfferingList;
@@ -40,11 +39,12 @@ public class CourseOfferingCreateWrapper implements Serializable{
     private String invalidCatalogCourseCodeError;
     private String invalidTargetTermError;
 
+    private boolean excludeCancelledActivityOfferings;
+    private boolean excludeSchedulingInformation;
+    private boolean excludeInstructorInformation;
+
     public CourseOfferingCreateWrapper(){
-        showCatalogLink = false;
         showTermOfferingLink = true;
-        showAllSections = false;
-        enableCreateButton = false;
         formatOfferingList = new ArrayList<FormatOfferingInfo>();
         existingCourseOfferings = new ArrayList<ExistingCourseOffering>();
         existingTermOfferings = new ArrayList<ExistingCourseOffering>();
@@ -201,6 +201,30 @@ public class CourseOfferingCreateWrapper implements Serializable{
         this.invalidTargetTermError = invalidTargetTermError;
     }
 
+    public boolean isExcludeCancelledActivityOfferings() {
+        return excludeCancelledActivityOfferings;
+    }
+
+    public void setExcludeCancelledActivityOfferings(boolean excludeCancelledActivityOfferings) {
+        this.excludeCancelledActivityOfferings = excludeCancelledActivityOfferings;
+    }
+
+    public boolean isExcludeSchedulingInformation() {
+        return excludeSchedulingInformation;
+    }
+
+    public void setExcludeSchedulingInformation(boolean excludeSchedulingInformation) {
+        this.excludeSchedulingInformation = excludeSchedulingInformation;
+    }
+
+    public boolean isExcludeInstructorInformation() {
+        return excludeInstructorInformation;
+    }
+
+    public void setExcludeInstructorInformation(boolean excludeInstructorInformation) {
+        this.excludeInstructorInformation = excludeInstructorInformation;
+    }
+
     public void clear(){
         setCourse(null);
         setShowAllSections(false);
@@ -209,5 +233,8 @@ public class CourseOfferingCreateWrapper implements Serializable{
         getExistingCourseOfferings().clear();
         setNoOfTermOfferings(0);
         setEnableCreateButton(false);
+        setExcludeCancelledActivityOfferings(false);
+        setExcludeSchedulingInformation(false);
+        setExcludeInstructorInformation(false);
     }
 }
