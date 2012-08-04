@@ -4,7 +4,6 @@
 
 drop table KSA.KSSA_CONFIG cascade constraints;
 
-
 drop table KSA.KSSA_ACNT cascade constraints;
 drop table KSA.KSSA_ACNT_PROTECTED_INFO cascade constraints;
 drop table KSA.KSSA_ACNT_STATUS_TYPE cascade constraints;
@@ -13,6 +12,7 @@ drop table KSA.KSSA_ACTIVITY_TYPE cascade constraints;
 drop table KSA.KSSA_ALLOCATION cascade constraints;
 drop table KSA.KSSA_BANK_TYPE cascade constraints;
 drop table KSA.KSSA_BATCH_RECEIPT cascade constraints;
+drop table KSA.KSSA_BILL_AUTHORITY cascade constraints;
 drop table KSA.KSSA_CREDIT_PERMISSION cascade constraints;
 drop table KSA.KSSA_CURRENCY cascade constraints;
 drop table KSA.KSSA_DOCUMENT cascade constraints;

@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "KSSA_PERSON_NAME")
-public class PersonName extends AccountIdAware implements Identifiable {
+public class PersonName implements Identifiable {
 
     /**
      * Person name ID
