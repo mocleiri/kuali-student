@@ -13,7 +13,8 @@ alter table KSA.KSSA_BATCH_RECEIPT add constraint FK6961BF2A4861130D foreign key
 alter table KSA.KSSA_BATCH_RECEIPT add constraint FK6961BF2A98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_BATCH_RECEIPT add constraint FK6961BF2A8016ED3 foreign key (OUTGOING_XML_ID_FK) references KSA.KSSA_XML;
 alter table KSA.KSSA_CREDIT_PERMISSION add constraint FK1F74048CBC57B259 foreign key (TRANSACTION_TYPE_ID_FK, TRANSACTION_TYPE_SUB_CODE_FK) references KSA.KSSA_TRANSACTION_TYPE;
-alter table KSA.KSSA_ELECTRONIC_CONTACT add constraint FK77758E6698518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_ELECTRONIC_CONTACT_ACNT add constraint FKED3ACBA198518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_ELECTRONIC_CONTACT_ACNT add constraint FKED3ACBA1E5947A1E foreign key (ELECTRONIC_CONTACT_ID_FK) references KSA.KSSA_ELECTRONIC_CONTACT;
 alter table KSA.KSSA_EXTERNAL_STATEMENT add constraint FK818A3B0498518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_GL_BREAKDOWN add constraint FKF48BE710AE27AC92 foreign key (TRANSACTION_TYPE_ID_FK, TRANSACTION_TYPE_SUB_CODE_FK) references KSA.KSSA_TRANSACTION_TYPE;
 alter table KSA.KSSA_GL_BREAKDOWN add constraint FKF48BE710FA70171C foreign key (GL_TYPE_ID_FK) references KSA.KSSA_GL_TYPE;
@@ -24,8 +25,10 @@ alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00316BC312E foreign key (
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00395ACD1EE foreign key (PREV_ID) references KSA.KSSA_INFORMATION;
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00398518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E003FE6E074B foreign key (TRN_ID_FK) references KSA.KSSA_TRANSACTION;
-alter table KSA.KSSA_PERSON_NAME add constraint FK45AEC02C98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
-alter table KSA.KSSA_POSTAL_ADDRESS add constraint FKC90A760998518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_PERSON_NAME_ACNT add constraint FK9F7C59B7FD92EAC foreign key (PERSON_NAME_ID_FK) references KSA.KSSA_PERSON_NAME;
+alter table KSA.KSSA_PERSON_NAME_ACNT add constraint FK9F7C59B98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_POSTAL_ADDRESS_ACNT add constraint FKBDC431DE98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_POSTAL_ADDRESS_ACNT add constraint FKBDC431DEF6AF9F26 foreign key (POSTAL_ADDRESS_ID_FK) references KSA.KSSA_POSTAL_ADDRESS;
 alter table KSA.KSSA_REFUND add constraint FK76773E21D61AFDF9 foreign key (TRANSACTION_ID_FK) references KSA.KSSA_TRANSACTION;
 alter table KSA.KSSA_REFUND add constraint FK76773E21E730F553 foreign key (AUTHORIZER_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_REFUND add constraint FK76773E2137C6ACE6 foreign key (REQUESTER_ID_FK) references KSA.KSSA_ACNT;

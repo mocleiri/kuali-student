@@ -72,11 +72,6 @@ public class PersonName extends AccountIdAware implements Identifiable {
      */
     private Boolean isDefault;
 
-    /**
-     * Reference to the corresponding account
-     */
-    private Account account;
-
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -186,13 +181,4 @@ public class PersonName extends AccountIdAware implements Identifiable {
         this.isDefault = isDefault;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACNT_ID_FK")
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

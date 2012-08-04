@@ -67,11 +67,6 @@ public class ElectronicContact extends AccountIdAware implements Identifiable {
     private Date lastUpdate;
 
     /**
-     * Reference to the corresponding account
-     */
-    private Account account;
-
-    /**
      * Is default
      */
     private Boolean isDefault;
@@ -173,16 +168,6 @@ public class ElectronicContact extends AccountIdAware implements Identifiable {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACNT_ID_FK")
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 
     @org.hibernate.annotations.Type(type = "yes_no")

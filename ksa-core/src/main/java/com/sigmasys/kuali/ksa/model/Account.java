@@ -176,7 +176,15 @@ public class Account implements Identifiable {
         this.latePeriod = latePeriod;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_PERSON_NAME_ACNT",
+            joinColumns = {
+                    @JoinColumn(name = "ACNT_ID_FK")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "PERSON_NAME_ID_FK")
+            }
+    )
     public Set<PersonName> getPersonNames() {
         return personNames;
     }
@@ -185,7 +193,15 @@ public class Account implements Identifiable {
         this.personNames = personNames;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_ELECTRONIC_CONTACT_ACNT",
+            joinColumns = {
+                    @JoinColumn(name = "ACNT_ID_FK")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ELECTRONIC_CONTACT_ID_FK")
+            }
+    )
     public Set<ElectronicContact> getElectronicContacts() {
         return electronicContacts;
     }
@@ -194,7 +210,15 @@ public class Account implements Identifiable {
         this.electronicContacts = electronicContacts;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_POSTAL_ADDRESS_ACNT",
+            joinColumns = {
+                    @JoinColumn(name = "ACNT_ID_FK")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "POSTAL_ADDRESS_ID_FK")
+            }
+    )
     public Set<PostalAddress> getPostalAddresses() {
         return postalAddresses;
     }

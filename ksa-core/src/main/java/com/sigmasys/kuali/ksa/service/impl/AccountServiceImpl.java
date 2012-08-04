@@ -443,9 +443,9 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             persistEntity(account);
 
             // Linking PersonName, PostalAddress and ElectronicContact back to already persisted Account
-            personName.setAccount(account);
-            address.setAccount(account);
-            electronicContact.setAccount(account);
+            //personName.setAccount(account);
+            //address.setAccount(account);
+            //electronicContact.setAccount(account);
 
             transactionManager.commit(transaction);
 
@@ -477,20 +477,25 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             throw new IllegalArgumentException(errMsg);
         }
 
+        Set<PersonName> personNames = account.getPersonNames();
+        if (personNames == null) {
+            personNames = new HashSet<PersonName>();
+        }
+
         if (personName.isDefault() != null && personName.isDefault()) {
-            Set<PersonName> personNames = account.getPersonNames();
-            if (personNames != null) {
-                for (PersonName name : personNames) {
-                    name.setDefault(false);
-                }
+            for (PersonName name : personNames) {
+                name.setDefault(false);
             }
         }
 
         personName.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
         personName.setLastUpdate(new Date());
-        personName.setAccount(account);
+        //personName.setAccount(account);
 
         persistEntity(personName);
+
+        personNames.add(personName);
+        account.setPersonNames(personNames);
 
         return personName;
     }
@@ -513,20 +518,25 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             throw new IllegalArgumentException(errMsg);
         }
 
+        Set<PostalAddress> addresses = account.getPostalAddresses();
+        if (addresses == null) {
+            addresses = new HashSet<PostalAddress>();
+        }
+
         if (postalAddress.isDefault() != null && postalAddress.isDefault()) {
-            Set<PostalAddress> addresses = account.getPostalAddresses();
-            if (addresses != null) {
-                for (PostalAddress address : addresses) {
-                    address.setDefault(false);
-                }
+            for (PostalAddress address : addresses) {
+                address.setDefault(false);
             }
         }
 
         postalAddress.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
         postalAddress.setLastUpdate(new Date());
-        postalAddress.setAccount(account);
+        //postalAddress.setAccount(account);
 
         persistEntity(postalAddress);
+
+        addresses.add(postalAddress);
+        account.setPostalAddresses(addresses);
 
         return postalAddress;
     }
@@ -549,20 +559,25 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             throw new IllegalArgumentException(errMsg);
         }
 
+        Set<ElectronicContact> contacts = account.getElectronicContacts();
+        if (contacts == null) {
+            contacts = new HashSet<ElectronicContact>();
+        }
+
         if (electronicContact.isDefault() != null && electronicContact.isDefault()) {
-            Set<ElectronicContact> contacts = account.getElectronicContacts();
-            if (contacts != null) {
-                for (ElectronicContact contact : contacts) {
-                    contact.setDefault(false);
-                }
+            for (ElectronicContact contact : contacts) {
+                contact.setDefault(false);
             }
         }
 
         electronicContact.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
         electronicContact.setLastUpdate(new Date());
-        electronicContact.setAccount(account);
+        //electronicContact.setAccount(account);
 
         persistEntity(electronicContact);
+
+        contacts.add(electronicContact);
+        account.setElectronicContacts(contacts);
 
         return electronicContact;
 
