@@ -13,6 +13,16 @@ import javax.persistence.*;
 @Table(name = "KSSA_GL_TYPE")
 public class GeneralLedgerType extends AuditableEntity {
 
+    /**
+     * General Ledger Account ID
+     */
+    private String glAssetAccount;
+
+    /**
+     * General Ledger Operation on Charge
+     */
+    private String glOperationOnCharge;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -25,5 +35,23 @@ public class GeneralLedgerType extends AuditableEntity {
     @Override
     public Long getId() {
         return id;
+    }
+
+    @Column(name = "GL_ASSET_ACCOUNT", length = 45)
+    public String getGlAssetAccount() {
+        return glAssetAccount;
+    }
+
+    public void setGlAssetAccount(String glAssetAccount) {
+        this.glAssetAccount = glAssetAccount;
+    }
+
+    @Column(name = "GL_OPERATION_ON_CHARGE", length = 1)
+    public String getGlOperationOnCharge() {
+        return glOperationOnCharge;
+    }
+
+    public void setGlOperationOnCharge(String glOperationOnCharge) {
+        this.glOperationOnCharge = glOperationOnCharge;
     }
 }

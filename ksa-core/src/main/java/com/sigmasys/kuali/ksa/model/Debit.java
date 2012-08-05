@@ -21,17 +21,23 @@ public abstract class Debit extends Transaction {
     protected Boolean deferred;
 
     /**
-     * Indicates if debit has been overriden by GL
+     * Indicates if debit has been overridden by GL
      */
     protected Boolean glOverridden;
 
-    
+    /**
+     * Indicates if the payment is billing
+     */
+    protected Boolean paymentBilling;
+
+
     /**
      * If a transaction is deferred, then it will return true here.
      * Deferred transactions also bear the identifier of the deferment transaction that offsets them in deferment
+     *
      * @return boolean value
      */
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_DEFERRED")
     public Boolean isDeferred() {
         return deferred;
@@ -41,7 +47,7 @@ public abstract class Debit extends Transaction {
         this.deferred = deferred;
     }
 
-    @org.hibernate.annotations.Type(type="yes_no")
+    @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_GL_OVERRIDDEN")
     public Boolean isGlOverridden() {
         return glOverridden;
@@ -51,13 +57,23 @@ public abstract class Debit extends Transaction {
         this.glOverridden = glOverridden;
     }
 
+    @org.hibernate.annotations.Type(type = "yes_no")
+    @Column(name = "IS_PAYMENT_BILLING")
+    public Boolean isPaymentBilling() {
+        return paymentBilling;
+    }
+
+    public void setPaymentBilling(Boolean paymentBilling) {
+        this.paymentBilling = paymentBilling;
+    }
+
     /**
      * Gets the priority of the debit from the transaction code. The priority of a transaction defines when it is paid off in the payment allocation system.
      * The priority of a debit may change, and is reference against the effective date of the transaction to ensure the correct priority.
      */
     @Transient
     public void getPriority() {
-         // TODO
+        // TODO
     }
 
 }

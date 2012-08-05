@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "KSSA_GL_BREAKDOWN")
-public class GeneralLedgerBreakdown implements Identifiable {
+public class GlBreakdown implements Identifiable {
 
     /**
      * The unique identifier
@@ -21,10 +21,15 @@ public class GeneralLedgerBreakdown implements Identifiable {
     /**
      * GL account
      */
-    private String account;
+    private String glAccount;
+
+    /**
+     * GL operation
+     */
+    private String glOperation;
 
 
-    private BigDecimal amount;
+    private BigDecimal percentageBreakdown;
 
 
     /**
@@ -56,21 +61,30 @@ public class GeneralLedgerBreakdown implements Identifiable {
     }
 
     @Column(name = "BREAKDOWN")
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getPercentageBreakdown() {
+        return percentageBreakdown;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setPercentageBreakdown(BigDecimal percentageBreakdown) {
+        this.percentageBreakdown = percentageBreakdown;
     }
 
     @Column(name = "GL_ACCOUNT", length = 45)
-    public String getAccount() {
-        return account;
+    public String getGlAccount() {
+        return glAccount;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setGlAccount(String glAccount) {
+        this.glAccount = glAccount;
+    }
+
+    @Column(name = "GL_OPERATION", length = 1)
+    public String getGlOperation() {
+        return glOperation;
+    }
+
+    public void setGlOperation(String glOperation) {
+        this.glOperation = glOperation;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

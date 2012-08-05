@@ -22,6 +22,10 @@ public class CreditType extends TransactionType {
 
     private String authorizationText;
 
+    private String unallocatedGlAccount;
+
+    private String unallocatedGlOperation;
+
 
     @Column(name = "REFUND_RULE", length = 2000)
     public String getRefundRule() {
@@ -48,5 +52,23 @@ public class CreditType extends TransactionType {
 
     public void setClearPeriod(Integer clearPeriod) {
         this.clearPeriod = clearPeriod;
+    }
+
+    @Column(name = "UNALLOCATED_GL_ACCOUNT", length = 45)
+    public String getUnallocatedGlAccount() {
+        return unallocatedGlAccount;
+    }
+
+    public void setUnallocatedGlAccount(String unallocatedGlAccount) {
+        this.unallocatedGlAccount = unallocatedGlAccount;
+    }
+
+    @Column(name = "UNALLOCATED_GL_OPERATION", length = 1)
+    public String getUnallocatedGlOperation() {
+        return unallocatedGlOperation;
+    }
+
+    public void setUnallocatedGlOperation(String unallocatedGlOperation) {
+        this.unallocatedGlOperation = unallocatedGlOperation;
     }
 }

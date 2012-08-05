@@ -122,7 +122,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         model.setOriginationDate(transaction.getOriginationDate());
         model.setGlEntryGenerated(transaction.isGlEntryGenerated());
         model.setInternal(transaction.isInternal());
-        model.setRefundRule(transaction.getRefundRule());
+        //model.setRefundRule(transaction.getRefundRule());
         model.setStatementText(transaction.getStatementText());
         model.setResponsibleEntity(transaction.getResponsibleEntity());
 

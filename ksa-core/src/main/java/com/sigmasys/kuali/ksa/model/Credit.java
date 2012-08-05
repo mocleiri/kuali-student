@@ -18,6 +18,11 @@ public abstract class Credit extends Transaction {
      */
     protected Boolean isRefundable;
 
+    /**
+     * Refund rule
+     */
+    private String refundRule;
+
 
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_REFUNDABLE")
@@ -28,5 +33,15 @@ public abstract class Credit extends Transaction {
     public void setRefundable(Boolean refundable) {
         isRefundable = refundable;
     }
+
+    @Column(name = "REFUND_RULE", length = 2000)
+    public String getRefundRule() {
+        return refundRule;
+    }
+
+    public void setRefundRule(String refundRule) {
+        this.refundRule = refundRule;
+    }
+
 }
 

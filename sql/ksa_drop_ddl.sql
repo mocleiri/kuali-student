@@ -21,6 +21,7 @@ drop table KSA.KSSA_ELECTRONIC_CONTACT_ACNT cascade constraints;
 drop table KSA.KSSA_EXTERNAL_STATEMENT cascade constraints;
 drop table KSA.KSSA_FLAG_TYPE cascade constraints;
 drop table KSA.KSSA_GL_BREAKDOWN cascade constraints;
+drop table KSA.KSSA_GL_BREAKDOWN_OVERRIDE cascade constraints;
 drop table KSA.KSSA_GL_TRANSACTION cascade constraints;
 drop table KSA.KSSA_GL_TRANSMISSION cascade constraints;
 drop table KSA.KSSA_GL_TYPE cascade constraints;

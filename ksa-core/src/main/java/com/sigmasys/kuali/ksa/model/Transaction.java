@@ -119,11 +119,6 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
      */
     private Boolean glEntryGenerated;
 
-    /**
-     * Refund rule
-     */
-    private String refundRule;
-
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -317,15 +312,6 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     public void setGlEntryGenerated(Boolean glEntryGenerated) {
         this.glEntryGenerated = glEntryGenerated;
-    }
-
-    @Column(name = "REFUND_RULE", length = 2000)
-    public String getRefundRule() {
-        return refundRule;
-    }
-
-    public void setRefundRule(String refundRule) {
-        this.refundRule = refundRule;
     }
 
     @Transient
