@@ -113,6 +113,16 @@
         NMSPC_CD="KS-SYS" OBJ_ID="28F89BDFF2F84DB99845E0E7458C5A17"
         ROLE_ID="10021" ROLE_NM="Completed Adhoc FYI Request Recipient" VER_NBR="1"/>
     <KRIM_ROLE_T ACTV_IND="Y"
+        DESC_TXT="This is a general KS admin role, default role for KS exception routing responsibility"
+        KIM_TYP_ID="10014" LAST_UPDT_DT="20120509163855"
+        NMSPC_CD="KS-SYS" OBJ_ID="F448D3E5B706430C81B80003F1F1A7E1"
+        ROLE_ID="10022" ROLE_NM="Kuali Student Admin" VER_NBR="1"/>
+    <KRIM_ROLE_T ACTV_IND="Y"
+        DESC_TXT="This role provides admin ability to grant roles/permissions for KS name space"
+        KIM_TYP_ID="10014" LAST_UPDT_DT="20120509163855"
+        NMSPC_CD="KS-SYS" OBJ_ID="BFE65B081C114FEB83F1999E4A47C2A4"
+        ROLE_ID="10023" ROLE_NM="Kuali Student IDM Admin" VER_NBR="1"/>        
+    <KRIM_ROLE_T ACTV_IND="Y"
         DESC_TXT="This role derives its members from users with that have received an action request for a given document."
         KIM_TYP_ID="42" LAST_UPDT_DT="20081114141017"
         NMSPC_CD="KR-WKFLW" OBJ_ID="5BABFACC4F62A8EEE0404F8189D8770F"
