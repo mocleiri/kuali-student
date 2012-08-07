@@ -3635,11 +3635,11 @@
     <sequence name="KRIM_PERM_RQRD_ATTR_ID_S" nextval="10000"/>
     <sequence name="KRIM_PERM_TMPL_ID_S" nextval="10011"/>
     <sequence name="KRIM_PRNCPL_ID_S" nextval="10000"/>
-    <sequence name="KRIM_ROLE_ID_S" nextval="10022"/>
+    <sequence name="KRIM_ROLE_ID_S" nextval="10024"/>
     <sequence name="KRIM_ROLE_MBR_ID_S" nextval="10028"/>
-    <sequence name="KRIM_ROLE_PERM_ID_S" nextval="1083"/>
+    <sequence name="KRIM_ROLE_PERM_ID_S" nextval="1087"/>
     <sequence name="KRIM_ROLE_RSP_ACTN_ID_S" nextval="10000"/>
-    <sequence name="KRIM_ROLE_RSP_ID_S" nextval="10000"/>
+    <sequence name="KRIM_ROLE_RSP_ID_S" nextval="10001"/>
     <sequence name="KRIM_RSP_ID_S" nextval="10000"/>
     <sequence name="KRIM_RSP_RQRD_ATTR_ID_S" nextval="10000"/>
     <sequence name="KRIM_RSP_TMPL_ID_S" nextval="10000"/>
