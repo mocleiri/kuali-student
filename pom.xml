@@ -97,14 +97,15 @@
     </profile>
   </profiles>
   <scm>
-    <connection>scm:svn:http://svn.kuali.org/repos/student/trunk</connection>
-    <developerConnection>scm:svn:http://svn.kuali.org/repos/student/trunk</developerConnection>
-    <url>http://svn.kuali.org/repos/student/trunk</url>
+    <connection>scm:svn:https://svn.kuali.org/repos/student/trunk</connection>
+    <developerConnection>scm:svn:https://svn.kuali.org/repos/student/trunk</developerConnection>
+    <url>https://svn.kuali.org/repos/student/trunk</url>
   </scm>
   <properties>
     <!-- Remove this property as soon as the devs are comfortable with Maven 3
     -->
     <kuali.site.plugin.version>2.0.1</kuali.site.plugin.version>
+    <sonar.core.codeCoveragePlugin>cobertura</sonar.core.codeCoveragePlugin>
 
     <kuali.clover.exclude.pattern.1>org/kuali/**/ui/**/client/**/*.java</kuali.clover.exclude.pattern.1>
     <kuali.clover.exclude.pattern.2>org/kuali/**/ui/client/**/*.java</kuali.clover.exclude.pattern.2>
