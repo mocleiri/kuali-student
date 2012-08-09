@@ -42,13 +42,13 @@
                                 </xs:sequence>
                                 <xs:element name="override-refund-rule" type="xs:string" minOccurs="0"/>
                                 <xs:element name="override-clear-date" type="xs:int" minOccurs="0"/>
+                                <xs:element name="is-refundable" type="xs:boolean" minOccurs="0"/>
+                                <xs:element name="refund-rule" type="xs:string" minOccurs="0"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
                 </xs:sequence>
                 <xs:element name="transaction-type" type="xs:string" form="qualified"/>
-                <xs:element name="is-refundable" type="xs:boolean" minOccurs="0"/>
-                <xs:element name="refund-rule" type="xs:string" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

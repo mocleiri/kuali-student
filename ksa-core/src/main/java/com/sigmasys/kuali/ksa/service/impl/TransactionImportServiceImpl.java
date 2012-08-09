@@ -65,7 +65,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
 
     private AccessControlService getAccessControlService() {
-        return  ContextUtils.getBean(AccessControlService.class);
+        return ContextUtils.getBean(AccessControlService.class);
     }
 
     /**
@@ -195,9 +195,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                     errMsg = "No such Transaction Type = '" + ksaTransaction.getTransactionType() +
                             "' with Effective Date = '" + effectiveDate + "'";
                 }
-                if (!isRefundRuleValid(ksaTransaction.getRefundRule())) {
+                if (ksaTransaction.getOverride() != null &&
+                        !isRefundRuleValid(ksaTransaction.getOverride().getRefundRule())) {
                     // applies to Payments
-                    errMsg = "Invalid refund rule '" + ksaTransaction.getRefundRule() + "'";
+                    errMsg = "Invalid refund rule '" + ksaTransaction.getOverride().getRefundRule() + "'";
                 }
 
                 if (errMsg.length() > 0) {
@@ -529,8 +530,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             Payment payment = (Payment) transaction;
             int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
             payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
-            payment.setRefundable(ksaTransaction.isIsRefundable());
-            payment.setRefundRule(ksaTransaction.getRefundRule());
+            if (ksaTransaction.getOverride() != null) {
+                payment.setRefundable(ksaTransaction.getOverride().isRefundable());
+                payment.setRefundRule(ksaTransaction.getOverride().getRefundRule());
+            }
         }
 
         // TODO What to do persist where and what document and override plus other types

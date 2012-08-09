@@ -24,9 +24,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -93,23 +93,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountIdentifier",
-    "incomingIdentifier",
-    "effectiveDate",
-    "originationDate",
-    "amount",
-    "nativeAmount",
-    "currency",
-    "document",
-    "override",
-    "transactionType",
-    "isRefundable",
-    "refundRule"
+        "accountIdentifier",
+        "incomingIdentifier",
+        "effectiveDate",
+        "originationDate",
+        "amount",
+        "nativeAmount",
+        "currency",
+        "document",
+        "override",
+        "transactionType"
 })
 @XmlRootElement(name = "ksa-transaction")
 public class KsaTransaction {
@@ -133,18 +129,12 @@ public class KsaTransaction {
     protected KsaTransaction.Override override;
     @XmlElement(name = "transaction-type", required = true)
     protected String transactionType;
-    @XmlElement(name = "is-refundable")
-    protected Boolean isRefundable;
-    @XmlElement(name = "refund-rule")
-    protected String refundRule;
 
     /**
      * Gets the value of the accountIdentifier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountIdentifier() {
         return accountIdentifier;
@@ -152,11 +142,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the accountIdentifier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountIdentifier(String value) {
         this.accountIdentifier = value;
@@ -164,11 +152,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the incomingIdentifier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getIncomingIdentifier() {
         return incomingIdentifier;
@@ -176,11 +162,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the incomingIdentifier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setIncomingIdentifier(String value) {
         this.incomingIdentifier = value;
@@ -188,11 +172,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the effectiveDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getEffectiveDate() {
         return effectiveDate;
@@ -200,11 +182,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the effectiveDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setEffectiveDate(XMLGregorianCalendar value) {
         this.effectiveDate = value;
@@ -212,11 +192,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the originationDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getOriginationDate() {
         return originationDate;
@@ -224,11 +202,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the originationDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setOriginationDate(XMLGregorianCalendar value) {
         this.originationDate = value;
@@ -236,11 +212,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmount() {
         return amount;
@@ -248,11 +222,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmount(BigDecimal value) {
         this.amount = value;
@@ -260,11 +232,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the nativeAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getNativeAmount() {
         return nativeAmount;
@@ -272,11 +242,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the nativeAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setNativeAmount(BigDecimal value) {
         this.nativeAmount = value;
@@ -284,11 +252,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the currency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCurrency() {
         return currency;
@@ -296,11 +262,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the currency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCurrency(String value) {
         this.currency = value;
@@ -308,11 +272,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the document property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link KsaTransaction.Document }
-     *     
+     *
+     * @return possible object is
+     *         {@link KsaTransaction.Document }
      */
     public KsaTransaction.Document getDocument() {
         return document;
@@ -320,11 +282,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the document property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link KsaTransaction.Document }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link KsaTransaction.Document }
      */
     public void setDocument(KsaTransaction.Document value) {
         this.document = value;
@@ -332,11 +292,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the override property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link KsaTransaction.Override }
-     *     
+     *
+     * @return possible object is
+     *         {@link KsaTransaction.Override }
      */
     public KsaTransaction.Override getOverride() {
         return override;
@@ -344,11 +302,9 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the override property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link KsaTransaction.Override }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link KsaTransaction.Override }
      */
     public void setOverride(KsaTransaction.Override value) {
         this.override = value;
@@ -356,11 +312,9 @@ public class KsaTransaction {
 
     /**
      * Gets the value of the transactionType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTransactionType() {
         return transactionType;
@@ -368,70 +322,19 @@ public class KsaTransaction {
 
     /**
      * Sets the value of the transactionType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTransactionType(String value) {
         this.transactionType = value;
     }
 
     /**
-     * Gets the value of the isRefundable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isIsRefundable() {
-        return isRefundable;
-    }
-
-    /**
-     * Sets the value of the isRefundable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setIsRefundable(Boolean value) {
-        this.isRefundable = value;
-    }
-
-    /**
-     * Gets the value of the refundRule property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRefundRule() {
-        return refundRule;
-    }
-
-    /**
-     * Sets the value of the refundRule property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRefundRule(String value) {
-        this.refundRule = value;
-    }
-
-
-    /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -446,15 +349,13 @@ public class KsaTransaction {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "personToContact",
-        "telephoneNumber",
-        "emailAddress",
-        "openDocument"
+            "personToContact",
+            "telephoneNumber",
+            "emailAddress",
+            "openDocument"
     })
     public static class Document {
 
@@ -469,11 +370,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the personToContact property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getPersonToContact() {
             return personToContact;
@@ -481,11 +380,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the personToContact property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setPersonToContact(String value) {
             this.personToContact = value;
@@ -493,11 +390,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the telephoneNumber property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getTelephoneNumber() {
             return telephoneNumber;
@@ -505,11 +400,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the telephoneNumber property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTelephoneNumber(String value) {
             this.telephoneNumber = value;
@@ -517,11 +410,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the emailAddress property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getEmailAddress() {
             return emailAddress;
@@ -529,11 +420,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the emailAddress property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setEmailAddress(String value) {
             this.emailAddress = value;
@@ -541,11 +430,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the openDocument property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getOpenDocument() {
             return openDocument;
@@ -553,11 +440,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the openDocument property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setOpenDocument(String value) {
             this.openDocument = value;
@@ -568,9 +453,9 @@ public class KsaTransaction {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -599,16 +484,18 @@ public class KsaTransaction {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "overrideRollup",
-        "overrideStatementText",
-        "generalLedgerOverride",
-        "overrideRefundRule",
-        "overrideClearDate"
+            "overrideRollup",
+            "overrideStatementText",
+            "generalLedgerOverride",
+            "overrideRefundRule",
+            "overrideClearDate",
+            "overrideClearPeriod",
+            "generalLedgerType",
+            "isRefundable",
+            "refundRule"
     })
     public static class Override {
 
@@ -622,14 +509,20 @@ public class KsaTransaction {
         protected String overrideRefundRule;
         @XmlElement(name = "override-clear-date")
         protected Integer overrideClearDate;
+        @XmlElement(name = "override-clear-period")
+        protected Integer overrideClearPeriod;
+        @XmlElement(name = "general-ledger-type")
+        protected String generalLedgerType;
+        @XmlElement(name = "is-refundable")
+        protected Boolean isRefundable;
+        @XmlElement(name = "refund-rule")
+        protected String refundRule;
 
         /**
          * Gets the value of the overrideRollup property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getOverrideRollup() {
             return overrideRollup;
@@ -637,11 +530,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the overrideRollup property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setOverrideRollup(String value) {
             this.overrideRollup = value;
@@ -649,11 +540,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the overrideStatementText property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getOverrideStatementText() {
             return overrideStatementText;
@@ -661,11 +550,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the overrideStatementText property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setOverrideStatementText(String value) {
             this.overrideStatementText = value;
@@ -673,11 +560,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the generalLedgerOverride property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link KsaTransaction.Override.GeneralLedgerOverride }
-         *     
+         *
+         * @return possible object is
+         *         {@link KsaTransaction.Override.GeneralLedgerOverride }
          */
         public KsaTransaction.Override.GeneralLedgerOverride getGeneralLedgerOverride() {
             return generalLedgerOverride;
@@ -685,11 +570,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the generalLedgerOverride property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link KsaTransaction.Override.GeneralLedgerOverride }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link KsaTransaction.Override.GeneralLedgerOverride }
          */
         public void setGeneralLedgerOverride(KsaTransaction.Override.GeneralLedgerOverride value) {
             this.generalLedgerOverride = value;
@@ -697,11 +580,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the overrideRefundRule property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getOverrideRefundRule() {
             return overrideRefundRule;
@@ -709,11 +590,9 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the overrideRefundRule property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setOverrideRefundRule(String value) {
             this.overrideRefundRule = value;
@@ -721,11 +600,9 @@ public class KsaTransaction {
 
         /**
          * Gets the value of the overrideClearDate property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Integer }
-         *     
+         *
+         * @return possible object is
+         *         {@link Integer }
          */
         public Integer getOverrideClearDate() {
             return overrideClearDate;
@@ -733,22 +610,75 @@ public class KsaTransaction {
 
         /**
          * Sets the value of the overrideClearDate property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Integer }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link Integer }
          */
         public void setOverrideClearDate(Integer value) {
             this.overrideClearDate = value;
         }
 
+        public Integer getOverrideClearPeriod() {
+            return overrideClearPeriod;
+        }
+
+        public void setOverrideClearPeriod(Integer overrideClearPeriod) {
+            this.overrideClearPeriod = overrideClearPeriod;
+        }
+
+        public String getGeneralLedgerType() {
+            return generalLedgerType;
+        }
+
+        public void setGeneralLedgerType(String generalLedgerType) {
+            this.generalLedgerType = generalLedgerType;
+        }
+
+        /**
+         * Gets the value of the isRefundable property.
+         *
+         * @return possible object is
+         *         {@link Boolean }
+         */
+        public Boolean isRefundable() {
+            return isRefundable;
+        }
+
+        /**
+         * Sets the value of the isRefundable property.
+         *
+         * @param value allowed object is
+         *              {@link Boolean }
+         */
+        public void setRefundable(Boolean value) {
+            this.isRefundable = value;
+        }
+
+        /**
+         * Gets the value of the refundRule property.
+         *
+         * @return possible object is
+         *         {@link String }
+         */
+        public String getRefundRule() {
+            return refundRule;
+        }
+
+        /**
+         * Sets the value of the refundRule property.
+         *
+         * @param value allowed object is
+         *              {@link String }
+         */
+        public void setRefundRule(String value) {
+            this.refundRule = value;
+        }
 
         /**
          * <p>Java class for anonymous complex type.
-         * 
+         * <p/>
          * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
+         * <p/>
          * <pre>
          * &lt;complexType>
          *   &lt;complexContent>
@@ -761,43 +691,39 @@ public class KsaTransaction {
          *   &lt;/complexContent>
          * &lt;/complexType>
          * </pre>
-         * 
-         * 
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
-            "generalLedgerAccountAndPercentageAllocation"
+                "generalLedgerAccountAndPercentageAllocation"
         })
         public static class GeneralLedgerOverride {
 
             @XmlElements({
-                @XmlElement(name = "general-ledger-account", required = true, type = String.class),
-                @XmlElement(name = "percentage-allocation", required = true, type = BigDecimal.class)
+                    @XmlElement(name = "general-ledger-account", required = true, type = String.class),
+                    @XmlElement(name = "percentage-allocation", required = true, type = BigDecimal.class)
             })
             protected List<Serializable> generalLedgerAccountAndPercentageAllocation;
 
             /**
              * Gets the value of the generalLedgerAccountAndPercentageAllocation property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * This accessor method returns a reference to the live list,
              * not a snapshot. Therefore any modification you make to the
              * returned list will be present inside the JAXB object.
              * This is why there is not a <CODE>set</CODE> method for the generalLedgerAccountAndPercentageAllocation property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * For example, to add a new item, do as follows:
              * <pre>
              *    getGeneralLedgerAccountAndPercentageAllocation().add(newItem);
              * </pre>
-             * 
-             * 
-             * <p>
+             * <p/>
+             * <p/>
+             * <p/>
              * Objects of the following type(s) are allowed in the list
              * {@link String }
              * {@link BigDecimal }
-             * 
-             * 
              */
             public List<Serializable> getGeneralLedgerAccountAndPercentageAllocation() {
                 if (generalLedgerAccountAndPercentageAllocation == null) {
