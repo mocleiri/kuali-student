@@ -147,7 +147,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         ksaBatchTransactionResponse.setAccepted(accepted);
         ksaBatchTransactionResponse.setFailed(failed);
 
-        Boolean singleBatchFailure = Boolean.valueOf(configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE));
+        Boolean singleBatchFailure =
+                Boolean.valueOf(configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME));
 
         // determine if batch or single transaction
         Object object = parseXml(new StringReader(xml));
@@ -517,27 +518,52 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         transaction.setCurrency(currencyService.getCurrency(ksaTransaction.getCurrency()));
         transaction.setExternalId(ksaTransaction.getIncomingIdentifier());
 
+        KsaTransaction.Override override = ksaTransaction.getOverride();
+
+        // Setting general ledger type
+        String glTypeCode = (override != null && override.getGeneralLedgerType() != null) ?
+                override.getGeneralLedgerType() :
+                configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME);
+
+        if (glTypeCode != null) {
+            transaction.setGeneralLedgerType(transactionService.getGeneralLedgerType(glTypeCode));
+        }
+
         if (transaction instanceof Payment) {
+
             TransactionType transactionType =
                     transactionService.getTransactionType(ksaTransaction.getTransactionType(), effectiveDate);
+
             if (transactionType == null) {
                 String errMsg = "Cannot find Transaction Type for ID = " + ksaTransaction.getTransactionType() +
                         " and Effective Date = " + effectiveDate;
                 logger.error(errMsg);
                 throw new IllegalStateException(errMsg);
             }
+
             CreditType creditType = (CreditType) transactionType;
             Payment payment = (Payment) transaction;
-            int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
-            payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
-            if (ksaTransaction.getOverride() != null) {
-                payment.setRefundable(ksaTransaction.getOverride().isRefundable());
-                payment.setRefundRule(ksaTransaction.getOverride().getRefundRule());
+
+            // Setting payment clear date
+            Integer clearPeriod = null;
+            if (override != null) {
+                if (override.getOverrideClearPeriod() != null) {
+                    clearPeriod = override.getOverrideClearPeriod();
+                }
+                payment.setRefundable(override.isRefundable());
+                payment.setRefundRule(override.getRefundRule());
             }
+
+            if (clearPeriod == null) {
+                clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
+            }
+
+            payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
+
         }
 
         // TODO What to do persist where and what document and override plus other types
-        // Save additional information concerning the transaction above and beyond the basic transction created
+        // Save additional information concerning the transaction above and beyond the basic transaction created
         transactionService.persistTransaction(transaction);
         return transaction;
     }

@@ -119,6 +119,11 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
      */
     private Boolean glEntryGenerated;
 
+    /**
+     * Reference to general ledger type
+     */
+    private GeneralLedgerType generalLedgerType;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -312,6 +317,16 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     public void setGlEntryGenerated(Boolean glEntryGenerated) {
         this.glEntryGenerated = glEntryGenerated;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GL_TYPE_ID_FK")
+    public GeneralLedgerType getGeneralLedgerType() {
+        return generalLedgerType;
+    }
+
+    public void setGeneralLedgerType(GeneralLedgerType generalLedgerType) {
+        this.generalLedgerType = generalLedgerType;
     }
 
     @Transient

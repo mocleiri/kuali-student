@@ -143,6 +143,25 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns the general ledger type instance for the given code.
+     *
+     * @param glTypeCode General Ledger type code
+     * @return GeneralLedgerType instance
+     */
+    @Override
+    public GeneralLedgerType getGeneralLedgerType(String glTypeCode) {
+        Query query = em.createQuery("select t from GeneralLedgerType t where t.code = :code");
+        query.setParameter("code", glTypeCode);
+        List<GeneralLedgerType> glTypes = query.getResultList();
+        if (glTypes != null && !glTypes.isEmpty()) {
+            return glTypes.get(0);
+        }
+        String errMsg = "Cannot find GeneralLedgerType for the code = " + glTypeCode;
+        logger.error(errMsg);
+        throw new IllegalStateException(errMsg);
+    }
+
+    /**
      * Creates a new transaction based on the given parameters
      *
      * @param id            Transaction type ID

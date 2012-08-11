@@ -17,6 +17,9 @@ public interface Constants {
     // KSA parameter names
     String LOCALE_LANG_PARAM_NAME = "ksa.locale.lang";
     String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
+    String IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME = "ksa.import.single.batch.failure";
+    String DEFAULT_GL_TYPE_PARAM_NAME = "ksa.default.general.ledger.type";
+
 
     // Log constants
     String LOGGING_OPERATION = "ksa.logging.operation";
@@ -46,6 +49,7 @@ public interface Constants {
     String TRANSACTION_SERVICE_URL = "transaction.service";
     String CURRENCY_SERVICE_URL = "currency.service";
 
-    String IMPORT_SINGLE_BATCH_FAILURE = "ksa.import.single.batch.failure";
+
+
 
 }
