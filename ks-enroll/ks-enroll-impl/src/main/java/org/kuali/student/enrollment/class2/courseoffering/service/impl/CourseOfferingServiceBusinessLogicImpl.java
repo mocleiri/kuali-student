@@ -195,6 +195,10 @@ public class CourseOfferingServiceBusinessLogicImpl implements CourseOfferingSer
                     targetFo.getTypeKey(), targetFo, context);
             List<ActivityOfferingInfo> aoInfoList = locoService.getActivityOfferingsByFormatOffering(sourceFo.getId(), context);
             for (ActivityOfferingInfo sourceAo : aoInfoList) {
+                if (optionKeys.contains(CourseOfferingSetServiceConstants.IGNORE_CANCELLED_AO_OPTION_KEY) &&
+                    StringUtils.equals(sourceAo.getTypeKey(),LuiServiceConstants.LUI_AO_STATE_CANCELED_KEY)){
+                    continue;
+                }
                 ActivityOfferingInfo targetAo = new ActivityOfferingInfo(sourceAo);
                 targetAo.setId(null);
                 // clear out the ids on the internal sub-objects
@@ -227,17 +231,6 @@ public class CourseOfferingServiceBusinessLogicImpl implements CourseOfferingSer
         Map<String, Object> properties = targetCoX.getProperties();
         properties.put(CourseOfferingInfoExtended.ACTIVITY_OFFERINGS_CREATED, new Integer(aoCount));
         return targetCoX;
-    }
-
-    @Override
-    public CourseOfferingInfo copyCourseOffering(String sourceCoId, String targetTermId, List<String> optionKeys, ContextInfo context)
-            throws AlreadyExistsException,
-            DataValidationErrorException, DoesNotExistException, DataValidationErrorException, InvalidParameterException,
-            MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException{
-        CourseOfferingInfo sourceCo = this._getCoService().getCourseOffering(sourceCoId, context);
-        CourseOfferingInfo targetCo = generateTargetCourseOffering(sourceCo, targetTermId, optionKeys, context);
-        return targetCo;
-
     }
 
     private CourseOfferingInfo generateTargetCourseOffering(CourseOfferingInfo sourceCo, String targetTermId, List<String> optionKeys, ContextInfo context)

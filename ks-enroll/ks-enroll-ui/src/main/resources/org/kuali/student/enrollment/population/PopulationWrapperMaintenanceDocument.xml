@@ -24,11 +24,6 @@
         <property name="dataObjectClassName" value="org.kuali.student.enrollment.class2.population.dto.PopulationWrapper"/>
         <property name="formClass" value="org.kuali.rice.krad.web.form.MaintenanceForm"/>
         <property name="singlePageView" value="true"/>
-        <property name="page.header.lowerGroup.render" value="false"/>
-        <property name="header">
-            <ref bean="KSHeader_Empty" />
-        </property>
-
         <property name="items">
             <list>
                 <ref bean="KS-PopulationWrapper-LinkSection"/>
@@ -42,7 +37,7 @@
                       p:render="@{(maintenanceAction eq 'New') and #actionFlags[#Constants.KUALI_ACTION_CAN_ROUTE]}"/>
                 <bean parent="Uif-PrimaryActionButton" p:methodToCall="route" p:actionLabel="Update" p:performClientSideValidation="true"
                       p:render="@{(maintenanceAction eq 'Edit') and #actionFlags[#Constants.KUALI_ACTION_CAN_ROUTE]}"/>
-                <bean parent="Uif-ActionLink" p:clientSideJs="stepBrowserBack()" p:actionLabel="Cancel"
+                <bean parent="Uif-ActionLink" p:actionScript="stepBrowserBack()" p:actionLabel="Cancel"
                       p:render="@{#actionFlags[#Constants.KUALI_ACTION_CAN_CANCEL]}"/>
             </list>
         </property>
@@ -126,7 +121,7 @@
                 <bean parent="Uif-DataField-LabelTop" p:label="Operation" p:propertyName="operationTypeText"
                       p:render="@{maintenanceAction eq 'Edit'}"/>
                 <bean parent="Uif-InputField-LabelTop" p:propertyName="operationType" p:label="Operation"
-                      p:defaultValue="kuali.population.rule.type.union" p:required="true"
+                      p:defaultValue="@{maintenanceAction eq 'New' ? 'kuali.population.rule.type.union' : #dp.operationType}" p:required="true"
                       p:render="@{maintenanceAction eq 'New'}">
                     <property name="control">
                         <bean parent="Uif-HorizontalRadioControl" />
