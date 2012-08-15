@@ -408,7 +408,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      * @param accountId       Account ID
      * @param transactionType Transaction Type
      * @param effectiveDate   Effective Date
-     * @return
+     * @return true/false
      */
     private boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate) {
         // TODO getAccountBlockedStatus ??
@@ -435,7 +435,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     }
 
     /**
-     * Check if the given TransationType ID is defined
+     * Check if the given TransactionType ID is defined
      *
      * @param transactionType Transaction Type
      * @param effectiveDate   Effective Date
