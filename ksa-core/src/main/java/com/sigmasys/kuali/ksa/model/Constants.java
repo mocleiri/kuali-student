@@ -20,10 +20,6 @@ public interface Constants {
     String IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME = "ksa.import.single.batch.failure";
     String DEFAULT_GL_TYPE_PARAM_NAME = "ksa.default.general.ledger.type";
 
-
-    // Log constants
-    String LOGGING_OPERATION = "ksa.logging.operation";
-
     // WS constants
     String WS_NAMESPACE = "http://sigmasys.com/";
 
