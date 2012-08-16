@@ -6,7 +6,6 @@ import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.transform.*;
 
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
-import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 import org.apache.commons.logging.Log;
@@ -63,10 +62,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     @Autowired
     private UserSessionManager sessionManager;
 
-
-    private AccessControlService getAccessControlService() {
-        return ContextUtils.getBean(AccessControlService.class);
-    }
 
     /**
      * Persist the given batch receipt in the database
@@ -182,9 +177,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 String errMsg = "";
                 if (!verifyRequiredValues(ksaTransaction)) {
                     errMsg = "Required values are missing from transaction";
-                } else if (!doesImportAccountExist(ksaTransaction.getAccountIdentifier())) {
+                } else if (!accountService.doesAccountExist(ksaTransaction.getAccountIdentifier())) {
                     errMsg = "Account '" + ksaTransaction.getAccountIdentifier() + "' does not exist";
-                } else if (!isTransactionAllowed(ksaTransaction.getAccountIdentifier(),
+                } else if (!transactionService.isTransactionAllowed(ksaTransaction.getAccountIdentifier(),
                         ksaTransaction.getTransactionType(), effectiveDate)) {
                     errMsg = "Transaction is not allowed. Transaction Type = '" +
                             ksaTransaction.getTransactionType() + "', Effective Date = '" + effectiveDate +
@@ -372,22 +367,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
 
     /**
-     * Determine if a KSA account exists and or create a KSA account if none found
-     * using KIM details to supplement KSA account. Return true if the account exists
-     * otherwise false if no account from getOrCreateAccount method combined with KIM
-     *
-     * @param accountId Account ID
-     */
-    private boolean doesImportAccountExist(String accountId) {
-        try {
-            return accountService.getOrCreateAccount(accountId) != null;
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return false;
-        }
-    }
-
-    /**
      * Validate inputs are provided.
      *
      * @param ksaTransaction KsaTransaction instance
@@ -402,21 +381,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 ksaTransaction.getTransactionType() != null);
     }
 
-    /**
-     * Determine if the transaction is allowed for the given Account ID
-     *
-     * @param accountId       Account ID
-     * @param transactionType Transaction Type
-     * @param effectiveDate   Effective Date
-     * @return true/false
-     */
-    private boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate) {
-        // TODO getAccountBlockedStatus ??
-        return doesImportAccountExist(accountId) &&
-                isTransactionTypeValid(transactionType, effectiveDate) &&
-                getAccessControlService().isTransactionTypeAllowed(accountId, transactionType);
-
-    }
 
     /**
      * Determine the credit limit of the account. do not exceed

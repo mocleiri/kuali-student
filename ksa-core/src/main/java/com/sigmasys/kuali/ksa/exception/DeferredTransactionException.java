@@ -8,5 +8,8 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class DeferredTransactionException extends GenericException {
 
+    public DeferredTransactionException(String message) {
+        super(message);
+    }
 
 }

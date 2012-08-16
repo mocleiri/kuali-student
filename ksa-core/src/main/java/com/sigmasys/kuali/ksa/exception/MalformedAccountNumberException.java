@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class MalformedAccountNumberException extends GenericException {
 
-
+    public MalformedAccountNumberException(String message) {
+        super(message);
+    }
 }

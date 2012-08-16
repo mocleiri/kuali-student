@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class LockedAllocationException extends GenericException {
 
-
+    public LockedAllocationException(String message) {
+        super(message);
+    }
 }

@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class RefundFailedException extends GenericException {
 
-
+    public RefundFailedException(String message) {
+        super(message);
+    }
 }

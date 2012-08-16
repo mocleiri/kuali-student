@@ -8,5 +8,8 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class InvalidAchAmountException extends GenericException {
 
+    public InvalidAchAmountException(String message) {
+        super(message);
+    }
 
 }

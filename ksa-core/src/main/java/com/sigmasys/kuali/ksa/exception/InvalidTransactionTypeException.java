@@ -8,5 +8,8 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class InvalidTransactionTypeException extends GenericException {
 
+    public InvalidTransactionTypeException(String message) {
+        super(message);
+    }
 
 }

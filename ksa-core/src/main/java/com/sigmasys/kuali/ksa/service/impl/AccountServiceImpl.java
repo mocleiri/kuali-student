@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.Query;
+import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -299,6 +301,23 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
     /**
+     * Checks if KSA account exists. If the KSA account does not exist, it tries to look for the existing KIM account
+     * and create a new KSA account, if the account does not exist returns false, otherwise true.
+     *
+     * @param userId Account ID
+     * @return true if the account exists, false otherwise
+     */
+    @Override
+    public boolean doesAccountExist(String userId) {
+        try {
+            return getOrCreateAccount(userId) != null;
+        } catch (UserNotFoundException e) {
+            logger.error(e.getMessage(), e);
+            return false;
+        }
+    }
+
+    /**
      * This methods fetches Account and all its associations by account ID.
      *
      * @param userId Account ID
@@ -355,7 +374,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             if (person == null) {
                 String errMsg = "The user '" + person + "' does not exist";
                 logger.error(errMsg);
-                throw new IllegalStateException(errMsg);
+                throw new UserNotFoundException(errMsg);
             }
             // If the person exists in KIM we have to create a new KSA account based on that
             account = createAccount(person);

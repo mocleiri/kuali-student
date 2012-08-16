@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class UserNotFoundException extends GenericException {
 
-
+    public UserNotFoundException(String message) {
+        super(message);
+    }
 }

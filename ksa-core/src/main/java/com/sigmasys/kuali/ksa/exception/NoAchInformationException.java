@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class NoAchInformationException extends GenericException {
 
-
+    public NoAchInformationException(String message) {
+        super(message);
+    }
 }

@@ -62,6 +62,12 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     protected Date originationDate;
 
     /**
+     * Period for which the transaction is recognized on the general ledger. By default, this is set to the effectiveDate, unless overridden.
+     */
+    protected Date recognitionDate;
+
+
+    /**
      * This is the value of the transaction in the system currency. This is the number that is used as the core value of the transaction. All calculations are performed against this number.
      */
     protected BigDecimal amount;
@@ -189,6 +195,15 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     public void setOriginationDate(Date originationDate) {
         this.originationDate = originationDate;
+    }
+
+    @Column(name = "RECOGNITION_DATE")
+    public Date getRecognitionDate() {
+        return recognitionDate;
+    }
+
+    public void setRecognitionDate(Date recognitionDate) {
+        this.recognitionDate = recognitionDate;
     }
 
     @Column(name = "NATIVE_AMNT")

@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class TransactionNotFoundException extends GenericException {
 
-
+    public TransactionNotFoundException(String message) {
+        super(message);
+    }
 }

@@ -8,5 +8,8 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class AccountTypeNotFoundException extends GenericException {
 
+    public AccountTypeNotFoundException(String message) {
+        super(message);
+    }
 
 }

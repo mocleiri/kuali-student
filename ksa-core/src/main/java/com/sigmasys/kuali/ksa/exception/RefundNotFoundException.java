@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class RefundNotFoundException extends GenericException {
 
-
+    public RefundNotFoundException(String message) {
+        super(message);
+    }
 }

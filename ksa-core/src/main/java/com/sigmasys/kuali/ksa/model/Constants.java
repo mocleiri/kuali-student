@@ -19,6 +19,8 @@ public interface Constants {
     String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
     String IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME = "ksa.import.single.batch.failure";
     String DEFAULT_GL_TYPE_PARAM_NAME = "ksa.default.general.ledger.type";
+    String DEFAULT_DEFERMENT_TYPE_PARAM_NAME = "ksa.deferment.type.id";
+    String LOGGING_OPERATION = "ksa.logging.operation";
 
     // WS constants
     String WS_NAMESPACE = "http://sigmasys.com/";

@@ -8,5 +8,8 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class DefermentExpiredException extends GenericException {
 
+    public DefermentExpiredException(String message) {
+        super(message);
+    }
 
 }

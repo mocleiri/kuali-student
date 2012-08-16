@@ -8,5 +8,8 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class InvalidRefundTypeException extends GenericException {
 
+    public InvalidRefundTypeException(String message) {
+        super(message);
+    }
 
 }

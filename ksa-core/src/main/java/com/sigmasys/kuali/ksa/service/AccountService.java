@@ -96,6 +96,7 @@ public interface AccountService {
      */
     Account getOrCreateAccount(String userId);
 
+
     /**
      * Checks if KSA account exists
      *
@@ -103,6 +104,15 @@ public interface AccountService {
      * @return true if the account exists, false otherwise
      */
     boolean doesKsaAccountExist(String userId);
+
+    /**
+     * Checks if KSA account exists. If the KSA account does not exist, it tries to look for the existing KIM account
+     * and create a new KSA account, if the account does not exist returns false, otherwise true.
+     *
+     * @param userId Account ID
+     * @return true if the account exists, false otherwise
+     */
+    boolean doesAccountExist(String userId);
 
     /**
      * This methods fetches Account and all its associations by account ID.
@@ -123,7 +133,7 @@ public interface AccountService {
     /**
      * Creates and associates a new person name object with the given Account ID.
      *
-     * @param userId Account ID
+     * @param userId     Account ID
      * @param personName Person name
      * @return new PersonName instance with ID
      */
@@ -132,7 +142,7 @@ public interface AccountService {
     /**
      * Creates and associates a new postal address with the given Account ID.
      *
-     * @param userId     Account ID
+     * @param userId        Account ID
      * @param postalAddress Postal address
      * @return new PostalAddress instance with ID
      */
@@ -141,7 +151,7 @@ public interface AccountService {
     /**
      * Creates and associates a new electronic contact with the given Account ID.
      *
-     * @param userId     Account ID
+     * @param userId            Account ID
      * @param electronicContact Electronic contact
      * @return new ElectronicContact instance with ID
      */

@@ -10,5 +10,8 @@ public class GenericException extends RuntimeException {
 
     // TODO: provide KSA generic exception logic
 
+    public GenericException(String message) {
+        super(message);
+    }
 
 }

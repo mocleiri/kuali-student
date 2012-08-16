@@ -1,8 +1,12 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
+import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,10 +40,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     private static final Log logger = LogFactory.getLog(TransactionServiceImpl.class);
 
-    private static final String DEFERMENT_TYPE_ID = "deferment.type.id";
 
     @Autowired
     private ConfigService configService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private CurrencyService currencyService;
@@ -52,6 +58,11 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Autowired
     private UserSessionManager userSessionManager;
+
+
+    private AccessControlService getAccessControlService() {
+       return ContextUtils.getBean(AccessControlService.class);
+    }
 
 
     private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
@@ -139,7 +150,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
         String errMsg = "Cannot find TransactionType for ID = " + transactionTypeId + " and date = " + effectiveDate;
         logger.error(errMsg);
-        throw new IllegalStateException(errMsg);
+        throw new InvalidTransactionTypeException(errMsg);
     }
 
     /**
@@ -178,14 +189,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transactionType == null) {
             String errMsg = "Transaction type does not exist for the given ID = " + id;
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Account account = em.find(Account.class, userId);
         if (account == null) {
             String errMsg = "Account does not exist for the given ID = " + userId;
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new UserNotFoundException(errMsg);
         }
 
         String currencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
@@ -193,7 +204,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (currency == null) {
             String errMsg = "Currency does not exist for the given ISO code = " + currencyCode;
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Transaction transaction = (transactionType instanceof CreditType) ? new Payment() : new Charge();
@@ -424,14 +435,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transaction1 == null) {
             String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Transaction transaction2 = getTransaction(transactionId2);
         if (transaction2 == null) {
             String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         if (transaction1.getAccount() == null || transaction2.getAccount() == null) {
@@ -575,7 +586,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transaction == null) {
             String errMsg = "Transaction with ID = " + transactionId + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Query query = em.createQuery("select a from Allocation a " +
@@ -626,14 +637,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transaction1 == null) {
             String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Transaction transaction2 = getTransaction(transactionId2);
         if (transaction2 == null) {
             String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Query query = em.createQuery("select a from Allocation a " +
@@ -759,7 +770,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transaction == null) {
             String errMsg = "Transaction with ID = " + transactionId + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         if (transaction.isDeferred()) {
@@ -789,7 +800,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         // If the deferment type ID is null -> use the default one defined in ksa.properties
         if (defermentTypeId == null) {
-            defermentTypeId = configService.getInitialParameter(DEFERMENT_TYPE_ID);
+            defermentTypeId = configService.getInitialParameter(Constants.DEFAULT_DEFERMENT_TYPE_PARAM_NAME);
         }
 
         TransactionType transactionType = getTransactionType(defermentTypeId, transaction.getEffectiveDate());
@@ -933,5 +944,23 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         return false;
     }
+
+    /**
+     * Determine if the transaction is allowed for the given account ID, transaction type and effective date
+     *
+     * @param accountId       Account ID
+     * @param transactionType Transaction Type
+     * @param effectiveDate   Effective Date
+     * @return true/false
+     */
+    @Override
+    public boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate) {
+        // TODO getAccountBlockedStatus ??
+        return accountService.doesAccountExist(accountId) &&
+                getTransactionType(transactionType, effectiveDate) != null &&
+                getAccessControlService().isTransactionTypeAllowed(accountId, transactionType);
+
+    }
+
 
 }

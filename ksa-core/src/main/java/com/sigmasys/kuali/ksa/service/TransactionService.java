@@ -328,4 +328,14 @@ public interface TransactionService {
     @WebMethod(exclude = true)
     <T extends TransactionType> Class<T> getTransactionTypeClass(String transactionTypeId);
 
+    /**
+     * Determine if the transaction is allowed for the given account ID, transaction type and effective date
+     *
+     * @param accountId       Account ID
+     * @param transactionType Transaction Type
+     * @param effectiveDate   Effective Date
+     * @return true/false
+     */
+    boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate);
+
 }

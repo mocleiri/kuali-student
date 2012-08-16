@@ -8,5 +8,7 @@ package com.sigmasys.kuali.ksa.exception;
  */
 public class MalformedRoutingNumberException extends GenericException {
 
-
+    public MalformedRoutingNumberException(String message) {
+        super(message);
+    }
 }
