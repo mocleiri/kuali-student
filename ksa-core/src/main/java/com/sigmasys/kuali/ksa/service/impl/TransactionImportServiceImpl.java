@@ -487,7 +487,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         // Setting general ledger type
         String glTypeCode = (override != null && override.getGeneralLedgerType() != null) ?
                 override.getGeneralLedgerType() :
-                configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME);
+                configService.getInitialParameter(Constants.GL_TYPE_PARAM_NAME);
 
         if (glTypeCode != null) {
             transaction.setGeneralLedgerType(transactionService.getGeneralLedgerType(glTypeCode));
