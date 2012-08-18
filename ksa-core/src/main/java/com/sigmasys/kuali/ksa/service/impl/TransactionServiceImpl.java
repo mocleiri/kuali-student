@@ -215,6 +215,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         transaction.setExternalId(externalId);
         transaction.setEffectiveDate(effectiveDate);
+        transaction.setRecognitionDate(effectiveDate);
         transaction.setNativeAmount(amount);
         transaction.setAmount(amount);
         transaction.setAllocatedAmount(BigDecimal.ZERO);
