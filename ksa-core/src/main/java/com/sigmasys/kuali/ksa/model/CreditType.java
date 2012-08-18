@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.util.EnumUtils;
+
 import javax.persistence.*;
 
 /**
@@ -24,7 +26,21 @@ public class CreditType extends TransactionType {
 
     private String unallocatedGlAccount;
 
-    private String unallocatedGlOperation;
+    private GlOperationType unallocatedGlOperation;
+
+    private String glOperationCode;
+
+
+    @PrePersist
+    void populateDBFields() {
+        glOperationCode = (unallocatedGlOperation != null) ? unallocatedGlOperation.getId() : null;
+    }
+
+    @PostLoad
+    void populateTransientFields() {
+        unallocatedGlOperation = (glOperationCode != null) ?
+                EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
+    }
 
 
     @Column(name = "REFUND_RULE", length = 2000)
@@ -64,11 +80,20 @@ public class CreditType extends TransactionType {
     }
 
     @Column(name = "UNALLOCATED_GL_OPERATION", length = 1)
-    public String getUnallocatedGlOperation() {
+    protected String getGlOperationCode() {
+        return glOperationCode;
+    }
+
+    protected void setGlOperationCode(String glOperationCode) {
+        this.glOperationCode = glOperationCode;
+    }
+
+    @Transient
+    public GlOperationType getUnallocatedGlOperation() {
         return unallocatedGlOperation;
     }
 
-    public void setUnallocatedGlOperation(String unallocatedGlOperation) {
+    public void setUnallocatedGlOperation(GlOperationType unallocatedGlOperation) {
         this.unallocatedGlOperation = unallocatedGlOperation;
     }
 }

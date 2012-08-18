@@ -140,6 +140,15 @@ public class GlTransaction implements Identifiable {
         this.generatedText = generatedText;
     }
 
+    protected void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    @Column(name = "STATUS", length = 1)
+    protected String getStatusCode() {
+        return statusCode;
+    }
+
     @Transient
     public GlTransactionStatus getStatus() {
         return status;
@@ -149,14 +158,6 @@ public class GlTransaction implements Identifiable {
         this.status = status;
     }
 
-    protected void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    @Column(name = "STATUS", length = 1)
-    protected String getStatusCode() {
-        return statusCode;
-    }
 }
 	
 
