@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.annotation.Auditable;
+
 import javax.persistence.*;
 
 /**
@@ -11,6 +13,7 @@ import javax.persistence.*;
  *         Date: 1/22/12
  *         Time: 3:47 PM
  */
+@Auditable
 @Entity
 @Table(name = "KSSA_ACNT_PROTECTED_INFO")
 public class AccountProtectedInfo implements Identifiable {
