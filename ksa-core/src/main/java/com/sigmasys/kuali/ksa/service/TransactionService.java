@@ -64,14 +64,6 @@ public interface TransactionService {
      */
     TransactionType getTransactionType(String transactionTypeId, Date effectiveDate);
 
-    /**
-     * Returns the general ledger type instance for the given code.
-     *
-     * @param glTypeCode General Ledger type code
-     * @return GeneralLedgerType instance
-     */
-    GeneralLedgerType getGeneralLedgerType(String glTypeCode);
-
 
     /**
      * Returns Transaction by ID

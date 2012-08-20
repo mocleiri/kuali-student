@@ -57,6 +57,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private TransactionService transactionService;
 
     @Autowired
+    private GeneralLedgerService glService;
+
+    @Autowired
     private ConfigService configService;
 
     @Autowired
@@ -490,7 +493,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 configService.getInitialParameter(Constants.GL_TYPE_PARAM_NAME);
 
         if (glTypeCode != null) {
-            transaction.setGeneralLedgerType(transactionService.getGeneralLedgerType(glTypeCode));
+            transaction.setGeneralLedgerType(glService.getGeneralLedgerType(glTypeCode));
         }
 
         if (transaction instanceof Payment) {

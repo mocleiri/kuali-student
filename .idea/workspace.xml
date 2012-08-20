@@ -5,34 +5,21 @@
     <bookmark url="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CalendarUtils.java" line="29" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
+    <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="Added @Auditable to AccountProtectedInfo class">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/GeneralLedgerService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/sigmasys/kuali/ksa/rm/Debit.html" afterPath="$PROJECT_DIR$/doc/com/sigmasys/kuali/ksa/rm/Debit.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/ksa-core.iml" afterPath="$PROJECT_DIR$/ksa-core/ksa-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/AccountTypeNotFoundException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/AccountTypeNotFoundException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DefermentExpiredException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DefermentExpiredException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DeferredTransactionException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DeferredTransactionException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/GenericException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/GenericException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidAchAmountException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidAchAmountException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidRefundTypeException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidRefundTypeException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidTransactionTypeException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidTransactionTypeException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/LockedAllocationException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/LockedAllocationException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/MalformedAccountNumberException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/MalformedAccountNumberException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/MalformedRoutingNumberException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/MalformedRoutingNumberException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/NoAchInformationException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/NoAchInformationException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundCancelledException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundCancelledException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundFailedException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundFailedException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundNotFoundException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundNotFoundException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundNotVerifiedException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundNotVerifiedException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/TransactionNotFoundException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/TransactionNotFoundException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/UserNotFoundException.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/UserNotFoundException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AccountService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AccountService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GeneralLedgerType.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GeneralLedgerType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccountServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccountServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/ksa_constraints_ddl.sql" afterPath="$PROJECT_DIR$/sql/ksa_constraints_ddl.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/ksa_create_ddl.sql" afterPath="$PROJECT_DIR$/sql/ksa_create_ddl.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/ksa_drop_ddl.sql" afterPath="$PROJECT_DIR$/sql/ksa_drop_ddl.sql" />
     </list>
     <ignored path="ksa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,52 +94,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TransactionNotFoundException.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/TransactionNotFoundException.java">
+      <file leaf-file-name="GeneralLedgerServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="57" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserNotFoundException.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/UserNotFoundException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="24" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransactionImportServiceImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="407" column="42" selection-start="17055" selection-end="17077" vertical-scroll-proportion="8.538462">
+            <state line="27" column="88" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1204#1234#0" expanded="true" />
+                <element signature="e#839#869#0" expanded="true" />
+                <element signature="e#3616#3642#0" expanded="true" />
+                <element signature="e#3782#3802#0" expanded="true" />
+                <element signature="e#3972#3995#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
+      <file leaf-file-name="GeneralLedgerService.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/GeneralLedgerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="960" column="41" selection-start="38166" selection-end="38166" vertical-scroll-proportion="0.0">
+            <state line="25" column="59" selection-start="760" selection-end="760" vertical-scroll-proportion="0.47882736">
               <folding>
-                <element signature="e#1320#1350#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ksa_create_ddl.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sql/ksa_create_ddl.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="121" selection-start="5651" selection-end="5651" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -160,16 +123,54 @@
       <file leaf-file-name="DatabaseUtilsTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/DatabaseUtilsTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="36" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0">
+            <state line="36" column="38" selection-start="1131" selection-end="1131" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericPersistenceService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java">
+      <file leaf-file-name="ksa_drop_ddl.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sql/ksa_drop_ddl.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="93" selection-start="1774" selection-end="1774" vertical-scroll-proportion="0.0">
+            <state line="25" column="28" selection-start="1233" selection-end="1233" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ksa_create_ddl.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sql/ksa_create_ddl.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="30" selection-start="6274" selection-end="6274" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ksa_constraints_ddl.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sql/ksa_constraints_ddl.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="29" selection-start="3445" selection-end="3445" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransactionImportServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="514" column="74" selection-start="21711" selection-end="21711" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1204#1234#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransactionServiceTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="12" selection-start="1009" selection-end="1009" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -178,7 +179,7 @@
       <file leaf-file-name="TransactionService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="338" column="95" selection-start="11561" selection-end="11561" vertical-scroll-proportion="0.0">
+            <state line="10" column="55" selection-start="259" selection-end="259" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -186,20 +187,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java">
+      <file leaf-file-name="GlTransaction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="53" selection-start="736" selection-end="736" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ksa.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/ksa.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="86" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="88" column="36" selection-start="1924" selection-end="1924" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -214,18 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccessControlServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionImportService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/sun-jaxws.xml" />
-        <option value="$PROJECT_DIR$/sql/ksa_constraints_ddl.sql" />
-        <option value="$PROJECT_DIR$/sql/test_inserts/ksa_test_data_dml.sql" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/LockedAllocationException.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/GenericException.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/AccountTypeNotFoundException.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DefermentExpiredException.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DeferredTransactionException.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidAchAmountException.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidRefundTypeException.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidTransactionTypeException.java" />
@@ -240,11 +222,23 @@
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/UserNotFoundException.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccountServiceImpl.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AccountService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlOperationType.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/CreditType.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/TransactionNotAllowedException.java" />
+        <option value="$PROJECT_DIR$/ksa-core/pom.xml" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/AccountProtectedInfo.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GeneralLedgerType.java" />
+        <option value="$PROJECT_DIR$/doc/com/sigmasys/kuali/ksa/rm/Debit.html" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/GeneralLedgerService.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java" />
         <option value="$PROJECT_DIR$/sql/ksa_create_ddl.sql" />
+        <option value="$PROJECT_DIR$/sql/ksa_constraints_ddl.sql" />
+        <option value="$PROJECT_DIR$/sql/ksa_drop_ddl.sql" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java" />
       </list>
     </option>
   </component>
@@ -1559,6 +1553,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane">
@@ -1660,11 +1668,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.sigmasys.kuali.ksa.service" />
-      <recent name="com.sigmasys.kuali.ksa.model" />
       <recent name="com.sigmasys.kuali.ksa.service.impl" />
+      <recent name="com.sigmasys.kuali.ksa.service" />
+      <recent name="com.sigmasys.kuali.ksa.exception" />
+      <recent name="com.sigmasys.kuali.ksa.model" />
       <recent name="com.sigmasys.kuali.ksa.config" />
-      <recent name="com.sigmasys.kuali.ksa.gwt.server.impl" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/gwt" />
@@ -1681,150 +1689,7 @@
       <recent name="com.sigmasys.kuali.ksa.service" />
     </key>
   </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="Moments ago" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-            <PATH vcs="svn" revision="34726">$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransactionStatus.java</PATH>
-            <PATH vcs="svn" revision="34726">$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java</PATH>
-            <PATH vcs="svn" revision="34726">$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-            <PATH vcs="svn" revision="34726">$PROJECT_DIR$/sql/ksa_config_dml.sql</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
-  </component>
-  <component name="RunManager" selected="JUnit.DatabaseUtilsTest.createSchemaTest">
-    <configuration default="false" name="TransactionImportServiceTest.singleImport" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ksa-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
-      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionImportServiceTest" />
-      <option name="METHOD_NAME" value="singleImport" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.DatabaseUtilsTest.dropSchemaTest">
     <configuration default="false" name="TransactionImportServiceTest.batchImport" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -1922,6 +1787,34 @@
       <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
       <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.DatabaseUtilsTest" />
       <option name="METHOD_NAME" value="createSchemaTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DatabaseUtilsTest.dropSchemaTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="ksa-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
+      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.DatabaseUtilsTest" />
+      <option name="METHOD_NAME" value="dropSchemaTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
       <option name="PARAMETERS" value="" />
@@ -2135,11 +2028,11 @@
       <item index="0" class="java.lang.String" itemvalue="Tomcat Server.KSA Tomcat 6" />
       <item index="1" class="java.lang.String" itemvalue="Tomcat Server.KSA Tomcat 7" />
       <item index="2" class="java.lang.String" itemvalue="GWT Configuration.KSA" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TransactionImportServiceTest.singleImport" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TransactionImportServiceTest.batchImport" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TransactionImportServiceTest.batchImportFail" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.CurrencyServiceTest.getCurrencies" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.DatabaseUtilsTest.createSchemaTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TransactionImportServiceTest.batchImport" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TransactionImportServiceTest.batchImportFail" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.CurrencyServiceTest.getCurrencies" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.DatabaseUtilsTest.createSchemaTest" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.DatabaseUtilsTest.dropSchemaTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -2632,7 +2525,31 @@
       <created>1343875968117</created>
       <updated>1343875968117</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Added several constructor to KSA exception classes, move isTransactionAllowed() to TransactionService class, implemented &quot;doesAccountExist&quot; in AccountService,made the appropriate changes to TransactionImportService, added &quot;recognitionDate&quot; to Transaction class, modified JPA mapping and KSA DDL scripts">
+      <created>1345085051132</created>
+      <updated>1345085051132</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Updated docs">
+      <created>1345211093102</created>
+      <updated>1345211093102</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Created GlOperationType enum, made use of it in CreditType, modified JPA mapping and GlTransaction class">
+      <created>1345260627102</created>
+      <updated>1345260627102</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Added TransactionNotAllowedException, set recognitionDate to effectiveDate in createTransaction() of TransactionServiceImpl class">
+      <created>1345262186102</created>
+      <updated>1345262186102</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Commented out the GWT Maven plugin">
+      <created>1345262370102</created>
+      <updated>1345262370102</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Added @Auditable to AccountProtectedInfo class">
+      <created>1345434965123</created>
+      <updated>1345434965123</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2663,24 +2580,24 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12401575" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27952754" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30341464" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20097561" sideWeight="0.49839744" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18327974" sideWeight="0.43307087" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26279527" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30019686" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3031496" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297244" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12861736" sideWeight="0.7746063" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12861736" sideWeight="0.65059054" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21597" sideWeight="0.7746063" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2253937" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25026795" sideWeight="0.65059054" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34940946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44389763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2727,7 +2644,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new statements to KSA DDL and DML scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added @Auditable to AccountProtectedInfo class" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -2740,12 +2657,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.87606114" />
-    <MESSAGE value="Included Woodstox Stax2 implementation in pom.xml, added getResourceAsString() method to CommonUtils, solved XLIFF parsing and XML schema validation issues, JUnit testing" />
-    <MESSAGE value="Added a few comments" />
-    <MESSAGE value="Bug fixing in the XML parser" />
-    <MESSAGE value="Added localized parameters to ReferenceData to make it available on UI, implemented getLocalizedParameters() method in ConfigService and GwtConfigService, added LocalizationServiceTest to ServiceTestSuite (now it is part of the KSA build)" />
-    <MESSAGE value="Fixed Localization JAX WS service return types and LocalizationWebServiceTest" />
-    <MESSAGE value="FIXED the datasource settings again" />
     <MESSAGE value="Excluded the failing test method" />
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Implemented BatchReceipt class and BatchReceiptStatus enum, added persistBatchReceipt() and getBatchReceipt methods to TransactionImportService, made the corresponding changes to KSA DDL scripts, fixed Dave's errors in TransactionImportServiceImpl" />
@@ -2765,6 +2676,12 @@
     <MESSAGE value="Fixed TransactionImportService web service annotations" />
     <MESSAGE value="Implemented multiple versions of canPay() in TransactionService, added RegExp matching for allowable debit types, provided validation, fixed JAX WS annotations, debugging" />
     <MESSAGE value="added new statements to KSA DDL and DML scripts" />
+    <MESSAGE value="Added several constructor to KSA exception classes, move isTransactionAllowed() to TransactionService class, implemented &quot;doesAccountExist&quot; in AccountService,made the appropriate changes to TransactionImportService, added &quot;recognitionDate&quot; to Transaction class, modified JPA mapping and KSA DDL scripts" />
+    <MESSAGE value="Updated docs" />
+    <MESSAGE value="Created GlOperationType enum, made use of it in CreditType, modified JPA mapping and GlTransaction class" />
+    <MESSAGE value="Added TransactionNotAllowedException, set recognitionDate to effectiveDate in createTransaction() of TransactionServiceImpl class" />
+    <MESSAGE value="Commented out the GWT Maven plugin" />
+    <MESSAGE value="Added @Auditable to AccountProtectedInfo class" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -2808,228 +2725,237 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransactionStatus.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/AccountProtectedInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="83" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0">
+        <state line="13" column="55" selection-start="252" selection-end="252" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/src.zip!/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1107" column="18" selection-start="44988" selection-end="44988" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransmission.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/CurrencyService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="74" selection-start="2549" selection-end="2549" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="209" column="76" selection-start="8754" selection-end="8754" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/src.zip!/javax/security/auth/login/AccountNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="11" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/AccountTypeNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="56" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DefermentExpiredException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="50" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/DeferredTransactionException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="55" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/GenericException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="20" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidAchAmountException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="52" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidRefundTypeException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="58" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidTransactionTypeException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="61" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/LockedAllocationException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="54" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/MalformedAccountNumberException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="61" selection-start="228" selection-end="228" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/MalformedRoutingNumberException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="63" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/NoAchInformationException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="57" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundCancelledException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="58" selection-start="232" selection-end="232" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundFailedException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="50" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="52" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/RefundNotVerifiedException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="55" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+        <state line="12" column="17" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AccountService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="4" selection-start="3867" selection-end="3867" vertical-scroll-proportion="0.0">
+        <state line="14" column="17" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccountServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/ActivityService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="82" selection-start="1615" selection-end="1615" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1502#1532#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/TransactionNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="57" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0">
+        <state line="12" column="17" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/UserNotFoundException.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/AccessControlService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="24" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
+        <state line="11" column="17" selection-start="235" selection-end="235" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/InformationService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="338" column="95" selection-start="11561" selection-end="11561" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GenericPersistenceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="93" selection-start="1774" selection-end="1774" vertical-scroll-proportion="0.0">
+        <state line="16" column="17" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/DroolsService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="53" selection-start="736" selection-end="736" vertical-scroll-proportion="0.0">
+        <state line="29" column="13" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/ksa.properties">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Deferment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="86" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
+        <state line="11" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/DatabaseUtilsTest.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransactionStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="36" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0">
+        <state line="7" column="12" selection-start="126" selection-end="126" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="28" selection-start="611" selection-end="611" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Payment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Credit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="42" selection-start="331" selection-end="331" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Debit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="25" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Charge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/com/sigmasys/kuali/ksa/rm/Debit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="265" column="56" selection-start="10793" selection-end="10793" vertical-scroll-proportion="-6.2083335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionImportService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="45" selection-start="846" selection-end="846" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GeneralLedgerType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="57" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="72" selection-start="5020" selection-end="5020" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="960" column="41" selection-start="38166" selection-end="38166" vertical-scroll-proportion="0.0">
+        <state line="16" column="81" selection-start="770" selection-end="770" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#1320#1350#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccountServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="13" selection-start="1546" selection-end="1546" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/DatabaseUtilsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="38" selection-start="1131" selection-end="1131" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sql/ksa_create_ddl.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="121" selection-start="5651" selection-end="5651" vertical-scroll-proportion="0.0">
+        <state line="32" column="30" selection-start="6274" selection-end="6274" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql/ksa_constraints_ddl.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="29" selection-start="3445" selection-end="3445" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql/ksa_drop_ddl.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="28" selection-start="1233" selection-end="1233" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="407" column="42" selection-start="17055" selection-end="17077" vertical-scroll-proportion="8.538462">
+        <state line="514" column="74" selection-start="21711" selection-end="21711" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1204#1234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="12" selection-start="1009" selection-end="1009" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="55" selection-start="259" selection-end="259" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1204#1234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="36" selection-start="1924" selection-end="1924" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="88" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#839#869#0" expanded="true" />
+            <element signature="e#3616#3642#0" expanded="true" />
+            <element signature="e#3782#3802#0" expanded="true" />
+            <element signature="e#3972#3995#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/GeneralLedgerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="59" selection-start="760" selection-end="760" vertical-scroll-proportion="0.47882736">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

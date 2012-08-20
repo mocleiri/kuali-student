@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.util.EnumUtils;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 
 /**
@@ -22,9 +23,9 @@ public class GlTransaction implements Identifiable {
     private Long id;
 
     /**
-     * Transaction that prompted this GL transaction
+     * Transactions associated with this GL transaction
      */
-    private Transaction transaction;
+    private Set<Transaction> transactions;
 
     /**
      * Transmission of the current GL transaction
@@ -49,7 +50,7 @@ public class GlTransaction implements Identifiable {
     /**
      * Generated text
      */
-    private String generatedText;
+    private String description;
 
     private GlTransactionStatus status;
 
@@ -84,14 +85,21 @@ public class GlTransaction implements Identifiable {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TRANSACTION_ID_FK", unique = true, nullable = false)
-    public Transaction getTransaction() {
-        return transaction;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_GL_TRANS_TRANSACTION",
+            joinColumns = {
+                    @JoinColumn(name = "GL_TRANSACTION_ID_FK")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "TRANSACTION_ID_FK")
+            }
+    )
+    public Set<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -132,12 +140,12 @@ public class GlTransaction implements Identifiable {
     }
 
     @Column(name = "GENERATED_TEXT", length = 1024)
-    public String getGeneratedText() {
-        return generatedText;
+    public String getDescription() {
+        return description;
     }
 
-    public void setGeneratedText(String generatedText) {
-        this.generatedText = generatedText;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     protected void setStatusCode(String statusCode) {

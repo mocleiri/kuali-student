@@ -217,7 +217,6 @@
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
-      <element id="gwt-compiler-output" facet="ksa-core/gwt/GWT" />
     </root>
   </artifact>
 </component>

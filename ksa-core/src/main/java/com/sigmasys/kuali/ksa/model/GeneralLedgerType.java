@@ -16,7 +16,7 @@ public class GeneralLedgerType extends AuditableEntity {
     /**
      * General Ledger Account ID
      */
-    private String glAssetAccount;
+    private String glAccountId;
 
     /**
      * General Ledger Operation on Charge
@@ -38,12 +38,12 @@ public class GeneralLedgerType extends AuditableEntity {
     }
 
     @Column(name = "GL_ASSET_ACCOUNT", length = 45)
-    public String getGlAssetAccount() {
-        return glAssetAccount;
+    public String getGlAccountId() {
+        return glAccountId;
     }
 
-    public void setGlAssetAccount(String glAssetAccount) {
-        this.glAssetAccount = glAssetAccount;
+    public void setGlAccountId(String glAccountId) {
+        this.glAccountId = glAccountId;
     }
 
     @Column(name = "GL_OPERATION_ON_CHARGE", length = 1)
