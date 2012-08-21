@@ -91,24 +91,34 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         // Map of GL Account ID and total transaction amount for this GL account
         Map<String, BigDecimal> amountMap = new HashMap<String, BigDecimal>();
         // Map of GL Account ID and the first GL transaction for this GL account from the given list
-        Map<String, GlTransaction> glTransactionMap = new HashMap<String, GlTransaction>();
+        Map<String, List<GlTransaction>> glTransactionMap = new HashMap<String, List<GlTransaction>>();
+
         for (GlTransaction glTransaction : glTransactions) {
             if (glTransaction.getStatus() != null && GlTransactionStatus.WAITING == glTransaction.getStatus()) {
                 String glAccountId = glTransaction.getGlAccountId();
                 if (glAccountId != null) {
+
                     Set<Transaction> transactionsForAccount = transactionMap.get(glAccountId);
                     if (transactionsForAccount == null) {
                         transactionsForAccount = new HashSet<Transaction>();
                         transactionMap.put(glAccountId, transactionsForAccount);
-                        // Putting the first GL transaction into the map
-                        glTransactionMap.put(glAccountId, glTransaction);
                     }
-                    // Adding transaction to the list of transactions for the current GL account
+                    // Adding all transactions to the list of transactions for the current GL account
                     transactionsForAccount.addAll(glTransaction.getTransactions());
+
+                    List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(glAccountId);
+                    if (glTransactionsForAccount == null) {
+                        glTransactionsForAccount = new LinkedList<GlTransaction>();
+                        glTransactionMap.put(glAccountId, glTransactionsForAccount);
+                    }
+                    // Adding GL transaction to the list of GL transactions for the current GL account
+                    glTransactionsForAccount.add(glTransaction);
+
                     BigDecimal amount = amountMap.get(glAccountId);
                     if (amount == null) {
                         amount = BigDecimal.ZERO;
                     }
+
                     for (Transaction trans : glTransaction.getTransactions()) {
                         amount = amount.add(trans.getAmount() != null ? trans.getAmount() : BigDecimal.ZERO);
                     }
@@ -117,11 +127,32 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                 }
             }
         }
+
+        Set<Long> glTransactionIdsToDelete = new HashSet<Long>();
         for (String glAccountId : glTransactionMap.keySet()) {
-            BigDecimal totalAmount = amountMap.get(glAccountId);
-            // TODO:
+            List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(glAccountId);
+            if (glTransactionsForAccount != null && !glTransactionsForAccount.isEmpty()) {
+                BigDecimal totalAmount = amountMap.get(glAccountId);
+                if (!BigDecimal.ZERO.equals(totalAmount)) {
+                    // Persisting the first GL transaction with the total amount and all
+                    // transactions for the current GL account
+                    GlTransaction firstGlTransaction = glTransactionsForAccount.get(0);
+                    firstGlTransaction.setTransactions(transactionMap.get(glAccountId));
+                    firstGlTransaction.setAmount(totalAmount);
+                    persistEntity(firstGlTransaction);
+                    // We have to remove the rest of GL transactions
+                    for (int i = 1; i < glTransactionsForAccount.size(); i++) {
+                        glTransactionIdsToDelete.add(glTransactionsForAccount.get(i).getId());
+                    }
+
+                } else {
+                    for (GlTransaction glTransaction : glTransactionsForAccount) {
+                        glTransactionIdsToDelete.add(glTransaction.getId());
+                    }
+                }
+            }
         }
-        // TODO
+        // TODO: go through glTransactionIdsToDelete
     }
 
     /**
