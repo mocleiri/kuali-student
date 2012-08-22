@@ -40,7 +40,9 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @param isQueued      Set status to Q unless isQueued is passed and is false, in which case, set status to W
      * @return new GL Transaction instance
      */
+    @Override
     @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
                                              String description, boolean isQueued) {
 
@@ -72,7 +74,9 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @param description   Transaction description
      * @return new GL Transaction instance
      */
+    @Override
     @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
                                              String description) {
         return createGlTransaction(transactionId, userId, amount, description, true);
@@ -84,7 +88,9 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      *
      * @param glTransactions List of general ledger transactions
      */
+    @Override
     @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
     public void summarizeGlTransactions(List<GlTransaction> glTransactions) {
         // Map of GL Account ID and set of transactions for this GL account
         Map<String, Set<Transaction>> transactionMap = new HashMap<String, Set<Transaction>>();
@@ -152,7 +158,17 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                 }
             }
         }
-        // TODO: go through glTransactionIdsToDelete
+        // Deleting GL transactions that must be eliminated from the list and database
+        for (Iterator<GlTransaction> iterator = glTransactions.iterator(); iterator.hasNext(); ) {
+            GlTransaction glTransaction = iterator.next();
+            if (glTransactionIdsToDelete.contains(glTransaction.getId())) {
+                deleteEntity(glTransaction.getId(), GlTransaction.class);
+                iterator.remove();
+            } else {
+                glTransaction.setStatus(GlTransactionStatus.QUEUED);
+                persistEntity(glTransaction);
+            }
+        }
     }
 
     /**
@@ -172,6 +188,16 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         String errMsg = "Cannot find GeneralLedgerType for the code = " + glTypeCode;
         logger.error(errMsg);
         throw new IllegalStateException(errMsg);
+    }
+
+    /**
+     * Sets the recognition period (String value) for the given date range
+     * @param recognitionPeriod
+     * @param fromDate
+     * @param toDate
+     */
+    public void setRecognitionPeriod (String recognitionPeriod, Date fromDate, Date toDate) {
+        // TODO:
     }
 
 
