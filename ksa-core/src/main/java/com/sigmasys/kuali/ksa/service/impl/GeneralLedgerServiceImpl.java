@@ -191,13 +191,22 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Sets the recognition period (String value) for the given date range
-     * @param recognitionPeriod
-     * @param fromDate
-     * @param toDate
+     * Gets all queued or in session general ledger transactions within the date range specified and
+     * adds the recognition period to the transmission
+     *
+     * @param recognitionPeriod Recognition period
+     * @param fromDate          Start date
+     * @param toDate            End date
+     * @return true if one or more records have been updated, false - otherwise
      */
-    public void setRecognitionPeriod (String recognitionPeriod, Date fromDate, Date toDate) {
-        // TODO:
+    public boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate) {
+        Query query = em.createQuery("update GlTransaction t " +
+                " set t.transmission.recognitionPeriod = :recognitionPeriod " +
+                " where t.date between :fromDate and :toDate");
+        query.setParameter("recognitionPeriod", recognitionPeriod);
+        query.setParameter("fromDate", fromDate);
+        query.setParameter("toDate", toDate);
+        return query.executeUpdate() > 0;
     }
 
 

@@ -6,6 +6,7 @@ import com.sigmasys.kuali.ksa.model.*;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,5 +67,16 @@ public interface GeneralLedgerService {
      * @return GeneralLedgerType instance
      */
     GeneralLedgerType getGeneralLedgerType(String glTypeCode);
+
+    /**
+     * Gets all queued or in session general ledger transactions within the date range specified and
+     * adds the recognition period to the transmission
+     *
+     * @param recognitionPeriod Recognition period
+     * @param fromDate          Start date
+     * @param toDate            End date
+     * @return true if one or more records have been updated, false - otherwise
+     */
+    boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate);
 
 }
