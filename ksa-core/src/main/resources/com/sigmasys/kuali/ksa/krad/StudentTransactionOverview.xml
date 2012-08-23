@@ -76,6 +76,15 @@
 
                 <!-- Activity stuff -->
                 <bean parent="Uif-Page" p:id="bursaActivityPage" p:title="Activity">
+                    <property name="header.group">
+                        <bean parent="Uif-LinkGroup">
+                            <property name="items">
+                                <list>
+                                    <bean parent="Uif-ActionLink" p:methodToCall="refresh" p:actionLabel="Refresh"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
                     <property name="items">
                         <list>
                             <ref bean="bursaActivityList"/>
@@ -355,12 +364,6 @@
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.refundRule" p:label="Refund Rule">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="45"/>
-                    </property>
-                </bean>
             </list>
         </property>
     </bean>
@@ -567,7 +570,7 @@
                         <bean parent="Uif-DateControl" p:size="11" p:maxLength="10"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Attribute" p:propertyName="attribute">
+                <bean parent="Uif-InputField" p:label="Attribute" p:propertyName="newAttribute">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21" p:maxLength="20"/>
                     </property>
