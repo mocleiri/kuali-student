@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.transform.Ach;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -279,5 +280,16 @@ public class AccountServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void getAch() {
+        String userId = "user1";
+        Ach ach =   accountService.getAch(userId);
+
+        Assert.notNull(ach);
+
+        Assert.isTrue("C".equals(ach.getAccountType()));
+        Assert.isTrue("0019921".equals(ach.getAba()));
+        Assert.isTrue("20100020101".equals(ach.getAccountNumber()));
+    }
 
 }

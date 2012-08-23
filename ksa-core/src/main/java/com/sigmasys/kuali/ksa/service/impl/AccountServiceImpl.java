@@ -1,11 +1,13 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.exception.AccountTypeNotFoundException;
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
+import com.sigmasys.kuali.ksa.transform.Ach;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,6 +28,8 @@ import javax.persistence.Query;
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Account service implementation.
@@ -599,6 +603,72 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         account.setElectronicContacts(contacts);
 
         return electronicContact;
+
+    }
+
+    /**
+     * Get ACH looks into the AccountProtectedInformation class (which triggers a system event) to look for
+     * the ACH information for the user
+     *
+     * @param userId            Account ID
+     * @return new ElectronicContact instance with ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Ach getAch(String userId) throws AccountTypeNotFoundException {
+        // @TODO - is it correct to hard code "US ACH." as the type?
+        String errMsg = "ACH Account with ID = " + userId + " does not exist";
+
+        AccountProtectedInfo account = getAccountProtectedInfo(userId, "US ACH.");
+        if (account == null) {
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        String details = account.getBankDetails();
+        String[] detailsArr = details.split(":");
+
+        if(detailsArr.length < 3){
+            throw new AccountTypeNotFoundException(errMsg) ;
+        }
+        String routing = detailsArr[0];
+        String act = detailsArr[1];
+        String type = detailsArr[2];
+
+        if(!("C".equals(type) || "S".equals(type))){
+            throw new AccountTypeNotFoundException(errMsg);
+        }
+
+        Pattern p = Pattern.compile("$d{9}^");
+        Matcher m = p.matcher(routing);
+        if(!m.matches()){
+            // Throw new RoutingNumberException
+        }
+
+        Ach ach = new Ach();
+        ach.setAccountType(type);
+        ach.setAccountNumber(act);
+        ach.setAba(routing);
+        return ach;
+    }
+
+    /**
+     *
+     * @TODO This needs to trigger a system event
+     * @param userId            Account ID
+     * @param type              Bank Type Name
+     * @return  new AccountProtectedInfo instance with ID
+     */
+    private AccountProtectedInfo getAccountProtectedInfo(String userId, String type){
+        Query query = em.createQuery("select a from AccountProtectedInfo a " +
+                "left outer join fetch a.bankType bt " +
+                "where a.id = :id " +
+                "and bt.name = :name ");
+
+        query.setParameter("id", userId);
+        query.setParameter("name", type);
+        List<AccountProtectedInfo> accounts = query.getResultList();
+        return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
 
     }
 

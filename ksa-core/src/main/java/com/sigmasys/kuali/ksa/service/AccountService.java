@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.transform.Ach;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -156,5 +157,14 @@ public interface AccountService {
      * @return new ElectronicContact instance with ID
      */
     ElectronicContact addElectronicContact(String userId, ElectronicContact electronicContact);
+
+    /**
+     * Get ACH looks into the AccountProtectedInformation class (which triggers a system event) to look for
+     * the ACH information for the user
+     *
+     * @param userId            Account ID
+     * @return Ach for associated ID.
+     */
+    Ach getAch(String userId);
 
 }
