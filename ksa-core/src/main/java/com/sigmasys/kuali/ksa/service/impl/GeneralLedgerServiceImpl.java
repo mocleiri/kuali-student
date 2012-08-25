@@ -61,6 +61,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         glTransaction.setTransactions(new HashSet<Transaction>(Arrays.asList(transaction)));
         glTransaction.setStatus(isQueued ? GlTransactionStatus.QUEUED : GlTransactionStatus.WAITING);
 
+        persistEntity(glTransaction);
+
         return glTransaction;
 
     }
@@ -200,9 +202,12 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @return true if one or more records have been updated, false - otherwise
      */
     public boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate) {
-        Query query = em.createQuery("update GlTransaction t " +
-                " set t.transmission.recognitionPeriod = :recognitionPeriod " +
-                " where t.date between :fromDate and :toDate");
+        Query query = em.createQuery("update GlTransmission " +
+                " set recognitionPeriod = :recognitionPeriod " +
+                " where id in " +
+                " (select t.transmission.id " +
+                "  from GlTransaction t " +
+                "  where t.transmission <> null and t.date between :fromDate and :toDate)");
         query.setParameter("recognitionPeriod", recognitionPeriod);
         query.setParameter("fromDate", fromDate);
         query.setParameter("toDate", toDate);
