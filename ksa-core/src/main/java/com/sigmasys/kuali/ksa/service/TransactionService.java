@@ -55,6 +55,22 @@ public interface TransactionService {
                                   BigDecimal amount);
 
     /**
+         * Creates a new transaction based on the given parameters
+         *
+         * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+         *                          based on the effective date
+         * @param externalId        Transaction External ID
+         * @param userId            Account ID
+         * @param effectiveDate     Transaction effective Date
+         * @param amount            Transaction amount
+         * @param overrideBlocks    indicates whether the account blocks must be overridden
+         * @return new Transaction instance
+         */
+    @WebMethod(exclude = true)
+    Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
+                                             BigDecimal amount, boolean overrideBlocks);
+
+    /**
      * Returns the transaction type instance for the given transaction type ID and effective date
      *
      * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated

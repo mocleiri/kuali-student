@@ -1107,3 +1107,11 @@ Insert into KSSA_CREDIT_PERMISSION (ID,ALLOWABLE_DEBIT_TYPE_MASK,PRIORITY,TRANSA
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_CREDIT_PERMISSION
 ---------------------------------------------------
+
+--- INSERTING DEFAULT GENERAL LEDGER TYPE
+Insert into KSSA_GL_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE,GL_ASSET_ACCOUNT,GL_OPERATION_ON_CHARGE) values (1,'system','Default GL Type',null,sysdate,'DEF_GL_TYPE','SAR',null,'D');
+
+
+--- INSERTING TRANSACTION MASKS ---
+Insert into KSSA_TRANSACTION_MASK_ROLE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE,TYPE_MASK,ROLE_NAME) values (1,'system','Admin type mask',null,sysdate,'ADMIN_TYPE_MASK',null,'.*','Technical Administrator');
+

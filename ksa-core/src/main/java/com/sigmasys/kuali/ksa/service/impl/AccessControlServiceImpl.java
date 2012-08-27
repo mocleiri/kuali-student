@@ -161,11 +161,13 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     @Override
     public List<String> getTransactionTypesByRoleNames(Set<String> roleNames) {
         List<String> typeMasks = getTransactionTypeMasksByRoleNames(roleNames);
+        logger.debug("Loaded type masks: " + typeMasks);
         List<String> transactionTypes = new LinkedList<String>();
         for (String typeMask : typeMasks) {
             for (String transactionTypeId : transactionTypeIds) {
                 if (Pattern.matches(typeMask, transactionTypeId)) {
                     transactionTypes.add(transactionTypeId);
+                    logger.debug("Adding [Transaction Type ID = '" + transactionTypeId + "']");
                 }
             }
         }
@@ -175,6 +177,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     @Override
     public boolean isTransactionTypeAllowed(String userId, String transactionTypeId) {
         List<String> typeMasks = getAllowedTransactionTypeMasks(userId);
+        logger.debug("Loaded type masks: " + typeMasks);
         for (String typeMask : typeMasks) {
             if (Pattern.matches(typeMask, transactionTypeId)) {
                 return true;

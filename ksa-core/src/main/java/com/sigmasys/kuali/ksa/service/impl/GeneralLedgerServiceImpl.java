@@ -1,10 +1,13 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,10 @@ import java.util.*;
 public class GeneralLedgerServiceImpl extends GenericPersistenceService implements GeneralLedgerService {
 
     private static final Log logger = LogFactory.getLog(GeneralLedgerServiceImpl.class);
+
+
+    @Autowired
+    private ConfigService configService;
 
 
     /**
@@ -189,7 +196,17 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         }
         String errMsg = "Cannot find GeneralLedgerType for the code = " + glTypeCode;
         logger.error(errMsg);
-        throw new IllegalStateException(errMsg);
+        throw new InvalidGeneralLedgerTypeException(errMsg);
+    }
+
+    /**
+     * Returns the default general ledger type instance for the given code.
+     *
+     * @return GeneralLedgerType instance
+     */
+    @Override
+    public GeneralLedgerType getDefaultGeneralLedgerType() {
+        return getGeneralLedgerType(configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME));
     }
 
     /**

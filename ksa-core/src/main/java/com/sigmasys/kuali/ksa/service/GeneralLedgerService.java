@@ -69,6 +69,13 @@ public interface GeneralLedgerService {
     GeneralLedgerType getGeneralLedgerType(String glTypeCode);
 
     /**
+     * Returns the default general ledger type instance for the given code.
+     *
+     * @return GeneralLedgerType instance
+     */
+    GeneralLedgerType getDefaultGeneralLedgerType();
+
+    /**
      * Gets all queued or in session general ledger transactions within the date range specified and
      * adds the recognition period to the transmission
      *

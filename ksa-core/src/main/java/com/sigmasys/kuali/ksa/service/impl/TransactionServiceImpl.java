@@ -1,9 +1,7 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
-import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
-import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
-import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
+import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
@@ -59,9 +57,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Autowired
     private UserSessionManager userSessionManager;
 
+    @Autowired
+    private GeneralLedgerService glService;
+
 
     private AccessControlService getAccessControlService() {
-       return ContextUtils.getBean(AccessControlService.class);
+        return ContextUtils.getBean(AccessControlService.class);
     }
 
 
@@ -125,9 +126,30 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Transactional(readOnly = false)
     public Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
                                          BigDecimal amount) {
-        TransactionTypeId id = getTransactionType(transactionTypeId, effectiveDate).getId();
-        return createTransaction(id, externalId, userId, effectiveDate, amount);
+        return createTransaction(transactionTypeId, externalId, userId, effectiveDate, amount, false);
     }
+
+    /**
+     * Creates a new transaction based on the given parameters
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param externalId        Transaction External ID
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
+     * @param overrideBlocks    indicates whether the account blocks must be overridden
+     * @return new Transaction instance
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
+                                         BigDecimal amount, boolean overrideBlocks) {
+        TransactionTypeId id = getTransactionType(transactionTypeId, effectiveDate).getId();
+        return createTransaction(id, externalId, userId, effectiveDate, amount, overrideBlocks);
+    }
+
 
     /**
      * Returns the transaction type instance for the given transaction type ID and effective date
@@ -157,15 +179,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     /**
      * Creates a new transaction based on the given parameters
      *
-     * @param id            Transaction type ID
-     * @param userId        Account ID
-     * @param effectiveDate Transaction effective Date
-     * @param amount        Transaction amount
+     * @param id             Transaction type ID
+     * @param userId         Account ID
+     * @param effectiveDate  Transaction effective Date
+     * @param amount         Transaction amount
+     * @param overrideBlocks indicates whether the account blocks must be overridden
      * @return new Transaction instance
      */
     @Transactional(readOnly = false)
     protected Transaction createTransaction(TransactionTypeId id, String externalId, String userId, Date effectiveDate,
-                                            BigDecimal amount) {
+                                            BigDecimal amount, boolean overrideBlocks) {
 
         TransactionType transactionType = em.find(TransactionType.class, id);
         if (transactionType == null) {
@@ -186,7 +209,19 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (currency == null) {
             String errMsg = "Currency does not exist for the given ISO code = " + currencyCode;
             logger.error(errMsg);
-            throw new TransactionNotFoundException(errMsg);
+            throw new CurrencyNotFoundException(errMsg);
+        }
+
+        if (overrideBlocks) {
+            if (!getAccessControlService().isTransactionTypeAllowed(userId, id.getId())) {
+                String errMsg = "Transaction type is not allowed for the given account = " + userId;
+                logger.error(errMsg);
+                throw new TransactionTypeNotAllowedException(errMsg);
+            }
+        } else if (!isTransactionAllowed(userId, id.getId(), effectiveDate)) {
+            String errMsg = "Transaction is not allowed for the given account = " + userId;
+            logger.error(errMsg);
+            throw new TransactionNotAllowedException(errMsg);
         }
 
         Transaction transaction = (transactionType instanceof CreditType) ? new Payment() : new Charge();
@@ -207,6 +242,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         transaction.setStatementText(transactionType.getDescription());
         transaction.setGlEntryGenerated(false);
         transaction.setInternal(false);
+
+        transaction.setGeneralLedgerType(glService.getDefaultGeneralLedgerType());
 
         transaction.setResponsibleEntity(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
 
@@ -870,14 +907,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transaction1 == null) {
             String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         Transaction transaction2 = getTransaction(transactionId2);
         if (transaction2 == null) {
             String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         boolean compatible = false;
@@ -938,7 +975,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate) {
-        // TODO getAccountBlockedStatus ??
         return accountService.doesAccountExist(accountId) &&
                 getTransactionType(transactionType, effectiveDate) != null &&
                 getAccessControlService().isTransactionTypeAllowed(accountId, transactionType);
