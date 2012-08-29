@@ -55,20 +55,20 @@ public interface TransactionService {
                                   BigDecimal amount);
 
     /**
-         * Creates a new transaction based on the given parameters
-         *
-         * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
-         *                          based on the effective date
-         * @param externalId        Transaction External ID
-         * @param userId            Account ID
-         * @param effectiveDate     Transaction effective Date
-         * @param amount            Transaction amount
-         * @param overrideBlocks    indicates whether the account blocks must be overridden
-         * @return new Transaction instance
-         */
+     * Creates a new transaction based on the given parameters
+     *
+     * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
+     *                          based on the effective date
+     * @param externalId        Transaction External ID
+     * @param userId            Account ID
+     * @param effectiveDate     Transaction effective Date
+     * @param amount            Transaction amount
+     * @param overrideBlocks    indicates whether the account blocks must be overridden
+     * @return new Transaction instance
+     */
     @WebMethod(exclude = true)
     Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
-                                             BigDecimal amount, boolean overrideBlocks);
+                                  BigDecimal amount, boolean overrideBlocks);
 
     /**
      * Returns the transaction type instance for the given transaction type ID and effective date
@@ -239,7 +239,23 @@ public interface TransactionService {
      * @param amount         amount of money to be allocated
      * @return a new allocation
      */
+    @WebMethod(exclude = true)
     Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+
+    /**
+     * This will allocate the value of amount on the transaction. A check will
+     * be made to ensure that the allocated amount is equal to or less than the
+     * localAmount, less any lockedAllocationAmount. The expectation is that
+     * this method will only be called by the payment application module.
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param amount         amount of money to be allocated
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return a new allocation
+     */
+    Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued);
 
     /**
      * This will allocate a locked amount on the transaction. A check will be
@@ -252,7 +268,22 @@ public interface TransactionService {
      * @param amount         amount of money to be allocated
      * @return a new allocation
      */
+    @WebMethod(exclude = true)
     Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+
+    /**
+         * This will allocate a locked amount on the transaction. A check will be
+         * made to ensure that the lockedAmount and the allocateAmount don't exceed
+         * the ledgerAmount of the transaction. Setting an amount as locked prevents
+         * the payment application system from reallocating the balance elsewhere.
+         *
+         * @param transactionId1 transaction1 ID
+         * @param transactionId2 transaction2 ID
+         * @param amount         amount of money to be allocated
+         * @param isQueued       indicates whether the GL transaction should be in Q or W status
+         * @return a new allocation
+         */
+    Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued);
 
     /**
      * Removes all allocations associated with the given transactions

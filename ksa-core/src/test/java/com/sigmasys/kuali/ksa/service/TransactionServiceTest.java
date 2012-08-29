@@ -33,7 +33,6 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     private Transaction transaction1;
     private Transaction transaction2;
-    private Allocation allocation;
 
     @Before
     public void setUpWithinTransaction() {
@@ -106,7 +105,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction1.getAmount());
         Assert.notNull(transaction2.getAmount());
 
-        allocation =
+        Allocation allocation =
                 locked ?
                         transactionService.createLockedAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90)) :
                         transactionService.createAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90));
@@ -137,6 +136,9 @@ public class TransactionServiceTest extends AbstractServiceTest {
         BigDecimal allocatedAmount2 = locked ?
                 transaction2.getLockedAllocatedAmount() :
                 transaction2.getAllocatedAmount();
+
+        logger.info("allocatedAmount1 = " + allocatedAmount1);
+        logger.info("allocatedAmount2 = " + allocatedAmount2);
 
         Assert.isTrue(new BigDecimal(90).equals(allocatedAmount1));
         Assert.isTrue(new BigDecimal(90).equals(allocatedAmount2));

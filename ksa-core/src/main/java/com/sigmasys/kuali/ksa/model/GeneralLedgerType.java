@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import com.sigmasys.kuali.ksa.util.EnumUtils;
+
 import javax.persistence.*;
 
 /**
@@ -21,7 +23,24 @@ public class GeneralLedgerType extends AuditableEntity {
     /**
      * General Ledger Operation on Charge
      */
-    private String glOperationOnCharge;
+    private GlOperationType glOperationOnCharge;
+
+    /**
+     * GL operation code (C or D)
+     */
+    private String glOperationCode;
+
+
+    @PrePersist
+    void populateDBFields() {
+        glOperationCode = (glOperationOnCharge != null) ? glOperationOnCharge.getId() : null;
+    }
+
+    @PostLoad
+    void populateTransientFields() {
+        glOperationOnCharge = (glOperationCode != null) ?
+                EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
+    }
 
 
     @Id
@@ -47,11 +66,20 @@ public class GeneralLedgerType extends AuditableEntity {
     }
 
     @Column(name = "GL_OPERATION_ON_CHARGE", length = 1)
-    public String getGlOperationOnCharge() {
+    protected String getGlOperationCode() {
+        return glOperationCode;
+    }
+
+    protected void setGlOperationCode(String glOperationCode) {
+        this.glOperationCode = glOperationCode;
+    }
+
+    @Transient
+    public GlOperationType getGlOperationOnCharge() {
         return glOperationOnCharge;
     }
 
-    public void setGlOperationOnCharge(String glOperationOnCharge) {
+    public void setGlOperationOnCharge(GlOperationType glOperationOnCharge) {
         this.glOperationOnCharge = glOperationOnCharge;
     }
 }

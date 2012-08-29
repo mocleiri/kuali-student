@@ -440,10 +440,30 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
-        return createAllocation(transactionId1, transactionId2, amount, false);
+        return createAllocation(transactionId1, transactionId2, amount, true, false);
     }
 
-    protected Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount, boolean locked) {
+    /**
+     * This will allocate the value of amount on the transaction. A check will
+     * be made to ensure that the allocated amount is equal to or less than the
+     * localAmount, less any lockedAllocationAmount. The expectation is that
+     * this method will only be called by the payment application module.
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param amount         amount of money to be allocated
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return a new allocation
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued) {
+        return createAllocation(transactionId1, transactionId2, amount, isQueued, false);
+    }
+
+    protected Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount,
+                                          boolean isQueued, boolean locked) {
 
         if (newAmount == null || newAmount.compareTo(BigDecimal.ZERO) <= 0) {
             String errMsg = "The allocation amount should be a positive number";
@@ -477,6 +497,17 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             String errMsg = "Both transactions must be associated with the same account";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
+        }
+
+        // Check if Transaction1 can pay Transaction2
+        // TODO Ask Paul about Deferments and canPay()!!
+        if (!(transaction1 instanceof Deferment) && !(transaction2 instanceof Deferment)) {
+            if (!canPay(transactionId1, transactionId2)) {
+                String errMsg = "Transaction1 [ID = " + transactionId1 + "] cannot pay Transaction2 [ID = " +
+                        transactionId2 + "]";
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
         }
 
         Query query = em.createQuery("select a from Allocation a " +
@@ -551,6 +582,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 transaction2.setAllocatedAmount(newAmount);
             }
 
+            createGlTransactions(transaction1, transaction2, newAmount, isQueued);
+
             return allocation;
 
         } else {
@@ -559,6 +592,53 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
+    }
+
+    protected void createGlTransactions(Transaction transaction1, Transaction transaction2, BigDecimal amount,
+                                        boolean isQueued) {
+
+        TransactionType transactionType1 = transaction1.getTransactionType();
+        TransactionType transactionType2 = transaction2.getTransactionType();
+
+        if ((transactionType1 instanceof DebitType && transactionType2 instanceof CreditType) ||
+                (transactionType1 instanceof CreditType && transactionType2 instanceof DebitType)) {
+
+            final Credit creditTransaction;
+            final Debit debitTransaction;
+            final CreditType creditType;
+
+            if (transactionType1 instanceof CreditType) {
+                creditTransaction = (Credit) transaction1;
+                debitTransaction = (Debit) transaction2;
+                creditType = (CreditType) transactionType1;
+            } else {
+                creditTransaction = (Credit) transaction2;
+                debitTransaction = (Debit) transaction1;
+                creditType = (CreditType) transactionType2;
+            }
+
+            // Getting the opposite GL operation for payment
+            String operationTypeValue = (GlOperationType.CREDIT == creditType.getUnallocatedGlOperation()) ?
+                    GlOperationType.DEBIT_CODE :
+                    GlOperationType.CREDIT_CODE;
+
+            // Creating GL transaction for payment
+            glService.createGlTransaction(creditTransaction.getId(), creditType.getUnallocatedGlAccount(), amount,
+                    operationTypeValue, isQueued);
+
+            GeneralLedgerType glType = debitTransaction.getGeneralLedgerType();
+            if (glType != null) {
+                // Getting the opposite GL operation for charge
+                operationTypeValue = (GlOperationType.CREDIT == glType.getGlOperationOnCharge()) ?
+                        GlOperationType.DEBIT_CODE :
+                        GlOperationType.CREDIT_CODE;
+
+                // Creating GL transaction for charge
+                glService.createGlTransaction(debitTransaction.getId(), glType.getGlAccountId(), amount,
+                        operationTypeValue, isQueued);
+            }
+        }
+
     }
 
     protected BigDecimal getUnallocatedAmount(Transaction transaction) {
@@ -589,7 +669,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
-        return createAllocation(transactionId1, transactionId2, amount, true);
+        return createAllocation(transactionId1, transactionId2, amount, true, true);
+    }
+
+    /**
+     * This will allocate a locked amount on the transaction. A check will be
+     * made to ensure that the lockedAmount and the allocateAmount don't exceed
+     * the ledgerAmount of the transaction. Setting an amount as locked prevents
+     * the payment application system from reallocating the balance elsewhere.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param amount         amount of money to be allocated
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return a new allocation
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount,
+                                             boolean isQueued) {
+        return createAllocation(transactionId1, transactionId2, amount, isQueued, true);
     }
 
     /**
@@ -944,7 +1043,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         TransactionTypeId debitTypeId = transaction2.getTransactionType().getId();
 
         Query query =
-                em.createQuery("select cp from CreditPermission cp where cp.creditType.id = :id" +
+                em.createQuery("select cp from CreditPermission cp where cp.creditType.id = :id " +
                         " cp.priority between :priorityFrom and :priorityTo");
 
         query.setParameter("id", creditTypeId);
