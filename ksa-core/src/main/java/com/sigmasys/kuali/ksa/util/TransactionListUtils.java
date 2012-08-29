@@ -1,4 +1,4 @@
-package com.sigmasys.kuali.ksa.service;
+package com.sigmasys.kuali.ksa.util;
 
 import com.sigmasys.kuali.ksa.gwt.client.model.TransactionType;
 import com.sigmasys.kuali.ksa.model.Transaction;
@@ -13,7 +13,7 @@ import java.util.*;
  * Time: 3:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TransactionList {
+public class TransactionListUtils {
 
     public static int getNumberOfTransactions(List<Transaction> transactions){
         return transactions.size();
