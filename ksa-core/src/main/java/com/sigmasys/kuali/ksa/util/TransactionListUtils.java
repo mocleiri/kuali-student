@@ -1,21 +1,24 @@
 package com.sigmasys.kuali.ksa.util;
 
-import com.sigmasys.kuali.ksa.gwt.client.model.TransactionType;
+import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.Payment;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * Created with IntelliJ IDEA.
+ * TransactionListUtils
  * User: timb
  * Date: 8/26/12
  * Time: 3:16 PM
- * To change this template use File | Settings | File Templates.
  */
 public class TransactionListUtils {
 
-    public static int getNumberOfTransactions(List<Transaction> transactions){
+    private TransactionListUtils() {
+    }
+
+    public static int getNumberOfTransactions(List<Transaction> transactions) {
         return transactions.size();
     }
 
@@ -23,29 +26,32 @@ public class TransactionListUtils {
      * Remove all transactions from the list that are now fully allocated (amount = allocatedAmount +
      * lockedAllocationAmount)
      */
-    public static List<Transaction> refreshList(List<Transaction> transactions){
-       if(transactions == null){ return null;}
+    public static List<Transaction> refreshList(List<Transaction> transactions) {
+        if (transactions == null) {
+            return null;
+        }
 
-       for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
-           Transaction t = it.next();
-           if(t.getAmount().equals(t.getAllocatedAmount().add(t.getLockedAllocatedAmount()))){
-               it.remove();
-           }
-       }
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
+            Transaction t = it.next();
+            if (t.getAmount().equals(t.getAllocatedAmount().add(t.getLockedAllocatedAmount()))) {
+                it.remove();
+            }
+        }
 
-       return transactions;
+        return transactions;
     }
 
     /**
      * Returns the value of the unallocated amount of all payments in the list
+     *
      * @return BigDecimal of the sum of the Unallocated Payment Value
      */
-    public static BigDecimal getUnallocatedPaymentValue(List<Transaction> transactions){
-        BigDecimal amt = new BigDecimal(0);
-
-        for(Transaction t : transactions){
-            if(! t.getTransactionType().equals(TransactionType.PAYMENT)){ continue; }
-            amt.add(t.getAmount().subtract(t.getAllocatedAmount()).subtract(t.getLockedAllocatedAmount()));
+    public static BigDecimal getUnallocatedPaymentValue(List<Transaction> transactions) {
+        BigDecimal amt = BigDecimal.ZERO;
+        for (Transaction t : transactions) {
+            if (t instanceof Payment) {
+                amt.add(t.getAmount().subtract(t.getAllocatedAmount()).subtract(t.getLockedAllocatedAmount()));
+            }
         }
 
         return amt;
@@ -53,14 +59,16 @@ public class TransactionListUtils {
 
     /**
      * Returns the value of the unallocated amount of all charges in the list
+     *
      * @return BigDecimal of the sum of the Unallocated Charge Value
      */
-    public static BigDecimal getUnallocatedChargeValue(List<Transaction> transactions){
-        BigDecimal amt = new BigDecimal(0);
+    public static BigDecimal getUnallocatedChargeValue(List<Transaction> transactions) {
+        BigDecimal amt = BigDecimal.ZERO;
 
-        for(Transaction t : transactions){
-            if(! t.getTransactionType().equals(TransactionType.CHARGE)){ continue; }
-            amt.add(t.getAmount().subtract(t.getAllocatedAmount()).subtract(t.getLockedAllocatedAmount()));
+        for (Transaction t : transactions) {
+            if (t instanceof Charge) {
+                amt.add(t.getAmount().subtract(t.getAllocatedAmount()).subtract(t.getLockedAllocatedAmount()));
+            }
         }
 
         return amt;
@@ -69,12 +77,13 @@ public class TransactionListUtils {
     /**
      * Return the unallocated amount of all restricted or unrestricted payments. Unrestricted payments have a
      * permissableDebitType of “*”.
+     *
      * @return BigDecimal of the sum of the Restricted Payment Value
      */
-    public static BigDecimal getRestrictedPaymentValue(List<Transaction> transactions){
-        BigDecimal amt = new BigDecimal(0);
+    public static BigDecimal getRestrictedPaymentValue(List<Transaction> transactions) {
+        BigDecimal amt = BigDecimal.ZERO;
 
-        for(Transaction t : transactions){
+        for (Transaction t : transactions) {
             // @TODO Need to figure out how to determine if this is a restricted payment
         }
 
@@ -84,12 +93,13 @@ public class TransactionListUtils {
     /**
      * Return the unallocated amount of all restricted or unrestricted payments. Unrestricted payments have a
      * permissableDebitType of “*”.
+     *
      * @return BigDecimal of the sum of the Unrestricted Payment Value
      */
-    public static BigDecimal getUnrestrictedPaymentValue(List<Transaction> transactions){
-        BigDecimal amt = new BigDecimal(0);
+    public static BigDecimal getUnrestrictedPaymentValue(List<Transaction> transactions) {
+        BigDecimal amt = BigDecimal.ZERO;
 
-        for(Transaction t : transactions){
+        for (Transaction t : transactions) {
             // @TODO Need to figure out how to determine if this is an unrestricted payment
         }
 
@@ -97,24 +107,25 @@ public class TransactionListUtils {
     }
 
     /**
-     * @TODO
      * @param transactions
+     * @TODO
      */
-    public static void calculateMatrixScore(List<Transaction> transactions){
+    public static void calculateMatrixScore(List<Transaction> transactions) {
 
     }
 
     /**
      * Order list by priority
+     *
      * @param transactions
      * @return List<Transaction> of sorted transactions
      */
-    public static List<Transaction> orderByPriority(List<Transaction> transactions){
+    public static List<Transaction> orderByPriority(List<Transaction> transactions) {
         return transactions;
     }
 
-    public static List<Transaction> orderByPriority(List<Transaction> transactions, boolean ascending){
-        if(ascending){
+    public static List<Transaction> orderByPriority(List<Transaction> transactions, boolean ascending) {
+        if (ascending) {
             PriorityComparatorAscending comparator = new PriorityComparatorAscending();
             Collections.sort(transactions, comparator);
             return transactions;
@@ -125,8 +136,8 @@ public class TransactionListUtils {
         }
     }
 
-    public static List<Transaction> orderByDate(List<Transaction> transactions, boolean ascending){
-        if(ascending){
+    public static List<Transaction> orderByDate(List<Transaction> transactions, boolean ascending) {
+        if (ascending) {
             DateComparatorAscending comparator = new DateComparatorAscending();
             Collections.sort(transactions, comparator);
             return transactions;
@@ -137,8 +148,8 @@ public class TransactionListUtils {
         }
     }
 
-    public static List<Transaction> orderByAmount(List<Transaction> transactions, boolean ascending){
-        if(ascending){
+    public static List<Transaction> orderByAmount(List<Transaction> transactions, boolean ascending) {
+        if (ascending) {
             AmountComparatorAscending comparator = new AmountComparatorAscending();
             Collections.sort(transactions, comparator);
             return transactions;
@@ -149,8 +160,8 @@ public class TransactionListUtils {
         }
     }
 
-    public static List<Transaction> orderByUnallocatedAmount(List<Transaction> transactions, boolean ascending){
-        if(ascending){
+    public static List<Transaction> orderByUnallocatedAmount(List<Transaction> transactions, boolean ascending) {
+        if (ascending) {
             UnallocatedAmountComparatorAscending comparator = new UnallocatedAmountComparatorAscending();
             Collections.sort(transactions, comparator);
             return transactions;
@@ -162,41 +173,41 @@ public class TransactionListUtils {
     }
 
     // @TODO Need to be able to create Matrix Score first
-    public static List<Transaction> orderByMatrixScore(List<Transaction> transactions, boolean ascending){
+    public static List<Transaction> orderByMatrixScore(List<Transaction> transactions, boolean ascending) {
         return transactions;
     }
 
-    public static List<Transaction> reverseList(List<Transaction> transactions){
+    public static List<Transaction> reverseList(List<Transaction> transactions) {
         Collections.reverse(transactions);
         return transactions;
     }
 
-    public static List<Transaction> getNewList(List<Transaction> transactions){
+    public static List<Transaction> getNewList(List<Transaction> transactions) {
         List<Transaction> newList = new ArrayList<Transaction>(transactions);
-        Collections.copy(newList,transactions);
+        Collections.copy(newList, transactions);
 
         return newList;
     }
 
-    public static void removeCharges(List<Transaction> transactions){
-        for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
+    public static void removeCharges(List<Transaction> transactions) {
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
             Transaction t = it.next();
-            if(TransactionType.CHARGE.equals(t.getTransactionType())){
+            if (t instanceof Charge) {
                 it.remove();
             }
         }
     }
 
-    public static void removePayments(List<Transaction> transactions){
-        for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
+    public static void removePayments(List<Transaction> transactions) {
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
             Transaction t = it.next();
-            if(TransactionType.PAYMENT.equals(t.getTransactionType())){
+            if (t instanceof Payment) {
                 it.remove();
             }
         }
     }
 
-    public static Set<Transaction> performUnion(List<Transaction> transactions1, List<Transaction> transactions2){
+    public static Set<Transaction> performUnion(List<Transaction> transactions1, List<Transaction> transactions2) {
         Set<Transaction> union = new HashSet<Transaction>(transactions1);
 
         union.addAll(transactions2);
@@ -204,7 +215,7 @@ public class TransactionListUtils {
         return union;
     }
 
-    public static Set<Transaction> performIntersection(List<Transaction> transactions1, List<Transaction> transactions2){
+    public static Set<Transaction> performIntersection(List<Transaction> transactions1, List<Transaction> transactions2) {
         Set<Transaction> intersection = new HashSet<Transaction>(transactions1);
 
         intersection.retainAll(transactions2);
@@ -212,7 +223,7 @@ public class TransactionListUtils {
         return intersection;
     }
 
-    public static Set<Transaction> performCombination(List<Transaction> transactions1, List<Transaction> transactions2){
+    public static Set<Transaction> performCombination(List<Transaction> transactions1, List<Transaction> transactions2) {
         Set<Transaction> symmetricDiff = new HashSet<Transaction>(transactions1);
         symmetricDiff.addAll(transactions2);
         Set<Transaction> tmp = new HashSet<Transaction>(transactions1);
@@ -222,7 +233,7 @@ public class TransactionListUtils {
         return symmetricDiff;
     }
 
-    public static Set<Transaction> performSubtract(List<Transaction> transactions1, List<Transaction> transactions2){
+    public static Set<Transaction> performSubtract(List<Transaction> transactions1, List<Transaction> transactions2) {
         Set<Transaction> intersection = new HashSet<Transaction>(transactions1);
 
         intersection.removeAll(transactions2);
@@ -231,8 +242,8 @@ public class TransactionListUtils {
     }
 
     // @TODO - Need to implement TransactionType.getPriority
-    public static void filterByPriority(List<Transaction> transactions, int from, int to){
-        for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
+    public static void filterByPriority(List<Transaction> transactions, int from, int to) {
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
             Transaction t = it.next();
             //int priority = t.getTransactionType().getPriority();
             //if(priority < from || priority > to){
@@ -241,49 +252,44 @@ public class TransactionListUtils {
         }
     }
 
-    public static void filterByDate(List<Transaction> transactions, Date from, Date to){
-        for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
+    public static void filterByDate(List<Transaction> transactions, Date from, Date to) {
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
             Transaction t = it.next();
             Date d = t.getEffectiveDate();
 
-            if(d.before(from) || d.after(to)){
+            if (d.before(from) || d.after(to)) {
                 it.remove();
             }
         }
     }
 
-    public static void filterByAmount(List<Transaction> transactions, BigDecimal from, BigDecimal to){
-        for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
+    public static void filterByAmount(List<Transaction> transactions, BigDecimal from, BigDecimal to) {
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
             Transaction t = it.next();
             BigDecimal d = t.getAmount();
 
-            if((d.compareTo(from) < 0) || (d.compareTo(to) > 0)){
+            if ((d.compareTo(from) < 0) || (d.compareTo(to) > 0)) {
                 it.remove();
             }
         }
     }
 
-    public static void filterByUnallocatedAmount(List<Transaction> transactions, BigDecimal from, BigDecimal to){
-        for(Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ){
+    public static void filterByUnallocatedAmount(List<Transaction> transactions, BigDecimal from, BigDecimal to) {
+        for (Iterator<Transaction> it = transactions.iterator(); it.hasNext(); ) {
             Transaction t = it.next();
             BigDecimal d = t.getAmount().subtract(t.getAllocatedAmount());
 
-            if((d.compareTo(from) < 0) || (d.compareTo(to) > 0)){
+            if ((d.compareTo(from) < 0) || (d.compareTo(to) > 0)) {
                 it.remove();
             }
         }
     }
 
     // @TODO
-    public static void filterByMatrixScore(List<Transaction> transactions, int from, int to){
+    public static void filterByMatrixScore(List<Transaction> transactions, int from, int to) {
         return;
     }
 
-    // @TODO
-    public void applyPayments(){}
-
-    // @TODO
-    public void applyPaymente(boolean isQueued){}
 }
 
 // @TODO - Need to implement the Priority column within the TransactionType model
@@ -322,6 +328,7 @@ class AmountComparatorAscending implements Comparator<Transaction> {
         return t1.getAmount().compareTo(t2.getAmount());
     }
 }
+
 class AmountComparatorDescending implements Comparator<Transaction> {
     @Override
     public int compare(Transaction t1, Transaction t2) {
@@ -338,6 +345,7 @@ class UnallocatedAmountComparatorAscending implements Comparator<Transaction> {
         return v1.compareTo(v2);
     }
 }
+
 class UnallocatedAmountComparatorDescending implements Comparator<Transaction> {
     @Override
     public int compare(Transaction t1, Transaction t2) {
