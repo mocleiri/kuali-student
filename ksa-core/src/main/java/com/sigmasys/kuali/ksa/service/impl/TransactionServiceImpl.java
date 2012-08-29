@@ -438,6 +438,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return a new allocation
      */
     @Override
+    @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
         return createAllocation(transactionId1, transactionId2, amount, true, false);
@@ -667,6 +668,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return a new allocation
      */
     @Override
+    @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
         return createAllocation(transactionId1, transactionId2, amount, true, true);

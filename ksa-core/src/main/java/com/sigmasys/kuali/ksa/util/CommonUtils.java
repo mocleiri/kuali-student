@@ -53,11 +53,11 @@ public final class CommonUtils {
         return getResourceAsString(resource, classLoader);
     }
 
-    public static String getResourceAsString(String resource, ClassLoader classLoader) {
+    public static String getStreamAsString(InputStream inputStream) {
         BufferedInputStream in = null;
         try {
-            in = new BufferedInputStream(classLoader.getResourceAsStream(resource));
-            byte[] buffer = new byte[1024];
+            in = new BufferedInputStream(inputStream);
+            byte[] buffer = new byte[2048];
             StringBuilder stringBuffer = new StringBuilder();
             int bytesRead;
             while ((bytesRead = in.read(buffer)) != -1) {
@@ -65,8 +65,7 @@ public final class CommonUtils {
             }
             return stringBuffer.toString();
         } catch (Exception e) {
-            logger.error("Cannot load resource defined as " + resource, e);
-            throw new RuntimeException("Cannot load resource defined as " + resource, e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             if (in != null) {
                 try {
@@ -75,6 +74,15 @@ public final class CommonUtils {
                     logger.warn(e.getMessage(), e);
                 }
             }
+        }
+    }
+
+    public static String getResourceAsString(String resource, ClassLoader classLoader) {
+        try {
+            return getStreamAsString(classLoader.getResourceAsStream(resource));
+        } catch (Exception e) {
+            logger.error("Cannot load resource defined as " + resource, e);
+            throw new RuntimeException("Cannot load resource defined as " + resource, e);
         }
     }
 

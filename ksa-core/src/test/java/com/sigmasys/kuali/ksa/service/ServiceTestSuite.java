@@ -29,7 +29,8 @@ import org.junit.runners.Suite;
         TransactionImportServiceTest.class,
         AccessControlServiceTest.class,
         ConfigServiceTest.class,
-        UserPreferenceServiceTest.class})
+        UserPreferenceServiceTest.class,
+        GeneralLedgerServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/test-context.xml";
