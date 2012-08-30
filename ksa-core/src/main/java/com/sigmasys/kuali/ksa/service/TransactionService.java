@@ -237,10 +237,10 @@ public interface TransactionService {
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
      * @param amount         amount of money to be allocated
-     * @return a new allocation
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
      */
     @WebMethod(exclude = true)
-    Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+    CompositeAllocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
 
     /**
      * This will allocate the value of amount on the transaction. A check will
@@ -255,7 +255,7 @@ public interface TransactionService {
      * @param isQueued       indicates whether the GL transaction should be in Q or W status
      * @return a new allocation
      */
-    Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued);
+    CompositeAllocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued);
 
     /**
      * This will allocate a locked amount on the transaction. A check will be
@@ -266,24 +266,24 @@ public interface TransactionService {
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
      * @param amount         amount of money to be allocated
-     * @return a new allocation
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
      */
     @WebMethod(exclude = true)
-    Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
+    CompositeAllocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount);
 
     /**
-         * This will allocate a locked amount on the transaction. A check will be
-         * made to ensure that the lockedAmount and the allocateAmount don't exceed
-         * the ledgerAmount of the transaction. Setting an amount as locked prevents
-         * the payment application system from reallocating the balance elsewhere.
-         *
-         * @param transactionId1 transaction1 ID
-         * @param transactionId2 transaction2 ID
-         * @param amount         amount of money to be allocated
-         * @param isQueued       indicates whether the GL transaction should be in Q or W status
-         * @return a new allocation
-         */
-    Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued);
+     * This will allocate a locked amount on the transaction. A check will be
+     * made to ensure that the lockedAmount and the allocateAmount don't exceed
+     * the ledgerAmount of the transaction. Setting an amount as locked prevents
+     * the payment application system from reallocating the balance elsewhere.
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param amount         amount of money to be allocated
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
+     */
+    CompositeAllocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued);
 
     /**
      * Removes all allocations associated with the given transactions

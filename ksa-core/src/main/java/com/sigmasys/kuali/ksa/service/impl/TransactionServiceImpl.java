@@ -435,12 +435,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
      * @param amount         amount of money to be allocated
-     * @return a new allocation
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
      */
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
+    public CompositeAllocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
         return createAllocation(transactionId1, transactionId2, amount, true, false);
     }
 
@@ -455,16 +455,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param transactionId2 transaction2 ID
      * @param amount         amount of money to be allocated
      * @param isQueued       indicates whether the GL transaction should be in Q or W status
-     * @return a new allocation
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
      */
     @Override
     @Transactional(readOnly = false)
-    public Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued) {
+    public CompositeAllocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal amount, boolean isQueued) {
         return createAllocation(transactionId1, transactionId2, amount, isQueued, false);
     }
 
-    protected Allocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount,
-                                          boolean isQueued, boolean locked) {
+    protected CompositeAllocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount,
+                                                   boolean isQueued, boolean locked) {
 
         if (newAmount == null || newAmount.compareTo(BigDecimal.ZERO) <= 0) {
             String errMsg = "The allocation amount should be a positive number";
@@ -583,9 +583,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 transaction2.setAllocatedAmount(newAmount);
             }
 
-            createGlTransactions(transaction1, transaction2, newAmount, isQueued);
+            Pair<GlTransaction, GlTransaction> pair = createGlTransactions(transaction1, transaction2, newAmount, isQueued);
 
-            return allocation;
+            CompositeAllocation compositeAllocation = new CompositeAllocation();
+            compositeAllocation.setAllocation(allocation);
+            compositeAllocation.setCreditGlTransaction(pair.getA());
+            compositeAllocation.setDebitGlTransaction(pair.getB());
+
+            return compositeAllocation;
 
         } else {
             String errMsg = "Illegal allocation. Transaction IDs: " + transactionId1 + ", " + transactionId2 +
@@ -595,11 +600,22 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
     }
 
-    protected void createGlTransactions(Transaction transaction1, Transaction transaction2, BigDecimal amount,
-                                        boolean isQueued) {
+    /**
+     * Creates the credit and debit transactions
+     *
+     * @param transaction1 First Transaction instance
+     * @param transaction2 Second Transaction instance
+     * @param amount       Allocation amount
+     * @param isQueued     indicates whether the GL transaction should be in Q or W status
+     * @return Pair instance with credit and debit GL transactions
+     */
+    protected Pair<GlTransaction, GlTransaction> createGlTransactions(Transaction transaction1,
+                                                                      Transaction transaction2, BigDecimal amount, boolean isQueued) {
 
         TransactionType transactionType1 = transaction1.getTransactionType();
         TransactionType transactionType2 = transaction2.getTransactionType();
+
+        Pair<GlTransaction, GlTransaction> pair = new Pair<GlTransaction, GlTransaction>();
 
         if ((transactionType1 instanceof DebitType && transactionType2 instanceof CreditType) ||
                 (transactionType1 instanceof CreditType && transactionType2 instanceof DebitType)) {
@@ -618,28 +634,34 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 creditType = (CreditType) transactionType2;
             }
 
-            // Getting the opposite GL operation for payment
+            // Getting the opposite GL operation for credit
             String operationTypeValue = (GlOperationType.CREDIT == creditType.getUnallocatedGlOperation()) ?
                     GlOperationType.DEBIT_CODE :
                     GlOperationType.CREDIT_CODE;
 
-            // Creating GL transaction for payment
-            glService.createGlTransaction(creditTransaction.getId(), creditType.getUnallocatedGlAccount(), amount,
-                    operationTypeValue, isQueued);
+            // Creating GL transaction for credit
+            GlTransaction creditGlTransaction = glService.createGlTransaction(creditTransaction.getId(),
+                    creditType.getUnallocatedGlAccount(), amount, operationTypeValue, isQueued);
+
+
+            pair.setA(creditGlTransaction);
 
             GeneralLedgerType glType = debitTransaction.getGeneralLedgerType();
             if (glType != null) {
-                // Getting the opposite GL operation for charge
+                // Getting the opposite GL operation for debit
                 operationTypeValue = (GlOperationType.CREDIT == glType.getGlOperationOnCharge()) ?
                         GlOperationType.DEBIT_CODE :
                         GlOperationType.CREDIT_CODE;
 
-                // Creating GL transaction for charge
-                glService.createGlTransaction(debitTransaction.getId(), glType.getGlAccountId(), amount,
-                        operationTypeValue, isQueued);
+                // Creating GL transaction for debit
+                GlTransaction debitGlTransaction = glService.createGlTransaction(debitTransaction.getId(),
+                        glType.getGlAccountId(), amount, operationTypeValue, isQueued);
+                pair.setB(debitGlTransaction);
             }
+
         }
 
+        return pair;
     }
 
     protected BigDecimal getUnallocatedAmount(Transaction transaction) {
@@ -665,12 +687,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
      * @param amount         amount of money to be allocated
-     * @return a new allocation
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
      */
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
+    public CompositeAllocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount) {
         return createAllocation(transactionId1, transactionId2, amount, true, true);
     }
 
@@ -684,12 +706,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param transactionId2 transaction2 ID
      * @param amount         amount of money to be allocated
      * @param isQueued       indicates whether the GL transaction should be in Q or W status
-     * @return a new allocation
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
      */
     @Override
     @Transactional(readOnly = false)
-    public Allocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount,
-                                             boolean isQueued) {
+    public CompositeAllocation createLockedAllocation(Long transactionId1, Long transactionId2, BigDecimal amount,
+                                                      boolean isQueued) {
         return createAllocation(transactionId1, transactionId2, amount, isQueued, true);
     }
 

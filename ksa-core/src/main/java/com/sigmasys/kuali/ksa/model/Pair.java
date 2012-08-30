@@ -21,6 +21,14 @@ public class Pair<A extends Serializable, B extends Serializable> implements Ser
         this.b = b;
     }
 
+    public void setA(A a) {
+        this.a = a;
+    }
+
+    public void setB(B b) {
+        this.b = b;
+    }
+
     public A getA() {
         return a;
     }

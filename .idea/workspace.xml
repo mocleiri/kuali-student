@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml" line="28" />
+    <bookmark url="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CalendarUtils.java" line="29" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="Wire in the TransactionImport to AdminLiasonController">
+    <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/CompositeAllocation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/ksa-core.iml" afterPath="$PROJECT_DIR$/ksa-core/ksa-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/AdminLiaisonController.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/AdminLiaisonController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-datasource.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/StudentTransactionOverview.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/StudentTransactionOverview.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java" afterPath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java" />
     </list>
     <ignored path="ksa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,21 +30,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.0.0/rice-impl-2.0.0-sources.jar!/org/kuali/rice/krad/service/impl/DataObjectMetaDataServiceImpl.java" line="72" class="org.kuali.rice.krad.service.impl.DataObjectMetaDataServiceImpl" package="org.kuali.rice.krad.service.impl">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -54,8 +43,8 @@
         <option name="CONDITION_ENABLED" value="false" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -69,8 +58,8 @@
         <option name="CONDITION_ENABLED" value="false" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
     <breakpoint_rules />
@@ -88,8 +77,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -98,46 +87,105 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TransactionImportServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java">
+      <file leaf-file-name="TransactionServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="532" column="113" selection-start="22509" selection-end="22509" vertical-scroll-proportion="0.0">
+            <state line="442" column="31" selection-start="15908" selection-end="15908" vertical-scroll-proportion="-8.48">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1157#1187#0" expanded="true" />
+                <element signature="e#24770#24800#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransactionService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="242" column="23" selection-start="7784" selection-end="7784" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransactionServiceTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="54" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#673#703#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pair.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="27" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransOvrController.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java">
+      <file leaf-file-name="Allocation.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Allocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="119" column="47" selection-start="3965" selection-end="3965" vertical-scroll-proportion="0.7699758">
+            <state line="13" column="13" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jta.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/jta.properties">
+      <file leaf-file-name="GlTransaction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="25" column="84" selection-start="493" selection-end="493" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransOvrForm.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/form/TransOvrForm.java">
+      <file leaf-file-name="GeneralLedgerServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="25" selection-start="169" selection-end="181" vertical-scroll-proportion="0.0">
+            <state line="52" column="25" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4056#4082#0" expanded="true" />
+                <element signature="e#4222#4242#0" expanded="true" />
+                <element signature="e#4418#4447#0" expanded="true" />
+                <element signature="e#6423#6429#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompositeAllocation.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/CompositeAllocation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="94" selection-start="432" selection-end="432" vertical-scroll-proportion="0.68877554">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentTransactionOverview.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/StudentTransactionOverview.xml">
+      <file leaf-file-name="Debit.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Debit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="31" selection-start="4219" selection-end="4219" vertical-scroll-proportion="-20.06">
+            <state line="13" column="42" selection-start="443" selection-end="443" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Deferment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Deferment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -150,28 +198,40 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
-  <component name="Git.Settings">
-    <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/UserPreferenceId.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/UserPreferenceServiceTest.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/UserPreferenceService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/IdType.java" />
+        <option value="$PROJECT_DIR$/ksa-core/pom.xml" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/AccountProtectedInfo.java" />
+        <option value="$PROJECT_DIR$/doc/com/sigmasys/kuali/ksa/rm/Debit.html" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java" />
         <option value="$PROJECT_DIR$/sql/ksa_create_ddl.sql" />
         <option value="$PROJECT_DIR$/sql/ksa_constraints_ddl.sql" />
         <option value="$PROJECT_DIR$/sql/ksa_drop_ddl.sql" />
-        <option value="$PROJECT_DIR$/sql/test_inserts/ksa_test_data_dml.sql" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Allocation.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/StudentTransactionOverview.xml" />
-        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/GeneralLedgerService.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/InvalidGeneralLedgerTypeException.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/CurrencyNotFoundException.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/AllocationNotFoundException.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/exception/TransactionTypeNotAllowedException.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/AccessControlServiceImpl.java" />
+        <option value="$PROJECT_DIR$/sql/test_inserts/ksa_test_data_dml.sql" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/DebitType.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlBreakdown.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GeneralLedgerType.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/TransactionListUtils.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CommonUtils.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/AdminLiaisonController.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/resources/logging.properties" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/CompositeAllocation.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java" />
+        <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java" />
       </list>
     </option>
   </component>
@@ -186,7 +246,6 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="snapshotUpdatePolicy" value="DO_NOT_UPDATE" />
-        <option name="userSettingsFile" value="C:\Documents and Settings\IvanovM\.m2\outside_settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -239,10 +298,6 @@
           <option name="myItemId" value="" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Profiles" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProfilesNode" />
-        </PATH_ELEMENT>
       </PATH>
     </treeState>
   </component>
@@ -254,10 +309,8 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1830" />
-    <option name="y" value="93" />
-    <option name="width" value="1404" />
-    <option name="height" value="860" />
+    <option name="width" value="1920" />
+    <option name="height" value="1165" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -287,20 +340,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ksa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ksa-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -308,6 +347,10 @@
               <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -315,7 +358,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -325,7 +368,39 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test_inserts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -339,7 +414,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -350,6 +425,18 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xmlImport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -357,7 +444,123 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xliff" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -372,6 +575,10 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -379,7 +586,233 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tags" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rice-portal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tags" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desktop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -405,7 +838,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xsd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -435,7 +898,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -465,7 +928,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -499,7 +1000,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="KSAGXTSandbox" />
+              <option name="myItemId" value="ksa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -521,6 +1022,296 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xliff" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exception" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ksa-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -545,26 +1336,26 @@
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="119" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="181" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="116" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="115" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="608" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="117" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="114" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="176" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="175" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="937" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="179" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="175" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="RESOURCE_BUNDLE_SPLITTER_PROPORTION" value="0.5" />
-    <property name="options.lastSelected" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="options.lastSelected" value="reference.settings.project.maven.runner" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatOrder2" value="2" />
-    <property name="project.structure.side.proportion" value="0.40178567" />
+    <property name="project.structure.side.proportion" value="0.32517484" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatOrder5" value="5" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatOrder4" value="4" />
@@ -574,27 +1365,27 @@
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeWidth1" value="145" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeWidth4" value="674" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_treeWidth3" value="144" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="135" />
-    <property name="project.structure.last.edited" value="SDKs" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="126" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="35" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="206" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="193" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="50" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="133" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="202" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.m2" />
     <property name="GoToClass.includeJavaFiles" value="true" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="133" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="627" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="203" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="969" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatWidth1" value="173" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatWidth0" value="165" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/ksa-core/src/test/resources" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatWidth5" value="589" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatWidth4" value="702" />
     <property name="FileHistory.org.jetbrains.idea.svn17.history.SvnHistoryProvider_flatWidth3" value="38" />
@@ -605,31 +1396,147 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.sigmasys.kuali.ksa.model" />
-      <recent name="com.sigmasys.kuali.ksa.service" />
+      <recent name="com.sigmasys.kuali.ksa.exception" />
       <recent name="com.sigmasys.kuali.ksa.service.impl" />
+      <recent name="com.sigmasys.kuali.ksa.service" />
+      <recent name="com.sigmasys.kuali.ksa.model" />
       <recent name="com.sigmasys.kuali.ksa.config" />
-      <recent name="com.sigmasys.kuali.ksa.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\projects\ksa\ksa-core\src\main\resources\META-INF" />
+      <recent name="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/gwt" />
+      <recent name="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/annotation" />
       <recent name="$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad" />
       <recent name="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF" />
       <recent name="$PROJECT_DIR$/ksa-core/src/main/resources/META-INF" />
-      <recent name="$PROJECT_DIR$/.idea" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="com.sigmasys.kuali.ksa.service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\projects\ksa\ksa-core\src\main\resources\xsd" />
-      <recent name="C:\projects\ksa\ksa-core\src\main\resources" />
+      <recent name="$PROJECT_DIR$/ksa-core/src/test/resources/xliff" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.KSA Tomcat 6">
-    <configuration default="false" name="DatabaseUtilsTest.dropSchemaTest" type="JUnit" factoryName="JUnit" temporary="true">
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="Moments ago" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+            <PATH vcs="svn" revision="35393">$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/TransactionListUtils.java</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+            <PATH vcs="svn" revision="35393">$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionList.java</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with tree conflicts" />
+          <option name="myStatusName" value="Merged with tree conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with property conflicts" />
+          <option name="myStatusName" value="Will be merged with property conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.KSA Tomcat 7">
+    <configuration default="false" name="TransactionServiceTest.createTransaction" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
@@ -638,14 +1545,14 @@
       </extension>
       <module name="ksa-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
-      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.DatabaseUtilsTest" />
-      <option name="METHOD_NAME" value="dropSchemaTest" />
+      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionServiceTest" />
+      <option name="METHOD_NAME" value="createTransaction" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -657,7 +1564,7 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TransactionServiceTest.getTransactionType" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="AccessControlServiceTest.getRoles" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
@@ -666,14 +1573,14 @@
       </extension>
       <module name="ksa-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
-      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionServiceTest" />
-      <option name="METHOD_NAME" value="getTransactionType" />
+      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.AccessControlServiceTest" />
+      <option name="METHOD_NAME" value="getRoles" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -685,7 +1592,7 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TransactionServiceTest.getTransactionTypeClass" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="TransactionServiceTest.deferTransaction" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
@@ -694,42 +1601,14 @@
       </extension>
       <module name="ksa-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
       <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionServiceTest" />
-      <option name="METHOD_NAME" value="getTransactionTypeClass" />
+      <option name="METHOD_NAME" value="deferTransaction" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TransactionServiceTest.createAllocation" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ksa-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
-      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionServiceTest" />
-      <option name="METHOD_NAME" value="createAllocation" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -750,14 +1629,14 @@
       </extension>
       <module name="ksa-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
       <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionServiceTest" />
       <option name="METHOD_NAME" value="createLockedAllocation" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -765,13 +1644,35 @@
       </option>
       <envs />
       <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TransactionServiceTest.createAllocation" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.sigmasys.kuali.ksa.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="ksa-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.sigmasys.kuali.ksa.service" />
+      <option name="MAIN_CLASS_NAME" value="com.sigmasys.kuali.ksa.service.TransactionServiceTest" />
+      <option name="METHOD_NAME" value="createAllocation" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -919,29 +1820,18 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -957,6 +1847,17 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
       <deployment />
       <server-settings />
@@ -970,14 +1871,14 @@
       </method>
     </configuration>
     <list size="8">
-      <item index="0" class="java.lang.String" itemvalue="GWT Configuration.KSA" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.KSA Tomcat 6" />
       <item index="1" class="java.lang.String" itemvalue="Tomcat Server.KSA Tomcat 7" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.KSA Tomcat 6" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DatabaseUtilsTest.dropSchemaTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.getTransactionType" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.getTransactionTypeClass" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.createAllocation" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.createLockedAllocation" />
+      <item index="2" class="java.lang.String" itemvalue="GWT Configuration.KSA" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.createTransaction" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.AccessControlServiceTest.getRoles" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.deferTransaction" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.createLockedAllocation" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.TransactionServiceTest.createAllocation" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1002,7 +1903,7 @@
     <option name="FORCE_UPDATE" value="false" />
     <option name="IGNORE_EXTERNALS" value="false" />
     <configuration useDefault="false">$USER_HOME$/.subversion_IDEA</configuration>
-    <myIsUseDefaultProxy>true</myIsUseDefaultProxy>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
   <component name="SvnConfiguration17" maxAnnotateRevisions="500" myUseAcceleration="nothing">
@@ -1028,16 +1929,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\KSAGXTSandbox" />
-          <option name="myCopyRoot" value="C:\KSAGXTSandbox" />
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\KSAGXTSandbox" />
-          <option name="myCopyRoot" value="C:\KSAGXTSandbox" />
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -1162,167 +2063,363 @@
       <created>1334625557101</created>
       <updated>1334625557101</updated>
     </task>
-    <task id="LOCAL-00025" summary="Fixed the JTA transaction configuration, configured KEW  Spring beans (used by KIM UI), fixed the Spring's bean initialization order, fixed the Maven dependencies to get rid of conflicting jar-files, included istack-runtime environment (needed by JAX WS)">
-      <created>1339008115111</created>
-      <updated>1339008115111</updated>
+    <task id="LOCAL-00025" summary="refactoring">
+      <created>1334625766101</created>
+      <updated>1334625766101</updated>
     </task>
-    <task id="LOCAL-00026" summary="Corrected Tomcat config settings">
-      <created>1339008418103</created>
-      <updated>1339008418103</updated>
+    <task id="LOCAL-00026" summary="Implemented rebalance">
+      <created>1334806811100</created>
+      <updated>1334806811100</updated>
     </task>
-    <task id="LOCAL-00027" summary="Configured Kuali Location service, changed the Struts action mapping and the KSA config files">
-      <created>1339015037117</created>
-      <updated>1339015037117</updated>
+    <task id="LOCAL-00027" summary="Refactoring: made Transaction associations lazily fetched, rewrote the queries for retrieving the list of transactions using &quot;left outer join fetch&quot;">
+      <created>1334808684101</created>
+      <updated>1334808684101</updated>
     </task>
-    <task id="LOCAL-00028" summary="Fixed the HTTP session ID issue in KRAD's UserSession, removed krad-beans.xml and kim-beans.xml, re-configured the application context, added beand definitions to krad-servlet.xml">
-      <created>1339023165134</created>
-      <updated>1339023165134</updated>
+    <task id="LOCAL-00028" summary="Refactoring: made Transaction associations lazily fetched, rewrote the queries for retrieving the list of transactions using &quot;left outer join fetch&quot;">
+      <created>1334808986101</created>
+      <updated>1334808986101</updated>
     </task>
-    <task id="LOCAL-00029" summary="Fixed the HTTP session ID issue in KRAD's UserSession, removed krad-beans.xml and kim-beans.xml, re-configured the application context, added bean definitions to krad-servlet.xml">
-      <created>1339023378108</created>
-      <updated>1339023378108</updated>
+    <task id="LOCAL-00029" summary="Big fixing, cleanup">
+      <created>1335105474101</created>
+      <updated>1335105474101</updated>
     </task>
-    <task id="LOCAL-00030" summary="Fixed the path to locale-specific messages">
-      <created>1339025178107</created>
-      <updated>1339025178107</updated>
+    <task id="LOCAL-00030" summary="Big fixing, cleanup">
+      <created>1335105531101</created>
+      <updated>1335105531101</updated>
     </task>
-    <task id="LOCAL-00031" summary="Updated KIM web resources from Rice 2.1.0, implemented RiceConfigBeanFactory to dynamically rewrite some of the Rice config parameters, implemented a few methods in RequestUtils, &#10;created KimWindow and attached it to the KSA desktop.">
-      <created>1339098371116</created>
-      <updated>1339098371116</updated>
+    <task id="LOCAL-00031" summary="Provided the correct webapp context">
+      <created>1335139813101</created>
+      <updated>1335139813101</updated>
     </task>
-    <task id="LOCAL-00032" summary="Introduced ReferenceDataProvider and ReferenceDataCommand">
-      <created>1339193463102</created>
-      <updated>1339193463102</updated>
+    <task id="LOCAL-00032" summary="Added UiFWidgetDefinitions with the corrected breadcrumbs, removed Struts config file">
+      <created>1335236401101</created>
+      <updated>1335236401101</updated>
     </task>
-    <task id="LOCAL-00033" summary="Made configuration changes: Added Rice's Config bean initialization to InitialParameterConfigurer so that the Rice config parameters could be populated from there, created KSSA_CONFIG table to store KSA database-driven parameters, modified DDL and KSA context files.">
-      <created>1339433172102</created>
-      <updated>1339433172102</updated>
+    <task id="LOCAL-00033" summary="added ErrorUtils">
+      <created>1335580779101</created>
+      <updated>1335580779101</updated>
     </task>
-    <task id="LOCAL-00034" summary="Bug fixing">
-      <created>1339438380092</created>
-      <updated>1339438380092</updated>
+    <task id="LOCAL-00034" summary="added ErrorUtils">
+      <created>1335580793101</created>
+      <updated>1335580793101</updated>
     </task>
-    <task id="LOCAL-00035" summary="XLIFF initial commit">
-      <created>1339453351177</created>
-      <updated>1339453351177</updated>
+    <task id="LOCAL-00035" summary="added ProxyEntity">
+      <created>1335580979101</created>
+      <updated>1335580979101</updated>
     </task>
-    <task id="LOCAL-00036" summary="Created Language class, changed the KSA DDL script">
-      <created>1339627688101</created>
-      <updated>1339627688101</updated>
+    <task id="LOCAL-00036" summary="added ProxyEntity">
+      <created>1335581036101</created>
+      <updated>1335581036101</updated>
     </task>
-    <task id="LOCAL-00037" summary="Implemented LanguageService, LanguageServiceImpl and LanguageServiceTest classes, modified the KSA test data">
-      <created>1339696609234</created>
-      <updated>1339696609234</updated>
+    <task id="LOCAL-00037" summary="Added GWT Account model">
+      <created>1335586104101</created>
+      <updated>1335586104101</updated>
     </task>
-    <task id="LOCAL-00038" summary="Implemented Xliff model, XmlSchemaValidator. Modified XliffParser to extract the language and country from XLIFF. Added a XLIFF example and schemas. Implemented XliffParserTest. Testing.">
-      <created>1340061320129</created>
-      <updated>1340061320129</updated>
+    <task id="LOCAL-00038" summary="Added GWT Account model">
+      <created>1335644960101</created>
+      <updated>1335644960101</updated>
     </task>
-    <task id="LOCAL-00039" summary="Refactored XmlSchemaValidator to allow it to accept multiple schema source locations, fixed import of xml.xsd in the XLIFF schema, created the correct reference to the xml.xsd located in the classpath, added XliffParserTest into ServiceTestSuite JUnit bundle.">
-      <created>1340126140097</created>
-      <updated>1340126140097</updated>
+    <task id="LOCAL-00039" summary="Added ServiceFactory and AccountListPanel">
+      <created>1335674647101</created>
+      <updated>1335674647101</updated>
     </task>
-    <task id="LOCAL-00040" summary="Continued working on LocalizationService, added parsing of the other few attributes to XliffParser">
-      <created>1340230534098</created>
-      <updated>1340230534098</updated>
+    <task id="LOCAL-00040" summary="Added ReferenceData, KsaDesktop, KsaEntryPoint, AccountCompositePanel,GwtConfigService">
+      <created>1335715090101</created>
+      <updated>1335715090101</updated>
     </task>
-    <task id="LOCAL-00041" summary="Worked on LocalizationServiceImpl, implemented importResources() logic based on the different import types, made LocalizedString auditable, updated the Data Model document.">
-      <created>1340303920100</created>
-      <updated>1340303920100</updated>
+    <task id="LOCAL-00041" summary="Added KSA GWT module config and 2 service impl classes">
+      <created>1335718932102</created>
+      <updated>1335718932102</updated>
     </task>
-    <task id="LOCAL-00042" summary="Refactored getReferenceData()">
-      <created>1340636043116</created>
-      <updated>1340636043116</updated>
+    <task id="LOCAL-00042" summary="GWT/GXT progress....">
+      <created>1335845095102</created>
+      <updated>1335845095102</updated>
     </task>
-    <task id="LOCAL-00043" summary="Registered LocalizationService on KSB, implemented JaxWsProxyFactoryBean and JaxWsServiceExporter for web service testing, created ws-context.xml">
-      <created>1340665603118</created>
-      <updated>1340665603118</updated>
+    <task id="LOCAL-00043" summary="Bug fixing">
+      <created>1335845522101</created>
+      <updated>1335845522101</updated>
     </task>
-    <task id="LOCAL-00044" summary="Configured JUnit with JAX WS to test Localization and Transaction web services from the command line, added LocalizationWebServiceTest, got JaxWsServiceExporter working with CGLIB proxies by overriding createEndpoint() method, fixed the web service endpoint names,  added the Spring context for testing web services, debugging">
-      <created>1340751594097</created>
-      <updated>1340751594097</updated>
+    <task id="LOCAL-00044" summary="Bug fixing">
+      <created>1335845945101</created>
+      <updated>1335845945101</updated>
     </task>
-    <task id="LOCAL-00045" summary="Worked on JAX WS JUnit support, made configuration changes, fixed session management in JAX WS services, debugging">
-      <created>1340840431094</created>
-      <updated>1340840431094</updated>
+    <task id="LOCAL-00045" summary="changed L&amp;F">
+      <created>1336018047102</created>
+      <updated>1336018047102</updated>
     </task>
-    <task id="LOCAL-00046" summary="Added LocalizationWebServiceTest to Maven's managed ServiceTestSuite class">
-      <created>1340899586109</created>
-      <updated>1340899586109</updated>
+    <task id="LOCAL-00046" summary="Bug fixing">
+      <created>1336095904101</created>
+      <updated>1336095904101</updated>
     </task>
-    <task id="LOCAL-00047" summary="Added a new parameter">
-      <created>1341336063097</created>
-      <updated>1341336063097</updated>
+    <task id="LOCAL-00047" summary="Overloaded createTransaction() adding externalId argument">
+      <created>1336183799103</created>
+      <updated>1336183799103</updated>
     </task>
-    <task id="LOCAL-00048" summary="refactoring, cleanup, got rid of Base64 conversion">
-      <created>1341337764103</created>
-      <updated>1341337764103</updated>
+    <task id="LOCAL-00048" summary="added getActivities() by Account ID">
+      <created>1336184584102</created>
+      <updated>1336184584102</updated>
     </task>
-    <task id="LOCAL-00049" summary="refactoring, cleanup">
-      <created>1341509750103</created>
-      <updated>1341509750103</updated>
+    <task id="LOCAL-00049" summary="Provided additional bean property values in createTransaction(), had to add @UseWebContext annotation to TransactionServiceTest">
+      <created>1336449786101</created>
+      <updated>1336449786101</updated>
     </task>
-    <task id="LOCAL-00050" summary="Implemented TransactionMaskRole JPA model, added JPA annotations, added/mapped &quot;creationDate&quot; property to AuditableEntity, discussed with Paul and applied changes to RefundType, Refund and other entities, modified GenericPersistenceService and KSA DDL scripts according to the new DB changes">
-      <created>1341526216111</created>
-      <updated>1341526216111</updated>
+    <task id="LOCAL-00050" summary="Provided additional bean property values in createTransaction()">
+      <created>1336450870102</created>
+      <updated>1336450870103</updated>
     </task>
-    <task id="LOCAL-00051" summary="Introduced EnumUtils and CalendarUtils classes, implemented GlTransactionStatus and EnumUtils's findById() method, simplified Hibernate type conversion">
-      <created>1341589926096</created>
-      <updated>1341589926096</updated>
+    <task id="LOCAL-00051" summary="Bug fixing: Fixed SearchCriteria parameter types and their form bindings">
+      <created>1337303700102</created>
+      <updated>1337303700102</updated>
     </task>
-    <task id="LOCAL-00052" summary="Implemented GlTransaction and GlTransmission classes, applied JPA annotations, modified KSA DDL and DML scripts, testing">
-      <created>1341604177104</created>
-      <updated>1341604177104</updated>
+    <task id="LOCAL-00052" summary="Fixed the grid style and NotSerializable exception for AbstractRangeValue, minor bug fixing">
+      <created>1337311069105</created>
+      <updated>1337311069105</updated>
     </task>
-    <task id="LOCAL-00053" summary="implemented AccessControlServiceTest, a few methods in AccessControlService for retrieving roles and permissions using KIM API, created XSD folder to keep all KSA XML schemas in one place">
-      <created>1341864465117</created>
-      <updated>1341864465117</updated>
+    <task id="LOCAL-00053" summary="Set borders and auto-fill for the grid">
+      <created>1337311651101</created>
+      <updated>1337311651102</updated>
     </task>
-    <task id="LOCAL-00054" summary="implemented getAllowedTransactionTypes() and getTransactionTypesByRoleNames() of AccessControlService, provided caching of the transaction types and their regexp-managed masks in AccessControlServiceImpl class, refactored the logic of the corresponding methods improving the search performance.">
-      <created>1341871529114</created>
-      <updated>1341871529114</updated>
+    <task id="LOCAL-00054" summary="Implemented generic type support for DroolsService, added the resource upload mechanism for reading Rule files from the classpath, created DroolsServiceTest and currency.drl XML-based rule set, added JVM parameters for GWT compiler and Maven JUnit plugin to increase memory consumption required by Rice, added Janino Maven dependency for Drools.">
+      <created>1337752935104</created>
+      <updated>1337752935104</updated>
     </task>
-    <task id="LOCAL-00055" summary="Moved all XSD files to &quot;xsd&quot; folder, made changes to XliffParser and TransactionImportServiceImpl classes">
-      <created>1341872941148</created>
-      <updated>1341872941148</updated>
+    <task id="LOCAL-00055" summary="Added &quot;DEF&quot; deferment type to the test data script, implemented JUnit tests for createMemo() and deferTransaction()">
+      <created>1337830880114</created>
+      <updated>1337830880115</updated>
     </task>
-    <task id="LOCAL-00056" summary="FIXED the datasource settings again">
-      <created>1341936701105</created>
-      <updated>1341936701105</updated>
+    <task id="LOCAL-00056" summary="Restored">
+      <created>1337907888103</created>
+      <updated>1337907888103</updated>
     </task>
-    <task id="LOCAL-00057" summary="A few comments, TODO's and bug fixing">
-      <created>1341938259109</created>
-      <updated>1341938259109</updated>
+    <task id="LOCAL-00057" summary="a little cleanup">
+      <created>1337912530101</created>
+      <updated>1337912530101</updated>
     </task>
-    <task id="LOCAL-00058" summary="Changed the JPA constraints on RefundType class, modified KSA DDL scripts">
-      <created>1341944837100</created>
-      <updated>1341944837100</updated>
+    <task id="LOCAL-00058" summary="Implemented addPersonName(Account ID, PersonName) and the corresponding JUnit test">
+      <created>1337918494101</created>
+      <updated>1337918494101</updated>
     </task>
-    <task id="LOCAL-00059" summary="Removed unused exception declarations">
-      <created>1342022612103</created>
-      <updated>1342022612103</updated>
+    <task id="LOCAL-00059" summary="Removed ksa.locale as it is defined by ksa.locale.lang and ksa.locale.country">
+      <created>1338045343122</created>
+      <updated>1338045343122</updated>
     </task>
-    <task id="LOCAL-00060" summary="Fixed Dave's try/catch/finally blocks, excluded the transaction import service test as they all fail, hence, breaks the Maven build">
-      <created>1342023581100</created>
-      <updated>1342023581100</updated>
+    <task id="LOCAL-00060" summary="Implemented to support GWT services - AuditableEntityModel, CurrencyModel, GwtCurrencyService, GwtCurrencyServiceAsync, GwtCurrencyServiceImpl, provided URL mapping, added the currency service instantiation to ServiceFactory, placed the GWT compiler jar-files in front of the others in the classpath to prevent &quot;java.lang.NoSuchFieldError: warningThreshold GWT compiler&quot;">
+      <created>1338138008101</created>
+      <updated>1338138008101</updated>
     </task>
-    <task id="LOCAL-00061" summary="Refactored JPA mapping in UserPreference class, implemented UserPreferenceService, ConfigServiceTest and UserPreferenceServiceTest, added them to the Maven build process, JUnit testing">
-      <created>1342464624109</created>
-      <updated>1342464624109</updated>
+    <task id="LOCAL-00061" summary="Renamed currency.drl to currency.xdrl to emphasize that it is in XML format">
+      <created>1338138345101</created>
+      <updated>1338138345101</updated>
     </task>
-    <task id="LOCAL-00062" summary="Added a few more tests to UserPreferenceServiceTest, implemented getTextContent(File) in CommonUtils class, fixed the hashcode generation in UserPreferenceId composite primary key object">
-      <created>1342558693111</created>
-      <updated>1342558693111</updated>
+    <task id="LOCAL-00062" summary="Added a few JUnit tests for GwtCurrencyService to the Maven build process">
+      <created>1338170185226</created>
+      <updated>1338170185226</updated>
     </task>
-    <task id="LOCAL-00063" summary="Implemented IdType JPA entity, added IdType reference to AccountProtectedInfo, provided JPA annotations, modified KSA DDL/DML scripts">
-      <created>1343150830097</created>
-      <updated>1343150830097</updated>
+    <task id="LOCAL-00063" summary="Refactoring: moved createMemo() factory-methods to InformationService, added InformationServiceTest class.">
+      <created>1338179826101</created>
+      <updated>1338179826101</updated>
     </task>
-    <task id="LOCAL-00064" summary="Implemented getTransactionTypeClass() of TransactionService, added a few JUnit tests to TransactionServiceTest class">
-      <created>1343166407093</created>
-      <updated>1343166407093</updated>
+    <task id="LOCAL-00064" summary="Implemented various types of createFlag() and createAlert() methods">
+      <created>1338261967101</created>
+      <updated>1338261967102</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Added AopBeanpostProcessor class, AopPoxy interface, provided AOP-based logging mechanism">
+      <created>1338466511102</created>
+      <updated>1338466511102</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Added getClientIpAddress() to RequestUtils class, implemented a few methods in AuditTrailInterceptor to capture Hibernate entity lifecycle events">
+      <created>1338519556103</created>
+      <updated>1338519556103</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Upgraded Rice from 2.1.0-M3 to 2.1.0 release">
+      <created>1338864824138</created>
+      <updated>1338864824138</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Modified KSA configuration and fixed maven dependencies to provide KIM UI application context, changed web.xml">
+      <created>1338958565101</created>
+      <updated>1338958565101</updated>
+    </task>
+    <task id="LOCAL-00069" summary="fixed the config">
+      <created>1338960752101</created>
+      <updated>1338960752101</updated>
+    </task>
+    <task id="LOCAL-00070" summary="used the service locator to retrieve PersonService">
+      <created>1338960810102</created>
+      <updated>1338960810102</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Fixed the Maven repository locations">
+      <created>1339038220106</created>
+      <updated>1339038220106</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Bug fixing">
+      <created>1339230190102</created>
+      <updated>1339230190102</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Added 2 more tables to drop">
+      <created>1339714623131</created>
+      <updated>1339714623131</updated>
+    </task>
+    <task id="LOCAL-00074" summary="LocalizationService initial commit">
+      <created>1339992714102</created>
+      <updated>1339992714102</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Included Woodstox Stax2 implementation in pom.xml, added getResourceAsString() method to CommonUtils, solved XLIFF parsing and XML schema validation issues, JUnit testing">
+      <created>1340080918103</created>
+      <updated>1340080918103</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Added a few comments">
+      <created>1340165201103</created>
+      <updated>1340165201103</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Bug fixing in the XML parser">
+      <created>1340232075111</created>
+      <updated>1340232075111</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Added localized parameters to ReferenceData to make it available on UI, implemented getLocalizedParameters() method in ConfigService and GwtConfigService, added LocalizationServiceTest to ServiceTestSuite (now it is part of the KSA build)">
+      <created>1340332411118</created>
+      <updated>1340332411118</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Fixed Localization JAX WS service return types and LocalizationWebServiceTest">
+      <created>1340847047103</created>
+      <updated>1340847047103</updated>
+    </task>
+    <task id="LOCAL-00080" summary="FIXED the datasource settings again">
+      <created>1341272604103</created>
+      <updated>1341272604103</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Excluded the failing test method">
+      <created>1341273289101</created>
+      <updated>1341273289101</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Refactoring">
+      <created>1341283084102</created>
+      <updated>1341283084102</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Implemented BatchReceipt class and BatchReceiptStatus enum, added persistBatchReceipt() and getBatchReceipt methods to TransactionImportService, made the corresponding changes to KSA DDL scripts, fixed Dave's errors in TransactionImportServiceImpl">
+      <created>1341429744103</created>
+      <updated>1341429744103</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Implemented Refund, RefundStatus and RefundType, provided JPA mapping, modified DDL scripts">
+      <created>1341465444101</created>
+      <updated>1341465444101</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Bug fixing">
+      <created>1341581321127</created>
+      <updated>1341581321127</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Initial commit of Access Control service">
+      <created>1341781668102</created>
+      <updated>1341781668103</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Implemented getAllowedTransactionTypeMasks(), getRoleNames() and isTransactionTypeAllowed() of AccessControlService">
+      <created>1341803967102</created>
+      <updated>1341803967102</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Fixed the RegExp logic">
+      <created>1341804092102</created>
+      <updated>1341804092102</updated>
+    </task>
+    <task id="LOCAL-00089" summary="Made the code compilable, fixed errors, cleanup">
+      <created>1341878468102</created>
+      <updated>1341878468103</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Bug fixing">
+      <created>1341879566102</created>
+      <updated>1341879566102</updated>
+    </task>
+    <task id="LOCAL-00091" summary="cleanup">
+      <created>1341879792101</created>
+      <updated>1341879792101</updated>
+    </task>
+    <task id="LOCAL-00092" summary="cleanup">
+      <created>1341882742101</created>
+      <updated>1341882742101</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Implemented XmlDocument JPA model, added @Auditable annotation, added references to XmlDocument from BatchReceipt for incoming and outgoing XMLs, refactored AccessControlServiceImpl, added logging, created a few more tests in AccessControlServiceTest class, modified KSA DDL scripts">
+      <created>1341969233102</created>
+      <updated>1341969233102</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Implemented UserPreference and its composite JPA primary key UserPreferenceId, modified KSA DDL scripts">
+      <created>1342370601102</created>
+      <updated>1342370601102</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Reimplemented TransactionImportServiceImpl, fixed TransactionImportServiceTest, added it to the Maven build, added UserPreferenceService interface">
+      <created>1342674498103</created>
+      <updated>1342674498103</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Added &quot;code&quot; property to AuditableEntity, removed &quot;iso&quot; from Currency JPA entity, modified the dependent services and UI components, changed KSA DDL and DML scripts, JUnit testing/debugging">
+      <created>1342742079103</created>
+      <updated>1342742079103</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Worked on transaction import validation, implemented isRefundRuleValid() and isTransactionTypeAllowed() methods, fixed issues with AccessControl Spring's injection, added PersistenceInterface, exposed TransactionImportService as a web service on KSB">
+      <created>1342756318102</created>
+      <updated>1342756318102</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Worked on transaction import validation, implemented isRefundRuleValid() and isTransactionTypeAllowed() methods, fixed issues with AccessControl Spring's injection, added PersistenceInterface, exposed TransactionImportService as a web service on KSB">
+      <created>1342756337101</created>
+      <updated>1342756337101</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Fixed TransactionImportService web service annotations">
+      <created>1342758050101</created>
+      <updated>1342758050101</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Implemented multiple versions of canPay() in TransactionService, added RegExp matching for allowable debit types, provided validation, fixed JAX WS annotations, debugging">
+      <created>1343187644118</created>
+      <updated>1343187644118</updated>
+    </task>
+    <task id="LOCAL-00101" summary="added new statements to KSA DDL and DML scripts">
+      <created>1343875968117</created>
+      <updated>1343875968117</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Added several constructor to KSA exception classes, move isTransactionAllowed() to TransactionService class, implemented &quot;doesAccountExist&quot; in AccountService,made the appropriate changes to TransactionImportService, added &quot;recognitionDate&quot; to Transaction class, modified JPA mapping and KSA DDL scripts">
+      <created>1345085051132</created>
+      <updated>1345085051132</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Updated docs">
+      <created>1345211093102</created>
+      <updated>1345211093102</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Created GlOperationType enum, made use of it in CreditType, modified JPA mapping and GlTransaction class">
+      <created>1345260627102</created>
+      <updated>1345260627102</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Added TransactionNotAllowedException, set recognitionDate to effectiveDate in createTransaction() of TransactionServiceImpl class">
+      <created>1345262186102</created>
+      <updated>1345262186102</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Commented out the GWT Maven plugin">
+      <created>1345262370102</created>
+      <updated>1345262370102</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Added @Auditable to AccountProtectedInfo class">
+      <created>1345434965123</created>
+      <updated>1345434965123</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Initial commit for GeneralLedgerService and GeneralLedgerServiceImpl classes, moved getGlTransactionType() from TransactionService to GeneralLedgerService, implemented createGlTransaction() methods, started working on summarizeGlTransactions() logic, changed the association between GlTransaction and Transaction JPA entities, created KSSA_GL_TRANS_TRANSACTION association table, modified KSA DDL scripts">
+      <created>1345503979101</created>
+      <updated>1345503979101</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Made progress on summarizeGlTransactions() functionality">
+      <created>1345522485101</created>
+      <updated>1345522485101</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Changed createTransaction() functionality, added default general ledger type and &quot;overrideBlocks&quot; argument, added isTransactionAllowed() and isTransactionTypeAllowed() to createTransaction() method, added default GL type and &quot;admin&quot; transaction type mask to ksa_test_data_dml.sql, created AllocationNotFoundException, CurrencyNotFountException, InvalidGeneralLedgerTypeException and TransactionTypeNotAllowedException classes">
+      <created>1346033275102</created>
+      <updated>1346033275102</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Bug fixing and cleanup in TransactionListUtils class">
+      <created>1346202316101</created>
+      <updated>1346202316101</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Changed createAllocation + general ledger logic, provided enums for GL operation values in GlBreakdown and GeneralLedgerType classes, made the corresponding changes to TransactionService API and its implementation">
+      <created>1346203354101</created>
+      <updated>1346203354101</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Implemented getStreamAsString() in CommonUtils, fixed Dave's AdminLiaisonController class, provided web services annotations in TransactionServiceImpl class, changed the level of Tomcat logging in logging.properties, added LedgerGeneralService's JUnit tests to ServiceTestSuite">
+      <created>1346265577100</created>
+      <updated>1346265577101</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1346,32 +2443,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1830" y="93" width="1404" height="860" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1165" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32700136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19980314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37177747" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30341464" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20097561" sideWeight="0.49839744" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2021104" sideWeight="0.323496" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18327974" sideWeight="0.43307087" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2657503" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5624284" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4488189" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3031496" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297244" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1298077" sideWeight="0.6720379" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11950697" sideWeight="0.43208662" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18916914" sideWeight="0.6282225" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51312333" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2540193" sideWeight="0.43208662" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5679134" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44389763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22680412" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1383,7 +2481,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
@@ -1399,7 +2497,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="true" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
@@ -1416,7 +2514,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented getTransactionTypeClass() of TransactionService, added a few JUnit tests to TransactionServiceTest class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented getStreamAsString() in CommonUtils, fixed Dave's AdminLiaisonController class, provided web services annotations in TransactionServiceImpl class, changed the level of Tomcat logging in logging.properties, added LedgerGeneralService's JUnit tests to ServiceTestSuite" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1428,32 +2526,32 @@
     <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
-    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Continued working on LocalizationService, added parsing of the other few attributes to XliffParser" />
-    <MESSAGE value="Worked on LocalizationServiceImpl, implemented importResources() logic based on the different import types, made LocalizedString auditable, updated the Data Model document." />
-    <MESSAGE value="Refactored getReferenceData()" />
-    <MESSAGE value="Registered LocalizationService on KSB, implemented JaxWsProxyFactoryBean and JaxWsServiceExporter for web service testing, created ws-context.xml" />
-    <MESSAGE value="Configured JUnit with JAX WS to test Localization and Transaction web services from the command line, added LocalizationWebServiceTest, got JaxWsServiceExporter working with CGLIB proxies by overriding createEndpoint() method, fixed the web service endpoint names,  added the Spring context for testing web services, debugging" />
-    <MESSAGE value="Worked on JAX WS JUnit support, made configuration changes, fixed session management in JAX WS services, debugging" />
-    <MESSAGE value="Added LocalizationWebServiceTest to Maven's managed ServiceTestSuite class" />
-    <MESSAGE value="Added a new parameter" />
-    <MESSAGE value="refactoring, cleanup, got rid of Base64 conversion" />
-    <MESSAGE value="refactoring, cleanup" />
-    <MESSAGE value="Implemented TransactionMaskRole JPA model, added JPA annotations, added/mapped &quot;creationDate&quot; property to AuditableEntity, discussed with Paul and applied changes to RefundType, Refund and other entities, modified GenericPersistenceService and KSA DDL scripts according to the new DB changes" />
-    <MESSAGE value="Introduced EnumUtils and CalendarUtils classes, implemented GlTransactionStatus and EnumUtils's findById() method, simplified Hibernate type conversion" />
-    <MESSAGE value="Implemented GlTransaction and GlTransmission classes, applied JPA annotations, modified KSA DDL and DML scripts, testing" />
-    <MESSAGE value="implemented AccessControlServiceTest, a few methods in AccessControlService for retrieving roles and permissions using KIM API, created XSD folder to keep all KSA XML schemas in one place" />
-    <MESSAGE value="implemented getAllowedTransactionTypes() and getTransactionTypesByRoleNames() of AccessControlService, provided caching of the transaction types and their regexp-managed masks in AccessControlServiceImpl class, refactored the logic of the corresponding methods improving the search performance." />
-    <MESSAGE value="Moved all XSD files to &quot;xsd&quot; folder, made changes to XliffParser and TransactionImportServiceImpl classes" />
-    <MESSAGE value="FIXED the datasource settings again" />
-    <MESSAGE value="A few comments, TODO's and bug fixing" />
-    <MESSAGE value="Changed the JPA constraints on RefundType class, modified KSA DDL scripts" />
-    <MESSAGE value="Removed unused exception declarations" />
-    <MESSAGE value="Fixed Dave's try/catch/finally blocks, excluded the transaction import service test as they all fail, hence, breaks the Maven build" />
-    <MESSAGE value="Refactored JPA mapping in UserPreference class, implemented UserPreferenceService, ConfigServiceTest and UserPreferenceServiceTest, added them to the Maven build process, JUnit testing" />
-    <MESSAGE value="Added a few more tests to UserPreferenceServiceTest, implemented getTextContent(File) in CommonUtils class, fixed the hashcode generation in UserPreferenceId composite primary key object" />
-    <MESSAGE value="Implemented IdType JPA entity, added IdType reference to AccountProtectedInfo, provided JPA annotations, modified KSA DDL/DML scripts" />
-    <MESSAGE value="Implemented getTransactionTypeClass() of TransactionService, added a few JUnit tests to TransactionServiceTest class" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.87606114" />
+    <MESSAGE value="Implemented getAllowedTransactionTypeMasks(), getRoleNames() and isTransactionTypeAllowed() of AccessControlService" />
+    <MESSAGE value="Fixed the RegExp logic" />
+    <MESSAGE value="Made the code compilable, fixed errors, cleanup" />
+    <MESSAGE value="Bug fixing" />
+    <MESSAGE value="cleanup" />
+    <MESSAGE value="Implemented XmlDocument JPA model, added @Auditable annotation, added references to XmlDocument from BatchReceipt for incoming and outgoing XMLs, refactored AccessControlServiceImpl, added logging, created a few more tests in AccessControlServiceTest class, modified KSA DDL scripts" />
+    <MESSAGE value="Implemented UserPreference and its composite JPA primary key UserPreferenceId, modified KSA DDL scripts" />
+    <MESSAGE value="Reimplemented TransactionImportServiceImpl, fixed TransactionImportServiceTest, added it to the Maven build, added UserPreferenceService interface" />
+    <MESSAGE value="Added &quot;code&quot; property to AuditableEntity, removed &quot;iso&quot; from Currency JPA entity, modified the dependent services and UI components, changed KSA DDL and DML scripts, JUnit testing/debugging" />
+    <MESSAGE value="Worked on transaction import validation, implemented isRefundRuleValid() and isTransactionTypeAllowed() methods, fixed issues with AccessControl Spring's injection, added PersistenceInterface, exposed TransactionImportService as a web service on KSB" />
+    <MESSAGE value="Fixed TransactionImportService web service annotations" />
+    <MESSAGE value="Implemented multiple versions of canPay() in TransactionService, added RegExp matching for allowable debit types, provided validation, fixed JAX WS annotations, debugging" />
+    <MESSAGE value="added new statements to KSA DDL and DML scripts" />
+    <MESSAGE value="Added several constructor to KSA exception classes, move isTransactionAllowed() to TransactionService class, implemented &quot;doesAccountExist&quot; in AccountService,made the appropriate changes to TransactionImportService, added &quot;recognitionDate&quot; to Transaction class, modified JPA mapping and KSA DDL scripts" />
+    <MESSAGE value="Updated docs" />
+    <MESSAGE value="Created GlOperationType enum, made use of it in CreditType, modified JPA mapping and GlTransaction class" />
+    <MESSAGE value="Added TransactionNotAllowedException, set recognitionDate to effectiveDate in createTransaction() of TransactionServiceImpl class" />
+    <MESSAGE value="Commented out the GWT Maven plugin" />
+    <MESSAGE value="Added @Auditable to AccountProtectedInfo class" />
+    <MESSAGE value="Initial commit for GeneralLedgerService and GeneralLedgerServiceImpl classes, moved getGlTransactionType() from TransactionService to GeneralLedgerService, implemented createGlTransaction() methods, started working on summarizeGlTransactions() logic, changed the association between GlTransaction and Transaction JPA entities, created KSSA_GL_TRANS_TRANSACTION association table, modified KSA DDL scripts" />
+    <MESSAGE value="Made progress on summarizeGlTransactions() functionality" />
+    <MESSAGE value="Changed createTransaction() functionality, added default general ledger type and &quot;overrideBlocks&quot; argument, added isTransactionAllowed() and isTransactionTypeAllowed() to createTransaction() method, added default GL type and &quot;admin&quot; transaction type mask to ksa_test_data_dml.sql, created AllocationNotFoundException, CurrencyNotFountException, InvalidGeneralLedgerTypeException and TransactionTypeNotAllowedException classes" />
+    <MESSAGE value="Bug fixing and cleanup in TransactionListUtils class" />
+    <MESSAGE value="Changed createAllocation + general ledger logic, provided enums for GL operation values in GlBreakdown and GeneralLedgerType classes, made the corresponding changes to TransactionService API and its implementation" />
+    <MESSAGE value="Implemented getStreamAsString() in CommonUtils, fixed Dave's AdminLiaisonController class, provided web services annotations in TransactionServiceImpl class, changed the level of Tomcat logging in logging.properties, added LedgerGeneralService's JUnit tests to ServiceTestSuite" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1497,125 +2595,255 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionImportServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/KsaConfigurer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="532" column="113" selection-start="22509" selection-end="22509" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/form/TransOvrForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="25" selection-start="169" selection-end="181" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/AlertsTransactionView.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="58" selection-start="1896" selection-end="1896" vertical-scroll-proportion="-4.577778">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/CashierTxMemo.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="82" selection-start="2239" selection-end="2239" vertical-scroll-proportion="-4.733333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/com/sigmasys/kuali/ksa/krad/StudentTransactionOverview.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="31" selection-start="4219" selection-end="4219" vertical-scroll-proportion="-20.06">
+        <state line="22" column="47" selection-start="954" selection-end="954" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.277512">
+        <state line="10" column="110" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-config-beans.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.1.0/rice-impl-2.1.0-sources.jar!/META-INF/common-config-defaults.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="18" column="60" selection-start="638" selection-end="638" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/META-INF/ksa-context.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/DebitType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="19" column="42" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/jta.properties">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="23" column="22" selection-start="605" selection-end="605" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/OJB.properties">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/TransactionType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="21" column="29" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/logging.properties">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/CreditType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="87" column="129" selection-start="2237" selection-end="2237" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/log4j.properties">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlBreakdown.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="60" column="31" selection-start="845" selection-end="1148" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GeneralLedgerType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="70" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlBreakdownOverride.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/TransactionListUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="81" selection-start="518" selection-end="518" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6306#6319#0" expanded="true" />
+            <element signature="e#7162#7175#0" expanded="true" />
+            <element signature="e#7434#7447#0" expanded="true" />
+            <element signature="e#7723#7736#0" expanded="true" />
+            <element signature="e#7840#7853#0" expanded="true" />
+            <element signature="e#8154#8167#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/src.zip!/java/lang/StringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="11" selection-start="3594" selection-end="3594" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#14071#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/ServiceTestSuite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="51" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="83" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/AdminLiaisonController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="63" selection-start="2687" selection-end="2687" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql/ksa_create_ddl.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="75" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.67464113">
+        <state line="28" column="58" selection-start="867" selection-end="883" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/ksa.properties">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/resources/logging.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="2" column="95" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/krad/controller/TransOvrController.java">
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CommonUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="47" selection-start="3965" selection-end="3965" vertical-scroll-proportion="0.7699758">
+        <state line="76" column="70" selection-start="2532" selection-end="2532" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/GeneralLedgerServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="44" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Charge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="31" selection-start="211" selection-end="211" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Debit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="42" selection-start="443" selection-end="443" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Deferment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Allocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/GlTransaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="84" selection-start="493" selection-end="493" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="25" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4056#4082#0" expanded="true" />
+            <element signature="e#4222#4242#0" expanded="true" />
+            <element signature="e#4418#4447#0" expanded="true" />
+            <element signature="e#6423#6429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Pair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="27" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/TransactionServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="442" column="31" selection-start="15908" selection-end="15908" vertical-scroll-proportion="-8.48">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1157#1187#0" expanded="true" />
+            <element signature="e#24770#24800#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/TransactionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="242" column="23" selection-start="7784" selection-end="7784" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/TransactionServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="54" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#673#703#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/CompositeAllocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="94" selection-start="432" selection-end="432" vertical-scroll-proportion="0.68877554">
           <folding />
         </state>
       </provider>
@@ -1674,11 +2902,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Web|ksa-core</last-edited>
+          <last-edited>ksa-core</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.40178567" />
+                <option value="0.32517484" />
               </list>
             </option>
           </splitter-proportions>

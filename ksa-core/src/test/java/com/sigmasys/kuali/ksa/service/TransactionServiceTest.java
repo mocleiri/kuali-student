@@ -105,10 +105,14 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction1.getAmount());
         Assert.notNull(transaction2.getAmount());
 
-        Allocation allocation =
+        CompositeAllocation compositeAllocation =
                 locked ?
                         transactionService.createLockedAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90)) :
                         transactionService.createAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90));
+
+        Assert.notNull(compositeAllocation);
+
+        Allocation allocation = compositeAllocation.getAllocation();
 
         Assert.notNull(allocation);
         Assert.notNull(allocation.getId());
