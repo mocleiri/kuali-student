@@ -501,14 +501,11 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         // Check if Transaction1 can pay Transaction2
-        // TODO Ask Paul about Deferments and canPay()!!
-        if (!(transaction1 instanceof Deferment) && !(transaction2 instanceof Deferment)) {
-            if (!canPay(transactionId1, transactionId2)) {
-                String errMsg = "Transaction1 [ID = " + transactionId1 + "] cannot pay Transaction2 [ID = " +
-                        transactionId2 + "]";
-                logger.error(errMsg);
-                throw new IllegalStateException(errMsg);
-            }
+        if (!canPay(transactionId1, transactionId2)) {
+            String errMsg = "Transaction1 [ID = " + transactionId1 + "] cannot pay Transaction2 [ID = " +
+                    transactionId2 + "]";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
 
         Query query = em.createQuery("select a from Allocation a " +
@@ -911,7 +908,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         Charge transaction = getCharge(transactionId);
         if (transaction == null) {
-            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            String errMsg = "Charge with ID = " + transactionId + " does not exist";
             logger.error(errMsg);
             throw new TransactionNotFoundException(errMsg);
         }
@@ -1042,17 +1039,17 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         boolean compatible = false;
 
-        if (transaction1 instanceof Payment && transaction2 instanceof Charge) {
+        if (transaction1 instanceof Credit && transaction2 instanceof Debit) {
             if (transaction1.getAmount() != null && transaction1.getAmount().compareTo(BigDecimal.ZERO) > 0 &&
                     transaction2.getAmount() != null && transaction2.getAmount().compareTo(BigDecimal.ZERO) > 0) {
                 compatible = true;
             }
-        } else if (transaction1 instanceof Payment && transaction2 instanceof Payment) {
+        } else if (transaction1 instanceof Credit && transaction2 instanceof Credit) {
             if (transaction1.getAmount() != null && transaction1.getAmount().compareTo(BigDecimal.ZERO) > 0 &&
                     transaction2.getAmount() != null && transaction2.getAmount().compareTo(BigDecimal.ZERO) < 0) {
                 compatible = true;
             }
-        } else if (transaction1 instanceof Charge && transaction2 instanceof Charge) {
+        } else if (transaction1 instanceof Debit && transaction2 instanceof Debit) {
             if (transaction1.getAmount() != null && transaction1.getAmount().compareTo(BigDecimal.ZERO) > 0 &&
                     transaction2.getAmount() != null && transaction2.getAmount().compareTo(BigDecimal.ZERO) < 0) {
                 return true;
@@ -1068,7 +1065,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         Query query =
                 em.createQuery("select cp from CreditPermission cp where cp.creditType.id = :id " +
-                        " cp.priority between :priorityFrom and :priorityTo");
+                        " and cp.priority between :priorityFrom and :priorityTo");
 
         query.setParameter("id", creditTypeId);
         query.setParameter("priorityFrom", priorityFrom);
@@ -1079,6 +1076,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (creditPermissions != null) {
             for (CreditPermission creditPermission : creditPermissions) {
                 String debitTypeMask = creditPermission.getAllowableDebitType();
+                logger.info("Debit type mask: " + debitTypeMask);
                 if (debitTypeMask != null && Pattern.matches(debitTypeMask, debitTypeId.getId())) {
                     return true;
                 }

@@ -44,7 +44,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
     @Test
     public void createTransaction() throws Exception {
 
-        String id = "1020";
+        String id = "cash";
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 
@@ -65,7 +65,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
     @Test
     public void deferTransaction() throws Exception {
 
-        String id = "1020";
+        String id = "debit1";
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 
@@ -73,7 +73,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction.getId());
 
         Deferment deferment = transactionService.deferTransaction(transaction.getId(), new BigDecimal(10e5 / 2),
-                new Date(System.currentTimeMillis() + 100 * 1000), "New deferment for 1020", "DEF");
+                new Date(System.currentTimeMillis() + 100 * 1000), "New deferment for 'debit1'", "DEF");
 
         Assert.notNull(deferment);
         Assert.notNull(deferment.getId());
