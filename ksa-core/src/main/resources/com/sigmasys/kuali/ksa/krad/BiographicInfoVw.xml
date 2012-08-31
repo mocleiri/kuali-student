@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    Copyright 2005-2012 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean id="BiographicInfoView" parent="Uif-KSAFormView" p:footer.render="false">
+    <property name="title" value="Biographic Information"/>
+    <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.BiographicInfoForm"/>
+        <property name="theme">
+            <bean parent="Uif-KradTheme"/>
+        </property>
+        <property name="entryPageId" value="BiographicInfoSearchPage"/>
+<!--        <property name="navigation">
+            <ref bean="KSABiographicInfoVwNav"/>
+        </property>-->
+<!--        <property name="header.items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="kimNameType" p:label="Name Type"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-Link" p:linkLabel="Back to term" p:target="foo"/>
+            </list>
+        </property>-->
+        <property name="items">
+            <list>
+                <bean parent="Uif-Page" p:id="BiographicInfoSearchPage" p:title="Account Query">
+                    <property name="items">
+                        <list>
+                            <ref bean="biographicInfoQueryByAccount"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="BiographicInfoSummaryPage" p:title="Biographic Information">
+                    <property name="items">
+                        <list>
+                            <ref bean="biographicInfoPerson"/>
+<!--                            <ref bean="biographicInfoPersonAudit"/>
+                            <ref bean="biographicInfoPostalAddress"/>
+                            <ref bean="biographicInfoPostalAddressAudit"/>
+                            <ref bean="biographicInfoElectronicContact"/>
+                            <ref bean="biographicInfoElectronicContactAudit"/>-->
+                            <bean parent="Uif-JumpToTopLink" p:actionLabel="Jump To Top"/>
+                        </list>
+                    </property>
+                </bean>
+                <!--<bean parent="Uif-Page" p:id="AdminLiaisonUploadFilePage" p:title="Upload File">
+                    <property name="items">
+                        <list>
+                            <ref bean="adminLiaisonUploadFile"/>
+                        </list>
+                    </property>
+                </bean>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- BiographicInfo navigation  DWM these need to link to our new  MVC Navigation &ndash;&gt; -->
+    <bean id="KSABiographicInfoVwNav" parent="Uif-MenuNavigationGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-HeaderField-Two" p:headerText="KSA Navigation"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BiographicInfoSearchPage" 
+                      p:actionLabel="Home"/>
+                
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                             Biographic search list section
+    ********************************************************************************************************************
+    -->
+        <!-- Lookup an account person, select to view their account details and drill down to person and postal detail -->
+    <bean id="biographicInfoQueryByAccount" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="Search for biographic information">
+    <property name="disclosure.render" value="false" />
+    <property name="items">
+        <list>
+            <ref bean="biographicInfoSearchAccounts" />
+            <ref bean="biographicInfoList" />
+        </list>
+    </property>
+    </bean>
+
+    <!-- Search criteria for full account biographic info -->
+    <bean id="biographicInfoSearchAccounts" parent="Uif-HorizontalBoxSection">
+    <property name="items">
+        <list>
+            <bean parent="Uif-InputField" p:label="Search By Name"
+                  p:instructionalText="Enter a value to search account biographic information"
+                  p:width="auto" p:propertyName="bioSearchByAccount" p:required="true">
+                <property name="control">
+                    <bean parent="Uif-TextControl" p:size="25" p:maxLength="100">
+                        <!--
+                        <property name="options">
+                            <list>
+                                <bean parent="Uif-KeyLabelPair" p:key="showTxNameMatches"
+                                      p:value="Show Transaction Match for search criteria" />
+                            </list>
+                        </property>
+                        -->
+                    </bean>
+                </property>
+            </bean>
+            <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchAccounts" p:actionLabel="Search">
+                <property name="actionImage">
+                    <bean parent="Uif-ImageField"
+                          p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
+                </property>
+            </bean>
+        </list>
+    </property>
+    </bean>
+
+
+        <!-- This is the list of matching accounts and address based on the search accounts value -->
+        <!--p:progressiveRenderViaAJAX="true" p:progressiveRender="studentLookupByName eq 'showTxNameMatches'" p:disclosure.render="false"-->
+    <bean id="biographicInfoList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="3"
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true"
+          p:title="Results"
+          p:instructionalText="Select a line item to view biographic information for the person.">
+    <property name="readOnly" value="true"/>
+    <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
+    <property name="propertyName" value="accountBrowseList"/>
+    <property name="layoutManager.sequencePropertyName" value="id"/>
+    <property name="layoutManager.richTable.render" value="false"/>
+    <property name="layoutManager.renderSequenceField" value="false"/>
+    <property name="items">
+        <list>
+            <bean parent="Uif-InputField" p:label="Name" p:propertyName="compositeDefaultPersonName" >
+                <property name="control">
+                    <bean parent="Uif-TextControl" p:size="60" p:maxLength="59"/>
+                </property>
+            </bean>
+            <bean parent="Uif-InputField" p:label="Description" p:propertyName="compositeDefaultPostalAddress" >
+                <property name="control">
+                    <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
+                </property>
+            </bean>
+            <bean parent="Uif-Link" p:linkLabel="Select" p:target="_self"
+                  p:hrefText="biographicInfoVw?methodToCall=get&amp;viewId=BiographicInfoView&amp;pageId=BiographicInfoSummaryPage&amp;id=@{#line.id}" />
+        </list>
+    </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                             Person section
+    ********************************************************************************************************************
+    -->
+    <bean id="biographicInfoPerson" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="Person">
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="kimNameType" p:label="Name Type"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="title" p:label="Title"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="firstName" p:label="First Name"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="middleName" p:label="Middle Name"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="lastName" p:label="Last Name"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="suffix" p:label="Suffix"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isDefault" p:label="Default"
+                      p:instructionalText="Label left, with colon" p:labelField.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

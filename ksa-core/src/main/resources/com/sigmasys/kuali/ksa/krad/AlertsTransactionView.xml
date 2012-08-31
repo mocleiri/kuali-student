@@ -104,7 +104,7 @@
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastLedgerDate" p:label="Last Ledger Date">
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastLedgerDate" p:label="Last Date">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
@@ -130,7 +130,7 @@
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastLedgerDate" p:label="Last Ledger Date">
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastLedgerDate" p:label="Last Date">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
@@ -204,7 +204,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Date" p:propertyName="ledgerDate" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
                       p:constraintText="Requires Date be filled out">
                     <property name="dependencyConstraints">

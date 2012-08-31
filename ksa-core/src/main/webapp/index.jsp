@@ -26,7 +26,6 @@
                             <img src="images/persona-bursar.png" alt="persona: bursar" width="140" height="140" border="0">
                         </a>
                     </td>
-
                     <td align="left" nowrap class="rightTd" >
                         <p><strong>Ida Bozwumon</strong><br>
                             <span >Bursar</span>
@@ -38,8 +37,9 @@
                             &bull; <a href="media/persona-bursar.pdf">View detailed persona</a>
                         </p>
                     </td>
+
                     <td class="leftTd" align="right">
-                        <a href="#">
+                        <a href="<%= request.getContextPath() %>/uif/biographicInfoVw?methodToCall=get&viewId=BiographicInfoView">
                             <img src="images/persona-student.png" alt="persona: student" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -48,10 +48,13 @@
                         <span >Student</span>
                         </p>
                         <hr/>
-                        <p >&bull;  UX Work in Progress<br>
+                        <p >&bull;  <a href="<%= request.getContextPath() %>/uif/biographicInfoVw?methodToCall=get&viewId=BiographicInfoView">
+                            Select
+                        </a><br>
                             &bull; <a href="media/persona-student.pdf">View detailed persona</a>
                         </p>
                     </td>
+
                     <td class="leftTd" align="right">
                         <a href="#">
                             <img src="images/persona-parent.png" alt="persona: parent" width="140" height="140" border="0">
@@ -70,7 +73,7 @@
 
                 <tr>
                     <td class="leftTd" align="right">
-                        <a href="#">
+                        <a href="<%= request.getContextPath() %>/uif/sponsorVw?methodToCall=get&viewId=SponsorView">
                             <img src="images/persona-sponsor.png" alt="persona: sponsor" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -79,7 +82,9 @@
                         <span >Sponsor</span>
                         </p>
                         <hr/>
-                        <p >&bull; UX Work in Progress<br>
+                        <p >&bull;  <a href="<%= request.getContextPath() %>/uif/sponsorVw?methodToCall=get&viewId=SponsorView">
+                            Select
+                        </a><br>
                             &bull; <a href="media/persona-sponsor.pdf">View detailed persona</a>
                         </p>
                     </td>

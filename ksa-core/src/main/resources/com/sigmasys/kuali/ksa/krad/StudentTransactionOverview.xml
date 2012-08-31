@@ -238,7 +238,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Date" p:propertyName="ledgerDate" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
                       p:constraintText="Requires Date be filled out">
                     <property name="dependencyConstraints">
@@ -270,7 +270,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Ledger Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Date" p:propertyName="ledgerDate" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
                       p:constraintText="Requires Date be filled out">
                     <property name="dependencyConstraints">
@@ -313,7 +313,7 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Ledger Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="charge.ledgerDate" p:label="Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
@@ -390,7 +390,7 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="payment.ledgerDate" p:label="Ledger Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="payment.ledgerDate" p:label="Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
