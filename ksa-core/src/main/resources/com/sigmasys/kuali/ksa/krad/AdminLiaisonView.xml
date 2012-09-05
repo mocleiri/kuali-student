@@ -43,7 +43,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="AdminLiaisonUploadFilePage" p:title="Upload File">
+                <bean parent="Uif-Page" p:id="AdminLiaisonUploadFilePage" p:title="File Upload">
                     <property name="items">
                         <list>
                             <ref bean="adminLiaisonUploadFile"/>
@@ -97,7 +97,7 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="uploadXMLFile" p:label="XML File Upload and Process ">
+                <bean parent="Uif-InputField" p:propertyName="uploadXMLFile" p:label="@{getLValue('label.upload.xml.file')}">
                     <property name="instructionalText" value="Select an XML file to Upload and Process. The file will be validated during the process task."/>
                     <property name="control">
                         <bean parent="Uif-FileControl" p:size="30"/>
@@ -109,7 +109,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit"
-                                  p:actionLabel="Process File">
+                                  p:actionLabel="@{getLValue('label.upload.file')}">
                                 <!--<property name="actionImage">
                                     <bean parent="Uif-ImageField"
                                           p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>

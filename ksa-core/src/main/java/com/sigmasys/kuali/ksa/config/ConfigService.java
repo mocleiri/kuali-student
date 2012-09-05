@@ -4,15 +4,16 @@ import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
+import com.sigmasys.kuali.ksa.util.LocaleUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
@@ -22,97 +23,30 @@ import java.util.*;
  *         Date: 3/22/12
  *         Time: 4:58 PM
  */
-@Service("configService")
-@Transactional(readOnly = true)
-public class ConfigService {
+public interface ConfigService {
 
-    @Autowired
-    private InitialParameterConfigurer parameterConfigurer;
-
-    @Autowired
-    @Qualifier("localizationService")
-    private LocalizationService localizationService;
+    /**
+     * Returns the localized parameters for the given locale
+     * @param locale java.util.Locale instance
+     * @return map of locale-aware parameters
+     */
+    public Map<String, String> getLocalizedParameters(Locale locale);
 
 
-    @PostConstruct
-    private void postConstruct() {
-        // Setting up locale if "locale" initial parameters exist
-        String localeLang = getInitialParameter(Constants.LOCALE_LANG_PARAM_NAME);
-        if (localeLang != null && !localeLang.trim().isEmpty()) {
-            String localeCountry = getInitialParameter(Constants.LOCALE_COUNTRY_PARAM_NAME);
-            Locale locale = (localeCountry != null && !localeCountry.trim().isEmpty()) ?
-                    new Locale(localeLang, localeCountry) : new Locale(localeLang);
-            Locale.setDefault(locale);
-        }
-    }
+    public String getInitialParameter(String name);
 
-    public Map<String, String> getLocalizedParameters(Locale locale) {
-        if (locale == null) {
-            throw new IllegalArgumentException("Locale cannot be null");
-        }
-        List<LocalizedString> localizedStrings =
-                localizationService.getLocalizedStrings(locale.toString());
-        if (localizedStrings != null) {
-            Map<String, String> localizedParameters = new HashMap<String, String>(localizedStrings.size());
-            for (LocalizedString string : localizedStrings) {
-                localizedParameters.put(string.getId().getId(), string.getValue());
-            }
-            return localizedParameters;
-        }
-        return new HashMap<String, String>();
-    }
+    public Map<String, String> getInitialParameters();
 
+    public Integer updateInitialParameters(List<InitialParameter> params);
 
-    public String getInitialParameter(String name) {
-        return getInitialParameters().get(name);
-    }
+    public Integer deleteInitialParameters(Set<String> paramNames);
 
-    public Map<String, String> getInitialParameters() {
-        return parameterConfigurer.getInitialParameters();
-    }
+    public List<InitialParameter> getInitialParameterList();
 
-    @Transactional(readOnly = false)
-    public Integer updateInitialParameters(List<InitialParameter> params) {
-        return parameterConfigurer.updateInitialParameters(params);
-    }
+    public Map<String, String> refreshInitialParameters();
 
-    @Transactional(readOnly = false)
-    public Integer deleteInitialParameters(Set<String> paramNames) {
-        return parameterConfigurer.deleteInitialParameters(paramNames);
-    }
+    public void changeLoggingLevel(Map<String, String> loggers);
 
-    public List<InitialParameter> getInitialParameterList() {
-        return parameterConfigurer.getInitialParameterList();
-    }
-
-    public Map<String, String> refreshInitialParameters() {
-        parameterConfigurer.loadDatabaseParameters(true);
-        return getInitialParameters();
-    }
-
-    private Logger getLogger(String loggerName) {
-        Logger logger = ("ROOT".equals(loggerName)) ? LogManager.getRootLogger() : LogManager.getLogger(loggerName);
-        if (logger != null) {
-            return logger;
-        }
-        throw new RuntimeException("Can not find logger '" + loggerName + "'");
-    }
-
-    public void changeLoggingLevel(Map<String, String> loggers) {
-        for (Map.Entry<String, String> entry : loggers.entrySet()) {
-            String loggerName = entry.getKey();
-            String loggerLevel = entry.getValue();
-            getLogger(loggerName).setLevel(Level.toLevel(loggerLevel));
-        }
-    }
-
-    public Map<String, String> getLoggingLevel(String[] loggers) {
-        Map<String, String> loggerMap = new HashMap<String, String>(loggers.length);
-        for (String loggerName : loggers) {
-            Logger logger = getLogger(loggerName);
-            loggerMap.put(loggerName, logger.getLevel() != null ? logger.getLevel().toString() : null);
-        }
-        return loggerMap;
-    }
+    public Map<String, String> getLoggingLevel(String[] loggers);
 
 }

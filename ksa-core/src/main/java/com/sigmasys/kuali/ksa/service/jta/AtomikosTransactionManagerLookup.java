@@ -1,8 +1,7 @@
 package com.sigmasys.kuali.ksa.service.jta;
 
 
-import com.sigmasys.kuali.ksa.util.ContextUtils;
-import org.hibernate.HibernateException;
+import com.atomikos.icatch.jta.UserTransactionManager;
 import org.hibernate.transaction.TransactionManagerLookup;
 
 import javax.transaction.Transaction;
@@ -17,16 +16,20 @@ import java.util.Properties;
  */
 public class AtomikosTransactionManagerLookup implements TransactionManagerLookup {
 
-    public static final String ATOMIKOS_TRANSACTION_MANAGER_BEAN_NAME = "atomikosTransactionManager";
 
+    private static final UserTransactionManager transactionManager = new UserTransactionManager();
+
+    static {
+        transactionManager.setForceShutdown(false);
+    }
+
+    public static TransactionManager getTransactionManager() {
+       return transactionManager;
+    }
 
     @Override
-    public TransactionManager getTransactionManager(Properties props) throws HibernateException {
-        try {
-            return ContextUtils.getBean(ATOMIKOS_TRANSACTION_MANAGER_BEAN_NAME, TransactionManager.class);
-        } catch (Exception e) {
-            throw new HibernateException("Could not obtain Atomikos JTA transaction manager instance", e);
-        }
+    public TransactionManager getTransactionManager(Properties props) {
+       return transactionManager;
     }
 
     @Override

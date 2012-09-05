@@ -2,8 +2,8 @@ package com.sigmasys.kuali.ksa.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
@@ -22,7 +22,7 @@ import com.sigmasys.kuali.ksa.util.RequestUtils;
  */
 @Transactional
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-public abstract class AbstractServiceTest implements ApplicationContextAware {
+public abstract class AbstractServiceTest implements BeanFactoryAware {
 
     public static final String TEST_USER_ID = "admin";
 
@@ -44,13 +44,14 @@ public abstract class AbstractServiceTest implements ApplicationContextAware {
         RequestUtils.setThreadResponse(new MockHttpServletResponse());
     }
 
-    protected void init(ApplicationContext applicationContext) {
-        ContextUtils.initContext(applicationContext);
+    protected void init(BeanFactory beanFactory) {
+        ContextUtils.initContext(beanFactory);
         UserSessionManager sessionManager = ContextUtils.getBean("userSessionManager");
         sessionManager.createSession(RequestUtils.getThreadRequest(), RequestUtils.getThreadResponse(), TEST_USER_ID);
     }
 
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        init(applicationContext);
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory)  {
+          init(beanFactory);
     }
 }

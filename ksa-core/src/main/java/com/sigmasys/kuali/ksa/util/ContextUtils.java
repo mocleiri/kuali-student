@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.util;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.BeanFactory;
 
 /**
  * ContextUtils
@@ -10,12 +10,12 @@ import org.springframework.context.ApplicationContext;
 @SuppressWarnings("unchecked")
 public class ContextUtils {
 
-    private static ApplicationContext applicationContext;
+    private static BeanFactory applicationContext;
 
     private ContextUtils() {
     }
 
-    public static ApplicationContext initContext(ApplicationContext context) {
+    public static BeanFactory initContext(BeanFactory context) {
         if (context != null) {
             applicationContext = context;
             return applicationContext;
@@ -23,7 +23,7 @@ public class ContextUtils {
         throw new IllegalArgumentException("Application context cannot be null");
     }
 
-    public static ApplicationContext getContext() {
+    public static BeanFactory getBeanFactory() {
         if (applicationContext == null) {
             throw new IllegalArgumentException("Application context cannot be null");
         }

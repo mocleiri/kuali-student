@@ -2,10 +2,10 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.*;
 
-import org.kuali.rice.krad.web.form.UifFormBase;
 import java.util.List;
 
-public class TransOvrForm extends UifFormBase {
+public class TransOvrForm extends AbstractForm {
+
    private static final long serialVersionUID = -7525378097732916420L;
 
    // use this object as a query argument for matching transactions by student name

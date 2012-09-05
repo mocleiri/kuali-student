@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
@@ -17,10 +18,7 @@ import javax.jws.WebService;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.text.DateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -716,11 +714,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * Removes all allocations associated with the given transactions
      * <p/>
      *
-     * @param transactionId Transaction ID
+     * @param transactionId transaction1 ID
+     * @return list of generated GL transactions
      */
     @Override
     @Transactional(readOnly = false)
-    public void removeAllocations(Long transactionId) {
+    public  List<GlTransaction> removeAllocations(Long transactionId) {
 
         Transaction transaction = getTransaction(transactionId);
         if (transaction == null) {
@@ -737,11 +736,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         List<Allocation> allocations = query.getResultList();
 
+        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
         for (Allocation allocation : allocations) {
             Long transactionId1 = allocation.getFirstTransaction().getId();
             Long transactionId2 = allocation.getSecondTransaction().getId();
-            removeAllocation(transactionId1, transactionId2, allocation.isLocked());
+            glTransactions.addAll(removeAllocation(transactionId1, transactionId2, allocation.isLocked()));
         }
+
+        return glTransactions;
 
     }
 
@@ -751,11 +753,29 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
+     * @return list of GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> removeAllocation(Long transactionId1, Long transactionId2) {
+        return removeAllocation(transactionId1, transactionId2, true, false);
+    }
+
+
+    /**
+     * Removes allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return list of GL transactions
      */
     @Override
     @Transactional(readOnly = false)
-    public void removeAllocation(Long transactionId1, Long transactionId2) {
-        removeAllocation(transactionId1, transactionId2, false);
+    public List<GlTransaction> removeAllocation(Long transactionId1, Long transactionId2, boolean isQueued) {
+        return removeAllocation(transactionId1, transactionId2, isQueued, false);
     }
 
     /**
@@ -764,14 +784,32 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
+     * @return list of GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> removeLockedAllocation(Long transactionId1, Long transactionId2) {
+        return removeAllocation(transactionId1, transactionId2, true, true);
+    }
+
+    /**
+     * Removes allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return list of GL transactions
      */
     @Override
     @Transactional(readOnly = false)
-    public void removeLockedAllocation(Long transactionId1, Long transactionId2) {
-        removeAllocation(transactionId1, transactionId2, true);
+    public List<GlTransaction> removeLockedAllocation(Long transactionId1, Long transactionId2, boolean isQueued) {
+        return removeAllocation(transactionId1, transactionId2, isQueued, true);
     }
 
-    protected void removeAllocation(Long transactionId1, Long transactionId2, boolean locked) {
+    protected List<GlTransaction> removeAllocation(Long transactionId1, Long transactionId2,
+                                                   boolean isQueued, boolean locked) {
 
         Transaction transaction1 = getTransaction(transactionId1);
         if (transaction1 == null) {
@@ -800,6 +838,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new IllegalStateException(errMsg);
         }
 
+        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
+
         for (Allocation allocation : allocations) {
 
             BigDecimal allocatedAmount = (allocation.getAmount() != null) ?
@@ -822,8 +862,21 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             transaction1.setAllocatedAmount(allocatedAmount1.subtract(allocatedAmount));
             transaction2.setAllocatedAmount(allocatedAmount2.subtract(allocatedAmount));
 
-            deleteEntity(allocation.getId(), Allocation.class);
+            boolean deleteAllocation = locked ? allocation.isLocked() : !allocation.isLocked();
+
+            if (deleteAllocation) {
+                deleteEntity(allocation.getId(), Allocation.class);
+            }
+
+            Pair<GlTransaction, GlTransaction> pair =
+                    createGlTransactions(transaction1, transaction2, allocatedAmount, isQueued);
+
+            glTransactions.add(pair.getA());
+            glTransactions.add(pair.getB());
+
         }
+
+        return glTransactions;
 
     }
 

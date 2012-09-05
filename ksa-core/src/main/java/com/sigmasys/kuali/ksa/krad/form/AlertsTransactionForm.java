@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Charge;
-import org.kuali.rice.krad.web.form.UifFormBase;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -10,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
 
-public class AlertsTransactionForm extends UifFormBase {
+public class AlertsTransactionForm extends AbstractForm {
 
     private List<Charge> charges;
 

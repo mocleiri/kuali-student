@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.*;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
-import org.kuali.rice.krad.web.form.UifFormBase;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +12,8 @@ import java.util.List;
  * Date: 4/16/12
  * Time: 2:49 PM
  */
-public class CashierTxMemoForm extends UifFormBase {
+public class CashierTxMemoForm extends AbstractForm {
+
    private static final long serialVersionUID = -7525378097732916420L;
 
    // use this object as a query argument for matching transactions by student name

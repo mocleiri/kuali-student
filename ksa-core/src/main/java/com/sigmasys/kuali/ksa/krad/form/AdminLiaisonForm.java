@@ -8,7 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
  * Date: 4/24/12
  * Time: 11:16 AM
  */
-public class AdminLiaisonForm extends UifFormBase {
+public class AdminLiaisonForm extends AbstractForm {
+
    private static final long serialVersionUID = -7525378097732916418L;
 
    private MultipartFile uploadXMLFile;

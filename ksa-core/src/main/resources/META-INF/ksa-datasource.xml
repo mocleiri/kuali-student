@@ -9,9 +9,9 @@
     <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"/>
 
     <!-- Atomikos JTA TransactionManager implementation -->
-    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager">
-        <property name="forceShutdown" value="false"/>
-    </bean>
+    <bean id="atomikosTransactionManager"
+          class="com.sigmasys.kuali.ksa.service.jta.AtomikosTransactionManagerLookup"
+          factory-method="getTransactionManager"/>
 
     <!--  Spring JTA TransactionManager -->
     <bean id="transactionManager" class="com.sigmasys.kuali.ksa.service.jta.JtaTransactionManager">

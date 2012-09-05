@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
-public class BiographicInfoForm extends UifFormBase {
+public class BiographicInfoForm extends AbstractForm {
+
    private static final long serialVersionUID = -7525378097732916418L;
 
    // use this object as a query argument for matching transactions by student name

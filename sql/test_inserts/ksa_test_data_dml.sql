@@ -1116,3 +1116,8 @@ Insert into KSSA_GL_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,C
 --- INSERTING TRANSACTION MASKS ---
 Insert into KSSA_TRANSACTION_MASK_ROLE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST_UPDATE,NAME,CODE,TYPE_MASK,ROLE_NAME) values (1,'system','Admin type mask',null,sysdate,'ADMIN_TYPE_MASK',null,'.*','Technical Administrator');
 
+
+--- INSERTING LOCALIZED RESOURCES ---
+Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values ('label.upload.file', 'en_US', 'Upload File', 200, 'N');
+Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values ('label.upload.xml.file', 'en_US', 'XML File Upload and Process', 200, 'N');
+

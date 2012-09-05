@@ -289,9 +289,10 @@ public interface TransactionService {
      * Removes all allocations associated with the given transactions
      * <p/>
      *
-     * @param transactionId1 transaction1 ID
+     * @param transactionId transaction1 ID
+     * @return list of generated GL transactions
      */
-    void removeAllocations(Long transactionId1);
+    List<GlTransaction> removeAllocations(Long transactionId);
 
     /**
      * Removes allocation between two given transactions
@@ -299,8 +300,21 @@ public interface TransactionService {
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
+     * @return list of generated GL transactions
      */
-    void removeAllocation(Long transactionId1, Long transactionId2);
+    @WebMethod(exclude = true)
+    List<GlTransaction> removeAllocation(Long transactionId1, Long transactionId2);
+
+    /**
+     * Removes allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return list of generated GL transactions
+     */
+    List<GlTransaction> removeAllocation(Long transactionId1, Long transactionId2, boolean isQueued);
 
     /**
      * Removes locked allocation between two given transactions
@@ -308,8 +322,21 @@ public interface TransactionService {
      *
      * @param transactionId1 transaction1 ID
      * @param transactionId2 transaction2 ID
+     * @return list of generated GL transactions
      */
-    void removeLockedAllocation(Long transactionId1, Long transactionId2);
+    @WebMethod(exclude = true)
+    List<GlTransaction> removeLockedAllocation(Long transactionId1, Long transactionId2);
+
+    /**
+     * Removes locked allocation between two given transactions
+     * <p/>
+     *
+     * @param transactionId1 transaction1 ID
+     * @param transactionId2 transaction2 ID
+     * @param isQueued       indicates whether the GL transaction should be in Q or W status
+     * @return list of generated GL transactions
+     */
+    List<GlTransaction> removeLockedAllocation(Long transactionId1, Long transactionId2, boolean isQueued);
 
 
     /**
