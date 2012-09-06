@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -8,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Date: 4/24/12
  * Time: 11:16 AM
  */
-public class AdminLiaisonForm extends AbstractForm {
+public class AdminLiaisonForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 

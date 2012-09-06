@@ -32,7 +32,6 @@ public interface ConfigService {
      */
     public Map<String, String> getLocalizedParameters(Locale locale);
 
-
     public String getInitialParameter(String name);
 
     public Map<String, String> getInitialParameters();

@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
 
-public class AlertsTransactionForm extends AbstractForm {
+public class AlertsTransactionForm extends AbstractViewModel {
 
     private List<Charge> charges;
 

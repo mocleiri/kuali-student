@@ -1,14 +1,13 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Account;
-import org.kuali.rice.krad.web.form.UifFormBase;
 
 import java.util.List;
 
 /**
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
-public class BiographicInfoForm extends AbstractForm {
+public class BiographicInfoForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 

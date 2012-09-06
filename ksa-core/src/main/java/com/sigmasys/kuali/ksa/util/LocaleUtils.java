@@ -4,7 +4,7 @@ package com.sigmasys.kuali.ksa.util;
 import java.util.*;
 
 /**
- * LocaleUtils
+ * LocaleUtils contains default system wide locale-aware resources.
  *
  * @author Michael Ivanov
  */

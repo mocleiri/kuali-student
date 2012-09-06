@@ -1120,4 +1120,10 @@ Insert into KSSA_TRANSACTION_MASK_ROLE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,LAST
 --- INSERTING LOCALIZED RESOURCES ---
 Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values ('ksa.label.upload.file', 'en_US', 'Upload File', 200, 'N');
 Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values ('ksa.label.upload.xml.file', 'en_US', 'XML File Upload and Process', 200, 'N');
+Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values ('ksa.label.upload.file', 'fr_FR', 'Téléversez le Dossier', 200, 'N');
+Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values ('ksa.label.upload.xml.file', 'fr_FR', 'Le Dossier de XML Téléverse et Traite', 200, 'N');
 
+
+--- INSERTING USER PREFERENCES ---
+Insert into KSSA_USER_PREF (ACNT_ID_FK, NAME, VALUE) values ('admin', 'ksa.locale.lang', 'fr');
+Insert into KSSA_USER_PREF (ACNT_ID_FK, NAME, VALUE) values ('admin', 'ksa.locale.country', 'FR');

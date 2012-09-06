@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 4/22/12
  * Time: 6:27 PM
  */
-public class CustomerServiceForm extends AbstractForm {
+public class CustomerServiceForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916420L;
 
