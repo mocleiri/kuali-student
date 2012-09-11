@@ -289,8 +289,9 @@ public class VersionsController extends BasicLayoutWithContentHeader implements 
     }
     
     public Widget generateActionDropDown(){
-    	CourseWorkflowActionList actionList = new CourseWorkflowActionList(this.getMessage("cluActionsLabel"));
-
+//    	CourseWorkflowActionList actionList = new CourseWorkflowActionList(this.getMessage("cluActionsLabel"));
+    	CourseWorkflowActionList actionList = GWT.create(CourseWorkflowActionList.class);
+    	actionList.initialise(this.getMessage("cluActionsLabel"));
     	actionDropDownWidgets.add(actionList);
         
     	return actionList;
