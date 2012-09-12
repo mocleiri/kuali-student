@@ -56,15 +56,24 @@ public class GlTransaction implements Identifiable {
 
     private String statusCode;
 
+    /**
+     * GL operation type. Can be 'C' or 'D'
+     */
+    private GlOperationType glOperation;
+
+    private String glOperationCode;
+
 
     @PrePersist
     void populateDBFields() {
         statusCode = (status != null) ? status.getId() : null;
+        glOperationCode = (glOperation != null) ? glOperation.getId() : null;
     }
 
     @PostLoad
     void populateTransientFields() {
         status = (statusCode != null) ? EnumUtils.findById(GlTransactionStatus.class, statusCode) : null;
+        glOperation = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }
 
 
@@ -164,6 +173,24 @@ public class GlTransaction implements Identifiable {
 
     public void setStatus(GlTransactionStatus status) {
         this.status = status;
+    }
+
+    @Column(name = "GL_OPERATION", length = 1)
+    protected String getGlOperationCode() {
+        return glOperationCode;
+    }
+
+    protected void setGlOperationCode(String glOperationCode) {
+        this.glOperationCode = glOperationCode;
+    }
+
+    @Transient
+    public GlOperationType getGlOperation() {
+        return glOperation;
+    }
+
+    public void setGlOperation(GlOperationType glOperation) {
+        this.glOperation = glOperation;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.model;
 
 
+import com.sigmasys.kuali.ksa.util.EnumUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -53,6 +55,25 @@ public class GlTransmission implements Identifiable {
      * Recognition period
      */
     private String recognitionPeriod;
+
+    /**
+     * GL operation type. Can be 'C' or 'D'
+     */
+    private GlOperationType glOperation;
+
+    private String glOperationCode;
+
+
+    @PrePersist
+    void populateDBFields() {
+        glOperationCode = (glOperation != null) ? glOperation.getId() : null;
+    }
+
+    @PostLoad
+    void populateTransientFields() {
+        glOperation = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
+    }
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -133,6 +154,25 @@ public class GlTransmission implements Identifiable {
     public void setRecognitionPeriod(String recognitionPeriod) {
         this.recognitionPeriod = recognitionPeriod;
     }
+
+    @Column(name = "GL_OPERATION", length = 1)
+    protected String getGlOperationCode() {
+        return glOperationCode;
+    }
+
+    protected void setGlOperationCode(String glOperationCode) {
+        this.glOperationCode = glOperationCode;
+    }
+
+    @Transient
+    public GlOperationType getGlOperation() {
+        return glOperation;
+    }
+
+    public void setGlOperation(GlOperationType glOperation) {
+        this.glOperation = glOperation;
+    }
+
 }
 	
 

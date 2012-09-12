@@ -95,6 +95,7 @@ public class KsaConfigurer extends ModuleConfigurer implements ApplicationContex
                 try {
                     dataDictionaryService.addDataDictionaryLocations(locations);
                     ((ViewServiceImpl) KRADServiceLocatorWeb.getViewService()).setDataDictionaryService(dataDictionaryService);
+                    //dataDictionaryService.getDataDictionary().parseDataDictionaryConfigurationFiles(false);
                 } catch (Exception e) {
                     throw new RuntimeException("Cannot add KSA packages to data dictionary locations: " + e.getMessage(), e);
                 }

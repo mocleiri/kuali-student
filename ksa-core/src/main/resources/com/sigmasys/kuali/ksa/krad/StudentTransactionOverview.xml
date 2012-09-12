@@ -11,9 +11,7 @@
     <bean id="StudentTransactionOverview" parent="Uif-FormView" p:footer.render="false">
         <property name="title" value="Student Transaction Overview"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransOvrForm"/>
-        <property name="theme">
-            <bean parent="Uif-KradTheme"/>
-        </property>
+        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
         <property name="navigation">
             <ref bean="KSATransOvrVwNav"/>
@@ -76,7 +74,7 @@
 
                 <!-- Activity stuff -->
                 <bean parent="Uif-Page" p:id="bursaActivityPage" p:title="Activity">
-                    <property name="header.group">
+                    <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
@@ -109,7 +107,7 @@
     <bean id="KSATransOvrVwNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderField-Two" p:headerText="KSA Navigation"/>
+                <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="bursaQuickMenuOptionsPage"
                       p:actionLabel="Quick Options"/>
             </list>
@@ -124,12 +122,12 @@
         <property name="disclosure.render" value="false" />
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkLabel="Transactions for a Person" p:target="_self"
-                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
-                <bean parent="Uif-Link" p:linkLabel="Currency Type" p:target="_self"
-                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
-                <bean parent="Uif-Link" p:linkLabel="Activity" p:target="_self"
-                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
+                <bean parent="Uif-LinkField" p:linkText="Transactions for a Person" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
+                <bean parent="Uif-LinkField" p:linkText="Currency Type" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                <bean parent="Uif-LinkField" p:linkText="Activity" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
             </list>
         </property>
     </bean>
@@ -169,7 +167,7 @@
                 </bean>
                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByName" p:actionLabel="Search">
                     <property name="actionImage">
-                        <bean parent="Uif-ImageField"
+                        <bean parent="Uif-Image"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
                     </property>
                 </bean>
@@ -203,9 +201,9 @@
                         <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
                     </property>
                 </bean>
-                <bean parent="Uif-Link" p:linkLabel="Select" p:target="_self"
-                      p:hrefText="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaTransByPersonPage&amp;id=@{#line.id}" />
-                <!--p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>-->
+                <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaTransByPersonPage&amp;id=@{#line.id}" />
+                <!--p:href="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>-->
             </list>
         </property>
     </bean>
@@ -248,10 +246,10 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true" p:align="right"/>
-                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaChargePage&amp;methodToCall=get&amp;id=@{#line.id}"/>
-                <!--<bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>-->
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaChargePage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <!--<bean parent="Uif-Link" p:linkText="Details" p:target="_self"
+                      p:href="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>-->
             </list>
         </property>
     </bean>
@@ -280,11 +278,11 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="formattedAmount" p:required="true" p:align="right"/>
-                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaPaymentPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaPaymentPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
 <!--
-                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <bean parent="Uif-Link" p:linkText="Details" p:target="_self"
+                      p:href="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
 -->
 
             </list>
@@ -358,7 +356,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="charge.statementText" p:label="Statement Description" p:rowSpan="2"
-                      p:labelField.rowSpan="2">
+                      p:fieldLabel.rowSpan="2">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
@@ -434,7 +432,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="payment.statementText" p:label="Statement Description" p:rowSpan="2"
-                      p:labelField.rowSpan="2">
+                      p:fieldLabel.rowSpan="2">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" p:watermarkText="Key in the statement description here..."/>
@@ -474,7 +472,7 @@
                 </bean>
                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="addCurrType" p:actionLabel="Add">
                     <property name="actionImage">
-                        <bean parent="Uif-ImageField"
+                        <bean parent="Uif-Image"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                     </property>
                 </bean>
@@ -513,10 +511,10 @@
                     </property>
                 </bean>
 
-                <bean parent="Uif-Link" p:linkLabel="Delete" p:target="_self"
-                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>
-                <bean parent="Uif-Link" p:linkLabel="Edit" p:target="_self"
-                      p:hrefText="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;code=@{#line.code}"/>
+                <bean parent="Uif-LinkField" p:linkText="Delete" p:target="_self"
+                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>
+                <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
+                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;code=@{#line.code}"/>
             </list>
         </property>
     </bean>

@@ -1,8 +1,8 @@
 <web-app
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    version="3.0">
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+        version="3.0">
 
     <!-- Default page to serve -->
     <welcome-file-list>
@@ -46,15 +46,7 @@
     </listener>
 
     <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener>
-
-    <listener>
         <listener-class>org.kuali.rice.krad.web.listener.KualiHttpSessionListener</listener-class>
-    </listener>
-
-    <listener>
-        <listener-class>org.apache.tiles.web.startup.simple.SimpleTilesListener</listener-class>
     </listener>
 
     <listener>
@@ -80,11 +72,11 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet>
+    <!--servlet>
         <servlet-name>ksbDispatcher</servlet-name>
         <servlet-class>org.kuali.rice.ksb.messaging.servlet.KSBDispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-    </servlet>
+    </servlet-->
 
     <!-- KualiActionServlet is needed by Rice UI -->
     <servlet>
@@ -115,10 +107,10 @@
         <url-pattern>*.webservice</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>ksbDispatcher</servlet-name>
         <url-pattern>/remoting/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping-->
 
     <servlet-mapping>
         <servlet-name>krad</servlet-name>
@@ -146,14 +138,19 @@
     </filter>
 
     <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter>
         <filter-name>BootstrapFilter</filter-name>
         <filter-class>org.kuali.rice.kew.web.BootstrapFilter</filter-class>
     </filter>
 
-    <filter>
-        <filter-name>httpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
+    <filter-mapping>
+        <filter-name>BootstrapFilter</filter-name>
+        <servlet-name>action</servlet-name>
+    </filter-mapping>
 
     <filter-mapping>
         <filter-name>httpMethodFilter</filter-name>
@@ -180,10 +177,6 @@
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
-    <filter-mapping>
-        <filter-name>BootstrapFilter</filter-name>
-        <servlet-name>krad</servlet-name>
-    </filter-mapping>
 
     <!--filter-mapping>
         <filter-name>UserPreferencesFilter</filter-name>
@@ -209,6 +202,10 @@
         <taglib>
             <taglib-uri>http://www.kuali.org/struts.apache.org/tags-html-el</taglib-uri>
             <taglib-location>/WEB-INF/tld/kuali-struts-html-el.tld</taglib-location>
+        </taglib>
+        <taglib>
+            <taglib-uri>http://www.joda.org/joda/time/tags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/joda.tld</taglib-location>
         </taglib>
     </jsp-config>
 

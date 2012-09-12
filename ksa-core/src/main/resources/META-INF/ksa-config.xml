@@ -6,7 +6,7 @@
 
     <param name="app.context.name">ksa</param>
 
-    <param name="validate.data.dictionary">false</param>
+    <param name="validate.data.dictionary">true</param>
 
     <!--  log4j Settings -->
     <param name="log4j.reload.minutes">5</param>
@@ -25,8 +25,8 @@
 
     <param name="rice.core.additionalSpringFiles">classpath:/META-INF/rice-beans.xml</param>
 
-    <param name="rice.kew.jpa.enabled">false</param>
-    <param name="rice.kim.jpa.enabled">false</param>
+    <param name="rice.kew.jpa.enabled">true</param>
+    <param name="rice.kim.jpa.enabled">true</param>
 
     <!-- UserTransaction properties -->
     <param name="transaction.timeout">300</param>

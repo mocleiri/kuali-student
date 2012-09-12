@@ -93,26 +93,26 @@ public class TransOvrController extends UifControllerBase {
         return getUIFModelAndView(form);
     }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // just for the transactions by person page
-      String pageId = request.getParameter("pageId");
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // just for the transactions by person page
+        String pageId = request.getParameter("pageId");
 
-      if (pageId != null && pageId.compareTo("bursaActivityPage") == 0) {
-         form.setActivities(activityService.getActivities());
-      }
+        if (pageId != null && pageId.compareTo("bursaActivityPage") == 0) {
+            form.setActivities(activityService.getActivities());
+        }
 
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
 
     /**
      * @param form
@@ -121,7 +121,7 @@ public class TransOvrController extends UifControllerBase {
      * @param response
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 

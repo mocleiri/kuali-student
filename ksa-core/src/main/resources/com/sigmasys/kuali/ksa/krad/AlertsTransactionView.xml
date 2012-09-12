@@ -7,17 +7,15 @@
 
     <bean id="AlertsTransactionView" parent="Uif-FormView" p:footer.render="false">
         <property name="id" value="AlertsTransactionView"/>
-        <property name="theme">
-            <bean parent="Uif-KradTheme"/>
-        </property>
+        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm"/>
         <property name="title" value="Student Accounts"/>
         <property name="entryPageId" value="AccountSummaryPage"/>
         <property name="navigation" ref="KSAAlertsTransNav"/>
         <property name="items">
             <list>
-                <!--<bean parent="Uif-Link" p:linkLabel="Transaction Detail"
-                      <p:hrefText="uif/transactionDetails?methodToCall=get&viewId=TransactionDetails-FormView"/>-->
+                <!--<bean parent="Uif-Link" p:linkText="Transaction Detail"
+                      <p:href="uif/transactionDetails?methodToCall=get&viewId=TransactionDetails-FormView"/>-->
                 <bean id="AccountSummaryPage" parent="Uif-Page" p:title="Account Summary">
                     <property name="items">
                         <list>
@@ -26,7 +24,7 @@
                     </property>
                 </bean>
                 <bean id="AlertsRecentTransactionsPage" parent="Uif-Page" p:title="Alerts Recent Transactions">
-                    <property name="header.group">
+                    <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
@@ -57,7 +55,7 @@
     <bean id="KSAAlertsTransNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderField-Two" p:headerText="Student Accounts"/>
+                <bean parent="Uif-HeaderTwo" p:headerText="Student Accounts"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountSummaryPage"
                     p:actionLabel="Summary Overview"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsRecentTransactionsPage"
@@ -215,8 +213,8 @@
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.code" p:required="true"/>
-                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>

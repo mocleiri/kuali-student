@@ -27,9 +27,7 @@
     <bean id="SponsorView" parent="Uif-FormView" p:footer.render="false">
         <property name="title" value="Sponsor"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.SponsorForm"/>
-        <property name="theme">
-            <bean parent="Uif-KradTheme"/>
-        </property>
+        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="SponsorQuickMenuOptionsPage"/>
         <property name="navigation">
             <ref bean="KSASponsorVwNav"/>
@@ -69,7 +67,7 @@
     <bean id="KSASponsorVwNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderField-Two" p:headerText="KSA Navigation"/>
+                <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SponsorQuickMenuOptionsPage"
                       p:actionLabel="Quick Options"/>
             </list>
@@ -84,8 +82,8 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-<!--                <bean parent="Uif-Link" p:linkLabel="XML Batch Process" p:target="_self"
-                      p:hrefText="sponsorVw?methodToCall=get&amp;viewId=SponsorVw&amp;pageId=AdminLiaisonUploadFilePage"/>-->
+<!--                <bean parent="Uif-LinkField" p:linkText="XML Batch Process" p:target="_self"
+                      p:href="sponsorVw?methodToCall=get&amp;viewId=SponsorVw&amp;pageId=AdminLiaisonUploadFilePage"/>-->
             </list>
         </property>
     </bean>

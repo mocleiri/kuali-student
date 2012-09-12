@@ -11,7 +11,7 @@
 
     <bean id="Uif-KSAFormView" parent="Uif-FormView" abstract="true">
         <property name="applicationHeader">
-            <bean parent="Uif-HeaderField-One" p:id="ksa-banner" p:template="/WEB-INF/jsp/templates/KSAHeader.jsp"/>
+            <bean parent="Uif-HeaderOne" p:id="ksa-banner" p:template="/WEB-INF/jsp/templates/KSAHeader.jsp"/>
         </property>
     </bean>
 </beans>

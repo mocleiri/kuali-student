@@ -68,9 +68,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         </property>
     </bean>
 
-    <bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="ksbConfigurer"/>
+    <!--bean id="kenConfigurer" class="org.kuali.rice.ken.impl.config.KENConfigurer" depends-on="ksbConfigurer"/-->
 
-    <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="kenConfigurer"/>
+    <bean id="kradConfigurer" class="org.kuali.rice.krad.config.KRADConfigurer" depends-on="ksbConfigurer"/>
 
     <bean id="kimConfigurer" class="org.kuali.rice.kim.config.KIMConfigurer" depends-on="kradConfigurer"/>
 

@@ -11,9 +11,7 @@
     <bean id="CashierTxMemoView" parent="Uif-FormView" p:footer.render="false">
         <property name="title" value="Cashier Accounting"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm"/>
-        <property name="theme">
-            <bean parent="Uif-KradTheme"/>
-        </property>
+        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="CashierQuickMenuOptionsPage"/>
         <property name="navigation">
             <ref bean="KSACashierTxMemoVwNav"/>
@@ -36,7 +34,7 @@
                 </bean>
                 <bean parent="Uif-Page" p:id="CashierTxBioAgeOvrVwPage"
                       p:title="Account Status - @{compositePersonName}">
-                    <property name="header.group">
+                    <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
@@ -101,7 +99,7 @@
     <bean id="KSACashierTxMemoVwNav" parent="Uif-MenuNavigationGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderField-Two" p:headerText="KSA Navigation"/>
+                <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CashierQuickMenuOptionsPage"
                       p:actionLabel="Quick Options"/>
             </list>
@@ -116,8 +114,8 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkLabel="Search for a Person" p:target="_self"
-                      p:hrefText="cashierTxMemo?methodToCall=get&amp;viewId=CashierTxMemoView&amp;pageId=CashierPersonLookupPage"/>
+                <bean parent="Uif-LinkField" p:linkText="Search for a Person" p:target="_self"
+                      p:href="cashierTxMemo?methodToCall=get&amp;viewId=CashierTxMemoView&amp;pageId=CashierPersonLookupPage"/>
             </list>
         </property>
     </bean>
@@ -157,11 +155,11 @@
                                 </property>
                             </bean>
                             <!-- Use this to display the charges and payments per person
-                            <bean parent="Uif-Link" p:linkLabel="Select" p:target="_self"
-                                  p:hrefText="cashierTxMemo?methodToCall=get&amp;viewId=CashierTxMemoView&amp;pageId=CashierTxListByPersonPage&amp;id=@{#line.id}" />-->
+                            <bean parent="Uif-Link" p:linkText="Select" p:target="_self"
+                                  p:href="cashierTxMemo?methodToCall=get&amp;viewId=CashierTxMemoView&amp;pageId=CashierTxListByPersonPage&amp;id=@{#line.id}" />-->
                             <!-- Use this to display the combined account, bio, aging and alerts -->
-                            <bean parent="Uif-Link" p:linkLabel="Select" p:target="_self"
-                                  p:hrefText="cashierTxMemo?methodToCall=get&amp;viewId=CashierTxMemoView&amp;pageId=CashierTxBioAgeOvrVwPage&amp;id=@{#line.id}"/>
+                            <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                                  p:href="cashierTxMemo?methodToCall=get&amp;viewId=CashierTxMemoView&amp;pageId=CashierTxBioAgeOvrVwPage&amp;id=@{#line.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -192,7 +190,7 @@
                 </bean>
                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByName" p:actionLabel="Search">
                     <property name="actionImage">
-                        <bean parent="Uif-ImageField"
+                        <bean parent="Uif-Image"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
                     </property>
                 </bean>
@@ -239,8 +237,8 @@
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.code" p:required="true"/>
-                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>
@@ -270,8 +268,8 @@
                 </bean>
                 <bean parent="Uif-InputField" p:label="Amount" p:propertyName="amount" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Currency" p:propertyName="currency.code" p:required="true"/>
-                <bean parent="Uif-Link" p:linkLabel="Details" p:target="_self"
-                      p:hrefText="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="chargeMaintVw?viewId=ChargeMaintenanceVw&amp;methodToCall=get&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>
@@ -511,7 +509,7 @@
                 <ref bean="CashierAddMemoGroup"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addMemo" p:actionLabel="Add Information">
                     <property name="actionImage">
-                        <bean parent="Uif-ImageField"
+                        <bean parent="Uif-Image"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                     </property>
                 </bean>
@@ -526,7 +524,7 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-HorizontalFieldGroup" p:width="40%" p:labelField.width="10%">
+                <bean parent="Uif-HorizontalFieldGroup" p:width="40%" p:fieldLabel.width="10%">
                     <property name="items">
                         <list>
                             <bean parent="Uif-InputField" p:propertyName="infoType" p:label="Information Type"
@@ -552,7 +550,7 @@
                             <bean parent="Uif-InputField" p:propertyName="infoText" p:label="Information Text"
                                   p:labelPlacement="TOP"
                                   p:rowSpan="2"
-                                  p:labelField.rowSpan="2">
+                                  p:fieldLabel.rowSpan="2">
                                 <property name="bindingInfo.bindToForm" value="true"/>
                                 <property name="control">
                                     <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
