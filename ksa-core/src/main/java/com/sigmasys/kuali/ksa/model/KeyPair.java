@@ -22,7 +22,7 @@ import org.apache.commons.lang.StringUtils;
 @Entity
 @Table(name = "KSSA_KEYPAIR")
 @DiscriminatorColumn(name = "TYPE")
-@DiscriminatorValue(KeyPairType.KEYPAIR_TYPE_CODE)
+@DiscriminatorValue(KeyPairType.KEY_PAIR_CODE)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class KeyPair implements Identifiable {
 	

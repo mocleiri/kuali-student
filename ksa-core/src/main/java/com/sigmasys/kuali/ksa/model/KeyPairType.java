@@ -9,19 +9,19 @@ package com.sigmasys.kuali.ksa.model;
  */
 public enum KeyPairType {
 
-	KEYPAIR("K"),
-	PERIOD_KEYPAIR("P");
+	KEY_PAIR(KeyPairType.KEY_PAIR_CODE),
+	PERIOD_KEY_PAIR(KeyPairType.PERIOD_KEY_PAIR_CODE);
 	
-	public static final String KEYPAIR_TYPE_CODE = "K";
-	public static final String PERIOD_KEYPAIR_TYPE_CODE = "P";
+	public static final String KEY_PAIR_CODE = "K";
+	public static final String PERIOD_KEY_PAIR_CODE = "P";
 	
-	private String typeCode;
+	private String code;
 	
-	private KeyPairType(String typeCode) {
-		this.typeCode = typeCode;
+	private KeyPairType(String code) {
+		this.code = code;
 	}
 	
-	public String getTypeCode() {
-		return typeCode;
+	public String getCode() {
+		return code;
 	}
 }

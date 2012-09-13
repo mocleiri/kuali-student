@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
  * @version 1.0
  */
 @Entity
-@DiscriminatorValue(KeyPairType.PERIOD_KEYPAIR_TYPE_CODE)
+@DiscriminatorValue(KeyPairType.PERIOD_KEY_PAIR_CODE)
 public class PeriodKeyPair extends KeyPair {
 
 	private static final long serialVersionUID = 1L;
