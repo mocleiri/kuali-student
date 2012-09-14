@@ -2,6 +2,10 @@
 
 alter table KSA.KSSA_ACNT add constraint FKB8F79251AC72F7E6 foreign key (ACNT_STATUS_TYPE_ID_FK) references KSA.KSSA_ACNT_STATUS_TYPE;
 alter table KSA.KSSA_ACNT add constraint FKB8F7925156D383B8 foreign key (LATE_PERIOD_ID_FK) references KSA.KSSA_LATE_PERIOD;
+alter table KSA.KSSA_ACNT_KYPR add constraint FKFC8A611E3AB9A295 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_ACNT_KYPR add constraint FKFC8A611E5C970A06 foreign key (KYPR_ID_FK) references KSA.KSSA_KYPR;
+alter table KSA.KSSA_ACNT_PERIOD_KYPR add constraint FK5366AEC096D8FC4D foreign key (PERDIOD_KYPR_ID_FK) references KSA.KSSA_KYPR;
+alter table KSA.KSSA_ACNT_PERIOD_KYPR add constraint FK5366AEC03AB9A295 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726D2C28B62A foreign key (BANK_TYPE_ID_FK) references KSA.KSSA_BANK_TYPE;
 alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726DDE0BFC8A foreign key (ID_TYPE_ID_FK) references KSA.KSSA_ID_TYPE;
 alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726DACFC7690 foreign key (TAX_TYPE_ID_FK) references KSA.KSSA_TAX_TYPE;
@@ -31,11 +35,14 @@ alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00316BC312E foreign key (
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00395ACD1EE foreign key (PREV_ID) references KSA.KSSA_INFORMATION;
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00398518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E003FE6E074B foreign key (TRN_ID_FK) references KSA.KSSA_TRANSACTION;
-alter table KSA.KSSA_LEARNING_UNIT add constraint FKDA3E5F3C98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
-alter table KSA.KSSA_L_UNIT_PERIOD_KEYPAIR add constraint FK30A626FA519D9A7E foreign key (LEARNING_UNIT_ID_FK) references KSA.KSSA_LEARNING_UNIT;
-alter table KSA.KSSA_L_UNIT_PERIOD_KEYPAIR add constraint FK30A626FADB075FD0 foreign key (PERIOD_KEYPAIR_ID_FK) references KSA.KSSA_KEYPAIR;
-alter table KSA.KSSA_PERIOD_PERIOD_KEYPAIR add constraint FK679EFD9098518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
-alter table KSA.KSSA_PERIOD_PERIOD_KEYPAIR add constraint FK679EFD90DB075FD0 foreign key (PERIOD_KEYPAIR_ID_FK) references KSA.KSSA_KEYPAIR;
+alter table KSA.KSSA_KYPR_PERIOD_TYPE add constraint FKC2AE1892E64CB6C5 foreign key (KYPR_ID_FK) references KSA.KSSA_KYPR;
+alter table KSA.KSSA_KYPR_PERIOD_TYPE add constraint FKC2AE1892267D474A foreign key (PERIOD_TYPE_ID_FK) references KSA.KSSA_PERIOD_TYPE;
+alter table KSA.KSSA_LU add constraint FK11C630B23AB9A295 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_LU add constraint FK11C630B298518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_LU_KYPR add constraint FK37B4975DF8899302 foreign key (LU_ID_FK) references KSA.KSSA_LU;
+alter table KSA.KSSA_LU_KYPR add constraint FK37B4975DE64CB6C5 foreign key (KYPR_ID_FK) references KSA.KSSA_KYPR;
+alter table KSA.KSSA_LU_PERIOD_TYPE add constraint FK24E1DAEBF8899302 foreign key (LU_ID_FK) references KSA.KSSA_LU;
+alter table KSA.KSSA_LU_PERIOD_TYPE add constraint FK24E1DAEB267D474A foreign key (PERIOD_TYPE_ID_FK) references KSA.KSSA_PERIOD_TYPE;
 alter table KSA.KSSA_PERSON_NAME_ACNT add constraint FK9F7C59B7FD92EAC foreign key (PERSON_NAME_ID_FK) references KSA.KSSA_PERSON_NAME;
 alter table KSA.KSSA_PERSON_NAME_ACNT add constraint FK9F7C59B98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_POSTAL_ADDRESS_ACNT add constraint FKBDC431DE98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
@@ -44,8 +51,6 @@ alter table KSA.KSSA_REFUND add constraint FK76773E21D61AFDF9 foreign key (TRANS
 alter table KSA.KSSA_REFUND add constraint FK76773E21E730F553 foreign key (AUTHORIZER_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_REFUND add constraint FK76773E2137C6ACE6 foreign key (REQUESTER_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_REFUND add constraint FK76773E21BC852B6A foreign key (REFUND_TYPE_ID_FK) references KSA.KSSA_REFUND_TYPE;
-alter table KSA.KSSA_STUDENT_KEYPAIR add constraint FKAF1732EC7E66110F foreign key (KEYPAIR_ID_FK) references KSA.KSSA_KEYPAIR;
-alter table KSA.KSSA_STUDENT_KEYPAIR add constraint FKAF1732EC98518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB598518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB5FB9EC59 foreign key (CURRENCY_ID_FK) references KSA.KSSA_CURRENCY;
 alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB590ED3EED foreign key (DOCUMENT_ID_FK) references KSA.KSSA_DOCUMENT;

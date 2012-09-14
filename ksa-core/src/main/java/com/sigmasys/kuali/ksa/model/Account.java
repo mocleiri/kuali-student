@@ -109,11 +109,6 @@ public class Account implements Identifiable {
      * Address line 1, state, postalCode, and country of the default PostalAddress Set record
      */
     private String compositeDefaultPostalAddress;
-    
-    /**
-     * The base for Fee Assessment associated with this account.
-     */
-    private FeeBase feeBase = new FeeBase(this);
 
 
     protected Account() {
@@ -349,67 +344,4 @@ public class Account implements Identifiable {
         account.setPostalAddresses(new HashSet<PostalAddress>(getPostalAddresses()));
         return account;
     }
-
-
-    /* ********************************************************
-     * 
-     * Fee Assessment support methods.
-     * You should normally call "getFeeBase" to get a support
-     * FeeBase object and use the data it contains.
-     * 
-     * ********************************************************/
-
-    @Transient
-	public FeeBase getFeeBase() {
-		// Check if the "account" property is set:
-		if (feeBase.getAccount() == null) {
-			feeBase.setAccount(this);
-		}
-		
-		return feeBase;
-	}
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "KSSA_STUDENT_KEYPAIR",
-            joinColumns = {
-                    @JoinColumn(name = "ACNT_ID_FK")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "KEYPAIR_ID_FK")
-            }
-    )
-	public Set<KeyPair> getStudentData() {
-		return feeBase.getStudentData();
-	}
-
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name="ACNT_ID_FK")
-	public Set<LearningUnit> getStudy() {
-		return feeBase.getStudy();
-	}
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "KSSA_PERIOD_PERIOD_KEYPAIR",
-            joinColumns = {
-                    @JoinColumn(name = "ACNT_ID_FK")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "PERIOD_KEYPAIR_ID_FK")
-            }
-    )
-	public Set<PeriodKeyPair> getPeriodData() {
-		return feeBase.getPeriodData();
-	}
-
-	public void setStudentData(Set<KeyPair> studentData) {
-		feeBase.setStudentData(studentData);
-	}
-
-	public void setPeriodData(Set<PeriodKeyPair> periodData) {
-		feeBase.setPeriodData(periodData);
-	}
-
-	public void setStudy(Set<LearningUnit> study) {
-		feeBase.setStudy(study);
-	}
 }

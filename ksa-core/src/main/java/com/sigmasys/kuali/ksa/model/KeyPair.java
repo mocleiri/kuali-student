@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
  * @author Sergey
  */
 @Entity
-@Table(name = "KSSA_KEYPAIR")
+@Table(name = "KSSA_KYPR")
 @DiscriminatorColumn(name = "TYPE")
 @DiscriminatorValue(KeyPairType.KEY_PAIR_CODE)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -1,10 +1,14 @@
 package com.sigmasys.kuali.ksa.model;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.ObjectUtils;
 
 /**
  * This class represents a subclass of the KeyPair class that is capable of
@@ -24,15 +28,23 @@ public class PeriodKeyPair extends KeyPair {
 	 * Due to the need to store different values by period, this is a key
 	 * pair value that also has a period indicator. Set at instantiation.
 	 */
-	private String period;
+	private PeriodType period;
 
 	
-	@Column(name="PERIOD", length=45)
-	public String getPeriod() {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_KYPR_PERIOD_TYPE",
+			joinColumns = {
+        			@JoinColumn(name = "KYPR_ID_FK")
+			},
+			inverseJoinColumns = {
+        			@JoinColumn(name = "PERIOD_TYPE_ID_FK")
+			}
+    )
+	public PeriodType getPeriod() {
 		return period;
 	}
 
-	public void setPeriod(String period) {
+	public void setPeriod(PeriodType period) {
 		this.period = period;
 	}
 	
@@ -40,13 +52,13 @@ public class PeriodKeyPair extends KeyPair {
 		if (o instanceof PeriodKeyPair) {
 			PeriodKeyPair pkpAnother = (PeriodKeyPair)o;
 			
-			return super.equals(o) && StringUtils.equals(pkpAnother.period, this.period);
+			return super.equals(o) && ObjectUtils.equals(pkpAnother.period, this.period);
 		}
 		
 		return false;
 	}
 	
 	public int hashCode() {
-		return 31 * (super.hashCode() + (StringUtils.isNotBlank(period) ? period.hashCode() : 1));
+		return 31 * (super.hashCode() + ObjectUtils.hashCode(period));
 	}
 }

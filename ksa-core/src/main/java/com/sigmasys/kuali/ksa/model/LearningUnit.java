@@ -13,12 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-import javax.persistence.Transient;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -29,7 +29,7 @@ import org.apache.commons.lang.time.DateUtils;
  * @version 1.0
  */
 @Entity
-@Table(name = "KSSA_LEARNING_UNIT")
+@Table(name = "KSSA_LU")
 public class LearningUnit extends AccountIdAware implements Identifiable {
 	
 	private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 	/**
 	 * Period for which these learning units relate.
 	 */
-	private String period;
+	private PeriodType period;
 	
 	/**
 	 * The date the learning unit was added by the student.
@@ -112,8 +112,16 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return id;
 	}
 
-    @Column(name="PERIOD", length=45, nullable=false)
-	public String getPeriod() {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_LU_PERIOD_TYPE",
+			joinColumns = {
+        			@JoinColumn(name = "LU_ID_FK")
+			},
+			inverseJoinColumns = {
+        			@JoinColumn(name = "PERIOD_TYPE_ID_FK")
+			}
+    )
+	public PeriodType getPeriod() {
 		return period;
 	}
 
@@ -142,10 +150,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return campus;
 	}
 
-    /**
-     * TODO: Unmapped column. Consult Paul about that. 
-     */
-    @Transient
+    @Column(name="LU_LEVEL", length=256)
 	public String getLevel() {
 		return level;
 	}
@@ -160,26 +165,26 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return status;
 	}
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "KSSA_L_UNIT_PERIOD_KEYPAIR",
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "KSSA_LU_KYPR",
             joinColumns = {
-                    @JoinColumn(name = "LEARNING_UNIT_ID_FK")
+                    @JoinColumn(name = "LU_ID_FK")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "PERIOD_KEYPAIR_ID_FK")
+                    @JoinColumn(name = "KYPR_ID_FK")
             }
     )
 	public Set<PeriodKeyPair> getExtended() {
 		return extended;
 	}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ACNT_ID_FK")
 	public Account getAccount() {
 		return account;
 	}
 
-	public void setPeriod(String period) {
+	public void setPeriod(PeriodType period) {
 		this.period = period;
 	}
 
@@ -234,7 +239,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 			return (luAnother.id != null) && (luAnother.id.equals(this.id))
 					&& StringUtils.equals(luAnother.accountId, this.accountId)
 					&& StringUtils.equals(luAnother.campus, this.campus)
-					&& StringUtils.equals(luAnother.period, this.period) 
+					&& ObjectUtils.equals(luAnother.period, this.period) 
 					&& StringUtils.equals(luAnother.status, this.status)
 					&& StringUtils.equals(luAnother.level, this.level)
 					&& StringUtils.equals(luAnother.unitCode, this.unitCode)
@@ -251,6 +256,6 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return 31 * (((id != null) ? id.hashCode() : 0) +
 				31 * ((StringUtils.isNotBlank(accountId) ? accountId.hashCode() : 0) +
 				31 * ((StringUtils.isNotBlank(unitCode) ? unitCode.hashCode() : 0) +
-				31 * (StringUtils.isNotBlank(period) ? period.hashCode() : 0))));
+				31 * ObjectUtils.hashCode(period))));
 	}
 }
