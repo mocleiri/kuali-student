@@ -5,8 +5,6 @@
 drop table KSA.KSSA_CONFIG cascade constraints;
 
 drop table KSA.KSSA_ACNT cascade constraints;
-drop table KSSA_ACNT_KYPR cascade constraints;
-drop table KSA.KSSA_ACNT_PERIOD_KYPR cascade constraints;
 drop table KSA.KSSA_ACNT_PROTECTED_INFO cascade constraints;
 drop table KSA.KSSA_ACNT_STATUS_TYPE cascade constraints;
 drop table KSA.KSSA_ACTIVITY cascade constraints;
@@ -25,8 +23,8 @@ drop table KSA.KSSA_FLAG_TYPE cascade constraints;
 drop table KSA.KSSA_GL_BREAKDOWN cascade constraints;
 drop table KSA.KSSA_GL_BREAKDOWN_OVERRIDE cascade constraints;
 drop table KSA.KSSA_GL_TRANSACTION cascade constraints;
-drop table KSA.KSSA_GL_TRANS_TRANSACTION cascade constraints;
 drop table KSA.KSSA_GL_TRANSMISSION cascade constraints;
+drop table KSA.KSSA_GL_TRANS_TRANSACTION cascade constraints;
 drop table KSA.KSSA_GL_TYPE cascade constraints;
 drop table KSA.KSSA_ID_TYPE cascade constraints;
 drop table KSA.KSSA_INFORMATION cascade constraints;

@@ -4,6 +4,7 @@ package com.sigmasys.kuali.ksa.model;
 import com.sigmasys.kuali.ksa.util.EnumUtils;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -55,6 +56,11 @@ public class GlTransmission implements Identifiable {
      * Recognition period
      */
     private String recognitionPeriod;
+
+    /**
+     * Transmission amount
+     */
+    private BigDecimal amount;
 
     /**
      * GL operation type. Can be 'C' or 'D'
@@ -144,6 +150,15 @@ public class GlTransmission implements Identifiable {
 
     public void setBatchId(String batchId) {
         this.batchId = batchId;
+    }
+
+    @Column(name = "AMOUNT")
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     @Column(name = "RECOGNITION_PERIOD", length = 45)

@@ -17,10 +17,12 @@ public class EnumUtils {
     }
 
     public static <T extends Enum<T>> T findById(Class<T> enumType, Serializable id) {
-        for (T item : EnumSet.allOf(enumType)) {
-            if (item instanceof Identifiable) {
-                if (id.equals(((Identifiable) item).getId())) {
-                    return item;
+        if (id != null) {
+            for (T item : EnumSet.allOf(enumType)) {
+                if (item instanceof Identifiable) {
+                    if (((Identifiable) item).getId().equals(id)) {
+                        return item;
+                    }
                 }
             }
         }

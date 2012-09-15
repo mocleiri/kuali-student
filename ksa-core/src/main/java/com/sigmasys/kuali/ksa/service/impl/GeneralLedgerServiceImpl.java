@@ -5,11 +5,13 @@ import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.util.EnumUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -229,6 +231,147 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         query.setParameter("fromDate", fromDate);
         query.setParameter("toDate", toDate);
         return query.executeUpdate() > 0;
+    }
+
+
+    private GlTransmission createGlTransmission(GlTransaction transaction, String batchId, String recognitionPeriod) {
+
+        GlTransmission transmission = new GlTransmission();
+        transmission.setBatchId(batchId);
+        transmission.setGlAccountId(transaction.getGlAccountId());
+        transmission.setEarliestDate(transaction.getDate());
+        transmission.setLatestDate(transaction.getDate());
+        transmission.setRecognitionPeriod(recognitionPeriod);
+        transmission.setTimestamp(new Date());
+        transmission.setGlOperation(transaction.getGlOperation());
+
+        persistEntity(transmission);
+
+        return transmission;
+
+    }
+
+    @Transactional(readOnly = false)
+    public synchronized void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod) {
+
+        if (fromDate != null && toDate != null && fromDate.after(toDate)) {
+            String errMsg = "Start Date cannot be greater than End Date: fromDate = " + fromDate +
+                    ", toDate = " + toDate;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        String glModeCode = configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME);
+        GeneralLedgerMode glMode = EnumUtils.findById(GeneralLedgerMode.class, glModeCode);
+        if (glMode == null) {
+            String errMsg = "General Ledger mode must be specified";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        Query query;
+        if (fromDate != null && toDate != null) {
+            query = em.createQuery("select t from GlTransaction t where t.status = :status and t.date " +
+                    " between :fromDate and :toDate order by t.date asc");
+            query.setParameter("fromDate", fromDate);
+            query.setParameter("toDate", toDate);
+        } else {
+            query = em.createQuery("select t from GlTransaction t where t.status = :status order by t.date asc");
+        }
+        query.setParameter("status", GlTransactionStatus.QUEUED.getId());
+        if (glMode == GeneralLedgerMode.INDIVIDUAL) {
+            query.setMaxResults(1);
+        }
+        List<GlTransaction> glTransactions = query.getResultList();
+        if (CollectionUtils.isEmpty(glTransactions)) {
+            if (fromDate != null && toDate != null) {
+                logger.warn("Cannot find GL transactions for the given date range: fromDate = " + fromDate +
+                        ", toDate = " + toDate);
+            } else {
+                logger.warn("No GL transactions found");
+            }
+            return;
+        }
+
+        if (glMode == GeneralLedgerMode.INDIVIDUAL) {
+            GlTransaction earliestGlTransaction = glTransactions.get(0);
+            GlTransmission transmission = createGlTransmission(earliestGlTransaction, "RT", recognitionPeriod);
+            earliestGlTransaction.setTransmission(transmission);
+            earliestGlTransaction.setStatus(GlTransactionStatus.COMPLETED);
+            persistEntity(earliestGlTransaction);
+        } else if (glMode == GeneralLedgerMode.BATCH) {
+            for (GlTransaction transaction : glTransactions) {
+                GlTransmission transmission = createGlTransmission(transaction, null, recognitionPeriod);
+                transaction.setTransmission(transmission);
+                transaction.setStatus(GlTransactionStatus.COMPLETED);
+                persistEntity(transaction);
+            }
+
+        } else if (glMode == GeneralLedgerMode.BATCH_ROLLUP) {
+            // Creating a map of <GL account, set of GL transactions>
+            HashMap<String, Set<GlTransaction>> accountTransactions = new HashMap<String, Set<GlTransaction>>();
+            for (GlTransaction transaction : glTransactions) {
+                String accountId = transaction.getGlAccountId();
+                Set<GlTransaction> glTransactionSet = accountTransactions.get(accountId);
+                if (glTransactionSet == null) {
+                    glTransactionSet = new HashSet<GlTransaction>();
+                    accountTransactions.put(accountId, glTransactionSet);
+                }
+                glTransactionSet.add(transaction);
+            }
+
+            for (Map.Entry<String, Set<GlTransaction>> entry : accountTransactions.entrySet()) {
+                String accountId = entry.getKey();
+                Set<GlTransaction> glTransactionSet = entry.getValue();
+                if (glTransactions.isEmpty()) {
+                    continue;
+                }
+                GlOperationType groupOperation = null;
+                BigDecimal amount1 = BigDecimal.ZERO;
+                BigDecimal amount2 = BigDecimal.ZERO;
+                Date minDate = null;
+                Date maxDate = null;
+                for (GlTransaction transaction : glTransactionSet) {
+                    if (groupOperation == null) {
+                        groupOperation = transaction.getGlOperation();
+                    }
+                    GlOperationType glOperation = transaction.getGlOperation();
+                    if (glOperation != null) {
+                        if (glOperation == groupOperation) {
+                            amount1 = amount1.add(transaction.getAmount());
+                        } else {
+                            amount2 = amount2.add(transaction.getAmount());
+                        }
+                    }
+                    if (minDate == null || minDate.after(transaction.getDate())) {
+                        minDate = transaction.getDate();
+                    }
+                    if (maxDate == null || maxDate.before(transaction.getDate())) {
+                        maxDate = transaction.getDate();
+                    }
+                }
+                GlTransmission transmission = new GlTransmission();
+                transmission.setGlAccountId(accountId);
+                transmission.setEarliestDate(minDate);
+                transmission.setLatestDate(maxDate);
+                transmission.setTimestamp(new Date());
+                // TODO: what to do with group operation????
+                transmission.setGlOperation(groupOperation);
+                transmission.setAmount(amount1.subtract(amount2));
+                persistEntity(transmission);
+                // Updating GL transactions for the current account
+                for (GlTransaction transaction : glTransactionSet) {
+                    transaction.setStatus(GlTransactionStatus.COMPLETED);
+                    transaction.setTransmission(transmission);
+                    persistEntity(transaction);
+                }
+            }
+        } else {
+            String errMsg = "Unexpected GeneralLedgerMode: " + glMode;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
     }
 
 

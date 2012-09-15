@@ -2,10 +2,6 @@
 
 alter table KSA.KSSA_ACNT add constraint FKB8F79251AC72F7E6 foreign key (ACNT_STATUS_TYPE_ID_FK) references KSA.KSSA_ACNT_STATUS_TYPE;
 alter table KSA.KSSA_ACNT add constraint FKB8F7925156D383B8 foreign key (LATE_PERIOD_ID_FK) references KSA.KSSA_LATE_PERIOD;
-alter table KSA.KSSA_ACNT_KYPR add constraint FKFC8A611E3AB9A295 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
-alter table KSA.KSSA_ACNT_KYPR add constraint FKFC8A611E5C970A06 foreign key (KYPR_ID_FK) references KSA.KSSA_KYPR;
-alter table KSA.KSSA_ACNT_PERIOD_KYPR add constraint FK5366AEC096D8FC4D foreign key (PERDIOD_KYPR_ID_FK) references KSA.KSSA_KYPR;
-alter table KSA.KSSA_ACNT_PERIOD_KYPR add constraint FK5366AEC03AB9A295 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726D2C28B62A foreign key (BANK_TYPE_ID_FK) references KSA.KSSA_BANK_TYPE;
 alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726DDE0BFC8A foreign key (ID_TYPE_ID_FK) references KSA.KSSA_ID_TYPE;
 alter table KSA.KSSA_ACNT_PROTECTED_INFO add constraint FKEF75726DACFC7690 foreign key (TAX_TYPE_ID_FK) references KSA.KSSA_TAX_TYPE;
@@ -37,7 +33,6 @@ alter table KSA.KSSA_INFORMATION add constraint FKD2A2E00398518DD2 foreign key (
 alter table KSA.KSSA_INFORMATION add constraint FKD2A2E003FE6E074B foreign key (TRN_ID_FK) references KSA.KSSA_TRANSACTION;
 alter table KSA.KSSA_KYPR_PERIOD_TYPE add constraint FKC2AE1892E64CB6C5 foreign key (KYPR_ID_FK) references KSA.KSSA_KYPR;
 alter table KSA.KSSA_KYPR_PERIOD_TYPE add constraint FKC2AE1892267D474A foreign key (PERIOD_TYPE_ID_FK) references KSA.KSSA_PERIOD_TYPE;
-alter table KSA.KSSA_LU add constraint FK11C630B23AB9A295 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_LU add constraint FK11C630B298518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_LU_KYPR add constraint FK37B4975DF8899302 foreign key (LU_ID_FK) references KSA.KSSA_LU;
 alter table KSA.KSSA_LU_KYPR add constraint FK37B4975DE64CB6C5 foreign key (KYPR_ID_FK) references KSA.KSSA_KYPR;

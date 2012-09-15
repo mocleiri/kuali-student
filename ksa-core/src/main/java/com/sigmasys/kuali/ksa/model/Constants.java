@@ -19,6 +19,7 @@ public interface Constants {
     String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
     String IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME = "ksa.import.single.batch.failure";
     String DEFAULT_GL_TYPE_PARAM_NAME = "ksa.general.ledger.type";
+    String DEFAULT_GL_MODE_PARAM_NAME = "ksa.general.ledger.mode";
     String DEFAULT_DEFERMENT_TYPE_PARAM_NAME = "ksa.deferment.type.id";
     String LOGGING_OPERATION = "ksa.logging.operation";
 
