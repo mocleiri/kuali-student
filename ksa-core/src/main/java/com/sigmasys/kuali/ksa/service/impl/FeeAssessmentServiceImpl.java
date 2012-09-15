@@ -108,6 +108,7 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		
 		//return findAccountAssociationsByIds(sql, accountId, resultClass);
 	}
+	
 	/**
 	 * Finds arbitrary associations of an Account by their entity type and using the provided SQL query. 
 	 * This method is used for finding Account associations not mapped using JPA annotations. 
