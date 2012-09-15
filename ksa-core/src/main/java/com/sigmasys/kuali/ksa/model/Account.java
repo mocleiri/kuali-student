@@ -22,7 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
-import com.sigmasys.kuali.ksa.model.support.FeeBase;
+import com.sigmasys.kuali.ksa.service.support.FeeBase;
 
 /**
  * KSA Account model

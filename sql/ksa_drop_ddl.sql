@@ -2,6 +2,8 @@
 -- This Oracle script drops database objects in KSA schema.
 -- It needs to be run by the schema owner
 
+drop table KSA.KSSA_ACNT_KYPR cascade constraints;
+
 drop table KSA.KSSA_CONFIG cascade constraints;
 
 drop table KSA.KSSA_ACNT cascade constraints;
@@ -29,13 +31,11 @@ drop table KSA.KSSA_GL_TYPE cascade constraints;
 drop table KSA.KSSA_ID_TYPE cascade constraints;
 drop table KSA.KSSA_INFORMATION cascade constraints;
 drop table KSA.KSSA_KYPR cascade constraints;
-drop table KSA.KSSA_KYPR_PERIOD_TYPE cascade constraints;
 drop table KSA.KSSA_LANGUAGE cascade constraints;
 drop table KSA.KSSA_LATE_PERIOD cascade constraints;
+drop table KSA.KSSA_LEARNING_PERIOD cascade constraints;
 drop table KSA.KSSA_LU cascade constraints;
 drop table KSA.KSSA_LU_KYPR cascade constraints;
-drop table KSA.KSSA_LU_PERIOD_TYPE cascade constraints;
-drop table KSA.KSSA_PERIOD_TYPE cascade constraints;
 drop table KSA.KSSA_PERSON_NAME cascade constraints;
 drop table KSA.KSSA_PERSON_NAME_ACNT cascade constraints;
 drop table KSA.KSSA_POSTAL_ADDRESS cascade constraints;

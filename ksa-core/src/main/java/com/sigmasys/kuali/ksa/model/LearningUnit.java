@@ -42,7 +42,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 	/**
 	 * Period for which these learning units relate.
 	 */
-	private PeriodType period;
+	private LearningPeriod learningPeriod;
 	
 	/**
 	 * The date the learning unit was added by the student.
@@ -90,7 +90,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 	/**
 	 * A set of PeriodKeyPair that represent extended elements of the LearningUnit.
 	 */
-	private Set<PeriodKeyPair> extended;
+	private Set<KeyPair> extended;
 	
 	/**
 	 * The Account associated with this LearningUnit.
@@ -112,17 +112,10 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return id;
 	}
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "KSSA_LU_PERIOD_TYPE",
-			joinColumns = {
-        			@JoinColumn(name = "LU_ID_FK")
-			},
-			inverseJoinColumns = {
-        			@JoinColumn(name = "PERIOD_TYPE_ID_FK")
-			}
-    )
-	public PeriodType getPeriod() {
-		return period;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LEARNING_PERIOD_ID_FK")
+	public LearningPeriod getLearningPeriod() {
+		return learningPeriod;
 	}
 
     @Column(name="ADD_DATE")
@@ -174,18 +167,18 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
                     @JoinColumn(name = "KYPR_ID_FK")
             }
     )
-	public Set<PeriodKeyPair> getExtended() {
+	public Set<KeyPair> getExtended() {
 		return extended;
 	}
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "ACNT_ID_FK")
 	public Account getAccount() {
 		return account;
 	}
 
-	public void setPeriod(PeriodType period) {
-		this.period = period;
+	public void setLearningPeriod(LearningPeriod period) {
+		this.learningPeriod = period;
 	}
 
 	public void setAddDate(Date addDate) {
@@ -220,7 +213,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		this.status = status;
 	}
 
-	public void setExtended(Set<PeriodKeyPair> extended) {
+	public void setExtended(Set<KeyPair> extended) {
 		this.extended = extended;
 	}
 
@@ -239,7 +232,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 			return (luAnother.id != null) && (luAnother.id.equals(this.id))
 					&& StringUtils.equals(luAnother.accountId, this.accountId)
 					&& StringUtils.equals(luAnother.campus, this.campus)
-					&& ObjectUtils.equals(luAnother.period, this.period) 
+					&& ObjectUtils.equals(luAnother.learningPeriod, this.learningPeriod) 
 					&& StringUtils.equals(luAnother.status, this.status)
 					&& StringUtils.equals(luAnother.level, this.level)
 					&& StringUtils.equals(luAnother.unitCode, this.unitCode)
@@ -256,6 +249,6 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return 31 * (((id != null) ? id.hashCode() : 0) +
 				31 * ((StringUtils.isNotBlank(accountId) ? accountId.hashCode() : 0) +
 				31 * ((StringUtils.isNotBlank(unitCode) ? unitCode.hashCode() : 0) +
-				31 * ObjectUtils.hashCode(period))));
+				31 * ObjectUtils.hashCode(learningPeriod))));
 	}
 }

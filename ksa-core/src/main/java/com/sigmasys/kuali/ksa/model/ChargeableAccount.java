@@ -2,18 +2,9 @@ package com.sigmasys.kuali.ksa.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-
-import com.sigmasys.kuali.ksa.model.support.FeeBase;
 
 /**
  * A super class for chargeable accounts
