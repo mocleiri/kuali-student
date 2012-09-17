@@ -14,73 +14,62 @@
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Home"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdministrationPage" p:actionLabel="Administration"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdministrationPage"
+                      p:actionLabel="Administration"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReportingPage" p:actionLabel="Reporting"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReconciliationPage" p:actionLabel="Reconciliation"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CollectionsPage" p:actionLabel="Collections"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BatchTransactionsPage" p:actionLabel="Batch Transactions"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="PaymentPlansPage" p:actionLabel="Payment Plans"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReconciliationPage"
+                      p:actionLabel="Reconciliation"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CollectionsPage"
+                      p:actionLabel="Collections"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BatchTransactionsPage"
+                      p:actionLabel="Batch Transactions"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="PaymentPlansPage"
+                      p:actionLabel="Payment Plans"/>
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SettingsPage" p:actionLabel="Settings"/>
             </list>
         </property>
     </bean>
 
     <bean id="Uif-KSAFormView" parent="Uif-FormView" abstract="true" scope="prototype">
-        <property name="theme">
-            <bean parent="Uif-KradTheme"/>
-        </property>
+        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="applicationHeader">
-            <bean parent="Uif-HeaderOne" p:id="ksa-banner">
-                <property name="items">
-                    <list>
-                        <bean parent="Uif-HorizontalBoxGroup" p:id="ksa-left"
-                              p:layoutManager.itemStyleClasses="boxLayoutHorizontalItem-tight">
-                            <property name="items">
-                                <list>
-                                    <bean parent="Uif-ImageField"
-                                          p:source="@{#ConfigProperties['krad.externalizable.images.url']}ksa/kuali_student_accounts.png">
-                                    </bean>
-                                </list>
-                            </property>
-                        </bean>
-                        <bean parent="Uif-HorizontalBoxGroup" p:id="ksa-right"
-                              p:layoutManager.itemStyleClasses="boxLayoutHorizontalItem-tight">
-                            <property name="items">
-                                <list>
-                                    <bean parent="Uif-InputField" p:propertyName="searchType" p:label="Search Type"
-                                          p:labelPlacement="LEFT"
-                                          p:width="auto"
-                                          p:defaultValue="ACCOUNTS_CODE"
-                                          p:required="true">
-                                        <property name="bindingInfo.bindToForm" value="true"/>
-                                        <property name="control">
-                                            <bean parent="Uif-DropdownControl"/>
-                                        </property>
-                                        <property name="optionsFinder">
-                                            <bean class="com.sigmasys.kuali.ksa.krad.util.SearchTypeKeyValues"
-                                                  p:blankOption="false"/>
-                                        </property>
-                                    </bean>
-                                    <!-- p:fieldLabel.styleClasses="labelTop" -->
-                                    <bean parent="Uif-InputField" p:label="Search" p:propertyName="searchValue" p:labelPlacement="LEFT"
-                                           p:fieldLabel.renderColon="true">
-                                        <property name="control">
-                                            <bean parent="Uif-TextControl" p:size="15"/>
-                                        </property>
-                                    </bean>
-                                    <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByType" p:actionLabel="Search">
-                                        <!--<property name="actionImage">
-                                            <bean parent="Uif-ImageField"
-                                                  p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
-                                        </property>-->
-                                    </bean>
-                                </list>
-                            </property>
-                        </bean>
-                        <bean parent="Uif-HorizontalBoxGroup" p:id="ksa-lower"
-                              p:layoutManager.itemStyleClasses="boxLayoutHorizontalItem-tight">
-                        </bean>
-                    </list>
+            <bean parent="Uif-HeaderBase" p:id="ksa-banner">
+                <property name="upperGroup">
+                    <bean parent="Uif-HeaderUpperGroup" p:id="ksa-upper"
+                          p:layoutManager.itemStyleClasses="boxLayoutHorizontalItem-tight">
+                        <property name="items">
+                            <list>
+                                <bean parent="Uif-ImageField"
+                                      p:source="@{getContext()}/images/kuali_student_accounts.png">
+                                </bean>
+                                <bean parent="Uif-InputField" p:propertyName="searchType" p:label="Search Type"
+                                      p:labelPlacement="LEFT"
+                                      p:width="auto"
+                                      p:required="true">
+                                    <property name="bindingInfo.bindToForm" value="true"/>
+                                    <property name="control">
+                                        <bean parent="Uif-DropdownControl"/>
+                                    </property>
+                                    <property name="optionsFinder" value="@{getSearchTypeValuesFinder()}"/>
+                                </bean>
+                                <!-- p:fieldLabel.styleClasses="labelTop" -->
+                                <bean parent="Uif-InputField" p:label="Search" p:propertyName="searchValue"
+                                      p:labelPlacement="LEFT"
+                                      p:fieldLabel.renderColon="true">
+                                    <property name="control">
+                                        <bean parent="Uif-TextControl" p:size="15"/>
+                                    </property>
+                                </bean>
+                                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByType"
+                                      p:actionLabel="Search">
+                                    <!--<property name="actionImage">
+                                        <bean parent="Uif-ImageField"
+                                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
+                                    </property>-->
+                                </bean>
+                            </list>
+                        </property>
+                    </bean>
                 </property>
             </bean>
         </property>
@@ -88,4 +77,5 @@
             <ref bean="Uif-KSAMenuNavigationGroup"/>
         </property>
     </bean>
+
 </beans>

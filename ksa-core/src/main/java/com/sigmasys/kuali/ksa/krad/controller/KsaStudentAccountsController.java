@@ -26,215 +26,208 @@ import java.util.List;
 @RequestMapping(value = "/ksaStudentAccountsVw")
 public class KsaStudentAccountsController extends UifControllerBase {
 
-   @Autowired
-   private AccountService accountService;
+    @Autowired
+    private AccountService accountService;
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected KsaStudentAccountsForm createInitialForm(HttpServletRequest request) {
-      KsaStudentAccountsForm form = new KsaStudentAccountsForm();
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected KsaStudentAccountsForm createInitialForm(HttpServletRequest request) {
+        KsaStudentAccountsForm form = new KsaStudentAccountsForm();
 
-      return form;
-   }
+        return form;
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
-
-      // do get stuff...
-      String pageId = request.getParameter("pageId");
-
-      if (pageId != null && pageId.compareTo("BioGraphicInfoSummaryPage") == 0) {
-         String id = request.getParameter("id");
-         if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("'id' request parameter must be specified");
-         }
-
-         String compositePersonName = createCompositeDefaultPersonName(id);
-         form.setSelectedAccountCompositePersonName(compositePersonName);
-
-       /*  // charges by ID
-         List<Charge> charges = transactionService.getCharges(id);
-
-         // payments by ID
-         List<Payment> payments = transactionService.getPayments(id);
-
-         form.setChargeList(charges);
-
-         form.setPaymentList(payments);*/
-      }
-
-
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-      // populate model for testing
-
-      return super.start(form, result, request, response);
-
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
-   @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        // do get stuff...
+        String pageId = request.getParameter("pageId");
 
-      return getUIFModelAndView(form);
-   }
+        if (pageId != null && pageId.compareTo("BioGraphicInfoSummaryPage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
+            }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+            String compositePersonName = createCompositeDefaultPersonName(id);
+            form.setSelectedAccountCompositePersonName(compositePersonName);
+
+            /*  // charges by ID
+            List<Charge> charges = transactionService.getCharges(id);
+
+            // payments by ID
+            List<Payment> payments = transactionService.getPayments(id);
+
+            form.setChargeList(charges);
+
+            form.setPaymentList(payments);*/
+        }
+
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+
+    @RequestMapping(params = "methodToCall=start")
+    public ModelAndView start(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+        // populate model for testing
+
+        return super.start(form, result, request, response);
+
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    @Transactional(readOnly = false)
+    public ModelAndView submit(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
+        // do submit stuff...
 
-   /**
-    * User searches on a (last) name. The result set is iterated over to create the composite PersonName
-    * and composite address using default records, eventfully creating a browse list that can be displayed
-    * and selected from for further processing as desired.
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByType")
-   public ModelAndView searchByName(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
-                                    HttpServletRequest request, HttpServletResponse response) {
 
-      // we do not have a query by name or partial name via last name or contains yet
-      // if no result set from getting full accounts than the List is empty
-      // otherwise the lit contains records and a compsite person name and postal address
+        return getUIFModelAndView(form);
+    }
 
-      String personSearchByAccount = form.getBioSearchByAccount();
-      String searchType = form.getSearchType();
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
+    public ModelAndView save(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
 
-      // query for all accounts
+        // do save stuff...
 
-      List<Account> accountSearchList = accountService.getFullAccounts();
+        return getUIFModelAndView(form);
+    }
 
-      // create a a list of Account objects for display requirements
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
 
-      List<Account> accountList = new ArrayList<Account>();
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
 
-      // if we have a result set of Accounts from the query
+    /**
+     * User searches on a (last) name. The result set is iterated over to create the composite PersonName
+     * and composite address using default records, eventfully creating a browse list that can be displayed
+     * and selected from for further processing as desired.
+     *
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByType")
+    public ModelAndView searchByName(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
 
-      for (Account account : accountSearchList) {
+        // we do not have a query by name or partial name via last name or contains yet
+        // if no result set from getting full accounts than the List is empty
+        // otherwise the lit contains records and a compsite person name and postal address
 
-         PersonName personName = account.getDefaultPersonName();
+        String personSearchByAccount = form.getBioSearchByAccount();
 
-         if (personName != null && personName.getLastName().contains(personSearchByAccount)) {
+        // query for all accounts
 
-            // an account should have a default PersonName and default PostalAddress
+        List<Account> accountSearchList = accountService.getFullAccounts();
 
-            PostalAddress postalAddress = account.getDefaultPostalAddress();
+        // create a a list of Account objects for display requirements
 
-            Account accountCopy = account.getCopy();
+        List<Account> accountList = new ArrayList<Account>();
 
-            // format the name and address as a single string of each
-            PersonPostal personPostal = new PersonPostal();
-            accountCopy.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
-            accountCopy.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
+        // if we have a result set of Accounts from the query
 
-            // add each account copy to a list
+        for (Account account : accountSearchList) {
 
-            accountList.add(accountCopy);
-         }
-      }
+            PersonName personName = account.getDefaultPersonName();
 
-      // set the account list derived from the full search list
+            if (personName != null && personName.getLastName() != null &&
+                    personName.getLastName().contains(personSearchByAccount)) {
 
-      form.setAccountBrowseList(accountList);
+                // an account should have a default PersonName and default PostalAddress
 
-      // do a search by name returning account info
-      return getUIFModelAndView(form);
-   }
+                PostalAddress postalAddress = account.getDefaultPostalAddress();
 
-   private String createCompositeDefaultPersonName(String id) {
-      Account accountById = accountService.getFullAccount(id);
-      if (accountById == null) {
-         throw new IllegalStateException("Cannot find Account by ID = " + id);
-      }
+                Account accountCopy = account.getCopy();
 
-      PersonPostal personPostal = new PersonPostal();
-      PersonName personName = accountById.getDefaultPersonName();
-      return personPostal.CreateCompositePersonName(personName);
-   }
+                // format the name and address as a single string of each
+                PersonPostal personPostal = new PersonPostal();
+                accountCopy.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
+                accountCopy.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
+
+                // add each account copy to a list
+
+                accountList.add(accountCopy);
+            }
+        }
+
+        // set the account list derived from the full search list
+
+        form.setAccountBrowseList(accountList);
+
+        // do a search by name returning account info
+        return getUIFModelAndView(form);
+    }
+
+    private String createCompositeDefaultPersonName(String id) {
+        Account accountById = accountService.getFullAccount(id);
+        if (accountById == null) {
+            throw new IllegalStateException("Cannot find Account by ID = " + id);
+        }
+
+        PersonPostal personPostal = new PersonPostal();
+        PersonName personName = accountById.getDefaultPersonName();
+        return personPostal.CreateCompositePersonName(personName);
+    }
 }

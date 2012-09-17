@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.Constants;
+import com.sigmasys.kuali.ksa.model.SearchTypeValue;
 import com.sigmasys.kuali.ksa.model.UserPreference;
 import com.sigmasys.kuali.ksa.service.UserPreferenceService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
@@ -10,14 +11,14 @@ import com.sigmasys.kuali.ksa.util.LocaleUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.kuali.rice.core.api.util.ConcreteKeyValue;
+import org.kuali.rice.core.api.util.KeyValue;
+import org.kuali.rice.krad.keyvalues.KeyValuesBase;
 import org.kuali.rice.krad.web.form.UifFormBase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The base abstract form. It is supposed to be extended by KSA subclasses.
@@ -31,6 +32,24 @@ public abstract class AbstractViewModel extends UifFormBase {
 
     private static final String USER_PREF_ATTR_NAME = "userPreferencesSessionAttr";
     private static final String LOCALIZED_PARAMS_ATTR_NAME = "localizedParamsSessionAttr";
+
+    private static final KeyValuesBase searchTypeValuesFinder = new KeyValuesBase() {
+        /**
+         * This is an implementation of a key value finder, normally this would make a request to
+         * a database to obtain the necessary values.
+         *
+         * @see org.kuali.rice.krad.keyvalues.KeyValuesFinder#getKeyValues()
+         */
+        @Override
+        public List<KeyValue> getKeyValues() {
+            List<KeyValue> keyValues = new ArrayList<KeyValue>();
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACCOUNTS_CODE, SearchTypeValue.ACCOUNTS.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ALERT_FLAG_CODE, SearchTypeValue.ALERT_FLAG.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.MEMO_CODE, SearchTypeValue.MEMO.toString()));
+
+            return keyValues;
+        }
+    };
 
 
     protected ConfigService getConfigService() {
@@ -104,6 +123,18 @@ public abstract class AbstractViewModel extends UifFormBase {
         }
         logger.info("Localized string: key = " + key + ", value = " + value);
         return (value != null) ? value : "";
+    }
+
+    public KeyValuesBase getSearchTypeValuesFinder() {
+          return searchTypeValuesFinder;
+    }
+
+    public String getContext() {
+        HttpServletRequest request = RequestUtils.getThreadRequest();
+        if (request == null) {
+            throw new IllegalStateException("HttpServletRequest is null");
+        }
+        return request.getContextPath();
     }
 
 }
