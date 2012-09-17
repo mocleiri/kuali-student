@@ -39,7 +39,7 @@
                     </td>
 
                     <td class="leftTd" align="right">
-                        <a href="<%= request.getContextPath() %>/uif/biographicInfoVw?methodToCall=get&viewId=BiographicInfoView">
+                        <a href="<%= request.getContextPath() %>/uif/ksaStudentAccountsVw?methodToCall=get&viewId=KsaStudentAccountsView">
                             <img src="images/persona-student.png" alt="persona: student" width="140" height="140" border="0">
                         </a>
                     </td>
@@ -48,7 +48,7 @@
                         <span >Student</span>
                         </p>
                         <hr/>
-                        <p >&bull;  <a href="<%= request.getContextPath() %>/uif/biographicInfoVw?methodToCall=get&viewId=BiographicInfoView">
+                        <p >&bull;  <a href="<%= request.getContextPath() %>/uif/ksaStudentAccountsVw?methodToCall=get&viewId=KsaStudentAccountsView">
                             Select
                         </a><br>
                             &bull; <a href="media/persona-student.pdf">View detailed persona</a>

@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.BiographicInfoForm;
+import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
 import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
@@ -23,8 +23,8 @@ import java.util.List;
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
 @Controller
-@RequestMapping(value = "/biographicInfoVw")
-public class BiographicInfoController extends UifControllerBase {
+@RequestMapping(value = "/ksaStudentAccountsVw")
+public class KsaStudentAccountsController extends UifControllerBase {
 
    @Autowired
    private AccountService accountService;
@@ -33,8 +33,8 @@ public class BiographicInfoController extends UifControllerBase {
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
-   protected BiographicInfoForm createInitialForm(HttpServletRequest request) {
-      BiographicInfoForm form = new BiographicInfoForm();
+   protected KsaStudentAccountsForm createInitialForm(HttpServletRequest request) {
+      KsaStudentAccountsForm form = new KsaStudentAccountsForm();
 
       return form;
    }
@@ -48,7 +48,7 @@ public class BiographicInfoController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") BiographicInfoForm form, BindingResult result,
+   public ModelAndView get(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
       // do get stuff...
@@ -89,7 +89,7 @@ public class BiographicInfoController extends UifControllerBase {
     */
 
    @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") BiographicInfoForm form, BindingResult result,
+   public ModelAndView start(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
       // populate model for testing
@@ -108,7 +108,7 @@ public class BiographicInfoController extends UifControllerBase {
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
    @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") BiographicInfoForm form, BindingResult result,
+   public ModelAndView submit(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
 
@@ -126,7 +126,7 @@ public class BiographicInfoController extends UifControllerBase {
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
    @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") BiographicInfoForm form, BindingResult result,
+   public ModelAndView save(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
       // do save stuff...
@@ -143,7 +143,7 @@ public class BiographicInfoController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") BiographicInfoForm form, BindingResult result,
+   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do cancel stuff...
       return getUIFModelAndView(form);
@@ -158,7 +158,7 @@ public class BiographicInfoController extends UifControllerBase {
     * @return
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") BiographicInfoForm form, BindingResult result,
+   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);
@@ -175,8 +175,8 @@ public class BiographicInfoController extends UifControllerBase {
     * @param response
     * @return
     */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchAccounts")
-   public ModelAndView searchByName(@ModelAttribute("KualiForm") BiographicInfoForm form, BindingResult result,
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByType")
+   public ModelAndView searchByName(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                                     HttpServletRequest request, HttpServletResponse response) {
 
       // we do not have a query by name or partial name via last name or contains yet
@@ -184,6 +184,7 @@ public class BiographicInfoController extends UifControllerBase {
       // otherwise the lit contains records and a compsite person name and postal address
 
       String personSearchByAccount = form.getBioSearchByAccount();
+      String searchType = form.getSearchType();
 
       // query for all accounts
 

@@ -7,9 +7,12 @@ import java.util.List;
 /**
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
-public class BiographicInfoForm extends AbstractViewModel {
-
+public class KsaStudentAccountsForm extends AbstractViewModel {
    private static final long serialVersionUID = -7525378097732916418L;
+
+   private String searchValue;
+   private String searchType;
+   private String searchKV;
 
    // use this object as a query argument for matching transactions by student name
    private String bioSearchByAccount;
@@ -46,6 +49,38 @@ public class BiographicInfoForm extends AbstractViewModel {
    /*
       Get/Set methods
     */
+
+   /*
+      header input/output
+    */
+   public String getSearchValue() {
+      return searchValue;
+   }
+
+   public void setSearchValue(String searchValue) {
+      this.searchValue = searchValue;
+   }
+
+   public String getSearchType() {
+      return searchType;
+   }
+
+   public void setSearchType(String searchType) {
+      this.searchType = searchType;
+   }
+
+   public String getSearchKV() {
+      return searchKV;
+   }
+
+   public void setSearchKV(String searchKV) {
+      this.searchKV = searchKV;
+   }
+
+   /*
+      Form values
+    */
+
 
    public String getBioSearchByAccount() {
       return bioSearchByAccount;
