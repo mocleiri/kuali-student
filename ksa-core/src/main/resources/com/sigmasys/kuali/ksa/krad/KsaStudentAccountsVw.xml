@@ -27,7 +27,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaStudentAccountsView" parent="Uif-KSAFormView" p:footer.render="false">
+    <bean id="KsaStudentAccountsView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="KSA View"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm"/>
         <property name="entryPageId" value="HomePage"/>

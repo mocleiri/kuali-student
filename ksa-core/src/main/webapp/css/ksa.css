@@ -56,6 +56,12 @@
     background-image: url(../images/icons/sonar-icon.png) !important;
 }
 
+.ksa-search-box {
+    width:400px;
+    float:right;
+    clear:right;
+}
+
 .sample-box {
     float: left;
     width: 135px;

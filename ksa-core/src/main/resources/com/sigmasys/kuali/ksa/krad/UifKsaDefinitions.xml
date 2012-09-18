@@ -27,7 +27,7 @@
                 <value>uif-menuNavigationGroup</value>
             </list>
         </property>
-        <property name="navigationType" value="VERTICAL_MENU"/>
+        <property name="navigationType" value="TAB_MENU"/>
     </bean>
 
     <bean id="Uif-KsaMenuNavigationGroup" parent="Uif-KsaMenuNavigationGroupBase">
@@ -61,12 +61,12 @@
         </property>
     </bean>
 
-    <bean id="Uif-KSAFormView" parent="Uif-FormView" abstract="true">
+    <bean id="Uif-KsaFormView" parent="Uif-FormView" abstract="true">
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="applicationHeader">
             <bean parent="Uif-HeaderBase" p:id="ksa-banner">
                 <property name="upperGroup">
-                    <bean parent="Uif-HeaderUpperGroup" p:id="ksa-upper"
+                    <bean parent="Uif-HeaderUpperGroup" p:id="ksa-header-upper-group"
                           p:layoutManager.itemStyleClasses="boxLayoutHorizontalItem-tight">
                         <property name="items">
                             <list>
@@ -76,7 +76,8 @@
                                 <bean parent="Uif-InputField" p:propertyName="searchType" p:label="Search Type"
                                       p:labelPlacement="LEFT"
                                       p:width="auto"
-                                      p:required="true">
+                                      p:required="false"
+                                      p:align="right">
                                     <property name="bindingInfo.bindToForm" value="true"/>
                                     <property name="control">
                                         <bean parent="Uif-DropdownControl"/>
@@ -86,13 +87,15 @@
                                 <!-- p:fieldLabel.styleClasses="labelTop" -->
                                 <bean parent="Uif-InputField" p:label="Search" p:propertyName="searchValue"
                                       p:labelPlacement="LEFT"
-                                      p:fieldLabel.renderColon="true">
+                                      p:fieldLabel.renderColon="true"
+                                      p:align="right">
                                     <property name="control">
                                         <bean parent="Uif-TextControl" p:size="15"/>
                                     </property>
                                 </bean>
                                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByType"
-                                      p:actionLabel="Search">
+                                      p:actionLabel="Search"
+                                      p:align="right">
                                     <!--<property name="actionImage">
                                         <bean parent="Uif-ImageField"
                                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
@@ -104,8 +107,27 @@
                 </property>
             </bean>
         </property>
+        <property name="header">
+            <bean parent="Uif-HeaderBase" p:id="ksa-view-header">
+                <property name="items">
+                    <list>
+                        <ref bean="Uif-KsaPageNavigation"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
         <property name="navigation">
             <ref bean="Uif-KsaMenuNavigationGroup"/>
+        </property>
+    </bean>
+
+    <bean id="Uif-KsaPageNavigation" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL" abstract="true">
+        <property name="disclosure.render" value="false"/>
+        <property name="items">
+            <list>
+               <!-- The navigation menu should be populated in the subclasses -->
+            </list>
         </property>
     </bean>
 

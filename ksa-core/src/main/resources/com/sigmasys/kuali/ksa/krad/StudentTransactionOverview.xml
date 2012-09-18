@@ -8,13 +8,34 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="StudentTransactionOverview" parent="Uif-FormView" p:footer.render="false">
+    <bean id="StudentTransactionOverview" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Student Transaction Overview"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransOvrForm"/>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
-        <property name="navigation">
-            <ref bean="KSATransOvrVwNav"/>
+        <property name="header">
+            <bean parent="Uif-HeaderBase" p:id="ksa-student-transaction-view-header">
+                <property name="items">
+                    <list>
+                        <bean parent="Uif-KsaPageNavigation">
+                            <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Home"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdministrationPage"
+                                  p:actionLabel="Administration"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReportingPage" p:actionLabel="Reporting"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReconciliationPage"
+                                  p:actionLabel="Reconciliation"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CollectionsPage"
+                                  p:actionLabel="Collections"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BatchTransactionsPage"
+                                  p:actionLabel="Batch Transactions"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="PaymentPlansPage"
+                                  p:actionLabel="Payment Plans"/>
+                            <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SettingsPage" p:actionLabel="Settings"/>
+                        </bean>
+                    </list>
+                </property>
+            </bean>
         </property>
         <property name="items">
             <list>
