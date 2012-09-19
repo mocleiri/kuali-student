@@ -62,6 +62,11 @@
     </bean>
 
     <bean id="Uif-KsaFormView" parent="Uif-FormView" abstract="true">
+        <property name="additionalCssFiles">
+            <list>
+                <value>css/ksa.css</value>
+            </list>
+        </property>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="applicationHeader">
             <bean parent="Uif-HeaderBase" p:id="ksa-banner">
@@ -76,8 +81,7 @@
                                 <bean parent="Uif-InputField" p:propertyName="searchType" p:label="Search Type"
                                       p:labelPlacement="LEFT"
                                       p:width="auto"
-                                      p:required="false"
-                                      p:align="right">
+                                      p:required="false">
                                     <property name="bindingInfo.bindToForm" value="true"/>
                                     <property name="control">
                                         <bean parent="Uif-DropdownControl"/>
@@ -87,19 +91,13 @@
                                 <!-- p:fieldLabel.styleClasses="labelTop" -->
                                 <bean parent="Uif-InputField" p:label="Search" p:propertyName="searchValue"
                                       p:labelPlacement="LEFT"
-                                      p:fieldLabel.renderColon="true"
-                                      p:align="right">
+                                      p:fieldLabel.renderColon="true">
                                     <property name="control">
                                         <bean parent="Uif-TextControl" p:size="15"/>
                                     </property>
                                 </bean>
                                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByType"
-                                      p:actionLabel="Search"
-                                      p:align="right">
-                                    <!--<property name="actionImage">
-                                        <bean parent="Uif-ImageField"
-                                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}searchicon.gif"/>
-                                    </property>-->
+                                      p:actionLabel="Search">
                                 </bean>
                             </list>
                         </property>
@@ -111,7 +109,7 @@
             <bean parent="Uif-HeaderBase" p:id="ksa-view-header">
                 <property name="items">
                     <list>
-                        <ref bean="Uif-KsaPageNavigation"/>
+                        <bean parent="Uif-KsaPageNavigation"/>
                     </list>
                 </property>
             </bean>
@@ -126,7 +124,7 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-               <!-- The navigation menu should be populated in the subclasses -->
+                <!-- The navigation menu should be populated in the subclasses -->
             </list>
         </property>
     </bean>
