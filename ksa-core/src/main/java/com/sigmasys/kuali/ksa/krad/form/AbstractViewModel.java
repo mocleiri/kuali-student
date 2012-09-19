@@ -33,6 +33,9 @@ public abstract class AbstractViewModel extends UifFormBase {
     private static final String USER_PREF_ATTR_NAME = "userPreferencesSessionAttr";
     private static final String LOCALIZED_PARAMS_ATTR_NAME = "localizedParamsSessionAttr";
 
+   private String searchValue;
+   private String searchType;
+
     private static final KeyValuesBase searchTypeValuesFinder = new KeyValuesBase() {
         /**
          * This is an implementation of a key value finder, normally this would make a request to
@@ -137,4 +140,19 @@ public abstract class AbstractViewModel extends UifFormBase {
         return request.getContextPath();
     }
 
+   public String getSearchValue() {
+      return searchValue;
+   }
+
+   public void setSearchValue(String searchValue) {
+      this.searchValue = searchValue;
+   }
+
+   public String getSearchType() {
+      return searchType;
+   }
+
+   public void setSearchType(String searchType) {
+      this.searchType = searchType;
+   }
 }

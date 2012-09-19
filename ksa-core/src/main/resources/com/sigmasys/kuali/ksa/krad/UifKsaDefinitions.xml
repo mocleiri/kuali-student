@@ -30,7 +30,7 @@
         <property name="navigationType" value="TAB_MENU"/>
     </bean>
 
-    <bean id="Uif-KsaMenuNavigationGroup" parent="Uif-KsaMenuNavigationGroupBase">
+    <bean id="Uif-KsaTabNavigationGroup" parent="Uif-KsaMenuNavigationGroupBase">
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Search" p:target="_self"
@@ -115,7 +115,7 @@
             </bean>
         </property>
         <property name="navigation">
-            <ref bean="Uif-KsaMenuNavigationGroup"/>
+            <ref bean="Uif-KsaTabNavigationGroup"/>
         </property>
     </bean>
 

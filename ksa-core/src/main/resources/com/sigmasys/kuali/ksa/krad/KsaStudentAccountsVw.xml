@@ -31,12 +31,33 @@
         <property name="title" value="KSA View"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm"/>
         <property name="entryPageId" value="HomePage"/>
+        <property name="header">
+            <bean parent="Uif-HeaderBase" p:id="ksa-student-account-view-header">
+                <property name="items">
+                    <list>
+                        <bean parent="Uif-KsaPageNavigation">
+                            <property name="items">
+                                <list>
+                                    <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+                                    <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage"
+                                          p:actionLabel="Home"/>
+                                    <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SearchResultsPage"
+                                          p:actionLabel="Search Results"/>
+                                    <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountOVTransactionsPage"
+                                          p:actionLabel="Account Overview"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+        </property>
         <property name="items">
             <list>
                 <bean parent="Uif-Page" p:id="HomePage" p:title="Home">
                     <property name="items">
                         <list>
-                            <ref bean="homeQuickOptions"/>
+                            <!--<ref bean="homeQuickOptions"/>-->
                         </list>
                     </property>
                 </bean>
@@ -92,6 +113,7 @@
             </list>
         </property>
     </bean>
+
 
     <!--
     ********************************************************************************************************************

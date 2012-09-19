@@ -13,8 +13,6 @@ import java.util.List;
 public class KsaStudentAccountsForm extends AbstractViewModel {
    private static final long serialVersionUID = -7525378097732916418L;
 
-   private String searchValue;
-   private String searchType;
 
    // use this object as a query argument for matching transactions by student name
    private String bioSearchByAccount;
@@ -164,26 +162,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
    /*
       Get/Set methods
     */
-
-   /*
-      header input/output
-    */
-   public String getSearchValue() {
-      return searchValue;
-   }
-
-   public void setSearchValue(String searchValue) {
-      this.searchValue = searchValue;
-   }
-
-   public String getSearchType() {
-      return searchType;
-   }
-
-   public void setSearchType(String searchType) {
-      this.searchType = searchType;
-   }
-
 
    /*
       Form values

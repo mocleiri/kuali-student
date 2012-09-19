@@ -184,14 +184,14 @@
                       p:width="auto" p:propertyName="studentLookupByName" p:required="true">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="25" p:maxLength="100">
-                            <!--
-                                                        <property name="options">
-                                                            <list>
-                                                                <bean parent="Uif-KeyLabelPair" p:key="showTxNameMatches"
-                                                                      p:value="Show Transaction Match for search criteria" />
-                                                            </list>
-                                                        </property>
-                            -->
+<!--
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="showTxNameMatches"
+                                          p:value="Show Transaction Match for search criteria" />
+                                </list>
+                            </property>
+-->
                         </bean>
                     </property>
                 </bean>
@@ -350,14 +350,14 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <!--
-                                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
-                                    <property name="bindingInfo.bindToForm" value="true"/>
-                                    <property name="control">
-                                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
-                                    </property>
-                                </bean>
-                -->
+<!--
+                <bean parent="Uif-InputField" p:propertyName="charge.account" p:label="Account" p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="45" p:watermarkText="XXXXYYYYC"/>
+                    </property>
+                </bean>
+-->
                 <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate" p:label="Effective Date"
                       p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
