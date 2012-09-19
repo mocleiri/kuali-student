@@ -54,6 +54,41 @@
                         </list>
                     </property>
                 </bean>
+                <!-- transactions overview for an account roll-up and ungroupded list -->
+                <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Quick View">
+                    <property name="items">
+                        <list>
+                            <ref bean="accountOVTransactionsSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <!-- transaction grouped by roll-up type -->
+                <!-- transaction details for a specific roll-up type -->
+                <bean parent="Uif-Page" p:id="AccountOVTransactionsRollupDetailPage" p:title="Quick View">
+                    <property name="items">
+                        <list>
+                            <ref bean="accountOVTransactionsByRollupSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <!-- Any transaction details -->
+                <bean parent="Uif-Page" p:id="AccountOVTransactionDetailPage" p:title="Quick View">
+                    <property name="items">
+                        <list>
+                            <ref bean="accountOVTransactionDetailSection"/>
+                            <ref bean="auditInformationSection"/>
+                            <ref bean="accountOVTransactionsControlSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <!-- transaction allocation -->
+                <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationPage" p:title="Quick View">
+                    <property name="items">
+                        <list>
+                            <ref bean="accountOVTransactionAllocationSection"/>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
@@ -144,6 +179,8 @@
     ********************************************************************************************************************
                                              Student Summary section
     A group of groups that can spawn account, bio, alerts/flags, aging of accounts, memos
+    This is the Quick View where a combination of vertical and horizontal box groups would display
+    and get you to the Biographic. Alerts/Flags, Accounts Overview or Memos - other sub pages as well
     ********************************************************************************************************************
     -->
     <bean id="studentSummarySection" parent="Uif-Disclosure-HorizontalBoxSection">
@@ -242,6 +279,564 @@
         </property>
     </bean>
 
+
+    <!--
+    ********************************************************************************************************************
+                                   Account Overview section
+    A page section of roll-up and ungrouped transactions using a table and a summary for each
+    ********************************************************************************************************************
+    -->
+    <bean id="accountOVTransactionsSection" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="@{selectedPersonName}"
+          p:instructionalText="The following table is a list of Roll-ups associated with the selected account">
+        <property name="disclosure.render" value="false" />
+        <property name="items">
+            <list>
+                <!-- TODO Add pagination -->
+                <ref bean="rollUpList" />
+                <ref bean="rollUpSummary" />
+                <ref bean="ungroupedTransactionsList" />
+                <ref bean="ungroupedTransactionsSummary" />
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Roll-up Transactions Table section
+    A table of roll-up transactions
+    ********************************************************************************************************************
+    -->
+    <bean id="rollUpList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="3" p:title=""
+          p:instructionalText="">
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Transaction"/>
+        <property name="propertyName" value="rollUpList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollUpType" />
+                <bean parent="Uif-InputField" p:label="Balance" p:propertyName="rollUpBalance" p:align="right"/>
+                <bean parent="Uif-LinkField" p:linkText="View Transactions" p:target="_self"
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Roll-up Transactions Summary section
+    A summary of roll-up transactions
+    ********************************************************************************************************************
+    -->
+    <bean id="rollUpSummary" parent="Uif-Disclosure-VerticalBoxSection"
+          p:title="" p:instructionalText="Summary of All Roll-ups for Selected Period">
+        <property name="readOnly" value="true"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="rollUpTotalDebit" p:label="Total Debits"
+                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="rollUpTotalCredit" p:label="Total Credits"
+                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--
+    ********************************************************************************************************************
+                                   Ungrouped Transactions Table section
+    A table of ungrouped transactions
+    ********************************************************************************************************************
+    -->
+    <bean id="ungroupedTransactionsList" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="5" p:title=""
+          p:instructionalText="The following table is a list of Transactions not included in a Roll-up">
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Transaction"/>
+        <property name="propertyName" value="unGroupedList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Transaction Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="statementText" p:label="Statement Description" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Balance" p:propertyName="unGroupedBalance" p:align="right"/>
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Ungrouped Transactions Summary section
+    A group summary of totals for debit and credit
+    ********************************************************************************************************************
+    -->
+    <bean id="ungroupedTransactionsSummary" parent="Uif-Disclosure-VerticalBoxSection"
+          p:title="Ungrouped Transactions"
+          p:instructionalText="The following is a list of Transactions not included in a Roll-up">
+        <property name="readOnly" value="true"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="unGroupedTotalDebit" p:label="Total Debits"
+                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="unGroupedTotalCredit" p:label="Total Credits"
+                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--
+    ********************************************************************************************************************
+                                   Account Overview by Roll-up type section
+    A detail of any roll-up or ungrouped transaction. These are individual fields
+    ********************************************************************************************************************
+    -->
+    <bean id="accountOVTransactionsByRollupSection"
+          parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5"
+          p:title="@{selectedPersonName}"
+          p:instructionalText="The following table is a list of transactions categorized in the @{selectedRollupType} Roll-up">
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Transaction"/>
+        <property name="propertyName" value="byRollUpList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Transaction Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="statementText" p:label="Description" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Balance" p:propertyName="rollUpBalance" p:align="right"/>
+                <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Account Overview Detail section
+    A detail of any roll-up or ungrouped transaction. These are individual fields
+    Title is set to the roll-up type or the ungrouped transaction label
+    ********************************************************************************************************************
+    -->
+    <bean id="accountOVTransactionDetailSection" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="@{selectedPersonName}"
+          p:instructionalText="@{transactionType} transaction detail">
+        <property name="disclosure.render" value="false" />
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="id" p:label="ID" p:maxLength="19"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="accountId" p:label="Account ID" p:maxLength="45"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="46"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="rollUpDesc" p:label="Roll-up" p:maxLength="200"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="201"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="rollUpTag" p:label="Tags" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="rolUpPriority" p:label="Priority" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+
+                <!-- Dates -->
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="recognitionDate" p:label="Recognition Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="expirationDate" p:label="Expiration Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="clearDate" p:label="Clear Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-InputField" p:propertyName="type" p:label="Type" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="statementText" p:label="Statement Text" p:maxLength="200"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="201"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="typeId" p:label="Type ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="typeSubCode" p:label="Type Sub-Code" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+
+                <!-- Amount fields -->
+                <bean parent="Uif-InputField" p:propertyName="amount" p:label="Amount" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isInternal" p:label="Internal"
+                      p:defaultValue="true" p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="amountAllocated" p:label="Amount Allocated" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="amountAllocatedLocked" p:label="Amount Allocated (and locked)" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="nativeAmountCurr" p:label="Native Amount" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+
+                <!-- Document and Memo -->
+                <bean parent="Uif-InputField" p:propertyName="documentId" p:label="Document ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="previousMemoId" p:label="Previous Memo ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="nextMemoId" p:label="Next Memo ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo" p:label="Memo" p:maxLength="200"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="201"/>
+                    </property>
+                </bean>
+
+                <!-- Deferred, Rules Payment and General Ledger -->
+                <bean parent="Uif-InputField" p:propertyName="deferredId" p:label="Deferred ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isRefundable" p:label="Refundable"
+                      p:defaultValue="true" p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="refundRule" p:label="Refund Rule" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isPaymentBilling" p:label="Payment Billing"
+                      p:defaultValue="true" p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="derivativeTransacionId"
+                      p:label="Derivative Transaction ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <!-- General Ledger -->
+                <bean parent="Uif-InputField" p:propertyName="generalLedgerTypeId" p:label="Type ID" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isEntryGenerated" p:label="Entry Generated"
+                      p:defaultValue="false" p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isOverRidden" p:label="Overridden"
+                      p:defaultValue="false" p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="originationDate" p:label="Origination Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Ledger Date" p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Audit Information section
+    Audit information for the transaction detail
+    ********************************************************************************************************************
+    -->
+    <bean id="auditInformationSection" parent="Uif-Disclosure-VerticalBoxSection"
+          p:title="Audit Information"
+          p:instructionalText="">
+        <property name="readOnly" value="true"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="responsibleEntity" p:label="Responsible Entity"
+                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="unGroupedTotalCredit" p:label="Total Credits"
+                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Transaction Detail controls section
+    Transaction detail controls
+    ********************************************************************************************************************
+    -->
+    <bean id="accountOVTransactionsControlSection" parent="Uif-HorizontalBoxSection">
+        <property name="title" value=""/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="done"
+                      p:actionLabel="Done">
+                    <!--<property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>-->
+                </bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="viewAllocations"
+                      p:actionLabel="View Allocations">
+                    <!--<property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>-->
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Account Overview Allocation section
+    Provides the detail for allocations of a student
+    If the user checks to lock an allocation then force a memo entry (no cancel) with activityName
+    like "Memo Creation for allocation 0945750203"
+    ********************************************************************************************************************
+    -->
+    <bean id="accountOVTransactionAllocationSection" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL"
+          p:title="@{selectedPersonName}"
+          p:instructionalText="@{transactionType} allocation Detail">
+        <property name="disclosure.render" value="false" />
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="allocationId" p:label="Allocation ID" p:maxLength="16" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="payerTransactionId" p:label="Payer Transaction ID" p:maxLength="16" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="paidTransactionId" p:label="Paid Transaction ID" p:maxLength="16" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="allocationAccountId" p:label="Account ID" p:maxLength="16" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isAllocationLocked" p:label="Locked"
+                      p:defaultValue="true" p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="allocationAmount" p:label="Amount" p:maxLength="16"
+                      p:fieldLabel.renderColon="true" >
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="clearAllocations"
+                      p:actionLabel="Clear Allocation">
+                    <!--<property name="actionImage">
+                        <bean parent="Uif-ImageField"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>-->
+                </bean>
+            </list>
+        </property>
+    </bean>
 
     <!-- nothing beyond here for now -->
 
