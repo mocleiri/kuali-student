@@ -33,8 +33,8 @@ public abstract class AbstractViewModel extends UifFormBase {
     private static final String USER_PREF_ATTR_NAME = "userPreferencesSessionAttr";
     private static final String LOCALIZED_PARAMS_ATTR_NAME = "localizedParamsSessionAttr";
 
-   private String searchValue;
-   private String searchType;
+    private String searchType;
+    private String searchValue;
 
     private static final KeyValuesBase searchTypeValuesFinder = new KeyValuesBase() {
         /**
@@ -45,12 +45,11 @@ public abstract class AbstractViewModel extends UifFormBase {
          */
         @Override
         public List<KeyValue> getKeyValues() {
-            List<KeyValue> keyValues = new ArrayList<KeyValue>();
+            List<KeyValue> keyValues = new ArrayList<KeyValue>(3);
             keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACCOUNTS_CODE, SearchTypeValue.ACCOUNTS.toString()));
             keyValues.add(new ConcreteKeyValue(SearchTypeValue.ALERT_FLAG_CODE, SearchTypeValue.ALERT_FLAG.toString()));
             keyValues.add(new ConcreteKeyValue(SearchTypeValue.MEMO_CODE, SearchTypeValue.MEMO.toString()));
-
-            return keyValues;
+            return Collections.unmodifiableList(keyValues);
         }
     };
 
@@ -129,7 +128,7 @@ public abstract class AbstractViewModel extends UifFormBase {
     }
 
     public KeyValuesBase getSearchTypeValuesFinder() {
-          return searchTypeValuesFinder;
+        return searchTypeValuesFinder;
     }
 
     public String getContext() {
@@ -140,19 +139,19 @@ public abstract class AbstractViewModel extends UifFormBase {
         return request.getContextPath();
     }
 
-   public String getSearchValue() {
-      return searchValue;
-   }
+    public String getSearchValue() {
+        return searchValue;
+    }
 
-   public void setSearchValue(String searchValue) {
-      this.searchValue = searchValue;
-   }
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
+    }
 
-   public String getSearchType() {
-      return searchType;
-   }
+    public String getSearchType() {
+        return searchType;
+    }
 
-   public void setSearchType(String searchType) {
-      this.searchType = searchType;
-   }
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
+    }
 }
