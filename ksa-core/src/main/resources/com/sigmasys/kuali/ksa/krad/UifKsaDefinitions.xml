@@ -12,7 +12,7 @@
     <bean id="Uif-KsaNavigationGroupBase" abstract="true"
           class="com.sigmasys.kuali.ksa.krad.util.LinkNavigationGroup"
           scope="prototype">
-        <property name="template" value="/krad/WEB-INF/ftl/components/group/navigationGroup.ftl"/>
+        <property name="template" value="/WEB-INF/ftl/navigationGroup.ftl"/>
         <property name="templateName" value="uif_navigationGroup"/>
         <property name="cssClasses">
             <list>
@@ -27,41 +27,22 @@
                 <value>uif-menuNavigationGroup</value>
             </list>
         </property>
-        <property name="navigationType" value="TAB_MENU"/>
+        <property name="navigationType" value="VERTICAL_MENU"/>
     </bean>
 
-    <bean id="Uif-KsaTabNavigationGroup" parent="Uif-KsaMenuNavigationGroupBase">
+    <bean id="Uif-KsaPageNavigation" parent="Uif-KsaMenuNavigationGroupBase" abstract="true" scope="prototype">
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Search" p:target="_self"
-                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=SearchResultsPage"/>
-                <bean parent="Uif-Link" p:linkText="Transactions for a Person" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
-                <bean parent="Uif-Link" p:linkText="Currency Type" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
-                <bean parent="Uif-Link" p:linkText="Activity" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page 1"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page 2"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page ..."/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page N"/>
             </list>
-            <!--list>
-                <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Home"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdministrationPage"
-                      p:actionLabel="Administration"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReportingPage" p:actionLabel="Reporting"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ReconciliationPage"
-                      p:actionLabel="Reconciliation"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CollectionsPage"
-                      p:actionLabel="Collections"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BatchTransactionsPage"
-                      p:actionLabel="Batch Transactions"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="PaymentPlansPage"
-                      p:actionLabel="Payment Plans"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SettingsPage" p:actionLabel="Settings"/>
-            </list-->
         </property>
     </bean>
 
-    <bean id="Uif-KsaFormView" parent="Uif-FormView" abstract="true">
+    <bean id="Uif-KsaFormView" parent="Uif-FormView" abstract="true" scope="prototype">
+        <property name="template" value="/WEB-INF/ftl/view.ftl"/>
         <property name="additionalCssFiles">
             <list>
                 <value>css/ksa.css</value>
@@ -106,25 +87,38 @@
             </bean>
         </property>
         <property name="header">
-            <bean parent="Uif-HeaderBase" p:id="ksa-view-header">
-                <property name="items">
-                    <list>
-                        <bean parent="Uif-KsaPageNavigation"/>
-                    </list>
+            <bean parent="Uif-HeaderBase">
+                <property name="upperGroup">
+                    <ref bean="Uif-KsaViewNavigation"/>
                 </property>
             </bean>
         </property>
         <property name="navigation">
-            <ref bean="Uif-KsaTabNavigationGroup"/>
+            <bean parent="Uif-KsaPageNavigation"/>
         </property>
     </bean>
 
-    <bean id="Uif-KsaPageNavigation" parent="Uif-VerticalBoxSection"
-          p:layoutManager.orientation="VERTICAL" abstract="true">
-        <property name="disclosure.render" value="false"/>
+    <bean id="Uif-KsaViewNavigation" parent="Uif-KsaNavigationGroupBase" scope="prototype">
+        <property name="navigationType" value="TAB_MENU"/>
+        <property name="cssClasses">
+            <list merge="true">
+                <value>uif-tabNavigationGroup</value>
+            </list>
+        </property>
         <property name="items">
             <list>
-                <!-- The navigation menu should be populated in the subclasses -->
+                <bean parent="Uif-Link" p:linkText="Home" p:target="_self"
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=SearchResultsPage"/>
+                <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
+                <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
+                <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
+                                     p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
+                                                     p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
             </list>
         </property>
     </bean>
