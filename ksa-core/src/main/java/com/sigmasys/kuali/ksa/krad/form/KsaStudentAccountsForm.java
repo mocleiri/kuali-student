@@ -11,6 +11,7 @@ import java.util.List;
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
 public class KsaStudentAccountsForm extends AbstractViewModel {
+
    private static final long serialVersionUID = -7525378097732916418L;
 
 

@@ -34,9 +34,7 @@ public class KsaStudentAccountsController extends UifControllerBase {
      */
     @Override
     protected KsaStudentAccountsForm createInitialForm(HttpServletRequest request) {
-        KsaStudentAccountsForm form = new KsaStudentAccountsForm();
-
-        return form;
+        return new KsaStudentAccountsForm();
     }
 
     /**
