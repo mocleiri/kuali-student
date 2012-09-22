@@ -9,6 +9,31 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <!-- URL mapping for the header search -->
+    <bean name="searchMapping" class="com.sigmasys.kuali.ksa.model.SearchMappingBean">
+        <!-- Map of "searchType" <-> "actionUrl" -->
+        <property name="mapping">
+            <map>
+                <entry key="ACCOUNTS" value="/uif/ksaStudentAccountsVw?methodToCall=searchByName&amp;viewId=KsaStudentAccountsView"/>
+                <entry key="ALERT_FLAG" value=""/>
+                <entry key="MEMO" value=""/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Breadcrumbs and History -->
+    <bean id="Uif-Breadcrumbs" parent="Uif-Breadcrumbs-parentBean">
+        <property name="homewardPathList">
+            <list>
+                <bean parent="Uif-HistoryEntry" p:title="Home" p:url="../index.jsp"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="Uif-KsaTheme" parent="Uif-KradTheme">
+       <!-- Additional CSS and JS files can be added here -->
+    </bean>
+
     <bean id="Uif-KsaNavigationGroupBase" abstract="true"
           class="com.sigmasys.kuali.ksa.krad.util.LinkNavigationGroup"
           scope="prototype">

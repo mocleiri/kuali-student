@@ -215,7 +215,7 @@ public class CoreFilter implements Filter {
             chain.doFilter(request, response);
 
         } catch (Throwable t) {
-            logger.error("Error occured while serving HTTP request: " + t.getMessage(), t);
+            logger.error("Error occurred while serving HTTP request: " + t.getMessage(), t);
         } finally {
             RequestUtils.setThreadResponse(null);
         }

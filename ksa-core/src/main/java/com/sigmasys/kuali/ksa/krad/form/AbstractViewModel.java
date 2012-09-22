@@ -46,9 +46,9 @@ public abstract class AbstractViewModel extends UifFormBase {
         @Override
         public List<KeyValue> getKeyValues() {
             List<KeyValue> keyValues = new ArrayList<KeyValue>(3);
-            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACCOUNTS_CODE, SearchTypeValue.ACCOUNTS.toString()));
-            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ALERT_FLAG_CODE, SearchTypeValue.ALERT_FLAG.toString()));
-            keyValues.add(new ConcreteKeyValue(SearchTypeValue.MEMO_CODE, SearchTypeValue.MEMO.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACCOUNTS.name(), SearchTypeValue.ACCOUNTS.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ALERT_FLAG.name(), SearchTypeValue.ALERT_FLAG.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.MEMO.name(), SearchTypeValue.MEMO.toString()));
             return Collections.unmodifiableList(keyValues);
         }
     };

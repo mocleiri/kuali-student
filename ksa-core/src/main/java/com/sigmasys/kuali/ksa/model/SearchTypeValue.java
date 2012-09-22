@@ -6,23 +6,9 @@ package com.sigmasys.kuali.ksa.model;
 public enum SearchTypeValue {
 
    // short cut for the search type key which is the key_code
-   ACCOUNTS(SearchTypeValue.ACCOUNTS_CODE),
-   ALERT_FLAG(SearchTypeValue.ALERT_FLAG_CODE),
-   MEMO(SearchTypeValue.MEMO_CODE);
-
-   public static final String ACCOUNTS_CODE = "AO";
-   public static final String ALERT_FLAG_CODE = "AF";
-   public static final String MEMO_CODE = "MO";
-
-   private String code;
-
-   private SearchTypeValue(String code) {
-      this.code = code;
-   }
-
-   public String getCode() {
-      return code;
-   }
+   ACCOUNTS,
+   ALERT_FLAG,
+   MEMO;
 
    /*
       These are the values
