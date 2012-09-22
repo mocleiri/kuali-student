@@ -67,6 +67,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
         Query query = em.createQuery("select t from " + entityType.getName() + " t " +
                 " left outer join fetch t.transactionType tt " +
+                " left outer join fetch t.generalLedgerType glt " +
                 " left outer join fetch t.account a " +
                 " left outer join fetch t.currency c " +
                 " left outer join fetch t.rollup r " +
@@ -82,6 +83,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     private <T extends Transaction> T getTransaction(Long id, Class<T> entityType) {
         Query query = em.createQuery("select t from " + entityType.getName() + " t " +
                 " left outer join fetch t.transactionType tt " +
+                " left outer join fetch t.generalLedgerType glt " +
                 " left outer join fetch t.account a " +
                 " left outer join fetch t.currency c " +
                 " left outer join fetch t.rollup r " +
@@ -630,13 +632,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             }
 
             // Getting the opposite GL operation for credit
-            String operationTypeValue = (GlOperationType.CREDIT == creditType.getUnallocatedGlOperation()) ?
-                    GlOperationType.DEBIT_CODE :
-                    GlOperationType.CREDIT_CODE;
+            GlOperationType operationType = (GlOperationType.CREDIT == creditType.getUnallocatedGlOperation()) ?
+                    GlOperationType.DEBIT :
+                    GlOperationType.CREDIT;
 
             // Creating GL transaction for credit
             GlTransaction creditGlTransaction = glService.createGlTransaction(creditTransaction.getId(),
-                    creditType.getUnallocatedGlAccount(), amount, operationTypeValue, isQueued);
+                    creditType.getUnallocatedGlAccount(), amount, operationType, isQueued);
 
 
             pair.setA(creditGlTransaction);
@@ -644,13 +646,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             GeneralLedgerType glType = debitTransaction.getGeneralLedgerType();
             if (glType != null) {
                 // Getting the opposite GL operation for debit
-                operationTypeValue = (GlOperationType.CREDIT == glType.getGlOperationOnCharge()) ?
-                        GlOperationType.DEBIT_CODE :
-                        GlOperationType.CREDIT_CODE;
+                operationType = (GlOperationType.CREDIT == glType.getGlOperationOnCharge()) ?
+                        GlOperationType.DEBIT :
+                        GlOperationType.CREDIT;
 
                 // Creating GL transaction for debit
                 GlTransaction debitGlTransaction = glService.createGlTransaction(debitTransaction.getId(),
-                        glType.getGlAccountId(), amount, operationTypeValue, isQueued);
+                        glType.getGlAccountId(), amount, operationType, isQueued);
                 pair.setB(debitGlTransaction);
             }
 
@@ -719,7 +721,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     @Transactional(readOnly = false)
-    public  List<GlTransaction> removeAllocations(Long transactionId) {
+    public List<GlTransaction> removeAllocations(Long transactionId) {
 
         Transaction transaction = getTransaction(transactionId);
         if (transaction == null) {
@@ -877,6 +879,85 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         return glTransactions;
+
+    }
+
+    private List<AbstractGlBreakdown> getGlBreakdowns(Transaction transaction) {
+        Query query = em.createQuery("select g from " +
+                (transaction.isGlOverridden() ? "GlBreakdownOverride" : "GlBreakdown") +
+                " g where " +
+                (transaction.isGlOverridden() ? "g.transaction.id" : "g.generalLedgerType.id") +
+                " = :id order by g.breakdown desc");
+        query.setParameter("id", transaction.isGlOverridden() ?
+                transaction.getId() : transaction.getGeneralLedgerType().getId());
+        return query.getResultList();
+    }
+
+    /**
+     * Moves a transaction from a pre-effective state to an effective state. Once a transaction is effective, its
+     * general ledger entries are created. In certain cases, a transaction might be moved to an effective state
+     * before its effective date, in which case, forceEffective is passed as true.
+     *
+     * @param transactionId  transaction ID
+     * @param forceEffective indicates whether it has to be forced
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void makeEffective(Long transactionId, boolean forceEffective) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Debit with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (transaction.isGlEntryGenerated() ||
+                (new Date().before(transaction.getEffectiveDate()) && !forceEffective)) {
+            logger.info("Cannot make transaction effective, ID = " + transaction);
+            return;
+        }
+
+        GeneralLedgerType glType = transaction.getGeneralLedgerType();
+
+        String glAccount;
+        GlOperationType glOperationType;
+        if (transaction.getTransactionType() instanceof CreditType) {
+            CreditType creditType = (CreditType) transaction.getTransactionType();
+            glAccount = creditType.getUnallocatedGlAccount();
+            glOperationType = creditType.getUnallocatedGlOperation();
+        } else {
+            glAccount = glType.getGlAccountId();
+            glOperationType = glType.getGlOperationOnCharge();
+        }
+
+        // Creating one GL transaction with the whole transaction amount
+        glService.createGlTransaction(transactionId, glAccount, transaction.getAmount(), glOperationType, true);
+
+        BigDecimal initialAmount = transaction.getAmount();
+        BigDecimal remainingAmount = initialAmount;
+        GlOperationType operationType = glType.getGlOperationOnCharge();
+        for (AbstractGlBreakdown glBreakdown : getGlBreakdowns(transaction)) {
+            BigDecimal percentage = glBreakdown.getBreakdown();
+            if (percentage.compareTo(BigDecimal.ZERO) > 0) {
+                BigDecimal amount = initialAmount.divide(new BigDecimal(100)).multiply(percentage);
+                glService.createGlTransaction(transactionId, glAccount, amount, operationType, true);
+                remainingAmount = remainingAmount.subtract(amount);
+            } else {
+                // If the remaining amount == 0 then apply it to the new GL transaction and exit
+                // considering that GL breakdowns are sorted by percentage in descendant order :)
+                glService.createGlTransaction(transactionId, glAccount, remainingAmount, operationType, true);
+                break;
+            }
+        }
+
+        transaction.setGlEntryGenerated(true);
+
+        persistTransaction(transaction);
+
+
+        // TODO: ask Paul about parameters for creating GL transmission and 'Individual' GL mode!
+        //glService.prepareGlTransmission(fromDate, toDate, recognitionPeriod);
 
     }
 

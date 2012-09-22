@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 
 /**
- * The base class to allow subclasses to refer to Account ID without having to
+ * This abstract class can be used by subclasses to refer to Account ID without having to
  * retrieve the entire Account instance when using @Many-to-one annotation.
  *
  * @author Michael Ivanov

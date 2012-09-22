@@ -31,12 +31,12 @@ public interface GeneralLedgerService {
      * @param transactionId ID of the corresponding transaction
      * @param userId        General ledger account ID
      * @param amount        Transaction amount
-     * @param description   Transaction description
+     * @param operationType GL operation type
      * @param isQueued      Set status to Q unless isQueued is passed and is false, in which case, set status to W
      * @return new GL Transaction instance
      */
     @WebMethod(exclude = true)
-    GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount, String description,
+    GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount, GlOperationType operationType,
                                       boolean isQueued);
 
     /**
@@ -45,11 +45,11 @@ public interface GeneralLedgerService {
      * @param transactionId ID of the corresponding transaction
      * @param userId        General ledger account ID
      * @param amount        Transaction amount
-     * @param description   Transaction description
+     * @param operationType GL operation type
      * @return new GL Transaction instance
      */
     @WebMethod(exclude = true)
-    GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount, String description);
+    GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount, GlOperationType operationType);
 
 
     /**
@@ -85,5 +85,16 @@ public interface GeneralLedgerService {
      * @return true if one or more records have been updated, false - otherwise
      */
     boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate);
+
+    /**
+     * Prepares a transmission to the general ledger.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     *
+     * @param fromDate          start date
+     * @param toDate            end date
+     * @param recognitionPeriod recognition period
+     */
+    void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod);
 
 }

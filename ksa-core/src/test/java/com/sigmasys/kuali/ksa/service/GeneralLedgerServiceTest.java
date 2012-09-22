@@ -36,7 +36,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
     private GlTransaction createGlTransaction(String userId) {
         Transaction transaction = transactionService.createTransaction("1020", userId, new Date(), new BigDecimal(10e5));
-        return glService.createGlTransaction(transaction.getId(), userId, new BigDecimal(10e4), "Test GL transaction");
+        return glService.createGlTransaction(transaction.getId(), userId, new BigDecimal(10e4), GlOperationType.DEBIT);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
         Assert.notNull(glTransaction.getGlAccountId());
         Assert.hasLength(glTransaction.getDescription());
 
-        Assert.isTrue("Test GL transaction".equals(glTransaction.getDescription()));
+        Assert.isTrue(GlOperationType.DEBIT == glTransaction.getGlOperation());
 
     }
 

@@ -45,7 +45,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @param transactionId ID of the corresponding transaction
      * @param userId        General ledger account ID
      * @param amount        Transaction amount
-     * @param description   Transaction description
+     * @param operationType GL operation type
      * @param isQueued      Set status to Q unless isQueued is passed and is false, in which case, set status to W
      * @return new GL Transaction instance
      */
@@ -53,7 +53,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
-                                             String description, boolean isQueued) {
+                                             GlOperationType operationType, boolean isQueued) {
 
         Transaction transaction = em.find(Transaction.class, transactionId);
         if (transaction == null) {
@@ -66,7 +66,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         glTransaction.setDate(new Date());
         glTransaction.setAmount(amount);
         glTransaction.setGlAccountId(userId);
-        glTransaction.setDescription(description);
+        glTransaction.setGlOperation(operationType);
+        glTransaction.setDescription(operationType.toString());
         glTransaction.setTransactions(new HashSet<Transaction>(Arrays.asList(transaction)));
         glTransaction.setStatus(isQueued ? GlTransactionStatus.QUEUED : GlTransactionStatus.WAITING);
 
@@ -82,15 +83,15 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @param transactionId ID of the corresponding transaction
      * @param userId        General ledger account ID
      * @param amount        Transaction amount
-     * @param description   Transaction description
+     * @param operationType GL operation type
      * @return new GL Transaction instance
      */
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
-                                             String description) {
-        return createGlTransaction(transactionId, userId, amount, description, true);
+                                             GlOperationType operationType) {
+        return createGlTransaction(transactionId, userId, amount, operationType, true);
 
     }
 
@@ -251,6 +252,16 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
     }
 
+    /**
+     * Prepares a transmission to the general ledger.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     *
+     * @param fromDate start date
+     * @param toDate end date
+     * @param recognitionPeriod recognition period
+     */
+    @Override
     @Transactional(readOnly = false)
     public synchronized void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod) {
 

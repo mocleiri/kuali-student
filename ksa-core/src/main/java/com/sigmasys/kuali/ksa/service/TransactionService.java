@@ -340,6 +340,17 @@ public interface TransactionService {
 
 
     /**
+     * Moves a transaction from a pre-effective state to an effective state. Once a transaction is effective, its
+     * general ledger entries are created. In certain cases, a transaction might be moved to an effective state
+     * before its effective date, in which case, forceEffective is passed as true.
+     *
+     * @param transactionId transaction ID
+     * @param forceEffective indicates whether it has to be forced
+     */
+    void makeEffective(Long transactionId, boolean forceEffective);
+
+
+    /**
      * If the reverse method is called, the system will generate a negative
      * transaction for the type of the original transaction. A memo transaction
      * will be generated, and the transactions will be locked together. Subject

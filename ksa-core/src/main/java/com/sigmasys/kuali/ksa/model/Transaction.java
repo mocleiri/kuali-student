@@ -130,6 +130,11 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
      */
     private GeneralLedgerType generalLedgerType;
 
+    /**
+     * Indicates if debit has been overridden by GL
+     */
+    protected Boolean glOverridden;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -327,7 +332,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "GL_ENTRY_GENERATED")
     public Boolean isGlEntryGenerated() {
-        return glEntryGenerated;
+        return glEntryGenerated != null ? glEntryGenerated : false;
     }
 
     public void setGlEntryGenerated(Boolean glEntryGenerated) {
@@ -342,6 +347,16 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     public void setGeneralLedgerType(GeneralLedgerType generalLedgerType) {
         this.generalLedgerType = generalLedgerType;
+    }
+
+    @org.hibernate.annotations.Type(type = "yes_no")
+    @Column(name = "IS_GL_OVERRIDDEN")
+    public Boolean isGlOverridden() {
+        return glOverridden != null ? glOverridden : false;
+    }
+
+    public void setGlOverridden(Boolean glOverridden) {
+        this.glOverridden = glOverridden;
     }
 
     @Transient

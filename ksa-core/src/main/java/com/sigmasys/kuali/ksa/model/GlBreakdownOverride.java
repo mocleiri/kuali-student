@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.model;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 
 /**
@@ -11,21 +10,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "KSSA_GL_BREAKDOWN_OVERRIDE")
-public class GlBreakdownOverride implements Identifiable {
-
-    /**
-     * The unique identifier
-     */
-    private Long id;
-
-    /**
-     * GL account
-     */
-    private String glAccount;
-
-
-    private BigDecimal percentageBreakdown;
-
+public class GlBreakdownOverride extends AbstractGlBreakdown {
 
     /**
      * Reference to Transaction
@@ -44,28 +29,6 @@ public class GlBreakdownOverride implements Identifiable {
     @Override
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column(name = "BREAKDOWN")
-    public BigDecimal getPercentageBreakdown() {
-        return percentageBreakdown;
-    }
-
-    public void setPercentageBreakdown(BigDecimal percentageBreakdown) {
-        this.percentageBreakdown = percentageBreakdown;
-    }
-
-    @Column(name = "GL_ACCOUNT", length = 45)
-    public String getGlAccount() {
-        return glAccount;
-    }
-
-    public void setGlAccount(String glAccount) {
-        this.glAccount = glAccount;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
