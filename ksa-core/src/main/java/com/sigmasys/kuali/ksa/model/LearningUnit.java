@@ -112,7 +112,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return id;
 	}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "LEARNING_PERIOD_ID_FK")
 	public LearningPeriod getLearningPeriod() {
 		return learningPeriod;

@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class PeriodKeyPair extends KeyPair {
 	private LearningPeriod learningPeriod;
 
 	
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "LEARNING_PERIOD_ID_FK")
 	public LearningPeriod getLearningPeriod() {
 		return learningPeriod;
