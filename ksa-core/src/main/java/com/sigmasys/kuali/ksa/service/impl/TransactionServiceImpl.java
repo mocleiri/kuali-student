@@ -5,7 +5,6 @@ import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.*;
-import com.sigmasys.kuali.ksa.transform.Receipt;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
@@ -1237,45 +1236,5 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     }
 
-    /**
-     * Generates a receipt for a given transaction,
-     *
-     * @param transactionId   Charge ID
-     * @return new Receipt instance
-     */
-    @Override
-    public Receipt produceReceipt(Long transactionId) throws TransactionNotFoundException {
-
-        Transaction t = this.getTransaction(transactionId);
-
-        if(t == null || t.getTransactionType() == null){
-            throw new TransactionNotFoundException("Transaction not found");
-        }
-
-        if(!(t.getTransactionType() instanceof CreditType)){
-            throw new TransactionNotFoundException("Transaction must be a credit and is " + t.getTransactionType());
-        }
-
-        Receipt receipt = new Receipt();
-        receipt.setReceiptDate(t.getLedgerDate());
-        receipt.setReceiptTime(t.getLedgerDate().getTime());
-
-        receipt.setTransactionIdentifier(transactionId);
-        receipt.setAuthorization(t.getExternalId());
-        receipt.setAmount(t.getAmount());
-        receipt.setPostedToAccountIdentifier(t.getAccountId());
-        receipt.setPostingUserIdentifier(t.getAccount().getEntityId());
-
-        Receipt.TransactionType tt = new Receipt.TransactionType();
-        tt.setTransactionTypeIdentifier(t.getTransactionType().getId().getId());
-        tt.setTransactionTypeName(t.getTransactionType().getDescription());
-
-        receipt.setTransactionType(tt);
-
-        // @TODO Check if transaction currency is different from system currency
-
-
-        return receipt;
-    }
 
 }

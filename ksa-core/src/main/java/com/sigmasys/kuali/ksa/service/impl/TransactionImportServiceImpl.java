@@ -195,9 +195,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                             "' with Effective Date = '" + effectiveDate + "'";
                 }
                 if (ksaTransaction.getOverride() != null &&
-                        !isRefundRuleValid(ksaTransaction.getOverride().getOverrideRefundRule())) {
+                        !isRefundRuleValid(ksaTransaction.getOverride().getRefundRule())) {
                     // applies to Payments
-                    errMsg = "Invalid refund rule '" + ksaTransaction.getOverride().getOverrideRefundRule() + "'";
+                    errMsg = "Invalid refund rule '" + ksaTransaction.getOverride().getRefundRule() + "'";
                 }
 
                 if (errMsg.length() > 0) {
@@ -489,7 +489,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
         // Setting general ledger type
         String glTypeCode = (override != null && override.getGeneralLedgerType() != null) ?
-                override.getGeneralLedgerType().toString() :
+                override.getGeneralLedgerType() :
                 configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME);
 
         if (glTypeCode != null) {
@@ -515,10 +515,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             Integer clearPeriod = null;
             if (override != null) {
                 if (override.getOverrideClearPeriod() != null) {
-                    clearPeriod = (Integer)override.getOverrideClearPeriod();
+                    clearPeriod = override.getOverrideClearPeriod();
                 }
-                payment.setRefundable(override.isIsRefundable());
-                payment.setRefundRule(override.getOverrideRefundRule());
+                payment.setRefundable(override.isRefundable());
+                payment.setRefundRule(override.getRefundRule());
             }
 
             if (clearPeriod == null) {

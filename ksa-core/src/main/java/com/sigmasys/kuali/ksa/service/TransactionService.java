@@ -5,9 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
-import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.transform.Receipt;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -417,11 +415,4 @@ public interface TransactionService {
      */
     boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate);
 
-    /**
-     * Generates a receipt for a given transaction,
-     *
-     * @param transactionId   Charge ID
-     * @return new Receipt instance
-     */
-    Receipt produceReceipt(Long transactionId) throws TransactionNotFoundException;
 }

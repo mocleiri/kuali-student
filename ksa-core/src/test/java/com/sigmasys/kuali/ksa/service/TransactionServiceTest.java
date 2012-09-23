@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.transform.Receipt;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +13,6 @@ import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -277,20 +274,5 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
-    @Test
-    public void getReceipt() throws Exception {
-        Long id = 5L;
-
-        Receipt receipt = transactionService.produceReceipt(id);
-
-
-        Assert.isTrue("cash".equals(receipt.getTransactionType().getTransactionTypeIdentifier()));
-        Assert.isTrue("5".equals(receipt.getTransactionIdentifier().toString()));
-
-        //JAXBContext jc = JAXBContext.newInstance( Receipt.class );
-        //Marshaller m = jc.createMarshaller();
-        //m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        //m.marshal( receipt, System.out );
-    }
 
 }
