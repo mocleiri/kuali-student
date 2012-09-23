@@ -401,24 +401,20 @@ public class CustomerServiceController extends UifControllerBase {
             Information info;
             switch (informationType) {
                 case ALERT:
-                    Alert alert = new Alert();
-                    alert.setText(form.getInfoText());
-                    info = alert;
+                    info = new Alert();
                     break;
                 case FLAG:
-                    Flag flag = new Flag();
-                    flag.setSeverity(0);
-                    info = flag;
+                    info = new Flag();
+                    ((Flag)info).setSeverity(0);
                     break;
                 case MEMO:
-                    Memo memo = new Memo();
-                    memo.setText(form.getInfoText());
-                    info = memo;
+                    info = new Memo();
                     break;
                 default:
                     throw new IllegalStateException("Unknown Information Type '" + informationType);
             }
 
+            info.setText(form.getInfoText());
             info.setAccount(account);
             info.setCreationDate(new Date());
             info.setEffectiveDate(form.getInfoEffectiveDate());
