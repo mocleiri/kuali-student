@@ -104,7 +104,7 @@ public interface AccountService {
      * @param userId Account ID
      * @return true if the account exists, false otherwise
      */
-    boolean doesKsaAccountExist(String userId);
+    boolean ksaAccountExists(String userId);
 
     /**
      * Checks if KSA account exists. If the KSA account does not exist, it tries to look for the existing KIM account
@@ -113,7 +113,7 @@ public interface AccountService {
      * @param userId Account ID
      * @return true if the account exists, false otherwise
      */
-    boolean doesAccountExist(String userId);
+    boolean accountExists(String userId);
 
     /**
      * This methods fetches Account and all its associations by account ID.

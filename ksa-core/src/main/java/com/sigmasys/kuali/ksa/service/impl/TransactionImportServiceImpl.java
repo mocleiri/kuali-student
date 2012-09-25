@@ -180,7 +180,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 String errMsg = "";
                 if (!verifyRequiredValues(ksaTransaction)) {
                     errMsg = "Required values are missing from transaction";
-                } else if (!accountService.doesAccountExist(ksaTransaction.getAccountIdentifier())) {
+                } else if (!accountService.accountExists(ksaTransaction.getAccountIdentifier())) {
                     errMsg = "Account '" + ksaTransaction.getAccountIdentifier() + "' does not exist";
                 } else if (!transactionService.isTransactionAllowed(ksaTransaction.getAccountIdentifier(),
                         ksaTransaction.getTransactionType(), effectiveDate)) {

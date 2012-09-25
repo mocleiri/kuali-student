@@ -313,7 +313,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return true if the account exists, false otherwise
      */
     @Override
-    public boolean doesKsaAccountExist(String userId) {
+    public boolean ksaAccountExists(String userId) {
         return getEntity(userId, Account.class) != null;
     }
 
@@ -325,7 +325,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return true if the account exists, false otherwise
      */
     @Override
-    public boolean doesAccountExist(String userId) {
+    public boolean accountExists(String userId) {
         try {
             return getOrCreateAccount(userId) != null;
         } catch (UserNotFoundException e) {

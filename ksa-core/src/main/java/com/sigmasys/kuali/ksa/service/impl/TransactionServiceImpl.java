@@ -1226,7 +1226,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate) {
-        return accountService.doesAccountExist(accountId) &&
+        return accountService.accountExists(accountId) &&
                 getTransactionType(transactionType, effectiveDate) != null &&
                 getAccessControlService().isTransactionTypeAllowed(accountId, transactionType);
 
