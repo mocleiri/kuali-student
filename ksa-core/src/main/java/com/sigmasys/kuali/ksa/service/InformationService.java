@@ -179,5 +179,12 @@ public interface InformationService {
      */
     Alert createAlert(String accountId, String alertText, Integer accessLevel, Date effectiveDate, Date expirationDate);
 
+    /**
+     * Returns the default memo level.
+     *
+     * @return level number
+     */
+    Integer getDefaultMemoLevel();
+
 
 }

@@ -951,11 +951,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         persistTransaction(transaction);
 
-
-        // TODO: ask Paul about parameters for creating GL transmission and 'Individual' GL mode!
-        //glService.prepareGlTransmission(fromDate, toDate, recognitionPeriod);
-
+        // If GL mode is Individual then we prepare the GL transmission
+        GeneralLedgerMode glMode = glService.getDefaultGeneralLedgerMode();
+        if (glMode == GeneralLedgerMode.INDIVIDUAL) {
+            glService.prepareGlTransmission();
+        }
     }
+
 
     /**
      * If the reverse method is called, the system will generate a negative
@@ -966,11 +968,98 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * be reversed when a mistake is made, or a refund is issued. A payment may
      * be reversed when a payment bounces, or for some other reason is entered
      * on to the account and is not payable.
+     *
+     * @param transactionId   Transaction ID
+     * @param memoText        Text of the memo to be created
+     * @param partialAmount   Partial amount
+     * @param statementPrefix Statement prefix that will be added to the existing Transaction statement
      */
     @Override
     @Transactional(readOnly = false)
-    public void reverseTransaction(Long transactionId) {
-        // TODO
+    public void reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount,
+                                   String statementPrefix) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (transaction.getAmount() == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not have any amount";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        // Removing all the transaction allocations
+        removeAllocations(transactionId);
+
+
+        BigDecimal lockedAllocatedAmount = transaction.getLockedAllocatedAmount();
+
+        // If partialAmount is not null OR transaction does not have any locked allocated amount
+        if (partialAmount != null ||
+                lockedAllocatedAmount == null || lockedAllocatedAmount.compareTo(BigDecimal.ZERO) == 0) {
+
+            BigDecimal reversedAmount;
+
+            if (partialAmount != null) {
+                if (partialAmount.compareTo(getUnallocatedAmount(transaction)) > 0) {
+                    String errMsg = "Partial amount is greater than transaction unallocated amount";
+                    logger.error(errMsg);
+                    throw new IllegalStateException(errMsg);
+                }
+                reversedAmount = partialAmount.negate();
+            } else {
+                reversedAmount = transaction.getAmount().negate();
+            }
+
+            // Creating a new reversed transaction
+            String transactionTypeId = transaction.getTransactionType().getId().getId();
+            Transaction reversedTransaction = createTransaction(transactionTypeId, transaction.getAccountId(),
+                    transaction.getEffectiveDate(), reversedAmount);
+
+            boolean updateReversed = false;
+            boolean updateOriginal = false;
+
+            if (statementPrefix != null && transaction.getStatementText() != null) {
+                String statement = statementPrefix + " " + transaction.getStatementText();
+                reversedTransaction.setStatementText(statement);
+                updateReversed = true;
+            }
+
+            if (transaction.getTransactionTypeValue() == TransactionTypeValue.CHARGE) {
+                transaction.setInternal(true);
+                reversedTransaction.setInternal(true);
+                updateOriginal = true;
+                updateReversed = true;
+            }
+
+            // Creating a locked allocation between the original and reversed transactions
+            createLockedAllocation(transaction.getId(), reversedTransaction.getId(), partialAmount);
+
+            if (updateOriginal) {
+                persistEntity(transaction);
+            }
+
+            if (updateReversed) {
+                persistEntity(reversedTransaction);
+            }
+
+            // Creating memo
+            if (memoText != null && memoText.trim().isEmpty()) {
+                Integer defaultMemoLevel = informationService.getDefaultMemoLevel();
+                Date effectiveDate = new Date();
+                informationService.createMemo(transactionId, memoText, defaultMemoLevel, effectiveDate, null, null);
+            }
+
+        } else {
+            // TODO: Check if the locked allocated amount comes from the deferment
+            String errMsg = "Transaction with ID = " + transactionId + " has locked allocation";
+            logger.error(errMsg);
+            throw new LockedAllocationException(errMsg);
+        }
     }
 
     /**
@@ -1239,7 +1328,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return List of Transaction instances
      */
     @Override
-    public List<Transaction> findTransactionByStatementPattern(String pattern) {
+    public List<Transaction> findTransactionsByStatementPattern(String pattern) {
         Query query = em.createQuery("select t from Transaction t " + GET_TRANSACTION_JOIN +
                 " where t.statementText like :pattern ");
         query.setParameter("pattern", pattern);

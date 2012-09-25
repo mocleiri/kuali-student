@@ -359,8 +359,14 @@ public interface TransactionService {
      * be reversed when a mistake is made, or a refund is issued. A payment may
      * be reversed when a payment bounces, or for some other reason is entered
      * on to the account and is not payable.
+     *
+     * @param transactionId   Transaction ID
+     * @param memoText        Text of the memo to be created
+     * @param partialAmount   Partial amount
+     * @param statementPrefix Statement prefix that will be added to the existing Transaction statement
      */
-    void reverseTransaction(Long transactionId);
+    void reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount,
+                                   String statementPrefix);
 
     /**
      * A deferment may be expired automatically (when the date of the deferment
@@ -421,6 +427,6 @@ public interface TransactionService {
      * @param pattern Statement text pattern
      * @return List of Transaction instances
      */
-    List<Transaction> findTransactionByStatementPattern(String pattern);
+    List<Transaction> findTransactionsByStatementPattern(String pattern);
 
 }

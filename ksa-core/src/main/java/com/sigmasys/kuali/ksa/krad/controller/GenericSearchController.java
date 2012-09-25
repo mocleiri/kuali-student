@@ -67,7 +67,7 @@ public abstract class GenericSearchController extends UifControllerBase {
                 form.setPageId(ACCOUNT_SEARCH_PAGE_ID);
                 break;
             case TRANSACTION:
-                form.setTransactions(transactionService.findTransactionByStatementPattern(searchValue));
+                form.setTransactions(transactionService.findTransactionsByStatementPattern(searchValue));
                 form.setPageId(TRANSACTION_SEARCH_PAGE_ID);
                 break;
             default:

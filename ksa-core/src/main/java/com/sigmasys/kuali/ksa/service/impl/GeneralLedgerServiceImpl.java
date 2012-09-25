@@ -203,13 +203,29 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Returns the default general ledger type instance for the given code.
+     * Returns the default general ledger type.
      *
      * @return GeneralLedgerType instance
      */
     @Override
     public GeneralLedgerType getDefaultGeneralLedgerType() {
         return getGeneralLedgerType(configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME));
+    }
+
+    /**
+     * Returns the default general ledger mode.
+     *
+     * @return GeneralLedgerMode instance
+     */
+    @Override
+    public GeneralLedgerMode getDefaultGeneralLedgerMode() {
+        String glMode = configService.getInitialParameter(Constants.DEFAULT_GL_MODE_PARAM_NAME);
+        if(glMode != null) {
+           return EnumUtils.findById(GeneralLedgerMode.class, glMode);
+        }
+        String errMsg = "ksa.general.ledger.mode' parameter must be set in the KSA configuration";
+        logger.error(errMsg);
+        throw new IllegalStateException(errMsg);
     }
 
     /**
@@ -221,6 +237,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @param toDate            End date
      * @return true if one or more records have been updated, false - otherwise
      */
+    @Override
+    @WebMethod(exclude = true)
     public boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate) {
         Query query = em.createQuery("update GlTransmission " +
                 " set recognitionPeriod = :recognitionPeriod " +
@@ -257,11 +275,12 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * This process takes into account the different ways in which an institution may choose to transmit to
      * the general ledger, including real-time, batch, and rollup modes.
      *
-     * @param fromDate start date
-     * @param toDate end date
+     * @param fromDate          start date
+     * @param toDate            end date
      * @param recognitionPeriod recognition period
      */
     @Override
+    @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public synchronized void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod) {
 
@@ -383,6 +402,18 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             throw new IllegalStateException(errMsg);
         }
 
+    }
+
+    /**
+     * Prepares a transmission to the general ledger for all GL transactions in status Q.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public void prepareGlTransmission() {
+        prepareGlTransmission(null, null, null);
     }
 
 

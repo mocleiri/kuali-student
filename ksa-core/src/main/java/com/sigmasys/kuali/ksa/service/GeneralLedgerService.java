@@ -69,6 +69,13 @@ public interface GeneralLedgerService {
     GeneralLedgerType getGeneralLedgerType(String glTypeCode);
 
     /**
+     * Returns the default general ledger mode.
+     *
+     * @return GeneralLedgerMode instance
+     */
+    GeneralLedgerMode getDefaultGeneralLedgerMode();
+
+    /**
      * Returns the default general ledger type instance for the given code.
      *
      * @return GeneralLedgerType instance
@@ -84,7 +91,9 @@ public interface GeneralLedgerService {
      * @param toDate            End date
      * @return true if one or more records have been updated, false - otherwise
      */
+    @WebMethod(exclude = true)
     boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate);
+
 
     /**
      * Prepares a transmission to the general ledger.
@@ -95,6 +104,15 @@ public interface GeneralLedgerService {
      * @param toDate            end date
      * @param recognitionPeriod recognition period
      */
+    @WebMethod(exclude = true)
     void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod);
+
+    /**
+     * Prepares a transmission to the general ledger for all GL transactions in status Q.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     */
+    @WebMethod(exclude = true)
+    void prepareGlTransmission();
 
 }
