@@ -24,16 +24,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="SponsorView" parent="Uif-FormView" p:footer.render="false">
+    <bean id="SponsorView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Sponsor"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.SponsorForm"/>
-        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="SponsorQuickMenuOptionsPage"/>
         <property name="navigation">
             <ref bean="KSASponsorVwNav"/>
         </property>
         <property name="items">
-            <list>
+            <list merge="true">
                 <bean parent="Uif-Page" p:id="SponsorQuickMenuOptionsPage" p:title="Quick Options">
                     <property name="items">
                         <list>
@@ -64,7 +63,7 @@
     </bean>-->
 
     <!-- Sponsor navigation -->
-    <bean id="KSASponsorVwNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSASponsorVwNav" parent="Uif-KsaNavigationGroupBase">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>

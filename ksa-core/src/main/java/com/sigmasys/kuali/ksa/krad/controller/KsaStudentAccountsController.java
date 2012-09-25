@@ -4,7 +4,6 @@ import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
 import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/ksaStudentAccountsVw")
-public class KsaStudentAccountsController extends UifControllerBase {
+public class KsaStudentAccountsController extends GenericSearchController {
 
     @Autowired
     private AccountService accountService;

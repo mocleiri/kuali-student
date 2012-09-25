@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.SponsorForm;
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -19,16 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/sponsorVw")
-public class SponsorController extends UifControllerBase {
+public class SponsorController extends GenericSearchController {
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
    protected SponsorForm createInitialForm(HttpServletRequest request) {
-      SponsorForm form = new SponsorForm();
-
-      return form;
+      return new SponsorForm();
    }
 
    /**

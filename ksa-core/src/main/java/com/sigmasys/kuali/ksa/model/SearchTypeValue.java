@@ -5,25 +5,29 @@ package com.sigmasys.kuali.ksa.model;
  */
 public enum SearchTypeValue {
 
-   // short cut for the search type key which is the key_code
-   ACCOUNTS,
-   ALERT_FLAG,
-   MEMO;
+    // short cut for the search type key which is the key_code
+    ALL,
+    ACCOUNT,
+    TRANSACTION,
+    ACTIVITY;
 
-   /*
+
+    /*
       These are the values
     */
-   @Override
-   public String toString() {
-      switch (this) {
-         case ACCOUNTS:
-            return "Accounts";
-         case ALERT_FLAG:
-            return "Alert/Flag";
-         case MEMO:
-            return "Memo";
-      }
-      throw new IllegalStateException("No search type description found for " + name() + " value");
-   }
+    @Override
+    public String toString() {
+        switch (this) {
+            case ALL:
+                return "All";
+            case ACCOUNT:
+                return "Account";
+            case TRANSACTION:
+                return "Transaction";
+            case ACTIVITY:
+                return "Activity";
+        }
+        throw new IllegalStateException("No search type description found for " + name() + " value");
+    }
 
 }

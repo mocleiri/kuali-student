@@ -2,9 +2,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.search.SearchCriteria;
 import com.sigmasys.kuali.ksa.service.PersistenceService;
-import com.sigmasys.kuali.ksa.service.aop.AopProxy;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.service.aop.LoggingInterceptor;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
@@ -13,12 +11,14 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -108,27 +108,30 @@ public class GenericPersistenceService implements PersistenceService {
      */
     @Override
     public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, Pair<String, SortOrder>... orderBy) {
-        return getEntities(entityClass, null, orderBy);
+        return getEntities(entityClass, null, null, null, orderBy);
     }
 
     /**
      * Returns the list of all Identifiable entities for the given class.
      *
-     * @param entityClass    Entity Class
-     * @param searchCriteria Search Criteria, can be null
-     * @param orderBy        optional array of fields used in "order by" clause, can be null
+     * @param entityClass Entity Class
+     * @param predicates  Predicates, can be null
+     * @param orderBy     optional array of fields used in "order by" clause, can be null
      * @return List of Identifiable objects
      */
     @Override
-    public <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
+    public <T extends Identifiable> List<T> getEntities(Class<T> entityClass,
+                                                        List<Predicate> predicates,
+                                                        Integer offset,
+                                                        Integer limit,
                                                         Pair<String, SortOrder>... orderBy) {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<T> criteria = criteriaBuilder.createQuery(entityClass);
-        Root<T> selection = criteria.from(entityClass);
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        Root<T> selection = criteriaQuery.from(entityClass);
         selection.alias(entityClass.getSimpleName().toLowerCase());
 
-        criteria.select(selection);
+        criteriaQuery.select(selection);
 
         if (orderBy != null && orderBy.length > 0) {
             Order[] orders = new Order[orderBy.length];
@@ -138,18 +141,23 @@ public class GenericPersistenceService implements PersistenceService {
                 SortOrder sortOrder = order.getB();
                 orders[i++] = (SortOrder.ASC == sortOrder) ? criteriaBuilder.asc(field) : criteriaBuilder.desc(field);
             }
-            criteria.orderBy(orders);
+            criteriaQuery.orderBy(orders);
         }
 
-        Query query = em.createQuery(criteria.select(selection));
-
-        // TODO: based on the search criteria build Predicate
-        if (searchCriteria != null) {
-            if (searchCriteria.getLimit() != SearchCriteria.UNLIMITED_ITEMS_NUMBER) {
-                query.setFirstResult(searchCriteria.getOffset());
-                query.setMaxResults(searchCriteria.getLimit());
-            }
+        if (!CollectionUtils.isEmpty(predicates)) {
+            criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
         }
+
+        Query query = em.createQuery(criteriaQuery);
+
+        if (offset != null) {
+            query.setFirstResult(offset);
+        }
+
+        if (limit != null) {
+            query.setMaxResults(limit);
+        }
+
 
         return query.getResultList();
     }

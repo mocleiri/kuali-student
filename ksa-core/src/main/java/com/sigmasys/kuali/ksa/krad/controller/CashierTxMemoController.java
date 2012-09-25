@@ -9,7 +9,6 @@ import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,7 +29,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping(value = "/cashierTxMemo")
-public class CashierTxMemoController extends UifControllerBase {
+public class CashierTxMemoController extends GenericSearchController {
 
     @Autowired
     private AccountService accountService;

@@ -43,6 +43,11 @@ public class Deferment extends Credit {
         this.expirationDate = expirationDate;
     }
 
+    @Transient
+    public TransactionTypeValue getTransactionTypeValue() {
+          return TransactionTypeValue.DEFERMENT;
+    }
+
     /*
       * This returns the expiration status and is true if the deferment has expired.
       */

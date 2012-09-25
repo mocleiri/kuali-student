@@ -167,4 +167,11 @@ public interface AccountService {
      */
     Ach getAch(String userId);
 
+    /**
+         * Returns the list of matching accounts for the given name pattern.
+         * @param namePattern Name pattern
+         * @return List of Account instances
+         */
+    List<Account> findAccountsByNamePattern(String namePattern);
+
 }

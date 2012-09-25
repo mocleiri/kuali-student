@@ -6,7 +6,6 @@ import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kns.exception.FileUploadLimitExceededException;
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "/adminLiaisonVw")
-public class AdminLiaisonController extends UifControllerBase {
+public class AdminLiaisonController extends GenericSearchController {
 
 
     @Autowired

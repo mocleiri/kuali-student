@@ -9,7 +9,6 @@ import com.sigmasys.kuali.ksa.service.ActivityService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping(value = "/transOvrVw")
-public class TransOvrController extends UifControllerBase {
+public class TransOvrController extends GenericSearchController {
 
     @Autowired
     private AccountService accountService;
@@ -44,7 +43,6 @@ public class TransOvrController extends UifControllerBase {
      */
     @Override
     protected TransOvrForm createInitialForm(HttpServletRequest request) {
-
         return new TransOvrForm();
     }
 

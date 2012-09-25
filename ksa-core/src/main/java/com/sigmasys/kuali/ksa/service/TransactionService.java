@@ -344,7 +344,7 @@ public interface TransactionService {
      * general ledger entries are created. In certain cases, a transaction might be moved to an effective state
      * before its effective date, in which case, forceEffective is passed as true.
      *
-     * @param transactionId transaction ID
+     * @param transactionId  transaction ID
      * @param forceEffective indicates whether it has to be forced
      */
     void makeEffective(Long transactionId, boolean forceEffective);
@@ -414,5 +414,13 @@ public interface TransactionService {
      * @return true/false
      */
     boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate);
+
+    /**
+     * Returns the list of matching transactions for the given name pattern.
+     *
+     * @param pattern Statement text pattern
+     * @return List of Transaction instances
+     */
+    List<Transaction> findTransactionByStatementPattern(String pattern);
 
 }

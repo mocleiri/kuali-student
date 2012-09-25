@@ -1,9 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
-import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.SearchTypeValue;
-import com.sigmasys.kuali.ksa.model.UserPreference;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.UserPreferenceService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
@@ -36,6 +34,11 @@ public abstract class AbstractViewModel extends UifFormBase {
     private String searchType;
     private String searchValue;
 
+    // Collections for search results
+    private List<Account> accounts;
+    private List<Transaction> transactions;
+    private List<Activity> activity;
+
     private static final KeyValuesBase searchTypeValuesFinder = new KeyValuesBase() {
         /**
          * This is an implementation of a key value finder, normally this would make a request to
@@ -46,9 +49,10 @@ public abstract class AbstractViewModel extends UifFormBase {
         @Override
         public List<KeyValue> getKeyValues() {
             List<KeyValue> keyValues = new ArrayList<KeyValue>(3);
-            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACCOUNTS.name(), SearchTypeValue.ACCOUNTS.toString()));
-            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ALERT_FLAG.name(), SearchTypeValue.ALERT_FLAG.toString()));
-            keyValues.add(new ConcreteKeyValue(SearchTypeValue.MEMO.name(), SearchTypeValue.MEMO.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ALL.name(), SearchTypeValue.ALL.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACCOUNT.name(), SearchTypeValue.ACCOUNT.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.TRANSACTION.name(), SearchTypeValue.TRANSACTION.toString()));
+            keyValues.add(new ConcreteKeyValue(SearchTypeValue.ACTIVITY.name(), SearchTypeValue.ACTIVITY.toString()));
             return Collections.unmodifiableList(keyValues);
         }
     };
@@ -153,5 +157,29 @@ public abstract class AbstractViewModel extends UifFormBase {
 
     public void setSearchType(String searchType) {
         this.searchType = searchType;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<Activity> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(List<Activity> activity) {
+        this.activity = activity;
     }
 }

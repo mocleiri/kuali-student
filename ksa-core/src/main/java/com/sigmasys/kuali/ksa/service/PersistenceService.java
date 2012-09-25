@@ -1,9 +1,9 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.search.SearchCriteria;
 import com.sigmasys.kuali.ksa.service.aop.AopProxy;
 
+import javax.persistence.criteria.Predicate;
 import java.io.Serializable;
 import java.util.List;
 
@@ -55,12 +55,15 @@ public interface PersistenceService extends AopProxy {
     /**
      * Returns the list of all Identifiable entities for the given class.
      *
-     * @param entityClass    Entity Class
-     * @param searchCriteria Search Criteria, can be null
-     * @param orderBy        optional array of fields used in "order by" clause, can be null
+     * @param entityClass Entity Class
+     * @param predicates  Predicates, can be null
+     * @param orderBy     optional array of fields used in "order by" clause, can be null
      * @return List of Identifiable objects
      */
-    <T extends Identifiable> List<T> getEntities(Class<T> entityClass, SearchCriteria searchCriteria,
+    <T extends Identifiable> List<T> getEntities(Class<T> entityClass,
+                                                 List<Predicate> predicates,
+                                                 Integer offset,
+                                                 Integer limit,
                                                  Pair<String, SortOrder>... orderBy);
 
 

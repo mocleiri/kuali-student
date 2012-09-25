@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/alertsTransaction")
 @Transactional(readOnly = true)
-public class AlertsTransactionController extends UifControllerBase {
+public class AlertsTransactionController extends GenericSearchController {
 
    @Autowired
    private TransactionService transactionService;
@@ -40,7 +39,6 @@ public class AlertsTransactionController extends UifControllerBase {
       AlertsTransactionForm form = new AlertsTransactionForm();
       form.setWorkSetRows("2");
       form.setMinQueryDate(new Date());
-
       return form;
    }
 

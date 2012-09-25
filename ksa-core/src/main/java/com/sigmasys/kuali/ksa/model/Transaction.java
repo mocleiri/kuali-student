@@ -374,6 +374,9 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
         return "";
     }
 
+    @Transient
+    public abstract TransactionTypeValue getTransactionTypeValue();
+
 }
 	
 

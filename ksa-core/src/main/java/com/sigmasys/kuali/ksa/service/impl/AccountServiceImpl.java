@@ -25,6 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 import java.util.*;
@@ -43,6 +46,16 @@ import java.util.regex.Pattern;
 public class AccountServiceImpl extends GenericPersistenceService implements AccountService, BeanFactoryAware {
 
     private static final Log logger = LogFactory.getLog(AccountServiceImpl.class);
+
+    private static final String GET_FULL_ACCOUNTS_QUERY = "select distinct a from Account a " +
+            "left outer join fetch a.personNames pn " +
+            "left outer join fetch a.postalAddresses pa " +
+            "left outer join fetch a.electronicContacts ec " +
+            "left outer join fetch a.statusType st " +
+            "left outer join fetch a.latePeriod lp " +
+            "where pn.default = true and " +
+            "      pa.default = true and " +
+            "      ec.default = true";
 
 
     @Autowired
@@ -348,15 +361,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      */
     @Override
     public List<Account> getFullAccounts() {
-        Query query = em.createQuery("select distinct a from Account a " +
-                "left outer join fetch a.personNames pn " +
-                "left outer join fetch a.postalAddresses pa " +
-                "left outer join fetch a.electronicContacts ec " +
-                "left outer join fetch a.statusType st " +
-                "left outer join fetch a.latePeriod lp " +
-                "where pn.default = true and " +
-                "      pa.default = true and " +
-                "      ec.default = true");
+        Query query = em.createQuery(GET_FULL_ACCOUNTS_QUERY);
         return query.getResultList();
     }
 
@@ -610,7 +615,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * Get ACH looks into the AccountProtectedInformation class (which triggers a system event) to look for
      * the ACH information for the user
      *
-     * @param userId            Account ID
+     * @param userId Account ID
      * @return new ElectronicContact instance with ID
      */
     @Override
@@ -628,47 +633,64 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         String details = account.getBankDetails();
         String[] detailsArr = details.split(":");
 
-        if(detailsArr.length < 3){
-            throw new AccountTypeNotFoundException(errMsg) ;
+        if (detailsArr.length < 3) {
+            logger.error(errMsg);
+            throw new AccountTypeNotFoundException(errMsg);
         }
-        String routing = detailsArr[0];
+        String routingNumber = detailsArr[0];
         String act = detailsArr[1];
         String type = detailsArr[2];
 
-        if(!("C".equals(type) || "S".equals(type))){
+        if (!("C".equals(type) || "S".equals(type))) {
+            logger.error(errMsg);
             throw new AccountTypeNotFoundException(errMsg);
         }
 
-        Pattern p = Pattern.compile("$d{9}^");
-        Matcher m = p.matcher(routing);
-        if(!m.matches()){
-            // Throw new RoutingNumberException
+        Pattern p = Pattern.compile("^(\\d{7}|\\d{9})$");
+        Matcher m = p.matcher(routingNumber);
+        if (!m.matches()) {
+            errMsg = "Routing number '" + routingNumber + "' is invalid";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         Ach ach = new Ach();
         ach.setAccountType(type);
         ach.setAccountNumber(act);
-        ach.setAba(routing);
+        ach.setAba(routingNumber);
         return ach;
     }
 
     /**
-     *
+     * @param userId Account ID
+     * @param type   Bank Type Name
+     * @return new AccountProtectedInfo instance with ID
      * @TODO This needs to trigger a system event
-     * @param userId            Account ID
-     * @param type              Bank Type Name
-     * @return  new AccountProtectedInfo instance with ID
      */
-    private AccountProtectedInfo getAccountProtectedInfo(String userId, String type){
+    private AccountProtectedInfo getAccountProtectedInfo(String userId, String type) {
         Query query = em.createQuery("select a from AccountProtectedInfo a " +
                 "left outer join fetch a.bankType bt " +
                 "where a.id = :id " +
                 "and bt.name = :name ");
-
         query.setParameter("id", userId);
         query.setParameter("name", type);
         List<AccountProtectedInfo> accounts = query.getResultList();
         return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
+
+    }
+
+    /**
+     * Returns the list of matching accounts for the given name pattern.
+     * @param namePattern Name pattern
+     * @return List of Account instances
+     */
+    @Override
+    public List<Account> findAccountsByNamePattern(String namePattern) {
+        Query query = em.createQuery(GET_FULL_ACCOUNTS_QUERY + " and (pn.firstName like :pattern or " +
+                "pn.middleName like :pattern or pn.lastName like :pattern)");
+        query.setParameter("pattern", "%" + namePattern + "%");
+        return query.getResultList();
+
 
     }
 

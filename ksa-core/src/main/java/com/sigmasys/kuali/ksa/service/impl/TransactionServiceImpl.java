@@ -36,6 +36,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     private static final Log logger = LogFactory.getLog(TransactionServiceImpl.class);
 
+    private static final String GET_TRANSACTION_JOIN =
+            " left outer join fetch t.transactionType tt " +
+                    " left outer join fetch t.generalLedgerType glt " +
+                    " left outer join fetch t.account a " +
+                    " left outer join fetch t.currency c " +
+                    " left outer join fetch t.rollup r " +
+                    " left outer join fetch t.document d ";
+
 
     @Autowired
     private ConfigService configService;
@@ -65,13 +73,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
 
     private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
-        Query query = em.createQuery("select t from " + entityType.getName() + " t " +
-                " left outer join fetch t.transactionType tt " +
-                " left outer join fetch t.generalLedgerType glt " +
-                " left outer join fetch t.account a " +
-                " left outer join fetch t.currency c " +
-                " left outer join fetch t.rollup r " +
-                " left outer join fetch t.document d " +
+        Query query = em.createQuery("select t from " + entityType.getName() + " t " + GET_TRANSACTION_JOIN +
                 ((userIds != null && userIds.length > 0) ? " where t.account.id in (:userIds) " : "") +
                 " order by t.id desc");
         if (userIds != null && userIds.length > 0) {
@@ -81,13 +83,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     private <T extends Transaction> T getTransaction(Long id, Class<T> entityType) {
-        Query query = em.createQuery("select t from " + entityType.getName() + " t " +
-                " left outer join fetch t.transactionType tt " +
-                " left outer join fetch t.generalLedgerType glt " +
-                " left outer join fetch t.account a " +
-                " left outer join fetch t.currency c " +
-                " left outer join fetch t.rollup r " +
-                " left outer join fetch t.document d " +
+        Query query = em.createQuery("select t from " + entityType.getName() + " t " + GET_TRANSACTION_JOIN +
                 " where t.id = :id ");
         query.setParameter("id", id);
         List<T> transactions = query.getResultList();
@@ -1234,6 +1230,20 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 getTransactionType(transactionType, effectiveDate) != null &&
                 getAccessControlService().isTransactionTypeAllowed(accountId, transactionType);
 
+    }
+
+    /**
+     * Returns the list of matching transactions for the given name pattern.
+     *
+     * @param pattern Statement text pattern
+     * @return List of Transaction instances
+     */
+    @Override
+    public List<Transaction> findTransactionByStatementPattern(String pattern) {
+        Query query = em.createQuery("select t from Transaction t " + GET_TRANSACTION_JOIN +
+                " where t.statementText like :pattern ");
+        query.setParameter("pattern", pattern);
+        return query.getResultList();
     }
 
 

@@ -8,16 +8,14 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-<bean id="CustomerServiceView" parent="Uif-FormView" p:footer.render="false">
-    <property name="title" value="Customer Service"/>
+<bean id="CustomerServiceView" parent="Uif-KsaFormView" p:footer.render="false">
     <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.CustomerServiceForm"/>
-    <property name="theme" ref="Uif-KsaTheme"/>
     <property name="entryPageId" value="CustomerServiceQuickMenuOptionsPage"/>
     <property name="navigation">
         <ref bean="KSACustomerServiceVwNav"/>
     </property>
     <property name="items">
-        <list>
+        <list merge="true">
             <bean parent="Uif-Page" p:id="CustomerServiceQuickMenuOptionsPage" p:title="Quick Options">
                 <property name="items">
                     <list>
@@ -93,7 +91,7 @@
     </bean>-->
 
     <!-- CustomerService navigation -->
-    <bean id="KSACustomerServiceVwNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSACustomerServiceVwNav" parent="Uif-KsaNavigationGroupBase">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>

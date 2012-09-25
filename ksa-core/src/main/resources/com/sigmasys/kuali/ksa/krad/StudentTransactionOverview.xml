@@ -27,7 +27,7 @@
             </bean>
         </property>
         <property name="items">
-            <list>
+            <list merge="true">
                 <bean parent="Uif-Page" p:id="bursaQuickMenuOptionsPage" p:title="Quick Options">
                     <property name="items">
                         <list>
@@ -116,7 +116,7 @@
         </property>
     </bean>-->
 
-    <bean id="KSATransOvrVwNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSATransOvrVwNav" parent="Uif-KsaNavigationGroupBase">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>

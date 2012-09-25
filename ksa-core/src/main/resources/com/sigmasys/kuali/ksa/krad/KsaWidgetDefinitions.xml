@@ -9,17 +9,6 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <!-- URL mapping for the header search -->
-    <bean name="searchMapping" class="com.sigmasys.kuali.ksa.model.SearchMappingBean">
-        <!-- Map of "searchType" <-> "actionUrl" -->
-        <property name="mapping">
-            <map>
-                <entry key="ACCOUNTS" value="/uif/ksaStudentAccountsVw?methodToCall=searchByName&amp;viewId=KsaStudentAccountsView"/>
-                <entry key="ALERT_FLAG" value=""/>
-                <entry key="MEMO" value=""/>
-            </map>
-        </property>
-    </bean>
 
     <!-- Breadcrumbs and History -->
     <bean id="Uif-Breadcrumbs" parent="Uif-Breadcrumbs-parentBean">
@@ -31,7 +20,7 @@
     </bean>
 
     <bean id="Uif-KsaTheme" parent="Uif-KradTheme">
-       <!-- Additional CSS and JS files can be added here -->
+        <!-- Additional CSS and JS files can be added here -->
     </bean>
 
     <bean id="Uif-KsaNavigationGroupBase" abstract="true"
@@ -121,6 +110,12 @@
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation"/>
         </property>
+        <property name="items">
+            <list>
+                <ref bean="AccountSearchPage"/>
+                <ref bean="TransactionSearchPage"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="Uif-KsaViewNavigation" parent="Uif-KsaNavigationGroupBase" scope="prototype">
@@ -141,9 +136,113 @@
                 <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
-                                     p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
-                                                     p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Common KSA search pages go here -->
+    <bean id="AccountSearchPage" parent="Uif-Page" p:title="Accounts" scope="prototype">
+        <property name="items">
+            <list>
+                <bean parent="Uif-VerticalBoxSection"
+                      p:layoutManager.orientation="VERTICAL"
+                      p:title="Search for Accounts by Name">
+                    <property name="disclosure.render" value="false"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-Disclosure-TableCollectionSection"
+                                  p:layoutManager.numberOfColumns="3"
+                                  p:disclosure.render="false"
+                                  p:progressiveRenderViaAJAX="true"
+                                  p:title="Matching Accounts"
+                                  p:instructionalText="Select an account to view details">
+                                <property name="readOnly" value="true"/>
+                                <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
+                                <property name="propertyName" value="accounts"/>
+                                <property name="layoutManager.sequencePropertyName" value="id"/>
+                                <property name="layoutManager.richTable.render" value="false"/>
+                                <property name="layoutManager.renderSequenceField" value="false"/>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-InputField" p:label="Name"
+                                              p:propertyName="compositeDefaultPersonName">
+                                            <property name="control">
+                                                <bean parent="Uif-TextControl" p:size="50" p:maxLength="50"/>
+                                            </property>
+                                        </bean>
+                                        <bean parent="Uif-InputField" p:label="Description"
+                                              p:propertyName="compositeDefaultPostalAddress">
+                                            <property name="control">
+                                                <bean parent="Uif-TextControl" p:size="120" p:maxLength="120"/>
+                                            </property>
+                                        </bean>
+                                        <!-- Use this to display the combined account, bio, aging and alerts -->
+                                        <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                                              p:href="customerService?methodToCall=get&amp;viewId=CustomerServiceView&amp;pageId=CustomerServicePersonOvrVwPage&amp;id=@{#line.id}"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="TransactionSearchPage" parent="Uif-Page" p:title="Transactions" scope="prototype">
+        <property name="items">
+            <list>
+                <bean parent="Uif-VerticalBoxSection"
+                      p:layoutManager.orientation="VERTICAL"
+                      p:title="Search for Transactions by Statement Text">
+                    <property name="disclosure.render" value="false"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-Disclosure-TableCollectionSection"
+                                  p:layoutManager.numberOfColumns="3"
+                                  p:disclosure.render="false"
+                                  p:progressiveRenderViaAJAX="true"
+                                  p:title="Matching Transactions"
+                                  p:instructionalText="Select a transaction to view details">
+                                <property name="readOnly" value="true"/>
+                                <property name="collectionObjectClass"
+                                          value="com.sigmasys.kuali.ksa.model.Transaction"/>
+                                <property name="propertyName" value="transactions"/>
+                                <property name="layoutManager.sequencePropertyName" value="id"/>
+                                <property name="layoutManager.richTable.render" value="false"/>
+                                <property name="layoutManager.renderSequenceField" value="false"/>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-InputField" p:label="ID"
+                                              p:propertyName="id">
+                                            <property name="control">
+                                                <bean parent="Uif-TextControl" p:size="35" p:maxLength="35"/>
+                                            </property>
+                                        </bean>
+                                        <bean parent="Uif-InputField" p:label="Type"
+                                              p:propertyName="transactionTypeValue">
+                                            <property name="control">
+                                                <bean parent="Uif-TextControl" p:size="50" p:maxLength="50"/>
+                                            </property>
+                                        </bean>
+                                        <bean parent="Uif-InputField" p:label="Statement"
+                                              p:propertyName="statementText">
+                                            <property name="control">
+                                                <bean parent="Uif-TextControl" p:size="120" p:maxLength="120"/>
+                                            </property>
+                                        </bean>
+                                        <!-- Use this to display the combined account, bio, aging and alerts -->
+                                        <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                                              p:href="customerService?methodToCall=get&amp;viewId=CustomerServiceView&amp;pageId=CustomerServicePersonOvrVwPage&amp;id=@{#line.id}"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>

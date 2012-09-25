@@ -7,7 +7,6 @@ import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,7 +31,7 @@ import static com.sigmasys.kuali.ksa.util.CommonUtils.*;
  */
 @Controller
 @RequestMapping(value = "/customerService")
-public class CustomerServiceController extends UifControllerBase {
+public class CustomerServiceController extends GenericSearchController {
 
     @Autowired
     private AccountService accountService;

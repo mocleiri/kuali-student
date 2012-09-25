@@ -36,6 +36,11 @@ public class Payment extends Credit {
         this.clearDate = clearDate;
     }
 
+    @Transient
+    public TransactionTypeValue getTransactionTypeValue() {
+        return TransactionTypeValue.PAYMENT;
+    }
+
     /*
     * Using the payment type and effective date, look up the priority of the payment for the payment application system.
     */

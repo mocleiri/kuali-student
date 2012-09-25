@@ -24,16 +24,15 @@
         xsi:schemaLocation="http://www.springframework.org/schema/beans
                             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="AdminLiaisonView" parent="Uif-FormView" p:footer.render="false">
+    <bean id="AdminLiaisonView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Administrative Liaison"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AdminLiaisonForm"/>
-        <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="AdminLiaisonQuickMenuOptionsPage"/>
         <property name="navigation">
             <ref bean="KSAAdminLiaisonVwNav"/>
         </property>
         <property name="items">
-            <list>
+            <list merge="true">
                 <bean parent="Uif-Page" p:id="AdminLiaisonQuickMenuOptionsPage" p:title="Quick Options">
                     <property name="items">
                         <list>
@@ -64,7 +63,7 @@
     </bean>-->
 
     <!-- AdminLiaison navigation -->
-    <bean id="KSAAdminLiaisonVwNav" parent="Uif-MenuNavigationGroup">
+    <bean id="KSAAdminLiaisonVwNav" parent="Uif-KsaNavigationGroupBase">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
