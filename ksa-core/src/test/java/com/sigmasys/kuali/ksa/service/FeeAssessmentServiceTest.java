@@ -181,6 +181,46 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		assertStudy(testStudy, feeBaseFromService.getStudy());
 	}
 	
+	@Test
+	public void testCalcluateChargeByCreditToMaxNegativeMax() throws Exception {
+		int numOfCredits = 5;
+		double amountPerCredit = 250.5;
+		double maxAmount = -100.5;
+		double charge = feeAssessmentService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		
+		assertEquals(1252.5, charge, 0.0);
+	}
+	
+	@Test
+	public void testCalcluateChargeByCreditToMaxPositiveMaxGreaterThanTotal() throws Exception {
+		int numOfCredits = 5;
+		double amountPerCredit = 250.5;
+		double maxAmount = 2000.5;
+		double charge = feeAssessmentService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		
+		assertEquals(1252.5, charge, 0.0);
+	}
+	
+	@Test
+	public void testCalcluateChargeByCreditToMaxPositiveMaxLessThanTotal() throws Exception {
+		int numOfCredits = 5;
+		double amountPerCredit = 250.5;
+		double maxAmount = 200.5;
+		double charge = feeAssessmentService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		
+		assertEquals(200.5, charge, 0.0);
+	}
+	
+	@Test
+	public void testCalcluateChargeByCreditToMaxZeroMax() throws Exception {
+		int numOfCredits = 5;
+		double amountPerCredit = 250.5;
+		double maxAmount = 0;
+		double charge = feeAssessmentService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		
+		assertEquals(0, charge, 0.0);
+	}
+	
 	/* *************************************
 	 * 
 	 * Helper methods.

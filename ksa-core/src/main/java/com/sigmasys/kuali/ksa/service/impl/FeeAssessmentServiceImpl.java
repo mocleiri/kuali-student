@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.KeyPair;
 import com.sigmasys.kuali.ksa.model.KeyPairType;
+import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.FeeAssessmentService;
@@ -101,5 +102,118 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		List<T> result = query.getResultList();
 
 		return result;
+	}
+
+	@Override
+	public double calculateFees(FeeBase feeBase, LearningPeriod period) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	/**
+	 * Calculates the total payment amount for the given amount of credits not to exceed 
+	 * the maximum amount <code>maxAmount</code>. If <code>maxAmount</code> is equal to <code>-1</code>, 
+	 * there is no total amount limit.
+	 * 
+	 * @param numOfCredits Amount of credits.
+	 * @param amountPerCredit Cost of each credit.
+	 * @param maxAmount Maximum total payment cap. 
+	 * @return The total payment limited by <code>maxAmount</code> or the total amount if <code>maxAmount</code> is <code>-1</code>.
+	 */
+	@Override
+	public double calcluateChargeByCreditToMax(int numOfCredits, double amountPerCredit, double maxAmount) {
+		return Math.min(numOfCredits * amountPerCredit, (maxAmount < 0) ? Double.MAX_VALUE : maxAmount);
+	}
+
+	@Override
+	public KeyPair createKeyPair(FeeBase feeBase, String name, String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PeriodKeyPair createPeriodKeyPair(FeeBase feeBase, String name,
+			String value, LearningPeriod period) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public KeyPair createLearningUnitKeyPair(LearningUnit learningUnit,
+			String name, String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeyPairValue(FeeBase feeBase, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeyPairValue(FeeBase feeBase, String name,
+			LearningPeriod period) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeyPairValue(LearningUnit learningUnit, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeKeyPair(FeeBase feeBase, String name, String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removePeriodKeyPair(FeeBase feeBase, String name, String value,
+			LearningPeriod period) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeLearningUnitKeyPair(LearningUnit learningUnit,
+			String name, String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateKeyPair(FeeBase feeBase, String name, String newValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePeriodKeyPair(FeeBase feeBase, String name,
+			String newValue, LearningPeriod newPeriod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateLearningUnitKeyPair(LearningUnit learningUnit,
+			String name, String newValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveLearningUnit(LearningUnit learningUnit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LearningPeriod getCurrentPeriod() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
