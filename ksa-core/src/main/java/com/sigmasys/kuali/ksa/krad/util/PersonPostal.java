@@ -18,7 +18,7 @@ public class PersonPostal {
     * @param personName
     * @return
     */
-   public String CreateCompositePersonName(PersonName personName) {
+   public String createCompositePersonName(PersonName personName) {
 
       StringBuilder personNameBuilder = new StringBuilder();
 
@@ -40,7 +40,7 @@ public class PersonPostal {
     * @param postalAddress
     * @return
     */
-   public String CreateCompositePostalAddress(PostalAddress postalAddress) {
+   public String createCompositePostalAddress(PostalAddress postalAddress) {
 
       StringBuilder postalAddressBuilder = new StringBuilder();
 

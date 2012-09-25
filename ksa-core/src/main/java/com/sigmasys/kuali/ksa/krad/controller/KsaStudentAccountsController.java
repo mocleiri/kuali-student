@@ -3,8 +3,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
 import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -25,8 +23,6 @@ import java.util.List;
 @RequestMapping(value = "/ksaStudentAccountsVw")
 public class KsaStudentAccountsController extends GenericSearchController {
 
-    @Autowired
-    private AccountService accountService;
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
@@ -192,20 +188,9 @@ public class KsaStudentAccountsController extends GenericSearchController {
             if (personName != null && personName.getLastName() != null &&
                     personName.getLastName().contains(personSearchByAccount)) {
 
-                // an account should have a default PersonName and default PostalAddress
-
-                PostalAddress postalAddress = account.getDefaultPostalAddress();
-
-                Account accountCopy = account.getCopy();
-
-                // format the name and address as a single string of each
-                PersonPostal personPostal = new PersonPostal();
-                accountCopy.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
-                accountCopy.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
-
                 // add each account copy to a list
 
-                accountList.add(accountCopy);
+                accountList.add(account.getCopy());
             }
         }
 
@@ -225,6 +210,6 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
         PersonPostal personPostal = new PersonPostal();
         PersonName personName = accountById.getDefaultPersonName();
-        return personPostal.CreateCompositePersonName(personName);
+        return personPostal.createCompositePersonName(personName);
     }
 }

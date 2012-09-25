@@ -4,10 +4,7 @@ import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
 import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,17 +28,10 @@ import java.util.*;
 @RequestMapping(value = "/cashierTxMemo")
 public class CashierTxMemoController extends GenericSearchController {
 
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private CurrencyService currencyService;
 
     @Autowired
     private InformationService informationService;
 
-    @Autowired
-    private TransactionService transactionService;
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
@@ -335,20 +325,9 @@ public class CashierTxMemoController extends GenericSearchController {
             // for each default PersonName in the query list that contains the selected person
             if (personName != null && personName.getLastName().contains(studentLookupByName)) {
 
-                // an account should have a default PersonName and default PostalAddress
-
-                PostalAddress postalAddress = account.getDefaultPostalAddress();
-
-                Account accountCopy = account.getCopy();
-
-                // format the name and address as a single string of each
-
-                accountCopy.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
-                accountCopy.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
-
                 // add each account copy to a list
 
-                accountList.add(accountCopy);
+                accountList.add(account.getCopy());
             }
         }
 
@@ -463,14 +442,6 @@ public class CashierTxMemoController extends GenericSearchController {
         }
 
         ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
-
-        PersonName personName = accountById.getDefaultPersonName();
-        PostalAddress postalAddress = accountById.getDefaultPostalAddress();
-
-        // format the name and address as a single string of each
-        PersonPostal personPostal = new PersonPostal();
-        accountById.setCompositeDefaultPersonName(personPostal.CreateCompositePersonName(personName));
-        accountById.setCompositeDefaultPostalAddress(personPostal.CreateCompositePostalAddress(postalAddress));
 
         List<Account> accountList = new ArrayList<Account>();
         accountList.add(accountById);

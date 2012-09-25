@@ -22,6 +22,8 @@ import javax.persistence.Transient;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
 
+import static com.sigmasys.kuali.ksa.util.CommonUtils.nvl;
+
 /**
  * KSA Account model
  * <p/>
@@ -97,16 +99,6 @@ public class Account implements Identifiable {
      * Account Status Type
      */
     protected AccountStatusType statusType;
-
-    /**
-     * lastName, firstName of the default PersonName Set record
-     */
-    private String compositeDefaultPersonName;
-
-    /**
-     * Address line 1, state, postalCode, and country of the default PostalAddress Set record
-     */
-    private String compositeDefaultPostalAddress;
 
 
     protected Account() {
@@ -295,16 +287,14 @@ public class Account implements Identifiable {
      */
     @Transient
     public String getCompositeDefaultPersonName() {
-        return compositeDefaultPersonName;
-    }
-
-    /**
-     * Set lastName, firstName of the default PersonName Set record
-     *
-     * @param compositeDefaultPersonName
-     */
-    public void setCompositeDefaultPersonName(String compositeDefaultPersonName) {
-        this.compositeDefaultPersonName = compositeDefaultPersonName;
+        StringBuilder personNameBuilder = new StringBuilder();
+        PersonName personName = getDefaultPersonName();
+        if (personName != null) {
+            personNameBuilder.append(nvl(personName.getLastName()));
+            personNameBuilder.append(", ");
+            personNameBuilder.append(nvl(personName.getFirstName()));
+        }
+        return personNameBuilder.toString();
     }
 
     /**
@@ -312,18 +302,21 @@ public class Account implements Identifiable {
      */
     @Transient
     public String getCompositeDefaultPostalAddress() {
-        return compositeDefaultPostalAddress;
+        StringBuilder postalAddressBuilder = new StringBuilder();
+        PostalAddress postalAddress = getDefaultPostalAddress();
+        if (postalAddress != null) {
+            postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(nvl(postalAddress.getCity()));
+            postalAddressBuilder.append(", ");
+            postalAddressBuilder.append(nvl(postalAddress.getState()));
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(nvl(postalAddress.getCountry()));
+        }
+        return postalAddressBuilder.toString();
     }
-
-    /**
-     * Set Address line 1, state, postalCode, and country of the default PostalAddress Set record
-     *
-     * @param compositeDefaultPostalAddress
-     */
-    public void setCompositeDefaultPostalAddress(String compositeDefaultPostalAddress) {
-        this.compositeDefaultPostalAddress = compositeDefaultPostalAddress;
-    }
-
 
     @Transient
     public Account getCopy() {

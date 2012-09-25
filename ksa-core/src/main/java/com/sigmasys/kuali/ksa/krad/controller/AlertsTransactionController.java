@@ -2,9 +2,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.krad.form.AlertsTransactionForm;
-import com.sigmasys.kuali.ksa.service.TransactionService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -28,8 +25,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class AlertsTransactionController extends GenericSearchController {
 
-   @Autowired
-   private TransactionService transactionService;
+
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)

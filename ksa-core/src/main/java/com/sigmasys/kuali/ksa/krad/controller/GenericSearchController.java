@@ -31,10 +31,10 @@ public abstract class GenericSearchController extends UifControllerBase {
 
 
     @Autowired
-    private AccountService accountService;
+    protected  AccountService accountService;
 
     @Autowired
-    private TransactionService transactionService;
+    protected TransactionService transactionService;
 
 
     /**

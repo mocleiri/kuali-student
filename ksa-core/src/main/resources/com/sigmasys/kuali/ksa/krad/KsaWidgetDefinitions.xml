@@ -55,7 +55,7 @@
         </property>
     </bean>
 
-    <bean id="Uif-KsaFormView" parent="Uif-FormView" abstract="true" scope="prototype">
+    <bean id="Uif-KsaFormView" parent="Uif-FormView" abstract="true">
         <property name="template" value="/WEB-INF/ftl/view.ftl"/>
         <property name="additionalCssFiles">
             <list>
@@ -76,7 +76,7 @@
                                 <bean parent="Uif-InputField" p:propertyName="searchType" p:label="Search Type"
                                       p:labelPlacement="LEFT"
                                       p:width="auto"
-                                      p:required="false">
+                                      p:required="true">
                                     <property name="bindingInfo.bindToForm" value="true"/>
                                     <property name="control">
                                         <bean parent="Uif-DropdownControl"/>
@@ -87,8 +87,9 @@
                                 <bean parent="Uif-InputField" p:label="Search" p:propertyName="searchValue"
                                       p:labelPlacement="LEFT"
                                       p:fieldLabel.renderColon="true">
+                                    <property name="bindingInfo.bindToForm" value="true"/>
                                     <property name="control">
-                                        <bean parent="Uif-TextControl" p:size="15"/>
+                                        <bean parent="Uif-TextControl" p:size="25"/>
                                     </property>
                                 </bean>
                                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByType"

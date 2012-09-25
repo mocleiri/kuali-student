@@ -4,10 +4,8 @@ import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
 import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.ActivityService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +24,6 @@ import java.util.*;
 @RequestMapping(value = "/transOvrVw")
 public class TransOvrController extends GenericSearchController {
 
-    @Autowired
-    private AccountService accountService;
 
     @Autowired
     ActivityService activityService;
@@ -35,8 +31,6 @@ public class TransOvrController extends GenericSearchController {
     @Autowired
     private CurrencyService currencyService;
 
-    @Autowired
-    private TransactionService transactionService;
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
@@ -158,7 +152,7 @@ public class TransOvrController extends GenericSearchController {
             if (charge != null) {
                 PersonName personName = charge.getAccount().getDefaultPersonName();
                 PersonPostal personPostal = new PersonPostal();
-                String compositePersonName = personPostal.CreateCompositePersonName(personName);
+                String compositePersonName = personPostal.createCompositePersonName(personName);
                 form.setSelectedPersonName(compositePersonName);
             }
 
@@ -177,7 +171,7 @@ public class TransOvrController extends GenericSearchController {
             if (payment != null) {
                 PersonName personName = payment.getAccount().getDefaultPersonName();
                 PersonPostal personPostal = new PersonPostal();
-                String compositePersonName = personPostal.CreateCompositePersonName(personName);
+                String compositePersonName = personPostal.createCompositePersonName(personName);
                 form.setSelectedPersonName(compositePersonName);
             }
 
@@ -257,22 +251,9 @@ public class TransOvrController extends GenericSearchController {
 
             if (personName != null && personName.getLastName().contains(studentLookupByName)) {
 
-                // an account should have a default PersonName and default PostalAddress
-
-                PostalAddress postalAddress = account.getDefaultPostalAddress();
-
-                Account accountCopy = account.getCopy();
-
-                PersonPostal personPostal = new PersonPostal();
-
-                String compositePersonName = personPostal.CreateCompositePersonName(personName);
-                accountCopy.setCompositeDefaultPersonName(compositePersonName);
-                String compositePostalAddress = personPostal.CreateCompositePostalAddress(postalAddress);
-                accountCopy.setCompositeDefaultPostalAddress(compositePostalAddress);
-
                 // add each account copy to a list
 
-                accountList.add(accountCopy);
+                accountList.add(account.getCopy());
             }
         }
 
@@ -313,6 +294,6 @@ public class TransOvrController extends GenericSearchController {
 
         PersonPostal personPostal = new PersonPostal();
         PersonName personName = accountById.getDefaultPersonName();
-        return personPostal.CreateCompositePersonName(personName);
+        return personPostal.createCompositePersonName(personName);
     }
 }
