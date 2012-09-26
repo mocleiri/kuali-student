@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CustomerServiceForm;
 import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
-import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,22 +121,15 @@ public class CustomerServiceController extends GenericSearchController {
         if (accountId != null && !accountId.trim().isEmpty()) {
 
            Date dtNow = new Date();
-           Transaction transaction = null;
 
            try {
-              transaction =
-                 transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
-                                                      accountId, dtNow, form.getCharge().getAmount());
-           } catch (IllegalArgumentException iaexp) {
-              form.setTransactionStatus(iaexp.getMessage());
+
+               transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
+                                                      accountId, dtNow, null, form.getCharge().getAmount());
+               form.setTransactionStatus("Success");
+
            } catch(Exception exp) {
               form.setTransactionStatus(exp.getMessage());
-           } finally {
-              // persisting the transaction should return a Long in the TransactionServiceImpl
-              // the local transaction would be set to a return object if persisted, otherwise null
-              if (transaction != null) {
-                 form.setTransactionStatus("Success");
-              }
            }
 
             // populate the form using the id
@@ -162,22 +154,16 @@ public class CustomerServiceController extends GenericSearchController {
         if (accountId != null && !accountId.trim().isEmpty()) {
 
            Date dtNow = new Date();
-           Transaction transaction = null;
 
            try {
-              transaction =
-                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
-                                                      accountId, dtNow, form.getPayment().getAmount());
-           } catch (IllegalArgumentException iaexp) {
-              form.setTransactionStatus(iaexp.getMessage());
+
+                transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
+                                                      accountId, dtNow, null, form.getPayment().getAmount());
+
+               form.setTransactionStatus("Success");
+
            } catch(Exception exp) {
               form.setTransactionStatus(exp.getMessage());
-           } finally {
-              // persisting the transaction should return a Long in the TransactionServiceImpl
-              // the local transaction would be set to a return object if persisted, otherwise null
-              if (transaction != null) {
-                 form.setTransactionStatus("Success");
-              }
            }
 
             // populate the form using the id
@@ -205,33 +191,20 @@ public class CustomerServiceController extends GenericSearchController {
         if (accountId != null && !accountId.trim().isEmpty()) {
 
            Date dtNow = new Date();
-           Transaction transaction = null;
 
            try {
-              transaction =
+
                  transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
-                                                      accountId, dtNow, form.getPayment().getAmount());
-           } catch (IllegalArgumentException iaexp) {
-              form.setTransactionStatus(iaexp.getMessage());
+                                                      accountId, dtNow, null, form.getPayment().getAmount());
+
+                 accountService.ageDebt(accountId, form.getIgnoreDeferment());
+
+               form.setTransactionStatus("Success");
+
            } catch(Exception exp) {
               form.setTransactionStatus(exp.getMessage());
-           } finally {
-              // persisting the transaction should return a Long in the TransactionServiceImpl
-              // the local transaction would be set to a return object if persisted, otherwise null
-              if (transaction != null) {
-                 // age the indexed Account Transactions
-                 ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
-
-                 if (chargeableAccount != null) {
-                    form.setTransactionStatus("Success");
-                 }
-/*
-                 else {
-                    form.setTransactionStatus("Failed to age transactions");
-                 }
-*/
-              }
            }
+
             // populate the form using the id
             populateForm(accountId, form);
         }
@@ -349,7 +322,7 @@ public class CustomerServiceController extends GenericSearchController {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
             // age the indexed Account Transactions
-            ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+            accountService.ageDebt(accountId, form.getIgnoreDeferment());
             // populate the form using the id
             populateForm(accountId, form);
         }
@@ -401,7 +374,7 @@ public class CustomerServiceController extends GenericSearchController {
             info.setEffectiveDate(form.getInfoEffectiveDate());
             info.setLastUpdate(new Date());
             //info.setCreatorId();
-            //info.setResponsibleEntity();
+            //info.setCreatorId();
             Long infoId = informationService.persistInformation(info);
 
             form.setInfoAddStatus(infoId > 0 ? "Success" : "Unable to add");

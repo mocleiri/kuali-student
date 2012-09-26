@@ -124,7 +124,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         model.setInternal(transaction.isInternal());
         //model.setRefundRule(transaction.getRefundRule());
         model.setStatementText(transaction.getStatementText());
-        model.setResponsibleEntity(transaction.getResponsibleEntity());
+        model.setResponsibleEntity(transaction.getCreatorId());
 
         if (transaction instanceof Charge) {
             model.setType(TransactionType.CHARGE);
@@ -163,7 +163,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
     public TransactionModel createTransaction(String transactionTypeId, String externalId, String userId,
                                               Date effectiveDate, Double amount) throws GwtError {
         Transaction transaction = transactionService.createTransaction(transactionTypeId, externalId, userId,
-                effectiveDate, new BigDecimal(amount));
+                effectiveDate, null, new BigDecimal(amount));
         return createModelFrom(transaction);
     }
 

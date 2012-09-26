@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.model;
 
-import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -11,37 +10,6 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class Credit extends Transaction {
-
-    /**
-     * if set to true, the amount may be refunded to the student subject to any other clearing rules, for example, a check 10-day waiting period, etc.
-     * This will be set to false in the case of tuition deposits, etc, which may not be refunded to a student, but may be allocated to charges on the account.
-     */
-    protected Boolean isRefundable;
-
-    /**
-     * Refund rule
-     */
-    private String refundRule;
-
-
-    @org.hibernate.annotations.Type(type = "yes_no")
-    @Column(name = "IS_REFUNDABLE")
-    public Boolean isRefundable() {
-        return isRefundable;
-    }
-
-    public void setRefundable(Boolean refundable) {
-        isRefundable = refundable;
-    }
-
-    @Column(name = "REFUND_RULE", length = 2000)
-    public String getRefundRule() {
-        return refundRule;
-    }
-
-    public void setRefundRule(String refundRule) {
-        this.refundRule = refundRule;
-    }
 
 }
 

@@ -35,7 +35,7 @@ public class TransactionModel extends AbstractModel {
     public static final String INTERNAL = "transaction.internal";
 
 
-    public static final String RESPONSIBLE_ENTITY = "transaction.responsibleEntity";
+    public static final String RESPONSIBLE_ENTITY = "transaction.creatorId";
     public static final String STATEMENT_TEXT = "transaction.statementText";
     public static final String REFUND_RULE = "transaction.refundRule";
 

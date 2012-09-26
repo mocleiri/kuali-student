@@ -61,36 +61,6 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
-
-    @Test
-    public void deferTransaction() throws Exception {
-
-        String id = "debit1";
-
-        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
-
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-
-        Deferment deferment = transactionService.deferTransaction(transaction.getId(), new BigDecimal(10e5 / 2),
-                new Date(System.currentTimeMillis() + 100 * 1000), "New deferment for 'debit1'", "DEF");
-
-        Assert.notNull(deferment);
-        Assert.notNull(deferment.getId());
-        Assert.notNull(deferment.getTransactionType());
-        Assert.notNull(deferment.getAccount());
-        Assert.notNull(deferment.getCurrency());
-        Assert.notNull(deferment.getAmount());
-
-        Assert.isTrue("USD".equals(deferment.getCurrency().getCode()));
-        Assert.isTrue("admin".equals(deferment.getAccount().getId()));
-        Assert.isTrue(TEST_USER_ID.equals(deferment.getResponsibleEntity()));
-
-        Assert.isTrue(new Date().compareTo(deferment.getEffectiveDate()) >= 0);
-        Assert.isTrue(new BigDecimal(10e5).equals(deferment.getNativeAmount()));
-
-    }
-
     private void createAllocation(boolean locked) {
 
         String id = "1020";

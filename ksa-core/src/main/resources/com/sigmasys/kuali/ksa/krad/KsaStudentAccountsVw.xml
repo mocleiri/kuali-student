@@ -582,7 +582,7 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="responsibleEntity" p:label="Responsible Entity"
+                <bean parent="Uif-InputField" p:propertyName="creatorId" p:label="Responsible Entity"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">

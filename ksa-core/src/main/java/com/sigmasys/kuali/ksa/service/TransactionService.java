@@ -48,11 +48,12 @@ public interface TransactionService {
      * @param externalId        Transaction external ID
      * @param userId            Account ID
      * @param effectiveDate     Transaction effective Date
+     * @param expirationDate    used for deferments only
      * @param amount            Transaction amount
      * @return new Transaction instance
      */
-    Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
-                                  BigDecimal amount);
+    Transaction createTransaction(String transactionTypeId, String externalId, String userId,
+                                  Date effectiveDate, Date expirationDate, BigDecimal amount);
 
     /**
      * Creates a new transaction based on the given parameters
@@ -62,12 +63,14 @@ public interface TransactionService {
      * @param externalId        Transaction External ID
      * @param userId            Account ID
      * @param effectiveDate     Transaction effective Date
+     * @param expirationDate    used for deferments only
      * @param amount            Transaction amount
      * @param overrideBlocks    indicates whether the account blocks must be overridden
      * @return new Transaction instance
      */
     @WebMethod(exclude = true)
-    Transaction createTransaction(String transactionTypeId, String externalId, String userId, Date effectiveDate,
+    Transaction createTransaction(String transactionTypeId, String externalId, String userId,
+                                  Date effectiveDate, Date expirationDate,
                                   BigDecimal amount, boolean overrideBlocks);
 
     /**
@@ -366,7 +369,7 @@ public interface TransactionService {
      * @param statementPrefix Statement prefix that will be added to the existing Transaction statement
      */
     void reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount,
-                                   String statementPrefix);
+                            String statementPrefix);
 
     /**
      * A deferment may be expired automatically (when the date of the deferment
@@ -387,20 +390,6 @@ public interface TransactionService {
      * issued.
      */
     void reduceDeferment(Long defermentId, BigDecimal newAmount);
-
-    /**
-     * Automatically generates a deferment transaction for the given transaction,
-     * allocates and locks the two transactions together.
-     *
-     * @param transactionId   Charge ID
-     * @param partialAmount   the amount to be used for the deferment
-     * @param expirationDate  the deferment expiration date
-     * @param memoText        the text of the new memo created for the deferment
-     * @param defermentTypeId the deferment type ID
-     * @return new Deferment instance
-     */
-    Deferment deferTransaction(Long transactionId, BigDecimal partialAmount,
-                               Date expirationDate, String memoText, String defermentTypeId);
 
     /**
      * Returns the transaction type for the given transaction type ID

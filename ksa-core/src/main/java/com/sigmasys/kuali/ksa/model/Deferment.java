@@ -18,21 +18,15 @@ public class Deferment extends Credit {
     private Date expirationDate;
 
     /**
-     * A deferment is always issued against a debit. This value shows the system which debit has been deferred.
-     * Once a deferment is expired, this value remains to show
-     * the original status and intention of the deferment.
+     * Indicates that the deferment has gone through a process called "expireDeferment"
      */
-    private Long deferredTransactionId;
+    private Boolean isExpired;
 
-
-    public void setDeferredTransactionId(Long deferredTransactionId) {
-        this.deferredTransactionId = deferredTransactionId;
+    @Transient
+    public TransactionTypeValue getTransactionTypeValue() {
+        return TransactionTypeValue.DEFERMENT;
     }
 
-    @Column(name = "DEFER_ID")
-    public Long getDeferredTransactionId() {
-        return deferredTransactionId;
-    }
 
     @Column(name = "EXPIRATION_DATE")
     public Date getExpirationDate() {
@@ -43,19 +37,14 @@ public class Deferment extends Credit {
         this.expirationDate = expirationDate;
     }
 
-    @Transient
-    public TransactionTypeValue getTransactionTypeValue() {
-          return TransactionTypeValue.DEFERMENT;
+    @org.hibernate.annotations.Type(type = "yes_no")
+    @Column(name = "IS_EXPIRED")
+    public Boolean isExpired() {
+        return isExpired != null ? isExpired : false;
     }
 
-    /*
-      * This returns the expiration status and is true if the deferment has expired.
-      */
-    @Transient
-    public boolean isExpired() {
-        Date expirationDate = getExpirationDate();
-        return (expirationDate != null) && new Date().after(expirationDate);
+    public void setExpired(Boolean expired) {
+        isExpired = expired;
     }
-
 }
 

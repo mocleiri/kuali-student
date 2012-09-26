@@ -117,30 +117,18 @@ public class CashierTxMemoController extends GenericSearchController {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
-           Transaction transaction = null;
-           StringBuilder sb = new StringBuilder();
-           sb.append("Add charge ");
+            Date dtNow = new Date();
 
-           try {
-              transaction =
-                 transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
-                                                      accountId, dtNow, form.getCharge().getAmount());
+            try {
 
-           } catch (IllegalArgumentException iaexp) {
-              form.setTransactionStatus(iaexp.getMessage());
-              sb.append(iaexp.getMessage());
-           } catch(Exception exp) {
-              form.setTransactionStatus(exp.getMessage());
-              sb.append(exp.getMessage());
-           } finally {
-              // persisting the transaction should return a Long in the TransactionServiceImpl
-              // the local transaction would be set to a return object if persisted, otherwise null
-              if (transaction != null) {
-                 form.setTransactionStatus("Success");
-                 sb.append(transaction.getId().toString());
-              }
-           }
+                transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
+                        accountId, dtNow, null, form.getCharge().getAmount());
+
+                form.setTransactionStatus("Success");
+
+            } catch (Exception exp) {
+                form.setTransactionStatus(exp.getMessage());
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -163,29 +151,18 @@ public class CashierTxMemoController extends GenericSearchController {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
-           Transaction transaction = null;
-           StringBuilder sb = new StringBuilder();
-           sb.append("Make payment ");
+            Date dtNow = new Date();
 
-           try {
-              transaction =
-                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
-                                                      accountId, dtNow, form.getPayment().getAmount());
-           } catch (IllegalArgumentException iaexp) {
-              form.setTransactionStatus(iaexp.getMessage());
-              sb.append(iaexp.getMessage());
-           } catch(Exception exp) {
-              form.setTransactionStatus(exp.getMessage());
-              sb.append(exp.getMessage());
-           } finally {
-              // persisting the transaction should return a Long in the TransactionServiceImpl
-              // the local transaction would be set to a return object if persisted, otherwise null
-              if (transaction != null) {
-                 form.setTransactionStatus("Success");
-                 sb.append(transaction.getId().toString());
-              }
-           }
+            try {
+
+                transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
+                        accountId, dtNow, null, form.getPayment().getAmount());
+
+                form.setTransactionStatus("Success");
+
+            } catch (Exception exp) {
+                form.setTransactionStatus(exp.getMessage());
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -210,29 +187,20 @@ public class CashierTxMemoController extends GenericSearchController {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
-           Transaction transaction = null;
+            Date dtNow = new Date();
 
-           try {
-              transaction =
-                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
-                                                      accountId, dtNow, form.getPayment().getAmount());
-           } catch (IllegalArgumentException iaexp) {
-              form.setTransactionStatus(iaexp.getMessage());
-           } catch(Exception exp) {
-              form.setTransactionStatus(exp.getMessage());
-           } finally {
-              // persisting the transaction should return a Long in the TransactionServiceImpl
-              // the local transaction would be set to a return object if persisted, otherwise null
-              if (transaction != null) {
-                 // age the indexed Account Transactions
-                 ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, form.getIgnoreDeferment());
+            try {
 
-                 if (chargeableAccount != null) {
-                    form.setTransactionStatus("Success");
-                 }
-              }
-           }
+                transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
+                        accountId, dtNow, null, form.getPayment().getAmount());
+
+                accountService.ageDebt(accountId, form.getIgnoreDeferment());
+
+                form.setTransactionStatus("Success");
+
+            } catch (Exception exp) {
+                form.setTransactionStatus(exp.getMessage());
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -411,7 +379,7 @@ public class CashierTxMemoController extends GenericSearchController {
             info.setEffectiveDate(form.getInfoEffectiveDate());
             info.setLastUpdate(new Date());
             //info.setCreatorId();
-            //info.setResponsibleEntity();
+            //info.setCreatorId();
             Long infoId = informationService.persistInformation(info);
 
             form.setInfoAddStatus(infoId > 0 ? "Success" : "Unable to add");
@@ -518,7 +486,7 @@ public class CashierTxMemoController extends GenericSearchController {
 
         for (Flag flag : flags) {
 
-           flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
+            flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
         }
 
         form.setFlagList(flags);

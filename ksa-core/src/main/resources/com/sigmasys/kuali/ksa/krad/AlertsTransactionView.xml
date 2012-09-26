@@ -146,7 +146,7 @@
         <property name="instructionalText" value="A list of the most recent transactions"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="transaction.responsibleEntity" p:label="Responsible Entity">
+                <bean parent="Uif-InputField" p:propertyName="transaction.creatorId" p:label="Responsible Entity">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>

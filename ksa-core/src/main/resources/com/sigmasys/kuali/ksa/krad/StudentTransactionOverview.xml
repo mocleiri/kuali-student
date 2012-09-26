@@ -354,7 +354,7 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.responsibleEntity" p:label="Responsible Entity"
+                <bean parent="Uif-InputField" p:propertyName="charge.creatorId" p:label="Responsible Entity"
                       p:maxLength="45">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -436,7 +436,7 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="payment.responsibleEntity" p:label="Responsible Entity"
+                <bean parent="Uif-InputField" p:propertyName="payment.creatorId" p:label="Responsible Entity"
                       p:maxLength="45">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">

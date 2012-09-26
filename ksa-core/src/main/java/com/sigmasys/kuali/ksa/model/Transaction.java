@@ -102,7 +102,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     /**
      * The responsible entity is the entity that created the transaction. It is assumed the identity will be derived from KIM.
      */
-    protected String responsibleEntity;
+    protected String creatorId;
 
     /**
      * The text for the transaction that will be displayed as a summary of the transaction on statements. For example "Bookstore Purchase"  If this string is null during instantiation, the default text will
@@ -229,13 +229,13 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
         this.lockedAllocatedAmount = lockedAllocatedAmount;
     }
 
-    @Column(name = "RESP_ENTITY", length = 45)
-    public String getResponsibleEntity() {
-        return responsibleEntity;
+    @Column(name = "CREATOR_ID", length = 45)
+    public String getCreatorId() {
+        return creatorId;
     }
 
-    public void setResponsibleEntity(String responsibleEntity) {
-        this.responsibleEntity = responsibleEntity;
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
 
     @Column(name = "STATEMENT_TXT", length = 100)
