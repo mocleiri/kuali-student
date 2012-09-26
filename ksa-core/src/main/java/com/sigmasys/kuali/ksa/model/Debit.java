@@ -35,7 +35,7 @@ public abstract class Debit extends Transaction {
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_DEFERRED")
     public Boolean isDeferred() {
-        return deferred;
+        return deferred != null ? deferred : false;
     }
 
     public void setDeferred(Boolean deferred) {
@@ -45,7 +45,7 @@ public abstract class Debit extends Transaction {
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_PAYMENT_BILLING")
     public Boolean isPaymentBilling() {
-        return paymentBilling;
+        return paymentBilling != null ? paymentBilling : false;
     }
 
     public void setPaymentBilling(Boolean paymentBilling) {

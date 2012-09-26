@@ -1073,7 +1073,50 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public void expireDeferment(Long defermentId) {
-        // TODO
+
+        Deferment deferment = getDeferment(defermentId);
+        if (deferment == null) {
+            String errMsg = "Deferment with ID = " + defermentId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        // Checking if the deferment has already expired
+        Long deferredTransactionId = deferment.getDeferredTransactionId();
+        if (deferredTransactionId == null) {
+            String errMsg = "Deferred transaction ID is null, deferment ID = " + defermentId + "";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        Charge charge = getCharge(deferredTransactionId);
+        if (charge == null) {
+            String errMsg = "Charge with ID = " + deferredTransactionId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (!charge.isDeferred()) {
+            String errMsg = "Deferment with ID = " + defermentId + " has already expired";
+            logger.error(errMsg);
+            throw new DefermentExpiredException(errMsg);
+        }
+
+        // Removing all allocations for the deferment
+        removeAllocations(defermentId);
+
+        deferment.setAmount(BigDecimal.ZERO);
+        deferment.setExpirationDate(new Date());
+
+        charge.setDeferred(false);
+
+        persistTransaction(deferment);
+        persistTransaction(charge);
+
+
+        // TODO: there will be changes according to Paul
+
+
     }
 
     /**
