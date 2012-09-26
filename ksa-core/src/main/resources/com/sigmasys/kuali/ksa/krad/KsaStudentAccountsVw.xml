@@ -35,13 +35,10 @@
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
+                        <!-- TODO Advanced Search -->
                         <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage"
                               p:actionLabel="Home"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SearchResultsPage"
-                              p:actionLabel="Search Results"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountOVTransactionsPage"
-                              p:actionLabel="Account Overview"/>
                     </list>
                 </property>
             </bean>
@@ -51,24 +48,11 @@
                 <bean parent="Uif-Page" p:id="HomePage" p:title="Home">
                     <property name="items">
                         <list>
-                            <!--<ref bean="homeQuickOptions"/>-->
+                            <ref bean="homeQuickOptions"/>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="SearchResultsPage" p:title="Search Results">
-                    <property name="items">
-                        <list>
-                            <ref bean="searchResults"/>
-                        </list>
-                    </property>
-                </bean>
-                <bean parent="Uif-Page" p:id="StudentSummaryPage" p:title="Quick View">
-                    <property name="items">
-                        <list>
-                            <ref bean="studentSummarySection"/>
-                        </list>
-                    </property>
-                </bean>
+
                 <!-- transactions overview for an account roll-up and ungroupded list -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Quick View">
                     <property name="items">
@@ -132,8 +116,8 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Search" p:target="_self"
-                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=SearchResultsPage"/>
+<!--                <bean parent="Uif-Link" p:linkText="Search" p:target="_self"
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=SearchResultsPage"/>-->
                 <bean parent="Uif-Link" p:linkText="Transactions for a Person" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
                 <bean parent="Uif-Link" p:linkText="Currency Type" p:target="_self"
@@ -143,166 +127,6 @@
             </list>
         </property>
     </bean>
-
-    <!--
-    ********************************************************************************************************************
-                                             search list section
-    ********************************************************************************************************************
-    -->
-    <!-- Lookup an account person, select to view their account details and drill down to person and postal detail -->
-    <bean id="searchResults" parent="Uif-VerticalBoxSection"
-          p:layoutManager.orientation="VERTICAL"
-          p:title="Search Results">
-        <property name="disclosure.render" value="false"/>
-        <property name="items">
-            <list>
-                <ref bean="searchResultsList"/>
-            </list>
-        </property>
-    </bean>
-
-
-    <!--
-    ********************************************************************************************************************
-                                             search list table
-    This is the list of matching accounts and address based on the search accounts value
-    ********************************************************************************************************************
-    -->
-
-    <bean id="searchResultsList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="3"
-          p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true"
-          p:title="Results"
-          p:instructionalText="Select an item to view detailed information.">
-        <property name="readOnly" value="true"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
-        <property name="propertyName" value="accountBrowseList"/>
-        <property name="layoutManager.sequencePropertyName" value="id"/>
-        <property name="layoutManager.richTable.render" value="false"/>
-        <property name="layoutManager.renderSequenceField" value="false"/>
-        <property name="items">
-            <list>
-                <bean parent="Uif-InputField" p:label="Name" p:propertyName="compositeDefaultPersonName">
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="60" p:maxLength="59"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:label="Description" p:propertyName="compositeDefaultPostalAddress">
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-Link" p:linkText="Select" p:target="_self"
-                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=StudentSummaryPage&amp;id=@{#line.id}"/>
-            </list>
-        </property>
-    </bean>
-
-
-    <!--
-    ********************************************************************************************************************
-                                             Student Summary section
-    A group of groups that can spawn account, bio, alerts/flags, aging of accounts, memos
-    This is the Quick View where a combination of vertical and horizontal box groups would display
-    and get you to the Biographic. Alerts/Flags, Accounts Overview or Memos - other sub pages as well
-    ********************************************************************************************************************
-    -->
-    <bean id="studentSummarySection" parent="Uif-Disclosure-HorizontalBoxSection">
-        <property name="title" value="Box Layout Horizontal with Nested Vertical Groups"/>
-        <property name="instructionalText"
-                  value="Box layouts are nested with different orientations to form complex layouts. Here groups with vertical orientation are nested within horizontal group."/>
-        <property name="items">
-            <list>
-                <bean parent="Uif-VerticalBoxGroup">
-                    <property name="items">
-                        <list>
-                            <bean parent="Uif-InputField" p:propertyName="kimNameType" p:label="Name Type"
-                                  p:instructionalText="Type" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="title" p:label="Title"
-                                  p:instructionalText="Title" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="firstName" p:label="First Name"
-                                  p:instructionalText="First" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="middleName" p:label="Middle Name"
-                                  p:instructionalText="Middle" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="lastName" p:label="Last Name"
-                                  p:instructionalText="Last" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="suffix" p:label="Suffix"
-                                  p:instructionalText="Suffix" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="isDefault" p:label="Default"
-                                  p:instructionalText="Default value" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                        </list>
-                    </property>
-                </bean>
-
-                <bean parent="Uif-VerticalBoxGroup">
-                    <property name="items">
-                        <list>
-                            <bean parent="Uif-InputField" p:propertyName="firstName" p:label="First Name"
-                                  p:instructionalText="First" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="middleName" p:label="Middle Name"
-                                  p:instructionalText="Middle" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                            <bean parent="Uif-InputField" p:propertyName="lastName" p:label="Last Name"
-                                  p:instructionalText="Last" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                        </list>
-                    </property>
-                </bean>
-
-                <bean parent="Uif-VerticalBoxGroup">
-                    <property name="items">
-                        <list>
-                            <bean parent="Uif-InputField" p:propertyName="isDefault" p:label="Default"
-                                  p:instructionalText="Default value" p:fieldLabel.renderColon="true">
-                                <property name="control">
-                                    <bean parent="Uif-TextControl"/>
-                                </property>
-                            </bean>
-                        </list>
-                    </property>
-                </bean>
-            </list>
-        </property>
-    </bean>
-
 
     <!--
     ********************************************************************************************************************

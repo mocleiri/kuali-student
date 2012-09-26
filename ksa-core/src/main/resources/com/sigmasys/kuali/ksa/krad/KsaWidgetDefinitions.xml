@@ -128,8 +128,8 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Home" p:target="_self"
-                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=SearchResultsPage"/>
+                <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=HomePage"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
@@ -137,7 +137,7 @@
                 <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                      p:href="ksaBatchTransactionsVw?methodToCall=get&amp;viewId=KsaBatchTransactionsView&amp;pageId=BatchTransactionsQuickMenuOptionsPage"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
             </list>
@@ -182,7 +182,7 @@
                                         </bean>
                                         <!-- Use this to display the combined account, bio, aging and alerts -->
                                         <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
-                                              p:href="customerService?methodToCall=get&amp;viewId=CustomerServiceView&amp;pageId=CustomerServicePersonOvrVwPage&amp;id=@{#line.id}"/>
+                                              p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;id=@{#line.id}"/>
                                     </list>
                                 </property>
                             </bean>

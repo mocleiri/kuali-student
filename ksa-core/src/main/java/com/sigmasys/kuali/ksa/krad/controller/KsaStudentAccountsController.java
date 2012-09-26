@@ -45,8 +45,9 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
         // do get stuff...
         String pageId = request.getParameter("pageId");
+/*
 
-        if (pageId != null && pageId.compareTo("BioGraphicInfoSummaryPage") == 0) {
+        if (pageId != null && pageId.compareTo("") == 0) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -55,7 +56,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
             String compositePersonName = createCompositeDefaultPersonName(id);
             form.setSelectedAccountCompositePersonName(compositePersonName);
 
-            /*  // charges by ID
+              // charges by ID
             List<Charge> charges = transactionService.getCharges(id);
 
             // payments by ID
@@ -63,10 +64,10 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
             form.setChargeList(charges);
 
-            form.setPaymentList(payments);*/
+            form.setPaymentList(payments);*//*
+
         }
-
-
+*/
         return getUIFModelAndView(form);
     }
 
@@ -147,58 +148,6 @@ public class KsaStudentAccountsController extends GenericSearchController {
     public ModelAndView refresh(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                                 HttpServletRequest request, HttpServletResponse response) {
         // do refresh stuff...
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * User searches on a (last) name. The result set is iterated over to create the composite PersonName
-     * and composite address using default records, eventfully creating a browse list that can be displayed
-     * and selected from for further processing as desired.
-     *
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByType")
-    public ModelAndView searchByName(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
-                                     HttpServletRequest request, HttpServletResponse response) {
-
-        // we do not have a query by name or partial name via last name or contains yet
-        // if no result set from getting full accounts than the List is empty
-        // otherwise the lit contains records and a compsite person name and postal address
-
-        String personSearchByAccount = form.getBioSearchByAccount();
-
-        // query for all accounts
-
-        List<Account> accountSearchList = accountService.getFullAccounts();
-
-        // create a a list of Account objects for display requirements
-
-        List<Account> accountList = new ArrayList<Account>();
-
-        // if we have a result set of Accounts from the query
-
-        for (Account account : accountSearchList) {
-
-            PersonName personName = account.getDefaultPersonName();
-
-            if (personName != null && personName.getLastName() != null &&
-                    personName.getLastName().contains(personSearchByAccount)) {
-
-                // add each account copy to a list
-
-                accountList.add(account.getCopy());
-            }
-        }
-
-        // set the account list derived from the full search list
-
-        form.setAccountBrowseList(accountList);
-
-        // do a search by name returning account info
         return getUIFModelAndView(form);
     }
 
