@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Allocation;
 import com.sigmasys.kuali.ksa.model.Transaction;
 
 import java.math.BigDecimal;
@@ -60,6 +61,7 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private List<Transaction> byRollUpList;
 
+   private List<Allocation> allocationList;
 
    private String id;
 
@@ -294,6 +296,14 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setByRollUpList(List<Transaction> byRollUpList) {
       this.byRollUpList = byRollUpList;
+   }
+
+   public List<Allocation> getAllocationList() {
+      return allocationList;
+   }
+
+   public void setAllocationList(List<Allocation> allocationList) {
+      this.allocationList = allocationList;
    }
 
    public String getId() {
