@@ -96,8 +96,16 @@
                         </list>
                     </property>
                 </bean>
-                <!-- transaction allocation -->
+                <!-- a list of transaction allocation -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationPage" p:title="Quick View">
+                    <property name="items">
+                        <list>
+                            <ref bean="accountOVTransactionAllocationSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <!-- single transaction allocation -->
+                <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationDetailPage" p:title="Quick View">
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionAllocationSection"/>
@@ -304,7 +312,7 @@
     -->
     <bean id="accountOVTransactionsSection" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="@{selectedPersonName}"
+          p:title="@{searchValue}"
           p:instructionalText="The following table is a list of Roll-ups associated with the selected account">
         <property name="disclosure.render" value="false"/>
         <property name="items">
@@ -451,7 +459,7 @@
     -->
     <bean id="accountOVTransactionsByRollupSection"
           parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5"
-          p:title="@{selectedPersonName}"
+          p:title="@{searchValue}"
           p:instructionalText="The following table is a list of transactions categorized in the @{selectedRollupType} Roll-up">
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Transaction"/>
         <property name="propertyName" value="byRollUpList"/>
@@ -494,7 +502,7 @@
     -->
     <bean id="accountOVTransactionDetailSection" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="@{selectedPersonName}"
+          p:title="@{searchValue}"
           p:instructionalText="@{transactionType} transaction detail">
         <property name="disclosure.render" value="false"/>
         <property name="items">
@@ -785,28 +793,67 @@
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                     </property>-->
                 </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="viewAllocations"
-                      p:actionLabel="View Allocations">
-                    <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"
-                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>-->
-                </bean>
+                <bean parent="Uif-NavigationActionLink"
+                      p:navigateToPageId="AccountOVTransactionAllocationPage" p:actionLabel="View Allocations"/>
             </list>
         </property>
     </bean>
 
     <!--
     ********************************************************************************************************************
-                                   Account Overview Allocation section
+                                      Account Overview Allocation List table
+    This is the list of allocations
+    ********************************************************************************************************************
+    -->
+
+    <bean id="accountOVTransactionAllocationSection" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4"
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true"
+          p:title="Allocations for @{searchValue}"
+          p:instructionalText="Select an item to view detailed information.">
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Allocation"/>
+        <property name="propertyName" value="allocationList"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="account">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="60" p:maxLength="59"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="amount">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="isAllocationLocked" p:label="Locked"
+                      p:defaultValue="true" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-Link" p:linkText="Select" p:target="_self"
+                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                   Account Overview Allocation Details section
     Provides the detail for allocations of a student
     If the user checks to lock an allocation then force a memo entry (no cancel) with activityName
     like "Memo Creation for allocation 0945750203"
     ********************************************************************************************************************
     -->
-    <bean id="accountOVTransactionAllocationSection" parent="Uif-VerticalBoxSection"
+    <bean id="accountOVTransactionAllocationDetailsSection" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="@{selectedPersonName}"
+          p:title="@{searchValue}"
           p:instructionalText="@{transactionType} allocation Detail">
         <property name="disclosure.render" value="false"/>
         <property name="items">

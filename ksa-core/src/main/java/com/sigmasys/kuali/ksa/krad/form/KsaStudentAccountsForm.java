@@ -14,7 +14,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
-
    // use this object as a query argument for matching transactions by student name
    private String bioSearchByAccount;
 
