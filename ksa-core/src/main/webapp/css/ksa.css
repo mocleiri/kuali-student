@@ -1,3 +1,16 @@
+ /*
+    JET CSS Start
+ */
+
+ .ksa-logo {
+     padding-left: 10px;
+     padding-right: 350px;
+ }
+
+ /*
+    JET CSS End
+ */
+
 * {
     font-family: arial, helvetica, tahoma, sans-serif;
 }
