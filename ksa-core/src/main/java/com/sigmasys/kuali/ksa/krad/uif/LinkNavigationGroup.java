@@ -1,4 +1,4 @@
-package com.sigmasys.kuali.ksa.krad.util;
+package com.sigmasys.kuali.ksa.krad.uif;
 
 import org.kuali.rice.krad.uif.component.Component;
 import org.kuali.rice.krad.uif.container.NavigationGroup;

@@ -33,7 +33,7 @@
 
         <!-- VIEW NAVIGATION -->
         <div id="Uif-Navigation">
-            <@krad.template component=view.navigation/>
+            <@krad.template component=view.navigation currentPageId="${view.currentPageId}"/>
         </div>
 
         <!-- PAGE CONTENT -->
