@@ -61,7 +61,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
         // All transactions
         List<Transaction> transactions = transactionService.getTransactions(id);
 
-        logger.info("TJB Transaction Count: " + transactions.size());
+        logger.info("Transaction Count: " + transactions.size());
         List<Transaction> rollups = new ArrayList<Transaction>();
         List<Transaction> ungrouped = new ArrayList<Transaction>();
 
