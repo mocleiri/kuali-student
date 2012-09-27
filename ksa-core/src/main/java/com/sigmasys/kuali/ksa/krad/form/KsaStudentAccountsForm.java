@@ -1,8 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Allocation;
-import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
+import com.sigmasys.kuali.ksa.model.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,51 +14,15 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
-   // use this object as a query argument for matching transactions by student name
-   private String bioSearchByAccount;
-
-   // this is the composite person name first + middle and last name
-   private String selectedAccountCompositePersonName;
-
-   // result set of matching persons and address postal information
-   private List<Account> accountBrowseList;
-
-   // account ID and Bio information
-   private String selectedId;
-
-   /*
-      Summary information and Biographic
-    */
-   private String kimNameType;
-
-   private String title;
-
-   private String firstName;
-
-   private String middleName;
-
-   private String lastName;
-
-   private String suffix;
-
-   private String isDefault;
-
-   // PersonName fields concatenated
-   private String compositePersonName;
-
-   // PostalAddress fields concatenated
-   private String compositePostalAddress;
-
-
-
    /*
      Account Overview
    */
-   private List<Transaction> rollUpList;
 
-   private List<Transaction> unGroupedList;
+   private List<TransactionModel> rollUpTransactionModelList;
 
-   private List<Transaction> byRollUpList;
+   private List<TransactionModel> unGroupedTransactionModelList;
+
+   private List<TransactionModel> byRollUpTransactionModelList;
 
    private List<Allocation> allocationList;
 
@@ -70,6 +33,8 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
    private String allocationId;
 
    private String allocationAccountId;
+
+   private String extensionId;
 
    private String payerTransactionId;
 
@@ -160,6 +125,9 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private BigDecimal unGroupedTotalCredit;
 
+   private String selectedRollupType;
+
+   private String selectedTransactionType;
 
    /*
       Get/Set methods
@@ -170,6 +138,7 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
     */
 
 
+/*
    public String getBioSearchByAccount() {
       return bioSearchByAccount;
    }
@@ -185,7 +154,9 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
    public void setSelectedAccountCompositePersonName(String selectedAccountCompositePersonName) {
       this.selectedAccountCompositePersonName = selectedAccountCompositePersonName;
    }
+*/
 
+/*
    public List<Account> getAccountBrowseList() {
       return accountBrowseList;
    }
@@ -200,9 +171,10 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setSelectedId(String selectedId) {
       this.selectedId = selectedId;
-   }
 
-   public String getKimNameType() {
+   }
+*/
+/*   public String getKimNameType() {
       return kimNameType;
    }
 
@@ -272,30 +244,31 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setCompositePostalAddress(String compositePostalAddress) {
       this.compositePostalAddress = compositePostalAddress;
+   }*/
+
+   public List<TransactionModel> getRollUpTransactionModelList() {
+      return rollUpTransactionModelList;
    }
 
-   public List<Transaction> getRollUpList() {
-      return rollUpList;
+   public void setRollUpTransactionModelList(List<TransactionModel> rollUpTransactionModelList) {
+      this.rollUpTransactionModelList = rollUpTransactionModelList;
    }
 
-   public void setRollUpList(List<Transaction> rollUpList) {
-      this.rollUpList = rollUpList;
+   public List<TransactionModel> getUnGroupedTransactionModelList() {
+      return unGroupedTransactionModelList;
    }
 
-   public List<Transaction> getUnGroupedList() {
-      return unGroupedList;
+   public void setUnGroupedTransactionModelList(List<TransactionModel> unGroupedTransactionModelList) {
+      this.unGroupedTransactionModelList = unGroupedTransactionModelList;
    }
 
-   public void setUnGroupedList(List<Transaction> unGroupedList) {
-      this.unGroupedList = unGroupedList;
+
+   public List<TransactionModel> getByRollUpTransactionModelList() {
+      return byRollUpTransactionModelList;
    }
 
-   public List<Transaction> getByRollUpList() {
-      return byRollUpList;
-   }
-
-   public void setByRollUpList(List<Transaction> byRollUpList) {
-      this.byRollUpList = byRollUpList;
+   public void setByRollUpTransactionModelList(List<TransactionModel> byRollUpTransactionModelList) {
+      this.byRollUpTransactionModelList = byRollUpTransactionModelList;
    }
 
    public List<Allocation> getAllocationList() {
@@ -336,6 +309,14 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setAllocationAccountId(String allocationAccountId) {
       this.allocationAccountId = allocationAccountId;
+   }
+
+   public String getExtensionId() {
+      return extensionId;
+   }
+
+   public void setExtensionId(String extensionId) {
+      this.extensionId = extensionId;
    }
 
    public String getPayerTransactionId() {
@@ -688,5 +669,21 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setUnGroupedTotalCredit(BigDecimal unGroupedTotalCredit) {
       this.unGroupedTotalCredit = unGroupedTotalCredit;
+   }
+
+   public String getSelectedRollupType() {
+      return selectedRollupType;
+   }
+
+   public void setSelectedRollupType(String selectedRollupType) {
+      this.selectedRollupType = selectedRollupType;
+   }
+
+   public String getSelectedTransactionType() {
+      return selectedTransactionType;
+   }
+
+   public void setSelectedTransactionType(String selectedTransactionType) {
+      this.selectedTransactionType = selectedTransactionType;
    }
 }

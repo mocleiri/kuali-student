@@ -105,7 +105,7 @@
                         <bean parent="Uif-FileControl" p:size="30"/>
                     </property>
                 </bean>
-                <bean id="adminLiaisonUploadFileUserIO" parent="Uif-HorizontalBoxSection"
+                <bean id="batchTransactionUploadFileUserIO" parent="Uif-HorizontalBoxSection"
                       p:layoutManager.orientation="VERTICAL">
                     <property name="disclosure.render" value="false"/>
                     <property name="items">
