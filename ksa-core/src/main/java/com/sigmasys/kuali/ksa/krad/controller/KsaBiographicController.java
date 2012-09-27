@@ -1,9 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaBiographicForm;
-import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.PersonName;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -22,119 +19,108 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaBiographicInformationVw")
 public class KsaBiographicController extends GenericSearchController {
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected KsaBiographicForm createInitialForm(HttpServletRequest request) {
-      return new KsaBiographicForm();
-   }
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected KsaBiographicForm createInitialForm(HttpServletRequest request) {
+        return new KsaBiographicForm();
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
-
-      // do get stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-      // populate model for testing
-
-      return super.start(form, result, request, response);
-
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
-   @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        // do get stuff...
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+
+    @RequestMapping(params = "methodToCall=start")
+    public ModelAndView start(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
 
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+        // populate model for testing
+
+        return super.start(form, result, request, response);
+
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    @Transactional(readOnly = false)
+    public ModelAndView submit(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
+        // do submit stuff...
 
-   private String createCompositeDefaultPersonName(String id) {
-      Account accountById = accountService.getFullAccount(id);
-      if (accountById == null) {
-         throw new IllegalStateException("Cannot find Account by ID = " + id);
-      }
 
-      PersonPostal personPostal = new PersonPostal();
-      PersonName personName = accountById.getDefaultPersonName();
-      return personPostal.createCompositePersonName(personName);
-   }
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
+    public ModelAndView save(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
+
+        // do save stuff...
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
 
 }

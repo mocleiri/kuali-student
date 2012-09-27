@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
-import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,17 +69,17 @@ public class KsaStudentAccountsController extends GenericSearchController {
         form.setUnGroupedCredit(new BigDecimal(0));
         form.setUnGroupedDebit(new BigDecimal(0));
 
-        for(Transaction t : transactions){
-            if(t.getRollup() != null){
+        for (Transaction t : transactions) {
+            if (t.getRollup() != null) {
                 rollups.add(t);
-                if(TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())){
+                if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
                     form.setRollUpCredit(form.getRollUpCredit().add(t.getAmount()));
                 } else {
                     form.setRollUpDebit(form.getRollUpDebit().add(t.getAmount()));
                 }
             } else {
                 ungrouped.add(t);
-                if(TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())){
+                if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
                     form.setUnGroupedCredit(form.getUnGroupedCredit().add(t.getAmount()));
                 } else {
                     form.setUnGroupedDebit(form.getUnGroupedDebit().add(t.getAmount()));
@@ -226,14 +225,5 @@ public class KsaStudentAccountsController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-    private String createCompositeDefaultPersonName(String id) {
-        Account accountById = accountService.getFullAccount(id);
-        if (accountById == null) {
-            throw new IllegalStateException("Cannot find Account by ID = " + id);
-        }
 
-        PersonPostal personPostal = new PersonPostal();
-        PersonName personName = accountById.getDefaultPersonName();
-        return personPostal.createCompositePersonName(personName);
-    }
 }

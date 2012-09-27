@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
 import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
-import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
 
@@ -285,7 +284,6 @@ public class CashierTxMemoController extends GenericSearchController {
         List<Account> accountList = new ArrayList<Account>();
 
         // if we have a result set of Accounts from the query
-        PersonPostal personPostal = new PersonPostal();
         for (Account account : accountSearchList) {
 
             PersonName personName = account.getDefaultPersonName();

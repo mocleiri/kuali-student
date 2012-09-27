@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
-import com.sigmasys.kuali.ksa.krad.util.PersonPostal;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.ActivityService;
@@ -126,7 +125,7 @@ public class TransOvrController extends GenericSearchController {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
             }
 
-            String compositePersonName = createCompositeDefaultPersonName(id);
+            String compositePersonName = getAccount(id).getCompositeDefaultPersonName();
             form.setSelectedPersonName(compositePersonName);
 
             // charges by ID
@@ -150,9 +149,7 @@ public class TransOvrController extends GenericSearchController {
             Charge charge = transactionService.getCharge(Long.valueOf(id));
 
             if (charge != null) {
-                PersonName personName = charge.getAccount().getDefaultPersonName();
-                PersonPostal personPostal = new PersonPostal();
-                String compositePersonName = personPostal.createCompositePersonName(personName);
+                String compositePersonName = charge.getAccount().getCompositeDefaultPersonName();
                 form.setSelectedPersonName(compositePersonName);
             }
 
@@ -169,9 +166,7 @@ public class TransOvrController extends GenericSearchController {
             Payment payment = transactionService.getPayment(Long.valueOf(id));
 
             if (payment != null) {
-                PersonName personName = payment.getAccount().getDefaultPersonName();
-                PersonPostal personPostal = new PersonPostal();
-                String compositePersonName = personPostal.createCompositePersonName(personName);
+                String compositePersonName = payment.getAccount().getCompositeDefaultPersonName();
                 form.setSelectedPersonName(compositePersonName);
             }
 
@@ -286,14 +281,11 @@ public class TransOvrController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-    private String createCompositeDefaultPersonName(String id) {
-        Account accountById = accountService.getFullAccount(id);
-        if (accountById == null) {
-            throw new IllegalStateException("Cannot find Account by ID = " + id);
+    private Account getAccount(String accountId) {
+        Account account = accountService.getFullAccount(accountId);
+        if (account != null) {
+            return account;
         }
-
-        PersonPostal personPostal = new PersonPostal();
-        PersonName personName = accountById.getDefaultPersonName();
-        return personPostal.createCompositePersonName(personName);
+        throw new IllegalStateException("Cannot find Account by ID = " + accountId);
     }
 }
