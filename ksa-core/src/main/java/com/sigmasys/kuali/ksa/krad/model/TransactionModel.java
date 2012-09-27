@@ -33,6 +33,7 @@ public class TransactionModel extends Transaction {
       setStatementText(transaction.getStatementText());
       setDocument(transaction.getDocument());
       setAccount(transaction.getAccount());
+      setCreatorId(transaction.getCreatorId());
       setGlEntryGenerated(transaction.isGlEntryGenerated());
       setGeneralLedgerType(transaction.getGeneralLedgerType());
       setGlOverridden(transaction.isGlOverridden());

@@ -656,18 +656,18 @@
             <list>
                 <bean parent="Uif-InputField" p:label="Allocation ID" p:propertyName="id">
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="60" p:maxLength="59"/>
+                        <bean parent="Uif-TextControl" p:size="17" p:maxLength="16"/>
                     </property>
                 </bean>
                 <!-- TODO Payer ID and Paid ID are not part of Allocation -->
                 <bean parent="Uif-InputField" p:label="Payer ID" p:propertyName="payerId">
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
+                        <bean parent="Uif-TextControl" p:size="17" p:maxLength="16"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Paid ID" p:propertyName="paidId">
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="300" p:maxLength="299"/>
+                        <bean parent="Uif-TextControl" p:size="17" p:maxLength="16"/>
                     </property>
                 </bean>
                 <bean parent="Uif-Link" p:linkText="Select" p:target="_self"

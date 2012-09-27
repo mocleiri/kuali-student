@@ -106,7 +106,7 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private String nativeAmountCurr;
 
-   private String ResponsibleEntity;
+   private String creatorId;
 
 
    private String type;
@@ -599,12 +599,12 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.nativeAmountCurr = nativeAmountCurr;
    }
 
-   public String getResponsibleEntity() {
-      return ResponsibleEntity;
+   public String getCreatorId() {
+      return creatorId;
    }
 
-   public void setResponsibleEntity(String responsibleEntity) {
-      ResponsibleEntity = responsibleEntity;
+   public void setCreatorId(String creatorId) {
+      this.creatorId = creatorId;
    }
 
    public String getType() {
