@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sigmasys.kuali.ksa.model.KeyPair;
@@ -93,7 +94,7 @@ public interface FeeAssessmentService {
 	 * @param period A <code>LearningPeriod</code> to be associated with the new <code>KeyPair</code>.
 	 * @return The newly created <code>PeriodKeyPair</code>.
 	 */
-	PeriodKeyPair createPeriodKeyPair(FeeBase feeBase, String name, String value, LearningPeriod period);
+	PeriodKeyPair createKeyPair(FeeBase feeBase, String name, String value, LearningPeriod period);
 	
 	/**
 	 * Creates a new <code>KeyPair</code> object for the specified <code>LearningUnit</code>
@@ -103,7 +104,7 @@ public interface FeeAssessmentService {
 	 * @param value Value of the new <code>KeyPair</code>.
 	 * @return The newly created <code>KeyPair</code>.
 	 */
-	KeyPair createLearningUnitKeyPair(LearningUnit learningUnit, String name, String value);
+	KeyPair createKeyPair(LearningUnit learningUnit, String name, String value);
 	
 	/**
 	 * Returns the value of a <code>KeyPair</code> with the specified name within the given <code>FeeBase</code>. 
@@ -115,18 +116,6 @@ public interface FeeAssessmentService {
 	 * 	or <code>null</code> is such a name does not exist.
 	 */
 	String getKeyPairValue(FeeBase feeBase, String name);
-	
-	/**
-	 * Returns the value of a <code>PeriodKeyPair</code> with the specified name for the specified <code>LearningPeriod</code>. 
-	 * Returns <code>null</code> if there is such <code>PeriodKeyPair</code> with the given name in the specified <code>FeeBase</code>.
-	 * 
-	 * @param feeBase A <code>FeeBase</code> object associated with an account.
-	 * @param name Name of a <code>KeyPair</code> which value to retrieve.
-	 * @param period Learning period.
-	 * @return The value of a <code>PeriodKeyPair</code> with the given name and period in the specified <code>FeeBase</code>
-	 * 	or <code>null</code> is such a name does not exist.
-	 */
-	String getKeyPairValue(FeeBase feeBase, String name, LearningPeriod period);
 	
 	/**
 	 * Returns the value of a <code>KeyPair</code> with the specified name within the given <code>LearningUnit</code>. 
@@ -144,28 +133,16 @@ public interface FeeAssessmentService {
 	 * 
 	 * @param feeBase A <code>FeeBase</code> object.
 	 * @param name <code>KeyPair</code> name.
-	 * @param value <code>KeyPair</code> value.
 	 */
-	void removeKeyPair(FeeBase feeBase, String name, String value);
-	
-	/**
-	 * Removes a <code>PeriodKeyPair</code> with the specified name and period from a <code>FeeBase</code>.
-	 * 
-	 * @param feeBase A <code>FeeBase</code> object.
-	 * @param name <code>PeriodKeyPair</code> name.
-	 * @param value <code>PeriodKeyPair</code> value.
-	 * @param period <code>Learning</code> period.
-	 */
-	void removePeriodKeyPair(FeeBase feeBase, String name, String value, LearningPeriod period);
+	<T extends KeyPair> void removeKeyPair(FeeBase feeBase, String name);
 	
 	/**
 	 * Removes a <code>KeyPair</code> with the specified name from a LearningUnit</code>.
 	 * 
 	 * @param learningUnit A <code>LearningUnit</code> object.
 	 * @param name <code>KeyPair</code> name.
-	 * @param value <code>KeyPair</code> value.
 	 */
-	void removeLearningUnitKeyPair(LearningUnit learningUnit, String name, String value);
+	void removeKeyPair(LearningUnit learningUnit, String name);
 	
 	/**
 	 * Updates the <code>KeyPair</code> with the specified name with a new value.
@@ -185,22 +162,23 @@ public interface FeeAssessmentService {
 	 * @param newValue New <code>PeriodKeyPair</code> value.
 	 * @param newPeriod New <code>Learning</code> period.
 	 */
-	void updatePeriodKeyPair(FeeBase feeBase, String name, String newValue, LearningPeriod newPeriod);
+	void updateKeyPair(FeeBase feeBase, String name, String newValue, LearningPeriod newPeriod);
 	
 	/**
 	 * Updates the <code>KeyPair</code> with the specified name with a new value.
 	 * 
-	 * @param feeBase A <code>FeeBase</code> object.
+	 * @param learningUnit A <code>LearningUnit</code> object.
 	 * @param name <code>KeyPair</code> name.
 	 * @param newValue The new <code>KeyPair</code> value.
 	 */
-	void updateLearningUnitKeyPair(LearningUnit learningUnit, String name, String newValue);
+	void updateKeyPair(LearningUnit learningUnit, String name, String newValue);
 	
 	/**
 	 * Saves a <code>LearningUnit</code>. This method is helpful when making modifications to a <code>LearningUnit</code>, such as setting new Status,
 	 * changing details, such as Campus, Add Date, Drop Date, etc.
 	 * 
 	 * @param learningUnit A <code>LearningUnit</code> to be updated. 
+	 * @returns The entity that was attached to the persistent context.
 	 */
 	void saveLearningUnit(LearningUnit learningUnit);
 	
@@ -210,4 +188,13 @@ public interface FeeAssessmentService {
 	 * @return The period that the rules are currently working on.
 	 */
 	LearningPeriod getCurrentPeriod();
+	
+	/**
+	 * Finds all <code>LearningPeriod</code>s that fall into the specified date range.
+	 * 
+	 * @param dateFrom Beginning of the search date range.
+	 * @param dateTo End of the search date range.
+	 * @return All <code>LearningPeriod</code> objects that fall into the given date range.
+	 */
+	List<LearningPeriod> findLearningPeriods(Date dateFrom, Date dateTo);
 }
