@@ -46,9 +46,6 @@ public class KsaStudentAccountsController extends GenericSearchController {
     public ModelAndView get(@ModelAttribute("KualiForm") KsaStudentAccountsForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
-        // do get stuff...
-        String pageId = request.getParameter("pageId");
-
         String id = request.getParameter("id");
         if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("'id' request parameter must be specified");
