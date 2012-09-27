@@ -26,6 +26,8 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private List<Allocation> allocationList;
 
+   private TransactionModel transactionModel;
+
    private String id;
 
    private String accountId;
@@ -576,5 +578,13 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setGeneralLedgerTypeId(String generalLedgerTypeId) {
       this.generalLedgerTypeId = generalLedgerTypeId;
+   }
+
+   public TransactionModel getTransactionModel() {
+      return transactionModel;
+   }
+
+   public void setTransactionModel(TransactionModel transactionModel) {
+      this.transactionModel = transactionModel;
    }
 }
