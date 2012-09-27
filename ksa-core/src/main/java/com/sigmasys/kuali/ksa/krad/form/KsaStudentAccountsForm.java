@@ -74,23 +74,23 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private BigDecimal allocationAmount;
 
-   private boolean isInternal;
+   private String internal;
 
-   private boolean isOverridden;
+   private String overRidden;
 
-   private boolean isPaymentBilling;
+   private String paymentBilling;
 
-   private boolean isRefundable;
+   private String refundable;
 
    private String refundRule;
 
    private String generalLedgerType;
 
-   private boolean isEntryGenerated;
+   private String generalLedgerTypeId;
 
-   private boolean isOverRidden;
+   private String entryGenerated;
 
-   private boolean isAllocationLocked;
+   private String allocationLocked;
 
    private Date ledgerDate;
 
@@ -136,115 +136,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
    /*
       Form values
     */
-
-
-/*
-   public String getBioSearchByAccount() {
-      return bioSearchByAccount;
-   }
-
-   public void setBioSearchByAccount(String bioSearchByAccount) {
-      this.bioSearchByAccount = bioSearchByAccount;
-   }
-
-   public String getSelectedAccountCompositePersonName() {
-      return selectedAccountCompositePersonName;
-   }
-
-   public void setSelectedAccountCompositePersonName(String selectedAccountCompositePersonName) {
-      this.selectedAccountCompositePersonName = selectedAccountCompositePersonName;
-   }
-*/
-
-/*
-   public List<Account> getAccountBrowseList() {
-      return accountBrowseList;
-   }
-
-   public void setAccountBrowseList(List<Account> accountBrowseList) {
-      this.accountBrowseList = accountBrowseList;
-   }
-
-   public String getSelectedId() {
-      return selectedId;
-   }
-
-   public void setSelectedId(String selectedId) {
-      this.selectedId = selectedId;
-
-   }
-*/
-/*   public String getKimNameType() {
-      return kimNameType;
-   }
-
-   public void setKimNameType(String kimNameType) {
-      this.kimNameType = kimNameType;
-   }
-
-   public String getTitle() {
-      return title;
-   }
-
-   public void setTitle(String title) {
-      this.title = title;
-   }
-
-   public String getFirstName() {
-      return firstName;
-   }
-
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
-
-   public String getMiddleName() {
-      return middleName;
-   }
-
-   public void setMiddleName(String middleName) {
-      this.middleName = middleName;
-   }
-
-   public String getLastName() {
-      return lastName;
-   }
-
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
-
-   public String getSuffix() {
-      return suffix;
-   }
-
-   public void setSuffix(String suffix) {
-      this.suffix = suffix;
-   }
-
-   public String getDefault() {
-      return isDefault;
-   }
-
-   public void setDefault(String aDefault) {
-      isDefault = aDefault;
-   }
-
-   public String getCompositePersonName() {
-      return compositePersonName;
-   }
-
-   public void setCompositePersonName(String compositePersonName) {
-      this.compositePersonName = compositePersonName;
-   }
-
-   public String getCompositePostalAddress() {
-      return compositePostalAddress;
-   }
-
-   public void setCompositePostalAddress(String compositePostalAddress) {
-      this.compositePostalAddress = compositePostalAddress;
-   }*/
 
    public List<TransactionModel> getRollUpTransactionModelList() {
       return rollUpTransactionModelList;
@@ -471,38 +362,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.allocationAmount = allocationAmount;
    }
 
-   public boolean isInternal() {
-      return isInternal;
-   }
-
-   public void setInternal(boolean internal) {
-      isInternal = internal;
-   }
-
-   public boolean isOverridden() {
-      return isOverridden;
-   }
-
-   public void setOverridden(boolean overridden) {
-      isOverridden = overridden;
-   }
-
-   public boolean isPaymentBilling() {
-      return isPaymentBilling;
-   }
-
-   public void setPaymentBilling(boolean paymentBilling) {
-      isPaymentBilling = paymentBilling;
-   }
-
-   public boolean isRefundable() {
-      return isRefundable;
-   }
-
-   public void setRefundable(boolean refundable) {
-      isRefundable = refundable;
-   }
-
    public String getRefundRule() {
       return refundRule;
    }
@@ -517,30 +376,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setGeneralLedgerType(String generalLedgerType) {
       this.generalLedgerType = generalLedgerType;
-   }
-
-   public boolean isEntryGenerated() {
-      return isEntryGenerated;
-   }
-
-   public void setEntryGenerated(boolean entryGenerated) {
-      isEntryGenerated = entryGenerated;
-   }
-
-   public boolean isOverRidden() {
-      return isOverRidden;
-   }
-
-   public void setOverRidden(boolean overRidden) {
-      isOverRidden = overRidden;
-   }
-
-   public boolean isAllocationLocked() {
-      return isAllocationLocked;
-   }
-
-   public void setAllocationLocked(boolean allocationLocked) {
-      isAllocationLocked = allocationLocked;
    }
 
    public Date getLedgerDate() {
@@ -685,5 +520,61 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setSelectedTransactionType(String selectedTransactionType) {
       this.selectedTransactionType = selectedTransactionType;
+   }
+
+   public String getInternal() {
+      return internal;
+   }
+
+   public void setInternal(String internal) {
+      this.internal = internal;
+   }
+
+   public String getOverRidden() {
+      return overRidden;
+   }
+
+   public void setOverRidden(String overRidden) {
+      this.overRidden = overRidden;
+   }
+
+   public String getPaymentBilling() {
+      return paymentBilling;
+   }
+
+   public void setPaymentBilling(String paymentBilling) {
+      this.paymentBilling = paymentBilling;
+   }
+
+   public String getRefundable() {
+      return refundable;
+   }
+
+   public void setRefundable(String refundable) {
+      this.refundable = refundable;
+   }
+
+   public String getEntryGenerated() {
+      return entryGenerated;
+   }
+
+   public void setEntryGenerated(String entryGenerated) {
+      this.entryGenerated = entryGenerated;
+   }
+
+   public String getAllocationLocked() {
+      return allocationLocked;
+   }
+
+   public void setAllocationLocked(String allocationLocked) {
+      this.allocationLocked = allocationLocked;
+   }
+
+   public String getGeneralLedgerTypeId() {
+      return generalLedgerTypeId;
+   }
+
+   public void setGeneralLedgerTypeId(String generalLedgerTypeId) {
+      this.generalLedgerTypeId = generalLedgerTypeId;
    }
 }

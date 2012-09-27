@@ -170,7 +170,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollup.description"/>
+                <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollup.name"/>
                 <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
                       p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;id=@{#line.id}"/>
@@ -185,7 +185,7 @@
     ********************************************************************************************************************
     -->
     <bean id="rollUpSummary" parent="Uif-Disclosure-VerticalBoxSection"
-          p:title="" p:instructionalText="Summary of All Roll-ups for Selected Period">
+          p:title="" p:instructionalText="Summary of all Roll-ups for Selected Period">
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
@@ -260,7 +260,7 @@
     -->
     <bean id="ungroupedTransactionsSummary" parent="Uif-Disclosure-VerticalBoxSection"
           p:title="Ungrouped Transactions"
-          p:instructionalText="The following is a list of Transactions not included in a Roll-up">
+          p:instructionalText="Summary of all Transactions in Selected Roll-up">
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
@@ -442,7 +442,7 @@
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isInternal" p:label="Internal"
+                <bean parent="Uif-InputField" p:propertyName="internal" p:label="Internal"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -512,7 +512,7 @@
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isRefundable" p:label="Refundable"
+                <bean parent="Uif-InputField" p:propertyName="refundable" p:label="Refundable"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -526,7 +526,7 @@
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isPaymentBilling" p:label="Payment Billing"
+                <bean parent="Uif-InputField" p:propertyName="paymentBilling" p:label="Payment Billing"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -549,14 +549,14 @@
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isEntryGenerated" p:label="Entry Generated"
+                <bean parent="Uif-InputField" p:propertyName="entryGenerated" p:label="Entry Generated"
                       p:defaultValue="false" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isOverRidden" p:label="Overridden"
+                <bean parent="Uif-InputField" p:propertyName="overRidden" p:label="Overridden"
                       p:defaultValue="false" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -727,7 +727,7 @@
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isAllocationLocked" p:label="Locked"
+                <bean parent="Uif-InputField" p:propertyName="allocationLocked" p:label="Locked"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
