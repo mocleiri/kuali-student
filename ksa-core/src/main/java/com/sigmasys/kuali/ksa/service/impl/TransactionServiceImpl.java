@@ -581,12 +581,18 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 transaction2.setAllocatedAmount(newAmount);
             }
 
-            Pair<GlTransaction, GlTransaction> pair = createGlTransactions(transaction1, transaction2, newAmount, isQueued);
-
             CompositeAllocation compositeAllocation = new CompositeAllocation();
             compositeAllocation.setAllocation(allocation);
-            compositeAllocation.setCreditGlTransaction(pair.getA());
-            compositeAllocation.setDebitGlTransaction(pair.getB());
+
+            // Creating GL transactions for charge+payment or payment+charge only
+            if ((transaction1.getTransactionTypeValue() == TransactionTypeValue.CHARGE &&
+                    transaction2.getTransactionTypeValue() != TransactionTypeValue.PAYMENT) ||
+                    (transaction1.getTransactionTypeValue() == TransactionTypeValue.PAYMENT &&
+                            transaction2.getTransactionTypeValue() != TransactionTypeValue.CHARGE)) {
+                Pair<GlTransaction, GlTransaction> pair = createGlTransactions(transaction1, transaction2, newAmount, isQueued);
+                compositeAllocation.setCreditGlTransaction(pair.getA());
+                compositeAllocation.setDebitGlTransaction(pair.getB());
+            }
 
             return compositeAllocation;
 
@@ -871,11 +877,15 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 deleteEntity(allocation.getId(), Allocation.class);
             }
 
-            Pair<GlTransaction, GlTransaction> pair =
-                    createGlTransactions(transaction1, transaction2, allocatedAmount, isQueued);
-
-            glTransactions.add(pair.getA());
-            glTransactions.add(pair.getB());
+            // Creating GL transactions for charge+payment or payment+charge only
+            if ((transaction1.getTransactionTypeValue() == TransactionTypeValue.CHARGE &&
+                    transaction2.getTransactionTypeValue() != TransactionTypeValue.PAYMENT) ||
+                    (transaction1.getTransactionTypeValue() == TransactionTypeValue.PAYMENT &&
+                            transaction2.getTransactionTypeValue() != TransactionTypeValue.CHARGE)) {
+                Pair<GlTransaction, GlTransaction> pair = createGlTransactions(transaction1, transaction2, allocatedAmount, isQueued);
+                glTransactions.add(pair.getA());
+                glTransactions.add(pair.getB());
+            }
 
         }
 
@@ -916,6 +926,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transaction.isGlEntryGenerated() ||
                 (new Date().before(transaction.getEffectiveDate()) && !forceEffective)) {
             logger.info("Cannot make transaction effective, ID = " + transaction);
+            return;
+        }
+
+        if (transaction.getTransactionTypeValue() == TransactionTypeValue.DEFERMENT) {
+            logger.info("Transaction is a deferment, ID = " + transaction);
+            transaction.setGlEntryGenerated(true);
             return;
         }
 
@@ -989,6 +1005,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             String errMsg = "Transaction with ID = " + transactionId + " does not exist";
             logger.error(errMsg);
             throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (transaction.getTransactionTypeValue() == TransactionTypeValue.DEFERMENT) {
+            String errMsg = "Transaction is a deferment and cannot be reversed, ID = " + transactionId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
 
         if (transaction.getAmount() == null) {
