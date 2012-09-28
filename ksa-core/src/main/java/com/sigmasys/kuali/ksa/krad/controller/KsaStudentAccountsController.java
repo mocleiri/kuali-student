@@ -59,7 +59,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
            // All transactions
            List<Transaction> transactions = transactionService.getTransactions(id);
 
-           logger.info("TJB Transaction Count: " + transactions.size());
+           logger.info("Transaction Count: " + transactions.size());
            List<TransactionModel> rollUpTransactionModelList = new ArrayList<TransactionModel>();
            List<TransactionModel> unGroupedTransactionModelList = new ArrayList<TransactionModel>();
 
@@ -89,6 +89,103 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
 	        form.setRollUpTransactionModelList(rollUpTransactionModelList);
            form.setUnGroupedTransactionModelList(unGroupedTransactionModelList);
+
+        } else if (pageId != null && pageId.compareTo("AccountOVTransactionsRollupDetailPage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
+            }
+
+            Long lId;
+
+            try{
+                lId = new Long(id);
+            } catch(NumberFormatException e){
+                throw new IllegalArgumentException("'id' request parameter must be a number");
+            }
+            Transaction t = transactionService.getTransaction(lId);
+            logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
+            TransactionModel transactionModel = new TransactionModel(t);
+            ArrayList<TransactionModel> list = new ArrayList<TransactionModel>();
+            list.add(transactionModel);
+            form.setByRollUpTransactionModelList(list);
+
+
+        } else if (pageId != null && pageId.compareTo("AccountOVTransactionDetailPage") == 0) {
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                throw new IllegalArgumentException("'id' request parameter must be specified");
+            }
+
+            Long lId;
+
+            try{
+                lId = new Long(id);
+            } catch(NumberFormatException e){
+                throw new IllegalArgumentException("'id' request parameter must be a number");
+            }
+            Transaction t = transactionService.getTransaction(lId);
+            logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
+
+            //TransactionModel transactionModel = new TransactionModel(t);
+            //form.setTransactionModel(transactionModel);
+
+            form.setId(t.getId().toString());
+            form.setAccountId(t.getAccountId());
+            if(t.getRollup() != null){
+                Rollup rollup = t.getRollup();
+                form.setRollUpDesc(rollup.getDescription());
+                //form.setRollUpTag(rollup.get);
+                //form.setRollUpPriority();
+            }
+
+            form.setEffectiveDate(t.getEffectiveDate());
+            form.setRecognitionDate(t.getRecognitionDate());
+            //form.setExpirationDate();
+            //form.setClearDate(t.get);
+            form.setStatementText(t.getStatementText());
+            TransactionType tt = t.getTransactionType();
+            if(tt != null){
+                form.setType(tt.getDescription());
+                form.setTypeId(tt.getId().toString());
+                //form.setTypeSubCode(t.get);
+            }
+            form.setAmount(t.getAmount());
+            if(t.isInternal() != null){
+                form.setInternal(t.isInternal().toString());
+            } else {
+                form.setInternal(Boolean.FALSE.toString());
+            }
+            form.setAllocationAmount(t.getAllocatedAmount());
+            form.setAmountAllocatedLocked(t.getLockedAllocatedAmount());
+            form.setNativeAmountCurr(t.getCurrency().getCode());
+            if(t.getDocument() != null){
+                form.setDocumentId(t.getDocument().getId().toString());
+            }
+            //form.setPreviousMemoId(t.get);
+            //form.setNextMemoId();
+            //form.setMemo(t.get);
+            //form.setDeferredId(t.get);
+            //form.setRefundable(t.is);
+            //form.setRefundRule(t.);
+            //form.setPaymentBilling();
+            //form.setDerivativeTransactionId(t.get);
+
+            if(t.getGeneralLedgerType() != null){
+                form.setGeneralLedgerTypeId(t.getGeneralLedgerType().getId().toString());
+            }
+            //form.setEntryGenerated(t.get);
+            if(t.isGlOverridden() != null){
+                form.setOverRidden(t.isGlOverridden().toString());
+            } else {
+                form.setOverRidden(Boolean.FALSE.toString());
+            }
+            form.setOriginationDate(t.getOriginationDate());
+            //form.setExtensionId(t.getE);
+
+
+        } else {
+            throw new IllegalArgumentException("'pageId' of " + pageId + " not understood");
         }
 
 
