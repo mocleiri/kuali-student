@@ -94,7 +94,7 @@
                                       p:source="@{getContext()}/images/kuali_student_accounts.png">
 
                                     <property name="cssClasses">
-                                        <list>
+                                        <list merge="true">
                                             <value>ksa-logo</value>
                                         </list>
                                     </property>
@@ -122,6 +122,11 @@
                                 </bean>
                                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="searchByType"
                                       p:actionLabel="Search">
+                                    <property name="cssClasses">
+                                        <list merge="true">
+                                            <value>ksa-header-search-button</value>
+                                        </list>
+                                    </property>
                                 </bean>
                             </list>
                         </property>
