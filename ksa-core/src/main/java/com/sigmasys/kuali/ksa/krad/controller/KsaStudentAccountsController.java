@@ -184,9 +184,9 @@ public class KsaStudentAccountsController extends GenericSearchController {
             //form.setExtensionId(t.getE);
 
 
-        } else {
+        } /*else {
             throw new IllegalArgumentException("'pageId' of " + pageId + " not understood");
-        }
+        }*/
 
 
         return getUIFModelAndView(form);

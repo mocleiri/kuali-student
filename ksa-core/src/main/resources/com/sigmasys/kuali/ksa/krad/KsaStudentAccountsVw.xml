@@ -297,6 +297,7 @@
           p:progressiveRenderViaAJAX="true">
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionModel"/>
         <property name="propertyName" value="byRollUpTransactionModelList"/>
+        <property name="readOnly" value="true"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
@@ -589,7 +590,9 @@
     -->
     <bean id="auditInformationSection" parent="Uif-Disclosure-VerticalBoxSection"
           p:title="Audit Information"
-          p:instructionalText="">
+          p:instructionalText="The following table is a list of allocations"
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true">
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
