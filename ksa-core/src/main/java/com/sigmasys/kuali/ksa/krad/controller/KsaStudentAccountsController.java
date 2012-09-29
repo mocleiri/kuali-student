@@ -3,10 +3,14 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.InformationService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +32,8 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
    private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
 
+    @Autowired
+    protected InformationService informationService;
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
@@ -130,26 +136,55 @@ public class KsaStudentAccountsController extends GenericSearchController {
             //TransactionModel transactionModel = new TransactionModel(t);
             //form.setTransactionModel(transactionModel);
 
+
             form.setId(t.getId().toString());
             form.setAccountId(t.getAccountId());
             if(t.getRollup() != null){
                 Rollup rollup = t.getRollup();
+
+                //@TODO change this method name.  It isn't part of Rollup.
                 form.setRollUpDesc(rollup.getDescription());
-                //form.setRollUpTag(rollup.get);
-                //form.setRollUpPriority();
+            }
+
+            TransactionType tt = t.getTransactionType();
+            if(tt != null){
+                List<Tag> tags = tt.getTags();
+                if(tags != null){
+                    List<String> names = new ArrayList<String>();
+                    for(Tag tag : tags){
+                        names.add(tag.getName());
+                    }
+                    form.setRollUpTag(StringUtils.collectionToCommaDelimitedString(names));
+                }
+                form.setType(tt.getDescription());
+                form.setTypeId(tt.getId().getId());
+
+            }
+
+            if(tt instanceof DebitType){
+                DebitType dt = (DebitType)tt;
+                form.setRollUpPriority(dt.getPriority().toString());
             }
 
             form.setEffectiveDate(t.getEffectiveDate());
             form.setRecognitionDate(t.getRecognitionDate());
-            //form.setExpirationDate();
-            //form.setClearDate(t.get);
-            form.setStatementText(t.getStatementText());
-            TransactionType tt = t.getTransactionType();
-            if(tt != null){
-                form.setType(tt.getDescription());
-                form.setTypeId(tt.getId().toString());
-                //form.setTypeSubCode(t.get);
+            try{
+                form.setTypeSubCode(t.getTransactionType().getId().getSubCode().toString());
+            } catch(NullPointerException n){}
+
+            if(t instanceof Deferment){
+                Deferment def = (Deferment)t;
+                form.setExpirationDate(def.getExpirationDate());
+
+                //form.setDeferredId(t.get);
+
+            } else if(t instanceof Payment){
+                Payment payment = (Payment)t;
+                form.setClearDate(payment.getClearDate());
             }
+            form.setStatementText(t.getStatementText());
+
+
             form.setAmount(t.getAmount());
             if(t.isInternal() != null){
                 form.setInternal(t.isInternal().toString());
@@ -162,10 +197,14 @@ public class KsaStudentAccountsController extends GenericSearchController {
             if(t.getDocument() != null){
                 form.setDocumentId(t.getDocument().getId().toString());
             }
+
+
+            //List<Memo> memos = informationService.getMemos;
             //form.setPreviousMemoId(t.get);
             //form.setNextMemoId();
             //form.setMemo(t.get);
-            //form.setDeferredId(t.get);
+
+
             //form.setRefundable(t.is);
             //form.setRefundRule(t.);
             //form.setPaymentBilling();
