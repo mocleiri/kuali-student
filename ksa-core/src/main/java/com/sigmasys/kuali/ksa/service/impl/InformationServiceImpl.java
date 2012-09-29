@@ -128,6 +128,22 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Returns all Memo entities by Transaction ID
+     *
+     * @param transactionId Transaction ID
+     * @return List of memos for the given transaction
+     */
+    @Override
+    public List<Memo> getMemos(Long transactionId) {
+        Query query = em.createQuery("select m from Memo m " +
+                " left outer join fetch m.nextMemo nm " +
+                " left outer join fetch m.previousMemo pm " +
+                " where m.transaction.id = :transactionId order by m.id desc");
+        query.setParameter("transactionId", transactionId);
+        return query.getResultList();
+    }
+
+    /**
      * Persists Information in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *

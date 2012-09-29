@@ -133,12 +133,20 @@ public class InformationServiceTest extends AbstractServiceTest {
 
         String id = "1020";
 
-        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e8));
+        createMemoForTransaction(id);
+
+    }
+
+    private Memo createMemoForTransaction(String transactionId) throws Exception {
+
+        Transaction transaction = transactionService.createTransaction(transactionId, "admin", new Date(),
+                new BigDecimal(10e8));
 
         Assert.notNull(transaction);
         Assert.notNull(transaction.getId());
 
-        Memo memo = informationService.createMemo(transaction.getId(), "New memo for 1020", 0, new Date(), null, null);
+        Memo memo = informationService.createMemo(transaction.getId(), "New memo for " + transactionId, 0,
+                new Date(), null, null);
 
         Assert.notNull(memo);
         Assert.notNull(memo.getId());
@@ -156,6 +164,8 @@ public class InformationServiceTest extends AbstractServiceTest {
 
         Assert.isNull(memo.getExpirationDate());
         Assert.isNull(memo.getPreviousMemo());
+
+        return memo;
 
     }
 
@@ -215,6 +225,24 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.isTrue(1 == flag.getAccessLevel());
 
         Assert.isNull(flag.getExpirationDate());
+
+    }
+
+    @Test
+    public void getMemosForTransaction() throws Exception {
+
+        String id = "1020";
+
+        Memo memo = createMemoForTransaction(id);
+
+        Assert.notNull(memo.getTransaction());
+        Assert.notNull(memo.getTransaction().getId());
+
+        List<Memo> memos = informationService.getMemos(memo.getTransaction().getId());
+
+        Assert.notNull(memos);
+        Assert.notEmpty(memos);
+        Assert.isTrue(memos.size() == 1);
 
     }
 

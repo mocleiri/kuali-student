@@ -46,6 +46,14 @@ public interface InformationService {
      */
     List<Memo> getMemos();
 
+    /**
+     * Returns all Memo entities by Transaction ID
+     *
+     * @param transactionId Transaction ID
+     * @return List of memos for the given transaction
+     */
+    List<Memo> getMemos(Long transactionId);
+
 
     /**
      * Returns all Alert entities by Account ID
