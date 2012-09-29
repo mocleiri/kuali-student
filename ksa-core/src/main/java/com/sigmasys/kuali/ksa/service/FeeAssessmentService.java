@@ -134,7 +134,7 @@ public interface FeeAssessmentService {
 	 * @param feeBase A <code>FeeBase</code> object.
 	 * @param name <code>KeyPair</code> name.
 	 */
-	<T extends KeyPair> void removeKeyPair(FeeBase feeBase, String name);
+	void removeKeyPair(FeeBase feeBase, String name);
 	
 	/**
 	 * Removes a <code>KeyPair</code> with the specified name from a LearningUnit</code>.
@@ -172,6 +172,26 @@ public interface FeeAssessmentService {
 	 * @param newValue The new <code>KeyPair</code> value.
 	 */
 	void updateKeyPair(LearningUnit learningUnit, String name, String newValue);
+	
+	/**
+	 * Checks if the given FeeBase contains a KeyPair or its subtype with the given name.
+	 * 
+	 * @param feeBase A FeeBase to check.
+	 * @param name Name of a KeyPair to locate within the FeeBase.
+	 * @return <code>true</code> if a KeyPair or its subtype with the given name exists within the specified FeeBase.
+	 * 	Returns <code>false</code> otherwise.
+	 */
+	boolean containsKeyPair(FeeBase feeBase, String name);
+	
+	/**
+	 * Checks if the given LearningUnit contains a KeyPair or its subtype with the given name.
+	 * 
+	 * @param learningUnit A LearningUnit to check.
+	 * @param name Name of a KeyPair to locate within the LearningUnit.
+	 * @return <code>true</code> if a KeyPair with the given name exists within the specified LearningUnit.
+	 * 	Returns <code>false</code> otherwise.
+	 */
+	boolean containsKeyPair(LearningUnit learningUnit, String name);
 	
 	/**
 	 * Saves a <code>LearningUnit</code>. This method is helpful when making modifications to a <code>LearningUnit</code>, such as setting new Status,

@@ -17,6 +17,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.util.CollectionUtils;
 
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.KeyPair;
@@ -118,24 +119,6 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		
 		return feeBase;
 	}
-	
-	/**
-	 * Loads either of the KeyPair type or sub-type object associated with an account with the given ID.
-	 * 
-	 * @param accountId Id of an account for which to load pairs.
-	 * @param resultClass Class of an object to load.
-	 * @return Associated objects.
-	 */
-	private <T extends KeyPair> List<T> findKeyPairs(String accountId, Class<T> resultClass, KeyPairType keyPairType) {
-		// Since associations between Account and KeyPair/PeriodKeyPair are not defined
-		// neither in Account nor KeyPair/PeriodKeyPair, we have to load them using 
-		// the physical association table join.
-		String sql = "select kp.* from kssa_kypr kp, kssa_acnt_kypr akp where kp.id = akp.kypr_id_fk and akp.acnt_id_fk = :accountId and kp.type = :keypairType";
-		Query query = em.createNativeQuery(sql, resultClass).setParameter("accountId", accountId).setParameter("keypairType", keyPairType.getCode());
-		List<T> result = query.getResultList();
-
-		return result;
-	}
 
 	@Override
 	public double calculateFees(FeeBase feeBase, LearningPeriod period) {
@@ -197,6 +180,7 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	public KeyPair createKeyPair(LearningUnit learningUnit, String name, String value) {
 		// Validate the input:
 		validateInputParameters(learningUnit, name, value);
+		validateKeyPairNameUnique(learningUnit, name);
 		
 		// Start a new Transaction:
 		TransactionStatus transaction = transactionManager.getTransaction(transactionDefinition);
@@ -204,8 +188,6 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		try {
 			// Create and persist a new KeyPair:
 			KeyPair newKeyPair = createKeyPairInternal(name, value, null, KeyPair.class);
-			
-			learningUnit.getExtended().add(newKeyPair);
 			
 			// Update the associations:
 			persistEntity(learningUnit);
@@ -215,6 +197,9 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 			
 			// Commit transaction:
 			transactionManager.commit(transaction);
+			
+			// Add the new KeyPair to the LearningUnit's list of KeyPairs:
+			learningUnit.getExtended().add(newKeyPair);
 			
 			return newKeyPair;
 		} catch (Throwable t) {
@@ -246,8 +231,9 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		// Create an execute a query:
 		Query query = em.createNativeQuery("select kp.value from kssa_kypr kp, kssa_acnt_kypr akp where kp.id = akp.kypr_id_fk and akp.acnt_id_fk = :accountId and kp.name = :keypairName")
 				.setParameter("accountId", feeBase.getAccount().getId()).setParameter("keypairName", name);
+		List<String> result = query.getResultList();
 		
-		return (String)query.getSingleResult();
+		return CollectionUtils.isEmpty(result) ? null : result.get(0);
 	}
 
 	/**
@@ -337,45 +323,43 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 * @param name <code>KeyPair</code> name.
 	 */
 	@Override
-	public <T extends KeyPair> void removeKeyPair(FeeBase feeBase, String name) {
+	public void removeKeyPair(FeeBase feeBase, String name) {
 		// Validate the input:
 		validateInputParameters(feeBase, name);
 		
-		// Remove the KeyPair from either "studentData":
-		List<T> removedFrom = (List<T>)feeBase.getStudentData();
-		T removedKeyPair = removeKeyPairInternal(removedFrom, name);
+		// Find the KeyPair to remove in "studentData":
+		List<? extends KeyPair> removeFrom = feeBase.getStudentData();
+		KeyPair removeKeyPair = getKeyPairInternal(removeFrom, name);
 		
-		// If not found in the "studentData", try to remove from the "periodData":
-		if (removedKeyPair == null) {
-			removedFrom = (List<T>)feeBase.getPeriodData();
-			removedKeyPair = removeKeyPairInternal(removedFrom, name);
+		// If not found in the "studentData", find in the "periodData":
+		if (removeKeyPair == null) {
+			removeFrom = feeBase.getPeriodData();
+			removeKeyPair = getKeyPairInternal(removeFrom, name);
 		}
 		
 		// If a KeyPair was found and removed, delete the entity and disassociate the Account and KeyPair:
-		if (removedKeyPair != null) {
+		if (removeKeyPair != null) {
 			// Start a new Transaction:
 			TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
 			
 			try {
 				// Delete the entity:
-				em.remove(removedKeyPair);
+				em.remove(removeKeyPair);
 				
 				// Remove the association record:
-				removeKeyPairAssociationRecord(feeBase.getAccount(), removedKeyPair);
+				removeKeyPairAssociationRecord(feeBase.getAccount(), removeKeyPair);
 				
 				// Flush the EM to the persistent storage:
 				em.flush();
 				
 				// Commit transaction:
 				transactionManager.commit(status);
+				
+				// Remove from the Collection:
+				removeFrom.remove(removeKeyPair);
 			} catch (Throwable t) {
 				// Roll-back transaction:
 				transactionManager.rollback(status);
-				
-				// Re-add the just removed KeyPair:
-				if (removedFrom != null) {
-					removedFrom.add(removedKeyPair);
-				}
 				
 				// Log error:
 				logger.error("Error removing KeyPair.", t);
@@ -394,11 +378,44 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 */
 	@Override
 	public void removeKeyPair(LearningUnit learningUnit, String name) {
+		// Validate input:
+		validateInputParameters(learningUnit, name);
+		
 		// Remove the KeyPair with the given name from the "extended" Set:
 		removeKeyPairInternal(learningUnit.getExtended(), name);
 		
 		// Update the persistent context:
 		persistEntity(learningUnit);
+	}
+
+	/**
+	 * Checks if the given FeeBase contains a KeyPair or its subtype with the given name.
+	 * 
+	 * @param feeBase A FeeBase to check.
+	 * @param name Name of a KeyPair to locate within the FeeBase.
+	 * @return <code>true</code> if a KeyPair or its subtype with the given name exists within the specified FeeBase.
+	 * 	Returns <code>false</code> otherwise.
+	 */
+	@Override
+	public boolean containsKeyPair(FeeBase feeBase, String name) {
+		// Validate input:
+		validateInputParameters(feeBase, name);
+		
+		return containsKeyPairInternal(feeBase.getStudentData(), name) 
+				|| containsKeyPairInternal(feeBase.getPeriodData(), name);
+	}
+
+	/**
+	 * Checks if the given LearningUnit contains a KeyPair or its subtype with the given name.
+	 * 
+	 * @param learningUnit A LearningUnit to check.
+	 * @param name Name of a KeyPair to locate within the LearningUnit.
+	 * @return <code>true</code> if a KeyPair with the given name exists within the specified LearningUnit.
+	 * 	Returns <code>false</code> otherwise.
+	 */
+	@Override
+	public boolean containsKeyPair(LearningUnit learningUnit, String name) {
+		return containsKeyPairInternal(learningUnit.getExtended(), name);
 	}
 
 	/**
@@ -435,6 +452,31 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		
 		return query.getResultList();
 	}
+	
+	
+	/* ***********************************************************
+	 * 
+	 * Utility methods.
+	 * 
+	 * ***********************************************************/
+	
+	/**
+	 * Loads either of the KeyPair type or sub-type object associated with an account with the given ID.
+	 * 
+	 * @param accountId Id of an account for which to load pairs.
+	 * @param resultClass Class of an object to load.
+	 * @return Associated objects.
+	 */
+	private <T extends KeyPair> List<T> findKeyPairs(String accountId, Class<T> resultClass, KeyPairType keyPairType) {
+		// Since associations between Account and KeyPair/PeriodKeyPair are not defined
+		// neither in Account nor KeyPair/PeriodKeyPair, we have to load them using 
+		// the physical association table join.
+		String sql = "select kp.* from kssa_kypr kp, kssa_acnt_kypr akp where kp.id = akp.kypr_id_fk and akp.acnt_id_fk = :accountId and kp.type = :keypairType";
+		Query query = em.createNativeQuery(sql, resultClass).setParameter("accountId", accountId).setParameter("keypairType", keyPairType.getCode());
+		List<T> result = query.getResultList();
+
+		return result;
+	}
 
 	/**
 	 * A generic method to create a new KeyPair or its subclass for a FeeBase. 
@@ -448,9 +490,8 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 */
 	private <T extends KeyPair> T createFeeBaseKeyPairInternal(FeeBase feeBase, String name, String value, LearningPeriod period, Class<T> entityClass) {
 		// Validate the input:
-		if ((feeBase == null) || (feeBase.getAccount() == null)) {
-			throw new IllegalArgumentException("Cannot create a new KeyPair for a null Account.");
-		}
+		validateInputParameters(feeBase, name, value, period, entityClass);
+		validateKeyPairNameUnique(feeBase, name);
 		
 		// Start a new Transaction:
 		TransactionStatus transaction = transactionManager.getTransaction(transactionDefinition);
@@ -467,6 +508,13 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 			
 			// Commit the transaction:
 			transactionManager.commit(transaction);
+			
+			// Add the new KeyPair to an appropriate list in FeeBase:
+			if (entityClass.equals(PeriodKeyPair.class)) {
+				feeBase.getPeriodData().add(PeriodKeyPair.class.cast(newKeyPair));
+			} else {
+				feeBase.getStudentData().add(newKeyPair);
+			}
 			
 			return newKeyPair;
 		} catch (Throwable t) {
@@ -491,22 +539,8 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 * @return The newly created object.
 	 */
 	private <T extends KeyPair> T createKeyPairInternal(String name, String value, LearningPeriod period, Class<T> entityClass) throws Exception {
-		// Validate the input:
-		boolean isPeriodKeyPair = entityClass.equals(PeriodKeyPair.class);
-		
-		if (StringUtils.isBlank(name)) {
-			throw new IllegalArgumentException("KeyPair.name property cannot be empty.");
-		}
-		
-		if (StringUtils.isBlank(value)) {
-			throw new IllegalArgumentException("KeyPair.value property cannot be empty.");
-		}
-		
-		if (isPeriodKeyPair && (period == null)) {
-			throw new IllegalArgumentException("PeriodKeyPair.period property cannot be null.");
-		}
-		
 		// Create a new instance:
+		boolean isPeriodKeyPair = entityClass.equals(PeriodKeyPair.class);
 		T keyPair = entityClass.newInstance();
 		
 		// Set common properties:
@@ -618,9 +652,38 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 * the specified "name" attribute exists in the given Collection.
 	 */
 	private <T extends KeyPair> T removeKeyPairInternal(Collection<T> keyPairs, String name) {
+		T keyPair = getKeyPairInternal(keyPairs, name);
+		
+		if (keyPair != null) {
+			keyPairs.remove(keyPair);
+		}
+		
+		return keyPair;
+	}
+	
+	/**
+	 * Checks if a KeyPair with the specified name exists in the given Collection.
+	 * 
+	 * @param keyPairs A Collection of KeyPairs to check.
+	 * @param name Name of a KeyPair to check.
+	 * @return true if exists, false otherwise.
+	 */
+	private <T extends KeyPair> boolean containsKeyPairInternal(Collection<T> keyPairs, String name) {
+		return (getKeyPairInternal(keyPairs, name) != null);
+	}
+	
+	/**
+	 * Finds a KeyPair with the specified name within the given Collection.
+	 * 
+	 * @param keyPairs A Collection of KeyPairs.
+	 * @param name Name of a KeyPair to find.
+	 * @return The KeyPair with the given name found in the given Collection or <code>null</code> 
+	 * 	if a KeyPair with such a name does not exist.
+	 */
+	private <T extends KeyPair> T getKeyPairInternal(Collection<T> keyPairs, String name) {
 		for (T keyPair : keyPairs) {
 			if (StringUtils.equalsIgnoreCase(keyPair.getName(), name)) {
-				return keyPairs.remove(keyPair) ? keyPair : null;
+				return keyPair;
 			}
 		}
 		
@@ -673,6 +736,19 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 		
 		if (StringUtils.isBlank(name)) {
 			throw new IllegalArgumentException("KeyPair.name property cannot be null.");
+		}
+	}
+	
+	private void validateKeyPairNameUnique(FeeBase feeBase, String name) {
+		if (containsKeyPairInternal(feeBase.getStudentData(), name)
+				|| containsKeyPairInternal(feeBase.getPeriodData(), name)) {
+			throw new IllegalArgumentException("Such KeyPair name [" + name + "] already exists for Account with ID [" + feeBase.getAccount().getId() + "].");
+		}
+	}
+	
+	private void validateKeyPairNameUnique(LearningUnit learningUnit, String name) {
+		if (containsKeyPairInternal(learningUnit.getExtended(), name)) {
+			throw new IllegalArgumentException("Such KeyPair name [" + name + "] already exists for LearningUnit with code [" + learningUnit.getUnitCode() + "].");
 		}
 	}
 }

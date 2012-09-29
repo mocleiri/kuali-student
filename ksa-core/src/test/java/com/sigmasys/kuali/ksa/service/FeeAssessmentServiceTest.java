@@ -60,6 +60,30 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 	PlatformTransactionManager transactionManager;
 	DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
 	
+	@Test
+	public void testKeyPairPreviousValue() throws Exception {
+		// Create a new KeyPair:
+		KeyPair kp = new KeyPair();
+		String name = "name";
+		String value = "value";
+		String newValue = "new value";
+		
+		kp.setName(name);
+		kp.setValue(value);
+		
+		// Assert validity:
+		assertEquals(name, kp.getName());
+		assertEquals(value, kp.getValue());
+		assertNull(kp.getPreviousValue());
+		
+		// Set a new value:
+		kp.setValue(newValue);
+		
+		// Make more assertions:
+		assertEquals(name, kp.getName());
+		assertEquals(newValue, kp.getValue());
+		assertEquals(value, kp.getPreviousValue());
+	}
 		
 	@Test
 	public void testGetStudentDataNoDataExists() throws Exception {
@@ -84,7 +108,7 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		List<KeyPair> studentDataFromService = feeAssessmentService.getStudentData(accountId);
 		
 		// Validate the result:
-		assertStudentData(testStudentData, studentDataFromService);
+		assertKeyPairs(testStudentData, studentDataFromService);
 	}
 	
 	@Test
@@ -110,7 +134,7 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		List<PeriodKeyPair> periodDataFromService = feeAssessmentService.getLearningPeriodData(accountId);
 		
 		// Validate the result:
-		assertPeriodData(testPeriodData, periodDataFromService);
+		assertKeyPairs(testPeriodData, periodDataFromService);
 	}
 	
 	@Test
@@ -161,24 +185,19 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 	
 	@Test
 	public void testGetFeeBaseDataPersistedWithEM() throws Exception {
-		// Create test objects:
-		List<KeyPair> testStudentData = createTestStudentDataWithinTransaction();
-		List<PeriodKeyPair> testPeriodData = createTestPeriodDataWithinTransaction();
-		List<LearningUnit> testStudy = createTestStudyWithinTransaction();
+		// Create a test FeeBase:
+		FeeBase testFeeBase = createTestFeeBase();
 		
-		// If creation of the test data failed, so be it, nothing to test:
-		if ((testStudentData == null) || (testPeriodData == null) || (testStudy == null)) {
+		// If creation of a new FeeBase failed, nothing to test, something just went wrong:
+		if (testFeeBase == null) {
 			return;
 		}
 		
-		// Get the FeeBase:
+		// Get the FeeBase from the service:
 		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
 		
 		// Validate the result:
-		assertNotNull(feeBaseFromService);
-		assertStudentData(testStudentData, feeBaseFromService.getStudentData());
-		assertPeriodData(testPeriodData, feeBaseFromService.getPeriodData());
-		assertStudy(testStudy, feeBaseFromService.getStudy());
+		assertFeeBase(testFeeBase, feeBaseFromService);
 	}
 	
 	@Test
@@ -220,6 +239,392 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		
 		assertEquals(0, charge, 0.0);
 	}
+	
+	@Test
+	public void testCreateKeyPairWithNewName() throws Exception {
+		// Test objects:
+		createTestFeeBase();
+		String name = "absolutely new name";
+		String value = "absolutely new value";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Call the service:
+		KeyPair newKeyPair = feeAssessmentService.createKeyPair(feeBaseFromService, name, value);
+		
+		// Validate the result:
+		assertNotNull(newKeyPair);
+		assertEquals(name, newKeyPair.getName());
+		assertEquals(value, newKeyPair.getValue());
+		assertNull(newKeyPair.getPreviousValue());
+		
+		// Get a fresh FeeBase from Service again:
+		FeeBase freshFeeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Validate the new KeyPair is in the FeeBase now:
+		assertFeeBase(feeBaseFromService, freshFeeBaseFromService);
+	}
+	
+	@Test
+	public void testCreateKeyPairWithExistingName() throws Exception {
+		// Test objects:
+		FeeBase testFeeBase = createTestFeeBase();
+		String nameThatHasAlreadyBeenUsed = "boo";
+		String value = "absolutely new value";
+		
+		// Make sure an exception is thrown because the name already exists:
+		boolean exceptionRaised = false;
+		
+		try {
+			// Call the service:
+			feeAssessmentService.createKeyPair(testFeeBase, nameThatHasAlreadyBeenUsed, value);
+			
+			// We should not be here:
+			assertTrue("An error should have occurred because a KeyPair name already exists, but it DID'T.", false);
+		} catch (Exception e) {
+			exceptionRaised = true;
+		}
+		
+		// Assert an exception has been raised:
+		assertTrue("An error should have occurred because a KeyPair name already exists, but it DID'T.", exceptionRaised);
+	}
+	
+	@Test
+	public void testCreateKeyPairWithInvalidParameters() throws Exception {
+		// Null FeeBase:
+		try {
+			FeeBase nullFeeBase = null;
+			feeAssessmentService.createKeyPair(nullFeeBase, "new name", "New value");
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null name:
+		try {
+			FeeBase testFeeBase = createTestFeeBase();
+			feeAssessmentService.createKeyPair(testFeeBase, null, "New value");
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null value:
+		try {
+			FeeBase testFeeBase = createTestFeeBase();
+			feeAssessmentService.createKeyPair(testFeeBase, "New name", null);
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null Everything:
+		try {
+			FeeBase nullFeeBase = null;
+			feeAssessmentService.createKeyPair(nullFeeBase, null, null);
+			assertTrue(false);
+		} catch(Exception e) {}
+	}
+
+	@Test
+	public void testCreatePeriodKeyPairWithNewName() throws Exception {
+		// Test objects:
+		FeeBase testFeeBase = createTestFeeBase();
+		String name = "absolutely new name";
+		String value = "absolutely new value";
+		LearningPeriod period = testFeeBase.getPeriodData().get(0).getLearningPeriod();
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Call the service:
+		PeriodKeyPair newKeyPair = feeAssessmentService.createKeyPair(feeBaseFromService, name, value, period);
+		
+		// Validate the result:
+		assertNotNull(newKeyPair);
+		assertEquals(name, newKeyPair.getName());
+		assertEquals(value, newKeyPair.getValue());
+		assertNull(newKeyPair.getPreviousValue());
+		assertLearningPeriod(period, newKeyPair.getLearningPeriod());
+		
+		// Get a fresh FeeBase from service:
+		FeeBase freshFeeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Validate the new KeyPair is in the FeeBase now:
+		assertFeeBase(feeBaseFromService, freshFeeBaseFromService);
+	}
+	
+	@Test
+	public void testCreatePeriodKeyPairWithExistingName() throws Exception {
+		// Test objects:
+		FeeBase testFeeBase = createTestFeeBase();
+		String nameThatHasAlreadyBeenUsed = "boo1";
+		String value = "absolutely new value";
+		LearningPeriod period = testFeeBase.getPeriodData().get(0).getLearningPeriod();
+		
+		// Make sure an exception is thrown because the name already exists:
+		boolean exceptionRaised = false;
+		
+		try {
+			// Call the service:
+			feeAssessmentService.createKeyPair(testFeeBase, nameThatHasAlreadyBeenUsed, value, period);
+			
+			// We should not be here:
+			assertTrue("An error should have occurred because a PeriodKeyPair name already exists, but it DID'T.", false);
+		} catch (Exception e) {
+			exceptionRaised = true;
+		}
+		
+		// Assert an exception has been raised:
+		assertTrue("An error should have occurred because a PeriodKeyPair name already exists, but it DID'T.", exceptionRaised);
+	}
+	
+	@Test
+	public void testCreatePeriodKeyPairWithInvalidParameters() throws Exception {
+		// Null FeeBase:
+		try {
+			FeeBase nullFeeBase = null;
+			feeAssessmentService.createKeyPair(nullFeeBase, "new name", "New value", new LearningPeriod());
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null name:
+		try {
+			FeeBase testFeeBase = createTestFeeBase();
+			feeAssessmentService.createKeyPair(testFeeBase, null, "New value", new LearningPeriod());
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null value:
+		try {
+			FeeBase testFeeBase = createTestFeeBase();
+			feeAssessmentService.createKeyPair(testFeeBase, "New name", null, new LearningPeriod());
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null period:
+		try {
+			FeeBase testFeeBase = createTestFeeBase();
+			feeAssessmentService.createKeyPair(testFeeBase, "New name", "new value", null);
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null Everything:
+		try {
+			FeeBase nullFeeBase = null;
+			feeAssessmentService.createKeyPair(nullFeeBase, null, null, null);
+			assertTrue(false);
+		} catch(Exception e) {}
+	}
+
+	@Test
+	public void testCreateLearningUnitKeyPairWithNewName() throws Exception {
+		// Test objects:
+		createTestFeeBase();
+		String name = "absolutely new name";
+		String value = "absolutely new value";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		LearningUnit testLearningUnit = feeBaseFromService.getStudy().get(0);
+		
+		// Call the service:
+		KeyPair newKeyPair = feeAssessmentService.createKeyPair(testLearningUnit, name, value);
+		
+		// Validate the result:
+		assertNotNull(newKeyPair);
+		assertEquals(name, newKeyPair.getName());
+		assertEquals(value, newKeyPair.getValue());
+		assertNull(newKeyPair.getPreviousValue());
+		
+		// Get a fresh FeeBase from service:
+		FeeBase freshFeeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Validate the new KeyPair is in the FeeBase now:
+		assertFeeBase(feeBaseFromService, freshFeeBaseFromService);
+	}
+	
+	@Test
+	public void testCreateLearningUnitKeyPairWithExistingName() throws Exception {
+		// Test objects:
+		FeeBase testFeeBase = createTestFeeBase();
+		LearningUnit testLearningUnit = testFeeBase.getStudy().get(0);
+		String nameThatHasAlreadyBeenUsed = "boo";
+		String value = "absolutely new value";
+		
+		// Make sure an exception is thrown because the name already exists:
+		boolean exceptionRaised = false;
+		
+		try {
+			// Call the service:
+			feeAssessmentService.createKeyPair(testLearningUnit, nameThatHasAlreadyBeenUsed, value);
+			
+			// We should not be here:
+			assertTrue("An error should have occurred because a KeyPair name already exists, but it DID'T.", false);
+		} catch (Exception e) {
+			exceptionRaised = true;
+		}
+		
+		// Assert an exception has been raised:
+		assertTrue("An error should have occurred because a KeyPair name already exists, but it DID'T.", exceptionRaised);
+	}
+	
+	@Test
+	public void testCreateKeyLearningUnitPairWithInvalidParameters() throws Exception {
+		// Null LearningUnit:
+		try {
+			LearningUnit nullLearningUnit = null;
+			feeAssessmentService.createKeyPair(nullLearningUnit, "new name", "New value");
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null name:
+		try {
+			feeAssessmentService.createKeyPair(new LearningUnit(), null, "New value");
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null value:
+		try {
+			feeAssessmentService.createKeyPair(new LearningUnit(), "new name", null);
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null everything:
+		try {
+			LearningUnit nullLearningUnit = null;
+			feeAssessmentService.createKeyPair(nullLearningUnit, null, null);
+			assertTrue(false);
+		} catch(Exception e) {}
+	}
+	
+	@Test
+	public void testGetKeyPairValueExistingName() throws Exception {
+		// Test Objects:
+		createTestFeeBase();
+		String existingKeyPairName = "boo";
+		String existingKeyPairValue = "foo";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Call the service:
+		String kpValueFromService = feeAssessmentService.getKeyPairValue(feeBaseFromService, existingKeyPairName);
+		
+		// Validate:
+		assertEquals(existingKeyPairValue, kpValueFromService);
+	}
+	
+	@Test
+	public void testGetKeyPairValueNonExistingName() throws Exception {
+		// Test Objects:
+		createTestFeeBase();
+		String nonExistingKeyPairName = "lalala-1";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Call the service:
+		String kpValueFromService = feeAssessmentService.getKeyPairValue(feeBaseFromService, nonExistingKeyPairName);
+		
+		// Validate:
+		assertNull(kpValueFromService);
+	}
+	
+	@Test
+	public void testGetKeyPairValueWithInvalidParameters() throws Exception {
+		// Null FeeBase:
+		try {
+			FeeBase nullFeeBase = null;
+			feeAssessmentService.getKeyPairValue(nullFeeBase, "new name");
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null name:
+		try {
+			FeeBase testFeeBase = createTestFeeBase();
+			feeAssessmentService.getKeyPairValue(testFeeBase, null);
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null Everything:
+		try {
+			FeeBase nullFeeBase = null;
+			feeAssessmentService.getKeyPairValue(nullFeeBase, null);
+			assertTrue(false);
+		} catch(Exception e) {}
+	}
+	
+	@Test
+	public void testGetPeriodKeyPairValueExistingName() throws Exception {
+		// Test Objects:
+		createTestFeeBase();
+		String existingKeyPairName = "boo1";
+		String existingKeyPairValue = "foo1";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		
+		// Call the service:
+		String kpValueFromService = feeAssessmentService.getKeyPairValue(feeBaseFromService, existingKeyPairName);
+		
+		// Validate:
+		assertEquals(existingKeyPairValue, kpValueFromService);
+	}
+	
+	@Test
+	public void testGetLearningUnitKeyPairValueExistingName() throws Exception {
+		// Test Objects:
+		createTestFeeBase();
+		String existingKeyPairName = "boo";
+		String existingKeyPairValue = "foo";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		
+		// Call the service:
+		String kpValueFromService = feeAssessmentService.getKeyPairValue(luFromService, existingKeyPairName);
+		
+		// Validate:
+		assertEquals(existingKeyPairValue, kpValueFromService);
+	}
+	
+	@Test
+	public void testGetLearningUnitKeyPairValueNonExistingName() throws Exception {
+		// Test Objects:
+		createTestFeeBase();
+		String nonExistingKeyPairName = "lalala-1";
+		
+		// Get the FeeBase from service:
+		FeeBase feeBaseFromService = feeAssessmentService.getFeeBase(accountId);
+		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		
+		// Call the service:
+		String kpValueFromService = feeAssessmentService.getKeyPairValue(luFromService, nonExistingKeyPairName);
+		
+		// Validate:
+		assertNull(kpValueFromService);
+	}
+	
+	@Test
+	public void testGetLearningUnitKeyPairValueWithInvalidParameters() throws Exception {
+		// Null LearningUnit:
+		try {
+			LearningUnit nullLearningUnit = null;
+			feeAssessmentService.getKeyPairValue(nullLearningUnit, "new name");
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null name:
+		try {
+			feeAssessmentService.getKeyPairValue(new LearningUnit(), null);
+			assertTrue(false);
+		} catch(Exception e) {}
+		
+		// Null everything:
+		try {
+			LearningUnit nullLearningUnit = null;
+			feeAssessmentService.getKeyPairValue(nullLearningUnit, null);
+			assertTrue(false);
+		} catch(Exception e) {}
+	}
+
 	
 	/* *************************************
 	 * 
@@ -286,7 +691,7 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		kp3.setName("snafu");
 		kp3.setValue("beyond recognition");
 		
-		return Arrays.asList(kp1, kp2, kp3);
+		return new ArrayList<KeyPair>(Arrays.asList(kp1, kp2, kp3));
 	}
 	
 	private List<PeriodKeyPair> createTestPeriodDataWithinTransaction() {
@@ -351,7 +756,7 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		lp.setDateFrom(new Date());
 		lp.setDateTo(new Date());
 		
-		return Arrays.asList(pkp1, pkp2, pkp3, pkp4);
+		return new ArrayList<PeriodKeyPair>(Arrays.asList(pkp1, pkp2, pkp3, pkp4));
 	}
 	
 	private List<LearningUnit> createTestStudyWithinTransaction() {
@@ -424,7 +829,7 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		lu2.setUnitSection("section 002v");
 		lu2.setExtended(new HashSet<KeyPair>(createKeyPairs()));
 		
-		return Arrays.asList(lu1, lu2);
+		return new ArrayList<LearningUnit>(Arrays.asList(lu1, lu2));
 	}
 	
 	private void persistAccount() {
@@ -432,32 +837,68 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 		em.persist(testAccount);
 	}
 	
-	private void assertStudentData(List<KeyPair> expected, List<KeyPair> actual) {
-		assertNotNull(actual);
-		assertEquals(expected.size(), actual.size());
+	private FeeBase createTestFeeBase() {
+		// Create test objects:
+		List<KeyPair> testStudentData = createTestStudentDataWithinTransaction();
+		List<PeriodKeyPair> testPeriodData = createTestPeriodDataWithinTransaction();
+		List<LearningUnit> testStudy = createTestStudyWithinTransaction();
 		
-		// Inspect each result object:
-		for (int i=0,sz=expected.size(); i<sz; i++) {
-			assertNotNull(actual.get(i));
-			assertEquals(expected.get(i).getId(), actual.get(i).getId());
-			assertEquals(expected.get(i).getName(), actual.get(i).getName());
-			assertEquals(expected.get(i).getValue(), actual.get(i).getValue());
-			assertEquals(expected.get(i).getPreviousValue(), actual.get(i).getPreviousValue());
+		// If creation of the test data failed, so be it, nothing to test:
+		if ((testStudentData == null) || (testPeriodData == null) || (testStudy == null)) {
+			return null;
 		}
+		
+		// Create a new FeeBase:
+		FeeBase feeBase = new FeeBase();
+		
+		feeBase.setAccount(testAccount);
+		feeBase.setStudentData(testStudentData);
+		feeBase.setPeriodData(testPeriodData);
+		feeBase.setStudy(testStudy);
+		
+		return feeBase;
 	}
 	
-	private void assertPeriodData(List<PeriodKeyPair> expected, List<PeriodKeyPair> actual) {
+	
+	/* **************************************************************
+	 * 
+	 * Assertion methods.
+	 * 
+	 * **************************************************************/
+	
+	private void assertFeeBase(FeeBase expected, FeeBase actual) {
+		assertNotNull(actual);
+		assertKeyPairs(expected.getStudentData(), actual.getStudentData());
+		assertKeyPairs(expected.getPeriodData(), actual.getPeriodData());
+		assertStudy(expected.getStudy(), actual.getStudy());
+	}
+	
+	private <T extends KeyPair> void assertKeyPairs(List<T> expected, List<T> actual) {
 		assertNotNull(actual);
 		assertEquals(expected.size(), actual.size());
 		
+		// Pre-sort the lists by their natural IDs:
+		List<KeyPair> expectedKeyPairs = new ArrayList<KeyPair>(expected);
+		List<KeyPair> actualKeyPairs = new ArrayList<KeyPair>(actual);
+		KeyPairComparator comparator = new KeyPairComparator();
+		
+		Collections.sort(expectedKeyPairs, comparator);
+		Collections.sort(actualKeyPairs, comparator);
+		
 		// Inspect each result object:
-		for (int i=0,sz=expected.size(); i<sz; i++) {
-			assertNotNull(actual.get(i));
-			assertEquals(expected.get(i).getId(), actual.get(i).getId());
-			assertEquals(expected.get(i).getName(), actual.get(i).getName());
-			assertEquals(expected.get(i).getValue(), actual.get(i).getValue());
-			assertEquals(expected.get(i).getPreviousValue(), actual.get(i).getPreviousValue());
-			assertLearningPeriod(expected.get(i).getLearningPeriod(), actual.get(i).getLearningPeriod());
+		for (int i=0,sz=expectedKeyPairs.size(); i<sz; i++) {
+			assertNotNull(actualKeyPairs.get(i));
+			assertEquals(expectedKeyPairs.get(i).getId(), actualKeyPairs.get(i).getId());
+			assertEquals(expectedKeyPairs.get(i).getName(), actualKeyPairs.get(i).getName());
+			assertEquals(expectedKeyPairs.get(i).getValue(), actualKeyPairs.get(i).getValue());
+			assertEquals(expectedKeyPairs.get(i).getPreviousValue(), actualKeyPairs.get(i).getPreviousValue());
+			
+			if (actual.get(i) instanceof PeriodKeyPair) {
+				assertLearningPeriod(
+						PeriodKeyPair.class.cast(expectedKeyPairs.get(i)).getLearningPeriod(), 
+						PeriodKeyPair.class.cast(actualKeyPairs.get(i)).getLearningPeriod()
+				);
+			}
 		}
 	}
 	
@@ -480,15 +921,7 @@ public class FeeAssessmentServiceTest extends AbstractServiceTest {
 			assertEquals(expected.get(i).getStatus(), actual.get(i).getStatus());
 			assertEquals(expected.get(i).getAccountId(), actual.get(i).getAccountId());
 			assertAccount(expected.get(i).getAccount(), actual.get(i).getAccount());
-			
-			// Assert the student data:
-			List<KeyPair> expectedKeyPairs = new ArrayList<KeyPair>(expected.get(i).getExtended());
-			List<KeyPair> actualKeyPairs = new ArrayList<KeyPair>(actual.get(i).getExtended());
-			KeyPairComparator comparator = new KeyPairComparator();
-			
-			Collections.sort(expectedKeyPairs, comparator);
-			Collections.sort(actualKeyPairs, comparator);
-			assertStudentData(expectedKeyPairs, actualKeyPairs);
+			assertKeyPairs(new ArrayList<KeyPair>(expected.get(i).getExtended()), new ArrayList<KeyPair>(actual.get(i).getExtended()));
 		}
 	}
 	
