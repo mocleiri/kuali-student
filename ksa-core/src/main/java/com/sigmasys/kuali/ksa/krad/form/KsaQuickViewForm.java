@@ -65,10 +65,10 @@ public class KsaQuickViewForm extends AbstractViewModel {
    // Memos
 
    private List<Memo> memos;
+
    /*
       Get / Set methods
     */
-
 
    public Account getAccount() {
       return account;

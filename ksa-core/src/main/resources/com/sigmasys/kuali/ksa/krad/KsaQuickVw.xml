@@ -91,6 +91,7 @@
     *******************************************************************************************************************
                                             Account Overview group
     A summary view of an account, drill down to the account overview detail view
+    TODO p:styleClasses="group-border add to the BoxGroup
     ********************************************************************************************************************
     -->
     <bean id="accountOverviewGroup" parent="Uif-VerticalBoxGroup"
@@ -144,7 +145,7 @@
                         <bean parent="Uif-Link" p:linkText="Add Charge" p:target="_self"
                               p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
                         <bean parent="Uif-Link" p:linkText="Add Payment" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                              p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView"/>
                         <bean parent="Uif-Link" p:linkText="Add Deferment" p:target="_self"
                               p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
                         <bean parent="Uif-Link" p:linkText="Write-Off Account" p:target="_self"

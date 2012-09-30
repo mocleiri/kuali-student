@@ -1,17 +1,21 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.Payment;
 
 import java.math.BigDecimal;
 
 /**
- * Created by: dmulderink on 9/28/12 at 7:56 AM
+ * Created by: dmulderink on 9/30/12 at 11:27 AM
  */
-public class KsaChargeForm extends AbstractViewModel {
+public class KsaPaymentForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
-   private Charge charge;
+   private Payment payment;
+
+   private String printReceipt;
+
+   private String emailReceipt;
 
    private BigDecimal estimatedCurrentBalance;
 
@@ -23,12 +27,28 @@ public class KsaChargeForm extends AbstractViewModel {
      Get / Set methods
    */
 
-   public Charge getCharge() {
-      return charge;
+   public Payment getPayment() {
+      return payment;
    }
 
-   public void setCharge(Charge charge) {
-      this.charge = charge;
+   public void setPayment(Payment payment) {
+      this.payment = payment;
+   }
+
+   public String getPrintReceipt() {
+      return printReceipt;
+   }
+
+   public void setPrintReceipt(String printReceipt) {
+      this.printReceipt = printReceipt;
+   }
+
+   public String getEmailReceipt() {
+      return emailReceipt;
+   }
+
+   public void setEmailReceipt(String emailReceipt) {
+      this.emailReceipt = emailReceipt;
    }
 
    public BigDecimal getEstimatedCurrentBalance() {

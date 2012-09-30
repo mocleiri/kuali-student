@@ -26,9 +26,9 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaChargeView" parent="Uif-KsaFormView" p:footer.render="false">
-        <property name="title" value="Charge"/>
-        <property name="entryPageId" value="AddChargePage"/>
+    <bean id="KsaPaymentView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="title" value=""/>
+        <property name="entryPageId" value="AddPaymentPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
@@ -43,10 +43,10 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="AddChargePage" p:title="Account">
+                <bean parent="Uif-Page" p:id="AddPaymentPage" p:title="Account">
                     <property name="items">
                         <list>
-                            <ref bean="addChargeSection"/>
+                            <ref bean="addPaymentSection"/>
                         </list>
                     </property>
                 </bean>
@@ -56,27 +56,43 @@
         <property name="additionalCssFiles" ref=""/>
         <property name="additionalJsFiles" ref=""/>
         <property name="viewHelperServiceClassName" value=""/>
-        <property name="defaultBindingObjectPath" value=""/>
+        <property name="defaultBindingObjectPath" vaue=""/>
 -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaChargeForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaPaymentForm"/>
     </bean>
 
     <!--
     ********************************************************************************************************************
-                                        Add Charge section
+                                        Add Payment section
     A vertical section with a vertical disclosure subsection and horizontal sub section devoted to button controls
     ********************************************************************************************************************
     -->
-    <bean id="addChargeSection" parent="Uif-VerticalBoxSection"
+    <bean id="addPaymentSection" parent="Uif-VerticalBoxSection"
           p:title="@{searchValue}"
-          p:instructionalText="The following form will allow a charge to be added to the account">
+          p:instructionalText="The following form will allow a payment to be applied to the account">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
                 <!-- Use a field to get/set the value  -->
+                <bean parent="Uif-InputField" p:propertyName="printReceipt" p:label="Print receipt"
+                      p:defaultValue="false" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <!-- Use a field to get/set the value  -->
+                <bean parent="Uif-InputField" p:propertyName="emailReceipt" p:label="Email receipt"
+                      p:defaultValue="false" p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CheckboxControl"/>
+                    </property>
+                </bean>
+                <!-- Use a field to get/set the value  -->
                 <bean parent="Uif-InputField" p:propertyName="estimatedCurrentBalance"
                       p:label="Estimated Current Balance"
-                      p:instructionalText="An estimate of the current charge balance"
+                      p:instructionalText="An estimate of the current balance"
                       p:fieldLabel.renderColon="true"
                       p:maxLength="10"
                       p:readOnly="true">
@@ -86,9 +102,9 @@
                     </property>
                 </bean>
                 <!-- Use a field to get/set the value  -->
-                <bean parent="Uif-InputField" p:propertyName="charge.transactionType"
-                      p:label="Charge Type"
-                      p:instructionalText="Charge type"
+                <bean parent="Uif-InputField" p:propertyName="payment.transactionType"
+                      p:label="Payment Type"
+                      p:instructionalText="Payment type"
                       p:fieldLabel.renderColon="true"
                       p:labelPlacement="TOP"
                       p:maxLength="10"
@@ -98,10 +114,10 @@
                         <bean parent="Uif-TextControl" p:size="11" />
                     </property>
                 </bean>
-                <!-- Use the Charge instance to get/set the values -->
-                <bean parent="Uif-InputField" p:propertyName="charge.amount"
+                <!-- Use the Payment instance to get/set the values -->
+                <bean parent="Uif-InputField" p:propertyName="payment.amount"
                       p:label="Amount"
-                      p:instructionalText="Enter the amount of the charge"
+                      p:instructionalText="Enter the amount of the payment"
                       p:fieldLabel.renderColon="true"
                       p:labelPlacement="TOP"
                       p:maxLength="21">
@@ -110,9 +126,9 @@
                         <bean parent="Uif-TextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="charge.effectiveDate"
+                <bean parent="Uif-InputField" p:propertyName="payment.effectiveDate"
                       p:label="Effective Date"
-                      p:instructionalText="Enter effective date of the charge"
+                      p:instructionalText="Enter the effective date of the payment"
                       p:fieldLabel.renderColon="true"
                       p:labelPlacement="TOP"
                       p:maxLength="10">
@@ -121,20 +137,10 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <!-- Advanced vertical sub section -->
-                <bean parent="Uif-Disclosure-VerticalBoxSubSection"
-                    p:title="Advanced">
-                    <property name="disclosure.render" value="false"/>
-                    <property name="items">
-                        <list>
-                           <!--  TODO Currency stuff -->
-                        </list>
-                    </property>
-                </bean>
                 <!-- Use a field to get/set the value  -->
                 <bean parent="Uif-InputField" p:propertyName="estimatedPendingBalance"
                       p:label="Estimated Pending Balance"
-                      p:instructionalText="An estimate of the pending charge balance"
+                      p:instructionalText="An estimate of the pending balance"
                       p:fieldLabel.renderColon="true"
                       p:maxLength="10"
                       p:readOnly="true">
@@ -143,7 +149,7 @@
                         <bean parent="Uif-TextControl" p:size="11" />
                     </property>
                 </bean>
-                <ref bean="chargeControls"/>
+                <ref bean="paymentControls"/>
                 <!--  Status message -->
                 <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
             </list>
@@ -156,9 +162,10 @@
     A horizontal sub section devoted to button controls or links
     ********************************************************************************************************************
     -->
-    <bean id="chargeControls" parent="Uif-HorizontalBoxSubSection">
+    <bean id="paymentControls" parent="Uif-HorizontalBoxSubSection">
         <property name="items">
             <list>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit and Age"></bean>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"></bean>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel" p:actionLabel="Cancel"></bean>
             </list>

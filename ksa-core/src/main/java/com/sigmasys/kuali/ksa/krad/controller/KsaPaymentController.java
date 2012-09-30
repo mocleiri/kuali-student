@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.KsaChargeForm;
+import com.sigmasys.kuali.ksa.krad.form.KsaPaymentForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -13,18 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by: dmulderink on 9/28/12 at 7:56 AM
+ * Created by: dmulderink on 9/30/12 at 11:27 AM
  */
 @Controller
-@RequestMapping(value = "/ksaChargeVw")
-public class KsaChargeController extends GenericSearchController {
+@RequestMapping(value = "/ksaPaymentVw")
+public class KsaPaymentController extends GenericSearchController {
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
-   protected KsaChargeForm createInitialForm(HttpServletRequest request) {
-      KsaChargeForm form  = new KsaChargeForm();
+   protected KsaPaymentForm createInitialForm(HttpServletRequest request) {
+      KsaPaymentForm form  = new KsaPaymentForm();
       form.setStatusMessage("My Status Message goes here!");
       return form;
    }
@@ -38,7 +38,7 @@ public class KsaChargeController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+   public ModelAndView get(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
       // do get stuff...
@@ -56,7 +56,7 @@ public class KsaChargeController extends GenericSearchController {
     */
 
    @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+   public ModelAndView start(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
       // populate model for testing
@@ -75,7 +75,7 @@ public class KsaChargeController extends GenericSearchController {
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
    @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+   public ModelAndView submit(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
 
@@ -93,7 +93,7 @@ public class KsaChargeController extends GenericSearchController {
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
    @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+   public ModelAndView save(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
       // do save stuff...
@@ -110,7 +110,7 @@ public class KsaChargeController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaChargeForm form, BindingResult result,
+   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaPaymentForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do cancel stuff...
       return getUIFModelAndView(form);
@@ -125,9 +125,10 @@ public class KsaChargeController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);
    }
+
 }
