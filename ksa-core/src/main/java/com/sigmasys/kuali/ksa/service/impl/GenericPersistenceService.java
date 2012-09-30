@@ -39,10 +39,10 @@ public class GenericPersistenceService implements PersistenceService {
     protected EntityManager em;
 
     @Autowired
-    private UserSessionManager userSessionManager;
+    protected UserSessionManager userSessionManager;
 
     @Autowired
-    private ConfigService configService;
+    protected ConfigService configService;
 
 
     /**

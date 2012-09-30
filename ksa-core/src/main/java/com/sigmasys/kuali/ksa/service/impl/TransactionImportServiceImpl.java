@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.transform.*;
@@ -58,12 +57,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     @Autowired
     private GeneralLedgerService glService;
-
-    @Autowired
-    private ConfigService configService;
-
-    @Autowired
-    private UserSessionManager sessionManager;
 
 
     /**
@@ -345,7 +338,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         XmlDocument xmlDocument = new XmlDocument();
         xmlDocument.setXml(xml);
         xmlDocument.setCreationDate(new Date());
-        xmlDocument.setCreatorId(sessionManager.getUserId(RequestUtils.getThreadRequest()));
+        xmlDocument.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
         persistEntity(xmlDocument);
         return xmlDocument;
     }

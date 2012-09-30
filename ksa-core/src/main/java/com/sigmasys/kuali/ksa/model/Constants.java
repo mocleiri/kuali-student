@@ -15,7 +15,8 @@ public interface Constants {
     String RICE_PERSISTENCE_UNIT = "rice";
 
     // KSA parameter names
-    String LOCALE_MEMO_LEVEL_PARAM_NAME = "ksa.memo.level";
+    String DEFAULT_WRITE_OFF_ROLLUP_PARAM_NAME = "ksa.writeoff.rollup";
+    String DEFAULT_MEMO_LEVEL_PARAM_NAME = "ksa.memo.level";
     String LOCALE_LANG_PARAM_NAME = "ksa.locale.lang";
     String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
     String IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME = "ksa.import.single.batch.failure";

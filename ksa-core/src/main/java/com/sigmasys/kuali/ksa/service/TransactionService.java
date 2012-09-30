@@ -83,6 +83,15 @@ public interface TransactionService {
      */
     TransactionType getTransactionType(String transactionTypeId, Date effectiveDate);
 
+    /**
+     * Returns the transaction type instance for the given transaction type ID and effective date
+     *
+     * @param transactionTypeId TransactionTypeId instance
+     * @return TransactionType instance
+     */
+    @WebMethod(exclude = true)
+    TransactionType getTransactionType(TransactionTypeId transactionTypeId);
+
 
     /**
      * Returns Transaction by ID
@@ -417,5 +426,20 @@ public interface TransactionService {
      * @return List of Transaction instances
      */
     List<Transaction> findTransactionsByStatementPattern(String pattern);
+
+    /**
+        * The logic of this is very similar to reverseTransaction(), except a partial write off is allowed, and only
+        * credits can be written off. Also, the institution can choose to write off charges to a different general
+        * ledger account, instead of the original, permitting the writing off to a general “bad debt” account, if they
+        * so choose.
+        *
+        * @param transactionId Transaction ID
+        * @param transactionTypeId TransactionType ID
+        * @param memoText Memo test
+        * @param statementPrefix Transaction statement prefix
+        * @return a write-off transaction instance
+        */
+    Transaction writeOffTransaction(Long transactionId, TransactionTypeId transactionTypeId,
+                                       String memoText, String statementPrefix);
 
 }

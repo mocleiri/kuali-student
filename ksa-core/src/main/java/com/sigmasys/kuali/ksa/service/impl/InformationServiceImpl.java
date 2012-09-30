@@ -1,11 +1,9 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,12 +35,6 @@ public class InformationServiceImpl extends GenericPersistenceService implements
 
     @Autowired
     private AccountService accountService;
-
-    @Autowired
-    private UserSessionManager userSessionManager;
-
-    @Autowired
-    private ConfigService configService;
 
 
     /**
@@ -440,7 +432,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Integer getDefaultMemoLevel() {
-        return Integer.valueOf(configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME));
+        return Integer.valueOf(configService.getInitialParameter(Constants.DEFAULT_MEMO_LEVEL_PARAM_NAME));
     }
 
 }

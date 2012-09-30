@@ -55,9 +55,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     private InformationService informationService;
 
     @Autowired
-    private UserSessionManager userSessionManager;
-
-    @Autowired
     private GeneralLedgerService glService;
 
 
@@ -164,6 +161,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             return transactionTypes.get(0);
         }
         String errMsg = "Cannot find TransactionType for ID = " + transactionTypeId + " and date = " + effectiveDate;
+        logger.error(errMsg);
+        throw new InvalidTransactionTypeException(errMsg);
+    }
+
+    /**
+     * Returns the transaction type instance for the given transaction type ID and effective date
+     *
+     * @param transactionTypeId TransactionTypeId instance
+     * @return TransactionType instance
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public TransactionType getTransactionType(TransactionTypeId transactionTypeId) {
+        Query query = em.createQuery("select t from TransactionType t where t.id = :transactionTypeId");
+        query.setParameter("transactionTypeId", transactionTypeId);
+        List<TransactionType> transactionTypes = query.getResultList();
+        if (transactionTypes != null && !transactionTypes.isEmpty()) {
+            return transactionTypes.get(0);
+        }
+        String errMsg = "Cannot find TransactionType for ID = " + transactionTypeId;
         logger.error(errMsg);
         throw new InvalidTransactionTypeException(errMsg);
     }
@@ -1291,6 +1308,102 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 " where t.statementText like :pattern ");
         query.setParameter("pattern", pattern);
         return query.getResultList();
+    }
+
+    /**
+     * The logic of this is very similar to reverseTransaction(), except a partial write off is allowed, and only
+     * credits can be written off. Also, the institution can choose to write off charges to a different general
+     * ledger account, instead of the original, permitting the writing off to a general “bad debt” account, if they
+     * so choose.
+     *
+     * @param transactionId Transaction ID
+     * @param transactionTypeId TransactionType ID
+     * @param memoText Memo test
+     * @param statementPrefix Transaction statement prefix
+     * @return a write-off transaction instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Transaction writeOffTransaction(Long transactionId, TransactionTypeId transactionTypeId,
+                                    String memoText, String statementPrefix) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (transaction.getTransactionTypeValue() != TransactionTypeValue.CHARGE) {
+            String errMsg = "Transaction must be a charge, ID = " + transactionId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        TransactionType transactionType = (transactionTypeId != null) ?
+                getTransactionType(transactionTypeId) : transaction.getTransactionType();
+
+        Query query = em.createQuery("select a from Allocation a " +
+                " join fetch a.firstTransaction t1 " +
+                " join fetch a.secondTransaction t2 " +
+                " where a.firstTransaction.id = :transactionId or " +
+                " a.secondTransaction.id = :transactionId and a.isLocked = true");
+        query.setParameter("transactionId", transactionId);
+        List<Allocation> lockedAllocations = query.getResultList();
+        if (lockedAllocations != null) {
+            for (Allocation allocation : lockedAllocations) {
+                Transaction firstTransaction = allocation.getFirstTransaction();
+                Transaction secondTransaction = allocation.getSecondTransaction();
+                if (firstTransaction.getTransactionTypeValue() == TransactionTypeValue.DEFERMENT) {
+                    expireDeferment(firstTransaction.getId());
+                }
+                if (secondTransaction.getTransactionTypeValue() == TransactionTypeValue.DEFERMENT) {
+                    expireDeferment(secondTransaction.getId());
+                }
+            }
+        }
+
+        BigDecimal writeOffAmount = getUnallocatedAmount(transaction);
+
+        // Creating a new transaction with the negate writeOffAmount
+        Transaction writeOffTransaction = createTransaction(transactionType.getId().getId(), transaction.getAccountId(),
+                transaction.getEffectiveDate(), writeOffAmount.negate());
+
+        // Creating a new locked allocation between the original and write-off transactions
+        createLockedAllocation(transaction.getId(), writeOffTransaction.getId(), writeOffAmount);
+
+        String statementText = transaction.getStatementText();
+        if (statementPrefix != null && !statementPrefix.isEmpty()) {
+            // TODO: ask Paul what transaction should update the statement
+            statementText = statementPrefix + " " + statementText;
+        }
+        writeOffTransaction.setStatementText(statementText);
+
+        String rollupCode = configService.getInitialParameter(Constants.DEFAULT_WRITE_OFF_ROLLUP_PARAM_NAME);
+        Rollup rollup = getRollupByCode(rollupCode);
+        if (rollup != null) {
+            writeOffTransaction.setRollup(rollup);
+        }
+
+        persistTransaction(writeOffTransaction);
+
+        // Creating memo
+        if (memoText != null && memoText.trim().isEmpty()) {
+            Integer defaultMemoLevel = informationService.getDefaultMemoLevel();
+            Date effectiveDate = new Date();
+            informationService.createMemo(transactionId, memoText, defaultMemoLevel, effectiveDate, null, null);
+        }
+
+        return writeOffTransaction;
+
+    }
+
+
+    private Rollup getRollupByCode(String code) {
+        Query query = em.createQuery("select r from Rollup r where r.code = :code");
+        query.setParameter("code", code);
+        List<Rollup> rollups = query.getResultList();
+        return (rollups != null && !rollups.isEmpty()) ? rollups.get(0) : null;
     }
 
 
