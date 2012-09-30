@@ -4,6 +4,8 @@ import com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm;
 import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +29,9 @@ import java.util.List;
 @RequestMapping(value = "/ksaQuickVw")
 public class KsaQuickViewController extends GenericSearchController {
 
-   @Autowired
+    private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+
+    @Autowired
    private InformationService informationService;
 
    /**
@@ -36,11 +40,11 @@ public class KsaQuickViewController extends GenericSearchController {
    @Override
    protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
       KsaQuickViewForm form  = new KsaQuickViewForm();
-      form.setCompositeDefaultPersonName("Thomas Brudenell-Bruce, 1st Earl of Ailesbury");
-      form.setCompositeDefaultPostalAddress("Winchester College\n" +
-            "College Street\n" +
-            "Winchester SO23 9NA\n" +
-            "United Kingdom");
+      //form.setCompositeDefaultPersonName("Thomas Brudenell-Bruce, 1st Earl of Ailesbury");
+      //form.setCompositeDefaultPostalAddress("Winchester College\n" +
+      //      "College Street\n" +
+      //      "Winchester SO23 9NA\n" +
+      //      "United Kingdom");
       return form;
    }
 
@@ -56,9 +60,22 @@ public class KsaQuickViewController extends GenericSearchController {
    public ModelAndView get(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
-      // do get stuff...
+       String viewId = request.getParameter("viewId");
+       String userId = request.getParameter("id");
 
-      return getUIFModelAndView(form);
+       logger.info("View: " + viewId + " User: " + userId);
+
+       if("KsaQuickView".equals(viewId)){
+           if(! accountService.accountExists(userId)){
+               throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
+           }
+
+           populateForm(userId, form);
+
+       }
+
+
+        return getUIFModelAndView(form);
    }
 
    /**
@@ -142,8 +159,22 @@ public class KsaQuickViewController extends GenericSearchController {
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
+
+       String viewId = request.getParameter("viewId");
+       String userId = request.getParameter("id");
+
+       logger.info("View: " + viewId + " User: " + userId);
+
+       if("KsaQuickView".equals(viewId)){
+           if(! accountService.accountExists(userId)){
+               throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
+           }
+
+           populateForm(userId, form);
+
+       }
+
+       return getUIFModelAndView(form);
    }
 
    /**
@@ -273,7 +304,7 @@ public class KsaQuickViewController extends GenericSearchController {
 
       List<Memo> memos = informationService.getMemos(id);
 
-      // Alerts
+      // Memos
       for (Memo memo : memos) {
 
          memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
