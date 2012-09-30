@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class GenericSearchController extends UifControllerBase {
 
-
+    private static final String ALL_SEARCH_PAGE_ID = "QuickViewPage";
     private static final String ACCOUNT_SEARCH_PAGE_ID = "AccountSearchPage";
     private static final String TRANSACTION_SEARCH_PAGE_ID = "TransactionSearchPage";
 
@@ -62,6 +62,10 @@ public abstract class GenericSearchController extends UifControllerBase {
 
         SearchTypeValue searchTypeValue = SearchTypeValue.valueOf(searchType);
         switch (searchTypeValue) {
+            case ALL:
+               form.setAccounts(accountService.findAccountsByNamePattern(searchValue));
+               form.setPageId(ALL_SEARCH_PAGE_ID);
+               break;
             case ACCOUNT:
                 form.setAccounts(accountService.findAccountsByNamePattern(searchValue));
                 form.setPageId(ACCOUNT_SEARCH_PAGE_ID);

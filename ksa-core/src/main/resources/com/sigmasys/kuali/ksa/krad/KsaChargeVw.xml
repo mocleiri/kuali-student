@@ -68,7 +68,7 @@
     ********************************************************************************************************************
     -->
     <bean id="addChargeSection" parent="Uif-VerticalBoxSection"
-          p:title="@{selectedPersonName}"
+          p:title="@{searchValue}"
           p:instructionalText="The following form will allow a charge to be added to the account">
         <property name="disclosure.render" value="false"/>
         <property name="items">

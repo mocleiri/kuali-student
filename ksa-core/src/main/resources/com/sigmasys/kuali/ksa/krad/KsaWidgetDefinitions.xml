@@ -42,8 +42,10 @@
         </property>
         <property name="items">
             <list>
+                <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
+                      p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView"/>
                 <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
-                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=HomePage"/>
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
@@ -51,7 +53,7 @@
                 <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
-                      p:href="ksaBatchTransactionsVw?methodToCall=get&amp;viewId=KsaBatchTransactionsView&amp;pageId=BatchTransactionsQuickMenuOptionsPage"/>
+                      p:href="ksaBatchTransactionsVw?methodToCall=get&amp;viewId=KsaBatchTransactionsView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
             </list>

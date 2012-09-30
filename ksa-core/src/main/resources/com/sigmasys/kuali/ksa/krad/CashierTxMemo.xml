@@ -385,7 +385,7 @@
 
 
 
-    <!-- Alerts -->
+    <!-- Flags -->
     <bean id="cashierFlagDetails" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="1"
           p:title="Flags"
           p:disclosure.render="false"
