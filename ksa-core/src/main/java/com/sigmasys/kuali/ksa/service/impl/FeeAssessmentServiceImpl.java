@@ -415,6 +415,9 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 */
 	@Override
 	public boolean containsKeyPair(LearningUnit learningUnit, String name) {
+		// Validate input:
+		validateInputParameters(learningUnit, name);
+		
 		return containsKeyPairInternal(learningUnit.getExtended(), name);
 	}
 
@@ -427,6 +430,9 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	 */
 	@Override
 	public void saveLearningUnit(LearningUnit learningUnit) {
+		// Validate input:
+		validateInputParameters(learningUnit);
+		
 		// Persist the entity
 		persistEntity(learningUnit);
 	}
@@ -730,12 +736,16 @@ public class FeeAssessmentServiceImpl extends GenericPersistenceService implemen
 	}
 	
 	private void validateInputParameters(LearningUnit learningUnit, String name) {
-		if (learningUnit == null) {
-			throw new IllegalArgumentException("Cannot create a new KeyPair for a null LearningUnit");
-		}
+		validateInputParameters(learningUnit);
 		
 		if (StringUtils.isBlank(name)) {
 			throw new IllegalArgumentException("KeyPair.name property cannot be null.");
+		}
+	}
+	
+	private void validateInputParameters(LearningUnit learningUnit) {
+		if (learningUnit == null) {
+			throw new IllegalArgumentException("LearningUnit cannot be null.");
 		}
 	}
 	
