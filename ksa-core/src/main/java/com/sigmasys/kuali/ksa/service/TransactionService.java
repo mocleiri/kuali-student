@@ -376,9 +376,9 @@ public interface TransactionService {
      * @param memoText        Text of the memo to be created
      * @param partialAmount   Partial amount
      * @param statementPrefix Statement prefix that will be added to the existing Transaction statement
+     * @return a newly created reversed transaction
      */
-    void reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount,
-                            String statementPrefix);
+    Transaction reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount, String statementPrefix);
 
     /**
      * A deferment may be expired automatically (when the date of the deferment
@@ -400,7 +400,7 @@ public interface TransactionService {
     <T extends TransactionType> Class<T> getTransactionTypeClass(String transactionTypeId);
 
     /**
-     * Determine if the transaction is allowed for the given account ID, transaction type and effective date
+     * Determines if the transaction is allowed for the given account ID, transaction type and effective date
      *
      * @param accountId       Account ID
      * @param transactionType Transaction Type

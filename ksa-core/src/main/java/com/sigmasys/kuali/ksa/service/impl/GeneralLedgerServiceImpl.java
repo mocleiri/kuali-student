@@ -285,7 +285,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             throw new IllegalStateException(errMsg);
         }
 
-        String glModeCode = configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME);
+        String glModeCode = configService.getInitialParameter(Constants.DEFAULT_GL_MODE_PARAM_NAME);
         GeneralLedgerMode glMode = EnumUtils.findById(GeneralLedgerMode.class, glModeCode);
         if (glMode == null) {
             String errMsg = "General Ledger mode must be specified";
@@ -295,12 +295,12 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
         Query query;
         if (fromDate != null && toDate != null) {
-            query = em.createQuery("select t from GlTransaction t where t.status = :status and t.date " +
+            query = em.createQuery("select t from GlTransaction t where t.statusCode = :status and t.date " +
                     " between :fromDate and :toDate order by t.date asc");
             query.setParameter("fromDate", fromDate);
             query.setParameter("toDate", toDate);
         } else {
-            query = em.createQuery("select t from GlTransaction t where t.status = :status order by t.date asc");
+            query = em.createQuery("select t from GlTransaction t where t.statusCode = :status order by t.date asc");
         }
         query.setParameter("status", GlTransactionStatus.QUEUED.getId());
         if (glMode == GeneralLedgerMode.INDIVIDUAL) {

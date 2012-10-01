@@ -52,6 +52,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(transaction.getId());
         Assert.notNull(transaction.getTransactionType());
         Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
         Assert.notNull(transaction.getCurrency());
 
         Assert.isTrue("USD".equals(transaction.getCurrency().getCode()));
@@ -241,6 +242,180 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Assert.notNull(debitTypeClass);
         Assert.notNull(debitTypeClass.equals(DebitType.class));
+
+    }
+
+    @Test
+    public void reverseTransaction() throws Exception {
+
+        String id = "cash";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getTransactionType().getId());
+
+        TransactionTypeId transactionTypeId = transaction.getTransactionType().getId();
+
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
+        Assert.notNull(transaction.getCurrency());
+        Assert.notNull(transaction.getAmount());
+
+        transaction = transactionService.reverseTransaction(transaction.getId(), "Memo text", new BigDecimal(150.05),
+                "Reversed");
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
+        Assert.notNull(transaction.getCurrency());
+        Assert.notNull(transaction.getAmount());
+
+        Assert.isTrue(transaction.getStatementText().contains("Reversed"));
+        Assert.isTrue(transactionTypeId.equals(transaction.getTransactionType().getId()));
+
+    }
+
+    @Test
+    public void createDeferment() throws Exception {
+
+        // Must be a credit type 'C'
+        String id = "ach";
+        String userId = "admin";
+
+        Date effectiveDate = new Date();
+        Date expirationDate = new Date(effectiveDate.getTime() * 2);
+
+        Transaction deferment =
+                transactionService.createTransaction(id, null, userId, effectiveDate, expirationDate,
+                        new BigDecimal(10e5), false);
+
+
+        Assert.notNull(deferment);
+
+        Assert.isTrue(deferment instanceof Deferment);
+
+        Assert.notNull(deferment.getId());
+        Assert.notNull(deferment.getTransactionType());
+        Assert.notNull(deferment.getTransactionType().getId());
+
+        Assert.notNull(deferment.getAccount());
+        Assert.notNull(deferment.getAccountId());
+        Assert.notNull(deferment.getCurrency());
+        Assert.notNull(deferment.getAmount());
+
+    }
+
+    @Test
+    public void expireDeferment() throws Exception {
+
+        // Must be a credit type 'C'
+        String id = "ach";
+        String userId = "admin";
+
+        Date effectiveDate = new Date();
+        Date expirationDate = new Date(effectiveDate.getTime() * 2);
+
+        Transaction deferment =
+                transactionService.createTransaction(id, null, userId, effectiveDate, expirationDate,
+                        new BigDecimal(10e5), false);
+
+
+        Assert.notNull(deferment);
+
+        Assert.isTrue(deferment instanceof Deferment);
+
+        Assert.notNull(deferment.getId());
+        Assert.notNull(deferment.getTransactionType());
+        Assert.notNull(deferment.getTransactionType().getId());
+
+        Assert.notNull(deferment.getAccount());
+        Assert.notNull(deferment.getAccountId());
+        Assert.notNull(deferment.getCurrency());
+        Assert.notNull(deferment.getAmount());
+
+        transactionService.expireDeferment(deferment.getId());
+
+    }
+
+    @Test
+    public void makeEffective() throws Exception {
+
+        String id = "cash";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getTransactionType().getId());
+
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
+        Assert.notNull(transaction.getCurrency());
+        Assert.notNull(transaction.getAmount());
+
+        transactionService.makeEffective(transaction.getId(), false);
+
+    }
+
+    @Test
+    public void makeEffectiveForced() throws Exception {
+
+        String id = "cash";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getTransactionType().getId());
+
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
+        Assert.notNull(transaction.getCurrency());
+        Assert.notNull(transaction.getAmount());
+
+        transactionService.makeEffective(transaction.getId(), true);
+
+    }
+
+    @Test
+    public void writeOffTransaction() throws Exception {
+
+        // Must be a Charge
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e3));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getTransactionType().getId());
+
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
+        Assert.notNull(transaction.getCurrency());
+        Assert.notNull(transaction.getAmount());
+
+        transaction = transactionService.writeOffTransaction(transaction.getId(), null, "Memo text", "Write-off");
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+        Assert.notNull(transaction.getTransactionType());
+        Assert.notNull(transaction.getTransactionType().getId());
+
+        Assert.notNull(transaction.getAccount());
+        Assert.notNull(transaction.getAccountId());
+        Assert.notNull(transaction.getCurrency());
+        Assert.notNull(transaction.getAmount());
+
+        Assert.isTrue(transaction.getStatementText().contains("Write-off"));
+        Assert.isTrue(transaction.getAmount().compareTo(new BigDecimal(10e3).negate()) == 0);
 
     }
 

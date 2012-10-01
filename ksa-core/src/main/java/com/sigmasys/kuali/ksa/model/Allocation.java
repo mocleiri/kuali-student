@@ -43,7 +43,7 @@ public class Allocation extends AccountIdAware implements Identifiable {
     /**
      * Is locked
      */
-    private Boolean isLocked;
+    private Boolean locked;
 
 
     @Id
@@ -105,11 +105,11 @@ public class Allocation extends AccountIdAware implements Identifiable {
     @org.hibernate.annotations.Type(type = "yes_no")
     @Column(name = "IS_LOCKED")
     public Boolean isLocked() {
-        return isLocked;
+        return locked;
     }
 
     public void setLocked(Boolean locked) {
-        isLocked = locked;
+        this.locked = locked;
     }
 }
 	

@@ -245,6 +245,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         transaction.setTransactionType(transactionType);
         transaction.setAccount(account);
+        transaction.setAccountId(account.getId());
         transaction.setCurrency(currency);
 
         transaction.setExternalId(externalId);
@@ -954,13 +955,22 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         GeneralLedgerType glType = transaction.getGeneralLedgerType();
 
-        String glAccount;
-        GlOperationType glOperationType;
+        String glAccount = null;
+        GlOperationType glOperationType = null;
         if (transaction.getTransactionType() instanceof CreditType) {
             CreditType creditType = (CreditType) transaction.getTransactionType();
             glAccount = creditType.getUnallocatedGlAccount();
             glOperationType = creditType.getUnallocatedGlOperation();
-        } else {
+        } else if (glType != null) {
+            glAccount = glType.getGlAccountId();
+            glOperationType = glType.getGlOperationOnCharge();
+        }
+
+        // TODO: This logic needs to be revised, discuss it with Paul
+        // Using the default GL type
+        if (glAccount == null || glOperationType == null) {
+            logger.info("Default GL type is being used...");
+            glType = glService.getDefaultGeneralLedgerType();
             glAccount = glType.getGlAccountId();
             glOperationType = glType.getGlOperationOnCharge();
         }
@@ -1011,11 +1021,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param memoText        Text of the memo to be created
      * @param partialAmount   Partial amount
      * @param statementPrefix Statement prefix that will be added to the existing Transaction statement
+     * @return a newly created reversed transaction
      */
     @Override
     @Transactional(readOnly = false)
-    public void reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount,
-                                   String statementPrefix) {
+    public Transaction reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount,
+                                          String statementPrefix) {
 
         Transaction transaction = getTransaction(transactionId);
         if (transaction == null) {
@@ -1097,6 +1108,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 Date effectiveDate = new Date();
                 informationService.createMemo(transactionId, memoText, defaultMemoLevel, effectiveDate, null, null);
             }
+
+            return reversedTransaction;
 
         } else {
             // TODO: Check if the locked allocated amount comes from the deferment
@@ -1304,16 +1317,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * ledger account, instead of the original, permitting the writing off to a general “bad debt” account, if they
      * so choose.
      *
-     * @param transactionId Transaction ID
+     * @param transactionId     Transaction ID
      * @param transactionTypeId TransactionType ID
-     * @param memoText Memo test
-     * @param statementPrefix Transaction statement prefix
+     * @param memoText          Memo test
+     * @param statementPrefix   Transaction statement prefix
      * @return a write-off transaction instance
      */
     @Override
     @Transactional(readOnly = false)
     public Transaction writeOffTransaction(Long transactionId, TransactionTypeId transactionTypeId,
-                                    String memoText, String statementPrefix) {
+                                           String memoText, String statementPrefix) {
 
         Transaction transaction = getTransaction(transactionId);
         if (transaction == null) {
@@ -1335,7 +1348,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 " join fetch a.firstTransaction t1 " +
                 " join fetch a.secondTransaction t2 " +
                 " where a.firstTransaction.id = :transactionId or " +
-                " a.secondTransaction.id = :transactionId and a.isLocked = true");
+                " a.secondTransaction.id = :transactionId and a.locked = true");
         query.setParameter("transactionId", transactionId);
         List<Allocation> lockedAllocations = query.getResultList();
         if (lockedAllocations != null) {
@@ -1386,7 +1399,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     private Rollup getRollupByCode(String code) {
-       return getAuditableEntityByCode(code, Rollup.class);
+        return getAuditableEntityByCode(code, Rollup.class);
     }
 
 
