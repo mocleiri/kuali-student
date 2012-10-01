@@ -148,7 +148,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		return level;
 	}
 
-	@Column(name="CREDIT", precision=3, scale=2)
+	@Column(name="CREDIT", precision=5, scale=2)
 	public BigDecimal getCredit() {
 		return credit;
 	}
@@ -246,9 +246,9 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 	}
 	
 	public int hashCode() {
-		return 31 * (((id != null) ? id.hashCode() : 0) +
+		return 
 				31 * ((StringUtils.isNotBlank(accountId) ? accountId.hashCode() : 0) +
 				31 * ((StringUtils.isNotBlank(unitCode) ? unitCode.hashCode() : 0) +
-				31 * ObjectUtils.hashCode(learningPeriod))));
+				31 * ObjectUtils.hashCode(learningPeriod)));
 	}
 }
