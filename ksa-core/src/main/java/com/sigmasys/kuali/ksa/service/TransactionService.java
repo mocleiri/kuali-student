@@ -391,16 +391,6 @@ public interface TransactionService {
     void expireDeferment(Long defermentId);
 
     /**
-     * A deferment may be reduced or set to zero after expiration. Often, the
-     * value of a deferment may not exceed the debit balance on the account to
-     * prevent a credit balance being available for refund on the strength of a
-     * deferment. A deferment may not be increased. Should such a situation
-     * arise, the deferment would need to be expired, and a new deferment
-     * issued.
-     */
-    void reduceDeferment(Long defermentId, BigDecimal newAmount);
-
-    /**
      * Returns the transaction type for the given transaction type ID
      *
      * @param transactionTypeId The first part of TransactionTypeId PK

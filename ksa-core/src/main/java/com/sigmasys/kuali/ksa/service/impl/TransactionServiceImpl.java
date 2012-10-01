@@ -1137,18 +1137,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     }
 
-    /**
-     * A deferment may be reduced or set to zero after expiration. Often, the
-     * value of a deferment may not exceed the debit balance on the account to
-     * prevent a credit balance being available for refund on the strength of a
-     * deferment. A deferment may not be increased. Should such a situation
-     * arise, the deferment would need to be expired, and a new deferment
-     * issued.
-     */
-    @Override
-    public void reduceDeferment(Long defermentId, BigDecimal newAmount) {
-        // TODO
-    }
 
     /**
      * Returns the transaction type for the given transaction type ID
