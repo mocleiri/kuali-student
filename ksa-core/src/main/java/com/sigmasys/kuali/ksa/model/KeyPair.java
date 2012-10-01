@@ -112,9 +112,9 @@ public class KeyPair implements Identifiable {
 	}
 	
 	public int hashCode() {
-		return 31 * (((id != null) ? id.hashCode() : 0) +
+		return 
 				31 * ((StringUtils.isNotEmpty(this.name) ? name.hashCode() : 0) + 
-				31 * (StringUtils.isNotEmpty(this.value) ? value.hashCode() : 0)));
+				31 * (StringUtils.isNotEmpty(this.value) ? value.hashCode() : 0));
 	}
 	
 }
