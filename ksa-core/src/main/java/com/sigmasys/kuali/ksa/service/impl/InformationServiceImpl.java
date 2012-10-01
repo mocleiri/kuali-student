@@ -240,7 +240,6 @@ public class InformationServiceImpl extends GenericPersistenceService implements
 
         String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
         newMemo.setCreatorId(creatorId);
-        newMemo.setResponsibleEntity(creatorId);
 
         Date curDate = new Date();
         newMemo.setCreationDate(curDate);
@@ -333,7 +332,6 @@ public class InformationServiceImpl extends GenericPersistenceService implements
 
         String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
         flag.setCreatorId(creatorId);
-        flag.setResponsibleEntity(creatorId);
 
         Date curDate = new Date();
         flag.setCreationDate(curDate);
@@ -412,7 +410,6 @@ public class InformationServiceImpl extends GenericPersistenceService implements
 
         String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
         alert.setCreatorId(creatorId);
-        alert.setResponsibleEntity(creatorId);
 
         Date curDate = new Date();
         alert.setCreationDate(curDate);

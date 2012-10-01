@@ -155,7 +155,6 @@ public class InformationServiceTest extends AbstractServiceTest {
 
         Assert.isTrue("New memo for 1020".equals(memo.getText()));
         Assert.isTrue(TEST_USER_ID.equals(memo.getCreatorId()));
-        Assert.isTrue(TEST_USER_ID.equals(memo.getResponsibleEntity()));
 
         Assert.isTrue(new Date().compareTo(memo.getEffectiveDate()) >= 0);
         Assert.isTrue(new Date().compareTo(memo.getCreationDate()) >= 0);
@@ -188,7 +187,6 @@ public class InformationServiceTest extends AbstractServiceTest {
 
         Assert.isTrue("New alert for 1020".equals(alert.getText()));
         Assert.isTrue(TEST_USER_ID.equals(alert.getCreatorId()));
-        Assert.isTrue(TEST_USER_ID.equals(alert.getResponsibleEntity()));
 
         Assert.isTrue(new Date().compareTo(alert.getEffectiveDate()) >= 0);
         Assert.isTrue(new Date().compareTo(alert.getCreationDate()) >= 0);
@@ -217,7 +215,6 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.notNull(flag.getTransaction());
 
         Assert.isTrue(TEST_USER_ID.equals(flag.getCreatorId()));
-        Assert.isTrue(TEST_USER_ID.equals(flag.getResponsibleEntity()));
 
         Assert.isTrue(new Date().compareTo(flag.getEffectiveDate()) >= 0);
         Assert.isTrue(new Date().compareTo(flag.getCreationDate()) >= 0);

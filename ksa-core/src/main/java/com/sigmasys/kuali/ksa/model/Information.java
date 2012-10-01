@@ -109,15 +109,6 @@ public class Information  extends AccountIdAware implements Identifiable {
         this.accessLevel = accessLevel;
     }
 
-    @Column(name = "RESP_ENTITY", length = 45)
-    public String getResponsibleEntity() {
-        return responsibleEntity;
-    }
-
-    public void setResponsibleEntity(String responsibleEntity) {
-        this.responsibleEntity = responsibleEntity;
-    }
-
     @Column(name = "CREATOR_ID", length = 45)
     public String getCreatorId() {
         return creatorId;
