@@ -1092,7 +1092,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             }
 
             // Creating memo
-            if (memoText != null && memoText.trim().isEmpty()) {
+            if (memoText != null && !memoText.trim().isEmpty()) {
                 Integer defaultMemoLevel = informationService.getDefaultMemoLevel();
                 Date effectiveDate = new Date();
                 informationService.createMemo(transactionId, memoText, defaultMemoLevel, effectiveDate, null, null);
@@ -1374,7 +1374,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         String statementText = transaction.getStatementText();
         if (statementPrefix != null && !statementPrefix.isEmpty()) {
-            // TODO: ask Paul what transaction should update the statement
             statementText = statementPrefix + " " + statementText;
         }
         writeOffTransaction.setStatementText(statementText);
@@ -1388,7 +1387,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         persistTransaction(writeOffTransaction);
 
         // Creating memo
-        if (memoText != null && memoText.trim().isEmpty()) {
+        if (memoText != null && !memoText.trim().isEmpty()) {
             Integer defaultMemoLevel = informationService.getDefaultMemoLevel();
             Date effectiveDate = new Date();
             informationService.createMemo(transactionId, memoText, defaultMemoLevel, effectiveDate, null, null);
@@ -1398,12 +1397,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     }
 
-
     private Rollup getRollupByCode(String code) {
-        Query query = em.createQuery("select r from Rollup r where r.code = :code");
-        query.setParameter("code", code);
-        List<Rollup> rollups = query.getResultList();
-        return (rollups != null && !rollups.isEmpty()) ? rollups.get(0) : null;
+       return getAuditableEntityByCode(code, Rollup.class);
     }
 
 
