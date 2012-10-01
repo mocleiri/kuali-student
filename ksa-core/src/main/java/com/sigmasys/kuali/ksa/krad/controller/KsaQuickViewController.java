@@ -40,11 +40,14 @@ public class KsaQuickViewController extends GenericSearchController {
    @Override
    protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
       KsaQuickViewForm form  = new KsaQuickViewForm();
-      //form.setCompositeDefaultPersonName("Thomas Brudenell-Bruce, 1st Earl of Ailesbury");
-      //form.setCompositeDefaultPostalAddress("Winchester College\n" +
-      //      "College Street\n" +
-      //      "Winchester SO23 9NA\n" +
-      //      "United Kingdom");
+      String userId = request.getParameter("userId");
+      Account accountById = accountService.getFullAccount(userId);
+      if (accountById == null) {
+         throw new IllegalStateException("Cannot find Account by ID = " + userId);
+      }
+      else {
+         form.setAccount(accountById);
+      }
       return form;
    }
 
@@ -61,7 +64,7 @@ public class KsaQuickViewController extends GenericSearchController {
                            HttpServletRequest request, HttpServletResponse response) {
 
        String viewId = request.getParameter("viewId");
-       String userId = request.getParameter("id");
+       String userId = request.getParameter("userId");
 
        logger.info("View: " + viewId + " User: " + userId);
 
@@ -73,7 +76,6 @@ public class KsaQuickViewController extends GenericSearchController {
            populateForm(userId, form);
 
        }
-
 
         return getUIFModelAndView(form);
    }
@@ -205,20 +207,22 @@ public class KsaQuickViewController extends GenericSearchController {
    /**
     * Populate the form per business needs for a single account by the account identifier
     *
-    * @param id
+    * @param userId
     * @param form
     */
-   private void populateForm(String id, KsaQuickViewForm form) {
+   private void populateForm(String userId, KsaQuickViewForm form) {
 
       // store the selected account ID
       //form.setSelectedId(id);
 
       boolean ignoreDeferment =  Boolean.parseBoolean(form.getIgnoreDeferment());
 
-      Account accountById = accountService.getFullAccount(id);
+      Account accountById = accountService.getFullAccount(userId);
       if (accountById == null) {
-         throw new IllegalStateException("Cannot find Account by ID = " + id);
+         throw new IllegalStateException("Cannot find Account by ID = " + userId);
       }
+
+      form.setAccount(accountById);
 
       ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
 
@@ -248,10 +252,10 @@ public class KsaQuickViewController extends GenericSearchController {
       //form.setPayments(payments);
       //form.setDeferments(deferments);
 
-      BigDecimal pastDue = accountService.getOutstandingBalance(id, ignoreDeferment) != null ? accountService.getOutstandingBalance(id, ignoreDeferment) : BigDecimal.ZERO;
-      BigDecimal balance = accountService.getDueBalance(id, ignoreDeferment) != null ? accountService.getDueBalance(id, ignoreDeferment) : BigDecimal.ZERO;
-      BigDecimal future = accountService.getUnallocatedBalance(id) != null ? accountService.getUnallocatedBalance(id) : BigDecimal.ZERO;
-      BigDecimal deferment = accountService.getDeferredAmount(id) != null ? accountService.getDeferredAmount(id) : BigDecimal.ZERO;
+      BigDecimal pastDue = accountService.getOutstandingBalance(userId, ignoreDeferment) != null ? accountService.getOutstandingBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
+      BigDecimal balance = accountService.getDueBalance(userId, ignoreDeferment) != null ? accountService.getDueBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
+      BigDecimal future = accountService.getUnallocatedBalance(userId) != null ? accountService.getUnallocatedBalance(userId) : BigDecimal.ZERO;
+      BigDecimal deferment = accountService.getDeferredAmount(userId) != null ? accountService.getDeferredAmount(userId) : BigDecimal.ZERO;
 
       // Aging
 
@@ -280,7 +284,7 @@ public class KsaQuickViewController extends GenericSearchController {
       form.setDefermentAmount(deferment);
 
       // Alerts, Flags and Memos
-      List<Alert> alerts = informationService.getAlerts(id);
+      List<Alert> alerts = informationService.getAlerts(userId);
 
       AlertsFlagsMemos afm = new AlertsFlagsMemos();
       // Alerts
@@ -293,7 +297,7 @@ public class KsaQuickViewController extends GenericSearchController {
 
       // Flags
       // Flags do not have a Text field and throws an exception when there are flag records TODO
-      List<Flag> flags = informationService.getFlags(id);
+      List<Flag> flags = informationService.getFlags(userId);
 
       for (Flag flag : flags) {
 
@@ -302,7 +306,7 @@ public class KsaQuickViewController extends GenericSearchController {
 
       form.setFlags(flags);
 
-      List<Memo> memos = informationService.getMemos(id);
+      List<Memo> memos = informationService.getMemos(userId);
 
       // Memos
       for (Memo memo : memos) {

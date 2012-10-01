@@ -28,11 +28,21 @@
 
     <bean id="KsaBiographicInformationView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Biographic Information"/>
-
-        <!-- TODO override navigation for the page -->
+        <property name="navigation">
+            <bean parent="Uif-KsaPageNavigation">
+                <property name="items">
+                    <list>
+                        <!-- TODO Advanced Search -->
+                        <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
+                              p:actionLabel="Advanced Search"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Page" p:id="StudentSummaryPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="StudentSummaryPage" p:title="Biographic Information">
                     <property name="items">
                         <list>
                             <ref bean="biographicInformationSummarySection"/>

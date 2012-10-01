@@ -96,16 +96,17 @@
     -->
     <bean id="accountOverviewGroup" parent="Uif-VerticalBoxGroup"
             p:instructionalText="Account Overview">
-        <property name="readOnly" value="true"/>
+
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView"/>
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-InputField" p:propertyName="pastDueAmount"
                       p:label="Past Due"
                       p:maxLength="10"
                       p:labelPlacement="LEFT"
                       p:fieldLabel.renderColon="true">
+                    <property name="readOnly" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="11"/>
                     </property>
@@ -115,6 +116,7 @@
                       p:maxLength="10"
                       p:labelPlacement="TOP"
                       p:fieldLabel.renderColon="true">
+                    <property name="readOnly" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CurrencyTextControl" p:size="11"/>
                     </property>
@@ -143,7 +145,8 @@
                     <property name="items">
                     <list>
                         <bean parent="Uif-Link" p:linkText="Add Charge" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"
+                              />
                         <bean parent="Uif-Link" p:linkText="Add Payment" p:target="_self"
                               p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView"/>
                         <bean parent="Uif-Link" p:linkText="Add Deferment" p:target="_self"
@@ -169,7 +172,8 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView"
+                      />
                 <!-- Would be great to have this as an account data member not just a method -->
                 <bean parent="Uif-InputField" p:propertyName="compositeDefaultPersonName"
                       p:label="Name"

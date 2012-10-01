@@ -42,8 +42,6 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                      p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView"/>
                 <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
                       p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
@@ -160,7 +158,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Disclosure-TableCollectionSection"
-                                  p:layoutManager.numberOfColumns="3"
+                                  p:layoutManager.numberOfColumns="4"
                                   p:disclosure.render="false"
                                   p:progressiveRenderViaAJAX="true"
                                   p:title="Matching Accounts"
@@ -187,7 +185,9 @@
                                         </bean>
                                         <!-- Use this to display the combined account, bio, aging and alerts -->
                                         <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
-                                              p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;id=@{#line.id}"/>
+                                              p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{#line.id}"/>
+                                        <bean parent="Uif-LinkField" p:linkText="Quick View" p:target="_self"
+                                              p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{#line.id}"/>
                                     </list>
                                 </property>
                             </bean>

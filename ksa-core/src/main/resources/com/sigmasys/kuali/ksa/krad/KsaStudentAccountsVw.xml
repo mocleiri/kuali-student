@@ -37,8 +37,6 @@
                     <list>
                         <!-- TODO Advanced Search -->
                         <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="QuickView"
-                              p:actionLabel="Quick View"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
                               p:actionLabel="Advanced Search"/>
                     </list>
@@ -56,7 +54,7 @@
                 </bean>
 
                 <!-- transactions overview for an account roll-up and ungroupded list -->
-                <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Account Transactions">
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionsSection"/>
@@ -65,7 +63,7 @@
                 </bean>
                 <!-- transaction grouped by roll-up type -->
                 <!-- transaction details for a specific roll-up type -->
-                <bean parent="Uif-Page" p:id="AccountOVTransactionsRollupDetailPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="AccountOVTransactionsRollupDetailPage" p:title="Roll-up Transactions">
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionsByRollupSection"/>
@@ -73,7 +71,7 @@
                     </property>
                 </bean>
                 <!-- Any transaction details -->
-                <bean parent="Uif-Page" p:id="AccountOVTransactionDetailPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="AccountOVTransactionDetailPage" p:title="Account Detail">
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionDetailSection"/>
@@ -83,7 +81,7 @@
                     </property>
                 </bean>
                 <!-- a list of transaction allocation -->
-                <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationPage" p:title="Allocations">
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionAllocationSection"/>
@@ -91,7 +89,7 @@
                     </property>
                 </bean>
                 <!-- single transaction allocation -->
-                <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationDetailPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationDetailPage" p:title="Allocation Detail">
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionAllocationSection"/>

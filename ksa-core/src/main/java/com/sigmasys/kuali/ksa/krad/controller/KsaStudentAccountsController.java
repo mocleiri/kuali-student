@@ -55,15 +55,15 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
         // do get stuff...
         String pageId = request.getParameter("pageId");
+        String userId = request.getParameter("userId");
 
         if (pageId != null && pageId.compareTo("AccountOVTransactionsPage") == 0) {
-            String id = request.getParameter("id");
-            if (id == null || id.isEmpty()) {
-                throw new IllegalArgumentException("'id' request parameter must be specified");
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
            // All transactions
-           List<Transaction> transactions = transactionService.getTransactions(id);
+           List<Transaction> transactions = transactionService.getTransactions(userId);
 
            logger.info("Transaction Count: " + transactions.size());
            List<TransactionModel> rollUpTransactionModelList = new ArrayList<TransactionModel>();
@@ -97,17 +97,17 @@ public class KsaStudentAccountsController extends GenericSearchController {
            form.setUnGroupedTransactionModelList(unGroupedTransactionModelList);
 
         } else if (pageId != null && pageId.compareTo("AccountOVTransactionsRollupDetailPage") == 0) {
-            String id = request.getParameter("id");
-            if (id == null || id.isEmpty()) {
-                throw new IllegalArgumentException("'id' request parameter must be specified");
+
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
             Long lId;
 
             try{
-                lId = new Long(id);
+                lId = new Long(userId);
             } catch(NumberFormatException e){
-                throw new IllegalArgumentException("'id' request parameter must be a number");
+                throw new IllegalArgumentException("'userId' request parameter must be a number");
             }
             Transaction t = transactionService.getTransaction(lId);
             logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
@@ -118,24 +118,19 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
 
         } else if (pageId != null && pageId.compareTo("AccountOVTransactionDetailPage") == 0) {
-            String id = request.getParameter("id");
-            if (id == null || id.isEmpty()) {
-                throw new IllegalArgumentException("'id' request parameter must be specified");
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
             Long lId;
 
             try{
-                lId = new Long(id);
+                lId = new Long(userId);
             } catch(NumberFormatException e){
-                throw new IllegalArgumentException("'id' request parameter must be a number");
+                throw new IllegalArgumentException("'userId' request parameter must be a number");
             }
             Transaction t = transactionService.getTransaction(lId);
             logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
-
-            //TransactionModel transactionModel = new TransactionModel(t);
-            //form.setTransactionModel(transactionModel);
-
 
             form.setId(t.getId().toString());
             form.setAccountId(t.getAccountId());
@@ -223,10 +218,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
             //form.setExtensionId(t.getE);
 
 
-        } /*else {
-            throw new IllegalArgumentException("'pageId' of " + pageId + " not understood");
-        }*/
-
+        }
 
         return getUIFModelAndView(form);
     }
