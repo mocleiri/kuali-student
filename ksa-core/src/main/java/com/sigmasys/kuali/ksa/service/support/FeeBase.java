@@ -7,7 +7,7 @@ import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.KeyPair;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
-import com.sigmasys.kuali.ksa.service.FeeAssessmentService;
+import com.sigmasys.kuali.ksa.service.FeeManagementService;
 
 /**
  * This class represents an implementation of a Fee Assessment unit of calculation. 
@@ -20,7 +20,7 @@ import com.sigmasys.kuali.ksa.service.FeeAssessmentService;
  * attribute.
  * 
  * NOTE: This class is a just a placeholder for data. The actual Java Persistence mapping
- * does not exist. Instead use an instance of {@link FeeAssessmentService} 
+ * does not exist. Instead use an instance of {@link FeeManagementService} 
  * 
  * @author Sergey
  *
