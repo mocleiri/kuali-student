@@ -10,14 +10,8 @@ import javax.persistence.Query;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.util.CollectionUtils;
 
 import com.sigmasys.kuali.ksa.model.Account;
@@ -32,30 +26,13 @@ import com.sigmasys.kuali.ksa.service.support.FeeBase;
 @Service("feeManagementService")
 @Transactional(readOnly=true)
 @SuppressWarnings("unchecked")
-public class FeeManagementServiceImpl extends GenericPersistenceService implements FeeManagementService, BeanFactoryAware {
+public class FeeManagementServiceImpl extends GenericPersistenceService implements FeeManagementService {
 		
 	/**
 	 * The logger.
 	 */
 	private static final Log logger = LogFactory.getLog(FeeManagementServiceImpl.class);
-	
-	/**
-	 * The Transaction manager.
-	 */
-    private PlatformTransactionManager transactionManager;
-    
-    /**
-     * The default Transaction definition.
-     */
-    private DefaultTransactionDefinition transactionDefinition;
 
-    
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) {
-        transactionManager = beanFactory.getBean("transactionManager", PlatformTransactionManager.class);
-        transactionDefinition = new DefaultTransactionDefinition();
-        transactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-    }
 
 	/**
 	 * Returns an account's Set of student data in form of KeyPair objects.
@@ -190,9 +167,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 		validateInputParameters(learningUnit, name, value);
 		validateKeyPairNameUnique(learningUnit, name);
 		
-		// Start a new Transaction:
-		TransactionStatus transaction = transactionManager.getTransaction(transactionDefinition);
-		
 		try {
 			// Create and persist a new KeyPair:
 			KeyPair newKeyPair = createKeyPairInternal(name, value, null, KeyPair.class);
@@ -203,17 +177,11 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 			// Flush the EM to the persistent storage:
 			em.flush();
 			
-			// Commit transaction:
-			transactionManager.commit(transaction);
-			
 			// Add the new KeyPair to the LearningUnit's list of KeyPairs:
 			learningUnit.getExtended().add(newKeyPair);
 			
 			return newKeyPair;
 		} catch (Throwable t) {
-			// Roll-back transaction:
-			transactionManager.rollback(transaction);
-			
 			// Log error:
 			logger.error("Error creating a KeyPair for a LearningPeriod.", t);
 			
@@ -347,9 +315,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 		
 		// If a KeyPair was found and removed, delete the entity and disassociate the Account and KeyPair:
 		if (removeKeyPair != null) {
-			// Start a new Transaction:
-			TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
-			
 			try {
 				// Delete the entity:
 				em.remove(removeKeyPair);
@@ -360,15 +325,9 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 				// Flush the EM to the persistent storage:
 				em.flush();
 				
-				// Commit transaction:
-				transactionManager.commit(status);
-				
 				// Remove from the Collection:
 				removeFrom.remove(removeKeyPair);
 			} catch (Throwable t) {
-				// Roll-back transaction:
-				transactionManager.rollback(status);
-				
 				// Log error:
 				logger.error("Error removing KeyPair.", t);
 				
@@ -508,9 +467,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 		validateInputParameters(feeBase, name, value, period, entityClass);
 		validateKeyPairNameUnique(feeBase, name);
 		
-		// Start a new Transaction:
-		TransactionStatus transaction = transactionManager.getTransaction(transactionDefinition);
-		
 		try {
 			// Create and persist a new KeyPair:
 			T newKeyPair = createKeyPairInternal(name, value, period, entityClass);
@@ -521,9 +477,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 			// Flush the EM to the persistent storage:
 			em.flush();
 			
-			// Commit the transaction:
-			transactionManager.commit(transaction);
-			
 			// Add the new KeyPair to an appropriate list in FeeBase:
 			if (entityClass.equals(PeriodKeyPair.class)) {
 				feeBase.getPeriodData().add(PeriodKeyPair.class.cast(newKeyPair));
@@ -533,9 +486,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 			
 			return newKeyPair;
 		} catch (Throwable t) {
-			// Roll-back the transaction:
-			transactionManager.rollback(transaction);
-
 			// Log an error:
 			logger.error("Error creating a new KeyPair object.", t);
 			

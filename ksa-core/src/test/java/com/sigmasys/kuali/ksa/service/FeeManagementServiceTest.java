@@ -27,11 +27,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Constants;
@@ -40,7 +36,6 @@ import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.support.FeeBase;
-import com.sigmasys.kuali.ksa.util.ContextUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -59,10 +54,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	// Test objects:
 	private String accountId = "admin1";
 	private Account testAccount;
-	
-	// Transaction Management objects:
-	PlatformTransactionManager transactionManager;
-	DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
 	
 	@Test
 	public void testKeyPairPreviousValue() throws Exception {
@@ -101,7 +93,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	@Test
 	public void testGetStudentDataDataPersistedWithEM() throws Exception {
 		// Create and persist new Student Data:
-		List<KeyPair> testStudentData = createTestStudentDataWithinTransaction();
+		List<KeyPair> testStudentData = createTestStudentData();
 		
 		// If creation of the test data failed, so be it, nothing to test:
 		if (testStudentData == null) {
@@ -127,7 +119,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	@Test
 	public void testGetLearningPeriodDataDataPersistedWithEM() throws Exception {
 		// Create and persist Period data:
-		List<PeriodKeyPair> testPeriodData = createTestPeriodDataWithinTransaction();
+		List<PeriodKeyPair> testPeriodData = createTestPeriodData();
 		
 		// If creation of the test data failed, so be it, nothing to test:
 		if (testPeriodData == null) {
@@ -153,7 +145,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	@Test
 	public void testGetStudyDataPersistedWithEM() throws Exception {
 		// Create and persist the study data:
-		List<LearningUnit> testStudy = createTestStudyWithinTransaction();
+		List<LearningUnit> testStudy = createTestStudy();
 		
 		// If creation of the test data failed, so be it, nothing to test:
 		if (testStudy == null) {
@@ -1646,23 +1638,10 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	 * 
 	 * *************************************/
 	
-	private PlatformTransactionManager getTransactionManager() {
-		if (transactionManager == null) {
-			transactionManager = ContextUtils.getBean("transactionManager", PlatformTransactionManager.class);
-		}
-		
-		return transactionManager;
-	}
-	
-	private List<KeyPair> createTestStudentDataWithinTransaction() {
+	private List<KeyPair> createTestStudentData() {
 		// Create and persist a test Account:
 		testAccount = accountService.getOrCreateAccount(accountId);
 		persistAccount();
-		
-		// Get the existing transaction:
-		transactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-		
-		TransactionStatus transaction = getTransactionManager().getTransaction(transactionDefinition);
 		
 		// Create KeyPairs:
 		List<KeyPair> studentData = createKeyPairs();
@@ -1674,10 +1653,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 			}
 			
 			em.flush();
-			getTransactionManager().commit(transaction);
 		} catch (Throwable t) {
-			getTransactionManager().rollback(transaction);
-			
 			return null;
 		}
 		
@@ -1708,15 +1684,10 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		return new ArrayList<KeyPair>(Arrays.asList(kp1, kp2, kp3));
 	}
 	
-	private List<PeriodKeyPair> createTestPeriodDataWithinTransaction() {
+	private List<PeriodKeyPair> createTestPeriodData() {
 		// Create and persist a test Account:
 		testAccount = accountService.getOrCreateAccount(accountId);
 		persistAccount();
-		
-		// Get the existing transaction:
-		transactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-		
-		TransactionStatus transaction = getTransactionManager().getTransaction(transactionDefinition);
 		
 		// Create PeriodKeyPairs:
 		List<PeriodKeyPair> periodData = createPeriodKeyPairs();
@@ -1728,10 +1699,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 			}
 			
 			em.flush();
-			getTransactionManager().commit(transaction);
 		} catch (Throwable t) {
-			getTransactionManager().rollback(transaction);
-			
 			return null;
 		}
 		
@@ -1773,15 +1741,10 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		return new ArrayList<PeriodKeyPair>(Arrays.asList(pkp1, pkp2, pkp3, pkp4));
 	}
 	
-	private List<LearningUnit> createTestStudyWithinTransaction() {
+	private List<LearningUnit> createTestStudy() {
 		// Create and persist a test Account:
 		testAccount = accountService.getOrCreateAccount(accountId);
 		persistAccount();
-		
-		// Get the existing transaction:
-		transactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-		
-		TransactionStatus transaction = getTransactionManager().getTransaction(transactionDefinition);
 		
 		// Create LearningUnits:
 		List<LearningUnit> study = createLearningUnits();
@@ -1793,10 +1756,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 			}
 			
 			em.flush();
-			getTransactionManager().commit(transaction);
 		} catch (Throwable t) {
-			getTransactionManager().rollback(transaction);
-			
 			return null;
 		}
 		
@@ -1853,9 +1813,9 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	
 	private FeeBase createTestFeeBase() {
 		// Create test objects:
-		List<KeyPair> testStudentData = createTestStudentDataWithinTransaction();
-		List<PeriodKeyPair> testPeriodData = createTestPeriodDataWithinTransaction();
-		List<LearningUnit> testStudy = createTestStudyWithinTransaction();
+		List<KeyPair> testStudentData = createTestStudentData();
+		List<PeriodKeyPair> testPeriodData = createTestPeriodData();
+		List<LearningUnit> testStudy = createTestStudy();
 		
 		// If creation of the test data failed, so be it, nothing to test:
 		if ((testStudentData == null) || (testPeriodData == null) || (testStudy == null)) {
