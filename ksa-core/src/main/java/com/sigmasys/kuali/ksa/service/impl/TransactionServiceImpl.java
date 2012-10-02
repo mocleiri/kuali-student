@@ -1453,14 +1453,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId) {
-    	// Create a Query:
-    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId")
-    			.setParameter("accountId", accountId)
-    			.setParameter("transactionTypeId", transactionTypeId)
-    			.setMaxResults(1);
-    	List<Object> result = query.getResultList();
-    	
-		return CollectionUtils.isNotEmpty(result);    	
+    	return transactionExistsInternal(accountId, transactionTypeId, null, null, null);    	
     }
     
     /**
@@ -1475,16 +1468,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo) {
-    	// Create a Query:
-    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId and effective_date between :dateFrom and :dateTo")
-    			.setParameter("accountId", accountId)
-    			.setParameter("transactionTypeId", transactionTypeId)
-    			.setParameter("dateFrom", effectiveDateFrom)
-    			.setParameter("dateTo", effectiveDateTo)
-    			.setMaxResults(1);
-    	List<Object> result = query.getResultList();
-    	
-		return CollectionUtils.isNotEmpty(result);    	
+    	return transactionExistsInternal(accountId, transactionTypeId, null, effectiveDateFrom, effectiveDateTo);    	
     }
     
     /**
@@ -1497,15 +1481,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount) {
-    	// Create a Query:
-    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId and amnt = :amount")
-    			.setParameter("accountId", accountId)
-    			.setParameter("transactionTypeId", transactionTypeId)
-    			.setParameter("amount", amount)
-    			.setMaxResults(1);
-    	List<Object> result = query.getResultList();
-    	
-		return CollectionUtils.isNotEmpty(result);    	
+    	return transactionExistsInternal(accountId, transactionTypeId, amount, null, null);    	
     }
     
     /**
@@ -1521,17 +1497,52 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
+    	return transactionExistsInternal(accountId, transactionTypeId, amount, effectiveDateFrom, effectiveDateTo);    	
+    }
+
+    /**
+     * InternalMethod: Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param amount Amount of a Transaction.
+     * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
+     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account 
+     * 	with the Effective Dates that fall into the specified range exists.
+     */
+    private boolean transactionExistsInternal(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
+    	// Create a query that may contain some of the parameters. "accountId" and "transactionType" are required, however:
+    	StringBuilder sbQuery = new StringBuilder("select 1 from Transaction t where t.account.id = :accountId and t.transactionType.id.id = :transactionTypeId");
+    	boolean hasAmount = (amount != null);
+    	boolean hasEffectiveDates = ((effectiveDateFrom != null) && (effectiveDateTo != null));
+    	
+    	if (hasAmount) {
+    		sbQuery.append(" and t.amount = :amount");
+    	}
+    	
+    	if (hasEffectiveDates) {
+    		sbQuery.append(" and t.effectiveDate between :dateFrom and :dateTo");
+    	}
+    	
     	// Create a Query:
-    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId and amnt = :amount and effective_date between :dateFrom and :dateTo")
+    	Query query = em.createQuery(sbQuery.toString())
     			.setParameter("accountId", accountId)
     			.setParameter("transactionTypeId", transactionTypeId)
-    			.setParameter("amount", amount)
-    			.setParameter("dateFrom", effectiveDateFrom)
-    			.setParameter("dateTo", effectiveDateTo)
     			.setMaxResults(1);
+    	
+    	if (hasAmount) {
+			query.setParameter("amount", amount);
+    	}
+    	
+    	if (hasEffectiveDates) {
+			query.setParameter("dateFrom", effectiveDateFrom)
+				.setParameter("dateTo", effectiveDateTo);
+    	}
+    	
+    	// Run the query:
     	List<Object> result = query.getResultList();
     	
 		return CollectionUtils.isNotEmpty(result);    	
     }
-
 }
