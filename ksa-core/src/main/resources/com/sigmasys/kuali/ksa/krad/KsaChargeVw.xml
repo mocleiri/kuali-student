@@ -86,7 +86,7 @@
                     </property>
                 </bean>
                 <!-- Use a field to get/set the value  -->
-                <bean parent="Uif-InputField" p:propertyName="charge.transactionType"
+                <bean parent="Uif-InputField" p:propertyName="chargeTransactionTypeId"
                       p:label="Charge Type"
                       p:instructionalText="Charge type"
                       p:fieldLabel.renderColon="true"

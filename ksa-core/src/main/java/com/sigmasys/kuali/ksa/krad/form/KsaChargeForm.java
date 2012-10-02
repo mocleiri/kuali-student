@@ -13,6 +13,8 @@ public class KsaChargeForm extends AbstractViewModel {
 
    private Charge charge;
 
+   private String chargeTransactionTypeId;
+
    private BigDecimal estimatedCurrentBalance;
 
    private BigDecimal estimatedPendingBalance;
@@ -29,6 +31,15 @@ public class KsaChargeForm extends AbstractViewModel {
 
    public void setCharge(Charge charge) {
       this.charge = charge;
+   }
+
+
+   public String getChargeTransactionTypeId() {
+      return chargeTransactionTypeId;
+   }
+
+   public void setChargeTransactionTypeId(String chargeTransactionTypeId) {
+      this.chargeTransactionTypeId = chargeTransactionTypeId;
    }
 
    public BigDecimal getEstimatedCurrentBalance() {

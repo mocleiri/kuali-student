@@ -13,6 +13,8 @@ public class KsaPaymentForm extends AbstractViewModel {
 
    private Payment payment;
 
+   private String paymentTransactionTypeId;
+
    private String printReceipt;
 
    private String emailReceipt;
@@ -33,6 +35,15 @@ public class KsaPaymentForm extends AbstractViewModel {
 
    public void setPayment(Payment payment) {
       this.payment = payment;
+   }
+
+
+   public String getPaymentTransactionTypeId() {
+      return paymentTransactionTypeId;
+   }
+
+   public void setPaymentTransactionTypeId(String paymentTransactionTypeId) {
+      this.paymentTransactionTypeId = paymentTransactionTypeId;
    }
 
    public String getPrintReceipt() {
