@@ -403,11 +403,11 @@ public interface TransactionService {
      * Determines if the transaction is allowed for the given account ID, transaction type and effective date
      *
      * @param accountId       Account ID
-     * @param transactionType Transaction Type
+     * @param transactionTypeId Transaction Type ID
      * @param effectiveDate   Effective Date
      * @return true/false
      */
-    boolean isTransactionAllowed(String accountId, String transactionType, Date effectiveDate);
+    boolean isTransactionAllowed(String accountId, String transactionTypeId, Date effectiveDate);
 
     /**
      * Returns the list of matching transactions for the given name pattern.
