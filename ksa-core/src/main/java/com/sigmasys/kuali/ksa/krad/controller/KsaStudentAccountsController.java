@@ -97,7 +97,6 @@ public class KsaStudentAccountsController extends GenericSearchController {
            form.setUnGroupedTransactionModelList(unGroupedTransactionModelList);
 
         } else if (pageId != null && pageId.compareTo("AccountOVTransactionsRollupDetailPage") == 0) {
-
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }

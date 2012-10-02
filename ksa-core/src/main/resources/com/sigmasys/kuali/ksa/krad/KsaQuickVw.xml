@@ -46,7 +46,9 @@
                 <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
                     <property name="items">
                         <list>
+                            <!-- TODO p:actionParameters="userId:@{#account.id}"-->
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
+
                                   p:actionLabel="Refresh">
                             </bean>
                             <ref bean="quickViewSection"/>
@@ -145,14 +147,13 @@
                     <property name="items">
                     <list>
                         <bean parent="Uif-Link" p:linkText="Add Charge" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"
-                              />
+                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                         <bean parent="Uif-Link" p:linkText="Add Payment" p:target="_self"
-                              p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView"/>
+                              p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView&amp;userId=@{account.id}"/>
                         <bean parent="Uif-Link" p:linkText="Add Deferment" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                         <bean parent="Uif-Link" p:linkText="Write-Off Account" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -172,8 +173,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView"
-                      />
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                 <!-- Would be great to have this as an account data member not just a method -->
                 <bean parent="Uif-InputField" p:propertyName="compositeDefaultPersonName"
                       p:label="Name"
@@ -208,7 +208,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                 <ref bean="quickViewAlertsTable"/>
                 <ref bean="quickViewFlagsTable"/>
             </list>
@@ -334,7 +334,9 @@
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
+                <!-- TODO p:actionParameters="userId:@{#account.id}"-->
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageDebt"
+
                       p:actionLabel="Age Transactions">
                 </bean>
             </list>
@@ -353,7 +355,7 @@
             <list>
                  <ref bean="quickViewMemosTable"/>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -396,13 +398,13 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Add Biographic Information" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add an Alert" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add a Flag" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add Memo" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView"/>
+                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
