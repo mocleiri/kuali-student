@@ -1,23 +1,64 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import com.sigmasys.kuali.ksa.exception.*;
-import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.service.*;
-import com.sigmasys.kuali.ksa.util.ContextUtils;
-import com.sigmasys.kuali.ksa.util.RequestUtils;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.persistence.Query;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
-import javax.persistence.Query;
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.regex.Pattern;
+import com.sigmasys.kuali.ksa.exception.CurrencyNotFoundException;
+import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
+import com.sigmasys.kuali.ksa.exception.LockedAllocationException;
+import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
+import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
+import com.sigmasys.kuali.ksa.exception.TransactionTypeNotAllowedException;
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
+import com.sigmasys.kuali.ksa.model.AbstractGlBreakdown;
+import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Allocation;
+import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.CompositeAllocation;
+import com.sigmasys.kuali.ksa.model.Constants;
+import com.sigmasys.kuali.ksa.model.Credit;
+import com.sigmasys.kuali.ksa.model.CreditPermission;
+import com.sigmasys.kuali.ksa.model.CreditType;
+import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.model.Debit;
+import com.sigmasys.kuali.ksa.model.DebitType;
+import com.sigmasys.kuali.ksa.model.Deferment;
+import com.sigmasys.kuali.ksa.model.GeneralLedgerMode;
+import com.sigmasys.kuali.ksa.model.GeneralLedgerType;
+import com.sigmasys.kuali.ksa.model.GlOperationType;
+import com.sigmasys.kuali.ksa.model.GlTransaction;
+import com.sigmasys.kuali.ksa.model.Pair;
+import com.sigmasys.kuali.ksa.model.Payment;
+import com.sigmasys.kuali.ksa.model.Rollup;
+import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.TransactionType;
+import com.sigmasys.kuali.ksa.model.TransactionTypeId;
+import com.sigmasys.kuali.ksa.model.TransactionTypeValue;
+import com.sigmasys.kuali.ksa.service.AccessControlService;
+import com.sigmasys.kuali.ksa.service.AccountService;
+import com.sigmasys.kuali.ksa.service.CalendarService;
+import com.sigmasys.kuali.ksa.service.CurrencyService;
+import com.sigmasys.kuali.ksa.service.GeneralLedgerService;
+import com.sigmasys.kuali.ksa.service.InformationService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.util.ContextUtils;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 
 /**
  * Transaction service JPA implementation.
@@ -1402,5 +1443,95 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return getAuditableEntityByCode(code, Rollup.class);
     }
 
+
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @return <code>true</code> if at least one Transaction of the given type for the given account exists.
+     */
+    @Override
+    public boolean transactionExists(String accountId, String transactionTypeId) {
+    	// Create a Query:
+    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId")
+    			.setParameter("accountId", accountId)
+    			.setParameter("transactionTypeId", transactionTypeId)
+    			.setMaxResults(1);
+    	List<Object> result = query.getResultList();
+    	
+		return CollectionUtils.isNotEmpty(result);    	
+    }
+    
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
+     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type for the given account 
+     * 	with the Effective Dates that fall into the specified range exists.
+     */
+    @Override
+    public boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo) {
+    	// Create a Query:
+    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId and effective_date between :dateFrom and :dateTo")
+    			.setParameter("accountId", accountId)
+    			.setParameter("transactionTypeId", transactionTypeId)
+    			.setParameter("dateFrom", effectiveDateFrom)
+    			.setParameter("dateTo", effectiveDateTo)
+    			.setMaxResults(1);
+    	List<Object> result = query.getResultList();
+    	
+		return CollectionUtils.isNotEmpty(result);    	
+    }
+    
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param amount Amount of a Transaction.
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
+     */
+    @Override
+    public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount) {
+    	// Create a Query:
+    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId and amnt = :amount")
+    			.setParameter("accountId", accountId)
+    			.setParameter("transactionTypeId", transactionTypeId)
+    			.setParameter("amount", amount)
+    			.setMaxResults(1);
+    	List<Object> result = query.getResultList();
+    	
+		return CollectionUtils.isNotEmpty(result);    	
+    }
+    
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param amount Amount of a Transaction.
+     * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
+     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account 
+     * 	with the Effective Dates that fall into the specified range exists.
+     */
+    @Override
+    public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
+    	// Create a Query:
+    	Query query = em.createNativeQuery("select 1 from kssa_transaction where acnt_id_fk = :accountId and transaction_type_id_fk = :transactionTypeId and amnt = :amount and effective_date between :dateFrom and :dateTo")
+    			.setParameter("accountId", accountId)
+    			.setParameter("transactionTypeId", transactionTypeId)
+    			.setParameter("amount", amount)
+    			.setParameter("dateFrom", effectiveDateFrom)
+    			.setParameter("dateTo", effectiveDateTo)
+    			.setMaxResults(1);
+    	List<Object> result = query.getResultList();
+    	
+		return CollectionUtils.isNotEmpty(result);    	
+    }
 
 }

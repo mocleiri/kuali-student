@@ -432,4 +432,51 @@ public interface TransactionService {
     Transaction writeOffTransaction(Long transactionId, TransactionTypeId transactionTypeId,
                                        String memoText, String statementPrefix);
 
+
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @return <code>true</code> if at least one Transaction of the given type for the given account exists.
+     */
+    @WebMethod(exclude = true)
+    boolean transactionExists(String accountId, String transactionTypeId);
+    
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
+     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type for the given account 
+     * 	with the Effective Dates that fall into the specified range exists.
+     */
+    @WebMethod(exclude = true)
+    boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo);
+    
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param amount Amount of a Transaction.
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
+     */
+    @WebMethod(exclude = true)
+    boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount);
+    
+    /**
+     * Checks if Transactions that meet the specified search criteria exist.
+     * 
+     * @param accountId Account ID.
+     * @param transactionTypeId Transaction Type ID.
+     * @param amount Amount of a Transaction.
+     * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
+     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account 
+     * 	with the Effective Dates that fall into the specified range exists.
+     */
+    boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo);
 }

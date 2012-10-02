@@ -1,7 +1,19 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.model.*;
+import static org.springframework.util.Assert.isNull;
+import static org.springframework.util.Assert.isTrue;
+import static org.springframework.util.Assert.notEmpty;
+import static org.springframework.util.Assert.notNull;
+
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,13 +21,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.springframework.util.Assert;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import com.sigmasys.kuali.ksa.model.Allocation;
+import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.CompositeAllocation;
+import com.sigmasys.kuali.ksa.model.Constants;
+import com.sigmasys.kuali.ksa.model.DebitType;
+import com.sigmasys.kuali.ksa.model.Deferment;
+import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.TransactionType;
+import com.sigmasys.kuali.ksa.model.TransactionTypeId;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -48,17 +62,17 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
 
-        Assert.isTrue("USD".equals(transaction.getCurrency().getCode()));
-        Assert.isTrue("admin".equals(transaction.getAccount().getId()));
-        Assert.isTrue(new Date().compareTo(transaction.getEffectiveDate()) >= 0);
-        Assert.isTrue(new BigDecimal(10e5).equals(transaction.getNativeAmount()));
+        isTrue("USD".equals(transaction.getCurrency().getCode()));
+        isTrue("admin".equals(transaction.getAccount().getId()));
+        isTrue(new Date().compareTo(transaction.getEffectiveDate()) >= 0);
+        isTrue(new BigDecimal(10e5).equals(transaction.getNativeAmount()));
 
     }
 
@@ -69,40 +83,40 @@ public class TransactionServiceTest extends AbstractServiceTest {
         transaction1 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(100));
         transaction2 = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(-100));
 
-        Assert.notNull(transaction1);
-        Assert.notNull(transaction2);
-        Assert.notNull(transaction1.getId());
-        Assert.notNull(transaction2.getId());
-        Assert.notNull(transaction1.getAmount());
-        Assert.notNull(transaction2.getAmount());
+        notNull(transaction1);
+        notNull(transaction2);
+        notNull(transaction1.getId());
+        notNull(transaction2.getId());
+        notNull(transaction1.getAmount());
+        notNull(transaction2.getAmount());
 
         CompositeAllocation compositeAllocation =
                 locked ?
                         transactionService.createLockedAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90)) :
                         transactionService.createAllocation(transaction1.getId(), transaction2.getId(), new BigDecimal(90));
 
-        Assert.notNull(compositeAllocation);
+        notNull(compositeAllocation);
 
         Allocation allocation = compositeAllocation.getAllocation();
 
-        Assert.notNull(allocation);
-        Assert.notNull(allocation.getId());
-        Assert.notNull(allocation.getFirstTransaction());
-        Assert.notNull(allocation.getSecondTransaction());
-        Assert.notNull(allocation.getFirstTransaction().getId());
-        Assert.notNull(allocation.getSecondTransaction().getId());
-        Assert.isTrue(allocation.getFirstTransaction().getId().equals(transaction1.getId()));
-        Assert.isTrue(allocation.getSecondTransaction().getId().equals(transaction2.getId()));
+        notNull(allocation);
+        notNull(allocation.getId());
+        notNull(allocation.getFirstTransaction());
+        notNull(allocation.getSecondTransaction());
+        notNull(allocation.getFirstTransaction().getId());
+        notNull(allocation.getSecondTransaction().getId());
+        isTrue(allocation.getFirstTransaction().getId().equals(transaction1.getId()));
+        isTrue(allocation.getSecondTransaction().getId().equals(transaction2.getId()));
 
         transaction1 = transactionService.getTransaction(transaction1.getId());
         transaction2 = transactionService.getTransaction(transaction2.getId());
 
-        Assert.notNull(transaction1);
-        Assert.notNull(transaction2);
-        Assert.notNull(transaction1.getId());
-        Assert.notNull(transaction2.getId());
+        notNull(transaction1);
+        notNull(transaction2);
+        notNull(transaction1.getId());
+        notNull(transaction2.getId());
 
-        Assert.isTrue(new BigDecimal(90).equals(allocation.getAmount()));
+        isTrue(new BigDecimal(90).equals(allocation.getAmount()));
 
         BigDecimal allocatedAmount1 = locked ?
                 transaction1.getLockedAllocatedAmount() :
@@ -115,8 +129,8 @@ public class TransactionServiceTest extends AbstractServiceTest {
         logger.info("allocatedAmount1 = " + allocatedAmount1);
         logger.info("allocatedAmount2 = " + allocatedAmount2);
 
-        Assert.isTrue(new BigDecimal(90).equals(allocatedAmount1));
-        Assert.isTrue(new BigDecimal(90).equals(allocatedAmount2));
+        isTrue(new BigDecimal(90).equals(allocatedAmount1));
+        isTrue(new BigDecimal(90).equals(allocatedAmount2));
     }
 
     @Test
@@ -165,8 +179,8 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         List<Transaction> transactions = transactionService.getTransactions();
 
-        Assert.notNull(transactions);
-        Assert.notEmpty(transactions);
+        notNull(transactions);
+        notEmpty(transactions);
 
         // Add more assertions when we have some test data
     }
@@ -176,8 +190,8 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         List<Charge> charges = transactionService.getCharges();
 
-        Assert.notNull(charges);
-        Assert.notEmpty(charges);
+        notNull(charges);
+        notEmpty(charges);
 
         // Add more assertions when we have some test data
     }
@@ -188,7 +202,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Transaction transaction = transactionService.getTransaction(7777777L);
 
         // Check that the entity does not exist
-        Assert.isNull(transaction);
+        isNull(transaction);
 
         // Add more assertions when we have some test data
     }
@@ -198,9 +212,9 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         List<Transaction> transactions = transactionService.getTransactions("dukakis");
 
-        Assert.notNull(transactions);
+        notNull(transactions);
 
-        Assert.isTrue(transactions.isEmpty());
+        isTrue(transactions.isEmpty());
 
         // Add more assertions when we have some test data
     }
@@ -210,11 +224,11 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         List<Charge> charges = transactionService.getCharges();
 
-        Assert.notNull(charges);
-        Assert.notEmpty(charges);
+        notNull(charges);
+        notEmpty(charges);
 
         for (Charge charge : charges) {
-            Assert.notNull(charge.getFormattedAmount());
+            notNull(charge.getFormattedAmount());
             logger.info("Formatted amount = " + charge.getFormattedAmount());
         }
 
@@ -227,9 +241,9 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         TransactionType transactionType = transactionService.getTransactionType(id, new Date());
 
-        Assert.notNull(transactionType);
-        Assert.notNull(transactionType.getId());
-        Assert.isTrue("1020".equals(transactionType.getId().getId()));
+        notNull(transactionType);
+        notNull(transactionType.getId());
+        isTrue("1020".equals(transactionType.getId().getId()));
 
     }
 
@@ -240,8 +254,8 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Class<TransactionType> debitTypeClass = transactionService.getTransactionTypeClass(id);
 
-        Assert.notNull(debitTypeClass);
-        Assert.notNull(debitTypeClass.equals(DebitType.class));
+        notNull(debitTypeClass);
+        notNull(debitTypeClass.equals(DebitType.class));
 
     }
 
@@ -252,31 +266,31 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getTransactionType().getId());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
 
         TransactionTypeId transactionTypeId = transaction.getTransactionType().getId();
 
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
-        Assert.notNull(transaction.getAmount());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
 
         transaction = transactionService.reverseTransaction(transaction.getId(), "Memo text", new BigDecimal(150.05),
                 "Reversed");
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
-        Assert.notNull(transaction.getAmount());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
 
-        Assert.isTrue(transaction.getStatementText().contains("Reversed"));
-        Assert.isTrue(transactionTypeId.equals(transaction.getTransactionType().getId()));
+        isTrue(transaction.getStatementText().contains("Reversed"));
+        isTrue(transactionTypeId.equals(transaction.getTransactionType().getId()));
 
     }
 
@@ -295,18 +309,18 @@ public class TransactionServiceTest extends AbstractServiceTest {
                         new BigDecimal(10e5), false);
 
 
-        Assert.notNull(deferment);
+        notNull(deferment);
 
-        Assert.isTrue(deferment instanceof Deferment);
+        isTrue(deferment instanceof Deferment);
 
-        Assert.notNull(deferment.getId());
-        Assert.notNull(deferment.getTransactionType());
-        Assert.notNull(deferment.getTransactionType().getId());
+        notNull(deferment.getId());
+        notNull(deferment.getTransactionType());
+        notNull(deferment.getTransactionType().getId());
 
-        Assert.notNull(deferment.getAccount());
-        Assert.notNull(deferment.getAccountId());
-        Assert.notNull(deferment.getCurrency());
-        Assert.notNull(deferment.getAmount());
+        notNull(deferment.getAccount());
+        notNull(deferment.getAccountId());
+        notNull(deferment.getCurrency());
+        notNull(deferment.getAmount());
 
     }
 
@@ -325,18 +339,18 @@ public class TransactionServiceTest extends AbstractServiceTest {
                         new BigDecimal(10e5), false);
 
 
-        Assert.notNull(deferment);
+        notNull(deferment);
 
-        Assert.isTrue(deferment instanceof Deferment);
+        isTrue(deferment instanceof Deferment);
 
-        Assert.notNull(deferment.getId());
-        Assert.notNull(deferment.getTransactionType());
-        Assert.notNull(deferment.getTransactionType().getId());
+        notNull(deferment.getId());
+        notNull(deferment.getTransactionType());
+        notNull(deferment.getTransactionType().getId());
 
-        Assert.notNull(deferment.getAccount());
-        Assert.notNull(deferment.getAccountId());
-        Assert.notNull(deferment.getCurrency());
-        Assert.notNull(deferment.getAmount());
+        notNull(deferment.getAccount());
+        notNull(deferment.getAccountId());
+        notNull(deferment.getCurrency());
+        notNull(deferment.getAmount());
 
         transactionService.expireDeferment(deferment.getId());
 
@@ -349,15 +363,15 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getTransactionType().getId());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
 
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
-        Assert.notNull(transaction.getAmount());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
 
         transactionService.makeEffective(transaction.getId(), false);
 
@@ -370,15 +384,15 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e5));
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getTransactionType().getId());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
 
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
-        Assert.notNull(transaction.getAmount());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
 
         transactionService.makeEffective(transaction.getId(), true);
 
@@ -392,32 +406,323 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e3));
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getTransactionType().getId());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
 
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
-        Assert.notNull(transaction.getAmount());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
 
         transaction = transactionService.writeOffTransaction(transaction.getId(), null, "Memo text", "Write-off");
 
-        Assert.notNull(transaction);
-        Assert.notNull(transaction.getId());
-        Assert.notNull(transaction.getTransactionType());
-        Assert.notNull(transaction.getTransactionType().getId());
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
 
-        Assert.notNull(transaction.getAccount());
-        Assert.notNull(transaction.getAccountId());
-        Assert.notNull(transaction.getCurrency());
-        Assert.notNull(transaction.getAmount());
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
 
-        Assert.isTrue(transaction.getStatementText().contains("Write-off"));
-        Assert.isTrue(transaction.getAmount().compareTo(new BigDecimal(10e3).negate()) == 0);
+        isTrue(transaction.getStatementText().contains("Write-off"));
+        isTrue(transaction.getAmount().compareTo(new BigDecimal(10e3).negate()) == 0);
 
     }
 
+    @Test
+    public void testTransactionExistsByTransactionType() throws Exception {
+    	// Create a new Transaction:
+        String transactionTypeId = "1020";
+        String accountId = "admin";
+        BigDecimal amount = new BigDecimal(10e3);
+        Date effectiveDate = new Date();
+        
+        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
+        
+        // Call the service:
+        boolean exists = transactionService.transactionExists(accountId, transactionTypeId);
+        
+        isTrue(exists);
+    	
+    	// Try to find a Transaction by a fake Account:
+        String fakeAccount = "fake";
+        
+        exists = transactionService.transactionExists(fakeAccount, transactionTypeId);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake Transaction ID:
+        String fakeTransactionTypeId = "somethingelse";
+        
+        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by all fake parameters:
+        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId);
+        isTrue(!exists);
+        
+        // Pass invalid parameters:
+        try {
+        	transactionService.transactionExists(null, fakeTransactionTypeId);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(fakeAccount, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+    }
+    
+    @Test
+    public void testTransactionExistsByTransactionTypeAndAmount() throws Exception {
+    	// Create a new Transaction:
+        String transactionTypeId = "1020";
+        String accountId = "admin";
+        BigDecimal amount = new BigDecimal(10e3);
+        Date effectiveDate = new Date();
+        
+        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
+        
+        // Call the service:
+        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, amount);
+        
+        isTrue(exists);
+    	
+    	// Try to find a Transaction by a fake Account:
+        String fakeAccount = "fake";
+        
+        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amount);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake Transaction ID:
+        String fakeTransactionTypeId = "somethingelse";
+        
+        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amount);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake amount:
+        BigDecimal fakeAmount = new BigDecimal(1.0);
+        
+        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by all fake parameters:
+        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount);
+        isTrue(!exists);
+        
+        // Pass invalid parameters:
+        try {
+        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(fakeAccount, null, fakeAmount);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+    }
+    
+    @Test
+    public void testTransactionExistsByTransactionTypeAndEffectiveDate() throws Exception {
+    	// Create a new Transaction:
+        String transactionTypeId = "1020";
+        String accountId = "admin";
+        BigDecimal amount = new BigDecimal(10e3);
+        Date effectiveDate = new Date();
+        
+        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
+        
+        // Prepare input Date parameters:
+		Calendar newDateFrom = Calendar.getInstance();
+		int newDateFromYear = newDateFrom.get(Calendar.YEAR) - 1;
+		int newDateFromMonth = Calendar.JULY;
+		int newDateFromDay = 18;
+		Calendar newDateTo = Calendar.getInstance();
+		int newDateToYear = newDateTo.get(Calendar.YEAR) + 1;
+		int newDateToMonth = Calendar.JANUARY;
+		int newDateToDay = 25;
+        
+		newDateFrom.set(Calendar.YEAR, newDateFromYear);
+		newDateFrom.set(Calendar.MONTH, newDateFromMonth);
+		newDateFrom.set(Calendar.DAY_OF_MONTH, newDateFromDay);
+
+		newDateTo.set(Calendar.YEAR, newDateToYear);
+		newDateTo.set(Calendar.MONTH, newDateToMonth);
+		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
+		
+        // Call the service:
+        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
+        
+        isTrue(exists);
+    	
+    	// Try to find a Transaction by a fake Account:
+        String fakeAccount = "fake";
+        
+        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake Transaction ID:
+        String fakeTransactionTypeId = "somethingelse";
+        
+        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake Effective Date:
+        Date fakeEffectiveDate = new Date(0);
+        
+        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by all fake parameters:
+        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
+        isTrue(!exists);
+        
+        // Pass invalid parameters:
+        try {
+        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(fakeAccount, null, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, fakeEffectiveDate, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, null, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, null, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+    }
+    
+    @Test
+    public void testTransactionExistsByTransactionTypeAmountAndEffectiveDate() throws Exception {
+    	// Create a new Transaction:
+        String transactionTypeId = "1020";
+        String accountId = "admin";
+        BigDecimal amount = new BigDecimal(10e3);
+        Date effectiveDate = new Date();
+        
+        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
+        
+        // Prepare input Date parameters:
+		Calendar newDateFrom = Calendar.getInstance();
+		int newDateFromYear = newDateFrom.get(Calendar.YEAR) - 1;
+		int newDateFromMonth = Calendar.JULY;
+		int newDateFromDay = 18;
+		Calendar newDateTo = Calendar.getInstance();
+		int newDateToYear = newDateTo.get(Calendar.YEAR) + 1;
+		int newDateToMonth = Calendar.JANUARY;
+		int newDateToDay = 25;
+        
+		newDateFrom.set(Calendar.YEAR, newDateFromYear);
+		newDateFrom.set(Calendar.MONTH, newDateFromMonth);
+		newDateFrom.set(Calendar.DAY_OF_MONTH, newDateFromDay);
+
+		newDateTo.set(Calendar.YEAR, newDateToYear);
+		newDateTo.set(Calendar.MONTH, newDateToMonth);
+		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
+		
+        // Call the service:
+        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
+        
+        isTrue(exists);
+    	
+    	// Try to find a Transaction by a fake Account:
+        String fakeAccount = "fake";
+        
+        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amount, newDateFrom.getTime(), newDateTo.getTime());
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake Transaction ID:
+        String fakeTransactionTypeId = "somethingelse";
+        
+        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amount, newDateFrom.getTime(), newDateTo.getTime());
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake amount:
+        BigDecimal fakeAmount = new BigDecimal(1.0);
+        
+        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount, newDateFrom.getTime(), newDateTo.getTime());
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by a fake Effective Date:
+        Date fakeEffectiveDate = new Date(0);
+        
+        exists = transactionService.transactionExists(accountId, transactionTypeId, amount, fakeEffectiveDate, fakeEffectiveDate);
+        isTrue(!exists);
+        
+    	// Try to find a Transaction by all fake parameters:
+        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+        isTrue(!exists);
+        
+        // Pass invalid parameters:
+        try {
+        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, amount, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, null, fakeEffectiveDate, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, null, fakeEffectiveDate, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, null, null, fakeEffectiveDate);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+        
+        try {
+        	transactionService.transactionExists(null, null, null, null, null);
+        	isTrue(false); // should not even get here
+        } catch (Exception e) {}
+    }
 
 }
