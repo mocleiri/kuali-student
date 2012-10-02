@@ -199,7 +199,6 @@ public interface FeeManagementService {
 	 * changing details, such as Campus, Add Date, Drop Date, etc.
 	 * 
 	 * @param learningUnit A <code>LearningUnit</code> to be updated. 
-	 * @returns The entity that was attached to the persistent context.
 	 */
 	void saveLearningUnit(LearningUnit learningUnit);
 	
