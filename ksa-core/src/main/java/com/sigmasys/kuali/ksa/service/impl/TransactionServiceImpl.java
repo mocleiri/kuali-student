@@ -1325,9 +1325,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     /**
      * Determine if the transaction is allowed for the given account ID, transaction type and effective date
      *
-     * @param accountId       Account ID
+     * @param accountId         Account ID
      * @param transactionTypeId Transaction Type ID
-     * @param effectiveDate   Effective Date
+     * @param effectiveDate     Effective Date
      * @return true/false
      */
     @Override
@@ -1446,103 +1446,103 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @return <code>true</code> if at least one Transaction of the given type for the given account exists.
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId) {
-    	return transactionExistsInternal(accountId, transactionTypeId, null, null, null);    	
+        return transactionExistsInternal(accountId, transactionTypeId, null, null, null);
     }
-    
+
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
-     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
-     * @return <code>true</code> if at least one Transaction of the given type for the given account 
-     * 	with the Effective Dates that fall into the specified range exists.
+     * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type for the given account
+     *         with the Effective Dates that fall into the specified range exists.
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo) {
-    	return transactionExistsInternal(accountId, transactionTypeId, null, effectiveDateFrom, effectiveDateTo);    	
+        return transactionExistsInternal(accountId, transactionTypeId, null, effectiveDateFrom, effectiveDateTo);
     }
-    
+
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount Amount of a Transaction.
+     * @param amount            Amount of a Transaction.
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount) {
-    	return transactionExistsInternal(accountId, transactionTypeId, amount, null, null);    	
+        return transactionExistsInternal(accountId, transactionTypeId, amount, null, null);
     }
-    
+
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount Amount of a Transaction.
+     * @param amount            Amount of a Transaction.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
-     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
-     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account 
-     * 	with the Effective Dates that fall into the specified range exists.
+     * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
+     *         with the Effective Dates that fall into the specified range exists.
      */
     @Override
     public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
-    	return transactionExistsInternal(accountId, transactionTypeId, amount, effectiveDateFrom, effectiveDateTo);    	
+        return transactionExistsInternal(accountId, transactionTypeId, amount, effectiveDateFrom, effectiveDateTo);
     }
 
     /**
      * InternalMethod: Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount Amount of a Transaction.
+     * @param amount            Amount of a Transaction.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
-     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
-     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account 
-     * 	with the Effective Dates that fall into the specified range exists.
+     * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
+     *         with the Effective Dates that fall into the specified range exists.
      */
     private boolean transactionExistsInternal(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
-    	// Create a query that may contain some of the parameters. "accountId" and "transactionType" are required, however:
-    	StringBuilder sbQuery = new StringBuilder("select 1 from Transaction t where t.account.id = :accountId and t.transactionType.id.id = :transactionTypeId");
-    	boolean hasAmount = (amount != null);
-    	boolean hasEffectiveDates = ((effectiveDateFrom != null) && (effectiveDateTo != null));
-    	
-    	if (hasAmount) {
-    		sbQuery.append(" and t.amount = :amount");
-    	}
-    	
-    	if (hasEffectiveDates) {
-    		sbQuery.append(" and t.effectiveDate between :dateFrom and :dateTo");
-    	}
-    	
-    	// Create a Query:
-    	Query query = em.createQuery(sbQuery.toString())
-    			.setParameter("accountId", accountId)
-    			.setParameter("transactionTypeId", transactionTypeId)
-    			.setMaxResults(1);
-    	
-    	if (hasAmount) {
-			query.setParameter("amount", amount);
-    	}
-    	
-    	if (hasEffectiveDates) {
-			query.setParameter("dateFrom", effectiveDateFrom)
-				.setParameter("dateTo", effectiveDateTo);
-    	}
-    	
-    	// Run the query:
-    	List<Object> result = query.getResultList();
-    	
-		return CollectionUtils.isNotEmpty(result);    	
+
+        // Create a query that may contain some of the parameters. "accountId" and "transactionType" are required
+        StringBuilder builder = new StringBuilder("select 1 from Transaction t where t.account.id = :accountId " +
+                " and t.transactionType.id.id = :transactionTypeId");
+
+        boolean hasAmount = (amount != null);
+        boolean hasDates = (effectiveDateFrom != null) && (effectiveDateTo != null);
+
+        if (hasAmount) {
+            builder.append(" and t.amount = :amount");
+        }
+
+        if (hasDates) {
+            builder.append(" and t.effectiveDate between :dateFrom and :dateTo");
+        }
+
+        // Create a Query:
+        Query query = em.createQuery(builder.toString());
+        query.setParameter("accountId", accountId);
+        query.setParameter("transactionTypeId", transactionTypeId);
+        query.setMaxResults(1);
+
+        if (amount != null) {
+            query.setParameter("amount", amount);
+        }
+
+        if (hasDates) {
+            query.setParameter("dateFrom", effectiveDateFrom);
+            query.setParameter("dateTo", effectiveDateTo);
+        }
+
+        return CollectionUtils.isNotEmpty(query.getResultList());
     }
 }
