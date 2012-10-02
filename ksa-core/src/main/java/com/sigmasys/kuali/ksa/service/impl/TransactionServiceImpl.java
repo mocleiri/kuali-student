@@ -1314,7 +1314,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     /**
      * The logic of this is very similar to reverseTransaction(), except a partial write off is allowed, and only
      * credits can be written off. Also, the institution can choose to write off charges to a different general
-     * ledger account, instead of the original, permitting the writing off to a general “bad debt” account, if they
+     * ledger account, instead of the original, permitting the writing off to a general "bad debt" account, if they
      * so choose.
      *
      * @param transactionId     Transaction ID
