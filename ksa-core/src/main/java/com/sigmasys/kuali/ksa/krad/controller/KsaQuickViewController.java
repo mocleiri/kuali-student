@@ -42,16 +42,16 @@ public class KsaQuickViewController extends GenericSearchController {
 
         if (userId != null) {
 
-            Account accountById = accountService.getFullAccount(userId);
+            Account account = accountService.getFullAccount(userId);
 
-            if (accountById == null) {
+            if (account == null) {
                 String errMsg = "Cannot find Account by ID = " + userId;
                 logger.error(errMsg);
                 throw new IllegalStateException(errMsg);
             }
 
             KsaQuickViewForm form = new KsaQuickViewForm();
-            form.setAccount(accountById);
+            form.setAccount(account);
             return form;
         }
 
