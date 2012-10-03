@@ -1452,6 +1452,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return <code>true</code> if at least one Transaction of the given type for the given account exists.
      */
     @Override
+    @WebMethod(exclude = true)
     public boolean transactionExists(String accountId, String transactionTypeId) {
         return transactionExistsInternal(accountId, transactionTypeId, null, null, null);
     }
@@ -1467,6 +1468,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *         with the Effective Dates that fall into the specified range exists.
      */
     @Override
+    @WebMethod(exclude = true)
     public boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo) {
         return transactionExistsInternal(accountId, transactionTypeId, null, effectiveDateFrom, effectiveDateTo);
     }
@@ -1480,6 +1482,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
      */
     @Override
+    @WebMethod(exclude = true)
     public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount) {
         return transactionExistsInternal(accountId, transactionTypeId, amount, null, null);
     }
