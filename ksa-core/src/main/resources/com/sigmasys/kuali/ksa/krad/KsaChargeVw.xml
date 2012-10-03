@@ -68,7 +68,7 @@
     ********************************************************************************************************************
     -->
     <bean id="addChargeSection" parent="Uif-VerticalBoxSection"
-          p:title="@{searchValue}"
+          p:title="@{account.id}"
           p:instructionalText="The following form will allow a charge to be added to the account">
         <property name="disclosure.render" value="false"/>
         <property name="items">
@@ -154,13 +154,16 @@
     ********************************************************************************************************************
                                         Controls and Links section
     A horizontal sub section devoted to button controls or links
+    TODO Cancel should return to previous form but how to ?
     ********************************************************************************************************************
     -->
     <bean id="chargeControls" parent="Uif-HorizontalBoxSubSection">
         <property name="items">
             <list>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"></bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel" p:actionLabel="Cancel"></bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel" p:actionLabel="Cancel"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
             </list>
         </property>
     </bean>

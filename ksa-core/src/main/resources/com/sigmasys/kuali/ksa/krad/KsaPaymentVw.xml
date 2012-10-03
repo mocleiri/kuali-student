@@ -68,7 +68,7 @@
     ********************************************************************************************************************
     -->
     <bean id="addPaymentSection" parent="Uif-VerticalBoxSection"
-          p:title="@{searchValue}"
+          p:title="@{account.id}"
           p:instructionalText="The following form will allow a payment to be applied to the account">
         <property name="disclosure.render" value="false"/>
         <property name="items">
@@ -114,6 +114,17 @@
                         <bean parent="Uif-TextControl" p:size="11" />
                     </property>
                 </bean>
+                <bean parent="Uif-InputField" p:propertyName="payment.externalId"
+                      p:label="Authorization"
+                      p:instructionalText="Enter the authorization code"
+                      p:fieldLabel.renderColon="true"
+                      p:labelPlacement="TOP"
+                      p:maxLength="16">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
                 <!-- Use the Payment instance to get/set the values -->
                 <bean parent="Uif-InputField" p:propertyName="payment.amount"
                       p:label="Amount"
@@ -151,7 +162,7 @@
                 </bean>
                 <ref bean="paymentControls"/>
                 <!--  Status message -->
-                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>
@@ -165,9 +176,12 @@
     <bean id="paymentControls" parent="Uif-HorizontalBoxSubSection">
         <property name="items">
             <list>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit and Age"></bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"></bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel" p:actionLabel="Cancel"></bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitAge" p:actionLabel="Submit and Age"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel" p:actionLabel="Cancel"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
             </list>
         </property>
     </bean>

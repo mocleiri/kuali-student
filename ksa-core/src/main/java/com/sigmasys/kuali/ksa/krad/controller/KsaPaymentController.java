@@ -1,6 +1,9 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaPaymentForm;
+import com.sigmasys.kuali.ksa.model.Account;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -19,14 +22,35 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaPaymentVw")
 public class KsaPaymentController extends GenericSearchController {
 
+   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
    protected KsaPaymentForm createInitialForm(HttpServletRequest request) {
-      KsaPaymentForm form  = new KsaPaymentForm();
-      form.setStatusMessage("My Status Message goes here!");
+      KsaPaymentForm form = new KsaPaymentForm();
+      form.setStatusMessage("");
+      String userId = request.getParameter("userId");
+
+      if (userId != null) {
+
+         Account account = accountService.getFullAccount(userId);
+
+         if (account == null) {
+            String errMsg = "Cannot find Account by ID = " + userId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+         }
+
+         form.setAccount(account);
+      } /*else {
+         String errMsg = "'userId' request parameter cannot be null";
+         logger.error(errMsg);
+         throw new IllegalStateException(errMsg);
+      }*/
+
       return form;
+
    }
 
    /**
@@ -83,6 +107,23 @@ public class KsaPaymentController extends GenericSearchController {
       return getUIFModelAndView(form);
    }
 
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submitAge")
+   @Transactional(readOnly = false)
+   public ModelAndView submitAge(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+      // do submit stuff...
+
+
+      return getUIFModelAndView(form);
+   }
    /**
     *
     * @param form

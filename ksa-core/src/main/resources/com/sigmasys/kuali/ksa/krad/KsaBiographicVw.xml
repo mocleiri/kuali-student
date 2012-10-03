@@ -57,7 +57,8 @@
                             <property name="items">
                                 <list>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPerson"
-                                          p:actionLabel="Add">
+                                          p:actionLabel="Add"
+                                          p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                                     </bean>
                                 </list>
                             </property>
@@ -75,8 +76,10 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="updatePerson"
-                                          p:actionLabel="Edit Person"/>
+                                    <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updatePerson"
+                                          p:actionLabel="Update"
+                                          p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                                    </bean>
                                 </list>
                             </property>
                         </bean>
@@ -93,12 +96,15 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="insertPostal"
-                                          p:actionLabel="Add"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="updatePostal"
-                                          p:actionLabel="Update"/>
+                                    <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPostal"
+                                          p:actionLabel="Add"
+                                          p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                                    </bean>
+                                    <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updatePostal"
+                                          p:actionLabel="Update"
+                                          p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                                    </bean>
                                 </list>
-
                             </property>
                         </bean>
                     </property>
@@ -114,10 +120,14 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="insertElectronicContact"
-                                          p:actionLabel="Add"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="updateElectronicContact"
-                                          p:actionLabel="Update"/>
+                                    <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertElectronicContact"
+                                          p:actionLabel="Add"
+                                          p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                                    </bean>
+                                    <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updateElectronicContact"
+                                          p:actionLabel="Update"
+                                          p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                                    </bean>
                                 </list>
                             </property>
                         </bean>
@@ -145,7 +155,7 @@
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationSummarySection" parent="Uif-VerticalBoxSection"
-          p:title="@{searchValue}">
+          p:title="@{account.id}">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
@@ -172,7 +182,7 @@
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationPersonSection" parent="Uif-VerticalBoxSubSection"
-          p:title="@{searchValue}">
+          p:title="@{account.id}">
         <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
         <property name="items">
@@ -256,7 +266,7 @@
     ********************************************************************************************************************
     -->
     <bean id="bioAuditPersonInformationSection" parent="Uif-Disclosure-VerticalBoxSubSection"
-          p:title="Audit Information"
+          p:title="Audit Information @{account.id}"
           p:instructionalText="">
         <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
@@ -305,7 +315,7 @@
           p:layoutManager.numberOfColumns="4"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:title="Postal Addresses"
+          p:title="Postal Addresses @{account.id}"
           p:instructionalText="">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.PostalAddress"/>
@@ -349,7 +359,7 @@
     ********************************************************************************************************************
     -->
     <bean id="bioAuditPostalInformationSection" parent="Uif-Disclosure-VerticalBoxSubSection"
-          p:title="Audit Information"
+          p:title="Audit Information @{account.id}"
           p:instructionalText="">
         <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
@@ -396,7 +406,7 @@
           p:layoutManager.numberOfColumns="4"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:title="Electronic Contact"
+          p:title="Electronic Contact @{account.id}"
           p:instructionalText="">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.ElectronicContact"/>
@@ -437,7 +447,7 @@
     ********************************************************************************************************************
     -->
     <bean id="bioAuditElectronicContactInformationSection" parent="Uif-Disclosure-VerticalBoxSubSection"
-          p:title="Audit Information"
+          p:title="Audit Information @{account.id}"
           p:instructionalText="">
         <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
@@ -478,7 +488,7 @@
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationPersonAEDSection" parent="Uif-GridSection"
-          p:title="@{searchValue}" p:instructionalText="Add or Edit a Person">
+          p:title="@{account.id}" p:instructionalText="Add or Edit a Person">
         <property name="layoutManager">
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="2"/>
         </property>
@@ -534,7 +544,7 @@
                     </property>
                 </bean>
                 <!--  Status message -->
-                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>
@@ -545,9 +555,11 @@
     A postal address field set and a control set to save Add/Edit actions
     ********************************************************************************************************************
     -->
-    <bean id="biographicInformationPostalADESection" parent="Uif-VerticalBoxSubSection"
-          p:title="@{searchValue}">
-        <property name="disclosure.render" value="false"/>
+    <bean id="biographicInformationPostalADESection" parent="Uif-GridSection"
+          p:title="@{account.id}">
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="2"/>
+        </property>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:propertyName="addressType"
@@ -630,7 +642,7 @@
                     </property>
                 </bean>
                 <!--  Status message -->
-                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>
@@ -641,9 +653,11 @@
     An electronic contact field set and a control set to save Add/Edit actions
     ********************************************************************************************************************
     -->
-    <bean id="biographicInformationElectronicContactADESection" parent="Uif-VerticalBoxSubSection"
-          p:title="@{searchValue}">
-        <property name="disclosure.render" value="false"/>
+    <bean id="biographicInformationElectronicContactADESection" parent="Uif-GridSection"
+          p:title="@{account.id}">
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="2"/>
+        </property>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:propertyName="electronicContactType"
@@ -706,7 +720,7 @@
                     </property>
                 </bean>
                 <!--  Status message -->
-                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>

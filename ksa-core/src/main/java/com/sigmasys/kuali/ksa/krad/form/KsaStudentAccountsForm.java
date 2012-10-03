@@ -32,6 +32,8 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private String accountId;
 
+   private Account account;
+
    private String allocationId;
 
    private String allocationAccountId;
@@ -155,7 +157,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.unGroupedTransactionModelList = unGroupedTransactionModelList;
    }
 
-
    public List<TransactionModel> getByRollUpTransactionModelList() {
       return byRollUpTransactionModelList;
    }
@@ -186,6 +187,14 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setAccountId(String accountId) {
       this.accountId = accountId;
+   }
+
+   public Account getAccount() {
+      return account;
+   }
+
+   public void setAccount(Account account) {
+      this.account = account;
    }
 
    public String getAllocationId() {

@@ -39,7 +39,27 @@ public class KsaStudentAccountsController extends GenericSearchController {
      */
     @Override
     protected KsaStudentAccountsForm createInitialForm(HttpServletRequest request) {
-        return new KsaStudentAccountsForm();
+       KsaStudentAccountsForm form = new KsaStudentAccountsForm();
+       String userId = request.getParameter("userId");
+
+       if (userId != null) {
+
+          Account account = accountService.getFullAccount(userId);
+
+          if (account == null) {
+             String errMsg = "Cannot find Account by ID = " + userId;
+             logger.error(errMsg);
+             throw new IllegalStateException(errMsg);
+          }
+
+          form.setAccount(account);
+       }/* else {
+          String errMsg = "'userId' request parameter cannot be null";
+          logger.error(errMsg);
+          throw new IllegalStateException(errMsg);
+       }*/
+
+       return form;
     }
 
     /**

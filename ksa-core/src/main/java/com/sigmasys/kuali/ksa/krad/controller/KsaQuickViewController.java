@@ -37,7 +37,7 @@ public class KsaQuickViewController extends GenericSearchController {
      */
     @Override
     protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
-
+        KsaQuickViewForm form = new KsaQuickViewForm();
         String userId = request.getParameter("userId");
 
         if (userId != null) {
@@ -50,14 +50,14 @@ public class KsaQuickViewController extends GenericSearchController {
                 throw new IllegalStateException(errMsg);
             }
 
-            KsaQuickViewForm form = new KsaQuickViewForm();
-            form.setAccount(account);
-            return form;
-        }
+             form.setAccount(account);
+        } /*else {
+           String errMsg = "'userId' request parameter cannot be null";
+           logger.error(errMsg);
+           throw new IllegalStateException(errMsg);
+        }*/
 
-        String errMsg = "'userId' request parameter cannot be null";
-        logger.error(errMsg);
-        throw new IllegalStateException(errMsg);
+       return form;
     }
 
     /**

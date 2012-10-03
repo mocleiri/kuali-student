@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
+import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Charge;
 
 import java.math.BigDecimal;
@@ -10,6 +11,8 @@ import java.math.BigDecimal;
 public class KsaChargeForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
+
+   private Account account;
 
    private Charge charge;
 
@@ -25,6 +28,15 @@ public class KsaChargeForm extends AbstractViewModel {
      Get / Set methods
    */
 
+
+   public Account getAccount() {
+      return account;
+   }
+
+   public void setAccount(Account account) {
+      this.account = account;
+   }
+
    public Charge getCharge() {
       return charge;
    }
@@ -32,7 +44,6 @@ public class KsaChargeForm extends AbstractViewModel {
    public void setCharge(Charge charge) {
       this.charge = charge;
    }
-
 
    public String getChargeTransactionTypeId() {
       return chargeTransactionTypeId;

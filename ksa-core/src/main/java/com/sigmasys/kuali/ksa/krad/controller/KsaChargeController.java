@@ -1,6 +1,9 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaChargeForm;
+import com.sigmasys.kuali.ksa.model.Account;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -19,14 +22,37 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaChargeVw")
 public class KsaChargeController extends GenericSearchController {
 
+   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
    protected KsaChargeForm createInitialForm(HttpServletRequest request) {
-      KsaChargeForm form  = new KsaChargeForm();
-      form.setStatusMessage("My Status Message goes here!");
+      KsaChargeForm form = new KsaChargeForm();
+      form.setStatusMessage("");
+      String userId = request.getParameter("userId");
+
+      if (userId != null) {
+
+         Account account = accountService.getFullAccount(userId);
+
+         if (account == null) {
+            String errMsg = "Cannot find Account by ID = " + userId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+         }
+
+         form.setAccount(account);
+
+      } /*else {
+         String errMsg = "'userId' request parameter cannot be null";
+         logger.error(errMsg);
+         throw new IllegalStateException(errMsg);
+      }*/
+
       return form;
+
    }
 
    /**
