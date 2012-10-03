@@ -62,10 +62,6 @@ public abstract class GenericSearchController extends UifControllerBase {
 
         SearchTypeValue searchTypeValue = SearchTypeValue.valueOf(searchType);
         switch (searchTypeValue) {
-            case ALL:
-               form.setAccounts(accountService.findAccountsByNamePattern(searchValue));
-               form.setPageId(ALL_SEARCH_PAGE_ID);
-               break;
             case ACCOUNT:
                 form.setAccounts(accountService.findAccountsByNamePattern(searchValue));
                 form.setPageId(ACCOUNT_SEARCH_PAGE_ID);
