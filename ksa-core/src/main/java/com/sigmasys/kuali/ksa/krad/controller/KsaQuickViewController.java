@@ -37,24 +37,27 @@ public class KsaQuickViewController extends GenericSearchController {
      */
     @Override
     protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
-        KsaQuickViewForm form = new KsaQuickViewForm();
+
         String userId = request.getParameter("userId");
 
         if (userId != null) {
+
             Account accountById = accountService.getFullAccount(userId);
+
             if (accountById == null) {
-                throw new IllegalStateException("Cannot find Account by ID = " + userId);
-            } else {
-/*
-            HashMap userIdMap = new HashMap();
-            userIdMap.put("userId", userId);
-*/
-                form.setUserId(userId);
-                form.setAccount(accountById);
+                String errMsg = "Cannot find Account by ID = " + userId;
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
             }
+
+            KsaQuickViewForm form = new KsaQuickViewForm();
+            form.setAccount(accountById);
+            return form;
         }
 
-        return form;
+        String errMsg = "'userId' request parameter cannot be null";
+        logger.error(errMsg);
+        throw new IllegalStateException(errMsg);
     }
 
     /**
