@@ -492,50 +492,52 @@ public class TransactionServiceTest extends AbstractServiceTest {
         transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
         
         // Call the service:
-        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, amount);
+        BigDecimal amountFrom = new BigDecimal(10e2);
+        BigDecimal amountTo = new BigDecimal(10e4);
+        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, amountFrom, amountTo);
         
         isTrue(exists);
     	
     	// Try to find a Transaction by a fake Account:
         String fakeAccount = "fake";
         
-        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amount);
+        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amountFrom, amountTo);
         isTrue(!exists);
         
     	// Try to find a Transaction by a fake Transaction ID:
         String fakeTransactionTypeId = "somethingelse";
         
-        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amount);
+        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amountFrom, amountTo);
         isTrue(!exists);
         
     	// Try to find a Transaction by a fake amount:
         BigDecimal fakeAmount = new BigDecimal(1.0);
         
-        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount);
+        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount, fakeAmount);
         isTrue(!exists);
         
     	// Try to find a Transaction by all fake parameters:
-        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount);
+        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount, fakeAmount);
         isTrue(!exists);
         
         // Pass invalid parameters:
         try {
-        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount);
+        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeAmount);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(fakeAccount, null, fakeAmount);
+        	transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeAmount);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, null);
+        	transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, (BigDecimal)null, null);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null);
+        	transactionService.transactionExists(null, null, (BigDecimal)null, null);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
     }
@@ -622,7 +624,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null, null, null);
+        	transactionService.transactionExists(null, null, (Date)null, null);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
     }
@@ -656,71 +658,73 @@ public class TransactionServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
         // Call the service:
-        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
+        BigDecimal amountFrom = new BigDecimal(10e2);
+        BigDecimal amountTo = new BigDecimal(10e4);
+        boolean exists = transactionService.transactionExists(accountId, transactionTypeId, amountFrom, amountTo, newDateFrom.getTime(), newDateTo.getTime());
         
         isTrue(exists);
     	
     	// Try to find a Transaction by a fake Account:
         String fakeAccount = "fake";
         
-        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amount, newDateFrom.getTime(), newDateTo.getTime());
+        exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amountFrom, amountTo, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
         
     	// Try to find a Transaction by a fake Transaction ID:
         String fakeTransactionTypeId = "somethingelse";
         
-        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amount, newDateFrom.getTime(), newDateTo.getTime());
+        exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amountFrom, amountTo, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
         
     	// Try to find a Transaction by a fake amount:
         BigDecimal fakeAmount = new BigDecimal(1.0);
         
-        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount, newDateFrom.getTime(), newDateTo.getTime());
+        exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount, fakeAmount, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
         
     	// Try to find a Transaction by a fake Effective Date:
         Date fakeEffectiveDate = new Date(0);
         
-        exists = transactionService.transactionExists(accountId, transactionTypeId, amount, fakeEffectiveDate, fakeEffectiveDate);
+        exists = transactionService.transactionExists(accountId, transactionTypeId, amountFrom, amountTo, fakeEffectiveDate, fakeEffectiveDate);
         isTrue(!exists);
         
     	// Try to find a Transaction by all fake parameters:
-        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+        exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
         isTrue(!exists);
         
         // Pass invalid parameters:
         try {
-        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+        	transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null, amount, fakeEffectiveDate, fakeEffectiveDate);
+        	transactionService.transactionExists(null, null, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null, null, fakeEffectiveDate, fakeEffectiveDate);
+        	transactionService.transactionExists(null, null, null, null, fakeEffectiveDate, fakeEffectiveDate);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null, null, fakeEffectiveDate, null);
+        	transactionService.transactionExists(null, null, null, null, fakeEffectiveDate, null);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null, null, null, fakeEffectiveDate);
+        	transactionService.transactionExists(null, null, null, null, null, fakeEffectiveDate);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
         
         try {
-        	transactionService.transactionExists(null, null, null, null, null);
+        	transactionService.transactionExists(null, null, null, null, null, null);
         	isTrue(false); // should not even get here
         } catch (Exception e) {}
     }

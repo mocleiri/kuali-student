@@ -461,24 +461,26 @@ public interface TransactionService {
      *
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount            Amount of a Transaction.
+     * @param amountFrom        Amount of a Transaction begging of a search range.
+     * @param amountTo			Amount of a Transaction end of a search range. 
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
      */
     @WebMethod(exclude = true)
-    boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount);
+    boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amountFrom, BigDecimal amountTo);
 
     /**
      * Checks if Transactions that meet the specified search criteria exist.
      *
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount            Amount of a Transaction.
+     * @param amountFrom        Amount of a Transaction begging of a search range.
+     * @param amountTo			Amount of a Transaction end of a search range. 
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
      * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
      *         with the Effective Dates that fall into the specified range exists.
      */
-    boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo);
+    boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amountFrom, BigDecimal amountTo, Date effectiveDateFrom, Date effectiveDateTo);
 
     /**
      * Returns a list of credit permissions for the given transaction type.

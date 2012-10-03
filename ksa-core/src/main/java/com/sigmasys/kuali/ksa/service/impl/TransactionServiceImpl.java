@@ -1490,7 +1490,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @WebMethod(exclude = true)
     public boolean transactionExists(String accountId, String transactionTypeId) {
-        return transactionExistsInternal(accountId, transactionTypeId, null, null, null);
+        return transactionExistsInternal(accountId, transactionTypeId, null, null, null, null);
     }
 
     /**
@@ -1506,7 +1506,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @WebMethod(exclude = true)
     public boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo) {
-        return transactionExistsInternal(accountId, transactionTypeId, null, effectiveDateFrom, effectiveDateTo);
+        return transactionExistsInternal(accountId, transactionTypeId, null, null, effectiveDateFrom, effectiveDateTo);
     }
 
     /**
@@ -1514,13 +1514,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount            Amount of a Transaction.
+     * @param amountFrom        Amount of a Transaction begging of a search range.
+     * @param amountTo			Amount of a Transaction end of a search range. 
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
      */
     @Override
     @WebMethod(exclude = true)
-    public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount) {
-        return transactionExistsInternal(accountId, transactionTypeId, amount, null, null);
+    public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amountFrom, BigDecimal amountTo) {
+        return transactionExistsInternal(accountId, transactionTypeId, amountFrom, amountTo, null, null);
     }
 
     /**
@@ -1528,15 +1529,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount            Amount of a Transaction.
+     * @param amountFrom        Amount of a Transaction begging of a search range.
+     * @param amountTo			Amount of a Transaction end of a search range. 
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
      * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
      *         with the Effective Dates that fall into the specified range exists.
      */
     @Override
-    public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
-        return transactionExistsInternal(accountId, transactionTypeId, amount, effectiveDateFrom, effectiveDateTo);
+    public boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amountFrom, BigDecimal amountTo, Date effectiveDateFrom, Date effectiveDateTo) {
+        return transactionExistsInternal(accountId, transactionTypeId, amountFrom, amountTo, effectiveDateFrom, effectiveDateTo);
     }
 
     /**
@@ -1544,23 +1546,24 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount            Amount of a Transaction.
+     * @param amountFrom        Amount of a Transaction begging of a search range.
+     * @param amountTo			Amount of a Transaction end of a search range. 
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
      * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
      *         with the Effective Dates that fall into the specified range exists.
      */
-    private boolean transactionExistsInternal(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo) {
+    private boolean transactionExistsInternal(String accountId, String transactionTypeId, BigDecimal amountFrom, BigDecimal amountTo, Date effectiveDateFrom, Date effectiveDateTo) {
 
         // Create a query that may contain some of the parameters. "accountId" and "transactionType" are required
         StringBuilder builder = new StringBuilder("select 1 from Transaction t where t.account.id = :accountId " +
                 " and t.transactionType.id.id = :transactionTypeId");
 
-        boolean hasAmount = (amount != null);
+        boolean hasAmounts = (amountFrom != null) && (amountTo != null);
         boolean hasDates = (effectiveDateFrom != null) && (effectiveDateTo != null);
 
-        if (hasAmount) {
-            builder.append(" and t.amount = :amount");
+        if (hasAmounts) {
+            builder.append(" and t.amount between :amountFrom and :amountTo");
         }
 
         if (hasDates) {
@@ -1569,12 +1572,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         // Create a Query:
         Query query = em.createQuery(builder.toString());
+        
         query.setParameter("accountId", accountId);
         query.setParameter("transactionTypeId", transactionTypeId);
         query.setMaxResults(1);
 
-        if (amount != null) {
-            query.setParameter("amount", amount);
+        if (hasAmounts) {
+            query.setParameter("amountFrom", amountFrom);
+            query.setParameter("amountTo", amountTo);
         }
 
         if (hasDates) {
