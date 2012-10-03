@@ -128,7 +128,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param transactionTypeId The first part of TransactionTypeId PK, the second part (sub-code) will be calculated
      *                          based on the effective date
      * @param userId            Account ID
-     * @param effectiveDate     Transaction effective Date
+     * @param effectiveDate     Transaction effective date
      * @param amount            Transaction amount
      * @return new Transaction instance
      */
@@ -1299,15 +1299,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         TransactionTypeId creditTypeId = transaction1.getTransactionType().getId();
         TransactionTypeId debitTypeId = transaction2.getTransactionType().getId();
 
-        Query query =
-                em.createQuery("select cp from CreditPermission cp where cp.creditType.id = :id " +
-                        " and cp.priority between :priorityFrom and :priorityTo");
-
-        query.setParameter("id", creditTypeId);
-        query.setParameter("priorityFrom", priorityFrom);
-        query.setParameter("priorityTo", priorityTo);
-
-        List<CreditPermission> creditPermissions = query.getResultList();
+        List<CreditPermission> creditPermissions = getCreditPermissions(creditTypeId, priorityFrom, priorityTo);
 
         if (creditPermissions != null) {
             for (CreditPermission creditPermission : creditPermissions) {
@@ -1320,6 +1312,50 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         return false;
+    }
+
+    /**
+     * Returns a list of credit permissions for the given transaction type.
+     *
+     * @param transactionTypeId Transaction Type ID
+     * @return list of CreditPermission instances
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public List<CreditPermission> getCreditPermissions(TransactionTypeId transactionTypeId) {
+        return getCreditPermissions(transactionTypeId, null, null);
+    }
+
+    /**
+     * Returns a list of credit permissions for the given transaction type and priority range.
+     *
+     * @param transactionTypeId Transaction Type ID
+     * @param priorityFrom      lower priority
+     * @param priorityTo        upper priority
+     * @return list of CreditPermission instances
+     */
+    @Override
+    public List<CreditPermission> getCreditPermissions(TransactionTypeId transactionTypeId,
+                                                       Integer priorityFrom, Integer priorityTo) {
+        StringBuilder queryBuilder =
+                new StringBuilder("select cp from CreditPermission cp where cp.creditType.id = :typeId");
+
+        if (priorityFrom != null && priorityTo != null) {
+            queryBuilder.append(" and cp.priority between :priorityFrom and :priorityTo");
+        }
+
+        queryBuilder.append(" order by cp.priority desc");
+
+        Query query = em.createQuery(queryBuilder.toString());
+
+        query.setParameter("typeId", transactionTypeId);
+
+        if (priorityFrom != null && priorityTo != null) {
+            query.setParameter("priorityFrom", priorityFrom);
+            query.setParameter("priorityTo", priorityTo);
+        }
+
+        return query.getResultList();
     }
 
     /**

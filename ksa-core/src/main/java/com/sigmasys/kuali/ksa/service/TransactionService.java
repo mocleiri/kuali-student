@@ -402,9 +402,9 @@ public interface TransactionService {
     /**
      * Determines if the transaction is allowed for the given account ID, transaction type and effective date
      *
-     * @param accountId       Account ID
+     * @param accountId         Account ID
      * @param transactionTypeId Transaction Type ID
-     * @param effectiveDate   Effective Date
+     * @param effectiveDate     Effective Date
      * @return true/false
      */
     boolean isTransactionAllowed(String accountId, String transactionTypeId, Date effectiveDate);
@@ -418,65 +418,85 @@ public interface TransactionService {
     List<Transaction> findTransactionsByStatementPattern(String pattern);
 
     /**
-        * The logic of this is very similar to reverseTransaction(), except a partial write off is allowed, and only
-        * credits can be written off. Also, the institution can choose to write off charges to a different general
-        * ledger account, instead of the original, permitting the writing off to a general "bad debt" account, if they
-        * so choose.
-        *
-        * @param transactionId Transaction ID
-        * @param transactionTypeId TransactionType ID
-        * @param memoText Memo test
-        * @param statementPrefix Transaction statement prefix
-        * @return a write-off transaction instance
-        */
+     * The logic of this is very similar to reverseTransaction(), except a partial write off is allowed, and only
+     * credits can be written off. Also, the institution can choose to write off charges to a different general
+     * ledger account, instead of the original, permitting the writing off to a general "bad debt" account, if they
+     * so choose.
+     *
+     * @param transactionId     Transaction ID
+     * @param transactionTypeId TransactionType ID
+     * @param memoText          Memo test
+     * @param statementPrefix   Transaction statement prefix
+     * @return a write-off transaction instance
+     */
     Transaction writeOffTransaction(Long transactionId, TransactionTypeId transactionTypeId,
-                                       String memoText, String statementPrefix);
+                                    String memoText, String statementPrefix);
 
 
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @return <code>true</code> if at least one Transaction of the given type for the given account exists.
      */
     @WebMethod(exclude = true)
     boolean transactionExists(String accountId, String transactionTypeId);
-    
+
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
-     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
-     * @return <code>true</code> if at least one Transaction of the given type for the given account 
-     * 	with the Effective Dates that fall into the specified range exists.
+     * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type for the given account
+     *         with the Effective Dates that fall into the specified range exists.
      */
     @WebMethod(exclude = true)
     boolean transactionExists(String accountId, String transactionTypeId, Date effectiveDateFrom, Date effectiveDateTo);
-    
+
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount Amount of a Transaction.
+     * @param amount            Amount of a Transaction.
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
      */
     @WebMethod(exclude = true)
     boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount);
-    
+
     /**
      * Checks if Transactions that meet the specified search criteria exist.
-     * 
-     * @param accountId Account ID.
+     *
+     * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
-     * @param amount Amount of a Transaction.
+     * @param amount            Amount of a Transaction.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
-     * @param effectiveDateTo Transaction Effective Date end range (inclusive).
-     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account 
-     * 	with the Effective Dates that fall into the specified range exists.
+     * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
+     * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
+     *         with the Effective Dates that fall into the specified range exists.
      */
     boolean transactionExists(String accountId, String transactionTypeId, BigDecimal amount, Date effectiveDateFrom, Date effectiveDateTo);
+
+    /**
+     * Returns a list of credit permissions for the given transaction type.
+     *
+     * @param transactionTypeId Transaction Type ID
+     * @return list of CreditPermission instances
+     */
+    @WebMethod(exclude = true)
+    List<CreditPermission> getCreditPermissions(TransactionTypeId transactionTypeId);
+
+    /**
+     * Returns a list of credit permissions for the given transaction type and priority range.
+     *
+     * @param transactionTypeId Transaction Type ID
+     * @param priorityFrom      lower priority
+     * @param priorityTo        upper priority
+     * @return list of CreditPermission instances
+     */
+    List<CreditPermission> getCreditPermissions(TransactionTypeId transactionTypeId,
+                                                Integer priorityFrom, Integer priorityTo);
 }
