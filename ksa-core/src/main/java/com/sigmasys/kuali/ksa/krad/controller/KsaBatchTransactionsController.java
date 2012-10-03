@@ -118,6 +118,10 @@ public class KsaBatchTransactionsController extends GenericSearchController {
                int endIndex = processResponse.indexOf(endValue);
                String batchStatus = processResponse.substring(begIndex, endIndex);
                processMsg = "Transaction(s) Processing " + batchStatus;
+
+               // TODO get the number of accepted vs failed
+
+
                form.setUploadProcessState(processMsg);
             } catch (Exception exp) {
                String expMsg = exp.getMessage();

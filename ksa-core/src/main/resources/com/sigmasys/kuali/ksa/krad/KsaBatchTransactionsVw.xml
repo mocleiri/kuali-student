@@ -117,13 +117,8 @@
                                           p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                                 </property>-->
                             </bean>
-                            <bean parent="Uif-InputField" p:propertyName="uploadProcessState" p:maxLength="30">
-                                <property name="bindingInfo.bindToForm" value="true"/>
-                                <property name="readOnly" value="true"/>
-                                <property name="control">
-                                    <bean parent="Uif-TextControl" p:size="31"/>
-                                </property>
-                            </bean>
+                            <!--  Status message -->
+                            <bean parent="Uif-MessageField" p:messageText="'@{uploadProcessState}'"/>
                         </list>
                     </property>
                 </bean>

@@ -11,6 +11,11 @@
      margin-top:20px;
  }
 
+ .ksa-group-border {
+     border: 1px solid #DDDDDD;
+     background-color: #F3F3F3;
+     padding: 5px;
+ }
  /*
     JET CSS End
  */

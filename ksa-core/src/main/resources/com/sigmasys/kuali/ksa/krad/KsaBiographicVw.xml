@@ -28,6 +28,7 @@
 
     <bean id="KsaBiographicInformationView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Biographic Information"/>
+        <property name="entryPageId" value="StudentSummaryPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
@@ -49,14 +50,15 @@
                         </list>
                     </property>
                 </bean>
+                <!-- Add Person page  -->
                 <bean parent="Uif-Page" p:id="BiographicAddPersonPage">
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="savePerson" p:actionLabel="Add"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="editPerson" p:actionLabel="Edit"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="deletePerson" p:actionLabel="Delete"/>
+                                    <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPerson"
+                                          p:actionLabel="Add">
+                                    </bean>
                                 </list>
                             </property>
                         </bean>
@@ -67,14 +69,14 @@
                         </list>
                     </property>
                 </bean>
+                <!-- Edit Person  -->
                 <bean parent="Uif-Page" p:id="BiographicEDPersonPage">
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="savePostal" p:actionLabel="Add"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="editPostal" p:actionLabel="Edit"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="deletePostal" p:actionLabel="Delete"/>
+                                    <bean parent="Uif-ActionLink" p:methodToCall="updatePerson"
+                                          p:actionLabel="Edit Person"/>
                                 </list>
                             </property>
                         </bean>
@@ -85,15 +87,18 @@
                         </list>
                     </property>
                 </bean>
+                <!-- Add/Edit Postal  -->
                 <bean parent="Uif-Page" p:id="biographicInformationPostalADE">
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="saveElectronicContact" p:actionLabel="Add"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="editElectronicContact" p:actionLabel="Edit"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="deleteElectronicContact" p:actionLabel="Delete"/>
+                                    <bean parent="Uif-ActionLink" p:methodToCall="insertPostal"
+                                          p:actionLabel="Add"/>
+                                    <bean parent="Uif-ActionLink" p:methodToCall="updatePostal"
+                                          p:actionLabel="Update"/>
                                 </list>
+
                             </property>
                         </bean>
                     </property>
@@ -103,14 +108,16 @@
                         </list>
                     </property>
                 </bean>
+                <!-- Add/Edit Electronic Contact -->
                 <bean parent="Uif-Page" p:id="biographicInformationElectronicContactADE">
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="saveElectronicContact" p:actionLabel="Add"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="editElectronicContact" p:actionLabel="Edit"/>
-                                    <bean parent="Uif-ActionLink" p:methodToCall="deleteElectronicContact" p:actionLabel="Delete"/>
+                                    <bean parent="Uif-ActionLink" p:methodToCall="insertElectronicContact"
+                                          p:actionLabel="Add"/>
+                                    <bean parent="Uif-ActionLink" p:methodToCall="updateElectronicContact"
+                                          p:actionLabel="Update"/>
                                 </list>
                             </property>
                         </bean>
@@ -130,9 +137,6 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaBiographicForm"/>
     </bean>
 
-
-
-
     <!--
     ********************************************************************************************************************
                                  Biographic Information Summary section
@@ -141,16 +145,22 @@
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationSummarySection" parent="Uif-VerticalBoxSection"
-          p:title="@{selectedPersonName}">
+          p:title="@{searchValue}">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
                 <ref bean="biographicInformationPersonSection" />
-                <ref bean="bioAuditPersonInformationSection" />
+                <!--<ref bean="bioAuditPersonInformationSection" />-->
+                <!-- Use this to display for Add the individual field values for a new row -->
+                <bean parent="Uif-LinkField" p:linkText="Add Postal" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE"/>
                 <ref bean="biographicInformationPostalSection" />
-                <ref bean="bioAuditPostalInformationSection" />
+                <!--<ref bean="bioAuditPostalInformationSection" />-->
+                <!-- Use this to display for Add the individual field values for a new row -->
+                <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE"/>
                 <ref bean="biographicInformationElectronicContactSection" />
-                <ref bean="bioAuditElectronicContactInformationSection" />
+                <!--<ref bean="bioAuditElectronicContactInformationSection" />-->
             </list>
         </property>
     </bean>
@@ -158,53 +168,67 @@
     <!--
     ********************************************************************************************************************
                                  Biographic Information Person section
-    A summary of the person information and a control set to add/edit/delete along with audit information
+    A summary of the person information and a control set to Add/Edit along with audit information
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationPersonSection" parent="Uif-VerticalBoxSubSection"
-          p:title="@{selectedPersonName}">
+          p:title="@{searchValue}">
         <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="kimNameType" p:label="Name Type"
-                      p:instructionalText="Type" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="kimNameType"
+                      p:label="Name Type"
+                      p:instructionalText="Type"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="firstName" p:label="First Name"
-                      p:instructionalText="First" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="firstName"
+                      p:label="First Name"
+                      p:instructionalText="First"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="middleName" p:label="Middle Name"
-                      p:instructionalText="Middle" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="middleName"
+                      p:label="Middle Name"
+                      p:instructionalText="Middle"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="lastName" p:label="Last Name"
-                      p:instructionalText="Last" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="lastName"
+                      p:label="Last Name"
+                      p:instructionalText="Last"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="suffix" p:label="Suffix"
-                      p:instructionalText="Suffix" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="suffix"
+                      p:label="Suffix"
+                      p:instructionalText="Suffix"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="title" p:label="Title"
-                      p:instructionalText="Title" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="title"
+                      p:label="Title"
+                      p:instructionalText="Title"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isPersonDefault" p:label="Default"
-                      p:instructionalText="Default value" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="personDefault"
+                      p:label="Default"
+                      p:instructionalText="Default value"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
@@ -213,10 +237,10 @@
                     <property name="items">
                         <list>
                             <!-- Use this to display for Add the individual field values for a new row -->
-                            <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                            <bean parent="Uif-LinkField" p:linkText="Add Person" p:target="_self"
                                   p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicAddPersonPage"/>
-                            <!-- Use this to display for Edit/Delete the individual field values for a selected row -->
-                            <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                            <!-- Use this to display for Edit the individual field values for a selected row -->
+                            <bean parent="Uif-LinkField" p:linkText="Edit Person" p:target="_self"
                                   p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicEDPersonPage"/>
                         </list>
                     </property>
@@ -234,25 +258,32 @@
     <bean id="bioAuditPersonInformationSection" parent="Uif-Disclosure-VerticalBoxSubSection"
           p:title="Audit Information"
           p:instructionalText="">
+        <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="auditPersonCreator" p:label="Creator"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="auditPersonCreator"
+                      p:label="Creator"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="auditPersonEditor" p:label="Editor"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="auditPersonEditor"
+                      p:label="Editor"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="auditPersonLastUpdateDate" p:label="Last Update Date"
-                      p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="auditPersonLastUpdateDate"
+                      p:label="Last Update Date"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
@@ -265,7 +296,7 @@
     <!--
     ********************************************************************************************************************
                                  Biographic Information Postal section
-    A list of postal address information and a control set to drill down to add/edit/delete along with audit information
+    A list of postal address information and a control set to drill down to add/edit along with audit information
     We will need to create a list of composite postal addresses so the collectionObjectClass will be different
     May have to add individual fields instead of computing the combined postal address
     ********************************************************************************************************************
@@ -287,29 +318,29 @@
         <property name="items">
             <list>
                 <!-- primary address, city, state, postal code, country -->
-                <!-- address 2 and 3 will be displayed in the add/edit/delete page -->
-                <bean parent="Uif-InputField" p:label="Postal Addresses" p:propertyName="compositeDefaultPostalAddress">
+                <!-- address 2 and 3 will be displayed in the add/edit page -->
+                <bean parent="Uif-InputField" p:propertyName="compositeDefaultPostalAddress"
+                      p:label="Postal Addresses" >
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="200" p:maxLength="199"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isPostalDefault" p:label="Default"
-                      p:instructionalText="Default value" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="postalDefault"
+                      p:label="Default"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
                 <!-- Use this to display for Add the individual field values for a new row -->
-                <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE"/>
-                <!-- Use this to display for Edit/Delete the individual field values for a selected row -->
-                <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+<!--                <bean parent="Uif-LinkField" p:linkText="Add" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE"/>-->
+                <!-- Use this to display for Edit the individual field values for a selected row -->
+                <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
                       p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>
-
-
 
     <!--
     ********************************************************************************************************************
@@ -320,25 +351,32 @@
     <bean id="bioAuditPostalInformationSection" parent="Uif-Disclosure-VerticalBoxSubSection"
           p:title="Audit Information"
           p:instructionalText="">
+        <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="auditPostalCreator" p:label="Creator"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="auditPostalCreator"
+                      p:label="Creator"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="auditPostalEditor" p:label="Editor"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="auditPostalEditor"
+                      p:label="Editor"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="auditPostalLastUpdateDate" p:label="Last Update Date"
-                      p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="auditPostalLastUpdateDate"
+                      p:label="Last Update Date"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
@@ -351,14 +389,14 @@
     <!--
     ********************************************************************************************************************
                                  Biographic Information Electronic Contact section
-    A list of electronic contact information and a control set to drill down to add/edit/delete along with audit information
+    A list of electronic contact information and a control set to drill down to add/edit along with audit information
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationElectronicContactSection" parent="Uif-Disclosure-TableCollectionSection"
           p:layoutManager.numberOfColumns="4"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:title="Postal Addresses"
+          p:title="Electronic Contact"
           p:instructionalText="">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.ElectronicContact"/>
@@ -370,22 +408,23 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Electronic Contacts" p:propertyName="compositeElectronicContacts">
+                <bean parent="Uif-InputField" p:propertyName="compositeElectronicContacts"
+                      p:label="Electronic Contacts">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="200" p:maxLength="199"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isElectronicContactDefault" p:label="Default"
-                      p:instructionalText="Default value" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="electronicContactDefault"
+                      p:label="Default">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
                 <!-- Use this to display for Add the individual field values for a new row -->
-                <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE"/>
-                <!-- Use this to display for Edit/Delete the individual field values for a selected row -->
-                <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                <!--<bean parent="Uif-LinkField" p:linkText="Add" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE"/>-->
+                <!-- Use this to display for Edit the individual field values for a selected row -->
+                <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
                       p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE&amp;id=@{#line.id}"/>
             </list>
         </property>
@@ -400,17 +439,20 @@
     <bean id="bioAuditElectronicContactInformationSection" parent="Uif-Disclosure-VerticalBoxSubSection"
           p:title="Audit Information"
           p:instructionalText="">
+        <property name="disclosure.render" value="false"/>
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="auditElectronicContactCreator" p:label="Creator"
+                <bean parent="Uif-InputField" p:propertyName="auditElectronicContactCreator"
+                      p:label="Creator"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="auditElectronicContactEditor" p:label="Editor"
+                <bean parent="Uif-InputField" p:propertyName="auditElectronicContactEditor"
+                      p:label="Editor"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -431,59 +473,68 @@
 
     <!--
     ********************************************************************************************************************
-                                 Biographic Information PPerson Add/Edit/Delete section
-    A postal address field set and a control set to save Add/Edit/Delete actions
+                                 Biographic Information Person Add/Edit section
+    A postal address field set and a control set to save Add/Edit actions
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationPersonAEDSection" parent="Uif-GridSection"
-          p:title="@{selectedPersonName}" p:instructionalText="Add Edit or Delete a Person">
+          p:title="@{searchValue}" p:instructionalText="Add or Edit a Person">
         <property name="layoutManager">
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="2"/>
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="kimNameType" p:label="Name Type"
-                      p:instructionalText="Type" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="kimNameType"
+                      p:label="Name Type"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="firstName" p:label="First Name"
-                      p:instructionalText="First" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="firstName"
+                      p:label="First Name"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="middleName" p:label="Middle Name"
-                      p:instructionalText="Middle" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="middleName"
+                      p:label="Middle Name"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="lastName" p:label="Last Name"
-                      p:instructionalText="Last" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="lastName"
+                      p:label="Last Name"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="suffix" p:label="Suffix"
-                      p:instructionalText="Suffix" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="suffix"
+                      p:label="Suffix"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="title" p:label="Title"
-                      p:instructionalText="Title" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="title"
+                      p:label="Title"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isPersonDefault" p:label="Default"
-                      p:instructionalText="Default value" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="personDefault"
+                      p:label="Default"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
             </list>
         </property>
     </bean>
@@ -491,77 +542,95 @@
     <!--
     ********************************************************************************************************************
                                  Biographic Information Postal section
-    A postal address field set and a control set to save Add/Edit/Delete actions
+    A postal address field set and a control set to save Add/Edit actions
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationPostalADESection" parent="Uif-VerticalBoxSubSection"
-          p:title="@{selectedPersonName}">
+          p:title="@{searchValue}">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="addressType" p:label="Address Type"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="addressType"
+                      p:label="Address Type"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="address1" p:label="Line 1"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="address1"
+                      p:label="Line 1"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="address2" p:label="Line 2"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="address2"
+                      p:label="Line 2"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="address3" p:label="Address 3"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="address3"
+                      p:label="Address 3"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="city" p:label="City"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="city"
+                      p:label="City"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="stateCode" p:label="State Code"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="stateCode"
+                      p:label="State Code"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="postalCode" p:label="Postal Code"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="postalCode"
+                      p:label="Postal Code"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="countryCode" p:label="Country Code"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="countryCode"
+                      p:label="Country Code"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isPostalDefault" p:label="Default"
-                      p:instructionalText="Default value" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="postalDefault"
+                      p:label="Default"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
             </list>
         </property>
     </bean>
@@ -569,30 +638,36 @@
     <!--
     ********************************************************************************************************************
                                  Biographic Information Electronic Contact section
-    An electronic contact field set and a control set to save add/Edit/Delete actions
+    An electronic contact field set and a control set to save Add/Edit actions
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationElectronicContactADESection" parent="Uif-VerticalBoxSubSection"
-          p:title="@{selectedPersonName}">
+          p:title="@{searchValue}">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="electronicContactType" p:label="Address Type"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="electronicContactType"
+                      p:label="Address Type"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="email" p:label="Email"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="email"
+                      p:label="Email"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="phoneType" p:label="Phone Type"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="phoneType"
+                      p:label="Phone Type"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
@@ -605,26 +680,33 @@
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="phoneNumber" p:label="Phone Number"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="phoneNumber"
+                      p:label="Phone Number"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="phoneExtension" p:label="Phone Extension"
-                      p:maxLength="20" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="phoneExtension"
+                      p:label="Phone Extension"
+                      p:maxLength="20"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="isElectronicContactDefault" p:label="Default"
-                      p:instructionalText="Default value" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="electronicContactDefault"
+                      p:label="Default"
+                      p:fieldLabel.renderColon="true">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
             </list>
         </property>
     </bean>

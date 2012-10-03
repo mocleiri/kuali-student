@@ -8,6 +8,7 @@ import com.sigmasys.kuali.ksa.model.Memo;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by: dmulderink on 9/28/12 at 2:25 PM
@@ -17,6 +18,8 @@ public class KsaQuickViewForm extends AbstractViewModel {
    private static final long serialVersionUID = -7525378097732916418L;
 
    private Account account;
+
+   private String userId;
 
    // Account Overview
 
@@ -66,6 +69,17 @@ public class KsaQuickViewForm extends AbstractViewModel {
 
    private List<Memo> memos;
 
+   private Date memoEffectiveDate;
+
+   private Date memoExpirationDate;
+
+   private String memoAccessLevel;
+
+   private String previousMemo;
+
+   private String nextMemo;
+
+   private String memoText;
    /*
       Get / Set methods
     */
@@ -201,5 +215,61 @@ public class KsaQuickViewForm extends AbstractViewModel {
 
    public void setMemos(List<Memo> memos) {
       this.memos = memos;
+   }
+
+   public String getUserId() {
+      return userId;
+   }
+
+   public void setUserId(String userId) {
+      this.userId = userId;
+   }
+
+   public Date getMemoEffectiveDate() {
+      return memoEffectiveDate;
+   }
+
+   public void setMemoEffectiveDate(Date memoEffectiveDate) {
+      this.memoEffectiveDate = memoEffectiveDate;
+   }
+
+   public Date getMemoExpirationDate() {
+      return memoExpirationDate;
+   }
+
+   public void setMemoExpirationDate(Date memoExpirationDate) {
+      this.memoExpirationDate = memoExpirationDate;
+   }
+
+   public String getPreviousMemo() {
+      return previousMemo;
+   }
+
+   public void setPreviousMemo(String previousMemo) {
+      this.previousMemo = previousMemo;
+   }
+
+   public String getNextMemo() {
+      return nextMemo;
+   }
+
+   public void setNextMemo(String nextMemo) {
+      this.nextMemo = nextMemo;
+   }
+
+   public String getMemoText() {
+      return memoText;
+   }
+
+   public void setMemoText(String memoText) {
+      this.memoText = memoText;
+   }
+
+   public String getMemoAccessLevel() {
+      return memoAccessLevel;
+   }
+
+   public void setMemoAccessLevel(String memoAccessLevel) {
+      this.memoAccessLevel = memoAccessLevel;
    }
 }

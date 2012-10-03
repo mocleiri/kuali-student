@@ -46,7 +46,7 @@
                 <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
                     <property name="items">
                         <list>
-                            <!-- TODO p:actionParameters="userId:@{#account.id}"-->
+                            <!-- TODO p:actionParameters="userId:@{account.id}"-->
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
 
                                   p:actionLabel="Refresh">
@@ -55,6 +55,20 @@
                         </list>
                     </property>
                 </bean>
+                <bean parent="Uif-Page" p:id="QuickViewAddMemoPage" p:title="Add Memo">
+                    <property name="items">
+                        <list>
+                            <!-- TODO p:actionParameters="userId:@{#account.id}"-->
+                            <ref bean="quickViewAddMemoSection"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+
+        <property name="additionalCssFiles">
+            <list>
+                <value>css/ksa.css</value>
             </list>
         </property>
 <!--
@@ -74,7 +88,7 @@
     -->
     <bean id="quickViewSection" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="@{searchValue}">
+          p:title="@{userId}">
         <property name="instructionalText" value=""/>
         <property name="disclosure.render" value="false"/>
         <property name="items">
@@ -93,12 +107,12 @@
     *******************************************************************************************************************
                                             Account Overview group
     A summary view of an account, drill down to the account overview detail view
-    TODO p:styleClasses="group-border add to the BoxGroup
+    TODO p:styleClasses="ksa-group-border add to the BoxGroup
     ********************************************************************************************************************
     -->
     <bean id="accountOverviewGroup" parent="Uif-VerticalBoxGroup"
-            p:instructionalText="Account Overview">
-
+            p:instructionalText="Account Overview"
+            >
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
@@ -334,7 +348,7 @@
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <!-- TODO p:actionParameters="userId:@{#account.id}"-->
+                <!-- TODO p:actionParameters="userId:@{account.id}" p:actionParameters="userId:@{userId}"-->
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageDebt"
 
                       p:actionLabel="Age Transactions">
@@ -404,9 +418,90 @@
                 <bean parent="Uif-Link" p:linkText="Add a Flag" p:target="_self"
                       p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add Memo" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                      p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Add Memo page section
+    Add a memo
+    ********************************************************************************************************************
+    -->
+    <bean id="quickViewAddMemoSection" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL">
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="memoEffectiveDate"
+                      p:label="Effective Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memoExpirationDate"
+                      p:label="Expiration Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memoAccessLevel"
+                      p:label="Level">
+                    <property name="control">
+                        <bean parent="Uif-HorizontalRadioControl">
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="O1" p:value="Level 1"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="O2" p:value="Level 2"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="O3" p:value="Level 3"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="O4" p:value="Level 4"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="O5" p:value="Level 5"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="previousMemo"
+                      p:label="Previous Memo ID"
+                      p:labelPlacement="TOP"
+                      p:maxLength="19" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="nextMemo"
+                      p:label="Expiration Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="19" >
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memoText"
+                      p:label="Text"
+                      p:labelPlacement="TOP">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Type in information text here..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addMemo"
+                      p:actionLabel="Add Memo">
+                    <property name="actionImage">
+                        <bean parent="Uif-Image"
+                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>

@@ -123,4 +123,111 @@ public class KsaBiographicController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertPerson")
+   @Transactional(readOnly = false)
+   public ModelAndView addPerson(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                 HttpServletRequest request, HttpServletResponse response) {
+
+      // do save stuff...
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePerson")
+   @Transactional(readOnly = false)
+   public ModelAndView updatePerson(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                    HttpServletRequest request, HttpServletResponse response) {
+
+      // do save stuff...
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertPostal")
+   @Transactional(readOnly = false)
+   public ModelAndView insertPostal(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                    HttpServletRequest request, HttpServletResponse response) {
+
+      // do save stuff...
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePostal")
+   @Transactional(readOnly = false)
+   public ModelAndView updatePostal(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                    HttpServletRequest request, HttpServletResponse response) {
+
+      // do save stuff...
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertElectronicContact")
+   @Transactional(readOnly = false)
+   public ModelAndView insertElectronicContact(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                               HttpServletRequest request, HttpServletResponse response) {
+
+      // do save stuff...
+
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateElectronicContact")
+   @Transactional(readOnly = false)
+   public ModelAndView updateElectronicContact(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                               HttpServletRequest request, HttpServletResponse response) {
+
+      // do save stuff...
+
+      return getUIFModelAndView(form);
+   }   
 }

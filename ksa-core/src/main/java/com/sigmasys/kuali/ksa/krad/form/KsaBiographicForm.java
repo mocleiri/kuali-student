@@ -33,7 +33,7 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    private String suffix;
 
-   private boolean isPersonDefault;
+   private String personDefault;
 
    // PersonName fields concatenated
    private String compositePersonName;
@@ -55,7 +55,7 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    private Date auditPostalLastUpdateDate;
 
-   private boolean isElectronicDefault;
+   private String electronicContactDefault;
 
    private String auditElectronicContactCreator;
 
@@ -79,7 +79,7 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    private String countryCode;
 
-   private boolean isPostalDefault;
+   private String postalDefault;
 
    private String electronicContactType;
 
@@ -92,6 +92,12 @@ public class KsaBiographicForm extends AbstractViewModel {
    private String phoneNumber;
 
    private String phoneExtension;
+
+   private String statusMessage;
+
+   /*
+     Get / Set methods
+   */
 
    public List<PostalAddress> getPostalAddressList() {
       return postalAddressList;
@@ -157,12 +163,12 @@ public class KsaBiographicForm extends AbstractViewModel {
       this.suffix = suffix;
    }
 
-   public boolean isPersonDefault() {
-      return isPersonDefault;
+   public String getPersonDefault() {
+      return personDefault;
    }
 
-   public void setPersonDefault(boolean personDefault) {
-      isPersonDefault = personDefault;
+   public void setPersonDefault(String personDefault) {
+      this.personDefault = personDefault;
    }
 
    public String getCompositePersonName() {
@@ -237,12 +243,12 @@ public class KsaBiographicForm extends AbstractViewModel {
       this.auditPostalLastUpdateDate = auditPostalLastUpdateDate;
    }
 
-   public boolean isElectronicDefault() {
-      return isElectronicDefault;
+   public String getElectronicContactDefault() {
+      return electronicContactDefault;
    }
 
-   public void setElectronicDefault(boolean electronicDefault) {
-      isElectronicDefault = electronicDefault;
+   public void setElectronicContactDefault(String electronicContactDefault) {
+      this.electronicContactDefault = electronicContactDefault;
    }
 
    public String getAuditElectronicContactCreator() {
@@ -333,12 +339,12 @@ public class KsaBiographicForm extends AbstractViewModel {
       this.countryCode = countryCode;
    }
 
-   public boolean isPostalDefault() {
-      return isPostalDefault;
+   public String getPostalDefault() {
+      return postalDefault;
    }
 
-   public void setPostalDefault(boolean postalDefault) {
-      isPostalDefault = postalDefault;
+   public void setPostalDefault(String postalDefault) {
+      this.postalDefault = postalDefault;
    }
 
    public String getElectronicContactType() {
@@ -387,5 +393,13 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    public void setPhoneExtension(String phoneExtension) {
       this.phoneExtension = phoneExtension;
+   }
+
+   public String getStatusMessage() {
+      return statusMessage;
+   }
+
+   public void setStatusMessage(String statusMessage) {
+      this.statusMessage = statusMessage;
    }
 }

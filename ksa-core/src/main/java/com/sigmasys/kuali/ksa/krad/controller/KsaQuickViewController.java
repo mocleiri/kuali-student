@@ -18,9 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by: dmulderink on 9/28/12 at 2:25 PM
@@ -41,13 +39,22 @@ public class KsaQuickViewController extends GenericSearchController {
    protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
       KsaQuickViewForm form  = new KsaQuickViewForm();
       String userId = request.getParameter("userId");
-      Account accountById = accountService.getFullAccount(userId);
-      if (accountById == null) {
-         throw new IllegalStateException("Cannot find Account by ID = " + userId);
+
+      if (userId != null) {
+         Account accountById = accountService.getFullAccount(userId);
+         if (accountById == null) {
+            throw new IllegalStateException("Cannot find Account by ID = " + userId);
+         }
+         else {
+/*
+            HashMap userIdMap = new HashMap();
+            userIdMap.put("userId", userId);
+*/
+            form.setUserId(userId);
+            form.setAccount(accountById);
+         }
       }
-      else {
-         form.setAccount(accountById);
-      }
+
       return form;
    }
 
@@ -163,7 +170,7 @@ public class KsaQuickViewController extends GenericSearchController {
                                HttpServletRequest request, HttpServletResponse response) {
 
        String viewId = request.getParameter("viewId");
-       String userId = request.getParameter("id");
+       String userId = request.getParameter("userId");
 
        logger.info("View: " + viewId + " User: " + userId);
 
@@ -191,7 +198,7 @@ public class KsaQuickViewController extends GenericSearchController {
                                HttpServletRequest request, HttpServletResponse response) {
 
       // do aging of transactions stuff...
-      String accountId = form.getSearchValue();
+      String accountId = form.getAccount().getId();
       boolean ignoreDeferment =  Boolean.parseBoolean(form.getIgnoreDeferment());
 
       if (accountId != null && !accountId.trim().isEmpty()) {
@@ -201,6 +208,21 @@ public class KsaQuickViewController extends GenericSearchController {
          populateForm(accountId, form);
       }
 
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method=RequestMethod.POST, params="methodToCall=addMemo")
+   public ModelAndView addMemo(@ModelAttribute ("KualiForm") KsaQuickViewForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+      // do cancel stuff...
       return getUIFModelAndView(form);
    }
 
