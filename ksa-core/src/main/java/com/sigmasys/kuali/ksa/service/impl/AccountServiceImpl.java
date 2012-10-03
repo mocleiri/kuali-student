@@ -8,6 +8,7 @@ import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.transform.Ach;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.kim.api.identity.Person;
@@ -318,12 +319,14 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      */
     @Override
     public boolean accountExists(String userId) {
-        try {
-            return getOrCreateAccount(userId) != null;
-        } catch (UserNotFoundException e) {
-            logger.error(e.getMessage(), e);
-            return false;
+        if (StringUtils.isNotEmpty(userId)) {
+            try {
+                return getOrCreateAccount(userId) != null;
+            } catch (UserNotFoundException e) {
+                logger.error(e.getMessage(), e);
+            }
         }
+        return false;
     }
 
     /**
@@ -673,6 +676,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     /**
      * Returns the list of matching accounts for the given name pattern.
+     *
      * @param namePattern Name pattern
      * @return List of Account instances
      */
