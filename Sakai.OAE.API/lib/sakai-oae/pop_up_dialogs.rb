@@ -363,9 +363,13 @@ module AddContentContainer
   alias check_document check_content
 
   # Enters the specified filename in the file field.
-  def upload_file=(file_name)
+  #
+  # The method takes an optional file_path parameter.
+  # This allows the file_name parameter to be a variable
+  # distinct from the path containing the file.
+  def upload_file=(file_name, file_path="")
     self.file_field(:name=>"fileData").wait_until_present
-    self.file_field(:name=>"fileData").set(File.expand_path(File.dirname(__FILE__)) + "/../../data/sakai-oae/" + file_name)
+    self.file_field(:name=>"fileData").set(file_path + file_name)
   end
 
   # Clicks the "Done, add collected" button, then waits for
@@ -553,13 +557,15 @@ module ChangePicturePopUp
 
   # Custom Methods...
 
-  # Uploads the specified file name for the Avatar photo
-  def upload_a_new_picture(file_name)
+  # Uploads the specified file name for the Avatar photo.
+  # The method takes an optional file_path parameter that allows
+  # the file_name and its file_path to be distinct variables.
+  def upload_a_new_picture(file_name, file_path="")
     self.back_to_top
-    #puts(File.expand_path(File.dirname(__FILE__)) + "/../../data/sakai-oae/" + file_name)
-    self.pic_file_element.when_visible { @browser.file_field(:id=>"profilepicture").set("/Users/abrahamheward/Work/Kuali-Sakai-Functional-Test-Automation-Framework/data/sakai-oae/Mercury.gif") }#File.expand_path(File.dirname(__FILE__)) + "/../../data/sakai-oae/" + file_name) }
+    #puts(File.expand_path(file_path + file_name)
+    self.pic_file_element.when_visible { self.pic_file=(file_path + file_name) }
     self.upload
-    sleep 5
+    self.linger_for_ajax(5)
   end
 
   # Clicks the Save button for the Change Picture Pop Up.

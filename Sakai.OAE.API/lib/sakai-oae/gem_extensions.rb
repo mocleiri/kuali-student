@@ -16,11 +16,11 @@ module PageObject
   def name_li(name)
     self.li(:text=>/#{Regexp.escape(name)}/i)
   end
-  
+
   def method_missing(sym, *args, &block)
     @browser.send sym, *args, &block
   end
-  
+
   module Accessors
     
     # Use this for menus that require floating the mouse

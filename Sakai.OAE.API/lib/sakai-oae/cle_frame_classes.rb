@@ -4,12 +4,49 @@
 # Assessments pages - "Samigo", a.k.a., "Tests & Quizzes"
 #================
 
+# This is a module containing methods that are
+# common to all the question pages inside the
+# Assessment section of a Site.
+module QuestionHelpers
+
+  include PageObject
+
+  # Saves the question by clicking the Save button, then makes the determination
+  # whether to instantiate the EditAssessment class, or the EditQuestionPool class.
+  def save
+
+    quiz = frm.div(:class=>"portletBody").div(:index=>0).text
+    pool = frm.div(:class=>"portletBody").div(:index=>1).text
+
+    frm.button(:value=>"Save").click
+
+    if quiz =~ /^Assessments/
+      EditAssessment.new(@browser)
+    elsif pool =~ /^Question Pools/
+      EditQuestionPool.new(@browser)
+    else
+      puts "Unexpected text: "
+      p pool
+      p quiz
+    end
+
+  end
+
+  in_frame(:index=>1) do |frame|
+    link(:assessments, :text=>"Assessments", :frame=>frame)
+    link(:assessment_types, :text=>"Assessment Types", :frame=>frame)
+    link(:question_pools, :text=>"Question Pools", :frame=>frame)
+    link(:questions, :text=>/Questions:/, :frame=>frame)
+  end
+
+end
+
+
 # The Course Tools "Tests and Quizzes" page for a given site.
 # (Instructor view)
 class AssessmentsList
 
   include PageObject
-  include ToolsMenu
 
   # This method reads the type of assessment selected for creation,
   # then clicks the Create button and instantiates the proper class.
@@ -101,7 +138,6 @@ end
 class PreviewOverview
 
   include PageObject
-  include ToolsMenu
 
   # Scrapes the value of the due date from the page. Returns it as a string.
   def due_date
@@ -141,7 +177,6 @@ end
 class AssessmentSettings
 
   include PageObject
-  include ToolsMenu
 
   # Scrapes the Assessment Type from the page and returns it as a string.
   def assessment_type_title
@@ -241,7 +276,6 @@ end
 class AssessmentTotalScores
 
   include PageObject
-  include ToolsMenu
 
   # Gets the user ids listed in the
   # scores table, returns them as an Array
@@ -303,7 +337,6 @@ end
 class EditAssessment
 
   include PageObject
-  include ToolsMenu
 
   # Allows insertion of a question at a specified
   # point in the Assessment. Must include the
@@ -436,7 +469,6 @@ end
 class AddEditAssessmentPart
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Save button, then instantiates
   # the EditAssessment page class.
@@ -472,7 +504,6 @@ end
 class PublishAssessment
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Publish button, then
   # instantiates the AssessmentsList page class.
@@ -494,7 +525,6 @@ end
 class MultipleChoice
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:class=>"portletMainIframe") do |frame|
@@ -561,7 +591,6 @@ end
 class Survey
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -588,7 +617,6 @@ end
 class ShortAnswer
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -609,7 +637,6 @@ end
 class FillInBlank
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -630,7 +657,6 @@ end
 class NumericResponse
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -651,7 +677,6 @@ end
 class Matching
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -675,7 +700,6 @@ end
 class TrueFalse
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -701,7 +725,6 @@ end
 class AudioRecording
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -724,7 +747,6 @@ end
 class FileUpload
 
   include PageObject
-  include ToolsMenu
   include QuestionHelpers
 
   in_frame(:index=>1) do |frame|
@@ -744,7 +766,6 @@ end
 class EditAssessmentType
 
   include PageObject
-  include ToolsMenu
 
   in_frame(:index=>1) do |frame|
     #(:, :=>"", :frame=>frame)
@@ -761,7 +782,6 @@ end
 class AddQuestionPool
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Save button, then
   # instantiates the QuestionPoolsList page class.
@@ -793,7 +813,6 @@ end
 class EditQuestionPool
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Add Question link, then
   # instantiates the SelectQuestionType class.
@@ -827,7 +846,6 @@ end
 class QuestionPoolsList
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the edit button, then instantiates
   # the EditQuestionPool page class.
@@ -884,7 +902,6 @@ end
 class PoolImport
 
   include PageObject
-  include ToolsMenu
 
   # Enters the target file into the Choose File
   # file field. Note that it assumes the file is in
@@ -908,7 +925,6 @@ end
 class SelectQuestionType
 
   include PageObject
-  include ToolsMenu
 
   # Selects the specified question type from the
   # drop-down list, then instantiates the appropriate
@@ -947,7 +963,6 @@ end
 class TakeAssessmentList
 
   include PageObject
-  include ToolsMenu
 
   # Returns an array containing the assessment names that appear on the page.
   def available_assessments
@@ -999,7 +1014,6 @@ end
 class BeginAssessment
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Begin Assessment button.
   def begin_assessment
@@ -1076,7 +1090,6 @@ end
 class ConfirmSubmission
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Submit for Grading button and instantiates
   # the SubmissionSummary Class.
@@ -1091,7 +1104,6 @@ end
 class SubmissionSummary
 
   include PageObject
-  include ToolsMenu
 
   # Clicks the Continue button and instantiates
   # the TakeAssessmentList Class.
@@ -1118,7 +1130,7 @@ module AssignmentsMenu
   def add_assignment
     frm.link(:title=>"Add").click
     frm.frame(:id=>"new_assignment_instructions___Frame").td(:id=>"xEditingArea").wait_until_present
-    AssignmentsAdd.new @browser
+    AddAssignments.new @browser
   end
 
   def grade_report
@@ -1179,11 +1191,11 @@ class Assignments # Note that the OAE portion of this class can be found in the 
   alias list assignments_titles
 
   # Clicks the Edit link for the Assignment specified.
-  # Then it instantiates the AssignmentsAdd page class.
+  # Then it instantiates the AddAssignments page class.
   def edit_assignment(assignment_name)
     index = assignments_titles.index(assignment_name)
     frm.link(:text=>"Edit", :index=>index).click
-    AssignmentsAdd.new(@browser)
+    AddAssignments.new(@browser)
   end
 
   # Checks the appropriate checkbox, based on the specified assignment_name
@@ -1275,7 +1287,7 @@ class Assignments # Note that the OAE portion of this class can be found in the 
 end # Assignments
 
 #
-class AssignmentsAdd
+class AddAssignments
 
   include PageObject
   include AssignmentsMenu
@@ -1401,7 +1413,7 @@ class AssignmentsAdd
     checkbox(:all_instructors, :id=>"allPurpose_Instructor", :frame=>frame)
   end
 
-end # AssignmentsAdd
+end # AddAssignments
 
 #
 class AssignmentsPermissions
@@ -2023,12 +2035,13 @@ class AttachPageTools
     instantiate_class(:file_details)
   end
 
-  # Enters the specified file into the file field name (assuming it's in the
-  # data/sakai-oae folder or a subfolder therein)
+  # Enters the specified file into the file field name. Method takes an optional
+  # file_path parameter that it will pre-pend before the supplied filename, allowing
+  # the file name and path name to be distinct variables.
   #
   # Does NOT instantiate any class, so use only when no page refresh occurs.
-  def upload_file(filename)
-    frm.file_field(:id=>"upload").set(File.expand_path(File.dirname(__FILE__)) + "/../../data/sakai-oae/" + filename)
+  def upload_file(filename, file_path="")
+    frm.file_field(:id=>"upload").set(file_path + filename)
     if frm.div(:class=>"alertMessage").exist?
       sleep 2
       upload_file(filename)
@@ -2138,7 +2151,7 @@ class AssignmentsAttachments < AttachPageTools
 
     @@classes = {
         :this => "AssignmentsAttachments",
-        :parent => "AssignmentsAdd",
+        :parent => "AddAssignments",
         :second => "AssignmentStudent",
         :third => "AssignmentSubmission"
     }

@@ -12,7 +12,7 @@ class LoginPage
   include PageObject
   include HeaderFooterBar
   include GlobalMethods
-  
+
   # Page Objects
   div(:expand_categories, :class=>"categories_expand")
   
@@ -48,7 +48,7 @@ class AllCategoriesPage
   include PageObject
   include HeaderFooterBar
   include GlobalMethods
-  
+
   # Page Objects
   div(:page_title, :class=>"s3d-contentpage-title")
   
@@ -292,7 +292,7 @@ class CreateNewAccount
   
   include PageObject
   include HeaderFooterBar
-  
+
   text_field(:user_name, :id=>"username")
   text_field(:institution, :id=>"institution")
   # The password field's method name needs to be
@@ -369,7 +369,7 @@ class CreateGroups
   include PageObject
   include HeaderFooterBar
   include LeftMenuBarCreateWorlds
-  
+
   text_field(:title, :id=>"newcreategroup_title")
   text_field(:suggested_url, :id=>"newcreategroup_suggested_url")
   text_area(:description, :id=>"newcreategroup_description")
@@ -563,7 +563,7 @@ class ExploreCourses
   include ListWidget
   include ListGroups
   include SearchBar
-  
+
   # Returns the results header title (the text prior to the count of the results returned)
   def results_header
     top = self.div(:id=>"searchgroups_widget", :index=>1)
@@ -601,7 +601,7 @@ class ExploreResearch
   include ListWidget
   include ListProjects
   include SearchBar
-  
+
   # Returns the results header title (the text prior to the count of the results returned)
   def results_header
     top = self.div(:id=>"searchgroups_widget", :index=>2)
@@ -688,7 +688,7 @@ class MyMessages
   include GlobalMethods
   include HeaderFooterBar
   include LeftMenuBarYou
-  
+
   # Page Objects
   button(:accept_invitation, :text=>"Accept invitation")
   button(:ignore_invitation, :text=>"Ignore invitation")
@@ -930,7 +930,7 @@ class MyProfileBasicInfo
   include GlobalMethods
   include HeaderFooterBar
   include LeftMenuBarYou
-  
+
   # Basic Information
   text_field(:given_name, :name=>"firstName")
   text_field(:family_name, :id=>"lastName")
@@ -987,7 +987,7 @@ class MyProfileAboutMe
   include GlobalMethods
   include HeaderFooterBar
   include LeftMenuBarYou
-  
+
   text_area(:about_Me, :id=>"aboutme")
   text_area(:academic_interests, :id=>"academicinterests")
   text_area(:personal_interests, :id=>"personalinterests")
@@ -1008,7 +1008,7 @@ class MyProfileOnline
   include GlobalMethods
   include HeaderFooterBar
   include LeftMenuBarYou
-  
+
   button(:add_another_online, :text=>"Add another Online", :id=>"displayprofilesection_add_online")
   
   text_field(:site, :id=>/siteOnline_\d+/, :index=>-1)
@@ -1049,7 +1049,7 @@ class MyProfileContactInfo
   include GlobalMethods
   include HeaderFooterBar
   include LeftMenuBarYou
-  
+
   # Page Objects
   #button(:add_another, :text=>"Add another", :id=>/profilesection_add_link_\d/)
   text_field(:institution, :id=>"college", :name=>"college")
@@ -1107,7 +1107,7 @@ class MyProfilePublications
   include GlobalMethods
   include HeaderFooterBar
   include LeftMenuBarYou
-  
+
   # Page Objects
   
   button(:add_another_publication, :text=>"Add another publication", :id=>"displayprofilesection_add_publications")

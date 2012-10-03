@@ -145,14 +145,34 @@ module HeaderFooterBar
     self.class.class_eval { include AccountPreferencesPopUp }
   end
 
+  # Logs in with the specified username and password variables.
+  # Returns the MyDashboard class object.
+  def login(username, password)
+    self.div(:id=>"topnavigation_user_options_login_wrapper").fire_event("onmouseover")
+    self.text_field(:id=>"topnavigation_user_options_login_fields_username").set username
+    self.text_field(:name=>"topnav_login_password").set password
+    self.button(:id=>"topnavigation_user_options_login_button_login").click
+    sleep 3 # TODO : Make into a wait clause
+    if self.button(:id=>"emailverify_continue_button").present?
+      self.button(:id=>"emailverify_continue_button").click
+    end
+    self.linger_for_ajax(2)
+    MyDashboard.new @browser
+  end
+  alias sign_in login
+  alias log_in login
+
   # Clicks the Sign out command in the user menu in the header bar.
   # returns the LoginPage class object.
   def sign_out
     self.link(:id=>"topnavigation_user_options_name").fire_event("onmouseover")
     self.link(:id=>"subnavigation_logout_link").click
-    self.wait_for_ajax
+    self.link(:text=>"Explore").wait_until_present
+    self.linger_for_ajax(2)
     LoginPage.new @browser
   end
+  alias logout sign_out
+  alias log_out sign_out
 
   # Opens the Create + Add menu in the header bar,
   # clicks on the Add Content item, waits for the Pop Up
