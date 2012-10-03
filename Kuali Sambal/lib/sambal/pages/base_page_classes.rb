@@ -21,6 +21,8 @@ class PopulationsBase < BasePage
       element(:reference_population) { |b| b.frm.text_field(name: "document.newMaintainableObject.dataObject.referencePopulation.name") }
       element(:populations_table) { |b| b.frm.div(id: "populations_table").table(index: 0) }
 
+      element(:child_populations_table) { |b| b.frm.table(id: "u200") }
+
       action(:lookup_population) { |b| b.frm.link(id: "lookup_searchPopulation_add").click; b.loading.wait_while_present } 
       action(:lookup_ref_population) { |b| b.frm.link(id: "lookup_searchRefPopulation").click; b.loading.wait_while_present }
       action(:add) { |b| b.frm.div(id: "populations_table").button(text: "add").click; b.loading.wait_while_present; sleep 1.5 } #TODO - right now, this button has a different name in edit vs create screens
@@ -110,12 +112,12 @@ module PopulationEdit
 
   def child_populations
     names = []
-    frm.div(id: "populations_table").table(index: 0).rows[2..-1].each { |row| names << row.span.text }
-    names.delete_if { |name| name == "" }
+    child_populations_table.divs(class: "uif-field").each { |div| names << div.text }
+    names.delete_if { |name| name == "" || name == "delete" || name == "add" }
   end
 
   def remove_population(name)
-    populations_table.row(text: /#{name}/).button(index: 0).click
+    child_populations_table.row(text: /#{name}/).button(id: /deletePop_button/).click
     loading.wait_while_present
     wait_until { description.enabled? }
     sleep 2 #FIXME - Needed because otherwise the automation causes an application error
