@@ -461,7 +461,7 @@
                                     <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
                                     <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
                                     <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="5" p:value="Level 5"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L5" p:value="Level 5"/>
                                 </list>
                             </property>
                         </bean>
