@@ -30,312 +30,304 @@ public class KsaQuickViewController extends GenericSearchController {
     private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
 
     @Autowired
-   private InformationService informationService;
+    private InformationService informationService;
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
-      KsaQuickViewForm form  = new KsaQuickViewForm();
-      String userId = request.getParameter("userId");
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
+        KsaQuickViewForm form = new KsaQuickViewForm();
+        String userId = request.getParameter("userId");
 
-      if (userId != null) {
-         Account accountById = accountService.getFullAccount(userId);
-         if (accountById == null) {
-            throw new IllegalStateException("Cannot find Account by ID = " + userId);
-         }
-         else {
+        if (userId != null) {
+            Account accountById = accountService.getFullAccount(userId);
+            if (accountById == null) {
+                throw new IllegalStateException("Cannot find Account by ID = " + userId);
+            } else {
 /*
             HashMap userIdMap = new HashMap();
             userIdMap.put("userId", userId);
 */
-            form.setUserId(userId);
-            form.setAccount(accountById);
-         }
-      }
+                form.setUserId(userId);
+                form.setAccount(accountById);
+            }
+        }
 
-      return form;
-   }
+        return form;
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
-
-       String viewId = request.getParameter("viewId");
-       String userId = request.getParameter("userId");
-
-       logger.info("View: " + viewId + " User: " + userId);
-
-       if("KsaQuickView".equals(viewId)){
-           if(! accountService.accountExists(userId)){
-               throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
-           }
-
-           populateForm(userId, form);
-
-       }
-
-        return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-      // populate model for testing
-
-      return super.start(form, result, request, response);
-
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
-   @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        String viewId = request.getParameter("viewId");
+        String userId = request.getParameter("userId");
 
-      return getUIFModelAndView(form);
-   }
+        logger.info("View: " + viewId + " User: " + userId);
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaQuickViewForm form, BindingResult result,
+        if ("KsaQuickView".equals(viewId)) {
+            if (!accountService.accountExists(userId)) {
+                throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
+            }
+
+            populateForm(userId, form);
+
+        }
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+
+    @RequestMapping(params = "methodToCall=start")
+    public ModelAndView start(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+        // populate model for testing
+
+        return super.start(form, result, request, response);
+
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    @Transactional(readOnly = false)
+    public ModelAndView submit(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
+        // do submit stuff...
 
-       String viewId = request.getParameter("viewId");
-       String userId = request.getParameter("userId");
 
-       logger.info("View: " + viewId + " User: " + userId);
+        return getUIFModelAndView(form);
+    }
 
-       if("KsaQuickView".equals(viewId)){
-           if(! accountService.accountExists(userId)){
-               throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
-           }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
+    public ModelAndView save(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
 
-           populateForm(userId, form);
+        // do save stuff...
 
-       }
+        return getUIFModelAndView(form);
+    }
 
-       return getUIFModelAndView(form);
-   }
-
-   /**
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
-   public ModelAndView ageDebt(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
 
-      // do aging of transactions stuff...
-      String accountId = form.getAccount().getId();
-      boolean ignoreDeferment =  Boolean.parseBoolean(form.getIgnoreDeferment());
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
 
-      if (accountId != null && !accountId.trim().isEmpty()) {
-         // age the indexed Account Transactions
-         ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, ignoreDeferment);
-         // populate the form using the id
-         populateForm(accountId, form);
-      }
+        String viewId = request.getParameter("viewId");
+        String userId = request.getParameter("userId");
 
-      return getUIFModelAndView(form);
-   }
+        logger.info("View: " + viewId + " User: " + userId);
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=addMemo")
-   public ModelAndView addMemo(@ModelAttribute ("KualiForm") KsaQuickViewForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
+        if ("KsaQuickView".equals(viewId)) {
+            if (!accountService.accountExists(userId)) {
+                throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
+            }
 
-   /**
-    * Populate the form per business needs for a single account by the account identifier
-    *
-    * @param userId
-    * @param form
-    */
-   private void populateForm(String userId, KsaQuickViewForm form) {
+            populateForm(userId, form);
 
-      // store the selected account ID
-      //form.setSelectedId(id);
+        }
 
-      boolean ignoreDeferment =  Boolean.parseBoolean(form.getIgnoreDeferment());
+        return getUIFModelAndView(form);
+    }
 
-      Account accountById = accountService.getFullAccount(userId);
-      if (accountById == null) {
-         throw new IllegalStateException("Cannot find Account by ID = " + userId);
-      }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
+    public ModelAndView ageDebt(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
 
-      form.setAccount(accountById);
+        // do aging of transactions stuff...
+        String accountId = form.getAccount().getId();
+        boolean ignoreDeferment = Boolean.parseBoolean(form.getIgnoreDeferment());
 
-      ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            // age the indexed Account Transactions
+            ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, ignoreDeferment);
+            // populate the form using the id
+            populateForm(accountId, form);
+        }
 
-      List<Account> accountList = new ArrayList<Account>();
-      accountList.add(accountById);
+        return getUIFModelAndView(form);
+    }
 
-      // no session scope
-      //form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
-      // a list of one
-      //form.setAccountBrowseList(accountList);
-      form.setCompositeDefaultPersonName(accountById.getCompositeDefaultPersonName());
-      form.setCompositeDefaultPostalAddress(accountById.getCompositeDefaultPostalAddress());
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addMemo")
+    public ModelAndView addMemo(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
 
-      // Account Status summation totals
-      // charges by ID
-      //List<Charge> charges = transactionService.getCharges(id);
+    /**
+     * Populate the form per business needs for a single account by the account identifier
+     *
+     * @param userId
+     * @param form
+     */
+    private void populateForm(String userId, KsaQuickViewForm form) {
 
-      // payments by ID
-      //List<Payment> payments = transactionService.getPayments(id);
+        // store the selected account ID
+        //form.setSelectedId(id);
 
-      // deferments by ID
-      //List<Deferment> deferments = transactionService.getDeferments(id);
+        boolean ignoreDeferment = Boolean.parseBoolean(form.getIgnoreDeferment());
 
-      // set the form data
+        Account accountById = accountService.getFullAccount(userId);
+        if (accountById == null) {
+            throw new IllegalStateException("Cannot find Account by ID = " + userId);
+        }
 
-      //form.setCharges(charges);
-      //form.setPayments(payments);
-      //form.setDeferments(deferments);
+        form.setAccount(accountById);
 
-      BigDecimal pastDue = accountService.getOutstandingBalance(userId, ignoreDeferment) != null ? accountService.getOutstandingBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
-      BigDecimal balance = accountService.getDueBalance(userId, ignoreDeferment) != null ? accountService.getDueBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
-      BigDecimal future = accountService.getUnallocatedBalance(userId) != null ? accountService.getUnallocatedBalance(userId) : BigDecimal.ZERO;
-      BigDecimal deferment = accountService.getDeferredAmount(userId) != null ? accountService.getDeferredAmount(userId) : BigDecimal.ZERO;
+        ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
 
-      // Aging
+        List<Account> accountList = new ArrayList<Account>();
+        accountList.add(accountById);
 
-      Date lastAgeDate = chargeableAccount.getLateLastUpdate();
-      form.setLastAgeDate(lastAgeDate);
+        // no session scope
+        //form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
+        // a list of one
+        //form.setAccountBrowseList(accountList);
+        form.setCompositeDefaultPersonName(accountById.getCompositeDefaultPersonName());
+        form.setCompositeDefaultPostalAddress(accountById.getCompositeDefaultPostalAddress());
 
-      form.setAged30(chargeableAccount.getAmountLate1());
-      form.setAged60(chargeableAccount.getAmountLate2());
-      form.setAged90(chargeableAccount.getAmountLate3());
+        // Account Status summation totals
+        // charges by ID
+        //List<Charge> charges = transactionService.getCharges(id);
 
-      BigDecimal agedTotal = BigDecimal.ZERO;
+        // payments by ID
+        //List<Payment> payments = transactionService.getPayments(id);
 
-      if (chargeableAccount.getAmountLate1() != null &&
-            chargeableAccount.getAmountLate2() != null &&
-            chargeableAccount.getAmountLate3() != null) {
-         agedTotal = agedTotal.add(chargeableAccount.getAmountLate1());
-         agedTotal = agedTotal.add(chargeableAccount.getAmountLate2());
-         agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
-      }
+        // deferments by ID
+        //List<Deferment> deferments = transactionService.getDeferments(id);
 
-      form.setAgedTotal(agedTotal);
+        // set the form data
 
-      form.setPastDueAmount(pastDue);
-      form.setBalanceAmount(balance);
-      form.setFutureAmount(future);
-      form.setDefermentAmount(deferment);
+        //form.setCharges(charges);
+        //form.setPayments(payments);
+        //form.setDeferments(deferments);
 
-      // Alerts, Flags and Memos
-      List<Alert> alerts = informationService.getAlerts(userId);
+        BigDecimal pastDue = accountService.getOutstandingBalance(userId, ignoreDeferment) != null ? accountService.getOutstandingBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
+        BigDecimal balance = accountService.getDueBalance(userId, ignoreDeferment) != null ? accountService.getDueBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
+        BigDecimal future = accountService.getUnallocatedBalance(userId) != null ? accountService.getUnallocatedBalance(userId) : BigDecimal.ZERO;
+        BigDecimal deferment = accountService.getDeferredAmount(userId) != null ? accountService.getDeferredAmount(userId) : BigDecimal.ZERO;
 
-      AlertsFlagsMemos afm = new AlertsFlagsMemos();
-      // Alerts
-      for (Alert alert : alerts) {
+        // Aging
 
-         alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
-      }
+        Date lastAgeDate = chargeableAccount.getLateLastUpdate();
+        form.setLastAgeDate(lastAgeDate);
 
-      form.setAlerts(alerts);
+        form.setAged30(chargeableAccount.getAmountLate1());
+        form.setAged60(chargeableAccount.getAmountLate2());
+        form.setAged90(chargeableAccount.getAmountLate3());
 
-      // Flags
-      // Flags do not have a Text field and throws an exception when there are flag records TODO
-      List<Flag> flags = informationService.getFlags(userId);
+        BigDecimal agedTotal = BigDecimal.ZERO;
 
-      for (Flag flag : flags) {
+        if (chargeableAccount.getAmountLate1() != null &&
+                chargeableAccount.getAmountLate2() != null &&
+                chargeableAccount.getAmountLate3() != null) {
+            agedTotal = agedTotal.add(chargeableAccount.getAmountLate1());
+            agedTotal = agedTotal.add(chargeableAccount.getAmountLate2());
+            agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
+        }
 
-         flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
-      }
+        form.setAgedTotal(agedTotal);
 
-      form.setFlags(flags);
+        form.setPastDueAmount(pastDue);
+        form.setBalanceAmount(balance);
+        form.setFutureAmount(future);
+        form.setDefermentAmount(deferment);
 
-      List<Memo> memos = informationService.getMemos(userId);
+        // Alerts, Flags and Memos
+        List<Alert> alerts = informationService.getAlerts(userId);
 
-      // Memos
-      for (Memo memo : memos) {
+        AlertsFlagsMemos afm = new AlertsFlagsMemos();
+        // Alerts
+        for (Alert alert : alerts) {
 
-         memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
-      }
+            alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
+        }
 
-      form.setMemos(memos);
-   }
+        form.setAlerts(alerts);
+
+        // Flags
+        // Flags do not have a Text field and throws an exception when there are flag records TODO
+        List<Flag> flags = informationService.getFlags(userId);
+
+        for (Flag flag : flags) {
+
+            flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
+        }
+
+        form.setFlags(flags);
+
+        List<Memo> memos = informationService.getMemos(userId);
+
+        // Memos
+        for (Memo memo : memos) {
+
+            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
+        }
+
+        form.setMemos(memos);
+    }
 }
