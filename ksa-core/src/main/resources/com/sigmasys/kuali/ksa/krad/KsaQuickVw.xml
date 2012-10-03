@@ -457,11 +457,11 @@
                         <bean parent="Uif-HorizontalRadioControl">
                             <property name="options">
                                 <list>
-                                    <bean parent="Uif-KeyLabelPair" p:key="O1" p:value="Level 1"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="O2" p:value="Level 2"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="O3" p:value="Level 3"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="O4" p:value="Level 4"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="O5" p:value="Level 5"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L1" p:value="Level 1"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="5" p:value="Level 5"/>
                                 </list>
                             </property>
                         </bean>
