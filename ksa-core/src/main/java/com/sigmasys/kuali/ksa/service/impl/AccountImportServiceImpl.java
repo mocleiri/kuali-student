@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import com.sigmasys.kuali.ksa.service.AccountImportService;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
 import com.sigmasys.kuali.ksa.service.support.FeeBase;
-import com.sigmasys.kuali.ksa.service.support.NoSuchAccountException;
 import com.sigmasys.kuali.ksa.transform.KeyPair;
 import com.sigmasys.kuali.ksa.transform.StudentProfile;
 
@@ -51,7 +51,7 @@ public class AccountImportServiceImpl implements AccountImportService {
 		boolean accountExists = accountService.accountExists(accountId);
 		
 		if (!accountExists) {
-			throw new NoSuchAccountException("Account does not exist", accountId);
+			throw new UserNotFoundException("Account does not exist, ID = " + accountId);
 		}
 		
 		// Retrieve a new FeeBase for the now validated Account with ID "accountId":
