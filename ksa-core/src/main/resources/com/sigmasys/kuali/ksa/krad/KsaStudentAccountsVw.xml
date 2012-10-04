@@ -640,7 +640,7 @@
 <!--                <bean parent="Uif-NavigationActionLink"
                       p:navigateToPageId="AccountOVTransactionAllocationPage" p:actionLabel="View Allocations"/>-->
                 <bean parent="Uif-Link" p:linkText="View Allocations" p:target="_self"
-                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationPage&amp;userId=@{account.id}"/>
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationPage&amp;userId=@{account.id}"/>
 
             </list>
         </property>
@@ -684,9 +684,9 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Link" p:linkText="Select" p:target="_self"
-                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Edit" p:target="_self"
-                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="lock"
                       p:actionLabel="Done"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);">

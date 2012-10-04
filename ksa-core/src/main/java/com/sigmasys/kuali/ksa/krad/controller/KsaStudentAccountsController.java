@@ -76,6 +76,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
         // do get stuff...
         String pageId = request.getParameter("pageId");
         String userId = request.getParameter("userId");
+        String transUserId = request.getParameter("id");
 
         if (pageId != null && pageId.compareTo("AccountOVTransactionsPage") == 0) {
             if (userId == null || userId.isEmpty()) {
@@ -124,7 +125,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
             Long lId;
 
             try{
-                lId = new Long(userId);
+                lId = new Long(transUserId);
             } catch(NumberFormatException e){
                 throw new IllegalArgumentException("'userId' request parameter must be a number");
             }
@@ -144,7 +145,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
             Long lId;
 
             try{
-                lId = new Long(userId);
+                lId = new Long(transUserId);
             } catch(NumberFormatException e){
                 throw new IllegalArgumentException("'userId' request parameter must be a number");
             }
@@ -235,8 +236,6 @@ public class KsaStudentAccountsController extends GenericSearchController {
             }
             form.setOriginationDate(t.getOriginationDate());
             //form.setExtensionId(t.getE);
-
-
         }
 
         return getUIFModelAndView(form);
