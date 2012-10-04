@@ -117,7 +117,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Transactions for a Person" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage&amp;userId=@{account.id}"/>
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
                 <bean parent="Uif-Link" p:linkText="Currency Type" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="Activity" p:target="_self"
@@ -171,7 +171,7 @@
                 <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollup.name"/>
                 <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
-                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;userId=@{#line.id}"/>
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -246,7 +246,7 @@
                 </bean>
                 <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
-                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;userId=@{#line.id}"/>
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -323,7 +323,7 @@
                 </bean>
                 <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
-                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;userId=@{#line.id}"/>
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -684,14 +684,14 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Link" p:linkText="Select" p:target="_self"
-                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;userId=@{#line.id}"/>
+                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Edit" p:target="_self"
-                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;userId=@{#line.id}"/>
+                      p:hrefText="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="lock"
                       p:actionLabel="Done"
-                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{#line.id}&quot;);">
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);">
                     <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"
+                        <bean parent="Uif-ImageField"           writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                     </property>-->
                 </bean>
