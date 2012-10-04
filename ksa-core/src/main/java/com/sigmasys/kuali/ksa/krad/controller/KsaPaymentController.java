@@ -1,7 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
 import com.sigmasys.kuali.ksa.krad.form.KsaPaymentForm;
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.Payment;
+import com.sigmasys.kuali.ksa.model.TransactionType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.Enumeration;
 
 /**
  * Created by: dmulderink on 9/30/12 at 11:27 AM
@@ -101,10 +107,57 @@ public class KsaPaymentController extends GenericSearchController {
    @Transactional(readOnly = false)
    public ModelAndView submit(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
+       // do submit stuff...
+       Enumeration<String> enumeration = request.getParameterNames();
+       while(enumeration.hasMoreElements()){
+           String name = enumeration.nextElement();
+           logger.info("Parameter: " + name + " Value: " + request.getParameter(name));
+       }
+       //String userId = request.getParameter("userId");
+
+       //String userId = form.getActionParamaterValue("userId");
+       //logger.info("Charge Form Userid: " + userId);
+       //if(userId == null){
+       //    throw new IllegalArgumentException("Invalid Userid: " + userId);
+       //}
+
+       Payment payment = form.getPayment();
+
+       payment.setAccount(form.getAccount());
+
+       String typeIdString = form.getPaymentTransactionTypeId();
+
+       TransactionType tt = transactionService.getTransactionType(typeIdString, payment.getEffectiveDate());
+
+       if(tt == null){
+           // Error handler here.
+           form.setStatusMessage("Invalid Transaction Type");
+           return getUIFModelAndView(form);
+       }
+
+       payment.setTransactionType(tt);
+       payment.setStatementText(tt.getDescription());
+       payment.setLedgerDate(new Date());
+       payment.setOriginationDate(new Date());
+       payment.setRecognitionDate(new Date());
+       payment.setNativeAmount(payment.getAmount());
 
 
-      return getUIFModelAndView(form);
+       try{
+           Long newId = transactionService.persistTransaction(payment);
+
+
+           if(newId != null){
+               payment.setId(newId);
+               form.setPayment(payment);
+               form.setStatusMessage("Payment saved");
+           }
+       } catch(TransactionNotAllowedException e){
+           form.setStatusMessage(e.getMessage());
+       }
+
+       return getUIFModelAndView(form);
+
    }
 
    /**
