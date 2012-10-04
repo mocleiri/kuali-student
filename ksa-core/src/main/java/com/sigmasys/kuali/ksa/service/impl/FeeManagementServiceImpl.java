@@ -32,6 +32,11 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * The logger.
 	 */
 	private static final Log logger = LogFactory.getLog(FeeManagementServiceImpl.class);
+	
+	/**
+	 * ThreadLocal variable for the LearningPeriod currently used for Fee Assessment.
+	 */
+	private static final ThreadLocal<LearningPeriod> currentPeriod = new ThreadLocal<LearningPeriod>();
 
 
 	/**
@@ -100,7 +105,15 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
 	@Override
 	public BigDecimal calculateFees(FeeBase feeBase, LearningPeriod period) {
-		// TODO Auto-generated method stub
+		// Set the current period:
+		currentPeriod.set(period);
+		
+		// TODO: Perform fee calculation for the given period
+		
+		
+		// Remove the current period:
+		currentPeriod.remove();
+		
 		return new BigDecimal(0);
 	}
 	
@@ -171,14 +184,14 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 			// Create and persist a new KeyPair:
 			KeyPair newKeyPair = createKeyPairInternal(name, value, null, KeyPair.class);
 			
+			// Add the new KeyPair to the LearningUnit's list of KeyPairs:
+			learningUnit.getExtended().add(newKeyPair);
+			
 			// Update the associations:
 			persistEntity(learningUnit);
 			
 			// Flush the EM to the persistent storage:
 			em.flush();
-			
-			// Add the new KeyPair to the LearningUnit's list of KeyPairs:
-			learningUnit.getExtended().add(newKeyPair);
 			
 			return newKeyPair;
 		} catch (Throwable t) {
@@ -404,10 +417,14 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 		persistEntity(learningUnit);
 	}
 
+	/**
+	 * Returns the period that the rules are currently working on.
+	 * 
+	 * @return The period that the rules are currently working on.
+	 */
 	@Override
 	public LearningPeriod getCurrentPeriod() {
-		// TODO Auto-generated method stub
-		return null;
+		return currentPeriod.get();
 	}
 
 	/**
