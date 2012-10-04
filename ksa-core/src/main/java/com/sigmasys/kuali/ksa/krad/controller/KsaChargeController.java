@@ -1,7 +1,10 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
 import com.sigmasys.kuali.ksa.krad.form.KsaChargeForm;
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Charge;
+import com.sigmasys.kuali.ksa.model.TransactionType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 /**
  * Created by: dmulderink on 9/28/12 at 7:56 AM
@@ -104,9 +108,55 @@ public class KsaChargeController extends GenericSearchController {
    public ModelAndView submit(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
+       Enumeration<String> enumeration = request.getParameterNames();
+       while(enumeration.hasMoreElements()){
+           String name = enumeration.nextElement();
+           logger.info("Parameter: " + name + " Value: " + request.getParameter(name));
+       }
+       //String userId = request.getParameter("userId");
+
+       String userId = form.getActionParamaterValue("userId");
+       logger.info("Charge Form Userid: " + userId);
+       if(userId == null){
+           throw new IllegalArgumentException("Invalid Userid: " + userId);
+       }
 
 
-      return getUIFModelAndView(form);
+       Charge charge = form.getCharge();
+       logger.info("Charge: " + charge);
+
+       logger.info("Amt: " + charge.getAmount());
+
+       logger.info("Dt: " + charge.getEffectiveDate());
+
+       String typeIdString = form.getChargeTransactionTypeId();
+       logger.info("Type: " + typeIdString);
+
+
+       TransactionType tt = transactionService.getTransactionType(typeIdString, charge.getEffectiveDate());
+
+       if(tt == null){
+           // Error handler here.
+           form.setStatusMessage("Invalid Transaction Type");
+           return getUIFModelAndView(form);
+       }
+
+       try{
+           Charge newCharge = (Charge)transactionService.createTransaction(typeIdString, "", userId,
+                   charge.getEffectiveDate(), null,  charge.getAmount());
+
+
+           if(newCharge != null){
+               form.setCharge(newCharge);
+               form.setStatusMessage("Charge saved");
+           }
+       } catch(TransactionNotAllowedException e){
+           form.setStatusMessage(e.getMessage());
+       }
+
+
+       return getUIFModelAndView(form);
+
    }
 
    /**
