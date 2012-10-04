@@ -117,7 +117,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Transactions for a Person" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
+                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Currency Type" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="Activity" p:target="_self"

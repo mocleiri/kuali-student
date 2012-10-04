@@ -163,12 +163,12 @@
                 <!--<ref bean="bioAuditPersonInformationSection" />-->
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Postal" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationPostalSection" />
                 <!--<ref bean="bioAuditPostalInformationSection" />-->
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationElectronicContactSection" />
                 <!--<ref bean="bioAuditElectronicContactInformationSection" />-->
             </list>
@@ -248,10 +248,10 @@
                         <list>
                             <!-- Use this to display for Add the individual field values for a new row -->
                             <bean parent="Uif-LinkField" p:linkText="Add Person" p:target="_self"
-                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicAddPersonPage"/>
+                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicAddPersonPage&amp;userId=@{account.id}"/>
                             <!-- Use this to display for Edit the individual field values for a selected row -->
                             <bean parent="Uif-LinkField" p:linkText="Edit Person" p:target="_self"
-                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicEDPersonPage"/>
+                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicEDPersonPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
