@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Composite allocation model that holds references to Allocation and GlTransaction instances.
@@ -38,5 +40,18 @@ public class CompositeAllocation implements Serializable {
 
     public void setDebitGlTransaction(GlTransaction debitGlTransaction) {
         this.debitGlTransaction = debitGlTransaction;
+    }
+
+    public List<GlTransaction> getGlTransactions() {
+        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
+        GlTransaction creditGlTransaction = getCreditGlTransaction();
+        GlTransaction debitGlTransaction = getDebitGlTransaction();
+        if (creditGlTransaction != null) {
+            glTransactions.add(creditGlTransaction);
+        }
+        if (debitGlTransaction != null) {
+            glTransactions.add(debitGlTransaction);
+        }
+        return glTransactions;
     }
 }

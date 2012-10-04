@@ -526,12 +526,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     protected CompositeAllocation createAllocation(Long transactionId1, Long transactionId2, BigDecimal newAmount,
                                                    boolean isQueued, boolean locked) {
 
-        if (newAmount == null || newAmount.compareTo(BigDecimal.ZERO) <= 0) {
-            String errMsg = "The allocation amount should be a positive number";
-            logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
-        }
-
         Transaction transaction1 = getTransaction(transactionId1);
         if (transaction1 == null) {
             String errMsg = "Transaction with ID = " + transactionId1 + " does not exist";
@@ -544,6 +538,34 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             String errMsg = "Transaction with ID = " + transactionId2 + " does not exist";
             logger.error(errMsg);
             throw new TransactionNotFoundException(errMsg);
+        }
+
+        return createAllocation(transaction1, transaction2, newAmount, isQueued, locked);
+    }
+
+    /**
+     * Creates an allocation between two transactions with the specified parameters.
+     *
+     * @param transaction1 First transaction
+     * @param transaction2 Second transaction
+     * @param newAmount    amount to be allocated
+     * @param isQueued     indicates whether the GL transaction should be in Q or W status
+     * @param locked       indicates whether the allocation should be locked or unlocked
+     * @return a new CompositeAllocation instance that has references to Allocation and GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public CompositeAllocation createAllocation(Transaction transaction1, Transaction transaction2,
+                                                BigDecimal newAmount, boolean isQueued, boolean locked) {
+
+        final Long transactionId1 = transaction1.getId();
+        final Long transactionId2 = transaction2.getId();
+
+        if (newAmount == null || newAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            String errMsg = "The allocation amount should be a positive number";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         if (transaction1.getAccount() == null || transaction2.getAccount() == null) {
@@ -640,6 +662,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 transaction2.setAllocatedAmount(newAmount);
             }
 
+            persistTransaction(transaction1);
+            persistTransaction(transaction2);
+
             CompositeAllocation compositeAllocation = new CompositeAllocation();
             compositeAllocation.setAllocation(allocation);
 
@@ -727,7 +752,14 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return pair;
     }
 
-    protected BigDecimal getUnallocatedAmount(Transaction transaction) {
+    /**
+     * Returns the total unallocated amount for the given transaction
+     *
+     * @param transaction Transaction instance
+     * @return the total unallocated amount
+     */
+    @Override
+    public BigDecimal getUnallocatedAmount(Transaction transaction) {
 
         BigDecimal amount = transaction.getAmount() != null ?
                 transaction.getAmount() : BigDecimal.ZERO;
@@ -1515,7 +1547,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @param amountFrom        Amount of a Transaction begging of a search range.
-     * @param amountTo			Amount of a Transaction end of a search range. 
+     * @param amountTo          Amount of a Transaction end of a search range.
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account exists.
      */
     @Override
@@ -1530,7 +1562,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @param amountFrom        Amount of a Transaction begging of a search range.
-     * @param amountTo			Amount of a Transaction end of a search range. 
+     * @param amountTo          Amount of a Transaction end of a search range.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
      * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
@@ -1547,7 +1579,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @param accountId         Account ID.
      * @param transactionTypeId Transaction Type ID.
      * @param amountFrom        Amount of a Transaction begging of a search range.
-     * @param amountTo			Amount of a Transaction end of a search range. 
+     * @param amountTo          Amount of a Transaction end of a search range.
      * @param effectiveDateFrom Transaction Effective Date beginning range (inclusive).
      * @param effectiveDateTo   Transaction Effective Date end range (inclusive).
      * @return <code>true</code> if at least one Transaction of the given type, given amount for the given account
@@ -1572,7 +1604,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         // Create a Query:
         Query query = em.createQuery(builder.toString());
-        
+
         query.setParameter("accountId", accountId);
         query.setParameter("transactionTypeId", transactionTypeId);
         query.setMaxResults(1);

@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,43 +45,74 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
      * summarizeGeneralLedgerTransactions() method.
      *
      * @param transactions List of transactions
-     * @param maxAmount    Maximum amount
+     * @param maxAmount    Maximum amount allowed
      * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
+     * @return List of generated GL transactions
      */
     @Override
-    public void applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued) {
+    public List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued) {
+        BigDecimal remainingAmount = maxAmount;
         List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
+        List<CreditPermission> creditPermissions = Collections.emptyList();
         for (Transaction transaction : transactions) {
-            if (transaction instanceof Credit) {
-                TransactionTypeId creditTypeId = transaction.getTransactionType().getId();
-                List<CreditPermission> creditPermissions = transactionService.getCreditPermissions(creditTypeId);
-                // Assuming that credit permissions are sorted by priorities in descending order
-                for (CreditPermission creditPermission : creditPermissions) {
-                    Integer priority = creditPermission.getPriority();
-                    for (Transaction transaction1 : transactions) {
-                        if (transactionService.canPay(transaction.getId(), transaction1.getId(), priority)) {
-                            BigDecimal amount = (transaction.getAmount() != null) ? transaction.getAmount() : BigDecimal.ZERO;
-                            BigDecimal amount1 = (transaction1.getAmount() != null) ? transaction1.getAmount() : BigDecimal.ZERO;
-                            BigDecimal minAmount = (amount.compareTo(amount1) <= 0) ? amount : amount1;
-                            boolean lessThanMaxAmount = (maxAmount == null) || minAmount.compareTo(maxAmount) < 0;
-                            if (amount.compareTo(minAmount) > 0 && lessThanMaxAmount) {
-                                CompositeAllocation allocation =
-                                        transactionService.createAllocation(transaction.getId(), transaction1.getId(),
-                                                minAmount, isQueued);
-                                glTransactions.add(allocation.getCreditGlTransaction());
-                                glTransactions.add(allocation.getDebitGlTransaction());
-                                if (maxAmount != null) {
-                                    maxAmount = maxAmount.subtract(minAmount);
-                                }
-                                // TODO: provide business logic
+            TransactionTypeId transactionTypeId = transaction.getTransactionType().getId();
+            // Check if it is Credit
+            boolean isCredit = (transaction instanceof Credit);
+            if (isCredit) {
+                creditPermissions = transactionService.getCreditPermissions(transactionTypeId);
+            }
+            // Assuming that credit permissions are sorted by priorities in descending order
+            int i = 0;
+            for (Transaction transaction1 : transactions) {
+                Long transactionId = transaction.getId();
+                Long transactionId1 = transaction1.getId();
+                // We have to exclude the same transaction
+                if (!transactionId.equals(transactionId1)) {
+                    // Check if the transactions can pay one another
+                    boolean canPay = false;
+                    if (isCredit) {
+                        // Credit
+                        if (CollectionUtils.isNotEmpty(creditPermissions)) {
+                            // Getting the next priority from the sorted credit permissions
+                            Integer currentPriority = creditPermissions.get(i).getPriority();
+                            canPay = transactionService.canPay(transactionId, transactionId1, currentPriority);
+                        }
+                    } else {
+                        // Debit
+                        canPay = transactionService.canPay(transactionId, transactionId1);
+                    }
+                    if (canPay) {
+                        BigDecimal amount = transactionService.getUnallocatedAmount(transaction);
+                        BigDecimal amount1 = transactionService.getUnallocatedAmount(transaction1);
+                        BigDecimal minAmount = (amount.compareTo(amount1) <= 0) ? amount : amount1;
+                        if (remainingAmount == null || minAmount.compareTo(remainingAmount) <= 0) {
+                            // If the smallest amount is less than or equal to the remaining amount
+                            // create a new allocation
+                            CompositeAllocation allocation = transactionService.createAllocation(transaction,
+                                    transaction1, minAmount, isQueued, false);
+                            // Adding new GL transactions to the list
+                            glTransactions.addAll(allocation.getGlTransactions());
+                            if (remainingAmount != null) {
+                                remainingAmount = remainingAmount.subtract(minAmount);
                             }
+                        }
+                        if (remainingAmount != null && remainingAmount.compareTo(BigDecimal.ZERO) <= 0) {
+                            // We have exceeded the limit and just need to return the result
+                            return glTransactions;
+                        }
+                    } else if (isCredit) {
+                        if (i < creditPermissions.size()) {
+                            // Moving to the next credit permission
+                            i++;
+                        } else {
+                            // Going to the next transaction from the external list
+                            break;
                         }
                     }
                 }
             }
         }
-
-
+        return glTransactions;
     }
 
 }

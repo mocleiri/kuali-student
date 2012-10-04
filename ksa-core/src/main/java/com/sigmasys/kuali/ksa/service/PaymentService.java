@@ -36,10 +36,11 @@ public interface PaymentService {
      * summarizeGeneralLedgerTransactions() method.
      *
      * @param transactions List of transactions
-     * @param maxAmount    Maximum amount
+     * @param maxAmount    Maximum amount allowed
      * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
+     * @return List of generated GL transactions
      */
-    void applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued);
+    List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued);
 
 
 }
