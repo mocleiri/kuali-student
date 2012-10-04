@@ -82,11 +82,13 @@ public class KeyPair implements Identifiable {
 	}
 
 	public void setValue(String value) {
-		// Store the old value into the "previousValue" property:
-		setPreviousValue(this.value);
-		
-		// Reassign the "value" property to the new value:
-		this.value = value;
+		// Store the old value into the "previousValue" property if different:
+		if (!StringUtils.equals(value, this.value)) {  
+			setPreviousValue(this.value);
+			
+			// Reassign the "value" property to the new value:
+			this.value = value;
+		}
 	}
 
 	public void setPreviousValue(String previousValue) {
