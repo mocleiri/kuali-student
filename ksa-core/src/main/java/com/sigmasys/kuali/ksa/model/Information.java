@@ -52,11 +52,6 @@ public class Information  extends AccountIdAware implements Identifiable {
     private Integer accessLevel;
 
     /**
-     * Responsible Entity
-     */
-    private String responsibleEntity;
-
-    /**
      * Transaction
      */
     private Transaction transaction;

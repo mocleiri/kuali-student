@@ -31,7 +31,8 @@ import org.junit.runners.Suite;
         ConfigServiceTest.class,
         UserPreferenceServiceTest.class,
         GeneralLedgerServiceTest.class,
-        FeeManagementServiceTest.class})
+        FeeManagementServiceTest.class,
+        PaymentServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/test-context.xml";

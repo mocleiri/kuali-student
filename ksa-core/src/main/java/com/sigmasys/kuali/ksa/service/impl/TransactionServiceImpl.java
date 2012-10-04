@@ -670,9 +670,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
             // Creating GL transactions for charge+payment or payment+charge only
             if ((transaction1.getTransactionTypeValue() == TransactionTypeValue.CHARGE &&
-                    transaction2.getTransactionTypeValue() != TransactionTypeValue.PAYMENT) ||
+                    transaction2.getTransactionTypeValue() == TransactionTypeValue.PAYMENT) ||
                     (transaction1.getTransactionTypeValue() == TransactionTypeValue.PAYMENT &&
-                            transaction2.getTransactionTypeValue() != TransactionTypeValue.CHARGE)) {
+                            transaction2.getTransactionTypeValue() == TransactionTypeValue.CHARGE)) {
                 Pair<GlTransaction, GlTransaction> pair = createGlTransactions(transaction1, transaction2, newAmount, isQueued);
                 compositeAllocation.setCreditGlTransaction(pair.getA());
                 compositeAllocation.setDebitGlTransaction(pair.getB());
@@ -1304,6 +1304,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             logger.error(errMsg);
             throw new TransactionNotFoundException(errMsg);
         }
+
+        boolean canPay = canPayInternal(transaction1, transaction2, priorityFrom, priorityTo);
+        return (canPay || canPayInternal(transaction2, transaction1, priorityFrom, priorityTo));
+    }
+
+    protected boolean canPayInternal(Transaction transaction1, Transaction transaction2, int priorityFrom, int priorityTo) {
 
         boolean compatible = false;
 

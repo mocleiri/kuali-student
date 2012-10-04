@@ -85,7 +85,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
                                              GlOperationType operationType) {
-        return createGlTransaction(transactionId, userId, amount, operationType, true);
+        return createGlTransaction(transactionId, userId, amount, operationType, false);
 
     }
 
