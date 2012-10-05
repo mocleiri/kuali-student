@@ -25,8 +25,7 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Page" p:id="MemosPage" p:title="@{account.id}"
-                      p:instructionalText="The following is a list of memos for the selected account @{account.id}">
+                <bean parent="Uif-Page" p:id="MemosPage" p:title="@{account.id}">
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
@@ -47,8 +46,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="ViewMemoPage" p:title="@{account.id}"
-                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                <bean parent="Uif-Page" p:id="ViewMemoPage" p:title="View a memo for @{account.id}">
                     <property name="items">
                         <list>
                             <ref bean="viewMemoSection"/>
@@ -56,21 +54,21 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="EditMemoPage" p:title="@{account.id}"
-                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                <bean parent="Uif-Page" p:id="EditMemoPage" p:title="Edit a memo for @{account.id}">
                     <property name="items">
                         <list>
                             <ref bean="viewMemoSection"/>
-                            <ref bean="viewMemoControlsGroup"/>
+                            <ref bean="addMemoSection"/>
+                            <ref bean="editMemoControlsGroup"/>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="FollowUpMemoPage" p:title="@{account.id}"
-                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                <bean parent="Uif-Page" p:id="FollowUpMemoPage" p:title="Follow-up a memo for @{account.id}">
                     <property name="items">
                         <list>
-                            <!--<ref bean="updateMemoSection"/>
-                            <ref bean="updateMemoControlsGroup"/>-->
+                            <ref bean="viewMemoSection"/>
+                            <ref bean="followUpMemoSection"/>
+                            <ref bean="followUpMemoControlsGroup"/>
                         </list>
                     </property>
                 </bean>
@@ -129,7 +127,7 @@
         p:layoutManager.numberOfColumns="4"
         p:disclosure.render="false"
         p:progressiveRenderViaAJAX="true"
-        p:instructionalText="The memo list">
+        p:instructionalText="The following is a list of memos for the selected account @{account.id}">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
         <property name="propertyName" value="memos"/>
@@ -138,7 +136,17 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="memos.effectiveDate"
+<!-- TODO New memo field
+                <bean parent="Uif-InputField" p:propertyName="status"
+                      p:label="Status"
+                      p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11"/>
+                    </property>
+                </bean>
+-->
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate"
                       p:label="Effective Date"
                       p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
@@ -146,7 +154,7 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memo.text"
+                <bean parent="Uif-InputField" p:propertyName="text"
                       p:label="Description">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -155,9 +163,9 @@
                     </property>
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
-                <bean parent="Uif-Link" p:linkText="Follow-up" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}"/>
-                <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}"/>
             </list>
         </property>
@@ -223,7 +231,7 @@
 
     <!--
     *******************************************************************************************************************
-                                        Memo controls group
+                                        Add Memo controls group
     A group of controls to support the add of a memorandum
     ********************************************************************************************************************
     -->
@@ -242,6 +250,43 @@
 
     <!--
     *******************************************************************************************************************
+                                        Edit Memo controls group
+    A group of controls to support the update of a memorandum
+    ********************************************************************************************************************
+    -->
+    <bean id="editMemoControlsGroup" parent="Uif-HorizontalBoxGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updateMemo"
+                      p:actionLabel="Submit"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Follow-up Memo controls group
+    A group of controls to support the follow-up of a memorandum
+    ********************************************************************************************************************
+    -->
+    <bean id="followUpMemoControlsGroup" parent="Uif-HorizontalBoxGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="followUpMemo"
+                      p:actionLabel="Submit"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
+            </list>
+        </property>
+    </bean>
+    <!--
+    *******************************************************************************************************************
                                         View Memorandum section
     View a memorandum input
     ********************************************************************************************************************
@@ -256,6 +301,84 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
+                <bean parent="Uif-InputField" p:propertyName="memo.id"
+                      p:label="ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.creationDate"
+                      p:label="Creation Date"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+
+<!--
+                <bean parent="Uif-InputField" p:propertyName="memo.account.id"
+                      p:label="Account ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.transaction.id"
+                      p:label="Transaction ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+-->
+
+                <!-- Activity Name -->
+<!--                <bean parent="Uif-InputField" p:propertyName="memo.activity.id"
+                      p:label="Activity Name"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>-->
+                <bean parent="Uif-InputField" p:propertyName="memo.creatorId"
+                      p:label="Creator ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.editorId"
+                      p:label="Editor ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+
+                <bean parent="Uif-InputField" p:propertyName="memo.lastUpdate"
+                      p:label="Last Date"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
                 <bean parent="Uif-InputField" p:propertyName="memo.effectiveDate"
                       p:label="Effective Date"
                       p:labelPlacement="LEFT"
@@ -276,19 +399,30 @@
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="memo.accessLevel"
                       p:label="Level"
+                      p:maxLength="2"
+                      p:labelPlacement="LEFT"
                       p:fieldLabel.renderColon="true">
                     <property name="control">
-                        <bean parent="Uif-HorizontalRadioControl">
-                            <property name="options">
-                                <list>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L1" p:value="Level 1"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L5" p:value="Level 5"/>
-                                </list>
-                            </property>
-                        </bean>
+                        <bean parent="Uif-TextControl" p:size="3"/>
+                    </property>
+                </bean>
+                <!-- TODO need the ID for these two -->
+                <bean parent="Uif-InputField" p:propertyName="memo.previousMemo"
+                      p:label="Previous Memo ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.nextMemo"
+                      p:label="Next Memo ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="memo.text"
@@ -319,6 +453,74 @@
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Follow-up Memorandum section
+    Follow-up a memorandum input
+    ********************************************************************************************************************
+    -->
+    <bean id="followUpMemoSection" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL">
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="memo.effectiveDate"
+                      p:label="Effective Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.expirationDate"
+                      p:label="Expiration Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.accessLevel"
+                      p:label="Level">
+                    <property name="control">
+                        <bean parent="Uif-HorizontalRadioControl">
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L1" p:value="Level 1"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L5" p:value="Level 5"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.previousMemo"
+                      p:label="Previous Memo"
+                      p:labelPlacement="TOP"
+                      p:readOnly="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:style="resize:none;"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.text"
+                      p:label="Memo"
+                      p:labelPlacement="TOP">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:style="resize:none;"
+                              p:watermarkText="Type in information text here..."/>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>

@@ -190,14 +190,14 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="rollUpDebit" p:label="Total Debits"
+                <bean parent="Uif-InputField" p:propertyName="rollUpDebit" p:label="Total Charges"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollUpCredit" p:label="Total Credits"
+                <bean parent="Uif-InputField" p:propertyName="rollUpCredit" p:label="Total Payments"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -280,14 +280,14 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="unGroupedDebit" p:label="Total Debits"
+                <bean parent="Uif-InputField" p:propertyName="unGroupedDebit" p:label="Total Charges"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="unGroupedCredit" p:label="Total Credits"
+                <bean parent="Uif-InputField" p:propertyName="unGroupedCredit" p:label="Total Payments"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
