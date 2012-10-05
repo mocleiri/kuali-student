@@ -23,6 +23,8 @@ public class KsaMemoForm extends AbstractViewModel {
 
    private Memo memo;
 
+   private String statusMessage;
+
    /*
      Get / Set methods
    */
@@ -65,5 +67,13 @@ public class KsaMemoForm extends AbstractViewModel {
 
    public void setMemo(Memo memo) {
       this.memo = memo;
+   }
+
+   public String getStatusMessage() {
+      return statusMessage;
+   }
+
+   public void setStatusMessage(String statusMessage) {
+      this.statusMessage = statusMessage;
    }
 }

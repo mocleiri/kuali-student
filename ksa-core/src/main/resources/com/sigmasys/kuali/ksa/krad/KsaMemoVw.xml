@@ -113,6 +113,8 @@
             </bean>
             <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
                   p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
+            <!--  Status message -->
+            <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
         </list>
         </property>
     </bean>
@@ -232,6 +234,8 @@
                       p:actionLabel="Submit"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                 </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>
