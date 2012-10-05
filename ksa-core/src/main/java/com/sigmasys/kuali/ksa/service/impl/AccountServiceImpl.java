@@ -682,9 +682,24 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      */
     @Override
     public List<Account> findAccountsByNamePattern(String namePattern) {
-        Query query = em.createQuery(GET_FULL_ACCOUNTS_QUERY + " and (pn.firstName like :pattern or " +
-                "pn.middleName like :pattern or pn.lastName like :pattern)");
-        query.setParameter("pattern", "%" + namePattern + "%");
+
+        boolean patternIsEmpty = namePattern != null && !namePattern.isEmpty();
+
+        StringBuilder builder = new StringBuilder(GET_FULL_ACCOUNTS_QUERY);
+
+        if (patternIsEmpty) {
+            builder.append(" and (lower(pn.firstName) like :pattern or " +
+                    "lower(pn.middleName) like :pattern or lower(pn.lastName) like :pattern)");
+        }
+
+        builder.append(" order by a.id");
+
+        Query query = em.createQuery(builder.toString());
+
+        if (patternIsEmpty) {
+            query.setParameter("pattern", "%" + namePattern.toLowerCase() + "%");
+        }
+
         return query.getResultList();
 
 
