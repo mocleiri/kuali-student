@@ -217,4 +217,14 @@ public interface FeeManagementService {
 	 * @return All <code>LearningPeriod</code> objects that fall into the given date range.
 	 */
 	List<LearningPeriod> findLearningPeriods(Date dateFrom, Date dateTo);
+	
+	/**
+	 * Attempts to find a <code>LearningPeriod</code> with the specified name. 
+	 * Returns <code>null</code> if no such <code>LearningPeriod</code> is found.
+	 * This method performs CASE-INSENSITIVE search.
+	 * 
+	 * @param 	name Name of a <code>LearningPeriod</code> to locate.
+	 * @return <code>LearningPeriod</code> with the given name or <code>null</code> if none found.
+	 */
+	LearningPeriod getLearningPeriod(String name);
 }

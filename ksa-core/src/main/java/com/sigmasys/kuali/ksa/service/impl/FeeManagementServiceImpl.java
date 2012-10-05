@@ -444,6 +444,25 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 		return query.getResultList();
 	}
 	
+	/**
+	 * Attempts to find a <code>LearningPeriod</code> with the specified name. 
+	 * Returns <code>null</code> if no such <code>LearningPeriod</code> is found.
+	 * This method performs CASE-INSENSITIVE search.
+	 * 
+	 * @param 	name Name of a <code>LearningPeriod</code> to locate.
+	 * @return <code>LearningPeriod</code> with the given name or <code>null</code> if none found.
+	 */
+	@Override
+	public LearningPeriod getLearningPeriod(String name) {
+		// Create a Query:
+		Query query = em.createQuery("select lp from LearningPeriod lp where UPPER(lp.name) = :name")
+				.setParameter("name", name.toUpperCase())
+				.setMaxResults(1);
+		List<LearningPeriod> result = query.getResultList();
+		
+		return CollectionUtils.isEmpty(result) ? null : result.get(0);
+	}
+	
 	
 	/* ***********************************************************
 	 * 

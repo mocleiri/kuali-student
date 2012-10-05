@@ -1632,6 +1632,35 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		isTrue(CollectionUtils.isEmpty(lps));
 	}
 	
+	@Test
+	public void testGetLearningPeriod() throws Exception {
+		// Test objects:
+		createTestFeeBase();
+		String nameExactMatch = "2011-ODISSEY";
+		String nameMatchDifferentCase = "2011-OdiSseY";
+		String nameNoMatch = "boo";
+		
+		// Call the service with an exact case matching name:
+		LearningPeriod lp = feeManagementService.getLearningPeriod(nameExactMatch);
+		
+		// Validate:
+		notNull(lp);
+		assertEquals(nameExactMatch, lp.getName());
+		
+		// Call the service with a different case name:
+		lp = feeManagementService.getLearningPeriod(nameMatchDifferentCase);
+		
+		// Validate:
+		notNull(lp);
+		assertEquals(nameExactMatch, lp.getName());
+		
+		// Call the service with a non-matched name:
+		lp = feeManagementService.getLearningPeriod(nameNoMatch);
+		
+		// Validate:
+		isNull(lp);
+	}
+	
 	/* *************************************
 	 * 
 	 * Helper methods.
@@ -1720,6 +1749,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		PeriodKeyPair pkp3 = new PeriodKeyPair();
 		PeriodKeyPair pkp4 = new PeriodKeyPair();
 		LearningPeriod lp = new LearningPeriod();
+		String lpName = "2011-ODDITY";
 		
 		pkp1.setName("boo1");
 		pkp1.setValue("foo1");
@@ -1737,6 +1767,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		pkp4.setLearningPeriod(lp);
 		lp.setDateFrom(new Date());
 		lp.setDateTo(new Date());
+		lp.setName(lpName);
 		
 		return new ArrayList<PeriodKeyPair>(Arrays.asList(pkp1, pkp2, pkp3, pkp4));
 	}
@@ -1768,12 +1799,16 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		LearningUnit lu2 = new LearningUnit();
 		LearningPeriod lp1 = new LearningPeriod();
 		LearningPeriod lp2 = new LearningPeriod();
+		String lp1Name = "2011-ODISSEY";
+		String lp2Name = "2012-ELECTION";
 		
 		// Set up learning periods:
 		lp1.setDateFrom(new Date());
 		lp1.setDateTo(new Date());
+		lp1.setName(lp1Name);
 		lp2.setDateFrom(new Date());
 		lp2.setDateTo(new Date());
+		lp2.setName(lp2Name);
 		
 		// Set up LearningUnit 1:
 		lu1.setAccount(testAccount);
