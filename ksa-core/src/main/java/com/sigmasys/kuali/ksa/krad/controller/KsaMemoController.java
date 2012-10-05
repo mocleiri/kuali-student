@@ -1,11 +1,8 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaMemoForm;
-import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
 import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Information;
-import com.sigmasys.kuali.ksa.model.InformationTypeValue;
 import com.sigmasys.kuali.ksa.model.Memo;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
@@ -31,224 +28,208 @@ import java.util.List;
 @RequestMapping(value = "/ksaMemoVw")
 public class KsaMemoController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+    private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
 
-   @Autowired
-   private InformationService informationService;
+    @Autowired
+    private InformationService informationService;
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected KsaMemoForm createInitialForm(HttpServletRequest request) {
-      KsaMemoForm form = new KsaMemoForm();
-      String userId = request.getParameter("userId");
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected KsaMemoForm createInitialForm(HttpServletRequest request) {
+        KsaMemoForm form = new KsaMemoForm();
+        String userId = request.getParameter("userId");
 
-      if (userId != null) {
+        if (userId != null) {
 
-         Account account = accountService.getFullAccount(userId);
+            Account account = accountService.getFullAccount(userId);
 
-         if (account == null) {
-            String errMsg = "Cannot find Account by ID = " + userId;
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-         }
+            if (account == null) {
+                String errMsg = "Cannot find Account by ID = " + userId;
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
 
-         form.setAccount(account);
-      }/* else {
+            form.setAccount(account);
+        }/* else {
           String errMsg = "'userId' request parameter cannot be null";
           logger.error(errMsg);
           throw new IllegalStateException(errMsg);
        }*/
 
-      return form;
-   }
+        return form;
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
-      // do get stuff...
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                            HttpServletRequest request, HttpServletResponse response) {
+        // do get stuff...
 
-      String pageId = request.getParameter("pageId");
-      // example user 1
-      String userId = request.getParameter("userId");
-      // a table selection record index
-      String transUserId = request.getParameter("id");
+        String pageId = request.getParameter("pageId");
+        // example user 1
+        String userId = request.getParameter("userId");
 
-      if (pageId != null && pageId.compareTo("MemosPage") == 0) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
+        if (pageId != null && pageId.compareTo("MemosPage") == 0) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
 
-         List<Memo> memos = informationService.getMemos(userId);
+            List<Memo> memos = informationService.getMemos(userId);
 
-         AlertsFlagsMemos afm = new AlertsFlagsMemos();
-         // Alerts
-         for (Memo memo : memos) {
+            AlertsFlagsMemos afm = new AlertsFlagsMemos();
+            // Alerts
+            for (Memo memo : memos) {
 
-            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
-         }
+                memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
+            }
 
-         form.setMemos(memos);
-      }
+            form.setMemos(memos);
+        }
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
 
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+    @RequestMapping(params = "methodToCall=start")
+    public ModelAndView start(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+
+        // populate model for testing
+
+        return super.start(form, result, request, response);
+
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    @Transactional(readOnly = false)
+    public ModelAndView submit(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+        // do submit stuff...
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
+    public ModelAndView save(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
-      // populate model for testing
+        // do save stuff...
 
-      return super.start(form, result, request, response);
+        return getUIFModelAndView(form);
+    }
 
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
-   @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
-
-      // do save stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaMemoForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=insertMemo")
-   public ModelAndView insertMemo(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do insert stuff...
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
 
-      // TODO validate the field entries before inserting
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertMemo")
+    public ModelAndView insertMemo(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                                   HttpServletRequest request, HttpServletResponse response) {
+        // do insert stuff...
 
-      // the account should be satisfied by the link that got us into this page
-      Account account = form.getAccount();
+        // TODO validate the field entries before inserting
 
-      String infoType = InformationTypeValue.MEMO.name();
+        // the account should be satisfied by the link that got us into this page
+        Account account = form.getAccount();
 
-      InformationTypeValue informationType = Enum.valueOf(InformationTypeValue.class, infoType);
+        Memo memo = form.getMemo();
+        memo.setAccount(account);
+        memo.setAccountId(account.getId());
+        memo.setCreationDate(new Date());
+        memo.setLastUpdate(new Date());
+        //info.setCreatorId();
+        //info.setCreatorId();
+        informationService.persistInformation(memo);
 
-      Memo memo = form.getMemo();
-      Information info =  memo;
-      memo.setAccount(account);
-      memo.setAccountId(account.getId());
-      memo.setCreationDate(new Date());
-      memo.setLastUpdate(new Date());
-      //info.setCreatorId();
-      //info.setCreatorId();
-      Long infoId = informationService.persistInformation(memo);
+        return getUIFModelAndView(form);
+    }
 
-      return getUIFModelAndView(form);
-   }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateMemo")
+    public ModelAndView updateMemo(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                                   HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=updateMemo")
-   public ModelAndView updateMemo(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=followUpMemo")
-   public ModelAndView followUpMemo(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=followUpMemo")
+    public ModelAndView followUpMemo(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
 }
