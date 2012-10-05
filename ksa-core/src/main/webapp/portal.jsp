@@ -21,6 +21,6 @@
 %>
 
 <%
-    String redirectUrl = "kim/index.jsp";
+    String redirectUrl = "index.jsp";
     response.sendRedirect(redirectUrl);
 %>
