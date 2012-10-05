@@ -1,0 +1,26 @@
+import java.util.*;
+import java.math.*;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.drools.*;
+
+expander ksa.dsl
+
+#global DroolsContext droolsContext;
+
+
+############ Beginning of rule definitions ##########################
+
+rule "Tuition 1"
+when
+ Student account ID is "admin"
+then
+ Use "1020" code to charge $345.78
+ Use "pp" code to credit $50.0
+end
+
+rule "Tuition 2"
+when
+ Student account ID is "admin"
+then
+ Use "cash" code to credit $50.50
+end

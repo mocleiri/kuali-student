@@ -2,6 +2,10 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.service.drools.DroolsContext;
+import com.sigmasys.kuali.ksa.service.drools.DroolsService;
+import org.drools.builder.ResourceType;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,30 @@ public class DroolsServiceTest extends AbstractServiceTest {
     @Autowired
     private DroolsService droolsService;
 
+    @Autowired
+    private AccountService accountService;
+
+    @Before
+        public void setUpWithinTransaction() {
+            // set up test data within the transaction
+            String userId = "admin";
+            accountService.getOrCreateAccount(userId);
+        }
+
+    @Test
+    public void fireFeeAssessmentRules() throws Exception {
+
+        DroolsContext droolsContext = new DroolsContext();
+        droolsContext.setAccount(accountService.getFullAccount("admin"));
+
+        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext);
+
+        Assert.notNull(droolsContext);
+        Assert.notNull(droolsContext.getAccount());
+        Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
+
+    }
+
     @Test
     public void fireCurrencyRules() throws Exception {
 
@@ -30,7 +58,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.notNull(currency);
         Assert.isTrue(currency.getCode().equals("USD"));
 
-        currency = droolsService.fireRules("/drools/currency.xdrl", currency);
+        currency = droolsService.fireRules("drools/currency.xdrl", ResourceType.XDRL, currency);
 
         Assert.notNull(currency);
         Assert.isTrue(currency.getEditorId().equals("admin"));
