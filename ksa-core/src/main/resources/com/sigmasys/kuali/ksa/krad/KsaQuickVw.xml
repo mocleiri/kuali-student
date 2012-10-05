@@ -42,7 +42,7 @@
             </bean>
         </property>
         <property name="items">
-            <list>
+            <list merge="true">
                 <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
                     <property name="items">
                         <list>

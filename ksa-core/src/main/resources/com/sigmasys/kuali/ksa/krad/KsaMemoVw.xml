@@ -24,7 +24,7 @@
             </bean>
         </property>
         <property name="items">
-            <list>
+            <list merge="true">
                 <bean parent="Uif-Page" p:id="MemosPage" p:title="@{account.id}">
                     <property name="items">
                         <list>
