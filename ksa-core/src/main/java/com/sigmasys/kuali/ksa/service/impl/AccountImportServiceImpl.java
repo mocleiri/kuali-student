@@ -82,22 +82,25 @@ public class AccountImportServiceImpl implements AccountImportService {
 		
 		// Step 5a: Identify the LearningPeriod:
 		StudentProfile.PeriodInformation periodInfo = studentProfile.getPeriodInformation();
-		LearningPeriod period = new LearningPeriod();
+		String periodName = ObjectUtils.toString(periodInfo.getPeriod());
+		LearningPeriod period = feeManagementService.getLearningPeriod(periodName);
 		
-		// Step 5b: Import StudentProfile.PeriodInformation.keyPair (List<KeyPair>)
+		// Importing the PeriodInformation is only possible when there is an already defined LearningPeriod:
 		if (period != null) {
-			for (KeyPair periodKeyPair : periodInfo.getKeyPair()) {
-				createPeriodKeyPair(feeBase, periodKeyPair.getKeyName(), periodKeyPair.getValue(), period);
+			// Step 5b: Import StudentProfile.PeriodInformation.keyPair (List<KeyPair>)
+			if (period != null) {
+				for (KeyPair periodKeyPair : periodInfo.getKeyPair()) {
+					createPeriodKeyPair(feeBase, periodKeyPair.getKeyName(), periodKeyPair.getValue(), period);
+				}
+			}
+			
+			// Step 6: Import StudentProfile.PeriodInformation.Study.learningUnit (List<LearningUnit>)
+			StudentProfile.PeriodInformation.Study study = periodInfo.getStudy();
+	
+			for (com.sigmasys.kuali.ksa.transform.LearningUnit lu : study.getLearningUnit()) {
+				importLearningUnit(feeBase, lu, period);
 			}
 		}
-		
-		// Step 6: Import StudentProfile.PeriodInformation.Study.learningUnit (List<LearningUnit>)
-		StudentProfile.PeriodInformation.Study study = periodInfo.getStudy();
-
-		for (com.sigmasys.kuali.ksa.transform.LearningUnit lu : study.getLearningUnit()) {
-			importLearningUnit(feeBase, lu, period);
-		}
-
 	}
 	
 	/**
