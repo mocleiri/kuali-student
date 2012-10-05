@@ -2,9 +2,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
 import com.sigmasys.kuali.ksa.krad.form.KsaChargeForm;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.TransactionType;
+import com.sigmasys.kuali.ksa.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -17,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.Enumeration;
 
 /**
@@ -108,30 +107,11 @@ public class KsaChargeController extends GenericSearchController {
    public ModelAndView submit(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
-       Enumeration<String> enumeration = request.getParameterNames();
-       while(enumeration.hasMoreElements()){
-           String name = enumeration.nextElement();
-           logger.info("Parameter: " + name + " Value: " + request.getParameter(name));
-       }
-       //String userId = request.getParameter("userId");
-
-       String userId = form.getActionParamaterValue("userId");
-       logger.info("Charge Form Userid: " + userId);
-       if(userId == null){
-           throw new IllegalArgumentException("Invalid Userid: " + userId);
-       }
-
 
        Charge charge = form.getCharge();
-       logger.info("Charge: " + charge);
-
-       logger.info("Amt: " + charge.getAmount());
-
-       logger.info("Dt: " + charge.getEffectiveDate());
+       charge.setAccount(form.getAccount());
 
        String typeIdString = form.getChargeTransactionTypeId();
-       logger.info("Type: " + typeIdString);
-
 
        TransactionType tt = transactionService.getTransactionType(typeIdString, charge.getEffectiveDate());
 
@@ -139,15 +119,24 @@ public class KsaChargeController extends GenericSearchController {
            // Error handler here.
            form.setStatusMessage("Invalid Transaction Type");
            return getUIFModelAndView(form);
+       } else if(! (tt instanceof DebitType)){
+           form.setStatusMessage("Transaction Type must be a charge type");
+           return getUIFModelAndView(form);
        }
+       charge.setTransactionType(tt);
+       charge.setStatementText(tt.getDescription());
+       charge.setLedgerDate(new Date());
+       charge.setOriginationDate(new Date());
+       charge.setRecognitionDate(new Date());
+       charge.setNativeAmount(charge.getAmount());
+
 
        try{
-           Charge newCharge = (Charge)transactionService.createTransaction(typeIdString, "", userId,
-                   charge.getEffectiveDate(), null,  charge.getAmount());
+           Long newId = transactionService.persistTransaction(charge);
 
 
-           if(newCharge != null){
-               form.setCharge(newCharge);
+           if(newId != null){
+               form.setCharge(charge);
                form.setStatusMessage("Charge saved");
            }
        } catch(TransactionNotAllowedException e){
