@@ -132,9 +132,8 @@
                       p:fieldLabel.renderColon="true"
                       p:labelPlacement="TOP"
                       p:maxLength="21">
-                    <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="22"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="payment.effectiveDate"
@@ -179,8 +178,6 @@
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitAge" p:actionLabel="Submit and Age"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"
-                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel" p:actionLabel="Cancel"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
             </list>
         </property>

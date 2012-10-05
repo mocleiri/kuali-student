@@ -28,7 +28,6 @@ public class KsaChargeForm extends AbstractViewModel {
      Get / Set methods
    */
 
-
    public Account getAccount() {
       return account;
    }

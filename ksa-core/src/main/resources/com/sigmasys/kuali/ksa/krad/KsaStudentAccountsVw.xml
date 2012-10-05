@@ -52,7 +52,6 @@
                         </list>
                     </property>
                 </bean>
-
                 <!-- transactions overview for an account roll-up and ungroupded list -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Account Transactions">
                     <property name="items">
@@ -105,23 +104,18 @@
     ********************************************************************************************************************
                                              Home page Quick Options section
     A quick menu of options with links to other pages, or to other views and pages
-    the map request, the view, the page
+    the map request, the view, the page   p:instructionalText="Options"  This is the initial "Landing" page from Login
     ********************************************************************************************************************
     -->
     <!-- A quick menu of options with links to other pages -->
     <bean id="homeQuickOptions" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
           p:title="Quick Menu"
-          p:instructionalText="Options">
+          p:instructionalText="">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Transactions for a Person" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
-                <bean parent="Uif-Link" p:linkText="Currency Type" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
-                <bean parent="Uif-Link" p:linkText="Activity" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaActivityPage"/>
+
             </list>
         </property>
     </bean>
@@ -169,7 +163,16 @@
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollup.name"/>
-                <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
+                <bean parent="Uif-InputField" p:propertyName="amount"
+                      p:label="Balance"
+                      p:maxLength="21"
+                      p:labelPlacement="TOP"
+                      p:fieldLabel.renderColon="true">
+                    <property name="readOnly" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                    </property>
+                </bean>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
                       p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
@@ -231,10 +234,17 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
+<!--                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>-->
+                <bean parent="Uif-InputField" p:propertyName="transactionTypeValue" p:label="Type">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:style="resize:none;"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="transactionType.description" p:label="Statement Description">
@@ -244,7 +254,14 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
+                <bean parent="Uif-InputField" p:propertyName="amount"
+                      p:label="Balance"
+                      p:maxLength="21"
+                      p:align="right">
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                    </property>
+                </bean>
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
                       p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
@@ -321,7 +338,16 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Balance" p:propertyName="amount" p:align="right"/>
+                <bean parent="Uif-InputField" p:propertyName="amount"
+                      p:label="Balance"
+                      p:maxLength="21"
+                      p:align="right">
+                    <property name="readOnly" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                    </property>
+                </bean>
+
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
                       p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
@@ -440,11 +466,13 @@
                 </bean>
 
                 <!-- Amount fields -->
-                <bean parent="Uif-InputField" p:propertyName="amount" p:label="Amount" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="amount"
+                      p:label="Amount"
+                      p:maxLength="21"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="internal" p:label="Internal"
@@ -454,27 +482,31 @@
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="amountAllocated" p:label="Amount Allocated"
-                      p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="amountAllocated"
+                      p:label="Amount Allocated"
+                      p:maxLength="21"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="amountAllocatedLocked"
-                      p:label="Amount Allocated (and locked)" p:maxLength="16"
+                      p:label="Amount Allocated (and locked)"
+                      p:maxLength="21"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="nativeAmountCurr" p:label="Native Amount" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="nativeAmountCurr"
+                      p:label="Native Amount"
+                      p:maxLength="21"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
 
@@ -608,7 +640,7 @@
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Ledger Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
@@ -631,10 +663,6 @@
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="done"
                       p:actionLabel="Done"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
-                    <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"
-                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>-->
                 </bean>
                 <!-- TODO Really in the middle of a page -->
 <!--                <bean parent="Uif-NavigationActionLink"
@@ -652,7 +680,6 @@
     This is the list of allocations
     ********************************************************************************************************************
     -->
-
     <bean id="accountOVTransactionAllocationSection" parent="Uif-Disclosure-TableCollectionSection"
           p:layoutManager.numberOfColumns="4"
           p:title="Allocations for @{account.id}"
@@ -690,10 +717,6 @@
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="lock"
                       p:actionLabel="Done"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);">
-                    <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"           writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);
-                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>-->
                 </bean>
             </list>
         </property>
@@ -715,54 +738,58 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="allocationId" p:label="Allocation ID" p:maxLength="16">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="payerTransactionId" p:label="Payer Transaction ID"
+                <bean parent="Uif-InputField" p:propertyName="allocationId"
+                      p:label="Allocation ID"
                       p:maxLength="16">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="paidTransactionId" p:label="Paid Transaction ID"
+                <bean parent="Uif-InputField" p:propertyName="payerTransactionId"
+                      p:label="Payer Transaction ID"
                       p:maxLength="16">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="allocationAccountId" p:label="Account ID"
+                <bean parent="Uif-InputField" p:propertyName="paidTransactionId"
+                      p:label="Paid Transaction ID"
                       p:maxLength="16">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="allocationLocked" p:label="Locked"
+                <bean parent="Uif-InputField" p:propertyName="allocationAccountId"
+                      p:label="Account ID"
+                      p:maxLength="16">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="allocationLocked"
+                      p:label="Locked"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="allocationAmount" p:label="Amount" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="allocationAmount"
+                      p:label="Amount"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="17"/>
                     </property>
                 </bean>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="clearAllocations"
                       p:actionLabel="Clear Allocation"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
-                    <!--<property name="actionImage">
-                        <bean parent="Uif-ImageField"
-                              p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>-->
                 </bean>
             </list>
         </property>

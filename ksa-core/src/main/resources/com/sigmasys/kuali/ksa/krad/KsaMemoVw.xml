@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean id="KsaMemoView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="title" value="Memos"/>
+        <property name="entryPageId" value="MemosPage"/>
+        <property name="navigation">
+            <bean parent="Uif-KsaPageNavigation">
+                <property name="items">
+                    <list>
+                        <!-- TODO Advanced Search -->
+                        <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
+                              p:actionLabel="Advanced Search"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-Page" p:id="MemosPage" p:title="@{account.id}"
+                      p:instructionalText="The following is a list of memos for the selected account @{account.id}">
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
+                                  p:actionLabel="Refresh"
+                                  p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                            </bean>
+                            <ref bean="memoDateRangeSection"/>
+                            <ref bean="memoTableSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="AddMemoPage" p:title="@{account.id}"
+                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                    <property name="items">
+                        <list>
+                            <ref bean="addMemoSection"/>
+                            <ref bean="addMemoControlsGroup"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="ViewMemoPage" p:title="@{account.id}"
+                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                    <property name="items">
+                        <list>
+                            <ref bean="viewMemoSection"/>
+                            <ref bean="viewMemoControlsGroup"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="EditMemoPage" p:title="@{account.id}"
+                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                    <property name="items">
+                        <list>
+                            <ref bean="viewMemoSection"/>
+                            <ref bean="viewMemoControlsGroup"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="FollowUpMemoPage" p:title="@{account.id}"
+                      p:instructionalText="Memos are freeform text items, which can be entered by system users to provide a history of when and why certain things have happened on the account.">
+                    <property name="items">
+                        <list>
+                            <!--<ref bean="updateMemoSection"/>
+                            <ref bean="updateMemoControlsGroup"/>-->
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+<!--        <property name="additionalCssFiles" ref=""/>
+        <property name="additionalJsFiles" ref=""/>
+        <property name="viewHelperServiceClassName" value=""/>
+        <property name="defaultBindingObjectPath" vaue=""/>-->
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaMemoForm"/>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Add Memo page section
+    A user definable date range from and to values
+    ********************************************************************************************************************
+    -->
+    <bean id="memoDateRangeSection" parent="Uif-HorizontalBoxSection"
+          p:title="Date Range">
+        <property name="items">
+        <list>
+            <bean parent="Uif-InputField" p:propertyName="fromDate"
+                  p:label="Show information from"
+                  p:labelPlacement="LEFT"
+                  p:maxLength="10">
+                <property name="bindingInfo.bindToForm" value="true"/>
+                <property name="control">
+                    <bean parent="Uif-DateControl" p:size="11"/>
+                </property>
+            </bean>
+            <bean parent="Uif-InputField" p:propertyName="toDate"
+                  p:label=" to "
+                  p:labelPlacement="LEFT"
+                  p:maxLength="10">
+                <property name="bindingInfo.bindToForm" value="true"/>
+                <property name="control">
+                    <bean parent="Uif-DateControl" p:size="11"/>
+                </property>
+            </bean>
+            <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
+                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
+        </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Memoranda table section
+    A memoranda list
+    ********************************************************************************************************************
+    -->
+    <bean id="memoTableSection" parent="Uif-Disclosure-TableCollectionSection"
+        p:layoutManager.numberOfColumns="4"
+        p:disclosure.render="false"
+        p:progressiveRenderViaAJAX="true"
+        p:instructionalText="The memo list">
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
+        <property name="propertyName" value="memos"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="memos.effectiveDate"
+                      p:label="Effective Date"
+                      p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.text"
+                      p:label="Description">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:style="resize:none;"/>
+                    </property>
+                </bean>
+                <!-- using a button means the controller would need to redirect to the appropriate page -->
+                <bean parent="Uif-Link" p:linkText="Follow-up" p:target="_self"
+                      p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}"/>
+                <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
+                      p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Add Memorandum section
+    Add a memorandum input
+    ********************************************************************************************************************
+    -->
+    <bean id="addMemoSection" parent="Uif-VerticalBoxSection"
+          p:layoutManager.orientation="VERTICAL">
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="memo.effectiveDate"
+                      p:label="Effective Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.expirationDate"
+                      p:label="Expiration Date"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.accessLevel"
+                      p:label="Level">
+                    <property name="control">
+                        <bean parent="Uif-HorizontalRadioControl">
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L1" p:value="Level 1"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L5" p:value="Level 5"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.text"
+                      p:label="Memo"
+                      p:labelPlacement="TOP">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:style="resize:none;"
+                              p:watermarkText="Type in information text here..."/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Memo controls group
+    A group of controls to support the add of a memorandum
+    ********************************************************************************************************************
+    -->
+    <bean id="addMemoControlsGroup" parent="Uif-HorizontalBoxGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertMemo"
+                      p:actionLabel="Submit"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        View Memorandum section
+    View a memorandum input
+    ********************************************************************************************************************
+    -->
+    <bean id="viewMemoSection" parent="Uif-GridSection"
+          p:title="@{account.id}"
+          p:instructionalText="View a Memo">
+        <property name="layoutManager">
+            <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
+        </property>
+        <property name="disclosure.render" value="false"/>
+        <property name="readOnly" value="true"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="memo.effectiveDate"
+                      p:label="Effective Date"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.expirationDate"
+                      p:label="Expiration Date"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.accessLevel"
+                      p:label="Level"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-HorizontalRadioControl">
+                            <property name="options">
+                                <list>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L1" p:value="Level 1"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="L5" p:value="Level 5"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memo.text"
+                      p:label="Description"
+                      p:fieldLabel.renderColon="true"
+                      p:labelPlacement="LEFT">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:style="resize:none;"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    *******************************************************************************************************************
+                                        Memo controls group
+    A group of controls to support the view of a memorandum
+    ********************************************************************************************************************
+    -->
+    <bean id="viewMemoControlsGroup" parent="Uif-HorizontalBoxGroup">
+        <property name="items">
+            <list>
+                <!-- using a button means the controller would need to redirect to the appropriate page -->
+                <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
+                      p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
+                <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
+                      p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

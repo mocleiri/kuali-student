@@ -58,19 +58,8 @@
                 <bean parent="Uif-Page" p:id="QuickViewAddMemoPage" p:title="Add Memo">
                     <property name="items">
                         <list>
-                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addMemo"
-                                  p:actionLabel="Add Memo"
-                                  p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
-                                <!--                    <property name="actionImage">
-                                    <bean parent="Uif-Image"
-                                          p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                                </property>-->
-                            </bean>
-                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="cancel"
-                                  p:actionLabel="Cancel"
-                                  p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
-                            </bean>
                             <ref bean="quickViewAddMemoSection"/>
+                            <ref bean="memoControlsGroup"/>
                         </list>
                     </property>
                 </bean>
@@ -82,7 +71,7 @@
         <property name="viewHelperServiceClassName" value=""/>
         <property name="defaultBindingObjectPath" vaue=""/>
 -->
-        <property name="formClass" value=""/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm"/>
     </bean>
 
     <!--
@@ -127,43 +116,43 @@
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
                       p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-InputField" p:propertyName="pastDueAmount"
-                      p:label="Past Due"
-                      p:maxLength="10"
+                      p:label="PastDue"
+                      p:fieldLabel.renderColon="true"
                       p:labelPlacement="LEFT"
-                      p:fieldLabel.renderColon="true">
+                      p:maxLength="21">
                     <property name="readOnly" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="11"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="balanceAmount"
                       p:label="Balance"
-                      p:maxLength="10"
-                      p:labelPlacement="TOP"
-                      p:fieldLabel.renderColon="true">
+                      p:fieldLabel.renderColon="true"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21">
                     <property name="readOnly" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="futureAmount"
                       p:label="Future"
-                      p:maxLength="10"
-                      p:labelPlacement="TOP"
-                      p:fieldLabel.renderColon="true">
+                      p:fieldLabel.renderColon="true"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21">
                     <property name="readOnly" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="defermentAmount"
                       p:label="Deferments"
-                      p:maxLength="10"
-                      p:labelPlacement="TOP"
-                      p:fieldLabel.renderColon="true">
+                      p:fieldLabel.renderColon="true"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21">
                     <property name="readOnly" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
                 <bean parent="Uif-HorizontalBoxSubSection">
@@ -407,7 +396,7 @@
             <list>
                  <ref bean="quickViewMemosTable"/>
                 <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                      p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -519,5 +508,21 @@
         </property>
     </bean>
 
+    <!--
+    *******************************************************************************************************************
+                                        Memo controls group
+    A group of controls to support the add of a memoranda
+    ********************************************************************************************************************
+    -->
+    <bean id="memoControlsGroup" parent="Uif-HorizontalBoxGroup">
+        <property name="items">
+            <list>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addMemo"
+                      p:actionLabel="Add Memo"
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                </bean>
+            </list>
+        </property>
+    </bean>
 
 </beans>
