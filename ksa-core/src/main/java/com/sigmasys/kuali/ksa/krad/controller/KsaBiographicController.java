@@ -1,8 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.exception.AccountTypeNotFoundException;
 import com.sigmasys.kuali.ksa.krad.form.KsaBiographicForm;
-import com.sigmasys.kuali.ksa.krad.form.KsaChargeForm;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.PersonName;
 import com.sigmasys.kuali.ksa.model.PostalAddress;
@@ -26,36 +24,36 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaBiographicInformationVw")
 public class KsaBiographicController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+    private static final Log logger = LogFactory.getLog(KsaBiographicController.class);
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
     protected KsaBiographicForm createInitialForm(HttpServletRequest request) {
-       KsaBiographicForm form = new KsaBiographicForm();
-       form.setStatusMessage("");
-       String userId = request.getParameter("userId");
+        KsaBiographicForm form = new KsaBiographicForm();
+        form.setStatusMessage("");
+        String userId = request.getParameter("userId");
 
-       if (userId != null) {
+        if (userId != null) {
 
-          Account account = accountService.getFullAccount(userId);
+            Account account = accountService.getFullAccount(userId);
 
-          if (account == null) {
-             String errMsg = "Cannot find Account by ID = " + userId;
-             logger.error(errMsg);
-             throw new IllegalStateException(errMsg);
-          }
+            if (account == null) {
+                String errMsg = "Cannot find Account by ID = " + userId;
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
 
-          form.setAccount(account);
+            form.setAccount(account);
 
-       } /*else {
+        } /*else {
           String errMsg = "'userId' request parameter cannot be null";
           logger.error(errMsg);
           throw new IllegalStateException(errMsg);
        }*/
 
-       return form;
+        return form;
     }
 
     /**
@@ -74,13 +72,13 @@ public class KsaBiographicController extends GenericSearchController {
 
         Account account = form.getAccount();
 
-        if(account == null){
+        if (account == null) {
             String errMsg = "No account available";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
 
-        if("BiographicAddPersonPage".equals(pageId)){
+        if ("BiographicAddPersonPage".equals(pageId)) {
 
             return getUIFModelAndView(form);
         }
@@ -106,24 +104,6 @@ public class KsaBiographicController extends GenericSearchController {
         form.setAccount(account);
 
         return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-
-    @RequestMapping(params = "methodToCall=start")
-    public ModelAndView start(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-
-        // populate model for testing
-
-        return super.start(form, result, request, response);
-
     }
 
     /**
@@ -188,150 +168,143 @@ public class KsaBiographicController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertPerson")
-   @Transactional(readOnly = false)
-   public ModelAndView addPerson(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                                 HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertPerson")
+    @Transactional(readOnly = false)
+    public ModelAndView addPerson(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                  HttpServletRequest request, HttpServletResponse response) {
 
-       Account account = form.getAccount();
+        Account account = form.getAccount();
 
-       PersonName name = new PersonName();
-       name.setKimNameType(form.getKimNameType());
-       name.setFirstName(form.getFirstName());
-       name.setMiddleName(form.getMiddleName());
-       name.setLastName(form.getLastName());
-       name.setSuffix(form.getSuffix());
-       name.setTitle(form.getTitle());
-       name.setDefault(new Boolean(form.getPersonDefault()));
+        PersonName name = new PersonName();
+        name.setKimNameType(form.getKimNameType());
+        name.setFirstName(form.getFirstName());
+        name.setMiddleName(form.getMiddleName());
+        name.setLastName(form.getLastName());
+        name.setSuffix(form.getSuffix());
+        name.setTitle(form.getTitle());
+        name.setDefault(new Boolean(form.getPersonDefault()));
 
-       PersonName newName = accountService.addPersonName(account.getId(), name);
+        accountService.addPersonName(account.getId(), name);
 
+        form.setStatusMessage("Person added");
+        return getUIFModelAndView(form);
+    }
 
-       form.setStatusMessage("Person added");
-      return getUIFModelAndView(form);
-   }
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePerson")
+    @Transactional(readOnly = false)
+    public ModelAndView updatePerson(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePerson")
-   @Transactional(readOnly = false)
-   public ModelAndView updatePerson(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                                    HttpServletRequest request, HttpServletResponse response) {
+        // @TODO: This is wrong.  Don't create a new one, get the one to update
+        PersonName name = new PersonName();
 
-       // @TODO: This is wrong.  Don't create a new one, get the one to update
-       PersonName name = new PersonName();
-
-       name.setKimNameType(form.getKimNameType());
-       name.setFirstName(form.getFirstName());
-       name.setMiddleName(form.getMiddleName());
-       name.setLastName(form.getLastName());
-       name.setSuffix(form.getSuffix());
-       name.setTitle(form.getTitle());
-       name.setDefault(new Boolean(form.getPersonDefault()));
+        name.setKimNameType(form.getKimNameType());
+        name.setFirstName(form.getFirstName());
+        name.setMiddleName(form.getMiddleName());
+        name.setLastName(form.getLastName());
+        name.setSuffix(form.getSuffix());
+        name.setTitle(form.getTitle());
+        name.setDefault(new Boolean(form.getPersonDefault()));
 
 
-       return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertPostal")
-   @Transactional(readOnly = false)
-   public ModelAndView insertPostal(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                                    HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertPostal")
+    @Transactional(readOnly = false)
+    public ModelAndView insertPostal(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
-       Account account = form.getAccount();
+        // do save stuff...
+        Account account = form.getAccount();
 
-       PostalAddress address = new PostalAddress();
-       address.setKimAddressType(form.getAddressType());
-       address.setStreetAddress1(form.getAddress1());
-       address.setStreetAddress2(form.getAddress2());
-       address.setStreetAddress3(form.getAddress3());
-       address.setCity(form.getCity());
-       address.setState(form.getStateCode());
-       address.setPostalCode(form.getPostalCode());
-       address.setCountry(form.getCountryCode());
-       address.setDefault(new Boolean(form.getPostalDefault()));
+        PostalAddress address = new PostalAddress();
+        address.setKimAddressType(form.getAddressType());
+        address.setStreetAddress1(form.getAddress1());
+        address.setStreetAddress2(form.getAddress2());
+        address.setStreetAddress3(form.getAddress3());
+        address.setCity(form.getCity());
+        address.setState(form.getStateCode());
+        address.setPostalCode(form.getPostalCode());
+        address.setCountry(form.getCountryCode());
+        address.setDefault(new Boolean(form.getPostalDefault()));
 
-       address = accountService.addPostalAddress(account.getId(), address);
+        accountService.addPostalAddress(account.getId(), address);
 
-       form.setStatusMessage("Address added");
+        form.setStatusMessage("Address added");
 
-       return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePostal")
-   @Transactional(readOnly = false)
-   public ModelAndView updatePostal(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                                    HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePostal")
+    @Transactional(readOnly = false)
+    public ModelAndView updatePostal(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                     HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        // do save stuff...
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertElectronicContact")
-   @Transactional(readOnly = false)
-   public ModelAndView insertElectronicContact(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                                               HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertElectronicContact")
+    @Transactional(readOnly = false)
+    public ModelAndView insertElectronicContact(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                                HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        // do save stuff...
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateElectronicContact")
-   @Transactional(readOnly = false)
-   public ModelAndView updateElectronicContact(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
-                                               HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateElectronicContact")
+    @Transactional(readOnly = false)
+    public ModelAndView updateElectronicContact(@ModelAttribute("KualiForm") KsaBiographicForm form, BindingResult result,
+                                                HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        // do save stuff...
 
-      return getUIFModelAndView(form);
-   }   
+        return getUIFModelAndView(form);
+    }
 }

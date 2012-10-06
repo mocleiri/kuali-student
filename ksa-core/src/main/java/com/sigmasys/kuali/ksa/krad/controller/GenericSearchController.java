@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class GenericSearchController extends UifControllerBase {
 
-    private static final String ALL_SEARCH_PAGE_ID = "QuickViewPage";
     private static final String ACCOUNT_SEARCH_PAGE_ID = "AccountSearchPage";
     private static final String TRANSACTION_SEARCH_PAGE_ID = "TransactionSearchPage";
 

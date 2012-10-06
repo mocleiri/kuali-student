@@ -3,6 +3,8 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.CustomerServiceForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,6 +30,7 @@ import java.util.List;
 @RequestMapping(value = "/customerService")
 public class CustomerServiceController extends GenericSearchController {
 
+    private static final Log logger = LogFactory.getLog(CustomerServiceController.class);
 
     @Autowired
     private InformationService informationService;
@@ -127,8 +130,9 @@ public class CustomerServiceController extends GenericSearchController {
                         accountId, dtNow, null, form.getCharge().getAmount());
                 form.setTransactionStatus("Success");
 
-            } catch (Exception exp) {
-                form.setTransactionStatus(exp.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                form.setTransactionStatus(e.getMessage());
             }
 
             // populate the form using the id
@@ -161,8 +165,9 @@ public class CustomerServiceController extends GenericSearchController {
 
                 form.setTransactionStatus("Success");
 
-            } catch (Exception exp) {
-                form.setTransactionStatus(exp.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                form.setTransactionStatus(e.getMessage());
             }
 
             // populate the form using the id
@@ -200,8 +205,9 @@ public class CustomerServiceController extends GenericSearchController {
 
                 form.setTransactionStatus("Success");
 
-            } catch (Exception exp) {
-                form.setTransactionStatus(exp.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                form.setTransactionStatus(e.getMessage());
             }
 
             // populate the form using the id

@@ -26,7 +26,7 @@ import java.util.Date;
 @RequestMapping(value = "/ksaMemoVw")
 public class KsaMemoController extends GenericSearchController {
 
-    private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+    private static final Log logger = LogFactory.getLog(KsaMemoController.class);
 
     @Autowired
     private InformationService informationService;
@@ -75,28 +75,29 @@ public class KsaMemoController extends GenericSearchController {
         // example user 1
         String userId = request.getParameter("userId");
 
-        if (pageId != null && pageId.compareTo("MemosPage") == 0) {
+        if (pageId != null && pageId.equals("MemosPage")) {
+
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
             form.setMemos(informationService.getMemos(userId));
 
-        } else if (pageId != null && pageId.compareTo("ViewMemoPage") == 0) {
+        } else if (pageId != null && pageId.equals("ViewMemoPage")) {
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
             form.setAefInstructionalText("View a memo");
 
-        } else if (pageId != null && pageId.compareTo("EditMemoPage") == 0) {
+        } else if (pageId != null && pageId.equals("EditMemoPage")) {
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
             form.setAefInstructionalText("Edit a memo");
 
-        } else if (pageId != null && pageId.compareTo("FollowUpMemoPage") == 0) {
+        } else if (pageId != null && pageId.equals("FollowUpMemoPage")) {
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
@@ -105,24 +106,6 @@ public class KsaMemoController extends GenericSearchController {
         }
 
         return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-
-    @RequestMapping(params = "methodToCall=start")
-    public ModelAndView start(@ModelAttribute("KualiForm") KsaMemoForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-
-        // populate model for testing
-
-        return super.start(form, result, request, response);
-
     }
 
     /**

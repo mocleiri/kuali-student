@@ -4,6 +4,8 @@ import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,8 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/cashierTxMemo")
 public class CashierTxMemoController extends GenericSearchController {
+
+    private static final Log logger = LogFactory.getLog(CashierTxMemoController.class);
 
 
     @Autowired
@@ -124,8 +128,9 @@ public class CashierTxMemoController extends GenericSearchController {
 
                 form.setTransactionStatus("Success");
 
-            } catch (Exception exp) {
-                form.setTransactionStatus(exp.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                form.setTransactionStatus(e.getMessage());
             }
 
             // populate the form using the id
@@ -158,8 +163,9 @@ public class CashierTxMemoController extends GenericSearchController {
 
                 form.setTransactionStatus("Success");
 
-            } catch (Exception exp) {
-                form.setTransactionStatus(exp.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                form.setTransactionStatus(e.getMessage());
             }
 
             // populate the form using the id
@@ -196,8 +202,9 @@ public class CashierTxMemoController extends GenericSearchController {
 
                 form.setTransactionStatus("Success");
 
-            } catch (Exception exp) {
-                form.setTransactionStatus(exp.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                form.setTransactionStatus(e.getMessage());
             }
 
             // populate the form using the id

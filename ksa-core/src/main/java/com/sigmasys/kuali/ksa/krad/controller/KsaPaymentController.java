@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-import java.util.Enumeration;
 
 /**
  * Created by: dmulderink on 9/30/12 at 11:27 AM
@@ -26,185 +25,164 @@ import java.util.Enumeration;
 @RequestMapping(value = "/ksaPaymentVw")
 public class KsaPaymentController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected KsaPaymentForm createInitialForm(HttpServletRequest request) {
-      KsaPaymentForm form = new KsaPaymentForm();
-      form.setStatusMessage("");
-      String userId = request.getParameter("userId");
+    private static final Log logger = LogFactory.getLog(KsaPaymentController.class);
 
-      if (userId != null) {
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected KsaPaymentForm createInitialForm(HttpServletRequest request) {
 
-         Account account = accountService.getFullAccount(userId);
+        KsaPaymentForm form = new KsaPaymentForm();
+        form.setStatusMessage("");
+        String userId = request.getParameter("userId");
 
-         if (account == null) {
-            String errMsg = "Cannot find Account by ID = " + userId;
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-         }
+        if (userId != null) {
 
-         form.setAccount(account);
-      } /*else {
+            Account account = accountService.getFullAccount(userId);
+
+            if (account == null) {
+                String errMsg = "Cannot find Account by ID = " + userId;
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
+
+            form.setAccount(account);
+        } /*else {
          String errMsg = "'userId' request parameter cannot be null";
          logger.error(errMsg);
          throw new IllegalStateException(errMsg);
       }*/
 
-      return form;
+        return form;
 
-   }
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
-                           HttpServletRequest request, HttpServletResponse response) {
-
-      // do get stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-      // populate model for testing
-
-      return super.start(form, result, request, response);
-
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
-   @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-       // do submit stuff...
-       this.savePayment(form);
-
-       return getUIFModelAndView(form);
-
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submitAge")
-   @Transactional(readOnly = false)
-   public ModelAndView submitAge(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-       this.savePayment(form);
-       Payment payment = form.getPayment();
-
-       if(payment != null && payment.getId() != null){
-            accountService.ageDebt(payment.getAccount().getId(), false);
-       }
-
-
-
-       return getUIFModelAndView(form);
-   }
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
-      // do save stuff...
+        // do get stuff...
 
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaPaymentForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
+    @Transactional(readOnly = false)
+    public ModelAndView submit(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do refresh stuff...
-      return getUIFModelAndView(form);
-   }
+        // do submit stuff...
+        this.savePayment(form);
 
-    private void savePayment(KsaPaymentForm form){
+        return getUIFModelAndView(form);
+
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submitAge")
+    @Transactional(readOnly = false)
+    public ModelAndView submitAge(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+                                  HttpServletRequest request, HttpServletResponse response) {
+        // do submit stuff...
+
+        this.savePayment(form);
+        Payment payment = form.getPayment();
+
+        if (payment != null && payment.getId() != null) {
+            accountService.ageDebt(payment.getAccount().getId(), false);
+        }
+
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
+    @Transactional(readOnly = false)
+    public ModelAndView save(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+                             HttpServletRequest request, HttpServletResponse response) {
+
+        // do save stuff...
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+        // do cancel stuff...
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @param result
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
+                                HttpServletRequest request, HttpServletResponse response) {
+        // do refresh stuff...
+        return getUIFModelAndView(form);
+    }
+
+    private void savePayment(KsaPaymentForm form) {
+
         Payment payment = form.getPayment();
 
         payment.setAccount(form.getAccount());
 
         String typeIdString = form.getPaymentTransactionTypeId();
 
-        TransactionType tt = null;
-        try{
+        TransactionType tt;
+        try {
             tt = transactionService.getTransactionType(typeIdString, payment.getEffectiveDate());
-        }catch(InvalidTransactionTypeException e){
+        } catch (InvalidTransactionTypeException e) {
+            logger.error(e.getMessage(), e);
             form.setStatusMessage(e.getMessage());
             return;
         }
 
-        if(tt == null){
+        if (tt == null) {
             // Error handler here.
             form.setStatusMessage("Invalid Transaction Type");
             return;
-        } else if(! (tt instanceof CreditType)){
+        } else if (!(tt instanceof CreditType)) {
             form.setStatusMessage("Transaction Type must be a payment");
             return;
         }
@@ -218,21 +196,18 @@ public class KsaPaymentController extends GenericSearchController {
         payment.setNativeAmount(payment.getAmount());
 
 
-        try{
+        try {
             Long newId = transactionService.persistTransaction(payment);
-
-
-            if(newId != null){
+            if (newId != null) {
                 payment.setId(newId);
                 form.setPayment(payment);
                 form.setStatusMessage("Payment saved");
             }
 
-        } catch(TransactionNotAllowedException e){
+        } catch (TransactionNotAllowedException e) {
+            logger.error(e.getMessage(), e);
             form.setStatusMessage(e.getMessage());
         }
-
-        return;
 
     }
 }

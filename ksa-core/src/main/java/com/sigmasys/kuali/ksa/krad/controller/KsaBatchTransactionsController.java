@@ -26,11 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaBatchTransactionsVw")
 public class KsaBatchTransactionsController extends GenericSearchController {
 
+   private static final Log logger = LogFactory.getLog(KsaBatchTransactionsController.class);
+
    @Autowired
    private TransactionImportService transactionImportService;
 
-
-   private static final Log logger = LogFactory.getLog(AdminLiaisonController.class);
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)

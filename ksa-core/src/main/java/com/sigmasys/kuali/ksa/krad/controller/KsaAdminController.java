@@ -26,7 +26,7 @@ public class KsaAdminController extends GenericSearchController {
    private static final Log logger = LogFactory.getLog(KsaAdminController.class);
 
    @Autowired
-   ActivityService activityService;
+   private ActivityService activityService;
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)

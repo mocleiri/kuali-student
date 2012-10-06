@@ -26,7 +26,7 @@ import java.util.*;
 @RequestMapping(value = "/ksaQuickVw")
 public class KsaQuickViewController extends GenericSearchController {
 
-    private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+    private static final Log logger = LogFactory.getLog(KsaQuickViewController.class);
 
     @Autowired
     private InformationService informationService;
@@ -85,24 +85,6 @@ public class KsaQuickViewController extends GenericSearchController {
         }
 
         return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-
-    @RequestMapping(params = "methodToCall=start")
-    public ModelAndView start(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-
-        // populate model for testing
-
-        return super.start(form, result, request, response);
-
     }
 
     /**
@@ -252,22 +234,6 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setCompositeDefaultPersonName(accountById.getCompositeDefaultPersonName());
         form.setCompositeDefaultPostalAddress(accountById.getCompositeDefaultPostalAddress());
 
-        // Account Status summation totals
-        // charges by ID
-        //List<Charge> charges = transactionService.getCharges(id);
-
-        // payments by ID
-        //List<Payment> payments = transactionService.getPayments(id);
-
-        // deferments by ID
-        //List<Deferment> deferments = transactionService.getDeferments(id);
-
-        // set the form data
-
-        //form.setCharges(charges);
-        //form.setPayments(payments);
-        //form.setDeferments(deferments);
-
         BigDecimal pastDue = accountService.getOutstandingBalance(userId, ignoreDeferment) != null ? accountService.getOutstandingBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
         BigDecimal balance = accountService.getDueBalance(userId, ignoreDeferment) != null ? accountService.getDueBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
         BigDecimal future = accountService.getUnallocatedBalance(userId) != null ? accountService.getUnallocatedBalance(userId) : BigDecimal.ZERO;
@@ -298,7 +264,6 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setBalanceAmount(balance);
         form.setFutureAmount(future);
         form.setDefermentAmount(deferment);
-
 
         form.setAlerts(informationService.getAlerts(userId));
 
