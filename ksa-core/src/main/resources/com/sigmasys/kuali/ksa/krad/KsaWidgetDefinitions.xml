@@ -83,6 +83,7 @@
         </property>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="breadcrumbs" ref="Uif-KsaBreadcrumbs"/>
+        <property name="onLoadScript" value="window.onbeforeunload = null;"/>
         <property name="entryPageId" value="AccountSearchPage"/>
         <property name="applicationHeader">
             <bean parent="Uif-HeaderBase" p:id="ksa-banner">
