@@ -286,13 +286,13 @@
           p:instructionalText="Creation date then alert information">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Alert"/>
-        <property name="propertyName" value="alertList"/>
+        <property name="propertyName" value="alerts"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="compositeInfo" p:maxLength="99">
+                <bean parent="Uif-InputField" p:propertyName="displayValue" p:maxLength="99">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="100"/>
                     </property>
@@ -310,13 +310,13 @@
           p:instructionalText="Creation date then flag information">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Flag"/>
-        <property name="propertyName" value="flagList"/>
+        <property name="propertyName" value="flags"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="compositeInfo" p:maxLength="99">
+                <bean parent="Uif-InputField" p:propertyName="displayValue" p:maxLength="99">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="100"/>
                     </property>
@@ -402,13 +402,13 @@
           p:instructionalText="Creation date then memo information">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
-        <property name="propertyName" value="memoList"/>
+        <property name="propertyName" value="memos"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="compositeInfo" p:maxLength="99">
+                <bean parent="Uif-InputField" p:propertyName="displayValue" p:maxLength="99">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="100"/>
                     </property>

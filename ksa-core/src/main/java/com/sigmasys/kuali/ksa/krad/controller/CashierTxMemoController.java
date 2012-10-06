@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CashierTxMemoForm;
-import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
 
@@ -466,37 +465,11 @@ public class CashierTxMemoController extends GenericSearchController {
         form.setFuture(future);
         form.setDefermentTotal(deferment);
 
-        // Alerts, Flags and Memos
-        List<Alert> alerts = informationService.getAlerts(id);
+        form.setAlerts(informationService.getAlerts(id));
 
-        AlertsFlagsMemos afm = new AlertsFlagsMemos();
-        // Alerts
-        for (Alert alert : alerts) {
+        form.setFlags(informationService.getFlags(id));
 
-            alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
-        }
+        form.setMemos(informationService.getMemos(id));
 
-        form.setAlertList(alerts);
-
-        // Flags
-        // Flags do not have a Text field and throws an exception when there are flag records TODO
-        List<Flag> flags = informationService.getFlags(id);
-
-        for (Flag flag : flags) {
-
-            flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
-        }
-
-        form.setFlagList(flags);
-
-        List<Memo> memos = informationService.getMemos(id);
-
-        // Alerts
-        for (Memo memo : memos) {
-
-            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
-        }
-
-        form.setMemoList(memos);
     }
 }

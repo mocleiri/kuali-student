@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaMemoForm;
-import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Memo;
 import com.sigmasys.kuali.ksa.service.InformationService;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by: dmulderink on 10/4/12 at 7:53 AM
@@ -82,38 +80,29 @@ public class KsaMemoController extends GenericSearchController {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
-            List<Memo> memos = informationService.getMemos(userId);
+            form.setMemos(informationService.getMemos(userId));
 
-            AlertsFlagsMemos afm = new AlertsFlagsMemos();
-            // Alerts
-            for (Memo memo : memos) {
-
-                memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
+        } else if (pageId != null && pageId.compareTo("ViewMemoPage") == 0) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
-         form.setMemos(memos);
+            form.setAefInstructionalText("View a memo");
 
-      } else if (pageId != null && pageId.compareTo("ViewMemoPage") == 0) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
+        } else if (pageId != null && pageId.compareTo("EditMemoPage") == 0) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
 
-         form.setAefInstructionalText("View a memo");
+            form.setAefInstructionalText("Edit a memo");
 
-      } else if (pageId != null && pageId.compareTo("EditMemoPage") == 0) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
+        } else if (pageId != null && pageId.compareTo("FollowUpMemoPage") == 0) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
 
-         form.setAefInstructionalText("Edit a memo");
-
-      }  else if (pageId != null && pageId.compareTo("FollowUpMemoPage") == 0) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
-
-         form.setAefInstructionalText("Follow-up a memo");
-      }
+            form.setAefInstructionalText("Follow-up a memo");
+        }
 
         return getUIFModelAndView(form);
     }

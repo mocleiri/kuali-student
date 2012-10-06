@@ -1,20 +1,25 @@
 package com.sigmasys.kuali.ksa.model;
 
+import org.apache.commons.lang.StringUtils;
+
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Information main class
  * <p/>
+ *
  * @author Michael Ivanov
- * Date: 1/22/12
- * Time: 3:47 PM
+ *         Date: 1/22/12
+ *         Time: 3:47 PM
  */
 @Entity
 @Table(name = "KSSA_INFORMATION")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Information  extends AccountIdAware implements Identifiable {
+public class Information extends AccountIdAware implements Identifiable {
 
     /**
      * Information ID
@@ -70,12 +75,6 @@ public class Information  extends AccountIdAware implements Identifiable {
      * Timestamp
      */
     private Date lastUpdate;
-
-   /**
-    * Concatenation of one or more fields
-    */
-    private String compositeInfo;
-
 
 
     @Id
@@ -187,15 +186,27 @@ public class Information  extends AccountIdAware implements Identifiable {
         this.text = text;
     }
 
-   /**
-    * A composition of fields
-    */
-   @Transient
-   public String getCompositeInfo() {
-      return compositeInfo;
-   }
+    @Transient
+    public boolean isActive() {
+        Date curDate = new Date();
+        return effectiveDate != null && effectiveDate.compareTo(curDate) <= 0 &&
+                (expirationDate == null || expirationDate.after(curDate));
+    }
 
-   public void setCompositeInfo(String compositeInfo) {
-      this.compositeInfo = compositeInfo;
-   }
+    /**
+     * A composition of fields
+     */
+    @Transient
+    public String getDisplayValue() {
+        DateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+        StringBuilder builder = new StringBuilder(dateFormat.format(getCreationDate()));
+        String text = getText();
+        if (StringUtils.isNotEmpty(text)) {
+            builder.append(" ");
+            builder.append(text);
+        }
+        return builder.toString();
+    }
+
+
 }

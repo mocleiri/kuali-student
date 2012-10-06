@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.CustomerServiceForm;
-import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,17 +119,17 @@ public class CustomerServiceController extends GenericSearchController {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
+            Date dtNow = new Date();
 
-           try {
+            try {
 
-               transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
-                                                      accountId, dtNow, null, form.getCharge().getAmount());
-               form.setTransactionStatus("Success");
+                transactionService.createTransaction(form.getChargeTransTypeValue(), form.getCharge().getExternalId(),
+                        accountId, dtNow, null, form.getCharge().getAmount());
+                form.setTransactionStatus("Success");
 
-           } catch(Exception exp) {
-              form.setTransactionStatus(exp.getMessage());
-           }
+            } catch (Exception exp) {
+                form.setTransactionStatus(exp.getMessage());
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -153,18 +152,18 @@ public class CustomerServiceController extends GenericSearchController {
         String accountId = form.getSelectedId();
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
+            Date dtNow = new Date();
 
-           try {
+            try {
 
                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
-                                                      accountId, dtNow, null, form.getPayment().getAmount());
+                        accountId, dtNow, null, form.getPayment().getAmount());
 
-               form.setTransactionStatus("Success");
+                form.setTransactionStatus("Success");
 
-           } catch(Exception exp) {
-              form.setTransactionStatus(exp.getMessage());
-           }
+            } catch (Exception exp) {
+                form.setTransactionStatus(exp.getMessage());
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -190,20 +189,20 @@ public class CustomerServiceController extends GenericSearchController {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
 
-           Date dtNow = new Date();
+            Date dtNow = new Date();
 
-           try {
+            try {
 
-                 transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
-                                                      accountId, dtNow, null, form.getPayment().getAmount());
+                transactionService.createTransaction(form.getPaymentTransTypeValue(), form.getPayment().getExternalId(),
+                        accountId, dtNow, null, form.getPayment().getAmount());
 
-                 accountService.ageDebt(accountId, form.getIgnoreDeferment());
+                accountService.ageDebt(accountId, form.getIgnoreDeferment());
 
-               form.setTransactionStatus("Success");
+                form.setTransactionStatus("Success");
 
-           } catch(Exception exp) {
-              form.setTransactionStatus(exp.getMessage());
-           }
+            } catch (Exception exp) {
+                form.setTransactionStatus(exp.getMessage());
+            }
 
             // populate the form using the id
             populateForm(accountId, form);
@@ -359,7 +358,7 @@ public class CustomerServiceController extends GenericSearchController {
                     break;
                 case FLAG:
                     info = new Flag();
-                    ((Flag)info).setSeverity(0);
+                    ((Flag) info).setSeverity(0);
                     break;
                 case MEMO:
                     info = new Memo();
@@ -485,38 +484,10 @@ public class CustomerServiceController extends GenericSearchController {
         form.setFuture(future);
         form.setDefermentTotal(deferment);
 
-        // Alerts, Flags and Memos
-        List<Alert> alerts = informationService.getAlerts(id);
+        form.setAlerts(informationService.getAlerts(id));
 
-        AlertsFlagsMemos afm = new AlertsFlagsMemos();
-        // Alerts
-        for (Alert alert : alerts) {
+        form.setFlags(informationService.getFlags(id));
 
-            alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
-        }
-
-        form.setAlertList(alerts);
-
-       // Flags
-       // Flags do not have a Text field and throws an exception when there are flag records TODO
-       List<Flag> flags = informationService.getFlags(id);
-
-       for (Flag flag : flags) {
-
-          flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
-       }
-
-       form.setFlagList(flags);
-
-       List<Memo> memos = informationService.getMemos(id);
-
-        // Alerts
-        for (Memo memo : memos) {
-
-            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
-
-        }
-
-        form.setMemoList(memos);
+        form.setMemos(informationService.getMemos(id));
     }
 }

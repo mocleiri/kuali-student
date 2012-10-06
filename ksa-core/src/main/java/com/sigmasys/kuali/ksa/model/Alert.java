@@ -11,6 +11,5 @@ import javax.persistence.*;
 @DiscriminatorValue(InformationTypeValue.ALERT_CODE)
 public class Alert extends Information {
 
-
 }
 

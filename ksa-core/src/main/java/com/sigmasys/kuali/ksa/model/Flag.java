@@ -22,7 +22,7 @@ public class Flag extends Information {
     private Integer severity;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "FLAG_TYPE_ID_FK")
     public FlagType getType() {
         return type;
@@ -40,5 +40,13 @@ public class Flag extends Information {
     public void setSeverity(Integer severity) {
         this.severity = severity;
     }
+
+    @Override
+    @Transient
+    public String getText() {
+        FlagType type = getType();
+        return (type != null) ? type.getDescription() : "";
+    }
+
 }
 

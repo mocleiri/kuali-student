@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm;
-import com.sigmasys.kuali.ksa.krad.util.AlertsFlagsMemos;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
@@ -300,37 +299,11 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setFutureAmount(future);
         form.setDefermentAmount(deferment);
 
-        // Alerts, Flags and Memos
-        List<Alert> alerts = informationService.getAlerts(userId);
 
-        AlertsFlagsMemos afm = new AlertsFlagsMemos();
-        // Alerts
-        for (Alert alert : alerts) {
+        form.setAlerts(informationService.getAlerts(userId));
 
-            alert.setCompositeInfo(afm.CreateCompositeAlert(alert));
-        }
+        form.setFlags(informationService.getFlags(userId));
 
-        form.setAlerts(alerts);
-
-        // Flags
-        // Flags do not have a Text field and throws an exception when there are flag records TODO
-        List<Flag> flags = informationService.getFlags(userId);
-
-        for (Flag flag : flags) {
-
-            flag.setCompositeInfo(afm.CreateCompositeFlag(flag));
-        }
-
-        form.setFlags(flags);
-
-        List<Memo> memos = informationService.getMemos(userId);
-
-        // Memos
-        for (Memo memo : memos) {
-
-            memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
-        }
-
-        form.setMemos(memos);
+        form.setMemos(informationService.getMemos(userId));
     }
 }

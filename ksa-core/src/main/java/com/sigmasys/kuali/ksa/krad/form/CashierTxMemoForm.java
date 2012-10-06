@@ -53,10 +53,10 @@ public class CashierTxMemoForm extends AbstractViewModel {
    private String compositePostalAddress;
 
    // Alerts
-   private List<Alert> alertList;
+   private List<Alert> alerts;
 
    // Flags
-   private List<Flag> flagList;
+   private List<Flag> flags;
 
    // the last aging date
    private Date lastAgeDate;
@@ -77,7 +77,7 @@ public class CashierTxMemoForm extends AbstractViewModel {
    private boolean ignoreDeferment;
 
    // a list of Memos
-   private List<Memo> memoList;
+   private List<Memo> memos;
 
    // the Information Text field
    private String infoText;
@@ -308,32 +308,32 @@ public class CashierTxMemoForm extends AbstractViewModel {
     * Get the alert list
     * @return
     */
-   public List<Alert> getAlertList() {
-      return alertList;
+   public List<Alert> getAlerts() {
+      return alerts;
    }
 
    /**
     * Set the alert list
-    * @param alertList
+    * @param alerts
     */
-   public void setAlertList(List<Alert> alertList) {
-      this.alertList = alertList;
+   public void setAlerts(List<Alert> alerts) {
+      this.alerts = alerts;
    }
 
    /**
     * Get the flag list
     * @return
     */
-   public List<Flag> getFlagList() {
-      return flagList;
+   public List<Flag> getFlags() {
+      return flags;
    }
 
    /**
     * Set the flag list
-    * @param flagList
+    * @param flags
     */
-   public void setFlagList(List<Flag> flagList) {
-      this.flagList = flagList;
+   public void setFlags(List<Flag> flags) {
+      this.flags = flags;
    }
 
    /**
@@ -436,16 +436,16 @@ public class CashierTxMemoForm extends AbstractViewModel {
     * Get the memo list
     * @return
     */
-   public List<Memo> getMemoList() {
-      return memoList;
+   public List<Memo> getMemos() {
+      return memos;
    }
 
    /**
     * Set the memo list
-    * @param memoList
+    * @param memos
     */
-   public void setMemoList(List<Memo> memoList) {
-      this.memoList = memoList;
+   public void setMemos(List<Memo> memos) {
+      this.memos = memos;
    }
 
    /**
