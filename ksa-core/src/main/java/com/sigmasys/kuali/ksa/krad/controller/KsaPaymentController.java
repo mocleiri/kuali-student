@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
 import com.sigmasys.kuali.ksa.krad.form.KsaPaymentForm;
 import com.sigmasys.kuali.ksa.model.*;
@@ -191,7 +192,13 @@ public class KsaPaymentController extends GenericSearchController {
 
         String typeIdString = form.getPaymentTransactionTypeId();
 
-        TransactionType tt = transactionService.getTransactionType(typeIdString, payment.getEffectiveDate());
+        TransactionType tt = null;
+        try{
+            tt = transactionService.getTransactionType(typeIdString, payment.getEffectiveDate());
+        }catch(InvalidTransactionTypeException e){
+            form.setStatusMessage(e.getMessage());
+            return;
+        }
 
         if(tt == null){
             // Error handler here.
