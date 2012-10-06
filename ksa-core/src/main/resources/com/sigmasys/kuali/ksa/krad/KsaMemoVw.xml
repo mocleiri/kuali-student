@@ -163,6 +163,8 @@
                     </property>
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
+                <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
+                      p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=ViewMemoPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self"
@@ -293,7 +295,7 @@
     -->
     <bean id="viewMemoSection" parent="Uif-GridSection"
           p:title="@{account.id}"
-          p:instructionalText="View a Memo">
+          p:instructionalText="@{aefInstructionalText}">
         <property name="layoutManager">
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
         </property>

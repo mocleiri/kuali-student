@@ -91,8 +91,29 @@ public class KsaMemoController extends GenericSearchController {
                 memo.setCompositeInfo(afm.CreateCompositeMemo(memo));
             }
 
-            form.setMemos(memos);
-        }
+         form.setMemos(memos);
+
+      } else if (pageId != null && pageId.compareTo("ViewMemoPage") == 0) {
+         if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("'userId' request parameter must be specified");
+         }
+
+         form.setAefInstructionalText("View a memo");
+
+      } else if (pageId != null && pageId.compareTo("EditMemoPage") == 0) {
+         if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("'userId' request parameter must be specified");
+         }
+
+         form.setAefInstructionalText("Edit a memo");
+
+      }  else if (pageId != null && pageId.compareTo("FollowUpMemoPage") == 0) {
+         if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("'userId' request parameter must be specified");
+         }
+
+         form.setAefInstructionalText("Follow-up a memo");
+      }
 
         return getUIFModelAndView(form);
     }

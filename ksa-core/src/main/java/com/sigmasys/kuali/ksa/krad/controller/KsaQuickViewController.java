@@ -166,7 +166,7 @@ public class KsaQuickViewController extends GenericSearchController {
                                 HttpServletRequest request, HttpServletResponse response) {
 
         String viewId = request.getParameter("viewId");
-        String userId = request.getParameter("userId");
+        String userId = request.getParameter("actionParameters[userId]");
 
         logger.info("View: " + viewId + " User: " + userId);
 

@@ -25,6 +25,8 @@ public class KsaMemoForm extends AbstractViewModel {
 
    private String statusMessage;
 
+   // resuable add edit or followup instructional text
+   private String aefInstructionalText;
    /*
      Get / Set methods
    */
@@ -75,5 +77,13 @@ public class KsaMemoForm extends AbstractViewModel {
 
    public void setStatusMessage(String statusMessage) {
       this.statusMessage = statusMessage;
+   }
+
+   public String getAefInstructionalText() {
+      return aefInstructionalText;
+   }
+
+   public void setAefInstructionalText(String aefInstructionalText) {
+      this.aefInstructionalText = aefInstructionalText;
    }
 }
