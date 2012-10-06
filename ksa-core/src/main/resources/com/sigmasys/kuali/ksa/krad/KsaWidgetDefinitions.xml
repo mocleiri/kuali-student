@@ -164,7 +164,8 @@
                                   p:disclosure.render="false"
                                   p:progressiveRenderViaAJAX="true"
                                   p:title="Matching Accounts"
-                                  p:instructionalText="Select an account to view details">
+                                  p:instructionalText="Select an account to view details"
+                                  p:width="85%">
                                 <property name="readOnly" value="true"/>
                                 <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
                                 <property name="propertyName" value="accounts"/>
@@ -186,9 +187,9 @@
                                             </property>
                                         </bean>
                                         <!-- Use this to display the combined account, bio, aging and alerts -->
-                                        <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self"
+                                        <bean parent="Uif-LinkField" p:linkText="Select" p:target="_self" p:align="center"
                                               p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{#line.id}"/>
-                                        <bean parent="Uif-LinkField" p:linkText="Quick View" p:target="_self"
+                                        <bean parent="Uif-LinkField" p:linkText="Quick View" p:target="_self" p:align="center"
                                               p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{#line.id}"/>
                                     </list>
                                 </property>
@@ -214,7 +215,8 @@
                                   p:disclosure.render="false"
                                   p:progressiveRenderViaAJAX="true"
                                   p:title="Matching Transactions"
-                                  p:instructionalText="Select a transaction to view details">
+                                  p:instructionalText="Select a transaction to view details"
+                                  p:width="85%">
                                 <property name="readOnly" value="true"/>
                                 <property name="collectionObjectClass"
                                           value="com.sigmasys.kuali.ksa.model.Transaction"/>

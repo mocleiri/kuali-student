@@ -153,7 +153,8 @@
           p:title=""
           p:instructionalText=""
           p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true">
+          p:progressiveRenderViaAJAX="true"
+          p:width="85%">
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionModel"/>
         <property name="propertyName" value="rollUpTransactionModelList"/>
         <property name="readOnly" value="true"/>
@@ -220,7 +221,8 @@
           p:title=""
           p:instructionalText="The following table is a list of Transactions not included in a Roll-up"
           p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true">
+          p:progressiveRenderViaAJAX="true"
+          p:width="85%">
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionModel"/>
         <property name="propertyName" value="unGroupedTransactionModelList"/>
         <property name="readOnly" value="true"/>
@@ -311,7 +313,8 @@
           p:title="@{account.id}"
           p:instructionalText="The following table is a list of transactions categorized in the @{selectedRollupType} Roll-up"
           p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true">
+          p:progressiveRenderViaAJAX="true"
+          p:width="85%">
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionModel"/>
         <property name="propertyName" value="byRollUpTransactionModelList"/>
         <property name="readOnly" value="true"/>
@@ -686,7 +689,8 @@
           p:title="Allocations for @{account.id}"
           p:instructionalText="Select an item to view detailed information."
           p:disclosure.render="false"
-          p:progressiveRenderViaAJAX="true">
+          p:progressiveRenderViaAJAX="true"
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Allocation"/>
         <property name="propertyName" value="allocationList"/>

@@ -87,11 +87,29 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <ref bean="accountOverviewGroup"/>
-                <ref bean="biographicInformationGroup"/>
-                <ref bean="alertFlagGroup"/>
-                <ref bean="agedAccountsGroup"/>
-                <ref bean="memoGroup"/>
+                <bean parent="Uif-HorizontalBoxSection">
+                    <property name="items">
+                        <list>
+                            <ref bean="accountOverviewGroup"/>
+                            <bean parent="Uif-VerticalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <ref bean="biographicInformationGroup"/>
+                                        <ref bean="alertFlagGroup"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-HorizontalBoxSection">
+                    <property name="items">
+                        <list>
+                            <ref bean="agedAccountsGroup"/>
+                            <ref bean="memoGroup"/>
+                        </list>
+                    </property>
+                </bean>
                 <ref bean="controlsGroup"/>
             </list>
         </property>
@@ -105,7 +123,8 @@
     ********************************************************************************************************************
     -->
     <bean id="accountOverviewGroup" parent="Uif-VerticalBoxGroup"
-            p:instructionalText="Account Overview">
+            p:instructionalText="Account Overview"
+            p:width="40%">
         <property name="cssClasses">
             <list merge="true">
                 <value>ksa-group-border</value>
@@ -310,7 +329,8 @@
     ********************************************************************************************************************
     -->
     <bean id="agedAccountsGroup" parent="Uif-HorizontalBoxSection"
-            p:instructionalText="Aged Transactions">
+            p:instructionalText="Aged Transactions"
+            p:width="40%">
         <property name="cssClasses">
             <list merge="true">
                 <value>ksa-group-border</value>
@@ -382,7 +402,7 @@
     <!--
     *******************************************************************************************************************
                                         Memoranda group
-    A section  devoted to display of Memoranda using a table and drill down to a Memorandum
+    A section devoted to display of Memoranda using a table and drill down to a Memorandum
     ********************************************************************************************************************
     -->
     <bean id="memoGroup" parent="Uif-HorizontalBoxGroup">
@@ -423,7 +443,7 @@
                 <bean parent="Uif-InputField" p:propertyName="displayValue" p:label="Composite Memoranda Info">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="60"
                               p:style="resize:none;"/>
                     </property>
                 </bean>
@@ -437,7 +457,8 @@
     A group of links to other views from this overview
     ********************************************************************************************************************
     -->
-    <bean id="controlsGroup" parent="Uif-HorizontalBoxGroup">
+    <bean id="controlsGroup" parent="Uif-HorizontalBoxGroup"
+          p:width="45%">
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Add Biographic Information" p:target="_self"

@@ -70,7 +70,8 @@
     ********************************************************************************************************************
     -->
     <bean id="ActivitySection" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="4">
+          p:layoutManager.numberOfColumns="4"
+          p:width="85%">
         <property name="title" value="Recent Activity"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Activity"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>

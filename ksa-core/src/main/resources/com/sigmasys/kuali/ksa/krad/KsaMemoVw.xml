@@ -127,7 +127,8 @@
         p:layoutManager.numberOfColumns="4"
         p:disclosure.render="false"
         p:progressiveRenderViaAJAX="true"
-        p:instructionalText="The following is a list of memos for the selected account @{account.id}">
+        p:instructionalText="The following is a list of memos for the selected account @{account.id}"
+        p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
         <property name="propertyName" value="memos"/>
@@ -163,11 +164,11 @@
                     </property>
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
-                <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=ViewMemoPage&amp;userId=@{account.id}"/>
-                <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self" p:align="center"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}"/>
-                <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self" p:align="center"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}"/>
             </list>
         </property>
