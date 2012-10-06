@@ -3,6 +3,8 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 import java.util.Date;
 
+import static com.sigmasys.kuali.ksa.util.CommonUtils.nvl;
+
 /**
  * Person name model.
  * One KSA account can be associated with one or more person names.
@@ -179,6 +181,17 @@ public class PersonName implements Identifiable {
 
     public void setDefault(Boolean isDefault) {
         this.isDefault = isDefault;
+    }
+
+    /**
+     * Get lastName, firstName of the default PersonName Set record
+     */
+    @Transient
+    public String getDisplayValue() {
+        StringBuilder personNameBuilder = new StringBuilder(nvl(getLastName()));
+        personNameBuilder.append(", ");
+        personNameBuilder.append(nvl(getFirstName()));
+        return personNameBuilder.toString();
     }
 
 }

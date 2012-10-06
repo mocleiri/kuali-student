@@ -22,8 +22,6 @@ import javax.persistence.Transient;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
 
-import static com.sigmasys.kuali.ksa.util.CommonUtils.nvl;
-
 /**
  * KSA Account model
  * <p/>
@@ -287,14 +285,8 @@ public class Account implements Identifiable {
      */
     @Transient
     public String getCompositeDefaultPersonName() {
-        StringBuilder personNameBuilder = new StringBuilder();
         PersonName personName = getDefaultPersonName();
-        if (personName != null) {
-            personNameBuilder.append(nvl(personName.getLastName()));
-            personNameBuilder.append(", ");
-            personNameBuilder.append(nvl(personName.getFirstName()));
-        }
-        return personNameBuilder.toString();
+        return (personName != null) ? personName.getDisplayValue() : "";
     }
 
     /**
@@ -302,20 +294,8 @@ public class Account implements Identifiable {
      */
     @Transient
     public String getCompositeDefaultPostalAddress() {
-        StringBuilder postalAddressBuilder = new StringBuilder();
         PostalAddress postalAddress = getDefaultPostalAddress();
-        if (postalAddress != null) {
-            postalAddressBuilder.append(nvl(postalAddress.getStreetAddress1()));
-            postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(nvl(postalAddress.getCity()));
-            postalAddressBuilder.append(", ");
-            postalAddressBuilder.append(nvl(postalAddress.getState()));
-            postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(nvl(postalAddress.getPostalCode()));
-            postalAddressBuilder.append(" ");
-            postalAddressBuilder.append(nvl(postalAddress.getCountry()));
-        }
-        return postalAddressBuilder.toString();
+        return (postalAddress != null) ? postalAddress.getDisplayValue() : "";
     }
 
     @Transient

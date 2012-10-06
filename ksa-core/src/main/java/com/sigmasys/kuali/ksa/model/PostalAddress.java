@@ -3,6 +3,8 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 import java.util.Date;
 
+import static com.sigmasys.kuali.ksa.util.CommonUtils.nvl;
+
 /**
  * Postal address
  * <p/>
@@ -206,6 +208,23 @@ public class PostalAddress implements Identifiable {
 
     public void setDefault(Boolean isDefault) {
         this.isDefault = isDefault;
+    }
+
+    /**
+     * Get Address line 1, state, postalCode, and country of the default PostalAddress Set record
+     */
+    @Transient
+    public String getDisplayValue() {
+        StringBuilder postalAddressBuilder = new StringBuilder(nvl(getStreetAddress1()));
+        postalAddressBuilder.append(" ");
+        postalAddressBuilder.append(nvl(getCity()));
+        postalAddressBuilder.append(", ");
+        postalAddressBuilder.append(nvl(getState()));
+        postalAddressBuilder.append(" ");
+        postalAddressBuilder.append(nvl(getPostalCode()));
+        postalAddressBuilder.append(" ");
+        postalAddressBuilder.append(nvl(getCountry()));
+        return postalAddressBuilder.toString();
     }
 
 }
