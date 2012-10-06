@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.ElectronicContact;
+import com.sigmasys.kuali.ksa.model.PersonName;
 import com.sigmasys.kuali.ksa.model.PostalAddress;
 
 import java.util.Date;
@@ -19,6 +20,8 @@ public class KsaBiographicForm extends AbstractViewModel {
    */
 
    private Account account;
+
+   private List<PersonName> personNameList;
 
    private List<PostalAddress> postalAddressList;
 
@@ -108,6 +111,14 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    public void setAccount(Account account) {
       this.account = account;
+   }
+
+   public List<PersonName> getPersonNameList() {
+      return personNameList;
+   }
+
+   public void setPersonNameList(List<PersonName> personNameList) {
+      this.personNameList = personNameList;
    }
 
    public List<PostalAddress> getPostalAddressList() {

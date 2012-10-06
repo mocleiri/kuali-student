@@ -499,11 +499,11 @@
                               p:watermarkText="Paste or key in the description here..." p:maxLength="2000"/>
                     </property>
                 </bean>
-                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="addCurrType" p:actionLabel="Add">
-                    <property name="actionImage">
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addCurrType" p:actionLabel="Add">
+                    <!--<property name="actionImage">
                         <bean parent="Uif-Image"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                    </property>
+                    </property>-->
                 </bean>
             </list>
         </property>
@@ -511,7 +511,8 @@
 
     <!-- Collection list of currency types -->
 
-    <bean id="bursaCurrencyList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5">
+    <bean id="bursaCurrencyList" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4">
         <property name="title" value="View Currency Types"/>
         <property name="instructionalText"
                   value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application."/>
@@ -540,8 +541,8 @@
                     </property>
                 </bean>
 
-                <bean parent="Uif-LinkField" p:linkText="Delete" p:target="_self"
-                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>
+                <!--<bean parent="Uif-LinkField" p:linkText="Delete" p:target="_self"
+                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>-->
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
                       p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;code=@{#line.code}"/>
             </list>

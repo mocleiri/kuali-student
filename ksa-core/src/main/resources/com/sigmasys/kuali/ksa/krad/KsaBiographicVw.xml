@@ -28,7 +28,7 @@
 
     <bean id="KsaBiographicInformationView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Biographic Information"/>
-        <property name="entryPageId" value="StudentSummaryPage"/>
+        <property name="entryPageId" value="BiographicPersonsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
@@ -43,7 +43,15 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="StudentSummaryPage" p:title="Biographic Information">
+                <bean parent="Uif-Page" p:id="BiographicPersonsPage" p:title="Biographic Information List">
+                    <property name="items">
+                        <list>
+                            <ref bean="biographicInformationPersonsSection"/>
+                            <ref bean="biographicInformationPersonsSubSection"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="BiographicSummaryPage" p:title="Biographic Information">
                     <property name="items">
                         <list>
                             <ref bean="biographicInformationSummarySection"/>
@@ -91,7 +99,7 @@
                     </property>
                 </bean>
                 <!-- Add/Edit Postal  -->
-                <bean parent="Uif-Page" p:id="biographicInformationPostalADE">
+                <bean parent="Uif-Page" p:id="BiographicInformationPostalADE">
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
@@ -115,7 +123,7 @@
                     </property>
                 </bean>
                 <!-- Add/Edit Electronic Contact -->
-                <bean parent="Uif-Page" p:id="biographicInformationElectronicContactADE">
+                <bean parent="Uif-Page" p:id="BiographicInformationElectronicContactADE">
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
@@ -147,6 +155,97 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaBiographicForm"/>
     </bean>
 
+
+    <!--
+    ********************************************************************************************************************
+                                 Biographic Information Summary section
+    A vertical section with horizontal sub sections devoted to Person information
+    p:layoutManager.orientation="VERTICAL" p:layoutManager.orientation="HORIZONTAL"
+    ********************************************************************************************************************
+    -->
+    <bean id="biographicInformationPersonsSection" parent="Uif-HorizontalBoxSection"
+          p:title="@{account.id}">
+        <property name="disclosure.render" value="false"/>
+        <property name="items">
+            <list>
+                <!-- Use this to display for Add the individual field values for a new person row -->
+                <bean parent="Uif-LinkField" p:linkText="Add Person" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicAddPersonPage&amp;userId=@{account.id}"/>
+                <!-- Use this to display for Add the individual field values for a new postal row -->
+                <bean parent="Uif-LinkField" p:linkText="Add Postal" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}"/>
+                <ref bean="biographicInformationPostalSection" />
+                <!-- Use this to display for Add the individual field values for a new electronic contact row -->
+                <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
+<!--                <bean id="biographicInformationPersonsSubSection" parent="Uif-VerticalBoxSubSection">
+                    <property name="items">
+                        <list>
+                            <ref bean="biographicInformationPersonSetSection" />
+                        </list>
+                    </property>
+                </bean>-->
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                 Biographic Information table section
+    A table listing of PersonNames, their type and composite person name
+    ********************************************************************************************************************
+    -->
+    <bean id="biographicInformationPersonsSubSection" parent="Uif-VerticalBoxSubSection">
+        <property name="items">
+            <list>
+                <bean id="biographicInformationPersonSetSection" parent="Uif-Disclosure-TableCollectionSection"
+                      p:layoutManager.numberOfColumns="4"
+                      p:disclosure.render="false"
+                      p:progressiveRenderViaAJAX="true"
+                      p:title="@{account.id}"
+                      p:instructionalText="The following table contains a list of Biographic Entries for the selected user.">
+                    <property name="readOnly" value="true"/>
+                    <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.PersonName"/>
+                    <property name="propertyName" value="personNameList"/>
+                    <!-- turn off the display of the row sequence -->
+                    <property name="layoutManager.sequencePropertyName" value="id"/>
+                    <!-- sorting, paging and export, otherwise false for none -->
+                    <property name="layoutManager.richTable.render" value="true"/>
+                    <property name="layoutManager.renderSequenceField" value="false"/>
+                    <property name="items">
+                        <list>
+                            <!-- CompositePersonName does not exist in PersonName model -->
+                            <!-- The type of person information for the record personType -->
+                            <bean parent="Uif-InputField" p:propertyName="kimNameType"
+                                  p:label="Type"
+                                  p:maxLength="15" p:fieldLabel.renderColon="true">
+                                <property name="bindingInfo.bindToForm" value="true"/>
+                                <property name="control">
+                                    <bean parent="Uif-TextControl" p:size="16"/>
+                                </property>
+                            </bean>
+                            <!-- compositePersonName Last, First, Middle -->
+                            <bean parent="Uif-InputField" p:propertyName="lastName"
+                                  p:label="Description"
+                                  p:maxLength="50" p:fieldLabel.renderColon="true">
+                                <property name="bindingInfo.bindToForm" value="true"/>
+                                <property name="control">
+                                    <bean parent="Uif-TextControl" p:size="51"/>
+                                </property>
+                            </bean>
+                            <!-- Use this to display for View to drill down into the Person record -->
+                            <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
+                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicSummaryPage&amp;id=@{#line.id}"/>
+                            <!-- Use this to display for Edit the individual field values for a selected row -->
+                            <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
+                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicEDPersonPage&amp;id=@{#line.id}"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!--
     ********************************************************************************************************************
                                  Biographic Information Summary section
@@ -163,12 +262,12 @@
                 <!--<ref bean="bioAuditPersonInformationSection" />-->
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Postal" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE&amp;userId=@{account.id}"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationPostalSection" />
                 <!--<ref bean="bioAuditPostalInformationSection" />-->
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationElectronicContactSection" />
                 <!--<ref bean="bioAuditElectronicContactInformationSection" />-->
             </list>
@@ -344,10 +443,10 @@
                 </bean>
                 <!-- Use this to display for Add the individual field values for a new row -->
 <!--                <bean parent="Uif-LinkField" p:linkText="Add" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE"/>-->
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationPostalADE"/>-->
                 <!-- Use this to display for Edit the individual field values for a selected row -->
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationPostalADE&amp;id=@{#line.id}"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>
@@ -432,10 +531,10 @@
                 </bean>
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <!--<bean parent="Uif-LinkField" p:linkText="Add" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE"/>-->
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE"/>-->
                 <!-- Use this to display for Edit the individual field values for a selected row -->
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=biographicInformationElectronicContactADE&amp;id=@{#line.id}"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>

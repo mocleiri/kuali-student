@@ -84,7 +84,7 @@ public class KsaBiographicController extends GenericSearchController {
         }
 
         account = accountService.getFullAccount(account.getId());
-
+        // TODO refactor to the id in the request parameters
         if (account == null) {
             String errMsg = "Cannot find Account by ID = " + account.getId();
             logger.error(errMsg);
