@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaAdminForm;
-import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.service.ActivityService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaAdminVw")
 public class KsaAdminController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+   private static final Log logger = LogFactory.getLog(KsaAdminController.class);
 
    @Autowired
    ActivityService activityService;
@@ -34,9 +33,7 @@ public class KsaAdminController extends GenericSearchController {
     */
    @Override
    protected KsaAdminForm createInitialForm(HttpServletRequest request) {
-      KsaAdminForm form = new KsaAdminForm();
-
-      return form;
+      return new KsaAdminForm();
    }
 
    /**
@@ -62,25 +59,6 @@ public class KsaAdminController extends GenericSearchController {
       }
 
       throw new IllegalArgumentException("'pageId' request parameter must be specified");
-
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaAdminForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-      // populate model for testing
-
-      return super.start(form, result, request, response);
 
    }
 
