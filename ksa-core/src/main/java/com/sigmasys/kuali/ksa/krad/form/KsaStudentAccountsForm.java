@@ -137,9 +137,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       Get/Set methods
     */
 
-   /*
-      Form values
-    */
 
    public List<TransactionModel> getRollUpTransactionModelList() {
       return rollUpTransactionModelList;

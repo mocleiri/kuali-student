@@ -119,7 +119,6 @@
     *******************************************************************************************************************
                                             Account Overview group
     A summary view of an account, drill down to the account overview detail view
-    TODO p:styleClasses="ksa-group-border" add to the BoxGroup
     ********************************************************************************************************************
     -->
     <bean id="accountOverviewGroup" parent="Uif-VerticalBoxGroup"
@@ -182,9 +181,9 @@
                         <bean parent="Uif-Link" p:linkText="Add Payment" p:target="_self"
                               p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView&amp;userId=@{account.id}"/>
                         <bean parent="Uif-Link" p:linkText="Add Deferment" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                              p:href="ksaDefermentsVw?methodToCall=get&amp;viewId=KsaDefermentsView&amp;userId=@{account.id}"/>
                         <bean parent="Uif-Link" p:linkText="Write-Off Account" p:target="_self"
-                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                              p:href="ksaWriteOffVw?methodToCall=get&amp;viewId=KsaWriteOffView&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -239,7 +238,7 @@
     A summary tables view of alerts and flags, drill down to the alerts and flags overview detail view
     ********************************************************************************************************************
     -->
-    <bean id="alertFlagGroup" parent="Uif-VerticalBoxGroup">
+    <bean id="alertFlagGroup" parent="Uif-VerticalBoxGroup" p:instructionalText="Alerts / Flags">
         <property name="cssClasses">
             <list merge="true">
                 <value>ksa-group-border</value>
@@ -248,8 +247,16 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="(more)" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                <bean parent="Uif-HorizontalBoxSection">
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-Link" p:linkText="(more Alerts)" p:target="_self"
+                                  p:href="ksaAlertsVw?methodToCall=get&amp;viewId=KsaAlertsView&amp;userId=@{account.id}"/>
+                            <bean parent="Uif-Link" p:linkText="(more Flags)" p:target="_self"
+                                  p:href="ksaFlagsVw?methodToCall=get&amp;viewId=KsaFlagsView&amp;userId=@{account.id}"/>
+                        </list>
+                    </property>
+                </bean>
                 <ref bean="quickViewAlertsTable"/>
                 <ref bean="quickViewFlagsTable"/>
             </list>
@@ -462,11 +469,11 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Add Biographic Information" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add an Alert" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                      p:href="ksaAlertsVw?methodToCall=get&amp;viewId=KsaAlertsView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add a Flag" p:target="_self"
-                      p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                      p:href="ksaFlagsVw?methodToCall=get&amp;viewId=KsaFlagsView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add Memo" p:target="_self"
                       p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>

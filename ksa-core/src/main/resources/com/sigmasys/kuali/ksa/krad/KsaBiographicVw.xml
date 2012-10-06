@@ -163,7 +163,8 @@
     ********************************************************************************************************************
     -->
     <bean id="biographicInformationPersonsSection" parent="Uif-HorizontalBoxSection"
-          p:title="@{account.id}">
+          p:title="@{account.id}"
+          p:width="85%">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
@@ -202,8 +203,7 @@
                       p:disclosure.render="false"
                       p:progressiveRenderViaAJAX="true"
                       p:title="@{account.id}"
-                      p:instructionalText="The following table contains a list of Biographic Entries for the selected user."
-                      p:width="85%">
+                      p:instructionalText="The following table contains a list of Biographic Entries for the selected user.">
                     <property name="readOnly" value="true"/>
                     <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.PersonName"/>
                     <property name="propertyName" value="personNameList"/>
