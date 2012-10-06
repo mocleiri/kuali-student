@@ -45,7 +45,7 @@
                 <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
                       p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaPersonLookupPage"/>
+                      p:href="ksaAdminVw?methodToCall=get&amp;viewId=KsaAdminView&amp;pageId=ActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
                       p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"

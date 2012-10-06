@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2005-2012 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean id="KsaAdminView" parent="Uif-KsaFormView">
+        <property name="title" value=""/>
+        <property name="entryPageId" value="ActivityPage"/>
+        <property name="navigation">
+            <bean parent="Uif-KsaPageNavigation">
+                <property name="items">
+                    <list>
+                        <!-- TODO Advanced Search -->
+                        <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
+                              p:actionLabel="Advanced Search"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="items">
+            <list merge="true">
+                <bean parent="Uif-Page" p:id="ActivityPage" p:title="Activity">
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
+                                  p:actionLabel="Refresh"
+                                 p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;ActivityPage&quot;);">
+                            </bean>
+                            <ref bean="ActivitySection"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+<!--        <property name="additionalCssFiles" ref=""/>
+        <property name="additionalJsFiles" ref=""/>
+        <property name="viewHelperServiceClassName" value=""/>
+        <property name="defaultBindingObjectPath" vaue=""/>-->
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaAdminForm"/>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                        Activity section
+    A table of activities with refresh
+    ********************************************************************************************************************
+    -->
+    <bean id="ActivitySection" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4">
+        <property name="title" value="Recent Activity"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Activity"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="readOnly" value="true"/>
+        <property name="propertyName" value="activities"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Creation Date" p:propertyName="timestamp">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Attribute" p:propertyName="newAttribute">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="21" p:maxLength="20"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Type" p:propertyName="type.name">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="logDetail">
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
+                              p:watermarkText="Activity description..." p:maxLength="2000"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

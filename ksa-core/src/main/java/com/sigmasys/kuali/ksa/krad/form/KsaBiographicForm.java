@@ -102,7 +102,6 @@ public class KsaBiographicForm extends AbstractViewModel {
      Get / Set methods
    */
 
-
    public Account getAccount() {
       return account;
    }
