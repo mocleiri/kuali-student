@@ -566,7 +566,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return	The total number of credits of study courses with the specified status.
 	 */
 	@Override
-	public Integer getNumOfCredits(FeeBase feeBase, String courseStatus) {
+	public int getNumOfCredits(FeeBase feeBase, String courseStatus) {
 		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
@@ -589,7 +589,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return Total number of credits.
 	 */
 	@Override
-	public Integer getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
+	public int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
 		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
@@ -615,7 +615,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return Total number of credits.
 	 */
 	@Override
-	public Integer getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
+	public int getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
 		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
@@ -643,7 +643,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return Total number of credits.
 	 */
 	@Override
-	public Integer getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
+	public int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
 		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
