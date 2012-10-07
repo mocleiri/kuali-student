@@ -286,7 +286,7 @@ public interface FeeManagementService {
 	 * @param courseStatus  The status of courses for which to calculate the total number of credits. Allows <code>null</code> as a status.
 	 * @return	The total number of credits of study courses with the specified status.
 	 */
-	BigDecimal getNumOfCredits(FeeBase feeBase, String courseStatus);
+	Integer getNumOfCredits(FeeBase feeBase, String courseStatus);
 	
 	/**
 	 * Returns the total number of credits that has a <code>KeyPair</code> with the given name and value or does not exists.
@@ -296,7 +296,7 @@ public interface FeeManagementService {
 	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
 	 * @return Total number of credits.
 	 */
-	BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue);
+	Integer getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue);
 	
 	/**
 	 * Returns the total number of credits with the given section code and that has a <code>KeyPair</code> with the given name and value or does not exists.
@@ -307,7 +307,7 @@ public interface FeeManagementService {
 	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
 	 * @return Total number of credits.
 	 */
-	BigDecimal getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue);
+	Integer getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue);
 	
 	/**
 	 * Returns the total number of credits that has both <code>KeyPair</code>s with the given name and value or either is optional.
@@ -319,5 +319,5 @@ public interface FeeManagementService {
 	 * @param secondKeyPairValue	Value of a second <code>KeyPair</code> to check (required).
 	 * @return Total number of credits.
 	 */
-	BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue);
+	Integer getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue);
 }

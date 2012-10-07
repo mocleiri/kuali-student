@@ -566,12 +566,14 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return	The total number of credits of study courses with the specified status.
 	 */
 	@Override
-	public BigDecimal getNumOfCredits(FeeBase feeBase, String courseStatus) {
-		BigDecimal numOfCredits = new BigDecimal(0);
+	public Integer getNumOfCredits(FeeBase feeBase, String courseStatus) {
+		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
 			if (StringUtils.equalsIgnoreCase(lu.getStatus(), courseStatus)) {
-				numOfCredits = numOfCredits.add(lu.getCredit());
+				if (lu.getCredit() != null) {
+					numOfCredits += lu.getCredit().intValue();
+				}
 			}
 		}
 		
@@ -587,14 +589,16 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return Total number of credits.
 	 */
 	@Override
-	public BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
-		BigDecimal numOfCredits = new BigDecimal(0);
+	public Integer getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
+		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
 			String kpValue = getKeyPairValue(feeBase, keyPairName);
 			
 			if (StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue)) {
-				numOfCredits = numOfCredits.add(lu.getCredit());
+				if (lu.getCredit() != null) {
+					numOfCredits += lu.getCredit().intValue();
+				}
 			}
 		}
 		
@@ -611,15 +615,17 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return Total number of credits.
 	 */
 	@Override
-	public BigDecimal getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
-		BigDecimal numOfCredits = new BigDecimal(0);
+	public Integer getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
+		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
 			String kpValue = getKeyPairValue(feeBase, keyPairName);
 			
 			if (StringUtils.equalsIgnoreCase(lu.getUnitSection(), sectionCode) 
 					&& (StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue))) {
-				numOfCredits = numOfCredits.add(lu.getCredit());
+				if (lu.getCredit() != null) {
+					numOfCredits += lu.getCredit().intValue();
+				}
 			}
 		}
 		
@@ -637,8 +643,8 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 	 * @return Total number of credits.
 	 */
 	@Override
-	public BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
-		BigDecimal numOfCredits = new BigDecimal(0);
+	public Integer getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
+		int numOfCredits = 0;
 		
 		for (LearningUnit lu : feeBase.getStudy()) {
 			String kpValue = getKeyPairValue(feeBase, keyPairName);
@@ -646,7 +652,9 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 			
 			if ((StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue))
 					&& (StringUtils.equalsIgnoreCase(kpValue2, secondKeyPairValue) || StringUtils.isBlank(kpValue2))) {
-				numOfCredits = numOfCredits.add(lu.getCredit());
+				if (lu.getCredit() != null) {
+					numOfCredits += lu.getCredit().intValue();
+				}
 			}
 		}
 		
