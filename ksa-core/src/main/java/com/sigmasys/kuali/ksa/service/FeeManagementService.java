@@ -227,4 +227,97 @@ public interface FeeManagementService {
 	 * @return <code>LearningPeriod</code> with the given name or <code>null</code> if none found.
 	 */
 	LearningPeriod getLearningPeriod(String name);
+	
+	/**
+	 * Returns the major course codes. This includes the major and the second major courses
+	 * from a students's profile. 
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return	Major course codes.
+	 */
+	List<String> getMajorCodes(FeeBase feeBase);
+	
+	/**
+	 * Returns the codes of all classes taken by a student.
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return	All study course codes.
+	 */
+	List<String> getStudyCodes(FeeBase feeBase);
+	
+	/**
+	 * Checks if a student is a resident.
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return <code>true</code> if a student is a resident, <code>false</code> otherwise.
+	 */
+	boolean isResident(FeeBase feeBase);
+
+	/**
+	 * Checks if a student is a graduate.
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return <code>true</code> if a student is a graduate, <code>false</code> otherwise.
+	 */
+	boolean isGraduate(FeeBase feeBase);
+	
+	/**
+	 * Sets a course's status and saves it. 
+	 * 
+	 * @param learningUnit 	A study course.
+	 * @param status 		The new course status.
+	 */
+	void setCourseStatus(LearningUnit learningUnit, String status);
+	
+	/**
+	 * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
+	 * 
+	 * @param learningUnit	A study course.
+	 * @param status		The new course status.
+	 * @param keyPairName	The name of a <code>KeyPair</code> to add.
+	 * @param keyPairValue	The value of a <code>KeyPair</code> to add.
+	 */
+	void setCourseStatus(LearningUnit learningUnit, String status, String keyPairName, String keyPairValue);
+	
+	/**
+	 * Returns the total number of credits of all study courses with the specified status, which can be <code>null</code>.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param courseStatus  The status of courses for which to calculate the total number of credits. Allows <code>null</code> as a status.
+	 * @return	The total number of credits of study courses with the specified status.
+	 */
+	BigDecimal getNumOfCredits(FeeBase feeBase, String courseStatus);
+	
+	/**
+	 * Returns the total number of credits that has a <code>KeyPair</code> with the given name and value or does not exists.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param keyPairName	Name of a <code>KeyPair</code> to check (required).
+	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
+	 * @return Total number of credits.
+	 */
+	BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue);
+	
+	/**
+	 * Returns the total number of credits with the given section code and that has a <code>KeyPair</code> with the given name and value or does not exists.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param sectionCode	Section code of courses to count.
+	 * @param keyPairName	Name of a <code>KeyPair</code> to check (required).
+	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
+	 * @return Total number of credits.
+	 */
+	BigDecimal getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue);
+	
+	/**
+	 * Returns the total number of credits that has both <code>KeyPair</code>s with the given name and value or either is optional.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param keyPairName	Name of a <code>KeyPair</code> to check (required).
+	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
+	 * @param secondKeyPairName	Name of a second <code>KeyPair</code> to check (required).
+	 * @param secondKeyPairValue	Value of a second <code>KeyPair</code> to check (required).
+	 * @return Total number of credits.
+	 */
+	BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue);
 }

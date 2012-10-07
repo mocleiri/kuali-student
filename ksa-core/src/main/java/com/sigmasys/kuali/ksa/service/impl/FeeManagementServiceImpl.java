@@ -1,18 +1,19 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.KeyPair;
@@ -461,6 +462,195 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 		List<LearningPeriod> result = query.getResultList();
 		
 		return CollectionUtils.isEmpty(result) ? null : result.get(0);
+	}
+	
+	/**
+	 * Returns the major course codes. This includes the major and the second major courses
+	 * from a students's profile. 
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return	Major course codes.
+	 */
+	@Override
+	public List<String> getMajorCodes(FeeBase feeBase) {
+		List<String> majorCodes = new ArrayList<String>();
+		String majorCourseCode = getKeyPairValue(feeBase, "program-of-study-major");
+		String secondMajorCourseCode = getKeyPairValue(feeBase, "program-of-study-second-major");
+		
+		CollectionUtils.addIgnoreNull(majorCodes, majorCourseCode);
+		CollectionUtils.addIgnoreNull(majorCodes, secondMajorCourseCode);
+		
+		return majorCodes;
+	}
+	
+	/**
+	 * Returns the codes of all classes taken by a student.
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return	All study course codes.
+	 */
+	@Override
+	public List<String> getStudyCodes(FeeBase feeBase) {
+		List<String> studyCodes = new ArrayList<String>();
+		
+		for (LearningUnit lu : feeBase.getStudy()) {
+			CollectionUtils.addIgnoreNull(studyCodes, lu.getUnitCode());
+		}
+		
+		return studyCodes;
+	}
+	
+	/**
+	 * Checks if a student is a resident.
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return <code>true</code> if a student is a resident, <code>false</code> otherwise.
+	 */
+	@Override
+	public boolean isResident(FeeBase feeBase) {
+		return StringUtils.equalsIgnoreCase(getKeyPairValue(feeBase, "residency"), "T");
+	}
+
+	/**
+	 * Checks if a student is a graduate.
+	 * 
+	 * @param feeBase	A <code>FeeBase</code> that contains a student's information.
+	 * @return <code>true</code> if a student is a graduate, <code>false</code> otherwise.
+	 */
+	@Override
+	public boolean isGraduate(FeeBase feeBase) {
+		String levelOfStudy = getKeyPairValue(feeBase, "level-of-study");
+					 
+		return StringUtils.equalsIgnoreCase(levelOfStudy, "MASTERS")
+				 || StringUtils.equalsIgnoreCase(levelOfStudy, "PHD");
+	}
+	
+	/**
+	 * Sets a course's status and saves it. 
+	 * 
+	 * @param learningUnit 	A study course.
+	 * @param status 		The new course status.
+	 */
+	@Override
+	public void setCourseStatus(LearningUnit learningUnit, String status) {
+		// Set the new status:
+		learningUnit.setStatus(status);
+		
+		// Save the LearningUnit:
+		saveLearningUnit(learningUnit);
+	}
+	
+	
+	/**
+	 * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
+	 * 
+	 * @param learningUnit	A study course.
+	 * @param status		The new course status.
+	 * @param keyPairName	The name of a <code>KeyPair</code> to add.
+	 * @param keyPairValue	The value of a <code>KeyPair</code> to add.
+	 */
+	@Override
+	public void setCourseStatus(LearningUnit learningUnit, String status, String keyPairName, String keyPairValue) {
+		// Set the course's status:
+		setCourseStatus(learningUnit, status);
+		
+		// Add a KeyPair:
+		createKeyPair(learningUnit, keyPairName, keyPairValue);
+	}
+	
+	/**
+	 * Returns the total number of credits of all study courses with the specified status, which can be <code>null</code>.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param courseStatus  The status of courses for which to calculate the total number of credits. Allows <code>null</code> as a status.
+	 * @return	The total number of credits of study courses with the specified status.
+	 */
+	@Override
+	public BigDecimal getNumOfCredits(FeeBase feeBase, String courseStatus) {
+		BigDecimal numOfCredits = new BigDecimal(0);
+		
+		for (LearningUnit lu : feeBase.getStudy()) {
+			if (StringUtils.equalsIgnoreCase(lu.getStatus(), courseStatus)) {
+				numOfCredits = numOfCredits.add(lu.getCredit());
+			}
+		}
+		
+		return numOfCredits;
+	}
+	
+	/**
+	 * Returns the total number of credits that has a <code>KeyPair</code> with the given name and value or does not exists.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param keyPairName	Name of a <code>KeyPair</code> to check (required).
+	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
+	 * @return Total number of credits.
+	 */
+	@Override
+	public BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
+		BigDecimal numOfCredits = new BigDecimal(0);
+		
+		for (LearningUnit lu : feeBase.getStudy()) {
+			String kpValue = getKeyPairValue(feeBase, keyPairName);
+			
+			if (StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue)) {
+				numOfCredits = numOfCredits.add(lu.getCredit());
+			}
+		}
+		
+		return numOfCredits;
+	}
+	
+	/**
+	 * Returns the total number of credits with the given section code and that has a <code>KeyPair</code> with the given name and value or does not exists.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param sectionCode	Section code of courses to count.
+	 * @param keyPairName	Name of a <code>KeyPair</code> to check (required).
+	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
+	 * @return Total number of credits.
+	 */
+	@Override
+	public BigDecimal getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
+		BigDecimal numOfCredits = new BigDecimal(0);
+		
+		for (LearningUnit lu : feeBase.getStudy()) {
+			String kpValue = getKeyPairValue(feeBase, keyPairName);
+			
+			if (StringUtils.equalsIgnoreCase(lu.getUnitSection(), sectionCode) 
+					&& (StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue))) {
+				numOfCredits = numOfCredits.add(lu.getCredit());
+			}
+		}
+		
+		return numOfCredits;
+	}
+	
+	/**
+	 * Returns the total number of credits that has both <code>KeyPair</code>s with the given name and value or either is optional.
+	 * 
+	 * @param feeBase		A <code>FeeBase</code> that contains a student's information.
+	 * @param keyPairName	Name of a <code>KeyPair</code> to check (required).
+	 * @param keyPairValue	Value of a <code>KeyPair</code> to check (required).
+	 * @param secondKeyPairName	Name of a second <code>KeyPair</code> to check (required).
+	 * @param secondKeyPairValue	Value of a second <code>KeyPair</code> to check (required).
+	 * @return Total number of credits.
+	 */
+	@Override
+	public BigDecimal getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
+		BigDecimal numOfCredits = new BigDecimal(0);
+		
+		for (LearningUnit lu : feeBase.getStudy()) {
+			String kpValue = getKeyPairValue(feeBase, keyPairName);
+			String kpValue2 = getKeyPairValue(feeBase, secondKeyPairName);
+			
+			if ((StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue))
+					&& (StringUtils.equalsIgnoreCase(kpValue2, secondKeyPairValue) || StringUtils.isBlank(kpValue2))) {
+				numOfCredits = numOfCredits.add(lu.getCredit());
+			}
+		}
+		
+		return numOfCredits;
 	}
 	
 	
