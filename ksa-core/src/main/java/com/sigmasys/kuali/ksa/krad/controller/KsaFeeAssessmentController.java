@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaFeeAssessmentVw")
 public class KsaFeeAssessmentController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaBatchTransactionsController.class);
+   private static final Log logger = LogFactory.getLog(KsaFeeAssessmentController.class);
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)

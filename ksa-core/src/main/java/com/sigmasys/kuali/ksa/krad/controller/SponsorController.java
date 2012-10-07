@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/sponsorVw")
 public class SponsorController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+   private static final Log logger = LogFactory.getLog(SponsorController.class);
 
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)

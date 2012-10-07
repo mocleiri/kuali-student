@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/ksaReportReconciliationVw")
 public class KsaReportReconciliationController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+   private static final Log logger = LogFactory.getLog(KsaReportReconciliationController.class);
    
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
