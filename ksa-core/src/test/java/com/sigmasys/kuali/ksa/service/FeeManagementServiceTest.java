@@ -35,7 +35,7 @@ import com.sigmasys.kuali.ksa.model.KeyPair;
 import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
-import com.sigmasys.kuali.ksa.service.support.FeeBase;
+import com.sigmasys.kuali.ksa.model.FeeBase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})

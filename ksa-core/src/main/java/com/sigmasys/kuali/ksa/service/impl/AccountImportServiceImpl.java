@@ -16,7 +16,7 @@ import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.AccountImportService;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
-import com.sigmasys.kuali.ksa.service.support.FeeBase;
+import com.sigmasys.kuali.ksa.model.FeeBase;
 import com.sigmasys.kuali.ksa.transform.KeyPair;
 import com.sigmasys.kuali.ksa.transform.StudentProfile;
 

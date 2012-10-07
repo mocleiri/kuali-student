@@ -5,7 +5,7 @@ import com.sigmasys.kuali.ksa.service.drools.*;
 
 expander ksa.dsl
 
-#global DroolsContext droolsContext;
+global FeeBase feeBase;
 
 
 ############ Beginning of rule definitions ##########################
@@ -20,7 +20,15 @@ end
 
 rule "Tuition 2"
 when
- Student account ID is "admin"
+ Major code is in "34444, 2345, MAJ1"
+then
+ Use "1020" code to charge $345.78
+ Use "1319" code to credit $50.0
+end
+
+rule "Tuition 3"
+when
+ Study code is in "MFRO, MABO, GOOG"
 then
  Use "cash" code to credit $50.50
 end

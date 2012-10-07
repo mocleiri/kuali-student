@@ -8,7 +8,7 @@ import com.sigmasys.kuali.ksa.model.KeyPair;
 import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
-import com.sigmasys.kuali.ksa.service.support.FeeBase;
+import com.sigmasys.kuali.ksa.model.FeeBase;
 
 /**
  * This interface represents a service object to work with Fee Assessments of ChargeableAccounts.

@@ -1,12 +1,8 @@
-package com.sigmasys.kuali.ksa.service.support;
+package com.sigmasys.kuali.ksa.model;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.KeyPair;
-import com.sigmasys.kuali.ksa.model.LearningUnit;
-import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
 
 /**

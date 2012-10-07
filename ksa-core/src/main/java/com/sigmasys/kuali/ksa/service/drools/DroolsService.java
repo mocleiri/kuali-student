@@ -98,9 +98,14 @@ public class DroolsService {
         }
     }
 
-    private <T> T fireRules(KnowledgeBase knowledgeBase, T droolsContext) {
+    private <T> T fireRules(KnowledgeBase knowledgeBase, T droolsContext, Map<String, Object> globalParams) {
         try {
             StatelessKnowledgeSession session = knowledgeBase.newStatelessKnowledgeSession();
+            if ( globalParams != null) {
+             for (Map.Entry<String, Object> entry : globalParams.entrySet()) {
+                session.setGlobal(entry.getKey(), entry.getValue());
+             }
+            }
             Command command = CommandFactory.newInsert(droolsContext, "droolsContext");
             ExecutionResults results = session.execute(CommandFactory.newBatchExecution(Arrays.asList(command)));
             return (T) results.getValue("droolsContext");
@@ -110,9 +115,15 @@ public class DroolsService {
         }
     }
 
-    public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext) {
-        return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext);
+    // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
+
+    public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext,
+                           Map<String, Object> globalParams) {
+        return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, globalParams);
     }
 
+    public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext) {
+           return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, null);
+    }
 
 }

@@ -14,6 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -29,12 +32,16 @@ public class DroolsServiceTest extends AbstractServiceTest {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private FeeManagementService feeManagementService;
+
+
     @Before
-        public void setUpWithinTransaction() {
-            // set up test data within the transaction
-            String userId = "admin";
-            accountService.getOrCreateAccount(userId);
-        }
+    public void setUpWithinTransaction() {
+        // set up test data within the transaction
+        String userId = "admin";
+        accountService.getOrCreateAccount(userId);
+    }
 
     @Test
     public void fireFeeAssessmentRules() throws Exception {
@@ -42,7 +49,10 @@ public class DroolsServiceTest extends AbstractServiceTest {
         DroolsContext droolsContext = new DroolsContext();
         droolsContext.setAccount(accountService.getFullAccount("admin"));
 
-        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext);
+        Map<String, Object> globalParams = new HashMap<String, Object>();
+        globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
+
+        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
         Assert.notNull(droolsContext);
         Assert.notNull(droolsContext.getAccount());

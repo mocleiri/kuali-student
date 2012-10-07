@@ -19,7 +19,7 @@ import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
-import com.sigmasys.kuali.ksa.service.support.FeeBase;
+import com.sigmasys.kuali.ksa.model.FeeBase;
 
 @Service("feeManagementService")
 @Transactional(readOnly = true)
@@ -490,7 +490,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public boolean containsAtLeastOneMajorCode(FeeBase feeBase, String majorCodes) {
         List<String> majorCodesList = getMajorCodes(feeBase);
         for (String majorCode : majorCodes.split(",")) {
-            if (majorCodesList.contains(majorCode.toUpperCase())) {
+            if (majorCodesList.contains(majorCode.trim().toUpperCase())) {
                 return true;
             }
         }
@@ -525,7 +525,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public boolean containsAtLeastOneStudyCode(FeeBase feeBase, String studyCodes) {
         List<String> studyCodesList = getStudyCodes(feeBase);
         for (String majorCode : studyCodes.split(",")) {
-            if (studyCodesList.contains(majorCode.toUpperCase())) {
+            if (studyCodesList.contains(majorCode.trim().toUpperCase())) {
                 return true;
             }
         }
