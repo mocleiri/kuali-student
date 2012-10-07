@@ -201,7 +201,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		int numOfCredits = 5;
 		BigDecimal amountPerCredit = new BigDecimal(250.5);
 		BigDecimal maxAmount = new BigDecimal(-100.5);
-		BigDecimal charge = feeManagementService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		BigDecimal charge = feeManagementService.calculateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
 		
 		assertEquals(1252.5, charge.doubleValue(), 0.0);
 	}
@@ -211,7 +211,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		int numOfCredits = 5;
 		BigDecimal amountPerCredit = new BigDecimal(250.5);
 		BigDecimal maxAmount = new BigDecimal(2000.5);
-		BigDecimal charge = feeManagementService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		BigDecimal charge = feeManagementService.calculateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
 		
 		assertEquals(1252.5, charge.doubleValue(), 0.0);
 	}
@@ -221,7 +221,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		int numOfCredits = 5;
 		BigDecimal amountPerCredit = new BigDecimal(250.5);
 		BigDecimal maxAmount = new BigDecimal(200.5);
-		BigDecimal charge = feeManagementService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		BigDecimal charge = feeManagementService.calculateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
 		
 		assertEquals(200.5, charge.doubleValue(), 0.0);
 	}
@@ -231,7 +231,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		int numOfCredits = 5;
 		BigDecimal amountPerCredit = new BigDecimal(250.5);
 		BigDecimal maxAmount = new BigDecimal(0d);
-		BigDecimal charge = feeManagementService.calcluateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
+		BigDecimal charge = feeManagementService.calculateChargeByCreditToMax(numOfCredits, amountPerCredit, maxAmount);
 		
 		assertEquals(0, charge.doubleValue(), 0.0);
 	}

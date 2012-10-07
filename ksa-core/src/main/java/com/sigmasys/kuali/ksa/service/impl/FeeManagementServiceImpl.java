@@ -1,10 +1,7 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.Query;
 
@@ -290,9 +287,9 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     /**
      * Updates the <code>KeyPair</code> with the specified name with a new value.
      *
-     * @param learningUnit  A <code>LearningUnit</code> instance.
-     * @param name     <code>KeyPair</code> name.
-     * @param newValue The new <code>KeyPair</code> value.
+     * @param learningUnit A <code>LearningUnit</code> instance.
+     * @param name         <code>KeyPair</code> name.
+     * @param newValue     The new <code>KeyPair</code> value.
      */
     @Override
     public void updateKeyPair(LearningUnit learningUnit, String name, String newValue) {
@@ -470,14 +467,34 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public List<String> getMajorCodes(FeeBase feeBase) {
-        List<String> majorCodes = new ArrayList<String>();
+        List<String> majorCodes = new LinkedList<String>();
         String majorCourseCode = getKeyPairValue(feeBase, "program-of-study-major");
+        if (majorCourseCode != null) {
+            majorCodes.add(majorCourseCode.toUpperCase());
+        }
         String secondMajorCourseCode = getKeyPairValue(feeBase, "program-of-study-second-major");
-
-        CollectionUtils.addIgnoreNull(majorCodes, majorCourseCode);
-        CollectionUtils.addIgnoreNull(majorCodes, secondMajorCourseCode);
+        if (secondMajorCourseCode != null) {
+            majorCodes.add(secondMajorCourseCode.toUpperCase());
+        }
 
         return majorCodes;
+    }
+
+    /**
+     * Check the existence of at least one of the given major codes in a <code>FeeBase</code> object.
+     *
+     * @param majorCodes a list of major codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one major code, <code>false</code> - otherwise.
+     */
+    @Override
+    public boolean containsAtLeastOneMajorCode(FeeBase feeBase, String majorCodes) {
+        List<String> majorCodesList = getMajorCodes(feeBase);
+        for (String majorCode : majorCodes.split(",")) {
+            if (majorCodesList.contains(majorCode.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -488,20 +505,38 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public List<String> getStudyCodes(FeeBase feeBase) {
-        List<String> studyCodes = new ArrayList<String>();
-
+        List<String> studyCodes = new LinkedList<String>();
         for (LearningUnit lu : feeBase.getStudy()) {
-            CollectionUtils.addIgnoreNull(studyCodes, lu.getUnitCode());
+            String studyCode = lu.getUnitCode();
+            if (studyCode != null) {
+                studyCodes.add(studyCode.toUpperCase());
+            }
         }
-
         return studyCodes;
+    }
+
+    /**
+     * Check the existence of at least one of the given study codes in a <code>FeeBase</code> object.
+     *
+     * @param studyCodes a list of study codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
+     */
+    @Override
+    public boolean containsAtLeastOneStudyCode(FeeBase feeBase, String studyCodes) {
+        List<String> studyCodesList = getStudyCodes(feeBase);
+        for (String majorCode : studyCodes.split(",")) {
+            if (studyCodesList.contains(majorCode.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
     /**
      * Checks if a KeyPair exists in the given <code>FeeBase</code>
      *
-     * @param feeBase A <code>FeeBase</code> that contains a student's information.
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
      * @param keyPairName  The name of a <code>KeyPair</code> to check.
      * @param keyPairValue The value of a <code>KeyPair</code> to check.
      * @return <code>true</code> if a KeyPair exists, <code>false</code> - otherwise

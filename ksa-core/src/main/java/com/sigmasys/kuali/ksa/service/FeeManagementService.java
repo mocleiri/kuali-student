@@ -248,12 +248,28 @@ public interface FeeManagementService {
     List<String> getMajorCodes(FeeBase feeBase);
 
     /**
+     * Check the existence of at least one of the given major codes in a <code>FeeBase</code> object.
+     *
+     * @param majorCodes a list of major codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one major code, <code>false</code> - otherwise.
+     */
+    boolean containsAtLeastOneMajorCode(FeeBase feeBase, String majorCodes);
+
+    /**
      * Returns the codes of all classes taken by a student.
      *
      * @param feeBase A <code>FeeBase</code> that contains a student's information.
      * @return All study course codes.
      */
     List<String> getStudyCodes(FeeBase feeBase);
+
+    /**
+     * Check the existence of at least one of the given study codes in a <code>FeeBase</code> object.
+     *
+     * @param studyCodes a list of study codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
+     */
+    boolean containsAtLeastOneStudyCode(FeeBase feeBase, String studyCodes);
 
     /**
      * Checks if a student is a resident.
