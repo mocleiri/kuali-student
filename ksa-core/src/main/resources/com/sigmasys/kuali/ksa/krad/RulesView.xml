@@ -86,7 +86,7 @@
                       p:fieldLabel.renderColon="false">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="100" p:style="resize:none;"/>
+                        <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="100"/>
                     </property>
                 </bean>
             </list>

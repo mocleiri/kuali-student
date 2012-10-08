@@ -127,30 +127,25 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     }
 
-
     /**
-     * Aging debts for a chargeable account.
+     * Aging debts for all chargeable accounts in KSA
      *
-     * @param userId          Account ID
      * @param ignoreDeferment boolean value
-     * @return a chargeable account being updated
      */
     @Override
-    public ChargeableAccount ageDebt(String userId, boolean ignoreDeferment) {
-
-        Account account = getFullAccount(userId);
-        if (account == null) {
-            String errMsg = "Account with ID '" + userId + "' does not exist";
-            logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+    @Transactional(readOnly = false)
+    public void ageDebt(boolean ignoreDeferment) {
+        List<Account> accounts = getFullAccounts();
+        for (Account account : accounts) {
+            if (account instanceof ChargeableAccount) {
+                ageDebt((ChargeableAccount)account, ignoreDeferment);
+            }
         }
-        if (!(account instanceof ChargeableAccount)) {
-            String errMsg = "Account must be of '" + ChargeableAccount.class.getName() + "' type";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
+    }
 
-        LatePeriod latePeriod = account.getLatePeriod();
+    protected ChargeableAccount ageDebt(ChargeableAccount chargeableAccount, boolean ignoreDeferment) {
+
+        LatePeriod latePeriod = chargeableAccount.getLatePeriod();
 
         final Date curDate = new Date();
         final Date lateDate1 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate1());
@@ -161,7 +156,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         BigDecimal lateAmount2 = BigDecimal.ZERO;
         BigDecimal lateAmount3 = BigDecimal.ZERO;
 
-        List<Pair<Debit, BigDecimal>> balancedDebits = rebalance(userId, ignoreDeferment);
+        List<Pair<Debit, BigDecimal>> balancedDebits = rebalance(chargeableAccount.getId(), ignoreDeferment);
         for (Pair<Debit, BigDecimal> pair : balancedDebits) {
             Debit debit = pair.getA();
             BigDecimal amount = pair.getB();
@@ -176,7 +171,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             }
         }
 
-        ChargeableAccount chargeableAccount = (ChargeableAccount) account;
         chargeableAccount.setAmountLate1(lateAmount1);
         chargeableAccount.setAmountLate2(lateAmount2);
         chargeableAccount.setAmountLate3(lateAmount3);
@@ -185,6 +179,34 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         persistEntity(chargeableAccount);
 
         return chargeableAccount;
+    }
+
+
+    /**
+     * Aging debts for a chargeable account.
+     *
+     * @param userId          Account ID
+     * @param ignoreDeferment boolean value
+     * @return a chargeable account being updated
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public ChargeableAccount ageDebt(String userId, boolean ignoreDeferment) {
+
+        Account account = getFullAccount(userId);
+        if (account == null) {
+            String errMsg = "Account with ID '" + userId + "' does not exist";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (!(account instanceof ChargeableAccount)) {
+            String errMsg = "Account must be of '" + ChargeableAccount.class.getName() + "' type";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        return ageDebt((ChargeableAccount)account, ignoreDeferment);
     }
 
     /**
@@ -370,6 +392,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return the account instance or null if the account does not exist
      */
     @Override
+    @Transactional(readOnly = false)
     public Account getOrCreateAccount(String userId) {
         Account account = getEntity(userId, Account.class);
         if (account == null) {
@@ -614,7 +637,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return new ElectronicContact instance with ID
      */
     @Override
-    @Transactional(readOnly = false)
     public Ach getAch(String userId) throws AccountTypeNotFoundException {
         // @TODO - is it correct to hard code "US ACH." as the type?
         String errMsg = "ACH Account with ID = " + userId + " does not exist";

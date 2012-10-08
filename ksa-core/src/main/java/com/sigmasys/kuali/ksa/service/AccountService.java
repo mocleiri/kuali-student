@@ -27,6 +27,13 @@ public interface AccountService {
     List<Pair<Debit, BigDecimal>> rebalance(String userId, boolean ignoreDeferment);
 
     /**
+     * Aging debts for all chargeable accounts in KSA
+     *
+     * @param ignoreDeferment boolean value
+     */
+    void ageDebt(boolean ignoreDeferment);
+
+    /**
      * Aging debts for a chargeable account.
      *
      * @param userId          Account ID
@@ -162,16 +169,17 @@ public interface AccountService {
      * Get ACH looks into the AccountProtectedInformation class (which triggers a system event) to look for
      * the ACH information for the user
      *
-     * @param userId            Account ID
+     * @param userId Account ID
      * @return Ach for associated ID.
      */
     Ach getAch(String userId);
 
     /**
-         * Returns the list of matching accounts for the given name pattern.
-         * @param namePattern Name pattern
-         * @return List of Account instances
-         */
+     * Returns the list of matching accounts for the given name pattern.
+     *
+     * @param namePattern Name pattern
+     * @return List of Account instances
+     */
     List<Account> findAccountsByNamePattern(String namePattern);
 
 }

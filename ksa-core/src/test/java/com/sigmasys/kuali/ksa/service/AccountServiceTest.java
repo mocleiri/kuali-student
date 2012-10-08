@@ -172,6 +172,17 @@ public class AccountServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void ageAllDebts() {
+
+            accountService.getFullAccount("admin");
+            accountService.getFullAccount("user1");
+            accountService.getFullAccount("dev1");
+
+            accountService.ageDebt(false);
+
+    }
+
+    @Test
     public void getAccountKsb() {
 
         String userId = "admin";
