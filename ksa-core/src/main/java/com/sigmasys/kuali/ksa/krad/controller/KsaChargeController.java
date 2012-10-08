@@ -109,20 +109,15 @@ public class KsaChargeController extends GenericSearchController {
             form.setStatusMessage("Transaction Type must be a charge type");
             return getUIFModelAndView(form);
         }
-        charge.setTransactionType(tt);
-        charge.setStatementText(tt.getDescription());
-        charge.setLedgerDate(new Date());
-        charge.setOriginationDate(new Date());
-        charge.setRecognitionDate(new Date());
-        charge.setNativeAmount(charge.getAmount());
-
 
         try {
-            Long newId = transactionService.persistTransaction(charge);
-            if (newId != null) {
+            charge = (Charge)transactionService.createTransaction(typeIdString, charge.getAccount().getId(), charge.getEffectiveDate(), charge.getAmount());
+
+            if (charge.getId() != null) {
                 form.setCharge(charge);
                 form.setStatusMessage("Charge saved");
             }
+
         } catch (TransactionNotAllowedException e) {
             logger.error(e.getMessage(), e);
             form.setStatusMessage(e.getMessage());

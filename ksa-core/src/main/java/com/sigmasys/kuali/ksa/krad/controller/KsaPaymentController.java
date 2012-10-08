@@ -187,19 +187,10 @@ public class KsaPaymentController extends GenericSearchController {
             return;
         }
 
-
-        payment.setTransactionType(tt);
-        payment.setStatementText(tt.getDescription());
-        payment.setLedgerDate(new Date());
-        payment.setOriginationDate(new Date());
-        payment.setRecognitionDate(new Date());
-        payment.setNativeAmount(payment.getAmount());
-
-
         try {
-            Long newId = transactionService.persistTransaction(payment);
-            if (newId != null) {
-                payment.setId(newId);
+            payment = (Payment)transactionService.createTransaction(typeIdString, payment.getExternalId(), payment.getAccount().getId(),
+                                    payment.getEffectiveDate(), null, payment.getAmount() );
+            if (payment.getId() != null) {
                 form.setPayment(payment);
                 form.setStatusMessage("Payment saved");
             }
