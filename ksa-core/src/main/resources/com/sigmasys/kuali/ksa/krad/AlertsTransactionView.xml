@@ -189,7 +189,9 @@
     </bean>
 
     <!-- a list of Charge transactions from the model type within the form's list -->
-    <bean id="Recent_Transaction_Section" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="5">
+    <bean id="Recent_Transaction_Section" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="5"
+          p:width="85%">
         <property name="title" value="Recent Transactions"/>
         <property name="instructionalText"
                   value="Recent Transactions"/>
