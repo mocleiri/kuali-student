@@ -129,7 +129,8 @@
                       p:disclosure.render="false"
                       p:progressiveRenderViaAJAX="true"
                       p:title="Matching Persons and Description"
-                      p:instructionalText="Select a line item to view details for the person.">
+                      p:instructionalText="Select a line item to view details for the person."
+                      p:width="85%">
                     <property name="readOnly" value="true"/>
                     <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
                     <property name="propertyName" value="accountBrowseList"/>
@@ -283,7 +284,8 @@
           p:title="Alerts"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:instructionalText="Creation date then alert information">
+          p:instructionalText="Creation date then alert information"
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Alert"/>
         <property name="propertyName" value="alerts"/>
@@ -307,7 +309,8 @@
           p:title="Flags"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:instructionalText="Creation date then flag information">
+          p:instructionalText="Creation date then flag information"
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Flag"/>
         <property name="propertyName" value="flags"/>
@@ -399,7 +402,8 @@
     <bean id="customerServiceMemos" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="2"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:instructionalText="Creation date then memo information">
+          p:instructionalText="Creation date then memo information"
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
         <property name="propertyName" value="memos"/>
