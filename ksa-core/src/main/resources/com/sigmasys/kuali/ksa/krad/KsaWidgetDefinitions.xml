@@ -78,7 +78,7 @@
         <property name="template" value="/WEB-INF/ftl/view.ftl"/>
         <property name="additionalCssFiles">
             <list>
-                <value>css/ksa.css</value>
+                <value>css/ksa.css?forceReload</value>
             </list>
         </property>
         <property name="theme" ref="Uif-KsaTheme"/>
