@@ -195,7 +195,8 @@
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
           p:title="Matching Persons and Description"
-          p:instructionalText="Select a line item to view transactions for the person.">
+          p:instructionalText="Select a line item to view transactions for the person."
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Account"/>
         <property name="propertyName" value="accountBrowseList"/>
@@ -240,7 +241,8 @@
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
           p:title="Charges"
-          p:instructionalText="Select a line item to view transactions for the person.">
+          p:instructionalText="Select a line item to view transactions for the person."
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Charge"/>
         <property name="propertyName" value="chargeList"/>
@@ -273,7 +275,8 @@
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
           p:title="Payments"
-          p:instructionalText="Select a line item to view transactions for the person.">
+          p:instructionalText="Select a line item to view transactions for the person."
+          p:width="85%">
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Payment"/>
         <property name="propertyName" value="paymentList"/>
@@ -512,7 +515,8 @@
     <!-- Collection list of currency types -->
 
     <bean id="bursaCurrencyList" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="4">
+          p:layoutManager.numberOfColumns="4"
+          p:width="85%">
         <property name="title" value="View Currency Types"/>
         <property name="instructionalText"
                   value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application."/>
@@ -524,27 +528,27 @@
         <property name="propertyName" value="currencies"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="code">
+                <bean parent="Uif-InputField" p:label="Symbol" p:propertyName="code" p:width="10%">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name">
+                <bean parent="Uif-InputField" p:label="Name" p:propertyName="name" p:width="25%">
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description">
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="description" p:width="55%">
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
                               p:watermarkText="Statement description..." p:maxLength="2000"/>
                     </property>
                 </bean>
-
+               <!-- JET - added width to all columns and label to action column-->
                 <!--<bean parent="Uif-LinkField" p:linkText="Delete" p:target="_self"
                       p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage&amp;methodToCall=get&amp;subMethod=deleteCurr&amp;id=@{#line.id}"/>-->
-                <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
-                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;code=@{#line.code}"/>
+                <bean parent="Uif-LinkField" p:label="Action" p:linkText="Edit" p:target="_self"
+                      p:href="transOvrVw?viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyEditPage&amp;methodToCall=get&amp;code=@{#line.code}" p:width="10%"/>
             </list>
         </property>
     </bean>
@@ -584,7 +588,9 @@
     </bean>
 
     <!-- Activity tuff -->
-    <bean id="bursaActivityList" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4">
+    <bean id="bursaActivityList" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4"
+          p:width="85%">
         <property name="title" value="Recent Activity"/>
 
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Activity"/>
