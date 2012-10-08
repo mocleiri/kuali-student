@@ -91,10 +91,15 @@ public class KsaChargeController extends GenericSearchController {
         charge.setAccount(form.getAccount());
 
         String typeIdString = form.getChargeTransactionTypeId();
+        Date effectiveDate = charge.getEffectiveDate();
+        if(effectiveDate == null){
+            effectiveDate = new Date();
+        }
+
 
         TransactionType tt;
         try {
-            tt = transactionService.getTransactionType(typeIdString, charge.getEffectiveDate());
+            tt = transactionService.getTransactionType(typeIdString, effectiveDate);
         } catch (InvalidTransactionTypeException e) {
             logger.error(e.getMessage(), e);
             form.setStatusMessage(e.getMessage());
@@ -111,7 +116,7 @@ public class KsaChargeController extends GenericSearchController {
         }
 
         try {
-            charge = (Charge)transactionService.createTransaction(typeIdString, charge.getAccount().getId(), charge.getEffectiveDate(), charge.getAmount());
+            charge = (Charge)transactionService.createTransaction(typeIdString, charge.getAccount().getId(), effectiveDate, charge.getAmount());
 
             if (charge.getId() != null) {
                 form.setCharge(charge);

@@ -168,10 +168,15 @@ public class KsaPaymentController extends GenericSearchController {
         payment.setAccount(form.getAccount());
 
         String typeIdString = form.getPaymentTransactionTypeId();
+        Date effectiveDate = payment.getEffectiveDate();
+        if(effectiveDate == null){
+            effectiveDate = new Date();
+        }
+
 
         TransactionType tt;
         try {
-            tt = transactionService.getTransactionType(typeIdString, payment.getEffectiveDate());
+            tt = transactionService.getTransactionType(typeIdString, effectiveDate);
         } catch (InvalidTransactionTypeException e) {
             logger.error(e.getMessage(), e);
             form.setStatusMessage(e.getMessage());
@@ -189,7 +194,7 @@ public class KsaPaymentController extends GenericSearchController {
 
         try {
             payment = (Payment)transactionService.createTransaction(typeIdString, payment.getExternalId(), payment.getAccount().getId(),
-                                    payment.getEffectiveDate(), null, payment.getAmount() );
+                                    effectiveDate, null, payment.getAmount() );
             if (payment.getId() != null) {
                 form.setPayment(payment);
                 form.setStatusMessage("Payment saved");
