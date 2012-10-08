@@ -203,7 +203,8 @@
                       p:disclosure.render="false"
                       p:progressiveRenderViaAJAX="true"
                       p:title="@{account.id}"
-                      p:instructionalText="The following table contains a list of Biographic Entries for the selected user.">
+                      p:instructionalText="The following table contains a list of Biographic Entries for the selected user."
+                      p:width="85%">
                     <property name="readOnly" value="true"/>
                     <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.PersonName"/>
                     <property name="propertyName" value="personNameList"/>
