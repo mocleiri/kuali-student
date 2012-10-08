@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
+import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Memo;
 
 import java.util.Date;
 import java.util.List;
@@ -19,9 +19,9 @@ public class KsaMemoForm extends AbstractViewModel {
 
    private Date toDate;
 
-   private List<Memo> memos;
+   private List<MemoModel> memoModels;
 
-   private Memo memo;
+   private MemoModel memoModel;
 
    private String statusMessage;
 
@@ -55,20 +55,20 @@ public class KsaMemoForm extends AbstractViewModel {
       this.toDate = toDate;
    }
 
-   public List<Memo> getMemos() {
-      return memos;
+   public List<MemoModel> getMemoModels() {
+      return memoModels;
    }
 
-   public void setMemos(List<Memo> memos) {
-      this.memos = memos;
+   public void setMemoModels(List<MemoModel> memoModels) {
+      this.memoModels = memoModels;
    }
 
-   public Memo getMemo() {
-      return memo;
+   public MemoModel getMemoModel() {
+      return memoModel;
    }
 
-   public void setMemo(Memo memo) {
-      this.memo = memo;
+   public void setMemoModel(MemoModel memoModel) {
+      this.memoModel = memoModel;
    }
 
    public String getStatusMessage() {

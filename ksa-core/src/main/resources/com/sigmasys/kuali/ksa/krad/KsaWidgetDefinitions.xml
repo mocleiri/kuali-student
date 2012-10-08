@@ -43,7 +43,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
-                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView"/>
+                      p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;AccountOVTransactionsPage"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
                       p:href="ksaAdminVw?methodToCall=get&amp;viewId=KsaAdminView&amp;pageId=ActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"

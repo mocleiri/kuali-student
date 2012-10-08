@@ -71,6 +71,7 @@ public class KsaQuickViewController extends GenericSearchController {
                             HttpServletRequest request, HttpServletResponse response) {
 
         String viewId = request.getParameter("viewId");
+        String pageId = request.getParameter("pageId");
         String userId = request.getParameter("userId");
 
         logger.info("View: " + viewId + " User: " + userId);
@@ -80,8 +81,18 @@ public class KsaQuickViewController extends GenericSearchController {
                 throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
             }
 
-            populateForm(userId, form);
+            if (pageId == null) {
+               populateForm(userId, form);
+            }  else if (pageId != null && pageId.equals("QuickViewAddMemoPage")) {
+               if (userId == null || userId.isEmpty()) {
+                  throw new IllegalArgumentException("'userId' request parameter must be specified");
+               }
 
+               Memo memo = new Memo();
+               memo.setEffectiveDate(new Date());
+               /*form.setMemo(memo);
+             form.setAefInstructionalText("Add a memo");*/
+            }
         }
 
         return getUIFModelAndView(form);

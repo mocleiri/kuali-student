@@ -471,9 +471,9 @@
                 <bean parent="Uif-Link" p:linkText="Add Biographic Information" p:target="_self"
                       p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add an Alert" p:target="_self"
-                      p:href="ksaAlertsVw?methodToCall=get&amp;viewId=KsaAlertsView&amp;userId=@{account.id}"/>
+                      p:href="ksaAlertsVw?methodToCall=get&amp;viewId=KsaAlertsView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add a Flag" p:target="_self"
-                      p:href="ksaFlagsVw?methodToCall=get&amp;viewId=KsaFlagsView&amp;userId=@{account.id}"/>
+                      p:href="ksaFlagsVw?methodToCall=get&amp;viewId=KsaFlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Add Memo" p:target="_self"
                       p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>
@@ -514,11 +514,11 @@
                         <bean parent="Uif-HorizontalRadioControl">
                             <property name="options">
                                 <list>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L1" p:value="Level 1"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L2" p:value="Level 2"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L3" p:value="Level 3"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L4" p:value="Level 4"/>
-                                    <bean parent="Uif-KeyLabelPair" p:key="L5" p:value="Level 5"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="0" p:value="0"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="1" p:value="1"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="2" p:value="2"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="3" p:value="3"/>
+                                    <bean parent="Uif-KeyLabelPair" p:key="4" p:value="4"/>
                                 </list>
                             </property>
                         </bean>

@@ -192,7 +192,13 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
             form.setAllocationAmount(t.getAllocatedAmount());
             form.setAmountAllocatedLocked(t.getLockedAllocatedAmount());
-            form.setNativeAmountCurr(t.getCurrency().getCode());
+            Currency currency = t.getCurrency();
+            if (currency != null) {
+               String currencyCode = currency.getCode();
+               form.setNativeAmountCurr(currencyCode);
+            } else {
+               form.setNativeAmountCurr("USD");
+            }
 
             if (t.getDocument() != null) {
                 form.setDocumentId(t.getDocument().getId().toString());
