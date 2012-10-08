@@ -126,7 +126,7 @@
                                       p:actionLabel="Search">
                                     <property name="cssClasses">
                                         <list merge="true">
-                                            <value>ksa-header-search-button</value>
+                                            <value>ksa-form-button</value>
                                         </list>
                                     </property>
                                 </bean>

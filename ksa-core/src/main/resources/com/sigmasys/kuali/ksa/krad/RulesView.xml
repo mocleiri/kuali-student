@@ -56,10 +56,11 @@
                 <bean parent="Uif-HorizontalBoxSection" p:layoutManager.orientation="HORIZONTAL">
                     <property name="items">
                         <list>
-                            <bean parent="Uif-InputField" p:propertyName="ruleSetId" p:label="Select a rule for editing"
+                            <bean parent="Uif-InputField" p:propertyName="ruleSetId"
+                                  p:label="Select a rule set for editing"
                                   p:labelPlacement="TOP"
-                                  p:width="auto"
-                                  p:required="false"
+                                  p:width="100"
+                                  p:required="true"
                                   p:fieldLabel.renderColon="false">
                                 <property name="bindingInfo.bindToForm" value="true"/>
                                 <property name="control">
@@ -68,14 +69,24 @@
                                 <property name="optionsFinder" value="@{getRuleSetNameFinder()}"/>
                             </bean>
                             <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="select"
-                                  p:actionLabel="Upload Rule"/>
+                                  p:actionLabel="Load Rule Set">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-form-button</value>
+                                    </list>
+                                </property>
+                            </bean>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="ruleSetBody" p:label="Rule Set Body">
+                <bean parent="Uif-InputField" p:propertyName="ruleSetBody"
+                      p:label="Rule Set Body"
+                      p:labelPlacement="TOP"
+                      p:required="true"
+                      p:fieldLabel.renderColon="false">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextAreaControl" p:rows="40" p:cols="40" p:style="resize:none;"/>
+                        <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="100" p:style="resize:none;"/>
                     </property>
                 </bean>
             </list>
