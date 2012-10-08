@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service.drools;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.Constants;
+import com.sigmasys.kuali.ksa.model.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.drools.KnowledgeBase;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.io.StringReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,20 +42,30 @@ public class DroolsService {
         System.setProperty("drools.dialect.java.compiler", "JANINO");
     }
 
-    // Map of <DRL file name, KnowledgeBase> objects
-    private final Map<String, KnowledgeBase> knowledgeBases = new HashMap<String, KnowledgeBase>();
-
-    private Resource dslResource;
-
     @Autowired
     private ConfigService configService;
 
+    @Autowired
+    private DroolsPersistenceService droolsPersistenceService;
+
+    private Resource dslResource;
+
+    // Specifies whether to use the classpath or database as a rule persistent store
+    private boolean useClasspath;
+
+    // Map of <DRL file name, KnowledgeBase> objects
+    private final Map<String, KnowledgeBase> knowledgeBases = new HashMap<String, KnowledgeBase>();
+
+    public DroolsService() {
+        // By default use resources from the classpath
+        setUseClasspath(true);
+    }
 
     @PostConstruct
     private void postConstruct() {
         String dslFileName = getDslFileName();
         logger.info("Initializing DSL resource '" + dslFileName + "'");
-        dslResource = ResourceFactory.newClassPathResource(getDslFileName());
+        dslResource = getRuleSetResource(getDslFileName());
         logger.info("DSL resource '" + dslFileName + "' has been initialized");
     }
 
@@ -72,7 +84,7 @@ public class DroolsService {
                     logger.info("Initializing DSL knowledge base...");
                     builder.add(dslResource, ResourceType.DSL);
                 }
-                builder.add(ResourceFactory.newClassPathResource(drlFileName), resourceType);
+                builder.add(getRuleSetResource(drlFileName), resourceType);
                 handleErrors(builder.getErrors(), drlFileName);
                 knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
                 knowledgeBase.addKnowledgePackages(builder.getKnowledgePackages());
@@ -101,10 +113,10 @@ public class DroolsService {
     private <T> T fireRules(KnowledgeBase knowledgeBase, T droolsContext, Map<String, Object> globalParams) {
         try {
             StatelessKnowledgeSession session = knowledgeBase.newStatelessKnowledgeSession();
-            if ( globalParams != null) {
-             for (Map.Entry<String, Object> entry : globalParams.entrySet()) {
-                session.setGlobal(entry.getKey(), entry.getValue());
-             }
+            if (globalParams != null) {
+                for (Map.Entry<String, Object> entry : globalParams.entrySet()) {
+                    session.setGlobal(entry.getKey(), entry.getValue());
+                }
             }
             Command command = CommandFactory.newInsert(droolsContext, "droolsContext");
             ExecutionResults results = session.execute(CommandFactory.newBatchExecution(Arrays.asList(command)));
@@ -115,7 +127,36 @@ public class DroolsService {
         }
     }
 
+    /**
+     * Returns a Drools resource using a rule set identifier either from the classpath (by a filename) or
+     * from the database (by a rule set ID column name).
+     *
+     * @param ruleSetId    a rule set identifier
+     * @return <code>Resource</code> instance
+     */
+    protected Resource getRuleSetResource(String ruleSetId) {
+        if (useClasspath) {
+            return ResourceFactory.newClassPathResource(ruleSetId);
+        } else {
+            RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
+            if (ruleSet == null) {
+                String errMsg = "Rule Set specified by ID = " + ruleSetId + " does not exist";
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
+            return ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
+        }
+    }
+
     // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
+
+    public boolean isUseClasspath() {
+        return useClasspath;
+    }
+
+    public void setUseClasspath(boolean useClasspath) {
+        this.useClasspath = useClasspath;
+    }
 
     public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext,
                            Map<String, Object> globalParams) {
@@ -123,7 +164,7 @@ public class DroolsService {
     }
 
     public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext) {
-           return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, null);
+        return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, null);
     }
 
 }

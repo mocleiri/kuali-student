@@ -68,7 +68,7 @@ public class Document implements Identifiable {
     }
 
     @Lob
-    @Column(name = "DOCUMENT")
+    @Column(name = "DOCUMENT", length = Integer.MAX_VALUE)
     public String getBody() {
         return body;
     }

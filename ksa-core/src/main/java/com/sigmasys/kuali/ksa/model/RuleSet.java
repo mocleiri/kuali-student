@@ -21,9 +21,16 @@ public class RuleSet implements Identifiable {
      */
     private String rules;
 
+    public RuleSet() {
+    }
+
+    public RuleSet(String id, String rules) {
+        setId(id);
+        setRules(rules);
+    }
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID", length = 100, nullable = false)
     @Override
     public String getId() {
         return id;
@@ -34,7 +41,7 @@ public class RuleSet implements Identifiable {
     }
 
     @Lob
-    @Column(name = "RULE_SET", nullable = false)
+    @Column(name = "RULE_SET", length = Integer.MAX_VALUE, nullable = false)
     public String getRules() {
         return rules;
     }

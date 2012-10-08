@@ -2,13 +2,17 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.model.RuleSet;
 import com.sigmasys.kuali.ksa.service.drools.DroolsContext;
+import com.sigmasys.kuali.ksa.service.drools.DroolsPersistenceService;
 import com.sigmasys.kuali.ksa.service.drools.DroolsService;
+import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.drools.builder.ResourceType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +32,9 @@ public class DroolsServiceTest extends AbstractServiceTest {
 
     @Autowired
     private DroolsService droolsService;
+
+    @Autowired
+    private DroolsPersistenceService droolsPersistenceService;
 
     @Autowired
     private AccountService accountService;
@@ -72,6 +79,26 @@ public class DroolsServiceTest extends AbstractServiceTest {
 
         Assert.notNull(currency);
         Assert.isTrue(currency.getEditorId().equals("admin"));
+
+    }
+
+    @Test
+    @Rollback(false)
+    public void persistRules() throws Exception {
+
+        String ruleSetBody = CommonUtils.getResourceAsString("drools/fee1.dslr");
+
+        Assert.notNull(ruleSetBody);
+        Assert.hasLength(ruleSetBody);
+
+        RuleSet ruleSet = new RuleSet();
+        ruleSet.setId("fee1.dslr");
+        ruleSet.setRules(ruleSetBody);
+
+        String ruleSetId = droolsPersistenceService.persistRules(ruleSet);
+
+        Assert.notNull(ruleSetId);
+        Assert.isTrue(ruleSetId.equals("fee1.dslr"));
 
     }
 
