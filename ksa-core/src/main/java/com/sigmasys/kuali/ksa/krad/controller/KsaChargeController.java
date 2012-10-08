@@ -120,7 +120,7 @@ public class KsaChargeController extends GenericSearchController {
 
             if (charge.getId() != null) {
                 form.setCharge(charge);
-                form.setStatusMessage("Charge saved");
+                form.setStatusMessage(tt.getDescription() + " charge saved");
             }
 
         } catch (TransactionNotAllowedException e) {

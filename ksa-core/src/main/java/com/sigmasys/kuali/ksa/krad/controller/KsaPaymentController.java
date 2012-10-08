@@ -197,7 +197,7 @@ public class KsaPaymentController extends GenericSearchController {
                                     effectiveDate, null, payment.getAmount() );
             if (payment.getId() != null) {
                 form.setPayment(payment);
-                form.setStatusMessage("Payment saved");
+                form.setStatusMessage(tt.getDescription() + " payment saved");
             }
 
         } catch (TransactionNotAllowedException e) {
