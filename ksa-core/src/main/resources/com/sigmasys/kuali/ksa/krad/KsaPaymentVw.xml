@@ -175,7 +175,7 @@
     <bean id="paymentControls" parent="Uif-HorizontalBoxSubSection">
         <property name="items">
             <list>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitAge" p:actionLabel="Submit and Age"
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitAge" p:actionLabel="Submit and Apply Payments"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit" p:actionLabel="Submit"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"/>

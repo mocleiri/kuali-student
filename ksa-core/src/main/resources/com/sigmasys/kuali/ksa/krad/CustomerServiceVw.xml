@@ -699,7 +699,7 @@
                     <!--p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>-->
                     <!--</property>-->
                 </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitPaymentAge" p:actionLabel="Submit and Age">
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submitPaymentAge" p:actionLabel="Submit and Apply Payments">
                     <!--                    <property name="actionImage">
                         <bean parent="Uif-ImageField"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
