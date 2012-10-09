@@ -265,13 +265,15 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new CurrencyNotFoundException(errMsg);
         }
 
+        String creatorId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+
         if (overrideBlocks) {
-            if (!getAccessControlService().isTransactionTypeAllowed(userId, id.getId())) {
+            if (!getAccessControlService().isTransactionTypeAllowed(creatorId, id.getId())) {
                 String errMsg = "Transaction type is not allowed for the given account = " + userId;
                 logger.error(errMsg);
                 throw new TransactionTypeNotAllowedException(errMsg);
             }
-        } else if (!isTransactionAllowed(userId, id.getId(), effectiveDate)) {
+        } else if (!isTransactionAllowed(creatorId, id.getId(), effectiveDate)) {
             String errMsg = "Transaction is not allowed for the given account = " + userId;
             logger.error(errMsg);
             throw new TransactionNotAllowedException(errMsg);
@@ -305,7 +307,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         transaction.setGeneralLedgerType(glService.getDefaultGeneralLedgerType());
 
-        transaction.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
+        transaction.setCreatorId(creatorId);
 
         if (transaction instanceof Payment) {
             CreditType creditType = (CreditType) transactionType;
