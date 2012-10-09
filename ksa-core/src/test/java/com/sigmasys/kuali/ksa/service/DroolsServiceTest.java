@@ -60,9 +60,9 @@ public class DroolsServiceTest extends AbstractServiceTest {
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
         // Using the database
-        droolsService.setUseClasspath(false);
+        //droolsService.setUseClasspath(false);
 
-        droolsContext = droolsService.fireRules("fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
         Assert.notNull(droolsContext);
         Assert.notNull(droolsContext.getAccount());
@@ -79,7 +79,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.isTrue(currency.getCode().equals("USD"));
 
         // Using the classpath
-        droolsService.setUseClasspath(true);
+        //droolsService.setUseClasspath(true);
 
         currency = droolsService.fireRules("drools/currency.xdrl", ResourceType.XDRL, currency);
 
