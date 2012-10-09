@@ -705,11 +705,11 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     @Override
     public List<Account> findAccountsByNamePattern(String namePattern) {
 
-        boolean patternIsEmpty = namePattern != null && !namePattern.isEmpty();
+        boolean patternIsNotEmpty = (namePattern != null) && !namePattern.isEmpty();
 
         StringBuilder builder = new StringBuilder(GET_FULL_ACCOUNTS_QUERY);
 
-        if (patternIsEmpty) {
+        if (patternIsNotEmpty) {
             builder.append(" and (lower(a.id) like :pattern or lower(pn.firstName) like :pattern or " +
                     "lower(pn.middleName) like :pattern or lower(pn.lastName) like :pattern)");
         }
@@ -718,7 +718,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
         Query query = em.createQuery(builder.toString());
 
-        if (patternIsEmpty) {
+        if (patternIsNotEmpty) {
             query.setParameter("pattern", "%" + namePattern.toLowerCase() + "%");
         }
 

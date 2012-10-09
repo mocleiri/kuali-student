@@ -1422,9 +1422,23 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Transaction> findTransactionsByStatementPattern(String pattern) {
-        Query query = em.createQuery("select t from Transaction t " + GET_TRANSACTION_JOIN +
-                " where t.statementText like :pattern ");
-        query.setParameter("pattern", pattern);
+
+        boolean patternIsNotEmpty = (pattern != null) && !pattern.isEmpty();
+
+        StringBuilder builder = new StringBuilder("select t from Transaction t " + GET_TRANSACTION_JOIN);
+
+        if (patternIsNotEmpty) {
+            builder.append(" where t.statementText like :pattern ");
+        }
+
+        builder.append(" order by t.id");
+
+        Query query = em.createQuery(builder.toString());
+
+        if (patternIsNotEmpty) {
+            query.setParameter("pattern", "%" + pattern.toLowerCase() + "%");
+        }
+
         return query.getResultList();
     }
 
