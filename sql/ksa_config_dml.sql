@@ -30,3 +30,6 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.memo.level', '2');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.account.status.type', 'N/A');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.account.credit.limit', '20000');
 
+-- Drools settings
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.drools.dsl', 'ksa.dsl');
+

@@ -50,7 +50,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         accountService.getOrCreateAccount(userId);
     }
 
-    @Test
+    //@Test
     public void fireFeeAssessmentRules() throws Exception {
 
         DroolsContext droolsContext = new DroolsContext();
@@ -89,7 +89,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    @Rollback(false)
+    //@Rollback(false)
     public void persistRules() throws Exception {
 
         String ruleSetBody = CommonUtils.getResourceAsString("drools/ksa.dsl");

@@ -89,6 +89,14 @@
                         <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="100"/>
                     </property>
                 </bean>
+                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="update"
+                      p:actionLabel="Update">
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>ksa-form-button</value>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
