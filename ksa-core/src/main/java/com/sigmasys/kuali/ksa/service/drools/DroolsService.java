@@ -10,6 +10,7 @@ import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.*;
 import org.drools.command.Command;
 import org.drools.command.CommandFactory;
+import org.drools.definition.KnowledgePackage;
 import org.drools.io.Resource;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.ExecutionResults;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,33 +71,40 @@ public class DroolsService {
         logger.info("DSL resource '" + dslId + "' has been initialized");
     }
 
-    private synchronized KnowledgeBase getKnowledgeBase(String drlFileName, ResourceType resourceType) {
+    private Collection<KnowledgePackage> buildKnowledgePackages(String ruleSetId, Resource rulesResource,
+                                                                ResourceType resourceType) {
+            KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+            if (ResourceType.DSLR.equals(resourceType)) {
+                logger.info("Initializing DSL knowledge base...");
+                builder.add(dslResource, ResourceType.DSL);
+            }
+            builder.add(rulesResource, resourceType);
+            handleErrors(builder.getErrors(), ruleSetId);
+            return builder.getKnowledgePackages();
+    }
+
+    private synchronized KnowledgeBase getKnowledgeBase(String ruleSetId, ResourceType resourceType) {
         try {
-            KnowledgeBase knowledgeBase = knowledgeBases.get(drlFileName);
+            KnowledgeBase knowledgeBase = knowledgeBases.get(ruleSetId);
             if (knowledgeBase == null) {
-                KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-                if (ResourceType.DSLR.equals(resourceType)) {
-                    logger.info("Initializing DSL knowledge base...");
-                    builder.add(dslResource, ResourceType.DSL);
-                }
-                builder.add(getRuleSetResource(drlFileName), resourceType);
-                handleErrors(builder.getErrors(), drlFileName);
+                Collection<KnowledgePackage> knowledgePackages =
+                        buildKnowledgePackages(ruleSetId, getRuleSetResource(ruleSetId), resourceType);
                 knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
-                knowledgeBase.addKnowledgePackages(builder.getKnowledgePackages());
-                knowledgeBases.put(drlFileName, knowledgeBase);
+                knowledgeBase.addKnowledgePackages(knowledgePackages);
+                knowledgeBases.put(ruleSetId, knowledgeBase);
             }
             return knowledgeBase;
         } catch (Throwable t) {
-            String errMsg = "Cannot retrieve KnowledgeBase from '" + drlFileName + "'";
+            String errMsg = "Cannot retrieve KnowledgeBase from '" + ruleSetId + "'";
             logger.error(errMsg, t);
             throw new RuntimeException(errMsg, t);
         }
     }
 
-    private void handleErrors(KnowledgeBuilderErrors errors, String drlFileName) {
+    private void handleErrors(KnowledgeBuilderErrors errors, String ruleSetId) {
         if (errors != null && !errors.isEmpty()) {
             StringBuilder errorMessage = new StringBuilder();
-            errorMessage.append("There are problems in compiling the rules for '").append(drlFileName).append("' \n");
+            errorMessage.append("There are problems in compiling the rules for '").append(ruleSetId).append("' \n");
             for (KnowledgeBuilderError error : errors) {
                 errorMessage.append(error).append("\n");
             }
@@ -162,13 +171,8 @@ public class DroolsService {
     }
 
     public void validateRuleSet(RuleSet ruleSet, ResourceType resourceType) {
-        Resource rulesResource = ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
-        KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-        if (ResourceType.DSLR.equals(resourceType)) {
-            builder.add(dslResource, ResourceType.DSL);
-        }
-        builder.add(rulesResource, resourceType);
-        handleErrors(builder.getErrors(), ruleSet.getId());
+        Resource ruleSetResource = ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
+        buildKnowledgePackages(ruleSet.getId(), ruleSetResource, resourceType);
     }
 
     public String getDslId() {

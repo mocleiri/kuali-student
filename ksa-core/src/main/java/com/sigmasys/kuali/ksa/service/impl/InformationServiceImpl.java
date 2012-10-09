@@ -145,6 +145,15 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public Long persistInformation(Information information) {
+        String userId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+        Date currentDate = new Date();
+        if (information.getId() != null) {
+            information.setEditorId(userId);
+            information.setLastUpdate(currentDate);
+        } else {
+            information.setCreatorId(userId);
+            information.setCreationDate(currentDate);
+        }
         return persistEntity(information);
     }
 
