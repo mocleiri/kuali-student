@@ -2,6 +2,10 @@
     JET CSS Start
  */
 
+ td.uif-field > div.uif-field{
+     width: auto !important;
+ } /*table column width bug workaround*/
+ 
  .ksa-logo {
      padding-left: 10px;
      padding-right: 350px;
