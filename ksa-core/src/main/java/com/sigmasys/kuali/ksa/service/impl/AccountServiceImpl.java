@@ -710,7 +710,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         StringBuilder builder = new StringBuilder(GET_FULL_ACCOUNTS_QUERY);
 
         if (patternIsEmpty) {
-            builder.append(" and (lower(pn.firstName) like :pattern or " +
+            builder.append(" and (lower(a.id) like :pattern or lower(pn.firstName) like :pattern or " +
                     "lower(pn.middleName) like :pattern or lower(pn.lastName) like :pattern)");
         }
 

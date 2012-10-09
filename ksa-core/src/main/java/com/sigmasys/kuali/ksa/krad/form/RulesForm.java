@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class RulesForm extends AbstractViewModel {
 
-    private static final String EMPTY_VALUE_KEY = "_emptyValueKey";
-
     private String ruleSetId;
     private String ruleSetBody;
 
@@ -29,8 +27,7 @@ public class RulesForm extends AbstractViewModel {
         private List<KeyValue> keyValues = Collections.emptyList();
 
         public void initValues(List<String> ruleSetNames) {
-            keyValues = new ArrayList<KeyValue>(ruleSetNames.size()+1);
-            keyValues.add(new ConcreteKeyValue(EMPTY_VALUE_KEY, ""));
+            keyValues = new ArrayList<KeyValue>(ruleSetNames.size());
             for (String ruleSetName : ruleSetNames) {
                 keyValues.add(new ConcreteKeyValue(ruleSetName, ruleSetName));
             }

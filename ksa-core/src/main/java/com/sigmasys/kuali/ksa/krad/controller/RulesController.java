@@ -3,9 +3,11 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.RulesForm;
 import com.sigmasys.kuali.ksa.model.RuleSet;
 import com.sigmasys.kuali.ksa.service.drools.DroolsPersistenceService;
+import com.sigmasys.kuali.ksa.service.drools.DroolsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.drools.builder.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 public class RulesController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(RulesController.class);
+
+    @Autowired
+    private DroolsService droolsService;
 
     @Autowired
     private DroolsPersistenceService droolsPersistenceService;
@@ -42,9 +47,6 @@ public class RulesController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
     public ModelAndView get(@ModelAttribute("KualiForm") RulesForm form) {
-
-        // TODO
-
         return getUIFModelAndView(form);
     }
 
@@ -52,13 +54,21 @@ public class RulesController extends GenericSearchController {
      * @param form RuleForm instance
      * @return ModelAndView instance
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    public ModelAndView save(@ModelAttribute("KualiForm") RulesForm form) {
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=update")
+    public ModelAndView update(@ModelAttribute("KualiForm") RulesForm form) {
 
         String ruleSetId = form.getRuleSetId();
         String ruleSetBody = form.getRuleSetBody();
 
-        droolsPersistenceService.persistRules(new RuleSet(ruleSetId, ruleSetBody));
+        RuleSet ruleSet = new RuleSet(ruleSetId, ruleSetBody);
+
+        // Validating the rule set content
+        ResourceType resourceType = ruleSetId.equals(droolsService.getDslId()) ? ResourceType.DSL : ResourceType.DSLR;
+        droolsService.validateRuleSet(ruleSet, resourceType);
+
+        droolsPersistenceService.persistRules(ruleSet);
+
+        logger.info("Updated Rule Set => \n" + ruleSetBody);
 
         return getUIFModelAndView(form);
     }
@@ -86,6 +96,8 @@ public class RulesController extends GenericSearchController {
 
         form.setRuleSetId(ruleSetId);
         form.setRuleSetBody(ruleSet.getRules());
+
+        logger.info("Selected Rule Set => \n" + ruleSet.getRules());
 
         return getUIFModelAndView(form);
     }

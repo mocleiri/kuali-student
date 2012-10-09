@@ -63,17 +63,11 @@ public class DroolsService {
 
     @PostConstruct
     private void postConstruct() {
-        String dslFileName = getDslFileName();
-        logger.info("Initializing DSL resource '" + dslFileName + "'");
-        dslResource = getRuleSetResource(getDslFileName());
-        logger.info("DSL resource '" + dslFileName + "' has been initialized");
+        String dslId = getDslId();
+        logger.info("Initializing DSL resource '" + dslId + "'");
+        dslResource = getRuleSetResource(getDslId());
+        logger.info("DSL resource '" + dslId + "' has been initialized");
     }
-
-
-    private String getDslFileName() {
-        return configService.getInitialParameter(Constants.DROOLS_DSL_FILE_PARAM_NAME);
-    }
-
 
     private synchronized KnowledgeBase getKnowledgeBase(String drlFileName, ResourceType resourceType) {
         try {
@@ -131,7 +125,7 @@ public class DroolsService {
      * Returns a Drools resource using a rule set identifier either from the classpath (by a filename) or
      * from the database (by a rule set ID column name).
      *
-     * @param ruleSetId    a rule set identifier
+     * @param ruleSetId a rule set identifier
      * @return <code>Resource</code> instance
      */
     protected Resource getRuleSetResource(String ruleSetId) {
@@ -166,5 +160,20 @@ public class DroolsService {
     public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext) {
         return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, null);
     }
+
+    public void validateRuleSet(RuleSet ruleSet, ResourceType resourceType) {
+        Resource rulesResource = ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
+        KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+        if (ResourceType.DSLR.equals(resourceType)) {
+            builder.add(dslResource, ResourceType.DSL);
+        }
+        builder.add(rulesResource, resourceType);
+        handleErrors(builder.getErrors(), ruleSet.getId());
+    }
+
+    public String getDslId() {
+        return configService.getInitialParameter(Constants.DROOLS_DSL_ID_PARAM_NAME);
+    }
+
 
 }
