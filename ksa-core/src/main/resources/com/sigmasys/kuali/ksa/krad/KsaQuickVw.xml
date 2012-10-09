@@ -355,7 +355,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="aged30"
-                      p:label="30"
+                      p:label="@{daysLate1}"
                       p:labelPlacement="TOP"
                       p:maxLength="10">
                     <property name="readOnly" value="true"/>
@@ -364,7 +364,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="aged60"
-                      p:label="60"
+                      p:label="@{daysLate2}"
                       p:labelPlacement="TOP"
                       p:maxLength="10">
                     <property name="readOnly" value="true"/>
@@ -373,7 +373,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="aged90"
-                      p:label="90"
+                      p:label="@{daysLate3}"
                       p:labelPlacement="TOP"
                       p:maxLength="10">
                     <property name="readOnly" value="true"/>

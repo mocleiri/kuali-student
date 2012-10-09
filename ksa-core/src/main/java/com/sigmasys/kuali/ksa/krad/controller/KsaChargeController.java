@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -71,7 +72,27 @@ public class KsaChargeController extends GenericSearchController {
 
         // do get stuff...
 
-        return getUIFModelAndView(form);
+       String viewId = request.getParameter("viewId");
+       // example user1
+       String userId = request.getParameter("userId");
+
+       logger.info("View: " + viewId + " User: " + userId);
+
+       if (userId == null || userId.isEmpty()) {
+          throw new IllegalArgumentException("'userId' request parameter must be specified");
+       }
+
+       // abbreviated payment initialization
+       Account account = accountService.getFullAccount(userId);
+       String accountId = account.getId();
+
+       Charge charge = new Charge();
+       charge.setAccount(account);
+       charge.setAccountId(accountId);
+       charge.setEffectiveDate(new Date());
+       form.setCharge(charge);
+
+       return getUIFModelAndView(form);
     }
 
     /**
@@ -96,6 +117,12 @@ public class KsaChargeController extends GenericSearchController {
             effectiveDate = new Date();
         }
 
+       BigDecimal amount = charge.getAmount();
+       int compareResult = amount.compareTo(BigDecimal.ZERO);
+       if (compareResult <= 0) {
+          form.setStatusMessage("Amount must be a positive value");
+          return getUIFModelAndView(form);
+       }
 
         TransactionType tt;
         try {

@@ -3,9 +3,10 @@ package com.sigmasys.kuali.ksa.krad.form;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
 
-import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by: dmulderink on 8/29/12 at 12:58 PM
@@ -27,6 +28,8 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
    private List<Allocation> allocationList;
 
    private TransactionModel transactionModel;
+
+   private Currency currency;
 
    private String id;
 
@@ -64,19 +67,19 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private String rollUpType;
 
-   private BigDecimal rollUpBalance;
+   private String rollUpBalance;
 
-   private BigDecimal rollUpDebit;
+   private String rollUpDebit;
 
-   private BigDecimal rollUpCredit;
+   private String rollUpCredit;
 
-   private BigDecimal amount;
+   private String amount;
 
-   private BigDecimal amountAllocated;
+   private String amountAllocated;
 
-   private BigDecimal amountAllocatedLocked;
+   private String amountAllocatedLocked;
 
-   private BigDecimal allocationAmount;
+   private String allocationAmount;
 
    private String internal;
 
@@ -121,13 +124,13 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private String statementText;
 
-   private BigDecimal unGroupedBalance;
+   private String unGroupedBalance;
 
-   private BigDecimal unGroupedDebit;
+   private String unGroupedDebit;
 
-   private BigDecimal unGroupedCredit;
+   private String unGroupedCredit;
 
-   private BigDecimal unGroupedTotalCredit;
+   private String unGroupedTotalCredit;
 
    private String selectedRollupType;
 
@@ -314,59 +317,59 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.rollUpType = rollUpType;
    }
 
-   public BigDecimal getRollUpBalance() {
-      return rollUpBalance;
+   public String getRollUpBalance() {
+      return getFormattedAmount(rollUpBalance);
    }
 
-   public void setRollUpBalance(BigDecimal rollUpBalance) {
+   public void setRollUpBalance(String rollUpBalance) {
       this.rollUpBalance = rollUpBalance;
    }
 
-   public BigDecimal getRollUpDebit() {
-      return rollUpDebit;
+   public String getRollUpDebit() {
+      return getFormattedAmount(rollUpDebit);
    }
 
-   public void setRollUpDebit(BigDecimal rollUpDebit) {
+   public void setRollUpDebit(String rollUpDebit) {
       this.rollUpDebit = rollUpDebit;
    }
 
-   public BigDecimal getRollUpCredit() {
-      return rollUpCredit;
+   public String getRollUpCredit() {
+      return getFormattedAmount(rollUpCredit);
    }
 
-   public void setRollUpCredit(BigDecimal rollUpCredit) {
+   public void setRollUpCredit(String rollUpCredit) {
       this.rollUpCredit = rollUpCredit;
    }
 
-   public BigDecimal getAmount() {
-      return amount;
+   public String getAmount() {
+      return getFormattedAmount(amount);
    }
 
-   public void setAmount(BigDecimal amount) {
+   public void setAmount(String amount) {
       this.amount = amount;
    }
 
-   public BigDecimal getAmountAllocated() {
-      return amountAllocated;
+   public String getAmountAllocated() {
+      return getFormattedAmount(amountAllocated);
    }
 
-   public void setAmountAllocated(BigDecimal amountAllocated) {
+   public void setAmountAllocated(String amountAllocated) {
       this.amountAllocated = amountAllocated;
    }
 
-   public BigDecimal getAmountAllocatedLocked() {
-      return amountAllocatedLocked;
+   public String getAmountAllocatedLocked() {
+      return getFormattedAmount(amountAllocatedLocked);
    }
 
-   public void setAmountAllocatedLocked(BigDecimal amountAllocatedLocked) {
+   public void setAmountAllocatedLocked(String amountAllocatedLocked) {
       this.amountAllocatedLocked = amountAllocatedLocked;
    }
 
-   public BigDecimal getAllocationAmount() {
-      return allocationAmount;
+   public String getAllocationAmount() {
+      return getFormattedAmount(allocationAmount);
    }
 
-   public void setAllocationAmount(BigDecimal allocationAmount) {
+   public void setAllocationAmount(String allocationAmount) {
       this.allocationAmount = allocationAmount;
    }
 
@@ -482,35 +485,35 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.statementText = statementText;
    }
 
-   public BigDecimal getUnGroupedBalance() {
-      return unGroupedBalance;
+   public String getUnGroupedBalance() {
+      return getFormattedAmount(unGroupedBalance);
    }
 
-   public void setUnGroupedBalance(BigDecimal unGroupedBalance) {
+   public void setUnGroupedBalance(String unGroupedBalance) {
       this.unGroupedBalance = unGroupedBalance;
    }
 
-   public BigDecimal getUnGroupedDebit() {
-      return unGroupedDebit;
+   public String getUnGroupedDebit() {
+      return getFormattedAmount(unGroupedDebit);
    }
 
-   public void setUnGroupedDebit(BigDecimal unGroupedDebit) {
+   public void setUnGroupedDebit(String unGroupedDebit) {
       this.unGroupedDebit = unGroupedDebit;
    }
 
-   public BigDecimal getUnGroupedCredit() {
-      return unGroupedCredit;
+   public String getUnGroupedCredit() {
+      return getFormattedAmount(unGroupedCredit);
    }
 
-   public void setUnGroupedCredit(BigDecimal unGroupedCredit) {
+   public void setUnGroupedCredit(String unGroupedCredit) {
       this.unGroupedCredit = unGroupedCredit;
    }
 
-   public BigDecimal getUnGroupedTotalCredit() {
-      return unGroupedTotalCredit;
+   public String getUnGroupedTotalCredit() {
+      return getFormattedAmount(unGroupedTotalCredit);
    }
 
-   public void setUnGroupedTotalCredit(BigDecimal unGroupedTotalCredit) {
+   public void setUnGroupedTotalCredit(String unGroupedTotalCredit) {
       this.unGroupedTotalCredit = unGroupedTotalCredit;
    }
 
@@ -592,5 +595,26 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setTransactionModel(TransactionModel transactionModel) {
       this.transactionModel = transactionModel;
+   }
+
+   public Currency getCurrency() {
+      return currency;
+   }
+
+   public void setCurrency(Currency currency) {
+      this.currency = currency;
+   }
+
+   public String getFormattedAmount(String amount) {
+
+      String formattedNumber = "";
+
+      if (getCurrency() != null && amount != null) {
+         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+         numberFormat.setCurrency(java.util.Currency.getInstance(getCurrency().getCode()));
+         double doubleAmount = Double.parseDouble(amount);
+         formattedNumber = numberFormat.format(doubleAmount);
+      }
+      return formattedNumber;
    }
 }

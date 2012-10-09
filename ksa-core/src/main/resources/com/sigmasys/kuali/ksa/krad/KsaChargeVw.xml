@@ -104,7 +104,8 @@
                       p:instructionalText="Enter the amount of the charge"
                       p:fieldLabel.renderColon="true"
                       p:labelPlacement="TOP"
-                      p:maxLength="21">
+                      p:maxLength="21"
+                      p:required="true">
                     <property name="control">
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
@@ -114,7 +115,8 @@
                       p:instructionalText="Enter effective date of the charge"
                       p:fieldLabel.renderColon="true"
                       p:labelPlacement="TOP"
-                      p:maxLength="10">
+                      p:maxLength="10"
+                      p:required="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>

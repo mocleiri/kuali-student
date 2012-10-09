@@ -2,6 +2,8 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +29,9 @@ import java.util.*;
 public class KsaQuickViewController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(KsaQuickViewController.class);
+
+    @Autowired
+    private CurrencyService currencyService;
 
     @Autowired
     private InformationService informationService;
@@ -255,9 +260,18 @@ public class KsaQuickViewController extends GenericSearchController {
         Date lastAgeDate = chargeableAccount.getLateLastUpdate();
         form.setLastAgeDate(lastAgeDate);
 
-        form.setAged30(chargeableAccount.getAmountLate1());
-        form.setAged60(chargeableAccount.getAmountLate2());
-        form.setAged90(chargeableAccount.getAmountLate3());
+        Currency currency = currencyService.getCurrency("USD");
+        form.setCurrency(currency);
+
+        LatePeriod latePeriod = chargeableAccount.getLatePeriod();
+
+        form.setDaysLate1(latePeriod.getDaysLate1() != null ? latePeriod.getDaysLate1().toString() : "30");
+        form.setDaysLate2(latePeriod.getDaysLate2() != null ? latePeriod.getDaysLate2().toString() : "60");
+        form.setDaysLate3(latePeriod.getDaysLate3() != null ? latePeriod.getDaysLate3().toString() : "90");
+
+        form.setAged30(chargeableAccount.getAmountLate1().toString());
+        form.setAged60(chargeableAccount.getAmountLate2().toString());
+        form.setAged90(chargeableAccount.getAmountLate3().toString());
 
         BigDecimal agedTotal = BigDecimal.ZERO;
 
@@ -269,12 +283,12 @@ public class KsaQuickViewController extends GenericSearchController {
             agedTotal = agedTotal.add(chargeableAccount.getAmountLate3());
         }
 
-        form.setAgedTotal(agedTotal);
+        form.setAgedTotal(agedTotal.toString());
 
-        form.setPastDueAmount(pastDue);
-        form.setBalanceAmount(balance);
-        form.setFutureAmount(future);
-        form.setDefermentAmount(deferment);
+        form.setPastDueAmount(pastDue.toString());
+        form.setBalanceAmount(balance.toString());
+        form.setFutureAmount(future.toString());
+        form.setDefermentAmount(deferment.toString());
 
         form.setAlerts(informationService.getAlerts(userId));
 

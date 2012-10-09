@@ -163,7 +163,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollup.name"/>
-                <bean parent="Uif-InputField" p:propertyName="amount"
+                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:labelPlacement="TOP"
@@ -256,7 +256,7 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="amount"
+                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:align="right">
@@ -341,7 +341,7 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="amount"
+                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:align="right">

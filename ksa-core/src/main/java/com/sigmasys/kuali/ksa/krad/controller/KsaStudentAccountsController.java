@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,6 +32,9 @@ import java.util.List;
 public class KsaStudentAccountsController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(KsaStudentAccountsController.class);
+
+    @Autowired
+    CurrencyService currencyService;
 
     @Autowired
     protected InformationService informationService;
@@ -93,30 +97,46 @@ public class KsaStudentAccountsController extends GenericSearchController {
             List<TransactionModel> rollUpTransactionModelList = new ArrayList<TransactionModel>();
             List<TransactionModel> unGroupedTransactionModelList = new ArrayList<TransactionModel>();
 
-            form.setRollUpCredit(BigDecimal.ZERO);
-            form.setRollUpDebit(BigDecimal.ZERO);
-            form.setUnGroupedCredit(BigDecimal.ZERO);
-            form.setUnGroupedDebit(BigDecimal.ZERO);
+            BigDecimal rollUpCredit = BigDecimal.ZERO;
+            BigDecimal rollUpDebit = BigDecimal.ZERO;
+            BigDecimal unGroupedCredit = BigDecimal.ZERO;
+            BigDecimal unGroupedDebit = BigDecimal.ZERO;
+
+            Transaction singleTransaction = transactions.size() > 0 ? transactions.get(0) : null;
+            boolean currencyIsSet = false;
+
+            if (singleTransaction == null) {
+               setCurrency(form, singleTransaction);
+               currencyIsSet = true;
+            }
 
             for (Transaction t : transactions) {
+                if (!currencyIsSet) {
+                   setCurrency(form, t);
+                   currencyIsSet = true;
+                }
                 TransactionModel transactionModel = new TransactionModel(t);
                 if (t.getRollup() != null) {
                     rollUpTransactionModelList.add(transactionModel);
                     if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                        form.setRollUpCredit(form.getRollUpCredit().add(t.getAmount()));
+                       rollUpCredit = rollUpCredit.add(t.getAmount());
                     } else {
-                        form.setRollUpDebit(form.getRollUpDebit().add(t.getAmount()));
+                       rollUpDebit = rollUpDebit.add(t.getAmount());
                     }
                 } else {
                     unGroupedTransactionModelList.add(transactionModel);
                     if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                        form.setUnGroupedCredit(form.getUnGroupedCredit().add(t.getAmount()));
+                       unGroupedCredit = unGroupedCredit.add(t.getAmount());
                     } else {
-                        form.setUnGroupedDebit(form.getUnGroupedDebit().add(t.getAmount()));
+                       unGroupedDebit = unGroupedDebit.add(t.getAmount());
                     }
                 }
             }
 
+            form.setRollUpCredit(rollUpCredit.toString());
+            form.setRollUpDebit(rollUpDebit.toString());
+            form.setUnGroupedCredit(unGroupedCredit.toString());
+            form.setUnGroupedDebit(unGroupedDebit.toString());
             form.setRollUpTransactionModelList(rollUpTransactionModelList);
             form.setUnGroupedTransactionModelList(unGroupedTransactionModelList);
 
@@ -127,6 +147,11 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
             Transaction t = transactionService.getTransaction(new Long(transactionId));
             logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
+
+            // the currency in effect for the transaction
+            // if no transactions then no need for a currency to convert values ?
+            setCurrency(form, t);
+
             TransactionModel transactionModel = new TransactionModel(t);
             form.setByRollUpTransactionModelList(Arrays.asList(transactionModel));
 
@@ -186,19 +211,21 @@ public class KsaStudentAccountsController extends GenericSearchController {
 
             form.setStatementText(t.getStatementText());
 
-
-            form.setAmount(t.getAmount());
+            if (t.getAmount() != null) {
+             form.setAmount(t.getAmount().toString());
+            }
             form.setInternal(t.isInternal() != null ? t.isInternal().toString() : Boolean.FALSE.toString());
 
-            form.setAllocationAmount(t.getAllocatedAmount());
-            form.setAmountAllocatedLocked(t.getLockedAllocatedAmount());
-            Currency currency = t.getCurrency();
-            if (currency != null) {
-               String currencyCode = currency.getCode();
-               form.setNativeAmountCurr(currencyCode);
-            } else {
-               form.setNativeAmountCurr("USD");
+            if (t.getAllocatedAmount() != null) {
+               form.setAllocationAmount(t.getAllocatedAmount().toString());
             }
+
+            if (t.getLockedAllocatedAmount() != null) {
+               form.setAmountAllocatedLocked(t.getLockedAllocatedAmount().toString());
+            }
+
+           // the currency in effect for the transaction
+            setCurrency(form, t);
 
             if (t.getDocument() != null) {
                 form.setDocumentId(t.getDocument().getId().toString());
@@ -277,4 +304,19 @@ public class KsaStudentAccountsController extends GenericSearchController {
         // do refresh stuff...
         return getUIFModelAndView(form);
     }
+
+   private void setCurrency(KsaStudentAccountsForm form, Transaction transaction) {
+
+      if (transaction != null) {
+         Currency currency = transaction.getCurrency();
+         if (currency == null) {
+            currency = currencyService.getCurrency("USD");
+         }
+         form.setCurrency(currency);
+         form.setNativeAmountCurr(currency.getCode());
+      } else {
+         form.setCurrency(currencyService.getCurrency("USD"));
+         form.setNativeAmountCurr(form.getCurrency().getCode());
+      }
+   }
 }

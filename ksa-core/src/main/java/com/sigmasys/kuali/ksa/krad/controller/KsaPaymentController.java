@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -71,7 +72,27 @@ public class KsaPaymentController extends GenericSearchController {
 
         // do get stuff...
 
-        return getUIFModelAndView(form);
+       String viewId = request.getParameter("viewId");
+       // example user1
+       String userId = request.getParameter("userId");
+
+       logger.info("View: " + viewId + " User: " + userId);
+
+       if (userId == null || userId.isEmpty()) {
+         throw new IllegalArgumentException("'userId' request parameter must be specified");
+       }
+
+       // abbreviated payment initialization
+       Account account = accountService.getFullAccount(userId);
+       String accountId = account.getId();
+
+       Payment payment = new Payment();
+       payment.setAccount(account);
+       payment.setAccountId(accountId);
+       payment.setEffectiveDate(new Date());
+       form.setPayment(payment);
+
+       return getUIFModelAndView(form);
     }
 
     /**
@@ -86,10 +107,17 @@ public class KsaPaymentController extends GenericSearchController {
     public ModelAndView submit(@ModelAttribute("KualiForm") KsaPaymentForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
-        this.savePayment(form);
 
-        return getUIFModelAndView(form);
+       String viewId = request.getParameter("viewId");
+       // example user1
+       String userId = request.getParameter("userId");
 
+       logger.info("View: " + viewId + " User: " + userId);
+       if (this.savePayment(form)) {
+          this.initPayment(form);
+       }
+
+       return getUIFModelAndView(form);
     }
 
     /**
@@ -105,15 +133,22 @@ public class KsaPaymentController extends GenericSearchController {
                                   HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
 
-        this.savePayment(form);
-        Payment payment = form.getPayment();
+       String viewId = request.getParameter("viewId");
+       // example user1
+       String userId = request.getParameter("userId");
 
-        if (payment != null && payment.getId() != null) {
-            accountService.ageDebt(payment.getAccount().getId(), false);
-        }
+       logger.info("View: " + viewId + " User: " + userId);
+       if (this.savePayment(form)) {
+         this.initPayment(form);
+       }
 
+       Payment payment = form.getPayment();
 
-        return getUIFModelAndView(form);
+       if (payment != null && payment.getId() != null) {
+           accountService.ageDebt(payment.getAccount().getId(), false);
+       }
+
+       return getUIFModelAndView(form);
     }
 
     /**
@@ -161,49 +196,73 @@ public class KsaPaymentController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-    private void savePayment(KsaPaymentForm form) {
+    private boolean savePayment(KsaPaymentForm form) {
 
-        Payment payment = form.getPayment();
+       boolean saveResult = false;
 
-        payment.setAccount(form.getAccount());
+       Payment payment = form.getPayment();
 
-        String typeIdString = form.getPaymentTransactionTypeId();
-        Date effectiveDate = payment.getEffectiveDate();
-        if(effectiveDate == null){
-            effectiveDate = new Date();
-        }
+       payment.setAccount(form.getAccount());
 
+       String typeIdString = form.getPaymentTransactionTypeId();
+       Date effectiveDate = payment.getEffectiveDate();
+       if(effectiveDate == null){
+           effectiveDate = new Date();
+       }
 
-        TransactionType tt;
-        try {
-            tt = transactionService.getTransactionType(typeIdString, effectiveDate);
-        } catch (InvalidTransactionTypeException e) {
-            logger.error(e.getMessage(), e);
-            form.setStatusMessage(e.getMessage());
-            return;
-        }
+       BigDecimal amount = payment.getAmount();
+       int compareResult = amount.compareTo(BigDecimal.ZERO);
+       if (compareResult <= 0) {
+          form.setStatusMessage("Amount must be a positive value");
+          return saveResult;
+       }
 
-        if (tt == null) {
-            // Error handler here.
-            form.setStatusMessage("Invalid Transaction Type");
-            return;
-        } else if (!(tt instanceof CreditType)) {
-            form.setStatusMessage("Transaction Type must be a payment");
-            return;
-        }
+       TransactionType tt;
+       try {
+           tt = transactionService.getTransactionType(typeIdString, effectiveDate);
+       } catch (InvalidTransactionTypeException e) {
+           logger.error(e.getMessage(), e);
+           form.setStatusMessage(e.getMessage());
+           return saveResult;
+       }
 
-        try {
-            payment = (Payment)transactionService.createTransaction(typeIdString, payment.getExternalId(), payment.getAccount().getId(),
-                                    effectiveDate, null, payment.getAmount() );
-            if (payment.getId() != null) {
-                form.setPayment(payment);
-                form.setStatusMessage(tt.getDescription() + " payment saved");
+       if (tt == null) {
+           // Error handler here.
+           form.setStatusMessage("Invalid Transaction Type");
+           return saveResult;
+       } else if (!(tt instanceof CreditType)) {
+           form.setStatusMessage("Transaction Type must be a payment");
+           return saveResult;
+       }
+
+       try {
+           payment = (Payment)transactionService.createTransaction(typeIdString, payment.getExternalId(),
+                 payment.getAccount().getId(),
+                 effectiveDate, null, payment.getAmount() );
+           if (payment.getId() != null) {
+               form.setPayment(payment);
+               form.setStatusMessage(tt.getDescription() + " Payment saved");
+               saveResult = true;
             }
 
-        } catch (TransactionNotAllowedException e) {
-            logger.error(e.getMessage(), e);
-            form.setStatusMessage(e.getMessage());
-        }
+       } catch (TransactionNotAllowedException e) {
+           logger.error(e.getMessage(), e);
+           form.setStatusMessage(e.getMessage());
+       }
 
+       return saveResult;
     }
+
+   private void initPayment(KsaPaymentForm form) {
+
+      // abbreviated payment initialization
+      Account account = form.getAccount();
+      String accountId = account.getId();
+
+      Payment payment = new Payment();
+      payment.setAccount(account);
+      payment.setAccountId(accountId);
+      payment.setEffectiveDate(new Date());
+      form.setPayment(payment);
+   }
 }
