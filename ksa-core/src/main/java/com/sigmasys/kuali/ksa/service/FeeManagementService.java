@@ -210,7 +210,7 @@ public interface FeeManagementService {
      *
      * @param learningUnit A <code>LearningUnit</code> to be updated.
      */
-    void saveLearningUnit(LearningUnit learningUnit);
+    void persistLearningUnit(LearningUnit learningUnit);
 
     /**
      * Returns the period that the rules are currently working on.

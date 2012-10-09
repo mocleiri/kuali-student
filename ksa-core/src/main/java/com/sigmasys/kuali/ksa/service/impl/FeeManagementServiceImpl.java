@@ -404,7 +404,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @returns The entity that was attached to the persistent context.
      */
     @Override
-    public void saveLearningUnit(LearningUnit learningUnit) {
+    public void persistLearningUnit(LearningUnit learningUnit) {
         // Validate input:
         validateInputParameters(learningUnit);
 
@@ -583,7 +583,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         learningUnit.setStatus(status);
 
         // Save the LearningUnit:
-        saveLearningUnit(learningUnit);
+        persistLearningUnit(learningUnit);
     }
 
 

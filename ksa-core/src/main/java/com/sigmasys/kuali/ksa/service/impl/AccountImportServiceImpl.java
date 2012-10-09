@@ -139,7 +139,7 @@ public class AccountImportServiceImpl implements AccountImportService {
 		    }
 	    	
 	    	// Persist the LearningUnit from FeeBase:
-	    	feeManagementService.saveLearningUnit(luFromFeeBase);
+	    	feeManagementService.persistLearningUnit(luFromFeeBase);
 	    	
 	    	// Create KeyPairs:
 	    	for (KeyPair keyPair : luFromXml.getKeyPair()) {
@@ -147,7 +147,7 @@ public class AccountImportServiceImpl implements AccountImportService {
 	    	}
 	    } else if (StringUtils.equalsIgnoreCase("drop", command)) {
 	    	luFromFeeBase.setDropDate(effectiveDate);
-	    	feeManagementService.saveLearningUnit(luFromFeeBase);
+	    	feeManagementService.persistLearningUnit(luFromFeeBase);
 	    }
 	}
 	

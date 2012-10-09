@@ -1264,7 +1264,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.setExtended(new HashSet<KeyPair>(Arrays.asList(newKp1, newKp2)));
 		
 		// Call the service:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Get a fresh FeeBase from service:
 		FeeBase freshFeeBaseFromService = feeManagementService.getFeeBase(accountId);
@@ -1276,7 +1276,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	@Test
 	public void testSaveLearningUnitNullLearningUnit() {
 		try {
-			feeManagementService.saveLearningUnit(null);
+			feeManagementService.persistLearningUnit(null);
 			isTrue(false);
 		} catch (Exception e) {}
 	}
@@ -1312,7 +1312,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
 		
 		// Save the changes:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Call the service:
 		List<LearningPeriod> lps = feeManagementService.findLearningPeriods(newDateFrom.getTime(), newDateTo.getTime()); 
@@ -1354,7 +1354,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
 		
 		// Save the changes:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Prepare input parameters:
 		Calendar newDateFrom_in = Calendar.getInstance();
@@ -1422,7 +1422,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService2.getLearningPeriod().setDateTo(newDateTo.getTime());
 		
 		// Save the changes:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Prepare input parameters:
 		Calendar newDateFrom_in = Calendar.getInstance();
@@ -1489,7 +1489,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
 		
 		// Save the changes:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Prepare input parameters:
 		Calendar newDateFrom_in = Calendar.getInstance();
@@ -1547,7 +1547,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
 		
 		// Save the changes:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Prepare input parameters:
 		Calendar newDateFrom_in = Calendar.getInstance();
@@ -1605,7 +1605,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
 		
 		// Save the changes:
-		feeManagementService.saveLearningUnit(luFromService);
+		feeManagementService.persistLearningUnit(luFromService);
 		
 		// Prepare input parameters:
 		Calendar newDateFrom_in = Calendar.getInstance();
