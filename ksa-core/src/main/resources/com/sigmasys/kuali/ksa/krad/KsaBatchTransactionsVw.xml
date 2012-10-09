@@ -28,14 +28,15 @@
 
     <bean id="KsaBatchTransactionsView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Batch Transactions"/>
-        <property name="entryPageId" value="BatchTransactionsQuickMenuOptionsPage"/>
+        <property name="entryPageId" value="BatchTransactionsUploadFilePage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
+                        <bean parent="Uif-HeaderTwo" p:headerText="Batch Transactions"/>
                         <bean parent="Uif-NavigationActionLink"
-                              p:navigateToPageId="BatchTransactionsQuickMenuOptionsPage"
-                              p:actionLabel="Quick Options"/>
+                              p:navigateToPageId="BatchTransactionsUploadFilePage"
+                              p:actionLabel="Upload a File"/>
                     </list>
                 </property>
             </bean>
