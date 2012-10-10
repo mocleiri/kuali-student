@@ -487,7 +487,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return <code>true</code> if <code>FeeBase</code> contains at least one major code, <code>false</code> - otherwise.
      */
     @Override
-    public boolean containsAtLeastOneMajorCode(FeeBase feeBase, String majorCodes) {
+    public boolean containsMajorCode(FeeBase feeBase, String majorCodes) {
         List<String> majorCodesList = getMajorCodes(feeBase);
         for (String majorCode : majorCodes.split(",")) {
             if (majorCodesList.contains(majorCode.trim().toUpperCase())) {
@@ -522,7 +522,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
      */
     @Override
-    public boolean containsAtLeastOneLearningUnitCode(FeeBase feeBase, String learningUnitCodes) {
+    public boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes) {
         List<String> learningUnitCodesList = getLearningUnitCodes(feeBase);
         for (String luCode : learningUnitCodes.split(",")) {
             if (learningUnitCodesList.contains(luCode.trim().toUpperCase())) {

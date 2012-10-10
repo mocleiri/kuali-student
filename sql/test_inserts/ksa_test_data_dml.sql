@@ -1139,8 +1139,8 @@ set sqlterminator '!'
 Insert into KSSA_RULE_SET (ID, RULE_SET) values ('ksa.dsl',
 '# The KSA DSL definition
 [when][]Student account ID is "{userId}" = context : DroolsContext(account.id == "{userId}");
-[when][]Study code is in "{studyCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneLearningUnitCode(feeBase, "{studyCodes}"));
-[when][]Major code is in "{majorCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneMajorCode(feeBase, "{majorCodes}"));
+[when][]LU code is in "{luCodes}" = context : DroolsContext(feeManagementService.containsLearningUnitCode(feeBase, "{luCodes}"));
+[when][]Major code is in "{majorCodes}" = context : DroolsContext(feeManagementService.containsMajorCode(feeBase, "{majorCodes}"));
 
 [then][]Use "{transactionTypeId}" code to charge ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
 [then][]Use "{transactionTypeId}" code to credit ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
@@ -1176,7 +1176,7 @@ end
 
 rule "Tuition 3"
 when
-    Study code is in "MFRO, MABO, GOOG"
+    LU code is in "MFRO, MABO, GOOG"
 then
     Use "cash" code to credit $50.50
 end

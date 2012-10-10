@@ -253,7 +253,7 @@ public interface FeeManagementService {
      * @param majorCodes a list of major codes represented by a <code>String</code> value and separated by commas.
      * @return <code>true</code> if <code>FeeBase</code> contains at least one major code, <code>false</code> - otherwise.
      */
-    boolean containsAtLeastOneMajorCode(FeeBase feeBase, String majorCodes);
+    boolean containsMajorCode(FeeBase feeBase, String majorCodes);
 
     /**
      * Returns the codes of all classes taken by a student.
@@ -269,7 +269,7 @@ public interface FeeManagementService {
      * @param learningUnitCodes a list of study codes represented by a <code>String</code> value and separated by commas.
      * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
      */
-    boolean containsAtLeastOneLearningUnitCode(FeeBase feeBase, String learningUnitCodes);
+    boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes);
 
     /**
      * Checks if a student is a resident.

@@ -18,6 +18,7 @@ import org.drools.runtime.StatelessKnowledgeSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.StringReader;
@@ -44,6 +45,11 @@ public class DroolsService {
         System.setProperty("drools.dialect.java.compiler", "JANINO");
     }
 
+    public static enum PersistenceType {
+        CLASSPATH,
+        DATABASE
+    }
+
     @Autowired
     private ConfigService configService;
 
@@ -51,9 +57,6 @@ public class DroolsService {
     private DroolsPersistenceService droolsPersistenceService;
 
     private Resource dslResource;
-
-    // Specifies whether to use the classpath or database as a rule persistent store
-    private boolean useClasspath;
 
     // Map of <DRL file name, KnowledgeBase> objects
     private final Map<String, KnowledgeBase> knowledgeBases = new HashMap<String, KnowledgeBase>();
@@ -69,14 +72,14 @@ public class DroolsService {
 
     private Collection<KnowledgePackage> buildKnowledgePackages(String ruleSetId, Resource rulesResource,
                                                                 ResourceType resourceType) {
-            KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-            if (ResourceType.DSLR.equals(resourceType)) {
-                logger.info("Initializing DSL knowledge base...");
-                builder.add(dslResource, ResourceType.DSL);
-            }
-            builder.add(rulesResource, resourceType);
-            handleErrors(builder.getErrors(), ruleSetId);
-            return builder.getKnowledgePackages();
+        KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+        if (ResourceType.DSLR.equals(resourceType)) {
+            logger.info("Initializing DSL knowledge base...");
+            builder.add(dslResource, ResourceType.DSL);
+        }
+        builder.add(rulesResource, resourceType);
+        handleErrors(builder.getErrors(), ruleSetId);
+        return builder.getKnowledgePackages();
     }
 
     private synchronized KnowledgeBase getKnowledgeBase(String ruleSetId, ResourceType resourceType) {
@@ -134,28 +137,26 @@ public class DroolsService {
      * @return <code>Resource</code> instance
      */
     protected Resource getRuleSetResource(String ruleSetId) {
-        if (useClasspath) {
-            return ResourceFactory.newClassPathResource(ruleSetId);
-        } else {
-            RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
-            if (ruleSet == null) {
-                String errMsg = "Rule Set specified by ID = " + ruleSetId + " does not exist";
+        switch (getPersistenceType()) {
+            case CLASSPATH:
+                return ResourceFactory.newClassPathResource(ruleSetId);
+            case DATABASE:
+                RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
+                if (ruleSet == null) {
+                    String errMsg = "Rule Set specified by ID = " + ruleSetId + " does not exist";
+                    logger.error(errMsg);
+                    throw new IllegalStateException(errMsg);
+                }
+                return ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
+            default:
+                String errMsg = "Cannot find resource handlers for persistence type = " + getPersistenceType();
                 logger.error(errMsg);
                 throw new IllegalStateException(errMsg);
-            }
-            return ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
         }
     }
 
     // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
 
-    public boolean isUseClasspath() {
-        return useClasspath;
-    }
-
-    public void setUseClasspath(boolean useClasspath) {
-        this.useClasspath = useClasspath;
-    }
 
     public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext,
                            Map<String, Object> globalParams) {
@@ -172,7 +173,23 @@ public class DroolsService {
     }
 
     public String getDslId() {
-        return configService.getInitialParameter(Constants.DROOLS_DSL_ID_PARAM_NAME);
+        String dslId = configService.getInitialParameter(Constants.DROOLS_DSL_ID_PARAM_NAME);
+        if (!StringUtils.hasText(dslId)) {
+            String errMsg = "Parameter '" + Constants.DROOLS_DSL_ID_PARAM_NAME + "' must be set";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+        return dslId;
+    }
+
+    public PersistenceType getPersistenceType() {
+        String type = configService.getInitialParameter(Constants.DROOLS_PERSISTENCE_PARAM_NAME);
+        if (!StringUtils.hasText(type)) {
+            String errMsg = "Parameter '" + Constants.DROOLS_PERSISTENCE_PARAM_NAME + "' must be set";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+        return Enum.valueOf(PersistenceType.class, type);
     }
 
 

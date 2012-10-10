@@ -24,7 +24,11 @@ public interface Constants {
     String DEFAULT_GL_MODE_PARAM_NAME = "ksa.general.ledger.mode";
     String DEFAULT_DEFERMENT_TYPE_PARAM_NAME = "ksa.deferment.type.id";
     String LOGGING_OPERATION = "ksa.logging.operation";
+
+    // Drools parameters
     String DROOLS_DSL_ID_PARAM_NAME = "ksa.drools.dsl";
+    String DROOLS_PERSISTENCE_PARAM_NAME = "ksa.drools.persistence";
+
 
     // WS constants
     String WS_NAMESPACE = "http://sigmasys.com/";
