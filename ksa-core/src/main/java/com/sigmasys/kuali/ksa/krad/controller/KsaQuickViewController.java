@@ -321,14 +321,25 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setDaysLate2(latePeriod.getDaysLate2() != null ? latePeriod.getDaysLate2().toString() : "60");
         form.setDaysLate3(latePeriod.getDaysLate3() != null ? latePeriod.getDaysLate3().toString() : "90");
 
+        // getOutstandingBalance above always ignores deferment per Paul setting the pastDue to the ageTotal
+        pastDue = BigDecimal.ZERO;
         if (chargeableAccount.getAmountLate1() != null) {
-          form.setAged30(chargeableAccount.getAmountLate1().toString());
+           form.setAged30(chargeableAccount.getAmountLate1().toString());
+           pastDue = pastDue.add(chargeableAccount.getAmountLate1());
+        } else {
+           form.setAged30(BigDecimal.ZERO.toString());
         }
         if (chargeableAccount.getAmountLate2() != null) {
           form.setAged60(chargeableAccount.getAmountLate2().toString());
+           pastDue = pastDue.add(chargeableAccount.getAmountLate2());
+        } else {
+           form.setAged60(BigDecimal.ZERO.toString());
         }
         if (chargeableAccount.getAmountLate3() != null) {
           form.setAged90(chargeableAccount.getAmountLate3().toString());
+           pastDue = pastDue.add(chargeableAccount.getAmountLate3());
+        } else {
+           form.setAged90(BigDecimal.ZERO.toString());
         }
 
         BigDecimal agedTotal = BigDecimal.ZERO;

@@ -471,7 +471,7 @@
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="text"
                       p:label="Description"
-                        p:width="30%">
+                        p:width="80%">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
