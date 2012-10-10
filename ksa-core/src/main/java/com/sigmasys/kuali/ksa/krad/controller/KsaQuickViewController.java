@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm;
+import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
@@ -93,10 +94,21 @@ public class KsaQuickViewController extends GenericSearchController {
                   throw new IllegalArgumentException("'userId' request parameter must be specified");
                }
 
+               // create a Memo, set defaults for the view
+               Account account = accountService.getFullAccount(userId);
+               String accountId = account.getId();
+               // don't create a persistent memo when adding a memo, just initialize one for use
+               // rather persist when the user submits (button control) an insert on the memo
                Memo memo = new Memo();
+               memo.setAccount(account);
+               memo.setAccountId(accountId);
                memo.setEffectiveDate(new Date());
-               /*form.setMemo(memo);
-             form.setAefInstructionalText("Add a memo");*/
+               memo.setText("");
+               memo.setAccessLevel(0);
+
+               MemoModel memoModel = new MemoModel(memo);
+               form.setMemoModel(memoModel);
+
             }
         }
 
@@ -211,10 +223,50 @@ public class KsaQuickViewController extends GenericSearchController {
      * @param response
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addMemo")
-    public ModelAndView addMemo(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertMemo")
+    public ModelAndView insertMemo(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
                                 HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
+        // do insert stuff...
+
+       String viewId = request.getParameter("viewId");
+       // example user1
+       String userId = request.getParameter("actionParameters[userId]");
+
+       logger.info("View: " + viewId + " User: " + userId);
+
+       // TODO validate the field entries before inserting
+
+       MemoModel memoModel = form.getMemoModel();
+
+       String accountId = memoModel.getAccountId();
+       String memoText = memoModel.getText();
+       String memoAccessLevel = memoModel.getInfoAccessLevel();
+       int accessLevel = Integer.parseInt(memoAccessLevel);
+       Date effectiveDate = memoModel.getEffectiveDate();
+       Date expirationDate = memoModel.getExpirationDate();
+       Memo previousMemo = memoModel.getPreviousMemo();
+       Long previousMemoId = previousMemo != null ? previousMemo.getId() : null;
+
+       try {
+
+          Memo memo = informationService.createMemo(accountId, memoText, accessLevel, effectiveDate, expirationDate, previousMemoId);
+
+          Long persistResult = informationService.persistInformation(memo);
+
+          if (persistResult >= 0) {
+             form.setStatusMessage("Success");
+             logger.info("Successful insert of memo number " + memo.getId().toString());
+          } else {
+             String failedMsg = "Failed to add memo. result code: " + persistResult.toString();
+             form.setStatusMessage(failedMsg);
+
+             form.setStatusMessage(failedMsg);
+          }
+       } catch(Exception exp) {
+          String errMsg = "'Failed to add memo. " + exp.getLocalizedMessage();
+          logger.error(errMsg);
+       }
+
         return getUIFModelAndView(form);
     }
 
@@ -302,6 +354,14 @@ public class KsaQuickViewController extends GenericSearchController {
 
         form.setFlags(informationService.getFlags(userId));
 
-        form.setMemos(informationService.getMemos(userId));
+        List<Memo> memoList = informationService.getMemos(userId);
+        List<MemoModel> memoModelList = new ArrayList<MemoModel>();
+
+        for (Memo memo : memoList) {
+           MemoModel memoModel = new MemoModel(memo);
+           memoModelList.add(memoModel);
+        }
+
+        form.setMemoModels(memoModelList);
     }
 }

@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
+import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 
 import java.text.NumberFormat;
@@ -70,19 +71,12 @@ public class KsaQuickViewForm extends AbstractViewModel {
 
    // Memos
 
-   private List<Memo> memos;
+   private List<MemoModel> memoModels;
 
-   private Date memoEffectiveDate;
+   private MemoModel memoModel;
 
-   private Date memoExpirationDate;
+   private String statusMessage;
 
-   private String memoAccessLevel;
-
-   private String previousMemo;
-
-   private String nextMemo;
-
-   private String memoText;
    /*
       Get / Set methods
     */
@@ -212,61 +206,22 @@ public class KsaQuickViewForm extends AbstractViewModel {
       this.ignoreDeferment = ignoreDeferment;
    }
 
-   public List<Memo> getMemos() {
-      return memos;
+   public List<MemoModel> getMemoModels() {
+      return memoModels;
    }
 
-   public void setMemos(List<Memo> memos) {
-      this.memos = memos;
+   public void setMemoModels(List<MemoModel> memoModels) {
+      this.memoModels = memoModels;
    }
 
-   public Date getMemoEffectiveDate() {
-      return memoEffectiveDate;
+   public MemoModel getMemoModel() {
+      return memoModel;
    }
 
-   public void setMemoEffectiveDate(Date memoEffectiveDate) {
-      this.memoEffectiveDate = memoEffectiveDate;
+   public void setMemoModel(MemoModel memoModel) {
+      this.memoModel = memoModel;
    }
 
-   public Date getMemoExpirationDate() {
-      return memoExpirationDate;
-   }
-
-   public void setMemoExpirationDate(Date memoExpirationDate) {
-      this.memoExpirationDate = memoExpirationDate;
-   }
-
-   public String getPreviousMemo() {
-      return previousMemo;
-   }
-
-   public void setPreviousMemo(String previousMemo) {
-      this.previousMemo = previousMemo;
-   }
-
-   public String getNextMemo() {
-      return nextMemo;
-   }
-
-   public void setNextMemo(String nextMemo) {
-      this.nextMemo = nextMemo;
-   }
-
-   public String getMemoText() {
-      return memoText;
-   }
-
-   public void setMemoText(String memoText) {
-      this.memoText = memoText;
-   }
-
-   public String getMemoAccessLevel() {
-      return memoAccessLevel;
-   }
-
-   public void setMemoAccessLevel(String memoAccessLevel) {
-      this.memoAccessLevel = memoAccessLevel;
-   }
 
    public String getDaysLate1() {
       return daysLate1;
@@ -311,5 +266,13 @@ public class KsaQuickViewForm extends AbstractViewModel {
          formattedNumber = numberFormat.format(doubleAmount);
       }
       return formattedNumber;
+   }
+
+   public String getStatusMessage() {
+      return statusMessage;
+   }
+
+   public void setStatusMessage(String statusMessage) {
+      this.statusMessage = statusMessage;
    }
 }

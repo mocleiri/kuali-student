@@ -9,9 +9,6 @@ public class MemoModel extends Memo {
 
    private String infoAccessLevel;
 
-   private String DisplayValue;
-
-
    public MemoModel() {
    }
 
@@ -41,7 +38,6 @@ public class MemoModel extends Memo {
       setEditorId(memo.getEditorId());
       setLastUpdate(memo.getLastUpdate());
 
-      setDisplayValue(memo.getDisplayValue());
    }
 
    public String getInfoAccessLevel() {
@@ -50,13 +46,5 @@ public class MemoModel extends Memo {
 
    public void setInfoAccessLevel(String infoAccessLevel) {
       this.infoAccessLevel = infoAccessLevel;
-   }
-
-   public String getDisplayValue() {
-      return DisplayValue;
-   }
-
-   public void setDisplayValue(String displayValue) {
-      DisplayValue = displayValue;
    }
 }

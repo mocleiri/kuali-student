@@ -259,7 +259,7 @@ public class KsaMemoController extends GenericSearchController {
         // TODO validate the field entries before inserting
 
         MemoModel memoModel = form.getMemoModel();
-        Account account = memoModel.getAccount();
+
         String accountId = memoModel.getAccountId();
         String memoText = memoModel.getText();
         String memoAccessLevel = memoModel.getInfoAccessLevel();

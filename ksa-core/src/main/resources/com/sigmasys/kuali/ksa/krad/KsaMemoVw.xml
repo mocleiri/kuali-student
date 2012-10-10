@@ -142,7 +142,7 @@
     ********************************************************************************************************************
     -->
     <bean id="memoTableSection" parent="Uif-Disclosure-TableCollectionSection"
-        p:layoutManager.numberOfColumns="4"
+        p:layoutManager.numberOfColumns="5"
         p:disclosure.render="false"
         p:progressiveRenderViaAJAX="true"
         p:instructionalText="The following is a list of memos for the selected account @{account.id}"
@@ -153,6 +153,8 @@
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+        <property name="layoutManager.richTable.disableTableSort" value="false"/>
         <property name="items">
             <list>
 <!-- TODO New memo field
@@ -167,14 +169,16 @@
 -->
                 <bean parent="Uif-InputField" p:propertyName="effectiveDate"
                       p:label="Effective Date"
-                      p:maxLength="10">
+                      p:maxLength="10"
+                        p:width="10%">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="text"
-                      p:label="Description">
+                      p:label="Description"
+                      p:width="60%">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
@@ -182,11 +186,11 @@
                     </property>
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
-                <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center"
+                <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center" p:width="10%"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=ViewMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
-                <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self" p:align="center"
+                <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self" p:align="center" p:width="10%"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
-                <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self" p:align="center"
+                <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self" p:align="center" p:width="10%"
                       p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
             </list>
         </property>

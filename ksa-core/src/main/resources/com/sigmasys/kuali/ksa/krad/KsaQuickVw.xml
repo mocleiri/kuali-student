@@ -435,22 +435,46 @@
     ********************************************************************************************************************
     -->
     <bean id="quickViewMemosTable" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="1"
+          p:layoutManager.numberOfColumns="2"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
-          p:instructionalText="Memoranda">
+          p:instructionalText="Memoranda"
+            p:width="40%">
         <property name="readOnly" value="true"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Memo"/>
-        <property name="propertyName" value="memos"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.MemoModel"/>
+        <property name="propertyName" value="memoModels"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+        <property name="layoutManager.richTable.disableTableSort" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="displayValue" p:label="Composite Memoranda Info">
+<!-- TODO New memo field
+                <bean parent="Uif-InputField" p:propertyName="status"
+                      p:label="Status"
+                      p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="60"
+                        <bean parent="Uif-TextControl" p:size="11"/>
+                    </property>
+                </bean>
+-->
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate"
+                      p:label="Effective Date"
+                      p:maxLength="10"
+                        p:width="10%">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="text"
+                      p:label="Description"
+                        p:width="30%">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
                               p:style="resize:none;"/>
                     </property>
                 </bean>
@@ -490,7 +514,7 @@
           p:layoutManager.orientation="VERTICAL">
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="memoEffectiveDate"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.effectiveDate"
                       p:label="Effective Date"
                       p:labelPlacement="TOP"
                       p:maxLength="10"
@@ -499,7 +523,7 @@
                         <bean parent="Uif-DateControl" p:size="11" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoExpirationDate"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.expirationDate"
                       p:label="Expiration Date"
                       p:labelPlacement="TOP"
                       p:maxLength="10"
@@ -508,7 +532,7 @@
                         <bean parent="Uif-DateControl" p:size="11" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoAccessLevel"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.infoAccessLevel"
                       p:label="Level">
                     <property name="control">
                         <bean parent="Uif-HorizontalRadioControl">
@@ -524,7 +548,7 @@
                         </bean>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoText"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.text"
                       p:label="Text"
                       p:labelPlacement="TOP">
                     <property name="bindingInfo.bindToForm" value="true"/>
@@ -547,10 +571,12 @@
     <bean id="memoControlsGroup" parent="Uif-HorizontalBoxGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addMemo"
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertMemo"
                       p:actionLabel="Add Memo"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                 </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>
