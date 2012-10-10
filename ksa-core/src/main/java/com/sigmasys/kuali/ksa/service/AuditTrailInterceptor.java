@@ -45,9 +45,11 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
     private static final Log logger = LogFactory.getLog(AuditTrailInterceptor.class);
 
+    private static final int MAX_VALUE_LENGTH = 4000;
+
     private static final String ENTITY_MANAGER_FACTORY_BEAN_NAME = "ksaEntityManagerFactory";
 
-    private static final AtomicLong IdGenerator = new AtomicLong(System.currentTimeMillis() * 100000);
+    private static final AtomicLong idGenerator = new AtomicLong(System.currentTimeMillis() * 100000);
 
     private EntityManager entityManager;
 
@@ -241,12 +243,20 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                                      String oldValue, String newValue, String logDetail) {
 
         Activity activity = new Activity();
-        activity.setId(IdGenerator.incrementAndGet());
+        activity.setId(idGenerator.incrementAndGet());
         activity.setEntityId(id.toString());
         activity.setEntityType(entityClass.getSimpleName());
         activity.setCreatorId(userId);
         activity.setIpAddress(RequestUtils.getClientIpAddress());
         activity.setLogDetail(logDetail);
+
+        if (oldValue != null && oldValue.length() > MAX_VALUE_LENGTH) {
+            oldValue = oldValue.substring(0, MAX_VALUE_LENGTH - 1);
+        }
+
+        if (newValue != null && newValue.length() > MAX_VALUE_LENGTH) {
+            newValue = newValue.substring(0, MAX_VALUE_LENGTH - 1);
+        }
 
         activity.setEntityProperty(propertyName);
         activity.setOldAttribute(oldValue);

@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -68,6 +70,7 @@ public class Document implements Identifiable {
     }
 
     @Lob
+    @Type(type = "text")
     @Column(name = "DOCUMENT", length = Integer.MAX_VALUE)
     public String getBody() {
         return body;

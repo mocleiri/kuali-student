@@ -23,9 +23,9 @@
     <!-- XA data source definitions -->
     <bean id="xaDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" abstract="true">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="minPoolSize" value="5"/>
-        <property name="poolSize" value="5"/>
-        <property name="maxPoolSize" value="5"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="poolSize" value="10"/>
+        <property name="maxPoolSize" value="10"/>
         <property name="testQuery" value="select 1 from dual"/>
     </bean>
 

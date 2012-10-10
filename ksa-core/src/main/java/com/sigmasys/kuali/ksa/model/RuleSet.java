@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 /**
@@ -41,6 +43,7 @@ public class RuleSet implements Identifiable {
     }
 
     @Lob
+    @Type(type = "text")
     @Column(name = "RULE_SET", length = Integer.MAX_VALUE, nullable = false)
     public String getRules() {
         return rules;

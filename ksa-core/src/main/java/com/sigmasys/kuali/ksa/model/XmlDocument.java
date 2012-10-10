@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,7 +38,6 @@ public class XmlDocument implements Identifiable {
     private String creatorId;
 
 
-
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @TableGenerator(name = "TABLE_GEN_XML",
@@ -56,7 +56,8 @@ public class XmlDocument implements Identifiable {
     }
 
     @Lob
-    @Column(name = "XML_DOCUMENT")
+    @Type(type="text")
+    @Column(name = "XML_DOCUMENT", length = Integer.MAX_VALUE, nullable = false)
     public String getXml() {
         return xml;
     }

@@ -1,10 +1,12 @@
 package com.sigmasys.kuali.ksa.util;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.sql.Clob;
 import java.util.*;
 
 
@@ -125,6 +127,18 @@ public final class CommonUtils {
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    public static String clobToString(Clob clob) {
+        try {
+            StringWriter writer = new StringWriter();
+            IOUtils.copy(clob.getCharacterStream(), writer);
+            return writer.toString();
+        } catch (Exception e) {
+            String msg = "Cannot convert CLOB (" + clob + ") to java.util.String";
+            logger.error(msg, e);
+            throw new RuntimeException(msg, e);
         }
     }
 
