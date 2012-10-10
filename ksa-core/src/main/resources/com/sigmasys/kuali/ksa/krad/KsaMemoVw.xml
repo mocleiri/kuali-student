@@ -334,6 +334,33 @@
                         <bean parent="Uif-TextControl" p:size="22" />
                     </property>
                 </bean>
+                <bean parent="Uif-InputField" p:propertyName="memoModel.editorId"
+                      p:label="Editor ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memoModel.creatorId"
+                      p:label="Creator ID"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="21"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="22" />
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="memoModel.lastUpdate"
+                      p:label="Last Updated"
+                      p:labelPlacement="LEFT"
+                      p:maxLength="10"
+                      p:fieldLabel.renderColon="true">
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11" />
+                    </property>
+                </bean>
                 <bean parent="Uif-InputField" p:propertyName="memoModel.creationDate"
                       p:label="Creation Date"
                       p:labelPlacement="LEFT"
@@ -343,7 +370,6 @@
                         <bean parent="Uif-DateControl" p:size="11" />
                     </property>
                 </bean>
-
 <!--
                 <bean parent="Uif-InputField" p:propertyName="memoModel.account.id"
                       p:label="Account ID"
@@ -375,34 +401,6 @@
                         <bean parent="Uif-TextControl" p:size="22" />
                     </property>
                 </bean>-->
-                <bean parent="Uif-InputField" p:propertyName="memoModel.creatorId"
-                      p:label="Creator ID"
-                      p:labelPlacement="LEFT"
-                      p:maxLength="21"
-                      p:fieldLabel.renderColon="true">
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="22" />
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoModel.editorId"
-                      p:label="Editor ID"
-                      p:labelPlacement="LEFT"
-                      p:maxLength="21"
-                      p:fieldLabel.renderColon="true">
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="22" />
-                    </property>
-                </bean>
-
-                <bean parent="Uif-InputField" p:propertyName="memoModel.lastUpdate"
-                      p:label="Last Date"
-                      p:labelPlacement="LEFT"
-                      p:maxLength="10"
-                      p:fieldLabel.renderColon="true">
-                    <property name="control">
-                        <bean parent="Uif-DateControl" p:size="11" />
-                    </property>
-                </bean>
                 <bean parent="Uif-InputField" p:propertyName="memoModel.effectiveDate"
                       p:label="Effective Date"
                       p:labelPlacement="LEFT"
