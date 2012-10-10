@@ -28,6 +28,7 @@
 
     <bean id="KsaAdminView" parent="Uif-KsaFormView">
         <property name="title" value=""/>
+        <property name="headerText" value="Administration"/>
         <property name="entryPageId" value="ActivityPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -44,6 +45,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="ActivityPage" p:title="Activity">
+                    <property name="headerText" value="Activity List"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"

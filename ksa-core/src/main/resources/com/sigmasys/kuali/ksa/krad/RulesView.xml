@@ -25,6 +25,7 @@
 
     <bean id="RulesView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="KSA Rules Editor"/>
+        <property name="headerText" value="Rules"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.RulesForm"/>
         <property name="entryPageId" value="RulesEditorPage"/>
         <property name="navigation">
@@ -39,6 +40,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="RulesEditorPage" p:title="KSA Rules Editor">
+                    <property name="headerText" value="KSA Rules Editor"/>
                     <property name="items">
                         <list>
                             <ref bean="rulesEditorPanel"/>

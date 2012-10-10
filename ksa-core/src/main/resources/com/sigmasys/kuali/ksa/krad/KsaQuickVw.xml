@@ -28,6 +28,7 @@
 
     <bean id="KsaQuickView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Quick View"/>
+        <property name="headerText" value="Quick View"/>
         <property name="entryPageId" value="QuickViewPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -44,6 +45,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
+                    <property name="headerText" value="Quick View"/>
                     <property name="items">
                         <list>
                             <!-- TODO p:actionParameters="userId:@{account.id}"-->
@@ -56,6 +58,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="QuickViewAddMemoPage" p:title="Add Memo">
+                    <property name="headerText" value="Add Memo"/>
                     <property name="items">
                         <list>
                             <ref bean="quickViewAddMemoSection"/>

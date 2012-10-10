@@ -28,6 +28,7 @@
 
     <bean id="KsaDefermentsView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Deferments"/>
+        <property name="headerText" value="Deferments"/>
         <property name="entryPageId" value="QuickViewPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -43,7 +44,8 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Deferment Options">
+                    <property name="headerText" value="Deferment Options"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"

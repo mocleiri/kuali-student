@@ -28,6 +28,7 @@
 
     <bean id="KsaBiographicInformationView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Biographic Information"/>
+        <property name="headerText" value="Biographic Information"/>
         <property name="entryPageId" value="BiographicPersonsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -44,6 +45,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="BiographicPersonsPage" p:title="Biographic Information List">
+                    <property name="headerText" value="Biographic Information List"/>
                     <property name="items">
                         <list>
                             <ref bean="biographicInformationPersonsSection"/>
@@ -52,6 +54,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="BiographicSummaryPage" p:title="Biographic Information">
+                    <property name="headerText" value="Summary"/>
                     <property name="items">
                         <list>
                             <ref bean="biographicInformationSummarySection"/>
@@ -60,6 +63,7 @@
                 </bean>
                 <!-- Add Person page  -->
                 <bean parent="Uif-Page" p:id="BiographicAddPersonPage">
+                    <property name="headerText" value="Add Person"/>
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
@@ -80,6 +84,7 @@
                 </bean>
                 <!-- Edit Person  -->
                 <bean parent="Uif-Page" p:id="BiographicEDPersonPage">
+                    <property name="headerText" value="Edit Person"/>
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
@@ -100,6 +105,7 @@
                 </bean>
                 <!-- Add/Edit Postal  -->
                 <bean parent="Uif-Page" p:id="BiographicInformationPostalADE">
+                    <property name="headerText" value="Add Update Postal"/>
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
@@ -124,6 +130,7 @@
                 </bean>
                 <!-- Add/Edit Electronic Contact -->
                 <bean parent="Uif-Page" p:id="BiographicInformationElectronicContactADE">
+                    <property name="headerText" value="Add Update Electronic Contact"/>
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">

@@ -28,6 +28,7 @@
 
     <bean id="KsaCollectionsView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Collections"/>
+        <property name="headerText" value="Collections"/>
         <property name="entryPageId" value="accountsInCollectionsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -49,6 +50,7 @@
             <list merge="true">
 
                 <bean parent="Uif-Page" p:id="accountsInCollectionsPage" p:title="Accounts in Collections">
+                    <property name="headerText" value="Accounts in Collections"/>
                     <property name="items">
                         <list>
                             <ref bean="accountsInCollections"/>
@@ -57,6 +59,7 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="agenciesPage" p:title="Agencies">
+                    <property name="headerText" value="Agencies"/>
                     <property name="items">
                         <list>
                             <ref bean="agencies"/>
@@ -65,6 +68,7 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
+                    <property name="headerText" value="Quick View"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"

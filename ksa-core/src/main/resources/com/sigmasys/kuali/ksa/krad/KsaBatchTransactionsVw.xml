@@ -28,6 +28,7 @@
 
     <bean id="KsaBatchTransactionsView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Batch Transactions"/>
+        <property name="headerText" value="Batch Transaction Upload"/>
         <property name="entryPageId" value="BatchTransactionsUploadFilePage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -44,6 +45,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="BatchTransactionsQuickMenuOptionsPage" p:title="Quick Options">
+                    <property name="headerText" value="Quick Options"/>
                     <property name="items">
                         <list>
                             <ref bean="batchTransactionsQuickOptions"/>
@@ -51,6 +53,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="BatchTransactionsUploadFilePage" p:title="File Upload">
+                    <property name="headerText" value="File Upload"/>
                     <property name="items">
                         <list>
                             <ref bean="batchTransactionsUploadFile"/>

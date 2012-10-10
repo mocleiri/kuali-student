@@ -27,6 +27,7 @@
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="KsaReportReconciliationView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="headerText" value="Reports / Reconciliation"/>
         <property name="title" value="Reports and Reconciliation"/>
         <property name="entryPageId" value="QuickViewPage"/>
         <property name="navigation">
@@ -43,7 +44,8 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Quick View">
+                <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Reports">
+                    <property name="headerText" value="Reports"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"

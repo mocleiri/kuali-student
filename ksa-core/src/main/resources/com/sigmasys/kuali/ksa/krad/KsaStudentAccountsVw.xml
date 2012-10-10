@@ -28,6 +28,7 @@
 
     <bean id="KsaStudentAccountsView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Account Overview"/>
+        <property name="headerText" value="Accounts"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaStudentAccountsForm"/>
         <property name="entryPageId" value="HomePage"/>
         <property name="navigation">
@@ -45,6 +46,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="HomePage" p:title="Home">
+                    <property name="headerText" value="Account Home"/>
                     <property name="items">
                         <list>
                             <ref bean="homeQuickOptions"/>
@@ -53,6 +55,7 @@
                 </bean>
                 <!-- transactions overview for an account roll-up and ungroupded list -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Account Transactions">
+                    <property name="headerText" value="Account Transactions"/>
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionsSection"/>
@@ -62,6 +65,7 @@
                 <!-- transaction grouped by roll-up type -->
                 <!-- transaction details for a specific roll-up type -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionsRollupDetailPage" p:title="Roll-up Transactions">
+                    <property name="headerText" value="Roll-up Transactions"/>
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionsByRollupSection"/>
@@ -70,6 +74,7 @@
                 </bean>
                 <!-- Any transaction details -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionDetailPage" p:title="Account Detail">
+                    <property name="headerText" value="Accounts"/>
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionDetailSection"/>
@@ -80,6 +85,7 @@
                 </bean>
                 <!-- a list of transaction allocation -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationPage" p:title="Allocations">
+                    <property name="headerText" value="Allocations"/>
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionAllocationSection"/>
@@ -88,6 +94,7 @@
                 </bean>
                 <!-- single transaction allocation -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionAllocationDetailPage" p:title="Allocation Detail">
+                    <property name="headerText" value="Allocation Details"/>
                     <property name="items">
                         <list>
                             <ref bean="accountOVTransactionAllocationSection"/>

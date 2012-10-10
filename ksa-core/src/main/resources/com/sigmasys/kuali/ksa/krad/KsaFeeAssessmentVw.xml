@@ -28,6 +28,7 @@
 
     <bean id="KsaFeeAssessmentView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Fee Assessment"/>
+        <property name="headerText" value="Fee Assessment"/>
         <property name="entryPageId" value="FeeAssessmentQuickMenuOptionsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
@@ -42,7 +43,8 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="FeeAssessmentQuickMenuOptionsPage" p:title="Quick Options">
+                <bean parent="Uif-Page" p:id="FeeAssessmentQuickMenuOptionsPage" p:title="Fee Assessment Options">
+                    <property name="headerText" value="Fee Assessment Options"/>
                     <property name="items">
                         <list>
                             <ref bean="feeAssessmentQuickOptions"/>
@@ -50,6 +52,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="FeeAssessmentUploadFilePage" p:title="File Upload">
+                    <property name="headerText" value="File Upload"/>
                     <property name="items">
                         <list>
                             <ref bean="feeAssessmentUploadFile"/>

@@ -10,6 +10,7 @@
 
     <bean id="StudentTransactionOverview" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Student Transaction Overview"/>
+        <property name="headerText" value="Transaction Overview"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransOvrForm"/>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
@@ -29,6 +30,7 @@
         <property name="items">
             <list merge="true">
                 <bean parent="Uif-Page" p:id="bursaQuickMenuOptionsPage" p:title="Quick Options">
+                    <property name="headerText" value="Quick Options"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaQuickOptions"/>
@@ -36,6 +38,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="bursaPersonLookupPage" p:title="Query for Persons">
+                    <property name="headerText" value="Person Query"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaQueryByName"/>
@@ -44,6 +47,7 @@
                 </bean>
                 <bean parent="Uif-Page" p:id="bursaTransByPersonPage"
                       p:title="Transactions for selected person @{selectedPersonName}">
+                    <property name="headerText" value="Transactions By Person"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaTransactionsReviewPage"/>
@@ -51,6 +55,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="bursaChargePage" p:title="Charge Detail - @{selectedPersonName}">
+                    <property name="headerText" value="Charge Detail"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaChargeReviewSection"/>
@@ -58,6 +63,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Page" p:id="bursaPaymentPage" p:title="Payment Detail - @{selectedPersonName}">
+                    <property name="headerText" value="Payment Detail"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaPaymentReviewSection"/>
@@ -68,6 +74,7 @@
                 <!-- Currency stuff -->
 
                 <bean parent="Uif-Page" p:id="bursaCurrencyPage" p:title="Currency Type">
+                    <property name="headerText" value="Currency Type"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaAddCurrencyType"/>
@@ -77,6 +84,7 @@
                 </bean>
                 <bean parent="Uif-Page" p:id="bursaCurrencyEditPage"
                       p:title="Currency Details (ISO = @{currency.code})">
+                    <property name="headerText" value="Edit Currency"/>
                     <property name="items">
                         <list>
                             <ref bean="bursaCurrencyDetail"/>
@@ -86,6 +94,7 @@
 
                 <!-- Activity stuff -->
                 <bean parent="Uif-Page" p:id="bursaActivityPage" p:title="Activity">
+                    <property name="headerText" value="Activity List"/>
                     <property name="header.upperGroup">
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
