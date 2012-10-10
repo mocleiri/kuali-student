@@ -199,9 +199,8 @@ public class KsaPaymentController extends GenericSearchController {
     private boolean savePayment(KsaPaymentForm form) {
 
        boolean saveResult = false;
-
+       String statusMsg = "";
        Payment payment = form.getPayment();
-
        payment.setAccount(form.getAccount());
 
        String typeIdString = form.getPaymentTransactionTypeId();
@@ -211,9 +210,18 @@ public class KsaPaymentController extends GenericSearchController {
        }
 
        BigDecimal amount = payment.getAmount();
+       if (amount == null) {
+          statusMsg = "Amount must be a numerical value";
+          form.setStatusMessage(statusMsg);
+          logger.error(statusMsg);
+          return saveResult;
+       }
+
        int compareResult = amount.compareTo(BigDecimal.ZERO);
        if (compareResult <= 0) {
-          form.setStatusMessage("Amount must be a positive value");
+          statusMsg = "Amount must be a positive value";
+          form.setStatusMessage(statusMsg);
+          logger.error(statusMsg);
           return saveResult;
        }
 
@@ -228,10 +236,14 @@ public class KsaPaymentController extends GenericSearchController {
 
        if (tt == null) {
            // Error handler here.
-           form.setStatusMessage("Invalid Transaction Type");
+           statusMsg = "Invalid Transaction Type";
+           form.setStatusMessage(statusMsg);
+           logger.error(statusMsg);
            return saveResult;
        } else if (!(tt instanceof CreditType)) {
-           form.setStatusMessage("Transaction Type must be a payment");
+           statusMsg = "Transaction Type must be a payment";
+           form.setStatusMessage(statusMsg);
+           logger.error(statusMsg);
            return saveResult;
        }
 
@@ -241,7 +253,9 @@ public class KsaPaymentController extends GenericSearchController {
                  effectiveDate, null, payment.getAmount() );
            if (payment.getId() != null) {
                form.setPayment(payment);
-               form.setStatusMessage(tt.getDescription() + " Payment saved");
+               statusMsg = tt.getDescription() + " Payment saved";
+               form.setStatusMessage(statusMsg);
+               logger.error(statusMsg);
                saveResult = true;
             }
 

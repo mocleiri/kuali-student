@@ -118,7 +118,7 @@
                                 </property>-->
                             </bean>
                             <!--  Status message -->
-                            <bean parent="Uif-MessageField" p:messageText="'@{uploadProcessState}'"/>
+                            <bean parent="Uif-MessageField" p:messageText="@{uploadProcessState}"/>
                         </list>
                     </property>
                 </bean>

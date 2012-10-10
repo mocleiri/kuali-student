@@ -146,7 +146,7 @@
                 </bean>
                 <ref bean="chargeControls"/>
                 <!--  Status message -->
-                <bean parent="Uif-MessageField" p:messageText="'@{statusMessage}'"/>
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
     </bean>

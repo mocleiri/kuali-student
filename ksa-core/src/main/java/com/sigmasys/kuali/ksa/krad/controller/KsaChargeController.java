@@ -108,56 +108,16 @@ public class KsaChargeController extends GenericSearchController {
                                HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
 
-        Charge charge = form.getCharge();
-        charge.setAccount(form.getAccount());
+       String viewId = request.getParameter("viewId");
+       // example user1
+       String userId = request.getParameter("userId");
 
-        String typeIdString = form.getChargeTransactionTypeId();
-        Date effectiveDate = charge.getEffectiveDate();
-        if(effectiveDate == null){
-            effectiveDate = new Date();
-        }
-
-       BigDecimal amount = charge.getAmount();
-       int compareResult = amount.compareTo(BigDecimal.ZERO);
-       if (compareResult <= 0) {
-          form.setStatusMessage("Amount must be a positive value");
-          return getUIFModelAndView(form);
+       logger.info("View: " + viewId + " User: " + userId);
+       if (this.saveCharge(form)) {
+          this.initCharge(form);
        }
 
-        TransactionType tt;
-        try {
-            tt = transactionService.getTransactionType(typeIdString, effectiveDate);
-        } catch (InvalidTransactionTypeException e) {
-            logger.error(e.getMessage(), e);
-            form.setStatusMessage(e.getMessage());
-            return getUIFModelAndView(form);
-        }
-
-        if (tt == null) {
-            // Error handler here.
-            form.setStatusMessage("Invalid Transaction Type");
-            return getUIFModelAndView(form);
-        } else if (!(tt instanceof DebitType)) {
-            form.setStatusMessage("Transaction Type must be a charge type");
-            return getUIFModelAndView(form);
-        }
-
-        try {
-            charge = (Charge)transactionService.createTransaction(typeIdString, charge.getAccount().getId(), effectiveDate, charge.getAmount());
-
-            if (charge.getId() != null) {
-                form.setCharge(charge);
-                form.setStatusMessage(tt.getDescription() + " charge saved");
-            }
-
-        } catch (TransactionNotAllowedException e) {
-            logger.error(e.getMessage(), e);
-            form.setStatusMessage(e.getMessage());
-        }
-
-
-        return getUIFModelAndView(form);
-
+       return getUIFModelAndView(form);
     }
 
     /**
@@ -173,7 +133,6 @@ public class KsaChargeController extends GenericSearchController {
                              HttpServletRequest request, HttpServletResponse response) {
 
         // do save stuff...
-
         return getUIFModelAndView(form);
     }
 
@@ -204,4 +163,86 @@ public class KsaChargeController extends GenericSearchController {
         // do refresh stuff...
         return getUIFModelAndView(form);
     }
+
+   private boolean saveCharge(KsaChargeForm form) {
+      boolean saveResult = false;
+      String statusMsg = "";
+      Charge charge = form.getCharge();
+      charge.setAccount(form.getAccount());
+
+      String typeIdString = form.getChargeTransactionTypeId();
+      Date effectiveDate = charge.getEffectiveDate();
+      if(effectiveDate == null){
+         effectiveDate = new Date();
+      }
+
+      BigDecimal amount = charge.getAmount();
+      if (amount == null) {
+         statusMsg = "Amount must be a numerical value";
+         form.setStatusMessage(statusMsg);
+         logger.error(statusMsg);
+         return saveResult;
+      }
+
+      int compareResult = amount.compareTo(BigDecimal.ZERO);
+      if (compareResult <= 0) {
+         statusMsg = "Amount must be a positive value";
+         form.setStatusMessage(statusMsg);
+         logger.error(statusMsg);
+         return saveResult;
+      }
+
+      TransactionType tt;
+      try {
+         tt = transactionService.getTransactionType(typeIdString, effectiveDate);
+      } catch (InvalidTransactionTypeException e) {
+         logger.error(e.getMessage(), e);
+         form.setStatusMessage(e.getMessage());
+         return saveResult;
+      }
+
+      if (tt == null) {
+         // Error handler here.
+         statusMsg = "Invalid Transaction Type";
+         form.setStatusMessage(statusMsg);
+         logger.error(statusMsg);
+         return saveResult;
+      } else if (!(tt instanceof DebitType)) {
+         statusMsg = "Transaction Type must be a charge type";
+         form.setStatusMessage(statusMsg);
+         logger.error(statusMsg);
+         return saveResult;
+      }
+
+      try {
+         charge = (Charge)transactionService.createTransaction(typeIdString, charge.getAccount().getId(), effectiveDate, charge.getAmount());
+
+         if (charge.getId() != null) {
+            form.setCharge(charge);
+            statusMsg = tt.getDescription() + " charge saved";
+            form.setStatusMessage(statusMsg);
+            logger.error(statusMsg);
+            saveResult = true;
+         }
+
+      } catch (TransactionNotAllowedException e) {
+         logger.error(e.getMessage(), e);
+         form.setStatusMessage(e.getMessage());
+      }
+
+      return saveResult;
+   }
+
+   private void initCharge(KsaChargeForm form) {
+
+      // abbreviated payment initialization
+      Account account = form.getAccount();
+      String accountId = account.getId();
+
+      Charge charge = new Charge();
+      charge.setAccount(account);
+      charge.setAccountId(accountId);
+      charge.setEffectiveDate(new Date());
+      form.setCharge(charge);
+   }
 }
