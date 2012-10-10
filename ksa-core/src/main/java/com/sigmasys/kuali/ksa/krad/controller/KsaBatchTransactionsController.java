@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.KsaBatchTransactionsForm;
+import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.ChargeableAccount;
 import com.sigmasys.kuali.ksa.service.TransactionImportService;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.apache.commons.logging.Log;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by: dmulderink on 9/26/12 at 9:11 AM
@@ -202,7 +205,15 @@ public class KsaBatchTransactionsController extends GenericSearchController {
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=ageAccounts")
    public ModelAndView ageAccounts(@ModelAttribute("KualiForm") KsaBatchTransactionsForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
-      // do ageAccounts stuff...
+
+
+      try{
+          accountService.ageDebt(true);
+          form.setUploadProcessState("Debts successfully aged.");
+      } catch(RuntimeException e){
+          form.setUploadProcessState(e.getLocalizedMessage());
+      }
+
 
 
       return getUIFModelAndView(form);
