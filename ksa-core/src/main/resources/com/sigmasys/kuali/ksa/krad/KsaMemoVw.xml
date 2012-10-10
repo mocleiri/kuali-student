@@ -48,6 +48,8 @@
                     <property name="headerText" value="Memo List"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
+                                  p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
                                   p:actionLabel="Refresh"
                                   p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -62,6 +64,8 @@
                     <property name="headerText" value="Add Memo"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
+                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="addMemoSection"/>
                             <ref bean="addMemoControlsGroup"/>
                         </list>
@@ -71,6 +75,8 @@
                     <property name="headerText" value="View Memo"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
+                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="viewMemoSection"/>
                             <ref bean="viewMemoControlsGroup"/>
                         </list>
@@ -80,6 +86,8 @@
                     <property name="headerText" value="Edit Memo"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
+                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="viewMemoSection"/>
                             <ref bean="addMemoSection"/>
                             <ref bean="editMemoControlsGroup"/>
