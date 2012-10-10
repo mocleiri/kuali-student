@@ -229,7 +229,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Transaction Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="creationDate" p:label="Transaction Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
@@ -321,7 +321,7 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Transaction Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="creationDate" p:label="Transaction Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
@@ -642,7 +642,7 @@
                         <bean parent="Uif-TextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="ledgerDate" p:label="Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="creationDate" p:label="Date" p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>

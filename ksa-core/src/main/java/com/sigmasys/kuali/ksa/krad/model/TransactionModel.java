@@ -20,7 +20,7 @@ public class TransactionModel extends Transaction {
         setTransactionType(transaction.getTransactionType());
         setRollup(transaction.getRollup());
         setExternalId(transaction.getExternalId());
-        setLedgerDate(transaction.getLedgerDate());
+        setCreationDate(transaction.getCreationDate());
         setEffectiveDate(transaction.getEffectiveDate());
         setOriginationDate(transaction.getOriginationDate());
         setRecognitionDate(transaction.getRecognitionDate());

@@ -203,12 +203,12 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:label="Date" p:propertyName="ledgerDate" p:required="true"/>
+                <bean parent="Uif-InputField" p:label="Date" p:propertyName="creationDate" p:required="true"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="statementText" p:required="true"
                       p:constraintText="Requires Date be filled out">
                     <property name="dependencyConstraints">
                         <list>
-                            <bean parent="PrerequisiteConstraint" p:propertyName="ledgerDate"/>
+                            <bean parent="PrerequisiteConstraint" p:propertyName="creationDate"/>
                         </list>
                     </property>
                 </bean>

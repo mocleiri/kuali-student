@@ -44,7 +44,7 @@ public interface FeeManagementService {
      * @param accountId Id of an account for which to get its study data.
      * @return Account's study data.
      */
-    List<LearningUnit> getStudy(String accountId);
+    List<LearningUnit> getLearningUnits(String accountId);
 
     /**
      * Returns a {@link FeeBase} object containing all information necessary for a
@@ -261,15 +261,15 @@ public interface FeeManagementService {
      * @param feeBase A <code>FeeBase</code> that contains a student's information.
      * @return All study course codes.
      */
-    List<String> getStudyCodes(FeeBase feeBase);
+    List<String> getLearningUnitCodes(FeeBase feeBase);
 
     /**
      * Check the existence of at least one of the given study codes in a <code>FeeBase</code> object.
      *
-     * @param studyCodes a list of study codes represented by a <code>String</code> value and separated by commas.
+     * @param learningUnitCodes a list of study codes represented by a <code>String</code> value and separated by commas.
      * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
      */
-    boolean containsAtLeastOneStudyCode(FeeBase feeBase, String studyCodes);
+    boolean containsAtLeastOneLearningUnitCode(FeeBase feeBase, String learningUnitCodes);
 
     /**
      * Checks if a student is a resident.

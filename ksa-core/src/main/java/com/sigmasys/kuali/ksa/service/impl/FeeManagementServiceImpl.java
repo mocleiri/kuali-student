@@ -66,7 +66,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return Account's study data.
      */
     @Override
-    public List<LearningUnit> getStudy(String accountId) {
+    public List<LearningUnit> getLearningUnits(String accountId) {
         // Find associated LearningUnits using a query by a foreign key in the LearningUnit table:
         String sql = "select * from kssa_lu lu where lu.acnt_id_fk = :accountId";
         Query query = em.createNativeQuery(sql, LearningUnit.class).setParameter("accountId", accountId);
@@ -86,7 +86,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         Account account = getEntity(accountId, Account.class);
         List<KeyPair> studentData = getStudentData(accountId);
         List<PeriodKeyPair> periodData = getLearningPeriodData(accountId);
-        List<LearningUnit> study = getStudy(accountId);
+        List<LearningUnit> study = getLearningUnits(accountId);
 
         // Build the resulting object:
         FeeBase feeBase = new FeeBase();
@@ -94,7 +94,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         feeBase.setAccount(account);
         feeBase.setStudentData(studentData);
         feeBase.setPeriodData(periodData);
-        feeBase.setStudy(study);
+        feeBase.setLearningUnits(study);
 
         return feeBase;
     }
@@ -504,12 +504,12 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return All study course codes.
      */
     @Override
-    public List<String> getStudyCodes(FeeBase feeBase) {
+    public List<String> getLearningUnitCodes(FeeBase feeBase) {
         List<String> studyCodes = new LinkedList<String>();
-        for (LearningUnit lu : feeBase.getStudy()) {
-            String studyCode = lu.getUnitCode();
-            if (studyCode != null) {
-                studyCodes.add(studyCode.toUpperCase());
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
+            String luUnitCode = lu.getUnitCode();
+            if (luUnitCode != null) {
+                studyCodes.add(luUnitCode.toUpperCase());
             }
         }
         return studyCodes;
@@ -518,14 +518,14 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     /**
      * Check the existence of at least one of the given study codes in a <code>FeeBase</code> object.
      *
-     * @param studyCodes a list of study codes represented by a <code>String</code> value and separated by commas.
+     * @param learningUnitCodes a list of study codes represented by a <code>String</code> value and separated by commas.
      * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
      */
     @Override
-    public boolean containsAtLeastOneStudyCode(FeeBase feeBase, String studyCodes) {
-        List<String> studyCodesList = getStudyCodes(feeBase);
-        for (String majorCode : studyCodes.split(",")) {
-            if (studyCodesList.contains(majorCode.trim().toUpperCase())) {
+    public boolean containsAtLeastOneLearningUnitCode(FeeBase feeBase, String learningUnitCodes) {
+        List<String> learningUnitCodesList = getLearningUnitCodes(feeBase);
+        for (String luCode : learningUnitCodes.split(",")) {
+            if (learningUnitCodesList.contains(luCode.trim().toUpperCase())) {
                 return true;
             }
         }
@@ -615,7 +615,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public int getNumOfCredits(FeeBase feeBase, String courseStatus) {
         int numOfCredits = 0;
 
-        for (LearningUnit lu : feeBase.getStudy()) {
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
             if (StringUtils.equalsIgnoreCase(lu.getStatus(), courseStatus)) {
                 if (lu.getCredit() != null) {
                     numOfCredits += lu.getCredit().intValue();
@@ -638,7 +638,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
         int numOfCredits = 0;
 
-        for (LearningUnit lu : feeBase.getStudy()) {
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
             String kpValue = getKeyPairValue(feeBase, keyPairName);
 
             if (StringUtils.equalsIgnoreCase(kpValue, keyPairValue) || StringUtils.isBlank(kpValue)) {
@@ -664,7 +664,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public int getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
         int numOfCredits = 0;
 
-        for (LearningUnit lu : feeBase.getStudy()) {
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
             String kpValue = getKeyPairValue(feeBase, keyPairName);
 
             if (StringUtils.equalsIgnoreCase(lu.getUnitSection(), sectionCode)
@@ -692,7 +692,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
         int numOfCredits = 0;
 
-        for (LearningUnit lu : feeBase.getStudy()) {
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
             String kpValue = getKeyPairValue(feeBase, keyPairName);
             String kpValue2 = getKeyPairValue(feeBase, secondKeyPairName);
 

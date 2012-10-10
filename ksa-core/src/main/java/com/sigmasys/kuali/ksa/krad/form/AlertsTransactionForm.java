@@ -80,7 +80,7 @@ public class AlertsTransactionForm extends AbstractViewModel {
                 totalAmnt = totalAmnt.add(charge.getAmount());
 
                 // compare to get the latest ledger and effective date
-                Date ledgerDate = charge.getLedgerDate();
+                Date ledgerDate = charge.getCreationDate();
                 String tranStatement = charge.getStatementText();
 
                 if (ledgerDate.compareTo(lastLedgerDate) > 0) {

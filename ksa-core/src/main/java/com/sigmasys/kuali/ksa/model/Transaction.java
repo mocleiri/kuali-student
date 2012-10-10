@@ -49,7 +49,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     /**
      * This is the date that the transaction is entered in the ledger. It is set when the transaction is instantiated.
      */
-    protected Date ledgerDate;
+    protected Date creationDate;
 
     /**
      * This is the date that the transaction is considered effective, allowing, for example, a college to assess fees in summer that are not 'due' until the fall. It is also the date that payment application will use to order the transactions. This date is also used as the defining date for a transaction if its GL code has multiple effective accounts.
@@ -176,12 +176,12 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     }
 
     @Column(name = "LEDGER_DATE")
-    public Date getLedgerDate() {
-        return ledgerDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setLedgerDate(Date ledgerDate) {
-        this.ledgerDate = ledgerDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Column(name = "EFFECTIVE_DATE")

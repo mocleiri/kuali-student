@@ -28,7 +28,7 @@ public class TransactionModel extends AbstractModel {
 
     public static final String EFFECTIVE_DATE = "transaction.effectiveDate";
     public static final String ORIGINATION_DATE = "transaction.originationDate";
-    public static final String LEDGER_DATE = "transaction.ledgerDate";
+    public static final String LEDGER_DATE = "transaction.creationDate";
 
     public static final String EXTERNAL_ID = "transaction.externalId";
     public static final String GL_ENTRY_GENERATED = "transaction.glEntryGenerated";

@@ -1139,7 +1139,7 @@ set sqlterminator '!'
 Insert into KSSA_RULE_SET (ID, RULE_SET) values ('ksa.dsl',
 '# The KSA DSL definition
 [when][]Student account ID is "{userId}" = context : DroolsContext(account.id == "{userId}");
-[when][]Study code is in "{studyCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneStudyCode(feeBase, "{studyCodes}"));
+[when][]Study code is in "{studyCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneLearningUnitCode(feeBase, "{studyCodes}"));
 [when][]Major code is in "{majorCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneMajorCode(feeBase, "{majorCodes}"));
 
 [then][]Use "{transactionTypeId}" code to charge ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));

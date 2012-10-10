@@ -305,6 +305,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         transaction.setGlOverridden(false);
         transaction.setInternal(false);
 
+        transaction.setCreationDate(new Date());
         transaction.setGeneralLedgerType(glService.getDefaultGeneralLedgerType());
 
         transaction.setCreatorId(creatorId);

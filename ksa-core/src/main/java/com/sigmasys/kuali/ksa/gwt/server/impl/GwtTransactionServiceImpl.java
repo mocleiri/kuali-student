@@ -118,7 +118,7 @@ public class GwtTransactionServiceImpl extends AbstractSearchService implements 
         model.setCurrencyCode(transaction.getCurrency().getCode());
 
         model.setEffectiveDate(transaction.getEffectiveDate());
-        model.setLedgerDate(transaction.getLedgerDate());
+        model.setLedgerDate(transaction.getCreationDate());
         model.setOriginationDate(transaction.getOriginationDate());
         model.setGlEntryGenerated(transaction.isGlEntryGenerated());
         model.setInternal(transaction.isInternal());

@@ -234,7 +234,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                             totalValueDebits = totalValueDebits.add(transaction.getAmount());
                         }
 
-                        ledgerDate = CalendarUtils.toXmlGregorianCalendar(transaction.getLedgerDate());
+                        ledgerDate = CalendarUtils.toXmlGregorianCalendar(transaction.getCreationDate());
 
                         // add the KsaTransaction object to the accepted KsaTransactionAndTransactionDetails
                         accepted.getKsaTransactionAndTransactionDetails().add(ksaTransaction);

@@ -43,7 +43,7 @@ public class FeeBase implements Serializable {
 	/**
 	 * All courses taken that are associated with the given account.
 	 */
-	private List<LearningUnit> study;
+	private List<LearningUnit> learningUnits;
 
 	
 	public FeeBase() {}
@@ -77,11 +77,11 @@ public class FeeBase implements Serializable {
 		this.periodData = periodData;
 	}
 
-	public List<LearningUnit> getStudy() {
-		return study;
+	public List<LearningUnit> getLearningUnits() {
+		return learningUnits;
 	}
 
-	public void setStudy(List<LearningUnit> study) {
-		this.study = study;
+	public void setLearningUnits(List<LearningUnit> learningUnits) {
+		this.learningUnits = learningUnits;
 	}
 }

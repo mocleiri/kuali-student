@@ -136,7 +136,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	@Test
 	public void testGetStudyNoDataExists() throws Exception {
 		// Get the study data:
-		List<LearningUnit> studyFromService = feeManagementService.getStudy(accountId);
+		List<LearningUnit> studyFromService = feeManagementService.getLearningUnits(accountId);
 		
 		notNull(studyFromService);
 		isTrue(studyFromService.isEmpty());
@@ -153,7 +153,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		}
 	
 		// Get the study data:
-		List<LearningUnit> studyFromService = feeManagementService.getStudy(accountId);
+		List<LearningUnit> studyFromService = feeManagementService.getLearningUnits(accountId);
 
 		// Validate the result:
 		assertStudy(testStudy, studyFromService);
@@ -173,8 +173,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		isTrue(feeBaseFromService.getStudentData().isEmpty());
 		notNull(feeBaseFromService.getPeriodData());
 		isTrue(feeBaseFromService.getPeriodData().isEmpty());
-		notNull(feeBaseFromService.getStudy());
-		isTrue(feeBaseFromService.getStudy().isEmpty());
+		notNull(feeBaseFromService.getLearningUnits());
+		isTrue(feeBaseFromService.getLearningUnits().isEmpty());
 		notNull(feeBaseFromService.getAccount());
 		assertAccount(testAccount, feeBaseFromService.getAccount());
 	}
@@ -417,7 +417,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit testLearningUnit = feeBaseFromService.getStudy().get(0);
+		LearningUnit testLearningUnit = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Call the service:
 		KeyPair newKeyPair = feeManagementService.createKeyPair(testLearningUnit, name, value);
@@ -439,7 +439,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 	public void testCreateLearningUnitKeyPairWithExistingName() throws Exception {
 		// Test objects:
 		FeeBase testFeeBase = createTestFeeBase();
-		LearningUnit testLearningUnit = testFeeBase.getStudy().get(0);
+		LearningUnit testLearningUnit = testFeeBase.getLearningUnits().get(0);
 		String nameThatHasAlreadyBeenUsed = "boo";
 		String value = "absolutely new value";
 		
@@ -572,7 +572,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Call the service:
 		String kpValueFromService = feeManagementService.getKeyPairValue(luFromService, existingKeyPairName);
@@ -589,7 +589,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Call the service:
 		String kpValueFromService = feeManagementService.getKeyPairValue(luFromService, nonExistingKeyPairName);
@@ -721,7 +721,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Call the service:
 		feeManagementService.removeKeyPair(luFromService, existingKeyPairName);
@@ -740,13 +740,13 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Call the service:
 		feeManagementService.removeKeyPair(luFromService, existingKeyPairName);
 		
 		// Validate:
-		assertStudy(testFeeBase.getStudy(), feeBaseFromService.getStudy());
+		assertStudy(testFeeBase.getLearningUnits(), feeBaseFromService.getLearningUnits());
 	}
 
 	@Test
@@ -998,7 +998,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		Long updatedId = luFromService.getId();
 		
 		// Assert the value is still the same:
@@ -1013,7 +1013,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		// Find the same learning unit:
 		LearningUnit updatedLu = null;
 		
-		for (LearningUnit lu : freshFeeBaseFromService.getStudy()) {
+		for (LearningUnit lu : freshFeeBaseFromService.getLearningUnits()) {
 			if (lu.getId().equals(updatedId)) {
 				updatedLu = lu;
 				break;
@@ -1035,7 +1035,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get the FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Assert the value is still the same:
 		assertEquals(existingValue, feeManagementService.getKeyPairValue(luFromService, name));
@@ -1154,7 +1154,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Test contains an existing name:
 		String existingName = "boo";
@@ -1241,7 +1241,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Create a few new KeyPairs:
 		String newName1 = "new name 1";
@@ -1288,7 +1288,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Set new date values:
 		Calendar newDateFrom = Calendar.getInstance();
@@ -1330,7 +1330,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Set new date values:
 		Calendar newDateFrom = Calendar.getInstance();
@@ -1390,8 +1390,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
-		LearningUnit luFromService2 = feeBaseFromService.getStudy().get(1);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
+		LearningUnit luFromService2 = feeBaseFromService.getLearningUnits().get(1);
 		
 		// Set new date values for LearningPeriod 1:
 		Calendar newDateFrom = Calendar.getInstance();
@@ -1465,7 +1465,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Set new date values:
 		Calendar newDateFrom = Calendar.getInstance();
@@ -1523,7 +1523,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Set new date values:
 		Calendar newDateFrom = Calendar.getInstance();
@@ -1581,7 +1581,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
-		LearningUnit luFromService = feeBaseFromService.getStudy().get(0);
+		LearningUnit luFromService = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Set new date values:
 		Calendar newDateFrom = Calendar.getInstance();
@@ -1778,11 +1778,11 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		persistAccount();
 		
 		// Create LearningUnits:
-		List<LearningUnit> study = createLearningUnits();
+		List<LearningUnit> learningUnits = createLearningUnits();
 		
 		try {
 			// Persist PeriodKeyPairs:
-			for (LearningUnit lu : study) {
+			for (LearningUnit lu : learningUnits) {
 				em.persist(lu);
 			}
 			
@@ -1791,7 +1791,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 			return null;
 		}
 		
-		return study;
+		return learningUnits;
 	}
 	
 	private List<LearningUnit> createLearningUnits() {
@@ -1863,7 +1863,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		feeBase.setAccount(testAccount);
 		feeBase.setStudentData(testStudentData);
 		feeBase.setPeriodData(testPeriodData);
-		feeBase.setStudy(testStudy);
+		feeBase.setLearningUnits(testStudy);
 		
 		return feeBase;
 	}
@@ -1879,7 +1879,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		notNull(actual);
 		assertKeyPairs(expected.getStudentData(), actual.getStudentData());
 		assertKeyPairs(expected.getPeriodData(), actual.getPeriodData());
-		assertStudy(expected.getStudy(), actual.getStudy());
+		assertStudy(expected.getLearningUnits(), actual.getLearningUnits());
 	}
 	
 	private <T extends KeyPair> void assertKeyPairs(List<T> expected, List<T> actual) {
