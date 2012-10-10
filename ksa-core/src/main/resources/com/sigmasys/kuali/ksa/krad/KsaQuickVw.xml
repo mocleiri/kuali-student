@@ -412,7 +412,7 @@
     A section devoted to display of Memoranda using a table and drill down to a Memorandum
     ********************************************************************************************************************
     -->
-    <bean id="memoGroup" parent="Uif-HorizontalBoxGroup">
+    <bean id="memoGroup" parent="Uif-HorizontalBoxGroup" p:width="45%">
         <property name="cssClasses">
             <list merge="true">
                 <value>ksa-group-border</value>
@@ -554,8 +554,7 @@
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
-                              p:style="resize:none;"
-                              p:watermarkText="Type in information text here..."/>
+                              p:style="resize:none;"/>
                     </property>
                 </bean>
             </list>
