@@ -136,14 +136,16 @@ public class KsaStudentAccountsController extends GenericSearchController {
                     } else {
                        rollUpDebit = rollUpDebit.add(t.getAmount());
                     }
+                } /*else {*/
+                /* Show all transactions, not just the non-rolled up ones */
+                unGroupedTransactionModelList.add(transactionModel);
+                if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
+                   unGroupedCredit = unGroupedCredit.add(t.getAmount());
                 } else {
-                    unGroupedTransactionModelList.add(transactionModel);
-                    if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                       unGroupedCredit = unGroupedCredit.add(t.getAmount());
-                    } else {
-                       unGroupedDebit = unGroupedDebit.add(t.getAmount());
-                    }
+                   unGroupedDebit = unGroupedDebit.add(t.getAmount());
                 }
+
+                /*}*/
             }
 
             form.setRollUpCredit(rollUpCredit.toString());
