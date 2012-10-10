@@ -50,7 +50,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         accountService.getOrCreateAccount(userId);
     }
 
-    //@Test
+    @Test
     public void fireFeeAssessmentRules() throws Exception {
 
         DroolsContext droolsContext = new DroolsContext();
@@ -59,10 +59,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-        // Using the database
-        //droolsService.setUseClasspath(false);
-
-        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        droolsContext = droolsService.fireRules("feeRuleSet1.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
         Assert.notNull(droolsContext);
         Assert.notNull(droolsContext.getAccount());
@@ -79,7 +76,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.isTrue(currency.getCode().equals("USD"));
 
         // Using the classpath
-        //droolsService.setUseClasspath(true);
+        droolsService.setUseClasspath(true);
 
         currency = droolsService.fireRules("drools/currency.xdrl", ResourceType.XDRL, currency);
 
@@ -89,7 +86,6 @@ public class DroolsServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    //@Rollback(false)
     public void persistRules() throws Exception {
 
         String ruleSetBody = CommonUtils.getResourceAsString("drools/ksa.dsl");
@@ -98,13 +94,13 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.hasLength(ruleSetBody);
 
         RuleSet ruleSet = new RuleSet();
-        ruleSet.setId("ksa.dsl");
+        ruleSet.setId("ksa_test.dsl");
         ruleSet.setRules(ruleSetBody);
 
         String ruleSetId = droolsPersistenceService.persistRules(ruleSet);
 
         Assert.notNull(ruleSetId);
-        Assert.isTrue(ruleSetId.equals("ksa.dsl"));
+        Assert.isTrue(ruleSetId.equals("ksa_test.dsl"));
 
         ruleSetBody = CommonUtils.getResourceAsString("drools/fee1.dslr");
 
@@ -112,13 +108,13 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.hasLength(ruleSetBody);
 
         ruleSet = new RuleSet();
-        ruleSet.setId("fee1.dslr");
+        ruleSet.setId("fee_test.dslr");
         ruleSet.setRules(ruleSetBody);
 
         ruleSetId = droolsPersistenceService.persistRules(ruleSet);
 
         Assert.notNull(ruleSetId);
-        Assert.isTrue(ruleSetId.equals("fee1.dslr"));
+        Assert.isTrue(ruleSetId.equals("fee_test.dslr"));
 
     }
 

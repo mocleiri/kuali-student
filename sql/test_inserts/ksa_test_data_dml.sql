@@ -1130,3 +1130,56 @@ Insert into KSSA_UI_STRING (ID, LOCALE, TEXT, MAX_LENGTH, IS_OVERRIDDEN) values 
 --- INSERTING USER PREFERENCES ---
 Insert into KSSA_USER_PREF (ACNT_ID_FK, NAME, VALUE) values ('admin', 'ksa.locale.lang', 'fr');
 Insert into KSSA_USER_PREF (ACNT_ID_FK, NAME, VALUE) values ('admin', 'ksa.locale.country', 'FR');
+
+
+--- INSERTING RULE SETS ---
+set sqlblanklines on
+set sqlterminator '!'
+
+Insert into KSSA_RULE_SET (ID, RULE_SET) values ('ksa.dsl',
+'# The KSA DSL definition
+[when][]Student account ID is "{userId}" = context : DroolsContext(account.id == "{userId}");
+[when][]Study code is in "{studyCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneStudyCode(feeBase, "{studyCodes}"));
+[when][]Major code is in "{majorCodes}" = context : DroolsContext(feeManagementService.containsAtLeastOneMajorCode(feeBase, "{majorCodes}"));
+
+[then][]Use "{transactionTypeId}" code to charge ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
+[then][]Use "{transactionTypeId}" code to credit ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
+')!
+
+Insert into KSSA_RULE_SET (ID, RULE_SET) values ('feeRuleSet1.dslr',
+'import java.util.*;
+import java.math.*;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.drools.*;
+
+expander ksa.dsl
+
+global FeeBase feeBase;
+
+/////////////////////// Beginning of rule definitions /////////////////////////////
+
+rule "Tuition 1"
+when
+    Student account ID is "admin"
+then
+    Use "1020" code to charge $345.78
+    Use "pp" code to credit $50.0
+end
+
+rule "Tuition 2"
+when
+    Major code is in "34444, 2345, MAJ1"
+then
+    Use "1020" code to charge $345.78
+    Use "1319" code to credit $50.0
+end
+
+rule "Tuition 3"
+when
+    Study code is in "MFRO, MABO, GOOG"
+then
+    Use "cash" code to credit $50.50
+end
+')!
+
+set sqlterminator ';'

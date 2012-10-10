@@ -58,10 +58,6 @@ public class DroolsService {
     // Map of <DRL file name, KnowledgeBase> objects
     private final Map<String, KnowledgeBase> knowledgeBases = new HashMap<String, KnowledgeBase>();
 
-    public DroolsService() {
-        // By default use resources from the classpath
-        setUseClasspath(true);
-    }
 
     @PostConstruct
     private void postConstruct() {
