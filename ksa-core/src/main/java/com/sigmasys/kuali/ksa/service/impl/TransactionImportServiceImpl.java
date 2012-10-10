@@ -124,7 +124,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         BigDecimal totalValueDebits = BigDecimal.ZERO;
         int numberOfAccepted = 0;
         int numberOfFailed = 0;
-        XMLGregorianCalendar ledgerDate;
+        XMLGregorianCalendar creationDate;
         com.sigmasys.kuali.ksa.model.Account firstAccount = null;
 
         ObjectFactory objectFactory = new ObjectFactory();
@@ -234,7 +234,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                             totalValueDebits = totalValueDebits.add(transaction.getAmount());
                         }
 
-                        ledgerDate = CalendarUtils.toXmlGregorianCalendar(transaction.getCreationDate());
+                        creationDate = CalendarUtils.toXmlGregorianCalendar(transaction.getCreationDate());
 
                         // add the KsaTransaction object to the accepted KsaTransactionAndTransactionDetails
                         accepted.getKsaTransactionAndTransactionDetails().add(ksaTransaction);
@@ -242,12 +242,12 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                         numberOfAccepted++;
                         acceptedValue = acceptedValue.add(transaction.getAmount());
 
-                        // add the ID and LedgerDate to the TransactionDetails and then to the KsaTransactionAndTransactionDetails
+                        // add the ID and Creation Date to the TransactionDetails and then to the KsaTransactionAndTransactionDetails
                         KsaBatchTransactionResponse.Accepted.TransactionDetails transactionDetails =
                                 new KsaBatchTransactionResponse.Accepted.TransactionDetails();
 
                         transactionDetails.setTransactionId(transaction.getId().toString());
-                        transactionDetails.setAcceptedDate(ledgerDate);
+                        transactionDetails.setAcceptedDate(creationDate);
                         accepted.getKsaTransactionAndTransactionDetails().add(transactionDetails);
 
                     } catch (Exception e) {

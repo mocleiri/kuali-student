@@ -56,7 +56,7 @@ public class TransactionModel extends AbstractModel {
 
     public static final String COLUMN_EFFECTIVE_DATE = "trans_effective_date";
     public static final String COLUMN_ORIGINATION_DATE = "trans_orig_date";
-    public static final String COLUMN_LEDGER_DATE = "trans_ledger_date";
+    public static final String COLUMN_CREATION_DATE = "trans_ledger_date";
 
     public static final String COLUMN_EXTERNAL_ID = "trans_external_id";
     public static final String COLUMN_GL_ENTRY_GENERATED = "trans_gl_entry_generated";
@@ -143,12 +143,12 @@ public class TransactionModel extends AbstractModel {
         set(COLUMN_INTERNAL, internal);
     }
 
-    public Date getLedgerDate() {
-        return get(COLUMN_LEDGER_DATE);
+    public Date getCreationDate() {
+        return get(COLUMN_CREATION_DATE);
     }
 
-    public void setLedgerDate(Date ledgerDate) {
-        set(COLUMN_LEDGER_DATE, ledgerDate);
+    public void setCreationDate(Date creationDate) {
+        set(COLUMN_CREATION_DATE, creationDate);
     }
 
     public Double getLockedAllocatedAmount() {

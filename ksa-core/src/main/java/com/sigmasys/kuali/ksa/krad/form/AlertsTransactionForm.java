@@ -15,7 +15,7 @@ public class AlertsTransactionForm extends AbstractViewModel {
 
     private BigDecimal totalAmnt = new BigDecimal(BigInteger.ZERO);
 
-    private Date lastLedgerDate;
+    private Date lastCreationDate;
 
     private String lastStatementText;
 
@@ -69,7 +69,7 @@ public class AlertsTransactionForm extends AbstractViewModel {
 
         if (this.charges != null) {
             try {
-                lastLedgerDate = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1970");
+                lastCreationDate = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1970");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -80,15 +80,15 @@ public class AlertsTransactionForm extends AbstractViewModel {
                 totalAmnt = totalAmnt.add(charge.getAmount());
 
                 // compare to get the latest ledger and effective date
-                Date ledgerDate = charge.getCreationDate();
+                Date creationDate = charge.getCreationDate();
                 String tranStatement = charge.getStatementText();
 
-                if (ledgerDate.compareTo(lastLedgerDate) > 0) {
-                    lastLedgerDate = ledgerDate;
+                if (creationDate.compareTo(lastCreationDate) > 0) {
+                    lastCreationDate = creationDate;
                     lastStatementText = tranStatement;
-                } else if (ledgerDate.compareTo(lastLedgerDate) < 0) {
+                } else if (creationDate.compareTo(lastCreationDate) < 0) {
                     // skip setting earliest date, holding current value
-                } else if (ledgerDate.compareTo(lastLedgerDate) == 0) {
+                } else if (creationDate.compareTo(lastCreationDate) == 0) {
                     // chances of both dates being the same is minimum or maximum
                     // might have to compare another field to make a determination
                 } else {
@@ -98,23 +98,6 @@ public class AlertsTransactionForm extends AbstractViewModel {
         }
     }
 
-    /**
-     * Get the last ledger date
-     *
-     * @return
-     */
-    public Date getLastLedgerDate() {
-        return lastLedgerDate;
-    }
-
-    /**
-     * Set the last ledger date
-     *
-     * @param lastLedgerDate
-     */
-    public void setLastLedgerDate(Date lastLedgerDate) {
-        this.lastLedgerDate = lastLedgerDate;
-    }
 
     /**
      * Get the Last StatementText
@@ -186,5 +169,13 @@ public class AlertsTransactionForm extends AbstractViewModel {
      */
     public void setMaxQueryDate(Date maxQueryDate) {
         this.maxQueryDate = maxQueryDate;
+    }
+
+    public Date getLastCreationDate() {
+        return lastCreationDate;
+    }
+
+    public void setLastCreationDate(Date lastCreationDate) {
+        this.lastCreationDate = lastCreationDate;
     }
 }

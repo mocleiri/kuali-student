@@ -99,7 +99,7 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private String allocationLocked;
 
-   private Date ledgerDate;
+   private Date creationDate;
 
    private Date effectiveDate;
 
@@ -389,12 +389,12 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.generalLedgerType = generalLedgerType;
    }
 
-   public Date getLedgerDate() {
-      return ledgerDate;
+   public Date getCreationDate() {
+      return creationDate;
    }
 
-   public void setLedgerDate(Date ledgerDate) {
-      this.ledgerDate = ledgerDate;
+   public void setCreationDate(Date creationDate) {
+      this.creationDate = creationDate;
    }
 
    public Date getEffectiveDate() {

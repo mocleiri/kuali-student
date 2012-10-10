@@ -101,7 +101,7 @@
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastLedgerDate" p:label="Last Date">
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastCreationDate" p:label="Last Date">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
@@ -127,7 +127,7 @@
                         <bean parent="Uif-TextControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastLedgerDate" p:label="Last Date">
+                <bean parent="Uif-InputField-LabelTop" p:propertyName="lastCreationDate" p:label="Last Date">
                     <property name="control">
                         <bean parent="Uif-TextControl"/>
                     </property>
