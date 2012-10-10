@@ -56,7 +56,13 @@ public abstract class AbstractViewModel extends UifFormBase {
         }
     };
 
-
+    /*
+      This is a modification. The issue is to remove the dropdown searchType control in UifWidgetDefinitions
+      Should we decide to reuse then this constructor and the setting of the searchType should be removed
+     */
+    public AbstractViewModel() {
+       searchType = SearchTypeValue.ACCOUNT.name();
+    }
     protected ConfigService getConfigService() {
         return ContextUtils.getBean(ConfigService.class);
     }

@@ -269,9 +269,15 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setDaysLate2(latePeriod.getDaysLate2() != null ? latePeriod.getDaysLate2().toString() : "60");
         form.setDaysLate3(latePeriod.getDaysLate3() != null ? latePeriod.getDaysLate3().toString() : "90");
 
-        form.setAged30(chargeableAccount.getAmountLate1().toString());
-        form.setAged60(chargeableAccount.getAmountLate2().toString());
-        form.setAged90(chargeableAccount.getAmountLate3().toString());
+        if (chargeableAccount.getAmountLate1() != null) {
+          form.setAged30(chargeableAccount.getAmountLate1().toString());
+        }
+        if (chargeableAccount.getAmountLate2() != null) {
+          form.setAged60(chargeableAccount.getAmountLate2().toString());
+        }
+        if (chargeableAccount.getAmountLate3() != null) {
+          form.setAged90(chargeableAccount.getAmountLate3().toString());
+        }
 
         BigDecimal agedTotal = BigDecimal.ZERO;
 
