@@ -528,7 +528,6 @@
         <property name="layoutManager.richTable.disableTableSort" value="false"/>
         <property name="readOnly" value="true"/>
         <property name="propertyName" value="currencies"/>
-        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
         <!--<property name="applyDefaultCellWidths" value="false"/>-->
         <property name="items">
             <list>

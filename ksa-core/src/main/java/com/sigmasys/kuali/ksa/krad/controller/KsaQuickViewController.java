@@ -288,7 +288,9 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setPastDueAmount(pastDue.toString());
         form.setBalanceAmount(balance.toString());
         form.setFutureAmount(future.toString());
-        form.setDefermentAmount(deferment.toString());
+        if (deferment != null) {
+           form.setDefermentAmount(deferment.toString());
+        }
 
         form.setAlerts(informationService.getAlerts(userId));
 

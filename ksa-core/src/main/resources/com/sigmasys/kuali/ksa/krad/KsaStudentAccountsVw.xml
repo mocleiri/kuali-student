@@ -110,11 +110,10 @@
     <bean id="homeQuickOptions" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
           p:title="Quick Menu"
-          p:instructionalText="">
+          p:instructionalText="This is the KSA home page. Here you would see a dashboard of actions available to the logged in user.">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-
             </list>
         </property>
     </bean>
