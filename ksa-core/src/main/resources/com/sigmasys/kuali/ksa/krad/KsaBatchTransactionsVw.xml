@@ -118,6 +118,13 @@
                                           p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                                 </property>-->
                             </bean>
+                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageAccounts"
+                                  p:actionLabel="Age All Accounts">
+                                <!--<property name="actionImage">
+                                    <bean parent="Uif-ImageField"
+                                          p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
+                                </property>-->
+                            </bean>
                             <!--  Status message -->
                             <bean parent="Uif-MessageField" p:messageText="@{uploadProcessState}"/>
                         </list>

@@ -190,4 +190,21 @@ public class KsaBatchTransactionsController extends GenericSearchController {
       // do refresh stuff...
       return getUIFModelAndView(form);
    }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
+   @RequestMapping(method= RequestMethod.POST, params="methodToCall=ageAccounts")
+   public ModelAndView ageAccounts(@ModelAttribute("KualiForm") KsaBatchTransactionsForm form, BindingResult result,
+                               HttpServletRequest request, HttpServletResponse response) {
+      // do ageAccounts stuff...
+
+
+      return getUIFModelAndView(form);
+   }
 }
