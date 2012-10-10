@@ -217,7 +217,7 @@
     <bean id="ungroupedTransactionsList" parent="Uif-Disclosure-TableCollectionSection"
           p:layoutManager.numberOfColumns="5"
           p:title=""
-          p:instructionalText="The following table is a list of Transactions not included in a Roll-up"
+          p:instructionalText="The following table is a list of Transactions"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true"
           p:width="85%">

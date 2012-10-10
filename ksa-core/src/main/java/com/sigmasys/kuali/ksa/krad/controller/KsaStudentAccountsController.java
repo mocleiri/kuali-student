@@ -122,7 +122,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
                     boolean found = false;
                     for(TransactionModel m : rollUpTransactionModelList){
                         Rollup r = m.getRollup();
-                        if(r.getId().equals(t.getId())){
+                        if(r.getId().equals(tmRollup.getId())){
                             m.setAmount(m.getAmount().add(transactionModel.getAmount()));
                             found = true;
                             break;
