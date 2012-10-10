@@ -174,7 +174,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
-                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="ksaStudentAccountsVw?viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;rollupId=@{#line.rollup.id}&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>

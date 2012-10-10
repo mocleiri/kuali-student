@@ -116,8 +116,21 @@ public class KsaStudentAccountsController extends GenericSearchController {
                    currencyIsSet = true;
                 }
                 TransactionModel transactionModel = new TransactionModel(t);
-                if (t.getRollup() != null) {
-                    rollUpTransactionModelList.add(transactionModel);
+                Rollup tmRollup = t.getRollup();
+                if (tmRollup != null) {
+                    // Check if this rollup is already in there.
+                    boolean found = false;
+                    for(TransactionModel m : rollUpTransactionModelList){
+                        Rollup r = m.getRollup();
+                        if(r.getId().equals(t.getId())){
+                            m.setAmount(m.getAmount().add(transactionModel.getAmount()));
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found){
+                        rollUpTransactionModelList.add(transactionModel);
+                    }
                     if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
                        rollUpCredit = rollUpCredit.add(t.getAmount());
                     } else {
@@ -145,15 +158,31 @@ public class KsaStudentAccountsController extends GenericSearchController {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
-            Transaction t = transactionService.getTransaction(new Long(transactionId));
-            logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
+            Long rollupId;
+            try{
+                rollupId = new Long(request.getParameter("rollupId"));
+            } catch(NumberFormatException e){
+                throw new IllegalArgumentException("'rollupId' request parameter is invalid");
+            }
 
-            // the currency in effect for the transaction
-            // if no transactions then no need for a currency to convert values ?
-            setCurrency(form, t);
+            List<Transaction> transactions = transactionService.getTransactions(userId);
+            List<TransactionModel> rollups = new ArrayList<TransactionModel>();
 
-            TransactionModel transactionModel = new TransactionModel(t);
-            form.setByRollUpTransactionModelList(Arrays.asList(transactionModel));
+            for(Transaction t : transactions){
+                Rollup r = t.getRollup();
+
+                if(r != null && rollupId.equals(r.getId())){
+                    logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
+                    TransactionModel transactionModel = new TransactionModel(t);
+                    rollups.add(transactionModel);
+                }
+                // the currency in effect for the transaction
+                // if no transactions then no need for a currency to convert values ?
+                setCurrency(form, t);
+
+            }
+
+            form.setByRollUpTransactionModelList(rollups);
 
 
         } else if (pageId != null && pageId.equals("AccountOVTransactionDetailPage")) {
