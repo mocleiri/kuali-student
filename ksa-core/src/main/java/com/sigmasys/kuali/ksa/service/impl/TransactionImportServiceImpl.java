@@ -166,6 +166,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             ksaBatchTransactionResponse.setResponseToBatchIdentifier(uuidBatchIdentifier);
             batchSize = ksaTransactions.size();
 
+            String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+
             for (KsaTransaction ksaTransaction : ksaTransactions) {
 
                 // pre determine, qualify the transaction create accepted and rejected lists of transactions
@@ -175,11 +177,11 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                     errMsg = "Required values are missing from transaction";
                 } else if (!accountService.accountExists(ksaTransaction.getAccountIdentifier())) {
                     errMsg = "Account '" + ksaTransaction.getAccountIdentifier() + "' does not exist";
-                } else if (!transactionService.isTransactionAllowed(ksaTransaction.getAccountIdentifier(),
+                } else if (!transactionService.isTransactionAllowed(currentUserId,
                         ksaTransaction.getTransactionType(), effectiveDate)) {
                     errMsg = "Transaction is not allowed. Transaction Type = '" +
                             ksaTransaction.getTransactionType() + "', Effective Date = '" + effectiveDate +
-                            "', Account ID = '" + ksaTransaction.getAccountIdentifier() + "'";
+                            "', Account ID = '" + currentUserId + "'";
                 } else if (!isWithinCreditLimit(ksaTransaction.getAccountIdentifier())) {
                     errMsg = "Account '" + ksaTransaction.getAccountIdentifier() + "' has insufficient credit";
                 }

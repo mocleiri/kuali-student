@@ -269,12 +269,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         if (overrideBlocks) {
             if (!getAccessControlService().isTransactionTypeAllowed(creatorId, id.getId())) {
-                String errMsg = "Transaction type is not allowed for the given account = " + userId;
+                String errMsg = "Transaction type is not allowed for the given account = " + creatorId;
                 logger.error(errMsg);
                 throw new TransactionTypeNotAllowedException(errMsg);
             }
         } else if (!isTransactionAllowed(creatorId, id.getId(), effectiveDate)) {
-            String errMsg = "Transaction is not allowed for the given account = " + userId;
+            String errMsg = "Transaction is not allowed for the given account = " + creatorId;
             logger.error(errMsg);
             throw new TransactionNotAllowedException(errMsg);
         }
