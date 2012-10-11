@@ -1,35 +1,103 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
+import com.sigmasys.kuali.ksa.model.FeeBase;
 import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
 import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.AccountImportService;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
-import com.sigmasys.kuali.ksa.model.FeeBase;
 import com.sigmasys.kuali.ksa.transform.KeyPair;
 import com.sigmasys.kuali.ksa.transform.StudentProfile;
+import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 
 @Service("accountImportService")
 @Transactional(readOnly = false)
 public class AccountImportServiceImpl implements AccountImportService {
+
+	/**
+	 * XMLSchema for the Student Profile.
+	 */
+	private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/student-profile.xsd";
+	
+	/**
+	 * XML schema file.
+	 */
+	private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
+	
+	/**
+	 * Static XML schema validator.
+	 */
+	private final static XmlSchemaValidator schemaValidator =
+			new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
+	
+	/**
+	 * The logger.
+	 */
+	private static final Log logger = LogFactory.getLog(AccountImportServiceImpl.class);
+	
 
     @Autowired
     private AccountService accountService;
 
     @Autowired
     private FeeManagementService feeManagementService;
+    
 
+	/**
+	 * Performs import of a student profile from the specified XML content of the profile.
+	 * Refer to the "Process Diagrams" design document for a detailed depiction of the process and logic.
+	 * This method validates the XML schema, unmarshalls the XML text into a <code>StudentProfile</code> object
+	 * and invokes the overloaded "importStudentProfile" method for import.
+	 * 
+	 * @param xmlContent XML content of a Student profile.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
+	 * @throws RuntimeException If any error is encountered during XML schema validation or unmarshalling. 
+	 * The original exception (if it exists) is wrapped in a <code>RuntimeException</code>.
+	 */
+	@Override
+	public void importStudentProfile(String xml) {
+		// Validate the input:
+		if (StringUtils.isBlank(xml)) {
+			throw new IllegalArgumentException("Student profile XML is null. Abort import.");
+		}
+		
+		// Validate the XML schema:
+		if (!schemaValidator.validateXml(xml)) {
+			throw new RuntimeException("The student profile XML schema is invalid");
+		}
+		
+		try {
+			// Unmarshal the object:
+			JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			StringReader reader = new StringReader(xml);
+			StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+			
+			// Invoke import:
+			importStudentProfile(profile);
+		} catch (Throwable t) {
+			logger.error("Error importing student profile.", t);
+			
+			throw new RuntimeException("Error importing student profile.", t);
+		}
+	}
 
     /**
      * Performs import of a student profile.
@@ -40,11 +108,16 @@ public class AccountImportServiceImpl implements AccountImportService {
      *
      * @param studentProfile A student's profile object.
      * @throws IllegalArgumentException If "studentProfile" is invalid.
+     * @throws UserNotFoundException	If an account does not exist in the system.
      * @throws RuntimeException         If student profile import encountered an error.
      */
     @Override
     public void importStudentProfile(StudentProfile studentProfile) {
         // Step 1: Validating the XML schema is done prior to invoking this method by the JAX-WS framework
+    	// Validate the argument object instead:
+    	if (studentProfile == null) {
+    		throw new IllegalArgumentException("Student profile is null. Abort import.");
+    	}
 
         // Step 2: Validating the account
         String accountId = studentProfile.getAccountIdentifier();

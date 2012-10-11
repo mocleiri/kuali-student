@@ -20,4 +20,11 @@ public interface AccountImportService {
 	 * @param studentProfile A student's profile object. 
 	 */
 	void importStudentProfile(StudentProfile studentProfile);
+	
+	/**
+	 * Performs import of a student profile from the specified XML content of the profile.
+	 * 
+	 * @param xmlContent XML content of a Student profile.
+	 */
+	void importStudentProfile(String xml);
 }
