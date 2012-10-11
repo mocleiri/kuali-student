@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +50,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void fireFeeAssessmentRulesFromDb() throws Exception {
+    public void fireFeeAssessmentRules() throws Exception {
 
         DroolsContext droolsContext = new DroolsContext();
         droolsContext.setAccount(accountService.getFullAccount("admin"));
@@ -59,30 +58,14 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-        droolsContext = droolsService.fireRules("feeRuleSet1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        //droolsContext = droolsService.fireRules("feeRuleSet1.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
         Assert.notNull(droolsContext);
         Assert.notNull(droolsContext.getAccount());
         Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
 
     }
-
-     //@Test
-     public void fireFeeAssessmentRulesFromClasspath() throws Exception {
-
-           DroolsContext droolsContext = new DroolsContext();
-           droolsContext.setAccount(accountService.getFullAccount("admin"));
-
-           Map<String, Object> globalParams = new HashMap<String, Object>();
-           globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
-
-           droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
-
-           Assert.notNull(droolsContext);
-           Assert.notNull(droolsContext.getAccount());
-           Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
-
-     }
 
     //@Test
     public void fireCurrencyRules() throws Exception {

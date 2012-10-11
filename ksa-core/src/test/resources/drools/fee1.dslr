@@ -13,7 +13,7 @@ global FeeBase feeBase;
 
 rule "Tuition 1"
 when
-    Student account ID is "admin"
+    (Student account ID is "admin")
 then
     Use "1020" code to charge $345.78
     Use "pp" code to credit $50.0
@@ -21,7 +21,7 @@ end
 
 rule "Tuition 2"
 when
-    Major code is in "34444, 2345, MAJ1"
+    (Major code is "34444, 2345, MAJ1")
 then
     Use "1020" code to charge $345.78
     Use "1319" code to credit $50.0
@@ -29,7 +29,21 @@ end
 
 rule "Tuition 3"
 when
-    Study code is in "MFRO, MABO, GOOG"
+    (LU code is "MFRO, MABO, GOOG")
+then
+    Use "cash" code to credit $50.50
+end
+
+rule "Tuition 4"
+when
+    ("a" equals "a" and LU code is "WARTY--")
+then
+    Use "cash" code to credit $950.50
+end
+
+rule "Tuition 5"
+when
+    (LU code is "MFRO, MABO" and Major code is "34444, 2345, MA34")
 then
     Use "cash" code to credit $50.50
 end

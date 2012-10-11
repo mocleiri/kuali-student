@@ -250,13 +250,14 @@ public interface FeeManagementService {
     /**
      * Check the existence of at least one of the given major codes in a <code>FeeBase</code> object.
      *
+     * @param feeBase    A <code>FeeBase</code> that contains a student's information.
      * @param majorCodes a list of major codes represented by a <code>String</code> value and separated by commas.
      * @return <code>true</code> if <code>FeeBase</code> contains at least one major code, <code>false</code> - otherwise.
      */
     boolean containsMajorCode(FeeBase feeBase, String majorCodes);
 
     /**
-     * Returns the codes of all classes taken by a student.
+     * Returns the LU codes of all classes taken by a student.
      *
      * @param feeBase A <code>FeeBase</code> that contains a student's information.
      * @return All study course codes.
@@ -264,12 +265,60 @@ public interface FeeManagementService {
     List<String> getLearningUnitCodes(FeeBase feeBase);
 
     /**
-     * Check the existence of at least one of the given study codes in a <code>FeeBase</code> object.
+     * Returns the LU codes of all classes taken by a student for the given set of LU statuses.
      *
-     * @param learningUnitCodes a list of study codes represented by a <code>String</code> value and separated by commas.
-     * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
+     * @param feeBase  A <code>FeeBase</code> that contains a student's information.
+     * @param statuses A <code>java.util.String</code> array of statuses
+     * @return All study course codes.
+     */
+    List<String> getLearningUnitCodes(FeeBase feeBase, String... statuses);
+
+    /**
+     * Returns the LU section codes of all classes taken by a student for the given set of LU statuses.
+     *
+     * @param feeBase  A <code>FeeBase</code> that contains a student's information.
+     * @param statuses A <code>java.util.String</code> array of statuses
+     * @return All study course codes.
+     */
+    List<String> getSectionCodes(FeeBase feeBase, String... statuses);
+
+    /**
+     * Check the existence of at least one of the given LU section codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param sectionCodes a list of section codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
+     */
+    boolean containsSectionCode(FeeBase feeBase, String sectionCodes);
+
+    /**
+     * Check the existence of at least one of the given LU section codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param sectionCodes a list of section codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses     a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
+     */
+    boolean containsSectionCode(FeeBase feeBase, String sectionCodes, String statuses);
+
+    /**
+     * Check the existence of at least one of the given LU codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param learningUnitCodes a list of LU codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
      */
     boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes);
+
+    /**
+     * Check the existence of at least one of the given LU codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param learningUnitCodes a list of LU codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses          a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
+     */
+    boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes, String statuses);
 
     /**
      * Checks if a student is a resident.
@@ -290,7 +339,7 @@ public interface FeeManagementService {
     /**
      * Sets a course's status and saves it.
      *
-     * @param learningUnit A study course.
+     * @param learningUnit A LU course.
      * @param status       The new course status.
      */
     void setCourseStatus(LearningUnit learningUnit, String status);
@@ -298,12 +347,33 @@ public interface FeeManagementService {
     /**
      * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
      *
-     * @param learningUnit A study course.
+     * @param learningUnit A LU course.
      * @param status       The new course status.
      * @param keyPairName  The name of a <code>KeyPair</code> to add.
      * @param keyPairValue The value of a <code>KeyPair</code> to add.
      */
     void setCourseStatus(LearningUnit learningUnit, String status, String keyPairName, String keyPairValue);
+
+    /**
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
+     *
+     * @param learningUnitCode A LU code.
+     * @param status           The new course status.
+     * @param keyPairName      The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue     The value of a <code>KeyPair</code> to add.
+     */
+    void setCourseStatusForLearningUnit(String learningUnitCode, String status, String keyPairName, String keyPairValue);
+
+    /**
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs with
+     * the given section code.
+     *
+     * @param sectionCode  A LU section code.
+     * @param status       The new course status.
+     * @param keyPairName  The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue The value of a <code>KeyPair</code> to add.
+     */
+    void setCourseStatusForSection(String sectionCode, String status, String keyPairName, String keyPairValue);
 
     /**
      * Returns the total number of credits of all study courses with the specified status, which can be <code>null</code>.

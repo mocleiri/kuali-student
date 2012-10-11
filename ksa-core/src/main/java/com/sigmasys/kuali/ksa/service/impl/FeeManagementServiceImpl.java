@@ -22,7 +22,7 @@ import com.sigmasys.kuali.ksa.service.FeeManagementService;
 import com.sigmasys.kuali.ksa.model.FeeBase;
 
 @Service("feeManagementService")
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @SuppressWarnings("unchecked")
 public class FeeManagementServiceImpl extends GenericPersistenceService implements FeeManagementService {
 
@@ -505,10 +505,36 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public List<String> getLearningUnitCodes(FeeBase feeBase) {
+        return getLearningUnitCodes(feeBase, (String[]) null);
+    }
+
+    private Set<String> toSet(String... items) {
+        Set<String> itemSet = new HashSet<String>();
+        if (items != null) {
+            for (String item : items) {
+                if (item != null) {
+                    itemSet.add(item.trim());
+                }
+            }
+        }
+        return itemSet;
+    }
+
+    /**
+     * Returns the codes of all classes taken by a student for the given set of LU statuses.
+     *
+     * @param feeBase  A <code>FeeBase</code> that contains a student's information.
+     * @param statuses A <code>java.util.String</code> array of statuses
+     * @return All study course codes.
+     */
+    @Override
+    public List<String> getLearningUnitCodes(FeeBase feeBase, String... statuses) {
+        Set<String> statusSet = toSet(statuses);
         List<String> studyCodes = new LinkedList<String>();
         for (LearningUnit lu : feeBase.getLearningUnits()) {
             String luUnitCode = lu.getUnitCode();
-            if (luUnitCode != null) {
+            String luStatus = lu.getStatus();
+            if (luUnitCode != null && (statusSet.isEmpty() || (luStatus != null && statusSet.contains(luStatus)))) {
                 studyCodes.add(luUnitCode.toUpperCase());
             }
         }
@@ -516,14 +542,83 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Check the existence of at least one of the given study codes in a <code>FeeBase</code> object.
+     * Returns the LU section codes of all classes taken by a student for the given set of LU statuses.
      *
-     * @param learningUnitCodes a list of study codes represented by a <code>String</code> value and separated by commas.
-     * @return <code>true</code> if <code>FeeBase</code> contains at least one study code, <code>false</code> - otherwise.
+     * @param feeBase  A <code>FeeBase</code> that contains a student's information.
+     * @param statuses A <code>java.util.String</code> array of statuses
+     * @return All study course codes.
+     */
+    @Override
+    public List<String> getSectionCodes(FeeBase feeBase, String... statuses) {
+        Set<String> statusSet = toSet(statuses);
+        List<String> sectionCodes = new LinkedList<String>();
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
+            String luSectionCode = lu.getUnitSection();
+            String luStatus = lu.getStatus();
+            if (luSectionCode != null && (statusSet.isEmpty() || (luStatus != null && statusSet.contains(luStatus)))) {
+                sectionCodes.add(luSectionCode.toUpperCase());
+            }
+        }
+        return sectionCodes;
+    }
+
+    /**
+     * Check the existence of at least one of the given LU section codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param sectionCodes a list of section codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
+     */
+    @Override
+    public boolean containsSectionCode(FeeBase feeBase, String sectionCodes) {
+        return containsSectionCode(feeBase, sectionCodes, null);
+    }
+
+    /**
+     * Check the existence of at least one of the given LU section codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param sectionCodes a list of section codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses     a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
+     */
+    @Override
+    public boolean containsSectionCode(FeeBase feeBase, String sectionCodes, String statuses) {
+        String[] statusArray = (statuses != null) ? statuses.split(",") : null;
+        List<String> sectionCodeList = getSectionCodes(feeBase, statusArray);
+        for (String luCode : sectionCodes.split(",")) {
+            if (sectionCodeList.contains(luCode.trim().toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Check the existence of at least one of the given LU codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param learningUnitCodes a list of LU codes represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
      */
     @Override
     public boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes) {
-        List<String> learningUnitCodesList = getLearningUnitCodes(feeBase);
+        return containsLearningUnitCode(feeBase, learningUnitCodes, null);
+    }
+
+    /**
+     * Check the existence of at least one of the given LU codes in a <code>FeeBase</code> object.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param learningUnitCodes a list of LU codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses          a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return <code>true</code> if <code>FeeBase</code> contains at least one LU code, <code>false</code> - otherwise.
+     */
+    @Override
+    public boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes, String statuses) {
+        String[] statusArray = (statuses != null) ? statuses.split(",") : null;
+        List<String> learningUnitCodesList = getLearningUnitCodes(feeBase, statusArray);
         for (String luCode : learningUnitCodes.split(",")) {
             if (learningUnitCodesList.contains(luCode.trim().toUpperCase())) {
                 return true;
@@ -605,6 +700,54 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
+     *
+     * @param learningUnitCode A LU code.
+     * @param status           The new course status.
+     * @param keyPairName      The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue     The value of a <code>KeyPair</code> to add.
+     */
+    @Override
+    public void setCourseStatusForLearningUnit(String learningUnitCode, String status, String keyPairName, String keyPairValue) {
+        LearningUnit learningUnit = getLearningUnitByCode(learningUnitCode);
+        if (learningUnitCode != null) {
+            setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
+        }
+        // TODO: throw an unchecked exception if the learning unit has not been found - "Mike"
+    }
+
+    /**
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs with
+     * the given section code.
+     *
+     * @param sectionCode  A LU section code.
+     * @param status       The new course status.
+     * @param keyPairName  The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue The value of a <code>KeyPair</code> to add.
+     */
+    @Override
+    public void setCourseStatusForSection(String sectionCode, String status, String keyPairName, String keyPairValue) {
+        List<LearningUnit> learningUnits = getLearningUnitsBySection(sectionCode);
+        for (LearningUnit learningUnit : learningUnits) {
+            setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
+        }
+    }
+
+    protected LearningUnit getLearningUnitByCode(String unitCode) {
+        Query query = em.createQuery("select lu from LearningUnit where lu.unitCode = :unitCode");
+        query.setParameter("unitCode", unitCode);
+        List<LearningUnit> learningUnits = query.getResultList();
+        return CollectionUtils.isNotEmpty(learningUnits) ? learningUnits.get(0) : null;
+    }
+
+    protected List<LearningUnit> getLearningUnitsBySection(String section) {
+        Query query = em.createQuery("select lu from LearningUnit where lu.unitSection = :section");
+        query.setParameter("section", section);
+        return query.getResultList();
+    }
+
+
+    /**
      * Returns the total number of credits of all study courses with the specified status, which can be <code>null</code>.
      *
      * @param feeBase      A <code>FeeBase</code> that contains a student's information.
@@ -614,7 +757,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public int getNumOfCredits(FeeBase feeBase, String courseStatus) {
         int numOfCredits = 0;
-
         for (LearningUnit lu : feeBase.getLearningUnits()) {
             if (StringUtils.equalsIgnoreCase(lu.getStatus(), courseStatus)) {
                 if (lu.getCredit() != null) {
@@ -637,7 +779,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue) {
         int numOfCredits = 0;
-
         for (LearningUnit lu : feeBase.getLearningUnits()) {
             String kpValue = getKeyPairValue(feeBase, keyPairName);
 
@@ -663,7 +804,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public int getNumOfCredits(FeeBase feeBase, String sectionCode, String keyPairName, String keyPairValue) {
         int numOfCredits = 0;
-
         for (LearningUnit lu : feeBase.getLearningUnits()) {
             String kpValue = getKeyPairValue(feeBase, keyPairName);
 
@@ -674,7 +814,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
                 }
             }
         }
-
         return numOfCredits;
     }
 
@@ -691,7 +830,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue) {
         int numOfCredits = 0;
-
         for (LearningUnit lu : feeBase.getLearningUnits()) {
             String kpValue = getKeyPairValue(feeBase, keyPairName);
             String kpValue2 = getKeyPairValue(feeBase, secondKeyPairName);
@@ -703,7 +841,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
                 }
             }
         }
-
         return numOfCredits;
     }
 
