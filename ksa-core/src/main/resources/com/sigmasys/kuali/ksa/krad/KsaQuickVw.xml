@@ -201,7 +201,7 @@
     <bean id="quickViewSection"
           parent="Uif-HorizontalBoxSection"
           p:title="@{account.id}"
-          p:width="85%">
+          p:width="100%">
         <property name="items">
             <list>
                 <bean parent="Uif-VerticalBoxSection">
@@ -212,7 +212,7 @@
                     </property>
                 </bean>
 
-                <bean parent="Uif-VerticalBoxGroup">
+                <bean parent="Uif-VerticalBoxGroup" p:width="60%">
                     <property name="items">
                         <list>
                             <ref bean="biographicInformationGroup"/>
@@ -599,9 +599,85 @@
                     <property name="readOnly" value="true"/>
                     <property name="items">
                         <list>
-                            <bean parent="Uif-MessageField" p:messageText=" "/>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/alert.png" p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="10/10/2012" p:style="padding-left:6px;font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="Please contact University Customer Service Representative Hal Kanni-Helfew at (555) 867-5309." p:style="padding-left:6px; margin:0px;">
+                                        <property name="cssClasses">
+                                            <list merge="true">
+                                                <value>ksa-ellipsis</value>
+                                            </list>
+                                        </property></bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/flag.png" p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="09/26/2012" p:style="padding-left:6px;font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="Check #199 Bounced." p:style="padding-left:6px; margin:0px;">
+                                            <property name="cssClasses">
+                                                <list merge="true">
+                                                    <value>ksa-ellipsis</value>
+                                                </list>
+                                            </property></bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/flag.png" p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="09/11/2012" p:style="padding-left:6px;font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="Permenant address does not appear to be valid." p:style="padding-left:6px; margin:0px;">
+                                            <property name="cssClasses">
+                                                <list merge="true">
+                                                    <value>ksa-ellipsis</value>
+                                                </list>
+                                            </property></bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/alert.png" p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="10/09/2012" p:style="padding-left:6px; font-weight: bold; margin:0px"/>
+                                        <bean parent="Uif-MessageField" p:messageText="Please contact Supervising Cashier Bill Peymaster." p:style="padding-left:6px; margin:0px">
+                                            <property name="cssClasses">
+                                            <list merge="true">
+                                                <value>ksa-ellipsis</value>
+                                            </list>
+                                        </property></bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<bean parent="Uif-MessageField" p:messageText=" "/>
                             <bean parent="Uif-MessageField" p:messageText="Work in Progress..."/>
-                            <bean parent="Uif-MessageField" p:messageText=" "/>
+                            <bean parent="Uif-MessageField" p:messageText=" "/>-->
                         </list>
                     </property>
                 </bean>
@@ -909,7 +985,8 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-MessageField" p:messageText="Memos"/>
-                            <bean parent="Uif-Link" p:linkText="more" p:target="_self" p:style="font-size: .8em; float: right; padding-top:6px;"
+                            <bean parent="Uif-Link" p:linkText="more" p:target="_self"
+                                  p:style="font-size: .8em; float: right; padding-top:6px;"
                                   p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
@@ -923,7 +1000,102 @@
                     <property name="readOnly" value="true"/>
                     <property name="items">
                         <list>
-                            <ref bean="quickViewMemosTable"/>
+                            <!--<ref bean="quickViewMemosTable"/>-->
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/memo.png"
+                                              p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="10/10/2012"
+                                              p:style="padding-left:6px;font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField"
+                                              p:messageText="One more memo just to make sure all is well with the world. This is updated text. This is a third update."
+                                              p:style="padding-left:6px; margin:0px;">
+                                            <property name="cssClasses">
+                                                <list merge="true">
+                                                    <value>ksa-ellipsis</value>
+                                                </list>
+                                            </property>
+                                        </bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/memo.png"
+                                              p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="10/10/2012"
+                                              p:style="padding-left:6px;font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField"
+                                              p:messageText="This is a brand new memo just to try out the fancy new memo service that we have."
+                                              p:style="padding-left:6px; margin:0px;">
+                                            <property name="cssClasses">
+                                                <list merge="true">
+                                                    <value>ksa-ellipsis</value>
+                                                </list>
+                                            </property>
+                                        </bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/memo.png"
+                                              p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="10/10/2012"
+                                              p:style="padding-left:6px;font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField"
+                                              p:messageText="This is another memo to test. This has been edited."
+                                              p:style="padding-left:6px; margin:0px;">
+                                            <property name="cssClasses">
+                                                <list merge="true">
+                                                    <value>ksa-ellipsis</value>
+                                                </list>
+                                            </property>
+                                        </bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-HorizontalBoxGroup">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-margin-zero</value>
+                                    </list>
+                                </property>
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-ImageField" p:source="@{getContext()}/images/memo.png" p:style="margin:0px;"/>
+                                        <bean parent="Uif-MessageField" p:messageText="10/09/2012"
+                                              p:style="padding-left:6px; font-weight: bold; margin:0px;"/>
+                                        <bean parent="Uif-MessageField"
+                                              p:messageText="This is an example of the use of a MEMO. Can be used for documenting conversations or agreements made with the student. Follow up allows the user to add information to the Memo."
+                                              p:style="padding-left:6px; margin:0px;">
+                                            <property name="cssClasses">
+                                                <list merge="true">
+                                                    <value>ksa-ellipsis</value>
+                                                </list>
+                                            </property>
+                                        </bean>
+                                    </list>
+                                </property>
+                            </bean>
                         </list>
                     </property>
                 </bean>
@@ -991,11 +1163,11 @@
                 <bean parent="Uif-InputField" p:propertyName="text"
                       p:label="Description"
                       p:width="90%">
-                    <property name="cssClasses">
+                    <!--<property name="cssClasses">
                         <list merge="true">
                             <value>ksa-ellipsis</value>
                         </list>
-                    </property>
+                    </property>-->
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"/>  <!--p:style="resize:none;"-->
@@ -1080,8 +1252,7 @@
                       p:labelPlacement="TOP">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
-                              p:style="resize:none;"/>
+                        <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"/> <!--p:style="resize:none;"-->
                     </property>
                 </bean>
             </list>
