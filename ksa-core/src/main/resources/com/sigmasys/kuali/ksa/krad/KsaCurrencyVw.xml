@@ -149,10 +149,17 @@
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
         <property name="propertyName" value="currencies"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
-        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.richTable.render" value="true"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="layoutManager.applyDefaultCellWidths" value="false"/>
         <property name="layoutManager.richTable.disableTableSort" value="false"/>
+        <property name="layoutManager.richTable.templateOptions">
+            <map merge="true">
+                <entry key="bPaginate" value="true"/>
+                <entry key="iDisplayLength" value="20"/>
+            </map>
+        </property>
+
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Symbol"

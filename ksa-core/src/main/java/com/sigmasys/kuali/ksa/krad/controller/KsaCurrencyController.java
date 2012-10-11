@@ -158,6 +158,21 @@ public class KsaCurrencyController extends GenericSearchController {
     * @param response
     * @return
     */
+   @RequestMapping(method=RequestMethod.POST, params="methodToCall=replace")
+   public ModelAndView replace(@ModelAttribute ("KualiForm") KsaCurrencyForm form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+      // do cancel stuff...
+      return getUIFModelAndView(form);
+   }
+
+   /**
+    *
+    * @param form
+    * @param result
+    * @param request
+    * @param response
+    * @return
+    */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaCurrencyForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
