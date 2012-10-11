@@ -48,6 +48,8 @@
                     <property name="headerText" value="Biographic Information List"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
+                                  p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
                             <ref bean="biographicInformationPersonsSection"/>
                             <ref bean="biographicInformationPersonsSubSection"/>
                         </list>
@@ -57,6 +59,8 @@
                     <property name="headerText" value="Summary"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
+                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                             <ref bean="biographicInformationSummarySection"/>
                         </list>
                     </property>
@@ -68,6 +72,8 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
+                                    <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
+                                          p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPerson"
                                           p:actionLabel="Add"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -89,6 +95,8 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
+                                    <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
+                                          p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updatePerson"
                                           p:actionLabel="Update"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -110,6 +118,8 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
+                                    <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
+                                          p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPostal"
                                           p:actionLabel="Add"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -135,6 +145,8 @@
                         <bean parent="Uif-LinkGroup">
                             <property name="items">
                                 <list>
+                                    <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
+                                          p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertElectronicContact"
                                           p:actionLabel="Add"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
