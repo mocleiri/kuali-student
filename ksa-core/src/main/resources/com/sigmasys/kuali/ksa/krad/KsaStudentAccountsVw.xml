@@ -511,13 +511,22 @@
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="nativeAmountCurr"
+                <bean parent="Uif-InputField" p:propertyName="nativeAmount"
                       p:label="Native Amount"
                       p:maxLength="21"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="nativeAmountCurrCode"
+                      p:label="Native Currency Code"
+                      p:maxLength="4"
+                      p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="5"/>
                     </property>
                 </bean>
 

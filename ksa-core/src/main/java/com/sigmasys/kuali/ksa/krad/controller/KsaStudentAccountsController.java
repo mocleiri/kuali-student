@@ -257,6 +257,10 @@ public class KsaStudentAccountsController extends GenericSearchController {
            // the currency in effect for the transaction
             setCurrency(form, t);
 
+            if (t.getNativeAmount() != null) {
+               form.setNativeAmount(t.getNativeAmount().toString());
+            }
+
             if (t.getDocument() != null) {
                 form.setDocumentId(t.getDocument().getId().toString());
             }
@@ -343,10 +347,10 @@ public class KsaStudentAccountsController extends GenericSearchController {
             currency = currencyService.getCurrency("USD");
          }
          form.setCurrency(currency);
-         form.setNativeAmountCurr(currency.getCode());
+         form.setNativeAmountCurrCode(currency.getCode());
       } else {
          form.setCurrency(currencyService.getCurrency("USD"));
-         form.setNativeAmountCurr(form.getCurrency().getCode());
+         form.setNativeAmountCurrCode(form.getCurrency().getCode());
       }
    }
 }

@@ -111,7 +111,9 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private Date clearDate;
 
-   private String nativeAmountCurr;
+   private String nativeAmount;
+
+   private String nativeAmountCurrCode;
 
    private String creatorId;
 
@@ -437,12 +439,20 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
       this.clearDate = clearDate;
    }
 
-   public String getNativeAmountCurr() {
-      return nativeAmountCurr;
+   public String getNativeAmount() {
+      return getFormattedAmount(nativeAmount);
    }
 
-   public void setNativeAmountCurr(String nativeAmountCurr) {
-      this.nativeAmountCurr = nativeAmountCurr;
+   public void setNativeAmount(String nativeAmount) {
+      this.nativeAmount = nativeAmount;
+   }
+
+   public String getNativeAmountCurrCode() {
+      return nativeAmountCurrCode;
+   }
+
+   public void setNativeAmountCurrCode(String nativeAmountCurrCode) {
+      this.nativeAmountCurrCode = nativeAmountCurrCode;
    }
 
    public String getCreatorId() {
