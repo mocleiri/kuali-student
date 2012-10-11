@@ -84,7 +84,6 @@ public class KsaMemoController extends GenericSearchController {
        logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
 
         if (pageId != null && pageId.equals("MemosPage")) {
-
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }

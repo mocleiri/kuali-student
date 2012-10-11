@@ -33,7 +33,6 @@ public class KsaPaymentController extends GenericSearchController {
      */
     @Override
     protected KsaPaymentForm createInitialForm(HttpServletRequest request) {
-
         KsaPaymentForm form = new KsaPaymentForm();
         form.setStatusMessage("");
         String userId = request.getParameter("userId");
@@ -249,13 +248,12 @@ public class KsaPaymentController extends GenericSearchController {
 
        try {
            payment = (Payment)transactionService.createTransaction(typeIdString, payment.getExternalId(),
-                 payment.getAccount().getId(),
-                 effectiveDate, null, payment.getAmount() );
+                 payment.getAccount().getId(), effectiveDate, null, payment.getAmount());
            if (payment.getId() != null) {
                form.setPayment(payment);
                statusMsg = tt.getDescription() + " Payment saved";
                form.setStatusMessage(statusMsg);
-               logger.error(statusMsg);
+               logger.info(statusMsg);
                saveResult = true;
             }
 

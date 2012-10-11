@@ -48,7 +48,6 @@
                     <property name="headerText" value="Quick View"/>
                     <property name="items">
                         <list>
-                            <!-- TODO p:actionParameters="userId:@{account.id}"-->
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
                                   p:actionLabel="Refresh"
                                   p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">

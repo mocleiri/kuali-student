@@ -221,7 +221,7 @@ public class KsaChargeController extends GenericSearchController {
             form.setCharge(charge);
             statusMsg = tt.getDescription() + " charge saved";
             form.setStatusMessage(statusMsg);
-            logger.error(statusMsg);
+            logger.info(statusMsg);
             saveResult = true;
          }
 

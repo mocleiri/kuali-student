@@ -53,7 +53,7 @@
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
                       p:href="ksaBatchTransactionsVw?methodToCall=get&amp;viewId=KsaBatchTransactionsView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
-                      p:href="transOvrVw?methodToCall=get&amp;viewId=StudentTransactionOverview&amp;pageId=bursaCurrencyPage"/>
+                      p:href="ksaCurrencyVw?methodToCall=get&amp;viewId=KsaCurrencyView&amp;pageId=CurrencyPage"/>
             </list>
         </property>
     </bean>
