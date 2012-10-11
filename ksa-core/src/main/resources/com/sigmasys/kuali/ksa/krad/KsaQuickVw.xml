@@ -1001,7 +1001,7 @@
                     <property name="items">
                         <list>
                             <!--<ref bean="quickViewMemosTable"/>-->
-                            <bean parent="Uif-HorizontalBoxGroup">
+                            <!--<bean parent="Uif-HorizontalBoxGroup">
                                 <property name="cssClasses">
                                     <list merge="true">
                                         <value>ksa-margin-zero</value>
@@ -1095,7 +1095,8 @@
                                         </bean>
                                     </list>
                                 </property>
-                            </bean>
+                            </bean>-->
+                            <ref bean="quickViewMemosTable"/>
                         </list>
                     </property>
                 </bean>
@@ -1152,18 +1153,20 @@
                                 </bean>
                 -->
                 <bean parent="Uif-InputField" p:propertyName="effectiveDate"
-                      p:label="Effective Date"
+
                       p:maxLength="10"
-                      p:width="10%">
+                      p:width="10%">   <!-- p:label="Effective Date"-->
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="text"
-                      p:label="Description"
+
                       p:width="90%">
-                    <!--<property name="cssClasses">
+                    <!--
+                    p:label="Description"
+                    <property name="cssClasses">
                         <list merge="true">
                             <value>ksa-ellipsis</value>
                         </list>
