@@ -75,6 +75,10 @@
      font-weight: bold;
  }
 
+ .ksa-margin-zero {
+     margin: 0px;
+ }
+
  .ksa-divider {
      margin: 4px;
      border-bottom: 2px solid #000;
@@ -85,6 +89,7 @@
  }
 
  .ksa-ellipsis {
+     width: 75%;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
