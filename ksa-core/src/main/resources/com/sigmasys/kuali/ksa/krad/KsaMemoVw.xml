@@ -98,6 +98,8 @@
                     <property name="headerText" value="Follow-up Memo"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
+                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="viewMemoSection"/>
                             <ref bean="followUpMemoSection"/>
                             <ref bean="followUpMemoControlsGroup"/>
