@@ -115,6 +115,14 @@ public class KsaStudentAccountsController extends GenericSearchController {
                    setCurrency(form, t);
                    currencyIsSet = true;
                 }
+
+                unGroupedTransactionModelList.add(new TransactionModel(t));
+                if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
+                    unGroupedCredit = unGroupedCredit.add(t.getAmount());
+                } else {
+                    unGroupedDebit = unGroupedDebit.add(t.getAmount());
+                }
+
                 TransactionModel transactionModel = new TransactionModel(t);
                 Rollup tmRollup = t.getRollup();
                 if (tmRollup != null) {
@@ -136,16 +144,7 @@ public class KsaStudentAccountsController extends GenericSearchController {
                     } else {
                        rollUpDebit = rollUpDebit.add(t.getAmount());
                     }
-                } /*else {*/
-                /* Show all transactions, not just the non-rolled up ones */
-                unGroupedTransactionModelList.add(transactionModel);
-                if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                   unGroupedCredit = unGroupedCredit.add(t.getAmount());
-                } else {
-                   unGroupedDebit = unGroupedDebit.add(t.getAmount());
                 }
-
-                /*}*/
             }
 
             form.setRollUpCredit(rollUpCredit.toString());
