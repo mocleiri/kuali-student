@@ -95,7 +95,6 @@ public class KsaBatchTransactionsController extends GenericSearchController {
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
 
-      // do submit stuff...
       // org.springframework.web.multipart.MaxUploadSizeExceededException:
       // Maximum upload size of 500000 bytes exceeded; nested exception is
       // org.apache.commons.fileupload.FileUploadBase$SizeLimitExceededException:
@@ -121,9 +120,6 @@ public class KsaBatchTransactionsController extends GenericSearchController {
                int endIndex = processResponse.indexOf(endValue);
                String batchStatus = processResponse.substring(begIndex, endIndex);
                processMsg = "Transaction(s) Processing " + batchStatus;
-
-               // TODO get the number of accepted vs failed
-
 
                form.setUploadProcessState(processMsg);
             } catch (Exception exp) {
