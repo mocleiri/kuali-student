@@ -29,6 +29,8 @@ public interface Constants {
     String DROOLS_DSL_ID_PARAM_NAME = "ksa.drools.dsl";
     String DROOLS_PERSISTENCE_PARAM_NAME = "ksa.drools.persistence";
 
+    // Quick View parameters
+    String QUICKVIEW_INFORMATION_COUNT = "ksa.quickview.information.count";
 
     // WS constants
     String WS_NAMESPACE = "http://sigmasys.com/";

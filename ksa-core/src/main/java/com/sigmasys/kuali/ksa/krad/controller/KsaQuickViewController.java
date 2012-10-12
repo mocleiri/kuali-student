@@ -1,11 +1,13 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm;
 import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
+import com.sigmasys.kuali.ksa.util.TransactionListUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,10 @@ public class KsaQuickViewController extends GenericSearchController {
 
     @Autowired
     private InformationService informationService;
+
+    @Autowired
+    protected ConfigService configService;
+
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
@@ -361,18 +367,71 @@ public class KsaQuickViewController extends GenericSearchController {
            form.setDefermentAmount(deferment.toString());
         }
 
-        form.setAlerts(informationService.getAlerts(userId));
+        String sizeStr = configService.getInitialParameter(Constants.QUICKVIEW_INFORMATION_COUNT);
+        Integer size = null;
+        try{
+            size = new Integer(sizeStr);
+        } catch(NumberFormatException e){}
+        if(size == null){
+            size = new Integer(4);
+        }
 
-        form.setFlags(informationService.getFlags(userId));
+
+        List<Alert> alertsAll = informationService.getAlerts(userId);
+        AlertDateComparatorAscending comparitor1 = new AlertDateComparatorAscending();
+        Collections.sort(alertsAll, comparitor1);
+
+        List<Alert> alerts = new ArrayList<Alert>();
+        for (int i=0; i < size.intValue() && i < alertsAll.size(); i++) {
+            alerts.add(alertsAll.get(i));
+        }
+
+        form.setAlerts(alerts);
+
+        List<Flag> flagAll = informationService.getFlags(userId);
+        FlagDateComparatorAscending comparitor2 = new FlagDateComparatorAscending();
+        Collections.sort(flagAll, comparitor2);
+
+        List<Flag> flags = new ArrayList<Flag>();
+        for (int i=0; i < size.intValue() && i < flagAll.size(); i++) {
+            flags.add(flagAll.get(i));
+        }
+
+        form.setFlags(flags);
+
 
         List<Memo> memoList = informationService.getMemos(userId);
         List<MemoModel> memoModelList = new ArrayList<MemoModel>();
 
-        for (Memo memo : memoList) {
+        MemoDateComparatorAscending comparator3 = new MemoDateComparatorAscending();
+        Collections.sort(memoList, comparator3);
+
+        for (int i=0; i < size.intValue() && i < memoList.size(); i++) {
+           Memo memo = memoList.get(i);
            MemoModel memoModel = new MemoModel(memo);
            memoModelList.add(memoModel);
         }
 
         form.setMemoModels(memoModelList);
+    }
+}
+
+class MemoDateComparatorAscending implements Comparator<Memo> {
+    @Override
+    public int compare(Memo m1, Memo m2) {
+        return m1.getEffectiveDate().compareTo(m2.getEffectiveDate());
+    }
+}
+
+class AlertDateComparatorAscending implements Comparator<Alert> {
+    @Override
+    public int compare(Alert a1, Alert a2) {
+        return a1.getEffectiveDate().compareTo(a2.getEffectiveDate());
+    }
+}
+class FlagDateComparatorAscending implements Comparator<Flag> {
+    @Override
+    public int compare(Flag f1, Flag f2) {
+        return f1.getEffectiveDate().compareTo(f2.getEffectiveDate());
     }
 }
