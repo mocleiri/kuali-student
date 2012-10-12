@@ -52,6 +52,7 @@
                                   p:actionLabel="Refresh"
                                   p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                             </bean>
+                            <!--Temp Test--><!--<ref bean="memoTest"/>-->
                             <ref bean="quickViewSection"/>
                         </list>
                     </property>
@@ -827,6 +828,9 @@
                                               p:actionLabel="Age Transactions" p:style="float: right;"
                                               p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                                         </bean>
+                                        <bean parent="Uif-SecondaryActionButton-Small"
+                                              p:actionLabel="Assess Fees" p:style="float: right;">
+                                        </bean>  <!-- p:methodToCall="methodToCall"  p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"-->
                                     </list>
                                 </property>
                             </bean>
@@ -999,6 +1003,9 @@
                     <property name="readOnly" value="true"/>
                     <property name="items">
                         <list>
+
+
+
                             <!--<ref bean="quickViewMemosTable"/>-->
                             <!--<bean parent="Uif-HorizontalBoxGroup">
                                 <property name="cssClasses">
@@ -1095,6 +1102,9 @@
                                     </list>
                                 </property>
                             </bean>-->
+
+
+
                             <ref bean="quickViewMemosTable"/>
                         </list>
                     </property>
@@ -1278,6 +1288,66 @@
                 <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
         </property>
+    </bean>
+
+
+
+    <!--
+    *******************************************************************************************************************
+                                            Memo Test
+    JET Test
+    ********************************************************************************************************************
+    -->
+
+    <bean id="memoTest" parent="Uif-VerticalBoxGroup">
+        <property name="cssClasses">
+            <list merge="true">
+                <value>ksa-group-border</value>
+            </list>
+        </property>
+        <property name="items">
+            <list>
+                <bean parent="Uif-HorizontalBoxGroup">
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>ksa-quickview-section-header</value>
+                        </list>
+                    </property>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-MessageField" p:messageText="Memos"/>
+                            <bean parent="Uif-Link" p:linkText="more" p:target="_self"
+                                  p:style="font-size: .8em; float: right; padding-top:6px;"
+                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-VerticalBoxGroup">
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>ksa-group-content</value>
+                        </list>
+                    </property>
+                    <property name="readOnly" value="true"/>
+                    <!--<property name="items">
+                        <list>
+                            <ref bean="memoTestStackedCollection"/>
+                        </list>
+                    </property>-->
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="memoTestStackedCollection" parent="Uif-StackedCollectionLayoutBase">
+        <property name="items">
+            <list>
+                <bean parent="Uif-HorizontalBoxGroup"/>
+            </list>
+        </property>
+
+
     </bean>
 
 </beans>
