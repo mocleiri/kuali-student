@@ -4,6 +4,8 @@ import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.FeeBase;
 import com.sigmasys.kuali.ksa.model.LearningPeriod;
 import com.sigmasys.kuali.ksa.model.LearningUnit;
@@ -29,6 +32,7 @@ import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 
 @Service("accountImportService")
 @Transactional(readOnly = false)
+@WebService(serviceName = AccountImportService.SERVICE_NAME, portName = AccountImportService.PORT_NAME, targetNamespace = Constants.WS_NAMESPACE)
 public class AccountImportServiceImpl implements AccountImportService {
 
 	/**
@@ -112,6 +116,7 @@ public class AccountImportServiceImpl implements AccountImportService {
      * @throws RuntimeException         If student profile import encountered an error.
      */
     @Override
+    @WebMethod(exclude=true)
     public void importStudentProfile(StudentProfile studentProfile) {
         // Step 1: Validating the XML schema is done prior to invoking this method by the JAX-WS framework
     	// Validate the argument object instead:

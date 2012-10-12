@@ -660,7 +660,11 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean isResident(FeeBase feeBase) {
-        return StringUtils.equalsIgnoreCase(getKeyPairValue(feeBase, "residency"), "T");
+    	String kpValue = getKeyPairValue(feeBase, "residency");
+    	
+        return StringUtils.equalsIgnoreCase(kpValue, "TRUE")
+        		|| StringUtils.equalsIgnoreCase(kpValue, "T")
+        		|| StringUtils.equalsIgnoreCase(kpValue, "Y");
     }
 
     /**

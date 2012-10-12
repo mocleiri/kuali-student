@@ -62,7 +62,7 @@ public class AccountImportServiceTest extends AbstractServiceTest {
 	@Test
 	public void testImportStudentProfileFromTextInvalidSchema() throws Exception {
 		// Load contents:
-		String content = CommonUtils.getResourceAsString("xmlImport/student-profile-invalid-schema.xml");
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-invalid-schema.xml");
 		boolean schemaInvalid = true;
 		
 		try {
@@ -77,9 +77,9 @@ public class AccountImportServiceTest extends AbstractServiceTest {
 	}
 	
 	@Test
-	public void testImportStudentProfileFromObjectMegNoAccountExists() throws Exception {
+	public void testImportStudentProfileFromObjectNoAccountExists() throws Exception {
 		// Create an unmarshalled object from XML text:
-		String content = CommonUtils.getResourceAsString("xmlImport/student-profile-unknown-user.xml");
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-unknown-user.xml");
 		StringReader reader = new StringReader(content);
 		JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -99,9 +99,9 @@ public class AccountImportServiceTest extends AbstractServiceTest {
 	}
 	
 	@Test
-	public void testImportStudentProfileFromTextMegNoAccountExists() throws Exception {
+	public void testImportStudentProfileFromTextNoAccountExists() throws Exception {
 		// Create an unmarshalled object from XML text:
-		String content = CommonUtils.getResourceAsString("xmlImport/student-profile-unknown-user.xml");
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-unknown-user.xml");
 		
 		// Call the service:
 		boolean accountDoesNotExist = false;
@@ -117,13 +117,13 @@ public class AccountImportServiceTest extends AbstractServiceTest {
 	}
 	
 	@Test
-	public void testImportStudentProfileFromObjectUser3AccountExists() throws Exception {
+	public void testImportStudentProfileFromObjectUser1AccountExists() throws Exception {
 		// Create an account:
-		String userId = "user3";
+		String userId = "user1";
 		accountService.getOrCreateAccount(userId);
 		
 		// Create an unmarshalled object from XML text:
-		String content = CommonUtils.getResourceAsString("xmlImport/student-profile-user3.xml");
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user1.xml");
 		StringReader reader = new StringReader(content);
 		JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -131,5 +131,178 @@ public class AccountImportServiceTest extends AbstractServiceTest {
 		
 		// Call the service:
 		accountImportService.importStudentProfile(profile);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromTextUser1AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user1";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user1.xml");
+		
+		// Call the service:
+		accountImportService.importStudentProfile(content);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromObjectUser2AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user2";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user2.xml");
+		StringReader reader = new StringReader(content);
+		JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+		
+		// Call the service:
+		accountImportService.importStudentProfile(profile);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromTextUser2AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user2";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user2.xml");
+		
+		// Call the service:
+		accountImportService.importStudentProfile(content);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromObjectUser3AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user3";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user3.xml");
+		StringReader reader = new StringReader(content);
+		JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+		
+		// Call the service:
+		accountImportService.importStudentProfile(profile);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromTextUser3AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user3";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user3.xml");
+		
+		// Call the service:
+		accountImportService.importStudentProfile(content);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromObjectUser4AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user4";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user4.xml");
+		StringReader reader = new StringReader(content);
+		JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+		
+		// Call the service:
+		accountImportService.importStudentProfile(profile);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromTextUser4AccountExists() throws Exception {
+		// Create an account:
+		String userId = "user4";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-user4.xml");
+		
+		// Call the service:
+		accountImportService.importStudentProfile(content);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromObjectAdmin1AccountExists() throws Exception {
+		// Create an account:
+	String userId = "admin1";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-admin1.xml");
+		StringReader reader = new StringReader(content);
+		JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+		
+		// Call the service:
+		accountImportService.importStudentProfile(profile);
+	}
+	
+	@Test
+	public void testImportStudentProfileFromTextAdmin1AccountExists() throws Exception {
+		// Create an account:
+		String userId = "admin1";
+		accountService.getOrCreateAccount(userId);
+		
+		// Create an unmarshalled object from XML text:
+		String content = CommonUtils.getResourceAsString("xmlImport/fee-management/student-profile-admin1.xml");
+		
+		// Call the service:
+		accountImportService.importStudentProfile(content);
+	}
+	
+	/* *****************************************
+	 * 
+	 * Test KD accounts.
+	 * 
+	 * *****************************************/
+	
+	@Test
+	public void testImportStudentProfileFromObjectKDAccounts() throws Exception {
+		for (int i=1; i<=6; i++) {
+			// Create an account:
+			String userId = "testuser" + i;
+			accountService.getOrCreateAccount(userId);
+			
+			// Create an unmarshalled object from XML text:
+			String content = CommonUtils.getResourceAsString("xmlImport/fee-management/kd/situation-" + i + ".xml");
+			StringReader reader = new StringReader(content);
+			JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+			
+			// Call the service:
+			accountImportService.importStudentProfile(profile);
+		}
+	}
+	
+	@Test
+	public void testImportStudentProfileFromTextKDAccounts() throws Exception {
+		for (int i=1; i<=6; i++) {
+			// Create an account:
+			String userId = "testuser" + i;
+			accountService.getOrCreateAccount(userId);
+			
+			// Create an unmarshalled object from XML text:
+			String content = CommonUtils.getResourceAsString("xmlImport/fee-management/kd/situation-" + i + ".xml");
+			
+			// Call the service:
+			accountImportService.importStudentProfile(content);
+		}
 	}
 }
