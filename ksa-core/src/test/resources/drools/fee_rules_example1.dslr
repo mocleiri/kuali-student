@@ -40,7 +40,7 @@ when
 then
     Use "1186" to charge $525 per credit where section is "BR[0-9A-Z]{2}" with status ""
     Use code "1187" to charge $53
-    Set status to "C", key pair "MAND_FEES" to "Y" where section is "EM11"
+    Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"
 end
 
 rule "Rule 5"
@@ -49,5 +49,5 @@ when
 then
     Use "1186" to charge $1131.00 per credit where section is "BR[0-9A-Z]{2}" with status ""
     Use code "1187" to charge $53
-    Set status to "C", key pair "MAND_FEES" to "Y" where section is "EM11"
+    Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"
 end
