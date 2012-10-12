@@ -1,0 +1,27 @@
+import java.util.*;
+import java.math.*;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.drools.*;
+
+expander ksa.dsl
+
+global FeeBase feeBase;
+
+
+############ Beginning of rule definitions ##########################
+
+rule "Rule 1"
+when
+    (Major code is "EMBA" and Section code is "EM11" with status "")
+then
+    Use "1179" code to charge $31280.36
+    Use "1121" code to charge $386.36
+    Set status to "C", key pair "MAND_FEES" to "Y" for LU where section is "EM11"
+end
+
+rule "Rule 2"
+when
+    (Key pair "member-code" is "12,22,42")
+then
+    Use "1060" code to charge $199.38
+end

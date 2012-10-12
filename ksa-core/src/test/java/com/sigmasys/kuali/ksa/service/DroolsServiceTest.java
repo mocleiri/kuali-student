@@ -50,7 +50,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void fireFeeAssessmentRules() throws Exception {
+    public void fireFeeAssessmentRules1() throws Exception {
 
         DroolsContext droolsContext = new DroolsContext();
         droolsContext.setAccount(accountService.getFullAccount("admin"));
@@ -67,7 +67,25 @@ public class DroolsServiceTest extends AbstractServiceTest {
 
     }
 
-    //@Test
+
+    @Test
+    public void fireFeeAssessmentRules2() throws Exception {
+
+           DroolsContext droolsContext = new DroolsContext();
+           droolsContext.setAccount(accountService.getFullAccount("admin"));
+
+           Map<String, Object> globalParams = new HashMap<String, Object>();
+           globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
+
+           droolsContext = droolsService.fireRules("drools/fee_rules_example1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+
+           Assert.notNull(droolsContext);
+           Assert.notNull(droolsContext.getAccount());
+           Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
+
+     }
+
+    @Test
     public void fireCurrencyRules() throws Exception {
 
         Currency currency = currencyService.getCurrency("USD");

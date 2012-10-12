@@ -197,12 +197,13 @@ public interface FeeManagementService {
     /**
      * Checks if a KeyPair exists in the given <code>FeeBase</code>
      *
-     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
-     * @param keyPairName  The name of a <code>KeyPair</code> to check.
-     * @param keyPairValue The value of a <code>KeyPair</code> to check.
+     * @param feeBase       A <code>FeeBase</code> that contains a student's information.
+     * @param keyPairName   The name of a <code>KeyPair</code> to check.
+     * @param keyPairValues The values of a <code>KeyPair</code> to check represented by a <code>String</code> and
+     *                      separated by commas
      * @return <code>true</code> if a KeyPair exists, <code>false</code> - otherwise
      */
-    boolean containsKeyPair(FeeBase feeBase, String keyPairName, String keyPairValue);
+    boolean containsKeyPair(FeeBase feeBase, String keyPairName, String keyPairValues);
 
     /**
      * Saves a <code>LearningUnit</code>. This method is helpful when making modifications to a <code>LearningUnit</code>, such as setting new Status,

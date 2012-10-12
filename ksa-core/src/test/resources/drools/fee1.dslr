@@ -21,7 +21,7 @@ end
 
 rule "Tuition 2"
 when
-    (Major code is "34444, 2345, MAJ1")
+    (Major code is "34444,2345,MAJ1")
 then
     Use "1020" code to charge $345.78
     Use "1319" code to credit $50.0
@@ -29,21 +29,21 @@ end
 
 rule "Tuition 3"
 when
-    (LU code is "MFRO, MABO, GOOG")
+    (LU code is "MFRO,MABO,GOOG" with status "")
 then
     Use "cash" code to credit $50.50
 end
 
 rule "Tuition 4"
 when
-    ("a" equals "a" and LU code is "WARTY--")
+    ("a" equals "a" and LU code is "WARTY--" with status "C")
 then
     Use "cash" code to credit $950.50
 end
 
 rule "Tuition 5"
 when
-    (LU code is "MFRO, MABO" and Major code is "34444, 2345, MA34")
+    (LU code is "MFRO,MABO" with status "F" and Major code is "34444,2345,MA34")
 then
     Use "cash" code to credit $50.50
 end

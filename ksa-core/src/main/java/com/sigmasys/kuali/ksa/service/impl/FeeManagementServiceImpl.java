@@ -584,7 +584,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean containsSectionCode(FeeBase feeBase, String sectionCodes, String statuses) {
-        String[] statusArray = (statuses != null) ? statuses.split(",") : null;
+        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(",") : null;
         List<String> sectionCodeList = getSectionCodes(feeBase, statusArray);
         for (String luCode : sectionCodes.split(",")) {
             if (sectionCodeList.contains(luCode.trim().toUpperCase())) {
@@ -617,7 +617,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes, String statuses) {
-        String[] statusArray = (statuses != null) ? statuses.split(",") : null;
+        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(",") : null;
         List<String> learningUnitCodesList = getLearningUnitCodes(feeBase, statusArray);
         for (String luCode : learningUnitCodes.split(",")) {
             if (learningUnitCodesList.contains(luCode.trim().toUpperCase())) {
@@ -631,15 +631,26 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     /**
      * Checks if a KeyPair exists in the given <code>FeeBase</code>
      *
-     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
-     * @param keyPairName  The name of a <code>KeyPair</code> to check.
-     * @param keyPairValue The value of a <code>KeyPair</code> to check.
+     * @param feeBase       A <code>FeeBase</code> that contains a student's information.
+     * @param keyPairName   The name of a <code>KeyPair</code> to check.
+     * @param keyPairValues The values of a <code>KeyPair</code> to check represented by a <code>String</code> and
+     *                      separated by commas
      * @return <code>true</code> if a KeyPair exists, <code>false</code> - otherwise
      */
     @Override
-    public boolean containsKeyPair(FeeBase feeBase, String keyPairName, String keyPairValue) {
-        return StringUtils.equalsIgnoreCase(getKeyPairValue(feeBase, keyPairName), keyPairValue);
+    public boolean containsKeyPair(FeeBase feeBase, String keyPairName, String keyPairValues) {
+        String[] values = (keyPairValues != null) ? keyPairValues.split(",") : null;
+        String keyPairValue = getKeyPairValue(feeBase, keyPairName);
+        if (values != null) {
+            for (String value : values) {
+                if (StringUtils.equalsIgnoreCase(value, keyPairValue)) {
+                    return true;
+                }
+            }
+        }
+        return keyPairValue == null;
     }
+
 
     /**
      * Checks if a student is a resident.
