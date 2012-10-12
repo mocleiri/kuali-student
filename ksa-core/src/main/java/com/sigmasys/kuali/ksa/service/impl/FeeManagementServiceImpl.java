@@ -212,12 +212,16 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public String getKeyPairValue(FeeBase feeBase, String name) {
         // Validate the input:
         validateInputParameters(feeBase, name);
-
-        // Create an execute a query:
-        Query query = em.createNativeQuery("select kp.value from kssa_kypr kp, kssa_acnt_kypr akp where kp.id = akp.kypr_id_fk and akp.acnt_id_fk = :accountId and kp.name = :keypairName")
-                .setParameter("accountId", feeBase.getAccount().getId()).setParameter("keypairName", name);
-        List<String> result = query.getResultList();
-        return CollectionUtils.isNotEmpty(result) ? result.get(0) : null;
+        
+        // Try to find a KeyPair in the StudentData:
+        KeyPair keyPair = getKeyPairInternal(feeBase.getStudentData(), name);
+        
+        // If not found, try to find in PeriodData:
+        if (keyPair == null) {
+        	keyPair = getKeyPairInternal(feeBase.getPeriodData(), name);
+        }
+        
+        return (keyPair != null) ? keyPair.getValue() : null;
     }
 
     /**
