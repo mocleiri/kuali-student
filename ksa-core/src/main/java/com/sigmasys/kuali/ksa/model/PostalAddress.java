@@ -215,16 +215,27 @@ public class PostalAddress implements Identifiable {
      */
     @Transient
     public String getDisplayValue() {
-        StringBuilder postalAddressBuilder = new StringBuilder(nvl(getStreetAddress1()));
-        postalAddressBuilder.append(" ");
-        postalAddressBuilder.append(nvl(getCity()));
-        postalAddressBuilder.append(", ");
-        postalAddressBuilder.append(nvl(getState()));
-        postalAddressBuilder.append(" ");
-        postalAddressBuilder.append(nvl(getPostalCode()));
-        postalAddressBuilder.append(" ");
-        postalAddressBuilder.append(nvl(getCountry()));
-        return postalAddressBuilder.toString();
+
+        String streetAddress1 = nvl(getStreetAddress1());
+        String city = nvl(getCity());
+        String state = nvl(getState());
+        String postalCode = nvl(getPostalCode());
+        String country = nvl(getCountry());
+
+        if (!streetAddress1.isEmpty() || !city.isEmpty() || !state.isEmpty()
+                || !postalCode.isEmpty() || !country.isEmpty()) {
+            StringBuilder postalAddressBuilder = new StringBuilder(streetAddress1);
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(city);
+            postalAddressBuilder.append(", ");
+            postalAddressBuilder.append(state);
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(postalCode);
+            postalAddressBuilder.append(" ");
+            postalAddressBuilder.append(country);
+            return postalAddressBuilder.toString();
+        }
+        return "";
     }
 
 }
