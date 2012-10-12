@@ -2,24 +2,21 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.persistence.Query;
 
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.KeyPair;
-import com.sigmasys.kuali.ksa.model.KeyPairType;
-import com.sigmasys.kuali.ksa.model.LearningPeriod;
-import com.sigmasys.kuali.ksa.model.LearningUnit;
-import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
-import com.sigmasys.kuali.ksa.model.FeeBase;
 
 @Service("feeManagementService")
 @Transactional(readOnly = false)
@@ -32,9 +29,18 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     private static final Log logger = LogFactory.getLog(FeeManagementServiceImpl.class);
 
     /**
+     * Used in rules to separate multiple pattern items from each other
+     */
+    private static final String PATTERN_DELIMITER = ",";
+
+    /**
      * ThreadLocal variable for the LearningPeriod currently used for Fee Assessment.
      */
     private static final ThreadLocal<LearningPeriod> currentPeriod = new ThreadLocal<LearningPeriod>();
+
+
+    @Autowired
+    private TransactionService transactionService;
 
 
     /**
@@ -212,15 +218,15 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     public String getKeyPairValue(FeeBase feeBase, String name) {
         // Validate the input:
         validateInputParameters(feeBase, name);
-        
+
         // Try to find a KeyPair in the StudentData:
         KeyPair keyPair = getKeyPairInternal(feeBase.getStudentData(), name);
-        
+
         // If not found, try to find in PeriodData:
         if (keyPair == null) {
-        	keyPair = getKeyPairInternal(feeBase.getPeriodData(), name);
+            keyPair = getKeyPairInternal(feeBase.getPeriodData(), name);
         }
-        
+
         return (keyPair != null) ? keyPair.getValue() : null;
     }
 
@@ -492,13 +498,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean containsMajorCode(FeeBase feeBase, String majorCodes) {
-        List<String> majorCodesList = getMajorCodes(feeBase);
-        for (String majorCode : majorCodes.split(",")) {
-            if (majorCodesList.contains(majorCode.trim().toUpperCase())) {
-                return true;
-            }
-        }
-        return false;
+        return matchOneOrMoreValues(majorCodes, getMajorCodes(feeBase));
     }
 
     /**
@@ -588,14 +588,8 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean containsSectionCode(FeeBase feeBase, String sectionCodes, String statuses) {
-        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(",") : null;
-        List<String> sectionCodeList = getSectionCodes(feeBase, statusArray);
-        for (String luCode : sectionCodes.split(",")) {
-            if (sectionCodeList.contains(luCode.trim().toUpperCase())) {
-                return true;
-            }
-        }
-        return false;
+        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(PATTERN_DELIMITER) : null;
+        return matchOneOrMoreValues(sectionCodes, getSectionCodes(feeBase, statusArray));
     }
 
 
@@ -621,14 +615,8 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean containsLearningUnitCode(FeeBase feeBase, String learningUnitCodes, String statuses) {
-        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(",") : null;
-        List<String> learningUnitCodesList = getLearningUnitCodes(feeBase, statusArray);
-        for (String luCode : learningUnitCodes.split(",")) {
-            if (learningUnitCodesList.contains(luCode.trim().toUpperCase())) {
-                return true;
-            }
-        }
-        return false;
+        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(PATTERN_DELIMITER) : null;
+        return matchOneOrMoreValues(learningUnitCodes, getLearningUnitCodes(feeBase, statusArray));
     }
 
 
@@ -643,16 +631,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean containsKeyPair(FeeBase feeBase, String keyPairName, String keyPairValues) {
-        String[] values = (keyPairValues != null) ? keyPairValues.split(",") : null;
-        String keyPairValue = getKeyPairValue(feeBase, keyPairName);
-        if (values != null) {
-            for (String value : values) {
-                if (StringUtils.equalsIgnoreCase(value, keyPairValue)) {
-                    return true;
-                }
-            }
-        }
-        return keyPairValue == null;
+        return matchOneOrMoreValues(keyPairValues, getKeyPairValue(feeBase, keyPairName));
     }
 
 
@@ -664,11 +643,11 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public boolean isResident(FeeBase feeBase) {
-    	String kpValue = getKeyPairValue(feeBase, "residency");
-    	
+        String kpValue = getKeyPairValue(feeBase, "residency");
+
         return StringUtils.equalsIgnoreCase(kpValue, "TRUE")
-        		|| StringUtils.equalsIgnoreCase(kpValue, "T")
-        		|| StringUtils.equalsIgnoreCase(kpValue, "Y");
+                || StringUtils.equalsIgnoreCase(kpValue, "T")
+                || StringUtils.equalsIgnoreCase(kpValue, "Y");
     }
 
     /**
@@ -767,7 +746,86 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
 
     /**
-     * Returns the total number of credits of all study courses with the specified status, which can be <code>null</code>.
+     * Creates transaction for the given amount per credit, UL section codes and statuses.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param transactionTypeId Transaction type ID
+     * @param amountPerCredit   Amount per one credit
+     * @param sectionCodes      a list of LU section codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses          a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return a new transaction instance
+     */
+    @Override
+    public Transaction createTransactionForNumberOfCredits(FeeBase feeBase,
+                                                           String transactionTypeId,
+                                                           BigDecimal amountPerCredit,
+                                                           String sectionCodes,
+                                                           String statuses) {
+        int numberOfCredits = getNumOfCreditsBySectionCodes(feeBase, sectionCodes, statuses);
+        BigDecimal amount = amountPerCredit.multiply(new BigDecimal(numberOfCredits));
+        return transactionService.createTransaction(transactionTypeId, feeBase.getAccount().getId(), new Date(), amount);
+    }
+
+
+    /**
+     * Returns the total number of credits of all LU courses with the specified status, which can be <code>null</code>.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param learningUnitCodes a list of LU codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses          a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return The number of credits
+     */
+    @Override
+    public int getNumOfCreditsByLearningUnitCodes(FeeBase feeBase, String learningUnitCodes, String statuses) {
+        int numOfCredits = 0;
+        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(PATTERN_DELIMITER) : null;
+        String[] luCodeArray = learningUnitCodes.split(PATTERN_DELIMITER);
+        for (String luCode : getLearningUnitCodes(feeBase, statusArray)) {
+            for (String luPattern : luCodeArray) {
+                if (luCode.equals(luPattern) || Pattern.matches(luPattern, luCode)) {
+                    LearningUnit learningUnit = feeBase.getLearningUnit(luCode);
+                    if (learningUnit.getCredit() != null) {
+                        numOfCredits += learningUnit.getCredit().intValue();
+                    }
+                }
+            }
+        }
+        return numOfCredits;
+    }
+
+    /**
+     * Returns the total number of credits of all LU courses with the specified section codes and statuses, which can be <code>null</code>.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param sectionCodes a list of LU section codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses     a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return The number of credits
+     */
+    @Override
+    public int getNumOfCreditsBySectionCodes(FeeBase feeBase, String sectionCodes, String statuses) {
+        int numOfCredits = 0;
+        String[] statusArray = (statuses != null && statuses.trim().length() > 0) ? statuses.split(PATTERN_DELIMITER) : null;
+        String[] sectionCodeArray = sectionCodes.split(PATTERN_DELIMITER);
+        Set<LearningUnit> visitedUnits = new HashSet<LearningUnit>();
+        for (String sectionCode : getSectionCodes(feeBase, statusArray)) {
+            for (String sectionPattern : sectionCodeArray) {
+                if (sectionCode.equals(sectionPattern) || Pattern.matches(sectionPattern, sectionCode)) {
+                    for (LearningUnit learningUnit : feeBase.getLearningUnitsBySectionCode(sectionCode)) {
+                        if (!visitedUnits.contains(learningUnit)) {
+                            if (learningUnit.getCredit() != null) {
+                                numOfCredits += learningUnit.getCredit().intValue();
+                            }
+                            visitedUnits.add(learningUnit);
+                        }
+                    }
+                }
+            }
+        }
+        return numOfCredits;
+    }
+
+    /**
+     * Returns the total number of credits of all LU courses with the specified status, which can be <code>null</code>.
      *
      * @param feeBase      A <code>FeeBase</code> that contains a student's information.
      * @param courseStatus The status of courses for which to calculate the total number of credits. Allows <code>null</code> as a status.
@@ -783,7 +841,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
                 }
             }
         }
-
         return numOfCredits;
     }
 
@@ -1087,6 +1144,34 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         }
 
         return null;
+    }
+
+    protected boolean matchOneOrMoreValues(String pattern, String... values) {
+        return matchOneOrMoreValues(pattern, Arrays.asList(values));
+    }
+
+    protected boolean matchOneOrMoreValues(String pattern, Collection<String> values) {
+        if (values == null || values.isEmpty()) {
+            return false;
+        }
+        if (pattern == null || !pattern.contains(PATTERN_DELIMITER)) {
+            for (String value : values) {
+                if ((value == null && pattern == null) ||
+                        (value != null && (value.equals(pattern) || Pattern.matches(pattern, value)))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        for (String patternItem : pattern.split(PATTERN_DELIMITER)) {
+            patternItem = patternItem.trim();
+            for (String value : values) {
+                if (value != null && (value.equals(patternItem) || Pattern.matches(patternItem, value))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

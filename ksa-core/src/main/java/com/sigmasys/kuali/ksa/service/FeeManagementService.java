@@ -4,11 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.sigmasys.kuali.ksa.model.KeyPair;
-import com.sigmasys.kuali.ksa.model.LearningPeriod;
-import com.sigmasys.kuali.ksa.model.LearningUnit;
-import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
-import com.sigmasys.kuali.ksa.model.FeeBase;
+import com.sigmasys.kuali.ksa.model.*;
 
 /**
  * This interface represents a service object to work with Fee Assessments of ChargeableAccounts.
@@ -417,4 +413,40 @@ public interface FeeManagementService {
      * @return Total number of credits.
      */
     int getNumOfCredits(FeeBase feeBase, String keyPairName, String keyPairValue, String secondKeyPairName, String secondKeyPairValue);
+
+    /**
+     * Returns the total number of credits of all LU courses with the specified unit codes and statuses, which can be <code>null</code>.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param learningUnitCodes a list of LU unit codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses          a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return The number of credits
+     */
+    int getNumOfCreditsByLearningUnitCodes(FeeBase feeBase, String learningUnitCodes, String statuses);
+
+    /**
+     * Returns the total number of credits of all LU courses with the specified section codes and statuses, which can be <code>null</code>.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param sectionCodes a list of LU section codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses     a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return The number of credits
+     */
+    int getNumOfCreditsBySectionCodes(FeeBase feeBase, String sectionCodes, String statuses);
+
+    /**
+     * Creates transaction for the given amount per credit, UL section codes and statuses.
+     *
+     * @param feeBase           A <code>FeeBase</code> that contains a student's information.
+     * @param transactionTypeId Transaction type ID
+     * @param amountPerCredit   Amount per one credit
+     * @param sectionCodes      a list of LU section codes represented by a <code>String</code> value and separated by commas.
+     * @param statuses          a list of LU statuses represented by a <code>String</code> value and separated by commas.
+     * @return a new transaction instance
+     */
+    Transaction createTransactionForNumberOfCredits(FeeBase feeBase,
+                                                    String transactionTypeId,
+                                                    BigDecimal amountPerCredit,
+                                                    String sectionCodes,
+                                                    String statuses);
 }
