@@ -397,6 +397,7 @@
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
         </property>
         <property name="disclosure.render" value="false"/>
+        <property name="readOnly" value="@{ovDetailReadWriteState}"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:propertyName="transactionModel.id"
@@ -529,7 +530,7 @@
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="transactionModel.internal"
                       p:label="Internal"
-                      p:defaultValue="true"
+                      p:defaultValue="false"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -584,15 +585,9 @@
                         <bean parent="Uif-TextControl" p:size="5"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="previousMemoId" p:label="Previous Memo ID"
+                <bean parent="Uif-InputField" p:propertyName="nextMemoId"
+                      p:label="Next Memo ID"
                       p:maxLength="16"
-                      p:fieldLabel.renderColon="true">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="nextMemoId" p:label="Next Memo ID" p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -609,44 +604,25 @@
                 </bean>
 
                 <!-- Deferred, Rules Payment and General Ledger -->
-                <bean parent="Uif-InputField" p:propertyName="transactionModel.deferredId" p:label="Deferred ID" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.refundable"
+                      p:label="Refundable"
+                      p:defaultValue="false"
                       p:fieldLabel.renderColon="true">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="transactionModel.refundable" p:label="Refundable"
-                      p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="transactionModel.refundRule" p:label="Refund Rule" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.refundRule"
+
+                      p:label="Refund Rule" p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="transactionModel.paymentBilling" p:label="Payment Billing"
-                      p:defaultValue="true" p:fieldLabel.renderColon="true">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-CheckboxControl"/>
-                    </property>
-                </bean>
-<!--
-                <bean parent="Uif-InputField" p:propertyName="derivativeTransactionId"
-                      p:label="Derivative Transaction ID" p:maxLength="16"
-                      p:fieldLabel.renderColon="true">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
-                    </property>
-                </bean>
--->
+
                 <!-- General Ledger -->
                 <bean parent="Uif-InputField" p:propertyName="transactionModel.generalLedgerTypeId"
                       p:label="Type ID"
@@ -681,8 +657,8 @@
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="extensionId"
-                      p:label="Extension ID"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.externalId"
+                      p:label="External ID"
                       p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
@@ -848,7 +824,8 @@
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="allocationLocked"
                       p:label="Locked"
-                      p:defaultValue="true" p:fieldLabel.renderColon="true">
+                      p:defaultValue="false"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>

@@ -40,7 +40,8 @@ public class KsaStudentAccountsController extends GenericSearchController {
     protected KsaStudentAccountsForm createInitialForm(HttpServletRequest request) {
 
         KsaStudentAccountsForm form = new KsaStudentAccountsForm();
-
+        // page can be used for editing or viewing
+        form.setOvDetailReadWriteState("true");
         String userId = request.getParameter("userId");
 
         if (userId != null) {
@@ -169,6 +170,9 @@ public class KsaStudentAccountsController extends GenericSearchController {
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
+
+            // page can be used for editing or viewing
+            form.setOvDetailReadWriteState("true");
 
             Transaction t = transactionService.getTransaction(new Long(transactionId));
             logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());

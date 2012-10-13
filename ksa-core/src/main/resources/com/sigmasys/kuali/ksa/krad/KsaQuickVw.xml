@@ -491,7 +491,7 @@
                         <list>
                             <bean parent="Uif-MessageField" p:messageText="Biographic Information"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self" p:style="font-size: .8em; float: right; padding-top:6px;"
-                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
+                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>

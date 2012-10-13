@@ -27,6 +27,12 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    private List<ElectronicContact> electronicContactList;
 
+   private PersonName personName;
+
+   private PostalAddress postalAddress;
+
+   private ElectronicContact electronicContact;
+
    private String kimNameType;
 
    private String title;
@@ -423,5 +429,29 @@ public class KsaBiographicForm extends AbstractViewModel {
 
    public void setStatusMessage(String statusMessage) {
       this.statusMessage = statusMessage;
+   }
+
+   public PersonName getPersonName() {
+      return personName;
+   }
+
+   public void setPersonName(PersonName personName) {
+      this.personName = personName;
+   }
+
+   public PostalAddress getPostalAddress() {
+      return postalAddress;
+   }
+
+   public void setPostalAddress(PostalAddress postalAddress) {
+      this.postalAddress = postalAddress;
+   }
+
+   public ElectronicContact getElectronicContact() {
+      return electronicContact;
+   }
+
+   public void setElectronicContact(ElectronicContact electronicContact) {
+      this.electronicContact = electronicContact;
    }
 }

@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by: dmulderink on 9/25/12 at 6:59 PM
@@ -78,12 +81,35 @@ public class KsaBiographicController extends GenericSearchController {
             throw new IllegalStateException(errMsg);
         }
 
-        if ("BiographicAddPersonPage".equals(pageId)) {
-
+        if (pageId != null && pageId.compareTo("BiographicAddPersonPage") == 0) {
+            form.setPersonName(new PersonName());
             return getUIFModelAndView(form);
         }
 
-        account = accountService.getFullAccount(account.getId());
+        // BiographicEDPersonPage needs a PersonName from a selection
+
+        // BiographicInformationPostalADE
+
+        // BiographicInformationElectronicContactADE
+
+        //BiographicSummaryPage needs a list
+        if (pageId != null && pageId.compareTo("BiographicPersonsPage") == 0) {
+           List<Account> accountsByPattern = accountService.findAccountsByNamePattern(account.getId());
+           List<PersonName> personNames = new ArrayList<PersonName>();
+           if (accountsByPattern != null) {
+              for (Account accountByPattern : accountsByPattern) {
+                 Set<PersonName> personNameSet = account.getPersonNames();
+                 for (PersonName personName : personNameSet) {
+                    personNames.add(personName);
+                 }
+              }
+           }
+
+           form.setPersonNameList(personNames);
+        }
+
+
+       account = accountService.getFullAccount(account.getId());
         // TODO refactor to the id in the request parameters
         if (account == null) {
             String errMsg = "Cannot find Account by ID = " + account.getId();
@@ -91,16 +117,17 @@ public class KsaBiographicController extends GenericSearchController {
             throw new IllegalStateException(errMsg);
         }
 
-        PersonName name = account.getDefaultPersonName();
+        PersonName personName = account.getDefaultPersonName();
 
-        form.setKimNameType(name.getKimNameType());
-        form.setFirstName(name.getFirstName());
-        form.setLastName(name.getLastName());
-        form.setMiddleName(name.getMiddleName());
-        form.setSuffix(name.getSuffix());
-        form.setTitle(name.getTitle());
-        form.setPersonDefault(name.isDefault().toString());
+        form.setKimNameType(personName.getKimNameType());
+        form.setFirstName(personName.getFirstName());
+        form.setLastName(personName.getLastName());
+        form.setMiddleName(personName.getMiddleName());
+        form.setSuffix(personName.getSuffix());
+        form.setTitle(personName.getTitle());
+        form.setPersonDefault(personName.isDefault().toString());
 
+        form.setPersonName(personName);
         form.setAccount(account);
 
         return getUIFModelAndView(form);
@@ -181,17 +208,17 @@ public class KsaBiographicController extends GenericSearchController {
                                   HttpServletRequest request, HttpServletResponse response) {
 
         Account account = form.getAccount();
+        //PersonName personName = form.getPersonName();
+        PersonName personName = new PersonName();
+        personName.setKimNameType(form.getKimNameType());
+        personName.setFirstName(form.getFirstName());
+        personName.setMiddleName(form.getMiddleName());
+        personName.setLastName(form.getLastName());
+        personName.setSuffix(form.getSuffix());
+        personName.setTitle(form.getTitle());
+        personName.setDefault(new Boolean(form.getPersonDefault()));
 
-        PersonName name = new PersonName();
-        name.setKimNameType(form.getKimNameType());
-        name.setFirstName(form.getFirstName());
-        name.setMiddleName(form.getMiddleName());
-        name.setLastName(form.getLastName());
-        name.setSuffix(form.getSuffix());
-        name.setTitle(form.getTitle());
-        name.setDefault(new Boolean(form.getPersonDefault()));
-
-        accountService.addPersonName(account.getId(), name);
+        accountService.addPersonName(account.getId(), personName);
 
         form.setStatusMessage("Person added");
         return getUIFModelAndView(form);
@@ -210,16 +237,17 @@ public class KsaBiographicController extends GenericSearchController {
                                      HttpServletRequest request, HttpServletResponse response) {
 
         // @TODO: This is wrong.  Don't create a new one, get the one to update
-        PersonName name = new PersonName();
+        PersonName personName = new PersonName();
 
-        name.setKimNameType(form.getKimNameType());
-        name.setFirstName(form.getFirstName());
-        name.setMiddleName(form.getMiddleName());
-        name.setLastName(form.getLastName());
-        name.setSuffix(form.getSuffix());
-        name.setTitle(form.getTitle());
-        name.setDefault(new Boolean(form.getPersonDefault()));
+        personName.setKimNameType(form.getKimNameType());
+        personName.setFirstName(form.getFirstName());
+        personName.setMiddleName(form.getMiddleName());
+        personName.setLastName(form.getLastName());
+        personName.setSuffix(form.getSuffix());
+        personName.setTitle(form.getTitle());
+        personName.setDefault(new Boolean(form.getPersonDefault()));
 
+       //accountService.persist(personName);
 
         return getUIFModelAndView(form);
     }

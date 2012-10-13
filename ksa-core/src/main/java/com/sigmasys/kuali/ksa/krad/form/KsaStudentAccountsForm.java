@@ -38,7 +38,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    private String allocationAccountId;
 
-   private String extensionId;
 
    private String payerTransactionId;
 
@@ -68,6 +67,9 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
    private String selectedRollupType;
 
    private String selectedTransactionType;
+
+   // The OverView Detail page readOnly property is both Read and Read/Write
+   private String ovDetailReadWriteState;
 
    /*
       Get/Set methods
@@ -137,14 +139,6 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setAllocationAccountId(String allocationAccountId) {
       this.allocationAccountId = allocationAccountId;
-   }
-
-   public String getExtensionId() {
-      return extensionId;
-   }
-
-   public void setExtensionId(String extensionId) {
-      this.extensionId = extensionId;
    }
 
    public String getPayerTransactionId() {
@@ -239,5 +233,13 @@ public class KsaStudentAccountsForm extends AbstractViewModel {
 
    public void setSelectedTransactionType(String selectedTransactionType) {
       this.selectedTransactionType = selectedTransactionType;
+   }
+
+   public String getOvDetailReadWriteState() {
+      return ovDetailReadWriteState;
+   }
+
+   public void setOvDetailReadWriteState(String ovDetailReadWriteState) {
+      this.ovDetailReadWriteState = ovDetailReadWriteState;
    }
 }
