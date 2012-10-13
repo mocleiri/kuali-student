@@ -76,7 +76,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
            Map<String, Object> globalParams = new HashMap<String, Object>();
            globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-           droolsContext = droolsService.fireRules("fee_rules_example1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+           droolsContext = droolsService.fireRules("fee_assessment.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
            Assert.notNull(droolsContext);
            Assert.notNull(droolsContext.getAccount());
