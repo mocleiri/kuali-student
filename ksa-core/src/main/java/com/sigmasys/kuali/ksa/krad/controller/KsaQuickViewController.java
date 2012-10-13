@@ -7,7 +7,6 @@ import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import com.sigmasys.kuali.ksa.service.InformationService;
-import com.sigmasys.kuali.ksa.util.TransactionListUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -367,22 +366,14 @@ public class KsaQuickViewController extends GenericSearchController {
            form.setDefermentAmount(deferment.toString());
         }
 
-        String sizeStr = configService.getInitialParameter(Constants.QUICKVIEW_INFORMATION_COUNT);
-        Integer size = null;
-        try{
-            size = new Integer(sizeStr);
-        } catch(NumberFormatException e){}
-        if(size == null){
-            size = new Integer(4);
-        }
-
+        int itemsPerPage = Integer.valueOf(configService.getInitialParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
 
         List<Alert> alertsAll = informationService.getAlerts(userId);
         AlertDateComparatorAscending comparitor1 = new AlertDateComparatorAscending();
         Collections.sort(alertsAll, comparitor1);
 
         List<Alert> alerts = new ArrayList<Alert>();
-        for (int i=0; i < size.intValue() && i < alertsAll.size(); i++) {
+        for (int i=0; i < itemsPerPage && i < alertsAll.size(); i++) {
             alerts.add(alertsAll.get(i));
         }
 
@@ -393,7 +384,7 @@ public class KsaQuickViewController extends GenericSearchController {
         Collections.sort(flagAll, comparitor2);
 
         List<Flag> flags = new ArrayList<Flag>();
-        for (int i=0; i < size.intValue() && i < flagAll.size(); i++) {
+        for (int i=0; i < itemsPerPage && i < flagAll.size(); i++) {
             flags.add(flagAll.get(i));
         }
 
@@ -406,7 +397,7 @@ public class KsaQuickViewController extends GenericSearchController {
         MemoDateComparatorAscending comparator3 = new MemoDateComparatorAscending();
         Collections.sort(memoList, comparator3);
 
-        for (int i=0; i < size.intValue() && i < memoList.size(); i++) {
+        for (int i=0; i < itemsPerPage && i < memoList.size(); i++) {
            Memo memo = memoList.get(i);
            MemoModel memoModel = new MemoModel(memo);
            memoModelList.add(memoModel);
