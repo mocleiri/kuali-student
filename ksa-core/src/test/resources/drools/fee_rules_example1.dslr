@@ -51,3 +51,19 @@ then
     Use code "1187" to charge $53
     Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"
 end
+
+rule "Rule 6"
+when
+    (Key pair "member-code" is "10,11,12,13,14,15,16,17,18,19,20" and Student is resident and Number of credits > 9 with status "")
+then
+    Use code "1000" to charge $3483.00
+    Set status to "C", key pair "MAND_FEES" to "Y" where status is ""
+end
+
+rule "Rule 7"
+when
+    (Key pair "member-code" is "10,11,12,13,14,15,16,17,18,19,20" and Student is not resident and Number of credits > 9 with status "")
+then
+    Use code "1020" to charge $12168.48
+    Set status to "C", key pair "MAND_FEES" to "Y" where status is ""
+end

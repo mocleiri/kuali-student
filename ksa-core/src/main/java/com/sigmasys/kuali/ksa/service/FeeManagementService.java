@@ -352,25 +352,40 @@ public interface FeeManagementService {
     void setCourseStatus(LearningUnit learningUnit, String status, String keyPairName, String keyPairValue);
 
     /**
-     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
+     * the given FeeBase and LU code.
      *
+     * @param feeBase          A <code>FeeBase</code> that contains a student's information.
      * @param learningUnitCode A LU code.
      * @param status           The new course status.
      * @param keyPairName      The name of a <code>KeyPair</code> to add.
      * @param keyPairValue     The value of a <code>KeyPair</code> to add.
      */
-    void setCourseStatusForLearningUnit(String learningUnitCode, String status, String keyPairName, String keyPairValue);
+    void setCourseStatusForLearningUnit(FeeBase feeBase, String learningUnitCode, String status, String keyPairName, String keyPairValue);
 
     /**
-     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs with
-     * the given section code.
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
+     * the given FeeBase and section code.
      *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
      * @param sectionCode  A LU section code.
      * @param status       The new course status.
      * @param keyPairName  The name of a <code>KeyPair</code> to add.
      * @param keyPairValue The value of a <code>KeyPair</code> to add.
      */
-    void setCourseStatusForSection(String sectionCode, String status, String keyPairName, String keyPairValue);
+    void setCourseStatusForSection(FeeBase feeBase, String sectionCode, String status, String keyPairName, String keyPairValue);
+
+    /**
+     * Sets a course's new status and add a <code>KeyPair</code> with the specified name and value to all LUs for
+     * the given FeeBase and old status.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param oldStatus    The old course status.
+     * @param newStatus    The new course status.
+     * @param keyPairName  The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue The value of a <code>KeyPair</code> to add.
+     */
+    void setCourseStatusForStatus(FeeBase feeBase, String oldStatus, String newStatus, String keyPairName, String keyPairValue);
 
     /**
      * Returns the total number of credits of all study courses with the specified status, which can be <code>null</code>.

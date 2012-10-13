@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.persistence.Query;
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
+
 
 @Service("feeManagementService")
 @Transactional(readOnly = false)
@@ -38,6 +40,9 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     private static final ThreadLocal<LearningPeriod> currentPeriod = new ThreadLocal<LearningPeriod>();
 
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private TransactionService transactionService;
@@ -74,8 +79,8 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public List<LearningUnit> getLearningUnits(String accountId) {
         // Find associated LearningUnits using a query by a foreign key in the LearningUnit table:
-        String sql = "select * from kssa_lu lu where lu.acnt_id_fk = :accountId";
-        Query query = em.createNativeQuery(sql, LearningUnit.class).setParameter("accountId", accountId);
+        String sql = "select lu from LearningUnit lu where lu.account.id = :accountId";
+        Query query = em.createQuery(sql).setParameter("accountId", accountId);
         return query.getResultList();
     }
 
@@ -88,8 +93,9 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public FeeBase getFeeBase(String accountId) {
+
         // Retrieve the Account and other data:
-        Account account = getEntity(accountId, Account.class);
+        Account account = accountService.getFullAccount(accountId);
         List<KeyPair> studentData = getStudentData(accountId);
         List<PeriodKeyPair> periodData = getLearningPeriodData(accountId);
         List<LearningUnit> study = getLearningUnits(accountId);
@@ -698,16 +704,18 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value.
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
+     * the given FeeBase and LU code.
      *
+     * @param feeBase          A <code>FeeBase</code> that contains a student's information.
      * @param learningUnitCode A LU code.
      * @param status           The new course status.
      * @param keyPairName      The name of a <code>KeyPair</code> to add.
      * @param keyPairValue     The value of a <code>KeyPair</code> to add.
      */
     @Override
-    public void setCourseStatusForLearningUnit(String learningUnitCode, String status, String keyPairName, String keyPairValue) {
-        LearningUnit learningUnit = getLearningUnitByCode(learningUnitCode);
+    public void setCourseStatusForLearningUnit(FeeBase feeBase, String learningUnitCode, String status, String keyPairName, String keyPairValue) {
+        LearningUnit learningUnit = feeBase.getLearningUnit(learningUnitCode);
         if (learningUnitCode != null) {
             setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
         }
@@ -715,33 +723,43 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs with
-     * the given section code.
+     * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
+     * the given FeeBase and section code.
      *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
      * @param sectionCode  A LU section code.
      * @param status       The new course status.
      * @param keyPairName  The name of a <code>KeyPair</code> to add.
      * @param keyPairValue The value of a <code>KeyPair</code> to add.
      */
     @Override
-    public void setCourseStatusForSection(String sectionCode, String status, String keyPairName, String keyPairValue) {
-        List<LearningUnit> learningUnits = getLearningUnitsBySection(sectionCode);
+    public void setCourseStatusForSection(FeeBase feeBase, String sectionCode, String status, String keyPairName, String keyPairValue) {
+        List<LearningUnit> learningUnits = feeBase.getLearningUnitsBySectionCode(sectionCode);
         for (LearningUnit learningUnit : learningUnits) {
             setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
         }
     }
 
-    protected LearningUnit getLearningUnitByCode(String unitCode) {
-        Query query = em.createQuery("select lu from LearningUnit where lu.unitCode = :unitCode");
-        query.setParameter("unitCode", unitCode);
-        List<LearningUnit> learningUnits = query.getResultList();
-        return CollectionUtils.isNotEmpty(learningUnits) ? learningUnits.get(0) : null;
-    }
-
-    protected List<LearningUnit> getLearningUnitsBySection(String section) {
-        Query query = em.createQuery("select lu from LearningUnit where lu.unitSection = :section");
-        query.setParameter("section", section);
-        return query.getResultList();
+    /**
+     * Sets a course's new status and add a <code>KeyPair</code> with the specified name and value to all LUs for
+     * the given FeeBase and old status.
+     *
+     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
+     * @param oldStatus    The old course status.
+     * @param newStatus    The new course status.
+     * @param keyPairName  The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue The value of a <code>KeyPair</code> to add.
+     */
+    @Override
+    public void setCourseStatusForStatus(FeeBase feeBase, String oldStatus, String newStatus, String keyPairName, String keyPairValue) {
+        List<LearningUnit> learningUnits = feeBase.getLearningUnits();
+        for (LearningUnit learningUnit : learningUnits) {
+            String status = learningUnit.getStatus();
+            if ((StringUtils.isBlank(status) && StringUtils.isBlank(oldStatus)) ||
+                    (oldStatus != null && oldStatus.equals(status))) {
+                setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
+            }
+        }
     }
 
 
