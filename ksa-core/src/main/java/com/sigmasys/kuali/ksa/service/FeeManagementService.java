@@ -19,6 +19,14 @@ import com.sigmasys.kuali.ksa.model.*;
 public interface FeeManagementService {
 
     /**
+     * Performs all the necessary operations to calculate fees for the given account.
+     * Most of this logic is usually performed by a rule engine (Drools).
+     *
+     * @param accountId  Account ID
+     */
+    void assessFees(String accountId);
+
+    /**
      * Returns an account's Set of student data in form of KeyPair objects.
      *
      * @param accountId Id of an account for which to get its student data.

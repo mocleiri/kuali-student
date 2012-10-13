@@ -141,7 +141,7 @@ public class DroolsService {
     protected Resource getRuleSetResource(String ruleSetId) {
         switch (getPersistenceType()) {
             case CLASSPATH:
-                return ResourceFactory.newClassPathResource(ruleSetId);
+                return ResourceFactory.newClassPathResource(Constants.DROOLS_CLASSPATH + "/"  + ruleSetId);
             case DATABASE:
                 RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
                 if (ruleSet == null) {

@@ -58,8 +58,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-        droolsContext = droolsService.fireRules("drools/fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
-        //droolsContext = droolsService.fireRules("feeRuleSet1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        droolsContext = droolsService.fireRules("fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
         Assert.notNull(droolsContext);
         Assert.notNull(droolsContext.getAccount());
@@ -77,7 +76,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
            Map<String, Object> globalParams = new HashMap<String, Object>();
            globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-           droolsContext = droolsService.fireRules("drools/fee_rules_example1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+           droolsContext = droolsService.fireRules("fee_rules_example1.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
            Assert.notNull(droolsContext);
            Assert.notNull(droolsContext.getAccount());
@@ -93,7 +92,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         Assert.notNull(currency);
         Assert.isTrue(currency.getCode().equals("USD"));
 
-        currency = droolsService.fireRules("drools/currency.xdrl", ResourceType.XDRL, currency);
+        currency = droolsService.fireRules("currency.xdrl", ResourceType.XDRL, currency);
 
         Assert.notNull(currency);
         Assert.isTrue(currency.getEditorId().equals("admin"));

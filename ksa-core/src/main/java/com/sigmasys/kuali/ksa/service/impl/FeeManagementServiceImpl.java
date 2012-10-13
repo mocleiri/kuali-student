@@ -6,13 +6,17 @@ import java.util.regex.Pattern;
 
 import javax.persistence.Query;
 
+import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.service.drools.DroolsContext;
+import com.sigmasys.kuali.ksa.service.drools.DroolsService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.drools.builder.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +25,7 @@ import com.sigmasys.kuali.ksa.service.FeeManagementService;
 
 
 @Service("feeManagementService")
-@Transactional(readOnly = false)
+@Transactional
 @SuppressWarnings("unchecked")
 public class FeeManagementServiceImpl extends GenericPersistenceService implements FeeManagementService {
 
@@ -46,6 +50,42 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private DroolsService droolsService;
+
+    @Autowired
+    private ConfigService configService;
+
+
+    /**
+     * Performs all the necessary operations to calculate fees for the given account.
+     * Most of this logic is usually performed by a rule engine (Drools).
+     *
+     * @param accountId  Account ID
+     */
+    @Override
+    public void assessFees(String accountId) {
+
+        String feeAssessmentRuleSetId = configService.getInitialParameter(Constants.DROOLS_FA_RULE_SET_PARAM_NAME);
+        if ( feeAssessmentRuleSetId ==  null ) {
+            String errMsg = "Fee Assessment Rule ID '" + Constants.DROOLS_FA_RULE_SET_PARAM_NAME + "' must be set";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        // Getting the fee base for the user
+        FeeBase feeBase = getFeeBase(accountId);
+
+        DroolsContext droolsContext = new DroolsContext();
+        droolsContext.setAccount(feeBase.getAccount());
+
+        Map<String, Object> globalParams = new HashMap<String, Object>();
+        globalParams.put("feeBase", feeBase);
+
+        droolsService.fireRules(feeAssessmentRuleSetId, ResourceType.DSLR, droolsContext, globalParams);
+    }
+
 
 
     /**

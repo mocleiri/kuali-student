@@ -26,8 +26,10 @@ public interface Constants {
     String LOGGING_OPERATION = "ksa.logging.operation";
 
     // Drools parameters
+    String DROOLS_CLASSPATH = "drools";
     String DROOLS_DSL_ID_PARAM_NAME = "ksa.drools.dsl";
     String DROOLS_PERSISTENCE_PARAM_NAME = "ksa.drools.persistence";
+    String DROOLS_FA_RULE_SET_PARAM_NAME = "ksa.drools.rule_set.fee_assessment";
 
     // Quick View parameters
     String QUICKVIEW_INFORMATION_COUNT = "ksa.quickview.information.count";
