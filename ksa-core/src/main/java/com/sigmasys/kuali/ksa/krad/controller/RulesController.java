@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * A controller for editing KSA Drools rule sets
+ *
+ * @author Michael Ivanov
+ */
 @Controller
 @RequestMapping(value = "/rulesView")
 public class RulesController extends GenericSearchController {
@@ -96,9 +99,7 @@ public class RulesController extends GenericSearchController {
         }
 
         form.setRuleSetId(ruleSetId);
-        form.setRuleSetBody(HtmlUtils.htmlEscape(ruleSet.getRules()));
-
-
+        form.setRuleSetBody(ruleSet.getRules());
 
         logger.info("Selected Rule Set => \n" + ruleSet.getRules());
 
