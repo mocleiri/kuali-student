@@ -419,19 +419,34 @@ public class KsaQuickViewController extends GenericSearchController {
 class MemoDateComparatorAscending implements Comparator<Memo> {
     @Override
     public int compare(Memo m1, Memo m2) {
-        return m1.getEffectiveDate().compareTo(m2.getEffectiveDate());
+        Date d1 = m1.getEffectiveDate();
+        Date d2 = m2.getEffectiveDate();
+        if(d1 == null && d2 == null){ return 0; }
+        if(d1 == null){ return 1; }
+        if(d2 == null){ return -1; }
+        return d1.compareTo(d2);
     }
 }
 
 class AlertDateComparatorAscending implements Comparator<Alert> {
     @Override
     public int compare(Alert a1, Alert a2) {
-        return a1.getEffectiveDate().compareTo(a2.getEffectiveDate());
+        Date d1 = a1.getEffectiveDate();
+        Date d2 = a2.getEffectiveDate();
+        if(d1 == null && d2 == null){ return 0; }
+        if(d1 == null){ return 1; }
+        if(d2 == null){ return -1; }
+        return d1.compareTo(d2);
     }
 }
 class FlagDateComparatorAscending implements Comparator<Flag> {
     @Override
     public int compare(Flag f1, Flag f2) {
-        return f1.getEffectiveDate().compareTo(f2.getEffectiveDate());
+        Date d1 = f1.getEffectiveDate();
+        Date d2 = f2.getEffectiveDate();
+        if(d1 == null && d2 == null){ return 0; }
+        if(d1 == null){ return 1; }
+        if(d2 == null){ return -1; }
+        return d1.compareTo(d2);
     }
 }
