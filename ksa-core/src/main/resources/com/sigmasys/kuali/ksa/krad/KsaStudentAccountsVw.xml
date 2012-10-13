@@ -68,6 +68,8 @@
                     <property name="headerText" value="Roll-up Transactions"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Account Transactions" p:target="_self"
+                                  p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                             <ref bean="accountOVTransactionsByRollupSection"/>
                         </list>
                     </property>
@@ -77,6 +79,8 @@
                     <property name="headerText" value="Accounts"/>
                     <property name="items">
                         <list>
+                            <bean parent="Uif-Link" p:linkText="Account Transactions" p:target="_self"
+                                  p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                             <ref bean="accountOVTransactionDetailSection"/>
                             <ref bean="auditInformationSection"/>
                             <ref bean="accountOVTransactionsControlSection"/>
@@ -171,7 +175,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Roll-up" p:propertyName="rollup.name"/>
-                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
+                <bean parent="Uif-InputField" p:propertyName="formattedUSDAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:labelPlacement="TOP"
@@ -199,14 +203,16 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="rollUpDebit" p:label="Total Payments"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.rollUpDebit"
+                      p:label="Total Payments"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CurrencyTextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollUpCredit" p:label="Total Charges"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.rollUpCredit"
+                      p:label="Total Charges"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -224,7 +230,7 @@
     ********************************************************************************************************************
     -->
     <bean id="ungroupedTransactionsList" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="5"
+          p:layoutManager.numberOfColumns="6"
           p:title=""
           p:instructionalText="The following table is a list of Transactions"
           p:disclosure.render="false"
@@ -238,33 +244,39 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="creationDate" p:label="Transaction Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="creationDate"
+                      p:label="Creation Date"
+                      p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-<!--                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate"
+                      p:label="Effective Date"
+                      p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
-                </bean>-->
-                <bean parent="Uif-InputField" p:propertyName="transactionTypeValue" p:label="Type">
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="transactionTypeValue"
+                      p:label="Type">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="transactionType.description" p:label="Statement Description">
+                <bean parent="Uif-InputField" p:propertyName="transactionType.description"
+                      p:label="Statement Description">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
+                <bean parent="Uif-InputField" p:propertyName="formattedUSDAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:align="right">
@@ -290,14 +302,16 @@
         <property name="readOnly" value="true"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="unGroupedDebit" p:label="Total Payments"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.unGroupedDebit"
+                      p:label="Total Payments"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CurrencyTextControl" p:size="21"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="unGroupedCredit" p:label="Total Charges"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.unGroupedCredit"
+                      p:label="Total Charges"
                       p:maxLength="20" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -307,7 +321,6 @@
             </list>
         </property>
     </bean>
-
 
     <!--
     ********************************************************************************************************************
@@ -330,26 +343,31 @@
         <property name="layoutManager.renderSequenceField" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="creationDate" p:label="Transaction Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="creationDate"
+                      p:label="Creation Date"
+                      p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate"
+                      p:label="Effective Date"
+                      p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollup.description" p:label="Description">
+                <bean parent="Uif-InputField" p:propertyName="rollup.description"
+                      p:label="Description">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
+                <bean parent="Uif-InputField" p:propertyName="formattedUSDAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:align="right">
@@ -381,21 +399,27 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="id" p:label="ID" p:maxLength="19"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.id"
+                      p:label="ID"
+                      p:maxLength="19"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="20"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="accountId" p:label="Account ID" p:maxLength="45"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.accountId"
+                      p:label="Account ID"
+                      p:maxLength="45"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="46"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollUpDesc" p:label="Roll-up"
+                <!-- Rollup in a Transaction could be null transasctionModel.rollup.rollupDesc -->
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.rollupDesc"
+                      p:label="Roll-up"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -403,14 +427,18 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollUpTag" p:label="Tags" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.rollupTag"
+                      p:label="Tags"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollUpPriority" p:label="Priority" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.debitPriority"
+                      p:label="Priority"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -419,41 +447,50 @@
                 </bean>
 
                 <!-- Dates -->
-                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective Date" p:maxLength="10">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-DateControl" p:size="11"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="recognitionDate" p:label="Recognition Date"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.effectiveDate"
+                      p:label="Effective Date"
                       p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="expirationDate" p:label="Expiration Date"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.recognitionDate"
+                      p:label="Recognition Date"
                       p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="clearDate" p:label="Clear Date" p:maxLength="10">
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.defermentExpirationDate"
+                      p:label="Expiration Date"
+                      p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-
-                <bean parent="Uif-InputField" p:propertyName="type" p:label="Type" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.paymentClearDate"
+                      p:label="Clear Date"
+                      p:maxLength="10">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <!-- listed as Type -->
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionTypeDesc"
+                      p:label="Statement Text"
+                      p:maxLength="25"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
+                        <bean parent="Uif-TextControl" p:size="26"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="statementText" p:label="Statement Text"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.statementText"
+                      p:label="Statement Text"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -461,14 +498,18 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="typeId" p:label="Type ID" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionTypeId"
+                      p:label="Type ID"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="typeSubCode" p:label="Type Sub-Code" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionTypeSubCode"
+                      p:label="Type Sub-Code"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -477,7 +518,7 @@
                 </bean>
 
                 <!-- Amount fields -->
-                <bean parent="Uif-InputField" p:propertyName="amount"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionAmount"
                       p:label="Amount"
                       p:maxLength="21"
                       p:fieldLabel.renderColon="true">
@@ -486,14 +527,16 @@
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="internal" p:label="Internal"
-                      p:defaultValue="true" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.internal"
+                      p:label="Internal"
+                      p:defaultValue="true"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="amountAllocated"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionAmountAllocated"
                       p:label="Amount Allocated"
                       p:maxLength="21"
                       p:fieldLabel.renderColon="true">
@@ -502,7 +545,7 @@
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="amountAllocatedLocked"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionAmountAllocatedLocked"
                       p:label="Amount Allocated (and locked)"
                       p:maxLength="21"
                       p:fieldLabel.renderColon="true">
@@ -511,7 +554,7 @@
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="nativeAmount"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.transactionNativeAmount"
                       p:label="Native Amount"
                       p:maxLength="21"
                       p:fieldLabel.renderColon="true">
@@ -520,22 +563,25 @@
                         <bean parent="Uif-CurrencyTextControl" p:size="22"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="nativeAmountCurrCode"
+
+
+                <!-- Document and Memo  plus native currency code moved here -->
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.documentId"
+                      p:label="Document ID"
+                      p:maxLength="16"
+                      p:fieldLabel.renderColon="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="17"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.currencyCode"
                       p:label="Native Currency Code"
                       p:maxLength="4"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="5"/>
-                    </property>
-                </bean>
-
-                <!-- Document and Memo -->
-                <bean parent="Uif-InputField" p:propertyName="documentId" p:label="Document ID" p:maxLength="16"
-                      p:fieldLabel.renderColon="true">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="previousMemoId" p:label="Previous Memo ID"
@@ -563,34 +609,35 @@
                 </bean>
 
                 <!-- Deferred, Rules Payment and General Ledger -->
-                <bean parent="Uif-InputField" p:propertyName="deferredId" p:label="Deferred ID" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.deferredId" p:label="Deferred ID" p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="refundable" p:label="Refundable"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.refundable" p:label="Refundable"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="refundRule" p:label="Refund Rule" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.refundRule" p:label="Refund Rule" p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="paymentBilling" p:label="Payment Billing"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.paymentBilling" p:label="Payment Billing"
                       p:defaultValue="true" p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
+<!--
                 <bean parent="Uif-InputField" p:propertyName="derivativeTransactionId"
                       p:label="Derivative Transaction ID" p:maxLength="16"
                       p:fieldLabel.renderColon="true">
@@ -599,36 +646,44 @@
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
+-->
                 <!-- General Ledger -->
-                <bean parent="Uif-InputField" p:propertyName="generalLedgerTypeId" p:label="Type ID" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.generalLedgerTypeId"
+                      p:label="Type ID"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-TextControl" p:size="17"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="entryGenerated" p:label="Entry Generated"
-                      p:defaultValue="false" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.entryGenerated"
+                      p:label="Entry Generated"
+                      p:defaultValue="false"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="overRidden" p:label="Overridden"
-                      p:defaultValue="false" p:fieldLabel.renderColon="true">
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.glOverRidden" p:label="Overridden"
+                      p:defaultValue="false"
+                      p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-CheckboxControl"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="originationDate" p:label="Origination Date"
+                <bean parent="Uif-InputField" p:propertyName="transactionModel.originationDate" p:label="Origination Date"
                       p:maxLength="10">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
                         <bean parent="Uif-DateControl" p:size="11"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="extensionId" p:label="Extension ID" p:maxLength="16"
+                <bean parent="Uif-InputField" p:propertyName="extensionId"
+                      p:label="Extension ID"
+                      p:maxLength="16"
                       p:fieldLabel.renderColon="true">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
@@ -701,7 +756,7 @@
     ********************************************************************************************************************
     -->
     <bean id="accountOVTransactionAllocationSection" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="4"
+          p:layoutManager.numberOfColumns="5"
           p:title="Allocations for @{account.id}"
           p:instructionalText="Select an item to view detailed information."
           p:disclosure.render="false"
@@ -731,9 +786,9 @@
                         <bean parent="Uif-TextControl" p:size="17" p:maxLength="16"/>
                     </property>
                 </bean>
-                <bean parent="Uif-Link" p:linkText="Select" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
                       p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
-                <bean parent="Uif-Link" p:linkText="Edit" p:target="_self"
+                <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
                       p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="lock"
                       p:actionLabel="Done"

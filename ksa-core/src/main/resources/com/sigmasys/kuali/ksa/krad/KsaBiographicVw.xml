@@ -51,7 +51,7 @@
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
                                   p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
                             <ref bean="biographicInformationPersonsSection"/>
-                            <ref bean="biographicInformationPersonsSubSection"/>
+                            <ref bean="biographicInformationPersonsTblSection"/>
                         </list>
                     </property>
                 </bean>
@@ -197,13 +197,6 @@
                 <!-- Use this to display for Add the individual field values for a new electronic contact row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
                       p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
-<!--                <bean id="biographicInformationPersonsSubSection" parent="Uif-VerticalBoxSubSection">
-                    <property name="items">
-                        <list>
-                            <ref bean="biographicInformationPersonSetSection" />
-                        </list>
-                    </property>
-                </bean>-->
             </list>
         </property>
     </bean>
@@ -214,7 +207,7 @@
     A table listing of PersonNames, their type and composite person name
     ********************************************************************************************************************
     -->
-    <bean id="biographicInformationPersonsSubSection" parent="Uif-VerticalBoxSubSection">
+    <bean id="biographicInformationPersonsTblSection" parent="Uif-VerticalBoxSubSection">
         <property name="items">
             <list>
                 <bean id="biographicInformationPersonSetSection" parent="Uif-Disclosure-TableCollectionSection"

@@ -90,7 +90,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getPastDueAmount() {
-      return this.getFormattedAmount(pastDueAmount);
+      return this.getFormattedUSDAmount(pastDueAmount);
    }
 
    public void setPastDueAmount(String pastDueAmount) {
@@ -98,7 +98,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getBalanceAmount() {
-      return this.getFormattedAmount(balanceAmount);
+      return this.getFormattedUSDAmount(balanceAmount);
    }
 
    public void setBalanceAmount(String balanceAmount) {
@@ -106,7 +106,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getFutureAmount() {
-      return this.getFormattedAmount(futureAmount);
+      return this.getFormattedUSDAmount(futureAmount);
    }
 
    public void setFutureAmount(String futureAmount) {
@@ -114,7 +114,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getDefermentAmount() {
-      return this.getFormattedAmount(defermentAmount);
+      return this.getFormattedUSDAmount(defermentAmount);
    }
 
    public void setDefermentAmount(String defermentAmount) {
@@ -166,7 +166,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getAgedTotal() {
-      return this.getFormattedAmount(agedTotal);
+      return this.getFormattedUSDAmount(agedTotal);
    }
 
    public void setAgedTotal(String agedTotal) {
@@ -174,7 +174,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getAged30() {
-      return this.getFormattedAmount(aged30);
+      return this.getFormattedUSDAmount(aged30);
    }
 
    public void setAged30(String aged30) {
@@ -182,7 +182,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getAged60() {
-      return this.getFormattedAmount(aged60);
+      return this.getFormattedUSDAmount(aged60);
    }
 
    public void setAged60(String aged60) {
@@ -190,7 +190,7 @@ public class KsaQuickViewForm extends AbstractViewModel {
    }
 
    public String getAged90() {
-      return this.getFormattedAmount(aged90);
+      return this.getFormattedUSDAmount(aged90);
    }
 
    public void setAged90(String aged90) {
@@ -264,6 +264,19 @@ public class KsaQuickViewForm extends AbstractViewModel {
          numberFormat.setCurrency(java.util.Currency.getInstance(getCurrency().getCode()));
          double doubleAmount = Double.parseDouble(amount);
          formattedNumber = numberFormat.format(doubleAmount);
+      }
+      return formattedNumber;
+   }
+
+   public String getFormattedUSDAmount(String value) {
+
+      String formattedNumber = "";
+
+      if (value != null) {
+         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
+         double doubleValue = Double.parseDouble(value);
+         String usdCurrency = numberFormat.format(doubleValue);
+         formattedNumber = usdCurrency.substring(1);
       }
       return formattedNumber;
    }

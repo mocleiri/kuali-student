@@ -369,12 +369,24 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
         if (currency != null && amount != null) {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
             numberFormat.setCurrency(java.util.Currency.getInstance(currency.getCode()));
-            return numberFormat.format(amount);
+            String nativeCurrency = numberFormat.format(amount);
+            return nativeCurrency;
         }
         return "";
     }
 
-    @Transient
+   @Transient
+   public String getFormattedUSDAmount() {
+      if (currency != null && amount != null) {
+         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
+         String usdCurrency = numberFormat.format(amount);
+         usdCurrency = usdCurrency.substring(1);
+         return usdCurrency;
+      }
+      return "";
+   }
+
+   @Transient
     public abstract TransactionTypeValue getTransactionTypeValue();
 
 }
