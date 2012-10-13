@@ -1,6 +1,7 @@
 # The KSA DSL definition
 
 [keyword][]and = &&
+[keyword][]equals = ==
 
 [when][]\({constraints}\) = context : DroolsContext({constraints})
 [when][]Student account ID is "{userId}" = account.id == "{userId}"
