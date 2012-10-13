@@ -65,7 +65,7 @@ public class RulesController extends GenericSearchController {
 
         // Validating the rule set content
         ResourceType resourceType = ruleSetId.equals(droolsService.getDslId()) ? ResourceType.DSL : ResourceType.DSLR;
-        droolsService.validateRuleSet(ruleSet, resourceType);
+        droolsService.reloadRuleSet(ruleSetId, resourceType);
 
         droolsPersistenceService.persistRules(ruleSet);
 

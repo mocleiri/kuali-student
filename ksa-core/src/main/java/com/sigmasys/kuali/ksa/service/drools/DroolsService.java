@@ -40,6 +40,8 @@ public class DroolsService {
 
     private static final Log logger = LogFactory.getLog(DroolsService.class);
 
+    public static final String DROOLS_CONTEXT_NAME = "droolsContext";
+
     static {
         System.setProperty("drools.compiler", "JANINO");
         System.setProperty("drools.dialect.java.compiler", "JANINO");
@@ -120,9 +122,9 @@ public class DroolsService {
                     session.setGlobal(entry.getKey(), entry.getValue());
                 }
             }
-            Command command = CommandFactory.newInsert(droolsContext, "droolsContext");
+            Command command = CommandFactory.newInsert(droolsContext, DROOLS_CONTEXT_NAME);
             ExecutionResults results = session.execute(CommandFactory.newBatchExecution(Arrays.asList(command)));
-            return (T) results.getValue("droolsContext");
+            return (T) results.getValue(DROOLS_CONTEXT_NAME);
         } catch (Throwable t) {
             logger.error(t.getMessage(), t);
             throw new RuntimeException(t.getMessage(), t);
@@ -158,13 +160,13 @@ public class DroolsService {
     // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
 
 
-    public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext,
+    public <T> T fireRules(String ruleSetId, ResourceType resourceType, T droolsContext,
                            Map<String, Object> globalParams) {
-        return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, globalParams);
+        return fireRules(getKnowledgeBase(ruleSetId, resourceType), droolsContext, globalParams);
     }
 
-    public <T> T fireRules(String drlFileName, ResourceType resourceType, T droolsContext) {
-        return fireRules(getKnowledgeBase(drlFileName, resourceType), droolsContext, null);
+    public <T> T fireRules(String ruleSetId, ResourceType resourceType, T droolsContext) {
+        return fireRules(getKnowledgeBase(ruleSetId, resourceType), droolsContext, null);
     }
 
     public void validateRuleSet(RuleSet ruleSet, ResourceType resourceType) {
@@ -190,6 +192,20 @@ public class DroolsService {
             throw new IllegalStateException(errMsg);
         }
         return Enum.valueOf(PersistenceType.class, type);
+    }
+
+    public void refresh() {
+        knowledgeBases.clear();
+        postConstruct();
+    }
+
+    public void reloadRuleSet(String ruleSetId, ResourceType resourceType) {
+        if (ruleSetId.equals(getDslId())) {
+            postConstruct();
+        } else {
+            knowledgeBases.remove(ruleSetId);
+            getKnowledgeBase(ruleSetId, resourceType);
+        }
     }
 
 
