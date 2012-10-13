@@ -6,20 +6,18 @@ import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
+import com.sigmasys.kuali.ksa.service.FeeManagementService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -39,7 +37,10 @@ public class KsaQuickViewController extends GenericSearchController {
     private InformationService informationService;
 
     @Autowired
-    protected ConfigService configService;
+    private FeeManagementService feeManagementService;
+
+    @Autowired
+    private ConfigService configService;
 
 
     /**
@@ -47,7 +48,9 @@ public class KsaQuickViewController extends GenericSearchController {
      */
     @Override
     protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
+
         KsaQuickViewForm form = new KsaQuickViewForm();
+
         String userId = request.getParameter("userId");
 
         if (userId != null) {
@@ -72,14 +75,11 @@ public class KsaQuickViewController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView get(@ModelAttribute("KualiForm") KsaQuickViewForm form, HttpServletRequest request) {
 
         String viewId = request.getParameter("viewId");
         String pageId = request.getParameter("pageId");
@@ -93,8 +93,8 @@ public class KsaQuickViewController extends GenericSearchController {
             }
 
             if (pageId == null) {
-               populateForm(userId, form);
-            }  else if (pageId != null && pageId.equals("QuickViewAddMemoPage")) {
+                populateForm(userId, form);
+            } else if (pageId.equals("QuickViewAddMemoPage")) {
                if (userId == null || userId.isEmpty()) {
                   throw new IllegalArgumentException("'userId' request parameter must be specified");
                }
@@ -122,62 +122,11 @@ public class KsaQuickViewController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
-    @Transactional(readOnly = false)
-    public ModelAndView submit(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do submit stuff...
-
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaQuickViewForm form, HttpServletRequest request) {
 
         String viewId = request.getParameter("viewId");
         String userId = request.getParameter("actionParameters[userId]");
@@ -197,15 +146,13 @@ public class KsaQuickViewController extends GenericSearchController {
     }
 
     /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
+     * Ageing debts.
+     *
+     * @param form Kuali form instance
+     * @return ModelandView
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
-    public ModelAndView ageDebt(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView ageDebt(@ModelAttribute("KualiForm") KsaQuickViewForm form) {
 
         // do aging of transactions stuff...
         String accountId = form.getAccount().getId();
@@ -213,7 +160,28 @@ public class KsaQuickViewController extends GenericSearchController {
 
         if (accountId != null && !accountId.trim().isEmpty()) {
             // age the indexed Account Transactions
-            ChargeableAccount chargeableAccount = accountService.ageDebt(accountId, ignoreDeferment);
+            accountService.ageDebt(accountId, ignoreDeferment);
+            // populate the form using the id
+            populateForm(accountId, form);
+        }
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * Fee assessment.
+     *
+     * @param form Kuali form instance
+     * @return ModelandView
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=assessFees")
+    public ModelAndView assessFees(@ModelAttribute("KualiForm") KsaQuickViewForm form) {
+
+        String accountId = form.getAccount().getId();
+
+        if (accountId != null && !accountId.trim().isEmpty()) {
+            // age the indexed Account Transactions
+            feeManagementService.assessFees(accountId);
             // populate the form using the id
             populateForm(accountId, form);
         }
@@ -223,14 +191,11 @@ public class KsaQuickViewController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertMemo")
-    public ModelAndView insertMemo(@ModelAttribute("KualiForm") KsaQuickViewForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView insertMemo(@ModelAttribute("KualiForm") KsaQuickViewForm form,  HttpServletRequest request) {
         // do insert stuff...
 
        String viewId = request.getParameter("viewId");
@@ -268,7 +233,7 @@ public class KsaQuickViewController extends GenericSearchController {
              form.setStatusMessage(failedMsg);
           }
        } catch(Exception exp) {
-          String errMsg = "'Failed to add memo. " + exp.getLocalizedMessage();
+          String errMsg = "'Failed to add memo. " + exp.getMessage();
           logger.error(errMsg);
        }
 
@@ -297,9 +262,6 @@ public class KsaQuickViewController extends GenericSearchController {
 
         ChargeableAccount chargeableAccount = (ChargeableAccount) accountById;
 
-        List<Account> accountList = new ArrayList<Account>();
-        accountList.add(accountById);
-
         // no session scope
         //form.setStudentLookupByName(accountById.getDefaultPersonName().getLastName());
         // a list of one
@@ -307,7 +269,6 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setCompositeDefaultPersonName(accountById.getCompositeDefaultPersonName());
         form.setCompositeDefaultPostalAddress(accountById.getCompositeDefaultPostalAddress());
 
-        BigDecimal pastDue = accountService.getOutstandingBalance(userId, ignoreDeferment) != null ? accountService.getOutstandingBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
         BigDecimal balance = accountService.getDueBalance(userId, ignoreDeferment) != null ? accountService.getDueBalance(userId, ignoreDeferment) : BigDecimal.ZERO;
         BigDecimal future = accountService.getUnallocatedBalance(userId) != null ? accountService.getUnallocatedBalance(userId) : BigDecimal.ZERO;
         BigDecimal deferment = accountService.getDeferredAmount(userId) != null ? accountService.getDeferredAmount(userId) : BigDecimal.ZERO;
@@ -327,7 +288,7 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setDaysLate3(latePeriod.getDaysLate3() != null ? latePeriod.getDaysLate3().toString() : "90");
 
         // getOutstandingBalance above always ignores deferment per Paul setting the pastDue to the ageTotal
-        pastDue = BigDecimal.ZERO;
+        BigDecimal pastDue = BigDecimal.ZERO;
         if (chargeableAccount.getAmountLate1() != null) {
            form.setAged30(chargeableAccount.getAmountLate1().toString());
            pastDue = pastDue.add(chargeableAccount.getAmountLate1());

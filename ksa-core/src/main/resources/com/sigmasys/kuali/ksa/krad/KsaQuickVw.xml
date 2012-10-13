@@ -826,13 +826,17 @@
                                                 <bean parent="Uif-TextControl" p:size="11"/>
                                             </property>
                                         </bean>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageDebt"
+                                        <bean parent="Uif-SecondaryActionButton-Small"
+                                              p:methodToCall="ageDebt"
                                               p:actionLabel="Age Transactions" p:style="float: right;"
                                               p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                                         </bean>
                                         <bean parent="Uif-SecondaryActionButton-Small"
-                                              p:actionLabel="Assess Fees" p:style="float: right;">
-                                        </bean>  <!-- p:methodToCall="methodToCall"  p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);"-->
+                                              p:methodToCall="assessFees"
+                                              p:actionLabel="Assess Fees" p:style="float: right;"
+                                              p:methodToCall="methodToCall"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
@@ -894,77 +898,6 @@
             </list>
         </property>
     </bean>
-
-
-    <!--<bean id="agedAccountsGroup" parent="Uif-HorizontalBoxSection"
-            p:instructionalText="Aged Transactions">
-        <property name="cssClasses">
-            <list merge="true">
-                <value>ksa-group-border</value>
-            </list>
-        </property>
-        <property name="items">
-            <list>
-                <bean parent="Uif-InputField" p:propertyName="lastAgeDate"
-                      p:label="Last Age Date"
-                      p:labelPlacement="TOP"
-                      p:maxLength="10">
-                    <property name="readOnly" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-TextControl" p:size="11"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="aged30"
-                      p:label="@{daysLate1}"
-                      p:labelPlacement="TOP"
-                      p:maxLength="10">
-                    <property name="readOnly" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="aged60"
-                      p:label="@{daysLate2}"
-                      p:labelPlacement="TOP"
-                      p:maxLength="10">
-                    <property name="readOnly" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="aged90"
-                      p:label="@{daysLate3}"
-                      p:labelPlacement="TOP"
-                      p:maxLength="10">
-                    <property name="readOnly" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="agedTotal"
-                      p:label="Total"
-                      p:labelPlacement="TOP"
-                      p:maxLength="10">
-                    <property name="readOnly" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="11"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:propertyName="ignoreDeferment"
-                      p:label="Ignore Deferment"
-                      p:defaultValue="true">
-                    <property name="bindingInfo.bindToForm" value="true"/>
-                    <property name="control">
-                        <bean parent="Uif-CheckboxControl"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageDebt"
-                      p:actionLabel="Age Transactions"
-                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
-                </bean>
-            </list>
-        </property>
-    </bean>-->
 
     <!--
     *******************************************************************************************************************
