@@ -1,10 +1,10 @@
-# module = ks-api branch Path = enrollment/ks-api/branches/M6 revision = 37872
-ks-api::enrollment_ks-api_branches_M6::f9264ca792930ec4a29ca92d05679434ac5d2292
-# module = ks-core branch Path = enrollment/ks-core/branches/services revision = 37872
-ks-core::enrollment_ks-core_branches_services::d919635a17ef3d86d488c3581bca4d7d70ac6abd
-# module = ks-lum branch Path = enrollment/ks-lum/branches/services revision = 37872
-ks-lum::enrollment_ks-lum_branches_services::232ff8aacc9bc96e0cd2d823ae4c3bbe023e6463
-# module = ks-enroll branch Path = enrollment/ks-enroll/branches/services revision = 37872
-ks-enroll::enrollment_ks-enroll_branches_services::fa53ec05c66a9e301521f22ee2d6ec3df02abaf5
-# module = ks-deployments branch Path = enrollment/ks-deployments/branches/services revision = 37872
-ks-deployments::enrollment_ks-deployments_branches_services::605ba11963ac9c23b1c5953cc852bf34aaa04230
+# module = ks-api branch Path = enrollment/ks-api/tags/builds/ks-api-2.0/2.0.0-M6/build-159 revision = 38586
+ks-api::enrollment_ks-api_tags_builds_ks-api-2.0_2.0.0-M6_build-159::bdbf0a2fd9fbcf7ebe95d331df6d419e1917c8e8
+# module = ks-core branch Path = enrollment/ks-core/tags/builds/ks-core-2.0/2.0.0-M6/build-159 revision = 38586
+ks-core::enrollment_ks-core_tags_builds_ks-core-2.0_2.0.0-M6_build-159::1348ad48ab6c60dc3bafa04234c6493a3228b33b
+# module = ks-deployments branch Path = enrollment/ks-deployments/tags/builds/ks-deployments-2.0/2.0.0-M6/build-159 revision = 38586
+ks-deployments::enrollment_ks-deployments_tags_builds_ks-deployments-2.0_2.0.0-M6_build-159::71eeaaa5e6cbbaa7b5fc60c721a247aa11b3c47b
+# module = ks-enroll branch Path = enrollment/ks-enroll/tags/builds/ks-enroll-1.0/1.0.0-M6/build-159 revision = 38586
+ks-enroll::enrollment_ks-enroll_tags_builds_ks-enroll-1.0_1.0.0-M6_build-159::ae30fdefbbb4a11eb7b77a4c06ba596b756cacaa
+# module = ks-lum branch Path = enrollment/ks-lum/tags/builds/ks-lum-2.0/2.0.0-M6/build-159 revision = 38586
+ks-lum::enrollment_ks-lum_tags_builds_ks-lum-2.0_2.0.0-M6_build-159::9c30548ae4d94731b202adccf98587a524b896d5
