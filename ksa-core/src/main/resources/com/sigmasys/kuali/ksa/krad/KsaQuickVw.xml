@@ -834,7 +834,6 @@
                                         <bean parent="Uif-SecondaryActionButton-Small"
                                               p:methodToCall="assessFees"
                                               p:actionLabel="Assess Fees" p:style="float: right;"
-                                              p:methodToCall="methodToCall"
                                               p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                                         </bean>
                                     </list>
