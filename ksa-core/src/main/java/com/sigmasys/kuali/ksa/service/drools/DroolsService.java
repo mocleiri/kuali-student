@@ -149,7 +149,7 @@ public class DroolsService {
                     logger.error(errMsg);
                     throw new IllegalStateException(errMsg);
                 }
-                return ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
+                return ResourceFactory.newByteArrayResource(ruleSet.getRules().getBytes());
             default:
                 String errMsg = "Cannot find resource handlers for persistence type = " + getPersistenceType();
                 logger.error(errMsg);
