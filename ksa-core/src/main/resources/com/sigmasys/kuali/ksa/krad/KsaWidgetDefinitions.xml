@@ -52,10 +52,12 @@
                       p:href="ksaCollectionsVw?methodToCall=get&amp;viewId=KsaCollectionsView"/>
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
                       p:href="ksaBatchTransactionsVw?methodToCall=get&amp;viewId=KsaBatchTransactionsView"/>
+                <bean parent="Uif-Link" p:linkText="Account Import" p:target="_self"
+                      p:href="ksaAccountImportVw?methodToCall=get&amp;viewId=KsaAccountImportView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
                       p:href="ksaCurrencyVw?methodToCall=get&amp;viewId=KsaCurrencyView&amp;pageId=CurrencyPage"/>
-                <bean parent="Uif-Link" p:linkText="FM-Upload" p:target="_self"
-                      p:href="ksaFeeAssessmentVw?methodToCall=get&amp;viewId=KsaFeeAssessmentView&amp;pageId=FeeAssessmentUploadFilePage"/>
+                <!--bean parent="Uif-Link" p:linkText="FM-Upload" p:target="_self"
+                      p:href="ksaFeeAssessmentVw?methodToCall=get&amp;viewId=KsaFeeAssessmentView&amp;pageId=FeeAssessmentUploadFilePage"/-->
                 <bean parent="Uif-Link" p:linkText="FM-Admin" p:target="_self"
                       p:href="rulesView?methodToCall=get&amp;viewId=RulesView"/>
             </list>
