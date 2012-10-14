@@ -70,7 +70,7 @@ public class AccountImportServiceImpl implements AccountImportService {
 	 * This method validates the XML schema, unmarshalls the XML text into a <code>StudentProfile</code> object
 	 * and invokes the overloaded "importStudentProfile" method for import.
 	 * 
-	 * @param xmlContent XML content of a Student profile.
+	 * @param xml XML content of a Student profile.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 * @throws RuntimeException If any error is encountered during XML schema validation or unmarshalling. 
 	 * The original exception (if it exists) is wrapped in a <code>RuntimeException</code>.
