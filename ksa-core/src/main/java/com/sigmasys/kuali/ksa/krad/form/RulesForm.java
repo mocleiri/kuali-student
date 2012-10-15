@@ -19,6 +19,10 @@ public class RulesForm extends AbstractViewModel {
 
     private String ruleSetId;
     private String ruleSetBody;
+    private String newRuleSetId;
+    private String newRuleSetBody;
+    private String editStatusMessage;
+    private String addStatusMessage;
 
     private final RuleSetNameFinder ruleSetNameFinder = new RuleSetNameFinder();
 
@@ -61,11 +65,43 @@ public class RulesForm extends AbstractViewModel {
         this.ruleSetBody = ruleSetBody;
     }
 
+    public String getNewRuleSetId() {
+        return newRuleSetId;
+    }
+
+    public void setNewRuleSetId(String newRuleSetId) {
+        this.newRuleSetId = newRuleSetId;
+    }
+
+    public String getNewRuleSetBody() {
+        return newRuleSetBody;
+    }
+
+    public void setNewRuleSetBody(String newRuleSetBody) {
+        this.newRuleSetBody = newRuleSetBody;
+    }
+
     public void initRuleSetNameFinder(List<String> ruleSetNames) {
         ruleSetNameFinder.initValues(ruleSetNames);
     }
 
+    public String getEditStatusMessage() {
+        return editStatusMessage;
+    }
+
+    public void setEditStatusMessage(String editStatusMessage) {
+        this.editStatusMessage = editStatusMessage;
+    }
+
     public KeyValuesFinder getRuleSetNameFinder() {
         return ruleSetNameFinder;
+    }
+
+    public String getAddStatusMessage() {
+        return addStatusMessage;
+    }
+
+    public void setAddStatusMessage(String addStatusMessage) {
+        this.addStatusMessage = addStatusMessage;
     }
 }

@@ -25,25 +25,38 @@
 
     <bean id="RulesView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="KSA Rules Editor"/>
-        <property name="headerText" value="Rules"/>
+        <property name="headerText" value="KSA Rules Editor"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.RulesForm"/>
-        <property name="entryPageId" value="RulesEditorPage"/>
+        <property name="entryPageId" value="EditRulesPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
-                        <!-- No page navigation needed -->
+                        <bean parent="Uif-NavigationActionLink"
+                              p:navigateToPageId="EditRulesPage"
+                              p:actionLabel="Edit Rules"/>
+                        <bean parent="Uif-NavigationActionLink"
+                              p:navigateToPageId="AddRulesPage"
+                              p:actionLabel="Add Rules"/>
                     </list>
                 </property>
             </bean>
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="RulesEditorPage" p:title="KSA Rules Editor">
-                    <property name="headerText" value="KSA Rules Editor"/>
+                <bean parent="Uif-Page" p:id="EditRulesPage" p:title="Edit Rule Set">
+                    <property name="headerText" value="Edit Rule Set"/>
                     <property name="items">
                         <list>
-                            <ref bean="rulesEditorPanel"/>
+                            <ref bean="editRulesPanel"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Page" p:id="AddRulesPage" p:title="Add Rule Set">
+                    <property name="headerText" value="Add Rule Set"/>
+                    <property name="items">
+                        <list>
+                            <ref bean="addRulesPanel"/>
                         </list>
                     </property>
                 </bean>
@@ -51,7 +64,60 @@
         </property>
     </bean>
 
-    <bean id="rulesEditorPanel" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
+    <bean id="addRulesPanel" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
+        <property name="disclosure.render" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-HorizontalBoxSection" p:layoutManager.orientation="HORIZONTAL">
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-InputField" p:propertyName="newRuleSetId"
+                                  p:label="Type in a new rule set name"
+                                  p:labelPlacement="TOP"
+                                  p:width="100"
+                                  p:required="true"
+                                  p:fieldLabel.renderColon="false">
+                                <property name="bindingInfo.bindToForm" value="true"/>
+                                <property name="control">
+                                    <bean parent="Uif-TextControl" p:size="100"/>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-ActionLink"
+                                  p:methodToCall="checkExistence"
+                                  p:actionLabel="Check if the name exist">
+                                <property name="cssClasses">
+                                    <list merge="true">
+                                        <value>ksa-form-button</value>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="newRuleSetBody"
+                      p:label="Rule Set Body"
+                      p:labelPlacement="TOP"
+                      p:required="true"
+                      p:fieldLabel.renderColon="false">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="150"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="add"
+                      p:actionLabel="Add">
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>ksa-form-button</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-MessageField" p:messageText="@{addStatusMessage}"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="editRulesPanel" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
@@ -88,7 +154,7 @@
                       p:fieldLabel.renderColon="false">
                     <property name="bindingInfo.bindToForm" value="true"/>
                     <property name="control">
-                        <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="100"/>
+                        <bean parent="Uif-TextAreaControl" p:rows="30" p:cols="150"/>
                     </property>
                 </bean>
                 <bean parent="Uif-PrimaryActionButton-Small" p:methodToCall="update"
@@ -99,6 +165,7 @@
                         </list>
                     </property>
                 </bean>
+                <bean parent="Uif-MessageField" p:messageText="@{editStatusMessage}"/>
             </list>
         </property>
     </bean>

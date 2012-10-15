@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.service.drools;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.RuleSet;
 import org.apache.commons.logging.Log;
@@ -95,6 +96,8 @@ public class DroolsService {
                 knowledgeBases.put(ruleSetId, knowledgeBase);
             }
             return knowledgeBase;
+        } catch (InvalidRulesException ire) {
+            throw ire;
         } catch (Throwable t) {
             String errMsg = "Cannot retrieve KnowledgeBase from '" + ruleSetId + "'";
             logger.error(errMsg, t);
@@ -110,7 +113,7 @@ public class DroolsService {
                 errorMessage.append(error).append("\n");
             }
             logger.error(errorMessage);
-            throw new RuntimeException(errorMessage.toString());
+            throw new InvalidRulesException(errorMessage.toString());
         }
     }
 
@@ -141,7 +144,7 @@ public class DroolsService {
     protected Resource getRuleSetResource(String ruleSetId) {
         switch (getPersistenceType()) {
             case CLASSPATH:
-                return ResourceFactory.newClassPathResource(Constants.DROOLS_CLASSPATH + "/"  + ruleSetId);
+                return ResourceFactory.newClassPathResource(Constants.DROOLS_CLASSPATH + "/" + ruleSetId);
             case DATABASE:
                 RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
                 if (ruleSet == null) {
