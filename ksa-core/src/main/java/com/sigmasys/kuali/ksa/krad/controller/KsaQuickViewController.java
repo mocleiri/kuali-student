@@ -330,8 +330,9 @@ public class KsaQuickViewController extends GenericSearchController {
         int itemsPerPage = Integer.valueOf(configService.getInitialParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
 
         List<Alert> alertsAll = informationService.getAlerts(userId);
-        AlertDateComparatorAscending comparitor1 = new AlertDateComparatorAscending();
-        Collections.sort(alertsAll, comparitor1);
+
+        //AlertDateComparatorAscending comparitor1 = new AlertDateComparatorAscending();
+        //Collections.sort(alertsAll, comparitor1);
 
         List<Alert> alerts = new ArrayList<Alert>();
         for (int i=0; i < itemsPerPage && i < alertsAll.size(); i++) {
@@ -341,8 +342,9 @@ public class KsaQuickViewController extends GenericSearchController {
         form.setAlerts(alerts);
 
         List<Flag> flagAll = informationService.getFlags(userId);
-        FlagDateComparatorAscending comparitor2 = new FlagDateComparatorAscending();
-        Collections.sort(flagAll, comparitor2);
+
+        //FlagDateComparatorAscending comparitor2 = new FlagDateComparatorAscending();
+        //Collections.sort(flagAll, comparitor2);
 
         List<Flag> flags = new ArrayList<Flag>();
         for (int i=0; i < itemsPerPage && i < flagAll.size(); i++) {
@@ -355,8 +357,8 @@ public class KsaQuickViewController extends GenericSearchController {
         List<Memo> memoList = informationService.getMemos(userId);
         List<MemoModel> memoModelList = new ArrayList<MemoModel>();
 
-        MemoDateComparatorAscending comparator3 = new MemoDateComparatorAscending();
-        Collections.sort(memoList, comparator3);
+        //MemoDateComparatorAscending comparator3 = new MemoDateComparatorAscending();
+        //Collections.sort(memoList, comparator3);
 
         for (int i=0; i < itemsPerPage && i < memoList.size(); i++) {
            Memo memo = memoList.get(i);

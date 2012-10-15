@@ -197,8 +197,8 @@ public class KsaStudentAccountsController extends GenericSearchController {
                     // added to TransactionModel
                     transactionModel.setRollupTag(StringUtils.collectionToCommaDelimitedString(names));
                 }
-               transactionModel.setTransactionTypeId(tt.getDescription());
-               transactionModel.setTransactionTypeDesc(tt.getId().getId());
+               transactionModel.setTransactionTypeId(tt.getId().getId());
+               transactionModel.setTransactionTypeDesc(tt.getDescription());
 
             }
             // // added to TransactionModel
