@@ -89,7 +89,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     @Override
     public List<Alert> getAlerts(String userId) {
         Query query = em.createQuery("select a from Alert a where a.account.id = :userId order by " +
-                " a.effectiveDate desc, a.creationDate desc, a.id desc");
+                " a.creationDate desc, a.effectiveDate desc");
         query.setParameter("userId", userId);
         return query.getResultList();
     }
@@ -103,7 +103,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     @Override
     public List<Flag> getFlags(String userId) {
         Query query = em.createQuery("select f from Flag f where f.account.id = :userId order by " +
-                " f.effectiveDate desc, f.creationDate desc, f.id desc");
+                " f.creationDate desc, f.effectiveDate desc");
         query.setParameter("userId", userId);
         return query.getResultList();
     }
@@ -117,7 +117,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     @Override
     public List<Memo> getMemos(String userId) {
         Query query = em.createQuery("select m from Memo m where m.account.id = :userId order by " +
-                " m.effectiveDate desc, m.creationDate desc, m.id desc");
+                " m.creationDate desc, m.effectiveDate desc");
         query.setParameter("userId", userId);
         return query.getResultList();
     }
@@ -134,7 +134,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
                 " left outer join fetch m.nextMemo nm " +
                 " left outer join fetch m.previousMemo pm " +
                 " where m.transaction.id = :transactionId order by " +
-                " m.effectiveDate desc, m.creationDate desc, m.id desc");
+                " m.creationDate desc, m.effectiveDate desc");
         query.setParameter("transactionId", transactionId);
         return query.getResultList();
     }
