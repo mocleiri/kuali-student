@@ -126,7 +126,15 @@ public class RulesController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=checkExistence")
     public ModelAndView checkExistence(@ModelAttribute("KualiForm") RulesForm form) {
 
-        ruleSetExists(form.getRuleSetId());
+        String ruleSetId = form.getNewRuleSetId();
+
+        if (StringUtils.isBlank(ruleSetId)) {
+            String errMsg = "Rule Set ID cannot be empty";
+            logger.error(errMsg);
+            form.setAddStatusMessage(errMsg);
+        } else if ( ruleSetExists(ruleSetId) ) {
+            form.setAddStatusMessage("Rule with ID = '" + ruleSetId + "' already exists");
+        }
 
         return getUIFModelAndView(form);
     }
