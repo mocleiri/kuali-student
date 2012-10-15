@@ -1176,7 +1176,7 @@ expander ksa.dsl
 global FeeBase feeBase;
 
 
-############ Beginning of rule definitions ##########################
+/////////////////////// Beginning of rule definitions ///////////////////////////
 
 rule "Rule 1"
 when
@@ -1248,7 +1248,7 @@ expander ksa.dsl
 global FeeBase feeBase;
 
 
-############ Beginning of rule definitions ##########################
+/////////////////////// Beginning of rule definitions ///////////////////////////
 
 
 rule "Tuition 1"
