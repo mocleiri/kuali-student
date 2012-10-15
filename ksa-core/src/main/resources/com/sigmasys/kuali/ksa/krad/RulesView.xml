@@ -79,7 +79,7 @@
                                   p:fieldLabel.renderColon="false">
                                 <property name="bindingInfo.bindToForm" value="true"/>
                                 <property name="control">
-                                    <bean parent="Uif-TextControl" p:size="100"/>
+                                    <bean parent="Uif-TextControl" p:size="50"/>
                                 </property>
                             </bean>
                             <bean parent="Uif-ActionLink"
