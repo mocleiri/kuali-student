@@ -84,7 +84,7 @@
                             </bean>
                             <bean parent="Uif-ActionLink"
                                   p:methodToCall="checkExistence"
-                                  p:actionLabel="Check if the name exist">
+                                  p:actionLabel="Check if the name exists">
                                 <property name="cssClasses">
                                     <list merge="true">
                                         <value>ksa-form-button</value>
