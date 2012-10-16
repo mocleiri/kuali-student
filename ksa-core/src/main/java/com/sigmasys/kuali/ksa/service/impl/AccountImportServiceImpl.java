@@ -300,7 +300,7 @@ public class AccountImportServiceImpl implements AccountImportService {
             if (feeManagementService.containsKeyPair(learningUnit, name)) {
                 feeManagementService.updateKeyPair(learningUnit, name, value);
             } else {
-                feeManagementService.createKeyPair(learningUnit, name, value);
+                feeManagementService.setKeyPair(learningUnit, name, value);
             }
         }
     }

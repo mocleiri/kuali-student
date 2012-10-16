@@ -109,7 +109,7 @@ public interface FeeManagementService {
      * @param value        Value of the new <code>KeyPair</code>.
      * @return The newly created <code>KeyPair</code>.
      */
-    KeyPair createKeyPair(LearningUnit learningUnit, String name, String value);
+    KeyPair setKeyPair(LearningUnit learningUnit, String name, String value);
 
     /**
      * Returns the value of a <code>KeyPair</code> with the specified name within the given <code>FeeBase</code>.
@@ -364,24 +364,24 @@ public interface FeeManagementService {
      * the given FeeBase and LU code.
      *
      * @param feeBase          A <code>FeeBase</code> that contains a student's information.
-     * @param learningUnitCode A LU code.
+     * @param luCodePattern    A LU code or a regular expression
      * @param status           The new course status.
      * @param keyPairName      The name of a <code>KeyPair</code> to add.
      * @param keyPairValue     The value of a <code>KeyPair</code> to add.
      */
-    void setCourseStatusForLearningUnit(FeeBase feeBase, String learningUnitCode, String status, String keyPairName, String keyPairValue);
+    void setCourseStatusForLearningUnits(FeeBase feeBase, String luCodePattern, String status, String keyPairName, String keyPairValue);
 
     /**
      * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
      * the given FeeBase and section code.
      *
      * @param feeBase      A <code>FeeBase</code> that contains a student's information.
-     * @param sectionCode  A LU section code.
+     * @param sectionPattern  A LU section code or a regular expression.
      * @param status       The new course status.
      * @param keyPairName  The name of a <code>KeyPair</code> to add.
      * @param keyPairValue The value of a <code>KeyPair</code> to add.
      */
-    void setCourseStatusForSection(FeeBase feeBase, String sectionCode, String status, String keyPairName, String keyPairValue);
+    void setCourseStatusForSections(FeeBase feeBase, String sectionPattern, String status, String keyPairName, String keyPairValue);
 
     /**
      * Sets a course's new status and add a <code>KeyPair</code> with the specified name and value to all LUs for

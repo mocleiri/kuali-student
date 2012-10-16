@@ -62,13 +62,13 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * Performs all the necessary operations to calculate fees for the given account.
      * Most of this logic is usually performed by a rule engine (Drools).
      *
-     * @param accountId  Account ID
+     * @param accountId Account ID
      */
     @Override
     public void assessFees(String accountId) {
 
         String feeAssessmentRuleSetId = configService.getInitialParameter(Constants.DROOLS_FA_RULE_SET_PARAM_NAME);
-        if ( feeAssessmentRuleSetId ==  null ) {
+        if (feeAssessmentRuleSetId == null) {
             String errMsg = "Fee Assessment Rule ID '" + Constants.DROOLS_FA_RULE_SET_PARAM_NAME + "' must be set";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
@@ -85,7 +85,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
         droolsService.fireRules(feeAssessmentRuleSetId, ResourceType.DSLR, droolsContext, globalParams);
     }
-
 
 
     /**
@@ -223,14 +222,14 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return The newly created <code>KeyPair</code>.
      */
     @Override
-    public KeyPair createKeyPair(LearningUnit learningUnit, String name, String value) {
+    public KeyPair setKeyPair(LearningUnit learningUnit, String name, String value) {
         // Validate the input:
         validateInputParameters(learningUnit, name, value);
-        validateKeyPairNameUnique(learningUnit, name);
+        //validateKeyPairNameUnique(learningUnit, name);
 
         try {
             // Create and persist a new KeyPair:
-            KeyPair newKeyPair = createKeyPairInternal(name, value, null, KeyPair.class);
+            KeyPair newKeyPair = setKeyPairInternal(name, value, null, KeyPair.class);
 
             // Add the new KeyPair to the LearningUnit's list of KeyPairs:
             learningUnit.getExtended().add(newKeyPair);
@@ -740,41 +739,52 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         setCourseStatus(learningUnit, status);
 
         // Add a KeyPair:
-        createKeyPair(learningUnit, keyPairName, keyPairValue);
+        setKeyPair(learningUnit, keyPairName, keyPairValue);
     }
 
     /**
      * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
      * the given FeeBase and LU code.
      *
-     * @param feeBase          A <code>FeeBase</code> that contains a student's information.
-     * @param learningUnitCode A LU code.
-     * @param status           The new course status.
-     * @param keyPairName      The name of a <code>KeyPair</code> to add.
-     * @param keyPairValue     The value of a <code>KeyPair</code> to add.
+     * @param feeBase       A <code>FeeBase</code> that contains a student's information.
+     * @param luCodePattern A LU code or a regular expression.
+     * @param status        The new course status.
+     * @param keyPairName   The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue  The value of a <code>KeyPair</code> to add.
      */
     @Override
-    public void setCourseStatusForLearningUnit(FeeBase feeBase, String learningUnitCode, String status, String keyPairName, String keyPairValue) {
-        LearningUnit learningUnit = feeBase.getLearningUnit(learningUnitCode);
-        if (learningUnitCode != null) {
+    public void setCourseStatusForLearningUnits(FeeBase feeBase, String luCodePattern, String status,
+                                                String keyPairName, String keyPairValue) {
+        Set<LearningUnit> learningUnits = new HashSet<LearningUnit>();
+        for (String luCode : getLearningUnitCodes(feeBase)) {
+            if (luCodePattern.equals(luCode) || Pattern.matches(luCodePattern, luCode)) {
+                learningUnits.add(feeBase.getLearningUnit(luCode));
+            }
+        }
+        for (LearningUnit learningUnit : learningUnits) {
             setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
         }
-        // TODO: throw an unchecked exception if the learning unit has not been found - "Mike"
     }
 
     /**
      * Sets a course's status and add a <code>KeyPair</code> with the specified name and value to all LUs for
      * the given FeeBase and section code.
      *
-     * @param feeBase      A <code>FeeBase</code> that contains a student's information.
-     * @param sectionCode  A LU section code.
-     * @param status       The new course status.
-     * @param keyPairName  The name of a <code>KeyPair</code> to add.
-     * @param keyPairValue The value of a <code>KeyPair</code> to add.
+     * @param feeBase        A <code>FeeBase</code> that contains a student's information.
+     * @param sectionPattern A LU section code or a regular expressions
+     * @param status         The new course status.
+     * @param keyPairName    The name of a <code>KeyPair</code> to add.
+     * @param keyPairValue   The value of a <code>KeyPair</code> to add.
      */
     @Override
-    public void setCourseStatusForSection(FeeBase feeBase, String sectionCode, String status, String keyPairName, String keyPairValue) {
-        List<LearningUnit> learningUnits = feeBase.getLearningUnitsBySectionCode(sectionCode);
+    public void setCourseStatusForSections(FeeBase feeBase, String sectionPattern, String status, String keyPairName, String keyPairValue) {
+        Set<LearningUnit> learningUnits = new HashSet<LearningUnit>();
+        for (LearningUnit lu : feeBase.getLearningUnits()) {
+            String sectionCode = lu.getUnitSection();
+            if (sectionCode != null && (sectionCode.equals(sectionPattern) || Pattern.matches(sectionPattern, sectionCode))) {
+                learningUnits.addAll(feeBase.getLearningUnitsBySectionCode(sectionCode));
+            }
+        }
         for (LearningUnit learningUnit : learningUnits) {
             setCourseStatus(learningUnit, status, keyPairName, keyPairValue);
         }
@@ -1018,7 +1028,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
         try {
             // Create and persist a new KeyPair:
-            T newKeyPair = createKeyPairInternal(name, value, period, entityClass);
+            T newKeyPair = setKeyPairInternal(name, value, period, entityClass);
 
             // Create an association record:
             createKeyPairAssociationRecord(feeBase.getAccount(), newKeyPair);
@@ -1052,18 +1062,24 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @param entityClass The type of the new object to create.
      * @return The newly created object.
      */
-    private <T extends KeyPair> T createKeyPairInternal(String name, String value, LearningPeriod period, Class<T> entityClass) throws Exception {
-        // Create a new instance:
-        boolean isPeriodKeyPair = entityClass.equals(PeriodKeyPair.class);
-        T keyPair = entityClass.newInstance();
+    private <T extends KeyPair> T setKeyPairInternal(String name, String value, LearningPeriod period, Class<T> entityClass) throws Exception {
+
+        Query query = em.createQuery("select kp from KeyPair kp where kp.name = :name");
+        query.setParameter("name", name);
+        List<T> keyPairs = query.getResultList();
+        T keyPair = CollectionUtils.isNotEmpty(keyPairs) ? keyPairs.get(0) : null;
+
+        if ( keyPair == null ) {
+            keyPair = entityClass.newInstance();
+        }
 
         // Set common properties:
         keyPair.setName(name);
         keyPair.setValue(value);
 
         // Set PeriodKeyPair properties:
-        if (isPeriodKeyPair) {
-            PeriodKeyPair.class.cast(keyPair).setLearningPeriod(period);
+        if (keyPair instanceof PeriodKeyPair) {
+           ((PeriodKeyPair)keyPair).setLearningPeriod(period);
         }
 
         // Persist the new instance:

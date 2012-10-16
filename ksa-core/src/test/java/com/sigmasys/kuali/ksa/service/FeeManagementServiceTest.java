@@ -420,7 +420,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		LearningUnit testLearningUnit = feeBaseFromService.getLearningUnits().get(0);
 		
 		// Call the service:
-		KeyPair newKeyPair = feeManagementService.createKeyPair(testLearningUnit, name, value);
+		KeyPair newKeyPair = feeManagementService.setKeyPair(testLearningUnit, name, value);
 		
 		// Validate the result:
 		notNull(newKeyPair);
@@ -448,7 +448,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		try {
 			// Call the service:
-			feeManagementService.createKeyPair(testLearningUnit, nameThatHasAlreadyBeenUsed, value);
+			feeManagementService.setKeyPair(testLearningUnit, nameThatHasAlreadyBeenUsed, value);
 			
 			// We should not be here:
 			isTrue(false, "An error should have occurred because a KeyPair name already exists, but it DID'T.");
@@ -465,26 +465,26 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		// Null LearningUnit:
 		try {
 			LearningUnit nullLearningUnit = null;
-			feeManagementService.createKeyPair(nullLearningUnit, "new name", "New value");
+			feeManagementService.setKeyPair(nullLearningUnit, "new name", "New value");
 			isTrue(false);
 		} catch(Exception e) {}
 		
 		// Null name:
 		try {
-			feeManagementService.createKeyPair(new LearningUnit(), null, "New value");
+			feeManagementService.setKeyPair(new LearningUnit(), null, "New value");
 			isTrue(false);
 		} catch(Exception e) {}
 		
 		// Null value:
 		try {
-			feeManagementService.createKeyPair(new LearningUnit(), "new name", null);
+			feeManagementService.setKeyPair(new LearningUnit(), "new name", null);
 			isTrue(false);
 		} catch(Exception e) {}
 		
 		// Null everything:
 		try {
 			LearningUnit nullLearningUnit = null;
-			feeManagementService.createKeyPair(nullLearningUnit, null, null);
+			feeManagementService.setKeyPair(nullLearningUnit, null, null);
 			isTrue(false);
 		} catch(Exception e) {}
 	}
