@@ -14,7 +14,7 @@
     <bean id="Uif-KsaBreadcrumbs" parent="Uif-Breadcrumbs-parentBean">
         <property name="homewardPathList">
             <list>
-                <bean parent="Uif-HistoryEntry" p:title="Home" p:url="../index.jsp"/>
+                <bean parent="Uif-HistoryEntry" p:title="Home" p:url="../index.html"/>
             </list>
         </property>
     </bean>
