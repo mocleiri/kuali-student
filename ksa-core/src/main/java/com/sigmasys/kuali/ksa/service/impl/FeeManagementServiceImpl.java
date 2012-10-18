@@ -223,16 +223,24 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public KeyPair setKeyPair(LearningUnit learningUnit, String name, String value) {
+
         // Validate the input:
         validateInputParameters(learningUnit, name, value);
         //validateKeyPairNameUnique(learningUnit, name);
 
         try {
+
             // Create and persist a new KeyPair:
             KeyPair newKeyPair = setKeyPairInternal(name, value, null, KeyPair.class);
 
-            // Add the new KeyPair to the LearningUnit's list of KeyPairs:
-            learningUnit.getExtended().add(newKeyPair);
+            // Add the new KeyPair to the LearningUnit's set of KeyPairs if it does not already exist there
+            Set<KeyPair> keyPairs = learningUnit.getKeyPairs();
+            if (keyPairs != null) {
+                if (keyPairs.contains(newKeyPair)) {
+                    keyPairs.remove(newKeyPair);
+                }
+                keyPairs.add(newKeyPair);
+            }
 
             // Update the associations:
             persistEntity(learningUnit);
@@ -241,12 +249,14 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
             em.flush();
 
             return newKeyPair;
+
         } catch (Throwable t) {
             // Log error:
-            logger.error("Error creating a KeyPair for a LearningPeriod.", t);
+            String errMsg = "Error creating a KeyPair for a LearningPeriod: " + t.getMessage();
+            logger.error(errMsg, t);
 
             // Re-throw the error:
-            throw new RuntimeException("Error creating a KeyPair for a LearningPeriod.", t);
+            throw new RuntimeException(errMsg, t);
         }
     }
 
@@ -296,7 +306,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
         // Iterate through the "extended" attribute of the "learningUnit"
         // to find the one that has the "name" attribute equals to the argument:
-        for (KeyPair keyPair : learningUnit.getExtended()) {
+        for (KeyPair keyPair : learningUnit.getKeyPairs()) {
             if (StringUtils.equalsIgnoreCase(keyPair.getName(), name)) {
                 return keyPair.getValue();
             }
@@ -352,7 +362,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         validateInputParameters(learningUnit, name, newValue);
 
         // Update the KeyPair value:
-        updateKeyPairInternal(learningUnit.getExtended(), name, newValue, null, KeyPair.class);
+        updateKeyPairInternal(learningUnit.getKeyPairs(), name, newValue, null, KeyPair.class);
     }
 
     /**
@@ -412,7 +422,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         validateInputParameters(learningUnit, name);
 
         // Remove the KeyPair with the given name from the "extended" Set:
-        removeKeyPairInternal(learningUnit.getExtended(), name);
+        removeKeyPairInternal(learningUnit.getKeyPairs(), name);
 
         // Update the persistent context:
         persistEntity(learningUnit);
@@ -448,7 +458,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         // Validate input:
         validateInputParameters(learningUnit, name);
 
-        return containsKeyPairInternal(learningUnit.getExtended(), name);
+        return containsKeyPairInternal(learningUnit.getKeyPairs(), name);
     }
 
     /**
@@ -1069,7 +1079,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         List<T> keyPairs = query.getResultList();
         T keyPair = CollectionUtils.isNotEmpty(keyPairs) ? keyPairs.get(0) : null;
 
-        if ( keyPair == null ) {
+        if (keyPair == null) {
             keyPair = entityClass.newInstance();
         }
 
@@ -1079,7 +1089,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
         // Set PeriodKeyPair properties:
         if (keyPair instanceof PeriodKeyPair) {
-           ((PeriodKeyPair)keyPair).setLearningPeriod(period);
+            ((PeriodKeyPair) keyPair).setLearningPeriod(period);
         }
 
         // Persist the new instance:
@@ -1108,8 +1118,8 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      */
     private void createKeyPairAssociationRecord(String accountId, KeyPair keyPair) throws Exception {
         // Create and execute an INSERT statement:
-        Query query = em.createNativeQuery("insert into kssa_acnt_kypr (acnt_id_fk, kypr_id_fk) values (:accountId, :keypairId)")
-                .setParameter("accountId", accountId).setParameter("keypairId", keyPair.getId());
+        Query query = em.createNativeQuery("insert into kssa_acnt_kypr (acnt_id_fk, kypr_id_fk) values (:accountId, :keypairId)");
+        query.setParameter("accountId", accountId).setParameter("keypairId", keyPair.getId());
 
         query.executeUpdate();
     }
@@ -1310,7 +1320,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     }
 
     private void validateKeyPairNameUnique(LearningUnit learningUnit, String name) {
-        if (containsKeyPairInternal(learningUnit.getExtended(), name)) {
+        if (containsKeyPairInternal(learningUnit.getKeyPairs(), name)) {
             throw new IllegalArgumentException("Such KeyPair name [" + name + "] already exists for LearningUnit with code [" + learningUnit.getUnitCode() + "].");
         }
     }

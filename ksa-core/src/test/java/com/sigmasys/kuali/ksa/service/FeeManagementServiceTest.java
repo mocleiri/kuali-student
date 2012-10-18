@@ -1261,7 +1261,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		luFromService.setStatus(newStatus);
 		luFromService.setUnitCode(newUnitCode);
 		luFromService.setUnitSection(newUnitSection);
-		luFromService.setExtended(new HashSet<KeyPair>(Arrays.asList(newKp1, newKp2)));
+		luFromService.setKeyPairs(new HashSet<KeyPair>(Arrays.asList(newKp1, newKp2)));
 		
 		// Call the service:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1822,7 +1822,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		lu1.setStatus("Undefined");
 		lu1.setUnitCode("doo");
 		lu1.setUnitSection("section 000v");
-		lu1.setExtended(new HashSet<KeyPair>(createKeyPairs()));
+		lu1.setKeyPairs(new HashSet<KeyPair>(createKeyPairs()));
 		
 		// Set up LearningUnit 2:
 		lu2.setAccount(testAccount);
@@ -1836,7 +1836,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		lu2.setStatus("Undefined 2");
 		lu2.setUnitCode("doo2");
 		lu2.setUnitSection("section 002v");
-		lu2.setExtended(new HashSet<KeyPair>(createKeyPairs()));
+		lu2.setKeyPairs(new HashSet<KeyPair>(createKeyPairs()));
 		
 		return new ArrayList<LearningUnit>(Arrays.asList(lu1, lu2));
 	}
@@ -1930,7 +1930,7 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 			assertEquals(expected.get(i).getStatus(), actual.get(i).getStatus());
 			assertEquals(expected.get(i).getAccountId(), actual.get(i).getAccountId());
 			assertAccount(expected.get(i).getAccount(), actual.get(i).getAccount());
-			assertKeyPairs(new ArrayList<KeyPair>(expected.get(i).getExtended()), new ArrayList<KeyPair>(actual.get(i).getExtended()));
+			assertKeyPairs(new ArrayList<KeyPair>(expected.get(i).getKeyPairs()), new ArrayList<KeyPair>(actual.get(i).getKeyPairs()));
 		}
 	}
 	

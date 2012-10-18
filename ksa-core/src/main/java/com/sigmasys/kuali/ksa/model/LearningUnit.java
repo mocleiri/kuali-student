@@ -90,7 +90,7 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 	/**
 	 * A set of PeriodKeyPair that represent extended elements of the LearningUnit.
 	 */
-	private Set<KeyPair> extended;
+	private Set<KeyPair> keyPairs;
 	
 	/**
 	 * The Account associated with this LearningUnit.
@@ -167,8 +167,8 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
                     @JoinColumn(name = "KYPR_ID_FK")
             }
     )
-	public Set<KeyPair> getExtended() {
-		return extended;
+	public Set<KeyPair> getKeyPairs() {
+		return keyPairs;
 	}
 
     @ManyToOne(fetch=FetchType.LAZY)
@@ -213,8 +213,8 @@ public class LearningUnit extends AccountIdAware implements Identifiable {
 		this.status = status;
 	}
 
-	public void setExtended(Set<KeyPair> extended) {
-		this.extended = extended;
+	public void setKeyPairs(Set<KeyPair> keyPairs) {
+		this.keyPairs = keyPairs;
 	}
 
 	public void setId(Long id) {

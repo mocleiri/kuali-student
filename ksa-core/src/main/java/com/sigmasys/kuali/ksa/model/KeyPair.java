@@ -25,8 +25,8 @@ import org.apache.commons.lang.StringUtils;
 @DiscriminatorValue(KeyPairType.KEY_PAIR_CODE)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class KeyPair implements Identifiable {
-	
-	private static final long serialVersionUID = 1L;
+
+
 	
 	/**
 	 * The unique identifier.
@@ -99,24 +99,28 @@ public class KeyPair implements Identifiable {
 		this.id = id;
 	}
 
-	public boolean equals(Object o) {
-		if (o instanceof KeyPair) {
-			KeyPair kpAnother = (KeyPair)o;
-			
-			return (kpAnother.id != null) && (kpAnother.id.equals(this.id)) 
-					&& StringUtils.equals(kpAnother.name, this.name)
-					&& StringUtils.equals(kpAnother.value, this.value)
-					&& StringUtils.equals(kpAnother.previousValue, this.previousValue);
-					
-		}
-		
-		return false;
-	}
-	
-	public int hashCode() {
-		return 
-				31 * ((StringUtils.isNotEmpty(this.name) ? name.hashCode() : 0) + 
-				31 * (StringUtils.isNotEmpty(this.value) ? value.hashCode() : 0));
-	}
-	
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        KeyPair keyPair = (KeyPair) o;
+
+        return !(name != null ? !name.equals(keyPair.name) : keyPair.name != null) && !(value != null ?
+                !value.equals(keyPair.value) : keyPair.value != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
+    }
 }

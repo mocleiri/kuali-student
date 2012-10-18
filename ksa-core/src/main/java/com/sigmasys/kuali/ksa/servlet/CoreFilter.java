@@ -7,6 +7,7 @@ import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.kuali.rice.core.api.exception.RiceIllegalArgumentException;
 import org.kuali.rice.kim.api.identity.IdentityService;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.kim.api.identity.principal.Principal;
@@ -124,8 +125,8 @@ public class CoreFilter implements Filter {
                 final String redirectUrl = request.getRequestURI() + (queryString != null ? "?" + queryString : "");
                 request.setAttribute("redirectUrl", redirectUrl);
 
-                final String userId = request.getParameter("userId");
-                final String password = request.getParameter("password");
+                final String userId = request.getParameter("ksa_userId");
+                final String password = request.getParameter("ksa_password");
 
                 if (userId != null) {
 
@@ -137,10 +138,17 @@ public class CoreFilter implements Filter {
                         throw e;
                     }
 
-                    final Principal principal =
-                            isTrustedUrl(request) ?
-                                    identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
-                                    identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
+                    Principal principal;
+
+                    try {
+                        principal = isTrustedUrl(request) ?
+                                identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
+                                identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
+                    } catch (RiceIllegalArgumentException re) {
+                        logger.error(re.getMessage(), re);
+                        invalidateSession(request, response, false);
+                        return;
+                    }
 
                     if (principal != null) {
 
@@ -191,7 +199,8 @@ public class CoreFilter implements Filter {
                         }
 
                     } else {
-                        handleInvalidLogin(request, response);
+                        invalidateSession(request, response, true);
+                        return;
                     }
 
                 } else {
@@ -229,15 +238,13 @@ public class CoreFilter implements Filter {
      * @throws ServletException if unable to handle the invalid login
      * @throws IOException      if unable to handle the invalid login
      */
-    private void handleInvalidLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request != null) {
+    private void invalidateSession(HttpServletRequest request, HttpServletResponse response, boolean invalidLogin) throws ServletException, IOException {
             final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
             if (sessionManager != null) {
                 sessionManager.destroySession(request);
             }
-            request.setAttribute("invalidLogin", true);
+            request.setAttribute("invalidLogin", invalidLogin);
             request.getRequestDispatcher(loginPath).forward(request, response);
-        }
     }
 
     @Override

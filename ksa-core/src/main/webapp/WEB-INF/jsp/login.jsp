@@ -101,7 +101,7 @@
                     <label>Username:&nbsp;</label>
                 </td>
                 <td class="rightTd" align="left">
-                    <input type="text" name="userId" value="" size="20"/>
+                    <input type="text" name="ksa_userId" value="" size="20"/>
                 </td>
             </tr>
             <c:set var="invalidAuthMsg" value="Invalid username"/>
@@ -112,7 +112,7 @@
                         <label>Password:&nbsp;</label>
                     </td>
                     <td class="rightTd" align="left">
-                        <input type="password" name="password" value="" size="20"/></td>
+                        <input type="password" name="ksa_password" value="" size="20"/></td>
                 </tr>
             </c:if>
             <c:if test="${requestScope.invalidLogin}">
