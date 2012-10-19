@@ -62,7 +62,7 @@
         <property name="additionalJsFiles" ref=""/>
         <property name="viewHelperServiceClassName" value=""/>
         <property name="defaultBindingObjectPath" vaue=""/>-->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaAdminForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AdminForm"/>
     </bean>
 
     <!--

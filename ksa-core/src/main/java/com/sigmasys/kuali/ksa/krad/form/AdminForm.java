@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Activity;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 /**
  * Created by: dmulderink on 10/5/12 at 6:55 PM
  */
-public class KsaAdminForm extends AbstractViewModel {
+public class AdminForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 

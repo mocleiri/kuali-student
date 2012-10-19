@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.TransOvrForm;
+import com.sigmasys.kuali.ksa.krad.form.TransactionOverviewForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.ActivityService;
@@ -9,23 +9,21 @@ import com.sigmasys.kuali.ksa.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Controller
-@RequestMapping(value = "/transOvrVw")
-public class TransOvrController extends GenericSearchController {
+@RequestMapping(value = "/transactionOverview")
+public class TransOverviewController extends GenericSearchController {
 
 
     @Autowired
-    ActivityService activityService;
+    private ActivityService activityService;
 
     @Autowired
     private CurrencyService currencyService;
@@ -35,65 +33,31 @@ public class TransOvrController extends GenericSearchController {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected TransOvrForm createInitialForm(HttpServletRequest request) {
-        return new TransOvrForm();
+    protected TransactionOverviewForm createInitialForm(HttpServletRequest request) {
+        return new TransactionOverviewForm();
     }
+
 
     /**
      * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
-    public ModelAndView submit(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do submit stuff...
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    public ModelAndView save(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView save(@ModelAttribute("KualiForm") TransactionOverviewForm form) {
         // do save stuff...
 
         currencyService.persistCurrency(form.getCurrency());
         return getUIFModelAndView(form);
     }
 
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
-        return getUIFModelAndView(form);
-    }
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView refresh(@ModelAttribute("KualiForm") TransactionOverviewForm form, HttpServletRequest request) {
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
 
@@ -107,14 +71,11 @@ public class TransOvrController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView get(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView get(@ModelAttribute("KualiForm") TransactionOverviewForm form, HttpServletRequest request) {
 
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
@@ -215,14 +176,10 @@ public class TransOvrController extends GenericSearchController {
      * and selected from for further processing as desired.
      *
      * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByName")
-    public ModelAndView searchByName(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                                     HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView searchByName(@ModelAttribute("KualiForm") TransactionOverviewForm form) {
 
         // we do not have a query by name or partial name via last name or contains yet
         // if no result set from getting full accounts than the List is empty
@@ -262,8 +219,7 @@ public class TransOvrController extends GenericSearchController {
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCurrType")
     @Transactional(readOnly = false)
-    public ModelAndView addCurrType(@ModelAttribute("KualiForm") TransOvrForm form, BindingResult result,
-                                    HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView addCurrType(@ModelAttribute("KualiForm") TransactionOverviewForm form) {
 
         // add a Currency Type
         Currency currency = new Currency();

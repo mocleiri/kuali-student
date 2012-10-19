@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by: dmulderink on 10/6/12 at 2:27 PM
  */
-public class KsaAlertsForm extends AbstractViewModel {
+public class AlertForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
@@ -26,7 +26,7 @@ public class KsaAlertsForm extends AbstractViewModel {
    private String statusMessage;
 
    // resuable add edit or followup instructional text
-   private String aeInstructionalText;
+   private String instructionalText;
 
    /*
      Get/Set methods
@@ -80,11 +80,11 @@ public class KsaAlertsForm extends AbstractViewModel {
       this.statusMessage = statusMessage;
    }
 
-   public String getAeInstructionalText() {
-      return aeInstructionalText;
+   public String getInstructionalText() {
+      return instructionalText;
    }
 
-   public void setAeInstructionalText(String aeInstructionalText) {
-      this.aeInstructionalText = aeInstructionalText;
+   public void setInstructionalText(String instructionalText) {
+      this.instructionalText = instructionalText;
    }
 }

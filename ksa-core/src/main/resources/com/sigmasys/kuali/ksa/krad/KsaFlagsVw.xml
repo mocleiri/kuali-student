@@ -296,7 +296,7 @@
     -->
     <bean id="viewFlagSection" parent="Uif-GridSection"
           p:title="@{account.id}"
-          p:instructionalText="@{aeInstructionalText}">
+          p:instructionalText="@{instructionalText}">
         <property name="layoutManager">
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
         </property>

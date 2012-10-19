@@ -26,7 +26,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaAlertsView" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="AlertView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Alerts"/>
         <property name="headerText" value="Alerts"/>
         <property name="entryPageId" value="AlertsPage"/>
@@ -96,7 +96,7 @@
         <property name="viewHelperServiceClassName" value=""/>
         <property name="defaultBindingObjectPath" value=""/>
 -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaAlertsForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.AlertForm"/>
     </bean>
 
     <!--
@@ -257,7 +257,7 @@
     <bean id="addAlertControlsGroup" parent="Uif-HorizontalBoxGroup">
         <property name="items">
             <list>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertAlert"
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="addAlert"
                       p:actionLabel="Submit"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                 </bean>
@@ -294,7 +294,7 @@
     -->
     <bean id="viewAlertSection" parent="Uif-GridSection"
           p:title="@{account.id}"
-          p:instructionalText="@{aeInstructionalText}">
+          p:instructionalText="@{instructionalText}">
         <property name="layoutManager">
             <bean parent="Uif-GridLayoutBase" p:numberOfColumns="4"/>
         </property>

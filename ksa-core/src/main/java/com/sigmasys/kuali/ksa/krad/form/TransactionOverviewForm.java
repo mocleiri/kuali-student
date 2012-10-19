@@ -4,7 +4,7 @@ import com.sigmasys.kuali.ksa.model.*;
 
 import java.util.List;
 
-public class TransOvrForm extends AbstractViewModel {
+public class TransactionOverviewForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916420L;
 

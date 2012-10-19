@@ -8,10 +8,10 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="StudentTransactionOverview" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="TransactionOverview" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Student Transaction Overview"/>
         <property name="headerText" value="Transaction Overview"/>
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransOvrForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionOverviewForm"/>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
         <property name="navigation">

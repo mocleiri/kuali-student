@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.AdminLiaisonForm;
+import com.sigmasys.kuali.ksa.krad.form.FileUploadForm;
 import com.sigmasys.kuali.ksa.service.TransactionImportService;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.apache.commons.logging.Log;
@@ -25,58 +25,33 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 11:17 AM
  */
 @Controller
-@RequestMapping(value = "/adminLiaisonVw")
-public class AdminLiaisonController extends GenericSearchController {
+@RequestMapping(value = "/transactionUploadView")
+public class TransactionUploadController extends GenericSearchController {
 
 
     @Autowired
     private TransactionImportService transactionImportService;
 
 
-    private static final Log logger = LogFactory.getLog(AdminLiaisonController.class);
+    private static final Log logger = LogFactory.getLog(TransactionUploadController.class);
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected AdminLiaisonForm createInitialForm(HttpServletRequest request) {
-        AdminLiaisonForm form = new AdminLiaisonForm();
+    protected FileUploadForm createInitialForm(HttpServletRequest request) {
+        FileUploadForm form = new FileUploadForm();
         form.setUploadProcessState("");
         return form;
     }
 
     /**
      * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") AdminLiaisonForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
-
-        // do get stuff...
-
+    public ModelAndView get(@ModelAttribute("KualiForm") FileUploadForm form) {
         return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-
-    @RequestMapping(params = "methodToCall=start")
-    public ModelAndView start(@ModelAttribute("KualiForm") AdminLiaisonForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-
-        // populate model for testing
-
-        return super.start(form, result, request, response);
-
     }
 
     /**
@@ -88,7 +63,7 @@ public class AdminLiaisonController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
     @Transactional(readOnly = false)
-    public ModelAndView submit(@ModelAttribute("KualiForm") AdminLiaisonForm form, BindingResult result,
+    public ModelAndView submit(@ModelAttribute("KualiForm") FileUploadForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
         // org.springframework.web.multipart.MaxUploadSizeExceededException:
@@ -97,7 +72,7 @@ public class AdminLiaisonController extends GenericSearchController {
         // the request was rejected because its size (992410) exceeds the configured maximum (500000)
         String processMsg = "";
         try {
-            MultipartFile uploadXMLFile = form.getUploadXMLFile();
+            MultipartFile uploadXMLFile = form.getUploadFile();
             String contentType = uploadXMLFile.getContentType();
             if (contentType.endsWith("xml")) {
 
@@ -137,48 +112,4 @@ public class AdminLiaisonController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") AdminLiaisonForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") AdminLiaisonForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") AdminLiaisonForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
-        // do refresh stuff...
-        return getUIFModelAndView(form);
-    }
 }

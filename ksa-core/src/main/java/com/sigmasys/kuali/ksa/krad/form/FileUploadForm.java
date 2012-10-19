@@ -7,11 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
  * Date: 4/24/12
  * Time: 11:16 AM
  */
-public class AdminLiaisonForm extends AbstractViewModel {
+public class FileUploadForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
-   private MultipartFile uploadXMLFile;
+   private MultipartFile uploadFile;
 
    private String uploadProcessState;
 
@@ -20,16 +20,16 @@ public class AdminLiaisonForm extends AbstractViewModel {
     * Get the upload XML file
     * @return
     */
-   public MultipartFile getUploadXMLFile() {
-      return uploadXMLFile;
+   public MultipartFile getUploadFile() {
+      return uploadFile;
    }
 
    /**
     * Set the upload XML file
-    * @param uploadXMLFile
+    * @param uploadFile
     */
-   public void setUploadXMLFile(MultipartFile uploadXMLFile) {
-      this.uploadXMLFile = uploadXMLFile;
+   public void setUploadFile(MultipartFile uploadFile) {
+      this.uploadFile = uploadFile;
    }
 
    /**
