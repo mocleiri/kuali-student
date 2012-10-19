@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.TransactionOverviewForm;
+import com.sigmasys.kuali.ksa.krad.form.TransactionForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.ActivityService;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
-@RequestMapping(value = "/transactionOverview")
-public class TransactionOverviewController extends GenericSearchController {
+@RequestMapping(value = "/transactionView")
+public class TransactionController extends GenericSearchController {
 
 
     @Autowired
@@ -33,8 +33,8 @@ public class TransactionOverviewController extends GenericSearchController {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected TransactionOverviewForm createInitialForm(HttpServletRequest request) {
-        return new TransactionOverviewForm();
+    protected TransactionForm createInitialForm(HttpServletRequest request) {
+        return new TransactionForm();
     }
 
 
@@ -43,7 +43,7 @@ public class TransactionOverviewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    public ModelAndView save(@ModelAttribute("KualiForm") TransactionOverviewForm form) {
+    public ModelAndView save(@ModelAttribute("KualiForm") TransactionForm form) {
         // do save stuff...
 
         currencyService.persistCurrency(form.getCurrency());
@@ -57,7 +57,7 @@ public class TransactionOverviewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") TransactionOverviewForm form, HttpServletRequest request) {
+    public ModelAndView refresh(@ModelAttribute("KualiForm") TransactionForm form, HttpServletRequest request) {
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
 
@@ -75,7 +75,7 @@ public class TransactionOverviewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView get(@ModelAttribute("KualiForm") TransactionOverviewForm form, HttpServletRequest request) {
+    public ModelAndView get(@ModelAttribute("KualiForm") TransactionForm form, HttpServletRequest request) {
 
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
@@ -179,7 +179,7 @@ public class TransactionOverviewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByName")
-    public ModelAndView searchByName(@ModelAttribute("KualiForm") TransactionOverviewForm form) {
+    public ModelAndView searchByName(@ModelAttribute("KualiForm") TransactionForm form) {
 
         // we do not have a query by name or partial name via last name or contains yet
         // if no result set from getting full accounts than the List is empty
@@ -219,7 +219,7 @@ public class TransactionOverviewController extends GenericSearchController {
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=addCurrType")
     @Transactional(readOnly = false)
-    public ModelAndView addCurrType(@ModelAttribute("KualiForm") TransactionOverviewForm form) {
+    public ModelAndView addCurrType(@ModelAttribute("KualiForm") TransactionForm form) {
 
         // add a Currency Type
         Currency currency = new Currency();

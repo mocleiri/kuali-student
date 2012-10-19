@@ -8,10 +8,10 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="TransactionOverview" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="TransactionView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Student Transaction Overview"/>
         <property name="headerText" value="Transaction Overview"/>
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionOverviewForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionForm"/>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
         <property name="navigation">
@@ -54,7 +54,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="bursaChargePage" p:title="Charge Detail - @{selectedPersonName}">
+                <bean parent="Uif-Page" p:id="bursaChargePage" p:title="Charge Details - @{selectedPersonName}">
                     <property name="headerText" value="Charge Detail"/>
                     <property name="items">
                         <list>
@@ -62,7 +62,7 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="bursaPaymentPage" p:title="Payment Detail - @{selectedPersonName}">
+                <bean parent="Uif-Page" p:id="bursaPaymentPage" p:title="Payment Details - @{selectedPersonName}">
                     <property name="headerText" value="Payment Detail"/>
                     <property name="items">
                         <list>
