@@ -19,7 +19,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping(value = "/transactionOverview")
-public class TransOverviewController extends GenericSearchController {
+public class TransactionOverviewController extends GenericSearchController {
 
 
     @Autowired
