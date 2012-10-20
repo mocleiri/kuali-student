@@ -26,7 +26,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaChargeView" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="ChargeView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Charge"/>
         <property name="headerText" value="Charges"/>
         <property name="entryPageId" value="AddChargePage"/>
@@ -49,7 +49,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                                  p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
+                                  p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
                             <ref bean="addChargeSection"/>
                         </list>
                     </property>
@@ -62,7 +62,7 @@
         <property name="viewHelperServiceClassName" value=""/>
         <property name="defaultBindingObjectPath" value=""/>
 -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaChargeForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.ChargeForm"/>
     </bean>
 
     <!--

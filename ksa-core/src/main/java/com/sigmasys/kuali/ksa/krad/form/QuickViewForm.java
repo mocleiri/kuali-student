@@ -11,7 +11,7 @@ import java.util.Locale;
 /**
  * Created by: dmulderink on 9/28/12 at 2:25 PM
  */
-public class KsaQuickViewForm extends AbstractViewModel {
+public class QuickViewForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 

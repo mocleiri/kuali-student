@@ -5,7 +5,7 @@ import com.sigmasys.kuali.ksa.model.Account;
 /**
  * Created by: dmulderink on 10/6/12 at 2:30 PM
  */
-public class KsaWriteOffForm extends AbstractViewModel {
+public class WriteOffForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 

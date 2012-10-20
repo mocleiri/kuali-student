@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.KsaWriteOffForm;
+import com.sigmasys.kuali.ksa.krad.form.WriteOffForm;
 import com.sigmasys.kuali.ksa.model.Account;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,17 +19,17 @@ import javax.servlet.http.HttpServletResponse;
  * Created by: dmulderink on 10/6/12 at 2:30 PM
  */
 @Controller
-@RequestMapping(value = "/ksaWriteOffVw")
-public class KsaWriteOffController extends GenericSearchController {
+@RequestMapping(value = "/WriteOffView")
+public class WriteOffController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(KsaWriteOffController.class);
+   private static final Log logger = LogFactory.getLog(WriteOffController.class);
    
    /**
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
-   protected KsaWriteOffForm createInitialForm(HttpServletRequest request) {
-      KsaWriteOffForm form = new KsaWriteOffForm();
+   protected WriteOffForm createInitialForm(HttpServletRequest request) {
+      WriteOffForm form = new WriteOffForm();
       String userId = request.getParameter("userId");
 
       if (userId != null) {
@@ -61,7 +61,7 @@ public class KsaWriteOffController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") KsaWriteOffForm form, BindingResult result,
+   public ModelAndView get(@ModelAttribute("KualiForm") WriteOffForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
       // do get stuff...
@@ -79,7 +79,7 @@ public class KsaWriteOffController extends GenericSearchController {
     */
 
    @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") KsaWriteOffForm form, BindingResult result,
+   public ModelAndView start(@ModelAttribute("KualiForm") WriteOffForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
       // populate model for testing
@@ -98,7 +98,7 @@ public class KsaWriteOffController extends GenericSearchController {
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
    @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") KsaWriteOffForm form, BindingResult result,
+   public ModelAndView submit(@ModelAttribute("KualiForm") WriteOffForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
 
@@ -116,7 +116,7 @@ public class KsaWriteOffController extends GenericSearchController {
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
    @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") KsaWriteOffForm form, BindingResult result,
+   public ModelAndView save(@ModelAttribute("KualiForm") WriteOffForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
       // do save stuff...
@@ -133,7 +133,7 @@ public class KsaWriteOffController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") KsaWriteOffForm form, BindingResult result,
+   public ModelAndView cancel(@ModelAttribute ("KualiForm") WriteOffForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do cancel stuff...
       return getUIFModelAndView(form);
@@ -148,7 +148,7 @@ public class KsaWriteOffController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") KsaWriteOffForm form, BindingResult result,
+   public ModelAndView refresh(@ModelAttribute("KualiForm") WriteOffForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);

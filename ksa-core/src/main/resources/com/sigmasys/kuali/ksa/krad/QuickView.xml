@@ -26,7 +26,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaQuickView" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="QuickView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Quick View"/>
         <property name="headerText" value="Quick View"/>
         <property name="entryPageId" value="QuickViewPage"/>
@@ -64,7 +64,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                                  p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
+                                  p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
                             <ref bean="quickViewAddMemoSection"/>
                             <ref bean="memoControlsGroup"/>
                         </list>
@@ -72,7 +72,7 @@
                 </bean>
             </list>
         </property>
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.QuickViewForm"/>
     </bean>
 
     <!--
@@ -236,13 +236,13 @@
                                 <property name="items">
                                     <list>
                                         <bean parent="Uif-Link" p:linkText="Add Charge" p:target="_self"
-                                              p:href="ksaChargeVw?methodToCall=get&amp;viewId=KsaChargeView&amp;userId=@{account.id}"/>
+                                              p:href="ChargeView?methodToCall=get&amp;viewId=ChargeView&amp;userId=@{account.id}"/>
                                         <bean parent="Uif-Link" p:linkText="Add Payment" p:target="_self"
                                               p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView&amp;userId=@{account.id}"/>
                                         <bean parent="Uif-Link" p:linkText="Add Deferment" p:target="_self"
                                               p:href="ksaDefermentsVw?methodToCall=get&amp;viewId=KsaDefermentsView&amp;userId=@{account.id}"/>
                                         <bean parent="Uif-Link" p:linkText="Write-Off Account" p:target="_self"
-                                              p:href="ksaWriteOffVw?methodToCall=get&amp;viewId=KsaWriteOffView&amp;userId=@{account.id}"/>
+                                              p:href="WriteOffView?methodToCall=get&amp;viewId=WriteOffView&amp;userId=@{account.id}"/>
                                     </list>
                                 </property>
                             </bean>
@@ -713,7 +713,7 @@
                 <bean parent="Uif-LinkField" p:linkText="Add a Flag" p:target="_self"
                       p:href="ksaFlagsVw?methodToCall=get&amp;viewId=KsaFlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add Memo" p:target="_self"
-                      p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
+                      p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>

@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
-import com.sigmasys.kuali.ksa.krad.form.KsaQuickViewForm;
+import com.sigmasys.kuali.ksa.krad.form.QuickViewForm;
 import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
@@ -25,10 +25,10 @@ import java.util.*;
  * Created by: dmulderink on 9/28/12 at 2:25 PM
  */
 @Controller
-@RequestMapping(value = "/ksaQuickVw")
-public class KsaQuickViewController extends GenericSearchController {
+@RequestMapping(value = "/QuickView")
+public class QuickViewController extends GenericSearchController {
 
-    private static final Log logger = LogFactory.getLog(KsaQuickViewController.class);
+    private static final Log logger = LogFactory.getLog(QuickViewController.class);
 
     @Autowired
     private CurrencyService currencyService;
@@ -47,9 +47,9 @@ public class KsaQuickViewController extends GenericSearchController {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected KsaQuickViewForm createInitialForm(HttpServletRequest request) {
+    protected QuickViewForm createInitialForm(HttpServletRequest request) {
 
-        KsaQuickViewForm form = new KsaQuickViewForm();
+        QuickViewForm form = new QuickViewForm();
 
         String userId = request.getParameter("userId");
 
@@ -79,7 +79,7 @@ public class KsaQuickViewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") KsaQuickViewForm form, HttpServletRequest request) {
+    public ModelAndView get(@ModelAttribute("KualiForm") QuickViewForm form, HttpServletRequest request) {
 
         String viewId = request.getParameter("viewId");
         String pageId = request.getParameter("pageId");
@@ -87,7 +87,7 @@ public class KsaQuickViewController extends GenericSearchController {
 
         logger.info("View: " + viewId + " User: " + userId);
 
-        if ("KsaQuickView".equals(viewId)) {
+        if ("QuickView".equals(viewId)) {
             if (!accountService.accountExists(userId)) {
                 throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
             }
@@ -126,14 +126,14 @@ public class KsaQuickViewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaQuickViewForm form, HttpServletRequest request) {
+    public ModelAndView refresh(@ModelAttribute("KualiForm") QuickViewForm form, HttpServletRequest request) {
 
         String viewId = request.getParameter("viewId");
         String userId = request.getParameter("actionParameters[userId]");
 
         logger.info("View: " + viewId + " User: " + userId);
 
-        if ("KsaQuickView".equals(viewId)) {
+        if ("QuickView".equals(viewId)) {
             if (!accountService.accountExists(userId)) {
                 throw new IllegalArgumentException("Unknown account for userid '" + userId + "'");
             }
@@ -152,7 +152,7 @@ public class KsaQuickViewController extends GenericSearchController {
      * @return ModelandView
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=ageDebt")
-    public ModelAndView ageDebt(@ModelAttribute("KualiForm") KsaQuickViewForm form) {
+    public ModelAndView ageDebt(@ModelAttribute("KualiForm") QuickViewForm form) {
 
         // do aging of transactions stuff...
         String accountId = form.getAccount().getId();
@@ -175,7 +175,7 @@ public class KsaQuickViewController extends GenericSearchController {
      * @return ModelandView
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=assessFees")
-    public ModelAndView assessFees(@ModelAttribute("KualiForm") KsaQuickViewForm form) {
+    public ModelAndView assessFees(@ModelAttribute("KualiForm") QuickViewForm form) {
 
         String accountId = form.getAccount().getId();
 
@@ -195,7 +195,7 @@ public class KsaQuickViewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertMemo")
-    public ModelAndView insertMemo(@ModelAttribute("KualiForm") KsaQuickViewForm form,  HttpServletRequest request) {
+    public ModelAndView insertMemo(@ModelAttribute("KualiForm") QuickViewForm form,  HttpServletRequest request) {
         // do insert stuff...
 
        String viewId = request.getParameter("viewId");
@@ -246,7 +246,7 @@ public class KsaQuickViewController extends GenericSearchController {
      * @param userId
      * @param form
      */
-    private void populateForm(String userId, KsaQuickViewForm form) {
+    private void populateForm(String userId, QuickViewForm form) {
 
         // store the selected account ID
         //form.setSelectedId(id);

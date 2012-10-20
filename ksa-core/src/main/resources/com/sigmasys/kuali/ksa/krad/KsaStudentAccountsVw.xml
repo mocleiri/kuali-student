@@ -143,7 +143,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                      p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
+                      p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
                 <!-- TODO Add pagination -->
                 <ref bean="rollUpList"/>
                 <ref bean="rollUpSummary"/>

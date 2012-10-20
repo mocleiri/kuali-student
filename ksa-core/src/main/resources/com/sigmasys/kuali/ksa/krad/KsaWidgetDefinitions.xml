@@ -190,7 +190,7 @@
                                         <bean parent="Uif-LinkField" p:linkText="Transactions" p:target="_self" p:align="center" p:width="10%"
                                               p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{#line.id}"/>
                                         <bean parent="Uif-LinkField" p:linkText="Quick View" p:target="_self" p:align="center" p:width="10%"
-                                              p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{#line.id}"/>
+                                              p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{#line.id}"/>
                                     </list>
                                 </property>
                             </bean>

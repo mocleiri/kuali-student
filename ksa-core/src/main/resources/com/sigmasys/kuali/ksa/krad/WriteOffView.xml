@@ -26,7 +26,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaWriteOffView" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="WriteOffView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Write-Off Account"/>
         <property name="headerText" value="Write-Off Account"/>
         <property name="entryPageId" value="QuickViewPage"/>
@@ -49,7 +49,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                                  p:href="ksaQuickVw?methodToCall=get&amp;viewId=KsaQuickView&amp;userId=@{account.id}"/>
+                                  p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
                                   p:actionLabel="Refresh">
                                   <!--p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">-->
@@ -66,7 +66,7 @@
                 <property name="viewHelperServiceClassName" value=""/>
                 <property name="defaultBindingObjectPath" vaue=""/>
         -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.KsaWriteOffForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.WriteOffForm"/>
     </bean>
 
 </beans>

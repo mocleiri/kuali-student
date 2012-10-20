@@ -2,7 +2,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
-import com.sigmasys.kuali.ksa.krad.form.KsaChargeForm;
+import com.sigmasys.kuali.ksa.krad.form.ChargeForm;
 import com.sigmasys.kuali.ksa.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,17 +23,17 @@ import java.util.Date;
  * Created by: dmulderink on 9/28/12 at 7:56 AM
  */
 @Controller
-@RequestMapping(value = "/ksaChargeVw")
-public class KsaChargeController extends GenericSearchController {
+@RequestMapping(value = "/ChargeView")
+public class ChargeController extends GenericSearchController {
 
-    private static final Log logger = LogFactory.getLog(KsaChargeController.class);
+    private static final Log logger = LogFactory.getLog(ChargeController.class);
 
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected KsaChargeForm createInitialForm(HttpServletRequest request) {
-        KsaChargeForm form = new KsaChargeForm();
+    protected ChargeForm createInitialForm(HttpServletRequest request) {
+        ChargeForm form = new ChargeForm();
         form.setStatusMessage("");
         String userId = request.getParameter("userId");
 
@@ -67,7 +67,7 @@ public class KsaChargeController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+    public ModelAndView get(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
         // do get stuff...
@@ -104,7 +104,7 @@ public class KsaChargeController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
     @Transactional(readOnly = false)
-    public ModelAndView submit(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+    public ModelAndView submit(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
 
@@ -129,7 +129,7 @@ public class KsaChargeController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
     @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+    public ModelAndView save(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
         // do save stuff...
@@ -144,7 +144,7 @@ public class KsaChargeController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+    public ModelAndView cancel(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
         // do cancel stuff...
         return getUIFModelAndView(form);
@@ -158,13 +158,13 @@ public class KsaChargeController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") KsaChargeForm form, BindingResult result,
+    public ModelAndView refresh(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
                                 HttpServletRequest request, HttpServletResponse response) {
         // do refresh stuff...
         return getUIFModelAndView(form);
     }
 
-   private boolean saveCharge(KsaChargeForm form) {
+   private boolean saveCharge(ChargeForm form) {
       boolean saveResult = false;
       String statusMsg = "";
       Charge charge = form.getCharge();
@@ -233,7 +233,7 @@ public class KsaChargeController extends GenericSearchController {
       return saveResult;
    }
 
-   private void initCharge(KsaChargeForm form) {
+   private void initCharge(ChargeForm form) {
 
       // abbreviated payment initialization
       Account account = form.getAccount();

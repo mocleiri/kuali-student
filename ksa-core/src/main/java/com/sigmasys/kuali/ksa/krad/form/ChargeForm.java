@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
  * Created by: dmulderink on 9/28/12 at 7:56 AM
  */
-public class KsaChargeForm extends AbstractViewModel {
+public class ChargeForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
