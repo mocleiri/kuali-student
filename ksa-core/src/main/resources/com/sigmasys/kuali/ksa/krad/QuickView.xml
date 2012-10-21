@@ -138,7 +138,7 @@
                         <list>
                             <bean parent="Uif-MessageField" p:messageText="Account Overview"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self" p:style="font-size: .8em; float: right;"
-                                  p:href="ksaStudentAccountsVw?methodToCall=get&amp;viewId=KsaStudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
+                                  p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -238,9 +238,9 @@
                                         <bean parent="Uif-Link" p:linkText="Add Charge" p:target="_self"
                                               p:href="ChargeView?methodToCall=get&amp;viewId=ChargeView&amp;userId=@{account.id}"/>
                                         <bean parent="Uif-Link" p:linkText="Add Payment" p:target="_self"
-                                              p:href="ksaPaymentVw?methodToCall=get&amp;viewId=KsaPaymentView&amp;userId=@{account.id}"/>
+                                              p:href="PaymentView?methodToCall=get&amp;viewId=PaymentView&amp;userId=@{account.id}"/>
                                         <bean parent="Uif-Link" p:linkText="Add Deferment" p:target="_self"
-                                              p:href="ksaDefermentsVw?methodToCall=get&amp;viewId=KsaDefermentsView&amp;userId=@{account.id}"/>
+                                              p:href="DefermentsView?methodToCall=get&amp;viewId=DefermentsView&amp;userId=@{account.id}"/>
                                         <bean parent="Uif-Link" p:linkText="Write-Off Account" p:target="_self"
                                               p:href="WriteOffView?methodToCall=get&amp;viewId=WriteOffView&amp;userId=@{account.id}"/>
                                     </list>
@@ -278,7 +278,7 @@
                         <list>
                             <bean parent="Uif-MessageField" p:messageText="Biographic Information"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self" p:style="font-size: .8em; float: right;"
-                                  p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
+                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -626,7 +626,7 @@
                             <bean parent="Uif-MessageField" p:messageText="Memos"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self"
                                   p:style="font-size: .8em; float: right;"
-                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -707,11 +707,11 @@
         <property name="items">
             <list>
                 <bean parent="Uif-LinkField" p:linkText="Add Biographic Information" p:target="_self"
-                      p:href="ksaBiographicInformationVw?methodToCall=get&amp;viewId=KsaBiographicInformationView&amp;userId=@{account.id}"/>
+                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add an Alert" p:target="_self"
-                      p:href="ksaAlertsVw?methodToCall=get&amp;viewId=KsaAlertsView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
+                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add a Flag" p:target="_self"
-                      p:href="ksaFlagsVw?methodToCall=get&amp;viewId=KsaFlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
+                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add Memo" p:target="_self"
                       p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>
@@ -821,7 +821,7 @@
                             <bean parent="Uif-MessageField" p:messageText="Memos"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self"
                                   p:style="font-size: .8em; float: right;"
-                                  p:href="ksaMemoVw?methodToCall=get&amp;viewId=KsaMemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>

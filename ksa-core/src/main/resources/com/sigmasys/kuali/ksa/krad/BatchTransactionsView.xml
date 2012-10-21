@@ -26,17 +26,17 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="AccountImportView" parent="Uif-KsaFormView" p:footer.render="false">
-        <property name="title" value="Account Import"/>
-        <property name="headerText" value="Account Profile Upload"/>
-        <property name="entryPageId" value="AccountImportUploadFilePage"/>
+    <bean id="BatchTransactionsView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="title" value="Batch Transactions"/>
+        <property name="headerText" value="Batch Transaction Upload"/>
+        <property name="entryPageId" value="BatchTransactionsUploadFilePage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
-                        <bean parent="Uif-HeaderTwo" p:headerText="Account Import"/>
+                        <bean parent="Uif-HeaderTwo" p:headerText="Batch Transactions"/>
                         <bean parent="Uif-NavigationActionLink"
-                              p:navigateToPageId="AccountImportUploadFilePage"
+                              p:navigateToPageId="BatchTransactionsUploadFilePage"
                               p:actionLabel="Upload a File"/>
                     </list>
                 </property>
@@ -44,19 +44,19 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="AccountImportQuickMenuOptionsPage" p:title="Quick Options">
+                <bean parent="Uif-Page" p:id="BatchTransactionsQuickMenuOptionsPage" p:title="Quick Options">
                     <property name="headerText" value="Quick Options"/>
                     <property name="items">
                         <list>
-                            <ref bean="accountImportQuickOptions"/>
+                            <ref bean="batchTransactionsQuickOptions"/>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="AccountImportUploadFilePage" p:title="File Upload">
+                <bean parent="Uif-Page" p:id="BatchTransactionsUploadFilePage" p:title="File Upload">
                     <property name="headerText" value="File Upload"/>
                     <property name="items">
                         <list>
-                            <ref bean="accountImportUploadFile"/>
+                            <ref bean="batchTransactionsUploadFile"/>
                         </list>
                     </property>
                 </bean>
@@ -68,7 +68,7 @@
         <property name="viewHelperServiceClassName" value=""/>
         <property name="defaultBindingObjectPath" vaue=""/>
 -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FileUploadForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.BatchTransactionsForm"/>
     </bean>
 
 
@@ -78,15 +78,15 @@
     This is the list of options like an extra navigation page
     ********************************************************************************************************************
     -->
-    <bean id="accountImportQuickOptions" parent="Uif-VerticalBoxSection"
+    <bean id="batchTransactionsQuickOptions" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="Account Import Tasks"
+          p:title="Batch Transaction Tasks"
           p:instructionalText="Select a quick navigation link from the options listed here.">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-LinkField" p:linkText="XML Import Process" p:target="_self"
-                      p:href="AccountImportView?methodToCall=get&amp;viewId=AccountImportView&amp;pageId=AccountImportUploadFilePage"/>
+                <bean parent="Uif-LinkField" p:linkText="XML Batch Process" p:target="_self"
+                      p:href="BatchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView&amp;pageId=BatchTransactionsUploadFilePage"/>
             </list>
         </property>
     </bean>
@@ -97,13 +97,13 @@
     This is the upload task page
     ********************************************************************************************************************
     -->
-    <bean id="accountImportUploadFile" parent="Uif-VerticalBoxSection"
+    <bean id="batchTransactionsUploadFile" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL">
         <!--p:title="Upload a file for processing">-->
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="uploadFile" p:label="@{getLValue('ksa.label.upload.xml.file')}">
+                <bean parent="Uif-InputField" p:propertyName="uploadXMLFile" p:label="@{getLValue('ksa.label.upload.xml.file')}">
                     <property name="instructionalText" value="Select an XML file to Upload and Process. The file will be validated during the process task."/>
                     <property name="control">
                         <bean parent="Uif-FileControl" p:size="30"/>
@@ -121,13 +121,13 @@
                                           p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                                 </property>-->
                             </bean>
-                            <!--bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageAccounts"
+                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageAccounts"
                                   p:actionLabel="Age All Accounts">
-                                <property name="actionImage">
+                                <!--<property name="actionImage">
                                     <bean parent="Uif-ImageField"
                                           p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                                </property>
-                            </bean-->
+                                </property>-->
+                            </bean>
                             <!--  Status message -->
                             <bean parent="Uif-MessageField" p:messageText="@{uploadProcessState}"/>
                         </list>

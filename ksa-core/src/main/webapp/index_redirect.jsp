@@ -18,6 +18,6 @@
 
 <%
     String redirectUrl = request.getContextPath()  +
-            "/uif/ksaStudentAccountsVw?methodToCall=get&viewId=KsaStudentAccountsView";
+            "/uif/StudentAccountsView?methodToCall=get&viewId=StudentAccountsView";
     response.sendRedirect(redirectUrl);
 %>

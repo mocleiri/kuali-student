@@ -26,49 +26,48 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="AccountImportView" parent="Uif-KsaFormView" p:footer.render="false">
-        <property name="title" value="Account Import"/>
-        <property name="headerText" value="Account Profile Upload"/>
-        <property name="entryPageId" value="AccountImportUploadFilePage"/>
+    <bean id="FeeAssessmentView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="title" value="Fee Assessment"/>
+        <property name="headerText" value="Fee Assessment"/>
+        <property name="entryPageId" value="FeeAssessmentQuickMenuOptionsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
-                        <bean parent="Uif-HeaderTwo" p:headerText="Account Import"/>
                         <bean parent="Uif-NavigationActionLink"
-                              p:navigateToPageId="AccountImportUploadFilePage"
-                              p:actionLabel="Upload a File"/>
+                              p:navigateToPageId="FeeAssessmentQuickMenuOptionsPage"
+                              p:actionLabel="Quick Options"/>
                     </list>
                 </property>
             </bean>
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="AccountImportQuickMenuOptionsPage" p:title="Quick Options">
-                    <property name="headerText" value="Quick Options"/>
+                <bean parent="Uif-Page" p:id="FeeAssessmentQuickMenuOptionsPage" p:title="Fee Assessment Options">
+                    <property name="headerText" value="Fee Assessment Options"/>
                     <property name="items">
                         <list>
-                            <ref bean="accountImportQuickOptions"/>
+                            <ref bean="feeAssessmentQuickOptions"/>
                         </list>
                     </property>
                 </bean>
-                <bean parent="Uif-Page" p:id="AccountImportUploadFilePage" p:title="File Upload">
+                <bean parent="Uif-Page" p:id="FeeAssessmentUploadFilePage" p:title="File Upload">
                     <property name="headerText" value="File Upload"/>
                     <property name="items">
                         <list>
-                            <ref bean="accountImportUploadFile"/>
+                            <ref bean="feeAssessmentUploadFile"/>
                         </list>
                     </property>
                 </bean>
             </list>
         </property>
-<!--
-        <property name="additionalCssFiles" ref=""/>
-        <property name="additionalJsFiles" ref=""/>
-        <property name="viewHelperServiceClassName" value=""/>
-        <property name="defaultBindingObjectPath" vaue=""/>
--->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FileUploadForm"/>
+        <!--
+                <property name="additionalCssFiles" ref=""/>
+                <property name="additionalJsFiles" ref=""/>
+                <property name="viewHelperServiceClassName" value=""/>
+                <property name="defaultBindingObjectPath" vaue=""/>
+        -->
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FeeAssessmentForm"/>
     </bean>
 
 
@@ -78,15 +77,15 @@
     This is the list of options like an extra navigation page
     ********************************************************************************************************************
     -->
-    <bean id="accountImportQuickOptions" parent="Uif-VerticalBoxSection"
+    <bean id="feeAssessmentQuickOptions" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="Account Import Tasks"
+          p:title="Fee Assessment Tasks"
           p:instructionalText="Select a quick navigation link from the options listed here.">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-LinkField" p:linkText="XML Import Process" p:target="_self"
-                      p:href="AccountImportView?methodToCall=get&amp;viewId=AccountImportView&amp;pageId=AccountImportUploadFilePage"/>
+                <bean parent="Uif-LinkField" p:linkText="XML Fee Assessment Process" p:target="_self"
+                      p:href="FeeAssessmentView?methodToCall=get&amp;viewId=FeeAssessmentView&amp;pageId=FeeAssessmentUploadFilePage"/>
             </list>
         </property>
     </bean>
@@ -97,7 +96,7 @@
     This is the upload task page
     ********************************************************************************************************************
     -->
-    <bean id="accountImportUploadFile" parent="Uif-VerticalBoxSection"
+    <bean id="feeAssessmentUploadFile" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL">
         <!--p:title="Upload a file for processing">-->
         <property name="disclosure.render" value="false"/>
@@ -121,13 +120,6 @@
                                           p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
                                 </property>-->
                             </bean>
-                            <!--bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="ageAccounts"
-                                  p:actionLabel="Age All Accounts">
-                                <property name="actionImage">
-                                    <bean parent="Uif-ImageField"
-                                          p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
-                                </property>
-                            </bean-->
                             <!--  Status message -->
                             <bean parent="Uif-MessageField" p:messageText="@{uploadProcessState}"/>
                         </list>
@@ -136,5 +128,6 @@
             </list>
         </property>
     </bean>
+
 
 </beans>
