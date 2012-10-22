@@ -278,7 +278,7 @@
                         <list>
                             <bean parent="Uif-MessageField" p:messageText="Biographic Information"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self" p:style="font-size: .8em; float: right;"
-                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
+                                  p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -707,7 +707,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-LinkField" p:linkText="Add Biographic Information" p:target="_self"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;userId=@{account.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add an Alert" p:target="_self"
                       p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add a Flag" p:target="_self"

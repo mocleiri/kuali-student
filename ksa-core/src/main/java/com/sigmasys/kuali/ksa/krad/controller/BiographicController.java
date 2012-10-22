@@ -24,7 +24,7 @@ import java.util.Set;
  * Created by: dmulderink on 9/25/12 at 6:59 PM
  */
 @Controller
-@RequestMapping(value = "/BiographicInformationView")
+@RequestMapping(value = "/biographicInformationView")
 public class BiographicController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(BiographicController.class);

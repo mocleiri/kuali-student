@@ -61,7 +61,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
-                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
+                                  p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                             <ref bean="biographicInformationSummarySection"/>
                         </list>
                     </property>
@@ -74,7 +74,7 @@
                             <property name="items">
                                 <list>
                                     <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
-                                          p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
+                                          p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPerson"
                                           p:actionLabel="Add"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -97,7 +97,7 @@
                             <property name="items">
                                 <list>
                                     <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
-                                          p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
+                                          p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updatePerson"
                                           p:actionLabel="Update"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -120,7 +120,7 @@
                             <property name="items">
                                 <list>
                                     <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
-                                          p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;userId=@{account.id}"/>
+                                          p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertPostal"
                                           p:actionLabel="Add"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -147,7 +147,7 @@
                             <property name="items">
                                 <list>
                                     <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
-                                          p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
+                                          p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicPersonsPage&amp;userId=@{account.id}"/>
                                     <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertElectronicContact"
                                           p:actionLabel="Add"
                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
@@ -190,14 +190,14 @@
             <list>
                 <!-- Use this to display for Add the individual field values for a new person row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Person" p:target="_self"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicAddPersonPage&amp;userId=@{account.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicAddPersonPage&amp;userId=@{account.id}"/>
                 <!-- Use this to display for Add the individual field values for a new postal row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Postal" p:target="_self"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationPostalSection" />
                 <!-- Use this to display for Add the individual field values for a new electronic contact row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -249,10 +249,10 @@
                             </bean>
                             <!-- Use this to display for View to drill down into the Person record -->
                             <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center"
-                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicSummaryPage&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
+                                  p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicSummaryPage&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
                             <!-- Use this to display for Edit the individual field values for a selected row -->
                             <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self" p:align="center"
-                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicEDPersonPage&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
+                                  p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicEDPersonPage&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -276,12 +276,12 @@
                 <!--<ref bean="bioAuditPersonInformationSection" />-->
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Postal" p:target="_self"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationPostalSection" />
                 <!--<ref bean="bioAuditPostalInformationSection" />-->
                 <!-- Use this to display for Add the individual field values for a new row -->
                 <bean parent="Uif-LinkField" p:linkText="Add Electronic Contact" p:target="_self"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}"/>
                 <ref bean="biographicInformationElectronicContactSection" />
                 <!--<ref bean="bioAuditElectronicContactInformationSection" />-->
             </list>
@@ -361,10 +361,10 @@
                         <list>
                             <!-- Use this to display for Add the individual field values for a new row -->
                             <bean parent="Uif-LinkField" p:linkText="Add Person" p:target="_self"
-                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicAddPersonPage&amp;userId=@{account.id}"/>
+                                  p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicAddPersonPage&amp;userId=@{account.id}"/>
                             <!-- Use this to display for Edit the individual field values for a selected row -->
                             <bean parent="Uif-LinkField" p:linkText="Edit Person" p:target="_self"
-                                  p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicEDPersonPage&amp;userId=@{account.id}"/>
+                                  p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicEDPersonPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -461,7 +461,7 @@
                       p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE"/>-->
                 <!-- Use this to display for Edit the individual field values for a selected row -->
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self" p:align="center"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationPostalADE&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>
@@ -550,7 +550,7 @@
                       p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE"/>-->
                 <!-- Use this to display for Edit the individual field values for a selected row -->
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self" p:align="center"
-                      p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
+                      p:href="biographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;pageId=BiographicInformationElectronicContactADE&amp;userId=@{account.id}&amp;id=@{#line.id}"/>
             </list>
         </property>
     </bean>
