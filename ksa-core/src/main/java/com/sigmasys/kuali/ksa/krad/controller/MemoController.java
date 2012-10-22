@@ -26,7 +26,7 @@ import java.util.List;
  * Created by: dmulderink on 10/4/12 at 7:53 AM
  */
 @Controller
-@RequestMapping(value = "/MemoView")
+@RequestMapping(value = "/memoView")
 public class MemoController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(MemoController.class);

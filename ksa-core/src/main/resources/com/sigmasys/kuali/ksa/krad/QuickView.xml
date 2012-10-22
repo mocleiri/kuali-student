@@ -626,7 +626,7 @@
                             <bean parent="Uif-MessageField" p:messageText="Memos"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self"
                                   p:style="font-size: .8em; float: right;"
-                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>
@@ -821,7 +821,7 @@
                             <bean parent="Uif-MessageField" p:messageText="Memos"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self"
                                   p:style="font-size: .8em; float: right;"
-                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>

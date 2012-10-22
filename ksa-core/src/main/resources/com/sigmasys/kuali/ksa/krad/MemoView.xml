@@ -65,7 +65,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
-                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="addMemoSection"/>
                             <ref bean="addMemoControlsGroup"/>
                         </list>
@@ -76,7 +76,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
-                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="viewMemoSection"/>
                             <ref bean="viewMemoControlsGroup"/>
                         </list>
@@ -87,7 +87,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
-                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="viewMemoSection"/>
                             <ref bean="addMemoSection"/>
                             <ref bean="editMemoControlsGroup"/>
@@ -99,7 +99,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Memo List" p:target="_self"
-                                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
+                                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=MemosPage&amp;userId=@{account.id}"/>
                             <ref bean="viewMemoSection"/>
                             <ref bean="followUpMemoSection"/>
                             <ref bean="followUpMemoControlsGroup"/>
@@ -144,7 +144,7 @@
                 </property>
             </bean>
             <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
-                  p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
+                  p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
             <!--  Status message -->
             <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
         </list>
@@ -203,11 +203,11 @@
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center" p:width="10%"
-                      p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=ViewMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
+                      p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=ViewMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Follow-up" p:target="_self" p:align="center" p:width="10%"
-                      p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
+                      p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=FollowUpMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self" p:align="center" p:width="10%"
-                      p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
+                      p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}&amp;memoId=@{#line.id}"/>
             </list>
         </property>
     </bean>
@@ -488,9 +488,9 @@
             <list>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
                 <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
-                      p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
+                      p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=AddMemoPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
-                      p:href="MemoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}&amp;memoId=@{memoModel.id}"/>
+                      p:href="memoView?methodToCall=get&amp;viewId=MemoView&amp;pageId=EditMemoPage&amp;userId=@{account.id}&amp;memoId=@{memoModel.id}"/>
             </list>
         </property>
     </bean>
