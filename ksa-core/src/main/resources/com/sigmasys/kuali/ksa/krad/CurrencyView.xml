@@ -70,7 +70,7 @@
                                 <property name="items">
                                     <list>
                                         <bean parent="Uif-Link" p:linkText="Currencies" p:target="_self"
-                                              p:href="CurrencyView?methodToCall=get&amp;viewId=CurrencyView&amp;pageId=CurrencyPage"/>
+                                              p:href="currencyView?methodToCall=get&amp;viewId=CurrencyView&amp;pageId=CurrencyPage"/>
                                     </list>
                                 </property>
                             </bean>
@@ -188,7 +188,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:label="Edit" p:linkText="Edit" p:target="_self" p:width="10%"
-                      p:href="CurrencyView?viewId=CurrencyView&amp;pageId=CurrencyDetailsPage&amp;methodToCall=get&amp;currencyId=@{#line.id}" />
+                      p:href="currencyView?viewId=CurrencyView&amp;pageId=CurrencyDetailsPage&amp;methodToCall=get&amp;currencyId=@{#line.id}" />
             </list>
         </property>
     </bean>

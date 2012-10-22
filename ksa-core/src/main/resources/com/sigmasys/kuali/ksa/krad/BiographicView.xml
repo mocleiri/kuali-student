@@ -49,7 +49,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                                  p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
+                                  p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
                             <ref bean="biographicInformationPersonsSection"/>
                             <ref bean="biographicInformationPersonsTblSection"/>
                         </list>

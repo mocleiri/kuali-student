@@ -25,7 +25,7 @@ import java.util.*;
  * Created by: dmulderink on 9/28/12 at 2:25 PM
  */
 @Controller
-@RequestMapping(value = "/QuickView")
+@RequestMapping(value = "/quickView")
 public class QuickViewController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(QuickViewController.class);

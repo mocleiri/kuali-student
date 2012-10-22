@@ -61,14 +61,11 @@ public class BiographicController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView get(@ModelAttribute("KualiForm") BiographicForm form, HttpServletRequest request) {
 
         String viewId = request.getParameter("viewId");
         String pageId = request.getParameter("pageId");
@@ -130,68 +127,6 @@ public class BiographicController extends GenericSearchController {
         form.setPersonName(personName);
         form.setAccount(account);
 
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
-    @Transactional(readOnly = false)
-    public ModelAndView submit(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do submit stuff...
-
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
-        // do refresh stuff...
         return getUIFModelAndView(form);
     }
 
@@ -276,7 +211,7 @@ public class BiographicController extends GenericSearchController {
         address.setState(form.getStateCode());
         address.setPostalCode(form.getPostalCode());
         address.setCountry(form.getCountryCode());
-        address.setDefault(new Boolean(form.getPostalDefault()));
+        address.setDefault(Boolean.valueOf(form.getPostalDefault()));
 
         accountService.addPostalAddress(account.getId(), address);
 
@@ -285,54 +220,4 @@ public class BiographicController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updatePostal")
-    @Transactional(readOnly = false)
-    public ModelAndView updatePostal(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                                     HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertElectronicContact")
-    @Transactional(readOnly = false)
-    public ModelAndView insertElectronicContact(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                                                HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
-
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateElectronicContact")
-    @Transactional(readOnly = false)
-    public ModelAndView updateElectronicContact(@ModelAttribute("KualiForm") BiographicForm form, BindingResult result,
-                                                HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
-
-        return getUIFModelAndView(form);
-    }
 }

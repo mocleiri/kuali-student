@@ -69,7 +69,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Account Transactions" p:target="_self"
-                                  p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
+                                  p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                             <ref bean="accountOVTransactionsByRollupSection"/>
                         </list>
                     </property>
@@ -80,7 +80,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Account Transactions" p:target="_self"
-                                  p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
+                                  p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                             <ref bean="accountOVTransactionDetailSection"/>
                             <ref bean="auditInformationSection"/>
                             <ref bean="accountOVTransactionsControlSection"/>
@@ -187,7 +187,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
-                      p:href="StudentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;rollupId=@{#line.rollup.id}&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="studentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;rollupId=@{#line.rollup.id}&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -285,7 +285,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
-                      p:href="StudentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="studentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -378,7 +378,7 @@
                 </bean>
 
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
-                      p:href="StudentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="studentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -719,7 +719,7 @@
 <!--                <bean parent="Uif-NavigationActionLink"
                       p:navigateToPageId="AccountOVTransactionAllocationPage" p:actionLabel="View Allocations"/>-->
                 <bean parent="Uif-Link" p:linkText="View Allocations" p:target="_self"
-                      p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationPage&amp;userId=@{account.id}"/>
+                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationPage&amp;userId=@{account.id}"/>
 
             </list>
         </property>
@@ -763,9 +763,9 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
-                      p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
-                      p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="lock"
                       p:actionLabel="Done"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);">

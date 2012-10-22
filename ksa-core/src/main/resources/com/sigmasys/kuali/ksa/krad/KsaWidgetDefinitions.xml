@@ -43,19 +43,19 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
-                      p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;AccountOVTransactionsPage"/>
+                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;AccountOVTransactionsPage"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
                       p:href="adminView?methodToCall=get&amp;viewId=KsaAdminView&amp;pageId=ActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
-                      p:href="ReportReconciliationView?methodToCall=get&amp;viewId=ReportReconciliationView"/>
+                      p:href="reportReconciliationView?methodToCall=get&amp;viewId=ReportReconciliationView"/>
                 <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
-                      p:href="CollectionsView?methodToCall=get&amp;viewId=CollectionsView"/>
+                      p:href="collectionsView?methodToCall=get&amp;viewId=CollectionsView"/>
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
                       p:href="batchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView"/>
                 <bean parent="Uif-Link" p:linkText="Account Import" p:target="_self"
                       p:href="AccountImportView?methodToCall=get&amp;viewId=AccountImportView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
-                      p:href="CurrencyView?methodToCall=get&amp;viewId=CurrencyView&amp;pageId=CurrencyPage"/>
+                      p:href="currencyView?methodToCall=get&amp;viewId=CurrencyView&amp;pageId=CurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="FM-Admin" p:target="_self"
                       p:href="rulesView?methodToCall=get&amp;viewId=RulesView"/>
             </list>
@@ -188,9 +188,9 @@
                                         </bean>
                                         <!-- Use this to display the combined account, bio, aging and alerts -->
                                         <bean parent="Uif-LinkField" p:linkText="Transactions" p:target="_self" p:align="center" p:width="10%"
-                                              p:href="StudentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{#line.id}"/>
+                                              p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{#line.id}"/>
                                         <bean parent="Uif-LinkField" p:linkText="Quick View" p:target="_self" p:align="center" p:width="10%"
-                                              p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{#line.id}"/>
+                                              p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{#line.id}"/>
                                     </list>
                                 </property>
                             </bean>

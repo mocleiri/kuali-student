@@ -1,7 +1,5 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
-import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
 import com.sigmasys.kuali.ksa.krad.form.ChargeForm;
 import com.sigmasys.kuali.ksa.model.*;
 import org.apache.commons.logging.Log;
@@ -23,7 +21,7 @@ import java.util.Date;
  * Created by: dmulderink on 9/28/12 at 7:56 AM
  */
 @Controller
-@RequestMapping(value = "/ChargeView")
+@RequestMapping(value = "/chargeView")
 public class ChargeController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(ChargeController.class);
@@ -61,38 +59,35 @@ public class ChargeController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView get(@ModelAttribute("KualiForm") ChargeForm form, HttpServletRequest request) {
 
         // do get stuff...
 
-       String viewId = request.getParameter("viewId");
-       // example user1
-       String userId = request.getParameter("userId");
+        String viewId = request.getParameter("viewId");
+        // example user1
+        String userId = request.getParameter("userId");
 
-       logger.info("View: " + viewId + " User: " + userId);
+        logger.info("View: " + viewId + " User: " + userId);
 
-       if (userId == null || userId.isEmpty()) {
-          throw new IllegalArgumentException("'userId' request parameter must be specified");
-       }
+        if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("'userId' request parameter must be specified");
+        }
 
-       // abbreviated payment initialization
-       Account account = accountService.getFullAccount(userId);
-       String accountId = account.getId();
+        // abbreviated payment initialization
+        Account account = accountService.getFullAccount(userId);
+        String accountId = account.getId();
 
-       Charge charge = new Charge();
-       charge.setAccount(account);
-       charge.setAccountId(accountId);
-       charge.setEffectiveDate(new Date());
-       form.setCharge(charge);
+        Charge charge = new Charge();
+        charge.setAccount(account);
+        charge.setAccountId(accountId);
+        charge.setEffectiveDate(new Date());
+        form.setCharge(charge);
 
-       return getUIFModelAndView(form);
+        return getUIFModelAndView(form);
     }
 
     /**
@@ -108,141 +103,98 @@ public class ChargeController extends GenericSearchController {
                                HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
 
-       String viewId = request.getParameter("viewId");
-       // example user1
-       String userId = request.getParameter("userId");
+        String viewId = request.getParameter("viewId");
+        // example user1
+        String userId = request.getParameter("userId");
 
-       logger.info("View: " + viewId + " User: " + userId);
-       if (this.saveCharge(form)) {
-          this.initCharge(form);
-       }
+        logger.info("View: " + viewId + " User: " + userId);
+        if (saveCharge(form)) {
+            initCharge(form);
+        }
 
-       return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-    @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-        // do save stuff...
         return getUIFModelAndView(form);
     }
 
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
-        return getUIFModelAndView(form);
-    }
+    private boolean saveCharge(ChargeForm form) {
+        boolean saveResult = false;
+        String statusMsg = "";
+        Charge charge = form.getCharge();
+        charge.setAccount(form.getAccount());
 
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") ChargeForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
-        // do refresh stuff...
-        return getUIFModelAndView(form);
-    }
+        String typeIdString = form.getChargeTransactionTypeId();
+        Date effectiveDate = charge.getEffectiveDate();
+        if (effectiveDate == null) {
+            effectiveDate = new Date();
+        }
 
-   private boolean saveCharge(ChargeForm form) {
-      boolean saveResult = false;
-      String statusMsg = "";
-      Charge charge = form.getCharge();
-      charge.setAccount(form.getAccount());
-
-      String typeIdString = form.getChargeTransactionTypeId();
-      Date effectiveDate = charge.getEffectiveDate();
-      if(effectiveDate == null){
-         effectiveDate = new Date();
-      }
-
-      BigDecimal amount = charge.getAmount();
-      if (amount == null) {
-         statusMsg = "Amount must be a numerical value";
-         form.setStatusMessage(statusMsg);
-         logger.error(statusMsg);
-         return saveResult;
-      }
-
-      int compareResult = amount.compareTo(BigDecimal.ZERO);
-      if (compareResult <= 0) {
-         statusMsg = "Amount must be a positive value";
-         form.setStatusMessage(statusMsg);
-         logger.error(statusMsg);
-         return saveResult;
-      }
-
-      TransactionType tt;
-      try {
-         tt = transactionService.getTransactionType(typeIdString, effectiveDate);
-      } catch (InvalidTransactionTypeException e) {
-         logger.error(e.getMessage(), e);
-         form.setStatusMessage(e.getMessage());
-         return saveResult;
-      }
-
-      if (tt == null) {
-         // Error handler here.
-         statusMsg = "Invalid Transaction Type";
-         form.setStatusMessage(statusMsg);
-         logger.error(statusMsg);
-         return saveResult;
-      } else if (!(tt instanceof DebitType)) {
-         statusMsg = "Transaction Type must be a charge type";
-         form.setStatusMessage(statusMsg);
-         logger.error(statusMsg);
-         return saveResult;
-      }
-
-      try {
-         charge = (Charge)transactionService.createTransaction(typeIdString, charge.getAccount().getId(), effectiveDate, charge.getAmount());
-
-         if (charge.getId() != null) {
-            form.setCharge(charge);
-            statusMsg = tt.getDescription() + " charge saved";
+        BigDecimal amount = charge.getAmount();
+        if (amount == null) {
+            statusMsg = "Amount must be a numerical value";
             form.setStatusMessage(statusMsg);
-            logger.info(statusMsg);
-            saveResult = true;
-         }
+            logger.error(statusMsg);
+            return saveResult;
+        }
 
-      } catch (TransactionNotAllowedException e) {
-         logger.error(e.getMessage(), e);
-         form.setStatusMessage(e.getMessage());
-      }
+        int compareResult = amount.compareTo(BigDecimal.ZERO);
+        if (compareResult <= 0) {
+            statusMsg = "Amount must be a positive value";
+            form.setStatusMessage(statusMsg);
+            logger.error(statusMsg);
+            return saveResult;
+        }
 
-      return saveResult;
-   }
+        TransactionType tt;
+        try {
+            tt = transactionService.getTransactionType(typeIdString, effectiveDate);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            form.setStatusMessage(e.getMessage());
+            return saveResult;
+        }
 
-   private void initCharge(ChargeForm form) {
+        if (tt == null) {
+            // Error handler here.
+            statusMsg = "Invalid Transaction Type";
+            form.setStatusMessage(statusMsg);
+            logger.error(statusMsg);
+            return saveResult;
+        } else if (!(tt instanceof DebitType)) {
+            statusMsg = "Transaction Type must be a charge type";
+            form.setStatusMessage(statusMsg);
+            logger.error(statusMsg);
+            return saveResult;
+        }
 
-      // abbreviated payment initialization
-      Account account = form.getAccount();
-      String accountId = account.getId();
+        try {
 
-      Charge charge = new Charge();
-      charge.setAccount(account);
-      charge.setAccountId(accountId);
-      charge.setEffectiveDate(new Date());
-      form.setCharge(charge);
-   }
+            charge = (Charge) transactionService.createTransaction(typeIdString, charge.getAccount().getId(), effectiveDate, charge.getAmount());
+
+            if (charge.getId() != null) {
+                form.setCharge(charge);
+                statusMsg = tt.getDescription() + " charge saved";
+                form.setStatusMessage(statusMsg);
+                logger.info(statusMsg);
+                saveResult = true;
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            form.setStatusMessage(e.getMessage());
+        }
+
+        return saveResult;
+    }
+
+    private void initCharge(ChargeForm form) {
+
+        // abbreviated payment initialization
+        Account account = form.getAccount();
+        String accountId = account.getId();
+
+        Charge charge = new Charge();
+        charge.setAccount(account);
+        charge.setAccountId(accountId);
+        charge.setEffectiveDate(new Date());
+        form.setCharge(charge);
+    }
 }

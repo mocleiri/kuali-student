@@ -25,7 +25,7 @@ import java.util.*;
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
 @Controller
-@RequestMapping(value = "/StudentAccountsView")
+@RequestMapping(value = "/studentAccountsView")
 public class StudentAccountsController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(StudentAccountsController.class);

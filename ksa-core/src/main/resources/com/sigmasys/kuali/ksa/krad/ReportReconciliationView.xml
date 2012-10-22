@@ -29,7 +29,7 @@
     <bean id="ReportReconciliationView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="headerText" value="Reports / Reconciliation"/>
         <property name="title" value="Reports and Reconciliation"/>
-        <property name="entryPageId" value="QuickViewPage"/>
+        <property name="entryPageId" value="ReportsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
@@ -44,11 +44,11 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Reports">
+                <bean parent="Uif-Page" p:id="ReportsPage" p:title="Reports">
                     <property name="headerText" value="Reports"/>
                     <property name="items">
                         <list>
-                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
+                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
                                   p:actionLabel="Refresh">
                                   <!--p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">-->
                             </bean>

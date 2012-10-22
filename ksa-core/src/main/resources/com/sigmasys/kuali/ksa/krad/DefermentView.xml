@@ -26,10 +26,10 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="DefermentsView" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="DefermentView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Deferments"/>
         <property name="headerText" value="Deferments"/>
-        <property name="entryPageId" value="QuickViewPage"/>
+        <property name="entryPageId" value="DefermentOptionsPage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
@@ -44,13 +44,13 @@
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="QuickViewPage" p:title="Deferment Options">
+                <bean parent="Uif-Page" p:id="DefermentOptionsPage" p:title="Deferment Options">
                     <property name="headerText" value="Deferment Options"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                                  p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
-                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
+                                  p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
+                            <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
                                   p:actionLabel="Refresh">
                                   <!--p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">-->
                             </bean>
@@ -60,13 +60,7 @@
                 </bean>
             </list>
         </property>
-        <!--
-                <property name="additionalCssFiles" ref=""/>
-                <property name="additionalJsFiles" ref=""/>
-                <property name="viewHelperServiceClassName" value=""/>
-                <property name="defaultBindingObjectPath" vaue=""/>
-        -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.DefermentsForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.DefermentForm"/>
     </bean>
 
 </beans>

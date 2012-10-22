@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by: dmulderink on 10/10/12 at 8:06 PM
  */
 @Controller
-@RequestMapping(value = "/CurrencyView")
+@RequestMapping(value = "/currencyView")
 public class CurrencyController extends GenericSearchController {
 
    private static final Log logger = LogFactory.getLog(SponsorController.class);

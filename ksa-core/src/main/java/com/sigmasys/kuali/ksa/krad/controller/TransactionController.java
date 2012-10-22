@@ -44,8 +44,6 @@ public class TransactionController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
     public ModelAndView save(@ModelAttribute("KualiForm") TransactionForm form) {
-        // do save stuff...
-
         currencyService.persistCurrency(form.getCurrency());
         return getUIFModelAndView(form);
     }
