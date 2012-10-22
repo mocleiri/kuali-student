@@ -128,7 +128,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
-                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
+                      p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
                 <!--  Status message -->
                 <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
@@ -183,9 +183,9 @@
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center"
-                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=ViewAlertPage&amp;userId=@{account.id}"/>
+                      p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=ViewAlertPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self" p:align="center"
-                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=EditAlertPage&amp;userId=@{account.id}"/>
+                      p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=EditAlertPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -451,9 +451,9 @@
             <list>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
                 <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
-                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
+                      p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
-                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=EditAlertPage&amp;userId=@{account.id}"/>
+                      p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=EditAlertPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>

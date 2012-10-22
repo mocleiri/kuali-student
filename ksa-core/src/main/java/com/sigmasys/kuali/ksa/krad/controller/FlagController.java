@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.FlagsForm;
+import com.sigmasys.kuali.ksa.krad.form.FlagForm;
 import com.sigmasys.kuali.ksa.krad.model.FlagModel;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Flag;
@@ -27,10 +27,10 @@ import java.util.List;
  * Created by: dmulderink on 10/6/12 at 2:29 PM
  */
 @Controller
-@RequestMapping(value = "/FlagsView")
-public class FlagsController extends GenericSearchController {
+@RequestMapping(value = "/flagView")
+public class FlagController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(FlagsController.class);
+   private static final Log logger = LogFactory.getLog(FlagController.class);
 
    @Autowired
    private InformationService informationService;
@@ -39,8 +39,8 @@ public class FlagsController extends GenericSearchController {
     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
     */
    @Override
-   protected FlagsForm createInitialForm(HttpServletRequest request) {
-      FlagsForm form = new FlagsForm();
+   protected FlagForm createInitialForm(HttpServletRequest request) {
+      FlagForm form = new FlagForm();
       String userId = request.getParameter("userId");
 
       if (userId != null) {
@@ -72,7 +72,7 @@ public class FlagsController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView get(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                            HttpServletRequest request, HttpServletResponse response) {
 
       // do get stuff...
@@ -145,7 +145,7 @@ public class FlagsController extends GenericSearchController {
     */
 
    @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView start(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
       // populate model for testing
@@ -164,7 +164,7 @@ public class FlagsController extends GenericSearchController {
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
    @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView submit(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do submit stuff...
 
@@ -182,7 +182,7 @@ public class FlagsController extends GenericSearchController {
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
    @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView save(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
       // do save stuff...
@@ -199,7 +199,7 @@ public class FlagsController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView cancel(@ModelAttribute ("KualiForm") FlagForm form, BindingResult result,
                               HttpServletRequest request, HttpServletResponse response) {
       // do cancel stuff...
       return getUIFModelAndView(form);
@@ -214,7 +214,7 @@ public class FlagsController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method= RequestMethod.POST, params="methodToCall=refresh")
-   public ModelAndView refresh(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView refresh(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);
@@ -228,7 +228,7 @@ public class FlagsController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertFlag")
-   public ModelAndView insertFlag(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView insertFlag(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                                    HttpServletRequest request, HttpServletResponse response) {
       // do insert stuff...
 
@@ -271,7 +271,7 @@ public class FlagsController extends GenericSearchController {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateFlag")
-   public ModelAndView updateFlag(@ModelAttribute("KualiForm") FlagsForm form, BindingResult result,
+   public ModelAndView updateFlag(@ModelAttribute("KualiForm") FlagForm form, BindingResult result,
                                    HttpServletRequest request, HttpServletResponse response) {
       // do refresh stuff...
       return getUIFModelAndView(form);

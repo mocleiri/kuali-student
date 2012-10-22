@@ -709,9 +709,9 @@
                 <bean parent="Uif-LinkField" p:linkText="Add Biographic Information" p:target="_self"
                       p:href="BiographicInformationView?methodToCall=get&amp;viewId=BiographicInformationView&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add an Alert" p:target="_self"
-                      p:href="AlertsView?methodToCall=get&amp;viewId=AlertsView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
+                      p:href="alertView?methodToCall=get&amp;viewId=AlertView&amp;pageId=AddAlertPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add a Flag" p:target="_self"
-                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
+                      p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add Memo" p:target="_self"
                       p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>

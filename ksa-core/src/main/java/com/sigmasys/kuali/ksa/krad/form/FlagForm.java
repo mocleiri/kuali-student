@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by: dmulderink on 10/6/12 at 2:28 PM
  */
-public class FlagsForm extends AbstractViewModel {
+public class FlagForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 

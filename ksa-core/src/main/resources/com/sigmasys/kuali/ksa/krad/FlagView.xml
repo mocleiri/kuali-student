@@ -26,7 +26,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="FlagsView" parent="Uif-KsaFormView" p:footer.render="false">
+    <bean id="FlagView" parent="Uif-KsaFormView" p:footer.render="false">
         <property name="title" value="Flags"/>
         <property name="headerText" value="Flags"/>
         <property name="entryPageId" value="FlagsPage"/>
@@ -97,7 +97,7 @@
                 <property name="viewHelperServiceClassName" value=""/>
                 <property name="defaultBindingObjectPath" vaue=""/>
         -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FlagsForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FlagForm"/>
     </bean>
 
 
@@ -130,7 +130,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
-                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
+                      p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <!--  Status message -->
                 <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
             </list>
@@ -185,9 +185,9 @@
                 </bean>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self" p:align="center"
-                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=ViewFlagPage&amp;userId=@{account.id}"/>
+                      p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=ViewFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Update" p:target="_self" p:align="center"
-                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=EditFlagPage&amp;userId=@{account.id}"/>
+                      p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=EditFlagPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -454,9 +454,9 @@
             <list>
                 <!-- using a button means the controller would need to redirect to the appropriate page -->
                 <bean parent="Uif-Link" p:linkText="Add" p:target="_self"
-                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
+                      p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-Link" p:linkText="Update" p:target="_self"
-                      p:href="FlagsView?methodToCall=get&amp;viewId=FlagsView&amp;pageId=EditFlagPage&amp;userId=@{account.id}"/>
+                      p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=EditFlagPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
