@@ -5,7 +5,6 @@ import com.sigmasys.kuali.ksa.service.TransactionImportService;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kuali.rice.kns.exception.FileUploadLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -103,10 +102,10 @@ public class TransactionUploadController extends GenericSearchController {
                 form.setUploadProcessState(processMsg);
                 logger.error(processMsg);
             }
-        } catch (FileUploadLimitExceededException exp) {
+        } catch (Exception exp) {
             String expMsg = exp.getMessage();
             logger.error(expMsg);
-            form.setUploadProcessState("File size limit exceeded");
+            form.setUploadProcessState(expMsg);
         }
 
         return getUIFModelAndView(form);

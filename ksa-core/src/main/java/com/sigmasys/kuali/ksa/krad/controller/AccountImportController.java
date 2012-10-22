@@ -1,13 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.sigmasys.kuali.ksa.krad.form.FileUploadForm;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kuali.rice.kns.exception.FileUploadLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,10 +100,10 @@ public class AccountImportController extends GenericSearchController {
                 form.setUploadProcessState(processMsg);
                 logger.error(processMsg);
             }
-        } catch (FileUploadLimitExceededException exp) {
+        } catch (Exception exp) {
             String expMsg = exp.getMessage();
             logger.error(expMsg);
-            form.setUploadProcessState("File size limit exceeded");
+            form.setUploadProcessState(expMsg);
         }
 
         return getUIFModelAndView(form);
