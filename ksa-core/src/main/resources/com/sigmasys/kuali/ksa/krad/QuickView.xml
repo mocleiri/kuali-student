@@ -64,7 +64,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
-                                  p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
+                                  p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{account.id}"/>
                             <ref bean="quickViewAddMemoSection"/>
                             <ref bean="memoControlsGroup"/>
                         </list>
@@ -713,7 +713,7 @@
                 <bean parent="Uif-LinkField" p:linkText="Add a Flag" p:target="_self"
                       p:href="flagView?methodToCall=get&amp;viewId=FlagView&amp;pageId=AddFlagPage&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Add Memo" p:target="_self"
-                      p:href="QuickView?methodToCall=get&amp;viewId=QuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
+                      p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;pageId=QuickViewAddMemoPage&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
