@@ -51,7 +51,7 @@
                 <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
                       p:href="CollectionsView?methodToCall=get&amp;viewId=CollectionsView"/>
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
-                      p:href="BatchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView"/>
+                      p:href="batchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView"/>
                 <bean parent="Uif-Link" p:linkText="Account Import" p:target="_self"
                       p:href="AccountImportView?methodToCall=get&amp;viewId=AccountImportView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"

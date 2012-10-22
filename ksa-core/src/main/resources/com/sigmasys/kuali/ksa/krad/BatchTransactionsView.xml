@@ -86,7 +86,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-LinkField" p:linkText="XML Batch Process" p:target="_self"
-                      p:href="BatchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView&amp;pageId=BatchTransactionsUploadFilePage"/>
+                      p:href="batchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView&amp;pageId=BatchTransactionsUploadFilePage"/>
             </list>
         </property>
     </bean>
