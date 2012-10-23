@@ -13,10 +13,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
+@ContextConfiguration(locations = {ServiceTestSuite.TEST_CONTEXT})
 public class DatabaseUtilsTest extends AbstractServiceTest {
 
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
+    @PersistenceContext(unitName = Constants.PROSAM_PERSISTENCE_UNIT)
     protected EntityManager em;
 
     @Test

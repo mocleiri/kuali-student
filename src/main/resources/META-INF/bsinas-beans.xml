@@ -39,7 +39,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="ksa"/>
+        <property name="persistenceUnitName" value="prosam"/>
         <property name="dataSource" ref="proSamDataSource"/>
         <property name="persistenceXmlLocation" value="classpath:/META-INF/bsinas-persistence.xml"/>
         <property name="persistenceUnitPostProcessors" ref="bsinasEntityFinder"/>

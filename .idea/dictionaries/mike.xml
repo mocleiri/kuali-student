@@ -8,8 +8,10 @@
       <w>configurer</w>
       <w>datasource</w>
       <w>dslr</w>
+      <w>jaxb</w>
       <w>jndi</w>
       <w>prosam</w>
+      <w>qname</w>
       <w>xliff</w>
     </words>
   </dictionary>

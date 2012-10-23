@@ -13,7 +13,7 @@ import org.springframework.util.Assert;
 import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
+@ContextConfiguration(locations = {ServiceTestSuite.TEST_CONTEXT})
 @Transactional
 public class ConfigServiceTest extends AbstractServiceTest {
 

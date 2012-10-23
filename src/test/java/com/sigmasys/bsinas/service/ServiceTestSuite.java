@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
         ConfigServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
-    public static final String TEST_KSA_CONTEXT = "/META-INF/test-context.xml";
+    public static final String TEST_CONTEXT = "/META-INF/test-context.xml";
 
     public static Test suite() {
         return new JUnit4TestAdapter(ServiceTestSuite.class);

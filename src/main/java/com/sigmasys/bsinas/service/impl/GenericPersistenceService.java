@@ -34,7 +34,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class GenericPersistenceService implements PersistenceService {
 
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
+    @PersistenceContext(unitName = Constants.PROSAM_PERSISTENCE_UNIT)
     protected EntityManager em;
 
     @Autowired
@@ -50,7 +50,8 @@ public class GenericPersistenceService implements PersistenceService {
     @Override
     public List<Advice> getAdvices(BeanFactory beanFactory) {
         LinkedList<Advice> advices = new LinkedList<Advice>();
-        if (configService != null && Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
+        if (configService != null &&
+                Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_ENABLED_PARAM_NAME))) {
             // Setting up the logging interceptor
             LoggingInterceptor loggingInterceptor = beanFactory.getBean(LoggingInterceptor.class);
             loggingInterceptor.setTargetObject(this);

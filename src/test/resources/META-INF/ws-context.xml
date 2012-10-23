@@ -24,9 +24,9 @@
         <property name="baseServiceUrl" ref="baseServiceUrl"/>
     </bean>
 
-    <bean id="localizationWsClient" class="com.sigmasys.bsinas.service.jaxws.JaxWsProxyFactoryBean"
+    <!--bean id="localizationWsClient" class="com.sigmasys.bsinas.service.jaxws.JaxWsProxyFactoryBean"
           parent="wsProxyFactoryBean">
         <property name="serviceInterface" value="com.sigmasys.bsinas.service.LocalizationService"/>
-    </bean>
+    </bean-->
 
 </beans>
