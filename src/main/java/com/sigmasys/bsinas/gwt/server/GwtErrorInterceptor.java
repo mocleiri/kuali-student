@@ -53,7 +53,7 @@ public class GwtErrorInterceptor implements MethodInterceptor {
                         logger.warn("Cannot set transaction to rollback: " + ex.toString(), ex);
                     }
                     logger.info("Error occured while invoking method '" + method.getName() + "'", t);
-                    throw getGxtError(t);
+                    throw getGwtError(t);
                 }
             }
         }
@@ -77,7 +77,7 @@ public class GwtErrorInterceptor implements MethodInterceptor {
         return true;
     }
 
-    public static GwtError getGxtError(Throwable t) {
+    public static GwtError getGwtError(Throwable t) {
         // If the exception is already GwtError - we don't have to do anything, but just throw it.
         return (t instanceof GwtError) ? (GwtError) t : new GwtError(ErrorUtils.getMessage(t), false);
     }

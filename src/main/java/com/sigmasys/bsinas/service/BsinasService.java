@@ -4,6 +4,7 @@ import org.collegeboard.inas._2012.NeedAnalysisXmlEngine;
 import org.collegeboard.inas._2012.input.NeedAnalysisInput;
 import org.collegeboard.inas._2012.output.NeedAnalysisOutput;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 
 /**
@@ -18,21 +19,21 @@ public interface BsinasService {
 
 
     /**
-     * Parses the incoming XML specified by StringReader and converts it into NeedAnalysisInput using JAXB.
+     * Parses the incoming XML specified by StringReader and converts it into a Java object using JAXB.
      *
-     * @param request String representation of XML
+     * @param xml String representation of XML
      * @return NeedAnalysisInput instance
      */
-    NeedAnalysisInput parseRequest(String request);
+    <T> T fromXml(String xml, Class<T> type) throws JAXBException;
 
 
     /**
-     * Takes the incoming  specified by StringReader
+     * Takes an object instance and serializes it to XML.
      *
-     * @param response NeedAnalysisOutput instance
+     * @param object a Java bean instance to be serialized to XML
      * @return String representation of XML
      */
-    String parseResponse(NeedAnalysisOutput response);
+    <T> String toXml(T object) throws JAXBException;
 
 
     /**

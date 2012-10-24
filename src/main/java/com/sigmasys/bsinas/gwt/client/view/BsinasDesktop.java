@@ -93,10 +93,8 @@ public class BsinasDesktop extends Desktop {
 
 
         final Window bsinasWindow = new BsinasWindow();
-        final Window kimWindow = new KimWindow();
 
         addShortcut("BSINAS", bsinasWindow, "bsinas-shortcut");
-        addShortcut("KIM", kimWindow, "accessControl-shortcut");
 
         // Creating "Start" menu
         final StartMenu menu = taskBar.getStartMenu();
@@ -106,12 +104,6 @@ public class BsinasDesktop extends Desktop {
 
         MenuItem menuItem = new MenuItem(bsinasWindow.getHeading());
         menuItem.setData(WINDOW_KEY, bsinasWindow);
-        menuItem.setIconStyle("tabs");
-        menuItem.addSelectionListener(listener);
-        menu.add(menuItem);
-
-        menuItem = new MenuItem(kimWindow.getHeading());
-        menuItem.setData(WINDOW_KEY, kimWindow);
         menuItem.setIconStyle("tabs");
         menuItem.addSelectionListener(listener);
         menu.add(menuItem);

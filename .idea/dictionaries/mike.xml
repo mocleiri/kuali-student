@@ -7,11 +7,13 @@
       <w>bsinas</w>
       <w>configurer</w>
       <w>datasource</w>
+      <w>deserialize</w>
       <w>dslr</w>
       <w>jaxb</w>
       <w>jndi</w>
       <w>prosam</w>
       <w>qname</w>
+      <w>xcal</w>
       <w>xliff</w>
     </words>
   </dictionary>

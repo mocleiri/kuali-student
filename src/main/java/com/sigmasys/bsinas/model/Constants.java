@@ -31,5 +31,6 @@ public interface Constants {
 
     // URL mapping constants
     String CONFIG_SERVICE_URL = "config.service";
+    String BSINAS_SERVICE_URL = "bsinas.service";
 
 }

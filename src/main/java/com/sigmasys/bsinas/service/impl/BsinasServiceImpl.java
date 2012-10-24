@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
@@ -57,42 +58,32 @@ public class BsinasServiceImpl extends GenericPersistenceService implements Bsin
     }
 
     /**
-     * Parses the incoming XML specified by StringReader and converts it into NeedAnalysisInput using JAXB.
+     * Parses the incoming XML specified by StringReader and converts it into a Java object using JAXB.
      *
-     * @param request String representation of XML
+     * @param xml String representation of XML
      * @return NeedAnalysisInput instance
      */
     @Override
-    public NeedAnalysisInput parseRequest(String request) {
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(NeedAnalysisInput.class);
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            return (NeedAnalysisInput) unmarshaller.unmarshal(new StringReader(request));
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException(e.getMessage(), e);
-        }
+    public <T> T fromXml(String xml, Class<T> type) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(type);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return (T) unmarshaller.unmarshal(new StringReader(xml));
     }
 
     /**
-     * Takes the incoming  specified by StringReader
+     * Takes an object instance and serializes it to XML.
      *
-     * @param response NeedAnalysisOutput instance
+     * @param object a Java bean instance to be serialized to XML
      * @return String representation of XML
      */
     @Override
-    public String parseResponse(NeedAnalysisOutput response) {
-        try {
-            StringWriter writer = new StringWriter();
-            JAXBContext context = JAXBContext.newInstance(NeedAnalysisOutput.class);
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(response, writer);
-            return writer.toString();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException(e.getMessage(), e);
-        }
+    public <T> String toXml(T object) throws JAXBException {
+        StringWriter writer = new StringWriter();
+        JAXBContext context = JAXBContext.newInstance(object.getClass());
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(object, writer);
+        return writer.toString();
     }
 
     /**

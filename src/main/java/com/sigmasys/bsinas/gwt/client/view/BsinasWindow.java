@@ -5,15 +5,14 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.Element;
 
 /**
- * KSA Main window
+ * BSINAS Main window
  *
  * @author Michael Ivanov
- *         Date: 5/2/12
  */
 public class BsinasWindow extends Window {
 
     public BsinasWindow() {
-        setHeading("Kuali Student Accounts");
+        setHeading("BSINAS");
         setMinimizable(true);
         setMaximizable(true);
         setClosable(true);

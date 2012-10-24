@@ -1,137 +1,109 @@
 package com.sigmasys.bsinas.gwt.client.view;
 
-import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.*;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.*;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.google.gwt.user.client.Element;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sigmasys.bsinas.gwt.client.service.GenericCallback;
+import com.sigmasys.bsinas.gwt.client.service.GwtErrorHandler;
+import com.sigmasys.bsinas.gwt.client.service.ServiceFactory;
+import com.sigmasys.bsinas.gwt.client.util.StringUtils;
+import com.sigmasys.bsinas.gwt.client.view.widget.WidgetFactory;
 
 /**
- * KSA Root Panel
+ * BSINAS Root Panel
  *
  * @author Michael Ivanov
  */
-public class BsinasPanel extends TabPanel {
+public class BsinasPanel extends LayoutContainer {
+
+    private static final String DEFAULT_REQUEST = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<needAnalysisInput CreatedDate=\"2012-10-23\" AwardYear=\"2012\" xmlns=\"http://INAS.collegeboard.org/2012/Input/\">\n" +
+            "</needAnalysisInput>\n";
+
+    private TextArea requestTextArea;
+    private TextArea responseTextArea;
 
     public BsinasPanel() {
-        setCloseContextMenu(true);
-        Registry.register(BsinasPanel.class.getName(), this);
-    }
 
-    private void init() {
+        setLayout(new FitLayout());
 
-        TabItem tabItem = new TabItem("Details");
-        tabItem.setIconStyle("icon-alert");
-        tabItem.setLayout(new FitLayout());
-        tabItem.setScrollMode(Style.Scroll.AUTO);
+        final LayoutContainer panel = new LayoutContainer(new TableLayout(3));
 
-        tabItem.add(new LayoutContainer());
-        add(tabItem);
+        requestTextArea = new TextArea();
+        requestTextArea.setWidth(750);
+        requestTextArea.setHeight(600);
+        requestTextArea.setValue(DEFAULT_REQUEST);
 
-    }
+        responseTextArea = new TextArea();
+        responseTextArea.setWidth(750);
+        responseTextArea.setHeight(600);
 
-    @Override
-    protected void onRender(Element target, int index) {
-        super.onRender(target, index);
-        init();
-    }
+        LayoutContainer buttonPanel = new LayoutContainer(new TableLayout(1));
 
-    @Override
-    protected void onItemContextMenu(TabItem tab, int x, int y) {
 
-        if (isCloseContextMenu()) {
-
-            if (closeContextMenu == null) {
-                closeContextMenu = new Menu();
-                closeContextMenu.addListener(Events.Hide, new Listener<MenuEvent>() {
-                    @Override
-                    public void handleEvent(MenuEvent be) {
-                        be.getContainer().setData("tab", null);
-                    }
-                });
-
-                MenuItem item = new MenuItem("Move to New Window", new SelectionListener<MenuEvent>() {
-                    @Override
-                    public void componentSelected(MenuEvent ce) {
-                        TabItem item = (TabItem) ce.getContainer().getData("tab");
-                        if (item != null) {
-                            List<Component> innerItems = item.getItems();
-                            if (innerItems != null && !innerItems.isEmpty()) {
-                                Window window = new Window();
-                                window.setHeading(item.getText());
-                                window.setLayout(new FitLayout());
-                                window.setMaximizable(true);
-                                window.setMinimizable(true);
-                                window.setClosable(true);
-                                window.setSize(800, 600);
-                                window.add(innerItems.get(0));
-                                BsinasDesktop desktop = Registry.get(BsinasDesktop.class.getName());
-                                desktop.openWindow(window);
-                                close(item);
+        Button submitButton = new Button("Submit");
+        submitButton.setWidth(80);
+        submitButton.setIconStyle("icon-check");
+        submitButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+            public void componentSelected(ButtonEvent event) {
+                try {
+                    String requestXml = requestTextArea.getValue();
+                    if (!StringUtils.isEmpty(requestXml)) {
+                        responseTextArea.mask("Processing request...");
+                        ServiceFactory.getBsinasService().runEngine(requestXml, new GenericCallback<String>() {
+                            @Override
+                            public void onSuccess(String responseXml) {
+                                responseTextArea.setValue(responseXml);
+                                responseTextArea.unmask();
                             }
-                        }
-                    }
-                });
-                item.setIconStyle("icon-checkin");
 
-                closeContextMenu.add(item);
-
-                item = new MenuItem("Close Tab", new SelectionListener<MenuEvent>() {
-                    @Override
-                    public void componentSelected(MenuEvent ce) {
-                        TabItem item = (TabItem) ce.getContainer().getData("tab");
-                        if (item != null) {
-                            close(item);
-                        }
-                    }
-                });
-                item.setIconStyle("icon-delete");
-
-                closeContextMenu.add(item);
-
-                item = new MenuItem("Close Other Tabs", new SelectionListener<MenuEvent>() {
-                    @Override
-                    public void componentSelected(MenuEvent ce) {
-                        TabItem item = (TabItem) ce.getContainer().getData("tab");
-                        if (item != null) {
-                            List<TabItem> items = new ArrayList<TabItem>();
-                            items.addAll(getItems());
-                            for (TabItem currentItem : items) {
-                                if (currentItem != item && currentItem.isClosable()) {
-                                    close(currentItem);
-                                }
+                            @Override
+                            public void onFailure(Throwable t) {
+                                responseTextArea.unmask();
+                                super.onFailure(t);
                             }
-                        }
+                        });
+                    } else {
+                        GwtErrorHandler.error("XML Request cannot be empty");
                     }
-
-                });
-                item.setIconStyle("icon-delete");
-
-                closeContextMenu.add(item);
-            }
-
-            closeContextMenu.getItem(0).setEnabled(tab.isClosable());
-            closeContextMenu.getItem(1).setEnabled(tab.isClosable());
-
-            closeContextMenu.setData("tab", tab);
-
-            boolean hasClosable = false;
-            for (TabItem item : getItems()) {
-                if (item.isClosable() && item != tab) {
-                    hasClosable = true;
-                    break;
+                } catch (Exception e) {
+                    responseTextArea.unmask();
+                    GwtErrorHandler.error(e);
                 }
             }
+        });
 
-            closeContextMenu.getItem(2).setEnabled(hasClosable);
-            closeContextMenu.showAt(x, y);
-        }
+        Button resetButton = new Button("Reset");
+        resetButton.setWidth(80);
+        resetButton.setIconStyle("icon-undo");
+        resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+            public void componentSelected(ButtonEvent event) {
+                responseTextArea.unmask();
+                requestTextArea.setValue(DEFAULT_REQUEST);
+                responseTextArea.setValue("");
+            }
+        });
+
+        TableData td = new TableData(Style.HorizontalAlignment.CENTER, Style.VerticalAlignment.TOP);
+        td.setMargin(10);
+        td.setPadding(10);
+
+        buttonPanel.add(submitButton, td);
+        buttonPanel.add(resetButton, td);
+
+        panel.add(WidgetFactory.createText("XML Request:"), td);
+        panel.add(WidgetFactory.createText(""), td);
+        panel.add(WidgetFactory.createText("XML Response:"), td);
+
+        panel.add(requestTextArea, td);
+        panel.add(buttonPanel);
+        panel.add(responseTextArea, td);
+
+        add(panel);
     }
 
 }

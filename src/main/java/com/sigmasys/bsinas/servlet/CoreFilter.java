@@ -9,9 +9,7 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -113,10 +111,10 @@ public class CoreFilter implements Filter {
                 final String redirectUrl = request.getRequestURI() + (queryString != null ? "?" + queryString : "");
                 request.setAttribute("redirectUrl", redirectUrl);
 
-                final String userId = request.getParameter("bsinas_userId");
-                final String password = request.getParameter("bsinas_password");
+                //final String userId = request.getParameter("bsinas_userId");
+                //final String password = request.getParameter("bsinas_password");
 
-                if (userId != null) {
+                //if (userId != null) {
 
                     // If the request has redirectUrl parameter ->
                     // redirect to the location specified by redirectUrl
@@ -125,17 +123,19 @@ public class CoreFilter implements Filter {
                         response.sendRedirect(targetUrl);
                     }
 
-                } else {
+                  sessionManager.createSession(request, response, DEFAULT_USER_ID);
+
+                /*} else {
                     invalidateSession(request, response, true);
                     return;
-                }
+                }*/
 
-            } else {
+            } /*else {
                 // No session has been established and this is not a login form submission,
                 // so forward to login page
                 request.getRequestDispatcher(loginPath).forward(request, response);
                 return;
-            }
+            }*/
 
 
             logger.info("USER-REQUEST-INFO: user = '" + sessionManager.getUserId(request) +

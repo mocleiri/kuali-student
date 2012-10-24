@@ -13,10 +13,12 @@ import com.sigmasys.bsinas.model.Constants;
 public class ServiceFactory {
 
     private static final GwtConfigServiceAsync configService;
+    private static final GwtBsinasServiceAsync bsinasService;
 
     // Initialization of the remote services
     static {
         configService = initService(GWT.create(GwtConfigService.class), Constants.CONFIG_SERVICE_URL);
+        bsinasService = initService(GWT.create(GwtBsinasService.class), Constants.BSINAS_SERVICE_URL);
     }
 
     private ServiceFactory() {
@@ -29,6 +31,10 @@ public class ServiceFactory {
 
     public static GwtConfigServiceAsync getConfigService() {
         return configService;
+    }
+
+    public static GwtBsinasServiceAsync getBsinasService() {
+           return bsinasService;
     }
 
 }

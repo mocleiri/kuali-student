@@ -12,7 +12,7 @@ public class GwtError extends RuntimeException {
     }
 
     public GwtError(String message) {
-        this(message, true);
+        this(message, false);
     }
 
     public GwtError(String message, boolean showCommonMessage) {

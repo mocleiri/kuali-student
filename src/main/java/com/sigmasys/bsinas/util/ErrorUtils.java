@@ -3,6 +3,7 @@ package com.sigmasys.bsinas.util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.xml.bind.JAXBException;
 import java.sql.SQLException;
 
 public class ErrorUtils {
@@ -25,6 +26,11 @@ public class ErrorUtils {
                 SQLException sqle = (SQLException) error;
                 while ((sqle = sqle.getNextException()) != null) {
                     addMessage(buffer, sqle.getMessage());
+                }
+            } else if (error instanceof JAXBException) {
+                JAXBException jaxbe = (JAXBException) error;
+                if (jaxbe.getLinkedException() != null) {
+                    addMessage(buffer, jaxbe.getMessage());
                 }
             }
         }

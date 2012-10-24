@@ -83,15 +83,15 @@ public abstract class AbstractRemoteService extends RemoteServiceServlet impleme
         } catch (InvocationTargetException ex) {
             logger.error("InvocationTargetException occured. Processing proxied call to " + this.getClass() + " failed", ex);
             return RPCCopy.encodeResponseForFailure(rpcRequest.getMethod(),
-                    GwtErrorInterceptor.getGxtError(ex.getCause()),
+                    GwtErrorInterceptor.getGwtError(ex.getCause()),
                     rpcRequest.getSerializationPolicy());
         } catch (IncompatibleRemoteServiceException ex) {
             logger.error("IncompatibleRemoteServiceException occured. Processing proxied call to " + this.getClass() + " failed", ex);
-            return RPCCopy.encodeResponseForFailure(null, GwtErrorInterceptor.getGxtError(ex),
+            return RPCCopy.encodeResponseForFailure(null, GwtErrorInterceptor.getGwtError(ex),
                     rpcRequest.getSerializationPolicy());
         } catch (Throwable ex) {
             logger.error("Processing non-proxied call to " + this.getClass() + " failed", ex);
-            return RPC.encodeResponseForFailure(rpcRequest.getMethod(), GwtErrorInterceptor.getGxtError(ex),
+            return RPC.encodeResponseForFailure(rpcRequest.getMethod(), GwtErrorInterceptor.getGwtError(ex),
                     rpcRequest.getSerializationPolicy());
         }
     }
