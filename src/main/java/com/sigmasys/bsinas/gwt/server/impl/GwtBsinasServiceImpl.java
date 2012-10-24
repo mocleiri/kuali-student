@@ -6,6 +6,7 @@ import com.sigmasys.bsinas.gwt.client.service.GwtBsinasService;
 import com.sigmasys.bsinas.gwt.server.AbstractRemoteService;
 import com.sigmasys.bsinas.model.Constants;
 import com.sigmasys.bsinas.service.BsinasService;
+import com.sigmasys.bsinas.util.ErrorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.collegeboard.inas._2012.input.NeedAnalysisInput;
@@ -36,9 +37,9 @@ public class GwtBsinasServiceImpl extends AbstractRemoteService implements GwtBs
             NeedAnalysisInput input = bsinasService.fromXml(inputXml, NeedAnalysisInput.class);
             NeedAnalysisOutput output = bsinasService.runEngine(input);
             return bsinasService.toXml(output);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException(e.getMessage(), e);
+        } catch (Throwable t) {
+            logger.error(t.getMessage(), t);
+            throw new GwtError(ErrorUtils.getMessage(t));
         }
 
     }

@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/bsinas_request1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/bsinas_request2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bsinas.iml" afterPath="$PROJECT_DIR$/bsinas.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/util/ErrorUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/util/ErrorUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java" afterPath="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java" />
     </list>
     <ignored path="ksa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -150,31 +147,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ErrorUtils.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ErrorUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/util/ErrorUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="93" selection-start="339" selection-end="339" vertical-scroll-proportion="0.3343949">
+            <state line="29" column="88" selection-start="947" selection-end="947" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RunNeedAnalysisResponse.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/collegeboard/inas/_2012/RunNeedAnalysisResponse.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="30" selection-start="1061" selection-end="1084" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="INeedAnalysisXmlEngine.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/collegeboard/inas/_2012/INeedAnalysisXmlEngine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="34" selection-start="1802" selection-end="1802" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -197,15 +176,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ObjectFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/collegeboard/inas/_2012/input/ObjectFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="500" column="11" selection-start="58084" selection-end="58084" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="NeedsAnalysisRecordType.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/collegeboard/inas/_2012/input/NeedsAnalysisRecordType.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -215,19 +185,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentInputDataType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/collegeboard/inas/_2012/input/StudentInputDataType.java">
+      <file leaf-file-name="BsinasServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/impl/BsinasServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="13" selection-start="1194" selection-end="1194" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="33" column="83" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1084#1114#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BsinasServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/impl/BsinasServiceImpl.java">
+      <file leaf-file-name="BsinasService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/BsinasService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="90" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0">
+            <state line="26" column="82" selection-start="929" selection-end="929" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -235,10 +208,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JAXBException.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///usr/java/src.zip!/javax/xml/bind/JAXBException.java">
+      <file leaf-file-name="GwtBsinasServiceImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="13" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
+            <state line="32" column="45" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.8617594">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GwtError.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="17" selection-start="196" selection-end="196" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SAXParseException.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///usr/java/src.zip!/org/xml/sax/SAXParseException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="44" selection-start="1375" selection-end="1375" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SAXException.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///usr/java/src.zip!/org/xml/sax/SAXException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="71" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -274,17 +276,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/servlet/CoreFilter.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/service/GwtBsinasService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/impl/BsinasServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/BsinasService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/GwtErrorInterceptor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/view/BsinasPanel.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/bsinas-datasource.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/util/ErrorUtils.java" />
         <option value="$PROJECT_DIR$/src/test/resources/bsinas_request1.xml" />
         <option value="$PROJECT_DIR$/src/test/resources/bsinas_request2.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/BsinasService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/impl/BsinasServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -2469,7 +2471,11 @@
       <created>1351057219101</created>
       <updated>1351057219101</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <task id="LOCAL-00210" summary="added 2 examples of the XML request">
+      <created>1351117791101</created>
+      <updated>1351117791101</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2500,7 +2506,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32677165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3356299" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3356299" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41446725" sideWeight="0.4989282" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2512,10 +2518,10 @@
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297244" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1318328" sideWeight="0.66437006" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1318328" sideWeight="0.5944882" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21221864" sideWeight="0.66437006" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21221864" sideWeight="0.5944882" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4055118" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2564,7 +2570,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created a simple web app with a GXT-based UI to send/receive XMLs to/from BSINAS service" />
+    <option name="LAST_COMMIT_MESSAGE" value="added 2 examples of the XML request" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -2579,6 +2585,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Created BsinasService and added the first JUNIT test, refactoring" />
     <MESSAGE value="Created a simple web app with a GXT-based UI to send/receive XMLs to/from BSINAS service" />
+    <MESSAGE value="added 2 examples of the XML request" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -2689,13 +2696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="27" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/view/BsinasWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="64" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0">
@@ -2703,28 +2703,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/BsinasService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="98" selection-start="753" selection-end="753" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/AbstractRemoteService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="71" selection-start="1305" selection-end="1387" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="73" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2754,26 +2736,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/src.zip!/org/xml/sax/SAXParseException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="44" selection-start="1375" selection-end="1375" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/GwtErrorInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="81" column="85" selection-start="3249" selection-end="3249" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/src.zip!/org/xml/sax/SAXException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="20" selection-start="1332" selection-end="1344" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#4209#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2817,15 +2783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/impl/BsinasServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="90" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/collegeboard/inas/_2012/input/ObjectFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="500" column="11" selection-start="58084" selection-end="58084" vertical-scroll-proportion="0.0">
@@ -2863,7 +2820,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/util/ErrorUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="93" selection-start="339" selection-end="339" vertical-scroll-proportion="0.3343949">
+        <state line="29" column="88" selection-start="947" selection-end="947" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/src.zip!/org/xml/sax/SAXParseException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="44" selection-start="1375" selection-end="1375" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/src.zip!/org/xml/sax/SAXException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="71" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/BsinasService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="82" selection-start="929" selection-end="929" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/service/impl/BsinasServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="83" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1084#1114#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/client/model/GwtError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="17" selection-start="196" selection-end="196" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sigmasys/bsinas/gwt/server/impl/GwtBsinasServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="45" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.8617594">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

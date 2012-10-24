@@ -8,7 +8,6 @@ public class GwtError extends RuntimeException {
     private boolean showCommonMessage;
 
     public GwtError() {
-        super();
     }
 
     public GwtError(String message) {
