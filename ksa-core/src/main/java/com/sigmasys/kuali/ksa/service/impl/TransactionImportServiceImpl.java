@@ -7,6 +7,7 @@ import com.sigmasys.kuali.ksa.transform.*;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ import java.util.UUID;
 public class TransactionImportServiceImpl extends GenericPersistenceService implements TransactionImportService {
 
     private static final Log logger = LogFactory.getLog(TransactionImportServiceImpl.class);
+
+    private static enum Status {
+        COMPLETE,
+        INCOMPLETE
+    }
 
     private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/transaction-import.xsd";
     private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
@@ -113,8 +119,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      */
     private String parseTransactions(String xml) {
 
-        String batchStatus = "incomplete";
-        String uuidBatchIdentifier;
+        Status batchStatus = Status.INCOMPLETE;
+        String batchIdentifier = null;
         int batchSize = 0;
 
         BigDecimal totalValue = BigDecimal.ZERO;
@@ -138,8 +144,8 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         ksaBatchTransactionResponse.setAccepted(accepted);
         ksaBatchTransactionResponse.setFailed(failed);
 
-        Boolean singleBatchFailure =
-                Boolean.valueOf(configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME));
+        String failureValue = configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME);
+        Boolean singleBatchFailure = Boolean.valueOf(failureValue);
 
         // determine if batch or single transaction
         Object object = parseXml(new StringReader(xml));
@@ -160,10 +166,20 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
         if (ksaTransactions != null) {
 
-            // A true batch stream will have a UUID. Otherwise a single will not have a value or be null
-            // set the incoming batch id as a response to batch identifier
-            uuidBatchIdentifier = ksaBatchTransaction.getBatchIdentifier();
-            ksaBatchTransactionResponse.setResponseToBatchIdentifier(uuidBatchIdentifier);
+            // Get the external batch ID and generate one if it is null
+            batchIdentifier = ksaBatchTransaction.getBatchIdentifier();
+            if (batchIdentifier == null) {
+                batchIdentifier = UUID.randomUUID().toString();
+            } else {
+                // If the batch ID already exists add a failure reason and set the batch ID to null
+                if (batchIdExists(batchIdentifier)) {
+                    failed.getKsaTransactionAndReason().add(ksaBatchTransaction);
+                    failed.getKsaTransactionAndReason().add("Batch ID = '" + batchIdentifier + "' already exists");
+                    batchIdentifier = null;
+                }
+            }
+
+            ksaBatchTransactionResponse.setResponseToBatchIdentifier(batchIdentifier);
             batchSize = ksaTransactions.size();
 
             String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
@@ -277,10 +293,10 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         }
 
         if (!failureNoted) {
-            batchStatus = "complete";
+            batchStatus = Status.COMPLETE;
         }
 
-        ksaBatchTransactionResponse.setBatchStatus(batchStatus);
+        ksaBatchTransactionResponse.setBatchStatus(batchStatus.toString());
 
         // fill in the response
 
@@ -309,12 +325,12 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             batchReceipt.setBatchDate(new Date());
             batchReceipt.setCreditOfAcceptedTransactions(totalValueCredit);
             batchReceipt.setDebitOfAcceptedTransactions(totalValueDebits);
-            batchReceipt.setExternalId(ksaBatchTransactionResponse.getResponseIdentifier());
+            batchReceipt.setExternalId(batchIdentifier);
             batchReceipt.setNumberOfAcceptedTransactions(numberOfAccepted);
             batchReceipt.setNumberOfRejectedTransactions(numberOfFailed);
             batchReceipt.setNumberOfTransactions(batchSize);
             batchReceipt.setReceiptDate(new Date());
-            batchReceipt.setStatus(("complete".equals(batchStatus)) ?
+            batchReceipt.setStatus((Status.COMPLETE.equals(batchStatus)) ?
                     BatchReceiptStatus.ACCEPTED : BatchReceiptStatus.FAILED);
             batchReceipt.setTotalVolume(totalValue);
             batchReceipt.setVolumeOfRejectedTransactions(failedValue);
@@ -379,12 +395,26 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 ksaTransaction.getTransactionType() != null);
     }
 
+    /**
+     * Checks if the given batch ID already exists in the database
+     *
+     * @param batchId Batch ID
+     * @return true if the given batch ID already exists, false - otherwise
+     */
+    private boolean batchIdExists(String batchId) {
+        Query query = em.createQuery("select br.externalId from BatchReceipt br where br.externalId = :batchId");
+        query.setParameter("batchId", batchId);
+        query.setMaxResults(1);
+        List<String> results = query.getResultList();
+        return (results != null && !results.isEmpty());
+    }
+
 
     /**
      * Determine the credit limit of the account. do not exceed
      *
-     * @param accountId
-     * @return
+     * @param accountId Account ID to be checked
+     * @return true if the given account is within credit limit, false - otherwise
      */
     private boolean isWithinCreditLimit(String accountId) {
         boolean exitState;
@@ -462,10 +492,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
 
     /**
-     * persist the extra Transaction field information from the incoming KsaTransaction
-     * return a revised KsaTransaction
+     * Persists the Transaction instance created from the incoming KsaTransaction
      *
-     * @param ksaTransaction KsaTransaction imstance
+     * @param ksaTransaction KsaTransaction instance
      * @return Transaction instance
      */
     private Transaction persistTransaction(KsaTransaction ksaTransaction) {
@@ -513,7 +542,11 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                     clearPeriod = override.getOverrideClearPeriod();
                 }
                 payment.setRefundable(override.isRefundable());
-                payment.setRefundRule(override.getRefundRule());
+                String refundRule = override.getOverrideRefundRule();
+                if (StringUtils.isBlank(refundRule)) {
+                    refundRule = override.getRefundRule();
+                }
+                payment.setRefundRule(refundRule);
             }
 
             if (clearPeriod == null) {

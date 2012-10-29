@@ -68,7 +68,7 @@
         <property name="viewHelperServiceClassName" value=""/>
         <property name="defaultBindingObjectPath" vaue=""/>
 -->
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.BatchTransactionsForm"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FileUploadForm"/>
     </bean>
 
 
@@ -103,7 +103,7 @@
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="uploadXMLFile" p:label="@{getLValue('ksa.label.upload.xml.file')}">
+                <bean parent="Uif-InputField" p:propertyName="uploadFile" p:label="@{getLValue('ksa.label.upload.xml.file')}">
                     <property name="instructionalText" value="Select an XML file to Upload and Process. The file will be validated during the process task."/>
                     <property name="control">
                         <bean parent="Uif-FileControl" p:size="30"/>

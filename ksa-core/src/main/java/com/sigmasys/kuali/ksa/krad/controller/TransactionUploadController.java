@@ -71,13 +71,13 @@ public class TransactionUploadController extends GenericSearchController {
         // the request was rejected because its size (992410) exceeds the configured maximum (500000)
         String processMsg = "";
         try {
-            MultipartFile uploadXMLFile = form.getUploadFile();
-            String contentType = uploadXMLFile.getContentType();
+            MultipartFile xmlFile = form.getUploadFile();
+            String contentType = xmlFile.getContentType();
             if (contentType.endsWith("xml")) {
 
                 try {
 
-                    String xmlContent = CommonUtils.getStreamAsString(uploadXMLFile.getInputStream());
+                    String xmlContent = CommonUtils.getStreamAsString(xmlFile.getInputStream());
 
                     processMsg = "Processing Transaction(s)";
                     form.setUploadProcessState(processMsg);

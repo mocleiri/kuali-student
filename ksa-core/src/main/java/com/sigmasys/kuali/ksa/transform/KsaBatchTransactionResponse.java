@@ -621,8 +621,8 @@ public class KsaBatchTransactionResponse {
     public static class Failed {
 
         @XmlElements({
-            @XmlElement(name = "reason", type = String.class),
-            @XmlElement(name = "ksa-transaction", type = KsaTransaction.class)
+            @XmlElement(name = "ksa-transaction", type = KsaTransaction.class),
+            @XmlElement(name = "reason", type = String.class)
         })
         protected List<Object> ksaTransactionAndReason;
 
@@ -644,9 +644,9 @@ public class KsaBatchTransactionResponse {
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link String }
          * {@link KsaTransaction }
-         * 
+         * {@link String }
+         *
          * 
          */
         public List<Object> getKsaTransactionAndReason() {
