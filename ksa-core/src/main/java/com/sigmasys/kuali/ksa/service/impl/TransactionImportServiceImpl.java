@@ -173,7 +173,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             } else {
                 // If the batch ID already exists add a failure reason and set the batch ID to null
                 if (batchIdExists(batchIdentifier)) {
-                    failed.getKsaTransactionAndReason().add(ksaBatchTransaction);
+                    failed.getKsaTransactionAndReason().add(null);
                     failed.getKsaTransactionAndReason().add("Batch ID = '" + batchIdentifier + "' already exists");
                     batchIdentifier = null;
                 }
