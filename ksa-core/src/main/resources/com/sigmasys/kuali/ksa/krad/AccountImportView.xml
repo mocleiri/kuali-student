@@ -86,7 +86,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-LinkField" p:linkText="XML Import Process" p:target="_self"
-                      p:href="AccountImportView?methodToCall=get&amp;viewId=AccountImportView&amp;pageId=AccountImportUploadFilePage"/>
+                      p:href="accountImportView?methodToCall=get&amp;viewId=AccountImportView&amp;pageId=AccountImportUploadFilePage"/>
             </list>
         </property>
     </bean>

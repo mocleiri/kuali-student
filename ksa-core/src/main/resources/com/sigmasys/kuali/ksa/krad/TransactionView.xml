@@ -125,10 +125,9 @@
         </property>
     </bean>-->
 
-    <bean id="KSATransOvrVwNav" parent="Uif-KsaNavigationGroupBase">
+    <bean id="KSATransOvrVwNav" parent="Uif-KsaPageNavigation">
         <property name="items">
-            <list>
-                <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+            <list merge="true">
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="bursaQuickMenuOptionsPage"
                       p:actionLabel="Quick Options"/>
             </list>

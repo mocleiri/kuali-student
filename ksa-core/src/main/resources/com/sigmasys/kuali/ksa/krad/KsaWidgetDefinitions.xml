@@ -53,7 +53,7 @@
                 <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
                       p:href="batchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView"/>
                 <bean parent="Uif-Link" p:linkText="Account Import" p:target="_self"
-                      p:href="AccountImportView?methodToCall=get&amp;viewId=AccountImportView"/>
+                      p:href="accountImportView?methodToCall=get&amp;viewId=AccountImportView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
                       p:href="currencyView?methodToCall=get&amp;viewId=CurrencyView&amp;pageId=CurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="FM-Admin" p:target="_self"
@@ -65,10 +65,7 @@
     <bean id="Uif-KsaPageNavigation" parent="Uif-MenuNavigationGroup" abstract="true">
         <property name="items">
             <list>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page 1"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page 2"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page ..."/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HomePage" p:actionLabel="Page N"/>
+                <bean parent="Uif-HeaderTwo" p:headerText="Page Navigation"/>
             </list>
         </property>
     </bean>

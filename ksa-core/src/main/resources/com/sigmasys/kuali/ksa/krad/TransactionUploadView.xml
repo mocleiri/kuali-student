@@ -29,10 +29,9 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.FileUploadForm"/>
         <property name="entryPageId" value="TransactionUploadMenuOptionsPage"/>
         <property name="navigation">
-            <bean parent="Uif-KsaNavigationGroupBase">
+            <bean parent="Uif-KsaPageNavigation">
                     <property name="items">
-                        <list>
-                            <bean parent="Uif-HeaderTwo" p:headerText="Page Navigation"/>
+                        <list merge="true">
                             <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TransactionUploadMenuOptionsPage"
                                   p:actionLabel="Quick Options"/>
                         </list>

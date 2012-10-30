@@ -34,9 +34,8 @@
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
-                    <list>
+                    <list merge="true">
                         <!-- TODO Advanced Search -->
-                        <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
                               p:actionLabel="Advanced Search"/>
                     </list>

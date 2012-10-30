@@ -63,10 +63,9 @@
     </bean>-->
 
     <!-- Sponsor navigation -->
-    <bean id="KSASponsorViewNav" parent="Uif-KsaNavigationGroupBase">
+    <bean id="KSASponsorViewNav" parent="Uif-KsaPageNavigation">
         <property name="items">
-            <list>
-                <bean parent="Uif-HeaderTwo" p:headerText="KSA Navigation"/>
+            <list merge="true">
                 <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SponsorQuickMenuOptionsPage"
                       p:actionLabel="Quick Options"/>
             </list>
