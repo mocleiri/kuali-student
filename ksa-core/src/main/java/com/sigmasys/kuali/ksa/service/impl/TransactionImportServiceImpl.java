@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.jws.WebService;
 import javax.persistence.Query;
@@ -37,11 +38,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     private static final Log logger = LogFactory.getLog(TransactionImportServiceImpl.class);
 
-    private static enum Status {
-        COMPLETE,
-        INCOMPLETE
-    }
-
     private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/transaction-import.xsd";
     private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
 
@@ -64,16 +60,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     @Autowired
     private GeneralLedgerService glService;
 
-
-    /**
-     * Persist the given batch receipt in the database
-     *
-     * @param batchReceipt BatchReceipt instance
-     * @return BatchReceipt ID
-     */
-    protected Long persistBatchReceipt(BatchReceipt batchReceipt) {
-        return persistEntity(batchReceipt);
-    }
 
     /**
      * Returns BatchReceipt by the given ID
@@ -119,7 +105,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      */
     private String parseTransactions(String xml) {
 
-        Status batchStatus = Status.INCOMPLETE;
+        BatchReceiptStatus batchReceiptStatus = BatchReceiptStatus.IN_PROCESS;
         String batchIdentifier = null;
         int batchSize = 0;
 
@@ -161,10 +147,12 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
         boolean failureNoted = false;
 
+        boolean batchIsQualified = false;
+
         // the unmarshaled list
         List<KsaTransaction> ksaTransactions = ksaBatchTransaction.getKsaTransaction();
 
-        if (ksaTransactions != null) {
+        if (!CollectionUtils.isEmpty(ksaTransactions)) {
 
             // Get the external batch ID and generate one if it is null
             batchIdentifier = ksaBatchTransaction.getBatchIdentifier();
@@ -176,6 +164,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                     failed.getKsaTransactionAndReason().add(null);
                     failed.getKsaTransactionAndReason().add("Batch ID = '" + batchIdentifier + "' already exists");
                     batchIdentifier = null;
+                    batchReceiptStatus = BatchReceiptStatus.FAILED;
                 }
             }
 
@@ -230,14 +219,11 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 }
             }
 
-            boolean batchIsQualified = failed.getKsaTransactionAndReason().isEmpty();
+            batchIsQualified = CollectionUtils.isEmpty(failed.getKsaTransactionAndReason());
 
-            // process the accepted list
-            // no failed rejects and singleBatchFailure is false
-            if ((batchIsQualified && !singleBatchFailure) || (!batchIsQualified && !singleBatchFailure)) {
+            if (batchIsQualified || !singleBatchFailure) {
 
                 for (KsaTransaction ksaTransaction : acceptedKsaTransactionList) {
-
 
                     try {
 
@@ -292,11 +278,17 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             }
         }
 
-        if (!failureNoted) {
-            batchStatus = Status.COMPLETE;
+        if (batchReceiptStatus != BatchReceiptStatus.FAILED) {
+            if (batchIsQualified && !failureNoted) {
+                batchReceiptStatus = BatchReceiptStatus.ACCEPTED;
+            } else if (!batchIsQualified && !failureNoted) {
+                batchReceiptStatus = BatchReceiptStatus.PARTIALLY_ACCEPTED;
+            } else {
+                batchReceiptStatus = BatchReceiptStatus.FAILED;
+            }
         }
 
-        ksaBatchTransactionResponse.setBatchStatus(batchStatus.toString());
+        ksaBatchTransactionResponse.setBatchStatus(batchReceiptStatus.toString());
 
         // fill in the response
 
@@ -317,9 +309,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             m.marshal(ksaBatchTransactionResponse, writer);
+            String responseXml = writer.toString();
 
-            // fill in the BatchReceipt and persist
-
+            // Create a new BatchReceipt and persist
             BatchReceipt batchReceipt = new BatchReceipt();
             batchReceipt.setAccount(firstAccount);
             batchReceipt.setBatchDate(new Date());
@@ -330,18 +322,15 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
             batchReceipt.setNumberOfRejectedTransactions(numberOfFailed);
             batchReceipt.setNumberOfTransactions(batchSize);
             batchReceipt.setReceiptDate(new Date());
-            batchReceipt.setStatus((Status.COMPLETE.equals(batchStatus)) ?
-                    BatchReceiptStatus.ACCEPTED : BatchReceiptStatus.FAILED);
+            batchReceipt.setStatus(batchReceiptStatus);
             batchReceipt.setTotalVolume(totalValue);
             batchReceipt.setVolumeOfRejectedTransactions(failedValue);
-
-            String responseXml = writer.toString();
 
             batchReceipt.setIncomingXml(createXmlDocument(xml));
 
             batchReceipt.setOutgoingXml(createXmlDocument(responseXml));
 
-            persistBatchReceipt(batchReceipt);
+            persistEntity(batchReceipt);
 
             return responseXml;
 
