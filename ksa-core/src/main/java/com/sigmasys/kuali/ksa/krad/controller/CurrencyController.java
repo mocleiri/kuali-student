@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +35,6 @@ public class CurrencyController extends GenericSearchController {
    protected CurrencyForm createInitialForm(HttpServletRequest request) {
       CurrencyForm form = new CurrencyForm();
       form.setStatusMessage("");
-
       return form;
    }
 
@@ -76,91 +74,6 @@ public class CurrencyController extends GenericSearchController {
          form.setCurrency(currencyService.getCurrency(new Long(currencyId)));
       }
 
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-
-   @RequestMapping(params = "methodToCall=start")
-   public ModelAndView start(@ModelAttribute("KualiForm") CurrencyForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
-
-      // populate model for testing
-
-      return super.start(form, result, request, response);
-
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method= RequestMethod.POST, params="methodToCall=submit")
-   @Transactional(readOnly = false)
-   public ModelAndView submit(@ModelAttribute("KualiForm") CurrencyForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do submit stuff...
-
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
-   @Transactional(readOnly = false)
-   public ModelAndView save(@ModelAttribute("KualiForm") CurrencyForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
-
-      // do save stuff...
-
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=cancel")
-   public ModelAndView cancel(@ModelAttribute ("KualiForm") CurrencyForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
-      return getUIFModelAndView(form);
-   }
-
-   /**
-    *
-    * @param form
-    * @param result
-    * @param request
-    * @param response
-    * @return
-    */
-   @RequestMapping(method=RequestMethod.POST, params="methodToCall=replace")
-   public ModelAndView replace(@ModelAttribute ("KualiForm") CurrencyForm form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-      // do cancel stuff...
       return getUIFModelAndView(form);
    }
 
@@ -290,4 +203,5 @@ public class CurrencyController extends GenericSearchController {
 
       return getUIFModelAndView(form);
    }
+
 }
