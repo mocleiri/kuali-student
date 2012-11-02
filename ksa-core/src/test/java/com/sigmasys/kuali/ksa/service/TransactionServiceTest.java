@@ -14,22 +14,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.sigmasys.kuali.ksa.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.sigmasys.kuali.ksa.model.Allocation;
-import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.CompositeAllocation;
-import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.DebitType;
-import com.sigmasys.kuali.ksa.model.Deferment;
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.model.TransactionType;
-import com.sigmasys.kuali.ksa.model.TransactionTypeId;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -433,300 +424,363 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
+
+    @Test
+    public void allocateReversals() throws Exception {
+
+        String userId = "admin";
+
+        Transaction transaction = transactionService.createTransaction("1020", userId, new Date(), new BigDecimal(10e5));
+
+        notNull(transaction);
+        notNull(transaction.getId());
+
+        transaction = transactionService.createTransaction("1020", userId, new Date(), new BigDecimal(-10e5));
+
+        notNull(transaction);
+        notNull(transaction.getId());
+
+
+        List<Transaction> transactions = transactionService.getTransactions(userId);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        for (Transaction t : transactions) {
+            notNull(t);
+            notNull(t.getId());
+        }
+
+        List<GlTransaction> glTransactions = transactionService.allocateReversals(userId, true);
+
+        notNull(glTransactions);
+        notEmpty(glTransactions);
+
+        isTrue(glTransactions.size() == 2);
+
+        glTransactions = transactionService.allocateReversals(userId, false);
+
+        notNull(glTransactions);
+
+        isTrue(glTransactions.isEmpty());
+
+    }
+
+
     @Test
     public void testTransactionExistsByTransactionType() throws Exception {
-    	// Create a new Transaction:
+        // Create a new Transaction:
         String transactionTypeId = "1020";
         String accountId = "admin";
         BigDecimal amount = new BigDecimal(10e3);
         Date effectiveDate = new Date();
-        
+
         transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
-        
+
         // Call the service:
         boolean exists = transactionService.transactionExists(accountId, transactionTypeId);
-        
+
         isTrue(exists);
-    	
-    	// Try to find a Transaction by a fake Account:
+
+        // Try to find a Transaction by a fake Account:
         String fakeAccount = "fake";
-        
+
         exists = transactionService.transactionExists(fakeAccount, transactionTypeId);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake Transaction ID:
+
+        // Try to find a Transaction by a fake Transaction ID:
         String fakeTransactionTypeId = "somethingelse";
-        
+
         exists = transactionService.transactionExists(accountId, fakeTransactionTypeId);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by all fake parameters:
+
+        // Try to find a Transaction by all fake parameters:
         exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId);
         isTrue(!exists);
-        
+
         // Pass invalid parameters:
         try {
-        	transactionService.transactionExists(null, fakeTransactionTypeId);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, fakeTransactionTypeId);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(fakeAccount, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(fakeAccount, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
+            transactionService.transactionExists(null, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
     }
-    
+
     @Test
     public void testTransactionExistsByTransactionTypeAndAmount() throws Exception {
-    	// Create a new Transaction:
+        // Create a new Transaction:
         String transactionTypeId = "1020";
         String accountId = "admin";
         BigDecimal amount = new BigDecimal(10e3);
         Date effectiveDate = new Date();
-        
+
         transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
-        
+
         // Call the service:
         BigDecimal amountFrom = new BigDecimal(10e2);
         BigDecimal amountTo = new BigDecimal(10e4);
         boolean exists = transactionService.transactionExists(accountId, transactionTypeId, amountFrom, amountTo);
-        
+
         isTrue(exists);
-    	
-    	// Try to find a Transaction by a fake Account:
+
+        // Try to find a Transaction by a fake Account:
         String fakeAccount = "fake";
-        
+
         exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amountFrom, amountTo);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake Transaction ID:
+
+        // Try to find a Transaction by a fake Transaction ID:
         String fakeTransactionTypeId = "somethingelse";
-        
+
         exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amountFrom, amountTo);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake amount:
+
+        // Try to find a Transaction by a fake amount:
         BigDecimal fakeAmount = new BigDecimal(1.0);
-        
+
         exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount, fakeAmount);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by all fake parameters:
+
+        // Try to find a Transaction by all fake parameters:
         exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount, fakeAmount);
         isTrue(!exists);
-        
+
         // Pass invalid parameters:
         try {
-        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeAmount);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeAmount);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeAmount);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeAmount);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, (BigDecimal)null, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, (BigDecimal) null, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, (BigDecimal)null, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
+            transactionService.transactionExists(null, null, (BigDecimal) null, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
     }
-    
+
     @Test
     public void testTransactionExistsByTransactionTypeAndEffectiveDate() throws Exception {
-    	// Create a new Transaction:
+        // Create a new Transaction:
         String transactionTypeId = "1020";
         String accountId = "admin";
         BigDecimal amount = new BigDecimal(10e3);
         Date effectiveDate = new Date();
-        
-        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
-        
-        // Prepare input Date parameters:
-		Calendar newDateFrom = Calendar.getInstance();
-		int newDateFromYear = newDateFrom.get(Calendar.YEAR) - 1;
-		int newDateFromMonth = Calendar.JULY;
-		int newDateFromDay = 18;
-		Calendar newDateTo = Calendar.getInstance();
-		int newDateToYear = newDateTo.get(Calendar.YEAR) + 1;
-		int newDateToMonth = Calendar.JANUARY;
-		int newDateToDay = 25;
-        
-		newDateFrom.set(Calendar.YEAR, newDateFromYear);
-		newDateFrom.set(Calendar.MONTH, newDateFromMonth);
-		newDateFrom.set(Calendar.DAY_OF_MONTH, newDateFromDay);
 
-		newDateTo.set(Calendar.YEAR, newDateToYear);
-		newDateTo.set(Calendar.MONTH, newDateToMonth);
-		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
-		
+        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
+
+        // Prepare input Date parameters:
+        Calendar newDateFrom = Calendar.getInstance();
+        int newDateFromYear = newDateFrom.get(Calendar.YEAR) - 1;
+        int newDateFromMonth = Calendar.JULY;
+        int newDateFromDay = 18;
+        Calendar newDateTo = Calendar.getInstance();
+        int newDateToYear = newDateTo.get(Calendar.YEAR) + 1;
+        int newDateToMonth = Calendar.JANUARY;
+        int newDateToDay = 25;
+
+        newDateFrom.set(Calendar.YEAR, newDateFromYear);
+        newDateFrom.set(Calendar.MONTH, newDateFromMonth);
+        newDateFrom.set(Calendar.DAY_OF_MONTH, newDateFromDay);
+
+        newDateTo.set(Calendar.YEAR, newDateToYear);
+        newDateTo.set(Calendar.MONTH, newDateToMonth);
+        newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
+
         // Call the service:
         boolean exists = transactionService.transactionExists(accountId, transactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
-        
+
         isTrue(exists);
-    	
-    	// Try to find a Transaction by a fake Account:
+
+        // Try to find a Transaction by a fake Account:
         String fakeAccount = "fake";
-        
+
         exists = transactionService.transactionExists(fakeAccount, transactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake Transaction ID:
+
+        // Try to find a Transaction by a fake Transaction ID:
         String fakeTransactionTypeId = "somethingelse";
-        
+
         exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake Effective Date:
+
+        // Try to find a Transaction by a fake Effective Date:
         Date fakeEffectiveDate = new Date(0);
-        
+
         exists = transactionService.transactionExists(accountId, transactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by all fake parameters:
+
+        // Try to find a Transaction by all fake parameters:
         exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
         isTrue(!exists);
-        
+
         // Pass invalid parameters:
         try {
-        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, fakeTransactionTypeId, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(fakeAccount, null, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(fakeAccount, null, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, fakeEffectiveDate, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, fakeEffectiveDate, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, null, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, null, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, (Date)null, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
+            transactionService.transactionExists(null, null, (Date) null, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
     }
-    
+
     @Test
     public void testTransactionExistsByTransactionTypeAmountAndEffectiveDate() throws Exception {
-    	// Create a new Transaction:
+        // Create a new Transaction:
         String transactionTypeId = "1020";
         String accountId = "admin";
         BigDecimal amount = new BigDecimal(10e3);
         Date effectiveDate = new Date();
-        
-        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
-        
-        // Prepare input Date parameters:
-		Calendar newDateFrom = Calendar.getInstance();
-		int newDateFromYear = newDateFrom.get(Calendar.YEAR) - 1;
-		int newDateFromMonth = Calendar.JULY;
-		int newDateFromDay = 18;
-		Calendar newDateTo = Calendar.getInstance();
-		int newDateToYear = newDateTo.get(Calendar.YEAR) + 1;
-		int newDateToMonth = Calendar.JANUARY;
-		int newDateToDay = 25;
-        
-		newDateFrom.set(Calendar.YEAR, newDateFromYear);
-		newDateFrom.set(Calendar.MONTH, newDateFromMonth);
-		newDateFrom.set(Calendar.DAY_OF_MONTH, newDateFromDay);
 
-		newDateTo.set(Calendar.YEAR, newDateToYear);
-		newDateTo.set(Calendar.MONTH, newDateToMonth);
-		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
-		
+        transactionService.createTransaction(transactionTypeId, accountId, effectiveDate, amount);
+
+        // Prepare input Date parameters:
+        Calendar newDateFrom = Calendar.getInstance();
+        int newDateFromYear = newDateFrom.get(Calendar.YEAR) - 1;
+        int newDateFromMonth = Calendar.JULY;
+        int newDateFromDay = 18;
+        Calendar newDateTo = Calendar.getInstance();
+        int newDateToYear = newDateTo.get(Calendar.YEAR) + 1;
+        int newDateToMonth = Calendar.JANUARY;
+        int newDateToDay = 25;
+
+        newDateFrom.set(Calendar.YEAR, newDateFromYear);
+        newDateFrom.set(Calendar.MONTH, newDateFromMonth);
+        newDateFrom.set(Calendar.DAY_OF_MONTH, newDateFromDay);
+
+        newDateTo.set(Calendar.YEAR, newDateToYear);
+        newDateTo.set(Calendar.MONTH, newDateToMonth);
+        newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
+
         // Call the service:
         BigDecimal amountFrom = new BigDecimal(10e2);
         BigDecimal amountTo = new BigDecimal(10e4);
         boolean exists = transactionService.transactionExists(accountId, transactionTypeId, amountFrom, amountTo, newDateFrom.getTime(), newDateTo.getTime());
-        
+
         isTrue(exists);
-    	
-    	// Try to find a Transaction by a fake Account:
+
+        // Try to find a Transaction by a fake Account:
         String fakeAccount = "fake";
-        
+
         exists = transactionService.transactionExists(fakeAccount, transactionTypeId, amountFrom, amountTo, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake Transaction ID:
+
+        // Try to find a Transaction by a fake Transaction ID:
         String fakeTransactionTypeId = "somethingelse";
-        
+
         exists = transactionService.transactionExists(accountId, fakeTransactionTypeId, amountFrom, amountTo, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake amount:
+
+        // Try to find a Transaction by a fake amount:
         BigDecimal fakeAmount = new BigDecimal(1.0);
-        
+
         exists = transactionService.transactionExists(accountId, transactionTypeId, fakeAmount, fakeAmount, newDateFrom.getTime(), newDateTo.getTime());
         isTrue(!exists);
-        
-    	// Try to find a Transaction by a fake Effective Date:
+
+        // Try to find a Transaction by a fake Effective Date:
         Date fakeEffectiveDate = new Date(0);
-        
+
         exists = transactionService.transactionExists(accountId, transactionTypeId, amountFrom, amountTo, fakeEffectiveDate, fakeEffectiveDate);
         isTrue(!exists);
-        
-    	// Try to find a Transaction by all fake parameters:
+
+        // Try to find a Transaction by all fake parameters:
         exists = transactionService.transactionExists(fakeAccount, fakeTransactionTypeId, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
         isTrue(!exists);
-        
+
         // Pass invalid parameters:
         try {
-        	transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, fakeTransactionTypeId, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(fakeAccount, null, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, fakeAmount, fakeAmount, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, null, null, fakeEffectiveDate, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, null, null, fakeEffectiveDate, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, null, null, fakeEffectiveDate, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, null, null, fakeEffectiveDate, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, null, null, null, fakeEffectiveDate);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
-        
+            transactionService.transactionExists(null, null, null, null, null, fakeEffectiveDate);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
+
         try {
-        	transactionService.transactionExists(null, null, null, null, null, null);
-        	isTrue(false); // should not even get here
-        } catch (Exception e) {}
+            transactionService.transactionExists(null, null, null, null, null, null);
+            isTrue(false); // should not even get here
+        } catch (Exception e) {
+        }
     }
 
 }

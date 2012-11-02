@@ -1117,7 +1117,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 Transaction reversal = findReversal(unprocessedTransactions, transaction);
                 if (reversal != null) {
                     CompositeAllocation allocation =
-                            createAllocation(transaction, reversal, transaction.getAmount(), isQueued, false);
+                            createAllocation(transaction, reversal, transaction.getAmount().abs(), isQueued, false);
                     glTransactions.add(allocation.getCreditGlTransaction());
                     glTransactions.add(allocation.getDebitGlTransaction());
                     unprocessedTransactions.remove(transaction);
