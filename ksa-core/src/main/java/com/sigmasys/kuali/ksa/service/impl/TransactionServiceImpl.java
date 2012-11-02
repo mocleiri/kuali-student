@@ -1078,6 +1078,24 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
     }
 
+    /**
+     * This method is used to apply “obvious” payments to their reversal. Under normal circumstances, this will not be needed,
+     * as reversals created inside of KSA will automatically be locked together. However, after an import from an external system,
+     * this allocation may not exist. This method is provided to ensure that transactions that are obviously designed to be together,
+     * are allocated together. “Obvious” means they are entirely unallocated, have the same amounts,
+     * but one is negated, and they have the same transaction type.
+     * <p/>
+     *
+     * @param accountId Account ID
+     * @return list of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> allocateReversals(String accountId) {
+        return allocateReversals(accountId, true);
+    }
+
 
     /**
      * This method is used to apply “obvious” payments to their reversal. Under normal circumstances, this will not be needed,
