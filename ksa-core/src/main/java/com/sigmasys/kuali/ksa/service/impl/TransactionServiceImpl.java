@@ -1,11 +1,7 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import javax.jws.WebMethod;
@@ -1080,6 +1076,75 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (glMode == GeneralLedgerMode.INDIVIDUAL) {
             glService.prepareGlTransmission();
         }
+    }
+
+
+    /**
+     * This method is used to apply “obvious” payments to their reversal. Under normal circumstances, this will not be needed,
+     * as reversals created inside of KSA will automatically be locked together. However, after an import from an external system,
+     * this allocation may not exist. This method is provided to ensure that transactions that are obviously designed to be together,
+     * are allocated together. “Obvious” means they are entirely unallocated, have the same amounts,
+     * but one is negated, and they have the same transaction type.
+     * <p/>
+     *
+     * @param accountId Account ID
+     * @param isQueued  indicates whether the GL transaction should be in Q or W status
+     * @return list of generated GL transactions
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public List<GlTransaction> allocateReversals(String accountId, boolean isQueued) {
+
+        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
+        List<Transaction> unallocatedTransactions = new LinkedList<Transaction>();
+
+        for (Transaction transaction : getTransactions(accountId)) {
+
+            BigDecimal allocatedAmount = transaction.getAllocatedAmount() != null ?
+                    transaction.getAllocatedAmount() : BigDecimal.ZERO;
+
+            BigDecimal lockedAllocatedAmount = transaction.getLockedAllocatedAmount() != null ?
+                    transaction.getLockedAllocatedAmount() : BigDecimal.ZERO;
+
+            if (allocatedAmount.compareTo(BigDecimal.ZERO) == 0 && lockedAllocatedAmount.compareTo(BigDecimal.ZERO) == 0) {
+                unallocatedTransactions.add(transaction);
+            }
+
+        }
+
+        Set<Transaction> unprocessedTransactions = new HashSet<Transaction>(unallocatedTransactions);
+        for (Transaction transaction : unallocatedTransactions) {
+                Transaction reversal = findReversal(unprocessedTransactions, transaction);
+                if (reversal != null) {
+                    CompositeAllocation allocation =
+                            createAllocation(transaction, reversal, transaction.getAmount(), isQueued, false);
+                    glTransactions.add(allocation.getCreditGlTransaction());
+                    glTransactions.add(allocation.getDebitGlTransaction());
+                    unprocessedTransactions.remove(transaction);
+                    unprocessedTransactions.remove(reversal);
+                }
+        }
+
+        return glTransactions;
+
+    }
+
+    /**
+     * Finds a transaction with a negated amount for the given transaction from the given list.
+     *
+     * @param transactions Collection of transactions
+     * @param transaction  Transaction instance
+     * @return Transaction reversal
+     */
+    protected Transaction findReversal(Collection<Transaction> transactions, Transaction transaction) {
+        for (Transaction reversal : transactions) {
+            if (transaction.getAmount() != null && reversal.getAmount() != null) {
+                if (transaction.getAmount().add(reversal.getAmount()).compareTo(BigDecimal.ZERO) == 0) {
+                    return reversal;
+                }
+            }
+        }
+        return null;
     }
 
 

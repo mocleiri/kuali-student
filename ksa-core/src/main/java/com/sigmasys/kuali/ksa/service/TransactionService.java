@@ -366,6 +366,21 @@ public interface TransactionService {
 
 
     /**
+     * This method is used to apply “obvious” payments to their reversal. Under normal circumstances, this will not be needed,
+     * as reversals created inside of KSA will automatically be locked together. However, after an import from an external system,
+     * this allocation may not exist. This method is provided to ensure that transactions that are obviously designed to be together,
+     * are allocated together. “Obvious” means they are entirely unallocated, have the same amounts,
+     * but one is negated, and they have the same transaction type.
+     * <p/>
+     *
+     * @param accountId Account ID
+     * @param isQueued  indicates whether the GL transaction should be in Q or W status
+     * @return list of generated GL transactions
+     */
+    List<GlTransaction> allocateReversals(String accountId, boolean isQueued);
+
+
+    /**
      * Moves a transaction from a pre-effective state to an effective state. Once a transaction is effective, its
      * general ledger entries are created. In certain cases, a transaction might be moved to an effective state
      * before its effective date, in which case, forceEffective is passed as true.
@@ -393,6 +408,7 @@ public interface TransactionService {
      * @return a newly created reversed transaction
      */
     Transaction reverseTransaction(Long transactionId, String memoText, BigDecimal partialAmount, String statementPrefix);
+
 
     /**
      * A deferment may be expired automatically (when the date of the deferment
