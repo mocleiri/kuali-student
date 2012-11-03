@@ -9,12 +9,14 @@ public enum RefundStatus implements Identifiable {
 
     UNVERIFIED(RefundStatus.UNVERIFIED_CODE),
     VERIFIED(RefundStatus.VERIFIED_CODE),
-    COMPLETED(RefundStatus.COMPLETED_CODE),
+    REFUNDED(RefundStatus.REFUNDED_CODE),
+    CANCELED(RefundStatus.CANCELED_CODE),
     FAILED(RefundStatus.FAILED_CODE);
 
     public static final String UNVERIFIED_CODE = "U";
     public static final String VERIFIED_CODE = "V";
-    public static final String COMPLETED_CODE = "R";
+    public static final String REFUNDED_CODE = "R";
+    public static final String CANCELED_CODE = "C";
     public static final String FAILED_CODE = "F";
 
     private String id;
@@ -33,12 +35,14 @@ public enum RefundStatus implements Identifiable {
         switch (this) {
             case UNVERIFIED:
                 return "Unverified";
-            case FAILED:
-                return "Failed";
             case VERIFIED:
                 return "Verified";
-            case COMPLETED:
-                return "Completed";
+            case REFUNDED:
+                return "Refunded";
+            case CANCELED:
+            	return "Canceled";
+            case FAILED:
+                return "Failed";
         }
         throw new IllegalStateException("No refund status found for " + name() + " value");
     }
