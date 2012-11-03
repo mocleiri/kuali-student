@@ -3,18 +3,33 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 
 /**
- * Refund type.
+ * This entity class describes a type of a <code>Refund</code> stored in the "refundType" attribute of that class.
  * <p/>
  *
  * @author Michael Ivanov
+ * @author Sergey Godunov
+ * @version 1.1
  */
 @Entity
 @Table(name = "KSSA_REFUND_TYPE")
 public class RefundType extends AuditableEntity {
 
-    private String creditTypeId;
+    /**
+	 * Serialization ID.
+	 */
+	private static final long serialVersionUID = -4396302416143306045L;
 
+	/**
+	 * The transaction type for refunds that are made by this type. This is a debit type ("charge"), as it deducts the over-payment from the account.
+	 */
     private String debitTypeId;
+    
+    /**
+     * For refund types that send the refund back to a KSA account ("Account Refunds", "Payoff Refunds") 
+     * this is the credit type ("payment") that will be applied to the receiving account. 
+     * For most refund types where the money is sent.
+     */
+    private String creditTypeId;
 
 
     @Id
