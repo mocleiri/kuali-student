@@ -86,7 +86,7 @@ public interface RefundService {
 	 * It marks the refund object as refunded.
 	 * 
 	 * @param refundId ID of a Refund object.
-	 * @param batchId ID of a batch transaction.
+	 * @param batch ID of a batch transaction.
 	 * @return The Refund object.
 	 */
 	Refund performRefund(Long refundId, String batch);
