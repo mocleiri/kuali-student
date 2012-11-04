@@ -59,6 +59,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     @Autowired
     private GeneralLedgerService glService;
+    
+    @Autowired
+    private RefundService refundService;
 
 
     /**
@@ -195,7 +198,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                             "' with Effective Date = '" + effectiveDate + "'";
                 }
                 if (ksaTransaction.getOverride() != null &&
-                        !isRefundRuleValid(ksaTransaction.getOverride().getRefundRule())) {
+                        !refundService.isRefundRuleValid(ksaTransaction.getOverride().getRefundRule())) {
                     // applies to Payments
                     errMsg = "Invalid refund rule '" + ksaTransaction.getOverride().getRefundRule() + "'";
                 }
@@ -424,59 +427,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
      */
     private boolean isTransactionTypeValid(String transactionType, Date effectiveDate) {
         return transactionService.getTransactionType(transactionType, effectiveDate) != null;
-    }
-
-    /**
-     * Payments may have a refund rule applied. Check for A and S types
-     *
-     * @param refundRule Refund rule
-     * @return boolean value
-     */
-    private boolean isRefundRuleValid(String refundRule) {
-
-        if (refundRule == null) {
-            return true;
-        }
-
-        // example A(100)(pheald) or S(45)
-        // transactionService.isRefundRule(refundRule);
-        // applies to credit types
-        // drill down on the refund rule provided
-        if (refundRule.startsWith("A") || refundRule.startsWith("S")) {
-            // does the rule have a number 0 - 65535 after/in parenthesis
-            int openRuleIndex = refundRule.indexOf("(");
-            int closeRuleIndex = refundRule.indexOf(")");
-            if (openRuleIndex > 0 && closeRuleIndex > 0 && openRuleIndex < closeRuleIndex) {
-                try {
-                    int value = Integer.valueOf(refundRule.substring(openRuleIndex + 1, closeRuleIndex - 1));
-                    if (value < 0 || value > Short.MAX_VALUE * 2) {
-                        return false;
-                    }
-                } catch (Exception e) {
-                    logger.error(e.getMessage(), e);
-                    return false;
-                }
-                if (refundRule.startsWith("S")) {
-                    return true;
-                } else {
-                    // There should be a second parameter in parenthesis for "A" which appears to be the accountId
-                    // which must exist in KSA
-                    int openAccountIndex = refundRule.lastIndexOf("(");
-                    int closeAccountIndex = refundRule.lastIndexOf(")");
-                    if (openAccountIndex > 0 && closeAccountIndex > 0 && openAccountIndex < closeAccountIndex) {
-                        try {
-                            String accountId = refundRule.substring(openAccountIndex + 1, closeAccountIndex - 1);
-                            return accountService.getOrCreateAccount(accountId) != null;
-                        } catch (Exception e) {
-                            logger.error(e.getMessage(), e);
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-
-        return false;
     }
 
 
