@@ -55,7 +55,7 @@
                 <bean parent="Uif-Link" p:linkText="Account Import" p:target="_self"
                       p:href="accountImportView?methodToCall=get&amp;viewId=AccountImportView"/>
                 <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
-                      p:href="currencyView?methodToCall=get&amp;viewId=CurrencyView&amp;pageId=CurrencyPage"/>
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
                 <bean parent="Uif-Link" p:linkText="FM-Admin" p:target="_self"
                       p:href="rulesView?methodToCall=get&amp;viewId=RulesView"/>
             </list>
