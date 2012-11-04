@@ -59,7 +59,8 @@ public interface Constants {
     String TRANSACTION_SERVICE_URL = "transaction.service";
     String CURRENCY_SERVICE_URL = "currency.service";
 
-
-
+    // Refund constants:
+    String REFUND_ACCOUNT_SYSTEM_NAME = "refund.account.system.name";
+    String REFUND_ACCOUNT_TYPE = "refund.account.type";
 
 }
