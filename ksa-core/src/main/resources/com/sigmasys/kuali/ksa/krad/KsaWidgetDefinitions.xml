@@ -33,7 +33,7 @@
         </property>
     </bean>
 
-    <bean id="Uif-KsaViewNavigation" parent="Uif-KsaNavigationGroupBase">
+    <bean id="Uif-KsaViewNavigation" parent="Uif-KsaNavigationGroupBase" scope="prototype">
         <property name="navigationType" value="TAB_MENU"/>
         <property name="cssClasses">
             <list merge="true">
@@ -62,7 +62,7 @@
         </property>
     </bean>
 
-    <bean id="Uif-KsaPageNavigation" parent="Uif-MenuNavigationGroup" abstract="true">
+    <bean id="Uif-KsaPageNavigation" parent="Uif-MenuNavigationGroup" abstract="true" scope="prototype">
         <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="Page Navigation"/>
@@ -70,7 +70,7 @@
         </property>
     </bean>
 
-    <bean id="Uif-KsaHeader"  class="com.sigmasys.kuali.ksa.krad.uif.KsaHeader" parent="Uif-HeaderBase">
+    <bean id="Uif-KsaHeader"  class="com.sigmasys.kuali.ksa.krad.uif.KsaHeader" parent="Uif-HeaderBase" scope="prototype">
         <property name="template" value="/WEB-INF/ftl/header.ftl"/>
         <property name="upperGroup" ref="Uif-KsaViewNavigation"/>
     </bean>
