@@ -32,14 +32,56 @@
                 <property name="items">
                     <list merge="true">
                         <!-- TODO Advanced Search -->
+                        <bean parent="Uif-HeaderTwo" p:headerText="Settings"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="UserProfilePage"
+                              p:actionLabel="User Profile"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CurrencyPage"
                               p:actionLabel="Currency Types"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="RollUpsPage"
+                              p:actionLabel="Roll-Ups"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="GeneralLedgerTypesPage"
+                              p:actionLabel="General Ledger Types"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BankTypesPage"
+                              p:actionLabel="Bank Types"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TaxTypesPage"
+                              p:actionLabel="Tax Types"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="LatePeriodsPage"
+                              p:actionLabel="Late Periods"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountStatusTypesPage"
+                              p:actionLabel="Account Status Types"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="FlagTypesPage"
+                              p:actionLabel="Flag Types"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ActivityTypesPage"
+                              p:actionLabel="Activity Types"/>
                     </list>
                 </property>
             </bean>
         </property>
         <property name="items">
             <list merge="true">
+
+                <!--Begin User Profile Page-->
+
+                <bean parent="Uif-Page" p:id="UserProfilePage" p:title="User Profile">
+                    <property name="headerText" value="User Profile"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <ref bean="userProfile"/>
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End User Profile Page-->
+
+                <!--Begin Currency Page-->
+
                 <bean parent="Uif-Page" p:id="CurrencyPage" p:title="Currency Types">
                     <property name="headerText" value="Currency Types"/>
                     <property name="items">
@@ -74,6 +116,171 @@
                         </list>
                     </property>
                 </bean>
+
+                <!--End Currency Page-->
+
+                <!--Begin Roll-Ups Page-->
+
+                <bean parent="Uif-Page" p:id="RollUpsPage" p:title="Roll-Ups">
+                    <property name="headerText" value="Roll-Ups"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <ref bean="rollUpsTable"/>
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Roll-Ups Page-->
+
+                <!--Begin General Ledger Types Page-->
+
+                <bean parent="Uif-Page" p:id="GeneralLedgerTypesPage" p:title="General Ledger Types">
+                    <property name="headerText" value="General Ledger Types"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End General Ledger Types Page-->
+
+                <!--Begin Bank Types Page-->
+
+                <bean parent="Uif-Page" p:id="BankTypesPage" p:title="Bank Types">
+                    <property name="headerText" value="Bank Types"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Bank Types Page-->
+
+                <!--Begin Tax Types Page-->
+
+                <bean parent="Uif-Page" p:id="TaxTypesPage" p:title="Tax Types">
+                    <property name="headerText" value="Tax Types"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Tax Types Page-->
+
+                <!--Begin Late Periods Page-->
+
+                <bean parent="Uif-Page" p:id="LatePeriodsPage" p:title="Late Periods">
+                    <property name="headerText" value="Late Periods"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Late Periods Page-->
+
+                <!--Begin Account Status Types Page-->
+
+                <bean parent="Uif-Page" p:id="AccountStatusTypesPage" p:title="Account Status Types Page">
+                    <property name="headerText" value="Account Status Types"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Account Status Types Page-->
+
+                <!--Begin Flag Types Page-->
+
+                <bean parent="Uif-Page" p:id="FlagTypesPage" p:title="Flag Types Page">
+                    <property name="headerText" value="Flag Types"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Flag Types Page-->
+
+                <!--Begin Activity Types Page-->
+
+                <bean parent="Uif-Page" p:id="ActivityTypesPage" p:title="Activity Types Page">
+                    <property name="headerText" value="Activity Types"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Activity Types Page-->
+
+
+
             </list>
         </property>
 <!--
@@ -83,6 +290,20 @@
         <property name="defaultBindingObjectPath" value=""/>
 -->
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.SettingsForm"/>
+    </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                             WIP !!!  User Profile Section
+    A section containing User Profile Settings
+    ********************************************************************************************************************
+    -->
+    <bean id="userProfile" parent="Uif-HorizontalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="Uif-MessageField" p:messageText="Placeholder: User Profile Section"/>
+            </list>
+        </property>
     </bean>
 
     <!--
@@ -242,5 +463,74 @@
             </list>
         </property>
     </bean>
+
+    <!--
+    ********************************************************************************************************************
+                                             WIP !!!  Roll-up Table
+    A table containing a list of Roll-Ups used in the system
+    ********************************************************************************************************************
+    -->
+    <bean id="rollUpsTable" parent="Uif-HorizontalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="Uif-MessageField" p:messageText="Placeholder: Roll-Ups Table"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--<bean id="rollUpsTable" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4"
+          p:width="85%">
+        <property name="title" value="View Roll-Ups"/>
+        <property name="instructionalText"
+                  value="Roll-Up table - instructional text"/>
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
+        <property name="propertyName" value="currencies"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="true"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+        <property name="layoutManager.richTable.disableTableSort" value="false"/>
+        <property name="layoutManager.richTable.templateOptions">
+            <map merge="true">
+                <entry key="bPaginate" value="true"/>
+                <entry key="iDisplayLength" value="20"/>
+            </map>
+        </property>
+
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="Symbol"
+                      p:propertyName="code"
+                      p:width="10%">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"
+                              p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Name"
+                      p:propertyName="name"
+                      p:width="15%">
+                    <property name="control">
+                        <bean parent="Uif-TextControl"
+                              p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description"
+                      p:propertyName="description"
+                      p:width="55%">
+                    <property name="control">
+                        <bean parent="Uif-TextAreaControl"
+                              p:rows="5" p:cols="80"
+                              p:watermarkText="Statement description..."/>
+                    </property>
+                </bean>
+                <bean parent="Uif-LinkField" p:label="Edit" p:linkText="Edit" p:target="_self" p:width="10%"
+                      p:href="settingsView?viewId=SettingsView&amp;pageId=CurrencyDetailsPage&amp;methodToCall=get&amp;currencyId=@{#line.id}" />
+            </list>
+        </property>
+    </bean>-->
 
 </beans>
