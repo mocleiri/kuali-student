@@ -1,12 +1,22 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Query;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,11 +37,13 @@ import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.PostalAddress;
 import com.sigmasys.kuali.ksa.model.Refund;
 import com.sigmasys.kuali.ksa.model.RefundStatus;
+import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.RefundService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.transform.Ach;
+import com.sigmasys.kuali.ksa.transform.Check;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 
 /**
@@ -228,7 +240,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	@Override
 	public List<Refund> doAccountRefunds(String batch) {
 		// Find all Refund object with the given value of "batch":
-        String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.creditTypeId = :refundTypeId";
+        String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
         String refundTypeId = configService.getInitialParameter(Constants.REFUND_ACCOUNT_TYPE);
         Query query = em.createQuery(sql)
         		.setParameter("batchId", batch)
@@ -241,40 +253,120 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
         	doAccountRefund(refund.getId(), batch);
         }
 		
-		return null;
+		return match;
 	}
 
+	/**
+	 * Performs refund as a check.
+	 * 
+	 * @param refundId Refund identifier.
+	 * @param checkDate Date on the issued check.
+	 * @param checkMemo Memo section on the issued check.
+	 * @return String An XML form of the issued check.
+	 */
 	@Override
 	public String doCheckRefund(Long refundId, Date checkDate, String checkMemo) {
-		// TODO Auto-generated method stub
-		return null;
+		return doCheckRefund(refundId, null, checkDate, checkMemo);
 	}
 
+	/**
+	 * Performs a batch refund as a check.
+	 * 
+	 * @param refundId Refund identifier.
+	 * @param batch ID of a transaction batch.
+	 * @param checkDate Date on the issued check.
+	 * @param checkMemo Memo section on the issued check.
+	 * @return String An XML form of the issued check.
+	 * @see RefundService#produceXMLCheck(String, String, PostalAddress, BigDecimal, Date, String)
+	 */
 	@Override
-	public String doCheckRefund(Long refundId, String batch, Date checkDate,
-			String checkMemo) {
-		// TODO Auto-generated method stub
-		return null;
+	public String doCheckRefund(Long refundId, String batch, Date checkDate, String checkMemo) {
+		// Check the flag to consolidate same account checks:
+		boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_CHECK_GROUP));
+
+		return doCheckRefundInternal(refundId, batch, checkDate, checkMemo, consolidateSameAccountRefunds);
 	}
 
+	/**
+	 * Performs check type refunds as a part of a batch.
+	 * 
+	 * @param batch Batch of transactions.
+	 * @param checkDate Date on the refund checks.
+	 * @param checkMemo Memo section on the refund checks.
+	 * @return A batch of checks in form of an XML.
+	 * @see RefundService#produceXMLCheck(String, String, PostalAddress, BigDecimal, Date, String)
+	 */
 	@Override
 	public String doCheckRefunds(String batch, Date checkDate, String checkMemo) {
-		// TODO Auto-generated method stub
+		// Find all VERIFIED Check Refunds in the batch:
+        String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
+        String refundTypeId = configService.getInitialParameter(Constants.REFUND_CHECK_TYPE);
+        Query query = em.createQuery(sql)
+        		.setParameter("batchId", batch)
+        		.setParameter("status", RefundStatus.VERIFIED)
+        		.setParameter("refundTypeId", refundTypeId);
+        List<Refund> match = query.getResultList();
+		
+		// For each matching Refund, perform refund and record its XML check:
+        List<String> allXmlChecks = new ArrayList<String>();
+        
+        for (Refund refund : match) {
+        	String xmlCheck = doCheckRefundInternal(refund.getId(), batch, checkDate, checkMemo, false);
+        	
+        	allXmlChecks.add(xmlCheck);
+        }
+        
+        // TODO: Produce a batch check:
+        String xmlBatchCheck = null;
+		
 		return null;
 	}
 
+	/**
+	 * Produces an XML form of a refund check.
+	 * 
+	 * @param identifier Check identifier.
+	 * @param payee To whom the check is made out to.
+	 * @param postalAddress Address of the payee.
+	 * @param amount Amount on the check.
+	 * @param checkDate Date on the check.
+	 * @param memo Memo section on the check.
+	 * @return A refund check in an XML form.
+	 * @see RefundService#produceXMLCheck(String, String, PostalAddress, BigDecimal, Date, String)
+	 */
 	@Override
-	public String produceXMLCheck(String identifier, String payee,
-			PostalAddress postalAddress, BigDecimal amount, Date checkDate,
-			String memo) {
-		// TODO Auto-generated method stub
-		return null;
+	public String produceXMLCheck(String identifier, String payee, PostalAddress postalAddress, BigDecimal amount, Date checkDate, String memo) {
+		// Create a new Check object:
+		Check check = new Check();
+		
+		check.setIdentifier(identifier);
+		check.setPayee(payee);
+		check.setPostalAddress(convertToXMLAddress(postalAddress));
+		check.setAmount(amount);
+		check.setMemo(StringUtils.isNotBlank(memo) ? memo : null);
+		check.setDate(produceXMLCheckDate(checkDate));
+		
+		// Marshal the Check object:
+		try {
+			return marshalCheck(check);
+		} catch (Exception e) {
+			logger.error("Error marshalling a Check object into an XML String. Check ID: " + identifier 
+					+ ", Payee: " + payee + ", Amount: " + amount.doubleValue() + ", Date: " + checkDate + ", Memo: " + memo, e);
+			
+			throw new RuntimeException("Error marshalling a Check object into an XML String.");
+		}
 	}
 
+	/**
+	 * Performs refund as a bank account credit.
+	 * 
+	 * @param refundId Refund identifier.
+	 * @return String An XML form of the bank account information (Ach).
+	 * @see RefundService#produceAchTransmission(Ach, BigDecimal, String)
+	 */
 	@Override
 	public String doAchRefund(Long refundId) {
-		// TODO Auto-generated method stub
-		return null;
+		return doAchRefund(refundId, null);
 	}
 
 	@Override
@@ -427,6 +519,87 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	 * ****************************************************************/
 	
 	/**
+	 * Performs a Check refund. Optionally, consolidates all refunds for the same Account into one refund check.
+	 * 
+	 * @param refundId Id of a Refund to perform a check refund on.
+	 * @param batch Batch ID.
+	 * @param checkDate Date of the refund check.
+	 * @param checkMemo Memo section on the refund check.
+	 * @param consolidateSameAccountRefunds Whether to consolidate refund checks into one large sum.
+	 * @return Refund check as an XML document.
+	 */
+	private String doCheckRefundInternal(Long refundId, String batch, Date checkDate, String checkMemo, boolean consolidateSameAccountRefunds) {
+		// Get the Refund object:
+		Refund refund = getRefund(refundId, true);
+		
+		// Check that this refund of of a Check type. Compare the value of the system setting to RefundType:
+		String refundTypeId = refund.getRefundType().getDebitTypeId();
+		String systemPropRefundType = configService.getInitialParameter(Constants.REFUND_CHECK_TYPE);
+		
+		if (!StringUtils.equalsIgnoreCase(refundTypeId, systemPropRefundType)) {
+			throw new InvalidRefundTypeException("Invalid Refund type for a Check refund. Refund type is [" + refundTypeId + "].");
+		}
+		
+		// Perform either an individual refund or a consolidated check refund:
+		String systemName = configService.getInitialParameter(Constants.REFUND_CHECK_SYSTEM_NAME);
+		String checkId;
+		BigDecimal amount;
+		
+		// Work on Refunds. Check if we need to consolidate refund amounts:
+		if (consolidateSameAccountRefunds) {
+			// Find all VALIDATED cash/check Refunds for the same account, EXCEPT for the current Refund:
+			String accountId = refund.getTransaction().getAccountId();
+			String sql = "select r from Refund r where r.status = :refundStatus and r.transaction.accountId = :accountId and r.refundType.debitTypeId = :refundType and r.id <> :id";
+			Query query = em.createQuery(sql)
+					.setParameter("refundStatus", RefundStatus.VERIFIED)
+					.setParameter("accountId", accountId)
+					.setParameter("refundType", refundTypeId)
+					.setParameter("id", refund.getId());
+			List<Refund> allDueRefunds = new ArrayList<Refund>();
+			
+			allDueRefunds.add(refund);
+			allDueRefunds.addAll(query.getResultList());
+			checkId = UUID.randomUUID().toString();
+			amount = new BigDecimal(0);
+			
+			// Get the new Rollup:
+			String checkRoolupCode = configService.getInitialParameter(Constants.REFUND_CHECK_GROUP_ROLLUP);
+			Rollup checkRollup = getAuditableEntityByCode(checkRoolupCode, Rollup.class);
+			
+			// Sum all due Refunds into one check and perform refund:
+			for (Refund dueRefund : allDueRefunds) {
+				// Add the current refund amount to the total:
+				amount = amount.add(dueRefund.getAmount());
+				
+				// Perform refund:
+				dueRefund = performRefundInternal(dueRefund.getId(), batch, null);
+				dueRefund.setSystem(systemName);
+				dueRefund.setRefundGroup(checkId);
+				dueRefund.getRefundTransaction().setRollup(checkRollup);
+				persistEntity(dueRefund.getRefundTransaction());
+				persistEntity(dueRefund);
+			}
+		} else {
+			// Produce a single refund check:
+			checkId = refundId.toString() + ObjectUtils.toString(batch);
+			amount = refund.getAmount();
+			
+			// Perform refund:
+			refund = performRefundInternal(refund.getId(), batch, null);
+			refund.setSystem(systemName);
+			persistEntity(refund);
+		}
+		
+		// Produce an XML check:
+		Account refundAccount = refund.getTransaction().getAccount();
+		String payee = refundAccount.getDefaultPersonName().getDisplayValue();
+		PostalAddress address = refundAccount.getDefaultPostalAddress();
+		String xmlCheck = produceXMLCheck(checkId, payee, address, amount, checkDate, checkMemo);
+		
+		return xmlCheck;
+	}
+	
+	/**
 	 * Finds a <code>Refund</code> object. Optionally, asserts that it's in the VERIFIED state.
 	 * 
 	 * @param refundId ID of a <code>Refund</code> to be located.
@@ -520,5 +693,72 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
         activity.setTimestamp(new Date());
         
         persistEntity(activity);
+	}
+	
+	/**
+	 * Marshals a Check object into an XML document.
+	 * 
+	 * @param check A Check to marshal.
+	 * @return XML document containing the marshalled Check.
+	 * @throws Exception If an error occurs.
+	 */
+	private String marshalCheck(Check check) throws Exception {
+		StringWriter writer = new StringWriter();
+		
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Check.class);
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			
+			marshaller.marshal(check, writer);
+			writer.flush();
+			
+			// Get the content of the StringWriter:
+			return writer.getBuffer().toString();
+		} finally {
+			IOUtils.closeQuietly(writer);
+		}
+	}
+	
+	/**
+	 * Converts a persistent entity <code>PostalAddress</code> into an XML type.
+	 * 
+	 * @param address A persistent entity.
+	 * @return XML type.
+	 */
+	private com.sigmasys.kuali.ksa.transform.PostalAddress convertToXMLAddress(PostalAddress address) {
+		// Create a new XML Postal Address:
+		com.sigmasys.kuali.ksa.transform.PostalAddress xmlAddress = new com.sigmasys.kuali.ksa.transform.PostalAddress();
+		
+		xmlAddress.setAddressLine1(address.getStreetAddress1());
+		xmlAddress.setAddressLine2(address.getStreetAddress2());
+		xmlAddress.setAddressLine3(address.getStreetAddress3());
+		xmlAddress.setCity(address.getCity());
+		xmlAddress.setCountryCode(address.getCountry());
+		xmlAddress.setPostalCode(address.getPostalCode());
+		xmlAddress.setStateCode(address.getState());
+		
+		return xmlAddress;
+	}
+	
+	/**
+	 * Produces an XML type of a date from a check date. Discourages future checks converting them to today's date.
+	 * 
+	 * @param checkDate Proposed check date.
+	 * @return XML check date no earlier than today. 
+	 */
+	private XMLGregorianCalendar produceXMLCheckDate(Date checkDate) {
+		// If a future date, change to the current date:
+		Date dateOnCheck = (checkDate.getTime() < System.currentTimeMillis()) ? checkDate : new Date();
+		
+		// Create a new calendar and convert to an XML calendar:
+		GregorianCalendar c = new GregorianCalendar();
+		
+		c.setTime(dateOnCheck);
+		
+		try {
+			return DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+		} catch (Exception e) {/* ignored. returning null */}
+		
+		return null;	
 	}
 }
