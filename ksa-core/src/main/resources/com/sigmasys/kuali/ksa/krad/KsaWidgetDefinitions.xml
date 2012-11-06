@@ -42,21 +42,21 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Account Overview"
                       p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView"/>
-                <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Administration"
                       p:href="adminView?methodToCall=get&amp;viewId=KsaAdminView&amp;pageId=ActivityPage"/>
-                <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Reconciliation"
                       p:href="reportReconciliationView?methodToCall=get&amp;viewId=ReportReconciliationView"/>
-                <bean parent="Uif-Link" p:linkText="Collections" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Collections"
                       p:href="collectionsView?methodToCall=get&amp;viewId=CollectionsView"/>
-                <bean parent="Uif-Link" p:linkText="Batch Transactions" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Batch Transactions"
                       p:href="batchTransactionsView?methodToCall=get&amp;viewId=BatchTransactionsView"/>
-                <bean parent="Uif-Link" p:linkText="Account Import" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Account Import"
                       p:href="accountImportView?methodToCall=get&amp;viewId=AccountImportView"/>
-                <bean parent="Uif-Link" p:linkText="Settings" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="Settings"
                       p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
-                <bean parent="Uif-Link" p:linkText="FM-Admin" p:target="_self"
+                <bean parent="Uif-Link" p:linkText="FM-Admin"
                       p:href="rulesView?methodToCall=get&amp;viewId=RulesView"/>
             </list>
         </property>

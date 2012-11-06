@@ -28,7 +28,7 @@
         <property name="headerText" value="Settings"/>
         <property name="entryPageId" value="CurrencyPage"/>
         <property name="navigation">
-            <bean parent="Uif-KsaPageNavigation" scope="prototype">
+            <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
                         <!-- TODO Advanced Search -->
