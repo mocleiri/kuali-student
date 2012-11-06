@@ -63,11 +63,11 @@
     </bean>
 
     <bean id="Uif-KsaPageNavigation" parent="Uif-MenuNavigationGroup" abstract="true">
-        <property name="items">
+<!--        <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="Page Navigation"/>
             </list>
-        </property>
+        </property>-->
     </bean>
 
     <bean id="Uif-KsaHeader"  class="com.sigmasys.kuali.ksa.krad.uif.KsaHeader" parent="Uif-HeaderBase">
