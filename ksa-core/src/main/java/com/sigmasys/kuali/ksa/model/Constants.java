@@ -62,5 +62,8 @@ public interface Constants {
     // Refund constants:
     String REFUND_ACCOUNT_SYSTEM_NAME = "refund.account.system.name";
     String REFUND_ACCOUNT_TYPE = "refund.account.type";
-
+    String REFUND_CHECK_GROUP = "refund.check.group";
+    String REFUND_CHECK_SYSTEM_NAME = "refund.check.system.name";
+    String REFUND_CHECK_TYPE = "refund.check.type";
+    String REFUND_CHECK_GROUP_ROLLUP = "refund.check.group.rollup";
 }
