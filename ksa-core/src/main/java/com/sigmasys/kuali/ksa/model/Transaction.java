@@ -14,7 +14,7 @@ import javax.persistence.*;
 /**
  * Transaction is an abstract class, used to generate different types of transactions within the system.
  *
- * @author Paul Heald, Michael Ivanov
+ * @author Michael Ivanov
  */
 @Auditable
 @Entity
@@ -369,24 +369,12 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
         if (currency != null && amount != null) {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
             numberFormat.setCurrency(java.util.Currency.getInstance(currency.getCode()));
-            String nativeCurrency = numberFormat.format(amount);
-            return nativeCurrency;
+            return numberFormat.format(amount);
         }
         return "";
     }
 
-   @Transient
-   public String getFormattedUSDAmount() {
-      if (currency != null && amount != null) {
-         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
-         String usdCurrency = numberFormat.format(amount);
-         usdCurrency = usdCurrency.substring(1);
-         return usdCurrency;
-      }
-      return "";
-   }
-
-   @Transient
+    @Transient
     public abstract TransactionTypeValue getTransactionTypeValue();
 
 }
