@@ -32,7 +32,7 @@
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.StudentAccountsForm"/>
         <property name="entryPageId" value="HomePage"/>
         <property name="navigation">
-            <bean parent="Uif-KsaPageNavigation">
+            <bean parent="Uif-KsaPageNavigation" scope="prototype">
                 <property name="items">
                     <list merge="true">
                         <!-- TODO Advanced Search -->

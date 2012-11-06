@@ -43,7 +43,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-Link" p:linkText="Account Overview" p:target="_self"
-                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;AccountOVTransactionsPage"/>
+                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView"/>
                 <bean parent="Uif-Link" p:linkText="Administration" p:target="_self"
                       p:href="adminView?methodToCall=get&amp;viewId=KsaAdminView&amp;pageId=ActivityPage"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation" p:target="_self"
@@ -63,11 +63,11 @@
     </bean>
 
     <bean id="Uif-KsaPageNavigation" parent="Uif-MenuNavigationGroup" abstract="true">
-<!--        <property name="items">
+        <property name="items">
             <list>
                 <bean parent="Uif-HeaderTwo" p:headerText="Page Navigation"/>
             </list>
-        </property>-->
+        </property>
     </bean>
 
     <bean id="Uif-KsaHeader"  class="com.sigmasys.kuali.ksa.krad.uif.KsaHeader" parent="Uif-HeaderBase">

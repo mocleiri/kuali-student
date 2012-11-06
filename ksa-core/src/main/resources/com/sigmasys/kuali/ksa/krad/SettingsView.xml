@@ -28,9 +28,9 @@
         <property name="headerText" value="Settings"/>
         <property name="entryPageId" value="CurrencyPage"/>
         <property name="navigation">
-            <bean parent="Uif-KsaPageNavigation">
+            <bean parent="Uif-KsaPageNavigation" scope="prototype">
                 <property name="items">
-                    <list merge="true">
+                    <list>
                         <!-- TODO Advanced Search -->
                         <bean parent="Uif-HeaderTwo" p:headerText="Settings"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="UserProfilePage"
