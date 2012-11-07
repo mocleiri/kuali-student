@@ -203,7 +203,7 @@ public class Refund implements Identifiable {
 		return refundDate;
 	}
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "REFUND_TRANSACTION_ID_FK")
 	public Transaction getRefundTransaction() {
 		return refundTransaction;
