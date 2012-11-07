@@ -60,15 +60,15 @@ public interface Constants {
     String CURRENCY_SERVICE_URL = "currency.service";
 
     // Refund constants:
-    String REFUND_ACCOUNT_SYSTEM_NAME = "refund.account.system.name";
-    String REFUND_ACCOUNT_TYPE = "refund.account.type";
-    String REFUND_CHECK_GROUP = "refund.check.group";
-    String REFUND_CHECK_SYSTEM_NAME = "refund.check.system.name";
-    String REFUND_CHECK_TYPE = "refund.check.type";
-    String REFUND_CHECK_GROUP_ROLLUP = "refund.check.group.rollup";
-    String REFUND_ACH_GROUP = "refund.ach.group";
-    String REFUND_ACH_TYPE = "refund.ach.type";
-    String REFUND_ACH_SYSTEM_NAME = "refund.ach.system.name";
-    String REFUND_ACH_BANK_TYPE = "refund.ach.bank.type";
-    String REFUND_ACH_GROUP_ROLLUP = "refund.ach.group.rollup";
+    String REFUND_ACCOUNT_SYSTEM_NAME = "ksa.refund.account.system.name";
+    String REFUND_ACCOUNT_TYPE = "ksa.refund.account.type";
+    String REFUND_CHECK_GROUP = "ksa.refund.check.group";
+    String REFUND_CHECK_SYSTEM_NAME = "ksa.refund.check.system.name";
+    String REFUND_CHECK_TYPE = "ksa.refund.check.type";
+    String REFUND_CHECK_GROUP_ROLLUP = "ksa.refund.check.group.rollup";
+    String REFUND_ACH_GROUP = "ksa.refund.ach.group";
+    String REFUND_ACH_TYPE = "ksa.refund.ach.type";
+    String REFUND_ACH_SYSTEM_NAME = "ksa.refund.ach.system.name";
+    String REFUND_ACH_BANK_TYPE = "ksa.refund.ach.bank.type";
+    String REFUND_ACH_GROUP_ROLLUP = "ksa.refund.ach.group.rollup";
 }
