@@ -7,9 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Transient;
 
-/*
- * Concrete payment class. 
- * 
+/**
+ * Payment entity.
+ *
+ * @author Michael Ivanov
  */
 
 @Entity
@@ -71,24 +72,6 @@ public class Payment extends Credit {
     @Transient
     public TransactionTypeValue getTransactionTypeValue() {
         return TransactionTypeValue.PAYMENT;
-    }
-
-    /*
-    * Using the payment type and effective date, look up the priority of the payment for the payment application system.
-    */
-    @Transient
-    public void getPriority() {
-        // TODO
-    }
-
-
-    /*
-      * Using the payment type and effective date, look up the types of debits that can be paid with this payment.
-      * This will be used by the payment application system.
-      */
-    @Transient
-    public void getAllowableCharges() {
-        // TODO
     }
 
 
