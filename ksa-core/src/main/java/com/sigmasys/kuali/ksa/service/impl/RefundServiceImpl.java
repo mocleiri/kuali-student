@@ -24,7 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sigmasys.kuali.ksa.exception.InvalidAchAmountException;
 import com.sigmasys.kuali.ksa.exception.InvalidRefundTypeException;
+import com.sigmasys.kuali.ksa.exception.NoAchInformationException;
 import com.sigmasys.kuali.ksa.exception.RefundCancelledException;
 import com.sigmasys.kuali.ksa.exception.RefundFailedException;
 import com.sigmasys.kuali.ksa.exception.RefundNotFoundException;
@@ -43,6 +45,8 @@ import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.RefundService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.transform.Ach;
+import com.sigmasys.kuali.ksa.transform.BatchAch;
+import com.sigmasys.kuali.ksa.transform.BatchCheck;
 import com.sigmasys.kuali.ksa.transform.Check;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 
@@ -213,19 +217,21 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		
 		refund = performRefundInternal(refundId, batch, accountId);
 		
+		// Create another payment Transaction for the Account to be credited:
+		String paymentTypeId = refund.getRefundType().getCreditTypeId();
+		Transaction paymentTransaction = transactionService.createTransaction(paymentTypeId, accountId, new Date(), refund.getAmount());
+		
+		if (StringUtils.isNotBlank(refund.getStatement())) {
+			paymentTransaction.setStatementText(refund.getStatement());
+		}
+		
+		persistEntity(paymentTransaction);
+		
 		// Set the Refund system:
 		String systemName = configService.getInitialParameter(Constants.REFUND_ACCOUNT_SYSTEM_NAME);
 		
 		refund.setSystem(systemName);
-		
-		// Set the Transaction's statement text to that of the Refund's:
-		String overrideStatement = refund.getStatement();
-		
-		if (StringUtils.isNotBlank(overrideStatement)) {
-			Transaction refundTransaction = refund.getRefundTransaction();
-			
-			refundTransaction.setStatementText(overrideStatement);
-		}
+		persistEntity(refund);
 		
 		return refund;
 	}
@@ -283,8 +289,9 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	public String doCheckRefund(Long refundId, String batch, Date checkDate, String checkMemo) {
 		// Check the flag to consolidate same account checks:
 		boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_CHECK_GROUP));
-
-		return doCheckRefundInternal(refundId, batch, checkDate, checkMemo, consolidateSameAccountRefunds);
+		Check check = doCheckRefundInternal(refundId, batch, checkDate, checkMemo, consolidateSameAccountRefunds);
+		
+		return marshalObject(check, Check.class);
 	}
 
 	/**
@@ -306,20 +313,29 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
         		.setParameter("status", RefundStatus.VERIFIED)
         		.setParameter("refundTypeId", refundTypeId);
         List<Refund> match = query.getResultList();
+        
+        // Create a new BatchCheck and a BatchControl:
+        BatchCheck batchCheck = new BatchCheck();
+        BatchCheck.BatchControl batchControl = new BatchCheck.BatchControl();
+        BigDecimal totalValue = new BigDecimal(0);
+
+        batchCheck.setBatchControl(batchControl);
+        batchCheck.setBatchIdentifier(batch);
+        batchControl.setNumberOfChecks(match.size());
 		
 		// For each matching Refund, perform refund and record its XML check:
-        List<String> allXmlChecks = new ArrayList<String>();
-        
         for (Refund refund : match) {
-        	String xmlCheck = doCheckRefundInternal(refund.getId(), batch, checkDate, checkMemo, false);
+        	Check check = doCheckRefundInternal(refund.getId(), batch, checkDate, checkMemo, false);
         	
-        	allXmlChecks.add(xmlCheck);
+        	batchCheck.getCheck().add(check);
+        	totalValue = totalValue.add(check.getAmount());
         }
         
-        // TODO: Produce a batch check:
-        String xmlBatchCheck = null;
-		
-		return null;
+        // Set the total value of checks:
+        batchControl.setValueOfChecks(totalValue);
+
+        // Marshal the batch check:
+    	return marshalObject(batchCheck, BatchCheck.class);
 	}
 
 	/**
@@ -337,24 +353,10 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	@Override
 	public String produceXMLCheck(String identifier, String payee, PostalAddress postalAddress, BigDecimal amount, Date checkDate, String memo) {
 		// Create a new Check object:
-		Check check = new Check();
-		
-		check.setIdentifier(identifier);
-		check.setPayee(payee);
-		check.setPostalAddress(convertToXMLAddress(postalAddress));
-		check.setAmount(amount);
-		check.setMemo(StringUtils.isNotBlank(memo) ? memo : null);
-		check.setDate(produceXMLCheckDate(checkDate));
+		Check check = produceCheckInternal(identifier, payee, postalAddress, amount, checkDate, memo);
 		
 		// Marshal the Check object:
-		try {
-			return marshalCheck(check);
-		} catch (Exception e) {
-			logger.error("Error marshalling a Check object into an XML String. Check ID: " + identifier 
-					+ ", Payee: " + payee + ", Amount: " + amount.doubleValue() + ", Date: " + checkDate + ", Memo: " + memo, e);
-			
-			throw new RuntimeException("Error marshalling a Check object into an XML String.");
-		}
+		return marshalObject(check, Check.class);
 	}
 
 	/**
@@ -369,25 +371,90 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		return doAchRefund(refundId, null);
 	}
 
+	/**
+	 * Performs a batch refund as a bank account credit.
+	 * 
+	 * @param refundId Refund identifier.
+	 * @param batch ID of a transaction batch.
+	 * @return String An XML form of the bank account information (Ach).
+	 * @see RefundService#produceAchTransmission(Ach, BigDecimal, String)
+	 */
 	@Override
 	public String doAchRefund(Long refundId, String batch) {
-		// TODO Auto-generated method stub
-		return null;
+		// Check the flag to consolidate same account checks:
+		boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_ACH_GROUP));
+		Ach achTransmission = doAchRefundInternal(refundId, batch, consolidateSameAccountRefunds);
+		
+		return marshalObject(achTransmission, Ach.class);
 	}
 
+	/**
+	 * Performs bank account credit type refunds as a part of a batch.
+	 * Go through the Refund objects. For each validated refund with type set to ach refund (refund.ach.type).
+	 * For each one that is found, call doAchRefund (refundId, batch).
+	 * 
+	 * @param batch Batch of transactions.
+	 * @return String An XML form of a batch of the bank account informations (Ach).
+	 * @see RefundService#produceAchTransmission(Ach, BigDecimal, String)
+	 */
 	@Override
 	public String doAchRefunds(String batch) {
-		// TODO Auto-generated method stub
-		return null;
+		// Find all VERIFIED Ach Refunds in the batch:
+        String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
+        String refundTypeId = configService.getInitialParameter(Constants.REFUND_ACH_TYPE);
+        Query query = em.createQuery(sql)
+        		.setParameter("batchId", batch)
+        		.setParameter("status", RefundStatus.VERIFIED)
+        		.setParameter("refundTypeId", refundTypeId);
+        List<Refund> match = query.getResultList();
+        
+        // Create a new BatchAch and a BatchControl:
+        BatchAch batchAch = new BatchAch();
+        BatchAch.BatchControl batchControl = new BatchAch.BatchControl();
+        BigDecimal totalValue = new BigDecimal(0);
+
+        batchAch.setBatchControl(batchControl);
+        batchAch.setBatchIdentifier(batch);
+        batchControl.setNumberOfAchs(match.size());
+		
+		// For each matching Refund, perform refund and record its XML check:
+        for (Refund refund : match) {
+        	Ach ach = doAchRefundInternal(refund.getId(), batch, false);
+        	
+        	batchAch.getAch().add(ach);
+        	totalValue = totalValue.add(ach.getAmount());
+        }
+        
+        // Set the total value of checks:
+        batchControl.setValueOfAchs(totalValue);
+
+        // Marshal the batch check:
+    	return marshalObject(batchAch, BatchAch.class);
 	}
 
+	/**
+	 * Produces a bank account transmission as an XML document.
+	 * 
+	 * @param ach <code>Ach</code> that contains bank account information.
+	 * @param amount Amount to be transmitted to the bank account.
+	 * @param reference Reference information.
+	 * @return Bank account transmission as an XML document.
+	 */
 	@Override
-	public String produceAchTransmission(Ach ach, BigDecimal amount,
-			String reference) {
-		// TODO Auto-generated method stub
-		return null;
+	public String produceAchTransmission(Ach ach, BigDecimal amount, String reference) {
+		// Create a new Ach:
+		Ach achTransmission = produceAchTransmissionInternal(amount, reference, ach);
+		
+		return marshalObject(achTransmission, Ach.class);
 	}
 
+	/**
+	 * Checks if a refund rule is valid. 
+	 * Refer to the "Process Diagrams" for the details.
+	 * 
+	 * @param refundRule A refund rule.
+	 * @return boolean Whether the specified refund rule is valid.
+	 */
 	@Override
 	public boolean isRefundRuleValid(String refundRule) {
         if (StringUtils.isBlank(refundRule)) {
@@ -519,6 +586,99 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	 * ****************************************************************/
 	
 	/**
+	 * Performs a refund to a bank account. Returns the bank account transmission object.
+	 * 
+	 * @param refundId ID of a Refund to process.
+	 * @param batch Batch of refunds.
+	 * @param consolidateSameAccountRefunds Whether to consolidate refunds into one transmission.
+	 * @return Ach transmission as a JAXB object.
+	 */
+	private Ach doAchRefundInternal(Long refundId, String batch, boolean consolidateSameAccountRefunds) {
+		// Get the Refund object:
+		Refund refund = getRefund(refundId, true);
+		
+		// Check the refund is of an ACH type. Compare the valueof the system setting to RefundType:
+		String refundTypeId = refund.getRefundType().getDebitTypeId();
+		String systemPropRefundType = configService.getInitialParameter(Constants.REFUND_ACH_TYPE);
+		
+		if (!StringUtils.equalsIgnoreCase(refundTypeId, systemPropRefundType)) {
+			throw new InvalidRefundTypeException("Invalid Refund type for an Ach refund. Refund type is [" + refundTypeId + "].");
+		}
+		
+		// Check that the account in question has bank type listed under protected information type of type refund.ach.banktype available. 
+		// If so, get the bank information.
+		String accountId = refund.getTransaction().getAccountId();
+		Ach ach = null;
+		
+		try {
+			ach = accountService.getAch(accountId);
+		} catch (Exception e) {/*ignored. null value of "ach" assumed*/}
+		
+		if (ach == null) {
+			// Mark refund as FAILED:
+			refund.setStatus(RefundStatus.FAILED);
+			persistEntity(refund);
+			
+			throw new NoAchInformationException("No ACH information found for account " + accountId);
+		}
+		
+		// Perform either an individual or consolidate refund:
+		String systemName = configService.getInitialParameter(Constants.REFUND_ACH_SYSTEM_NAME);
+		BigDecimal amount;
+		
+		if (consolidateSameAccountRefunds) {
+			// Find all VALIDATED Ach Refunds for the same account, EXCEPT for the current Refund:
+			String sql = "select r from Refund r where r.status = :refundStatus and r.transaction.accountId = :accountId and r.refundType.debitTypeId = :refundType and r.id <> :id";
+			Query query = em.createQuery(sql)
+					.setParameter("refundStatus", RefundStatus.VERIFIED)
+					.setParameter("accountId", accountId)
+					.setParameter("refundType", refundTypeId)
+					.setParameter("id", refund.getId());
+			List<Refund> allDueRefunds = new ArrayList<Refund>();
+			
+			allDueRefunds.add(refund);
+			allDueRefunds.addAll(query.getResultList());
+			amount = new BigDecimal(0);
+			
+			// Get the new Rollup:
+			String achRoolupCode = configService.getInitialParameter(Constants.REFUND_ACH_GROUP_ROLLUP);
+			Rollup achRollup = getAuditableEntityByCode(achRoolupCode, Rollup.class);
+			Transaction consolidatedRefundTransaction = null;
+			String refundGroup = UUID.randomUUID().toString();
+			
+			// Sum all due Refunds into one Ach transmission and perform refund:
+			for (Refund dueRefund : allDueRefunds) {
+				// Add the current refund amount to the total:
+				amount = amount.add(dueRefund.getAmount());
+				
+				// Perform refund:
+				dueRefund = performRefundInternal(dueRefund.getId(), batch, null, consolidatedRefundTransaction);
+				dueRefund.setSystem(systemName);
+				dueRefund.setRefundGroup(refundGroup);
+				dueRefund.getRefundTransaction().setRollup(achRollup);
+				persistEntity(dueRefund.getRefundTransaction());
+				persistEntity(dueRefund);
+				consolidatedRefundTransaction = dueRefund.getRefundTransaction();
+			}
+		} else {
+			// Produce a single refund Ach transmission:
+			amount = refund.getAmount();
+			
+			// Perform refund:
+			refund = performRefundInternal(refund.getId(), batch, null);
+			refund.setSystem(systemName);
+			persistEntity(refund);
+		}
+		
+		// Produce an ACH transmission:
+		// TODO: What's reference here?
+		String reference = null;
+		Ach achTransmission = produceAchTransmissionInternal(amount, reference, ach);
+		
+		return achTransmission;
+	}
+	
+	/**
 	 * Performs a Check refund. Optionally, consolidates all refunds for the same Account into one refund check.
 	 * 
 	 * @param refundId Id of a Refund to perform a check refund on.
@@ -526,9 +686,9 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	 * @param checkDate Date of the refund check.
 	 * @param checkMemo Memo section on the refund check.
 	 * @param consolidateSameAccountRefunds Whether to consolidate refund checks into one large sum.
-	 * @return Refund check as an XML document.
+	 * @return Refund check as a JAXB object.
 	 */
-	private String doCheckRefundInternal(Long refundId, String batch, Date checkDate, String checkMemo, boolean consolidateSameAccountRefunds) {
+	private Check doCheckRefundInternal(Long refundId, String batch, Date checkDate, String checkMemo, boolean consolidateSameAccountRefunds) {
 		// Get the Refund object:
 		Refund refund = getRefund(refundId, true);
 		
@@ -565,6 +725,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 			// Get the new Rollup:
 			String checkRoolupCode = configService.getInitialParameter(Constants.REFUND_CHECK_GROUP_ROLLUP);
 			Rollup checkRollup = getAuditableEntityByCode(checkRoolupCode, Rollup.class);
+			Transaction consolidatedRefundTransaction = null;
 			
 			// Sum all due Refunds into one check and perform refund:
 			for (Refund dueRefund : allDueRefunds) {
@@ -572,12 +733,13 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 				amount = amount.add(dueRefund.getAmount());
 				
 				// Perform refund:
-				dueRefund = performRefundInternal(dueRefund.getId(), batch, null);
+				dueRefund = performRefundInternal(dueRefund.getId(), batch, null, consolidatedRefundTransaction);
 				dueRefund.setSystem(systemName);
 				dueRefund.setRefundGroup(checkId);
 				dueRefund.getRefundTransaction().setRollup(checkRollup);
 				persistEntity(dueRefund.getRefundTransaction());
 				persistEntity(dueRefund);
+				consolidatedRefundTransaction = dueRefund.getRefundTransaction();
 			}
 		} else {
 			// Produce a single refund check:
@@ -594,9 +756,9 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		Account refundAccount = refund.getTransaction().getAccount();
 		String payee = refundAccount.getDefaultPersonName().getDisplayValue();
 		PostalAddress address = refundAccount.getDefaultPostalAddress();
-		String xmlCheck = produceXMLCheck(checkId, payee, address, amount, checkDate, checkMemo);
+		Check check = produceCheckInternal(checkId, payee, address, amount, checkDate, checkMemo);
 		
-		return xmlCheck;
+		return check;
 	}
 	
 	/**
@@ -638,6 +800,19 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	 * @return The Refund object.
 	 */
 	private Refund performRefundInternal(Long refundId, String batch, String accountId) {
+		return performRefundInternal(refundId, batch, accountId, null);
+	}
+	
+	/**
+	 * A utility method that performs refund and accepts an Account ID optionally.
+	 * 
+	 * @param refundId Refund ID.
+	 * @param batch Batch ID.
+	 * @param accountId Optional Account ID. If null, the original Transaction's Account ID is used.
+	 * @param consolidatedRefundTransaction One refund Transaction to be shared across multiple Refunds.
+	 * @return The Refund object.
+	 */
+	private Refund performRefundInternal(Long refundId, String batch, String accountId, Transaction consolidatedRefundTransaction) {
 		// Get the Refund object and check that it's in the VERIFIED status:
 		Refund refund = getRefund(refundId, true);
 		
@@ -649,7 +824,8 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		String refundTransactionTypeId = refund.getRefundType().getCreditTypeId();
 		Date effectiveDate = new Date();
 		BigDecimal amount = refund.getAmount();
-		Transaction refundTransaction = transactionService.createTransaction(refundTransactionTypeId, userId, effectiveDate, amount);
+		Transaction refundTransaction = (consolidatedRefundTransaction != null) 
+				? consolidatedRefundTransaction : transactionService.createTransaction(refundTransactionTypeId, userId, effectiveDate, amount);
 		
 		// Create a lockedAllocation between the refund and the original transaction in the amount of the refund:
         Allocation allocation = new Allocation();
@@ -696,24 +872,78 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	}
 	
 	/**
-	 * Marshals a Check object into an XML document.
+	 * Produces an Ach transmission using the specified parameters.
 	 * 
-	 * @param check A Check to marshal.
-	 * @return XML document containing the marshalled Check.
-	 * @throws Exception If an error occurs.
+	 * @param amount Amount of transmission.
+	 * @param reference Reference info.
+	 * @param ach Original Ach.
+	 * @return Newly created Ach transmission.
 	 */
-	private String marshalCheck(Check check) throws Exception {
+	private Ach produceAchTransmissionInternal(BigDecimal amount, String reference, Ach ach) {
+		// Validate the Amount:
+		if (amount.intValue() == 0) {
+			throw new InvalidAchAmountException("ACH transmission amount is zero.");
+		}
+		
+		// Create a new Ach:
+		Ach achTransmission = new Ach();
+		
+		achTransmission.setReference(reference);
+		achTransmission.setAmount(amount);
+		achTransmission.setAba(ach.getAba());
+		achTransmission.setAccountNumber(ach.getAccountNumber());
+		achTransmission.setAccountType(ach.getAccountType());
+
+		return achTransmission;
+	}
+	
+	/**
+	 * Creates a JAXB Check object.
+	 * 
+	 * @param identifier Check identifier.
+	 * @param payee Payee
+	 * @param postalAddress Postal address on check.
+	 * @param amount Amount of check to produce.
+	 * @param checkDate Date on check.
+	 * @param memo Memo section on check.
+	 * @return A new Check object.
+	 */
+	private Check produceCheckInternal(String identifier, String payee, PostalAddress postalAddress, BigDecimal amount, Date checkDate, String memo) {
+		// Create a new Check object:
+		Check check = new Check();
+		
+		check.setIdentifier(identifier);
+		check.setPayee(payee);
+		check.setPostalAddress(convertToXMLAddress(postalAddress));
+		check.setAmount(amount);
+		check.setMemo(StringUtils.isNotBlank(memo) ? memo : null);
+		check.setDate(produceXMLCheckDate(checkDate));
+		
+		return check;
+	}
+	
+	/**
+	 * Marshals an arbitrary object that has XML JAXB mapping in the system into an XML document.
+	 * 
+	 * @param target An Object to marshal.
+	 * @return XML document containing the marshaled object.
+	 */
+	private <T> String marshalObject(T target, Class<T> type) {
 		StringWriter writer = new StringWriter();
 		
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(Check.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(type);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			
-			marshaller.marshal(check, writer);
+			marshaller.marshal(target, writer);
 			writer.flush();
 			
 			// Get the content of the StringWriter:
 			return writer.getBuffer().toString();
+        } catch (Exception e) {
+			logger.error("Error marshalling an object of type " + type.getCanonicalName() + " into an XML String.");
+			
+			throw new RuntimeException("Error marshalling an object of type " + type.getCanonicalName() + " into an XML String.");
 		} finally {
 			IOUtils.closeQuietly(writer);
 		}
