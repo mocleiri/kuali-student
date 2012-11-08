@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="reference" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="aba" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="routingNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="account-number" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="account-type" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "reference",
-    "aba",
+    "routingNumber",
     "accountNumber",
     "accountType",
     "amount"
@@ -52,12 +52,16 @@ public class Ach {
 
     @XmlElement(required = true)
     protected String reference;
-    @XmlElement(required = true)
-    protected String aba;
+
+    @XmlElement(name = "routing-number", required = true)
+    protected String routingNumber;
+
     @XmlElement(name = "account-number", required = true)
     protected String accountNumber;
+
     @XmlElement(name = "account-type", required = true)
     protected String accountType;
+
     @XmlElement(required = true)
     protected BigDecimal amount;
 
@@ -86,27 +90,27 @@ public class Ach {
     }
 
     /**
-     * Gets the value of the aba property.
+     * Gets the value of the routingNumber property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAba() {
-        return aba;
+    public String getRoutingNumber() {
+        return routingNumber;
     }
 
     /**
-     * Sets the value of the aba property.
+     * Sets the value of the routingNumber property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAba(String value) {
-        this.aba = value;
+    public void setRoutingNumber(String value) {
+        this.routingNumber = value;
     }
 
     /**

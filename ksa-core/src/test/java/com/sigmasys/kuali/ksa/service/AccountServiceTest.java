@@ -299,7 +299,7 @@ public class AccountServiceTest extends AbstractServiceTest {
         Assert.notNull(ach);
 
         Assert.isTrue("C".equals(ach.getAccountType()));
-        Assert.isTrue("0019921".equals(ach.getAba()));
+        Assert.isTrue("0019921".equals(ach.getRoutingNumber()));
         Assert.isTrue("20100020101".equals(ach.getAccountNumber()));
     }
 

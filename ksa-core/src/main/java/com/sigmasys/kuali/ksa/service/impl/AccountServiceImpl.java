@@ -674,7 +674,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         Ach ach = new Ach();
         ach.setAccountType(type);
         ach.setAccountNumber(act);
-        ach.setAba(routingNumber);
+        ach.setRoutingNumber(routingNumber);
         return ach;
     }
 

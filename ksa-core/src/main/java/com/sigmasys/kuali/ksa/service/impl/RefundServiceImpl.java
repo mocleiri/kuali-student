@@ -890,7 +890,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		
 		achTransmission.setReference(reference);
 		achTransmission.setAmount(amount);
-		achTransmission.setAba(ach.getAba());
+		achTransmission.setRoutingNumber(ach.getRoutingNumber());
 		achTransmission.setAccountNumber(ach.getAccountNumber());
 		achTransmission.setAccountType(ach.getAccountType());
 
