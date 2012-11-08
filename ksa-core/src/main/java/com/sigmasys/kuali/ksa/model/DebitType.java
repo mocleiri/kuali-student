@@ -19,19 +19,5 @@ import javax.persistence.*;
 @DiscriminatorValue(TransactionType.DEBIT_TYPE)
 public class DebitType extends TransactionType {
 
-    /**
-     * Transaction priority
-     */
-    private Integer priority;
-
-
-    @Column(name = "PRIORITY")
-    public Integer getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
 
 }

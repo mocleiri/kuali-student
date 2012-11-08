@@ -135,6 +135,11 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
      */
     protected Boolean glOverridden;
 
+    /**
+     * This is a transient property used in payment application services
+     */
+    private Integer matrixScore;
+
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -362,6 +367,15 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     @Transient
     public int getDaysBeforeDueDate() {
         return CalendarService.getInstance().getCalendarDaysBetween(getEffectiveDate(), new Date());
+    }
+
+    @Transient
+    public Integer getMatrixScore() {
+        return matrixScore;
+    }
+
+    public void setMatrixScore(Integer matrixScore) {
+        this.matrixScore = matrixScore;
     }
 
     @Transient

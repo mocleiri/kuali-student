@@ -9,9 +9,6 @@ import javax.persistence.*;
 /**
  * TransactionType defines different transaction types existing in KSA.
  * <p/>
- * User: mivanov
- * Date: 1/22/12
- * Time: 3:46 PM
  *
  * @author Michael Ivanov
  */
@@ -35,6 +32,12 @@ public abstract class TransactionType implements Identifiable {
     protected String description;
 
     protected List<Tag> tags;
+
+    /**
+     * Transaction priority
+     */
+    private Integer priority;
+
 
     /**
      * The default rollup
@@ -92,6 +95,15 @@ public abstract class TransactionType implements Identifiable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "PRIORITY")
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.util;
 
 import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.TransactionType;
 import com.sigmasys.kuali.ksa.model.TransactionTypeValue;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -263,6 +264,21 @@ public class TransactionUtils {
         for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
             BigDecimal amount = getUnallocatedAmount(iterator.next());
             if (amount.compareTo(fromAmount) < 0 || amount.compareTo(toAmount) > 0) {
+                iterator.remove();
+            }
+        }
+        return transactions;
+    }
+
+    public static List<Transaction> filterByPriority(List<Transaction> transactions, int fromPriority, int toPriority) {
+        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
+            TransactionType transactionType = iterator.next().getTransactionType();
+            if (transactionType == null || transactionType.getPriority() == null) {
+                iterator.remove();
+                continue;
+            }
+            int priority = transactionType.getPriority();
+            if (priority < fromPriority || priority > toPriority) {
                 iterator.remove();
             }
         }
