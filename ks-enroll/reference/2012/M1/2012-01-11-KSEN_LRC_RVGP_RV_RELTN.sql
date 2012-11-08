@@ -11,3 +11,4 @@ INSERT INTO KSEN_LRC_RVGP_RV_RELTN (RES_VAL_GRP_ID,RES_VAL_ID) VALUES ('kuali.re
 INSERT INTO KSEN_LRC_RVGP_RV_RELTN (RES_VAL_GRP_ID,RES_VAL_ID) VALUES ('kuali.resultComponent.grade.passFail','kuali.result.value.grade.pf.p')
 /
 INSERT INTO KSEN_LRC_RVGP_RV_RELTN (RES_VAL_GRP_ID,RES_VAL_ID) VALUES ('kuali.resultComponent.grade.passFail','kuali.result.value.grade.pf.f')
+/

@@ -11,3 +11,4 @@ INSERT INTO KSEN_LRC_RES_VALUE (ID,TYPE_ID,NAME,RT_DESCR_ID,VALUE,STATE_ID,RES_S
 INSERT INTO KSEN_LRC_RES_VALUE (ID,TYPE_ID,NAME,RT_DESCR_ID,VALUE,STATE_ID,RES_SCALE_ID) VALUES ('kuali.result.value.grade.pf.p','kuali.result.value.type.value','Pass','RICHTEXT-229','P','kuali.result.value.state.approved','kuali.result.scale.grade.pf')
 /
 INSERT INTO KSEN_LRC_RES_VALUE (ID,TYPE_ID,NAME,RT_DESCR_ID,VALUE,STATE_ID,RES_SCALE_ID) VALUES ('kuali.result.value.grade.pf.f','kuali.result.value.type.value','Fail','RICHTEXT-230','F','kuali.result.value.state.approved','kuali.result.scale.grade.pf')
+/

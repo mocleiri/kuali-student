@@ -27,3 +27,4 @@ alter table kren_recip_list_t add ver_nbr NUMBER(8)
 alter table kren_sndr_t add ver_nbr NUMBER(8)
 /
 alter table kren_recip_t add ver_nbr NUMBER(8)
+/
