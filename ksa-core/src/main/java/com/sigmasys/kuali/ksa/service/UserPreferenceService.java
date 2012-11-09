@@ -18,6 +18,24 @@ public interface UserPreferenceService  {
      * @return a list of preferences
      */
     List<UserPreference> getUserPreferences(String userId);
+    
+    /**
+     * Returns a single user preference with the specified name for the given user ID.
+     * 
+     * @param userId User ID
+     * @param prefName Preference name.
+     * @return A single user preference with the matching name or <code>null</code> if such a preference does not exist.
+     */
+    UserPreference getUserPreference(String userId, String prefName);
+    
+    /**
+     * Returns the value of a user preference with the specified name for the given user ID.
+     * 
+     * @param userId User ID
+     * @param prefName Preference name.
+     * @return The value of a user preference with the matching name or <code>null</code> if such a preference does not exist.
+     */
+    String getUserPreferenceValue(String userId, String prefName);
 
     /**
      * Creates or updates the user preference in the database
