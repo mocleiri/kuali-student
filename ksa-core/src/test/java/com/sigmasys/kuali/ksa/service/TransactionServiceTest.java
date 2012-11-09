@@ -813,6 +813,20 @@ public class TransactionServiceTest extends AbstractServiceTest {
             notNull(creditPermission.getCreditType());
         }
 
+        creditPermissions =
+                transactionService.getCreditPermissions(transaction.getTransactionType().getId(), 0, Integer.MAX_VALUE);
+
+        notNull(creditPermissions);
+        notEmpty(creditPermissions);
+
+        for (CreditPermission creditPermission : creditPermissions) {
+            logger.info("Credit Permission = " + creditPermission);
+            notNull(creditPermission);
+            notNull(creditPermission.getId());
+            notNull(creditPermission.getAllowableDebitType());
+            notNull(creditPermission.getCreditType());
+        }
+
     }
 
 }
