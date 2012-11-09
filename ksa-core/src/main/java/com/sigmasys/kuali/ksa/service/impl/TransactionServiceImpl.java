@@ -8,6 +8,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.persistence.Query;
 
+import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -759,17 +760,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public BigDecimal getUnallocatedAmount(Transaction transaction) {
-
-        BigDecimal amount = transaction.getAmount() != null ?
-                transaction.getAmount() : BigDecimal.ZERO;
-
-        BigDecimal allocatedAmount = transaction.getAllocatedAmount() != null ?
-                transaction.getAllocatedAmount() : BigDecimal.ZERO;
-
-        BigDecimal lockedAllocatedAmount = transaction.getLockedAllocatedAmount() != null ?
-                transaction.getLockedAllocatedAmount() : BigDecimal.ZERO;
-
-        return amount.subtract(allocatedAmount.add(lockedAllocatedAmount));
+        return TransactionUtils.getUnallocatedAmount(transaction);
     }
 
     /**
@@ -1132,15 +1123,15 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         Set<Transaction> unprocessedTransactions = new HashSet<Transaction>(unallocatedTransactions);
         for (Transaction transaction : unallocatedTransactions) {
-                Transaction reversal = findReversal(unprocessedTransactions, transaction);
-                if (reversal != null) {
-                    CompositeAllocation allocation =
-                            createAllocation(transaction, reversal, transaction.getAmount().abs(), isQueued, false);
-                    glTransactions.add(allocation.getCreditGlTransaction());
-                    glTransactions.add(allocation.getDebitGlTransaction());
-                    unprocessedTransactions.remove(transaction);
-                    unprocessedTransactions.remove(reversal);
-                }
+            Transaction reversal = findReversal(unprocessedTransactions, transaction);
+            if (reversal != null) {
+                CompositeAllocation allocation =
+                        createAllocation(transaction, reversal, transaction.getAmount().abs(), isQueued, false);
+                glTransactions.add(allocation.getCreditGlTransaction());
+                glTransactions.add(allocation.getDebitGlTransaction());
+                unprocessedTransactions.remove(transaction);
+                unprocessedTransactions.remove(reversal);
+            }
         }
 
         return glTransactions;
@@ -1425,7 +1416,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         List<CreditPermission> creditPermissions = getCreditPermissions(creditTypeId, priorityFrom, priorityTo);
 
-        if (creditPermissions != null) {
+        if (CollectionUtils.isNotEmpty(creditPermissions)) {
             for (CreditPermission creditPermission : creditPermissions) {
                 String debitTypeMask = creditPermission.getAllowableDebitType();
                 logger.info("Debit type mask: " + debitTypeMask);
@@ -1439,7 +1430,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Returns a list of credit permissions for the given transaction type.
+     * Returns a list of credit permissions for the given transaction type sorted by
+     * priority in descending order.
      *
      * @param transactionTypeId Transaction Type ID
      * @return list of CreditPermission instances
@@ -1451,7 +1443,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Returns a list of credit permissions for the given transaction type and priority range.
+     * Returns a list of credit permissions for the given transaction type and priority range sorted by
+     * priority in descending order.
      *
      * @param transactionTypeId Transaction Type ID
      * @param priorityFrom      lower priority
@@ -1461,8 +1454,35 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     public List<CreditPermission> getCreditPermissions(TransactionTypeId transactionTypeId,
                                                        Integer priorityFrom, Integer priorityTo) {
+        Set<TransactionTypeId> typeIds = new HashSet<TransactionTypeId>(1);
+        typeIds.add(transactionTypeId);
+        return getCreditPermissions(typeIds, priorityFrom, priorityTo);
+    }
+
+    /**
+     * Returns a list of credit permissions for the given set of transaction types sorted by
+     * priority in descending order.
+     *
+     * @param transactionTypeIds a set of Transaction Type IDs
+     * @return list of CreditPermission instances
+     */
+    private List<CreditPermission> getCreditPermissions(Set<TransactionTypeId> transactionTypeIds) {
+        return getCreditPermissions(transactionTypeIds, null, null);
+    }
+
+    /**
+     * Returns a list of credit permissions for the given set of transaction types and priority range sorted by
+     * priority in descending order.
+     *
+     * @param transactionTypeIds a set of Transaction Type IDs
+     * @param priorityFrom       lower priority
+     * @param priorityTo         upper priority
+     * @return list of CreditPermission instances
+     */
+    private List<CreditPermission> getCreditPermissions(Set<TransactionTypeId> transactionTypeIds,
+                                                        Integer priorityFrom, Integer priorityTo) {
         StringBuilder queryBuilder =
-                new StringBuilder("select cp from CreditPermission cp where cp.creditType.id = :typeId");
+                new StringBuilder("select distinct cp from CreditPermission cp where cp.creditType.id in (:typeIds)");
 
         if (priorityFrom != null && priorityTo != null) {
             queryBuilder.append(" and cp.priority between :priorityFrom and :priorityTo");
@@ -1472,7 +1492,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         Query query = em.createQuery(queryBuilder.toString());
 
-        query.setParameter("typeId", transactionTypeId);
+        query.setParameter("typeIds", transactionTypeIds);
 
         if (priorityFrom != null && priorityTo != null) {
             query.setParameter("priorityFrom", priorityFrom);
@@ -1729,4 +1749,47 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         return CollectionUtils.isNotEmpty(query.getResultList());
     }
+
+
+    /**
+     * Returns the unallocated amount of all transactions in the list for the given transaction type and
+     * debit type mask
+     *
+     * @param transactions    a list of transactions
+     * @param transactionType transaction type <code>TransactionTypeValue</code>(Charge, Payment or Deferment)
+     * @param restricted      if "true" credit permissions with a mask != ".*" will be summarized,
+     *                        otherwise the mask ".*" will be used
+     * @return BigDecimal of the sum of the Restricted Payment amount
+     */
+    @Override
+    public BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType,
+                                           boolean restricted) {
+
+        BigDecimal unallocatedAmount = BigDecimal.ZERO;
+
+        for (Transaction transaction : transactions) {
+
+            if (transaction.getTransactionTypeValue() == transactionType) {
+
+                TransactionTypeId transactionTypeId = transaction.getTransactionType().getId();
+
+                List<CreditPermission> creditPermissions = getCreditPermissions(transactionTypeId);
+
+                if (CollectionUtils.isNotEmpty(creditPermissions)) {
+                    boolean allPermissions = false;
+                    for (CreditPermission creditPermission : creditPermissions) {
+                        if (".*".equals(creditPermission.getAllowableDebitType())) {
+                            allPermissions = true;
+                        }
+                    }
+                    if ((allPermissions && !restricted) || (!allPermissions && restricted)) {
+                        unallocatedAmount = unallocatedAmount.add(getUnallocatedAmount(transaction));
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
 }

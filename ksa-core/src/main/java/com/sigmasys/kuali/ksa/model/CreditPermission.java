@@ -82,6 +82,16 @@ public class CreditPermission implements Identifiable {
     public void setCreditType(CreditType creditType) {
         this.creditType = creditType;
     }
+
+    @Override
+    public String toString() {
+        return "CreditPermission{" +
+                "id=" + id +
+                ", allowableDebitType='" + allowableDebitType + '\'' +
+                ", priority=" + priority +
+                ", creditType=" + creditType +
+                '}';
+    }
 }
 	
 

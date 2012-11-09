@@ -554,4 +554,17 @@ public interface TransactionService {
      */
     @WebMethod(exclude = true)
     BigDecimal getUnallocatedAmount(Transaction transaction);
+
+    /**
+     * Returns the unallocated amount of all transactions in the list for the given transaction type and
+     * debit type mask
+     *
+     * @param transactions    a list of transactions
+     * @param transactionType transaction type <code>TransactionTypeValue</code>(Charge, Payment or Deferment)
+     * @param restricted      if "true" credit permissions with a mask != ".*" will be summarized,
+     *                        otherwise the mask ".*" will be used
+     * @return BigDecimal of the sum of the Restricted Payment amount
+     */
+    BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType, boolean restricted);
+
 }

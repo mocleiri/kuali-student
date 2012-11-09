@@ -783,4 +783,36 @@ public class TransactionServiceTest extends AbstractServiceTest {
         }
     }
 
+    @Test
+    public void getCreditPermissions() throws Exception {
+
+        Transaction transaction = transactionService.createTransaction("chip", "admin", new Date(), new BigDecimal(100.55));
+
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
+
+        notNull(transaction.getAccount());
+        notNull(transaction.getAccountId());
+        notNull(transaction.getCurrency());
+        notNull(transaction.getAmount());
+
+        // Getting credit permissions
+        List<CreditPermission> creditPermissions =
+                transactionService.getCreditPermissions(transaction.getTransactionType().getId());
+
+        notNull(creditPermissions);
+        notEmpty(creditPermissions);
+
+        for (CreditPermission creditPermission : creditPermissions) {
+            logger.info("Credit Permission = " + creditPermission);
+            notNull(creditPermission);
+            notNull(creditPermission.getId());
+            notNull(creditPermission.getAllowableDebitType());
+            notNull(creditPermission.getCreditType());
+        }
+
+    }
+
 }
