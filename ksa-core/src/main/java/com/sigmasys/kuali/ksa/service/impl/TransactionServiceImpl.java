@@ -1334,6 +1334,19 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return canPay(transactionId1, transactionId2, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transaction1 First transaction
+     * @param transaction2 Second transaction
+     * @return true if transaction1 can pay transaction2, false - otherwise
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public boolean canPay(Transaction transaction1, Transaction transaction2) {
+        return canPayInternal(transaction1, transaction2, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
 
     /**
      * Checks if the first transaction can pay the second transaction.

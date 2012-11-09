@@ -216,6 +216,15 @@ public interface TransactionService {
     @WebMethod(exclude = true)
     boolean canPay(Long transactionId1, Long transactionId2);
 
+    /**
+     * Checks if the first transaction can pay the second transaction.
+     *
+     * @param transaction1 First transaction
+     * @param transaction2 Second transaction
+     * @return true if transaction1 can pay transaction2, false - otherwise
+     */
+    @WebMethod(exclude = true)
+    boolean canPay(Transaction transaction1, Transaction transaction2);
 
     /**
      * Checks if the first transaction can pay the second transaction.

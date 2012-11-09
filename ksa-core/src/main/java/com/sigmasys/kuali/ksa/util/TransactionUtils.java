@@ -1,8 +1,6 @@
 package com.sigmasys.kuali.ksa.util;
 
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.model.TransactionType;
-import com.sigmasys.kuali.ksa.model.TransactionTypeValue;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -180,9 +178,36 @@ public class TransactionUtils {
         return getTransactionService().getUnallocatedAmount(transactions, TransactionTypeValue.DEFERMENT, false);
     }
 
+    public static void calculateMatrixScores(List<Transaction> transactions) {
 
-    public static void calculateMatrixScore(List<Transaction> transactions) {
-        // TODO
+        Set<Credit> credits = new HashSet<Credit>();
+        Set<Debit> debits = new HashSet<Debit>();
+
+        for (Transaction transaction : transactions) {
+            if (transaction instanceof Credit) {
+                credits.add((Credit) transaction);
+            } else if (transaction instanceof Debit) {
+                debits.add((Debit) transaction);
+            }
+        }
+
+        for (Transaction transaction : transactions) {
+            int matrixScore = 0;
+            if (transaction instanceof Credit) {
+                for (Debit debit : debits) {
+                    if (getTransactionService().canPay(transaction, debit)) {
+                        matrixScore++;
+                    }
+                }
+            } else if (transaction instanceof Debit) {
+                for (Credit credit : credits) {
+                    if (getTransactionService().canPay(credit, transaction)) {
+                        matrixScore++;
+                    }
+                }
+            }
+            transaction.setMatrixScore(matrixScore);
+        }
     }
 
     private static List<Transaction> orderTransactions(List<Transaction> transactions,
@@ -210,6 +235,10 @@ public class TransactionUtils {
         return orderTransactions(transactions, new UnallocatedAmountComparator(), ascending);
     }
 
+    public static List<Transaction> orderByMatrixScore(List<Transaction> transactions, boolean ascending) {
+        return orderTransactions(transactions, new MatrixScoreComparator(), ascending);
+    }
+
     public static List<Transaction> reverseOrder(List<Transaction> transactions) {
         Collections.reverse(transactions);
         return transactions;
@@ -219,12 +248,6 @@ public class TransactionUtils {
         List<Transaction> newList = new ArrayList<Transaction>(transactions.size());
         Collections.copy(newList, transactions);
         return newList;
-    }
-
-
-    // TODO Need to be able to create Matrix Score first
-    public static List<Transaction> orderByMatrixScore(List<Transaction> transactions, boolean ascending) {
-        return transactions;
     }
 
     private static List<Transaction> removeTransactions(List<Transaction> transactions, TransactionTypeValue transactionType) {
@@ -326,7 +349,6 @@ class EffectiveDateComparator implements Comparator<Transaction> {
     }
 }
 
-
 class AmountComparator implements Comparator<Transaction> {
     @Override
     public int compare(Transaction t1, Transaction t2) {
@@ -338,6 +360,15 @@ class UnallocatedAmountComparator implements Comparator<Transaction> {
     @Override
     public int compare(Transaction t1, Transaction t2) {
         return getUnallocatedAmount(t1).compareTo(getUnallocatedAmount(t2));
+    }
+}
+
+class MatrixScoreComparator implements Comparator<Transaction> {
+    @Override
+    public int compare(Transaction t1, Transaction t2) {
+        Integer matrixScore1 = (t1.getMatrixScore() != null) ? t1.getMatrixScore() : 0;
+        Integer matrixScore2 = (t2.getMatrixScore() != null) ? t2.getMatrixScore() : 0;
+        return matrixScore1.compareTo(matrixScore2);
     }
 }
 
