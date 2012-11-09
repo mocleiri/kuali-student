@@ -50,7 +50,10 @@ alter table KSA.KSSA_REFUND add constraint FK76773E217FC9D8F2 foreign key (REFUN
 alter table KSA.KSSA_REFUND add constraint FK76773E21D61AFDF9 foreign key (TRANSACTION_ID_FK) references KSA.KSSA_TRANSACTION;
 alter table KSA.KSSA_REFUND add constraint FK76773E21A0B2BA5 foreign key (AUTHORIZED_BY_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_REFUND add constraint FK76773E21C8C8E732 foreign key (REQUESTED_BY_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_REFUND add constraint FK76773E21FF0A3794 foreign key (REFUND_MANIFEST_ID_FK) references KSA.KSSA_REFUND_MANIFEST;
 alter table KSA.KSSA_REFUND add constraint FK76773E21BC852B6A foreign key (REFUND_TYPE_ID_FK) references KSA.KSSA_REFUND_TYPE;
+alter table KSA.KSSA_REFUND_MANIFEST add constraint FK621A668DA0AC5650 foreign key (REFUND_ACCOUNT_ID_FK) references KSA.KSSA_ACNT;
+alter table KSA.KSSA_REFUND_MANIFEST add constraint FK621A668D7FC9D8F2 foreign key (REFUND_TRANSACTION_ID_FK) references KSA.KSSA_TRANSACTION;
 alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB598518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB5FB9EC59 foreign key (CURRENCY_ID_FK) references KSA.KSSA_CURRENCY;
 alter table KSA.KSSA_TRANSACTION add constraint FKDCED3DB590ED3EED foreign key (DOCUMENT_ID_FK) references KSA.KSSA_DOCUMENT;

@@ -41,6 +41,7 @@ drop table KSA.KSSA_PERSON_NAME_ACNT cascade constraints;
 drop table KSA.KSSA_POSTAL_ADDRESS cascade constraints;
 drop table KSA.KSSA_POSTAL_ADDRESS_ACNT cascade constraints;
 drop table KSA.KSSA_REFUND cascade constraints;
+drop table KSA.KSSA_REFUND_MANIFEST cascade constraints;
 drop table KSA.KSSA_REFUND_TYPE cascade constraints;
 drop table KSA.KSSA_ROLLUP cascade constraints;
 drop table KSA.KSSA_RULE_SET cascade constraints;
