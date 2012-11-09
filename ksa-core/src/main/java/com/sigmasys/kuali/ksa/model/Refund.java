@@ -27,15 +27,11 @@ import java.util.Date;
  * @author Sergey Godunov
  * @version 1.1
  */
+@SuppressWarnings("serial")
 @Auditable
 @Entity
 @Table(name = "KSSA_REFUND")
 public class Refund implements Identifiable {
-
-	/**
-	 * Serialization ID.
-	 */
-	private static final long serialVersionUID = -773828513980108857L;
 
 	/**
      * Refund ID
@@ -124,10 +120,11 @@ public class Refund implements Identifiable {
     private String batchId;
     
     /**
-     * When the refund is completed, this value can be set to any external identification that shows the refund. 
-     * For example, if the refund code from the credit card company is returned, it can be stored here.
+     * References a RefundManifest object, which records how the refund was actually manifested. 
+     * For example, if the refund is given as a check, we will record the check number, 
+     * if an account refund, the transaction Id and the KSA account number.
      */
-    private String externalRefundId;
+    private RefundManifest refundManifest;
 
     /**
      * If several refunds are issued under a single refund header (i.e. four transactions are refunded, but only one check is issued) 
@@ -234,15 +231,16 @@ public class Refund implements Identifiable {
         return statement;
     }
 
-    @Column(name="EXTERNAL_ID", length=100)
-	public String getExternalRefundId() {
-		return externalRefundId;
-	}
-
     @Column(name="REFUND_GROUP_ID", length=100)
 	public String getRefundGroup() {
 		return refundGroup;
 	}
+
+    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name="REFUND_MANIFEST_ID_FK")
+    public RefundManifest getRefundManifest() {
+    	return refundManifest;
+    }
 
 	
     public void setId(Long id) {
@@ -297,10 +295,6 @@ public class Refund implements Identifiable {
 		this.refundDate = refundDate;
 	}
 
-	public void setExternalRefundId(String externalRefundId) {
-		this.externalRefundId = externalRefundId;
-	}
-
 	public void setRefundGroup(String refundGroup) {
 		this.refundGroup = refundGroup;
 	}
@@ -311,5 +305,9 @@ public class Refund implements Identifiable {
 
 	public void setRefundTransaction(Transaction refundTransaction) {
 		this.refundTransaction = refundTransaction;
+	}
+
+	public void setRefundManifest(RefundManifest refundManifest) {
+		this.refundManifest = refundManifest;
 	}
 }
