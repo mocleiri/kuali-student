@@ -3,12 +3,13 @@ package com.sigmasys.kuali.ksa.util;
 import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.model.TransactionType;
 import com.sigmasys.kuali.ksa.model.TransactionTypeValue;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-import static com.sigmasys.kuali.ksa.util.TransactionUtils.getUnallocatedAmount;
+import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 
 /**
  * TransactionUtils
@@ -18,7 +19,16 @@ import static com.sigmasys.kuali.ksa.util.TransactionUtils.getUnallocatedAmount;
 @SuppressWarnings("unchecked")
 public class TransactionUtils {
 
+    private static TransactionService transactionService;
+
     private TransactionUtils() {
+    }
+
+    private static TransactionService getTransactionService() {
+        if (transactionService == null) {
+            transactionService = ContextUtils.getBean(TransactionService.class);
+        }
+        return transactionService;
     }
 
     public static BigDecimal getUnallocatedAmount(Transaction transaction) {
@@ -127,26 +137,47 @@ public class TransactionUtils {
     }
 
     /**
-     * Return the unallocated amount of all restricted or unrestricted payments. Unrestricted payments have a
-     * permissibleDebitType of “*”.
+     * Return the unallocated amount of all restricted payments. Unrestricted payments have a
+     * permissible debit type mask of “.*”.
      *
      * @param transactions a list of transactions
-     * @return BigDecimal of the sum of the Restricted Payment Value
+     * @return BigDecimal of the sum of the restricted unallocated payment amount
      */
-    public static BigDecimal getRestrictedPaymentValue(List<Transaction> transactions) {
-        // TODO Need to figure out how to determine if this is a restricted payment
-        return null;
+    public static BigDecimal getRestrictedUnallocatedPaymentAmount(List<Transaction> transactions) {
+        return getTransactionService().getUnallocatedAmount(transactions, TransactionTypeValue.PAYMENT, true);
     }
 
     /**
-     * Return the unallocated amount of all restricted or unrestricted payments. Unrestricted payments have a
-     * permissibleDebitType of “*”.
+     * Return the unallocated amount of all unrestricted payments. Unrestricted payments have a
+     * permissible debit type mask of “.*”.
      *
-     * @return BigDecimal of the sum of the Unrestricted Payment Value
+     * @param transactions a list of transactions
+     * @return BigDecimal of the sum of the unrestricted unallocated payment amount
      */
-    public static BigDecimal getUnrestrictedPaymentValue(List<Transaction> transactions) {
-        // TODO Need to figure out how to determine if this is an unrestricted payment
-        return null;
+    public static BigDecimal getUnrestrictedUnallocatedPaymentAmount(List<Transaction> transactions) {
+        return getTransactionService().getUnallocatedAmount(transactions, TransactionTypeValue.PAYMENT, false);
+    }
+
+    /**
+     * Return the unallocated amount of all restricted deferments. Unrestricted deferments have a
+     * permissible debit type mask of “.*”.
+     *
+     * @param transactions a list of transactions
+     * @return BigDecimal of the sum of the restricted unallocated deferment amount
+     */
+    public static BigDecimal getRestrictedUnallocatedDefermentAmount(List<Transaction> transactions) {
+        return getTransactionService().getUnallocatedAmount(transactions, TransactionTypeValue.DEFERMENT, true);
+    }
+
+    /**
+     * Return the unallocated amount of all unrestricted deferments. Unrestricted deferments have a
+     * permissible debit type mask of “.*”.
+     *
+     * @param transactions a list of transactions
+     * @return BigDecimal of the sum of the unrestricted unallocated deferment amount
+     */
+    public static BigDecimal getUnrestrictedUnallocatedDefermentAmount(List<Transaction> transactions) {
+        return getTransactionService().getUnallocatedAmount(transactions, TransactionTypeValue.DEFERMENT, false);
     }
 
 

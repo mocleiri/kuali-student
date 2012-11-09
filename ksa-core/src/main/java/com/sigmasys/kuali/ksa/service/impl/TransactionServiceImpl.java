@@ -1780,6 +1780,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                     for (CreditPermission creditPermission : creditPermissions) {
                         if (".*".equals(creditPermission.getAllowableDebitType())) {
                             allPermissions = true;
+                            break;
                         }
                     }
                     if ((allPermissions && !restricted) || (!allPermissions && restricted)) {
