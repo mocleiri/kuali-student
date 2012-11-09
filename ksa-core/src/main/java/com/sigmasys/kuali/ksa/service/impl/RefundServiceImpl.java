@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.sigmasys.kuali.ksa.exception.InvalidAchAmountException;
 import com.sigmasys.kuali.ksa.exception.InvalidRefundTypeException;
@@ -36,14 +38,19 @@ import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Activity;
 import com.sigmasys.kuali.ksa.model.Allocation;
 import com.sigmasys.kuali.ksa.model.Constants;
+import com.sigmasys.kuali.ksa.model.CreditType;
+import com.sigmasys.kuali.ksa.model.Payment;
 import com.sigmasys.kuali.ksa.model.PostalAddress;
 import com.sigmasys.kuali.ksa.model.Refund;
+import com.sigmasys.kuali.ksa.model.RefundManifest;
 import com.sigmasys.kuali.ksa.model.RefundStatus;
+import com.sigmasys.kuali.ksa.model.RefundType;
 import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.RefundService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.service.UserPreferenceService;
 import com.sigmasys.kuali.ksa.transform.Ach;
 import com.sigmasys.kuali.ksa.transform.BatchAch;
 import com.sigmasys.kuali.ksa.transform.BatchCheck;
@@ -84,31 +91,141 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     @Autowired
     private TransactionService transactionService;
     
+    @Autowired
+    private UserPreferenceService userPreferenceService;
+    
 
+	/**
+	 * Creates a list of unverified Refunds in the specified date range.
+	 * 
+	 * Per Paul H's description (from "Process Diagrams").
+	 * It is expected that once the system has produced this refund list, an institution-specific set of rules 
+	 * would then check for use cases specific to the school in question and ensure that the list is ready for 
+	 * human validation. As an example, for an account refund (a refund from one KSA account to another KSA account) 
+	 * the refundAttribute can be used to override the statement text of the refund. The rules engine could be used 
+	 * to insert this text, based on institution-specific preferences.
+	 * 
+	 * @param accountId The ID of an account for which to create a List of unverified Refunds.
+	 * @param dateFrom Beginning of the Date range in which to search for refunds.
+	 * @param dateTo End of the Date range in which to search for refunds.
+	 * @return List of unverified refunds. 
+	 */
 	@Override
-	public List<Refund> checkForRefund(String accountId, Date dateFrom,
-			Date dateTo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Refund> checkForRefund(String accountId, Date dateFrom, Date dateTo) {
+		// Get all payment transactions on account accountId, where effectiveDate > dateFrom and < dateTo:
+		boolean isRefundable = true;
+		BigDecimal amountThreshold = new BigDecimal(0);
+		String sql = "select p from Payment p where p.effectiveDate between :dateFrom and :dateTo and p.refundable = :isRefundable and p.clearDate <= current_date() and " 
+				+ "(p.amount - p.lockedAllocatedAmount - p.allocatedAmount <= :amountThreshold) and (p.refundRule is not null or p.transactionType.refundRule is not null)";
+		Query query = em.createQuery(sql)
+				.setParameter("dateFrom", dateFrom)
+				.setParameter("dateTo", dateTo)
+				.setParameter("isRefundable", isRefundable)
+				.setParameter("amountThreshold", amountThreshold);
+		List<Payment> payments = query.getResultList();
+		List<Refund> allRefunds = new ArrayList<Refund>();
+		Date refundRequestDate = null;
+		Account refundRequestedBy = null;
+		
+		// Iterate through the Payments:
+		for (Payment payment : payments) {
+			// Get the refund rule:
+			String refundRule = StringUtils.isNotBlank(payment.getRefundRule()) ? payment.getRefundRule() : ((CreditType)payment.getTransactionType()).getRefundRule();
+			boolean processAsCash = false;
+			
+			if (StringUtils.isBlank(refundRule)) {
+				processAsCash = true;
+			} else if (isRefundRuleValid(refundRule)) {
+				// Check the clearing period from the refund rule. Add it to the effectiveDate of the transaction and compare to current date:
+				String clearingPeriodStr = StringUtils.substringBetween(refundRule, "(", ")");
+				int clearingPeriod = Integer.parseInt(clearingPeriodStr);
+				
+				if (clearingPeriod != 0) {
+					Calendar effectiveDate = Calendar.getInstance();
+					
+					effectiveDate.setTime(payment.getEffectiveDate());
+					effectiveDate.add(Calendar.DAY_OF_YEAR, clearingPeriod);
+					
+					// Uncleared payments can only be credited to the same source:
+					if (effectiveDate.getTimeInMillis() < System.currentTimeMillis()) {
+						processAsCash = true;
+					}
+				}
+			} else {
+				// Invalid refund rule. Get next Payment:
+				continue;
+			}
+			
+			// Lazily initialize the values required to create Refunds:
+			if (refundRequestDate == null) {
+				String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+				
+				refundRequestDate = new Date();
+				refundRequestedBy = accountService.getOrCreateAccount(currentUserId);
+			}
+
+			// Create a new Refund:
+			Refund refund = processAsCash
+					? createCashRefund(payment, refundRequestDate, refundRequestedBy)
+					: createSourceRefund(payment, refundRequestDate, refundRequestedBy, refundRule);
+
+			allRefunds.add(refund);
+		}
+		
+		return allRefunds;
 	}
 
+	/**
+	 * A convenience methods that checks for unverified Refunds for each of the specified accounts in the specified date range.
+	 * 
+	 * @param accountIds Student accounts for which to look for unverified refunds.
+	 * @param dateFrom Beginning of the Date range in which to search for refunds.
+	 * @param dateTo End of the Date range in which to search for refunds.
+	 * @return List of unverified refunds for all specified accounts. 
+	 */
 	@Override
-	public List<Refund> checkForRefund(List<String> accountIds, Date dateFrom,
-			Date dateTo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Refund> checkForRefund(List<String> accountIds, Date dateFrom, Date dateTo) {
+		List<Refund> allRefunds = new ArrayList<Refund>();
+		
+		for (String accountId : accountIds) {
+			List<Refund> refunds = checkForRefund(accountId, dateFrom, dateTo);
+			
+			allRefunds.addAll(refunds);
+		}
+		
+		return allRefunds;
 	}
 
+	/**
+	 * For each account in the system, creates a list of Refunds within the specified date range. 
+	 * 
+	 * @param dateFrom Beginning of the Date range in which to search for refunds.
+	 * @param dateTo End of the Date range in which to search for refunds.
+	 * @return List of unverified refunds for all accounts in the given date range. 
+	 */
 	@Override
 	public List<Refund> checkForRefunds(Date dateFrom, Date dateTo) {
-		// TODO Auto-generated method stub
-		return null;
+		// Get all Accounts and IDs:
+		Query query = em.createQuery("select a from Account a");
+		List<Account> allAccounts = query.getResultList();
+		List<String> allAccountIds = new ArrayList<String>();
+		
+		for (Account account : allAccounts) {
+			allAccountIds.add(account.getId());
+		}
+		
+		// Get all Refunds:
+		return checkForRefund(allAccountIds, dateFrom, dateTo);
 	}
 
+	/**
+	 * For each account in the system, searches for refunds for the entire life.
+	 * 
+	 * @return List of all Refunds for all accounts in the system for the entire life.
+	 */
 	@Override
 	public List<Refund> checkForRefunds() {
-		// TODO Auto-generated method stub
-		return null;
+		return checkForRefunds(new Date(0), new Date(Long.MAX_VALUE));
 	}
 
 	/**
@@ -231,7 +348,9 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		String systemName = configService.getInitialParameter(Constants.REFUND_ACCOUNT_SYSTEM_NAME);
 		
 		refund.setSystem(systemName);
-		persistEntity(refund);
+		
+		// Add Refund Manifest:
+		addAccountRefundManifest(refund, accountId, paymentTransaction);
 		
 		return refund;
 	}
@@ -553,6 +672,38 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		
 		return refund;
 	}
+	
+	/**
+	 * Either retrieves an existing <code>RefundType</code> with the matching values of
+	 * the debit and credit payment types, or creates and persists a new one.
+	 * 
+	 * @param debitTypeId Debit type ID.
+	 * @param creditTypeId Credit type ID.
+	 * @return An existing <code>RefundType</code> or a newly created one if there is no existing one.
+	 */
+	@Override
+	public RefundType getOrCreateRefundType(String debitTypeId, String creditTypeId) {
+		// Create a query:
+		String sql = "select rt from RefundType rt where rt.debitTypeId = :debitTypeId and rt.creditTypeId = :creditTypeId";
+		Query query = em.createQuery(sql)
+				.setParameter("debitTypeId", debitTypeId)
+				.setParameter("creditTypeId", creditTypeId)
+				.setMaxResults(1);
+		List<RefundType> result = query.getResultList();
+		RefundType refundType;
+		
+		if (CollectionUtils.isEmpty(result)) {
+			// Create a new RefundType:
+			refundType = new RefundType();
+			refundType.setDebitTypeId(debitTypeId);
+			refundType.setCreditTypeId(creditTypeId);
+			persistEntity(refundType);
+		} else {
+			refundType = result.get(0);
+		}
+		
+		return refundType;
+	}
 
 	@Override
 	public Refund payoffWithRefund(String accountId, BigDecimal maxPayoff) {
@@ -623,8 +774,13 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		}
 		
 		// Perform either an individual or consolidate refund:
+		List<Refund> allDueRefunds = new ArrayList<Refund>();
 		String systemName = configService.getInitialParameter(Constants.REFUND_ACH_SYSTEM_NAME);
+		String achReference;
 		BigDecimal amount;
+
+		// Add the original Refund to the list of all Refunds:
+		allDueRefunds.add(refund);
 		
 		if (consolidateSameAccountRefunds) {
 			// Find all VALIDATED Ach Refunds for the same account, EXCEPT for the current Refund:
@@ -634,17 +790,15 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 					.setParameter("accountId", accountId)
 					.setParameter("refundType", refundTypeId)
 					.setParameter("id", refund.getId());
-			List<Refund> allDueRefunds = new ArrayList<Refund>();
+			String refundGroup = UUID.randomUUID().toString();
 			
-			allDueRefunds.add(refund);
 			allDueRefunds.addAll(query.getResultList());
 			amount = new BigDecimal(0);
+			achReference = refundGroup;
 			
 			// Get the new Rollup:
 			String achRoolupCode = configService.getInitialParameter(Constants.REFUND_ACH_GROUP_ROLLUP);
 			Rollup achRollup = getAuditableEntityByCode(achRoolupCode, Rollup.class);
-			Transaction consolidatedRefundTransaction = null;
-			String refundGroup = UUID.randomUUID().toString();
 			
 			// Sum all due Refunds into one Ach transmission and perform refund:
 			for (Refund dueRefund : allDueRefunds) {
@@ -652,28 +806,27 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 				amount = amount.add(dueRefund.getAmount());
 				
 				// Perform refund:
-				dueRefund = performRefundInternal(dueRefund.getId(), batch, null, consolidatedRefundTransaction);
+				dueRefund = performRefundInternal(dueRefund.getId(), batch, null);
 				dueRefund.setSystem(systemName);
 				dueRefund.setRefundGroup(refundGroup);
 				dueRefund.getRefundTransaction().setRollup(achRollup);
 				persistEntity(dueRefund.getRefundTransaction());
-				persistEntity(dueRefund);
-				consolidatedRefundTransaction = dueRefund.getRefundTransaction();
 			}
 		} else {
 			// Produce a single refund Ach transmission:
 			amount = refund.getAmount();
+			achReference = refundId.toString();
 			
 			// Perform refund:
 			refund = performRefundInternal(refund.getId(), batch, null);
 			refund.setSystem(systemName);
-			persistEntity(refund);
 		}
 		
 		// Produce an ACH transmission:
-		// TODO: What's reference here?
-		String reference = null;
-		Ach achTransmission = produceAchTransmissionInternal(amount, reference, ach);
+		Ach achTransmission = produceAchTransmissionInternal(amount, achReference, ach);
+		
+		// Add Refund Manifest:
+		addAchRefundManifest(allDueRefunds, achTransmission);
 		
 		return achTransmission;
 	}
@@ -701,9 +854,13 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		}
 		
 		// Perform either an individual refund or a consolidated check refund:
+		List<Refund> allDueRefunds = new ArrayList<Refund>();
 		String systemName = configService.getInitialParameter(Constants.REFUND_CHECK_SYSTEM_NAME);
 		String checkId;
 		BigDecimal amount;
+		
+		// Add the original refund to the list of all Refunds:
+		allDueRefunds.add(refund);
 		
 		// Work on Refunds. Check if we need to consolidate refund amounts:
 		if (consolidateSameAccountRefunds) {
@@ -715,9 +872,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 					.setParameter("accountId", accountId)
 					.setParameter("refundType", refundTypeId)
 					.setParameter("id", refund.getId());
-			List<Refund> allDueRefunds = new ArrayList<Refund>();
 			
-			allDueRefunds.add(refund);
 			allDueRefunds.addAll(query.getResultList());
 			checkId = UUID.randomUUID().toString();
 			amount = new BigDecimal(0);
@@ -725,7 +880,6 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 			// Get the new Rollup:
 			String checkRoolupCode = configService.getInitialParameter(Constants.REFUND_CHECK_GROUP_ROLLUP);
 			Rollup checkRollup = getAuditableEntityByCode(checkRoolupCode, Rollup.class);
-			Transaction consolidatedRefundTransaction = null;
 			
 			// Sum all due Refunds into one check and perform refund:
 			for (Refund dueRefund : allDueRefunds) {
@@ -733,13 +887,11 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 				amount = amount.add(dueRefund.getAmount());
 				
 				// Perform refund:
-				dueRefund = performRefundInternal(dueRefund.getId(), batch, null, consolidatedRefundTransaction);
+				dueRefund = performRefundInternal(dueRefund.getId(), batch, null);
 				dueRefund.setSystem(systemName);
 				dueRefund.setRefundGroup(checkId);
 				dueRefund.getRefundTransaction().setRollup(checkRollup);
 				persistEntity(dueRefund.getRefundTransaction());
-				persistEntity(dueRefund);
-				consolidatedRefundTransaction = dueRefund.getRefundTransaction();
 			}
 		} else {
 			// Produce a single refund check:
@@ -749,7 +901,6 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 			// Perform refund:
 			refund = performRefundInternal(refund.getId(), batch, null);
 			refund.setSystem(systemName);
-			persistEntity(refund);
 		}
 		
 		// Produce an XML check:
@@ -758,7 +909,70 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		PostalAddress address = refundAccount.getDefaultPostalAddress();
 		Check check = produceCheckInternal(checkId, payee, address, amount, checkDate, checkMemo);
 		
+		// Add Refund Manifest:
+		addCheckRefundManifest(allDueRefunds, checkId);
+		
 		return check;
+	}
+	
+	/**
+	 * Creates a <code>RefundManifest</code> for an Account refund and adds it to the specified <code>Refund</code>.
+	 * 
+	 * @param refund A <code>Refund</code> for which to add an Account refund manifest.
+	 * @param accountId ID of an Account into which a refund was made.
+	 * @param refundTransaction Transaction that actually refunded the funds.
+	 */
+	private void addAccountRefundManifest(Refund refund, String accountId, Transaction refundTransaction) {
+		// Create an Account refund Manifest and add it to the Refund:
+		RefundManifest refundManifest = new RefundManifest();
+		Account refundAccount = accountService.getOrCreateAccount(accountId);
+		
+		refundManifest.setRefundAccount(refundAccount);
+		refundManifest.setRefundTransaction(refundTransaction);
+		persistEntity(refundManifest);
+		refund.setRefundManifest(refundManifest);
+		persistEntity(refund);
+	}
+	
+	/**
+	 * Creates a <code>RefundManifest</code> for a Check refund and adds it to the specified <code>Refund</code>.
+	 * 
+	 * @param allDueRefunds Either a single or grouped <code>Refund</code> objects.
+	 * @param checkIdentifier Refund check identifier.
+	 */
+	private void addCheckRefundManifest(List<Refund> allDueRefunds, String checkIdentifier) {
+		// Create a Check refund manifest:
+		RefundManifest refundManifest = new RefundManifest();
+		
+		refundManifest.setCheckIdentifier(checkIdentifier);
+		persistEntity(refundManifest);
+		
+		// Add the manifest all Refunds and persist them:
+		for (Refund refund : allDueRefunds) {
+			refund.setRefundManifest(refundManifest);
+			persistEntity(refund);
+		}
+	}
+	
+	/**
+	 * Creates a <code>RefundManifest</code> for a Bank transfer refund and adds it to the specified <code>Refund</code>.
+	 * 
+	 * @param allDueRefunds Either a single or grouped <code>Refund</code> objects.
+	 * @param achTransmission Bank transmission that defined the refund.
+	 */
+	private void addAchRefundManifest(List<Refund> allDueRefunds, Ach achTransmission) {
+		// Create an Ach refund manifest:
+		RefundManifest refundManifest = new RefundManifest();
+		String bankTransferIdentifier = achTransmission.getReference();
+		
+		refundManifest.setBankTransferIdentifier(bankTransferIdentifier);
+		persistEntity(refundManifest);
+		
+		// Add the manifest all Refunds and persist them:
+		for (Refund refund : allDueRefunds) {
+			refund.setRefundManifest(refundManifest);
+			persistEntity(refund);
+		}
 	}
 	
 	/**
@@ -800,19 +1014,6 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	 * @return The Refund object.
 	 */
 	private Refund performRefundInternal(Long refundId, String batch, String accountId) {
-		return performRefundInternal(refundId, batch, accountId, null);
-	}
-	
-	/**
-	 * A utility method that performs refund and accepts an Account ID optionally.
-	 * 
-	 * @param refundId Refund ID.
-	 * @param batch Batch ID.
-	 * @param accountId Optional Account ID. If null, the original Transaction's Account ID is used.
-	 * @param consolidatedRefundTransaction One refund Transaction to be shared across multiple Refunds.
-	 * @return The Refund object.
-	 */
-	private Refund performRefundInternal(Long refundId, String batch, String accountId, Transaction consolidatedRefundTransaction) {
 		// Get the Refund object and check that it's in the VERIFIED status:
 		Refund refund = getRefund(refundId, true);
 		
@@ -821,11 +1022,10 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		Transaction originalTransaction = refund.getTransaction();
 		Account account = originalTransaction.getAccount();
 		String userId = StringUtils.isNotBlank(accountId) ? accountId : account.getId();
-		String refundTransactionTypeId = refund.getRefundType().getCreditTypeId();
+		String refundTransactionTypeId = refund.getRefundType().getDebitTypeId();
 		Date effectiveDate = new Date();
 		BigDecimal amount = refund.getAmount();
-		Transaction refundTransaction = (consolidatedRefundTransaction != null) 
-				? consolidatedRefundTransaction : transactionService.createTransaction(refundTransactionTypeId, userId, effectiveDate, amount);
+		Transaction refundTransaction = transactionService.createTransaction(refundTransactionTypeId, userId, effectiveDate, amount);
 		
 		// Create a lockedAllocation between the refund and the original transaction in the amount of the refund:
         Allocation allocation = new Allocation();
@@ -850,6 +1050,83 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		
 		return refund;
 	}
+	
+	/**
+	 * Creates a Cash type Refund.
+	 * 
+	 * @param payment Original payment.
+	 * @param requestDate Date the new <code>Refund</code> is requested. Defaults to current date.
+	 * @param requestedBy User who requested the refund. Defaults to the current system user.
+	 * @return A newly created <code>Refund</code>.
+	 */
+	private Refund createCashRefund(Payment payment, Date requestDate, Account requestedBy) {
+		// Figure out the refund type method. Get the overriden value first:
+		String refundTypeMethod = configService.getInitialParameter(Constants.OVERRIDE_REFUND_METHOD);
+		
+		if (StringUtils.isBlank(refundTypeMethod)) {
+			// If there is no overriden value, get the configured value:
+			refundTypeMethod = configService.getInitialParameter(Constants.REFUND_METHOD);
+			
+			// If there is still no value, use the User preference:
+			if (StringUtils.isBlank(refundTypeMethod)) {
+				refundTypeMethod = userPreferenceService.getUserPreferenceValue(requestedBy.getId(), Constants.DEFAULT_REFUND_METHOD);
+			}
+		}
+		
+		// If there is a valid Refund type, create a new Refund:
+		if (StringUtils.isNotBlank(refundTypeMethod)) {
+			// Create a new Refund:
+			Refund refund = new Refund();
+			String debitTypeId = payment.getTransactionType().getId().getId();
+			RefundType refundType = getOrCreateRefundType(debitTypeId, refundTypeMethod);
+			
+			refund.setAmount(payment.getAmount());
+			refund.setRequestDate(requestDate);
+			refund.setRequestedBy(requestedBy);
+			refund.setTransaction(payment);
+			refund.setRefundType(refundType);
+			persistEntity(refund);
+			
+			return refund;
+		} else {
+			throw new InvalidRefundTypeException("No default Refund Type in system configuration or User Preferences.");
+		}
+	}
+	
+	/**
+	 * Creates a <code>Refund</code> to the original payment source.
+	 * 
+	 * @param payment Original payment.
+	 * @param requestDate Date the new <code>Refund</code> is requested. Defaults to current date.
+	 * @param requestedBy User who requested the refund. Defaults to the current system user.
+	 * @param refundRule Refund rule from the original payment.
+	 * @return A newly created <code>Refund</code>.
+	 */
+	private Refund createSourceRefund(Payment payment, Date requestDate, Account requestedBy, String refundRule) {
+		// Create a new Refund:
+		String refundTypeMethod = payment.getTransactionType().getId().getId();
+		RefundType refundType = getOrCreateRefundType(refundTypeMethod, refundTypeMethod);
+		Refund refund = new Refund();
+		
+		refund.setAmount(payment.getAmount());
+		refund.setRequestDate(requestDate);
+		refund.setRequestedBy(requestedBy);
+		refund.setTransaction(payment);
+		refund.setRefundType(refundType);
+		
+		// If an Account refund, set the "attribute" to the Account ID:
+		if (StringUtils.startsWith(refundRule, "A")) {
+			String refundAccountId = StringUtils.substringsBetween(refundRule, "(", ")")[1];
+			
+			refund.setAttribute(refundAccountId);
+		}
+		
+		persistEntity(refund);
+		
+		return refund;
+	}
+	
+	
 
 	/**
 	 * Creates an <code>Activity</code> that records an occurrence of an invalid <code>Account</code>
