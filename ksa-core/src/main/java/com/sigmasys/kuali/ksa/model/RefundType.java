@@ -10,14 +10,10 @@ import javax.persistence.*;
  * @author Sergey Godunov
  * @version 1.1
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "KSSA_REFUND_TYPE")
 public class RefundType extends AuditableEntity {
-
-    /**
-	 * Serialization ID.
-	 */
-	private static final long serialVersionUID = -4396302416143306045L;
 
 	/**
 	 * The transaction type for refunds that are made by this type. This is a debit type ("charge"), as it deducts the over-payment from the account.
