@@ -7,6 +7,7 @@ import java.util.List;
 import com.sigmasys.kuali.ksa.model.PostalAddress;
 import com.sigmasys.kuali.ksa.model.Refund;
 import com.sigmasys.kuali.ksa.model.RefundStatus;
+import com.sigmasys.kuali.ksa.model.RefundType;
 import com.sigmasys.kuali.ksa.transform.Ach;
 
 /**
@@ -231,6 +232,16 @@ public interface RefundService {
 	 * @return <code>Refund</code> that was cancelled.
 	 */
 	Refund cancelRefund(Long refundId, String memo);
+	
+	/**
+	 * Either retrieves an existing <code>RefundType</code> with the matching values of
+	 * the debit and credit payment types, or creates and persists a new one.
+	 * 
+	 * @param debitTypeId Debit type ID.
+	 * @param creditTypeId Credit type ID.
+	 * @return An existing <code>RefundType</code> or a newly created one if there is no existing one.
+	 */
+	RefundType getOrCreateRefundType(String debitTypeId, String creditTypeId);
 	
 	
 	/**
